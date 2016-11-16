@@ -22,7 +22,7 @@ convert_local_links <- function(files) {
 }
 
 convert_alien_links <- function(files) {
-  gsub_in_files(files, "[\\\\]code[{][\\\\]link[[]([^]]+)[]][{]([^}]+)[}][}]", "[\1::\2()]")
+  gsub_in_files(files, "[\\\\]code[{][\\\\]link[[]([^]]+)[]][{]([^}]+)[}][}]", "[\\1::\\2()]")
 }
 
 convert_code <- function(files) {
