@@ -6,9 +6,20 @@ roxygen2md <- function(pkg = ".") {
 
 roxygen2md_local <- function() {
   files <- dir(pattern = "[.][rR]$", recursive = TRUE)
-  convert_local_links(files)
-  convert_alien_links(files)
-  convert_code(files)
+
+  changed <- c(
+    convert_local_links(files),
+    convert_alien_links(files),
+    convert_code(files),
+    NULL
+  )
+  changed <- sort(unique(changed))
+
+  if (length(changed) > 0) {
+    message("Changed ", length(changed), " files: ", paste(changed, collapse = ", "), ". Please review the changes carefully!")
+  } else {
+    message("No files changed")
+  }
 
   if (is.na(desc::desc_get("RoxygenNote"))) {
     desc::desc_set("RoxygenNote" = "list(markdown = TRUE)")
@@ -30,11 +41,13 @@ convert_code <- function(files) {
 }
 
 gsub_in_files <- function(files, search, replace, ...) {
-  lapply(files, gsub_in_file, search, replace)
+  changed <- BBmisc::vlapply(files, gsub_in_file, search, replace, ...)
+  files[changed]
 }
 
 gsub_in_file <- function(file, search, replace, ...) {
   text <- readLines(file)
   new_text <- gsub(search, replace, text, ...)
   writeLines(new_text, file)
+  any(text != new_text)
 }
