@@ -21,10 +21,14 @@ roxygen2md_local <- function() {
     message("No files changed")
   }
 
-  if (is.na(desc::desc_get("RoxygenNote"))) {
-    desc::desc_set("RoxygenNote" = "list(markdown = TRUE)")
-  } else {
-    message("Please update the RoxygenNote field in DESCRIPTION to include list(markdown = TRUE)")
+  roxygen_field <- desc::desc_get("Roxygen")
+  roxygen_field_new <- "list(markdown = TRUE)"
+  if (roxygen_field != roxygen_field_new) {
+    if (is.na()) {
+      desc::desc_set("Roxygen" = roxygen_field_new)
+    } else {
+      message("Please update the Roxygen field in DESCRIPTION to include ", roxygen_field_new)
+    }
   }
 }
 
