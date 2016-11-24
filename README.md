@@ -8,9 +8,8 @@ Currently, the following substitutions are carried out:
 - `\code{\link[...]{...}}` becomes `[...::...()]`
 - `\code{...}` becomes `` `...` ``
 
-In addition, `DESCRIPTION` is edited to enable the new constructs if necessary.
-Note that only the development version of `roxygen2` is currently capable of
-handling Markdown in documentation.
+If necessary, `DESCRIPTION` is edited to enable Markdown in roxygen blocks.
+You'll need the development version of `roxygen2`.
 
 More to come. The substitutions are not completely safe,
 please carefully examine the results!
