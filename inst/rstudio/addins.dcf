@@ -1,0 +1,4 @@
+Name: Rd to Markdown
+Description: Replace Rd syntax with Markdown in roxygen blocks
+Binding: roxygen2md
+Interactive: false
