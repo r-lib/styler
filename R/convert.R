@@ -1,3 +1,10 @@
+#' Convert from Rd to Markdown in roxygen2 comments
+#'
+#' Performs various substitutions in all `.R` files in a package.
+#' Carefully examine the results after running this function!
+#'
+#' @param pkg Path to a (subdirectory of an) R package
+#'
 #' @export
 roxygen2md <- function(pkg = ".") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
