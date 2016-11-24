@@ -3,6 +3,11 @@ Title: 'Roxygen' to 'Markdown'
 Version: 0.0-0
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
 Description: Converts elements of 'roxygen' documentation to 'markdown'.
+Imports:
+    BBmisc,
+    desc,
+    rprojroot,
+    withr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
