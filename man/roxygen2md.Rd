@@ -11,6 +11,8 @@ roxygen2md(pkg = ".")
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package.
+Also attempts to enable Markdown support in \code{roxygen2} by adding a field to
+\code{DESCRIPTION}.
 Carefully examine the results after running this function!
 }
 

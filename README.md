@@ -8,6 +8,8 @@ Currently, the following substitutions are carried out:
 - `\code{\link[...]{...}}` becomes `[...::...()]`
 - `\code{...}` becomes `` `...` ``
 
+In addition, `DESCRIPTION` is edited to enable the new constructs if necessary.
+
 More to come. The substitutions are not completely safe,
 please carefully examine the results!
 
@@ -31,4 +33,3 @@ In your package directory, run
 ```r
 roxygen2md::roxygen2md()
 ```
-

@@ -1,6 +1,8 @@
 #' Convert from Rd to Markdown in roxygen2 comments
 #'
 #' Performs various substitutions in all `.R` files in a package.
+#' Also attempts to enable Markdown support in `roxygen2` by adding a field to
+#' `DESCRIPTION`.
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package
