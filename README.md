@@ -35,3 +35,5 @@ In your package directory, run
 ```r
 roxygen2md::roxygen2md()
 ```
+
+If you are using RStudio, simply choose the item "Rd to Markdown" from your "Addins" menu.
