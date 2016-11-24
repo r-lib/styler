@@ -9,6 +9,8 @@ Currently, the following substitutions are carried out:
 - `\code{...}` becomes `` `...` ``
 
 In addition, `DESCRIPTION` is edited to enable the new constructs if necessary.
+Note that only the development version of `roxygen2` is currently capable of
+handling Markdown in documentation.
 
 More to come. The substitutions are not completely safe,
 please carefully examine the results!
@@ -22,6 +24,7 @@ Install from GitHub using
 
 ```r
 # install.packages("remotes")
+# remotes::install_packages("klutometis/roxygen2")
 remotes::install_packages("krlmlr/roxygen2md")
 ```
 
