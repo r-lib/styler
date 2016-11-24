@@ -1,9 +1,8 @@
 Package: roxygen2md
-Title: What the Package Does (one line, title case)
+Title: 'Roxygen' to 'Markdown'
 Version: 0.0-0
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
-Description: What the package does (one paragraph).
-Depends: R (>= 3.3.2)
+Description: Converts elements of 'roxygen' documentation to 'markdown'.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
