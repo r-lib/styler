@@ -33,7 +33,7 @@ roxygen2md_local <- function() {
   roxygen_field <- desc::desc_get("Roxygen")
   roxygen_field_new <- "list(markdown = TRUE)"
   if (!identical(roxygen_field, roxygen_field_new)) {
-    if (is.na()) {
+    if (is.na(roxygen_field)) {
       desc::desc_set("Roxygen" = roxygen_field_new)
     } else {
       message("Please update the Roxygen field in DESCRIPTION to include ", roxygen_field_new)
