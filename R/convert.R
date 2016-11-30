@@ -14,7 +14,7 @@ roxygen2md <- function(pkg = ".") {
 }
 
 roxygen2md_local <- function() {
-  files <- dir(pattern = "[.][rR]$", recursive = TRUE)
+  files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
 
   changed <- c(
     convert_local_links(files),
