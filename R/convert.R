@@ -32,7 +32,7 @@ roxygen2md_local <- function() {
 
   roxygen_field <- desc::desc_get("Roxygen")
   roxygen_field_new <- "list(markdown = TRUE)"
-  if (roxygen_field != roxygen_field_new) {
+  if (!identical(roxygen_field, roxygen_field_new)) {
     if (is.na()) {
       desc::desc_set("Roxygen" = roxygen_field_new)
     } else {
