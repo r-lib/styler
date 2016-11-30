@@ -39,6 +39,8 @@ roxygen2md_local <- function() {
       message("Please update the Roxygen field in DESCRIPTION to include ", roxygen_field_new)
     }
   }
+
+  invisible()
 }
 
 convert_local_links <- function(files) {
