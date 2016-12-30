@@ -62,7 +62,10 @@ gsub_in_files <- function(files, search, replace, ...) {
 
 gsub_in_file <- function(file, search, replace, ...) {
   text <- readLines(file)
-  new_text <- gsub(search, replace, text, ...)
+  roxy_lines <- grep("^\\s*#'", text)
+  if (length(roxy_lines) == 0) return(FALSE)
+  new_text <- text
+  new_text[roxy_lines] <- gsub(search, replace, text[roxy_lines], ...)
   writeLines(new_text, file)
   any(text != new_text)
 }
