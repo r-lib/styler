@@ -61,7 +61,7 @@ convert_alien_links <- function(files) {
     files,
     rex::rex(
       "\\code{\\link[",
-      capture(one_or_more(rex::regex("[^]]"))), # kevinushey/rex#51
+      capture(one_or_more(none_of("]"))),
       "]{",
       capture(one_or_more(none_of("}"))),
       "}",
@@ -82,17 +82,17 @@ convert_code <- function(files) {
     "`\\1`")
 }
 
-gsub_in_files <- function(files, search, replace, ...) {
-  changed <- BBmisc::vlapply(files, gsub_in_file, search, replace, ...)
+gsub_in_files <- function(files, search, replace) {
+  changed <- BBmisc::vlapply(files, gsub_in_file, search, replace)
   files[changed]
 }
 
-gsub_in_file <- function(file, search, replace, ...) {
+gsub_in_file <- function(file, search, replace) {
   text <- readLines(file)
-  roxy_lines <- grep("^\\s*#'", text)
+  roxy_lines <- grep("^\\s*#'", text, perl = TRUE)
   if (length(roxy_lines) == 0) return(FALSE)
   new_text <- text
-  new_text[roxy_lines] <- gsub(search, replace, text[roxy_lines], ...)
+  new_text[roxy_lines] <- gsub(search, replace, text[roxy_lines], perl = TRUE)
   writeLines(new_text, file)
   any(text != new_text)
 }
