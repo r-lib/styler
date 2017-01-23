@@ -44,7 +44,7 @@ roxygen2md_local <- function() {
 }
 
 convert_local_links <- function(files) {
-  gsub_in_files(files, "[\\\\]code[{][\\\\]link[{]([^}]+)[}][}]", "[\\1()]")
+  gsub_in_files(files, "[\\\\]code[{][\\\\]link[{]([^}]+)[}](?:|[(][)])[}]", "[\\1()]")
 }
 
 convert_alien_links <- function(files) {
