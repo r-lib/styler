@@ -6,6 +6,7 @@ Description: Converts elements of 'roxygen' documentation to 'markdown'.
 Imports:
     BBmisc,
     desc,
+    rex,
     rprojroot,
     withr
 License: GPL-3

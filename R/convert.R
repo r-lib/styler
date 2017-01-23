@@ -44,15 +44,42 @@ roxygen2md_local <- function() {
 }
 
 convert_local_links <- function(files) {
-  gsub_in_files(files, "[\\\\]code[{][\\\\]link[{]([^}]+)[}](?:|[(][)])[}]", "[\\1()]")
+  gsub_in_files(
+    files,
+    rex::rex(
+      "\\code{\\link{",
+      capture(one_or_more(none_of("}"))),
+      "}",
+      maybe("()"),
+      "}"
+    ),
+    "[\\1()]")
 }
 
 convert_alien_links <- function(files) {
-  gsub_in_files(files, "[\\\\]code[{][\\\\]link[[]([^]]+)[]][{]([^}]+)[}][}]", "[\\1::\\2()]")
+  gsub_in_files(
+    files,
+    rex::rex(
+      "\\code{\\link[",
+      capture(one_or_more(rex::regex("[^]]"))), # kevinushey/rex#51
+      "]{",
+      capture(one_or_more(none_of("}"))),
+      "}",
+      maybe("()"),
+      "}"
+    ),
+    "[\\1::\\2()]")
 }
 
 convert_code <- function(files) {
-  gsub_in_files(files, "[\\\\]code[{]([^{}]+)[}]", "`\\1`")
+  gsub_in_files(
+    files,
+    rex::rex(
+      "\\code{",
+      capture(one_or_more(none_of("{}"))),
+      "}"
+    ),
+    "`\\1`")
 }
 
 gsub_in_files <- function(files, search, replace, ...) {
