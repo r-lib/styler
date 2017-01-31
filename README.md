@@ -9,7 +9,7 @@ Currently, the following substitutions are carried out:
 - `\code{...}` becomes `` `...` ``
 
 If necessary, `DESCRIPTION` is edited to enable Markdown in roxygen blocks.
-You'll need the development version of `roxygen2`.
+You'll need `roxygen2` version 6.0.0 or later.
 
 More to come. The substitutions are not completely safe,
 please carefully examine the results!
@@ -37,3 +37,7 @@ roxygen2md::roxygen2md()
 ```
 
 If you are using RStudio, simply choose the item "Rd to Markdown" from your "Addins" menu.
+
+-----
+
+GPL-3 © Kirill Müller
