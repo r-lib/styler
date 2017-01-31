@@ -11,6 +11,8 @@ Currently, the following substitutions are carried out:
 If necessary, `DESCRIPTION` is edited to enable Markdown in roxygen blocks.
 You'll need `roxygen2` version 6.0.0 or later.
 
+Call `roxygen2md::roxygen2md()` in your package's directory, or navigate to "Tools/Addins/Rd to Markdown" in RStudio.
+
 More to come. The substitutions are not completely safe,
 please carefully examine the results!
 
