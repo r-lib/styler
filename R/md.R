@@ -42,9 +42,9 @@ add_roxygen_field <- function() {
   invisible()
 }
 
-convert_local_links <- function(files) {
-  gsub_in_files(
-    files,
+convert_local_links <- function(text) {
+  rex::re_substitutes(
+    text,
     rex::rex(
       "\\code{\\link{",
       capture(one_or_more(none_of("}"))),
@@ -55,9 +55,9 @@ convert_local_links <- function(files) {
     "[\\1()]")
 }
 
-convert_alien_links <- function(files) {
-  gsub_in_files(
-    files,
+convert_alien_links <- function(text) {
+  rex::re_substitutes(
+    text,
     rex::rex(
       "\\code{\\link[",
       capture(one_or_more(none_of("]"))),
@@ -70,9 +70,9 @@ convert_alien_links <- function(files) {
     "[\\1::\\2()]")
 }
 
-convert_code <- function(files) {
-  gsub_in_files(
-    files,
+convert_code <- function(text) {
+  rex::re_substitutes(
+    text,
     rex::rex(
       "\\code{",
       capture(one_or_more(none_of("{}"))),

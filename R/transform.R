@@ -1,7 +1,6 @@
 transform_files <- function(files, transformers) {
-  changed <- lapply(
-    transformers, function(fun) fun(files))
-  changed <- sort(unique(unlist(changed)))
+  changed <- BBmisc::vlapply(files, apply_transformers_on_file, transformers)
+  changed <- files[changed]
 
   if (length(changed) > 0) {
     message(
@@ -14,17 +13,16 @@ transform_files <- function(files, transformers) {
   invisible(changed)
 }
 
-gsub_in_files <- function(files, search, replace) {
-  changed <- BBmisc::vlapply(files, gsub_in_file, search, replace)
-  files[changed]
-}
-
-gsub_in_file <- function(file, search, replace) {
+apply_transformers_on_file <- function(file, transformers) {
   text <- readLines(file)
-  roxy_lines <- grep("^\\s*#'", text, perl = TRUE)
-  if (length(roxy_lines) == 0) return(FALSE)
-  new_text <- text
-  new_text[roxy_lines] <- gsub(search, replace, text[roxy_lines], perl = TRUE)
-  writeLines(new_text, file)
-  any(text != new_text)
+  new_text <- Reduce(
+    function(text, transformer) transformer(text),
+    transformers,
+    init = text)
+  if (any(text != new_text)) {
+    writeLines(new_text, file)
+    TRUE
+  } else {
+    FALSE
+  }
 }
