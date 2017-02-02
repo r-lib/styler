@@ -29,10 +29,10 @@ prettify_ws <- function(pkg = ".") {
 
 #' @rdname prettify_ws
 #' @export
-prettify_quotes <- function(pkg = ".") {
+prettify_parsed <- function(pkg = ".") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   transformers <- c(
-    convert_to_double_quotes,
+    #add_space_around_equal,
     NULL)
   withr::with_dir(pkg_root, prettify_local(transformers))
 }
@@ -42,7 +42,6 @@ prettify_local <- function(transformers) {
   files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
 
   transform_files(files, transformers)
-  invisible()
 }
 
 remove_space_after_paren <- function(text) {

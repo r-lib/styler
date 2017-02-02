@@ -2,12 +2,12 @@
 % Please edit documentation in R/ws.R
 \name{prettify_ws}
 \alias{prettify_ws}
-\alias{prettify_quotes}
+\alias{prettify_parsed}
 \title{Prettify R source code}
 \usage{
 prettify_ws(pkg = ".")
 
-prettify_quotes(pkg = ".")
+prettify_parsed(pkg = ".")
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package}
