@@ -109,18 +109,7 @@ add_space_before_brace <- function(text) {
 }
 
 convert_to_double_quotes <- function(text) {
-  re_substitutes_repeat(
-    text,
-    rex::rex(
-      start,
-      capture(zero_or_more(none_of('"', "'"))),
-      "'",
-      capture(zero_or_more(none_of('"', "'"))),
-      "'",
-      capture(zero_or_more(none_of('"', "'"))),
-      end
-    ),
-    '\\1"\\2"\\3')
+  stop("NYI")
 }
 
 make_add_space_around_operators <- function() {
