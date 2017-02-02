@@ -87,3 +87,10 @@ add_space_around_equal <- function(pd) {
   pd$filler[eq_sub] <- " "
   pd
 }
+
+fix_quotes <- function(pd) {
+  browser()
+  str_const <- pd$token == "STR_CONST"
+  pd$text[str_const] <- gsub("^'([^'\"]*)'$", '"\\1"', pd$text[str_const])
+  pd
+}
