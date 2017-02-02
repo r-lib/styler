@@ -18,21 +18,18 @@ roxygen2md <- function(pkg = ".") {
 
 roxygen2md_local <- function() {
   files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  transformers <- c(
+    convert_local_links,
+    convert_alien_links,
+    convert_code,
+    NULL)
 
-  changed <- c(
-    convert_local_links(files),
-    convert_alien_links(files),
-    convert_code(files),
-    NULL
-  )
-  changed <- sort(unique(changed))
+  transform_files(files, transformers)
+  add_roxygen_field()
+  invisible()
+}
 
-  if (length(changed) > 0) {
-    message("Changed ", length(changed), " files: ", paste(changed, collapse = ", "), ". Please review the changes carefully!")
-  } else {
-    message("No files changed")
-  }
-
+add_roxygen_field <- function() {
   roxygen_field <- desc::desc_get("Roxygen")
   roxygen_field_new <- "list(markdown = TRUE)"
   if (!identical(unname(roxygen_field), roxygen_field_new)) {
@@ -42,7 +39,6 @@ roxygen2md_local <- function() {
       message("Please update the Roxygen field in DESCRIPTION to include ", roxygen_field_new)
     }
   }
-
   invisible()
 }
 
