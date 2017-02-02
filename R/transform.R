@@ -11,4 +11,5 @@ transform_files <- function(files, transformers) {
   } else {
     message("No files changed")
   }
+  invisible(changed)
 }

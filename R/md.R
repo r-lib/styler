@@ -9,6 +9,7 @@ NULL
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package
+#' @return List of changed files, invisibly
 #'
 #' @export
 roxygen2md <- function(pkg = ".") {
@@ -24,9 +25,8 @@ roxygen2md_local <- function() {
     convert_code,
     NULL)
 
-  transform_files(files, transformers)
   add_roxygen_field()
-  invisible()
+  transform_files(files, transformers)
 }
 
 add_roxygen_field <- function() {
