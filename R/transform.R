@@ -17,7 +17,10 @@ transform_files <- function(files, transformers) {
 tokenize <- function(text) {
   string_regex <- rex::rex(
     capture(
-      quoted_string_regex('"') %or% quoted_string_regex("'"),
+      quoted_string_regex('"') %or%
+        quoted_string_regex("'") %or%
+        quoted_string_regex("`") %or%
+        quoted_string_regex("%"),
       name = "string"
     ))
   splits <- strsplit(text, split = string_regex, perl = TRUE)
