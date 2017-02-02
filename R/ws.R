@@ -32,7 +32,7 @@ prettify_ws <- function(pkg = ".") {
 prettify_parsed <- function(pkg = ".") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   transformers <- c(
-    #add_space_around_equal,
+    add_space_around_equal,
     NULL)
   withr::with_dir(pkg_root, prettify_local(transformers))
 }

@@ -21,7 +21,7 @@ apply_text_transformers_on_file <- function(file, transformers) {
     transformers,
     init = parse_data_with_ws)
 
-  new_text <- serialize_parse_data(parse_data_with_ws)
+  new_text <- serialize_parse_data(transformed_data_with_ws)
 
   if (any(text != new_text)) {
     writeLines(new_text, file)
@@ -47,8 +47,8 @@ add_ws_to_parse_data <- function(parse_data) {
     parse_data_filtered %>%
     mutate_(filler = ~create_filler(
       line2, col2,
-      coalesce(lead(line1), tail(line2, 1)),
-      coalesce(lead(col1), tail(col2, 1) + 1L)))
+      lead(line1, default = tail(line2, 1)),
+      lead(col1, default = tail(col2, 1) + 1L)))
 
   parse_data_filled
 }
@@ -75,5 +75,10 @@ create_filler <- function(line2, col2, line3, col3) {
 }
 
 add_space_around_equal <- function(pd) {
+  eq_sub <- pd$token == "EQ_SUB"
+  eq_sub_lead <- lead(eq_sub, default = FALSE)
+  stopifnot(!any(eq_sub & eq_sub_lead))
+  pd$filler[eq_sub_lead] <- " "
+  pd$filler[eq_sub] <- " "
   pd
 }
