@@ -1,3 +1,9 @@
+#' @import tibble
+#' @import dplyr
+#' @import tidyr
+#' @import rex
+NULL
+
 #' Prettify R source code
 #'
 #' Performs various substitutions in all `.R` files in a package.
@@ -9,12 +15,14 @@
 prettify_ws <- function(pkg = ".") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   transformers <- c(
-    remove_space_after_paren,
-    remove_space_before_paren_or_comma,
+    #remove_space_after_paren,
+    #remove_space_before_paren_or_comma,
     add_space_after_comma,
     remove_extra_space_after_comma,
     remove_extra_space_before_brace,
     add_space_before_brace,
+    make_add_space_around_operators(),
+    remove_trailing_space,
     NULL)
   withr::with_dir(pkg_root, prettify_local(transformers))
 }
@@ -48,25 +56,18 @@ remove_space_after_paren <- function(text) {
 }
 
 remove_space_before_paren_or_comma <- function(text) {
-  repeat {
-    old_text <- text
-    text <- rex::re_substitutes(
-      text,
-      rex::rex(
-        capture(not(" ")),
-        one_or_more(" "),
-        capture(one_of(")", ","))
-      ),
-      "\\1\\2")
-
-    if (text == old_text)
-      break
-  }
-  text
+  re_substitutes_repeat(
+    text,
+    rex::rex(
+      capture(none_of(" ")),
+      one_or_more(" "),
+      capture(one_of(")", ","))
+    ),
+    "\\1\\2")
 }
 
 remove_extra_space_after_comma <- function(text) {
-  rex::re_substitutes(
+  re_substitutes_repeat(
     text,
     rex::rex(
       ", ",
@@ -76,20 +77,20 @@ remove_extra_space_after_comma <- function(text) {
 }
 
 add_space_after_comma <- function(text) {
-  rex::re_substitutes(
+  re_substitutes_repeat(
     text,
     rex::rex(
       ",",
-      capture(not(" "))
+      capture(none_of(" "))
     ),
     ", \\1")
 }
 
 remove_extra_space_before_brace <- function(text) {
-  rex::re_substitutes(
+  re_substitutes_repeat(
     text,
     rex::rex(
-      capture(not(" ")),
+      capture(none_of(" ")),
       " ",
       one_or_more(" "),
       "{"
@@ -98,7 +99,7 @@ remove_extra_space_before_brace <- function(text) {
 }
 
 add_space_before_brace <- function(text) {
-  rex::re_substitutes(
+  re_substitutes_repeat(
     text,
     rex::rex(
       capture(none_of(" ", "(")),
@@ -108,7 +109,7 @@ add_space_before_brace <- function(text) {
 }
 
 convert_to_double_quotes <- function(text) {
-  rex::re_substitutes(
+  re_substitutes_repeat(
     text,
     rex::rex(
       start,
@@ -120,4 +121,89 @@ convert_to_double_quotes <- function(text) {
       end
     ),
     '\\1"\\2"\\3')
+}
+
+make_add_space_around_operators <- function() {
+  operators <- list(
+    "%/%",
+    "%%",
+    "&&",
+    "||",
+    "==",
+    "!=",
+    "<=",
+    ">=",
+    "<-",
+    "->",
+    "=" = list(
+      behind = c("<", ">", "!", "="),
+      ahead = "="),
+    "<" = list(
+      behind = c("=", "-")),
+    ">" = list(
+      behind = "-",
+      ahead = c("=", "-")),
+    "+",
+    "-" = list(
+      behind = "<",
+      ahead = ">"),
+    "*",
+    "/" = list(
+      behind = "%",
+      ahead = "%"),
+    "^",
+    "&" = list(
+      behind = "&",
+      ahead = "&"),
+    "|" = list(
+      behind = "|",
+      ahead = "|")
+  )
+
+  unnamed <- names(operators) == ""
+  names(operators)[unnamed] <- unlist(operators[unnamed])
+  operators[unnamed] <- NULL
+
+  unlist(Map(make_add_space_around_operator, names(operators), operators))
+}
+
+make_add_space_around_operator <- function(op, lookaround) {
+  c(
+    make_add_space_before_operator(op, lookaround$ahead),
+    make_add_space_after_operator(op, lookaround$behind)
+  )
+}
+
+make_add_space_before_operator <- function(op, lookbehind) {
+  function(text) {
+    re_substitutes_repeat(
+      text,
+      rex::rex(
+        capture(none_of(c(" ", lookbehind))),
+        op
+      ),
+      paste0("\\1 ", op))
+  }
+}
+
+make_add_space_after_operator <- function(op, lookahead) {
+  function(text) {
+    re_substitutes_repeat(
+      text,
+      rex::rex(
+        op,
+        capture(none_of(c(" ", lookahead)))
+      ),
+      paste0(op, " \\1"))
+  }
+}
+
+remove_trailing_space <- function(text) {
+  re_substitutes_global(
+    text,
+    rex::rex(
+      one_or_more(" "),
+      end
+    ),
+    "")
 }

@@ -3,3 +3,7 @@
 export(prettify_quotes)
 export(prettify_ws)
 export(roxygen2md)
+import(dplyr)
+import(rex)
+import(tibble)
+import(tidyr)
