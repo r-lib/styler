@@ -128,14 +128,16 @@ make_add_space_around_operators <- function() {
       behind = c("<", ">", "!", "="),
       ahead = "="),
     "<" = list(
-      behind = c("=", "-")),
+      ahead = c("=", "-")),
     ">" = list(
       behind = "-",
-      ahead = c("=", "-")),
-    "+",
+      ahead = "="),
+    "+" = list(
+      behind = c("("),
+      ahead = c(0:9, ".")),
     "-" = list(
-      behind = "<",
-      ahead = ">"),
+      behind = c("<", "("),
+      ahead = c(">", 0:9, ".")),
     "*",
     "/" = list(
       behind = "%",
@@ -151,15 +153,15 @@ make_add_space_around_operators <- function() {
 
   unnamed <- names(operators) == ""
   names(operators)[unnamed] <- unlist(operators[unnamed])
-  operators[unnamed] <- NULL
+  operators[unnamed] <- rep(list(NULL), sum(unnamed))
 
   unlist(Map(make_add_space_around_operator, names(operators), operators))
 }
 
 make_add_space_around_operator <- function(op, lookaround) {
   c(
-    make_add_space_before_operator(op, lookaround$ahead),
-    make_add_space_after_operator(op, lookaround$behind)
+    make_add_space_before_operator(op, lookaround$behind),
+    make_add_space_after_operator(op, lookaround$ahead)
   )
 }
 
