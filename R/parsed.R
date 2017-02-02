@@ -3,6 +3,7 @@ apply_text_transformers_on_file <- function(file, transformers) {
 
   text <- readLines(file, warn = FALSE)
   text <- gsub(" +$", "", text)
+  text <- gsub("\t", "        ", text)
 
   parsed <- parse(file, keep.source = TRUE)
   parse_data <- utils::getParseData(parsed)
@@ -50,7 +51,11 @@ add_ws_to_parse_data <- function(parse_data) {
       lead(line1, default = tail(line2, 1)),
       lead(col1, default = tail(col2, 1) + 1L)))
 
-  parse_data_filled
+  parse_data_comment_eol <-
+    parse_data_filled %>%
+    mutate(text = if_else(token == "COMMENT", gsub(" +$", "", text), text))
+
+  parse_data_comment_eol
 }
 
 serialize_parse_data <- function(parse_data_with_ws) {
