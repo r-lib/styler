@@ -136,8 +136,8 @@ make_add_space_around_operators <- function() {
       behind = c("("),
       ahead = c(0:9, ".")),
     "-" = list(
-      behind = c("<", "("),
-      ahead = c(">", 0:9, ".")),
+      behind = c("<", "(", "-", "["),
+      ahead = c(">", 0:9, ".", "-")),
     "*",
     "/" = list(
       behind = "%",
