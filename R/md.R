@@ -32,8 +32,9 @@ roxygen2md_local <- function() {
 add_roxygen_field <- function() {
   if (!is_roxygen_field_markdown()) {
     roxygen_field <- desc::desc_get("Roxygen")
+    roxygen_field_new <- "list(markdown = TRUE)"
     if (is.na(roxygen_field)) {
-      desc::desc_set("Roxygen" = "list(markdown = TRUE)")
+      desc::desc_set("Roxygen" = roxygen_field_new)
     } else {
       message(
         "If necessary, please update the Roxygen field in DESCRIPTION to include ",
