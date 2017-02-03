@@ -30,20 +30,39 @@ roxygen2md_local <- function() {
 }
 
 add_roxygen_field <- function() {
-  roxygen_field <- desc::desc_get("Roxygen")
-  roxygen_field_new <- "list(markdown = TRUE)"
-  if (!identical(unname(roxygen_field), roxygen_field_new)) {
+  if (!is_roxygen_field_markdown()) {
+    roxygen_field <- desc::desc_get("Roxygen")
+    roxygen_field_new <- "list(markdown = TRUE)"
     if (is.na(roxygen_field)) {
       desc::desc_set("Roxygen" = roxygen_field_new)
     } else {
-      message("Please update the Roxygen field in DESCRIPTION to include ", roxygen_field_new)
+      message(
+        "If necessary, please update the Roxygen field in DESCRIPTION to include ",
+        roxygen_field_new, "\nCurrent value: ", roxygen_field)
     }
   }
   invisible()
 }
 
+is_roxygen_field_markdown <- function() {
+  roxygen_field <- desc::desc_get("Roxygen")
+  roxygen_field_new <- "list(markdown = TRUE)"
+  if (identical(unname(roxygen_field), roxygen_field_new)) return(TRUE)
+
+  roxygen_field_val <- try_eval_text(roxygen_field)
+  isTRUE(roxygen_field_val$markdown)
+}
+
+try_eval_text <- function(text) {
+  tryCatch(
+    eval(parse(text = text)),
+    error = function(e) NULL
+  )
+}
+
 convert_local_links <- function(text) {
   rex::re_substitutes(
+    global = TRUE,
     text,
     rex::rex(
       "\\code{\\link{",
@@ -57,6 +76,7 @@ convert_local_links <- function(text) {
 
 convert_alien_links <- function(text) {
   rex::re_substitutes(
+    global = TRUE,
     text,
     rex::rex(
       "\\code{\\link[",
@@ -72,6 +92,7 @@ convert_alien_links <- function(text) {
 
 convert_code <- function(text) {
   rex::re_substitutes(
+    global = TRUE,
     text,
     rex::rex(
       "\\code{",

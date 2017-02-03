@@ -1,6 +1,6 @@
 Package: roxygen2md
 Title: 'Roxygen' to 'Markdown'
-Version: 0.0-1
+Version: 0.0-2
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
 Description: Converts elements of 'roxygen' documentation to 'markdown'.
 Imports:
