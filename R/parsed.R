@@ -75,3 +75,9 @@ fix_quotes <- function(pd) {
   pd$text[str_const] <- gsub("^'([^'\"]*)'$", '"\\1"', pd$text[str_const])
   pd
 }
+
+remove_space_after_paren <- function(pd) {
+  paren_after <- pd$token == "'('"
+  pd$spaces[paren_after] <- 0L
+  pd
+}
