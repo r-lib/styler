@@ -1,6 +1,6 @@
 Package: roxygen2md
 Title: 'Roxygen' to 'Markdown'
-Version: 0.0-0
+Version: 0.0-1
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
 Description: Converts elements of 'roxygen' documentation to 'markdown'.
 Imports:
@@ -15,7 +15,7 @@ Remotes:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Date: 2016-11-16
+Date: 2017-02-03
 BugReports: https://github.com/krlmlr/roxygen2md/issues
 URL: https://github.com/krlmlr/roxygen2md, http://krlmlr.github.io/roxygen2md
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "pkgapi::api_roclet"))
