@@ -9,6 +9,7 @@ test <- function() {
   function_calls(get_spaces=around_equal)
 
   no_space( after_opening( ), paren( (1 + 2)))
+  no_space (before_opening (), paren ( (1 + 2)))
   no_space(before(closing ), paren((1 + 2) ) )
   multi(
     line,
