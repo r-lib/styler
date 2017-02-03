@@ -3,4 +3,8 @@ test <- function() {
   'Single quotes are converted to double quotes'
   'but not if the string contains a "double quote'
   'or an escaped \' single quote'
+
+  # Comments are always preserved
+
+  function_calls(get_spaces=around_equal)
 }
