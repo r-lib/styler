@@ -15,7 +15,7 @@ apply_text_transformers_on_file <- function(file, transformers) {
     text <- text[seq_along(roundtrip)]
   }
 
-  stopifnot(all(text == roundtrip))
+  stopifnot(identical(text, roundtrip))
 
   transformed_data_with_ws <- Reduce(
     function(x, fun) fun(x),
@@ -24,7 +24,7 @@ apply_text_transformers_on_file <- function(file, transformers) {
 
   new_text <- serialize_parse_data(transformed_data_with_ws)
 
-  if (any(text != new_text)) {
+  if (!identical(text, new_text)) {
     writeLines(new_text, file)
     TRUE
   } else {
