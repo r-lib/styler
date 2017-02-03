@@ -1,21 +1,25 @@
 apply_text_transformers_on_file <- function(file, transformers) {
   message(file)
-
   text <- readLines(file, warn = FALSE)
+  new_text <- apply_text_transformers_on_text(text, transformers)
+  if (!identical(text, new_text)) {
+    writeLines(new_text, file)
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
+apply_text_transformers_on_text <- function(text, transformers) {
   text <- gsub(" +$", "", text)
   text <- gsub("\t", "        ", text)
 
-  parsed <- parse(file, keep.source = TRUE)
+  parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- utils::getParseData(parsed)
   parse_data_with_ws <- add_ws_to_parse_data(parse_data)
-  roundtrip <- serialize_parse_data(parse_data_with_ws)
 
-  if (length(roundtrip) < length(text)) {
-    stopifnot(text[-seq_along(roundtrip)] == "")
-    text <- text[seq_along(roundtrip)]
-  }
-
-  stopifnot(identical(text, roundtrip))
+  # May strip empty lines before EOF
+  text <- verify_roundtrip(parse_data_with_ws, text)
 
   transformed_data_with_ws <- Reduce(
     function(x, fun) fun(x),
@@ -23,13 +27,7 @@ apply_text_transformers_on_file <- function(file, transformers) {
     init = parse_data_with_ws)
 
   new_text <- serialize_parse_data(transformed_data_with_ws)
-
-  if (!identical(text, new_text)) {
-    writeLines(new_text, file)
-    TRUE
-  } else {
-    FALSE
-  }
+  new_text
 }
 
 add_ws_to_parse_data <- function(parse_data) {
@@ -53,6 +51,18 @@ add_ws_to_parse_data <- function(parse_data) {
     mutate(text = if_else(token == "COMMENT", gsub(" +$", "", text), text))
 
   parse_data_comment_eol
+}
+
+verify_roundtrip <- function(pd, text) {
+  roundtrip <- serialize_parse_data(pd)
+
+  if (length(roundtrip) < length(text)) {
+    stopifnot(text[-seq_along(roundtrip)] == "")
+    text <- text[seq_along(roundtrip)]
+  }
+
+  stopifnot(identical(text, roundtrip))
+  text
 }
 
 serialize_parse_data <- function(parse_data_with_ws) {
