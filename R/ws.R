@@ -2,7 +2,6 @@
 #' @import tibble
 #' @import dplyr
 #' @import tidyr
-#' @import rex
 NULL
 
 #' Prettify R source code

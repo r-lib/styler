@@ -5,9 +5,6 @@ Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r
 Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
-    BBmisc,
-    desc,
-    rex,
     rprojroot,
     utf8,
     withr
