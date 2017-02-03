@@ -1,4 +1,4 @@
-Name: Rd to Markdown
-Description: Replace Rd syntax with Markdown in roxygen blocks
-Binding: roxygen2md
+Name: styler
+Description: Pretty-print package source code
+Binding: style_pkg
 Interactive: false
