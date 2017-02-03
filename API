@@ -1,0 +1,5 @@
+# API for roxygen2md package
+
+## Exported functions
+
+roxygen2md(pkg = ".")
