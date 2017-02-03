@@ -11,6 +11,7 @@ Imports:
     rprojroot,
     utf8,
     withr
+Suggests: testthat
 Remotes:
     krlmlr/utf8
 License: GPL-3

@@ -1,0 +1,6 @@
+test <- function() {
+  "Double quotes remain as they are"
+  "Single quotes are converted to double quotes"
+  'but not if the string contains a "double quote'
+  'or an escaped \' single quote'
+}
