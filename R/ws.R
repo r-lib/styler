@@ -7,19 +7,30 @@ NULL
 
 #' Prettify R source code
 #'
-#' Performs various substitutions in all `.R` files in a package.
+#' Performs various substitutions in all `.R` files in a package
+#' (code and tests).
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package
 #'
 #' @export
-styler <- function(pkg = ".") {
+style_pkg <- function(pkg = ".", transformers = get_transformers()) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  transformers <- c(
+  withr::with_dir(pkg_root, prettify_local(transformers))
+}
+
+#' @export
+style_text <- function(text, transformers = get_transformers()) {
+  transformer <- make_transformer(transformers)
+  transformer(text)
+}
+
+#' @export
+get_transformers <- function() {
+  c(
     add_space_around_equal,
     fix_quotes,
     NULL)
-  withr::with_dir(pkg_root, prettify_local(transformers))
 }
 
 prettify_local <- function(transformers) {
