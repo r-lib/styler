@@ -13,24 +13,7 @@ NULL
 #' @param pkg Path to a (subdirectory of an) R package
 #'
 #' @export
-prettify_ws <- function(pkg = ".") {
-  pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  transformers <- c(
-    #remove_space_after_paren,
-    #remove_space_before_paren_or_comma,
-    add_space_after_comma,
-    remove_extra_space_after_comma,
-    remove_extra_space_before_brace,
-    add_space_before_brace,
-    make_add_space_around_operators(),
-    remove_trailing_space,
-    NULL)
-  withr::with_dir(pkg_root, prettify_local(transformers))
-}
-
-#' @rdname prettify_ws
-#' @export
-prettify_parsed <- function(pkg = ".") {
+styler <- function(pkg = ".") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   transformers <- c(
     add_space_around_equal,
