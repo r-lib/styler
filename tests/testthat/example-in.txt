@@ -12,4 +12,35 @@ test <- function() {
   no_space(before(closing ), paren((1 + 2) ) )
 
   one_space(after,comma("in","function",  args))
+
+  {
+    braced
+    expression
+  }
+
+  braced("unnamed", {
+    "function"
+    call
+  })
+
+  braced(named = {
+    "function"
+    call
+  })
+
+  braced("unnamed reduces space",    {
+  })
+
+  braced("unnamed adds space space",{
+  })
+
+  braced(named_reduces_space =    {
+  })
+
+  braced(named_adds_space =    {
+  })
+
+  braced(  {
+    empty_removes_space
+  })
 }
