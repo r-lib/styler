@@ -1,8 +1,9 @@
-Package: roxygen2md
-Title: 'Roxygen' to 'Markdown'
-Version: 0.0-2
+Package: styler
+Title: Non-invasive Pretty Printing of R code
+Version: 0.0-0
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
-Description: Converts elements of 'roxygen' documentation to 'markdown'.
+Description:
+    Pretty-prints R code without changing the user's formatting intent.
 Imports:
     BBmisc,
     desc,
@@ -16,7 +17,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Date: 2017-02-03
-BugReports: https://github.com/krlmlr/roxygen2md/issues
-URL: https://github.com/krlmlr/roxygen2md, http://krlmlr.github.io/roxygen2md
+BugReports: https://github.com/krlmlr/styler/issues
+URL: https://github.com/krlmlr/styler, http://krlmlr.github.io/styler
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.0
