@@ -61,12 +61,16 @@ create_filler <- function(data) {
     select_(~-line3, ~-col3, ~-col2_nl)
 }
 
-add_space_around_equal <- function(pd) {
-  eq_sub_after <- pd$token == "EQ_SUB"
-  eq_sub_before <- lead(eq_sub_after, default = FALSE)
-  stopifnot(!any(eq_sub_after & eq_sub_before))
-  pd$spaces[eq_sub_before & (pd$newlines == 0L)] <- 1L
-  pd$spaces[eq_sub_after & (pd$newlines == 0L)] <- 1L
+add_space_around_op <- function(pd) {
+  op_token <- c(
+    "'*'", "'/'", "'^'", "AND", "AND2", "EQ", "EQ_ASSIGN",
+    "GE", "GT", "LE", "LEFT_ASSIGN", "LT", "NE", "OR", "OR2", "RIGHT_ASSIGN",
+    "SPECIAL", "EQ_SUB")
+  op_after <- pd$token %in% op_token
+  op_before <- lead(op_after, default = FALSE)
+  stopifnot(!any(op_after & op_before))
+  pd$spaces[op_before & (pd$newlines == 0L)] <- 1L
+  pd$spaces[op_after & (pd$newlines == 0L)] <- 1L
   pd
 }
 

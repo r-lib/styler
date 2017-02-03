@@ -43,4 +43,24 @@ test <- function() {
   braced({
     empty_removes_space
   })
+
+  a %/% b
+  a %% b
+  a && b
+  a || b
+  a == b
+  a != b
+  a <= b
+  a >= b
+  a <- b
+  a -> b
+  a = b
+  a < b
+  a > b
+  a * b
+  a / b
+  a ^ b
+  a & b
+  a | b
+  a := b
 }
