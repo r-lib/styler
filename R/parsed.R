@@ -1,35 +1,3 @@
-apply_text_transformers_on_file <- function(file, transformers) {
-  message(file)
-  text <- readLines(file, warn = FALSE)
-  new_text <- apply_text_transformers_on_text(text, transformers)
-  if (!identical(text, new_text)) {
-    writeLines(new_text, file)
-    TRUE
-  } else {
-    FALSE
-  }
-}
-
-apply_text_transformers_on_text <- function(text, transformers) {
-  text <- gsub(" +$", "", text)
-  text <- gsub("\t", "        ", text)
-
-  parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- utils::getParseData(parsed)
-  parse_data_with_ws <- add_ws_to_parse_data(parse_data)
-
-  # May strip empty lines before EOF
-  text <- verify_roundtrip(parse_data_with_ws, text)
-
-  transformed_data_with_ws <- Reduce(
-    function(x, fun) fun(x),
-    transformers,
-    init = parse_data_with_ws)
-
-  new_text <- serialize_parse_data(transformed_data_with_ws)
-  new_text
-}
-
 add_ws_to_parse_data <- function(parse_data) {
   parse_data_filtered <-
     parse_data %>%
