@@ -76,6 +76,16 @@ op_token <- c(
 add_space_around_op <- function(pd) {
   op_after <- pd$token %in% op_token
   op_before <- lead(op_after, default = FALSE)
+  idx_before <- op_before & (pd$newlines == 0L)
+  pd$spaces[idx_before] <- pmax(pd$spaces[idx_before], 1L)
+  idx_after <- op_after & (pd$newlines == 0L)
+  pd$spaces[idx_after] <- pmax(pd$spaces[idx_after], 1L)
+  pd
+}
+
+set_space_around_op <- function(pd) {
+  op_after <- pd$token %in% op_token
+  op_before <- lead(op_after, default = FALSE)
   pd$spaces[op_before & (pd$newlines == 0L)] <- 1L
   pd$spaces[op_after & (pd$newlines == 0L)] <- 1L
   pd
@@ -86,7 +96,6 @@ remove_space_after_unary_pm <- function(pd) {
   op_pm_unary_after <- c(op_pm, op_token, "'('", "','")
 
   pm_after <- pd$token %in% op_pm
-  pm_before <- lead(pm_after, default = FALSE)
   pd$spaces[pm_after & (pd$newlines == 0L) & dplyr::lag(pd$token) %in% op_pm_unary_after] <- 0L
   pd
 }
