@@ -1,9 +1,9 @@
 context("styler")
 
 test_that("can style example source file", {
-  text <- style_text(utf8::read_lines_enc("example-in.txt"))
+  text <- style_text(utf8::read_lines_enc("example/in.R"))
   expect_false(
-    utf8::transform_lines_enc("example-out.txt", function(x) text))
+    utf8::transform_lines_enc("example/out.R", function(x) text))
 })
 
 test_that("removes space at EOL", {
