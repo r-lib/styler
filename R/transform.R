@@ -1,28 +1,15 @@
 transform_files <- function(files, transformers) {
-  changed <- BBmisc::vlapply(files, apply_transformers_on_file, transformers)
-  changed <- files[changed]
+  transformer <- function(text) {
+    new_text <- Reduce(
+      function(text, transformer) transformer(text),
+      transformers,
+      init = text)
+    new_text
+  }
 
-  if (length(changed) > 0) {
-    message(
-      "Changed ", length(changed), " files: ",
-      paste(changed, collapse = ", "),
-      ". Please review the changes carefully!")
-  } else {
-    message("No files changed")
+  changed <- utf8::transform_lines_enc(files, transformer)
+  if (any(changed)) {
+      message("Please review the changes carefully!")
   }
   invisible(changed)
-}
-
-apply_transformers_on_file <- function(file, transformers) {
-  text <- readLines(file)
-  new_text <- Reduce(
-    function(text, transformer) transformer(text),
-    transformers,
-    init = text)
-  if (any(text != new_text)) {
-    writeLines(new_text, file)
-    TRUE
-  } else {
-    FALSE
-  }
 }
