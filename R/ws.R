@@ -33,6 +33,7 @@ get_transformers <- function() {
     remove_space_after_paren,
     remove_space_before_paren,
     add_space_after_comma,
+    set_space_after_comma,
     NULL)
 }
 

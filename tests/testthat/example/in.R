@@ -83,4 +83,11 @@ test <- function() {
   call( - a)
   call(5, + a)
   call(5, - a)
+
+  # Only with conservative settings:
+  call(
+    preserves, distance,
+    after,     commas,
+    given_has,one
+  )
 }

@@ -112,6 +112,14 @@ remove_space_before_paren <- function(pd) {
 
 add_space_after_comma <- function(pd) {
   comma_after <- pd$token == "','"
+  idx <- comma_after & (pd$newlines == 0L)
+  pd$spaces[idx] <- pmax(pd$spaces[idx], 1L)
+  pd
+}
+
+set_space_after_comma <- function(pd) {
+  comma_after <- pd$token == "','"
+  idx <- comma_after & (pd$newlines == 0L)
   pd$spaces[comma_after & (pd$newlines == 0L)] <- 1L
   pd
 }
