@@ -61,6 +61,7 @@ try_eval_text <- function(text) {
 
 convert_local_links <- function(text) {
   rex::re_substitutes(
+    global = TRUE,
     text,
     rex::rex(
       "\\code{\\link{",
@@ -74,6 +75,7 @@ convert_local_links <- function(text) {
 
 convert_alien_links <- function(text) {
   rex::re_substitutes(
+    global = TRUE,
     text,
     rex::rex(
       "\\code{\\link[",
@@ -89,6 +91,7 @@ convert_alien_links <- function(text) {
 
 convert_code <- function(text) {
   rex::re_substitutes(
+    global = TRUE,
     text,
     rex::rex(
       "\\code{",
