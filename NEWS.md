@@ -1,6 +1,6 @@
 ## roxygen2md 0.0-2 (2017-02-03)
 
-- Now uses global replacement.
+- Now uses global replacement again.
 - Improve detection for existing `markdown = TRUE` setting in `DESCRIPTION`.
 
 
