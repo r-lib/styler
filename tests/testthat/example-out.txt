@@ -10,6 +10,12 @@ test <- function() {
 
   no_space(after_opening(), paren((1 + 2)))
   no_space(before(closing), paren((1 + 2)))
+  multi(
+    line,
+    call
+  )
+  multi_line_empty_call(
+  )
 
   one_space(after, comma("in", "function", args))
 

@@ -92,7 +92,7 @@ fix_quotes <- function(pd) {
 
 remove_space_after_paren <- function(pd) {
   paren_after <- pd$token == "'('"
-  pd$spaces[paren_after] <- 0L
+  pd$spaces[paren_after & (pd$newlines == 0L)] <- 0L
   pd
 }
 
