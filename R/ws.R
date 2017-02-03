@@ -31,6 +31,7 @@ get_transformers <- function() {
     fix_quotes,
     remove_space_after_paren,
     remove_space_before_paren,
+    add_space_after_comma,
     NULL)
 }
 

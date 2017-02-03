@@ -88,3 +88,9 @@ remove_space_before_paren <- function(pd) {
   pd$spaces[paren_before & (pd$newlines == 0L)] <- 0L
   pd
 }
+
+add_space_after_comma <- function(pd) {
+  comma_after <- pd$token == "','"
+  pd$spaces[comma_after & (pd$newlines == 0L)] <- 1L
+  pd
+}
