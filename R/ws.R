@@ -30,6 +30,7 @@ get_transformers <- function() {
     add_space_around_equal,
     fix_quotes,
     remove_space_after_paren,
+    remove_space_before_paren,
     NULL)
 }
 

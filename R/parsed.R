@@ -81,3 +81,10 @@ remove_space_after_paren <- function(pd) {
   pd$spaces[paren_after] <- 0L
   pd
 }
+
+remove_space_before_paren <- function(pd) {
+  paren_after <- pd$token == "')'"
+  paren_before <- lead(paren_after, default = FALSE)
+  pd$spaces[paren_before & (pd$newlines == 0L)] <- 0L
+  pd
+}
