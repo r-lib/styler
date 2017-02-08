@@ -102,7 +102,12 @@ remove_space_after_unary_pm <- function(pd) {
 
 fix_quotes <- function(pd) {
   str_const <- pd$token == "STR_CONST"
-  pd$text[str_const] <- gsub("^'([^\"]*)'$", '"\\1"', pd$text[str_const])
+  str_const_change <- grepl("^'([^\"]*)'$", pd$text[str_const])
+  pd$text[str_const][str_const_change] <-
+    vapply(
+      lapply(pd$text[str_const][str_const_change], parse_text),
+      deparse,
+      character(1L))
   pd
 }
 
