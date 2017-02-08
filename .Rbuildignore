@@ -1,3 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^API$
+^README\.Rmd$
+^README-.*\.png$
