@@ -1,8 +1,8 @@
 test <- function() {
   "Double quotes remain as they are"
   "Single quotes are converted to double quotes"
-  'but not if the string contains a "double quote'
-  'or an escaped \' single quote'
+  "even if the string contains an escaped \' single quote"
+  'but not if it contains a "double quote'
 
   # Comments are always preserved
 
