@@ -33,13 +33,15 @@ get_transformers <- function(strict = TRUE) {
     remove_space_after_opening_paren,
     remove_space_before_closing_paren,
     if (strict) remove_space_before_opening_paren,
+    add_space_after_for_if_while,
+    add_space_before_brace,
     if (strict) set_space_after_comma else add_space_after_comma,
     NULL)
 }
 
 prettify_local <- function(transformers) {
-  #files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
-  files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  #files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
 
   transform_files(files, transformers)
 }

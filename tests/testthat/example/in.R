@@ -91,4 +91,18 @@ test <- function() {
     after,     commas,
     given_has,one
   )
+
+  if(TRUE){
+    FALSE
+  }
+
+  if(TRUE){
+    FALSE
+  }else{
+    TRUE
+  }
+
+  while(TRUE){
+    FALSE
+  }
 }
