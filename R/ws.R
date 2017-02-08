@@ -27,15 +27,15 @@ style_text <- function(text, transformers = get_transformers()) {
 #' @export
 get_transformers <- function(strict = TRUE) {
   c(
-    if (strict) set_space_around_op else add_space_around_op,
-    remove_space_after_unary_pm,
     fix_quotes,
-    remove_space_after_opening_paren,
     remove_space_before_closing_paren,
     if (strict) remove_space_before_opening_paren,
     add_space_after_for_if_while,
     add_space_before_brace,
+    if (strict) set_space_around_op else add_space_around_op,
     if (strict) set_space_after_comma else add_space_after_comma,
+    remove_space_after_unary_pm,
+    remove_space_after_opening_paren,
     NULL)
 }
 
