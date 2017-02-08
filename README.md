@@ -1,45 +1,333 @@
-# roxygen2md
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+styler
+======
 
-The goal of roxygen2md is to replace Rd syntax with Markdown
-in your package's `roxygen2` documentation.
-Currently, the following substitutions are carried out:
+The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to general formatting conventions.
 
-- `\code{\link{...}}` becomes `[...()]`
-- `\code{\link[...]{...}}` becomes `[...::...()]`
-- `\code{...}` becomes `` `...` ``
+Dirty source file
+-----------------
 
-If necessary, `DESCRIPTION` is edited to enable Markdown in roxygen blocks.
-You'll need `roxygen2` version 6.0.0 or later.
+``` r
+print_code <- function(x) {
+  knitr::asis_output(
+    paste(
+      c("```r", "", "", "# ------", x, "# ------", "```"),
+      collapse = "\n"))
+}
 
-Call `roxygen2md::roxygen2md()` in your package's directory, or navigate to "Tools/Addins/Rd to Markdown" in RStudio.
+dirty <- readLines("tests/testthat/example/in.R")
 
-More to come. The substitutions are not completely safe,
-please carefully examine the results!
-
-Let me know if this works with your documentation.
+print_code(dirty)
 
 
-## Installation
+# ------
+test <- function() {
+  "Double quotes remain as they are"
+  'Single quotes are converted to double quotes'
+  'but not if the string contains a "double quote'
+  'or an escaped \' single quote'
 
-Install from GitHub using
+  # Comments are always preserved
 
-```r
-# install.packages("remotes")
-# remotes::install_packages("klutometis/roxygen")
-remotes::install_packages("r-pkgs/roxygen2md")
+  function_calls(get_spaces=around_equal)
+
+  no_space( after_opening( ), paren( (1 + 2)))
+  no_space (before_opening (), paren ( (1 + 2)))
+  no_space(before(closing ), paren((1 + 2) ) )
+  multi(
+    line,
+    call
+  )
+  multi_line_empty_call(
+  )
+
+  one_space(after,comma("in","function",  args))
+
+  {
+    braced
+    expression
+  }
+
+  braced("unnamed", {
+    "function"
+    call
+  })
+
+  braced(named = {
+    "function"
+    call
+  })
+
+  braced("unnamed reduces space",    {
+  })
+
+  braced("unnamed adds space space",{
+  })
+
+  braced(named_reduces_space =    {
+  })
+
+  braced(named_adds_space =    {
+  })
+
+  braced(  {
+    empty_removes_space
+  })
+
+  a%/%b
+  a%%b
+  a&&b
+  a||b
+  a==b
+  a!=b
+  a<=b
+  a>=b
+  a<-b
+  a->b
+  a=b
+  a<b
+  a>b
+  a*b
+  a/b
+  a^b
+  a&b
+  a|b
+  a:=b
+
+  a+b
+  a-b
+  a++b
+  a+-b
+  a++b
+  a-+b
+  a--b
+  a+--b
+  a--+b
+  call( + a)
+  call( - a)
+  call(5, + a)
+  call(5, - a)
+
+  # Only with conservative settings:
+  call(
+    preserves, distance,
+    after,     commas,
+    given_has,one
+  )
+}
+# ------
 ```
 
+Tidied file
+-----------
 
-## Usage
+``` r
+tidy <- style_text(dirty, get_transformers(strict = FALSE))
 
-In your package directory, run
+print_code(tidy)
 
-```r
-roxygen2md::roxygen2md()
+
+# ------
+test <- function() {
+  "Double quotes remain as they are"
+  "Single quotes are converted to double quotes"
+  'but not if the string contains a "double quote'
+  'or an escaped \' single quote'
+
+  # Comments are always preserved
+
+  function_calls(get_spaces = around_equal)
+
+  no_space(after_opening(), paren((1 + 2)))
+  no_space (before_opening (), paren ((1 + 2)))
+  no_space(before(closing), paren((1 + 2)))
+  multi(
+    line,
+    call
+  )
+  multi_line_empty_call(
+  )
+
+  one_space(after, comma("in", "function",  args))
+
+  {
+    braced
+    expression
+  }
+
+  braced("unnamed", {
+    "function"
+    call
+  })
+
+  braced(named = {
+    "function"
+    call
+  })
+
+  braced("unnamed reduces space",    {
+  })
+
+  braced("unnamed adds space space", {
+  })
+
+  braced(named_reduces_space =    {
+  })
+
+  braced(named_adds_space =    {
+  })
+
+  braced({
+    empty_removes_space
+  })
+
+  a %/% b
+  a %% b
+  a && b
+  a || b
+  a == b
+  a != b
+  a <= b
+  a >= b
+  a <- b
+  a -> b
+  a = b
+  a < b
+  a > b
+  a * b
+  a / b
+  a ^ b
+  a & b
+  a | b
+  a := b
+
+  a + b
+  a - b
+  a + +b
+  a + -b
+  a + +b
+  a - +b
+  a - -b
+  a + --b
+  a - -+b
+  call(+a)
+  call(-a)
+  call(5, +a)
+  call(5, -a)
+
+  # Only with conservative settings:
+  call(
+    preserves, distance,
+    after,     commas,
+    given_has, one
+  )
+}
+# ------
 ```
 
-If you are using RStudio, simply choose the item "Rd to Markdown" from your "Addins" menu.
+Cleaned file
+------------
 
------
+``` r
+clean <- styler::style_text(dirty)
 
-GPL-3 © Kirill Müller
+print_code(clean)
+
+
+# ------
+test <- function() {
+  "Double quotes remain as they are"
+  "Single quotes are converted to double quotes"
+  'but not if the string contains a "double quote'
+  'or an escaped \' single quote'
+
+  # Comments are always preserved
+
+  function_calls(get_spaces = around_equal)
+
+  no_space(after_opening(), paren((1 + 2)))
+  no_space (before_opening (), paren ((1 + 2)))
+  no_space(before(closing), paren((1 + 2)))
+  multi(
+    line,
+    call
+  )
+  multi_line_empty_call(
+  )
+
+  one_space(after, comma("in", "function", args))
+
+  {
+    braced
+    expression
+  }
+
+  braced("unnamed", {
+    "function"
+    call
+  })
+
+  braced(named = {
+    "function"
+    call
+  })
+
+  braced("unnamed reduces space", {
+  })
+
+  braced("unnamed adds space space", {
+  })
+
+  braced(named_reduces_space = {
+  })
+
+  braced(named_adds_space = {
+  })
+
+  braced({
+    empty_removes_space
+  })
+
+  a %/% b
+  a %% b
+  a && b
+  a || b
+  a == b
+  a != b
+  a <= b
+  a >= b
+  a <- b
+  a -> b
+  a = b
+  a < b
+  a > b
+  a * b
+  a / b
+  a ^ b
+  a & b
+  a | b
+  a := b
+
+  a + b
+  a - b
+  a + +b
+  a + -b
+  a + +b
+  a - +b
+  a - -b
+  a + --b
+  a - -+b
+  call(+a)
+  call(-a)
+  call(5, +a)
+  call(5, -a)
+
+  # Only with conservative settings:
+  call(
+    preserves, distance,
+    after, commas,
+    given_has, one
+  )
+}
+# ------
+```

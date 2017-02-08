@@ -16,12 +16,41 @@ knitr::opts_chunk$set(
 
 # styler
 
-The goal of styler is to ...
+The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to general formatting conventions.
 
-## Example
+## Dirty source file
 
-This is a basic example which shows you how to solve a common problem:
+```{r echo=FALSE, message=FALSE}
+devtools::load_all()
+#knitr::opts_chunk$set(comment = NA)
+```
 
-```{r example}
-## basic example code
+
+```{r}
+print_code <- function(x) {
+  knitr::asis_output(
+    paste(
+      c("```r", "", "", "# ------", x, "# ------", "```"),
+      collapse = "\n"))
+}
+
+dirty <- readLines("tests/testthat/example/in.R")
+
+print_code(dirty)
+```
+
+## Tidied file
+
+```{r}
+tidy <- style_text(dirty, get_transformers(strict = FALSE))
+
+print_code(tidy)
+```
+
+## Cleaned file
+
+```{r}
+clean <- styler::style_text(dirty)
+
+print_code(clean)
 ```
