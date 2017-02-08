@@ -111,6 +111,13 @@ fix_quotes <- function(pd) {
   pd
 }
 
+remove_space_before_opening_paren <- function(pd) {
+  paren_after <- pd$token == "'('"
+  paren_before <- lead(paren_after, default = FALSE)
+  pd$spaces[paren_before & (pd$newlines == 0L)] <- 0L
+  pd
+}
+
 remove_space_after_opening_paren <- function(pd) {
   paren_after <- pd$token == "'('"
   pd$spaces[paren_after & (pd$newlines == 0L)] <- 0L
