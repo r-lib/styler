@@ -40,9 +40,10 @@ get_transformers <- function(strict = TRUE) {
 }
 
 prettify_local <- function(transformers) {
-  files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
-  files <- grep("/RcppExports[.]R$", files, invert = TRUE, value = TRUE)
-  #files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  r_files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  r_files <- grep("/RcppExports[.]R$", r_files, invert = TRUE, value = TRUE)
+  test_files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  files <- c(r_files, test_files)
 
   transform_files(files, transformers)
 }
