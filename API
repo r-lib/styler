@@ -1,5 +1,7 @@
-# API for roxygen2md package
+# API for styler package
 
 ## Exported functions
 
-roxygen2md(pkg = ".")
+get_transformers(strict = TRUE)
+style_pkg(pkg = ".", transformers = get_transformers())
+style_text(text, transformers = get_transformers())
