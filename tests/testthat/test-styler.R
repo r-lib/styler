@@ -20,3 +20,8 @@ test_that("removes space at EOL", {
 test_that("removes blank lines at EOF", {
   expect_equal(style_text(c("a() ", "", "")), "a()")
 })
+
+
+test_that("Space placed after 'if' and before '('", {
+  expect_equal(style_text(c("if(TRUE) x else y")), "if (TRUE) x else y")
+})
