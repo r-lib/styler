@@ -2,25 +2,12 @@
 % Please edit documentation in R/transform.R
 \name{make_transformer}
 \alias{make_transformer}
-\title{TODO:
-\itemize{
-\item Walk tree defined by \code{leaves}, compute whitespace
-\item Perform all transformations on hierarchical structure
-\itemize{
-\item Compute text for a sub-element
-}
-\item Compute indentation
-\itemize{
-\item Braces
-\item Function calls
-\item Function definitions
-}
-\item Remove \code{includeText = TRUE}
-}}
+\title{Closure to return a transformer function}
 \usage{
 make_transformer(transformers)
 }
-\description{
+\arguments{
+\item{transformers}{A list of transformer functions.
 TODO:
 \itemize{
 \item Walk tree defined by \code{leaves}, compute whitespace
@@ -35,5 +22,10 @@ TODO:
 \item Function definitions
 }
 \item Remove \code{includeText = TRUE}
+}}
 }
+\description{
+This function takes a list of transformer functions as input and
+returns a function that can be applied to character strings
+that should be transformed.
 }

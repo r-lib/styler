@@ -8,6 +8,8 @@ style_pkg(pkg = ".", transformers = get_transformers())
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package}
+
+\item{transformers}{A list with functions to be applied to the parsed data.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package
