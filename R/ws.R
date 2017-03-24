@@ -63,7 +63,13 @@ style_src <- function(path = ".", transformers = get_transformers(), recursive =
   withr::with_dir(path, prettify_any(transformers, recursive = recursive))
 }
 
-
+#' Prettify R code in current working directory
+#'
+#' This is a helper function for style_src.
+#' @inheritParams style_src
+#' @param recursive A logical value indicating whether or not files in subdirectories
+#'   should be styled as well.
+#' @keywords internal
 prettify_any <- function(transformers, recursive) {
   files <- dir(path = ".", pattern = "[.][rR]$", recursive = recursive, full.names = TRUE)
   transform_files(files, transformers)
