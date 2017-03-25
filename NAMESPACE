@@ -2,6 +2,7 @@
 
 export(get_transformers)
 export(style_pkg)
+export(style_src)
 export(style_text)
 import(dplyr)
 import(tibble)

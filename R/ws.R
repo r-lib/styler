@@ -47,3 +47,31 @@ prettify_local <- function(transformers) {
 
   transform_files(files, transformers)
 }
+
+
+#' Prettify arbitrary R code
+#'
+#' Performs various substitutions in all `.R` files in a directory.
+#' Carefully examine the results after running this function!
+#' @param path Path to a directory with files to transform.
+#' @param transformers A list of transformer functions to be applied to the
+#'   files in `path`.
+#' @param recursive A logical value indicating whether or not files in subdirectories
+#'   of `path` should be styled as well.
+#' @export
+style_src <- function(path = ".", transformers = get_transformers(), recursive = TRUE) {
+  withr::with_dir(path, prettify_any(transformers, recursive = recursive))
+}
+
+#' Prettify R code in current working directory
+#'
+#' This is a helper function for style_src.
+#' @inheritParams style_src
+#' @param recursive A logical value indicating whether or not files in subdirectories
+#'   should be styled as well.
+#' @keywords internal
+prettify_any <- function(transformers, recursive) {
+  files <- dir(path = ".", pattern = "[.][rR]$", recursive = recursive, full.names = TRUE)
+  transform_files(files, transformers)
+
+}
