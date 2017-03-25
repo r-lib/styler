@@ -11,19 +11,28 @@ NULL
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package
-#'
+#' @inheritParams style_text
 #' @export
 style_pkg <- function(pkg = ".", transformers = get_transformers()) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   withr::with_dir(pkg_root, prettify_local(transformers))
 }
 
+#' Style a string
+#'
+#' Styles a character vector
+#' @param text A character vector with text to style.
+#' @param transformers A list with functions to be applied to the parsed data.
 #' @export
 style_text <- function(text, transformers = get_transformers()) {
   transformer <- make_transformer(transformers)
   transformer(text)
 }
 
+#' get the transformer functions
+#'
+#' @param strict A logical value indicating whether a set of strict
+#'   or not so strict transformer functions should be returned.
 #' @export
 get_transformers <- function(strict = TRUE) {
   c(
