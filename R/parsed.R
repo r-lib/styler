@@ -45,7 +45,7 @@ add_ws_to_parse_data <- function(parse_data) {
 
   parse_data_comment_eol <-
     parse_data_filled %>%
-    mutate(text = if_else(token == "COMMENT", gsub(" +$", "", text), text))
+    mutate_(text = ~if_else(token == "COMMENT", gsub(" +$", "", text), text))
 
   parse_data_comment_eol
 }
