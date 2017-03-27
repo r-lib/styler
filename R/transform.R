@@ -21,22 +21,6 @@ make_transformer <- function(transformers) {
 
     parse_data_with_ws <- compute_parse_data_flat_with_ws(text)
 
-    #' TODO:
-    #' - Implement compute_parse_data_nested_with_ws()
-    #'     - Walk tree defined by `leaves`, compute whitespace information
-    #'     - Store indention depth in a separate column, unaffected by
-    #'       inter-token space
-    #' - Implement serialization of nested parse data
-    #' - Use compute_parse_data_nested_with_ws() instead of
-    #'   compute_parse_data_flat_with_ws()
-    #' - Perform all transformations on hierarchical structure
-    #'     - Compute text for a sub-element
-    #' - Compute indentation
-    #'     - Braces
-    #'     - Function calls
-    #'     - Function definitions
-    #' - Remove `includeText = TRUE`
-
     # May strip empty lines before EOF
     text <- verify_roundtrip(parse_data_with_ws, text)
 

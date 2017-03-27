@@ -1,3 +1,21 @@
+#' TODO:
+#' - Implement add_ws_to_parse_data_nested()
+#'     - Walk tree defined by `leaves`, compute whitespace information
+#'     - Store indention depth in a separate column, unaffected by
+#'       inter-token space
+#' - Implement compute_parse_data_nested_with_ws() as
+#'   compute_parse_data_nested() + add_ws_to_parse_data_nested()
+#' - Implement serialization of nested parse data
+#' - Use compute_parse_data_nested_with_ws() instead of
+#'   compute_parse_data_flat_with_ws()
+#' - Perform all transformations on hierarchical structure
+#'     - Compute text for a sub-element
+#' - Compute indentation
+#'     - Braces
+#'     - Function calls
+#'     - Function definitions
+#' - Remove `includeText = TRUE`
+
 compute_parse_data_nested <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
