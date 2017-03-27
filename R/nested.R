@@ -21,6 +21,7 @@ compute_parse_data_nested <- function(text) {
   parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
   parse_data_nested <-
     parse_data %>%
+    mutate_(leaves = ~rep(list(NULL), length(text))) %>%
     mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
     nest_parse_data
@@ -38,11 +39,7 @@ nest_parse_data <- function(parse_data) {
   leaves <- split$data[!split$internal][[1L]]
   internal <- split$data[split$internal][[1L]]
 
-  if ("leaves" %in% names(internal)) {
-    internal <- rename_(internal, internal_leaves = ~leaves)
-  } else {
-    internal <- mutate_(internal, internal_leaves = ~vector("list", nrow(internal)))
-  }
+  internal <- rename_(internal, internal_leaves = ~leaves)
 
   nested <-
     leaves %>%
