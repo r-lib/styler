@@ -1,0 +1,122 @@
+---
+title: "Data Structures"
+author: "Lorenz Walthert and Kirill Müller"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This vignette illustrates how the core of `styler` currently^[at commit e`6ddee0f510d3c9e3e22ef68586068fa5c6bc140`] works, i.e. how
+rules are applied to a parse table and how limitations of this approach can be 
+overcome with a refined approach.
+
+## Status quo - the flat apporach
+
+Roughly speaking, a string containing code to be formatted is parsed with `parse`
+and the output is passed to `getParseData` in order to obtain a parse
+table with detailed information about every token. For a simple example string
+"`a <- function(x) { 1+1 }`" to be formatted, the parse table on which `styler`
+performs the manipulations looks similar to the one presented below.
+```{r, message = FALSE}
+library("styler")
+library("dplyr")
+
+code <- "a <- function(x) { 1+1 }"
+
+(parse_table <- compute_parse_data_flat_with_ws(code))
+```
+The column `spaces` was computed from the columns `col1` and `col2`, `newlines`
+was computed from `line1` and `line2` respectively.
+
+So far, styler can set the spaces around the operators correctly. In our example, 
+that involves adding spaces around `+`, so in the `spaces` column, element nine
+and ten must be set to one. This means that a space is added after `1` and after `+`. 
+To get the spacing right and cover the various cases, a set of functions has to 
+be applied to the parse table subsequently (and in the right order), 
+which is essentially done via `Reduce()`. 
+After all modifications on the table are completed, `serialize_parse_data()`
+collapses the `text` column and adds the number of spaces and 
+line breaks specified in `spaces` and `newlines` in between the elements of
+`text`. If we serialize our table and don't perform any modification, we 
+obviously just get back what we started with.
+```{r}
+serialize_parse_data(parse_table)
+```
+
+## Refining the flat approach - nesting the parse table
+
+Although the flat approach is good place to start, e.g. for fixing spaces
+between operators, it has its limitations. In particular, it treats each token 
+the same way in the sense that it does not account for the context of the token, 
+i.e. in which sub-expression it appears.
+To set the indention correctly, we need a hierarchical view on the parse data, 
+since all tokens in a sub-expression have the same indention level. Hence, 
+a natural approach would be to create a nested parse table instead of a flat
+parse table and than take a recursion over all elements in the table, so for 
+each sub(-sub etc.)-expression, a separate parse table would be created and the 
+modifications would be applied to this table before putting everything back 
+together. A function to create a nested parse table already exists in `styler`.
+Let's have a look at the top level:
+
+```{r}
+(l1 <- compute_parse_data_nested(code)[-1])
+
+```
+
+The tibble contains the column `leaves`, which itself contains a tibble. 
+If we "enter"  the first leaf, we can see that the expression was split up 
+further.
+
+```{r}
+l1$leaves[[1]] %>%
+  select(text, terminal, leaves, token)
+```
+
+And further...
+```{r}
+l1$leaves[[1]]$leaves[[3]]$leaves[[5]]$leaves[[2]]
+```
+
+... and so on. Every leaf that is not a terminal contains another tibble where 
+the sub-expression is split up further - until we are left with tibbles that 
+only contain terminals.
+
+
+Recall the above example. `1+1` 
+is a sub-expression of the expression `code`, and we would like to set the 
+indention for `1+1`, even before we do anything with `1+1`.
+
+The code for a function that kind of sketches the idea and illustrates such a 
+recursion is given below: 
+
+```{r}
+serialize <- function(x) {
+  out <- Map(
+    function(terminal, token, leaf) {
+      if (terminal)
+        token
+      else
+        serialize(leaf)
+    },
+    x$terminal, x$token,
+    if (is.null(x$leaves)) rep(list(NULL), length(x$terminal)) else x$leaves
+  )
+  out
+}
+
+x <- compute_parse_data_nested(code)
+serialize(x) %>% unlist
+```
+
+How to exactly implement a similar recursion to not just return the tokens, but 
+the styled code is subject to future work, so would be the functions to be
+applied to a sub-expression parse table that create correct indention.
+
+## Final Remarks
+
+Although a flat structure would possibly also allow to solve the problem, it is
+a less elegant and flexible solution to the problem, so the authors of this 
+vignette think its worth giving the nested approach a try.
