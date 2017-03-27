@@ -19,25 +19,7 @@ make_transformer <- function(transformers) {
     text <- gsub(" +$", "", text)
     text <- gsub("\t", "        ", text)
 
-    parsed <- parse(text = text, keep.source = TRUE)
-    parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
-    parse_data_nested <-
-      parse_data %>%
-      mutate_(short = ~substr(text, 1, 5)) %>%
-      select_(~short, ~everything()) %>%
-      nest_parse_data
-
-    browser()
-    #' TODO:
-    #' - Walk tree defined by `leaves`, compute whitespace
-    #' - Perform all transformations on hierarchical structure
-    #'     - Compute text for a sub-element
-    #' - Compute indentation
-    #'     - Braces
-    #'     - Function calls
-    #'     - Function definitions
-    #' - Remove `includeText = TRUE`
-    parse_data_with_ws <- add_ws_to_parse_data(parse_data)
+    parse_data_with_ws <- compute_parse_data_flat_with_ws(text)
 
     # May strip empty lines before EOF
     text <- verify_roundtrip(parse_data_with_ws, text)
