@@ -2,6 +2,8 @@
 styler
 ======
 
+[![Build Status](https://travis-ci.org/krlmlr/styler.svg?branch=master)](https://travis-ci.org/krlmlr/styler)
+
 The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to general formatting conventions.
 
 Dirty source file
@@ -114,7 +116,55 @@ test <- function() {
     after,     commas,
     given_has,one
   )
+
+  if(TRUE){
+    FALSE
+  }
+
+  if(TRUE){
+    FALSE
+  }else{
+    TRUE
+  }
+
+  while(TRUE){
+    FALSE
+  }
+
+  single_line ( "function" ,call )
+
+  multiline (
+  "function", call )
+
+  nested ( function_call ( "in" ,one ,line ) )
+
+  nested ( function_call (
+  "in",
+      multiple,lines ) )
+
+  nested(
+  function_call ( with ),
+      many
+  ,     first_level_args  )
+
+  nested(
+    function_call ( with ),  # a comment and
+    many #more
+    ,     first_level_args  )
+
+  difficult(nested(
+    "function", call
+  ),
+    with, more, args
+  )
 }
+
+
+# formula
+lm(a~b+c,data=NA)
+lm(a~.-1,data=NA)
+a~b:c
+a~b :c
 # ------
 ```
 
@@ -221,7 +271,55 @@ test <- function() {
     after,     commas,
     given_has, one
   )
+
+  if (TRUE) {
+    FALSE
+  }
+
+  if (TRUE) {
+    FALSE
+  } else {
+    TRUE
+  }
+
+  while (TRUE) {
+    FALSE
+  }
+
+  single_line ("function" , call)
+
+  multiline (
+  "function", call)
+
+  nested (function_call ("in" , one , line))
+
+  nested (function_call (
+  "in",
+      multiple, lines))
+
+  nested(
+  function_call (with),
+      many
+  ,     first_level_args)
+
+  nested(
+    function_call (with),  # a comment and
+    many #more
+    ,     first_level_args)
+
+  difficult(nested(
+    "function", call
+  ),
+    with, more, args
+  )
 }
+
+
+# formula
+lm(a~b + c, data = NA)
+lm(a~. - 1, data = NA)
+a~b:c
+a~b :c
 # ------
 ```
 
@@ -328,6 +426,54 @@ test <- function() {
     after, commas,
     given_has, one
   )
+
+  if (TRUE) {
+    FALSE
+  }
+
+  if (TRUE) {
+    FALSE
+  } else {
+    TRUE
+  }
+
+  while (TRUE) {
+    FALSE
+  }
+
+  single_line("function" , call)
+
+  multiline(
+  "function", call)
+
+  nested(function_call("in" , one , line))
+
+  nested(function_call(
+  "in",
+      multiple, lines))
+
+  nested(
+  function_call(with),
+      many
+  , first_level_args)
+
+  nested(
+    function_call(with), # a comment and
+    many #more
+    , first_level_args)
+
+  difficult(nested(
+    "function", call
+  ),
+    with, more, args
+  )
 }
+
+
+# formula
+lm(a~b + c, data = NA)
+lm(a~. - 1, data = NA)
+a~b:c
+a~b :c
 # ------
 ```

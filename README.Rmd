@@ -14,7 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 # styler
+
+[![Build Status](https://travis-ci.org/krlmlr/styler.svg?branch=master)](https://travis-ci.org/krlmlr/styler)
 
 The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to general formatting conventions.
 
