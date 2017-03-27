@@ -7,22 +7,7 @@
 make_transformer(transformers)
 }
 \arguments{
-\item{transformers}{A list of transformer functions.
-TODO:
-\itemize{
-\item Walk tree defined by \code{leaves}, compute whitespace
-\item Perform all transformations on hierarchical structure
-\itemize{
-\item Compute text for a sub-element
-}
-\item Compute indentation
-\itemize{
-\item Braces
-\item Function calls
-\item Function definitions
-}
-\item Remove \code{includeText = TRUE}
-}}
+\item{transformers}{A list of transformer functions.}
 }
 \description{
 This function takes a list of transformer functions as input and
