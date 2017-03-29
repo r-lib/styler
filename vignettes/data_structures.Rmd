@@ -13,7 +13,7 @@ This vignette illustrates how the core of `styler` currently^[at commit e`6ddee0
 rules are applied to a parse table and how limitations of this approach can be 
 overcome with a refined approach.
 
-## Status quo - the flat apporach
+## Status quo - the flat approach
 
 Roughly speaking, a string containing code to be formatted is parsed with `parse`
 and the output is passed to `getParseData` in order to obtain a parse
@@ -24,7 +24,7 @@ performs the manipulations looks similar to the one presented below.
 library("styler")
 library("dplyr")
 
-code <- "a <- function(x) { 1+1 }"
+code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 
 (parse_table <- compute_parse_data_flat_with_ws(code))
 ```
@@ -66,21 +66,21 @@ Let's have a look at the top level:
 
 ```
 
-The tibble contains the column `leaves`, which itself contains a tibble. 
-If we "enter"  the first leaf, we can see that the expression was split up 
+The tibble contains the column `child`, which itself contains a tibble. 
+If we "enter"  the first child, we can see that the expression was split up 
 further.
 
 ```{r}
-l1$leaves[[1]] %>%
-  select(text, terminal, leaves, token)
+l1$child[[1]] %>%
+  select(text, terminal, child, token)
 ```
 
 And further...
 ```{r}
-l1$leaves[[1]]$leaves[[3]]$leaves[[5]]$leaves[[2]]
+l1$child[[1]]$child[[3]]$child[[5]]$child[[2]]
 ```
 
-... and so on. Every leaf that is not a terminal contains another tibble where 
+... and so on. Every child that is not a terminal contains another tibble where 
 the sub-expression is split up further - until we are left with tibbles that 
 only contain terminals.
 
@@ -95,14 +95,14 @@ recursion is given below:
 ```{r}
 serialize <- function(x) {
   out <- Map(
-    function(terminal, token, leaf) {
+    function(terminal, token, child) {
       if (terminal)
         token
       else
-        serialize(leaf)
+        serialize(child)
     },
     x$terminal, x$token,
-    if (is.null(x$leaves)) rep(list(NULL), length(x$terminal)) else x$leaves
+    if (is.null(x$child)) rep(list(NULL), length(x$terminal)) else x$child
   )
   out
 }

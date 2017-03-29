@@ -1,6 +1,6 @@
 #' TODO:
 #' - Implement add_ws_to_parse_data_nested()
-#'     - Walk tree defined by `leaves`, compute whitespace information
+#'     - Walk tree defined by `child`, compute whitespace information
 #'     - Store indention depth in a separate column, unaffected by
 #'       inter-token space
 #' - Implement compute_parse_data_nested_with_ws() as
@@ -23,7 +23,7 @@ compute_parse_data_nested <- function(text) {
   parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
   parse_data_nested <-
     parse_data %>%
-    mutate_(leaves = ~rep(list(NULL), length(text))) %>%
+    mutate_(child = ~rep(list(NULL), length(text))) %>%
     mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
     nest_parse_data
@@ -38,19 +38,19 @@ nest_parse_data <- function(parse_data) {
     mutate_(internal = ~id %in% parent) %>%
     nest_("data", names(parse_data))
 
-  leaves <- split$data[!split$internal][[1L]]
+  child <- split$data[!split$internal][[1L]]
   internal <- split$data[split$internal][[1L]]
 
-  internal <- rename_(internal, internal_leaves = ~leaves)
+  internal <- rename_(internal, internal_child = ~child)
 
   nested <-
-    leaves %>%
+    child %>%
     mutate_(parent_ = ~parent) %>%
-    nest_(., "leaves", setdiff(names(.), "parent_")) %>%
+    nest_(., "child", setdiff(names(.), "parent_")) %>%
     left_join(internal, ., by = c("id" = "parent_")) %>%
-    mutate_(leaves = ~Map(bind_rows, leaves, internal_leaves)) %>%
-    mutate_(leaves = ~lapply(leaves, arrange_, ~line1, ~col1)) %>%
-    select_(~-internal_leaves) %>%
+    mutate_(child = ~Map(bind_rows, child, internal_child)) %>%
+    mutate_(child = ~lapply(child, arrange_, ~line1, ~col1)) %>%
+    select_(~-internal_child) %>%
     select_(~short, ~everything(), ~-text, ~text)
 
   nest_parse_data(nested)
