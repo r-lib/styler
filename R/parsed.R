@@ -1,3 +1,7 @@
+#' get flat parse table
+#'
+#' @export
+#' @keywords internal
 compute_parse_data_flat_with_ws <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed))
@@ -40,6 +44,9 @@ verify_roundtrip <- function(pd, text) {
   text
 }
 
+#' serialize a parse table
+#' @export
+#' @keywords internal
 serialize_parse_data <- function(parse_data_with_ws) {
   parse_data_with_ws %>%
     summarize_(
