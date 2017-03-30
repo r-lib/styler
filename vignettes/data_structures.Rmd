@@ -18,7 +18,7 @@ overcome with a refined approach.
 Roughly speaking, a string containing code to be formatted is parsed with `parse`
 and the output is passed to `getParseData` in order to obtain a parse
 table with detailed information about every token. For a simple example string
-"`a <- function(x) { 1+1 }`" to be formatted, the parse table on which `styler`
+"`a <- function(x) { if(x > 1) { 1+1 } else {x} }`" to be formatted, the parse table on which `styler`
 performs the manipulations looks similar to the one presented below.
 ```{r, message = FALSE}
 library("styler")
@@ -77,7 +77,7 @@ l1$child[[1]] %>%
 
 And further...
 ```{r}
-l1$child[[1]]$child[[3]]$child[[5]]$child[[2]]
+l1$child[[1]]$child[[3]]$child[[5]]
 ```
 
 ... and so on. Every child that is not a terminal contains another tibble where 
@@ -85,23 +85,40 @@ the sub-expression is split up further - until we are left with tibbles that
 only contain terminals.
 
 
-Recall the above example. `1+1` 
-is a sub-expression of the expression `code`, and we would like to set the 
-indention for `1+1`, even before we do anything with `1+1`.
+Recall the above example. `a <- function(x) { if(x > 1) { 1+1 } else {x} }`.
+In the last printed parse table, we can see that see that the whole if condition
+is a sub-expression of `code`, surrounded by two curly brackets. Hence, 
+one would like to set the indention level for this sub-expression before 
+doing anything with it in more detail. Later, when we progressed deeper into 
+the nested table, we hit a similar pattern:
+
+```{r}
+l1$child[[1]]$child[[3]]$child[[5]]$child[[2]]$child[[5]]
+```
+Again, we have two curly brackets and an expression inside. We would like to 
+set the indention level for the expression `1+1` in the same way as for the 
+whole if condition.
+
+The simple example above makes it evident that a recursive approach to this
+problem would be the most natural.
 
 The code for a function that kind of sketches the idea and illustrates such a 
-recursion is given below: 
+recursion is given below.
+
+It takes a nested parse table as input and then does the recursion over all 
+children. If the children is a terminal, it returns the text, otherwise,
+it "enters" the child to find the terminals inside of the child and returns them.
 
 ```{r}
 serialize <- function(x) {
   out <- Map(
-    function(terminal, token, child) {
+    function(terminal, text, child) {
       if (terminal)
-        token
+        text
       else
         serialize(child)
     },
-    x$terminal, x$token,
+    x$terminal, x$text,
     if (is.null(x$child)) rep(list(NULL), length(x$terminal)) else x$child
   )
   out
@@ -111,12 +128,25 @@ x <- compute_parse_data_nested(code)
 serialize(x) %>% unlist
 ```
 
-How to exactly implement a similar recursion to not just return the tokens, but 
-the styled code is subject to future work, so would be the functions to be
-applied to a sub-expression parse table that create correct indention.
+How to exactly implement a similar recursion to not just return each text 
+token separately, but 
+the styled text as one string is subject to future work, so would be the functions to be
+applied to a sub-expression parse table that create correct indention. 
+Similar to `compute_parse_data_flat_with_ws`, the column `spaces` and `newlines`
+would be required to be computed by `compute_parse_data_nested` as well as a
+new column `indention`. 
+
 
 ## Final Remarks
 
-Although a flat structure would possibly also allow to solve the problem, it is
-a less elegant and flexible solution to the problem, so the authors of this 
-vignette think its worth giving the nested approach a try.
+Although a flat structure would possibly also allow us to solve the problem of
+indention, it is
+a less elegant and flexible solution to the problem. It would involve looking 
+for an opening curly bracket in the parse table, set the indention level for all
+subsequent rows in the parse table until the next opening or closing curly 
+bracket is hit and then intending one level further or setting indention back to 
+where it was at the beginning of the table.
+
+Note that the vignette just addressed the question of indention caused by
+curly brackets and has not dealt with other operators that would trigger 
+indention, such as `(` or `+`. 
