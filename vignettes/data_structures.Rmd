@@ -1,6 +1,6 @@
 ---
 title: "Data Structures"
-author: "Lorenz Walthert and Kirill Müller"
+author: "Lorenz Walthert"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
