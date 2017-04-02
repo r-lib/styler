@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette illustrates how the core of `styler` currently^[at commit e`6ddee0f510d3c9e3e22ef68586068fa5c6bc140`] works, i.e. how
+This vignette illustrates how the core of `styler` currently^[at commit `e6ddee0f510d3c9e3e22ef68586068fa5c6bc140`] works, i.e. how
 rules are applied to a parse table and how limitations of this approach can be 
 overcome with a refined approach.
 
@@ -18,8 +18,10 @@ overcome with a refined approach.
 Roughly speaking, a string containing code to be formatted is parsed with `parse`
 and the output is passed to `getParseData` in order to obtain a parse
 table with detailed information about every token. For a simple example string
-"`a <- function(x) { if(x > 1) { 1+1 } else {x} }`" to be formatted, the parse table on which `styler`
-performs the manipulations looks similar to the one presented below.
+"`a <- function(x) { if(x > 1) { 1+1 } else {x} }`" to be formatted, the parse 
+table on which `styler` performs the manipulations looks similar to the one 
+presented below.
+
 ```{r, message = FALSE}
 library("styler")
 library("dplyr")
@@ -55,7 +57,7 @@ i.e. in which sub-expression it appears.
 To set the indention correctly, we need a hierarchical view on the parse data, 
 since all tokens in a sub-expression have the same indention level. Hence, 
 a natural approach would be to create a nested parse table instead of a flat
-parse table and than take a recursion over all elements in the table, so for 
+parse table and then take a recursion over all elements in the table, so for 
 each sub(-sub etc.)-expression, a separate parse table would be created and the 
 modifications would be applied to this table before putting everything back 
 together. A function to create a nested parse table already exists in `styler`.
@@ -106,7 +108,7 @@ The code for a function that kind of sketches the idea and illustrates such a
 recursion is given below.
 
 It takes a nested parse table as input and then does the recursion over all 
-children. If the children is a terminal, it returns the text, otherwise,
+children. If the child is a terminal, it returns the text, otherwise,
 it "enters" the child to find the terminals inside of the child and returns them.
 
 ```{r}
@@ -118,8 +120,7 @@ serialize <- function(x) {
       else
         serialize(child)
     },
-    x$terminal, x$text,
-    if (is.null(x$child)) rep(list(NULL), length(x$terminal)) else x$child
+    x$terminal, x$text, x$child
   )
   out
 }
@@ -130,7 +131,7 @@ serialize(x) %>% unlist
 
 How to exactly implement a similar recursion to not just return each text 
 token separately, but 
-the styled text as one string is subject to future work, so would be the functions to be
+the styled text as one string (or one string per line) is subject to future work, so would be the functions to be
 applied to a sub-expression parse table that create correct indention. 
 Similar to `compute_parse_data_flat_with_ws`, the column `spaces` and `newlines`
 would be required to be computed by `compute_parse_data_nested` as well as a
