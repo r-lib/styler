@@ -63,6 +63,15 @@ rep_char <- function(char, times) {
     vapply(paste, collapse = "", character(1L))
 }
 
+
+#' Enrich parse table with space and linebreak information
+#'
+#' This function computes difference (as column and line difference) between two
+#'   entries in the parse table and adds this information to the table.
+#' @param data a parse table.
+#' @return a parse table with two new columns: newlines and spaces.
+#' @export
+#' @keywords internal
 create_filler <- function(data) {
   ret <-
     data %>%

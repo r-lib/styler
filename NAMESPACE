@@ -2,6 +2,7 @@
 
 export(compute_parse_data_flat_with_ws)
 export(compute_parse_data_nested)
+export(create_filler)
 export(get_transformers)
 export(serialize_parse_data)
 export(style_pkg)
