@@ -15,7 +15,6 @@
 #'     - Function calls
 #'     - Function definitions
 #' - Remove `includeText = TRUE`
-
 #' @export
 #' @keywords internal
 compute_parse_data_nested <- function(text) {

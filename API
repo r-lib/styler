@@ -2,6 +2,7 @@
 
 ## Exported functions
 
+add_ws_to_parse_data(parse_data)
 compute_parse_data_flat_with_ws(text)
 compute_parse_data_nested(text)
 create_filler(data)

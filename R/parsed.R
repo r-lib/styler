@@ -9,6 +9,18 @@ compute_parse_data_flat_with_ws <- function(text) {
   parse_data_with_ws
 }
 
+#' Pre-processing parse data
+#'
+#' @details Preprocessing includes
+#' * removing non-terminal entries.
+#' * remove columns id, parent and terminal.
+#' * adding a start token.
+#' * add linebreak and space information.
+#' * replace spaces in comments at the end of the line.
+#' @param parse_data a parse table.
+#' @return a pre-processed parse table.
+#' @export
+#' @keywords internal
 add_ws_to_parse_data <- function(parse_data) {
   parse_data_filtered <-
     parse_data %>%
@@ -23,7 +35,7 @@ add_ws_to_parse_data <- function(parse_data) {
 
   parse_data_filled <-
     parse_data_filtered %>%
-    create_filler
+    create_filler()
 
   parse_data_comment_eol <-
     parse_data_filled %>%
