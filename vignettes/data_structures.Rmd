@@ -28,7 +28,7 @@ library("dplyr")
 
 code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 
-(parse_table <- compute_parse_data_flat_with_ws(code))
+(parse_table <- styler:::compute_parse_data_flat_with_ws(code))
 ```
 The column `spaces` was computed from the columns `col1` and `col2`, `newlines`
 was computed from `line1` and `line2` respectively.
@@ -45,7 +45,7 @@ line breaks specified in `spaces` and `newlines` in between the elements of
 `text`. If we serialize our table and don't perform any modification, we 
 obviously just get back what we started with.
 ```{r}
-serialize_parse_data(parse_table)
+styler:::serialize_parse_data(parse_table)
 ```
 
 ## Refining the flat approach - nesting the parse table
@@ -64,7 +64,7 @@ together. A function to create a nested parse table already exists in `styler`.
 Let's have a look at the top level:
 
 ```{r}
-(l1 <- compute_parse_data_nested(code)[-1])
+(l1 <- styler:::compute_parse_data_nested(code)[-1])
 
 ```
 
@@ -125,7 +125,7 @@ serialize <- function(x) {
   out
 }
 
-x <- compute_parse_data_nested(code)
+x <- styler:::compute_parse_data_nested(code)
 serialize(x) %>% unlist
 ```
 

@@ -1,7 +1,3 @@
-#' get flat parse table
-#'
-#' @export
-#' @keywords internal
 compute_parse_data_flat_with_ws <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed))
@@ -9,6 +5,17 @@ compute_parse_data_flat_with_ws <- function(text) {
   parse_data_with_ws
 }
 
+#' Pre-processing parse data
+#'
+#' Modifies the parse table minimally by applying some pre-processing steps.
+#' @details Preprocessing includes
+#'   * removing non-terminal entries.
+#'   * removing columns id, parent and terminal.
+#'   * adding a start token.
+#'   * adding linebreak and space information.
+#'   * removing spaces in comments at the end of the line.
+#' @param parse_data a parse table.
+#' @return a pre-processed parse table.
 add_ws_to_parse_data <- function(parse_data) {
   parse_data_filtered <-
     parse_data %>%
@@ -23,7 +30,7 @@ add_ws_to_parse_data <- function(parse_data) {
 
   parse_data_filled <-
     parse_data_filtered %>%
-    create_filler
+    create_filler()
 
   parse_data_comment_eol <-
     parse_data_filled %>%
@@ -44,9 +51,6 @@ verify_roundtrip <- function(pd, text) {
   text
 }
 
-#' serialize a parse table
-#' @export
-#' @keywords internal
 serialize_parse_data <- function(parse_data_with_ws) {
   parse_data_with_ws %>%
     summarize_(
@@ -63,6 +67,13 @@ rep_char <- function(char, times) {
     vapply(paste, collapse = "", character(1L))
 }
 
+
+#' Enrich parse table with space and linebreak information
+#'
+#' This function computes difference (as column and line difference) between two
+#'   entries in the parse table and adds this information to the table.
+#' @param data a parse table.
+#' @return a parse table with two new columns: newlines and spaces.
 create_filler <- function(data) {
   ret <-
     data %>%

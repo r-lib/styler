@@ -6,7 +6,7 @@
 \itemize{
 \item Implement add_ws_to_parse_data_nested()
 \itemize{
-\item Walk tree defined by \code{leaves}, compute whitespace information
+\item Walk tree defined by \code{child}, compute whitespace information
 \item Store indention depth in a separate column, unaffected by
 inter-token space
 }
@@ -35,7 +35,7 @@ TODO:
 \itemize{
 \item Implement add_ws_to_parse_data_nested()
 \itemize{
-\item Walk tree defined by \code{leaves}, compute whitespace information
+\item Walk tree defined by \code{child}, compute whitespace information
 \item Store indention depth in a separate column, unaffected by
 inter-token space
 }
@@ -57,4 +57,3 @@ compute_parse_data_flat_with_ws()
 \item Remove \code{includeText = TRUE}
 }
 }
-\keyword{internal}
