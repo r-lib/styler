@@ -13,16 +13,16 @@ add_ws_to_parse_data(parse_data)
 a pre-processed parse table.
 }
 \description{
-Pre-processing parse data
+Modifies the parse table minimally by applying some pre-processing steps.
 }
 \details{
 Preprocessing includes
 \itemize{
 \item removing non-terminal entries.
-\item remove columns id, parent and terminal.
+\item removing columns id, parent and terminal.
 \item adding a start token.
-\item add linebreak and space information.
-\item replace spaces in comments at the end of the line.
+\item adding linebreak and space information.
+\item removing spaces in comments at the end of the line.
 }
 }
 \keyword{internal}

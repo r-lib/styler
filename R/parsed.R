@@ -11,12 +11,13 @@ compute_parse_data_flat_with_ws <- function(text) {
 
 #' Pre-processing parse data
 #'
+#' Modifies the parse table minimally by applying some pre-processing steps.
 #' @details Preprocessing includes
-#' * removing non-terminal entries.
-#' * remove columns id, parent and terminal.
-#' * adding a start token.
-#' * add linebreak and space information.
-#' * replace spaces in comments at the end of the line.
+#'   * removing non-terminal entries.
+#'   * removing columns id, parent and terminal.
+#'   * adding a start token.
+#'   * adding linebreak and space information.
+#'   * removing spaces in comments at the end of the line.
 #' @param parse_data a parse table.
 #' @return a pre-processed parse table.
 #' @export
