@@ -16,4 +16,3 @@ a parse table with two new columns: newlines and spaces.
 This function computes difference (as column and line difference) between two
 entries in the parse table and adds this information to the table.
 }
-\keyword{internal}

@@ -25,4 +25,3 @@ Preprocessing includes
 \item removing spaces in comments at the end of the line.
 }
 }
-\keyword{internal}

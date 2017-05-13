@@ -57,4 +57,3 @@ compute_parse_data_flat_with_ws()
 \item Remove \code{includeText = TRUE}
 }
 }
-\keyword{internal}

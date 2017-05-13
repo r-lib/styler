@@ -1,7 +1,3 @@
-#' get flat parse table
-#'
-#' @export
-#' @keywords internal
 compute_parse_data_flat_with_ws <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed))
@@ -20,8 +16,6 @@ compute_parse_data_flat_with_ws <- function(text) {
 #'   * removing spaces in comments at the end of the line.
 #' @param parse_data a parse table.
 #' @return a pre-processed parse table.
-#' @export
-#' @keywords internal
 add_ws_to_parse_data <- function(parse_data) {
   parse_data_filtered <-
     parse_data %>%
@@ -57,9 +51,6 @@ verify_roundtrip <- function(pd, text) {
   text
 }
 
-#' serialize a parse table
-#' @export
-#' @keywords internal
 serialize_parse_data <- function(parse_data_with_ws) {
   parse_data_with_ws %>%
     summarize_(
@@ -83,8 +74,6 @@ rep_char <- function(char, times) {
 #'   entries in the parse table and adds this information to the table.
 #' @param data a parse table.
 #' @return a parse table with two new columns: newlines and spaces.
-#' @export
-#' @keywords internal
 create_filler <- function(data) {
   ret <-
     data %>%

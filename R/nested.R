@@ -15,8 +15,6 @@
 #'     - Function calls
 #'     - Function definitions
 #' - Remove `includeText = TRUE`
-#' @export
-#' @keywords internal
 compute_parse_data_nested <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))

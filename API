@@ -2,12 +2,7 @@
 
 ## Exported functions
 
-add_ws_to_parse_data(parse_data)
-compute_parse_data_flat_with_ws(text)
-compute_parse_data_nested(text)
-create_filler(data)
 get_transformers(strict = TRUE)
-serialize_parse_data(parse_data_with_ws)
 style_pkg(pkg = ".", transformers = get_transformers())
 style_src(path = ".", transformers = get_transformers(), recursive = TRUE)
 style_text(text, transformers = get_transformers())
