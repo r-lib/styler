@@ -22,7 +22,7 @@ Preprocessing includes
 \item removing non-terminal entries.
 \item removing columns id, parent and terminal.
 \item adding a start token.
-\item adding linebreak and space information.
+\item adding line-break and space information.
 \item removing spaces in comments at the end of the line.
 }
 }

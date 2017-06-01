@@ -12,7 +12,7 @@ verify_roundtrip(pd, text)
 \item{text}{A character vector with the initial text to compare against.}
 }
 \value{
-If the verfication is successful, \code{pd} is returned, with empty
+If the verification is successful, \code{pd} is returned, with empty
 lines at the end of \code{text} stripped. \cr
 Otherwise, an error is thrown.
 }

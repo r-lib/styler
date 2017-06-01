@@ -25,7 +25,7 @@ compute_parse_data_flat_with_ws <- function(text) {
 #'   * removing non-terminal entries.
 #'   * removing columns id, parent and terminal.
 #'   * adding a start token.
-#'   * adding linebreak and space information.
+#'   * adding line-break and space information.
 #'   * removing spaces in comments at the end of the line.
 #' @param parse_data a parse table.
 #' @return a pre-processed parse table.
@@ -58,7 +58,7 @@ add_ws_to_parse_data <- function(parse_data) {
 #' number of lines as the initial data that should be styled.
 #' @param pd A parse table.
 #' @param text A character vector with the initial text to compare against.
-#' @return If the verfication is successful, `pd` is returned, with empty
+#' @return If the verification is successful, `pd` is returned, with empty
 #'   lines at the end of `text` stripped. \cr
 #'   Otherwise, an error is thrown.
 #' @seealso [serialize_parse_data_flat]
