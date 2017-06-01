@@ -45,7 +45,7 @@ line breaks specified in `spaces` and `newlines` in between the elements of
 `text`. If we serialize our table and don't perform any modification, we 
 obviously just get back what we started with.
 ```{r}
-styler:::serialize_parse_data(parse_table)
+styler:::serialize_parse_data_flat(parse_table)
 ```
 
 ## Refining the flat approach - nesting the parse table

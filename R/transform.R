@@ -40,7 +40,7 @@ make_transformer <- function(transformers) {
       transformers,
       init = parse_data_with_ws)
 
-    new_text <- serialize_parse_data(transformed_data_with_ws)
+    new_text <- serialize_parse_data_flat(transformed_data_with_ws)
     new_text
   }
 }

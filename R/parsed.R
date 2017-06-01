@@ -53,7 +53,7 @@ add_ws_to_parse_data <- function(parse_data) {
 }
 
 verify_roundtrip <- function(pd, text) {
-  roundtrip <- serialize_parse_data(pd)
+  roundtrip <- serialize_parse_data_flat(pd)
 
   if (length(roundtrip) < length(text)) {
     stopifnot(text[-seq_along(roundtrip)] == "")
@@ -64,7 +64,19 @@ verify_roundtrip <- function(pd, text) {
   text
 }
 
-serialize_parse_data <- function(parse_data_with_ws) {
+#' Serialize Flat Parse Data
+#'
+#' Collapses a parse table into character vector representation.
+#' @param parse_data_with_ws A parse table.
+#' @details
+#'   The function essentially collapses the column text of `parse_data_with_ws`
+#'   while taking into account space and linebreak information from the columns
+#'   newlines and spaces. \cr
+#'   Roughly speaking, this is the inverse operation of
+#'   [compute_parse_data_flat_with_ws], which turns a character vector into a
+#'   parse table, since `serialize_parse_data_flat` turns a parse table back
+#'   into a character vector.
+serialize_parse_data_flat <- function(parse_data_with_ws) {
   parse_data_with_ws %>%
     summarize_(
       text_ws = ~paste0(
