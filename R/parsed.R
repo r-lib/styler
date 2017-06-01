@@ -52,6 +52,16 @@ add_ws_to_parse_data <- function(parse_data) {
   parse_data_comment_eol
 }
 
+#' Verify parse data modifications
+#'
+#' @description Check whether serializing the parse data results in the same
+#' number of lines as the initial data that should be styled.
+#' @param pd A parse table.
+#' @param text A character vector with the initial text to compare against.
+#' @return If the verfication is successful, `pd` is returned, with empty
+#'   lines at the end of `text` stripped. \cr
+#'   Otherwise, an error is thrown.
+#' @seealso [serialize_parse_data_flat]
 verify_roundtrip <- function(pd, text) {
   roundtrip <- serialize_parse_data_flat(pd)
 
