@@ -23,7 +23,8 @@ transform_files <- function(files, transformers) {
 #' This function takes a list of transformer functions as input and
 #'  returns a function that can be applied to character strings
 #'  that should be transformed.
-#' @param transformers A list of transformer functions.
+#' @param transformers A list of transformer functions that operate on parse
+#'   tables.
 make_transformer <- function(transformers) {
   function(text) {
     text <- gsub(" +$", "", text)

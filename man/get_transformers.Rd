@@ -10,6 +10,10 @@ get_transformers(strict = TRUE)
 \item{strict}{A logical value indicating whether a set of strict
 or not so strict transformer functions should be returned.}
 }
+\value{
+A list of transformer functions that operate on parse
+tables.
+}
 \description{
 get the transformer functions
 }
