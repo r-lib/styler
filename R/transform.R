@@ -1,3 +1,13 @@
+#' Transform files with transformer functions
+#'
+#' `transform_files` applies transformations to file contents and writes back
+#'   the result.
+#' @param files A character vector with paths to the file that should be
+#'   transformed.
+#' @inheritParams make_transformer
+#' @return A logical value that indicates whether or not any file was changed is
+#'   returned invisibly. If files were changed, the user is informed to
+#'   carefully inspect the changes via a message sent to the console.
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
 
