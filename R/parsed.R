@@ -1,3 +1,15 @@
+#' Parse and pre-process character vector
+#'
+#' @description The function obtains detailed parse information for `text` via
+#'   [utils::getParseData] and does some minimal pre-processing by calling
+#'   [add_ws_to_parse_data].
+#' @inheritSection add_ws_to_parse_data Details
+#' @param text a character vector.
+#' @return A pre-processed parse table.
+#' @details Roughly speaking, this is the inverse operation of
+#'   [serialize_parse_data_flat], which turns a parse table into a character
+#'   vector, since `compute_parse_data_flat_with_ws` turns a character vector
+#'   into a parse table.
 compute_parse_data_flat_with_ws <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed))
@@ -8,7 +20,8 @@ compute_parse_data_flat_with_ws <- function(text) {
 #' Pre-processing parse data
 #'
 #' Modifies the parse table minimally by applying some pre-processing steps.
-#' @details Preprocessing includes
+#' @section Details:
+#' Preprocessing includes
 #'   * removing non-terminal entries.
 #'   * removing columns id, parent and terminal.
 #'   * adding a start token.

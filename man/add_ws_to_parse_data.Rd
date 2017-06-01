@@ -15,7 +15,8 @@ a pre-processed parse table.
 \description{
 Modifies the parse table minimally by applying some pre-processing steps.
 }
-\details{
+\section{Details}{
+
 Preprocessing includes
 \itemize{
 \item removing non-terminal entries.
@@ -25,3 +26,4 @@ Preprocessing includes
 \item removing spaces in comments at the end of the line.
 }
 }
+
