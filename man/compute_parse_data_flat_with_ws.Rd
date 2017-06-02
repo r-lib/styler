@@ -14,13 +14,13 @@ A pre-processed parse table.
 }
 \description{
 The function obtains detailed parse information for \code{text} via
-\link[utils:getParseData]{utils::getParseData} and does some minimal pre-processing by calling
-\link{add_ws_to_parse_data}.
+\code{\link[utils:getParseData]{utils::getParseData()}} and does some minimal pre-processing by calling
+\code{\link[=add_ws_to_parse_data]{add_ws_to_parse_data()}}.
 }
 \details{
 Roughly speaking, this is the inverse operation of
-\link{serialize_parse_data_flat}, which turns a parse table into a character
-vector, since \code{compute_parse_data_flat_with_ws} turns a character vector
+\code{\link[=serialize_parse_data_flat]{serialize_parse_data_flat()}}, which turns a parse table into a character
+vector, since \code{compute_parse_data_flat_with_ws()} turns a character vector
 into a parse table.
 }
 \section{Details}{

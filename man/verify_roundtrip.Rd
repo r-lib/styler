@@ -21,5 +21,5 @@ Check whether serializing the parse data results in the same
 number of lines as the initial data that should be styled.
 }
 \seealso{
-\link{serialize_parse_data_flat}
+\code{\link[=serialize_parse_data_flat]{serialize_parse_data_flat()}}
 }

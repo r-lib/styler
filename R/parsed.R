@@ -1,14 +1,14 @@
 #' Parse and pre-process character vector
 #'
 #' @description The function obtains detailed parse information for `text` via
-#'   [utils::getParseData] and does some minimal pre-processing by calling
-#'   [add_ws_to_parse_data].
+#'   [utils::getParseData()] and does some minimal pre-processing by calling
+#'   [add_ws_to_parse_data()].
 #' @inheritSection add_ws_to_parse_data Details
-#' @param text a character vector.
+#' @param text A character vector.
 #' @return A pre-processed parse table.
 #' @details Roughly speaking, this is the inverse operation of
-#'   [serialize_parse_data_flat], which turns a parse table into a character
-#'   vector, since `compute_parse_data_flat_with_ws` turns a character vector
+#'   [serialize_parse_data_flat()], which turns a parse table into a character
+#'   vector, since `compute_parse_data_flat_with_ws()` turns a character vector
 #'   into a parse table.
 compute_parse_data_flat_with_ws <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
@@ -61,7 +61,7 @@ add_ws_to_parse_data <- function(parse_data) {
 #' @return If the verification is successful, `pd` is returned, with empty
 #'   lines at the end of `text` stripped. \cr
 #'   Otherwise, an error is thrown.
-#' @seealso [serialize_parse_data_flat]
+#' @seealso [serialize_parse_data_flat()]
 verify_roundtrip <- function(pd, text) {
   roundtrip <- serialize_parse_data_flat(pd)
 
@@ -83,8 +83,8 @@ verify_roundtrip <- function(pd, text) {
 #'   while taking into account space and linebreak information from the columns
 #'   newlines and spaces. \cr
 #'   Roughly speaking, this is the inverse operation of
-#'   [compute_parse_data_flat_with_ws], which turns a character vector into a
-#'   parse table, since `serialize_parse_data_flat` turns a parse table back
+#'   [compute_parse_data_flat_with_ws()], which turns a character vector into a
+#'   parse table, since `serialize_parse_data_flat()` turns a parse table back
 #'   into a character vector.
 serialize_parse_data_flat <- function(parse_data_with_ws) {
   parse_data_with_ws %>%
