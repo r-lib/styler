@@ -7,7 +7,8 @@
 make_transformer(transformers)
 }
 \arguments{
-\item{transformers}{A list of transformer functions.}
+\item{transformers}{A list of transformer functions that operate on parse
+tables.}
 }
 \description{
 This function takes a list of transformer functions as input and

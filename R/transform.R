@@ -1,3 +1,13 @@
+#' Transform files with transformer functions
+#'
+#' `transform_files` applies transformations to file contents and writes back
+#'   the result.
+#' @param files A character vector with paths to the file that should be
+#'   transformed.
+#' @inheritParams make_transformer
+#' @return A logical value that indicates whether or not any file was changed is
+#'   returned invisibly. If files were changed, the user is informed to
+#'   carefully inspect the changes via a message sent to the console.
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
 
@@ -13,7 +23,8 @@ transform_files <- function(files, transformers) {
 #' This function takes a list of transformer functions as input and
 #'  returns a function that can be applied to character strings
 #'  that should be transformed.
-#' @param transformers A list of transformer functions.
+#' @param transformers A list of transformer functions that operate on parse
+#'   tables.
 make_transformer <- function(transformers) {
   function(text) {
     text <- gsub(" +$", "", text)
@@ -29,7 +40,7 @@ make_transformer <- function(transformers) {
       transformers,
       init = parse_data_with_ws)
 
-    new_text <- serialize_parse_data(transformed_data_with_ws)
+    new_text <- serialize_parse_data_flat(transformed_data_with_ws)
     new_text
   }
 }

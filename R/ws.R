@@ -33,6 +33,8 @@ style_text <- function(text, transformers = get_transformers()) {
 #'
 #' @param strict A logical value indicating whether a set of strict
 #'   or not so strict transformer functions should be returned.
+#' @return A list of transformer functions that operate on parse
+#'   tables.
 #' @export
 get_transformers <- function(strict = TRUE) {
   c(

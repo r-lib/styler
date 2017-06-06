@@ -15,13 +15,15 @@ a pre-processed parse table.
 \description{
 Modifies the parse table minimally by applying some pre-processing steps.
 }
-\details{
+\section{Details}{
+
 Preprocessing includes
 \itemize{
 \item removing non-terminal entries.
 \item removing columns id, parent and terminal.
 \item adding a start token.
-\item adding linebreak and space information.
+\item adding line-break and space information.
 \item removing spaces in comments at the end of the line.
 }
 }
+
