@@ -4,14 +4,14 @@
 \alias{compute_parse_data_nested}
 \title{TODO:
 \itemize{
-\item Implement add_ws_to_parse_data_nested()
+\item Implement enhance_parse_data_nested()
 \itemize{
 \item Walk tree defined by \code{child}, compute whitespace information
 \item Store indention depth in a separate column, unaffected by
 inter-token space
 }
 \item Implement compute_parse_data_nested_with_ws() as
-compute_parse_data_nested() + add_ws_to_parse_data_nested()
+compute_parse_data_nested() + enhance_parse_data_nested()
 \item Implement serialization of nested parse data
 \item Use compute_parse_data_nested_with_ws() instead of
 compute_parse_data_flat_with_ws()
@@ -33,14 +33,14 @@ compute_parse_data_nested(text)
 \description{
 TODO:
 \itemize{
-\item Implement add_ws_to_parse_data_nested()
+\item Implement enhance_parse_data_nested()
 \itemize{
 \item Walk tree defined by \code{child}, compute whitespace information
 \item Store indention depth in a separate column, unaffected by
 inter-token space
 }
 \item Implement compute_parse_data_nested_with_ws() as
-compute_parse_data_nested() + add_ws_to_parse_data_nested()
+compute_parse_data_nested() + enhance_parse_data_nested()
 \item Implement serialization of nested parse data
 \item Use compute_parse_data_nested_with_ws() instead of
 compute_parse_data_flat_with_ws()

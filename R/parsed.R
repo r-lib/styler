@@ -2,8 +2,8 @@
 #'
 #' @description The function obtains detailed parse information for `text` via
 #'   [utils::getParseData()] and does some minimal pre-processing by calling
-#'   [add_ws_to_parse_data()].
-#' @inheritSection add_ws_to_parse_data Details
+#'   [enhance_parse_data()].
+#' @inheritSection enhance_parse_data Details
 #' @param text A character vector.
 #' @return A pre-processed parse table.
 #' @details Roughly speaking, this is the inverse operation of
@@ -13,7 +13,7 @@
 compute_parse_data_flat_with_ws <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed))
-  parse_data_with_ws <- add_ws_to_parse_data(parse_data)
+  parse_data_with_ws <- enhance_parse_data(parse_data)
   parse_data_with_ws
 }
 
@@ -29,7 +29,7 @@ compute_parse_data_flat_with_ws <- function(text) {
 #'   * removing spaces in comments at the end of the line.
 #' @param parse_data a parse table.
 #' @return a pre-processed parse table.
-add_ws_to_parse_data <- function(parse_data) {
+enhance_parse_data <- function(parse_data) {
   parse_data_filtered <-
     parse_data %>%
     filter_(~terminal) %>%

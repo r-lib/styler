@@ -15,7 +15,7 @@ A pre-processed parse table.
 \description{
 The function obtains detailed parse information for \code{text} via
 \code{\link[utils:getParseData]{utils::getParseData()}} and does some minimal pre-processing by calling
-\code{\link[=add_ws_to_parse_data]{add_ws_to_parse_data()}}.
+\code{\link[=enhance_parse_data]{enhance_parse_data()}}.
 }
 \details{
 Roughly speaking, this is the inverse operation of
