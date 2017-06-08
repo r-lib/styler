@@ -1,3 +1,12 @@
+#' Obtain a nested parse table from a character vector
+#'
+#' [utils::getParseData()] is used to obtain a flat parse table from `text`.
+#'   Subsequentially, it's representation is changed from a flat table into a
+#'   nested parse table with [nest_parse_data()].
+#' @param text A character vector to parse.
+#' @return A nested parse table. Apart from the columns provided by
+#'   `utils::getParseData()`, a column "short" with the first five characters of
+#'   "text" is added, the nested subtibbles are in column "child".
 #' TODO:
 #' - Implement enhance_parse_data_nested()
 #'     - Walk tree defined by `child`, compute whitespace information
@@ -28,6 +37,17 @@ compute_parse_data_nested <- function(text) {
   pd_nested
 }
 
+#' Nest a flat parse table
+#'
+#' `nest_parse_data` groups `pd_flat` into a parse table with tokens that are
+#'   a parent to other tokens (called internal) and such that are not (called
+#'   child). Then, the token in child are joined to their parents in internal
+#'   and all token information of the children is nested into a column "child".
+#'   This is done recursively until we are only left with a nested tibble that
+#'   contains one row: The nested parse table.
+#' @param pd_flat A flat parse table including both terminals and non-terminals.
+#' @seealso [compute_parse_data_nested()]
+#' @return A nested parse table.
 nest_parse_data <- function(pd_flat) {
   if (nrow(pd_flat) <= 1) return(pd_flat)
   split <-
