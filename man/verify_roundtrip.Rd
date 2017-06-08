@@ -4,10 +4,10 @@
 \alias{verify_roundtrip}
 \title{Verify parse data modifications}
 \usage{
-verify_roundtrip(pd, text)
+verify_roundtrip(pd_flat, text)
 }
 \arguments{
-\item{pd}{A parse table.}
+\item{pd_flat}{A parse table.}
 
 \item{text}{A character vector with the initial text to compare against.}
 }

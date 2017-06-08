@@ -30,17 +30,17 @@ make_transformer <- function(transformers) {
     text <- gsub(" +$", "", text)
     text <- gsub("\t", "        ", text)
 
-    parse_data_with_ws <- compute_parse_data_flat_enhanced(text)
+    pd_flat <- compute_parse_data_flat_enhanced(text)
 
     # May strip empty lines before EOF
-    text <- verify_roundtrip(parse_data_with_ws, text)
+    text <- verify_roundtrip(pd_flat, text)
 
-    transformed_data_with_ws <- Reduce(
+    transformed_pd_flat <- Reduce(
       function(x, fun) fun(x),
       transformers,
-      init = parse_data_with_ws)
+      init = pd_flat)
 
-    new_text <- serialize_parse_data_flat(transformed_data_with_ws)
+    new_text <- serialize_parse_data_flat(transformed_pd_flat)
     new_text
   }
 }

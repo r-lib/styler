@@ -4,10 +4,10 @@
 \alias{create_filler_nested}
 \title{Enrich nested parse table with space and linebreak information}
 \usage{
-create_filler_nested(pd)
+create_filler_nested(pd_nested)
 }
 \arguments{
-\item{pd}{A nested parse table.}
+\item{pd_nested}{A nested parse table.}
 }
 \value{
 A nested parse table with two new columns: newlines and spaces.

@@ -18,22 +18,22 @@
 compute_parse_data_nested <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
-  parse_data_nested <-
+  pd_nested <-
     parse_data %>%
     mutate_(child = ~rep(list(NULL), length(text))) %>%
     mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
-    nest_parse_data
+    nest_parse_data()
 
-  parse_data_nested
+  pd_nested
 }
 
-nest_parse_data <- function(parse_data) {
-  if (nrow(parse_data) <= 1) return(parse_data)
+nest_parse_data <- function(pd_flat) {
+  if (nrow(pd_flat) <= 1) return(pd_flat)
   split <-
-    parse_data %>%
+    pd_flat %>%
     mutate_(internal = ~id %in% parent) %>%
-    nest_("data", names(parse_data))
+    nest_("data", names(pd_flat))
 
   child <- split$data[!split$internal][[1L]]
   internal <- split$data[split$internal][[1L]]
@@ -57,14 +57,14 @@ nest_parse_data <- function(parse_data) {
 #'
 #' Uses [create_filler()] in a recursion add space and line break information
 #'   separately on every level of nesting.
-#' @param pd A nested parse table.
+#' @param pd_nested A nested parse table.
 #' @return A nested parse table with two new columns: newlines and spaces.
 #' @seealso [create_filler()]
 #' @importFrom purrr map
-create_filler_nested <- function(pd) {
-  if (is.null(pd$child)) return()
-  pd <- create_filler(pd)
-  pd$child <- map(pd$child, create_filler_nested)
-  select_(pd, ~spaces, ~newlines, ~short, ~everything())
+create_filler_nested <- function(pd_nested) {
+  if (is.null(pd_nested$child)) return()
+  pd_nested <- create_filler(pd_nested)
+  pd_nested$child <- map(pd_nested$child, create_filler_nested)
+  select_(pd_nested, ~spaces, ~newlines, ~short, ~everything())
 }
 

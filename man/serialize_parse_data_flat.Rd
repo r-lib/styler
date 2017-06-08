@@ -4,16 +4,16 @@
 \alias{serialize_parse_data_flat}
 \title{Serialize Flat Parse Data}
 \usage{
-serialize_parse_data_flat(parse_data_with_ws)
+serialize_parse_data_flat(pd_flat)
 }
 \arguments{
-\item{parse_data_with_ws}{A parse table.}
+\item{pd_flat}{A parse table.}
 }
 \description{
 Collapses a parse table into character vector representation.
 }
 \details{
-The function essentially collapses the column text of \code{parse_data_with_ws}
+The function essentially collapses the column text of \code{pd_flat}
 while taking into account space and linebreak information from the columns
 newlines and spaces. \cr
 Roughly speaking, this is the inverse operation of
