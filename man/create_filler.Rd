@@ -7,12 +7,15 @@
 create_filler(data)
 }
 \arguments{
-\item{data}{a parse table.}
+\item{data}{A parse table.}
 }
 \value{
-a parse table with two new columns: newlines and spaces.
+A parse table with two new columns: newlines and spaces.
 }
 \description{
 This function computes difference (as column and line difference) between two
 entries in the parse table and adds this information to the table.
+}
+\seealso{
+\code{\link[=create_filler_nested]{create_filler_nested()}}
 }

@@ -107,8 +107,9 @@ rep_char <- function(char, times) {
 #'
 #' This function computes difference (as column and line difference) between two
 #'   entries in the parse table and adds this information to the table.
-#' @param data a parse table.
-#' @return a parse table with two new columns: newlines and spaces.
+#' @param data A parse table.
+#' @return A parse table with two new columns: newlines and spaces.
+#' @seealso [create_filler_nested()]
 create_filler <- function(data) {
   ret <-
     data %>%

@@ -52,3 +52,19 @@ nest_parse_data <- function(parse_data) {
 
   nest_parse_data(nested)
 }
+
+#' Enrich nested parse table with space and linebreak information
+#'
+#' Uses [create_filler()] in a recursion add space and line break information
+#'   separately on every level of nesting.
+#' @param pd A nested parse table.
+#' @return A nested parse table with two new columns: newlines and spaces.
+#' @seealso [create_filler()]
+#' @importFrom purrr map
+create_filler_nested <- function(pd) {
+  if (is.null(pd$child)) return()
+  pd <- create_filler(pd)
+  pd$child <- map(pd$child, create_filler_nested)
+  select_(pd, ~spaces, ~newlines, ~short, ~everything())
+}
+

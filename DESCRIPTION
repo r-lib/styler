@@ -10,7 +10,8 @@ Imports:
     withr,
     dplyr,
     tibble,
-    tidyr
+    tidyr,
+    purrr
 Suggests: testthat,
     knitr,
     rmarkdown

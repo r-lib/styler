@@ -7,7 +7,7 @@
 compute_parse_data_flat_with_ws(text)
 }
 \arguments{
-\item{text}{a character vector.}
+\item{text}{A character vector.}
 }
 \value{
 A pre-processed parse table.
