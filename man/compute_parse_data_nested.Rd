@@ -2,48 +2,30 @@
 % Please edit documentation in R/nested.R
 \name{compute_parse_data_nested}
 \alias{compute_parse_data_nested}
-\title{TODO:
-\itemize{
-\item Implement add_ws_to_parse_data_nested()
-\itemize{
-\item Walk tree defined by \code{child}, compute whitespace information
-\item Store indention depth in a separate column, unaffected by
-inter-token space
-}
-\item Implement compute_parse_data_nested_with_ws() as
-compute_parse_data_nested() + add_ws_to_parse_data_nested()
-\item Implement serialization of nested parse data
-\item Use compute_parse_data_nested_with_ws() instead of
-compute_parse_data_flat_with_ws()
-\item Perform all transformations on hierarchical structure
-\itemize{
-\item Compute text for a sub-element
-}
-\item Compute indentation
-\itemize{
-\item Braces
-\item Function calls
-\item Function definitions
-}
-\item Remove \code{includeText = TRUE}
-}}
+\title{Obtain a nested parse table from a character vector}
 \usage{
 compute_parse_data_nested(text)
 }
-\description{
+\arguments{
+\item{text}{A character vector to parse.}
+}
+\value{
+A nested parse table. Apart from the columns provided by
+\code{utils::getParseData()}, a column "short" with the first five characters of
+"text" is added, the nested subtibbles are in column "child".
 TODO:
 \itemize{
-\item Implement add_ws_to_parse_data_nested()
+\item Implement enhance_parse_data_nested()
 \itemize{
 \item Walk tree defined by \code{child}, compute whitespace information
 \item Store indention depth in a separate column, unaffected by
 inter-token space
 }
 \item Implement compute_parse_data_nested_with_ws() as
-compute_parse_data_nested() + add_ws_to_parse_data_nested()
+compute_parse_data_nested() + enhance_parse_data_nested()
 \item Implement serialization of nested parse data
 \item Use compute_parse_data_nested_with_ws() instead of
-compute_parse_data_flat_with_ws()
+compute_parse_data_flat_enhanced()
 \item Perform all transformations on hierarchical structure
 \itemize{
 \item Compute text for a sub-element
@@ -56,4 +38,9 @@ compute_parse_data_flat_with_ws()
 }
 \item Remove \code{includeText = TRUE}
 }
+}
+\description{
+\code{\link[utils:getParseData]{utils::getParseData()}} is used to obtain a flat parse table from \code{text}.
+Subsequentially, it's representation is changed from a flat table into a
+nested parse table with \code{\link[=nest_parse_data]{nest_parse_data()}}.
 }

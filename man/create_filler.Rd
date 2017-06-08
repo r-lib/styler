@@ -4,10 +4,10 @@
 \alias{create_filler}
 \title{Enrich parse table with space and linebreak information}
 \usage{
-create_filler(data)
+create_filler(pd_flat)
 }
 \arguments{
-\item{data}{A parse table.}
+\item{pd_flat}{A parse table.}
 }
 \value{
 A parse table with two new columns: newlines and spaces.

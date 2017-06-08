@@ -1,13 +1,22 @@
+#' Obtain a nested parse table from a character vector
+#'
+#' [utils::getParseData()] is used to obtain a flat parse table from `text`.
+#'   Subsequentially, it's representation is changed from a flat table into a
+#'   nested parse table with [nest_parse_data()].
+#' @param text A character vector to parse.
+#' @return A nested parse table. Apart from the columns provided by
+#'   `utils::getParseData()`, a column "short" with the first five characters of
+#'   "text" is added, the nested subtibbles are in column "child".
 #' TODO:
-#' - Implement add_ws_to_parse_data_nested()
+#' - Implement enhance_parse_data_nested()
 #'     - Walk tree defined by `child`, compute whitespace information
 #'     - Store indention depth in a separate column, unaffected by
 #'       inter-token space
 #' - Implement compute_parse_data_nested_with_ws() as
-#'   compute_parse_data_nested() + add_ws_to_parse_data_nested()
+#'   compute_parse_data_nested() + enhance_parse_data_nested()
 #' - Implement serialization of nested parse data
 #' - Use compute_parse_data_nested_with_ws() instead of
-#'   compute_parse_data_flat_with_ws()
+#'   compute_parse_data_flat_enhanced()
 #' - Perform all transformations on hierarchical structure
 #'     - Compute text for a sub-element
 #' - Compute indentation
@@ -18,22 +27,33 @@
 compute_parse_data_nested <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
-  parse_data_nested <-
+  pd_nested <-
     parse_data %>%
     mutate_(child = ~rep(list(NULL), length(text))) %>%
     mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
-    nest_parse_data
+    nest_parse_data()
 
-  parse_data_nested
+  pd_nested
 }
 
-nest_parse_data <- function(parse_data) {
-  if (nrow(parse_data) <= 1) return(parse_data)
+#' Nest a flat parse table
+#'
+#' `nest_parse_data` groups `pd_flat` into a parse table with tokens that are
+#'   a parent to other tokens (called internal) and such that are not (called
+#'   child). Then, the token in child are joined to their parents in internal
+#'   and all token information of the children is nested into a column "child".
+#'   This is done recursively until we are only left with a nested tibble that
+#'   contains one row: The nested parse table.
+#' @param pd_flat A flat parse table including both terminals and non-terminals.
+#' @seealso [compute_parse_data_nested()]
+#' @return A nested parse table.
+nest_parse_data <- function(pd_flat) {
+  if (nrow(pd_flat) <= 1) return(pd_flat)
   split <-
-    parse_data %>%
+    pd_flat %>%
     mutate_(internal = ~id %in% parent) %>%
-    nest_("data", names(parse_data))
+    nest_("data", names(pd_flat))
 
   child <- split$data[!split$internal][[1L]]
   internal <- split$data[split$internal][[1L]]
@@ -57,14 +77,14 @@ nest_parse_data <- function(parse_data) {
 #'
 #' Uses [create_filler()] in a recursion add space and line break information
 #'   separately on every level of nesting.
-#' @param pd A nested parse table.
+#' @param pd_nested A nested parse table.
 #' @return A nested parse table with two new columns: newlines and spaces.
 #' @seealso [create_filler()]
 #' @importFrom purrr map
-create_filler_nested <- function(pd) {
-  if (is.null(pd$child)) return()
-  pd <- create_filler(pd)
-  pd$child <- map(pd$child, create_filler_nested)
-  select_(pd, ~spaces, ~newlines, ~short, ~everything())
+create_filler_nested <- function(pd_nested) {
+  if (is.null(pd_nested$child)) return()
+  pd_nested <- create_filler(pd_nested)
+  pd_nested$child <- map(pd_nested$child, create_filler_nested)
+  select_(pd_nested, ~spaces, ~newlines, ~short, ~everything())
 }
 

@@ -2,19 +2,19 @@
 #'
 #' @description The function obtains detailed parse information for `text` via
 #'   [utils::getParseData()] and does some minimal pre-processing by calling
-#'   [add_ws_to_parse_data()].
-#' @inheritSection add_ws_to_parse_data Details
+#'   [enhance_parse_data()].
+#' @inheritSection enhance_parse_data Details
 #' @param text A character vector.
 #' @return A pre-processed parse table.
 #' @details Roughly speaking, this is the inverse operation of
 #'   [serialize_parse_data_flat()], which turns a parse table into a character
-#'   vector, since `compute_parse_data_flat_with_ws()` turns a character vector
+#'   vector, since `compute_parse_data_flat_enhanced()` turns a character vector
 #'   into a parse table.
-compute_parse_data_flat_with_ws <- function(text) {
+compute_parse_data_flat_enhanced <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed))
-  parse_data_with_ws <- add_ws_to_parse_data(parse_data)
-  parse_data_with_ws
+  pd_flat <- enhance_parse_data(parse_data)
+  pd_flat
 }
 
 #' Pre-processing parse data
@@ -29,7 +29,7 @@ compute_parse_data_flat_with_ws <- function(text) {
 #'   * removing spaces in comments at the end of the line.
 #' @param parse_data a parse table.
 #' @return a pre-processed parse table.
-add_ws_to_parse_data <- function(parse_data) {
+enhance_parse_data <- function(parse_data) {
   parse_data_filtered <-
     parse_data %>%
     filter_(~terminal) %>%
@@ -56,14 +56,14 @@ add_ws_to_parse_data <- function(parse_data) {
 #'
 #' @description Check whether serializing the parse data results in the same
 #' number of lines as the initial data that should be styled.
-#' @param pd A parse table.
+#' @param pd_flat A parse table.
 #' @param text A character vector with the initial text to compare against.
 #' @return If the verification is successful, `pd` is returned, with empty
 #'   lines at the end of `text` stripped. \cr
 #'   Otherwise, an error is thrown.
 #' @seealso [serialize_parse_data_flat()]
-verify_roundtrip <- function(pd, text) {
-  roundtrip <- serialize_parse_data_flat(pd)
+verify_roundtrip <- function(pd_flat, text) {
+  roundtrip <- serialize_parse_data_flat(pd_flat)
 
   if (length(roundtrip) < length(text)) {
     stopifnot(text[-seq_along(roundtrip)] == "")
@@ -77,17 +77,17 @@ verify_roundtrip <- function(pd, text) {
 #' Serialize Flat Parse Data
 #'
 #' Collapses a parse table into character vector representation.
-#' @param parse_data_with_ws A parse table.
+#' @param pd_flat A parse table.
 #' @details
-#'   The function essentially collapses the column text of `parse_data_with_ws`
+#'   The function essentially collapses the column text of `pd_flat`
 #'   while taking into account space and linebreak information from the columns
 #'   newlines and spaces. \cr
 #'   Roughly speaking, this is the inverse operation of
-#'   [compute_parse_data_flat_with_ws()], which turns a character vector into a
+#'   [compute_parse_data_flat_enhanced()], which turns a character vector into a
 #'   parse table, since `serialize_parse_data_flat()` turns a parse table back
 #'   into a character vector.
-serialize_parse_data_flat <- function(parse_data_with_ws) {
-  parse_data_with_ws %>%
+serialize_parse_data_flat <- function(pd_flat) {
+  pd_flat %>%
     summarize_(
       text_ws = ~paste0(
         text, rep_char("\n", newlines), rep_char(" ", spaces),
@@ -107,12 +107,12 @@ rep_char <- function(char, times) {
 #'
 #' This function computes difference (as column and line difference) between two
 #'   entries in the parse table and adds this information to the table.
-#' @param data A parse table.
+#' @param pd_flat A parse table.
 #' @return A parse table with two new columns: newlines and spaces.
 #' @seealso [create_filler_nested()]
-create_filler <- function(data) {
+create_filler <- function(pd_flat) {
   ret <-
-    data %>%
+    pd_flat %>%
     mutate_(
       line3 = ~lead(line1, default = tail(line2, 1)),
       col3 = ~lead(col1, default = tail(col2, 1) + 1L),
