@@ -7,7 +7,7 @@
 #'   compute_parse_data_nested() + enhance_parse_data_nested()
 #' - Implement serialization of nested parse data
 #' - Use compute_parse_data_nested_with_ws() instead of
-#'   compute_parse_data_flat_with_ws()
+#'   compute_parse_data_flat_enhanced()
 #' - Perform all transformations on hierarchical structure
 #'     - Compute text for a sub-element
 #' - Compute indentation

@@ -8,9 +8,9 @@
 #' @return A pre-processed parse table.
 #' @details Roughly speaking, this is the inverse operation of
 #'   [serialize_parse_data_flat()], which turns a parse table into a character
-#'   vector, since `compute_parse_data_flat_with_ws()` turns a character vector
+#'   vector, since `compute_parse_data_flat_enhanced()` turns a character vector
 #'   into a parse table.
-compute_parse_data_flat_with_ws <- function(text) {
+compute_parse_data_flat_enhanced <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed))
   parse_data_with_ws <- enhance_parse_data(parse_data)
@@ -83,7 +83,7 @@ verify_roundtrip <- function(pd, text) {
 #'   while taking into account space and linebreak information from the columns
 #'   newlines and spaces. \cr
 #'   Roughly speaking, this is the inverse operation of
-#'   [compute_parse_data_flat_with_ws()], which turns a character vector into a
+#'   [compute_parse_data_flat_enhanced()], which turns a character vector into a
 #'   parse table, since `serialize_parse_data_flat()` turns a parse table back
 #'   into a character vector.
 serialize_parse_data_flat <- function(parse_data_with_ws) {

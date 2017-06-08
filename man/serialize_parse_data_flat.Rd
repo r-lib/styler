@@ -17,7 +17,7 @@ The function essentially collapses the column text of \code{parse_data_with_ws}
 while taking into account space and linebreak information from the columns
 newlines and spaces. \cr
 Roughly speaking, this is the inverse operation of
-\code{\link[=compute_parse_data_flat_with_ws]{compute_parse_data_flat_with_ws()}}, which turns a character vector into a
+\code{\link[=compute_parse_data_flat_enhanced]{compute_parse_data_flat_enhanced()}}, which turns a character vector into a
 parse table, since \code{serialize_parse_data_flat()} turns a parse table back
 into a character vector.
 }

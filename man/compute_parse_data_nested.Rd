@@ -14,7 +14,7 @@ inter-token space
 compute_parse_data_nested() + enhance_parse_data_nested()
 \item Implement serialization of nested parse data
 \item Use compute_parse_data_nested_with_ws() instead of
-compute_parse_data_flat_with_ws()
+compute_parse_data_flat_enhanced()
 \item Perform all transformations on hierarchical structure
 \itemize{
 \item Compute text for a sub-element
@@ -43,7 +43,7 @@ inter-token space
 compute_parse_data_nested() + enhance_parse_data_nested()
 \item Implement serialization of nested parse data
 \item Use compute_parse_data_nested_with_ws() instead of
-compute_parse_data_flat_with_ws()
+compute_parse_data_flat_enhanced()
 \item Perform all transformations on hierarchical structure
 \itemize{
 \item Compute text for a sub-element

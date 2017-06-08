@@ -28,7 +28,7 @@ library("dplyr")
 
 code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 
-(parse_table <- styler:::compute_parse_data_flat_with_ws(code))
+(parse_table <- styler:::compute_parse_data_flat_enhanced(code))
 ```
 The column `spaces` was computed from the columns `col1` and `col2`, `newlines`
 was computed from `line1` and `line2` respectively.
@@ -133,7 +133,7 @@ How to exactly implement a similar recursion to not just return each text
 token separately, but 
 the styled text as one string (or one string per line) is subject to future work, so would be the functions to be
 applied to a sub-expression parse table that create correct indention. 
-Similar to `compute_parse_data_flat_with_ws`, the column `spaces` and `newlines`
+Similar to `compute_parse_data_flat_enhanced`, the column `spaces` and `newlines`
 would be required to be computed by `compute_parse_data_nested` as well as a
 new column `indention`. 
 
