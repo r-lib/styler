@@ -90,16 +90,11 @@ serialize_parse_data_flat <- function(pd_flat) {
   pd_flat %>%
     summarize_(
       text_ws = ~paste0(
-        text, rep_char("\n", newlines), rep_char(" ", spaces),
+        text, newlines_and_spaces(newlines, spaces),
         collapse = "")) %>%
     .[["text_ws"]] %>%
     strsplit("\n", fixed = TRUE) %>%
     .[[1L]]
-}
-
-rep_char <- function(char, times) {
-  lapply(times, rep.int, x = char) %>%
-    vapply(paste, collapse = "", character(1L))
 }
 
 
