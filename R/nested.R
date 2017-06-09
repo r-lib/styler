@@ -89,22 +89,24 @@ create_filler_nested <- function(pd_nested) {
 }
 
 #' @importFrom purrr pmap
-serialize_parse_data_nested_helper <- function(x) {
+serialize_parse_data_nested_helper <- function(x, pass_indent) {
   out <- Map(
-    function(terminal, text, child, spaces, newlines) {
-      if (terminal)
-        c(text, newlines_and_spaces(newlines, spaces))
-      else
-        c(serialize_parse_data_nested_helper(child),
+    function(terminal, text, child, spaces, newlines, lag_newlines, indent, pass_indent) {
+      if (terminal) {
+        c(rep_char(" ", pass_indent), text, newlines_and_spaces(newlines, spaces))
+      } else {
+        c(serialize_parse_data_nested_helper(child, indent + pass_indent),
           newlines_and_spaces(newlines, spaces))
+      }
     },
-    x$terminal, x$text, x$child, x$spaces, x$newlines
+    x$terminal, x$text, x$child, x$spaces, x$newlines, x$lag_newlines,
+    x$indent, pass_indent
   )
   out
 }
 
 serialize_parse_data_nested <- function(pd_nested) {
-  serialize_parse_data_nested_helper(pd_nested) %>%
+  serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
     unlist() %>%
     paste0(collapse = "") %>%
     strsplit("\n", fixed = TRUE) %>%
