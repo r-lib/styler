@@ -88,17 +88,26 @@ create_filler_nested <- function(pd_nested) {
   select_(pd_nested, ~spaces, ~newlines, ~short, ~everything())
 }
 
-serialize_parse_data_nested_helper <- function(x, pass_indent) {
-  out <- Map(
-    function(terminal, text, child, spaces, newlines, indent) {
-      if (terminal) {
-        c(rep_char(" ", pass_indent), text, newlines_and_spaces(newlines, spaces))
-      } else {
-        c(serialize_parse_data_nested_helper(child, indent + pass_indent),
-          newlines_and_spaces(newlines, spaces))
-      }
-    },
-    x$terminal, x$text, x$child, x$spaces, x$newlines, x$indent
+#' Serialize a nested parse table
+#'
+#' Helper function that recursively extracts terminals from a nested tibble.
+#' @param pd_nested A nested parse table.
+#' @param pass_indent Level of indention of a token.
+#' @return A character vector with all tokens in `pd_nested` plus whitespace,
+#'   line break and indention information added between the tokens.
+#' @importFrom purrr pmap
+serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
+  out <- pmap(list(pd_nested$terminal, pd_nested$text, pd_nested$child,
+             pd_nested$spaces, pd_nested$newlines, pd_nested$indent),
+           function(terminal, text, child, spaces, newlines, indent) {
+             if (terminal) {
+               c(rep_char(" ", pass_indent), text,
+                 newlines_and_spaces(newlines, spaces))
+             } else {
+               c(serialize_parse_data_nested_helper(child, indent + pass_indent),
+                 newlines_and_spaces(newlines, spaces))
+             }
+        }
   )
   out
 }
@@ -106,12 +115,12 @@ serialize_parse_data_nested_helper <- function(x, pass_indent) {
 #' Serialize a nested parse table
 #'
 #' Collapses a nested parse table into its character vector representation. To
-#'   achieve this, obsolete white that were inserted in
+#'   achieve this, obsolete white spaces that were inserted in
 #'   [serialize_parse_data_nested_helper] spaces before the tokens have to be
 #'   removed.
 #' @param pd_nested A nested parse table with line break, spaces and indention
 #'   information.
-#' @return A character string
+#' @return A character string.
 serialize_parse_data_nested <- function(pd_nested) {
   raw <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
     unlist()
