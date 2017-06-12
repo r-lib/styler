@@ -88,10 +88,9 @@ create_filler_nested <- function(pd_nested) {
   select_(pd_nested, ~spaces, ~newlines, ~short, ~everything())
 }
 
-#' @importFrom purrr pmap
 serialize_parse_data_nested_helper <- function(x, pass_indent) {
   out <- Map(
-    function(terminal, text, child, spaces, newlines, lag_newlines, indent, pass_indent) {
+    function(terminal, text, child, spaces, newlines, indent) {
       if (terminal) {
         c(rep_char(" ", pass_indent), text, newlines_and_spaces(newlines, spaces))
       } else {
@@ -99,17 +98,21 @@ serialize_parse_data_nested_helper <- function(x, pass_indent) {
           newlines_and_spaces(newlines, spaces))
       }
     },
-    x$terminal, x$text, x$child, x$spaces, x$newlines, x$lag_newlines,
-    x$indent, pass_indent
+    x$terminal, x$text, x$child, x$spaces, x$newlines, x$indent
   )
   out
 }
 
 serialize_parse_data_nested <- function(pd_nested) {
-  serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
-    unlist() %>%
+  raw <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
+    unlist()
+  newline <- which(raw == "\n")
+  token <- setdiff(1:length(raw), union(which(raw == ""),
+                                        union(grep("^ +$", raw), newline)))
+  to_zero <- setdiff(token - 1, newline + 1)
+  raw[to_zero] <- ""
+  raw %>%
     paste0(collapse = "") %>%
     strsplit("\n", fixed = TRUE) %>%
     .[[1L]]
 }
-
