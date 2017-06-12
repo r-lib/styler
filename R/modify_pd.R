@@ -1,8 +1,8 @@
 #' Update indention information of parse data
 #'
 #' @param pd A nested or flat parse table that is already enhanced with
-#'   line break and space information via [create_filler] or
-#'   [create_filler_nested].
+#'   line break and space information via [create_filler()] or
+#'   [create_filler_nested()].
 #' @param indent_by How many spaces should be added after the token of interest.
 #' @name update_indention
 NULL
