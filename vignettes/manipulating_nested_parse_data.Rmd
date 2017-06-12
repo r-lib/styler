@@ -83,41 +83,35 @@ styler:::serialize_parse_data_nested_helper
 
 styler:::serialize_parse_data_nested
 ```
-
-
-Here is the *proof* that it works.
+Before we are done, we need to add information regarding indention to the parse
+table. We can add indention after every line break that comes after a round 
+braket with `indent_round()`. And then serialize it. 
 ```{r}
-styler:::serialize_parse_data_nested(pd_nested_enhanced)
-code
+styler:::indent_round_nested(pd_nested_enhanced) %>%
+  styler:::serialize_parse_data_nested()
 ```
-We can also verify that on an other example:
-```{r}
-code2 <- "a <- function(x) {if(x > 1) {if(x == 13){99}} else {1 + x} }"
 
-back_and_forth <- code2 %>%
+We can see how indention works with a more complicated example
+```{r}
+indented <- c(
+  "call(", 
+  "  1,", 
+  "  call2(", 
+  "    2, 3,", 
+  "    call3(1, 2, 22),", 
+  "    5", 
+  "  ),", 
+  "  144",
+  ")"
+)
+
+not_indented <- trimws(indented)
+back_and_forth <- not_indented %>%
   styler:::compute_parse_data_nested() %>%
   styler:::create_filler_nested() %>%
+  styler:::indent_round_nested() %>%
   styler:::serialize_parse_data_nested()
 
-identical(code2, back_and_forth)
-```
-```{r}
-code3 <- c(
-  "a <- function(x) {",
-  "  if(x > 1) {",
-  "    if(x == 13){",
-  "      99",
-  "    }",
-  "  }",
-  "  else {1 + x}",
-  "}")
-
-back_and_forth <- code3 %>%
-  styler:::compute_parse_data_nested() %>%
-  styler:::create_filler_nested() %>%
-  styler:::serialize_parse_data_nested()
-
-identical(code3, back_and_forth)
-
+identical(indented, back_and_forth)
 ```
 
