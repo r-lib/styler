@@ -11,7 +11,8 @@ Imports:
     dplyr,
     tibble,
     tidyr,
-    purrr
+    purrr,
+    data.tree
 Suggests: testthat,
     knitr,
     rmarkdown
