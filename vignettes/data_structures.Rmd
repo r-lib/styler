@@ -131,7 +131,8 @@ serialize(x) %>% unlist
 
 How to exactly implement a similar recursion to not just return each text 
 token separately, but 
-the styled text as one string (or one string per line) is subject to future work, so would be the functions to be
+the styled text as one string (or one string per line) is subject to future work, 
+so would be the functions to be
 applied to a sub-expression parse table that create correct indention. 
 Similar to `compute_parse_data_flat_enhanced`, the column `spaces` and `newlines`
 would be required to be computed by `compute_parse_data_nested` as well as a
@@ -141,12 +142,11 @@ new column `indention`.
 ## Final Remarks
 
 Although a flat structure would possibly also allow us to solve the problem of
-indention, it is
-a less elegant and flexible solution to the problem. It would involve looking 
-for an opening curly bracket in the parse table, set the indention level for all
-subsequent rows in the parse table until the next opening or closing curly 
-bracket is hit and then intending one level further or setting indention back to 
-where it was at the beginning of the table.
+indention, it is a less elegant and flexible solution to the problem. It would 
+involve looking for an opening curly bracket in the parse table, set the 
+indention level for all subsequent rows in the parse table until the next 
+opening or closing curly bracket is hit and then intending one level further or 
+setting indention back to where it was at the beginning of the table.
 
 Note that the vignette just addressed the question of indention caused by
 curly brackets and has not dealt with other operators that would trigger 
