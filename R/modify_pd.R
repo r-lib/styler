@@ -1,3 +1,13 @@
+#' Update indention information of parse data
+#'
+#' @param pd A nested or flat parse table that is already enhanced with
+#'   line break and space information via [create_filler] or
+#'   [create_filler_nested].
+#' @param indent_by How many spaces should be added after the token of interest.
+#' @name update_indention
+NULL
+
+#' @rdname update_indention
 indent_round <- function(pd, indent_by) {
   start <- which(pd$token == "'('") + 1
   stop <- which(pd$token == "')'") - 1
@@ -6,40 +16,28 @@ indent_round <- function(pd, indent_by) {
   } else {
     pd$indent <- ifelse(1:nrow(pd) %in% start[1]:stop[1], indent_by, 0) *
       lag(pd$newlines, default = 0)
-    pd$spaces <- pd$spaces * (pd$newlines == 0)
   }
-  pd$lag_newlines <- lag(pd$newlines, default = 0)
-  select_(pd, ~indent, ~newlines, ~lag_newlines, ~everything())
+  # general, should maybe not go here.
+  pd$spaces <- pd$spaces * (pd$newlines == 0)
+
+  select_(pd, ~indent, ~newlines, ~everything())
 }
 
 
+
+#' Update indention information of nested parse data
+#'
+#' These functions apply the update functions of the same name but without
+#'   suffix nested to each level of nesting of the nested parse table.
+#' @param pd A nested parse table that is already enhanced with
+#'   line break and space information via [create_filler_nested].
+#' @name update_indention_nested
+NULL
+
+#' @rdname update_indention_nested
 indent_round_nested <- function(pd) {
   if (is.null(pd)) return(pd)
   pd <- indent_round(pd, indent_by = 2)
   pd$child <- map(pd$child, indent_round_nested)
-  pd
-}
-
-
-# update terminal line info
-previous_terminal_line_nested <- function(pd) {
-  if (is.null(pd)) return()
-  if (max(pd$line2) - min(pd$line1) < 1) {
-    pd$terminal_line <- c(1, rep(0, nrow(pd) - 1))
-    return(pd)
-  }
-  pd$child <- map(pd$child, previous_terminal_line_nested)
-  pd
-}
-
-introduce_previous_terminal_line <- function(pd) {
-  pd$terminal_line <- 0
-  pd
-}
-
-
-introduce_previous_terminal_line_nested <- function(pd) {
-  pd <- introduce_previous_terminal_line(pd)
-  pd$child <- map(pd$child, introduce_previous_terminal_line)
   pd
 }
