@@ -103,6 +103,15 @@ serialize_parse_data_nested_helper <- function(x, pass_indent) {
   out
 }
 
+#' Serialize a nested parse table
+#'
+#' Collapses a nested parse table into its character vector representation. To
+#'   achieve this, obsolete white that were inserted in
+#'   [serialize_parse_data_nested_helper] spaces before the tokens have to be
+#'   removed.
+#' @param pd_nested A nested parse table with line break, spaces and indention
+#'   information.
+#' @return A character string
 serialize_parse_data_nested <- function(pd_nested) {
   raw <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
     unlist()
