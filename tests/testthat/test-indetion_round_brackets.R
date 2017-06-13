@@ -7,6 +7,7 @@ test_that("one-line function call yields correct indention", {
     compute_parse_data_nested() %>%
     create_filler_nested() %>%
     indent_round_nested() %>%
+    strip_eol_spaces_nested() %>%
     serialize_parse_data_nested()
 
   expect_identical(code, back_and_forth)
@@ -47,6 +48,7 @@ test_that(paste("multi-line function call without any indention",
     compute_parse_data_nested() %>%
     create_filler_nested() %>%
     indent_round_nested() %>%
+    strip_eol_spaces_nested() %>%
     serialize_parse_data_nested()
 
   expect_identical(indented_multi_line_correct, back_and_forth)
@@ -58,6 +60,7 @@ test_that(paste("multi-line function call with random indention",
     compute_parse_data_nested() %>%
     create_filler_nested() %>%
     indent_round_nested() %>%
+    strip_eol_spaces_nested() %>%
     serialize_parse_data_nested()
 
   expect_identical(indented_multi_line_correct, back_and_forth)

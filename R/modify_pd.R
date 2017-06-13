@@ -38,3 +38,16 @@ indent_round_nested <- function(pd) {
   pd$child <- map(pd$child, indent_round_nested)
   pd
 }
+
+
+#' Strip EOL spaces
+#'
+#' Remove end-of-line spaces.
+#' @param pd_nested A nested parse table.
+#' @return A nested parse table.
+strip_eol_spaces_nested <- function(pd_nested) {
+  if (is.null(pd_nested)) return()
+  pd_nested$spaces <- pd_nested$spaces * (pd_nested$newlines == 0)
+  pd_nested$child <- map(pd_nested$child, strip_eol_spaces_nested)
+  pd_nested
+}
