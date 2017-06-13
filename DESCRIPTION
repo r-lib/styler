@@ -12,10 +12,11 @@ Imports:
     tibble,
     tidyr,
     purrr,
-    data.tree
+    magrittr
 Suggests: testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    data.tree
 Remotes:
     krlmlr/utf8
 License: GPL-3
