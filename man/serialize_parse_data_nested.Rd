@@ -14,8 +14,5 @@ information.}
 A character string.
 }
 \description{
-Collapses a nested parse table into its character vector representation. To
-achieve this, obsolete white spaces that were inserted in
-\link{serialize_parse_data_nested_helper} spaces before the tokens have to be
-removed.
+Collapses a nested parse table into its character vector representation.
 }

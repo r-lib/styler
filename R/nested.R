@@ -85,7 +85,7 @@ create_filler_nested <- function(pd_nested) {
   if (is.null(pd_nested$child)) return()
   pd_nested <- create_filler(pd_nested)
   pd_nested$child <- map(pd_nested$child, create_filler_nested)
-  select_(pd_nested, ~spaces, ~newlines, ~short, ~everything())
+  select_(pd_nested, ~spaces, ~newlines, ~lag_newlines, ~short, ~everything())
 }
 
 #' Serialize a nested parse table
@@ -93,19 +93,26 @@ create_filler_nested <- function(pd_nested) {
 #' Helper function that recursively extracts terminals from a nested tibble.
 #' @param pd_nested A nested parse table.
 #' @param pass_indent Level of indention of a token.
-#' @return A character vector with all tokens in `pd_nested` plus whitespace,
-#'   line break and indention information added between the tokens.
+#' @return A character vector with all terminal tokens in `pd_nested` plus
+#'   the appropriate amount of white spaces and line breaks are inserted between
+#'   them.
 #' @importFrom purrr pmap
 serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
   out <- pmap(list(pd_nested$terminal, pd_nested$text, pd_nested$child,
-             pd_nested$spaces, pd_nested$newlines, pd_nested$indent),
-           function(terminal, text, child, spaces, newlines, indent) {
+             pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent),
+           function(terminal, text, child, spaces, lag_newlines, indent) {
+             total_indent <- pass_indent + indent
+             preceding_linebreak <- if_else(lag_newlines > 0, 1, 0)
              if (terminal) {
-               c(rep_char(" ", pass_indent), text,
-                 newlines_and_spaces(newlines, spaces))
+               c(add_newlines(lag_newlines),
+                 add_spaces(total_indent * preceding_linebreak),
+                 text,
+                 add_spaces(spaces))
              } else {
-               c(serialize_parse_data_nested_helper(child, indent + pass_indent),
-                 newlines_and_spaces(newlines, spaces))
+               c(add_newlines(lag_newlines),
+                 add_spaces(total_indent * preceding_linebreak),
+                 serialize_parse_data_nested_helper(child, total_indent),
+                 add_spaces(spaces))
              }
         }
   )
@@ -114,22 +121,13 @@ serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
 
 #' Serialize a nested parse table
 #'
-#' Collapses a nested parse table into its character vector representation. To
-#'   achieve this, obsolete white spaces that were inserted in
-#'   [serialize_parse_data_nested_helper] spaces before the tokens have to be
-#'   removed.
+#' Collapses a nested parse table into its character vector representation.
 #' @param pd_nested A nested parse table with line break, spaces and indention
 #'   information.
 #' @return A character string.
 serialize_parse_data_nested <- function(pd_nested) {
   raw <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
-    unlist()
-  newline <- which(raw == "\n")
-  token <- setdiff(1:length(raw), union(which(raw == ""),
-                                        union(grep("^ +$", raw), newline)))
-  to_zero <- setdiff(token - 1, newline + 1)
-  raw[to_zero] <- ""
-  raw %>%
+    unlist() %>%
     paste0(collapse = "") %>%
     strsplit("\n", fixed = TRUE) %>%
     .[[1L]]

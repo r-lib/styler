@@ -103,7 +103,8 @@ serialize_parse_data_flat <- function(pd_flat) {
 #' This function computes difference (as column and line difference) between two
 #'   entries in the parse table and adds this information to the table.
 #' @param pd_flat A parse table.
-#' @return A parse table with two new columns: newlines and spaces.
+#' @return A parse table with two three columns: lag_newlines, newlines and
+#'   spaces.
 #' @seealso [create_filler_nested()]
 create_filler <- function(pd_flat) {
   ret <-
@@ -112,6 +113,7 @@ create_filler <- function(pd_flat) {
       line3 = ~lead(line1, default = tail(line2, 1)),
       col3 = ~lead(col1, default = tail(col2, 1) + 1L),
       newlines = ~line3 - line2,
+      lag_newlines = ~lag(newlines, default = 0),
       col2_nl = ~if_else(newlines > 0L, 0L, col2),
       spaces = ~col3 - col2_nl - 1L
     ) %>%

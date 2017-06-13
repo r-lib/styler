@@ -12,8 +12,9 @@ serialize_parse_data_nested_helper(pd_nested, pass_indent)
 \item{pass_indent}{Level of indention of a token.}
 }
 \value{
-A character vector with all tokens in \code{pd_nested} plus whitespace,
-line break and indention information added between the tokens.
+A character vector with all terminal tokens in \code{pd_nested} plus
+the appropriate amount of white spaces and line breaks are inserted between
+them.
 }
 \description{
 Helper function that recursively extracts terminals from a nested tibble.

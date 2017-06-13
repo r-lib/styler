@@ -19,3 +19,11 @@ rep_char <- function(char, times) {
 newlines_and_spaces <- function(newlines, spaces) {
   paste0(rep_char("\n", newlines), rep_char(" ", spaces))
 }
+
+add_newlines <- function(n) {
+  rep_char("\n", n)
+}
+
+add_spaces <- function(n) {
+  rep_char(" ", n)
+}

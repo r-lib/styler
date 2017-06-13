@@ -9,16 +9,13 @@ NULL
 
 #' @rdname update_indention
 indent_round <- function(pd, indent_by) {
-  start <- which(pd$token == "'('") + 1
-  stop <- which(pd$token == "')'") - 1
-  if (length(start) == 0 && length(stop) == 0) {
-    pd$indent <- 0
+  if (any(pd$token == "')'")) {
+    start <- 2
+    stop <- nrow(pd) - 1
   } else {
-    pd$indent <- ifelse(1:nrow(pd) %in% start[1]:stop[1], indent_by, 0) *
-      lag(pd$newlines, default = 0)
+    start <- stop <- 0
   }
-  # general, should maybe not go here.
-  pd$spaces <- pd$spaces * (pd$newlines == 0)
+  pd$indent <- ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
 
   select_(pd, ~indent, ~newlines, ~everything())
 }

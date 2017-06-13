@@ -10,7 +10,8 @@ create_filler(pd_flat)
 \item{pd_flat}{A parse table.}
 }
 \value{
-A parse table with two new columns: newlines and spaces.
+A parse table with two three columns: lag_newlines, newlines and
+spaces.
 }
 \description{
 This function computes difference (as column and line difference) between two
