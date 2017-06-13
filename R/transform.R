@@ -25,22 +25,59 @@ transform_files <- function(files, transformers) {
 #'  that should be transformed.
 #' @param transformers A list of transformer functions that operate on parse
 #'   tables.
-make_transformer <- function(transformers) {
-  function(text) {
-    text <- gsub(" +$", "", text)
-    text <- gsub("\t", "        ", text)
+#' @param flat Whether to do the styling with a flat approach or with a nested
+#'   approach.
+make_transformer <- function(transformers, flat = FALSE) {
+  if (flat) {
+    function(text) {
+      text <- gsub(" +$", "", text)
+      text <- gsub("\t", "        ", text)
 
-    pd_flat <- compute_parse_data_flat_enhanced(text)
+      pd_flat <- compute_parse_data_flat_enhanced(text)
 
-    # May strip empty lines before EOF
-    text <- verify_roundtrip(pd_flat, text)
+      # May strip empty lines before EOF
+      text <- verify_roundtrip(pd_flat, text)
 
-    transformed_pd_flat <- Reduce(
-      function(x, fun) fun(x),
-      transformers,
-      init = pd_flat)
+      transformed_pd_flat <- Reduce(function(x, fun) fun(x),
+        transformers,
+        init = pd_flat)
 
-    new_text <- serialize_parse_data_flat(transformed_pd_flat)
-    new_text
+      new_text <- serialize_parse_data_flat(transformed_pd_flat)
+      new_text
+    }
+
+  } else {
+    function(text) {
+      text <- gsub(" +$", "", text)
+      text <- gsub("\t", "        ", text)
+
+      pd_nested <- styler:::compute_parse_data_nested(text) %>%
+        styler:::create_filler_nested() %>%
+        styler:::indent_round_nested()
+
+      #' TODO verify_roundtrip
+      transformed_pd_nested <- Reduce(
+        transform_nested,
+        transformers,
+        init = pd_nested)
+
+      new_text <- styler:::serialize_parse_data_nested(transformed_pd_nested)
+      new_text
+    }
+
   }
+}
+
+
+#' Transform nested tibble with a transformer function
+#'
+#' @param pd_nested A nested parse table.
+#' @param fun A transformer function that operates on a flat parse table.
+#' @return A transformed, nested parse table. Whereas `fun` was applied to
+#'   every level of nesting within `pd_nested`.
+transform_nested <- function(pd_nested, fun) {
+  if (is.null(pd_nested$child)) return()
+  pd_nested <- fun(pd_nested)
+  pd_nested$child <- map(pd_nested$child, transform_one)
+  pd_nested
 }
