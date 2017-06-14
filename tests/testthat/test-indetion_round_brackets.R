@@ -70,48 +70,48 @@ test_that(paste("multi-line function call with random indention",
 ##  ............................................................................
 
 
-context("grouping arithmetric expressions with round brackets. ")
+context("grouping arithmetic expressions with round brackets. ")
 
 # Does NOT cover indention by operators such as +"
 
-test_that("arithmetric grouping with braces yields correctly indention", {
+test_that("arithmetic grouping with braces yields correctly indention", {
 
-  indented_arithmetric_round <- c(
+  indented_arithmetic_round <- c(
     "(1+",
     "  2 + (",
     "    3 + 4",
     "  )",
     ")")
 
-  indented_arithmetric_without_round <- c(
+  indented_arithmetic_without_round <- c(
     "1+",
     "2 + (",
     "  3 + 4",
     ")")
 
-  not_indented_arithmetric_round <-
-    trimws(indented_arithmetric_round)
+  not_indented_arithmetic_round <-
+    trimws(indented_arithmetic_round)
 
-  not_indented_arithmetric_without_round <-
-    trimws(indented_arithmetric_without_round)
+  not_indented_arithmetic_without_round <-
+    trimws(indented_arithmetic_without_round)
 
-  back_and_forth <- not_indented_arithmetric_round %>%
+  back_and_forth <- not_indented_arithmetic_round %>%
     compute_parse_data_nested() %>%
     create_filler_nested() %>%
     indent_round_nested() %>%
     strip_eol_spaces_nested() %>%
     serialize_parse_data_nested()
 
-  expect_identical(indented_arithmetric_round, back_and_forth)
+  expect_identical(indented_arithmetic_round, back_and_forth)
 
 
-  back_and_forth <- not_indented_arithmetric_without_round %>%
+  back_and_forth <- not_indented_arithmetic_without_round %>%
     compute_parse_data_nested() %>%
     create_filler_nested() %>%
     indent_round_nested() %>%
     strip_eol_spaces_nested() %>%
     serialize_parse_data_nested()
 
-  expect_identical(indented_arithmetric_without_round, back_and_forth)
+  expect_identical(indented_arithmetic_without_round, back_and_forth)
 
 })
