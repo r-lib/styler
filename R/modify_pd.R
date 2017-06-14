@@ -9,8 +9,9 @@ NULL
 
 #' @rdname update_indention
 indent_round <- function(pd, indent_by) {
-  if (any(pd$token == "')'")) {
-    start <- 2
+  opening <- which(pd$token == "'('")
+  if (length(opening) > 0) {
+    start <- opening + 1
     stop <- nrow(pd) - 1
   } else {
     start <- stop <- 0
