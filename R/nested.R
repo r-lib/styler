@@ -1,7 +1,7 @@
 #' Obtain a nested parse table from a character vector
 #'
 #' [utils::getParseData()] is used to obtain a flat parse table from `text`.
-#'   Subsequentially, it's representation is changed from a flat table into a
+#'   Subsequently, it's representation is changed from a flat table into a
 #'   nested parse table with [nest_parse_data()].
 #' @param text A character vector to parse.
 #' @return A nested parse table. Apart from the columns provided by
@@ -127,9 +127,10 @@ serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
 #'   information.
 #' @return A character string.
 serialize_parse_data_nested <- function(pd_nested) {
-  raw <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
+  out <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
     unlist() %>%
     paste0(collapse = "") %>%
     strsplit("\n", fixed = TRUE) %>%
     .[[1L]]
+  out
 }
