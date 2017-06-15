@@ -1,7 +1,7 @@
 ---
 output:
-  md_document:
-    variant: markdown_github
+  github_document:
+    html_preview: false
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -39,7 +39,7 @@ print_code <- function(x) {
       collapse = "\n"))
 }
 
-dirty <- readLines("tests/testthat/example/in.R")
+dirty <- readLines(here::here("tests/testthat/example/in.R"))
 
 print_code(dirty)
 ```

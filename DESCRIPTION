@@ -1,6 +1,6 @@
 Package: styler
 Title: Non-invasive Pretty Printing of R code
-Version: 0.0-3
+Version: 0.0-4
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
 Description:
     Pretty-prints R code without changing the user's formatting intent.
@@ -13,10 +13,12 @@ Imports:
     tidyr,
     purrr,
     magrittr
-Suggests: testthat,
+Suggests:
+    data.tree,
+    here,
     knitr,
     rmarkdown,
-    data.tree
+    testthat
 Remotes:
     krlmlr/utf8
 License: GPL-3

@@ -1,3 +1,8 @@
+## styler 0.0-4 (2017-06-15)
+
+- Fix `README.Rmd` for compatibility with pkgdown.
+
+
 ## styler 0.0-3 (2017-06-15)
 
 - Technical release for creation of pkgdown documentation.
