@@ -41,7 +41,7 @@ notifications:
 
 #before_script
 before_script:
-- R -q -e 'remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages()'
+- R -q -e 'install.packages("remotes"); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages()'
 
 #after_success
 after_success:
