@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 styler
 ======
@@ -17,7 +18,7 @@ print_code <- function(x) {
       collapse = "\n"))
 }
 
-dirty <- readLines("tests/testthat/example/in.R")
+dirty <- readLines(here::here("tests/testthat/example/in.R"))
 
 print_code(dirty)
 

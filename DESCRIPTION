@@ -13,10 +13,12 @@ Imports:
     tidyr,
     purrr,
     magrittr
-Suggests: testthat,
+Suggests:
+    data.tree,
+    here,
     knitr,
     rmarkdown,
-    data.tree
+    testthat
 Remotes:
     krlmlr/utf8
 License: GPL-3
