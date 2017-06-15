@@ -1,0 +1,4 @@
+Name: styler
+Description: Pretty-print package source code
+Binding: style_pkg
+Interactive: false

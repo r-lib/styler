@@ -1,0 +1,8 @@
+# API for styler package
+
+## Exported functions
+
+get_transformers(strict = TRUE)
+style_pkg(pkg = ".", transformers = get_transformers())
+style_src(path = ".", transformers = get_transformers(), recursive = TRUE)
+style_text(text, transformers = get_transformers())

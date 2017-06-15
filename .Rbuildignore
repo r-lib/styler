@@ -1,0 +1,8 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^API$
+^README\.Rmd$
+^README-.*\.png$
+^.travis.yml
+^appveyor\.yml$
+^tic\.R$
