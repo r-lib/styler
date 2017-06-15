@@ -1,15 +1,7 @@
-## roxygen2md 0.0-2 (2017-02-03)
+## styler 0.0-1 (2017-06-15)
 
-- Now uses global replacement again.
-- Improve detection for existing `markdown = TRUE` setting in `DESCRIPTION`.
+Initial release, work in progress.
 
-
-## roxygen2md 0.0-1 (2017-02-03)
-
-Initial GitHub release.
-
-- Single function `roxygen2md()` that can be run in the package's directory and converts all roxygen2 comments to Markdown. The `DESCRIPTION` is edited if necessary, or a message is given that the user should edit themselves.
-- RStudio add-in with single menu item "Rd to Markdown".
-
-
-
+- Create and serialize nested parse data.
+- Internal support for indention of expressions with parentheses.
+- Adding and removing spaces around operators on flat parse data.
