@@ -83,9 +83,10 @@ nest_parse_data <- function(pd_flat) {
 #' @importFrom purrr map
 create_filler_nested <- function(pd_nested) {
   if (is.null(pd_nested$child)) return()
-  pd_nested <- create_filler(pd_nested)
-  pd_nested$child <- map(pd_nested$child, create_filler_nested)
-  select_(pd_nested, ~spaces, ~newlines, ~lag_newlines, ~short, ~everything())
+  pd_nested <- pd_nested %>%
+    create_filler() %>%
+    mutate(child = map(child, create_filler_nested)) %>%
+    select_(~spaces, ~newlines, ~lag_newlines, ~short, ~everything())
 }
 
 #' Serialize a nested parse table

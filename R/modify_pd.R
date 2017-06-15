@@ -16,9 +16,10 @@ indent_round <- function(pd, indent_by) {
   } else {
     start <- stop <- 0
   }
-  pd$indent <- ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
-
-  select_(pd, ~indent, ~newlines, ~everything())
+  pd <- pd %>%
+    mutate(indent = ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
+    select_(~indent, ~newlines, ~everything())
+  pd
 }
 
 
@@ -35,8 +36,9 @@ NULL
 #' @rdname update_indention_nested
 indent_round_nested <- function(pd) {
   if (is.null(pd)) return(pd)
-  pd <- indent_round(pd, indent_by = 2)
-  pd$child <- map(pd$child, indent_round_nested)
+  pd <- pd %>%
+    indent_round(indent_by = 2) %>%
+    mutate(child = map(child, indent_round_nested))
   pd
 }
 
@@ -48,7 +50,8 @@ indent_round_nested <- function(pd) {
 #' @return A nested parse table.
 strip_eol_spaces_nested <- function(pd_nested) {
   if (is.null(pd_nested)) return()
-  pd_nested$spaces <- pd_nested$spaces * (pd_nested$newlines == 0)
-  pd_nested$child <- map(pd_nested$child, strip_eol_spaces_nested)
+  pd_nested <- pd_nested %>%
+    mutate(spaces = spaces * (newlines == 0),
+           child  = map(child, strip_eol_spaces_nested))
   pd_nested
 }
