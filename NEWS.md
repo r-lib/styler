@@ -1,3 +1,8 @@
+## styler 0.0-3 (2017-06-15)
+
+- Technical release for creation of pkgdown documentation.
+
+
 ## styler 0.0-2 (2017-06-15)
 
 - Technical release for creation of pkgdown documentation.
