@@ -104,10 +104,3 @@ style_indent_round <- function(text) {
     strip_eol_spaces_nested() %>%
     serialize_parse_data_nested()
 }
-
-#' Pass input right through
-#'
-#' Passes an input as is without changing its class (unlike [base::I()].
-#'   Helpful for testing in conjunction with [utf8::transform_lines_enc()].
-#' @param x The an R object
-as_is <- function(x) x
