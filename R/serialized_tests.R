@@ -23,10 +23,7 @@
 test_collection <- function(test, sub_test = NULL,
                             write_back = FALSE,
                             transformer) {
-
-  path <- if_else(interactive(),
-                  file.path("tests", "testthat", test),
-                  file.path(test))
+  path <- rprojroot::find_testthat_root_file(test)
 
   pattern <- if_else(!is.null(sub_test),
                      paste0("^", sub_test, ".*", "in\\.R$"),

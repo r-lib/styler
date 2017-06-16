@@ -31,7 +31,7 @@ by taking the substring of the *-in.R file before the
 first dash and adding -out.R. This allows for multiple in.R files to
 share one out.R file. You could have one_line-out.R as the reference to
 compare one_line-random-something-stuff-in.R and
-one_line-random-but-not-so-mch-in.R.
+one_line-random-but-not-so-much-in.R.
 
 This also implies that -out.R files cannot have more than one dash in
 their name, i.e. just the one before out.R.
