@@ -10,8 +10,8 @@ transform_files(files, transformers)
 \item{files}{A character vector with paths to the file that should be
 transformed.}
 
-\item{transformers}{A list of transformer functions that operate on parse
-tables.}
+\item{transformers}{A list of transformer functions that operate on flat
+parse tables.}
 }
 \value{
 A logical value that indicates whether or not any file was changed is

@@ -23,61 +23,89 @@ transform_files <- function(files, transformers) {
 #' This function takes a list of transformer functions as input and
 #'  returns a function that can be applied to character strings
 #'  that should be transformed.
-#' @param transformers A list of transformer functions that operate on parse
-#'   tables.
+#' @param transformers A list of transformer functions that operate on flat
+#'   parse tables.
 #' @param flat Whether to do the styling with a flat approach or with a nested
 #'   approach.
+#' @family make transformers
 make_transformer <- function(transformers, flat = FALSE) {
   if (flat) {
-    function(text) {
-      text <- gsub(" +$", "", text)
-      text <- gsub("\t", "        ", text)
-
-      pd_flat <- compute_parse_data_flat_enhanced(text)
-
-      # May strip empty lines before EOF
-      text <- verify_roundtrip(pd_flat, text)
-
-      transformed_pd_flat <- Reduce(function(x, fun) fun(x),
-        transformers,
-        init = pd_flat)
-
-      new_text <- serialize_parse_data_flat(transformed_pd_flat)
-      new_text
-    }
-
+    make_transformer_flat(transformers = transformers)
   } else {
-    function(text) {
-      text <- gsub(" +$", "", text)
-      text <- gsub("\t", "        ", text)
-
-      pd_nested <- styler:::compute_parse_data_nested(text) %>%
-        styler:::create_filler_nested() %>%
-        styler:::indent_round_nested()
-
-      #' TODO verify_roundtrip
-      transformed_pd_nested <- Reduce(
-        transform_nested,
-        transformers,
-        init = pd_nested)
-
-      new_text <- styler:::serialize_parse_data_nested(transformed_pd_nested)
-      new_text
-    }
-
+    make_transformer_nested(transformers = transformers)
   }
 }
 
-
-#' Transform nested tibble with a transformer function
+#' A Closure to return transformer function
 #'
+#' Returns a closure that turns `text` into a flat parse table and applies
+#'   `transformers`  on it.
+#' @inheritParams make_transformer
+#' @family make transformers
+make_transformer_flat <- function(transformers = transformers) {
+  function(text) {
+    text <- gsub(" +$", "", text)
+    text <- gsub("\t", "        ", text)
+
+    pd_flat <- compute_parse_data_flat_enhanced(text)
+
+    # May strip empty lines before EOF
+    text <- verify_roundtrip(pd_flat, text)
+
+    transformed_pd_flat <- Reduce(function(x, fun) fun(x),
+                                  transformers,
+                                  init = pd_flat)
+
+    new_text <- serialize_parse_data_flat(transformed_pd_flat)
+    new_text
+  }
+}
+
+#' Closure to return transformer function
+#'
+#' Returns a closure that turns `text` into a nested parse table and applies
+#'   `transformers`  on it.
+#' @inheritParams make_transformer
+#' @family make transformers
+make_transformer_nested <- function(transformers = transformers) {
+  function(text) {
+    text <- gsub(" +$", "", text)
+    text <- gsub("\t", "        ", text)
+
+    transformers_pre_processing <- c(create_filler, indent_round, indent_op)
+    all_transformers <- c(transformers_pre_processing, transformers)
+
+    pd_nested <- compute_parse_data_nested(text)
+    transformed_pd_nested <- visit(pd_nested, all_transformers)
+    # TODO verify_roundtrip
+    new_text <- serialize_parse_data_nested(transformed_pd_nested)
+    new_text
+  }
+}
+
+#' Visit'em all
+#'
+#' Apply a list of functions to each level in a nested parse table.
 #' @param pd_nested A nested parse table.
-#' @param fun A transformer function that operates on a flat parse table.
-#' @return A transformed, nested parse table. Whereas `fun` was applied to
-#'   every level of nesting within `pd_nested`.
-transform_nested <- function(pd_nested, fun) {
-  if (is.null(pd_nested$child)) return()
-  pd_nested <- fun(pd_nested)
-  pd_nested$child <- map(pd_nested$child, transform_one)
-  pd_nested
+#' @inheritParams visit_one
+#' @family visitors
+visit <- function(pd_nested, funs) {
+  if (is.null(pd_nested)) return()
+  pd_transformed <- pd_nested %>%
+    visit_one(funs) %>%
+    mutate(child = map(child, visit, funs = funs))
+  pd_transformed
+}
+
+#' Transform a flat parse table with a list of transformers
+#'
+#' Uses [purrr::reduce()] to apply each function of `funs` sequentially to
+#'   `pd_flat`.
+#' @param pd_flat A flat parse table.
+#' @param funs A list of transformer functions.
+#' @family visitors
+#' @importFrom purrr reduce
+visit_one <- function(pd_flat, funs) {
+  reduce(funs, function(x, fun) fun(x),
+         .init = pd_flat)
 }
