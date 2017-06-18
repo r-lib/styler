@@ -18,6 +18,16 @@ style_pkg <- function(pkg = ".", transformers = get_transformers()) {
   withr::with_dir(pkg_root, prettify_local(transformers))
 }
 
+prettify_local <- function(transformers) {
+  r_files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  r_files <- grep("/RcppExports[.]R$", r_files, invert = TRUE, value = TRUE)
+  test_files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  files <- c(r_files, test_files)
+
+  transform_files(files, transformers)
+}
+
+
 #' Style a string
 #'
 #' Styles a character vector
@@ -28,37 +38,6 @@ style_text <- function(text, transformers = get_transformers()) {
   transformer <- make_transformer(transformers)
   transformer(text)
 }
-
-#' get the transformer functions
-#'
-#' @param strict A logical value indicating whether a set of strict
-#'   or not so strict transformer functions should be returned.
-#' @return A list of transformer functions that operate on parse
-#'   tables.
-#' @export
-get_transformers <- function(strict = TRUE) {
-  c(
-    fix_quotes,
-    remove_space_before_closing_paren,
-    if (strict) remove_space_before_opening_paren,
-    add_space_after_for_if_while,
-    add_space_before_brace,
-    if (strict) set_space_around_op else add_space_around_op,
-    if (strict) set_space_after_comma else add_space_after_comma,
-    remove_space_after_unary_pm,
-    remove_space_after_opening_paren,
-    NULL)
-}
-
-prettify_local <- function(transformers) {
-  r_files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
-  r_files <- grep("/RcppExports[.]R$", r_files, invert = TRUE, value = TRUE)
-  test_files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
-  files <- c(r_files, test_files)
-
-  transform_files(files, transformers)
-}
-
 
 #' Prettify arbitrary R code
 #'
