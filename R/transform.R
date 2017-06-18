@@ -28,7 +28,7 @@ transform_files <- function(files, transformers) {
 #' @param flat Whether to do the styling with a flat approach or with a nested
 #'   approach.
 #' @family make transformers
-make_transformer <- function(transformers, flat = FALSE) {
+make_transformer <- function(transformers, flat) {
   if (flat) {
     make_transformer_flat(transformers = transformers)
   } else {
@@ -42,7 +42,7 @@ make_transformer <- function(transformers, flat = FALSE) {
 #'   `transformers`  on it.
 #' @inheritParams make_transformer
 #' @family make transformers
-make_transformer_flat <- function(transformers = transformers) {
+make_transformer_flat <- function(transformers) {
   function(text) {
     text <- gsub(" +$", "", text)
     text <- gsub("\t", "        ", text)
@@ -67,16 +67,13 @@ make_transformer_flat <- function(transformers = transformers) {
 #'   `transformers`  on it.
 #' @inheritParams make_transformer
 #' @family make transformers
-make_transformer_nested <- function(transformers = transformers) {
+make_transformer_nested <- function(transformers) {
   function(text) {
     text <- gsub(" +$", "", text)
     text <- gsub("\t", "        ", text)
 
-    transformers_pre_processing <- c(create_filler, indent_round, indent_op)
-    all_transformers <- c(transformers_pre_processing, transformers)
-
     pd_nested <- compute_parse_data_nested(text)
-    transformed_pd_nested <- visit(pd_nested, all_transformers)
+    transformed_pd_nested <- visit(pd_nested, transformers)
     # TODO verify_roundtrip
     new_text <- serialize_parse_data_nested(transformed_pd_nested)
     new_text
