@@ -4,7 +4,7 @@
 \alias{make_transformer_flat}
 \title{A Closure to return transformer function}
 \usage{
-make_transformer_flat(transformers = transformers)
+make_transformer_flat(transformers)
 }
 \arguments{
 \item{transformers}{A list of transformer functions that operate on flat

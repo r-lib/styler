@@ -4,7 +4,7 @@
 \alias{make_transformer_nested}
 \title{Closure to return transformer function}
 \usage{
-make_transformer_nested(transformers = transformers)
+make_transformer_nested(transformers)
 }
 \arguments{
 \item{transformers}{A list of transformer functions that operate on flat
