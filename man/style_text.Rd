@@ -4,7 +4,8 @@
 \alias{style_text}
 \title{Style a string}
 \usage{
-style_text(text, transformers = get_transformers())
+style_text(text, flat = FALSE, transformers = if (flat)
+  get_transformers_flat() else get_transformers_nested())
 }
 \arguments{
 \item{text}{A character vector with text to style.}

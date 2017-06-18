@@ -13,7 +13,9 @@ NULL
 #' @param pkg Path to a (subdirectory of an) R package
 #' @inheritParams style_text
 #' @export
-style_pkg <- function(pkg = ".", transformers = get_transformers()) {
+style_pkg <- function(pkg = ".",
+                      flat = FALSE,
+                      transformers = get_transformers(flat = flat)) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   withr::with_dir(pkg_root, prettify_local(transformers))
 }
@@ -34,8 +36,10 @@ prettify_local <- function(transformers) {
 #' @param text A character vector with text to style.
 #' @param transformers A list with functions to be applied to the parsed data.
 #' @export
-style_text <- function(text, transformers = get_transformers()) {
-  transformer <- make_transformer(transformers)
+style_text <- function(text,
+                       flat = FALSE,
+                       transformers = get_transformers(flat = flat)) {
+  transformer <- make_transformer(transformers, flat = flat)
   transformer(text)
 }
 
@@ -49,7 +53,10 @@ style_text <- function(text, transformers = get_transformers()) {
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
 #' @export
-style_src <- function(path = ".", transformers = get_transformers(), recursive = TRUE) {
+style_src <- function(path = ".",
+                      flat = FALSE,
+                      recursive = TRUE,
+                      transformers = get_transformers(flat = flat)) {
   withr::with_dir(path, prettify_any(transformers, recursive = recursive))
 }
 

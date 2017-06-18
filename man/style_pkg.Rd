@@ -4,7 +4,7 @@
 \alias{style_pkg}
 \title{Prettify R source code}
 \usage{
-style_pkg(pkg = ".", transformers = get_transformers())
+style_pkg(pkg = ".", transformers = get_transformers_flat())
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package}
