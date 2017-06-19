@@ -30,7 +30,7 @@ indent_op <- function(pd, indent_by = 2, op = op_token) {
   add <- lag(pd$token %in% op_token, n = 1, default = 0)
   if (any(add > 0)) {
     pd <- pd %>%
-      mutate(spaces_before = spaces_before + indent_by * add * (lag_newlines > 0))
+      mutate(spaces_before = spaces_before + indent_by * add)
   }
   select_(pd, ~indent, ~newlines, ~everything())
 }

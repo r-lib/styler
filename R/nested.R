@@ -98,7 +98,7 @@ create_filler_nested <- function(pd_nested) {
 #'   the appropriate amount of white spaces and line breaks are inserted between
 #'   them.
 #' @importFrom purrr pmap
-serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
+serialize_parse_data_nested_helper <- function(pd_nested, pass_indent, pass_space) {
   out <- pmap(list(pd_nested$terminal, pd_nested$text, pd_nested$child,
              pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent,
              pd_nested$spaces_before),
@@ -108,13 +108,17 @@ serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
              preceding_linebreak <- if_else(lag_newlines > 0, 1, 0)
              if (terminal) {
                c(add_newlines(lag_newlines),
+                 add_spaces(total_indent * preceding_linebreak),
                  add_spaces(total_indent * preceding_linebreak + spaces_before),
                  text,
                  add_spaces(spaces))
              } else {
                c(add_newlines(lag_newlines),
-                 add_spaces(total_indent * preceding_linebreak + spaces_before),
-                 serialize_parse_data_nested_helper(child, total_indent),
+                 add_spaces(total_indent * preceding_linebreak),
+                 add_spaces((spaces_before + pass_space) * preceding_linebreak),
+                 serialize_parse_data_nested_helper(child,
+                    total_indent,
+                    (1 - preceding_linebreak) * (pass_space + spaces_before)),
                  add_spaces(spaces))
              }
         }
@@ -129,7 +133,7 @@ serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
 #'   information.
 #' @return A character string.
 serialize_parse_data_nested <- function(pd_nested) {
-  out <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
+  out <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0, pass_space = 0) %>%
     unlist() %>%
     paste0(collapse = "") %>%
     strsplit("\n", fixed = TRUE) %>%
