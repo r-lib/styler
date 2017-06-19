@@ -100,18 +100,20 @@ create_filler_nested <- function(pd_nested) {
 #' @importFrom purrr pmap
 serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
   out <- pmap(list(pd_nested$terminal, pd_nested$text, pd_nested$child,
-             pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent),
-           function(terminal, text, child, spaces, lag_newlines, indent) {
+             pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent,
+             pd_nested$spaces_before),
+           function(terminal, text, child, spaces, lag_newlines, indent,
+                    spaces_before) {
              total_indent <- pass_indent + indent
              preceding_linebreak <- if_else(lag_newlines > 0, 1, 0)
              if (terminal) {
                c(add_newlines(lag_newlines),
-                 add_spaces(total_indent * preceding_linebreak),
+                 add_spaces(total_indent * preceding_linebreak + spaces_before),
                  text,
                  add_spaces(spaces))
              } else {
                c(add_newlines(lag_newlines),
-                 add_spaces(total_indent * preceding_linebreak),
+                 add_spaces(total_indent * preceding_linebreak + spaces_before),
                  serialize_parse_data_nested_helper(child, total_indent),
                  add_spaces(spaces))
              }
