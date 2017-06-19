@@ -3,9 +3,12 @@
 \name{update_indention}
 \alias{update_indention}
 \alias{indent_round}
+\alias{indent_op}
 \title{Update indention information of parse data}
 \usage{
-indent_round(pd, indent_by)
+indent_round(pd, indent_by = 2)
+
+indent_op(pd, indent_by = 2, op = op_token)
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with
