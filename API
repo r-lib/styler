@@ -4,7 +4,7 @@
 
 get_transformers(flat, ...)
 get_transformers_flat(strict = TRUE)
-get_transformers_nested(strict = TRUE, indent_by = 2)
+get_transformers_nested(strict = TRUE, indent_by = 2, op_token = styler:::op_token)
 style_pkg(pkg = ".", flat = FALSE, transformers = get_transformers(flat = flat))
 style_src(path = ".", flat = FALSE, recursive = TRUE, transformers = get_transformers(flat = flat))
 style_text(text, flat = FALSE, transformers = get_transformers(flat = flat))

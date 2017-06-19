@@ -4,7 +4,8 @@
 \alias{get_transformers_nested}
 \title{Get the transformer functions for nested styling}
 \usage{
-get_transformers_nested(strict = TRUE, indent_by = 2)
+get_transformers_nested(strict = TRUE, indent_by = 2,
+  op_token = styler:::op_token)
 }
 \arguments{
 \item{strict}{A logical value indicating whether a set of strict
@@ -12,6 +13,9 @@ or not so strict transformer functions should be returned.}
 
 \item{indent_by}{How many spaces of indention should be inserted after
 operators such as '('.}
+
+\item{op_token}{A character vector with tokens that cause indention after
+a line break.}
 }
 \description{
 Similar to \code{\link[=get_transformers_flat]{get_transformers_flat()}}, but additionally, returns some

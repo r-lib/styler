@@ -42,13 +42,19 @@ get_transformers_flat <- function(strict = TRUE) {
 #'   functions needed due the fact that styling is done in a nested way.
 #' @param indent_by How many spaces of indention should be inserted after
 #'   operators such as '('.
+#' @param op_token A character vector with tokens that cause indention after
+#'   a line break.
 #' @inheritParams get_transformers_flat
 #' @family obtain transformers
 #' @importFrom purrr partial
 #' @export
-get_transformers_nested <- function(strict = TRUE, indent_by = 2) {
+get_transformers_nested <- function(strict = TRUE,
+                                    indent_by = 2,
+                                    op_token = styler:::op_token) {
   c(create_filler,
     partial(indent_round, indent_by = indent_by),
+    partial(indent_op, op = op_token),
+    strip_eol_spaces,
     get_transformers_flat(strict)
     )
 }
