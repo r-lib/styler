@@ -27,15 +27,12 @@
 compute_parse_data_nested <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
-  top_level_expr <- parse_data %>%
-    filter_(~parent == 0) %>%
-    pull(id)
   pd_nested <-
     parse_data %>%
     mutate_(child = ~rep(list(NULL), length(text))) %>%
     mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
-    nest_parse_data(top_level_expr)
+    nest_parse_data()
 
   pd_nested
 }
@@ -49,17 +46,13 @@ compute_parse_data_nested <- function(text) {
 #'   This is done recursively until we are only left with a nested tibble that
 #'   contains one row: The nested parse table.
 #' @param pd_flat A flat parse table including both terminals and non-terminals.
-#' @param top_level_expr The ids of the expressions that cannot be attributed
-#'   to another expression since they are not nested in any other expression.
-#'   This is important for terminating the recursion, i.e. further nesting is
-#'   impossible if our nested parse table has `length(top_level_expr)` rows.
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
-nest_parse_data <- function(pd_flat, top_level_expr) {
-  if (nrow(pd_flat) <= length(top_level_expr)) return(pd_flat)
+nest_parse_data <- function(pd_flat) {
+  if (all(pd_flat$parent == 0)) return(pd_flat)
   split <-
     pd_flat %>%
-    mutate_(internal = ~id %in% c(parent, top_level_expr)) %>%
+    mutate_(internal = ~ (id %in% parent) | (parent == 0)) %>%
     nest_("data", names(pd_flat))
 
   child <- split$data[!split$internal][[1L]]
@@ -77,7 +70,7 @@ nest_parse_data <- function(pd_flat, top_level_expr) {
     select_(~-internal_child) %>%
     select_(~short, ~everything(), ~-text, ~text)
 
-  nest_parse_data(nested, top_level_expr)
+  nest_parse_data(nested)
 }
 
 #' Enrich nested parse table with space and linebreak information

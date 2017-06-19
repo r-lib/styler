@@ -4,15 +4,10 @@
 \alias{nest_parse_data}
 \title{Nest a flat parse table}
 \usage{
-nest_parse_data(pd_flat, top_level_expr)
+nest_parse_data(pd_flat)
 }
 \arguments{
 \item{pd_flat}{A flat parse table including both terminals and non-terminals.}
-
-\item{top_level_expr}{The ids of the expressions that cannot be attributed
-to another expression since they are not nested in any other expression.
-This is important for terminating the recursion, i.e. further nesting is
-impossible if our nested parse table has \code{length(top_level_expr)} rows.}
 }
 \value{
 A nested parse table.
