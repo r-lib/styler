@@ -13,6 +13,7 @@ NULL
 #' @param pkg Path to a (subdirectory of an) R package
 #' @inheritParams style_text
 #' @export
+#' @family stylers
 style_pkg <- function(pkg = ".",
                       flat = FALSE,
                       transformers = get_transformers(flat = flat)) {
@@ -35,6 +36,9 @@ prettify_local <- function(transformers) {
 #' Styles a character vector
 #' @param text A character vector with text to style.
 #' @param transformers A list with functions to be applied to the parsed data.
+#' @param flat Whether to do the styling with a flat approach or with a nested
+#'   approach.
+#' @family stylers
 #' @export
 style_text <- function(text,
                        flat = FALSE,
@@ -48,10 +52,10 @@ style_text <- function(text,
 #' Performs various substitutions in all `.R` files in a directory.
 #' Carefully examine the results after running this function!
 #' @param path Path to a directory with files to transform.
-#' @param transformers A list of transformer functions to be applied to the
-#'   files in `path`.
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
+#' @inheritParams style_text
+#' @family stylers
 #' @export
 style_src <- function(path = ".",
                       flat = FALSE,

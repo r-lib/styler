@@ -4,10 +4,14 @@
 \alias{style_pkg}
 \title{Prettify R source code}
 \usage{
-style_pkg(pkg = ".", transformers = get_transformers_flat())
+style_pkg(pkg = ".", flat = FALSE, transformers = get_transformers(flat =
+  flat))
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package}
+
+\item{flat}{Whether to do the styling with a flat approach or with a nested
+approach.}
 
 \item{transformers}{A list with functions to be applied to the parsed data.}
 }
@@ -15,4 +19,8 @@ style_pkg(pkg = ".", transformers = get_transformers_flat())
 Performs various substitutions in all \code{.R} files in a package
 (code and tests).
 Carefully examine the results after running this function!
+}
+\seealso{
+Other stylers: \code{\link{style_src}},
+  \code{\link{style_text}}
 }

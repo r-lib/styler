@@ -4,18 +4,25 @@
 \alias{style_src}
 \title{Prettify arbitrary R code}
 \usage{
-style_src(path = ".", transformers = get_transformers(), recursive = TRUE)
+style_src(path = ".", flat = FALSE, recursive = TRUE,
+  transformers = get_transformers(flat = flat))
 }
 \arguments{
 \item{path}{Path to a directory with files to transform.}
 
-\item{transformers}{A list of transformer functions to be applied to the
-files in \code{path}.}
+\item{flat}{Whether to do the styling with a flat approach or with a nested
+approach.}
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 of \code{path} should be styled as well.}
+
+\item{transformers}{A list with functions to be applied to the parsed data.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a directory.
 Carefully examine the results after running this function!
+}
+\seealso{
+Other stylers: \code{\link{style_pkg}},
+  \code{\link{style_text}}
 }

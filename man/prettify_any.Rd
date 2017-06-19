@@ -7,8 +7,7 @@
 prettify_any(transformers, recursive)
 }
 \arguments{
-\item{transformers}{A list of transformer functions to be applied to the
-files in \code{path}.}
+\item{transformers}{A list with functions to be applied to the parsed data.}
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 should be styled as well.}
