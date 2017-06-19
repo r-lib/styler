@@ -13,41 +13,12 @@ NULL
 #' @param pkg Path to a (subdirectory of an) R package
 #' @inheritParams style_text
 #' @export
-style_pkg <- function(pkg = ".", transformers = get_transformers()) {
+#' @family stylers
+style_pkg <- function(pkg = ".",
+                      flat = FALSE,
+                      transformers = get_transformers(flat = flat)) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   withr::with_dir(pkg_root, prettify_local(transformers))
-}
-
-#' Style a string
-#'
-#' Styles a character vector
-#' @param text A character vector with text to style.
-#' @param transformers A list with functions to be applied to the parsed data.
-#' @export
-style_text <- function(text, transformers = get_transformers()) {
-  transformer <- make_transformer(transformers)
-  transformer(text)
-}
-
-#' get the transformer functions
-#'
-#' @param strict A logical value indicating whether a set of strict
-#'   or not so strict transformer functions should be returned.
-#' @return A list of transformer functions that operate on parse
-#'   tables.
-#' @export
-get_transformers <- function(strict = TRUE) {
-  c(
-    fix_quotes,
-    remove_space_before_closing_paren,
-    if (strict) remove_space_before_opening_paren,
-    add_space_after_for_if_while,
-    add_space_before_brace,
-    if (strict) set_space_around_op else add_space_around_op,
-    if (strict) set_space_after_comma else add_space_after_comma,
-    remove_space_after_unary_pm,
-    remove_space_after_opening_paren,
-    NULL)
 }
 
 prettify_local <- function(transformers) {
@@ -60,17 +31,36 @@ prettify_local <- function(transformers) {
 }
 
 
+#' Style a string
+#'
+#' Styles a character vector
+#' @param text A character vector with text to style.
+#' @param transformers A list with functions to be applied to the parsed data.
+#' @param flat Whether to do the styling with a flat approach or with a nested
+#'   approach.
+#' @family stylers
+#' @export
+style_text <- function(text,
+                       flat = FALSE,
+                       transformers = get_transformers(flat = flat)) {
+  transformer <- make_transformer(transformers, flat = flat)
+  transformer(text)
+}
+
 #' Prettify arbitrary R code
 #'
 #' Performs various substitutions in all `.R` files in a directory.
 #' Carefully examine the results after running this function!
 #' @param path Path to a directory with files to transform.
-#' @param transformers A list of transformer functions to be applied to the
-#'   files in `path`.
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
+#' @inheritParams style_text
+#' @family stylers
 #' @export
-style_src <- function(path = ".", transformers = get_transformers(), recursive = TRUE) {
+style_src <- function(path = ".",
+                      flat = FALSE,
+                      recursive = TRUE,
+                      transformers = get_transformers(flat = flat)) {
   withr::with_dir(path, prettify_any(transformers, recursive = recursive))
 }
 

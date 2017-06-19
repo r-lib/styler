@@ -4,13 +4,20 @@
 \alias{style_text}
 \title{Style a string}
 \usage{
-style_text(text, transformers = get_transformers())
+style_text(text, flat = FALSE, transformers = get_transformers(flat = flat))
 }
 \arguments{
 \item{text}{A character vector with text to style.}
+
+\item{flat}{Whether to do the styling with a flat approach or with a nested
+approach.}
 
 \item{transformers}{A list with functions to be applied to the parsed data.}
 }
 \description{
 Styles a character vector
+}
+\seealso{
+Other stylers: \code{\link{style_pkg}},
+  \code{\link{style_src}}
 }
