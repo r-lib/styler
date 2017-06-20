@@ -8,7 +8,7 @@
 NULL
 
 #' @rdname update_indention
-indent_round <- function(pd, indent_by) {
+indent_round <- function(pd, indent_by = 2) {
   opening <- which(pd$token == "'('")
   if (length(opening) > 0) {
     start <- opening + 1
@@ -17,9 +17,22 @@ indent_round <- function(pd, indent_by) {
     start <- stop <- 0
   }
   pd <- pd %>%
-    mutate(indent = ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
+    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
+                                    indent_by,
+                                    0)) %>%
     select_(~indent, ~newlines, ~everything())
   pd
+}
+
+
+#' @rdname update_indention
+indent_op <- function(pd, indent_by = 2, op = op_token) {
+  add <- lag(pd$token %in% op_token, n = 1, default = 0)
+  if (any(add > 0)) {
+    pd <- pd %>%
+      mutate(spaces_before = spaces_before + indent_by * add)
+  }
+  select_(pd, ~indent, ~newlines, ~everything())
 }
 
 
@@ -40,6 +53,17 @@ indent_round_nested <- function(pd) {
     indent_round(indent_by = 2) %>%
     mutate(child = map(child, indent_round_nested))
   pd
+}
+
+
+#' Strip EOL spaces
+#'
+#' Remove end-of-line spaces.
+#' @param pd_nested A nested parse table.
+#' @return A nested parse table.
+strip_eol_spaces <- function(pd_flat) {
+  pd_flat %>%
+    mutate(spaces = spaces * (newlines == 0))
 }
 
 

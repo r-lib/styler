@@ -115,7 +115,9 @@ create_filler <- function(pd_flat) {
       newlines = ~line3 - line2,
       lag_newlines = ~lag(newlines, default = 0),
       col2_nl = ~if_else(newlines > 0L, 0L, col2),
-      spaces = ~col3 - col2_nl - 1L
+      spaces = ~col3 - col2_nl - 1L,
+      indent = 0,
+      spaces_before = 0
     ) %>%
     select_(~-line3, ~-col3, ~-col2_nl)
 
