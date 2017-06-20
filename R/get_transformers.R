@@ -49,6 +49,7 @@ get_transformers_flat <- function(strict = TRUE) {
 get_transformers_nested <- function(strict = TRUE, indent_by = 2) {
   c(create_filler,
     partial(indent_round, indent_by = indent_by),
+    strip_eol_spaces,
     get_transformers_flat(strict)
     )
 }

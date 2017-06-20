@@ -73,22 +73,6 @@ nest_parse_data <- function(pd_flat) {
   nest_parse_data(nested)
 }
 
-#' Enrich nested parse table with space and linebreak information
-#'
-#' Uses [create_filler()] in a recursion add space and line break information
-#'   separately on every level of nesting.
-#' @param pd_nested A nested parse table.
-#' @return A nested parse table with two new columns: newlines and spaces.
-#' @seealso [create_filler()]
-#' @importFrom purrr map
-create_filler_nested <- function(pd_nested) {
-  if (is.null(pd_nested$child)) return()
-  pd_nested <- pd_nested %>%
-    create_filler() %>%
-    mutate(child = map(child, create_filler_nested)) %>%
-    select_(~spaces, ~newlines, ~lag_newlines, ~short, ~everything())
-}
-
 #' Serialize a nested parse table
 #'
 #' Helper function that recursively extracts terminals from a nested tibble.
