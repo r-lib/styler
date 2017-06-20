@@ -20,7 +20,7 @@ create_node_from_nested_root <- function(pd_nested) {
 #'
 #' @inheritParams create_node_from_nested_root
 #' @param parent The parent of the node to be created.
-#' @importFrom purrr map2
+#' @importFrom purrr map2 map
 create_node_from_nested <- function(pd_nested, parent) {
   if (is.null(pd_nested))
     return()
