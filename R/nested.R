@@ -49,10 +49,10 @@ compute_parse_data_nested <- function(text) {
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
 nest_parse_data <- function(pd_flat) {
-  if (nrow(pd_flat) <= 1) return(pd_flat)
+  if (all(pd_flat$parent == 0)) return(pd_flat)
   split <-
     pd_flat %>%
-    mutate_(internal = ~id %in% parent) %>%
+    mutate_(internal = ~ (id %in% parent) | (parent == 0)) %>%
     nest_("data", names(pd_flat))
 
   child <- split$data[!split$internal][[1L]]
