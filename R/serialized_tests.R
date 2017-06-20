@@ -99,8 +99,9 @@ transform_and_check <- function(in_item, out_item,
 style_indent_round <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    create_filler_nested() %>%
-    indent_round_nested() %>%
-    strip_eol_spaces_nested() %>%
+    visit(funs = c(create_filler,
+                   partial(indent_round, indent_by = 2),
+                   strip_eol_spaces)) %>%
+
     serialize_parse_data_nested()
 }
