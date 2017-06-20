@@ -16,20 +16,36 @@ library("purrr")
 This vignette builds on the vignette "Data Structures" and discusses how 
 to go forward with the nested structure of the parse data.
 In order to compute the white space information in a nested data structure, we
-need a recursion. The function `create_filler_nested()` is used to add 
-white space information on every level of nesting within the nested parse data.
+need a recursion. We use a 
+[visitor approach](https://en.wikipedia.org/wiki/Visitor_pattern) to separate
+the algorithm (computing white space information) from the object (nested) 
+data structure.
+The function `create_filler()` can then be used to add
+white space information on every level of nesting within the nested parse data 
+if applied in combination with the visitor. `visitor()` takes a object to 
+operate on and a list of functions. Each function is applied at the current 
+level of nesting before the next level of nesting is entered.
 ```{r}
-styler:::create_filler_nested
+styler:::visit
+styler:::visit_one
+
 ```
-The function takes a nested parse table and uses `create_filler` to add two 
-new columns "spaces" and "newlines" to the top-level tibble. Next, all entries
-in the column "child" (i.e. the column that contains all remaining nested data) 
-are modified in a recursive manner. Note that there is no need to unnest the 
-tibble, add the information and re-nest it.
+This comes with two advantages. 
+
+* We don't need a *_nested() version of every function we want to apply to the
+  parse tables, in particular the rules in R/rules.R
+* We go through the whole structure only once (instead of every *_nested() 
+  function going through it once, which is more efficient in terms of speed.
+
+`create_filler()` was adapted to also initialize indention and lag_newlines.
+```{r}
+styler:::create_filler
+```
+
 ```{r}
 code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 pd_nested <- styler:::compute_parse_data_nested(code)
-pd_nested_enhanced <- styler:::create_filler_nested(pd_nested)
+pd_nested_enhanced <- styler:::visit(pd_nested, c(styler:::create_filler))
 pd_nested_enhanced
 ```
 
@@ -85,10 +101,11 @@ styler:::serialize_parse_data_nested
 ```
 Before we are done, we need to add information regarding indention to the parse
 table. We can add indention after every line break that comes after a round 
-braket with `indent_round()`. And then serialize it. 
+bracket with `indent_round()`. And then serialize it. 
 ```{r}
-styler:::indent_round_nested(pd_nested_enhanced) %>%
-  styler:::serialize_parse_data_nested()
+styler:::visit(pd_nested, 
+               c(styler:::create_filler, 
+                 purrr::partial(styler:::indent_round, indent_by = 2)))
 ```
 
 We can see how indention works with a more complicated example
@@ -108,8 +125,8 @@ indented <- c(
 not_indented <- trimws(indented)
 back_and_forth <- not_indented %>%
   styler:::compute_parse_data_nested() %>%
-  styler:::create_filler_nested() %>%
-  styler:::indent_round_nested() %>%
+  styler:::visit(c(styler:::create_filler, 
+        purrr::partial(styler:::indent_round, indent_by = 2))) %>%
   styler:::serialize_parse_data_nested()
 
 identical(indented, back_and_forth)
