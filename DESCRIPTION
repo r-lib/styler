@@ -12,7 +12,8 @@ Imports:
     tibble,
     tidyr,
     purrr,
-    magrittr
+    magrittr,
+    pkgload
 Suggests:
     data.tree,
     here,
@@ -20,7 +21,8 @@ Suggests:
     rmarkdown,
     testthat
 Remotes:
-    krlmlr/utf8
+    krlmlr/utf8,
+    r-lib/pkgload
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

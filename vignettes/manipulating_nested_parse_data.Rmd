@@ -11,6 +11,7 @@ vignette: >
 ```{r, message=FALSE}
 library("dplyr")
 library("purrr")
+pkgload::load_all()
 ```
 
 This vignette builds on the vignette "Data Structures" and discusses how 
@@ -26,8 +27,8 @@ if applied in combination with the visitor. `visitor()` takes a object to
 operate on and a list of functions. Each function is applied at the current 
 level of nesting before the next level of nesting is entered.
 ```{r}
-styler:::visit
-styler:::visit_one
+visit
+visit_one
 
 ```
 This comes with two advantages. 
@@ -39,13 +40,13 @@ This comes with two advantages.
 
 `create_filler()` was adapted to also initialize indention and lag_newlines.
 ```{r}
-styler:::create_filler
+create_filler
 ```
 
 ```{r}
 code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
-pd_nested <- styler:::compute_parse_data_nested(code)
-pd_nested_enhanced <- styler:::visit(pd_nested, c(styler:::create_filler))
+pd_nested <- compute_parse_data_nested(code)
+pd_nested_enhanced <- visit(pd_nested, c(create_filler))
 pd_nested_enhanced
 ```
 
@@ -76,7 +77,7 @@ serialize(pd_nested) %>% unlist
 pastes together the column "text" of a flat parse table by taking into account
 space and line break information, splits the string by line break and returns it.
 ```{r}
-styler:::serialize_parse_data_flat
+serialize_parse_data_flat
 ```
 
 
@@ -95,17 +96,17 @@ expression. In our example: we know that there is a space after the non-terminal
 this space to the very last terminal within `pd_nested_enhanced$child[[1]]` before we 
 collapse everything together.
 ```{r}
-styler:::serialize_parse_data_nested_helper
+serialize_parse_data_nested_helper
 
-styler:::serialize_parse_data_nested
+serialize_parse_data_nested
 ```
 Before we are done, we need to add information regarding indention to the parse
 table. We can add indention after every line break that comes after a round 
 bracket with `indent_round()`. And then serialize it. 
 ```{r}
-styler:::visit(pd_nested, 
-               c(styler:::create_filler, 
-                 purrr::partial(styler:::indent_round, indent_by = 2)))
+visit(pd_nested, 
+               c(create_filler, 
+                 purrr::partial(indent_round, indent_by = 2)))
 ```
 
 We can see how indention works with a more complicated example
@@ -124,10 +125,10 @@ indented <- c(
 
 not_indented <- trimws(indented)
 back_and_forth <- not_indented %>%
-  styler:::compute_parse_data_nested() %>%
-  styler:::visit(c(styler:::create_filler, 
-        purrr::partial(styler:::indent_round, indent_by = 2))) %>%
-  styler:::serialize_parse_data_nested()
+  compute_parse_data_nested() %>%
+  visit(c(create_filler, 
+        purrr::partial(indent_round, indent_by = 2))) %>%
+  serialize_parse_data_nested()
 
 identical(indented, back_and_forth)
 ```
