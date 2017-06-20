@@ -17,6 +17,3 @@ spaces.
 This function computes difference (as column and line difference) between two
 entries in the parse table and adds this information to the table.
 }
-\seealso{
-\code{\link[=create_filler_nested]{create_filler_nested()}}
-}

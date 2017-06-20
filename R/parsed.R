@@ -105,7 +105,6 @@ serialize_parse_data_flat <- function(pd_flat) {
 #' @param pd_flat A parse table.
 #' @return A parse table with two three columns: lag_newlines, newlines and
 #'   spaces.
-#' @seealso [create_filler_nested()]
 create_filler <- function(pd_flat) {
   ret <-
     pd_flat %>%
