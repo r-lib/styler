@@ -89,13 +89,14 @@ transform_and_check <- function(in_item, out_item,
 #'  [transform_and_check()].
 #' @name test_transformer
 #' @param text A character vector to transform.
-#' @details `style_indent_round` is suited for internal tests of indention based
-#'   on round brackets.
-#'
+#' @details
 #'   As inputs for [test_collection()], we can also use top-level functions such
 #'   as [style_text()].
-
 #' @rdname test_transformer
+NULL
+
+#' @describeIn test_transformer Transformations for indention based on round
+#'   brackets.
 style_indent_round <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
@@ -103,5 +104,17 @@ style_indent_round <- function(text) {
                    partial(indent_round, indent_by = 2),
                    strip_eol_spaces)) %>%
 
+    serialize_parse_data_nested()
+}
+
+
+
+#' @describeIn test_transformer Nest and unnest `text` without applying any
+#'   transformations but remove indention due to the way the serialization is
+#'   set up.
+style_empty <- function(text) {
+  text %>%
+    compute_parse_data_nested() %>%
+    visit(funs = c(create_filler)) %>%
     serialize_parse_data_nested()
 }
