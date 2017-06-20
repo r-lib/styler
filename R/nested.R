@@ -24,12 +24,13 @@
 #'     - Function calls
 #'     - Function definitions
 #' - Remove `includeText = TRUE`
+#' @importFrom purrr rerun
 compute_parse_data_nested <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
   pd_nested <-
     parse_data %>%
-    mutate_(child = ~rep(list(NULL), length(text))) %>%
+    mutate_(child = ~rerun(length(text), tibble())) %>%
     mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
     nest_parse_data()
@@ -49,10 +50,10 @@ compute_parse_data_nested <- function(text) {
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
 nest_parse_data <- function(pd_flat) {
-  if (all(pd_flat$parent == 0)) return(pd_flat)
+  if (all(pd_flat$parent <= 0)) return(pd_flat)
   split <-
     pd_flat %>%
-    mutate_(internal = ~ (id %in% parent) | (parent == 0)) %>%
+    mutate_(internal = ~ (id %in% parent) | (parent <= 0)) %>%
     nest_("data", names(pd_flat))
 
   child <- split$data[!split$internal][[1L]]

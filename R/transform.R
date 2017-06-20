@@ -88,7 +88,7 @@ make_transformer_nested <- function(transformers) {
 #' @family visitors
 #' @importFrom purrr map
 visit <- function(pd_nested, funs) {
-  if (is.null(pd_nested)) return()
+  if (nrow(pd_nested) == 0) return()
   pd_transformed <- pd_nested %>%
     visit_one(funs) %>%
     mutate(child = map(child, visit, funs = funs))
