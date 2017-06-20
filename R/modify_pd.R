@@ -22,36 +22,12 @@ indent_round <- function(pd, indent_by) {
   pd
 }
 
-
-
-#' Update indention information of nested parse data
-#'
-#' These functions apply the update functions of the same name but without
-#'   suffix nested to each level of nesting of the nested parse table.
-#' @param pd A nested parse table that is already enhanced with
-#'   line break and space information via [create_filler_nested].
-#' @name update_indention_nested
-NULL
-
-#' @rdname update_indention_nested
-indent_round_nested <- function(pd) {
-  if (is.null(pd)) return(pd)
-  pd <- pd %>%
-    indent_round(indent_by = 2) %>%
-    mutate(child = map(child, indent_round_nested))
-  pd
-}
-
-
 #' Strip EOL spaces
 #'
 #' Remove end-of-line spaces.
-#' @param pd_nested A nested parse table.
+#' @param pd_flat A flat parse table.
 #' @return A nested parse table.
-strip_eol_spaces_nested <- function(pd_nested) {
-  if (is.null(pd_nested)) return()
-  pd_nested <- pd_nested %>%
-    mutate(spaces = spaces * (newlines == 0),
-           child  = map(child, strip_eol_spaces_nested))
-  pd_nested
+strip_eol_spaces <- function(pd_flat) {
+  pd_flat %>%
+    mutate(spaces = spaces * (newlines == 0))
 }
