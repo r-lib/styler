@@ -20,6 +20,7 @@ cache:
 # Adapt as necessary starting from here
 build_script:
   - travis-tool.sh install_github krlmlr/utf8
+  - travis-tool.sh install_github r-lib/pkgload
   - travis-tool.sh install_deps
 
 test_script:

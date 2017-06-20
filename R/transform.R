@@ -86,6 +86,7 @@ make_transformer_nested <- function(transformers) {
 #' @param pd_nested A nested parse table.
 #' @inheritParams visit_one
 #' @family visitors
+#' @importFrom purrr map
 visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) return()
   pd_transformed <- pd_nested %>%

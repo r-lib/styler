@@ -19,7 +19,7 @@
 #'   This also implies that -out.R files cannot have more than one dash in
 #'   their name, i.e. just the one before out.R.
 #' @inheritParams transform_and_check
-#' @importFrom purrr flatten_chr pwalk
+#' @importFrom purrr flatten_chr pwalk map
 test_collection <- function(test, sub_test = NULL,
                             write_back = FALSE,
                             transformer) {

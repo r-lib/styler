@@ -9,8 +9,7 @@ indent_round(pd, indent_by)
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with
-line break and space information via \code{\link[=create_filler]{create_filler()}} or
-\code{\link[=create_filler_nested]{create_filler_nested()}}.}
+line break and space information via \code{\link[=create_filler]{create_filler()}}.}
 
 \item{indent_by}{How many spaces should be added after the token of interest.}
 }

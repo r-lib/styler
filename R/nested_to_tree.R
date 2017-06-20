@@ -8,7 +8,7 @@
 #' library("magrittr")
 #' code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 #' l1 <- styler:::compute_parse_data_nested(code) %>%
-#'   styler:::create_filler_nested() %>%
+#'   styler:::visit(c(styler:::create_filler)) %>%
 #'   styler:::create_node_from_nested_root()
 create_node_from_nested_root <- function(pd_nested) {
   n <- data.tree::Node$new("xxx")
@@ -20,7 +20,7 @@ create_node_from_nested_root <- function(pd_nested) {
 #'
 #' @inheritParams create_node_from_nested_root
 #' @param parent The parent of the node to be created.
-#' @importFrom purrr map2
+#' @importFrom purrr map2 map
 create_node_from_nested <- function(pd_nested, parent) {
   if (is.null(pd_nested))
     return()
