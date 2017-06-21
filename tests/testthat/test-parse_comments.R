@@ -11,5 +11,11 @@ test_that("comments are treated corectly", {
                                  "just_comments",
                                  transformer = style_empty), NA)
 
+
+  expect_warning(test_collection("parse_comments",
+                                 "with_indention",
+                                 transformer = style_text,
+                                 write_back = TRUE), NA)
+
   # top-level test with indention
 })
