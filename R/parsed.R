@@ -11,8 +11,7 @@
 #'   vector, since `compute_parse_data_flat_enhanced()` turns a character vector
 #'   into a parse table.
 compute_parse_data_flat_enhanced <- function(text) {
-  parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- tbl_df(utils::getParseData(parsed))
+  parse_data <- tokenize(text)
   pd_flat <- enhance_parse_data(parse_data)
   pd_flat
 }

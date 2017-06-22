@@ -1,8 +1,8 @@
 #' Obtain a nested parse table from a character vector
 #'
-#' [utils::getParseData()] is used to obtain a flat parse table from `text`.
-#'   Subsequently, it's representation is changed from a flat table into a
-#'   nested parse table with [nest_parse_data()].
+#' Parses `text` to a flat parse table and subsequently changes its
+#'   representation into a nested parse table with
+#'   [nest_parse_data()].
 #' @param text A character vector to parse.
 #' @return A nested parse table. Apart from the columns provided by
 #'   `utils::getParseData()`, a column "short" with the first five characters of
@@ -25,8 +25,7 @@
 #'     - Function definitions
 #' - Remove `includeText = TRUE`
 compute_parse_data_nested <- function(text) {
-  parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
+  parse_data <- tokenize(text)
   pd_nested <-
     parse_data %>%
     mutate_(child = ~rep(list(NULL), length(text))) %>%
@@ -36,6 +35,18 @@ compute_parse_data_nested <- function(text) {
 
   pd_nested
 }
+
+#' Obtain token table from text
+#'
+#' [utils::getParseData()] is used to obtain a flat parse table from `text`.
+#' @param text A character vector.
+#' @return A flat parse table
+tokenize <- function(text) {
+  parsed <- parse(text = text, keep.source = TRUE)
+  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA))
+  parse_data
+}
+
 
 #' Nest a flat parse table
 #'
