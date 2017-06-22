@@ -1,5 +1,6 @@
 get_stage("before_install") %>%
-  add_step(step_run_code(update.packages(ask = FALSE)))
+  add_step(step_run_code(withr::with_options(
+    list(install.packages.check.source = "no"), update.packages(ask = FALSE))))
 
 get_stage("install") %>%
   add_step(step_run_code(remotes::install_deps(dependencies = TRUE)))
