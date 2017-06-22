@@ -138,10 +138,20 @@ serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
 #'   information.
 #' @return A character string.
 serialize_parse_data_nested <- function(pd_nested) {
-  out <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
+  out <- c(add_newlines(start_on_line(pd_nested) - 1),
+           serialize_parse_data_nested_helper(pd_nested, pass_indent = 0)) %>%
     unlist() %>%
     paste0(collapse = "") %>%
     strsplit("\n", fixed = TRUE) %>%
     .[[1L]]
   out
+}
+
+#' Get the start right
+#'
+#' On what line does the first token occur?
+#' @param pd A parse table.
+#' @return The line number on which the first token occurs.
+start_on_line <- function(pd) {
+  pd$line1[1]
 }
