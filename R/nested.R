@@ -48,11 +48,12 @@ compute_parse_data_nested <- function(text) {
 #' @param pd_flat A flat parse table including both terminals and non-terminals.
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
+#' @importFrom purrr map2
 nest_parse_data <- function(pd_flat) {
-  if (all(pd_flat$parent == 0)) return(pd_flat)
+  if (all(pd_flat$parent <= 0)) return(pd_flat)
   split <-
     pd_flat %>%
-    mutate_(internal = ~ (id %in% parent) | (parent == 0)) %>%
+    mutate_(internal = ~ (id %in% parent) | (parent <= 0)) %>%
     nest_("data", names(pd_flat))
 
   child <- split$data[!split$internal][[1L]]
@@ -65,8 +66,7 @@ nest_parse_data <- function(pd_flat) {
     mutate_(parent_ = ~parent) %>%
     nest_(., "child", setdiff(names(.), "parent_")) %>%
     left_join(internal, ., by = c("id" = "parent_")) %>%
-    mutate_(child = ~Map(bind_rows, child, internal_child)) %>%
-    mutate_(child = ~lapply(child, arrange_, ~line1, ~col1)) %>%
+    mutate_(child = ~map2(child, internal_child, combine_children)) %>%
     select_(~-internal_child) %>%
     select_(~short, ~everything(), ~-text, ~text)
 
