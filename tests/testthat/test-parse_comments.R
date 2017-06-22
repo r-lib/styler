@@ -14,8 +14,7 @@ test_that("comments are treated corectly", {
 
   expect_warning(test_collection("parse_comments",
                                  "with_indention",
-                                 transformer = style_text,
-                                 write_back = TRUE), NA)
+                                 transformer = style_text), NA)
 
   # top-level test with indention
 })
