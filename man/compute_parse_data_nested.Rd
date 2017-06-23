@@ -40,7 +40,7 @@ compute_parse_data_flat_enhanced()
 }
 }
 \description{
-\code{\link[utils:getParseData]{utils::getParseData()}} is used to obtain a flat parse table from \code{text}.
-Subsequently, it's representation is changed from a flat table into a
-nested parse table with \code{\link[=nest_parse_data]{nest_parse_data()}}.
+Parses \code{text} to a flat parse table and subsequently changes its
+representation into a nested parse table with
+\code{\link[=nest_parse_data]{nest_parse_data()}}.
 }

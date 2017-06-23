@@ -27,4 +27,3 @@ add_newlines <- function(n) {
 add_spaces <- function(n) {
   rep_char(" ", n)
 }
-
