@@ -16,7 +16,7 @@ indent_round <- function(pd, indent_by) {
     start <- stop <- 0
   }
   pd <- pd %>%
-    mutate(indent = ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
+    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
     select_(~indent, ~newlines, ~everything())
   pd
 }

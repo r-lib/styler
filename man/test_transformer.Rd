@@ -3,9 +3,12 @@
 \name{test_transformer}
 \alias{test_transformer}
 \alias{style_indent_round}
+\alias{style_empty}
 \title{Transforming test input with a transformer function}
 \usage{
 style_indent_round(text)
+
+style_empty(text)
 }
 \arguments{
 \item{text}{A character vector to transform.}
@@ -15,9 +18,16 @@ These functions can be used as inputs for \code{\link[=test_collection]{test_col
 \code{\link[=transform_and_check]{transform_and_check()}}.
 }
 \details{
-\code{style_indent_round} is suited for internal tests of indention based
-on round brackets.
-
 As inputs for \code{\link[=test_collection]{test_collection()}}, we can also use top-level functions such
 as \code{\link[=style_text]{style_text()}}.
 }
+\section{Functions}{
+\itemize{
+\item \code{style_indent_round}: Transformations for indention based on round
+brackets.
+
+\item \code{style_empty}: Nest and unnest \code{text} without applying any
+transformations but remove indention due to the way the serialization is
+set up.
+}}
+

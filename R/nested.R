@@ -48,11 +48,12 @@ compute_parse_data_nested <- function(text) {
 #' @param pd_flat A flat parse table including both terminals and non-terminals.
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
+#' @importFrom purrr map2
 nest_parse_data <- function(pd_flat) {
-  if (all(pd_flat$parent == 0)) return(pd_flat)
+  if (all(pd_flat$parent <= 0)) return(pd_flat)
   split <-
     pd_flat %>%
-    mutate_(internal = ~ (id %in% parent) | (parent == 0)) %>%
+    mutate_(internal = ~ (id %in% parent) | (parent <= 0)) %>%
     nest_("data", names(pd_flat))
 
   child <- split$data[!split$internal][[1L]]
@@ -65,13 +66,28 @@ nest_parse_data <- function(pd_flat) {
     mutate_(parent_ = ~parent) %>%
     nest_(., "child", setdiff(names(.), "parent_")) %>%
     left_join(internal, ., by = c("id" = "parent_")) %>%
-    mutate_(child = ~Map(bind_rows, child, internal_child)) %>%
-    mutate_(child = ~lapply(child, arrange_, ~line1, ~col1)) %>%
+    mutate_(child = ~map2(child, internal_child, combine_children)) %>%
     select_(~-internal_child) %>%
     select_(~short, ~everything(), ~-text, ~text)
 
   nest_parse_data(nested)
 }
+
+#' Combine child and internal child
+#'
+#' binds two parse tables together and arranges them so that the tokens are in
+#'   the correct order.
+#' @param child A parse table or `NULL`.
+#' @param internal_child A parse table or `NULL`.
+#' @details Essentially, this is a wrapper around [dplyr::bind_rows()], but
+#'   returns `NULL` if the result of [dplyr::bind_rows()] is a data frame with
+#'   zero rows.
+combine_children <- function(child, internal_child) {
+  bound <- bind_rows(child, internal_child)
+  if (nrow(bound) == 0) return(NULL)
+  arrange_(bound,  ~line1, ~col1)
+}
+
 
 #' Serialize a nested parse table
 #'
