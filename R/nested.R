@@ -73,6 +73,22 @@ nest_parse_data <- function(pd_flat) {
   nest_parse_data(nested)
 }
 
+#' Combine child and internal child
+#'
+#' binds two parse tables together and arranges them so that the tokens are in
+#'   the correct order.
+#' @param child A parse table or `NULL`.
+#' @param internal_child A parse table or `NULL`.
+#' @details Essentially, this is a wrapper around [dplyr::bind_rows()], but
+#'   returns `NULL` if the result of [dplyr::bind_rows()] is a data frame with
+#'   zero rows.
+combine_children <- function(child, internal_child) {
+  bound <- bind_rows(child, internal_child)
+  if (nrow(bound) == 0) return(NULL)
+  arrange_(bound,  ~line1, ~col1)
+}
+
+
 #' Serialize a nested parse table
 #'
 #' Helper function that recursively extracts terminals from a nested tibble.
