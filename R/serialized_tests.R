@@ -143,11 +143,37 @@ style_indent_round <- function(text) {
 
 
 #' @describeIn test_transformer Nest and unnest `text` without applying any
-#'   transformations but remove indention due to the way the serialization is
-#'   set up.
+#'   transformations but remove EOL spaces and indention due to the way the
+#'   serialization is set up.
 style_empty <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    visit(funs = c(create_filler)) %>%
+    visit(funs = c(create_filler, strip_eol_spaces)) %>%
+    serialize_parse_data_nested()
+}
+
+#' @describeIn test_transformer Transformations for indention based on curly
+#'   brackets only.
+style_indent_curly <- function(text) {
+  text %>%
+    compute_parse_data_nested() %>%
+    visit(funs = c(create_filler,
+                   partial(indent_curly, indent_by = 2),
+                   strip_eol_spaces)) %>%
+
+    serialize_parse_data_nested()
+}
+
+
+#' @describeIn test_transformer Transformations for indention based on curly
+#'   brackets and round brackets.
+style_indent_curly_round <- function(text) {
+  text %>%
+    compute_parse_data_nested() %>%
+    visit(funs = c(create_filler,
+                   partial(indent_curly, indent_by = 2),
+                   partial(indent_round, indent_by = 2),
+                   strip_eol_spaces)) %>%
+
     serialize_parse_data_nested()
 }
