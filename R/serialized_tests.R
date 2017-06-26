@@ -42,7 +42,7 @@ test_collection <- function(test, sub_test = NULL,
   out_items <- file.path(path, out_names)
   in_items <- file.path(path, in_names)
 
-  out_trees <- tree_from_in(in_items)
+  out_trees <- construct_tree(in_items)
 
   pwalk(list(in_items, out_items, in_names, out_names, out_trees),
        transform_and_check,
@@ -53,21 +53,22 @@ test_collection <- function(test, sub_test = NULL,
 
 #' Construct *-out.R from a *-in.R
 #'
-#' @param in_path A character vector that denotes paths to *-in.R files.
-construct_out <- function(in_path) {
-  in_path %>%
-  strsplit("-") %>%
-  map(1) %>%
-  flatten_chr() %>%
-  paste0("-out.R")
+#' Multiple *-in.R files can have the same *-out.R file since to create the
+#'   *-out.R file, everything after the first dash is replaced by *-out.R.
+#' @param in_paths A character vector that denotes paths to *-in.R files.
+#' @examples
+#' styler:::construct_out(c("path/to/file/first-in.R",
+#'  "path/to/file/first-extended-in.R"))
+construct_out <- function(in_paths) {
+  gsub("\\-.*$", "\\-out\\.R", in_paths)
 }
 
 #' Construct paths of a tree object given the paths of *-in.R files
 #'
-#' @param in_files Character vector of *-in.R files.
+#' @param in_paths Character vector of *-in.R files.
 #' @param suffix Suffix for the tree object.
-tree_from_in <- function(in_files, suffix = "_tree") {
-  gsub("\\.R$", suffix, in_files)
+construct_tree <- function(in_paths, suffix = "_tree") {
+  gsub("\\.R$", suffix, in_paths)
 }
 
 #' Transform a file an check the result

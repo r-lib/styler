@@ -4,11 +4,16 @@
 \alias{construct_out}
 \title{Construct *-out.R from a *-in.R}
 \usage{
-construct_out(in_path)
+construct_out(in_paths)
 }
 \arguments{
-\item{in_path}{A character vector that denotes paths to *-in.R files.}
+\item{in_paths}{A character vector that denotes paths to *-in.R files.}
 }
 \description{
-Construct *-out.R from a *-in.R
+Multiple *-in.R files can have the same *-out.R file since to create the
+*-out.R file, everything after the first dash is replaced by *-out.R.
+}
+\examples{
+styler:::construct_out(c("path/to/file/first-in.R",
+ "path/to/file/first-extended-in.R"))
 }
