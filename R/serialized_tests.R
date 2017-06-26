@@ -2,6 +2,7 @@
 #'
 #' Run transformations on all *-in.R files in a test directory and compare them
 #'   with their *-out.R counterpart.
+#' @inheritParams transform_and_check
 #' @param test The test to run. It corresponds to a folder name in
 #'   tests/testthat.
 #' @param sub_test A regex pattern to further reduce the amount of test files
@@ -22,6 +23,7 @@
 #' @importFrom purrr flatten_chr pwalk map
 test_collection <- function(test, sub_test = NULL,
                             write_back = FALSE,
+                            write_tree = TRUE,
                             transformer) {
   path <- rprojroot::find_testthat_root_file(test)
 
@@ -35,20 +37,38 @@ test_collection <- function(test, sub_test = NULL,
 
   if (length(in_names) < 1) stop("no items to check")
 
-  out_names <- in_names %>%
-    strsplit("-") %>%
-    map(1) %>%
-    flatten_chr() %>%
-    paste0("-out.R")
+  out_names <- construct_out(in_names)
 
   out_items <- file.path(path, out_names)
   in_items <- file.path(path, in_names)
 
-  pwalk(list(in_items, out_items, in_names, out_names),
+  out_trees <- tree_from_in(in_items)
+
+  pwalk(list(in_items, out_items, in_names, out_names, out_trees),
        transform_and_check,
-       transformer = transformer, write_back = write_back)
+       transformer = transformer,
+       write_back = write_back,
+       write_tree = write_tree)
 }
 
+#' Construct *-out.R from a *-in.R
+#'
+#' @param in_path A character vector that denotes paths to *-in.R files.
+construct_out <- function(in_path) {
+  in_path %>%
+  strsplit("-") %>%
+  map(1) %>%
+  flatten_chr() %>%
+  paste0("-out.R")
+}
+
+#' Construct paths of a tree object given the paths of *-in.R files
+#'
+#' @param in_files Character vector of *-in.R files.
+#' @param suffix Suffix for the tree object.
+tree_from_in <- function(in_files, suffix = "_tree") {
+  gsub("\\.R$", suffix, in_files)
+}
 
 #' Transform a file an check the result
 #'
@@ -60,10 +80,25 @@ test_collection <- function(test, sub_test = NULL,
 #' @param transformer A function to apply to the content of `in_item`.
 #' @param write_back Whether the results of the transformation should be written
 #'   to the output file.
+#' @param write_tree Whether or not the tree structure of the test should be
+#'   computed and written to a file.
+#' @param out_tree Name of tree file if written out.
+#' @importFrom readr write_tsv
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
-                                transformer, write_back) {
-  transformed <- utf8::read_lines_enc(in_item) %>%
+                                transformer, write_back,
+                                write_tree = FALSE,
+                                out_tree = "_tree") {
+
+  read_in <- utf8::read_lines_enc(in_item)
+  if (write_tree) {
+    compute_parse_data_nested(read_in) %>%
+      visit(c(create_filler)) %>%
+      create_node_from_nested_root() %>%
+      as.data.frame() %>%
+      write_tsv(out_tree)
+  }
+  transformed <- read_in %>%
     transformer()
   transformed <- suppressMessages(utf8::transform_lines_enc(out_item,
     function(x) transformed,

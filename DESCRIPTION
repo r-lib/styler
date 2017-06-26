@@ -13,7 +13,8 @@ Imports:
     tidyr,
     purrr,
     magrittr,
-    pkgload
+    pkgload,
+    readr
 Suggests:
     data.tree,
     here,
