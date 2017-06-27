@@ -4,7 +4,8 @@
 \alias{test_collection}
 \title{Run a collection of tests}
 \usage{
-test_collection(test, sub_test = NULL, write_back = FALSE, transformer)
+test_collection(test, sub_test = NULL, write_back = FALSE,
+  write_tree = TRUE, transformer)
 }
 \arguments{
 \item{test}{The test to run. It corresponds to a folder name in
@@ -16,6 +17,9 @@ names in tests/testthat. \code{NULL} matches all files.}
 
 \item{write_back}{Whether the results of the transformation should be written
 to the output file.}
+
+\item{write_tree}{Whether or not the tree structure of the test should be
+computed and written to a file.}
 
 \item{transformer}{A function to apply to the content of \code{in_item}.}
 }

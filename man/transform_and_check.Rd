@@ -5,7 +5,8 @@
 \title{Transform a file an check the result}
 \usage{
 transform_and_check(in_item, out_item, in_name = in_item,
-  out_name = out_item, transformer, write_back)
+  out_name = out_item, transformer, write_back, write_tree = FALSE,
+  out_tree = "_tree")
 }
 \arguments{
 \item{in_item}{An path to an file to transform.}
@@ -20,6 +21,11 @@ transform_and_check(in_item, out_item, in_name = in_item,
 
 \item{write_back}{Whether the results of the transformation should be written
 to the output file.}
+
+\item{write_tree}{Whether or not the tree structure of the test should be
+computed and written to a file.}
+
+\item{out_tree}{Name of tree file if written out.}
 }
 \description{
 Transform an file and check whether it is identical to a reference.
