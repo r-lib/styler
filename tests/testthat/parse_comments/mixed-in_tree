@@ -1,5 +1,4 @@
-levelName
-xxx                                         
+ROOT (token: short_text [newlines/spaces])  
  ¦--COMMENT: # A f [1/0]                    
  °--expr:  [0/0]                            
      ¦--expr:  [0/1]                        

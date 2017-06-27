@@ -1,5 +1,4 @@
-levelName
-xxx                                       
+ROOT (token: short_text [newlines/spaces])
  °--expr:  [0/0]                          
      ¦--'(': ( [0/0]                      
      ¦--expr:  [1/0]                      

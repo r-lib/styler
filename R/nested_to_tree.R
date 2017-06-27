@@ -1,3 +1,15 @@
+#' Create a tree from text
+#'
+#' Create a tree representation from a text.
+#' @param text A character vector.
+#' @return A data frame.
+create_tree <- function(text) {
+  compute_parse_data_nested(text) %>%
+    visit(c(styler:::create_filler)) %>%
+    create_node_from_nested_root() %>%
+    as.data.frame()
+}
+
 #' Convert a nested tibble into a node tree
 #'
 #' This function is convenient to display all nesting levels of a nested tibble
@@ -11,7 +23,7 @@
 #'   styler:::visit(c(styler:::create_filler)) %>%
 #'   styler:::create_node_from_nested_root()
 create_node_from_nested_root <- function(pd_nested) {
-  n <- data.tree::Node$new("xxx")
+  n <- data.tree::Node$new("ROOT (token: short_text [newlines/spaces])")
   create_node_from_nested(pd_nested, n)
   n
 }

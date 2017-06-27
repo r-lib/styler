@@ -93,11 +93,8 @@ transform_and_check <- function(in_item, out_item,
 
   read_in <- utf8::read_lines_enc(in_item)
   if (write_tree) {
-    compute_parse_data_nested(read_in) %>%
-      visit(c(create_filler)) %>%
-      create_node_from_nested_root() %>%
-      as.data.frame() %>%
-      write_tsv(out_tree)
+    create_tree(read_in) %>%
+      write_tsv(out_tree, col_names = FALSE)
   }
   transformed <- read_in %>%
     transformer()
