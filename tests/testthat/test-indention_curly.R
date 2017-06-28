@@ -30,4 +30,8 @@ test_that(paste("complete styling via top level api is correct",
                                  "multi_line_curly_round_spacing",
                                  transformer = style_text), NA)
 
+  expect_warning(test_collection("indention_curly_brackets",
+                                 "multi_line_curly_while_for_if_fun",
+                                 transformer = style_text), NA)
+
 })

@@ -1,9 +1,9 @@
-b <- function(x){ # FIXME indent before {
+b <- function(x) {
   x <- c(1,
     2 + 3,
     sin(pi))
 
-  if (x > 10){ # FIXME indent before {
+  if (x > 10) {
     return("done")
   }
 }
