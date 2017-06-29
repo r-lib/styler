@@ -4,11 +4,17 @@
 \alias{test_transformer}
 \alias{style_indent_round}
 \alias{style_empty}
+\alias{style_indent_curly}
+\alias{style_indent_curly_round}
 \title{Transforming test input with a transformer function}
 \usage{
 style_indent_round(text)
 
 style_empty(text)
+
+style_indent_curly(text)
+
+style_indent_curly_round(text)
 }
 \arguments{
 \item{text}{A character vector to transform.}
@@ -27,7 +33,13 @@ as \code{\link[=style_text]{style_text()}}.
 brackets.
 
 \item \code{style_empty}: Nest and unnest \code{text} without applying any
-transformations but remove indention due to the way the serialization is
-set up.
+transformations but remove EOL spaces and indention due to the way the
+serialization is set up.
+
+\item \code{style_indent_curly}: Transformations for indention based on curly
+brackets only.
+
+\item \code{style_indent_curly_round}: Transformations for indention based on curly
+brackets and round brackets.
 }}
 
