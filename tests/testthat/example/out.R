@@ -124,7 +124,7 @@ test <- function() {
 
   nested(
     function_call(with), # a comment and
-    many #more
+    many # more
     , first_level_args)
 
   difficult(nested(

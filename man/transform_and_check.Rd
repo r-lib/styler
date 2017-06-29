@@ -6,7 +6,7 @@
 \usage{
 transform_and_check(in_item, out_item, in_name = in_item,
   out_name = out_item, transformer, write_back, write_tree = FALSE,
-  out_tree = "_tree")
+  out_tree = "_tree", ...)
 }
 \arguments{
 \item{in_item}{An path to an file to transform.}
@@ -26,6 +26,8 @@ to the output file.}
 computed and written to a file.}
 
 \item{out_tree}{Name of tree file if written out.}
+
+\item{...}{Parameters passed to transformer function.}
 }
 \description{
 Transform an file and check whether it is identical to a reference.

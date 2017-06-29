@@ -5,7 +5,7 @@
 \title{Run a collection of tests}
 \usage{
 test_collection(test, sub_test = NULL, write_back = FALSE,
-  write_tree = TRUE, transformer)
+  write_tree = TRUE, transformer, ...)
 }
 \arguments{
 \item{test}{The test to run. It corresponds to a folder name in
@@ -22,6 +22,8 @@ to the output file.}
 computed and written to a file.}
 
 \item{transformer}{A function to apply to the content of \code{in_item}.}
+
+\item{...}{Parameters passed to transformer function.}
 }
 \description{
 Run transformations on all *-in.R files in a test directory and compare them

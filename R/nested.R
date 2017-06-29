@@ -47,6 +47,24 @@ tokenize <- function(text) {
   parse_data
 }
 
+#' Helper for setting spaces
+#'
+#' @param spaces_after_prefix An integer vector with the number of spaces
+#'   after the prefix.
+#' @param force_one Whether spaces_after_prefix should be set to one in all
+#'   cases.
+#' @return An integer vector of length spaces_after_prefix, which is either
+#'   one (if `force_one = TRUE`) or `space_after_prefix` with all values
+#'   below one set to one.
+set_spaces <- function(spaces_after_prefix, force_one) {
+  if (force_one) {
+    n_of_spaces <- rep(1, length(spaces_after_prefix))
+  } else {
+    n_of_spaces <- if_else(spaces_after_prefix < 1L, 1L, spaces_after_prefix)
+  }
+  n_of_spaces
+}
+
 
 #' Nest a flat parse table
 #'
