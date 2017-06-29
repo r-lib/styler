@@ -11,7 +11,7 @@ get_transformers_flat(strict = TRUE, start_comments_with_one_space = FALSE)
 or not so strict transformer functions should be returned.}
 
 \item{start_comments_with_one_space}{Whether or not comments should start
-with only one space (see \link{start_comments_with_space}).}
+with only one space (see \code{\link[=start_comments_with_space]{start_comments_with_space()}}).}
 }
 \value{
 A list of transformer functions that operate on flat parse

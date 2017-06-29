@@ -109,12 +109,12 @@ set_space_between_levels <- function(pd_flat) {
 #' Start comments with a space
 #'
 #' Forces comments to start with a space, that is, after the regular expression
-#'   "#+'*", at least one space must follow. Multiple spaces may be legit for
+#'   "^#+'*", at least one space must follow. Multiple spaces may be legit for
 #'   indention in some situations.
 #'
 #' @param pd A parse table.
 #' @param force_one Wheter or not to force one space or allow multiple spaces
-#'   after the regex "#+'*".
+#'   after the regex "^#+'*".
 start_comments_with_space <- function(pd, force_one = FALSE) {
   comments <- pd %>%
     filter(token == "COMMENT")

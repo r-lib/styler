@@ -15,7 +15,7 @@ or not so strict transformer functions should be returned.}
 operators such as '('.}
 
 \item{start_comments_with_one_space}{Whether or not comments should start
-with only one space (see \link{start_comments_with_space}).}
+with only one space (see \code{\link[=start_comments_with_space]{start_comments_with_space()}}).}
 }
 \description{
 Similar to \code{\link[=get_transformers_flat]{get_transformers_flat()}}, but additionally, returns some

@@ -19,7 +19,7 @@ get_transformers <- function(flat, ...) {
 #' @param strict A logical value indicating whether a set of strict
 #'   or not so strict transformer functions should be returned.
 #' @param start_comments_with_one_space Whether or not comments should start
-#'   with only one space (see [start_comments_with_space]).
+#'   with only one space (see [start_comments_with_space()]).
 #' @return A list of transformer functions that operate on flat parse
 #'   tables.
 #' @export
