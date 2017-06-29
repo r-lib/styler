@@ -24,7 +24,8 @@
 test_collection <- function(test, sub_test = NULL,
                             write_back = FALSE,
                             write_tree = TRUE,
-                            transformer) {
+                            transformer,
+                            ...) {
   path <- rprojroot::find_testthat_root_file(test)
 
   pattern <- if_else(!is.null(sub_test),
@@ -48,7 +49,8 @@ test_collection <- function(test, sub_test = NULL,
        transform_and_check,
        transformer = transformer,
        write_back = write_back,
-       write_tree = write_tree)
+       write_tree = write_tree,
+       ...)
 }
 
 #' Construct *-out.R from a *-in.R
@@ -83,13 +85,14 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #'   to the output file.
 #' @param write_tree Whether or not the tree structure of the test should be
 #'   computed and written to a file.
+#' @param ... Parameters passed to transformer function.
 #' @param out_tree Name of tree file if written out.
 #' @importFrom utils write.table
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
                                 transformer, write_back,
                                 write_tree = FALSE,
-                                out_tree = "_tree") {
+                                out_tree = "_tree", ...) {
 
   read_in <- utf8::read_lines_enc(in_item)
   if (write_tree) {
@@ -97,7 +100,7 @@ transform_and_check <- function(in_item, out_item,
       write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE)
   }
   transformed <- read_in %>%
-    transformer()
+    transformer(...)
   transformed <- suppressMessages(utf8::transform_lines_enc(out_item,
     function(x) transformed,
     write_back = write_back))
