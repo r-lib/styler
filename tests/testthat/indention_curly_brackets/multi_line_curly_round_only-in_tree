@@ -31,7 +31,7 @@ ROOT (token: short_text [newlines/spaces])
              ¦   ¦   ¦--'{': { [1/4]                  
              ¦   ¦   ¦--expr:  [1/16]                 
              ¦   ¦   ¦   ¦--expr:  [0/0]              
-"             ¦   ¦   ¦   ¦   °--STR_CONST: ""done [0/0]"
+             ¦   ¦   ¦   ¦   °--STR_CONST: "done [0/0]
              ¦   ¦   ¦   ¦--'(': ( [0/0]              
              ¦   ¦   ¦   °--')': ) [0/0]              
              ¦   ¦   °--'}': } [0/0]                  

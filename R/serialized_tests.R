@@ -84,7 +84,7 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param write_tree Whether or not the tree structure of the test should be
 #'   computed and written to a file.
 #' @param out_tree Name of tree file if written out.
-#' @importFrom readr write_tsv
+#' @importFrom utils write.table
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
                                 transformer, write_back,
@@ -94,7 +94,7 @@ transform_and_check <- function(in_item, out_item,
   read_in <- utf8::read_lines_enc(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
-      write_tsv(out_tree, col_names = FALSE)
+      write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE)
   }
   transformed <- read_in %>%
     transformer()
