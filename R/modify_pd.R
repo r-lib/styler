@@ -21,6 +21,22 @@ indent_round <- function(pd, indent_by) {
   pd
 }
 
+
+#' @rdname update_indention
+indent_curly <- function(pd, indent_by) {
+  opening <- which(pd$token == "'{'")
+  if (length(opening) > 0) {
+    start <- opening + 1
+    stop <- nrow(pd) - 1
+  } else {
+    start <- stop <- 0
+  }
+  pd <- pd %>%
+    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
+    select_(~indent, ~newlines, ~everything())
+  pd
+}
+
 #' Strip EOL spaces
 #'
 #' Remove end-of-line spaces.

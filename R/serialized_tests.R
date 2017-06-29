@@ -84,7 +84,7 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param write_tree Whether or not the tree structure of the test should be
 #'   computed and written to a file.
 #' @param out_tree Name of tree file if written out.
-#' @importFrom readr write_tsv
+#' @importFrom utils write.table
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
                                 transformer, write_back,
@@ -94,7 +94,7 @@ transform_and_check <- function(in_item, out_item,
   read_in <- utf8::read_lines_enc(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
-      write_tsv(out_tree, col_names = FALSE)
+      write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE)
   }
   transformed <- read_in %>%
     transformer()
@@ -143,11 +143,37 @@ style_indent_round <- function(text) {
 
 
 #' @describeIn test_transformer Nest and unnest `text` without applying any
-#'   transformations but remove indention due to the way the serialization is
-#'   set up.
+#'   transformations but remove EOL spaces and indention due to the way the
+#'   serialization is set up.
 style_empty <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    visit(funs = c(create_filler)) %>%
+    visit(funs = c(create_filler, strip_eol_spaces)) %>%
+    serialize_parse_data_nested()
+}
+
+#' @describeIn test_transformer Transformations for indention based on curly
+#'   brackets only.
+style_indent_curly <- function(text) {
+  text %>%
+    compute_parse_data_nested() %>%
+    visit(funs = c(create_filler,
+                   partial(indent_curly, indent_by = 2),
+                   strip_eol_spaces)) %>%
+
+    serialize_parse_data_nested()
+}
+
+
+#' @describeIn test_transformer Transformations for indention based on curly
+#'   brackets and round brackets.
+style_indent_curly_round <- function(text) {
+  text %>%
+    compute_parse_data_nested() %>%
+    visit(funs = c(create_filler,
+                   partial(indent_curly, indent_by = 2),
+                   partial(indent_round, indent_by = 2),
+                   strip_eol_spaces)) %>%
+
     serialize_parse_data_nested()
 }

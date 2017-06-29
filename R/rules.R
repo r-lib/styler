@@ -90,3 +90,19 @@ set_space_after_comma <- function(pd_flat) {
   pd_flat$spaces[comma_after & (pd_flat$newlines == 0L)] <- 1L
   pd_flat
 }
+
+#' Set space between levels of nesting
+#'
+#' With the nested approach, certain rules do not have an effect anymore because
+#'   of the nature of the nested structure. Setting spacing before curly
+#'   brackets in for / if / while statements and function declarations will be
+#'   such a case since a curly bracket is always at the first position in a
+#'   parse table, so spacing cannot be set after the previous token.
+#' @param pd_flat A flat parse table.
+set_space_between_levels <- function(pd_flat) {
+  if (pd_flat$token[1] %in% c("FUNCTION", "FOR", "IF", "WHILE")) {
+    pd_flat$spaces[nrow(pd_flat) - 1] <- 1L
+  }
+  pd_flat
+}
+
