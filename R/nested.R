@@ -41,10 +41,59 @@ compute_parse_data_nested <- function(text) {
 #' [utils::getParseData()] is used to obtain a flat parse table from `text`.
 #' @param text A character vector.
 #' @return A flat parse table
+#' @importFrom tidyr separate
 tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA))
   parse_data
+}
+
+#' Start comments with a space
+#'
+#' Forces comments to start with a space, that is, after the regular expression
+#'   "#+'*", at least one space must follow. Multiple spaces may be legit for
+#'   indention in some situations.
+#'
+#' @param pd A parse table.
+#' @param force_one Wheter or not to force one space or allow multiple spaces
+#'   after the regex "#+'*".
+start_comments_with_space <- function(pd, force_one = FALSE) {
+  comments <- pd %>%
+    filter(token == "COMMENT")
+
+  if (nrow(comments) == 0) return(pd)
+
+  non_comments <- pd %>%
+    filter(token != "COMMENT")
+
+  comments <- comments %>%
+    extract(text, c("prefix", "space_after_prefix", "text"),
+            regex = "^(#+'*)( *)(.*)$") %>%
+    mutate(space_after_prefix = nchar(space_after_prefix),
+           space_after_prefix = set_spaces(space_after_prefix, force_one),
+           text = paste0(prefix, rep_char(" ", space_after_prefix), text),
+           short = substr(text, 1, 5)) %>%
+    select(-space_after_prefix, -prefix)
+  bind_rows(comments, non_comments) %>%
+    arrange(line1, col1)
+}
+
+#' Helper for setting spaces
+#'
+#' @param spaces_after_prefix An integer vector with the number of spaces
+#'   after the prefix.
+#' @param force_one Whether spaces_after_prefix should be set to one in all
+#'   cases.
+#' @return An integer vector of length spaces_after_prefix, which is either
+#'   one (if `force_one = TRUE`) or `space_after_prefix` with all values
+#'   below one set to one.
+set_spaces <- function(spaces_after_prefix, force_one) {
+  if (force_one) {
+    n_of_spaces <- rep(1, length(spaces_after_prefix))
+  } else {
+    n_of_spaces <- if_else(spaces_after_prefix < 1L, 1L, spaces_after_prefix)
+  }
+  n_of_spaces
 }
 
 
