@@ -41,7 +41,6 @@ compute_parse_data_nested <- function(text) {
 #' [utils::getParseData()] is used to obtain a flat parse table from `text`.
 #' @param text A character vector.
 #' @return A flat parse table
-#' @importFrom tidyr separate
 tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA))
