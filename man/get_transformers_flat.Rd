@@ -4,11 +4,14 @@
 \alias{get_transformers_flat}
 \title{Get the transformer functions for flat styling}
 \usage{
-get_transformers_flat(strict = TRUE)
+get_transformers_flat(strict = TRUE, start_comments_with_one_space = FALSE)
 }
 \arguments{
 \item{strict}{A logical value indicating whether a set of strict
 or not so strict transformer functions should be returned.}
+
+\item{start_comments_with_one_space}{Whether or not comments should start
+with only one space (see \link{start_comments_with_space}).}
 }
 \value{
 A list of transformer functions that operate on flat parse
