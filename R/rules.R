@@ -106,3 +106,11 @@ set_space_between_levels <- function(pd_flat) {
   pd_flat
 }
 
+
+set_space_before_comments <- function(pd_flat) {
+  comment_after <- pd_flat$token == "COMMENT"
+  comment_before <- lead(comment_after, default = FALSE)
+  pd_flat$spaces[comment_before & (pd_flat$newlines == 0L)] <- 1L
+  pd_flat
+
+}

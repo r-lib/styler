@@ -60,6 +60,7 @@ get_transformers_nested <- function(strict = TRUE,
     partial(indent_curly, indent_by = indent_by),
     strip_eol_spaces,
     get_transformers_flat(strict, start_comments_with_one_space),
+    set_space_before_comments,
     set_space_between_levels
     )
 }
