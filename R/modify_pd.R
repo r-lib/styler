@@ -8,8 +8,9 @@ NULL
 
 #' @rdname update_indention
 indent_round <- function(pd, indent_by) {
-  opening <- which(pd$token == "'('")
-  if (length(opening) > 0) {
+  indention_needed <- needs_indention(pd, token = "'('")
+  if (indention_needed) {
+    opening <- which(pd$token == "'('")
     start <- opening + 1
     stop <- nrow(pd) - 1
   } else {
@@ -21,11 +22,67 @@ indent_round <- function(pd, indent_by) {
   pd
 }
 
+#' Check whether indention is needed
+#'
+#' @param pd A parse table.
+#' @param token Which token the check should be based on.
+#' @return returns `TRUE` if indention is needed, `FALSE` otherwise. Indention
+#'   is needed:
+#'     * if `token` occurs in `pd`.
+#'     * if there is no child that starts on the same line as `token` and
+#'       indents.
+#' @return `TRUE` if indention is needed, `FALSE` otherwise.
+needs_indention <- function(pd, token = "'('") {
+  opening <- which(pd$token %in% token)
+  if (length(opening) > 0 && !child_indents(pd, opening, c("'('", "'{'"))) {
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
+#' Check whether a child will indent
+#'
+#' @param pd A parse table.
+#' @param opening The row number of the opening token in the parse table.
+#' @return Returns `TRUE` if `pd` has at least one child that indents starting
+#'   on the same line as the opening token, `FALSE` otherwise.
+#' @param token On which token the indention check should be based on.
+#' @importFrom purrr map_lgl
+child_indents <- function(pd, opening, token) {
+  if (is.null(pd$child)) return(FALSE)
+  opening_line <- pd$line1[opening]
+  pd <- pd %>%
+    filter(!terminal, line1 == opening_line)
+  children_indent <- map_lgl(pd$child, pd_has_token, token)
+  if (any(children_indent)) {
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
+#' Check whether a parse table contains a token
+#'
+#' @param pd A parse table.
+#' @param token The token for which it should be checked whether it is in the
+#'   parse table.
+#' @return `TRUE` if the token is in the parse table, `FALSE` otherwise.
+pd_has_token <- function(pd, token) {
+  has_indention_token <- token %in% pd$token
+  if (any(has_indention_token)) {
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
 
 #' @rdname update_indention
 indent_curly <- function(pd, indent_by) {
-  opening <- which(pd$token == "'{'")
-  if (length(opening) > 0) {
+  indention_needed <- needs_indention(pd, token = "'{'")
+  if (indention_needed) {
+    opening <- which(pd$token == "'{'")
     start <- opening + 1
     stop <- nrow(pd) - 1
   } else {
