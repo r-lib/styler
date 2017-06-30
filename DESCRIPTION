@@ -1,18 +1,20 @@
 Package: styler
 Title: Non-invasive Pretty Printing of R code
-Version: 0.0-4
+Version: 0.0-5
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
 Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
-    rprojroot,
-    utf8,
-    withr,
     dplyr,
+    magrittr,
+    pkgload,
+    purrr,
+    readr,
+    rprojroot,
     tibble,
     tidyr,
-    purrr,
-    magrittr
+    utf8,
+    withr
 Suggests:
     data.tree,
     here,
@@ -20,11 +22,12 @@ Suggests:
     rmarkdown,
     testthat
 Remotes:
+    r-lib/pkgload,
     krlmlr/utf8
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Date: 2017-06-15
+Date: 2017-06-30
 BugReports: https://github.com/krlmlr/styler/issues
 URL: https://github.com/krlmlr/styler, http://krlmlr.github.io/styler
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "pkgapi::api_roclet"))

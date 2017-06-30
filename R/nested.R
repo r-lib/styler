@@ -1,8 +1,8 @@
 #' Obtain a nested parse table from a character vector
 #'
-#' [utils::getParseData()] is used to obtain a flat parse table from `text`.
-#'   Subsequentially, it's representation is changed from a flat table into a
-#'   nested parse table with [nest_parse_data()].
+#' Parses `text` to a flat parse table and subsequently changes its
+#'   representation into a nested parse table with
+#'   [nest_parse_data()].
 #' @param text A character vector to parse.
 #' @return A nested parse table. Apart from the columns provided by
 #'   `utils::getParseData()`, a column "short" with the first five characters of
@@ -25,8 +25,7 @@
 #'     - Function definitions
 #' - Remove `includeText = TRUE`
 compute_parse_data_nested <- function(text) {
-  parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- tbl_df(utils::getParseData(parsed, includeText = TRUE))
+  parse_data <- tokenize(text)
   pd_nested <-
     parse_data %>%
     mutate_(child = ~rep(list(NULL), length(text))) %>%
@@ -36,6 +35,36 @@ compute_parse_data_nested <- function(text) {
 
   pd_nested
 }
+
+#' Obtain token table from text
+#'
+#' [utils::getParseData()] is used to obtain a flat parse table from `text`.
+#' @param text A character vector.
+#' @return A flat parse table
+tokenize <- function(text) {
+  parsed <- parse(text = text, keep.source = TRUE)
+  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA))
+  parse_data
+}
+
+#' Helper for setting spaces
+#'
+#' @param spaces_after_prefix An integer vector with the number of spaces
+#'   after the prefix.
+#' @param force_one Whether spaces_after_prefix should be set to one in all
+#'   cases.
+#' @return An integer vector of length spaces_after_prefix, which is either
+#'   one (if `force_one = TRUE`) or `space_after_prefix` with all values
+#'   below one set to one.
+set_spaces <- function(spaces_after_prefix, force_one) {
+  if (force_one) {
+    n_of_spaces <- rep(1, length(spaces_after_prefix))
+  } else {
+    n_of_spaces <- if_else(spaces_after_prefix < 1L, 1L, spaces_after_prefix)
+  }
+  n_of_spaces
+}
+
 
 #' Nest a flat parse table
 #'
@@ -48,11 +77,12 @@ compute_parse_data_nested <- function(text) {
 #' @param pd_flat A flat parse table including both terminals and non-terminals.
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
+#' @importFrom purrr map2
 nest_parse_data <- function(pd_flat) {
-  if (nrow(pd_flat) <= 1) return(pd_flat)
+  if (all(pd_flat$parent <= 0)) return(pd_flat)
   split <-
     pd_flat %>%
-    mutate_(internal = ~id %in% parent) %>%
+    mutate_(internal = ~ (id %in% parent) | (parent <= 0)) %>%
     nest_("data", names(pd_flat))
 
   child <- split$data[!split$internal][[1L]]
@@ -65,29 +95,28 @@ nest_parse_data <- function(pd_flat) {
     mutate_(parent_ = ~parent) %>%
     nest_(., "child", setdiff(names(.), "parent_")) %>%
     left_join(internal, ., by = c("id" = "parent_")) %>%
-    mutate_(child = ~Map(bind_rows, child, internal_child)) %>%
-    mutate_(child = ~lapply(child, arrange_, ~line1, ~col1)) %>%
+    mutate_(child = ~map2(child, internal_child, combine_children)) %>%
     select_(~-internal_child) %>%
     select_(~short, ~everything(), ~-text, ~text)
 
   nest_parse_data(nested)
 }
 
-#' Enrich nested parse table with space and linebreak information
+#' Combine child and internal child
 #'
-#' Uses [create_filler()] in a recursion add space and line break information
-#'   separately on every level of nesting.
-#' @param pd_nested A nested parse table.
-#' @return A nested parse table with two new columns: newlines and spaces.
-#' @seealso [create_filler()]
-#' @importFrom purrr map
-create_filler_nested <- function(pd_nested) {
-  if (is.null(pd_nested$child)) return()
-  pd_nested <- pd_nested %>%
-    create_filler() %>%
-    mutate(child = map(child, create_filler_nested)) %>%
-    select_(~spaces, ~newlines, ~lag_newlines, ~short, ~everything())
+#' binds two parse tables together and arranges them so that the tokens are in
+#'   the correct order.
+#' @param child A parse table or `NULL`.
+#' @param internal_child A parse table or `NULL`.
+#' @details Essentially, this is a wrapper around [dplyr::bind_rows()], but
+#'   returns `NULL` if the result of [dplyr::bind_rows()] is a data frame with
+#'   zero rows.
+combine_children <- function(child, internal_child) {
+  bound <- bind_rows(child, internal_child)
+  if (nrow(bound) == 0) return(NULL)
+  arrange_(bound,  ~line1, ~col1)
 }
+
 
 #' Serialize a nested parse table
 #'
@@ -100,22 +129,22 @@ create_filler_nested <- function(pd_nested) {
 #' @importFrom purrr pmap
 serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
   out <- pmap(list(pd_nested$terminal, pd_nested$text, pd_nested$child,
-             pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent),
-           function(terminal, text, child, spaces, lag_newlines, indent) {
-             total_indent <- pass_indent + indent
-             preceding_linebreak <- if_else(lag_newlines > 0, 1, 0)
-             if (terminal) {
-               c(add_newlines(lag_newlines),
-                 add_spaces(total_indent * preceding_linebreak),
-                 text,
-                 add_spaces(spaces))
-             } else {
-               c(add_newlines(lag_newlines),
-                 add_spaces(total_indent * preceding_linebreak),
-                 serialize_parse_data_nested_helper(child, total_indent),
-                 add_spaces(spaces))
-             }
-        }
+                   pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent),
+              function(terminal, text, child, spaces, lag_newlines, indent) {
+                total_indent <- pass_indent + indent
+                preceding_linebreak <- if_else(lag_newlines > 0, 1, 0)
+                if (terminal) {
+                  c(add_newlines(lag_newlines),
+                    add_spaces(total_indent * preceding_linebreak),
+                    text,
+                    add_spaces(spaces))
+                } else {
+                  c(add_newlines(lag_newlines),
+                    add_spaces(total_indent * preceding_linebreak),
+                    serialize_parse_data_nested_helper(child, total_indent),
+                    add_spaces(spaces))
+                }
+              }
   )
   out
 }
@@ -127,9 +156,20 @@ serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
 #'   information.
 #' @return A character string.
 serialize_parse_data_nested <- function(pd_nested) {
-  raw <- serialize_parse_data_nested_helper(pd_nested, pass_indent = 0) %>%
+  out <- c(add_newlines(start_on_line(pd_nested) - 1),
+           serialize_parse_data_nested_helper(pd_nested, pass_indent = 0)) %>%
     unlist() %>%
     paste0(collapse = "") %>%
     strsplit("\n", fixed = TRUE) %>%
     .[[1L]]
+  out
+}
+
+#' Get the start right
+#'
+#' On what line does the first token occur?
+#' @param pd A parse table.
+#' @return The line number on which the first token occurs.
+start_on_line <- function(pd) {
+  pd$line1[1]
 }

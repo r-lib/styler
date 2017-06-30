@@ -4,14 +4,21 @@
 \alias{make_transformer}
 \title{Closure to return a transformer function}
 \usage{
-make_transformer(transformers)
+make_transformer(transformers, flat)
 }
 \arguments{
-\item{transformers}{A list of transformer functions that operate on parse
-tables.}
+\item{transformers}{A list of transformer functions that operate on flat
+parse tables.}
+
+\item{flat}{Whether to do the styling with a flat approach or with a nested
+approach.}
 }
 \description{
 This function takes a list of transformer functions as input and
 returns a function that can be applied to character strings
 that should be transformed.
+}
+\seealso{
+Other make transformers: \code{\link{make_transformer_flat}},
+  \code{\link{make_transformer_nested}}
 }

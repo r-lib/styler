@@ -1,3 +1,15 @@
+#' Create a tree from text
+#'
+#' Create a tree representation from a text.
+#' @param text A character vector.
+#' @return A data frame.
+create_tree <- function(text) {
+  compute_parse_data_nested(text) %>%
+    visit(c(styler:::create_filler)) %>%
+    create_node_from_nested_root() %>%
+    as.data.frame()
+}
+
 #' Convert a nested tibble into a node tree
 #'
 #' This function is convenient to display all nesting levels of a nested tibble
@@ -8,10 +20,10 @@
 #' library("magrittr")
 #' code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 #' l1 <- styler:::compute_parse_data_nested(code) %>%
-#'   styler:::create_filler_nested() %>%
+#'   styler:::visit(c(styler:::create_filler)) %>%
 #'   styler:::create_node_from_nested_root()
 create_node_from_nested_root <- function(pd_nested) {
-  n <- data.tree::Node$new("xxx")
+  n <- data.tree::Node$new("ROOT (token: short_text [newlines/spaces])")
   create_node_from_nested(pd_nested, n)
   n
 }
@@ -20,7 +32,7 @@ create_node_from_nested_root <- function(pd_nested) {
 #'
 #' @inheritParams create_node_from_nested_root
 #' @param parent The parent of the node to be created.
-#' @importFrom purrr map2
+#' @importFrom purrr map2 map
 create_node_from_nested <- function(pd_nested, parent) {
   if (is.null(pd_nested))
     return()

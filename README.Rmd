@@ -18,18 +18,36 @@ knitr::opts_chunk$set(
 # styler
 
 [![Build Status](https://travis-ci.org/krlmlr/styler.svg?branch=master)](https://travis-ci.org/krlmlr/styler)
-[![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/krlmlr/styler?branch=master&svg=true)](https://ci.appveyor.com/project/lorenzwalthert/styler)
+[![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 
-The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to general formatting conventions.
+The goal of styler is to provide non-invasive pretty-printing of R source code 
+while adhering to the [tidyverse](https://github.com/tidyverse/style) formatting 
+rules. Support for custom style guides is planned.
 
-## Dirty source file
-
+You can style a simple character vector of code with `style_text()`, a directory 
+with `style_src()`or a whole R package with `style_pkg()`.
 ```{r echo=FALSE, message=FALSE}
 devtools::load_all()
 #knitr::opts_chunk$set(comment = NA)
 ```
 
+
+```{r}
+ugly_code <- "a<-function( x){1+1}           "
+style_text(ugly_code)
+
+```
+
+You can find more information on the wiki of [Google Summer of Code 2017](https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting) 
+or check out the [pkgdown](https://krlmlr.github.io/styler/) page.
+
+In the following, we present a dirty file and how it is styled with styler. 
+The file can either be tidied, which is a less strict form of styling with an 
+emphasis on preserving the programmer's intentions - or cleaned, which means to 
+strictly apply the style guide at hand.
+
+## Dirty source file
 
 ```{r}
 print_code <- function(x) {

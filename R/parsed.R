@@ -11,8 +11,7 @@
 #'   vector, since `compute_parse_data_flat_enhanced()` turns a character vector
 #'   into a parse table.
 compute_parse_data_flat_enhanced <- function(text) {
-  parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- tbl_df(utils::getParseData(parsed))
+  parse_data <- tokenize(text)
   pd_flat <- enhance_parse_data(parse_data)
   pd_flat
 }
@@ -105,7 +104,6 @@ serialize_parse_data_flat <- function(pd_flat) {
 #' @param pd_flat A parse table.
 #' @return A parse table with two three columns: lag_newlines, newlines and
 #'   spaces.
-#' @seealso [create_filler_nested()]
 create_filler <- function(pd_flat) {
   ret <-
     pd_flat %>%
@@ -115,7 +113,8 @@ create_filler <- function(pd_flat) {
       newlines = ~line3 - line2,
       lag_newlines = ~lag(newlines, default = 0),
       col2_nl = ~if_else(newlines > 0L, 0L, col2),
-      spaces = ~col3 - col2_nl - 1L
+      spaces = ~col3 - col2_nl - 1L,
+      indent = 0
     ) %>%
     select_(~-line3, ~-col3, ~-col2_nl)
 
