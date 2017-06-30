@@ -16,7 +16,7 @@ returns \code{TRUE} if indention is needed, \code{FALSE} otherwise. Indention
 is needed:
 * if \code{token} occurs in \code{pd}.
 * if there is no child that starts on the same line as \code{token} and
-indents.
+"opens" indention without closing it on this line.
 
 \code{TRUE} if indention is needed, \code{FALSE} otherwise.
 }

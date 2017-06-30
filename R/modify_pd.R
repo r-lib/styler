@@ -30,7 +30,7 @@ indent_round <- function(pd, indent_by) {
 #'   is needed:
 #'     * if `token` occurs in `pd`.
 #'     * if there is no child that starts on the same line as `token` and
-#'       indents.
+#'       "opens" indention without closing it on this line.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
 needs_indention <- function(pd, token = "'('") {
   opening <- which(pd$token %in% token)
@@ -53,7 +53,8 @@ child_indents <- function(pd, opening, token) {
   if (is.null(pd$child)) return(FALSE)
   opening_line <- pd$line1[opening]
   pd <- pd %>%
-    filter(!terminal, line1 == opening_line)
+    filter(!terminal, line1 == opening_line, line2 != opening_line)
+  if (nrow(pd) == 0) return(FALSE)
   children_indent <- map_lgl(pd$child, pd_has_token, token)
   if (any(children_indent)) {
     TRUE
