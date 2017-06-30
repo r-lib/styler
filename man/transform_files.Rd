@@ -4,7 +4,7 @@
 \alias{transform_files}
 \title{Transform files with transformer functions}
 \usage{
-transform_files(files, transformers)
+transform_files(files, transformers, flat)
 }
 \arguments{
 \item{files}{A character vector with paths to the file that should be
@@ -12,6 +12,9 @@ transformed.}
 
 \item{transformers}{A list of transformer functions that operate on flat
 parse tables.}
+
+\item{flat}{Whether to do the styling with a flat approach or with a nested
+approach.}
 }
 \value{
 A logical value that indicates whether or not any file was changed is
