@@ -8,27 +8,35 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  ps: Bootstrap
-
-environment:
-  USE_RTOOLS: true
-
+  - ps: Bootstrap
+  - cmd: R -q -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
+  - cmd: R -q -e "getOption('repos')"
+  - cmd: R -q -e "install.packages('remotes'); remotes::install_github('ropenscilabs/tic'); tic::prepare_all_stages()"
 
 cache:
-  - C:\RLibrary
+- C:\RLibrary
+
+before_build: R -q -e "tic::before_install()"
+build_script: R -q -e "tic::install()"
+after_build: R -q -e "tic::after_install()"
+before_test: R -q -e "tic::before_script()"
+test_script: R -q -e "tic::script()"
+on_success: R -q -e "try(tic::after_success(), silent = TRUE)"
+on_failure: R -q -e "tic::after_failure()"
+before_deploy: R -q -e "tic::before_deploy()"
+deploy_script: R -q -e "tic::deploy()"
+after_deploy: R -q -e "tic::after_deploy()"
+on_finish: R -q -e "tic::after_script()"
 
 # Adapt as necessary starting from here
-build_script:
-  - travis-tool.sh install_github krlmlr/utf8
-  - travis-tool.sh install_github r-lib/pkgload
-  - travis-tool.sh install_deps
 
-test_script:
-  - travis-tool.sh run_tests
+#on_failure:
+#  - 7z a failure.zip *.Rcheck\*
+#  - appveyor PushArtifact failure.zip
 
-on_failure:
-  - 7z a failure.zip *.Rcheck\*
-  - appveyor PushArtifact failure.zip
+environment:
+  GITHUB_PAT:
+    secure: 1Vnv525td0/o+X7LTSkdckcyOyb77v66p6auH2HUoR4hPXrjv4r6LrjaW/dyTluW
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
