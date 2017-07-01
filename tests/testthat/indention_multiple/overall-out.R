@@ -19,12 +19,12 @@ a <- function(x) {
       26 ^ 2, # FIXME ^ operator has to be surrounded by one space (or none?!), never multiple
       8,
       7
-    )))
+  )))
 
   call(
     1, 2,
     23 + Inf - 99, call(
       16
-    )) # FIXME should be unindented
+  ))
 }
 # comments everywhere

@@ -25,6 +25,6 @@ a<- function(x){
     1, 2,
     23+Inf - 99, call(
       16
-    )) # FIXME should be unindented
+    ))
 }
 # comments everywhere
