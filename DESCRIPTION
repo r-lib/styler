@@ -11,6 +11,7 @@ Imports:
     purrr,
     readr,
     rprojroot,
+    rstudioapi,
     tibble,
     tidyr,
     utf8,
