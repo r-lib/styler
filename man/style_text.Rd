@@ -18,6 +18,6 @@ approach.}
 Styles a character vector
 }
 \seealso{
-Other stylers: \code{\link{style_pkg}},
-  \code{\link{style_src}}
+Other stylers: \code{\link{style_file}},
+  \code{\link{style_pkg}}, \code{\link{style_src}}
 }
