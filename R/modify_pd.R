@@ -18,9 +18,28 @@ indent_round <- function(pd, indent_by) {
   }
   pd <- pd %>%
     mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
+    set_unindention_child(token = "')'", unindent_by = indent_by) %>%
     select_(~indent, ~newlines, ~everything())
   pd
+
 }
+
+#' @rdname update_indention
+indent_curly <- function(pd, indent_by) {
+  indention_needed <- needs_indention(pd, token = "'{'")
+  if (indention_needed) {
+    opening <- which(pd$token == "'{'")
+    start <- opening + 1
+    stop <- nrow(pd) - 1
+  } else {
+    start <- stop <- 0
+  }
+  pd <- pd %>%
+    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
+    set_unindention_child(token = "'}'", unindent_by = indent_by) %>%
+    select_(~indent, ~newlines, ~everything())
+}
+
 
 #' Check whether indention is needed
 #'
@@ -76,23 +95,6 @@ pd_has_token <- function(pd, token) {
   } else {
     FALSE
   }
-}
-
-
-#' @rdname update_indention
-indent_curly <- function(pd, indent_by) {
-  indention_needed <- needs_indention(pd, token = "'{'")
-  if (indention_needed) {
-    opening <- which(pd$token == "'{'")
-    start <- opening + 1
-    stop <- nrow(pd) - 1
-  } else {
-    start <- stop <- 0
-  }
-  pd <- pd %>%
-    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
-    select_(~indent, ~newlines, ~everything())
-  pd
 }
 
 #' Strip EOL spaces
