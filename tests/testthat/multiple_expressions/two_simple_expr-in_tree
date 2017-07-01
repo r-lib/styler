@@ -1,5 +1,5 @@
-ROOT (token: short_text [newlines/spaces])
- ¦--expr:  [1/0]                          
- ¦   °--SYMBOL: a [0/0]                   
- °--expr:  [0/0]                          
-     °--SYMBOL: b [0/0]                   
+ROOT (token: short_text [newlines/spaces] {id})
+ ¦--expr:  [1/0] {3}                           
+ ¦   °--SYMBOL: a [0/0] {1}                    
+ °--expr:  [0/0] {8}                           
+     °--SYMBOL: b [0/0] {6}                    

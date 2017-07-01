@@ -1,5 +1,5 @@
-ROOT (token: short_text [newlines/spaces])
- ¦--COMMENT: # A c [1/0]                  
- ¦--COMMENT: #' A  [1/0]                  
- ¦--COMMENT: #' [3/0]                     
- °--COMMENT: # som [0/0]                  
+ROOT (token: short_text [newlines/spaces] {id})
+ ¦--COMMENT: # A c [1/0] {1}                   
+ ¦--COMMENT: #' A  [1/0] {4}                   
+ ¦--COMMENT: #' [3/0] {7}                      
+ °--COMMENT: # som [0/0] {14}                  

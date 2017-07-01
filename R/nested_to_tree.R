@@ -23,7 +23,7 @@ create_tree <- function(text) {
 #'   styler:::visit(c(styler:::create_filler)) %>%
 #'   styler:::create_node_from_nested_root()
 create_node_from_nested_root <- function(pd_nested) {
-  n <- data.tree::Node$new("ROOT (token: short_text [newlines/spaces])")
+  n <- data.tree::Node$new("ROOT (token: short_text [newlines/spaces] {id})")
   create_node_from_nested(pd_nested, n)
   n
 }
@@ -39,7 +39,7 @@ create_node_from_nested <- function(pd_nested, parent) {
 
   node_info <-
     pd_nested %>%
-    transmute(formatted = paste0(token, ": ", short, " [", newlines, "/", spaces, "]")) %>%
+    transmute(formatted = paste0(token, ": ", short, " [", newlines, "/", spaces, "] {", id, "}")) %>%
     .[["formatted"]]
 
   child_nodes <-

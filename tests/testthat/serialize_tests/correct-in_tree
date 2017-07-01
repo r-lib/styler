@@ -1,5 +1,7 @@
-ROOT (token: short_text [newlines/spaces])
- ¦--expr:  [1/0]                          
- ¦   °--NUM_CONST: 2 [0/0]                
- °--expr:  [0/0]                          
-     °--NUM_CONST: 3 [0/0]                
+ROOT (token: short_text [newlines/spaces] {id})
+ ¦--expr:  [1/0] {2}                           
+ ¦   °--NUM_CONST: 1 [0/0] {1}                 
+ ¦--expr:  [1/0] {7}                           
+ ¦   °--NUM_CONST: 2 [0/0] {6}                 
+ °--expr:  [0/0] {12}                          
+     °--NUM_CONST: 3 [0/0] {11}                
