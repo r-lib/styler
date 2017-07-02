@@ -57,7 +57,7 @@ style_text <- function(text,
 #' @inheritParams style_text
 #' @family stylers
 #' @export
-style_src <- function(path = ".",
+style_dir <- function(path = ".",
   flat = FALSE,
   recursive = TRUE,
   transformers = get_transformers(flat = flat)) {
@@ -68,8 +68,8 @@ style_src <- function(path = ".",
 
 #' Prettify R code in current working directory
 #'
-#' This is a helper function for style_src.
-#' @inheritParams style_src
+#' This is a helper function for style_dir.
+#' @inheritParams style_dir
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   should be styled as well.
 #' @keywords internal
@@ -96,8 +96,8 @@ style_file <- function(path,
 
 #' Prettify one R file
 #'
-#' This is a helper function for style_src.
-#' @inheritParams style_src
+#' This is a helper function for style_dir.
+#' @inheritParams style_dir
 #' @param path The path to a file that should be styled.
 prettify_one <- function(transformers, flat, path) {
   if (!grepl("\\.[Rr]$", path)) stop(path, " is not a .R file")

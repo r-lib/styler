@@ -19,6 +19,6 @@ Performs various substitutions in the \code{.R} file specified.
 Carefully examine the results after running this function!
 }
 \seealso{
-Other stylers: \code{\link{style_pkg}},
-  \code{\link{style_src}}, \code{\link{style_text}}
+Other stylers: \code{\link{style_dir}},
+  \code{\link{style_pkg}}, \code{\link{style_text}}
 }

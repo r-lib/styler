@@ -16,6 +16,6 @@ should be styled as well.}
 approach.}
 }
 \description{
-This is a helper function for style_src.
+This is a helper function for style_dir.
 }
 \keyword{internal}

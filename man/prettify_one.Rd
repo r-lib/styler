@@ -15,5 +15,5 @@ approach.}
 \item{path}{The path to a file that should be styled.}
 }
 \description{
-This is a helper function for style_src.
+This is a helper function for style_dir.
 }
