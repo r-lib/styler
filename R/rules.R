@@ -91,6 +91,15 @@ set_space_after_comma <- function(pd_flat) {
   pd_flat
 }
 
+remove_space_before_comma <- function(pd_flat) {
+  comma_after <- pd_flat$token == "','"
+  comma_before <- lead(comma_after, default = FALSE)
+  idx <- comma_before  & (pd_flat$newlines == 0L)
+  pd_flat$spaces[idx] <- 0L
+  pd_flat
+}
+
+
 #' Set space between levels of nesting
 #'
 #' With the nested approach, certain rules do not have an effect anymore because
