@@ -1,5 +1,6 @@
+math_token <- c("'+'", "'-'", "'*'", "'/'", "'^'")
 op_token <- c(
-  "'+'", "'-'", "'*'", "'/'", "'^'", "AND", "AND2", "EQ", "EQ_ASSIGN",
+  math_token, "AND", "AND2", "EQ", "EQ_ASSIGN",
   "GE", "GT", "LE", "LEFT_ASSIGN", "LT", "NE", "OR", "OR2", "RIGHT_ASSIGN",
   "SPECIAL", "EQ_SUB", "ELSE")
 

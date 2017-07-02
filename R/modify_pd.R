@@ -3,6 +3,7 @@
 #' @param pd A nested or flat parse table that is already enhanced with
 #'   line break and space information via [create_filler()].
 #' @param indent_by How many spaces should be added after the token of interest.
+#' @param token The token the indention should be based on.
 #' @name update_indention
 NULL
 
@@ -76,6 +77,12 @@ child_indents <- function(pd, opening, token) {
 
 #' Check whether a parse table contains a token
 #'
+#' Checks whether a token is in a parse table. `pd_has_token_not_one` is usesful
+#'   in the situation where one wants to check whether the *operator* + or - is
+#'   in the parse table, but not the *sign* + or -.
+#'   We use the fact that signs always appear as first tokens in the parse
+#'   table. There are two functions and not just one for performance reasons
+#'   only, as this function is rather low level and gets called very often.
 #' @param pd A parse table.
 #' @param token The token for which it should be checked whether it is in the
 #'   parse table.
@@ -84,6 +91,29 @@ pd_has_token <- function(pd, token) {
   has_indention_token <- token %in% pd$token
   any(has_indention_token)
 }
+
+#' @rdname pd_has_token
+pd_has_token_not_first <- function(pd, token) {
+  has_indention_token <- token %in% pd$token[-1]
+  any(has_indention_token)
+}
+
+
+#' @rdname update_indention
+indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL")) {
+  opening <- which(pd$token %in% token)
+  if (length(opening) > 0) {
+    start <- opening[1] + 1
+    stop <- nrow(pd)
+  } else {
+    start <- stop <- 0
+  }
+  pd <- pd %>%
+    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
+    select_(~indent, ~newlines, ~everything())
+  pd
+}
+
 
 #' Strip EOL spaces
 #'
