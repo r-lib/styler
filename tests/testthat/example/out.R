@@ -106,12 +106,12 @@ test <- function() {
     FALSE
   }
 
-  single_line("function" , call)
+  single_line("function", call)
 
   multiline(
   "function", call)
 
-  nested(function_call("in" , one , line))
+  nested(function_call("in", one, line))
 
   nested(function_call(
   "in",
