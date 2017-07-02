@@ -4,7 +4,7 @@
 \alias{get_transformers}
 \title{Get the transformer functions for styling}
 \usage{
-get_transformers(flat, ...)
+get_transformers(flat = FALSE, ...)
 }
 \arguments{
 \item{flat}{Whether the transformer functions for flat or nested styling

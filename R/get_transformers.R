@@ -7,7 +7,7 @@
 #'   * [get_transformers_flat()] if `flat = TRUE` or
 #'   * [get_transformers_nested()] if `flat = FALSE`.
 #' @export
-get_transformers <- function(flat, ...) {
+get_transformers <- function(flat = FALSE, ...) {
   if (flat) {
     get_transformers_flat(...)
   } else {

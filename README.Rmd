@@ -26,7 +26,7 @@ while adhering to the [tidyverse](https://github.com/tidyverse/style) formatting
 rules. Support for custom style guides is planned.
 
 You can style a simple character vector of code with `style_text()`, a directory 
-with `style_src()`or a whole R package with `style_pkg()`.
+with `style_dir()`or a whole R package with `style_pkg()`.
 ```{r echo=FALSE, message=FALSE}
 devtools::load_all()
 #knitr::opts_chunk$set(comment = NA)
