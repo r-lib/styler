@@ -36,3 +36,12 @@ test_that("multiple curly and round brackets overall test", {
                                  write_back = TRUE), NA)
 
 })
+
+
+test_that("edge cases work", {
+  expect_warning(test_collection("indention_multiple",
+                                 "edge_",
+                                 transformer = style_text,
+                                 write_back = TRUE), NA)
+
+})
