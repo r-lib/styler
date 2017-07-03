@@ -13,14 +13,13 @@ indent_round <- function(pd, indent_by) {
     opening <- which(pd$token == "'('")
     start <- opening + 1
     stop <- nrow(pd) - 1
-  } else {
-    start <- stop <- 0
+    pd <- pd %>%
+      mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
+                                      indent_by, 0))
   }
-  pd <- pd %>%
-    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
+  pd %>%
     set_unindention_child(token = "')'", unindent_by = indent_by) %>%
     select_(~indent, ~newlines, ~everything())
-  pd
 
 }
 
@@ -31,13 +30,14 @@ indent_curly <- function(pd, indent_by) {
     opening <- which(pd$token == "'{'")
     start <- opening + 1
     stop <- nrow(pd) - 1
-  } else {
-    start <- stop <- 0
+    pd <- pd %>%
+      mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
+                                      indent_by, 0))
   }
   pd <- pd %>%
-    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)) %>%
     set_unindention_child(token = "'}'", unindent_by = indent_by) %>%
     select_(~indent, ~newlines, ~everything())
+  pd
 }
 
 
@@ -53,11 +53,7 @@ indent_curly <- function(pd, indent_by) {
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
 needs_indention <- function(pd, token = "'('") {
   opening <- which(pd$token %in% token)
-  if (length(opening) > 0 && !child_indents(pd, opening, c("'('", "'{'"))) {
-    TRUE
-  } else {
-    FALSE
-  }
+  length(opening) > 0 && !child_indents(pd, opening, c("'('", "'{'"))
 }
 
 #' Check whether a child will indent
@@ -75,11 +71,7 @@ child_indents <- function(pd, opening, token) {
     filter(!terminal, line1 == opening_line, line2 != opening_line)
   if (nrow(pd) == 0) return(FALSE)
   children_indent <- map_lgl(pd$child, pd_has_token, token)
-  if (any(children_indent)) {
-    TRUE
-  } else {
-    FALSE
-  }
+  any(children_indent)
 }
 
 #' Check whether a parse table contains a token
@@ -90,11 +82,7 @@ child_indents <- function(pd, opening, token) {
 #' @return `TRUE` if the token is in the parse table, `FALSE` otherwise.
 pd_has_token <- function(pd, token) {
   has_indention_token <- token %in% pd$token
-  if (any(has_indention_token)) {
-    TRUE
-  } else {
-    FALSE
-  }
+  any(has_indention_token)
 }
 
 #' Strip EOL spaces
