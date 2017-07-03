@@ -20,7 +20,7 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
   candidates$child <- map(candidates$child,
                           unindent_child,
                           token = token,
-                          unindent_by = unindent_by)
+                          unindent_by = abs(pd$indent[closing] - pd$indent[closing-1]))
 
   bind_rows(candidates, non_candidates) %>%
     arrange(line1, col1) %>%
@@ -38,7 +38,7 @@ unindent_child <- function(pd, token = "')'", unindent_by = 2) {
     pd$indent <- 0
   }
   if (length(closing) > 0) {
-    pd$indent[closing] <- -unindent_by
+    pd$indent[closing] <- pd$indent[closing] - unindent_by
   }
   pd
 }
