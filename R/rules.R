@@ -21,6 +21,7 @@ set_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
+# depreciated!
 remove_space_after_unary_pm <- function(pd_flat) {
   op_pm <- c("'+'", "'-'")
   op_pm_unary_after <- c(op_pm, op_token, "'('", "','")
@@ -30,6 +31,16 @@ remove_space_after_unary_pm <- function(pd_flat) {
                    dplyr::lag(pd_flat$token) %in% op_pm_unary_after] <- 0L
   pd_flat
 }
+
+
+remove_space_after_unary_pm_nested <- function(pd) {
+  if (any(c("'+'", "'-'") %in% pd$token[1])) {
+    pd$spaces[1] <- 0L
+  }
+
+  pd
+}
+
 
 fix_quotes <- function(pd_flat) {
   str_const <- pd_flat$token == "STR_CONST"
