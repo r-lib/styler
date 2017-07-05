@@ -4,13 +4,24 @@ pd %>%
   ggplot(aes(x = new, y = old)) +
   geom_point()
 
-1 + (
-  22 - (1 /
+1 + ( # FIXME indention interaction math and braces
+    22 - (1 / # FIXME indention interaction math and braces
           2718 /
           23 * 29 * (
-            2 * (22*-1) +
+            2 * (22 * -1) +
               1) -
           18) +
-    sin(pi) -
-    2
-)
+      sin(pi) -
+      2
+  )
+
+a <- function(z) {
+  a %>%
+    q() %>%
+    n()
+}
+
+a %>%
+  b() %>%
+  c() %>%
+  k()
