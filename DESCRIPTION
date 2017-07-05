@@ -21,7 +21,8 @@ Suggests:
     knitr,
     rmarkdown,
     rstudioapi,
-    testthat
+    testthat,
+    pkgload
 Remotes:
     r-lib/pkgload,
     krlmlr/utf8

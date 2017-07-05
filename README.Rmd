@@ -1,7 +1,7 @@
 ---
 output:
   github_document:
-    html_preview: true
+    html_preview: false
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -27,7 +27,7 @@ rules. Support for custom style guides is planned.
 
 You can style a simple character vector of code with `style_text()`:
 ```{r echo=FALSE, message=FALSE}
-devtools::load_all()
+pkgload::load_all()
 library("magrittr")
 #knitr::opts_chunk$set(comment = NA)
 ```
@@ -45,7 +45,7 @@ There are a few variants of `style_text()`:
 * `style_file()` styles a single .R file.
 * `style_dir()` styles all .R files in a directory.
 * `style_pkg()` styles the source files of an R package.
-* An RStudio-Addin that styles the active file .R file
+* An RStudio Addin that styles the active file .R file
 
 ```{r, out.width = "650px", echo = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif")
