@@ -14,7 +14,7 @@ a <- function(x) {
     }
   })
   # we like comments too
-  c(list(x + 2), # FIXME no space before ,. Problem of styling across different levels of nesting?
+  c(list(x + 2),
     c(c(
       26 ^ 2, # FIXME ^ operator has to be surrounded by one space (or none?!), never multiple
       8,
