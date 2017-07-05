@@ -1,0 +1,10 @@
+ROOT (token: short_text [newlines/spaces])
+ °--expr:  [0/0]                          
+     ¦--expr:  [0/0]                      
+     ¦   °--NUM_CONST: 1 [0/0]            
+     ¦--'(': ( [0/0]                      
+     ¦--',': , [0/1]                      
+     ¦--COMMENT: # cho [1/0]              
+     ¦--expr:  [1/1]                      
+     ¦   °--NUM_CONST: 29 [0/0]           
+     °--')': ) [0/0]                      
