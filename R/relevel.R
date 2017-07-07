@@ -51,6 +51,7 @@ move_children_up <- function(pd_nested,
   out <- bind_rows(pd_nested, pd_nested$child[move_up]) %>%
     mutate(old_parent = id %in% parent) %>%
     filter(!old_parent) %>%
+    select(-old_parent) %>%
     arrange(line1, col1)
   if (any(move_up)) {
     out <- re_nest(out)
