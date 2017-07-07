@@ -14,3 +14,14 @@ geom_point()
     sin(    pi) -
 2
   )
+
+a <- function(z) {
+  a %>%
+    q() %>%
+    n()
+}
+
+ a %>%
+b()%>%
+c()%>%
+k()

@@ -10,19 +10,16 @@ test_that("pipe is indended correctly", {
 test_that("mathematical operators are indended correctly", {
   expect_warning(test_collection("indention_operators",
                                  "plus_minus",
-                                 transformer = style_op,
-                                 write_back = TRUE), NA)
+                                 transformer = style_op), NA)
 
   expect_warning(test_collection("indention_operators",
                                  "multiply_divide",
-                                 transformer = style_op,
-                                 write_back = TRUE), NA)
+                                 transformer = style_op), NA)
 })
 
 
 test_that("overall", {
   expect_warning(test_collection("indention_operators",
                                  "overall",
-                                 transformer = style_text,
-                                 write_back = TRUE), NA)
+                                 transformer = style_text), NA)
 })
