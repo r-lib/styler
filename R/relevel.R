@@ -21,6 +21,28 @@ re_nest <- function(pd_nested) {
   pd_nested
 }
 
+re_nest2 <- function(pd_nested) {
+  pd_nested %>%
+    visit_post(c(re_nest2_one))
+}
+
+re_nest2_one <- function(pd_nested) {
+  token <- c("'+'", "'-'", "SPECIAL", "'/'", "'*'")
+
+  token_pos <- which(pd_nested$token %in% token)
+  if (length(token_pos) == 0) return(pd_nested)
+  stopifnot(length(token_pos) == 1)
+
+  lhs_pos <- token_pos - 1L
+  if (lhs_pos < 1) return(pd_nested)
+  if (!any(pd_nested$child[[lhs_pos]]$token %in% token)) return(pd_nested)
+
+  pd_nested %>%
+    slice(-lhs_pos) %>%
+    bind_rows(pd_nested$child[[lhs_pos]]) %>%
+    arrange(line1, col1)
+}
+
 #' Move children up if appropriate
 #'
 #' Move children one level of nesting up if necessary. If any was moved up,

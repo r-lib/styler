@@ -73,7 +73,6 @@ make_transformer_nested <- function(transformers) {
     text <- gsub("\t", "        ", text)
 
     pd_nested <- compute_parse_data_nested(text)
-    pd_nested <- re_nest(pd_nested)
     transformed_pd_nested <- visit(pd_nested, transformers)
     # TODO verify_roundtrip
     new_text <- serialize_parse_data_nested(transformed_pd_nested)
@@ -93,6 +92,15 @@ visit <- function(pd_nested, funs) {
   pd_transformed <- pd_nested %>%
     visit_one(funs) %>%
     mutate(child = map(child, visit, funs = funs))
+  pd_transformed
+}
+
+#' @rdname visit
+visit_post <- function(pd_nested, funs) {
+  if (is.null(pd_nested)) return()
+  pd_transformed <- pd_nested %>%
+    mutate(child = map(child, visit, funs = funs)) %>%
+    visit_one(funs)
   pd_transformed
 }
 
