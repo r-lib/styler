@@ -3,26 +3,20 @@
 #' Certain tokens are not placed optimally in the nested parse data with
 #'   [compute_parse_data_nested()]. For example, the token of arithmetic
 #'   operations 1 + 1 + 1 should all be on the same level of nesting since
-#'   the indention is the same for all but the first two terminals. This
-#'   is easier to achieve if they are put on the same level of nesting.
+#'   the indention is the same for all but the first two terminals. Setting the
+#'   indention correcly is easier to achieve if they are put on the same level
+#'   of nesting.
 #' @examples
-#' library("magrittr")
 #' code <- "1+1+1+1"
 #' # tree-structure with compute_parse_data_nested
-#' styler:::compute_parse_data_nested(code) %>%
-#'   styler:::visit(c(styler:::create_filler)) %>%
-#'   styler:::create_node_from_nested_root()
+#' styler:::create_tree(code, re_nest = FALSE)
 #' # tree-structure with re_nest post-processing
-#' styler:::compute_parse_data_nested(code) %>%
-#'   styler:::re_nest() %>%
-#'   styler:::visit(c(styler:::create_filler)) %>%
-#'   styler:::create_node_from_nested_root()
+#' styler:::create_tree(code, re_nest = TRUE)
 #' @inheritParams move_children_up
 re_nest <- function(pd_nested) {
   if (is.null(pd_nested)) return()
   pd_nested <- pd_nested %>%
-    move_children_up(token_after = c("'+'", "'-'", "SPECIAL"),
-                  token_before = c("'/'", "'*'")) %>%
+    move_children_up(token = c("'+'", "'-'", "SPECIAL", "'/'", "'*'")) %>%
     mutate(child = map(child, re_nest))
   pd_nested
 }
@@ -42,7 +36,7 @@ re_nest <- function(pd_nested) {
 #'     Otherwise, the second expression may be indented due to operator
 #'     indention(e.g. in "1+1; 1+1").
 #'   * The child has one of `token` in the parse table. The first token is not
-#'     considered to propper handle signs (see [pd_has_token_not_one()]).
+#'     considered to propper handle signs (see [pd_has_token_not_first()]).
 #'   * One of `token` also appears before or after the child in `pd_nested`.
 #'     For example, there is no need to move any child up in the expression
 #'     "{1+1}", since then, operator and bracket indention would conflict.

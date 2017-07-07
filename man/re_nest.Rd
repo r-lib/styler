@@ -13,19 +13,14 @@ re_nest(pd_nested)
 Certain tokens are not placed optimally in the nested parse data with
 \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}. For example, the token of arithmetic
 operations 1 + 1 + 1 should all be on the same level of nesting since
-the indention is the same for all but the first two terminals. This
-is easier to achieve if they are put on the same level of nesting.
+the indention is the same for all but the first two terminals. Setting the
+indention correcly is easier to achieve if they are put on the same level
+of nesting.
 }
 \examples{
-library("magrittr")
 code <- "1+1+1+1"
 # tree-structure with compute_parse_data_nested
-styler:::compute_parse_data_nested(code) \%>\%
-  styler:::visit(c(styler:::create_filler)) \%>\%
-  styler:::create_node_from_nested_root()
+styler:::create_tree(code, re_nest = FALSE)
 # tree-structure with re_nest post-processing
-styler:::compute_parse_data_nested(code) \%>\%
-  styler:::re_nest() \%>\%
-  styler:::visit(c(styler:::create_filler)) \%>\%
-  styler:::create_node_from_nested_root()
+styler:::create_tree(code, re_nest = TRUE)
 }
