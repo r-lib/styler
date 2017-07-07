@@ -4,7 +4,7 @@
 \alias{test_collection}
 \title{Run a collection of tests}
 \usage{
-test_collection(test, sub_test = NULL, write_back = FALSE,
+test_collection(test, sub_test = NULL, write_back = TRUE,
   write_tree = TRUE, transformer, ...)
 }
 \arguments{

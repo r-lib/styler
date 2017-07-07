@@ -6,6 +6,7 @@
 \alias{style_empty}
 \alias{style_indent_curly}
 \alias{style_indent_curly_round}
+\alias{style_op}
 \title{Transforming test input with a transformer function}
 \usage{
 style_indent_round(text)
@@ -15,6 +16,8 @@ style_empty(text)
 style_indent_curly(text)
 
 style_indent_curly_round(text)
+
+style_op(text)
 }
 \arguments{
 \item{text}{A character vector to transform.}
@@ -41,5 +44,7 @@ brackets only.
 
 \item \code{style_indent_curly_round}: Transformations for indention based on curly
 brackets and round brackets.
+
+\item \code{style_op}: Transformations for indention based on operators
 }}
 

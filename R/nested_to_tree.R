@@ -2,10 +2,14 @@
 #'
 #' Create a tree representation from a text.
 #' @param text A character vector.
+#' @param re_nest Whether or not the parse table should be renested with
+#'   [re_nest()].
 #' @return A data frame.
-create_tree <- function(text) {
+#' @importFrom purrr when
+create_tree <- function(text, re_nest = FALSE) {
   compute_parse_data_nested(text) %>%
-    visit(c(styler:::create_filler)) %>%
+    visit(c(create_filler)) %>%
+    when(re_nest ~ re_nest(.), ~.) %>%
     create_node_from_nested_root() %>%
     as.data.frame()
 }

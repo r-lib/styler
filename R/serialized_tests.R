@@ -22,7 +22,7 @@
 #' @inheritParams transform_and_check
 #' @importFrom purrr flatten_chr pwalk map
 test_collection <- function(test, sub_test = NULL,
-                            write_back = FALSE,
+                            write_back = TRUE,
                             write_tree = TRUE,
                             transformer,
                             ...) {
@@ -176,6 +176,18 @@ style_indent_curly_round <- function(text) {
     visit(funs = c(create_filler,
                    partial(indent_curly, indent_by = 2),
                    partial(indent_round, indent_by = 2),
+                   strip_eol_spaces)) %>%
+
+    serialize_parse_data_nested()
+}
+
+#' @describeIn test_transformer Transformations for indention based on operators
+style_op <- function(text) {
+  text %>%
+    compute_parse_data_nested() %>%
+    re_nest() %>%
+    visit(funs = c(create_filler,
+                   partial(indent_op, indent_by = 2),
                    strip_eol_spaces)) %>%
 
     serialize_parse_data_nested()

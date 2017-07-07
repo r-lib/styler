@@ -4,17 +4,22 @@
 \alias{update_indention}
 \alias{indent_round}
 \alias{indent_curly}
+\alias{indent_op}
 \title{Update indention information of parse data}
 \usage{
 indent_round(pd, indent_by)
 
 indent_curly(pd, indent_by)
+
+indent_op(pd, indent_by, token = c(math_token, "SPECIAL"))
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with
 line break and space information via \code{\link[=create_filler]{create_filler()}}.}
 
 \item{indent_by}{How many spaces should be added after the token of interest.}
+
+\item{token}{The token the indention should be based on.}
 }
 \description{
 Update indention information of parse data
