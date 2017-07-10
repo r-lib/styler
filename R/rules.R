@@ -1,5 +1,6 @@
+math_token <- c("'+'", "'-'", "'*'", "'/'", "'^'")
 op_token <- c(
-  "'+'", "'-'", "'*'", "'/'", "'^'", "AND", "AND2", "EQ", "EQ_ASSIGN",
+  math_token, "AND", "AND2", "EQ", "EQ_ASSIGN",
   "GE", "GT", "LE", "LEFT_ASSIGN", "LT", "NE", "OR", "OR2", "RIGHT_ASSIGN",
   "SPECIAL", "EQ_SUB", "ELSE")
 
@@ -21,6 +22,7 @@ set_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
+# depreciated!
 remove_space_after_unary_pm <- function(pd_flat) {
   op_pm <- c("'+'", "'-'")
   op_pm_unary_after <- c(op_pm, op_token, "'('", "','")
@@ -30,6 +32,16 @@ remove_space_after_unary_pm <- function(pd_flat) {
                    dplyr::lag(pd_flat$token) %in% op_pm_unary_after] <- 0L
   pd_flat
 }
+
+
+remove_space_after_unary_pm_nested <- function(pd) {
+  if (any(c("'+'", "'-'") %in% pd$token[1])) {
+    pd$spaces[1] <- 0L
+  }
+
+  pd
+}
+
 
 fix_quotes <- function(pd_flat) {
   str_const <- pd_flat$token == "STR_CONST"
@@ -90,6 +102,15 @@ set_space_after_comma <- function(pd_flat) {
   pd_flat$spaces[comma_after & (pd_flat$newlines == 0L)] <- 1L
   pd_flat
 }
+
+remove_space_before_comma <- function(pd_flat) {
+  comma_after <- pd_flat$token == "','"
+  comma_before <- lead(comma_after, default = FALSE)
+  idx <- comma_before  & (pd_flat$newlines == 0L)
+  pd_flat$spaces[idx] <- 0L
+  pd_flat
+}
+
 
 #' Set space between levels of nesting
 #'

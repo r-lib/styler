@@ -2,10 +2,14 @@
 #'
 #' Create a tree representation from a text.
 #' @param text A character vector.
+#' @param re_nest Whether or not the parse table should be renested with
+#'   [re_nest()].
 #' @return A data frame.
-create_tree <- function(text) {
+#' @importFrom purrr when
+create_tree <- function(text, re_nest = FALSE) {
   compute_parse_data_nested(text) %>%
-    visit(c(styler:::create_filler)) %>%
+    visit(c(create_filler)) %>%
+    when(re_nest ~ re_nest(.), ~.) %>%
     create_node_from_nested_root() %>%
     as.data.frame()
 }
@@ -23,7 +27,7 @@ create_tree <- function(text) {
 #'   styler:::visit(c(styler:::create_filler)) %>%
 #'   styler:::create_node_from_nested_root()
 create_node_from_nested_root <- function(pd_nested) {
-  n <- data.tree::Node$new("ROOT (token: short_text [newlines/spaces])")
+  n <- data.tree::Node$new("ROOT (token: short_text [newlines/spaces] {id})")
   create_node_from_nested(pd_nested, n)
   n
 }
@@ -39,7 +43,7 @@ create_node_from_nested <- function(pd_nested, parent) {
 
   node_info <-
     pd_nested %>%
-    transmute(formatted = paste0(token, ": ", short, " [", newlines, "/", spaces, "]")) %>%
+    transmute(formatted = paste0(token, ": ", short, " [", newlines, "/", spaces, "] {", id, "}")) %>%
     .[["formatted"]]
 
   child_nodes <-

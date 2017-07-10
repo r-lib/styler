@@ -7,7 +7,7 @@
 #'   * [get_transformers_flat()] if `flat = TRUE` or
 #'   * [get_transformers_nested()] if `flat = FALSE`.
 #' @export
-get_transformers <- function(flat, ...) {
+get_transformers <- function(flat = FALSE, ...) {
   if (flat) {
     get_transformers_flat(...)
   } else {
@@ -35,6 +35,7 @@ get_transformers_flat <- function(strict = TRUE,
     add_space_before_brace,
     if (strict) set_space_around_op else add_space_around_op,
     if (strict) set_space_after_comma else add_space_after_comma,
+    remove_space_before_comma,
     remove_space_after_unary_pm,
     remove_space_after_opening_paren,
     partial(start_comments_with_space,
@@ -58,8 +59,10 @@ get_transformers_nested <- function(strict = TRUE,
   c(create_filler,
     partial(indent_round, indent_by = indent_by),
     partial(indent_curly, indent_by = indent_by),
+    partial(indent_op, indent_by = indent_by),
     strip_eol_spaces,
     get_transformers_flat(strict, start_comments_with_one_space),
+    remove_space_after_unary_pm_nested,
     set_space_before_comments,
     set_space_between_levels
     )

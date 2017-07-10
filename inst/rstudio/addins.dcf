@@ -1,4 +1,9 @@
-Name: styler
+Name: style package
 Description: Pretty-print package source code
 Binding: style_pkg
+Interactive: false
+
+Name: style active file
+Description: Pretty-print active file
+Binding: style_active_file
 Interactive: false

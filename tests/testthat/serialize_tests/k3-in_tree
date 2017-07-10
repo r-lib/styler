@@ -1,0 +1,6 @@
+ROOT (token: short_text [newlines/spaces] {id}) 
+ °--expr:  [0/0] {6}                            
+     ¦--expr:  [0/0] {3}                        
+     ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {1}
+     ¦--'(': ( [0/0] {2}                        
+     °--')': ) [0/0] {4}                        

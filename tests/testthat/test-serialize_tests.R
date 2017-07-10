@@ -17,8 +17,9 @@ test_that("Can handle multiple in for one out file", {
 
 
 test_that("properly detects non-match", {
-  expect_warning(test_collection("serialize_tests", "k2",
-                                 transformer = identity),
+  expect_warning(test_collection("serialize_tests", "k3",
+                                 transformer = identity,
+                                 write_back = FALSE),
                  "different")
 })
 

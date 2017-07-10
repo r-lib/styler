@@ -8,8 +8,8 @@
 #' @return A logical value that indicates whether or not any file was changed is
 #'   returned invisibly. If files were changed, the user is informed to
 #'   carefully inspect the changes via a message sent to the console.
-transform_files <- function(files, transformers) {
-  transformer <- make_transformer(transformers)
+transform_files <- function(files, transformers, flat) {
+  transformer <- make_transformer(transformers, flat = flat)
 
   changed <- utf8::transform_lines_enc(files, transformer)
   if (any(changed)) {
@@ -73,6 +73,7 @@ make_transformer_nested <- function(transformers) {
     text <- gsub("\t", "        ", text)
 
     pd_nested <- compute_parse_data_nested(text)
+    pd_nested <- re_nest(pd_nested)
     transformed_pd_nested <- visit(pd_nested, transformers)
     # TODO verify_roundtrip
     new_text <- serialize_parse_data_nested(transformed_pd_nested)

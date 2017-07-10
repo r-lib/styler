@@ -4,15 +4,18 @@
 \alias{prettify_any}
 \title{Prettify R code in current working directory}
 \usage{
-prettify_any(transformers, recursive)
+prettify_any(transformers, recursive, flat)
 }
 \arguments{
 \item{transformers}{A list with functions to be applied to the parsed data.}
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 should be styled as well.}
+
+\item{flat}{Whether to do the styling with a flat approach or with a nested
+approach.}
 }
 \description{
-This is a helper function for style_src.
+This is a helper function for style_dir.
 }
 \keyword{internal}
