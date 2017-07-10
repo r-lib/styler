@@ -73,17 +73,17 @@ test <- function() {
 
   a + b
   a - b
-  a + +b
-  a + -b
-  a + +b
-  a - +b
-  a - -b
-  a + --b
-  a - -+b
-  call(+a)
-  call(-a)
-  call(5, +a)
-  call(5, -a)
+  a + + b
+  a + - b
+  a + + b
+  a - + b
+  a - - b
+  a + - - b
+  a - - + b
+  call(+ a)
+  call(- a)
+  call(5, + a)
+  call(5, - a)
 
   # Only with conservative settings:
   call(
