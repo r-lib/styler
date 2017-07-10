@@ -73,46 +73,9 @@ make_transformer_nested <- function(transformers) {
     text <- gsub("\t", "        ", text)
 
     pd_nested <- compute_parse_data_nested(text)
-    transformed_pd_nested <- visit(pd_nested, transformers)
+    transformed_pd_nested <- pre_visit(pd_nested, transformers)
     # TODO verify_roundtrip
     new_text <- serialize_parse_data_nested(transformed_pd_nested)
     new_text
   }
-}
-
-#' Visit'em all
-#'
-#' Apply a list of functions to each level in a nested parse table.
-#' @param pd_nested A nested parse table.
-#' @inheritParams visit_one
-#' @family visitors
-#' @importFrom purrr map
-visit <- function(pd_nested, funs) {
-  if (is.null(pd_nested)) return()
-  pd_transformed <- pd_nested %>%
-    visit_one(funs) %>%
-    mutate(child = map(child, visit, funs = funs))
-  pd_transformed
-}
-
-#' @rdname visit
-visit_post <- function(pd_nested, funs) {
-  if (is.null(pd_nested)) return()
-  pd_transformed <- pd_nested %>%
-    mutate(child = map(child, visit_post, funs = funs)) %>%
-    visit_one(funs)
-  pd_transformed
-}
-
-#' Transform a flat parse table with a list of transformers
-#'
-#' Uses [purrr::reduce()] to apply each function of `funs` sequentially to
-#'   `pd_flat`.
-#' @param pd_flat A flat parse table.
-#' @param funs A list of transformer functions.
-#' @family visitors
-#' @importFrom purrr reduce
-visit_one <- function(pd_flat, funs) {
-  reduce(funs, function(x, fun) fun(x),
-         .init = pd_flat)
 }

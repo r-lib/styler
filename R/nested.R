@@ -32,7 +32,7 @@ compute_parse_data_nested <- function(text) {
     mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
     nest_parse_data() %>%
-    flatten_partially()
+    flatten_operators()
 
   pd_nested
 }

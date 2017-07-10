@@ -136,7 +136,7 @@ NULL
 style_indent_round <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    visit(funs = c(create_filler,
+    pre_visit(funs = c(create_filler,
                    partial(indent_round, indent_by = 2),
                    strip_eol_spaces)) %>%
 
@@ -151,7 +151,7 @@ style_indent_round <- function(text) {
 style_empty <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    visit(funs = c(create_filler, strip_eol_spaces)) %>%
+    pre_visit(funs = c(create_filler, strip_eol_spaces)) %>%
     serialize_parse_data_nested()
 }
 
@@ -160,7 +160,7 @@ style_empty <- function(text) {
 style_indent_curly <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    visit(funs = c(create_filler,
+    pre_visit(funs = c(create_filler,
                    partial(indent_curly, indent_by = 2),
                    strip_eol_spaces)) %>%
 
@@ -173,7 +173,7 @@ style_indent_curly <- function(text) {
 style_indent_curly_round <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    visit(funs = c(create_filler,
+    pre_visit(funs = c(create_filler,
                    partial(indent_curly, indent_by = 2),
                    partial(indent_round, indent_by = 2),
                    strip_eol_spaces)) %>%
@@ -185,7 +185,7 @@ style_indent_curly_round <- function(text) {
 style_op <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    visit(funs = c(create_filler,
+    pre_visit(funs = c(create_filler,
                    partial(indent_op, indent_by = 2),
                    strip_eol_spaces)) %>%
 

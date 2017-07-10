@@ -8,9 +8,6 @@ create_tree(text)
 }
 \arguments{
 \item{text}{A character vector.}
-
-\item{re_nest}{Whether or not the parse table should be renested with
-\code{\link[=re_nest]{re_nest()}}.}
 }
 \value{
 A data frame.
