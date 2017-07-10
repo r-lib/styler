@@ -185,7 +185,6 @@ style_indent_curly_round <- function(text) {
 style_op <- function(text) {
   text %>%
     compute_parse_data_nested() %>%
-    re_nest() %>%
     visit(funs = c(create_filler,
                    partial(indent_op, indent_by = 2),
                    strip_eol_spaces)) %>%

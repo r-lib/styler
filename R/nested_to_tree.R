@@ -6,7 +6,7 @@
 #'   [re_nest()].
 #' @return A data frame.
 #' @importFrom purrr when
-create_tree <- function(text, re_nest = FALSE) {
+create_tree <- function(text) {
   compute_parse_data_nested(text) %>%
     visit(c(create_filler)) %>%
     create_node_from_nested_root() %>%

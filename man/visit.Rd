@@ -2,9 +2,12 @@
 % Please edit documentation in R/transform.R
 \name{visit}
 \alias{visit}
+\alias{visit_post}
 \title{Visit'em all}
 \usage{
 visit(pd_nested, funs)
+
+visit_post(pd_nested, funs)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}

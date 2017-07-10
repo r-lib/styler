@@ -99,7 +99,7 @@ visit <- function(pd_nested, funs) {
 visit_post <- function(pd_nested, funs) {
   if (is.null(pd_nested)) return()
   pd_transformed <- pd_nested %>%
-    mutate(child = map(child, visit, funs = funs)) %>%
+    mutate(child = map(child, visit_post, funs = funs)) %>%
     visit_one(funs)
   pd_transformed
 }

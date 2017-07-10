@@ -4,7 +4,7 @@
 \alias{create_tree}
 \title{Create a tree from text}
 \usage{
-create_tree(text, re_nest = FALSE)
+create_tree(text)
 }
 \arguments{
 \item{text}{A character vector.}
