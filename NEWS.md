@@ -1,3 +1,17 @@
+## styler 0.0-6 (2017-07-10)
+
+* Tidy up README (#43).
+* Fix indention of long operator chains (#69).
+* Properly format unary operators (#38).
+* Fixing indent multiple - one more time (#68).
+* Remove spaces before comma (#62).
+* Fixing indention with multiple parentheses (#57).
+* data.tree gains unique node IDs for proper printing.
+* Add `style_file()` function to style a single .R file.
+* Add RStudio add-in to style active .R file.
+* hotfix: make `style_pkg()` and `style_src()` work by passing flat argument.
+
+
 ## styler 0.0-5 (2017-06-30)
 
 * Correctly deal with comments (spacing before comments, start comment with space)
