@@ -25,9 +25,11 @@
 #'     - Function definitions
 #' - Remove `includeText = TRUE`
 compute_parse_data_nested <- function(text) {
-  parse_data <- tokenize(text)
-  pd_nested <-
-    parse_data %>%
+  parse_data <- tokenize(text) %>%
+    add_terminal_token_before() %>%
+    add_terminal_token_after()
+
+  pd_nested <- parse_data %>%
     mutate_(child = ~rep(list(NULL), length(text))) %>%
     mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
@@ -48,6 +50,31 @@ tokenize <- function(text) {
   parse_data
 }
 
+#' Add information about previous / next token to each terminal
+#'
+#' @param pd_flat A flat parse table.
+#' @name add_token_terminal
+NULL
+
+#' @rdname add_token_terminal
+add_terminal_token_after <- function(pd_flat) {
+  pd_flat %>%
+    filter(terminal) %>%
+    arrange(line1, col1) %>%
+    transmute(id = id, token_after = lead(token, default = "")) %>%
+    right_join(pd_flat, by = "id") %>%
+    select(-token_after, everything(), token_after)
+}
+#' @rdname add_token_terminal
+add_terminal_token_before <- function(pd_flat) {
+  pd_flat %>%
+    filter(terminal) %>%
+    arrange(line1, col1) %>%
+    transmute(id = id, token_before = lag(token, default = "")) %>%
+    right_join(pd_flat, by = "id") %>%
+    select(-token_before, everything(), token_before)
+}
+
 #' Helper for setting spaces
 #'
 #' @param spaces_after_prefix An integer vector with the number of spaces
@@ -66,7 +93,6 @@ set_spaces <- function(spaces_after_prefix, force_one) {
   n_of_spaces
 }
 
-
 #' Nest a flat parse table
 #'
 #' `nest_parse_data` groups `pd_flat` into a parse table with tokens that are
@@ -81,8 +107,7 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @importFrom purrr map2
 nest_parse_data <- function(pd_flat) {
   if (all(pd_flat$parent <= 0)) return(pd_flat)
-  split <-
-    pd_flat %>%
+  split <- pd_flat %>%
     mutate_(internal = ~ (id %in% parent) | (parent <= 0)) %>%
     nest_("data", names(pd_flat))
 
@@ -115,7 +140,7 @@ nest_parse_data <- function(pd_flat) {
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
-  arrange_(bound,  ~line1, ~col1)
+  arrange_(bound, ~line1, ~col1)
 }
 
 
