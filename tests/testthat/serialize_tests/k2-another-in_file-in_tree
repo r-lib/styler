@@ -1,12 +1,12 @@
-ROOT (token: short_text [newlines/spaces] {id})          
+ROOT (token: short_text [lag_newlines/spaces] {id})      
  °--expr:  [0/0] {45}                                    
      ¦--expr:  [0/0] {3}                                 
      ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {1}         
      ¦--'(': ( [0/0] {2}                                 
      ¦--expr:  [0/0] {5}                                 
      ¦   °--NUM_CONST: 1 [0/0] {4}                       
-     ¦--',': , [1/5] {6}                                 
-     ¦--expr:  [0/0] {41}                                
+     ¦--',': , [0/5] {6}                                 
+     ¦--expr:  [1/0] {41}                                
      ¦   ¦--expr:  [0/0] {12}                            
      ¦   ¦   °--SYMBOL_FUNCTION_CALL: call2 [0/0] {10}   
      ¦   ¦--'(': ( [0/0] {11}                            
@@ -23,8 +23,8 @@ ROOT (token: short_text [newlines/spaces] {id})
      ¦   ¦   ¦--expr:  [0/0] {27}                        
      ¦   ¦   ¦   °--NUM_CONST: 2 [0/0] {26}              
      ¦   ¦   °--')': ) [0/0] {28}                        
-     ¦   ¦--',': , [1/11] {32}                           
-     ¦   ¦--expr:  [0/0] {37}                            
+     ¦   ¦--',': , [0/11] {32}                           
+     ¦   ¦--expr:  [1/0] {37}                            
      ¦   ¦   °--NUM_CONST: 4 [0/0] {36}                  
      ¦   °--')': ) [0/0] {38}                            
      °--')': ) [0/0] {42}                                

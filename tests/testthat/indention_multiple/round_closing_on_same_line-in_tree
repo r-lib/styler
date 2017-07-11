@@ -1,4 +1,4 @@
-ROOT (token: short_text [newlines/spaces] {id})     
+ROOT (token: short_text [lag_newlines/spaces] {id}) 
  °--expr:  [0/0] {29}                               
      ¦--expr:  [0/0] {3}                            
      ¦   °--SYMBOL_FUNCTION_CALL: c [0/0] {1}       
@@ -14,7 +14,7 @@ ROOT (token: short_text [newlines/spaces] {id})
      ¦--expr:  [0/0] {17}                           
      ¦   °--NUM_CONST: 1 [0/0] {16}                 
      ¦--',': , [0/1] {18}                           
-     ¦--COMMENT: # cho [1/0] {21}                   
+     ¦--COMMENT: # cho [0/0] {21}                   
      ¦--expr:  [1/1] {24}                           
      ¦   °--NUM_CONST: 29 [0/0] {23}                
-     °--')': ) [0/0] {26}                           
+     °--')': ) [1/0] {26}                           

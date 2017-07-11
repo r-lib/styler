@@ -1,4 +1,4 @@
-ROOT (token: short_text [newlines/spaces] {id})    
+ROOT (token: short_text [lag_newlines/spaces] {id})
  °--expr:  [0/0] {40}                              
      ¦--expr:  [0/1] {3}                           
      ¦   °--SYMBOL: a [0/0] {1}                    
