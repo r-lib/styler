@@ -2,7 +2,7 @@ ROOT (token: short_text [lag_newlines/spaces] {id})
  ¦--expr:  [0/0] {96}                                                   
  ¦   ¦--expr:  [0/0] {3}                                                
  ¦   ¦   °--SYMBOL: pd [0/0] {1}                                        
- ¦   ¦--SPECIAL: %>% [0/0] {2}                                          
+ ¦   ¦--SPECIAL-PIPE: %>% [0/0] {2}                                     
  ¦   ¦--expr:  [1/1] {43}                                               
  ¦   ¦   ¦--expr:  [0/0] {7}                                            
  ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: mutat [0/0] {5}                   
@@ -32,7 +32,7 @@ ROOT (token: short_text [lag_newlines/spaces] {id})
  ¦   ¦   ¦   ¦   °--')': ) [0/0] {30}                                   
  ¦   ¦   ¦   °--')': ) [0/0] {36}                                       
  ¦   ¦   °--')': ) [0/0] {40}                                           
- ¦   ¦--SPECIAL: %>% [0/5] {44}                                         
+ ¦   ¦--SPECIAL-PIPE: %>% [0/5] {44}                                    
  ¦   ¦--expr:  [1/1] {57}                                               
  ¦   ¦   ¦--expr:  [0/0] {49}                                           
  ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: filte [0/0] {47}                  
@@ -42,7 +42,7 @@ ROOT (token: short_text [lag_newlines/spaces] {id})
  ¦   ¦   ¦   °--expr:  [0/0] {53}                                       
  ¦   ¦   ¦       °--SYMBOL: termi [0/0] {51}                            
  ¦   ¦   °--')': ) [0/0] {52}                                           
- ¦   ¦--SPECIAL: %>% [0/2] {58}                                         
+ ¦   ¦--SPECIAL-PIPE: %>% [0/2] {58}                                    
  ¦   ¦--expr:  [1/0] {85}                                               
  ¦   ¦   ¦--expr:  [0/0] {63}                                           
  ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: ggplo [0/0] {61}                  
@@ -146,13 +146,13 @@ ROOT (token: short_text [lag_newlines/spaces] {id})
  ¦           ¦--expr:  [1/0] {222}                                      
  ¦           ¦   ¦--expr:  [0/1] {204}                                  
  ¦           ¦   ¦   °--SYMBOL: a [0/0] {202}                           
- ¦           ¦   ¦--SPECIAL: %>% [0/4] {203}                            
+ ¦           ¦   ¦--SPECIAL-PIPE: %>% [0/4] {203}                       
  ¦           ¦   ¦--expr:  [1/1] {211}                                  
  ¦           ¦   ¦   ¦--expr:  [0/0] {208}                              
  ¦           ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: q [0/0] {206}         
  ¦           ¦   ¦   ¦--'(': ( [0/0] {207}                              
  ¦           ¦   ¦   °--')': ) [0/0] {209}                              
- ¦           ¦   ¦--SPECIAL: %>% [0/4] {212}                            
+ ¦           ¦   ¦--SPECIAL-PIPE: %>% [0/4] {212}                       
  ¦           ¦   °--expr:  [1/0] {220}                                  
  ¦           ¦       ¦--expr:  [0/0] {217}                              
  ¦           ¦       ¦   °--SYMBOL_FUNCTION_CALL: n [0/0] {215}         
@@ -162,19 +162,19 @@ ROOT (token: short_text [lag_newlines/spaces] {id})
  °--expr:  [2/0] {265}                                                  
      ¦--expr:  [0/1] {238}                                              
      ¦   °--SYMBOL: a [0/0] {236}                                       
-     ¦--SPECIAL: %>% [0/0] {237}                                        
+     ¦--SPECIAL-PIPE: %>% [0/0] {237}                                   
      ¦--expr:  [1/0] {245}                                              
      ¦   ¦--expr:  [0/0] {242}                                          
      ¦   ¦   °--SYMBOL_FUNCTION_CALL: b [0/0] {240}                     
      ¦   ¦--'(': ( [0/0] {241}                                          
      ¦   °--')': ) [0/0] {243}                                          
-     ¦--SPECIAL: %>% [0/0] {246}                                        
+     ¦--SPECIAL-PIPE: %>% [0/0] {246}                                   
      ¦--expr:  [1/0] {254}                                              
      ¦   ¦--expr:  [0/0] {251}                                          
      ¦   ¦   °--SYMBOL_FUNCTION_CALL: c [0/0] {249}                     
      ¦   ¦--'(': ( [0/0] {250}                                          
      ¦   °--')': ) [0/0] {252}                                          
-     ¦--SPECIAL: %>% [0/0] {255}                                        
+     ¦--SPECIAL-PIPE: %>% [0/0] {255}                                   
      °--expr:  [1/0] {263}                                              
          ¦--expr:  [0/0] {260}                                          
          ¦   °--SYMBOL_FUNCTION_CALL: k [0/0] {258}                     
