@@ -1,16 +1,16 @@
 {
   (
-    ((
-      {{
+    (({
+      {
         {
           c(99,
-            1 + 1,
-            {
+            1 + 1, {
               "within that suff"
           })
         }
-      }}
-    ))
+      }
+      })) # FIXME how to handle round brackets +
+    # not correctly unindented after line break added by styler.
   )
 }
 

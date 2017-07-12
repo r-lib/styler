@@ -10,7 +10,8 @@
 })
         }
     }}
-))
+)) # FIXME how to handle round brackets +
+# not correctly unindented after line break added by styler.
   )
 }
 
