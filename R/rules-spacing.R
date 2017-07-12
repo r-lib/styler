@@ -1,8 +1,16 @@
 math_token <- c("'+'", "'-'", "'*'", "'/'", "'^'")
+
+special_token <- lookup_new_special()
+
 op_token <- c(
-  math_token, "AND", "AND2", "EQ", "EQ_ASSIGN",
+  math_token,
+  special_token,
+  "AND", "AND2", "EQ", "EQ_ASSIGN",
   "GE", "GT", "LE", "LEFT_ASSIGN", "LT", "NE", "OR", "OR2", "RIGHT_ASSIGN",
-  "SPECIAL", "EQ_SUB", "ELSE")
+  "EQ_SUB", "ELSE"
+)
+
+
 
 add_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
@@ -91,15 +99,13 @@ add_space_before_brace <- function(pd_flat) {
 
 add_space_after_comma <- function(pd_flat) {
   comma_after <- pd_flat$token == "','"
-  idx <- comma_after & (pd_flat$newlines == 0L)
-  pd_flat$spaces[idx] <- pmax(pd_flat$spaces[idx], 1L)
+  pd_flat$spaces[comma_after] <- pmax(pd_flat$spaces[comma_after], 1L)
   pd_flat
 }
 
 set_space_after_comma <- function(pd_flat) {
   comma_after <- pd_flat$token == "','"
-  idx <- comma_after & (pd_flat$newlines == 0L)
-  pd_flat$spaces[comma_after & (pd_flat$newlines == 0L)] <- 1L
+  pd_flat$spaces[comma_after] <- 1L
   pd_flat
 }
 

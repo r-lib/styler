@@ -14,6 +14,7 @@ get_transformers <- function(flat = FALSE, ...) {
     get_transformers_nested(...)
   }
 }
+
 #' Get the transformer functions for flat styling
 #'
 #' @param strict A logical value indicating whether a set of strict
@@ -59,10 +60,19 @@ get_transformers_nested <- function(strict = TRUE,
     partial(indent_round, indent_by = indent_by),
     partial(indent_curly, indent_by = indent_by),
     partial(indent_op, indent_by = indent_by),
-    strip_eol_spaces,
     get_transformers_flat(strict, start_comments_with_one_space),
+    force_assignment_op,
+    resolve_semicolon,
+    remove_line_break_before_curly_opening,
+    remove_line_break_before_round_closing,
+    add_line_break_afer_curly_opening,
+    add_line_break_before_curly_closing,
+    add_line_break_after_pipe,
     remove_space_after_unary_pm_nested,
     set_space_before_comments,
-    set_space_between_levels
-    )
+    set_space_between_levels,
+    add_brackets_in_pipe,
+    strip_eol_spaces,
+    NULL
+  )
 }
