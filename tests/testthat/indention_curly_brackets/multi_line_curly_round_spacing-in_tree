@@ -1,4 +1,4 @@
-ROOT (token: short_text [newlines/spaces] {id})                       
+ROOT (token: short_text [lag_newlines/spaces] {id})                   
  °--expr:  [0/0] {89}                                                 
      ¦--expr:  [0/0] {3}                                              
      ¦   °--SYMBOL: b [0/0] {1}                                       
@@ -9,8 +9,8 @@ ROOT (token: short_text [newlines/spaces] {id})
          ¦--SYMBOL_FORMALS: x [0/3] {6}                               
          ¦--')': ) [0/0] {7}                                          
          °--expr:  [0/0] {85}                                         
-             ¦--'{': { [1/2] {9}                                      
-             ¦--expr:  [2/2] {47}                                     
+             ¦--'{': { [0/2] {9}                                      
+             ¦--expr:  [1/2] {47}                                     
              ¦   ¦--expr:  [0/1] {13}                                 
              ¦   ¦   °--SYMBOL: x [0/0] {11}                          
              ¦   ¦--LEFT_ASSIGN: <- [0/1] {12}                        
@@ -20,15 +20,15 @@ ROOT (token: short_text [newlines/spaces] {id})
              ¦       ¦--'(': ( [0/0] {15}                             
              ¦       ¦--expr:  [0/0] {18}                             
              ¦       ¦   °--NUM_CONST: 1 [0/0] {17}                   
-             ¦       ¦--',': , [1/19] {19}                            
-             ¦       ¦--expr:  [0/0] {29}                             
+             ¦       ¦--',': , [0/19] {19}                            
+             ¦       ¦--expr:  [1/0] {29}                             
              ¦       ¦   ¦--expr:  [0/0] {24}                         
              ¦       ¦   ¦   °--NUM_CONST: 2 [0/0] {23}               
              ¦       ¦   ¦--'+': + [0/5] {25}                         
              ¦       ¦   °--expr:  [0/0] {27}                         
              ¦       ¦       °--NUM_CONST: 3 [0/0] {26}               
-             ¦       ¦--',': , [1/9] {28}                             
-             ¦       ¦--expr:  [0/1] {41}                             
+             ¦       ¦--',': , [0/9] {28}                             
+             ¦       ¦--expr:  [1/1] {41}                             
              ¦       ¦   ¦--expr:  [0/0] {35}                         
              ¦       ¦   ¦   °--SYMBOL_FUNCTION_CALL: sin [0/0] {33}  
              ¦       ¦   ¦--'(': ( [0/0] {34}                         
@@ -36,7 +36,7 @@ ROOT (token: short_text [newlines/spaces] {id})
              ¦       ¦   ¦   °--SYMBOL: pi [0/0] {36}                 
              ¦       ¦   °--')': ) [0/0] {37}                         
              ¦       °--')': ) [0/0] {42}                             
-             ¦--expr:  [1/20] {82}                                    
+             ¦--expr:  [2/20] {82}                                    
              ¦   ¦--IF: if [0/0] {52}                                 
              ¦   ¦--'(': ( [0/0] {53}                                 
              ¦   ¦--expr:  [0/0] {60}                                 
@@ -47,7 +47,7 @@ ROOT (token: short_text [newlines/spaces] {id})
              ¦   ¦       °--NUM_CONST: 10 [0/0] {57}                  
              ¦   ¦--')': ) [0/0] {59}                                 
              ¦   °--expr:  [0/0] {78}                                 
-             ¦       ¦--'{': { [1/0] {62}                             
+             ¦       ¦--'{': { [0/0] {62}                             
              ¦       ¦--expr:  [1/2] {72}                             
              ¦       ¦   ¦--expr:  [0/0] {66}                         
              ¦       ¦   ¦   °--SYMBOL_FUNCTION_CALL: retur [0/0] {64}
@@ -55,5 +55,5 @@ ROOT (token: short_text [newlines/spaces] {id})
              ¦       ¦   ¦--expr:  [0/0] {69}                         
              ¦       ¦   ¦   °--STR_CONST: "done [0/0] {67}           
              ¦       ¦   °--')': ) [0/0] {68}                         
-             ¦       °--'}': } [0/0] {76}                             
-             °--'}': } [0/0] {80}                                     
+             ¦       °--'}': } [1/0] {76}                             
+             °--'}': } [1/0] {80}                                     

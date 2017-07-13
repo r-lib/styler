@@ -73,30 +73,6 @@ verify_roundtrip <- function(pd_flat, text) {
   text
 }
 
-#' Serialize Flat Parse Data
-#'
-#' Collapses a parse table into character vector representation.
-#' @param pd_flat A parse table.
-#' @details
-#'   The function essentially collapses the column text of `pd_flat`
-#'   while taking into account space and linebreak information from the columns
-#'   newlines and spaces. \cr
-#'   Roughly speaking, this is the inverse operation of
-#'   [compute_parse_data_flat_enhanced()], which turns a character vector into a
-#'   parse table, since `serialize_parse_data_flat()` turns a parse table back
-#'   into a character vector.
-serialize_parse_data_flat <- function(pd_flat) {
-  pd_flat %>%
-    summarize_(
-      text_ws = ~paste0(
-        text, newlines_and_spaces(newlines, spaces),
-        collapse = "")) %>%
-    .[["text_ws"]] %>%
-    strsplit("\n", fixed = TRUE) %>%
-    .[[1L]]
-}
-
-
 #' Enrich parse table with space and linebreak information
 #'
 #' This function computes difference (as column and line difference) between two

@@ -1,5 +1,5 @@
-ROOT (token: short_text [newlines/spaces] {id})                
- ¦--expr:  [1/0] {47}                                          
+ROOT (token: short_text [lag_newlines/spaces] {id})            
+ ¦--expr:  [0/0] {47}                                          
  ¦   ¦--expr:  [0/0] {2}                                       
  ¦   ¦   °--NUM_CONST: 1 [0/0] {1}                             
  ¦   ¦--'+': + [0/0] {3}                                       
@@ -38,7 +38,7 @@ ROOT (token: short_text [newlines/spaces] {id})
  ¦       ¦--'-': - [0/0] {42}                                  
  ¦       °--expr:  [0/0] {44}                                  
  ¦           °--NUM_CONST: 40 [0/0] {43}                       
- °--expr:  [0/0] {96}                                          
+ °--expr:  [1/0] {96}                                          
      ¦--expr:  [0/0] {51}                                      
      ¦   °--NUM_CONST: 1 [0/0] {50}                            
      ¦--'+': + [0/0] {52}                                      

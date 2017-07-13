@@ -1,21 +1,21 @@
-ROOT (token: short_text [newlines/spaces] {id})                 
- ¦--expr:  [2/0] {60}                                           
+ROOT (token: short_text [lag_newlines/spaces] {id})             
+ ¦--expr:  [0/0] {60}                                           
  ¦   ¦--expr:  [0/1] {3}                                        
  ¦   ¦   °--SYMBOL: a [0/0] {1}                                 
- ¦   ¦--SPECIAL: %>% [1/0] {2}                                  
- ¦   ¦--expr:  [0/1] {10}                                       
+ ¦   ¦--SPECIAL: %>% [0/0] {2}                                  
+ ¦   ¦--expr:  [1/1] {10}                                       
  ¦   ¦   ¦--expr:  [0/0] {7}                                    
  ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: b [0/0] {5}               
  ¦   ¦   ¦--'(': ( [0/0] {6}                                    
  ¦   ¦   °--')': ) [0/0] {8}                                    
- ¦   ¦--SPECIAL: %>% [1/0] {11}                                 
- ¦   ¦--expr:  [0/1] {19}                                       
+ ¦   ¦--SPECIAL: %>% [0/0] {11}                                 
+ ¦   ¦--expr:  [1/1] {19}                                       
  ¦   ¦   ¦--expr:  [0/0] {16}                                   
  ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: c [0/0] {14}              
  ¦   ¦   ¦--'(': ( [0/0] {15}                                   
  ¦   ¦   °--')': ) [0/0] {17}                                   
- ¦   ¦--SPECIAL: %>% [1/10] {20}                                
- ¦   ¦--expr:  [0/1] {49}                                       
+ ¦   ¦--SPECIAL: %>% [0/10] {20}                                
+ ¦   ¦--expr:  [1/1] {49}                                       
  ¦   ¦   ¦--expr:  [0/0] {25}                                   
  ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: d [0/0] {23}              
  ¦   ¦   ¦--'(': ( [0/0] {24}                                   
@@ -36,13 +36,13 @@ ROOT (token: short_text [newlines/spaces] {id})
  ¦   ¦   ¦       ¦   °--')': ) [0/0] {36}                       
  ¦   ¦   ¦       °--')': ) [0/0] {41}                           
  ¦   ¦   °--')': ) [0/0] {45}                                   
- ¦   ¦--SPECIAL: %>% [1/33] {50}                                
- ¦   °--expr:  [0/0] {58}                                       
+ ¦   ¦--SPECIAL: %>% [0/33] {50}                                
+ ¦   °--expr:  [1/0] {58}                                       
  ¦       ¦--expr:  [0/0] {55}                                   
  ¦       ¦   °--SYMBOL_FUNCTION_CALL: g_out [0/0] {53}          
  ¦       ¦--'(': ( [0/0] {54}                                   
  ¦       °--')': ) [0/0] {56}                                   
- °--expr:  [0/0] {79}                                           
+ °--expr:  [2/0] {79}                                           
      ¦--expr:  [0/1] {67}                                       
      ¦   °--SYMBOL: a [0/0] {65}                                
      ¦--LEFT_ASSIGN: <- [0/1] {66}                              

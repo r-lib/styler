@@ -10,7 +10,6 @@ create_tree <- function(text) {
     create_node_from_nested_root() %>%
     as.data.frame()
 }
-
 #' Convert a nested tibble into a node tree
 #'
 #' This function is convenient to display all nesting levels of a nested tibble
@@ -24,11 +23,10 @@ create_tree <- function(text) {
 #'   styler:::pre_visit(c(styler:::create_filler)) %>%
 #'   styler:::create_node_from_nested_root()
 create_node_from_nested_root <- function(pd_nested) {
-  n <- data.tree::Node$new("ROOT (token: short_text [newlines/spaces] {id})")
+  n <- data.tree::Node$new("ROOT (token: short_text [lag_newlines/spaces] {id})")
   create_node_from_nested(pd_nested, n)
   n
 }
-
 #' Create node from nested parse data
 #'
 #' @inheritParams create_node_from_nested_root
@@ -40,7 +38,7 @@ create_node_from_nested <- function(pd_nested, parent) {
 
   node_info <-
     pd_nested %>%
-    transmute(formatted = paste0(token, ": ", short, " [", newlines, "/", spaces, "] {", id, "}")) %>%
+    transmute(formatted = paste0(token, ": ", short, " [", lag_newlines, "/", spaces, "] {", id, "}")) %>%
     .[["formatted"]]
 
   child_nodes <-
