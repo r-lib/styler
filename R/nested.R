@@ -46,9 +46,47 @@ compute_parse_data_nested <- function(text) {
 #' @return A flat parse table
 tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA))
+  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
+    enhance_mapping_special()
   parse_data
 }
+
+#' Enhance the mapping of text to the token "SPECIAL"
+#'
+#' Map text corresponding to the token "SPECIAL" to a (more) unique token
+#'   description.
+enhance_mapping_special <- function(pd) {
+  pd %>%
+    mutate(token = case_when(
+      token != "SPECIAL" ~ token,
+      text == "%>%" ~ special_and("PIPE"),
+      text == "%in%" ~ special_and("IN"),
+      TRUE ~ special_and("OTHER")
+    ))
+}
+
+special_and <- function(text) {
+  paste0("SPECIAL-", text)
+}
+
+
+#' lookup which new tokens were created from "SPECIAL"
+#'
+#' @importFrom purrr map_chr
+lookup_new_special <- function(regex = NA) {
+  new_special <- c("PIPE", "IN", "OTHER")
+
+  potential_regex <- grep(regex, new_special, value = TRUE, ignore.case = TRUE)
+  if (is.na(regex)) {
+    mapping <- new_special
+  } else if (length(potential_regex) > 0) {
+    mapping <- potential_regex
+  } else {
+    return(NA)
+  }
+  map_chr(mapping, special_and)
+}
+
 
 #' Add information about previous / next token to each terminal
 #'
