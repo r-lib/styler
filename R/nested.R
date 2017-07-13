@@ -55,6 +55,7 @@ tokenize <- function(text) {
 #'
 #' Map text corresponding to the token "SPECIAL" to a (more) unique token
 #'   description.
+#' @param pd A parse table.
 enhance_mapping_special <- function(pd) {
   pd %>%
     mutate(token = case_when(
@@ -72,6 +73,7 @@ special_and <- function(text) {
 
 #' lookup which new tokens were created from "SPECIAL"
 #'
+#' @param regex A regular expression pattern to search for.
 #' @importFrom purrr map_chr
 lookup_new_special <- function(regex = NA) {
   new_special <- c("PIPE", "IN", "OTHER")

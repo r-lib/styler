@@ -6,6 +6,9 @@
 \usage{
 enhance_mapping_special(pd)
 }
+\arguments{
+\item{pd}{A parse table.}
+}
 \description{
 Map text corresponding to the token "SPECIAL" to a (more) unique token
 description.

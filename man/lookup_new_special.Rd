@@ -6,6 +6,9 @@
 \usage{
 lookup_new_special(regex = NA)
 }
+\arguments{
+\item{regex}{A regular expression pattern to search for.}
+}
 \description{
 lookup which new tokens were created from "SPECIAL"
 }
