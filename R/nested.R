@@ -62,8 +62,7 @@ add_terminal_token_after <- function(pd_flat) {
     filter(terminal) %>%
     arrange(line1, col1) %>%
     transmute(id = id, token_after = lead(token, default = "")) %>%
-    right_join(pd_flat, by = "id") %>%
-    select(-token_after, everything(), token_after)
+    left_join(pd_flat, ., by = "id")
 }
 #' @rdname add_token_terminal
 add_terminal_token_before <- function(pd_flat) {
@@ -71,8 +70,7 @@ add_terminal_token_before <- function(pd_flat) {
     filter(terminal) %>%
     arrange(line1, col1) %>%
     transmute(id = id, token_before = lag(token, default = "")) %>%
-    right_join(pd_flat, by = "id") %>%
-    select(-token_before, everything(), token_before)
+    left_join(pd_flat, ., by = "id")
 }
 
 #' Helper for setting spaces
