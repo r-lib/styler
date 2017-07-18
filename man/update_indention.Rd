@@ -31,8 +31,6 @@ Update indention information of parse data
 \itemize{
 \item \code{indent_round}: Inserts indetion based on round brackets.
 
-\item \code{indent_op}: Inserts indetion based on operators.
-
 \item \code{indent_without_paren}: Is used to indent if / while / for statements
 that do not have curly brackets.
 }}

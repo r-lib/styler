@@ -2,12 +2,9 @@
 % Please edit documentation in R/modify_pd.R
 \name{pd_has_token}
 \alias{pd_has_token}
-\alias{pd_has_token_not_first}
 \title{Check whether a parse table contains a token}
 \usage{
 pd_has_token(pd, token)
-
-pd_has_token_not_first(pd, token)
 }
 \arguments{
 \item{pd}{A parse table.}
@@ -19,10 +16,5 @@ parse table.}
 \code{TRUE} if the token is in the parse table, \code{FALSE} otherwise.
 }
 \description{
-Checks whether a token is in a parse table. \code{pd_has_token_not_one} is usesful
-in the situation where one wants to check whether the \emph{operator} + or - is
-in the parse table, but not the \emph{sign} + or -.
-We use the fact that signs always appear as first tokens in the parse
-table. There are two functions and not just one for performance reasons
-only, as this function is rather low level and gets called very often.
+Checks whether a token is in a parse table.
 }

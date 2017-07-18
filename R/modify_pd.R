@@ -76,12 +76,7 @@ child_indents <- function(pd, opening, token) {
 
 #' Check whether a parse table contains a token
 #'
-#' Checks whether a token is in a parse table. `pd_has_token_not_one` is usesful
-#'   in the situation where one wants to check whether the *operator* + or - is
-#'   in the parse table, but not the *sign* + or -.
-#'   We use the fact that signs always appear as first tokens in the parse
-#'   table. There are two functions and not just one for performance reasons
-#'   only, as this function is rather low level and gets called very often.
+#' Checks whether a token is in a parse table.
 #' @param pd A parse table.
 #' @param token The token for which it should be checked whether it is in the
 #'   parse table.
@@ -91,13 +86,7 @@ pd_has_token <- function(pd, token) {
   any(has_indention_token)
 }
 
-#' @rdname pd_has_token
-pd_has_token_not_first <- function(pd, token) {
-  has_indention_token <- token %in% pd$token[-1]
-  any(has_indention_token)
-}
-
-#' @describeIn update_indention Inserts indetion based on operators.
+#' @rdname update_indention
 indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL-PIPE")) {
   opening <- which(pd$token %in% token)
   if (length(opening) > 0) {
