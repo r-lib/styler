@@ -73,9 +73,42 @@ make_transformer_nested <- function(transformers) {
     text <- gsub("\t", "        ", text)
 
     pd_nested <- compute_parse_data_nested(text)
-    transformed_pd_nested <- pre_visit(pd_nested, transformers)
+    transformed_pd <- apply_transformers(pd_nested, transformers)
     # TODO verify_roundtrip
-    new_text <- serialize_parse_data_nested(transformed_pd_nested)
+    new_text <- serialize_parse_data_nested(transformed_pd)
     new_text
   }
+}
+
+
+
+#' Apply transformers to a parse table
+#'
+#' Depending on whether `transformers` contains functions to modify the
+#'   line break information, the column `multi_line` is updated (after
+#'   the line break information is modified) and
+#'   the rest of the transformers is applied afterwards, or (if line break
+#'   information is not to be modified), all transformers are applied in one
+#'   step. The former requires two pre visits and one post visit, the latter
+#'   only one pre visit.
+#' @param pd_nested A nested parse table.
+#' @param transformers A list of *named* transformer functions
+#' @importFrom purrr flatten
+apply_transformers <- function(pd_nested, transformers) {
+  if (is.null(transformers$line_break)) {
+    transformed_all <- pre_visit(pd_nested, unlist(transformers))
+  } else {
+    transformed_line_breaks <- pre_visit(pd_nested,
+                                         c(transformers$filler,
+                                           transformers$line_break))
+
+    transformed_updated_multi_line <- post_visit(transformed_line_breaks,
+                                                 c(set_multi_line))
+
+    transformed_all <- pre_visit(transformed_updated_multi_line,
+                                 c(transformers$space,
+                                   transformers$token,
+                                   transformers$eol))
+  }
+  transformed_all
 }
