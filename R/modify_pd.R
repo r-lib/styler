@@ -122,6 +122,29 @@ indent_without_paren <- function(pd, indent_by = 2) {
   pd
 }
 
+#' Set the multi-line column
+#'
+#' Sets the column `multi_line` in `pd` by checking row-wise whether any child
+#'   of a token is a multi-line token.
+#' @param pd A parse table.
+#' @importFrom purrr map_lgl
+set_multi_line <- function(pd) {
+  pd %>%
+    mutate(multi_line = map_lgl(child, token_is_multi_line))
+}
+
+#' Check whether a parse table is a multi-line token
+#'
+#' A token is a multi-line expression if and only if:
+#'
+#' * it contains a line break.
+#' * it has at least one child that is a multi-line expression itself.
+#' @param pd A parse table.
+token_is_multi_line <- function(pd) {
+  any(pd$multi_line) | any(pd$lag_newlines)
+}
+
+
 #' Strip EOL spaces
 #'
 #' Remove end-of-line spaces.
