@@ -45,17 +45,6 @@ serialize_parse_data_nested <- function(pd_nested) {
   out
 }
 
-#' Get the start right
-#'
-#' On what line does the first token occur?
-#' @param pd A parse table.
-#' @return The line number on which the first token occurs.
-start_on_line <- function(pd) {
-  pd$line1[1]
-}
-
-
-
 #' Serialize Flat Parse Data
 #'
 #' Collapses a parse table into character vector representation.

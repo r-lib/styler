@@ -46,9 +46,49 @@ compute_parse_data_nested <- function(text) {
 #' @return A flat parse table
 tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA))
+  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
+    enhance_mapping_special()
   parse_data
 }
+
+#' Enhance the mapping of text to the token "SPECIAL"
+#'
+#' Map text corresponding to the token "SPECIAL" to a (more) unique token
+#'   description.
+#' @param pd A parse table.
+enhance_mapping_special <- function(pd) {
+  pd %>%
+    mutate(token = case_when(
+      token != "SPECIAL" ~ token,
+      text == "%>%" ~ special_and("PIPE"),
+      text == "%in%" ~ special_and("IN"),
+      TRUE ~ special_and("OTHER")
+    ))
+}
+
+special_and <- function(text) {
+  paste0("SPECIAL-", text)
+}
+
+
+#' lookup which new tokens were created from "SPECIAL"
+#'
+#' @param regex A regular expression pattern to search for.
+#' @importFrom purrr map_chr
+lookup_new_special <- function(regex = NA) {
+  new_special <- c("PIPE", "IN", "OTHER")
+
+  potential_regex <- grep(regex, new_special, value = TRUE, ignore.case = TRUE)
+  if (is.na(regex)) {
+    mapping <- new_special
+  } else if (length(potential_regex) > 0) {
+    mapping <- potential_regex
+  } else {
+    return(NA)
+  }
+  map_chr(mapping, special_and)
+}
+
 
 #' Add information about previous / next token to each terminal
 #'
@@ -64,6 +104,7 @@ add_terminal_token_after <- function(pd_flat) {
     transmute(id = id, token_after = lead(token, default = "")) %>%
     left_join(pd_flat, ., by = "id")
 }
+
 #' @rdname add_token_terminal
 add_terminal_token_before <- function(pd_flat) {
   pd_flat %>%
@@ -139,4 +180,13 @@ combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
   arrange_(bound, ~line1, ~col1)
+}
+
+#' Get the start right
+#'
+#' On what line does the first token occur?
+#' @param pd A parse table.
+#' @return The line number on which the first token occurs.
+start_on_line <- function(pd) {
+  pd$line1[1]
 }

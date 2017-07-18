@@ -94,7 +94,7 @@ pd_has_token_not_first <- function(pd, token) {
 }
 
 #' @rdname update_indention
-indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL")) {
+indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL-PIPE")) {
   opening <- which(pd$token %in% token)
   if (length(opening) > 0) {
     start <- opening[1] + 1
@@ -115,5 +115,5 @@ indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL")) {
 #' @return A nested parse table.
 strip_eol_spaces <- function(pd_flat) {
   pd_flat %>%
-    mutate(spaces = spaces * (newlines == 0))
+    mutate(spaces = spaces * (lead(lag_newlines, default = 0) == 0))
 }

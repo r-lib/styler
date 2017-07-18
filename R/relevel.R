@@ -14,7 +14,7 @@ flatten_operators <- function(pd_nested) {
 
 
 flatten_operators_one <- function(pd_nested) {
-  token <- c("'+'", "'-'", "SPECIAL", "'/'", "'*'")
+  token <- c("'+'", "'-'", special_token, "'/'", "'*'")
   token_pos <- which(pd_nested$token %in% token)
   if (length(token_pos) == 0) return(pd_nested)
   stopifnot(length(token_pos) == 1)
@@ -28,4 +28,3 @@ flatten_operators_one <- function(pd_nested) {
     bind_rows(pd_nested$child[[lhs_pos]]) %>%
     arrange(line1, col1)
 }
-

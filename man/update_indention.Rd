@@ -11,7 +11,7 @@ indent_round(pd, indent_by)
 
 indent_curly(pd, indent_by)
 
-indent_op(pd, indent_by, token = c(math_token, "SPECIAL"))
+indent_op(pd, indent_by, token = c(math_token, "SPECIAL-PIPE"))
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with
