@@ -4,10 +4,18 @@
 \alias{get_transformers_nested}
 \title{Get the transformer functions for nested styling}
 \usage{
-get_transformers_nested(strict = TRUE, indent_by = 2,
-  start_comments_with_one_space = FALSE)
+get_transformers_nested(manipulate_spaces = TRUE,
+  manipulate_line_breaks = TRUE, manipulate_tokens = TRUE, strict = TRUE,
+  indent_by = 2, start_comments_with_one_space = FALSE)
 }
 \arguments{
+\item{manipulate_spaces}{Whether spaces should be manipulated in the styling.}
+
+\item{manipulate_line_breaks}{Whether line breaks should be manipulated in
+the styling.}
+
+\item{manipulate_tokens}{Whether tokens should be manipulated in the styling.}
+
 \item{strict}{A logical value indicating whether a set of strict
 or not so strict transformer functions should be returned.}
 
