@@ -1,5 +1,6 @@
 add_brackets_in_pipe <- function(pd) {
-  has_no_brackets <- (pd$token_before == "SPECIAL-PIPE") & (pd$token == "SYMBOL")
+  has_no_brackets <- (pd$token_before == "SPECIAL-PIPE") &
+    (pd$token == "SYMBOL") & (pd$text != ".")
   if (!any(has_no_brackets)) return(pd)
   new <- data_frame(token = c("'('", "')'"),
              text  = c("(", ")"),
