@@ -6,11 +6,11 @@ pd %>%
 
 1 + ( # FIXME indention interaction math and braces
     22 - (1 / # FIXME indention interaction math and braces
-          2718 /
-          23 * 29 * (
-            2 * (22 * -1) +
-              1) -
-          18) +
+        2718 /
+        23 * 29 * (
+          2 * (22 * -1) +
+            1) -
+        18) +
       sin(pi) -
       2
   )

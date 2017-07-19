@@ -1,12 +1,12 @@
 # { never on its own line
 if (y == 0){
-    1
-  } else { # FIXME indention
+  1
+} else {
   2
 }
 
 test_that("I am here", {
-    a_test(x) # FIXME indention
+  a_test(x)
 })
 
 
