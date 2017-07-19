@@ -7,7 +7,6 @@ Description:
 Imports:
     dplyr,
     magrittr,
-    pkgload,
     purrr,
     readr,
     rprojroot,
