@@ -19,3 +19,7 @@
 (((
   1 + 2) * (3 + 4 # FIXME only one indention here
 ))) # FIXME indention interaction math and braces
+
+
+function(x, y, z) {
+}

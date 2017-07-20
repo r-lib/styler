@@ -14,6 +14,8 @@ indent_round <- function(pd, indent_by) {
     opening <- which(pd$token == "'('")
     start <- opening + 1
     stop <- nrow(pd) - 1
+    if (start > stop) return(pd)
+
     pd <- pd %>%
       mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
                                       indent_by, 0))
@@ -29,6 +31,8 @@ indent_curly <- function(pd, indent_by) {
     opening <- which(pd$token == "'{'")
     start <- opening + 1
     stop <- nrow(pd) - 1
+    if (start > stop) return(pd)
+
     pd <- pd %>%
       mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
                                       indent_by, 0))
