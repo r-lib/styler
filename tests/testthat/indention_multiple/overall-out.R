@@ -1,7 +1,7 @@
 #' this function does
 #' 
 #' @param x a parameter.
-#'    indented comments
+#' indented comments
 a <- function(x) {
   test_that("I want to test", {
     out <- c(1, c(

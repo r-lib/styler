@@ -47,25 +47,37 @@ get_transformers_flat <- function(strict = TRUE,
 #'
 #' Similar to [get_transformers_flat()], but additionally, returns some
 #'   functions needed due the fact that styling is done in a nested way.
+#' @param scope The extend of manipulation. Can range from "none" (least
+#'   invasive) to "token (most invasive). See 'Details'. This argument is a
+#'   vector of length one.
 #' @param indent_by How many spaces of indention should be inserted after
 #'   operators such as '('.
-#' @param manipulate_spaces Whether spaces should be manipulated in the styling.
-#' @param manipulate_line_breaks Whether line breaks should be manipulated in
-#'   the styling.
-#' @param manipulate_tokens Whether tokens should be manipulated in the styling.
 #' @inheritParams get_transformers_flat
+#' @details The following options for `scope` are available.
+#'
+#' * "none": Performs no transformation at all.
+#' * "spaces": Manipulates spacing between token on the same line.
+#' * "line_breaks": In addition to "spaces", this option also manipulates
+#'   line breaks.
+#' * "tokens": In addition to "line_breaks", this option also manipulates
+#'   tokens.
+#'
+#' As it becomes clear from this description, more invasive operations can only
+#' be performed if all less invasive operations are performed too.
 #' @family obtain transformers
 #' @importFrom purrr partial
 #' @export
 get_transformers_nested <- function(
-  manipulate_spaces = TRUE,
-  manipulate_line_breaks = TRUE,
-  manipulate_tokens = TRUE,
+  scope = "tokens",
   strict = TRUE,
   indent_by = 2,
-  start_comments_with_one_space = FALSE) {
+  start_comments_with_one_space = scope) {
 
-  space_manipulators <- if (manipulate_line_breaks)
+  lvls_scope <- c("none", "spaces", "line_breaks", "tokens")
+
+  scope <- character_to_ordered(scope, lvls_scope)
+
+  space_manipulators <- if (scope >= lvls_scope[2])
     c(
       partial(indent_round, indent_by = indent_by),
       partial(indent_curly, indent_by = indent_by),
@@ -77,7 +89,7 @@ get_transformers_nested <- function(
       set_space_between_levels
     )
 
-  line_break_manipulators <- if (manipulate_line_breaks)
+  line_break_manipulators <- if (scope >= lvls_scope[3])
     c(
       remove_line_break_before_curly_opening,
       remove_line_break_before_round_closing,
@@ -86,7 +98,7 @@ get_transformers_nested <- function(
       add_line_break_after_pipe
     )
 
-  token_manipulators <- if (manipulate_tokens)
+  token_manipulators <- if (scope >= lvls_scope[4])
     c(
       force_assignment_op,
       resolve_semicolon,
@@ -103,3 +115,21 @@ get_transformers_nested <- function(
     NULL
   )
 }
+
+
+#' Convert a character vector to an ordered factor
+#'
+#' Convert a vector to an ordered factor but stop if any of the values in
+#'   `x` does not match the predefined levels in `levels.`
+#' @param x A character vector.
+#' @param levels A vector with levels.
+#' @param name The name of the character vector to be dispayed if the
+#'   construction of the factor fails.
+character_to_ordered <- function(x, levels, name = substitute(x)) {
+  if (!all((x %in% levels))) {
+    stop("all values in ", name, " must be one of the following: ",
+         paste(levels, collapse = ", "))
+  }
+  factor(x, levels = levels, ordered = TRUE)
+}
+

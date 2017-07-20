@@ -71,6 +71,7 @@ make_transformer_nested <- function(transformers) {
   function(text) {
     text <- gsub(" +$", "", text)
     text <- gsub("\t", "        ", text)
+    if (is.null(transformers$space)) return(text)
 
     pd_nested <- compute_parse_data_nested(text)
     transformed_pd <- apply_transformers(pd_nested, transformers)

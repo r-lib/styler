@@ -4,17 +4,13 @@
 \alias{get_transformers_nested}
 \title{Get the transformer functions for nested styling}
 \usage{
-get_transformers_nested(manipulate_spaces = TRUE,
-  manipulate_line_breaks = TRUE, manipulate_tokens = TRUE, strict = TRUE,
-  indent_by = 2, start_comments_with_one_space = FALSE)
+get_transformers_nested(scope = "tokens", strict = TRUE, indent_by = 2,
+  start_comments_with_one_space = scope)
 }
 \arguments{
-\item{manipulate_spaces}{Whether spaces should be manipulated in the styling.}
-
-\item{manipulate_line_breaks}{Whether line breaks should be manipulated in
-the styling.}
-
-\item{manipulate_tokens}{Whether tokens should be manipulated in the styling.}
+\item{scope}{The extend of manipulation. Can range from "none" (least
+invasive) to "token (most invasive). See 'Details'. This argument is a
+vector of length one.}
 
 \item{strict}{A logical value indicating whether a set of strict
 or not so strict transformer functions should be returned.}
@@ -28,6 +24,20 @@ with only one space (see \code{\link[=start_comments_with_space]{start_comments_
 \description{
 Similar to \code{\link[=get_transformers_flat]{get_transformers_flat()}}, but additionally, returns some
 functions needed due the fact that styling is done in a nested way.
+}
+\details{
+The following options for \code{scope} are available.
+\itemize{
+\item "none": Performs no transformation at all.
+\item "spaces": Manipulates spacing between token on the same line.
+\item "line_breaks": In addition to "spaces", this option also manipulates
+line breaks.
+\item "tokens": In addition to "line_breaks", this option also manipulates
+tokens.
+}
+
+As it becomes clear from this description, more invasive operations can only
+be performed if all less invasive operations are performed too.
 }
 \seealso{
 Other obtain transformers: \code{\link{get_transformers_flat}}
