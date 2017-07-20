@@ -112,6 +112,16 @@ indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL-PIPE")) {
   pd
 }
 
+#' @describeIn update_indention Is used to indent if / while / for statements
+#'   that do not have curly brackets.
+indent_without_paren <- function(pd, indent_by = 2) {
+  nrow <- nrow(pd)
+  if (!(pd$token[1] %in% c("IF", "FOR", "WHILE"))) return(pd)
+  if (pd$child[[nrow]]$token[1] == "'{'") return(pd)
+  pd$indent[nrow] <- indent_by
+  pd
+}
+
 #' Strip EOL spaces
 #'
 #' Remove end-of-line spaces.

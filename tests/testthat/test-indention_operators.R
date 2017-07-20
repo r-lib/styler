@@ -18,6 +18,13 @@ test_that("mathematical operators are indended correctly", {
 })
 
 
+test_that("while / for / if without curly brackets", {
+  expect_warning(test_collection("indention_operators",
+                                 "while_for_if_without_curly",
+                                 transformer = style_text), NA)
+})
+
+
 test_that("overall", {
   expect_warning(test_collection("indention_operators",
                                  "overall",
