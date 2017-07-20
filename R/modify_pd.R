@@ -7,7 +7,7 @@
 #' @name update_indention
 NULL
 
-#' @rdname update_indention
+#' @describeIn update_indention Inserts indetion based on round brackets.
 indent_round <- function(pd, indent_by) {
   indention_needed <- needs_indention(pd, token = "'('")
   if (indention_needed) {
@@ -97,7 +97,7 @@ pd_has_token_not_first <- function(pd, token) {
   any(has_indention_token)
 }
 
-#' @rdname update_indention
+#' @describeIn update_indention Inserts indetion based on operators.
 indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL-PIPE")) {
   opening <- which(pd$token %in% token)
   if (length(opening) > 0) {
