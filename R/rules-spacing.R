@@ -1,5 +1,6 @@
 math_token <- c("'+'", "'-'", "'*'", "'/'", "'^'")
 
+#' @include nested.R
 special_token <- lookup_new_special()
 
 op_token <- c(
