@@ -52,25 +52,39 @@ indent_curly <- function(pd, indent_by) {
 #'       "opens" indention without closing it on this line.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
 needs_indention <- function(pd, token = "'('") {
-  opening <- which(pd$token %in% token)
-  if (length(opening) < 1) return(FALSE)
+  opening <- which(pd$token %in% token)[1]
+  if (is.na(opening)) return(FALSE)
   before_first_break <- which(pd$lag_newlines > 0)[1] - 1
   if (is.na(before_first_break)) return(FALSE)
   !any(pd$multi_line[opening:before_first_break])
 }
 
 #' @rdname update_indention
-indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL-PIPE")) {
-  opening <- which(pd$token %in% token)
-  if (length(opening) > 0) {
+indent_op <- function(pd, indent_by, token = c(math_token,
+                                               "SPECIAL-PIPE")) {
+  if (needs_indention(pd, token)) {
+    opening <- which(pd$token %in% token)
     start <- opening[1] + 1
     stop <- nrow(pd)
-  } else {
-    start <- stop <- 0
+    pd <- pd %>%
+      mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
+                                      indent_by, 0))
   }
-  pd <- pd %>%
-    mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
-                                    indent_by, 0))
+  pd
+}
+
+#' @describeIn update_indention Same as indent_op, but only indents one token
+#'   after `token`, not all remaining.
+indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
+                                                   EQ_ASSIGN")) {
+  if (needs_indention(pd, token)) {
+    opening <- which(pd$token %in% token)
+    start <- opening + 1
+    stop <- start + 1
+    pd <- pd %>%
+      mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
+                                      indent_by, 0))
+  }
   pd
 }
 
