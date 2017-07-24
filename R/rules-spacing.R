@@ -144,13 +144,12 @@ set_space_between_levels <- function(pd_flat) {
 #' @param force_one Wheter or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".
 start_comments_with_space <- function(pd, force_one = FALSE) {
-  comments <- pd %>%
-    filter(token == "COMMENT")
+  comment_pos <- pd$token == "COMMENT"
+  if (all(!comment_pos)) return(pd)
 
-  if (nrow(comments) == 0) return(pd)
+  comments <- pd[comment_pos, ]
 
-  non_comments <- pd %>%
-    filter(token != "COMMENT")
+  non_comments <-pd[pd$token != "COMMENT", ]
 
   comments <- comments %>%
     extract(text, c("prefix", "space_after_prefix", "text"),
@@ -167,8 +166,7 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
   )
   comments$short <- substr(comments$text, 1, 5)
 
-  comments %>%
-    select(-space_after_prefix, -prefix) %>%
+  comments[, setdiff(names(comments), c("space_after_prefix", "prefix"))] %>%
     bind_rows(non_comments) %>%
     arrange(line1, col1)
 }

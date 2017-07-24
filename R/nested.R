@@ -168,8 +168,7 @@ nest_parse_data <- function(pd_flat) {
     left_join(internal, ., by = c("id" = "parent_"))
   nested <- joined
   nested$child <- map2(nested$child, nested$internal_child, combine_children)
-  nested <- nested %>%
-    select_(~-internal_child)
+  nested <- nested[, setdiff(names(nested), "internal_child")]
   nest_parse_data(nested)
 }
 
@@ -185,7 +184,8 @@ nest_parse_data <- function(pd_flat) {
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
-  arrange_(bound, ~line1, ~col1)
+  bound[order(bound$line1, bound$col1), ]
+
 }
 
 #' Get the start right
