@@ -33,7 +33,6 @@ compute_parse_data_nested <- function(text) {
   parse_data$short <- substr(parse_data$text, 1, 5)
 
   pd_nested <- parse_data %>%
-    select_(~short, ~everything()) %>%
     nest_parse_data() %>%
     flatten_operators()
 
@@ -99,19 +98,23 @@ NULL
 
 #' @rdname add_token_terminal
 add_terminal_token_after <- function(pd_flat) {
-  pd_flat %>%
+  terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(line1, col1) %>%
-    transmute(id = id, token_after = lead(token, default = "")) %>%
+    arrange(line1, col1)
+
+  data_frame(id = terminals$id,
+             token_after = lead(terminals$token, default = "")) %>%
     left_join(pd_flat, ., by = "id")
 }
 
 #' @rdname add_token_terminal
 add_terminal_token_before <- function(pd_flat) {
-  pd_flat %>%
+  terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(line1, col1) %>%
-    transmute(id = id, token_before = lag(token, default = "")) %>%
+    arrange(line1, col1)
+
+  data_frame(id = terminals$id,
+             token_before = lag(terminals$token, default = "")) %>%
     left_join(pd_flat, ., by = "id")
 }
 
@@ -166,9 +169,7 @@ nest_parse_data <- function(pd_flat) {
   nested <- joined
   nested$child <- map2(nested$child, nested$internal_child, combine_children)
   nested <- nested %>%
-    select_(~-internal_child) %>%
-    select_(~short, ~everything(), ~-text, ~text)
-
+    select_(~-internal_child)
   nest_parse_data(nested)
 }
 
