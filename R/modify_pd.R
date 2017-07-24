@@ -9,9 +9,9 @@ NULL
 
 #' @describeIn update_indention Inserts indetion based on round brackets.
 indent_round <- function(pd, indent_by) {
-  indention_needed <- needs_indention(pd, token = "'('")
+  opening <- which(pd$token == "'('")
+  indention_needed <- needs_indention(pd, token = "'('", opening[1])
   if (indention_needed) {
-    opening <- which(pd$token == "'('")
     start <- opening + 1
     stop <- nrow(pd) - 1
     if (start > stop) return(pd)
@@ -24,9 +24,9 @@ indent_round <- function(pd, indent_by) {
 }
 #' @rdname update_indention
 indent_curly <- function(pd, indent_by) {
-  indention_needed <- needs_indention(pd, token = "'{'")
+  opening <- which(pd$token == "'{'")
+  indention_needed <- needs_indention(pd, token = "'{'", opening[1])
   if (indention_needed) {
-    opening <- which(pd$token == "'{'")
     start <- opening + 1
     stop <- nrow(pd) - 1
     if (start > stop) return(pd)
@@ -41,14 +41,16 @@ indent_curly <- function(pd, indent_by) {
 #'
 #' @param pd A parse table.
 #' @param token Which token the check should be based on.
+#' @param opening the index of the opening parse table. Since always computed
+#'   before this function is called, it is included as an argument so it does
+#'   not have to be recomputed.
 #' @return returns `TRUE` if indention is needed, `FALSE` otherwise. Indention
 #'   is needed:
 #'     * if `token` occurs in `pd`.
 #'     * if there is no child that starts on the same line as `token` and
 #'       "opens" indention without closing it on this line.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
-needs_indention <- function(pd, token = "'('") {
-  opening <- which(pd$token %in% token)[1]
+needs_indention <- function(pd, token = "'('", opening) {
   if (is.na(opening)) return(FALSE)
   before_first_break <- which(pd$lag_newlines > 0)[1] - 1
   if (is.na(before_first_break)) return(FALSE)
@@ -58,8 +60,8 @@ needs_indention <- function(pd, token = "'('") {
 #' @rdname update_indention
 indent_op <- function(pd, indent_by, token = c(math_token,
                                                "SPECIAL-PIPE")) {
-  if (needs_indention(pd, token)) {
-    opening <- which(pd$token %in% token)
+  opening <- which(pd$token %in% token)
+  if (needs_indention(pd, token, opening[1])) {
     start <- opening[1] + 1
     stop <- nrow(pd)
     pd$indent <- pd$indent +
@@ -72,8 +74,8 @@ indent_op <- function(pd, indent_by, token = c(math_token,
 #'   after `token`, not all remaining.
 indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
                                                    EQ_ASSIGN")) {
-  if (needs_indention(pd, token)) {
-    opening <- which(pd$token %in% token)
+  opening <- which(pd$token %in% token)
+  if (needs_indention(pd, token, opening[1])) {
     start <- opening + 1
     stop <- start + 1
     pd$indent <- pd$indent +
@@ -111,7 +113,7 @@ set_multi_line <- function(pd) {
 #' * it has at least one child that is a multi-line expression itself.
 #' @param pd A parse table.
 token_is_multi_line <- function(pd) {
-  any(pd$multi_line) | any(pd$lag_newlines > 0)
+  any(pd$multi_line, pd$lag_newlines > 0)
 }
 
 

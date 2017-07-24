@@ -4,12 +4,16 @@
 \alias{needs_indention}
 \title{Check whether indention is needed}
 \usage{
-needs_indention(pd, token = "'('")
+needs_indention(pd, token = "'('", opening)
 }
 \arguments{
 \item{pd}{A parse table.}
 
 \item{token}{Which token the check should be based on.}
+
+\item{opening}{the index of the opening parse table. Since always computed
+before this function is called, it is included as an argument so it does
+not have to be recomputed.}
 }
 \value{
 returns \code{TRUE} if indention is needed, \code{FALSE} otherwise. Indention
