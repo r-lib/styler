@@ -7,13 +7,15 @@
 #' @name update_indention
 NULL
 
-#' @rdname update_indention
+#' @describeIn update_indention Inserts indetion based on round brackets.
 indent_round <- function(pd, indent_by) {
   indention_needed <- needs_indention(pd, token = "'('")
   if (indention_needed) {
     opening <- which(pd$token == "'('")
     start <- opening + 1
     stop <- nrow(pd) - 1
+    if (start > stop) return(pd)
+
     pd <- pd %>%
       mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
                                       indent_by, 0))
@@ -29,6 +31,8 @@ indent_curly <- function(pd, indent_by) {
     opening <- which(pd$token == "'{'")
     start <- opening + 1
     stop <- nrow(pd) - 1
+    if (start > stop) return(pd)
+
     pd <- pd %>%
       mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
                                       indent_by, 0))
@@ -93,7 +97,7 @@ pd_has_token_not_first <- function(pd, token) {
   any(has_indention_token)
 }
 
-#' @rdname update_indention
+#' @describeIn update_indention Inserts indetion based on operators.
 indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL-PIPE")) {
   opening <- which(pd$token %in% token)
   if (length(opening) > 0) {
@@ -105,6 +109,16 @@ indent_op <- function(pd, indent_by, token = c(math_token, "SPECIAL-PIPE")) {
   pd <- pd %>%
     mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
                                     indent_by, 0))
+  pd
+}
+
+#' @describeIn update_indention Is used to indent if / while / for statements
+#'   that do not have curly brackets.
+indent_without_paren <- function(pd, indent_by = 2) {
+  nrow <- nrow(pd)
+  if (!(pd$token[1] %in% c("IF", "FOR", "WHILE"))) return(pd)
+  if (pd$child[[nrow]]$token[1] == "'{'") return(pd)
+  pd$indent[nrow] <- indent_by
   pd
 }
 
