@@ -15,10 +15,8 @@ indent_round <- function(pd, indent_by) {
     start <- opening + 1
     stop <- nrow(pd) - 1
     if (start > stop) return(pd)
-
-    pd <- pd %>%
-      mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
-                                      indent_by, 0))
+    pd$indent <- pd$indent +
+      ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
   }
 
   pd %>%
@@ -32,10 +30,8 @@ indent_curly <- function(pd, indent_by) {
     start <- opening + 1
     stop <- nrow(pd) - 1
     if (start > stop) return(pd)
-
-    pd <- pd %>%
-      mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
-                                      indent_by, 0))
+    pd$indent <- pd$indent +
+      ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
   }
   pd %>%
     set_unindention_child(token = "'}'", unindent_by = indent_by)
@@ -66,9 +62,8 @@ indent_op <- function(pd, indent_by, token = c(math_token,
     opening <- which(pd$token %in% token)
     start <- opening[1] + 1
     stop <- nrow(pd)
-    pd <- pd %>%
-      mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
-                                      indent_by, 0))
+    pd$indent <- pd$indent +
+      ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
   }
   pd
 }
@@ -81,9 +76,8 @@ indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
     opening <- which(pd$token %in% token)
     start <- opening + 1
     stop <- start + 1
-    pd <- pd %>%
-      mutate(indent = indent + ifelse(seq_len(nrow(pd)) %in% start:stop,
-                                      indent_by, 0))
+    pd$indent <- pd$indent +
+      ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
   }
   pd
 }
@@ -105,8 +99,8 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #' @param pd A parse table.
 #' @importFrom purrr map_lgl
 set_multi_line <- function(pd) {
-  pd %>%
-    mutate(multi_line = map_lgl(child, token_is_multi_line))
+  pd$multi_line <- map_lgl(pd$child, token_is_multi_line)
+  pd
 }
 
 #' Check whether a parse table is a multi-line token
@@ -117,7 +111,7 @@ set_multi_line <- function(pd) {
 #' * it has at least one child that is a multi-line expression itself.
 #' @param pd A parse table.
 token_is_multi_line <- function(pd) {
-  any(pd$multi_line) | any(pd$lag_newlines)
+  any(pd$multi_line) | any(pd$lag_newlines > 0)
 }
 
 
@@ -127,6 +121,6 @@ token_is_multi_line <- function(pd) {
 #' @param pd_flat A flat parse table.
 #' @return A nested parse table.
 strip_eol_spaces <- function(pd_flat) {
-  pd_flat %>%
-    mutate(spaces = spaces * (lead(lag_newlines, default = 0) == 0))
+  pd_flat$spaces <- pd_flat$spaces * (lead(pd_flat$lag_newlines, default = 0) == 0)
+  pd_flat
 }

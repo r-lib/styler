@@ -44,9 +44,12 @@ enhance_parse_data <- function(parse_data) {
     parse_data_filtered %>%
     create_filler()
 
-  parse_data_comment_eol <-
-    parse_data_filled %>%
-    mutate_(text = ~if_else(token == "COMMENT", gsub(" +$", "", text), text))
+  parse_data_comment_eol <- parse_data_filled
+
+  parse_data_comment_eol$text <-
+    if_else(parse_data_comment_eol$token == "COMMENT",
+            gsub(" +$", "", parse_data_comment_eol$text),
+            parse_data_comment_eol$text)
 
   parse_data_comment_eol
 }
@@ -81,18 +84,17 @@ verify_roundtrip <- function(pd_flat, text) {
 #' @return A parse table with two three columns: lag_newlines, newlines and
 #'   spaces.
 create_filler <- function(pd_flat) {
-  ret <-
-    pd_flat %>%
-    mutate_(
-      line3 = ~lead(line1, default = tail(line2, 1)),
-      col3 = ~lead(col1, default = tail(col2, 1) + 1L),
-      newlines = ~line3 - line2,
-      lag_newlines = ~lag(newlines, default = 0),
-      col2_nl = ~if_else(newlines > 0L, 0L, col2),
-      spaces = ~col3 - col2_nl - 1L,
-      multi_line = ~ifelse(terminal, FALSE, NA)
-    ) %>%
+
+  pd_flat$line3 <- lead(pd_flat$line1, default = tail(pd_flat$line2, 1))
+  pd_flat$col3 <- lead(pd_flat$col1, default = tail(pd_flat$col2, 1) + 1L)
+  pd_flat$newlines <- pd_flat$line3 - pd_flat$line2
+  pd_flat$lag_newlines <- lag(pd_flat$newlines, default = 0)
+  pd_flat$col2_nl <- if_else(pd_flat$newlines > 0L, 0L, pd_flat$col2)
+  pd_flat$spaces <- pd_flat$col3 - pd_flat$col2_nl - 1L
+  pd_flat$multi_line <- ifelse(pd_flat$terminal, FALSE, NA)
+  ret <- pd_flat %>%
     select_(~-line3, ~-col3, ~-col2_nl)
+
 
   if (!("indent" %in% names(ret))) {
     ret$indent <- 0

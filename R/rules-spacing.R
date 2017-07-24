@@ -154,13 +154,22 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
 
   comments <- comments %>%
     extract(text, c("prefix", "space_after_prefix", "text"),
-            regex = "^(#+'*)( *)(.*)$") %>%
-    mutate(space_after_prefix = nchar(space_after_prefix),
-           space_after_prefix = set_spaces(space_after_prefix, force_one),
-           text = paste0(prefix, rep_char(" ", space_after_prefix), text),
-           short = substr(text, 1, 5)) %>%
-    select(-space_after_prefix, -prefix)
-  bind_rows(comments, non_comments) %>%
+            regex = "^(#+'*)( *)(.*)$")
+  comments$space_after_prefix <- nchar(comments$space_after_prefix)
+  comments$space_after_prefix <- set_spaces(
+    comments$space_after_prefix,
+    force_one
+  )
+
+  comments$text <- paste0(
+    comments$prefix,
+    rep_char(" ", comments$space_after_prefix), comments$text
+  )
+  comments$short <- substr(comments$text, 1, 5)
+
+  comments %>%
+    select(-space_after_prefix, -prefix) %>%
+    bind_rows(non_comments) %>%
     arrange(line1, col1)
 }
 

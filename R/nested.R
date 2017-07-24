@@ -29,9 +29,10 @@ compute_parse_data_nested <- function(text) {
     add_terminal_token_before() %>%
     add_terminal_token_after()
 
+  parse_data$child <- rep(list(NULL), length(parse_data$text))
+  parse_data$short <- substr(parse_data$text, 1, 5)
+
   pd_nested <- parse_data %>%
-    mutate_(child = ~rep(list(NULL), length(text))) %>%
-    mutate_(short = ~substr(text, 1, 5)) %>%
     select_(~short, ~everything()) %>%
     nest_parse_data() %>%
     flatten_operators()
@@ -57,13 +58,13 @@ tokenize <- function(text) {
 #'   description.
 #' @param pd A parse table.
 enhance_mapping_special <- function(pd) {
-  pd %>%
-    mutate(token = case_when(
+  pd$token <- with(pd, case_when(
       token != "SPECIAL" ~ token,
       text == "%>%" ~ special_and("PIPE"),
       text == "%in%" ~ special_and("IN"),
       TRUE ~ special_and("OTHER")
     ))
+  pd
 }
 
 special_and <- function(text) {
@@ -146,21 +147,25 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @importFrom purrr map2
 nest_parse_data <- function(pd_flat) {
   if (all(pd_flat$parent <= 0)) return(pd_flat)
+
+
+  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
   split <- pd_flat %>%
-    mutate_(internal = ~ (id %in% parent) | (parent <= 0)) %>%
-    nest_("data", names(pd_flat))
+    nest_("data", setdiff(names(pd_flat), "internal"))
 
   child <- split$data[!split$internal][[1L]]
   internal <- split$data[split$internal][[1L]]
 
   internal <- rename_(internal, internal_child = ~child)
 
-  nested <-
+  child$parent_ <- child$parent
+  joined <-
     child %>%
-    mutate_(parent_ = ~parent) %>%
     nest_(., "child", setdiff(names(.), "parent_")) %>%
-    left_join(internal, ., by = c("id" = "parent_")) %>%
-    mutate_(child = ~map2(child, internal_child, combine_children)) %>%
+    left_join(internal, ., by = c("id" = "parent_"))
+  nested <- joined
+  nested$child <- map2(nested$child, nested$internal_child, combine_children)
+  nested <- nested %>%
     select_(~-internal_child) %>%
     select_(~short, ~everything(), ~-text, ~text)
 
