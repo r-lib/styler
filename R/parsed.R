@@ -32,7 +32,7 @@ enhance_parse_data <- function(parse_data) {
   parse_data_filtered <-
     parse_data %>%
     filter_(~terminal) %>%
-    select_(~-id, ~-parent, ~-terminal) %>%
+    select_(~-id, ~-parent) %>%
     arrange_(~line1, ~col1, ~line2, ~col2) %>%
     bind_rows(
       tibble(line1 = 1L, col1 = 0L, line2 = 1L, col2 = 0L,
@@ -89,7 +89,8 @@ create_filler <- function(pd_flat) {
       newlines = ~line3 - line2,
       lag_newlines = ~lag(newlines, default = 0),
       col2_nl = ~if_else(newlines > 0L, 0L, col2),
-      spaces = ~col3 - col2_nl - 1L
+      spaces = ~col3 - col2_nl - 1L,
+      multi_line = ~ifelse(terminal, FALSE, NA)
     ) %>%
     select_(~-line3, ~-col3, ~-col2_nl)
 

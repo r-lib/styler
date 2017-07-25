@@ -7,23 +7,26 @@
 set_unindention_child <- function(pd, token = "')'", unindent_by) {
   if(all(pd$terminal) | all(pd$indent == 0)) return(pd)
   closing <- which(pd$token %in% token)
-  if (length(closing) == 0) return(pd)
-  closing_line <- pd$line1[closing]
+  if (length(closing) == 0 || pd$lag_newlines[closing] > 0) return(pd)
 
-  pd <- pd %>%
-    mutate(candidate = (!terminal) & (line2 == closing_line))
-  candidates <- pd %>%
-    filter(candidate)
+  first_on_same_line <- last(which(pd$lag_newlines > 0))
+  if (is.na(first_on_same_line)) {
+    on_same_line <- 1:(closing - 1)
+  } else {
+    on_same_line <- first_on_same_line:(closing - 1)
+  }
+  cand_ind <- setdiff(on_same_line, which(pd$terminal))
 
-  non_candidates <- pd %>%
-    filter(!candidate)
+  candidates <- pd[cand_ind, ]
+
+  non_candidates <- pd[-cand_ind, ]
+
   candidates$child <- map(candidates$child,
                           unindent_child,
                           unindent_by = abs(pd$indent[closing] - pd$indent[closing-1]))
 
   bind_rows(candidates, non_candidates) %>%
-    arrange(line1, col1) %>%
-    select(-candidate)
+    arrange(line1, col1)
 }
 
 #' Unindent a child

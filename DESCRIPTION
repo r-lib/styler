@@ -36,7 +36,6 @@ RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
 Collate: 
     'get_transformers.R'
-    'line_break-rules.R'
     'modify_pd.R'
     'nested.R'
     'nested_to_tree.R'

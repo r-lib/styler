@@ -12,7 +12,10 @@ test_that("spacing within comments is done correctly", {
 
   expect_warning(test_collection("parse_comments",
                                  "within_spacing_without_force",
-                                 transformer = style_text), NA)
+                                 transformer = style_text,
+                                 transformers = get_transformers(
+                                   flat = FALSE,
+                                   start_comments_with_one_space = FALSE)), NA)
 })
 
 test_that("spacing before comments is done correctly", {

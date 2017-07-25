@@ -4,7 +4,7 @@
 
 get_transformers(flat = FALSE, ...)
 get_transformers_flat(strict = TRUE, start_comments_with_one_space = FALSE)
-get_transformers_nested(strict = TRUE, indent_by = 2, start_comments_with_one_space = FALSE)
+get_transformers_nested(scope = "tokens", strict = TRUE, indent_by = 2, start_comments_with_one_space = FALSE)
 style_dir(path = ".", flat = FALSE, recursive = TRUE, transformers = get_transformers(flat = flat))
 style_file(path, flat = FALSE, transformers = get_transformers(flat = flat))
 style_pkg(pkg = ".", flat = FALSE, transformers = get_transformers(flat = flat))
