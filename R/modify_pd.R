@@ -14,9 +14,8 @@ indent_round <- function(pd, indent_by) {
   if (indention_needed) {
     start <- opening + 1
     stop <- nrow(pd) - 1
-    if (start > stop) return(pd)
     pd$indent <- pd$indent +
-      ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
+      ifelse(between(seq_len(nrow(pd)), start, stop), indent_by, 0)
   }
 
   pd %>%
@@ -29,9 +28,8 @@ indent_curly <- function(pd, indent_by) {
   if (indention_needed) {
     start <- opening + 1
     stop <- nrow(pd) - 1
-    if (start > stop) return(pd)
     pd$indent <- pd$indent +
-      ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
+      ifelse(between(seq_len(nrow(pd)), start, stop), indent_by, 0)
   }
   pd %>%
     set_unindention_child(token = "'}'", unindent_by = indent_by)
@@ -65,7 +63,7 @@ indent_op <- function(pd, indent_by, token = c(math_token,
     start <- opening[1] + 1
     stop <- nrow(pd)
     pd$indent <- pd$indent +
-      ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
+      ifelse(between(seq_len(nrow(pd)), start, stop), indent_by, 0)
   }
   pd
 }
@@ -79,7 +77,7 @@ indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
     start <- opening + 1
     stop <- start + 1
     pd$indent <- pd$indent +
-      ifelse(seq_len(nrow(pd)) %in% start:stop, indent_by, 0)
+      ifelse(between(seq_len(nrow(pd)), start, stop), indent_by, 0)
   }
   pd
 }
