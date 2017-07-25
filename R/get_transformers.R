@@ -71,7 +71,7 @@ get_transformers_nested <- function(
   scope = "tokens",
   strict = TRUE,
   indent_by = 2,
-  start_comments_with_one_space = scope) {
+  start_comments_with_one_space = FALSE) {
 
   lvls_scope <- c("none", "spaces", "line_breaks", "tokens")
 

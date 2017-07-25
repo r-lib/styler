@@ -5,7 +5,7 @@
 \title{Get the transformer functions for nested styling}
 \usage{
 get_transformers_nested(scope = "tokens", strict = TRUE, indent_by = 2,
-  start_comments_with_one_space = scope)
+  start_comments_with_one_space = FALSE)
 }
 \arguments{
 \item{scope}{The extent of manipulation. Can range from "none" (least
