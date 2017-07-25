@@ -8,7 +8,8 @@ force_assignment_op <- function(pd) {
 
 resolve_semicolon <- function(pd) {
   is_semicolon <- pd$token == "';'"
+  if (all(!is_semicolon)) return(pd)
   pd$lag_newlines[lag(is_semicolon)] <- 1L
-  pd <- pd[!is_semicolon,]
+  pd <- pd[!is_semicolon, ]
   pd
 }
