@@ -47,8 +47,8 @@ get_transformers_flat <- function(strict = TRUE,
 #'
 #' Similar to [get_transformers_flat()], but additionally, returns some
 #'   functions needed due the fact that styling is done in a nested way.
-#' @param scope The extend of manipulation. Can range from "none" (least
-#'   invasive) to "token (most invasive). See 'Details'. This argument is a
+#' @param scope The extent of manipulation. Can range from "none" (least
+#'   invasive) to "token" (most invasive). See 'Details'. This argument is a
 #'   vector of length one.
 #' @param indent_by How many spaces of indention should be inserted after
 #'   operators such as '('.

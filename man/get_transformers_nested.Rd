@@ -8,8 +8,8 @@ get_transformers_nested(scope = "tokens", strict = TRUE, indent_by = 2,
   start_comments_with_one_space = scope)
 }
 \arguments{
-\item{scope}{The extend of manipulation. Can range from "none" (least
-invasive) to "token (most invasive). See 'Details'. This argument is a
+\item{scope}{The extent of manipulation. Can range from "none" (least
+invasive) to "token" (most invasive). See 'Details'. This argument is a
 vector of length one.}
 
 \item{strict}{A logical value indicating whether a set of strict
