@@ -121,6 +121,7 @@ token_is_multi_line <- function(pd) {
 #' @param pd_flat A flat parse table.
 #' @return A nested parse table.
 strip_eol_spaces <- function(pd_flat) {
-  pd_flat$spaces <- pd_flat$spaces * (lead(pd_flat$lag_newlines, default = 0) == 0)
+  idx <- lead(pd_flat$lag_newlines, default = 0) != 0
+  pd_flat$spaces[idx] <- 0
   pd_flat
 }
