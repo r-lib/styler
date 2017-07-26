@@ -5,10 +5,8 @@ parse_text <- function(x) parse(text = x)[[1L]]
 #' @param char A character vector.
 #' @param times an integer giving the number of repetitions.
 #' @return A character vector.
-#' @importFrom purrr map map_chr
 rep_char <- function(char, times) {
-  map(times, rep.int, x = char) %>%
-    map_chr(paste, collapse = "")
+  paste(rep.int(char, times), collapse = "")
 }
 
 #' concentrate newlines an spaces in a string
@@ -17,8 +15,9 @@ rep_char <- function(char, times) {
 #' @param spaces Scalar indicating how many spaces should be appended to the
 #'   newlines.
 #' @return A string.
+#' @importFrom purrr map2
 newlines_and_spaces <- function(newlines, spaces) {
-  paste0(rep_char("\n", newlines), rep_char(" ", spaces))
+  map2(newlines, spaces, ~paste0(rep_char("\n", .x), rep_char(" ", .y)))
 }
 
 add_newlines <- function(n) {

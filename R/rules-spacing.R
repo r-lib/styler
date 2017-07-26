@@ -150,6 +150,7 @@ set_space_between_levels <- function(pd_flat) {
 #' @param pd A parse table.
 #' @param force_one Wheter or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".
+#' @importFrom purrr map_chr
 start_comments_with_space <- function(pd, force_one = FALSE) {
   comment_pos <- pd$token == "COMMENT"
   if (all(!comment_pos)) return(pd)
@@ -169,7 +170,8 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
 
   comments$text <- paste0(
     comments$prefix,
-    rep_char(" ", comments$space_after_prefix), comments$text
+    map_chr(comments$space_after_prefix, rep_char, char = " "),
+    comments$text
   )
   comments$short <- substr(comments$text, 1, 5)
 
