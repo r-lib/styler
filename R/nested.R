@@ -150,14 +150,11 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @importFrom purrr map2
 nest_parse_data <- function(pd_flat) {
   if (all(pd_flat$parent <= 0)) return(pd_flat)
-
-
   pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
-  split <- pd_flat %>%
-    nest_("data", setdiff(names(pd_flat), "internal"))
+  split_data <- split(pd_flat, pd_flat$internal)
 
-  child <- split$data[!split$internal][[1L]]
-  internal <- split$data[split$internal][[1L]]
+  child <- split_data$`FALSE`
+  internal <- split_data$`TRUE`
 
   internal <- rename_(internal, internal_child = ~child)
 
