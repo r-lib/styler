@@ -159,9 +159,9 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
 
   non_comments <-pd[pd$token != "COMMENT", ]
 
-  comments <- comments %>%
-    extract(text, c("prefix", "space_after_prefix", "text"),
-            regex = "^(#+'*)( *)(.*)$")
+  comments <-  extract(comments, text,
+                       c("prefix", "space_after_prefix", "text"),
+                       regex = "^(#+'*)( *)(.*)$")
   comments$space_after_prefix <- nchar(comments$space_after_prefix)
   comments$space_after_prefix <- set_spaces(
     comments$space_after_prefix,

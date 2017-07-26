@@ -16,8 +16,7 @@ NULL
 #' @rdname visit
 pre_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) return()
-  pd_transformed <- pd_nested %>%
-    visit_one(funs)
+  pd_transformed <- visit_one(pd_nested, funs)
 
   pd_transformed$child <- map(pd_transformed$child, pre_visit, funs = funs)
   pd_transformed
