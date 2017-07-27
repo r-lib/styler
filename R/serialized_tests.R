@@ -137,16 +137,13 @@ style_indent_round <- function(text) {
   transformers <- list(
     filler     = create_filler,
     line_break = NULL,
-    space      =  partial(indent_round, indent_by = 2),
+    space      = partial(indent_round, indent_by = 2),
     token      = NULL,
     eol        = strip_eol_spaces,
     NULL
   )
-
-  text %>%
-    compute_parse_data_nested() %>%
-    apply_transformers(transformers) %>%
-    serialize_parse_data_nested()
+  transformed_text <- parse_transform_serialize(text, transformers)
+  transformed_text
 }
 
 
@@ -155,10 +152,16 @@ style_indent_round <- function(text) {
 #'   transformations but remove EOL spaces and indention due to the way the
 #'   serialization is set up.
 style_empty <- function(text) {
-  text %>%
-    compute_parse_data_nested() %>%
-    pre_visit(funs = c(create_filler, strip_eol_spaces)) %>%
-    serialize_parse_data_nested()
+  transformers <- list(
+    filler     = create_filler,
+    line_break = NULL,
+    space      = NULL,
+    token      = NULL,
+    eol        = strip_eol_spaces,
+    NULL
+  )
+  transformed_text <- parse_transform_serialize(text, transformers)
+  transformed_text
 }
 
 #' @describeIn test_transformer Transformations for indention based on curly
@@ -173,11 +176,8 @@ style_indent_curly <- function(text) {
     eol        = strip_eol_spaces,
     NULL
   )
-
-  text %>%
-    compute_parse_data_nested() %>%
-    apply_transformers(transformers) %>%
-    serialize_parse_data_nested()
+  transformed_text <- parse_transform_serialize(text, transformers)
+  transformed_text
 }
 
 
@@ -187,7 +187,7 @@ style_indent_curly_round <- function(text) {
   transformers <- list(
     filler     = create_filler,
     line_break = NULL,
-    space      =  c(partial(indent_curly, indent_by = 2),
+    space      = c(partial(indent_curly, indent_by = 2),
                     partial(indent_round, indent_by = 2)),
     token      = NULL,
     eol        = strip_eol_spaces,
@@ -203,11 +203,17 @@ style_indent_curly_round <- function(text) {
 
 #' @describeIn test_transformer Transformations for indention based on operators
 style_op <- function(text) {
-  text %>%
-    compute_parse_data_nested() %>%
-    pre_visit(funs = c(create_filler,
-                   partial(indent_op, indent_by = 2),
-                   strip_eol_spaces)) %>%
 
-    serialize_parse_data_nested()
+  transformers <- list(
+    filler     = create_filler,
+    line_break = NULL,
+    space      = partial(indent_op, indent_by = 2),
+    token      = NULL,
+    eol        = strip_eol_spaces,
+    NULL
+  )
+
+  transformed_text <- parse_transform_serialize(text, transformers)
+  transformed_text
+
 }

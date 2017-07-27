@@ -69,18 +69,26 @@ make_transformer_flat <- function(transformers) {
 #' @family make transformers
 make_transformer_nested <- function(transformers) {
   function(text) {
-    text <- gsub(" +$", "", text)
-    text <- gsub("\t", "        ", text)
     if (is.null(transformers$space)) return(text)
+    transformed_text <- parse_transform_serialize(text, transformers)
+    transformed_text
 
-    pd_nested <- compute_parse_data_nested(text)
-    transformed_pd <- apply_transformers(pd_nested, transformers)
-    # TODO verify_roundtrip
-    new_text <- serialize_parse_data_nested(transformed_pd)
-    new_text
   }
 }
 
+
+#' Parse, transform and serialize text
+#'
+#' Wrapper function for the common three operations.
+#' @inheritParams compute_parse_data_nested
+#' @inheritParams apply_transformers
+parse_transform_serialize <- function(text, transformers) {
+  pd_nested <- compute_parse_data_nested(text)
+  transformed_pd <- apply_transformers(pd_nested, transformers)
+  # TODO verify_roundtrip
+  serialized_transformed_text <- serialize_parse_data_nested(transformed_pd)
+  serialized_transformed_text
+}
 
 
 #' Apply transformers to a parse table
