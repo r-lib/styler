@@ -5,7 +5,7 @@
 #' @inheritParams unindent_child
 #' @importFrom purrr map
 set_unindention_child <- function(pd, token = "')'", unindent_by) {
-  if(all(pd$terminal) | all(pd$indent == 0)) return(pd)
+  if(all(pd$indent == 0) || all(pd$terminal) ) return(pd)
   closing <- which(pd$token %in% token)
   if (length(closing) == 0 || pd$lag_newlines[closing] > 0) return(pd)
 

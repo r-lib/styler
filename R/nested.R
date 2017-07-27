@@ -29,10 +29,8 @@ compute_parse_data_nested <- function(text) {
     add_terminal_token_before() %>%
     add_terminal_token_after()
 
+  parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
-    mutate_(child = ~rep(list(NULL), length(text))) %>%
-    mutate_(short = ~substr(text, 1, 5)) %>%
-    select_(~short, ~everything()) %>%
     nest_parse_data() %>%
     flatten_operators()
 
@@ -48,6 +46,7 @@ tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
     enhance_mapping_special()
+  parse_data$short <- substr(parse_data$text, 1, 5)
   parse_data
 }
 
@@ -57,13 +56,13 @@ tokenize <- function(text) {
 #'   description.
 #' @param pd A parse table.
 enhance_mapping_special <- function(pd) {
-  pd %>%
-    mutate(token = case_when(
+  pd$token <- with(pd, case_when(
       token != "SPECIAL" ~ token,
       text == "%>%" ~ special_and("PIPE"),
       text == "%in%" ~ special_and("IN"),
       TRUE ~ special_and("OTHER")
     ))
+  pd
 }
 
 special_and <- function(text) {
@@ -98,19 +97,23 @@ NULL
 
 #' @rdname add_token_terminal
 add_terminal_token_after <- function(pd_flat) {
-  pd_flat %>%
+  terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(line1, col1) %>%
-    transmute(id = id, token_after = lead(token, default = "")) %>%
+    arrange(line1, col1)
+
+  data_frame(id = terminals$id,
+             token_after = lead(terminals$token, default = "")) %>%
     left_join(pd_flat, ., by = "id")
 }
 
 #' @rdname add_token_terminal
 add_terminal_token_before <- function(pd_flat) {
-  pd_flat %>%
+  terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(line1, col1) %>%
-    transmute(id = id, token_before = lag(token, default = "")) %>%
+    arrange(line1, col1)
+
+  data_frame(id = terminals$id,
+             token_before = lag(terminals$token, default = "")) %>%
     left_join(pd_flat, ., by = "id")
 }
 
@@ -146,24 +149,22 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @importFrom purrr map2
 nest_parse_data <- function(pd_flat) {
   if (all(pd_flat$parent <= 0)) return(pd_flat)
-  split <- pd_flat %>%
-    mutate_(internal = ~ (id %in% parent) | (parent <= 0)) %>%
-    nest_("data", names(pd_flat))
+  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
+  split_data <- split(pd_flat, pd_flat$internal)
 
-  child <- split$data[!split$internal][[1L]]
-  internal <- split$data[split$internal][[1L]]
+  child <- split_data$`FALSE`
+  internal <- split_data$`TRUE`
 
   internal <- rename_(internal, internal_child = ~child)
 
-  nested <-
+  child$parent_ <- child$parent
+  joined <-
     child %>%
-    mutate_(parent_ = ~parent) %>%
     nest_(., "child", setdiff(names(.), "parent_")) %>%
-    left_join(internal, ., by = c("id" = "parent_")) %>%
-    mutate_(child = ~map2(child, internal_child, combine_children)) %>%
-    select_(~-internal_child) %>%
-    select_(~short, ~everything(), ~-text, ~text)
-
+    left_join(internal, ., by = c("id" = "parent_"))
+  nested <- joined
+  nested$child <- map2(nested$child, nested$internal_child, combine_children)
+  nested <- nested[, setdiff(names(nested), "internal_child")]
   nest_parse_data(nested)
 }
 
@@ -179,7 +180,8 @@ nest_parse_data <- function(pd_flat) {
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
-  arrange_(bound, ~line1, ~col1)
+  bound[order(bound$line1, bound$col1), ]
+
 }
 
 #' Get the start right
