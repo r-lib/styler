@@ -1,3 +1,15 @@
+## styler 0.0-7 (2017-07-27)
+
+- curly braces don't move a line up if previous token is comment.
+- wrap parse + transform + serialize in new function.
+- Speedup of nested styler functions by ~ 4x.
+- Use multi line instead of line1 / line2 for indention and unindention.
+- Indent multiple.
+- add tidyverse rules (indention not yet working properly).
+- Refactoring and add token before and afterwards to parse table.
+- Implement post visitor instead of complicated move_up child.
+
+
 ## styler 0.0-6 (2017-07-10)
 
 * Tidy up README (#43).
