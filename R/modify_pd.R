@@ -9,31 +9,57 @@ NULL
 
 #' @describeIn update_indention Inserts indetion based on round brackets.
 indent_round <- function(pd, indent_by) {
-  opening <- which(pd$token == "'('")
-  indention_needed <- needs_indention(pd, token = "'('", opening[1])
-  if (indention_needed) {
-    start <- opening + 1
-    stop <- nrow(pd) - 1
-    pd$indent <- pd$indent +
-      ifelse(between(seq_len(nrow(pd)), start, stop), indent_by, 0)
-  }
-
+  indent_indices <- compute_indent_indices(pd, token = "'('")
+  pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd %>%
     set_unindention_child(token = "')'", unindent_by = indent_by)
 }
+
 #' @rdname update_indention
 indent_curly <- function(pd, indent_by) {
-  opening <- which(pd$token == "'{'")
-  indention_needed <- needs_indention(pd, token = "'{'", opening[1])
-  if (indention_needed) {
-    start <- opening + 1
-    stop <- nrow(pd) - 1
-    pd$indent <- pd$indent +
-      ifelse(between(seq_len(nrow(pd)), start, stop), indent_by, 0)
-  }
+  indent_indices <- compute_indent_indices(pd, token = "'{'")
+  pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd %>%
     set_unindention_child(token = "'}'", unindent_by = indent_by)
 }
+
+#' @rdname update_indention
+indent_op <- function(pd, indent_by, token = c(math_token,
+                                               "SPECIAL-PIPE")) {
+  indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
+  pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
+  pd
+}
+
+#' @describeIn update_indention Same as indent_op, but only indents one token
+#'   after `token`, not all remaining.
+indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
+                                                   EQ_ASSIGN")) {
+  indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
+  pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
+  pd
+}
+
+#' @describeIn update_indention Is used to indent if / while / for statements
+#'   that do not have curly brackets.
+indent_without_paren <- function(pd, indent_by = 2) {
+  nrow <- nrow(pd)
+  if (!(pd$token[1] %in% c("IF", "FOR", "WHILE"))) return(pd)
+  if (pd$child[[nrow]]$token[1] == "'{'") return(pd)
+  pd$indent[nrow] <- indent_by
+  pd
+}
+
+
+compute_indent_indices <- function(pd, token = "'('", indent_last = FALSE) {
+  npd <- nrow(pd)
+  opening <- which(pd$token %in% token)[1]
+  if (!needs_indention(pd, token, opening)) return()
+  start <- opening + 1
+  stop <- npd - ifelse(indent_last, 0, 1)
+  between(seq_len(npd), start, stop)
+}
+
 
 #' Check whether indention is needed
 #'
@@ -55,42 +81,7 @@ needs_indention <- function(pd, token = "'('", opening) {
   !any(pd$multi_line[opening:before_first_break])
 }
 
-#' @rdname update_indention
-indent_op <- function(pd, indent_by, token = c(math_token,
-                                               "SPECIAL-PIPE")) {
-  opening <- which(pd$token %in% token)
-  if (needs_indention(pd, token, opening[1])) {
-    start <- opening[1] + 1
-    stop <- nrow(pd)
-    pd$indent <- pd$indent +
-      ifelse(between(seq_len(nrow(pd)), start, stop), indent_by, 0)
-  }
-  pd
-}
 
-#' @describeIn update_indention Same as indent_op, but only indents one token
-#'   after `token`, not all remaining.
-indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
-                                                   EQ_ASSIGN")) {
-  opening <- which(pd$token %in% token)
-  if (needs_indention(pd, token, opening[1])) {
-    start <- opening + 1
-    stop <- start + 1
-    pd$indent <- pd$indent +
-      ifelse(between(seq_len(nrow(pd)), start, stop), indent_by, 0)
-  }
-  pd
-}
-
-#' @describeIn update_indention Is used to indent if / while / for statements
-#'   that do not have curly brackets.
-indent_without_paren <- function(pd, indent_by = 2) {
-  nrow <- nrow(pd)
-  if (!(pd$token[1] %in% c("IF", "FOR", "WHILE"))) return(pd)
-  if (pd$child[[nrow]]$token[1] == "'{'") return(pd)
-  pd$indent[nrow] <- indent_by
-  pd
-}
 
 #' Set the multi-line column
 #'
