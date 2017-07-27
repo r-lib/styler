@@ -48,7 +48,17 @@ indent_without_paren <- function(pd, indent_by = 2) {
   pd
 }
 
-
+#' Compute the indices that need indention
+#'
+#' Based on `token`, find the rows in `pd` that need to be indented.
+#' @param pd A parse table.
+#' @param token A character vector with tokens.
+#' @param indent_last Flag to indicate whether the last token in `pd` should
+#'   be indented or not. See 'Details'.
+#' @details
+#'  For example when `token` is a parenthesis, the closing parenthesis does not
+#'  need indention, but if token is something else, for example a plus (+), the
+#'  last token in `pd` needs indention.
 compute_indent_indices <- function(pd, token = "'('", indent_last = FALSE) {
   npd <- nrow(pd)
   opening <- which(pd$token %in% token)[1]
