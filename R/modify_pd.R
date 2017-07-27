@@ -11,16 +11,14 @@ NULL
 indent_round <- function(pd, indent_by) {
   indent_indices <- compute_indent_indices(pd, token = "'('")
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
-  pd %>%
-    set_unindention_child(token = "')'", unindent_by = indent_by)
+  set_unindention_child(pd, token = "')'", unindent_by = indent_by)
 }
 
 #' @rdname update_indention
 indent_curly <- function(pd, indent_by) {
   indent_indices <- compute_indent_indices(pd, token = "'{'")
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
-  pd %>%
-    set_unindention_child(token = "'}'", unindent_by = indent_by)
+  set_unindention_child(pd, token = "'}'", unindent_by = indent_by)
 }
 
 #' @rdname update_indention
@@ -54,10 +52,10 @@ indent_without_paren <- function(pd, indent_by = 2) {
 compute_indent_indices <- function(pd, token = "'('", indent_last = FALSE) {
   npd <- nrow(pd)
   opening <- which(pd$token %in% token)[1]
-  if (!needs_indention(pd, token, opening)) return()
+  if (!needs_indention(pd, token, opening)) return(numeric(0))
   start <- opening + 1
   stop <- npd - ifelse(indent_last, 0, 1)
-  between(seq_len(npd), start, stop)
+  which(between(seq_len(npd), start, stop))
 }
 
 
