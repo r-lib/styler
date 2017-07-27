@@ -1,6 +1,6 @@
 # A { should never go on its own line
 remove_line_break_before_curly_opening <- function(pd) {
-  rm_break <- pd$token_after == "'{'"
+  rm_break <- (pd$token_after == "'{'") & (pd$token != "COMMENT")
   pd$lag_newlines[lag(rm_break)] <- 0L
   pd
 }
