@@ -27,9 +27,8 @@ if applied in combination with the visitor. `visitor()` takes a object to
 operate on and a list of functions. Each function is applied at the current 
 level of nesting before the next level of nesting is entered.
 ```{r}
-visit
+pre_visit
 visit_one
-
 ```
 This comes with two advantages. 
 
@@ -46,7 +45,7 @@ create_filler
 ```{r}
 code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 pd_nested <- compute_parse_data_nested(code)
-pd_nested_enhanced <- visit(pd_nested, c(create_filler))
+pd_nested_enhanced <- pre_visit(pd_nested, c(create_filler))
 pd_nested_enhanced
 ```
 
@@ -104,7 +103,7 @@ Before we are done, we need to add information regarding indention to the parse
 table. We can add indention after every line break that comes after a round 
 bracket with `indent_round()`. And then serialize it. 
 ```{r}
-visit(pd_nested, 
+pre_visit(pd_nested, 
                c(create_filler, 
                  purrr::partial(indent_round, indent_by = 2)))
 ```
@@ -126,7 +125,7 @@ indented <- c(
 not_indented <- trimws(indented)
 back_and_forth <- not_indented %>%
   compute_parse_data_nested() %>%
-  visit(c(create_filler, 
+  pre_visit(c(create_filler, 
         purrr::partial(indent_round, indent_by = 2))) %>%
   serialize_parse_data_nested()
 

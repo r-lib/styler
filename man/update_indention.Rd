@@ -5,13 +5,20 @@
 \alias{indent_round}
 \alias{indent_curly}
 \alias{indent_op}
+\alias{indent_assign}
+\alias{indent_without_paren}
 \title{Update indention information of parse data}
 \usage{
 indent_round(pd, indent_by)
 
 indent_curly(pd, indent_by)
 
-indent_op(pd, indent_by, token = c(math_token, "SPECIAL"))
+indent_op(pd, indent_by, token = c(math_token, "SPECIAL-PIPE"))
+
+indent_assign(pd, indent_by, token = c("LEFT_ASSIGN",
+  "\\n                                                   EQ_ASSIGN"))
+
+indent_without_paren(pd, indent_by = 2)
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with
@@ -24,3 +31,14 @@ line break and space information via \code{\link[=create_filler]{create_filler()
 \description{
 Update indention information of parse data
 }
+\section{Functions}{
+\itemize{
+\item \code{indent_round}: Inserts indetion based on round brackets.
+
+\item \code{indent_assign}: Same as indent_op, but only indents one token
+after \code{token}, not all remaining.
+
+\item \code{indent_without_paren}: Is used to indent if / while / for statements
+that do not have curly brackets.
+}}
+

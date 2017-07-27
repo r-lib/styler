@@ -4,19 +4,20 @@
 \alias{needs_indention}
 \title{Check whether indention is needed}
 \usage{
-needs_indention(pd, token = "'('")
+needs_indention(pd, opening)
 }
 \arguments{
 \item{pd}{A parse table.}
 
-\item{token}{Which token the check should be based on.}
+\item{opening}{the index of the opening parse table. Since always computed
+before this function is called, it is included as an argument so it does
+not have to be recomputed.}
 }
 \value{
 returns \code{TRUE} if indention is needed, \code{FALSE} otherwise. Indention
-is needed:
-* if \code{token} occurs in \code{pd}.
-* if there is no child that starts on the same line as \code{token} and
-"opens" indention without closing it on this line.
+is needed if and only if:
+* the opening token is not \code{NA}.
+* if there is a multi-line token before the first line break.
 
 \code{TRUE} if indention is needed, \code{FALSE} otherwise.
 }

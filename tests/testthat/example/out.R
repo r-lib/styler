@@ -13,7 +13,7 @@ test <- function() {
   no_space(before(closing), paren((1 + 2)))
   multi(
     line,
-    call
+ call
   )
   multi_line_empty_call(
   )
@@ -73,23 +73,23 @@ test <- function() {
 
   a + b
   a - b
-  a + +b
-  a + -b
-  a + +b
-  a - +b
-  a - -b
-  a + --b
-  a - -+b
-  call(+a)
-  call(-a)
-  call(5, +a)
-  call(5, -a)
+  a + + b
+  a + - b
+  a + + b
+  a - + b
+  a - - b
+  a + - - b
+  a - - + b
+  call(+ a)
+  call(- a)
+  call(5, + a)
+  call(5, - a)
 
   # Only with conservative settings:
   call(
     preserves, distance,
-    after, commas,
-    given_has, one
+ after, commas,
+ given_has, one
   )
 
   if (TRUE) {
@@ -115,11 +115,11 @@ test <- function() {
 
   nested(function_call(
   "in",
-      multiple, lines))
+ multiple, lines))
 
   nested(
   function_call(with),
-      many
+ many
   , first_level_args)
 
   nested(
@@ -130,7 +130,7 @@ test <- function() {
   difficult(nested(
     "function", call
   ),
-    with, more, args
+ with, more, args
   )
 }
 

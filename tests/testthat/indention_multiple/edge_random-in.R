@@ -1,4 +1,4 @@
-{{({{{{{{{{(( # FIXME spaces between brackets don't vanish
+{{(   {{{{  {{{{   ((
   19
 ))}}}}}}}})}}
 

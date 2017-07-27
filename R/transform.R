@@ -69,42 +69,51 @@ make_transformer_flat <- function(transformers) {
 #' @family make transformers
 make_transformer_nested <- function(transformers) {
   function(text) {
-    text <- gsub(" +$", "", text)
-    text <- gsub("\t", "        ", text)
+    if (is.null(transformers$space)) return(text)
+    transformed_text <- parse_transform_serialize(text, transformers)
+    transformed_text
 
-    pd_nested <- compute_parse_data_nested(text)
-    pd_nested <- re_nest(pd_nested)
-    transformed_pd_nested <- visit(pd_nested, transformers)
-    # TODO verify_roundtrip
-    new_text <- serialize_parse_data_nested(transformed_pd_nested)
-    new_text
   }
 }
 
-#' Visit'em all
+
+#' Parse, transform and serialize text
 #'
-#' Apply a list of functions to each level in a nested parse table.
-#' @param pd_nested A nested parse table.
-#' @inheritParams visit_one
-#' @family visitors
-#' @importFrom purrr map
-visit <- function(pd_nested, funs) {
-  if (is.null(pd_nested)) return()
-  pd_transformed <- pd_nested %>%
-    visit_one(funs) %>%
-    mutate(child = map(child, visit, funs = funs))
-  pd_transformed
+#' Wrapper function for the common three operations.
+#' @inheritParams compute_parse_data_nested
+#' @inheritParams apply_transformers
+parse_transform_serialize <- function(text, transformers) {
+  pd_nested <- compute_parse_data_nested(text)
+  transformed_pd <- apply_transformers(pd_nested, transformers)
+  # TODO verify_roundtrip
+  serialized_transformed_text <- serialize_parse_data_nested(transformed_pd)
+  serialized_transformed_text
 }
 
-#' Transform a flat parse table with a list of transformers
+
+#' Apply transformers to a parse table
 #'
-#' Uses [purrr::reduce()] to apply each function of `funs` sequentially to
-#'   `pd_flat`.
-#' @param pd_flat A flat parse table.
-#' @param funs A list of transformer functions.
-#' @family visitors
-#' @importFrom purrr reduce
-visit_one <- function(pd_flat, funs) {
-  reduce(funs, function(x, fun) fun(x),
-         .init = pd_flat)
+#' Depending on whether `transformers` contains functions to modify the
+#'   line break information, the column `multi_line` is updated (after
+#'   the line break information is modified) and
+#'   the rest of the transformers is applied afterwards, or (if line break
+#'   information is not to be modified), all transformers are applied in one
+#'   step. The former requires two pre visits and one post visit, the latter
+#'   only one pre visit.
+#' @param pd_nested A nested parse table.
+#' @param transformers A list of *named* transformer functions
+#' @importFrom purrr flatten
+apply_transformers <- function(pd_nested, transformers) {
+  transformed_line_breaks <- pre_visit(pd_nested,
+                                       c(transformers$filler,
+                                         transformers$line_break))
+
+  transformed_updated_multi_line <- post_visit(transformed_line_breaks,
+                                               c(set_multi_line))
+
+  transformed_all <- pre_visit(transformed_updated_multi_line,
+                               c(transformers$space,
+                                 transformers$token,
+                                 transformers$eol))
+  transformed_all
 }

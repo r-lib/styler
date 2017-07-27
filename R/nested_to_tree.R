@@ -2,18 +2,14 @@
 #'
 #' Create a tree representation from a text.
 #' @param text A character vector.
-#' @param re_nest Whether or not the parse table should be renested with
-#'   [re_nest()].
 #' @return A data frame.
 #' @importFrom purrr when
-create_tree <- function(text, re_nest = FALSE) {
+create_tree <- function(text) {
   compute_parse_data_nested(text) %>%
-    visit(c(create_filler)) %>%
-    when(re_nest ~ re_nest(.), ~.) %>%
+    pre_visit(c(create_filler)) %>%
     create_node_from_nested_root() %>%
     as.data.frame()
 }
-
 #' Convert a nested tibble into a node tree
 #'
 #' This function is convenient to display all nesting levels of a nested tibble
@@ -24,14 +20,13 @@ create_tree <- function(text, re_nest = FALSE) {
 #' library("magrittr")
 #' code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 #' l1 <- styler:::compute_parse_data_nested(code) %>%
-#'   styler:::visit(c(styler:::create_filler)) %>%
+#'   styler:::pre_visit(c(styler:::create_filler)) %>%
 #'   styler:::create_node_from_nested_root()
 create_node_from_nested_root <- function(pd_nested) {
-  n <- data.tree::Node$new("ROOT (token: short_text [newlines/spaces] {id})")
+  n <- data.tree::Node$new("ROOT (token: short_text [lag_newlines/spaces] {id})")
   create_node_from_nested(pd_nested, n)
   n
 }
-
 #' Create node from nested parse data
 #'
 #' @inheritParams create_node_from_nested_root
@@ -43,7 +38,7 @@ create_node_from_nested <- function(pd_nested, parent) {
 
   node_info <-
     pd_nested %>%
-    transmute(formatted = paste0(token, ": ", short, " [", newlines, "/", spaces, "] {", id, "}")) %>%
+    transmute(formatted = paste0(token, ": ", short, " [", lag_newlines, "/", spaces, "] {", id, "}")) %>%
     .[["formatted"]]
 
   child_nodes <-

@@ -1,6 +1,6 @@
-ROOT (token: short_text [newlines/spaces] {id})             
+ROOT (token: short_text [lag_newlines/spaces] {id})         
  °--expr:  [0/0] {40}                                       
-     ¦--'{': { [1/9] {1}                                    
+     ¦--'{': { [0/9] {1}                                    
      ¦--expr:  [1/0] {13}                                   
      ¦   ¦--'{': { [0/0] {3}                                
      ¦   ¦--expr:  [0/0] {10}                               
@@ -24,4 +24,4 @@ ROOT (token: short_text [newlines/spaces] {id})
      ¦   ¦       ¦   °--SYMBOL: pi [0/0] {24}               
      ¦   ¦       °--')': ) [0/0] {25}                       
      ¦   °--'}': } [0/0] {30}                               
-     °--'}': } [0/0] {38}                                   
+     °--'}': } [1/0] {38}                                   

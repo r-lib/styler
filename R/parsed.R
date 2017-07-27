@@ -32,7 +32,7 @@ enhance_parse_data <- function(parse_data) {
   parse_data_filtered <-
     parse_data %>%
     filter_(~terminal) %>%
-    select_(~-id, ~-parent, ~-terminal) %>%
+    select_(~-id, ~-parent) %>%
     arrange_(~line1, ~col1, ~line2, ~col2) %>%
     bind_rows(
       tibble(line1 = 1L, col1 = 0L, line2 = 1L, col2 = 0L,
@@ -44,9 +44,12 @@ enhance_parse_data <- function(parse_data) {
     parse_data_filtered %>%
     create_filler()
 
-  parse_data_comment_eol <-
-    parse_data_filled %>%
-    mutate_(text = ~if_else(token == "COMMENT", gsub(" +$", "", text), text))
+  parse_data_comment_eol <- parse_data_filled
+
+  parse_data_comment_eol$text <-
+    if_else(parse_data_comment_eol$token == "COMMENT",
+            gsub(" +$", "", parse_data_comment_eol$text),
+            parse_data_comment_eol$text)
 
   parse_data_comment_eol
 }
@@ -73,30 +76,6 @@ verify_roundtrip <- function(pd_flat, text) {
   text
 }
 
-#' Serialize Flat Parse Data
-#'
-#' Collapses a parse table into character vector representation.
-#' @param pd_flat A parse table.
-#' @details
-#'   The function essentially collapses the column text of `pd_flat`
-#'   while taking into account space and linebreak information from the columns
-#'   newlines and spaces. \cr
-#'   Roughly speaking, this is the inverse operation of
-#'   [compute_parse_data_flat_enhanced()], which turns a character vector into a
-#'   parse table, since `serialize_parse_data_flat()` turns a parse table back
-#'   into a character vector.
-serialize_parse_data_flat <- function(pd_flat) {
-  pd_flat %>%
-    summarize_(
-      text_ws = ~paste0(
-        text, newlines_and_spaces(newlines, spaces),
-        collapse = "")) %>%
-    .[["text_ws"]] %>%
-    strsplit("\n", fixed = TRUE) %>%
-    .[[1L]]
-}
-
-
 #' Enrich parse table with space and linebreak information
 #'
 #' This function computes difference (as column and line difference) between two
@@ -105,17 +84,17 @@ serialize_parse_data_flat <- function(pd_flat) {
 #' @return A parse table with two three columns: lag_newlines, newlines and
 #'   spaces.
 create_filler <- function(pd_flat) {
-  ret <-
-    pd_flat %>%
-    mutate_(
-      line3 = ~lead(line1, default = tail(line2, 1)),
-      col3 = ~lead(col1, default = tail(col2, 1) + 1L),
-      newlines = ~line3 - line2,
-      lag_newlines = ~lag(newlines, default = 0),
-      col2_nl = ~if_else(newlines > 0L, 0L, col2),
-      spaces = ~col3 - col2_nl - 1L
-    ) %>%
-    select_(~-line3, ~-col3, ~-col2_nl)
+
+  pd_flat$line3 <- lead(pd_flat$line1, default = tail(pd_flat$line2, 1))
+  pd_flat$col3 <- lead(pd_flat$col1, default = tail(pd_flat$col2, 1) + 1L)
+  pd_flat$newlines <- pd_flat$line3 - pd_flat$line2
+  pd_flat$lag_newlines <- lag(pd_flat$newlines, default = 0)
+  pd_flat$col2_nl <- if_else(pd_flat$newlines > 0L, 0L, pd_flat$col2)
+  pd_flat$spaces <- pd_flat$col3 - pd_flat$col2_nl - 1L
+  pd_flat$multi_line <- ifelse(pd_flat$terminal, FALSE, NA)
+
+  ret <- pd_flat[, !(names(pd_flat) %in% c("line3", "col3", "col2_nl"))]
+
 
   if (!("indent" %in% names(ret))) {
     ret$indent <- 0

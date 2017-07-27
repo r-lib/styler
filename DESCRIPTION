@@ -1,13 +1,12 @@
 Package: styler
 Title: Non-invasive Pretty Printing of R code
-Version: 0.0-6
+Version: 0.0-7
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
 Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
     dplyr,
     magrittr,
-    pkgload,
     purrr,
     readr,
     rprojroot,
@@ -29,9 +28,28 @@ Remotes:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Date: 2017-07-10
+Date: 2017-07-27
 BugReports: https://github.com/krlmlr/styler/issues
 URL: https://github.com/krlmlr/styler, http://krlmlr.github.io/styler
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
+Collate: 
+    'get_transformers.R'
+    'modify_pd.R'
+    'nested.R'
+    'nested_to_tree.R'
+    'parsed.R'
+    'relevel.R'
+    'rules-line_break.R'
+    'rules-other.R'
+    'rules-replacement.R'
+    'rules-spacing.R'
+    'serialize.R'
+    'serialized_tests.R'
+    'styler.R'
+    'transform.R'
+    'unindent.R'
+    'utils.R'
+    'visit.R'
+    'ws.R'

@@ -25,13 +25,14 @@
 #'     - Function definitions
 #' - Remove `includeText = TRUE`
 compute_parse_data_nested <- function(text) {
-  parse_data <- tokenize(text)
-  pd_nested <-
-    parse_data %>%
-    mutate_(child = ~rep(list(NULL), length(text))) %>%
-    mutate_(short = ~substr(text, 1, 5)) %>%
-    select_(~short, ~everything()) %>%
-    nest_parse_data()
+  parse_data <- tokenize(text) %>%
+    add_terminal_token_before() %>%
+    add_terminal_token_after()
+
+  parse_data$child <- rep(list(NULL), length(parse_data$text))
+  pd_nested <- parse_data %>%
+    nest_parse_data() %>%
+    flatten_operators()
 
   pd_nested
 }
@@ -43,8 +44,77 @@ compute_parse_data_nested <- function(text) {
 #' @return A flat parse table
 tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA))
+  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
+    enhance_mapping_special()
+  parse_data$short <- substr(parse_data$text, 1, 5)
   parse_data
+}
+
+#' Enhance the mapping of text to the token "SPECIAL"
+#'
+#' Map text corresponding to the token "SPECIAL" to a (more) unique token
+#'   description.
+#' @param pd A parse table.
+enhance_mapping_special <- function(pd) {
+  pd$token <- with(pd, case_when(
+      token != "SPECIAL" ~ token,
+      text == "%>%" ~ special_and("PIPE"),
+      text == "%in%" ~ special_and("IN"),
+      TRUE ~ special_and("OTHER")
+    ))
+  pd
+}
+
+special_and <- function(text) {
+  paste0("SPECIAL-", text)
+}
+
+
+#' lookup which new tokens were created from "SPECIAL"
+#'
+#' @param regex A regular expression pattern to search for.
+#' @importFrom purrr map_chr
+lookup_new_special <- function(regex = NA) {
+  new_special <- c("PIPE", "IN", "OTHER")
+
+  potential_regex <- grep(regex, new_special, value = TRUE, ignore.case = TRUE)
+  if (is.na(regex)) {
+    mapping <- new_special
+  } else if (length(potential_regex) > 0) {
+    mapping <- potential_regex
+  } else {
+    return(NA)
+  }
+  map_chr(mapping, special_and)
+}
+
+
+#' Add information about previous / next token to each terminal
+#'
+#' @param pd_flat A flat parse table.
+#' @name add_token_terminal
+NULL
+
+#' @rdname add_token_terminal
+add_terminal_token_after <- function(pd_flat) {
+  terminals <- pd_flat %>%
+    filter(terminal) %>%
+    arrange(line1, col1)
+
+  data_frame(id = terminals$id,
+             token_after = lead(terminals$token, default = "")) %>%
+    left_join(pd_flat, ., by = "id")
+}
+
+#' @rdname add_token_terminal
+add_terminal_token_before <- function(pd_flat) {
+  terminals <- pd_flat %>%
+    filter(terminal) %>%
+    arrange(line1, col1)
+
+  data_frame(id = terminals$id,
+             token_before = lag(terminals$token, default = "")) %>%
+    left_join(pd_flat, ., by = "id")
 }
 
 #' Helper for setting spaces
@@ -60,11 +130,11 @@ set_spaces <- function(spaces_after_prefix, force_one) {
   if (force_one) {
     n_of_spaces <- rep(1, length(spaces_after_prefix))
   } else {
-    n_of_spaces <- if_else(spaces_after_prefix < 1L, 1L, spaces_after_prefix)
+    n_of_spaces <- pmax(spaces_after_prefix, 1L)
+    n_of_spaces[spaces_after_prefix == 0L] <- 0L
   }
   n_of_spaces
 }
-
 
 #' Nest a flat parse table
 #'
@@ -80,25 +150,22 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @importFrom purrr map2
 nest_parse_data <- function(pd_flat) {
   if (all(pd_flat$parent <= 0)) return(pd_flat)
-  split <-
-    pd_flat %>%
-    mutate_(internal = ~ (id %in% parent) | (parent <= 0)) %>%
-    nest_("data", names(pd_flat))
+  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
+  split_data <- split(pd_flat, pd_flat$internal)
 
-  child <- split$data[!split$internal][[1L]]
-  internal <- split$data[split$internal][[1L]]
+  child <- split_data$`FALSE`
+  internal <- split_data$`TRUE`
 
   internal <- rename_(internal, internal_child = ~child)
 
-  nested <-
+  child$parent_ <- child$parent
+  joined <-
     child %>%
-    mutate_(parent_ = ~parent) %>%
     nest_(., "child", setdiff(names(.), "parent_")) %>%
-    left_join(internal, ., by = c("id" = "parent_")) %>%
-    mutate_(child = ~map2(child, internal_child, combine_children)) %>%
-    select_(~-internal_child) %>%
-    select_(~short, ~everything(), ~-text, ~text)
-
+    left_join(internal, ., by = c("id" = "parent_"))
+  nested <- joined
+  nested$child <- map2(nested$child, nested$internal_child, combine_children)
+  nested <- nested[, setdiff(names(nested), "internal_child")]
   nest_parse_data(nested)
 }
 
@@ -114,55 +181,8 @@ nest_parse_data <- function(pd_flat) {
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
-  arrange_(bound,  ~line1, ~col1)
-}
+  bound[order(bound$line1, bound$col1), ]
 
-
-#' Serialize a nested parse table
-#'
-#' Helper function that recursively extracts terminals from a nested tibble.
-#' @param pd_nested A nested parse table.
-#' @param pass_indent Level of indention of a token.
-#' @return A character vector with all terminal tokens in `pd_nested` plus
-#'   the appropriate amount of white spaces and line breaks are inserted between
-#'   them.
-#' @importFrom purrr pmap
-serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
-  out <- pmap(list(pd_nested$terminal, pd_nested$text, pd_nested$child,
-                   pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent),
-              function(terminal, text, child, spaces, lag_newlines, indent) {
-                total_indent <- pass_indent + indent
-                preceding_linebreak <- if_else(lag_newlines > 0, 1, 0)
-                if (terminal) {
-                  c(add_newlines(lag_newlines),
-                    add_spaces(total_indent * preceding_linebreak),
-                    text,
-                    add_spaces(spaces))
-                } else {
-                  c(add_newlines(lag_newlines),
-                    add_spaces(total_indent * preceding_linebreak),
-                    serialize_parse_data_nested_helper(child, total_indent),
-                    add_spaces(spaces))
-                }
-              }
-  )
-  out
-}
-
-#' Serialize a nested parse table
-#'
-#' Collapses a nested parse table into its character vector representation.
-#' @param pd_nested A nested parse table with line break, spaces and indention
-#'   information.
-#' @return A character string.
-serialize_parse_data_nested <- function(pd_nested) {
-  out <- c(add_newlines(start_on_line(pd_nested) - 1),
-           serialize_parse_data_nested_helper(pd_nested, pass_indent = 0)) %>%
-    unlist() %>%
-    paste0(collapse = "") %>%
-    strsplit("\n", fixed = TRUE) %>%
-    .[[1L]]
-  out
 }
 
 #' Get the start right
