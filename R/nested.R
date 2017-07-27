@@ -30,8 +30,6 @@ compute_parse_data_nested <- function(text) {
     add_terminal_token_after()
 
   parse_data$child <- rep(list(NULL), length(parse_data$text))
-  parse_data$short <- substr(parse_data$text, 1, 5)
-
   pd_nested <- parse_data %>%
     nest_parse_data() %>%
     flatten_operators()
@@ -48,6 +46,7 @@ tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
     enhance_mapping_special()
+  parse_data$short <- substr(parse_data$text, 1, 5)
   parse_data
 }
 
