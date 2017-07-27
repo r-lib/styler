@@ -62,7 +62,7 @@ indent_without_paren <- function(pd, indent_by = 2) {
 compute_indent_indices <- function(pd, token = "'('", indent_last = FALSE) {
   npd <- nrow(pd)
   opening <- which(pd$token %in% token)[1]
-  if (!needs_indention(pd, token, opening)) return(numeric(0))
+  if (!needs_indention(pd, opening)) return(numeric(0))
   start <- opening + 1
   stop <- npd - ifelse(indent_last, 0, 1)
   which(between(seq_len(npd), start, stop))
@@ -72,17 +72,15 @@ compute_indent_indices <- function(pd, token = "'('", indent_last = FALSE) {
 #' Check whether indention is needed
 #'
 #' @param pd A parse table.
-#' @param token Which token the check should be based on.
 #' @param opening the index of the opening parse table. Since always computed
 #'   before this function is called, it is included as an argument so it does
 #'   not have to be recomputed.
 #' @return returns `TRUE` if indention is needed, `FALSE` otherwise. Indention
-#'   is needed:
-#'     * if `token` occurs in `pd`.
-#'     * if there is no child that starts on the same line as `token` and
-#'       "opens" indention without closing it on this line.
+#'   is needed if and only if:
+#'     * the opening token is not `NA`.
+#'     * if there is a multi-line token before the first line break.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
-needs_indention <- function(pd, token = "'('", opening) {
+needs_indention <- function(pd, opening) {
   if (is.na(opening)) return(FALSE)
   before_first_break <- which(pd$lag_newlines > 0)[1] - 1
   if (is.na(before_first_break)) return(FALSE)
