@@ -37,7 +37,7 @@ ROOT (token: short_text [lag_newlines/spaces] {id})
  ¦       ¦   °--SYMBOL: i [0/0] {44}                  
  ¦       °--')': ) [0/0] {45}                         
  °--expr:  [2/0] {75}                                 
-     ¦--IF: if [0/0] {57}                             
+     ¦--IF: if [0/1] {57}                             
      ¦--'(': ( [0/0] {58}                             
      ¦--expr:  [0/0] {61}                             
      ¦   °--SYMBOL: x [0/0] {59}                      
