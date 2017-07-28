@@ -131,7 +131,6 @@ set_spaces <- function(spaces_after_prefix, force_one) {
     n_of_spaces <- rep(1, length(spaces_after_prefix))
   } else {
     n_of_spaces <- pmax(spaces_after_prefix, 1L)
-    n_of_spaces[spaces_after_prefix == 0L] <- 0L
   }
   n_of_spaces
 }
