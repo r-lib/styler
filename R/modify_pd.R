@@ -24,8 +24,7 @@ indent_curly <- function(pd, indent_by) {
 #' @rdname update_indention
 indent_op <- function(pd, indent_by, token = c(math_token,
                                                "SPECIAL-PIPE",
-                                               "LEFT_ASSIGN",
-                                               "EQ_ASSIGN")) {
+                                               "LEFT_ASSIGN")) {
   indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
