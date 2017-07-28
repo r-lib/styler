@@ -5,7 +5,7 @@
 #' @inheritParams unindent_child
 #' @importFrom purrr map
 set_unindention_child <- function(pd, token = "')'", unindent_by) {
-  if(all(pd$indent == 0) || all(pd$terminal) ) return(pd)
+  if (all(pd$indent == 0) || all(pd$terminal)) return(pd)
   closing <- which(pd$token %in% token)
   if (length(closing) == 0 || pd$lag_newlines[closing] > 0) return(pd)
 
@@ -16,6 +16,7 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
     on_same_line <- first_on_same_line:(closing - 1)
   }
   cand_ind <- setdiff(on_same_line, which(pd$terminal))
+  if (length(cand_ind) < 1) return(pd)
 
   candidates <- pd[cand_ind, ]
 
@@ -39,7 +40,7 @@ unindent_child <- function(pd, token = c("')'", "'}'"), unindent_by = 2) {
   if (!("indent" %in% names(pd))) {
     pd$indent <- 0
   }
-  if (length(closing) > 0) {
+  if ((length(closing) > 0) && (closing  == nrow(pd))) {
     pd$indent[closing] <- pd$indent[closing] - unindent_by
   }
   pd
