@@ -139,7 +139,6 @@ style_indent_round <- function(text) {
     line_break = NULL,
     space      = partial(indent_round, indent_by = 2),
     token      = NULL,
-    eol        = strip_eol_spaces,
     NULL
   )
   transformed_text <- parse_transform_serialize(text, transformers)
@@ -157,7 +156,6 @@ style_empty <- function(text) {
     line_break = NULL,
     space      = NULL,
     token      = NULL,
-    eol        = strip_eol_spaces,
     NULL
   )
   transformed_text <- parse_transform_serialize(text, transformers)
@@ -173,7 +171,6 @@ style_indent_curly <- function(text) {
     line_break = NULL,
     space      =  partial(indent_curly, indent_by = 2),
     token      = NULL,
-    eol        = strip_eol_spaces,
     NULL
   )
   transformed_text <- parse_transform_serialize(text, transformers)
@@ -190,7 +187,6 @@ style_indent_curly_round <- function(text) {
     space      = c(partial(indent_curly, indent_by = 2),
                     partial(indent_round, indent_by = 2)),
     token      = NULL,
-    eol        = strip_eol_spaces,
     NULL
   )
 
@@ -209,7 +205,6 @@ style_op <- function(text) {
     line_break = NULL,
     space      = partial(indent_op, indent_by = 2),
     token      = NULL,
-    eol        = strip_eol_spaces,
     NULL
   )
 

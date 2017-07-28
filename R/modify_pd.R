@@ -23,7 +23,8 @@ indent_curly <- function(pd, indent_by) {
 
 #' @rdname update_indention
 indent_op <- function(pd, indent_by, token = c(math_token,
-                                               "SPECIAL-PIPE")) {
+                                               "SPECIAL-PIPE",
+                                               "LEFT_ASSIGN")) {
   indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
@@ -31,8 +32,7 @@ indent_op <- function(pd, indent_by, token = c(math_token,
 
 #' @describeIn update_indention Same as indent_op, but only indents one token
 #'   after `token`, not all remaining.
-indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
-                                                   EQ_ASSIGN")) {
+indent_assign <- function(pd, indent_by, token = NULL) {
   indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
@@ -43,7 +43,7 @@ indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
 indent_without_paren <- function(pd, indent_by = 2) {
   nrow <- nrow(pd)
   if (!(pd$token[1] %in% c("IF", "FOR", "WHILE"))) return(pd)
-  if (pd$child[[nrow]]$token[1] == "'{'") return(pd)
+  if (pd$lag_newlines[nrow] == 0) return(pd)
   pd$indent[nrow] <- indent_by
   pd
 }
@@ -109,16 +109,4 @@ set_multi_line <- function(pd) {
 #' @param pd A parse table.
 token_is_multi_line <- function(pd) {
   any(pd$multi_line, pd$lag_newlines > 0)
-}
-
-
-#' Strip EOL spaces
-#'
-#' Remove end-of-line spaces.
-#' @param pd_flat A flat parse table.
-#' @return A nested parse table.
-strip_eol_spaces <- function(pd_flat) {
-  idx <- lead(pd_flat$lag_newlines, default = 0) != 0
-  pd_flat$spaces[idx] <- 0
-  pd_flat
 }

@@ -3,7 +3,7 @@ context("indention operators")
 test_that("pipe is indended correctly", {
   expect_warning(test_collection("indention_operators",
                                  "pipe",
-                                 transformer = style_op,
+                                 transformer = style_text,
                                  write_back = TRUE), NA)
 })
 
