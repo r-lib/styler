@@ -112,8 +112,6 @@ apply_transformers <- function(pd_nested, transformers) {
                                                c(set_multi_line))
 
   transformed_all <- pre_visit(transformed_updated_multi_line,
-                               c(transformers$space,
-                                 transformers$token,
-                                 transformers$eol))
+                               c(transformers$space, transformers$token))
   transformed_all
 }

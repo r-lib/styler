@@ -41,7 +41,8 @@ serialize_parse_data_nested <- function(pd_nested) {
     unlist() %>%
     paste0(collapse = "") %>%
     strsplit("\n", fixed = TRUE) %>%
-    .[[1L]]
+    .[[1L]] %>%
+    trimws(which = "right")
   out
 }
 

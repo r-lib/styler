@@ -112,7 +112,6 @@ get_transformers_nested <- function(
     line_break = line_break_manipulators,
     space      = space_manipulators,
     token      = token_manipulators,
-    eol        = strip_eol_spaces,
     NULL
   )
 }

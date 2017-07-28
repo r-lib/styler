@@ -1,5 +1,5 @@
 #' this function does
-#' 
+#'
 #' @param x a parameter.
 #'    indented comments
 a <- function(x) {

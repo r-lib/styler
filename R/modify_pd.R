@@ -110,15 +110,3 @@ set_multi_line <- function(pd) {
 token_is_multi_line <- function(pd) {
   any(pd$multi_line, pd$lag_newlines > 0)
 }
-
-
-#' Strip EOL spaces
-#'
-#' Remove end-of-line spaces.
-#' @param pd_flat A flat parse table.
-#' @return A nested parse table.
-strip_eol_spaces <- function(pd_flat) {
-  idx <- lead(pd_flat$lag_newlines, default = 0) != 0
-  pd_flat$spaces[idx] <- 0
-  pd_flat
-}
