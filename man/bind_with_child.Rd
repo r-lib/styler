@@ -6,6 +6,11 @@
 \usage{
 bind_with_child(pd_nested, pos)
 }
+\arguments{
+\item{pd_nested}{A nested parse table.}
+
+\item{pos}{The position of the child to bind.}
+}
 \description{
 Bind a parse table with one of its children and return the \strong{unordered}
 parse table (that is, rows are not arranged according to line1 / line2).
