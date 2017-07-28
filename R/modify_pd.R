@@ -43,7 +43,7 @@ indent_assign <- function(pd, indent_by, token = c("LEFT_ASSIGN", "
 indent_without_paren <- function(pd, indent_by = 2) {
   nrow <- nrow(pd)
   if (!(pd$token[1] %in% c("IF", "FOR", "WHILE"))) return(pd)
-  if (pd$child[[nrow]]$token[1] == "'{'") return(pd)
+  if (pd$lag_newlines[nrow] == 0) return(pd)
   pd$indent[nrow] <- indent_by
   pd
 }
