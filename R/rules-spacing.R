@@ -1,18 +1,4 @@
-math_token <- c("'+'", "'-'", "'*'", "'/'", "'^'")
-
-#' @include nested.R
-special_token <- lookup_new_special()
-
-op_token <- c(
-  math_token,
-  special_token,
-  "AND", "AND2", "EQ", "EQ_ASSIGN",
-  "GE", "GT", "LE", "LEFT_ASSIGN", "LT", "NE", "OR", "OR2", "RIGHT_ASSIGN",
-  "EQ_SUB", "ELSE"
-)
-
-
-
+#' @include token.R
 add_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   op_before <- lead(op_after, default = FALSE)
@@ -23,6 +9,7 @@ add_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
+#' @include token.R
 set_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   if (!any(op_after)) return(pd_flat)
@@ -33,6 +20,7 @@ set_space_around_op <- function(pd_flat) {
 }
 
 # depreciated!
+#' @include token.R
 remove_space_after_unary_pm <- function(pd_flat) {
   op_pm <- c("'+'", "'-'")
   op_pm_unary_after <- c(op_pm, op_token, "'('", "','")

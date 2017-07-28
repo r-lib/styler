@@ -14,7 +14,7 @@ flatten_operators <- function(pd_nested) {
 
 
 flatten_operators_one <- function(pd_nested) {
-  token <- c("'+'", "'-'", special_token, "'/'", "'*'")
+  token <- c(special_token, math_token)
   token_pos <- which(pd_nested$token %in% token)
   if (length(token_pos) == 0) return(pd_nested)
   stopifnot(length(token_pos) == 1)
