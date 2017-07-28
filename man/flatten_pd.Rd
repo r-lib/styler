@@ -15,7 +15,7 @@ occur in \code{pd_nested} in order to flatten it.}
 \item{child_token}{A character vector of tokens of which at least one has to
 occur in the child in order to flatten the parse table.}
 
-\item{left}{Flag that indicates whether the parse table should be flatened
+\item{left}{Flag that indicates whether the parse table should be flattened
 from left or from right.}
 }
 \description{

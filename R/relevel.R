@@ -12,7 +12,7 @@ flatten_operators <- function(pd_nested) {
     post_visit(c(flatten_operators_one))
 }
 
-#' Flaten one level of nesting with its child
+#' Flatten one level of nesting with its child
 #'
 #' Flattening is done in two ways. We can flatten a parse table by moving
 #'   the left hand token of an operator one level up. Or doing that with the
@@ -41,7 +41,7 @@ flatten_operators_one <- function(pd_nested) {
 #'   occur in `pd_nested` in order to flatten it.
 #' @param child_token A character vector of tokens of which at least one has to
 #'   occur in the child in order to flatten the parse table.
-#' @param left Flag that indicates whether the parse table should be flatened
+#' @param left Flag that indicates whether the parse table should be flattened
 #'   from left or from right.
 flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   token_pos <- which(pd_nested$token[-1] %in% token) + 1

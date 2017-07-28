@@ -2,7 +2,7 @@
 % Please edit documentation in R/relevel.R
 \name{flatten_operators_one}
 \alias{flatten_operators_one}
-\title{Flaten one level of nesting with its child}
+\title{Flatten one level of nesting with its child}
 \usage{
 flatten_operators_one(pd_nested)
 }
