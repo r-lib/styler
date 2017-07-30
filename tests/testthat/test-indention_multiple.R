@@ -3,18 +3,18 @@ context("test indent multiple")
 test_that("multiple round brackets don't cause extraindention", {
   expect_warning(test_collection("indention_multiple",
                                  "round_only",
-                                 transformer = style_indent_round), NA)
+                                 transformer = style_text), NA)
 
   expect_warning(test_collection("indention_multiple",
                                  "round_closing_on_same_line",
-                                 transformer = style_indent_round), NA)
+                                 transformer = style_text), NA)
 })
 
 
 test_that("multiple curly brackets don't cause extraindention", {
   expect_warning(test_collection("indention_multiple",
                                  "curly_only",
-                                 transformer = style_indent_curly), NA)
+                                 transformer = style_text), NA)
 
 })
 
@@ -22,7 +22,7 @@ test_that("multiple curly brackets don't cause extraindention", {
 test_that("multiple curly and round brackets don't cause extraindention", {
   expect_warning(test_collection("indention_multiple",
                                  "curly_and_round",
-                                 transformer = style_indent_curly_round), NA)
+                                 transformer = style_text), NA)
 
 })
 
