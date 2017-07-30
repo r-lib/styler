@@ -190,11 +190,8 @@ style_indent_curly_round <- function(text) {
     NULL
   )
 
-  text %>%
-    compute_parse_data_nested() %>%
-    apply_transformers(transformers) %>%
-    serialize_parse_data_nested()
-
+  transformed_text <- parse_transform_serialize(text, transformers)
+  transformed_text
 }
 
 #' @describeIn test_transformer Transformations for indention based on operators
