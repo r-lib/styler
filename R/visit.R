@@ -97,5 +97,54 @@ context_towards_terminals <- function(pd_nested,
   pd_nested
 }
 
+#' Extract terminal tokens
+#'
+#' Turns a nested parse table into a flat parse table. In particular it extracts
+#'   terminal tokens and the following attributes:
+#'
+#'  * lag_newlines
+#'  * indent
+#'  * token
+#'  * text
+#'  * spaces
+#'  * id
+#'  * parent
+#'  * line1
+#' @inheritParams extract_terminals_helper
+#' @importFrom readr type_convert col_integer cols
+extract_terminals <- function(pd_nested) {
+  flat_vec <- extract_terminals_helper(pd_nested) %>%
+    unlist()
+  nms <- list(
+    NULL,
+    c("lag_newlines", "indent", "token", "text", "spaces", "id", "parent", "line1")
+  )
+  flat_tbl <- matrix(flat_vec, ncol = length(nms[[2]]), byrow = TRUE, dimnames = nms) %>%
+    as_tibble() %>%
+    type_convert(
+      col_types = cols(
+        lag_newlines = col_integer(),
+        indent       = col_integer(),
+        spaces       = col_integer()
+      )
+    )
+}
 
+#' Helper to extract terminals
+#'
+#' @param pd_nested A nested parse table.
+extract_terminals_helper <- function(pd_nested) {
+  if (is.null(pd_nested)) return(pd)
+  pmap(list(pd_nested$terminal, pd_nested$token, pd_nested$text,
+            pd_nested$lag_newlines, pd_nested$spaces, pd_nested$indent,
+            pd_nested$id, pd_nested$parent, pd_nested$line1, pd_nested$child),
+       function(terminal, token, text, lag_newlines, spaces, indent, id,
+                parent, line1, child) {
+         if (terminal) {
+           c(lag_newlines, indent, token, text, spaces, id, parent, line1)
+         } else {
+           extract_terminals_helper(child)
+         }
+       })
+}
 
