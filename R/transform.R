@@ -17,7 +17,6 @@ transform_files <- function(files, transformers, flat) {
   }
   invisible(changed)
 }
-
 #' Closure to return a transformer function
 #'
 #' This function takes a list of transformer functions as input and
@@ -86,7 +85,11 @@ parse_transform_serialize <- function(text, transformers) {
   pd_nested <- compute_parse_data_nested(text)
   transformed_pd <- apply_transformers(pd_nested, transformers)
   # TODO verify_roundtrip
-  serialized_transformed_text <- serialize_parse_data_nested(transformed_pd)
+  flattened_pd <- extract_terminals(transformed_pd) %>%
+    enrich_terminals() %>%
+    set_token_dependent_indention()
+
+  serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
   serialized_transformed_text
 }
 
@@ -113,5 +116,12 @@ apply_transformers <- function(pd_nested, transformers) {
 
   transformed_all <- pre_visit(transformed_updated_multi_line,
                                c(transformers$space, transformers$token))
-  transformed_all
+
+  transformed_absolute_indent <- context_to_terminals(transformed_all,
+                                                      passed_lag_newlines = 0,
+                                                      passed_indent = 0,
+                                                      passed_spaces = 0)
+
+  transformed_absolute_indent
+
 }
