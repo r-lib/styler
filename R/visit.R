@@ -148,3 +148,52 @@ extract_terminals_helper <- function(pd_nested) {
        })
 }
 
+#' Enrich flattened parse table
+#'
+#' Enriches a flattened parse table with terminals only. In particular, it is
+#'   possible to compute the line on which a token occurs and compute the exact
+#'   position a token will have on that line if it would be serialized.
+#' @inheritParams choose_indention
+enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
+  flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0)
+  flattened_pd <- choose_indention(flattened_pd, use_raw_indention)
+  flattened_pd$line <- cumsum(flattened_pd$lag_newlines) + 1
+  flattened_pd$newlines <- lead(flattened_pd$lag_newlines, default = 0)
+  flattened_pd$nchar <- nchar(flattened_pd$text)
+  flattened_pd$nr <- seq_len(nrow(flattened_pd))
+  flattened_pd %>%
+    group_by(line) %>%
+    mutate(col = cumsum(nchar + lag_spaces)) %>%
+    ungroup()
+}
+
+#' Choose the indention method for the tokens
+#'
+#' Either use the raw indention, which is just the spaces computed between
+#'   the first token on a new line and the token before it, or use the indention
+#'   computed according to the transformer used, which is stored in the column
+#'   `indention`.
+#'
+#'  All indention information will be combined with the space information for
+#'  the first token on a new line.
+#'  If `use_raw_indention` is set, information in the column `indention` will
+#'  be discarded anyways. If it is not set, the first token on a new line will
+#'  "inherit" the indention of the whole line.
+#'  The column `indention` will be removed since all information necessary is
+#'  containted in the spacing information of the first token on a new line and
+#'  the position of the tokens will not be changed anymore at this stage.
+#' @param flattened_pd A nested parse table that was turned into a flat parse
+#'   table using [extract_terminals()].
+#' @param use_raw_indention Boolean indicating wheter or not the raw indention
+#'   should be used.
+choose_indention <- function(flattened_pd, use_raw_indention) {
+  if (!use_raw_indention) {
+    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0,
+                                      flattened_pd$indent,
+                                      flattened_pd$lag_spaces)
+  }
+  flattened_pd$indention <- NULL
+  flattened_pd
+}
+
+
