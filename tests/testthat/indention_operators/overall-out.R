@@ -4,13 +4,15 @@ pd %>%
   ggplot(aes(x = new, y = old)) +
   geom_point()
 
+# FIXME don't make indention token-dependent for braces that only group
+# arithmetic operations
 1 + (
   22 - (1 /
-    2718 /
-    23 * 29 * (
-      2 * (22 * -1) +
-        1) -
-    18) +
+        2718 /
+        23 * 29 * (
+          2 * (22 * -1) +
+            1) -
+        18) +
   sin(pi) -
   2
 )

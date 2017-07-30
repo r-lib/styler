@@ -2,10 +2,11 @@
 if (x) {1 + 1 + +1} else {3}
 
 # not removing line-break
+# FIXME If linebreaks are not touched: Do not indent token-dependent before '{'
 test_that("x",
-  {
-    my_test(call)
-})
+          {
+            my_test(call)
+        })
 
 # do not replace assignment
 a = 3

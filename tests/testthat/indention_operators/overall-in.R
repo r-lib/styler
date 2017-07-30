@@ -4,6 +4,8 @@ mutate(x =devide(call3(a, b, 1 + q))) %>%
   ggplot(aes(x = new, y = old))+
 geom_point()
 
+# FIXME don't make indention token-dependent for braces that only group
+# arithmetic operations
 1+(
 22- (1/
   2718 /
