@@ -1,11 +1,20 @@
 context("grouped transformers")
 
-test_that("no line-break manipulation", {
+test_that("no indention manipulation but spaces manipulation", {
   expect_warning(
     test_collection("transformer_grouping", "scope_spaces",
                     transformer = style_text,
                     transformers = get_transformers(
                       flat = FALSE, scope = "spaces")
+    ), NA)
+})
+
+test_that("no line-break manipulation", {
+  expect_warning(
+    test_collection("transformer_grouping", "scope_indention",
+                    transformer = style_text,
+                    transformers = get_transformers(
+                      flat = FALSE, scope = "indention")
     ), NA)
 })
 
