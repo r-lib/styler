@@ -30,7 +30,9 @@ The following options for \code{scope} are available.
 \itemize{
 \item "none": Performs no transformation at all.
 \item "spaces": Manipulates spacing between token on the same line.
-\item "line_breaks": In addition to "spaces", this option also manipulates
+\item "indention": In addition to "spaces", this option also manipulates the
+indention level.
+\item "line_breaks": In addition to "indention", this option also manipulates
 line breaks.
 \item "tokens": In addition to "line_breaks", this option also manipulates
 tokens.

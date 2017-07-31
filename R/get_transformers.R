@@ -58,7 +58,9 @@ get_transformers_flat <- function(strict = TRUE,
 #'
 #' * "none": Performs no transformation at all.
 #' * "spaces": Manipulates spacing between token on the same line.
-#' * "line_breaks": In addition to "spaces", this option also manipulates
+#' * "indention": In addition to "spaces", this option also manipulates the
+#'   indention level.
+#' * "line_breaks": In addition to "indention", this option also manipulates
 #'   line breaks.
 #' * "tokens": In addition to "line_breaks", this option also manipulates
 #'   tokens.
@@ -74,7 +76,7 @@ get_transformers_nested <- function(
   indent_by = 2,
   start_comments_with_one_space = FALSE) {
 
-  lvls_scope <- c("none", "spaces", "line_breaks", "tokens")
+  lvls_scope <- c("none", "spaces", "indention", "line_breaks", "tokens")
 
   scope <- character_to_ordered(scope, lvls_scope)
 
@@ -90,7 +92,9 @@ get_transformers_nested <- function(
       set_space_between_levels
     )
 
-  line_break_manipulators <- if (scope >= lvls_scope[3])
+  use_raw_indention <- scope < lvls_scope[3]
+
+  line_break_manipulators <- if (scope >= lvls_scope[4])
     c(
       remove_line_break_before_curly_opening,
       remove_line_break_before_round_closing,
@@ -99,7 +103,7 @@ get_transformers_nested <- function(
       add_line_break_after_pipe
     )
 
-  token_manipulators <- if (scope >= lvls_scope[4])
+  token_manipulators <- if (scope >= lvls_scope[5])
     c(
       force_assignment_op,
       resolve_semicolon,
@@ -108,10 +112,14 @@ get_transformers_nested <- function(
 
 
   list(
-    filler     = create_filler,
-    line_break = line_break_manipulators,
-    space      = space_manipulators,
-    token      = token_manipulators,
+    # transformer functions
+    filler            = create_filler,
+    line_break        = line_break_manipulators,
+    space             = space_manipulators,
+    token             = token_manipulators,
+
+    # transformer options
+    use_raw_indention = use_raw_indention,
     NULL
   )
 }
