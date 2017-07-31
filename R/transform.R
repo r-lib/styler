@@ -114,7 +114,7 @@ apply_transformers <- function(pd_nested, transformers) {
 
   transformed_updated_multi_line <- post_visit(
     transformed_line_breaks,
-    c(set_multi_line)
+    c(set_multi_line, update_newlines)
   )
 
   transformed_all <- pre_visit(
