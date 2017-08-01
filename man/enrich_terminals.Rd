@@ -15,6 +15,14 @@ should be used.}
 }
 \description{
 Enriches a flattened parse table with terminals only. In particular, it is
-possible to compute the line on which a token occurs and compute the exact
-position a token will have on that line if it would be serialized.
+possible to compute the exact position a token will have (line and column)
+when it will be serialized.
+}
+\details{
+Since we have only terminal tokens now, the line on which a token
+starts we also be the line on which it ends. We call \code{line1} the line on
+which the token starts. \code{line1} has the same meaning as \code{line1} that can be
+found in a flat parse table (see \code{\link[=tokenize]{tokenize()}}), just that the \code{line1}
+created by \code{enrich_terminals()} is the updated version of the former
+\code{line1}. The same applies for \code{col1} and \code{col2}.
 }
