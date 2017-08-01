@@ -18,3 +18,24 @@ A parse table with updated indention for \code{target_index}.
 \description{
 Set the token-dependent indention for one target index.
 }
+\details{
+Updating indention is carried out in two steps: updating the indention itself
+and updating the position of the corresponding tokens in the colum \code{col}, so
+subsequent indention based on re-indented tokens can be done correctly.
+
+The idea is to first find the token on which the indention of other tokens
+should be based on. This is always an opening parenthesis.
+Then, via \code{id}, it is possible to identify the closing parenthesis that
+belongs to the expresion.
+Since the column \code{indent} was removed in \code{\link[=enrich_terminals]{enrich_terminals()}}
+and all indention information is now stored in the column \code{spaces} of the
+first token of every line, spacing is only updated for the tokens after a
+line break. \code{lag_spaces} of these tokens will be updated to match
+the position of the token right after the opening parenthesis as shown in the
+example in \code{\link[=set_token_dependent_indention]{set_token_dependent_indention()}}
+
+All re-indented lines now have oudated \code{col} values. Hence, these now need to
+be updated according to the number of spaces that were added
+to or removed from the first token on the line. This is necessary because
+subsequent re-indention depends on \code{col} values.
+}

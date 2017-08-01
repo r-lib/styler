@@ -35,23 +35,6 @@ set_token_dependent_indention <- function (flattened_pd) {
 
 #' Compute the indices of the parents that are to be updated
 #' @param flattened_pd A flattened parse table.
-#' @details
-#' Updating indention is carried out in two steps: updating the indention itself
-#' and updating the position of the corresponding tokens in the colum `col`, so
-#' subsequent indention based on re-indented tokens can be done correctly.
-#'
-#' The idea is to first find the tokens on which the indention of other tokens
-#' should be based on. Then, via `id`, it is possible to identify the closing
-#' parenthesis. Since the column `indent` was removed in [enrich_terminals()]
-#' and all indention information is now stored in the column `spaces` of the
-#' first token of every line, spacing is only updated for the tokens after a
-#' line break. Therefore, `lag_spaces` of these tokens will be updated with
-#' `col` of the opening bracket.
-#'
-#' All re-indented lines now have oudated `col` values. Hence, these now need to
-#' be updated according to the number of spaces that were added
-#' to or removed from the first token on the line. This is necessary because
-#' subsequent re-indention depends on `col` values.
 compute_parent_to_update <- function(flattened_pd) {
   which(flattened_pd$token == "'('" & flattened_pd$newlines == 0)
 }
@@ -63,6 +46,26 @@ compute_parent_to_update <- function(flattened_pd) {
 #' @param flattened_pd A flattened parse table.
 #' @param target_index The index of the token in `flattened_pd` that has the
 #'   indention we want to apply to other tokens.
+#' @details
+#' Updating indention is carried out in two steps: updating the indention itself
+#' and updating the position of the corresponding tokens in the colum `col`, so
+#' subsequent indention based on re-indented tokens can be done correctly.
+#'
+#' The idea is to first find the token on which the indention of other tokens
+#' should be based on. This is always an opening parenthesis.
+#' Then, via `id`, it is possible to identify the closing parenthesis that
+#' belongs to the expresion.
+#' Since the column `indent` was removed in [enrich_terminals()]
+#' and all indention information is now stored in the column `spaces` of the
+#' first token of every line, spacing is only updated for the tokens after a
+#' line break. `lag_spaces` of these tokens will be updated to match
+#' the position of the token right after the opening parenthesis as shown in the
+#' example in [set_token_dependent_indention()]
+#'
+#' All re-indented lines now have oudated `col` values. Hence, these now need to
+#' be updated according to the number of spaces that were added
+#' to or removed from the first token on the line. This is necessary because
+#' subsequent re-indention depends on `col` values.
 #' @return A parse table with updated indention for `target_index`.
 set_token_dependent_indention_one <- function(flattened_pd, target_index) {
 
