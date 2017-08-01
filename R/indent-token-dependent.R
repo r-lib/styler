@@ -36,7 +36,8 @@ set_token_dependent_indention <- function (flattened_pd) {
 #' Compute the indices of the parents that are to be updated
 #' @param flattened_pd A flattened parse table.
 compute_parent_to_update <- function(flattened_pd) {
-  which(flattened_pd$token == "'('" & flattened_pd$newlines == 0)
+  which(flattened_pd$token %in% c("SYMBOL_FUNCTION_CALL", "FUNCTION")
+        & flattened_pd$newlines == 0)
 }
 
 
@@ -133,7 +134,7 @@ compute_start_from_target <- function(flattened_pd, target_index) {
 #' before, otherwise it is the last token on the same line as the closing
 #' parenthesis.
 compute_stop_from_start <- function(flattened_pd, target_index) {
-  parent_of_ids_to_update <- flattened_pd$parent[target_index]
+  parent_of_ids_to_update <- flattened_pd$parent[target_index + 1]
   index_closing <- last(which(flattened_pd$parent == parent_of_ids_to_update))
   line_of_stop <- flattened_pd$line1[index_closing]
 
@@ -164,7 +165,9 @@ compute_stop_from_start <- function(flattened_pd, target_index) {
 needs_reindention <- function(flattened_pd, target_index) {
 
   next_opening_on_same_line <-
-    token_on_same_line_as(flattened_pd, target_index, "'('")[1]
+    token_on_same_line_as(flattened_pd,
+                          target_index,
+                          c("SYMBOL_FUNCTION_CALL", "FUNCTION"))[1]
 
   if (is.na(next_opening_on_same_line)) {
     if (line_break_after(flattened_pd, target_index)) {
@@ -177,7 +180,7 @@ needs_reindention <- function(flattened_pd, target_index) {
   }
   next_closing <- last(which(
     flattened_pd$parent ==
-    flattened_pd$parent[next_opening_on_same_line]
+    flattened_pd$parent[next_opening_on_same_line + 1]
   ))
 
   flattened_pd$line1[next_opening_on_same_line] == flattened_pd$line1[next_closing]
@@ -190,10 +193,10 @@ needs_reindention <- function(flattened_pd, target_index) {
 #' Check wheter a code line break follows, that is, whether a line break
 #' separates `target_index` and the next non-comment element.
 line_break_after <- function(flattened_pd, target_index) {
-  if (flattened_pd$token[target_index + 1] == "COMMENT") {
+  if (flattened_pd$token[target_index + 2] == "COMMENT") {
     return(TRUE)
   } else {
-    flattened_pd$lag_newlines[target_index + 1] > 0
+    flattened_pd$lag_newlines[target_index + 2] > 0
   }
 }
 
@@ -203,7 +206,7 @@ line_break_after <- function(flattened_pd, target_index) {
 #' Returns only tokens that are coming *after* target_index and are on
 #' the same line.
 token_on_same_line_as <- function(flattened_pd, target_index, token) {
-  all <- which(flattened_pd$token == token)
+  all <- which(flattened_pd$token %in% token)
   index <- all > target_index &
     (flattened_pd$line1[all] == flattened_pd$line1[target_index])
   all[index]
@@ -238,7 +241,7 @@ compute_spaces_to_update <- function(flattened_pd, cols_to_update) {
 #'   should match the target indention after re-indention.
 compute_shift_from_col <- function(flattened_pd, target_index, subject_index) {
   subject_col <- flattened_pd$col1[subject_index]
-  target_col <- flattened_pd$col1[target_index]
+  target_col <- flattened_pd$col1[target_index + 1]
   shift <- target_col - subject_col + 1
   shift
 }
