@@ -30,7 +30,7 @@ set_token_dependent_indention <- function (flattened_pd) {
   for (index in parents_to_update) {
     flattened_pd <- set_token_dependent_indention_one(flattened_pd, index)
   }
-  flattened_pd
+  force_regex_indention(flattened_pd, regex = regex_strcode())
 }
 
 #' Compute the indices of the parents that are to be updated
@@ -164,6 +164,8 @@ compute_stop_from_start <- function(flattened_pd, target_index) {
 #'   should be shifted.
 needs_reindention <- function(flattened_pd, target_index) {
 
+  if (length(token_on_same_line_as(flattened_pd, target_index, "'{'")) > 0)
+    return(FALSE)
   next_opening_on_same_line <-
     token_on_same_line_as(flattened_pd,
                           target_index,
@@ -171,8 +173,6 @@ needs_reindention <- function(flattened_pd, target_index) {
 
   if (is.na(next_opening_on_same_line)) {
     if (line_break_after(flattened_pd, target_index)) {
-      return(FALSE)
-    } else if (length(token_on_same_line_as(flattened_pd, target_index, "'{'")) > 0) {
       return(FALSE)
     } else {
       return(TRUE)
