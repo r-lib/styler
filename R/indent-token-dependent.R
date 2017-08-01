@@ -130,8 +130,8 @@ compute_cols_to_update <- function(flattened_pd, target_index) {
 #'   re-indented because of some other token that causes token-dependent
 #'   indention, `FALSE` if that is not the case.
 child_will_indent <- function(flattened_pd, target_index, cols_to_update) {
-  cols_line <- flattened_pd$line[cols_to_update]
-  index_line <- flattened_pd$line[target_index]
+  cols_line <- flattened_pd$line1[cols_to_update]
+  index_line <- flattened_pd$line1[target_index]
   cols_on_same_line_as_index <-
     cols_to_update[cols_line == index_line]
   any(flattened_pd$token[cols_on_same_line_as_index] %in% c("'('", "'{'"))
@@ -167,8 +167,8 @@ compute_spaces_to_update <- function(flattened_pd, cols_to_update) {
 #' @param subject_index The index of a token in `flattened_pd` that
 #'   should match the target indention after re-indention.
 compute_shift_from_col <- function(flattened_pd, target_index, subject_index) {
-  subject_col <- flattened_pd$col[subject_index] - flattened_pd$nchar[subject_index]
-  target_col <- flattened_pd$col[target_index] - flattened_pd$nchar[target_index]
+  subject_col <- flattened_pd$col1[subject_index]
+  target_col <- flattened_pd$col1[target_index]
   shift <- target_col - subject_col + 1
   shift
 }
@@ -195,8 +195,8 @@ apply_shift_to_tokens <- function(flattened_pd,
     flattened_pd$lag_spaces[spaces_to_update] + shift
 
   # update col
-  flattened_pd$col[cols_to_update] <-
-    flattened_pd$col[cols_to_update]  + shift
+  flattened_pd$col1[cols_to_update] <-
+    flattened_pd$col1[cols_to_update]  + shift
 
   flattened_pd
 }
