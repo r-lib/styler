@@ -72,7 +72,7 @@ set_token_dependent_indention_one <- function(flattened_pd, target_index) {
   cols_to_update <- compute_cols_to_update(flattened_pd, target_index)
 
   if (length(cols_to_update) < 1) return(flattened_pd)
-  if (any(child_will_indent(flattened_pd, target_index, cols_to_update)))
+  if (!needs_reindention(flattened_pd, target_index))
     return(flattened_pd)
 
   spaces_to_update <- compute_spaces_to_update(flattened_pd, cols_to_update)
@@ -105,9 +105,8 @@ set_token_dependent_indention_one <- function(flattened_pd, target_index) {
 #'   indention we want to apply to other tokens.
 #' @seealso compute_spaces_to_update
 compute_cols_to_update <- function(flattened_pd, target_index) {
-  parent_of_ids_to_update <- flattened_pd$parent[target_index]
-  index_start <- target_index + 1
-  index_stop <- last(which(flattened_pd$parent == parent_of_ids_to_update)) - 1
+  index_start <- compute_start_from_target(flattened_pd, target_index)
+  index_stop <- compute_stop_from_start(flattened_pd, target_index)
   cols_to_update <- which(between(
     seq_len(nrow(flattened_pd)),
     index_start, index_stop)
@@ -117,26 +116,98 @@ compute_cols_to_update <- function(flattened_pd, target_index) {
 }
 
 
-#' Check whether a child will re-indent token-dependent
+#' Compute the start given a target index
 #'
-#' Check whether a child in a flattened parse table will be re-indented
-#' depending on another token.
+#' Computes the index of the first token for which `col` needs to be updated.
+#' This is the first token on the line following `target_index`.
+compute_start_from_target <- function(flattened_pd, target_index) {
+  line_of_start <- flattened_pd$line1[target_index] + 1
+  which(flattened_pd$line1 == line_of_start)[1]
+}
+
+#' Compute the stop given start
+#'
+#' Computes the index of the last token for which `col` needs to be updated.
+#' If the line where the last token sits starts with
+#' a closing parenthesis, the stopping token is the last token on the line
+#' before, otherwise it is the last token on the same line as the closing
+#' parenthesis.
+compute_stop_from_start <- function(flattened_pd, target_index) {
+  parent_of_ids_to_update <- flattened_pd$parent[target_index]
+  index_closing <- last(which(flattened_pd$parent == parent_of_ids_to_update))
+  line_of_stop <- flattened_pd$line1[index_closing]
+
+  first_on_line_stop <- first(which(flattened_pd$line1 == line_of_stop))
+  last_on_line_stop <- last(which(flattened_pd$line1 == line_of_stop))
+  if (flattened_pd$token[first_on_line_stop] %in% c("'}'", "')'")) {
+    first_on_line_stop - 1
+  } else {
+    last_on_line_stop
+  }
+}
+
+
+#' Check whether an expression needs reindention
+#'
+#' Check whether an opening round brace is on the same line. If not, check
+#' whether a curly opening brace is there or whether there is nothing following
+#' on the same line at all. If so, there is no need to indent.
+#'
+#' If there is an opening round brace on the same line, check whether the
+#' closing brace is on that very same line too. If so, re-indention is needed,
+#' otherwise not.
 #' @param flattened_pd A flattened parse table.
 #' @param target_index The index of the token in `flattened_pd` that has the
 #'   indention we want to apply to other tokens.
 #' @param cols_to_update The indices of the tokens in the parse table which
 #'   should be shifted.
-#' @return `TRUE` if there is a child in `flattened_pd` that will be
-#'   re-indented because of some other token that causes token-dependent
-#'   indention, `FALSE` if that is not the case.
-child_will_indent <- function(flattened_pd, target_index, cols_to_update) {
-  cols_line <- flattened_pd$line1[cols_to_update]
-  index_line <- flattened_pd$line1[target_index]
-  cols_on_same_line_as_index <-
-    cols_to_update[cols_line == index_line]
-  any(flattened_pd$token[cols_on_same_line_as_index] %in% c("'('", "'{'"))
+needs_reindention <- function(flattened_pd, target_index) {
+
+  next_opening_on_same_line <-
+    token_on_same_line_as(flattened_pd, target_index, "'('")[1]
+
+  if (is.na(next_opening_on_same_line)) {
+    if (line_break_after(flattened_pd, target_index)) {
+      return(FALSE)
+    } else if (length(token_on_same_line_as(flattened_pd, target_index, "'{'")) > 0) {
+      return(FALSE)
+    } else {
+      return(TRUE)
+    }
+  }
+  next_closing <- last(which(
+    flattened_pd$parent ==
+    flattened_pd$parent[next_opening_on_same_line]
+  ))
+
+  flattened_pd$line1[next_opening_on_same_line] == flattened_pd$line1[next_closing]
+
+
 }
 
+#' Check whether a line break follows
+#'
+#' Check wheter a code line break follows, that is, whether a line break
+#' separates `target_index` and the next non-comment element.
+line_break_after <- function(flattened_pd, target_index) {
+  if (flattened_pd$token[target_index + 1] == "COMMENT") {
+    return(TRUE)
+  } else {
+    flattened_pd$lag_newlines[target_index + 1] > 0
+  }
+}
+
+
+#' Return the indices of a token on the line of a target index
+#'
+#' Returns only tokens that are coming *after* target_index and are on
+#' the same line.
+token_on_same_line_as <- function(flattened_pd, target_index, token) {
+  all <- which(flattened_pd$token == token)
+  index <- all > target_index &
+    (flattened_pd$line1[all] == flattened_pd$line1[target_index])
+  all[index]
+}
 
 
 #' Which spaces need an update?
@@ -151,7 +222,6 @@ child_will_indent <- function(flattened_pd, target_index, cols_to_update) {
 #'   should be shifted.
 #' @seealso compute_cols_to_update
 compute_spaces_to_update <- function(flattened_pd, cols_to_update) {
-  # could be computed outside of function since reused
   after_line_break <- which(flattened_pd$lag_newlines > 0)
   intersect(cols_to_update, after_line_break)
 }
@@ -198,5 +268,9 @@ apply_shift_to_tokens <- function(flattened_pd,
   flattened_pd$col1[cols_to_update] <-
     flattened_pd$col1[cols_to_update]  + shift
 
+  flattened_pd$col2[cols_to_update] <-
+    flattened_pd$col2[cols_to_update]  + shift
+
   flattened_pd
 }
+
