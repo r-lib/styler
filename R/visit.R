@@ -151,20 +151,29 @@ extract_terminals_helper <- function(pd_nested) {
 #' Enrich flattened parse table
 #'
 #' Enriches a flattened parse table with terminals only. In particular, it is
-#'   possible to compute the line on which a token occurs and compute the exact
-#'   position a token will have on that line if it would be serialized.
+#'   possible to compute the exact position a token will have (line and column)
+#'   when it will be serialized.
+#' @details Since we have only terminal tokens now, the line on which a token
+#'  starts we also be the line on which it ends. We call `line1` the line on
+#'  which the token starts. `line1` has the same meaning as `line1` that can be
+#'  found in a flat parse table (see [tokenize()]), just that the `line1`
+#'  created by `enrich_terminals()` is the updated version of the former
+#'  `line1`. The same applies for `col1` and `col2`.
 #' @inheritParams choose_indention
 enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0)
   flattened_pd <- choose_indention(flattened_pd, use_raw_indention)
-  flattened_pd$line <- cumsum(flattened_pd$lag_newlines) + 1
+  flattened_pd$line1 <-
+    cumsum(flattened_pd$lag_newlines) + flattened_pd$line1[1]
+
   flattened_pd$newlines <- lead(flattened_pd$lag_newlines, default = 0)
   flattened_pd$nchar <- nchar(flattened_pd$text)
-  flattened_pd$nr <- seq_len(nrow(flattened_pd))
-  flattened_pd %>%
-    group_by(line) %>%
-    mutate(col = cumsum(nchar + lag_spaces)) %>%
+  flattened_pd <- flattened_pd %>%
+    group_by(line1) %>%
+    mutate(col2 = cumsum(nchar + lag_spaces)) %>%
     ungroup()
+  flattened_pd$col1 <- flattened_pd$col2 - flattened_pd$nchar
+  flattened_pd
 }
 
 #' Choose the indention method for the tokens
@@ -192,7 +201,7 @@ choose_indention <- function(flattened_pd, use_raw_indention) {
                                       flattened_pd$indent,
                                       flattened_pd$lag_spaces)
   }
-  flattened_pd$indention <- NULL
+  flattened_pd$indent <- NULL
   flattened_pd
 }
 
