@@ -189,3 +189,11 @@ remove_space_after_excl <- function(pd_flat) {
   pd_flat$spaces[excl] <- 0L
   pd_flat
 }
+
+
+remove_space_before_dollar <- function(pd_flat) {
+  dollar_after <- (pd_flat$token == "'$'") & (pd_flat$lag_newlines == 0L)
+  dollar_before <- lead(dollar_after, default = FALSE)
+  pd_flat$spaces[dollar_before] <- 0L
+  pd_flat
+}

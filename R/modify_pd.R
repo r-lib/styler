@@ -27,7 +27,8 @@ indent_op <- function(pd,
                       token = c(math_token,
                                 logical_token,
                                 special_token,
-                                "LEFT_ASSIGN")) {
+                                "LEFT_ASSIGN", 
+                                "'$'")) {
   indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
