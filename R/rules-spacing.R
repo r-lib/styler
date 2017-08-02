@@ -177,3 +177,9 @@ set_space_before_comments <- function(pd_flat) {
   pd_flat
 
 }
+
+remove_space_after_excl <- function(pd_flat) {
+  excl <- (pd_flat$token == "'!'") & (pd_flat$newlines == 0L)
+  pd_flat$spaces[excl] <- 0L
+  pd_flat
+}
