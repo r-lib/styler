@@ -267,6 +267,10 @@ apply_shift_to_tokens <- function(flattened_pd,
   flattened_pd$lag_spaces[spaces_to_update] <-
     flattened_pd$lag_spaces[spaces_to_update] + shift
 
+  # depdreciated?
+  flattened_pd$spaces[spaces_to_update - 1] <-
+    flattened_pd$spaces[spaces_to_update - 1] + shift
+
   # update col
   flattened_pd$col1[cols_to_update] <-
     flattened_pd$col1[cols_to_update]  + shift
