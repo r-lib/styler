@@ -166,6 +166,9 @@ needs_reindention <- function(flattened_pd, target_index) {
 
   if (length(token_on_same_line_as(flattened_pd, target_index, "'{'")) > 0)
     return(FALSE)
+  if (length(first_token_on_next_line_is(flattened_pd, target_index, "'{")))
+    return(FALSE)
+
   next_opening_on_same_line <-
     token_on_same_line_as(flattened_pd,
                           target_index,
@@ -212,6 +215,11 @@ token_on_same_line_as <- function(flattened_pd, target_index, token) {
   all[index]
 }
 
+first_token_on_next_line_is <- function(flattened_pd, target_index, token) {
+  same_line <- flattened_pd$line1[target_index] + 1
+  last_ind_on_line <- last(flattened_pd$line1 == same_line)
+  flattened_pd$token[last_ind_on_line + 1]
+}
 
 #' Which spaces need an update?
 #'
