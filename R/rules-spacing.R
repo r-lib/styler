@@ -123,8 +123,12 @@ remove_space_before_comma <- function(pd_flat) {
 #'   parse table, so spacing cannot be set after the previous token.
 #' @param pd_flat A flat parse table.
 set_space_between_levels <- function(pd_flat) {
-  if (pd_flat$token[1] %in% c("FUNCTION", "FOR", "IF", "WHILE")) {
-    pd_flat$spaces[nrow(pd_flat) - 1] <- 1L
+  if (pd_flat$token[1] %in% c("FUNCTION", "IF", "WHILE")) {
+    index <- pd_flat$token == "')'" & pd_flat$newlines == 0L
+    pd_flat$spaces[index] <- 1L
+  } else if (pd_flat$token[1] == "FOR") {
+    index <- 2
+    pd_flat$spaces[index] <- 1L
   }
   pd_flat
 }

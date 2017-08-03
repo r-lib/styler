@@ -1,5 +1,5 @@
 # { never on its own line
-if (y == 0){
+if (y == 0) {
   1
 } else {
   2
