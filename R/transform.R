@@ -17,7 +17,6 @@ transform_files <- function(files, transformers, flat) {
   }
   invisible(changed)
 }
-
 #' Closure to return a transformer function
 #'
 #' This function takes a list of transformer functions as input and
@@ -86,7 +85,11 @@ parse_transform_serialize <- function(text, transformers) {
   pd_nested <- compute_parse_data_nested(text)
   transformed_pd <- apply_transformers(pd_nested, transformers)
   # TODO verify_roundtrip
-  serialized_transformed_text <- serialize_parse_data_nested(transformed_pd)
+  flattened_pd <- extract_terminals(transformed_pd) %>%
+    enrich_terminals(transformers$use_raw_indention) %>%
+    set_token_dependent_indention()
+
+  serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
   serialized_transformed_text
 }
 
@@ -104,14 +107,29 @@ parse_transform_serialize <- function(text, transformers) {
 #' @param transformers A list of *named* transformer functions
 #' @importFrom purrr flatten
 apply_transformers <- function(pd_nested, transformers) {
-  transformed_line_breaks <- pre_visit(pd_nested,
-                                       c(transformers$filler,
-                                         transformers$line_break))
+  transformed_line_breaks <- pre_visit(
+    pd_nested,
+    c(transformers$filler,
+    transformers$line_break)
+  )
 
-  transformed_updated_multi_line <- post_visit(transformed_line_breaks,
-                                               c(set_multi_line))
+  transformed_updated_multi_line <- post_visit(
+    transformed_line_breaks,
+    c(set_multi_line, update_newlines)
+  )
 
-  transformed_all <- pre_visit(transformed_updated_multi_line,
-                               c(transformers$space, transformers$token))
-  transformed_all
+  transformed_all <- pre_visit(
+    transformed_updated_multi_line,
+    c(transformers$space, transformers$token)
+  )
+
+  transformed_absolute_indent <- context_to_terminals(
+    transformed_all,
+    passed_lag_newlines = 0,
+    passed_indent = 0,
+    passed_spaces = 0
+  )
+
+  transformed_absolute_indent
+
 }

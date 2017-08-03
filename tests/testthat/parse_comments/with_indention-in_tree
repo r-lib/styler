@@ -21,7 +21,7 @@ ROOT (token: short_text [lag_newlines/spaces] {id})
  ¦   ¦   ¦   ¦--expr:  [0/0] {31}                         
  ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: call3 [0/0] {29}
  ¦   ¦   ¦   ¦--'(': ( [0/0] {30}                         
- ¦   ¦   ¦   ¦--COMMENT: # zer [0/0] {32}                 
+ ¦   ¦   ¦   ¦--COMMENT: # FIX [0/0] {32}                 
  ¦   ¦   ¦   ¦--COMMENT: # one [1/19] {34}                
  ¦   ¦   ¦   ¦--COMMENT: # two [1/6] {36}                 
  ¦   ¦   ¦   ¦--expr:  [1/0] {39}                         

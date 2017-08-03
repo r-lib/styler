@@ -27,7 +27,7 @@ remove_space_after_unary_pm <- function(pd_flat) {
 
   pm_after <- pd_flat$token %in% op_pm
   pd_flat$spaces[pm_after & (pd_flat$newlines == 0L) &
-                   dplyr::lag(pd_flat$token) %in% op_pm_unary_after] <- 0L
+                   (dplyr::lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
   pd_flat
 }
 
@@ -93,19 +93,19 @@ add_space_before_brace <- function(pd_flat) {
 }
 
 add_space_after_comma <- function(pd_flat) {
-  comma_after <- pd_flat$token == "','"
+  comma_after <- (pd_flat$token == "','") & (pd_flat$newlines == 0L)
   pd_flat$spaces[comma_after] <- pmax(pd_flat$spaces[comma_after], 1L)
   pd_flat
 }
 
 set_space_after_comma <- function(pd_flat) {
-  comma_after <- pd_flat$token == "','"
+  comma_after <- (pd_flat$token == "','") & (pd_flat$newlines == 0L)
   pd_flat$spaces[comma_after] <- 1L
   pd_flat
 }
 
 remove_space_before_comma <- function(pd_flat) {
-  comma_after <- pd_flat$token == "','"
+  comma_after <- (pd_flat$token == "','")
   if (!any(comma_after)) return(pd_flat)
   comma_before <- lead(comma_after, default = FALSE)
   idx <- comma_before  & (pd_flat$newlines == 0L)
@@ -174,7 +174,7 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
 
 
 set_space_before_comments <- function(pd_flat) {
-  comment_after <- pd_flat$token == "COMMENT"
+  comment_after <- (pd_flat$token == "COMMENT") & (pd_flat$lag_newlines == 0L)
   if (!any(comment_after)) return(pd_flat)
   comment_before <- lead(comment_after, default = FALSE)
   pd_flat$spaces[comment_before & (pd_flat$newlines == 0L)] <- 1L
