@@ -38,6 +38,7 @@ get_transformers_flat <- function(strict = TRUE,
     if (strict) set_space_after_comma else add_space_after_comma,
     remove_space_before_comma,
     remove_space_after_opening_paren,
+    remove_space_after_excl,
     partial(start_comments_with_space,
             force_one = start_comments_with_one_space),
     NULL)
