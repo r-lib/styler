@@ -54,14 +54,14 @@ visit_one <- function(pd_flat, funs) {
 #' @inherit context_towards_terminals
 #' @seealso context_towards_terminals visitors
 context_to_terminals <- function(pd_nested,
-                                 passed_lag_newlines,
-                                 passed_indent,
-                                 passed_spaces) {
+                                 outer_lag_newlines,
+                                 outer_indent,
+                                 outer_spaces) {
 
   if (is.null(pd_nested)) return()
 
   pd_transformed <- context_towards_terminals(
-    pd_nested, passed_lag_newlines, passed_indent, passed_spaces
+    pd_nested, outer_lag_newlines, outer_indent, outer_spaces
   )
 
   pd_transformed$child <- pmap(list(pd_transformed$child,
@@ -75,25 +75,25 @@ context_to_terminals <- function(pd_nested,
 
 #' Update the a parse table given outer context
 #'
-#' `passed_lag_newlines` are added to the first token in `pd`,
-#'   `passed_indent` is added to all tokens in `pd`, `passed_spaces` is added to
+#' `outer_lag_newlines` are added to the first token in `pd`,
+#'   `outer_indent` is added to all tokens in `pd`, `outer_spaces` is added to
 #'   the last token in `pd`. [context_to_terminals()] calls this function
 #'   repeatedly, which means the propagation of the parse information to the
 #'   terminal tokens.
 #' @param pd_nested A nested parse table.
-#' @param passed_lag_newlines The lag_newlines to be propagated inwards.
-#' @param passed_indent The indention depth to be propagated inwards.
-#' @param passed_spaces The number of spaces to be propagated inwards.
+#' @param outer_lag_newlines The lag_newlines to be propagated inwards.
+#' @param outer_indent The indention depth to be propagated inwards.
+#' @param outer_spaces The number of spaces to be propagated inwards.
 #' @return An updated parse table.
 #' @seealso context_to_terminals
 context_towards_terminals <- function(pd_nested,
-                                      passed_lag_newlines,
-                                      passed_indent,
-                                      passed_spaces) {
-  pd_nested$indent <- pd_nested$indent + passed_indent
-  pd_nested$lag_newlines[1] <- pd_nested$lag_newlines[1] + passed_lag_newlines
+                                      outer_lag_newlines,
+                                      outer_indent,
+                                      outer_spaces) {
+  pd_nested$indent <- pd_nested$indent + outer_indent
+  pd_nested$lag_newlines[1] <- pd_nested$lag_newlines[1] + outer_lag_newlines
   pd_nested$spaces[nrow(pd_nested)] <-
-    pd_nested$spaces[nrow(pd_nested)] + passed_spaces
+    pd_nested$spaces[nrow(pd_nested)] + outer_spaces
   pd_nested
 }
 

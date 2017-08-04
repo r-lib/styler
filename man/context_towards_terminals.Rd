@@ -4,24 +4,24 @@
 \alias{context_towards_terminals}
 \title{Update the a parse table given outer context}
 \usage{
-context_towards_terminals(pd_nested, passed_lag_newlines, passed_indent,
-  passed_spaces)
+context_towards_terminals(pd_nested, outer_lag_newlines, outer_indent,
+  outer_spaces)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}
 
-\item{passed_lag_newlines}{The lag_newlines to be propagated inwards.}
+\item{outer_lag_newlines}{The lag_newlines to be propagated inwards.}
 
-\item{passed_indent}{The indention depth to be propagated inwards.}
+\item{outer_indent}{The indention depth to be propagated inwards.}
 
-\item{passed_spaces}{The number of spaces to be propagated inwards.}
+\item{outer_spaces}{The number of spaces to be propagated inwards.}
 }
 \value{
 An updated parse table.
 }
 \description{
-\code{passed_lag_newlines} are added to the first token in \code{pd},
-\code{passed_indent} is added to all tokens in \code{pd}, \code{passed_spaces} is added to
+\code{outer_lag_newlines} are added to the first token in \code{pd},
+\code{outer_indent} is added to all tokens in \code{pd}, \code{outer_spaces} is added to
 the last token in \code{pd}. \code{\link[=context_to_terminals]{context_to_terminals()}} calls this function
 repeatedly, which means the propagation of the parse information to the
 terminal tokens.

@@ -117,9 +117,9 @@ apply_transformers <- function(pd_nested, transformers) {
                                c(transformers$space, transformers$token))
 
   transformed_absolute_indent <- context_to_terminals(transformed_all,
-                                                      passed_lag_newlines = 0,
-                                                      passed_indent = 0,
-                                                      passed_spaces = 0)
+                                                      outer_lag_newlines = 0,
+                                                      outer_indent = 0,
+                                                      outer_spaces = 0)
 
   transformed_absolute_indent
 

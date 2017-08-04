@@ -4,17 +4,16 @@
 \alias{context_to_terminals}
 \title{Propagate context to terminals}
 \usage{
-context_to_terminals(pd_nested, passed_lag_newlines, passed_indent,
-  passed_spaces)
+context_to_terminals(pd_nested, outer_lag_newlines, outer_indent, outer_spaces)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}
 
-\item{passed_lag_newlines}{The lag_newlines to be propagated inwards.}
+\item{outer_lag_newlines}{The lag_newlines to be propagated inwards.}
 
-\item{passed_indent}{The indention depth to be propagated inwards.}
+\item{outer_indent}{The indention depth to be propagated inwards.}
 
-\item{passed_spaces}{The number of spaces to be propagated inwards.}
+\item{outer_spaces}{The number of spaces to be propagated inwards.}
 }
 \value{
 An updated parse table.
