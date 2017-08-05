@@ -31,3 +31,24 @@ add_line_break_after_pipe <- function(pd) {
   pd$lag_newlines[lag(is_special)] <- 1L
   pd
 }
+
+# Break the line if
+break_line_after_opening_if_call_is_multiline <- function(pd) {
+  return(pd)
+  npd <- nrow(pd)
+  if (npd < 2) return(pd)
+  if (all(is.na(pd$token_before[2]))) return(pd)
+  is_call <- pd$token_before[2] == "SYMBOL_FUNCTION_CALL"
+  if (!is_call) return(pd)
+  if (npd == 3) {
+    pd$lag_newlines[3] <- 0L
+    return(pd)
+  }
+  comments <- which(pd$token == "COMMENT")
+  is_multi_line <- any(pd$lag_newlines[3:(npd - 1)] > 0)
+
+  if (!is_multi_line) return(pd)
+
+  pd$lag_newlines[setdiff(3, comments)] <- 1L
+  pd
+}

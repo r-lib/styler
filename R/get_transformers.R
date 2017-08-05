@@ -99,7 +99,8 @@ get_transformers_nested <- function(
       remove_line_break_before_round_closing,
       add_line_break_afer_curly_opening,
       add_line_break_before_curly_closing,
-      add_line_break_after_pipe
+      add_line_break_after_pipe,
+      break_line_after_opening_if_call_is_multiline
     )
 
   token_manipulators <- if (scope >= lvls_scope[5])
