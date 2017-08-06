@@ -10,5 +10,6 @@ serialize_parse_data_flattened(flattened_pd)
 \item{flattened_pd}{A flattened parse table.}
 }
 \description{
-Collapses a flattened parse table into character vector representation.
+Collapses a flattened parse table into character vector representation and
+removes trailing white spaces.
 }

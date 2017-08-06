@@ -10,7 +10,8 @@ serialize_parse_data_flat(pd_flat)
 \item{pd_flat}{A parse table.}
 }
 \description{
-Collapses a parse table into character vector representation.
+Collapses a parse table into character vector representation and
+removes trailing white spaces.
 }
 \details{
 The function essentially collapses the column text of \code{pd_flat}
