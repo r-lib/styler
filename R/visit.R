@@ -123,7 +123,7 @@ extract_terminals <- function(pd_nested) {
 #'  `line1`. The same applies for `col1` and `col2`.
 #' @inheritParams choose_indention
 enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
-  flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0)
+  flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0L)
   flattened_pd <- choose_indention(flattened_pd, use_raw_indention)
   flattened_pd$line1 <-
     cumsum(flattened_pd$lag_newlines) + flattened_pd$line1[1]

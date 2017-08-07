@@ -88,7 +88,7 @@ create_filler <- function(pd_flat) {
   pd_flat$line3 <- lead(pd_flat$line1, default = tail(pd_flat$line2, 1))
   pd_flat$col3 <- lead(pd_flat$col1, default = tail(pd_flat$col2, 1) + 1L)
   pd_flat$newlines <- pd_flat$line3 - pd_flat$line2
-  pd_flat$lag_newlines <- lag(pd_flat$newlines, default = 0)
+  pd_flat$lag_newlines <- lag(pd_flat$newlines, default = 0L)
   pd_flat$col2_nl <- if_else(pd_flat$newlines > 0L, 0L, pd_flat$col2)
   pd_flat$spaces <- pd_flat$col3 - pd_flat$col2_nl - 1L
   pd_flat$multi_line <- ifelse(pd_flat$terminal, FALSE, NA)
