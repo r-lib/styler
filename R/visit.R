@@ -128,8 +128,8 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$line1 <-
     cumsum(flattened_pd$lag_newlines) + flattened_pd$line1[1]
 
-  flattened_pd$newlines <- lead(flattened_pd$lag_newlines, default = 0)
-  flattened_pd$nchar <- nchar(flattened_pd$text)
+  flattened_pd$newlines <- lead(flattened_pd$lag_newlines, default = 0L)
+  flattened_pd$nchar <- nchar(flattened_pd$text, type = "width")
   flattened_pd <- flattened_pd %>%
     group_by(line1) %>%
     mutate(col2 = cumsum(nchar + lag_spaces)) %>%
