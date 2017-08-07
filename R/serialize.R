@@ -31,8 +31,7 @@ serialize_parse_data_nested_helper <- function(pd_nested, pass_indent) {
 
 #' Serialize a nested parse table
 #'
-#' Collapses a nested parse table into its character vector representation and
-#' removes trailing white spaces.
+#' Collapses a nested parse table into its character vector representation.
 #' @param pd_nested A nested parse table with line break, spaces and indention
 #'   information.
 #' @return A character string.
@@ -49,8 +48,7 @@ serialize_parse_data_nested <- function(pd_nested) {
 
 #' Serialize Flat Parse Data
 #'
-#' Collapses a parse table into character vector representation and
-#' removes trailing white spaces.
+#' Collapses a parse table into character vector representation.
 #' @param pd_flat A parse table.
 #' @details
 #'   The function essentially collapses the column text of `pd_flat`
@@ -68,14 +66,12 @@ serialize_parse_data_flat <- function(pd_flat) {
         collapse = "")) %>%
     .[["text_ws"]] %>%
     strsplit("\n", fixed = TRUE) %>%
-    .[[1L]] %>%
-    trimws(which = "right")
+    .[[1L]]
 }
 
 #' Serialize flattened parse data
 #'
-#' Collapses a flattened parse table into character vector representation and
-#' removes trailing white spaces.
+#' Collapses a flattened parse table into character vector representation.
 #' @param flattened_pd A flattened parse table.
 serialize_parse_data_flattened <- function(flattened_pd) {
   flattened_pd$lag_newlines[1] <- flattened_pd$line1[1] - 1
@@ -88,8 +84,7 @@ serialize_parse_data_flattened <- function(flattened_pd) {
         collapse = "")) %>%
     .[["text_ws"]] %>%
     strsplit("\n", fixed = TRUE) %>%
-    .[[1L]] %>%
-    trimws(which = "right")
+    .[[1L]]
 
 
 }

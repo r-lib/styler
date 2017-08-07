@@ -14,6 +14,5 @@ information.}
 A character string.
 }
 \description{
-Collapses a nested parse table into its character vector representation and
-removes trailing white spaces.
+Collapses a nested parse table into its character vector representation.
 }
