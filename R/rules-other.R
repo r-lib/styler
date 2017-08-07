@@ -18,3 +18,14 @@ add_brackets_in_pipe <- function(pd) {
   pd
 
 }
+
+updat_indention_ref <- function(pd_nested) {
+  if ((pd_nested$token_before[2] %in% c("SYMBOL_FUNCTION_CALL")) &&
+       nrow(pd_nested) > 3 &&
+       pd_nested$lag_newlines[3] == 0) {
+    seq <- 3:(nrow(pd_nested) - 1)
+    one_line_seqs <- setdiff(seq, which(pd_nested$multi_line))
+    pd_nested$indent_ref_id[one_line_seqs] <- pd_nested$child[[1]]$id
+  }
+  pd_nested
+}

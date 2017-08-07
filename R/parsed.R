@@ -92,7 +92,7 @@ create_filler <- function(pd_flat) {
   pd_flat$col2_nl <- if_else(pd_flat$newlines > 0L, 0L, pd_flat$col2)
   pd_flat$spaces <- pd_flat$col3 - pd_flat$col2_nl - 1L
   pd_flat$multi_line <- ifelse(pd_flat$terminal, FALSE, NA)
-
+  pd_flat$indent_ref_id <- NA
   ret <- pd_flat[, !(names(pd_flat) %in% c("line3", "col3", "col2_nl"))]
 
 

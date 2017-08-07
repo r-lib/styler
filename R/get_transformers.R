@@ -110,14 +110,17 @@ get_transformers_nested <- function(
       add_brackets_in_pipe
     )
 
-
+  indention_modifier <-
+    c(
+      updat_indention_ref
+    )
   list(
     # transformer functions
     filler            = create_filler,
     line_break        = line_break_manipulators,
     space             = space_manipulators,
     token             = token_manipulators,
-
+    indention         = indention_modifier,
     # transformer options
     use_raw_indention = use_raw_indention,
     NULL

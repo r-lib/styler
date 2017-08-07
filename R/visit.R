@@ -56,18 +56,22 @@ visit_one <- function(pd_flat, funs) {
 context_to_terminals <- function(pd_nested,
                                  passed_lag_newlines,
                                  passed_indent,
-                                 passed_spaces) {
+                                 passed_spaces,
+                                 passed_indention_refs) {
 
   if (is.null(pd_nested)) return()
 
   pd_transformed <- context_towards_terminals(
-    pd_nested, passed_lag_newlines, passed_indent, passed_spaces
+    pd_nested, passed_lag_newlines,
+    passed_indent, passed_spaces,
+    passed_indention_refs
   )
 
   pd_transformed$child <- pmap(list(pd_transformed$child,
                                     pd_transformed$lag_newlines,
                                     pd_transformed$indent,
-                                    pd_transformed$spaces),
+                                    pd_transformed$spaces,
+                                    pd_transformed$indent_ref_id),
                                context_to_terminals)
   pd_transformed
 }
@@ -89,8 +93,11 @@ context_to_terminals <- function(pd_nested,
 context_towards_terminals <- function(pd_nested,
                                       passed_lag_newlines,
                                       passed_indent,
-                                      passed_spaces) {
+                                      passed_spaces,
+                                      passed_indention_refs) {
   pd_nested$indent <- pd_nested$indent + passed_indent
+  ref_id_is_na <- !is.na(pd_nested$indent_ref_id)
+  pd_nested$indent_ref_id[!ref_id_is_na] <- passed_indention_refs
   pd_nested$lag_newlines[1] <- pd_nested$lag_newlines[1] + passed_lag_newlines
   pd_nested$spaces[nrow(pd_nested)] <-
     pd_nested$spaces[nrow(pd_nested)] + passed_spaces
@@ -99,54 +106,16 @@ context_towards_terminals <- function(pd_nested,
 
 #' Extract terminal tokens
 #'
-#' Turns a nested parse table into a flat parse table. In particular it extracts
-#'   terminal tokens and the following attributes:
-#'
-#'  * lag_newlines
-#'  * indent
-#'  * token
-#'  * text
-#'  * spaces
-#'  * id
-#'  * parent
-#'  * line1
-#' @inheritParams extract_terminals_helper
+#' Turns a nested parse table into a flat parse table and extracts *all*
+#' attributes
+#' @param pd_nested A nested parse table.
 #' @importFrom readr type_convert col_integer cols
 extract_terminals <- function(pd_nested) {
-  flat_vec <- extract_terminals_helper(pd_nested) %>%
-    unlist()
-  nms <- list(
-    NULL,
-    c("lag_newlines", "indent", "token", "text", "spaces", "id", "parent", "line1")
-  )
-  flat_tbl <- matrix(flat_vec, ncol = length(nms[[2]]), byrow = TRUE, dimnames = nms) %>%
-    as_tibble() %>%
-    type_convert(
-      col_types = cols(
-        lag_newlines = col_integer(),
-        indent       = col_integer(),
-        spaces       = col_integer()
-      )
-    )
+  if (is.null(pd_nested)) return(pd)
+  pd_splitted <- split(pd_nested, seq_len(nrow(pd_nested)))
+  bind_rows(ifelse(pd_nested$terminal, pd_splitted, pd_nested$child))
 }
 
-#' Helper to extract terminals
-#'
-#' @param pd_nested A nested parse table.
-extract_terminals_helper <- function(pd_nested) {
-  if (is.null(pd_nested)) return(pd)
-  pmap(list(pd_nested$terminal, pd_nested$token, pd_nested$text,
-            pd_nested$lag_newlines, pd_nested$spaces, pd_nested$indent,
-            pd_nested$id, pd_nested$parent, pd_nested$line1, pd_nested$child),
-       function(terminal, token, text, lag_newlines, spaces, indent, id,
-                parent, line1, child) {
-         if (terminal) {
-           c(lag_newlines, indent, token, text, spaces, id, parent, line1)
-         } else {
-           extract_terminals_helper(child)
-         }
-       })
-}
 
 #' Enrich flattened parse table
 #'
@@ -162,6 +131,7 @@ extract_terminals_helper <- function(pd_nested) {
 #' @inheritParams choose_indention
 enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0)
+  flattened_pd$spaces <- NULL # depreciate spaces
   flattened_pd <- choose_indention(flattened_pd, use_raw_indention)
   flattened_pd$line1 <-
     cumsum(flattened_pd$lag_newlines) + flattened_pd$line1[1]
@@ -173,7 +143,9 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
     mutate(col2 = cumsum(nchar + lag_spaces)) %>%
     ungroup()
   flattened_pd$col1 <- flattened_pd$col2 - flattened_pd$nchar
+  flattened_pd <- apply_indention_refs(flattened_pd)
   flattened_pd
+
 }
 
 #' Choose the indention method for the tokens
@@ -206,3 +178,30 @@ choose_indention <- function(flattened_pd, use_raw_indention) {
 }
 
 
+apply_indention_refs <- function(flattened_pd) {
+  ref_id_is_na <- is.na(flattened_pd$indent_ref_id)
+  first_token_on_line <- flattened_pd$lag_newlines > 0L
+  tokens_to_update_lag_spaces <- which(!ref_id_is_na & first_token_on_line)
+
+  # needs sequential update
+  for (token in tokens_to_update_lag_spaces) {
+    flattened_pd <- apply_indention_ref_one(flattened_pd, token)
+  }
+  flattened_pd
+}
+
+apply_indention_ref_one <- function(flattened_pd, token) {
+  copied_spaces <-
+    flattened_pd$col2[flattened_pd$id == flattened_pd$indent_ref_id[token]] + 1
+  old_spaces <-
+    flattened_pd$lag_spaces[token]
+  shift <- copied_spaces - old_spaces
+  flattened_pd$lag_spaces[token] <- copied_spaces # depreciate spaces.
+
+  # update col1 / col2
+  cols_to_update <- flattened_pd$line1 == flattened_pd$line1[token]
+  flattened_pd$col1[cols_to_update] <- flattened_pd$col1[cols_to_update] + shift
+  flattened_pd$col2[cols_to_update] <- flattened_pd$col2[cols_to_update] + shift
+  flattened_pd
+
+}
