@@ -10,11 +10,11 @@ set_spaces(spaces_after_prefix, text_length, force_one)
 \item{spaces_after_prefix}{An integer vector with the number of spaces
 after the prefix.}
 
+\item{text_length}{Integer vector giving the number of characters of
+the text.}
+
 \item{force_one}{Whether spaces_after_prefix should be set to one in all
 cases.}
-
-\item{text_lenght}{Integer vector giving the number of characters of
-the text.}
 }
 \value{
 An integer vector of length spaces_after_prefix, which is either

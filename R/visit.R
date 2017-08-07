@@ -104,8 +104,8 @@ context_towards_terminals <- function(pd_nested,
 #' @param pd_nested A nested parse table.
 extract_terminals <- function(pd_nested) {
   if (is.null(pd_nested)) return(pd)
-  pd_splitted <- split(pd_nested, seq_len(nrow(pd_nested)))
-  bind_rows(ifelse(pd_nested$terminal, pd_splitted, pd_nested$child))
+  pd_split <- split(pd_nested, seq_len(nrow(pd_nested)))
+  bind_rows(ifelse(pd_nested$terminal, pd_split, pd_nested$child))
 }
 
 

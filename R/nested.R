@@ -101,7 +101,7 @@ add_terminal_token_before <- function(pd_flat) {
 #'
 #' @param spaces_after_prefix An integer vector with the number of spaces
 #'   after the prefix.
-#' @param text_lenght Integer vector giving the number of characters of
+#' @param text_length Integer vector giving the number of characters of
 #'   the text.
 #' @param force_one Whether spaces_after_prefix should be set to one in all
 #'   cases.
