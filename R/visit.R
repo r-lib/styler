@@ -102,7 +102,6 @@ context_towards_terminals <- function(pd_nested,
 #' Turns a nested parse table into a flat parse table and extracts *all*
 #' attributes
 #' @param pd_nested A nested parse table.
-#' @importFrom readr type_convert col_integer cols
 extract_terminals <- function(pd_nested) {
   if (is.null(pd_nested)) return(pd)
   pd_splitted <- split(pd_nested, seq_len(nrow(pd_nested)))
