@@ -93,13 +93,13 @@ add_space_before_brace <- function(pd_flat) {
 }
 
 add_space_after_comma <- function(pd_flat) {
-  comma_after <- (pd_flat$token == "','") & (pd_flat$newlines == 0L)
+  comma_after <- pd_flat$token == "','"
   pd_flat$spaces[comma_after] <- pmax(pd_flat$spaces[comma_after], 1L)
   pd_flat
 }
 
 set_space_after_comma <- function(pd_flat) {
-  comma_after <- (pd_flat$token == "','") & (pd_flat$newlines == 0L)
+  comma_after <- pd_flat$token == "','"
   pd_flat$spaces[comma_after] <- 1L
   pd_flat
 }
@@ -136,9 +136,9 @@ set_space_between_levels <- function(pd_flat) {
 #' Start comments with a space
 #'
 #' Forces comments to start with a space, that is, after the regular expression
-#'   "^#+'*", at least one space must follow. Multiple spaces may be legit for
-#'   indention in some situations.
-#'
+#'   "^#+'*", at least one space must follow if the comment is *non-empty*, i.e
+#'   there is not just spaces within the comment. Multiple spaces may be legit
+#'   for indention in some situations.
 #' @param pd A parse table.
 #' @param force_one Wheter or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".
@@ -156,15 +156,17 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
                        regex = "^(#+'*)( *)(.*)$")
   comments$space_after_prefix <- nchar(comments$space_after_prefix)
   comments$space_after_prefix <- set_spaces(
-    comments$space_after_prefix,
+    spaces_after_prefix = comments$space_after_prefix,
     force_one
   )
 
-  comments$text <- paste0(
-    comments$prefix,
-    map_chr(comments$space_after_prefix, rep_char, char = " "),
-    comments$text
-  )
+  comments$text <-
+    paste0(
+      comments$prefix,
+      map_chr(comments$space_after_prefix, rep_char, char = " "),
+      comments$text
+    ) %>%
+    trimws("right")
   comments$short <- substr(comments$text, 1, 5)
 
   comments[, setdiff(names(comments), c("space_after_prefix", "prefix"))] %>%
@@ -180,4 +182,10 @@ set_space_before_comments <- function(pd_flat) {
   pd_flat$spaces[comment_before & (pd_flat$newlines == 0L)] <- 1L
   pd_flat
 
+}
+
+remove_space_after_excl <- function(pd_flat) {
+  excl <- (pd_flat$token == "'!'") & (pd_flat$newlines == 0L)
+  pd_flat$spaces[excl] <- 0L
+  pd_flat
 }
