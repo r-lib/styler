@@ -4,14 +4,11 @@
 \alias{set_spaces}
 \title{Helper for setting spaces}
 \usage{
-set_spaces(spaces_after_prefix, text_length, force_one)
+set_spaces(spaces_after_prefix, force_one)
 }
 \arguments{
 \item{spaces_after_prefix}{An integer vector with the number of spaces
 after the prefix.}
-
-\item{text_length}{Integer vector giving the number of characters of
-the text.}
 
 \item{force_one}{Whether spaces_after_prefix should be set to one in all
 cases.}

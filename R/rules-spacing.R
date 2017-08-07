@@ -157,15 +157,16 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
   comments$space_after_prefix <- nchar(comments$space_after_prefix)
   comments$space_after_prefix <- set_spaces(
     spaces_after_prefix = comments$space_after_prefix,
-    text_length = nchar(trimws(comments$text, "right")),
     force_one
   )
 
-  comments$text <- paste0(
-    comments$prefix,
-    map_chr(comments$space_after_prefix, rep_char, char = " "),
-    comments$text
-  )
+  comments$text <-
+    paste0(
+      comments$prefix,
+      map_chr(comments$space_after_prefix, rep_char, char = " "),
+      comments$text
+    ) %>%
+    trimws("right")
   comments$short <- substr(comments$text, 1, 5)
 
   comments[, setdiff(names(comments), c("space_after_prefix", "prefix"))] %>%

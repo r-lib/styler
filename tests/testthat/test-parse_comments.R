@@ -16,6 +16,10 @@ test_that("spacing within comments is done correctly", {
                                  transformers = get_transformers(
                                    flat = FALSE,
                                    start_comments_with_one_space = FALSE)), NA)
+
+  expect_warning(test_collection("parse_comments",
+                                 "eol_eof_spaces",
+                                 transformer = style_text), NA)
 })
 
 test_that("spacing before comments is done correctly", {
