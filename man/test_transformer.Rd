@@ -2,15 +2,12 @@
 % Please edit documentation in R/serialized_tests.R
 \name{test_transformer}
 \alias{test_transformer}
-\alias{style_indent_round}
 \alias{style_empty}
 \alias{style_indent_curly}
 \alias{style_indent_curly_round}
 \alias{style_op}
 \title{Transforming test input with a transformer function}
 \usage{
-style_indent_round(text)
-
 style_empty(text)
 
 style_indent_curly(text)
@@ -32,9 +29,6 @@ as \code{\link[=style_text]{style_text()}}.
 }
 \section{Functions}{
 \itemize{
-\item \code{style_indent_round}: Transformations for indention based on round
-brackets.
-
 \item \code{style_empty}: Nest and unnest \code{text} without applying any
 transformations but remove EOL spaces and indention due to the way the
 serialization is set up.

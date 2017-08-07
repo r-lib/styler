@@ -22,7 +22,7 @@ test_that("adding and removing line breaks", {
 })
 
 test_that("adding and removing line breaks", {
-  test_collection("line_breaks_and_other",
-                  "if",
-                  transformer = style_text)
+  expect_warning(test_collection("line_breaks_and_other", "if",
+                  transformer = style_text), NA)
 })
+

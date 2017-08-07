@@ -131,22 +131,6 @@ transform_and_check <- function(in_item, out_item,
 #' @rdname test_transformer
 NULL
 
-#' @describeIn test_transformer Transformations for indention based on round
-#'   brackets.
-style_indent_round <- function(text) {
-  transformers <- list(
-    filler     = create_filler,
-    line_break = NULL,
-    space      = partial(indent_round, indent_by = 2),
-    token      = NULL,
-    NULL
-  )
-  transformed_text <- parse_transform_serialize(text, transformers)
-  transformed_text
-}
-
-
-
 #' @describeIn test_transformer Nest and unnest `text` without applying any
 #'   transformations but remove EOL spaces and indention due to the way the
 #'   serialization is set up.
