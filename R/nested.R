@@ -101,20 +101,18 @@ add_terminal_token_before <- function(pd_flat) {
 #'
 #' @param spaces_after_prefix An integer vector with the number of spaces
 #'   after the prefix.
-#' @param text_length Integer vector giving the number of characters of
-#'   the text.
 #' @param force_one Whether spaces_after_prefix should be set to one in all
 #'   cases.
 #' @return An integer vector of length spaces_after_prefix, which is either
 #'   one (if `force_one = TRUE`) or `space_after_prefix` with all values
 #'   below one set to one.
-set_spaces <- function(spaces_after_prefix, text_length, force_one) {
+set_spaces <- function(spaces_after_prefix, force_one) {
   if (force_one) {
     n_of_spaces <- rep(1, length(spaces_after_prefix))
   } else {
     n_of_spaces <- pmax(spaces_after_prefix, 1L)
   }
-  ifelse(text_length > 0, n_of_spaces, 0)
+  n_of_spaces
 }
 
 #' Nest a flat parse table
