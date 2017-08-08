@@ -104,3 +104,48 @@ is_function_call <- function(pd) {
   if (is.na(pd$token_before[2])) return(FALSE)
   pd$token_before[2] == "SYMBOL_FUNCTION_CALL"
 }
+
+
+
+#' Force indention of tokens that match regex
+#'
+#' Force the level of indention of tokens whose text matches a regular
+#' expression pattern to be a certain amount of spaces. The rule
+#' is only active for the first tokens on a line.
+#' @importFrom purrr map flatten_int
+force_regex_indention <- function(flattened_pd,
+                                  regex,
+                                  indention = 0,
+                                  comments_only = TRUE) {
+  if (comments_only) {
+    cond <- which(
+      (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0)
+    )
+    if (length(cond) < 1) return(flattened_pd)
+    to_check <- flattened_pd[cond,]
+    not_to_check <- flattened_pd[-cond,]
+  } else {
+    to_check <- flattened_pd
+    not_to_check <- tibble()
+  }
+
+  indices_to_force <-
+    map(regex, grep, to_check$text) %>%
+    flatten_int()
+
+  to_check$lag_spaces[indices_to_force] <- indention
+  bind_rows(to_check, not_to_check) %>%
+    arrange(line1, col1)
+}
+
+#' Return the regular expressions from the strcode package
+#'
+#' Returns a character vector with the patterns of code separator and title
+#' for the three levels of granularity.
+regex_strcode <- function() {
+  c(
+    "^#   ",
+    "^##  ",
+    "^### "
+  )
+}
