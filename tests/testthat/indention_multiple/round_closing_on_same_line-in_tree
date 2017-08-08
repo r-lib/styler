@@ -1,20 +1,20 @@
 ROOT (token: short_text [lag_newlines/spaces] {id}) 
- °--expr:  [0/0] {29}                               
-     ¦--expr:  [0/0] {3}                            
+ °--expr: c(cal [0/0] {29}                          
+     ¦--expr: c [0/0] {3}                           
      ¦   °--SYMBOL_FUNCTION_CALL: c [0/0] {1}       
      ¦--'(': ( [0/0] {2}                            
-     ¦--expr:  [0/0] {12}                           
-     ¦   ¦--expr:  [0/0] {6}                        
+     ¦--expr: call( [0/0] {12}                      
+     ¦   ¦--expr: call [0/0] {6}                    
      ¦   ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {4}
      ¦   ¦--'(': ( [0/0] {5}                        
-     ¦   ¦--expr:  [0/0] {8}                        
+     ¦   ¦--expr: 2 [0/0] {8}                       
      ¦   ¦   °--NUM_CONST: 2 [0/0] {7}              
      ¦   °--')': ) [0/0] {9}                        
      ¦--',': , [0/1] {13}                           
-     ¦--expr:  [0/0] {17}                           
+     ¦--expr: 1 [0/0] {17}                          
      ¦   °--NUM_CONST: 1 [0/0] {16}                 
      ¦--',': , [0/1] {18}                           
      ¦--COMMENT: # cho [0/0] {21}                   
-     ¦--expr:  [1/1] {24}                           
+     ¦--expr: 29 [1/1] {24}                         
      ¦   °--NUM_CONST: 29 [0/0] {23}                
      °--')': ) [1/0] {26}                           

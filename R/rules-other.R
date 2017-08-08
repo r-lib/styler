@@ -19,13 +19,33 @@ add_brackets_in_pipe <- function(pd) {
 
 }
 
+#' @importFrom purrr map_lgl
 updat_indention_ref <- function(pd_nested) {
   if ((pd_nested$token_before[2] %in% c("SYMBOL_FUNCTION_CALL")) &&
        nrow(pd_nested) > 3 &&
        pd_nested$lag_newlines[3] == 0) {
     seq <- 3:(nrow(pd_nested) - 1)
-    one_line_seqs <- setdiff(seq, which(pd_nested$multi_line))
+    is_call <- map_lgl(pd_nested$child, is_function_call)
+    is_curly_expr <- map_lgl(pd_nested$child, is_curly_expr)
+    is_on_same_line <- cumsum(pd_nested$lag_newlines) == 0
+
+    call_on_same_line <- is_call & is_on_same_line
+
+
+    one_line_seqs <- setdiff(seq, which(call_on_same_line | is_curly_expr))
     pd_nested$indent_ref_id[one_line_seqs] <- pd_nested$child[[1]]$id
   }
   pd_nested
+}
+
+
+is_function_call <- function(pd_nested) {
+  if (is.null(pd_nested)) return(FALSE)
+  if (is.na(pd_nested$token_before[2])) return(FALSE)
+  pd_nested$token_before[2] == "SYMBOL_FUNCTION_CALL"
+}
+
+is_curly_expr <- function(pd_nested) {
+  if (is.null(pd_nested)) return(FALSE)
+  pd_nested$token[1] == "'{'"
 }

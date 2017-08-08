@@ -3,7 +3,7 @@ a <- function(x) {
          2 + 3,
          sin(pi)) # FIXME add tidyverse-comliant rule to break after '('
 
-  if(x > 10) {
+  if (x > 10) {
     return("done")
   }
 }

@@ -7,5 +7,6 @@
 regex_strcode()
 }
 \description{
-Return the regular expressions from the strcode package
+Returns a character vector with the patterns of code separator and title
+for the three levels of granularity.
 }

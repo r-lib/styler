@@ -10,18 +10,6 @@ extract_terminals(pd_nested)
 \item{pd_nested}{A nested parse table.}
 }
 \description{
-Turns a nested parse table into a flat parse table. In particular it extracts
-terminal tokens and the following attributes:
-}
-\details{
-\itemize{
-\item lag_newlines
-\item indent
-\item token
-\item text
-\item spaces
-\item id
-\item parent
-\item line1
-}
+Turns a nested parse table into a flat parse table and extracts \emph{all}
+attributes
 }

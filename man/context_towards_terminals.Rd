@@ -5,7 +5,7 @@
 \title{Update the a parse table given outer context}
 \usage{
 context_towards_terminals(pd_nested, passed_lag_newlines, passed_indent,
-  passed_spaces)
+  passed_spaces, passed_indention_refs)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}

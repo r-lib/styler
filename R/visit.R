@@ -173,33 +173,34 @@ choose_indention <- function(flattened_pd, use_raw_indention) {
                                       flattened_pd$indent,
                                       flattened_pd$lag_spaces)
   }
-  flattened_pd$indent <- NULL
   flattened_pd
 }
 
 
 apply_indention_refs <- function(flattened_pd) {
-  ref_id_is_na <- is.na(flattened_pd$indent_ref_id)
-  first_token_on_line <- flattened_pd$lag_newlines > 0L
-  tokens_to_update_lag_spaces <- which(!ref_id_is_na & first_token_on_line)
+  target_tokens <- which(flattened_pd$id %in% flattened_pd$indent_ref_id)
 
   # needs sequential update
-  for (token in tokens_to_update_lag_spaces) {
-    flattened_pd <- apply_indention_ref_one(flattened_pd, token)
+  for (target_token in target_tokens) {
+    flattened_pd <- apply_indention_ref_one(flattened_pd, target_token)
   }
   flattened_pd
 }
 
-apply_indention_ref_one <- function(flattened_pd, token) {
-  copied_spaces <-
-    flattened_pd$col2[flattened_pd$id == flattened_pd$indent_ref_id[token]] + 1
-  old_spaces <-
-    flattened_pd$lag_spaces[token]
+apply_indention_ref_one <- function(flattened_pd, target_token) {
+  token_points_to_ref <-
+    flattened_pd$indent_ref_id == flattened_pd$id[target_token]
+  first_token_on_line <- flattened_pd$lag_newlines > 0L
+  token_to_update <- which(token_points_to_ref & first_token_on_line)
+
+  copied_spaces <- flattened_pd$col2[target_token] + 1
+  old_spaces <- flattened_pd$lag_spaces[token_to_update[1]]
   shift <- copied_spaces - old_spaces
-  flattened_pd$lag_spaces[token] <- copied_spaces # depreciate spaces.
+  flattened_pd$lag_spaces[token_to_update] <-
+    flattened_pd$lag_spaces[token_to_update] + shift
 
   # update col1 / col2
-  cols_to_update <- flattened_pd$line1 == flattened_pd$line1[token]
+  cols_to_update <- flattened_pd$line1 %in% flattened_pd$line1[token_to_update]
   flattened_pd$col1[cols_to_update] <- flattened_pd$col1[cols_to_update] + shift
   flattened_pd$col2[cols_to_update] <- flattened_pd$col2[cols_to_update] + shift
   flattened_pd

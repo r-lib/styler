@@ -44,7 +44,7 @@ compute_parse_data_nested <- function(text) {
 #' @return A flat parse table
 tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
+  parse_data <- as_tibble(utils::getParseData(parsed, includeText = TRUE)) %>%
     enhance_mapping_special()
   parse_data$short <- substr(parse_data$text, 1, 5)
   parse_data

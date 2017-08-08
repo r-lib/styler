@@ -4,10 +4,10 @@ call(
   call2(
     2, 3,
     call3( # FIXME comments are irrelevant for making indention token-dependent
-      # one
-      # two2
-      1, 2 # two
-      , 22 # comment
+          # one
+          # two2
+          1, 2 # two
+          , 22 # comment
     ),
     5
   ), #' A roxygen comment
