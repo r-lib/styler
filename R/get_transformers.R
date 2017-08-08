@@ -113,13 +113,19 @@ get_transformers_nested <- function(
     )
 
 
+  indention_modifier <-
+    c(
+      update_indention_ref_fun_dec,
+      update_indention_ref_fun_call
+    )
+
   list(
     # transformer functions
     filler            = create_filler,
     line_break        = line_break_manipulators,
     space             = space_manipulators,
     token             = token_manipulators,
-
+    indention         = indention_modifier,
     # transformer options
     use_raw_indention = use_raw_indention,
     NULL

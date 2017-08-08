@@ -40,6 +40,7 @@ Collate:
     'nested.R'
     'nested_to_tree.R'
     'parsed.R'
+    'reindent.R'
     'token.R'
     'relevel.R'
     'rules-line_break.R'
