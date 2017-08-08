@@ -31,7 +31,8 @@ NULL
 #'   start on the same line as the opening parenthesis, are not themselves
 #'   function calls or expressions wrapped in curly brackets are re-indented,
 #'   that is, they are indented up to the level at which the call ends in
-#'   terms of col2.
+#'   terms of col2. We need to take the last from the first child because calls
+#'   like package::function() can have three elements.
 #' @examples
 #' \dontrun{
 #' # not re-indented
@@ -58,7 +59,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
     call_on_same_line <- child_is_call & child_is_on_same_line
     to_indent <- setdiff(candidates, which(call_on_same_line | child_is_curly_expr))
 
-    pd_nested$indent_ref_id[to_indent] <- pd_nested$child[[1]]$id
+    pd_nested$indent_ref_id[to_indent] <- last(pd_nested$child[[1]]$id)
   }
   pd_nested
 }
