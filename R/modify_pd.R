@@ -110,3 +110,21 @@ set_multi_line <- function(pd) {
 token_is_multi_line <- function(pd) {
   any(pd$multi_line, pd$lag_newlines > 0)
 }
+
+#' Update the newlines attribute
+#'
+#' As we work only with the `lag_newlines` attribute for setting the linebreaks,
+#' (R/rules-line_break.R) but we need `newlines` to determine
+#' whether or not to set `spaces` (R/rules-spacing.R), we have to update the
+#' attribute. We cannot simply use `dplyr::lead(pd$lag_newlines)` since we would
+#' loose information for the last token. `spaces` is left as is in
+#' R/rules-spacing.R for tokens at the end of a line since this allows styling
+#' without touching indention.
+#' @param pd A parse table.
+#' @return A parse table with syncronized `lag_newlines` and `newlines` columns.
+#' @seealso choose_indention
+update_newlines <- function(pd) {
+  npd <- nrow(pd) - 1
+  pd$newlines[seq_len(npd)] <- pd$lag_newlines[seq_len(npd) + 1]
+  pd
+}

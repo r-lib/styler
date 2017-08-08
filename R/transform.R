@@ -86,7 +86,7 @@ parse_transform_serialize <- function(text, transformers) {
   transformed_pd <- apply_transformers(pd_nested, transformers)
   # TODO verify_roundtrip
   flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
-    enrich_terminals()
+    enrich_terminals(transformers$use_raw_indention)
 
   serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
   serialized_transformed_text
@@ -114,7 +114,7 @@ apply_transformers <- function(pd_nested, transformers) {
 
   transformed_updated_multi_line <- post_visit(
     transformed_line_breaks,
-    c(set_multi_line)
+    c(set_multi_line, update_newlines)
   )
 
   transformed_all <- pre_visit(
