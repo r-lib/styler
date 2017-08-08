@@ -143,7 +143,6 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
     mutate(col2 = cumsum(nchar + lag_spaces)) %>%
     ungroup()
   flattened_pd$col1 <- flattened_pd$col2 - flattened_pd$nchar
-  flattened_pd <- apply_indention_refs(flattened_pd)
   flattened_pd
 
 }
