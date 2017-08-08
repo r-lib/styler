@@ -145,6 +145,7 @@ style_empty <- function(text) {
 
     # transformer options
     use_raw_indention = FALSE,
+    reindention = specify_reindention(),
     NULL
   )
   transformed_text <- parse_transform_serialize(text, transformers)
@@ -163,6 +164,7 @@ style_op <- function(text) {
 
     # transformer options
     use_raw_indention = FALSE,
+    reindention = specify_reindention(),
     NULL
   )
 

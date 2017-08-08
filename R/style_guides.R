@@ -25,8 +25,10 @@ NULL
 #'   See 'Examples'.
 #' @param start_comments_with_one_space Whether or not comments should start
 #'   with only one space (see [start_comments_with_space()]).
+#' @inheritParams create_style_guide
 #' @param math_token_spacing An list of parameters that define spacing around
 #'   math token, conveniently constructed using [specify_math_token_spacing()].
+
 #' @details The following options for `scope` are available.
 #'
 #' * "none": Performs no transformation at all.
@@ -52,7 +54,9 @@ tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
                             indent_by = 2,
                             start_comments_with_one_space = FALSE,
+                            reindention = specify_reindention(),
                             math_token_spacing = tidyverse_math_token_spacing()) {
+
   scope <- character_to_ordered(
     scope,
     c("none", "spaces", "indention", "line_breaks", "tokens")
@@ -138,7 +142,8 @@ tidyverse_style <- function(scope = "tokens",
     token             = token_manipulators,
     indention         = indention_modifier,
     # transformer options
-    use_raw_indention = use_raw_indention
+    use_raw_indention = use_raw_indention,
+    reindention       = reindention
   )
 }
 
@@ -159,13 +164,16 @@ tidyverse_style <- function(scope = "tokens",
 #' @param indention A list of transformer functions that manipulate indention.
 #' @param use_raw_indention Boolean indicating whether or not the raw indention
 #'   should be used.
+#' @param reindention An list of parameters for regex re-indention, most
+#'   conveniently constructed using [specify_reindention()].
 #' @export
 create_style_guide <- function(initialize = initialize_attributes,
                                line_break = NULL,
                                space = NULL,
                                token = NULL,
                                indention = NULL,
-                               use_raw_indention = FALSE) {
+                               use_raw_indention = FALSE,
+                               reindention = specify_reindention(regex_none())) {
   lst(
     # transformer functions
     initialize,
@@ -174,9 +182,34 @@ create_style_guide <- function(initialize = initialize_attributes,
     token,
     indention,
     # transformer options
-    use_raw_indention
+    use_raw_indention,
+    reindention
   )
 }
+
+
+#' Specify what is re-indented how
+#'
+#' This function returns a list that can be used as an input for the argument
+#' `reindention` of the function [tidyverse_style()]. It features sensible
+#' defaults, so the user can specify deviations from them conveniently without
+#' the need of setting all arguments explicitly.
+#' @param regex_pattern Character vector with regular expression patterns that
+#'   are to be re-indented with spaces.
+#' @param indention The indention tokens should have if they match
+#'   `regex_pattern`.
+#' @param comments_only Whether the `regex_reindention_pattern` should only be
+#'   matched against comments or against all tokens. Mainly added for
+#'   performance.
+specify_reindention <- function(regex_pattern = regex_strcode(),
+                                indention = 0,
+                                comments_only = TRUE)
+  lst(
+    regex_pattern,
+    indention,
+    comments_only
+)
+
 
 #' Convert a character vector to an ordered factor
 #'
