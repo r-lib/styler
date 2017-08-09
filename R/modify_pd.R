@@ -21,14 +21,29 @@ indent_curly <- function(pd, indent_by) {
   set_unindention_child(pd, token = "'}'", unindent_by = indent_by)
 }
 
-#' @rdname update_indention
-indent_op <- function(pd, indent_by, token = c(math_token,
-                                               "SPECIAL-PIPE",
-                                               "LEFT_ASSIGN")) {
+#' @describeIn update_indention Indents operatos
+indent_op <- function(pd,
+                      indent_by,
+                      token = c(math_token,
+                                logical_token,
+                                special_token,
+                                "LEFT_ASSIGN")) {
   indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
 }
+
+#' @describeIn update_indention Upates indention for token EQ_SUB. Only differs
+#'   from ident_op in the sense that the last token on the talbe where EQ_SUB
+#'   occurs is not indented (see[compute_indent_indices()])
+indent_eq_sub <- function(pd,
+                          indent_by,
+                          token = "EQ_SUB") {
+  indent_indices <- compute_indent_indices(pd, token, indent_last = FALSE)
+  pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
+  pd
+}
+
 
 #' @describeIn update_indention Same as indent_op, but only indents one token
 #'   after `token`, not all remaining.

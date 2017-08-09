@@ -85,6 +85,7 @@ get_transformers_nested <- function(
       partial(indent_round, indent_by = indent_by),
       partial(indent_curly, indent_by = indent_by),
       partial(indent_op, indent_by = indent_by),
+      partial(indent_eq_sub, indent_by = indent_by),
       partial(indent_without_paren, indent_by = indent_by),
       get_transformers_flat(strict, start_comments_with_one_space),
       remove_space_after_unary_pm_nested,
