@@ -27,7 +27,7 @@ indent_op <- function(pd,
                       token = c(math_token,
                                 logical_token,
                                 special_token,
-                                "LEFT_ASSIGN", 
+                                "LEFT_ASSIGN",
                                 "'$'")) {
   indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
@@ -133,7 +133,7 @@ token_is_multi_line <- function(pd) {
 #' (R/rules-line_break.R) but we need `newlines` to determine
 #' whether or not to set `spaces` (R/rules-spacing.R), we have to update the
 #' attribute. We cannot simply use `dplyr::lead(pd$lag_newlines)` since we would
-#' loose information for the last token. `spaces` is left as is in
+#' lose information for the last token. `spaces` is left as is in
 #' R/rules-spacing.R for tokens at the end of a line since this allows styling
 #' without touching indention.
 #' @param pd A parse table.

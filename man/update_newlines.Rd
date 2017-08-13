@@ -17,7 +17,7 @@ As we work only with the \code{lag_newlines} attribute for setting the linebreak
 (R/rules-line_break.R) but we need \code{newlines} to determine
 whether or not to set \code{spaces} (R/rules-spacing.R), we have to update the
 attribute. We cannot simply use \code{dplyr::lead(pd$lag_newlines)} since we would
-loose information for the last token. \code{spaces} is left as is in
+lose information for the last token. \code{spaces} is left as is in
 R/rules-spacing.R for tokens at the end of a line since this allows styling
 without touching indention.
 }
