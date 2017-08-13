@@ -10,6 +10,7 @@ token <- tribble(
   ">=" , "logical"     , "GE",
   "!=" , "logical"     , "NE",
   "==" , "logical"     , "EQ",
+  "="  , "assign_left" , "EQ_SUB",
   "="  , "assign_left" , "EQ_ASSIGN",
   "<-" , "assign_left" , "LEFT_ASSIGN",
   "->" , "assign_right", "RIGHT_ASSIGN",

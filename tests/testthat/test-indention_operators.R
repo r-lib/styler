@@ -24,6 +24,18 @@ test_that("while / for / if without curly brackets", {
                                  transformer = style_text), NA)
 })
 
+test_that("logical, special and EQ_SUB tokens are indented correctly", {
+  expect_warning(test_collection("indention_operators",
+                                 "logical_special",
+                                 transformer = style_text), NA)
+})
+
+test_that("dollar is indented and spaced correctl", {
+  expect_warning(test_collection("indention_operators",
+                                 "dollar",
+                                 transformer = style_text), NA)
+})
+
 
 test_that("overall", {
   expect_warning(test_collection("indention_operators",

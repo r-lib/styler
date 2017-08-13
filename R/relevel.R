@@ -20,8 +20,8 @@ flatten_operators <- function(pd_nested) {
 #' @param pd_nested A nested parse table.
 #' @include token.R
 flatten_operators_one <- function(pd_nested) {
-  pd_token_left <- c(special_token, math_token)
-  pd_token_right <- c(special_token, left_assignment_token,  "'+'", "'-'")
+  pd_token_left <- c(special_token, math_token, "'$'")
+  pd_token_right <- c(special_token, "LEFT_ASSIGN",  "'+'", "'-'")
   bound <- pd_nested %>%
     flatten_pd(pd_token_left, left = TRUE) %>%
     flatten_pd(pd_token_right, left = FALSE)

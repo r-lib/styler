@@ -5,6 +5,7 @@
 \alias{indent_round}
 \alias{indent_curly}
 \alias{indent_op}
+\alias{indent_eq_sub}
 \alias{indent_assign}
 \alias{indent_without_paren}
 \title{Update indention information of parse data}
@@ -13,7 +14,10 @@ indent_round(pd, indent_by)
 
 indent_curly(pd, indent_by)
 
-indent_op(pd, indent_by, token = c(math_token, "SPECIAL-PIPE", "LEFT_ASSIGN"))
+indent_op(pd, indent_by, token = c(math_token, logical_token, special_token,
+  "LEFT_ASSIGN", "'$'"))
+
+indent_eq_sub(pd, indent_by, token = "EQ_SUB")
 
 indent_assign(pd, indent_by, token = NULL)
 
@@ -33,6 +37,12 @@ Update indention information of parse data
 \section{Functions}{
 \itemize{
 \item \code{indent_round}: Inserts indetion based on round brackets.
+
+\item \code{indent_op}: Indents operatos
+
+\item \code{indent_eq_sub}: Upates indention for token EQ_SUB. Only differs
+from ident_op in the sense that the last token on the talbe where EQ_SUB
+occurs is not indented (see\code{\link[=compute_indent_indices]{compute_indent_indices()}})
 
 \item \code{indent_assign}: Same as indent_op, but only indents one token
 after \code{token}, not all remaining.
