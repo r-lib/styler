@@ -95,11 +95,11 @@ is_function_call <- function(pd) {
 #' @inheritParams apply_ref_indention_one
 apply_ref_indention <- function(flattened_pd) {
   target_tokens <- which(flattened_pd$id %in% flattened_pd$indention_ref_id)
-
-  # needs sequential update
-  for (target_token in target_tokens) {
-    flattened_pd <- apply_ref_indention_one(flattened_pd, target_token)
-  }
+  flattened_pd <- reduce(
+    target_tokens,
+    apply_ref_indention_one,
+    .init = flattened_pd
+  )
   flattened_pd
 }
 
