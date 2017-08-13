@@ -57,7 +57,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
 #' }
 #' }
 update_indention_ref_fun_dec <- function(pd_nested) {
-  if (pd_nested$token[1] == c("FUNCTION") &&
+  if (pd_nested$token[1] == "FUNCTION" &&
       nrow(pd_nested) > 3) {
     seq <- 3:(nrow(pd_nested) - 1)
     pd_nested$indention_ref_id[seq] <- pd_nested$id[1]
@@ -107,7 +107,7 @@ apply_ref_indention <- function(flattened_pd) {
 #'
 #' Applies the indention level of `target_token` to all tokens that have
 #' `target_token` as a reference. This includes adding spaces to the first
-#' tokens on a line and updating the column `col1` and `col2` for all token
+#' tokens on a line and updating the column `col1` and `col2` for all tokens
 #' on that line so they are kept updated.
 #' @param flattened_pd A flattened parse table
 #' @param target_token The index of the token from wich the indention level
