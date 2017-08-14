@@ -11,12 +11,14 @@ NULL
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package
+#' @param ... Passed on to [get_transformers()]
 #' @inheritParams style_text
 #' @export
 #' @family stylers
 style_pkg <- function(pkg = ".",
   flat = FALSE,
-  transformers = get_transformers(flat = flat)) {
+  ...,
+  transformers = get_transformers(flat = flat, ...)) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   withr::with_dir(pkg_root, prettify_local(transformers, flat = flat))
 }
