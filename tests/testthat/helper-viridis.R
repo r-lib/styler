@@ -1,0 +1,1 @@
+suppressWarnings(requireNamespace("DiagrammeR"))
