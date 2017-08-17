@@ -31,7 +31,7 @@ LazyData: true
 Date: 2017-07-27
 BugReports: https://github.com/krlmlr/styler/issues
 URL: https://github.com/krlmlr/styler, http://krlmlr.github.io/styler
-Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "pkgapi::api_roclet"))
+Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
 Collate: 
