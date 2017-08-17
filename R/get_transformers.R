@@ -120,7 +120,7 @@ get_transformers_nested <- function(
       update_indention_ref_fun_call
     )
 
-  list(
+  create_style_guide(
     # transformer functions
     filler            = create_filler,
     line_break        = line_break_manipulators,
@@ -128,11 +128,28 @@ get_transformers_nested <- function(
     token             = token_manipulators,
     indention         = indention_modifier,
     # transformer options
-    use_raw_indention = use_raw_indention,
-    NULL
+    use_raw_indention = use_raw_indention
   )
 }
 
+#' @export
+create_style_guide <- function(filler,
+                               line_break,
+                               space,
+                               token,
+                               indention,
+                               use_raw_indention = FALSE) {
+  tibble::lst(
+    # transformer functions
+    filler,
+    line_break,
+    space,
+    token,
+    indention,
+    # transformer options
+    use_raw_indention
+  )
+}
 
 #' Convert a character vector to an ordered factor
 #'
