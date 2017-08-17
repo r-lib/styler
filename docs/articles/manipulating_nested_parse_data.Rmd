@@ -1,0 +1,134 @@
+---
+title: "Manipulating the nested Parse Table"
+author: "Lorenz Walthert"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r, message=FALSE}
+library("dplyr")
+library("purrr")
+pkgload::load_all()
+```
+
+This vignette builds on the vignette "Data Structures" and discusses how 
+to go forward with the nested structure of the parse data.
+In order to compute the white space information in a nested data structure, we
+need a recursion. We use a 
+[visitor approach](https://en.wikipedia.org/wiki/Visitor_pattern) to separate
+the algorithm (computing white space information) from the object (nested) 
+data structure.
+The function `create_filler()` can then be used to add
+white space information on every level of nesting within the nested parse data 
+if applied in combination with the visitor. `visitor()` takes a object to 
+operate on and a list of functions. Each function is applied at the current 
+level of nesting before the next level of nesting is entered.
+```{r}
+pre_visit
+visit_one
+```
+This comes with two advantages. 
+
+* We don't need a *_nested() version of every function we want to apply to the
+  parse tables, in particular the rules in R/rules.R
+* We go through the whole structure only once (instead of every *_nested() 
+  function going through it once, which is more efficient in terms of speed.
+
+`create_filler()` was adapted to also initialize indention and lag_newlines.
+```{r}
+create_filler
+```
+
+```{r}
+code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
+pd_nested <- compute_parse_data_nested(code)
+pd_nested_enhanced <- pre_visit(pd_nested, c(create_filler))
+pd_nested_enhanced
+```
+
+
+As a next step, we need to find a way to serialize the nested tibble, or in 
+other words, to transform it to its character vector representation. As a 
+starting point, consider the function `serialize` that was introduced in the 
+vignette "Data Structures". 
+
+```{r}
+serialize <- function(x) {
+  out <- Map(
+    function(terminal, text, child) {
+      if (terminal)
+        text
+      else
+        serialize(child)
+    },
+    x$terminal, x$text, x$child
+  )
+  out
+}
+
+serialize(pd_nested) %>% unlist
+```
+
+`serialize` can be combined with `serialize_parse_data_flat`. The latter
+pastes together the column "text" of a flat parse table by taking into account
+space and line break information, splits the string by line break and returns it.
+```{r}
+serialize_parse_data_flat
+```
+
+
+However, things get a bit more complicated, mainly because line break and white
+space information is not only contained in the terminal tibbles of the nested
+parse data, but even before, as the following example shows.
+```{r}
+pd_nested_enhanced$child[[1]]
+pd_nested_enhanced$child[[1]]$child[[1]]
+```
+After "a" in `code`, there is a space, but this information is not contained in the
+tibble where we find the terminal "a". In general, we must add newlines
+and spaces values *after* we computed character vector representation of the 
+expression. In our example: we know that there is a space after the non-terminal 
+"a" by looking at `pd_nested_enhanced$child[[1]]`. Therefore, we need to add 
+this space to the very last terminal within `pd_nested_enhanced$child[[1]]` before we 
+collapse everything together.
+```{r}
+serialize_parse_data_nested_helper
+
+serialize_parse_data_nested
+```
+Before we are done, we need to add information regarding indention to the parse
+table. We can add indention after every line break that comes after a round 
+bracket with `indent_round()`. And then serialize it. 
+```{r}
+pre_visit(pd_nested, 
+               c(create_filler, 
+                 purrr::partial(indent_round, indent_by = 2)))
+```
+
+We can see how indention works with a more complicated example
+```{r}
+indented <- c(
+  "call(", 
+  "  1,", 
+  "  call2(", 
+  "    2, 3,", 
+  "    call3(1, 2, 22),", 
+  "    5", 
+  "  ),", 
+  "  144",
+  ")"
+)
+
+not_indented <- trimws(indented)
+back_and_forth <- not_indented %>%
+  compute_parse_data_nested() %>%
+  pre_visit(c(create_filler, 
+        purrr::partial(indent_round, indent_by = 2))) %>%
+  serialize_parse_data_nested()
+
+identical(indented, back_and_forth)
+```
+

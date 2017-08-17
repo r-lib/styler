@@ -13,7 +13,9 @@ You can style a simple character vector of code with `style_text()`:
 ugly_code <- "a<-function( x){1+1}           "
 style_text(ugly_code) %>%
   cat(sep = "\n")
-#> a <- function(x) {1 + 1}
+#> a <- function(x) {
+#>   1 + 1
+#> }
 ```
 
 There are a few variants of `style_text()`:

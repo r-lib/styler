@@ -1,0 +1,153 @@
+---
+title: "Data Structures"
+author: "Lorenz Walthert"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This vignette illustrates how the core of `styler` currently^[at commit `e6ddee0f510d3c9e3e22ef68586068fa5c6bc140`] works, i.e. how
+rules are applied to a parse table and how limitations of this approach can be 
+overcome with a refined approach.
+
+## Status quo - the flat approach
+
+Roughly speaking, a string containing code to be formatted is parsed with `parse`
+and the output is passed to `getParseData` in order to obtain a parse
+table with detailed information about every token. For a simple example string
+"`a <- function(x) { if(x > 1) { 1+1 } else {x} }`" to be formatted, the parse 
+table on which `styler` performs the manipulations looks similar to the one 
+presented below.
+
+```{r, message = FALSE}
+library("styler")
+library("dplyr")
+
+code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
+
+(parse_table <- styler:::compute_parse_data_flat_enhanced(code))
+```
+The column `spaces` was computed from the columns `col1` and `col2`, `newlines`
+was computed from `line1` and `line2` respectively.
+
+So far, styler can set the spaces around the operators correctly. In our example, 
+that involves adding spaces around `+`, so in the `spaces` column, element nine
+and ten must be set to one. This means that a space is added after `1` and after `+`. 
+To get the spacing right and cover the various cases, a set of functions has to 
+be applied to the parse table subsequently (and in the right order), 
+which is essentially done via `Reduce()`. 
+After all modifications on the table are completed, `serialize_parse_data()`
+collapses the `text` column and adds the number of spaces and 
+line breaks specified in `spaces` and `newlines` in between the elements of
+`text`. If we serialize our table and don't perform any modification, we 
+obviously just get back what we started with.
+```{r}
+styler:::serialize_parse_data_flat(parse_table)
+```
+
+## Refining the flat approach - nesting the parse table
+
+Although the flat approach is good place to start, e.g. for fixing spaces
+between operators, it has its limitations. In particular, it treats each token 
+the same way in the sense that it does not account for the context of the token, 
+i.e. in which sub-expression it appears.
+To set the indention correctly, we need a hierarchical view on the parse data, 
+since all tokens in a sub-expression have the same indention level. Hence, 
+a natural approach would be to create a nested parse table instead of a flat
+parse table and then take a recursion over all elements in the table, so for 
+each sub(-sub etc.)-expression, a separate parse table would be created and the 
+modifications would be applied to this table before putting everything back 
+together. A function to create a nested parse table already exists in `styler`.
+Let's have a look at the top level:
+
+```{r}
+(l1 <- styler:::compute_parse_data_nested(code)[-1])
+
+```
+
+The tibble contains the column `child`, which itself contains a tibble. 
+If we "enter"  the first child, we can see that the expression was split up 
+further.
+
+```{r}
+l1$child[[1]] %>%
+  select(text, terminal, child, token)
+```
+
+And further...
+```{r}
+l1$child[[1]]$child[[3]]$child[[5]]
+```
+
+... and so on. Every child that is not a terminal contains another tibble where 
+the sub-expression is split up further - until we are left with tibbles that 
+only contain terminals.
+
+
+Recall the above example. `a <- function(x) { if(x > 1) { 1+1 } else {x} }`.
+In the last printed parse table, we can see that see that the whole if condition
+is a sub-expression of `code`, surrounded by two curly brackets. Hence, 
+one would like to set the indention level for this sub-expression before 
+doing anything with it in more detail. Later, when we progressed deeper into 
+the nested table, we hit a similar pattern:
+
+```{r}
+l1$child[[1]]$child[[3]]$child[[5]]$child[[2]]$child[[5]]
+```
+Again, we have two curly brackets and an expression inside. We would like to 
+set the indention level for the expression `1+1` in the same way as for the 
+whole if condition.
+
+The simple example above makes it evident that a recursive approach to this
+problem would be the most natural.
+
+The code for a function that kind of sketches the idea and illustrates such a 
+recursion is given below.
+
+It takes a nested parse table as input and then does the recursion over all 
+children. If the child is a terminal, it returns the text, otherwise,
+it "enters" the child to find the terminals inside of the child and returns them.
+
+```{r}
+serialize <- function(x) {
+  out <- Map(
+    function(terminal, text, child) {
+      if (terminal)
+        text
+      else
+        serialize(child)
+    },
+    x$terminal, x$text, x$child
+  )
+  out
+}
+
+x <- styler:::compute_parse_data_nested(code)
+serialize(x) %>% unlist
+```
+
+How to exactly implement a similar recursion to not just return each text 
+token separately, but 
+the styled text as one string (or one string per line) is subject to future work, 
+so would be the functions to be
+applied to a sub-expression parse table that create correct indention. 
+Similar to `compute_parse_data_flat_enhanced`, the column `spaces` and `newlines`
+would be required to be computed by `compute_parse_data_nested` as well as a
+new column `indention`. 
+
+
+## Final Remarks
+
+Although a flat structure would possibly also allow us to solve the problem of
+indention, it is a less elegant and flexible solution to the problem. It would 
+involve looking for an opening curly bracket in the parse table, set the 
+indention level for all subsequent rows in the parse table until the next 
+opening or closing curly bracket is hit and then intending one level further or 
+setting indention back to where it was at the beginning of the table.
+
+Note that the vignette just addressed the question of indention caused by
+curly brackets and has not dealt with other operators that would trigger 
+indention, such as `(` or `+`. 
