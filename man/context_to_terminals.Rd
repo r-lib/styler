@@ -4,7 +4,8 @@
 \alias{context_to_terminals}
 \title{Propagate context to terminals}
 \usage{
-context_to_terminals(pd_nested, outer_lag_newlines, outer_indent, outer_spaces)
+context_to_terminals(pd_nested, outer_lag_newlines, outer_indent, outer_spaces,
+  outer_indention_refs)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}
@@ -14,6 +15,9 @@ context_to_terminals(pd_nested, outer_lag_newlines, outer_indent, outer_spaces)
 \item{outer_indent}{The indention depth to be propagated inwards.}
 
 \item{outer_spaces}{The number of spaces to be propagated inwards.}
+
+\item{outer_indention_refs}{The reference id that should be propagated
+inwards.}
 }
 \value{
 An updated parse table.

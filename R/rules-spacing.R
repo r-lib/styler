@@ -105,7 +105,7 @@ set_space_after_comma <- function(pd_flat) {
 }
 
 remove_space_before_comma <- function(pd_flat) {
-  comma_after <- (pd_flat$token == "','") & (pd_flat$newlines == 0L)
+  comma_after <- pd_flat$token == "','"
   if (!any(comma_after)) return(pd_flat)
   comma_before <- lead(comma_after, default = FALSE)
   idx <- comma_before  & (pd_flat$newlines == 0L)

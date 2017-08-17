@@ -56,18 +56,20 @@ visit_one <- function(pd_flat, funs) {
 context_to_terminals <- function(pd_nested,
                                  outer_lag_newlines,
                                  outer_indent,
-                                 outer_spaces) {
+                                 outer_spaces,
+                                 outer_indention_refs) {
 
   if (is.null(pd_nested)) return()
 
   pd_transformed <- context_towards_terminals(
-    pd_nested, outer_lag_newlines, outer_indent, outer_spaces
+    pd_nested, outer_lag_newlines, outer_indent, outer_spaces, outer_indention_refs
   )
 
   pd_transformed$child <- pmap(list(pd_transformed$child,
                                     pd_transformed$lag_newlines,
                                     pd_transformed$indent,
-                                    pd_transformed$spaces),
+                                    pd_transformed$spaces,
+                                    pd_transformed$indention_ref_id),
                                context_to_terminals)
   pd_transformed
 }
@@ -84,13 +86,18 @@ context_to_terminals <- function(pd_nested,
 #' @param outer_lag_newlines The lag_newlines to be propagated inwards.
 #' @param outer_indent The indention depth to be propagated inwards.
 #' @param outer_spaces The number of spaces to be propagated inwards.
+#' @param outer_indention_refs The reference id that should be propagated
+#'   inwards.
 #' @return An updated parse table.
 #' @seealso context_to_terminals
 context_towards_terminals <- function(pd_nested,
                                       outer_lag_newlines,
                                       outer_indent,
-                                      outer_spaces) {
+                                      outer_spaces,
+                                      outer_indention_refs) {
   pd_nested$indent <- pd_nested$indent + outer_indent
+  ref_id_is_na <- !is.na(pd_nested$indention_ref_id)
+  pd_nested$indention_ref_id[!ref_id_is_na] <- outer_indention_refs
   pd_nested$lag_newlines[1] <- pd_nested$lag_newlines[1] + outer_lag_newlines
   pd_nested$spaces[nrow(pd_nested)] <-
     pd_nested$spaces[nrow(pd_nested)] + outer_spaces
@@ -119,10 +126,15 @@ extract_terminals <- function(pd_nested) {
 #'  which the token starts. `line1` has the same meaning as `line1` that can be
 #'  found in a flat parse table (see [tokenize()]), just that the `line1`
 #'  created by `enrich_terminals()` is the updated version of the former
-#'  `line1`. The same applies for `col1` and `col2`.
+#'  `line1`. The same applies for `col1` and `col2`. Note that this function
+#'  does remove the columns `indent` and `spaces.` All information of the former
+#'  is stored in `lag_spaces` now. The later was removed because it is redundant
+#'  after adding the column `lag_spaces`, which is more convenient to work with,
+#'  in particular when serializing the parse table.
 #' @inheritParams choose_indention
 enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0L)
+  flattened_pd$spaces <- NULL # depreciate spaces
   flattened_pd <- choose_indention(flattened_pd, use_raw_indention)
   flattened_pd$line1 <-
     cumsum(flattened_pd$lag_newlines) + flattened_pd$line1[1]
