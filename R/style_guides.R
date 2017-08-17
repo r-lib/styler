@@ -1,67 +1,13 @@
 #' The tidyverse style
-#' @param ... ...
-#' @export
-tidyverse_style <- function(...) {
-  get_transformers_nested(...)
-}
-
-#' Get the transformer functions for styling
-#'
-#' @param flat Whether the transformer functions for flat or nested styling
-#'   should be returned.
-#' @return A list of transformer functions that operate on flat parse tables.
-#' @param ... Parameters passed to
-#'   * [get_transformers_flat()] if `flat = TRUE` or
-#'   * [get_transformers_nested()] if `flat = FALSE`.
-#' @export
-get_transformers <- function(flat = FALSE, ...) {
-  if (flat) {
-    get_transformers_flat(...)
-  } else {
-    get_transformers_nested(...)
-  }
-}
-
-#' Get the transformer functions for flat styling
-#'
-#' @param strict A logical value indicating whether a set of strict
-#'   or not so strict transformer functions should be returned.
-#' @param start_comments_with_one_space Whether or not comments should start
-#'   with only one space (see [start_comments_with_space()]).
-#' @return A list of transformer functions that operate on flat parse
-#'   tables.
-#' @export
-#' @family obtain transformers
-#' @importFrom purrr partial
-get_transformers_flat <- function(strict = TRUE,
-                                  start_comments_with_one_space = FALSE) {
-  c(
-    fix_quotes,
-    remove_space_before_closing_paren,
-    if (strict) remove_space_before_opening_paren,
-    add_space_after_for_if_while,
-    add_space_before_brace,
-    if (strict) set_space_around_op else add_space_around_op,
-    if (strict) set_space_after_comma else add_space_after_comma,
-    remove_space_before_comma,
-    remove_space_after_opening_paren,
-    remove_space_after_excl,
-    remove_space_before_dollar,
-    partial(start_comments_with_space,
-            force_one = start_comments_with_one_space),
-    NULL)
-}
-
-#' Get the transformer functions for nested styling
-#'
-#' Similar to [get_transformers_flat()], but additionally, returns some
-#'   functions needed due the fact that styling is done in a nested way.
 #' @param scope The extent of manipulation. Can range from "none" (least
 #'   invasive) to "token" (most invasive). See 'Details'. This argument is a
 #'   vector of length one.
 #' @param indent_by How many spaces of indention should be inserted after
 #'   operators such as '('.
-#' @inheritParams get_transformers_flat
+#' @param strict A logical value indicating whether a set of strict
+#'   or not so strict transformer functions should be returned.
+#' @param start_comments_with_one_space Whether or not comments should start
+#'   with only one space (see [start_comments_with_space()]).
 #' @details The following options for `scope` are available.
 #'
 #' * "none": Performs no transformation at all.
@@ -78,11 +24,10 @@ get_transformers_flat <- function(strict = TRUE,
 #' @family obtain transformers
 #' @importFrom purrr partial
 #' @export
-get_transformers_nested <- function(
-  scope = "tokens",
-  strict = TRUE,
-  indent_by = 2,
-  start_comments_with_one_space = FALSE) {
+tidyverse_style <- function(scope = "tokens",
+                            strict = TRUE,
+                            indent_by = 2,
+                            start_comments_with_one_space = FALSE) {
 
   scope <- character_to_ordered(
     scope,
@@ -96,7 +41,21 @@ get_transformers_nested <- function(
       partial(indent_op, indent_by = indent_by),
       partial(indent_eq_sub, indent_by = indent_by),
       partial(indent_without_paren, indent_by = indent_by),
-      get_transformers_flat(strict, start_comments_with_one_space),
+
+      fix_quotes,
+      remove_space_before_closing_paren,
+      if (strict) remove_space_before_opening_paren,
+      add_space_after_for_if_while,
+      add_space_before_brace,
+      if (strict) set_space_around_op else add_space_around_op,
+      if (strict) set_space_after_comma else add_space_after_comma,
+      remove_space_before_comma,
+      remove_space_after_opening_paren,
+      remove_space_after_excl,
+      remove_space_before_dollar,
+      partial(start_comments_with_space,
+              force_one = start_comments_with_one_space),
+
       remove_space_after_unary_pm_nested,
       set_space_before_comments,
       set_space_between_levels
@@ -139,6 +98,23 @@ get_transformers_nested <- function(
   )
 }
 
+#' Create a style guide
+#'
+#' This is a helper function to create a style guide, which is technically
+#' speaking a named list of groups of transformer functions where each
+#' transformer function corresponds to one styling rule. The output of this
+#' function can be used as an argument for \code{style} in top level functions
+#' like [style_text()] and friends.
+#' @param filler A filler function that initializes various variables on each
+#'   level of nesting.
+#' @param line_break A list of transformer functiosn that manipulate line_break
+#'   information.
+#' @param space A list of transformer functions that manipulate spacing
+#'   information.
+#' @param token A list of transformer functions that manipulate token text.
+#' @param indention A list of transformer functions that manipulate indention.
+#' @param use_raw_indention Boolean indicating wheter or not the raw indention
+#'   should be used.
 #' @export
 create_style_guide <- function(filler,
                                line_break,

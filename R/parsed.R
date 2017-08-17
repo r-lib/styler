@@ -83,6 +83,7 @@ verify_roundtrip <- function(pd_flat, text) {
 #' @param pd_flat A parse table.
 #' @return A parse table with two three columns: lag_newlines, newlines and
 #'   spaces.
+#' @importFrom utils tail
 create_filler <- function(pd_flat) {
 
   pd_flat$line3 <- lead(pd_flat$line1, default = tail(pd_flat$line2, 1))

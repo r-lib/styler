@@ -8,11 +8,14 @@ style_pkg(pkg = ".", ..., style = tidyverse_style,
   transformers = style(...))
 }
 \arguments{
-\item{pkg}{Path to a (subdirectory of an) R package}
+\item{pkg}{Path to a (subdirectory of an) R package.}
 
-\item{...}{Passed on to \code{\link[=get_transformers]{get_transformers()}}}
+\item{...}{Passed on to the \code{style} function.}
 
-\item{transformers}{A list with functions to be applied to the parsed data.}
+\item{style}{The unquoted name of a style guide to use. Will not be used
+further except to construct the argument \code{transformers}.}
+
+\item{transformers}{A set of transformer functions.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package

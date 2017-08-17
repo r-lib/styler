@@ -61,7 +61,7 @@ test <- function() {
   a >= b
   a <- b
   a -> b
-  a = b
+  a <- b
   a < b
   a > b
   a * b
@@ -73,17 +73,17 @@ test <- function() {
 
   a + b
   a - b
-  a + + b
-  a + - b
-  a + + b
-  a - + b
-  a - - b
-  a + - - b
-  a - - + b
-  call(+ a)
-  call(- a)
-  call(5, + a)
-  call(5, - a)
+  a + +b
+  a + -b
+  a + +b
+  a - +b
+  a - -b
+  a + --b
+  a - -+b
+  call(+a)
+  call(-a)
+  call(5, +a)
+  call(5, -a)
 
   # Only with conservative settings:
   call(
@@ -109,18 +109,18 @@ test <- function() {
   single_line("function", call)
 
   multiline(
-  "function", call)
+    "function", call)
 
   nested(function_call("in", one, line))
 
   nested(function_call(
-  "in",
-      multiple, lines))
+    "in",
+    multiple, lines))
 
   nested(
-  function_call(with),
-      many
-  , first_level_args)
+    function_call(with),
+    many
+    , first_level_args)
 
   nested(
     function_call(with), # a comment and
@@ -130,7 +130,7 @@ test <- function() {
   difficult(nested(
     "function", call
   ),
-    with, more, args
+            with, more, args
   )
 }
 
