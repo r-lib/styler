@@ -40,7 +40,10 @@ indent_op <- function(pd,
 indent_eq_sub <- function(pd,
                           indent_by,
                           token = "EQ_SUB") {
-  indent_indices <- compute_indent_indices(pd, token, indent_last = FALSE)
+  eq_sub <- which(pd$token == "EQ_SUB")
+  if (length(eq_sub) == 0) return(pd)
+  has_line_break <- which(pd$lag_newlines > 0)
+  indent_indices <- intersect(eq_sub + 1, has_line_break)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
 }

@@ -28,6 +28,10 @@ test_that("logical, special and EQ_SUB tokens are indented correctly", {
   expect_warning(test_collection("indention_operators",
                                  "logical_special",
                                  transformer = style_text), NA)
+
+  expect_warning(test_collection("indention_operators",
+                                 "eq",
+                                 transformer = style_text), NA)
 })
 
 test_that("dollar is indented and spaced correctl", {
