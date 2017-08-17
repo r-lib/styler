@@ -4,14 +4,11 @@
 \alias{style_pkg}
 \title{Prettify R source code}
 \usage{
-style_pkg(pkg = ".", flat = FALSE, ...,
-  transformers = get_transformers(flat = flat, ...))
+style_pkg(pkg = ".", ..., style = tidyverse_style,
+  transformers = style(...))
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package}
-
-\item{flat}{Whether to do the styling with a flat approach or with a nested
-approach.}
 
 \item{...}{Passed on to \code{\link[=get_transformers]{get_transformers()}}}
 

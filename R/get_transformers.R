@@ -1,3 +1,10 @@
+#' The tidyverse style
+#' @param ... ...
+#' @export
+tidyverse_style <- function(...) {
+  get_transformers_nested(...)
+}
+
 #' Get the transformer functions for styling
 #'
 #' @param flat Whether the transformer functions for flat or nested styling

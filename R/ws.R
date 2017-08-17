@@ -16,11 +16,11 @@ NULL
 #' @export
 #' @family stylers
 style_pkg <- function(pkg = ".",
-  flat = FALSE,
-  ...,
-  transformers = get_transformers(flat = flat, ...)) {
+                      ...,
+                      style = tidyverse_style,
+                      transformers = style(...)) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  withr::with_dir(pkg_root, prettify_local(transformers, flat = flat))
+  withr::with_dir(pkg_root, prettify_local(transformers, flat = FALSE))
 }
 
 prettify_local <- function(transformers, flat) {
