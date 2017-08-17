@@ -77,11 +77,12 @@ get_transformers_nested <- function(
   indent_by = 2,
   start_comments_with_one_space = FALSE) {
 
-  lvls_scope <- c("none", "spaces", "indention", "line_breaks", "tokens")
+  scope <- character_to_ordered(
+    scope,
+    c("none", "spaces", "indention", "line_breaks", "tokens")
+  )
 
-  scope <- character_to_ordered(scope, lvls_scope)
-
-  space_manipulators <- if (scope >= lvls_scope[2])
+  space_manipulators <- if (scope >= "spaces")
     c(
       partial(indent_round, indent_by = indent_by),
       partial(indent_curly, indent_by = indent_by),
@@ -94,9 +95,9 @@ get_transformers_nested <- function(
       set_space_between_levels
     )
 
-  use_raw_indention <- scope < lvls_scope[3]
+  use_raw_indention <- scope < "indention"
 
-  line_break_manipulators <- if (scope >= lvls_scope[4])
+  line_break_manipulators <- if (scope >= "line_breaks")
     c(
       remove_line_break_before_curly_opening,
       remove_line_break_before_round_closing,
@@ -105,7 +106,7 @@ get_transformers_nested <- function(
       add_line_break_after_pipe
     )
 
-  token_manipulators <- if (scope >= lvls_scope[5])
+  token_manipulators <- if (scope >= "tokens")
     c(
       force_assignment_op,
       resolve_semicolon,
