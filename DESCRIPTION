@@ -35,7 +35,6 @@ Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi
 RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
 Collate: 
-    'get_transformers.R'
     'modify_pd.R'
     'nested.R'
     'nested_to_tree.R'
@@ -49,6 +48,7 @@ Collate:
     'rules-spacing.R'
     'serialize.R'
     'serialized_tests.R'
+    'style_guides.R'
     'styler.R'
     'transform.R'
     'unindent.R'

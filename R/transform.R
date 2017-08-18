@@ -8,8 +8,8 @@
 #' @return A logical value that indicates whether or not any file was changed is
 #'   returned invisibly. If files were changed, the user is informed to
 #'   carefully inspect the changes via a message sent to the console.
-transform_files <- function(files, transformers, flat) {
-  transformer <- make_transformer(transformers, flat = flat)
+transform_files <- function(files, transformers) {
+  transformer <- make_transformer(transformers)
 
   changed <- utf8::transform_lines_enc(files, transformer)
   if (any(changed)) {
@@ -24,49 +24,7 @@ transform_files <- function(files, transformers, flat) {
 #'  that should be transformed.
 #' @param transformers A list of transformer functions that operate on flat
 #'   parse tables.
-#' @param flat Whether to do the styling with a flat approach or with a nested
-#'   approach.
-#' @family make transformers
-make_transformer <- function(transformers, flat) {
-  if (flat) {
-    make_transformer_flat(transformers = transformers)
-  } else {
-    make_transformer_nested(transformers = transformers)
-  }
-}
-
-#' A Closure to return transformer function
-#'
-#' Returns a closure that turns `text` into a flat parse table and applies
-#'   `transformers`  on it.
-#' @inheritParams make_transformer
-#' @family make transformers
-make_transformer_flat <- function(transformers) {
-  function(text) {
-    text <- gsub(" +$", "", text)
-    text <- gsub("\t", "        ", text)
-
-    pd_flat <- compute_parse_data_flat_enhanced(text)
-
-    # May strip empty lines before EOF
-    text <- verify_roundtrip(pd_flat, text)
-
-    transformed_pd_flat <- Reduce(function(x, fun) fun(x),
-                                  transformers,
-                                  init = pd_flat)
-
-    new_text <- serialize_parse_data_flat(transformed_pd_flat)
-    new_text
-  }
-}
-
-#' Closure to return transformer function
-#'
-#' Returns a closure that turns `text` into a nested parse table and applies
-#'   `transformers`  on it.
-#' @inheritParams make_transformer
-#' @family make transformers
-make_transformer_nested <- function(transformers) {
+make_transformer <- function(transformers) {
   function(text) {
     if (is.null(transformers$space)) return(text)
     transformed_text <- parse_transform_serialize(text, transformers)
@@ -74,7 +32,6 @@ make_transformer_nested <- function(transformers) {
 
   }
 }
-
 
 #' Parse, transform and serialize text
 #'

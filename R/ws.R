@@ -10,24 +10,28 @@ NULL
 #' (code and tests).
 #' Carefully examine the results after running this function!
 #'
-#' @param pkg Path to a (subdirectory of an) R package
-#' @inheritParams style_text
+#' @param pkg Path to a (subdirectory of an) R package.
+#' @param ... Passed on to the `style` function.
+#' @param style The unquoted name of a style guide to use. Will not be used
+#'   further except to construct the argument `transformers`.
+#' @param transformers A set of transformer functions.
 #' @export
 #' @family stylers
 style_pkg <- function(pkg = ".",
-  flat = FALSE,
-  transformers = get_transformers(flat = flat)) {
+                      ...,
+                      style = tidyverse_style,
+                      transformers = style(...)) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  withr::with_dir(pkg_root, prettify_local(transformers, flat = flat))
+  withr::with_dir(pkg_root, prettify_local(transformers))
 }
 
-prettify_local <- function(transformers, flat) {
+prettify_local <- function(transformers) {
   r_files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
   r_files <- grep("/RcppExports[.]R$", r_files, invert = TRUE, value = TRUE)
   test_files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
   files <- c(r_files, test_files)
 
-  transform_files(files, transformers, flat)
+  transform_files(files, transformers)
 }
 
 
@@ -35,15 +39,14 @@ prettify_local <- function(transformers, flat) {
 #'
 #' Styles a character vector
 #' @param text A character vector with text to style.
-#' @param transformers A list with functions to be applied to the parsed data.
-#' @param flat Whether to do the styling with a flat approach or with a nested
-#'   approach.
+#' @inheritParams style_pkg
 #' @family stylers
 #' @export
 style_text <- function(text,
-  flat = FALSE,
-  transformers = get_transformers(flat = flat)) {
-  transformer <- make_transformer(transformers, flat = flat)
+                       ...,
+                       style = tidyverse_style,
+                       transformers = style(...)) {
+  transformer <- make_transformer(transformers)
   transformer(text)
 }
 
@@ -54,28 +57,26 @@ style_text <- function(text,
 #' @param path Path to a directory with files to transform.
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
-#' @inheritParams style_text
+#' @inheritParams style_pkg
 #' @family stylers
 #' @export
 style_dir <- function(path = ".",
-  flat = FALSE,
-  recursive = TRUE,
-  transformers = get_transformers(flat = flat)) {
-  withr::with_dir(path, prettify_any(transformers,
-      recursive = recursive,
-      flat = flat))
+                      ...,
+                      style = tidyverse_style,
+                      transformers = style(...),
+                      recursive = TRUE) {
+  withr::with_dir(path, prettify_any(transformers, recursive = recursive))
 }
 
 #' Prettify R code in current working directory
 #'
 #' This is a helper function for style_dir.
-#' @inheritParams style_dir
+#' @inheritParams style_pkg
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   should be styled as well.
-#' @keywords internal
-prettify_any <- function(transformers, recursive, flat) {
+prettify_any <- function(transformers, recursive) {
   files <- dir(path = ".", pattern = "[.][rR]$", recursive = recursive, full.names = TRUE)
-  transform_files(files, transformers, flat = flat)
+  transform_files(files, transformers)
 
 }
 
@@ -84,14 +85,15 @@ prettify_any <- function(transformers, recursive, flat) {
 #' Performs various substitutions in the `.R` file specified.
 #'   Carefully examine the results after running this function!
 #' @param path A path to a file to style.
-#' @inheritParams style_text
+#' @inheritParams style_pkg
 #' @family stylers
 #' @export
 style_file <- function(path,
-                       flat = FALSE,
-                       transformers = get_transformers(flat = flat)) {
+                       ...,
+                       style = tidyverse_style,
+                       transformers = style(...)) {
   withr::with_dir(dirname(path),
-                 prettify_one(transformers, flat, basename(path)))
+                 prettify_one(transformers, basename(path)))
 }
 
 #' Prettify one R file
@@ -99,9 +101,9 @@ style_file <- function(path,
 #' This is a helper function for style_dir.
 #' @inheritParams style_dir
 #' @param path The path to a file that should be styled.
-prettify_one <- function(transformers, flat, path) {
+prettify_one <- function(transformers, path) {
   if (!grepl("\\.[Rr]$", path)) stop(path, " is not a .R file")
-  transform_files(path, transformers, flat = flat)
+  transform_files(path, transformers)
 }
 
 #' Style the active file
@@ -109,7 +111,5 @@ prettify_one <- function(transformers, flat, path) {
 #' Helper function fot RStudio Add-in.
 style_active_file <- function() {
   file <- rstudioapi::getActiveDocumentContext()$path
-  style_file(file,
-             flat = FALSE,
-             transformers = get_transformers(flat = FALSE))
+  style_file(file, transformers = tidyverse_style)
 }

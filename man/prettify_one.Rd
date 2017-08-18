@@ -4,13 +4,10 @@
 \alias{prettify_one}
 \title{Prettify one R file}
 \usage{
-prettify_one(transformers, flat, path)
+prettify_one(transformers, path)
 }
 \arguments{
-\item{transformers}{A list with functions to be applied to the parsed data.}
-
-\item{flat}{Whether to do the styling with a flat approach or with a nested
-approach.}
+\item{transformers}{A set of transformer functions.}
 
 \item{path}{The path to a file that should be styled.}
 }

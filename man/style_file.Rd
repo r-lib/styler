@@ -4,15 +4,17 @@
 \alias{style_file}
 \title{Style a file}
 \usage{
-style_file(path, flat = FALSE, transformers = get_transformers(flat = flat))
+style_file(path, ..., style = tidyverse_style, transformers = style(...))
 }
 \arguments{
 \item{path}{A path to a file to style.}
 
-\item{flat}{Whether to do the styling with a flat approach or with a nested
-approach.}
+\item{...}{Passed on to the \code{style} function.}
 
-\item{transformers}{A list with functions to be applied to the parsed data.}
+\item{style}{The unquoted name of a style guide to use. Will not be used
+further except to construct the argument \code{transformers}.}
+
+\item{transformers}{A set of transformer functions.}
 }
 \description{
 Performs various substitutions in the \code{.R} file specified.
