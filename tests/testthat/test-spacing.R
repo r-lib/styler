@@ -5,3 +5,9 @@ test_that("curly braces", {
     "spacing", "round",
     transformer = style_text), NA)
 })
+
+test_that(":, ::, and :::", {
+  expect_warning(test_collection(
+    "spacing", "colon",
+    transformer = style_text), NA)
+})
