@@ -13,3 +13,13 @@ test_that("tokens are not dropped in named vector", {
                                  transformer = style_text,
                                  write_back = TRUE), NA)
 })
+
+
+test_that(paste("if last token is multi-line and no line break precede,",
+                "unindention is correct"), {
+  expect_warning(test_collection("unindention",
+                                 "vec",
+                                 transformer = style_text,
+                                 write_back = TRUE), NA)
+})
+
