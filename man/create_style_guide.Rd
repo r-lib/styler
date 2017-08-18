@@ -4,7 +4,8 @@
 \alias{create_style_guide}
 \title{Create a style guide}
 \usage{
-create_style_guide(filler, line_break, space, token, indention,
+create_style_guide(filler = create_filler, line_break = NULL,
+  space = NULL, token = NULL, indention = NULL,
   use_raw_indention = FALSE)
 }
 \arguments{

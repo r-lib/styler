@@ -35,7 +35,7 @@ tidyverse_style <- function(scope = "tokens",
   )
 
   space_manipulators <- if (scope >= "spaces")
-    c(
+    lst(
       partial(indent_round, indent_by = indent_by),
       partial(indent_curly, indent_by = indent_by),
       partial(indent_op, indent_by = indent_by),
@@ -44,7 +44,7 @@ tidyverse_style <- function(scope = "tokens",
 
       fix_quotes,
       remove_space_before_closing_paren,
-      if (strict) remove_space_before_opening_paren,
+      if (strict) remove_space_before_opening_paren else identity,
       add_space_after_for_if_while,
       add_space_before_brace,
       if (strict) set_space_around_op else add_space_around_op,
@@ -64,7 +64,7 @@ tidyverse_style <- function(scope = "tokens",
   use_raw_indention <- scope < "indention"
 
   line_break_manipulators <- if (scope >= "line_breaks")
-    c(
+    lst(
       remove_line_break_before_curly_opening,
       remove_line_break_before_round_closing,
       add_line_break_afer_curly_opening,
@@ -73,7 +73,7 @@ tidyverse_style <- function(scope = "tokens",
     )
 
   token_manipulators <- if (scope >= "tokens")
-    c(
+    lst(
       force_assignment_op,
       resolve_semicolon,
       add_brackets_in_pipe
@@ -116,13 +116,13 @@ tidyverse_style <- function(scope = "tokens",
 #' @param use_raw_indention Boolean indicating wheter or not the raw indention
 #'   should be used.
 #' @export
-create_style_guide <- function(filler,
-                               line_break,
-                               space,
-                               token,
-                               indention,
-                               use_raw_indention = FALSE) {
-  tibble::lst(
+create_style_guide <- function(filler = create_filler,
+                               line_break = NULL,
+                               space = NULL,
+                               token = NULL,
+                               indention = NULL,
+                               use_raw_indention = TRUE) {
+  lst(
     # transformer functions
     filler,
     line_break,

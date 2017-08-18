@@ -2,7 +2,7 @@
 
 ## Exported functions
 
-create_style_guide(filler, line_break, space, token, indention, use_raw_indention = FALSE)
+create_style_guide(filler = create_filler, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE)
 style_dir(path = ".", recursive = TRUE, ..., style = tidyverse_style, transformers = style(...))
 style_file(path, ..., style = tidyverse_style, transformers = style(...))
 style_pkg(pkg = ".", ..., style = tidyverse_style, transformers = style(...))
