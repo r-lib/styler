@@ -4,14 +4,11 @@
 \alias{style_dir}
 \title{Prettify arbitrary R code}
 \usage{
-style_dir(path = ".", recursive = TRUE, ..., style = tidyverse_style,
-  transformers = style(...))
+style_dir(path = ".", ..., style = tidyverse_style,
+  transformers = style(...), recursive = TRUE)
 }
 \arguments{
 \item{path}{Path to a directory with files to transform.}
-
-\item{recursive}{A logical value indicating whether or not files in subdirectories
-of \code{path} should be styled as well.}
 
 \item{...}{Passed on to the \code{style} function.}
 
@@ -19,6 +16,9 @@ of \code{path} should be styled as well.}
 further except to construct the argument \code{transformers}.}
 
 \item{transformers}{A set of transformer functions.}
+
+\item{recursive}{A logical value indicating whether or not files in subdirectories
+of \code{path} should be styled as well.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a directory.

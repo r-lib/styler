@@ -61,10 +61,10 @@ style_text <- function(text,
 #' @family stylers
 #' @export
 style_dir <- function(path = ".",
-                      recursive = TRUE,
                       ...,
                       style = tidyverse_style,
-                      transformers = style(...)) {
+                      transformers = style(...),
+                      recursive = TRUE) {
   withr::with_dir(path, prettify_any(transformers, recursive = recursive))
 }
 
