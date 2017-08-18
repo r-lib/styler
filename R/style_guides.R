@@ -121,7 +121,7 @@ create_style_guide <- function(filler = create_filler,
                                space = NULL,
                                token = NULL,
                                indention = NULL,
-                               use_raw_indention = TRUE) {
+                               use_raw_indention = FALSE) {
   lst(
     # transformer functions
     filler,
