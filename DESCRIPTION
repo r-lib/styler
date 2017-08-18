@@ -1,7 +1,8 @@
 Package: styler
 Title: Non-invasive Pretty Printing of R code
 Version: 0.0-7
-Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
+Authors@R: c(person("Kirill", "Müller", role = c("aut"), email = "krlmlr+r@mailbox.org"),
+  person("Lorenz", "Walthert", role = c("cre", "aut"), email = "lorenz.walthert@icloud.com"))
 Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
