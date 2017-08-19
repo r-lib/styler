@@ -197,3 +197,17 @@ remove_space_before_dollar <- function(pd_flat) {
   pd_flat$spaces[dollar_before] <- 0L
   pd_flat
 }
+
+remove_space_around_colons <- function(pd_flat) {
+  one_two_or_three_col_after <-
+    pd_flat$token %in% c("':'", "NS_GET_INT", "NS_GET")
+
+  one_two_or_three_col_before <-
+    lead(one_two_or_three_col_after, default = FALSE)
+
+  col_around <-
+    one_two_or_three_col_before | one_two_or_three_col_after
+
+  pd_flat$spaces[col_around & (pd_flat$newlines == 0L)] <- 0L
+  pd_flat
+}

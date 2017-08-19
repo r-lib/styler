@@ -53,6 +53,7 @@ tidyverse_style <- function(scope = "tokens",
       remove_space_after_opening_paren,
       remove_space_after_excl,
       remove_space_before_dollar,
+      remove_space_around_colons,
       partial(start_comments_with_space,
               force_one = start_comments_with_one_space),
 
