@@ -68,8 +68,10 @@ tidyverse_style <- function(scope = "tokens",
     lst(
       remove_line_break_before_curly_opening,
       remove_line_break_before_round_closing,
-      add_line_break_afer_curly_opening,
-      add_line_break_before_curly_closing,
+      if (strict) set_line_break_afer_curly_opening else
+        add_line_break_afer_curly_opening,
+      if (strict) set_line_break_before_curly_closing else
+        add_line_break_before_curly_closing,
       add_line_break_after_pipe
     )
 
