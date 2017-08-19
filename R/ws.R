@@ -111,5 +111,5 @@ prettify_one <- function(transformers, path) {
 #' Helper function fot RStudio Add-in.
 style_active_file <- function() {
   file <- rstudioapi::getActiveDocumentContext()$path
-  style_file(file, transformers = tidyverse_style)
+  style_file(file, style = tidyverse_style)
 }
