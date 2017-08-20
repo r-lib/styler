@@ -150,11 +150,3 @@ prettify_one <- function(transformers, path) {
   if (!grepl("\\.[Rr]$", path)) stop(path, " is not a .R file")
   transform_files(path, transformers)
 }
-
-#' Style the active file
-#'
-#' Helper function fot RStudio Add-in.
-style_active_file <- function() {
-  file <- rstudioapi::getActiveDocumentContext()$path
-  style_file(file, style = tidyverse_style)
-}

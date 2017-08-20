@@ -7,3 +7,8 @@ Name: style active file
 Description: Pretty-print active file
 Binding: style_active_file
 Interactive: false
+
+Name: style active region
+Description: Pretty-print active region
+Binding: style_active_region
+Interactive: false
