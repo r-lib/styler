@@ -53,6 +53,7 @@ visit_one <- function(pd_flat, funs) {
 #'   relative in `pd_nested`) will be converted into absolute.
 #' @inherit context_towards_terminals
 #' @seealso context_towards_terminals visitors
+#' @importFrom purrr pmap
 context_to_terminals <- function(pd_nested,
                                  outer_lag_newlines,
                                  outer_indent,

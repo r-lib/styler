@@ -9,21 +9,19 @@ rep_char <- function(char, times) {
   paste(rep.int(char, times), collapse = "")
 }
 
-#' concentrate newlines an spaces in a string
+#' Concentrate newlines or spaces in a string
 #'
-#' @param newlines Scalar indicating how many newlines ("\ n") should returned.
-#' @param spaces Scalar indicating how many spaces should be appended to the
-#'   newlines.
+#' @param n Scalar indicating how many characters should be concentrated
 #' @return A string.
-#' @importFrom purrr map2
-newlines_and_spaces <- function(newlines, spaces) {
-  map2(newlines, spaces, ~paste0(rep_char("\n", .x), rep_char(" ", .y)))
-}
+#' @name add_spaces_or_newlines
+NULL
 
+#' @rdname add_spaces_or_newlines
 add_newlines <- function(n) {
   rep_char("\n", n)
 }
 
+#' @rdname add_spaces_or_newlines
 add_spaces <- function(n) {
   rep_char(" ", n)
 }
