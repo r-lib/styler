@@ -9,11 +9,11 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
   closing <- which(pd$token %in% token)
   if (length(closing) == 0 || pd$lag_newlines[closing] > 0) return(pd)
 
-  first_on_same_line <- last(which(pd$lag_newlines > 0))
-  if (is.na(first_on_same_line)) {
+  first_on_last_line <- last(which(pd$lag_newlines > 0 | pd$multi_line))
+  if (is.na(first_on_last_line)) {
     on_same_line <- 1:(closing - 1)
   } else {
-    on_same_line <- first_on_same_line:(closing - 1)
+    on_same_line <- first_on_last_line:(closing - 1)
   }
   cand_ind <- setdiff(on_same_line, which(pd$terminal))
   if (length(cand_ind) < 1) return(pd)
