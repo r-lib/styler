@@ -7,4 +7,4 @@ call(
        x
        },{
    xx
-  } )
+  } ) # FIXME: line break after '}', see also #125
