@@ -10,9 +10,8 @@
 #'   carefully inspect the changes via a message sent to the console.
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
-
   changed <- utf8::transform_lines_enc(files, transformer)
-  if (any(changed)) {
+  if (any(changed, na.rm = TRUE)) {
     message("Please review the changes carefully!")
   }
   invisible(changed)
