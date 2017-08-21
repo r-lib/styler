@@ -35,10 +35,10 @@ RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
 Collate: 
     'addins.R'
+    'initialize.R'
     'modify_pd.R'
     'nested.R'
     'nested_to_tree.R'
-    'parsed.R'
     'reindent.R'
     'token.R'
     'relevel.R'

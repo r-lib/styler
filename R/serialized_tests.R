@@ -137,7 +137,7 @@ NULL
 style_empty <- function(text) {
   transformers <- list(
     # transformer functions
-    filler     = create_filler,
+    initialize = initialize_attributes,
     line_break = NULL,
     space      = NULL,
     token      = NULL,
@@ -156,7 +156,7 @@ style_indent_curly <- function(text) {
 
   transformers <- list(
     # transformer functions
-    filler     = create_filler,
+    initialize = initialize_attributes,
     line_break = NULL,
     space      =  partial(indent_curly, indent_by = 2),
     token      = NULL,
@@ -175,7 +175,7 @@ style_indent_curly <- function(text) {
 style_indent_curly_round <- function(text) {
   transformers <- list(
     # transformer functions
-    filler     = create_filler,
+    initialize = initialize_attributes,
     line_break = NULL,
     space      = c(partial(indent_curly, indent_by = 2),
                     partial(indent_round, indent_by = 2)),
@@ -195,7 +195,7 @@ style_op <- function(text) {
 
   transformers <- list(
     # transformer functions
-    filler     = create_filler,
+    initialize = initialize_attributes,
     line_break = NULL,
     space      = partial(indent_op, indent_by = 2),
     token      = NULL,

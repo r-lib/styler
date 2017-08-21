@@ -124,7 +124,7 @@ tidyverse_style <- function(scope = "tokens",
 
   create_style_guide(
     # transformer functions
-    filler            = create_filler,
+    initialize        = initialize_attributes,
     line_break        = line_break_manipulators,
     space             = space_manipulators,
     token             = token_manipulators,
@@ -141,7 +141,7 @@ tidyverse_style <- function(scope = "tokens",
 #' transformer function corresponds to one styling rule. The output of this
 #' function can be used as an argument for \code{style} in top level functions
 #' like [style_text()] and friends.
-#' @param filler A filler function that initializes various variables on each
+#' @param initialize A function that initializes various variables on each
 #'   level of nesting.
 #' @param line_break A list of transformer functions that manipulate line_break
 #'   information.
@@ -152,7 +152,7 @@ tidyverse_style <- function(scope = "tokens",
 #' @param use_raw_indention Boolean indicating whether or not the raw indention
 #'   should be used.
 #' @export
-create_style_guide <- function(filler = create_filler,
+create_style_guide <- function(initialize = initialize_attributes,
                                line_break = NULL,
                                space = NULL,
                                token = NULL,
@@ -160,7 +160,7 @@ create_style_guide <- function(filler = create_filler,
                                use_raw_indention = FALSE) {
   lst(
     # transformer functions
-    filler,
+    initialize,
     line_break,
     space,
     token,
