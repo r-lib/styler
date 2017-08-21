@@ -44,7 +44,7 @@ test_that(
   "code is indented correctly if not first pontial trigger causes indention", {
     expect_warning(
       test_collection(
-        "indention_operators", "non_first_trigger",
+        "indention_operators", "not_first_trigger",
         transformer = style_text
       ),
     NA)
