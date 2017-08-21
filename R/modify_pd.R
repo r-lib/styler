@@ -78,6 +78,7 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #'  For example when `token` is a parenthesis, the closing parenthesis does not
 #'  need indention, but if token is something else, for example a plus (+), the
 #'  last token in `pd` needs indention.
+#' @importFrom rlang seq2
 compute_indent_indices <- function(pd, token = "'('", indent_last = FALSE) {
   npd <- nrow(pd)
   potential_triggers <- which(pd$token %in% token)
@@ -86,7 +87,7 @@ compute_indent_indices <- function(pd, token = "'('", indent_last = FALSE) {
   if (is.na(trigger)) return(numeric(0))
   start <- trigger + 1
   stop <- npd - ifelse(indent_last, 0, 1)
-  which(between(seq_len(npd), start, stop))
+  seq2(start, stop)
 }
 
 
@@ -111,10 +112,11 @@ needs_indention <- function(pd, potential_triggers) {
 #'   for which it should be checked whether it should trigger indention.
 #' @return Returns `TRUE` if indention is needed, `FALSE` otherwise.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
+#' @importFrom rlang seq2
 needs_indention_one <- function(pd, potential_trigger) {
   before_first_break <- which(pd$lag_newlines > 0)[1] - 1
   if (is.na(before_first_break)) return(FALSE)
-  !any(pd$multi_line[potential_trigger:before_first_break])
+  !any(pd$multi_line[seq2(potential_trigger, before_first_break)])
 }
 
 
