@@ -34,10 +34,20 @@ test_that("logical, special and EQ_SUB tokens are indented correctly", {
                                  transformer = style_text), NA)
 })
 
-test_that("dollar is indented and spaced correctl", {
+test_that("dollar is indented and spaced correctly", {
   expect_warning(test_collection("indention_operators",
                                  "dollar",
                                  transformer = style_text), NA)
+})
+
+test_that(
+  "code is indented correctly if not first pontial trigger causes indention", {
+    expect_warning(
+      test_collection(
+        "indention_operators", "non_first_trigger",
+        transformer = style_text
+      ),
+    NA)
 })
 
 
