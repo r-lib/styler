@@ -17,11 +17,10 @@ create_tree <- function(text) {
 #' @param pd_nested A nested tibble.
 #' @return An object of class "Node" and "R6".
 #' @examples
-#' library("magrittr")
 #' code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
-#' l1 <- styler:::compute_parse_data_nested(code) %>%
-#'   styler:::pre_visit(c(styler:::create_filler)) %>%
-#'   styler:::create_node_from_nested_root()
+#' nested_pd <- styler:::compute_parse_data_nested(code)
+#' initialized <- styler:::pre_visit(nested_pd, c(styler:::create_filler))
+#' styler:::create_node_from_nested_root(initialized)
 create_node_from_nested_root <- function(pd_nested) {
   n <- data.tree::Node$new("ROOT (token: short_text [lag_newlines/spaces] {id})")
   create_node_from_nested(pd_nested, n)
