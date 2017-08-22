@@ -33,7 +33,7 @@ There are three major steps that styler performs in order to style code:
    the nested parse table and add spaces and line breaks between them as 
    specified in the nested parse table. 
 
-The argument transformers is, apart from the code to style, the key argument 
+The `transformers` argument is, apart from the code to style, the key argument 
 of functions such as `style_text()` and friends. By default, it is created 
 via the argument `style`. The transformers are a named
 list of transformer functions and other arguments passed to styler. To use the
@@ -144,7 +144,7 @@ four attributes in total: `lag_newlines`, `newlines`, `spaces`, `lag_spaces`.
 `lag_spaces` is created from `spaces` only just before the parse table is
 serialized, so it is not relevant for manipulating the parse table as
 described above. These columns are to some degree redundant, but with just lag
-or lead, we would loose information on the first or the last element 
+or lead, we would lose information on the first or the last element 
 respectively, so we need both.
 
 The sequence in which styler applies rules on each level of nesting 
@@ -178,6 +178,10 @@ Also, as indicated above, work with `lag_nelwines` only in your line break
 rules. For development purposes, you also may want to use the unexported 
 function `test_collection()` to help you with testing your style guide. You can 
 find more information in the help file of the function. 
+
+If you write functions that modify spaces, don't forget make sure
+you don't modify EOL spacing, since that is needed for `use_raw_indention`, as 
+indicated in the previous paragraph.
 
 Finally, take note of the naming convention. All function names starting with
 `set-*` correspond to the `strict` option, that is, setting some value to an 
@@ -242,12 +246,9 @@ Now you can style your string according to it.
 ```{r}
 style_text(code, style = set_line_break_before_curly_opening_style)
 ```
-Note that: 
 
-* We have not implemented a rule that sets the line breaks before the curly
-  opening brace, which you probably want to for the above rule to be complete.
-* Note that when removing line breaks, always take care of comments, since you 
-  don't want this
+Note that when removing line breaks, always take care of comments, since you 
+don't want
 ```{r, eval = FALSE}
 a <- function() # comments should remain EOL
 { 
@@ -263,6 +264,11 @@ a <- function() # comments should remain EOL {
 }
 ```
 
-The easiest way of taking care of that is not applying the rule
-if there is a comment, which can be checked for within your transformer 
-function.
+The easiest way of taking care of that is not applying the rule if there is a
+comment before the token of interest, which can be checked for within your
+transformer function. The transformer function from the tidyverse style that
+removes line breaks before the curly opening bracket looks as follows: 
+```{r}
+styler:::remove_line_break_before_curly_opening
+```
+
