@@ -6,6 +6,9 @@
 \usage{
 set_space_between_eq_sub_and_comma(pd)
 }
+\arguments{
+\item{pd}{A parse table.}
+}
 \description{
 Set space between EQ_SUB and "','"
 }

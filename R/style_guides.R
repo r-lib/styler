@@ -59,7 +59,8 @@ tidyverse_style <- function(scope = "tokens",
 
       remove_space_after_unary_pm_nested,
       set_space_before_comments,
-      set_space_between_levels
+      set_space_between_levels,
+      set_space_between_eq_sub_and_comma,
     )
 
   use_raw_indention <- scope < "indention"
