@@ -26,7 +26,6 @@ transform_files <- function(files, transformers) {
 #'   parse tables.
 make_transformer <- function(transformers) {
   function(text) {
-    if (is.null(transformers$space)) return(text)
     transformed_text <- parse_transform_serialize(text, transformers)
     transformed_text
 
