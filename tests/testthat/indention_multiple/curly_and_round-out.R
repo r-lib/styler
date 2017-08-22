@@ -6,7 +6,8 @@ test_that("this is a text", {
   {
     call(
       12, 1 + 1,
-      26)
+      26
+    )
   }
 }))
 

@@ -52,7 +52,7 @@ add_line_break_after_pipe <- function(pd) {
 
 #' Set line break for multi-line function calls
 #' @param pd A parse table.
-#' @param except_token A character vector with tokens before "'('" that do not
+#' @param except A character vector with tokens before "'('" that do not
 #' @name set_line_break_if_call_is_multi_line
 #' @importFrom rlang seq2
 NULL
