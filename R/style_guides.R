@@ -72,6 +72,11 @@ tidyverse_style <- function(scope = "tokens",
         add_line_break_afer_curly_opening,
       if (strict) set_line_break_before_curly_closing else
         add_line_break_before_curly_closing,
+      partial(
+        set_line_break_after_opening_if_call_is_multi_line,
+        except_token = "COMMENT"
+      ),
+      set_line_break_before_closing_if_call_is_multi_line,
       add_line_break_after_pipe
     )
 
@@ -86,7 +91,7 @@ tidyverse_style <- function(scope = "tokens",
   indention_modifier <-
     c(
       update_indention_ref_fun_dec,
-      update_indention_ref_fun_call
+      NULL
     )
 
   create_style_guide(

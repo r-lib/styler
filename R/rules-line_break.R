@@ -42,8 +42,51 @@ remove_line_break_before_round_closing <- function(pd) {
   pd
 }
 
+#' @importFrom rlang seq2
 add_line_break_after_pipe <- function(pd) {
   is_special <- pd$token %in% c("SPECIAL-PIPE")
   pd$lag_newlines[lag(is_special)] <- 1L
+  pd
+}
+
+
+#' Set line break for multi-line function calls
+#' @param pd A parse table.
+#' @param except_token A character vector with tokens before "'('" that do not
+#' @name set_line_break_if_call_is_multi_line
+#' @importFrom rlang seq2
+NULL
+
+#' @describeIn set_line_break_if_call_is_multi_line Sets line break after
+#'   opening parenthesis.
+set_line_break_after_opening_if_call_is_multi_line <-
+  function(pd,
+           except_token = NULL) {
+  if (!is_function_call(pd)) return(pd)
+  npd <- nrow(pd)
+  if (npd == 3) {
+    pd$lag_newlines[3] <- 0L
+    return(pd)
+  }
+  is_multi_line <- any(pd$lag_newlines[seq2(3, npd - 1)] > 0)
+  if (!is_multi_line) return(pd)
+  exeption_pos <- which(pd$token %in% except_token)
+  pd$lag_newlines[setdiff(3, exeption_pos)] <- 1L
+  pd
+}
+
+
+#' @describeIn set_line_break_if_call_is_multi_line Sets line break before
+#'   closing parenthesis.
+set_line_break_before_closing_if_call_is_multi_line <- function(pd) {
+  if (!is_function_call(pd)) return(pd)
+  npd <- nrow(pd)
+  if (npd == 3) {
+    pd$lag_newlines[3] <- 0L
+    return(pd)
+  }
+  is_multi_line <- any(pd$lag_newlines[seq2(3, npd - 1)] > 0)
+  if (!is_multi_line) return(pd)
+  pd$lag_newlines[npd] <- 1L
   pd
 }
