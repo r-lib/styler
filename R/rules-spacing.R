@@ -213,3 +213,11 @@ remove_space_around_colons <- function(pd_flat) {
   pd_flat$spaces[col_around & (pd_flat$newlines == 0L)] <- 0L
   pd_flat
 }
+
+#' Set space between EQ_SUB and "','"
+set_space_between_eq_sub_and_comma <- function(pd) {
+  op_before <- which(pd$token == "EQ_SUB" & lead(pd$token == "','"))
+  pd$spaces[op_before] <- 1L
+  pd
+
+}
