@@ -26,9 +26,16 @@ style_pkg <- function(pkg = ".",
 }
 
 prettify_local <- function(transformers) {
-  r_files <- dir(path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  r_files <- dir(
+    path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE
+  )
+
   r_files <- grep("/RcppExports[.]R$", r_files, invert = TRUE, value = TRUE)
-  test_files <- dir(path = "tests/testthat", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE)
+  test_files <- dir(
+    path = "tests/testthat", pattern = "[.][rR]$",
+    recursive = TRUE, full.names = TRUE
+  )
+
   files <- c(r_files, test_files)
 
   transform_files(files, transformers)
@@ -46,6 +53,7 @@ style_text <- function(text,
                        ...,
                        style = tidyverse_style,
                        transformers = style(...)) {
+
   transformer <- make_transformer(transformers)
   transformer(text)
 }
@@ -65,7 +73,9 @@ style_dir <- function(path = ".",
                       style = tidyverse_style,
                       transformers = style(...),
                       recursive = TRUE) {
-  withr::with_dir(path, prettify_any(transformers, recursive = recursive))
+  withr::with_dir(
+    path, prettify_any(transformers, recursive = recursive)
+  )
 }
 
 #' Prettify R code in current working directory
@@ -92,8 +102,10 @@ style_file <- function(path,
                        ...,
                        style = tidyverse_style,
                        transformers = style(...)) {
-  withr::with_dir(dirname(path),
-                 prettify_one(transformers, basename(path)))
+  withr::with_dir(
+    dirname(path),
+    prettify_one(transformers, basename(path))
+  )
 }
 
 #' Prettify one R file
