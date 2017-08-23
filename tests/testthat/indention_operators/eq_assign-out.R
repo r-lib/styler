@@ -1,12 +1,14 @@
-switch(engine,
-       pdftex = {
+switch(
+  engine,
+  pdftex = {
     if (any) {
       x
     }
   },
-       new = (
-         2
-     )) # FIXME: Add line break between parens (#125)
+  new = (
+    2
+  )
+)
 
 {
   a <-

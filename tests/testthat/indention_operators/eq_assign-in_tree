@@ -1,5 +1,5 @@
 ROOT (token: short_text [lag_newlines/spaces] {id})
- ¦--expr:  [0/1] {54}                              
+ ¦--expr:  [0/0] {54}                              
  ¦   ¦--expr:  [0/0] {3}                           
  ¦   ¦   °--SYMBOL_FUNCTION_CALL: switc [0/0] {1}  
  ¦   ¦--'(': ( [0/0] {2}                           
@@ -31,13 +31,12 @@ ROOT (token: short_text [lag_newlines/spaces] {id})
  ¦   ¦   ¦   °--NUM_CONST: 2 [0/0] {45}            
  ¦   ¦   °--')': ) [1/0] {48}                      
  ¦   °--')': ) [0/0] {51}                          
- ¦--COMMENT: # FIX [0/0] {55}                      
- °--expr:  [2/0] {75}                              
-     ¦--'{': { [0/2] {61}                          
-     ¦--expr:  [1/0] {70}                          
-     ¦   ¦--expr:  [0/1] {65}                      
-     ¦   ¦   °--SYMBOL: a [0/0] {63}               
-     ¦   ¦--LEFT_ASSIGN: <- [0/4] {64}             
-     ¦   °--expr:  [1/0] {68}                      
-     ¦       °--NUM_CONST: 3 [0/0] {67}            
-     °--'}': } [1/0] {73}                          
+ °--expr:  [2/0] {74}                              
+     ¦--'{': { [0/2] {60}                          
+     ¦--expr:  [1/0] {69}                          
+     ¦   ¦--expr:  [0/1] {64}                      
+     ¦   ¦   °--SYMBOL: a [0/0] {62}               
+     ¦   ¦--LEFT_ASSIGN: <- [0/4] {63}             
+     ¦   °--expr:  [1/0] {67}                      
+     ¦       °--NUM_CONST: 3 [0/0] {66}            
+     °--'}': } [1/0] {72}                          

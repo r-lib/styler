@@ -15,8 +15,7 @@ test <- function() {
     line,
     call
   )
-  multi_line_empty_call(
-  )
+  multi_line_empty_call()
 
   one_space(after, comma("in", "function",  args))
 
@@ -109,28 +108,33 @@ test <- function() {
   single_line ("function", call)
 
   multiline (
-    "function", call)
+    "function", call
+  )
 
   nested (function_call ("in", one, line))
 
   nested (function_call (
     "in",
-    multiple, lines))
+    multiple, lines
+  ))
 
   nested(
     function_call (with),
     many
-    ,     first_level_args)
+    ,     first_level_args
+  )
 
   nested(
     function_call (with), # a comment and
     many # more
-    ,     first_level_args)
+    ,     first_level_args
+  )
 
-  difficult(nested(
-    "function", call
-  ),
-            with, more, args
+  difficult(
+    nested(
+      "function", call
+    ),
+    with, more, args
   )
 }
 
