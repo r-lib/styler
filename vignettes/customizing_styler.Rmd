@@ -21,14 +21,19 @@ There are three major steps that styler performs in order to style code:
    this a nested parse table. You can learn more about how that is done
    exactly in the vignettes "Data Structures" and "Manipulating the nested 
    parse table".
-2. Apply transformer functions at each level of the nested parse table. In 
-   particular, we create two columns `lag_newlines` and `spaces`, which contain
+2. Apply transformer functions at each level of the nested parse table. We 
+   use a visitor approach, i.e. a function that takes functions as arguments and
+   applies them to every level of nesting. You can find out more about it on
+   the help file for `visit`. Note that the function is not exported by styler.
+   The visitor will take care of applying the functions on every 
+   level of nesting - and we can supply transformer functions that operate on 
+   one level of nesting. In the sequel, we use the term *nest* to refer to 
+   such a parse table at one level of nesting. A *nest* always represents a 
+   complete expression. Before we apply the transformers, we have to initialize
+   two columns `lag_newlines` and `spaces`, which contain
    the number of line breaks before the token and the number of spaces 
    after the token. These will be the columns that most of our transformer 
-   functions will modify. To go through the whole nested structure and apply
-   the transformer functions repeatedly on every level of nesting, we use
-   a visitor approach, i.e. a function that takes functions as arguments and
-   applies them to every level of nesting. 
+   functions will modify. 
 3. Serialize the nested parse table, that is, extract the terminal tokens from 
    the nested parse table and add spaces and line breaks between them as 
    specified in the nested parse table. 
@@ -57,10 +62,10 @@ tidyverse_style()$space$remove_space_after_opening_paren
 ```
 
 As the name says, this function removes spaces after the opening parenthesis. But
-how? Its input is a flat parse table. Since the visitor functions `pre_visit()`
-and `post_visit()` will go through all levels of nesting, we don't need to care
-about that - we just need a function that can be applied to a flat parse table,
-i.e at one level of nesting.
+how?
+Its input is a *nest*. Since the visitor will go through all levels of nesting, 
+we just need a function that can be applied to a *nest*, that is, to a parse 
+table at one level of nesting.
 We can compute the nested parse table and look at one of the levels of nesting
 that is interesting for us (more on the data structure in the vignettes 
 "Data structures" and "Manipulating the parse table"):
