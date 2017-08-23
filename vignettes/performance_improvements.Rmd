@@ -2,7 +2,12 @@
 title: "Performance Improvements"
 author: "Lorenz Walthert"
 date: "7/24/2017"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Performance Improvements}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+
 ---
 
 We want to make styler faster.
