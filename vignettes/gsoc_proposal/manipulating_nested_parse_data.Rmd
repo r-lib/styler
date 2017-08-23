@@ -8,23 +8,30 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+> This vignette is partly outdated since nested structure was implemented
+> completely. In particular, the serialization is now done differently.
+
     library("dplyr")
     library("purrr")
     pkgload::load_all()
 
-This vignette builds on the vignette "Data Structures" and discusses how
-to go forward with the nested structure of the parse data. In order to
-compute the white space information in a nested data structure, we need
-a recursion. We use a [visitor
-approach](https://en.wikipedia.org/wiki/Visitor_pattern) to separate the
-algorithm (computing white space information) from the object (nested)
-data structure. The function `create_filler()` can then be used to add
-white space information on every level of nesting within the nested
-parse data if applied in combination with the visitor. `visitor()` takes
-a object to operate on and a list of functions. Each function is applied
-at the current level of nesting before the next level of nesting is
-entered.
 
+This vignette builds on the vignette "Data Structures" and discusses how 
+to go forward with the nested structure of the parse data.
+In order to compute the white space information in a nested data structure, we
+use a [visitor approach](https://en.wikipedia.org/wiki/Visitor_pattern) to 
+separate the algorithm (computing white space information and later apply
+transformations) from the object (nested data structure).
+The function `create_filler()` can then be used to compute current
+white space information on every level of nesting within the nested parse data 
+if applied in combination with the visitor. In the sequel, a parse table at 
+one level of nesting will be denoted with the term *nest*, which always 
+represents a complete expression. Our visiting functions `pre_visit()` and `post_visit()` take an object to 
+operate on and a list of functions. Concretely, the object is the 
+nested parse table. Each function is applied at each level of 
+nesting nesting before the next level of nesting is entered. You can find out
+more about the visitor on the help file for `visit` (note that this function
+is not exported by styler).
     pre_visit
 
     ## function(pd_nested, funs) {
@@ -43,13 +50,19 @@ entered.
     ##          .init = pd_flat)
     ## }
     ## <environment: namespace:styler>
+This comes with two advantages. 
 
-This comes with two advantages.
 
+* We go through the whole structure only as many times as we call the visitor
+  (instead of every *_nested() function going through it once, which is more 
+  efficient in terms of speed.
+  
+  
 -   We don't need a \*\_nested() version of every function we want to
     apply to the parse tables, in particular the rules in R/rules.R
--   We go through the whole structure only once (instead of every
-    \*\_nested() function going through it once, which is more efficient
+-   We go through the whole structure only as many times as we call the visitor
+    (instead of every
+    \*\_nested() function going through it once), which is more efficient
     in terms of speed.
 
 `create_filler()` was adapted to also initialize indention and

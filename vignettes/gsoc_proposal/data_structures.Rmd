@@ -9,9 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette illustrates how the core of `styler` currently[1] works,
-i.e. how rules are applied to a parse table and how limitations of this
-approach can be overcome with a refined approach.
+> This vignette is partly outdated since nested structure was implemented
+> completely.
+
+This vignette illustrates how the core of `styler` currently^[at commit `e6ddee0f510d3c9e3e22ef68586068fa5c6bc140`] works, i.e. how
+rules are applied to a parse table and how limitations of this approach can be 
+overcome with a refined approach.
 
 Status quo - the flat approach
 ------------------------------
