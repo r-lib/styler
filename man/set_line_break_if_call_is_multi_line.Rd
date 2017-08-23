@@ -16,7 +16,7 @@ remove_line_break_in_empty_fun_call(pd)
 \arguments{
 \item{pd}{A parse table.}
 
-\item{except}{A character vector with tokens before "'('" that do not}
+\item{except_token}{A character vector with tokens before "'('" that do not}
 }
 \description{
 Set line break for multi-line function calls
