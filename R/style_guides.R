@@ -78,6 +78,7 @@ tidyverse_style <- function(scope = "tokens",
         except_token = "COMMENT"
       ),
       set_line_break_before_closing_if_call_is_multi_line,
+      remove_line_break_in_empty_fun_call,
       add_line_break_after_pipe
     )
 

@@ -64,10 +64,6 @@ set_line_break_after_opening_if_call_is_multi_line <-
            except_token = NULL) {
   if (!is_function_call(pd)) return(pd)
   npd <- nrow(pd)
-  if (npd == 3) {
-    pd$lag_newlines[3] <- 0L
-    return(pd)
-  }
   is_multi_line <- any(pd$lag_newlines[seq2(3, npd - 1)] > 0)
   if (!is_multi_line) return(pd)
   exeption_pos <- which(pd$token %in% except_token)
@@ -81,12 +77,16 @@ set_line_break_after_opening_if_call_is_multi_line <-
 set_line_break_before_closing_if_call_is_multi_line <- function(pd) {
   if (!is_function_call(pd)) return(pd)
   npd <- nrow(pd)
-  if (npd == 3) {
-    pd$lag_newlines[3] <- 0L
-    return(pd)
-  }
   is_multi_line <- any(pd$lag_newlines[seq2(3, npd - 1)] > 0)
   if (!is_multi_line) return(pd)
   pd$lag_newlines[npd] <- 1L
+  pd
+}
+
+#' @rdname set_line_break_if_call_is_multi_line
+remove_line_break_in_empty_fun_call <- function(pd) {
+  if (is_function_call(pd) && nrow(pd) == 3) {
+    pd$lag_newlines[3] <- 0L
+  }
   pd
 }
