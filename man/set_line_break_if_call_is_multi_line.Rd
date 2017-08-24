@@ -7,7 +7,8 @@
 \alias{remove_line_break_in_empty_fun_call}
 \title{Set line break for multi-line function calls}
 \usage{
-set_line_break_after_opening_if_call_is_multi_line(pd, except_token = NULL)
+set_line_break_after_opening_if_call_is_multi_line(pd,
+  except_token_after = NULL, except_text_before = NULL)
 
 set_line_break_before_closing_if_call_is_multi_line(pd)
 
@@ -16,7 +17,11 @@ remove_line_break_in_empty_fun_call(pd)
 \arguments{
 \item{pd}{A parse table.}
 
-\item{except_token}{A character vector with tokens before "'('" that do not}
+\item{except_token_after}{A character vector with tokens after "'('" that do
+not cause a line break after "'('".}
+
+\item{except_text_before}{A character vector with texts before "'('" that do
+not cause a line break after "'('".}
 }
 \description{
 Set line break for multi-line function calls
