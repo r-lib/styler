@@ -17,10 +17,12 @@ NULL
 #' @param indent_by How many spaces of indention should be inserted after
 #'   operators such as '('.
 #' @param strict A logical value indicating whether a set of strict
-#'   or not so strict transformer functions should be returned. `strict = TRUE`
-#'   means force *one* space e.g. after "," and *one* line break e.g. after
-#'   "}". `strict = FALSE` means to set spaces and line breaks to one if there
-#'   is none and leave the code untouched otherwise. See 'Examples'.
+#'   or not so strict transformer functions should be returned. Compare the
+#'   functions returned with or without `strict = TRUE`. For example,
+#'   `strict = TRUE` means force *one* space e.g. after "," and *one* line break
+#'   e.g. after a closing curly brace. `strict = FALSE` means to set spaces and
+#'   line breaks to one if there is none and leave the code untouched otherwise.
+#'   See 'Examples'.
 #' @param start_comments_with_one_space Whether or not comments should start
 #'   with only one space (see [start_comments_with_space()]).
 #' @details The following options for `scope` are available.
@@ -39,9 +41,9 @@ NULL
 #' @family obtain transformers
 #' @family style_guides
 #' @examples
-#' style_text("call( 1)", style = tidyverse, scope = "spaces")
-#' style_text(c("ab <- 3", "a  <-3", strict = FALSE) # keeps alignment of "<-"
-#' style_text(c("ab <- 3", "a  <-3", strict = FALSE) # drops alignment of "<-"
+#' style_text("call( 1)", style = tidyverse_style, scope = "spaces")
+#' style_text(c("ab <- 3", "a  <-3"), strict = FALSE) # keeps alignment of "<-"
+#' style_text(c("ab <- 3", "a  <-3"), strict = TRUE) # drops alignment of "<-"
 #' @importFrom purrr partial
 #' @export
 tidyverse_style <- function(scope = "tokens",

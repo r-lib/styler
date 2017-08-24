@@ -50,7 +50,8 @@ prettify_local <- function(transformers) {
 
 #' Style a string
 #'
-#' Styles a character vector
+#' Styles a character vector. Each element of the character vector corresponds
+#' to one line of code.
 #' @param text A character vector with text to style.
 #' @inheritParams style_pkg
 #' @family stylers

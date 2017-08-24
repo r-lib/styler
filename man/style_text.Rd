@@ -18,7 +18,8 @@ further except to construct the argument \code{transformers}. See
 \item{transformers}{A set of transformer functions.}
 }
 \description{
-Styles a character vector
+Styles a character vector. Each element of the character vector corresponds
+to one line of code.
 }
 \examples{
 style_text("call( 1)")
