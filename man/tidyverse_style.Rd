@@ -12,9 +12,6 @@ tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2,
 invasive) to "token" (most invasive). See 'Details'. This argument is a
 vector of length one.}
 
-\item{strict}{A logical value indicating whether a set of strict
-or not so strict transformer functions should be returned.}
-
 \item{indent_by}{How many spaces of indention should be inserted after
 operators such as '('.}
 
@@ -22,7 +19,7 @@ operators such as '('.}
 with only one space (see \code{\link[=start_comments_with_space]{start_comments_with_space()}}).}
 }
 \description{
-The tidyverse style
+Style code according to the tidyverse style guide.
 }
 \details{
 The following options for \code{scope} are available.
@@ -39,4 +36,9 @@ tokens.
 
 As it becomes clear from this description, more invasive operations can only
 be performed if all less invasive operations are performed too.
+}
+\examples{
+style_text("call( 1)", style = tidyverse, scope = "spaces")
+style_text(c("ab <- 3", "a  <-3", strict = FALSE) # keeps alignment of "<-"
+style_text(c("ab <- 3", "a  <-3", strict = FALSE) # drops alignment of "<-"
 }

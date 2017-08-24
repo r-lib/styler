@@ -1,11 +1,26 @@
+#' Style guides
+#'
+#' Format code according to a style guide. Style guides are the input to the
+#' argument `style` in [style_file()] and friends.
+#' The available style guides are:
+#' * the tidyverse style guide (see [tidyverse_style()]).
+#' @name style_guides
+NULL
+
+
 #' The tidyverse style
+#'
+#' Style code according to the tidyverse style guide.
 #' @param scope The extent of manipulation. Can range from "none" (least
 #'   invasive) to "token" (most invasive). See 'Details'. This argument is a
 #'   vector of length one.
 #' @param indent_by How many spaces of indention should be inserted after
 #'   operators such as '('.
 #' @param strict A logical value indicating whether a set of strict
-#'   or not so strict transformer functions should be returned.
+#'   or not so strict transformer functions should be returned. `strict = TRUE`
+#'   means force *one* space e.g. after "," and *one* line break e.g. after
+#'   "}". `strict = FALSE` means to set spaces and line breaks to one if there
+#'   is none and leave the code untouched otherwise. See 'Examples'.
 #' @param start_comments_with_one_space Whether or not comments should start
 #'   with only one space (see [start_comments_with_space()]).
 #' @details The following options for `scope` are available.
@@ -22,6 +37,11 @@
 #' As it becomes clear from this description, more invasive operations can only
 #' be performed if all less invasive operations are performed too.
 #' @family obtain transformers
+#' @family style_guides
+#' @examples
+#' style_text("call( 1)", style = tidyverse, scope = "spaces")
+#' style_text(c("ab <- 3", "a  <-3", strict = FALSE) # keeps alignment of "<-"
+#' style_text(c("ab <- 3", "a  <-3", strict = FALSE) # drops alignment of "<-"
 #' @importFrom purrr partial
 #' @export
 tidyverse_style <- function(scope = "tokens",
