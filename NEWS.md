@@ -28,6 +28,7 @@
 - Complicated indentions based on arithmetic and special operators (#96).
 - indention interaction on with assignment operator and other operators (#97).
 
+
 ## styler 0.0-7 (2017-07-27)
 
 - curly braces don't move a line up if previous token is comment.
