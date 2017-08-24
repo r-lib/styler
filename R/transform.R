@@ -8,16 +8,14 @@
 #' @return A logical value that indicates whether or not any file was changed is
 #'   returned invisibly. If files were changed, the user is informed to
 #'   carefully inspect the changes via a message sent to the console.
-transform_files <- function(files, transformers, flat) {
-  transformer <- make_transformer(transformers, flat = flat)
-
+transform_files <- function(files, transformers) {
+  transformer <- make_transformer(transformers)
   changed <- utf8::transform_lines_enc(files, transformer)
-  if (any(changed)) {
+  if (any(changed, na.rm = TRUE)) {
     message("Please review the changes carefully!")
   }
   invisible(changed)
 }
-
 #' Closure to return a transformer function
 #'
 #' This function takes a list of transformer functions as input and
@@ -25,57 +23,13 @@ transform_files <- function(files, transformers, flat) {
 #'  that should be transformed.
 #' @param transformers A list of transformer functions that operate on flat
 #'   parse tables.
-#' @param flat Whether to do the styling with a flat approach or with a nested
-#'   approach.
-#' @family make transformers
-make_transformer <- function(transformers, flat) {
-  if (flat) {
-    make_transformer_flat(transformers = transformers)
-  } else {
-    make_transformer_nested(transformers = transformers)
-  }
-}
-
-#' A Closure to return transformer function
-#'
-#' Returns a closure that turns `text` into a flat parse table and applies
-#'   `transformers`  on it.
-#' @inheritParams make_transformer
-#' @family make transformers
-make_transformer_flat <- function(transformers) {
+make_transformer <- function(transformers) {
   function(text) {
-    text <- gsub(" +$", "", text)
-    text <- gsub("\t", "        ", text)
-
-    pd_flat <- compute_parse_data_flat_enhanced(text)
-
-    # May strip empty lines before EOF
-    text <- verify_roundtrip(pd_flat, text)
-
-    transformed_pd_flat <- Reduce(function(x, fun) fun(x),
-                                  transformers,
-                                  init = pd_flat)
-
-    new_text <- serialize_parse_data_flat(transformed_pd_flat)
-    new_text
-  }
-}
-
-#' Closure to return transformer function
-#'
-#' Returns a closure that turns `text` into a nested parse table and applies
-#'   `transformers`  on it.
-#' @inheritParams make_transformer
-#' @family make transformers
-make_transformer_nested <- function(transformers) {
-  function(text) {
-    if (is.null(transformers$space)) return(text)
     transformed_text <- parse_transform_serialize(text, transformers)
     transformed_text
 
   }
 }
-
 
 #' Parse, transform and serialize text
 #'
@@ -86,7 +40,11 @@ parse_transform_serialize <- function(text, transformers) {
   pd_nested <- compute_parse_data_nested(text)
   transformed_pd <- apply_transformers(pd_nested, transformers)
   # TODO verify_roundtrip
-  serialized_transformed_text <- serialize_parse_data_nested(transformed_pd)
+  flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
+    enrich_terminals(transformers$use_raw_indention) %>%
+    apply_ref_indention()
+
+  serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
   serialized_transformed_text
 }
 
@@ -104,16 +62,30 @@ parse_transform_serialize <- function(text, transformers) {
 #' @param transformers A list of *named* transformer functions
 #' @importFrom purrr flatten
 apply_transformers <- function(pd_nested, transformers) {
-  transformed_line_breaks <- pre_visit(pd_nested,
-                                       c(transformers$filler,
-                                         transformers$line_break))
+  transformed_line_breaks <- pre_visit(
+    pd_nested,
+    c(transformers$filler,
+    transformers$line_break)
+  )
 
-  transformed_updated_multi_line <- post_visit(transformed_line_breaks,
-                                               c(set_multi_line))
+  transformed_updated_multi_line <- post_visit(
+    transformed_line_breaks,
+    c(set_multi_line, update_newlines)
+  )
 
-  transformed_all <- pre_visit(transformed_updated_multi_line,
-                               c(transformers$space,
-                                 transformers$token,
-                                 transformers$eol))
-  transformed_all
+  transformed_all <- pre_visit(
+    transformed_updated_multi_line,
+    c(transformers$space, transformers$token, transformers$indention)
+  )
+
+  transformed_absolute_indent <- context_to_terminals(
+    transformed_all,
+    outer_lag_newlines = 0,
+    outer_indent = 0,
+    outer_spaces = 0,
+    outer_indention_refs = NA
+  )
+
+  transformed_absolute_indent
+
 }

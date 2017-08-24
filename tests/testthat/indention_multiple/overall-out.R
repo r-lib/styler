@@ -1,5 +1,5 @@
 #' this function does
-#' 
+#'
 #' @param x a parameter.
 #'    indented comments
 a <- function(x) {
@@ -14,17 +14,20 @@ a <- function(x) {
     }
   })
   # we like comments too
-  c(list(x + 2),
+  c(
+    list(x + 2),
     c(c(
       26 ^ 2, # FIXME ^ operator has to be surrounded by one space (or none?!), never multiple
       8,
       7
-  )))
+    ))
+  )
 
   call(
     1, 2,
     23 + Inf - 99, call(
       16
-  ))
+    )
+  )
 }
 # comments everywhere

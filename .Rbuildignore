@@ -7,3 +7,4 @@
 ^appveyor\.yml$
 ^tic\.R$
 ^\.travis\.yml$
+^docs$

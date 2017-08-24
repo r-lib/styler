@@ -131,33 +131,19 @@ transform_and_check <- function(in_item, out_item,
 #' @rdname test_transformer
 NULL
 
-#' @describeIn test_transformer Transformations for indention based on round
-#'   brackets.
-style_indent_round <- function(text) {
-  transformers <- list(
-    filler     = create_filler,
-    line_break = NULL,
-    space      = partial(indent_round, indent_by = 2),
-    token      = NULL,
-    eol        = strip_eol_spaces,
-    NULL
-  )
-  transformed_text <- parse_transform_serialize(text, transformers)
-  transformed_text
-}
-
-
-
 #' @describeIn test_transformer Nest and unnest `text` without applying any
 #'   transformations but remove EOL spaces and indention due to the way the
 #'   serialization is set up.
 style_empty <- function(text) {
   transformers <- list(
+    # transformer functions
     filler     = create_filler,
     line_break = NULL,
     space      = NULL,
     token      = NULL,
-    eol        = strip_eol_spaces,
+
+    # transformer options
+    use_raw_indention = FALSE,
     NULL
   )
   transformed_text <- parse_transform_serialize(text, transformers)
@@ -169,11 +155,14 @@ style_empty <- function(text) {
 style_indent_curly <- function(text) {
 
   transformers <- list(
+    # transformer functions
     filler     = create_filler,
     line_break = NULL,
     space      =  partial(indent_curly, indent_by = 2),
     token      = NULL,
-    eol        = strip_eol_spaces,
+
+    # transformer options
+    use_raw_indention = FALSE,
     NULL
   )
   transformed_text <- parse_transform_serialize(text, transformers)
@@ -185,31 +174,34 @@ style_indent_curly <- function(text) {
 #'   brackets and round brackets.
 style_indent_curly_round <- function(text) {
   transformers <- list(
+    # transformer functions
     filler     = create_filler,
     line_break = NULL,
     space      = c(partial(indent_curly, indent_by = 2),
                     partial(indent_round, indent_by = 2)),
     token      = NULL,
-    eol        = strip_eol_spaces,
+
+    # transformer options
+    use_raw_indention = FALSE,
     NULL
   )
 
-  text %>%
-    compute_parse_data_nested() %>%
-    apply_transformers(transformers) %>%
-    serialize_parse_data_nested()
-
+  transformed_text <- parse_transform_serialize(text, transformers)
+  transformed_text
 }
 
 #' @describeIn test_transformer Transformations for indention based on operators
 style_op <- function(text) {
 
   transformers <- list(
+    # transformer functions
     filler     = create_filler,
     line_break = NULL,
     space      = partial(indent_op, indent_by = 2),
     token      = NULL,
-    eol        = strip_eol_spaces,
+
+    # transformer options
+    use_raw_indention = FALSE,
     NULL
   )
 

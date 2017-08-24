@@ -1,14 +1,14 @@
 Package: styler
 Title: Non-invasive Pretty Printing of R code
-Version: 0.0-7
-Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
+Version: 0.0-8
+Authors@R: c(person("Kirill", "Müller", role = c("aut"), email = "krlmlr+r@mailbox.org"),
+  person("Lorenz", "Walthert", role = c("cre", "aut"), email = "lorenz.walthert@icloud.com"))
 Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
     dplyr,
-    magrittr,
     purrr,
-    readr,
+    rlang,
     rprojroot,
     tibble,
     tidyr,
@@ -28,18 +28,19 @@ Remotes:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Date: 2017-07-27
+Date: 2017-08-24
 BugReports: https://github.com/krlmlr/styler/issues
 URL: https://github.com/krlmlr/styler, http://krlmlr.github.io/styler
-Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "pkgapi::api_roclet"))
+Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
 Collate: 
-    'get_transformers.R'
     'modify_pd.R'
     'nested.R'
     'nested_to_tree.R'
     'parsed.R'
+    'reindent.R'
+    'token.R'
     'relevel.R'
     'rules-line_break.R'
     'rules-other.R'
@@ -47,6 +48,7 @@ Collate:
     'rules-spacing.R'
     'serialize.R'
     'serialized_tests.R'
+    'style_guides.R'
     'styler.R'
     'transform.R'
     'unindent.R'

@@ -14,6 +14,7 @@ after the regex "^#+'*".}
 }
 \description{
 Forces comments to start with a space, that is, after the regular expression
-"^#+'*", at least one space must follow. Multiple spaces may be legit for
-indention in some situations.
+"^#+'*", at least one space must follow if the comment is \emph{non-empty}, i.e
+there is not just spaces within the comment. Multiple spaces may be legit
+for indention in some situations.
 }

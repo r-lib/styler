@@ -4,15 +4,18 @@
 \alias{style_text}
 \title{Style a string}
 \usage{
-style_text(text, flat = FALSE, transformers = get_transformers(flat = flat))
+style_text(text, ..., style = tidyverse_style, transformers = style(...))
 }
 \arguments{
 \item{text}{A character vector with text to style.}
 
-\item{flat}{Whether to do the styling with a flat approach or with a nested
-approach.}
+\item{...}{Passed on to the \code{style} function.}
 
-\item{transformers}{A list with functions to be applied to the parsed data.}
+\item{style}{A function that creates a style guide to use, by default
+\code{\link[=tidyverse_style]{tidyverse_style()}} (without the parentheses). Will not be used further
+except to construct the argument \code{transformers}.}
+
+\item{transformers}{A set of transformer functions.}
 }
 \description{
 Styles a character vector

@@ -4,23 +4,15 @@
 \alias{needs_indention}
 \title{Check whether indention is needed}
 \usage{
-needs_indention(pd, opening)
+needs_indention(pd, potential_triggers)
 }
 \arguments{
 \item{pd}{A parse table.}
 
-\item{opening}{the index of the opening parse table. Since always computed
-before this function is called, it is included as an argument so it does
-not have to be recomputed.}
-}
-\value{
-returns \code{TRUE} if indention is needed, \code{FALSE} otherwise. Indention
-is needed if and only if:
-* the opening token is not \code{NA}.
-* if there is a multi-line token before the first line break.
-
-\code{TRUE} if indention is needed, \code{FALSE} otherwise.
+\item{potential_triggers}{A vector with indices of the potential trigger
+tokens in \code{pd}.}
 }
 \description{
-Check whether indention is needed
+Checks for each potential trigger token in \code{pd} whether it actually should
+cause indention.
 }

@@ -19,6 +19,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org}
+\strong{Maintainer}: Lorenz Walthert \email{lorenz.walthert@icloud.com}
+
+Authors:
+\itemize{
+  \item Kirill Müller \email{krlmlr+r@mailbox.org}
+}
 
 }

@@ -2,10 +2,9 @@
 
 ## Exported functions
 
-get_transformers(flat = FALSE, ...)
-get_transformers_flat(strict = TRUE, start_comments_with_one_space = FALSE)
-get_transformers_nested(scope = "tokens", strict = TRUE, indent_by = 2, start_comments_with_one_space = FALSE)
-style_dir(path = ".", flat = FALSE, recursive = TRUE, transformers = get_transformers(flat = flat))
-style_file(path, flat = FALSE, transformers = get_transformers(flat = flat))
-style_pkg(pkg = ".", flat = FALSE, transformers = get_transformers(flat = flat))
-style_text(text, flat = FALSE, transformers = get_transformers(flat = flat))
+create_style_guide(filler = create_filler, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE)
+style_dir(path = ".", ..., style = tidyverse_style, transformers = style(...), recursive = TRUE)
+style_file(path, ..., style = tidyverse_style, transformers = style(...))
+style_pkg(pkg = ".", ..., style = tidyverse_style, transformers = style(...))
+style_text(text, ..., style = tidyverse_style, transformers = style(...))
+tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2, start_comments_with_one_space = FALSE)

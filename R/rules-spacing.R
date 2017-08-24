@@ -1,18 +1,4 @@
-math_token <- c("'+'", "'-'", "'*'", "'/'", "'^'")
-
-#' @include nested.R
-special_token <- lookup_new_special()
-
-op_token <- c(
-  math_token,
-  special_token,
-  "AND", "AND2", "EQ", "EQ_ASSIGN",
-  "GE", "GT", "LE", "LEFT_ASSIGN", "LT", "NE", "OR", "OR2", "RIGHT_ASSIGN",
-  "EQ_SUB", "ELSE"
-)
-
-
-
+#' @include token.R
 add_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   op_before <- lead(op_after, default = FALSE)
@@ -23,6 +9,7 @@ add_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
+#' @include token.R
 set_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   if (!any(op_after)) return(pd_flat)
@@ -33,13 +20,14 @@ set_space_around_op <- function(pd_flat) {
 }
 
 # depreciated!
+#' @include token.R
 remove_space_after_unary_pm <- function(pd_flat) {
   op_pm <- c("'+'", "'-'")
   op_pm_unary_after <- c(op_pm, op_token, "'('", "','")
 
   pm_after <- pd_flat$token %in% op_pm
   pd_flat$spaces[pm_after & (pd_flat$newlines == 0L) &
-                   dplyr::lag(pd_flat$token) %in% op_pm_unary_after] <- 0L
+                   (dplyr::lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
   pd_flat
 }
 
@@ -105,13 +93,13 @@ add_space_before_brace <- function(pd_flat) {
 }
 
 add_space_after_comma <- function(pd_flat) {
-  comma_after <- pd_flat$token == "','"
+  comma_after <- (pd_flat$token == "','") & (pd_flat$newlines == 0L)
   pd_flat$spaces[comma_after] <- pmax(pd_flat$spaces[comma_after], 1L)
   pd_flat
 }
 
 set_space_after_comma <- function(pd_flat) {
-  comma_after <- pd_flat$token == "','"
+  comma_after <- (pd_flat$token == "','") & (pd_flat$newlines == 0L)
   pd_flat$spaces[comma_after] <- 1L
   pd_flat
 }
@@ -135,8 +123,12 @@ remove_space_before_comma <- function(pd_flat) {
 #'   parse table, so spacing cannot be set after the previous token.
 #' @param pd_flat A flat parse table.
 set_space_between_levels <- function(pd_flat) {
-  if (pd_flat$token[1] %in% c("FUNCTION", "FOR", "IF", "WHILE")) {
-    pd_flat$spaces[nrow(pd_flat) - 1] <- 1L
+  if (pd_flat$token[1] %in% c("FUNCTION", "IF", "WHILE")) {
+    index <- pd_flat$token == "')'" & pd_flat$newlines == 0L
+    pd_flat$spaces[index] <- 1L
+  } else if (pd_flat$token[1] == "FOR") {
+    index <- 2
+    pd_flat$spaces[index] <- 1L
   }
   pd_flat
 }
@@ -144,9 +136,9 @@ set_space_between_levels <- function(pd_flat) {
 #' Start comments with a space
 #'
 #' Forces comments to start with a space, that is, after the regular expression
-#'   "^#+'*", at least one space must follow. Multiple spaces may be legit for
-#'   indention in some situations.
-#'
+#'   "^#+'*", at least one space must follow if the comment is *non-empty*, i.e
+#'   there is not just spaces within the comment. Multiple spaces may be legit
+#'   for indention in some situations.
 #' @param pd A parse table.
 #' @param force_one Wheter or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".
@@ -162,17 +154,21 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
   comments <-  extract(comments, text,
                        c("prefix", "space_after_prefix", "text"),
                        regex = "^(#+'*)( *)(.*)$")
-  comments$space_after_prefix <- nchar(comments$space_after_prefix)
+  comments$space_after_prefix <- nchar(
+    comments$space_after_prefix, type = "width"
+  )
   comments$space_after_prefix <- set_spaces(
-    comments$space_after_prefix,
+    spaces_after_prefix = comments$space_after_prefix,
     force_one
   )
 
-  comments$text <- paste0(
-    comments$prefix,
-    map_chr(comments$space_after_prefix, rep_char, char = " "),
-    comments$text
-  )
+  comments$text <-
+    paste0(
+      comments$prefix,
+      map_chr(comments$space_after_prefix, rep_char, char = " "),
+      comments$text
+    ) %>%
+    trimws("right")
   comments$short <- substr(comments$text, 1, 5)
 
   comments[, setdiff(names(comments), c("space_after_prefix", "prefix"))] %>%
@@ -182,10 +178,47 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
 
 
 set_space_before_comments <- function(pd_flat) {
-  comment_after <- pd_flat$token == "COMMENT"
+  comment_after <- (pd_flat$token == "COMMENT") & (pd_flat$lag_newlines == 0L)
   if (!any(comment_after)) return(pd_flat)
   comment_before <- lead(comment_after, default = FALSE)
   pd_flat$spaces[comment_before & (pd_flat$newlines == 0L)] <- 1L
   pd_flat
+
+}
+
+remove_space_after_excl <- function(pd_flat) {
+  excl <- (pd_flat$token == "'!'") & (pd_flat$newlines == 0L)
+  pd_flat$spaces[excl] <- 0L
+  pd_flat
+}
+
+
+remove_space_before_dollar <- function(pd_flat) {
+  dollar_after <- (pd_flat$token == "'$'") & (pd_flat$lag_newlines == 0L)
+  dollar_before <- lead(dollar_after, default = FALSE)
+  pd_flat$spaces[dollar_before] <- 0L
+  pd_flat
+}
+
+remove_space_around_colons <- function(pd_flat) {
+  one_two_or_three_col_after <-
+    pd_flat$token %in% c("':'", "NS_GET_INT", "NS_GET")
+
+  one_two_or_three_col_before <-
+    lead(one_two_or_three_col_after, default = FALSE)
+
+  col_around <-
+    one_two_or_three_col_before | one_two_or_three_col_after
+
+  pd_flat$spaces[col_around & (pd_flat$newlines == 0L)] <- 0L
+  pd_flat
+}
+
+#' Set space between EQ_SUB and "','"
+#' @param pd A parse table.
+set_space_between_eq_sub_and_comma <- function(pd) {
+  op_before <- which(pd$token == "EQ_SUB" & lead(pd$token == "','"))
+  pd$spaces[op_before] <- 1L
+  pd
 
 }
