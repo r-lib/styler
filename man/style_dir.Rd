@@ -12,8 +12,9 @@ style_dir(path = ".", ..., style = tidyverse_style,
 
 \item{...}{Passed on to the \code{style} function.}
 
-\item{style}{The unquoted name of a style guide to use. Will not be used
-further except to construct the argument \code{transformers}.}
+\item{style}{A function that creates a style guide to use, by default
+\code{\link[=tidyverse_style]{tidyverse_style()}} (without the parentheses). Will not be used further
+except to construct the argument \code{transformers}.}
 
 \item{transformers}{A set of transformer functions.}
 

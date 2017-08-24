@@ -12,8 +12,9 @@ NULL
 #'
 #' @param pkg Path to a (subdirectory of an) R package.
 #' @param ... Passed on to the `style` function.
-#' @param style The unquoted name of a style guide to use. Will not be used
-#'   further except to construct the argument `transformers`.
+#' @param style A function that creates a style guide to use, by default
+#'   [tidyverse_style()] (without the parentheses). Will not be used further
+#'   except to construct the argument `transformers`.
 #' @param transformers A set of transformer functions.
 #' @export
 #' @family stylers
