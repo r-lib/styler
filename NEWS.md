@@ -1,3 +1,33 @@
+## styler 0.0-8 (2017-08-24)
+
+- Vignette on customizing styler (#145).
+- No line break after `switch()` and friends (#152).
+- Remove flat relicts completely (#151).
+- Don't reindent function calls and break line correctly for multi-line calls (#149).
+- Set space between "=" and "," (#150).
+- Make R CMD Check perfect (#148).
+- Adding tests for exception handling with invalid parse data (#139).
+- Fix indention by checking for all potential triggers (#142).
+- Fix un-indention (#135).
+- Support wide characters (#130).
+- No spaces around :, :: and :::.
+- Redesigning the API (#123).
+- Solve eq_sub indention in general (#125).
+- Minor refactorings.
+- Re-indent token-dependent (#119).
+- Supporting more indention patterns.
+- Allow raw indention.
+- Definitively fixing eol issue with comments.
+- Infrastructure.
+- Flattening out the parse table.
+- New rule: no space after ! -> !!! for tidyeval.
+- Fix spacing around '{'.
+- Don't drop tokens! Fixes #101.
+- EOL spaces in empty comments (and in general) (#98).
+- mal-indention in conditional statement due to wrong specification of indent_without_paren) (#95).
+- Complicated indentions based on arithmetic and special operators (#96).
+- indention interaction on with assignment operator and other operators (#97).
+
 ## styler 0.0-7 (2017-07-27)
 
 - curly braces don't move a line up if previous token is comment.
