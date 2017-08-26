@@ -194,7 +194,9 @@ remove_space_after_excl <- function(pd_flat) {
 
 set_space_after_bang_bang <- function(pd_flat) {
   last_bang <- (pd_flat$token == "'!'") &
-    (pd_flat$token_after != "'!'") & (pd_flat$newlines == 0L)
+    (pd_flat$token_after != "'!'") &
+    (pd_flat$newlines == 0L) &
+    (pd_flat$token_before == "'!'")
 
   pd_flat$spaces[last_bang] <- 1L
   pd_flat
