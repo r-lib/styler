@@ -12,7 +12,7 @@ combine_children(child, internal_child)
 \item{internal_child}{A parse table or \code{NULL}.}
 }
 \description{
-binds two parse tables together and arranges them so that the tokens are in
+Binds two parse tables together and arranges them so that the tokens are in
 the correct order.
 }
 \details{

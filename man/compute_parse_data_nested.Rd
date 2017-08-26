@@ -13,31 +13,6 @@ compute_parse_data_nested(text)
 A nested parse table. Apart from the columns provided by
 \code{utils::getParseData()}, a column "short" with the first five characters of
 "text" is added, the nested subtibbles are in column "child".
-TODO:
-\itemize{
-\item Implement enhance_parse_data_nested()
-\itemize{
-\item Walk tree defined by \code{child}, compute whitespace information
-\item Store indention depth in a separate column, unaffected by
-inter-token space
-}
-\item Implement compute_parse_data_nested_with_ws() as
-compute_parse_data_nested() + enhance_parse_data_nested()
-\item Implement serialization of nested parse data
-\item Use compute_parse_data_nested_with_ws() instead of
-compute_parse_data_flat_enhanced()
-\item Perform all transformations on hierarchical structure
-\itemize{
-\item Compute text for a sub-element
-}
-\item Compute indentation
-\itemize{
-\item Braces
-\item Function calls
-\item Function definitions
-}
-\item Remove \code{includeText = TRUE}
-}
 }
 \description{
 Parses \code{text} to a flat parse table and subsequently changes its

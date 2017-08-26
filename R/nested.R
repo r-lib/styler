@@ -7,23 +7,6 @@
 #' @return A nested parse table. Apart from the columns provided by
 #'   `utils::getParseData()`, a column "short" with the first five characters of
 #'   "text" is added, the nested subtibbles are in column "child".
-#' TODO:
-#' - Implement enhance_parse_data_nested()
-#'     - Walk tree defined by `child`, compute whitespace information
-#'     - Store indention depth in a separate column, unaffected by
-#'       inter-token space
-#' - Implement compute_parse_data_nested_with_ws() as
-#'   compute_parse_data_nested() + enhance_parse_data_nested()
-#' - Implement serialization of nested parse data
-#' - Use compute_parse_data_nested_with_ws() instead of
-#'   compute_parse_data_flat_enhanced()
-#' - Perform all transformations on hierarchical structure
-#'     - Compute text for a sub-element
-#' - Compute indentation
-#'     - Braces
-#'     - Function calls
-#'     - Function definitions
-#' - Remove `includeText = TRUE`
 compute_parse_data_nested <- function(text) {
   parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
@@ -150,7 +133,7 @@ nest_parse_data <- function(pd_flat) {
 
 #' Combine child and internal child
 #'
-#' binds two parse tables together and arranges them so that the tokens are in
+#' Binds two parse tables together and arranges them so that the tokens are in
 #'   the correct order.
 #' @param child A parse table or `NULL`.
 #' @param internal_child A parse table or `NULL`.
