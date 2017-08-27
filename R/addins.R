@@ -50,7 +50,7 @@ style_region <- function(text, context) {
   lines_to_style <- text[ind_to_style]
   last <- length(lines_to_style)
   lines_to_style[1] <- substring(lines_to_style[1], context$start[2])
-  start_if_on_same_line <- ifelse(context$start[1] == context$end[1], context$start[2] - 1, 0)
+  start_if_on_same_line <- ifelse(context$start[1] == context$end[1], context$start[2], 0)
   lines_to_style[last] <- substring(
     lines_to_style[last],
     1,
