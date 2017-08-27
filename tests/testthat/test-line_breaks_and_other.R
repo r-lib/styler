@@ -26,3 +26,8 @@ test_that("adding and removing line breaks", {
                   transformer = style_text), NA)
 })
 
+test_that("no line break after %>% if next token is comment", {
+  expect_warning(test_collection("line_breaks_and_other", "pipe_and",
+                                 transformer = style_text), NA)
+})
+
