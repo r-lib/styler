@@ -10,12 +10,48 @@
 #'   carefully inspect the changes via a message sent to the console.
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
-  changed <- utf8::transform_lines_enc(files, transformer)
-  if (any(changed, na.rm = TRUE)) {
+  max_char <- min(max(nchar(files), 0), 80)
+  if (length(files) > 0) message("Styling files:")
+  changed <- map_lgl(
+    files, transform_file, fun = transformer, max_char_path = max_char
+  )
+  if (!any(changed, na.rm = TRUE)) {
+    message("No files changed.")
+  } else {
+    message("* File changed.")
     message("Please review the changes carefully!")
   }
   invisible(changed)
 }
+
+#' Transform a file an give customized message
+#'
+#' Wraps `utf8::transform_lines_enc()` and gives customized messages.
+#' @inheritParams utf8::transform_lines_enc
+#' @param ... Further arguments passed to `utf8::transform_lines_enc()`.
+transform_file <- function(path,
+                           fun,
+                           verbose = FALSE,
+                           max_char_path,
+                           message_before = "",
+                           message_after = " [DONE]",
+                           message_after_if_changed = " *",
+                           ...) {
+  char_after_path <- nchar(message_before) + nchar(path) + 1
+  max_char_after_message_path <- nchar(message_before) + max_char_path + 1
+  n_spaces_before_message_after <-
+    max_char_after_message_path - char_after_path
+  message(message_before, path, ".", appendLF = FALSE)
+  changed <- utf8::transform_lines_enc(path, fun = fun, verbose = verbose, ...)
+
+  message(
+    rep(" ", max(0, n_spaces_before_message_after)),
+    message_after,
+    if (changed) message_after_if_changed
+  )
+  invisible(changed)
+}
+
 #' Closure to return a transformer function
 #'
 #' This function takes a list of transformer functions as input and
