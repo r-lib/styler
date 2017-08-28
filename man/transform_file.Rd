@@ -4,7 +4,9 @@
 \alias{transform_file}
 \title{Transform a file an give customized message}
 \usage{
-transform_file(path, fun, verbose = FALSE, ...)
+transform_file(path, fun, verbose = FALSE, max_char_path,
+  message_before = "", message_after = " [DONE]",
+  message_after_if_changed = " *", ...)
 }
 \arguments{
 \item{path}{A vector of file paths.}
@@ -13,6 +15,16 @@ transform_file(path, fun, verbose = FALSE, ...)
 
 \item{verbose}{Should the function show a message with a list of changed
 files?}
+
+\item{max_char_path}{The number of characters of the longest path. Determines
+the indention level of \code{message_after}.}
+
+\item{message_before}{The message to print before the path.}
+
+\item{message_after}{The message to print after the path.}
+
+\item{message_after_if_changed}{The message to print after \code{message_after} if
+any file was transformed.}
 
 \item{...}{Further arguments passed to \code{utf8::transform_lines_enc()}.}
 }

@@ -27,6 +27,12 @@ transform_files <- function(files, transformers) {
 #' Transform a file an give customized message
 #'
 #' Wraps `utf8::transform_lines_enc()` and gives customized messages.
+#' @param max_char_path The number of characters of the longest path. Determines
+#'   the indention level of `message_after`.
+#' @param message_before The message to print before the path.
+#' @param message_after The message to print after the path.
+#' @param message_after_if_changed The message to print after `message_after` if
+#'   any file was transformed.
 #' @inheritParams utf8::transform_lines_enc
 #' @param ... Further arguments passed to `utf8::transform_lines_enc()`.
 transform_file <- function(path,
@@ -47,7 +53,7 @@ transform_file <- function(path,
   message(
     rep(" ", max(0, n_spaces_before_message_after)),
     message_after,
-    if (changed) message_after_if_changed
+    if (any(changed, na.rm = TRUE)) message_after_if_changed
   )
   invisible(changed)
 }
