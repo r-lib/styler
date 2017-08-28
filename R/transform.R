@@ -11,7 +11,10 @@
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
   max_char <- min(max(nchar(files), 0), 80)
-  if (length(files) > 0) message("Styling files:")
+  if (length(files) > 0) {
+    message("Styling ", length(files), " files:")
+  }
+
   changed <- map_lgl(
     files, transform_file, fun = transformer, max_char_path = max_char
   )
