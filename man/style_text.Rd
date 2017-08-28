@@ -9,13 +9,16 @@ style_text(text, ..., style = tidyverse_style, transformers = style(...))
 \arguments{
 \item{text}{A character vector with text to style.}
 
-\item{...}{Passed on to the \code{style} function.}
+\item{...}{Arguments passed on to the \code{style} function.}
 
-\item{style}{The unquoted name of a style guide to use. Will not be used
+\item{style}{A function that creates a style guide to use, by default
+\code{\link[=tidyverse_style]{tidyverse_style()}} (without the parentheses). Not used
 further except to construct the argument \code{transformers}. See
 \code{\link[=style_guides]{style_guides()}} for details.}
 
-\item{transformers}{A set of transformer functions.}
+\item{transformers}{A set of transformer functions. This argument is most
+conveniently constructed via the \code{style} argument and \code{...}. See
+'Examples'.}
 }
 \description{
 Styles a character vector. Each element of the character vector corresponds
@@ -27,6 +30,9 @@ style_text("1    + 1", strict = FALSE)
 style_text("a\%>\%b", scope = "spaces")
 style_text("a\%>\%b; a", scope = "line_breaks")
 style_text("a\%>\%b; a", scope = "tokens")
+# the following is identical but the former is more convenient:
+style_text("a<-3++1", style = tidyverse_style, strict = TRUE)
+style_text("a<-3++1", transformers = tidyverse_style(strict = TRUE))
 }
 \seealso{
 Other stylers: \code{\link{style_dir}},
