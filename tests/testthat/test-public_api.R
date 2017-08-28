@@ -16,4 +16,8 @@ test_that("styler can style file", {
   )
 })
 
-# style_active_file() must be tested manually.
+test_that("styler does not return error when there is no file to style", {
+  expect_error(style_dir(paste0(base, "/xyzemptydir"), strict = FALSE), NA)
+})
+
+
