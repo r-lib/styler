@@ -2,8 +2,8 @@
 #'
 #' Helper function for RStudio Addin.
 style_active_file <- function() {
-  file <- rstudioapi::getActiveDocumentContext()$path
-  style_file(file, style = tidyverse_style)
+  context <- find_active_context()
+  style_file(context$path, style = tidyverse_style)
 }
 
 
@@ -14,6 +14,7 @@ style_active_file <- function() {
 #' @importFrom rlang seq2
 style_active_region <- function() {
   context <- find_active_context()
+  if (all(context$start == context$end)) stop("No region selected")
   all_text <- utf8::read_lines_enc(context$path)
   styled_expr <- style_region(all_text, context)
   neighbourhood <- extract_neighbourhood(all_text, context)
@@ -28,16 +29,19 @@ style_active_region <- function() {
 #' [rstudioapi::getActiveDocumentContext()].
 #'
 find_active_context <- function() {
-  context <- rstudioapi::getActiveDocumentContext()
+  context <- get_rstudio_context()
   path <- context$path
   start <- context$selection[[1]]$range$start
   end <- context$selection[[1]]$range$end
-  if (all(start == end)) return()
-  if (end[2] == 1) {
+  if (end[2] == 1 & !all(start == end)) {
     end[1] <- end[1] - 1
     end[2] <- 1000000L # because of range constraint in substr()
   }
   list(start = start, end = end, path = path)
+}
+
+get_rstudio_context <- function() {
+  rstudioapi::getActiveDocumentContext()
 }
 
 #' Style a region of text given context
