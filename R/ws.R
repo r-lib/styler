@@ -19,6 +19,10 @@ NULL
 #' @param transformers A set of transformer functions. This argument is most
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
+#' @section Warning:
+#'   This function overwrites files (if styling results in a change of the
+#'   code to be formatted). It is strongly suggested to only style files
+#'   that are under version control or creating a backup copy.
 #' @family stylers
 #' @examples
 #' \dontrun{
@@ -87,6 +91,7 @@ style_text <- function(text,
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
 #' @inheritParams style_pkg
+#' @inheritSection style_pkg Warning
 #' @family stylers
 #' @export
 style_dir <- function(path = ".",
@@ -117,6 +122,7 @@ prettify_any <- function(transformers, recursive) {
 #'   Carefully examine the results after running this function!
 #' @param path A path to a file to style.
 #' @inheritParams style_pkg
+#' @inheritSection style_pkg Warning
 #' @examples
 #' \dontrun{
 #' # the following is identical but the former is more convenient:

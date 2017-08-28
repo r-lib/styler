@@ -24,6 +24,13 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 Performs various substitutions in the \code{.R} file specified.
 Carefully examine the results after running this function!
 }
+\section{Warning}{
+
+This function overwrites files (if styling results in a change of the
+code to be formatted). It is strongly suggested to only style files
+that are under version control or creating a backup copy.
+}
+
 \examples{
 \dontrun{
 # the following is identical but the former is more convenient:

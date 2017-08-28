@@ -28,6 +28,13 @@ of \code{path} should be styled as well.}
 Performs various substitutions in all \code{.R} files in a directory.
 Carefully examine the results after running this function!
 }
+\section{Warning}{
+
+This function overwrites files (if styling results in a change of the
+code to be formatted). It is strongly suggested to only style files
+that are under version control or creating a backup copy.
+}
+
 \seealso{
 Other stylers: \code{\link{style_file}},
   \code{\link{style_pkg}}, \code{\link{style_text}}

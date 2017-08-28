@@ -26,6 +26,13 @@ Performs various substitutions in all \code{.R} files in a package
 (code and tests).
 Carefully examine the results after running this function!
 }
+\section{Warning}{
+
+This function overwrites files (if styling results in a change of the
+code to be formatted). It is strongly suggested to only style files
+that are under version control or creating a backup copy.
+}
+
 \examples{
 \dontrun{
 # the following is identical but the former is more convenient:
