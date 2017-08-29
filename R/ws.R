@@ -11,15 +11,24 @@ NULL
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package.
-#' @param ... Passed on to the `style` function.
-#' @param style The unquoted name of a style guide to use. Will not be used
+#' @param ... Arguments passed on to the `style` function.
+#' @param style A function that creates a style guide to use, by default
+#'   [tidyverse_style()] (without the parentheses). Not used
 #'   further except to construct the argument `transformers`. See
 #'   [style_guides()] for details.
-#' @param transformers A set of transformer functions.
+#' @param transformers A set of transformer functions. This argument is most
+#'   conveniently constructed via the `style` argument and `...`. See
+#'   'Examples'.
+#' @section Warning:
+#'   This function overwrites files (if styling results in a change of the
+#'   code to be formatted). It is strongly suggested to only style files
+#'   that are under version control or creating a backup copy.
 #' @family stylers
 #' @examples
 #' \dontrun{
-#' style_pkg()
+#' # the following is identical but the former is more convenient:
+#' style_pkg(style = tidyverse_style, strict = TRUE)
+#' style_pkg(transformers = tidyverse_style(strict = TRUE))
 #' }
 #' @export
 #' @family stylers
@@ -61,6 +70,9 @@ prettify_local <- function(transformers) {
 #' style_text("a%>%b", scope = "spaces")
 #' style_text("a%>%b; a", scope = "line_breaks")
 #' style_text("a%>%b; a", scope = "tokens")
+#' # the following is identical but the former is more convenient:
+#' style_text("a<-3++1", style = tidyverse_style, strict = TRUE)
+#' style_text("a<-3++1", transformers = tidyverse_style(strict = TRUE))
 #' @export
 style_text <- function(text,
                        ...,
@@ -79,6 +91,7 @@ style_text <- function(text,
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
 #' @inheritParams style_pkg
+#' @inheritSection style_pkg Warning
 #' @family stylers
 #' @export
 style_dir <- function(path = ".",
@@ -109,6 +122,13 @@ prettify_any <- function(transformers, recursive) {
 #'   Carefully examine the results after running this function!
 #' @param path A path to a file to style.
 #' @inheritParams style_pkg
+#' @inheritSection style_pkg Warning
+#' @examples
+#' \dontrun{
+#' # the following is identical but the former is more convenient:
+#' style_file("file.R", style = tidyverse_style, strict = TRUE)
+#' style_text("file.R", transformers = tidyverse_style(strict = TRUE))
+#' }
 #' @family stylers
 #' @export
 style_file <- function(path,

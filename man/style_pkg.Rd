@@ -10,22 +10,34 @@ style_pkg(pkg = ".", ..., style = tidyverse_style,
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package.}
 
-\item{...}{Passed on to the \code{style} function.}
+\item{...}{Arguments passed on to the \code{style} function.}
 
-\item{style}{The unquoted name of a style guide to use. Will not be used
+\item{style}{A function that creates a style guide to use, by default
+\code{\link[=tidyverse_style]{tidyverse_style()}} (without the parentheses). Not used
 further except to construct the argument \code{transformers}. See
 \code{\link[=style_guides]{style_guides()}} for details.}
 
-\item{transformers}{A set of transformer functions.}
+\item{transformers}{A set of transformer functions. This argument is most
+conveniently constructed via the \code{style} argument and \code{...}. See
+'Examples'.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package
 (code and tests).
 Carefully examine the results after running this function!
 }
+\section{Warning}{
+
+This function overwrites files (if styling results in a change of the
+code to be formatted). It is strongly suggested to only style files
+that are under version control or creating a backup copy.
+}
+
 \examples{
 \dontrun{
-style_pkg()
+# the following is identical but the former is more convenient:
+style_pkg(style = tidyverse_style, strict = TRUE)
+style_pkg(transformers = tidyverse_style(strict = TRUE))
 }
 }
 \seealso{

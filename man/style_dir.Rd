@@ -10,13 +10,16 @@ style_dir(path = ".", ..., style = tidyverse_style,
 \arguments{
 \item{path}{Path to a directory with files to transform.}
 
-\item{...}{Passed on to the \code{style} function.}
+\item{...}{Arguments passed on to the \code{style} function.}
 
-\item{style}{The unquoted name of a style guide to use. Will not be used
+\item{style}{A function that creates a style guide to use, by default
+\code{\link[=tidyverse_style]{tidyverse_style()}} (without the parentheses). Not used
 further except to construct the argument \code{transformers}. See
 \code{\link[=style_guides]{style_guides()}} for details.}
 
-\item{transformers}{A set of transformer functions.}
+\item{transformers}{A set of transformer functions. This argument is most
+conveniently constructed via the \code{style} argument and \code{...}. See
+'Examples'.}
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 of \code{path} should be styled as well.}
@@ -25,6 +28,13 @@ of \code{path} should be styled as well.}
 Performs various substitutions in all \code{.R} files in a directory.
 Carefully examine the results after running this function!
 }
+\section{Warning}{
+
+This function overwrites files (if styling results in a change of the
+code to be formatted). It is strongly suggested to only style files
+that are under version control or creating a backup copy.
+}
+
 \seealso{
 Other stylers: \code{\link{style_file}},
   \code{\link{style_pkg}}, \code{\link{style_text}}

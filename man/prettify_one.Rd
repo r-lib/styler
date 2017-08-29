@@ -7,7 +7,9 @@
 prettify_one(transformers, path)
 }
 \arguments{
-\item{transformers}{A set of transformer functions.}
+\item{transformers}{A set of transformer functions. This argument is most
+conveniently constructed via the \code{style} argument and \code{...}. See
+'Examples'.}
 
 \item{path}{The path to a file that should be styled.}
 }
