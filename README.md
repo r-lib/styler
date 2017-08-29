@@ -3,7 +3,7 @@
 styler
 ======
 
-[![Build Status](https://travis-ci.org/krlmlr/styler.svg?branch=master)](https://travis-ci.org/krlmlr/styler) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/krlmlr/styler?branch=master&svg=true)](https://ci.appveyor.com/project/krlmlr/styler) [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip) [![codecov](https://codecov.io/gh/krlmlr/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/krlmlr/styler)
+[![Build Status](https://travis-ci.org/krlmlr/styler.svg?branch=master)](https://travis-ci.org/krlmlr/styler) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/krlmlr/styler?branch=master&svg=true)](https://ci.appveyor.com/project/krlmlr/styler) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![codecov](https://codecov.io/gh/krlmlr/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/krlmlr/styler)
 
 The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to the [tidyverse](https://github.com/tidyverse/style) formatting rules. Support for custom style guides is planned.
 
