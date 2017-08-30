@@ -53,5 +53,6 @@ Collate:
     'transform.R'
     'unindent.R'
     'utils.R'
+    'vertical.R'
     'visit.R'
     'ws.R'
