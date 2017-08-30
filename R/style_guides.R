@@ -141,13 +141,13 @@ tidyverse_style <- function(scope = "tokens",
 #' like [style_text()] and friends.
 #' @param filler A filler function that initializes various variables on each
 #'   level of nesting.
-#' @param line_break A list of transformer functiosn that manipulate line_break
+#' @param line_break A list of transformer functions that manipulate line_break
 #'   information.
 #' @param space A list of transformer functions that manipulate spacing
 #'   information.
 #' @param token A list of transformer functions that manipulate token text.
 #' @param indention A list of transformer functions that manipulate indention.
-#' @param use_raw_indention Boolean indicating wheter or not the raw indention
+#' @param use_raw_indention Boolean indicating whether or not the raw indention
 #'   should be used.
 #' @export
 create_style_guide <- function(filler = create_filler,
@@ -174,7 +174,7 @@ create_style_guide <- function(filler = create_filler,
 #'   `x` does not match the predefined levels in `levels.`
 #' @param x A character vector.
 #' @param levels A vector with levels.
-#' @param name The name of the character vector to be dispayed if the
+#' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
 character_to_ordered <- function(x, levels, name = substitute(x)) {
   if (!all((x %in% levels))) {

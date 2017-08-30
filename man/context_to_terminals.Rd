@@ -25,7 +25,7 @@ An updated parse table.
 \description{
 Implements a very specific pre-visiting scheme, namely to propagate
 indention, spaces and lag_newlines to inner token to terminals. This means
-that information regarding indention, linebreaks and spaces (which is
+that information regarding indention, line breaks and spaces (which is
 relative in \code{pd_nested}) will be converted into absolute.
 }
 \seealso{

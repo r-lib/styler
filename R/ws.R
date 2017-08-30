@@ -20,9 +20,9 @@ NULL
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
 #' @section Warning:
-#'   This function overwrites files (if styling results in a change of the
-#'   code to be formatted). It is strongly suggested to only style files
-#'   that are under version control or creating a backup copy.
+#' This function overwrites files (if styling results in a change of the
+#' code to be formatted). It is strongly suggested to only style files
+#' that are under version control or to create a backup copy.
 #' @family stylers
 #' @examples
 #' \dontrun{

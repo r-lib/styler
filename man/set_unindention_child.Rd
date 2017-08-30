@@ -2,7 +2,7 @@
 % Please edit documentation in R/unindent.R
 \name{set_unindention_child}
 \alias{set_unindention_child}
-\title{Unindent a chlid if necessary}
+\title{Unindent a child if necessary}
 \usage{
 set_unindention_child(pd, token = "')'", unindent_by)
 }

@@ -140,7 +140,7 @@ set_space_between_levels <- function(pd_flat) {
 #'   there is not just spaces within the comment. Multiple spaces may be legit
 #'   for indention in some situations.
 #' @param pd A parse table.
-#' @param force_one Wheter or not to force one space or allow multiple spaces
+#' @param force_one Whether or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".
 #' @importFrom purrr map_chr
 start_comments_with_space <- function(pd, force_one = FALSE) {

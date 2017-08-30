@@ -4,7 +4,7 @@
 #'   [compute_parse_data_nested()]. For example, the token of arithmetic
 #'   operations 1 + 1 + 1 should all be on the same level of nesting since
 #'   the indention is the same for all but the first two terminals. Setting the
-#'   indention correcly is easier to achieve if they are put on the same level
+#'   indention correctly is easier to achieve if they are put on the same level
 #'   of nesting.
 #' @param pd_nested A nested parse table to partially flatten.
 flatten_operators <- function(pd_nested) {
@@ -35,7 +35,7 @@ flatten_operators_one <- function(pd_nested) {
 #' either flattening from left or from right. If one of `token` is present in
 #' `pd_nested`  and one of `child_token` is present in one of the children next
 #' to `token` in `pd_nested`, the nested parse table is flattened. Otherwise, it
-#' is returned unodified.
+#' is returned unmodified.
 #' @param pd_nested A nested parse table.
 #' @param token A character vector with tokens of which at least one has to
 #'   occur in `pd_nested` in order to flatten it.

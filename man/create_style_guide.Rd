@@ -12,7 +12,7 @@ create_style_guide(filler = create_filler, line_break = NULL,
 \item{filler}{A filler function that initializes various variables on each
 level of nesting.}
 
-\item{line_break}{A list of transformer functiosn that manipulate line_break
+\item{line_break}{A list of transformer functions that manipulate line_break
 information.}
 
 \item{space}{A list of transformer functions that manipulate spacing
@@ -22,7 +22,7 @@ information.}
 
 \item{indention}{A list of transformer functions that manipulate indention.}
 
-\item{use_raw_indention}{Boolean indicating wheter or not the raw indention
+\item{use_raw_indention}{Boolean indicating whether or not the raw indention
 should be used.}
 }
 \description{

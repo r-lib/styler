@@ -36,12 +36,12 @@ Update indention information of parse data
 }
 \section{Functions}{
 \itemize{
-\item \code{indent_round}: Inserts indetion based on round brackets.
+\item \code{indent_round}: Inserts indention based on round brackets.
 
-\item \code{indent_op}: Indents operatos
+\item \code{indent_op}: Indents operators
 
-\item \code{indent_eq_sub}: Upates indention for token EQ_SUB. Only differs
-from ident_op in the sense that the last token on the talbe where EQ_SUB
+\item \code{indent_eq_sub}: Updates indention for token EQ_SUB. Only differs
+from indent_op in the sense that the last token on the table where EQ_SUB
 occurs is not indented (see\code{\link[=compute_indent_indices]{compute_indent_indices()}})
 
 \item \code{indent_assign}: Same as indent_op, but only indents one token

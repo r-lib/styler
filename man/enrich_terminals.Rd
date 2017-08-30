@@ -10,7 +10,7 @@ enrich_terminals(flattened_pd, use_raw_indention = FALSE)
 \item{flattened_pd}{A nested parse table that was turned into a flat parse
 table using \code{\link[=extract_terminals]{extract_terminals()}}.}
 
-\item{use_raw_indention}{Boolean indicating wheter or not the raw indention
+\item{use_raw_indention}{Boolean indicating whether or not the raw indention
 should be used.}
 }
 \description{

@@ -72,7 +72,7 @@ update_indention_ref_fun_dec <- function(pd_nested) {
 NULL
 
 #' @describeIn pd_is Checks whether `pd` contains an expression wrapped in
-#'   curley brackets.
+#'   curly brackets.
 is_curly_expr <- function(pd) {
   if (is.null(pd)) return(FALSE)
   pd$token[1] == "'{'"
@@ -110,7 +110,7 @@ apply_ref_indention <- function(flattened_pd) {
 #' tokens on a line and updating the column `col1` and `col2` for all tokens
 #' on that line so they are kept updated.
 #' @param flattened_pd A flattened parse table
-#' @param target_token The index of the token from wich the indention level
+#' @param target_token The index of the token from which the indention level
 #'   should be applied to other tokens.
 apply_ref_indention_one <- function(flattened_pd, target_token) {
   token_points_to_ref <-

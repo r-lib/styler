@@ -1,4 +1,4 @@
-#' Enrich parse table with space and linebreak information
+#' Enrich parse table with space and line break information
 #'
 #' This function computes difference (as column and line difference) between two
 #'   entries in the parse table and adds this information to the table.
