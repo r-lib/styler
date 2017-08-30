@@ -2,11 +2,11 @@
 #'
 #' styler allows you to format .R files, packages or entire R source trees
 #'  according to a style guide.
-#'  The fo,lowing functions can be used for styling:
-#'  * `style_text()` to style a character vector.
-#'  * `style_file()` to style a single .R file.
-#'  * `style_dir()` to style all .R files in a directory.
-#'  * `style_pkg()` to style the source files of an R package.
+#'  The following functions can be used for styling:
+#'  * [style_text()] to style a character vector.
+#'  * [style_file()] to style a single .R file.
+#'  * [style_dir()] to style all .R files in a directory.
+#'  * [style_pkg()] to style the source files of an R package.
 #'  * An RStudio Addin to style the active file .R file and the current package.
 #' @examples
 #' style_text("call( 1)")

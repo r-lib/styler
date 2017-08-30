@@ -14,6 +14,6 @@ Certain tokens are not placed optimally in the nested parse data with
 \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}. For example, the token of arithmetic
 operations 1 + 1 + 1 should all be on the same level of nesting since
 the indention is the same for all but the first two terminals. Setting the
-indention correcly is easier to achieve if they are put on the same level
+indention correctly is easier to achieve if they are put on the same level
 of nesting.
 }

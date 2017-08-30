@@ -19,7 +19,7 @@ Check whether a parse table corresponds to a a certain expression
 \section{Functions}{
 \itemize{
 \item \code{is_curly_expr}: Checks whether \code{pd} contains an expression wrapped in
-curley brackets.
+curly brackets.
 
 \item \code{is_function_call}: Checks whether \code{pd} is a function call.
 }}

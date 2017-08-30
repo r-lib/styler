@@ -30,7 +30,7 @@ Carefully examine the results after running this function!
 
 This function overwrites files (if styling results in a change of the
 code to be formatted). It is strongly suggested to only style files
-that are under version control or creating a backup copy.
+that are under version control or to create a backup copy.
 }
 
 \examples{

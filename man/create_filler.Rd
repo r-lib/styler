@@ -2,7 +2,7 @@
 % Please edit documentation in R/parsed.R
 \name{create_filler}
 \alias{create_filler}
-\title{Enrich parse table with space and linebreak information}
+\title{Enrich parse table with space and line break information}
 \usage{
 create_filler(pd_flat)
 }

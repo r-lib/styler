@@ -9,7 +9,7 @@ apply_ref_indention_one(flattened_pd, target_token)
 \arguments{
 \item{flattened_pd}{A flattened parse table}
 
-\item{target_token}{The index of the token from wich the indention level
+\item{target_token}{The index of the token from which the indention level
 should be applied to other tokens.}
 }
 \description{

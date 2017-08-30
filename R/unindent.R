@@ -1,4 +1,4 @@
-#' Unindent a chlid if necessary
+#' Unindent a child if necessary
 #'
 #' check whether any of the children of `pd` has `token` on the same line as
 #'   the closing `token` of pd. If so, unindent that token.

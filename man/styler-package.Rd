@@ -8,12 +8,12 @@
 \description{
 styler allows you to format .R files, packages or entire R source trees
 according to a style guide.
-The fo,lowing functions can be used for styling:
+The following functions can be used for styling:
 \itemize{
-\item \code{style_text()} to style a character vector.
-\item \code{style_file()} to style a single .R file.
-\item \code{style_dir()} to style all .R files in a directory.
-\item \code{style_pkg()} to style the source files of an R package.
+\item \code{\link[=style_text]{style_text()}} to style a character vector.
+\item \code{\link[=style_file]{style_file()}} to style a single .R file.
+\item \code{\link[=style_dir]{style_dir()}} to style all .R files in a directory.
+\item \code{\link[=style_pkg]{style_pkg()}} to style the source files of an R package.
 \item An RStudio Addin to style the active file .R file and the current package.
 }
 }

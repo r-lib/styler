@@ -23,5 +23,5 @@ Flattens a parse table if certain tokens occur in this table or its child,
 either flattening from left or from right. If one of \code{token} is present in
 \code{pd_nested}  and one of \code{child_token} is present in one of the children next
 to \code{token} in \code{pd_nested}, the nested parse table is flattened. Otherwise, it
-is returned unodified.
+is returned unmodified.
 }

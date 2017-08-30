@@ -11,7 +11,7 @@ character_to_ordered(x, levels, name = substitute(x))
 
 \item{levels}{A vector with levels.}
 
-\item{name}{The name of the character vector to be dispayed if the
+\item{name}{The name of the character vector to be displayed if the
 construction of the factor fails.}
 }
 \description{

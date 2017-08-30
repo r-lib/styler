@@ -9,7 +9,7 @@ start_comments_with_space(pd, force_one = FALSE)
 \arguments{
 \item{pd}{A parse table.}
 
-\item{force_one}{Wheter or not to force one space or allow multiple spaces
+\item{force_one}{Whether or not to force one space or allow multiple spaces
 after the regex "^#+'*".}
 }
 \description{

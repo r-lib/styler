@@ -7,7 +7,7 @@
 #' @name update_indention
 NULL
 
-#' @describeIn update_indention Inserts indetion based on round brackets.
+#' @describeIn update_indention Inserts indention based on round brackets.
 indent_round <- function(pd, indent_by) {
   indent_indices <- compute_indent_indices(pd, token = "'('")
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
@@ -21,7 +21,7 @@ indent_curly <- function(pd, indent_by) {
   set_unindention_child(pd, token = "'}'", unindent_by = indent_by)
 }
 
-#' @describeIn update_indention Indents operatos
+#' @describeIn update_indention Indents operators
 indent_op <- function(pd,
                       indent_by,
                       token = c(math_token,
@@ -34,8 +34,8 @@ indent_op <- function(pd,
   pd
 }
 
-#' @describeIn update_indention Upates indention for token EQ_SUB. Only differs
-#'   from ident_op in the sense that the last token on the talbe where EQ_SUB
+#' @describeIn update_indention Updates indention for token EQ_SUB. Only differs
+#'   from indent_op in the sense that the last token on the table where EQ_SUB
 #'   occurs is not indented (see[compute_indent_indices()])
 indent_eq_sub <- function(pd,
                           indent_by,
@@ -153,7 +153,7 @@ token_is_multi_line <- function(pd) {
 #' R/rules-spacing.R for tokens at the end of a line since this allows styling
 #' without touching indention.
 #' @param pd A parse table.
-#' @return A parse table with syncronized `lag_newlines` and `newlines` columns.
+#' @return A parse table with synchronized `lag_newlines` and `newlines` columns.
 #' @seealso choose_indention
 update_newlines <- function(pd) {
   npd <- nrow(pd) - 1

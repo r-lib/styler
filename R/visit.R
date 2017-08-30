@@ -49,7 +49,7 @@ visit_one <- function(pd_flat, funs) {
 #'
 #' Implements a very specific pre-visiting scheme, namely to propagate
 #'   indention, spaces and lag_newlines to inner token to terminals. This means
-#'   that information regarding indention, linebreaks and spaces (which is
+#'   that information regarding indention, line breaks and spaces (which is
 #'   relative in `pd_nested`) will be converted into absolute.
 #' @inherit context_towards_terminals
 #' @seealso context_towards_terminals visitors
@@ -163,11 +163,11 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #'  be discarded anyways. If it is not set, the first token on a new line will
 #'  "inherit" the indention of the whole line.
 #'  The column `indention` will be removed since all information necessary is
-#'  containted in the spacing information of the first token on a new line and
+#'  contained in the spacing information of the first token on a new line and
 #'  the position of the tokens will not be changed anymore at this stage.
 #' @param flattened_pd A nested parse table that was turned into a flat parse
 #'   table using [extract_terminals()].
-#' @param use_raw_indention Boolean indicating wheter or not the raw indention
+#' @param use_raw_indention Boolean indicating whether or not the raw indention
 #'   should be used.
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
