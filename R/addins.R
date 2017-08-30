@@ -21,7 +21,7 @@ style_active_region <- function() {
 
   styled_lines <- complete_styled_expr(context, styled_expr, neighbourhood)
 
-  merged_text <- append(neighbourhood$body, styled_lines, context$start[1] - 1)
+  merged_text <- append(neighbourhood$lines_not_to_style, styled_lines, context$start[1] - 1)
   utf8::write_lines_enc(merged_text, context$path)
 }
 
@@ -95,10 +95,10 @@ complete_styled_expr <- function(context,
 #' @param text Character vector that contains highlighted area.
 #' @param context The context from [find_active_context()].
 #' @return A character vector of length three.
-#'   * First element corresponds to the text on the start line that was not
+#'   * The first element corresponds to the text on the start line that was not
 #'     selected.
-#'   * Second element to the text on the end line that was not selected.
-#'   * Third element is the lines that are not overlapping with the
+#'   * The second element to the text on the end line that was not selected.
+#'   * The third element are the lines that are not overlapping with the
 #'     highlighted text.
 extract_neighbourhood <- function(text, context) {
   ind_to_style <- seq2(context$start[1], context$end[1])
@@ -110,6 +110,6 @@ extract_neighbourhood <- function(text, context) {
   list(
     start = fract_of_line_start,
     end = fract_of_line_end,
-    body = lines_not_to_style
+    lines_not_to_style = lines_not_to_style
   )
 }
