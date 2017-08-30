@@ -23,7 +23,6 @@ Suggests:
     testthat,
     pkgload
 Remotes:
-    r-lib/pkgload,
     krlmlr/utf8
 License: GPL-3
 Encoding: UTF-8
