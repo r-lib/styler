@@ -74,7 +74,6 @@ set_line_break_after_opening_if_call_is_multi_line <-
     which(pd$token %in% except_token_after),
     ifelse(pd$child[[1]]$text[1] %in% except_text_before, 3L, NA)
   )
-  pd$lag_newlines[3] <- 0L
   pd$lag_newlines[setdiff(3, exception_pos)] <- 1L
   pd
 }
