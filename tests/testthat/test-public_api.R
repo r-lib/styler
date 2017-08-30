@@ -19,9 +19,19 @@ test_that("styler can style file", {
 test_that("styler does not return error when there is no file to style", {
   expect_error(style_dir(paste0(base, "/xyzemptydir"), strict = FALSE), NA)
 })
+
+
+##  ............................................................................
+
+dir <- tempfile("styler")
+dir.create(dir)
+region_path_temp <- paste0(dir, "/addin_region-in.R")
+region_path_perm <- paste0(base, "/xyzaddin/addin_region-in.R")
+file.copy(region_path_perm, dir)
+
 context <- structure(list(
   id = "C533793B",
-  path = paste0(base, "/xyzaddin/addin_region-in.R"),
+  path = region_path_temp,
   contents = c("fjkdsfa 2jy+wj/ 1+1 <?+d", ""),
   selection = structure(list(structure(list(range = structure(list(
     start = structure(c(1, 17), .Names = c("row", "column"), class = "document_position"),
@@ -34,10 +44,7 @@ context <- structure(list(
 
 # style_active_file() must be tested manually.
 test_that("styling active region works", {
-
-  before_styling <- utf8::read_lines_enc(paste0(base, "/xyzaddin/addin_region-in.R"))
-
-  reference <- utf8::read_lines_enc(paste0(base, "/xyzaddin/addin_region-out.R"))
+  reference <- utf8::read_lines_enc( paste0(base, "/xyzaddin/addin_region-out.R"))
 
   result <- expect_error(
     mockr::with_mock(
@@ -46,9 +53,7 @@ test_that("styling active region works", {
       .env = asNamespace("styler")
   ), NA)
 
-  after_styling <- utf8::read_lines_enc(paste0(base, "/xyzaddin/addin_region-in.R"))
-
+  after_styling <- utf8::read_lines_enc(region_path_temp)
   expect_equivalent(after_styling, reference)
-
-  utf8::write_lines_enc(before_styling, paste0(base, "/xyzaddin/addin_region-in.R"))
+  unlink(dir)
 })

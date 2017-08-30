@@ -16,5 +16,5 @@ complete_styled_expr(context, styled_expr, neighbourhood)
 \description{
 Essentially adding the parts before the highlighted area on the line where
 the higlighted area starts to the styled expression. Also, after the styled
-expression, the remainer of that line that was not styled is added.
+expression, the remainder of that line that was not styled is added.
 }

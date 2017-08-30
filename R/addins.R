@@ -68,7 +68,7 @@ style_region <- function(text, context) {
 #'
 #' Essentially adding the parts before the highlighted area on the line where
 #' the higlighted area starts to the styled expression. Also, after the styled
-#' expression, the remainer of that line that was not styled is added.
+#' expression, the remainder of that line that was not styled is added.
 #' @param context The context from [find_active_context()].
 #' @param styled_expr Character vector consisting of the styled expression.
 #' @param neighbourhood Neighbourhood obtained from [extract_neighbourhood()].

@@ -7,7 +7,6 @@ Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
     dplyr,
-    mockr,
     purrr,
     rlang,
     rprojroot,
@@ -19,6 +18,7 @@ Suggests:
     data.tree,
     here,
     knitr,
+    mockr,
     rmarkdown,
     rstudioapi,
     testthat,
