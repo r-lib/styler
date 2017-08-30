@@ -145,7 +145,8 @@ NULL
 #'   transformations but remove EOL spaces and indention due to the way the
 #'   serialization is set up.
 style_empty <- function(text) {
-  transformers <- list( # transformer functions
+  transformers <- list(
+    # transformer functions
     filler = create_filler,
     line_break = NULL,
     space = NULL,
@@ -162,7 +163,8 @@ style_empty <- function(text) {
 #' @describeIn test_transformer Transformations for indention based on curly
 #'   brackets only.
 style_indent_curly <- function(text) {
-  transformers <- list( # transformer functions
+  transformers <- list(
+    # transformer functions
     filler = create_filler,
     line_break = NULL,
     space = partial(indent_curly, indent_by = 2),
@@ -180,7 +182,8 @@ style_indent_curly <- function(text) {
 #' @describeIn test_transformer Transformations for indention based on curly
 #'   brackets and round brackets.
 style_indent_curly_round <- function(text) {
-  transformers <- list( # transformer functions
+  transformers <- list(
+    # transformer functions
     filler = create_filler,
     line_break = NULL,
     space = c(
@@ -200,7 +203,8 @@ style_indent_curly_round <- function(text) {
 
 #' @describeIn test_transformer Transformations for indention based on operators
 style_op <- function(text) {
-  transformers <- list( # transformer functions
+  transformers <- list(
+    # transformer functions
     filler = create_filler,
     line_break = NULL,
     space = partial(indent_op, indent_by = 2),
