@@ -14,10 +14,10 @@ extract_neighbourhood(text, context)
 \value{
 A character vector of length three.
 \itemize{
-\item First element corresponds to the text on the start line that was not
+\item The first element corresponds to the text on the start line that was not
 selected.
-\item Second element to the text on the end line that was not selected.
-\item Third element is the lines that are not overlapping with the
+\item The second element to the text on the end line that was not selected.
+\item The third element are the lines that are not overlapping with the
 highlighted text.
 }
 }
