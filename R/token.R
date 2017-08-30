@@ -1,24 +1,24 @@
 token <- tribble(
   ~text, ~class, ~token,
-  "&", "logical", "AND",
-  "&&", "logical", "AND2",
-  "|", "logical", "OR",
-  "||", "logical", "OR2",
-  ">", "logical", "GT",
-  "<", "logical", "LT",
-  "<=", "logical", "LE",
-  ">=", "logical", "GE",
-  "!=", "logical", "NE",
-  "==", "logical", "EQ",
-  "=", "assign_left", "EQ_SUB",
-  "=", "assign_left", "EQ_ASSIGN",
-  "<-", "assign_left", "LEFT_ASSIGN",
-  "->", "assign_right", "RIGHT_ASSIGN",
-  "+", "math", "'+'",
-  "-", "math", "'-'",
-  "*", "math", "'*'",
-  "/", "math", "'/'",
-  "^", "math", "'^'"
+  "&"  , "logical"     , "AND",
+  "&&" , "logical"     , "AND2",
+  "|"  , "logical"     , "OR",
+  "||" , "logical"     , "OR2",
+  ">"  , "logical"     , "GT",
+  "<"  , "logical"     , "LT",
+  "<=" , "logical"     , "LE",
+  ">=" , "logical"     , "GE",
+  "!=" , "logical"     , "NE",
+  "==" , "logical"     , "EQ",
+  "="  , "assign_left" , "EQ_SUB",
+  "="  , "assign_left" , "EQ_ASSIGN",
+  "<-" , "assign_left" , "LEFT_ASSIGN",
+  "->" , "assign_right", "RIGHT_ASSIGN",
+  "+"  , "math"        , "'+'",
+  "-"  , "math"        , "'-'",
+  "*"  , "math"        , "'*'",
+  "/"  , "math"        , "'/'",
+  "^"  , "math"        , "'^'"
 )
 
 math_token <- token$token[token$class == "math"]
@@ -54,3 +54,6 @@ op_token <- c(
   right_assignment_token,
   "EQ_SUB", "ELSE"
 )
+
+
+
