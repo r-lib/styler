@@ -72,7 +72,6 @@ make_transformer <- function(transformers) {
   function(text) {
     transformed_text <- parse_transform_serialize(text, transformers)
     transformed_text
-
   }
 }
 
@@ -109,8 +108,10 @@ parse_transform_serialize <- function(text, transformers) {
 apply_transformers <- function(pd_nested, transformers) {
   transformed_line_breaks <- pre_visit(
     pd_nested,
-    c(transformers$filler,
-    transformers$line_break)
+    c(
+      transformers$filler,
+      transformers$line_break
+    )
   )
 
   transformed_updated_multi_line <- post_visit(
@@ -132,5 +133,4 @@ apply_transformers <- function(pd_nested, transformers) {
   )
 
   transformed_absolute_indent
-
 }

@@ -7,7 +7,6 @@
 #'   spaces.
 #' @importFrom utils tail
 create_filler <- function(pd_flat) {
-
   pd_flat$line3 <- lead(pd_flat$line1, default = tail(pd_flat$line2, 1))
   pd_flat$col3 <- lead(pd_flat$col1, default = tail(pd_flat$col2, 1) + 1L)
   pd_flat$newlines <- pd_flat$line3 - pd_flat$line2
@@ -29,4 +28,3 @@ create_filler <- function(pd_flat) {
 
   ret
 }
-

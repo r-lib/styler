@@ -78,7 +78,6 @@ style_text <- function(text,
                        ...,
                        style = tidyverse_style,
                        transformers = style(...)) {
-
   transformer <- make_transformer(transformers)
   transformer(text)
 }
@@ -113,7 +112,6 @@ style_dir <- function(path = ".",
 prettify_any <- function(transformers, recursive) {
   files <- dir(path = ".", pattern = "[.][rR]$", recursive = recursive, full.names = TRUE)
   transform_files(files, transformers)
-
 }
 
 #' Style a file

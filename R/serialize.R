@@ -10,10 +10,10 @@ serialize_parse_data_flattened <- function(flattened_pd) {
         map(lag_newlines, add_newlines),
         map(lag_spaces, add_spaces),
         text,
-        collapse = "")) %>%
+        collapse = ""
+      )
+    ) %>%
     .[["text_ws"]] %>%
     strsplit("\n", fixed = TRUE) %>%
     .[[1L]]
-
-
 }

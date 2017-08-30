@@ -29,12 +29,15 @@ test_collection <- function(test, sub_test = NULL,
   path <- rprojroot::find_testthat_root_file(test)
 
   pattern <- if_else(!is.null(sub_test),
-                     paste0("^", sub_test, ".*", "in\\.R$"),
-                     "in\\.R$")
+    paste0("^", sub_test, ".*", "in\\.R$"),
+    "in\\.R$"
+  )
 
-  in_names <- list.files(file.path(path),
-                          pattern = pattern,
-                          full.names = FALSE)
+  in_names <- list.files(
+    file.path(path),
+    pattern = pattern,
+    full.names = FALSE
+  )
 
   if (length(in_names) < 1) stop("no items to check")
 
@@ -45,12 +48,14 @@ test_collection <- function(test, sub_test = NULL,
 
   out_trees <- construct_tree(in_items)
 
-  pwalk(list(in_items, out_items, in_names, out_names, out_trees),
-       transform_and_check,
-       transformer = transformer,
-       write_back = write_back,
-       write_tree = write_tree,
-       ...)
+  pwalk(
+    list(in_items, out_items, in_names, out_names, out_trees),
+    transform_and_check,
+    transformer = transformer,
+    write_back = write_back,
+    write_tree = write_tree,
+    ...
+  )
 }
 
 #' Construct *-out.R from a *-in.R
@@ -93,7 +98,6 @@ transform_and_check <- function(in_item, out_item,
                                 transformer, write_back,
                                 write_tree = FALSE,
                                 out_tree = "_tree", ...) {
-
   read_in <- utf8::read_lines_enc(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
@@ -101,17 +105,23 @@ transform_and_check <- function(in_item, out_item,
   }
   transformed <- read_in %>%
     transformer(...)
-  transformed <- suppressMessages(utf8::transform_lines_enc(out_item,
+  transformed <- suppressMessages(utf8::transform_lines_enc(
+    out_item,
     function(x) transformed,
-    write_back = write_back))
+    write_back = write_back
+  ))
 
   if (transformed) {
     target <- utf8::read_lines_enc(out_item)
-    warning(in_name, " was different from ", out_name,
-            immediate. = TRUE, call. = FALSE)
+    warning(
+      in_name, " was different from ", out_name,
+      immediate. = TRUE, call. = FALSE
+    )
   } else {
-    message(in_name, " was identical to ", out_name,
-            immediate. = TRUE, call. = FALSE)
+    message(
+      in_name, " was identical to ", out_name,
+      immediate. = TRUE, call. = FALSE
+    )
   }
 }
 
@@ -135,12 +145,11 @@ NULL
 #'   transformations but remove EOL spaces and indention due to the way the
 #'   serialization is set up.
 style_empty <- function(text) {
-  transformers <- list(
-    # transformer functions
-    filler     = create_filler,
+  transformers <- list( # transformer functions
+    filler = create_filler,
     line_break = NULL,
-    space      = NULL,
-    token      = NULL,
+    space = NULL,
+    token = NULL,
 
     # transformer options
     use_raw_indention = FALSE,
@@ -153,13 +162,11 @@ style_empty <- function(text) {
 #' @describeIn test_transformer Transformations for indention based on curly
 #'   brackets only.
 style_indent_curly <- function(text) {
-
-  transformers <- list(
-    # transformer functions
-    filler     = create_filler,
+  transformers <- list( # transformer functions
+    filler = create_filler,
     line_break = NULL,
-    space      =  partial(indent_curly, indent_by = 2),
-    token      = NULL,
+    space = partial(indent_curly, indent_by = 2),
+    token = NULL,
 
     # transformer options
     use_raw_indention = FALSE,
@@ -173,13 +180,14 @@ style_indent_curly <- function(text) {
 #' @describeIn test_transformer Transformations for indention based on curly
 #'   brackets and round brackets.
 style_indent_curly_round <- function(text) {
-  transformers <- list(
-    # transformer functions
-    filler     = create_filler,
+  transformers <- list( # transformer functions
+    filler = create_filler,
     line_break = NULL,
-    space      = c(partial(indent_curly, indent_by = 2),
-                    partial(indent_round, indent_by = 2)),
-    token      = NULL,
+    space = c(
+      partial(indent_curly, indent_by = 2),
+      partial(indent_round, indent_by = 2)
+    ),
+    token = NULL,
 
     # transformer options
     use_raw_indention = FALSE,
@@ -192,13 +200,11 @@ style_indent_curly_round <- function(text) {
 
 #' @describeIn test_transformer Transformations for indention based on operators
 style_op <- function(text) {
-
-  transformers <- list(
-    # transformer functions
-    filler     = create_filler,
+  transformers <- list( # transformer functions
+    filler = create_filler,
     line_break = NULL,
-    space      = partial(indent_op, indent_by = 2),
-    token      = NULL,
+    space = partial(indent_op, indent_by = 2),
+    token = NULL,
 
     # transformer options
     use_raw_indention = FALSE,
@@ -207,5 +213,4 @@ style_op <- function(text) {
 
   transformed_text <- parse_transform_serialize(text, transformers)
   transformed_text
-
 }

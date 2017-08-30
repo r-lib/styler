@@ -21,7 +21,7 @@ flatten_operators <- function(pd_nested) {
 #' @include token.R
 flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, math_token, "'$'")
-  pd_token_right <- c(special_token, "LEFT_ASSIGN",  "'+'", "'-'")
+  pd_token_right <- c(special_token, "LEFT_ASSIGN", "'+'", "'-'")
   bound <- pd_nested %>%
     flatten_pd(pd_token_left, left = TRUE) %>%
     flatten_pd(pd_token_right, left = FALSE)
@@ -64,4 +64,3 @@ bind_with_child <- function(pd_nested, pos) {
     bind_rows(pd_nested$child[[pos]]) %>%
     arrange(line1, col1)
 }
-

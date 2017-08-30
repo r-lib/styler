@@ -40,11 +40,11 @@ tokenize <- function(text) {
 #' @param pd A parse table.
 enhance_mapping_special <- function(pd) {
   pd$token <- with(pd, case_when(
-      token != "SPECIAL" ~ token,
-      text == "%>%" ~ special_and("PIPE"),
-      text == "%in%" ~ special_and("IN"),
-      TRUE ~ special_and("OTHER")
-    ))
+    token != "SPECIAL" ~ token,
+    text == "%>%" ~ special_and("PIPE"),
+    text == "%in%" ~ special_and("IN"),
+    TRUE ~ special_and("OTHER")
+  ))
   pd
 }
 
@@ -64,8 +64,10 @@ add_terminal_token_after <- function(pd_flat) {
     filter(terminal) %>%
     arrange(line1, col1)
 
-  data_frame(id = terminals$id,
-             token_after = lead(terminals$token, default = "")) %>%
+  data_frame(
+    id = terminals$id,
+    token_after = lead(terminals$token, default = "")
+  ) %>%
     left_join(pd_flat, ., by = "id")
 }
 
@@ -75,8 +77,10 @@ add_terminal_token_before <- function(pd_flat) {
     filter(terminal) %>%
     arrange(line1, col1)
 
-  data_frame(id = terminals$id,
-             token_before = lag(terminals$token, default = "")) %>%
+  data_frame(
+    id = terminals$id,
+    token_before = lag(terminals$token, default = "")
+  ) %>%
     left_join(pd_flat, ., by = "id")
 }
 
@@ -144,7 +148,6 @@ combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
   bound[order(bound$line1, bound$col1), ]
-
 }
 
 #' Get the start right

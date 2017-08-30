@@ -50,7 +50,6 @@ tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
                             indent_by = 2,
                             start_comments_with_one_space = FALSE) {
-
   scope <- character_to_ordered(
     scope,
     c("none", "spaces", "indention", "line_breaks", "tokens")
@@ -77,8 +76,10 @@ tidyverse_style <- function(scope = "tokens",
       set_space_after_bang_bang,
       remove_space_before_dollar,
       remove_space_around_colons,
-      partial(start_comments_with_space,
-              force_one = start_comments_with_one_space),
+      partial(
+        start_comments_with_space,
+        force_one = start_comments_with_one_space
+      ),
 
       remove_space_after_unary_pm_nested,
       set_space_before_comments,
@@ -120,13 +121,12 @@ tidyverse_style <- function(scope = "tokens",
       NULL
     )
 
-  create_style_guide(
-    # transformer functions
-    filler            = create_filler,
-    line_break        = line_break_manipulators,
-    space             = space_manipulators,
-    token             = token_manipulators,
-    indention         = indention_modifier,
+  create_style_guide( # transformer functions
+    filler = create_filler,
+    line_break = line_break_manipulators,
+    space = space_manipulators,
+    token = token_manipulators,
+    indention = indention_modifier,
     # transformer options
     use_raw_indention = use_raw_indention
   )
@@ -156,8 +156,7 @@ create_style_guide <- function(filler = create_filler,
                                token = NULL,
                                indention = NULL,
                                use_raw_indention = FALSE) {
-  lst(
-    # transformer functions
+  lst( # transformer functions
     filler,
     line_break,
     space,
@@ -178,9 +177,10 @@ create_style_guide <- function(filler = create_filler,
 #'   construction of the factor fails.
 character_to_ordered <- function(x, levels, name = substitute(x)) {
   if (!all((x %in% levels))) {
-    stop("all values in ", name, " must be one of the following: ",
-         paste(levels, collapse = ", "))
+    stop(
+      "all values in ", name, " must be one of the following: ",
+      paste(levels, collapse = ", ")
+    )
   }
   factor(x, levels = levels, ordered = TRUE)
 }
-

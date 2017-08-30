@@ -29,8 +29,8 @@ update_indention_ref_fun_call <- function(pd_nested) {
   non_comment <- which(pd_nested$token != "COMMENT")
   first_non_comment_after_call <- non_comment[non_comment > 2][1]
   if ((current_is_call) &&
-      nrow(pd_nested) > 3 &&
-      pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
+    nrow(pd_nested) > 3 &&
+    pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
     candidates <- 3:(nrow(pd_nested) - 1)
 
     child_is_call <- map_lgl(pd_nested$child, is_function_call)
@@ -58,7 +58,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
 #' }
 update_indention_ref_fun_dec <- function(pd_nested) {
   if (pd_nested$token[1] == "FUNCTION" &&
-      nrow(pd_nested) > 3) {
+    nrow(pd_nested) > 3) {
     seq <- 3:(nrow(pd_nested) - 1)
     pd_nested$indention_ref_id[seq] <- pd_nested$id[1]
   }
@@ -130,5 +130,4 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   flattened_pd$col1[cols_to_update] <- flattened_pd$col1[cols_to_update] + shift
   flattened_pd$col2[cols_to_update] <- flattened_pd$col2[cols_to_update] + shift
   flattened_pd
-
 }

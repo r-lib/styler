@@ -24,11 +24,13 @@ indent_curly <- function(pd, indent_by) {
 #' @describeIn update_indention Indents operators
 indent_op <- function(pd,
                       indent_by,
-                      token = c(math_token,
-                                logical_token,
-                                special_token,
-                                "LEFT_ASSIGN",
-                                "'$'")) {
+                      token = c(
+                        math_token,
+                        logical_token,
+                        special_token,
+                        "LEFT_ASSIGN",
+                        "'$'"
+                      )) {
   indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
