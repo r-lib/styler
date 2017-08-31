@@ -81,7 +81,7 @@ tidyverse_style <- function(scope = "tokens",
               force_one = start_comments_with_one_space),
 
       remove_space_after_unary_pm_nested,
-      set_space_before_comments,
+      if (strict) set_space_before_comments else add_space_before_comments,
       set_space_between_levels,
       set_space_between_eq_sub_and_comma,
     )

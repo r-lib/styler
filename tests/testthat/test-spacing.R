@@ -11,3 +11,10 @@ test_that(":, ::, and :::", {
     "spacing", "colon",
     transformer = style_text), NA)
 })
+
+
+test_that("comments and strict = FALSE", {
+  expect_warning(test_collection(
+    "spacing", "comments",
+    transformer = style_text, stric = FALSE), NA)
+})
