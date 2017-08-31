@@ -19,10 +19,6 @@ test_that("spacing within comments is done correctly", {
                                  transformer = style_text), NA)
 })
 
-test_that("spacing before comments is done correctly", {
-
-})
-
 test_that("comments are treated corectly", {
   expect_warning(test_collection("parse_comments",
                                  "mixed",

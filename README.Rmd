@@ -47,7 +47,8 @@ There are a few variants of `style_text()`:
 * `style_file()` styles a single .R file.
 * `style_dir()` styles all .R files in a directory.
 * `style_pkg()` styles the source files of an R package.
-* An RStudio Addin that styles the active file .R file
+* RStudio Addins for styling the active file, styling the current package and 
+  styling the highlighted code region.
 
 ```{r, out.width = "650px", echo = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif")
