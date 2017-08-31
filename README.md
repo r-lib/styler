@@ -7,6 +7,13 @@ styler
 
 The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to the [tidyverse](https://github.com/tidyverse/style) formatting rules. Support for custom style guides is planned.
 
+You can install the package from GitHub:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("krlmlr/styler")
+```
+
 You can style a simple character vector of code with `style_text()`:
 
 ``` r
