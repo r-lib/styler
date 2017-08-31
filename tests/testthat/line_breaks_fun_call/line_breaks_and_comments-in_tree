@@ -1,0 +1,37 @@
+ROOT (token: short_text [lag_newlines/spaces] {id})
+ ¦--expr:  [0/0] {12}                              
+ ¦   ¦--expr:  [0/0] {3}                           
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {1}   
+ ¦   ¦--'(': ( [0/1] {2}                           
+ ¦   ¦--COMMENT: # com [0/2] {4}                   
+ ¦   ¦--expr:  [1/0] {9}                           
+ ¦   ¦   °--SYMBOL: am [0/0] {6}                   
+ ¦   °--')': ) [1/0] {8}                           
+ ¦--expr:  [2/0] {30}                              
+ ¦   ¦--expr:  [0/0] {20}                          
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {18}  
+ ¦   ¦--'(': ( [0/2] {19}                          
+ ¦   ¦--COMMENT: # com [1/2] {22}                  
+ ¦   ¦--expr:  [1/0] {27}                          
+ ¦   ¦   °--SYMBOL: am [0/0] {24}                  
+ ¦   °--')': ) [1/0] {26}                          
+ ¦--expr:  [2/1] {46}                              
+ ¦   ¦--expr:  [0/0] {38}                          
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {36}  
+ ¦   ¦--'(': ( [0/0] {37}                          
+ ¦   ¦--expr:  [0/1] {43}                          
+ ¦   ¦   °--SYMBOL: am [0/0] {39}                  
+ ¦   ¦--COMMENT: # com [0/0] {40}                  
+ ¦   °--')': ) [1/0] {42}                          
+ ¦--COMMENT: # FIX [0/0] {47}                      
+ °--expr:  [2/0] {69}                              
+     ¦--expr:  [0/0] {55}                          
+     ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {53}  
+     ¦--'(': ( [0/0] {54}                          
+     ¦--expr:  [0/0] {58}                          
+     ¦   °--SYMBOL: am [0/0] {56}                  
+     ¦--',': , [0/1] {57}                          
+     ¦--COMMENT: # com [0/2] {61}                  
+     ¦--expr:  [1/0] {66}                          
+     ¦   °--SYMBOL: pm [0/0] {63}                  
+     °--')': ) [1/0] {65}                          
