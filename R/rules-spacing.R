@@ -183,8 +183,17 @@ set_space_before_comments <- function(pd_flat) {
   comment_before <- lead(comment_after, default = FALSE)
   pd_flat$spaces[comment_before & (pd_flat$newlines == 0L)] <- 1L
   pd_flat
-
 }
+
+add_space_before_comments <- function(pd_flat) {
+  comment_after <- (pd_flat$token == "COMMENT") & (pd_flat$lag_newlines == 0L)
+  if (!any(comment_after)) return(pd_flat)
+  comment_before <- lead(comment_after, default = FALSE)
+  pd_flat$spaces[comment_before & (pd_flat$newlines == 0L)] <-
+    pmax(pd_flat$spaces[comment_before], 1L)
+  pd_flat
+}
+
 
 remove_space_after_excl <- function(pd_flat) {
   excl <- (pd_flat$token == "'!'") & (pd_flat$newlines == 0L)
