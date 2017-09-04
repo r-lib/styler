@@ -69,6 +69,7 @@ transform_file <- function(path,
 #' @param transformers A list of transformer functions that operate on flat
 #'   parse tables.
 make_transformer <- function(transformers) {
+  force(transformers)
   function(text) {
     transformed_text <- parse_transform_serialize(text, transformers)
     transformed_text
