@@ -89,6 +89,6 @@ last <- function (x, order_by = NULL, default = x[NA_real_]) {
   nth(x, -1L, order_by = order_by, default = default)
 }
 
-slice <- function(...) {
-  return(dplyr::slice(...))
+slice <- function(.data, ...) {
+  .data[c(...), , drop = FALSE]
 }
