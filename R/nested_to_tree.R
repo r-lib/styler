@@ -35,10 +35,7 @@ create_node_from_nested <- function(pd_nested, parent) {
   if (is.null(pd_nested))
     return()
 
-  node_info <-
-    pd_nested %>%
-    transmute(formatted = paste0(token, ": ", short, " [", lag_newlines, "/", spaces, "] {", id, "}")) %>%
-    .[["formatted"]]
+  node_info <- paste0(pd_nested$token, ": ", pd_nested$short, " [", pd_nested$lag_newlines, "/", pd_nested$spaces, "] {", pd_nested$id, "}")
 
   child_nodes <-
     node_info %>%

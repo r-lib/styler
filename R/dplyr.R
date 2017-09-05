@@ -47,10 +47,6 @@ left_join <- function(...) {
   merge(...)
 }
 
-transmute <- function(...) {
-  return(dplyr::transmute(...))
-}
-
 summarize_ <- function(...) {
   return(dplyr::summarize_(...))
 }
