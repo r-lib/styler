@@ -1,5 +1,4 @@
 lag <- function(x, n = 1L, default = NA, ...) {
-  return(dplyr::lag(x, n, default, ...))
   if (n == 0) {
     return(x)
   }
@@ -11,7 +10,6 @@ lag <- function(x, n = 1L, default = NA, ...) {
 }
 
 lead <- function(x, n = 1L, default = NA, ...) {
-  return(dplyr::lead(x, n, default, ...))
   if (n == 0) {
     return(x)
   }
