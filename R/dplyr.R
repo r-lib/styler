@@ -35,12 +35,10 @@ bind_rows <- function(...) {
 }
 
 if_else <- function(condition, true, false, missing = NULL) {
-  return(dplyr::if_else(condition, true, false, missing))
   ifelse(condition, true, false)
 }
 
 filter <- function(.data, ...) {
-  return(dplyr::filter(.data, ...))
   subset(.data, ...)
 }
 
