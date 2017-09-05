@@ -121,7 +121,8 @@ nest_parse_data <- function(pd_flat) {
   child <- split_data$`FALSE`
   internal <- split_data$`TRUE`
 
-  internal <- rename_(internal, internal_child = ~child)
+  internal$internal_child <- internal$child
+  internal$child <- NULL
 
   child$parent_ <- child$parent
   joined <-

@@ -30,17 +30,6 @@ arrange <- function(.data, ...) {
   .data[ord, , drop = FALSE]
 }
 
-rename_ <- function(.data, ...) {
-  return(dplyr::rename_(.data, ...))
-  map <- list(...)
-  nms <- names(.data)
-  for (i in seq_along(map)) {
-    .data[[map[[i]]]] <- .data[[nms[[i]]]]
-    .data[[nms[[i]]]] <- NULL
-  }
-  .data
-}
-
 bind_rows <- function(...) {
   return(dplyr::bind_rows(...))
 }
