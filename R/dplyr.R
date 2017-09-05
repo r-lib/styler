@@ -21,14 +21,13 @@ lead <- function(x, n = 1L, default = NA, ...) {
 }
 
 arrange <- function(.data, ...) {
-  return(dplyr::arrange(.data, ...))
-  stopifnot(is.data.frame(df))
-  ord <- eval(substitute(order(...)), df, parent.frame())
-  if (length(ord) != nrow(df)) {
+  stopifnot(is.data.frame(.data))
+  ord <- eval(substitute(order(...)), .data, parent.frame())
+  if (length(ord) != nrow(.data)) {
     stop("Length of ordering vectors don't match data frame size",
       call. = FALSE)
   }
-  df[ord, , drop = FALSE]
+  .data[ord, , drop = FALSE]
 }
 
 rename_ <- function(.data, ...) {
