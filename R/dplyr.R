@@ -51,10 +51,6 @@ transmute <- function(...) {
   return(dplyr::transmute(...))
 }
 
-mutate <- function(...) {
-  return(dplyr::mutate(...))
-}
-
 summarize_ <- function(...) {
   return(dplyr::summarize_(...))
 }
