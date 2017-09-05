@@ -47,10 +47,6 @@ left_join <- function(...) {
   merge(...)
 }
 
-summarize_ <- function(...) {
-  return(dplyr::summarize_(...))
-}
-
 nth <- function (x, n, order_by = NULL, default = x[NA_real_]) {
   stopifnot(length(n) == 1, is.numeric(n))
   n <- trunc(n)
