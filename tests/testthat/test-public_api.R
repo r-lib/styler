@@ -52,7 +52,7 @@ test_that("styling active region works", {
   )
 
   result <- expect_error(
-    mockr::with_mock(
+    testthat::with_mock(
       get_rstudio_context = function() context,
       style_active_region(),
       .env = asNamespace("styler")
