@@ -8,8 +8,28 @@ call(
 )
 
 call(am # comment
-) # FIXME: maybe move ')' up and switch position with the comment
+)
 
 call(am, # comment
   pm
 )
+
+
+call(b
+)
+
+call(
+  a
+)
+
+call(
+  a # b
+)
+
+call( #
+)
+
+call(a # b
+)
+call(# b
+  a)
