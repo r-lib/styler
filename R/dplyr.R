@@ -51,16 +51,8 @@ transmute <- function(...) {
   return(dplyr::transmute(...))
 }
 
-group_by <- function(...) {
-  return(dplyr::group_by(...))
-}
-
 mutate <- function(...) {
   return(dplyr::mutate(...))
-}
-
-ungroup <- function(...) {
-  return(dplyr::ungroup(...))
 }
 
 summarize_ <- function(...) {

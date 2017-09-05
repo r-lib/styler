@@ -142,10 +142,13 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 
   flattened_pd$newlines <- lead(flattened_pd$lag_newlines, default = 0L)
   flattened_pd$nchar <- nchar(flattened_pd$text, type = "width")
+  groups <- flattened_pd$line1
   flattened_pd <- flattened_pd %>%
-    group_by(line1) %>%
-    mutate(col2 = cumsum(nchar + lag_spaces)) %>%
-    ungroup()
+    split(groups) %>%
+    lapply(function(.x) {
+      .x$col2 <- cumsum(.x$nchar + .x$lag_spaces)
+      .x}) %>%
+    bind_rows()
   flattened_pd$col1 <- flattened_pd$col2 - flattened_pd$nchar
   flattened_pd
 }
