@@ -30,8 +30,28 @@ arrange <- function(.data, ...) {
   .data[ord, , drop = FALSE]
 }
 
-bind_rows <- function(...) {
-  return(dplyr::bind_rows(...))
+bind_rows <- function(x, y = NULL) {
+  if (is.null(x) && is.null(y)) {
+    return(tibble())
+  }
+  if (is.null(x)) {
+    if (inherits(y, "data.frame")) {
+      return(y)
+    }
+    return(do.call(rbind.data.frame, x))
+  }
+  if (is.null(y)) {
+    if (inherits(x, "data.frame")) {
+      return(x)
+    }
+    return(do.call(rbind.data.frame, x))
+  }
+  if (NCOL(x) != NCOL(y)) {
+    for (nme in setdiff(names(x), names(y))) {
+      y[[nme]] <- NA
+    }
+  }
+  rbind.data.frame(x, y)
 }
 
 if_else <- function(condition, true, false, missing = NULL) {
