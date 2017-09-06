@@ -125,7 +125,7 @@ test <- function() {
   )
 
   nested(
-    function_call (with), # a comment and
+    function_call (with),  # a comment and
     many # more
     ,     first_level_args
   )
