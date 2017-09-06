@@ -6,7 +6,6 @@ Authors@R: c(person("Kirill", "Müller", role = c("aut"), email = "krlmlr+r@mail
 Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
-    dplyr,
     purrr,
     rlang,
     rprojroot,
@@ -16,6 +15,7 @@ Imports:
     withr
 Suggests:
     data.tree,
+    dplyr,
     here,
     knitr,
     mockr,

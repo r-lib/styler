@@ -27,7 +27,7 @@ remove_space_after_unary_pm <- function(pd_flat) {
 
   pm_after <- pd_flat$token %in% op_pm
   pd_flat$spaces[pm_after & (pd_flat$newlines == 0L) &
-                   (dplyr::lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
+                   (lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
   pd_flat
 }
 
