@@ -31,10 +31,8 @@ call(
     3,
     4, call(5, 6, call(
       2
-    )
-    )
-  )
-  )
+    ))
+  ))
 )
 
 # comment lala
