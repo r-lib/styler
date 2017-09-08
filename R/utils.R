@@ -25,3 +25,17 @@ add_newlines <- function(n) {
 add_spaces <- function(n) {
   rep_char(" ", n)
 }
+
+#' Invoke a system command
+#'
+#' Wraps a system command into [shell()] or [system()], depending on the
+#' os.
+#' @param sys_call The call to be executed.
+#' @param ... Arguments passed to [shell()] or [system()].
+calls_sys <- function(sys_call, ...) {
+  if (Sys.info()[1] == "Windows") {
+    error <- shell(sys_call, ...)
+  } else {
+    error <- system(sys_call, ...)
+  }
+}
