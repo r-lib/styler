@@ -25,7 +25,7 @@ indent_without_paren(pd, indent_by = 2)
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with
-line break and space information via \code{\link[=create_filler]{create_filler()}}.}
+line break and space information via \code{\link[=initialize_attributes]{initialize_attributes()}}.}
 
 \item{indent_by}{How many spaces should be added after the token of interest.}
 
