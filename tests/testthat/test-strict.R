@@ -27,13 +27,3 @@ test_that("removes blank lines at EOF", {
     transformer = style_text,
     strict = FALSE), NA)
 })
-
-
-test_that("Space placed after 'if' and before '('", {
-  expect_equal(style_text(c("if(TRUE) x else y")), "if (TRUE) x else y")
-})
-
-test_that("space before comma is removed", {
-  expect_equal(style_text("c(    1,       16    , 333 , 33 ,  1)"),
-                          "c(1, 16, 333, 33, 1)")
-})
