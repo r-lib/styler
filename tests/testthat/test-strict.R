@@ -15,12 +15,17 @@ test_that("can style example source file with strict = FALSE", {
 })
 
 test_that("removes space at EOL", {
-  expect_equal(style_text("a() "), "a()")
-  expect_equal(style_text("a() # comment "), "a() # comment")
+  expect_warning(test_collection(
+    "strict", "eol",
+    transformer = style_text,
+    strict = FALSE), NA)
 })
 
 test_that("removes blank lines at EOF", {
-  expect_equal(style_text(c("a() ", "", "")), "a()")
+  expect_warning(test_collection(
+    "strict", "eof",
+    transformer = style_text,
+    strict = FALSE), NA)
 })
 
 
