@@ -1,0 +1,3 @@
+ROOT (token: short_text [lag_newlines/spaces] {id})
+ °--expr:  [0/0] {3}                               
+     °--SYMBOL: blabl [0/0] {1}                    
