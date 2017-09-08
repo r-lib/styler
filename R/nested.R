@@ -26,6 +26,8 @@ compute_parse_data_nested <- function(text) {
 #' @param text A character vector.
 #' @return A flat parse table
 tokenize <- function(text) {
+  # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
+  parse(text = text, keep.source = TRUE)
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
     enhance_mapping_special()
