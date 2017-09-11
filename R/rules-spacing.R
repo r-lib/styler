@@ -166,7 +166,6 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
     ) %>%
     trimws("right")
   pd$short[comment_pos] <- substr(pd$text[comment_pos], 1, 5)
-
   pd
 }
 

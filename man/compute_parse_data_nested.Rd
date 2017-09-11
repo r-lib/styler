@@ -10,9 +10,8 @@ compute_parse_data_nested(text)
 \item{text}{A character vector to parse.}
 }
 \value{
-A nested parse table. Apart from the columns provided by
-\code{utils::getParseData()}, a column "short" with the first five characters of
-"text" is added, the nested subtibbles are in column "child".
+A nested parse table. See \code{\link[=tokenize]{tokenize()}} for details on the columns
+of the parse table.
 }
 \description{
 Parses \code{text} to a flat parse table and subsequently changes its

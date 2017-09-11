@@ -62,6 +62,6 @@ bind_with_child <- function(pd_nested, pos) {
   pd_nested %>%
     slice(-pos) %>%
     bind_rows(pd_nested$child[[pos]]) %>%
-    arrange(line1, col1)
+    arrange(pos_id)
 }
 
