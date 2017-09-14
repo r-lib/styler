@@ -54,8 +54,8 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
 
 #' Bind a parse table with one of its children
 #'
-#' Bind a parse table with one of its children and return the **unordered**
-#' parse table (that is, rows are not arranged according to line1 / line2).
+#' Bind a parse table with one of its children and return parse table, ordered
+#' according to the appearance of the tokens.
 #' @param pd_nested A nested parse table.
 #' @param pos The position of the child to bind.
 bind_with_child <- function(pd_nested, pos) {
