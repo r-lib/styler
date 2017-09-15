@@ -31,7 +31,7 @@ Date: 2017-08-24
 BugReports: https://github.com/krlmlr/styler/issues
 URL: https://github.com/krlmlr/styler, http://krlmlr.github.io/styler
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi::api_roclet"))
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Collate: 
     'addins.R'
