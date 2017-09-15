@@ -1,6 +1,6 @@
 #' @api
 #' @import tibble
-#' @import tidyr
+#' @importFrom magrittr %>%
 NULL
 
 #' Prettify R source code

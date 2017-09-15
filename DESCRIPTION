@@ -10,9 +10,10 @@ Imports:
     rlang,
     rprojroot,
     tibble,
-    tidyr,
     utf8,
-    withr
+    withr,
+    rematch2,
+    magrittr
 Suggests:
     data.tree,
     dplyr,
@@ -37,6 +38,7 @@ Collate:
     'addins.R'
     'dplyr.R'
     'initialize.R'
+    'compat-tidyr.R'
     'modify_pd.R'
     'nested.R'
     'nested_to_tree.R'

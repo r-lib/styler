@@ -147,13 +147,9 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
   comment_pos <- pd$token == "COMMENT"
   if (!any(comment_pos)) return(pd)
 
-  comments <- pd[comment_pos, ]
+  comments <- rematch2::re_match(pd$text[comment_pos],
+    "^(?<prefix>#+'*)(?<space_after_prefix> *)(?<text>.*)$")
 
-  non_comments <-pd[pd$token != "COMMENT", ]
-
-  comments <-  extract(comments, text,
-                       c("prefix", "space_after_prefix", "text"),
-                       regex = "^(#+'*)( *)(.*)$")
   comments$space_after_prefix <- nchar(
     comments$space_after_prefix, type = "width"
   )
@@ -162,18 +158,16 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
     force_one
   )
 
-  comments$text <-
+  pd$text[comment_pos] <-
     paste0(
       comments$prefix,
       map_chr(comments$space_after_prefix, rep_char, char = " "),
       comments$text
     ) %>%
     trimws("right")
-  comments$short <- substr(comments$text, 1, 5)
+  pd$short[comment_pos] <- substr(pd$text[comment_pos], 1, 5)
 
-  comments[, setdiff(names(comments), c("space_after_prefix", "prefix"))] %>%
-    bind_rows(non_comments) %>%
-    arrange(line1, col1)
+  pd
 }
 
 
