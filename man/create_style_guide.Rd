@@ -4,12 +4,12 @@
 \alias{create_style_guide}
 \title{Create a style guide}
 \usage{
-create_style_guide(filler = create_filler, line_break = NULL,
+create_style_guide(initialize = initialize_attributes, line_break = NULL,
   space = NULL, token = NULL, indention = NULL,
   use_raw_indention = FALSE)
 }
 \arguments{
-\item{filler}{A filler function that initializes various variables on each
+\item{initialize}{A function that initializes various variables on each
 level of nesting.}
 
 \item{line_break}{A list of transformer functions that manipulate line_break

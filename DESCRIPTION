@@ -36,10 +36,10 @@ VignetteBuilder: knitr
 Collate: 
     'addins.R'
     'dplyr.R'
+    'initialize.R'
     'modify_pd.R'
     'nested.R'
     'nested_to_tree.R'
-    'parsed.R'
     'reindent.R'
     'token.R'
     'relevel.R'
@@ -54,5 +54,6 @@ Collate:
     'transform.R'
     'unindent.R'
     'utils.R'
+    'vertical.R'
     'visit.R'
     'ws.R'

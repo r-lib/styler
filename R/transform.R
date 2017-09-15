@@ -110,7 +110,7 @@ parse_transform_serialize <- function(text, transformers) {
 apply_transformers <- function(pd_nested, transformers) {
   transformed_line_breaks <- pre_visit(
     pd_nested,
-    c(transformers$filler,
+    c(transformers$initialize,
     transformers$line_break)
   )
 

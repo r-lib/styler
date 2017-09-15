@@ -79,7 +79,8 @@ style_text <- function(text,
                        transformers = style(...)) {
 
   transformer <- make_transformer(transformers)
-  transformer(text)
+  styled_text <- transformer(text)
+  construct_vertical(styled_text)
 }
 
 #' Prettify arbitrary R code

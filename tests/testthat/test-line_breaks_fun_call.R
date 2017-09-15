@@ -14,6 +14,9 @@ test_that("line breaks work with comments", {
   expect_warning(test_collection("line_breaks_fun_call",
                                  "token_dependent_comments",
                                  transformer = style_text), NA)
+  expect_warning(test_collection("line_breaks_fun_call",
+                                 "line_breaks_and_comments",
+                                 transformer = style_text), NA)
 })
 
 test_that("line breaks work with exceptions", {
