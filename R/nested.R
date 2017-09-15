@@ -41,12 +41,15 @@ tokenize <- function(text) {
 #'   description.
 #' @param pd A parse table.
 enhance_mapping_special <- function(pd) {
-  pd$token <- with(pd, case_when(
-      token != "SPECIAL" ~ token,
-      text == "%>%" ~ special_and("PIPE"),
-      text == "%in%" ~ special_and("IN"),
-      TRUE ~ special_and("OTHER")
-    ))
+  pipes <- pd$token == "SPECIAL" & pd$text == "%>%"
+  pd$token[pipes] <- special_and("PIPE")
+
+  ins <- pd$token == "SPECIAL" & pd$text == "%in%"
+  pd$token[ins] <- special_and("IN")
+
+  others <- pd$token == "SPECIAL" & !(pipes | ins)
+  pd$token[others] <- special_and("OTHER")
+
   pd
 }
 
@@ -120,7 +123,8 @@ nest_parse_data <- function(pd_flat) {
   child <- split_data$`FALSE`
   internal <- split_data$`TRUE`
 
-  internal <- rename_(internal, internal_child = ~child)
+  internal$internal_child <- internal$child
+  internal$child <- NULL
 
   child$parent_ <- child$parent
   joined <-
