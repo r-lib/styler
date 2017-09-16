@@ -36,9 +36,9 @@ RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Collate: 
     'addins.R'
+    'compat-tidyr.R'
     'dplyr.R'
     'initialize.R'
-    'compat-tidyr.R'
     'modify_pd.R'
     'nested.R'
     'nested_to_tree.R'

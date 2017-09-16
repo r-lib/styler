@@ -31,3 +31,9 @@ test_that("space before comma is removed", {
     transformer = style_text), NA)
 })
 
+
+test_that("two commas are separated by a space", {
+  expect_warning(test_collection(
+    "spacing", "spacing_comma2",
+    transformer = style_text), NA)
+})
