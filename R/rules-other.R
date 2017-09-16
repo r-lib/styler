@@ -1,3 +1,4 @@
+#' @importFrom rlang seq2
 add_brackets_in_pipe <- function(pd) {
   has_no_brackets <- (pd$token_before == "SPECIAL-PIPE") &
     (pd$token == "SYMBOL") & (pd$text != ".")
@@ -12,7 +13,7 @@ add_brackets_in_pipe <- function(pd) {
              line1 = pd$line1[has_no_brackets],
              line2 = line1,
              col1 = pd$col1[has_no_brackets] + c(0.3, 0.6),
-             col2 = col1 + 1:2,
+             col2 = col1 + seq2(1, 2),
              indent = rep(0, 2),
              child = rep(list(NULL), 2)
          )

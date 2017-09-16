@@ -24,14 +24,14 @@ NULL
 #'           2))
 #' }
 #' @importFrom purrr map_lgl
+#' @importFrom rlang seq2
 update_indention_ref_fun_call <- function(pd_nested) {
   current_is_call <- pd_nested$token_before[2] %in% c("SYMBOL_FUNCTION_CALL")
   non_comment <- which(pd_nested$token != "COMMENT")
   first_non_comment_after_call <- non_comment[non_comment > 2][1]
   if ((current_is_call) &&
-      nrow(pd_nested) > 3 &&
       pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
-    candidates <- 3:(nrow(pd_nested) - 1)
+    candidates <- seq2(3, nrow(pd_nested) - 1)
 
     child_is_call <- map_lgl(pd_nested$child, is_function_call)
     child_is_curly_expr <- map_lgl(pd_nested$child, is_curly_expr)
@@ -56,10 +56,10 @@ update_indention_ref_fun_call <- function(pd_nested) {
 #' x + y
 #' }
 #' }
+#' @importFrom rlang seq2
 update_indention_ref_fun_dec <- function(pd_nested) {
-  if (pd_nested$token[1] == "FUNCTION" &&
-      nrow(pd_nested) > 3) {
-    seq <- 3:(nrow(pd_nested) - 1)
+  if (pd_nested$token[1] == "FUNCTION") {
+    seq <- seq2(3, nrow(pd_nested) - 1)
     pd_nested$indention_ref_id[seq] <- pd_nested$id[1]
   }
   pd_nested
