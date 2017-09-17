@@ -63,13 +63,39 @@ indent_assign <- function(pd, indent_by, token = NULL) {
   pd
 }
 
-#' @describeIn update_indention Is used to indent if / while / for statements
-#'   that do not have curly brackets.
+#' @describeIn update_indention Is used to indent for / while / if / if-else
+#'   statements that do not have curly parenthesis.
 indent_without_paren <- function(pd, indent_by = 2) {
+  pd %>%
+  indent_without_paren_for_while(indent_by) %>%
+  indent_without_paren_if_else(indent_by)
+}
+
+#' @describeIn update_indention Is used to indent for and while statements.
+indent_without_paren_for_while <- function(pd, indent_by) {
   nrow <- nrow(pd)
-  if (!(pd$token[1] %in% c("IF", "FOR", "WHILE"))) return(pd)
+  if (!(pd$token[1] %in% c("FOR", "WHILE"))) return(pd)
   if (pd$lag_newlines[nrow] == 0) return(pd)
   pd$indent[nrow] <- indent_by
+  pd
+}
+
+#' @describeIn update_indention Is used to indent if and if-else statements.
+#' @importFrom rlang seq2
+indent_without_paren_if_else <- function(pd, indent_by) {
+  has_if_without_curly <-
+    pd$token[1] %in% c("IF", "WHILE") && pd$child[[5]]$token[1] != "'{'"
+  if (has_if_without_curly) {
+    pd$indent[5] <- indent_by
+  }
+
+  has_else_without_curly_or_else_chid <-
+    any(pd$token == "ELSE") &&
+    pd$child[[7]]$token[1] != "'{'" &&
+    pd$child[[7]]$token[1] != "IF"
+  if (has_else_without_curly_or_else_chid) {
+    pd$indent[seq(7, nrow(pd))] <- indent_by
+  }
   pd
 }
 
