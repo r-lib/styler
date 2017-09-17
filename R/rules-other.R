@@ -23,3 +23,17 @@ add_brackets_in_pipe <- function(pd) {
   pd
 
 }
+
+wrap_if_else_multi_line_in_curly <- function(pd) {
+  if (pd$token[1] == "IF" && pd_is_multi_line(pd)) {
+    pd$child[[5]] <- wrap_expr_in_curly(pd$child[[5]])
+  }
+  if (nrow(pd) > 6 &&
+      pd$token[6] == "ELSE" &&
+      pd_is_multi_line(pd) &&
+      pd$child[[7]]$token != "IF") {
+    pd$child[[7]] <- wrap_expr_in_curly(pd$child[[7]])
+  }
+
+  pd
+}
