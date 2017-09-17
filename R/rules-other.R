@@ -15,6 +15,8 @@ add_brackets_in_pipe <- function(pd) {
              col1 = pd$col1[has_no_brackets] + c(0.3, 0.6),
              col2 = col1 + seq2(1, 2),
              indent = rep(0, 2),
+             id = rep(NA, 2),
+             pos_id = pd$pos_id[has_no_brackets] + c(0.3, 0.6),
              child = rep(list(NULL), 2)
          )
   pd <- bind_rows(pd, new)

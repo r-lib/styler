@@ -72,7 +72,7 @@ set_line_break_after_opening_if_call_is_multi_line <-
            except_text_before  = NULL) {
   if (!is_function_call(pd)) return(pd)
   npd <- nrow(pd)
-  seq_x <- seq2(3, npd - 1)
+  seq_x <- seq2(3L, npd - 1L)
   is_multi_line <- any(
     (pd$lag_newlines[seq_x] > 0) |
     (pd$token[seq_x] == "COMMENT")
@@ -94,7 +94,7 @@ set_line_break_after_opening_if_call_is_multi_line <-
 set_line_break_before_closing_call <- function(pd, except_token_before) {
   if (!is_function_call(pd)) return(pd)
   npd <- nrow(pd)
-  is_multi_line <- any(pd$lag_newlines[seq2(3, npd - 1)] > 0)
+  is_multi_line <- any(pd$lag_newlines[seq2(3L, npd - 1L)] > 0)
   if (!is_multi_line) {
     exception <- which(pd$token_before %in% except_token_before)
     pd$lag_newlines[setdiff(npd, exception)] <- 0L

@@ -23,6 +23,7 @@ if (getRversion() >= "2.15.1") {
     "terminal", "text", "short",
     "spaces", "lag_spaces",
     "newlines", "lag_newlines",
+    "pos_id",
     NULL
   ))
 }

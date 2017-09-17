@@ -4,9 +4,8 @@
 #'   representation into a nested parse table with
 #'   [nest_parse_data()].
 #' @param text A character vector to parse.
-#' @return A nested parse table. Apart from the columns provided by
-#'   `utils::getParseData()`, a column "short" with the first five characters of
-#'   "text" is added, the nested subtibbles are in column "child".
+#' @return A nested parse table. See [tokenize()] for details on the columns
+#'   of the parse table.
 compute_parse_data_nested <- function(text) {
   parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
@@ -23,14 +22,26 @@ compute_parse_data_nested <- function(text) {
 #' Obtain token table from text
 #'
 #' [utils::getParseData()] is used to obtain a flat parse table from `text`.
+#'
+#' Apart from the columns provided by `utils::getParseData()`, the following
+#' columns are added:
+#'
+#'   * A column "short" with the first five characters of "text".
+#'   * A column "pos_id" for (positional id) which can be used for sorting
+#'     (because "id" cannot be used in general). Note that the nth value of this
+#'     column corresponds to n as long as no tokens are inserted.
+#'   * A column "child" that contains the nested subtibbles.
+#'
 #' @param text A character vector.
 #' @return A flat parse table
+#' @importFrom rlang seq2
 tokenize <- function(text) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse(text = text, keep.source = TRUE)
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
     enhance_mapping_special()
+  parse_data$pos_id <- seq2(1L, nrow(parse_data))
   parse_data$short <- substr(parse_data$text, 1, 5)
   parse_data
 }
@@ -67,7 +78,7 @@ NULL
 add_terminal_token_after <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(line1, col1)
+    arrange(pos_id)
 
   data_frame(id = terminals$id,
              token_after = lead(terminals$token, default = "")) %>%
@@ -78,7 +89,7 @@ add_terminal_token_after <- function(pd_flat) {
 add_terminal_token_before <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(line1, col1)
+    arrange(pos_id)
 
   data_frame(id = terminals$id,
              token_before = lag(terminals$token, default = "")) %>%
@@ -149,7 +160,7 @@ nest_parse_data <- function(pd_flat) {
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
-  bound[order(bound$line1, bound$col1), ]
+  bound[order(bound$pos_id), ]
 
 }
 
