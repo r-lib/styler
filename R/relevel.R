@@ -18,7 +18,7 @@ flatten_operators <- function(pd_nested) {
 #'   the left hand token of an operator one level up. Or doing that with the
 #'   right hand token.
 #' @param pd_nested A nested parse table.
-#' @include token.R
+#' @include token-define.R
 flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, math_token, "'$'")
   pd_token_right <- c(special_token, "LEFT_ASSIGN",  "'+'", "'-'")

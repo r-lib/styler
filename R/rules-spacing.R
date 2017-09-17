@@ -1,4 +1,4 @@
-#' @include token.R
+#' @include token-define.R
 add_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   op_before <- lead(op_after, default = FALSE)
@@ -9,7 +9,7 @@ add_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
-#' @include token.R
+#' @include token-define.R
 set_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   if (!any(op_after)) return(pd_flat)
@@ -20,7 +20,7 @@ set_space_around_op <- function(pd_flat) {
 }
 
 # depreciated!
-#' @include token.R
+#' @include token-define.R
 remove_space_after_unary_pm <- function(pd_flat) {
   op_pm <- c("'+'", "'-'")
   op_pm_unary_after <- c(op_pm, op_token, "'('", "','")

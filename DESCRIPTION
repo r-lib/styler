@@ -44,7 +44,7 @@ Collate:
     'nested.R'
     'nested_to_tree.R'
     'reindent.R'
-    'token.R'
+    'token-define.R'
     'relevel.R'
     'rules-line_break.R'
     'rules-other.R'
