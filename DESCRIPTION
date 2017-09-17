@@ -38,6 +38,7 @@ Collate:
     'addins.R'
     'compat-tidyr.R'
     'dplyr.R'
+    'expr-is.R'
     'initialize.R'
     'modify_pd.R'
     'nested.R'

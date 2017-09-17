@@ -58,7 +58,7 @@ indent_eq_sub <- function(pd,
 #' @describeIn update_indention Same as indent_op, but only indents one token
 #'   after `token`, not all remaining.
 indent_assign <- function(pd, indent_by, token = NULL) {
-  indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
+  indent_indices <- compute_indent_indices(pd, token)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
 }
