@@ -30,7 +30,7 @@ arrange <- function(.data, ...) {
   .data[ord, , drop = FALSE]
 }
 
-bind_rows <- function(x, y = NULL) {
+bind_rows <- function(x, y = NULL, ...) {
   if (is.null(x) && is.null(y)) {
     return(tibble())
   }
@@ -51,7 +51,7 @@ bind_rows <- function(x, y = NULL) {
       y[[nme]] <- NA
     }
   }
-  rbind.data.frame(x, y)
+  bind_rows(rbind.data.frame(x, y), ...)
 }
 
 if_else <- function(condition, true, false, missing = NULL) {
