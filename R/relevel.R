@@ -46,7 +46,7 @@ flatten_operators_one <- function(pd_nested) {
 flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   token_pos <- which(pd_nested$token[-1] %in% token) + 1
   if (length(token_pos) == 0) return(pd_nested)
-  pos <- token_pos[ifelse(left, 1, length(token_pos))] + ifelse(left, -1L, 1L)
+  pos <- token_pos[if_else(left, 1, length(token_pos))] + if_else(left, -1L, 1L)
   if (pos < 1) return(pd_nested)
   if (!any(pd_nested$child[[pos]]$token[-1] %in% child_token)) return(pd_nested)
   bind_with_child(pd_nested, pos)

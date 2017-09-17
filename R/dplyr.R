@@ -30,6 +30,13 @@ arrange <- function(.data, ...) {
   .data[ord, , drop = FALSE]
 }
 
+if_else <- function(condition, true, false, missing = NULL) {
+  stopifnot(length(condition) == length(true))
+  stopifnot(length(condition) == length(false))
+  if (!is.null(missing)) stop("missing arg not yet implemented")
+  ifelse(condition, true, false)
+}
+
 bind_rows <- function(x, y = NULL, ...) {
   if (is.null(x) && is.null(y)) {
     return(tibble())
@@ -52,10 +59,6 @@ bind_rows <- function(x, y = NULL, ...) {
     }
   }
   bind_rows(rbind.data.frame(x, y), ...)
-}
-
-if_else <- function(condition, true, false, missing = NULL) {
-  ifelse(condition, true, false)
 }
 
 filter <- function(.data, ...) {

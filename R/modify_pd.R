@@ -125,9 +125,11 @@ compute_indent_indices <- function(pd,
   trigger <- potential_triggers[needs_indention][1]
   if (is.na(trigger)) return(numeric(0))
   start <- trigger + 1
-  stop <- ifelse(is.null(token_closing),
-                 npd,
-                 which(pd$token %in% token_closing) - 1)
+  if (is.null(token_closing)) {
+    stop <- npd
+  } else {
+    stop <- which(pd$token %in% token_closing) - 1
+  }
 
   seq2(start, stop)
 }
