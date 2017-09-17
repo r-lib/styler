@@ -41,7 +41,7 @@ tokenize <- function(text) {
   parsed <- parse(text = text, keep.source = TRUE)
   parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
     enhance_mapping_special()
-  parse_data$pos_id <- seq2(1, nrow(parse_data))
+  parse_data$pos_id <- seq2(1L, nrow(parse_data))
   parse_data$short <- substr(parse_data$text, 1, 5)
   parse_data
 }
