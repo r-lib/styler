@@ -36,6 +36,12 @@ test_that("multiple curly and round brackets overall test", {
 
 })
 
+test_that("if and ifelse interacting with curly braces works", {
+  expect_warning(test_collection("indention_multiple",
+                                 "if_else_curly",
+                                 transformer = style_text,
+                                 write_back = TRUE), NA)
+})
 
 test_that("edge cases work", {
   expect_warning(test_collection("indention_multiple",

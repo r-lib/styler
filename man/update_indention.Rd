@@ -8,6 +8,8 @@
 \alias{indent_eq_sub}
 \alias{indent_assign}
 \alias{indent_without_paren}
+\alias{indent_without_paren_for_while}
+\alias{indent_without_paren_if_else}
 \title{Update indention information of parse data}
 \usage{
 indent_round(pd, indent_by)
@@ -22,6 +24,10 @@ indent_eq_sub(pd, indent_by, token = "EQ_SUB")
 indent_assign(pd, indent_by, token = NULL)
 
 indent_without_paren(pd, indent_by = 2)
+
+indent_without_paren_for_while(pd, indent_by)
+
+indent_without_paren_if_else(pd, indent_by)
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with
@@ -47,7 +53,11 @@ occurs is not indented (see\code{\link[=compute_indent_indices]{compute_indent_i
 \item \code{indent_assign}: Same as indent_op, but only indents one token
 after \code{token}, not all remaining.
 
-\item \code{indent_without_paren}: Is used to indent if / while / for statements
-that do not have curly brackets.
+\item \code{indent_without_paren}: Is used to indent for / while / if / if-else
+statements that do not have curly parenthesis.
+
+\item \code{indent_without_paren_for_while}: Is used to indent for and while statements.
+
+\item \code{indent_without_paren_if_else}: Is used to indent if and if-else statements.
 }}
 

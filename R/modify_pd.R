@@ -9,14 +9,18 @@ NULL
 
 #' @describeIn update_indention Inserts indention based on round brackets.
 indent_round <- function(pd, indent_by) {
-  indent_indices <- compute_indent_indices(pd, token = "'('")
+  indent_indices <- compute_indent_indices(
+    pd, token_opening = "'('", token_closing = "')'"
+  )
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   set_unindention_child(pd, token = "')'", unindent_by = indent_by)
 }
 
 #' @rdname update_indention
 indent_curly <- function(pd, indent_by) {
-  indent_indices <- compute_indent_indices(pd, token = "'{'")
+  indent_indices <- compute_indent_indices(
+    pd, token_opening = "'{'", token_closing = "'}'"
+  )
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   set_unindention_child(pd, token = "'}'", unindent_by = indent_by)
 }
@@ -24,12 +28,14 @@ indent_curly <- function(pd, indent_by) {
 #' @describeIn update_indention Indents operators
 indent_op <- function(pd,
                       indent_by,
-                      token = c(math_token,
-                                logical_token,
-                                special_token,
-                                "LEFT_ASSIGN",
-                                "'$'")) {
-  indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
+                      token = c(
+                        math_token,
+                        logical_token,
+                        special_token,
+                        "LEFT_ASSIGN",
+                        "'$'")
+                      ) {
+  indent_indices <- compute_indent_indices(pd, token)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
 }
@@ -52,18 +58,44 @@ indent_eq_sub <- function(pd,
 #' @describeIn update_indention Same as indent_op, but only indents one token
 #'   after `token`, not all remaining.
 indent_assign <- function(pd, indent_by, token = NULL) {
-  indent_indices <- compute_indent_indices(pd, token, indent_last = TRUE)
+  indent_indices <- compute_indent_indices(pd, token)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
 }
 
-#' @describeIn update_indention Is used to indent if / while / for statements
-#'   that do not have curly brackets.
+#' @describeIn update_indention Is used to indent for / while / if / if-else
+#'   statements that do not have curly parenthesis.
 indent_without_paren <- function(pd, indent_by = 2) {
+  pd %>%
+  indent_without_paren_for_while(indent_by) %>%
+  indent_without_paren_if_else(indent_by)
+}
+
+#' @describeIn update_indention Is used to indent for and while statements.
+indent_without_paren_for_while <- function(pd, indent_by) {
   nrow <- nrow(pd)
-  if (!(pd$token[1] %in% c("IF", "FOR", "WHILE"))) return(pd)
+  if (!(pd$token[1] %in% c("FOR", "WHILE"))) return(pd)
   if (pd$lag_newlines[nrow] == 0) return(pd)
   pd$indent[nrow] <- indent_by
+  pd
+}
+
+#' @describeIn update_indention Is used to indent if and if-else statements.
+#' @importFrom rlang seq2
+indent_without_paren_if_else <- function(pd, indent_by) {
+  has_if_without_curly <-
+    pd$token[1] %in% c("IF", "WHILE") && pd$child[[5]]$token[1] != "'{'"
+  if (has_if_without_curly) {
+    pd$indent[5] <- indent_by
+  }
+
+  has_else_without_curly_or_else_chid <-
+    any(pd$token == "ELSE") &&
+    pd$child[[7]]$token[1] != "'{'" &&
+    pd$child[[7]]$token[1] != "IF"
+  if (has_else_without_curly_or_else_chid) {
+    pd$indent[seq(7, nrow(pd))] <- indent_by
+  }
   pd
 }
 
@@ -71,22 +103,38 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #'
 #' Based on `token`, find the rows in `pd` that need to be indented.
 #' @param pd A parse table.
-#' @param token A character vector with tokens.
-#' @param indent_last Flag to indicate whether the last token in `pd` should
-#'   be indented or not. See 'Details'.
+#' @param token_opening A character vector with tokens that could induce
+#'   indention for subsequent tokens.
+#' @param token_closing A character vector with tokens that could terminate
+#'   indention for previous tokens. If `NULL` (the default), indention should
+#'   end with the last token in the parse table.
 #' @details
-#'  For example when `token` is a parenthesis, the closing parenthesis does not
-#'  need indention, but if token is something else, for example a plus (+), the
-#'  last token in `pd` needs indention.
+#' Two cases are fundamentally different:
+#'
+#' * Indention based on operators (e.g '+'), where all subsequent tokens should
+#'   be indented.
+#' * Indention based on braces (e.g. '('), where just the tokens between the
+#'   opening and the closing brace have to be indented.
+#'
+#' To cover the second case, we need `token_closing` because it cannot be taken
+#' for granted that `token_closing` is always the last token in `pd`. For
+#' example in if-else expressions, this is not the case and indenting
+#' everything between '(' and the penultimate token would result in the wrong
+#' formatting.
 #' @importFrom rlang seq2
-compute_indent_indices <- function(pd, token = "'('", indent_last = FALSE) {
+compute_indent_indices <- function(pd,
+                                   token_opening,
+                                   token_closing = NULL) {
   npd <- nrow(pd)
-  potential_triggers <- which(pd$token %in% token)
+  potential_triggers <- which(pd$token %in% token_opening)
   needs_indention <- needs_indention(pd, potential_triggers)
   trigger <- potential_triggers[needs_indention][1]
   if (is.na(trigger)) return(numeric(0))
   start <- trigger + 1
-  stop <- npd - ifelse(indent_last, 0, 1)
+  stop <- ifelse(is.null(token_closing),
+                 npd,
+                 which(pd$token %in% token_closing) - 1)
+
   seq2(start, stop)
 }
 
