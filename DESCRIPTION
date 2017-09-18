@@ -19,7 +19,6 @@ Suggests:
     dplyr,
     here,
     knitr,
-    mockr,
     rmarkdown,
     rstudioapi,
     testthat
