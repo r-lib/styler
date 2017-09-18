@@ -49,3 +49,10 @@ test_that("edge cases work", {
                                  transformer = style_text), NA)
 
 })
+
+test_that("token / braces interaction works", {
+  expect_warning(test_collection("indention_multiple",
+                                 "fun_for_new_line",
+                                 transformer = style_text), NA)
+})
+
