@@ -2,8 +2,7 @@
 % Please edit documentation in R/modify_pd.R
 \name{update_indention}
 \alias{update_indention}
-\alias{indent_round}
-\alias{indent_curly}
+\alias{indent_braces}
 \alias{indent_op}
 \alias{indent_eq_sub}
 \alias{indent_assign}
@@ -12,9 +11,7 @@
 \alias{indent_without_paren_if_else}
 \title{Update indention information of parse data}
 \usage{
-indent_round(pd, indent_by)
-
-indent_curly(pd, indent_by)
+indent_braces(pd, indent_by)
 
 indent_op(pd, indent_by, token = c(math_token, logical_token, special_token,
   "LEFT_ASSIGN", "'$'"))
@@ -42,7 +39,8 @@ Update indention information of parse data
 }
 \section{Functions}{
 \itemize{
-\item \code{indent_round}: Inserts indention based on round brackets.
+\item \code{indent_braces}: Inserts indention based on round, square and
+curly brackets.
 
 \item \code{indent_op}: Indents operators
 
