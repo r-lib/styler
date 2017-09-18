@@ -14,13 +14,8 @@ style_active_file <- function() {
 #' @importFrom rlang seq2
 style_active_region <- function() {
   context <- get_rstudio_context()
-  text <- context$selection[[1]]$text
-  if (all(nchar(text)) == 0) stop("No text selected")
-  out <- style_text(text)
-  pos <- rstudioapi::as.document_position(context$selection[[1]]$range$start)
-  rng <- context$selection[[1]]$range
-  rstudioapi::insertText(rng, "", id = context$id)
-  rstudioapi::insertText(pos, paste0(out, collapse = "\n"), id = context$id)
+  out <- style_text(context$selection[[1]]$text)
+  rstudioapi::modifyRange(context$selection[[1]]$range, out, id = context$id)
 }
 
 get_rstudio_context <- function() {
