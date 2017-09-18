@@ -111,7 +111,8 @@ tidyverse_style <- function(scope = "tokens",
     lst(
       force_assignment_op,
       resolve_semicolon,
-      add_brackets_in_pipe
+      add_brackets_in_pipe,
+      remove_terminal_token_before_and_after
     )
 
 
