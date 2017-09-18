@@ -29,3 +29,7 @@ corresponding to the tokens.}
 \description{
 Creates a terminal token represented as (a row of) a parse table.
 }
+\seealso{
+Other token creators: \code{\link{create_pos_id}},
+  \code{\link{validate_new_pos_id}}
+}

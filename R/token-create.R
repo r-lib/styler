@@ -11,6 +11,7 @@
 #' @param indention_ref_ids Character vector with indention ref ids
 #'   corresponding to the tokens.
 #' @param indents Character vector with indents corresponding to the tokens.
+#' @family token creators
 create_tokens <- function(tokens,
                           texts,
                           lag_newlines = 0,
@@ -55,15 +56,35 @@ create_tokens <- function(tokens,
 #'   `pos`.
 #' @param by By how much the reference `pos_id` should be increased / decreased
 #'   to create a new id.
+#' @param n Number of ids to generate.
 #' @return
-#' Returns a valid pos_id or an error if it was not possible to create one.
-create_pos_id <- function(pd, pos, after = FALSE, by = 0.1) {
+#' Returns a valid pos_id or an error if it was not possible to create one. The
+#' validation is done with [validate_new_pos_id()]
+#' @family token creators
+create_pos_id <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
+  direction <- ifelse(after, 1L, -1L)
+  first <- pd$pos_id[pos] + by * direction
+  new_ids <- seq(first, to = first + direction * (n - 1) * by, by = by * direction)
+  validate_new_pos_id(new_ids, after)
+  new_ids
+}
+
+#' @describeIn create_pos_id Helper to create one id.
+create_pos_id_one <- function(pd, pos, after = FALSE, by = 0.1) {
   new_id <- pd$pos_id[pos] + by * ifelse(after, 1L, -1L)
-  ref <- ifelse(after, floor(new_id), ceiling(new_id))
-  if (abs(new_id - ref) > 0.45) stop("too many ids assigned")
+  validate_new_pos_id(new_id, after)
   new_id
 }
 
+#' Validate new position ids
+#' @param new_ids A vector with new ids
+#' @param after Whether the ids are created with `after = TRUE` (and hence
+#' should be in the range x.0-x.45) or not.
+#' @family token creators
+validate_new_pos_id <- function(new_ids, after) {
+  ref <- ifelse(after, floor(new_ids), ceiling(new_ids))
+  if (any(abs(new_ids - ref) > 0.45)) stop("too many ids assigned")
+}
 #' Find the parent of a nest
 #'
 #' It is any id of the nest (nested parse table at one level

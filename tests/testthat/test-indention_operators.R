@@ -21,7 +21,7 @@ test_that("mathematical operators are indended correctly", {
 test_that("while / for / if without curly brackets", {
   expect_warning(test_collection("indention_operators",
                                  "while_for_if_without_curly",
-                                 transformer = style_text), NA)
+                                 transformer = style_text, strict = FALSE), NA)
 })
 
 test_that("logical, special and EQ_SUB tokens are indented correctly", {
