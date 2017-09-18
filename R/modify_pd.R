@@ -74,8 +74,8 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #' @describeIn update_indention Is used to indent for and while statements.
 indent_without_paren_for_while <- function(pd, indent_by) {
   nrow <- nrow(pd)
-  if (!(pd$token[1] %in% c("FOR", "WHILE"))) return(pd)
-  if (pd$lag_newlines[nrow] == 0) return(pd)
+  if (!(pd$token[1] %in% c("FOR", "WHILE", "FUNCTION"))) return(pd)
+  if (is_curly_expr(pd$child[[nrow]])) return(pd)
   pd$indent[nrow] <- indent_by
   pd
 }
