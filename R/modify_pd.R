@@ -7,22 +7,16 @@
 #' @name update_indention
 NULL
 
-#' @describeIn update_indention Inserts indention based on round brackets.
-indent_round <- function(pd, indent_by) {
+#' @describeIn update_indention Inserts indention based on round, square and
+#'   curly brackets.
+indent_braces <- function(pd, indent_by) {
   indent_indices <- compute_indent_indices(
-    pd, token_opening = "'('", token_closing = "')'"
+    pd,
+    token_opening = c("'('", "'['", "'{'"),
+    token_closing = c("')'", "']'", "'}'")
   )
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   set_unindention_child(pd, token = "')'", unindent_by = indent_by)
-}
-
-#' @rdname update_indention
-indent_curly <- function(pd, indent_by) {
-  indent_indices <- compute_indent_indices(
-    pd, token_opening = "'{'", token_closing = "'}'"
-  )
-  pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
-  set_unindention_child(pd, token = "'}'", unindent_by = indent_by)
 }
 
 #' @describeIn update_indention Indents operators

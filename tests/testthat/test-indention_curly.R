@@ -3,14 +3,14 @@ context("indent curly brackets")
 test_that("indention on one-liner curley only is not changed", {
   expect_warning(test_collection("indention_curly_brackets",
                                  "one_line_curly",
-                                 transformer = style_indent_curly), NA)
+                                 transformer = style_text), NA)
 
 })
 
 test_that("indention with multi-line curley only is correct", {
   expect_warning(test_collection("indention_curly_brackets",
                                  "multi_line_curly_only",
-                                 transformer = style_indent_curly), NA)
+                                 transformer = style_text), NA)
 
 })
 
@@ -18,7 +18,7 @@ test_that("indention with multi-line curley only is correct", {
 test_that("indention with multi-line curley and round is correct", {
   expect_warning(test_collection("indention_curly_brackets",
                                  "multi_line_curly_round_only",
-                                 transformer = style_indent_curly_round), NA)
+                                 transformer = style_text), NA)
 
 })
 

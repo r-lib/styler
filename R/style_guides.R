@@ -58,8 +58,7 @@ tidyverse_style <- function(scope = "tokens",
 
   space_manipulators <- if (scope >= "spaces")
     lst(
-      partial(indent_round, indent_by = indent_by),
-      partial(indent_curly, indent_by = indent_by),
+      partial(indent_braces, indent_by = indent_by),
       partial(indent_op, indent_by = indent_by),
       partial(indent_eq_sub, indent_by = indent_by),
       partial(indent_without_paren, indent_by = indent_by),

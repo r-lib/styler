@@ -151,46 +151,6 @@ style_empty <- function(text) {
   transformed_text
 }
 
-#' @describeIn test_transformer Transformations for indention based on curly
-#'   brackets only.
-style_indent_curly <- function(text) {
-
-  transformers <- list(
-    # transformer functions
-    initialize = initialize_attributes,
-    line_break = NULL,
-    space      =  partial(indent_curly, indent_by = 2),
-    token      = NULL,
-
-    # transformer options
-    use_raw_indention = FALSE,
-    NULL
-  )
-  transformed_text <- parse_transform_serialize(text, transformers)
-  transformed_text
-}
-
-
-#' @describeIn test_transformer Transformations for indention based on curly
-#'   brackets and round brackets.
-style_indent_curly_round <- function(text) {
-  transformers <- list(
-    # transformer functions
-    initialize = initialize_attributes,
-    line_break = NULL,
-    space      = c(partial(indent_curly, indent_by = 2),
-                    partial(indent_round, indent_by = 2)),
-    token      = NULL,
-
-    # transformer options
-    use_raw_indention = FALSE,
-    NULL
-  )
-
-  transformed_text <- parse_transform_serialize(text, transformers)
-  transformed_text
-}
-
 #' @describeIn test_transformer Transformations for indention based on operators
 style_op <- function(text) {
 
