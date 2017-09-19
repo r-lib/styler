@@ -70,7 +70,7 @@ set_line_break_after_opening_if_call_is_multi_line <-
   function(pd,
            except_token_after = NULL,
            except_text_before  = NULL) {
-  if (!is_function_call(pd)) return(pd)
+  if (!is_function_call(pd) && !is_subset_expr(pd)) return(pd)
   npd <- nrow(pd)
   seq_x <- seq2(3L, npd - 1L)
   is_multi_line <- any(
@@ -92,7 +92,7 @@ set_line_break_after_opening_if_call_is_multi_line <-
 #' @describeIn set_line_break_if_call_is_multi_line Sets line break before
 #'   closing parenthesis.
 set_line_break_before_closing_call <- function(pd, except_token_before) {
-  if (!is_function_call(pd)) return(pd)
+  if (!is_function_call(pd) && !is_subset_expr(pd)) return(pd)
   npd <- nrow(pd)
   is_multi_line <- any(pd$lag_newlines[seq2(3L, npd - 1L)] > 0)
   if (!is_multi_line) {

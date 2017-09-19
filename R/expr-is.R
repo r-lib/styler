@@ -11,6 +11,11 @@ is_curly_expr <- function(pd) {
   pd$token[1] == "'{'"
 }
 
+is_subset_expr <- function(pd) {
+  if (is.null(pd) || nrow(pd) == 1) return(FALSE)
+  pd$token[2] == "'['"
+}
+
 #' @describeIn pd_is Checks whether `pd` is a function call.
 is_function_call <- function(pd) {
   if (is.null(pd)) return(FALSE)
