@@ -37,3 +37,9 @@ test_that("two commas are separated by a space", {
     "spacing", "spacing_comma2",
     transformer = style_text), NA)
 })
+
+test_that("spacing between ! and bang is perserved", {
+  expect_warning(test_collection(
+    "spacing", "bang_bang_spacing",
+    transformer = style_text), NA)
+})
