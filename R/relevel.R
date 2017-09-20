@@ -18,7 +18,7 @@ flatten_operators <- function(pd_nested) {
 #'   the left hand token of an operator one level up. Or doing that with the
 #'   right hand token.
 #' @param pd_nested A nested parse table.
-#' @include token.R
+#' @include token-define.R
 flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, math_token, "'$'")
   pd_token_right <- c(special_token, "LEFT_ASSIGN",  "'+'", "'-'")
@@ -46,7 +46,7 @@ flatten_operators_one <- function(pd_nested) {
 flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   token_pos <- which(pd_nested$token[-1] %in% token) + 1
   if (length(token_pos) == 0) return(pd_nested)
-  pos <- token_pos[ifelse(left, 1, length(token_pos))] + ifelse(left, -1L, 1L)
+  pos <- token_pos[if_else(left, 1, length(token_pos))] + if_else(left, -1L, 1L)
   if (pos < 1) return(pd_nested)
   if (!any(pd_nested$child[[pos]]$token[-1] %in% child_token)) return(pd_nested)
   bind_with_child(pd_nested, pos)
@@ -54,8 +54,8 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
 
 #' Bind a parse table with one of its children
 #'
-#' Bind a parse table with one of its children and return the **unordered**
-#' parse table (that is, rows are not arranged according to line1 / line2).
+#' Bind a parse table with one of its children and return parse table, ordered
+#' according to the appearance of the tokens.
 #' @param pd_nested A nested parse table.
 #' @param pos The position of the child to bind.
 bind_with_child <- function(pd_nested, pos) {

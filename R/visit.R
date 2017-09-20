@@ -113,7 +113,7 @@ context_towards_terminals <- function(pd_nested,
 extract_terminals <- function(pd_nested) {
   if (is.null(pd_nested)) return(pd)
   pd_split <- split(pd_nested, seq_len(nrow(pd_nested)))
-  bind_rows(ifelse(pd_nested$terminal, pd_split, pd_nested$child))
+  bind_rows(if_else(pd_nested$terminal, pd_split, pd_nested$child))
 }
 
 
@@ -174,7 +174,7 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #'   should be used.
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
-    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0,
+    flattened_pd$lag_spaces <- if_else(flattened_pd$lag_newlines > 0,
                                       flattened_pd$indent,
                                       flattened_pd$lag_spaces)
   }

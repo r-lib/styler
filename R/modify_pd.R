@@ -125,9 +125,11 @@ compute_indent_indices <- function(pd,
   trigger <- potential_triggers[needs_indention][1]
   if (is.na(trigger)) return(numeric(0))
   start <- trigger + 1
-  stop <- ifelse(is.null(token_closing),
-                 npd,
-                 which(pd$token %in% token_closing) - 1)
+  if (is.null(token_closing)) {
+    stop <- npd
+  } else {
+    stop <- which(pd$token %in% token_closing) - 1
+  }
 
   seq2(start, stop)
 }
@@ -170,7 +172,7 @@ needs_indention_one <- function(pd, potential_trigger) {
 #' @param pd A parse table.
 #' @importFrom purrr map_lgl
 set_multi_line <- function(pd) {
-  pd$multi_line <- map_lgl(pd$child, token_is_multi_line)
+  pd$multi_line <- map_lgl(pd$child, pd_is_multi_line)
   pd
 }
 
@@ -181,7 +183,7 @@ set_multi_line <- function(pd) {
 #' * it contains a line break.
 #' * it has at least one child that is a multi-line expression itself.
 #' @param pd A parse table.
-token_is_multi_line <- function(pd) {
+pd_is_multi_line <- function(pd) {
   any(pd$multi_line, pd$lag_newlines > 0)
 }
 

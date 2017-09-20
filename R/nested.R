@@ -96,6 +96,15 @@ add_terminal_token_before <- function(pd_flat) {
     left_join(pd_flat, ., by = "id")
 }
 
+#' @describeIn add_token_terminal Removes column `terimnal_token_before`. Might
+#'   be used to prevent the use of invalidated information, e.g. if tokens were
+#'   added to the nested parse table.
+remove_terminal_token_before_and_after <- function(pd_flat) {
+  pd_flat$token_before <- NULL
+  pd_flat$token_after <- NULL
+  pd_flat
+}
+
 #' Helper for setting spaces
 #'
 #' @param spaces_after_prefix An integer vector with the number of spaces
