@@ -16,7 +16,7 @@ test_that("can create a token that has relevant columns", {
 
 test_that("pos_id can be created", {
   pd <- create_tokens("XZY_TEST", "test", pos_ids = 3, parents = 0)
-  new_id <- create_pos_id(pd, 1L, by = 0.4)
+  new_id <- create_pos_ids(pd, 1L, by = 0.4)
   parents <- create_parent_id(pd)
   expect_error(
     bind_rows(
@@ -30,7 +30,7 @@ test_that("pos_id can be created", {
 
 test_that("unambiguous pos_id won't be created (down)", {
   pd <- create_tokens("XZY_TEST", "test", pos_ids = 3, parents = 0)
-  new_id <- create_pos_id(pd, 1L, by = 0.4)
+  new_id <- create_pos_ids(pd, 1L, by = 0.4)
   parents <- create_parent_id(pd)
   pd <- bind_rows(
     create_tokens("XZY_TEST", "test", pos_ids = new_id, parents = parents),
@@ -41,7 +41,7 @@ test_that("unambiguous pos_id won't be created (down)", {
 
 test_that("unambiguous pos_id won't be created (up)", {
   pd <- create_tokens("XZY_TEST", "test", pos_ids = 3, parents = 0)
-  new_id <- create_pos_id(pd, 1L, by = 0.4, after = TRUE)
+  new_id <- create_pos_ids(pd, 1L, by = 0.4, after = TRUE)
   parents <- create_parent_id(pd)
 
   pd <- bind_rows(

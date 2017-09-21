@@ -3,15 +3,22 @@ add_brackets_in_pipe <- function(pd) {
   has_no_brackets <- (pd$token_before == "SPECIAL-PIPE") &
     (pd$token == "SYMBOL") & (pd$text != ".")
   if (!any(has_no_brackets)) return(pd)
-  new_pos_id <- create_pos_id(pd, 1, after = TRUE, n = 2)
+  new_pos_ids <- create_pos_ids(pd, 1, after = TRUE, n = 2)
   new_pd <- create_tokens(
-    tokens = c("'('", "')'"), texts = c("(", ")"), pos_ids = new_pos_id,
+    tokens = c("'('", "')'"), texts = c("(", ")"), pos_ids = new_pos_ids,
     lag_newlines = rep(0, 2), parents = create_parent_id(pd))
   pd <- bind_rows(pd, new_pd)
   pd
 
 }
 
+#' Wrap if-else statement in curly braces
+#'
+#' Wrap an if-else statement in curly braces if it is not already wrapped in
+#' a such.
+#' @param pd A parse table.
+#' @param indent_by The amont of spaces used to indent an expression in curly
+#'   braces. Used for unindention.
 wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
   if (pd$token[1] == "IF" &&
       pd_is_multi_line(pd) &&

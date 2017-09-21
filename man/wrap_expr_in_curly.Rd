@@ -8,6 +8,9 @@ wrap_expr_in_curly(pd, stretch_out = FALSE)
 }
 \arguments{
 \item{pd}{A parse table.}
+
+\item{stretch_out}{Whether or not to create a line break after the opening
+curly brace and before the closing curly brace.}
 }
 \description{
 Adds curly braces to an expression (represented as a parse table) if there

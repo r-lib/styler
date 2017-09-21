@@ -21,15 +21,24 @@ tokens.}
 \item{pos_ids}{Character vector with positional id corresponding to the
 tokens.}
 
+\item{parents}{Vector with \code{id} corresponding to the
+parent of the tokens we want to create.}
+
+\item{token_before}{Character vector corresponding to the columns
+\code{token_before}.}
+
+\item{token_after}{Character vector corresponding to the columns
+\code{token_after}.}
+
 \item{indention_ref_ids}{Character vector with indention ref ids
 corresponding to the tokens.}
 
-\item{indents}{Character vector with indents corresponding to the tokens.}
+\item{indents}{Vector with indents corresponding to the tokens.}
 }
 \description{
 Creates a terminal token represented as (a row of) a parse table.
 }
 \seealso{
-Other token creators: \code{\link{create_pos_id}},
-  \code{\link{validate_new_pos_id}}
+Other token creators: \code{\link{create_pos_ids}},
+  \code{\link{validate_new_pos_ids}}
 }

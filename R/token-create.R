@@ -8,9 +8,15 @@
 #' @param spaces Character vector with spaces corresponding to the tokens.
 #' @param pos_ids Character vector with positional id corresponding to the
 #'   tokens.
+#' @param parents Vector with `id` corresponding to the
+#'   parent of the tokens we want to create.
+#' @param token_before Character vector corresponding to the columns
+#'   `token_before`.
+#' @param token_after Character vector corresponding to the columns
+#'   `token_after`.
 #' @param indention_ref_ids Character vector with indention ref ids
 #'   corresponding to the tokens.
-#' @param indents Character vector with indents corresponding to the tokens.
+#' @param indents Vector with indents corresponding to the tokens.
 #' @family token creators
 create_tokens <- function(tokens,
                           texts,
@@ -48,43 +54,42 @@ create_tokens <- function(tokens,
   )
 }
 
-#' Create a valid pos_id if possible
+#' Create valid pos_ids if possible
 #'
 #' @param pd A parse table.
 #' @param pos The position where the new id should be inserted.
-#' @param after Boolean indicating whether it should be inserted after or before
-#'   `pos`.
 #' @param by By how much the reference `pos_id` should be increased / decreased
 #'   to create a new id.
+#' @param after Boolean indicating whether it should be inserted after or before
+#'   `pos`.
 #' @param n Number of ids to generate.
 #' @return
-#' Returns a valid pos_id or an error if it was not possible to create one. The
-#' validation is done with [validate_new_pos_id()]
+#' Returns a valid sequences of pos_ids or an error if it was not possible to
+#' create one. The validation is done with [validate_new_pos_ids()]
 #' @family token creators
-create_pos_id <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
+create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
   direction <- ifelse(after, 1L, -1L)
   first <- pd$pos_id[pos] + by * direction
   new_ids <- seq(first, to = first + direction * (n - 1) * by, by = by * direction)
-  validate_new_pos_id(new_ids, after)
+  validate_new_pos_ids(new_ids, after)
   new_ids
 }
 
-#' @describeIn create_pos_id Helper to create one id.
-create_pos_id_one <- function(pd, pos, after = FALSE, by = 0.1) {
-  new_id <- pd$pos_id[pos] + by * ifelse(after, 1L, -1L)
-  validate_new_pos_id(new_id, after)
-  new_id
-}
-
-#' Validate new position ids
+#' Validate sequence of new position ids
+#'
+#' Ids created with `after = TRUE` can have `pos_id` values between x.0 and
+#' x.5 and ids created with `after = FALSE` can have `pos_id` values between
+#' 1+ x.0 and 1 + x.5 where x is the `pos_id` integer which was used as a
+#' reference to create the new `pos_ids`.
 #' @param new_ids A vector with new ids
 #' @param after Whether the ids are created with `after = TRUE` (and hence
 #' should be in the range x.0-x.45) or not.
 #' @family token creators
-validate_new_pos_id <- function(new_ids, after) {
+validate_new_pos_ids <- function(new_ids, after) {
   ref <- ifelse(after, floor(new_ids), ceiling(new_ids))
-  if (any(abs(new_ids - ref) > 0.45)) stop("too many ids assigned")
+  if (any(abs(new_ids - ref) > 0.5)) stop("too many ids assigned")
 }
+
 #' Find the parent of a nest
 #'
 #' It is any id of the nest (nested parse table at one level
@@ -108,6 +113,8 @@ create_parent_id <- function(pd_nested) {
 #' Adds curly braces to an expression (represented as a parse table) if there
 #' are none.
 #' @param pd A parse table.
+#' @param stretch_out Whether or not to create a line break after the opening
+#'   curly brace and before the closing curly brace.
 wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
   if (is_curly_expr(pd)) return(pd)
   if (stretch_out) {
@@ -115,13 +122,13 @@ wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
   }
   opening <- create_tokens(
     "'{'", "{",
-    pos_ids = create_pos_id(pd, 1, after = FALSE),
+    pos_ids = create_pos_ids(pd, 1, after = FALSE),
     parents = create_parent_id(pd)
   )
 
   closing <- create_tokens(
     "'}'", "}", spaces = 1, lag_newlines = as.integer(stretch_out),
-    pos_id = create_pos_id(pd, nrow(pd), after = TRUE),
+    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
     parents = create_parent_id(pd)
   )
   bind_rows(opening, pd, closing)
