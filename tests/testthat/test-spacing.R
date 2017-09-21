@@ -43,3 +43,10 @@ test_that("spacing between ! and bang is perserved", {
     "spacing", "bang_bang_spacing",
     transformer = style_text), NA)
 })
+
+test_that("spacing around in works", {
+  expect_warning(test_collection(
+    "spacing", "spacing_in",
+    transformer = style_text), NA)
+})
+

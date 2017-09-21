@@ -7,7 +7,7 @@
 \alias{indent_eq_sub}
 \alias{indent_assign}
 \alias{indent_without_paren}
-\alias{indent_without_paren_for_while}
+\alias{indent_without_paren_for_while_fun}
 \alias{indent_without_paren_if_else}
 \title{Update indention information of parse data}
 \usage{
@@ -22,7 +22,7 @@ indent_assign(pd, indent_by, token = NULL)
 
 indent_without_paren(pd, indent_by = 2)
 
-indent_without_paren_for_while(pd, indent_by)
+indent_without_paren_for_while_fun(pd, indent_by)
 
 indent_without_paren_if_else(pd, indent_by)
 }
@@ -54,7 +54,8 @@ after \code{token}, not all remaining.
 \item \code{indent_without_paren}: Is used to indent for / while / if / if-else
 statements that do not have curly parenthesis.
 
-\item \code{indent_without_paren_for_while}: Is used to indent for and while statements.
+\item \code{indent_without_paren_for_while_fun}: Is used to indent for and statements and function
+definitions without parenthesis.
 
 \item \code{indent_without_paren_if_else}: Is used to indent if and if-else statements.
 }}
