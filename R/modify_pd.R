@@ -61,12 +61,13 @@ indent_assign <- function(pd, indent_by, token = NULL) {
 #'   statements that do not have curly parenthesis.
 indent_without_paren <- function(pd, indent_by = 2) {
   pd %>%
-  indent_without_paren_for_while(indent_by) %>%
+  indent_without_paren_for_while_fun(indent_by) %>%
   indent_without_paren_if_else(indent_by)
 }
 
-#' @describeIn update_indention Is used to indent for and while statements.
-indent_without_paren_for_while <- function(pd, indent_by) {
+#' @describeIn update_indention Is used to indent for and statements and function
+#'   definitions without parenthesis.
+indent_without_paren_for_while_fun <- function(pd, indent_by) {
   nrow <- nrow(pd)
   if (!(pd$token[1] %in% c("FOR", "WHILE", "FUNCTION"))) return(pd)
   if (is_curly_expr(pd$child[[nrow]])) return(pd)
