@@ -84,7 +84,7 @@ make_transformer <- function(transformers) {
 #' @inheritParams apply_transformers
 parse_transform_serialize <- function(text, transformers) {
   pd_nested <- compute_parse_data_nested(text)
-
+  start_line <- find_start_line(pd_nested)
   if (nrow(pd_nested) == 0) {
     warning(
       "Text to style did not contain any tokens. Returning empty string.",
@@ -98,7 +98,8 @@ parse_transform_serialize <- function(text, transformers) {
     enrich_terminals(transformers$use_raw_indention) %>%
     apply_ref_indention()
 
-  serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
+  serialized_transformed_text <-
+    serialize_parse_data_flattened(flattened_pd, start_line = start_line)
   serialized_transformed_text
 }
 

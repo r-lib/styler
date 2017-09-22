@@ -176,8 +176,8 @@ combine_children <- function(child, internal_child) {
 #' Get the start right
 #'
 #' On what line does the first token occur?
-#' @param pd A parse table.
+#' @param pd_nested A nested parse table.
 #' @return The line number on which the first token occurs.
-start_on_line <- function(pd) {
-  pd$line1[1]
+find_start_line <- function(pd_nested) {
+  pd_nested$line1[1]
 }

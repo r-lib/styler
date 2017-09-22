@@ -45,10 +45,6 @@ create_tokens <- function(tokens,
     spaces = spaces,
     multi_line = rep(FALSE, len_text),
     indention_ref_id = indention_ref_ids,
-    line1 = rep(NA, len_text),
-    line2 = rep(NA, len_text),
-    col1 = rep(NA, len_text),
-    col2 = rep(NA, len_text),
     indent = indents,
     child = rep(list(NULL), len_text)
   )

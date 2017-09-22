@@ -9,6 +9,7 @@ initialize_attributes <- function(pd_flat) {
   init_pd <-
     initialize_newlines(pd_flat) %>%
     initialize_spaces() %>%
+    remove_line_col() %>%
     initialize_multi_line() %>%
     initialize_indention_ref_id() %>%
     initialize_indent() %>%
@@ -34,6 +35,11 @@ initialize_spaces <- function(pd_flat) {
   pd_flat$spaces <- pd_flat$col3 - pd_flat$col2_nl - 1L
   pd_flat$col3 <- NULL
   pd_flat$col2_nl <- NULL
+  pd_flat
+}
+
+remove_line_col <- function(pd_flat) {
+  pd_flat[c("line1", "line2", "col1", "col2")] <- NULL
   pd_flat
 }
 
