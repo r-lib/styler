@@ -124,11 +124,13 @@ prettify_any <- function(transformers, recursive) {
 #' @inheritParams style_pkg
 #' @inheritSection style_pkg Warning
 #' @examples
-#' \dontrun{
 #' # the following is identical but the former is more convenient:
-#' style_file("file.R", style = tidyverse_style, strict = TRUE)
-#' style_text("file.R", transformers = tidyverse_style(strict = TRUE))
-#' }
+#' file <- tempfile("styler", fileext = ".R")
+#' utf8::write_lines_enc("1++1", file)
+#' style_file(file, style = tidyverse_style, strict = TRUE)
+#' style_file(file, transformers = tidyverse_style(strict = TRUE))
+#' utf8::read_lines_enc(file)
+#' unlink(file)
 #' @family stylers
 #' @export
 style_file <- function(path,
