@@ -213,9 +213,25 @@ character_to_ordered <- function(x, levels, name = substitute(x)) {
 specify_math_token_spacing <-
   function(zero = NULL,
            one = c("'+'", "'-'", "'*'", "'/'", "'^'")) {
+    assert_tokens(c(one, zero))
     lst(
       one = setdiff(c(math_token, one), zero),
       zero
     )
 }
 
+#' Check token validity
+#'
+#' Check whether one or more tokens exist and have a unique token-text mapping
+#' @param tokens Tokens to check.
+assert_tokens <- function(tokens) {
+  invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
+  if (length(invalid_tokens) > 0) {
+    stop(
+      "Token(s) ", paste0(invalid_tokens, collapse = ", "), " are invalid. ",
+      "You can lookup all valid tokens and their text ",
+      "with styler:::looup_tokens(). Make sure you supply the values of ",
+      "the column 'token', not 'text'."
+    )
+  }
+}
