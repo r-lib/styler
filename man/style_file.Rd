@@ -32,11 +32,13 @@ that are under version control or to create a backup copy.
 }
 
 \examples{
-\dontrun{
 # the following is identical but the former is more convenient:
-style_file("file.R", style = tidyverse_style, strict = TRUE)
-style_text("file.R", transformers = tidyverse_style(strict = TRUE))
-}
+file <- tempfile("styler", fileext = ".R")
+utf8::write_lines_enc("1++1", file)
+style_file(file, style = tidyverse_style, strict = TRUE)
+style_file(file, transformers = tidyverse_style(strict = TRUE))
+utf8::read_lines_enc(file)
+unlink(file)
 }
 \seealso{
 Other stylers: \code{\link{style_dir}},
