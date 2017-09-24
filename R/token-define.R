@@ -49,7 +49,6 @@ lookup_new_special <- function(regex = NA) {
 special_token <- lookup_new_special()
 
 op_token <- c(
-  math_token,
   special_token,
   logical_token,
   left_assignment_token,
