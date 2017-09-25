@@ -40,7 +40,7 @@ test_that("if and ifelse interacting with curly braces works", {
   expect_warning(test_collection("indention_multiple",
                                  "if_else_curly",
                                  transformer = style_text,
-                                 write_back = TRUE), NA)
+                                 write_back = TRUE, strict = FALSE), NA)
 })
 
 test_that("edge cases work", {

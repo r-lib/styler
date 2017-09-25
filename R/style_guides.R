@@ -112,7 +112,8 @@ tidyverse_style <- function(scope = "tokens",
       force_assignment_op,
       resolve_semicolon,
       add_brackets_in_pipe,
-      remove_terminal_token_before_and_after
+      remove_terminal_token_before_and_after,
+      if (strict) wrap_if_else_multi_line_in_curly else identity
     )
 
 
