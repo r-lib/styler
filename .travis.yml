@@ -24,6 +24,9 @@ after_script: R -q -e 'tic::after_script()'
 
 # Header
 language: r
+r: rel
+r: oldrel
+r: devel
 sudo: false
 dist: trusty
 cache: packages
