@@ -7,9 +7,7 @@
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
 compute_parse_data_nested <- function(text) {
-  tokenized <- tokenize(text)
-  if (nrow(tokenized) == 0) return(data_frame())
-  parse_data <- tokenized %>%
+  parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
     add_terminal_token_after()
 
