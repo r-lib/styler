@@ -84,6 +84,14 @@ make_transformer <- function(transformers) {
 #' @inheritParams apply_transformers
 parse_transform_serialize <- function(text, transformers) {
   pd_nested <- compute_parse_data_nested(text)
+
+  if (nrow(pd_nested) == 0) {
+    warning(
+      "Text to style did not contain any tokens. Returning empty string.",
+      call. = FALSE
+    )
+    return("")
+  }
   transformed_pd <- apply_transformers(pd_nested, transformers)
   # TODO verify_roundtrip
   flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
