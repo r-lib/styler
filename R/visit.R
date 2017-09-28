@@ -138,7 +138,7 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$spaces <- NULL # depreciate spaces
   flattened_pd <- choose_indention(flattened_pd, use_raw_indention)
   flattened_pd$line1 <-
-    cumsum(flattened_pd$lag_newlines) + flattened_pd$line1[1]
+    cumsum(flattened_pd$lag_newlines)
 
   flattened_pd$newlines <- lead(flattened_pd$lag_newlines, default = 0L)
   flattened_pd$nchar <- nchar(flattened_pd$text, type = "width")
