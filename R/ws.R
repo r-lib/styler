@@ -155,6 +155,7 @@ style_file <- function(path,
 #' @inheritParams style_dir
 #' @param path The path to a file that should be styled.
 prettify_one <- function(transformers, path) {
-  if (!grepl("\\.[Rr]$", path)) stop(path, " is not a .R file")
+  if (!grepl("\\.[r](md)?$", path, ignore.case = TRUE))
+    stop(path, " is not an R or Rmd file")
   transform_files(path, transformers)
 }
