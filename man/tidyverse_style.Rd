@@ -6,7 +6,7 @@
 \usage{
 tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2,
   start_comments_with_one_space = FALSE,
-  reindention = specify_reindention(),
+  reindention = tidyverse_reindention(),
   math_token_spacing = tidyverse_math_token_spacing())
 }
 \arguments{

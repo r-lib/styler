@@ -54,7 +54,7 @@ tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
                             indent_by = 2,
                             start_comments_with_one_space = FALSE,
-                            reindention = specify_reindention(),
+                            reindention = tidyverse_reindention(),
                             math_token_spacing = tidyverse_math_token_spacing()) {
 
   scope <- character_to_ordered(
@@ -173,7 +173,7 @@ create_style_guide <- function(initialize = initialize_attributes,
                                token = NULL,
                                indention = NULL,
                                use_raw_indention = FALSE,
-                               reindention = specify_reindention(regex_none())) {
+                               reindention = tidyverse_reindention()) {
   lst(
     # transformer functions
     initialize,
@@ -201,7 +201,13 @@ create_style_guide <- function(initialize = initialize_attributes,
 #' @param comments_only Whether the `regex_reindention_pattern` should only be
 #'   matched against comments or against all tokens. Mainly added for
 #'   performance.
-specify_reindention <- function(regex_pattern = regex_strcode(),
+#' @name reindention
+NULL
+
+#' @describeIn reindention Allows to specify which tokens are reindented and
+#'   how.
+#' @export
+specify_reindention <- function(regex_pattern = regex_none(),
                                 indention = 0,
                                 comments_only = TRUE)
   lst(
@@ -210,6 +216,15 @@ specify_reindention <- function(regex_pattern = regex_strcode(),
     comments_only
 )
 
+#' @describeIn reindention Simple forwarder to
+#' `specify_reindention` with reindention according to the tidyverse style
+#' guide.
+#' @export
+tidyverse_reindention <- function() {
+  specify_reindention(
+    regex_pattern = regex_none(), indention = 0, comments_only = TRUE
+  )
+}
 
 #' Convert a character vector to an ordered factor
 #'

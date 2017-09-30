@@ -160,19 +160,6 @@ set_regex_indention <- function(flattened_pd,
 #' @name regex_for_reindention
 NULL
 
-#' @describeIn regex_for_reindention Returns the regular expression pattern used
-#' in the [strcode](https://github.com/lorenzwalthert/strcode) package.
-#' Character vector with the patterns of code separator and title for the three
-#' levels of granularity.
-#' @export
-regex_strcode <- function() {
-  c(
-    "^#   ",
-    "^##  ",
-    "^### "
-  )
-}
-
 #' @export
 #' @describeIn regex_for_reindention Returns `NULL`, i.e. no pattern will
 #'   match against this.

@@ -2,12 +2,9 @@
 % Please edit documentation in R/reindent.R
 \name{regex_for_reindention}
 \alias{regex_for_reindention}
-\alias{regex_strcode}
 \alias{regex_none}
 \title{Return regex patterns for re-indention}
 \usage{
-regex_strcode()
-
 regex_none()
 }
 \description{
@@ -15,11 +12,6 @@ Return regex patterns for re-indention
 }
 \section{Functions}{
 \itemize{
-\item \code{regex_strcode}: Returns the regular expression pattern used
-in the \href{https://github.com/lorenzwalthert/strcode}{strcode} package.
-Character vector with the patterns of code separator and title for the three
-levels of granularity.
-
 \item \code{regex_none}: Returns \code{NULL}, i.e. no pattern will
 match against this.
 }}

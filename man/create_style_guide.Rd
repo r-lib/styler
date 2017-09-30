@@ -6,8 +6,7 @@
 \usage{
 create_style_guide(initialize = initialize_attributes, line_break = NULL,
   space = NULL, token = NULL, indention = NULL,
-  use_raw_indention = FALSE,
-  reindention = specify_reindention(regex_none()))
+  use_raw_indention = FALSE, reindention = tidyverse_reindention())
 }
 \arguments{
 \item{initialize}{A function that initializes various variables on each
