@@ -52,7 +52,7 @@ tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
                             indent_by = 2,
                             start_comments_with_one_space = FALSE,
-                            math_token_spacing = specify_math_token_spacing()) {
+                            math_token_spacing = tidyverse_math_token_spacing()) {
   scope <- character_to_ordered(
     scope,
     c("none", "spaces", "indention", "line_breaks", "tokens")
@@ -209,6 +209,16 @@ character_to_ordered <- function(x, levels, name = substitute(x)) {
 #'   math_token_spacing = specify_math_token_spacing(zero = "'+'"),
 #'   strict = TRUE
 #' )
+#' style_text(
+#'   "1+1   -3",
+#'   math_token_spacing = tidyverse_math_token_spacing(),
+#'   strict = TRUE
+#' )
+#' @name math_token_spacing
+NULL
+
+#' @describeIn math_token_spacing Allows to fully specify the math token
+#'   spacing.
 #' @export
 specify_math_token_spacing <-
   function(zero = NULL,
@@ -218,6 +228,14 @@ specify_math_token_spacing <-
       one = setdiff(c(math_token, one), zero),
       zero
     )
+  }
+
+#' @describeIn math_token_spacing Simple forwarder to
+#' `specify_math_token_spacing` with spacing around math tokens according to the
+#' tidyverse style guide.
+#' @export
+tidyverse_math_token_spacing <- function() {
+  specify_math_token_spacing(one = c("'+'", "'-'", "'*'", "'/'", "'^'"))
 }
 
 #' Check token validity

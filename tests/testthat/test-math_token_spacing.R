@@ -26,7 +26,7 @@ test_that("strict default: spacing around all", {
     transformer = style_text,
     style = tidyverse_style,
     scope = "spaces",
-    math_token_spacing = specify_math_token_spacing(),
+    math_token_spacing = tidyverse_math_token_spacing(),
     strict = TRUE), NA)
 })
 
