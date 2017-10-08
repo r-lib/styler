@@ -23,7 +23,7 @@ There are three major steps that styler performs in order to style code:
 2. Apply transformer functions at each level of the nested parse table. We use a 
    visitor approach, i.e. a function that takes functions as arguments and
    applies them to every level of nesting. You can find out more about it on
-   the help file for `visit`. Note that the function is not exported by styler.
+   the help file for `visit()`. Note that the function is not exported by styler.
    The visitor will take care of applying the functions on every 
    level of nesting - and we can supply transformer functions that operate on 
    one level of nesting. In the sequel, we use the term *nest* to refer to 
@@ -52,7 +52,7 @@ names(tidyverse_style())
 str(tidyverse_style(), give.attr = FALSE, list.len = 3)
 ```
 
-We note that there are different types of transformer functions. `filler` 
+We note that there are different types of transformer functions. `initialize` 
 initializes some variables in the nested parse table (so it is not actually a
 transformer), and the other elements modify either spacing, line breaks or 
 tokens. `use_raw_indention` is not a function, it is just an option. All 
@@ -286,3 +286,5 @@ removes line breaks before the curly opening bracket looks as follows:
 styler:::remove_line_break_before_curly_opening
 ```
 
+With our example function `set_line_break_before_curly_opening()` we don't need
+to worry about that as we are only adding line breaks, but we don't remove them.
