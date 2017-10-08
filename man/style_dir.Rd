@@ -5,7 +5,7 @@
 \title{Prettify arbitrary R code}
 \usage{
 style_dir(path = ".", ..., style = tidyverse_style,
-  transformers = style(...), recursive = TRUE)
+  transformers = style(...), recursive = TRUE, exclude_files = NULL)
 }
 \arguments{
 \item{path}{Path to a directory with files to transform.}
@@ -23,6 +23,9 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 of \code{path} should be styled as well.}
+
+\item{exclude_files}{Character vector with paths to files that should be
+excluded from styling.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a directory.

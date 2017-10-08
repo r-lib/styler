@@ -5,7 +5,7 @@
 \title{Prettify R source code}
 \usage{
 style_pkg(pkg = ".", ..., style = tidyverse_style,
-  transformers = style(...))
+  transformers = style(...), exclude_files = "R/RcppExports.R")
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package.}
@@ -20,6 +20,9 @@ further except to construct the argument \code{transformers}. See
 \item{transformers}{A set of transformer functions. This argument is most
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
+
+\item{exclude_files}{Character vector with paths to files that should be
+excluded from styling.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package
