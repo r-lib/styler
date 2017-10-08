@@ -6,7 +6,7 @@
 \usage{
 create_style_guide(initialize = initialize_attributes, line_break = NULL,
   space = NULL, token = NULL, indention = NULL,
-  use_raw_indention = FALSE)
+  use_raw_indention = FALSE, reindention = tidyverse_reindention())
 }
 \arguments{
 \item{initialize}{A function that initializes various variables on each
@@ -24,6 +24,9 @@ information.}
 
 \item{use_raw_indention}{Boolean indicating whether or not the raw indention
 should be used.}
+
+\item{reindention}{An list of parameters for regex re-indention, most
+conveniently constructed using \code{\link[=specify_reindention]{specify_reindention()}}.}
 }
 \description{
 This is a helper function to create a style guide, which is technically

@@ -96,7 +96,11 @@ parse_transform_serialize <- function(text, transformers) {
   # TODO verify_roundtrip
   flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
     enrich_terminals(transformers$use_raw_indention) %>%
-    apply_ref_indention()
+    apply_ref_indention() %>%
+    set_regex_indention(
+      pattern          = transformers$reindent$regex_pattern,
+      target_indention = transformers$reindent$indention,
+      comments_only    = transformers$reindent$comments_only)
 
   serialized_transformed_text <-
     serialize_parse_data_flattened(flattened_pd, start_line = start_line)

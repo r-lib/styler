@@ -2,11 +2,14 @@
 
 ## Exported functions
 
-create_style_guide(initialize = initialize_attributes, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE)
+create_style_guide(initialize = initialize_attributes, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE, reindention = tidyverse_reindention())
+regex_none()
 specify_math_token_spacing(zero = NULL, one = c("'+'", "'-'", "'*'", "'/'", "'^'"))
+specify_reindention(regex_pattern = regex_none(), indention = 0, comments_only = TRUE)
 style_dir(path = ".", ..., style = tidyverse_style, transformers = style(...), recursive = TRUE)
 style_file(path, ..., style = tidyverse_style, transformers = style(...))
 style_pkg(pkg = ".", ..., style = tidyverse_style, transformers = style(...))
 style_text(text, ..., style = tidyverse_style, transformers = style(...))
 tidyverse_math_token_spacing()
-tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2, start_comments_with_one_space = FALSE, math_token_spacing = tidyverse_math_token_spacing())
+tidyverse_reindention()
+tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2, start_comments_with_one_space = FALSE, reindention = tidyverse_reindention(), math_token_spacing = tidyverse_math_token_spacing())

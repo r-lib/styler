@@ -111,3 +111,58 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   flattened_pd
 
 }
+
+
+
+
+#' Set indention of tokens that match regex
+#'
+#' Force the level of indention of tokens whose text matches a regular
+#' expression pattern to be a certain amount of spaces. The rule
+#' is only active for the first tokens on a line.
+#' @param flattened_pd A flattened parse table.
+#' @param pattern A character  with regular expressions to match against the token
+#'   in `flattened_pd`.
+#' @param target_indention The desired level of indention of the tokens that
+#'   match `pattern`.
+#' @param comments_only Boolean indicating whether only comments should be
+#'   checked or all tokens.
+#' @return A flattened parse table with indention set to `target_indention` for
+#'   the tokens that match `regex.`
+#' @importFrom purrr map flatten_int
+set_regex_indention <- function(flattened_pd,
+                                  pattern,
+                                  target_indention = 0,
+                                  comments_only = TRUE) {
+  if (comments_only) {
+    cond <- which(
+      (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0)
+    )
+    if (length(cond) < 1) return(flattened_pd)
+    to_check <- flattened_pd[cond,]
+    not_to_check <- flattened_pd[-cond,]
+  } else {
+    to_check <- flattened_pd
+    not_to_check <- NULL
+  }
+
+  indices_to_force <-
+    map(pattern, grep, to_check$text) %>%
+    flatten_int()
+
+  to_check$lag_spaces[indices_to_force] <- target_indention
+  bind_rows(to_check, not_to_check) %>%
+    arrange(pos_id)
+}
+
+#' Return regex patterns for re-indention
+#'
+#' @name regex_for_reindention
+NULL
+
+#' @export
+#' @describeIn regex_for_reindention Returns `NULL`, i.e. no pattern will
+#'   match against this.
+regex_none <- function() {
+  NULL
+}
