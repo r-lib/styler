@@ -19,33 +19,6 @@ compute_parse_data_nested <- function(text) {
   pd_nested
 }
 
-#' Obtain token table from text
-#'
-#' [utils::getParseData()] is used to obtain a flat parse table from `text`.
-#'
-#' Apart from the columns provided by `utils::getParseData()`, the following
-#' columns are added:
-#'
-#'   * A column "short" with the first five characters of "text".
-#'   * A column "pos_id" for (positional id) which can be used for sorting
-#'     (because "id" cannot be used in general). Note that the nth value of this
-#'     column corresponds to n as long as no tokens are inserted.
-#'   * A column "child" that contains the nested subtibbles.
-#'
-#' @param text A character vector.
-#' @return A flat parse table
-#' @importFrom rlang seq2
-tokenize <- function(text) {
-  # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
-  parse(text = text, keep.source = TRUE)
-  parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
-    enhance_mapping_special()
-  parse_data$pos_id <- seq2(1L, nrow(parse_data))
-  parse_data$short <- substr(parse_data$text, 1, 5)
-  parse_data
-}
-
 #' Enhance the mapping of text to the token "SPECIAL"
 #'
 #' Map text corresponding to the token "SPECIAL" to a (more) unique token

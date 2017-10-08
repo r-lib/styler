@@ -43,6 +43,7 @@ Collate:
     'modify_pd.R'
     'nested.R'
     'nested_to_tree.R'
+    'parse.R'
     'reindent.R'
     'token-define.R'
     'relevel.R'
