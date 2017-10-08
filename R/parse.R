@@ -58,20 +58,20 @@ add_id_and_short <- function(pd) {
 verify_str_txt <- function(pd_with_terminal_text, text) {
   string_ind <- pd_with_terminal_text$token == "STR_CONST"
   strings <- pd_with_terminal_text[string_ind,]
-  parent_ind <- pd_with_terminal_text$id %in% strings$parent
-  other_ind <- !(string_ind | parent_ind)
+  parent_of_strings_ind <- pd_with_terminal_text$id %in% strings$parent
+  other_ind <- !(string_ind | parent_of_strings_ind)
   if (nrow(strings) == 0 || !any(substr(strings$text, 1, 1) == "[")) {
     return(pd_with_terminal_text)
   }
   pd_with_all_text <- get_parse_data(text, include_text = TRUE)
-  parents <- pd_with_all_text[parent_ind, c("id", "text", "short")]
+  parent_of_strings <- pd_with_all_text[parent_of_strings_ind, c("id", "text", "short")]
   strings$text <- NULL
   strings$short <- NULL
-  new_strings <- merge(strings, parents, by.x = "parent", by.y = "id")
+  new_strings <- merge(strings, parent_of_strings, by.x = "parent", by.y = "id")
   bind_rows(
     new_strings,
     pd_with_terminal_text[other_ind, ],
-    pd_with_terminal_text[parent_ind,]
+    pd_with_terminal_text[parent_of_strings_ind,]
   ) %>%
     arrange(pos_id)
 
