@@ -121,6 +121,16 @@ more examples of code before and after styling.
 1++1-1-1/2
 ```
 
+This is tidyverse style. However, styler offers very granular control for 
+math token spacing. Assuming you like spacing around `+` and `-`, but not 
+around `/` and `*` and `^`, do the following:
+```{r}
+style_text(
+  "1++1/2*2^2", 
+  math_token_spacing = specify_math_token_spacing(zero = c("'/'", "'*'", "'^'"))
+)
+```
+
 It can also format complicated expressions that involve line breaking and 
 indention based on both brace expressions and operators:
 
@@ -176,3 +186,20 @@ z) {
 mtcars %>%
   group_by( !!my_vars )
 ```
+
+If you, say, don't want comments starting with `###` to be indented, you can 
+formulate an unindention rule:
+```{r}
+style_text(
+  c(
+    "a <- function() {",
+    "### not to be indented",
+    "# indent normally",
+    "33",
+    "}"
+  ),
+  reindention = specify_reindention(regex_pattern = "###", indention = 0)
+  
+)
+```
+
