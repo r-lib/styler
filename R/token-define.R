@@ -30,6 +30,12 @@ logical_token <- token$token[token$class == "logical"]
 left_assignment_token <- token$token[token$class == "assign_left"]
 right_assignment_token <- token$token[token$class == "assign_right"]
 
+#' Lookup all tokens that have a unique token-text mapping
+#'
+lookup_tokens <- function() {
+  token
+}
+
 #' lookup which new tokens were created from "SPECIAL"
 #'
 #' @param regex A regular expression pattern to search for.
@@ -51,7 +57,6 @@ lookup_new_special <- function(regex = NA) {
 special_token <- lookup_new_special()
 
 op_token <- c(
-  math_token,
   special_token,
   logical_token,
   left_assignment_token,

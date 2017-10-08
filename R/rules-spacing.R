@@ -19,6 +19,42 @@ set_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
+#' Style spacing around math tokens
+#' @inheritParams style_space_around_math_token_one
+#' @param one Character vector with tokens that should be surrounded by at
+#'   least one space (depending on `strict = TRUE` in the styling functions
+#'   [style_text()] and friends). See 'Examples'.
+#' @param zero Character vector of tokens that should be surrounded with zero
+#'   spaces.
+style_space_around_math_token <- function(strict, zero, one, pd_flat) {
+  pd_flat %>%
+    style_space_around_math_token_one(strict, zero, 0L) %>%
+    style_space_around_math_token_one(strict, one, 1L)
+}
+
+#' Set spacing of token to a certain level
+#'
+#' Set the spacing of all `tokens` in `pd_flat` to `level` if `strict = TRUE` or
+#' to at least to `level` if `strict = FALSE`.
+#' @param pd_flat A nest or a flat parse table.
+#' @param strict Whether the rules should be applied strictly or not.
+#' @param tokens Character vector with tokens that should be styled.
+#' @param level Scalar indicating the amount of spaces that should be inserted
+#'   around the `tokens`.
+style_space_around_math_token_one <- function(pd_flat, strict, tokens, level) {
+  op_after <- pd_flat$token %in% tokens
+  op_before <- lead(op_after, default = FALSE)
+  idx_before <- op_before & (pd_flat$newlines == 0L)
+  idx_after <- op_after & (pd_flat$newlines == 0L)
+  if (strict) {
+    pd_flat$spaces[idx_before | idx_after] <- level
+  } else {
+    pd_flat$spaces[idx_before | idx_after] <-
+      pmax(pd_flat$spaces[idx_before | idx_after], level)
+  }
+  pd_flat
+}
+
 # depreciated!
 #' @include token-define.R
 remove_space_after_unary_pm <- function(pd_flat) {

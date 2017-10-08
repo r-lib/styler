@@ -25,6 +25,8 @@ NULL
 #'   See 'Examples'.
 #' @param start_comments_with_one_space Whether or not comments should start
 #'   with only one space (see [start_comments_with_space()]).
+#' @param math_token_spacing An list of parameters that define spacing around
+#'   math token, conveniently constructed using [specify_math_token_spacing()].
 #' @details The following options for `scope` are available.
 #'
 #' * "none": Performs no transformation at all.
@@ -49,8 +51,8 @@ NULL
 tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
                             indent_by = 2,
-                            start_comments_with_one_space = FALSE) {
-
+                            start_comments_with_one_space = FALSE,
+                            math_token_spacing = tidyverse_math_token_spacing()) {
   scope <- character_to_ordered(
     scope,
     c("none", "spaces", "indention", "line_breaks", "tokens")
@@ -69,6 +71,11 @@ tidyverse_style <- function(scope = "tokens",
       add_space_after_for_if_while,
       add_space_before_brace,
       remove_space_before_comma,
+      partial(
+        style_space_around_math_token, strict,
+        math_token_spacing$zero,
+        math_token_spacing$one
+      ),
       if (strict) set_space_around_op else add_space_around_op,
       if (strict) set_space_after_comma else add_space_after_comma,
       remove_space_after_opening_paren,
@@ -82,7 +89,7 @@ tidyverse_style <- function(scope = "tokens",
       remove_space_after_unary_pm_nested,
       if (strict) set_space_before_comments else add_space_before_comments,
       set_space_between_levels,
-      set_space_between_eq_sub_and_comma,
+      set_space_between_eq_sub_and_comma
     )
 
   use_raw_indention <- scope < "indention"
@@ -187,3 +194,63 @@ character_to_ordered <- function(x, levels, name = substitute(x)) {
   factor(x, levels = levels, ordered = TRUE)
 }
 
+#' Specify spacing around math tokens
+#'
+#' Helper function to create the input for the argument `math_token_spacing`  in
+#' [tidyverse_style()].
+#' @inheritParams style_space_around_math_token
+#' @examples
+#' style_text(
+#'   "1+1   -3",
+#'   math_token_spacing = specify_math_token_spacing(zero = "'+'"),
+#'   strict = FALSE
+#' )
+#' style_text(
+#'   "1+1   -3",
+#'   math_token_spacing = specify_math_token_spacing(zero = "'+'"),
+#'   strict = TRUE
+#' )
+#' style_text(
+#'   "1+1   -3",
+#'   math_token_spacing = tidyverse_math_token_spacing(),
+#'   strict = TRUE
+#' )
+#' @name math_token_spacing
+NULL
+
+#' @describeIn math_token_spacing Allows to fully specify the math token
+#'   spacing.
+#' @export
+specify_math_token_spacing <-
+  function(zero = NULL,
+           one = c("'+'", "'-'", "'*'", "'/'", "'^'")) {
+    assert_tokens(c(one, zero))
+    lst(
+      one = setdiff(c(math_token, one), zero),
+      zero
+    )
+  }
+
+#' @describeIn math_token_spacing Simple forwarder to
+#' `specify_math_token_spacing` with spacing around math tokens according to the
+#' tidyverse style guide.
+#' @export
+tidyverse_math_token_spacing <- function() {
+  specify_math_token_spacing(one = c("'+'", "'-'", "'*'", "'/'", "'^'"))
+}
+
+#' Check token validity
+#'
+#' Check whether one or more tokens exist and have a unique token-text mapping
+#' @param tokens Tokens to check.
+assert_tokens <- function(tokens) {
+  invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
+  if (length(invalid_tokens) > 0) {
+    stop(
+      "Token(s) ", paste0(invalid_tokens, collapse = ", "), " are invalid. ",
+      "You can lookup all valid tokens and their text ",
+      "with styler:::looup_tokens(). Make sure you supply the values of ",
+      "the column 'token', not 'text'."
+    )
+  }
+}

@@ -2,10 +2,12 @@
 
 S3method(print,vertical)
 export(create_style_guide)
+export(specify_math_token_spacing)
 export(style_dir)
 export(style_file)
 export(style_pkg)
 export(style_text)
+export(tidyverse_math_token_spacing)
 export(tidyverse_style)
 import(tibble)
 importFrom(magrittr,"%>%")

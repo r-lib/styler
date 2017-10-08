@@ -5,7 +5,8 @@
 \title{The tidyverse style}
 \usage{
 tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2,
-  start_comments_with_one_space = FALSE)
+  start_comments_with_one_space = FALSE,
+  math_token_spacing = tidyverse_math_token_spacing())
 }
 \arguments{
 \item{scope}{The extent of manipulation. Can range from "none" (least
@@ -25,6 +26,9 @@ operators such as '('.}
 
 \item{start_comments_with_one_space}{Whether or not comments should start
 with only one space (see \code{\link[=start_comments_with_space]{start_comments_with_space()}}).}
+
+\item{math_token_spacing}{An list of parameters that define spacing around
+math token, conveniently constructed using \code{\link[=specify_math_token_spacing]{specify_math_token_spacing()}}.}
 }
 \description{
 Style code according to the tidyverse style guide.
