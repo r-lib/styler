@@ -27,3 +27,23 @@ test_that("styler does not return error when there is no file to style", {
 
 # styling active region cannot be tested automatically since
 # rstudioapi::insertText() needs the context id.
+
+context("public API - Rmd")
+
+test_that("styler can style Rmd file", {
+  expect_false(
+    style_file(testthat_file("public-api", "xyzfile_rmd", "random.Rmd"), strict = FALSE)
+  )
+  expect_false(
+    style_file(testthat_file("public-api", "xyzfile_rmd", "random2.Rmd"), strict = FALSE)
+  )
+})
+
+test_that("styler handles malformed Rmd file and invalid R code in chunk", {
+  expect_warning(
+    style_file(testthat_file("public-api", "xyzfile_rmd", "random3.Rmd"), strict = FALSE)
+  )
+  expect_warning(
+    style_file(testthat_file("public-api", "xyzfile_rmd", "random4.Rmd"), strict = FALSE)
+  )
+})
