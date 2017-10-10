@@ -32,7 +32,6 @@ transform_rmd <- function(lines, transformer_fun) {
 #'
 #' @importFrom purrr map2
 #' @importFrom rlang seq2
-#' @importFrom tibble lst
 identify_chunks <- function(lines) {
   pattern <- get_knitr_pattern(lines)
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
