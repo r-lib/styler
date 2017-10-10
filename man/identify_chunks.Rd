@@ -2,7 +2,7 @@
 % Please edit documentation in R/style_rmd.R
 \name{identify_chunks}
 \alias{identify_chunks}
-\title{Identify R and text chunks within an Rmd}
+\title{Identify chunks within Rmd contents}
 \usage{
 identify_chunks(lines)
 }
@@ -10,5 +10,6 @@ identify_chunks(lines)
 \item{lines}{a character vector of lines from an Rmd file}
 }
 \description{
-Identify R and text chunks within an Rmd
+Identifies the code and text chunks within an Rmd file, and returns these
+as a nested list.
 }

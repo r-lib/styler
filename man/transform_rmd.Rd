@@ -2,7 +2,7 @@
 % Please edit documentation in R/style_rmd.R
 \name{transform_rmd}
 \alias{transform_rmd}
-\title{Transform Rmd contents with a transformer function}
+\title{Transform Rmd contents}
 \usage{
 transform_rmd(lines, transformer_fun)
 }
@@ -12,5 +12,7 @@ transform_rmd(lines, transformer_fun)
 \item{transformer_fun}{A styler transformer function}
 }
 \description{
-Transform Rmd contents with a transformer function
+Applies the supplied transformer function to code chunks identified within
+an Rmd file and recombines the resulting (styled) code chunks with the text
+chunks.
 }

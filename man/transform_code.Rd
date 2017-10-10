@@ -17,5 +17,7 @@ files?}
 \item{...}{Further arguments passed to \code{utf8::transform_lines_enc()}.}
 }
 \description{
-Transform code from R or Rmd files
+A wrapper for \code{\link[utf8:transform_lines_enc]{utf8::transform_lines_enc()}} which initiates the styling of
+either R or Rmd files by passing the relevant transformer function for each
+case.
 }

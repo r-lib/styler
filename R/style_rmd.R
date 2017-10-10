@@ -1,5 +1,9 @@
 #' Transform code from R or Rmd files
 #'
+#' A wrapper for [utf8::transform_lines_enc()] which initiates the styling of
+#' either R or Rmd files by passing the relevant transformer function for each
+#' case.
+#'
 #' @inheritParams utf8::transform_lines_enc
 #' @param ... Further arguments passed to `utf8::transform_lines_enc()`.
 transform_code <- function(path, fun, verbose, ...) {
@@ -8,11 +12,15 @@ transform_code <- function(path, fun, verbose, ...) {
   } else if (grepl("\\.Rmd$", path, ignore.case = TRUE)) {
     utf8::transform_lines_enc(path, fun = partial(transform_rmd, transformer_fun = fun), ...)
   } else {
-    stop("")
+    stop(path, " is not an R or Rmd file")
   }
 }
 
-#' Transform Rmd contents with a transformer function
+#' Transform Rmd contents
+#'
+#' Applies the supplied transformer function to code chunks identified within
+#' an Rmd file and recombines the resulting (styled) code chunks with the text
+#' chunks.
 #'
 #' @param lines A character vector of lines from an Rmd file
 #' @param transformer_fun A styler transformer function
@@ -26,7 +34,10 @@ transform_rmd <- function(lines, transformer_fun) {
 }
 
 
-#' Identify R and text chunks within an Rmd
+#' Identify chunks within Rmd contents
+#'
+#' Identifies the code and text chunks within an Rmd file, and returns these
+#' as a nested list.
 #'
 #' @param lines a character vector of lines from an Rmd file
 #'
@@ -54,7 +65,7 @@ identify_chunks <- function(lines) {
 
 #' Get chunk pattern
 #'
-#' Determine a regex pattern for identifying R code chunks
+#' Determine a regex pattern for identifying R code chunks.
 #'
 #' @inheritParams identify_chunks
 get_knitr_pattern <- function(lines) {

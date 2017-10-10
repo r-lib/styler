@@ -10,5 +10,5 @@ get_knitr_pattern(lines)
 \item{lines}{a character vector of lines from an Rmd file}
 }
 \description{
-Determine a regex pattern for identifying R code chunks
+Determine a regex pattern for identifying R code chunks.
 }
