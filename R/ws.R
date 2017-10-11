@@ -145,17 +145,6 @@ style_file <- function(path,
                        transformers = style(...)) {
   withr::with_dir(
     dirname(path),
-    prettify_one(transformers, basename(path))
+    transform_files(basename(path), transformers)
   )
-}
-
-#' Prettify one R file
-#'
-#' This is a helper function for style_dir.
-#' @inheritParams style_dir
-#' @param path The path to a file that should be styled.
-prettify_one <- function(transformers, path) {
-  if (!grepl("\\.[r](md)?$", path, ignore.case = TRUE))
-    stop(path, " is not an R or Rmd file")
-  transform_files(path, transformers)
 }
