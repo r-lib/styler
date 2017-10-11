@@ -39,7 +39,7 @@ initialize_spaces <- function(pd_flat) {
 }
 
 remove_line_col <- function(pd_flat) {
-  pd_flat[c("line1", "line2", "col1", "col2")] <- NULL
+  pd_flat[c("line1", "line2", "col1", "col2")] <- rep(list(NULL), 4)
   pd_flat
 }
 
