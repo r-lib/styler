@@ -98,9 +98,9 @@ parse_transform_serialize <- function(text, transformers) {
     enrich_terminals(transformers$use_raw_indention) %>%
     apply_ref_indention() %>%
     set_regex_indention(
-      pattern          = transformers$reindent$regex_pattern,
-      target_indention = transformers$reindent$indention,
-      comments_only    = transformers$reindent$comments_only)
+      pattern          = transformers$reindention$regex_pattern,
+      target_indention = transformers$reindention$indention,
+      comments_only    = transformers$reindention$comments_only)
 
   serialized_transformed_text <-
     serialize_parse_data_flattened(flattened_pd, start_line = start_line)
