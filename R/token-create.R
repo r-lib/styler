@@ -76,6 +76,7 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
 #' Looks at the current nest as well as into its children (if necessary) to make
 #' sure the right id is returned. Otherise, ordering of tokens might not be
 #' preserved.
+#' @param direction Derived from `after`. `1` if `after = TRUE`, `-1` otherwise.
 #' @inheritParams create_pos_ids
 find_start_pos_id <- function(pd, pos, by, direction, after) {
   if (is.null(pd$child[[pos]])) {

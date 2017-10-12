@@ -14,6 +14,8 @@ find_start_pos_id(pd, pos, by, direction, after)
 \item{by}{By how much the reference \code{pos_id} should be increased / decreased
 to create a new id.}
 
+\item{direction}{Derived from \code{after}. \code{1} if \code{after = TRUE}, \code{-1} otherwise.}
+
 \item{after}{Boolean indicating whether it should be inserted after or before
 \code{pos}.}
 }
