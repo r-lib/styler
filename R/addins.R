@@ -3,7 +3,15 @@
 #' Helper function for RStudio Addin.
 style_active_file <- function() {
   context <- get_rstudio_context()
-  style_file(context$path, style = tidyverse_style)
+  if (context$path != "") {
+    style_file(context$path, style = tidyverse_style)
+  } else {
+    out <- style_text(context$contents)
+    rstudioapi::modifyRange(
+      c(1, 1, length(out) + 1, 1),
+      paste0(out, collapse = "\n"), id = context$id
+    )
+  }
 }
 
 
