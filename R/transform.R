@@ -83,6 +83,7 @@ make_transformer <- function(transformers) {
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams apply_transformers
 parse_transform_serialize <- function(text, transformers) {
+  text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text)
   start_line <- find_start_line(pd_nested)
   if (nrow(pd_nested) == 0) {

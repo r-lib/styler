@@ -39,3 +39,13 @@ calls_sys <- function(sys_call, ...) {
     error <- system(sys_call, ...)
   }
 }
+
+#' Assert text to be of positive length and replace it with the empty
+#' string otherwise.
+#' @param text The input to style.
+assert_text <- function(text) {
+  if (length(text) < 1) {
+    text <- ""
+  }
+  text
+}
