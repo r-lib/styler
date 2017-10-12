@@ -129,7 +129,7 @@ compute_indent_indices <- function(pd,
   if (is.null(token_closing)) {
     stop <- npd
   } else {
-    stop <- which(pd$token %in% token_closing) - 1
+    stop <- last(which(pd$token %in% token_closing)[needs_indention]) - 1
   }
 
   seq2(start, stop)

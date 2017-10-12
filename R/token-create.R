@@ -65,10 +65,29 @@ create_tokens <- function(tokens,
 #' @family token creators
 create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
   direction <- ifelse(after, 1L, -1L)
-  first <- pd$pos_id[pos] + by * direction
+  first <- find_start_pos_id(pd, pos, by, direction, after)
   new_ids <- seq(first, to = first + direction * (n - 1) * by, by = by * direction)
   validate_new_pos_ids(new_ids, after)
   new_ids
+}
+
+#' Find legit starting value for a new positional id
+#'
+#' Looks at the current nest as well as into its children (if necessary) to make
+#' sure the right id is returned. Otherise, ordering of tokens might not be
+#' preserved.
+#' @param direction Derived from `after`. `1` if `after = TRUE`, `-1` otherwise.
+#' @inheritParams create_pos_ids
+find_start_pos_id <- function(pd, pos, by, direction, after) {
+  if (is.null(pd$child[[pos]])) {
+    pd$pos_id[pos] + by * direction
+  } else {
+
+    find_start_pos_id(
+      pd$child[[pos]], if_else(after, nrow(pd$child[[pos]]), 1L),
+      by, direction, after
+    )
+  }
 }
 
 #' Validate sequence of new position ids
