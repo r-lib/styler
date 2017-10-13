@@ -32,7 +32,6 @@ NULL
 #' style_pkg(transformers = tidyverse_style(strict = TRUE))
 #' }
 #' @export
-#' @family stylers
 style_pkg <- function(pkg = ".",
                       ...,
                       style = tidyverse_style,
