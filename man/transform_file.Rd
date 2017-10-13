@@ -2,7 +2,7 @@
 % Please edit documentation in R/transform.R
 \name{transform_file}
 \alias{transform_file}
-\title{Transform a file an give customized message}
+\title{Transform a file and output a customized message}
 \usage{
 transform_file(path, fun, verbose = FALSE, max_char_path,
   message_before = "", message_after = " [DONE]",
@@ -29,5 +29,5 @@ any file was transformed.}
 \item{...}{Further arguments passed to \code{utf8::transform_lines_enc()}.}
 }
 \description{
-Wraps \code{utf8::transform_lines_enc()} and gives customized messages.
+Wraps \code{utf8::transform_lines_enc()} and outputs customized messages.
 }

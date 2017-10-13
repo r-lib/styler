@@ -54,6 +54,7 @@ Collate:
     'serialize.R'
     'serialized_tests.R'
     'style_guides.R'
+    'style_rmd.R'
     'styler.R'
     'token-create.R'
     'transform.R'
