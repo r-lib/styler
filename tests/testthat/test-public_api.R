@@ -34,9 +34,10 @@ test_that("styler can style Rmd file", {
   expect_false(
     style_file(testthat_file("public-api", "xyzfile_rmd", "random.Rmd"), strict = FALSE)
   )
-  expect_false(
-    style_file(testthat_file("public-api", "xyzfile_rmd", "random2.Rmd"), strict = FALSE)
+  expect_warning(
+    styled <- style_file(testthat_file("public-api", "xyzfile_rmd", "random2.Rmd"), strict = FALSE)
   )
+  expect_false(styled)
 })
 
 test_that("styler handles malformed Rmd file and invalid R code in chunk", {
