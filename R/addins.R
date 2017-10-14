@@ -3,15 +3,13 @@
 #' Helper function for RStudio Addin.
 style_active_file <- function() {
   context <- get_rstudio_context()
-  if (context$path != "") {
-    style_file(context$path, style = tidyverse_style)
-  } else {
-    out <- style_text(context$contents)
-    rstudioapi::modifyRange(
-      c(1, 1, length(out) + 1, 1),
-      paste0(out, collapse = "\n"), id = context$id
-    )
-  }
+  out <- style_text(context$contents)
+  rstudioapi::modifyRange(
+    c(1, 1, length(out) + 1, 1),
+    paste0(out, collapse = "\n"), id = context$id
+  )
+  if (Sys.getenv("save_after_styling") == TRUE && context$path != "")
+    rstudioapi::documentSave(context$id)
 }
 
 
