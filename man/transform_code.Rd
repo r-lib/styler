@@ -4,7 +4,7 @@
 \alias{transform_code}
 \title{Transform code from R or Rmd files}
 \usage{
-transform_code(path, fun, verbose, ...)
+transform_code(path, fun, verbose = FALSE, ...)
 }
 \arguments{
 \item{path}{A vector of file paths.}

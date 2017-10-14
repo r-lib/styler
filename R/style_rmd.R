@@ -6,11 +6,13 @@
 #'
 #' @inheritParams utf8::transform_lines_enc
 #' @param ... Further arguments passed to `utf8::transform_lines_enc()`.
-transform_code <- function(path, fun, verbose, ...) {
+transform_code <- function(path, fun, verbose = FALSE, ...) {
   if (grepl("\\.R$", path, ignore.case = TRUE)) {
-    utf8::transform_lines_enc(path, fun = fun, ...)
+    utf8::transform_lines_enc(path, fun = fun, ..., verbose = verbose)
   } else if (grepl("\\.Rmd$", path, ignore.case = TRUE)) {
-    utf8::transform_lines_enc(path, fun = partial(transform_rmd, transformer_fun = fun), ...)
+    utf8::transform_lines_enc(
+      path, fun = partial(transform_rmd, transformer_fun = fun), ...,
+      verbose = verbose)
   } else {
     stop(path, " is not an R or Rmd file")
   }
