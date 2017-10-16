@@ -26,7 +26,7 @@ NULL
 #' @param start_comments_with_one_space Whether or not comments should start
 #'   with only one space (see [start_comments_with_space()]).
 #' @inheritParams create_style_guide
-#' @param math_token_spacing An list of parameters that define spacing around
+#' @param math_token_spacing A list of parameters that define spacing around
 #'   math token, conveniently constructed using [specify_math_token_spacing()].
 
 #' @details The following options for `scope` are available.
@@ -164,7 +164,7 @@ tidyverse_style <- function(scope = "tokens",
 #' @param indention A list of transformer functions that manipulate indention.
 #' @param use_raw_indention Boolean indicating whether or not the raw indention
 #'   should be used.
-#' @param reindention An list of parameters for regex re-indention, most
+#' @param reindention A list of parameters for regex re-indention, most
 #'   conveniently constructed using [specify_reindention()].
 #' @export
 create_style_guide <- function(initialize = initialize_attributes,
