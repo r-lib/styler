@@ -101,7 +101,7 @@ tidyverse_style <- function(scope = "tokens",
   line_break_manipulators <- if (scope >= "line_breaks")
     lst(
       remove_line_break_before_curly_opening,
-      remove_line_break_before_round_closing,
+      if (strict) remove_line_break_before_round_closing else identity,
       if (strict) set_line_break_afer_curly_opening else
         add_line_break_afer_curly_opening,
       if (strict) set_line_break_before_curly_closing else
