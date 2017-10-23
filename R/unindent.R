@@ -1,21 +1,19 @@
-#' Unindent a chlid if necessary
+#' Unindent a child if necessary
 #'
 #' check whether any of the children of `pd` has `token` on the same line as
 #'   the closing `token` of pd. If so, unindent that token.
 #' @inheritParams unindent_child
 #' @importFrom purrr map
+#' @importFrom rlang seq2
 set_unindention_child <- function(pd, token = "')'", unindent_by) {
   if (all(pd$indent == 0) || all(pd$terminal)) return(pd)
   closing <- which(pd$token %in% token)
   if (length(closing) == 0 || pd$lag_newlines[closing] > 0) return(pd)
 
-  first_on_last_line <- last(which(pd$lag_newlines > 0 | pd$multi_line))
-  if (is.na(first_on_last_line)) {
-    on_same_line <- 1:(closing - 1)
-  } else {
-    on_same_line <- first_on_last_line:(closing - 1)
-  }
+  first_on_last_line <- last(c(1, which(pd$lag_newlines > 0 | pd$multi_line)))
+  on_same_line <- seq2(first_on_last_line, closing - 1)
   cand_ind <- setdiff(on_same_line, which(pd$terminal))
+
   if (length(cand_ind) < 1) return(pd)
 
   candidates <- pd[cand_ind, ]
@@ -27,7 +25,7 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
                           unindent_by = abs(pd$indent[closing] - pd$indent[closing-1]))
 
   bind_rows(candidates, non_candidates) %>%
-    arrange(line1, col1)
+    arrange(pos_id)
 }
 
 #' Unindent a child

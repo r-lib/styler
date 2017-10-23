@@ -4,26 +4,8 @@
 #'   representation into a nested parse table with
 #'   [nest_parse_data()].
 #' @param text A character vector to parse.
-#' @return A nested parse table. Apart from the columns provided by
-#'   `utils::getParseData()`, a column "short" with the first five characters of
-#'   "text" is added, the nested subtibbles are in column "child".
-#' TODO:
-#' - Implement enhance_parse_data_nested()
-#'     - Walk tree defined by `child`, compute whitespace information
-#'     - Store indention depth in a separate column, unaffected by
-#'       inter-token space
-#' - Implement compute_parse_data_nested_with_ws() as
-#'   compute_parse_data_nested() + enhance_parse_data_nested()
-#' - Implement serialization of nested parse data
-#' - Use compute_parse_data_nested_with_ws() instead of
-#'   compute_parse_data_flat_enhanced()
-#' - Perform all transformations on hierarchical structure
-#'     - Compute text for a sub-element
-#' - Compute indentation
-#'     - Braces
-#'     - Function calls
-#'     - Function definitions
-#' - Remove `includeText = TRUE`
+#' @return A nested parse table. See [tokenize()] for details on the columns
+#'   of the parse table.
 compute_parse_data_nested <- function(text) {
   parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
@@ -37,31 +19,21 @@ compute_parse_data_nested <- function(text) {
   pd_nested
 }
 
-#' Obtain token table from text
-#'
-#' [utils::getParseData()] is used to obtain a flat parse table from `text`.
-#' @param text A character vector.
-#' @return A flat parse table
-tokenize <- function(text) {
-  parsed <- parse(text = text, keep.source = TRUE)
-  parse_data <- as_tibble(utils::getParseData(parsed, includeText = NA)) %>%
-    enhance_mapping_special()
-  parse_data$short <- substr(parse_data$text, 1, 5)
-  parse_data
-}
-
 #' Enhance the mapping of text to the token "SPECIAL"
 #'
 #' Map text corresponding to the token "SPECIAL" to a (more) unique token
 #'   description.
 #' @param pd A parse table.
 enhance_mapping_special <- function(pd) {
-  pd$token <- with(pd, case_when(
-      token != "SPECIAL" ~ token,
-      text == "%>%" ~ special_and("PIPE"),
-      text == "%in%" ~ special_and("IN"),
-      TRUE ~ special_and("OTHER")
-    ))
+  pipes <- pd$token == "SPECIAL" & pd$text == "%>%"
+  pd$token[pipes] <- special_and("PIPE")
+
+  ins <- pd$token == "SPECIAL" & pd$text == "%in%"
+  pd$token[ins] <- special_and("IN")
+
+  others <- pd$token == "SPECIAL" & !(pipes | ins)
+  pd$token[others] <- special_and("OTHER")
+
   pd
 }
 
@@ -79,7 +51,7 @@ NULL
 add_terminal_token_after <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(line1, col1)
+    arrange(pos_id)
 
   data_frame(id = terminals$id,
              token_after = lead(terminals$token, default = "")) %>%
@@ -90,11 +62,20 @@ add_terminal_token_after <- function(pd_flat) {
 add_terminal_token_before <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(line1, col1)
+    arrange(pos_id)
 
   data_frame(id = terminals$id,
              token_before = lag(terminals$token, default = "")) %>%
     left_join(pd_flat, ., by = "id")
+}
+
+#' @describeIn add_token_terminal Removes column `terimnal_token_before`. Might
+#'   be used to prevent the use of invalidated information, e.g. if tokens were
+#'   added to the nested parse table.
+remove_terminal_token_before_and_after <- function(pd_flat) {
+  pd_flat$token_before <- NULL
+  pd_flat$token_after <- NULL
+  pd_flat
 }
 
 #' Helper for setting spaces
@@ -135,7 +116,8 @@ nest_parse_data <- function(pd_flat) {
   child <- split_data$`FALSE`
   internal <- split_data$`TRUE`
 
-  internal <- rename_(internal, internal_child = ~child)
+  internal$internal_child <- internal$child
+  internal$child <- NULL
 
   child$parent_ <- child$parent
   joined <-
@@ -150,7 +132,7 @@ nest_parse_data <- function(pd_flat) {
 
 #' Combine child and internal child
 #'
-#' binds two parse tables together and arranges them so that the tokens are in
+#' Binds two parse tables together and arranges them so that the tokens are in
 #'   the correct order.
 #' @param child A parse table or `NULL`.
 #' @param internal_child A parse table or `NULL`.
@@ -160,15 +142,15 @@ nest_parse_data <- function(pd_flat) {
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
-  bound[order(bound$line1, bound$col1), ]
+  bound[order(bound$pos_id), ]
 
 }
 
 #' Get the start right
 #'
 #' On what line does the first token occur?
-#' @param pd A parse table.
+#' @param pd_nested A nested parse table.
 #' @return The line number on which the first token occurs.
-start_on_line <- function(pd) {
-  pd$line1[1]
+find_start_line <- function(pd_nested) {
+  pd_nested$line1[1]
 }

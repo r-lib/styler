@@ -24,14 +24,14 @@ NULL
 #'           2))
 #' }
 #' @importFrom purrr map_lgl
+#' @importFrom rlang seq2
 update_indention_ref_fun_call <- function(pd_nested) {
   current_is_call <- pd_nested$token_before[2] %in% c("SYMBOL_FUNCTION_CALL")
   non_comment <- which(pd_nested$token != "COMMENT")
   first_non_comment_after_call <- non_comment[non_comment > 2][1]
   if ((current_is_call) &&
-      nrow(pd_nested) > 3 &&
       pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
-    candidates <- 3:(nrow(pd_nested) - 1)
+    candidates <- seq2(3, nrow(pd_nested) - 1)
 
     child_is_call <- map_lgl(pd_nested$child, is_function_call)
     child_is_curly_expr <- map_lgl(pd_nested$child, is_curly_expr)
@@ -56,35 +56,14 @@ update_indention_ref_fun_call <- function(pd_nested) {
 #' x + y
 #' }
 #' }
+#' @importFrom rlang seq2
 update_indention_ref_fun_dec <- function(pd_nested) {
-  if (pd_nested$token[1] == "FUNCTION" &&
-      nrow(pd_nested) > 3) {
-    seq <- 3:(nrow(pd_nested) - 1)
+  if (pd_nested$token[1] == "FUNCTION") {
+    seq <- seq2(3, nrow(pd_nested) - 1)
     pd_nested$indention_ref_id[seq] <- pd_nested$id[1]
   }
   pd_nested
 }
-
-#' Check whether a parse table corresponds to a a certain expression
-#'
-#' @param pd A parse table.
-#' @name pd_is
-NULL
-
-#' @describeIn pd_is Checks whether `pd` contains an expression wrapped in
-#'   curley brackets.
-is_curly_expr <- function(pd) {
-  if (is.null(pd)) return(FALSE)
-  pd$token[1] == "'{'"
-}
-
-#' @describeIn pd_is Checks whether `pd` is a function call.
-is_function_call <- function(pd) {
-  if (is.null(pd)) return(FALSE)
-  if (is.na(pd$token_before[2])) return(FALSE)
-  pd$token_before[2] == "SYMBOL_FUNCTION_CALL"
-}
-
 
 #' Apply reference indention to tokens
 #'
@@ -110,7 +89,7 @@ apply_ref_indention <- function(flattened_pd) {
 #' tokens on a line and updating the column `col1` and `col2` for all tokens
 #' on that line so they are kept updated.
 #' @param flattened_pd A flattened parse table
-#' @param target_token The index of the token from wich the indention level
+#' @param target_token The index of the token from which the indention level
 #'   should be applied to other tokens.
 apply_ref_indention_one <- function(flattened_pd, target_token) {
   token_points_to_ref <-
@@ -131,4 +110,59 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   flattened_pd$col2[cols_to_update] <- flattened_pd$col2[cols_to_update] + shift
   flattened_pd
 
+}
+
+
+
+
+#' Set indention of tokens that match regex
+#'
+#' Force the level of indention of tokens whose text matches a regular
+#' expression pattern to be a certain amount of spaces. The rule
+#' is only active for the first tokens on a line.
+#' @param flattened_pd A flattened parse table.
+#' @param pattern A character  with regular expressions to match against the token
+#'   in `flattened_pd`.
+#' @param target_indention The desired level of indention of the tokens that
+#'   match `pattern`.
+#' @param comments_only Boolean indicating whether only comments should be
+#'   checked or all tokens.
+#' @return A flattened parse table with indention set to `target_indention` for
+#'   the tokens that match `regex.`
+#' @importFrom purrr map flatten_int
+set_regex_indention <- function(flattened_pd,
+                                  pattern,
+                                  target_indention = 0,
+                                  comments_only = TRUE) {
+  if (comments_only) {
+    cond <- which(
+      (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0)
+    )
+    if (length(cond) < 1) return(flattened_pd)
+    to_check <- flattened_pd[cond,]
+    not_to_check <- flattened_pd[-cond,]
+  } else {
+    to_check <- flattened_pd
+    not_to_check <- NULL
+  }
+
+  indices_to_force <-
+    map(pattern, grep, to_check$text) %>%
+    flatten_int()
+
+  to_check$lag_spaces[indices_to_force] <- target_indention
+  bind_rows(to_check, not_to_check) %>%
+    arrange(pos_id)
+}
+
+#' Return regex patterns for re-indention
+#'
+#' @name regex_for_reindention
+NULL
+
+#' @export
+#' @describeIn regex_for_reindention Returns `NULL`, i.e. no pattern will
+#'   match against this.
+regex_none <- function() {
+  NULL
 }

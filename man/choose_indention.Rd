@@ -10,7 +10,7 @@ choose_indention(flattened_pd, use_raw_indention)
 \item{flattened_pd}{A nested parse table that was turned into a flat parse
 table using \code{\link[=extract_terminals]{extract_terminals()}}.}
 
-\item{use_raw_indention}{Boolean indicating wheter or not the raw indention
+\item{use_raw_indention}{Boolean indicating whether or not the raw indention
 should be used.}
 }
 \description{
@@ -26,6 +26,6 @@ If \code{use_raw_indention} is set, information in the column \code{indention} w
 be discarded anyways. If it is not set, the first token on a new line will
 "inherit" the indention of the whole line.
 The column \code{indention} will be removed since all information necessary is
-containted in the spacing information of the first token on a new line and
+contained in the spacing information of the first token on a new line and
 the position of the tokens will not be changed anymore at this stage.
 }

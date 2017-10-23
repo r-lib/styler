@@ -49,7 +49,7 @@ visit_one <- function(pd_flat, funs) {
 #'
 #' Implements a very specific pre-visiting scheme, namely to propagate
 #'   indention, spaces and lag_newlines to inner token to terminals. This means
-#'   that information regarding indention, linebreaks and spaces (which is
+#'   that information regarding indention, line breaks and spaces (which is
 #'   relative in `pd_nested`) will be converted into absolute.
 #' @inherit context_towards_terminals
 #' @seealso context_towards_terminals visitors
@@ -113,7 +113,7 @@ context_towards_terminals <- function(pd_nested,
 extract_terminals <- function(pd_nested) {
   if (is.null(pd_nested)) return(pd)
   pd_split <- split(pd_nested, seq_len(nrow(pd_nested)))
-  bind_rows(ifelse(pd_nested$terminal, pd_split, pd_nested$child))
+  bind_rows(if_else(pd_nested$terminal, pd_split, pd_nested$child))
 }
 
 
@@ -138,14 +138,17 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$spaces <- NULL # depreciate spaces
   flattened_pd <- choose_indention(flattened_pd, use_raw_indention)
   flattened_pd$line1 <-
-    cumsum(flattened_pd$lag_newlines) + flattened_pd$line1[1]
+    cumsum(flattened_pd$lag_newlines)
 
   flattened_pd$newlines <- lead(flattened_pd$lag_newlines, default = 0L)
   flattened_pd$nchar <- nchar(flattened_pd$text, type = "width")
+  groups <- flattened_pd$line1
   flattened_pd <- flattened_pd %>%
-    group_by(line1) %>%
-    mutate(col2 = cumsum(nchar + lag_spaces)) %>%
-    ungroup()
+    split(groups) %>%
+    lapply(function(.x) {
+      .x$col2 <- cumsum(.x$nchar + .x$lag_spaces)
+      .x}) %>%
+    bind_rows()
   flattened_pd$col1 <- flattened_pd$col2 - flattened_pd$nchar
   flattened_pd
 }
@@ -163,15 +166,15 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #'  be discarded anyways. If it is not set, the first token on a new line will
 #'  "inherit" the indention of the whole line.
 #'  The column `indention` will be removed since all information necessary is
-#'  containted in the spacing information of the first token on a new line and
+#'  contained in the spacing information of the first token on a new line and
 #'  the position of the tokens will not be changed anymore at this stage.
 #' @param flattened_pd A nested parse table that was turned into a flat parse
 #'   table using [extract_terminals()].
-#' @param use_raw_indention Boolean indicating wheter or not the raw indention
+#' @param use_raw_indention Boolean indicating whether or not the raw indention
 #'   should be used.
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
-    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0,
+    flattened_pd$lag_spaces <- if_else(flattened_pd$lag_newlines > 0,
                                       flattened_pd$indent,
                                       flattened_pd$lag_spaces)
   }

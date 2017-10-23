@@ -4,11 +4,14 @@
 \alias{add_token_terminal}
 \alias{add_terminal_token_after}
 \alias{add_terminal_token_before}
+\alias{remove_terminal_token_before_and_after}
 \title{Add information about previous / next token to each terminal}
 \usage{
 add_terminal_token_after(pd_flat)
 
 add_terminal_token_before(pd_flat)
+
+remove_terminal_token_before_and_after(pd_flat)
 }
 \arguments{
 \item{pd_flat}{A flat parse table.}
@@ -16,3 +19,10 @@ add_terminal_token_before(pd_flat)
 \description{
 Add information about previous / next token to each terminal
 }
+\section{Functions}{
+\itemize{
+\item \code{remove_terminal_token_before_and_after}: Removes column \code{terimnal_token_before}. Might
+be used to prevent the use of invalidated information, e.g. if tokens were
+added to the nested parse table.
+}}
+

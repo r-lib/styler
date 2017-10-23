@@ -1,4 +1,4 @@
-#' @include token.R
+#' @include token-define.R
 add_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   op_before <- lead(op_after, default = FALSE)
@@ -9,7 +9,7 @@ add_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
-#' @include token.R
+#' @include token-define.R
 set_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   if (!any(op_after)) return(pd_flat)
@@ -19,15 +19,51 @@ set_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
+#' Style spacing around math tokens
+#' @inheritParams style_space_around_math_token_one
+#' @param one Character vector with tokens that should be surrounded by at
+#'   least one space (depending on `strict = TRUE` in the styling functions
+#'   [style_text()] and friends). See 'Examples'.
+#' @param zero Character vector of tokens that should be surrounded with zero
+#'   spaces.
+style_space_around_math_token <- function(strict, zero, one, pd_flat) {
+  pd_flat %>%
+    style_space_around_math_token_one(strict, zero, 0L) %>%
+    style_space_around_math_token_one(strict, one, 1L)
+}
+
+#' Set spacing of token to a certain level
+#'
+#' Set the spacing of all `tokens` in `pd_flat` to `level` if `strict = TRUE` or
+#' to at least to `level` if `strict = FALSE`.
+#' @param pd_flat A nest or a flat parse table.
+#' @param strict Whether the rules should be applied strictly or not.
+#' @param tokens Character vector with tokens that should be styled.
+#' @param level Scalar indicating the amount of spaces that should be inserted
+#'   around the `tokens`.
+style_space_around_math_token_one <- function(pd_flat, strict, tokens, level) {
+  op_after <- pd_flat$token %in% tokens
+  op_before <- lead(op_after, default = FALSE)
+  idx_before <- op_before & (pd_flat$newlines == 0L)
+  idx_after <- op_after & (pd_flat$newlines == 0L)
+  if (strict) {
+    pd_flat$spaces[idx_before | idx_after] <- level
+  } else {
+    pd_flat$spaces[idx_before | idx_after] <-
+      pmax(pd_flat$spaces[idx_before | idx_after], level)
+  }
+  pd_flat
+}
+
 # depreciated!
-#' @include token.R
+#' @include token-define.R
 remove_space_after_unary_pm <- function(pd_flat) {
   op_pm <- c("'+'", "'-'")
   op_pm_unary_after <- c(op_pm, op_token, "'('", "','")
 
   pm_after <- pd_flat$token %in% op_pm
   pd_flat$spaces[pm_after & (pd_flat$newlines == 0L) &
-                   (dplyr::lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
+                   (lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
   pd_flat
 }
 
@@ -140,20 +176,16 @@ set_space_between_levels <- function(pd_flat) {
 #'   there is not just spaces within the comment. Multiple spaces may be legit
 #'   for indention in some situations.
 #' @param pd A parse table.
-#' @param force_one Wheter or not to force one space or allow multiple spaces
+#' @param force_one Whether or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".
 #' @importFrom purrr map_chr
 start_comments_with_space <- function(pd, force_one = FALSE) {
   comment_pos <- pd$token == "COMMENT"
   if (!any(comment_pos)) return(pd)
 
-  comments <- pd[comment_pos, ]
+  comments <- rematch2::re_match(pd$text[comment_pos],
+    "^(?<prefix>#+'*)(?<space_after_prefix> *)(?<text>.*)$")
 
-  non_comments <-pd[pd$token != "COMMENT", ]
-
-  comments <-  extract(comments, text,
-                       c("prefix", "space_after_prefix", "text"),
-                       regex = "^(#+'*)( *)(.*)$")
   comments$space_after_prefix <- nchar(
     comments$space_after_prefix, type = "width"
   )
@@ -162,18 +194,15 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
     force_one
   )
 
-  comments$text <-
+  pd$text[comment_pos] <-
     paste0(
       comments$prefix,
       map_chr(comments$space_after_prefix, rep_char, char = " "),
       comments$text
     ) %>%
     trimws("right")
-  comments$short <- substr(comments$text, 1, 5)
-
-  comments[, setdiff(names(comments), c("space_after_prefix", "prefix"))] %>%
-    bind_rows(non_comments) %>%
-    arrange(line1, col1)
+  pd$short[comment_pos] <- substr(pd$text[comment_pos], 1, 5)
+  pd
 }
 
 
@@ -183,15 +212,35 @@ set_space_before_comments <- function(pd_flat) {
   comment_before <- lead(comment_after, default = FALSE)
   pd_flat$spaces[comment_before & (pd_flat$newlines == 0L)] <- 1L
   pd_flat
-
 }
 
+add_space_before_comments <- function(pd_flat) {
+  comment_after <- (pd_flat$token == "COMMENT") & (pd_flat$lag_newlines == 0L)
+  if (!any(comment_after)) return(pd_flat)
+  comment_before <- lead(comment_after, default = FALSE)
+  pd_flat$spaces[comment_before & (pd_flat$newlines == 0L)] <-
+    pmax(pd_flat$spaces[comment_before], 1L)
+  pd_flat
+}
+
+
 remove_space_after_excl <- function(pd_flat) {
-  excl <- (pd_flat$token == "'!'") & (pd_flat$newlines == 0L)
+  excl <- (pd_flat$token == "'!'") &
+    (pd_flat$token_after != "'!'") &
+    (pd_flat$newlines == 0L)
   pd_flat$spaces[excl] <- 0L
   pd_flat
 }
 
+set_space_after_bang_bang <- function(pd_flat) {
+  last_bang <- (pd_flat$token == "'!'") &
+    (pd_flat$token_after != "'!'") &
+    (pd_flat$newlines == 0L) &
+    (pd_flat$token_before == "'!'")
+
+  pd_flat$spaces[last_bang] <- 1L
+  pd_flat
+}
 
 remove_space_before_dollar <- function(pd_flat) {
   dollar_after <- (pd_flat$token == "'$'") & (pd_flat$lag_newlines == 0L)

@@ -6,7 +6,7 @@
 #' @importFrom purrr when
 create_tree <- function(text) {
   compute_parse_data_nested(text) %>%
-    pre_visit(c(create_filler)) %>%
+    pre_visit(c(initialize_attributes)) %>%
     create_node_from_nested_root() %>%
     as.data.frame()
 }
@@ -19,7 +19,7 @@ create_tree <- function(text) {
 #' @examples
 #' code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 #' nested_pd <- styler:::compute_parse_data_nested(code)
-#' initialized <- styler:::pre_visit(nested_pd, c(styler:::create_filler))
+#' initialized <- styler:::pre_visit(nested_pd, c(styler:::initialize_attributes))
 #' styler:::create_node_from_nested_root(initialized)
 create_node_from_nested_root <- function(pd_nested) {
   n <- data.tree::Node$new("ROOT (token: short_text [lag_newlines/spaces] {id})")
@@ -35,10 +35,7 @@ create_node_from_nested <- function(pd_nested, parent) {
   if (is.null(pd_nested))
     return()
 
-  node_info <-
-    pd_nested %>%
-    transmute(formatted = paste0(token, ": ", short, " [", lag_newlines, "/", spaces, "] {", id, "}")) %>%
-    .[["formatted"]]
+  node_info <- paste0(pd_nested$token, ": ", pd_nested$short, " [", pd_nested$lag_newlines, "/", pd_nested$spaces, "] {", pd_nested$id, "}")
 
   child_nodes <-
     node_info %>%

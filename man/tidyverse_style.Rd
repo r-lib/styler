@@ -5,7 +5,9 @@
 \title{The tidyverse style}
 \usage{
 tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2,
-  start_comments_with_one_space = FALSE)
+  start_comments_with_one_space = FALSE,
+  reindention = tidyverse_reindention(),
+  math_token_spacing = tidyverse_math_token_spacing())
 }
 \arguments{
 \item{scope}{The extent of manipulation. Can range from "none" (least
@@ -13,16 +15,27 @@ invasive) to "token" (most invasive). See 'Details'. This argument is a
 vector of length one.}
 
 \item{strict}{A logical value indicating whether a set of strict
-or not so strict transformer functions should be returned.}
+or not so strict transformer functions should be returned. Compare the
+functions returned with or without \code{strict = TRUE}. For example,
+\code{strict = TRUE} means force \emph{one} space e.g. after "," and \emph{one} line break
+e.g. after a closing curly brace. \code{strict = FALSE} means to set spaces and
+line breaks to one if there is none and leave the code untouched otherwise.
+See 'Examples'.}
 
 \item{indent_by}{How many spaces of indention should be inserted after
 operators such as '('.}
 
 \item{start_comments_with_one_space}{Whether or not comments should start
 with only one space (see \code{\link[=start_comments_with_space]{start_comments_with_space()}}).}
+
+\item{reindention}{An list of parameters for regex re-indention, most
+conveniently constructed using \code{\link[=specify_reindention]{specify_reindention()}}.}
+
+\item{math_token_spacing}{An list of parameters that define spacing around
+math token, conveniently constructed using \code{\link[=specify_math_token_spacing]{specify_math_token_spacing()}}.}
 }
 \description{
-The tidyverse style
+Style code according to the tidyverse style guide.
 }
 \details{
 The following options for \code{scope} are available.
@@ -39,4 +52,9 @@ tokens.
 
 As it becomes clear from this description, more invasive operations can only
 be performed if all less invasive operations are performed too.
+}
+\examples{
+style_text("call( 1)", style = tidyverse_style, scope = "spaces")
+style_text(c("ab <- 3", "a  <-3"), strict = FALSE) # keeps alignment of "<-"
+style_text(c("ab <- 3", "a  <-3"), strict = TRUE) # drops alignment of "<-"
 }

@@ -100,7 +100,8 @@ transform_and_check <- function(in_item, out_item,
       write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE)
   }
   transformed <- read_in %>%
-    transformer(...)
+    transformer(...) %>%
+    unclass()
   transformed <- suppressMessages(utf8::transform_lines_enc(out_item,
     function(x) transformed,
     write_back = write_back))
@@ -137,55 +138,16 @@ NULL
 style_empty <- function(text) {
   transformers <- list(
     # transformer functions
-    filler     = create_filler,
+    initialize = initialize_attributes,
     line_break = NULL,
     space      = NULL,
     token      = NULL,
 
     # transformer options
     use_raw_indention = FALSE,
+    reindention = specify_reindention(),
     NULL
   )
-  transformed_text <- parse_transform_serialize(text, transformers)
-  transformed_text
-}
-
-#' @describeIn test_transformer Transformations for indention based on curly
-#'   brackets only.
-style_indent_curly <- function(text) {
-
-  transformers <- list(
-    # transformer functions
-    filler     = create_filler,
-    line_break = NULL,
-    space      =  partial(indent_curly, indent_by = 2),
-    token      = NULL,
-
-    # transformer options
-    use_raw_indention = FALSE,
-    NULL
-  )
-  transformed_text <- parse_transform_serialize(text, transformers)
-  transformed_text
-}
-
-
-#' @describeIn test_transformer Transformations for indention based on curly
-#'   brackets and round brackets.
-style_indent_curly_round <- function(text) {
-  transformers <- list(
-    # transformer functions
-    filler     = create_filler,
-    line_break = NULL,
-    space      = c(partial(indent_curly, indent_by = 2),
-                    partial(indent_round, indent_by = 2)),
-    token      = NULL,
-
-    # transformer options
-    use_raw_indention = FALSE,
-    NULL
-  )
-
   transformed_text <- parse_transform_serialize(text, transformers)
   transformed_text
 }
@@ -195,17 +157,25 @@ style_op <- function(text) {
 
   transformers <- list(
     # transformer functions
-    filler     = create_filler,
+    initialize = initialize_attributes,
     line_break = NULL,
     space      = partial(indent_op, indent_by = 2),
     token      = NULL,
 
     # transformer options
     use_raw_indention = FALSE,
+    reindention = specify_reindention(),
     NULL
   )
 
   transformed_text <- parse_transform_serialize(text, transformers)
   transformed_text
 
+}
+
+#' Create the path to a test that file
+#' @param ... Arguments passed to [file.path()] to construct the path after
+#'   ".../tests/testthat/"
+testthat_file <- function(...) {
+  file.path(rprojroot::find_testthat_root_file(), ...)
 }

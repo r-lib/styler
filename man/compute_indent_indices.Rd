@@ -4,21 +4,33 @@
 \alias{compute_indent_indices}
 \title{Compute the indices that need indention}
 \usage{
-compute_indent_indices(pd, token = "'('", indent_last = FALSE)
+compute_indent_indices(pd, token_opening, token_closing = NULL)
 }
 \arguments{
 \item{pd}{A parse table.}
 
-\item{token}{A character vector with tokens.}
+\item{token_opening}{A character vector with tokens that could induce
+indention for subsequent tokens.}
 
-\item{indent_last}{Flag to indicate whether the last token in \code{pd} should
-be indented or not. See 'Details'.}
+\item{token_closing}{A character vector with tokens that could terminate
+indention for previous tokens. If \code{NULL} (the default), indention should
+end with the last token in the parse table.}
 }
 \description{
 Based on \code{token}, find the rows in \code{pd} that need to be indented.
 }
 \details{
-For example when \code{token} is a parenthesis, the closing parenthesis does not
-need indention, but if token is something else, for example a plus (+), the
-last token in \code{pd} needs indention.
+Two cases are fundamentally different:
+\itemize{
+\item Indention based on operators (e.g '+'), where all subsequent tokens should
+be indented.
+\item Indention based on braces (e.g. '('), where just the tokens between the
+opening and the closing brace have to be indented.
+}
+
+To cover the second case, we need \code{token_closing} because it cannot be taken
+for granted that \code{token_closing} is always the last token in \code{pd}. For
+example in if-else expressions, this is not the case and indenting
+everything between '(' and the penultimate token would result in the wrong
+formatting.
 }
