@@ -29,6 +29,14 @@ dist: trusty
 cache: packages
 latex: false
 
+matrix:
+  include:
+  - r: 3.1
+  - r: 3.2
+  - r: oldrel
+  - r: release
+  - r: devel
+
 #env
 env:
   global:
