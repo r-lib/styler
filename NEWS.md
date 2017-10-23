@@ -1,3 +1,57 @@
+## styler 0.0-9 (2017-10-23)
+
+- Hotfix: utf8 should not be verbose (#245).
+- Allow styling of Rmd files(#233).
+- Remove duplicate @family (#244).
+- Fixing token insertion (#242).
+- Capitalize Addin titles (#241).
+- Explicit `NULL` creation to make styler compatible with R3.2.0 (#237).
+- Improve vignettes (#232).
+- Allow exclusion of files with `style_pkg()` and `style_dir()`.
+- Correct styling with long strings (#230).
+- Add tools for re-indenting tokens (#217).
+- Math token spacing (#221).
+- Remove outdated line and col information (#218).
+- Empty input for styling does not cause an error (#227, #228).
+- Tools to insert tokens + application on `if`-`else` clauses (#212).
+- Improve example in documentation (#222).
+- Fix spacing around in (#214).
+- Maintenance: renaming functions / files, extend helper, documentation, if_else etc. (#204).
+- Disallow line break after ( for function calls (#210).
+- Preserve space between `!` and bang (#209).
+- Simplify RStudio Addin (#208, #211).
+- Indention based on square brackets (#207).
+- Add vignette on introducing styler (#203).
+- Indent function declaration without curly braces correctly (#202).
+- Fix indention in if-else statement (#200).
+- Sorting key (#196).
+- Use safe sequences (#197).
+- Fix space between two commas (#195).
+- Keep single-line pipes on one line (#74).
+- Remove tidyr and dplyr dependency (#182, #183, @jimhester).
+- Fix parsing inconsistency (#188).
+- Substitute create filler (#190).
+- Introducing class vertical (#189).
+- Adapt line break rules (#172).
+- Fix `R CMD check` (#185).
+- Force argument evaluation for proper error handling (#179).
+- Add nonstrict version of set_space_before_comment (#174).
+- Add installation instructions to README (#175).
+- Addin to style highlighted region (#143).
+- Improve spelling (#168).
+- Add coverage badge
+- Change badge from WIP to active
+- Add the number of files to message (#166).
+- Improve documentation (#164).
+- Add informative messages while styling files (#165).
+- More examples in help file (#161).
+- No line breaks after pipe if comment is next token (#160).
+- Fixing spacing around `!` (non-bang-bang) (#157).
+- Finalize function documentation (#154).
+- Review vignette (#158).
+- Update bang-bang rule (#156).
+
+
 ## styler 0.0-8 (2017-08-24)
 
 - Vignette on customizing styler (#145).
@@ -27,6 +81,7 @@
 - mal-indention in conditional statement due to wrong specification of indent_without_paren) (#95).
 - Complicated indentions based on arithmetic and special operators (#96).
 - indention interaction on with assignment operator and other operators (#97).
+
 
 ## styler 0.0-7 (2017-07-27)
 
