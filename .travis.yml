@@ -35,6 +35,8 @@ matrix:
   - r: 3.2
   - r: oldrel
   - r: release
+    env:
+    - BUILD_PKGDOWN: true
   - r: devel
 
 #env
