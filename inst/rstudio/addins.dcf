@@ -12,3 +12,8 @@ Name: Style active region
 Description: Pretty-print active region
 Binding: style_active_region
 Interactive: true
+
+Name: Style working directory
+Description: Pretty-print working directory
+Binding: style_dir
+Interactive: true
