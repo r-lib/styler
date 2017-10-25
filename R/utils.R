@@ -49,3 +49,13 @@ assert_text <- function(text) {
   }
   text
 }
+
+#' Find the index of the next non-comment in a parse table
+#' @param pd A parse table.
+#' @param pos The position of the token to start the search from.
+#' @importFrom rlang seq2
+next_non_comment <- function(pd, pos) {
+  if (pos >= nrow(pd)) return(integer(0))
+  candidates <- seq2(pos + 1L, nrow(pd))
+  setdiff(candidates, which(pd$token == "COMMENT"))[1]
+}

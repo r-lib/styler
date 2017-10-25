@@ -1,15 +1,25 @@
-#' @importFrom rlang seq2
+#' @importFrom purrr reduce
 add_brackets_in_pipe <- function(pd) {
-  has_no_brackets <- (pd$token_before == "SPECIAL-PIPE") &
-    (pd$token == "SYMBOL") & (pd$text != ".")
-  if (!any(has_no_brackets)) return(pd)
-  new_pos_ids <- create_pos_ids(pd, 1, after = TRUE, n = 2)
-  new_pd <- create_tokens(
-    tokens = c("'('", "')'"), texts = c("(", ")"), pos_ids = new_pos_ids,
-    lag_newlines = rep(0, 2), parents = create_parent_id(pd))
-  pd <- bind_rows(pd, new_pd)
+  is_pipe <- pd$token == "SPECIAL-PIPE"
+  if (any(is_pipe, na.rm = TRUE)) {
+    pd <- reduce(which(is_pipe), add_brackets_in_pipe_one, .init = pd)
+  }
   pd
 
+}
+
+add_brackets_in_pipe_one <- function(pd, pos) {
+  next_non_comment <- next_non_comment(pd, pos)
+  if (nrow(pd$child[[next_non_comment]]) < 2) {
+    new_pos_ids <- create_pos_ids(pd$child[[next_non_comment]], 1, after = TRUE, n = 2)
+    new_pd <- create_tokens(
+      tokens = c("'('", "')'"), texts = c("(", ")"), pos_ids = new_pos_ids,
+      lag_newlines = rep(0, 2), parents = create_parent_id(pd))
+    pd$child[[next_non_comment]] <-
+      bind_rows(pd$child[[next_non_comment]], new_pd) %>%
+      arrange(pos_id)
+  }
+  pd
 }
 
 #' Wrap if-else statement in curly braces
