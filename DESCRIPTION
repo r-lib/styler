@@ -10,7 +10,7 @@ Imports:
     rlang,
     rprojroot,
     tibble,
-    utf8,
+    enc,
     withr,
     rematch2,
     magrittr
@@ -24,7 +24,7 @@ Suggests:
     rstudioapi,
     testthat
 Remotes:
-    krlmlr/utf8
+    krlmlr/enc
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

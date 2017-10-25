@@ -34,10 +34,10 @@ that are under version control or to create a backup copy.
 \examples{
 # the following is identical but the former is more convenient:
 file <- tempfile("styler", fileext = ".R")
-utf8::write_lines_enc("1++1", file)
+enc::write_lines_enc("1++1", file)
 style_file(file, style = tidyverse_style, strict = TRUE)
 style_file(file, transformers = tidyverse_style(strict = TRUE))
-utf8::read_lines_enc(file)
+enc::read_lines_enc(file)
 unlink(file)
 }
 \seealso{
