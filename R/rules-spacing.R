@@ -249,6 +249,12 @@ remove_space_before_dollar <- function(pd_flat) {
   pd_flat
 }
 
+remove_space_after_fun_dec <- function(pd_flat) {
+  fun_after <- (pd_flat$token == "FUNCTION") & (pd_flat$lag_newlines == 0L)
+  pd_flat$spaces[fun_after] <- 0L
+  pd_flat
+}
+
 remove_space_around_colons <- function(pd_flat) {
   one_two_or_three_col_after <-
     pd_flat$token %in% c("':'", "NS_GET_INT", "NS_GET")

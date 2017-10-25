@@ -5,9 +5,11 @@ remove_line_break_before_curly_opening <- function(pd) {
   pd
 }
 
+
 # A { should always be followed by a new line
 set_line_break_afer_curly_opening <- function(pd) {
-  to_break <- (pd$token == "'{'") & (pd$token_after != "COMMENT")
+  to_break <- (pd$token == "'{'") &
+    (pd$token_after != "COMMENT")
   pd$lag_newlines[lag(to_break)] <- 1L
   pd
 }
@@ -36,11 +38,20 @@ add_line_break_before_curly_closing <- function(pd) {
 }
 
 # if ) follows on }, don't break line
-remove_line_break_before_round_closing <- function(pd) {
+remove_line_break_before_round_closing_after_curly <- function(pd) {
   round_after_curly <- pd$token == "')'" & (pd$token_before == "'}'")
   pd$lag_newlines[round_after_curly] <- 0L
   pd
 }
+
+remove_line_break_before_round_closing_fun_dec <- function(pd) {
+  if (is_function_dec(pd)) {
+    round_after <- pd$token == "')'" & pd$token_before != "COMMENT"
+    pd$lag_newlines[round_after] <- 0L
+  }
+  pd
+}
+
 
 #' @importFrom rlang seq2
 add_line_break_after_pipe <- function(pd) {
