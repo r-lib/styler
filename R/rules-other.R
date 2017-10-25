@@ -35,6 +35,7 @@ wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
     if (nrow(pd) > 5) pd$lag_newlines[6] <- 0L
     pd$indent[5] <- pd$indent[5] - indent_by
     pd$child[[5]] <- wrap_expr_in_curly(pd$child[[5]], stretch_out = TRUE)
+    pd$multi_line[5] <- TRUE
   }
   if (nrow(pd) > 6 &&
       (pd$token[6] == "ELSE" && pd_is_multi_line(pd)) &&
