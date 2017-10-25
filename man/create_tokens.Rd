@@ -6,7 +6,7 @@
 \usage{
 create_tokens(tokens, texts, lag_newlines = 0, spaces = 0, pos_ids, parents,
   token_before = NA, token_after = NA, indention_ref_ids = NA,
-  indents = 0)
+  indents = 0, terminal = TRUE, child = NULL)
 }
 \arguments{
 \item{tokens}{Character vector with tokens to create.}
@@ -34,6 +34,11 @@ parent of the tokens we want to create.}
 corresponding to the tokens.}
 
 \item{indents}{Vector with indents corresponding to the tokens.}
+
+\item{terminal}{Boolean vector indicating whether a token is a terminal or
+not.}
+
+\item{child}{The children of the tokens.}
 }
 \description{
 Creates a terminal token represented as (a row of) a parse table.

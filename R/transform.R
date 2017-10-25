@@ -111,21 +111,29 @@ parse_transform_serialize <- function(text, transformers) {
 
 #' Apply transformers to a parse table
 #'
-#' Depending on whether `transformers` contains functions to modify the
-#'   line break information, the column `multi_line` is updated (after
-#'   the line break information is modified) and
-#'   the rest of the transformers is applied afterwards, or (if line break
-#'   information is not to be modified), all transformers are applied in one
-#'   step. The former requires two pre visits and one post visit, the latter
-#'   only one pre visit.
+#' The column `multi_line` is updated (after the line break information is
+#' modified) and the rest of the transformers are applied afterwards,
+#' The former requires two pre visits and one post visit.
+#' @details
+#' The order of the transformations is:
+#'
+#' * Initialization (must be first).
+#' * Line breaks (must be before spacing due to indention).
+#' * Update of newline and multi-line attributes (must not change afterwards,
+#'   hence line breaks must be modified first).
+#' * spacing rules (must be after line-breaks and updating newlines and
+#'   multi-line).
+#' * token manipulation / replacement (is last since adding and removing tokens
+#'   will invalidate columns token_after and token_before).
+#' * Update indention reference (must be after line breaks).
+#'
 #' @param pd_nested A nested parse table.
 #' @param transformers A list of *named* transformer functions
 #' @importFrom purrr flatten
 apply_transformers <- function(pd_nested, transformers) {
   transformed_line_breaks <- pre_visit(
     pd_nested,
-    c(transformers$initialize,
-    transformers$line_break)
+    c(transformers$initialize, transformers$line_break)
   )
 
   transformed_updated_multi_line <- post_visit(
@@ -135,7 +143,7 @@ apply_transformers <- function(pd_nested, transformers) {
 
   transformed_all <- pre_visit(
     transformed_updated_multi_line,
-    c(transformers$space, transformers$token, transformers$indention)
+    c(transformers$space, transformers$indention, transformers$token)
   )
 
   transformed_absolute_indent <- context_to_terminals(
@@ -145,7 +153,6 @@ apply_transformers <- function(pd_nested, transformers) {
     outer_spaces = 0,
     outer_indention_refs = NA
   )
-
   transformed_absolute_indent
 
 }

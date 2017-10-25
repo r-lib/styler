@@ -17,6 +17,9 @@
 #' @param indention_ref_ids Character vector with indention ref ids
 #'   corresponding to the tokens.
 #' @param indents Vector with indents corresponding to the tokens.
+#' @param terminal Boolean vector indicating whether a token is a terminal or
+#'   not.
+#' @param child The children of the tokens.
 #' @family token creators
 create_tokens <- function(tokens,
                           texts,
@@ -27,7 +30,9 @@ create_tokens <- function(tokens,
                           token_before = NA,
                           token_after = NA,
                           indention_ref_ids = NA,
-                          indents = 0) {
+                          indents = 0,
+                          terminal = TRUE,
+                          child = NULL) {
   len_text <- length(text)
   data_frame(
     token = tokens,
@@ -40,13 +45,13 @@ create_tokens <- function(tokens,
     token_before = token_before,
     token_after = token_after,
     id = NA,
-    terminal = rep(TRUE, len_text),
+    terminal = rep(terminal, len_text),
     internal = rep(FALSE, len_text),
     spaces = spaces,
     multi_line = rep(FALSE, len_text),
     indention_ref_id = indention_ref_ids,
     indent = indents,
-    child = rep(list(NULL), len_text)
+    child = rep(list(child), len_text)
   )
 }
 
@@ -126,7 +131,10 @@ create_parent_id <- function(pd_nested) {
 #' Wrap an expression in curly braces
 #'
 #' Adds curly braces to an expression (represented as a parse table) if there
-#' are none.
+#' are none. Because of the nature of the nested parse table, curly braces only appear
+#' with a single expression between them, so `wrap_expr_in_curly()` actually
+#' first wraps the expression to wrap in curly braces into a new expression and
+#' then adds curly braces around this new expression.
 #' @param pd A parse table.
 #' @param stretch_out Whether or not to create a line break after the opening
 #'   curly brace and before the closing curly brace.
@@ -135,16 +143,24 @@ wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
   if (stretch_out) {
     pd$lag_newlines[1] <- 1L
   }
+  expr <- create_tokens(
+    "expr", "",
+    pos_ids = create_pos_ids(pd, 1, after = FALSE),
+    parents = create_parent_id(pd),
+    child = pd,
+    terminal = FALSE
+  )
   opening <- create_tokens(
     "'{'", "{",
-    pos_ids = create_pos_ids(pd, 1, after = FALSE),
-    parents = create_parent_id(pd)
+    pos_ids = create_pos_ids(expr, 1, after = FALSE),
+    parents = NA
   )
 
   closing <- create_tokens(
     "'}'", "}", spaces = 1, lag_newlines = as.integer(stretch_out),
     pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
-    parents = create_parent_id(pd)
+    parents = NA
   )
-  bind_rows(opening, pd, closing)
+
+  bind_rows(opening, expr, closing)
 }
