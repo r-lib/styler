@@ -86,6 +86,7 @@ tidyverse_style <- function(scope = "tokens",
       remove_space_after_excl,
       set_space_after_bang_bang,
       remove_space_before_dollar,
+      remove_space_after_fun_dec,
       remove_space_around_colons,
       partial(start_comments_with_space,
               force_one = start_comments_with_one_space),
@@ -101,7 +102,7 @@ tidyverse_style <- function(scope = "tokens",
   line_break_manipulators <- if (scope >= "line_breaks")
     lst(
       remove_line_break_before_curly_opening,
-      if (strict) remove_line_break_before_round_closing else identity,
+      if (strict) remove_line_break_before_round_closing_after_curly else identity,
       if (strict) set_line_break_afer_curly_opening else
         add_line_break_afer_curly_opening,
       if (strict) set_line_break_before_curly_closing else

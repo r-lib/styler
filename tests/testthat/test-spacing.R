@@ -50,3 +50,11 @@ test_that("spacing around in works", {
     transformer = style_text), NA)
 })
 
+test_that("no spaces after token FUNCTION", {
+  expect_warning(test_collection(
+    "spacing", "spacing_function",
+    transformer = style_text, strict = FALSE), NA)
+})
+
+
+

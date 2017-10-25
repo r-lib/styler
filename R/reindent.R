@@ -60,7 +60,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
 update_indention_ref_fun_dec <- function(pd_nested) {
   if (pd_nested$token[1] == "FUNCTION") {
     seq <- seq2(3, nrow(pd_nested) - 1)
-    pd_nested$indention_ref_id[seq] <- pd_nested$id[1]
+    pd_nested$indention_ref_id[seq] <- pd_nested$id[2]
   }
   pd_nested
 }
@@ -98,7 +98,7 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   token_to_update <- which(token_points_to_ref & first_token_on_line)
 
   # udate spaces
-  copied_spaces <- flattened_pd$col2[target_token] + 1
+  copied_spaces <- flattened_pd$col2[target_token]
   old_spaces <- flattened_pd$lag_spaces[token_to_update[1]]
   shift <- copied_spaces - old_spaces
   flattened_pd$lag_spaces[token_to_update] <-
