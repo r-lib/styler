@@ -4,11 +4,14 @@
 \alias{pd_is}
 \alias{is_curly_expr}
 \alias{is_function_call}
+\alias{is_function_dec}
 \title{Check whether a parse table corresponds to a a certain expression}
 \usage{
 is_curly_expr(pd)
 
 is_function_call(pd)
+
+is_function_dec(pd)
 }
 \arguments{
 \item{pd}{A parse table.}
@@ -22,5 +25,7 @@ Check whether a parse table corresponds to a a certain expression
 curly brackets.
 
 \item \code{is_function_call}: Checks whether \code{pd} is a function call.
+
+\item \code{is_function_dec}: Checks whether \code{pd} is a function declaration.
 }}
 
