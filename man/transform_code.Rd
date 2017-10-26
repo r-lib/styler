@@ -14,10 +14,10 @@ transform_code(path, fun, verbose = FALSE, ...)
 \item{verbose}{Should the function show a message with a list of changed
 files?}
 
-\item{...}{Further arguments passed to \code{utf8::transform_lines_enc()}.}
+\item{...}{Further arguments passed to \code{enc::transform_lines_enc()}.}
 }
 \description{
-A wrapper for \code{\link[utf8:transform_lines_enc]{utf8::transform_lines_enc()}} which initiates the styling of
+A wrapper for \code{\link[enc:transform_lines_enc]{enc::transform_lines_enc()}} which initiates the styling of
 either R or Rmd files by passing the relevant transformer function for each
 case.
 }

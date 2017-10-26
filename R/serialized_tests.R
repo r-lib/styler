@@ -94,7 +94,7 @@ transform_and_check <- function(in_item, out_item,
                                 write_tree = FALSE,
                                 out_tree = "_tree", ...) {
 
-  read_in <- utf8::read_lines_enc(in_item)
+  read_in <- enc::read_lines_enc(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
       write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE)
@@ -102,12 +102,12 @@ transform_and_check <- function(in_item, out_item,
   transformed <- read_in %>%
     transformer(...) %>%
     unclass()
-  transformed <- suppressMessages(utf8::transform_lines_enc(out_item,
+  transformed <- suppressMessages(enc::transform_lines_enc(out_item,
     function(x) transformed,
     write_back = write_back))
 
   if (transformed) {
-    target <- utf8::read_lines_enc(out_item)
+    target <- enc::read_lines_enc(out_item)
     warning(in_name, " was different from ", out_name,
             immediate. = TRUE, call. = FALSE)
   } else {
