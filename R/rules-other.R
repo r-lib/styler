@@ -10,7 +10,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
     new_pos_ids <- create_pos_ids(pd$child[[next_non_comment]], 1, after = TRUE, n = 2)
     new_pd <- create_tokens(
       tokens = c("'('", "')'"), texts = c("(", ")"), pos_ids = new_pos_ids,
-      lag_newlines = rep(0, 2), parents = create_parent_id(pd))
+      lag_newlines = rep(0, 2))
     pd$child[[next_non_comment]] <-
       bind_rows(pd$child[[next_non_comment]], new_pd) %>%
       arrange(pos_id)

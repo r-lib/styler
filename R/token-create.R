@@ -26,7 +26,6 @@ create_tokens <- function(tokens,
                           lag_newlines = 0,
                           spaces = 0,
                           pos_ids,
-                          parents,
                           token_before = NA,
                           token_after = NA,
                           indention_ref_ids = NA,
@@ -41,7 +40,6 @@ create_tokens <- function(tokens,
     lag_newlines = lag_newlines,
     newlines = lead(lag_newlines),
     pos_id = pos_ids,
-    parent = parents,
     token_before = token_before,
     token_after = token_after,
     id = NA,
@@ -110,24 +108,6 @@ validate_new_pos_ids <- function(new_ids, after) {
   if (any(abs(new_ids - ref) > 0.5)) stop("too many ids assigned")
 }
 
-#' Find the parent of a nest
-#'
-#' It is any id of the nest (nested parse table at one level
-#' of nesting) since by definition, all tokens on a nest have the same id.
-#' @param pd_nested A nested parse table.
-find_parent <- function(pd_nested) {
-  pd_nested$parent[1]
-}
-
-#' Create the parent id for a new token
-#'
-#' Just wraps [find_parent()], since it can also be used to obtain the parent id
-#' that is needed to create a new token in this nest.
-#' @inheritParams find_parent
-create_parent_id <- function(pd_nested) {
-  find_parent(pd_nested)
-}
-
 #' Wrap an expression in curly braces
 #'
 #' Adds curly braces to an expression (represented as a parse table) if there
@@ -146,20 +126,17 @@ wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
   expr <- create_tokens(
     "expr", "",
     pos_ids = create_pos_ids(pd, 1, after = FALSE),
-    parents = create_parent_id(pd),
     child = pd,
     terminal = FALSE
   )
   opening <- create_tokens(
     "'{'", "{",
-    pos_ids = create_pos_ids(expr, 1, after = FALSE),
-    parents = NA
+    pos_ids = create_pos_ids(pd, 1, after = FALSE)
   )
 
   closing <- create_tokens(
     "'}'", "}", spaces = 1, lag_newlines = as.integer(stretch_out),
-    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
-    parents = NA
+    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE)
   )
 
   bind_rows(opening, expr, closing)

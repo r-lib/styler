@@ -73,7 +73,7 @@ left_join <- function(x, y, by, ...) {
     by_x <- by_y <- by
   }
   res <- as_tibble(merge(x, y, by.x = by_x, by.y = by_y, all.x = TRUE, ...))
-  res <- arrange(res, line1, col1, line2, col2, parent)
+  res <- arrange(res, pos_id)
 
   # dplyr::left_join set unknown list columns to NULL, merge sets them
   # to NA
