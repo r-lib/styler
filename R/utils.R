@@ -55,7 +55,6 @@ assert_text <- function(text) {
 #' @param pos The position of the token to start the search from.
 #' @importFrom rlang seq2
 next_non_comment <- function(pd, pos) {
-  if (pos >= nrow(pd)) return(integer(0))
   candidates <- seq2(pos + 1L, nrow(pd))
   setdiff(candidates, which(pd$token == "COMMENT"))[1]
 }
