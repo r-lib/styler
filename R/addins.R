@@ -8,8 +8,9 @@ style_active_file <- function() {
     c(1, 1, length(out) + 1, 1),
     paste0(out, collapse = "\n"), id = context$id
   )
-  if (Sys.getenv("save_after_styling") == TRUE && context$path != "")
+  if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
     rstudioapi::documentSave(context$id)
+  }
 }
 
 
@@ -18,7 +19,7 @@ style_active_file <- function() {
 #' Helper function for RStudio Addin. This function is complicated because of
 #' one thing: You can highlight also just parts of lines.
 #' @importFrom rlang seq2
-style_active_region <- function() {
+style_selection <- function() {
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
   if (all(nchar(text) == 0)) stop("No code selected")
@@ -26,6 +27,9 @@ style_active_region <- function() {
   rstudioapi::modifyRange(
     context$selection[[1]]$range, paste0(out, collapse = "\n"), id = context$id
   )
+  if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
+    rstudioapi::documentSave(context$id)
+  }
 }
 
 get_rstudio_context <- function() {
