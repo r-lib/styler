@@ -8,13 +8,11 @@
 #' @param spaces Character vector with spaces corresponding to the tokens.
 #' @param pos_ids Character vector with positional id corresponding to the
 #'   tokens.
-#' @param parents Vector with `id` corresponding to the
-#'   parent of the tokens we want to create.
 #' @param token_before Character vector corresponding to the columns
 #'   `token_before`.
 #' @param token_after Character vector corresponding to the columns
 #'   `token_after`.
-#' @param indention_ref_ids Character vector with indention ref ids
+#' @param indention_ref_pos_ids Character vector with indention ref ids
 #'   corresponding to the tokens.
 #' @param indents Vector with indents corresponding to the tokens.
 #' @param terminal Boolean vector indicating whether a token is a terminal or
@@ -28,7 +26,7 @@ create_tokens <- function(tokens,
                           pos_ids,
                           token_before = NA,
                           token_after = NA,
-                          indention_ref_ids = NA,
+                          indention_ref_pos_ids = NA,
                           indents = 0,
                           terminal = TRUE,
                           child = NULL) {
@@ -42,12 +40,11 @@ create_tokens <- function(tokens,
     pos_id = pos_ids,
     token_before = token_before,
     token_after = token_after,
-    id = NA,
     terminal = rep(terminal, len_text),
     internal = rep(FALSE, len_text),
     spaces = spaces,
     multi_line = rep(FALSE, len_text),
-    indention_ref_id = indention_ref_ids,
+    indention_ref_pos_id = indention_ref_pos_ids,
     indent = indents,
     child = rep(list(child), len_text)
   )
@@ -80,18 +77,22 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
 #' sure the right id is returned. Otherise, ordering of tokens might not be
 #' preserved.
 #' @param direction Derived from `after`. `1` if `after = TRUE`, `-1` otherwise.
+#' @param candidates The `pos_ids` of the candidates that origin from other
+#'   nests.
 #' @inheritParams create_pos_ids
-find_start_pos_id <- function(pd, pos, by, direction, after) {
+find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) {
+  candidates <- append(candidates, pd$pos_id[pos])
   if (is.null(pd$child[[pos]])) {
-    pd$pos_id[pos] + by * direction
+    ifelse(after, max(candidates), min(candidates)) + by * direction
   } else {
-
     find_start_pos_id(
       pd$child[[pos]], if_else(after, nrow(pd$child[[pos]]), 1L),
-      by, direction, after
+      by, direction, after, candidates
     )
   }
 }
+
+
 
 #' Validate sequence of new position ids
 #'
@@ -131,7 +132,7 @@ wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
   )
   opening <- create_tokens(
     "'{'", "{",
-    pos_ids = create_pos_ids(pd, 1, after = FALSE)
+    pos_ids = create_pos_ids(expr, 1, after = FALSE)
   )
 
   closing <- create_tokens(

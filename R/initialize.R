@@ -39,7 +39,8 @@ initialize_spaces <- function(pd_flat) {
 }
 
 remove_unused_attributes <- function(pd_flat) {
-  pd_flat[c("line1", "line2", "col1", "col2", "parent")] <- rep(list(NULL), 4)
+  pd_flat[c("line1", "line2", "col1", "col2", "parent", "id")] <-
+    rep(list(NULL), 4)
   pd_flat
 }
 

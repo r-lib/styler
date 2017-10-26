@@ -22,7 +22,7 @@ create_tree <- function(text) {
 #' initialized <- styler:::pre_visit(nested_pd, c(styler:::initialize_attributes))
 #' styler:::create_node_from_nested_root(initialized)
 create_node_from_nested_root <- function(pd_nested) {
-  n <- data.tree::Node$new("ROOT (token: short_text [lag_newlines/spaces] {id})")
+  n <- data.tree::Node$new("ROOT (token: short_text [lag_newlines/spaces] {pos_id})")
   create_node_from_nested(pd_nested, n)
   n
 }
@@ -35,7 +35,7 @@ create_node_from_nested <- function(pd_nested, parent) {
   if (is.null(pd_nested))
     return()
 
-  node_info <- paste0(pd_nested$token, ": ", pd_nested$short, " [", pd_nested$lag_newlines, "/", pd_nested$spaces, "] {", pd_nested$id, "}")
+  node_info <- paste0(pd_nested$token, ": ", pd_nested$short, " [", pd_nested$lag_newlines, "/", pd_nested$spaces, "] {", pd_nested$pos_id, "}")
 
   child_nodes <-
     node_info %>%

@@ -3,8 +3,8 @@ context("token insertion")
 test_that("can create a token that has relevant columns", {
   pd_names <- c(
     "token", "text", "short", "lag_newlines", "newlines", "pos_id",
-    "token_before", "token_after", "id", "terminal", "internal",
-    "spaces", "multi_line", "indention_ref_id", "indent", "child"
+    "token_before", "token_after", "terminal", "internal",
+    "spaces", "multi_line", "indention_ref_pos_id", "indent", "child"
   )
 
   expect_equal(
