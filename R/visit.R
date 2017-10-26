@@ -70,7 +70,7 @@ context_to_terminals <- function(pd_nested,
                                     pd_transformed$lag_newlines,
                                     pd_transformed$indent,
                                     pd_transformed$spaces,
-                                    pd_transformed$indention_ref_id),
+                                    pd_transformed$indention_ref_pos_id),
                                context_to_terminals)
   pd_transformed
 }
@@ -87,7 +87,7 @@ context_to_terminals <- function(pd_nested,
 #' @param outer_lag_newlines The lag_newlines to be propagated inwards.
 #' @param outer_indent The indention depth to be propagated inwards.
 #' @param outer_spaces The number of spaces to be propagated inwards.
-#' @param outer_indention_refs The reference id that should be propagated
+#' @param outer_indention_refs The reference pos id that should be propagated
 #'   inwards.
 #' @return An updated parse table.
 #' @seealso context_to_terminals
@@ -97,8 +97,8 @@ context_towards_terminals <- function(pd_nested,
                                       outer_spaces,
                                       outer_indention_refs) {
   pd_nested$indent <- pd_nested$indent + outer_indent
-  ref_id_is_na <- !is.na(pd_nested$indention_ref_id)
-  pd_nested$indention_ref_id[!ref_id_is_na] <- outer_indention_refs
+  ref_pos_id_is_na <- !is.na(pd_nested$indention_ref_pos_id)
+  pd_nested$indention_ref_pos_id[!ref_pos_id_is_na] <- outer_indention_refs
   pd_nested$lag_newlines[1] <- pd_nested$lag_newlines[1] + outer_lag_newlines
   pd_nested$spaces[nrow(pd_nested)] <-
     pd_nested$spaces[nrow(pd_nested)] + outer_spaces

@@ -11,7 +11,7 @@ initialize_attributes <- function(pd_flat) {
     initialize_spaces() %>%
     remove_unused_attributes() %>%
     initialize_multi_line() %>%
-    initialize_indention_ref_id() %>%
+    initialize_indention_ref_pos_id() %>%
     initialize_indent() %>%
     validate_parse_data()
   init_pd
@@ -54,8 +54,8 @@ initialize_multi_line <- function(pd_flat) {
 }
 
 #' @describeIn initialize_attributes Initializes `indention_ref_ind`.
-initialize_indention_ref_id <- function(pd_flat) {
-  pd_flat$indention_ref_id <- NA
+initialize_indention_ref_pos_id <- function(pd_flat) {
+  pd_flat$indention_ref_pos_id <- NA
   pd_flat
 }
 
