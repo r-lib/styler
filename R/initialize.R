@@ -9,9 +9,9 @@ initialize_attributes <- function(pd_flat) {
   init_pd <-
     initialize_newlines(pd_flat) %>%
     initialize_spaces() %>%
-    remove_line_col() %>%
+    remove_unused_attributes() %>%
     initialize_multi_line() %>%
-    initialize_indention_ref_id() %>%
+    initialize_indention_ref_pos_id() %>%
     initialize_indent() %>%
     validate_parse_data()
   init_pd
@@ -38,8 +38,9 @@ initialize_spaces <- function(pd_flat) {
   pd_flat
 }
 
-remove_line_col <- function(pd_flat) {
-  pd_flat[c("line1", "line2", "col1", "col2")] <- rep(list(NULL), 4)
+remove_unused_attributes <- function(pd_flat) {
+  pd_flat[c("line1", "line2", "col1", "col2", "parent", "id")] <-
+    rep(list(NULL), 4)
   pd_flat
 }
 
@@ -54,8 +55,8 @@ initialize_multi_line <- function(pd_flat) {
 }
 
 #' @describeIn initialize_attributes Initializes `indention_ref_ind`.
-initialize_indention_ref_id <- function(pd_flat) {
-  pd_flat$indention_ref_id <- NA
+initialize_indention_ref_pos_id <- function(pd_flat) {
+  pd_flat$indention_ref_pos_id <- NA
   pd_flat
 }
 

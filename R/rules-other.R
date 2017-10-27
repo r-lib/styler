@@ -10,7 +10,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
     new_pos_ids <- create_pos_ids(pd$child[[next_non_comment]], 1, after = TRUE, n = 2)
     new_pd <- create_tokens(
       tokens = c("'('", "')'"), texts = c("(", ")"), pos_ids = new_pos_ids,
-      lag_newlines = rep(0, 2), parents = create_parent_id(pd))
+      lag_newlines = rep(0, 2))
     pd$child[[next_non_comment]] <-
       bind_rows(pd$child[[next_non_comment]], new_pd) %>%
       arrange(pos_id)
@@ -35,6 +35,7 @@ wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
     if (nrow(pd) > 5) pd$lag_newlines[6] <- 0L
     pd$indent[5] <- pd$indent[5] - indent_by
     pd$child[[5]] <- wrap_expr_in_curly(pd$child[[5]], stretch_out = TRUE)
+    pd$multi_line[5] <- TRUE
   }
   if (nrow(pd) > 6 &&
       (pd$token[6] == "ELSE" && pd_is_multi_line(pd)) &&

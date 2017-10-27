@@ -35,3 +35,19 @@
     5
   }
 }
+
+if (TRUE)
+  1 else
+  3
+
+if (FALSE)
+  1 + a * (31 / 2) else
+  3 ^ k
+
+
+if (TRUE)
+  1 + 1 else
+  3
+
+if (TRUE)
+  1 + 1 else a + 4

@@ -16,7 +16,7 @@ context_towards_terminals(pd_nested, outer_lag_newlines, outer_indent,
 
 \item{outer_spaces}{The number of spaces to be propagated inwards.}
 
-\item{outer_indention_refs}{The reference id that should be propagated
+\item{outer_indention_refs}{The reference pos id that should be propagated
 inwards.}
 }
 \value{

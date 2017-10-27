@@ -14,5 +14,8 @@ curly brace and before the closing curly brace.}
 }
 \description{
 Adds curly braces to an expression (represented as a parse table) if there
-are none.
+are none. Because of the nature of the nested parse table, curly braces only appear
+with a single expression between them, so \code{wrap_expr_in_curly()} actually
+first wraps the expression to wrap in curly braces into a new expression and
+then adds curly braces around this new expression.
 }

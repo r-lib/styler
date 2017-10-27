@@ -53,9 +53,8 @@ add_terminal_token_after <- function(pd_flat) {
     filter(terminal) %>%
     arrange(pos_id)
 
-  data_frame(id = terminals$id,
-             token_after = lead(terminals$token, default = "")) %>%
-    left_join(pd_flat, ., by = "id")
+  data_frame(pos_id = terminals$pos_id, token_after = lead(terminals$token, default = "")) %>%
+    left_join(pd_flat, ., by = "pos_id")
 }
 
 #' @rdname add_token_terminal
