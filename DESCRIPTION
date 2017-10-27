@@ -6,6 +6,7 @@ Authors@R: c(person("Kirill", "Müller", role = c("aut"), email = "krlmlr+r@mail
 Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
+    backports,
     enc,
     magrittr,
     purrr,
@@ -63,3 +64,4 @@ Collate:
     'vertical.R'
     'visit.R'
     'ws.R'
+    'zzz.R'
