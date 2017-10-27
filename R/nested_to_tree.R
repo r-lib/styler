@@ -24,6 +24,7 @@ create_tree <- function(text) {
 #' styler:::create_node_from_nested_root(initialized)
 #' }
 create_node_from_nested_root <- function(pd_nested) {
+  if (getRversion() < 3.2) stop_insufficient_r_version()
   n <- data.tree::Node$new("ROOT (token: short_text [lag_newlines/spaces] {pos_id})")
   create_node_from_nested(pd_nested, n)
   n
