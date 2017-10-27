@@ -184,6 +184,7 @@ testthat_file <- function(...) {
 }
 
 #' Set arguments
+#' @param write_tree Whether or not to write tree.
 #' @name set_args
 NULL
 

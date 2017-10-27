@@ -7,6 +7,9 @@
 \usage{
 set_arg_write_tree(write_tree)
 }
+\arguments{
+\item{write_tree}{Whether or not to write tree.}
+}
 \description{
 Set arguments
 }
