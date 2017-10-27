@@ -5,35 +5,17 @@ remove_line_break_before_curly_opening <- function(pd) {
   pd
 }
 
-
-# A { should always be followed by a new line
-set_line_break_afer_curly_opening <- function(pd) {
-  to_break <- (pd$token == "'{'") &
-    (pd$token_after != "COMMENT")
-  pd$lag_newlines[lag(to_break)] <- 1L
-  pd
-}
-
-add_line_break_afer_curly_opening <- function(pd) {
-  to_break <- lag(
-    (pd$token == "'{'") & (pd$token_after != "COMMENT"),
-    default = FALSE
-  )
-  pd$lag_newlines[to_break] <- pmax(1L, pd$lag_newlines[to_break])
-  pd
-}
-
-
-# A } should always go on its own line, unless it’s followed by else or ).
-set_line_break_before_curly_closing <- function(pd) {
-  to_break <- pd$token == "'}'"
-  pd$lag_newlines[to_break] <- 1L
-  pd
-}
-
-add_line_break_before_curly_closing <- function(pd) {
-  to_break <- pd$token == "'}'"
-  pd$lag_newlines[to_break] <- pmax(1L, pd$lag_newlines[to_break])
+style_line_break_around_curly <- function(strict, pd) {
+  if (is_curly_expr(pd) && nrow(pd) > 2) {
+    closing_before <- pd$token == "'}'"
+    opening_before <- (pd$token == "'{'") & (pd$token_after != "COMMENT")
+    to_break <- lag(opening_before, default =FALSE) | closing_before
+    len_to_break <- sum(to_break)
+    pd$lag_newlines[to_break] <- ifelse(rep(strict, len_to_break),
+      1L,
+      pmax(1L, pd$lag_newlines[to_break])
+    )
+  }
   pd
 }
 

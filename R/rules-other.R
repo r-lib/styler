@@ -27,8 +27,8 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #'   braces. Used for unindention.
 wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
   if (pd$token[1] == "IF" &&
-      pd_is_multi_line(pd) &&
-      !is_curly_expr(pd$child[[5]])) {
+    pd_is_multi_line(pd) &&
+    !is_curly_expr(pd$child[[5]])) {
     pd$lag_newlines[5] <- 0L
     pd$spaces[4] <- 1L
     pd$spaces[5] <- 0L
@@ -38,9 +38,9 @@ wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
     pd$multi_line[5] <- TRUE
   }
   if (nrow(pd) > 6 &&
-      (pd$token[6] == "ELSE" && pd_is_multi_line(pd)) &&
-      pd$child[[7]]$token != "IF" &&
-      !is_curly_expr(pd$child[[7]])) {
+    (pd$token[6] == "ELSE" && pd_is_multi_line(pd)) &&
+    pd$child[[7]]$token != "IF" &&
+    !is_curly_expr(pd$child[[7]])) {
     pd$spaces[6] <- 1L
     pd$spaces[7] <- 0L
     pd$indent[7] <- pd$indent[7] - indent_by

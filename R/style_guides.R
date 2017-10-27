@@ -104,10 +104,7 @@ tidyverse_style <- function(scope = "tokens",
       remove_line_break_before_curly_opening,
       if (strict) remove_line_break_before_round_closing_after_curly else identity,
       if (strict) remove_line_break_before_round_closing_fun_dec else identity,
-      if (strict) set_line_break_afer_curly_opening else
-        add_line_break_afer_curly_opening,
-      if (strict) set_line_break_before_curly_closing else
-        add_line_break_before_curly_closing,
+      partial(style_line_break_around_curly, strict),
       if (strict) partial(
         set_line_break_after_opening_if_call_is_multi_line,
         except_token_after = "COMMENT",
