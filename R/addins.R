@@ -6,9 +6,9 @@
 #' @section Auto-Save Option:
 #' By default, both of the RStudio Addins will apply styling to the (selected)
 #' file contents without saving changes. Automatic saving can be enabled by
-#' setting the environment variable \code{save_after_styling} to \code{TRUE}.
+#' setting the environment variable `save_after_styling` to `TRUE`.
 #'
-#' Consider setting this in your \code{.Rprofile} file if you want to persist
+#' Consider setting this in your `.Rprofile` file if you want to persist
 #' this setting across multiple sessions. Untitled files will always need to be
 #' saved manually after styling.
 #'
@@ -30,10 +30,7 @@ style_active_file <- function() {
   }
 }
 
-
-
 #' @describeIn styler_addins Styles the highlighted region
-#' @importFrom rlang seq2
 style_selection <- function() {
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
