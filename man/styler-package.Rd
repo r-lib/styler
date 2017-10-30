@@ -14,7 +14,8 @@ The following functions can be used for styling:
 \item \code{\link[=style_file]{style_file()}} to style a single .R file.
 \item \code{\link[=style_dir]{style_dir()}} to style all .R files in a directory.
 \item \code{\link[=style_pkg]{style_pkg()}} to style the source files of an R package.
-\item An RStudio Addin to style the active file .R file and the current package.
+\item \link{styler_addins} (RStudio Addins) to style either selected code or the
+active file.
 }
 }
 \examples{
