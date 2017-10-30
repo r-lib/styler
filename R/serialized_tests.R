@@ -23,7 +23,7 @@
 #' @importFrom purrr flatten_chr pwalk map
 test_collection <- function(test, sub_test = NULL,
                             write_back = TRUE,
-                            write_tree = TRUE,
+                            write_tree = NA,
                             transformer,
                             ...) {
   path <- rprojroot::find_testthat_root_file(test)
@@ -84,16 +84,19 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param write_back Whether the results of the transformation should be written
 #'   to the output file.
 #' @param write_tree Whether or not the tree structure of the test should be
-#'   computed and written to a file.
+#'   computed and written to a file. Note that this needs R >= 3.2
+#'   (see [set_arg_write_tree()]). If the argument is set to `NA`, the function
+#'   determines whether R >= 3.2 is in use and if so, trees will be written.
 #' @param ... Parameters passed to transformer function.
 #' @param out_tree Name of tree file if written out.
 #' @importFrom utils write.table
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
                                 transformer, write_back,
-                                write_tree = FALSE,
+                                write_tree = NA,
                                 out_tree = "_tree", ...) {
 
+  write_tree <- set_arg_write_tree(write_tree)
   read_in <- enc::read_lines_enc(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
@@ -178,4 +181,30 @@ style_op <- function(text) {
 #'   ".../tests/testthat/"
 testthat_file <- function(...) {
   file.path(rprojroot::find_testthat_root_file(), ...)
+}
+
+#' Set arguments
+#' @param write_tree Whether or not to write tree.
+#' @name set_args
+NULL
+
+#' @describeIn set_args Sets the argument `write_tree` in
+#'   [test_collection()] to be `TRUE` for R versions higher or equal to 3.2, and
+#'   `FALSE` otherwise since the second-level dependency `DiagrammeR` from
+#'   `data.table` is not available for R < 3.2.
+set_arg_write_tree <- function(write_tree) {
+  sufficient_version <- getRversion() >= 3.2
+  if (is.na(write_tree)) {
+    write_tree <- ifelse(sufficient_version, TRUE, FALSE)
+  } else if (!sufficient_version & write_tree) {
+    stop_insufficient_r_version()
+  }
+  write_tree
+}
+
+stop_insufficient_r_version <- function() {
+  stop(paste0(
+    "Can't write tree with R version ", getRversion(),
+    "since data.tree not available. Needs at least R version 3.2."
+  ), call. = FALSE)
 }
