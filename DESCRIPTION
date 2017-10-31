@@ -30,8 +30,8 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Date: 2017-10-23
-BugReports: https://github.com/krlmlr/styler/issues
-URL: https://github.com/krlmlr/styler, http://krlmlr.github.io/styler
+BugReports: https://github.com/r-lib/styler/issues
+URL: https://github.com/r-lib/styler, https://r-lib.github.io/styler/
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
