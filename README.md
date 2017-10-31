@@ -33,4 +33,4 @@ There are a few variants of `style_text()`:
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
 
-You can find more information on the wiki of [Google Summer of Code 2017](https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting) or check out the [pkgdown](https://krlmlr.github.io/styler/) page.
+You can find more information on the wiki of [Google Summer of Code 2017](https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting) or check out the [pkgdown](https://r-lib.github.io/styler/) page.
