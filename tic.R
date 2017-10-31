@@ -11,5 +11,6 @@ if (Sys.getenv("id_rsa") != "" && ci()$is_tag() && Sys.getenv("BUILD_PKGDOWN") !
 
   get_stage("deploy") %>%
     add_step(step_build_pkgdown()) %>%
+    add_code_step(writeLines("styler.r-lib.org", "docs/CNAME")) %>%
     add_step(step_push_deploy("docs", "gh-pages"))
 }
