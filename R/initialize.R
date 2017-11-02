@@ -9,7 +9,7 @@ initialize_attributes <- function(pd_flat) {
   init_pd <-
     initialize_newlines(pd_flat) %>%
     initialize_spaces() %>%
-    remove_attributes() %>%
+    remove_attributes(c("line1", "line2", "col1", "col2", "parent", "id")) %>%
     initialize_multi_line() %>%
     initialize_indention_ref_pos_id() %>%
     initialize_indent() %>%
