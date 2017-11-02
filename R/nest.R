@@ -14,7 +14,8 @@ compute_parse_data_nested <- function(text) {
   parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
     nest_parse_data() %>%
-    flatten_operators()
+    flatten_operators() %>%
+    relocate_eq_assign()
 
   pd_nested
 }
