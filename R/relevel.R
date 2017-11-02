@@ -65,3 +65,16 @@ bind_with_child <- function(pd_nested, pos) {
     arrange(pos_id)
 }
 
+#' Wrap an expression into an expression
+#'
+#' Takes a parse table and wraps it in a new parse table that contains the
+#' expression as a child.
+#' @param pd A parse table.
+wrap_expr_in_expr <- function(pd) {
+  expr <- create_tokens(
+    "expr", "",
+    pos_ids = create_pos_ids(pd, 1, after = FALSE),
+    child = pd,
+    terminal = FALSE
+  )
+}
