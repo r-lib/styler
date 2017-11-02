@@ -28,9 +28,9 @@ style_text("a\%>\%b; a", scope = "tokens")
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/krlmlr/styler}
-  \item \url{http://krlmlr.github.io/styler}
-  \item Report bugs at \url{https://github.com/krlmlr/styler/issues}
+  \item \url{https://github.com/r-lib/styler}
+  \item \url{https://r-lib.github.io/styler/}
+  \item Report bugs at \url{https://github.com/r-lib/styler/issues}
 }
 
 }
