@@ -8,6 +8,10 @@ create_node_from_nested_root(pd_nested, structure_only)
 }
 \arguments{
 \item{pd_nested}{A nested tibble.}
+
+\item{structure_only}{Whether or not create a tree that represents the
+structure of the expression without any information on the tokens. Useful
+to check whether two structures are identical.}
 }
 \value{
 An object of class "Node" and "R6".
@@ -21,6 +25,6 @@ if (getRversion() >= 3.2) {
 code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 nested_pd <- styler:::compute_parse_data_nested(code)
 initialized <- styler:::pre_visit(nested_pd, c(styler:::initialize_attributes))
-styler:::create_node_from_nested_root(initialized)
+styler:::create_node_from_nested_root(initialized, structure_only = FALSE)
 }
 }

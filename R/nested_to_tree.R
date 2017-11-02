@@ -2,9 +2,7 @@
 #'
 #' Create a tree representation from a text.
 #' @param text A character vector.
-#' @param structure_only Whether or not create a tree that represents the
-#'   structure of the expression without any information on the tokens. Useful
-#'   to check whether two structures are identical.
+#' @inheritParams create_node_from_nested_root
 #' @return A data frame.
 #' @importFrom purrr when
 create_tree <- function(text, structure_only = FALSE) {
@@ -13,18 +11,22 @@ create_tree <- function(text, structure_only = FALSE) {
     create_node_from_nested_root(structure_only) %>%
     as.data.frame()
 }
+
 #' Convert a nested tibble into a node tree
 #'
 #' This function is convenient to display all nesting levels of a nested tibble
 #'   at once.
 #' @param pd_nested A nested tibble.
+#' @param structure_only Whether or not create a tree that represents the
+#'   structure of the expression without any information on the tokens. Useful
+#'   to check whether two structures are identical.
 #' @return An object of class "Node" and "R6".
 #' @examples
 #' if (getRversion() >= 3.2) {
 #' code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 #' nested_pd <- styler:::compute_parse_data_nested(code)
 #' initialized <- styler:::pre_visit(nested_pd, c(styler:::initialize_attributes))
-#' styler:::create_node_from_nested_root(initialized)
+#' styler:::create_node_from_nested_root(initialized, structure_only = FALSE)
 #' }
 create_node_from_nested_root <- function(pd_nested, structure_only) {
   if (getRversion() < 3.2) stop_insufficient_r_version()

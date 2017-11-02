@@ -4,7 +4,7 @@
 \alias{get_parse_data}
 \title{Obtain robust parse data}
 \usage{
-get_parse_data(text, include_text, ...)
+get_parse_data(text, include_text = TRUE, ...)
 }
 \arguments{
 \item{text}{The text to parse.}
