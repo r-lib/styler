@@ -2,12 +2,15 @@
 #'
 #' Create a tree representation from a text.
 #' @param text A character vector.
+#' @param structure_only Whether or not create a tree that represents the
+#'   structure of the expression without any information on the tokens. Useful
+#'   to check whether two structures are identical.
 #' @return A data frame.
 #' @importFrom purrr when
-create_tree <- function(text) {
+create_tree <- function(text, structure_only = FALSE) {
   compute_parse_data_nested(text) %>%
     pre_visit(c(initialize_attributes)) %>%
-    create_node_from_nested_root() %>%
+    create_node_from_nested_root(structure_only) %>%
     as.data.frame()
 }
 #' Convert a nested tibble into a node tree
@@ -23,10 +26,13 @@ create_tree <- function(text) {
 #' initialized <- styler:::pre_visit(nested_pd, c(styler:::initialize_attributes))
 #' styler:::create_node_from_nested_root(initialized)
 #' }
-create_node_from_nested_root <- function(pd_nested) {
+create_node_from_nested_root <- function(pd_nested, structure_only) {
   if (getRversion() < 3.2) stop_insufficient_r_version()
-  n <- data.tree::Node$new("ROOT (token: short_text [lag_newlines/spaces] {pos_id})")
-  create_node_from_nested(pd_nested, n)
+  n <- data.tree::Node$new(ifelse(
+    structure_only, "Hierarchical structure",
+    "ROOT (token: short_text [lag_newlines/spaces] {pos_id})"
+  ))
+  create_node_from_nested(pd_nested, n, structure_only)
   n
 }
 #' Create node from nested parse data
@@ -34,16 +40,26 @@ create_node_from_nested_root <- function(pd_nested) {
 #' @inheritParams create_node_from_nested_root
 #' @param parent The parent of the node to be created.
 #' @importFrom purrr map2 map
-create_node_from_nested <- function(pd_nested, parent) {
+create_node_from_nested <- function(pd_nested, parent, structure_only) {
   if (is.null(pd_nested))
     return()
 
-  node_info <- paste0(pd_nested$token, ": ", pd_nested$short, " [", pd_nested$lag_newlines, "/", pd_nested$spaces, "] {", pd_nested$pos_id, "}")
+  node_info <- create_node_info(pd_nested, structure_only)
 
   child_nodes <-
     node_info %>%
     map(parent$AddChild)
 
-  map2(pd_nested$child, child_nodes, create_node_from_nested)
-  return()
+  map2(pd_nested$child, child_nodes, create_node_from_nested, structure_only)
+}
+
+create_node_info <- function(pd_nested, structure_only) {
+  if (structure_only) return(seq2(1L, nrow(pd_nested)))
+  paste0(
+    pd_nested$token, ": ",
+    pd_nested$short, " [",
+    pd_nested$lag_newlines, "/",
+    pd_nested$spaces, "] {",
+    pd_nested$pos_id, "}")
+
 }

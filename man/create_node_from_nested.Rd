@@ -4,7 +4,7 @@
 \alias{create_node_from_nested}
 \title{Create node from nested parse data}
 \usage{
-create_node_from_nested(pd_nested, parent)
+create_node_from_nested(pd_nested, parent, structure_only)
 }
 \arguments{
 \item{pd_nested}{A nested tibble.}

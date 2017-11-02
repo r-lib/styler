@@ -4,7 +4,7 @@
 \alias{create_node_from_nested_root}
 \title{Convert a nested tibble into a node tree}
 \usage{
-create_node_from_nested_root(pd_nested)
+create_node_from_nested_root(pd_nested, structure_only)
 }
 \arguments{
 \item{pd_nested}{A nested tibble.}
