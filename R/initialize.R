@@ -9,7 +9,7 @@ initialize_attributes <- function(pd_flat) {
   init_pd <-
     initialize_newlines(pd_flat) %>%
     initialize_spaces() %>%
-    remove_unused_attributes() %>%
+    remove_attributes() %>%
     initialize_multi_line() %>%
     initialize_indention_ref_pos_id() %>%
     initialize_indent() %>%
@@ -38,9 +38,8 @@ initialize_spaces <- function(pd_flat) {
   pd_flat
 }
 
-remove_unused_attributes <- function(pd_flat) {
-  pd_flat[c("line1", "line2", "col1", "col2", "parent", "id")] <-
-    rep(list(NULL), 4)
+remove_attributes <- function(pd_flat, attributes) {
+  pd_flat[attributes] <- rep(list(NULL), length(attributes))
   pd_flat
 }
 
