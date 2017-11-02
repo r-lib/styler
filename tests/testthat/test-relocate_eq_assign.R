@@ -1,6 +1,7 @@
 context("EQ_ASSIGN relocation")
 # Tests code in R/relevel.R
 test_that("tree hierarchy is the same no matter whether = or <- is used", {
+  skip_if_not_installed("DiagrammeR")
   assign_left <- create_tree(
     "x <- 5
 

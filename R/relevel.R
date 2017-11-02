@@ -102,16 +102,17 @@ wrap_expr_in_expr <- function(pd) {
 #' (and `relocate_eq_assign()` not), we need to
 #' wrap the the implementation [relocate_eq_assign_nest()] that operates on
 #' *nests* into a visitor call.
+#' @param pd A parse table.
 #' @examples
-#' get_parse_data("a <- b <- 3")
-#' get_parse_data("a  = b = 3")
-#' get_parse_data(
+#' styler:::get_parse_data("a <- b <- 3")
+#' styler:::get_parse_data("a  = b = 3")
+#' styler:::get_parse_data(
 #'   "x = 5
 #'   if(x >= 5)
 #'   y = TRUE else
 #'   y = FALSE",
 #' )
-#' get_parse_data(
+#' styler:::get_parse_data(
 #'   "x <- 5
 #'   if(x >= 5)
 #'   y <- TRUE else
@@ -123,22 +124,22 @@ relocate_eq_assign <- function(pd) {
 }
 
 
-#' Relocate an assignment expression that contains `EQ_ASSIGN` within a *nest*
+#' Relocate all assignment expressions that contain `EQ_ASSIGN` within a *nest*
 #'
 #' Implements the relocation of an `EQ_ASSIGN` and associated tokens
 #' within a *nest* (nested parse table at one level of nesting).
 #' Note that one assignment expression (such as "a = b = c") can include
-#' multiple assignment operators an assignment involves just one assignment
+#' multiple assignment operators, an assignment involves just one assignment
 #' oparator.
-#' For the relocation of assignment expression that contains `EQ_ASSIGN` within
+#' For the relocation of assignment expressions that contain `EQ_ASSIGN` within
 #' a *nest*, we need to first find the expressions that contain `=` and then
 #' split the *nest* into parse tables each containing one such assignment
 #' expression and then relocate each of them separately.
 #' We can't do all of them together because:
 #'
-#'  * An assignment con contain more than just three tokens, e.g. (a <- b <- c).
+#'  * An assignment can contain more than just three tokens, e.g. (a <- b <- c).
 #'  * Two assignemnts can be in the same nest although they don't belong to the
-#'    same assignment.
+#'    same assignment (if-else statement).
 #'
 #' Please refer to the section 'Examples' in [relocate_eq_assign()] for details.
 #' @param pd A parse table.

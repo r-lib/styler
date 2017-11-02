@@ -7,6 +7,9 @@ parse table}
 \usage{
 relocate_eq_assign(pd)
 }
+\arguments{
+\item{pd}{A parse table.}
+}
 \description{
 Although syntactically identical, \code{\link[utils:getParseData]{utils::getParseData()}} does not produce
 the same hierarchy of the parse table (parent and id relationship) for \code{<-}
@@ -23,15 +26,15 @@ wrap the the implementation \code{\link[=relocate_eq_assign_nest]{relocate_eq_as
 \emph{nests} into a visitor call.
 }
 \examples{
-get_parse_data("a <- b <- 3")
-get_parse_data("a  = b = 3")
-get_parse_data(
+styler:::get_parse_data("a <- b <- 3")
+styler:::get_parse_data("a  = b = 3")
+styler:::get_parse_data(
   "x = 5
   if(x >= 5)
   y = TRUE else
   y = FALSE",
 )
-get_parse_data(
+styler:::get_parse_data(
   "x <- 5
   if(x >= 5)
   y <- TRUE else
