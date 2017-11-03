@@ -12,3 +12,8 @@ Name: Style selection
 Description: Pretty-print selection
 Binding: style_selection
 Interactive: true
+
+Name: Style working directory
+Description: Pretty-print working directory
+Binding: style_dir
+Interactive: true
