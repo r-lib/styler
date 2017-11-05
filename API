@@ -8,6 +8,7 @@ specify_math_token_spacing(zero = NULL, one = c("'+'", "'-'", "'*'", "'/'", "'^'
 specify_reindention(regex_pattern = regex_none(), indention = 0, comments_only = TRUE)
 style_dir(path = ".", ..., style = tidyverse_style, transformers = style(...), recursive = TRUE, exclude_files = NULL)
 style_file(path, ..., style = tidyverse_style, transformers = style(...))
+style_files(path, ..., style = tidyverse_style, transformers = style(...))
 style_pkg(pkg = ".", ..., style = tidyverse_style, transformers = style(...), exclude_files = "R/RcppExports.R")
 style_text(text, ..., style = tidyverse_style, transformers = style(...))
 tidyverse_math_token_spacing()

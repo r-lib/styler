@@ -147,3 +147,17 @@ style_file <- function(path,
     transform_files(basename(path), transformers)
   )
 }
+
+#' Style files
+#'
+#' Like [style_file()], but can style more than one file at once.
+#' @inheritParams style_file
+#' @family stylers
+#' @importFrom purrr map_lgl
+#' @export
+style_files <- function(path,
+                        ...,
+                        style = tidyverse_style,
+                        transformers = style(...)) {
+  map_lgl(path, style_file, ..., style = style, transformers = transformers)
+}

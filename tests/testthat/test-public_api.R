@@ -10,11 +10,16 @@ test_that("styler can style directory", {
   expect_false(all(style_dir(testthat_file("public-api", "xyzdir"))))
 })
 
-test_that("styler can style file", {
+test_that("styler can style files", {
   expect_false(
     style_file(testthat_file("public-api", "xyzfile", "random-script.R"), strict = FALSE)
   )
+  expect_false(any(style_files(
+    rep(testthat_file("public-api", "xyzfile", "random-script.R"), 2),
+    strict = FALSE
+  )))
 })
+
 
 test_that("styler does not return error when there is no file to style", {
   expect_error(style_dir(testthat_file("public-api", "xyzemptydir"), strict = FALSE), NA)

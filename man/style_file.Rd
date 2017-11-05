@@ -42,6 +42,6 @@ unlink(file)
 }
 \seealso{
 Other stylers: \code{\link{style_dir}},
-  \code{\link{style_pkg}}, \code{\link{style_text}},
-  \code{\link{styler_addins}}
+  \code{\link{style_files}}, \code{\link{style_pkg}},
+  \code{\link{style_text}}, \code{\link{styler_addins}}
 }
