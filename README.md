@@ -3,7 +3,7 @@
 styler
 ======
 
-[![Build Status](https://travis-ci.org/r-lib/styler.svg?branch=master)](https://travis-ci.org/krlmlr/styler) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=master&svg=true)](https://ci.appveyor.com/project/krlmlr/styler) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![codecov](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/krlmlr/styler) [![cran version](http://www.r-pkg.org/badges/version/styler)](http://cran.rstudio.com/web/packages/styler)
+[![Build Status](https://travis-ci.org/r-lib/styler.svg?branch=master)](https://travis-ci.org/r-lib/styler) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=master&svg=true)](https://ci.appveyor.com/project/r-lib/styler) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![codecov](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler) [![cran version](http://www.r-pkg.org/badges/version/styler)](http://cran.rstudio.com/web/packages/styler)
 
 The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to the [tidyverse](https://github.com/tidyverse/style) formatting rules. Support for custom style guides is planned.
 
