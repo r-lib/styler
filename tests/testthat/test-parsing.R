@@ -18,7 +18,7 @@ test_that("repreated parsing solves wrong parent assignment", {
     "R -q -e \"styler::style_file(\\\"", path_temp, "\\\")\""
   )
   calls_sys(sys_call, intern = FALSE, ignore.stdout = TRUE, ignore.stderr = TRUE)
-  ref <- enc::read_lines_enc(construct_out(path_perm))
+  ref <- enc::read_lines_enc(testthat_file("parsing", "repeated_parsing-out.R"))
   result <- enc::read_lines_enc(path_temp)
   expect_equal(ref, result)
   unlink(dir)
