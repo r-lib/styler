@@ -14,7 +14,7 @@ test_that("styler can style files", {
   expect_false(
     style_file(testthat_file("public-api", "xyzfile", "random-script.R"), strict = FALSE)
   )
-  expect_false(any(style_files(
+  expect_false(any(style_file(
     rep(testthat_file("public-api", "xyzfile", "random-script.R"), 2),
     strict = FALSE
   )))
