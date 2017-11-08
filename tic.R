@@ -1,4 +1,4 @@
-add_package_checks(notes_are_errors = TRUE)
+add_package_checks(notes_are_errors = getRversion() >= "3.2")
 
 if (Sys.getenv("id_rsa") != "" && ci()$is_tag() && Sys.getenv("BUILD_PKGDOWN") != "") {
   # pkgdown documentation can be built optionally. Other example criteria:
