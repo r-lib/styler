@@ -91,7 +91,7 @@ wrap_expr_in_expr <- function(pd) {
 #'
 #' Although syntactically identical, [utils::getParseData()] does not produce
 #' the same hierarchy of the parse table (parent and id relationship) for `<-`
-#' and `=` (See 'Examles').
+#' and `=` (See 'Examples').
 #' This is considered to be a bug and causes problems because the
 #' nested parse table constructed with [compute_parse_data_nested()] is not
 #' consistent if `EQ_ASSIGN` occurs in the expression to style. In particular,
@@ -165,11 +165,12 @@ relocate_eq_assign_nest <- function(pd) {
 #' @param pd A parse table.
 find_block_id <- function(pd) {
   is_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_belongs_to_block <-
-    cumsum((is_eq_assign - lag(is_eq_assign, default = is_eq_assign[1])) > 2)
+  eq_belongs_to_block <- c(0, cumsum(diff(is_eq_assign)) > 2)
+
   empty_seq <- rep(0, nrow(pd))
   empty_seq[lead(pd$token == "EQ_ASSIGN", default = FALSE)] <- eq_belongs_to_block
   block_id <- cumsum(empty_seq)
+  block_id
 }
 
 #' Relocate an assignment expression
@@ -193,6 +194,7 @@ relocate_eq_assign_one <- function(pd) {
   non_eq_expr <- pd[-eq_ind,]
   pd <- bind_rows(eq_expr, non_eq_expr) %>%
     arrange(pos_id)
+  pd
 }
 
 #' Adds line and col information to an expression from its child
