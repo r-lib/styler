@@ -71,10 +71,5 @@ identify_chunks <- function(lines) {
 #'
 #' @inheritParams identify_chunks
 get_knitr_pattern <- function(lines) {
-  pattern <- knitr:::detect_pattern(lines, "rmd")
-  if (!is.null(pattern)) {
-    knitr::all_patterns[[pattern]]
-  } else {
-    NULL
-  }
+    knitr::all_patterns[["md"]]
 }
