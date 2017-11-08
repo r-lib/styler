@@ -4,12 +4,16 @@
 \alias{create_node_from_nested}
 \title{Create node from nested parse data}
 \usage{
-create_node_from_nested(pd_nested, parent)
+create_node_from_nested(pd_nested, parent, structure_only)
 }
 \arguments{
 \item{pd_nested}{A nested tibble.}
 
 \item{parent}{The parent of the node to be created.}
+
+\item{structure_only}{Whether or not create a tree that represents the
+structure of the expression without any information on the tokens. Useful
+to check whether two structures are identical.}
 }
 \description{
 Create node from nested parse data
