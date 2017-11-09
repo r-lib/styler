@@ -7,7 +7,7 @@
 style_file(path, ..., style = tidyverse_style, transformers = style(...))
 }
 \arguments{
-\item{path}{A path to a file to style.}
+\item{path}{A character vector with paths to files to style.}
 
 \item{...}{Arguments passed on to the \code{style} function.}
 
