@@ -102,12 +102,15 @@ transform_and_check <- function(in_item, out_item,
     create_tree(read_in) %>%
       write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE)
   }
-  transformed <- read_in %>%
+  transformed_text <- read_in %>%
     transformer(...) %>%
     unclass()
-  transformed <- suppressMessages(enc::transform_lines_enc(out_item,
-    function(x) transformed,
-    write_back = write_back))
+  transformed <- enc::transform_lines_enc(
+    out_item,
+    function(x) transformed_text,
+    write_back = write_back,
+    verbose = FALSE
+  )
 
   if (transformed) {
     target <- enc::read_lines_enc(out_item)
