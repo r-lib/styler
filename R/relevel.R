@@ -146,8 +146,8 @@ relocate_eq_assign <- function(pd) {
 #' @importFrom rlang seq2
 #' @importFrom purrr map_dfr
 relocate_eq_assign_nest <- function(pd) {
-  is_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  if (length(is_eq_assign) > 0) {
+  idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
+  if (length(idx_eq_assign) > 0) {
     block_id <- find_block_id(pd)
     blocks <- split(pd, block_id)
     pd <- map_dfr(blocks, relocate_eq_assign_one)
@@ -164,11 +164,11 @@ relocate_eq_assign_nest <- function(pd) {
 #' `EQ_ASSING` already belongs to the `EQ_ASSING` after it.
 #' @param pd A parse table.
 find_block_id <- function(pd) {
-  is_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_belongs_to_block <- c(0, cumsum(diff(is_eq_assign)) > 2)
+  idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
+  eq_belongs_to_block <- c(0, cumsum(diff(idx_eq_assign)) > 2)
 
   empty_seq <- rep(0, nrow(pd))
-  empty_seq[lead(pd$token == "EQ_ASSIGN", default = FALSE)] <- eq_belongs_to_block
+  empty_seq[idx_eq_assign - 1] <- eq_belongs_to_block
   block_id <- cumsum(empty_seq)
   block_id
 }
@@ -180,8 +180,8 @@ find_block_id <- function(pd) {
 #' assignment operators such as "a = b = c".
 #' @param pd A parse table with one assignment expression to relocate.
 relocate_eq_assign_one <- function(pd) {
-  is_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_ind <- seq2(is_eq_assign[1] - 1L, last(is_eq_assign) + 1L)
+  idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
+  eq_ind <- seq2(idx_eq_assign[1] - 1L, last(idx_eq_assign) + 1L)
   eq_expr <- pd[eq_ind,] %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%
