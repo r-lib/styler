@@ -26,20 +26,26 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' @param indent_by The amont of spaces used to indent an expression in curly
 #'   braces. Used for unindention.
 wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
-  to_be_wrapped <- next_non_comment(pd, 4)
+  to_be_wrapped_expr_with_child <- next_non_comment(pd, 4)
   if (pd$token[1] == "IF" &&
     pd_is_multi_line(pd) &&
-    !is_curly_expr(pd$child[[to_be_wrapped]])) {
+    !is_curly_expr(pd$child[[to_be_wrapped_expr_with_child]])) {
 
+    all_to_be_wrapped_ind <- seq2(5, to_be_wrapped_expr_with_child)
+    to_be_wrapped_starts_with_comment <-
+      pd[all_to_be_wrapped_ind[1],]$token == "COMMENT"
     pd$spaces[4] <- 1L
-    new_expr <- wrap_expr_in_curly(pd[seq2(5, to_be_wrapped),], stretch_out = TRUE)
-    new_expr$indent <- pd$indent[to_be_wrapped] - indent_by
+    new_expr <- wrap_expr_in_curly(
+      pd[all_to_be_wrapped_ind,],
+      stretch_out = rep(!to_be_wrapped_starts_with_comment, 2)
+    )
+    new_expr$indent <- pd$indent[to_be_wrapped_expr_with_child] - indent_by
     new_expr_in_expr <- new_expr %>%
       wrap_expr_in_expr() %>%
       remove_attributes(c("token_before", "token_after"))
 
     pd <- pd %>%
-      slice(-seq2(5, to_be_wrapped)) %>%
+      slice(-all_to_be_wrapped_ind) %>%
       bind_rows(new_expr_in_expr) %>%
       set_multi_line() %>%
       arrange(pos_id)
@@ -60,7 +66,7 @@ wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
 
   new_expr <- wrap_expr_in_curly(
     pd[seq2(after_to_be_wrapped + 1L, after_else),],
-    stretch_out = TRUE
+    stretch_out = c(TRUE, TRUE)
   )
   new_expr$indent <- pd$indent[after_to_be_wrapped + 1] - indent_by
   pd$spaces[after_else] <- 0L

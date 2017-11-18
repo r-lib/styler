@@ -116,9 +116,9 @@ validate_new_pos_ids <- function(new_ids, after) {
 #' @param pd A parse table.
 #' @param stretch_out Whether or not to create a line break after the opening
 #'   curly brace and before the closing curly brace.
-wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
+wrap_expr_in_curly <- function(pd, stretch_out = c(FALSE, FALSE)) {
   if (is_curly_expr(pd)) return(pd)
-  if (stretch_out) {
+  if (stretch_out[1]) {
     pd$lag_newlines[1] <- 1L
   }
 
@@ -128,7 +128,7 @@ wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
   )
 
   closing <- create_tokens(
-    "'}'", "}", spaces = 1, lag_newlines = as.integer(stretch_out),
+    "'}'", "}", spaces = 1, lag_newlines = as.integer(stretch_out[2]),
     pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE)
   )
 

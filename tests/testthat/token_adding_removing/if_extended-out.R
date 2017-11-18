@@ -6,9 +6,9 @@ if (TRUE) {
   5
 }
 
-if (TRUE) { #
-  3
-} else { #
+if (TRUE) {#
+  3 } else {
+  #
   5
 }  #
 
@@ -22,13 +22,11 @@ if (TRUE) {
   3
 }
 
-if (TRUE) { #
-  3
-}  #
+if (TRUE) {#
+  3}  #
 
-if (TRUE) { #
-  3
-}
+if (TRUE) {#
+  3}
 
 if (TRUE) {
   3
@@ -46,9 +44,9 @@ if (TRUE) {
   5
 }
 
-if (TRUE) { #
-  3 + 33
-} else { #
+if (TRUE) {#
+  3 + 33 } else {
+  #
   5
 }  #
 
@@ -62,13 +60,11 @@ if (TRUE) {
   call(3)
 }
 
-if (TRUE) { #
-  3
-}  #
+if (TRUE) {#
+  3}  #
 
-if (TRUE) { #
-  nex(3)
-}
+if (TRUE) {#
+  nex(3)}
 
 if (TRUE) {
   3
