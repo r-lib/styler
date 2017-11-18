@@ -26,26 +26,53 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' @param indent_by The amont of spaces used to indent an expression in curly
 #'   braces. Used for unindention.
 wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
+  to_be_wrapped <- next_non_comment(pd, 4)
   if (pd$token[1] == "IF" &&
     pd_is_multi_line(pd) &&
-    !is_curly_expr(pd$child[[5]])) {
-    pd$lag_newlines[5] <- 0L
+    !is_curly_expr(pd$child[[to_be_wrapped]])) {
+
     pd$spaces[4] <- 1L
-    pd$spaces[5] <- 0L
+    new_expr <- wrap_expr_in_curly(pd[seq2(5, to_be_wrapped),], stretch_out = TRUE)
+    new_expr$indent <- pd$indent[to_be_wrapped] - indent_by
+    new_expr_in_expr <- new_expr %>%
+      wrap_expr_in_expr() %>%
+      remove_attributes(c("token_before", "token_after"))
+
+    pd <- pd %>%
+      slice(-seq2(5, to_be_wrapped)) %>%
+      bind_rows(new_expr_in_expr) %>%
+      set_multi_line() %>%
+      arrange(pos_id)
+
     if (nrow(pd) > 5) pd$lag_newlines[6] <- 0L
-    pd$indent[5] <- pd$indent[5] - indent_by
-    pd$child[[5]] <- wrap_expr_in_curly(pd$child[[5]], stretch_out = TRUE)
-    pd$multi_line[5] <- TRUE
   }
-  if (nrow(pd) > 6 &&
-    (pd$token[6] == "ELSE" && pd_is_multi_line(pd)) &&
-    pd$child[[7]]$token != "IF" &&
-    !is_curly_expr(pd$child[[7]])) {
-    pd$spaces[6] <- 1L
-    pd$spaces[7] <- 0L
-    pd$indent[7] <- pd$indent[7] - indent_by
-    pd$lag_newlines[7] <- 0L
-    pd$child[[7]] <- wrap_expr_in_curly(pd$child[[7]], stretch_out = TRUE)
-  }
+
+  to_be_wrapped <- next_non_comment(pd, 4)
+  after_to_be_wrapped <- next_non_comment(pd, to_be_wrapped)
+  after_else <- next_non_comment(pd, after_to_be_wrapped)
+
+  if (length(after_to_be_wrapped) > 0 &&
+     (pd$token[after_to_be_wrapped] == "ELSE" && pd_is_multi_line(pd)) &&
+      pd$child[[after_else]]$token != "IF" &&
+   !is_curly_expr(pd$child[[after_else]])) {
+  pd$spaces[after_to_be_wrapped] <- 1L
+  pd$lag_newlines[after_to_be_wrapped] <- 0L
+
+  new_expr <- wrap_expr_in_curly(
+    pd[seq2(after_to_be_wrapped + 1L, after_else),],
+    stretch_out = TRUE
+  )
+  new_expr$indent <- pd$indent[after_to_be_wrapped + 1] - indent_by
+  pd$spaces[after_else] <- 0L
+
+  new_expr_in_expr <- new_expr %>%
+    wrap_expr_in_expr() %>%
+    remove_attributes(c("token_before", "token_after"))
+
+  pd <- pd %>%
+    slice(-seq2(after_to_be_wrapped + 1L, nrow(pd))) %>%
+    bind_rows(new_expr_in_expr) %>%
+    arrange(pos_id)
+   }
   pd
 }
