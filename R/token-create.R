@@ -112,10 +112,7 @@ validate_new_pos_ids <- function(new_ids, after) {
 #' Wrap an expression in curly braces
 #'
 #' Adds curly braces to an expression (represented as a parse table) if there
-#' are none. Because of the nature of the nested parse table, curly braces only appear
-#' with a single expression between them, so `wrap_expr_in_curly()` actually
-#' first wraps the expression to wrap in curly braces into a new expression and
-#' then adds curly braces around this new expression.
+#' are none.
 #' @param pd A parse table.
 #' @param stretch_out Whether or not to create a line break after the opening
 #'   curly brace and before the closing curly brace.
@@ -125,10 +122,9 @@ wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
     pd$lag_newlines[1] <- 1L
   }
 
-  expr <- wrap_expr_in_expr(pd)
   opening <- create_tokens(
     "'{'", "{",
-    pos_ids = create_pos_ids(expr, 1, after = FALSE)
+    pos_ids = create_pos_ids(pd, 1, after = FALSE)
   )
 
   closing <- create_tokens(
@@ -136,5 +132,6 @@ wrap_expr_in_curly <- function(pd, stretch_out = FALSE) {
     pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE)
   )
 
-  bind_rows(opening, expr, closing)
+  bind_rows(opening, pd, closing) %>%
+    set_multi_line()
 }
