@@ -35,11 +35,12 @@ wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
 
 wrap_if_else_multi_line_in_curly_since_is_if_expr <- function(pd, indent_by = 2) {
   if (if_part_requires_braces(pd)) {
-    pd$spaces[4] <- 1L
+    closing_brace_ind <- which(pd$token == "')'")[1]
+    pd$spaces[closing_brace_ind] <- 1L
 
-    to_be_wrapped_expr_with_child <- next_non_comment(pd, 4)
+    to_be_wrapped_expr_with_child <- next_non_comment(pd, which(pd$token == "')'")[1])
 
-    all_to_be_wrapped_ind <- seq2(5, to_be_wrapped_expr_with_child)
+    all_to_be_wrapped_ind <- seq2(closing_brace_ind + 1L, to_be_wrapped_expr_with_child)
 
     pd <- wrap_subexpr_in_curly(
       pd, all_to_be_wrapped_ind, indent_by
@@ -92,5 +93,5 @@ wrap_subexpr_in_curly <- function(pd,
 }
 
 if_part_requires_braces <- function(pd) {
-  pd_is_multi_line(pd) && !is_curly_expr(pd$child[[next_non_comment(pd, 4)]])
+  pd_is_multi_line(pd) && !is_curly_expr(pd$child[[next_non_comment(pd, which(pd$token == "')'")[1])]])
 }
