@@ -211,3 +211,36 @@ stop_insufficient_r_version <- function() {
     "since data.tree not available. Needs at least R version 3.2."
   ), call. = FALSE)
 }
+
+
+
+##  ............................................................................
+##  generating test samples                                                 ####
+
+gen <- function(x) {
+  if (length(x) == 0) ""
+  else {
+    c(
+      paste0(x[1], gen(x[-1])),
+      paste0(x[1], " # comment\n", paste(x[-1], collapse = ""))
+    )
+  }
+}
+
+collapse <- function(x) paste(x, collapse = "\n\n")
+
+save_test_samples <- function() {
+  cat(
+    collapse(gen(c("if", "(", "TRUE", ")", "NULL"))),
+    file = "tests/testthat/insertion_comment_interaction/just_if-in.R"
+  )
+  cat(
+    collapse(gen(c("if", "(", "TRUE", ")", "NULL", " else", " NULL"))),
+    file = "tests/testthat/insertion_comment_interaction/if_else-in.R"
+  )
+  cat(collapse(gen(c(
+    "if", "(", "TRUE", ")", "NULL", " else", " if", "(", "FALSE", ")", "NULL",
+    " else", " NULL"))),
+    file = "tests/testthat/insertion_comment_interaction/if_else_if_else-in.R"
+  )
+}
