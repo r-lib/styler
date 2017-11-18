@@ -78,7 +78,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 #' @describeIn update_indention Is used to indent if and if-else statements.
 #' @importFrom rlang seq2
 indent_without_paren_if_else <- function(pd, indent_by) {
-  expr_after_if_while <- next_non_comment(pd, 4)
+  expr_after_if_while <- next_non_comment(pd, which(pd$token == "')'")[1])
   has_if_without_curly <-
     pd$token[1] %in% c("IF", "WHILE") && pd$child[[expr_after_if_while]]$token[1] != "'{'"
   if (has_if_without_curly) {
