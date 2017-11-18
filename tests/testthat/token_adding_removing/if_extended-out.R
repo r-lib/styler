@@ -7,7 +7,8 @@ if (TRUE) {
 }
 
 if (TRUE) {#
-  3 } else {
+  3
+} else {
   #
   5
 }  #
@@ -23,10 +24,12 @@ if (TRUE) {
 }
 
 if (TRUE) {#
-  3}  #
+  3
+}  #
 
 if (TRUE) {#
-  3}
+  3
+}
 
 if (TRUE) {
   3
@@ -45,7 +48,8 @@ if (TRUE) {
 }
 
 if (TRUE) {#
-  3 + 33 } else {
+  3 + 33
+} else {
   #
   5
 }  #
@@ -61,10 +65,12 @@ if (TRUE) {
 }
 
 if (TRUE) {#
-  3}  #
+  3
+}  #
 
 if (TRUE) {#
-  nex(3)}
+  nex(3)
+}
 
 if (TRUE) {
   3
