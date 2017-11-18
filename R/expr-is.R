@@ -28,3 +28,24 @@ is_function_dec <- function(pd) {
   if (is.null(pd)) return(FALSE)
   pd$token[1] == "FUNCTION"
 }
+
+
+contains_else_expr <- function(pd) {
+  any(pd$token == "ELSE")
+}
+
+contains_curly_alternative_expr <- function(pd) {
+  else_idx <- which(pd$token == "ELSE")
+  if (length(else_idx) > 0) {
+    non_comment_after_else <- next_non_comment(pd, else_idx)
+    sub_expr <- pd$child[[non_comment_after_else]]
+    (is_cond_expr(sub_expr) && is_curly_expr(sub_expr$child[[5]])) | is_curly_expr(sub_expr)
+  } else {
+    FALSE
+  }
+}
+
+
+is_cond_expr <- function(pd) {
+  pd$token[1] == "IF"
+}
