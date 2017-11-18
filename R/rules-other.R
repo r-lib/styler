@@ -48,32 +48,17 @@ wrap_if_else_multi_line_in_curly_since_is_if_expr <- function(pd, indent_by = 2)
     if (nrow(pd) > 5) pd$lag_newlines[6] <- 0L
   }
 
-  to_be_wrapped_expr_with_child <- next_non_comment(pd, 4)
-  after_to_be_wrapped <- next_non_comment(pd, to_be_wrapped_expr_with_child)
-  after_else <- next_non_comment(pd, after_to_be_wrapped)
-
   if (contains_else_expr(pd)  &&
       pd_is_multi_line(pd) &&
-      !contains_curly_alternative_expr(pd)) {
-    pd$spaces[after_to_be_wrapped] <- 1L
-    pd$lag_newlines[after_to_be_wrapped] <- 0L
-    all_to_be_wrapped_ind <- seq2(after_to_be_wrapped + 1L, after_else)
+      contains_else_expr_that_needs_braces(pd)) {
 
-    new_expr <- wrap_expr_in_curly(
-      pd[all_to_be_wrapped_ind,],
-      stretch_out = c(TRUE, TRUE)
+    else_idx <- which(pd$token == "ELSE")
+    pd$spaces[else_idx] <- 1L
+    all_to_be_wrapped_ind <- seq2(else_idx + 1L, nrow(pd))
+
+    pd <- wrap_subexpr_in_curly(
+      pd, all_to_be_wrapped_ind, indent_by
     )
-    new_expr$indent <- pd$indent[after_to_be_wrapped + 1] - indent_by
-    pd$spaces[after_else] <- 0L
-
-    new_expr_in_expr <- new_expr %>%
-      wrap_expr_in_expr() %>%
-      remove_attributes(c("token_before", "token_after"))
-
-    pd <- pd %>%
-      slice(-all_to_be_wrapped_ind) %>%
-      bind_rows(new_expr_in_expr) %>%
-      arrange(pos_id)
   }
   pd
 }
@@ -81,12 +66,12 @@ wrap_if_else_multi_line_in_curly_since_is_if_expr <- function(pd, indent_by = 2)
 #' Wrap a sub-expression in curly braces
 #'
 #' Wraps some rows of a parse table into a sub-expression.
-#' @param pd A parse table.
+#' @inheritParams wrap_if_else_multi_line_in_curly
 #' @param ind_to_be_wrapped The indices of the rows that should be wrapped
 #'   into a new expression.
 wrap_subexpr_in_curly <- function(pd,
-                                                     ind_to_be_wrapped,
-                                                     indent_by) {
+                                  ind_to_be_wrapped,
+                                  indent_by) {
   to_be_wrapped_starts_with_comment <-
     pd[ind_to_be_wrapped[1],]$token == "COMMENT"
   new_expr <- wrap_expr_in_curly(

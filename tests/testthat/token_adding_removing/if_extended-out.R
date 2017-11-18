@@ -6,10 +6,9 @@ if (TRUE) {
   5
 }
 
-if (TRUE) {#
+if (TRUE) { #
   3
-} else {
-  #
+} else { #
   5
 }  #
 
@@ -23,11 +22,11 @@ if (TRUE) {
   3
 }
 
-if (TRUE) {#
+if (TRUE) { #
   3
 }  #
 
-if (TRUE) {#
+if (TRUE) { #
   3
 }
 
@@ -47,10 +46,9 @@ if (TRUE) {
   5
 }
 
-if (TRUE) {#
+if (TRUE) { #
   3 + 33
-} else {
-  #
+} else { #
   5
 }  #
 
@@ -64,11 +62,11 @@ if (TRUE) {
   call(3)
 }
 
-if (TRUE) {#
+if (TRUE) { #
   3
 }  #
 
-if (TRUE) {#
+if (TRUE) { #
   nex(3)
 }
 
@@ -91,3 +89,17 @@ if (TRUE) {
 } else if (FALSE) {
   5
 }
+
+if (TRUE) {
+  3 / 2
+} else if (FALSE) {
+  5
+}
+
+if (TRUE) { #
+  3
+} else if (TRUE) {
+  5
+} else { #
+  5
+}  #

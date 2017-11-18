@@ -67,3 +67,12 @@ if (TRUE)
   3/2 else if (FALSE) {
     5
   }
+
+if (TRUE)
+  3/2 else if (FALSE)
+    5
+
+if (TRUE) #
+  3 else if (TRUE)
+    5 else #
+      5 #
