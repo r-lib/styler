@@ -24,8 +24,6 @@ Suggests:
     rmarkdown,
     rstudioapi,
     testthat
-Remotes:
-    krlmlr/enc
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
