@@ -212,24 +212,28 @@ stop_insufficient_r_version <- function() {
   ), call. = FALSE)
 }
 
-
-
-##  ............................................................................
-##  generating test samples                                                 ####
-
-gen <- function(x) {
-  if (length(x) == 0) ""
-  else {
-    c(
-      paste0(x[1], gen(x[-1])),
-      paste0(x[1], " # comment\n", paste(x[-1], collapse = ""))
-    )
+#' Generate a comprehensive collection test cases for comment / insertion
+#' interaction
+#' Test consist of if / if-else / if-else-if-else caes, paired with various
+#' line-break and comment configurations. Used for internal testing.
+#' @return
+#' The function is called for its side effects, i.e. to write the
+#' test cases to *-in.R files that can be tested with [test_collection()]. Note
+#' that a few of the test cases are invalid and need to be removed / commented
+#' out manually.
+generate_test_samples <- function() {
+  gen <- function(x) {
+    if (length(x) == 0) ""
+    else {
+      c(
+        paste0(x[1], gen(x[-1])),
+        paste0(x[1], " # comment\n", paste(x[-1], collapse = ""))
+      )
+    }
   }
-}
 
-collapse <- function(x) paste(x, collapse = "\n\n")
+  collapse <- function(x) paste(x, collapse = "\n\n")
 
-save_test_samples <- function() {
   cat(
     collapse(gen(c("if", "(", "TRUE", ")", "NULL"))),
     file = "tests/testthat/insertion_comment_interaction/just_if-in.R"
