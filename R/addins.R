@@ -22,7 +22,7 @@ style_active_file <- function() {
   context <- get_rstudio_context()
   out <- style_text(context$contents)
   rstudioapi::modifyRange(
-    c(1, 1, length(out) + 1, 1),
+    c(1, 1, length(context$contents) + 1, 1),
     paste0(out, collapse = "\n"), id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
