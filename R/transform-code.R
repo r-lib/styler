@@ -7,9 +7,9 @@
 #' @inheritParams enc::transform_lines_enc
 #' @param ... Further arguments passed to `enc::transform_lines_enc()`.
 transform_code <- function(path, fun, verbose = FALSE, ...) {
-  if (grepl("\\.R$", path, ignore.case = TRUE)) {
+  if (is_plain_r_file(path)) {
     enc::transform_lines_enc(path, fun = fun, ..., verbose = verbose)
-  } else if (grepl("\\.Rmd$", path, ignore.case = TRUE)) {
+  } else if (is_rmd_file(path)) {
     enc::transform_lines_enc(
       path, fun = partial(transform_rmd, transformer_fun = fun), ...,
       verbose = verbose)

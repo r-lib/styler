@@ -1,4 +1,3 @@
-
 #' Stylers for RStudio Addins
 #'
 #' Helper functions for styling via RStudio Addins.
@@ -19,15 +18,39 @@ NULL
 
 #' @describeIn styler_addins Styles the active file
 style_active_file <- function() {
+  transformer <- make_transformer(tidyverse_style())
   context <- get_rstudio_context()
-  out <- style_text(context$contents)
+  if (is_rmd_file(context$path)) {
+    out <- transform_rmd(context$contents, transformer)
+  } else if (is_plain_r_file(context$path) | is_unsaved_file(context$path)) {
+    out <- try_transform_as_r_file(context, transformer)
+  } else {
+    stop("Can only style .R and .Rmd files.", call. = FALSE)
+  }
   rstudioapi::modifyRange(
-    c(1, 1, length(out) + 1, 1),
+    c(1, 1, length(context$contents) + 1, 1),
     paste0(out, collapse = "\n"), id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
     rstudioapi::documentSave(context$id)
   }
+}
+
+#' Style a file as if it was an .R file
+#'
+#' If not successful, the file is most
+#' likely not a .R file, so saving the file and try styling again will work if
+#' the file is an .Rmd file. Otherwise, we can throw an error that the file must
+#' be a .R or .Rmd file.
+#' @param context The context from `styler:::get_rstudio_context()`.
+#' @param transformer A transformer function most conveniently constructed with
+#'   [make_transformer()].
+try_transform_as_r_file <- function(context, transformer) {
+  tryCatch(
+    transformer(context$contents),
+    error = function(e) stop(
+      "Cannot style unsaved files other than .R files. Please save the file.", call. = FALSE
+  ))
 }
 
 #' @describeIn styler_addins Styles the highlighted region

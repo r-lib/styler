@@ -50,6 +50,18 @@ assert_text <- function(text) {
   text
 }
 
+is_plain_r_file <- function(path) {
+  grepl("\\.R$", path, ignore.case = TRUE)
+}
+
+is_rmd_file <- function(path) {
+  grepl("\\.Rmd$", path, ignore.case = TRUE)
+}
+
+is_unsaved_file <- function(path) {
+  path == ""
+}
+
 #' Find the index of the next non-comment in a parse table
 #' @param pd A parse table.
 #' @param pos The position of the token to start the search from.
