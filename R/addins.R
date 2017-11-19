@@ -42,8 +42,9 @@ style_active_file <- function() {
 #' likely not a .R file, so saving the file and try styling again will work if
 #' the file is an .Rmd file. Otherwise, we can throw an error that the file must
 #' be a .R or .Rmd file.
-#' @param context The context from [get_rstudio_context()].
-#' @inheritParams style_pkg
+#' @param context The context from `styler:::get_rstudio_context()`.
+#' @param transformer A transformer function most conveniently constructed with
+#'   [make_transformer()].
 try_transform_as_r_file <- function(context, transformer) {
   tryCatch(
     transformer(context$contents),

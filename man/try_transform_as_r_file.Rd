@@ -7,7 +7,10 @@
 try_transform_as_r_file(context, transformer)
 }
 \arguments{
-\item{context}{The context from \code{\link[=get_rstudio_context]{get_rstudio_context()}}.}
+\item{context}{The context from \code{styler:::get_rstudio_context()}.}
+
+\item{transformer}{A transformer function most conveniently constructed with
+\code{\link[=make_transformer]{make_transformer()}}.}
 }
 \description{
 If not successful, the file is most
