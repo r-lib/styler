@@ -82,6 +82,10 @@ style_text <- function(text,
 
   transformer <- make_transformer(transformers)
   styled_text <- transformer(text)
+  if (!identical(text, styled_text) &&
+      !can_verify_roundtrip(transformers)) {
+    message("Please review the changes carefully!")
+  }
   construct_vertical(styled_text)
 }
 
@@ -142,7 +146,10 @@ style_file <- function(path,
                         ...,
                         style = tidyverse_style,
                         transformers = style(...)) {
-  map_lgl(path, style_file_one, ..., style = style, transformers = transformers)
+  changed <- map_lgl(path,
+    style_file_one, ..., style = style, transformers = transformers
+  )
+  invisible(changed)
 }
 
 style_file_one <- function(path,

@@ -22,7 +22,9 @@ transform_files <- function(files, transformers) {
     message("No files changed.")
   } else {
     message("* File changed.")
-    message("Please review the changes carefully!")
+    if (!can_verify_roundtrip(transformers)) {
+      message("Please review the changes carefully!")
+    }
   }
   invisible(changed)
 }
@@ -177,8 +179,7 @@ can_verify_roundtrip <- function(transformers) {
 #' we can compare the expression before and after styling and return an error if
 #' it is not the same. Note that this method ignores comments and no
 #' verification can be conducted if scope > "line_breaks".
-#' @param old_text The initial expression in its character representation.
-#' @param new_text The styled expression in its character representation.
+#' @inheritParams expressions_are_identical
 #' @examples
 #' styler:::verify_roundtrip("a+1", "a + 1")
 #' styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
@@ -186,11 +187,7 @@ can_verify_roundtrip <- function(transformers) {
 #' styler:::verify_roundtrip("a+1", "b - 3")
 #' }
 verify_roundtrip <- function(old_text, new_text) {
-  expressions_are_identical <- identical(
-    parse(text = old_text, keep.source = FALSE),
-    parse(text = new_text, keep.source = FALSE)
-  )
-  if (!expressions_are_identical) {
+  if (!expressions_are_identical(old_text, new_text)) {
     msg <- paste(
       "The expression evaluated before the styling is not the same as the",
       "expression after styling. This should not happen. Please file a",
@@ -199,4 +196,15 @@ verify_roundtrip <- function(old_text, new_text) {
     )
     stop(msg, call. = FALSE)
   }
+}
+
+#' Check whether two expressions are identical
+#'
+#' @param old_text The initial expression in its character representation.
+#' @param new_text The styled expression in its character representation.
+expressions_are_identical <- function(old_text, new_text) {
+    identical(
+      parse(text = old_text, keep.source = FALSE),
+      parse(text = new_text, keep.source = FALSE)
+    )
 }
