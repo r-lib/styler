@@ -67,6 +67,21 @@ is_unsaved_file <- function(path) {
 #' @param pos The position of the token to start the search from.
 #' @importFrom rlang seq2
 next_non_comment <- function(pd, pos) {
+  if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) return(integer(0))
   candidates <- seq2(pos + 1L, nrow(pd))
+  if (all(candidates %in% which(pd$token == "COMMENT"))) return(integer(0))
   setdiff(candidates, which(pd$token == "COMMENT"))[1]
+}
+
+#' Find the index of the last comment in the sequence of comments-only tokens
+#' after the token that has position `pos` in `pd`.
+#' @param pd A parse table.
+#' @param pos The position of the token to start the search from.
+extend_if_comment <- function(pd, pos) {
+  if (pos == nrow(pd)) return(pos)
+  if (pd$token[pos + 1] == "COMMENT") {
+    extend_if_comment(pd, pos + 1L)
+  } else {
+    pos
+  }
 }
