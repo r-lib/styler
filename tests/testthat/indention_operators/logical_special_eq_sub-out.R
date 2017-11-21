@@ -14,3 +14,5 @@ data_frame(
   a =
     list()
 )
+b =
+  3

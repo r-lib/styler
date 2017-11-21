@@ -23,15 +23,21 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦--SPECIAL-IN: %in% [0/1] {22}                    
  ¦   °--expr:  [1/0] {24}                              
  ¦       °--SYMBOL: c [0/0] {23}                       
- °--expr:  [2/0] {25}                                  
-     ¦--expr:  [0/0] {27}                              
-     ¦   °--SYMBOL_FUNCTION_CALL: data_ [0/0] {26}     
-     ¦--'(': ( [0/0] {28}                              
-     ¦--SYMBOL_SUB: a [1/5] {29}                       
-     ¦--EQ_SUB: = [0/6] {30}                           
-     ¦--expr:  [1/1] {31}                              
-     ¦   ¦--expr:  [0/0] {33}                          
-     ¦   ¦   °--SYMBOL_FUNCTION_CALL: list [0/0] {32}  
-     ¦   ¦--'(': ( [0/0] {34}                          
-     ¦   °--')': ) [0/0] {35}                          
-     °--')': ) [1/0] {36}                              
+ ¦--expr:  [2/0] {25}                                  
+ ¦   ¦--expr:  [0/0] {27}                              
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: data_ [0/0] {26}     
+ ¦   ¦--'(': ( [0/0] {28}                              
+ ¦   ¦--SYMBOL_SUB: a [1/5] {29}                       
+ ¦   ¦--EQ_SUB: = [0/6] {30}                           
+ ¦   ¦--expr:  [1/1] {31}                              
+ ¦   ¦   ¦--expr:  [0/0] {33}                          
+ ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: list [0/0] {32}  
+ ¦   ¦   ¦--'(': ( [0/0] {34}                          
+ ¦   ¦   °--')': ) [0/0] {35}                          
+ ¦   °--')': ) [1/0] {36}                              
+ °--expr:  [1/0] {36.9}                                
+     ¦--expr:  [0/1] {38}                              
+     ¦   °--SYMBOL: b [0/0] {37}                       
+     ¦--EQ_ASSIGN: = [0/0] {39}                        
+     °--expr:  [1/0] {41}                              
+         °--NUM_CONST: 3 [0/0] {40}                    
