@@ -94,20 +94,22 @@ parse_transform_serialize <- function(text, transformers) {
     return("")
   }
   transformed_pd <- apply_transformers(pd_nested, transformers)
-  # TODO verify_roundtrip
   flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
     enrich_terminals(transformers$use_raw_indention) %>%
     apply_ref_indention() %>%
     set_regex_indention(
       pattern          = transformers$reindention$regex_pattern,
       target_indention = transformers$reindention$indention,
-      comments_only    = transformers$reindention$comments_only)
-
+      comments_only    = transformers$reindention$comments_only
+  )
   serialized_transformed_text <-
     serialize_parse_data_flattened(flattened_pd, start_line = start_line)
+
+  if (can_verify_roundtrip(transformers)) {
+    verify_roundtrip(text, serialized_transformed_text)
+  }
   serialized_transformed_text
 }
-
 
 #' Apply transformers to a parse table
 #'
@@ -154,5 +156,47 @@ apply_transformers <- function(pd_nested, transformers) {
     outer_indention_refs = NA
   )
   transformed_absolute_indent
+}
 
+
+
+#' Check whether a roundtip verification can be carried out
+#'
+#' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
+#' we can compare the expression before and after styling and return an error if
+#' it is not the same.
+#' @param transformers The list of transformer functions used for styling.
+#'   Needed for reverse engineering the scope.
+can_verify_roundtrip <- function(transformers) {
+  is.null(transformers$token)
+}
+
+#' Verify the styling
+#'
+#' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
+#' we can compare the expression before and after styling and return an error if
+#' it is not the same. Note that this method ignores comments and no
+#' verification can be conducted if scope > "line_breaks".
+#' @param old_text The initial expression in its character representation.
+#' @param new_text The styled expression in its character representation.
+#' @examples
+#' styler:::verify_roundtrip("a+1", "a + 1")
+#' styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
+#' \dontrun{
+#' styler:::verify_roundtrip("a+1", "b - 3")
+#' }
+verify_roundtrip <- function(old_text, new_text) {
+  expressions_are_identical <- identical(
+    parse(text = old_text, keep.source = FALSE),
+    parse(text = new_text, keep.source = FALSE)
+  )
+  if (!expressions_are_identical) {
+    msg <- paste(
+      "The expression evaluated before the styling is not the same as the",
+      "expression after styling. This should not happen. Please file a",
+      "bug report on GitHub (https://github.com/r-lib/styler/issues)",
+      "using a reprex."
+    )
+    stop(msg, call. = FALSE)
+  }
 }
