@@ -67,7 +67,7 @@ next_non_comment <- function(pd, pos) {
 #' @param pos The position of the token to start the search from.
 extend_if_comment <- function(pd, pos) {
   if (pos == nrow(pd)) return(pos)
-  if (pd[pos + 1,]$token == "COMMENT") {
+  if (pd$token[pos + 1] == "COMMENT") {
     extend_if_comment(pd, pos + 1L)
   } else {
     pos

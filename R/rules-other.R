@@ -84,7 +84,7 @@ wrap_subexpr_in_curly <- function(pd,
                                   ind_to_be_wrapped,
                                   indent_by) {
   to_be_wrapped_starts_with_comment <-
-    pd[ind_to_be_wrapped[1], ]$token == "COMMENT"
+    pd$token[ind_to_be_wrapped[1]] == "COMMENT"
   new_expr <- wrap_expr_in_curly(
     pd[ind_to_be_wrapped, ],
     stretch_out = c(!to_be_wrapped_starts_with_comment, TRUE)
