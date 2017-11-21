@@ -22,9 +22,3 @@ test_that("double braces are treated correctly", {
   expect_warning(test_collection("token_adding_removing", "token_creation_find_pos",
                                  transformer = style_text), NA)
 })
-
-
-test_that("various ifelse clauses", {
-  expect_warning(test_collection("token_adding_removing", "if_extended",
-                                 transformer = style_text), NA)
-})
