@@ -2,17 +2,14 @@
 % Please edit documentation in R/transform-files.R
 \name{verify_roundtrip}
 \alias{verify_roundtrip}
-\title{Verify the styling if possible}
+\title{Verify the styling}
 \usage{
-verify_roundtrip(old_text, new_text, transformers)
+verify_roundtrip(old_text, new_text)
 }
 \arguments{
 \item{old_text}{The initial expression in its character representation.}
 
 \item{new_text}{The styled expression in its character representation.}
-
-\item{transformers}{The list of transformer functions used for styling.
-Needed for reverse engineering the scope.}
 }
 \description{
 If scope was set to "line_breaks" or lower (compare \code{\link[=tidyverse_style]{tidyverse_style()}}),
@@ -21,13 +18,9 @@ it is not the same. Note that this method ignores comments and no
 verification can be conducted if scope > "line_breaks".
 }
 \examples{
-styler:::verify_roundtrip("a+1", "a + 1", tidyverse_style(scope = "line_breaks"))
-styler:::verify_roundtrip(
-  "a+1",
-  "a + 1 # comments are dropped",
-  tidyverse_style(scope = "line_breaks")
-)
+styler:::verify_roundtrip("a+1", "a + 1")
+styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
 \dontrun{
-styler:::verify_roundtrip("a+1", "b - 3", tidyverse_style(scope = "line_breaks"))
+styler:::verify_roundtrip("a+1", "b - 3")
 }
 }
