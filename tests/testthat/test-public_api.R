@@ -68,16 +68,12 @@ test_that("messages of style_text are correct", {
 })
 
 test_that("messages of style_file are correct", {
-  dir <- tempfile("styler")
-  dir.create(dir)
-  path_perm <- testthat_file("public-api", "xyzdir-dirty", "dirty-sample.R")
-  file.copy(path_perm, dir)
+  # code changes, needs review
+  temp_path <- copy_to_tempdir(testthat_file("public-api", "xyzdir-dirty", "dirty-sample.R"))
   expect_known_output(
-    capture_messages(style_file(file.path(dir, "dirty-sample.R"))),
+    capture_messages(style_file(temp_path, scope = "tokens")),
     testthat_file("public-api/xyzdir-dirty/dirty-reference"),
     print = TRUE
   )
   unlink(dir)
-
-
 })

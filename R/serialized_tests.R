@@ -179,12 +179,27 @@ style_op <- function(text) {
 
 }
 
+
 #' Create the path to a test that file
 #' @param ... Arguments passed to [file.path()] to construct the path after
 #'   ".../tests/testthat/"
 testthat_file <- function(...) {
   file.path(rprojroot::find_testthat_root_file(), ...)
 }
+
+#' Copy a file to a temporary directory
+#'
+#' Takes the path to a file as input and returns the path where the temporary
+#' file is stored. Don't forget to unlink once you are done.
+#' @param path_perm The path of the file to copy.
+copy_to_tempdir <- function(path_perm = testthat_file()) {
+  dir <- tempfile("styler")
+  dir.create(dir)
+  file.copy(path_perm, dir)
+  base <- basename(path_perm)
+  file.path(dir, base)
+}
+
 
 #' Set arguments
 #' @param write_tree Whether or not to write tree.
@@ -248,3 +263,4 @@ generate_test_samples <- function() {
     file = "tests/testthat/insertion_comment_interaction/if_else_if_else-in.R"
   )
 }
+
