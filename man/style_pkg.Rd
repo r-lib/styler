@@ -5,7 +5,7 @@
 \title{Prettify R source code}
 \usage{
 style_pkg(pkg = ".", ..., style = tidyverse_style,
-  transformers = style(...), filetype = "R",
+  transformers = style(...), filetype = c("r"),
   exclude_files = "R/RcppExports.R")
 }
 \arguments{
