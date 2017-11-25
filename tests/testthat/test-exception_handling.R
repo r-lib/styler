@@ -5,10 +5,10 @@ test_that("style_text returns custom error", {
 })
 
 test_that("style_file returns custom error", {
-  expect_warning(
+  capture_output(expect_warning(
     style_file(testthat_file("exception_handling", "parser-error.R")),
     "When processing"
-  )
+  ))
 })
 
 
@@ -17,8 +17,8 @@ test_that("style_text with no tokens returns empty string and warning", {
 })
 
 test_that("style_file with no tokens returns empty string and warning", {
-  expect_warning(
+  capture_output(expect_warning(
     style_file(testthat_file("exception_handling", "empty_file.R")),
     "not contain any tokens."
-  )
+  ))
 })
