@@ -97,10 +97,27 @@ test_that("messages (via cat()) of style_file are correct", {
 
 context("public API - Rmd in style_dir()")
 
-test_that("styler can style Rmd fie via style_dir()", {
+test_that("styler can style R and Rmd files via style_dir()", {
   msg <- capture_messages(
     style_dir(testthat_file("public-api", "xyz-r-and-rmd-dir"),
               filetype = c("R", "Rmd"))
+  )
+  expect_true(any(grepl("random-script-in-sub-dir.R", msg, fixed = TRUE)))
+  expect_true(any(grepl("random-rmd-script.Rmd", msg, fixed = TRUE)))
+})
+
+test_that("styler can style Rmd files only via style_dir()", {
+  msg <- capture_messages(
+    style_dir(testthat_file("public-api", "xyz-r-and-rmd-dir"),
+              filetype = "Rmd")
+  )
+  expect_true(any(grepl("random-rmd-script.Rmd", msg, fixed = TRUE)))
+})
+
+test_that("styler can style .r and .rmd files via style_dir()", {
+  msg <- capture_messages(
+    style_dir(testthat_file("public-api", "xyz-r-and-rmd-dir"),
+              filetype = c(".r", ".rmd"))
   )
   expect_true(any(grepl("random-script-in-sub-dir.R", msg, fixed = TRUE)))
   expect_true(any(grepl("random-rmd-script.Rmd", msg, fixed = TRUE)))

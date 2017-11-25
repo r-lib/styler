@@ -19,7 +19,8 @@ NULL
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
 #' @param filetype Vector of file extensions indicating which filetypes should
-#'   be styled e.g. c("R", "Rmd")
+#'   be styled. Case is ignored, and the `.` is optional, e.g. c(".R", ".Rmd")
+#'   or c("r", "rmd").
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
 #' @section Warning:
@@ -123,12 +124,10 @@ style_dir <- function(path = ".",
 #'   should be styled as well.
 prettify_any <- function(transformers, filetype, recursive, exclude_files) {
   files <- dir(
-    path = ".",
-    pattern = paste0("(", paste(filetype, collapse = "|"), ")$"),
+    path = ".", pattern = map_filetype_to_pattern(filetype),
     ignore.case = TRUE, recursive = recursive, full.names = TRUE
   )
   transform_files(setdiff(files, exclude_files), transformers)
-
 }
 
 #' Style `.R` and/or `.Rmd` files

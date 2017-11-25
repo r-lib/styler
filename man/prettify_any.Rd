@@ -12,7 +12,8 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
 \item{filetype}{Vector of file extensions indicating which filetypes should
-be styled e.g. c("R", "Rmd")}
+be styled. Case is ignored, and the \code{.} is optional, e.g. c(".R", ".Rmd")
+or c("r", "rmd").}
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 should be styled as well.}

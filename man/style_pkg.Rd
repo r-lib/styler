@@ -23,7 +23,8 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
 \item{filetype}{Vector of file extensions indicating which filetypes should
-be styled e.g. c("R", "Rmd")}
+be styled. Case is ignored, and the \code{.} is optional, e.g. c(".R", ".Rmd")
+or c("r", "rmd").}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}

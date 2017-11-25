@@ -85,3 +85,7 @@ extend_if_comment <- function(pd, pos) {
     pos
   }
 }
+
+map_filetype_to_pattern <- function(filetype) {
+  paste0("(", paste(set_and_assert_filetype(filetype), collapse = "|"), ")$")
+}

@@ -206,20 +206,6 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
 #' @name set_args
 NULL
 
-#' @describeIn set_args Sets the argument `write_tree` in
-#'   [test_collection()] to be `TRUE` for R versions higher or equal to 3.2, and
-#'   `FALSE` otherwise since the second-level dependency `DiagrammeR` from
-#'   `data.table` is not available for R < 3.2.
-set_arg_write_tree <- function(write_tree) {
-  sufficient_version <- getRversion() >= 3.2
-  if (is.na(write_tree)) {
-    write_tree <- ifelse(sufficient_version, TRUE, FALSE)
-  } else if (!sufficient_version & write_tree) {
-    stop_insufficient_r_version()
-  }
-  write_tree
-}
-
 stop_insufficient_r_version <- function() {
   stop(paste0(
     "Can't write tree with R version ", getRversion(),
