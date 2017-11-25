@@ -18,6 +18,8 @@ NULL
 #' @param transformers A set of transformer functions. This argument is most
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
+#' @param filetype Vector of file extensions indicating which filetypes should
+#'   be styled e.g. c("R", "Rmd")
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
 #' @section Warning:
@@ -37,6 +39,7 @@ style_pkg <- function(pkg = ".",
                       ...,
                       style = tidyverse_style,
                       transformers = style(...),
+                      filetype = "R",
                       exclude_files = "R/RcppExports.R") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   changed <- withr::with_dir(pkg_root, prettify_local(transformers, exclude_files))
@@ -103,10 +106,11 @@ style_dir <- function(path = ".",
                       ...,
                       style = tidyverse_style,
                       transformers = style(...),
+                      filetype = "R",
                       recursive = TRUE,
                       exclude_files = NULL) {
   changed <- withr::with_dir(
-    path, prettify_any(transformers, recursive, exclude_files)
+    path, prettify_any(transformers, filetype, recursive, exclude_files)
   )
   invisible(changed)
 }
@@ -117,9 +121,11 @@ style_dir <- function(path = ".",
 #' @inheritParams style_pkg
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   should be styled as well.
-prettify_any <- function(transformers, recursive, exclude_files) {
+prettify_any <- function(transformers, filetype, recursive, exclude_files) {
   files <- dir(
-    path = ".", pattern = "[.][rR]$", recursive = recursive, full.names = TRUE
+    path = ".",
+    pattern = paste0("(", paste(filetype, collapse = "|"), ")$"),
+    ignore.case = TRUE, recursive = recursive, full.names = TRUE
   )
   transform_files(setdiff(files, exclude_files), transformers)
 
