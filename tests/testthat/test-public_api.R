@@ -70,10 +70,9 @@ test_that("messages of style_text are correct", {
 test_that("messages of style_file are correct", {
   # code changes, needs review
   temp_path <- copy_to_tempdir(testthat_file("public-api", "xyzdir-dirty", "dirty-sample.R"))
-  expect_known_output(
+  expect_equal_to_reference(
     capture_messages(style_file(temp_path, scope = "tokens")),
-    testthat_file("public-api/xyzdir-dirty/dirty-reference"),
-    print = TRUE
+    testthat_file("public-api/xyzdir-dirty/dirty-reference")
   )
-  unlink(dir)
+  unlink(dirname(temp_path))
 })
