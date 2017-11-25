@@ -38,15 +38,7 @@ test_that("styler does not return error when there is no file to style", {
   ))
 })
 
-
-
-##  ............................................................................
-##  highlighted region                                                      ####
-
-# styling active region cannot be tested automatically since
-# rstudioapi::insertText() needs the context id.
-
-context("public API - Rmd")
+context("public API - Rmd in style_file()")
 
 test_that("styler can style Rmd file", {
   capture_output(expect_false({
@@ -103,3 +95,12 @@ test_that("messages (via cat()) of style_file are correct", {
   unlink(dirname(temp_path))
 })
 
+context("public API - Rmd in style_dir()")
+
+test_that("styler can style Rmd fie via style_dir()", {
+  msg <- capture_messages(
+    style_dir(testthat_file("public-api", "xyz-r-and-rmd-dir"))
+  )
+  expect_true(any(grepl("random-script-in-sub-dir.R", msg, fixed = TRUE)))
+  expect_true(any(grepl("random-rmd-script.Rmd", msg, fixed = TRUE)))
+})
