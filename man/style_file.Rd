@@ -2,7 +2,7 @@
 % Please edit documentation in R/ui.R
 \name{style_file}
 \alias{style_file}
-\title{Style a file}
+\title{Style \code{.R} and/or \code{.Rmd} files}
 \usage{
 style_file(path, ..., style = tidyverse_style, transformers = style(...))
 }
@@ -21,7 +21,7 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 }
 \description{
-Performs various substitutions in the \code{.R} file specified.
+Performs various substitutions in the files specified.
 Carefully examine the results after running this function!
 }
 \section{Warning}{
