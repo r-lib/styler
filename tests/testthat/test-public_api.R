@@ -53,3 +53,31 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
     style_file(testthat_file("public-api", "xyzfile_rmd", "random4.Rmd"), strict = FALSE)
   )
 })
+
+context("messages are correct")
+
+test_that("messages of style_text are correct", {
+  # Message if scope > line_breaks and code changes
+  expect_message(style_text("1+1", scope = "tokens"))
+
+  # No message if scope > line_breaks and code does not change
+  expect_message(style_text("1 + 1", scope = "tokens"), NA)
+  # No message if scope < spaces
+  expect_message(style_text("1 + 1", scope = "spaces"), NA)
+
+})
+
+test_that("messages of style_file are correct", {
+  dir <- tempfile("styler")
+  dir.create(dir)
+  path_perm <- testthat_file("public-api", "xyzdir-dirty", "dirty-sample.R")
+  file.copy(path_perm, dir)
+  expect_known_output(
+    capture_messages(style_file(file.path(dir, "dirty-sample.R"))),
+    testthat_file("public-api/xyzdir-dirty/dirty-reference"),
+    print = TRUE
+  )
+  unlink(dir)
+
+
+})
