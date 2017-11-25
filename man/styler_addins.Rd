@@ -15,9 +15,11 @@ Helper functions for styling via RStudio Addins.
 }
 \section{Functions}{
 \itemize{
-\item \code{style_active_file}: Styles the active file
+\item \code{style_active_file}: Styles the active file with \code{\link[=tidyverse_style]{tidyverse_style()}} and
+\code{strict = TRUE}.
 
-\item \code{style_selection}: Styles the highlighted region
+\item \code{style_selection}: Styles the highlighted selection in a \code{.R} or
+\code{.Rmd} file.
 }}
 
 \section{Auto-Save Option}{

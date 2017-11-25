@@ -16,7 +16,8 @@
 #' @seealso [Sys.setenv()]
 NULL
 
-#' @describeIn styler_addins Styles the active file
+#' @describeIn styler_addins Styles the active file with [tidyverse_style()] and
+#'   `strict = TRUE`.
 style_active_file <- function() {
   transformer <- make_transformer(tidyverse_style())
   context <- get_rstudio_context()
@@ -53,7 +54,8 @@ try_transform_as_r_file <- function(context, transformer) {
   ))
 }
 
-#' @describeIn styler_addins Styles the highlighted region
+#' @describeIn styler_addins Styles the highlighted selection in a `.R` or
+#'   `.Rmd` file.
 style_selection <- function() {
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text

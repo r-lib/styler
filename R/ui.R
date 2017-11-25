@@ -121,9 +121,9 @@ prettify_any <- function(transformers, recursive, exclude_files) {
 
 }
 
-#' Style a file
+#' Style `.R` and/or `.Rmd` files
 #'
-#' Performs various substitutions in the `.R` file specified.
+#' Performs various substitutions in the files specified.
 #'   Carefully examine the results after running this function!
 #' @param path A character vector with paths to files to style.
 #' @inheritParams style_pkg
