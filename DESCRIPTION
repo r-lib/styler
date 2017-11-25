@@ -7,6 +7,7 @@ Description:
     Pretty-prints R code without changing the user's formatting intent.
 Imports:
     backports,
+    cli,
     enc,
     magrittr,
     purrr,
@@ -35,6 +36,7 @@ RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Collate: 
     'addins.R'
+    'communicate.R'
     'compat-tidyr.R'
     'dplyr.R'
     'expr-is.R'

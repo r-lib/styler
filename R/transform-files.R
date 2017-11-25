@@ -11,21 +11,15 @@
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
   max_char <- min(max(nchar(files), 0), 80)
-  if (length(files) > 0) {
-    message("Styling ", length(files), " files:")
+  if (length(files) < 1) {
+    cat("Styling ", length(files), " files:\n")
   }
 
   changed <- map_lgl(
     files, transform_file, fun = transformer, max_char_path = max_char
   )
-  if (!any(changed, na.rm = TRUE)) {
-    message("No files changed.")
-  } else {
-    message("* File changed.")
-    if (!can_verify_roundtrip(transformers)) {
-      message("Please review the changes carefully!")
-    }
-  }
+  communicate_summary(changed, max_char)
+  communicate_warning(changed, transformers)
   invisible(changed)
 }
 
@@ -52,13 +46,24 @@ transform_file <- function(path,
   max_char_after_message_path <- nchar(message_before) + max_char_path + 1
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
-  message(message_before, path, ".", appendLF = FALSE)
+  cat(
+    message_before,
+    path,
+    rep_char(" ", max(0, n_spaces_before_message_after)),
+    append = FALSE
+  )
   changed <- transform_code(path, fun = fun, verbose = verbose, ...)
 
-  message(
-    rep(" ", max(0, n_spaces_before_message_after)),
-    message_after,
-    if (any(changed, na.rm = TRUE)) message_after_if_changed
+  bullet <- ifelse(is.na(changed),
+    "warning",
+    ifelse(changed,
+      "info",
+      "tick"
+    )
+  )
+
+  cli::cat_bullet(
+    bullet = bullet
   )
   invisible(changed)
 }
