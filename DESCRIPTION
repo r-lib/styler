@@ -54,7 +54,7 @@ Collate:
     'rules-spacing.R'
     'serialize.R'
     'serialized_tests.R'
-    'set-args.R'
+    'set-assert-args.R'
     'style_guides.R'
     'styler.R'
     'token-create.R'

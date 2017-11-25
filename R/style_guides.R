@@ -285,19 +285,3 @@ specify_math_token_spacing <-
 tidyverse_math_token_spacing <- function() {
   specify_math_token_spacing(one = c("'+'", "'-'", "'*'", "'/'", "'^'"))
 }
-
-#' Check token validity
-#'
-#' Check whether one or more tokens exist and have a unique token-text mapping
-#' @param tokens Tokens to check.
-assert_tokens <- function(tokens) {
-  invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
-  if (length(invalid_tokens) > 0) {
-    stop(
-      "Token(s) ", paste0(invalid_tokens, collapse = ", "), " are invalid. ",
-      "You can lookup all valid tokens and their text ",
-      "with styler:::looup_tokens(). Make sure you supply the values of ",
-      "the column 'token', not 'text'."
-    )
-  }
-}
