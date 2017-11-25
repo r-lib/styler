@@ -187,6 +187,7 @@ testthat_file <- function(...) {
   file.path(rprojroot::find_testthat_root_file(), ...)
 }
 
+
 #' Copy a file to a temporary directory
 #'
 #' Takes the path to a file as input and returns the path where the temporary
@@ -200,11 +201,6 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
   file.path(dir, base)
 }
 
-
-#' Set arguments
-#' @param write_tree Whether or not to write tree.
-#' @name set_args
-NULL
 
 stop_insufficient_r_version <- function() {
   stop(paste0(

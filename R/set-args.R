@@ -1,3 +1,7 @@
+#' Set arguments
+#' @param write_tree Whether or not to write tree.
+#' @name set_args
+NULL
 
 #' @describeIn set_args Sets the argument `write_tree` in
 #'   [test_collection()] to be `TRUE` for R versions higher or equal to 3.2, and
