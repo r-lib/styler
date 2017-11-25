@@ -72,15 +72,15 @@ test_that("messages (via cat()) of style_file are correct", {
   # Message if scope > line_breaks and code changes
   temp_path <- copy_to_tempdir(testthat_file("public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"))
   expect_equal_to_reference(capture_output(
-    style_file(temp_path, scope = "tokens")
-    ), testthat_file("public-api/xyzdir-dirty/dirty-reference-with-scope-tokens")
+    enc::to_utf8(style_file(temp_path, scope = "tokens"))),
+    testthat_file("public-api/xyzdir-dirty/dirty-reference-with-scope-tokens")
   )
   unlink(dirname(temp_path))
 
   # No message if scope > line_breaks and code does not change
   temp_path <- copy_to_tempdir(testthat_file("public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"))
   expect_equal_to_reference(
-    capture_output(style_file(temp_path, scope = "tokens")),
+    enc::to_utf8(capture_output(style_file(temp_path, scope = "tokens"))),
     testthat_file("public-api/xyzdir-dirty/clean-reference-with-scope-tokens")
   )
   unlink(dirname(temp_path))
@@ -88,8 +88,9 @@ test_that("messages (via cat()) of style_file are correct", {
   # No message if scope <= line_breaks even if code is changed.
   temp_path <- copy_to_tempdir(testthat_file("public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"))
   expect_equal_to_reference(
-    capture_output(style_file(temp_path, scope = "spaces")),
+    enc::to_utf8(capture_output(style_file(temp_path, scope = "spaces"))),
     testthat_file("public-api/xyzdir-dirty/dirty-reference-with-scope-spaces")
   )
   unlink(dirname(temp_path))
 })
+
