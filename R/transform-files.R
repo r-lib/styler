@@ -5,26 +5,22 @@
 #' @param files A character vector with paths to the file that should be
 #'   transformed.
 #' @inheritParams make_transformer
-#' @return A logical value that indicates whether or not any file was changed is
-#'   returned invisibly. If files were changed, the user is informed to
-#'   carefully inspect the changes via a message sent to the console.
+#' @section Value:
+#' Invisibly returns a data frame that indicates for each file considered for
+#' styling whether or not it was actually changed.
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
   max_char <- min(max(nchar(files), 0), 80)
-  if (length(files) > 0) {
-    message("Styling ", length(files), " files:")
+  if (length(files) > 0L) {
+    cat("Styling ", length(files), " files:\n")
   }
 
   changed <- map_lgl(
     files, transform_file, fun = transformer, max_char_path = max_char
   )
-  if (!any(changed, na.rm = TRUE)) {
-    message("No files changed.")
-  } else {
-    message("* File changed.")
-    message("Please review the changes carefully!")
-  }
-  invisible(changed)
+  communicate_summary(changed, max_char)
+  communicate_warning(changed, transformers)
+  data_frame(file = files, changed = changed)
 }
 
 #' Transform a file and output a customized message
@@ -50,13 +46,24 @@ transform_file <- function(path,
   max_char_after_message_path <- nchar(message_before) + max_char_path + 1
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
-  message(message_before, path, ".", appendLF = FALSE)
+  cat(
+    message_before,
+    path,
+    rep_char(" ", max(0, n_spaces_before_message_after)),
+    append = FALSE
+  )
   changed <- transform_code(path, fun = fun, verbose = verbose, ...)
 
-  message(
-    rep(" ", max(0, n_spaces_before_message_after)),
-    message_after,
-    if (any(changed, na.rm = TRUE)) message_after_if_changed
+  bullet <- ifelse(is.na(changed),
+    "warning",
+    ifelse(changed,
+      "info",
+      "tick"
+    )
+  )
+
+  cli::cat_bullet(
+    bullet = bullet
   )
   invisible(changed)
 }
@@ -177,8 +184,7 @@ can_verify_roundtrip <- function(transformers) {
 #' we can compare the expression before and after styling and return an error if
 #' it is not the same. Note that this method ignores comments and no
 #' verification can be conducted if scope > "line_breaks".
-#' @param old_text The initial expression in its character representation.
-#' @param new_text The styled expression in its character representation.
+#' @inheritParams expressions_are_identical
 #' @examples
 #' styler:::verify_roundtrip("a+1", "a + 1")
 #' styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
@@ -186,11 +192,7 @@ can_verify_roundtrip <- function(transformers) {
 #' styler:::verify_roundtrip("a+1", "b - 3")
 #' }
 verify_roundtrip <- function(old_text, new_text) {
-  expressions_are_identical <- identical(
-    parse(text = old_text, keep.source = FALSE),
-    parse(text = new_text, keep.source = FALSE)
-  )
-  if (!expressions_are_identical) {
+  if (!expressions_are_identical(old_text, new_text)) {
     msg <- paste(
       "The expression evaluated before the styling is not the same as the",
       "expression after styling. This should not happen. Please file a",
@@ -199,4 +201,15 @@ verify_roundtrip <- function(old_text, new_text) {
     )
     stop(msg, call. = FALSE)
   }
+}
+
+#' Check whether two expressions are identical
+#'
+#' @param old_text The initial expression in its character representation.
+#' @param new_text The styled expression in its character representation.
+expressions_are_identical <- function(old_text, new_text) {
+  identical(
+    parse(text = old_text, keep.source = FALSE),
+    parse(text = new_text, keep.source = FALSE)
+  )
 }

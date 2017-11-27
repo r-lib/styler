@@ -31,6 +31,12 @@ excluded from styling.}
 Performs various substitutions in all \code{.R} files in a directory.
 Carefully examine the results after running this function!
 }
+\section{Value}{
+
+Invisibly returns a data frame that indicates for each file considered for
+styling whether or not it was actually changed.
+}
+
 \section{Warning}{
 
 This function overwrites files (if styling results in a change of the
