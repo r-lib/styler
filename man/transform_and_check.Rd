@@ -5,7 +5,7 @@
 \title{Transform a file an check the result}
 \usage{
 transform_and_check(in_item, out_item, in_name = in_item,
-  out_name = out_item, transformer, write_back, write_tree = FALSE,
+  out_name = out_item, transformer, write_back, write_tree = NA,
   out_tree = "_tree", ...)
 }
 \arguments{
@@ -23,7 +23,9 @@ transform_and_check(in_item, out_item, in_name = in_item,
 to the output file.}
 
 \item{write_tree}{Whether or not the tree structure of the test should be
-computed and written to a file.}
+computed and written to a file. Note that this needs R >= 3.2
+(see \code{\link[=set_arg_write_tree]{set_arg_write_tree()}}). If the argument is set to \code{NA}, the function
+determines whether R >= 3.2 is in use and if so, trees will be written.}
 
 \item{out_tree}{Name of tree file if written out.}
 

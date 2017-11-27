@@ -121,27 +121,34 @@ prettify_any <- function(transformers, recursive, exclude_files) {
 
 }
 
-#' Style a file
+#' Style `.R` and/or `.Rmd` files
 #'
-#' Performs various substitutions in the `.R` file specified.
+#' Performs various substitutions in the files specified.
 #'   Carefully examine the results after running this function!
-#' @param path A path to a file to style.
+#' @param path A character vector with paths to files to style.
 #' @inheritParams style_pkg
 #' @inheritSection style_pkg Warning
 #' @examples
 #' # the following is identical but the former is more convenient:
 #' file <- tempfile("styler", fileext = ".R")
-#' utf8::write_lines_enc("1++1", file)
+#' enc::write_lines_enc("1++1", file)
 #' style_file(file, style = tidyverse_style, strict = TRUE)
 #' style_file(file, transformers = tidyverse_style(strict = TRUE))
-#' utf8::read_lines_enc(file)
+#' enc::read_lines_enc(file)
 #' unlink(file)
 #' @family stylers
 #' @export
 style_file <- function(path,
-                       ...,
-                       style = tidyverse_style,
-                       transformers = style(...)) {
+                        ...,
+                        style = tidyverse_style,
+                        transformers = style(...)) {
+  map_lgl(path, style_file_one, ..., style = style, transformers = transformers)
+}
+
+style_file_one <- function(path,
+                           ...,
+                           style = tidyverse_style,
+                           transformers = style(...)) {
   withr::with_dir(
     dirname(path),
     transform_files(basename(path), transformers)

@@ -8,7 +8,7 @@ Description: Pretty-print active file
 Binding: style_active_file
 Interactive: true
 
-Name: Style active region
-Description: Pretty-print active region
-Binding: style_active_region
+Name: Style selection
+Description: Pretty-print selection
+Binding: style_selection
 Interactive: true

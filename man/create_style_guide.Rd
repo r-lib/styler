@@ -25,7 +25,7 @@ information.}
 \item{use_raw_indention}{Boolean indicating whether or not the raw indention
 should be used.}
 
-\item{reindention}{An list of parameters for regex re-indention, most
+\item{reindention}{A list of parameters for regex re-indention, most
 conveniently constructed using \code{\link[=specify_reindention]{specify_reindention()}}.}
 }
 \description{

@@ -14,7 +14,8 @@ The following functions can be used for styling:
 \item \code{\link[=style_file]{style_file()}} to style a single .R file.
 \item \code{\link[=style_dir]{style_dir()}} to style all .R files in a directory.
 \item \code{\link[=style_pkg]{style_pkg()}} to style the source files of an R package.
-\item An RStudio Addin to style the active file .R file and the current package.
+\item \link{styler_addins} (RStudio Addins) to style either selected code or the
+active file.
 }
 }
 \examples{
@@ -27,9 +28,9 @@ style_text("a\%>\%b; a", scope = "tokens")
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/krlmlr/styler}
-  \item \url{http://krlmlr.github.io/styler}
-  \item Report bugs at \url{https://github.com/krlmlr/styler/issues}
+  \item \url{https://github.com/r-lib/styler}
+  \item \url{https://r-lib.github.io/styler/}
+  \item Report bugs at \url{https://github.com/r-lib/styler/issues}
 }
 
 }

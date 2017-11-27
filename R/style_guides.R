@@ -26,7 +26,7 @@ NULL
 #' @param start_comments_with_one_space Whether or not comments should start
 #'   with only one space (see [start_comments_with_space()]).
 #' @inheritParams create_style_guide
-#' @param math_token_spacing An list of parameters that define spacing around
+#' @param math_token_spacing A list of parameters that define spacing around
 #'   math token, conveniently constructed using [specify_math_token_spacing()].
 
 #' @details The following options for `scope` are available.
@@ -86,6 +86,7 @@ tidyverse_style <- function(scope = "tokens",
       remove_space_after_excl,
       set_space_after_bang_bang,
       remove_space_before_dollar,
+      remove_space_after_fun_dec,
       remove_space_around_colons,
       partial(start_comments_with_space,
               force_one = start_comments_with_one_space),
@@ -101,11 +102,9 @@ tidyverse_style <- function(scope = "tokens",
   line_break_manipulators <- if (scope >= "line_breaks")
     lst(
       remove_line_break_before_curly_opening,
-      remove_line_break_before_round_closing,
-      if (strict) set_line_break_afer_curly_opening else
-        add_line_break_afer_curly_opening,
-      if (strict) set_line_break_before_curly_closing else
-        add_line_break_before_curly_closing,
+      if (strict) remove_line_break_before_round_closing_after_curly else identity,
+      if (strict) remove_line_break_before_round_closing_fun_dec else identity,
+      partial(style_line_break_around_curly, strict),
       if (strict) partial(
         set_line_break_after_opening_if_call_is_multi_line,
         except_token_after = "COMMENT",
@@ -164,7 +163,7 @@ tidyverse_style <- function(scope = "tokens",
 #' @param indention A list of transformer functions that manipulate indention.
 #' @param use_raw_indention Boolean indicating whether or not the raw indention
 #'   should be used.
-#' @param reindention An list of parameters for regex re-indention, most
+#' @param reindention A list of parameters for regex re-indention, most
 #'   conveniently constructed using [specify_reindention()].
 #' @export
 create_style_guide <- function(initialize = initialize_attributes,

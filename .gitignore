@@ -3,3 +3,5 @@
 .RData
 inst/doc
 docs
+.gitsum
+gitsum

@@ -23,7 +23,7 @@
 #' @importFrom purrr flatten_chr pwalk map
 test_collection <- function(test, sub_test = NULL,
                             write_back = TRUE,
-                            write_tree = TRUE,
+                            write_tree = NA,
                             transformer,
                             ...) {
   path <- rprojroot::find_testthat_root_file(test)
@@ -84,30 +84,36 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param write_back Whether the results of the transformation should be written
 #'   to the output file.
 #' @param write_tree Whether or not the tree structure of the test should be
-#'   computed and written to a file.
+#'   computed and written to a file. Note that this needs R >= 3.2
+#'   (see [set_arg_write_tree()]). If the argument is set to `NA`, the function
+#'   determines whether R >= 3.2 is in use and if so, trees will be written.
 #' @param ... Parameters passed to transformer function.
 #' @param out_tree Name of tree file if written out.
 #' @importFrom utils write.table
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
                                 transformer, write_back,
-                                write_tree = FALSE,
+                                write_tree = NA,
                                 out_tree = "_tree", ...) {
 
-  read_in <- utf8::read_lines_enc(in_item)
+  write_tree <- set_arg_write_tree(write_tree)
+  read_in <- enc::read_lines_enc(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
       write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE)
   }
-  transformed <- read_in %>%
+  transformed_text <- read_in %>%
     transformer(...) %>%
     unclass()
-  transformed <- suppressMessages(utf8::transform_lines_enc(out_item,
-    function(x) transformed,
-    write_back = write_back))
+  transformed <- enc::transform_lines_enc(
+    out_item,
+    function(x) transformed_text,
+    write_back = write_back,
+    verbose = FALSE
+  )
 
   if (transformed) {
-    target <- utf8::read_lines_enc(out_item)
+    target <- enc::read_lines_enc(out_item)
     warning(in_name, " was different from ", out_name,
             immediate. = TRUE, call. = FALSE)
   } else {
@@ -178,4 +184,67 @@ style_op <- function(text) {
 #'   ".../tests/testthat/"
 testthat_file <- function(...) {
   file.path(rprojroot::find_testthat_root_file(), ...)
+}
+
+#' Set arguments
+#' @param write_tree Whether or not to write tree.
+#' @name set_args
+NULL
+
+#' @describeIn set_args Sets the argument `write_tree` in
+#'   [test_collection()] to be `TRUE` for R versions higher or equal to 3.2, and
+#'   `FALSE` otherwise since the second-level dependency `DiagrammeR` from
+#'   `data.table` is not available for R < 3.2.
+set_arg_write_tree <- function(write_tree) {
+  sufficient_version <- getRversion() >= 3.2
+  if (is.na(write_tree)) {
+    write_tree <- ifelse(sufficient_version, TRUE, FALSE)
+  } else if (!sufficient_version & write_tree) {
+    stop_insufficient_r_version()
+  }
+  write_tree
+}
+
+stop_insufficient_r_version <- function() {
+  stop(paste0(
+    "Can't write tree with R version ", getRversion(),
+    "since data.tree not available. Needs at least R version 3.2."
+  ), call. = FALSE)
+}
+
+#' Generate a comprehensive collection test cases for comment / insertion
+#' interaction
+#' Test consist of if / if-else / if-else-if-else caes, paired with various
+#' line-break and comment configurations. Used for internal testing.
+#' @return
+#' The function is called for its side effects, i.e. to write the
+#' test cases to *-in.R files that can be tested with [test_collection()]. Note
+#' that a few of the test cases are invalid and need to be removed / commented
+#' out manually.
+generate_test_samples <- function() {
+  gen <- function(x) {
+    if (length(x) == 0) ""
+    else {
+      c(
+        paste0(x[1], gen(x[-1])),
+        paste0(x[1], " # comment\n", paste(x[-1], collapse = ""))
+      )
+    }
+  }
+
+  collapse <- function(x) paste(x, collapse = "\n\n")
+
+  cat(
+    collapse(gen(c("if", "(", "TRUE", ")", "NULL"))),
+    file = "tests/testthat/insertion_comment_interaction/just_if-in.R"
+  )
+  cat(
+    collapse(gen(c("if", "(", "TRUE", ")", "NULL", " else", " NULL"))),
+    file = "tests/testthat/insertion_comment_interaction/if_else-in.R"
+  )
+  cat(collapse(gen(c(
+    "if", "(", "TRUE", ")", "NULL", " else", " if", "(", "FALSE", ")", "NULL",
+    " else", " NULL"))),
+    file = "tests/testthat/insertion_comment_interaction/if_else_if_else-in.R"
+  )
 }

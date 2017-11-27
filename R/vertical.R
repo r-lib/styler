@@ -4,7 +4,7 @@
 #' aligns the output vertically.
 #' @param x A character vector or an object of class "vertical".
 construct_vertical <- function(x) {
-  stopifnot(inherits(x, what = c("character", "vertical")))
+  stopifnot(inherits(x, what = c("utf8", "character", "vertical")))
   structure(x, class = "vertical")
 }
 

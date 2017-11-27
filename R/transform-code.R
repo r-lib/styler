@@ -1,16 +1,16 @@
 #' Transform code from R or Rmd files
 #'
-#' A wrapper for [utf8::transform_lines_enc()] which initiates the styling of
+#' A wrapper for [enc::transform_lines_enc()] which initiates the styling of
 #' either R or Rmd files by passing the relevant transformer function for each
 #' case.
 #'
-#' @inheritParams utf8::transform_lines_enc
-#' @param ... Further arguments passed to `utf8::transform_lines_enc()`.
+#' @inheritParams enc::transform_lines_enc
+#' @param ... Further arguments passed to `enc::transform_lines_enc()`.
 transform_code <- function(path, fun, verbose = FALSE, ...) {
-  if (grepl("\\.R$", path, ignore.case = TRUE)) {
-    utf8::transform_lines_enc(path, fun = fun, ..., verbose = verbose)
-  } else if (grepl("\\.Rmd$", path, ignore.case = TRUE)) {
-    utf8::transform_lines_enc(
+  if (is_plain_r_file(path)) {
+    enc::transform_lines_enc(path, fun = fun, ..., verbose = verbose)
+  } else if (is_rmd_file(path)) {
+    enc::transform_lines_enc(
       path, fun = partial(transform_rmd, transformer_fun = fun), ...,
       verbose = verbose)
   } else {
@@ -71,10 +71,5 @@ identify_chunks <- function(lines) {
 #'
 #' @inheritParams identify_chunks
 get_knitr_pattern <- function(lines) {
-  pattern <- knitr:::detect_pattern(lines, "rmd")
-  if (!is.null(pattern)) {
-    knitr::all_patterns[[pattern]]
-  } else {
-    NULL
-  }
+    knitr::all_patterns[["md"]]
 }

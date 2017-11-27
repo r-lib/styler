@@ -6,6 +6,7 @@
 #' @param text A character vector to parse.
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
+#' @importFrom purrr when
 compute_parse_data_nested <- function(text) {
   parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
@@ -14,7 +15,8 @@ compute_parse_data_nested <- function(text) {
   parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
     nest_parse_data() %>%
-    flatten_operators()
+    flatten_operators() %>%
+    when(any(parse_data$token == "EQ_ASSIGN") ~ relocate_eq_assign(.), ~.)
 
   pd_nested
 }
@@ -53,9 +55,8 @@ add_terminal_token_after <- function(pd_flat) {
     filter(terminal) %>%
     arrange(pos_id)
 
-  data_frame(id = terminals$id,
-             token_after = lead(terminals$token, default = "")) %>%
-    left_join(pd_flat, ., by = "id")
+  data_frame(pos_id = terminals$pos_id, token_after = lead(terminals$token, default = "")) %>%
+    left_join(pd_flat, ., by = "pos_id")
 }
 
 #' @rdname add_token_terminal

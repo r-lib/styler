@@ -24,10 +24,10 @@ test_that("while / for / if without curly brackets", {
                                  transformer = style_text, strict = FALSE), NA)
 })
 
-test_that("logical, special and EQ_SUB tokens are indented correctly", {
+test_that("logical, special EQ_SUB and EQ_ASSIGN tokens are indented correctly", {
   expect_warning(test_collection("indention_operators",
                                  "logical_special",
-                                 transformer = style_text), NA)
+                                 transformer = style_text, scope = "line_breaks"), NA)
 
   expect_warning(test_collection("indention_operators",
                                  "eq",

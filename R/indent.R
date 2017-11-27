@@ -27,6 +27,7 @@ indent_op <- function(pd,
                         logical_token,
                         special_token,
                         "LEFT_ASSIGN",
+                        "EQ_ASSIGN",
                         "'$'")
                       ) {
   indent_indices <- compute_indent_indices(pd, token)
@@ -78,18 +79,21 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 #' @describeIn update_indention Is used to indent if and if-else statements.
 #' @importFrom rlang seq2
 indent_without_paren_if_else <- function(pd, indent_by) {
+  expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
   has_if_without_curly <-
-    pd$token[1] %in% c("IF", "WHILE") && pd$child[[5]]$token[1] != "'{'"
+    pd$token[1] %in% "IF" && pd$child[[expr_after_if]]$token[1] != "'{'"
   if (has_if_without_curly) {
-    pd$indent[5] <- indent_by
+    pd$indent[expr_after_if] <- indent_by
   }
 
+  else_idx <- which(pd$token == "ELSE")
+  expr_after_else_idx <- next_non_comment(pd, else_idx)
   has_else_without_curly_or_else_chid <-
     any(pd$token == "ELSE") &&
-    pd$child[[7]]$token[1] != "'{'" &&
-    pd$child[[7]]$token[1] != "IF"
+    pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
+    pd$child[[expr_after_else_idx]]$token[1] != "IF"
   if (has_else_without_curly_or_else_chid) {
-    pd$indent[seq(7, nrow(pd))] <- indent_by
+    pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
   }
   pd
 }

@@ -4,7 +4,7 @@
 \alias{find_start_pos_id}
 \title{Find legit starting value for a new positional id}
 \usage{
-find_start_pos_id(pd, pos, by, direction, after)
+find_start_pos_id(pd, pos, by, direction, after, candidates = NULL)
 }
 \arguments{
 \item{pd}{A parse table.}
@@ -18,6 +18,9 @@ to create a new id.}
 
 \item{after}{Boolean indicating whether it should be inserted after or before
 \code{pos}.}
+
+\item{candidates}{The \code{pos_ids} of the candidates that origin from other
+nests.}
 }
 \description{
 Looks at the current nest as well as into its children (if necessary) to make

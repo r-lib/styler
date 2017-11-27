@@ -4,9 +4,9 @@
 \alias{create_tokens}
 \title{Create a terminal token}
 \usage{
-create_tokens(tokens, texts, lag_newlines = 0, spaces = 0, pos_ids, parents,
-  token_before = NA, token_after = NA, indention_ref_ids = NA,
-  indents = 0)
+create_tokens(tokens, texts, lag_newlines = 0, spaces = 0, pos_ids,
+  token_before = NA, token_after = NA, indention_ref_pos_ids = NA,
+  indents = 0, terminal = TRUE, child = NULL)
 }
 \arguments{
 \item{tokens}{Character vector with tokens to create.}
@@ -21,19 +21,21 @@ tokens.}
 \item{pos_ids}{Character vector with positional id corresponding to the
 tokens.}
 
-\item{parents}{Vector with \code{id} corresponding to the
-parent of the tokens we want to create.}
-
 \item{token_before}{Character vector corresponding to the columns
 \code{token_before}.}
 
 \item{token_after}{Character vector corresponding to the columns
 \code{token_after}.}
 
-\item{indention_ref_ids}{Character vector with indention ref ids
+\item{indention_ref_pos_ids}{Character vector with indention ref ids
 corresponding to the tokens.}
 
 \item{indents}{Vector with indents corresponding to the tokens.}
+
+\item{terminal}{Boolean vector indicating whether a token is a terminal or
+not.}
+
+\item{child}{The children of the tokens.}
 }
 \description{
 Creates a terminal token represented as (a row of) a parse table.

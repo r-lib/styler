@@ -4,10 +4,14 @@
 \alias{create_tree}
 \title{Create a tree from text}
 \usage{
-create_tree(text)
+create_tree(text, structure_only = FALSE)
 }
 \arguments{
 \item{text}{A character vector.}
+
+\item{structure_only}{Whether or not create a tree that represents the
+structure of the expression without any information on the tokens. Useful
+to check whether two structures are identical.}
 }
 \value{
 A data frame.

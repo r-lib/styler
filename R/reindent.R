@@ -6,7 +6,7 @@
 NULL
 
 
-#' @describeIn update_indention_ref Updates the reference id for all
+#' @describeIn update_indention_ref Updates the reference pos_id for all
 #'   tokens in `pd_nested` if `pd_nested` contains a function call. Tokens that
 #'   start on the same line as the opening parenthesis, are not themselves
 #'   function calls or expressions wrapped in curly brackets are re-indented,
@@ -39,12 +39,12 @@ update_indention_ref_fun_call <- function(pd_nested) {
     call_on_same_line <- child_is_call & child_is_on_same_line
     to_indent <- setdiff(candidates, which(call_on_same_line | child_is_curly_expr))
 
-    pd_nested$indention_ref_id[to_indent] <- last(pd_nested$child[[1]]$id)
+    pd_nested$indention_ref_pos_id[to_indent] <- last(pd_nested$child[[1]]$pos_id)
   }
   pd_nested
 }
 
-#' @describeIn update_indention_ref Updates the reference id for all
+#' @describeIn update_indention_ref Updates the reference pos_id for all
 #'   tokens in `pd_nested` if `pd_nested` contains a function declaration.
 #'   Tokens inside a function declaration are are re-indented,
 #'   that is, they are indented up to the level at which the token FUNCTION
@@ -60,7 +60,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
 update_indention_ref_fun_dec <- function(pd_nested) {
   if (pd_nested$token[1] == "FUNCTION") {
     seq <- seq2(3, nrow(pd_nested) - 1)
-    pd_nested$indention_ref_id[seq] <- pd_nested$id[1]
+    pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2]
   }
   pd_nested
 }
@@ -73,7 +73,7 @@ update_indention_ref_fun_dec <- function(pd_nested) {
 #' i.e. by looping over the target tokens.
 #' @inheritParams apply_ref_indention_one
 apply_ref_indention <- function(flattened_pd) {
-  target_tokens <- which(flattened_pd$id %in% flattened_pd$indention_ref_id)
+  target_tokens <- which(flattened_pd$pos_id %in% flattened_pd$indention_ref_pos_id)
   flattened_pd <- reduce(
     target_tokens,
     apply_ref_indention_one,
@@ -93,12 +93,12 @@ apply_ref_indention <- function(flattened_pd) {
 #'   should be applied to other tokens.
 apply_ref_indention_one <- function(flattened_pd, target_token) {
   token_points_to_ref <-
-    flattened_pd$indention_ref_id == flattened_pd$id[target_token]
+    flattened_pd$indention_ref_pos_id == flattened_pd$pos_id[target_token]
   first_token_on_line <- flattened_pd$lag_newlines > 0L
   token_to_update <- which(token_points_to_ref & first_token_on_line)
 
   # udate spaces
-  copied_spaces <- flattened_pd$col2[target_token] + 1
+  copied_spaces <- flattened_pd$col2[target_token]
   old_spaces <- flattened_pd$lag_spaces[token_to_update[1]]
   shift <- copied_spaces - old_spaces
   flattened_pd$lag_spaces[token_to_update] <-

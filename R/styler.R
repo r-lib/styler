@@ -7,7 +7,8 @@
 #'  * [style_file()] to style a single .R file.
 #'  * [style_dir()] to style all .R files in a directory.
 #'  * [style_pkg()] to style the source files of an R package.
-#'  * An RStudio Addin to style the active file .R file and the current package.
+#'  * [styler_addins] (RStudio Addins) to style either selected code or the
+#'  active file.
 #' @examples
 #' style_text("call( 1)")
 #' style_text("1    + 1", strict = FALSE)

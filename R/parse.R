@@ -27,7 +27,7 @@ tokenize <- function(text) {
 #' @param text The text to parse.
 #' @param include_text Passed to [utils::getParseData()] as `includeText`.
 #' @param ... Other arguments passed to [utils::getParseData()].
-get_parse_data <- function(text, include_text, ...) {
+get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse(text = text, keep.source = TRUE)
   parsed <- parse(text = text, keep.source = TRUE)

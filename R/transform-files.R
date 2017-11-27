@@ -29,15 +29,15 @@ transform_files <- function(files, transformers) {
 
 #' Transform a file and output a customized message
 #'
-#' Wraps `utf8::transform_lines_enc()` and outputs customized messages.
+#' Wraps `enc::transform_lines_enc()` and outputs customized messages.
 #' @param max_char_path The number of characters of the longest path. Determines
 #'   the indention level of `message_after`.
 #' @param message_before The message to print before the path.
 #' @param message_after The message to print after the path.
 #' @param message_after_if_changed The message to print after `message_after` if
 #'   any file was transformed.
-#' @inheritParams utf8::transform_lines_enc
-#' @param ... Further arguments passed to `utf8::transform_lines_enc()`.
+#' @inheritParams enc::transform_lines_enc
+#' @param ... Further arguments passed to `enc::transform_lines_enc()`.
 transform_file <- function(path,
                            fun,
                            verbose = FALSE,
@@ -94,38 +94,48 @@ parse_transform_serialize <- function(text, transformers) {
     return("")
   }
   transformed_pd <- apply_transformers(pd_nested, transformers)
-  # TODO verify_roundtrip
   flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
     enrich_terminals(transformers$use_raw_indention) %>%
     apply_ref_indention() %>%
     set_regex_indention(
       pattern          = transformers$reindention$regex_pattern,
       target_indention = transformers$reindention$indention,
-      comments_only    = transformers$reindention$comments_only)
-
+      comments_only    = transformers$reindention$comments_only
+  )
   serialized_transformed_text <-
     serialize_parse_data_flattened(flattened_pd, start_line = start_line)
+
+  if (can_verify_roundtrip(transformers)) {
+    verify_roundtrip(text, serialized_transformed_text)
+  }
   serialized_transformed_text
 }
 
-
 #' Apply transformers to a parse table
 #'
-#' Depending on whether `transformers` contains functions to modify the
-#'   line break information, the column `multi_line` is updated (after
-#'   the line break information is modified) and
-#'   the rest of the transformers is applied afterwards, or (if line break
-#'   information is not to be modified), all transformers are applied in one
-#'   step. The former requires two pre visits and one post visit, the latter
-#'   only one pre visit.
+#' The column `multi_line` is updated (after the line break information is
+#' modified) and the rest of the transformers are applied afterwards,
+#' The former requires two pre visits and one post visit.
+#' @details
+#' The order of the transformations is:
+#'
+#' * Initialization (must be first).
+#' * Line breaks (must be before spacing due to indention).
+#' * Update of newline and multi-line attributes (must not change afterwards,
+#'   hence line breaks must be modified first).
+#' * spacing rules (must be after line-breaks and updating newlines and
+#'   multi-line).
+#' * token manipulation / replacement (is last since adding and removing tokens
+#'   will invalidate columns token_after and token_before).
+#' * Update indention reference (must be after line breaks).
+#'
 #' @param pd_nested A nested parse table.
 #' @param transformers A list of *named* transformer functions
 #' @importFrom purrr flatten
 apply_transformers <- function(pd_nested, transformers) {
   transformed_line_breaks <- pre_visit(
     pd_nested,
-    c(transformers$initialize,
-    transformers$line_break)
+    c(transformers$initialize, transformers$line_break)
   )
 
   transformed_updated_multi_line <- post_visit(
@@ -135,7 +145,7 @@ apply_transformers <- function(pd_nested, transformers) {
 
   transformed_all <- pre_visit(
     transformed_updated_multi_line,
-    c(transformers$space, transformers$token, transformers$indention)
+    c(transformers$space, transformers$indention, transformers$token)
   )
 
   transformed_absolute_indent <- context_to_terminals(
@@ -145,7 +155,48 @@ apply_transformers <- function(pd_nested, transformers) {
     outer_spaces = 0,
     outer_indention_refs = NA
   )
-
   transformed_absolute_indent
+}
 
+
+
+#' Check whether a roundtip verification can be carried out
+#'
+#' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
+#' we can compare the expression before and after styling and return an error if
+#' it is not the same.
+#' @param transformers The list of transformer functions used for styling.
+#'   Needed for reverse engineering the scope.
+can_verify_roundtrip <- function(transformers) {
+  is.null(transformers$token)
+}
+
+#' Verify the styling
+#'
+#' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
+#' we can compare the expression before and after styling and return an error if
+#' it is not the same. Note that this method ignores comments and no
+#' verification can be conducted if scope > "line_breaks".
+#' @param old_text The initial expression in its character representation.
+#' @param new_text The styled expression in its character representation.
+#' @examples
+#' styler:::verify_roundtrip("a+1", "a + 1")
+#' styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
+#' \dontrun{
+#' styler:::verify_roundtrip("a+1", "b - 3")
+#' }
+verify_roundtrip <- function(old_text, new_text) {
+  expressions_are_identical <- identical(
+    parse(text = old_text, keep.source = FALSE),
+    parse(text = new_text, keep.source = FALSE)
+  )
+  if (!expressions_are_identical) {
+    msg <- paste(
+      "The expression evaluated before the styling is not the same as the",
+      "expression after styling. This should not happen. Please file a",
+      "bug report on GitHub (https://github.com/r-lib/styler/issues)",
+      "using a reprex."
+    )
+    stop(msg, call. = FALSE)
+  }
 }

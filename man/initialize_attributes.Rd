@@ -5,7 +5,7 @@
 \alias{initialize_newlines}
 \alias{initialize_spaces}
 \alias{initialize_multi_line}
-\alias{initialize_indention_ref_id}
+\alias{initialize_indention_ref_pos_id}
 \alias{initialize_indent}
 \alias{validate_parse_data}
 \title{Enrich parse table with space and line break information}
@@ -18,7 +18,7 @@ initialize_spaces(pd_flat)
 
 initialize_multi_line(pd_flat)
 
-initialize_indention_ref_id(pd_flat)
+initialize_indention_ref_pos_id(pd_flat)
 
 initialize_indent(pd_flat)
 
@@ -39,7 +39,7 @@ entries in the parse table and adds this information to the table.
 
 \item \code{initialize_multi_line}: Initializes \code{multi_line}.
 
-\item \code{initialize_indention_ref_id}: Initializes \code{indention_ref_ind}.
+\item \code{initialize_indention_ref_pos_id}: Initializes \code{indention_ref_ind}.
 
 \item \code{initialize_indent}: Initializes \code{indent}.
 

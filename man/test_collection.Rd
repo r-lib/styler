@@ -4,8 +4,8 @@
 \alias{test_collection}
 \title{Run a collection of tests}
 \usage{
-test_collection(test, sub_test = NULL, write_back = TRUE,
-  write_tree = TRUE, transformer, ...)
+test_collection(test, sub_test = NULL, write_back = TRUE, write_tree = NA,
+  transformer, ...)
 }
 \arguments{
 \item{test}{The test to run. It corresponds to a folder name in
@@ -19,7 +19,9 @@ names in tests/testthat. \code{NULL} matches all files.}
 to the output file.}
 
 \item{write_tree}{Whether or not the tree structure of the test should be
-computed and written to a file.}
+computed and written to a file. Note that this needs R >= 3.2
+(see \code{\link[=set_arg_write_tree]{set_arg_write_tree()}}). If the argument is set to \code{NA}, the function
+determines whether R >= 3.2 is in use and if so, trees will be written.}
 
 \item{transformer}{A function to apply to the content of \code{in_item}.}
 
