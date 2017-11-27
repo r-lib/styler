@@ -36,6 +36,12 @@ code to be formatted). It is strongly suggested to only style files
 that are under version control or to create a backup copy.
 }
 
+\section{Value}{
+
+Invisibly returns a data frame that indicates for each file considered for
+styling whether or not it was actually changed.
+}
+
 \examples{
 \dontrun{
 # the following is identical but the former is more convenient:

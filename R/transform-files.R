@@ -5,9 +5,9 @@
 #' @param files A character vector with paths to the file that should be
 #'   transformed.
 #' @inheritParams make_transformer
-#' @return A logical value that indicates whether or not any file was changed is
-#'   returned invisibly. If files were changed, the user is informed to
-#'   carefully inspect the changes via a message sent to the console.
+#' @section Value:
+#' Invisibly returns a data frame that indicates for each file considered for
+#' styling whether or not it was actually changed.
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
   max_char <- min(max(nchar(files), 0), 80)
@@ -20,7 +20,7 @@ transform_files <- function(files, transformers) {
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
-  invisible(data_frame(file = files, changed = changed))
+  data_frame(file = files, changed = changed)
 }
 
 #' Transform a file and output a customized message

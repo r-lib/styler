@@ -24,6 +24,7 @@ NULL
 #' This function overwrites files (if styling results in a change of the
 #' code to be formatted). It is strongly suggested to only style files
 #' that are under version control or to create a backup copy.
+#' @inheritSection transform_files Value
 #' @family stylers
 #' @examples
 #' \dontrun{
@@ -93,6 +94,7 @@ style_text <- function(text,
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
 #' @inheritParams style_pkg
+#' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @family stylers
 #' @export
@@ -127,6 +129,7 @@ prettify_any <- function(transformers, recursive, exclude_files) {
 #'   Carefully examine the results after running this function!
 #' @param path A character vector with paths to files to style.
 #' @inheritParams style_pkg
+#' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @examples
 #' # the following is identical but the former is more convenient:

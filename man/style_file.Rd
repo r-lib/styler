@@ -24,6 +24,12 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 Performs various substitutions in the \code{.R} file specified.
 Carefully examine the results after running this function!
 }
+\section{Value}{
+
+Invisibly returns a data frame that indicates for each file considered for
+styling whether or not it was actually changed.
+}
+
 \section{Warning}{
 
 This function overwrites files (if styling results in a change of the

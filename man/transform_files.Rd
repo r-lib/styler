@@ -13,12 +13,13 @@ transformed.}
 \item{transformers}{A list of transformer functions that operate on flat
 parse tables.}
 }
-\value{
-A logical value that indicates whether or not any file was changed is
-returned invisibly. If files were changed, the user is informed to
-carefully inspect the changes via a message sent to the console.
-}
 \description{
 \code{transform_files} applies transformations to file contents and writes back
 the result.
 }
+\section{Value}{
+
+Invisibly returns a data frame that indicates for each file considered for
+styling whether or not it was actually changed.
+}
+
