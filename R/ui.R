@@ -142,16 +142,6 @@ style_file <- function(path,
                         ...,
                         style = tidyverse_style,
                         transformers = style(...)) {
-  changed <- map_lgl(path,
-    style_file_one, ..., style = style, transformers = transformers
-  )
-  invisible(tibble(file = path, changed = changed))
-}
-
-style_file_one <- function(path,
-                           ...,
-                           style = tidyverse_style,
-                           transformers = style(...)) {
   withr::with_dir(
     dirname(path),
     transform_files(basename(path), transformers)

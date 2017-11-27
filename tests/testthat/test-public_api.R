@@ -3,11 +3,17 @@ context("public API")
 
 
 test_that("styler can style package", {
-  capture_output(expect_false(all(style_pkg(testthat_file("public-api", "xyzpackage")))))
+  capture_output(expect_false({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"))
+    any(styled$changed)
+    }))
 })
 
 test_that("styler can style directory", {
-  capture_output(expect_false(all(style_dir(testthat_file("public-api", "xyzdir")))))
+  capture_output(expect_false({
+    styled <- style_dir(testthat_file("public-api", "xyzdir"))
+    any(styled$changed)
+    }))
 })
 
 test_that("styler can style files", {

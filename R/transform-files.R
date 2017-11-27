@@ -20,7 +20,7 @@ transform_files <- function(files, transformers) {
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
-  invisible(changed)
+  invisible(data_frame(file = files, changed = changed))
 }
 
 #' Transform a file and output a customized message
@@ -208,8 +208,8 @@ verify_roundtrip <- function(old_text, new_text) {
 #' @param old_text The initial expression in its character representation.
 #' @param new_text The styled expression in its character representation.
 expressions_are_identical <- function(old_text, new_text) {
-    identical(
-      parse(text = old_text, keep.source = FALSE),
-      parse(text = new_text, keep.source = FALSE)
-    )
+  identical(
+    parse(text = old_text, keep.source = FALSE),
+    parse(text = new_text, keep.source = FALSE)
+  )
 }
