@@ -80,8 +80,8 @@ test_that("messages (via cat()) of style_file are correct", {
   temp_path <- copy_to_tempdir(testthat_file(
     "public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"
   ))
-  expect_equal_to_reference(capture_output(
-    enc::to_utf8(style_file(temp_path, scope = "tokens"))),
+  expect_equal_to_reference(enc::to_utf8(capture_output(
+    style_file(temp_path, scope = "tokens"))),
     testthat_file("public-api/xyzdir-dirty/dirty-reference-with-scope-tokens")
   )
   unlink(dirname(temp_path))
