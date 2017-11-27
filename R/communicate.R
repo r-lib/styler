@@ -6,7 +6,7 @@
 #'   been changed.
 #' @inheritParams can_verify_roundtrip
 communicate_warning <- function(changed, transformers) {
-  if (any(changed, na.rm = TRUE) & !can_verify_roundtrip(transformers)) {
+  if (any(changed, na.rm = TRUE) && !can_verify_roundtrip(transformers)) {
     cat("Please review the changes carefully!")
   }
 }

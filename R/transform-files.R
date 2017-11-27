@@ -11,7 +11,7 @@
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
   max_char <- min(max(nchar(files), 0), 80)
-  if (length(files) < 1) {
+  if (length(files) > 0L) {
     cat("Styling ", length(files), " files:\n")
   }
 
