@@ -75,8 +75,11 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
 context("messages are correct")
 
 test_that("messages (via cat()) of style_file are correct", {
+  skip_on_appveyor()
   # Message if scope > line_breaks and code changes
-  temp_path <- copy_to_tempdir(testthat_file("public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"))
+  temp_path <- copy_to_tempdir(testthat_file(
+    "public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"
+  ))
   expect_equal_to_reference(capture_output(
     enc::to_utf8(style_file(temp_path, scope = "tokens"))),
     testthat_file("public-api/xyzdir-dirty/dirty-reference-with-scope-tokens")
