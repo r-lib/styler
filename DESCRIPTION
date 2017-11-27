@@ -1,6 +1,6 @@
 Package: styler
 Title: Non-invasive Pretty Printing of R code
-Version: 0.0-9
+Version: 0.0-10
 Authors@R: c(person("Kirill", "Müller", role = c("aut"), email = "krlmlr+r@mailbox.org"),
   person("Lorenz", "Walthert", role = c("cre", "aut"), email = "lorenz.walthert@icloud.com"))
 Description:
@@ -27,7 +27,7 @@ Suggests:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Date: 2017-10-23
+Date: 2017-11-27
 BugReports: https://github.com/r-lib/styler/issues
 URL: https://github.com/r-lib/styler, https://r-lib.github.io/styler/
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi::api_roclet"))

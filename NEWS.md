@@ -1,3 +1,27 @@
+## styler 0.0-10 (2017-11-27)
+
+- Adapt documentation (#290).
+- Add roundtrip (#287).
+- Fix AppVeyor builds.
+- Fix token insertion / comment interaction (#279).
+- Clarify labelling strategy (#285).
+- Fixing and extending Rstudioaddins (#283).
+- Fix eq assign parsing (#276).
+- style_files -> vectorized style_file (#273).
+- Refactoring (#270).
+- Fix CI (#275).
+- Fix covr (#274).
+- Renaming files (#271).
+- Handle styling of an unsaved active file (#243).
+- Test R 3.1 and R 3.2 (#249).
+- Allow empty {} without line break (#261).
+- Wrap expr in expr before enclosing with curly braces (#263).
+- Avoid checking for hard-coded dot (#262).
+- Account for dependency renaming (utf8 changed to enc) (#264).
+- Indention of function declaration and closing braces (#260).
+- Only remove line break before closing with strict option (#252).
+
+
 ## styler 0.0-9 (2017-10-23)
 
 - Hotfix: utf8 should not be verbose (#245).
