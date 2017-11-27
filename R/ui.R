@@ -39,7 +39,8 @@ style_pkg <- function(pkg = ".",
                       transformers = style(...),
                       exclude_files = "R/RcppExports.R") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  withr::with_dir(pkg_root, prettify_local(transformers, exclude_files))
+  changed <- withr::with_dir(pkg_root, prettify_local(transformers, exclude_files))
+  invisible(changed)
 }
 
 prettify_local <- function(transformers, exclude_files) {
@@ -104,9 +105,10 @@ style_dir <- function(path = ".",
                       transformers = style(...),
                       recursive = TRUE,
                       exclude_files = NULL) {
-  withr::with_dir(
+  changed <- withr::with_dir(
     path, prettify_any(transformers, recursive, exclude_files)
   )
+  invisible(changed)
 }
 
 #' Prettify R code in current working directory
@@ -145,8 +147,9 @@ style_file <- function(path,
                         ...,
                         style = tidyverse_style,
                         transformers = style(...)) {
-  withr::with_dir(
+  changed <- withr::with_dir(
     dirname(path),
     transform_files(basename(path), transformers)
   )
+  invisible(changed)
 }
