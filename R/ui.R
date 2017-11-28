@@ -40,25 +40,47 @@ style_pkg <- function(pkg = ".",
                       ...,
                       style = tidyverse_style,
                       transformers = style(...),
-                      filetype = c("r"),
+                      filetype = "R",
                       exclude_files = "R/RcppExports.R") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  changed <- withr::with_dir(pkg_root, prettify_local(transformers, exclude_files))
+  changed <- withr::with_dir(pkg_root,
+    prettify_local(transformers, filetype, exclude_files)
+  )
   invisible(changed)
 }
 
-prettify_local <- function(transformers, exclude_files) {
-  r_files <- dir(
-    path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE
-  )
+prettify_local <- function(transformers, filetype, exclude_files) {
 
-  r_files <- grep("/RcppExports[.]R$", r_files, invert = TRUE, value = TRUE)
-  test_files <- dir(
-    path = "tests/testthat", pattern = "[.][rR]$",
-    recursive = TRUE, full.names = TRUE
-  )
+  filetype <- set_and_assert_arg_filetype(filetype)
+  r_files <- test_files <- data_raw_files <- vignette_files <- readme <- NULL
 
-  files <- setdiff(c(r_files, test_files), exclude_files)
+  if ("\\.r" %in% filetype) {
+    r_files <- dir(
+      path = "R", pattern = "\\.r$", ignore.case = TRUE,
+      recursive = TRUE, full.names = TRUE
+    )
+    test_files <- dir(
+      path = "tests", pattern = "\\.r$", ignore.case = TRUE,
+      recursive = TRUE, full.names = TRUE
+    )
+    data_raw_files <- dir(
+      path = "data-raw", pattern = "\\.r$", ignore.case = TRUE,
+      recursive = TRUE, full.names = TRUE
+    )
+  }
+
+  if ("\\.rmd" %in% filetype) {
+    vignette_files <- dir(
+      path = "vignettes", pattern = "\\.rmd$", ignore.case = TRUE,
+      recursive = TRUE, full.names = TRUE
+    )
+    readme <- dir(pattern = "readme\\.rmd", ignore.case = TRUE)
+  }
+
+  files <- setdiff(
+    c(r_files, test_files, data_raw_files, vignette_files, readme),
+    exclude_files
+  )
 
   transform_files(files, transformers)
 }
