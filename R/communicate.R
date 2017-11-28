@@ -1,4 +1,4 @@
-#' Communiate a warning if necessary
+#' Communicate a warning if necessary
 #'
 #' If roundtrip verification was not possible, issue a warning to review the
 #' changes carefully.

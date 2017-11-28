@@ -2,7 +2,7 @@
 % Please edit documentation in R/communicate.R
 \name{communicate_warning}
 \alias{communicate_warning}
-\title{Communiate a warning if necessary}
+\title{Communicate a warning if necessary}
 \usage{
 communicate_warning(changed, transformers)
 }

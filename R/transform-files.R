@@ -167,7 +167,7 @@ apply_transformers <- function(pd_nested, transformers) {
 
 
 
-#' Check whether a roundtip verification can be carried out
+#' Check whether a roundtrip verification can be carried out
 #'
 #' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
 #' we can compare the expression before and after styling and return an error if

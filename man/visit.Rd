@@ -17,9 +17,9 @@ post_visit(pd_nested, funs)
 }
 \description{
 Apply a list of functions to each level in a nested parse table.
-\code{pre_visit()} applies \code{funs} before it preceeds to the children,
+\code{pre_visit()} applies \code{funs} before it proceeds to the children,
 (that is, starts from the outermost level of nesting progressing
-to the innermost level), \code{post_visit()} preceeds to its children
+to the innermost level), \code{post_visit()} proceeds to its children
 before applying the functions (meaning it first applies the functions
 to the innermost level of nesting first and then going outwards).
 }

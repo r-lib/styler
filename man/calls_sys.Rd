@@ -13,5 +13,5 @@ calls_sys(sys_call, ...)
 }
 \description{
 Wraps a system command into \code{\link[=shell]{shell()}} or \code{\link[=system]{system()}}, depending on the
-os.
+operating system.
 }

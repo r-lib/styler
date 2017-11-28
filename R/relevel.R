@@ -130,7 +130,7 @@ relocate_eq_assign <- function(pd) {
 #' within a *nest* (nested parse table at one level of nesting).
 #' Note that one assignment expression (such as "a = b = c") can include
 #' multiple assignment operators, an assignment involves just one assignment
-#' oparator.
+#' operator.
 #' For the relocation of assignment expressions that contain `EQ_ASSIGN` within
 #' a *nest*, we need to first find the expressions that contain `=` and then
 #' split the *nest* into parse tables each containing one such assignment
@@ -138,7 +138,7 @@ relocate_eq_assign <- function(pd) {
 #' We can't do all of them together because:
 #'
 #'  * An assignment can contain more than just three tokens, e.g. (a <- b <- c).
-#'  * Two assignemnts can be in the same nest although they don't belong to the
+#'  * Two assignments can be in the same nest although they don't belong to the
 #'    same assignment (if-else statement).
 #'
 #' Please refer to the section 'Examples' in [relocate_eq_assign()] for details.
@@ -160,7 +160,7 @@ relocate_eq_assign_nest <- function(pd) {
 #'
 #' Two assignment tokens `EQ_ASSIGN` belong to the same block if they are not
 #' separated by more than one token. Token between `EQ_ASSIGN` tokens belong
-#' to the `EQ_ASSIGN` token occuring before them, except the token right before
+#' to the `EQ_ASSIGN` token occurring before them, except the token right before
 #' `EQ_ASSING` already belongs to the `EQ_ASSING` after it.
 #' @param pd A parse table.
 find_block_id <- function(pd) {
