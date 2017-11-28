@@ -5,7 +5,7 @@
 \alias{is_curly_expr}
 \alias{is_function_call}
 \alias{is_function_dec}
-\title{Check whether a parse table corresponds to a a certain expression}
+\title{Check whether a parse table corresponds to a certain expression}
 \usage{
 is_curly_expr(pd)
 
@@ -17,7 +17,7 @@ is_function_dec(pd)
 \item{pd}{A parse table.}
 }
 \description{
-Check whether a parse table corresponds to a a certain expression
+Check whether a parse table corresponds to a certain expression
 }
 \section{Functions}{
 \itemize{
