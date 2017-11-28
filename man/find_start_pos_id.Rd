@@ -24,6 +24,6 @@ nests.}
 }
 \description{
 Looks at the current nest as well as into its children (if necessary) to make
-sure the right id is returned. Otherise, ordering of tokens might not be
+sure the right id is returned. Otherwise, ordering of tokens might not be
 preserved.
 }

@@ -229,7 +229,7 @@ stop_insufficient_r_version <- function() {
 
 #' Generate a comprehensive collection test cases for comment / insertion
 #' interaction
-#' Test consist of if / if-else / if-else-if-else caes, paired with various
+#' Test consist of if / if-else / if-else-if-else cases, paired with various
 #' line-break and comment configurations. Used for internal testing.
 #' @return
 #' The function is called for its side effects, i.e. to write the

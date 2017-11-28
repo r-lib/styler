@@ -74,7 +74,7 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
 #' Find legit starting value for a new positional id
 #'
 #' Looks at the current nest as well as into its children (if necessary) to make
-#' sure the right id is returned. Otherise, ordering of tokens might not be
+#' sure the right id is returned. Otherwise, ordering of tokens might not be
 #' preserved.
 #' @param direction Derived from `after`. `1` if `after = TRUE`, `-1` otherwise.
 #' @param candidates The `pos_ids` of the candidates that origin from other

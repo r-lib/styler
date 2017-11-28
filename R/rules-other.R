@@ -24,7 +24,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' Wrap an if-else statement in curly braces if it is not already wrapped in
 #' a such.
 #' @param pd A parse table.
-#' @param indent_by The amont of spaces used to indent an expression in curly
+#' @param indent_by The amount of spaces used to indent an expression in curly
 #'   braces. Used for unindention.
 wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
   if (is_cond_expr(pd)) {

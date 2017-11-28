@@ -37,7 +37,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
 
 #' Add column `pos_id` and `short`
 #'
-#' Addds column `pos_id` and `short` to a flat parse table.
+#' Adds column `pos_id` and `short` to a flat parse table.
 #' @param pd A flat parse table
 add_id_and_short <- function(pd) {
   pd$pos_id <- seq2(1L, nrow(pd))

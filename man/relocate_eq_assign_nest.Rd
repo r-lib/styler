@@ -14,7 +14,7 @@ Implements the relocation of an \code{EQ_ASSIGN} and associated tokens
 within a \emph{nest} (nested parse table at one level of nesting).
 Note that one assignment expression (such as "a = b = c") can include
 multiple assignment operators, an assignment involves just one assignment
-oparator.
+operator.
 For the relocation of assignment expressions that contain \code{EQ_ASSIGN} within
 a \emph{nest}, we need to first find the expressions that contain \code{=} and then
 split the \emph{nest} into parse tables each containing one such assignment
@@ -24,7 +24,7 @@ We can't do all of them together because:
 \details{
 \itemize{
 \item An assignment can contain more than just three tokens, e.g. (a <- b <- c).
-\item Two assignemnts can be in the same nest although they don't belong to the
+\item Two assignments can be in the same nest although they don't belong to the
 same assignment (if-else statement).
 }
 
