@@ -65,7 +65,7 @@ assert_tokens <- function(tokens) {
     stop(
       "Token(s) ", paste0(invalid_tokens, collapse = ", "), " are invalid. ",
       "You can lookup all valid tokens and their text ",
-      "with styler:::looup_tokens(). Make sure you supply the values of ",
+      "with styler:::lookup_tokens(). Make sure you supply the values of ",
       "the column 'token', not 'text'."
     )
   }

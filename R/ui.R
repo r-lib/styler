@@ -19,8 +19,8 @@ NULL
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
 #' @param filetype Vector of file extensions indicating which filetypes should
-#'   be styled. Case is ignored, and the `.` is optional, e.g. c(".R", ".Rmd")
-#'   or c("r", "rmd").
+#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R", ".Rmd")`
+#'   or `c("r", "rmd")`.
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
 #' @section Warning:
@@ -44,44 +44,32 @@ style_pkg <- function(pkg = ".",
                       exclude_files = "R/RcppExports.R") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   changed <- withr::with_dir(pkg_root,
-    prettify_local(transformers, filetype, exclude_files)
+    prettify_pkg(transformers, filetype, exclude_files)
   )
   invisible(changed)
 }
 
-prettify_local <- function(transformers, filetype, exclude_files) {
+prettify_pkg <- function(transformers, filetype, exclude_files) {
 
   filetype <- set_and_assert_arg_filetype(filetype)
-  r_files <- test_files <- data_raw_files <- vignette_files <- readme <- NULL
+  r_files <- vignette_files <- readme <- NULL
 
   if ("\\.r" %in% filetype) {
     r_files <- dir(
-      path = "R", pattern = "\\.r$", ignore.case = TRUE,
-      recursive = TRUE, full.names = TRUE
-    )
-    test_files <- dir(
-      path = "tests", pattern = "\\.r$", ignore.case = TRUE,
-      recursive = TRUE, full.names = TRUE
-    )
-    data_raw_files <- dir(
-      path = "data-raw", pattern = "\\.r$", ignore.case = TRUE,
-      recursive = TRUE, full.names = TRUE
+      path = c("R", "tests", "data-raw"), pattern = "\\.r$",
+      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
     )
   }
 
   if ("\\.rmd" %in% filetype) {
     vignette_files <- dir(
-      path = "vignettes", pattern = "\\.rmd$", ignore.case = TRUE,
-      recursive = TRUE, full.names = TRUE
+      path = "vignettes", pattern = "\\.rmd$",
+      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
     )
-    readme <- dir(pattern = "readme\\.rmd", ignore.case = TRUE)
+    readme <- dir(pattern = "^readme\\.rmd$", ignore.case = TRUE)
   }
 
-  files <- setdiff(
-    c(r_files, test_files, data_raw_files, vignette_files, readme),
-    exclude_files
-  )
-
+  files <- setdiff(c(r_files, vignette_files, readme), exclude_files)
   transform_files(files, transformers)
 }
 
