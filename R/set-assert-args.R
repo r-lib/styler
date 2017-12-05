@@ -8,7 +8,7 @@ set_arg_write_tree <- function(write_tree) {
   sufficient_version <- getRversion() >= 3.2
   if (is.na(write_tree)) {
     write_tree <- ifelse(sufficient_version, TRUE, FALSE)
-  } else if (!sufficient_version & write_tree) {
+  } else if (!sufficient_version && write_tree) {
     stop_insufficient_r_version()
   }
   write_tree
