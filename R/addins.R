@@ -50,7 +50,12 @@ try_transform_as_r_file <- function(context, transformer) {
   tryCatch(
     transformer(context$contents),
     error = function(e) stop(
-      "Cannot style unsaved files other than .R files. Please save the file.", call. = FALSE
+      paste(
+        "Styling of unsaved files is only supported for R files with valid code.",
+        "Please save the file (as .R or .Rmd) and make sure that the R code in it",
+        "can be parsed. Then, try to style again.",
+        "The error was \n", e
+      ), call. = FALSE
   ))
 }
 
