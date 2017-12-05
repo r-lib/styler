@@ -9,7 +9,7 @@ wrap_if_else_multi_line_in_curly(pd, indent_by = 2)
 \arguments{
 \item{pd}{A parse table.}
 
-\item{indent_by}{The amont of spaces used to indent an expression in curly
+\item{indent_by}{The amount of spaces used to indent an expression in curly
 braces. Used for unindention.}
 }
 \description{

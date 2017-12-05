@@ -28,9 +28,10 @@ test_collection <- function(test, sub_test = NULL,
                             ...) {
   path <- rprojroot::find_testthat_root_file(test)
 
-  pattern <- if_else(!is.null(sub_test),
-                     paste0("^", sub_test, ".*", "in\\.R$"),
-                     "in\\.R$")
+  pattern <- paste0(
+    if (!is.null(sub_test)) paste0("^", sub_test, ".*"),
+    "in\\.R(?:|md)$"
+  )
 
   in_names <- list.files(file.path(path),
                           pattern = pattern,
@@ -62,7 +63,7 @@ test_collection <- function(test, sub_test = NULL,
 #' styler:::construct_out(c("path/to/file/first-in.R",
 #'  "path/to/file/first-extended-in.R"))
 construct_out <- function(in_paths) {
-  gsub("\\-.*$", "\\-out\\.R", in_paths)
+  gsub("\\-.*([.]R(?:|md))$", "\\-out\\1", in_paths)
 }
 
 #' Construct paths of a tree object given the paths of *-in.R files
@@ -113,7 +114,6 @@ transform_and_check <- function(in_item, out_item,
   )
 
   if (transformed) {
-    target <- enc::read_lines_enc(out_item)
     warning(in_name, " was different from ", out_name,
             immediate. = TRUE, call. = FALSE)
   } else {
@@ -179,6 +179,7 @@ style_op <- function(text) {
 
 }
 
+
 #' Create the path to a test that file
 #' @param ... Arguments passed to [file.path()] to construct the path after
 #'   ".../tests/testthat/"
@@ -186,24 +187,20 @@ testthat_file <- function(...) {
   file.path(rprojroot::find_testthat_root_file(), ...)
 }
 
-#' Set arguments
-#' @param write_tree Whether or not to write tree.
-#' @name set_args
-NULL
 
-#' @describeIn set_args Sets the argument `write_tree` in
-#'   [test_collection()] to be `TRUE` for R versions higher or equal to 3.2, and
-#'   `FALSE` otherwise since the second-level dependency `DiagrammeR` from
-#'   `data.table` is not available for R < 3.2.
-set_arg_write_tree <- function(write_tree) {
-  sufficient_version <- getRversion() >= 3.2
-  if (is.na(write_tree)) {
-    write_tree <- ifelse(sufficient_version, TRUE, FALSE)
-  } else if (!sufficient_version & write_tree) {
-    stop_insufficient_r_version()
-  }
-  write_tree
+#' Copy a file to a temporary directory
+#'
+#' Takes the path to a file as input and returns the path where the temporary
+#' file is stored. Don't forget to unlink once you are done.
+#' @param path_perm The path of the file to copy.
+copy_to_tempdir <- function(path_perm = testthat_file()) {
+  dir <- tempfile("styler")
+  dir.create(dir)
+  file.copy(path_perm, dir)
+  base <- basename(path_perm)
+  file.path(dir, base)
 }
+
 
 stop_insufficient_r_version <- function() {
   stop(paste0(
@@ -214,7 +211,7 @@ stop_insufficient_r_version <- function() {
 
 #' Generate a comprehensive collection test cases for comment / insertion
 #' interaction
-#' Test consist of if / if-else / if-else-if-else caes, paired with various
+#' Test consist of if / if-else / if-else-if-else cases, paired with various
 #' line-break and comment configurations. Used for internal testing.
 #' @return
 #' The function is called for its side effects, i.e. to write the
@@ -248,3 +245,4 @@ generate_test_samples <- function() {
     file = "tests/testthat/insertion_comment_interaction/if_else_if_else-in.R"
   )
 }
+

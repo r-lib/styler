@@ -5,7 +5,8 @@
 \title{Prettify R source code}
 \usage{
 style_pkg(pkg = ".", ..., style = tidyverse_style,
-  transformers = style(...), exclude_files = "R/RcppExports.R")
+  transformers = style(...), filetype = "R",
+  exclude_files = "R/RcppExports.R")
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package.}
@@ -21,6 +22,10 @@ further except to construct the argument \code{transformers}. See
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
+\item{filetype}{Vector of file extensions indicating which filetypes should
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}
+or \code{c("r", "rmd")}.}
+
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
 }
@@ -34,6 +39,12 @@ Carefully examine the results after running this function!
 This function overwrites files (if styling results in a change of the
 code to be formatted). It is strongly suggested to only style files
 that are under version control or to create a backup copy.
+}
+
+\section{Value}{
+
+Invisibly returns a data frame that indicates for each file considered for
+styling whether or not it was actually changed.
 }
 
 \examples{

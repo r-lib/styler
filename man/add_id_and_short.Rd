@@ -10,5 +10,5 @@ add_id_and_short(pd)
 \item{pd}{A flat parse table}
 }
 \description{
-Addds column \code{pos_id} and \code{short} to a flat parse table.
+Adds column \code{pos_id} and \code{short} to a flat parse table.
 }

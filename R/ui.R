@@ -18,12 +18,16 @@ NULL
 #' @param transformers A set of transformer functions. This argument is most
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
+#' @param filetype Vector of file extensions indicating which filetypes should
+#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R", ".Rmd")`
+#'   or `c("r", "rmd")`.
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
 #' @section Warning:
 #' This function overwrites files (if styling results in a change of the
 #' code to be formatted). It is strongly suggested to only style files
 #' that are under version control or to create a backup copy.
+#' @inheritSection transform_files Value
 #' @family stylers
 #' @examples
 #' \dontrun{
@@ -36,24 +40,36 @@ style_pkg <- function(pkg = ".",
                       ...,
                       style = tidyverse_style,
                       transformers = style(...),
+                      filetype = "R",
                       exclude_files = "R/RcppExports.R") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  withr::with_dir(pkg_root, prettify_local(transformers, exclude_files))
+  changed <- withr::with_dir(pkg_root,
+    prettify_pkg(transformers, filetype, exclude_files)
+  )
+  invisible(changed)
 }
 
-prettify_local <- function(transformers, exclude_files) {
-  r_files <- dir(
-    path = "R", pattern = "[.][rR]$", recursive = TRUE, full.names = TRUE
-  )
+prettify_pkg <- function(transformers, filetype, exclude_files) {
 
-  r_files <- grep("/RcppExports[.]R$", r_files, invert = TRUE, value = TRUE)
-  test_files <- dir(
-    path = "tests/testthat", pattern = "[.][rR]$",
-    recursive = TRUE, full.names = TRUE
-  )
+  filetype <- set_and_assert_arg_filetype(filetype)
+  r_files <- vignette_files <- readme <- NULL
 
-  files <- setdiff(c(r_files, test_files), exclude_files)
+  if ("\\.r" %in% filetype) {
+    r_files <- dir(
+      path = c("R", "tests", "data-raw"), pattern = "\\.r$",
+      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+    )
+  }
 
+  if ("\\.rmd" %in% filetype) {
+    vignette_files <- dir(
+      path = "vignettes", pattern = "\\.rmd$",
+      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+    )
+    readme <- dir(pattern = "^readme\\.rmd$", ignore.case = TRUE)
+  }
+
+  files <- setdiff(c(r_files, vignette_files, readme), exclude_files)
   transform_files(files, transformers)
 }
 
@@ -93,6 +109,7 @@ style_text <- function(text,
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
 #' @inheritParams style_pkg
+#' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @family stylers
 #' @export
@@ -100,11 +117,13 @@ style_dir <- function(path = ".",
                       ...,
                       style = tidyverse_style,
                       transformers = style(...),
+                      filetype = "R",
                       recursive = TRUE,
                       exclude_files = NULL) {
-  withr::with_dir(
-    path, prettify_any(transformers, recursive, exclude_files)
+  changed <- withr::with_dir(
+    path, prettify_any(transformers, filetype, recursive, exclude_files)
   )
+  invisible(changed)
 }
 
 #' Prettify R code in current working directory
@@ -113,12 +132,12 @@ style_dir <- function(path = ".",
 #' @inheritParams style_pkg
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   should be styled as well.
-prettify_any <- function(transformers, recursive, exclude_files) {
+prettify_any <- function(transformers, filetype, recursive, exclude_files) {
   files <- dir(
-    path = ".", pattern = "[.][rR]$", recursive = recursive, full.names = TRUE
+    path = ".", pattern = map_filetype_to_pattern(filetype),
+    ignore.case = TRUE, recursive = recursive, full.names = TRUE
   )
   transform_files(setdiff(files, exclude_files), transformers)
-
 }
 
 #' Style `.R` and/or `.Rmd` files
@@ -127,6 +146,7 @@ prettify_any <- function(transformers, recursive, exclude_files) {
 #'   Carefully examine the results after running this function!
 #' @param path A character vector with paths to files to style.
 #' @inheritParams style_pkg
+#' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @examples
 #' # the following is identical but the former is more convenient:
@@ -142,15 +162,9 @@ style_file <- function(path,
                         ...,
                         style = tidyverse_style,
                         transformers = style(...)) {
-  map_lgl(path, style_file_one, ..., style = style, transformers = transformers)
-}
-
-style_file_one <- function(path,
-                           ...,
-                           style = tidyverse_style,
-                           transformers = style(...)) {
-  withr::with_dir(
+  changed <- withr::with_dir(
     dirname(path),
     transform_files(basename(path), transformers)
   )
+  invisible(changed)
 }

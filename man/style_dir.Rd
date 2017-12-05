@@ -5,7 +5,8 @@
 \title{Prettify arbitrary R code}
 \usage{
 style_dir(path = ".", ..., style = tidyverse_style,
-  transformers = style(...), recursive = TRUE, exclude_files = NULL)
+  transformers = style(...), filetype = "R", recursive = TRUE,
+  exclude_files = NULL)
 }
 \arguments{
 \item{path}{Path to a directory with files to transform.}
@@ -21,6 +22,10 @@ further except to construct the argument \code{transformers}. See
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
+\item{filetype}{Vector of file extensions indicating which filetypes should
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}
+or \code{c("r", "rmd")}.}
+
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 of \code{path} should be styled as well.}
 
@@ -31,6 +36,12 @@ excluded from styling.}
 Performs various substitutions in all \code{.R} files in a directory.
 Carefully examine the results after running this function!
 }
+\section{Value}{
+
+Invisibly returns a data frame that indicates for each file considered for
+styling whether or not it was actually changed.
+}
+
 \section{Warning}{
 
 This function overwrites files (if styling results in a change of the

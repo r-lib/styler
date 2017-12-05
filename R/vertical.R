@@ -1,6 +1,6 @@
 #' Construct an object of class vertical
 #'
-#' Sole puropse of the class vertical is to have a print method that
+#' Sole purpose of the class vertical is to have a print method that
 #' aligns the output vertically.
 #' @param x A character vector or an object of class "vertical".
 construct_vertical <- function(x) {

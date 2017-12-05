@@ -154,15 +154,3 @@ set_regex_indention <- function(flattened_pd,
   bind_rows(to_check, not_to_check) %>%
     arrange(pos_id)
 }
-
-#' Return regex patterns for re-indention
-#'
-#' @name regex_for_reindention
-NULL
-
-#' @export
-#' @describeIn regex_for_reindention Returns `NULL`, i.e. no pattern will
-#'   match against this.
-regex_none <- function() {
-  NULL
-}
