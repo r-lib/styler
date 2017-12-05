@@ -13,7 +13,7 @@ test_that("do not force regex token-dependent indention without pattern", {
   expect_warning(test_collection(
     "unindention_regex", "regex_force_no",
     transformer = style_text,
-    reindention = specify_reindention(regex_none())), NA)
+    reindention = specify_reindention(NULL)), NA)
 })
 
 

@@ -194,7 +194,7 @@ create_style_guide <- function(initialize = initialize_attributes,
 #' defaults, so the user can specify deviations from them conveniently without
 #' the need of setting all arguments explicitly.
 #' @param regex_pattern Character vector with regular expression patterns that
-#'   are to be re-indented with spaces.
+#'   are to be re-indented with spaces, `NULL` if no reindention needed.
 #' @param indention The indention tokens should have if they match
 #'   `regex_pattern`.
 #' @param comments_only Whether the `regex_reindention_pattern` should only be
@@ -206,7 +206,7 @@ NULL
 #' @describeIn reindention Allows to specify which tokens are reindented and
 #'   how.
 #' @export
-specify_reindention <- function(regex_pattern = regex_none(),
+specify_reindention <- function(regex_pattern = NULL,
                                 indention = 0,
                                 comments_only = TRUE)
   lst(
@@ -221,7 +221,7 @@ specify_reindention <- function(regex_pattern = regex_none(),
 #' @export
 tidyverse_reindention <- function() {
   specify_reindention(
-    regex_pattern = regex_none(), indention = 0, comments_only = TRUE
+    regex_pattern = NULL, indention = 0, comments_only = TRUE
   )
 }
 

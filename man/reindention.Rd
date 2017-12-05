@@ -6,14 +6,14 @@
 \alias{tidyverse_reindention}
 \title{Specify what is re-indented how}
 \usage{
-specify_reindention(regex_pattern = regex_none(), indention = 0,
+specify_reindention(regex_pattern = NULL, indention = 0,
   comments_only = TRUE)
 
 tidyverse_reindention()
 }
 \arguments{
 \item{regex_pattern}{Character vector with regular expression patterns that
-are to be re-indented with spaces.}
+are to be re-indented with spaces, \code{NULL} if no reindention needed.}
 
 \item{indention}{The indention tokens should have if they match
 \code{regex_pattern}.}
