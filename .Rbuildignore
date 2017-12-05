@@ -13,3 +13,4 @@ CONTRIBUTING.md
 ^\.gitsum$
 ^gitsum$
 
+^cran-comments\.md$
