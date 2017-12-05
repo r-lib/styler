@@ -28,9 +28,10 @@ test_collection <- function(test, sub_test = NULL,
                             ...) {
   path <- rprojroot::find_testthat_root_file(test)
 
-  pattern <- if_else(!is.null(sub_test),
-                     paste0("^", sub_test, ".*", "in\\.R$"),
-                     "in\\.R$")
+  pattern <- paste0(
+    if (!is.null(sub_test)) paste0("^", sub_test, ".*"),
+    "in\\.R(?:|md)$"
+  )
 
   in_names <- list.files(file.path(path),
                           pattern = pattern,
@@ -62,7 +63,7 @@ test_collection <- function(test, sub_test = NULL,
 #' styler:::construct_out(c("path/to/file/first-in.R",
 #'  "path/to/file/first-extended-in.R"))
 construct_out <- function(in_paths) {
-  gsub("\\-.*$", "\\-out\\.R", in_paths)
+  gsub("\\-.*([.]R(?:|md))$", "\\-out\\1", in_paths)
 }
 
 #' Construct paths of a tree object given the paths of *-in.R files
@@ -113,7 +114,6 @@ transform_and_check <- function(in_item, out_item,
   )
 
   if (transformed) {
-    target <- enc::read_lines_enc(out_item)
     warning(in_name, " was different from ", out_name,
             immediate. = TRUE, call. = FALSE)
   } else {

@@ -1,0 +1,14 @@
+# Header
+
+Some text.
+
+```{r}
+1 + 1
+```
+
+More text.
+
+```{r another, results="asis"}
+# another chunk
+fun(a = 1)
+```
