@@ -1,4 +1,4 @@
-#' Check whether a parse table corresponds to a a certain expression
+#' Check whether a parse table corresponds to a certain expression
 #'
 #' @param pd A parse table.
 #' @name pd_is
@@ -39,7 +39,7 @@ contains_else_expr <- function(pd) {
 #' Checks whether an else expression in a nest needs braces. Note that for
 #' if-else-if expressions, there is no need to add braces since the if in
 #' else-if will be visited separately with the visitor. This applies to all
-#' conditional statmements with more than one alternative.
+#' conditional statements with more than one alternative.
 #' @param pd A parse table
 contains_else_expr_that_needs_braces <- function(pd) {
   else_idx <- which(pd$token == "ELSE")

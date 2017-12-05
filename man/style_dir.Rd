@@ -5,7 +5,8 @@
 \title{Prettify arbitrary R code}
 \usage{
 style_dir(path = ".", ..., style = tidyverse_style,
-  transformers = style(...), recursive = TRUE, exclude_files = NULL)
+  transformers = style(...), filetype = "R", recursive = TRUE,
+  exclude_files = NULL)
 }
 \arguments{
 \item{path}{Path to a directory with files to transform.}
@@ -20,6 +21,10 @@ further except to construct the argument \code{transformers}. See
 \item{transformers}{A set of transformer functions. This argument is most
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
+
+\item{filetype}{Vector of file extensions indicating which filetypes should
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}
+or \code{c("r", "rmd")}.}
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 of \code{path} should be styled as well.}

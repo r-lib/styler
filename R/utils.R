@@ -40,16 +40,6 @@ calls_sys <- function(sys_call, ...) {
   }
 }
 
-#' Assert text to be of positive length and replace it with the empty
-#' string otherwise.
-#' @param text The input to style.
-assert_text <- function(text) {
-  if (length(text) < 1) {
-    text <- ""
-  }
-  text
-}
-
 is_plain_r_file <- function(path) {
   grepl("\\.R$", path, ignore.case = TRUE)
 }
@@ -84,4 +74,13 @@ extend_if_comment <- function(pd, pos) {
   } else {
     pos
   }
+}
+
+#' Map the file type to a corresponding regular expression
+#'
+#' @param filetype The file type to map to a regex.
+#' @examples
+#' styler:::map_filetype_to_pattern(c(".rMd", "R"))
+map_filetype_to_pattern <- function(filetype) {
+  paste0("(", paste(set_and_assert_arg_filetype(filetype), collapse = "|"), ")$")
 }

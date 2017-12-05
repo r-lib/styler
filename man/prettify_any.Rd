@@ -4,12 +4,16 @@
 \alias{prettify_any}
 \title{Prettify R code in current working directory}
 \usage{
-prettify_any(transformers, recursive, exclude_files)
+prettify_any(transformers, filetype, recursive, exclude_files)
 }
 \arguments{
 \item{transformers}{A set of transformer functions. This argument is most
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
+
+\item{filetype}{Vector of file extensions indicating which filetypes should
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}
+or \code{c("r", "rmd")}.}
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 should be styled as well.}
