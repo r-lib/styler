@@ -1,3 +1,13 @@
+## styler 0.0-11 (2017-12-05)
+
+- Remove `regex_none()`, document `NULL` default.
+- `style_dir()` and `style_pkg()` now also handle `.Rmd` files (#292, @jonmcalder).
+- Add test for styling `.Rmd` files.
+- Better error message for styling new files via the RStudio addin (#295).
+- Spelling via devtools::spell_check() (#294).
+- Roundtrip and CLI (#289).
+
+
 ## styler 0.0-10 (2017-11-27)
 
 - Adapt documentation (#290).
