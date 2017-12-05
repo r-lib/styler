@@ -1,5 +1,5 @@
 Package: styler
-Title: Non-invasive Pretty Printing of R code
+Title: Non-Invasive Pretty Printing of R code
 Version: 1.0.0
 Authors@R: c(person("Kirill", "Müller", role = c("aut"), email = "krlmlr+r@mailbox.org"),
   person("Lorenz", "Walthert", role = c("cre", "aut"), email = "lorenz.walthert@icloud.com"))
