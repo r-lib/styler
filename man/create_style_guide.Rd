@@ -9,8 +9,8 @@ create_style_guide(initialize = initialize_attributes, line_break = NULL,
   use_raw_indention = FALSE, reindention = tidyverse_reindention())
 }
 \arguments{
-\item{initialize}{A function that initializes various variables on each
-level of nesting.}
+\item{initialize}{The bare name of a function that initializes various
+variables on each level of nesting.}
 
 \item{line_break}{A list of transformer functions that manipulate line_break
 information.}
@@ -34,4 +34,15 @@ speaking a named list of groups of transformer functions where each
 transformer function corresponds to one styling rule. The output of this
 function can be used as an argument for \code{style} in top level functions
 like \code{\link[=style_text]{style_text()}} and friends.
+}
+\examples{
+set_line_break_before_curly_opening <- function(pd_flat) {
+  op <- pd_flat$token \%in\% "'{'"
+  pd_flat$lag_newlines[op] <- 1L
+  pd_flat
+}
+set_line_break_before_curly_opening_style <- function() {
+  create_style_guide(line_break = set_line_break_before_curly_opening)
+}
+style_text("a <- function(x) { x }", style = set_line_break_before_curly_opening_style)
 }

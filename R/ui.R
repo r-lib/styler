@@ -31,9 +31,12 @@ NULL
 #' @family stylers
 #' @examples
 #' \dontrun{
-#' # the following is identical but the former is more convenient:
+#'
 #' style_pkg(style = tidyverse_style, strict = TRUE)
-#' style_pkg(transformers = tidyverse_style(strict = TRUE))
+#' style_pkg(
+#'   scope = "line_breaks",
+#'   math_token_spacing = specify_math_token_spacing(zero = "'+'")
+#' )
 #' }
 #' @export
 style_pkg <- function(pkg = ".",
@@ -112,6 +115,10 @@ style_text <- function(text,
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @family stylers
+#' @examples
+#' \dontrun{
+#' style_dir(file_type = "r")
+#' }
 #' @export
 style_dir <- function(path = ".",
                       ...,

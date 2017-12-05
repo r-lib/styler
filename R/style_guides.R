@@ -46,6 +46,7 @@ NULL
 #' @family style_guides
 #' @examples
 #' style_text("call( 1)", style = tidyverse_style, scope = "spaces")
+#' style_text("call( 1)", transformers = tidyverse_style(strict = TRUE))
 #' style_text(c("ab <- 3", "a  <-3"), strict = FALSE) # keeps alignment of "<-"
 #' style_text(c("ab <- 3", "a  <-3"), strict = TRUE) # drops alignment of "<-"
 #' @importFrom purrr partial
@@ -153,8 +154,8 @@ tidyverse_style <- function(scope = "tokens",
 #' transformer function corresponds to one styling rule. The output of this
 #' function can be used as an argument for \code{style} in top level functions
 #' like [style_text()] and friends.
-#' @param initialize A function that initializes various variables on each
-#'   level of nesting.
+#' @param initialize The bare name of a function that initializes various
+#'   variables on each level of nesting.
 #' @param line_break A list of transformer functions that manipulate line_break
 #'   information.
 #' @param space A list of transformer functions that manipulate spacing
@@ -165,6 +166,16 @@ tidyverse_style <- function(scope = "tokens",
 #'   should be used.
 #' @param reindention A list of parameters for regex re-indention, most
 #'   conveniently constructed using [specify_reindention()].
+#' @examples
+#' set_line_break_before_curly_opening <- function(pd_flat) {
+#'   op <- pd_flat$token %in% "'{'"
+#'   pd_flat$lag_newlines[op] <- 1L
+#'   pd_flat
+#' }
+#' set_line_break_before_curly_opening_style <- function() {
+#'   create_style_guide(line_break = set_line_break_before_curly_opening)
+#' }
+#' style_text("a <- function(x) { x }", style = set_line_break_before_curly_opening_style)
 #' @export
 create_style_guide <- function(initialize = initialize_attributes,
                                line_break = NULL,
@@ -205,6 +216,10 @@ NULL
 
 #' @describeIn reindention Allows to specify which tokens are reindented and
 #'   how.
+#' @examples
+#' style_text("a <- xyz", reindention = specify_reindention(
+#'   regex_pattern = "xyz", indention = 4, comments_only = FALSE)
+#' )
 #' @export
 specify_reindention <- function(regex_pattern = NULL,
                                 indention = 0,
@@ -218,6 +233,8 @@ specify_reindention <- function(regex_pattern = NULL,
 #' @describeIn reindention Simple forwarder to
 #' `specify_reindention` with reindention according to the tidyverse style
 #' guide.
+#' @examples
+#' style_text("a <- xyz", reindention = tidyverse_reindention())
 #' @export
 tidyverse_reindention <- function() {
   specify_reindention(
@@ -281,6 +298,12 @@ specify_math_token_spacing <-
 #' @describeIn math_token_spacing Simple forwarder to
 #' `specify_math_token_spacing` with spacing around math tokens according to the
 #' tidyverse style guide.
+#' @examples
+#' style_text(
+#'   "1+1   -3",
+#'   math_token_spacing = tidyverse_math_token_spacing(),
+#'   strict = TRUE
+#' )
 #' @export
 tidyverse_math_token_spacing <- function() {
   specify_math_token_spacing(one = c("'+'", "'-'", "'*'", "'/'", "'^'"))

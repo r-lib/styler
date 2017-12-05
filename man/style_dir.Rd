@@ -49,6 +49,11 @@ code to be formatted). It is strongly suggested to only style files
 that are under version control or to create a backup copy.
 }
 
+\examples{
+\dontrun{
+style_dir(file_type = "r")
+}
+}
 \seealso{
 Other stylers: \code{\link{style_file}},
   \code{\link{style_pkg}}, \code{\link{style_text}},
