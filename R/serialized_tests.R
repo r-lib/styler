@@ -144,7 +144,7 @@ NULL
 style_empty <- function(text) {
   transformers <- list(
     # transformer functions
-    initialize = initialize_attributes,
+    initialize = initialize_default_attributes,
     line_break = NULL,
     space      = NULL,
     token      = NULL,
@@ -163,7 +163,7 @@ style_op <- function(text) {
 
   transformers <- list(
     # transformer functions
-    initialize = initialize_attributes,
+    initialize = initialize_default_attributes,
     line_break = NULL,
     space      = partial(indent_op, indent_by = 2),
     token      = NULL,

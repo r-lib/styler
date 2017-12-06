@@ -136,7 +136,7 @@ tidyverse_style <- function(scope = "tokens",
 
   create_style_guide(
     # transformer functions
-    initialize        = initialize_attributes,
+    initialize        = initialize_default_attributes,
     line_break        = line_break_manipulators,
     space             = space_manipulators,
     token             = token_manipulators,
@@ -177,7 +177,7 @@ tidyverse_style <- function(scope = "tokens",
 #' }
 #' style_text("a <- function(x) { x }", style = set_line_break_before_curly_opening_style)
 #' @export
-create_style_guide <- function(initialize = initialize_attributes,
+create_style_guide <- function(initialize = initialize_default_attributes,
                                line_break = NULL,
                                space = NULL,
                                token = NULL,

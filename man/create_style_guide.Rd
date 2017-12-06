@@ -4,8 +4,8 @@
 \alias{create_style_guide}
 \title{Create a style guide}
 \usage{
-create_style_guide(initialize = initialize_attributes, line_break = NULL,
-  space = NULL, token = NULL, indention = NULL,
+create_style_guide(initialize = initialize_default_attributes,
+  line_break = NULL, space = NULL, token = NULL, indention = NULL,
   use_raw_indention = FALSE, reindention = tidyverse_reindention())
 }
 \arguments{
