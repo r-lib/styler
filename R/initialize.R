@@ -4,6 +4,10 @@
 #'   entries in the parse table and adds this information to the table.
 #' @param pd_flat A parse table.
 #' @importFrom utils tail
+#' @examples
+#' string_to_format <- "call( 3)"
+#' pd <- styler:::compute_parse_data_nested(string_to_format)
+#' styler:::pre_visit(pd, c(initialize_default_attributes))
 #' @export
 initialize_default_attributes <- function(pd_flat) {
 
