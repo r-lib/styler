@@ -2,7 +2,7 @@
 
 S3method(print,vertical)
 export(create_style_guide)
-export(initialize_default_attributes)
+export(default_style_guide_attributes)
 export(specify_math_token_spacing)
 export(specify_reindention)
 export(style_dir)

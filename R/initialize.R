@@ -7,9 +7,9 @@
 #' @examples
 #' string_to_format <- "call( 3)"
 #' pd <- styler:::compute_parse_data_nested(string_to_format)
-#' styler:::pre_visit(pd, c(initialize_default_attributes))
+#' styler:::pre_visit(pd, c(default_style_guide_attributes))
 #' @export
-initialize_default_attributes <- function(pd_flat) {
+default_style_guide_attributes <- function(pd_flat) {
 
   init_pd <-
     initialize_newlines(pd_flat) %>%

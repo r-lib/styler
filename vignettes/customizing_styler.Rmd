@@ -73,12 +73,12 @@ table"):
 ```{r}
 string_to_format <- "call( 3)"
 pd <- styler:::compute_parse_data_nested(string_to_format) %>%
-  styler:::pre_visit(c(initialize_default_attributes))
+  styler:::pre_visit(c(default_style_guide_attributes))
 pd$child[[1]] %>%
   select(token, terminal, text, newlines, spaces)
 ```
 
-`initialize_default_attributes()` is called to initialize some variables, it does not actually
+`default_style_guide_attributes()` is called to initialize some variables, it does not actually
 transform the parse table.
 
 All the function `remove_space_after_opening_paren()` now does is to look for
@@ -155,7 +155,7 @@ respectively, so we need both.
 The sequence in which styler applies rules on each level of nesting is given in 
 the list below:
 
-* call `initialize_default_attributes()` to initialize some variables.
+* call `default_style_guide_attributes()` to initialize some variables.
 * modify the line breaks (modifying `lag_newlines` only based on 
   `token`, `token_before`, `token_after` and `text`).
 * modify the spaces (modifying `spaces` only based on `lag_newlines`, 
