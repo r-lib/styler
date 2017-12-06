@@ -1,4 +1,4 @@
-## styler 0.1.0 (2017-12-05)
+## styler 1.0.0 (2017-12-05)
 
 Initial release.
 
@@ -24,6 +24,21 @@ style_file(path,
 style_text(text, ..., style = tidyverse_style, transformers = style(...))
 ```
 
+### style guides
+These functions are the style guides implemented.
+```
+tidyverse_style(
+  scope = "tokens", 
+  strict = TRUE, 
+  indent_by = 2, 
+  start_comments_with_one_space = FALSE, 
+  reindention = tidyverse_reindention(), 
+  math_token_spacing = tidyverse_math_token_spacing()
+)
+tidyverse_reindention()
+tidyverse_math_token_spacing())
+```
+
 ### style guide creators
 This function is used to create a style guide.
 ```
@@ -35,19 +50,6 @@ create_style_guide(
   indention = NULL, 
   use_raw_indention = FALSE, 
   reindention = tidyverse_reindention()
-)
-```
-
-### style guides
-These functions are the style guides implemented.
-```
-tidyverse_style(
-  scope = "tokens", 
-  strict = TRUE, 
-  indent_by = 2, 
-  start_comments_with_one_space = FALSE, 
-  reindention = tidyverse_reindention(), 
-  math_token_spacing = tidyverse_math_token_spacing()
 )
 ```
 
@@ -65,10 +67,5 @@ specify_reindention(
   indention = 0, 
   comments_only = TRUE
 )
-```
-
-These are helper functions that simply forward to the helper functions above.
-```
-tidyverse_reindention()
-tidyverse_math_token_spacing())
+initialize_default_attributes(pd_flat)
 ```
