@@ -2,7 +2,7 @@
 % Please edit documentation in R/initialize.R
 \name{default_style_guide_attributes}
 \alias{default_style_guide_attributes}
-\title{Enrich parse table with space and line break information}
+\title{Intialize default style guide attributes}
 \usage{
 default_style_guide_attributes(pd_flat)
 }
@@ -10,8 +10,8 @@ default_style_guide_attributes(pd_flat)
 \item{pd_flat}{A parse table.}
 }
 \description{
-This function computes difference (as column and line difference) between two
-entries in the parse table and adds this information to the table.
+This function initialises and removes various variables from the parse
+table.
 }
 \examples{
 string_to_format <- "call( 3)"

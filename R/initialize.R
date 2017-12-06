@@ -1,7 +1,7 @@
-#' Enrich parse table with space and line break information
+#' Intialize default style guide attributes
 #'
-#' This function computes difference (as column and line difference) between two
-#'   entries in the parse table and adds this information to the table.
+#' This function initialises and removes various variables from the parse
+#' table.
 #' @param pd_flat A parse table.
 #' @importFrom utils tail
 #' @examples
