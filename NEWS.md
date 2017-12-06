@@ -43,7 +43,7 @@ tidyverse_math_token_spacing())
 This function is used to create a style guide.
 ```
 create_style_guide(
-  initialize = initialize_attributes, 
+  initialize = default_style_guide_attributes, 
   line_break = NULL, 
   space = NULL, 
   token = NULL, 
