@@ -33,9 +33,11 @@ test_collection <- function(test, sub_test = NULL,
     "in\\.R(?:|md)$"
   )
 
-  in_names <- list.files(file.path(path),
-                          pattern = pattern,
-                          full.names = FALSE)
+  in_names <- list.files(
+    file.path(path),
+    pattern = pattern,
+    full.names = FALSE
+  )
 
   if (length(in_names) < 1) stop("no items to check")
 
@@ -47,11 +49,12 @@ test_collection <- function(test, sub_test = NULL,
   out_trees <- construct_tree(in_items)
 
   pwalk(list(in_items, out_items, in_names, out_names, out_trees),
-       transform_and_check,
-       transformer = transformer,
-       write_back = write_back,
-       write_tree = write_tree,
-       ...)
+    transform_and_check,
+    transformer = transformer,
+    write_back = write_back,
+    write_tree = write_tree,
+    ...
+  )
 }
 
 #' Construct *-out.R from a *-in.R
@@ -96,7 +99,6 @@ transform_and_check <- function(in_item, out_item,
                                 transformer, write_back,
                                 write_tree = NA,
                                 out_tree = "_tree", ...) {
-
   write_tree <- set_arg_write_tree(write_tree)
   read_in <- enc::read_lines_enc(in_item)
   if (write_tree) {
@@ -114,11 +116,15 @@ transform_and_check <- function(in_item, out_item,
   )
 
   if (transformed) {
-    warning(in_name, " was different from ", out_name,
-            immediate. = TRUE, call. = FALSE)
+    warning(
+      in_name, " was different from ", out_name,
+      immediate. = TRUE, call. = FALSE
+    )
   } else {
-    message(in_name, " was identical to ", out_name,
-            immediate. = TRUE, call. = FALSE)
+    message(
+      in_name, " was identical to ", out_name,
+      immediate. = TRUE, call. = FALSE
+    )
   }
 }
 
@@ -145,13 +151,12 @@ style_empty <- function(text) {
   transformers <- list(
     # transformer functions
     initialize = default_style_guide_attributes,
-    line_break = NULL,
-    space      = NULL,
-    token      = NULL,
-
+    line_break        = NULL,
+    space             = NULL,
+    token             = NULL,
     # transformer options
     use_raw_indention = FALSE,
-    reindention = specify_reindention(),
+    reindention       = specify_reindention(),
     NULL
   )
   transformed_text <- parse_transform_serialize(text, transformers)
@@ -160,23 +165,21 @@ style_empty <- function(text) {
 
 #' @describeIn test_transformer Transformations for indention based on operators
 style_op <- function(text) {
-
   transformers <- list(
     # transformer functions
     initialize = default_style_guide_attributes,
-    line_break = NULL,
-    space      = partial(indent_op, indent_by = 2),
-    token      = NULL,
+    line_break        = NULL,
+    space             = partial(indent_op, indent_by = 2),
+    token             = NULL,
 
     # transformer options
     use_raw_indention = FALSE,
-    reindention = specify_reindention(),
+    reindention       = specify_reindention(),
     NULL
   )
 
   transformed_text <- parse_transform_serialize(text, transformers)
   transformed_text
-
 }
 
 
@@ -220,8 +223,9 @@ stop_insufficient_r_version <- function() {
 #' out manually.
 generate_test_samples <- function() {
   gen <- function(x) {
-    if (length(x) == 0) ""
-    else {
+    if (length(x) == 0) {
+      ""
+    } else {
       c(
         paste0(x[1], gen(x[-1])),
         paste0(x[1], " # comment\n", paste(x[-1], collapse = ""))
@@ -239,10 +243,11 @@ generate_test_samples <- function() {
     collapse(gen(c("if", "(", "TRUE", ")", "NULL", " else", " NULL"))),
     file = "tests/testthat/insertion_comment_interaction/if_else-in.R"
   )
-  cat(collapse(gen(c(
-    "if", "(", "TRUE", ")", "NULL", " else", " if", "(", "FALSE", ")", "NULL",
-    " else", " NULL"))),
+  cat(
+    collapse(gen(c(
+      "if", "(", "TRUE", ")", "NULL", " else", " if", "(", "FALSE", ")", "NULL",
+      " else", " NULL"
+    ))),
     file = "tests/testthat/insertion_comment_interaction/if_else_if_else-in.R"
   )
 }
-

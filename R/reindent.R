@@ -30,7 +30,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
   non_comment <- which(pd_nested$token != "COMMENT")
   first_non_comment_after_call <- non_comment[non_comment > 2][1]
   if ((current_is_call) &&
-      pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
+    pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
     candidates <- seq2(3, nrow(pd_nested) - 1)
 
     child_is_call <- map_lgl(pd_nested$child, is_function_call)
@@ -109,7 +109,6 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   flattened_pd$col1[cols_to_update] <- flattened_pd$col1[cols_to_update] + shift
   flattened_pd$col2[cols_to_update] <- flattened_pd$col2[cols_to_update] + shift
   flattened_pd
-
 }
 
 
@@ -131,16 +130,16 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
 #'   the tokens that match `regex.`
 #' @importFrom purrr map flatten_int
 set_regex_indention <- function(flattened_pd,
-                                  pattern,
-                                  target_indention = 0,
-                                  comments_only = TRUE) {
+                                pattern,
+                                target_indention = 0,
+                                comments_only = TRUE) {
   if (comments_only) {
     cond <- which(
       (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0)
     )
     if (length(cond) < 1) return(flattened_pd)
-    to_check <- flattened_pd[cond,]
-    not_to_check <- flattened_pd[-cond,]
+    to_check <- flattened_pd[cond, ]
+    not_to_check <- flattened_pd[-cond, ]
   } else {
     to_check <- flattened_pd
     not_to_check <- NULL

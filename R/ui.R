@@ -53,7 +53,6 @@ style_pkg <- function(pkg = ".",
 }
 
 prettify_pkg <- function(transformers, filetype, exclude_files) {
-
   filetype <- set_and_assert_arg_filetype(filetype)
   r_files <- vignette_files <- readme <- NULL
 
@@ -98,7 +97,6 @@ style_text <- function(text,
                        ...,
                        style = tidyverse_style,
                        transformers = style(...)) {
-
   transformer <- make_transformer(transformers)
   styled_text <- transformer(text)
   construct_vertical(styled_text)
@@ -166,9 +164,9 @@ prettify_any <- function(transformers, filetype, recursive, exclude_files) {
 #' @family stylers
 #' @export
 style_file <- function(path,
-                        ...,
-                        style = tidyverse_style,
-                        transformers = style(...)) {
+                       ...,
+                       style = tidyverse_style,
+                       transformers = style(...)) {
   changed <- withr::with_dir(
     dirname(path),
     transform_files(basename(path), transformers)

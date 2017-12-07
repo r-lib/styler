@@ -10,7 +10,6 @@
 #' styler:::pre_visit(pd, c(default_style_guide_attributes))
 #' @export
 default_style_guide_attributes <- function(pd_flat) {
-
   init_pd <-
     initialize_newlines(pd_flat) %>%
     initialize_spaces() %>%

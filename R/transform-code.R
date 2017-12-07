@@ -12,7 +12,8 @@ transform_code <- function(path, fun, verbose = FALSE, ...) {
   } else if (is_rmd_file(path)) {
     enc::transform_lines_enc(
       path, fun = partial(transform_rmd, transformer_fun = fun), ...,
-      verbose = verbose)
+      verbose = verbose
+    )
   } else {
     stop(path, " is not an R or Rmd file")
   }
@@ -71,5 +72,5 @@ identify_chunks <- function(lines) {
 #'
 #' @inheritParams identify_chunks
 get_knitr_pattern <- function(lines) {
-    knitr::all_patterns[["md"]]
+  knitr::all_patterns[["md"]]
 }

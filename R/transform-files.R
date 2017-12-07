@@ -80,7 +80,6 @@ make_transformer <- function(transformers) {
   function(text) {
     transformed_text <- parse_transform_serialize(text, transformers)
     transformed_text
-
   }
 }
 
@@ -108,7 +107,7 @@ parse_transform_serialize <- function(text, transformers) {
       pattern          = transformers$reindention$regex_pattern,
       target_indention = transformers$reindention$indention,
       comments_only    = transformers$reindention$comments_only
-  )
+    )
   serialized_transformed_text <-
     serialize_parse_data_flattened(flattened_pd, start_line = start_line)
 
