@@ -67,7 +67,7 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
 context("messages are correct")
 
 test_that("messages (via cat()) of style_file are correct", {
-  skip_on_appveyor()
+  skip_on_os("windows")
   # Message if scope > line_breaks and code changes
   temp_path <- copy_to_tempdir(testthat_file(
     "public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"

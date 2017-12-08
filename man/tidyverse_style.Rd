@@ -26,7 +26,7 @@ See 'Examples'.}
 operators such as '('.}
 
 \item{start_comments_with_one_space}{Whether or not comments should start
-with only one space (see \code{\link[=start_comments_with_space]{start_comments_with_space()}}).}
+with only one space (see \code{start_comments_with_space()}).}
 
 \item{reindention}{A list of parameters for regex re-indention, most
 conveniently constructed using \code{\link[=specify_reindention]{specify_reindention()}}.}
@@ -55,6 +55,7 @@ be performed if all less invasive operations are performed too.
 }
 \examples{
 style_text("call( 1)", style = tidyverse_style, scope = "spaces")
+style_text("call( 1)", transformers = tidyverse_style(strict = TRUE))
 style_text(c("ab <- 3", "a  <-3"), strict = FALSE) # keeps alignment of "<-"
 style_text(c("ab <- 3", "a  <-3"), strict = TRUE) # drops alignment of "<-"
 }

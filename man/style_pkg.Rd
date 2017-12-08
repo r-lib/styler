@@ -49,9 +49,12 @@ styling whether or not it was actually changed.
 
 \examples{
 \dontrun{
-# the following is identical but the former is more convenient:
+
 style_pkg(style = tidyverse_style, strict = TRUE)
-style_pkg(transformers = tidyverse_style(strict = TRUE))
+style_pkg(
+  scope = "line_breaks",
+  math_token_spacing = specify_math_token_spacing(zero = "'+'")
+)
 }
 }
 \seealso{

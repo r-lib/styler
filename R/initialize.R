@@ -1,10 +1,15 @@
-#' Enrich parse table with space and line break information
+#' Intialize default style guide attributes
 #'
-#' This function computes difference (as column and line difference) between two
-#'   entries in the parse table and adds this information to the table.
+#' This function initialises and removes various variables from the parse
+#' table.
 #' @param pd_flat A parse table.
 #' @importFrom utils tail
-initialize_attributes <- function(pd_flat) {
+#' @examples
+#' string_to_format <- "call( 3)"
+#' pd <- styler:::compute_parse_data_nested(string_to_format)
+#' styler:::pre_visit(pd, c(default_style_guide_attributes))
+#' @export
+default_style_guide_attributes <- function(pd_flat) {
 
   init_pd <-
     initialize_newlines(pd_flat) %>%
@@ -16,6 +21,11 @@ initialize_attributes <- function(pd_flat) {
     validate_parse_data()
   init_pd
 }
+
+#' Initialize attributes
+#'
+#' @name initialize_attributes
+NULL
 
 #' @describeIn initialize_attributes Initializes `newlines` and `lag_newlines`.
 initialize_newlines <- function(pd_flat) {
