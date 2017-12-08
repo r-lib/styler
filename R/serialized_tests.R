@@ -167,11 +167,10 @@ style_empty <- function(text) {
 style_op <- function(text) {
   transformers <- list(
     # transformer functions
-    initialize = default_style_guide_attributes,
+    initialize        = default_style_guide_attributes,
     line_break        = NULL,
     space             = partial(indent_op, indent_by = 2),
     token             = NULL,
-
     # transformer options
     use_raw_indention = FALSE,
     reindention       = specify_reindention(),
