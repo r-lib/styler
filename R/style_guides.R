@@ -57,13 +57,12 @@ tidyverse_style <- function(scope = "tokens",
                             start_comments_with_one_space = FALSE,
                             reindention = tidyverse_reindention(),
                             math_token_spacing = tidyverse_math_token_spacing()) {
-
   scope <- character_to_ordered(
     scope,
     c("none", "spaces", "indention", "line_breaks", "tokens")
   )
 
-  space_manipulators <- if (scope >= "spaces")
+  space_manipulators <- if (scope >= "spaces") {
     lst(
       partial(indent_braces, indent_by = indent_by),
       partial(indent_op, indent_by = indent_by),
@@ -89,36 +88,48 @@ tidyverse_style <- function(scope = "tokens",
       remove_space_before_dollar,
       remove_space_after_fun_dec,
       remove_space_around_colons,
-      partial(start_comments_with_space,
-              force_one = start_comments_with_one_space),
+      partial(
+        start_comments_with_space,
+        force_one = start_comments_with_one_space
+      ),
 
       remove_space_after_unary_pm_nested,
       if (strict) set_space_before_comments else add_space_before_comments,
       set_space_between_levels,
       set_space_between_eq_sub_and_comma
     )
+  }
 
   use_raw_indention <- scope < "indention"
 
-  line_break_manipulators <- if (scope >= "line_breaks")
+  line_break_manipulators <- if (scope >= "line_breaks") {
     lst(
       remove_line_break_before_curly_opening,
       if (strict) remove_line_break_before_round_closing_after_curly else identity,
       if (strict) remove_line_break_before_round_closing_fun_dec else identity,
       partial(style_line_break_around_curly, strict),
-      if (strict) partial(
-        set_line_break_after_opening_if_call_is_multi_line,
-        except_token_after = "COMMENT",
-        except_text_before = c("switch", "ifelse", "if_else")
-      ) else identity,
-      if (strict) partial(
-        set_line_break_before_closing_call, except_token_before = "COMMENT"
-      ) else identity,
+      if (strict) {
+        partial(
+          set_line_break_after_opening_if_call_is_multi_line,
+          except_token_after = "COMMENT",
+          except_text_before = c("switch", "ifelse", "if_else")
+        )
+      } else {
+        identity
+      } ,
+      if (strict) {
+        partial(
+          set_line_break_before_closing_call, except_token_before = "COMMENT"
+        )
+      } else {
+        identity
+      } ,
       remove_line_break_in_empty_fun_call,
       add_line_break_after_pipe
     )
+  }
 
-  token_manipulators <- if (scope >= "tokens")
+  token_manipulators <- if (scope >= "tokens") {
     lst(
       force_assignment_op,
       resolve_semicolon,
@@ -126,6 +137,7 @@ tidyverse_style <- function(scope = "tokens",
       remove_terminal_token_before_and_after,
       if (strict) wrap_if_else_multi_line_in_curly else identity
     )
+  }
 
 
   indention_modifier <-
@@ -228,7 +240,7 @@ specify_reindention <- function(regex_pattern = NULL,
     regex_pattern,
     indention,
     comments_only
-)
+  )
 
 #' @describeIn reindention Simple forwarder to
 #' `specify_reindention` with reindention according to the tidyverse style
@@ -252,8 +264,10 @@ tidyverse_reindention <- function() {
 #'   construction of the factor fails.
 character_to_ordered <- function(x, levels, name = substitute(x)) {
   if (!all((x %in% levels))) {
-    stop("all values in ", name, " must be one of the following: ",
-         paste(levels, collapse = ", "), call. = FALSE)
+    stop(
+      "all values in ", name, " must be one of the following: ",
+      paste(levels, collapse = ", "), call. = FALSE
+    )
   }
   factor(x, levels = levels, ordered = TRUE)
 }

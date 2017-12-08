@@ -43,8 +43,9 @@ create_node_from_nested_root <- function(pd_nested, structure_only) {
 #' @param parent The parent of the node to be created.
 #' @importFrom purrr map2 map
 create_node_from_nested <- function(pd_nested, parent, structure_only) {
-  if (is.null(pd_nested))
+  if (is.null(pd_nested)) {
     return()
+  }
 
   node_info <- create_node_info(pd_nested, structure_only)
 
@@ -62,6 +63,6 @@ create_node_info <- function(pd_nested, structure_only) {
     pd_nested$short, " [",
     pd_nested$lag_newlines, "/",
     pd_nested$spaces, "] {",
-    pd_nested$pos_id, "}")
-
+    pd_nested$pos_id, "}"
+  )
 }

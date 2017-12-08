@@ -65,8 +65,10 @@ add_terminal_token_before <- function(pd_flat) {
     filter(terminal) %>%
     arrange(pos_id)
 
-  data_frame(id = terminals$id,
-             token_before = lag(terminals$token, default = "")) %>%
+  data_frame(
+    id = terminals$id,
+    token_before = lag(terminals$token, default = "")
+  ) %>%
     left_join(pd_flat, ., by = "id")
 }
 
@@ -144,7 +146,6 @@ combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
   bound[order(bound$pos_id), ]
-
 }
 
 #' Get the start right
