@@ -2,7 +2,7 @@
 % Please edit documentation in R/initialize.R
 \name{default_style_guide_attributes}
 \alias{default_style_guide_attributes}
-\title{Intialize default style guide attributes}
+\title{Initialize default style guide attributes}
 \usage{
 default_style_guide_attributes(pd_flat)
 }

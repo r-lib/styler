@@ -1,4 +1,4 @@
-#' Intialize default style guide attributes
+#' Initialize default style guide attributes
 #'
 #' This function initialises and removes various variables from the parse
 #' table.
