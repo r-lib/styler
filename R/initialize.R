@@ -24,6 +24,7 @@ default_style_guide_attributes <- function(pd_flat) {
 #' Initialize attributes
 #'
 #' @name initialize_attributes
+#' @inheritParams default_style_guide_attributes
 NULL
 
 #' @describeIn initialize_attributes Initializes `newlines` and `lag_newlines`.
