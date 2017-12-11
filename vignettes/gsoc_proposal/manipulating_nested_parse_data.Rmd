@@ -23,7 +23,7 @@ use a [visitor approach](https://en.wikipedia.org/wiki/Visitor_pattern) to
 separate the algorithm (computing white space information and later apply
 transformations) from the object (nested data structure).
 The function `create_filler()` (name depreciated, now called
-`initialize_attributes()`) can then be used to compute current
+`default_style_guide_attributes()`) can then be used to compute current
 white space information on every level of nesting within the nested parse data 
 if applied in combination with the visitor. In the sequel, a parse table at 
 one level of nesting will be denoted with the term *nest*, which always 

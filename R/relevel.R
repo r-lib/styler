@@ -24,7 +24,7 @@ flatten_operators <- function(pd_nested) {
 #' @include token-define.R
 flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, math_token, "'$'")
-  pd_token_right <- c(special_token, "LEFT_ASSIGN",  "'+'", "'-'")
+  pd_token_right <- c(special_token, "LEFT_ASSIGN", "'+'", "'-'")
   bound <- pd_nested %>%
     flatten_pd(pd_token_left, left = TRUE) %>%
     flatten_pd(pd_token_right, left = FALSE)
@@ -182,7 +182,7 @@ find_block_id <- function(pd) {
 relocate_eq_assign_one <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   eq_ind <- seq2(idx_eq_assign[1] - 1L, last(idx_eq_assign) + 1L)
-  eq_expr <- pd[eq_ind,] %>%
+  eq_expr <- pd[eq_ind, ] %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%
     remove_attributes(c(
@@ -191,7 +191,7 @@ relocate_eq_assign_one <- function(pd) {
     ))
   eq_expr$id <- NA
   eq_expr$parent <- NA
-  non_eq_expr <- pd[-eq_ind,]
+  non_eq_expr <- pd[-eq_ind, ]
   pd <- bind_rows(eq_expr, non_eq_expr) %>%
     arrange(pos_id)
   pd

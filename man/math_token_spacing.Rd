@@ -49,4 +49,9 @@ style_text(
   math_token_spacing = tidyverse_math_token_spacing(),
   strict = TRUE
 )
+style_text(
+  "1+1   -3",
+  math_token_spacing = tidyverse_math_token_spacing(),
+  strict = TRUE
+)
 }

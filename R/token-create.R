@@ -33,7 +33,7 @@ create_tokens <- function(tokens,
   len_text <- length(text)
   data_frame(
     token = tokens,
-    text  = texts,
+    text = texts,
     short = substr(texts, 1, 5),
     lag_newlines = lag_newlines,
     newlines = lead(lag_newlines),

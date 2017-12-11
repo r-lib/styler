@@ -23,5 +23,4 @@ communicate_summary <- function(changed, ruler_width) {
   cli::cat_bullet("\t", sum(changed, na.rm = TRUE), "\tFile changed.", bullet = "info")
   cli::cat_bullet(bullet = "cross", "\t", sum(is.na(changed)), "\tStyling threw an eror.")
   cli::cat_rule(width = max(40, ruler_width))
-
 }

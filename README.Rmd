@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=master&svg=true)](https://ci.appveyor.com/project/r-lib/styler)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![codecov](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
-[![cran version](http://www.r-pkg.org/badges/version/styler)](http://cran.rstudio.com/web/packages/styler) 
+[![cran version](http://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler) 
 
 
 The goal of styler is to provide non-invasive pretty-printing of R source code 

@@ -1,7 +1,7 @@
 #' Update indention information of parse data
 #'
 #' @param pd A nested or flat parse table that is already enhanced with
-#'   line break and space information via [initialize_attributes()].
+#'   line break and space information via [default_style_guide_attributes()].
 #' @param indent_by How many spaces should be added after the token of interest.
 #' @param token The token the indention should be based on.
 #' @name update_indention
@@ -28,8 +28,8 @@ indent_op <- function(pd,
                         special_token,
                         "LEFT_ASSIGN",
                         "EQ_ASSIGN",
-                        "'$'")
-                      ) {
+                        "'$'"
+                      )) {
   indent_indices <- compute_indent_indices(pd, token)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
@@ -62,8 +62,8 @@ indent_assign <- function(pd, indent_by, token = NULL) {
 #'   statements that do not have curly parenthesis.
 indent_without_paren <- function(pd, indent_by = 2) {
   pd %>%
-  indent_without_paren_for_while_fun(indent_by) %>%
-  indent_without_paren_if_else(indent_by)
+    indent_without_paren_for_while_fun(indent_by) %>%
+    indent_without_paren_if_else(indent_by)
 }
 
 #' @describeIn update_indention Is used to indent for and statements and function
@@ -90,8 +90,8 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_else_idx <- next_non_comment(pd, else_idx)
   has_else_without_curly_or_else_chid <-
     any(pd$token == "ELSE") &&
-    pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
-    pd$child[[expr_after_else_idx]]$token[1] != "IF"
+      pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
+      pd$child[[expr_after_else_idx]]$token[1] != "IF"
   if (has_else_without_curly_or_else_chid) {
     pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
   }

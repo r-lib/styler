@@ -24,8 +24,10 @@ arrange <- function(.data, ...) {
   stopifnot(is.data.frame(.data))
   ord <- eval(substitute(order(...)), .data, parent.frame())
   if (length(ord) != nrow(.data)) {
-    stop("Length of ordering vectors don't match data frame size",
-      call. = FALSE)
+    stop(
+      "Length of ordering vectors don't match data frame size",
+      call. = FALSE
+    )
   }
   .data[ord, , drop = FALSE]
 }
@@ -83,7 +85,7 @@ left_join <- function(x, y, by, ...) {
   res
 }
 
-nth <- function (x, n, order_by = NULL, default = x[NA_real_]) {
+nth <- function(x, n, order_by = NULL, default = x[NA_real_]) {
   stopifnot(length(n) == 1, is.numeric(n))
   n <- trunc(n)
   if (n == 0 || n > length(x) || n < -length(x)) {
@@ -101,7 +103,7 @@ nth <- function (x, n, order_by = NULL, default = x[NA_real_]) {
 }
 
 
-last <- function (x, order_by = NULL, default = x[NA_real_]) {
+last <- function(x, order_by = NULL, default = x[NA_real_]) {
   nth(x, -1L, order_by = order_by, default = default)
 }
 

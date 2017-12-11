@@ -47,7 +47,7 @@ contains_else_expr_that_needs_braces <- function(pd) {
     non_comment_after_else <- next_non_comment(pd, else_idx)
     sub_expr <- pd$child[[non_comment_after_else]]
     # needs braces if NOT if_condition, NOT curly expr
-    !is_cond_expr(sub_expr) &&  !is_curly_expr(sub_expr)
+    !is_cond_expr(sub_expr) && !is_curly_expr(sub_expr)
   } else {
     FALSE
   }

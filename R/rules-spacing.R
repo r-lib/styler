@@ -63,7 +63,7 @@ remove_space_after_unary_pm <- function(pd_flat) {
 
   pm_after <- pd_flat$token %in% op_pm
   pd_flat$spaces[pm_after & (pd_flat$newlines == 0L) &
-                   (lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
+    (lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
   pd_flat
 }
 
@@ -84,7 +84,8 @@ fix_quotes <- function(pd_flat) {
     vapply(
       lapply(pd_flat$text[str_const][str_const_change], parse_text),
       deparse,
-      character(1L))
+      character(1L)
+    )
   pd_flat
 }
 
@@ -144,7 +145,7 @@ remove_space_before_comma <- function(pd_flat) {
   comma_after <- pd_flat$token == "','"
   if (!any(comma_after)) return(pd_flat)
   comma_before <- lead(comma_after, default = FALSE)
-  idx <- comma_before  & (pd_flat$newlines == 0L)
+  idx <- comma_before & (pd_flat$newlines == 0L)
   pd_flat$spaces[idx] <- 0L
   pd_flat
 }
@@ -183,8 +184,10 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
   comment_pos <- pd$token == "COMMENT"
   if (!any(comment_pos)) return(pd)
 
-  comments <- rematch2::re_match(pd$text[comment_pos],
-    "^(?<prefix>#+'*)(?<space_after_prefix> *)(?<text>.*)$")
+  comments <- rematch2::re_match(
+    pd$text[comment_pos],
+    "^(?<prefix>#+'*)(?<space_after_prefix> *)(?<text>.*)$"
+  )
 
   comments$space_after_prefix <- nchar(
     comments$space_after_prefix, type = "width"
@@ -275,5 +278,4 @@ set_space_between_eq_sub_and_comma <- function(pd) {
   op_before <- which(pd$token == "EQ_SUB" & lead(pd$token == "','"))
   pd$spaces[op_before] <- 1L
   pd
-
 }

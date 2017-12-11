@@ -31,9 +31,12 @@ NULL
 #' @family stylers
 #' @examples
 #' \dontrun{
-#' # the following is identical but the former is more convenient:
+#'
 #' style_pkg(style = tidyverse_style, strict = TRUE)
-#' style_pkg(transformers = tidyverse_style(strict = TRUE))
+#' style_pkg(
+#'   scope = "line_breaks",
+#'   math_token_spacing = specify_math_token_spacing(zero = "'+'")
+#' )
 #' }
 #' @export
 style_pkg <- function(pkg = ".",
@@ -50,7 +53,6 @@ style_pkg <- function(pkg = ".",
 }
 
 prettify_pkg <- function(transformers, filetype, exclude_files) {
-
   filetype <- set_and_assert_arg_filetype(filetype)
   r_files <- vignette_files <- readme <- NULL
 
@@ -95,7 +97,6 @@ style_text <- function(text,
                        ...,
                        style = tidyverse_style,
                        transformers = style(...)) {
-
   transformer <- make_transformer(transformers)
   styled_text <- transformer(text)
   construct_vertical(styled_text)
@@ -112,6 +113,10 @@ style_text <- function(text,
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @family stylers
+#' @examples
+#' \dontrun{
+#' style_dir(file_type = "r")
+#' }
 #' @export
 style_dir <- function(path = ".",
                       ...,
@@ -159,9 +164,9 @@ prettify_any <- function(transformers, filetype, recursive, exclude_files) {
 #' @family stylers
 #' @export
 style_file <- function(path,
-                        ...,
-                        style = tidyverse_style,
-                        transformers = style(...)) {
+                       ...,
+                       style = tidyverse_style,
+                       transformers = style(...)) {
   changed <- withr::with_dir(
     dirname(path),
     transform_files(basename(path), transformers)

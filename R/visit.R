@@ -40,8 +40,10 @@ post_visit <- function(pd_nested, funs) {
 #' @family visitors
 #' @importFrom purrr reduce
 visit_one <- function(pd_flat, funs) {
-  reduce(funs, function(x, fun) fun(x),
-         .init = pd_flat)
+  reduce(
+    funs, function(x, fun) fun(x),
+    .init = pd_flat
+  )
 }
 
 
@@ -59,19 +61,22 @@ context_to_terminals <- function(pd_nested,
                                  outer_indent,
                                  outer_spaces,
                                  outer_indention_refs) {
-
   if (is.null(pd_nested)) return()
 
   pd_transformed <- context_towards_terminals(
     pd_nested, outer_lag_newlines, outer_indent, outer_spaces, outer_indention_refs
   )
 
-  pd_transformed$child <- pmap(list(pd_transformed$child,
-                                    pd_transformed$lag_newlines,
-                                    pd_transformed$indent,
-                                    pd_transformed$spaces,
-                                    pd_transformed$indention_ref_pos_id),
-                               context_to_terminals)
+  pd_transformed$child <- pmap(
+    list(
+      pd_transformed$child,
+      pd_transformed$lag_newlines,
+      pd_transformed$indent,
+      pd_transformed$spaces,
+      pd_transformed$indention_ref_pos_id
+    ),
+    context_to_terminals
+  )
   pd_transformed
 }
 
@@ -147,7 +152,8 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
     split(groups) %>%
     lapply(function(.x) {
       .x$col2 <- cumsum(.x$nchar + .x$lag_spaces)
-      .x}) %>%
+      .x
+    }) %>%
     bind_rows()
   flattened_pd$col1 <- flattened_pd$col2 - flattened_pd$nchar
   flattened_pd
@@ -175,11 +181,10 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
     flattened_pd$lag_spaces <- if_else(flattened_pd$lag_newlines > 0,
-                                      flattened_pd$indent,
-                                      flattened_pd$lag_spaces)
+      flattened_pd$indent,
+      flattened_pd$lag_spaces
+    )
   }
   flattened_pd$indent <- NULL
   flattened_pd
 }
-
-

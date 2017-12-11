@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-1+1
+1 + 1
 ```
 
 ## R Markdown
