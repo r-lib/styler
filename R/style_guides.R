@@ -24,7 +24,7 @@ NULL
 #'   line breaks to one if there is none and leave the code untouched otherwise.
 #'   See 'Examples'.
 #' @param start_comments_with_one_space Whether or not comments should start
-#'   with only one space (see `start_comments_with_space()`).
+#'   with only one space (see [start_comments_with_space()]).
 #' @inheritParams create_style_guide
 #' @param math_token_spacing A list of parameters that define spacing around
 #'   math token, conveniently constructed using [specify_math_token_spacing()].

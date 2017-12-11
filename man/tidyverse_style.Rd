@@ -26,7 +26,7 @@ See 'Examples'.}
 operators such as '('.}
 
 \item{start_comments_with_one_space}{Whether or not comments should start
-with only one space (see \code{start_comments_with_space()}).}
+with only one space (see \code{\link[=start_comments_with_space]{start_comments_with_space()}}).}
 
 \item{reindention}{A list of parameters for regex re-indention, most
 conveniently constructed using \code{\link[=specify_reindention]{specify_reindention()}}.}
