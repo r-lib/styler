@@ -8,10 +8,8 @@
 \alias{initialize_indention_ref_pos_id}
 \alias{initialize_indent}
 \alias{validate_parse_data}
-\title{Enrich parse table with space and line break information}
+\title{Initialize attributes}
 \usage{
-initialize_attributes(pd_flat)
-
 initialize_newlines(pd_flat)
 
 initialize_spaces(pd_flat)
@@ -28,8 +26,7 @@ validate_parse_data(pd_flat)
 \item{pd_flat}{A parse table.}
 }
 \description{
-This function computes difference (as column and line difference) between two
-entries in the parse table and adds this information to the table.
+Initialize attributes
 }
 \section{Functions}{
 \itemize{

@@ -28,7 +28,7 @@ indent_without_paren_if_else(pd, indent_by)
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with
-line break and space information via \code{\link[=initialize_attributes]{initialize_attributes()}}.}
+line break and space information via \code{\link[=default_style_guide_attributes]{default_style_guide_attributes()}}.}
 
 \item{indent_by}{How many spaces should be added after the token of interest.}
 
