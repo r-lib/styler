@@ -19,7 +19,13 @@ source code while adhering to the
 [tidyverse](https://github.com/tidyverse/style) formatting rules.
 Support for custom style guides is planned.
 
-You can install the package from GitHub:
+You can install the package from CRAN:
+
+``` r
+install.packages("styler")
+```
+
+Or get the development version from GitHub:
 
 ``` r
 # install.packages("remotes")

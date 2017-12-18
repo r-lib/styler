@@ -28,13 +28,18 @@ The goal of styler is to provide non-invasive pretty-printing of R source code
 while adhering to the [tidyverse](https://github.com/tidyverse/style) formatting 
 rules. Support for custom style guides is planned.
 
-You can install the package from GitHub:
 
+
+You can install the package from CRAN:
+```{r, eval = FALSE}
+install.packages("styler")
+```
+
+Or get the development version from GitHub:
 ```{r, eval = FALSE}
 # install.packages("remotes")
 remotes::install_github("r-lib/styler")
 ```
-
 
 You can style a simple character vector of code with `style_text()`:
 ```{r echo=FALSE, message=FALSE}
