@@ -142,8 +142,8 @@ tidyverse_style <- function(scope = "tokens",
 
   indention_modifier <-
     c(
-      update_indention_ref_fun_dec,
-      NULL
+      if (scope >= "indention") update_indention_ref_fun_dec,
+      identity
     )
 
   create_style_guide(
