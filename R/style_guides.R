@@ -321,5 +321,5 @@ specify_math_token_spacing <-
 #' )
 #' @export
 tidyverse_math_token_spacing <- function() {
-  specify_math_token_spacing(one = c("'+'", "'-'", "'*'", "'/'", "'^'"))
+  specify_math_token_spacing(one = math_token_lo)
 }

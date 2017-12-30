@@ -27,6 +27,7 @@ token <- tribble(
 )
 
 math_token <- token$token[token$class == "math"]
+math_token_lo <- setdiff(math_token, "^")
 logical_token <- token$token[token$class == "logical"]
 left_assignment_token <- token$token[token$class == "assign_left"]
 right_assignment_token <- token$token[token$class == "assign_right"]
