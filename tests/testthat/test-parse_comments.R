@@ -34,5 +34,10 @@ test_that("comments are treated corectly", {
                                  transformer = style_text,
                                  write_back = TRUE), NA)
 
-  # top-level test with indention
+})
+
+test_that("rplumber tags / syntax is handled properly", {
+  expect_warning(test_collection("parse_comments",
+                                 "rplumber",
+                                 transformer = style_text), NA)
 })
