@@ -6,8 +6,8 @@
 \alias{tidyverse_math_token_spacing}
 \title{Specify spacing around math tokens}
 \usage{
-specify_math_token_spacing(zero = NULL, one = c("'+'", "'-'", "'*'", "'/'",
-  "'^'"))
+specify_math_token_spacing(zero = "'^'", one = c("'+'", "'-'", "'*'",
+  "'/'"))
 
 tidyverse_math_token_spacing()
 }
@@ -47,7 +47,7 @@ style_text(
 style_text(
   "1+1   -3",
   math_token_spacing = tidyverse_math_token_spacing(),
-  strict = TRUE
+  strict = FALSE
 )
 style_text(
   "1+1   -3",
