@@ -139,13 +139,13 @@ tidyverse_style <- function(scope = "tokens",
 
   indention_modifier <-
     lst(
-      update_indention_ref_fun_dec = 
+      update_indention_ref_fun_dec =
         if (scope >= "indention") update_indention_ref_fun_dec
     )
 
   create_style_guide(
     # transformer functions
-    initialize        = lst(default_style_guide_attributes),
+    initialize        = default_style_guide_attributes,
     line_break        = line_break_manipulators,
     space             = space_manipulators,
     token             = token_manipulators,
@@ -163,7 +163,7 @@ tidyverse_style <- function(scope = "tokens",
 #' transformer function corresponds to one styling rule. The output of this
 #' function can be used as an argument for \code{style} in top level functions
 #' like [style_text()] and friends.
-#' @param initialize A list of functions that initializes various
+#' @param initialize The bare name of a function that initializes various
 #'   variables on each level of nesting.
 #' @param line_break A list of transformer functions that manipulate line_break
 #'   information.
@@ -187,7 +187,7 @@ tidyverse_style <- function(scope = "tokens",
 #' style_text("a <- function(x) { x }", style = set_line_break_before_curly_opening_style)
 #' @importFrom purrr compact
 #' @export
-create_style_guide <- function(initialize = lst(default_style_guide_attributes),
+create_style_guide <- function(initialize = default_style_guide_attributes,
                                line_break = NULL,
                                space = NULL,
                                token = NULL,
@@ -196,7 +196,7 @@ create_style_guide <- function(initialize = lst(default_style_guide_attributes),
                                reindention = tidyverse_reindention()) {
   lst(
     # transformer functions
-    initialize,
+    initialize = lst(initialize),
     line_break,
     space,
     token,
