@@ -71,7 +71,7 @@ tidyverse_style <- function(scope = "tokens",
 
       fix_quotes,
       remove_space_before_closing_paren,
-      if (strict) remove_space_before_opening_paren else identity,
+      remove_space_before_opening_paren = if (strict) remove_space_before_opening_paren,
       add_space_after_for_if_while,
       add_space_before_brace,
       remove_space_before_comma,
@@ -105,25 +105,21 @@ tidyverse_style <- function(scope = "tokens",
   line_break_manipulators <- if (scope >= "line_breaks") {
     lst(
       remove_line_break_before_curly_opening,
-      if (strict) remove_line_break_before_round_closing_after_curly else identity,
-      if (strict) remove_line_break_before_round_closing_fun_dec else identity,
+      remove_line_break_before_round_closing_after_curly =
+        if (strict) remove_line_break_before_round_closing_after_curly,
+      remove_line_break_before_round_closing_fun_dec =
+        if (strict) remove_line_break_before_round_closing_fun_dec,
       partial(style_line_break_around_curly, strict),
-      if (strict) {
+      set_line_break_after_opening_if_call_is_multi_line = if (strict)
         partial(
           set_line_break_after_opening_if_call_is_multi_line,
           except_token_after = "COMMENT",
           except_text_before = c("switch", "ifelse", "if_else")
-        )
-      } else {
-        identity
-      } ,
-      if (strict) {
+        ),
+      set_line_break_before_closing_call = if (strict)
         partial(
           set_line_break_before_closing_call, except_token_before = "COMMENT"
-        )
-      } else {
-        identity
-      } ,
+        ),
       remove_line_break_in_empty_fun_call,
       add_line_break_after_pipe
     )
@@ -135,15 +131,16 @@ tidyverse_style <- function(scope = "tokens",
       resolve_semicolon,
       add_brackets_in_pipe,
       remove_terminal_token_before_and_after,
-      if (strict) wrap_if_else_multi_line_in_curly else identity
+      wrap_if_else_multi_line_in_curly =
+        if (strict) wrap_if_else_multi_line_in_curly
     )
   }
 
 
   indention_modifier <-
-    c(
-      update_indention_ref_fun_dec,
-      NULL
+    lst(
+      update_indention_ref_fun_dec =
+        if (scope >= "indention") update_indention_ref_fun_dec
     )
 
   create_style_guide(
@@ -185,9 +182,10 @@ tidyverse_style <- function(scope = "tokens",
 #'   pd_flat
 #' }
 #' set_line_break_before_curly_opening_style <- function() {
-#'   create_style_guide(line_break = set_line_break_before_curly_opening)
+#'   create_style_guide(line_break = tibble::lst(set_line_break_before_curly_opening))
 #' }
 #' style_text("a <- function(x) { x }", style = set_line_break_before_curly_opening_style)
+#' @importFrom purrr compact
 #' @export
 create_style_guide <- function(initialize = default_style_guide_attributes,
                                line_break = NULL,
@@ -198,7 +196,7 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                reindention = tidyverse_reindention()) {
   lst(
     # transformer functions
-    initialize,
+    initialize = lst(initialize),
     line_break,
     space,
     token,
@@ -206,7 +204,8 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
     # transformer options
     use_raw_indention,
     reindention
-  )
+  ) %>%
+    map(compact)
 }
 
 
