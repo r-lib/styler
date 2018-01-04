@@ -1,0 +1,18 @@
+# Header
+
+Some text.
+
+```{R}
+1 + 1
+```
+
+More text.
+
+```{nonR}
+I like the jungle, I like the .2'
+```
+
+```{blabla }
+I like the jungle,
+```
+

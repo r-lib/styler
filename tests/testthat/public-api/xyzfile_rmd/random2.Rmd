@@ -7,7 +7,7 @@ Some text before empty chunk
 ```
 Final text before longer code chunk
 This text chunk has multiple lines
-```{r}
+```{R}
 # random
 this(is_a_call(x))
 if (x) {
