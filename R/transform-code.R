@@ -69,15 +69,15 @@ identify_r_raw_chunks <- function(lines, engine_pattern = "[rR]") {
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
     stop("Unrecognized chunk pattern!", call. = FALSE)
   }
-  starts <- grep(pattern$chunk.begin, lines, perl = TRUE)
-  ends <- grep(pattern$chunk.end, lines, perl = TRUE)
+  starts <- grep("^[\t >]*```+\\s*\\{\\s*([a-zA-Z0-9]+.*)\\}\\s*$", lines, perl = TRUE)
+  ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
 
   if (length(starts) != length(ends)) {
     stop("Malformed file!", call. = FALSE)
   }
 
   is_r_code <- grepl(
-    paste0("^[\t >]*```+\\s*\\{(", engine_pattern, ".*)\\}\\s*$"),
+    paste0("^[\t >]*```+\\s*\\{\\s*", engine_pattern, "[\\s\\},]"),
     lines[starts], perl = TRUE
   )
   list(starts = starts[is_r_code], ends = ends[is_r_code])
