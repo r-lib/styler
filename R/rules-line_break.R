@@ -73,12 +73,27 @@ set_line_break_after_opening_if_call_is_multi_line <-
   if (!is_multi_line) {
     return(pd)
   }
+  break_pos <- find_line_break_position_in_multiline_call(pd)
+
   exception_pos <- c(
     which(pd$token %in% except_token_after),
-    if_else(pd$child[[1]]$text[1] %in% except_text_before, 3L, NA)
+    if_else(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
   )
-  pd$lag_newlines[setdiff(3, exception_pos)] <- 1L
+  pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
   pd
+  }
+
+
+#' Find index of the token before which the line should be broken
+#'
+#' Given a multi-line function call parse table, this function finds the
+#' position of the first named argument and breaks returns the index of it.
+#' If there is no named argument, the line is broken right after the opening
+#' parenthesis.
+#' @inheritParams set_line_break_if_call_is_multi_line
+find_line_break_position_in_multiline_call <- function(pd) {
+  candidate <- (which(pd$token == "EQ_SUB") - 1L)[1]
+  ifelse(is.na(candidate), 3L, candidate)
 }
 
 
