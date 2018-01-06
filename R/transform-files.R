@@ -1,7 +1,7 @@
 #' Transform files with transformer functions
 #'
 #' `transform_files` applies transformations to file contents and writes back
-#'   the result.
+#' the result.
 #' @param files A character vector with paths to the file that should be
 #'   transformed.
 #' @inheritParams make_transformer
@@ -71,8 +71,8 @@ transform_file <- function(path,
 #' Closure to return a transformer function
 #'
 #' This function takes a list of transformer functions as input and
-#'  returns a function that can be applied to character strings
-#'  that should be transformed.
+#' returns a function that can be applied to character strings
+#' that should be transformed.
 #' @param transformers A list of transformer functions that operate on flat
 #'   parse tables.
 make_transformer <- function(transformers) {

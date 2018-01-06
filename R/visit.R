@@ -1,11 +1,11 @@
 #' Visit'em all
 #'
 #' Apply a list of functions to each level in a nested parse table.
-#'   `pre_visit()` applies `funs` before it proceeds to the children,
-#'   (that is, starts from the outermost level of nesting progressing
-#'   to the innermost level), `post_visit()` proceeds to its children
-#'   before applying the functions (meaning it first applies the functions
-#'   to the innermost level of nesting first and then going outwards).
+#' `pre_visit()` applies `funs` before it proceeds to the children,
+#' (that is, starts from the outermost level of nesting progressing
+#' to the innermost level), `post_visit()` proceeds to its children
+#' before applying the functions (meaning it first applies the functions
+#' to the innermost level of nesting first and then going outwards).
 #' @param pd_nested A nested parse table.
 #' @inheritParams visit_one
 #' @family visitors
@@ -46,13 +46,12 @@ visit_one <- function(pd_flat, funs) {
   )
 }
 
-
 #' Propagate context to terminals
 #'
 #' Implements a very specific pre-visiting scheme, namely to propagate
-#'   indention, spaces and lag_newlines to inner token to terminals. This means
-#'   that information regarding indention, line breaks and spaces (which is
-#'   relative in `pd_nested`) will be converted into absolute.
+#' indention, spaces and lag_newlines to inner token to terminals. This means
+#' that information regarding indention, line breaks and spaces (which is
+#' relative in `pd_nested`) will be converted into absolute.
 #' @inherit context_towards_terminals
 #' @seealso context_towards_terminals visitors
 #' @importFrom purrr pmap
@@ -80,14 +79,13 @@ context_to_terminals <- function(pd_nested,
   pd_transformed
 }
 
-
 #' Update the a parse table given outer context
 #'
 #' `outer_lag_newlines` are added to the first token in `pd`,
-#'   `outer_indent` is added to all tokens in `pd`, `outer_spaces` is added to
-#'   the last token in `pd`. [context_to_terminals()] calls this function
-#'   repeatedly, which means the propagation of the parse information to the
-#'   terminal tokens.
+#' `outer_indent` is added to all tokens in `pd`, `outer_spaces` is added to
+#' the last token in `pd`. [context_to_terminals()] calls this function
+#' repeatedly, which means the propagation of the parse information to the
+#' terminal tokens.
 #' @param pd_nested A nested parse table.
 #' @param outer_lag_newlines The lag_newlines to be propagated inwards.
 #' @param outer_indent The indention depth to be propagated inwards.
@@ -113,7 +111,7 @@ context_towards_terminals <- function(pd_nested,
 #' Extract terminal tokens
 #'
 #' Turns a nested parse table into a flat parse table and extracts *all*
-#' attributes
+#' attributes.
 #' @param pd_nested A nested parse table.
 extract_terminals <- function(pd_nested) {
   if (is.null(pd_nested)) return(pd)
@@ -121,22 +119,22 @@ extract_terminals <- function(pd_nested) {
   bind_rows(if_else(pd_nested$terminal, pd_split, pd_nested$child))
 }
 
-
 #' Enrich flattened parse table
 #'
 #' Enriches a flattened parse table with terminals only. In particular, it is
-#'   possible to compute the exact position a token will have (line and column)
-#'   when it will be serialized.
-#' @details Since we have only terminal tokens now, the line on which a token
-#'  starts we also be the line on which it ends. We call `line1` the line on
-#'  which the token starts. `line1` has the same meaning as `line1` that can be
-#'  found in a flat parse table (see [tokenize()]), just that the `line1`
-#'  created by `enrich_terminals()` is the updated version of the former
-#'  `line1`. The same applies for `col1` and `col2`. Note that this function
-#'  does remove the columns `indent` and `spaces.` All information of the former
-#'  is stored in `lag_spaces` now. The later was removed because it is redundant
-#'  after adding the column `lag_spaces`, which is more convenient to work with,
-#'  in particular when serializing the parse table.
+#' possible to compute the exact position a token will have (line and column)
+#' when it will be serialized.
+#' @details
+#' Since we have only terminal tokens now, the line on which a token
+#' starts we also be the line on which it ends. We call `line1` the line on
+#' which the token starts. `line1` has the same meaning as `line1` that can be
+#' found in a flat parse table (see [tokenize()]), just that the `line1`
+#' created by `enrich_terminals()` is the updated version of the former
+#' `line1`. The same applies for `col1` and `col2`. Note that this function
+#' does remove the columns `indent` and `spaces.` All information of the former
+#' is stored in `lag_spaces` now. The later was removed because it is redundant
+#' after adding the column `lag_spaces`, which is more convenient to work with,
+#' in particular when serializing the parse table.
 #' @inheritParams choose_indention
 enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0L)
@@ -162,18 +160,17 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #' Choose the indention method for the tokens
 #'
 #' Either use the raw indention, which is just the spaces computed between
-#'   the first token on a new line and the token before it, or use the indention
-#'   computed according to the transformer used, which is stored in the column
-#'   `indention`.
-#'
-#'  All indention information will be combined with the space information for
-#'  the first token on a new line.
-#'  If `use_raw_indention` is set, information in the column `indention` will
-#'  be discarded anyways. If it is not set, the first token on a new line will
-#'  "inherit" the indention of the whole line.
-#'  The column `indention` will be removed since all information necessary is
-#'  contained in the spacing information of the first token on a new line and
-#'  the position of the tokens will not be changed anymore at this stage.
+#' the first token on a new line and the token before it, or use the indention
+#' computed according to the transformer used, which is stored in the column
+#' `indention`.
+#' All indention information will be combined with the space information for
+#' the first token on a new line.
+#' If `use_raw_indention` is set, information in the column `indention` will
+#' be discarded anyways. If it is not set, the first token on a new line will
+#' "inherit" the indention of the whole line.
+#' The column `indention` will be removed since all information necessary is
+#' contained in the spacing information of the first token on a new line and
+#' the position of the tokens will not be changed anymore at this stage.
 #' @param flattened_pd A nested parse table that was turned into a flat parse
 #'   table using [extract_terminals()].
 #' @param use_raw_indention Boolean indicating whether or not the raw indention
