@@ -29,3 +29,9 @@ test_that("line breaks work with exceptions", {
                                  "switch_ifelse",
                                  transformer = style_text), NA)
 })
+
+test_that("line breaks work with exceptions", {
+  expect_warning(test_collection("line_breaks_fun_call",
+                                 "named_arguments",
+                                 transformer = style_text), NA)
+})
