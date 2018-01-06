@@ -19,6 +19,7 @@ token <- tribble(
   "*"    , "math"        , "'*'"         ,
   "/"    , "math"        , "'/'"         ,
   "^"    , "math"        , "'^'"         ,
+  "~"    , "formula"     , "'~'"         ,
   "if"   , "cond"        , "IF"          ,
   "else" , "cond"        , "ELSE"        ,
   "in"   , "loop_cond"   , "IN"          ,

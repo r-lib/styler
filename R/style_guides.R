@@ -80,6 +80,8 @@ tidyverse_style <- function(scope = "tokens",
         math_token_spacing$zero,
         math_token_spacing$one
       ),
+      partial(
+        style_space_around_token, strict = strict, tokens = "'~'", level = 1),
       if (strict) set_space_around_op else add_space_around_op,
       if (strict) set_space_after_comma else add_space_after_comma,
       remove_space_after_opening_paren,
