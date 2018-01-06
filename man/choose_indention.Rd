@@ -18,8 +18,6 @@ Either use the raw indention, which is just the spaces computed between
 the first token on a new line and the token before it, or use the indention
 computed according to the transformer used, which is stored in the column
 \code{indention}.
-}
-\details{
 All indention information will be combined with the space information for
 the first token on a new line.
 If \code{use_raw_indention} is set, information in the column \code{indention} will
