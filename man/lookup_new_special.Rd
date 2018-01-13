@@ -2,7 +2,7 @@
 % Please edit documentation in R/token-define.R
 \name{lookup_new_special}
 \alias{lookup_new_special}
-\title{lookup which new tokens were created from "SPECIAL"}
+\title{Lookup which new tokens were created from "SPECIAL"}
 \usage{
 lookup_new_special(regex = NA)
 }
@@ -10,5 +10,5 @@ lookup_new_special(regex = NA)
 \item{regex}{A regular expression pattern to search for.}
 }
 \description{
-lookup which new tokens were created from "SPECIAL"
+Lookup which new tokens were created from "SPECIAL"
 }

@@ -154,10 +154,10 @@ remove_space_before_comma <- function(pd_flat) {
 #' Set space between levels of nesting
 #'
 #' With the nested approach, certain rules do not have an effect anymore because
-#'   of the nature of the nested structure. Setting spacing before curly
-#'   brackets in for / if / while statements and function declarations will be
-#'   such a case since a curly bracket is always at the first position in a
-#'   parse table, so spacing cannot be set after the previous token.
+#' of the nature of the nested structure. Setting spacing before curly
+#' brackets in for / if / while statements and function declarations will be
+#' such a case since a curly bracket is always at the first position in a parse
+#' table, so spacing cannot be set after the previous token.
 #' @param pd_flat A flat parse table.
 set_space_between_levels <- function(pd_flat) {
   if (pd_flat$token[1] %in% c("FUNCTION", "IF", "WHILE")) {
@@ -173,9 +173,9 @@ set_space_between_levels <- function(pd_flat) {
 #' Start comments with a space
 #'
 #' Forces comments to start with a space, that is, after the regular expression
-#'   "^#+'*", at least one space must follow if the comment is *non-empty*, i.e
-#'   there is not just spaces within the comment. Multiple spaces may be legit
-#'   for indention in some situations.
+#' "^#+'*", at least one space must follow if the comment is *non-empty*, i.e
+#' there is not just spaces within the comment. Multiple spaces may be legit for
+#' indention in some situations.
 #' @param pd A parse table.
 #' @param force_one Whether or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".

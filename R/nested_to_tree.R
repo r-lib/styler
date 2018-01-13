@@ -15,7 +15,7 @@ create_tree <- function(text, structure_only = FALSE) {
 #' Convert a nested tibble into a node tree
 #'
 #' This function is convenient to display all nesting levels of a nested tibble
-#'   at once.
+#' at once.
 #' @param pd_nested A nested tibble.
 #' @param structure_only Whether or not create a tree that represents the
 #'   structure of the expression without any information on the tokens. Useful

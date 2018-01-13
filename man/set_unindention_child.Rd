@@ -14,6 +14,6 @@ set_unindention_child(pd, token = "')'", unindent_by)
 \item{unindent_by}{By how many spaces one level of indention is reversed.}
 }
 \description{
-check whether any of the children of \code{pd} has \code{token} on the same line as
-the closing \code{token} of pd. If so, unindent that token.
+check whether any of the children of \code{pd} has \code{token} on the same line as the
+closing \code{token} of pd. If so, unindent that token.
 }

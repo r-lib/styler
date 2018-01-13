@@ -173,7 +173,7 @@ needs_indention_one <- function(pd, potential_trigger) {
 #' Set the multi-line column
 #'
 #' Sets the column `multi_line` in `pd` by checking row-wise whether any child
-#'   of a token is a multi-line token.
+#' of a token is a multi-line token.
 #' @param pd A parse table.
 #' @importFrom purrr map_lgl
 set_multi_line <- function(pd) {

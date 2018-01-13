@@ -82,10 +82,9 @@ context_to_terminals <- function(pd_nested,
 #' Update the a parse table given outer context
 #'
 #' `outer_lag_newlines` are added to the first token in `pd`,
-#' `outer_indent` is added to all tokens in `pd`, `outer_spaces` is added to
-#' the last token in `pd`. [context_to_terminals()] calls this function
-#' repeatedly, which means the propagation of the parse information to the
-#' terminal tokens.
+#' `outer_indent` is added to all tokens in `pd`, `outer_spaces` is added to the
+#' last token in `pd`. [context_to_terminals()] calls this function repeatedly,
+#' which means the propagation of the parse information to the terminal tokens.
 #' @param pd_nested A nested parse table.
 #' @param outer_lag_newlines The lag_newlines to be propagated inwards.
 #' @param outer_indent The indention depth to be propagated inwards.
@@ -125,16 +124,16 @@ extract_terminals <- function(pd_nested) {
 #' possible to compute the exact position a token will have (line and column)
 #' when it will be serialized.
 #' @details
-#' Since we have only terminal tokens now, the line on which a token
-#' starts we also be the line on which it ends. We call `line1` the line on
-#' which the token starts. `line1` has the same meaning as `line1` that can be
-#' found in a flat parse table (see [tokenize()]), just that the `line1`
-#' created by `enrich_terminals()` is the updated version of the former
-#' `line1`. The same applies for `col1` and `col2`. Note that this function
-#' does remove the columns `indent` and `spaces.` All information of the former
-#' is stored in `lag_spaces` now. The later was removed because it is redundant
-#' after adding the column `lag_spaces`, which is more convenient to work with,
-#' in particular when serializing the parse table.
+#' Since we have only terminal tokens now, the line on which a token starts we
+#' also be the line on which it ends. We call `line1` the line on which the
+#' token starts. `line1` has the same meaning as `line1` that can be found in a
+#' flat parse table (see [tokenize()]), just that the `line1` created by
+#' `enrich_terminals()` is the updated version of the former `line1`. The same
+#' applies for `col1` and `col2`. Note that this function does remove the
+#' columns `indent` and `spaces.` All information of the former is stored in
+#' `lag_spaces` now. The later was removed because it is redundant after adding
+#' the column `lag_spaces`, which is more convenient to work with, in particular
+#' when serializing the parse table.
 #' @inheritParams choose_indention
 enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0L)

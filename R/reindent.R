@@ -5,7 +5,6 @@
 #' @name update_indention_ref
 NULL
 
-
 #' @describeIn update_indention_ref Updates the reference pos_id for all
 #'   tokens in `pd_nested` if `pd_nested` contains a function call. Tokens that
 #'   start on the same line as the opening parenthesis, are not themselves
@@ -110,9 +109,6 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   flattened_pd$col2[cols_to_update] <- flattened_pd$col2[cols_to_update] + shift
   flattened_pd
 }
-
-
-
 
 #' Set indention of tokens that match regex
 #'
