@@ -1,7 +1,7 @@
 #' Unindent a child if necessary
 #'
-#' check whether any of the children of `pd` has `token` on the same line as
-#'   the closing `token` of pd. If so, unindent that token.
+#' check whether any of the children of `pd` has `token` on the same line as the
+#' closing `token` of pd. If so, unindent that token.
 #' @inheritParams unindent_child
 #' @importFrom purrr map
 #' @importFrom rlang seq2

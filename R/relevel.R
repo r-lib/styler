@@ -4,11 +4,11 @@
 #' Flatten some token in the nested parse table based on operators
 #'
 #' Certain tokens are not placed optimally in the nested parse data with
-#'   [compute_parse_data_nested()]. For example, the token of arithmetic
-#'   operations 1 + 1 + 1 should all be on the same level of nesting since
-#'   the indention is the same for all but the first two terminals. Setting the
-#'   indention correctly is easier to achieve if they are put on the same level
-#'   of nesting.
+#' [compute_parse_data_nested()]. For example, the token of arithmetic
+#' operations 1 + 1 + 1 should all be on the same level of nesting since the
+#' indention is the same for all but the first two terminals. Setting the
+#' indention correctly is easier to achieve if they are put on the same level of
+#' nesting.
 #' @param pd_nested A nested parse table to partially flatten.
 flatten_operators <- function(pd_nested) {
   pd_nested %>%
@@ -17,9 +17,9 @@ flatten_operators <- function(pd_nested) {
 
 #' Flatten one level of nesting with its child
 #'
-#' Flattening is done in two ways. We can flatten a parse table by moving
-#'   the left hand token of an operator one level up. Or doing that with the
-#'   right hand token.
+#' Flattening is done in two ways. We can flatten a parse table by moving the
+#' left hand token of an operator one level up. Or doing that with the right
+#' hand token.
 #' @param pd_nested A nested parse table.
 #' @include token-define.R
 flatten_operators_one <- function(pd_nested) {

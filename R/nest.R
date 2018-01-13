@@ -1,8 +1,7 @@
 #' Obtain a nested parse table from a character vector
 #'
 #' Parses `text` to a flat parse table and subsequently changes its
-#'   representation into a nested parse table with
-#'   [nest_parse_data()].
+#' representation into a nested parse table with [nest_parse_data()].
 #' @param text A character vector to parse.
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
@@ -24,7 +23,7 @@ compute_parse_data_nested <- function(text) {
 #' Enhance the mapping of text to the token "SPECIAL"
 #'
 #' Map text corresponding to the token "SPECIAL" to a (more) unique token
-#'   description.
+#' description.
 #' @param pd A parse table.
 enhance_mapping_special <- function(pd) {
   pipes <- pd$token == "SPECIAL" & pd$text == "%>%"
@@ -102,11 +101,11 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' Nest a flat parse table
 #'
 #' `nest_parse_data` groups `pd_flat` into a parse table with tokens that are
-#'   a parent to other tokens (called internal) and such that are not (called
-#'   child). Then, the token in child are joined to their parents in internal
-#'   and all token information of the children is nested into a column "child".
-#'   This is done recursively until we are only left with a nested tibble that
-#'   contains one row: The nested parse table.
+#'  a parent to other tokens (called internal) and such that are not (called
+#'  child). Then, the token in child are joined to their parents in internal
+#'  and all token information of the children is nested into a column "child".
+#'  This is done recursively until we are only left with a nested tibble that
+#'  contains one row: The nested parse table.
 #' @param pd_flat A flat parse table including both terminals and non-terminals.
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
@@ -136,7 +135,7 @@ nest_parse_data <- function(pd_flat) {
 #' Combine child and internal child
 #'
 #' Binds two parse tables together and arranges them so that the tokens are in
-#'   the correct order.
+#' the correct order.
 #' @param child A parse table or `NULL`.
 #' @param internal_child A parse table or `NULL`.
 #' @details Essentially, this is a wrapper around [dplyr::bind_rows()], but

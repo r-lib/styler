@@ -24,10 +24,9 @@ An updated parse table.
 }
 \description{
 \code{outer_lag_newlines} are added to the first token in \code{pd},
-\code{outer_indent} is added to all tokens in \code{pd}, \code{outer_spaces} is added to
-the last token in \code{pd}. \code{\link[=context_to_terminals]{context_to_terminals()}} calls this function
-repeatedly, which means the propagation of the parse information to the
-terminal tokens.
+\code{outer_indent} is added to all tokens in \code{pd}, \code{outer_spaces} is added to the
+last token in \code{pd}. \code{\link[=context_to_terminals]{context_to_terminals()}} calls this function repeatedly,
+which means the propagation of the parse information to the terminal tokens.
 }
 \seealso{
 context_to_terminals

@@ -37,7 +37,7 @@ lookup_tokens <- function() {
   token
 }
 
-#' lookup which new tokens were created from "SPECIAL"
+#' Lookup which new tokens were created from "SPECIAL"
 #'
 #' @param regex A regular expression pattern to search for.
 #' @importFrom purrr map_chr
