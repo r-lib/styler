@@ -139,4 +139,5 @@ test <- function() {
 lm(a~b+c,data=NA)
 lm(a~.-1,data=NA)
 a~b:c
+a   ~   b  : c
 a~b :c
