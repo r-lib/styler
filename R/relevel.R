@@ -144,7 +144,6 @@ relocate_eq_assign <- function(pd) {
 #' Please refer to the section 'Examples' in [relocate_eq_assign()] for details.
 #' @param pd A parse table.
 #' @importFrom rlang seq2
-#' @importFrom purrr map_dfr
 relocate_eq_assign_nest <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   if (length(idx_eq_assign) > 0) {

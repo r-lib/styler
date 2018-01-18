@@ -110,3 +110,11 @@ last <- function(x, order_by = NULL, default = x[NA_real_]) {
 slice <- function(.data, ...) {
   .data[c(...), , drop = FALSE]
 }
+
+#' @importFrom purrr as_mapper map
+map_dfr <- function (.x, .f, ..., .id = NULL) {
+  .f <- as_mapper(.f, ...)
+  res <- map(.x, .f, ...)
+  bind_rows(res, .id = .id)
+}
+
