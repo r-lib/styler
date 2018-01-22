@@ -10,7 +10,7 @@ Imports:
     cli,
     enc,
     magrittr,
-    purrr,
+    purrr (> 0.2.3),
     rematch2,
     rlang,
     rprojroot,
