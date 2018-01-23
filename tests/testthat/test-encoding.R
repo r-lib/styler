@@ -7,17 +7,16 @@ test_that("non-ASCII characters are handled properly", {
   withr::with_locale(
     c(LC_CTYPE = locale),
     {
-      # c.f. dplyr's tests/testthat/helper-encoding.R
-      latin_string <- "Gl\u00fcck+1"
-
       tmp <- tempfile(fileext = ".R")
       con <- file(tmp, encoding = "UTF-8")
       on.exit(close(con), add = TRUE)
 
-      writeLines(latin_string, con)
+      # c.f. dplyr's tests/testthat/helper-encoding.R
+      writeLines("Gl\u00fcck+1", con)
+
       style_file(tmp)
       result <- readLines(con)
-      expect_equal(result, latin_string)
+      expect_equal(result, "Gl\u00fcck + 1")
     }
   )
 })
