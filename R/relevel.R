@@ -164,7 +164,7 @@ relocate_eq_assign_nest <- function(pd) {
 #' @param pd A parse table.
 find_block_id <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_belongs_to_block <- c(0, cumsum(diff(idx_eq_assign)) > 2)
+  eq_belongs_to_block <- c(0, cumsum(diff(idx_eq_assign) > 2))
 
   empty_seq <- rep(0, nrow(pd))
   empty_seq[idx_eq_assign - 1] <- eq_belongs_to_block
