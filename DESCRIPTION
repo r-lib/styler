@@ -66,3 +66,5 @@ Collate:
     'vertical.R'
     'visit.R'
     'zzz.R'
+Remotes:
+    krlmlr/enc
