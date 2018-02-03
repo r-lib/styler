@@ -8,7 +8,7 @@ Description:
 Imports:
     backports,
     cli,
-    enc,
+    enc (>= 0.1-10),
     magrittr,
     purrr (>= 0.2.3),
     rematch2,
