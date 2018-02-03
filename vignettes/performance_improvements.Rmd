@@ -73,3 +73,27 @@ microbenchmark::microbenchmark(
 #>  base 930.4391 944.9253 969.2838 951.4632 951.6571 1067.934     5
 ```
 
+Various changes (positive and negative in terms of speed)
+```{r}
+microbenchmark::microbenchmark(
+  base = style_file("tests/testthat/indention_multiple/overall-in.R"),
+  times = 10
+)
+#> Unit: seconds
+#> expr      min       lq     mean   median       uq      max neval
+#>  base 1.235749 1.259139 1.269869 1.269396 1.275887 1.330341    10
+
+```
+
+
+Removed tibble bottlenecks (tibble 1.4.2, https://github.com/tidyverse/tibble/pull/348)
+```{r}
+microbenchmark::microbenchmark(
+  base = style_file("tests/testthat/indention_multiple/overall-in.R"),
+  times = 10
+)
+#> Unit: milliseconds
+#>  expr      min       lq     mean   median       uq      max neval
+#>  base 514.9392 520.5061 587.6329 530.3154 548.7248 989.3332    10
+
+```
