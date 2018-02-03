@@ -1,11 +1,10 @@
 context("non-ASCII characters are handled properly")
 
 test_that("non-ASCII characters are handled properly", {
-  # c.f. rlang::mut_latin1_locale()
-  locale <- if (.Platform$OS.type == "windows") "English_United States.1252" else "en_US.ISO8859-1"
+  skip_if(.Platform$OS.type != "windows")
 
   withr::with_locale(
-    c(LC_CTYPE = locale),
+    c(LC_CTYPE = "English_United States.1252"),
     {
       tmp <- tempfile(fileext = ".R")
       con <- file(tmp, encoding = "UTF-8")
