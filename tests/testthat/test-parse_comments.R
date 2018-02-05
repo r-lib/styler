@@ -41,3 +41,10 @@ test_that("rplumber tags / syntax is handled properly", {
                                  "rplumber",
                                  transformer = style_text), NA)
 })
+
+
+test_that("hashbangs are respected", {
+  expect_warning(test_collection("parse_comments",
+                                 "shebang",
+                                 transformer = style_text), NA)
+})

@@ -181,14 +181,13 @@ set_space_between_levels <- function(pd_flat) {
 #'   after the regex "^#+'*".
 #' @importFrom purrr map_chr
 start_comments_with_space <- function(pd, force_one = FALSE) {
-  comment_pos <- pd$token == "COMMENT"
+  comment_pos <- is_comment(pd) & !is_shebang(pd)
   if (!any(comment_pos)) return(pd)
 
   comments <- rematch2::re_match(
     pd$text[comment_pos],
     "^(?<prefix>#+['\\*]*)(?<space_after_prefix> *)(?<text>.*)$"
   )
-
   comments$space_after_prefix <- nchar(
     comments$space_after_prefix, type = "width"
   )

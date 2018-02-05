@@ -29,6 +29,27 @@ is_function_dec <- function(pd) {
   pd$token[1] == "FUNCTION"
 }
 
+is_comment <- function(pd) {
+  if (is.null(pd)) return(FALSE)
+  pd$token == "COMMENT"
+}
+
+#' Identify comments that are shebangs
+#'
+#' Shebangs should be preserved and no space should be inserted between
+#' \# and !. A comment is a shebang if it is the first top level token
+#' (identified with `pos_id`) and if it starts with `#!`.
+#' @param pd A parse table.
+#' @examples
+#' style_text("#!/usr/bin/env Rscript")
+is_shebang <- function(pd) {
+  if (is.null(pd)) return(rep(FALSE, nrow(pd)))
+  is_first_comment <- is_comment(pd) & (pd$pos_id == 1L)
+  is_first_comment[is_first_comment] <- grepl(
+    "^#!", pd$text[is_first_comment], perl = TRUE
+  )
+  is_first_comment
+}
 
 contains_else_expr <- function(pd) {
   any(pd$token == "ELSE")
