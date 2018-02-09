@@ -64,7 +64,7 @@ separate_chunks <- function(lines) {
 #' whose name matches `engine-pattern` are considered as R code.
 #' @inheritParams separate_chunks
 #' @param engine_pattern A regular expression that must match the engine name.
-identify_r_raw_chunks <- function(lines, engine_pattern = "[rR]") {
+identify_r_raw_chunks <- function(lines, engine_pattern = get_engine_pattern()) {
   pattern <- get_knitr_pattern(lines)
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
     stop("Unrecognized chunk pattern!", call. = FALSE)
@@ -81,6 +81,20 @@ identify_r_raw_chunks <- function(lines, engine_pattern = "[rR]") {
     lines[starts], perl = TRUE
   )
   list(starts = starts[is_r_code], ends = ends[is_r_code])
+}
+
+#' What's the engine pattern for rmd code chunks?
+#'
+#' The function returns the regular expression pattern that identifies
+#' all r engines in Rmd chunks. Defaults to `[Rr]`. You probably only want to
+#' change this if you create a knitr engine that processes R code but is not
+#' the default engine `r`.
+#' The pattern must be followed by a space (in the case the chunk is given
+#' a name), a comma (if no name is given but further options are passed to the
+#' engine) or a closing curly brace (in case no option and no name is given to
+#' the chunk).
+get_engine_pattern <- function() {
+  "[rR]"
 }
 
 #' Get chunk pattern

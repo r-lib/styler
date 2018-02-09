@@ -10,6 +10,6 @@ separate_chunks(lines)
 \item{lines}{a character vector of lines from an Rmd file}
 }
 \description{
-Identifies and separates the code and text chunks (the latter including non-R
+Identifies and separates the code and text chunks (the latter includes non-R
 code) within an Rmd file, and returns these separately.
 }

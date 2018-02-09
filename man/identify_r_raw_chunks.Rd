@@ -4,7 +4,7 @@
 \alias{identify_r_raw_chunks}
 \title{Identifies raw R code chunks}
 \usage{
-identify_r_raw_chunks(lines, engine_pattern = "[rR]")
+identify_r_raw_chunks(lines, engine_pattern = get_engine_pattern())
 }
 \arguments{
 \item{lines}{a character vector of lines from an Rmd file}
