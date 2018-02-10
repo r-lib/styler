@@ -10,7 +10,7 @@ Imports:
     cli,
     enc,
     magrittr,
-    purrr (> 0.2.3),
+    purrr (>= 0.2.3),
     rematch2,
     rlang,
     rprojroot,
@@ -67,4 +67,4 @@ Collate:
     'visit.R'
     'zzz.R'
 Remotes:
-    krlmlr/enc
+    krlmlr/enc@v0.1-10
