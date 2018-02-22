@@ -30,7 +30,10 @@ test_that("logical, special EQ_SUB and EQ_ASSIGN tokens are indented correctly",
                                  transformer = style_text, scope = "line_breaks"), NA)
 
   expect_warning(test_collection("indention_operators",
-                                 "eq",
+                                 "eq_assign",
+                                 transformer = style_text), NA)
+  expect_warning(test_collection("indention_operators",
+                                 "eq_formal_simple",
                                  transformer = style_text), NA)
 })
 
@@ -50,6 +53,25 @@ test_that(
     NA)
 })
 
+test_that("indents eq_sub correctly with various levels of scope" , {
+  expect_warning(test_collection("indention_operators",
+                                 "eq_sub_complex_indention",
+                                 transformer = style_text, scope = "indention"), NA)
+
+  expect_warning(test_collection("indention_operators",
+                                 "eq_sub_complex_tokens",
+                                 transformer = style_text, scope = "tokens"), NA)
+})
+
+test_that("indents eq_formals correctly with various levels of scope" , {
+  expect_warning(test_collection("indention_operators",
+                                 "eq_formals_complex_indention",
+                                 transformer = style_text, scope = "indention"), NA)
+
+  expect_warning(test_collection("indention_operators",
+                                 "eq_formals_complex_tokens",
+                                 transformer = style_text, scope = "tokens"), NA)
+})
 
 test_that("overall", {
   expect_warning(test_collection("indention_operators",
