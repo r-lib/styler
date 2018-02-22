@@ -58,7 +58,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
 #' @importFrom rlang seq2
 update_indention_ref_fun_dec <- function(pd_nested) {
   if (pd_nested$token[1] == "FUNCTION") {
-    seq <- seq2(3, nrow(pd_nested) - 1)
+    seq <- seq2(3, nrow(pd_nested) - 2)
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2]
   }
   pd_nested
