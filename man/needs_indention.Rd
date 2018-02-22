@@ -4,10 +4,13 @@
 \alias{needs_indention}
 \title{Check whether indention is needed}
 \usage{
-needs_indention(pd, potential_triggers)
+needs_indention(pd, potential_triggers_pos, other_trigger_tokens = NULL)
 }
 \arguments{
 \item{pd}{A parse table.}
+
+\item{other_trigger_tokens}{Other tokens that are going to cause indention
+if on the same line as the token corresponding to \code{potential_trigger}.}
 
 \item{potential_triggers}{A vector with indices of the potential trigger
 tokens in \code{pd}.}
