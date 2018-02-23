@@ -163,7 +163,7 @@ compute_indent_indices <- function(pd,
 #'
 #' Checks for each potential trigger token in `pd` whether it actually should
 #' cause indention.
-#' @param potential_triggers A vector with indices of the potential trigger
+#' @param potential_triggers_pos A vector with indices of the potential trigger
 #'   tokens in `pd`.
 #' @inheritParams needs_indention_one
 needs_indention <- function(pd,
@@ -184,7 +184,7 @@ needs_indention <- function(pd,
 #'   break that is going to cause indention.
 #'
 #' @param pd A parse table.
-#' @param potential_trigger the index of the token in the parse table
+#' @param potential_trigger_pos the index of the token in the parse table
 #'   for which it should be checked whether it should trigger indention.
 #' @return Returns `TRUE` if indention is needed, `FALSE` otherwise.
 #' @param other_trigger_tokens Other tokens that are going to cause indention

@@ -114,7 +114,7 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
 #' already embeded in the column `lag_spaces`, only tokens at the beginning of
 #' a line are of concern.
 #' @param flattened_pd A flattened parse table.
-#' @param token_to_update An integer vector with positions of tokens to update.
+#' @inheritParams apply_ref_indention_one
 #' @seealso apply_ref_indention_one()
 #' @examples
 #' style_text("function(a =

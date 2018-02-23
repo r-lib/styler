@@ -9,7 +9,8 @@ find_tokens_to_update(flattened_pd, target_token)
 \arguments{
 \item{flattened_pd}{A flattened parse table.}
 
-\item{token_to_update}{An integer vector with positions of tokens to update.}
+\item{target_token}{The index of the token from which the indention level
+should be applied to other tokens.}
 }
 \description{
 Given a target token and a flattened parse table, the token for which the

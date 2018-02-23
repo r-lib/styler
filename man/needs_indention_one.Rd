@@ -9,11 +9,11 @@ needs_indention_one(pd, potential_trigger_pos, other_trigger_tokens)
 \arguments{
 \item{pd}{A parse table.}
 
+\item{potential_trigger_pos}{the index of the token in the parse table
+for which it should be checked whether it should trigger indention.}
+
 \item{other_trigger_tokens}{Other tokens that are going to cause indention
 if on the same line as the token corresponding to \code{potential_trigger}.}
-
-\item{potential_trigger}{the index of the token in the parse table
-for which it should be checked whether it should trigger indention.}
 }
 \value{
 Returns \code{TRUE} if indention is needed, \code{FALSE} otherwise.

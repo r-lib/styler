@@ -9,11 +9,11 @@ needs_indention(pd, potential_triggers_pos, other_trigger_tokens = NULL)
 \arguments{
 \item{pd}{A parse table.}
 
+\item{potential_triggers_pos}{A vector with indices of the potential trigger
+tokens in \code{pd}.}
+
 \item{other_trigger_tokens}{Other tokens that are going to cause indention
 if on the same line as the token corresponding to \code{potential_trigger}.}
-
-\item{potential_triggers}{A vector with indices of the potential trigger
-tokens in \code{pd}.}
 }
 \description{
 Checks for each potential trigger token in \code{pd} whether it actually should
