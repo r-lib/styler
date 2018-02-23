@@ -96,9 +96,7 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   # udate spaces
   copied_spaces <- flattened_pd$col2[target_token]
   old_spaces <- flattened_pd$lag_spaces[token_to_update[1]]
-  if (length(token_to_update) < 1) return(flattened_pd)
-  zero_ref <- min(flattened_pd$lag_spaces[token_to_update])
-  shift <-  copied_spaces - zero_ref
+  shift <- copied_spaces
   flattened_pd$lag_spaces[token_to_update] <-
     flattened_pd$lag_spaces[token_to_update] + shift
 
@@ -115,8 +113,6 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
 #' spacing information needs to be updated are computed. Since indention is
 #' already embeded in the column `lag_spaces`, only tokens at the beginning of
 #' a line are of concern.
-#' This function is currently tailored targeted at
-#' re-indention of function delcaration.
 #' @param flattened_pd A flattened parse table.
 #' @param token_to_update An integer vector with positions of tokens to update.
 #' @seealso apply_ref_indention_one()

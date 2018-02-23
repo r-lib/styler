@@ -36,6 +36,21 @@ indent_op <- function(pd,
   pd
 }
 
+#' Revert the indention of function declaration heads
+#'
+#' Necessary for consistent indention of the function declaration head.
+#' @param pd A parse table.
+#' @seealso set_unindention_child update_indention_ref_fun_dec
+unindent_fun_dec <- function(pd) {
+  if (is_function_dec(pd)) {
+    idx_closing_brace <- which(pd$token %in% "')'")
+    fun_dec_head <- seq2(2L, idx_closing_brace)
+    pd$indent[fun_dec_head] <- 0L
+
+  }
+  pd
+}
+
 #' @describeIn update_indention Updates indention for token EQ_SUB. Only differs
 #'   from [indent_op()] in the sense that not all subsequent tokens in the parse
 #'   table are necessarily indented, as `EQ_SUB` and `EQ_FORMALS` can occur

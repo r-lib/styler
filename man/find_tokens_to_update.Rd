@@ -16,8 +16,6 @@ Given a target token and a flattened parse table, the token for which the
 spacing information needs to be updated are computed. Since indention is
 already embeded in the column \code{lag_spaces}, only tokens at the beginning of
 a line are of concern.
-This function is currently tailored targeted at
-re-indention of function delcaration.
 }
 \examples{
 style_text("function(a =
