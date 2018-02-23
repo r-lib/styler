@@ -2,7 +2,7 @@
 % Please edit documentation in R/indent.R
 \name{unindent_fun_dec}
 \alias{unindent_fun_dec}
-\title{Revert the indention of function declaration heads}
+\title{Revert the indention of function declaration header}
 \usage{
 unindent_fun_dec(pd)
 }
@@ -10,7 +10,7 @@ unindent_fun_dec(pd)
 \item{pd}{A parse table.}
 }
 \description{
-Necessary for consistent indention of the function declaration head.
+Necessary for consistent indention of the function declaration header.
 }
 \seealso{
 set_unindention_child update_indention_ref_fun_dec

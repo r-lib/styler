@@ -131,6 +131,7 @@ parse_transform_serialize <- function(text, transformers) {
 #'   hence line breaks must be modified first).
 #' * spacing rules (must be after line-breaks and updating newlines and
 #'   multi-line).
+#' * indention.
 #' * token manipulation / replacement (is last since adding and removing tokens
 #'   will invalidate columns token_after and token_before).
 #' * Update indention reference (must be after line breaks).

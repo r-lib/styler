@@ -36,9 +36,9 @@ indent_op <- function(pd,
   pd
 }
 
-#' Revert the indention of function declaration heads
+#' Revert the indention of function declaration header
 #'
-#' Necessary for consistent indention of the function declaration head.
+#' Necessary for consistent indention of the function declaration header.
 #' @param pd A parse table.
 #' @seealso set_unindention_child update_indention_ref_fun_dec
 unindent_fun_dec <- function(pd) {
@@ -46,7 +46,6 @@ unindent_fun_dec <- function(pd) {
     idx_closing_brace <- which(pd$token %in% "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
     pd$indent[fun_dec_head] <- 0L
-
   }
   pd
 }
@@ -144,8 +143,8 @@ compute_indent_indices <- function(pd,
                                    token_closing = NULL) {
   npd <- nrow(pd)
   potential_triggers <- which(pd$token %in% token_opening)
-  needs_indention <- needs_indention(
-    pd, potential_triggers, other_trigger_tokens = c("EQ_SUB", "EQ_FORMALS")
+  needs_indention <- needs_indention(pd, potential_triggers,
+    other_trigger_tokens = c("EQ_SUB", "EQ_FORMALS")
   )
   trigger <- potential_triggers[needs_indention][1]
   if (is.na(trigger)) return(numeric(0))
@@ -201,7 +200,7 @@ needs_indention_one <- function(pd,
     potential_trigger_pos, before_first_break
   )
   multi_line_token <- pd_is_multi_line(
-    pd[row_idx_between_trigger_and_line_break,]
+    pd[row_idx_between_trigger_and_line_break, ]
   )
   remaining_row_idx_between_trigger_and_line_break <- setdiff(
     row_idx_between_trigger_and_line_break,
@@ -209,8 +208,8 @@ needs_indention_one <- function(pd,
   )
 
   other_trigger_on_same_line <-
-    pd[remaining_row_idx_between_trigger_and_line_break,]$token %in%
-      other_trigger_tokens
+    pd[remaining_row_idx_between_trigger_and_line_break, ]$token %in%
+    other_trigger_tokens
 
   !any(multi_line_token) & !any(other_trigger_on_same_line)
 }
