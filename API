@@ -4,7 +4,7 @@
 
 create_style_guide(initialize = default_style_guide_attributes, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE, reindention = tidyverse_reindention())
 default_style_guide_attributes(pd_flat)
-specify_math_token_spacing(zero = NULL, one = c("'+'", "'-'", "'*'", "'/'", "'^'"))
+specify_math_token_spacing(zero = "'^'", one = c("'+'", "'-'", "'*'", "'/'"))
 specify_reindention(regex_pattern = NULL, indention = 0, comments_only = TRUE)
 style_dir(path = ".", ..., style = tidyverse_style, transformers = style(...), filetype = "R", recursive = TRUE, exclude_files = NULL)
 style_file(path, ..., style = tidyverse_style, transformers = style(...))

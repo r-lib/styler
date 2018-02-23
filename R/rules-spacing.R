@@ -27,9 +27,11 @@ set_space_around_op <- function(pd_flat) {
 #' @param zero Character vector of tokens that should be surrounded with zero
 #'   spaces.
 style_space_around_math_token <- function(strict, zero, one, pd_flat) {
+  # We remove spaces for zero (e.g., around ^ in the tidyverse style guide)
+  # even for strict = FALSE to be consistent with the : operator
   pd_flat %>%
-    style_space_around_token(strict, zero, 0L) %>%
-    style_space_around_token(strict, one, 1L)
+    style_space_around_token(strict = TRUE, zero, 0L) %>%
+    style_space_around_token(strict = strict, one, 1L)
 }
 
 #' Set spacing of token to a certain level
