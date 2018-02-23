@@ -208,7 +208,7 @@ needs_indention_one <- function(pd,
   )
 
   other_trigger_on_same_line <-
-    pd[remaining_row_idx_between_trigger_and_line_break, ]$token %in%
+    pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
     other_trigger_tokens
 
   !any(multi_line_token) & !any(other_trigger_on_same_line)
