@@ -14,7 +14,7 @@ Imports:
     rematch2,
     rlang,
     rprojroot,
-    tibble,
+    tibble (>= 1.4.2),
     withr
 Suggests:
     data.tree,
