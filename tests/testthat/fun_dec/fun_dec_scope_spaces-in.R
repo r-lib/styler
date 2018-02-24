@@ -10,3 +10,18 @@ a <- function(x, #
 {
   x
 }
+
+function(a =
+           b,
+         c) {}
+
+function(a =
+           b,
+         c) {
+
+}
+
+function(a =
+           b,
+         c
+) {}
