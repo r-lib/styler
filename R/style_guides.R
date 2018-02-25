@@ -64,39 +64,50 @@ tidyverse_style <- function(scope = "tokens",
 
   space_manipulators <- if (scope >= "spaces") {
     lst(
-      partial(indent_braces, indent_by = indent_by),
-      partial(indent_op, indent_by = indent_by),
-      partial(indent_eq_sub, indent_by = indent_by),
-      partial(indent_without_paren, indent_by = indent_by),
-
+      indent_braces = partial(indent_braces, indent_by = indent_by),
+      indent_op = partial(indent_op, indent_by = indent_by),
+      indent_eq_sub = partial(indent_eq_sub, indent_by = indent_by),
+      indent_without_paren = partial(indent_without_paren,
+        indent_by = indent_by
+      ),
       fix_quotes,
       remove_space_before_closing_paren,
       remove_space_before_opening_paren = if (strict) remove_space_before_opening_paren,
       add_space_after_for_if_while,
       add_space_before_brace,
       remove_space_before_comma,
-      partial(
+      style_space_around_math_token = partial(
         style_space_around_math_token, strict,
         math_token_spacing$zero,
         math_token_spacing$one
       ),
-      partial(
+      style_space_around_tilde = partial(
         style_space_around_token, strict = strict, tokens = "'~'", level = 1L),
-      if (strict) set_space_around_op else add_space_around_op,
-      if (strict) set_space_after_comma else add_space_after_comma,
+      spacing_around_op = if (strict) {
+        set_space_around_op
+      }else {
+        add_space_around_op
+      },
+      spacing_around_comma = if (strict) {
+        set_space_after_comma
+      } else {
+        add_space_after_comma
+      },
       remove_space_after_opening_paren,
       remove_space_after_excl,
       set_space_after_bang_bang,
       remove_space_before_dollar,
       remove_space_after_fun_dec,
       remove_space_around_colons,
-      partial(
-        start_comments_with_space,
+      start_comments_with_space = partial(start_comments_with_space,
         force_one = start_comments_with_one_space
       ),
-
       remove_space_after_unary_pm_nested,
-      if (strict) set_space_before_comments else add_space_before_comments,
+      spacing_before_comments = if (strict) {
+        set_space_before_comments
+      } else {
+        add_space_before_comments
+      },
       set_space_between_levels,
       set_space_between_eq_sub_and_comma
     )
@@ -111,17 +122,20 @@ tidyverse_style <- function(scope = "tokens",
         if (strict) remove_line_break_before_round_closing_after_curly,
       remove_line_break_before_round_closing_fun_dec =
         if (strict) remove_line_break_before_round_closing_fun_dec,
-      partial(style_line_break_around_curly, strict),
+      style_line_break_around_curly = partial(style_line_break_around_curly,
+        strict
+      ),
       set_line_break_after_opening_if_call_is_multi_line = if (strict)
         partial(
           set_line_break_after_opening_if_call_is_multi_line,
           except_token_after = "COMMENT",
           except_text_before = c("switch", "ifelse", "if_else")
         ),
-      set_line_break_before_closing_call = if (strict)
+      set_line_break_before_closing_call = if (strict) {
         partial(
           set_line_break_before_closing_call, except_token_before = "COMMENT"
-        ),
+        )
+      },
       remove_line_break_in_empty_fun_call,
       add_line_break_after_pipe
     )
