@@ -48,3 +48,9 @@ test_that("hashbangs are respected", {
                                  "shebang",
                                  transformer = style_text), NA)
 })
+
+test_that("code chunk headers for spinning are respected", {
+  expect_warning(test_collection("parse_comments",
+                                 "spinning_code_chunk_headers",
+                                 transformer = style_text), NA)
+})
