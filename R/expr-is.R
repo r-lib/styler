@@ -43,12 +43,30 @@ is_comment <- function(pd) {
 #' @examples
 #' style_text("#!/usr/bin/env Rscript")
 is_shebang <- function(pd) {
-  if (is.null(pd)) return(rep(FALSE, nrow(pd)))
   is_first_comment <- is_comment(pd) & (pd$pos_id == 1L)
   is_first_comment[is_first_comment] <- grepl(
     "^#!", pd$text[is_first_comment], perl = TRUE
   )
   is_first_comment
+}
+
+#' Identify spinning code chunk header
+#'
+#' See https://yihui.name/knitr/demo/stitch/#spin-comment-out-texts for details.
+#' @examples
+#' style_text(c(
+#'   "# title",
+#'   "some_code <- function() {}",
+#'   "#+ chunk-label, opt1=value1",
+#'   "call(3, 2, c(3:2))"
+#'   ))
+#' @param pd A parse table.
+is_code_chunk_header <- function(pd) {
+  is_comment <- is_comment(pd)
+  is_comment[is_comment] <- grepl(
+    "^#[\\+|\\-]", pd$text[is_comment], perl = TRUE
+  )
+  is_comment
 }
 
 contains_else_expr <- function(pd) {
@@ -73,7 +91,6 @@ contains_else_expr_that_needs_braces <- function(pd) {
     FALSE
   }
 }
-
 
 is_cond_expr <- function(pd) {
   pd$token[1] == "IF"

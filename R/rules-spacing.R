@@ -183,7 +183,7 @@ set_space_between_levels <- function(pd_flat) {
 #'   after the regex "^#+'*".
 #' @importFrom purrr map_chr
 start_comments_with_space <- function(pd, force_one = FALSE) {
-  comment_pos <- is_comment(pd) & !is_shebang(pd)
+  comment_pos <- is_comment(pd) & !is_shebang(pd) & !is_code_chunk_header(pd)
   if (!any(comment_pos)) return(pd)
 
   comments <- rematch2::re_match(
