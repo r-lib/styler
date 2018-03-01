@@ -19,7 +19,8 @@ indent_braces <- function(pd, indent_by) {
   set_unindention_child(pd, token = "')'", unindent_by = indent_by)
 }
 
-#' @describeIn update_indention Indents operators
+#' @describeIn update_indention Indents *all* tokens after `token` - including
+#'   the last token.
 indent_op <- function(pd,
                       indent_by,
                       token = c(
@@ -35,13 +36,29 @@ indent_op <- function(pd,
   pd
 }
 
+#' Revert the indention of function declaration header
+#'
+#' Necessary for consistent indention of the function declaration header.
+#' @param pd A parse table.
+#' @seealso set_unindention_child update_indention_ref_fun_dec
+unindent_fun_dec <- function(pd) {
+  if (is_function_dec(pd)) {
+    idx_closing_brace <- which(pd$token %in% "')'")
+    fun_dec_head <- seq2(2L, idx_closing_brace)
+    pd$indent[fun_dec_head] <- 0L
+  }
+  pd
+}
+
 #' @describeIn update_indention Updates indention for token EQ_SUB. Only differs
-#'   from indent_op in the sense that the last token on the table where EQ_SUB
+#'   from [indent_op()] in the sense that not all subsequent tokens in the parse
+#'   table are necessarily indented, as `EQ_SUB` and `EQ_FORMALS` can occur
+#'   multiple times in a parse table.
 #'   occurs is not indented (see[compute_indent_indices()])
 indent_eq_sub <- function(pd,
                           indent_by,
-                          token = "EQ_SUB") {
-  eq_sub <- which(pd$token == "EQ_SUB")
+                          token = c("EQ_SUB", "EQ_FORMALS")) {
+  eq_sub <- which(pd$token %in% token)
   if (length(eq_sub) == 0) return(pd)
   has_line_break <- which(pd$lag_newlines > 0)
   indent_indices <- intersect(eq_sub + 1, has_line_break)
@@ -126,7 +143,9 @@ compute_indent_indices <- function(pd,
                                    token_closing = NULL) {
   npd <- nrow(pd)
   potential_triggers <- which(pd$token %in% token_opening)
-  needs_indention <- needs_indention(pd, potential_triggers)
+  needs_indention <- needs_indention(pd, potential_triggers,
+    other_trigger_tokens = c("EQ_SUB", "EQ_FORMALS")
+  )
   trigger <- potential_triggers[needs_indention][1]
   if (is.na(trigger)) return(numeric(0))
   start <- trigger + 1
@@ -144,28 +163,55 @@ compute_indent_indices <- function(pd,
 #'
 #' Checks for each potential trigger token in `pd` whether it actually should
 #' cause indention.
-#' @param potential_triggers A vector with indices of the potential trigger
+#' @param potential_triggers_pos A vector with indices of the potential trigger
 #'   tokens in `pd`.
 #' @inheritParams needs_indention_one
-needs_indention <- function(pd, potential_triggers) {
-  map_lgl(potential_triggers, needs_indention_one, pd = pd)
+needs_indention <- function(pd,
+                            potential_triggers_pos,
+                            other_trigger_tokens = NULL) {
+  map_lgl(potential_triggers_pos, needs_indention_one,
+    pd = pd, other_trigger_tokens = other_trigger_tokens
+  )
 }
 
 
 #' Check whether indention is needed
 #'
-#' Indention is needed if and only if there is no multi-line token between the
-#' trigger and the first line break.
+#' Indention is needed if the two conditions apply:
+#'
+#' * there is no multi-line token between the trigger and the first line break.
+#' * there is no other token between the potential trigger and the first line
+#'   break that is going to cause indention.
+#'
 #' @param pd A parse table.
-#' @param potential_trigger the index of the token in the parse table
+#' @param potential_trigger_pos the index of the token in the parse table
 #'   for which it should be checked whether it should trigger indention.
 #' @return Returns `TRUE` if indention is needed, `FALSE` otherwise.
+#' @param other_trigger_tokens Other tokens that are going to cause indention
+#'   if on the same line as the token corresponding to `potential_trigger`.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
 #' @importFrom rlang seq2
-needs_indention_one <- function(pd, potential_trigger) {
+needs_indention_one <- function(pd,
+                                potential_trigger_pos,
+                                other_trigger_tokens) {
   before_first_break <- which(pd$lag_newlines > 0)[1] - 1
   if (is.na(before_first_break)) return(FALSE)
-  !any(pd$multi_line[seq2(potential_trigger, before_first_break)])
+  row_idx_between_trigger_and_line_break <- seq2(
+    potential_trigger_pos, before_first_break
+  )
+  multi_line_token <- pd_is_multi_line(
+    pd[row_idx_between_trigger_and_line_break, ]
+  )
+  remaining_row_idx_between_trigger_and_line_break <- setdiff(
+    row_idx_between_trigger_and_line_break,
+    potential_trigger_pos
+  )
+
+  other_trigger_on_same_line <-
+    pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
+    other_trigger_tokens
+
+  !any(multi_line_token) & !any(other_trigger_on_same_line)
 }
 
 

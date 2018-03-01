@@ -4,13 +4,16 @@
 \alias{needs_indention_one}
 \title{Check whether indention is needed}
 \usage{
-needs_indention_one(pd, potential_trigger)
+needs_indention_one(pd, potential_trigger_pos, other_trigger_tokens)
 }
 \arguments{
 \item{pd}{A parse table.}
 
-\item{potential_trigger}{the index of the token in the parse table
+\item{potential_trigger_pos}{the index of the token in the parse table
 for which it should be checked whether it should trigger indention.}
+
+\item{other_trigger_tokens}{Other tokens that are going to cause indention
+if on the same line as the token corresponding to \code{potential_trigger}.}
 }
 \value{
 Returns \code{TRUE} if indention is needed, \code{FALSE} otherwise.
@@ -18,6 +21,12 @@ Returns \code{TRUE} if indention is needed, \code{FALSE} otherwise.
 \code{TRUE} if indention is needed, \code{FALSE} otherwise.
 }
 \description{
-Indention is needed if and only if there is no multi-line token between the
-trigger and the first line break.
+Indention is needed if the two conditions apply:
+}
+\details{
+\itemize{
+\item there is no multi-line token between the trigger and the first line break.
+\item there is no other token between the potential trigger and the first line
+break that is going to cause indention.
+}
 }

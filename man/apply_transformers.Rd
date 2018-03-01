@@ -25,6 +25,7 @@ The order of the transformations is:
 hence line breaks must be modified first).
 \item spacing rules (must be after line-breaks and updating newlines and
 multi-line).
+\item indention.
 \item token manipulation / replacement (is last since adding and removing tokens
 will invalidate columns token_after and token_before).
 \item Update indention reference (must be after line breaks).

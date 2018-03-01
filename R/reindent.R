@@ -58,7 +58,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
 #' @importFrom rlang seq2
 update_indention_ref_fun_dec <- function(pd_nested) {
   if (pd_nested$token[1] == "FUNCTION") {
-    seq <- seq2(3, nrow(pd_nested) - 1)
+    seq <- seq2(3, nrow(pd_nested) - 2)
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2]
   }
   pd_nested
@@ -91,15 +91,12 @@ apply_ref_indention <- function(flattened_pd) {
 #' @param target_token The index of the token from which the indention level
 #'   should be applied to other tokens.
 apply_ref_indention_one <- function(flattened_pd, target_token) {
-  token_points_to_ref <-
-    flattened_pd$indention_ref_pos_id == flattened_pd$pos_id[target_token]
-  first_token_on_line <- flattened_pd$lag_newlines > 0L
-  token_to_update <- which(token_points_to_ref & first_token_on_line)
 
+  token_to_update <- find_tokens_to_update(flattened_pd, target_token)
   # udate spaces
   copied_spaces <- flattened_pd$col2[target_token]
   old_spaces <- flattened_pd$lag_spaces[token_to_update[1]]
-  shift <- copied_spaces - old_spaces
+  shift <- copied_spaces
   flattened_pd$lag_spaces[token_to_update] <-
     flattened_pd$lag_spaces[token_to_update] + shift
 
@@ -109,6 +106,32 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   flattened_pd$col2[cols_to_update] <- flattened_pd$col2[cols_to_update] + shift
   flattened_pd
 }
+
+#' Find the tokens to update when applying a reference indention
+#'
+#' Given a target token and a flattened parse table, the token for which the
+#' spacing information needs to be updated are computed. Since indention is
+#' already embeded in the column `lag_spaces`, only tokens at the beginning of
+#' a line are of concern.
+#' @param flattened_pd A flattened parse table.
+#' @inheritParams apply_ref_indention_one
+#' @seealso apply_ref_indention_one()
+#' @examples
+#' style_text("function(a =
+#'   b,
+#'   dd
+#' ) {}", scope = "indention")
+#' style_text("function(a,
+#'   b,
+#'   dd
+#' ) {}", scope = "indention")
+find_tokens_to_update <- function(flattened_pd, target_token) {
+  token_points_to_ref <-
+    flattened_pd$indention_ref_pos_id == flattened_pd$pos_id[target_token]
+  first_token_on_line <- flattened_pd$lag_newlines > 0L
+  which(token_points_to_ref & first_token_on_line)
+}
+
 
 #' Set indention of tokens that match regex
 #'

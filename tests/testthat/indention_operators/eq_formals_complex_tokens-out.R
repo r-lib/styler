@@ -1,9 +1,9 @@
 function(a =
-         33,
+           33,
          b) {}
 
 function(a =
-         33,
+           33,
          b) {}
 
 function(a,
@@ -16,15 +16,15 @@ function(a,
 
 function(ss,
          a =
-         3,
+           3,
          er =
-         4) {}
+           4) {}
 
 function(a =
-         b,
+           b,
          f =
-         d, c =
-         3, d =
-         4) {
+           d, c =
+           3, d =
+           4) {
 
 }
