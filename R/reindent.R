@@ -116,7 +116,7 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
 #'
 #' Given a target token and a flattened parse table, the token for which the
 #' spacing information needs to be updated are computed. Since indention is
-#' already embeded in the column `lag_spaces`, only tokens at the beginning of
+#' already embedded in the column `lag_spaces`, only tokens at the beginning of
 #' a line are of concern.
 #' @param flattened_pd A flattened parse table.
 #' @inheritParams apply_ref_indention_one

@@ -186,6 +186,7 @@ find_block_id <- function(pd) {
 #' assignment expression. Note that one assignment can include multiple
 #' assignment operators such as "a = b = c".
 #' @param pd A parse table with one assignment expression to relocate.
+#' @keywords internal
 relocate_eq_assign_one <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   eq_ind <- seq2(idx_eq_assign[1] - 1L, last(idx_eq_assign) + 1L)

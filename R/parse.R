@@ -9,7 +9,7 @@
 #'   * A column "pos_id" for (positional id) which can be used for sorting
 #'     (because "id" cannot be used in general). Note that the nth value of this
 #'     column corresponds to n as long as no tokens are inserted.
-#'   * A column "child" that contains the nested subtibbles.
+#'   * A column "child" that contains the nested sub-tibbles.
 #'
 #' @param text A character vector.
 #' @return A flat parse table
