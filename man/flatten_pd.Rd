@@ -25,3 +25,4 @@ either flattening from left or from right. If one of \code{token} is present in
 to \code{token} in \code{pd_nested}, the nested parse table is flattened. Otherwise, it
 is returned unmodified.
 }
+\keyword{internal}

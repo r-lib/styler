@@ -15,3 +15,4 @@ The line number on which the first token occurs.
 \description{
 On what line does the first token occur?
 }
+\keyword{internal}

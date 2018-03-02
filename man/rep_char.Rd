@@ -17,3 +17,4 @@ A character vector.
 \description{
 Repeat elements of a character vector \code{times} times and collapse it
 }
+\keyword{internal}

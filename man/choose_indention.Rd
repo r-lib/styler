@@ -27,3 +27,4 @@ The column \code{indention} will be removed since all information necessary is
 contained in the spacing information of the first token on a new line and
 the position of the tokens will not be changed anymore at this stage.
 }
+\keyword{internal}

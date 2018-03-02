@@ -13,3 +13,4 @@ enhance_mapping_special(pd)
 Map text corresponding to the token "SPECIAL" to a (more) unique token
 description.
 }
+\keyword{internal}

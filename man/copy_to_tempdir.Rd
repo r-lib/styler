@@ -13,3 +13,4 @@ copy_to_tempdir(path_perm = testthat_file())
 Takes the path to a file as input and returns the path where the temporary
 file is stored. Don't forget to unlink once you are done.
 }
+\keyword{internal}

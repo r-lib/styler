@@ -18,3 +18,4 @@ Forces comments to start with a space, that is, after the regular expression
 there is not just spaces within the comment. Multiple spaces may be legit for
 indention in some situations.
 }
+\keyword{internal}

@@ -63,3 +63,4 @@ definitions without parenthesis.
 \item \code{indent_without_paren_if_else}: Is used to indent if and if-else statements.
 }}
 
+\keyword{internal}

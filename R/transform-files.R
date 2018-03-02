@@ -8,6 +8,7 @@
 #' @section Value:
 #' Invisibly returns a data frame that indicates for each file considered for
 #' styling whether or not it was actually changed.
+#' @keywords internal
 transform_files <- function(files, transformers) {
   transformer <- make_transformer(transformers)
   max_char <- min(max(nchar(files), 0), 80)
@@ -34,6 +35,7 @@ transform_files <- function(files, transformers) {
 #'   any file was transformed.
 #' @inheritParams enc::transform_lines_enc
 #' @param ... Further arguments passed to `enc::transform_lines_enc()`.
+#' @keywords internal
 transform_file <- function(path,
                            fun,
                            verbose = FALSE,
@@ -75,6 +77,7 @@ transform_file <- function(path,
 #' that should be transformed.
 #' @param transformers A list of transformer functions that operate on flat
 #'   parse tables.
+#' @keywords internal
 make_transformer <- function(transformers) {
   force(transformers)
   function(text) {
@@ -88,6 +91,7 @@ make_transformer <- function(transformers) {
 #' Wrapper function for the common three operations.
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams apply_transformers
+#' @keywords internal
 parse_transform_serialize <- function(text, transformers) {
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text)
@@ -139,6 +143,7 @@ parse_transform_serialize <- function(text, transformers) {
 #' @param pd_nested A nested parse table.
 #' @param transformers A list of *named* transformer functions
 #' @importFrom purrr flatten
+#' @keywords internal
 apply_transformers <- function(pd_nested, transformers) {
   transformed_line_breaks <- pre_visit(
     pd_nested,
@@ -174,6 +179,7 @@ apply_transformers <- function(pd_nested, transformers) {
 #' it is not the same.
 #' @param transformers The list of transformer functions used for styling.
 #'   Needed for reverse engineering the scope.
+#' @keywords internal
 can_verify_roundtrip <- function(transformers) {
   is.null(transformers$token)
 }
@@ -191,6 +197,7 @@ can_verify_roundtrip <- function(transformers) {
 #' \dontrun{
 #' styler:::verify_roundtrip("a+1", "b - 3")
 #' }
+#' @keywords internal
 verify_roundtrip <- function(old_text, new_text) {
   if (!expressions_are_identical(old_text, new_text)) {
     msg <- paste(
@@ -207,6 +214,7 @@ verify_roundtrip <- function(old_text, new_text) {
 #'
 #' @param old_text The initial expression in its character representation.
 #' @param new_text The styled expression in its character representation.
+#' @keywords internal
 expressions_are_identical <- function(old_text, new_text) {
   identical(
     parse(text = old_text, keep.source = FALSE),

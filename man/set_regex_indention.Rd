@@ -28,3 +28,4 @@ Force the level of indention of tokens whose text matches a regular
 expression pattern to be a certain amount of spaces. The rule
 is only active for the first tokens on a line.
 }
+\keyword{internal}

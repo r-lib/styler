@@ -14,3 +14,4 @@ expressions_are_identical(old_text, new_text)
 \description{
 Check whether two expressions are identical
 }
+\keyword{internal}

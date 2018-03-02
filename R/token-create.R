@@ -19,6 +19,7 @@
 #'   not.
 #' @param child The children of the tokens.
 #' @family token creators
+#' @keywords internal
 create_tokens <- function(tokens,
                           texts,
                           lag_newlines = 0,
@@ -63,6 +64,7 @@ create_tokens <- function(tokens,
 #' Returns a valid sequences of pos_ids or an error if it was not possible to
 #' create one. The validation is done with [validate_new_pos_ids()]
 #' @family token creators
+#' @keywords internal
 create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
   direction <- ifelse(after, 1L, -1L)
   first <- find_start_pos_id(pd, pos, by, direction, after)
@@ -80,6 +82,7 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
 #' @param candidates The `pos_ids` of the candidates that origin from other
 #'   nests.
 #' @inheritParams create_pos_ids
+#' @keywords internal
 find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) {
   candidates <- append(candidates, pd$pos_id[pos])
   if (is.null(pd$child[[pos]])) {
@@ -104,6 +107,7 @@ find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) 
 #' @param after Whether the ids are created with `after = TRUE` (and hence
 #' should be in the range x.0-x.45) or not.
 #' @family token creators
+#' @keywords internal
 validate_new_pos_ids <- function(new_ids, after) {
   ref <- ifelse(after, floor(new_ids), ceiling(new_ids))
   if (any(abs(new_ids - ref) > 0.5)) stop("too many ids assigned")
@@ -116,6 +120,7 @@ validate_new_pos_ids <- function(new_ids, after) {
 #' @param pd A parse table.
 #' @param stretch_out Whether or not to create a line break after the opening
 #'   curly brace and before the closing curly brace.
+#' @keywords internal
 wrap_expr_in_curly <- function(pd, stretch_out = c(FALSE, FALSE)) {
   if (is_curly_expr(pd)) return(pd)
   if (stretch_out[1]) {

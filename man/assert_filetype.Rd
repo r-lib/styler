@@ -12,3 +12,4 @@ assert_filetype(lowercase_filetype)
 \description{
 Make sure all supplied file types are allowed
 }
+\keyword{internal}

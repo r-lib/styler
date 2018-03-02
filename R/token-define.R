@@ -32,7 +32,7 @@ left_assignment_token <- token$token[token$class == "assign_left"]
 right_assignment_token <- token$token[token$class == "assign_right"]
 
 #' Lookup all tokens that have a unique token-text mapping
-#'
+#' @keywords internal
 lookup_tokens <- function() {
   token
 }
@@ -41,6 +41,7 @@ lookup_tokens <- function() {
 #'
 #' @param regex A regular expression pattern to search for.
 #' @importFrom purrr map_chr
+#' @keywords internal
 lookup_new_special <- function(regex = NA) {
   new_special <- c("PIPE", "IN", "OTHER")
 

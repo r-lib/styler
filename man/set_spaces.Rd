@@ -21,3 +21,4 @@ below one set to one.
 \description{
 Helper for setting spaces
 }
+\keyword{internal}

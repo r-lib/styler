@@ -21,3 +21,4 @@ interaction
 Test consist of if / if-else / if-else-if-else cases, paired with various
 line-break and comment configurations. Used for internal testing.
 }
+\keyword{internal}

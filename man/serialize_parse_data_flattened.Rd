@@ -14,3 +14,4 @@ serialize_parse_data_flattened(flattened_pd, start_line = 1)
 \description{
 Collapses a flattened parse table into character vector representation.
 }
+\keyword{internal}

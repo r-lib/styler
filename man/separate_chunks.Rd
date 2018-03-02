@@ -13,3 +13,4 @@ separate_chunks(lines)
 Identifies and separates the code and text chunks (the latter includes non-R
 code) within an Rmd file, and returns these separately.
 }
+\keyword{internal}

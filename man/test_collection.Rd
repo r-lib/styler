@@ -44,3 +44,4 @@ one_line-random-but-not-so-much-in.R.
 This also implies that -out.R files cannot have more than one dash in
 their name, i.e. just the one before out.R.
 }
+\keyword{internal}

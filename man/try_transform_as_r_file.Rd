@@ -18,3 +18,4 @@ likely not a .R file, so saving the file and try styling again will work if
 the file is an .Rmd file. Otherwise, we can throw an error that the file must
 be a .R or .Rmd file.
 }
+\keyword{internal}

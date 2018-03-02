@@ -13,3 +13,4 @@ testthat_file(...)
 \description{
 Create the path to a test that file
 }
+\keyword{internal}

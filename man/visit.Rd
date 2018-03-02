@@ -26,3 +26,4 @@ to the innermost level of nesting first and then going outwards).
 \seealso{
 Other visitors: \code{\link{visit_one}}
 }
+\keyword{internal}

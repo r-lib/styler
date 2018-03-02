@@ -5,10 +5,12 @@
 #' @param indent_by How many spaces should be added after the token of interest.
 #' @param token The token the indention should be based on.
 #' @name update_indention
+#' @keywords internal
 NULL
 
 #' @describeIn update_indention Inserts indention based on round, square and
 #'   curly brackets.
+#' @keywords internal
 indent_braces <- function(pd, indent_by) {
   indent_indices <- compute_indent_indices(
     pd,
@@ -21,6 +23,7 @@ indent_braces <- function(pd, indent_by) {
 
 #' @describeIn update_indention Indents *all* tokens after `token` - including
 #'   the last token.
+#' @keywords internal
 indent_op <- function(pd,
                       indent_by,
                       token = c(
@@ -41,6 +44,7 @@ indent_op <- function(pd,
 #' Necessary for consistent indention of the function declaration header.
 #' @param pd A parse table.
 #' @seealso set_unindention_child update_indention_ref_fun_dec
+#' @keywords internal
 unindent_fun_dec <- function(pd) {
   if (is_function_dec(pd)) {
     idx_closing_brace <- which(pd$token %in% "')'")
@@ -55,6 +59,7 @@ unindent_fun_dec <- function(pd) {
 #'   table are necessarily indented, as `EQ_SUB` and `EQ_FORMALS` can occur
 #'   multiple times in a parse table.
 #'   occurs is not indented (see[compute_indent_indices()])
+#' @keywords internal
 indent_eq_sub <- function(pd,
                           indent_by,
                           token = c("EQ_SUB", "EQ_FORMALS")) {
@@ -69,6 +74,7 @@ indent_eq_sub <- function(pd,
 
 #' @describeIn update_indention Same as indent_op, but only indents one token
 #'   after `token`, not all remaining.
+#' @keywords internal
 indent_assign <- function(pd, indent_by, token = NULL) {
   indent_indices <- compute_indent_indices(pd, token)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
@@ -77,6 +83,7 @@ indent_assign <- function(pd, indent_by, token = NULL) {
 
 #' @describeIn update_indention Is used to indent for / while / if / if-else
 #'   statements that do not have curly parenthesis.
+#' @keywords internal
 indent_without_paren <- function(pd, indent_by = 2) {
   pd %>%
     indent_without_paren_for_while_fun(indent_by) %>%
@@ -85,6 +92,7 @@ indent_without_paren <- function(pd, indent_by = 2) {
 
 #' @describeIn update_indention Is used to indent for and statements and function
 #'   definitions without parenthesis.
+#' @keywords internal
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
   nrow <- nrow(pd)
   if (!(pd$token[1] %in% c("FOR", "WHILE", "FUNCTION"))) return(pd)
@@ -95,6 +103,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 
 #' @describeIn update_indention Is used to indent if and if-else statements.
 #' @importFrom rlang seq2
+#' @keywords internal
 indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
   has_if_without_curly <-
@@ -138,6 +147,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
 #' everything between '(' and the penultimate token would result in the wrong
 #' formatting.
 #' @importFrom rlang seq2
+#' @keywords internal
 compute_indent_indices <- function(pd,
                                    token_opening,
                                    token_closing = NULL) {
@@ -166,6 +176,7 @@ compute_indent_indices <- function(pd,
 #' @param potential_triggers_pos A vector with indices of the potential trigger
 #'   tokens in `pd`.
 #' @inheritParams needs_indention_one
+#' @keywords internal
 needs_indention <- function(pd,
                             potential_triggers_pos,
                             other_trigger_tokens = NULL) {
@@ -191,6 +202,7 @@ needs_indention <- function(pd,
 #'   if on the same line as the token corresponding to `potential_trigger`.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
 #' @importFrom rlang seq2
+#' @keywords internal
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
@@ -222,6 +234,7 @@ needs_indention_one <- function(pd,
 #' of a token is a multi-line token.
 #' @param pd A parse table.
 #' @importFrom purrr map_lgl
+#' @keywords internal
 set_multi_line <- function(pd) {
   pd$multi_line <- map_lgl(pd$child, pd_is_multi_line)
   pd
@@ -234,6 +247,7 @@ set_multi_line <- function(pd) {
 #' * it contains a line break.
 #' * it has at least one child that is a multi-line expression itself.
 #' @param pd A parse table.
+#' @keywords internal
 pd_is_multi_line <- function(pd) {
   any(pd$multi_line, pd$lag_newlines > 0)
 }
@@ -250,6 +264,7 @@ pd_is_multi_line <- function(pd) {
 #' @param pd A parse table.
 #' @return A parse table with synchronized `lag_newlines` and `newlines` columns.
 #' @seealso choose_indention
+#' @keywords internal
 update_newlines <- function(pd) {
   npd <- nrow(pd) - 1
   pd$newlines[seq_len(npd)] <- pd$lag_newlines[seq_len(npd) + 1]

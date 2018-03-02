@@ -34,3 +34,4 @@ determines whether R >= 3.2 is in use and if so, trees will be written.}
 \description{
 Transform an file and check whether it is identical to a reference.
 }
+\keyword{internal}

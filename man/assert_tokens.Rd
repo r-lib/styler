@@ -12,3 +12,4 @@ assert_tokens(tokens)
 \description{
 Check whether one or more tokens exist and have a unique token-text mapping
 }
+\keyword{internal}

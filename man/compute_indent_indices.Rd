@@ -34,3 +34,4 @@ example in if-else expressions, this is not the case and indenting
 everything between '(' and the penultimate token would result in the wrong
 formatting.
 }
+\keyword{internal}

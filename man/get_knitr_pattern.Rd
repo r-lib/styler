@@ -12,3 +12,4 @@ get_knitr_pattern(lines)
 \description{
 Determine a regex pattern for identifying R code chunks.
 }
+\keyword{internal}

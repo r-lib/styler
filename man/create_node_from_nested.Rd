@@ -18,3 +18,4 @@ to check whether two structures are identical.}
 \description{
 Create node from nested parse data
 }
+\keyword{internal}

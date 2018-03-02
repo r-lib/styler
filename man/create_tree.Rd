@@ -19,3 +19,4 @@ A data frame.
 \description{
 Create a tree representation from a text.
 }
+\keyword{internal}

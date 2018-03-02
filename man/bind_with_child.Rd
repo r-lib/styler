@@ -15,3 +15,4 @@ bind_with_child(pd_nested, pos)
 Bind a parse table with one of its children and return parse table, ordered
 according to the appearance of the tokens.
 }
+\keyword{internal}

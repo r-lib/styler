@@ -26,6 +26,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' @param pd A parse table.
 #' @param indent_by The amount of spaces used to indent an expression in curly
 #'   braces. Used for unindention.
+#' @keywords internal
 wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
   if (is_cond_expr(pd)) {
     pd <- pd %>%
@@ -80,6 +81,7 @@ wrap_else_multiline_curly <- function(pd, indent_by = 2) {
 #' @inheritParams wrap_if_else_multi_line_in_curly
 #' @param ind_to_be_wrapped The indices of the rows that should be wrapped
 #'   into a new expression.
+#' @keywords internal
 wrap_subexpr_in_curly <- function(pd,
                                   ind_to_be_wrapped,
                                   indent_by) {

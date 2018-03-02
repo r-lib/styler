@@ -28,3 +28,4 @@ initialized <- styler:::pre_visit(nested_pd, c(default_style_guide_attributes))
 styler:::create_node_from_nested_root(initialized, structure_only = FALSE)
 }
 }
+\keyword{internal}

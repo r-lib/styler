@@ -11,3 +11,4 @@ The available style guides are:
 \item the tidyverse style guide (see \code{\link[=tidyverse_style]{tidyverse_style()}}).
 }
 }
+\keyword{internal}

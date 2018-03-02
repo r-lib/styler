@@ -14,3 +14,4 @@ construct_tree(in_paths, suffix = "_tree")
 \description{
 Construct paths of a tree object given the paths of *-in.R files
 }
+\keyword{internal}

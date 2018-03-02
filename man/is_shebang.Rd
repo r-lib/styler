@@ -17,3 +17,4 @@ Shebangs should be preserved and no space should be inserted between
 \examples{
 style_text("#!/usr/bin/env Rscript")
 }
+\keyword{internal}

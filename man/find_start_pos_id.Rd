@@ -27,3 +27,4 @@ Looks at the current nest as well as into its children (if necessary) to make
 sure the right id is returned. Otherwise, ordering of tokens might not be
 preserved.
 }
+\keyword{internal}

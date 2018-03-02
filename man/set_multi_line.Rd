@@ -13,3 +13,4 @@ set_multi_line(pd)
 Sets the column \code{multi_line} in \code{pd} by checking row-wise whether any child
 of a token is a multi-line token.
 }
+\keyword{internal}

@@ -17,3 +17,4 @@ Multiple *-in.R files can have the same *-out.R file since to create the
 styler:::construct_out(c("path/to/file/first-in.R",
  "path/to/file/first-extended-in.R"))
 }
+\keyword{internal}

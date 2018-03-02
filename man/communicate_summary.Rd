@@ -15,3 +15,4 @@ been changed.}
 \description{
 Communicate the summary of styling
 }
+\keyword{internal}

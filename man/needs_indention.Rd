@@ -19,3 +19,4 @@ if on the same line as the token corresponding to \code{potential_trigger}.}
 Checks for each potential trigger token in \code{pd} whether it actually should
 cause indention.
 }
+\keyword{internal}

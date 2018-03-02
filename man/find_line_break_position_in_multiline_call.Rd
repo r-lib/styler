@@ -15,3 +15,4 @@ position of the first named argument and breaks returns the index of it.
 If there is no named argument, the line is broken right after the opening
 parenthesis.
 }
+\keyword{internal}

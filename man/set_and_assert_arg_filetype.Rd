@@ -20,3 +20,4 @@ styler:::set_and_assert_arg_filetype("rMd")
 styler:::set_and_assert_arg_filetype("xyz")
 }
 }
+\keyword{internal}

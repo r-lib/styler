@@ -18,3 +18,4 @@ construction of the factor fails.}
 Convert a vector to an ordered factor but stop if any of the values in
 \code{x} does not match the predefined levels in \code{levels.}
 }
+\keyword{internal}

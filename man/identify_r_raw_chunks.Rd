@@ -16,3 +16,4 @@ Raw in the sense that these chunks don't contain pure R code, but they
 contain a header and footer of markdown. Only code chunks that have an engine
 whose name matches \code{engine-pattern} are considered as R code.
 }
+\keyword{internal}

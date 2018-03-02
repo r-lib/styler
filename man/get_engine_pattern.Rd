@@ -16,3 +16,4 @@ a name), a comma (if no name is given but further options are passed to the
 engine) or a closing curly brace (in case no option and no name is given to
 the chunk).
 }
+\keyword{internal}

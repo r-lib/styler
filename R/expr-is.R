@@ -2,10 +2,12 @@
 #'
 #' @param pd A parse table.
 #' @name pd_is
+#' @keywords internal
 NULL
 
 #' @describeIn pd_is Checks whether `pd` contains an expression wrapped in
 #'   curly brackets.
+#' @keywords internal
 is_curly_expr <- function(pd) {
   if (is.null(pd)) return(FALSE)
   pd$token[1] == "'{'"
@@ -17,6 +19,7 @@ is_subset_expr <- function(pd) {
 }
 
 #' @describeIn pd_is Checks whether `pd` is a function call.
+#' @keywords internal
 is_function_call <- function(pd) {
   if (is.null(pd)) return(FALSE)
   if (is.na(pd$token_before[2])) return(FALSE)
@@ -24,6 +27,7 @@ is_function_call <- function(pd) {
 }
 
 #' @describeIn pd_is Checks whether `pd` is a function declaration.
+#' @keywords internal
 is_function_dec <- function(pd) {
   if (is.null(pd)) return(FALSE)
   pd$token[1] == "FUNCTION"
@@ -42,6 +46,7 @@ is_comment <- function(pd) {
 #' @param pd A parse table.
 #' @examples
 #' style_text("#!/usr/bin/env Rscript")
+#' @keywords internal
 is_shebang <- function(pd) {
   is_first_comment <- is_comment(pd) & (pd$pos_id == 1L)
   is_first_comment[is_first_comment] <- grepl(
@@ -61,6 +66,7 @@ is_shebang <- function(pd) {
 #'   "call(3, 2, c(3:2))"
 #'   ))
 #' @param pd A parse table.
+#' @keywords internal
 is_code_chunk_header <- function(pd) {
   is_comment <- is_comment(pd)
   is_comment[is_comment] <- grepl(
@@ -80,6 +86,7 @@ contains_else_expr <- function(pd) {
 #' else-if will be visited separately with the visitor. This applies to all
 #' conditional statements with more than one alternative.
 #' @param pd A parse table
+#' @keywords internal
 contains_else_expr_that_needs_braces <- function(pd) {
   else_idx <- which(pd$token == "ELSE")
   if (length(else_idx) > 0) {

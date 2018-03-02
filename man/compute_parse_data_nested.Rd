@@ -17,3 +17,4 @@ of the parse table.
 Parses \code{text} to a flat parse table and subsequently changes its
 representation into a nested parse table with \code{\link[=nest_parse_data]{nest_parse_data()}}.
 }
+\keyword{internal}

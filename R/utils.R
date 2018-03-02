@@ -5,6 +5,7 @@ parse_text <- function(x) parse(text = x)[[1L]]
 #' @param char A character vector.
 #' @param times an integer giving the number of repetitions.
 #' @return A character vector.
+#' @keywords internal
 rep_char <- function(char, times) {
   paste(rep.int(char, times), collapse = "")
 }
@@ -14,14 +15,17 @@ rep_char <- function(char, times) {
 #' @param n Scalar indicating how many characters should be concentrated
 #' @return A string.
 #' @name add_spaces_or_newlines
+#' @keywords internal
 NULL
 
 #' @rdname add_spaces_or_newlines
+#' @keywords internal
 add_newlines <- function(n) {
   rep_char("\n", n)
 }
 
 #' @rdname add_spaces_or_newlines
+#' @keywords internal
 add_spaces <- function(n) {
   rep_char(" ", n)
 }
@@ -32,6 +36,7 @@ add_spaces <- function(n) {
 #' operating system.
 #' @param sys_call The call to be executed.
 #' @param ... Arguments passed to [shell()] or [system()].
+#' @keywords internal
 calls_sys <- function(sys_call, ...) {
   if (Sys.info()[1] == "Windows") {
     error <- shell(sys_call, ...)
@@ -56,6 +61,7 @@ is_unsaved_file <- function(path) {
 #' @param pd A parse table.
 #' @param pos The position of the token to start the search from.
 #' @importFrom rlang seq2
+#' @keywords internal
 next_non_comment <- function(pd, pos) {
   if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) return(integer(0))
   candidates <- seq2(pos + 1L, nrow(pd))
@@ -67,6 +73,7 @@ next_non_comment <- function(pd, pos) {
 #' after the token that has position `pos` in `pd`.
 #' @param pd A parse table.
 #' @param pos The position of the token to start the search from.
+#' @keywords internal
 extend_if_comment <- function(pd, pos) {
   if (pos == nrow(pd)) return(pos)
   if (pd$token[pos + 1] == "COMMENT") {
@@ -81,6 +88,7 @@ extend_if_comment <- function(pd, pos) {
 #' @param filetype The file type to map to a regex.
 #' @examples
 #' styler:::map_filetype_to_pattern(c(".rMd", "R"))
+#' @keywords internal
 map_filetype_to_pattern <- function(filetype) {
   paste0("(", paste(set_and_assert_arg_filetype(filetype), collapse = "|"), ")$")
 }

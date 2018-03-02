@@ -55,10 +55,12 @@ add_line_break_after_pipe <- function(pd) {
 #'   not cause a line break before "')'".
 #' @name set_line_break_if_call_is_multi_line
 #' @importFrom rlang seq2
+#' @keywords internal
 NULL
 
 #' @describeIn set_line_break_if_call_is_multi_line Sets line break after
 #'   opening parenthesis.
+#' @keywords internal
 set_line_break_after_opening_if_call_is_multi_line <-
   function(pd,
            except_token_after = NULL,
@@ -91,6 +93,7 @@ set_line_break_after_opening_if_call_is_multi_line <-
 #' If there is no named argument, the line is broken right after the opening
 #' parenthesis.
 #' @inheritParams set_line_break_if_call_is_multi_line
+#' @keywords internal
 find_line_break_position_in_multiline_call <- function(pd) {
   candidate <- (which(pd$token == "EQ_SUB") - 1L)[1]
   ifelse(is.na(candidate), 3L, candidate)
@@ -99,6 +102,7 @@ find_line_break_position_in_multiline_call <- function(pd) {
 
 #' @describeIn set_line_break_if_call_is_multi_line Sets line break before
 #'   closing parenthesis.
+#' @keywords internal
 set_line_break_before_closing_call <- function(pd, except_token_before) {
   if (!is_function_call(pd) && !is_subset_expr(pd)) return(pd)
   npd <- nrow(pd)
@@ -114,6 +118,7 @@ set_line_break_before_closing_call <- function(pd, except_token_before) {
 
 
 #' @rdname set_line_break_if_call_is_multi_line
+#' @keywords internal
 remove_line_break_in_empty_fun_call <- function(pd) {
   if (is_function_call(pd) && nrow(pd) == 3) {
     pd$lag_newlines[3] <- 0L

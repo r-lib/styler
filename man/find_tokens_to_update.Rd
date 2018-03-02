@@ -31,3 +31,4 @@ style_text("function(a,
 \seealso{
 apply_ref_indention_one()
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ around the \code{tokens}.}
 Set the spacing of all \code{tokens} in \code{pd_flat} to \code{level} if \code{strict = TRUE} or
 to at least to \code{level} if \code{strict = FALSE}.
 }
+\keyword{internal}

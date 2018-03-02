@@ -30,3 +30,4 @@ Indention is needed if the two conditions apply:
 break that is going to cause indention.
 }
 }
+\keyword{internal}

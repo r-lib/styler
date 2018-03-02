@@ -15,3 +15,4 @@ If scope was set to "line_breaks" or lower (compare \code{\link[=tidyverse_style
 we can compare the expression before and after styling and return an error if
 it is not the same.
 }
+\keyword{internal}
