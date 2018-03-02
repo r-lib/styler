@@ -212,14 +212,6 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
   file.path(dir, base)
 }
 
-
-stop_insufficient_r_version <- function() {
-  stop(paste0(
-    "Can't write tree with R version ", getRversion(),
-    "since data.tree not available. Needs at least R version 3.2."
-  ), call. = FALSE)
-}
-
 #' Generate a comprehensive collection test cases for comment / insertion
 #' interaction
 #' Test consist of if / if-else / if-else-if-else cases, paired with various
