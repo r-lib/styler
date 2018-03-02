@@ -70,7 +70,7 @@ set_line_break_after_opening_if_call_is_multi_line <-
     (pd$lag_newlines[seq_x] > 0) |
     (pd$token[seq_x] == "COMMENT")
   )
-  if (!is_multi_line) {
+  if (!is_multi_line | pd$lag_newlines[3] > 0) {
     return(pd)
   }
   break_pos <- find_line_break_position_in_multiline_call(pd)
