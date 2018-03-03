@@ -8,22 +8,21 @@ This is a maintenance release without any breaking API changes.
   @jimhester, #324).
 * Added required minimal version dependency for purr (`>= 0.2.3`) (#338).
 * The dependency tibble was optimzed for speed in `v1.4.2` so styler should run 
-  ~2x as fast [348](https://github.com/tidyverse/tibble/pull/348). Hence, styler
-  now depends on `tibble >= 1.4.2`.
+  ~2x as fast [#348](https://github.com/tidyverse/tibble/pull/348). Hence, 
+  styler now depends on `tibble >= 1.4.2`.
 * In the dependency `enc`, a bug was fixed that removed/changed non-ASCII 
   characters. Hence, styler now depends on `enc >= 0.1-10` (#348).
 
 ## Minor changes
 
-* Recognizing and respecging of DSL used in R comments: rplumnber (`#*`, #306), 
-  shebang `#/!` (#345), knitr chunk headers for spinning `#+` / `#-`).
+* Recognizing and respecging of DSLs used in R comments: rplumnber (`#*`, #306), 
+  shebang `#/!` (#345), knitr chunk headers for spinning `#+` / `#-`, #362).
 * Named arguments can stay on the first line if call is multi-line (#318).
-* various bug fixes and edge case improvements.
 * No space anymore with `tidyverse_style()` after `!!` since with `rlang 0.2`, 
   `!!` now binds tighter (#322).
 * Spacing around `~` (#316).
 * No space anymore around `^` with `tidyverse_style()` (#308).
-* Various bug fixes.
+* Various bug fixes and edge case improvements.
 
 Thanks to all contributors for patches, issues and the like: 
 @devSJR, @klrmlr, @yutannihilation, @samhinshaw, @martin-mfg, @jjramsey, 
