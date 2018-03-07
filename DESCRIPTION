@@ -28,7 +28,7 @@ Suggests:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Date: 2017-12-05
+Date: 2018-03-07
 BugReports: https://github.com/r-lib/styler/issues
 URL: https://github.com/r-lib/styler, https://r-lib.github.io/styler/
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi::api_roclet"))
