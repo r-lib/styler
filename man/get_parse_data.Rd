@@ -17,3 +17,4 @@ get_parse_data(text, include_text = TRUE, ...)
 Wrapper around \code{utils::getParseData(parse(text = text))} that returns a flat
 parse table.
 }
+\keyword{internal}

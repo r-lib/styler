@@ -24,3 +24,4 @@ excluded from styling.}
 \description{
 This is a helper function for style_dir.
 }
+\keyword{internal}

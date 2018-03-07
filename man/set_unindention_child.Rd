@@ -17,3 +17,4 @@ set_unindention_child(pd, token = "')'", unindent_by)
 check whether any of the children of \code{pd} has \code{token} on the same line as the
 closing \code{token} of pd. If so, unindent that token.
 }
+\keyword{internal}

@@ -15,3 +15,4 @@ Applies the reference indention created with functions
 is applied to all token that inherit from a reference token sequentially,
 i.e. by looping over the target tokens.
 }
+\keyword{internal}

@@ -31,3 +31,4 @@ which means the propagation of the parse information to the terminal tokens.
 \seealso{
 context_to_terminals
 }
+\keyword{internal}

@@ -1,3 +1,35 @@
+## styler 1.0.1 (2018-03-02)
+
+This is a maintenance release without any breaking API changes.
+
+## Major & dependency related changes
+
+* Removed implicit `dplyr` dependency via `purrr:::map_dfr()` (thanks 
+  @jimhester, #324).
+* Added required minimal version dependency for purr (`>= 0.2.3`) (#338).
+* We rely on the tibble package which was optimized for speed in `v1.4.2` so 
+  styler should run ~2x as fast 
+  [(#348)](https://github.com/tidyverse/tibble/pull/348). For that reason, 
+  styler now depends on `tibble >= 1.4.2`.
+* In the dependency `enc`, a bug was fixed that removed/changed non-ASCII 
+  characters. Hence, styler now depends on `enc >= 0.2` (#348).
+
+## Minor changes
+
+* We're now recognizing and respecting DSLs used in R comments: rplumnber 
+  (`#*`, #306), shebang `#/!` (#345), knitr chunk headers for spinning (`#+` / 
+  `#-`, #362).
+* Named arguments can stay on the first line if call is multi-line (#318).
+* No space anymore with `tidyverse_style()` after `!!` since with `rlang 0.2`, 
+  `!!` now binds tighter (#322), spacing around `~` (#316), no space anymore 
+  around `^` (#308).
+* Various bug fixes and edge case improvements.
+
+Thanks to all contributors for patches, issues and the like: 
+@devSJR, @klrmlr, @yutannihilation, @samhinshaw, @martin-mfg, @jjramsey, 
+@RMHogervorst, @wlandau, @llrs, @aaronrudkin, @crew102, @jkgrain, @jennybc, 
+@joranE.
+
 ## styler 1.0.0 (2017-12-05)
 
 Initial release.

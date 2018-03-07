@@ -29,3 +29,4 @@ curly brackets.
 \item \code{is_function_dec}: Checks whether \code{pd} is a function declaration.
 }}
 
+\keyword{internal}

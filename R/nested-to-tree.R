@@ -5,6 +5,7 @@
 #' @inheritParams create_node_from_nested_root
 #' @return A data frame.
 #' @importFrom purrr when
+#' @keywords internal
 create_tree <- function(text, structure_only = FALSE) {
   compute_parse_data_nested(text) %>%
     pre_visit(c(default_style_guide_attributes)) %>%
@@ -28,6 +29,7 @@ create_tree <- function(text, structure_only = FALSE) {
 #' initialized <- styler:::pre_visit(nested_pd, c(default_style_guide_attributes))
 #' styler:::create_node_from_nested_root(initialized, structure_only = FALSE)
 #' }
+#' @keywords internal
 create_node_from_nested_root <- function(pd_nested, structure_only) {
   if (getRversion() < 3.2) stop_insufficient_r_version()
   n <- data.tree::Node$new(ifelse(
@@ -42,6 +44,7 @@ create_node_from_nested_root <- function(pd_nested, structure_only) {
 #' @inheritParams create_node_from_nested_root
 #' @param parent The parent of the node to be created.
 #' @importFrom purrr map2 map
+#' @keywords internal
 create_node_from_nested <- function(pd_nested, parent, structure_only) {
   if (is.null(pd_nested)) {
     return()

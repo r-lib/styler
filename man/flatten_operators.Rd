@@ -17,3 +17,4 @@ indention is the same for all but the first two terminals. Setting the
 indention correctly is easier to achieve if they are put on the same level of
 nesting.
 }
+\keyword{internal}

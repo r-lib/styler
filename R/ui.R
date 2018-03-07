@@ -137,6 +137,7 @@ style_dir <- function(path = ".",
 #' @inheritParams style_pkg
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   should be styled as well.
+#' @keywords internal
 prettify_any <- function(transformers, filetype, recursive, exclude_files) {
   files <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),

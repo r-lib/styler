@@ -14,3 +14,4 @@ assert_text(text)
 Assert text to be of positive length and replace it with the empty
 string otherwise.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ A token is a multi-line expression if and only if:
 \item it has at least one child that is a multi-line expression itself.
 }
 }
+\keyword{internal}

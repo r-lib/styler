@@ -23,3 +23,4 @@ contains one row: The nested parse table.
 \seealso{
 \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}
 }
+\keyword{internal}

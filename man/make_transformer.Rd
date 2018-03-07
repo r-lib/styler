@@ -15,3 +15,4 @@ This function takes a list of transformer functions as input and
 returns a function that can be applied to character strings
 that should be transformed.
 }
+\keyword{internal}

@@ -12,3 +12,4 @@ lookup_new_special(regex = NA)
 \description{
 Lookup which new tokens were created from "SPECIAL"
 }
+\keyword{internal}

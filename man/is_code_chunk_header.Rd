@@ -20,3 +20,4 @@ style_text(c(
   "call(3, 2, c(3:2))"
   ))
 }
+\keyword{internal}

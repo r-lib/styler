@@ -13,3 +13,4 @@ construct_vertical(x)
 Sole purpose of the class vertical is to have a print method that
 aligns the output vertically.
 }
+\keyword{internal}

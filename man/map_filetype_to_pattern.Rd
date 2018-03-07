@@ -15,3 +15,4 @@ Map the file type to a corresponding regular expression
 \examples{
 styler:::map_filetype_to_pattern(c(".rMd", "R"))
 }
+\keyword{internal}

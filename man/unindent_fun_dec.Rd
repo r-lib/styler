@@ -15,3 +15,4 @@ Necessary for consistent indention of the function declaration header.
 \seealso{
 set_unindention_child update_indention_ref_fun_dec
 }
+\keyword{internal}

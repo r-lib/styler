@@ -16,3 +16,4 @@ curly brace and before the closing curly brace.}
 Adds curly braces to an expression (represented as a parse table) if there
 are none.
 }
+\keyword{internal}

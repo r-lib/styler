@@ -15,3 +15,4 @@ separated by more than one token. Token between \code{EQ_ASSIGN} tokens belong
 to the \code{EQ_ASSIGN} token occurring before them, except the token right before
 \code{EQ_ASSING} already belongs to the \code{EQ_ASSING} after it.
 }
+\keyword{internal}

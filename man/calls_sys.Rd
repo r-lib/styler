@@ -15,3 +15,4 @@ calls_sys(sys_call, ...)
 Wraps a system command into \code{\link[=shell]{shell()}} or \code{\link[=system]{system()}}, depending on the
 operating system.
 }
+\keyword{internal}

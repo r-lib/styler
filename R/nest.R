@@ -6,6 +6,7 @@
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
 #' @importFrom purrr when
+#' @keywords internal
 compute_parse_data_nested <- function(text) {
   parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
@@ -25,6 +26,7 @@ compute_parse_data_nested <- function(text) {
 #' Map text corresponding to the token "SPECIAL" to a (more) unique token
 #' description.
 #' @param pd A parse table.
+#' @keywords internal
 enhance_mapping_special <- function(pd) {
   pipes <- pd$token == "SPECIAL" & pd$text == "%>%"
   pd$token[pipes] <- special_and("PIPE")
@@ -46,9 +48,11 @@ special_and <- function(text) {
 #'
 #' @param pd_flat A flat parse table.
 #' @name add_token_terminal
+#' @keywords internal
 NULL
 
 #' @rdname add_token_terminal
+#' @keywords internal
 add_terminal_token_after <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
@@ -59,6 +63,7 @@ add_terminal_token_after <- function(pd_flat) {
 }
 
 #' @rdname add_token_terminal
+#' @keywords internal
 add_terminal_token_before <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
@@ -74,6 +79,7 @@ add_terminal_token_before <- function(pd_flat) {
 #' @describeIn add_token_terminal Removes column `terimnal_token_before`. Might
 #'   be used to prevent the use of invalidated information, e.g. if tokens were
 #'   added to the nested parse table.
+#' @keywords internal
 remove_terminal_token_before_and_after <- function(pd_flat) {
   pd_flat$token_before <- NULL
   pd_flat$token_after <- NULL
@@ -89,6 +95,7 @@ remove_terminal_token_before_and_after <- function(pd_flat) {
 #' @return An integer vector of length spaces_after_prefix, which is either
 #'   one (if `force_one = TRUE`) or `space_after_prefix` with all values
 #'   below one set to one.
+#' @keywords internal
 set_spaces <- function(spaces_after_prefix, force_one) {
   if (force_one) {
     n_of_spaces <- rep(1, length(spaces_after_prefix))
@@ -110,6 +117,7 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
 #' @importFrom purrr map2
+#' @keywords internal
 nest_parse_data <- function(pd_flat) {
   if (all(pd_flat$parent <= 0)) return(pd_flat)
   pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
@@ -141,6 +149,7 @@ nest_parse_data <- function(pd_flat) {
 #' @details Essentially, this is a wrapper around [dplyr::bind_rows()], but
 #'   returns `NULL` if the result of [dplyr::bind_rows()] is a data frame with
 #'   zero rows.
+#' @keywords internal
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
   if (nrow(bound) == 0) return(NULL)
@@ -152,6 +161,7 @@ combine_children <- function(child, internal_child) {
 #' On what line does the first token occur?
 #' @param pd_nested A nested parse table.
 #' @return The line number on which the first token occurs.
+#' @keywords internal
 find_start_line <- function(pd_nested) {
   pd_nested$line1[1]
 }

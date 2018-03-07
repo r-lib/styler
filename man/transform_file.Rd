@@ -31,3 +31,4 @@ any file was transformed.}
 \description{
 Wraps \code{enc::transform_lines_enc()} and outputs customized messages.
 }
+\keyword{internal}

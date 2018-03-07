@@ -14,3 +14,4 @@ parse_transform_serialize(text, transformers)
 \description{
 Wrapper function for the common three operations.
 }
+\keyword{internal}

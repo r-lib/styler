@@ -21,3 +21,4 @@ least one space (depending on \code{strict = TRUE} in the styling functions
 \description{
 Style spacing around math tokens
 }
+\keyword{internal}

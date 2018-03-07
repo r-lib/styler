@@ -30,3 +30,4 @@ same assignment (if-else statement).
 
 Please refer to the section 'Examples' in \code{\link[=relocate_eq_assign]{relocate_eq_assign()}} for details.
 }
+\keyword{internal}

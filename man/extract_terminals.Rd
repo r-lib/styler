@@ -13,3 +13,4 @@ extract_terminals(pd_nested)
 Turns a nested parse table into a flat parse table and extracts \emph{all}
 attributes.
 }
+\keyword{internal}

@@ -4,6 +4,7 @@
 #' versions higher or equal to 3.2, and `FALSE` otherwise since the second-level
 #' dependency `DiagrammeR` from `data.table` is not available for R < 3.2.
 #' @param write_tree Whether or not to write tree.
+#' @keywords internal
 set_arg_write_tree <- function(write_tree) {
   sufficient_version <- getRversion() >= 3.2
   if (is.na(write_tree)) {
@@ -25,6 +26,7 @@ set_arg_write_tree <- function(write_tree) {
 #' \dontrun{
 #' styler:::set_and_assert_arg_filetype("xyz")
 #' }
+#' @keywords internal
 set_and_assert_arg_filetype <- function(filetype) {
   without_dot <- gsub("^\\.", "", tolower(filetype))
   assert_filetype(without_dot)
@@ -34,6 +36,7 @@ set_and_assert_arg_filetype <- function(filetype) {
 #' Make sure all supplied file types are allowed
 #'
 #' @param lowercase_filetype A vector with file types to check, all lower case.
+#' @keywords internal
 assert_filetype <- function(lowercase_filetype) {
   if (!all(lowercase_filetype %in% c("r", "rmd"))) {
     stop(
@@ -47,6 +50,7 @@ assert_filetype <- function(lowercase_filetype) {
 #' Assert text to be of positive length and replace it with the empty
 #' string otherwise.
 #' @param text The input to style.
+#' @keywords internal
 assert_text <- function(text) {
   if (length(text) < 1) {
     text <- ""
@@ -59,6 +63,7 @@ assert_text <- function(text) {
 #'
 #' Check whether one or more tokens exist and have a unique token-text mapping
 #' @param tokens Tokens to check.
+#' @keywords internal
 assert_tokens <- function(tokens) {
   invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
   if (length(invalid_tokens) > 0) {

@@ -11,9 +11,11 @@
 #' @family visitors
 #' @importFrom purrr map
 #' @name visit
+#' @keywords internal
 NULL
 
 #' @rdname visit
+#' @keywords internal
 pre_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) return()
   pd_transformed <- visit_one(pd_nested, funs)
@@ -23,6 +25,7 @@ pre_visit <- function(pd_nested, funs) {
 }
 
 #' @rdname visit
+#' @keywords internal
 post_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) return()
   pd_transformed <- pd_nested
@@ -39,6 +42,7 @@ post_visit <- function(pd_nested, funs) {
 #' @param funs A list of transformer functions.
 #' @family visitors
 #' @importFrom purrr reduce
+#' @keywords internal
 visit_one <- function(pd_flat, funs) {
   reduce(
     funs, function(x, fun) fun(x),
@@ -55,6 +59,7 @@ visit_one <- function(pd_flat, funs) {
 #' @inherit context_towards_terminals
 #' @seealso context_towards_terminals visitors
 #' @importFrom purrr pmap
+#' @keywords internal
 context_to_terminals <- function(pd_nested,
                                  outer_lag_newlines,
                                  outer_indent,
@@ -93,6 +98,7 @@ context_to_terminals <- function(pd_nested,
 #'   inwards.
 #' @return An updated parse table.
 #' @seealso context_to_terminals
+#' @keywords internal
 context_towards_terminals <- function(pd_nested,
                                       outer_lag_newlines,
                                       outer_indent,
@@ -112,6 +118,7 @@ context_towards_terminals <- function(pd_nested,
 #' Turns a nested parse table into a flat parse table and extracts *all*
 #' attributes.
 #' @param pd_nested A nested parse table.
+#' @keywords internal
 extract_terminals <- function(pd_nested) {
   if (is.null(pd_nested)) return(pd)
   pd_split <- split(pd_nested, seq_len(nrow(pd_nested)))
@@ -135,6 +142,7 @@ extract_terminals <- function(pd_nested) {
 #' the column `lag_spaces`, which is more convenient to work with, in particular
 #' when serializing the parse table.
 #' @inheritParams choose_indention
+#' @keywords internal
 enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$lag_spaces <- lag(flattened_pd$spaces, default = 0L)
   flattened_pd$spaces <- NULL # depreciate spaces
@@ -174,6 +182,7 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #'   table using [extract_terminals()].
 #' @param use_raw_indention Boolean indicating whether or not the raw indention
 #'   should be used.
+#' @keywords internal
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
     flattened_pd$lag_spaces <- if_else(flattened_pd$lag_newlines > 0,

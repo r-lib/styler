@@ -9,11 +9,12 @@
 #'   * A column "pos_id" for (positional id) which can be used for sorting
 #'     (because "id" cannot be used in general). Note that the nth value of this
 #'     column corresponds to n as long as no tokens are inserted.
-#'   * A column "child" that contains the nested subtibbles.
+#'   * A column "child" that contains *nest*s.
 #'
 #' @param text A character vector.
 #' @return A flat parse table
 #' @importFrom rlang seq2
+#' @keywords internal
 tokenize <- function(text) {
   get_parse_data(text, include_text = NA) %>%
     verify_str_txt(text) %>%
@@ -27,6 +28,7 @@ tokenize <- function(text) {
 #' @param text The text to parse.
 #' @param include_text Passed to [utils::getParseData()] as `includeText`.
 #' @param ... Other arguments passed to [utils::getParseData()].
+#' @keywords internal
 get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse(text = text, keep.source = TRUE)
@@ -39,6 +41,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
 #'
 #' Adds column `pos_id` and `short` to a flat parse table.
 #' @param pd A flat parse table
+#' @keywords internal
 add_id_and_short <- function(pd) {
   pd$pos_id <- seq2(1L, nrow(pd))
   pd$short <- substr(pd$text, 1, 5)
@@ -55,6 +58,7 @@ add_id_and_short <- function(pd) {
 #' @param pd_with_terminal_text A parse table.
 #' @param text The text from which `pd_with_terminal_text` was created. Needed
 #'   for potential reparsing.
+#' @keywords internal
 verify_str_txt <- function(pd_with_terminal_text, text) {
   string_ind <- pd_with_terminal_text$token == "STR_CONST"
   strings <- pd_with_terminal_text[string_ind, ]

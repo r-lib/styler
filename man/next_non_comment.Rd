@@ -14,3 +14,4 @@ next_non_comment(pd, pos)
 \description{
 Find the index of the next non-comment in a parse table
 }
+\keyword{internal}

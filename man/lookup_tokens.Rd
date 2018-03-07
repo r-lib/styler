@@ -9,3 +9,4 @@ lookup_tokens()
 \description{
 Lookup all tokens that have a unique token-text mapping
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ Essentially, this is a wrapper around \code{\link[dplyr:bind_rows]{dplyr::bind_r
 returns \code{NULL} if the result of \code{\link[dplyr:bind_rows]{dplyr::bind_rows()}} is a data frame with
 zero rows.
 }
+\keyword{internal}

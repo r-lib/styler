@@ -30,3 +30,4 @@ columns \code{indent} and \code{spaces.} All information of the former is stored
 the column \code{lag_spaces}, which is more convenient to work with, in particular
 when serializing the parse table.
 }
+\keyword{internal}

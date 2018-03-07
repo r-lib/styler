@@ -21,3 +21,4 @@ A wrapper for \code{\link[enc:transform_lines_enc]{enc::transform_lines_enc()}} 
 either R or Rmd files by passing the relevant transformer function for each
 case.
 }
+\keyword{internal}

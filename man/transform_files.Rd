@@ -23,3 +23,4 @@ Invisibly returns a data frame that indicates for each file considered for
 styling whether or not it was actually changed.
 }
 
+\keyword{internal}

@@ -5,6 +5,7 @@
 #' @inheritParams unindent_child
 #' @importFrom purrr map
 #' @importFrom rlang seq2
+#' @keywords internal
 set_unindention_child <- function(pd, token = "')'", unindent_by) {
   if (all(pd$indent == 0) || all(pd$terminal)) return(pd)
   closing <- which(pd$token %in% token)
@@ -34,6 +35,7 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
 #' @param pd A parse table.
 #' @param token The token the unindention should be based on.
 #' @param unindent_by By how many spaces one level of indention is reversed.
+#' @keywords internal
 unindent_child <- function(pd, token = c("')'", "'}'"), unindent_by = 2) {
   closing <- which(pd$token %in% token)
   if (!("indent" %in% names(pd))) {

@@ -16,3 +16,4 @@ braces. Used for unindention.}
 Wrap an if-else statement in curly braces if it is not already wrapped in
 a such.
 }
+\keyword{internal}

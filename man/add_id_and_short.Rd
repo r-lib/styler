@@ -12,3 +12,4 @@ add_id_and_short(pd)
 \description{
 Adds column \code{pos_id} and \code{short} to a flat parse table.
 }
+\keyword{internal}

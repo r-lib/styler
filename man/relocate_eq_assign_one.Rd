@@ -14,3 +14,4 @@ Relocates an assignment expression within a parse table containing one
 assignment expression. Note that one assignment can include multiple
 assignment operators such as "a = b = c".
 }
+\keyword{internal}

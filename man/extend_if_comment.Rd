@@ -16,3 +16,4 @@ extend_if_comment(pd, pos)
 Find the index of the last comment in the sequence of comments-only tokens
 after the token that has position \code{pos} in \code{pd}.
 }
+\keyword{internal}

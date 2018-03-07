@@ -6,6 +6,7 @@
 #'
 #' @inheritParams enc::transform_lines_enc
 #' @param ... Further arguments passed to `enc::transform_lines_enc()`.
+#' @keywords internal
 transform_code <- function(path, fun, verbose = FALSE, ...) {
   if (is_plain_r_file(path)) {
     enc::transform_lines_enc(path, fun = fun, ..., verbose = verbose)
@@ -28,6 +29,7 @@ transform_code <- function(path, fun, verbose = FALSE, ...) {
 #' @param lines A character vector of lines from an Rmd file
 #' @param transformer_fun A styler transformer function
 #' @importFrom purrr flatten_chr
+#' @keywords internal
 transform_rmd <- function(lines, transformer_fun) {
   chunks <- separate_chunks(lines)
   chunks$r_chunks <- map(chunks$r_chunks, transformer_fun)
@@ -44,6 +46,7 @@ transform_rmd <- function(lines, transformer_fun) {
 #' @param lines a character vector of lines from an Rmd file
 #' @importFrom purrr map2
 #' @importFrom rlang seq2
+#' @keywords internal
 separate_chunks <- function(lines) {
   r_raw_chunks <- identify_r_raw_chunks(lines)
   r_chunks <- map2(
@@ -64,6 +67,7 @@ separate_chunks <- function(lines) {
 #' whose name matches `engine-pattern` are considered as R code.
 #' @inheritParams separate_chunks
 #' @param engine_pattern A regular expression that must match the engine name.
+#' @keywords internal
 identify_r_raw_chunks <- function(lines, engine_pattern = get_engine_pattern()) {
   pattern <- get_knitr_pattern(lines)
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
@@ -93,6 +97,7 @@ identify_r_raw_chunks <- function(lines, engine_pattern = get_engine_pattern()) 
 #' a name), a comma (if no name is given but further options are passed to the
 #' engine) or a closing curly brace (in case no option and no name is given to
 #' the chunk).
+#' @keywords internal
 get_engine_pattern <- function() {
   "[rR]"
 }
@@ -102,6 +107,7 @@ get_engine_pattern <- function() {
 #' Determine a regex pattern for identifying R code chunks.
 #'
 #' @inheritParams separate_chunks
+#' @keywords internal
 get_knitr_pattern <- function(lines) {
   knitr::all_patterns[["md"]]
 }

@@ -18,3 +18,4 @@ braces. Used for unindention.}
 \description{
 Wraps some rows of a parse table into a sub-expression.
 }
+\keyword{internal}

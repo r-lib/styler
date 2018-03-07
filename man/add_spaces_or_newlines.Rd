@@ -19,3 +19,4 @@ A string.
 \description{
 Concentrate newlines or spaces in a string
 }
+\keyword{internal}

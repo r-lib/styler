@@ -18,3 +18,4 @@ Applies the indention level of \code{target_token} to all tokens that have
 tokens on a line and updating the column \code{col1} and \code{col2} for all tokens
 on that line so they are kept updated.
 }
+\keyword{internal}

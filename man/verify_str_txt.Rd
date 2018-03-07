@@ -18,3 +18,4 @@ We first parse \code{text} again and include also non-terminal text. Then, we
 replace offending \code{text} in the terminal expressions with the text of their
 parents.
 }
+\keyword{internal}

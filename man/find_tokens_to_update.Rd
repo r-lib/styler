@@ -15,7 +15,7 @@ should be applied to other tokens.}
 \description{
 Given a target token and a flattened parse table, the token for which the
 spacing information needs to be updated are computed. Since indention is
-already embeded in the column \code{lag_spaces}, only tokens at the beginning of
+already embedded in the column \code{lag_spaces}, only tokens at the beginning of
 a line are of concern.
 }
 \examples{
@@ -31,3 +31,4 @@ style_text("function(a,
 \seealso{
 apply_ref_indention_one()
 }
+\keyword{internal}

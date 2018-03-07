@@ -1,4 +1,5 @@
 #' @include token-define.R
+#' @keywords internal
 add_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   op_before <- lead(op_after, default = FALSE)
@@ -10,6 +11,7 @@ add_space_around_op <- function(pd_flat) {
 }
 
 #' @include token-define.R
+#' @keywords internal
 set_space_around_op <- function(pd_flat) {
   op_after <- pd_flat$token %in% op_token
   if (!any(op_after)) return(pd_flat)
@@ -26,6 +28,7 @@ set_space_around_op <- function(pd_flat) {
 #'   [style_text()] and friends). See 'Examples'.
 #' @param zero Character vector of tokens that should be surrounded with zero
 #'   spaces.
+#' @keywords internal
 style_space_around_math_token <- function(strict, zero, one, pd_flat) {
   # We remove spaces for zero (e.g., around ^ in the tidyverse style guide)
   # even for strict = FALSE to be consistent with the : operator
@@ -43,6 +46,7 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
 #' @param tokens Character vector with tokens that should be styled.
 #' @param level Scalar indicating the amount of spaces that should be inserted
 #'   around the `tokens`.
+#' @keywords internal
 style_space_around_token <- function(pd_flat, strict, tokens, level) {
   op_after <- pd_flat$token %in% tokens
   op_before <- lead(op_after, default = FALSE)
@@ -59,6 +63,7 @@ style_space_around_token <- function(pd_flat, strict, tokens, level) {
 
 # depreciated!
 #' @include token-define.R
+#' @keywords internal
 remove_space_after_unary_pm <- function(pd_flat) {
   op_pm <- c("'+'", "'-'")
   op_pm_unary_after <- c(op_pm, op_token, "'('", "','")
@@ -161,6 +166,7 @@ remove_space_before_comma <- function(pd_flat) {
 #' such a case since a curly bracket is always at the first position in a parse
 #' table, so spacing cannot be set after the previous token.
 #' @param pd_flat A flat parse table.
+#' @keywords internal
 set_space_between_levels <- function(pd_flat) {
   if (pd_flat$token[1] %in% c("FUNCTION", "IF", "WHILE")) {
     index <- pd_flat$token == "')'" & pd_flat$newlines == 0L
@@ -182,6 +188,7 @@ set_space_between_levels <- function(pd_flat) {
 #' @param force_one Whether or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".
 #' @importFrom purrr map_chr
+#' @keywords internal
 start_comments_with_space <- function(pd, force_one = FALSE) {
   comment_pos <- is_comment(pd) & !is_shebang(pd) & !is_code_chunk_header(pd)
   if (!any(comment_pos)) return(pd)
@@ -275,6 +282,7 @@ remove_space_around_colons <- function(pd_flat) {
 
 #' Set space between EQ_SUB and "','"
 #' @param pd A parse table.
+#' @keywords internal
 set_space_between_eq_sub_and_comma <- function(pd) {
   op_before <- which(pd$token == "EQ_SUB" & lead(pd$token == "','"))
   pd$spaces[op_before] <- 1L

@@ -5,6 +5,7 @@
 #' The available style guides are:
 #' * the tidyverse style guide (see [tidyverse_style()]).
 #' @name style_guides
+#' @keywords internal
 NULL
 
 
@@ -278,6 +279,7 @@ tidyverse_reindention <- function() {
 #' @param levels A vector with levels.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
+#' @keywords internal
 character_to_ordered <- function(x, levels, name = substitute(x)) {
   if (!all((x %in% levels))) {
     stop(
