@@ -1,10 +1,16 @@
 ## Test environments
-* local OS X install, R 3.4.2, R 3.4.3
-* ubuntu 12.04 (on travis-ci), R 3.4.2
-* win-builder (devel and release)
+* local OS X install: R 3.4.3
+* ubuntu 14.04 (on travis-ci): R 3.4.3, R 3.3.3, devel
+* win-builder: R 3.4.3, devel
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 ERRORS | 0 WARNINGS | 0 NOTES
 
-* This is a new release.
+## Downstream Dependencies
+
+I have also run R CMD check on downstream dependencies of styler. The 
+downstream dependencies are exampletestr, pmatch, usethis, which all pass 
+R CMD check with 
+
+0 ERRORS | 0 WARNINGS | 0 NOTES
