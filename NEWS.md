@@ -11,7 +11,7 @@ This is a maintenance release without any breaking API changes.
   ~2x as fast [(#348)](https://github.com/tidyverse/tibble/pull/348). Hence, 
   styler now depends on `tibble >= 1.4.2`.
 * In the dependency `enc`, a bug was fixed that removed/changed non-ASCII 
-  characters. Hence, styler now depends on `enc >= 0.1-10` (#348).
+  characters. Hence, styler now depends on `enc >= 0.2` (#348).
 
 ## Minor changes
 
