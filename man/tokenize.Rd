@@ -24,7 +24,7 @@ columns are added:
 \item A column "pos_id" for (positional id) which can be used for sorting
 (because "id" cannot be used in general). Note that the nth value of this
 column corresponds to n as long as no tokens are inserted.
-\item A column "child" that contains the nested sub-tibbles.
+\item A column "child" that contains \emph{nest}s.
 }
 }
 }
