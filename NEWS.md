@@ -16,13 +16,15 @@ This is a maintenance release without any breaking API changes.
 
 ## Minor changes
 
-* We're now recognizing and respecting DSLs used in R comments: rplumnber 
+* We're now recognizing and respecting more DSLs used in R comments: rplumber 
   (`#*`, #306), shebang `#/!` (#345), knitr chunk headers for spinning (`#+` / 
   `#-`, #362).
 * Named arguments can stay on the first line if call is multi-line (#318).
 * No space anymore with `tidyverse_style()` after `!!` since with `rlang 0.2`, 
   `!!` now binds tighter (#322), spacing around `~` (#316), no space anymore 
   around `^` (#308).
+* Code chunks in Rmd documents that don't use the R engine are no longer 
+  formatted (#313).
 * Various bug fixes and edge case improvements.
 
 Thanks to all contributors for patches, issues and the like: 
