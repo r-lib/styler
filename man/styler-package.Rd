@@ -29,7 +29,7 @@ style_text("a\%>\%b; a", scope = "tokens")
 Useful links:
 \itemize{
   \item \url{https://github.com/r-lib/styler}
-  \item \url{https://r-lib.github.io/styler/}
+  \item \url{https://styler.r-lib.org/}
   \item Report bugs at \url{https://github.com/r-lib/styler/issues}
 }
 
