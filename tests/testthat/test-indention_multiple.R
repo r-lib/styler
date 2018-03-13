@@ -45,14 +45,15 @@ test_that("if and ifelse interacting with curly braces works", {
 
 test_that("edge cases work", {
   expect_warning(test_collection("indention_multiple",
-                                 "edge_",
+                                 "edge_strict",
                                  transformer = style_text), NA)
-
 })
 
 test_that("token / braces interaction works", {
   expect_warning(test_collection("indention_multiple",
                                  "fun_for_new_line",
                                  transformer = style_text), NA)
+
+
 })
 
