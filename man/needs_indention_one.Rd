@@ -27,7 +27,14 @@ Indention is needed if the two conditions apply:
 \itemize{
 \item there is no multi-line token between the trigger and the first line break.
 \item there is no other token between the potential trigger and the first line
-break that is going to cause indention.
+break that is going to cause indention. Note that such an other trigger
+only causes indention if there is a line break after that other token, not
+otherwise. See 'Details' for an example where there is such an other
+trigger, but since the next token is on the same line as the other trigger,
+no indention is caused by that other trigger.
 }
+}
+\examples{
+style_text("call(named = c, \\nnamed = b)", strict = FALSE)
 }
 \keyword{internal}

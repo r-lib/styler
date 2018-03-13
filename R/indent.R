@@ -192,8 +192,11 @@ needs_indention <- function(pd,
 #'
 #' * there is no multi-line token between the trigger and the first line break.
 #' * there is no other token between the potential trigger and the first line
-#'   break that is going to cause indention.
-#'
+#'   break that is going to cause indention. Note that such an other trigger
+#'   only causes indention if there is a line break after that other token, not
+#'   otherwise. See 'Details' for an example where there is such an other
+#'   trigger, but since the next token is on the same line as the other trigger,
+#'   no indention is caused by that other trigger.
 #' @param pd A parse table.
 #' @param potential_trigger_pos the index of the token in the parse table
 #'   for which it should be checked whether it should trigger indention.
@@ -203,6 +206,8 @@ needs_indention <- function(pd,
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
 #' @importFrom rlang seq2
 #' @keywords internal
+#' @examples
+#' style_text("call(named = c, \nnamed = b)", strict = FALSE)
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
@@ -219,9 +224,14 @@ needs_indention_one <- function(pd,
     potential_trigger_pos
   )
 
-  other_trigger_on_same_line <-
-    pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
-    other_trigger_tokens
+  other_trigger_on_same_line <- (
+     pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
+       other_trigger_tokens
+    ) & (
+      pd$lag_newlines[remaining_row_idx_between_trigger_and_line_break + 1L] >
+        0L
+    )
+
 
   !any(multi_line_token) & !any(other_trigger_on_same_line)
 }
