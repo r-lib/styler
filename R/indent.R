@@ -188,21 +188,27 @@ needs_indention <- function(pd,
 
 #' Check whether indention is needed
 #'
+#' Determine whether the tokens corresponding to `potential_trigger_pos` should
+#' cause indention, considering that there might be other potential triggers
+#' `other_trigger_tokens` that are going to cause indention.
 #' Indention is needed if the two conditions apply:
 #'
 #' * there is no multi-line token between the trigger and the first line break.
 #' * there is no other token between the potential trigger and the first line
 #'   break that is going to cause indention. Note that such an other trigger
-#'   only causes indention if there is a line break after that other token, not
-#'   otherwise. See 'Details' for an example where there is such an other
-#'   trigger, but since the next token is on the same line as the other trigger,
-#'   no indention is caused by that other trigger.
+#'   only causes indention if there is a line break after that other triggering
+#'   token, not otherwise. If it causes indention, it is said to be an active
+#'   trigger, if it does not, it is called an inactive trigger.
+#'   See 'Details' for an example where there is an other trigger token, but
+#'   since the next token is on the same line as the other trigger,
+#'   the trigger is passive.
 #' @param pd A parse table.
 #' @param potential_trigger_pos the index of the token in the parse table
 #'   for which it should be checked whether it should trigger indention.
 #' @return Returns `TRUE` if indention is needed, `FALSE` otherwise.
 #' @param other_trigger_tokens Other tokens that are going to cause indention
-#'   if on the same line as the token corresponding to `potential_trigger`.
+#'   if on the same line as the token corresponding to `potential_trigger` and
+#'   directly followed by a line break.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
 #' @importFrom rlang seq2
 #' @keywords internal
@@ -227,13 +233,14 @@ needs_indention_one <- function(pd,
   other_trigger_on_same_line <- (
      pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
        other_trigger_tokens
-    ) & (
-      pd$lag_newlines[remaining_row_idx_between_trigger_and_line_break + 1L] >
-        0L
     )
+  line_break_after_other_trigger <-
+    pd$lag_newlines[remaining_row_idx_between_trigger_and_line_break + 1L] > 0L
 
+  active_trigger_on_same_line <-
+    other_trigger_on_same_line & line_break_after_other_trigger
 
-  !any(multi_line_token) & !any(other_trigger_on_same_line)
+  !any(multi_line_token) & !any(active_trigger_on_same_line)
 }
 
 

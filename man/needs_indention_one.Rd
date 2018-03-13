@@ -13,7 +13,8 @@ needs_indention_one(pd, potential_trigger_pos, other_trigger_tokens)
 for which it should be checked whether it should trigger indention.}
 
 \item{other_trigger_tokens}{Other tokens that are going to cause indention
-if on the same line as the token corresponding to \code{potential_trigger}.}
+if on the same line as the token corresponding to \code{potential_trigger} and
+directly followed by a line break.}
 }
 \value{
 Returns \code{TRUE} if indention is needed, \code{FALSE} otherwise.
@@ -21,6 +22,9 @@ Returns \code{TRUE} if indention is needed, \code{FALSE} otherwise.
 \code{TRUE} if indention is needed, \code{FALSE} otherwise.
 }
 \description{
+Determine whether the tokens corresponding to \code{potential_trigger_pos} should
+cause indention, considering that there might be other potential triggers
+\code{other_trigger_tokens} that are going to cause indention.
 Indention is needed if the two conditions apply:
 }
 \details{
@@ -28,10 +32,12 @@ Indention is needed if the two conditions apply:
 \item there is no multi-line token between the trigger and the first line break.
 \item there is no other token between the potential trigger and the first line
 break that is going to cause indention. Note that such an other trigger
-only causes indention if there is a line break after that other token, not
-otherwise. See 'Details' for an example where there is such an other
-trigger, but since the next token is on the same line as the other trigger,
-no indention is caused by that other trigger.
+only causes indention if there is a line break after that other triggering
+token, not otherwise. If it causes indention, it is said to be an active
+trigger, if it does not, it is called an inactive trigger.
+See 'Details' for an example where there is an other trigger token, but
+since the next token is on the same line as the other trigger,
+the trigger is passive.
 }
 }
 \examples{
