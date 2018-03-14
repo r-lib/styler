@@ -13,7 +13,8 @@ needs_indention(pd, potential_triggers_pos, other_trigger_tokens = NULL)
 tokens in \code{pd}.}
 
 \item{other_trigger_tokens}{Other tokens that are going to cause indention
-if on the same line as the token corresponding to \code{potential_trigger}.}
+if on the same line as the token corresponding to \code{potential_trigger} and
+directly followed by a line break.}
 }
 \description{
 Checks for each potential trigger token in \code{pd} whether it actually should
