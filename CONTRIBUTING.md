@@ -4,6 +4,35 @@ This project follows the contributing recommendations outlined by [saamwerk](htt
 In particular, issues labelled with `Status: Postponed` are closed even if they
 are not resolved.
 
+## How to dive in and understanding the source code
+
+Read the vignettes. If you are done, come back here.
+
+`devtools::load_all()` 
+
+`debug(style_text)`
+
+`style_text("call(1, 2 + 1)")`
+
+Go broad before you go deep. Before going into the very deep layers of function
+calls of `style_text()`, try to understand that `style_text()` consists of only 
+three function calls. 
+Go into each of them and try to understand one layer deep. That is, try to 
+understand what `make_transformer()` does by reading the names of the functions
+that get called, the name of the objects that are created by assigning the output of 
+these function calls. Before looking into a functions source code, look at the 
+documentation for that function. All internal important functions
+are documented and documentation is available also for unexported objects via 
+`?` (if you did `devtools::load_all()`. 
+Then, go into `parse_transform_serialize()` and so on.
+
+To understand the most fundamental operation in styler, the manipulation of the 
+columns related to spacing and line break information, pick a rule from 
+`R/rules-*.R`, e.g. `R/rules-spacing`, add a breakpoint to a rule and style a
+string where you think this rule will be active. Then, see what happens and how 
+this rule is applied on each level of nesting.
+
+
 ## File Structure
 
 The source code is organized as follows:
