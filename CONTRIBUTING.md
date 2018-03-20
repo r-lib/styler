@@ -28,10 +28,35 @@ Then, go into `parse_transform_serialize()` and so on.
 
 To understand the most fundamental operation in styler, the manipulation of the 
 columns related to spacing and line break information, pick a rule from 
-`R/rules-*.R`, e.g. `R/rules-spacing`, add a breakpoint to a rule and style a
+`R/rules-*.R`, e.g. `R/rules-spacing`, add a break point to a rule and style a
 string where you think this rule will be active. Then, see what happens and how 
 this rule is applied on each level of nesting.
 
+## Static code analysis
+
+There are multiple packages that can be used to analyze a code base: 
+
+* [gitsum](https://github.com/lorenzwalthert/gitsum): Parses and summarises git
+  repository history. 
+* [parsesum](https://github.com/lorenzwalthert/parsesum): Analyses source code 
+  through parsing. 
+
+Check out the links above to see how the tools listed could help you
+understanding styler.
+
+## Project setup
+
+* The package is developed with the devtools suite, which includes roxgen2 for 
+  documentation, testthat for unit testing, pkgdown for html documentation.
+* Continuous integration is done with the tic (tasks integrating continuously)
+  package. 
+* A key development principle of styler is to separate infrastructure from 
+  style guide. Hence, whenever possible, transformer functions should be 
+  adapted, not the infrastructure should be changed for a specific style guide.
+* styler was created in 2017 by Kirill Müller, then turned from a
+  proof-of-concept into a ready-for-production tool as part of GSOC 2017 with
+  Kirill Müller and Yihui Xie as mentors and Lorenz Walthert as student. 
+  
 
 ## File Structure
 
@@ -66,3 +91,44 @@ The source code is organized as follows:
 | vertical.R | S3 class for pretty printing of styled code. | 
 | visit.R | Functions that apply functions to each level of nesting, either inside out or outside in. | 
 | zzz.R | backport imports. |
+
+
+## High-level conventions
+
+* The project follows a highly functional approach. This means that 
+  functionality should be capsuled into functions, even if they are only called
+  once. This makes abstraction from the code easier, reduces the number of lines
+  for each function declaration considerably and makes it easier for people not
+  familiar with the code base to dive into it.
+* All internal functions (except if they are 100% self-explanatory) are to be
+  documented.
+* New functionality (e.g. in terms of styling rules) needs to be unit tested. If
+  the new functionality changes how code is to be styled, the infrastructure 
+  with `test_collection()` should be used.
+* Cases that are not yet formatted correctly can be labelled with a `FIXME`.
+* GitHub is the platform where communication about source code happens. We
+  refrain from adding extensive in-line code comments. One can use `git blame` 
+  to track when changes were introduced and find the corresponding pull request
+  and associated issues to understand the thought process that lead to a change 
+  in the source code. This also implies that issues and / or pull request 
+  contain verbose explanation of problems and solutions provided. 
+  
+## Low-level coventions
+
+This project follows the [tidyverse style guide](http://style.tidyverse.org).
+
+### Files
+* File names only contain alphanumeric characters and dashes.
+* Files are named according to topics / contexts, not according to functions 
+  that live in these files.
+
+### Functions
+
+* Function names should be verbs. No abbreviations should be used, we don't 
+  care if function names are particularly long. For example, there is a
+  function with the name `remove_line_break_before_round_closing_after_curly()`.
+* only very low-level functions or functions that don't fit in any other file
+  go to `utils.R`.
+
+
+  
