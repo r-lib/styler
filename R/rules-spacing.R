@@ -33,8 +33,12 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
   # We remove spaces for zero (e.g., around ^ in the tidyverse style guide)
   # even for strict = FALSE to be consistent with the : operator
   pd_flat %>%
-    style_space_around_token(strict = TRUE, zero, 0L) %>%
-    style_space_around_token(strict = strict, one, 1L)
+    style_space_around_token(
+      strict = TRUE, tokens = zero, level_before = 0L, level_after = 0L
+  ) %>%
+    style_space_around_token(
+      strict = strict, tokens = one, level_before = 1L, level_after = 1L
+  )
 }
 
 #' Set spacing of token to a certain level
