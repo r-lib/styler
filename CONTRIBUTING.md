@@ -15,8 +15,8 @@ Read the vignettes. If you are done, come back here.
 `style_text("call(1, 2 + 1)")`
 
 Go broad before you go deep. Before going into the very deep layers of function
-calls of `style_text()`, try to understand that `style_text()` consists of only 
-three function calls. 
+calls of `style_text()`, try to understand that `style_text()` consists of a few 
+function calls only. 
 Go into each of them and try to understand one layer deep. That is, try to 
 understand what `make_transformer()` does by reading the names of the functions
 that get called, the name of the objects that are created by assigning the output of 
