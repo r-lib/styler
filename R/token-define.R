@@ -63,7 +63,8 @@ op_token <- c(
   logical_token,
   left_assignment_token,
   right_assignment_token,
-  "EQ_SUB", "ELSE", "IN"
+  "EQ_SUB", "ELSE", "IN",
+  "EQ_FORMALS"
 )
 
 
