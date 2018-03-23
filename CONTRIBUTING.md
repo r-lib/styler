@@ -115,9 +115,14 @@ The source code is organized as follows:
   
 ## Low-level coventions
 
-This project follows the [tidyverse style guide](http://style.tidyverse.org).
+This project follows the [tidyverse style guide](http://style.tidyverse.org). 
+If we refer to specific variables / values etc. in the following sections, you
+can use RStudio's full text search to find where 
+`remove_line_break_before_round_closing_after_curly()` is declared or called.
+
 
 ### Files
+
 * File names only contain alphanumeric characters and dashes.
 * Files are named according to topics / contexts, not according to functions 
   that live in these files.
@@ -130,5 +135,14 @@ This project follows the [tidyverse style guide](http://style.tidyverse.org).
 * only very low-level functions or functions that don't fit in any other file
   go to `utils.R`.
 
+### Boolean Values
 
-  
+Functions that return Boolean values or variables that hold Boolean values are
+often prefixed with `is` or `has`. For example, `is_rmd_file(path)` is a 
+function that returns `TRUE` if `path` is the path to a `.Rmd` file and `FALSE`
+otherwise.  
+
+### Vectors with indices
+
+Vectors that hold indices are often suffixed with `idx`. `else_idx` for example
+indicates for every row in a parse table whether it contains an `else` token.
