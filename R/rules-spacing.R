@@ -44,19 +44,40 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
 #' @param pd_flat A nest or a flat parse table.
 #' @param strict Whether the rules should be applied strictly or not.
 #' @param tokens Character vector with tokens that should be styled.
-#' @param level Scalar indicating the amount of spaces that should be inserted
-#'   around the `tokens`.
+#' @param level_before,level_after Scalar indicating the amount of spaces that
+#'   should be inserted around the `tokens` on the left and right position
+#'   respectively.
 #' @keywords internal
-style_space_around_token <- function(pd_flat, strict, tokens, level) {
+style_space_around_token <- function(pd_flat,
+                                     strict,
+                                     tokens,
+                                     level_before,
+                                     level_after = level_before) {
   op_after <- pd_flat$token %in% tokens
   op_before <- lead(op_after, default = FALSE)
   idx_before <- op_before & (pd_flat$newlines == 0L)
   idx_after <- op_after & (pd_flat$newlines == 0L)
   if (strict) {
-    pd_flat$spaces[idx_before | idx_after] <- level
+    pd_flat$spaces[idx_before] <- level_before
+    pd_flat$spaces[idx_after] <- level_after
   } else {
-    pd_flat$spaces[idx_before | idx_after] <-
-      pmax(pd_flat$spaces[idx_before | idx_after], level)
+    pd_flat$spaces[idx_before] <-
+      pmax(pd_flat$spaces[idx_before], level_before)
+    pd_flat$spaces[idx_after] <-
+      pmax(pd_flat$spaces[idx_after], level_after)
+  }
+  pd_flat
+}
+
+style_space_around_tilde <- function(pd_flat, strict) {
+  if (is_symmetric_tilde_expr(pd_flat)) {
+    pd_flat <- style_space_around_token(pd_flat,
+       strict, "'~'", level_before = 1, level_after = 1
+    )
+  } else if (is_asymmetric_tilde_expr(pd_flat)) {
+    pd_flat <- style_space_around_token(pd_flat,
+      strict = TRUE, "'~'", level_before = 1, level_after = 0
+    )
   }
   pd_flat
 }

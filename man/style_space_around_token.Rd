@@ -4,7 +4,8 @@
 \alias{style_space_around_token}
 \title{Set spacing of token to a certain level}
 \usage{
-style_space_around_token(pd_flat, strict, tokens, level)
+style_space_around_token(pd_flat, strict, tokens, level_before,
+  level_after = level_before)
 }
 \arguments{
 \item{pd_flat}{A nest or a flat parse table.}
@@ -13,8 +14,9 @@ style_space_around_token(pd_flat, strict, tokens, level)
 
 \item{tokens}{Character vector with tokens that should be styled.}
 
-\item{level}{Scalar indicating the amount of spaces that should be inserted
-around the \code{tokens}.}
+\item{level_before, level_after}{Scalar indicating the amount of spaces that
+should be inserted around the \code{tokens} on the left and right position
+respectively.}
 }
 \description{
 Set the spacing of all \code{tokens} in \code{pd_flat} to \code{level} if \code{strict = TRUE} or
