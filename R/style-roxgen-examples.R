@@ -9,12 +9,14 @@ identify_start_and_stop_of_royxgen_examples_from_text <- function(text) {
   stops <- map_int(starts, match_stop_to_start,
     stop_candidates = stop_candidates
   )
-  NULL
+  map2(starts, stops, c)
 }
 
 identify_start_stop_of_royxgen_examples_from_paths <- function(path) {
   content <- enc::read_lines_enc(path) # ensure file can be read
   identify_start_stop_of_royxgen_examples_from_text(content)
+
+  # some random output for now to make testing work.
   list(
     c(5, 9),
     c(18, 39)
@@ -45,7 +47,7 @@ style_roxygen_code_examples_one <- function(path) {
     full_file_content, start_stop_sequences
   )
 
-  plain_examples <- map(start_stop_paris, remove_roxygen_mask,
+  plain_examples <- map(start_stop_sequences, remove_roxygen_mask,
     text = masked_examples
   )
   styled_examples <- map(plain_examples, style_text, ...)
