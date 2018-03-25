@@ -3,10 +3,11 @@
 #' Finds the start and stop indices of the lines in `text` that are
 #' code examples in roxygen comments.
 #' @param text
+#' @importFrom purrr map_int
 identify_start_stop_of_roxygen_examples_from_text <- function(text) {
-  starts <- grep("^#'\\s@examples", text, perl = TRUE)
-  stop_candidates <- grep("^[^#]|^#'\\s@", text, perl = TRUE)
-  stops <- sapply(starts, match_stop_to_start, stop_candidates)
+  starts <- grep("^#'\\s*@examples", text, perl = TRUE)
+  stop_candidates <- grep("^[^#]|^#'\\s*@", text, perl = TRUE)
+  stops <- map_int(starts, match_stop_to_start, stop_candidates)
   map2(starts, stops, c)
 }
 
@@ -16,7 +17,7 @@ identify_start_stop_of_roxygen_examples <- function(path) {
 }
 
 match_stop_to_start <- function(start, stop_candidates) {
-  min(stop_candidates[stop_candidates > start]) - 1
+  min(stop_candidates[stop_candidates > start]) - 1L
 }
 
 #' TODO:
@@ -52,9 +53,9 @@ style_roxygen_code_examples_one <- function(path) {
 
 
 remove_roxygen_mask <- function(text) {
-  sub(pattern = "#'(\\s)?", "", text)
+  sub(pattern = "^#'\\s*", "", text)
 }
 
 add_roxygen_mask <- function(text) {
-  sapply(text, FUN = function(x) paste0("#' ", x))
+  map_chr(text, ~paste0("#' ", .x))
 }
