@@ -5,20 +5,33 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {4}                      
  ¦   °--expr:  [1/0] {6}                               
  ¦       °--NUM_CONST: 3 [0/0] {5}                     
- ¦--expr:  [1/0] {8}                                   
- ¦   °--STR_CONST: "v x  [0/0] {7}                     
- ¦--expr:  [2/0] {10}                                  
- ¦   °--STR_CONST: "'tes [0/0] {9}                     
- ¦--expr:  [1/0] {11}                                  
- ¦   ¦--expr:  [0/1] {13}                              
- ¦   ¦   °--NUM_CONST: 99 [0/0] {12}                   
- ¦   ¦--'+': + [0/1] {14}                              
- ¦   °--expr:  [0/0] {16}                              
- ¦       °--NUM_CONST: 1 [0/0] {15}                    
- ¦--expr:  [1/0] {18}                                  
- ¦   °--STR_CONST: 'test [0/0] {17}                    
- ¦--expr:  [1/1] {20}                                  
- ¦   °--STR_CONST: 'test [0/0] {19}                    
- ¦--COMMENT: # com [0/0] {21}                          
- °--expr:  [1/0] {23}                                  
-     °--NUM_CONST: 1 [0/0] {22}                        
+ ¦--expr:  [1/0] {7}                                   
+ ¦   ¦--expr:  [0/1] {9}                               
+ ¦   ¦   °--SYMBOL: g [0/0] {8}                        
+ ¦   ¦--LEFT_ASSIGN: <- [0/0] {10}                     
+ ¦   °--expr:  [1/0] {12}                              
+ ¦       °--STR_CONST: "v x  [0/0] {11}                
+ ¦--expr:  [2/0] {14}                                  
+ ¦   °--STR_CONST: "'tes [0/0] {13}                    
+ ¦--expr:  [1/0] {15}                                  
+ ¦   ¦--expr:  [0/1] {17}                              
+ ¦   ¦   °--NUM_CONST: 99 [0/0] {16}                   
+ ¦   ¦--'+': + [0/1] {18}                              
+ ¦   °--expr:  [0/0] {20}                              
+ ¦       °--NUM_CONST: 1 [0/0] {19}                    
+ ¦--expr:  [1/0] {22}                                  
+ ¦   °--STR_CONST: 'test [0/0] {21}                    
+ ¦--expr:  [1/1] {24}                                  
+ ¦   °--STR_CONST: 'test [0/0] {23}                    
+ ¦--COMMENT: # com [0/0] {25}                          
+ ¦--expr:  [1/0] {27}                                  
+ ¦   °--NUM_CONST: 1 [0/0] {26}                        
+ °--expr:  [2/0] {28}                                  
+     ¦--expr:  [0/0] {30}                              
+     ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {29}      
+     ¦--'(': ( [0/0] {31}                              
+     ¦--STR_CONST: call( [0/1] {32}                    
+     ¦--EQ_SUB: = [0/1] {33}                           
+     ¦--expr:  [0/0] {35}                              
+     ¦   °--NUM_CONST: 2 [0/0] {34}                    
+     °--')': ) [0/0] {36}                              
