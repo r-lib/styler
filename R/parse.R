@@ -77,7 +77,9 @@ ensure_correct_str_txt <- function(pd, text) {
   problematic_strings$text <- NULL
   problematic_strings$short <- NULL
   new_strings <- merge(problematic_strings, parent_of_problematic_strings,
-    by.x = "parent", by.y = "id"
+    by.x = "parent",
+    by.y = "id",
+    suffixes = c("", "parent")
   ) %>%
     as_tibble()
 
@@ -87,8 +89,12 @@ ensure_correct_str_txt <- function(pd, text) {
       "Please file an issue on GitHub (https://github.com/r-lib/styler/issues)",
     ), call. = FALSE)
   }
+  names_to_keep <- setdiff(
+    names(new_strings),
+    paste0(line_col_names(), "parent")
+  )
   bind_rows(
-    new_strings,
+    new_strings[, names_to_keep],
     pd[is_unaffected_token, ],
     pd[is_parent_of_problematic_string, ]
   ) %>%
@@ -115,8 +121,8 @@ identify_insufficiently_parsed_stings <- function(pd, text) {
 
 #' @importFrom purrr map2_lgl
 lines_and_cols_match <- function(data) {
-  left <- paste0(line_col_names(), ".x")
-  right <- paste0(line_col_names(), ".y")
+  left <- paste0(line_col_names(), "")
+  right <- paste0(line_col_names(), "parent")
   map2_lgl(left, right,
     two_cols_match,
     data = data

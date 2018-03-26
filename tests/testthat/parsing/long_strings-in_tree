@@ -30,7 +30,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
      ¦--expr:  [0/0] {30}                              
      ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {29}      
      ¦--'(': ( [0/0] {31}                              
-     ¦--STR_CONST: call( [0/1] {32}                    
+     ¦--STR_CONST: "a_is [0/1] {32}                    
      ¦--EQ_SUB: = [0/1] {33}                           
      ¦--expr:  [0/0] {35}                              
      ¦   °--NUM_CONST: 2 [0/0] {34}                    
