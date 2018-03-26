@@ -17,7 +17,7 @@
 #' @keywords internal
 tokenize <- function(text) {
   get_parse_data(text, include_text = NA) %>%
-    verify_str_txt(text) %>%
+    ensure_correct_str_txt(text) %>%
     enhance_mapping_special()
 }
 
@@ -49,33 +49,77 @@ add_id_and_short <- function(pd) {
 }
 
 
-#' Verify the text of strings
+#' Ensure a correct `text` of all strings
 #'
 #' Make sure `text` of the tokens `STR_CONST` is correct and adapt if necessary.
 #' We first parse `text` again and include also non-terminal text. Then, we
 #' replace offending `text` in the terminal expressions with the text of their
-#' parents.
-#' @param pd_with_terminal_text A parse table.
-#' @param text The text from which `pd_with_terminal_text` was created. Needed
+#' parents if their line / col position matches and return an error otherwise.
+#' @param pd A parse table.
+#' @param text The text from which `pd` was created. Needed
 #'   for potential reparsing.
 #' @keywords internal
-verify_str_txt <- function(pd_with_terminal_text, text) {
-  string_ind <- pd_with_terminal_text$token == "STR_CONST"
-  strings <- pd_with_terminal_text[string_ind, ]
-  parent_of_strings_ind <- pd_with_terminal_text$id %in% strings$parent
-  other_ind <- !(string_ind | parent_of_strings_ind)
-  if (nrow(strings) == 0 || !any(substr(strings$text, 1, 1) == "[")) {
-    return(pd_with_terminal_text)
+ensure_correct_str_txt <- function(pd, text) {
+  is_problematic_string <- identify_insufficiently_parsed_stings(pd, text)
+  problematic_strings <- pd[is_problematic_string, ]
+  is_parent_of_problematic_string <-
+    pd$id %in% problematic_strings$parent
+
+  is_unaffected_token <- !(is_problematic_string | is_parent_of_problematic_string)
+  if (!any(is_problematic_string)) {
+    return(pd)
   }
+
   pd_with_all_text <- get_parse_data(text, include_text = TRUE)
-  parent_of_strings <- pd_with_all_text[parent_of_strings_ind, c("id", "text", "short")]
-  strings$text <- NULL
-  strings$short <- NULL
-  new_strings <- merge(strings, parent_of_strings, by.x = "parent", by.y = "id")
+  parent_cols_for_merge <- c("id", "text", "short", line_col_names())
+  parent_of_problematic_strings <-
+    pd_with_all_text[is_parent_of_problematic_string, parent_cols_for_merge]
+  problematic_strings$text <- NULL
+  problematic_strings$short <- NULL
+  new_strings <- merge(problematic_strings, parent_of_problematic_strings,
+    by.x = "parent", by.y = "id"
+  ) %>%
+    as_tibble()
+
+  if (!lines_and_cols_match(new_strings)) {
+    stop(paste(
+      "Error in styler:::ensure_correct_str_txt().",
+      "Please file an issue on GitHub (https://github.com/r-lib/styler/issues)",
+    ), call. = FALSE)
+  }
   bind_rows(
     new_strings,
-    pd_with_terminal_text[other_ind, ],
-    pd_with_terminal_text[parent_of_strings_ind, ]
+    pd[is_unaffected_token, ],
+    pd[is_parent_of_problematic_string, ]
   ) %>%
     arrange(pos_id)
+}
+
+#' Indentify strings that were not fully parsed
+#'
+#' Indentifies strings that were not fully parsed due to their vast length.
+#' @details
+#' The meaning of the variable `is_problematic_string` in the source code
+#' changes from "all strings" to "all problematic strings", is partly
+#' missleading and this approach was choosen for performance reasons only.
+#' @param pd A parse table.
+#' @param text The initial code to style.
+identify_insufficiently_parsed_stings <- function(pd, text) {
+  is_problematic_string <- pd$token == "STR_CONST"
+  candidate_substring <- substr(
+    pd$text[is_problematic_string], 1, 1
+  )
+  is_problematic_string[is_problematic_string] <- candidate_substring == "["
+  is_problematic_string
+}
+
+#' @importFrom purrr map2_lgl
+lines_and_cols_match <- function(data) {
+  left <- paste0(line_col_names(), ".x")
+  right <- paste0(line_col_names(), ".y")
+  map2_lgl(left, right,
+    two_cols_match,
+    data = data
+  ) %>%
+  all()
 }
