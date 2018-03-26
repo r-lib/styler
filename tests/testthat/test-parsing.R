@@ -25,5 +25,8 @@ test_that("repreated parsing solves wrong parent assignment", {
 })
 
 test_that("long strings are parsed correctly", {
-  test_collection("parsing", "long_strings", transformer = style_text)
+  expect_warning(
+    test_collection("parsing", "long_strings", transformer = style_text),
+    NA
+  )
 })
