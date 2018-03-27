@@ -145,3 +145,7 @@ lm(a ~ . - 1, data = NA)
 a ~ b:c
 a ~ b:c
 a ~ b:c
+~a
+~gg
+b ~ k
+call(1, ~qq)

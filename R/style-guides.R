@@ -84,7 +84,8 @@ tidyverse_style <- function(scope = "tokens",
         math_token_spacing$one
       ),
       style_space_around_tilde = partial(
-        style_space_around_token, strict = strict, tokens = "'~'", level = 1L),
+        style_space_around_tilde, strict = strict
+      ),
       spacing_around_op = if (strict) {
         set_space_around_op
       }else {

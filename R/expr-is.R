@@ -13,6 +13,33 @@ is_curly_expr <- function(pd) {
   pd$token[1] == "'{'"
 }
 
+
+#' Check whether a parse table contains a tilde
+#'
+#'
+#' @param pd A parse table.
+#' @param tilde_pos Integer vector indicating row-indices that should be
+#'   checked for tilde. See 'Details'.
+#'
+#' @details
+#' A tilde is on the top row in the parse table if it is an asymmetric tilde
+#' expression (like `~column`), in the second row if it is a symmetric tilde
+#' expression (like `a~b`).
+is_tilde_expr <- function(pd, tilde_pos = c(1, 2)) {
+  if (is.null(pd) || nrow(pd) == 1) return(FALSE)
+  pd$token[tilde_pos] == "'~'"
+}
+
+#' @rdname is_tilde_expr
+is_asymmetric_tilde_expr <- function(pd) {
+  is_tilde_expr(pd, tilde_pos = 1)
+}
+
+#' @rdname is_tilde_expr
+is_symmetric_tilde_expr <- function(pd) {
+  is_tilde_expr(pd, tilde_pos = 2)
+}
+
 is_subset_expr <- function(pd) {
   if (is.null(pd) || nrow(pd) == 1) return(FALSE)
   pd$token[2] == "'['"
