@@ -73,8 +73,9 @@ identify_r_raw_chunks <- function(lines, engine_pattern = get_engine_pattern()) 
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
     stop("Unrecognized chunk pattern!", call. = FALSE)
   }
-  starts <- grep("^[\t >]*```+\\s*\\{\\s*([a-zA-Z0-9]+.*)\\}\\s*$", lines, perl = TRUE)
-  ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
+  chunks <- grep("^[\t >]*```+\\s*", lines, perl = TRUE)
+  starts <- odd(chunks)
+  ends <- even(chunks)
 
   if (length(starts) != length(ends)) {
     stop("Malformed file!", call. = FALSE)
