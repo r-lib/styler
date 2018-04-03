@@ -1,5 +1,25 @@
 parse_text <- function(x) parse(text = x)[[1L]]
 
+line_col_names <- function() {
+  c("line1", "line2", "col1", "col2")
+}
+
+#' Check whether two columns match
+#'
+#' @param col1,col2 Column names as string.
+#' @param data The data frames that contains `col1` and `col2`.
+two_cols_match <- function(col1, col2, data) {
+  all(unlist(data[col1]) == unlist(data[col2]))
+}
+
+odd <- function(x) {
+  x[seq(1L, length(x), by = 2)]
+}
+
+even <- function(x) {
+  x[seq(2L, length(x), by = 2)]
+}
+
 #' Repeat elements of a character vector `times` times and collapse it
 #'
 #' @param char A character vector.
