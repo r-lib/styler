@@ -27,6 +27,31 @@ NULL
 #' This function overwrites files (if styling results in a change of the
 #' code to be formatted). It is strongly suggested to only style files
 #' that are under version control or to create a backup copy.
+#'
+#' We suggest to first style with `scope < "tokens"` and inspect and commit
+#' changes, because these changes are guaranteed to leave the abstract syntax
+#' tree (AST) unchanged. See section 'Roundtrip Validation' for details.
+#'
+#' Then, we suggest to style with `scope = "tokens"` (if desired) and carefully
+#' inspect the changes to make sure the AST is not changed in an unexpected way
+#' that invalidates code.
+#' @section Roundtrip Validation:
+#' The following section describes when and how styling is guaranteed to
+#' yield correct code.
+#'
+#' If the style guide has `scope < "tokens"`, no tokens are changed and the
+#' abstract syntax tree (AST) should not change.
+#' Hence, it is possible to validate the styling by comparing whether the parsed
+#' expression before and after styling have the same AST.
+#' This comparison omits comments. styler compares
+#' error if the AST has changed through styling.
+#'
+#' Note that with `scope = "tokens"` such a comparison is not conducted because
+#' the AST might well change and such a change is intended. There is no way
+#' styler can validate styling, that is why we inform the user to carefully
+#' inspect the changes.
+#'
+#' See section 'Warning' for a good strategy to apply styling safely.
 #' @inheritSection transform_files Value
 #' @family stylers
 #' @examples
@@ -112,6 +137,7 @@ style_text <- function(text,
 #' @inheritParams style_pkg
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
+#' @inheritSection style_pkg Roundtrip Validation
 #' @family stylers
 #' @examples
 #' \dontrun{
@@ -154,6 +180,7 @@ prettify_any <- function(transformers, filetype, recursive, exclude_files) {
 #' @inheritParams style_pkg
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
+#' @inheritSection style_pkg Roundtrip Validation
 #' @examples
 #' # the following is identical but the former is more convenient:
 #' file <- tempfile("styler", fileext = ".R")
