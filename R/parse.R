@@ -60,6 +60,7 @@ add_id_and_short <- function(pd) {
 #'   for potential reparsing.
 #' @keywords internal
 ensure_correct_str_txt <- function(pd, text) {
+  ensure_valid_pd(pd)
   is_problematic_string <- identify_insufficiently_parsed_stings(pd, text)
   problematic_strings <- pd[is_problematic_string, ]
   is_parent_of_problematic_string <-
@@ -99,6 +100,30 @@ ensure_correct_str_txt <- function(pd, text) {
     pd[is_parent_of_problematic_string, ]
   ) %>%
     arrange(pos_id)
+}
+
+#' Ensure that the parse data is valid
+#'
+#' Test whether all non-termnals have at least one child and throw an error
+#' otherwise. As this is check is rather expensive, it is only
+#' carried out for configurations we have good reasons to expect problems.
+#' @param pd A parse table.
+ensure_valid_pd <- function(pd) {
+  if (getRversion() < "3.2") {
+    non_terminals <- pd %>%
+      filter(terminal == FALSE)
+    valid_pd <- non_terminals$id %>%
+      map_lgl(~ .x %in% pd$parent) %>%
+      all()
+    if (!valid_pd) {
+      stop(paste(
+        "The parse data is not valid and the problem is most likely related",
+        "to the parser in base R. Please install R >= 3.2 and try again.",
+        call. = FALSE
+      ))
+    }
+  }
+  TRUE
 }
 
 #' Indentify strings that were not fully parsed
