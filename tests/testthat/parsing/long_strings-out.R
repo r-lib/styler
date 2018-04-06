@@ -1,6 +1,7 @@
 b <-
   3
-"v x ijyuldlf ixi tt ucw nk xejkf omch  ujm ymgsgkwickxn tg zknjxmk aqtgqrn bhv
+g <-
+  "v x ijyuldlf ixi tt ucw nk xejkf omch  ujm ymgsgkwickxn tg zknjxmk aqtgqrn bhv
  se g ec  avo  xs nyz   fhadktjlwuocti au  y gxv y xbr x kxn om dkaderkl  xqok
  pp ud lcw  pnft ggzz lu v  sgs  ysv uyyxp gmcvt   o   rumej  rfed j qy   ozo
  oq wz  na  oii  m  rg imfktlkwisc  wvc y  ab   ms pjugxh  ieco xjdfiysqsnoizgzz
@@ -32,3 +33,5 @@ b <-
 "test"
 'test"ji"' # comment
 1
+
+call("a_is_long" = 2)

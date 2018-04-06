@@ -66,7 +66,7 @@ If the style guide has \code{scope < "tokens"}, no tokens are changed and the
 abstract syntax tree (AST) should not change.
 Hence, it is possible to validate the styling by comparing whether the parsed
 expression before and after styling have the same AST.
-This comparison omits comments. styler does that internally and returns an
+This comparison omits comments. styler compares
 error if the AST has changed through styling.
 
 Note that with \code{scope = "tokens"} such a comparison is not conducted because
