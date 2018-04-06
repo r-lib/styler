@@ -25,8 +25,20 @@ test_that("repreated parsing solves wrong parent assignment", {
 })
 
 test_that("long strings are parsed correctly", {
+  if (getRversion() < "3.2") skip("skip on R < 3.2 because of parsing problems")
+
   expect_warning(
     test_collection("parsing", "long_strings", transformer = style_text),
     NA
+  )
+})
+
+test_that("issues with parsing long strings on R 3.1 can be detected", {
+  if (getRversion() >= "3.2") {
+    skip("skip on R >= 3.2 because parsing probmes don't appear")
+  }
+  expect_error(
+    test_collection("parsing", "long_strings", transformer = style_text),
+    "install R .* 3.2"
   )
 })
