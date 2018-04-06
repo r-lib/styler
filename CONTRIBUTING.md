@@ -104,9 +104,9 @@ the following strategies:
 * Use `$git blame` to see where changes were introduced. Look at the commit
   message, check changes that were made to the code in the same commit. If you
   are using the GUI of GitHub, you can easily obtain more contextual information
-  such as the pull request with which a change was introdued. Often 
-  functionality was introduced with testing. So you can easily see which new 
-  tests are related to the new functionality. You can remvoe the changes in the 
+  such as the pull request with which a change was introduced. Often 
+  functionality was introduced with testing. So, you can easily see which new 
+  tests are related to the new functionality. You can remove the changes in the 
   source code and re-run the tests and see what fails and why.
 * Search Issues and Pull Requests on GitHub with the full text search. Make 
   sure you also search for closed Issues and PRs.
