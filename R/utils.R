@@ -13,11 +13,19 @@ two_cols_match <- function(col1, col2, data) {
 }
 
 odd <- function(x) {
-  x[seq(1L, length(x), by = 2)]
+  x[odd_index(x)]
+}
+
+odd_index <- function(x) {
+  seq(1L, length(x), by = 2)
 }
 
 even <- function(x) {
-  x[seq(2L, length(x), by = 2)]
+  x[even_index(x)]
+}
+
+even_index <- function(x) {
+  seq(2L, length(x), by = 2)
 }
 
 #' Repeat elements of a character vector `times` times and collapse it
