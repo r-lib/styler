@@ -54,9 +54,17 @@ style_roxygen_code_examples_one <- function(path) {
 
 
 remove_roxygen_mask <- function(text) {
-  sub(pattern = "^#'\\s*", "", text)
+  code_with_header <- sub(pattern = "^#'\\s*", "", text)
+  remove_roxygen_header(code_with_header)
+}
+
+remove_roxygen_header <- function(text) {
+  gsub("^\\s*@examples\\s*", "", text, perl = TRUE)
 }
 
 add_roxygen_mask <- function(text) {
-  map_chr(text, ~paste0("#' ", .x))
+  c(
+    trimws(paste0("#' @examples ", text[1])),
+    map_chr(text[-1], ~paste0("#' ", .x))
+  )
 }
