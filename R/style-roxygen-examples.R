@@ -21,15 +21,6 @@ match_stop_to_start <- function(start, stop_candidates) {
   min(stop_candidates[stop_candidates > start]) - 1L
 }
 
-#' TODO:
-#' * move to R/ui.R
-#' * same arguments as other stylers
-#' * add include_roxygen_code_examples argument to style_pkg() et al.
-#' * export
-style_roxygen_code_examples <- function(path) {
-  map(path, style_roxygen_code_examples_one)
-}
-
 style_roxygen_code_examples_one <- function(path) {
   full_file_content <- enc::read_lines_enc(path)
   start_stop_sequences <- identify_start_and_stop_of_royxgen_examples_from_paths(
