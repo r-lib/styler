@@ -6,6 +6,9 @@
 \usage{
 identify_start_to_stop_of_roxygen_examples_from_text(text)
 }
+\arguments{
+\item{text}{A text consisting of code and/or roxygen comments.}
+}
 \description{
 Finds the sequence from start to stop of the lines in \code{text} that are
 code examples in roxygen comments.

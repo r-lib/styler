@@ -2,7 +2,7 @@
 #'
 #' Finds the sequence from start to stop of the lines in `text` that are
 #' code examples in roxygen comments.
-#' @param text
+#' @param text A text consisting of code and/or roxygen comments.
 #' @importFrom purrr map_int
 #' @importFrom rlang seq2
 identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
