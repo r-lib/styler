@@ -1,19 +1,20 @@
 #' Figure out where code examples start and stop
 #'
-#' Finds the start and stop indices of the lines in `text` that are
+#' Finds the sequence from start to stop of the lines in `text` that are
 #' code examples in roxygen comments.
 #' @param text
 #' @importFrom purrr map_int
-identify_start_stop_of_roxygen_examples_from_text <- function(text) {
+#' @importFrom rlang seq2
+identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
   starts <- grep("^#'\\s*@examples", text, perl = TRUE)
   stop_candidates <- grep("^[^#]|^#'\\s*@", text, perl = TRUE)
   stops <- map_int(starts, match_stop_to_start, stop_candidates)
-  map2(starts, stops, c)
+  map2(starts, stops, seq2)
 }
 
-identify_start_stop_of_roxygen_examples <- function(path) {
+identify_start_to_stop_of_roxygen_examples <- function(path) {
   content <- enc::read_lines_enc(path) # ensure file can be read
-  identify_start_stop_of_roxygen_examples_from_text(content)
+  identify_start_to_stop_of_roxygen_examples_from_text(content)
 }
 
 match_stop_to_start <- function(start, stop_candidates) {
