@@ -112,16 +112,3 @@ extend_if_comment <- function(pd, pos) {
 map_filetype_to_pattern <- function(filetype) {
   paste0("(", paste(set_and_assert_arg_filetype(filetype), collapse = "|"), ")$")
 }
-
-
-extract_selected_lines_from_text <- function() {
-  NULL
-}
-
-update_selected_lines_of_text <- function() {
-  NULL
-}
-
-start_stop_pairs_to_sequences <- function() {
-  NULL
-}
