@@ -81,9 +81,30 @@ transform_file <- function(path,
 make_transformer <- function(transformers) {
   force(transformers)
   function(text) {
-    transformed_text <- parse_transform_serialize(text, transformers)
-    transformed_text
+    transformed_code <- text %>%
+      parse_transform_serialize_r(transformers) %>%
+      parse_transform_serialize_roxygen(transformers)
+    transformed_code
   }
+}
+
+#' @importFrom purrr map_at flatten_chr
+parse_transform_serialize_roxygen <- function(text, transformers) {
+  roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
+  if (length(roxygen_seqs) < 1L) return(text)
+  all_lines <- seq2(1L, length(text))
+  roxygen_examples <- unlist(roxygen_seqs)
+  active_segemnt <- as.integer(all_lines %in% roxygen_examples)
+  segment_id <- cumsum(abs(c(0, diff(active_segemnt))))
+  separated <- split(text, factor(segment_id))
+  restyle_selector <- ifelse(roxygen_seqs[[1]][1] == 1L, odd_index, even_index)
+  map_at(separated, restyle_selector(separated),
+    style_roxygen_code_examples_one,
+    transformers = transformers
+  ) %>%
+    flatten_chr()
+
+
 }
 
 #' Parse, transform and serialize text
@@ -92,7 +113,7 @@ make_transformer <- function(transformers) {
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams apply_transformers
 #' @keywords internal
-parse_transform_serialize <- function(text, transformers) {
+parse_transform_serialize_r <- function(text, transformers) {
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text)
   start_line <- find_start_line(pd_nested)

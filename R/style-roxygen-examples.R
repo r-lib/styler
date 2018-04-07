@@ -21,26 +21,11 @@ match_stop_to_start <- function(start, stop_candidates) {
   min(stop_candidates[stop_candidates > start]) - 1L
 }
 
-style_roxygen_code_examples_one <- function(path) {
-  full_file_content <- enc::read_lines_enc(path)
-  start_stop_sequences <- identify_start_and_stop_of_royxgen_examples_from_paths(
-    full_file_content
-  ) %>%
-    start_stop_pairs_to_sequences()
-
-  masked_examples <- extract_selected_lines_from_text(
-    full_file_content, start_stop_sequences
-  )
-
-  plain_examples <- map(start_stop_sequences, remove_roxygen_mask,
-    text = masked_examples
-  )
-  styled_examples <- map(plain_examples, style_text, ...)
-  masked_examples <- map(styled_examples, add_roxygen_mask)
-  full_file_content <- update_selected_lines_of_text(
-    full_file_content, masked_examples, start_stop_sequences
-  )
-  enc::write_lines_enc(path, full_file_content)
+style_roxygen_code_examples_one <- function(example, transformers) {
+  bare <- remove_roxygen_mask(example)
+  styled <- parse_transform_serialize_r(bare, transformers)
+  masked <- add_roxygen_mask(styled)
+  masked
 }
 
 
