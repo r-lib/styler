@@ -154,6 +154,14 @@ can use RStudio's full text search to find where
 * only very low-level functions or functions that don't fit in any other file
   go to `utils.R`.
 
+### Control Flow
+
+* Conditional statements should always evaluate to `TRUE` or `FALSE`, i.e. we 
+  don't encourage `if (length(x))` but rather `if (length(x) > 0L)`.
+* We avoid loops whenever possible and use functions like `purrr::map()` and 
+  friends when possible and prefer them over R base counterparts like 
+  `base::lapply()`.
+
 ### Boolean Values
 
 Functions that return Boolean values or variables that hold Boolean values are
@@ -165,3 +173,8 @@ otherwise.
 
 Vectors that hold indices are often suffixed with `idx`. `else_idx` for example
 indicates for every row in a parse table whether it contains an `else` token.
+
+### Closures
+
+The use of closures is discouraged. We prefer to prefill a template function 
+with `purrr::partial()`.
