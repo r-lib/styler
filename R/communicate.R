@@ -8,7 +8,7 @@
 #' @keywords internal
 communicate_warning <- function(changed, transformers) {
   if (any(changed, na.rm = TRUE) && !can_verify_roundtrip(transformers)) {
-    cat("Please review the changes carefully!")
+    cat("Please review the changes carefully!", fill = TRUE)
   }
 }
 
