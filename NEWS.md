@@ -1,4 +1,4 @@
-## styler 1.0.1 (2018-03-02)
+# styler 1.0.1 (2018-03-02)
 
 This is a maintenance release without any breaking API changes.
 
@@ -32,11 +32,11 @@ Thanks to all contributors for patches, issues and the like:
 @RMHogervorst, @wlandau, @llrs, @aaronrudkin, @crew102, @jkgrain, @jennybc, 
 @joranE.
 
-## styler 1.0.0 (2017-12-05)
+# styler 1.0.0 (2017-12-05)
 
 Initial release.
 
-### stylers
+## stylers
 These are functions used to style code. They style a directory, a whole package,
 a file or a string.
 ```
@@ -58,7 +58,7 @@ style_file(path,
 style_text(text, ..., style = tidyverse_style, transformers = style(...))
 ```
 
-### style guides
+## style guides
 These functions are the style guides implemented.
 ```
 tidyverse_style(
@@ -73,7 +73,7 @@ tidyverse_reindention()
 tidyverse_math_token_spacing())
 ```
 
-### style guide creators
+## style guide creators
 This function is used to create a style guide.
 ```
 create_style_guide(
@@ -87,7 +87,7 @@ create_style_guide(
 )
 ```
 
-### Helpers
+## Helpers
 These are helper functions used to specify the style guides in use.
 
 ```
