@@ -25,6 +25,7 @@ is_curly_expr <- function(pd) {
 #' A tilde is on the top row in the parse table if it is an asymmetric tilde
 #' expression (like `~column`), in the second row if it is a symmetric tilde
 #' expression (like `a~b`).
+#' @keywords internal
 is_tilde_expr <- function(pd, tilde_pos = c(1, 2)) {
   if (is.null(pd) || nrow(pd) == 1) return(FALSE)
   pd$token[tilde_pos] == "'~'"

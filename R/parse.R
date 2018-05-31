@@ -108,6 +108,7 @@ ensure_correct_str_txt <- function(pd, text) {
 #' otherwise. As this is check is rather expensive, it is only
 #' carried out for configurations we have good reasons to expect problems.
 #' @param pd A parse table.
+#' @keywords internal
 ensure_valid_pd <- function(pd) {
   if (getRversion() < "3.2") {
     non_terminals <- pd %>%
@@ -135,6 +136,7 @@ ensure_valid_pd <- function(pd) {
 #' missleading and this approach was choosen for performance reasons only.
 #' @param pd A parse table.
 #' @param text The initial code to style.
+#' @keywords internal
 identify_insufficiently_parsed_stings <- function(pd, text) {
   is_problematic_string <- pd$token == "STR_CONST"
   candidate_substring <- substr(

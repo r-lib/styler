@@ -19,3 +19,4 @@ The meaning of the variable \code{is_problematic_string} in the source code
 changes from "all strings" to "all problematic strings", is partly
 missleading and this approach was choosen for performance reasons only.
 }
+\keyword{internal}
