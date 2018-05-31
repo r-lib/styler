@@ -12,6 +12,6 @@ set_arg_write_tree(write_tree)
 \description{
 Sets the argument \code{write_tree} in \code{\link[=test_collection]{test_collection()}} to be \code{TRUE} for R
 versions higher or equal to 3.2, and \code{FALSE} otherwise since the second-level
-dependency \code{DiagrammeR} from \code{data.table} is not available for R < 3.2.
+dependency \code{DiagrammeR} from \code{data.tree} is not available for R < 3.2.
 }
 \keyword{internal}
