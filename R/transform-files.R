@@ -92,20 +92,37 @@ make_transformer <- function(transformers) {
 parse_transform_serialize_roxygen <- function(text, transformers) {
   roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
   if (length(roxygen_seqs) < 1L) return(text)
-  all_lines <- seq2(1L, length(text))
-  roxygen_examples <- unlist(roxygen_seqs)
-  active_segemnt <- as.integer(all_lines %in% roxygen_examples)
-  segment_id <- cumsum(abs(c(0, diff(active_segemnt))))
-  separated <- split(text, factor(segment_id))
-  restyle_selector <- ifelse(roxygen_seqs[[1]][1] == 1L, odd_index, even_index)
-  map_at(separated, restyle_selector(separated),
+  split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
+  map_at(split_segments$separated, split_segments$selectors,
     style_roxygen_code_examples_one,
     transformers = transformers
   ) %>%
     flatten_chr()
-
-
 }
+
+#' Split text into roxygen and non-roxygen example segments
+#'
+#' @param text Roxygen comments
+#' @param roxygen_examples Integer sequence that indicates which lines in `text`
+#'   are roxygen examples. Most conveniently obtained with
+#'   [identify_start_to_stop_of_roxygen_examples_from_text].
+#' @return
+#' A list with two elements:
+#'
+#' * A list that contains elements grouped into roxygen and non-rogxygen
+#'   sections. This list is named `separated`.
+#' * An integer vector with the indices that correspond to roxygen code
+#'   examples in `separated`.
+split_roxygen_segments <- function(text, roxygen_examples) {
+  all_lines <- seq2(1L, length(text))
+  active_segemnt <- as.integer(all_lines %in% roxygen_examples)
+  segment_id <- cumsum(abs(c(0, diff(active_segemnt)))) + 1L
+  separated <- split(text, factor(segment_id))
+  restyle_selector <- ifelse(roxygen_examples[1] == 1L, odd_index, even_index)
+
+  lst(separated, selectors = restyle_selector(separated))
+}
+
 
 #' Parse, transform and serialize text
 #'
