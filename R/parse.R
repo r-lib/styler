@@ -104,7 +104,7 @@ ensure_correct_str_txt <- function(pd, text) {
 
 #' Ensure that the parse data is valid
 #'
-#' Test whether all non-termnals have at least one child and throw an error
+#' Test whether all non-terminals have at least one child and throw an error
 #' otherwise. As this is check is rather expensive, it is only
 #' carried out for configurations we have good reasons to expect problems.
 #' @param pd A parse table.
@@ -127,13 +127,13 @@ ensure_valid_pd <- function(pd) {
   TRUE
 }
 
-#' Indentify strings that were not fully parsed
+#' Identify strings that were not fully parsed
 #'
-#' Indentifies strings that were not fully parsed due to their vast length.
+#' Identifies strings that were not fully parsed due to their vast length.
 #' @details
 #' The meaning of the variable `is_problematic_string` in the source code
 #' changes from "all strings" to "all problematic strings", is partly
-#' missleading and this approach was choosen for performance reasons only.
+#' missleading and this approach was chosen for performance reasons only.
 #' @param pd A parse table.
 #' @param text The initial code to style.
 #' @keywords internal

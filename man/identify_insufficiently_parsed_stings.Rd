@@ -2,7 +2,7 @@
 % Please edit documentation in R/parse.R
 \name{identify_insufficiently_parsed_stings}
 \alias{identify_insufficiently_parsed_stings}
-\title{Indentify strings that were not fully parsed}
+\title{Identify strings that were not fully parsed}
 \usage{
 identify_insufficiently_parsed_stings(pd, text)
 }
@@ -12,11 +12,11 @@ identify_insufficiently_parsed_stings(pd, text)
 \item{text}{The initial code to style.}
 }
 \description{
-Indentifies strings that were not fully parsed due to their vast length.
+Identifies strings that were not fully parsed due to their vast length.
 }
 \details{
 The meaning of the variable \code{is_problematic_string} in the source code
 changes from "all strings" to "all problematic strings", is partly
-missleading and this approach was choosen for performance reasons only.
+missleading and this approach was chosen for performance reasons only.
 }
 \keyword{internal}

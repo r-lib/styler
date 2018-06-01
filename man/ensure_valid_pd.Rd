@@ -10,7 +10,7 @@ ensure_valid_pd(pd)
 \item{pd}{A parse table.}
 }
 \description{
-Test whether all non-termnals have at least one child and throw an error
+Test whether all non-terminals have at least one child and throw an error
 otherwise. As this is check is rather expensive, it is only
 carried out for configurations we have good reasons to expect problems.
 }

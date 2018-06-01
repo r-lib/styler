@@ -18,7 +18,7 @@ NULL
 #' @param transformers A set of transformer functions. This argument is most
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
-#' @param filetype Vector of file extensions indicating which filetypes should
+#' @param filetype Vector of file extensions indicating which file types should
 #'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R", ".Rmd")`
 #'   or `c("r", "rmd")`.
 #' @param exclude_files Character vector with paths to files that should be

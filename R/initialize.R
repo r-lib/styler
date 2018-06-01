@@ -1,6 +1,6 @@
 #' Initialize default style guide attributes
 #'
-#' This function initialises and removes various variables from the parse
+#' This function initializes and removes various variables from the parse
 #' table.
 #' @param pd_flat A parse table.
 #' @importFrom utils tail
