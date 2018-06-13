@@ -5,6 +5,7 @@
 #' @param text A text consisting of code and/or roxygen comments.
 #' @importFrom purrr map_int
 #' @importFrom rlang seq2
+#' @keywords internal
 identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
   starts <- grep("^#'\\s*@examples", text, perl = TRUE)
   stop_candidates <- grep("^[^#]|^#'\\s*@", text, perl = TRUE)
@@ -17,15 +18,107 @@ identify_start_to_stop_of_roxygen_examples <- function(path) {
   identify_start_to_stop_of_roxygen_examples_from_text(content)
 }
 
+#' Match a stop candidate to a start
+#' @param start An integer.
+#' @param stop_candidates Potential stop candidates.
+#' @examples
+#' styler:::match_stop_to_start(1, c(3, 4, 5))
+#' @keywords internal
 match_stop_to_start <- function(start, stop_candidates) {
   min(stop_candidates[stop_candidates > start]) - 1L
 }
 
+#' Parse roxygen comments into text
+#'
+#' Used to parse roxygen code examples
+#' @param roxygen Roxygen comments.
+#' @examples
+#' styler:::parse_roxygen(
+#' "#' @examples
+#'  #' 1+  1
+#' ")
+#' @keywords internal
+parse_roxygen <- function(roxygen) {
+  remove_roxygen_mask(roxygen) %>%
+    textConnection() %>%
+    tools::parse_Rd(fragment = TRUE) %>%
+    as.character()
+}
+
+#' Style a roxygen code example that may contain a dontrun
+#'
+#' Parses roxygen2 comments into code, breaks it into dontrun / run sections and
+#' processes each segment indicidually.
+#' @param example Roxygen example code.
+#' @importFrom purrr map2 flatten_chr
+#' @import rlang seq2
 style_roxygen_code_examples_one <- function(example, transformers) {
-  bare <- remove_roxygen_mask(example)
-  styled <- parse_transform_serialize_r(bare, transformers)
-  masked <- add_roxygen_mask(styled)
-  masked
+  bare <- parse_roxygen(example)
+  dontrun_seqs <- find_dontrun_seqs(bare)
+  split_segments <- split_roxygen_segments(bare, unlist(dontrun_seqs))
+  is_dontrun <-
+    seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
+
+  map2(split_segments$separated, is_dontrun,
+    style_roxygen_dontrun_code_examples_one,
+    transformers = transformers
+  ) %>%
+    flatten_chr() %>%
+    add_roxygen_mask()
+}
+
+#' Find dontrun sequences
+#'
+#' Returns the indices of the lines that correspond to a `dontrun` sequence.
+#' @param bare
+#' @importFrom purrr map2 map_int
+find_dontrun_seqs <- function(bare) {
+  dontrun_openings <- which(bare == "\\dontrun")
+  dontrun_closings <- map_int(dontrun_openings + 1L, find_dontrun_closings, bare = bare)
+  map2(dontrun_openings, dontrun_closings, seq2)
+}
+
+#' Given a code segment is dontrun or run, style it
+#'
+#' @param code_segment A character vector with code to style.
+#' @param is_dontrun Whether the segment to process is a dontrun segemnt or not.
+style_roxygen_dontrun_code_examples_one <- function(code_segment,
+                                                    transformers,
+                                                    is_dontrun) {
+  if (is_dontrun) {
+    code_segment <- remove_dontrun_mask(code_segment)
+  }
+  code_segment <- code_segment %>%
+    paste0(collapse = "") %>%
+    parse_transform_serialize_r(transformers)
+
+  if (is_dontrun) {
+    code_segment <- c("\\dontrun{", code_segment, "}")
+  }
+  code_segment
+}
+
+#' Remove dontrun mask
+#'
+#' @param roxygen Roxygen code examples that contains a dontrun segment only.
+remove_dontrun_mask <- function(roxygen) {
+  potential_pos <- c(3L, length(roxygen) - 1L)
+  is_line_break_at_potential_pos <- which(roxygen[potential_pos] == "\n")
+  mask <- c(
+    1, 2, length(roxygen), potential_pos[is_line_break_at_potential_pos]
+  ) %>% sort()
+  roxygen[-mask]
+}
+
+find_dontrun_closings <- function(bare, dontrun_openings) {
+  opening <- cumsum(bare == "{")
+  closing <- cumsum(bare == "}")
+  diff <- opening - closing
+  level_dontrun <- diff[dontrun_openings]
+
+  all_closing_level_dontrun <- which(diff == level_dontrun & lead(diff) == (level_dontrun - 1L))
+  dontrun_closing <- all_closing_level_dontrun[all_closing_level_dontrun > dontrun_openings]
+  dontrun_closing + 1L
 }
 
 
@@ -38,6 +131,7 @@ remove_roxygen_header <- function(text) {
   gsub("^\\s*@examples\\s*", "", text, perl = TRUE)
 }
 
+#' @importFrom purrr map_chr
 add_roxygen_mask <- function(text) {
   c(
     trimws(paste0("#' @examples ", text[1])),

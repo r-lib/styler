@@ -15,7 +15,8 @@ Imports:
     rlang,
     rprojroot,
     tibble (>= 1.4.2),
-    withr
+    withr,
+    tools
 Suggests:
     data.tree,
     dplyr,

@@ -88,6 +88,7 @@ make_transformer <- function(transformers) {
   }
 }
 
+
 #' @importFrom purrr map_at flatten_chr
 parse_transform_serialize_roxygen <- function(text, transformers) {
   roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
@@ -124,11 +125,12 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 }
 
 
-#' Parse, transform and serialize text
+#' Parse, transform and serialize plain R code
 #'
 #' Wrapper function for the common three operations.
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams apply_transformers
+#' @seealso [parse_transform_serialize_roxygen()]
 #' @keywords internal
 parse_transform_serialize_r <- function(text, transformers) {
   text <- assert_text(text)
