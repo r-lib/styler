@@ -1,3 +1,18 @@
+#' Save parsing from text
+#'
+#' Parses text safely, i.e. it can handle UNIX and CRLF line endings. The trick
+#' is to write the contents to a temporary file using [base::textConnection()].
+#' Surprisingly, this speeds up parsing.
+#' @param text Text to parse.
+#' @param ... Parameters passed to [base::parse()]
+#' @keywords internal
+parse_safely <- function(text, ...) {
+  temp_path <- tempfile()
+  on.exit(unlink(temp_path))
+  enc::write_lines_enc(text, temp_path)
+  parse(temp_path, ...)
+}
+
 #' Obtain token table from text
 #'
 #' [utils::getParseData()] is used to obtain a flat parse table from `text`.
@@ -31,8 +46,8 @@ tokenize <- function(text) {
 #' @keywords internal
 get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
-  parse(text = text, keep.source = TRUE)
-  parsed <- parse(text = text, keep.source = TRUE)
+  parse_safely(text, keep.source = TRUE)
+  parsed <- parse_safely(text, keep.source = TRUE)
   as_tibble(utils::getParseData(parsed, includeText = include_text)) %>%
     add_id_and_short()
 }

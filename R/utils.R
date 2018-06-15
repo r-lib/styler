@@ -1,4 +1,4 @@
-parse_text <- function(x) parse(text = x)[[1L]]
+parse_text <- function(x) parse_safely(x)[[1L]]
 
 line_col_names <- function() {
   c("line1", "line2", "col1", "col2")
