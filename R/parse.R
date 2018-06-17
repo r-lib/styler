@@ -9,7 +9,7 @@
 parse_safely <- function(text, ...) {
   temp_path <- tempfile()
   on.exit(unlink(temp_path))
-  enc::write_lines_enc(text, temp_path)
+  enc::write_lines_enc(enc::to_utf8(text), temp_path)
   parse(temp_path, ...)
 }
 
