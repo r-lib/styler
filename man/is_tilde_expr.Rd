@@ -26,3 +26,4 @@ A tilde is on the top row in the parse table if it is an asymmetric tilde
 expression (like \code{~column}), in the second row if it is a symmetric tilde
 expression (like \code{a~b}).
 }
+\keyword{internal}

@@ -10,7 +10,7 @@ default_style_guide_attributes(pd_flat)
 \item{pd_flat}{A parse table.}
 }
 \description{
-This function initialises and removes various variables from the parse
+This function initializes and removes various variables from the parse
 table.
 }
 \examples{

@@ -1,3 +1,25 @@
+# styler 1.0.2 (2018-06-10)
+
+This is a maintenance release without any breaking API changes.
+
+## Major Changes
+
+* Fixed indention for named multi-line function calls (#372).
+* Non-R code chunks in `.Rmd` files are now respected (#386).
+
+## Minor Changes
+
+* Fixing an edge case in which, if very long strings were present in the code, 
+  tokens could be replaced with wrong text (#384).
+* Spacing around tilde in formulas depends now on whether there is a LHS 
+  in the formula (#379).
+* Spaces are now also added around `EQ_SUB` (`=`) (#380).
+* Added `CONTRIBUTING.md` to outline guidelines for contributing to styler.
+
+Thanks to all contributors for patches, issues and the like: 
+@katrinleinweber, @dchiu911, @ramnathv, @aedobbyn, @Bio7, 
+@tonytonov, @samhinshaw, @fny, @vnijs, @martin-mfg.
+
 # styler 1.0.1 (2018-03-02)
 
 This is a maintenance release without any breaking API changes.

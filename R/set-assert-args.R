@@ -2,7 +2,7 @@
 #'
 #' Sets the argument `write_tree` in [test_collection()] to be `TRUE` for R
 #' versions higher or equal to 3.2, and `FALSE` otherwise since the second-level
-#' dependency `DiagrammeR` from `data.table` is not available for R < 3.2.
+#' dependency `DiagrammeR` from `data.tree` is not available for R < 3.2.
 #' @param write_tree Whether or not to write tree.
 #' @keywords internal
 set_arg_write_tree <- function(write_tree) {

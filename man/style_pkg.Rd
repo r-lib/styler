@@ -22,7 +22,7 @@ further except to construct the argument \code{transformers}. See
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
-\item{filetype}{Vector of file extensions indicating which filetypes should
+\item{filetype}{Vector of file extensions indicating which file types should
 be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}
 or \code{c("r", "rmd")}.}
 

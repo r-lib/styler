@@ -1,6 +1,13 @@
 context("non-ASCII characters are handled properly")
 
-test_that("non-ASCII characters are handled properly", {
+test_that("non-ASCII characters are handled properly for text styling", {
+  expect_equal(
+    style_text("glück <-3") %>% unclass(), "glück <- 3"
+  )
+})
+
+
+test_that("non-ASCII characters are handled properly for file styling", {
   skip_if(.Platform$OS.type != "windows")
 
   withr::with_locale(
