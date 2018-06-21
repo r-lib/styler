@@ -51,14 +51,19 @@ style_active_file <- function() {
 try_transform_as_r_file <- function(context, transformer) {
   tryCatch(
     transformer(context$contents),
-    error = function(e) stop(
-        paste(
-          "Styling of unsaved files is only supported for R files with valid code.",
-          "Please save the file (as .R or .Rmd) and make sure that the R code in it",
-          "can be parsed. Then, try to style again.",
-          "The error was \n", e
-        ), call. = FALSE
+    error = function(e) {
+      preamble_for_unsaved <- paste(
+        "Styling of unsaved files is only supported for R files with valid code.",
+        "Please save the file (as .R or .Rmd) and make sure that the R code in it",
+        "can be parsed. Then, try to style again."
       )
+
+      if (context$path == "") {
+        stop(paste0(preamble_for_unsaved, "The error was \n", e), call. = FALSE)
+      } else {
+        stop(e)
+      }
+    }
   )
 }
 
