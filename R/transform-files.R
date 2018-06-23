@@ -217,7 +217,7 @@ verify_roundtrip <- function(old_text, new_text) {
 #' @keywords internal
 expressions_are_identical <- function(old_text, new_text) {
   identical(
-    parse(text = old_text, keep.source = FALSE),
-    parse(text = new_text, keep.source = FALSE)
+    parse_safely(old_text, keep.source = FALSE),
+    parse_safely(new_text, keep.source = FALSE)
   )
 }

@@ -1,3 +1,60 @@
+#' Save parsing from text
+#'
+#' Parses text safely, i.e. throws an informative error if EOL style does not
+#' match LF or indicates the exact position where the parsing failed. Note
+#' that we can only detect wrong EOL style if it occurs on the first line
+#' already.
+#' @param text Text to parse.
+#' @param ... Parameters passed to [base::parse()]
+#' @keywords internal
+#' @examples
+#' \dontrun{
+#' styler:::parse_safely("a + 3 -4 -> x\r\n glück + 1")
+#' # This cannot be detected as a EOL style problem because the first
+#' # line ends as expected with \n
+#' styler:::parse_safely("a + 3 -4 -> x\nx + 2\r\n glück + 1")
+#' }
+#' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
+parse_safely <- function(text, ...) {
+  tried_parsing <- tryCatch(parse(text = text, ...),
+    error = function(e) e,
+    warning = function(w) w
+  )
+  if (inherits(tried_parsing, "error")) {
+    if (has_crlf_as_first_line_sep(tried_parsing$message, text)) {
+      stop(
+        "The code to style seems to use Windows style line endings (CRLF). " ,
+        "styler currently only supports Unix style line endings (LF). ",
+        "Please change the EOL character in your editor to Unix style and try again.",
+        "\nThe parsing error was:\n", tried_parsing$message,
+        call. = FALSE
+      )
+    } else {
+      stop(tried_parsing)
+    }
+  } else if (inherits(tried_parsing, "warning")) {
+    warning(tried_parsing$message, call. = FALSE)
+  }
+  tried_parsing
+}
+
+#' Check if a string uses CRLF EOLs
+#'
+#' @param message A message returned with `tryCatch()`.
+#' @param initial_text The inital text to style.
+has_crlf_as_first_line_sep <- function(message, initial_text) {
+  split <- strsplit(message, ":", fixed = TRUE)[[1]]
+  if (length(split) > 1L && split[1] == "<text>") {
+    start_char <- as.numeric(split[3])
+    offending_line <- initial_text[as.integer(split[2])]
+    if (!is.na(offending_line)) {
+      if (substr(offending_line, start_char, start_char + 1) == "\r\n") {
+      return(TRUE)
+      }
+    }
+  }
+  FALSE
+}
 #' Obtain token table from text
 #'
 #' [utils::getParseData()] is used to obtain a flat parse table from `text`.
@@ -31,8 +88,8 @@ tokenize <- function(text) {
 #' @keywords internal
 get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
-  parse(text = text, keep.source = TRUE)
-  parsed <- parse(text = text, keep.source = TRUE)
+  parse_safely(text, keep.source = TRUE)
+  parsed <- parse_safely(text, keep.source = TRUE)
   as_tibble(utils::getParseData(parsed, includeText = include_text)) %>%
     add_id_and_short()
 }
