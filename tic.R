@@ -12,6 +12,7 @@ if (Sys.getenv("id_rsa") != "" && ci()$get_branch() == "master" && Sys.getenv("B
   get_stage("deploy") %>%
     add_code_step(install.packages("remotes")) %>%
     add_code_step(remotes::install_github("r-lib/pkgload")) %>%
+    add_code_step(remotes::install_github("r-lib/pkgapi")) %>%
     add_step(step_build_pkgdown()) %>%
     add_code_step(writeLines("styler.r-lib.org", "docs/CNAME")) %>%
     add_step(step_push_deploy("docs", "gh-pages"))
