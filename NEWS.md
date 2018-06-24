@@ -5,7 +5,8 @@ This is a maintenance release without any breaking API changes.
 ## Major Changes
 
 * Fixed indention for named multi-line function calls (#372).
-* Non-R code chunks in `.Rmd` files are now respected (#386).
+* Non-R code chunks in `.Rmd` files are now respected and won't get styled 
+  (#386).
 
 ## Minor Changes
 
@@ -15,10 +16,12 @@ This is a maintenance release without any breaking API changes.
   in the formula (#379).
 * Spaces are now also added around `EQ_SUB` (`=`) (#380).
 * Added `CONTRIBUTING.md` to outline guidelines for contributing to styler.
+* More informative error messages for parsing problems (#401, #400).
+* Improved documentation (#387).
 
 Thanks to all contributors for patches, issues and the like: 
-@katrinleinweber, @dchiu911, @ramnathv, @aedobbyn, @Bio7, 
-@tonytonov, @samhinshaw, @fny, @vnijs, @martin-mfg.
+@katrinleinweber, @krlmlr, @dchiu911, @ramnathv, @aedobbyn, @Bio7, 
+@tonytonov, @samhinshaw, @fny, @vnijs, @martin-mfg, @NGaffney, @dchiu911.
 
 # styler 1.0.1 (2018-03-02)
 
