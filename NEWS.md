@@ -1,4 +1,4 @@
-# styler 1.0.2 (2018-06-10)
+# styler 1.0.2
 
 This is a maintenance release without any breaking API changes.
 
@@ -23,7 +23,7 @@ Thanks to all contributors for patches, issues and the like:
 @katrinleinweber, @krlmlr, @dchiu911, @ramnathv, @aedobbyn, @Bio7, 
 @tonytonov, @samhinshaw, @fny, @vnijs, @martin-mfg, @NGaffney, @dchiu911.
 
-# styler 1.0.1 (2018-03-02)
+# styler 1.0.1
 
 This is a maintenance release without any breaking API changes.
 
@@ -57,7 +57,7 @@ Thanks to all contributors for patches, issues and the like:
 @RMHogervorst, @wlandau, @llrs, @aaronrudkin, @crew102, @jkgrain, @jennybc, 
 @joranE.
 
-# styler 1.0.0 (2017-12-05)
+# styler 1.0.0
 
 Initial release.
 
