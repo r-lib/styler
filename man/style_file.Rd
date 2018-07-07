@@ -24,6 +24,12 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 Performs various substitutions in the files specified.
 Carefully examine the results after running this function!
 }
+\section{Encoding}{
+
+UTF-8 encoding is assumed. Please convert your code to UTF-8 if necessary
+before applying styler.
+}
+
 \section{Value}{
 
 Invisibly returns a data frame that indicates for each file considered for
