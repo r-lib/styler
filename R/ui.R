@@ -175,7 +175,10 @@ prettify_any <- function(transformers, filetype, recursive, exclude_files) {
 #' Style `.R` and/or `.Rmd` files
 #'
 #' Performs various substitutions in the files specified.
-#'   Carefully examine the results after running this function!
+#' Carefully examine the results after running this function!
+#' @section Encoding:
+#' UTF-8 encoding is assumed. Please convert your code to UTF-8 if necessary
+#' before applying styler.
 #' @param path A character vector with paths to files to style.
 #' @inheritParams style_pkg
 #' @inheritSection transform_files Value
