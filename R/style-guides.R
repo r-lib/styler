@@ -72,7 +72,6 @@ tidyverse_style <- function(scope = "tokens",
       indent_without_paren = partial(indent_without_paren,
         indent_by = indent_by
       ),
-      fix_quotes,
       remove_space_before_closing_paren,
       remove_space_before_opening_paren = if (strict) remove_space_before_opening_paren,
       add_space_after_for_if_while,
@@ -146,6 +145,7 @@ tidyverse_style <- function(scope = "tokens",
 
   token_manipulators <- if (scope >= "tokens") {
     lst(
+      fix_quotes,
       force_assignment_op,
       resolve_semicolon,
       add_brackets_in_pipe,
