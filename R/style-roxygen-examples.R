@@ -48,10 +48,12 @@ parse_roxygen <- function(roxygen) {
 #' Style a roxygen code example that may contain a dontrun
 #'
 #' Parses roxygen2 comments into code, breaks it into dontrun / run sections and
-#' processes each segment indicidually.
+#' processes each segment indicidually using
+#' [style_roxygen_dontrun_code_examples_one()].
 #' @param example Roxygen example code.
 #' @importFrom purrr map2 flatten_chr
 #' @importFrom rlang seq2
+#' @keywords internal
 style_roxygen_code_examples_one <- function(example, transformers) {
   bare <- parse_roxygen(example)
   dontrun_seqs <- find_dontrun_seqs(bare)
@@ -72,6 +74,7 @@ style_roxygen_code_examples_one <- function(example, transformers) {
 #' Returns the indices of the lines that correspond to a `dontrun` sequence.
 #' @param bare Bare code.
 #' @importFrom purrr map2 map_int
+#' @keywords internal
 find_dontrun_seqs <- function(bare) {
   dontrun_openings <- which(bare == "\\dontrun")
   dontrun_closings <- map_int(dontrun_openings + 1L, find_dontrun_closings, bare = bare)
@@ -80,11 +83,21 @@ find_dontrun_seqs <- function(bare) {
 
 #' Given a code segment is dontrun or run, style it
 #'
+#' We drop all newline characters first because otherwise the code segment
+#' passed to this function was previously parsed with [parse_roxygen()] and
+#' line-breaks in and after the `\\dontrun{...}` are expressed with `"\n"`, which
+#' contradicts to the definition used elsewhere in this package, where every
+#' element in a vector corresponds to a line. These line-breaks don't get
+#' eliminated because they move to the front of a `code_segment` and
+#' `style_text("\n1")` gives `"\n1"`, i.e. trailing newlines are not
+#' eliminated.
 #' @param code_segment A character vector with code to style.
 #' @param is_dontrun Whether the segment to process is a dontrun segemnt or not.
+#' @keywords internal
 style_roxygen_dontrun_code_examples_one <- function(code_segment,
                                                     transformers,
                                                     is_dontrun) {
+  code_segment <- drop_newline_codelines(code_segment)
   if (is_dontrun) {
     code_segment <- remove_dontrun_mask(code_segment)
   }
@@ -101,6 +114,7 @@ style_roxygen_dontrun_code_examples_one <- function(code_segment,
 #' Remove dontrun mask
 #'
 #' @param roxygen Roxygen code examples that contains a dontrun segment only.
+#' @keywords internal
 remove_dontrun_mask <- function(roxygen) {
   potential_pos <- c(3L, length(roxygen) - 1L)
   is_line_break_at_potential_pos <- which(roxygen[potential_pos] == "\n")
@@ -109,6 +123,7 @@ remove_dontrun_mask <- function(roxygen) {
   ) %>% sort()
   roxygen[-mask]
 }
+
 
 find_dontrun_closings <- function(bare, dontrun_openings) {
   opening <- cumsum(bare == "{")
@@ -120,6 +135,8 @@ find_dontrun_closings <- function(bare, dontrun_openings) {
   dontrun_closing <- all_closing_level_dontrun[all_closing_level_dontrun > dontrun_openings]
   dontrun_closing + 1L
 }
+
+
 
 drop_newline_codelines <- function(code) {
   code[code != "\n"]

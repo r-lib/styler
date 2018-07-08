@@ -14,4 +14,7 @@ parse_transform_serialize_r(text, transformers)
 \description{
 Wrapper function for the common three operations.
 }
+\seealso{
+\code{\link[=parse_transform_serialize_roxygen]{parse_transform_serialize_roxygen()}}
+}
 \keyword{internal}

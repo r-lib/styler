@@ -31,6 +31,9 @@ of \code{path} should be styled as well.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
+
+\item{include_roxygen_examples}{Whether or not to style code in roxygen
+examples.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a directory.

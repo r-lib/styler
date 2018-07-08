@@ -23,6 +23,8 @@ NULL
 #'   or `c("r", "rmd")`.
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
+#' @param include_roxygen_examples Whether or not to style code in roxygen
+#'   examples.
 #' @section Warning:
 #' This function overwrites files (if styling results in a change of the
 #' code to be formatted). It is strongly suggested to only style files

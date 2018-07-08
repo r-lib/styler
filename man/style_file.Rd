@@ -20,6 +20,9 @@ further except to construct the argument \code{transformers}. See
 \item{transformers}{A set of transformer functions. This argument is most
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
+
+\item{include_roxygen_examples}{Whether or not to style code in roxygen
+examples.}
 }
 \description{
 Performs various substitutions in the files specified.

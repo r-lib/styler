@@ -94,7 +94,13 @@ make_transformer <- function(transformers, include_roxygen_examples) {
 }
 
 
+#' Parse, transform and serialize roxygen comments
+#'
+#' Splits `text` into roxygen code examples and non-roxygen code examples and
+#' then maps over these examples by applyingj
+#' [style_roxygen_code_examples_one()].
 #' @importFrom purrr map_at flatten_chr
+#' @keywords internal
 parse_transform_serialize_roxygen <- function(text, transformers) {
   roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
   if (length(roxygen_seqs) < 1L) return(text)
@@ -119,6 +125,7 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
 #'   sections. This list is named `separated`.
 #' * An integer vector with the indices that correspond to roxygen code
 #'   examples in `separated`.
+#' @keywords internal
 split_roxygen_segments <- function(text, roxygen_examples) {
   if (is.null(roxygen_examples)) return(lst(separated = list(text), selectors = NULL))
   all_lines <- seq2(1L, length(text))
