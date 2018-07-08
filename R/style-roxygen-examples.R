@@ -99,6 +99,7 @@ style_roxygen_code_examples_one_example <- function(example, transformers) {
 #' @keywords internal
 style_roxygen_code_examples_one_dontrun <- function(one_dontrun, transformers) {
   one_dontrun <- drop_newline_codelines(one_dontrun)
+  if (length(one_dontrun) < 1L) return(character())
   dontrun_seqs <- find_dontrun_seqs(one_dontrun)
   split_segments <- split_roxygen_segments(one_dontrun, unlist(dontrun_seqs))
   is_dontrun <-

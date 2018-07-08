@@ -57,8 +57,6 @@ NULL
 #' @inheritSection transform_files Value
 #' @family stylers
 #' @examples
-#'
-#' @examples
 #' \dontrun{
 #' style_pkg(style = tidyverse_style, strict = TRUE)
 #' style_pkg(
@@ -147,8 +145,6 @@ style_text <- function(text,
 #' @inheritSection style_pkg Warning
 #' @inheritSection style_pkg Roundtrip Validation
 #' @family stylers
-#' @examples
-#'
 #' @examples
 #' \dontrun{
 #' style_dir(file_type = "r")
