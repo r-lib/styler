@@ -55,7 +55,7 @@ parse_roxygen <- function(roxygen) {
 #' style_text('a%>%b; a', scope = 'line_breaks')
 #' style_text('a%>%b; a', scope = 'tokens')"
 #' parsed <- styler:::parse_roxygen(code) # cuts before "%" for no reason
-#' fixed <- post_parse_roxygen(styler:::drop_newline_codelines(parsed)) # better
+#' fixed <- styler:::post_parse_roxygen(styler:::drop_newline_codelines(parsed)) # better
 post_parse_roxygen <- function(raw) {
   special <- substr(raw, 1, 1) == "%"
   len <- nchar(raw)
