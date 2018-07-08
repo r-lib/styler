@@ -17,6 +17,11 @@
 #' style_file(file, transformers = tidyverse_style(strict = TRUE))
 #' enc::read_lines_enc(file)
 #' \dontrun{unlink(file2)}
+#' \dontrun{
+#' { x
+#' }
+#' unlink(file2)
+#' }
 #' @family stylers
 #' @export
 style_file <- function(path,

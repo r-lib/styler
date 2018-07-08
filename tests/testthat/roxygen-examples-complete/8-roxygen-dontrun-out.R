@@ -26,6 +26,13 @@
 #' \dontrun{
 #' unlink(file2)
 #' }
+#' @examples
+#' \dontrun{
+#' {
+#'   x
+#' }
+#' unlink(file2)
+#' }
 #' @family stylers
 #' @export
 style_file <- function(path,
