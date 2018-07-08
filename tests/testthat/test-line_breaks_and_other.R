@@ -19,3 +19,9 @@ test_that("no line break after %>% if next token is comment", {
   expect_warning(test_collection("line_breaks_and_other", "pipe_and",
                                  transformer = style_text), NA)
 })
+
+
+test_that("line break before comma is removed and placed after comma ", {
+  expect_warning(test_collection("line_breaks_and_other", "comma",
+                                 transformer = style_text), NA)
+})

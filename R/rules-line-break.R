@@ -5,6 +5,16 @@ remove_line_break_before_curly_opening <- function(pd) {
   pd
 }
 
+set_line_break_around_comma <- function(pd) {
+  comma_with_line_break_before <-
+    (pd$token == "','") &
+    (pd$lag_newlines > 0) &
+    (pd$token_before != "COMMENT")
+  pd$lag_newlines[comma_with_line_break_before] <- 0L
+  pd$lag_newlines[lead(comma_with_line_break_before)] <- 1L
+  pd
+}
+
 style_line_break_around_curly <- function(strict, pd) {
   if (is_curly_expr(pd) && nrow(pd) > 2) {
     closing_before <- pd$token == "'}'"
