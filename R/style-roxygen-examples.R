@@ -50,6 +50,7 @@ parse_roxygen <- function(roxygen) {
 #' Parses roxygen2 comments into code, breaks it into dontrun / run sections and
 #' processes each segment indicidually using
 #' [style_roxygen_dontrun_code_examples_one()].
+#' @inheritParams parse_transform_serialize_r
 #' @param example Roxygen example code.
 #' @importFrom purrr map2 flatten_chr
 #' @importFrom rlang seq2
@@ -61,6 +62,19 @@ style_roxygen_code_examples_one_example <- function(example, transformers) {
     flatten_chr()
 }
 
+#' Style a roxygen code example that contains at most one `\\dontrun{...}`
+#'
+#' We drop all newline characters first because otherwise the code segment
+#' passed to this function was previously parsed with [parse_roxygen()] and
+#' line-breaks in and after the `\\dontrun{...}` are expressed with `"\n"`, which
+#' contradicts to the definition used elsewhere in this package, where every
+#' element in a vector corresponds to a line. These line-breaks don't get
+#' eliminated because they move to the front of a `code_segment` and
+#' `style_text("\n1")` gives `"\n1"`, i.e. trailing newlines are not
+#' eliminated.
+#' @param one_dontrun Bare R code containing at most one `\\dontrun{...}`.
+#' @inheritParams parse_transform_serialize_r
+#' @keywords internal
 style_roxygen_code_examples_one_dontrun <- function(one_dontrun, transformers) {
   one_dontrun <- drop_newline_codelines(one_dontrun)
   dontrun_seqs <- find_dontrun_seqs(one_dontrun)
@@ -91,21 +105,13 @@ find_dontrun_seqs <- function(bare) {
 
 #' Given a code segment is dontrun or run, style it
 #'
-#' We drop all newline characters first because otherwise the code segment
-#' passed to this function was previously parsed with [parse_roxygen()] and
-#' line-breaks in and after the `\\dontrun{...}` are expressed with `"\n"`, which
-#' contradicts to the definition used elsewhere in this package, where every
-#' element in a vector corresponds to a line. These line-breaks don't get
-#' eliminated because they move to the front of a `code_segment` and
-#' `style_text("\n1")` gives `"\n1"`, i.e. trailing newlines are not
-#' eliminated.
 #' @param code_segment A character vector with code to style.
 #' @param is_dontrun Whether the segment to process is a dontrun segemnt or not.
+#' @inheritParams parse_transform_serialize_r
 #' @keywords internal
 style_roxygen_dontrun_code_examples_one <- function(code_segment,
                                                     transformers,
                                                     is_dontrun) {
-  code_segment <- drop_newline_codelines(code_segment)
   if (is_dontrun) {
     code_segment <- remove_dontrun_mask(code_segment)
   }

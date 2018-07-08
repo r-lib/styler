@@ -9,16 +9,11 @@ style_roxygen_dontrun_code_examples_one(code_segment, transformers, is_dontrun)
 \arguments{
 \item{code_segment}{A character vector with code to style.}
 
+\item{transformers}{A list of \emph{named} transformer functions}
+
 \item{is_dontrun}{Whether the segment to process is a dontrun segemnt or not.}
 }
 \description{
-We drop all newline characters first because otherwise the code segment
-passed to this function was previously parsed with \code{\link[=parse_roxygen]{parse_roxygen()}} and
-line-breaks in and after the \code{\\dontrun{...}} are expressed with \code{"\n"}, which
-contradicts to the definition used elsewhere in this package, where every
-element in a vector corresponds to a line. These line-breaks don't get
-eliminated because they move to the front of a \code{code_segment} and
-\code{style_text("\n1")} gives \code{"\n1"}, i.e. trailing newlines are not
-eliminated.
+Given a code segment is dontrun or run, style it
 }
 \keyword{internal}
