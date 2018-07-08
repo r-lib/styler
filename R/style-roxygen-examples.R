@@ -54,19 +54,27 @@ parse_roxygen <- function(roxygen) {
 #' @importFrom purrr map2 flatten_chr
 #' @importFrom rlang seq2
 #' @keywords internal
-style_roxygen_code_examples_one <- function(example, transformers) {
+style_roxygen_code_examples_one_example <- function(example, transformers) {
   bare <- parse_roxygen(example)
-  dontrun_seqs <- find_dontrun_seqs(bare)
-  split_segments <- split_roxygen_segments(bare, unlist(dontrun_seqs))
+  one_dontrun <- split(bare, factor(cumsum(bare == "\\dontrun")))
+  map(one_dontrun, style_roxygen_code_examples_one_dontrun, transformers) %>%
+    flatten_chr()
+}
+
+style_roxygen_code_examples_one_dontrun <- function(one_dontrun, transformers) {
+  one_dontrun <- drop_newline_codelines(one_dontrun)
+  dontrun_seqs <- find_dontrun_seqs(one_dontrun)
+  split_segments <- split_roxygen_segments(one_dontrun, unlist(dontrun_seqs))
   is_dontrun <-
     seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
 
   map2(split_segments$separated, is_dontrun,
-    style_roxygen_dontrun_code_examples_one,
-    transformers = transformers
+       style_roxygen_dontrun_code_examples_one,
+       transformers = transformers
   ) %>%
     flatten_chr() %>%
     add_roxygen_mask()
+
 }
 
 #' Find dontrun sequences

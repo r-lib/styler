@@ -106,7 +106,7 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
   if (length(roxygen_seqs) < 1L) return(text)
   split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
   map_at(split_segments$separated, split_segments$selectors,
-    style_roxygen_code_examples_one,
+    style_roxygen_code_examples_one_example,
     transformers = transformers
   ) %>%
     flatten_chr()
