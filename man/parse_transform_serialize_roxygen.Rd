@@ -9,6 +9,6 @@ parse_transform_serialize_roxygen(text, transformers)
 \description{
 Splits \code{text} into roxygen code examples and non-roxygen code examples and
 then maps over these examples by applyingj
-\code{\link[=style_roxygen_code_examples_one]{style_roxygen_code_examples_one()}}.
+\code{\link[=style_roxygen_code_examples_one_example]{style_roxygen_code_examples_one_example()}}.
 }
 \keyword{internal}

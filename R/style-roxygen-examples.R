@@ -45,6 +45,28 @@ parse_roxygen <- function(roxygen) {
     as.character()
 }
 
+#' Fix parsing bugs
+#'
+#' @examples
+#' code <- "style_text('call( 1)')
+#' style_text('1    + 1', strict = FALSE)
+#' style_text('a%>%b', scope = 'spaces')
+#' style_text('a%>%b; a', scope = 'line_breaks')
+#' style_text('a%>%b; a', scope = 'tokens')"
+#' parsed <- styler:::parse_roxygen(code) # cuts before "%" for no reason
+#' fixed <- post_parse_roxygen(drop_newline_codelines(parsed)) # better
+post_parse_roxygen <- function(raw) {
+  special <- substr(raw, 1, 1) == "%"
+  len <- nchar(raw)
+  newline_after <- substr(raw, len, len) == "\n"
+  must_instert_linebreak_after <- which(special & !newline_after)
+  append_ <- purrr::partial(append, x = raw, values = "\n")
+  split <- reduce(must_instert_linebreak_after + seq(0, length(must_instert_linebreak_after) - 1L), append, values = "\n", .init = raw) %>%
+    paste0(collapse = "") %>%
+    strsplit("\n")
+  split[[1]]
+}
+
 #' Style a roxygen code example that may contain a dontrun
 #'
 #' Parses roxygen2 comments into code, breaks it into dontrun / run sections and
@@ -115,8 +137,8 @@ style_roxygen_dontrun_code_examples_one <- function(code_segment,
   if (is_dontrun) {
     code_segment <- remove_dontrun_mask(code_segment)
   }
-  code_segment <- code_segment %>%
-    paste0(collapse = "") %>%
+  code_segment <- post_parse_roxygen(code_segment) %>%
+    paste0(collapse = "\n") %>%
     parse_transform_serialize_r(transformers)
 
   if (is_dontrun) {

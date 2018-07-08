@@ -98,7 +98,7 @@ make_transformer <- function(transformers, include_roxygen_examples) {
 #'
 #' Splits `text` into roxygen code examples and non-roxygen code examples and
 #' then maps over these examples by applyingj
-#' [style_roxygen_code_examples_one()].
+#' [style_roxygen_code_examples_one_example()].
 #' @importFrom purrr map_at flatten_chr
 #' @keywords internal
 parse_transform_serialize_roxygen <- function(text, transformers) {
