@@ -4,7 +4,8 @@
 \alias{style_file}
 \title{Style \code{.R} and/or \code{.Rmd} files}
 \usage{
-style_file(path, ..., style = tidyverse_style, transformers = style(...))
+style_file(path, ..., style = tidyverse_style, transformers = style(...),
+  include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{path}{A character vector with paths to files to style.}

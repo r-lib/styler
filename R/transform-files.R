@@ -9,8 +9,8 @@
 #' Invisibly returns a data frame that indicates for each file considered for
 #' styling whether or not it was actually changed.
 #' @keywords internal
-transform_files <- function(files, transformers) {
-  transformer <- make_transformer(transformers)
+transform_files <- function(files, transformers, include_roxygen_examples) {
+  transformer <- make_transformer(transformers, include_roxygen_examples)
   max_char <- min(max(nchar(files), 0), 80)
   if (length(files) > 0L) {
     cat("Styling ", length(files), " files:\n")
@@ -77,13 +77,18 @@ transform_file <- function(path,
 #' that should be transformed.
 #' @param transformers A list of transformer functions that operate on flat
 #'   parse tables.
+#' @param include_roxygen_examples Whether or not to style code in roxygen
+#'   examples.
 #' @keywords internal
-make_transformer <- function(transformers) {
+make_transformer <- function(transformers, include_roxygen_examples = TRUE) {
   force(transformers)
   function(text) {
     transformed_code <- text %>%
       parse_transform_serialize_r(transformers) %>%
-      parse_transform_serialize_roxygen(transformers)
+      when(include_roxygen_examples ~
+             parse_transform_serialize_roxygen(transformers),
+           ~ .
+      )
     transformed_code
   }
 }
@@ -124,8 +129,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
   lst(separated, selectors = restyle_selector(separated))
 }
 
-
-#' Parse, transform and serialize plain R code
+#' Parse, transform and serialize text
 #'
 #' Wrapper function for the common three operations.
 #' @inheritParams compute_parse_data_nested

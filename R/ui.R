@@ -197,7 +197,8 @@ prettify_any <- function(transformers, filetype, recursive, exclude_files) {
 style_file <- function(path,
                        ...,
                        style = tidyverse_style,
-                       transformers = style(...)) {
+                       transformers = style(...),
+                       include_roxygen_examples = TRUE) {
   changed <- withr::with_dir(
     dirname(path),
     transform_files(basename(path), transformers)
