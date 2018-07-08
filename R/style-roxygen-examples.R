@@ -51,7 +51,7 @@ parse_roxygen <- function(roxygen) {
 #' processes each segment indicidually.
 #' @param example Roxygen example code.
 #' @importFrom purrr map2 flatten_chr
-#' @import rlang seq2
+#' @importFrom rlang seq2
 style_roxygen_code_examples_one <- function(example, transformers) {
   bare <- parse_roxygen(example)
   dontrun_seqs <- find_dontrun_seqs(bare)
@@ -70,7 +70,7 @@ style_roxygen_code_examples_one <- function(example, transformers) {
 #' Find dontrun sequences
 #'
 #' Returns the indices of the lines that correspond to a `dontrun` sequence.
-#' @param bare
+#' @param bare Bare code.
 #' @importFrom purrr map2 map_int
 find_dontrun_seqs <- function(bare) {
   dontrun_openings <- which(bare == "\\dontrun")
@@ -121,6 +121,9 @@ find_dontrun_closings <- function(bare, dontrun_openings) {
   dontrun_closing + 1L
 }
 
+drop_newline_codelines <- function(code) {
+  code[code != "\n"]
+}
 
 remove_roxygen_mask <- function(text) {
   code_with_header <- sub(pattern = "^#'\\s*", "", text)

@@ -4,7 +4,8 @@
 \alias{style_text}
 \title{Style a string}
 \usage{
-style_text(text, ..., style = tidyverse_style, transformers = style(...))
+style_text(text, ..., style = tidyverse_style, transformers = style(...),
+  include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{text}{A character vector with text to style.}

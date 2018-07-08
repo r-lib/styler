@@ -80,7 +80,7 @@ transform_file <- function(path,
 #' @param include_roxygen_examples Whether or not to style code in roxygen
 #'   examples.
 #' @keywords internal
-make_transformer <- function(transformers, include_roxygen_examples = TRUE) {
+make_transformer <- function(transformers, include_roxygen_examples) {
   force(transformers)
   function(text) {
     transformed_code <- text %>%

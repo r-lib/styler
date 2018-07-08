@@ -6,7 +6,7 @@
 \usage{
 style_pkg(pkg = ".", ..., style = tidyverse_style,
   transformers = style(...), filetype = "R",
-  exclude_files = "R/RcppExports.R")
+  exclude_files = "R/RcppExports.R", include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package.}

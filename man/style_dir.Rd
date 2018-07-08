@@ -6,7 +6,7 @@
 \usage{
 style_dir(path = ".", ..., style = tidyverse_style,
   transformers = style(...), filetype = "R", recursive = TRUE,
-  exclude_files = NULL)
+  exclude_files = NULL, include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{path}{Path to a directory with files to transform.}
