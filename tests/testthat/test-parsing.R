@@ -45,6 +45,7 @@ test_that("issues with parsing long strings on R 3.1 can be detected", {
 
 
 test_that("CRLF EOLs fail with informative error", {
+  skip_if(getRversion() < "3.4")
 
   expect_error(
     style_text("glück <- 3\r\n glück + 1"),
@@ -54,9 +55,12 @@ test_that("CRLF EOLs fail with informative error", {
     style_text(c("glück <- 3", "glück + 1\r\n 3")),
     "Please change the EOL character in your editor to Unix style and try again."
   )
+})
 
-  expect_error(
-    style_text("a + 3 -4 -> x\nx + 2\r\n glück + 1"),
-    "unexpected input"
-  )
+
+test_that("mixed CRLF / LF EOLs fail", {
+expect_error(
+  style_text("a + 3 -4 -> x\nx + 2\r\n glück + 1"),
+  "unexpected input"
+)
 })
