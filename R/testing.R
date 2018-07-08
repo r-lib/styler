@@ -68,7 +68,7 @@ test_collection <- function(test, sub_test = NULL,
 #'  "path/to/file/first-extended-in.R"))
 #' @keywords internal
 construct_out <- function(in_paths) {
-  gsub("\\-.*([.]R(?:|md))$", "\\-out\\1", in_paths)
+  gsub("\\-in([.]R(?:|md))$", "\\-out\\1", in_paths)
 }
 
 #' Construct paths of a tree object given the paths of *-in.R files
