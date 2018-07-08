@@ -32,7 +32,8 @@ matrix:
   include:
   - r: 3.1
   - r: 3.2
-  - r: oldrel
+  - r: 3.3
+  - r: 3.4
   - r: release
     env:
     - BUILD_PKGDOWN: true
