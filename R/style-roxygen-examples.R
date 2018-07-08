@@ -134,7 +134,7 @@ remove_roxygen_header <- function(text) {
 #' @importFrom purrr map_chr
 add_roxygen_mask <- function(text) {
   c(
-    trimws(paste0("#' @examples ", text[1])),
-    map_chr(text[-1], ~paste0("#' ", .x))
+    paste0("#' @examples"),
+    map_chr(text, ~paste0("#' ", .x))
   )
 }
