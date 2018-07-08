@@ -86,7 +86,7 @@ make_transformer <- function(transformers, include_roxygen_examples = TRUE) {
     transformed_code <- text %>%
       parse_transform_serialize_r(transformers) %>%
       when(include_roxygen_examples ~
-             parse_transform_serialize_roxygen(transformers),
+             parse_transform_serialize_roxygen(., transformers),
            ~ .
       )
     transformed_code
@@ -120,6 +120,7 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
 #' * An integer vector with the indices that correspond to roxygen code
 #'   examples in `separated`.
 split_roxygen_segments <- function(text, roxygen_examples) {
+  if (is.null(roxygen_examples)) return(lst(separated = list(text), selectors = NULL))
   all_lines <- seq2(1L, length(text))
   active_segemnt <- as.integer(all_lines %in% roxygen_examples)
   segment_id <- cumsum(abs(c(0, diff(active_segemnt)))) + 1L
