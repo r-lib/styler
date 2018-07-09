@@ -3,7 +3,7 @@
 #' Finds the sequence from start to stop of the lines in `text` that are
 #' code examples in roxygen comments.
 #' @param text A text consisting of code and/or roxygen comments.
-#' @importFrom purrr map_int
+#' @importFrom purrr map_int map2
 #' @importFrom rlang seq2
 #' @keywords internal
 identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
@@ -64,7 +64,6 @@ post_parse_roxygen <- function(raw) {
     (special & !newline_after) |
     (raw == "}" & (!(lead(substr(raw, 1, 1)) %in% c(",", "}", ")"))))
   )
-  append_ <- purrr::partial(append, x = raw, values = "\n")
   split <- reduce(must_instert_linebreak_after +
     seq(0, length(must_instert_linebreak_after) - 1L),
     append, values = "\n", .init = raw
@@ -81,8 +80,7 @@ post_parse_roxygen <- function(raw) {
 #' [style_roxygen_dont_code_examples_one()].
 #' @inheritParams parse_transform_serialize_r
 #' @param example Roxygen example code.
-#' @importFrom purrr map2 flatten_chr
-#' @importFrom rlang seq2
+#' @importFrom purrr map flatten_chr
 #' @keywords internal
 style_roxygen_code_examples_one_example <- function(example, transformers) {
   bare <- parse_roxygen(example)
@@ -105,6 +103,8 @@ style_roxygen_code_examples_one_example <- function(example, transformers) {
 #' @param one_dont Bare R code containing at most one `\\dontrun{...}` or
 #'   friends.
 #' @inheritParams parse_transform_serialize_r
+#' @importFrom rlang seq2
+#' @importFrom purrr map2 flatten_chr
 #' @keywords internal
 style_roxygen_code_examples_one_dont <- function(one_dont, transformers) {
   one_dont <- drop_newline_codelines(one_dont)
@@ -178,6 +178,7 @@ remove_dont_mask <- function(roxygen) {
 }
 
 
+#' @importFrom rlang seq2
 find_dont_closings <- function(bare, dont_openings) {
   opening <- cumsum(bare == "{")
   closing <- cumsum(bare == "}")
@@ -202,7 +203,7 @@ remove_roxygen_mask <- function(text) {
 }
 
 remove_roxygen_header <- function(text) {
-  gsub("^\\s*@examples\\s*", "", text, perl = TRUE)
+  sub("^\\s*@examples\\s*", "", text, perl = TRUE)
 }
 
 #' @importFrom purrr map_chr

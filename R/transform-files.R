@@ -80,6 +80,7 @@ transform_file <- function(path,
 #' @param include_roxygen_examples Whether or not to style code in roxygen
 #'   examples.
 #' @keywords internal
+#' @importFrom purrr when
 make_transformer <- function(transformers, include_roxygen_examples) {
   force(transformers)
   function(text) {
@@ -125,6 +126,7 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
 #'   sections. This list is named `separated`.
 #' * An integer vector with the indices that correspond to roxygen code
 #'   examples in `separated`.
+#' @importFrom rlang seq2
 #' @keywords internal
 split_roxygen_segments <- function(text, roxygen_examples) {
   if (is.null(roxygen_examples)) return(lst(separated = list(text), selectors = NULL))
