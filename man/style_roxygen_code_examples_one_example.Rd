@@ -2,7 +2,7 @@
 % Please edit documentation in R/style-roxygen-examples.R
 \name{style_roxygen_code_examples_one_example}
 \alias{style_roxygen_code_examples_one_example}
-\title{Style a roxygen code example that may contain a dontrun}
+\title{Style a roxygen code example that may contain a dontrun and friends}
 \usage{
 style_roxygen_code_examples_one_example(example, transformers)
 }
@@ -12,8 +12,8 @@ style_roxygen_code_examples_one_example(example, transformers)
 \item{transformers}{A list of \emph{named} transformer functions}
 }
 \description{
-Parses roxygen2 comments into code, breaks it into dontrun / run sections and
-processes each segment indicidually using
-\code{\link[=style_roxygen_dontrun_code_examples_one]{style_roxygen_dontrun_code_examples_one()}}.
+Parses roxygen2 comments into code, breaks it into dont* (dontrun, dontest,
+dontshow) and run sections and processes each segment indicidually using
+\code{\link[=style_roxygen_dont_code_examples_one]{style_roxygen_dont_code_examples_one()}}.
 }
 \keyword{internal}

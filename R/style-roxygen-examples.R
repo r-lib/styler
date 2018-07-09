@@ -65,17 +65,20 @@ post_parse_roxygen <- function(raw) {
     (raw == "}" & (!(lead(substr(raw, 1, 1)) %in% c(",", "}", ")"))))
   )
   append_ <- purrr::partial(append, x = raw, values = "\n")
-  split <- reduce(must_instert_linebreak_after + seq(0, length(must_instert_linebreak_after) - 1L), append, values = "\n", .init = raw) %>%
+  split <- reduce(must_instert_linebreak_after +
+    seq(0, length(must_instert_linebreak_after) - 1L),
+    append, values = "\n", .init = raw
+  ) %>%
     paste0(collapse = "") %>%
     strsplit("\n")
   split[[1]]
 }
 
-#' Style a roxygen code example that may contain a dontrun
+#' Style a roxygen code example that may contain a dontrun and friends
 #'
-#' Parses roxygen2 comments into code, breaks it into dontrun / run sections and
-#' processes each segment indicidually using
-#' [style_roxygen_dontrun_code_examples_one()].
+#' Parses roxygen2 comments into code, breaks it into dont* (dontrun, dontest,
+#' dontshow) and run sections and processes each segment indicidually using
+#' [style_roxygen_dont_code_examples_one()].
 #' @inheritParams parse_transform_serialize_r
 #' @param example Roxygen example code.
 #' @importFrom purrr map2 flatten_chr
@@ -83,12 +86,13 @@ post_parse_roxygen <- function(raw) {
 #' @keywords internal
 style_roxygen_code_examples_one_example <- function(example, transformers) {
   bare <- parse_roxygen(example)
-  one_dontrun <- split(bare, factor(cumsum(bare == "\\dontrun")))
-  map(one_dontrun, style_roxygen_code_examples_one_dontrun, transformers) %>%
+  one_dont <- split(bare, factor(cumsum(bare %in% dont_keywords())))
+  map(one_dont, style_roxygen_code_examples_one_dont, transformers) %>%
     flatten_chr()
 }
 
-#' Style a roxygen code example that contains at most one `\\dontrun{...}`
+#' Style a roxygen code example that contains at most one `\\dontrun{...}` or
+#' friends
 #'
 #' We drop all newline characters first because otherwise the code segment
 #' passed to this function was previously parsed with [parse_roxygen()] and
@@ -98,19 +102,20 @@ style_roxygen_code_examples_one_example <- function(example, transformers) {
 #' eliminated because they move to the front of a `code_segment` and
 #' `style_text("\n1")` gives `"\n1"`, i.e. trailing newlines are not
 #' eliminated.
-#' @param one_dontrun Bare R code containing at most one `\\dontrun{...}`.
+#' @param one_dont Bare R code containing at most one `\\dontrun{...}` or
+#'   friends.
 #' @inheritParams parse_transform_serialize_r
 #' @keywords internal
-style_roxygen_code_examples_one_dontrun <- function(one_dontrun, transformers) {
-  one_dontrun <- drop_newline_codelines(one_dontrun)
-  if (length(one_dontrun) < 1L) return(character())
-  dontrun_seqs <- find_dontrun_seqs(one_dontrun)
-  split_segments <- split_roxygen_segments(one_dontrun, unlist(dontrun_seqs))
-  is_dontrun <-
+style_roxygen_code_examples_one_dont <- function(one_dont, transformers) {
+  one_dont <- drop_newline_codelines(one_dont)
+  if (length(one_dont) < 1L) return(character())
+  dont_seqs <- find_dont_seqs(one_dont)
+  split_segments <- split_roxygen_segments(one_dont, unlist(dont_seqs))
+  is_dont <-
     seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
 
-  map2(split_segments$separated, is_dontrun,
-       style_roxygen_dontrun_code_examples_one,
+  map2(split_segments$separated, is_dont,
+       style_roxygen_dont_code_examples_one,
        transformers = transformers
   ) %>%
     flatten_chr() %>%
@@ -118,63 +123,71 @@ style_roxygen_code_examples_one_dontrun <- function(one_dontrun, transformers) {
 
 }
 
-#' Find dontrun sequences
+#' Find dontrun and friend sequences
 #'
-#' Returns the indices of the lines that correspond to a `dontrun` sequence.
+#' Returns the indices of the lines that correspond to a `dontrun` or
+#' friends sequence.
 #' @param bare Bare code.
 #' @importFrom purrr map2 map_int
 #' @keywords internal
-find_dontrun_seqs <- function(bare) {
-  dontrun_openings <- which(bare == "\\dontrun")
-  dontrun_closings <- map_int(dontrun_openings + 1L, find_dontrun_closings, bare = bare)
-  map2(dontrun_openings, dontrun_closings, seq2)
+find_dont_seqs <- function(bare) {
+  dont_openings <- which(bare %in% dont_keywords())
+  dont_type <- bare[dont_openings]
+  dont_closings <- map_int(dont_openings + 1L, find_dont_closings, bare = bare)
+  map2(dont_openings, dont_closings, seq2)
 }
 
-#' Given a code segment is dontrun or run, style it
+#' Given a code segment is dont* or run, style it
 #'
 #' @param code_segment A character vector with code to style.
-#' @param is_dontrun Whether the segment to process is a dontrun segemnt or not.
+#' @param is_dont Whether the segment to process is a dontrun, dontshow,
+#' donttest segemnt or not.
 #' @inheritParams parse_transform_serialize_r
 #' @keywords internal
-style_roxygen_dontrun_code_examples_one <- function(code_segment,
+style_roxygen_dont_code_examples_one <- function(code_segment,
                                                     transformers,
-                                                    is_dontrun) {
-  if (is_dontrun) {
-    code_segment <- remove_dontrun_mask(code_segment)
+                                                    is_dont) {
+  if (is_dont) {
+    decomposed <-  remove_dont_mask(code_segment)
+    code_segment <- decomposed$code
+    mask <- decomposed$mask
   }
   code_segment <- post_parse_roxygen(code_segment) %>%
     paste0(collapse = "\n") %>%
     parse_transform_serialize_r(transformers)
 
-  if (is_dontrun) {
-    code_segment <- c("\\dontrun{", code_segment, "}")
+  if (is_dont) {
+    code_segment <- c(mask, code_segment, "}")
   }
   code_segment
 }
 
-#' Remove dontrun mask
+#' Remove dont* mask
 #'
-#' @param roxygen Roxygen code examples that contains a dontrun segment only.
+#' @param roxygen Roxygen code examples that contains a dont* segment only.
 #' @keywords internal
-remove_dontrun_mask <- function(roxygen) {
+remove_dont_mask <- function(roxygen) {
   potential_pos <- c(3L, length(roxygen) - 1L)
   is_line_break_at_potential_pos <- which(roxygen[potential_pos] == "\n")
   mask <- c(
     1, 2, length(roxygen), potential_pos[is_line_break_at_potential_pos]
   ) %>% sort()
-  roxygen[-mask]
+  list(
+    code = roxygen[-mask], mask = paste(roxygen[1:2], collapse = "")
+  )
 }
 
 
-find_dontrun_closings <- function(bare, dontrun_openings) {
+find_dont_closings <- function(bare, dont_openings) {
   opening <- cumsum(bare == "{")
   closing <- cumsum(bare == "}")
   diff <- opening - closing
-  level_dontrun <- diff[dontrun_openings]
-
-  all_closing_level_dontrun <- which(diff == level_dontrun & lead(diff) == (level_dontrun - 1L))
-  dontrun_closing <- all_closing_level_dontrun[all_closing_level_dontrun > dontrun_openings]
-  dontrun_closing + 1L
+  level_dont <- diff[dont_openings]
+  match_closing <- intersect(
+    seq2(dont_openings + 1L, length(bare)),
+    which(diff == level_dont - 1L)
+  )[1]
+  match_closing
 }
 
 
@@ -198,4 +211,9 @@ add_roxygen_mask <- function(text) {
     paste0("#' @examples"),
     map_chr(text, ~paste0("#' ", .x))
   )
+}
+
+
+dont_keywords <- function() {
+  c("\\dontrun", "\\dontshow", "\\donttest")
 }
