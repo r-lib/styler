@@ -51,7 +51,7 @@ transform_file <- function(path,
   cat(
     message_before,
     path,
-    rep_char(" ", max(0, n_spaces_before_message_after)),
+    rep_char(" ", max(0L, n_spaces_before_message_after)),
     append = FALSE
   )
   changed <- transform_code(path, fun = fun, verbose = verbose, ...)
@@ -88,7 +88,7 @@ make_transformer <- function(transformers, include_roxygen_examples) {
       parse_transform_serialize_r(transformers) %>%
       when(include_roxygen_examples ~
              parse_transform_serialize_roxygen(., transformers),
-           ~ .
+           ~.
       )
     transformed_code
   }
@@ -132,7 +132,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
   if (is.null(roxygen_examples)) return(lst(separated = list(text), selectors = NULL))
   all_lines <- seq2(1L, length(text))
   active_segemnt <- as.integer(all_lines %in% roxygen_examples)
-  segment_id <- cumsum(abs(c(0, diff(active_segemnt)))) + 1L
+  segment_id <- cumsum(abs(c(0L, diff(active_segemnt)))) + 1L
   separated <- split(text, factor(segment_id))
   restyle_selector <- ifelse(roxygen_examples[1] == 1L, odd_index, even_index)
 

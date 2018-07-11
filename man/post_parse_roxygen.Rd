@@ -19,5 +19,7 @@ style_text('a\%>\%b', scope = 'spaces')
 style_text('a\%>\%b; a', scope = 'line_breaks')
 style_text('a\%>\%b; a', scope = 'tokens')"
 parsed <- styler:::parse_roxygen(code) # cuts before "\%" for no reason
-fixed <- styler:::post_parse_roxygen(styler:::drop_newline_codelines(parsed)) # better
+# better
+fixed <- styler:::post_parse_roxygen(styler:::drop_newline_codelines(parsed))
 }
+\keyword{internal}

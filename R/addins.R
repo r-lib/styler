@@ -21,7 +21,8 @@ NULL
 #' @keywords internal
 style_active_file <- function() {
   transformer <- make_transformer(tidyverse_style(),
-                                  include_roxygen_examples = TRUE)
+    include_roxygen_examples = TRUE
+  )
   context <- get_rstudio_context()
   if (is_rmd_file(context$path)) {
     out <- transform_rmd(context$contents, transformer)

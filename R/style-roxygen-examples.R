@@ -55,7 +55,9 @@ parse_roxygen <- function(roxygen) {
 #' style_text('a%>%b; a', scope = 'line_breaks')
 #' style_text('a%>%b; a', scope = 'tokens')"
 #' parsed <- styler:::parse_roxygen(code) # cuts before "%" for no reason
-#' fixed <- styler:::post_parse_roxygen(styler:::drop_newline_codelines(parsed)) # better
+#' # better
+#' fixed <- styler:::post_parse_roxygen(styler:::drop_newline_codelines(parsed))
+#' @keywords internal
 post_parse_roxygen <- function(raw) {
   special <- substr(raw, 1, 1) == "%"
   len <- nchar(raw)
@@ -65,7 +67,7 @@ post_parse_roxygen <- function(raw) {
     (raw == "}" & (!(lead(substr(raw, 1, 1)) %in% c(",", "}", ")"))))
   )
   split <- reduce(must_instert_linebreak_after +
-    seq(0, length(must_instert_linebreak_after) - 1L),
+    seq(0L, length(must_instert_linebreak_after) - 1L),
     append, values = "\n", .init = raw
   ) %>%
     paste0(collapse = "") %>%
@@ -115,8 +117,8 @@ style_roxygen_code_examples_one_dont <- function(one_dont, transformers) {
     seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
 
   map2(split_segments$separated, is_dont,
-       style_roxygen_dont_code_examples_one,
-       transformers = transformers
+    style_roxygen_dont_code_examples_one,
+    transformers = transformers
   ) %>%
     flatten_chr() %>%
     add_roxygen_mask()
@@ -141,14 +143,14 @@ find_dont_seqs <- function(bare) {
 #'
 #' @param code_segment A character vector with code to style.
 #' @param is_dont Whether the segment to process is a dontrun, dontshow,
-#' donttest segemnt or not.
+#'   donttest segemnt or not.
 #' @inheritParams parse_transform_serialize_r
 #' @keywords internal
 style_roxygen_dont_code_examples_one <- function(code_segment,
                                                     transformers,
                                                     is_dont) {
   if (is_dont) {
-    decomposed <-  remove_dont_mask(code_segment)
+    decomposed <- remove_dont_mask(code_segment)
     code_segment <- decomposed$code
     mask <- decomposed$mask
   }
@@ -170,10 +172,10 @@ remove_dont_mask <- function(roxygen) {
   potential_pos <- c(3L, length(roxygen) - 1L)
   is_line_break_at_potential_pos <- which(roxygen[potential_pos] == "\n")
   mask <- c(
-    1, 2, length(roxygen), potential_pos[is_line_break_at_potential_pos]
+    1L, 2L, length(roxygen), potential_pos[is_line_break_at_potential_pos]
   ) %>% sort()
   list(
-    code = roxygen[-mask], mask = paste(roxygen[1:2], collapse = "")
+    code = roxygen[-mask], mask = paste(roxygen[seq2(1, 2)], collapse = "")
   )
 }
 
@@ -208,10 +210,7 @@ remove_roxygen_header <- function(text) {
 
 #' @importFrom purrr map_chr
 add_roxygen_mask <- function(text) {
-  c(
-    paste0("#' @examples"),
-    map_chr(text, ~paste0("#' ", .x))
-  )
+  c(paste0("#' @examples"), map_chr(text, ~paste0("#' ", .x)))
 }
 
 
