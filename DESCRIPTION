@@ -49,6 +49,7 @@ Collate:
     'token-define.R'
     'relevel.R'
     'roxygen-examples-add-remove.R'
+    'roxygen-examples-find.R'
     'roxygen-examples-parse.R'
     'roxygen-examples.R'
     'rules-line-break.R'
