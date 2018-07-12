@@ -94,12 +94,30 @@ make_transformer <- function(transformers, include_roxygen_examples) {
   }
 }
 
-
 #' Parse, transform and serialize roxygen comments
 #'
 #' Splits `text` into roxygen code examples and non-roxygen code examples and
 #' then maps over these examples by applyingj
-#' [style_roxygen_code_examples_one_example()].
+#' [style_roxygen_code_example()].
+#' @section Hierarchy:
+#' Styling involves splitting roxygen example code into segments, and segments
+#' into snippets. This describes the proccess for input of
+#' [parse_transform_serialize_roxygen()]:
+#'
+#' - Splitting code into roxygen example code and other code. Downstream,
+#'   we are only concerned about roxygen code. See
+#'   [parse_transform_serialize_roxygen()].
+#' - Every roxygen example code can have zero or more
+#'   dontrun / dontshow / donttest sequences. We next create segments of roxygen
+#'   code examples that contain at most one of these. See
+#'   [style_roxygen_code_example()].
+#' - We further split the segment that contains at most one dont* sequence into
+#'   snippets that are either don* or not. See
+#'   [style_roxygen_code_example_segment()].
+#'
+#' Finally, that we have roxygen code snippets that are either dont* or not,
+#' we style them in [style_roxygen_example_snippet()] using
+#' [parse_transform_serialize_r()].
 #' @importFrom purrr map_at flatten_chr
 #' @keywords internal
 parse_transform_serialize_roxygen <- function(text, transformers) {
@@ -107,7 +125,7 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
   if (length(roxygen_seqs) < 1L) return(text)
   split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
   map_at(split_segments$separated, split_segments$selectors,
-    style_roxygen_code_examples_one_example,
+    style_roxygen_code_example,
     transformers = transformers
   ) %>%
     flatten_chr()
