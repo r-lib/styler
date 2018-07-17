@@ -103,15 +103,34 @@ parse_transform_serialize <- function(text, transformers) {
     )
     return("")
   }
-  transformed_pd <- apply_transformers(pd_nested, transformers)
-  flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
-    enrich_terminals(transformers$use_raw_indention) %>%
-    apply_ref_indention() %>%
-    set_regex_indention(
-      pattern          = transformers$reindention$regex_pattern,
-      target_indention = transformers$reindention$indention,
-      comments_only    = transformers$reindention$comments_only
-    )
+
+  width <- getOption("width")
+
+  newline_ids <- integer(0)
+  tf <- transformers
+  repeat{
+    add_line_break_at_pos_id <- mk_add_line_break_at_pos_id(newline_ids)
+    tf$line_break <- c(lst(add_line_break_at_pos_id),transformers$line_break)
+    transformed_pd <- apply_transformers(pd_nested, tf)
+    
+    flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
+      enrich_terminals(transformers$use_raw_indention) %>%
+      apply_ref_indention() %>%
+      set_regex_indention(
+        pattern          = transformers$reindention$regex_pattern,
+        target_indention = transformers$reindention$indention,
+        comments_only    = transformers$reindention$comments_only
+      )
+    
+    overflowed <- flattened_pd$pos_id[flattened_pd$col2>width]
+    
+    if(length(overflowed)){
+      newline_ids <- unique(c(newline_ids, min(overflowed)))
+    }else{
+      break
+    }
+  }
+
   serialized_transformed_text <-
     serialize_parse_data_flattened(flattened_pd, start_line = start_line)
 
