@@ -3,10 +3,8 @@
 #' @param roxygen Roxygen code examples that contains a dont* segment only.
 #' @keywords internal
 remove_dont_mask <- function(roxygen) {
-  potential_pos <- c(3L, length(roxygen) - 1L)
-  is_line_break_at_potential_pos <- which(roxygen[potential_pos] == "\n")
   mask <- c(
-    1L, 2L, length(roxygen), potential_pos[is_line_break_at_potential_pos]
+    1L, 2L, if (roxygen[3] == "\n") 3L, last(which(roxygen == "}"))
   ) %>% sort()
   list(
     code = roxygen[-mask], mask = paste(roxygen[seq2(1, 2)], collapse = "")
