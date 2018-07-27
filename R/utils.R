@@ -17,10 +17,12 @@ odd <- function(x) {
 }
 
 odd_index <- function(x) {
+  if (length(x) < 1) return(NULL)
   seq(1L, length(x), by = 2)
 }
 
 even <- function(x) {
+  if (length(x) < 2) return(NULL)
   x[even_index(x)]
 }
 
