@@ -6,7 +6,7 @@
 \usage{
 style_dir(path = ".", ..., style = tidyverse_style,
   transformers = style(...), filetype = "R", recursive = TRUE,
-  exclude_files = NULL)
+  exclude_files = NULL, include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{path}{Path to a directory with files to transform.}
@@ -31,6 +31,9 @@ of \code{path} should be styled as well.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
+
+\item{include_roxygen_examples}{Whether or not to style code in roxygen
+examples.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a directory.

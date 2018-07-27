@@ -6,7 +6,7 @@
 \usage{
 style_pkg(pkg = ".", ..., style = tidyverse_style,
   transformers = style(...), filetype = "R",
-  exclude_files = "R/RcppExports.R")
+  exclude_files = "R/RcppExports.R", include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package.}
@@ -28,6 +28,9 @@ or \code{c("r", "rmd")}.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
+
+\item{include_roxygen_examples}{Whether or not to style code in roxygen
+examples.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package

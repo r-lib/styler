@@ -4,7 +4,8 @@
 \alias{prettify_any}
 \title{Prettify R code in current working directory}
 \usage{
-prettify_any(transformers, filetype, recursive, exclude_files)
+prettify_any(transformers, filetype, recursive, exclude_files,
+  include_roxygen_examples)
 }
 \arguments{
 \item{transformers}{A set of transformer functions. This argument is most
@@ -20,6 +21,9 @@ should be styled as well.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
+
+\item{include_roxygen_examples}{Whether or not to style code in roxygen
+examples.}
 }
 \description{
 This is a helper function for style_dir.

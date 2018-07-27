@@ -1,0 +1,13 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--COMMENT: #' Pr [0/0] {1}                           
+ ¦--COMMENT: #' [1/0] {2}                              
+ ¦--COMMENT: #' Pe [1/0] {3}                           
+ ¦--COMMENT: #' (c [1/0] {4}                           
+ ¦--COMMENT: #' Ca [1/0] {5}                           
+ ¦--COMMENT: #'@ex [1/0] {6}                           
+ °--expr:  [1/0] {7}                                   
+     ¦--expr:  [0/1] {9}                               
+     ¦   °--SYMBOL: a [0/0] {8}                        
+     ¦--LEFT_ASSIGN: <- [0/1] {10}                     
+     °--expr:  [0/0] {12}                              
+         °--NUM_CONST: 2 [0/0] {11}                    

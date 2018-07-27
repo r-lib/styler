@@ -1,11 +1,15 @@
 Package: styler
 Title: Non-Invasive Pretty Printing of R Code
 Version: 1.0.2.9000
+Date: 2018-06-21
 Authors@R: c(person("Kirill", "Müller", role = c("aut"), email = "krlmlr+r@mailbox.org"),
   person("Lorenz", "Walthert", role = c("cre", "aut"), email = "lorenz.walthert@icloud.com"))
 Description:
     Pretty-prints R code without changing the user's formatting intent.
-Imports:
+License: GPL-3
+URL: https://github.com/r-lib/styler
+BugReports: https://github.com/r-lib/styler/issues
+Imports: 
     backports,
     cli,
     enc (>= 0.2),
@@ -15,8 +19,9 @@ Imports:
     rlang,
     rprojroot,
     tibble (>= 1.4.2),
+    tools,
     withr
-Suggests:
+Suggests: 
     data.tree,
     dplyr,
     here,
@@ -24,15 +29,11 @@ Suggests:
     rmarkdown,
     rstudioapi,
     testthat
-License: GPL-3
+VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-Date: 2018-06-21
-BugReports: https://github.com/r-lib/styler/issues
-URL: https://github.com/r-lib/styler
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi::api_roclet"))
 RoxygenNote: 6.0.1
-VignetteBuilder: knitr
 Collate: 
     'addins.R'
     'communicate.R'
@@ -47,6 +48,10 @@ Collate:
     'reindent.R'
     'token-define.R'
     'relevel.R'
+    'roxygen-examples-add-remove.R'
+    'roxygen-examples-find.R'
+    'roxygen-examples-parse.R'
+    'roxygen-examples.R'
     'rules-line-break.R'
     'rules-other.R'
     'rules-replacement.R'

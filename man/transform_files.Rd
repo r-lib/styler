@@ -4,7 +4,7 @@
 \alias{transform_files}
 \title{Transform files with transformer functions}
 \usage{
-transform_files(files, transformers)
+transform_files(files, transformers, include_roxygen_examples)
 }
 \arguments{
 \item{files}{A character vector with paths to the file that should be
@@ -12,6 +12,9 @@ transformed.}
 
 \item{transformers}{A list of transformer functions that operate on flat
 parse tables.}
+
+\item{include_roxygen_examples}{Whether or not to style code in roxygen
+examples.}
 }
 \description{
 \code{transform_files} applies transformations to file contents and writes back

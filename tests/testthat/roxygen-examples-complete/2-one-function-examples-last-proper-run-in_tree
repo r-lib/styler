@@ -1,0 +1,18 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--COMMENT: #' Pr [0/0] {1}                           
+ ¦--COMMENT: #' [1/0] {2}                              
+ ¦--COMMENT: #' Pe [1/0] {3}                           
+ ¦--COMMENT: #' (c [1/0] {4}                           
+ ¦--COMMENT: #' Ca [1/0] {5}                           
+ ¦--COMMENT: #' @e [1/0] {6}                           
+ ¦--COMMENT: #' st [1/0] {7}                           
+ ¦--COMMENT: #' st [1/0] {8}                           
+ ¦--COMMENT: #'    [1/0] {9}                           
+ ¦--COMMENT: #'    [1/0] {10}                          
+ ¦--COMMENT: #' ) [1/0] {11}                           
+ °--expr:  [1/0] {11.9}                                
+     ¦--expr:  [0/1] {13}                              
+     ¦   °--SYMBOL: a [0/0] {12}                       
+     ¦--EQ_ASSIGN: = [0/1] {14}                        
+     °--expr:  [0/0] {16}                              
+         °--SYMBOL: call [0/0] {15}                    

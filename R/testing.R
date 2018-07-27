@@ -8,17 +8,13 @@
 #' @param sub_test A regex pattern to further reduce the amount of test files
 #'   to be tested in the test. `sub_test` must match the beginning of file
 #'   names in tests/testthat. `NULL` matches all files.
-#' @details Each file name that matches `test` and `sub_test` and ends with
-#'   "-in.R" is considered as an input to test. Its counterpart,
-#'   the reference to compare it against is the *-out.R file. It is constructed
-#'   by taking the substring of the *-in.R file before the
-#'   first dash and adding -out.R. This allows for multiple in.R files to
-#'   share one out.R file. You could have one_line-out.R as the reference to
-#'   compare one_line-random-something-stuff-in.R and
-#'   one_line-random-but-not-so-much-in.R.
-#'
-#'   This also implies that -out.R files cannot have more than one dash in
-#'   their name, i.e. just the one before out.R.
+#' @details
+#' Each file name that matches `test` and `sub_test` and ends with
+#' "-in.R" is considered as an input to test. Its counterpart,
+#' the reference to compare it against is the *-out.R file. It is constructed
+#' by taking the substring of the *-in.R file before the
+#' last dash and adding -out.R. In contrast to older versions of this
+#' function, every *-out.R file has just one in file.
 #' @inheritParams transform_and_check
 #' @importFrom purrr flatten_chr pwalk map
 #' @keywords internal
@@ -68,7 +64,7 @@ test_collection <- function(test, sub_test = NULL,
 #'  "path/to/file/first-extended-in.R"))
 #' @keywords internal
 construct_out <- function(in_paths) {
-  gsub("\\-.*([.]R(?:|md))$", "\\-out\\1", in_paths)
+  gsub("\\-in([.]R(?:|md))$", "\\-out\\1", in_paths)
 }
 
 #' Construct paths of a tree object given the paths of *-in.R files
@@ -125,10 +121,7 @@ transform_and_check <- function(in_item, out_item,
       immediate. = TRUE, call. = FALSE
     )
   } else {
-    message(
-      in_name, " was identical to ", out_name,
-      immediate. = TRUE, call. = FALSE
-    )
+    message(in_name, " was identical to ", out_name)
   }
 }
 
@@ -165,7 +158,7 @@ style_empty <- function(text) {
     reindention       = specify_reindention(),
     NULL
   )
-  transformed_text <- parse_transform_serialize(text, transformers)
+  transformed_text <- parse_transform_serialize_r(text, transformers)
   transformed_text
 }
 
@@ -184,7 +177,7 @@ style_op <- function(text) {
     NULL
   )
 
-  transformed_text <- parse_transform_serialize(text, transformers)
+  transformed_text <- parse_transform_serialize_r(text, transformers)
   transformed_text
 }
 

@@ -4,7 +4,8 @@
 \alias{style_text}
 \title{Style a string}
 \usage{
-style_text(text, ..., style = tidyverse_style, transformers = style(...))
+style_text(text, ..., style = tidyverse_style, transformers = style(...),
+  include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{text}{A character vector with text to style.}
@@ -19,6 +20,9 @@ further except to construct the argument \code{transformers}. See
 \item{transformers}{A set of transformer functions. This argument is most
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
+
+\item{include_roxygen_examples}{Whether or not to style code in roxygen
+examples.}
 }
 \description{
 Styles a character vector. Each element of the character vector corresponds
