@@ -2,7 +2,7 @@
 % Please edit documentation in R/roxygen-examples-parse.R
 \name{post_parse_roxygen}
 \alias{post_parse_roxygen}
-\title{Fix parsing bugs}
+\title{Changing the line definition}
 \usage{
 post_parse_roxygen(raw)
 }
@@ -10,16 +10,7 @@ post_parse_roxygen(raw)
 \item{raw}{Raw code to post-process.}
 }
 \description{
-Fix parsing bugs
-}
-\examples{
-code <- "style_text('call( 1)')
-style_text('1    + 1', strict = FALSE)
-style_text('a\%>\%b', scope = 'spaces')
-style_text('a\%>\%b; a', scope = 'line_breaks')
-style_text('a\%>\%b; a', scope = 'tokens')"
-parsed <- styler:::parse_roxygen(code) # cuts before "\%" for no reason
-# better
-fixed <- styler:::post_parse_roxygen(styler:::remove_blank_lines(parsed))
+Input: New line denoted with \code{\\n}. Lines can span accross elements.
+Output: Each element in the vector is one line.
 }
 \keyword{internal}

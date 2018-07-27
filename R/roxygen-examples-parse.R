@@ -27,22 +27,17 @@ parse_roxygen <- function(roxygen) {
   c(parsed[1][!is_line_break], parsed[-1])
 }
 
-#' Fix parsing bugs
+#' Changing the line definition
+#'
+#' Input: New line denoted with `\\n`. Lines can span accross elements.
+#' Output: Each element in the vector is one line.
 #'
 #' @param raw Raw code to post-process.
 #' @examples
-#' code <- "style_text('call( 1)')
-#' style_text('1    + 1', strict = FALSE)
-#' style_text('a%>%b', scope = 'spaces')
-#' style_text('a%>%b; a', scope = 'line_breaks')
-#' style_text('a%>%b; a', scope = 'tokens')"
-#' parsed <- styler:::parse_roxygen(code) # cuts before "%" for no reason
-#' # better
-#' fixed <- styler:::post_parse_roxygen(styler:::remove_blank_lines(parsed))
 #' @keywords internal
 post_parse_roxygen <- function(raw) {
   split <- raw %>%
     paste0(collapse = "") %>%
-    strsplit("\n")
+    strsplit("\n", fixed = TRUE)
   split[[1]]
 }
