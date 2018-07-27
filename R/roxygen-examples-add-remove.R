@@ -20,8 +20,17 @@ remove_roxygen_mask <- function(text) {
   remove_roxygen_header(code_with_header)
 }
 
+#' Remove roxygen header
+#'
+#' Can't simply remove the element with the regex because it may happen that
+#' the roxygen tag is on the same line as its contents start.
+#' @examples
+#' #' @examples c(1, 2)
+#' @keywords internal
 remove_roxygen_header <- function(text) {
-  sub("^\\s*@examples\\s*", "", text, perl = TRUE)
+  text <- sub("^\\s*@examples\\s*", "", text, perl = TRUE)
+  starts_with_blank <- text[1] == "\n"
+  c(text[1][!starts_with_blank], text[-1])
 }
 
 #' @importFrom purrr map_chr
