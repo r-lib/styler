@@ -40,7 +40,7 @@ guide.
 
 \examples{
 style_text("a <- xyz", reindention = specify_reindention(
-  regex_pattern = "xyz", indention = 4, comments_only = FALSE)
-)
+  regex_pattern = "xyz", indention = 4, comments_only = FALSE
+))
 style_text("a <- xyz", reindention = tidyverse_reindention())
 }

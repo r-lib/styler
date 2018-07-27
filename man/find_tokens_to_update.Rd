@@ -20,12 +20,12 @@ a line are of concern.
 }
 \examples{
 style_text("function(a =
-  b,
-  dd
+b,
+dd
 ) {}", scope = "indention")
 style_text("function(a,
-  b,
-  dd
+b,
+dd
 ) {}", scope = "indention")
 }
 \seealso{

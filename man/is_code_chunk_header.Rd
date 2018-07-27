@@ -18,6 +18,6 @@ style_text(c(
   "some_code <- function() {}",
   "#+ chunk-label, opt1=value1",
   "call(3, 2, c(3:2))"
-  ))
+))
 }
 \keyword{internal}

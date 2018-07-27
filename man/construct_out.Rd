@@ -14,7 +14,9 @@ Multiple *-in.R files can have the same *-out.R file since to create the
 *-out.R file, everything after the first dash is replaced by *-out.R.
 }
 \examples{
-styler:::construct_out(c("path/to/file/first-in.R",
- "path/to/file/first-extended-in.R"))
+styler:::construct_out(c(
+  "path/to/file/first-in.R",
+  "path/to/file/first-extended-in.R"
+))
 }
 \keyword{internal}
