@@ -10,12 +10,18 @@ parse_roxygen(roxygen)
 \item{roxygen}{Roxygen comments.}
 }
 \description{
-Used to parse roxygen code examples
+Used to parse roxygen code examples. Removes line break before
+\code{\\dontrun{...}} and friends because it does not occurr for segments other
+than \code{\\dont{...}} and friends.
 }
 \examples{
 styler:::parse_roxygen(
 "#' @examples
  #' 1+  1
+")
+styler:::parse_roxygen(
+"#' @examples
+ #' \\\dontrun{1+  1}
 ")
 }
 \keyword{internal}

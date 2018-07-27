@@ -1,18 +1,30 @@
 #' Parse roxygen comments into text
 #'
-#' Used to parse roxygen code examples
+#' Used to parse roxygen code examples. Removes line break before
+#' `\\dontrun{...}` and friends because it does not occurr for segments other
+#' than `\\dont{...}` and friends.
 #' @param roxygen Roxygen comments.
 #' @examples
-#' styler:::parse_roxygen(
-#' "#' @examples
-#'  #' 1+  1
-#' ")
+#' styler:::parse_roxygen(c(
+#' "#' @examples",
+#'  "#' 1+  1"
+#' ))
+#' styler:::parse_roxygen(c(
+#' "#' @examples 33",
+#'  "#' 1+  1"
+#' ))
+#' styler:::parse_roxygen(c(
+#' "#' @examples",
+#' "#' \\dontrun{1+  1}"
+#' ))
 #' @keywords internal
 parse_roxygen <- function(roxygen) {
-  remove_roxygen_mask(roxygen) %>%
+  parsed <- remove_roxygen_mask(roxygen) %>%
     textConnection() %>%
     tools::parse_Rd(fragment = TRUE) %>%
     as.character()
+  is_line_break <- parsed[1] == "\n"
+  c(parsed[1][!is_line_break], parsed[-1])
 }
 
 #' Fix parsing bugs
@@ -32,10 +44,10 @@ post_parse_roxygen <- function(raw) {
   special <- substr(raw, 1, 1) == "%"
   len <- nchar(raw)
   newline_after <- substr(raw, len, len) == "\n"
-  # must_instert_linebreak_after <- which(
-  #   (special & !newline_after) |
-  #     (raw == "}" & (!(lead(substr(raw, 1, 1)) %in% c(",", "}", ")"))))
-  # )
+  must_instert_linebreak_after <- which(
+    (special & !newline_after) |
+      (raw == "}" & (!(lead(substr(raw, 1, 1)) %in% c(",", "}", ")"))))
+  )
   must_instert_linebreak_after <- integer(0)
   split <- reduce(must_instert_linebreak_after +
                     seq(0L, length(must_instert_linebreak_after) - 1L),
