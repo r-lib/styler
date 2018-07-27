@@ -6,16 +6,12 @@
 #' @param roxygen Roxygen comments.
 #' @examples
 #' styler:::parse_roxygen(c(
-#' "#' @examples",
-#'  "#' 1+  1"
+#'   "#' @examples",
+#'   "#' 1+  1"
 #' ))
 #' styler:::parse_roxygen(c(
-#' "#' @examples 33",
-#'  "#' 1+  1"
-#' ))
-#' styler:::parse_roxygen(c(
-#' "#' @examples",
-#' "#' \\dontrun{1+  1}"
+#'   "#' @examples 33",
+#'   "#'1+  1"
 #' ))
 #' @keywords internal
 parse_roxygen <- function(roxygen) {

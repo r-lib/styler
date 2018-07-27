@@ -43,11 +43,10 @@ style_roxygen_code_example_segment <- function(one_dont, transformers) {
     seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
 
   map2(split_segments$separated, is_dont,
-       style_roxygen_example_snippet,
+    style_roxygen_example_snippet,
     transformers = transformers
   ) %>%
     flatten_chr()
-
 }
 
 #' Given a code snippet is dont* or run, style it
@@ -59,8 +58,8 @@ style_roxygen_code_example_segment <- function(one_dont, transformers) {
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
 #' @keywords internal
 style_roxygen_example_snippet <- function(code_snippet,
-                                                    transformers,
-                                                    is_dont) {
+                                          transformers,
+                                          is_dont) {
   if (is_dont) {
     decomposed <- remove_dont_mask(code_snippet)
     code_snippet <- decomposed$code
