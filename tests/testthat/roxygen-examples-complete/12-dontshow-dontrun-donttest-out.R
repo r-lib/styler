@@ -9,7 +9,6 @@
 #'   pd_flat$lag_newlines[op] <- 1L
 #'   pd_flat
 #' }
-#' @examples
 #' \dontshow{
 #' {
 #'   x
@@ -18,7 +17,6 @@
 #' set_line_break_before_curly_opening_style <- function() {
 #'   create_style_guide(line_break = tibble::lst(set_line_break_before_curly_opening))
 #' }
-#' @examples
 #' \dontrun{
 #' style_text("a <- function(x) { x }
 #' ", style = set_line_break_before_curly_opening_style)
@@ -57,7 +55,6 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #'   pd_flat$lag_newlines[op] <- 1L
 #'   pd_flat
 #' }
-#' @examples
 #' \dontshow{
 #' {
 #'   x
@@ -66,7 +63,6 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' set_line_break_before_curly_opening_style <- function() {
 #'   create_style_guide(line_break = tibble::lst(set_line_break_before_curly_opening))
 #' }
-#' @examples
 #' \donttest{
 #' style_text("a <- function(x) { x }
 #' ", style = set_line_break_before_curly_opening_style)

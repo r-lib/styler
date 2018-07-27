@@ -4,7 +4,6 @@
 #' @param reindention A list of parameters for regex re-indention, most
 #'   conveniently constructed using [specify_reindention()].
 #' @examples
-#' 
 #' # empty
 #' 
 #' 
@@ -16,7 +15,6 @@
 #' # more
 #' a <- 3
 #' # a comment
-#' @examples
 #' \dontrun{
 #' x
 #' 
@@ -26,7 +24,6 @@
 #' 
 #' a <- 3
 #' }
-#' 
 #' @importFrom purrr compact
 #' @export
 create_style_guide <- function(initialize = default_style_guide_attributes,

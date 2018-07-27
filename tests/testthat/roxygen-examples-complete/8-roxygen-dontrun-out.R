@@ -12,7 +12,6 @@
 #' file <- tempfile("styler",
 #'   fileext = ".R"
 #' )
-#' @examples
 #' \dontrun{
 #' enc::write_lines_enc("1++1", file)
 #' }
@@ -22,11 +21,9 @@
 #' )
 #' style_file(file, transformers = tidyverse_style(strict = TRUE))
 #' enc::read_lines_enc(file)
-#' @examples
 #' \dontrun{
 #' unlink(file2)
 #' }
-#' @examples
 #' \dontrun{
 #' {
 #'   x

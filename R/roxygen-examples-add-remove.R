@@ -28,7 +28,7 @@ remove_roxygen_mask <- function(text) {
 #' #' @examples c(1, 2)
 #' @keywords internal
 remove_roxygen_header <- function(text) {
-  text <- sub("^\\s*@examples\\s*", "", text, perl = TRUE)
+  text <- gsub("^\\s*@examples\\s*", "", text, perl = TRUE)
   starts_with_blank <- text[1] == "\n"
   c(text[1][!starts_with_blank], text[-1])
 }
