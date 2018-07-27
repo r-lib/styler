@@ -16,8 +16,8 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
     cat("Styling ", length(files), " files:\n")
   }
 
-  changed <- map_lgl(
-    files, transform_file, fun = transformer, max_char_path = max_char
+  changed <- map_lgl(files, transform_file,
+    fun = transformer, max_char_path = max_char
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
@@ -49,24 +49,15 @@ transform_file <- function(path,
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
   cat(
-    message_before,
-    path,
+    message_before, path,
     rep_char(" ", max(0L, n_spaces_before_message_after)),
     append = FALSE
   )
   changed <- transform_code(path, fun = fun, verbose = verbose, ...)
 
-  bullet <- ifelse(is.na(changed),
-    "warning",
-    ifelse(changed,
-      "info",
-      "tick"
-    )
-  )
+  bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
 
-  cli::cat_bullet(
-    bullet = bullet
-  )
+  cli::cat_bullet(bullet = bullet)
   invisible(changed)
 }
 
@@ -86,9 +77,10 @@ make_transformer <- function(transformers, include_roxygen_examples) {
   function(text) {
     transformed_code <- text %>%
       parse_transform_serialize_r(transformers) %>%
-      when(include_roxygen_examples ~
-             parse_transform_serialize_roxygen(., transformers),
-           ~.
+      when(
+        include_roxygen_examples ~
+        parse_transform_serialize_roxygen(., transformers),
+        ~.
       )
     transformed_code
   }
@@ -180,9 +172,9 @@ parse_transform_serialize_r <- function(text, transformers) {
     enrich_terminals(transformers$use_raw_indention) %>%
     apply_ref_indention() %>%
     set_regex_indention(
-      pattern          = transformers$reindention$regex_pattern,
+      pattern = transformers$reindention$regex_pattern,
       target_indention = transformers$reindention$indention,
-      comments_only    = transformers$reindention$comments_only
+      comments_only = transformers$reindention$comments_only
     )
   serialized_transformed_text <-
     serialize_parse_data_flattened(flattened_pd, start_line = start_line)

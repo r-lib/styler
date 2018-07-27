@@ -35,10 +35,10 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
   pd_flat %>%
     style_space_around_token(
       strict = TRUE, tokens = zero, level_before = 0L, level_after = 0L
-  ) %>%
+    ) %>%
     style_space_around_token(
       strict = strict, tokens = one, level_before = 1L, level_after = 1L
-  )
+    )
 }
 
 #' Set spacing of token to a certain level
@@ -76,7 +76,8 @@ style_space_around_token <- function(pd_flat,
 style_space_around_tilde <- function(pd_flat, strict) {
   if (is_symmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
-       strict, "'~'", level_before = 1, level_after = 1
+      strict, "'~'",
+      level_before = 1, level_after = 1
     )
   } else if (is_asymmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
@@ -223,7 +224,8 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
     "^(?<prefix>#+['\\*]*)(?<space_after_prefix> *)(?<text>.*)$"
   )
   comments$space_after_prefix <- nchar(
-    comments$space_after_prefix, type = "width"
+    comments$space_after_prefix,
+    type = "width"
   )
   comments$space_after_prefix <- set_spaces(
     spaces_after_prefix = comments$space_after_prefix,

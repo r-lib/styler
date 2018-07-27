@@ -231,9 +231,9 @@ needs_indention_one <- function(pd,
   )
 
   other_trigger_on_same_line <- (
-     pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
-       other_trigger_tokens
-    )
+    pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
+      other_trigger_tokens
+  )
   line_break_after_other_trigger <-
     pd$lag_newlines[remaining_row_idx_between_trigger_and_line_break + 1L] > 0L
 

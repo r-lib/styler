@@ -60,8 +60,10 @@ test_collection <- function(test, sub_test = NULL,
 #'   *-out.R file, everything after the first dash is replaced by *-out.R.
 #' @param in_paths A character vector that denotes paths to *-in.R files.
 #' @examples
-#' styler:::construct_out(c("path/to/file/first-in.R",
-#'  "path/to/file/first-extended-in.R"))
+#' styler:::construct_out(c(
+#'   "path/to/file/first-in.R",
+#'   "path/to/file/first-extended-in.R"
+#' ))
 #' @keywords internal
 construct_out <- function(in_paths) {
   gsub("\\-in([.]R(?:|md))$", "\\-out\\1", in_paths)

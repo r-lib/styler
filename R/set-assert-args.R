@@ -41,7 +41,8 @@ assert_filetype <- function(lowercase_filetype) {
   if (!all(lowercase_filetype %in% c("r", "rmd"))) {
     stop(
       "filetype must not contain other values than 'R'",
-      "or 'Rmd' (case is ignored).", call. = FALSE
+      "or 'Rmd' (case is ignored).",
+      call. = FALSE
     )
   }
 }

@@ -24,10 +24,10 @@ create_tree <- function(text, structure_only = FALSE) {
 #' @return An object of class "Node" and "R6".
 #' @examples
 #' if (getRversion() >= 3.2) {
-#' code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
-#' nested_pd <- styler:::compute_parse_data_nested(code)
-#' initialized <- styler:::pre_visit(nested_pd, c(default_style_guide_attributes))
-#' styler:::create_node_from_nested_root(initialized, structure_only = FALSE)
+#'   code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
+#'   nested_pd <- styler:::compute_parse_data_nested(code)
+#'   initialized <- styler:::pre_visit(nested_pd, c(default_style_guide_attributes))
+#'   styler:::create_node_from_nested_root(initialized, structure_only = FALSE)
 #' }
 #' @keywords internal
 create_node_from_nested_root <- function(pd_nested, structure_only) {

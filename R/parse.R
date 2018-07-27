@@ -23,7 +23,7 @@ parse_safely <- function(text, ...) {
   if (inherits(tried_parsing, "error")) {
     if (has_crlf_as_first_line_sep(tried_parsing$message, text)) {
       stop(
-        "The code to style seems to use Windows style line endings (CRLF). " ,
+        "The code to style seems to use Windows style line endings (CRLF). ",
         "styler currently only supports Unix style line endings (LF). ",
         "Please change the EOL character in your editor to Unix style and try again.",
         "\nThe parsing error was:\n", tried_parsing$message,
@@ -49,7 +49,7 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
     offending_line <- initial_text[as.integer(split[2])]
     if (!is.na(offending_line)) {
       if (substr(offending_line, start_char, start_char + 1) == "\r\n") {
-      return(TRUE)
+        return(TRUE)
       }
     }
   }
@@ -171,7 +171,7 @@ ensure_valid_pd <- function(pd) {
     non_terminals <- pd %>%
       filter(terminal == FALSE)
     valid_pd <- non_terminals$id %>%
-      map_lgl(~ .x %in% pd$parent) %>%
+      map_lgl(~.x %in% pd$parent) %>%
       all()
     if (!valid_pd) {
       stop(paste(
@@ -211,5 +211,5 @@ lines_and_cols_match <- function(data) {
     two_cols_match,
     data = data
   ) %>%
-  all()
+    all()
 }

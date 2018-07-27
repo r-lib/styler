@@ -33,7 +33,8 @@ style_active_file <- function() {
   }
   rstudioapi::modifyRange(
     c(1, 1, length(context$contents) + 1, 1),
-    paste0(append(out, ""), collapse = "\n"), id = context$id
+    paste0(append(out, ""), collapse = "\n"),
+    id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
     rstudioapi::documentSave(context$id)
@@ -78,7 +79,8 @@ style_selection <- function() {
   if (all(nchar(text) == 0)) stop("No code selected")
   out <- style_text(text)
   rstudioapi::modifyRange(
-    context$selection[[1]]$range, paste0(out, collapse = "\n"), id = context$id
+    context$selection[[1]]$range, paste0(out, collapse = "\n"),
+    id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
     rstudioapi::documentSave(context$id)

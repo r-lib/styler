@@ -83,11 +83,12 @@ tidyverse_style <- function(scope = "tokens",
         math_token_spacing$one
       ),
       style_space_around_tilde = partial(
-        style_space_around_tilde, strict = strict
+        style_space_around_tilde,
+        strict = strict
       ),
       spacing_around_op = if (strict) {
         set_space_around_op
-      }else {
+      } else {
         add_space_around_op
       },
       spacing_around_comma = if (strict) {
@@ -249,8 +250,8 @@ NULL
 #'   how.
 #' @examples
 #' style_text("a <- xyz", reindention = specify_reindention(
-#'   regex_pattern = "xyz", indention = 4, comments_only = FALSE)
-#' )
+#'   regex_pattern = "xyz", indention = 4, comments_only = FALSE
+#' ))
 #' @export
 specify_reindention <- function(regex_pattern = NULL,
                                 indention = 0,
@@ -286,7 +287,8 @@ character_to_ordered <- function(x, levels, name = substitute(x)) {
   if (!all((x %in% levels))) {
     stop(
       "all values in ", name, " must be one of the following: ",
-      paste(levels, collapse = ", "), call. = FALSE
+      paste(levels, collapse = ", "),
+      call. = FALSE
     )
   }
   factor(x, levels = levels, ordered = TRUE)
@@ -316,7 +318,7 @@ NULL
 #' @export
 specify_math_token_spacing <-
   function(zero = "'^'",
-           one = c("'+'", "'-'", "'*'", "'/'")) {
+             one = c("'+'", "'-'", "'*'", "'/'")) {
     assert_tokens(c(one, zero))
     lst(
       one = setdiff(c(math_token, one), zero),
