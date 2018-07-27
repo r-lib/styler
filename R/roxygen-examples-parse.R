@@ -33,7 +33,6 @@ parse_roxygen <- function(roxygen) {
 #' Output: Each element in the vector is one line.
 #'
 #' @param raw Raw code to post-process.
-#' @examples
 #' @keywords internal
 post_parse_roxygen <- function(raw) {
   split <- raw %>%
