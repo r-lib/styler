@@ -16,16 +16,12 @@ than \code{\\dont{...}} and friends.
 }
 \examples{
 styler:::parse_roxygen(c(
-"#' @examples",
- "#' 1+  1"
+  "#' @examples",
+  "#' 1+  1"
 ))
 styler:::parse_roxygen(c(
-"#' @examples 33",
- "#' 1+  1"
-))
-styler:::parse_roxygen(c(
-"#' @examples",
-"#' \\\dontrun{1+  1}"
+  "#' @examples 33",
+  "#'1+  1"
 ))
 }
 \keyword{internal}
