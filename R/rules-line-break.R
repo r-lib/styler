@@ -8,8 +8,8 @@ remove_line_break_before_curly_opening <- function(pd) {
 set_line_break_around_comma <- function(pd) {
   comma_with_line_break_before <-
     (pd$token == "','") &
-    (pd$lag_newlines > 0) &
-    (pd$token_before != "COMMENT")
+      (pd$lag_newlines > 0) &
+      (pd$token_before != "COMMENT")
   pd$lag_newlines[comma_with_line_break_before] <- 0L
   pd$lag_newlines[lead(comma_with_line_break_before)] <- 1L
   pd
@@ -19,7 +19,7 @@ style_line_break_around_curly <- function(strict, pd) {
   if (is_curly_expr(pd) && nrow(pd) > 2) {
     closing_before <- pd$token == "'}'"
     opening_before <- (pd$token == "'{'") & (pd$token_after != "COMMENT")
-    to_break <- lag(opening_before, default =FALSE) | closing_before
+    to_break <- lag(opening_before, default = FALSE) | closing_before
     len_to_break <- sum(to_break)
     pd$lag_newlines[to_break] <- ifelse(rep(strict, len_to_break),
       1L,
@@ -73,26 +73,26 @@ NULL
 #' @keywords internal
 set_line_break_after_opening_if_call_is_multi_line <-
   function(pd,
-           except_token_after = NULL,
-           except_text_before  = NULL) {
-  if (!is_function_call(pd) && !is_subset_expr(pd)) return(pd)
-  npd <- nrow(pd)
-  seq_x <- seq2(3L, npd - 1L)
-  is_multi_line <- any(
-    (pd$lag_newlines[seq_x] > 0) |
-    (pd$token[seq_x] == "COMMENT")
-  )
-  if (!is_multi_line) {
-    return(pd)
-  }
-  break_pos <- find_line_break_position_in_multiline_call(pd)
+             except_token_after = NULL,
+             except_text_before = NULL) {
+    if (!is_function_call(pd) && !is_subset_expr(pd)) return(pd)
+    npd <- nrow(pd)
+    seq_x <- seq2(3L, npd - 1L)
+    is_multi_line <- any(
+      (pd$lag_newlines[seq_x] > 0) |
+        (pd$token[seq_x] == "COMMENT")
+    )
+    if (!is_multi_line) {
+      return(pd)
+    }
+    break_pos <- find_line_break_position_in_multiline_call(pd)
 
-  exception_pos <- c(
-    which(pd$token %in% except_token_after),
-    if_else(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
-  )
-  pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
-  pd
+    exception_pos <- c(
+      which(pd$token %in% except_token_after),
+      if_else(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
+    )
+    pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
+    pd
   }
 
 

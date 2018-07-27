@@ -78,7 +78,8 @@ is_comment <- function(pd) {
 is_shebang <- function(pd) {
   is_first_comment <- is_comment(pd) & (pd$pos_id == 1L)
   is_first_comment[is_first_comment] <- grepl(
-    "^#!", pd$text[is_first_comment], perl = TRUE
+    "^#!", pd$text[is_first_comment],
+    perl = TRUE
   )
   is_first_comment
 }
@@ -92,13 +93,14 @@ is_shebang <- function(pd) {
 #'   "some_code <- function() {}",
 #'   "#+ chunk-label, opt1=value1",
 #'   "call(3, 2, c(3:2))"
-#'   ))
+#' ))
 #' @param pd A parse table.
 #' @keywords internal
 is_code_chunk_header <- function(pd) {
   is_comment <- is_comment(pd)
   is_comment[is_comment] <- grepl(
-    "^#[\\+|\\-]", pd$text[is_comment], perl = TRUE
+    "^#[\\+|\\-]", pd$text[is_comment],
+    perl = TRUE
   )
   is_comment
 }

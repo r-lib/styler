@@ -11,8 +11,8 @@ transform_code <- function(path, fun, verbose = FALSE, ...) {
   if (is_plain_r_file(path)) {
     enc::transform_lines_enc(path, fun = fun, ..., verbose = verbose)
   } else if (is_rmd_file(path)) {
-    enc::transform_lines_enc(
-      path, fun = partial(transform_rmd, transformer_fun = fun), ...,
+    enc::transform_lines_enc(path,
+      fun = partial(transform_rmd, transformer_fun = fun), ...,
       verbose = verbose
     )
   } else {
@@ -83,7 +83,8 @@ identify_r_raw_chunks <- function(lines, engine_pattern = get_engine_pattern()) 
 
   is_r_code <- grepl(
     paste0("^[\t >]*```+\\s*\\{\\s*", engine_pattern, "[\\s\\},]"),
-    lines[starts], perl = TRUE
+    lines[starts],
+    perl = TRUE
   )
   list(starts = starts[is_r_code], ends = ends[is_r_code])
 }

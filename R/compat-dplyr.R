@@ -112,9 +112,8 @@ slice <- function(.data, ...) {
 }
 
 #' @importFrom purrr as_mapper map
-map_dfr <- function (.x, .f, ..., .id = NULL) {
+map_dfr <- function(.x, .f, ..., .id = NULL) {
   .f <- as_mapper(.f, ...)
   res <- map(.x, .f, ...)
   bind_rows(res, .id = .id)
 }
-

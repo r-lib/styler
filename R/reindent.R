@@ -54,7 +54,7 @@ update_indention_ref_fun_call <- function(pd_nested) {
 #' \dontrun{
 #' a <- function(x,
 #'               y) {
-#' x + y
+#'   x + y
 #' }
 #' }
 #' @importFrom rlang seq2
@@ -96,7 +96,6 @@ apply_ref_indention <- function(flattened_pd) {
 #'   should be applied to other tokens.
 #' @keywords internal
 apply_ref_indention_one <- function(flattened_pd, target_token) {
-
   token_to_update <- find_tokens_to_update(flattened_pd, target_token)
   # udate spaces
   copied_spaces <- flattened_pd$col2[target_token]
@@ -123,12 +122,12 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
 #' @seealso apply_ref_indention_one()
 #' @examples
 #' style_text("function(a =
-#'   b,
-#'   dd
+#' b,
+#' dd
 #' ) {}", scope = "indention")
 #' style_text("function(a,
-#'   b,
-#'   dd
+#' b,
+#' dd
 #' ) {}", scope = "indention")
 #' @keywords internal
 find_tokens_to_update <- function(flattened_pd, target_token) {
