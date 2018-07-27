@@ -5,7 +5,6 @@
 \alias{indent_braces}
 \alias{indent_op}
 \alias{indent_eq_sub}
-\alias{indent_assign}
 \alias{indent_without_paren}
 \alias{indent_without_paren_for_while_fun}
 \alias{indent_without_paren_if_else}
@@ -17,8 +16,6 @@ indent_op(pd, indent_by, token = c(math_token, logical_token, special_token,
   "LEFT_ASSIGN", "EQ_ASSIGN", "'$'"))
 
 indent_eq_sub(pd, indent_by, token = c("EQ_SUB", "EQ_FORMALS"))
-
-indent_assign(pd, indent_by, token = NULL)
 
 indent_without_paren(pd, indent_by = 2)
 
@@ -50,9 +47,6 @@ from \code{\link[=indent_op]{indent_op()}} in the sense that not all subsequent 
 table are necessarily indented, as \code{EQ_SUB} and \code{EQ_FORMALS} can occur
 multiple times in a parse table.
 occurs is not indented (see\code{\link[=compute_indent_indices]{compute_indent_indices()}})
-
-\item \code{indent_assign}: Same as indent_op, but only indents one token
-after \code{token}, not all remaining.
 
 \item \code{indent_without_paren}: Is used to indent for / while / if / if-else
 statements that do not have curly parenthesis.
