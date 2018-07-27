@@ -13,6 +13,5 @@
 #'   there()
 #' }
 #' call("\n", x = 3)
-#' call("\n", x = 3)
 #' @export
 NULL
