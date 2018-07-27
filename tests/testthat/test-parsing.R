@@ -59,8 +59,8 @@ test_that("CRLF EOLs fail with informative error", {
 
 
 test_that("mixed CRLF / LF EOLs fail", {
-expect_error(
-  style_text("a + 3 -4 -> x\nx + 2\r\n glück + 1"),
-  "unexpected input"
-)
+  expect_error(
+    style_text("a + 3 -4 -> x\nx + 2\r\n glück + 1"),
+    "unexpected input"
+  )
 })

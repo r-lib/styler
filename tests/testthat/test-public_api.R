@@ -151,3 +151,7 @@ test_that("styler can style Rmd files only via style_pkg()", {
   expect_false(any(grepl("RcppExports.R", msg, fixed = TRUE)))
 })
 
+test_that("insufficient R version returns error", {
+  expect_error(stop_insufficient_r_version())
+})
+
