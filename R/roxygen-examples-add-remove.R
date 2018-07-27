@@ -2,6 +2,7 @@
 #'
 #' @param roxygen Roxygen code examples that contains a dont* segment only.
 #' @keywords internal
+#' @importFrom rlang seq2
 remove_dont_mask <- function(roxygen) {
   mask <- c(
     1L, 2L, if (roxygen[3] == "\n") 3L, last(which(roxygen == "}"))
@@ -16,7 +17,7 @@ remove_blank_lines <- function(code) {
 }
 
 remove_roxygen_mask <- function(text) {
-  code_with_header <- sub(pattern = "^#'\\s*", "", text)
+  code_with_header <- gsub(pattern = "^#'\\s*", "", text)
   remove_roxygen_header(code_with_header)
 }
 
