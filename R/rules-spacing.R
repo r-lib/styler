@@ -87,20 +87,6 @@ style_space_around_tilde <- function(pd_flat, strict) {
   pd_flat
 }
 
-# depreciated!
-#' @include token-define.R
-#' @keywords internal
-remove_space_after_unary_pm <- function(pd_flat) {
-  op_pm <- c("'+'", "'-'")
-  op_pm_unary_after <- c(op_pm, op_token, "'('", "','")
-
-  pm_after <- pd_flat$token %in% op_pm
-  pd_flat$spaces[pm_after & (pd_flat$newlines == 0L) &
-    (lag(pd_flat$token) %in% op_pm_unary_after)] <- 0L
-  pd_flat
-}
-
-
 remove_space_after_unary_pm_nested <- function(pd) {
   if (any(pd$token[1] %in% c("'+'", "'-'"))) {
     pd$spaces[1] <- 0L

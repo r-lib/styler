@@ -72,15 +72,6 @@ indent_eq_sub <- function(pd,
 }
 
 
-#' @describeIn update_indention Same as indent_op, but only indents one token
-#'   after `token`, not all remaining.
-#' @keywords internal
-indent_assign <- function(pd, indent_by, token = NULL) {
-  indent_indices <- compute_indent_indices(pd, token)
-  pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
-  pd
-}
-
 #' @describeIn update_indention Is used to indent for / while / if / if-else
 #'   statements that do not have curly parenthesis.
 #' @keywords internal

@@ -26,24 +26,25 @@ NULL
 #' @importFrom purrr map_lgl
 #' @importFrom rlang seq2
 #' @keywords internal
-update_indention_ref_fun_call <- function(pd_nested) {
-  current_is_call <- pd_nested$token_before[2] %in% c("SYMBOL_FUNCTION_CALL")
-  non_comment <- which(pd_nested$token != "COMMENT")
-  first_non_comment_after_call <- non_comment[non_comment > 2][1]
-  if ((current_is_call) &&
-    pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
-    candidates <- seq2(3, nrow(pd_nested) - 1)
-
-    child_is_call <- map_lgl(pd_nested$child, is_function_call)
-    child_is_curly_expr <- map_lgl(pd_nested$child, is_curly_expr)
-    child_is_on_same_line <- cumsum(pd_nested$lag_newlines) == 0
-    call_on_same_line <- child_is_call & child_is_on_same_line
-    to_indent <- setdiff(candidates, which(call_on_same_line | child_is_curly_expr))
-
-    pd_nested$indention_ref_pos_id[to_indent] <- last(pd_nested$child[[1]]$pos_id)
-  }
-  pd_nested
-}
+# update_indention_ref_fun_call <- function(pd_nested) {
+#   current_is_call <- pd_nested$token_before[2] %in% c("SYMBOL_FUNCTION_CALL")
+#   non_comment <- which(pd_nested$token != "COMMENT")
+#   first_non_comment_after_call <- non_comment[non_comment > 2][1]
+#   if ((current_is_call) &&
+#     pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
+#     candidates <- seq2(3, nrow(pd_nested) - 1)
+#
+#     child_is_call <- map_lgl(pd_nested$child, is_function_call)
+#     child_is_curly_expr <- map_lgl(pd_nested$child, is_curly_expr)
+#     child_is_on_same_line <- cumsum(pd_nested$lag_newlines) == 0
+#     call_on_same_line <- child_is_call & child_is_on_same_line
+#     to_indent <- setdiff(candidates, which(call_on_same_line | child_is_curly_expr))
+#
+#     pd_nested$indention_ref_pos_id[to_indent] <- last(pd_nested$child[[1]]$pos_id)
+#   }
+#   pd_nested
+# }
+NULL
 
 #' @describeIn update_indention_ref Updates the reference pos_id for all
 #'   tokens in `pd_nested` if `pd_nested` contains a function declaration.

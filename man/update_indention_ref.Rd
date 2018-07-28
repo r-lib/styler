@@ -2,12 +2,9 @@
 % Please edit documentation in R/reindent.R
 \name{update_indention_ref}
 \alias{update_indention_ref}
-\alias{update_indention_ref_fun_call}
 \alias{update_indention_ref_fun_dec}
 \title{Update the indention reference}
 \usage{
-update_indention_ref_fun_call(pd_nested)
-
 update_indention_ref_fun_dec(pd_nested)
 }
 \arguments{
@@ -18,14 +15,6 @@ Update the indention reference
 }
 \section{Functions}{
 \itemize{
-\item \code{update_indention_ref_fun_call}: Updates the reference pos_id for all
-tokens in \code{pd_nested} if \code{pd_nested} contains a function call. Tokens that
-start on the same line as the opening parenthesis, are not themselves
-function calls or expressions wrapped in curly brackets are re-indented,
-that is, they are indented up to the level at which the call ends in
-terms of col2. We need to take the last from the first child because calls
-like package::function() can have three elements.
-
 \item \code{update_indention_ref_fun_dec}: Updates the reference pos_id for all
 tokens in \code{pd_nested} if \code{pd_nested} contains a function declaration.
 Tokens inside a function declaration are are re-indented,
@@ -35,18 +24,9 @@ ends in terms of col2.
 
 \examples{
 \dontrun{
-# not re-indented
-call(call(
-  xyz
-))
-# re-indented
-call(call(1,
-          2))
-}
-\dontrun{
 a <- function(x,
               y) {
-x + y
+  x + y
 }
 }
 }
