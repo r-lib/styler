@@ -4,8 +4,8 @@
 \alias{style_file}
 \title{Style \code{.R} and/or \code{.Rmd} files}
 \usage{
-style_file(path, ..., style = tidyverse_style, transformers = style(...),
-  include_roxygen_examples = TRUE)
+style_file(path, ..., style = tidyverse_style,
+  transformers = style(...), include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{path}{A character vector with paths to files to style.}
@@ -89,3 +89,4 @@ Other stylers: \code{\link{style_dir}},
   \code{\link{style_pkg}}, \code{\link{style_text}},
   \code{\link{styler_addins}}
 }
+\concept{stylers}

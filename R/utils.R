@@ -8,6 +8,7 @@ line_col_names <- function() {
 #'
 #' @param col1,col2 Column names as string.
 #' @param data The data frames that contains `col1` and `col2`.
+#' @keywords internal
 two_cols_match <- function(col1, col2, data) {
   all(unlist(data[col1]) == unlist(data[col2]))
 }

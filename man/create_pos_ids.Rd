@@ -30,4 +30,5 @@ Create valid pos_ids if possible
 Other token creators: \code{\link{create_tokens}},
   \code{\link{validate_new_pos_ids}}
 }
+\concept{token creators}
 \keyword{internal}

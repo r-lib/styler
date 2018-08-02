@@ -33,7 +33,7 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "pkgapi::api_roclet"))
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Collate: 
     'addins.R'
     'communicate.R'

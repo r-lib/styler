@@ -14,3 +14,4 @@ two_cols_match(col1, col2, data)
 \description{
 Check whether two columns match
 }
+\keyword{internal}

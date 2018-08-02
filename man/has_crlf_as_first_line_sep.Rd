@@ -14,3 +14,4 @@ has_crlf_as_first_line_sep(message, initial_text)
 \description{
 Check if a string uses CRLF EOLs
 }
+\keyword{internal}

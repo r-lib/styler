@@ -18,4 +18,5 @@ Uses \code{\link[purrr:reduce]{purrr::reduce()}} to apply each function of \code
 \seealso{
 Other visitors: \code{\link{visit}}
 }
+\concept{visitors}
 \keyword{internal}

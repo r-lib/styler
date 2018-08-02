@@ -42,6 +42,7 @@ parse_safely <- function(text, ...) {
 #'
 #' @param message A message returned with `tryCatch()`.
 #' @param initial_text The inital text to style.
+#' @keywords internal
 has_crlf_as_first_line_sep <- function(message, initial_text) {
   split <- strsplit(message, ":", fixed = TRUE)[[1]]
   if (length(split) > 1L && split[1] == "<text>") {

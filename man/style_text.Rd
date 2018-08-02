@@ -4,8 +4,8 @@
 \alias{style_text}
 \title{Style a string}
 \usage{
-style_text(text, ..., style = tidyverse_style, transformers = style(...),
-  include_roxygen_examples = TRUE)
+style_text(text, ..., style = tidyverse_style,
+  transformers = style(...), include_roxygen_examples = TRUE)
 }
 \arguments{
 \item{text}{A character vector with text to style.}
@@ -43,3 +43,4 @@ Other stylers: \code{\link{style_dir}},
   \code{\link{style_file}}, \code{\link{style_pkg}},
   \code{\link{styler_addins}}
 }
+\concept{stylers}

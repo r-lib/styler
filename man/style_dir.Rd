@@ -90,3 +90,4 @@ Other stylers: \code{\link{style_file}},
   \code{\link{style_pkg}}, \code{\link{style_text}},
   \code{\link{styler_addins}}
 }
+\concept{stylers}
