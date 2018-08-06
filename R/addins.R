@@ -39,6 +39,7 @@ style_active_file <- function() {
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
     rstudioapi::documentSave(context$id)
   }
+  rstudioapi::setCursorPosition(context$selection[[1]]$range)
 }
 
 #' Style a file as if it was an .R file
