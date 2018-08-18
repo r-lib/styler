@@ -9,7 +9,19 @@ construct_vertical <- function(x) {
   structure(x, class = "vertical")
 }
 
+#' Print styled code
+#'
+#' @param x A character vector, one element corresponds to one line of code.
+#' @param ... Not currently used.
+#' @param colored Whether or not the output should be colored with
+#'   `prettycode::highlight()`.
+#' @param style Passed to `prettycode::highlight()`.
 #' @export
-print.vertical <- function(x, ...) {
+print.vertical <- function(x, ...,
+                           colored = TRUE,
+                           style = prettycode::default_style()) {
+  if (coloured) {
+    x <- prettycode::highlight(x, style = style)
+  }
   cat(x, sep = "\n")
 }
