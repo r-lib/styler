@@ -20,7 +20,7 @@ construct_vertical <- function(x) {
 print.vertical <- function(x, ...,
                            colored = TRUE,
                            style = prettycode::default_style()) {
-  if (coloured) {
+  if (colored) {
     x <- prettycode::highlight(x, style = style)
   }
   cat(x, sep = "\n")
