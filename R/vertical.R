@@ -16,12 +16,20 @@ construct_vertical <- function(x) {
 #' @param colored Whether or not the output should be colored with
 #'   `prettycode::highlight()`.
 #' @param style Passed to `prettycode::highlight()`.
+#' @importFrom rlang is_installed
 #' @export
 print.vertical <- function(x, ...,
-                           colored = TRUE,
+                           colored = getOption("styler.colored_print.vertical"),
                            style = prettycode::default_style()) {
   if (colored) {
-    x <- prettycode::highlight(x, style = style)
+    if (is_installed("prettycode")) {
+      x <- prettycode::highlight(x, style = style)
+    } else {
+      warn(c(
+        "Could not use colored = TRUE, as the package prettycode is not",
+        "installed. Please install it if you want to see colored output."
+      ))
+    }
   }
   cat(x, sep = "\n")
 }
