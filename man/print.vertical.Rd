@@ -4,7 +4,8 @@
 \alias{print.vertical}
 \title{Print styled code}
 \usage{
-\method{print}{vertical}(x, ..., colored = TRUE,
+\method{print}{vertical}(x, ...,
+  colored = getOption("styler.colored_print.vertical"),
   style = prettycode::default_style())
 }
 \arguments{
