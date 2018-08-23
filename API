@@ -16,4 +16,4 @@ tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2, start_comments_w
 
 ## Foreign S3 methods
 
-print.vertical(x, ..., colored = TRUE, style = prettycode::default_style())
+print.vertical(x, ..., colored = getOption("styler.colored_print.vertical"), style = prettycode::default_style())
