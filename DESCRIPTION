@@ -20,7 +20,8 @@ Imports:
     rprojroot,
     tibble (>= 1.4.2),
     tools,
-    withr
+    withr,
+    prettycode
 Suggests: 
     data.tree,
     dplyr,
