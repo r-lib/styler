@@ -125,12 +125,8 @@ wrap_expr_in_expr <- function(pd) {
 #' )
 #' @keywords internal
 relocate_eq_assign <- function(pd) {
-  if (FALSE) {
-    pd
-  } else {
     pd %>%
       post_visit(c(relocate_eq_assign_nest))
-  }
 }
 
 
