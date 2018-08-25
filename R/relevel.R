@@ -152,15 +152,18 @@ relocate_eq_assign <- function(pd) {
 #' @importFrom rlang seq2
 #' @keywords internal
 relocate_eq_assign_nest <- function(pd) {
-  idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  if (length(idx_eq_assign) > 0) {
-    block_id <- find_block_id(pd)
-    blocks <- split(pd, block_id)
-    pd <- map_dfr(blocks, relocate_eq_assign_one)
+  if (any(pd$token == "equal_assign")) {
+    pd
+  } else {
+    idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
+    if (length(idx_eq_assign) > 0) {
+      block_id <- find_block_id(pd)
+      blocks <- split(pd, block_id)
+      pd <- map_dfr(blocks, relocate_eq_assign_one)
+    }
+    pd
   }
-  pd
 }
-
 
 #' Find the block to which a token belongs
 #'
