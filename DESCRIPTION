@@ -20,8 +20,7 @@ Imports:
     rprojroot,
     tibble (>= 1.4.2),
     tools,
-    withr,
-    prettycode
+    withr
 Suggests: 
     data.tree,
     dplyr,
@@ -29,7 +28,8 @@ Suggests:
     knitr,
     rmarkdown,
     rstudioapi,
-    testthat
+    testthat,
+    prettycode
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
