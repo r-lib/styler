@@ -22,3 +22,8 @@ test_that("double braces are treated correctly", {
   expect_warning(test_collection("token_adding_removing", "token_creation_find_pos",
                                  transformer = style_text), NA)
 })
+
+test_that("braces only added to pipe if RHS is a symbol", {
+  expect_warning(test_collection("token_adding_removing", "add_brackets_in_pipe",
+                                 transformer = style_text), NA)
+})

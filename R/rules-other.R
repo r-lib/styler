@@ -6,7 +6,8 @@ add_brackets_in_pipe <- function(pd) {
 
 add_brackets_in_pipe_one <- function(pd, pos) {
   next_non_comment <- next_non_comment(pd, pos)
-  if (nrow(pd$child[[next_non_comment]]) < 2) {
+  rh_child <- pd$child[[next_non_comment]]
+  if (nrow(rh_child) < 2 && rh_child$token == "SYMBOL") {
     new_pos_ids <- create_pos_ids(pd$child[[next_non_comment]], 1, after = TRUE, n = 2)
     new_pd <- create_tokens(
       tokens = c("'('", "')'"), texts = c("(", ")"), pos_ids = new_pos_ids,

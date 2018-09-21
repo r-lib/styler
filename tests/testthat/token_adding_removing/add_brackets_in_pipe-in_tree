@@ -1,0 +1,31 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--expr:  [0/0] {1}                                   
+ ¦   ¦--expr:  [0/1] {3}                               
+ ¦   ¦   °--NUM_CONST: 1 [0/0] {2}                     
+ ¦   ¦--SPECIAL-PIPE: %>% [0/1] {4}                    
+ ¦   °--expr:  [0/0] {6}                               
+ ¦       °--NUM_CONST: 2 [0/0] {5}                     
+ ¦--expr:  [1/0] {7}                                   
+ ¦   ¦--expr:  [0/1] {9}                               
+ ¦   ¦   °--NUM_CONST: 1 [0/0] {8}                     
+ ¦   ¦--SPECIAL-OTHER: %x% [0/1] {10}                  
+ ¦   °--expr:  [0/0] {12}                              
+ ¦       °--NUM_CONST: 1 [0/0] {11}                    
+ ¦--expr:  [1/0] {13}                                  
+ ¦   ¦--expr:  [0/1] {15}                              
+ ¦   ¦   °--NUM_CONST: 1 [0/0] {14}                    
+ ¦   ¦--SPECIAL-OTHER: %x% [0/1] {16}                  
+ ¦   °--expr:  [0/0] {18}                              
+ ¦       °--SYMBOL: y [0/0] {17}                       
+ ¦--expr:  [1/0] {19}                                  
+ ¦   ¦--expr:  [0/1] {21}                              
+ ¦   ¦   °--NUM_CONST: 1 [0/0] {20}                    
+ ¦   ¦--SPECIAL-PIPE: %>% [0/1] {22}                   
+ ¦   °--expr:  [0/0] {24}                              
+ ¦       °--SYMBOL: x [0/0] {23}                       
+ °--expr:  [1/0] {25}                                  
+     ¦--expr:  [0/1] {27}                              
+     ¦   °--NUM_CONST: 1 [0/0] {26}                    
+     ¦--SPECIAL-OTHER: %s% [0/1] {28}                  
+     °--expr:  [0/0] {30}                              
+         °--NUM_CONST: 1 [0/0] {29}                    
