@@ -4,13 +4,15 @@
 \alias{wrap_expr_in_curly}
 \title{Wrap an expression in curly braces}
 \usage{
-wrap_expr_in_curly(pd, stretch_out = c(FALSE, FALSE))
+wrap_expr_in_curly(pd, stretch_out = c(FALSE, FALSE), space_after = 1)
 }
 \arguments{
 \item{pd}{A parse table.}
 
 \item{stretch_out}{Whether or not to create a line break after the opening
 curly brace and before the closing curly brace.}
+
+\item{space_after}{How many spaces shold be inserted after the closing brace.}
 }
 \description{
 Adds curly braces to an expression (represented as a parse table) if there

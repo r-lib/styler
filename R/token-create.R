@@ -120,8 +120,11 @@ validate_new_pos_ids <- function(new_ids, after) {
 #' @param pd A parse table.
 #' @param stretch_out Whether or not to create a line break after the opening
 #'   curly brace and before the closing curly brace.
+#' @param space_after How many spaces shold be inserted after the closing brace.
 #' @keywords internal
-wrap_expr_in_curly <- function(pd, stretch_out = c(FALSE, FALSE)) {
+wrap_expr_in_curly <- function(pd,
+                               stretch_out = c(FALSE, FALSE),
+                               space_after = 1) {
   if (is_curly_expr(pd)) return(pd)
   if (stretch_out[1]) {
     pd$lag_newlines[1] <- 1L
@@ -134,7 +137,7 @@ wrap_expr_in_curly <- function(pd, stretch_out = c(FALSE, FALSE)) {
 
   closing <- create_tokens(
     "'}'", "}",
-    spaces = 1, lag_newlines = as.integer(stretch_out[2]),
+    spaces = space_after, lag_newlines = as.integer(stretch_out[2]),
     pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE)
   )
 
