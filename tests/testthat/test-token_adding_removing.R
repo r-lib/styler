@@ -11,6 +11,9 @@ test_that("braces in if-else clause are added correctly", {
                                  transformer = style_text), NA)
   expect_warning(test_collection("token_adding_removing", "if_else_non_strict",
                                  transformer = style_text, strict = FALSE), NA)
+  expect_warning(test_collection("token_adding_removing", "if-else-comma",
+                                 transformer = style_text, strict = TRUE), NA)
+
 })
 
 test_that("double braces are treated correctly", {
