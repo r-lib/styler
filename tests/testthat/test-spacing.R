@@ -56,5 +56,11 @@ test_that("no spaces after token FUNCTION", {
     transformer = style_text, strict = FALSE), NA)
 })
 
+test_that("spacing around tilde", {
+  expect_warning(test_collection(
+    "spacing", "spacing-tilde",
+    transformer = style_text, strict = TRUE), NA)
+})
+
 
 

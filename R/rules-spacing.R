@@ -81,7 +81,8 @@ style_space_around_tilde <- function(pd_flat, strict) {
     )
   } else if (is_asymmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
-      strict = TRUE, "'~'", level_before = 1, level_after = 0
+      strict = TRUE, "'~'", level_before = 1,
+      level_after = ifelse(nrow(pd_flat$child[[2]]) > 1, 1, 0)
     )
   }
   pd_flat

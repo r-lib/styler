@@ -28,7 +28,7 @@ is_curly_expr <- function(pd) {
 #' @keywords internal
 is_tilde_expr <- function(pd, tilde_pos = c(1, 2)) {
   if (is.null(pd) || nrow(pd) == 1) return(FALSE)
-  pd$token[tilde_pos] == "'~'"
+  any(pd$token[tilde_pos] == "'~'")
 }
 
 #' @rdname is_tilde_expr
