@@ -104,7 +104,7 @@ with the tidyverse style guide in in this
 [vignette](http://styler.r-lib.org/articles/introducing_styler.html). If
 this is not flexible enough for you, you can implement your own style
 guide, as explained in the corresponding
-[vignette](http://styler.r-lib.org/articles/customizing_styler.html)
+[vignette](http://styler.r-lib.org/articles/customizing_styler.html).
 
 ## Adaption of styler
 
@@ -117,6 +117,11 @@ notably
     printing. To permanently use `style = TRUE` without specifying it
     every time, you can add the following line to your `.Rprofile` (via
     `usethis::edit_r_profile()`): `options(reprex.styler = TRUE)`.
+  - in [`knitr`](https://github.com/yihui/knitr) via the code chunk
+    option `style = "styler"` to style code in the rendered output
+    without touching the source (requires knitr \>= 1.20.15).
+  - pretty-printing of [drake](https://github.com/ropensci/drake)
+    workflow data frames with `drake::drake_plan_source()`.
 
 ## Further resources
 
