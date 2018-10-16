@@ -117,9 +117,12 @@ notably
     printing. To permanently use `style = TRUE` without specifying it
     every time, you can add the following line to your `.Rprofile` (via
     `usethis::edit_r_profile()`): `options(reprex.styler = TRUE)`.
-  - in [`knitr`](https://github.com/yihui/knitr) via the code chunk
-    option `style = "styler"` to style code in the rendered output
-    without touching the source (requires knitr \>= 1.20.15).
+  - you can pretty-print your R code in RMarkdown reports without having
+    styler modifying the source. This feature is implemented as a code
+    chunk option in knitr. use `tidy = "styler"` in the header of a code
+    chunks (e.g. ` ```{r name-of-the-chunk, tidy = "styler"}`), or
+    `knitr::opts_chunk$set(tidy = "styler")` at the top of your
+    RMarkdown script.
   - pretty-printing of [drake](https://github.com/ropensci/drake)
     workflow data frames with `drake::drake_plan_source()`.
 
