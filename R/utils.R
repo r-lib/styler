@@ -84,6 +84,10 @@ is_rmd_file <- function(path) {
   grepl("\\.Rmd$", path, ignore.case = TRUE)
 }
 
+is_rnw_file <- function(path) {
+  grepl("\\.Rnw$", path, ignore.case = TRUE)
+}
+
 is_unsaved_file <- function(path) {
   path == ""
 }
