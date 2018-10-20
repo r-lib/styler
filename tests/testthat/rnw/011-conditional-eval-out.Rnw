@@ -1,0 +1,18 @@
+\documentclass{article}
+
+\begin{document}
+
+<<controller>>=
+# this variable controls if a chunk should be evaluated
+dothis <- TRUE
+@
+
+<<chunk1, eval = dothis>>=
+print("say hello world")
+@
+
+<<chunk2, eval = !dothis>>=
+print("silence is gold")
+@
+
+\end{document}

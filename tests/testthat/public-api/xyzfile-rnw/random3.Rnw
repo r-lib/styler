@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\begin{document}
+
+Some text
+<<>>=
+# Some R code
+f <- function(x) {
+  x
+}
+@
+More text before malformed chunk
+# More R code
+g <- function(y) {
+  y
+}
+@
+
+Final text
+<<>>=
+1 + 2
+@
+
+
+\end{document}

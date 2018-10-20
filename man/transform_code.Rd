@@ -2,7 +2,7 @@
 % Please edit documentation in R/transform-code.R
 \name{transform_code}
 \alias{transform_code}
-\title{Transform code from R or Rmd files}
+\title{Transform code from R, Rmd or Rnw files}
 \usage{
 transform_code(path, fun, verbose = FALSE, ...)
 }
@@ -18,7 +18,7 @@ files?}
 }
 \description{
 A wrapper for \code{\link[enc:transform_lines_enc]{enc::transform_lines_enc()}} which initiates the styling of
-either R or Rmd files by passing the relevant transformer function for each
+either R, Rmd or Rnw files by passing the relevant transformer function for each
 case.
 }
 \keyword{internal}

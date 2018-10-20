@@ -4,7 +4,7 @@
 \alias{get_knitr_pattern}
 \title{Get chunk pattern}
 \usage{
-get_knitr_pattern(lines)
+get_knitr_pattern(lines, filetype = "Rmd")
 }
 \arguments{
 \item{lines}{a character vector of lines from an Rmd file}

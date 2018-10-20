@@ -155,3 +155,28 @@ test_that("insufficient R version returns error", {
   expect_error(stop_insufficient_r_version())
 })
 
+context("public API - Rnw in style_file()")
+
+test_that("styler can style Rnw file", {
+  capture_output(expect_false({
+    out <- style_file(
+      testthat_file("public-api", "xyzfile-rnw", "random.Rnw"), strict = FALSE
+    )
+    out$changed
+  }))
+
+  capture_output(expect_warning(
+    styled <- style_file(testthat_file("public-api", "xyzfile-rnw", "random2.Rnw"), strict = FALSE)
+  ))
+  expect_false(styled$changed)
+})
+
+test_that("styler handles malformed Rnw file and invalid R code in chunk", {
+  capture_output(expect_warning(
+    style_file(testthat_file("public-api", "xyzfile-rnw", "random3.Rnw"), strict = FALSE)
+  ))
+
+  capture_output(expect_warning(
+    style_file(testthat_file("public-api", "xyzfile-rnw", "random4.Rnw"), strict = FALSE)
+  ))
+})

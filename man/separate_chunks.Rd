@@ -2,15 +2,15 @@
 % Please edit documentation in R/transform-code.R
 \name{separate_chunks}
 \alias{separate_chunks}
-\title{Separate chunks within Rmd contents}
+\title{Separate chunks within Rmd and Rnw contents}
 \usage{
-separate_chunks(lines)
+separate_chunks(lines, filetype = "Rmd")
 }
 \arguments{
 \item{lines}{a character vector of lines from an Rmd file}
 }
 \description{
 Identifies and separates the code and text chunks (the latter includes non-R
-code) within an Rmd file, and returns these separately.
+code) within an Rmd or Rnw file, and returns these separately.
 }
 \keyword{internal}

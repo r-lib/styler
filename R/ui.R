@@ -58,7 +58,7 @@ NULL
 #' @family stylers
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' style_pkg(style = tidyverse_style, strict = TRUE)
 #' style_pkg(
 #'   scope = "line_breaks",
@@ -188,7 +188,7 @@ prettify_any <- function(transformers,
   )
 }
 
-#' Style `.R` and/or `.Rmd` files
+#' Style `.R` and/or `.Rmd` and.or `.Rnw` files
 #'
 #' Performs various substitutions in the files specified.
 #' Carefully examine the results after running this function!
