@@ -92,7 +92,7 @@ identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pat
   } else if (filetype == "Rnw") {
     starts <- grep(pattern$chunk.begin, lines, perl = TRUE)
     ends <- grep(pattern$chunk.end, lines, perl = TRUE)
-    is_r_code <- rep(TRUE, length(start))
+    is_r_code <- rep(TRUE, length(starts))
   }
 
   if (length(starts) != length(ends)) {
