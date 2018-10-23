@@ -2,7 +2,7 @@
 % Please edit documentation in R/ui.R
 \name{style_file}
 \alias{style_file}
-\title{Style \code{.R} and/or \code{.Rmd} and.or \code{.Rnw} files}
+\title{Style \code{.R}, \code{.Rmd} or \code{.Rnw} files}
 \usage{
 style_file(path, ..., style = tidyverse_style,
   transformers = style(...), include_roxygen_examples = TRUE)

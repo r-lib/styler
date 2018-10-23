@@ -188,7 +188,7 @@ prettify_any <- function(transformers,
   )
 }
 
-#' Style `.R` and/or `.Rmd` and.or `.Rnw` files
+#' Style `.R`, `.Rmd` or `.Rnw` files
 #'
 #' Performs various substitutions in the files specified.
 #' Carefully examine the results after running this function!

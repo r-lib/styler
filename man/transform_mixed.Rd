@@ -4,14 +4,14 @@
 \alias{transform_mixed}
 \title{Transform mixed contents}
 \usage{
-transform_mixed(lines, transformer_fun, filetype = "Rmd")
+transform_mixed(lines, transformer_fun, filetype)
 }
 \arguments{
-\item{lines}{A character vector of lines from an Rmd or Rnw file}
+\item{lines}{A character vector of lines from an Rmd or Rnw file.}
 
-\item{transformer_fun}{A styler transformer function}
+\item{transformer_fun}{A styler transformer function.}
 
-\item{filetype}{A string indicating the filetype (Rmd or Rnw)}
+\item{filetype}{A string indicating the filetype (Rmd or Rnw).}
 }
 \description{
 Applies the supplied transformer function to code chunks identified within

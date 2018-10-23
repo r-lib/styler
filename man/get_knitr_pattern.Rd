@@ -4,10 +4,10 @@
 \alias{get_knitr_pattern}
 \title{Get chunk pattern}
 \usage{
-get_knitr_pattern(lines, filetype = "Rmd")
+get_knitr_pattern(filetype)
 }
 \arguments{
-\item{lines}{a character vector of lines from an Rmd file}
+\item{filetype}{A string indicating the filetype - either 'Rmd' or 'Rnw'.}
 }
 \description{
 Determine a regex pattern for identifying R code chunks.

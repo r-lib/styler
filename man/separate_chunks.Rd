@@ -4,10 +4,12 @@
 \alias{separate_chunks}
 \title{Separate chunks within Rmd and Rnw contents}
 \usage{
-separate_chunks(lines, filetype = "Rmd")
+separate_chunks(lines, filetype)
 }
 \arguments{
-\item{lines}{a character vector of lines from an Rmd file}
+\item{lines}{A character vector of lines from an Rmd or Rnw file.}
+
+\item{filetype}{A string indicating the filetype - either 'Rmd' or 'Rnw'.}
 }
 \description{
 Identifies and separates the code and text chunks (the latter includes non-R
