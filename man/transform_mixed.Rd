@@ -11,7 +11,7 @@ transform_mixed(lines, transformer_fun, filetype)
 
 \item{transformer_fun}{A styler transformer function.}
 
-\item{filetype}{A string indicating the filetype (Rmd or Rnw).}
+\item{filetype}{A string indicating the filetype - either 'Rmd' or 'Rnw'.}
 }
 \description{
 Applies the supplied transformer function to code chunks identified within

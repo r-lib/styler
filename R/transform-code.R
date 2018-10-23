@@ -31,9 +31,8 @@ transform_code <- function(path, fun, verbose = FALSE, ...) {
 #' an Rmd or Rnw file and recombines the resulting (styled) code chunks with the text
 #' chunks.
 #'
-#' @param lines A character vector of lines from an Rmd or Rnw file.
 #' @param transformer_fun A styler transformer function.
-#' @param filetype A string indicating the filetype (Rmd or Rnw).
+#' @inheritParams separate_chunks
 #' @importFrom purrr flatten_chr
 #' @keywords internal
 transform_mixed <- function(lines, transformer_fun, filetype) {
