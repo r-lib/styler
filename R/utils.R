@@ -4,6 +4,15 @@ line_col_names <- function() {
   c("line1", "line2", "col1", "col2")
 }
 
+ensure_last_is_empty <- function(x) {
+  has_line_break_at_eof <- x[length(x)] == ""
+  if (has_line_break_at_eof) {
+    return(x)
+  } else {
+    append(x, "")
+  }
+}
+
 #' Check whether two columns match
 #'
 #' @param col1,col2 Column names as string.

@@ -104,7 +104,7 @@ with the tidyverse style guide in in this
 [vignette](http://styler.r-lib.org/articles/introducing_styler.html). If
 this is not flexible enough for you, you can implement your own style
 guide, as explained in the corresponding
-[vignette](http://styler.r-lib.org/articles/customizing_styler.html)
+[vignette](http://styler.r-lib.org/articles/customizing_styler.html).
 
 ## Adaption of styler
 
@@ -117,6 +117,14 @@ notably
     printing. To permanently use `style = TRUE` without specifying it
     every time, you can add the following line to your `.Rprofile` (via
     `usethis::edit_r_profile()`): `options(reprex.styler = TRUE)`.
+  - you can pretty-print your R code in RMarkdown reports without having
+    styler modifying the source. This feature is implemented as a code
+    chunk option in knitr. use `tidy = "styler"` in the header of a code
+    chunks (e.g. ` ```{r name-of-the-chunk, tidy = "styler"}`), or
+    `knitr::opts_chunk$set(tidy = "styler")` at the top of your
+    RMarkdown script.
+  - pretty-printing of [drake](https://github.com/ropensci/drake)
+    workflow data frames with `drake::drake_plan_source()`.
 
 ## Further resources
 

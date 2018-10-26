@@ -33,7 +33,7 @@ style_active_file <- function() {
   }
   rstudioapi::modifyRange(
     c(1, 1, length(context$contents) + 1, 1),
-    paste0(append(out, ""), collapse = "\n"),
+    paste0(ensure_last_is_empty(out), collapse = "\n"),
     id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
