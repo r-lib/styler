@@ -180,3 +180,29 @@ test_that("styler handles malformed Rnw file and invalid R code in chunk", {
     style_file(testthat_file("public-api", "xyzfile-rnw", "random4.Rnw"), strict = FALSE)
   ))
 })
+
+context("public API - Rnw in style_pkg()")
+
+test_that("styler can style R, Rmd and Rnw files via style_pkg()", {
+  msg <- capture_output(
+    style_pkg(testthat_file("public-api", "xyzpackage-rnw"),
+              filetype = c("R", "Rmd", "Rnw"))
+  )
+  expect_true(any(grepl("hello-world.R", msg, fixed = TRUE)))
+  expect_true(any(grepl("test-package-xyz.R", msg, fixed = TRUE)))
+  expect_true(any(grepl("random.Rmd", msg, fixed = TRUE)))
+  expect_true(any(grepl("random.Rnw", msg, fixed = TRUE)))
+  expect_false(any(grepl("RcppExports.R", msg, fixed = TRUE)))
+})
+
+test_that("styler can style Rnw files only via style_pkg()", {
+  msg <- capture_output(
+    style_pkg(testthat_file("public-api", "xyzpackage-rnw"),
+              filetype = "Rnw")
+  )
+  expect_false(any(grepl("hello-world.R", msg, fixed = TRUE)))
+  expect_false(any(grepl("test-package-xyz.R", msg, fixed = TRUE)))
+  expect_false(any(grepl("random.Rmd", msg, fixed = TRUE)))
+  expect_true(any(grepl("random.Rnw", msg, fixed = TRUE)))
+  expect_false(any(grepl("RcppExports.R", msg, fixed = TRUE)))
+})

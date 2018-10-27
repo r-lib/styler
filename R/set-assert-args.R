@@ -38,10 +38,10 @@ set_and_assert_arg_filetype <- function(filetype) {
 #' @param lowercase_filetype A vector with file types to check, all lower case.
 #' @keywords internal
 assert_filetype <- function(lowercase_filetype) {
-  if (!all(lowercase_filetype %in% c("r", "rmd"))) {
+  if (!all(lowercase_filetype %in% c("r", "rmd", "rnw"))) {
     stop(
       "filetype must not contain other values than 'R'",
-      "or 'Rmd' (case is ignored).",
+      "'Rmd' or 'Rnw' (case is ignored).",
       call. = FALSE
     )
   }

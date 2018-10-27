@@ -1,0 +1,22 @@
+\documentclass{article}
+
+\begin{document}
+
+This is all you need to do if you want to use the xyzpackage package:
+
+<<setup, include=FALSE>>=
+library(xyzpackage)
+@
+
+The quick brown fox jumps over the lazy dog the quick brown fox jumps over the
+lazy dog the quick brown fox jumps over the lazy dog.
+
+<<test>>=
+1 + 1
+rnorm(30)
+@
+
+The quick brown fox jumps over the lazy dog the quick brown fox jumps over the
+lazy dog the quick brown fox jumps over the lazy dog.
+
+\end{document}

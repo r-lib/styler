@@ -19,8 +19,8 @@ NULL
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
 #' @param filetype Vector of file extensions indicating which file types should
-#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R", ".Rmd")`
-#'   or `c("r", "rmd")`.
+#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R", ".Rmd",
+#'   ".Rnw")` or `c("r", "rmd", "rnw")`.
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
 #' @param include_roxygen_examples Whether or not to style code in roxygen
@@ -100,6 +100,16 @@ prettify_pkg <- function(transformers,
       ignore.case = TRUE, recursive = TRUE, full.names = TRUE
     )
     readme <- dir(pattern = "^readme\\.rmd$", ignore.case = TRUE)
+  }
+
+  if ("\\.rnw" %in% filetype) {
+    vignette_files <- append(
+      vignette_files,
+      dir(
+        path = "vignettes", pattern = "\\.rnw$",
+        ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      )
+    )
   }
 
   files <- setdiff(c(r_files, vignette_files, readme), exclude_files)
