@@ -35,7 +35,8 @@ excluded from styling.}
 examples.}
 }
 \description{
-Performs various substitutions in all \code{.R} files in a directory.
+Performs various substitutions in all \code{.R}, \code{.Rmd} and/or \code{.Rnw} files
+in a directory (by default only \code{.R} files are styled - see \code{filetype} argument).
 Carefully examine the results after running this function!
 }
 \section{Value}{

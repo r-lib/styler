@@ -33,7 +33,8 @@ examples.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package
-(code and tests).
+(code and tests). One can also (optionally) style \code{.Rmd} and/or
+\code{.Rnw} files (vignettes and readme) by changing the \code{filetype} argument.
 Carefully examine the results after running this function!
 }
 \section{Warning}{

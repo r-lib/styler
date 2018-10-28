@@ -6,7 +6,8 @@ NULL
 #' Prettify R source code
 #'
 #' Performs various substitutions in all `.R` files in a package
-#' (code and tests).
+#' (code and tests). One can also (optionally) style `.Rmd` and/or
+#' `.Rnw` files (vignettes and readme) by changing the `filetype` argument.
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package.
@@ -146,7 +147,8 @@ style_text <- function(text,
 
 #' Prettify arbitrary R code
 #'
-#' Performs various substitutions in all `.R` files in a directory.
+#' Performs various substitutions in all `.R`, `.Rmd` and/or `.Rnw` files
+#' in a directory (by default only `.R` files are styled - see `filetype` argument).
 #' Carefully examine the results after running this function!
 #' @param path Path to a directory with files to transform.
 #' @param recursive A logical value indicating whether or not files in subdirectories
