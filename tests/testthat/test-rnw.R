@@ -1,18 +1,18 @@
-context("rmd")
+context("rnw")
 
-test_that("can style .Rmd files", {
+test_that("can style .Rnw files", {
   expect_warning(test_collection(
-    "rmd", "simple",
+    "rnw", "008-outdec",
     transformer = transform_mixed,
     transformer_fun = style_text,
-    filetype = "Rmd",
+    filetype = "Rnw",
     write_tree = FALSE
   ), NA)
   expect_warning(test_collection(
-    "rmd", "r_and_non_r_code_chunks",
+    "rnw", "011-conditional-eval",
     transformer = transform_mixed,
     transformer_fun = style_text,
-    filetype = "Rmd",
+    filetype = "Rnw",
     write_tree = FALSE
   ), NA)
 })

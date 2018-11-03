@@ -1,0 +1,26 @@
+\documentclass{article}
+
+\begin{document}
+
+<<>>=
+# Start with chunk
+@
+
+Some text before empty chunk
+<<>>=
+
+@
+
+Final text before longer code chunk
+This text chunk has multiple lines
+<<>>=
+# random
+this(is_a_call(x))
+if (x) {
+  r()
+  a    <- 3
+  bcds <- 5
+}
+@
+
+\end{document}

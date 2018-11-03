@@ -27,7 +27,7 @@ test_collection <- function(test, sub_test = NULL,
 
   pattern <- paste0(
     if (!is.null(sub_test)) paste0("^", sub_test, ".*"),
-    "in\\.R(?:|md)$"
+    "in\\.R(?:|md|nw)$"
   )
 
   in_names <- list.files(
@@ -66,7 +66,7 @@ test_collection <- function(test, sub_test = NULL,
 #' ))
 #' @keywords internal
 construct_out <- function(in_paths) {
-  gsub("\\-in([.]R(?:|md))$", "\\-out\\1", in_paths)
+  gsub("\\-in([.]R(?:|md|nw))$", "\\-out\\1", in_paths)
 }
 
 #' Construct paths of a tree object given the paths of *-in.R files

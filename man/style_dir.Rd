@@ -23,8 +23,7 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
 \item{filetype}{Vector of file extensions indicating which file types should
-be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}
-or \code{c("r", "rmd")}.}
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd", ".Rnw")} or \code{c("r", "rmd", "rnw")}.}
 
 \item{recursive}{A logical value indicating whether or not files in subdirectories
 of \code{path} should be styled as well.}
@@ -36,7 +35,8 @@ excluded from styling.}
 examples.}
 }
 \description{
-Performs various substitutions in all \code{.R} files in a directory.
+Performs various substitutions in all \code{.R}, \code{.Rmd} and/or \code{.Rnw} files
+in a directory (by default only \code{.R} files are styled - see \code{filetype} argument).
 Carefully examine the results after running this function!
 }
 \section{Value}{
