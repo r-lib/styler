@@ -12,7 +12,6 @@ BugReports: https://github.com/r-lib/styler/issues
 Imports: 
     backports,
     cli,
-    enc (>= 0.2),
     magrittr,
     purrr (>= 0.2.3),
     rematch2,
@@ -20,7 +19,8 @@ Imports:
     rprojroot,
     tibble (>= 1.4.2),
     tools,
-    withr
+    withr,
+    xfun
 Suggests: 
     data.tree,
     dplyr,
@@ -44,6 +44,7 @@ Collate:
     'expr-is.R'
     'indent.R'
     'initialize.R'
+    'io.R'
     'nest.R'
     'nested-to-tree.R'
     'parse.R'

@@ -102,7 +102,7 @@ transform_and_check <- function(in_item, out_item,
                                 write_tree = NA,
                                 out_tree = "_tree", ...) {
   write_tree <- set_arg_write_tree(write_tree)
-  read_in <- enc::read_lines_enc(in_item)
+  read_in <- xfun::read_utf8(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
       write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE)
@@ -110,11 +110,10 @@ transform_and_check <- function(in_item, out_item,
   transformed_text <- read_in %>%
     transformer(...) %>%
     unclass()
-  transformed <- enc::transform_lines_enc(
+  transformed <- transform_lines_utf8(
     out_item,
     function(x) transformed_text,
-    write_back = write_back,
-    verbose = FALSE
+    write_back = write_back
   )
 
   if (transformed) {

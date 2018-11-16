@@ -26,19 +26,18 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
 
 #' Transform a file and output a customized message
 #'
-#' Wraps `enc::transform_lines_enc()` and outputs customized messages.
+#' Transforms file contents and outputs customized messages.
 #' @param max_char_path The number of characters of the longest path. Determines
 #'   the indention level of `message_after`.
 #' @param message_before The message to print before the path.
 #' @param message_after The message to print after the path.
 #' @param message_after_if_changed The message to print after `message_after` if
 #'   any file was transformed.
-#' @inheritParams enc::transform_lines_enc
+#' @inheritParams transform_lines_utf8
 #' @param ... Further arguments passed to `enc::transform_lines_enc()`.
 #' @keywords internal
 transform_file <- function(path,
                            fun,
-                           verbose = FALSE,
                            max_char_path,
                            message_before = "",
                            message_after = " [DONE]",
@@ -53,7 +52,7 @@ transform_file <- function(path,
     rep_char(" ", max(0L, n_spaces_before_message_after)),
     append = FALSE
   )
-  changed <- transform_code(path, fun = fun, verbose = verbose, ...)
+  changed <- transform_code(path, fun = fun, ...)
 
   bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
 

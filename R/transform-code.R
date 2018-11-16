@@ -1,24 +1,24 @@
 #' Transform code from R, Rmd or Rnw files
 #'
-#' A wrapper for [enc::transform_lines_enc()] which initiates the styling of
+#' A wrapper which initiates the styling of
 #' either R, Rmd or Rnw files by passing the relevant transformer function for each
 #' case.
 #'
 #' @inheritParams enc::transform_lines_enc
 #' @param ... Further arguments passed to `enc::transform_lines_enc()`.
 #' @keywords internal
-transform_code <- function(path, fun, verbose = FALSE, ...) {
+transform_code <- function(path, fun, ...) {
   if (is_plain_r_file(path)) {
-    enc::transform_lines_enc(path, fun = fun, ..., verbose = verbose)
+    transform_lines_utf8(path, fun = fun, ...)
   } else if (is_rmd_file(path)) {
-    enc::transform_lines_enc(path,
-      fun = partial(transform_mixed, transformer_fun = fun, filetype = "Rmd"), ...,
-      verbose = verbose
+    transform_lines_utf8(path,
+      fun = partial(transform_mixed, transformer_fun = fun, filetype = "Rmd"),
+      ...
     )
   } else if (is_rnw_file(path)) {
-    enc::transform_lines_enc(path,
-      fun = partial(transform_mixed, transformer_fun = fun, filetype = "Rnw"), ...,
-      verbose = verbose
+    transform_lines_utf8(path,
+      fun = partial(transform_mixed, transformer_fun = fun, filetype = "Rnw"),
+      ...
     )
   } else {
     stop(path, " is not an R, Rmd or Rnw file")
