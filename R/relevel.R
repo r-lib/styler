@@ -26,7 +26,10 @@ flatten_operators <- function(pd_nested) {
 #' @keywords internal
 flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, math_token, "'$'")
-  pd_token_right <- c(special_token, "LEFT_ASSIGN", "'+'", "'-'")
+  pd_token_right <- c(
+    special_token, "LEFT_ASSIGN", if (parser_version_get() > 1) "EQ_ASSIGN",
+    "'+'", "'-'"
+  )
   bound <- pd_nested %>%
     flatten_pd(pd_token_left, left = TRUE) %>%
     flatten_pd(pd_token_right, left = FALSE)
@@ -125,8 +128,13 @@ wrap_expr_in_expr <- function(pd) {
 #' )
 #' @keywords internal
 relocate_eq_assign <- function(pd) {
+  if (parser_version_get() < 2) {
     pd %>%
       post_visit(c(relocate_eq_assign_nest))
+  } else {
+    pd
+  }
+
 }
 
 
@@ -152,17 +160,13 @@ relocate_eq_assign <- function(pd) {
 #' @importFrom rlang seq2
 #' @keywords internal
 relocate_eq_assign_nest <- function(pd) {
-  if (any(pd$token == "equal_assign")) {
-    pd
-  } else {
-    idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-    if (length(idx_eq_assign) > 0) {
-      block_id <- find_block_id(pd)
-      blocks <- split(pd, block_id)
-      pd <- map_dfr(blocks, relocate_eq_assign_one)
-    }
-    pd
+  idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
+  if (length(idx_eq_assign) > 0) {
+    block_id <- find_block_id(pd)
+    blocks <- split(pd, block_id)
+    pd <- map_dfr(blocks, relocate_eq_assign_one)
   }
+  pd
 }
 
 #' Find the block to which a token belongs
