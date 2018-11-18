@@ -1,25 +1,33 @@
 # styler 1.0.3
 
-This release introduces new features and is fully backward-compatible.
+This release introduces new features and is fully backward-compatible. It also
+adapts to changes in the R parser committed into R devel (#419).
 
 ## Major Changes
 
 * styler can now style roxygen code examples in the source code of package
-  (#351).
+  (#332) as well as Rnw files (#431).
 * the print method for the output of `style_text()` (`print.vertical()`) now
-  returns syntax-higlighted code by default, controllable via the option 
-  `styler.colored_print.vertical` (#XXX).
-* Completely redesigned README (#413).
-* Fixed semi-colon expression that contained multiple assignments (#404, XXX)
+  returns syntax-highlighted code by default, controllable via the option 
+  `styler.colored_print.vertical` (#417).
+* the README was redesigned (#413).
+* semi-colon expression that contained multiple assignments was fixed(#404).
 
 ## Minor Changes
 
-* remove line-breaks before commas (#405).
-* moved rule that turns single quotes into double quotes to token modifier in
+* cursor position is remembered for styling via Addin (#416).
+* adapt spacing around tilde for multi-token expressions(#424) and brace
+  edge case (#425).
+* only add brackets to piped function call if RHS is a symbol (#422).
+* increase coverage again to over 90% (#412). 
+* move rule that turns single quotes into double quotes to token modifier in
   `tidyverse_style_guide() (#406).
-* Increased coverage again to over 90% (#412). 
+* remove line-breaks before commas (#405).
+* removed package dependency enc in favour of xfun (#442).
 
-Thanks to all contributors for patches, issues and the like: XXX
+Thanks to all contributors for patches, issues and the like:
+@jonmcalder, @krlmlr, @IndrajeetPatil, @kalibera, @Hasnep, @kiranmaiganji, 
+@dirkschumacher, @ClaytonJY, @wlandau, @maurolepore, 
 
 # styler 1.0.2
 
