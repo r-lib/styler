@@ -4,17 +4,13 @@
 \alias{transform_file}
 \title{Transform a file and output a customized message}
 \usage{
-transform_file(path, fun, verbose = FALSE, max_char_path,
-  message_before = "", message_after = " [DONE]",
-  message_after_if_changed = " *", ...)
+transform_file(path, fun, max_char_path, message_before = "",
+  message_after = " [DONE]", message_after_if_changed = " *", ...)
 }
 \arguments{
-\item{path}{A vector of file paths.}
+\item{path}{A vector with file paths to transform.}
 
 \item{fun}{A function that returns a character vector.}
-
-\item{verbose}{Should the function show a message with a list of changed
-files?}
 
 \item{max_char_path}{The number of characters of the longest path. Determines
 the indention level of \code{message_after}.}
@@ -26,9 +22,9 @@ the indention level of \code{message_after}.}
 \item{message_after_if_changed}{The message to print after \code{message_after} if
 any file was transformed.}
 
-\item{...}{Further arguments passed to \code{enc::transform_lines_enc()}.}
+\item{...}{Further arguments passed to \code{\link[=transform_utf8]{transform_utf8()}}.}
 }
 \description{
-Wraps \code{enc::transform_lines_enc()} and outputs customized messages.
+Transforms file contents and outputs customized messages.
 }
 \keyword{internal}

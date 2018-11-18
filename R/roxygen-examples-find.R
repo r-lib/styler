@@ -14,7 +14,7 @@ identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
 }
 
 identify_start_to_stop_of_roxygen_examples <- function(path) {
-  content <- enc::read_lines_enc(path)
+  content <- xfun::read_utf8(path)
   identify_start_to_stop_of_roxygen_examples_from_text(content)
 }
 

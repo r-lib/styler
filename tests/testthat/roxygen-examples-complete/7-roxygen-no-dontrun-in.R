@@ -11,11 +11,11 @@
 #' # the following is identical but the former is more convenient:
 #' file<- tempfile("styler",
 #' fileext = ".R")
-#' enc::write_lines_enc("1++1", file)
+#' xfun::write_utf8("1++1", file)
 #' style_file(
 #' file, style = tidyverse_style, strict = TRUE)
 #' style_file(file, transformers = tidyverse_style(strict = TRUE))
-#' enc::read_lines_enc(file)
+#' xfun::read_utf8(file)
 #' unlink(file2)
 #' @family stylers
 #' @export
