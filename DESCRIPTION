@@ -40,6 +40,7 @@ Collate:
     'communicate.R'
     'compat-dplyr.R'
     'compat-tidyr.R'
+    'environments.R'
     'expr-is.R'
     'indent.R'
     'initialize.R'

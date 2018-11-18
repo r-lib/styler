@@ -91,8 +91,10 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
-  as_tibble(utils::getParseData(parsed, includeText = include_text)) %>%
+  pd <- as_tibble(utils::getParseData(parsed, includeText = include_text)) %>%
     add_id_and_short()
+  parser_version_set(parser_version_find(pd))
+  pd
 }
 
 #' Add column `pos_id` and `short`
