@@ -22,7 +22,7 @@ the indention level of \code{message_after}.}
 \item{message_after_if_changed}{The message to print after \code{message_after} if
 any file was transformed.}
 
-\item{...}{Further arguments passed to \code{enc::transform_lines_enc()}.}
+\item{...}{Further arguments passed to \code{\link[=transform_utf8]{transform_utf8()}}.}
 }
 \description{
 Transforms file contents and outputs customized messages.

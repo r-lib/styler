@@ -11,7 +11,7 @@ transform_code(path, fun, ...)
 
 \item{fun}{A function that returns a character vector.}
 
-\item{...}{Further arguments passed to \code{enc::transform_lines_enc()}.}
+\item{...}{Further arguments passed to \code{\link[=transform_utf8]{transform_utf8()}}.}
 }
 \description{
 A wrapper which initiates the styling of

@@ -34,7 +34,7 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
 #' @param message_after_if_changed The message to print after `message_after` if
 #'   any file was transformed.
 #' @inheritParams transform_utf8
-#' @param ... Further arguments passed to `enc::transform_lines_enc()`.
+#' @param ... Further arguments passed to [transform_utf8()].
 #' @keywords internal
 transform_file <- function(path,
                            fun,

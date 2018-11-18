@@ -5,7 +5,7 @@
 #' case.
 #'
 #' @inheritParams transform_utf8
-#' @param ... Further arguments passed to `enc::transform_lines_enc()`.
+#' @param ... Further arguments passed to [transform_utf8()].
 #' @keywords internal
 transform_code <- function(path, fun, ...) {
   if (is_plain_r_file(path)) {
