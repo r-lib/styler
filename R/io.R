@@ -7,12 +7,12 @@
 #'   be written back to the file.
 #' @importFrom magrittr set_names
 #' @keywords internal
-transform_lines_utf8 <- function(path, fun, write_back = TRUE) {
-  map_lgl(path, transform_lines_utf8_one, fun = fun, write_back = write_back) %>%
+transform_utf8 <- function(path, fun, write_back = TRUE) {
+  map_lgl(path, transform_utf8_one, fun = fun, write_back = write_back) %>%
     set_names(path)
 }
 
-transform_lines_utf8_one <- function(path, fun, write_back = write_back) {
+transform_utf8_one <- function(path, fun, write_back = write_back) {
   old <- xfun::read_utf8(path)
   tryCatch({
     new <- fun(old)

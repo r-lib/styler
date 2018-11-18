@@ -7,7 +7,7 @@
 transform_code(path, fun, ...)
 }
 \arguments{
-\item{path}{A vector of file paths.}
+\item{path}{A vector with file paths to transform.}
 
 \item{fun}{A function that returns a character vector.}
 

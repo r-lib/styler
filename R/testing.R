@@ -110,7 +110,7 @@ transform_and_check <- function(in_item, out_item,
   transformed_text <- read_in %>%
     transformer(...) %>%
     unclass()
-  transformed <- transform_lines_utf8(
+  transformed <- transform_utf8(
     out_item,
     function(x) transformed_text,
     write_back = write_back

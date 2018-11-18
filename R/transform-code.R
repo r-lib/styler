@@ -4,19 +4,19 @@
 #' either R, Rmd or Rnw files by passing the relevant transformer function for each
 #' case.
 #'
-#' @inheritParams enc::transform_lines_enc
+#' @inheritParams transform_utf8
 #' @param ... Further arguments passed to `enc::transform_lines_enc()`.
 #' @keywords internal
 transform_code <- function(path, fun, ...) {
   if (is_plain_r_file(path)) {
-    transform_lines_utf8(path, fun = fun, ...)
+    transform_utf8(path, fun = fun, ...)
   } else if (is_rmd_file(path)) {
-    transform_lines_utf8(path,
+    transform_utf8(path,
       fun = partial(transform_mixed, transformer_fun = fun, filetype = "Rmd"),
       ...
     )
   } else if (is_rnw_file(path)) {
-    transform_lines_utf8(path,
+    transform_utf8(path,
       fun = partial(transform_mixed, transformer_fun = fun, filetype = "Rnw"),
       ...
     )
