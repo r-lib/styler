@@ -1,4 +1,4 @@
-# styler 1.0.3
+# styler 1.1.0
 
 This release introduces new features and is fully backward-compatible. It also
 adapts to changes in the R parser committed into R devel (#419).
