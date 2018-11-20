@@ -19,7 +19,7 @@ dontshow) and run sections and processes each segment indicidually using
 \section{Hierarchy}{
 
 Styling involves splitting roxygen example code into segments, and segments
-into snippets. This describes the proccess for input of
+into snippets. This describes the process for input of
 \code{\link[=parse_transform_serialize_roxygen]{parse_transform_serialize_roxygen()}}:
 \itemize{
 \item Splitting code into roxygen example code and other code. Downstream,

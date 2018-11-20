@@ -88,11 +88,11 @@ make_transformer <- function(transformers, include_roxygen_examples) {
 #' Parse, transform and serialize roxygen comments
 #'
 #' Splits `text` into roxygen code examples and non-roxygen code examples and
-#' then maps over these examples by applyingj
+#' then maps over these examples by applying
 #' [style_roxygen_code_example()].
 #' @section Hierarchy:
 #' Styling involves splitting roxygen example code into segments, and segments
-#' into snippets. This describes the proccess for input of
+#' into snippets. This describes the process for input of
 #' [parse_transform_serialize_roxygen()]:
 #'
 #' - Splitting code into roxygen example code and other code. Downstream,
@@ -131,7 +131,7 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
 #' @return
 #' A list with two elements:
 #'
-#' * A list that contains elements grouped into roxygen and non-rogxygen
+#' * A list that contains elements grouped into roxygen and non-roxygen
 #'   sections. This list is named `separated`.
 #' * An integer vector with the indices that correspond to roxygen code
 #'   examples in `separated`.
@@ -140,8 +140,8 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
 split_roxygen_segments <- function(text, roxygen_examples) {
   if (is.null(roxygen_examples)) return(lst(separated = list(text), selectors = NULL))
   all_lines <- seq2(1L, length(text))
-  active_segemnt <- as.integer(all_lines %in% roxygen_examples)
-  segment_id <- cumsum(abs(c(0L, diff(active_segemnt)))) + 1L
+  active_segment <- as.integer(all_lines %in% roxygen_examples)
+  segment_id <- cumsum(abs(c(0L, diff(active_segment)))) + 1L
   separated <- split(text, factor(segment_id))
   restyle_selector <- ifelse(roxygen_examples[1] == 1L, odd_index, even_index)
 

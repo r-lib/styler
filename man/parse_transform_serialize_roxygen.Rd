@@ -8,13 +8,13 @@ parse_transform_serialize_roxygen(text, transformers)
 }
 \description{
 Splits \code{text} into roxygen code examples and non-roxygen code examples and
-then maps over these examples by applyingj
+then maps over these examples by applying
 \code{\link[=style_roxygen_code_example]{style_roxygen_code_example()}}.
 }
 \section{Hierarchy}{
 
 Styling involves splitting roxygen example code into segments, and segments
-into snippets. This describes the proccess for input of
+into snippets. This describes the process for input of
 \code{\link[=parse_transform_serialize_roxygen]{parse_transform_serialize_roxygen()}}:
 \itemize{
 \item Splitting code into roxygen example code and other code. Downstream,

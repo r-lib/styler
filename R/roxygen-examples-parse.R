@@ -27,7 +27,7 @@ parse_roxygen <- function(roxygen) {
 
 #' Changing the line definition
 #'
-#' Input: New line denoted with `\\n`. Lines can span accross elements.
+#' Input: New line denoted with `\\n`. Lines can span across elements.
 #' Output: Each element in the vector is one line.
 #'
 #' @param raw Raw code to post-process.

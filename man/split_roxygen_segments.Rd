@@ -16,7 +16,7 @@ are roxygen examples. Most conveniently obtained with
 \value{
 A list with two elements:
 \itemize{
-\item A list that contains elements grouped into roxygen and non-rogxygen
+\item A list that contains elements grouped into roxygen and non-roxygen
 sections. This list is named \code{separated}.
 \item An integer vector with the indices that correspond to roxygen code
 examples in \code{separated}.

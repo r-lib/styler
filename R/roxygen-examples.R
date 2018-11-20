@@ -53,7 +53,7 @@ style_roxygen_code_example_segment <- function(one_dont, transformers) {
 #'
 #' @param code_snippet A character vector with code to style.
 #' @param is_dont Whether the snippet to process is a dontrun, dontshow,
-#'   donttest segemnt or not.
+#'   donttest segment or not.
 #' @inheritParams parse_transform_serialize_r
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
 #' @keywords internal

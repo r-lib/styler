@@ -17,6 +17,6 @@ Identifies strings that were not fully parsed due to their vast length.
 \details{
 The meaning of the variable \code{is_problematic_string} in the source code
 changes from "all strings" to "all problematic strings", is partly
-missleading and this approach was chosen for performance reasons only.
+misleading and this approach was chosen for performance reasons only.
 }
 \keyword{internal}

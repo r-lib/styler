@@ -15,7 +15,7 @@ into a new expression.}
 \item{indent_by}{The amount of spaces used to indent an expression in curly
 braces. Used for unindention.}
 
-\item{space_after}{How many spaces shold be inserted after the closing brace.}
+\item{space_after}{How many spaces should be inserted after the closing brace.}
 }
 \description{
 Wraps some rows of a parse table into a sub-expression.

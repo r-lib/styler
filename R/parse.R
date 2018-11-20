@@ -193,7 +193,7 @@ ensure_valid_pd <- function(pd) {
 #' @details
 #' The meaning of the variable `is_problematic_string` in the source code
 #' changes from "all strings" to "all problematic strings", is partly
-#' missleading and this approach was chosen for performance reasons only.
+#' misleading and this approach was chosen for performance reasons only.
 #' @param pd A parse table.
 #' @param text The initial code to style.
 #' @keywords internal
