@@ -14,5 +14,5 @@
 CONTRIBUTING.md
 ^\.gitsum$
 ^gitsum$
-
+revdep
 ^cran-comments\.md$
