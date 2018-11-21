@@ -22,7 +22,7 @@ Imports:
     magrittr,
     purrr (>= 0.2.3),
     rematch2,
-    rlang,
+    rlang (>= 0.1.1),
     rprojroot,
     tibble (>= 1.4.2),
     tools,
