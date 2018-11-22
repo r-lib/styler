@@ -6,12 +6,13 @@ remove_line_break_before_curly_opening <- function(pd) {
 }
 
 set_line_break_around_comma <- function(pd) {
-  comma_with_line_break_before <-
+  comma_with_line_break_that_can_be_removed_before <-
     (pd$token == "','") &
-      (pd$lag_newlines > 0) &
-      (pd$token_before != "COMMENT")
-  pd$lag_newlines[comma_with_line_break_before] <- 0L
-  pd$lag_newlines[lead(comma_with_line_break_before)] <- 1L
+    (pd$lag_newlines > 0) &
+    (pd$token_before != "COMMENT") &
+    (lag(pd$token) != "'['")
+  pd$lag_newlines[comma_with_line_break_that_can_be_removed_before] <- 0L
+  pd$lag_newlines[lead(comma_with_line_break_that_can_be_removed_before)] <- 1L
   pd
 }
 

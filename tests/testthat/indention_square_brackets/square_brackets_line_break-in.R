@@ -5,7 +5,18 @@ fak[a, b]
 
 fac[a,
     b]
+
 fac[
   a,
   b
   ]
+
+fac[
+  , `:`(a = b)]
+
+fac[
+  , `:`(a = b)
+]
+
+fac[, `:`(a = c)
+]
