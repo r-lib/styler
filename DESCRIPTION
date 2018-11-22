@@ -17,25 +17,26 @@ License: GPL-3
 URL: https://github.com/r-lib/styler
 BugReports: https://github.com/r-lib/styler/issues
 Imports: 
-    backports,
+    backports (>= 1.1.0),
     cli,
-    magrittr,
+    magrittr (>= 1.0.1),
     purrr (>= 0.2.3),
     rematch2,
     rlang (>= 0.1.1),
-    rprojroot,
+    rprojroot (>= 1.1),
     tibble (>= 1.4.2),
     tools,
     withr,
-    xfun
+    xfun,
+    fs
 Suggests: 
-    data.tree,
+    data.tree (>= 0.1.6),
     dplyr,
     here,
     knitr,
     prettycode,
     rmarkdown,
-    rstudioapi,
+    rstudioapi (>= 0.7),
     testthat
 VignetteBuilder: 
     knitr
