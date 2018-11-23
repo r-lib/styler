@@ -33,7 +33,7 @@ wrap_if_else_multi_line_in_curly <- function(pd, indent_by = 2) {
     pd <- pd %>%
       wrap_if_multiline_curly(indent_by,
         space_after = ifelse(contains_else_expr(pd), 1, 0)
-    ) %>%
+      ) %>%
       wrap_else_multiline_curly(indent_by, space_after = 0)
   }
   pd

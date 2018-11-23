@@ -174,7 +174,7 @@ ensure_valid_pd <- function(pd) {
     non_terminals <- pd %>%
       filter(terminal == FALSE)
     valid_pd <- non_terminals$id %>%
-      map_lgl(~.x %in% pd$parent) %>%
+      map_lgl(~ .x %in% pd$parent) %>%
       all()
     if (!valid_pd) {
       stop(paste(

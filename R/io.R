@@ -20,7 +20,7 @@ transform_utf8_one <- function(path, fun, write_back = write_back) {
       xfun::write_utf8(new, path)
     }
     !identical(unclass(old), unclass(new))
-    }, error = function(e) {
+  }, error = function(e) {
     warning("When processing ", path, ": ", conditionMessage(e), call. = FALSE)
     NA
   })

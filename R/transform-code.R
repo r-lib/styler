@@ -56,12 +56,12 @@ separate_chunks <- function(lines, filetype) {
   r_raw_chunks <- identify_raw_chunks(lines, filetype = filetype)
 
   r_chunks <- map2(
-    r_raw_chunks$starts, r_raw_chunks$ends, ~lines[seq2(.x + 1, .y - 1)]
+    r_raw_chunks$starts, r_raw_chunks$ends, ~ lines[seq2(.x + 1, .y - 1)]
   )
 
   text_chunks <- map2(
     c(1, r_raw_chunks$ends), c(r_raw_chunks$starts, length(lines)),
-    ~lines[seq2(.x, .y)]
+    ~ lines[seq2(.x, .y)]
   )
   lst(r_chunks, text_chunks)
 }
@@ -124,7 +124,7 @@ get_engine_pattern <- function() {
 #' @inheritParams separate_chunks
 #' @keywords internal
 get_knitr_pattern <- function(filetype) {
-  if(filetype == "Rnw") {
+  if (filetype == "Rnw") {
     knitr::all_patterns[["rnw"]]
   } else if (filetype == "Rmd") {
     knitr::all_patterns[["md"]]

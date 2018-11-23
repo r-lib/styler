@@ -16,7 +16,7 @@
 #' * version 1: Before fix mentioned in #419.
 #' * version 2: After #419.
 #'
-#'The following utilities are available:
+#' The following utilities are available:
 #'
 #' * `parser_version_set()` sets the parser version in the environment
 #'   `env_current`.

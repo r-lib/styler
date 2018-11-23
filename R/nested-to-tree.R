@@ -14,7 +14,7 @@ create_tree <- function(text, structure_only = FALSE) {
 
 create_tree_from_pd_with_default_style_attributes <- function(pd, structure_only = FALSE) {
   pd %>%
-  create_node_from_nested_root(structure_only) %>%
+    create_node_from_nested_root(structure_only) %>%
     as.data.frame()
 }
 
