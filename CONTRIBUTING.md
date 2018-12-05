@@ -178,3 +178,16 @@ indicates for every row in a parse table whether it contains an `else` token.
 
 The use of closures is discouraged. We prefer to prefill a template function 
 with `purrr::partial()`.
+
+## Testing
+
+We have a testing framework powered by `test_collection()`. 
+Essentially, there is an \*-in.R file and a \*-out.R file. The \*-in.R file is the
+input that is transformed and - if it matches the *-out.R file, the test has 
+passed. You can create an \*-in.R file, run `devtools::test(f = "[your file]")`
+and an \*-out.R file is generated. If the file matches your expectation, 
+you can commit it. Note that files are overwritten and version control should be
+used to track failed tests. 
+The files are placed in `tests/testthat` under the category they fit. 
+Please have a look at the documentation for `test_collection()` and see other 
+unit tests. Let me know if there is anything unclear about this.
