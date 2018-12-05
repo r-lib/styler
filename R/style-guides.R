@@ -362,12 +362,13 @@ tidyverse_math_token_spacing <- function() {
 #'
 #' @family style_guides
 #' @examples
-#' txt = "x <- 1"
-#' style_text(txt, style = equals_style)
-#' @importFrom purrr partial
+#' style_text("x <- 1", style = equals_style)
 #' @export
 equals_style <- function() {
- create_style_guide(token = list(force_assignment_op_equals))
+  create_style_guide(
+    token = list(force_assignment_op_equals),
+    use_raw_indention = TRUE
+  )
 }
 
 force_assignment_op_equals <- function(pd) {

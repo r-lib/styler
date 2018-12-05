@@ -14,8 +14,7 @@ This style guide is the same as \code{\link[=tidyverse_style]{tidyverse_style()}
 equals (\code{=}) rather than arrow \code{<-} assignment.
 }
 \examples{
-txt = "x <- 1"
-style_text(txt, style = equals_style)
+style_text("x <- 1", style = equals_style)
 }
 \seealso{
 Other style_guides: \code{\link{tidyverse_style}}
