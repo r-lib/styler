@@ -60,7 +60,7 @@ style_text(c("ab <- 3", "a  <-3"), strict = FALSE) # keeps alignment of "<-"
 style_text(c("ab <- 3", "a  <-3"), strict = TRUE) # drops alignment of "<-"
 }
 \seealso{
-Other style_guides: \code{\link{yihui_style}}
+Other style_guides: \code{\link{equals_style}}
 }
 \concept{obtain transformers}
 \concept{style_guides}

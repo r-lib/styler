@@ -349,9 +349,10 @@ tidyverse_math_token_spacing <- function() {
 }
 
 
-#' The yihui style
+#' Equals assignment style
 #'
-#' Style code according to [Yihui Xie](https://github.com/yihui).
+#' Use equals assignment instead of arrow assignment.
+#'
 #' @inheritParams tidyverse_style
 
 #' @details
@@ -361,10 +362,11 @@ tidyverse_math_token_spacing <- function() {
 #'
 #' @family style_guides
 #' @examples
-#' style_text("x <- 1", style = yihui_style)
+#' txt = "x <- 1"
+#' style_text(, style = equals_style)
 #' @importFrom purrr partial
 #' @export
-yihui_style <- function() {
+equals_style <- function() {
  create_style_guide(token = list(force_assignment_op_equals))
 }
 
