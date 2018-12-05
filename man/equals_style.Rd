@@ -15,7 +15,7 @@ equals (\code{=}) rather than arrow \code{<-} assignment.
 }
 \examples{
 txt = "x <- 1"
-style_text(, style = equals_style)
+style_text(txt, style = equals_style)
 }
 \seealso{
 Other style_guides: \code{\link{tidyverse_style}}

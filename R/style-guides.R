@@ -363,7 +363,7 @@ tidyverse_math_token_spacing <- function() {
 #' @family style_guides
 #' @examples
 #' txt = "x <- 1"
-#' style_text(, style = equals_style)
+#' style_text(txt, style = equals_style)
 #' @importFrom purrr partial
 #' @export
 equals_style <- function() {
