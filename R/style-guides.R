@@ -347,3 +347,32 @@ tidyverse_math_token_spacing <- function() {
     one = c("'+'", "'-'", "'*'", "'/'")
   )
 }
+
+#' Equals assignment style
+#'
+#' Use equals assignment instead of arrow assignment.
+#'
+#' @inheritParams tidyverse_style
+#'
+#' @details
+#'
+#' This style guide is the same as [`tidyverse_style()`], except it uses
+#' equals (`=`) rather than arrow `<-` assignment.
+#'
+#' @family style_guides
+#' @examples
+#' style_text("x <- 1", style = equals_style)
+#' @export
+equals_style <- function() {
+  create_style_guide(
+    token = list(force_assignment_op_equals),
+    use_raw_indention = TRUE
+  )
+}
+
+force_assignment_op_equals <- function(pd) {
+  to_replace <- pd$token == "LEFT_ASSIGN"
+  pd$token[to_replace] <- "EQ_ASSIGN"
+  pd$text[to_replace] <- "="
+  pd
+}
