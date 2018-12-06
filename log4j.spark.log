@@ -1,0 +1,154 @@
+17/06/23 14:57:11 INFO SparkContext: Running Spark version 1.6.2
+17/06/23 14:57:11 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+17/06/23 14:57:11 INFO SecurityManager: Changing view acls to: muelleki
+17/06/23 14:57:11 INFO SecurityManager: Changing modify acls to: muelleki
+17/06/23 14:57:11 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(muelleki); users with modify permissions: Set(muelleki)
+17/06/23 14:57:11 INFO Utils: Successfully started service 'sparkDriver' on port 34287.
+17/06/23 14:57:12 INFO Slf4jLogger: Slf4jLogger started
+17/06/23 14:57:12 INFO Remoting: Starting remoting
+17/06/23 14:57:12 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriverActorSystem@127.0.0.1:40565]
+17/06/23 14:57:12 INFO Utils: Successfully started service 'sparkDriverActorSystem' on port 40565.
+17/06/23 14:57:12 INFO SparkEnv: Registering MapOutputTracker
+17/06/23 14:57:12 INFO SparkEnv: Registering BlockManagerMaster
+17/06/23 14:57:12 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-eda582b3-34b6-475e-a42a-083b8a9dcffd
+17/06/23 14:57:12 INFO MemoryStore: MemoryStore started with capacity 511.1 MB
+17/06/23 14:57:12 INFO SparkEnv: Registering OutputCommitCoordinator
+17/06/23 14:57:12 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+17/06/23 14:57:12 INFO SparkUI: Started SparkUI at http://127.0.0.1:4040
+17/06/23 14:57:12 INFO HttpFileServer: HTTP File server directory is /tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/httpd-7d9ae7e3-2484-4c55-b7f5-07d25d13cbea
+17/06/23 14:57:12 INFO HttpServer: Starting HTTP Server
+17/06/23 14:57:12 INFO Utils: Successfully started service 'HTTP file server' on port 39741.
+17/06/23 14:57:12 INFO SparkContext: Added JAR file:/home/muelleki/R/x86_64-pc-linux-gnu-library/3.4/sparklyr/java/spark-csv_2.11-1.3.0.jar at http://127.0.0.1:39741/jars/spark-csv_2.11-1.3.0.jar with timestamp 1498222632410
+17/06/23 14:57:12 INFO SparkContext: Added JAR file:/home/muelleki/R/x86_64-pc-linux-gnu-library/3.4/sparklyr/java/commons-csv-1.1.jar at http://127.0.0.1:39741/jars/commons-csv-1.1.jar with timestamp 1498222632411
+17/06/23 14:57:12 INFO SparkContext: Added JAR file:/home/muelleki/R/x86_64-pc-linux-gnu-library/3.4/sparklyr/java/univocity-parsers-1.5.1.jar at http://127.0.0.1:39741/jars/univocity-parsers-1.5.1.jar with timestamp 1498222632411
+17/06/23 14:57:12 INFO SparkContext: Added JAR file:/home/muelleki/R/x86_64-pc-linux-gnu-library/3.4/sparklyr/java/sparklyr-1.6-2.10.jar at http://127.0.0.1:39741/jars/sparklyr-1.6-2.10.jar with timestamp 1498222632412
+17/06/23 14:57:12 INFO Executor: Starting executor ID driver on host localhost
+17/06/23 14:57:12 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 35727.
+17/06/23 14:57:12 INFO NettyBlockTransferService: Server created on 35727
+17/06/23 14:57:12 INFO BlockManagerMaster: Trying to register BlockManager
+17/06/23 14:57:12 INFO BlockManagerMasterEndpoint: Registering block manager localhost:35727 with 511.1 MB RAM, BlockManagerId(driver, localhost, 35727)
+17/06/23 14:57:12 INFO BlockManagerMaster: Registered BlockManager
+17/06/23 14:57:13 INFO HiveContext: Initializing execution hive, version 1.2.1
+17/06/23 14:57:13 INFO ClientWrapper: Inspected Hadoop version: 2.6.0
+17/06/23 14:57:13 INFO ClientWrapper: Loaded org.apache.hadoop.hive.shims.Hadoop23Shims for Hadoop version 2.6.0
+17/06/23 14:57:13 INFO HiveMetaStore: 0: Opening raw store with implemenation class:org.apache.hadoop.hive.metastore.ObjectStore
+17/06/23 14:57:13 INFO ObjectStore: ObjectStore, initialize called
+17/06/23 14:57:13 INFO Persistence: Property hive.metastore.integral.jdo.pushdown unknown - will be ignored
+17/06/23 14:57:13 INFO Persistence: Property datanucleus.cache.level2 unknown - will be ignored
+17/06/23 14:57:13 WARN Connection: BoneCP specified but not present in CLASSPATH (or one of dependencies)
+17/06/23 14:57:13 WARN Connection: BoneCP specified but not present in CLASSPATH (or one of dependencies)
+17/06/23 14:57:15 INFO ObjectStore: Setting MetaStore object pin classes with hive.metastore.cache.pinobjtypes="Table,StorageDescriptor,SerDeInfo,Partition,Database,Type,FieldSchema,Order"
+17/06/23 14:57:16 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MFieldSchema" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:16 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MOrder" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:17 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MFieldSchema" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:17 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MOrder" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:17 INFO MetaStoreDirectSql: Using direct SQL, underlying DB is DERBY
+17/06/23 14:57:17 INFO ObjectStore: Initialized ObjectStore
+17/06/23 14:57:17 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
+17/06/23 14:57:17 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
+17/06/23 14:57:18 INFO HiveMetaStore: Added admin role in metastore
+17/06/23 14:57:18 INFO HiveMetaStore: Added public role in metastore
+17/06/23 14:57:18 INFO HiveMetaStore: No user is added in admin role, since config is empty
+17/06/23 14:57:18 INFO HiveMetaStore: 0: get_all_databases
+17/06/23 14:57:18 INFO audit: ugi=muelleki	ip=unknown-ip-addr	cmd=get_all_databases	
+17/06/23 14:57:18 INFO HiveMetaStore: 0: get_functions: db=default pat=*
+17/06/23 14:57:18 INFO audit: ugi=muelleki	ip=unknown-ip-addr	cmd=get_functions: db=default pat=*	
+17/06/23 14:57:18 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MResourceUri" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:18 INFO SessionState: Created HDFS directory: /tmp/hive/muelleki
+17/06/23 14:57:18 INFO SessionState: Created local directory: /tmp/muelleki
+17/06/23 14:57:18 INFO SessionState: Created local directory: /tmp/8b6c6fe1-5d40-4065-9788-393d277a88ef_resources
+17/06/23 14:57:18 INFO SessionState: Created HDFS directory: /tmp/hive/muelleki/8b6c6fe1-5d40-4065-9788-393d277a88ef
+17/06/23 14:57:18 INFO SessionState: Created local directory: /tmp/muelleki/8b6c6fe1-5d40-4065-9788-393d277a88ef
+17/06/23 14:57:18 INFO SessionState: Created HDFS directory: /tmp/hive/muelleki/8b6c6fe1-5d40-4065-9788-393d277a88ef/_tmp_space.db
+17/06/23 14:57:18 INFO HiveContext: default warehouse location is /user/hive/warehouse
+17/06/23 14:57:18 INFO HiveContext: Initializing HiveMetastoreConnection version 1.2.1 using Spark classes.
+17/06/23 14:57:18 INFO ClientWrapper: Inspected Hadoop version: 2.6.0
+17/06/23 14:57:18 INFO ClientWrapper: Loaded org.apache.hadoop.hive.shims.Hadoop23Shims for Hadoop version 2.6.0
+17/06/23 14:57:18 INFO HiveMetaStore: 0: Opening raw store with implemenation class:org.apache.hadoop.hive.metastore.ObjectStore
+17/06/23 14:57:18 INFO ObjectStore: ObjectStore, initialize called
+17/06/23 14:57:19 INFO Persistence: Property hive.metastore.integral.jdo.pushdown unknown - will be ignored
+17/06/23 14:57:19 INFO Persistence: Property datanucleus.cache.level2 unknown - will be ignored
+17/06/23 14:57:19 WARN Connection: BoneCP specified but not present in CLASSPATH (or one of dependencies)
+17/06/23 14:57:19 WARN Connection: BoneCP specified but not present in CLASSPATH (or one of dependencies)
+17/06/23 14:57:19 INFO ObjectStore: Setting MetaStore object pin classes with hive.metastore.cache.pinobjtypes="Table,StorageDescriptor,SerDeInfo,Partition,Database,Type,FieldSchema,Order"
+17/06/23 14:57:20 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MFieldSchema" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:20 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MOrder" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:20 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MFieldSchema" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:20 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MOrder" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:20 INFO MetaStoreDirectSql: Using direct SQL, underlying DB is DERBY
+17/06/23 14:57:20 INFO ObjectStore: Initialized ObjectStore
+17/06/23 14:57:20 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
+17/06/23 14:57:20 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
+17/06/23 14:57:21 INFO HiveMetaStore: Added admin role in metastore
+17/06/23 14:57:21 INFO HiveMetaStore: Added public role in metastore
+17/06/23 14:57:21 INFO HiveMetaStore: No user is added in admin role, since config is empty
+17/06/23 14:57:21 INFO HiveMetaStore: 0: get_all_databases
+17/06/23 14:57:21 INFO audit: ugi=muelleki	ip=unknown-ip-addr	cmd=get_all_databases	
+17/06/23 14:57:21 INFO HiveMetaStore: 0: get_functions: db=default pat=*
+17/06/23 14:57:21 INFO audit: ugi=muelleki	ip=unknown-ip-addr	cmd=get_functions: db=default pat=*	
+17/06/23 14:57:21 INFO Datastore: The class "org.apache.hadoop.hive.metastore.model.MResourceUri" is tagged as "embedded-only" so does not have its own datastore table.
+17/06/23 14:57:21 INFO SessionState: Created local directory: /tmp/61f168d6-0853-46e7-8b75-4767f5503c28_resources
+17/06/23 14:57:21 INFO SessionState: Created HDFS directory: /tmp/hive/muelleki/61f168d6-0853-46e7-8b75-4767f5503c28
+17/06/23 14:57:21 INFO SessionState: Created local directory: /tmp/muelleki/61f168d6-0853-46e7-8b75-4767f5503c28
+17/06/23 14:57:21 INFO SessionState: Created HDFS directory: /tmp/hive/muelleki/61f168d6-0853-46e7-8b75-4767f5503c28/_tmp_space.db
+17/06/23 14:57:31 INFO ParseDriver: Parsing command: CREATE TABLE new_df AS SELECT * FROM df WHERE u rlike '.*hello.*'
+17/06/23 14:57:32 INFO ParseDriver: Parse Completed
+17/06/23 14:57:32 INFO HiveMetaStore: 0: get_table : db=default tbl=df
+17/06/23 14:57:32 INFO audit: ugi=muelleki	ip=unknown-ip-addr	cmd=get_table : db=default tbl=df	
+17/06/23 14:57:43 INFO ParseDriver: Parsing command: SELECT 1
+17/06/23 14:57:43 INFO ParseDriver: Parse Completed
+17/06/23 14:57:43 INFO SparkContext: Starting job: collect at utils.scala:195
+17/06/23 14:57:43 INFO DAGScheduler: Got job 0 (collect at utils.scala:195) with 1 output partitions
+17/06/23 14:57:43 INFO DAGScheduler: Final stage: ResultStage 0 (collect at utils.scala:195)
+17/06/23 14:57:43 INFO DAGScheduler: Parents of final stage: List()
+17/06/23 14:57:43 INFO DAGScheduler: Missing parents: List()
+17/06/23 14:57:43 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[2] at collect at utils.scala:195), which has no missing parents
+17/06/23 14:57:43 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 4.7 KB, free 4.7 KB)
+17/06/23 14:57:43 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 2.7 KB, free 7.4 KB)
+17/06/23 14:57:43 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:35727 (size: 2.7 KB, free: 511.1 MB)
+17/06/23 14:57:43 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:1006
+17/06/23 14:57:43 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (MapPartitionsRDD[2] at collect at utils.scala:195)
+17/06/23 14:57:43 INFO TaskSchedulerImpl: Adding task set 0.0 with 1 tasks
+17/06/23 14:57:43 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, partition 0,PROCESS_LOCAL, 2535 bytes)
+17/06/23 14:57:43 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
+17/06/23 14:57:43 INFO Executor: Fetching http://127.0.0.1:39741/jars/univocity-parsers-1.5.1.jar with timestamp 1498222632411
+17/06/23 14:57:43 INFO Utils: Fetching http://127.0.0.1:39741/jars/univocity-parsers-1.5.1.jar to /tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/userFiles-fb90e0ef-1224-44a1-a472-a416ff27830d/fetchFileTemp8535681141781819418.tmp
+17/06/23 14:57:43 INFO Executor: Adding file:/tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/userFiles-fb90e0ef-1224-44a1-a472-a416ff27830d/univocity-parsers-1.5.1.jar to class loader
+17/06/23 14:57:43 INFO Executor: Fetching http://127.0.0.1:39741/jars/sparklyr-1.6-2.10.jar with timestamp 1498222632412
+17/06/23 14:57:43 INFO Utils: Fetching http://127.0.0.1:39741/jars/sparklyr-1.6-2.10.jar to /tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/userFiles-fb90e0ef-1224-44a1-a472-a416ff27830d/fetchFileTemp6988257835744908057.tmp
+17/06/23 14:57:43 INFO Executor: Adding file:/tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/userFiles-fb90e0ef-1224-44a1-a472-a416ff27830d/sparklyr-1.6-2.10.jar to class loader
+17/06/23 14:57:43 INFO Executor: Fetching http://127.0.0.1:39741/jars/spark-csv_2.11-1.3.0.jar with timestamp 1498222632410
+17/06/23 14:57:43 INFO Utils: Fetching http://127.0.0.1:39741/jars/spark-csv_2.11-1.3.0.jar to /tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/userFiles-fb90e0ef-1224-44a1-a472-a416ff27830d/fetchFileTemp3953390855796001920.tmp
+17/06/23 14:57:43 INFO Executor: Adding file:/tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/userFiles-fb90e0ef-1224-44a1-a472-a416ff27830d/spark-csv_2.11-1.3.0.jar to class loader
+17/06/23 14:57:43 INFO Executor: Fetching http://127.0.0.1:39741/jars/commons-csv-1.1.jar with timestamp 1498222632411
+17/06/23 14:57:43 INFO Utils: Fetching http://127.0.0.1:39741/jars/commons-csv-1.1.jar to /tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/userFiles-fb90e0ef-1224-44a1-a472-a416ff27830d/fetchFileTemp4765010594823292181.tmp
+17/06/23 14:57:43 INFO Executor: Adding file:/tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/userFiles-fb90e0ef-1224-44a1-a472-a416ff27830d/commons-csv-1.1.jar to class loader
+17/06/23 14:57:44 INFO GenerateUnsafeProjection: Code generated in 81.366073 ms
+17/06/23 14:57:44 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1306 bytes result sent to driver
+17/06/23 14:57:44 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 216 ms on localhost (1/1)
+17/06/23 14:57:44 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+17/06/23 14:57:44 INFO DAGScheduler: ResultStage 0 (collect at utils.scala:195) finished in 0.226 s
+17/06/23 14:57:44 INFO DAGScheduler: Job 0 finished: collect at utils.scala:195, took 0.318829 s
+17/06/23 14:58:11 INFO ParseDriver: Parsing command: CREATE TABLE a AS SELECT 1 AS a
+17/06/23 14:58:11 INFO ParseDriver: Parse Completed
+17/06/23 14:58:11 INFO HiveMetaStore: 0: get_table : db=default tbl=a
+17/06/23 14:58:11 INFO audit: ugi=muelleki	ip=unknown-ip-addr	cmd=get_table : db=default tbl=a	
+17/06/23 14:58:12 INFO HiveMetaStore: 0: create_table: Table(tableName:a, dbName:default, owner:muelleki, createTime:1498222692, lastAccessTime:0, retention:0, sd:StorageDescriptor(cols:[FieldSchema(name:a, type:int, comment:null)], location:null, inputFormat:org.apache.hadoop.mapred.TextInputFormat, outputFormat:org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat, compressed:false, numBuckets:-1, serdeInfo:SerDeInfo(name:null, serializationLib:org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, parameters:{serialization.format=1}), bucketCols:[], sortCols:[], parameters:{}, skewedInfo:SkewedInfo(skewedColNames:[], skewedColValues:[], skewedColValueLocationMaps:{})), partitionKeys:[], parameters:{}, viewOriginalText:null, viewExpandedText:null, tableType:MANAGED_TABLE, privileges:PrincipalPrivilegeSet(userPrivileges:{}, groupPrivileges:null, rolePrivileges:null))
+17/06/23 14:58:12 INFO audit: ugi=muelleki	ip=unknown-ip-addr	cmd=create_table: Table(tableName:a, dbName:default, owner:muelleki, createTime:1498222692, lastAccessTime:0, retention:0, sd:StorageDescriptor(cols:[FieldSchema(name:a, type:int, comment:null)], location:null, inputFormat:org.apache.hadoop.mapred.TextInputFormat, outputFormat:org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat, compressed:false, numBuckets:-1, serdeInfo:SerDeInfo(name:null, serializationLib:org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, parameters:{serialization.format=1}), bucketCols:[], sortCols:[], parameters:{}, skewedInfo:SkewedInfo(skewedColNames:[], skewedColValues:[], skewedColValueLocationMaps:{})), partitionKeys:[], parameters:{}, viewOriginalText:null, viewExpandedText:null, tableType:MANAGED_TABLE, privileges:PrincipalPrivilegeSet(userPrivileges:{}, groupPrivileges:null, rolePrivileges:null))	
+17/06/23 14:58:12 INFO FileUtils: Creating directory if it doesn't exist: file:/user/hive/warehouse/a
+17/06/23 15:27:12 INFO BlockManagerInfo: Removed broadcast_0_piece0 on localhost:35727 in memory (size: 2.7 KB, free: 511.1 MB)
+17/06/23 15:27:12 INFO ContextCleaner: Cleaned accumulator 3
+17/06/23 15:51:35 INFO SparkContext: Invoking stop() from shutdown hook
+17/06/23 15:51:35 INFO SparkUI: Stopped Spark web UI at http://127.0.0.1:4040
+17/06/23 15:51:35 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+17/06/23 15:51:35 INFO MemoryStore: MemoryStore cleared
+17/06/23 15:51:35 INFO BlockManager: BlockManager stopped
+17/06/23 15:51:35 INFO BlockManagerMaster: BlockManagerMaster stopped
+17/06/23 15:51:35 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+17/06/23 15:51:35 INFO SparkContext: Successfully stopped SparkContext
+17/06/23 15:51:35 INFO ShutdownHookManager: Shutdown hook called
+17/06/23 15:51:35 INFO RemoteActorRefProvider$RemotingTerminator: Shutting down remote daemon.
+17/06/23 15:51:35 INFO ShutdownHookManager: Deleting directory /tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212
+17/06/23 15:51:35 INFO ShutdownHookManager: Deleting directory /tmp/spark-eb798167-4372-4f35-8bb7-2fbdcf3fc807
+17/06/23 15:51:35 INFO RemoteActorRefProvider$RemotingTerminator: Remote daemon shut down; proceeding with flushing remote transports.
+17/06/23 15:51:35 INFO ShutdownHookManager: Deleting directory /tmp/spark-4f8a42c0-4e89-4860-bc01-893ad3442212/httpd-7d9ae7e3-2484-4c55-b7f5-07d25d13cbea
