@@ -6,11 +6,10 @@
 #' @param write_tree Whether or not to write tree.
 #' @keywords internal
 set_arg_write_tree <- function(write_tree) {
-  sufficient_version <- getRversion() >= 3.2
   if (is.na(write_tree)) {
-    write_tree <- ifelse(sufficient_version, TRUE, FALSE)
-  } else if (!sufficient_version && write_tree) {
-    stop_insufficient_r_version()
+    write_tree <- ifelse(is_installed("data.tree"), TRUE, FALSE)
+  } else if (write_tree) {
+    assert_data.tree_installation()
   }
   write_tree
 }

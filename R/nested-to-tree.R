@@ -29,7 +29,7 @@ create_tree_from_pd_with_default_style_attributes <- function(pd, structure_only
 #'   to check whether two structures are identical.
 #' @return An object of class "Node" and "R6".
 #' @examples
-#' if (getRversion() >= 3.2) {
+#' if (rlang::is_installed("data.tree")) {
 #'   code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
 #'   nested_pd <- styler:::compute_parse_data_nested(code)
 #'   initialized <- styler:::pre_visit(nested_pd, c(default_style_guide_attributes))
@@ -37,7 +37,7 @@ create_tree_from_pd_with_default_style_attributes <- function(pd, structure_only
 #' }
 #' @keywords internal
 create_node_from_nested_root <- function(pd_nested, structure_only) {
-  if (getRversion() < 3.2) stop_insufficient_r_version()
+  assert_data.tree_installation()
   n <- data.tree::Node$new(ifelse(
     structure_only, "Hierarchical structure",
     "ROOT (token: short_text [lag_newlines/spaces] {pos_id})"
