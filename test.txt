@@ -1,0 +1,24 @@
+# A tibble: 1 x 13
+spaces newlines    short line1  col1 line2  col2    id parent token terminal
+<int>    <int>    <chr> <int> <int> <int> <int> <int>  <int> <chr>    <lgl>
+  1      0        0 "f(\n1,"     1     1     3     2    21      0  expr    FALSE
+|
+|
+    # A tibble: 8 x 13
+      spaces newlines short line1  col1 line2  col2    id parent token terminal
+       <int>    <int> <chr> <int> <int> <int> <int> <int>  <int> <chr>    <lgl>
+    1      0        0     f     1     1     1     1     3     21  expr    FALSE
+        # A tibble: 1 x 13
+          spaces newlines short line1  col1 line2  col2    id parent                token
+           <int>    <int> <chr> <int> <int> <int> <int> <int>  <int>                <chr>
+        1      0        0     f     1     1     1     1     1      3 SYMBOL_FUNCTION_CALL
+        # ... with 3 more variables: terminal <lgl>, text <chr>, child <list>
+
+    2      0        1     (     1     2     1     2     2     21   '('     TRUE
+    3      0        0     1     2     1     2     1     6     21  expr    FALSE
+    4      1        0     ,     2     2     2     2     7     21   ','     TRUE
+    5      0        0     2     2     4     2     4    11     21  expr    FALSE
+    6      0        1     ,     2     5     2     5    12     21   ','     TRUE
+    7      0        0     3     3     1     3     1    17     21  expr    FALSE
+    8      0        0     )     3     2     3     2    18     21   ')'     TRUE
+    # ... with 2 more variables: child <list>, text <chr>
