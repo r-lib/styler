@@ -90,7 +90,7 @@ prettify_pkg <- function(transformers,
 
   if ("\\.r" %in% filetype) {
     r_files <- dir(
-      path = c("R", "tests", "data-raw"), pattern = "\\.r$",
+      path = c("R", "tests", "data-raw", "demo"), pattern = "\\.r$",
       ignore.case = TRUE, recursive = TRUE, full.names = TRUE
     )
   }
