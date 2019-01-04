@@ -16,7 +16,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' st [1/0] {15}                                             
  ¦--COMMENT: #' fi [1/0] {16}                                             
  ¦--COMMENT: #' st [1/0] {17}                                             
- ¦--COMMENT: #' en [1/0] {18}                                             
+ ¦--COMMENT: #' xf [1/0] {18}                                             
  ¦--COMMENT: #' \d [1/0] {19}                                            
  ¦--COMMENT: #' \d [1/0] {20}                                            
  ¦--COMMENT: #' {  [1/0] {21}                                             

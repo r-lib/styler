@@ -110,6 +110,13 @@ transform_and_check <- function(in_item, out_item,
   transformed_text <- read_in %>%
     transformer(...) %>%
     unclass()
+  if (!file.exists(out_item)) {
+    warning(
+      "File ", out_item, " does not exist. Creating it from transormation.",
+      call. = FALSE, immediate. = TRUE
+    )
+    file.create(out_item)
+  }
   transformed <- transform_utf8(
     out_item,
     function(x) transformed_text,
