@@ -70,4 +70,9 @@ test_that("analogous to test-roxygen-examples-complete", {
     "roxygen-examples-complete", "^10",
     transformer = style_text
   ), NA)
+
+  expect_warning(test_collection(
+    "roxygen-examples-complete", "^15",
+    transformer = style_text, scope = "spaces"
+  ), NA)
 })

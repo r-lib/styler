@@ -17,7 +17,7 @@ remove_blank_lines <- function(code) {
 }
 
 remove_roxygen_mask <- function(text) {
-  code_with_header <- gsub(pattern = "^#'\\s*", "", text)
+  code_with_header <- gsub(pattern = "^#'\\s?", "", text)
   remove_roxygen_header(code_with_header)
 }
 
