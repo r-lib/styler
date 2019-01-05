@@ -24,6 +24,19 @@ test_that("while / for / if without curly brackets", {
                                  transformer = style_text, strict = FALSE), NA)
 })
 
+
+test_that("nested for and indention", {
+  expect_warning(test_collection("indention_operators",
+                                 "nested-for-spacing-scope-indention",
+                                 transformer = style_text, scope = "indention"),
+                                 NA)
+
+  expect_warning(test_collection("indention_operators",
+                                 "nested-for-spacing-scope-spaces",
+                                 transformer = style_text, scope = "spaces"),
+                                 NA)
+})
+
 test_that("logical, special EQ_SUB and EQ_ASSIGN tokens are indented correctly", {
   expect_warning(test_collection("indention_operators",
                                  "logical_special",

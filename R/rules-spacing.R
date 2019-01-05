@@ -185,7 +185,7 @@ set_space_between_levels <- function(pd_flat) {
     index <- pd_flat$token == "')'" & pd_flat$newlines == 0L
     pd_flat$spaces[index] <- 1L
   } else if (pd_flat$token[1] == "FOR") {
-    index <- 2
+    index <- pd_flat$token == "forcond" & pd_flat$newlines == 0
     pd_flat$spaces[index] <- 1L
   }
   pd_flat
