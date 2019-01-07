@@ -11,7 +11,7 @@ adapts to changes in the R parser committed into R devel (#419).
   returns syntax-highlighted code by default, controllable via the option 
   `styler.colored_print.vertical` (#417).
 * the README was redesigned (#413).
-* semi-colon expression that contained multiple assignments was fixed(#404).
+* semi-colon expression that contained multiple assignments was fixed (#404).
 
 ## Minor Changes
 
@@ -23,11 +23,11 @@ adapts to changes in the R parser committed into R devel (#419).
 * move rule that turns single quotes into double quotes to token modifier in
   `tidyverse_style_guide() (#406).
 * remove line-breaks before commas (#405).
-* removed package dependency enc in favour of xfun (#442).
+* removed package dependency enc in favor of xfun (#442).
 
 Thanks to all contributors for patches, issues and the like:
 @jonmcalder, @krlmlr, @IndrajeetPatil, @kalibera, @Hasnep, @kiranmaiganji, 
-@dirkschumacher, @ClaytonJY, @wlandau, @maurolepore, 
+@dirkschumacher, @ClaytonJY, @wlandau, @maurolepore
 
 # styler 1.0.2
 
