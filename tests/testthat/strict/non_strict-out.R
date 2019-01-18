@@ -4,6 +4,18 @@ test <- function() {
   "even if the string contains an escaped ' single quote"
   'but not if it contains a "double quote'
 
+  "multi-line quotes
+  remain multi-line
+  "
+
+  "That also holds true
+  if
+  single quotes are used
+  ."
+
+  "strings with embeded
+line breaks are unfortunately split"
+
   # Comments are always preserved
 
   function_calls(get_spaces = around_equal)
