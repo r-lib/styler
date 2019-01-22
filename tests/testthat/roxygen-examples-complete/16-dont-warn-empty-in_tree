@@ -1,0 +1,16 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--COMMENT: #' Do [0/0] {1}                           
+ ¦--COMMENT: #' [1/0] {2}                              
+ ¦--COMMENT: #' So [1/0] {3}                           
+ ¦--COMMENT: #' @e [1/0] {4}                           
+ ¦--COMMENT: #' g( [1/0] {5}                           
+ ¦--COMMENT: #' \d [1/0] {6}                          
+ ¦--COMMENT: #' f( [1/0] {7}                           
+ ¦--COMMENT: #' } [1/0] {8}                            
+ ¦--COMMENT: #' [1/0] {9}                              
+ ¦--COMMENT: #' @e [1/0] {10}                          
+ °--expr:  [1/0] {11}                                  
+     ¦--expr:  [0/0] {13}                              
+     ¦   °--SYMBOL_FUNCTION_CALL: g [0/0] {12}         
+     ¦--'(': ( [0/0] {14}                              
+     °--')': ) [0/0] {15}                              

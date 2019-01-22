@@ -20,10 +20,11 @@ NULL
 #'   `strict = TRUE`.
 #' @keywords internal
 style_active_file <- function() {
-  transformer <- make_transformer(tidyverse_style(),
-    include_roxygen_examples = TRUE
-  )
   context <- get_rstudio_context()
+  transformer <- make_transformer(tidyverse_style(),
+    include_roxygen_examples = TRUE, warn_empty = is_plain_r_file(context$path)
+  )
+
   if (is_rmd_file(context$path)) {
     out <- transform_mixed(context$contents, transformer, filetype = "Rmd")
   } else if (is_rnw_file(context$path)) {
