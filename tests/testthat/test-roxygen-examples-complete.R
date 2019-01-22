@@ -75,4 +75,10 @@ test_that("analogous to test-roxygen-examples-complete", {
     "roxygen-examples-complete", "^15",
     transformer = style_text, scope = "spaces"
   ), NA)
+
+  # Don't warn about empty strings in roxygen comments
+  expect_warning(test_collection(
+    "roxygen-examples-complete", "^16",
+    transformer = style_text
+  ), NA)
 })

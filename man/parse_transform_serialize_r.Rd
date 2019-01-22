@@ -4,12 +4,15 @@
 \alias{parse_transform_serialize_r}
 \title{Parse, transform and serialize text}
 \usage{
-parse_transform_serialize_r(text, transformers)
+parse_transform_serialize_r(text, transformers, warn_empty = TRUE)
 }
 \arguments{
 \item{text}{A character vector to parse.}
 
 \item{transformers}{A list of \emph{named} transformer functions}
+
+\item{warn_empty}{Whether or not a warning should be displayed when \code{text}
+does not contain any tokens.}
 }
 \description{
 Wrapper function for the common three operations.

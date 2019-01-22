@@ -69,13 +69,14 @@ transform_file <- function(path,
 #'   parse tables.
 #' @param include_roxygen_examples Whether or not to style code in roxygen
 #'   examples.
+#' @inheritParams parse_transform_serialize_r
 #' @keywords internal
 #' @importFrom purrr when
-make_transformer <- function(transformers, include_roxygen_examples) {
+make_transformer <- function(transformers, include_roxygen_examples, warn_empty = TRUE) {
   force(transformers)
   function(text) {
     transformed_code <- text %>%
-      parse_transform_serialize_r(transformers) %>%
+      parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
       when(
         include_roxygen_examples ~
         parse_transform_serialize_roxygen(., transformers),
@@ -151,19 +152,23 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' Parse, transform and serialize text
 #'
 #' Wrapper function for the common three operations.
+#' @param warn_empty Whether or not a warning should be displayed when `text`
+#'   does not contain any tokens.
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams apply_transformers
 #' @seealso [parse_transform_serialize_roxygen()]
 #' @keywords internal
-parse_transform_serialize_r <- function(text, transformers) {
+parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text)
   start_line <- find_start_line(pd_nested)
   if (nrow(pd_nested) == 0) {
-    warning(
-      "Text to style did not contain any tokens. Returning empty string.",
-      call. = FALSE
-    )
+    if (warn_empty) {
+      warning(
+        "Text to style did not contain any tokens. Returning empty string.",
+        call. = FALSE
+      )
+    }
     return("")
   }
   transformed_pd <- apply_transformers(pd_nested, transformers)
