@@ -9,7 +9,10 @@
 identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
   starts <- grep("^#'\\s*@examples", text, perl = TRUE)
   stop_candidates <- grep("^[^#]|^#'\\s*@", text, perl = TRUE)
-  stops <- map_int(starts, match_stop_to_start, stop_candidates)
+  stops <- map(starts, match_stop_to_start, stop_candidates) %>%
+    flatten_int()
+  if (length(stops) < 1L) return(integer())
+
   map2(starts, stops, seq2)
 }
 
@@ -25,7 +28,12 @@ identify_start_to_stop_of_roxygen_examples <- function(path) {
 #' styler:::match_stop_to_start(1, c(3, 4, 5))
 #' @keywords internal
 match_stop_to_start <- function(start, stop_candidates) {
-  min(stop_candidates[stop_candidates > start]) - 1L
+  is_stop_candidate <- stop_candidates > start
+  if (any(is_stop_candidate)) {
+    min(stop_candidates[is_stop_candidate]) - 1L
+  } else {
+    integer()
+  }
 }
 
 #' Find dontrun and friend sequences
