@@ -80,5 +80,15 @@ test_that("analogous to test-roxygen-examples-complete", {
   expect_warning(test_collection(
     "roxygen-examples-complete", "^16",
     transformer = style_text
+  ), NA)  
+
+  expect_warning(test_collection(
+    "roxygen-examples-complete", "^17",
+    transformer = style_text
+  ), NA)
+
+  expect_warning(test_collection(
+    "roxygen-examples-complete", "^18",
+    transformer = style_text
   ), NA)
 })
