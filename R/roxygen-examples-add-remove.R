@@ -34,7 +34,8 @@ remove_roxygen_header <- function(text) {
   c(text[1][!starts_with_blank], text[-1])
 }
 
-#' @importFrom purrr map_chr
+#' @importFrom purrr map2_chr
 add_roxygen_mask <- function(text) {
-  c(paste0("#' @examples"), map_chr(text, ~ paste0("#' ", .x)))
+  space <- ifelse(text == "", "", " ")
+  c(paste0("#' @examples"), map2_chr(space, text, ~ paste0("#'", .x, .y)))
 }

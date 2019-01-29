@@ -5,23 +5,23 @@
 #'   conveniently constructed using [specify_reindention()].
 #' @examples
 #' # empty
-#' 
-#' 
+#'
+#'
 #' # two
-#' 
-#' 
-#' 
-#' 
+#'
+#'
+#'
+#'
 #' # more
 #' a <- 3
 #' # a comment
 #' \dontrun{
 #' x
-#' 
+#'
 #' y # hi
-#' 
+#'
 #' # more
-#' 
+#'
 #' a <- 3
 #' }
 #' @importFrom purrr compact
