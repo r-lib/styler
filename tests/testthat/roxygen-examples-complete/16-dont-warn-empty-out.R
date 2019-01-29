@@ -6,6 +6,6 @@
 #' \dontrun{
 #' f(x)
 #' }
-#' 
+#'
 #' @export
 g()

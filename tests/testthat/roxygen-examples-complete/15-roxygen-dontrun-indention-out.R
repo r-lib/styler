@@ -16,7 +16,7 @@
 #' }
 #' if (TRUE)
 #'   return(X)
-#' 
+#'
 #' if (TRUE)
 #' return(X)
 #' if (TRUE)
