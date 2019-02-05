@@ -109,7 +109,7 @@ prompt_style <- function() {
       current_style
     )
   if (!is.null(new_style)) {
-    options(styler.addins.style = style_name)
+    options(styler.addins.style = new_style)
   }
   invisible(current_style)
 }
