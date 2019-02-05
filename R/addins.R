@@ -97,35 +97,8 @@ get_rstudio_context <- function() {
   rstudioapi::getActiveDocumentContext()
 }
 
-
-# Dedicated binding for package styling addin. Simple wrapper calling style_pkg
-# with the selected addins style.
-style_package <- function() {
-  communicate_addins_style()
-  style_pkg(style = get_addins_style_fun())
-}
-
-
-# `match.fun`-like utility covering "ns::name".
-exported_value_rx <- "^([^:]+)::([^:]+)$"
-is_exported_value <- function(x) {
-  rlang::is_scalar_character(x) && grepl(exported_value_rx, x)
-}
-extract_exported_ns <- function(x) {
-  sub(exported_value_rx, "\\1", x)
-}
-extract_exported_name <- function(x) {
-  sub(exported_value_rx, "\\2", x)
-}
 match_fun <- function(x) {
-  if (is_exported_value(x)) {
-    x <-
-      getExportedValue(
-        extract_exported_ns(x),
-        extract_exported_name(x)
-      )
-  }
-  match.fun(x)
+  eval(parse(text = x))
 }
 
 # Binding for style-setting addin.
