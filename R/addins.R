@@ -97,9 +97,11 @@ get_rstudio_context <- function() {
   rstudioapi::getActiveDocumentContext()
 }
 
-# Binding for style-setting addin.
+#' Ask the user to supply a style
+#'
+#' @keywords internal
 prompt_style <- function() {
-  current_style <- get_addins_style()
+  current_style <- get_addins_style_name()
   new_style <-
     rstudioapi::showPrompt(
       "Select a style",
@@ -112,19 +114,23 @@ prompt_style <- function() {
   invisible(current_style)
 }
 
-get_addins_style <- function() {
+#' Return the style function or name
+#'
+#' @keywords internal
+get_addins_style_name <- function() {
   getOption(
     "styler.addins.style",
     default = "styler::tidyverse_style"
   )
 }
 
+#' @rdname get_addins_style_name
+#' @keywords internal
 get_addins_style_fun <- function() {
-  eval(parse(text = get_addins_style()))
+  eval(parse(text = get_addins_style_name()))
 }
 
-# How the addins communicate the style being used.
 communicate_addins_style <- function() {
-  style_name <- get_addins_style()
+  style_name <- get_addins_style_name()
   cat("Using style `", style_name, "`\n", sep = "")
 }
