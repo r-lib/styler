@@ -119,7 +119,6 @@ prompt_style <- function() {
 # Set/get style used by the addins.
 set_addins_style <- function(style_name) {
   # match_fun ensures the provided name is a valid function
-  invisible(match_fun(style_name))
   options(
     styler.addins.style = style_name
   )
