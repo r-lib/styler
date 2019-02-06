@@ -118,10 +118,7 @@ prompt_style <- function() {
 #'
 #' @keywords internal
 get_addins_style_name <- function() {
-  getOption(
-    "styler.addins.style",
-    default = "styler::tidyverse_style"
-  )
+  getOption("styler.addins.style", default = "styler::tidyverse_style")
 }
 
 #' @rdname get_addins_style_name
