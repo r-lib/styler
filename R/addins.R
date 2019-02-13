@@ -108,8 +108,14 @@ prompt_style <- function() {
       "Enter the name of a style function, e.g. `styler::tidyverse_style`",
       current_style
     )
-  if (!is.null(new_style)) {
+  parsed_new_style <- tryCatch(
+    eval(parse(text = new_style)),
+    error = function(e) e
+  )
+  if (inherits(parsed_new_style, "function")) {
     options(styler.addins.style = new_style)
+  } else {
+    stop("The selected style \"", quote(new_style), "\" is not a function.")
   }
   invisible(current_style)
 }
