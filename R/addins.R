@@ -97,77 +97,45 @@ get_rstudio_context <- function() {
   rstudioapi::getActiveDocumentContext()
 }
 
-
-# Dedicated binding for package styling addin. Simple wrapper calling style_pkg
-# with the selected addins style.
-style_package <- function() {
-  communicate_addins_style()
-  style_pkg(style = get_addins_style_fun())
-}
-
-
-# `match.fun`-like utility covering "ns::name".
-exported_value_rx <- "^([^:]+)::([^:]+)$"
-is_exported_value <- function(x) {
-  rlang::is_scalar_character(x) && grepl(exported_value_rx, x)
-}
-extract_exported_ns <- function(x) {
-  sub(exported_value_rx, "\\1", x)
-}
-extract_exported_name <- function(x) {
-  sub(exported_value_rx, "\\2", x)
-}
-match_fun <- function(x) {
-  if (is_exported_value(x)) {
-    x <-
-      getExportedValue(
-        extract_exported_ns(x),
-        extract_exported_name(x)
-      )
-  }
-  match.fun(x)
-}
-
-# Binding for style-setting addin.
+#' Ask the user to supply a style
+#'
+#' @keywords internal
 prompt_style <- function() {
-  current_style <- get_addins_style()
+  current_style <- get_addins_style_name()
   new_style <-
     rstudioapi::showPrompt(
       "Select a style",
       "Enter the name of a style function, e.g. `styler::tidyverse_style`",
       current_style
     )
-  if (!is.null(new_style)) {
-    set_addins_style(new_style)
+  parsed_new_style <- tryCatch(
+    eval(parse(text = new_style)),
+    error = function(e) {
+      stop("The selected style \"", new_style, "\" is not valid: ", e$message)
+    }
+  )
+  if (inherits(parsed_new_style, "function")) {
+    options(styler.addins.style = new_style)
+  } else {
+    stop("The selected style \"", new_style, "\" is not a function.")
   }
   invisible(current_style)
 }
 
-# Set/get style used by the addins.
-set_addins_style <- function(style_name) {
-  # match_fun ensures the provided name is a valid function
-  invisible(match_fun(style_name))
-  options(
-    styler.addins.style = style_name
-  )
+#' Return the style function or name
+#'
+#' @keywords internal
+get_addins_style_name <- function() {
+  getOption("styler.addins.style", default = "styler::tidyverse_style")
 }
 
-get_addins_style <- function() {
-  # `default` could be an environment variable
-  getOption(
-    "styler.addins.style",
-    default = "styler::tidyverse_style"
-  )
-}
-
+#' @rdname get_addins_style_name
+#' @keywords internal
 get_addins_style_fun <- function() {
-  match_fun(
-    get_addins_style()
-  )
+  eval(parse(text = get_addins_style_name()))
 }
 
-# How the addins communicate the style being used.
 communicate_addins_style <- function() {
-  style_name <- get_addins_style()
+  style_name <- get_addins_style_name()
   cat("Using style `", style_name, "`\n", sep = "")
 }

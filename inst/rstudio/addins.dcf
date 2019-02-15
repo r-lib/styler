@@ -3,11 +3,6 @@ Description: Prompt for and set the style used by all STYLER addins
 Binding: prompt_style
 Interactive: true
 
-Name: Style package
-Description: Pretty-print package source code
-Binding: style_package
-Interactive: true
-
 Name: Style active file
 Description: Pretty-print active file
 Binding: style_active_file
