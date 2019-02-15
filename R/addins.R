@@ -115,7 +115,7 @@ prompt_style <- function() {
   if (inherits(parsed_new_style, "function")) {
     options(styler.addins.style = new_style)
   } else {
-    stop("The selected style \"", quote(new_style), "\" is not a function.")
+    stop("The selected style \"", new_style, "\" is not a function.")
   }
   invisible(current_style)
 }
