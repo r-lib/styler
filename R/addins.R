@@ -110,7 +110,9 @@ prompt_style <- function() {
     )
   parsed_new_style <- tryCatch(
     eval(parse(text = new_style)),
-    error = function(e) e
+    error = function(e) {
+      stop("The selected style \"", new_style, "\" is not valid: ", e$message)
+    }
   )
   if (inherits(parsed_new_style, "function")) {
     options(styler.addins.style = new_style)
