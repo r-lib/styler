@@ -20,8 +20,9 @@ NULL
 #'   `strict = TRUE`.
 #' @keywords internal
 style_active_file <- function() {
+  communicate_addins_style()
   context <- get_rstudio_context()
-  transformer <- make_transformer(tidyverse_style(),
+  transformer <- make_transformer(get_addins_style_fun()(),
     include_roxygen_examples = TRUE, warn_empty = is_plain_r_file(context$path)
   )
 
@@ -78,10 +79,11 @@ try_transform_as_r_file <- function(context, transformer) {
 #'   `.Rmd` file.
 #' @keywords internal
 style_selection <- function() {
+  communicate_addins_style()
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
   if (all(nchar(text) == 0)) stop("No code selected")
-  out <- style_text(text)
+  out <- style_text(text, style = get_addins_style_fun())
   rstudioapi::modifyRange(
     context$selection[[1]]$range, paste0(out, collapse = "\n"),
     id = context$id
@@ -93,4 +95,47 @@ style_selection <- function() {
 
 get_rstudio_context <- function() {
   rstudioapi::getActiveDocumentContext()
+}
+
+#' Ask the user to supply a style
+#'
+#' @keywords internal
+prompt_style <- function() {
+  current_style <- get_addins_style_name()
+  new_style <-
+    rstudioapi::showPrompt(
+      "Select a style",
+      "Enter the name of a style function, e.g. `styler::tidyverse_style`",
+      current_style
+    )
+  parsed_new_style <- tryCatch(
+    eval(parse(text = new_style)),
+    error = function(e) {
+      stop("The selected style \"", new_style, "\" is not valid: ", e$message)
+    }
+  )
+  if (inherits(parsed_new_style, "function")) {
+    options(styler.addins.style = new_style)
+  } else {
+    stop("The selected style \"", new_style, "\" is not a function.")
+  }
+  invisible(current_style)
+}
+
+#' Return the style function or name
+#'
+#' @keywords internal
+get_addins_style_name <- function() {
+  getOption("styler.addins.style", default = "styler::tidyverse_style")
+}
+
+#' @rdname get_addins_style_name
+#' @keywords internal
+get_addins_style_fun <- function() {
+  eval(parse(text = get_addins_style_name()))
+}
+
+communicate_addins_style <- function() {
+  style_name <- get_addins_style_name()
+  cat("Using style `", style_name, "`\n", sep = "")
 }

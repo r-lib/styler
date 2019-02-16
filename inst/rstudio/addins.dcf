@@ -1,6 +1,6 @@
-Name: Style package
-Description: Pretty-print package source code
-Binding: style_pkg
+Name: Set style
+Description: Prompt for and set the style used by all STYLER addins
+Binding: prompt_style
 Interactive: true
 
 Name: Style active file
