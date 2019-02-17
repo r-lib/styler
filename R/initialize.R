@@ -84,11 +84,12 @@ initialize_indent <- function(pd_flat) {
   pd_flat
 }
 
+#' @importFrom rlang abort
 #' @describeIn initialize_attributes validates the parse data.
 #' @keywords internal
 validate_parse_data <- function(pd_flat) {
   if (any(pd_flat$spaces < 0L)) {
-    stop("Invalid parse data")
+    abort("Invalid parse data")
   }
   pd_flat
 }

@@ -283,13 +283,13 @@ tidyverse_reindention <- function() {
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
 #' @keywords internal
+#' @importFrom rlang abort
 character_to_ordered <- function(x, levels, name = substitute(x)) {
   if (!all((x %in% levels))) {
-    stop(
+    abort(paste0(
       "all values in ", name, " must be one of the following: ",
       paste(levels, collapse = ", "),
-      call. = FALSE
-    )
+    ))
   }
   factor(x, levels = levels, ordered = TRUE)
 }
