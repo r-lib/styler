@@ -68,7 +68,7 @@ assert_text <- function(text) {
 assert_tokens <- function(tokens) {
   invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
   if (length(invalid_tokens) > 0) {
-    abport(paste0(
+    abort(paste0(
       "Token(s) ", paste0(invalid_tokens, collapse = ", "), " are invalid. ",
       "You can lookup all valid tokens and their text ",
       "with styler:::lookup_tokens(). Make sure you supply the values of ",

@@ -13,9 +13,10 @@ transform_utf8 <- function(path, fun, write_back = TRUE) {
     set_names(path)
 }
 
+#' @importFrom rlang with_handlers warn
 transform_utf8_one <- function(path, fun, write_back = write_back) {
   old <- xfun::read_utf8(path)
-  tryCatch({
+  with_handlers({
     new <- fun(old)
     if (write_back) {
       xfun::write_utf8(new, path)

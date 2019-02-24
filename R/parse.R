@@ -6,7 +6,7 @@
 #' already.
 #' @param text Text to parse.
 #' @param ... Parameters passed to [base::parse()]
-#' @importFrom rlang abort warn
+#' @importFrom rlang abort with_handlers warn
 #' @keywords internal
 #' @examples
 #' \dontrun{
@@ -17,7 +17,8 @@
 #' }
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
-  tried_parsing <- tryCatch(parse(text = text, ...),
+  tried_parsing <- with_handlers(
+    parse(text = text, ...),
     error = function(e) e,
     warning = function(w) w
   )

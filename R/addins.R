@@ -56,9 +56,10 @@ style_active_file <- function() {
 #' @param context The context from `styler:::get_rstudio_context()`.
 #' @param transformer A transformer function most conveniently constructed with
 #'   [make_transformer()].
+#' @importFrom rlang with_handlers abort
 #' @keywords internal
 try_transform_as_r_file <- function(context, transformer) {
-  tryCatch(
+  with_handlers(
     transformer(context$contents),
     error = function(e) {
       preamble_for_unsaved <- paste(
@@ -68,9 +69,9 @@ try_transform_as_r_file <- function(context, transformer) {
       )
 
       if (context$path == "") {
-        abort(paste0(preamble_for_unsaved, "The error was \n", e))
+        abort(paste0(preamble_for_unsaved, "The error was \n", e$message))
       } else {
-        abort(e)
+        abort(e$message)
       }
     }
   )
@@ -103,6 +104,7 @@ get_rstudio_context <- function() {
 #'
 #' @importFrom rlang abort
 #' @keywords internal
+#' @importFrom rlang with_handlers abort
 prompt_style <- function() {
   current_style <- get_addins_style_name()
   new_style <-
@@ -111,7 +113,7 @@ prompt_style <- function() {
       "Enter the name of a style function, e.g. `styler::tidyverse_style`",
       current_style
     )
-  parsed_new_style <- tryCatch(
+  parsed_new_style <- with_handlers(
     eval(parse(text = new_style)),
     error = function(e) {
       abort(paste0("The selected style \"", new_style, "\" is not valid: ", e$message))
@@ -120,7 +122,7 @@ prompt_style <- function() {
   if (inherits(parsed_new_style, "function")) {
     options(styler.addins.style = new_style)
   } else {
-    abort(paste0("The selected style \"", new_style, "\" is not a function."))
+    stop("The selected style \"", new_style, "\" is not a function.")
   }
   invisible(current_style)
 }
