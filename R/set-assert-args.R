@@ -40,7 +40,7 @@ set_and_assert_arg_filetype <- function(filetype) {
 assert_filetype <- function(lowercase_filetype) {
   if (!all(lowercase_filetype %in% c("r", "rmd", "rnw"))) {
     abort(paste(
-      "filetype must not contain other values than 'R'",
+      "filetype must not contain other values than 'R',",
       "'Rmd' or 'Rnw' (case is ignored)."
     ))
   }
@@ -68,10 +68,10 @@ assert_text <- function(text) {
 assert_tokens <- function(tokens) {
   invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
   if (length(invalid_tokens) > 0) {
-    abort(paste0(
-      "Token(s) ", paste0(invalid_tokens, collapse = ", "), " are invalid. ",
-      "You can lookup all valid tokens and their text ",
-      "with styler:::lookup_tokens(). Make sure you supply the values of ",
+    abort(paste(
+      "Token(s)", paste0(invalid_tokens, collapse = ", "), "are invalid.",
+      "You can lookup all valid tokens and their text",
+      "with styler:::lookup_tokens(). Make sure you supply the values of",
       "the column 'token', not 'text'."
     ))
   }

@@ -69,7 +69,7 @@ try_transform_as_r_file <- function(context, transformer) {
       )
 
       if (context$path == "") {
-        abort(paste0(preamble_for_unsaved, "The error was \n", e$message))
+        abort(paste0(preamble_for_unsaved, " The error was \n", e$message))
       } else {
         abort(e$message)
       }
@@ -119,11 +119,7 @@ prompt_style <- function() {
       abort(paste0("The selected style \"", new_style, "\" is not valid: ", e$message))
     }
   )
-  if (inherits(parsed_new_style, "function")) {
-    options(styler.addins.style = new_style)
-  } else {
-    stop("The selected style \"", new_style, "\" is not a function.")
-  }
+  options(styler.addins.style = new_style)
   invisible(current_style)
 }
 

@@ -286,9 +286,9 @@ tidyverse_reindention <- function() {
 #' @importFrom rlang abort
 character_to_ordered <- function(x, levels, name = substitute(x)) {
   if (!all((x %in% levels))) {
-    abort(paste0(
-      "all values in ", name, " must be one of the following: ",
-      paste(levels, collapse = ", "),
+    abort(paste(
+      "all values in", name, "must be one of the following:",
+      paste(levels, collapse = ", ")
     ))
   }
   factor(x, levels = levels, ordered = TRUE)

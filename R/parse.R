@@ -182,8 +182,7 @@ ensure_valid_pd <- function(pd) {
     if (!valid_pd) {
       abort(paste(
         "The parse data is not valid and the problem is most likely related",
-        "to the parser in base R. Please install R >= 3.2 and try again.",
-        call. = FALSE
+        "to the parser in base R. Please install R >= 3.2 and try again."
       ))
     }
   }

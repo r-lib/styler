@@ -25,9 +25,9 @@ print.vertical <- function(x, ...,
     if (is_installed("prettycode")) {
       x <- prettycode::highlight(x, style = style)
     } else {
-      warn(paste0(
-        "Could not use colored = TRUE, as the package prettycode is not ",
-        "installed. Please install it if you want to see colored output ",
+      warn(paste(
+        "Could not use colored = TRUE, as the package prettycode is not",
+        "installed. Please install it if you want to see colored output",
         "or see `?print.vertical` for more information."
       ))
     }

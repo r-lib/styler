@@ -165,9 +165,7 @@ parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
   start_line <- find_start_line(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {
-      warn(paste0(
-        "Text to style did not contain any tokens. Returning empty string."
-      ))
+      warn("Text to style did not contain any tokens. Returning empty string.")
     }
     return("")
   }

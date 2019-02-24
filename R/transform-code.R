@@ -22,7 +22,7 @@ transform_code <- function(path, fun, ...) {
       ...
     )
   } else {
-    abort(paste0(path, " is not an R, Rmd or Rnw file"))
+    abort(paste(path, "is not an R, Rmd or Rnw file"))
   }
 }
 
@@ -79,7 +79,7 @@ separate_chunks <- function(lines, filetype) {
 identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pattern()) {
   pattern <- get_knitr_pattern(filetype)
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
-    abort(paste0("Unrecognized chunk pattern!"))
+    abort("Unrecognized chunk pattern!")
   }
 
   if (filetype == "Rmd") {

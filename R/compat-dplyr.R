@@ -25,9 +25,9 @@ arrange <- function(.data, ...) {
   stopifnot(is.data.frame(.data))
   ord <- eval(substitute(order(...)), .data, parent.frame())
   if (length(ord) != nrow(.data)) {
-    abort(paste0(
+    abort(
       "Length of ordering vectors don't match data frame size"
-    ))
+    )
   }
   .data[ord, , drop = FALSE]
 }

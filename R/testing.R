@@ -113,8 +113,8 @@ transform_and_check <- function(in_item, out_item,
     transformer(...) %>%
     unclass()
   if (!file.exists(out_item)) {
-    warn(paste0(
-      "File ", out_item, " does not exist. Creating it from transormation."
+    warn(paste(
+      "File", out_item, "does not exist. Creating it from transormation."
     ))
     file.create(out_item)
   }
@@ -125,7 +125,7 @@ transform_and_check <- function(in_item, out_item,
   )
 
   if (transformed) {
-    warn(paste0(in_name, " was different from ", out_name))
+    warn(paste(in_name, "was different from", out_name))
   } else {
     message(in_name, " was identical to ", out_name)
   }
