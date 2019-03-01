@@ -35,14 +35,14 @@ set_and_assert_arg_filetype <- function(filetype) {
 #' Make sure all supplied file types are allowed
 #'
 #' @param lowercase_filetype A vector with file types to check, all lower case.
+#' @importFrom rlang abort
 #' @keywords internal
 assert_filetype <- function(lowercase_filetype) {
   if (!all(lowercase_filetype %in% c("r", "rmd", "rnw"))) {
-    stop(
-      "filetype must not contain other values than 'R'",
-      "'Rmd' or 'Rnw' (case is ignored).",
-      call. = FALSE
-    )
+    abort(paste(
+      "filetype must not contain other values than 'R',",
+      "'Rmd' or 'Rnw' (case is ignored)."
+    ))
   }
 }
 
@@ -63,15 +63,16 @@ assert_text <- function(text) {
 #'
 #' Check whether one or more tokens exist and have a unique token-text mapping
 #' @param tokens Tokens to check.
+#' @importFrom rlang abort
 #' @keywords internal
 assert_tokens <- function(tokens) {
   invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
   if (length(invalid_tokens) > 0) {
-    stop(
-      "Token(s) ", paste0(invalid_tokens, collapse = ", "), " are invalid. ",
-      "You can lookup all valid tokens and their text ",
-      "with styler:::lookup_tokens(). Make sure you supply the values of ",
+    abort(paste(
+      "Token(s)", paste0(invalid_tokens, collapse = ", "), "are invalid.",
+      "You can lookup all valid tokens and their text",
+      "with styler:::lookup_tokens(). Make sure you supply the values of",
       "the column 'token', not 'text'."
-    )
+    ))
   }
 }

@@ -18,6 +18,7 @@ NULL
 
 #' @describeIn styler_addins Styles the active file with [tidyverse_style()] and
 #'   `strict = TRUE`.
+#' @importFrom rlang abort
 #' @keywords internal
 style_active_file <- function() {
   communicate_addins_style()
@@ -33,7 +34,7 @@ style_active_file <- function() {
   } else if (is_plain_r_file(context$path) | is_unsaved_file(context$path)) {
     out <- try_transform_as_r_file(context, transformer)
   } else {
-    stop("Can only style .R, .Rmd and .Rnw files.", call. = FALSE)
+    abort("Can only style .R, .Rmd and .Rnw files.")
   }
   rstudioapi::modifyRange(
     c(1, 1, length(context$contents) + 1, 1),
@@ -55,9 +56,10 @@ style_active_file <- function() {
 #' @param context The context from `styler:::get_rstudio_context()`.
 #' @param transformer A transformer function most conveniently constructed with
 #'   [make_transformer()].
+#' @importFrom rlang with_handlers abort
 #' @keywords internal
 try_transform_as_r_file <- function(context, transformer) {
-  tryCatch(
+  with_handlers(
     transformer(context$contents),
     error = function(e) {
       preamble_for_unsaved <- paste(
@@ -67,9 +69,9 @@ try_transform_as_r_file <- function(context, transformer) {
       )
 
       if (context$path == "") {
-        stop(paste0(preamble_for_unsaved, "The error was \n", e), call. = FALSE)
+        abort(paste0(preamble_for_unsaved, " The error was \n", e$message))
       } else {
-        stop(e)
+        abort(e$message)
       }
     }
   )
@@ -77,12 +79,13 @@ try_transform_as_r_file <- function(context, transformer) {
 
 #' @describeIn styler_addins Styles the highlighted selection in a `.R` or
 #'   `.Rmd` file.
+#' @importFrom rlang abort
 #' @keywords internal
 style_selection <- function() {
   communicate_addins_style()
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
-  if (all(nchar(text) == 0)) stop("No code selected")
+  if (all(nchar(text) == 0)) abort("No code selected")
   out <- style_text(text, style = get_addins_style_fun())
   rstudioapi::modifyRange(
     context$selection[[1]]$range, paste0(out, collapse = "\n"),
@@ -99,7 +102,9 @@ get_rstudio_context <- function() {
 
 #' Ask the user to supply a style
 #'
+#' @importFrom rlang abort
 #' @keywords internal
+#' @importFrom rlang with_handlers abort
 prompt_style <- function() {
   current_style <- get_addins_style_name()
   new_style <-
@@ -108,17 +113,13 @@ prompt_style <- function() {
       "Enter the name of a style function, e.g. `styler::tidyverse_style`",
       current_style
     )
-  parsed_new_style <- tryCatch(
+  parsed_new_style <- with_handlers(
     eval(parse(text = new_style)),
     error = function(e) {
-      stop("The selected style \"", new_style, "\" is not valid: ", e$message)
+      abort(paste0("The selected style \"", new_style, "\" is not valid: ", e$message))
     }
   )
-  if (inherits(parsed_new_style, "function")) {
-    options(styler.addins.style = new_style)
-  } else {
-    stop("The selected style \"", new_style, "\" is not a function.")
-  }
+  options(styler.addins.style = new_style)
   invisible(current_style)
 }
 

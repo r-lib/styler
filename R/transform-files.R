@@ -157,6 +157,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams apply_transformers
 #' @seealso [parse_transform_serialize_roxygen()]
+#' @importFrom rlang abort
 #' @keywords internal
 parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
   text <- assert_text(text)
@@ -164,10 +165,7 @@ parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
   start_line <- find_start_line(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {
-      warning(
-        "Text to style did not contain any tokens. Returning empty string.",
-        call. = FALSE
-      )
+      warn("Text to style did not contain any tokens. Returning empty string.")
     }
     return("")
   }
@@ -259,6 +257,7 @@ can_verify_roundtrip <- function(transformers) {
 #' it is not the same. Note that this method ignores comments and no
 #' verification can be conducted if scope > "line_breaks".
 #' @inheritParams expressions_are_identical
+#' @importFrom rlang abort
 #' @examples
 #' styler:::verify_roundtrip("a+1", "a + 1")
 #' styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
@@ -274,7 +273,7 @@ verify_roundtrip <- function(old_text, new_text) {
       "bug report on GitHub (https://github.com/r-lib/styler/issues)",
       "using a reprex."
     )
-    stop(msg, call. = FALSE)
+    abort(msg)
   }
 }
 

@@ -6,6 +6,7 @@
 #' already.
 #' @param text Text to parse.
 #' @param ... Parameters passed to [base::parse()]
+#' @importFrom rlang abort with_handlers warn
 #' @keywords internal
 #' @examples
 #' \dontrun{
@@ -16,24 +17,24 @@
 #' }
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
-  tried_parsing <- tryCatch(parse(text = text, ...),
+  tried_parsing <- with_handlers(
+    parse(text = text, ...),
     error = function(e) e,
     warning = function(w) w
   )
   if (inherits(tried_parsing, "error")) {
     if (has_crlf_as_first_line_sep(tried_parsing$message, text)) {
-      stop(
+      abort(paste0(
         "The code to style seems to use Windows style line endings (CRLF). ",
         "styler currently only supports Unix style line endings (LF). ",
         "Please change the EOL character in your editor to Unix style and try again.",
-        "\nThe parsing error was:\n", tried_parsing$message,
-        call. = FALSE
-      )
+        "\nThe parsing error was:\n", tried_parsing$message
+      ))
     } else {
-      stop(tried_parsing)
+      abort(tried_parsing$message)
     }
   } else if (inherits(tried_parsing, "warning")) {
-    warning(tried_parsing$message, call. = FALSE)
+    warn(tried_parsing$message)
   }
   tried_parsing
 }
@@ -118,6 +119,7 @@ add_id_and_short <- function(pd) {
 #' @param pd A parse table.
 #' @param text The text from which `pd` was created. Needed
 #'   for potential reparsing.
+#' @importFrom rlang abort
 #' @keywords internal
 ensure_correct_str_txt <- function(pd, text) {
   ensure_valid_pd(pd)
@@ -145,10 +147,10 @@ ensure_correct_str_txt <- function(pd, text) {
     as_tibble()
 
   if (!lines_and_cols_match(new_strings)) {
-    stop(paste(
+    abort(paste(
       "Error in styler:::ensure_correct_str_txt().",
       "Please file an issue on GitHub (https://github.com/r-lib/styler/issues)",
-    ), call. = FALSE)
+    ))
   }
   names_to_keep <- setdiff(
     names(new_strings),
@@ -168,6 +170,7 @@ ensure_correct_str_txt <- function(pd, text) {
 #' otherwise. As this is check is rather expensive, it is only
 #' carried out for configurations we have good reasons to expect problems.
 #' @param pd A parse table.
+#' @importFrom rlang abort
 #' @keywords internal
 ensure_valid_pd <- function(pd) {
   if (getRversion() < "3.2") {
@@ -177,10 +180,9 @@ ensure_valid_pd <- function(pd) {
       map_lgl(~ .x %in% pd$parent) %>%
       all()
     if (!valid_pd) {
-      stop(paste(
+      abort(paste(
         "The parse data is not valid and the problem is most likely related",
-        "to the parser in base R. Please install R >= 3.2 and try again.",
-        call. = FALSE
+        "to the parser in base R. Please install R >= 3.2 and try again."
       ))
     }
   }

@@ -20,22 +20,23 @@ lead <- function(x, n = 1L, default = NA, ...) {
   out
 }
 
+#' @importFrom rlang abort
 arrange <- function(.data, ...) {
   stopifnot(is.data.frame(.data))
   ord <- eval(substitute(order(...)), .data, parent.frame())
   if (length(ord) != nrow(.data)) {
-    stop(
-      "Length of ordering vectors don't match data frame size",
-      call. = FALSE
+    abort(
+      "Length of ordering vectors don't match data frame size"
     )
   }
   .data[ord, , drop = FALSE]
 }
 
+#' @importFrom rlang abort
 if_else <- function(condition, true, false, missing = NULL) {
   stopifnot(length(condition) == length(true))
   stopifnot(length(condition) == length(false))
-  if (!is.null(missing)) stop("missing arg not yet implemented")
+  if (!is.null(missing)) abort("missing arg not yet implemented")
   ifelse(condition, true, false)
 }
 

@@ -215,9 +215,10 @@ relocate_eq_assign_one <- function(pd) {
 #' Adds line and col information to an expression from its child
 #'
 #' @param pd A parse table.
+#' @importFrom rlang abort
 #' @keywords internal
 add_line_col_to_wrapped_expr <- function(pd) {
-  if (nrow(pd) > 1) stop("pd must be a wrapped expression that has one row.")
+  if (nrow(pd) > 1) abort("pd must be a wrapped expression that has one row.")
   pd$line1 <- pd$child[[1]]$line1[1]
   pd$line2 <- last(pd$child[[1]]$line2)
   pd$col1 <- pd$child[[1]]$col1[1]

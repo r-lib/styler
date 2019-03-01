@@ -6,6 +6,7 @@
 #'
 #' @inheritParams transform_utf8
 #' @param ... Further arguments passed to [transform_utf8()].
+#' @importFrom rlang abort
 #' @keywords internal
 transform_code <- function(path, fun, ...) {
   if (is_plain_r_file(path)) {
@@ -21,7 +22,7 @@ transform_code <- function(path, fun, ...) {
       ...
     )
   } else {
-    stop(path, " is not an R, Rmd or Rnw file")
+    abort(paste(path, "is not an R, Rmd or Rnw file"))
   }
 }
 
@@ -73,11 +74,12 @@ separate_chunks <- function(lines, filetype) {
 #' whose name matches `engine-pattern` are considered as R code.
 #' @inheritParams separate_chunks
 #' @param engine_pattern A regular expression that must match the engine name.
+#' @importFrom rlang abort
 #' @keywords internal
 identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pattern()) {
   pattern <- get_knitr_pattern(filetype)
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
-    stop("Unrecognized chunk pattern!", call. = FALSE)
+    abort("Unrecognized chunk pattern!")
   }
 
   if (filetype == "Rmd") {
@@ -96,7 +98,7 @@ identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pat
   }
 
   if (length(starts) != length(ends)) {
-    stop("Malformed file!", call. = FALSE)
+    abort("Malformed file!")
   }
 
   list(starts = starts[is_r_code], ends = ends[is_r_code])
