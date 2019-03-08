@@ -1,4 +1,5 @@
 Package: styler
+Type: Package
 Title: Non-Invasive Pretty Printing of R Code
 Version: 1.1.0.9000
 Authors@R: 
