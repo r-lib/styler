@@ -36,9 +36,9 @@ saved manually after styling.
 \seealso{
 \code{\link[=Sys.setenv]{Sys.setenv()}}
 
-Other stylers: \code{\link{style_dir}},
-  \code{\link{style_file}}, \code{\link{style_pkg}},
-  \code{\link{style_text}}
+Other stylers: \code{\link{style_book}},
+  \code{\link{style_dir}}, \code{\link{style_file}},
+  \code{\link{style_pkg}}, \code{\link{style_text}}
 }
 \concept{stylers}
 \keyword{internal}

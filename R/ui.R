@@ -118,6 +118,44 @@ prettify_pkg <- function(transformers,
 }
 
 
+#' Prettify book source code
+#'
+#' Performs various substitutions in all `.Rmd` files in a bookdown project.
+#' One can also (optionally) style `.R` and/or `.Rnw` files in the project by
+#' changing the `filetype` argument.
+#' Carefully examine the results after running this function!
+#'
+#' @param book Path to a (subdirectory of an) book project.
+#' @inheritParams style_pkg
+#' @family stylers
+#' @examples
+#' \dontrun{
+#'
+#' style_book()
+#' style_book(filetype = c(".R", ".Rmd", ".Rnw"))
+#' }
+#' @export
+style_book <- function(book = ".",
+                       ...,
+                       style = tidyverse_style,
+                       transformers = style(...),
+                       filetype = "Rmd",
+                       exclude_files = NULL,
+                       include_roxygen_examples = TRUE) {
+  pkg_root <- rprojroot::find_package_root_file(path = book)
+  changed <- style_dir(
+    path = pkg_root,
+    style = style,
+    transformers = transformers,
+    filetype = filetype,
+    exclude_files = exclude_files,
+    include_roxygen_examples = include_roxygen_examples,
+    ...
+  )
+  invisible(changed)
+}
+
+
 #' Style a string
 #'
 #' Styles a character vector. Each element of the character vector corresponds

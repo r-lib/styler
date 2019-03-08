@@ -39,8 +39,8 @@ style_text("a<-3++1", style = tidyverse_style, strict = TRUE)
 style_text("a<-3++1", transformers = tidyverse_style(strict = TRUE))
 }
 \seealso{
-Other stylers: \code{\link{style_dir}},
-  \code{\link{style_file}}, \code{\link{style_pkg}},
-  \code{\link{styler_addins}}
+Other stylers: \code{\link{style_book}},
+  \code{\link{style_dir}}, \code{\link{style_file}},
+  \code{\link{style_pkg}}, \code{\link{styler_addins}}
 }
 \concept{stylers}
