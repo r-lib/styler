@@ -120,7 +120,8 @@ test <- function() {
 
   nested(
     function_call(with),
-    many, first_level_args
+    many,
+    first_level_args
   )
 
   nested(

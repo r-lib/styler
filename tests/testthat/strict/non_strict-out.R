@@ -130,7 +130,8 @@ line breaks are unfortunately split"
 
   nested(
     function_call (with),
-    many,     first_level_args)
+    many,
+    first_level_args)
 
   nested(
     function_call (with),  # a comment and
