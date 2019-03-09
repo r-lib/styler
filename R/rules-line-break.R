@@ -12,7 +12,7 @@ set_line_break_around_comma <- function(pd) {
     (pd$token_before != "COMMENT") &
     (lag(pd$token) != "'['")
   pd$lag_newlines[comma_with_line_break_that_can_be_removed_before] <- 0L
-  pd$lag_newlines[lead(comma_with_line_break_that_can_be_removed_before)] <- 1L
+  pd$lag_newlines[lag(comma_with_line_break_that_can_be_removed_before)] <- 1L
   pd
 }
 
