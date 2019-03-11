@@ -101,7 +101,7 @@ is_unsaved_file <- function(path) {
   path == ""
 }
 
-#' Find the index of the next non-comment in a parse table
+#' Find the index of the next or previous non-comment in a parse table.
 #' @param pd A parse table.
 #' @param pos The position of the token to start the search from.
 #' @importFrom rlang seq2
@@ -112,6 +112,16 @@ next_non_comment <- function(pd, pos) {
   if (all(candidates %in% which(pd$token == "COMMENT"))) return(integer(0))
   setdiff(candidates, which(pd$token == "COMMENT"))[1]
 }
+
+#' @rdname next_non_comment
+previous_non_comment <- function(pd, pos) {
+  if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) return(integer(0))
+  candidates <- seq2(1L, pos - 1L)
+  if (all(candidates %in% which(pd$token == "COMMENT"))) return(integer(0))
+  last(setdiff(candidates, which(pd$token == "COMMENT")))
+}
+
+
 
 #' Find the index of the last comment in the sequence of comments-only tokens
 #' after the token that has position `pos` in `pd`.

@@ -53,9 +53,14 @@ flatten_operators_one <- function(pd_nested) {
 #'   from left or from right.
 #' @keywords internal
 flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
-  token_pos <- which(pd_nested$token[-1] %in% token) + 1
-  if (length(token_pos) == 0) return(pd_nested)
-  pos <- token_pos[if_else(left, 1, length(token_pos))] + if_else(left, -1L, 1L)
+  token_pos_candidates <- which(pd_nested$token[-1] %in% token) + 1
+  if (length(token_pos_candidates) == 0) return(pd_nested)
+  token_pos <- token_pos_candidates[if_else(left, 1, length(token_pos_candidates))]
+  if (left) {
+    pos <- previous_non_comment(pd_nested, token_pos)
+  } else {
+    pos <- next_non_comment(pd_nested, token_pos)
+  }
   if (pos < 1) return(pd_nested)
   if (!any(pd_nested$child[[pos]]$token[-1] %in% child_token)) return(pd_nested)
   bind_with_child(pd_nested, pos)

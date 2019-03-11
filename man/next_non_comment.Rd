@@ -2,9 +2,12 @@
 % Please edit documentation in R/utils.R
 \name{next_non_comment}
 \alias{next_non_comment}
-\title{Find the index of the next non-comment in a parse table}
+\alias{previous_non_comment}
+\title{Find the index of the next or previous non-comment in a parse table.}
 \usage{
 next_non_comment(pd, pos)
+
+previous_non_comment(pd, pos)
 }
 \arguments{
 \item{pd}{A parse table.}
@@ -12,6 +15,6 @@ next_non_comment(pd, pos)
 \item{pos}{The position of the token to start the search from.}
 }
 \description{
-Find the index of the next non-comment in a parse table
+Find the index of the next or previous non-comment in a parse table.
 }
 \keyword{internal}
