@@ -87,7 +87,7 @@ bind_with_child <- function(pd_nested, pos) {
 #' @param pd A parse table.
 #' @keywords internal
 wrap_expr_in_expr <- function(pd) {
-  expr <- create_tokens(
+  create_tokens(
     "expr", "",
     pos_ids = create_pos_ids(pd, 1, after = FALSE),
     child = pd,
