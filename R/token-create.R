@@ -32,7 +32,7 @@ create_tokens <- function(tokens,
                           terminal = TRUE,
                           child = NULL) {
   len_text <- length(texts)
-  data_frame(
+  tibble(
     token = tokens,
     text = texts,
     short = substr(texts, 1, 5),
