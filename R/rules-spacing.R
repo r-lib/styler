@@ -100,7 +100,7 @@ remove_space_after_unary_pm_nested <- function(pd) {
 #'
 #' We do not use `deparse()` as in previous implementations but `paste0()` since
 #' the former approach escapes the reverse backslash in the line break character
-#' "\n" whereas the solution with `paste0()` does not.
+#' `\\n` whereas the solution with `paste0()` does not.
 #' @examples
 #' style_text("'here
 #' is a string
