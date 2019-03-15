@@ -6,26 +6,26 @@
 #' @keywords internal
 NULL
 
-#' @describeIn update_indention_ref Updates the reference pos_id for all
-#'   tokens in `pd_nested` if `pd_nested` contains a function call. Tokens that
-#'   start on the same line as the opening parenthesis, are not themselves
-#'   function calls or expressions wrapped in curly brackets are re-indented,
-#'   that is, they are indented up to the level at which the call ends in
-#'   terms of col2. We need to take the last from the first child because calls
-#'   like package::function() can have three elements.
-#' @examples
-#' \dontrun{
-#' # not re-indented
-#' call(call(
-#'   xyz
-#' ))
-#' # re-indented
-#' call(call(1,
-#'           2))
-#' }
-#' @importFrom purrr map_lgl
-#' @importFrom rlang seq2
-#' @keywords internal
+# @describeIn update_indention_ref Updates the reference pos_id for all
+#   tokens in `pd_nested` if `pd_nested` contains a function call. Tokens that
+#   start on the same line as the opening parenthesis, are not themselves
+#   function calls or expressions wrapped in curly brackets are re-indented,
+#   that is, they are indented up to the level at which the call ends in
+#   terms of col2. We need to take the last from the first child because calls
+#   like package::function() can have three elements.
+#  @examples
+# \dontrun{
+# # not re-indented
+# call(call(
+#   xyz
+# ))
+# # re-indented
+# call(call(1,
+#           2))
+# }
+# @importFrom purrr map_lgl
+# @importFrom rlang seq2
+# @keywords internal
 # update_indention_ref_fun_call <- function(pd_nested) {
 #   current_is_call <- pd_nested$token_before[2] %in% c("SYMBOL_FUNCTION_CALL")
 #   non_comment <- which(pd_nested$token != "COMMENT")
@@ -44,7 +44,6 @@ NULL
 #   }
 #   pd_nested
 # }
-NULL
 
 #' @describeIn update_indention_ref Updates the reference pos_id for all
 #'   tokens in `pd_nested` if `pd_nested` contains a function declaration.
