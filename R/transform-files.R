@@ -21,7 +21,7 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
-  data_frame(file = files, changed = changed)
+  tibble(file = files, changed = changed)
 }
 
 #' Transform a file and output a customized message
