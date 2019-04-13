@@ -15,7 +15,7 @@ if (x > 3) {
   "x"
 }
 
-# A } should always go on its own line, unless it’s followed by else or ).
+# A } should always go on its own line, unless it's followed by else or ).
 if (x > 3) {
   "x"
 }
