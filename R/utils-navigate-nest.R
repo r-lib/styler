@@ -40,8 +40,8 @@ previous_non_comment <- function(pd, pos) {
 #' nested structure.
 #' @keywords internal
 #' @examples
-#' pd <- compute_parse_data_nested("if (TRUE) f()")
-#' styler::next_terminal(pd)
+#' pd <- styler:::compute_parse_data_nested("if (TRUE) f()")
+#' styler:::next_terminal(pd)
 next_terminal <- function(pd,
                           stack = FALSE,
                           vars = c("pos_id", "token", "text"),
