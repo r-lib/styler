@@ -12,9 +12,6 @@ wrap_subexpr_in_curly(pd, ind_to_be_wrapped, indent_by, space_after)
 \item{ind_to_be_wrapped}{The indices of the rows that should be wrapped
 into a new expression.}
 
-\item{indent_by}{The amount of spaces used to indent an expression in curly
-braces. Used for unindention.}
-
 \item{space_after}{How many spaces should be inserted after the closing brace.}
 }
 \description{

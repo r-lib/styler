@@ -46,7 +46,6 @@ assert_filetype <- function(lowercase_filetype) {
   }
 }
 
-
 #' Assert text to be of positive length and replace it with the empty
 #' string otherwise.
 #' @param text The input to style.
@@ -57,7 +56,6 @@ assert_text <- function(text) {
   }
   text
 }
-
 
 #' Check token validity
 #'

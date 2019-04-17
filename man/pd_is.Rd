@@ -3,15 +3,24 @@
 \name{pd_is}
 \alias{pd_is}
 \alias{is_curly_expr}
+\alias{is_cond_expr}
+\alias{is_while_expr}
 \alias{is_function_call}
 \alias{is_function_dec}
+\alias{is_comment}
 \title{Check whether a parse table corresponds to a certain expression}
 \usage{
 is_curly_expr(pd)
 
+is_cond_expr(pd)
+
+is_while_expr(pd)
+
 is_function_call(pd)
 
 is_function_dec(pd)
+
+is_comment(pd)
 }
 \arguments{
 \item{pd}{A parse table.}
@@ -24,9 +33,15 @@ Check whether a parse table corresponds to a certain expression
 \item \code{is_curly_expr}: Checks whether \code{pd} contains an expression wrapped in
 curly brackets.
 
+\item \code{is_cond_expr}: Checks whether \code{pd} contains is a conditional expression.
+
+\item \code{is_while_expr}: Checks whether \code{pd} contains is a while loop.
+
 \item \code{is_function_call}: Checks whether \code{pd} is a function call.
 
 \item \code{is_function_dec}: Checks whether \code{pd} is a function declaration.
+
+\item \code{is_comment}: Checks for every token whether or not it is a comment.
 }}
 
 \keyword{internal}
