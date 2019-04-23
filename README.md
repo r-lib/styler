@@ -125,6 +125,9 @@ notably
     RMarkdown script.
   - pretty-printing of [drake](https://github.com/ropensci/drake)
     workflow data frames with `drake::drake_plan_source()`.
+  - Adding styler as a fixer to the [ale
+    Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966)
+    for VIM.
 
 ## Further resources
 
