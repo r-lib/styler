@@ -2,25 +2,44 @@
 % Please edit documentation in R/addins.R
 \name{styler_addins}
 \alias{styler_addins}
-\alias{style_active_file}
-\alias{style_selection}
+\alias{set_style_transformers}
 \title{Stylers for RStudio Addins}
 \usage{
-style_active_file()
-
-style_selection()
+set_style_transformers()
 }
 \description{
 Helper functions for styling via RStudio Addins.
 }
 \section{Functions}{
 \itemize{
-\item \code{style_active_file}: Styles the active file with \code{\link[=tidyverse_style]{tidyverse_style()}} and
-\code{strict = TRUE}.
-
-\item \code{style_selection}: Styles the highlighted selection in a \code{.R} or
-\code{.Rmd} file.
+\item \code{set_style_transformers}: asks the user to supply a style
 }}
+
+\section{Addins}{
+
+\itemize{
+\item Set style: Select the style transformers to use. For flexibility, the user
+input is passed to the \code{transformers} argument, not the \code{style} argument, so
+enter \code{styler::tidyverse_style(scope = "spaces")} in the Addin is
+equivalent to \code{styler::style_text("1+1", scope = "spaces")} and
+\code{styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))}
+if the text to style is \code{1 + 1}. The style is memorized within an R
+session. If you want it to persist over a session, set the option
+\code{styler.addins_style_transformer} in your \code{.Rprofile}.
+\item Style active file: Styles the active file, by default with
+\code{\link[= tidyverse_style]{ tidyverse_style()}} and \code{strict = TRUE}. You can set the style
+with the Addin \code{Set style}.
+}
+}
+
+\section{Life-cycle}{
+
+The way of specifying the style in the Addin is experimental. We currently
+think about letting the user specify the defaults for other style APIs like
+\code{\link[styler:style_text]{styler::style_text()}}, either via R options, config files or other ways as
+well. See \href{https://github.com/r-lib/styler/issues/319}{r-lib/styler#319} for
+the current status of this.
+}
 
 \section{Auto-Save Option}{
 

@@ -16,3 +16,4 @@ CONTRIBUTING.md
 ^gitsum$
 revdep
 ^cran-comments\.md$
+^tests/testmanual$
