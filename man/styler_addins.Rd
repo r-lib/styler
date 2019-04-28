@@ -2,19 +2,10 @@
 % Please edit documentation in R/addins.R
 \name{styler_addins}
 \alias{styler_addins}
-\alias{set_style_transformers}
 \title{Stylers for RStudio Addins}
-\usage{
-set_style_transformers()
-}
 \description{
 Helper functions for styling via RStudio Addins.
 }
-\section{Functions}{
-\itemize{
-\item \code{set_style_transformers}: asks the user to supply a style
-}}
-
 \section{Addins}{
 
 \itemize{
@@ -32,7 +23,7 @@ with the Addin \code{Set style}.
 }
 }
 
-\section{Life-cycle}{
+\section{Life cycle}{
 
 The way of specifying the style in the Addin is experimental. We currently
 think about letting the user specify the defaults for other style APIs like
@@ -60,4 +51,3 @@ Other stylers: \code{\link{style_dir}},
   \code{\link{style_text}}
 }
 \concept{stylers}
-\keyword{internal}

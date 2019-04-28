@@ -29,7 +29,6 @@ NULL
 #' @inheritParams create_style_guide
 #' @param math_token_spacing A list of parameters that define spacing around
 #'   math token, conveniently constructed using [specify_math_token_spacing()].
-
 #' @details The following options for `scope` are available.
 #'
 #' * "none": Performs no transformation at all.

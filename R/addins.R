@@ -85,7 +85,7 @@ get_rstudio_context <- function() {
   rstudioapi::getActiveDocumentContext()
 }
 
-#' @describeIn styler_addins asks the user to supply a style
+#' Asks the user to supply a style
 #' @importFrom rlang abort
 #' @keywords internal
 #' @importFrom rlang with_handlers abort
