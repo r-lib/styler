@@ -71,7 +71,7 @@ style_selection <- function() {
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
   if (all(nchar(text) == 0)) abort("No code selected")
-  out <- style_text(text, style = get_addins_style_fun())
+  out <- style_text(text, transformers = get_addins_style_fun())
   rstudioapi::modifyRange(
     context$selection[[1]]$range, paste0(out, collapse = "\n"),
     id = context$id
