@@ -127,7 +127,7 @@ get_addins_style_fun <- function() {
 
 communicate_addins_style <- function() {
   style_name <- get_addins_style_transformer_name()
-  cat("Using style transformers`", style_name, "`\n", sep = "")
+  cat("Using style transformers `", style_name, "`\n", sep = "")
 }
 
 #' Style a file as if it was an .R file
