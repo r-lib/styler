@@ -14,3 +14,13 @@
   - unsaved .Rnw file
   - saved non-R file
   - unsaved R file
+* style selection:
+  - saved .R file (valid and invalid code)
+  - unsaved .R file
+  - saved .Rmd file (valid and invalid code)
+  - unsaved .Rmd file
+  - saved .Rnw file (valid and invalid code)
+  - unsaved .Rnw file
+  - saved non-R file
+  - unsaved R file
+
