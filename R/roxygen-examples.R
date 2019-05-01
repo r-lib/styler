@@ -36,7 +36,9 @@ style_roxygen_code_example <- function(example, transformers) {
 #' @importFrom purrr map2 flatten_chr
 #' @keywords internal
 style_roxygen_code_example_segment <- function(one_dont, transformers) {
-  if (length(one_dont) < 1L) return(character())
+  if (length(one_dont) < 1L) {
+    return(character())
+  }
   dont_seqs <- find_dont_seqs(one_dont)
   split_segments <- split_roxygen_segments(one_dont, unlist(dont_seqs))
   is_dont <-

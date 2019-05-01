@@ -34,4 +34,3 @@ assert_data.tree_installation <- function() {
     abort("The package data.tree needs to be installed for this functionality.")
   }
 }
-

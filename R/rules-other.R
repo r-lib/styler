@@ -34,7 +34,8 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' @keywords internal
 #' @importFrom purrr when
 wrap_if_else_while_for_multi_line_in_curly <- function(pd, indent_by = 2) {
-  key_token <- when(pd,
+  key_token <- when(
+    pd,
     is_cond_expr(.) ~ "')'",
     is_while_expr(.) ~ "')'",
     is_for_expr(.) ~ "forcond"
@@ -45,7 +46,7 @@ wrap_if_else_while_for_multi_line_in_curly <- function(pd, indent_by = 2) {
         space_after = ifelse(contains_else_expr(pd), 1, 0),
         key_token = key_token
       )
-    }
+  }
   if (is_cond_expr(pd)) {
     pd <- pd %>%
       wrap_else_multiline_curly(indent_by, space_after = 0)
@@ -65,7 +66,7 @@ wrap_multiline_curly <- function(pd, indent_by, space_after = 1, key_token) {
   to_be_wrapped_expr_with_child <- next_non_comment(
     pd, which(pd$token == key_token)[1]
   )
-  next_terminal <- next_terminal(pd[to_be_wrapped_expr_with_child,])$text
+  next_terminal <- next_terminal(pd[to_be_wrapped_expr_with_child, ])$text
   requires_braces <- if_for_while_part_requires_braces(pd, key_token)
   if (requires_braces | next_terminal == "return") {
     closing_brace_ind <- which(pd$token == key_token)[1]

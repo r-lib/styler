@@ -7,15 +7,21 @@
 #' @importFrom rlang seq2
 #' @keywords internal
 set_unindention_child <- function(pd, token = "')'", unindent_by) {
-  if (all(pd$indent == 0) || all(pd$terminal)) return(pd)
+  if (all(pd$indent == 0) || all(pd$terminal)) {
+    return(pd)
+  }
   closing <- which(pd$token %in% token)
-  if (length(closing) == 0 || pd$lag_newlines[closing] > 0) return(pd)
+  if (length(closing) == 0 || pd$lag_newlines[closing] > 0) {
+    return(pd)
+  }
 
   first_on_last_line <- last(c(1, which(pd$lag_newlines > 0 | pd$multi_line)))
   on_same_line <- seq2(first_on_last_line, closing - 1)
   cand_ind <- setdiff(on_same_line, which(pd$terminal))
 
-  if (length(cand_ind) < 1) return(pd)
+  if (length(cand_ind) < 1) {
+    return(pd)
+  }
 
   candidates <- pd[cand_ind, ]
 

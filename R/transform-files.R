@@ -114,7 +114,9 @@ make_transformer <- function(transformers, include_roxygen_examples, warn_empty 
 #' @keywords internal
 parse_transform_serialize_roxygen <- function(text, transformers) {
   roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
-  if (length(roxygen_seqs) < 1L) return(text)
+  if (length(roxygen_seqs) < 1L) {
+    return(text)
+  }
   split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
   map_at(split_segments$separated, split_segments$selectors,
     style_roxygen_code_example,
@@ -139,7 +141,9 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
 #' @importFrom rlang seq2
 #' @keywords internal
 split_roxygen_segments <- function(text, roxygen_examples) {
-  if (is.null(roxygen_examples)) return(lst(separated = list(text), selectors = NULL))
+  if (is.null(roxygen_examples)) {
+    return(lst(separated = list(text), selectors = NULL))
+  }
   all_lines <- seq2(1L, length(text))
   active_segment <- as.integer(all_lines %in% roxygen_examples)
   segment_id <- cumsum(abs(c(0L, diff(active_segment)))) + 1L

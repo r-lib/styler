@@ -59,7 +59,7 @@ NULL
 #' @family stylers
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' style_pkg(style = tidyverse_style, strict = TRUE)
 #' style_pkg(
 #'   scope = "line_breaks",
