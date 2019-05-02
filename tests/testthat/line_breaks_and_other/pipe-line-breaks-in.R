@@ -46,9 +46,16 @@ c(a +
 a %>% b(
 )
 
+a %>% b(
+) %>% q
+
 a %>%
   b()
 
+a %>% b() %>% c
+
+# short pipes < 2 can stay on one line
+a %>% b()
 
 fun(x,
   a %>% b)
@@ -65,9 +72,12 @@ fun( s = g(x),
     gg = a(n == 2) %>% b,
     tt %>% q(r = 3))
 
+# FIXME closing brace could go on ntext line. Alternative: remove lin breaks completely.
 blew(x %>%
+
        c(), y = 2)
 
+# FIXME closing brace could go on ntext line. Alternative: move c() up.
 blew(y = 2, x %>%
        c())
 
