@@ -35,9 +35,9 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦   ¦--'(': ( [0/0] {34}                          
  ¦   ¦   °--')': ) [0/0] {35}                          
  ¦   °--')': ) [1/0] {36}                              
- °--expr:  [1/0] {36.9}                                
-     ¦--expr:  [0/1] {38}                              
-     ¦   °--SYMBOL: b [0/0] {37}                       
-     ¦--EQ_ASSIGN: = [0/0] {39}                        
-     °--expr:  [1/0] {41}                              
-         °--NUM_CONST: 3 [0/0] {40}                    
+ °--equal_assign:  [1/0] {37}                          
+     ¦--expr:  [0/1] {39}                              
+     ¦   °--SYMBOL: b [0/0] {38}                       
+     ¦--EQ_ASSIGN: = [0/0] {40}                        
+     °--expr:  [1/0] {42}                              
+         °--NUM_CONST: 3 [0/0] {41}                    
