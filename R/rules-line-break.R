@@ -49,7 +49,8 @@ remove_line_break_before_round_closing_fun_dec <- function(pd) {
 #' @importFrom rlang seq2
 add_line_break_after_pipe <- function(pd) {
   is_special <- pd$token == c("SPECIAL-PIPE") & pd$token_after != "COMMENT"
-  if (any(is_special) && !(next_terminal(pd, vars = "token_before")$token_before == c("'('"))) {
+  if (any(is_special) &&
+      !(next_terminal(pd, vars = "token_before")$token_before %in% c("'('", "EQ_SUB", "','"))) {
     pd$lag_newlines[lag(is_special)] <- 1L
   }
   pd
