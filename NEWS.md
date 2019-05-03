@@ -5,17 +5,10 @@ This is preimarily a maintenance release upon the request of the CRAN team
 
 ## Major changes
 
-- User can now control style configurations for styler Addins (#463, #500). Use
-  the `Set style` Addin. See `?styler::styler_addins` for details.
+- Users can now control style configurations for styler Addins (#463, #500), 
+  using the `Set style` Addin. See `?styler::styler_addins` for details.
 
 ## Minor changes
-
-- `style_pkg()` now also styles the "demo" directory by default (#453).
-
-- more minimal version dependencies on other packages and clean-up (9cfe808c,
-  7077d440, 8ee486c6).
-
-- fix line-break styling around comma (#479).
 
 - fix roxygen code example styling indention (#455) and EOF spacing (#469).
 
@@ -23,18 +16,48 @@ This is preimarily a maintenance release upon the request of the CRAN team
   (#482).
 
 - more consistent styling of multi-line strings (#459).
-
-- remove slightly confusing warning about empty strings caused with roxygen code
-  examples and Rmd.
+- fix line-break styling around comma (#479).
 
 - fix bug that may cause an error when the variable `text` in any name space
   before styler on the search path was defined and did not have lenght 1
   (#484).
 
-- Removed right apastrophe to let package pass R CMD Check in strict Latin-1
+- `style_pkg()` now also styles the "demo" directory by default (#453).
+
+- more minimal version dependencies on other packages and clean-up (9cfe808c,
+  7077d440, 8ee486c6).
+
+- remove slightly confusing warning about empty strings caused with roxygen code
+  examples and Rmd.
+
+- Removed right apostrophe to let package pass R CMD Check in strict Latin-1
   locale (#490, reason for release).
 
-Thanks to all contributors.
+## Adaption of styler
+
+Since it's never been mentioned in the release notes, we also mention here
+where else you can use styler functionality:
+
+* `usethis::use_tidy_style()` styles your project according to the tidyverse
+  style guide.
+* `reprex::reprex(style = TRUE)` to prettify reprex code before printing. To
+  permanently use `style = TRUE` without specifying it every time, you can add the
+  following line to your `.Rprofile` (via `usethis::edit_r_profile()`):
+  `options(reprex.styler = TRUE)`.
+* you can pretty-print your R code in RMarkdown reports without having styler
+  modifying the source. This feature is implemented as a code chunk option in
+  knitr. use `tidy = "styler"` in the header of a code chunks (e.g. ` ```{r
+  name-of-the-chunk, tidy = "styler"}`), or `knitr::opts_chunk$set(tidy =
+  "styler")` at the top of your RMarkdown script.
+* pretty-printing of [drake](https://github.com/ropensci/drake) workflow data
+  frames with `drake::drake_plan_source()`.
+* Adding styler as a fixer to the 
+  [ale Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966) 
+  for VIM.
+
+
+Thanks to all contributors involved, in particular
+[&#x0040;ArthurPERE](https://github.com/ArthurPERE), [&#x0040;hadley](https://github.com/hadley), [&#x0040;igordot](https://github.com/igordot), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;jackwasey](https://github.com/jackwasey), [&#x0040;jcrodriguez1989](https://github.com/jcrodriguez1989), [&#x0040;jennybc](https://github.com/jennybc), [&#x0040;jonmcalder](https://github.com/jonmcalder), [&#x0040;katrinleinweber](https://github.com/katrinleinweber), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;msberends](https://github.com/msberends), [&#x0040;raynamharris](https://github.com/raynamharris), [&#x0040;riccardoporreca](https://github.com/riccardoporreca), [&#x0040;rjake](https://github.com/rjake), [&#x0040;Robinlovelace](https://github.com/Robinlovelace), [&#x0040;skirmer](https://github.com/skirmer), [&#x0040;thalesmello](https://github.com/thalesmello), [&#x0040;tobiasgerstenberg](https://github.com/tobiasgerstenberg), [&#x0040;tvatter](https://github.com/tvatter), [&#x0040;wdearden](https://github.com/wdearden), [&#x0040;wmayner](https://github.com/wmayner), and [&#x0040;yech1990](https://github.com/yech1990).
 
 # styler 1.1.0
 
