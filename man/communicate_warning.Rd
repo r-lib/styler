@@ -14,7 +14,7 @@ been changed.}
 Needed for reverse engineering the scope.}
 }
 \description{
-If roundtrip verification was not possible, issue a warning to review the
+If round trip verification was not possible, issue a warning to review the
 changes carefully.
 }
 \keyword{internal}

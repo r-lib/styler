@@ -1,6 +1,6 @@
 # styler 1.1.1
 
-This is preimarily a maintenance release upon the request of the CRAN team
+This is primarily a maintenance release upon the request of the CRAN team
 (#490).
 
 ## Major changes
@@ -22,7 +22,7 @@ This is preimarily a maintenance release upon the request of the CRAN team
 - fix line-break styling around comma (#479).
 
 - fix bug that may cause an error when the variable `text` in any name space
-  before styler on the search path was defined and did not have lenght 1
+  before styler on the search path was defined and did not have length 1
   (#484).
 
 - `style_pkg()` now also styles the "demo" directory by default (#453).

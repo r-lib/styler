@@ -88,7 +88,7 @@ wrap_multiline_curly <- function(pd, indent_by, space_after = 1, key_token) {
 #' Add curly braces to else
 #'
 #' Wrap the else part of a conditional expression into curly braces if not
-#' already wraped into a such.
+#' already wrapped into a such.
 #' @inheritParams wrap_multiline_curly
 #' @keywords internal
 wrap_else_multiline_curly <- function(pd, indent_by = 2, space_after = 0) {
@@ -139,7 +139,7 @@ wrap_subexpr_in_curly <- function(pd,
 
 #' Check if if, for or while loop expression require a braces.
 #'
-#' This is the case if they are multi-line and not yet wraped into curly
+#' This is the case if they are multi-line and not yet wrapped into curly
 #' braces.
 #' @inheritParams wrap_multiline_curly
 #' @keywords internal

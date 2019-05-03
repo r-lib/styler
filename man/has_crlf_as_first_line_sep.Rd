@@ -9,7 +9,7 @@ has_crlf_as_first_line_sep(message, initial_text)
 \arguments{
 \item{message}{A message returned with \code{tryCatch()}.}
 
-\item{initial_text}{The inital text to style.}
+\item{initial_text}{The initial text to style.}
 }
 \description{
 Check if a string uses CRLF EOLs

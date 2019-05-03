@@ -53,14 +53,14 @@ that are under version control or to create a backup copy.
 
 We suggest to first style with \code{scope < "tokens"} and inspect and commit
 changes, because these changes are guaranteed to leave the abstract syntax
-tree (AST) unchanged. See section 'Roundtrip Validation' for details.
+tree (AST) unchanged. See section 'Round trip validation' for details.
 
 Then, we suggest to style with \code{scope = "tokens"} (if desired) and carefully
 inspect the changes to make sure the AST is not changed in an unexpected way
 that invalidates code.
 }
 
-\section{Roundtrip Validation}{
+\section{Round trip validation}{
 
 The following section describes when and how styling is guaranteed to
 yield correct code.

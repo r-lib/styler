@@ -20,7 +20,7 @@ parser_version_find(pd)
 }
 \description{
 The structure of the parse data affects many operations in styler. There was
-unexpected behaviour of the parser that styler was initially designed to work
+unexpected behavior of the parser that styler was initially designed to work
 around. Examples are \href{https://github.com/r-lib/styler/issues/187}{#187},
 \href{https://github.com/r-lib/styler/issues/216}{#216},
 \href{https://github.com/r-lib/styler/issues/100}{#100} and others. With
@@ -47,7 +47,7 @@ environment \code{env_current}.
 data. This does not necessarily mean that the version found is the
 actual version, but it \emph{behaves} like it. For example, code that does not
 contain \code{EQ_ASSIGN} is parsed the same way with version 1 and 2. If the
-behaviour is identical, the version is set to 1.
+behavior is identical, the version is set to 1.
 }
 }
 \keyword{internal}

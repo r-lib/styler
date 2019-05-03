@@ -33,12 +33,12 @@ NULL
 #'
 #' We suggest to first style with `scope < "tokens"` and inspect and commit
 #' changes, because these changes are guaranteed to leave the abstract syntax
-#' tree (AST) unchanged. See section 'Roundtrip Validation' for details.
+#' tree (AST) unchanged. See section 'Round trip validation' for details.
 #'
 #' Then, we suggest to style with `scope = "tokens"` (if desired) and carefully
 #' inspect the changes to make sure the AST is not changed in an unexpected way
 #' that invalidates code.
-#' @section Roundtrip Validation:
+#' @section Round trip validation:
 #' The following section describes when and how styling is guaranteed to
 #' yield correct code.
 #'
@@ -156,7 +156,7 @@ style_text <- function(text,
 #' @inheritParams style_pkg
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
-#' @inheritSection style_pkg Roundtrip Validation
+#' @inheritSection style_pkg Round trip validation
 #' @family stylers
 #' @examples
 #' \dontrun{
@@ -211,7 +211,7 @@ prettify_any <- function(transformers,
 #' @inheritParams style_pkg
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
-#' @inheritSection style_pkg Roundtrip Validation
+#' @inheritSection style_pkg Round trip validation
 #' @examples
 #' # the following is identical but the former is more convenient:
 #' file <- tempfile("styler", fileext = ".R")

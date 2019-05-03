@@ -27,7 +27,7 @@ microbenchmark::microbenchmark(
 #>  base 4.131253 4.131253 4.172017 4.172017 4.212781 4.212781     2
 ```
 
-Replacing mutate statments.
+Replacing mutate statements.
 ```{r}
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),
@@ -50,7 +50,7 @@ microbenchmark::microbenchmark(
 #>  base 2.18097 2.184721 2.225294 2.200893 2.241799 2.318089     5
 ```
 
-Dropping unnecessary select and arrange stuffstatments
+Dropping unnecessary select statements and arrange stuff.
 ```{r}
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),

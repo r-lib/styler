@@ -13,7 +13,7 @@ style_roxygen_code_example(example, transformers)
 }
 \description{
 Parses roxygen2 comments into code, breaks it into dont* (dontrun, dontest,
-dontshow) and run sections and processes each segment indicidually using
+dontshow) and run sections and processes each segment individually using
 \code{\link[=style_roxygen_example_snippet]{style_roxygen_example_snippet()}}.
 }
 \section{Hierarchy}{

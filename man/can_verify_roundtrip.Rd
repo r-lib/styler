@@ -2,7 +2,7 @@
 % Please edit documentation in R/transform-files.R
 \name{can_verify_roundtrip}
 \alias{can_verify_roundtrip}
-\title{Check whether a roundtrip verification can be carried out}
+\title{Check whether a round trip verification can be carried out}
 \usage{
 can_verify_roundtrip(transformers)
 }

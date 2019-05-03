@@ -1,6 +1,6 @@
 #' Communicate a warning if necessary
 #'
-#' If roundtrip verification was not possible, issue a warning to review the
+#' If round trip verification was not possible, issue a warning to review the
 #' changes carefully.
 #' @param changed Boolean with indicating for each file whether or not it has
 #'   been changed.

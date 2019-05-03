@@ -42,7 +42,7 @@ parse_safely <- function(text, ...) {
 #' Check if a string uses CRLF EOLs
 #'
 #' @param message A message returned with `tryCatch()`.
-#' @param initial_text The inital text to style.
+#' @param initial_text The initial text to style.
 #' @keywords internal
 has_crlf_as_first_line_sep <- function(message, initial_text) {
   split <- strsplit(message, ":", fixed = TRUE)[[1]]
