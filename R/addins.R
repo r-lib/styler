@@ -77,7 +77,7 @@ style_selection <- function() {
     id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
-    rstudioapi::documentSave(context$id)
+    invisible(rstudioapi::documentSave(context$id))
   }
 }
 
