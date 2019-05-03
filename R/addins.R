@@ -4,7 +4,7 @@
 #' @section Addins:
 #' - Set style: Select the style transformers to use. For flexibility, the user
 #'   input is passed to the `transformers` argument, not the `style` argument, so
-#'   enter `styler::tidyverse_style(scope = "spaces")` in the Addin is
+#'   entering `styler::tidyverse_style(scope = "spaces")` in the Addin is
 #'   equivalent to `styler::style_text("1+1", scope = "spaces")` and
 #'   `styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))`
 #'   if the text to style is `1 + 1`. The style transformers are memorized
@@ -33,7 +33,15 @@
 #'
 #' @name styler_addins
 #' @family stylers
-#' @seealso [Sys.setenv()]
+#' @examples
+#' \dontrun{
+#' # save after styling when using the Addin
+#' Sys.setenv(save_after_styling = TRUE)
+#' # only style with scope = "spaces" when using the Addin
+#' options(
+#'   styler.addins_style_transformer = "styler::tidyverse_style(scope = 'spaces')"
+#' )
+#' }
 NULL
 
 

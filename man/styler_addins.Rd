@@ -11,7 +11,7 @@ Helper functions for styling via RStudio Addins.
 \itemize{
 \item Set style: Select the style transformers to use. For flexibility, the user
 input is passed to the \code{transformers} argument, not the \code{style} argument, so
-enter \code{styler::tidyverse_style(scope = "spaces")} in the Addin is
+entering \code{styler::tidyverse_style(scope = "spaces")} in the Addin is
 equivalent to \code{styler::style_text("1+1", scope = "spaces")} and
 \code{styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))}
 if the text to style is \code{1 + 1}. The style transformers are memorized
@@ -46,9 +46,17 @@ this setting across multiple sessions. Untitled files will always need to be
 saved manually after styling.
 }
 
+\examples{
+\dontrun{
+# save after styling when using the Addin
+Sys.setenv(save_after_styling = TRUE)
+# only style with scope = "spaces" when using the Addin
+options(
+  styler.addins_style_transformer = "styler::tidyverse_style(scope = 'spaces')"
+)
+}
+}
 \seealso{
-\code{\link[=Sys.setenv]{Sys.setenv()}}
-
 Other stylers: \code{\link{style_dir}},
   \code{\link{style_file}}, \code{\link{style_pkg}},
   \code{\link{style_text}}
