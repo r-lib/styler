@@ -11,7 +11,7 @@
 #'   session. If you want it to persist over a session, set the option
 #'   `styler.addins_style_transformer` in your `.Rprofile`.
 #' * Style active file: Styles the active file, by default with
-#' [ tidyverse_style()] and `strict = TRUE`. You can set the style
+#'   [tidyverse_style()] and `strict = TRUE`. You can set the style
 #'   with the Addin `Set style`.
 #' @section Life cycle:
 #' The way of specifying the style in the Addin is experimental. We currently

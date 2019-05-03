@@ -18,7 +18,7 @@ if the text to style is \code{1 + 1}. The style is memorized within an R
 session. If you want it to persist over a session, set the option
 \code{styler.addins_style_transformer} in your \code{.Rprofile}.
 \item Style active file: Styles the active file, by default with
-\code{\link[= tidyverse_style]{ tidyverse_style()}} and \code{strict = TRUE}. You can set the style
+\code{\link[=tidyverse_style]{tidyverse_style()}} and \code{strict = TRUE}. You can set the style
 with the Addin \code{Set style}.
 }
 }
