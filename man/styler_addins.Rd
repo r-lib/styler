@@ -38,11 +38,11 @@ saved manually after styling.
 
 \section{Life cycle}{
 
-The way of specifying the style as well as the auto-save option (see below)
-in the Addin are experimental. We currently
-think about letting the user specify the defaults for other style APIs like
-\code{\link[styler:style_text]{styler::style_text()}}, either via R options, config files or other ways as
-well. See \href{https://github.com/r-lib/styler/issues/319}{r-lib/styler#319} for
+The way of specifying the style in the Addin as well as the auto-save option
+(see below) are experimental. We currently think about letting the user
+specify the defaults for other style APIs like \code{\link[styler:style_text]{styler::style_text()}},
+either via R options, config files or other ways as well.
+See \href{https://github.com/r-lib/styler/issues/319}{r-lib/styler#319} for
 the current status of this.
 }
 
