@@ -25,3 +25,8 @@ test_that("line break before comma is removed and placed after comma ", {
   expect_warning(test_collection("line_breaks_and_other", "comma",
                                  transformer = style_text), NA)
 })
+
+test_that("line break before comma is removed and placed after comma ", {
+  expect_warning(test_collection("line_breaks_and_other", "pipe-line",
+                                 transformer = style_text), NA)
+})

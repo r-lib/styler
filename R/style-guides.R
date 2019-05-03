@@ -141,7 +141,7 @@ tidyverse_style <- function(scope = "tokens",
         )
       },
       remove_line_break_in_empty_fun_call,
-      add_line_break_after_pipe
+      add_line_break_after_pipe = if (strict) add_line_break_after_pipe
     )
   }
 
