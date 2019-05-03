@@ -14,12 +14,15 @@ input is passed to the \code{transformers} argument, not the \code{style} argume
 enter \code{styler::tidyverse_style(scope = "spaces")} in the Addin is
 equivalent to \code{styler::style_text("1+1", scope = "spaces")} and
 \code{styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))}
-if the text to style is \code{1 + 1}. The style is memorized within an R
-session. If you want it to persist over a session, set the option
+if the text to style is \code{1 + 1}. The style transformers are memorized
+within an R session via the R option \code{styler.addins_style_transformer} so
+if you want it to persist over sessions, set the option
 \code{styler.addins_style_transformer} in your \code{.Rprofile}.
 \item Style active file: Styles the active file, by default with
-\code{\link[=tidyverse_style]{tidyverse_style()}} and \code{strict = TRUE}. You can set the style
-with the Addin \code{Set style}.
+\code{\link[=tidyverse_style]{tidyverse_style()}} and \code{strict = TRUE} or the value of the option
+\code{styler.addins_style_transformer} if specified.
+\item Style selection: Same as \emph{style active file}, but styles the highlighted
+code instead of the whole file.
 }
 }
 

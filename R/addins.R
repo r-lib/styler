@@ -2,17 +2,20 @@
 #'
 #' Helper functions for styling via RStudio Addins.
 #' @section Addins:
-#' * Set style: Select the style transformers to use. For flexibility, the user
+#' - Set style: Select the style transformers to use. For flexibility, the user
 #'   input is passed to the `transformers` argument, not the `style` argument, so
 #'   enter `styler::tidyverse_style(scope = "spaces")` in the Addin is
 #'   equivalent to `styler::style_text("1+1", scope = "spaces")` and
 #'   `styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))`
-#'   if the text to style is `1 + 1`. The style is memorized within an R
-#'   session. If you want it to persist over a session, set the option
+#'   if the text to style is `1 + 1`. The style transformers are memorized
+#'   within an R session via the R option `styler.addins_style_transformer` so
+#'   if you want it to persist over sessions, set the option
 #'   `styler.addins_style_transformer` in your `.Rprofile`.
-#' * Style active file: Styles the active file, by default with
-#'   [tidyverse_style()] and `strict = TRUE`. You can set the style
-#'   with the Addin `Set style`.
+#' - Style active file: Styles the active file, by default with
+#'   [tidyverse_style()] and `strict = TRUE` or the value of the option
+#'   `styler.addins_style_transformer` if specified.
+#' - Style selection: Same as *style active file*, but styles the highlighted
+#'   code instead of the whole file.
 #' @section Life cycle:
 #' The way of specifying the style in the Addin is experimental. We currently
 #' think about letting the user specify the defaults for other style APIs like
