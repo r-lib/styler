@@ -14,25 +14,16 @@ input is passed to the \code{transformers} argument, not the \code{style} argume
 entering \code{styler::tidyverse_style(scope = "spaces")} in the Addin is
 equivalent to \code{styler::style_text("1+1", scope = "spaces")} and
 \code{styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))}
-if the text to style is \code{1 + 1}. The style transformers are memorized
+if the text to style is \code{1+1}. The style transformers are memorized
 within an R session via the R option \code{styler.addins_style_transformer} so
 if you want it to persist over sessions, set the option
 \code{styler.addins_style_transformer} in your \code{.Rprofile}.
 \item Style active file: Styles the active file, by default with
-\code{\link[=tidyverse_style]{tidyverse_style()}} and \code{strict = TRUE} or the value of the option
+\code{\link[=tidyverse_style]{tidyverse_style()}} or the value of the option
 \code{styler.addins_style_transformer} if specified.
-\item Style selection: Same as \emph{style active file}, but styles the highlighted
+\item Style selection: Same as \emph{Style active file}, but styles the highlighted
 code instead of the whole file.
 }
-}
-
-\section{Life cycle}{
-
-The way of specifying the style in the Addin is experimental. We currently
-think about letting the user specify the defaults for other style APIs like
-\code{\link[styler:style_text]{styler::style_text()}}, either via R options, config files or other ways as
-well. See \href{https://github.com/r-lib/styler/issues/319}{r-lib/styler#319} for
-the current status of this.
 }
 
 \section{Auto-Save Option}{
@@ -40,10 +31,19 @@ the current status of this.
 By default, both of the RStudio Addins will apply styling to the (selected)
 file contents without saving changes. Automatic saving can be enabled by
 setting the environment variable \code{save_after_styling} to \code{TRUE}.
-
 Consider setting this in your \code{.Rprofile} file if you want to persist
 this setting across multiple sessions. Untitled files will always need to be
 saved manually after styling.
+}
+
+\section{Life cycle}{
+
+The way of specifying the style as well as the auto-save option (see below)
+in the Addin are experimental. We currently
+think about letting the user specify the defaults for other style APIs like
+\code{\link[styler:style_text]{styler::style_text()}}, either via R options, config files or other ways as
+well. See \href{https://github.com/r-lib/styler/issues/319}{r-lib/styler#319} for
+the current status of this.
 }
 
 \examples{
