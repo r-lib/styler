@@ -25,7 +25,7 @@
 #' saved manually after styling.
 #' @section Life cycle:
 #' The way of specifying the style in the Addin as well as the auto-save option
-#' (see below) are experimental. We currently think about letting the user
+#' (see below) are experimental. We are currently considering letting the user
 #' specify the defaults for other style APIs like [styler::style_text()],
 #' either via R options, config files or other ways as well.
 #' See [r-lib/styler#319](https://github.com/r-lib/styler/issues/319) for
