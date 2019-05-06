@@ -7,34 +7,31 @@ This is primarily a maintenance release upon the request of the CRAN team
 
 - Users can now control style configurations for styler Addins (#463, #500),
   using the `Set style` Addin. See `?styler::styler_addins` for details.
+- `%>%` almost always causes a line break now (#503) for `strict = TRUE`.
 
 ## Minor changes
 
-- `%>%` almost always causes a line break now (#503).
-
-- fix roxygen code example styling indention (#455) and EOF spacing (#469).
-
-- fix indention for for loop edge case (#457) and comments in pipe chain
-  (#482).
-
-- more consistent styling of multi-line strings (#459).
-
-- fix line-break styling around comma (#479).
-
-- fix bug that may cause an error when the variable `text` in any name space
-  before styler on the search path was defined and did not have length 1
-  (#484).
-
 - `style_pkg()` now also styles the "demo" directory by default (#453).
 
-- more minimal version dependencies on other packages and clean-up (9cfe808c,
-  7077d440, 8ee486c6).
+- multi-line strings are now styled more consistently (#459).
 
-- remove slightly confusing warning about empty strings caused with roxygen code
-  examples and Rmd.
+- indention in roxygen code example styling (#455) and EOF spacing (#469) was
+  fixed.
 
-- Removed right apostrophe to let package pass R CMD Check in strict Latin-1
-  locale (#490, reason for release).
+- indention for for loop edge case (#457) and comments in pipe chain (#482)
+  were fixed.
+
+- line-break styling around comma is improved (#479).
+
+-  bug that can cause an error when the variable `text` in any name space
+  before styler on the search path was defined and did not have length 1 is
+  fixed (#484).
+
+- slightly confusing warning about empty strings caused with roxygen code
+  examples and Rmd was removed.
+
+- right apostrophe to let package pass R CMD Check in strict Latin-1
+  locale was removed (#490, reason for release).
 
 ## Adaption of styler
 
