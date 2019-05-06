@@ -7,6 +7,10 @@ This is primarily a maintenance release upon the request of the CRAN team
 
 - Users can now control style configurations for styler Addins (#463, #500),
   using the `Set style` Addin. See `?styler::styler_addins` for details.
+
+- `return()` is now always put in braces and put on a new line when used in 
+  a conditional statement (#492).
+
 - `%>%` almost always causes a line break now for `strict = TRUE` (#503).
 
 ## Minor changes
