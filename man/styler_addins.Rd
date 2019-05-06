@@ -2,43 +2,63 @@
 % Please edit documentation in R/addins.R
 \name{styler_addins}
 \alias{styler_addins}
-\alias{style_active_file}
-\alias{style_selection}
 \title{Stylers for RStudio Addins}
-\usage{
-style_active_file()
-
-style_selection()
-}
 \description{
 Helper functions for styling via RStudio Addins.
 }
-\section{Functions}{
-\itemize{
-\item \code{style_active_file}: Styles the active file with \code{\link[=tidyverse_style]{tidyverse_style()}} and
-\code{strict = TRUE}.
+\section{Addins}{
 
-\item \code{style_selection}: Styles the highlighted selection in a \code{.R} or
-\code{.Rmd} file.
-}}
+\itemize{
+\item Set style: Select the style transformers to use. For flexibility, the user
+input is passed to the \code{transformers} argument, not the \code{style} argument, so
+entering \code{styler::tidyverse_style(scope = "spaces")} in the Addin is
+equivalent to \code{styler::style_text("1+1", scope = "spaces")} and
+\code{styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))}
+if the text to style is \code{1+1}. The style transformers are memorized
+within an R session via the R option \code{styler.addins_style_transformer} so
+if you want it to persist over sessions, set the option
+\code{styler.addins_style_transformer} in your \code{.Rprofile}.
+\item Style active file: Styles the active file, by default with
+\code{\link[=tidyverse_style]{tidyverse_style()}} or the value of the option
+\code{styler.addins_style_transformer} if specified.
+\item Style selection: Same as \emph{Style active file}, but styles the highlighted
+code instead of the whole file.
+}
+}
 
 \section{Auto-Save Option}{
 
 By default, both of the RStudio Addins will apply styling to the (selected)
 file contents without saving changes. Automatic saving can be enabled by
 setting the environment variable \code{save_after_styling} to \code{TRUE}.
-
 Consider setting this in your \code{.Rprofile} file if you want to persist
 this setting across multiple sessions. Untitled files will always need to be
 saved manually after styling.
 }
 
-\seealso{
-\code{\link[=Sys.setenv]{Sys.setenv()}}
+\section{Life cycle}{
 
+The way of specifying the style in the Addin as well as the auto-save option
+(see below) are experimental. We are currently considering letting the user
+specify the defaults for other style APIs like \code{\link[styler:style_text]{styler::style_text()}},
+either via R options, config files or other ways as well.
+See \href{https://github.com/r-lib/styler/issues/319}{r-lib/styler#319} for
+the current status of this.
+}
+
+\examples{
+\dontrun{
+# save after styling when using the Addin
+Sys.setenv(save_after_styling = TRUE)
+# only style with scope = "spaces" when using the Addin
+options(
+  styler.addins_style_transformer = "styler::tidyverse_style(scope = 'spaces')"
+)
+}
+}
+\seealso{
 Other stylers: \code{\link{style_dir}},
   \code{\link{style_file}}, \code{\link{style_pkg}},
   \code{\link{style_text}}
 }
 \concept{stylers}
-\keyword{internal}
