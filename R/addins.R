@@ -47,9 +47,9 @@ NULL
 #' @importFrom rlang abort
 #' @keywords internal
 style_active_file <- function() {
-  communicate_addins_style()
+  communicate_addins_style_transformers()
   context <- get_rstudio_context()
-  transformer <- make_transformer(get_addins_style_fun(),
+  transformer <- make_transformer(get_addins_style_transformer(),
     include_roxygen_examples = TRUE, warn_empty = is_plain_r_file(context$path)
   )
 
@@ -73,15 +73,22 @@ style_active_file <- function() {
   rstudioapi::setCursorPosition(context$selection[[1]]$range)
 }
 
+#' Wrapper around [style_pkg()] for access via Addin.
+#' @keywords internal
+style_active_pkg <- function() {
+  communicate_addins_style_transformers()
+  style_pkg(transformers = get_addins_style_transformer())
+}
+
 #' Styles the highlighted selection in a `.R` or `.Rmd` file.
 #' @importFrom rlang abort
 #' @keywords internal
 style_selection <- function() {
-  communicate_addins_style()
+  communicate_addins_style_transformers()
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
   if (all(nchar(text) == 0)) abort("No code selected")
-  out <- style_text(text, transformers = get_addins_style_fun())
+  out <- style_text(text, transformers = get_addins_style_transformer())
   rstudioapi::modifyRange(
     context$selection[[1]]$range, paste0(out, collapse = "\n"),
     id = context$id
@@ -131,11 +138,11 @@ get_addins_style_transformer_name <- function() {
 
 #' @rdname get_addins_style_transformer_name
 #' @keywords internal
-get_addins_style_fun <- function() {
+get_addins_style_transformer <- function() {
   eval(parse(text = get_addins_style_transformer_name()))
 }
 
-communicate_addins_style <- function() {
+communicate_addins_style_transformers <- function() {
   style_name <- get_addins_style_transformer_name()
   cat("Using style transformers `", style_name, "`\n", sep = "")
 }
