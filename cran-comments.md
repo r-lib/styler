@@ -1,8 +1,8 @@
 ## Test environments
 
 * local OS X install (10.14.3): R 3.6
-* ubuntu 14.04 (on travis-ci): R devel, R 3.5, R 3.4, R 3.2
-* r-hub: R devel (Windows and Linux) and R release (Windows and Linux).
+* ubuntu 14.04 (on travis-ci): R devel, R 3.6, R 3.5, R 3.4, R 3.2
+* r-hub: R devel (Windows and Linux) and R 3.6 (Windows and Linux).
 * win-builder: R devel, R 3.6 
 
 ## R CMD check results
