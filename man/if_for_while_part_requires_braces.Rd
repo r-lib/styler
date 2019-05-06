@@ -14,7 +14,7 @@ the expression to be wrapped (ignoring comments). For if and while loops,
 this is the closing "')'", for a for-loop it's "forcond".}
 }
 \description{
-This is the case if they are multi-line and not yet wraped into curly
+This is the case if they are multi-line and not yet wrapped into curly
 braces.
 }
 \keyword{internal}

@@ -64,7 +64,9 @@ indent_eq_sub <- function(pd,
                           indent_by,
                           token = c("EQ_SUB", "EQ_FORMALS")) {
   eq_sub <- which(pd$token %in% token)
-  if (length(eq_sub) == 0) return(pd)
+  if (length(eq_sub) == 0) {
+    return(pd)
+  }
   has_line_break <- which(pd$lag_newlines > 0)
   indent_indices <- intersect(eq_sub + 1, has_line_break)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
@@ -86,8 +88,12 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #' @keywords internal
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
   nrow <- nrow(pd)
-  if (!(pd$token[1] %in% c("FOR", "WHILE", "FUNCTION"))) return(pd)
-  if (is_curly_expr(pd$child[[nrow]])) return(pd)
+  if (!(pd$token[1] %in% c("FOR", "WHILE", "FUNCTION"))) {
+    return(pd)
+  }
+  if (is_curly_expr(pd$child[[nrow]])) {
+    return(pd)
+  }
   pd$indent[nrow] <- indent_by
   pd
 }
@@ -148,7 +154,9 @@ compute_indent_indices <- function(pd,
     other_trigger_tokens = c("EQ_SUB", "EQ_FORMALS")
   )
   trigger <- potential_triggers[needs_indention][1]
-  if (is.na(trigger)) return(numeric(0))
+  if (is.na(trigger)) {
+    return(numeric(0))
+  }
   start <- trigger + 1
   if (is.null(token_closing)) {
     stop <- npd
@@ -209,7 +217,9 @@ needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
   before_first_break <- which(pd$lag_newlines > 0)[1] - 1
-  if (is.na(before_first_break)) return(FALSE)
+  if (is.na(before_first_break)) {
+    return(FALSE)
+  }
   row_idx_between_trigger_and_line_break <- seq2(
     potential_trigger_pos, before_first_break
   )

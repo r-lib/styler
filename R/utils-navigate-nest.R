@@ -5,17 +5,25 @@
 #' @importFrom rlang seq2
 #' @keywords internal
 next_non_comment <- function(pd, pos) {
-  if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) return(integer(0))
+  if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) {
+    return(integer(0))
+  }
   candidates <- seq2(pos + 1L, nrow(pd))
-  if (all(candidates %in% which(pd$token == "COMMENT"))) return(integer(0))
+  if (all(candidates %in% which(pd$token == "COMMENT"))) {
+    return(integer(0))
+  }
   setdiff(candidates, which(pd$token == "COMMENT"))[1]
 }
 
 #' @rdname next_non_comment
 previous_non_comment <- function(pd, pos) {
-  if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) return(integer(0))
+  if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) {
+    return(integer(0))
+  }
   candidates <- seq2(1L, pos - 1L)
-  if (all(candidates %in% which(pd$token == "COMMENT"))) return(integer(0))
+  if (all(candidates %in% which(pd$token == "COMMENT"))) {
+    return(integer(0))
+  }
   last(setdiff(candidates, which(pd$token == "COMMENT")))
 }
 
@@ -46,9 +54,8 @@ next_terminal <- function(pd,
                           stack = FALSE,
                           vars = c("pos_id", "token", "text"),
                           tokens_exclude = c()) {
-
   pd$position <- seq2(1, nrow(pd))
-  pd <- pd[!(pd$token %in% tokens_exclude),]
+  pd <- pd[!(pd$token %in% tokens_exclude), ]
   if (pd$terminal[1]) {
     pd[1, c("position", vars)]
   } else {
@@ -68,7 +75,9 @@ next_terminal <- function(pd,
 #' @param pos The position of the token to start the search from.
 #' @keywords internal
 extend_if_comment <- function(pd, pos) {
-  if (pos == nrow(pd)) return(pos)
+  if (pos == nrow(pd)) {
+    return(pos)
+  }
   if (pd$token[pos + 1] == "COMMENT") {
     extend_if_comment(pd, pos + 1L)
   } else {

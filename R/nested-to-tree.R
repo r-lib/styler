@@ -66,7 +66,9 @@ create_node_from_nested <- function(pd_nested, parent, structure_only) {
 }
 
 create_node_info <- function(pd_nested, structure_only) {
-  if (structure_only) return(seq2(1L, nrow(pd_nested)))
+  if (structure_only) {
+    return(seq2(1L, nrow(pd_nested)))
+  }
   paste0(
     pd_nested$token, ": ",
     pd_nested$short, " [",

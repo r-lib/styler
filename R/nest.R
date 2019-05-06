@@ -119,7 +119,9 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @importFrom purrr map2
 #' @keywords internal
 nest_parse_data <- function(pd_flat) {
-  if (all(pd_flat$parent <= 0)) return(pd_flat)
+  if (all(pd_flat$parent <= 0)) {
+    return(pd_flat)
+  }
   pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
   split_data <- split(pd_flat, pd_flat$internal)
 
@@ -152,7 +154,9 @@ nest_parse_data <- function(pd_flat) {
 #' @keywords internal
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
-  if (nrow(bound) == 0) return(NULL)
+  if (nrow(bound) == 0) {
+    return(NULL)
+  }
   bound[order(bound$pos_id), ]
 }
 

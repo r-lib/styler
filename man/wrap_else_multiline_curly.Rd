@@ -16,6 +16,6 @@ braces. Used for unindention.}
 }
 \description{
 Wrap the else part of a conditional expression into curly braces if not
-already wraped into a such.
+already wrapped into a such.
 }
 \keyword{internal}

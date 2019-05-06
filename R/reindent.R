@@ -162,7 +162,9 @@ set_regex_indention <- function(flattened_pd,
     cond <- which(
       (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0)
     )
-    if (length(cond) < 1) return(flattened_pd)
+    if (length(cond) < 1) {
+      return(flattened_pd)
+    }
     to_check <- flattened_pd[cond, ]
     not_to_check <- flattened_pd[-cond, ]
   } else {

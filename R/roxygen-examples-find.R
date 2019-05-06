@@ -11,7 +11,9 @@ identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
   stop_candidates <- grep("^[^#]|^#'\\s*@", text, perl = TRUE)
   stops <- map(starts, match_stop_to_start, stop_candidates) %>%
     flatten_int()
-  if (length(stops) < 1L) return(integer())
+  if (length(stops) < 1L) {
+    return(integer())
+  }
 
   map2(starts, stops, seq2)
 }

@@ -126,7 +126,9 @@ validate_new_pos_ids <- function(new_ids, after) {
 wrap_expr_in_curly <- function(pd,
                                stretch_out = c(FALSE, FALSE),
                                space_after = 1) {
-  if (is_curly_expr(pd)) return(pd)
+  if (is_curly_expr(pd)) {
+    return(pd)
+  }
   if (stretch_out[1]) {
     pd$lag_newlines[1] <- 1L
   }

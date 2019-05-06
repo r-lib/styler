@@ -3,6 +3,7 @@
 
 # styler
 
+<!-- badges
 [![Build
 Status](https://travis-ci.org/r-lib/styler.svg?branch=master)](https://travis-ci.org/r-lib/styler)
 [![AppVeyor Build
@@ -11,6 +12,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=m
 [![codecov](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
 [![cran
 version](http://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
+-->
 
 The goal of styler is to provide non-invasive pretty-printing of R
 source code while adhering to the

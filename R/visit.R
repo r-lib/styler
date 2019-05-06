@@ -17,7 +17,9 @@ NULL
 #' @rdname visit
 #' @keywords internal
 pre_visit <- function(pd_nested, funs) {
-  if (is.null(pd_nested)) return()
+  if (is.null(pd_nested)) {
+    return()
+  }
   pd_transformed <- visit_one(pd_nested, funs)
 
   pd_transformed$child <- map(pd_transformed$child, pre_visit, funs = funs)
@@ -27,7 +29,9 @@ pre_visit <- function(pd_nested, funs) {
 #' @rdname visit
 #' @keywords internal
 post_visit <- function(pd_nested, funs) {
-  if (is.null(pd_nested)) return()
+  if (is.null(pd_nested)) {
+    return()
+  }
   pd_transformed <- pd_nested
 
   pd_transformed$child <- map(pd_transformed$child, post_visit, funs = funs)
@@ -65,7 +69,9 @@ context_to_terminals <- function(pd_nested,
                                  outer_indent,
                                  outer_spaces,
                                  outer_indention_refs) {
-  if (is.null(pd_nested)) return()
+  if (is.null(pd_nested)) {
+    return()
+  }
 
   pd_transformed <- context_towards_terminals(
     pd_nested, outer_lag_newlines, outer_indent, outer_spaces, outer_indention_refs
@@ -120,7 +126,9 @@ context_towards_terminals <- function(pd_nested,
 #' @param pd_nested A nested parse table.
 #' @keywords internal
 extract_terminals <- function(pd_nested) {
-  if (is.null(pd_nested)) return(pd)
+  if (is.null(pd_nested)) {
+    return(pd)
+  }
   pd_split <- split(pd_nested, seq_len(nrow(pd_nested)))
   bind_rows(if_else(pd_nested$terminal, pd_split, pd_nested$child))
 }

@@ -1,7 +1,7 @@
 #' Work with parser versions
 #'
 #' The structure of the parse data affects many operations in styler. There was
-#' unexpected behaviour of the parser that styler was initially designed to work
+#' unexpected behavior of the parser that styler was initially designed to work
 #' around. Examples are [#187](https://github.com/r-lib/styler/issues/187),
 #' [#216](https://github.com/r-lib/styler/issues/216),
 #' [#100](https://github.com/r-lib/styler/issues/100) and others. With
@@ -26,7 +26,7 @@
 #'   data. This does not necessarily mean that the version found is the
 #'   actual version, but it *behaves* like it. For example, code that does not
 #'   contain `EQ_ASSIGN` is parsed the same way with version 1 and 2. If the
-#'   behaviour is identical, the version is set to 1.
+#'   behavior is identical, the version is set to 1.
 #' @param version The version of the parser to be used.
 #' @param pd A parse table such as the output from
 #'   `utils::getParseData(parse(text = text))`.

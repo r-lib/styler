@@ -1,6 +1,6 @@
 #' Communicate a warning if necessary
 #'
-#' If roundtrip verification was not possible, issue a warning to review the
+#' If round trip verification was not possible, issue a warning to review the
 #' changes carefully.
 #' @param changed Boolean with indicating for each file whether or not it has
 #'   been changed.
@@ -34,4 +34,3 @@ assert_data.tree_installation <- function() {
     abort("The package data.tree needs to be installed for this functionality.")
   }
 }
-
