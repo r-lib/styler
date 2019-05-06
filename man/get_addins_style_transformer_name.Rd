@@ -2,12 +2,12 @@
 % Please edit documentation in R/addins.R
 \name{get_addins_style_transformer_name}
 \alias{get_addins_style_transformer_name}
-\alias{get_addins_style_fun}
+\alias{get_addins_style_transformer}
 \title{Return the style function or name}
 \usage{
 get_addins_style_transformer_name()
 
-get_addins_style_fun()
+get_addins_style_transformer()
 }
 \description{
 Return the style function or name
