@@ -114,9 +114,10 @@ set_style_transformers <- function() {
       "Enter the name of a style transformer, e.g. `styler::tidyverse_style()`",
       current_style
     )
-  parsed_new_style <- with_handlers({
-    transformers <- eval(parse(text = new_style))
-    style_text(c("a = 2", "function() {", "NULL", "}"))
+  if (!is.null(new_style)) {
+    parsed_new_style <- with_handlers({
+      transformers <- eval(parse(text = new_style))
+      style_text(c("a = 2", "function() {", "NULL", "}"))
     },
     error = function(e) {
       abort(paste0(
@@ -124,8 +125,10 @@ set_style_transformers <- function() {
         new_style, "\" is not valid: ", e$message
       ))
     }
-  )
-  options(styler.addins_style_transformer = new_style)
+    )
+    options(styler.addins_style_transformer = new_style)
+  }
+
   invisible(current_style)
 }
 
