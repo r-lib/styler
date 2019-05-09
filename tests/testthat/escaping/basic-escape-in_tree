@@ -1,0 +1,27 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--COMMENT: #' th [0/0] {1}                           
+ ¦--COMMENT: #' [1/0] {2}                              
+ ¦--COMMENT: #' @e [1/0] {3}                           
+ ¦--COMMENT: #' ca [1/0] {4}                           
+ ¦--expr:  [1/0] {6}                                   
+ ¦   °--NULL_CONST: NULL [0/0] {5}                     
+ ¦--COMMENT: #' th [3/0] {7}                           
+ ¦--COMMENT: #' [1/0] {8}                              
+ ¦--COMMENT: #' @e [1/0] {9}                           
+ ¦--COMMENT: #' ca [1/0] {10}                          
+ ¦--expr:  [1/0] {12}                                  
+ ¦   °--NULL_CONST: NULL [0/0] {11}                    
+ ¦--COMMENT: #' th [2/0] {13}                          
+ ¦--COMMENT: #' [1/0] {14}                             
+ ¦--COMMENT: #' @e [1/0] {15}                          
+ ¦--COMMENT: #' ca [1/0] {16}                          
+ ¦--COMMENT: #' an [1/0] {17}                          
+ ¦--expr:  [1/0] {19}                                  
+ ¦   °--NULL_CONST: NULL [0/0] {18}                    
+ ¦--COMMENT: #' th [3/0] {20}                          
+ ¦--COMMENT: #' [1/0] {21}                             
+ ¦--COMMENT: #' @e [1/0] {22}                          
+ ¦--COMMENT: #' ca [1/0] {23}                          
+ ¦--COMMENT: #' an [1/0] {24}                          
+ °--expr:  [1/0] {26}                                  
+     °--NULL_CONST: NULL [0/0] {25}                    

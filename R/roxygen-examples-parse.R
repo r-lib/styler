@@ -19,7 +19,7 @@ parse_roxygen <- function(roxygen) {
     textConnection()
   parsed <- connection %>%
     tools::parse_Rd(fragment = TRUE) %>%
-    as.character()
+    as.character(deparse = TRUE)
   is_line_break <- parsed[1] == "\n"
   close(connection)
   c(parsed[1][!is_line_break], parsed[-1])
