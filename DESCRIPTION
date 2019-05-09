@@ -36,7 +36,7 @@ Suggests:
     prettycode,
     rmarkdown,
     rstudioapi (>= 0.7),
-    testthat
+    testthat (>= 2.1.0)
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
