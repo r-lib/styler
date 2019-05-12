@@ -1,5 +1,5 @@
 -   id: devtools-document
-    name: devtools::document()
+    name: devtools-document
     description: run devtools::document()
     entry: ./exec/devtools-document
     language: script
