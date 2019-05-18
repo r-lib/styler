@@ -10,6 +10,9 @@ add_space_around_op <- function(pd_flat) {
   pd_flat
 }
 
+#' Set spaces around operators
+#'
+#' Alignement is kept, if detected.
 #' @include token-define.R
 #' @keywords internal
 set_space_around_op <- function(pd_flat) {
@@ -18,8 +21,13 @@ set_space_around_op <- function(pd_flat) {
     return(pd_flat)
   }
   op_before <- lead(op_after, default = FALSE)
-  pd_flat$spaces[op_before & (pd_flat$newlines == 0L)] <- 1L
-  pd_flat$spaces[op_after & (pd_flat$newlines == 0L)] <- 1L
+  if (any(pd_flat$token == "EQ_SUB")) {
+    is_on_alligned_line <- token_is_on_alligned_line(pd_flat, op_before)
+  } else {
+    is_on_alligned_line <- FALSE
+  }
+  pd_flat$spaces[op_before & (pd_flat$newlines == 0L) & !is_on_alligned_line] <- 1L
+  pd_flat$spaces[op_after & (pd_flat$newlines == 0L) & !is_on_alligned_line] <- 1L
   pd_flat
 }
 
