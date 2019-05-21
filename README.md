@@ -22,7 +22,7 @@ adding a `.pre-commit-config.yaml` file that has a structure like this:
 
 ``` yaml
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: dcdeae2f8c96a59fab4e8f327af3fe5b050d834a
+    rev: 0be8269b3431af994c56a90b818540c1d526debc
     hooks: 
     -   id: devtools-document
 ```
