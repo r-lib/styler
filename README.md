@@ -10,9 +10,11 @@
 A collection of git pre-commit hooks to use with pre-commit.com.
 Currently, we have:
 
-  - `devtools-document`: A hook to run `devtools::document()`.
   - `styler-style-files`: A hook to style files with
     [styler](https://styler.r-lib.org)
+  - `devtools-document`: A hook to run `devtools::document()`.
+  - `check-readme-rmd-rendered`: A hook to make sure `README.Rmd` hasn’t
+    been edited more recently than `README.md`.
 
 To add a pre-commit hook to your project, install pre-commit as
 described in the [official documentation](https://pre-commit.com/#intro)
