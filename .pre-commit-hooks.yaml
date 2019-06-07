@@ -3,6 +3,7 @@
     description: run devtools::document()
     entry: bin/devtools-document
     language: script
+    files: '^(R/|man/)'
 -   id: styler-style-files
     name: styler-style-files
     description: style files with styler
