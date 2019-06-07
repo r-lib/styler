@@ -4,6 +4,12 @@
     entry: bin/devtools-document
     language: script
     files: '^(R/|man/)'
+-   id: usethis-use-tidy-description
+    name: usethis-use-tidy-description
+    description: run usethis::use_tidy_description()
+    entry: bin/usethis-use-tidy-description
+    language: script
+    files: '^DESCRIPTION$'
 -   id: styler-style-files
     name: styler-style-files
     description: style files with styler
