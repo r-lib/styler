@@ -1,2 +1,6 @@
 #!/usr/bin/env Rscript
+print("libPaths are") 
+print(.libPaths())
+print("wd is")
+print(getwd())
 styler::style_file(commandArgs(trailing = TRUE))
