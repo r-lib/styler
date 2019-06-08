@@ -43,4 +43,4 @@ If you installed pre-commit, you can add it to a specific project by adding a
 
 Then, run `pre-commit install` in your repo and you are done. The next time
 you run `$ git commit`, the hooks listed in your `.pre-commit-config.yaml`  will
-get exeuted before the commit.
+get exeuted before the commit. The revision `latest` refers to HEAD of master.

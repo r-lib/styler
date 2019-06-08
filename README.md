@@ -36,4 +36,5 @@ adding a `.pre-commit-config.yaml` file that has a structure like this:
 
 Then, run `pre-commit install` in your repo and you are done. The next
 time you run `$ git commit`, the hooks listed in your
-`.pre-commit-config.yaml` will get exeuted before the commit.
+`.pre-commit-config.yaml` will get exeuted before the commit. The
+revision `latest` refers to HEAD of master.
