@@ -90,7 +90,7 @@ style_selection <- function() {
   if (all(nchar(text) == 0)) abort("No code selected")
   out <- style_text(text, transformers = get_addins_style_transformer())
   rstudioapi::modifyRange(
-    context$selection[[1]]$range, paste0(out, collapse = "\n"),
+    context$selection[[1]]$range, paste0(c(out, if (context$selection[[1]]$range$end[2] == 1) ""), collapse = "\n"),
     id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
