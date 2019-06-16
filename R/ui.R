@@ -227,9 +227,6 @@ style_file <- function(path,
                        style = tidyverse_style,
                        transformers = style(...),
                        include_roxygen_examples = TRUE) {
-  changed <- withr::with_dir(
-    dirname(path),
-    transform_files(basename(path), transformers, include_roxygen_examples)
-  )
+  changed <- transform_files(path, transformers, include_roxygen_examples)
   invisible(changed)
 }

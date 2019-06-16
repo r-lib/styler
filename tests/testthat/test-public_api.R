@@ -17,18 +17,17 @@ test_that("styler can style directory", {
 })
 
 test_that("styler can style files", {
-  capture_output(expect_false({
-    out <- style_file(testthat_file("public-api", "xyzfile", "random-script.R"), strict = FALSE)
-    out$changed
-  }))
-
-  capture_output(expect_false(any({
-    out <- style_file(
-      rep(testthat_file("public-api", "xyzfile", "random-script.R"), 2),
-      strict = FALSE
-    )
-    out$changed
-  })))
+  # just one
+  capture_output(expect_equivalent(
+    {
+      out <- style_file(c(
+        testthat_file("public-api", "xyzfile", "random-script.R"),
+        testthat_file("public-api", "xyzfile", "subfolder", "random-script.R")
+      ), strict = FALSE)
+      out$changed
+    },
+    rep(FALSE, 2)
+  ))
 })
 
 
