@@ -21,6 +21,16 @@ test_that("styler can style files", {
   capture_output(expect_equivalent(
     {
       out <- style_file(c(
+        testthat_file("public-api", "xyzfile", "random-script.R")
+      ), strict = FALSE)
+      out$changed
+    },
+    rep(FALSE, 1)
+  ))
+  # multiple not in the same working directory
+  capture_output(expect_equivalent(
+    {
+      out <- style_file(c(
         testthat_file("public-api", "xyzfile", "random-script.R"),
         testthat_file("public-api", "xyzfile", "subfolder", "random-script.R")
       ), strict = FALSE)
@@ -82,13 +92,13 @@ test_that("messages (via cat()) of style_file are correct", {
         temp_path <- copy_to_tempdir(testthat_file(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"
         ))
-        expect_equal_to_reference(
-          capture.output(
+        expect_known_value(
+          gsub(dirname(temp_path), "", capture.output(
             style_file(temp_path, scope = "tokens")
-          ),
+          ), fixed = TRUE),
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
-            ifelse(cli::is_utf8_output(), "utf8", "non-utf8")
+            ifelse(encoding, "utf8", "non-utf8")
           ))
         )
         unlink(dirname(temp_path))
@@ -97,11 +107,14 @@ test_that("messages (via cat()) of style_file are correct", {
         temp_path <- copy_to_tempdir(testthat_file(
           "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
         ))
-        expect_equal_to_reference(
-          capture.output(style_file(temp_path, scope = "tokens")),
+        expect_known_value(
+          gsub(dirname(temp_path), "",
+            capture.output(style_file(temp_path, scope = "tokens")),
+            fixed = TRUE
+          ),
           testthat_file(paste0(
             "public-api/xyzdir-dirty/clean-reference-with-scope-tokens-",
-            ifelse(cli::is_utf8_output(), "utf8", "non-utf8")
+            ifelse(encoding, "utf8", "non-utf8")
           ))
         )
         unlink(dirname(temp_path))
@@ -110,11 +123,14 @@ test_that("messages (via cat()) of style_file are correct", {
         temp_path <- copy_to_tempdir(testthat_file(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
         ))
-        expect_equal_to_reference(
-          capture.output(style_file(temp_path, scope = "spaces")),
+        expect_known_value(
+          gsub(dirname(temp_path), "",
+            capture.output(style_file(temp_path, scope = "spaces")),
+            fixed = TRUE
+          ),
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-spaces-",
-            ifelse(cli::is_utf8_output(), "utf8", "non-utf8")
+            ifelse(encoding, "utf8", "non-utf8")
           ))
         )
         unlink(dirname(temp_path))
