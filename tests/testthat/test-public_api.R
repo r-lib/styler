@@ -87,7 +87,7 @@ test_that("messages (via cat()) of style_file are correct", {
   }
   for (encoding in c(encodings, FALSE)) {
     withr::with_options(
-      list(cli.unicode = encoding), {
+      list(cli.unicode = encoding, width = 80), {
         # Message if scope > line_breaks and code changes
         temp_path <- copy_to_tempdir(testthat_file(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"
