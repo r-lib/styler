@@ -80,14 +80,14 @@ context("messages are correct")
 test_that("messages (via cat()) of style_file are correct", {
   if (cli::is_utf8_output()) {
     # if utf8 is available test under this and test  if it is not available
-    encodings <- list(TRUE)
+    is_utf8_encodings <- list(TRUE)
   } else {
     # if utf8 is not available, only test under that
-    encodings <- list()
+    is_utf8_encodings <- list()
   }
-  for (encoding in c(encodings, FALSE)) {
+  for (is_utf8_encoding in c(is_utf8_encodings, FALSE)) {
     withr::with_options(
-      list(cli.unicode = encoding, width = 80), {
+      list(cli.unicode = is_utf8_encoding, width = 80), {
         # Message if scope > line_breaks and code changes
         temp_path <- copy_to_tempdir(testthat_file(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"
@@ -98,7 +98,7 @@ test_that("messages (via cat()) of style_file are correct", {
           ), fixed = TRUE),
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
-            ifelse(encoding, "utf8", "non-utf8")
+            ifelse(is_utf8_encoding, "utf8", "non-utf8")
           ))
         )
         unlink(dirname(temp_path))
@@ -114,7 +114,7 @@ test_that("messages (via cat()) of style_file are correct", {
           ),
           testthat_file(paste0(
             "public-api/xyzdir-dirty/clean-reference-with-scope-tokens-",
-            ifelse(encoding, "utf8", "non-utf8")
+            ifelse(is_utf8_encoding, "utf8", "non-utf8")
           ))
         )
         unlink(dirname(temp_path))
@@ -130,7 +130,7 @@ test_that("messages (via cat()) of style_file are correct", {
           ),
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-spaces-",
-            ifelse(encoding, "utf8", "non-utf8")
+            ifelse(is_utf8_encoding, "utf8", "non-utf8")
           ))
         )
         unlink(dirname(temp_path))
