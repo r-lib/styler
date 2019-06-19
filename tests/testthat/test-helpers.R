@@ -2,7 +2,9 @@ context("various helpers")
 
 test_that("can construct and print vertical", {
   expect_error(construct_vertical(c("1 + 1", "nw")), NA)
-  expect_error(construct_vertical(c("1 + 1", "nw")) %>% print(), NA)
+  capture.output(
+    expect_error(construct_vertical(c("1 + 1", "nw")) %>% print(), NA)
+  )
 })
 
 
