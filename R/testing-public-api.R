@@ -12,6 +12,7 @@
 #' value to make the output portable across systems (in particular, to run it on
 #' CI systems). Since the horizontal rules width depend on the length of the
 #' path, the rules were also removed to standardize the ouptut of this function.
+#' @importFrom utils capture.output
 #' @keywords internal
 catch_style_file_output <- function(file_in = c(
                                       "public-api",
@@ -20,7 +21,7 @@ catch_style_file_output <- function(file_in = c(
                                     ),
                                     encoding) {
   temp_path <- copy_to_tempdir(do.call(testthat_file, as.list(file_in)))
-  removed_path <- gsub(dirname(temp_path), "", capture.output(
+  removed_path <- gsub(normalizePath(dirname(temp_path)), "", capture.output(
     style_file(temp_path, scope = "tokens")
   ), fixed = TRUE)
   removed_rules <- gsub(
