@@ -11,7 +11,7 @@
 #' @keywords internal
 transform_files <- function(files, transformers, include_roxygen_examples) {
   transformer <- make_transformer(transformers, include_roxygen_examples)
-  max_char <- min(max(nchar(files), 0), 80)
+  max_char <- min(max(nchar(files), 0), getOption("width"))
   if (length(files) > 0L) {
     cat("Styling ", length(files), " files:\n")
   }

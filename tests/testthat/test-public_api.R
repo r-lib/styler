@@ -78,59 +78,47 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
 context("messages are correct")
 
 test_that("messages (via cat()) of style_file are correct", {
-  if (cli::is_utf8_output()) {
-    # if utf8 is available test under this and test  if it is not available
-    is_utf8_encodings <- list(TRUE)
-  } else {
-    # if utf8 is not available, only test under that
-    is_utf8_encodings <- list()
-  }
-  for (is_utf8_encoding in c(is_utf8_encodings, FALSE)) {
+
+  for (encoding in ls_testable_encodings()) {
     withr::with_options(
-      list(cli.unicode = is_utf8_encoding, width = 80), {
+      list(cli.unicode = encoding == "utf8"), {
         # Message if scope > line_breaks and code changes
-        temp_path <- copy_to_tempdir(testthat_file(
-          "public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"
-        ))
+        output <- catch_style_file_output(c(
+          "public-api",
+            "xyzdir-dirty",
+            "dirty-sample-with-scope-tokens.R"
+          ), encoding = encoding)
         expect_known_value(
-          gsub(dirname(temp_path), "", capture.output(
-            style_file(temp_path, scope = "tokens")
-          ), fixed = TRUE),
+          output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
-            ifelse(is_utf8_encoding, "utf8", "non-utf8")
+            encoding
           ))
         )
         unlink(dirname(temp_path))
 
         # No message if scope > line_breaks and code does not change
-        temp_path <- copy_to_tempdir(testthat_file(
+        output <- catch_style_file_output(c(
           "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
-        ))
+        ), encoding = encoding)
         expect_known_value(
-          gsub(dirname(temp_path), "",
-            capture.output(style_file(temp_path, scope = "tokens")),
-            fixed = TRUE
-          ),
+          output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/clean-reference-with-scope-tokens-",
-            ifelse(is_utf8_encoding, "utf8", "non-utf8")
+            encoding
           ))
         )
         unlink(dirname(temp_path))
 
         # No message if scope <= line_breaks even if code is changed.
-        temp_path <- copy_to_tempdir(testthat_file(
+        output <- catch_style_file_output(c(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
-        ))
+        ), encoding = encoding)
         expect_known_value(
-          gsub(dirname(temp_path), "",
-            capture.output(style_file(temp_path, scope = "spaces")),
-            fixed = TRUE
-          ),
+          output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-spaces-",
-            ifelse(is_utf8_encoding, "utf8", "non-utf8")
+            encoding
           ))
         )
         unlink(dirname(temp_path))
