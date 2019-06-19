@@ -95,7 +95,6 @@ test_that("messages (via cat()) of style_file are correct", {
             encoding
           ))
         )
-        unlink(dirname(temp_path))
 
         # No message if scope > line_breaks and code does not change
         output <- catch_style_file_output(c(
@@ -108,7 +107,6 @@ test_that("messages (via cat()) of style_file are correct", {
             encoding
           ))
         )
-        unlink(dirname(temp_path))
 
         # No message if scope <= line_breaks even if code is changed.
         output <- catch_style_file_output(c(
@@ -121,7 +119,6 @@ test_that("messages (via cat()) of style_file are correct", {
             encoding
           ))
         )
-        unlink(dirname(temp_path))
       }
     )
   }

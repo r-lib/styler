@@ -27,6 +27,7 @@ catch_style_file_output <- function(file_in = c(
     ifelse(encoding == "utf8", "\u2500+", "-+"),
     "", removed_path
   )
+  unlink(dirname(temp_path))
   removed_rules
 }
 
