@@ -196,6 +196,18 @@ testthat_file <- function(...) {
   file.path(rprojroot::find_testthat_root_file(), ...)
 }
 
+#' Convert a serialized R object to a certaion verion.
+#'
+#' Needed to make [testthat::expect_known_value()] work on R < 3.6.
+#' @param path A path to an rds file.
+#' @param version The target version.
+#' @keywords internal
+rds_to_version <- function(path, version = 2) {
+  readRDS(path) %>%
+    saveRDS(path, version = version)
+}
+
+
 
 #' Copy a file to a temporary directory
 #'
