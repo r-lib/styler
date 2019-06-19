@@ -5,7 +5,9 @@
 #'   to the reference file.
 #' @return
 #' A character vector with the captured output of [style_file()] called on
-#' `file_in` ran in a temp dir to avoid side effects. In this output, the
+#' `file_in` ran in a temp dir to avoid side effects on the input file (because
+#' the next time the test would ran, the file would not need styling).
+#' In this output, the
 #' path has been removed so only the file name is contained in the return
 #' value to make the output portable across systems (in particular, to run it on
 #' CI systems). Since the horizontal rules width depend on the length of the
@@ -31,11 +33,3 @@ catch_style_file_output <- function(file_in = c(
 ls_testable_encodings <- function() {
   c("non-utf8", if (cli::is_utf8_output()) "utf8")
 }
-
-# path_reference_catched_style_file_output <- function(file_reference) {
-#   testthat_file(
-#     "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
-#     ifelse(is_utf8_encoding, "utf8", "non-utf8")
-#   ))
-#
-# }

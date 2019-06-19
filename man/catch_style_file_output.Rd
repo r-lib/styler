@@ -14,7 +14,9 @@ to the reference file.}
 }
 \value{
 A character vector with the captured output of \code{\link[=style_file]{style_file()}} called on
-\code{file_in} ran in a temp dir to avoid side effects. In this output, the
+\code{file_in} ran in a temp dir to avoid side effects on the input file (because
+the next time the test would ran, the file would not need styling).
+In this output, the
 path has been removed so only the file name is contained in the return
 value to make the output portable across systems (in particular, to run it on
 CI systems). Since the horizontal rules width depend on the length of the
