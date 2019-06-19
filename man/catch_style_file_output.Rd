@@ -15,12 +15,14 @@ to the reference file.}
 \value{
 A character vector with the captured output of \code{\link[=style_file]{style_file()}} called on
 \code{file_in} ran in a temp dir to avoid side effects on the input file (because
-the next time the test would ran, the file would not need styling).
-In this output, the
-path has been removed so only the file name is contained in the return
-value to make the output portable across systems (in particular, to run it on
-CI systems). Since the horizontal rules width depend on the length of the
-path, the rules were also removed to standardize the ouptut of this function.
+the next time the test would ran, the file would not need styling). The
+styling is carried out with a temporary working directory change to keep
+filenames relative and avoid portability issues in the exact output
+comparison which is needed when the system that runs the unit testing (CI)
+is a different system than the one that created the reference value.
+This also implies that the ruler width, which depend on the path
+length, will again have the same width on all systems and is independent of
+how many characters the path of the temporary directory has.
 }
 \description{
 Capture and post-process the output of \code{style_file} without causing side
