@@ -1,8 +1,9 @@
 branch="$(git branch | grep \* | cut -d ' ' -f2)"
 if [ "master" == "$branch" ]
 then
-        echo "Pushing tag 'latest' to HEAD in 3s"
+        echo "Pushing HEAD and tagging it with 'latest' in 3s"
         sleep 3
+        git push
         git tag -d latest
         git push --delete origin latest
         git tag -a latest -m "current HEAD of master"
