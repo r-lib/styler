@@ -111,7 +111,8 @@ tidyverse_style <- function(scope = "tokens",
         add_space_before_comments
       },
       set_space_between_levels,
-      set_space_between_eq_sub_and_comma
+      set_space_between_eq_sub_and_comma,
+      set_space_in_curly_curly
     )
   }
 
@@ -128,6 +129,9 @@ tidyverse_style <- function(scope = "tokens",
       style_line_break_around_curly = partial(style_line_break_around_curly,
         strict
       ),
+      # must be after style_line_break_around_curly as it remove line
+      # breaks again for {{.
+      set_line_break_around_curly_curly,
       set_line_break_after_opening_if_call_is_multi_line = if (strict)
         partial(
           set_line_break_after_opening_if_call_is_multi_line,

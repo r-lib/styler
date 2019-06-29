@@ -158,7 +158,35 @@ add_space_after_for_if_while <- function(pd_flat) {
   pd_flat
 }
 
+#' @rdname set_line_break_around_curly_curly
+#' @keywords internal
+set_space_in_curly_curly <- function(pd) {
+  if (is_curly_expr(pd)) {
+    after_inner_opening <- pd$token == "'{'" & pd$token_before == "'{'"
+    before_inner_closing <- lead(pd$token == "'}'" & pd$token_after == "'}'")
+    if (
+      any(after_inner_opening, na.rm = TRUE) &&
+      any(before_inner_closing, na.rm = TRUE)
+    ) {
+      pd$spaces[after_inner_opening] <- 1L
+      pd$spaces[before_inner_closing] <- 1L
+    }
+    after_outer_opening <- pd$token == "'{'" & pd$token_after == "'{'"
+    before_outer_closing <- lead(pd$token == "'}'" & pd$token_before == "'}'")
+    if (
+      any(after_outer_opening, na.rm = TRUE) &&
+      any(before_outer_closing, nna.rm = TRUE)) {
+      pd$spaces[after_outer_opening] <- 0L
+      pd$spaces[before_outer_closing] <- 0L
+    }
+  }
+  pd
+}
+
 add_space_before_brace <- function(pd_flat) {
+  # TODO remove this, it has no effect since { can only appear in the first
+  # position of the nest and taking lead(op_after, default = FALSE) will always
+  # yield a vector of FALSE only.
   op_after <- pd_flat$token %in% "'{'"
   if (!any(op_after)) {
     return(pd_flat)
