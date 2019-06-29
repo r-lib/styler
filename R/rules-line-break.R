@@ -16,10 +16,11 @@ set_line_break_around_comma <- function(pd) {
   pd
 }
 
-style_line_break_around_curly <- function(strict, curly_curly_has_linebreak, pd) {
+style_line_break_around_curly <- function(strict, pd) {
   if (is_curly_expr(pd) && nrow(pd) > 2) {
-    to_break <- to_break_curly_inner(pd, strict, curly_curly_has_linebreak) &
-      to_break_curly_outer(pd, strict, curly_curly_has_linebreak)
+    closing_before <- pd$token == "'}'"
+    opening_before <- (pd$token == "'{'") & (pd$token_after != "COMMENT")
+    to_break <- lag(opening_before, default = FALSE) | closing_before
     len_to_break <- sum(to_break)
     pd$lag_newlines[to_break] <- ifelse(rep(strict, len_to_break),
       1L,
@@ -27,42 +28,6 @@ style_line_break_around_curly <- function(strict, curly_curly_has_linebreak, pd)
     )
   }
   pd
-}
-
-
-to_break_curly_inner <- function(pd, strict, curly_curly_has_linebreak) {
-  closing_before <- (pd$token == "'}'") &
-    if (!curly_curly_has_linebreak) {
-      pd$token_after != "'}'"
-    } else {
-      TRUE
-    }
-  opening_before <- (pd$token == "'{'") &
-    (pd$token_after != "COMMENT") &
-    if (!curly_curly_has_linebreak) {
-      pd$token_before != "'{'"
-    } else {
-      TRUE
-    }
-  lag(opening_before, default = FALSE) | closing_before
-}
-
-to_break_curly_outer <- function(pd, strict, curly_curly_has_linebreak) {
-  closing_before <- (pd$token == "'}'") &
-    if (!curly_curly_has_linebreak) {
-      pd$token_before != "'}'"
-    } else {
-      TRUE
-    }
-
-  opening_before <- (pd$token == "'{'") &
-    (pd$token_after != "COMMENT") &
-    if (!curly_curly_has_linebreak) {
-      pd$token_after != "'{'"
-    } else {
-      TRUE
-    }
-  lag(opening_before, default = FALSE) | closing_before
 }
 
 # if ) follows on }, don't break line

@@ -3,7 +3,7 @@ context("unindention")
 test_that("round brackets are unindented correctly", {
   expect_warning(test_collection("unindention",
                                  "mixed",
-                                 transformer = style_text_without_curly_curly,
+                                 transformer = style_text,
                                  write_back = TRUE), NA)
 })
 
