@@ -4,9 +4,9 @@
 #' rules for the curly-curly syntactic sugar (introduced in rlang 0.4).
 #' This function (`style_text_without_curly_curly()`) is needed for testing
 #' only, namely to test indention
-#' with multiple curly braces in a sequence. It is important to maintain test
-#' for indention rules even as `\{\{` is always kept on the same line (if
-#' followed) by `\}\}` without interruption, e.g. `{{1} + 2}` because we should
+#' with multiple curly braces in a sequence. It is important to maintain testing
+#' for indention rules even as the curly-curly expression is always kept on the
+#' same line in the tidyverse style guide because we should
 #' ensure the underlaying mechanics for indention work correctly. When
 #' indention mechanisms are changed later, e.g. by simplifying
 #' [compute_indent_indices()], we must have
