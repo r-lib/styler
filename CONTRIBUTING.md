@@ -191,3 +191,10 @@ used to track failed tests.
 The files are placed in `tests/testthat` under the category they fit. 
 Please have a look at the documentation for `test_collection()` and see other 
 unit tests. Let me know if there is anything unclear about this.
+
+## Contributing code
+
+* Only open a PR when your idea was approved of by a contributor in an issue.
+* Add a bullet to NEWS.md referencing the PR, also following the guide lines in 
+  [tidyverse style guide](http://style.tidyverse.org), as for your code 
+  contributions.
