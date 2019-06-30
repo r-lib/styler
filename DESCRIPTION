@@ -71,6 +71,7 @@ Collate:
     'set-assert-args.R'
     'style-guides.R'
     'styler.R'
+    'testing-mocks.R'
     'testing-public-api.R'
     'testing.R'
     'token-create.R'

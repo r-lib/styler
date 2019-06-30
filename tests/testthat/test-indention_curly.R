@@ -10,7 +10,7 @@ test_that("indention on one-liner curley only is not changed", {
 test_that("indention with multi-line curley only is correct", {
   expect_warning(test_collection("indention_curly_brackets",
                                  "multi_line_curly_only",
-                                 transformer = style_text), NA)
+                                 transformer = style_text_without_curly_curly), NA)
 
 })
 

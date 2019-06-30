@@ -14,7 +14,7 @@ test_that("multiple round brackets don't cause extraindention", {
 test_that("multiple curly brackets don't cause extraindention", {
   expect_warning(test_collection("indention_multiple",
                                  "curly_only",
-                                 transformer = style_text), NA)
+                                 transformer = style_text_without_curly_curly), NA)
 
 })
 
@@ -22,7 +22,7 @@ test_that("multiple curly brackets don't cause extraindention", {
 test_that("multiple curly and round brackets don't cause extraindention", {
   expect_warning(test_collection("indention_multiple",
                                  "curly_and_round",
-                                 transformer = style_text), NA)
+                                 transformer = style_text_without_curly_curly), NA)
 
 })
 
@@ -46,14 +46,12 @@ test_that("if and ifelse interacting with curly braces works", {
 test_that("edge cases work", {
   expect_warning(test_collection("indention_multiple",
                                  "edge_strict",
-                                 transformer = style_text), NA)
+                                 transformer = style_text_without_curly_curly), NA)
 })
 
 test_that("token / braces interaction works", {
   expect_warning(test_collection("indention_multiple",
                                  "fun_for_new_line",
-                                 transformer = style_text), NA)
-
-
+                                 transformer = style_text_without_curly_curly), NA)
 })
 
