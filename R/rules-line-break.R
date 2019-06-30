@@ -1,7 +1,13 @@
 # A { should never go on its own line
 remove_line_break_before_curly_opening <- function(pd) {
-  rm_break <- (pd$token_after == "'{'") & (pd$token != "COMMENT")
-  pd$lag_newlines[lag(rm_break)] <- 0L
+  rm_break_idx <- which((pd$token_after == "'{'") & (pd$token != "COMMENT"))
+  if (length(rm_break_idx) > 0) {
+    is_not_curly_curly <- map_chr(rm_break_idx + 1L,
+      ~next_terminal(pd[.x,], vars = "token_after")$token_after
+    ) != "'{'"
+    is_not_curly_curly_idx <- rm_break_idx[is_not_curly_curly]
+    pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
+  }
   pd
 }
 
