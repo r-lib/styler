@@ -1,3 +1,27 @@
+# styler 1.1.1.9000
+
+## Breaking changes
+
+* `style_file()` now correctly styles multiple files from different 
+  directories. We no longer display the file name of the styled file, but
+  the absolute path. This is also reflected in the invisible return value of the 
+  function (#522).
+
+## New features
+
+* curlyl-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now 
+  explicitly handled, as opposed previously where it was just treated as two 
+  consequtive curly braces (#528).
+
+## Minor improvements and fixes
+
+* escape characters in roxygen code examples are now correctly escaped (#512).
+* style selection Addin now preserves line break when the last line selected is 
+  an entire line (#520).
+* style file Addin can now properly handle cancelling (#511).
+* advice for contributors in `CONTRIBUTING.md` was updated (#508).
+
+
 # styler 1.1.1
 
 This is primarily a maintenance release upon the request of the CRAN team
