@@ -9,7 +9,7 @@
 #' @importFrom rlang abort
 #' @keywords internal
 transform_code <- function(path, fun, ...) {
-  if (is_plain_r_file(path)) {
+  if (is_plain_r_file(path) || is_rprofile_file(path)) {
     transform_utf8(path, fun = fun, ...)
   } else if (is_rmd_file(path)) {
     transform_utf8(path,

@@ -2,6 +2,9 @@ is_plain_r_file <- function(path) {
   grepl("\\.R$", path, ignore.case = TRUE)
 }
 
+is_rprofile_file <- function(path) {
+  grepl(".rprofile", path, ignore.case = TRUE)
+}
 is_rmd_file <- function(path) {
   grepl("\\.Rmd$", path, ignore.case = TRUE)
 }

@@ -38,9 +38,9 @@ set_and_assert_arg_filetype <- function(filetype) {
 #' @importFrom rlang abort
 #' @keywords internal
 assert_filetype <- function(lowercase_filetype) {
-  if (!all(lowercase_filetype %in% c("r", "rmd", "rnw"))) {
+  if (!all(lowercase_filetype %in% c("r", "rmd", "rnw", "rprofile"))) {
     abort(paste(
-      "filetype must not contain other values than 'R',",
+      "filetype must not contain other values than 'R', 'Rprofile',",
       "'Rmd' or 'Rnw' (case is ignored)."
     ))
   }
