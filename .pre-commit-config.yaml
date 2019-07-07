@@ -1,6 +1,6 @@
 repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: latest
+    rev: v0.0.0.9001
     hooks: 
     -   id: devtools-document
     -   id: styler-style-files

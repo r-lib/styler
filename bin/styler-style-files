@@ -2,7 +2,7 @@
 files <- commandArgs(trailing = TRUE)
 
 
-if (packageVersion("styler") < "1.1.1.9000") {
+if (packageVersion("styler") < "1.1.1.9001") {
 # work around for #521.
   lapply(files, styler::style_file)
 } else {

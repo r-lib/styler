@@ -32,15 +32,12 @@ adding a `.pre-commit-config.yaml` file that has a structure like this:
 ``` yaml
 repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: latest
+    rev: v0.0.0.9001
     hooks: 
     -   id: devtools-document
     -   id: styler-style-files
     -   id: usethis-use-tidy-description
 ```
-
-The revision `latest` above is a tag and refers to HEAD of
-<https://github.com/lorenzwalthert/pre-commit-hooks>.\[1\]
 
 Next, run `pre-commit install` in your repo and you are done. The next
 time you run `git commit`, the hooks listed in your
@@ -99,5 +96,3 @@ to use simple bash scripts in `.git/hooks`:
     project to another.
 
 -----
-
-1.  this is specific to hooks from lorenzwalthert/pre-commit-hooks.

@@ -40,14 +40,12 @@ If you installed pre-commit, you can add it to a specific project by adding a
 ``` yaml
 repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: latest
+    rev: v0.0.0.9001
     hooks: 
     -   id: devtools-document
     -   id: styler-style-files
     -   id: usethis-use-tidy-description
 ````
-The revision `latest` above is a tag and refers to HEAD of https://github.com/lorenzwalthert/pre-commit-hooks.^[this is specific to hooks
-from lorenzwalthert/pre-commit-hooks.]
 
 Next, run `pre-commit install` in your repo and you are done. The next time
 you run `git commit`, the hooks listed in your `.pre-commit-config.yaml`  will
