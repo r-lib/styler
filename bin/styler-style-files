@@ -1,3 +1,11 @@
 #!/usr/bin/env Rscript
 files <- commandArgs(trailing = TRUE)
-styler::style_file(files)
+
+out <- styler::style_file(files)
+if (packageVersion("styler") < "1.1.1.9000") {
+  warning(
+  "To work properly with pre-commit, you need styler > 1.1.1.9000.", 
+  " Install it from GitHub with `remote::install_github('r-lib/styler')"
+  )
+}
+out
