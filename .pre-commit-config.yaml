@@ -1,3 +1,4 @@
+repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
     rev: latest
     hooks: 

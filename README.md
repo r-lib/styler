@@ -12,7 +12,9 @@ A collection of git pre-commit hooks to use with
 
   - `styler-style-files`: A hook to style files with
     [styler](https://styler.r-lib.org). Only commit code corresponding
-    to the tidyverse style guide.
+    to the tidyverse style guide. NOTE: works with CRAN version of
+    styler, but has better performance with dev version due to
+    r-lib/styler\#522.
   - `devtools-document`: A hook to run `devtools::document()`. Makes
     sure you commit your `.Rd` changes with the source changes.
   - `usethis-use-tidy-description`: A hook to run
@@ -28,6 +30,7 @@ If you installed pre-commit, you can add it to a specific project by
 adding a `.pre-commit-config.yaml` file that has a structure like this:
 
 ``` yaml
+repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
     rev: latest
     hooks: 
@@ -89,7 +92,8 @@ to use simple bash scripts in `.git/hooks`:
     `check-added-large-files` prevents you from committing big files,
     json or yaml validators and so on.
   - No need to without worrying about dependencies, testing, different
-    versions of hooks etc. It’s handled by pre-commit.
+    versions of hooks, file filtering for specific hooks etc. It’s
+    handled by pre-commit.
   - Hooks are maintained in *one* place, and you just need a
     `.pre-commit-config.yaml` file. No need to c/p hooks from one
     project to another.
