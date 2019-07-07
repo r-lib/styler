@@ -1,1 +1,3 @@
 ^README\.Rmd$
+^.*\.Rproj$
+^\.Rproj\.user$
