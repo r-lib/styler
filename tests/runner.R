@@ -3,7 +3,6 @@ run_test_impl <- function(path_executable, path_candidate, path_reference) {
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
   fs::file_copy(path_candidate, tempdir, overwrite = TRUE)
   exec <- fs::path_abs(path_executable)
-  browser()
   withr::with_dir(
     fs::path_dir(path_candidate_temp),
     system2(exec, fs::path_file(path_candidate_temp))
