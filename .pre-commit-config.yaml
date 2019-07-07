@@ -1,0 +1,6 @@
+-   repo: https://github.com/lorenzwalthert/pre-commit-hooks
+    rev: latest
+    hooks: 
+    -   id: devtools-document
+    -   id: styler-style-files
+    -   id: usethis-use-tidy-description
