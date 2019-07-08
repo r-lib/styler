@@ -204,7 +204,8 @@ prettify_any <- function(transformers,
                          include_roxygen_examples) {
   files <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),
-    ignore.case = TRUE, recursive = recursive, full.names = TRUE
+    ignore.case = TRUE, recursive = recursive, full.names = TRUE,
+    all.files = TRUE
   )
   transform_files(
     setdiff(files, exclude_files), transformers, include_roxygen_examples
