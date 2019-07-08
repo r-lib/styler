@@ -16,3 +16,15 @@
     entry: bin/styler-style-files
     language: script
     files: '(\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
+-   id: custom-no-browser-statement
+    name: custom-no-browser-statement
+    description: check if a .R file contains a `browser()` statement
+    entry: bin/custom-no-browser-statement
+    language: script
+    files: '\.R$'
+-   id: custom-parsable-R
+    name: custom-parsable-R
+    description: check if a .R file is parsable
+    entry: bin/custom-parsable-R
+    language: script
+    files: '\.R$'
