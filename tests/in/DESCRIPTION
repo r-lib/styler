@@ -4,10 +4,10 @@ Version: 1.0.0
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Imports:
-    usethis,
-    styler,
     devtools,
-    testthat
+    styler,
+    testthat,
+    usethis
 Remotes: 
     ropenscilabs/tic
 Encoding: UTF-8
