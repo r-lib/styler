@@ -1,5 +1,6 @@
 repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: v0.0.0.9005
+    rev: v0.0.0.9006
     hooks: 
+    -   id: style-files
     -   id: readme-rmd-rendered

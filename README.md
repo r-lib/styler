@@ -101,5 +101,3 @@ to use simple bash scripts in `.git/hooks`:
   - Hooks are maintained in *one* place, and you just need a
     `.pre-commit-config.yaml` file. No need to c/p hooks from one
     project to another.
-
------
