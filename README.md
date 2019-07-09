@@ -40,8 +40,11 @@ repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
     rev: v0.0.0.9007
     hooks: 
-    -   id: roxygenize
     -   id: style-files
+    -   id: parsable-R
+    -   id: no-browser-statement
+    -   id: readme-rmd-rendered
+    -   id: roxygenize
     -   id: use-tidy-description
 ```
 
@@ -58,7 +61,6 @@ You can also add other hooks from other repos, by extending the
 `.pre-commit-config.yaml` file, e.g. like this:
 
 ``` yaml
-repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v1.2.3
     hooks: 
