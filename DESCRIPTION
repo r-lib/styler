@@ -4,9 +4,9 @@ Version: 1.0.0
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Imports:
-    devtools,
     fs,
     here,
+    roxygen2,
     styler,
     testthat,
     usethis,

@@ -22,8 +22,8 @@ A collection of git pre-commit hooks to use with
   - `parsable-R`: Checks if your `.R` files are “valid” R code.
   - `no-browser-statement`: Guarantees you that you don’t accidentally
     commit code with a `browser()` statement in it.
-  - `devtools-document`: A hook to run `devtools::document()`. Makes
-    sure you commit your `.Rd` changes with the source changes.
+  - `roxygenize`: A hook to run `roxygen2::roxygenize()`. Makes sure you
+    commit your `.Rd` changes with the source changes.
   - `use-tidy-description`: A hook to run
     `usethis::use_tidy_description()` to make sure you only commit key
     values ordered (alphabetically) in your DESCRIPTION file.
@@ -41,7 +41,7 @@ repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
     rev: v0.0.0.9001
     hooks: 
-    -   id: devtools-document
+    -   id: roxygenize
     -   id: style-files
     -   id: use-tidy-description
 ```

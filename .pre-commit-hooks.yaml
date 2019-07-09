@@ -1,6 +1,6 @@
--   id: devtools-document
-    name: devtools-document
-    description: run devtools::document()
+-   id: roxygenize
+    name: roxygeniz
+    description: run roxygen2::roxygenize()
     entry: bin/devtools-document
     language: script
     files: '^(R/|man/)'
