@@ -5,3 +5,4 @@ repos:
     -   id: roxygenize
     -   id: style-files
     -   id: use-tidy-description
+    -   id: readme-rmd-rendered

@@ -1,7 +1,7 @@
 -   id: roxygenize
     name: roxygeniz
     description: run roxygen2::roxygenize()
-    entry: bin/devtools-document
+    entry: bin/roxygenize
     language: script
     files: '^(R/|man/)'
 -   id: use-tidy-description
