@@ -14,14 +14,15 @@ transform_utf8 <- function(path, fun, write_back = TRUE) {
 }
 
 #' @importFrom rlang with_handlers warn
-transform_utf8_one <- function(path, fun, write_back = write_back) {
+transform_utf8_one <- function(path, fun, write_back) {
   old <- xfun::read_utf8(path)
   with_handlers({
     new <- fun(old)
-    if (write_back) {
+    identical <- identical(unclass(old), unclass(new))
+    if (!identical && write_back) {
       xfun::write_utf8(new, path)
     }
-    !identical(unclass(old), unclass(new))
+    !identical
   }, error = function(e) {
     warn(paste0("When processing ", path, ": ", conditionMessage(e)))
     NA
