@@ -28,3 +28,9 @@
     entry: bin/custom-parsable-R
     language: script
     files: '\.R$'
+-   id: check-readme-rmd-rendered
+    name: check-readme-rmd-rendered
+    description: make sure README.Rmd hasn't been edited more recently than README.md
+    entry: bin/check-readme-rmd-rendered
+    language: script
+    files: '\.[Rr]?md'

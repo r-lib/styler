@@ -17,6 +17,9 @@ A collection of git pre-commit hooks to use with
     to the tidyverse style guide. NOTE: works with CRAN version of
     styler, but has better performance with dev version due to
     r-lib/styler\#522.
+- `check-readme-rmd-rendered`: A hook to make sure `README.Rmd` hasn’t
+    been edited more recently than `README.md`.
+
   - `custom-parsable-R`: Checks if your `.R` files are “valid” R code.
   - `custom-no-browser-statement`: Guarantees you that you don’t
     accidentally commit code with a `browser()` statement in it.
@@ -25,6 +28,7 @@ A collection of git pre-commit hooks to use with
   - `usethis-use-tidy-description`: A hook to run
     `usethis::use_tidy_description()` to make sure you only commit key
     values ordered (alphabetically) in your DESCRIPTION file.
+
 
 To add a pre-commit hook to your project, install pre-commit as
 described in the [official documentation](https://pre-commit.com/#intro)
