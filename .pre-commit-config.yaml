@@ -2,7 +2,4 @@ repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
     rev: v0.0.0.9005
     hooks: 
-    -   id: roxygenize
-    -   id: style-files
-    -   id: use-tidy-description
     -   id: readme-rmd-rendered
