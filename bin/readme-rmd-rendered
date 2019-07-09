@@ -2,7 +2,7 @@
 
 # adapted from https://github.com/r-lib/usethis/blob/master/inst/templates/readme-rmd-pre-commit.sh
 
-if [[ README.Rmd -nt README.md ]]
+if [[ README.md -nt README.Rmd ]]
 then
     echo >&2 "README.md is out of date; please re-knit README.Rmd."
     exit 1
