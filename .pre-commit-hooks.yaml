@@ -1,5 +1,5 @@
 -   id: roxygenize
-    name: roxygeniz
+    name: roxygenize
     description: run roxygen2::roxygenize()
     entry: bin/roxygenize
     language: script
