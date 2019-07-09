@@ -6,6 +6,7 @@ Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Imports:
     devtools,
     fs,
+    here,
     styler,
     testthat,
     usethis,
