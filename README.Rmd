@@ -22,8 +22,8 @@ A collection of git pre-commit hooks to use with
 
 * `style-files`: A hook to style files with 
   [styler](https://styler.r-lib.org). Only commit code corresponding to
-  the tidyverse style guide. NOTE: works with CRAN version of styler, but has 
-  better performance with dev version due to r-lib/styler#522.
+  the tidyverse style guide. NOTE: works only with devel version of styler. 
+  Install via `remotes::install_github('r-lib/styler')`.
 * `readme-rmd-rendered`: Make sure `README.Rmd` hasn't been edited 
   more recently than `README.md`.
 * `parsable-R`: Checks if your `.R` files are "valid" R code.

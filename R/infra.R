@@ -20,7 +20,10 @@ run_test_impl <- function(path_executable,
   reference <- readLines(path_candidate)
   if (expect_success) {
     # file not changed + no stderr
-    testthat::expect_equal(readLines(path_stderr), character(0))
+    contents <- readLines(path_stderr)
+    if (!identical(contents, character(0))) {
+      stop("Expected: No error. Found:", contents, call. = FALSE)
+    }
     testthat::expect_equivalent(candidate, reference)
   } else if (!expect_success) {
     # either file changed or stderr
