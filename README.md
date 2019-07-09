@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.org/lorenzwalthert/pre-commit-hooks.svg?branch=master)](https://travis-ci.org/lorenzwalthert/pre-commit-hooks)
 <!-- badges: end -->
 
 A collection of git pre-commit hooks to use with
@@ -15,6 +17,9 @@ A collection of git pre-commit hooks to use with
     to the tidyverse style guide. NOTE: works with CRAN version of
     styler, but has better performance with dev version due to
     r-lib/styler\#522.
+  - `custom-parsable-R`: Checks if your `.R` files are “valid” R code.
+  - `custom-no-browser-statement`: Guarantees you that you don’t
+    accidentally commit code with a `browser()` statement in it.
   - `devtools-document`: A hook to run `devtools::document()`. Makes
     sure you commit your `.Rd` changes with the source changes.
   - `usethis-use-tidy-description`: A hook to run

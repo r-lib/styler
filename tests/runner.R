@@ -1,24 +1,33 @@
-run_test_impl <- function(path_executable, path_candidate, path_reference) {
-  tempdir <- tempdir()
-  path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
-  fs::file_copy(path_candidate, tempdir, overwrite = TRUE)
-  exec <- fs::path_abs(path_executable)
-  withr::with_dir(
-    fs::path_dir(path_candidate_temp),
-    system2(exec, fs::path_file(path_candidate_temp))
-  )
-  testthat::expect_equivalent(
-    readLines(path_candidate_temp),
-    readLines(path_reference)
-  )
-}
+source(here::here("R", "infra.R"))
+# success
+run_test("styler-style-files", suffix = "-success.R")
+# fail
+run_test("styler-style-files", suffix = "-fail.R", error_msg = NA)
 
-run_test <- function(hook_name, file_name = hook_name, suffix = ".R") {
-  path_executable <- file.path("bin", hook_name)
-  test_ancestor <- file.path("tests", c("in", "out"), file_name)
-  path_candidate <- paste0(test_ancestor, suffix)
-  run_test_impl(path_executable, path_candidate[1], path_candidate[2])
-}
+# success
+run_test("usethis-use-tidy-description", "DESCRIPTION", suffix = "")
 
-run_test("styler-style-files")
-run_test("usethis-use-tidy-description", "DESCRIPTION", "")
+
+# success
+run_test(
+  "custom-no-browser-statement",
+  suffix = "-success.R",
+  error_msg = NULL
+)
+
+# failure
+run_test(
+  "custom-no-browser-statement",
+  suffix = "-fail.R",
+  error_msg = "contains a `browser()` statement."
+)
+
+
+# success
+run_test("custom-parsable-R",
+  suffix = "-success.R",
+  error_msg = NULL
+)
+
+# failure
+run_test("custom-parsable-R", suffix = "-fail.R", error_msg = "not parsable")
