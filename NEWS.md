@@ -6,6 +6,9 @@
   directories. We no longer display the file name of the styled file, but
   the absolute path. This is also reflected in the invisible return value of the 
   function (#522).
+* `style_file()` and friends do not write content back to a file when 
+  styling does not cause any changes in the file. This means the modification 
+  date of files styled is only changed when the content is changed (#532).
 
 ## New features
 
