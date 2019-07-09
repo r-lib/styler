@@ -20,18 +20,18 @@ knitr::opts_chunk$set(
 A collection of git pre-commit hooks to use with 
 [pre-commit.com](pre-commit.com). Currently, we have: 
 
-* `styler-style-files`: A hook to style files with 
+* `style-files`: A hook to style files with 
   [styler](https://styler.r-lib.org). Only commit code corresponding to
   the tidyverse style guide. NOTE: works with CRAN version of styler, but has 
   better performance with dev version due to r-lib/styler#522.
-* `check-readme-rmd-rendered`: A hook to make sure `README.Rmd` hasn't been edited 
+* `readme-rmd-rendered`: A hook to make sure `README.Rmd` hasn't been edited 
   more recently than `README.md`.
-* `custom-parsable-R`: Checks if your `.R` files are "valid" R code.
-* `custom-no-browser-statement`: Guarantees you that you don't accidentally 
+* `parsable-R`: Checks if your `.R` files are "valid" R code.
+* `no-browser-statement`: Guarantees you that you don't accidentally 
   commit code with a `browser()` statement in it.
 * `devtools-document`: A hook to run `devtools::document()`. Makes sure you 
   commit your `.Rd` changes with the source changes.
-* `usethis-use-tidy-description`: A hook to run `usethis::use_tidy_description()`
+* `use-tidy-description`: A hook to run `usethis::use_tidy_description()`
   to make sure you only commit key values ordered (alphabetically) in your 
   DESCRIPTION file.
 
@@ -49,8 +49,8 @@ repos:
     rev: v0.0.0.9001
     hooks: 
     -   id: devtools-document
-    -   id: styler-style-files
-    -   id: usethis-use-tidy-description
+    -   id: style-files
+    -   id: use-tidy-description
 ````
 
 Next, run `pre-commit install` in your repo and you are done. The next time
@@ -82,7 +82,7 @@ The idea of pre-commit hooks is to make sure your commits meet some
 requirements, e.g:
 
 - that they comply to a certain coding style (with the hook 
-  `styler-style-files`). 
+  `style-files`). 
 - that you commit derivatives such as `README.md` or `.Rd` files with their 
   source instead of spreading them over multiple commits.
 

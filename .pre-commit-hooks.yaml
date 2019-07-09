@@ -4,33 +4,33 @@
     entry: bin/devtools-document
     language: script
     files: '^(R/|man/)'
--   id: usethis-use-tidy-description
-    name: usethis-use-tidy-description
+-   id: use-tidy-description
+    name: use-tidy-description
     description: run usethis::use_tidy_description()
-    entry: bin/usethis-use-tidy-description
+    entry: bin/use-tidy-description
     language: script
     files: '^DESCRIPTION$'
--   id: styler-style-files
-    name: styler-style-files
+-   id: style-files
+    name: style-files
     description: style files with styler
-    entry: bin/styler-style-files
+    entry: bin/style-files
     language: script
     files: '(\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
--   id: custom-no-browser-statement
-    name: custom-no-browser-statement
+-   id: no-browser-statement
+    name: no-browser-statement
     description: check if a .R file contains a `browser()` statement
-    entry: bin/custom-no-browser-statement
+    entry: bin/no-browser-statement
     language: script
     files: '\.R$'
--   id: custom-parsable-R
-    name: custom-parsable-R
+-   id: parsable-R
+    name: parsable-R
     description: check if a .R file is parsable
-    entry: bin/custom-parsable-R
+    entry: bin/parsable-R
     language: script
     files: '\.R$'
--   id: check-readme-rmd-rendered
-    name: check-readme-rmd-rendered
+-   id: readme-rmd-rendered
+    name: readme-rmd-rendered
     description: make sure README.Rmd hasn't been edited more recently than README.md
-    entry: bin/check-readme-rmd-rendered
+    entry: bin/readme-rmd-rendered
     language: script
     files: '\.[Rr]?md'

@@ -3,5 +3,5 @@ repos:
     rev: v0.0.0.9001
     hooks: 
     -   id: devtools-document
-    -   id: styler-style-files
-    -   id: usethis-use-tidy-description
+    -   id: style-files
+    -   id: use-tidy-description
