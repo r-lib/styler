@@ -38,7 +38,7 @@ adding a `.pre-commit-config.yaml` file that has a structure like this:
 ``` yaml
 repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: v0.0.0.9001
+    rev: v0.0.0.9007
     hooks: 
     -   id: roxygenize
     -   id: style-files
