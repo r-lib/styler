@@ -13,7 +13,7 @@ Imports:
     usethis,
     withr
 Remotes: 
-    ropenscilabs/tic
+    ropenscilabs/tic,
     r-lib/styler
 Encoding: UTF-8
 RoxygenNote: 6.1.1
