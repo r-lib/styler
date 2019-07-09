@@ -52,12 +52,17 @@ style_active_file <- function() {
   transformer <- make_transformer(get_addins_style_transformer(),
     include_roxygen_examples = TRUE, warn_empty = is_plain_r_file(context$path)
   )
+  is_r_file <- any(
+    is_plain_r_file(context$path),
+    is_unsaved_file(context$path),
+    is_rprofile_file(context$path)
+  )
 
   if (is_rmd_file(context$path)) {
     out <- transform_mixed(context$contents, transformer, filetype = "Rmd")
   } else if (is_rnw_file(context$path)) {
     out <- transform_mixed(context$contents, transformer, filetype = "Rnw")
-  } else if (is_plain_r_file(context$path) | is_unsaved_file(context$path)) {
+  } else if (is_r_file) {
     out <- try_transform_as_r_file(context, transformer)
   } else {
     abort("Can only style .R, .Rmd and .Rnw files.")

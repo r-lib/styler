@@ -20,8 +20,9 @@ NULL
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
 #' @param filetype Vector of file extensions indicating which file types should
-#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R", ".Rmd",
-#'   ".Rnw")` or `c("r", "rmd", "rnw")`.
+#'   be styled. Case is ignored, and the `.` is optional, e.g.
+#'   `c(".R", ".Rmd")`, or `c("r", "rmd")`. Supported values (after
+#'   standardization) are: "r", "rprofile", "rmd", "rnw".
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
 #' @param include_roxygen_examples Whether or not to style code in roxygen
@@ -71,7 +72,7 @@ style_pkg <- function(pkg = ".",
                       ...,
                       style = tidyverse_style,
                       transformers = style(...),
-                      filetype = "R",
+                      filetype = c("R", "Rprofile"),
                       exclude_files = "R/RcppExports.R",
                       include_roxygen_examples = TRUE) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
@@ -86,7 +87,7 @@ prettify_pkg <- function(transformers,
                          exclude_files,
                          include_roxygen_examples) {
   filetype <- set_and_assert_arg_filetype(filetype)
-  r_files <- vignette_files <- readme <- NULL
+  r_files <- rprofile_files <- vignette_files <- readme <- NULL
 
   if ("\\.r" %in% filetype) {
     r_files <- dir(
@@ -95,6 +96,13 @@ prettify_pkg <- function(transformers,
     )
   }
 
+  if ("\\.rprofile" %in% filetype) {
+    rprofile_files <- dir(
+      path = ".", pattern = "^\\.rprofile$",
+      ignore.case = TRUE, recursive = FALSE, full.names = TRUE,
+      all.files = TRUE
+    )
+  }
   if ("\\.rmd" %in% filetype) {
     vignette_files <- dir(
       path = "vignettes", pattern = "\\.rmd$",
@@ -113,7 +121,10 @@ prettify_pkg <- function(transformers,
     )
   }
 
-  files <- setdiff(c(r_files, vignette_files, readme), exclude_files)
+  files <- setdiff(
+    c(r_files, rprofile_files, vignette_files, readme),
+    exclude_files
+  )
   transform_files(files, transformers, include_roxygen_examples)
 }
 
@@ -167,7 +178,7 @@ style_dir <- function(path = ".",
                       ...,
                       style = tidyverse_style,
                       transformers = style(...),
-                      filetype = "R",
+                      filetype = c("R", "Rprofile"),
                       recursive = TRUE,
                       exclude_files = NULL,
                       include_roxygen_examples = TRUE) {
@@ -193,7 +204,8 @@ prettify_any <- function(transformers,
                          include_roxygen_examples) {
   files <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),
-    ignore.case = TRUE, recursive = recursive, full.names = TRUE
+    ignore.case = TRUE, recursive = recursive, full.names = TRUE,
+    all.files = TRUE
   )
   transform_files(
     setdiff(files, exclude_files), transformers, include_roxygen_examples

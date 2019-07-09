@@ -12,6 +12,8 @@
 * curlyl-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now 
   explicitly handled, as opposed previously where it was just treated as two 
   consequtive curly braces (#528).
+* `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and 
+  hidden files are now also styled (#530).
 
 ## Minor improvements and fixes
 
