@@ -24,7 +24,7 @@ A collection of git pre-commit hooks to use with
   [styler](https://styler.r-lib.org). Only commit code corresponding to
   the tidyverse style guide. NOTE: works with CRAN version of styler, but has 
   better performance with dev version due to r-lib/styler#522.
-* `readme-rmd-rendered`: A hook to make sure `README.Rmd` hasn't been edited 
+* `readme-rmd-rendered`: Make sure `README.Rmd` hasn't been edited 
   more recently than `README.md`.
 * `parsable-R`: Checks if your `.R` files are "valid" R code.
 * `no-browser-statement`: Guarantees you that you don't accidentally 
@@ -51,16 +51,15 @@ repos:
     -   id: roxygenize
     -   id: style-files
     -   id: use-tidy-description
-````
+```
 
 Next, run `pre-commit install` in your repo and you are done. The next time
-you run `git commit`, the hooks listed in your `.pre-commit-config.yaml`  will
+you run `git commit`, the hooks listed in your `.pre-commit-config.yaml` will
 get executed before the commit. When any file is changed due to running a hook, 
-the commit will fail. You can inspect the changes introduced by the hook
-and if satisfied, you can attempt to commit again. If all hooks pass, the commit
+the commit will fail. You can inspect the changes introduced by the hook and if 
+satisfied, you can attempt to commit again. If all hooks pass, the commit
 is made. You can also 
 [temporarily disable hooks](https://pre-commit.com/#temporarily-disabling-hooks).
-
 
 
 You can also add other hooks from other repos, by extending the 

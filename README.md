@@ -17,8 +17,8 @@ A collection of git pre-commit hooks to use with
     to the tidyverse style guide. NOTE: works with CRAN version of
     styler, but has better performance with dev version due to
     r-lib/styler\#522.
-  - `readme-rmd-rendered`: A hook to make sure `README.Rmd` hasn’t been
-    edited more recently than `README.md`.
+  - `readme-rmd-rendered`: Make sure `README.Rmd` hasn’t been edited
+    more recently than `README.md`.
   - `parsable-R`: Checks if your `.R` files are “valid” R code.
   - `no-browser-statement`: Guarantees you that you don’t accidentally
     commit code with a `browser()` statement in it.
