@@ -13,3 +13,4 @@ Imports:
 Remotes: 
     ropenscilabs/tic
 Encoding: UTF-8
+RoxygenNote: 6.1.1
