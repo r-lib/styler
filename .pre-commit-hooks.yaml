@@ -33,4 +33,4 @@
     description: make sure README.Rmd hasn't been edited more recently than README.md
     entry: bin/readme-rmd-rendered
     language: script
-    files: '\.[Rr]?md'
+    files: 'README\.[Rr]?md$'
