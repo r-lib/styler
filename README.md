@@ -95,7 +95,7 @@ to use simple bash scripts in `.git/hooks`:
     languages. There is a wealth of useful hooks available, most listed
     [here](https://pre-commit.com/hooks.html). For example,
     `check-added-large-files` prevents you from committing big files,
-    json or yaml validators and so on.
+    other hooks validate json or yaml files and so on.
   - No need to without worrying about dependencies, testing, different
     versions of hooks, file filtering for specific hooks etc. It’s
     handled by pre-commit.

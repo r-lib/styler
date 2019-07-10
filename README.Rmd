@@ -102,8 +102,8 @@ simple bash scripts in `.git/hooks`:
 * easily use hooks other people wrote, in bash, R, python and other languages.
   There is a wealth of useful hooks available, most listed
   [here](https://pre-commit.com/hooks.html). For example, 
-  `check-added-large-files` prevents you from committing big files, json or yaml
-  validators and so on. 
+  `check-added-large-files` prevents you from committing big files, other hooks
+  validate json or yaml files and so on. 
 * No need to without worrying about dependencies, testing, different versions 
   of hooks, file filtering for specific hooks etc. It's handled by pre-commit.
 * Hooks are maintained in *one* place, and you just need a 
