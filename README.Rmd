@@ -127,6 +127,8 @@ styler functionality is made available through other packages, most notably
   knitr. use `tidy = "styler"` in the header of a code chunks (e.g. ` ```{r
   name-of-the-chunk, tidy = "styler"}`), or `knitr::opts_chunk$set(tidy =
   "styler")` at the top of your RMarkdown script.
+* as a pre-commit hook `style-files` in 
+  https://github.com/lorenzwalthert/pre-commit-hooks.
 * pretty-printing of [drake](https://github.com/ropensci/drake) workflow data
   frames with `drake::drake_plan_source()`.
 * Adding styler as a fixer to the 

@@ -26,6 +26,10 @@
 * style file Addin can now properly handle cancelling (#511).
 * advice for contributors in `CONTRIBUTING.md` was updated (#508).
 
+## Adaption
+
+* styler is now available through the pre-commit hook `style-files` in
+  https://github.com/lorenzwalthert/pre-commit-hooks.
 
 # styler 1.1.1
 
