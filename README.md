@@ -14,18 +14,19 @@ A collection of git pre-commit hooks to use with
 
   - `style-files`: A hook to style files with
     [styler](https://styler.r-lib.org). Only commit code corresponding
-    to the tidyverse style guide. NOTE: works only with devel version of
-    styler. Install via `remotes::install_github('r-lib/styler')`.
+    to the tidyverse style guide. NOTE: devel version of styler strongly
+    suggested. Install via `remotes::install_github('r-lib/styler')`.
   - `readme-rmd-rendered`: Make sure `README.Rmd` hasn’t been edited
-    more recently than `README.md`.
+    more recently than `README.md`, i.e. remind you to render the `.Rmd`
+    to `.md` before committing.
   - `parsable-R`: Checks if your `.R` files are “valid” R code.
   - `no-browser-statement`: Guarantees you that you don’t accidentally
     commit code with a `browser()` statement in it.
   - `roxygenize`: A hook to run `roxygen2::roxygenize()`. Makes sure you
     commit your `.Rd` changes with the source changes.
   - `use-tidy-description`: A hook to run
-    `usethis::use_tidy_description()` to make sure you only commit key
-    values ordered (alphabetically) in your DESCRIPTION file.
+    `usethis::use_tidy_description()` to ensure dependencies are ordered
+    alphabetically and fields are in standard order.
 
 To add a pre-commit hook to your project, install pre-commit as
 described in the [official documentation](https://pre-commit.com/#intro)
@@ -47,6 +48,10 @@ repos:
     -   id: roxygenize
     -   id: use-tidy-description
 ```
+
+If you want to see the file `.pre-commit-config.yaml` in RStudio, you
+have to enable “Show Hidden Files” in the *Files* Pane of RStudio under
+*More*.
 
 Next, run `pre-commit install` in your repo and you are done. The next
 time you run `git commit`, the hooks listed in your
@@ -96,9 +101,11 @@ to use simple bash scripts in `.git/hooks`:
     [here](https://pre-commit.com/hooks.html). For example,
     `check-added-large-files` prevents you from committing big files,
     other hooks validate json or yaml files and so on.
-  - No need to without worrying about dependencies, testing, different
-    versions of hooks, file filtering for specific hooks etc. It’s
-    handled by pre-commit.
+  - No need to worry about dependencies, testing, different versions of
+    hooks, file filtering for specific hooks etc. It’s handled by
+    pre-commit.
   - Hooks are maintained in *one* place, and you just need a
     `.pre-commit-config.yaml` file. No need to c/p hooks from one
     project to another.
+
+You have an idea for a hook? Please file an issue.
