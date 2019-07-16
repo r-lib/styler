@@ -10,7 +10,7 @@ status](https://travis-ci.org/lorenzwalthert/pre-commit-hooks.svg?branch=master)
 <!-- badges: end -->
 
 A collection of git pre-commit hooks to use with
-[pre-commit.com](pre-commit.com). Currently, we have:
+[pre-commit.com](https://pre-commit.com). Currently, we have:
 
   - `style-files`: A hook to style files with
     [styler](https://styler.r-lib.org). Only commit code corresponding
