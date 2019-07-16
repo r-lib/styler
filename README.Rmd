@@ -84,13 +84,14 @@ To update the hook revisions, just run `pre-commit autoupdate`.
 
 # why using hooks?
 
-The idea of pre-commit hooks is to make sure your commits meet some 
-requirements, e.g:
+The goal of pre-commit hooks is to improve the quality of commits. This is
+achieved by making sure your commits meet some (formal) requirements, e.g:
 
 - that they comply to a certain coding style (with the hook 
   `style-files`). 
 - that you commit derivatives such as `README.md` or `.Rd` files with their 
   source instead of spreading them over multiple commits.
+- and so on.
 
 As all changes enter a repository history with a commit, we believe many checks 
 should be performed at that point, and not only later on a CI service. For 
