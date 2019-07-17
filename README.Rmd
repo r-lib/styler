@@ -70,7 +70,7 @@ is made. You can also
 [temporarily disable hooks](https://pre-commit.com/#temporarily-disabling-hooks).
 If you succeed, it should look like this: 
 
-```{r}
+```{r, echo = FALSE}
 knitr::include_graphics("man/figs/screenshot.png")
 ```
 

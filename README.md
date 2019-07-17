@@ -63,10 +63,6 @@ also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you
 succeed, it should look like this:
 
-``` r
-knitr::include_graphics("man/figs/screenshot.png")
-```
-
 ![](man/figs/screenshot.png)<!-- -->
 
 You can also add other hooks from other repos, by extending the
