@@ -52,10 +52,11 @@ run_test_impl <- function(path_executable,
 #' Two potential outcomes of a hooks are pass or fail. This is reflected on the
 #' level of the executable: Fail means the executable fails or the file is
 #' changed. Pass means the executable succeeds and the file is unchanged.
-#'  We check if the executable passes as follows:
+#' We check if the executable passes as follows:
 #'
 #' * If we expect success (by setting `error_msg` to `NULL`), we make sure
 #'   nothing was written to sterr and the file content does not change.
+#'
 #' * If we expect failure, it can be due to changed file or due to failed
 #'   executable. To check for failed executalble, we set `error_msg` to
 #'   the message we expect. To check changed file content, we set `error_msg` to
@@ -71,8 +72,8 @@ run_test_impl <- function(path_executable,
 #'   used if `error_msg` is not `NULL`.
 run_test <- function(hook_name, file_name = hook_name, suffix = ".R",
                      error_msg = NULL) {
-  path_executable <- fs::path("bin", hook_name)
-  test_ancestor <- fs::path("tests", "in", file_name)
+  path_executable <- fs::path(here::here(), "bin", hook_name)
+  test_ancestor <- fs::path(here::here(), "tests", "testthat", "in", file_name)
   path_candidate <- paste0(test_ancestor, suffix)
   run_test_impl(
     path_executable, path_candidate[1],
