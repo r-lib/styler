@@ -27,4 +27,5 @@ To summarize:
 - add executable in `bin`.
 - register hook in `.pre-commit-hooks.yaml`.
 - add two tests.
-- add a description of the new hook to the `README.Rmd`.
+- add a description of the new hook to the `README.Rmd`. Both description and 
+  `YAML` example code. 
