@@ -8,33 +8,34 @@ run_test(hook_name, file_name = hook_name, suffix = ".R",
   error_msg = NULL)
 }
 \arguments{
-\item{hook_name}{The name of the hook in `bin/`.}
+\item{hook_name}{The name of the hook in \code{bin/}.}
 
-\item{file_name}{The file to test in `tests/in` (without extension).}
+\item{file_name}{The file to test in \code{tests/in} (without extension).}
 
-\item{suffix}{The fuffix of `file_name`.}
+\item{suffix}{The fuffix of \code{file_name}.}
 
 \item{error_msg}{An expected error message. If no error is expected, this
-can be `NULL`. In that case, the `comparator` is applied.}
+can be \code{NULL}. In that case, the \code{comparator} is applied.}
 
 \item{comparator}{A function thtat takes two paths as arguments: One to
-a file *after* the hooks has been applied and one to a reference file. Only
-used if `error_msg` is not `NULL`.}
+a file \emph{after} the hooks has been applied and one to a reference file. Only
+used if \code{error_msg} is not \code{NULL}.}
 }
 \description{
-Tests for the executables used as pre-commit hooks via `entrypoint` in
-`.pre-commit-config.yaml`.
+Tests for the executables used as pre-commit hooks via \code{entrypoint} in
+\code{.pre-commit-config.yaml}.
 }
 \details{
 Two potential outcomes of a hooks are pass or fail. This is reflected on the
 level of the executable: Fail means the executable fails or the file is
 changed. Pass means the executable succeeds and the file is unchanged.
- We check if the executable passes as follows:
-
-* If we expect success (by setting `error_msg` to `NULL`), we make sure
-  nothing was written to sterr and the file content does not change.
-* If we expect failure, it can be due to changed file or due to failed
-  executable. To check for failed executalble, we set `error_msg` to
-  the message we expect. To check changed file content, we set `error_msg` to
-  `NA`.
+We check if the executable passes as follows:
+\itemize{
+\item If we expect success (by setting \code{error_msg} to \code{NULL}), we make sure
+nothing was written to sterr and the file content does not change.
+\item If we expect failure, it can be due to changed file or due to failed
+executable. To check for failed executalble, we set \code{error_msg} to
+the message we expect. To check changed file content, we set \code{error_msg} to
+\code{NA}.
+}
 }

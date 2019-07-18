@@ -7,13 +7,14 @@ Imports:
     fs,
     here,
     roxygen2,
-    styler (>= 1.1.1.9002), 
+    styler (>= 1.1.1.9002),
     testthat,
     tic,
     usethis,
     withr
 Remotes: 
-    ropenscilabs/tic,
-    r-lib/styler
+    r-lib/styler,
+    ropenscilabs/tic
 Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
