@@ -11,7 +11,7 @@ Options:
 ' -> doc
 
 arguments <- docopt::docopt(doc)
-print(arguments)
+
 
 if (packageVersion("styler") < "1.1.1.9002") {
   stop(
