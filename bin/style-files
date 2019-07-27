@@ -1,6 +1,16 @@
 #!/usr/bin/env Rscript
-files <- commandArgs(trailing = TRUE)
 
+'sytle files.
+Usage:
+  style_files [--style=<style_guide>] <files>...
+
+Options:
+  --style=<style_guide>  Style guide [default: styler::tidyverse_style].
+
+' -> doc
+
+arguments <- docopt::docopt(doc)
+print(arguments)
 
 if (packageVersion("styler") < "1.1.1.9002") {
   stop(
@@ -10,5 +20,5 @@ if (packageVersion("styler") < "1.1.1.9002") {
     "use remotes::install_github('r-lib/styler')"
   )
 } else {
-  styler::style_file(files)
+  styler::style_file(arguments$files, style = eval(parse(text = arguments$style)))
 }
