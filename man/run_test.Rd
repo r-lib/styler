@@ -5,7 +5,7 @@
 \title{Run a test}
 \usage{
 run_test(hook_name, file_name = hook_name, suffix = ".R",
-  error_msg = NULL)
+  error_msg = NULL, cmd_args = NULL)
 }
 \arguments{
 \item{hook_name}{The name of the hook in \code{bin/}.}
@@ -16,6 +16,9 @@ run_test(hook_name, file_name = hook_name, suffix = ".R",
 
 \item{error_msg}{An expected error message. If no error is expected, this
 can be \code{NULL}. In that case, the \code{comparator} is applied.}
+
+\item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
+described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
 
 \item{comparator}{A function thtat takes two paths as arguments: One to
 a file \emph{after} the hooks has been applied and one to a reference file. Only

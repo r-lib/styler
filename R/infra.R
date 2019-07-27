@@ -5,7 +5,8 @@
 #'   executable.
 run_test_impl <- function(path_executable,
                           path_candidate,
-                          error_msg) {
+                          error_msg,
+                          cmd_args) {
   expect_success <- is.null(error_msg)
   tempdir <- tempdir()
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
@@ -14,7 +15,10 @@ run_test_impl <- function(path_executable,
   path_stderr <- tempfile()
   withr::with_dir(
     fs::path_dir(path_candidate_temp),
-    system2(exec, fs::path_file(path_candidate_temp), stderr = path_stderr)
+    system2(exec,
+      args = c(cmd_args, fs::path_file(path_candidate_temp)),
+      stderr = path_stderr
+    )
   )
   candidate <- readLines(path_candidate_temp)
   reference <- readLines(path_candidate)
@@ -70,13 +74,16 @@ run_test_impl <- function(path_executable,
 #' @param comparator A function thtat takes two paths as arguments: One to
 #'   a file *after* the hooks has been applied and one to a reference file. Only
 #'   used if `error_msg` is not `NULL`.
+#' @param cmd_args More arguments passed to the file. Pre-commit handles it as
+#'   described [here](https://pre-commit.com/#arguments-pattern-in-hooks).
 run_test <- function(hook_name, file_name = hook_name, suffix = ".R",
-                     error_msg = NULL) {
+                     error_msg = NULL, cmd_args = NULL) {
   path_executable <- fs::path(here::here(), "bin", hook_name)
   test_ancestor <- fs::path(here::here(), "tests", "testthat", "in", file_name)
   path_candidate <- paste0(test_ancestor, suffix)
   run_test_impl(
     path_executable, path_candidate[1],
-    error_msg = error_msg
+    error_msg = error_msg,
+    cmd_args = cmd_args
   )
 }
