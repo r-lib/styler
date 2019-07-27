@@ -4,8 +4,10 @@ Version: 0.0.0.9007
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Imports:
+    docopt,
     fs,
     here,
+    oneliner (>= 0.1.0),
     roxygen2,
     styler (>= 1.1.1.9002),
     testthat,
@@ -13,6 +15,7 @@ Imports:
     usethis,
     withr
 Remotes: 
+    lorenzwalthert/oneliner,
     r-lib/styler,
     ropenscilabs/tic
 Encoding: UTF-8
