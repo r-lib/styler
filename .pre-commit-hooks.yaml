@@ -4,6 +4,7 @@
     entry: bin/roxygenize
     language: script
     files: '^(R/|man/)'
+    pass_filenames: false
 -   id: use-tidy-description
     name: use-tidy-description
     description: run usethis::use_tidy_description()
