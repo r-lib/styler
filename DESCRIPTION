@@ -4,6 +4,7 @@ Version: 0.0.0.9007
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Imports:
+    docopt,
     fs,
     here,
     roxygen2,

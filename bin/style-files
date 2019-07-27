@@ -2,14 +2,16 @@
 
 'sytle files.
 Usage:
-  style_files [--style=<style_guide>] <files>...
+  style_files [--style_pkg=<style_guide_pkg>] [--style_fun=<style_guide_fun>] <files>...
 
 Options:
-  --style=<style_guide>  Style guide [default: "styler::tidyverse_style"].
+  --style_pkg=<style_guide_pkg>  Package where the style guide is stored [default: "styler"].
+  --style_fun=<style_guide_fun>  The styling function in style_pkg [default: "tidyverse_style"].
 
 ' -> doc
 
 arguments <- docopt::docopt(doc)
+print(arguments)
 
 if (packageVersion("styler") < "1.1.1.9002") {
   stop(
@@ -20,6 +22,7 @@ if (packageVersion("styler") < "1.1.1.9002") {
   )
 } else {
   styler::style_file(
-    arguments$files, style = eval(parse(text = arguments$style))
+    arguments$files, 
+    style = eval(parse(text = paste(arguments$style_pkg, "::", arguments$style_fun)))
   )
 }
