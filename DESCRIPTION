@@ -15,6 +15,7 @@ Imports:
     usethis,
     withr
 Remotes: 
+    lorenzwalthert/oneliner,
     r-lib/styler,
     ropenscilabs/tic
 Encoding: UTF-8
