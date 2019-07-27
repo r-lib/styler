@@ -65,6 +65,8 @@ repos:
 The `repo` key points to the place where the source code of the hooks are stored, 
 not the repo you want to apply them to.
 
+Some hooks also take arguments, see section **Arguments** below.
+
 If you want to see the file `.pre-commit-config.yaml` in RStudio, you have to
 enable "Show Hidden Files" in the *Files* Pane of RStudio under *More*.
 
@@ -135,3 +137,15 @@ simple bash scripts in `.git/hooks`:
 You have an idea for a hook? Please file an issue.
 
 *** 
+
+# Hook arguments
+
+Arguments are specified as described in the
+[pre-commit.com documentation](https://pre-commit.com/#passing-arguments-to-hooks), 
+that is, as children in the `.pre-commit-config.yaml`. The following hooks 
+take arguments:
+
+* style-files: Argument `style_pkg` and `style_fun` if you want to use another 
+  style guide than the default. The below example styles code according to the 
+  [one-line-style](https://github.com/lorenzwalthert/oneliner):
+  `args: [style_pkg=oneliner, style_fun=one_line_style]`.
