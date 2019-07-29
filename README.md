@@ -154,7 +154,7 @@ take arguments:
     use another style guide than the default. The below example styles
     code according to the
     [one-line-style](https://github.com/lorenzwalthert/oneliner): `args:
-    [style_pkg=oneliner, style_fun=one_line_style]`.
+    [--style_pkg=oneliner, --style_fun=one_line_style]`.
 
   - `spell-check`: Argument `ignore_files` takes a regular expression
     matched with `base::grep()` to ignore furhter files from the hook.
