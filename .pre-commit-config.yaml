@@ -1,6 +1,6 @@
 repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: v0.0.0.9007
+    rev: v0.0.0.9012
     hooks: 
     -   id: style-files
     -   id: parsable-R
@@ -8,3 +8,5 @@ repos:
     -   id: readme-rmd-rendered
     -   id: roxygenize
     -   id: use-tidy-description
+    -   id: spell-check
+        args: [--ignore_files="\.pre-commit-config\.yaml"]
