@@ -4,13 +4,16 @@
 \alias{run_test_impl}
 \title{Implement a test run}
 \usage{
-run_test_impl(path_executable, path_candidate, error_msg, cmd_args)
+run_test_impl(path_executable, path_candidate, error_msg, cmd_args, copy)
 }
 \arguments{
 \item{path_executable}{The path to the executable bash script.}
 
 \item{path_candidate}{The path to a file that should be modified by the
 executable.}
+
+\item{copy}{Path with files to copy to the temp directory where the test
+is run.}
 }
 \description{
 Implement a test run

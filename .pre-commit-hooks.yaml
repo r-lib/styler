@@ -35,3 +35,9 @@
     entry: bin/readme-rmd-rendered
     language: script
     files: 'README\.[Rr]?md$'
+-   id: spell-check 
+    name: spell-check
+    description: perform a spell check with spelling::spell_check_files()
+    entry: bin/spell-check
+    language: script
+    files: '(\.[rR]$|\.py|\.gitignore|)$'

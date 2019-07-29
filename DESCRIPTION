@@ -9,6 +9,7 @@ Imports:
     here,
     oneliner (>= 0.1.0),
     roxygen2,
+    spelling,
     styler (>= 1.1.1.9002),
     testthat,
     tic,

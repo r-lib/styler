@@ -5,7 +5,7 @@
 \title{Run a test}
 \usage{
 run_test(hook_name, file_name = hook_name, suffix = ".R",
-  error_msg = NULL, cmd_args = NULL)
+  error_msg = NULL, cmd_args = NULL, copy = NULL)
 }
 \arguments{
 \item{hook_name}{The name of the hook in \code{bin/}.}
