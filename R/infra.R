@@ -3,12 +3,22 @@
 #' @param path_executable The path to the executable bash script.
 #' @param path_candidate The path to a file that should be modified by the
 #'   executable.
+#' @param copy Path with files to copy to the temp directory where the test
+#'   is run.
 run_test_impl <- function(path_executable,
                           path_candidate,
                           error_msg,
-                          cmd_args) {
+                          cmd_args,
+                          copy) {
   expect_success <- is.null(error_msg)
   tempdir <- tempdir()
+  if (!is.null(copy)) {
+    new_dirs <- fs::path(tempdir, fs::path_dir(copy))
+    fs::dir_create(new_dirs)
+    paths_copy <- fs::path(new_dirs, fs::path_file(copy))
+    on.exit(fs::file_delete(paths_copy))
+    fs::file_copy(copy, paths_copy, overwrite = TRUE)
+  }
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
   fs::file_copy(path_candidate, tempdir, overwrite = TRUE)
   exec <- fs::path_abs(path_executable)
@@ -77,13 +87,15 @@ run_test_impl <- function(path_executable,
 #' @param cmd_args More arguments passed to the file. Pre-commit handles it as
 #'   described [here](https://pre-commit.com/#arguments-pattern-in-hooks).
 run_test <- function(hook_name, file_name = hook_name, suffix = ".R",
-                     error_msg = NULL, cmd_args = NULL) {
+                     error_msg = NULL, cmd_args = NULL,
+                     copy = NULL) {
   path_executable <- fs::path(here::here(), "bin", hook_name)
   test_ancestor <- fs::path(here::here(), "tests", "testthat", "in", file_name)
   path_candidate <- paste0(test_ancestor, suffix)
   run_test_impl(
     path_executable, path_candidate[1],
     error_msg = error_msg,
-    cmd_args = cmd_args
+    cmd_args = cmd_args,
+    copy = copy
   )
 }
