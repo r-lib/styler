@@ -60,3 +60,28 @@ run_test("parsable-R",
 
 # failure
 run_test("parsable-R", suffix = "-fail.R", error_msg = "not parsable")
+
+
+### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+### spell-check                                                             ####
+# success
+run_test("spell-check", suffix = "-success.md", error_msg = NULL)
+
+# basic failure
+run_test("spell-check", suffix = "-fail.md", error_msg = "Spell check failed")
+
+# success with wordlist
+test_temp <- function() {
+  path_wordlist <- "inst/WORDLIST"
+  on.exit(fs::file_delete(path_wordlist))
+  fs::dir_create("inst")
+  fs::file_create(path_wordlist)
+  writeLines("fsssile", path_wordlist)
+
+  run_test("spell-check",
+    suffix = "-wordlist-success.md",
+    error_msg = NULL,
+    copy = "inst/WORDLIST"
+  )
+}
+test_temp()
