@@ -75,6 +75,8 @@ test_temp <- function() {
   tempdir <- tempdir()
   path_inst <- fs::path(tempdir, "inst")
   path_wordlist <- fs::path(path_inst, "WORDLIST")
+  fs::dir_create(path_inst)
+  fs::file_create(path_wordlist)
   writeLines(c("fsssile", ""), path_wordlist)
   on.exit(fs::file_delete(path_wordlist))
 
@@ -98,8 +100,8 @@ run_test("spell-check", suffix = "-language-success.md", cmd_args = "--lang=en_G
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### depds-in-desc                                                           ####
 test_temp <- function(suffix, error_msg) {
-  path_desc <- test_path("reference-objects/DESCRIPTION")
-  path_desc_temp <- fs::path(tempdir(), path_desc)
+  path_desc <- testthat::test_path("reference-objects/DESCRIPTION")
+  path_desc_temp <- fs::path(tempdir(), fs::path_file(path_desc))
   fs::file_copy(path_desc, tempdir(), overwrite = TRUE)
   new_desc <- desc::description$new(path_desc_temp)
   new_desc$set_dep("bliblablupp")

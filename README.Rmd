@@ -44,6 +44,9 @@ A collection of git pre-commit hooks to use with
 * `roxygenize`: A hook to run `roxygen2::roxygenize()`. Makes sure you commit
   your `.Rd` changes with the source changes.
 
+* `deps-in-desc`: Checks if packagese used in the `pkgname::fun()` syntax are 
+  listed in your DESCRIPTION file.
+
 * `use-tidy-description`: A hook to run `usethis::use_tidy_description()` to
   ensure dependencies are ordered alphabetically and fields are in standard
   order.
