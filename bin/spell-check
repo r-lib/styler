@@ -12,7 +12,7 @@ Options:
 arguments <- docopt::docopt(doc)
 path_wordlist <- file.path("inst", "WORDLIST")
 files <- arguments$files
-ignored_files <- grep(arguments$ignore, argumentsfiles)
+ignored_files <- grep(arguments$ignore, arguments$files)
 files <- setdiff(files, ignored_files)
 if (file.exists(path_wordlist)) {
   ignore <- readLines(path_wordlist, encoding = "UTF-8")
@@ -27,9 +27,9 @@ spelling_errors <- spelling::spell_check_files(
   ignore = ignore
 )
 if (nrow(spelling_errors) > 0) {
-  message("The following spelling errors were found:")
+  cat("The following spelling errors were found:\n" )
   print(spelling_errors)
-  stop(
+  cat(
     "You can", action, "the file inst/WORDLIST if some of the shown words are",
     " not errors, but you want them to be included in your dictionary. If ", 
     "these are many, you can also interactively run ", 
@@ -37,4 +37,5 @@ if (nrow(spelling_errors) > 0) {
     "on the files you just tried to commit. This gives you a list of files ", 
     "you can c/p into your inst/WORDLIST file easily.", call. = FALSE
   )
+  stop("Spell check failed", call. = FALSE)
 }
