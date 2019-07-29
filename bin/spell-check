@@ -2,7 +2,7 @@
 
 'Spell check for files
 Usage:
-  spell-check-files [--ignore_files=<ignored_files>] [--lang=<language>] <files>...
+  spell-check [--ignore_files=<ignored_files>] [--lang=<language>] <files>...
 
 Options:
   --ignore_files=<ignored_files>  Regex for files to ignore apart from R, py and .gitignore [default: ""].
@@ -13,7 +13,7 @@ Options:
 arguments <- docopt::docopt(doc)
 path_wordlist <- file.path("inst", "WORDLIST")
 files <- arguments$files
-ignored_files <- grep(arguments$ignore_files, arguments$files)
+ignored_files <- grep(arguments$ignore_files, arguments$files, value = TRUE)
 files <- setdiff(files, ignored_files)
 if (file.exists(path_wordlist)) {
   ignore <- readLines(path_wordlist, encoding = "UTF-8")
@@ -22,6 +22,7 @@ if (file.exists(path_wordlist)) {
   ignore <- character()
   action <- "create"
 }
+
 
 spelling_errors <- spelling::spell_check_files(
   files, 
