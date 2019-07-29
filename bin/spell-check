@@ -2,17 +2,18 @@
 
 'Spell check for files
 Usage:
-  spell-check-files [--ignore=<ignored_files>] <files>...
+  spell-check-files [--ignore_files=<ignored_files>] [--lang=<language>] <files>...
 
 Options:
-  --ignore=<ignored_files>  Regex for files to ignore apart from R, py and .gitignore [default: ""].
+  --ignore_files=<ignored_files>  Regex for files to ignore apart from R, py and .gitignore [default: ""].
+  --lang=<language> Passed to `spelling::spell_check_files()` [default: en_US]
 
 ' -> doc
 
 arguments <- docopt::docopt(doc)
 path_wordlist <- file.path("inst", "WORDLIST")
 files <- arguments$files
-ignored_files <- grep(arguments$ignore, arguments$files)
+ignored_files <- grep(arguments$ignore_files, arguments$files)
 files <- setdiff(files, ignored_files)
 if (file.exists(path_wordlist)) {
   ignore <- readLines(path_wordlist, encoding = "UTF-8")
@@ -24,7 +25,8 @@ if (file.exists(path_wordlist)) {
 
 spelling_errors <- spelling::spell_check_files(
   files, 
-  ignore = ignore
+  ignore = ignore, 
+  lang = arguments$lang
 )
 if (nrow(spelling_errors) > 0) {
   cat("The following spelling errors were found:\n" )

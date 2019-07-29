@@ -85,3 +85,10 @@ test_temp <- function() {
   )
 }
 test_temp()
+
+# success with ignored files
+# basic failure
+run_test("spell-check", suffix = "-ignored-success.md", cmd_args = "--ignore_files='\\.md$'")
+
+# uses lang argument
+run_test("spell-check", suffix = "-language-success.md", cmd_args = "--lang=en_GB")
