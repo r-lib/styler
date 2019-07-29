@@ -1,0 +1,33 @@
+#!/usr/bin/env Rscript
+
+"Ensure all dependencies of the form pkg::fun are in DESCRIPTION
+Usage:
+  deps-in-desc <files>...
+
+" -> doc
+
+arguments <- docopt::docopt(doc)
+deps_in_desc <- function(file, arguments) {
+  parse_data <- getParseData(parse(file = file, keep.source = TRUE))
+  used <- parse_data[parse_data$token == "SYMBOL_PACKAGE", ]$text
+  unregistered <- setdiff(
+    unique(used),
+    desc::desc_get_deps(file = ".")$package
+  )
+  if (length(unregistered) > 0) {
+    cat(
+      "Not all packages used in your code are listed in DESCRIPTION. ",
+      "The following are missing in file", file, ": ",
+      paste(unregistered, collapse = ", "), ".\n", 
+      "You can add them with `usethis::use_package()` or `usethis::use_dev_package()`.",
+      sep = ""
+    )
+    return(FALSE)
+  }
+  TRUE
+}
+
+out <- lapply(arguments$files, deps_in_desc, arguments = arguments)
+if (!all(unlist(out))) {
+  stop("Dependency check failed", call. = FALSE)
+}

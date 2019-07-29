@@ -41,3 +41,9 @@
     entry: bin/spell-check
     language: script
     files: '(\.[rR]$|\.py|\.gitignore|)$'
+-   id: deps-in-desc
+    name: deps-in-desc
+    description: Check if dependencies that can be parsed from code are in DESCRIPTION.
+    entry: bin/deps-in-desc
+    language: script
+    files: '\.[rR]$'

@@ -1,0 +1,24 @@
+Package: precommithooks
+Title: Pre commit hooks
+Version: 0.0.0.9007
+Author: Lorenz Walthert
+Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
+Imports:
+    docopt,
+    fs,
+    here,
+    oneliner (>= 0.1.0),
+    roxygen2,
+    spelling,
+    styler (>= 1.1.1.9002),
+    testthat,
+    tic,
+    usethis,
+    withr
+Remotes: 
+    lorenzwalthert/oneliner,
+    r-lib/styler,
+    ropenscilabs/tic
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
