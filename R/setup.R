@@ -39,3 +39,17 @@ is_package <- function(base_path = here::here()) {
   )
   !is.null(res)
 }
+#' Open pre-commit related files
+#'
+#' @details
+#' * `open_config()`: opens the pre-commit config file.
+#' * `open_wordlist()`: opens the the WORDLIST file for the check-spelling hook.
+#' @export
+open_config <- function() {
+  rstudioapi::navigateToFile(".pre-commit-config.yaml")
+}
+
+#' @export
+open_wordlist <- function() {
+  rstudioapi::navigateToFile("inst/WORDLIST")
+}
