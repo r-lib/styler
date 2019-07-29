@@ -37,7 +37,7 @@ if (nrow(spelling_errors) > 0) {
     "these are many, you can also interactively run ", 
     "`cat(spelling::spell_check_files('paths/to/your/files'), sep = '\\n')` ",
     "on the files you just tried to commit. This gives you a list of files ", 
-    "you can c/p into your inst/WORDLIST file easily.", call. = FALSE
+    "you can c/p into your inst/WORDLIST file easily."
   )
   stop("Spell check failed", call. = FALSE)
 }

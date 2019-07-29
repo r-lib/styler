@@ -75,6 +75,7 @@ test_temp <- function() {
   tempdir <- tempdir()
   path_inst <- fs::path(tempdir, "inst")
   path_wordlist <- fs::path(path_inst, "WORDLIST")
+  fs::dir_create(path_inst)
   fs::file_create(path_wordlist)
   writeLines(c("fsssile", ""), path_wordlist)
   on.exit(fs::file_delete(path_wordlist))
