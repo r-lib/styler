@@ -4,6 +4,12 @@ call(
   xy  = 2, n    = 33,
 )
 
+# without trailing comma
+call(
+  x   = 1, kdd  =  2,
+  xy  = 2, n    = 33
+)
+
 # algorithm: aligned. human: aligned.
 call(
   x  = 1, kdd  =  2,
@@ -22,29 +28,19 @@ call(
   xy =2,   n    = 33,
 )
 
-# algorithm: aligned (spacing around coma cannot be detected). human: aligned
-# (fix: spacing around comma).
-# TODO should detect redundant space before comma (not possible currently
-# because this space is hidden in child nest. Would be possible when we would
-# attempt to get position of all tokens on the line right away)
-call(
-  x  = 1,   kdd  =  2,
-  xy = 2 ,  n    = 33,
-)
-
-# algorithm: aligned. human: not aligned.
+# algorithm: not aligned. human: not aligned.
 call(
   x  = 1,   kdd  =  2,
   xy = 2, n = 33,
 )
 
-# algorithm: aligned. human: aligned.
+# algorithm: not aligned. human: not aligned.
 call(
   x  =  1,   kdd  =  2,
   xy = 22, n = 33,
 )
 
-# algorithm: aligned. human: not aligned.
+# algorithm: not aligned. human: not aligned.
 call(
   x  = 1, d = 2,
   xy = 22, n = 33,
@@ -57,13 +53,6 @@ call(
   xy = 2,   n    = 33, z = "333"
 )
 
-# algorithm: aligned. human: aligned (fix spacing around =).
-# FIXME need to check also text of argument value.
-call(
-  x  = 122,   kdd  =  2, k = "abc",
-  xy = 2,   n    = 33, z = "333"
-)
-
 
 # algorithm: aligned. human: aligned.
 call(
@@ -72,9 +61,31 @@ call(
 )
 
 # algorithm: aligned. human: aligned.
+# FIXME
 call(
   x  = 1, n = 33, z = "333",
 
   xy = 2,
 )
 
+# aligned. when spaces are spread accross different nests
+call(
+  k =  ff("pk"), k  = 3,
+  b = f(-g),     22 + 1,
+  44,               323
+)
+
+# if all col1 arguments are named, col1 must also be aligned
+# not aligned
+fell(
+  x =   1,
+  y =  23,
+  zz = NULL
+)
+
+# aligned
+fell(
+  x =     1,
+  y =    23,
+  zz = NULL
+)

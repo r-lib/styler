@@ -85,16 +85,9 @@ tidyverse_style <- function(scope = "tokens",
         style_space_around_tilde,
         strict = strict
       ),
-      spacing_around_op = if (strict) {
-        set_space_around_op
-      } else {
-        add_space_around_op
-      },
-      spacing_around_comma = if (strict) {
-        set_space_after_comma
-      } else {
-        add_space_after_comma
-      },
+      spacing_around_op = purrr::partial(set_space_around_op,
+        strict = strict
+      ),
       remove_space_after_opening_paren,
       remove_space_after_excl,
       set_space_after_bang_bang,
