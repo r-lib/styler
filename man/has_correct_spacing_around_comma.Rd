@@ -2,8 +2,7 @@
 % Please edit documentation in R/detect-alignment.R
 \name{has_correct_spacing_around_comma}
 \alias{has_correct_spacing_around_comma}
-\title{At least one space after comma, none before, for all but the last comma on
-the line}
+\title{Check if spacing around comma is correcr}
 \usage{
 has_correct_spacing_around_comma(pd_sub)
 }

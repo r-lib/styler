@@ -4,7 +4,10 @@
 \alias{token_is_on_alligned_line}
 \title{Check if tokens are aligned}
 \usage{
-token_is_on_alligned_line(pd_flat, op_before)
+token_is_on_alligned_line(pd_flat)
+}
+\arguments{
+\item{pd_flat}{A flat parse table.}
 }
 \description{
 If all tokens are aligned, \code{TRUE} is returned, otherwise \code{FALSE}.

@@ -118,3 +118,9 @@ fell(
   y =    23,
   zz = NULL
 )
+
+# aligned but comma in the wrong line
+call(
+  a  =  2,
+  bb =  3
+,)

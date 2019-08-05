@@ -20,7 +20,7 @@ set_space_around_op <- function(pd_flat, strict) {
       is_function_call(pd_flat) &&
       any(pd_flat$token %in% c("EQ_SUB", "','"))
   ) {
-    is_on_alligned_line <- token_is_on_alligned_line(pd_flat, op_before)
+    is_on_alligned_line <- token_is_on_alligned_line(pd_flat)
   } else {
     is_on_alligned_line <- FALSE
   }

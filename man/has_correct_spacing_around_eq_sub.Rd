@@ -2,7 +2,7 @@
 % Please edit documentation in R/detect-alignment.R
 \name{has_correct_spacing_around_eq_sub}
 \alias{has_correct_spacing_around_eq_sub}
-\title{At least one space around \code{EQ_SUB}}
+\title{Check if spacing around \code{=} is correct}
 \usage{
 has_correct_spacing_around_eq_sub(pd_sub)
 }
