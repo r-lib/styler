@@ -251,7 +251,7 @@ needs_indention <- function(pd,
 #' @keywords internal
 #' @examples
 #' style_text(c(
-#'   "call(named = c",
+#'   "call(named = c,",
 #'   "named = b)"
 #' ), strict = FALSE)
 needs_indention_one <- function(pd,

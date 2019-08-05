@@ -42,7 +42,7 @@ the trigger is passive.
 }
 \examples{
 style_text(c(
-  "call(named = c",
+  "call(named = c,",
   "named = b)"
 ), strict = FALSE)
 }
