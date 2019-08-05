@@ -7,13 +7,24 @@
 token_is_on_alligned_line(pd_flat, op_before)
 }
 \description{
-A line is called aligned if the following conditions hold:
+If all tokens are aligned, \code{TRUE} is returned, otherwise \code{FALSE}.
 }
 \details{
+A line is called aligned if the following conditions hold:
 \itemize{
-\item argument name and = have the same line1 (i.e. the start of a token) for
-multiple lines for the first column.
-\item spacing around comma is correct (none before, at least one after).
-\item and at least one space around =.
+\item lag spaces of column 1 must agree.
+\item spacing around comma (0 before, > 1 after) and spacing around \code{=} (at least
+one around).
+\item all positions of commas of col > 2 must agree (needs recursive creation of
+\code{text}).
+}
+
+Because of the last requirement, this function is very expensive to run. For
+this reason, the following approach is taken:
+\itemize{
+\item Only invoke the function when certain that allignment is possible.
+\item Check the cheap conditions first.
+\item For the recursive creation of text, greedily check column by column to make
+sure we can stop as soon as we found that columns are not aligned.
 }
 }

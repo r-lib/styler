@@ -61,7 +61,6 @@ call(
 )
 
 # algorithm: aligned. human: aligned.
-# FIXME
 call(
   x  = 1, n = 33, z = "333",
 
@@ -74,6 +73,36 @@ call(
   b = f(-g),     22 + 1,
   44,               323
 )
+
+# aligned. when spaces are spread accross different nests
+call(
+  k =  ff("pk"), k  = 3,
+  b = f(-g),     22 + 1,
+  44,               323,
+)
+
+# no trailing
+call(
+  k =  ff("pk"), k  = 3,
+  b = f(-g),     22 + 1,
+  44
+)
+
+# aligned: fewest arguments not on last line
+call(
+  44,
+  k =  ff("pk"), k  = 3,
+  b = f(-g),     22 + 1,
+)
+
+# aligned: fewest arguments not on last line
+call(
+  k =  ff("pk"), k  = 3,
+  44,
+  b = f(-g),     22 + 1,
+)
+
+
 
 # if all col1 arguments are named, col1 must also be aligned
 # not aligned

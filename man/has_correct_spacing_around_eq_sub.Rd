@@ -6,6 +6,9 @@
 \usage{
 has_correct_spacing_around_eq_sub(pd_sub)
 }
+\arguments{
+\item{pd_sub}{The subset of a parse table corresponding to one line.}
+}
 \description{
 At least one space around \code{EQ_SUB}
 }

@@ -4,7 +4,7 @@
 \alias{set_space_around_op}
 \title{Set spaces around operators}
 \usage{
-set_space_around_op(pd_flat)
+set_space_around_op(pd_flat, strict)
 }
 \description{
 Alignement is kept, if detected.

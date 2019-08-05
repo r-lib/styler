@@ -1,5 +1,6 @@
 #' Check if tokens are aligned
 #'
+#' If all tokens are aligned, `TRUE` is returned, otherwise `FALSE`.
 #' @details
 #' A line is called aligned if the following conditions hold:
 #'
@@ -51,27 +52,24 @@ token_is_on_alligned_line <- function(pd_flat, op_before) {
     return(FALSE)
   }
   # most expensive check in the end.
-  loop_upper <- max(purrr::map_int(pd_by_line, ~ sum(.x$token == "','")))
-  col1_all_named <- purrr::map_lgl(pd_by_line[relevant_idx],
-    ~ .x$token[c(1, 3)] == c("SYMBOL_SUB", "expr") &&
-      .x$token[2] %in% c("EQ_SUB", "SPECIAL-IN", "LT", "GT", "EQ", "NE")
-  ) %>%
-    all()
-  for (column in seq2(ifelse(col1_all_named, 1, 2), loop_upper)) {
+  # browser()
+  n_cols <- purrr::map_int(pd_by_line, ~ sum(.x$token == "','"))[relevant_idx]
+  # if last non-comment is not a comma, last(n_cols) must be adjusted
+  very_last_token_is_comma <- last(last(pd_by_line[relevant_idx])$token)  == "','"
+  if (!very_last_token_is_comma) {
+    n_cols[length(n_cols)] <- last(n_cols)+ 1L
+  }
+  start <- ifelse(all(col1_is_named(pd_by_line[relevant_idx])), 1, 2)
+  for (column in seq2(start, max(n_cols))) {
     # check column by column since it is very expensive
-    is_last <- column == loop_upper
-    char_len <- purrr::map(pd_by_line[relevant_idx],
-        serialize_lines, column = column,
-        is_last_idx = is_last
-      ) %>%
+    char_len <- serialize_column(pd_by_line[relevant_idx], column) %>%
       purrr::compact() %>%
       unlist() %>%
       trimws(which = "right") %>%
       nchar()
-    # TODO consistently use last()
-    if (is_last && last(last(pd_by_line[relevant_idx])$token) != "','") {
-      # last column does often not have a comma.
-      char_len[length(char_len)] <- char_len[length(char_len)] +1
+
+    if (column == last(n_cols) && !very_last_token_is_comma) {
+      char_len[length(char_len)] <- last(char_len) + 1L
     }
     is_aligned <- length(unique(char_len)) == 1
 
@@ -85,22 +83,51 @@ token_is_on_alligned_line <- function(pd_flat, op_before) {
   TRUE
 }
 
-serialize_lines <- function(pd,is_last_idx, column) {
+
+#' Checks if all arguments of column 1 are named
+#' @param relevant_pd_by_line A list with parse tables of a multi-line call,
+#'   excluding first and last column.
+#' @keywords internal
+col1_is_named <- function(relevant_pd_by_line) {
+  purrr::map_lgl(relevant_pd_by_line,
+                 ~ .x$token[c(1, 3)] == c("SYMBOL_SUB", "expr") &&
+                   .x$token[2] %in% c(
+                     "EQ_SUB", "SPECIAL-IN", "LT", "GT", "EQ", "NE"
+                    )
+  ) %>%
+    all()
+}
+
+#' Serialize all lines for a given column
+#' @param colum Which column to serialize.
+#' @inheritParams col1_is_named
+#' @keywords internal
+serialize_column <- function(relevant_pd_by_line, column) {
+  purrr::map2(
+    relevant_pd_by_line,
+    c(rep(FALSE, length(relevant_pd_by_line) - 1), TRUE),
+    serialize_lines, column = column
+  )
+}
+
+serialize_lines <- function(pd, is_last_line, column) {
   # better also add lover bound for column. If you already checked up to comma 2,
   # you don't need to re-construct text again, just check if text between comma 2
   # and 3 has the same length.
-
-  if (is_last_idx) {
+  comma_idx <- which(pd$token == "','")
+  n_cols <- length(comma_idx) + ifelse(is_last_line && last(pd$token != "','"), 1L, 0)
+  if (column > n_cols) {
+    # line does not have values at that column
+    return(NULL)
+  } else if (column == n_cols) {
+    # last column won't have comma matching
     relevant_comma <- nrow(pd)
+    # TODO not true for commas after , !
   } else {
-    comma_idx <- which(pd$token == "','")
     relevant_comma <- comma_idx[column]
-    if (column > length(comma_idx)) {
-      return(NULL)
-    }
   }
 
-  pd <- pd[seq2(1, nrow(pd)) < 1L + relevant_comma,]
+  pd <- pd[seq2(1, relevant_comma),]
   serialize(pd)
 }
 
@@ -136,6 +163,7 @@ has_correct_spacing_around_comma <- function(pd_sub) {
 }
 
 #' At least one space around `EQ_SUB`
+#' @inheritParams has_correct_spacing_around_comma
 #' @keywords internal
 #' @importFrom rlang seq2
 has_correct_spacing_around_eq_sub <- function(pd_sub) {
