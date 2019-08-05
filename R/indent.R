@@ -87,6 +87,7 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #'   definitions without parenthesis.
 #' @keywords internal
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
+
   tokens <- c("FOR", "WHILE", "FUNCTION")
   nrow <- nrow(pd)
   if (!(pd$token[1] %in% tokens)) {
@@ -96,24 +97,8 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
     return(pd)
   }
 
-  if (pd$token[1] %in% tokens) {
-    other_trigger_tokens <- c(
-      math_token,
-      logical_token,
-      special_token,
-      "LEFT_ASSIGN",
-      "EQ_ASSIGN",
-      "'$'",
-      "'('", "'['", "'{'"
-    )
-    needs_indention_now <- needs_indention_one(pd,
-      potential_trigger_pos = 1,
-      other_trigger_tokens = other_trigger_tokens
-    )
-
-    if (!needs_indention_now) {
-      return(pd)
-    }
+  if (pd$newlines[length(pd$newlines) - 1] == 0 ) {
+    return(pd)
   }
   pd$indent[nrow] <- indent_by
   pd
@@ -130,19 +115,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   if (!is_if) {
     return(pd)
   }
-  other_trigger_tokens <- c(
-    math_token,
-    logical_token,
-    special_token,
-    "LEFT_ASSIGN",
-    "EQ_ASSIGN",
-    "'$'",
-    "'('", "'['", "'{'"
-  )
-  needs_indention_now <- needs_indention_one(pd,
-    potential_trigger_pos = 1,
-    other_trigger_tokens = other_trigger_tokens
-  )
+  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "')'"))] > 0
 
   if (needs_indention_now) {
     pd$indent[expr_after_if] <- indent_by
@@ -159,10 +132,9 @@ indent_without_paren_if_else <- function(pd, indent_by) {
     any(pd$token == "ELSE") &&
       pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
       pd$child[[expr_after_else_idx]]$token[1] != "IF"
-  needs_indention_now <- needs_indention_one(pd,
-    potential_trigger_pos = else_idx,
-    other_trigger_tokens = other_trigger_tokens
-  )
+
+  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "ELSE"))] > 0
+
   if (has_else_without_curly_or_else_chid && needs_indention_now) {
     pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
   }

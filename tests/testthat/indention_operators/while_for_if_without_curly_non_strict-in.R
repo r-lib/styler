@@ -10,17 +10,14 @@ if (x)
 for (i in 1:3) #
   print(i)
 
-# FIXME
 for (i in
      1:3) #
   print(i)
 
-# FIXME
 for (i in #
      1:3) #
   print(i)
 
-# FIXME
 for (#
   i in #
   1:3#
@@ -39,21 +36,18 @@ while ( # test
   x > 3) # another
   return(FALSE)
 
-# FIXME
 while (
   2 > #here
   3 #
 ) #
   FALSE
 
-# FIXME
 while (
   2 > #here
   3 #
 )
   FALSE
 
-# FIXME
 while (
   2 > #here
   3
