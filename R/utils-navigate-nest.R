@@ -17,7 +17,7 @@ next_non_comment <- function(pd, pos) {
 
 #' @rdname next_non_comment
 previous_non_comment <- function(pd, pos) {
-  if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) {
+  if (length(pos) < 1 || is.na(pos) || pos > nrow(pd)) {
     return(integer(0))
   }
   candidates <- seq2(1L, pos - 1L)

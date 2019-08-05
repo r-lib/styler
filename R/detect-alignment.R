@@ -26,6 +26,18 @@ token_is_on_alligned_line <- function(pd_flat) {
   line_idx <- 1 + cumsum(pd_flat$lag_newlines)
   pd_flat$.lag_spaces <- lag(pd_flat$spaces)
   pd_by_line <- split(pd_flat, line_idx)
+  # cannot use lag_newlines and newlines anymore since we removed tokens. Need
+  # to remove comments because code will fail if last column is comment only.
+  pd_by_line <- purrr::map(pd_by_line, function(x) {
+    out <- x[x$token != "COMMENT",]
+    if (nrow(out) < 1) {
+      return(NULL)
+    } else {
+      out
+    }
+  }) %>%
+    purrr::compact()
+
   relevant_idx <- seq2(2, length(pd_by_line) - 1)
   pd_by_line <- pd_by_line[relevant_idx]
   lag_spaces_col_1 <- map_int(pd_by_line, ~ .x$.lag_spaces[1])
@@ -53,12 +65,17 @@ token_is_on_alligned_line <- function(pd_flat) {
   if (any(starting_with_comma)) {
     return(FALSE)
   }
+
   n_cols <- purrr::map_int(pd_by_line, ~ sum(.x$token == "','"))
-  very_last_token_is_comma <- last(last(pd_by_line)$token) == "','"
+  very_last_token_is_comma <- last(last(pd_by_line)$token) == "','" ||
+    (last(pd_by_line)$token[length(last(pd_by_line)$token) - 1] == "','" &&
+       last(last(pd_by_line)$token) == "COMMENT"
+    )
   if (!very_last_token_is_comma) {
     n_cols[length(n_cols)] <- last(n_cols) + 1L
   }
   start <- ifelse(all(col1_is_named(pd_by_line)), 1, 2)
+
   for (column in seq2(start, max(n_cols))) {
     # check column by column since it is very expensive
     char_len <- serialize_column(pd_by_line, column) %>%
@@ -102,32 +119,40 @@ serialize_column <- function(relevant_pd_by_line, column) {
   purrr::map2(
     relevant_pd_by_line,
     c(rep(FALSE, length(relevant_pd_by_line) - 1), TRUE),
-    serialize_lines,
+    serialize_line,
     column = column
   )
 }
 
-serialize_lines <- function(pd, is_last_line, column) {
+#' Serialize one line for a column
+#'
+#' @param is_last_line Boolean for every element of `relevant_pd_by_line`
+#'   indicating if it is the last line.
+#' @param column The index of the column to serialize.
+#' @inheritParams col1_is_named
+serialize_line <- function(relevant_pd_by_line, is_last_line, column) {
   # better also add lover bound for column. If you already checked up to comma 2,
   # you don't need to re-construct text again, just check if text between comma 2
   # and 3 has the same length.
-  comma_idx <- which(pd$token == "','")
-  n_cols_correcture <- ifelse(is_last_line && last(pd$token != "','"), 1L, 0)
+  comma_idx <- which(relevant_pd_by_line$token == "','")
+  n_cols_correcture <- ifelse(
+    is_last_line && !last(relevant_pd_by_line$token %in% c("','")),
+    1L, 0
+  )
   n_cols <- length(comma_idx) + n_cols_correcture
-
   if (column > n_cols) {
     # line does not have values at that column
     return(NULL)
-  } else if (column == n_cols) {
+  } else if (column == n_cols && n_cols_correcture == 1) {
     # last column won't have comma matching
-    relevant_comma <- nrow(pd)
+    relevant_comma <- nrow(relevant_pd_by_line)
     # TODO not true for commas after , !
   } else {
     relevant_comma <- comma_idx[column]
   }
 
-  pd <- pd[seq2(1, relevant_comma), ]
-  serialize(pd)
+  relevant_pd_by_line <- relevant_pd_by_line[seq2(1, relevant_comma), ]
+  serialize(relevant_pd_by_line)
 }
 
 # No new lines considered

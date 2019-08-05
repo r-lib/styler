@@ -124,3 +124,45 @@ call(
   a  =  2,
   bb =  3
 ,)
+
+
+# aligned (comments)
+call(
+  a  =  2, x = 111,
+  # another
+  bb =  3, # hi
+)
+
+# aligned (comments)
+call(
+  a  =  2, x = 111,
+  bb =  3, # hi
+)
+
+# aligned (comments)
+call(
+  # another one
+  a  =  2, x = 111,
+  bb =  3, # hi
+)
+
+# aligned (comments)
+call(
+  # another one
+  a  =  2, x = 111,
+  bb =  3 # hi
+)
+
+# not aligned (comments)
+call(
+  a =  2, x = 111,
+  bb =  3, # hi
+)
+
+# not aligned (comments)
+call(
+  # another one
+  a =  2, x = 111,
+  bb =  3,
+  # hi
+)
