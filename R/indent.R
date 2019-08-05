@@ -87,11 +87,17 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #'   definitions without parenthesis.
 #' @keywords internal
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
+
+  tokens <- c("FOR", "WHILE", "FUNCTION")
   nrow <- nrow(pd)
-  if (!(pd$token[1] %in% c("FOR", "WHILE", "FUNCTION"))) {
+  if (!(pd$token[1] %in% tokens)) {
     return(pd)
   }
   if (is_curly_expr(pd$child[[nrow]])) {
+    return(pd)
+  }
+
+  if (pd$newlines[length(pd$newlines) - 1] == 0 ) {
     return(pd)
   }
   pd$indent[nrow] <- indent_by
@@ -103,19 +109,33 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 #' @keywords internal
 indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
+  is_if <- pd$token[1] %in% "IF"
   has_if_without_curly <-
-    pd$token[1] %in% "IF" && pd$child[[expr_after_if]]$token[1] != "'{'"
-  if (has_if_without_curly) {
+    is_if && pd$child[[expr_after_if]]$token[1] != "'{'"
+  if (!is_if) {
+    return(pd)
+  }
+  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "')'"))] > 0
+
+  if (needs_indention_now) {
     pd$indent[expr_after_if] <- indent_by
   }
 
+
+
   else_idx <- which(pd$token == "ELSE")
+  if (length(else_idx) == 0) {
+    return(pd)
+  }
   expr_after_else_idx <- next_non_comment(pd, else_idx)
   has_else_without_curly_or_else_chid <-
     any(pd$token == "ELSE") &&
       pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
       pd$child[[expr_after_else_idx]]$token[1] != "IF"
-  if (has_else_without_curly_or_else_chid) {
+
+  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "ELSE"))] > 0
+
+  if (has_else_without_curly_or_else_chid && needs_indention_now) {
     pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
   }
   pd
@@ -212,7 +232,10 @@ needs_indention <- function(pd,
 #' @importFrom rlang seq2
 #' @keywords internal
 #' @examples
-#' style_text("call(named = c, \nnamed = b)", strict = FALSE)
+#' style_text(c(
+#'   "call(named = c,",
+#'   "named = b)"
+#' ), strict = FALSE)
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {

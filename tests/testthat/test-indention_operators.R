@@ -22,6 +22,23 @@ test_that("while / for / if without curly brackets", {
   expect_warning(test_collection("indention_operators",
                                  "while_for_if_without_curly_non_strict",
                                  transformer = style_text, strict = FALSE), NA)
+  expect_warning(test_collection("indention_operators",
+                                 "while_for_without_curly_same_line_non_strict",
+                                 transformer = style_text, strict = FALSE), NA)
+
+  expect_warning(test_collection("indention_operators",
+                                 "if-else-no-braces-not-strict",
+                                 transformer = style_text, strict = FALSE), NA)
+
+})
+
+test_that("function multiline without curly brackets", {
+  expect_warning(test_collection("indention_operators",
+                                 "function-multiline-no-braces-strict",
+                                 transformer = style_text, strict = TRUE), NA)
+  expect_warning(test_collection("indention_operators",
+                                 "function-multiline-no-braces-non-strict",
+                                 transformer = style_text, strict = FALSE), NA)
 })
 
 test_that("while / for / if without curly brackets", {

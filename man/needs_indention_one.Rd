@@ -41,6 +41,9 @@ the trigger is passive.
 }
 }
 \examples{
-style_text("call(named = c, \\nnamed = b)", strict = FALSE)
+style_text(c(
+  "call(named = c,",
+  "named = b)"
+), strict = FALSE)
 }
 \keyword{internal}
