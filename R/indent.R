@@ -87,12 +87,41 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #'   definitions without parenthesis.
 #' @keywords internal
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
+  tokens <- c("FOR", "WHILE", "FUNCTION")
   nrow <- nrow(pd)
-  if (!(pd$token[1] %in% c("FOR", "WHILE", "FUNCTION"))) {
+  if (!(pd$token[1] %in% tokens)) {
     return(pd)
   }
   if (is_curly_expr(pd$child[[nrow]])) {
     return(pd)
+  }
+  if (pd$token[1] == "FOR") {
+    is_multi_line <- pd_is_multi_line(
+      pd$child[[which(pd$token == "forcond")]]
+    )
+  } else if (pd$token[1] %in% c("WHILE", "FUNCTION")) {
+    start <- which(pd$token == "'('")
+    end <- which(pd$token == "')'")
+    is_multi_line <- any(pd[seq2(start, end),]$multi_line)
+  }
+  if (pd$token[1] %in% tokens && !is_multi_line) {
+    other_trigger_tokens <- c(
+      math_token,
+      logical_token,
+      special_token,
+      "LEFT_ASSIGN",
+      "EQ_ASSIGN",
+      "'$'",
+      "'('", "'['", "'{'"
+    )
+    needs_indention_now <- needs_indention_one(pd,
+      potential_trigger_pos = 1,
+      other_trigger_tokens = other_trigger_tokens
+    )
+
+    if (!needs_indention_now) {
+      return(pd)
+    }
   }
   pd$indent[nrow] <- indent_by
   pd
@@ -105,7 +134,23 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
   has_if_without_curly <-
     pd$token[1] %in% "IF" && pd$child[[expr_after_if]]$token[1] != "'{'"
-  if (has_if_without_curly) {
+
+  other_trigger_tokens <- c(
+    math_token,
+    logical_token,
+    special_token,
+    "LEFT_ASSIGN",
+    "EQ_ASSIGN",
+    "'$'",
+    "'('", "'['", "'{'"
+  )
+  needs_indention_now <- needs_indention_one(pd,
+   potential_trigger_pos = 1,
+   other_trigger_tokens = other_trigger_tokens
+  )
+
+  if (has_if_without_curly && needs_indention_now) {
+
     pd$indent[expr_after_if] <- indent_by
   }
 
@@ -115,6 +160,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
     any(pd$token == "ELSE") &&
       pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
       pd$child[[expr_after_else_idx]]$token[1] != "IF"
+
   if (has_else_without_curly_or_else_chid) {
     pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
   }
@@ -212,7 +258,10 @@ needs_indention <- function(pd,
 #' @importFrom rlang seq2
 #' @keywords internal
 #' @examples
-#' style_text("call(named = c, \nnamed = b)", strict = FALSE)
+#' style_text(c(
+#'   "call(named = c",
+#'   "named = b)"
+#' ), strict = FALSE)
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
