@@ -2,28 +2,35 @@
 
 ## Breaking changes
 
-* `style_file()` now correctly styles multiple files from different 
-  directories. We no longer display the file name of the styled file, but
-  the absolute path. This is also reflected in the invisible return value of the 
-  function (#522).
-* `style_file()` and friends do not write content back to a file when 
-  styling does not cause any changes in the file. This means the modification 
-  date of files styled is only changed when the content is changed (#532).
+* `style_file()` now correctly styles multiple files from different directories.
+  We no longer display the file name of the styled file, but the absolute path.
+  This is also reflected in the invisible return value of the function (#522).
+
+* `style_file()` and friends do not write content back to a file when styling
+  does not cause any changes in the file. This means the modification date of
+  files styled is only changed when the content is changed (#532).
 
 ## New features
 
-* curlyl-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now 
-  explicitly handled, as opposed previously where it was just treated as two 
+* curlyl-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
+  explicitly handled, as opposed previously where it was just treated as two
   consequtive curly braces (#528).
-* `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and 
+
+* `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and
   hidden files are now also styled (#530).
 
 ## Minor improvements and fixes
 
 * escape characters in roxygen code examples are now correctly escaped (#512).
-* style selection Addin now preserves line break when the last line selected is 
+
+* style selection Addin now preserves line break when the last line selected is
   an entire line (#520).
+
 * style file Addin can now properly handle cancelling (#511).
+
+* The body of a multi-line function declaration is now indented correctly for
+  `strict = FALSE` and also wrapped in curly braces for `strict = TRUE` (#536).
+
 * advice for contributors in `CONTRIBUTING.md` was updated (#508).
 
 ## Adaption
@@ -41,8 +48,8 @@ This is primarily a maintenance release upon the request of the CRAN team
 - Users can now control style configurations for styler Addins (#463, #500),
   using the `Set style` Addin. See `?styler::styler_addins` for details.
 
-- `return()` is now always put in braces and put on a new line when used in 
-  a conditional statement (#492).
+- `return()` is now always put in braces and put on a new line when used in a
+  conditional statement (#492).
 
 - `%>%` almost always causes a line break now for `strict = TRUE` (#503).
 
@@ -55,20 +62,20 @@ This is primarily a maintenance release upon the request of the CRAN team
 - indention in roxygen code example styling (#455) and EOF spacing (#469) was
   fixed.
 
-- indention for for loop edge case (#457) and comments in pipe chain (#482)
-  were fixed.
+- indention for for loop edge case (#457) and comments in pipe chain (#482) were
+  fixed.
 
 - line-break styling around comma is improved (#479).
 
--  bug that can cause an error when the variable `text` in any name space
-  before styler on the search path was defined and did not have length 1 is
-  fixed (#484).
+- bug that can cause an error when the variable `text` in any name space before
+  styler on the search path was defined and did not have length 1 is fixed
+  (#484).
 
 - slightly confusing warning about empty strings caused with roxygen code
   examples and Rmd was removed.
 
-- right apostrophe to let package pass R CMD Check in strict Latin-1
-  locale was removed (#490, reason for release).
+- right apostrophe to let package pass R CMD Check in strict Latin-1 locale was
+  removed (#490, reason for release).
 
 ## Adaption of styler
 
