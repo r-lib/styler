@@ -155,8 +155,8 @@ tidyverse_style <- function(scope = "tokens",
       resolve_semicolon,
       add_brackets_in_pipe,
       remove_terminal_token_before_and_after,
-      wrap_if_else_while_for_multi_line_in_curly =
-        if (strict) wrap_if_else_while_for_multi_line_in_curly
+      wrap_if_else_while_for_fun_multi_line_in_curly =
+        if (strict) wrap_if_else_while_for_fun_multi_line_in_curly
     )
   }
 
