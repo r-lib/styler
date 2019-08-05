@@ -95,16 +95,8 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
   if (is_curly_expr(pd$child[[nrow]])) {
     return(pd)
   }
-  if (pd$token[1] == "FOR") {
-    is_multi_line <- pd_is_multi_line(
-      pd$child[[which(pd$token == "forcond")]]
-    )
-  } else if (pd$token[1] %in% c("WHILE", "FUNCTION")) {
-    start <- which(pd$token == "'('")
-    end <- which(pd$token == "')'")
-    is_multi_line <- any(pd[seq2(start, end),]$multi_line)
-  }
-  if (pd$token[1] %in% tokens && !is_multi_line) {
+
+  if (pd$token[1] %in% tokens) {
     other_trigger_tokens <- c(
       math_token,
       logical_token,
