@@ -124,9 +124,12 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 #' @keywords internal
 indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
+  is_if <- pd$token[1] %in% "IF"
   has_if_without_curly <-
-    pd$token[1] %in% "IF" && pd$child[[expr_after_if]]$token[1] != "'{'"
-
+    is_if && pd$child[[expr_after_if]]$token[1] != "'{'"
+  if (!is_if) {
+    return(pd)
+  }
   other_trigger_tokens <- c(
     math_token,
     logical_token,
@@ -137,14 +140,15 @@ indent_without_paren_if_else <- function(pd, indent_by) {
     "'('", "'['", "'{'"
   )
   needs_indention_now <- needs_indention_one(pd,
-   potential_trigger_pos = 1,
-   other_trigger_tokens = other_trigger_tokens
+    potential_trigger_pos = 1,
+    other_trigger_tokens = other_trigger_tokens
   )
 
-  if (has_if_without_curly && needs_indention_now) {
-
+  if (needs_indention_now) {
     pd$indent[expr_after_if] <- indent_by
   }
+
+
 
   else_idx <- which(pd$token == "ELSE")
   if (length(else_idx) == 0) {
