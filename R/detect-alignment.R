@@ -28,18 +28,14 @@ token_is_on_alligned_line <- function(pd_flat) {
   pd_by_line <- split(pd_flat, line_idx)
   # cannot use lag_newlines and newlines anymore since we removed tokens. Need
   # to remove comments because code will fail if last column is comment only.
-  pd_by_line <- purrr::map(pd_by_line, function(x) {
-    out <- x[x$token != "COMMENT",]
-    if (nrow(out) < 1) {
-      return(NULL)
-    } else {
-      out
-    }
-  }) %>%
-    purrr::compact()
-
-  relevant_idx <- seq2(2, length(pd_by_line) - 1)
+  last_line_is_closing_brace_only <- nrow(last(pd_by_line)) == 1
+  relevant_idx <- seq2(2, ifelse(last_line_is_closing_brace_only,
+    length(pd_by_line) - 1,
+    length(pd_by_line)
+  )) # always remove first line, also e.g. map(x, f,\nx = 2)
   pd_by_line <- pd_by_line[relevant_idx]
+
+
   lag_spaces_col_1 <- map_int(pd_by_line, ~ .x$.lag_spaces[1])
 
   relevant_lag_spaces_col_1 <- lag_spaces_col_1
@@ -66,14 +62,13 @@ token_is_on_alligned_line <- function(pd_flat) {
     return(FALSE)
   }
 
+  pd_by_line <- alignment_drop_comments(pd_by_line) %>%
+    alignment_ensure_no_closing_brace(last_line_is_closing_brace_only) %>%
+    alignment_ensure_trailing_comma()
+  # now, pd only contains arguments separated by values, ideal for iterating
+  # over columns
+
   n_cols <- purrr::map_int(pd_by_line, ~ sum(.x$token == "','"))
-  very_last_token_is_comma <- last(last(pd_by_line)$token) == "','" ||
-    (last(pd_by_line)$token[length(last(pd_by_line)$token) - 1] == "','" &&
-       last(last(pd_by_line)$token) == "COMMENT"
-    )
-  if (!very_last_token_is_comma) {
-    n_cols[length(n_cols)] <- last(n_cols) + 1L
-  }
   start <- ifelse(all(col1_is_named(pd_by_line)), 1, 2)
 
   for (column in seq2(start, max(n_cols))) {
@@ -84,9 +79,6 @@ token_is_on_alligned_line <- function(pd_flat) {
       trimws(which = "right") %>%
       nchar()
 
-    if (column == last(n_cols) && !very_last_token_is_comma) {
-      char_len[length(char_len)] <- last(char_len) + 1L
-    }
     is_aligned <- length(unique(char_len)) == 1
 
     if (!is_aligned) {
@@ -96,6 +88,64 @@ token_is_on_alligned_line <- function(pd_flat) {
   TRUE
 }
 
+#' Must be after dropping comments because the closing brace is only guaranteed
+#' to be the last token in that case.
+alignment_ensure_no_closing_brace <- function(pd_by_line, last_line_droped_early) {
+  if (last_line_droped_early) {
+    return(pd_by_line)
+  }
+  last <- last(pd_by_line)
+  if (nrow(last) == 1) {
+    # can drop last line completely
+    pd_by_line[-length(pd_by_line)]
+  } else {
+    # only drop last elment of last line
+    pd_by_line[[length(pd_by_line)]] <- last[seq2(1, nrow(last) - 1),]
+    pd_by_line
+  }
+
+}
+
+
+#' Remove all comment tokens
+#'
+#' Must be after split by line because it invalidates (lag)newlines, which are
+#' used for splitting by line.
+alignment_drop_comments <- function(pd_by_line) {
+  purrr::map(pd_by_line, function(x) {
+    out <- x[x$token != "COMMENT",]
+    if (nrow(out) < 1) {
+      return(NULL)
+    } else {
+      out
+    }
+  }) %>%
+    purrr::compact()
+}
+
+#' Must be after [alignment_drop_closing_brace()] because if it comes after
+#' [alignment_ensure_trailing_comma()], the last expression would not be a
+#' brace, which would make removal complicated.
+alignment_ensure_trailing_comma <- function(pd_by_line) {
+  last_pd <- last(pd_by_line)
+  # needed to make sure comma is aded without space
+  last_pd$spaces[nrow(last_pd)] <- 0
+  if (last(last_pd$token) == "','") {
+    return(pd_by_line)
+  } else {
+    pos_id <- create_pos_ids(last_pd, nrow(last_pd), after = TRUE)
+    tokens <- create_tokens(
+      tokens = "','",
+      texts = ",",
+      lag_newlines = 0,
+      spaces = 0,
+      pos_ids = pos_id,
+      )
+    tokens$.lag_spaces <- 0
+    pd_by_line[[length(pd_by_line)]] <- rbind(last_pd, tokens)
+    pd_by_line
+  }
+}
 
 #' Checks if all arguments of column 1 are named
 #' @param relevant_pd_by_line A list with parse tables of a multi-line call,
@@ -135,18 +185,10 @@ serialize_line <- function(relevant_pd_by_line, is_last_line, column) {
   # you don't need to re-construct text again, just check if text between comma 2
   # and 3 has the same length.
   comma_idx <- which(relevant_pd_by_line$token == "','")
-  n_cols_correcture <- ifelse(
-    is_last_line && !last(relevant_pd_by_line$token %in% c("','")),
-    1L, 0
-  )
-  n_cols <- length(comma_idx) + n_cols_correcture
+  n_cols <- length(comma_idx)
   if (column > n_cols) {
     # line does not have values at that column
     return(NULL)
-  } else if (column == n_cols && n_cols_correcture == 1) {
-    # last column won't have comma matching
-    relevant_comma <- nrow(relevant_pd_by_line)
-    # TODO not true for commas after , !
   } else {
     relevant_comma <- comma_idx[column]
   }
