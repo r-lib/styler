@@ -14,7 +14,7 @@
 #' Because of the last requirement, this function is very expensive to run. For
 #' this reason, the following approach is taken:
 #'
-#' * Only invoke the function when certain that allignment is possible.
+#' * Only invoke the function when certain that alignment is possible.
 #' * Check the cheap conditions first.
 #' * For the recursive creation of text, greedily check column by column to make
 #'   sure we can stop as soon as we found that columns are not aligned.
@@ -22,7 +22,7 @@
 #' @importFrom purrr map compact reduce map_lgl map_int
 #' @importFrom rlang seq2
 #' @importFrom magrittr not
-token_is_on_alligned_line <- function(pd_flat) {
+token_is_on_aligned_line <- function(pd_flat) {
   line_idx <- 1 + cumsum(pd_flat$lag_newlines)
   pd_flat$.lag_spaces <- lag(pd_flat$spaces)
   pd_by_line <- split(pd_flat, line_idx)

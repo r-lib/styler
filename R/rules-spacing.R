@@ -6,7 +6,7 @@
 #' @include token-define.R
 set_space_around_op <- function(pd_flat, strict) {
   # spacing and operator in same function because alternative is
-  # calling token_is_on_alligned_line() twice because comma and operator spacing
+  # calling token_is_on_aligned_line() twice because comma and operator spacing
   # depends on it.
   pd_flat <- add_space_after_comma(pd_flat)
   op_after <- pd_flat$token %in% op_token
@@ -20,18 +20,18 @@ set_space_around_op <- function(pd_flat, strict) {
       is_function_call(pd_flat) &&
       any(pd_flat$token %in% c("EQ_SUB", "','"))
   ) {
-    is_on_alligned_line <- token_is_on_alligned_line(pd_flat)
+    is_on_aligned_line <- token_is_on_aligned_line(pd_flat)
   } else {
-    is_on_alligned_line <- FALSE
+    is_on_aligned_line <- FALSE
   }
   # operator
-  must_have_space_before <- op_before & (pd_flat$newlines == 0L) & !is_on_alligned_line
+  must_have_space_before <- op_before & (pd_flat$newlines == 0L) & !is_on_aligned_line
   pd_flat$spaces[must_have_space_before] <- if (strict) {
     1L
   } else {
     pmax(pd_flat$spaces[must_have_space_before], 1L)
   }
-  must_have_space_after <- op_after & (pd_flat$newlines == 0L) & !is_on_alligned_line
+  must_have_space_after <- op_after & (pd_flat$newlines == 0L) & !is_on_aligned_line
   pd_flat$spaces[must_have_space_after] <- if (strict) {
     1L
   } else {
