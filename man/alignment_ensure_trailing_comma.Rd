@@ -2,9 +2,7 @@
 % Please edit documentation in R/detect-alignment-utils.R
 \name{alignment_ensure_trailing_comma}
 \alias{alignment_ensure_trailing_comma}
-\title{Must be after \code{\link[=alignment_drop_closing_brace]{alignment_drop_closing_brace()}} because if it comes after
-\code{\link[=alignment_ensure_trailing_comma]{alignment_ensure_trailing_comma()}}, the last expression would not be a
-brace, which would make removal complicated.}
+\title{Ensure last pd has a trailing comma}
 \usage{
 alignment_ensure_trailing_comma(pd_by_line)
 }
@@ -13,7 +11,7 @@ alignment_ensure_trailing_comma(pd_by_line)
 incomplete parse table that represents all token from one line.}
 }
 \description{
-Must be after \code{\link[=alignment_drop_closing_brace]{alignment_drop_closing_brace()}} because if it comes after
+Must be after \code{\link[=alignment_ensure_no_closing_brace]{alignment_ensure_no_closing_brace()}} because if it comes after
 \code{\link[=alignment_ensure_trailing_comma]{alignment_ensure_trailing_comma()}}, the last expression would not be a
 brace, which would make removal complicated.
 }

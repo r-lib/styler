@@ -41,7 +41,9 @@ alignment_drop_comments <- function(pd_by_line) {
     compact()
 }
 
-#' Must be after [alignment_drop_closing_brace()] because if it comes after
+#' Ensure last pd has a trailing comma
+#'
+#' Must be after [alignment_ensure_no_closing_brace()] because if it comes after
 #' [alignment_ensure_trailing_comma()], the last expression would not be a
 #' brace, which would make removal complicated.
 #' @inheritParams alignment_drop_comments
