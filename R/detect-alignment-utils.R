@@ -76,6 +76,9 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
 #' @keywords internal
 alignment_col1_is_named <- function(relevant_pd_by_line) {
   map_lgl(relevant_pd_by_line, function(x) {
+    if (nrow(x) < 3) {
+      return(FALSE)
+    }
     x$token[c(1, 3)] == c("SYMBOL_SUB", "expr") &&
       x$token[2] %in% c(
         "EQ_SUB", "SPECIAL-IN", "LT", "GT", "EQ", "NE"
