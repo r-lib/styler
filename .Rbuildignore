@@ -17,3 +17,5 @@ CONTRIBUTING.md
 revdep
 ^cran-comments\.md$
 ^tests/testmanual$
+^\.pre-commit-config\.yaml$
+^brew\-log$

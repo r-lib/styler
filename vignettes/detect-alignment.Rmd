@@ -1,0 +1,183 @@
+---
+title: "Alignment detection"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Alignment detection}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+Sometimes, you deliberately align code to make it more readable.
+
+```{r}
+call(
+  a =       3,
+  b = 3213232
+)
+
+```
+
+Until styler 1.1.1.9002 (with `strict = TRUE`, e.g. as in
+`styler_style_file(..., strict = TRUE)`), this was formatted as follows:
+
+```{r}
+call(
+  a = 3,
+  b = 3213232
+)
+
+```
+
+because no alignment detection was built in. With `strict = FALSE`, the spacing
+would have been kept, however, `strict = FALSE` has a number of other
+implications because it is in general less invasive (e.g. it would not add
+braces to the following expression, whereas `strict = TRUE` would):
+
+```{r}
+if (TRUE)
+  call(another, arg)
+```
+
+Back to the initial topic, styler >= 1.1.1.9003 detects the aforementioned
+alignment. This vignette describes how an aligned code is defined by styler and
+gives some examples so users can format their aligned code to match the
+definition styler uses to ensure their code is not unintentionally reformatted.
+
+## function calls
+
+### Non-technical
+
+If all arguments in the first column are named: Make commas match position
+vertically and right align everything between commas
+
+```{r}
+# all arguments of first column named -> must right align
+# aligned if the (imaginary) comma on the last line is in line with the commas 
+# from the two top lines.
+fell(
+  x  =    1, 
+  y  =   23,
+  zz = NULL
+)
+```
+
+If not all arguments of the first column are named: Make all but the first
+column's commas match position vertically and right align everything between the
+commas, except before the first comma on a line, give priority to correctly
+indent.
+
+```{r}
+# not all arguments of first column (f = NULL and 13231) named, hence, only 
+# commas of all but the first column must agree.
+gell(
+  2,        g = gg(x), n  = 3 * 3,
+  13231,  fds =    -1, gz = f / 3,
+)
+```
+
+By *align everything in between the commas*, we mean put zero space before a
+comma and at least one after. Note that the arguments on the first line are
+ignored when detecting alignment, which is best shown when code is formatted
+such that no line breaks will be modified by styler (which is the case if all
+names on the first line are unnamed and all subsequent are named), like here:
+
+```{r}
+map(x, f, 
+ arg1 =  121,
+ arg2 =    1
+)
+```
+
+## technical
+
+Function calls are aligned if **all** of the following conditions hold (for all
+but the very first line (i.e. `call(` below):
+
+* first column has same number of lag spaces. This basically means that the
+  indention is identical for all columns (except for the closing brace if it is
+  on its own line). The below example has one column, because the maximal number
+  of commas on one line is one.
+
+```{r}
+# holds
+call(
+  a =  3,
+  b = 32
+)
+
+# doesn't hold
+call(
+  a =  3,
+   b = 32
+)
+```
+
+* spacing around comma (0 before, > 1 after, >= 0 after last column on line) and
+  spacing around `=` (at least one before and after).
+
+```{r}
+# holds
+call(
+  a =  3, k  = 3,
+  b = 32,    222
+)
+
+# doesn't hold
+call(
+  a =  3 ,
+  b = 32
+)
+```
+
+* All commas from all columns are aligned. This means that for every column, all
+  commas must be on the same positions as the commas from the other lines. If
+  not all arguments are named in the first column, this column is not considered.
+  The reason to exclude the first column is that, as in the example below, it is
+  possible that some arguments are named while others are not. Then, it is not
+  generally possible to keep the first rule (i.e. indention identical across
+  lines) as well as ensuring that the comma does not have any spaces before it
+  and that the comma is aligned with the other lines. This is shown below with
+  the line `f(x, y),`. For this reason, the requirements exclude the first
+  column in such cases. The *holds* example shows that is is possible (but not
+  required) for named arguments to also have the commas separating the first and
+  second column aligned.
+
+```{r}
+# holds
+call(
+  a =  ff("pk"), k  = 3, x =  2,
+  b =     f(-g), 22 + 1, yy = 1,
+  c =         1,
+  f(x, y), 
+  k
+)
+
+# doesn't hold
+call(
+  a =   3,
+  b = 32, c = 2
+)
+```
+
+Note that the above definition does not check alignment of `=`, so styler will
+treat the following as aligned:
+
+```{r}
+rge(
+  x  = 99, x =  2,
+  fs =  1,  y = 1,
+)
+```
+
+## comments
+
+not supported yet.
+
+## assignment
+
+not supported yet.
+

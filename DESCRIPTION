@@ -1,7 +1,7 @@
 Package: styler
 Type: Package
 Title: Non-Invasive Pretty Printing of R Code
-Version: 1.1.1.9002
+Version: 1.1.1.9003
 Authors@R: 
     c(person(given = "Kirill",
              family = "Müller",
@@ -48,6 +48,8 @@ Collate:
     'communicate.R'
     'compat-dplyr.R'
     'compat-tidyr.R'
+    'detect-alignment-utils.R'
+    'detect-alignment.R'
     'environments.R'
     'expr-is.R'
     'indent.R'
