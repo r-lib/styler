@@ -6,6 +6,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
@@ -41,12 +42,12 @@ if (TRUE)
   call(another, arg)
 ```
 
-Back to the initial topic, styler >= 1.1.1.9003 detects the aforementeioned
+Back to the initial topic, styler >= 1.1.1.9003 detects the aforementioned
 alignment. This vignette describes how an aligned code is defined by styler and
 gives some examples so users can format their aligned code to match the
 definition styler uses to ensure their code is not unintentionally reformatted.
 
-## functinon calls
+## function calls
 
 ### Non-technical
 
@@ -64,9 +65,9 @@ fell(
 )
 ```
 
-If not all arguemnts of the first column are aligned: Make all but the first
-column commas match position vertically and right align everything between the 
-commas, except before the first comma on a line, give priority to correctly 
+If not all arguments of the first column are named: Make all but the first
+column's commas match position vertically and right align everything between the
+commas, except before the first comma on a line, give priority to correctly
 indent.
 
 ```{r}
@@ -78,18 +79,28 @@ gell(
 )
 ```
 
-By *align everything in between the commas*, we mean put zero space before a 
-comma and at least one after.
+By *align everything in between the commas*, we mean put zero space before a
+comma and at least one after. Note that the arguments on the first line are
+ignored when detecting alignment, which is best shown when code is formatted
+such that no line breaks will be modified by styler (which is the case if all
+names on the first line are unnamed and all subsequent are named), like here:
 
+```{r}
+map(x, f, 
+ arg1 =  121,
+ arg2 =    1
+)
+```
 
 ## technical
 
-Function calls are aligned if **all** of the following conditions hold:
+Function calls are aligned if **all** of the following conditions hold (for all
+but the very first line (i.e. `call(` below):
 
 * first column has same number of lag spaces. This basically means that the
-  indention is identical for all but the first and the last line. The below
-  example has one column, because the maximal number of commas on one line is
-  one.
+  indention is identical for all columns (except for the closing brace if it is
+  on its own line). The below example has one column, because the maximal number
+  of commas on one line is one.
 
 ```{r}
 # holds
@@ -105,8 +116,8 @@ call(
 )
 ```
 
-* spacing around comma (0 before, > 1 after, >= 0 at EOL) and spacing around `=`
-  (at least one around).
+* spacing around comma (0 before, > 1 after, >= 0 after last column on line) and
+  spacing around `=` (at least one before and after).
 
 ```{r}
 # holds
@@ -122,18 +133,18 @@ call(
 )
 ```
 
-* All commas from all columns are aligned. This means that for every line, all
-  columns must be on the same positions as the commas from the other lines. If
-  not all arguments are named in the first colum, this column is not considered.
+* All commas from all columns are aligned. This means that for every column, all
+  commas must be on the same positions as the commas from the other lines. If
+  not all arguments are named in the first column, this column is not considered.
   The reason to exclude the first column is that, as in the example below, it is
-  possible that some arguments are named while others are not. For the later
-  cases, it is not generally possible to keep the first rule (i.e. indention as
-  other lines) as well as ensuring that the comma does not have any spaces
-  before it and that the comma is aligned with the other lines. This is shown
-  below with the line `f(x, y),`. For this reason the requirements exclude the
-  first column. The *holds* example shows that is is possible (but not required)
-  for named arguments to also have the commas separating the first and second
-  column aligned.
+  possible that some arguments are named while others are not. Then, it is not
+  generally possible to keep the first rule (i.e. indention identical across
+  lines) as well as ensuring that the comma does not have any spaces before it
+  and that the comma is aligned with the other lines. This is shown below with
+  the line `f(x, y),`. For this reason, the requirements exclude the first
+  column in such cases. The *holds* example shows that is is possible (but not
+  required) for named arguments to also have the commas separating the first and
+  second column aligned.
 
 ```{r}
 # holds
@@ -147,13 +158,13 @@ call(
 
 # doesn't hold
 call(
-  a =  3 ,
+  a =   3,
   b = 32, c = 2
 )
 ```
 
-Note that the above definition does not check alignemnt of `=`, so styler
-will treat the following as aligned:
+Note that the above definition does not check alignment of `=`, so styler will
+treat the following as aligned:
 
 ```{r}
 rge(
@@ -166,6 +177,7 @@ rge(
 
 not supported yet.
 
-## assignemnt
+## assignment
 
 not supported yet.
+
