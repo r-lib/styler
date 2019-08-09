@@ -94,7 +94,7 @@ alignment_serialize_column <- function(relevant_pd_by_line, column) {
 #' Serialize one line for a column
 #'
 #'
-#' @inheritParams serialize_column
+#' @inheritParams alignment_serialize_column
 #' @inheritParams alignment_col1_is_named
 alignment_serialize_line <- function(relevant_pd_by_line, column) {
   # TODO
@@ -156,7 +156,7 @@ alignment_has_correct_spacing_around_comma <- function(pd_sub) {
 #' Check if spacing around `=` is correct
 #'
 #' At least one space around `EQ_SUB`
-#' @inheritParams has_correct_spacing_around_comma
+#' @inheritParams alignment_has_correct_spacing_around_comma
 #' @keywords internal
 #' @importFrom rlang seq2
 alignment_has_correct_spacing_around_eq_sub <- function(pd_sub) {

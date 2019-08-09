@@ -9,6 +9,8 @@ alignment_serialize_line(relevant_pd_by_line, column)
 \arguments{
 \item{relevant_pd_by_line}{A list with parse tables of a multi-line call,
 excluding first and last column.}
+
+\item{column}{The index of the column to serialize.}
 }
 \description{
 Serialize one line for a column
