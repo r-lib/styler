@@ -166,3 +166,13 @@ call(
   bb =  3,
   # hi
 )
+
+# If a call is mult-line, it can't be aligned (also, it would not currently
+# not be ideopotent because first bace would be moved up without alignment and
+# in the second step, because all arguments are named and there is no alignment,
+# the extra spaces before `=` as of 29a010064257fa1a9caf32d182e7ee62008de98a.
+call(
+  x  = 95232,
+  y  = f(
+  ),
+)
