@@ -12,6 +12,10 @@
 
 ## New features
 
+* Aligned function calls are detected and kept as is if they match the styler 
+  [definition for aligned function calls](https://styler.r-lib.org/articles/detect-alignment.html)
+  (#537).
+
 * curlyl-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
   explicitly handled, as opposed previously where it was just treated as two
   consequtive curly braces (#528).
