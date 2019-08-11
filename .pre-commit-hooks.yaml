@@ -40,7 +40,7 @@
     description: perform a spell check with spelling::spell_check_files()
     entry: bin/spell-check
     language: script
-    exclude: '(\.[rR]$|\.py$|^\.gitignore$|^\.pre-commit|^NAMESPACE$|^inst/WORDLIST$)'
+    exclude: '(\.[rR]$|\.py$|/?\.gitignore$|^\.pre-commit|^NAMESPACE$|^inst/WORDLIST$)'
 -   id: deps-in-desc
     name: deps-in-desc
     description: Check if dependencies that can be parsed from code are in DESCRIPTION.
