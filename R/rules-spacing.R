@@ -17,8 +17,8 @@ set_space_around_op <- function(pd_flat, strict) {
     return(pd_flat)
   }
   if (sum(pd_flat$lag_newlines) > 2 &&
-      is_function_call(pd_flat) &&
-      any(pd_flat$token %in% c("EQ_SUB", "','"))
+    is_function_call(pd_flat) &&
+    any(pd_flat$token %in% c("EQ_SUB", "','"))
   ) {
     is_on_aligned_line <- token_is_on_aligned_line(pd_flat)
   } else {
@@ -179,7 +179,6 @@ add_space_after_for_if_while <- function(pd_flat) {
 #' @keywords internal
 set_space_in_curly_curly <- function(pd) {
   if (is_curly_expr(pd)) {
-
     after_inner_opening <- pd$token == "'{'" & pd$token_before == "'{'"
     before_inner_closing <- lead(pd$token == "'}'" & pd$token_after == "'}'")
     is_curly_curly_inner <- any(after_inner_opening, na.rm = TRUE) &&

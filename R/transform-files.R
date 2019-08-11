@@ -215,7 +215,6 @@ parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
 #' @importFrom purrr flatten
 #' @keywords internal
 apply_transformers <- function(pd_nested, transformers) {
-
   transformed_updated_multi_line <- post_visit(
     pd_nested,
     c(transformers$initialize, transformers$line_break, set_multi_line, update_newlines)

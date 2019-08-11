@@ -3,8 +3,9 @@ remove_line_break_before_curly_opening <- function(pd) {
   rm_break_idx <- which((pd$token_after == "'{'") & (pd$token != "COMMENT"))
   rm_break_idx <- setdiff(rm_break_idx, nrow(pd))
   if (length(rm_break_idx) > 0) {
-    is_not_curly_curly <- map_chr(rm_break_idx + 1L,
-      ~next_terminal(pd[.x,], vars = "token_after")$token_after
+    is_not_curly_curly <- map_chr(
+      rm_break_idx + 1L,
+      ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
     is_not_curly_curly_idx <- rm_break_idx[is_not_curly_curly]
     pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
@@ -104,7 +105,7 @@ remove_line_break_before_round_closing_fun_dec <- function(pd) {
 add_line_break_after_pipe <- function(pd) {
   is_pipe <- pd$token == c("SPECIAL-PIPE") & pd$token_after != "COMMENT"
   if (sum(is_pipe) > 1 &&
-      !(next_terminal(pd, vars = "token_before")$token_before %in% c("'('", "EQ_SUB", "','"))) {
+    !(next_terminal(pd, vars = "token_before")$token_before %in% c("'('", "EQ_SUB", "','"))) {
     pd$lag_newlines[lag(is_pipe)] <- 1L
   }
   pd

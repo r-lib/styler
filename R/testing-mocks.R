@@ -1,4 +1,4 @@
-#'`style_text()` without rules for `\{\{`
+#' `style_text()` without rules for `\{\{`
 #'
 #' This function mocks [style_text()], but without taking into consideration the
 #' rules for the curly-curly syntactic sugar (introduced in rlang 0.4).
@@ -29,7 +29,7 @@ style_text_without_curly_curly <- function(text,
   }
   transformers$line_break$set_line_break_around_curly_curly <- NULL
   style_text(text, ...,
-             style = NULL, transformers = transformers,
-             include_roxygen_examples = include_roxygen_examples
+    style = NULL, transformers = transformers,
+    include_roxygen_examples = include_roxygen_examples
   )
 }

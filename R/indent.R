@@ -87,7 +87,6 @@ indent_without_paren <- function(pd, indent_by = 2) {
 #'   definitions without parenthesis.
 #' @keywords internal
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
-
   tokens <- c("FOR", "WHILE", "FUNCTION")
   nrow <- nrow(pd)
   if (!(pd$token[1] %in% tokens)) {
@@ -97,7 +96,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
     return(pd)
   }
 
-  if (pd$newlines[length(pd$newlines) - 1] == 0 ) {
+  if (pd$newlines[length(pd$newlines) - 1] == 0) {
     return(pd)
   }
   pd$indent[nrow] <- indent_by

@@ -27,8 +27,9 @@ catch_style_file_output <- function(file_in = c(
   raw_output <- withr::with_dir(
     dirname(temp_path),
     capture.output(
-    style_file(basename(temp_path), scope = "tokens")
-  ))
+      style_file(basename(temp_path), scope = "tokens")
+    )
+  )
   unlink(dirname(temp_path))
   raw_output
 }
