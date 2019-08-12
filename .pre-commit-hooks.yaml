@@ -47,3 +47,9 @@
     entry: bin/deps-in-desc
     language: script
     files: '\.[rR]$'
+-   id: lintr
+    name: lintr
+    description: check if a .R file is lint free (using lintr)
+    entry: bin/lintr
+    language: script
+    files: '\.R$'

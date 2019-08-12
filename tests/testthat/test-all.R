@@ -119,3 +119,15 @@ test_temp(suffix = "-success.R", error_msg = NULL)
 
 # fail (call to library that is not in description)
 test_temp(suffix = "-fail.R", error_msg = "Dependency check failed")
+
+### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+### lintr                                                                   ####
+
+# success
+run_test("lintr",
+         suffix = "-success.R",
+         error_msg = NULL
+)
+
+# failure
+run_test("lintr", suffix = "-fail.R", error_msg = "not lint free")

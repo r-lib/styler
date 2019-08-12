@@ -1,0 +1,9 @@
+#!/usr/bin/env Rscript
+files <- commandArgs(trailing = TRUE)
+
+out <- lapply(files, function(path) {
+  lints <- lintr::lint(path)
+  if (length(lints) > 0) {
+    stop("File ", path, " is not lint free", call. = FALSE)  
+  }
+})
