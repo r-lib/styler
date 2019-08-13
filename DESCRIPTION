@@ -7,6 +7,7 @@ Imports:
     docopt,
     fs,
     here,
+    lintr,
     oneliner (>= 0.1.0),
     roxygen2,
     spelling,

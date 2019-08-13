@@ -22,13 +22,13 @@
     description: check if a .R file contains a `browser()` statement
     entry: bin/no-browser-statement
     language: script
-    files: '\.R$'
+    files: '\.[rR]$'
 -   id: parsable-R
     name: parsable-R
     description: check if a .R file is parsable
     entry: bin/parsable-R
     language: script
-    files: '\.R$'
+    files: '\.[rR]$'
 -   id: readme-rmd-rendered
     name: readme-rmd-rendered
     description: make sure README.Rmd hasn't been edited more recently than README.md
@@ -52,4 +52,4 @@
     description: check if a .R file is lint free (using lintr)
     entry: bin/lintr
     language: script
-    files: '\.R$'
+    files: '\.[rR]$'

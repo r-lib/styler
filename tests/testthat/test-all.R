@@ -125,8 +125,8 @@ test_temp(suffix = "-fail.R", error_msg = "Dependency check failed")
 
 # success
 run_test("lintr",
-         suffix = "-success.R",
-         error_msg = NULL
+  suffix = "-success.R",
+  error_msg = NULL
 )
 
 # failure
