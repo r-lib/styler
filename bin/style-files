@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-'sytle files.
+'style files.
 Usage:
   style_files [--style_pkg=<style_guide_pkg>] [--style_fun=<style_guide_fun>] <files>...
 
