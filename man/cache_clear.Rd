@@ -19,6 +19,6 @@ Clears the cache that stores which files' styling is up-to-date. You won't be
 able to undo this. Note that the file corresponding to the cache won't be
 deleted.
 If the cache is used at all or not is determined via the R option
-\code{styler.use_cache}.
+\code{styler.use_cache}, defaulting to \code{TRUE}.
 }
 \concept{cache managers}

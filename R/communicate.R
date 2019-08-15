@@ -34,3 +34,19 @@ assert_data.tree_installation <- function() {
     abort("The package data.tree needs to be installed for this functionality.")
   }
 }
+
+#' R.cache needs to be installed if caching functionality is enabled
+#'
+#' @keywords internal
+assert_R.cache_installation <- function(installation_only = FALSE) {
+  if (!rlang::is_installed("R.cache") &&
+      ifelse(installation_only, TRUE, getOption("styler.use_cache")
+  )) {
+    rlang::abort(paste(
+      "R package R.cache is not installed, which is needed when the option ",
+      "`styler.use_cache` is `TRUE`. Please install the package to enable the ",
+      "caching feature of styler or set `options(styler.use_cache = FALSE)` ",
+      "in your .Rprofile to use styler without that feature."
+    ))
+  }
+}

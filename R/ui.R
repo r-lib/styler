@@ -249,7 +249,7 @@ style_file <- function(path,
 #' able to undo this. Note that the file corresponding to the cache won't be
 #' deleted.
 #' If the cache is used at all or not is determined via the R option
-#' `styler.use_cache`.
+#' `styler.use_cache`, defaulting to `TRUE`.
 #' @param cache_subdir Each version of styler has it's own cache, because
 #'   styling is potentially different with different versions of styler. If
 #'   `cache_subdir` is `NULL`, the option "styler.cache_subdir" is considered.
@@ -258,6 +258,7 @@ style_file <- function(path,
 #' @family cache managers
 #' @export
 cache_clear <- function(cache_subdir = NULL, ask = TRUE) {
+  assert_R.cache_installation(installation_only = TRUE)
   path_cache <- cache_find_path(cache_subdir)
   R.cache::clearCache(path_cache, prompt = ask)
 }
@@ -271,6 +272,7 @@ cache_clear <- function(cache_subdir = NULL, ask = TRUE) {
 #'   tabular summary.
 #' @export
 cache_info <- function(cache_subdir = NULL, format = "lucid") {
+  assert_R.cache_installation(installation_only = TRUE)
   rlang::arg_match(format, c("tabular", "lucid"))
   path_cache <- cache_find_path(cache_subdir)
   tbl <- fs::file_info(path_cache)

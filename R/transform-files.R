@@ -77,14 +77,7 @@ make_transformer <- function(transformers,
                              warn_empty = TRUE) {
   force(transformers)
   cache_dir <- c("styler", get_cache_subdir())
-  if (!rlang::is_installed("R.cache") && getOption("styler.use_cache")) {
-    rlang::abort(paste(
-      "R package R.cache is not installed, which is needed when the option ",
-      "`styler.use_cache` is `TRUE`. Please install the package to enable the ",
-      "caching feature of styler or set `options(styler.use_cache = FALSE)` ",
-      "in your .Rprofile to use styler without that feature."
-    ))
-  }
+  assert_R.cache_installation()
   function(text) {
     is_cached <- !is.null(
       R.cache::loadCache(key = hash_standardize(text), dir = cache_dir)
