@@ -5,6 +5,13 @@ Usage:
   deps-in-desc <files>...
 
 " -> doc
+pre_installed <- c(
+  "base", "boot", "class", "cluster", "codetools", "compiler",
+  "datasets", "foreign", "graphics", "grDevices", "grid", "KernSmooth",
+  "lattice", "MASS", "Matrix", "methods", "mgcv", "nlme", "nnet",
+  "parallel", "rpart", "spatial", "splines", "stats", "stats4",
+  "survival", "tcltk", "tools", "utils"
+)
 
 arguments <- docopt::docopt(doc)
 deps_in_desc <- function(file, arguments) {
@@ -12,7 +19,7 @@ deps_in_desc <- function(file, arguments) {
   used <- parse_data[parse_data$token == "SYMBOL_PACKAGE", ]$text
   unregistered <- setdiff(
     unique(used),
-    desc::desc_get_deps(file = ".")$package
+    c(pre_installed, desc::desc_get_deps(file = ".")$package)
   )
   if (length(unregistered) > 0) {
     cat(
