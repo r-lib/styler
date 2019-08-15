@@ -23,8 +23,5 @@ cache_find_path <- function(cache_subdir = NULL) {
 }
 
 get_cache_subdir <- function() {
-  getOption(
-    "styler.cache_subdir",
-    packageDescription("styler", fields = "Version")
-  )
+  getOption("styler.cache_subdir")
 }

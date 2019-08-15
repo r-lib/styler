@@ -82,7 +82,7 @@ make_transformer <- function(transformers,
     is_cached <- !is.null(
       R.cache::loadCache(key = hash_standardize(text), dir = cache_dir)
     )
-    should_use_cache <- getOption("styler.use_cache", FALSE)
+    should_use_cache <- getOption("styler.use_cache")
     can_use_cache <- is_cached && should_use_cache
     if (!can_use_cache) {
       transformed_code <- text %>%
