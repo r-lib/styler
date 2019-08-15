@@ -1,9 +1,11 @@
 #!/usr/bin/env Rscript
 files <- commandArgs(trailing = TRUE)
 
-git_status <- git2r::status(staged = FALSE)
-if (any(grepl("\\.lintr", git_status))) {
-  stop("Unstaged changes to .lintr file", call. = FALSE)
+if (git2r::in_repository()) {
+  git_status <- git2r::status(staged = FALSE)
+  if (any(grepl("\\.lintr", git_status))) {
+    stop("Unstaged changes to .lintr file", call. = FALSE)
+  }
 }
 
 out <- lapply(files, function(path) {
