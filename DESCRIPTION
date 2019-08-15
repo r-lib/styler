@@ -6,7 +6,9 @@ Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Imports:
     docopt,
     fs,
+    git2r,
     here,
+    lintr,
     oneliner (>= 0.1.0),
     roxygen2,
     spelling,
