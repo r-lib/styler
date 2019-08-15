@@ -43,6 +43,9 @@ A collection of git pre-commit hooks to use with
     `usethis::use_tidy_description()` to ensure dependencies are ordered
     alphabetically and fields are in standard order.
 
+  - `lintr`: A hook to run `lintr::lint()` to check that R files are
+    lint free.
+
 To add a pre-commit hook to your project, install pre-commit as
 described in the [official documentation](https://pre-commit.com/#intro)
 and make sure the executable `pre-commit` is in a place that is on your
@@ -62,6 +65,7 @@ repos:
     -   id: readme-rmd-rendered
     -   id: roxygenize
     -   id: use-tidy-description
+    -   id: lintr
 ```
 
 The `repo` key points to the place where the source code of the hooks
@@ -157,5 +161,10 @@ take arguments:
     [--style_pkg=oneliner, --style_fun=one_line_style]`.
 
   - `spell-check`: Argument `ignore_files` takes a regular expression
-    matched with `base::grep()` to ignore furhter files from the hook.
+    matched with `base::grep()` to ignore further files from the hook.
     Argument `lang` is passed to `spelling::spell_check_files()`.
+
+  - `lintr`: Arguments are not supported. Instead, `lintr` config should
+    be specified in a `.lintr` config file in Debian Control Field
+    Format as specified in the [`.lintr`
+    documentation](https://github.com/jimhester/lintr#project-configuration).
