@@ -20,12 +20,16 @@ pre-commit (https://github.com/pre-commit/pre-commit/issues/926), most hooks use
 Hooks should be tested by checking both the positive outcome (hook passes) and
 the negative outcome (hook fails) by adding two `run_test()` statements to
 `./tests/testthat/test-all.R`. Look at existing examples and the documentation of
-`run_test()`.
+`run_test()`. Note that this won't actually use pre-commit. It will simply call 
+the hook script the same way as pre-commit would. 
+
+You can test the hook manually end-to-end with `pre-commit try-repo` as 
+described in the [documentation](https://pre-commit.com/#pre-commit-try-repo).
 
 To summarize: 
 
 - add executable in `bin`.
 - register hook in `.pre-commit-hooks.yaml`.
-- add two tests.
+- add two unit tests, test manually with `pre-commit try-repo`.
 - add a description of the new hook to the `README.Rmd`. Both description and 
-  `YAML` example code. 
+  `YAML` example code.
