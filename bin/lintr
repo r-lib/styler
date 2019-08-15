@@ -3,7 +3,7 @@ files <- commandArgs(trailing = TRUE)
 
 if (git2r::in_repository()) {
   git_status <- git2r::status(staged = FALSE)
-  if (any(grepl("\\.lintr", git_status))) {
+  if (any(unlist(git_status) == ".lintr")) {
     stop("Unstaged changes to .lintr file", call. = FALSE)
   }
 }
