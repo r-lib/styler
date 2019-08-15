@@ -72,17 +72,37 @@ transform_file <- function(path,
 #' @inheritParams parse_transform_serialize_r
 #' @keywords internal
 #' @importFrom purrr when
-make_transformer <- function(transformers, include_roxygen_examples, warn_empty = TRUE) {
+make_transformer <- function(transformers,
+                             include_roxygen_examples,
+                             warn_empty = TRUE) {
   force(transformers)
+  cache_dir <- c("styler", get_cache_subdir())
+
   function(text) {
-    transformed_code <- text %>%
-      parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
-      when(
-        include_roxygen_examples ~
-        parse_transform_serialize_roxygen(., transformers),
-        ~.
-      )
-    transformed_code
+    is_cached <- !is.null(
+      R.cache::loadCache(key = hash_standardize(text), dir = cache_dir)
+    )
+    should_use_cache <- getOption("styler.use_cache", FALSE)
+    can_use_cache <- is_cached && should_use_cache
+    if (!can_use_cache) {
+      transformed_code <- text %>%
+        parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
+        when(
+          include_roxygen_examples ~
+          parse_transform_serialize_roxygen(., transformers),
+          ~.
+        )
+      if (should_use_cache) {
+        R.cache::saveCache(
+          Sys.time(),
+          key = hash_standardize(transformed_code),
+          dir = cache_dir
+        )
+      }
+      transformed_code
+    } else {
+      text
+    }
   }
 }
 

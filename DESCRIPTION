@@ -36,7 +36,8 @@ Suggests:
     prettycode,
     rmarkdown,
     rstudioapi (>= 0.7),
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    R.cache
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
@@ -81,6 +82,7 @@ Collate:
     'transform-files.R'
     'ui.R'
     'unindent.R'
+    'utils-cache.R'
     'utils-files.R'
     'utils-navigate-nest.R'
     'utils-strings.R'
