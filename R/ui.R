@@ -269,18 +269,18 @@ cache_clear <- function(cache_subdir = NULL, ask = TRUE) {
 #' `styler.use_cache`.
 #' @inheritParams cache_delete
 #' @param format Either "lucid" for a printed summary or "tabular" for a
-#'   tabular summary.
+#'   tabular summary from [base::file.info()].
 #' @export
 cache_info <- function(cache_subdir = NULL, format = "lucid") {
   assert_R.cache_installation(installation_only = TRUE)
   rlang::arg_match(format, c("tabular", "lucid"))
   path_cache <- cache_find_path(cache_subdir)
-  tbl <- fs::file_info(path_cache)
+  tbl <- file_info(path_cache)
   if (format == "lucid") {
     cat(
       "Size:\t\t", tbl$size, " bytes\nLast modified:\t",
-      as.character(tbl$modification_time), "\nCreated:\t",
-      as.character(tbl$birth_time), "\nLocation:\t", tbl$path
+      as.character(tbl$mtime), "\nCreated:\t",
+      as.character(tbl$ctime), "\nLocation:\t", path_cache
     )
   } else {
     tbl

@@ -8,7 +8,7 @@ cache_info(cache_subdir = NULL, format = "lucid")
 }
 \arguments{
 \item{format}{Either "lucid" for a printed summary or "tabular" for a
-tabular summary.}
+tabular summary from \code{\link[base:file.info]{base::file.info()}}.}
 }
 \description{
 If the cache is used at all or not is determined via the R option

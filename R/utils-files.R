@@ -26,3 +26,8 @@ is_unsaved_file <- function(path) {
 map_filetype_to_pattern <- function(filetype) {
   paste0("(", paste(set_and_assert_arg_filetype(filetype), collapse = "|"), ")$")
 }
+
+file_info <- function(path) {
+  file.info(path) %>%
+    as_tibble()
+}
