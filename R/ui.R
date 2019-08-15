@@ -267,7 +267,7 @@ cache_clear <- function(cache_subdir = NULL, ask = TRUE) {
 #'
 #' If the cache is used at all or not is determined via the R option
 #' `styler.use_cache`.
-#' @inheritParams cache_delete
+#' @inheritParams cache_clear
 #' @param format Either "lucid" for a printed summary or "tabular" for a
 #'   tabular summary from [base::file.info()].
 #' @export
