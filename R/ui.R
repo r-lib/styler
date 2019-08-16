@@ -319,6 +319,7 @@ cache_activate <- function(cache_name = NULL) {
 }
 
 #' @rdname cache_activate
+#' @export
 cache_deactivate <- function() {
   options("styler.use_cache" = FALSE)
   options("styler.cache_name" = NULL)

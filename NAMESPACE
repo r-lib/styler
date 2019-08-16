@@ -3,6 +3,7 @@
 S3method(print,vertical)
 export(cache_activate)
 export(cache_clear)
+export(cache_deactivate)
 export(cache_info)
 export(create_style_guide)
 export(default_style_guide_attributes)

@@ -4,6 +4,7 @@
 
 cache_activate(cache_name = NULL)
 cache_clear(cache_name = NULL, ask = TRUE)
+cache_deactivate()
 cache_info(cache_name = NULL, format = "lucid")
 create_style_guide(initialize = default_style_guide_attributes, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE, reindention = tidyverse_reindention())
 default_style_guide_attributes(pd_flat)
