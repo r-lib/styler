@@ -313,7 +313,7 @@ cache_activate <- function(cache_name = NULL) {
   if (!is.null(cache_name)) {
     options("styler.cache_name" = cache_name)
   }
-  cat("Using cache at", cache_find_path(cache_name), ".")
+  cat("Using cache at ", cache_find_path(cache_name), ".", sep = "")
 }
 
 #' @rdname cache_activate
