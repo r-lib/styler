@@ -5,14 +5,14 @@
 \alias{cache_deactivate}
 \title{Activate or deactivate the styler cache}
 \usage{
-cache_activate(cache_subdir = NULL)
+cache_activate(cache_name = NULL)
 
 cache_deactivate()
 }
 \arguments{
-\item{cache_subdir}{The sub-directory you want to use under the R.cache
-location. If \code{NULL}, the option "styler.cache_subdir" is considered
-which defaults to the version of styler used.}
+\item{cache_name}{The name of the cache to use. If
+\code{NULL}, the option "styler.cache_name" is considered which defaults to
+the version of styler used.}
 }
 \description{
 Helper functions to control the behavior of caching. Simple wrappers around

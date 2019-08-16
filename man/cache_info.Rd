@@ -4,13 +4,12 @@
 \alias{cache_info}
 \title{Show information about the styler cache}
 \usage{
-cache_info(cache_subdir = NULL, format = "lucid")
+cache_info(cache_name = NULL, format = "lucid")
 }
 \arguments{
-\item{cache_subdir}{Each version of styler has it's own cache, because
-styling is potentially different with different versions of styler. If
-\code{cache_subdir} is \code{NULL}, the option "styler.cache_subdir" is considered
-which defaults to the version of styler used.}
+\item{cache_name}{The name of the cache to use. If
+\code{NULL}, the option "styler.cache_name" is considered which defaults to
+the version of styler used.}
 
 \item{format}{Either "lucid" for a printed summary or "tabular" for a
 tabular summary from \code{\link[base:file.info]{base::file.info()}}.}

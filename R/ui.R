@@ -251,16 +251,18 @@ style_file <- function(path,
 #' `cache_clear`.
 #' If the cache is used at all or not is determined via the R option
 #' `styler.use_cache`, defaulting to `TRUE`.
-#' @param cache_subdir Each version of styler has it's own cache, because
-#'   styling is potentially different with different versions of styler. If
-#'   `cache_subdir` is `NULL`, the option "styler.cache_subdir" is considered
-#'   which defaults to the version of styler used.
+#' @param cache_name The name of the cache to use. If
+#'   `NULL`, the option "styler.cache_name" is considered which defaults to
+#'   the version of styler used.
+#' @details
+#' Each version of styler has it's own cache by default, because styling is
+#' potentially different with different versions of styler.
 #' @param ask Whether or not to interactively ask the user again.
 #' @family cache managers
 #' @export
-cache_clear <- function(cache_subdir = NULL, ask = TRUE) {
+cache_clear <- function(cache_name = NULL, ask = TRUE) {
   assert_R.cache_installation(installation_only = TRUE)
-  path_cache <- cache_find_path(cache_subdir)
+  path_cache <- cache_find_path(cache_name)
   R.cache::clearCache(path_cache, prompt = ask)
 }
 
@@ -273,10 +275,10 @@ cache_clear <- function(cache_subdir = NULL, ask = TRUE) {
 #'   tabular summary from [base::file.info()].
 #' @family cache managers
 #' @export
-cache_info <- function(cache_subdir = NULL, format = "lucid") {
+cache_info <- function(cache_name = NULL, format = "lucid") {
   assert_R.cache_installation(installation_only = TRUE)
   rlang::arg_match(format, c("tabular", "lucid"))
-  path_cache <- cache_find_path(cache_subdir)
+  path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
   file_info <- file_info(files)
   tbl <- tibble(
@@ -303,23 +305,21 @@ cache_info <- function(cache_subdir = NULL, format = "lucid") {
 #'
 #' Helper functions to control the behavior of caching. Simple wrappers around
 #' [base::options()].
-#' @param cache_subdir The sub-directory you want to use under the R.cache
-#'   location. If `NULL`, the option "styler.cache_subdir" is considered
-#'   which defaults to the version of styler used.
+#' @inheritParams cache_clear
 #' @family cache managers
 #' @export
-cache_activate <- function(cache_subdir = NULL) {
+cache_activate <- function(cache_name = NULL) {
   options("styler.use_cache" = TRUE)
-  if (!is.null(cache_subdir)) {
-    options("styler.cache_subdir" = cache_subdir)
+  if (!is.null(cache_name)) {
+    options("styler.cache_name" = cache_name)
   }
-  cat("Using cache at", cache_find_path(cache_subdir), ".")
+  cat("Using cache at", cache_find_path(cache_name), ".")
 }
 
 #' @rdname cache_activate
 cache_deactivate <- function() {
   options("styler.use_cache" = FALSE)
-  options("styler.cache_subdir" = NULL)
+  options("styler.cache_name" = NULL)
 
   cat("Deactivated cache.")
 }

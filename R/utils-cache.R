@@ -11,17 +11,15 @@ hash_standardize <- function(x) {
 #' Where is the cache?
 #'
 #' Finds the path to the cache and creates it if it does not exist.
-#' @param cache_subdir The subdir of the cache. Is equivalent to the
-#'   R.cache subdir when adding "styler" as a parent directory to
-#'   `cache_subdir`.
+#' @inheritParams cache_clear
 #' @keywords internal
-cache_find_path <- function(cache_subdir = NULL) {
-  if (is.null(cache_subdir)) {
-    cache_subdir <- get_cache_subdir()
+cache_find_path <- function(cache_name = NULL) {
+  if (is.null(cache_name)) {
+    cache_name <- get_cache_name()
   }
-  R.cache::getCachePath(c("styler", cache_subdir))
+  R.cache::getCachePath(c("styler", cache_name))
 }
 
-get_cache_subdir <- function() {
-  getOption("styler.cache_subdir")
+get_cache_name <- function() {
+  getOption("styler.cache_name")
 }

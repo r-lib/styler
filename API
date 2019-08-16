@@ -2,9 +2,9 @@
 
 ## Exported functions
 
-cache_activate(cache_subdir = NULL)
-cache_clear(cache_subdir = NULL, ask = TRUE)
-cache_info(cache_subdir = NULL, format = "lucid")
+cache_activate(cache_name = NULL)
+cache_clear(cache_name = NULL, ask = TRUE)
+cache_info(cache_name = NULL, format = "lucid")
 create_style_guide(initialize = default_style_guide_attributes, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE, reindention = tidyverse_reindention())
 default_style_guide_attributes(pd_flat)
 specify_math_token_spacing(zero = "'^'", one = c("'+'", "'-'", "'*'", "'/'"))

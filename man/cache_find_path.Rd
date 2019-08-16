@@ -4,12 +4,12 @@
 \alias{cache_find_path}
 \title{Where is the cache?}
 \usage{
-cache_find_path(cache_subdir = NULL)
+cache_find_path(cache_name = NULL)
 }
 \arguments{
-\item{cache_subdir}{The subdir of the cache. Is equivalent to the
-R.cache subdir when adding "styler" as a parent directory to
-\code{cache_subdir}.}
+\item{cache_name}{The name of the cache to use. If
+\code{NULL}, the option "styler.cache_name" is considered which defaults to
+the version of styler used.}
 }
 \description{
 Finds the path to the cache and creates it if it does not exist.

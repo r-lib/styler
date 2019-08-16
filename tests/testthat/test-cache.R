@@ -1,6 +1,6 @@
 test_that("activated cache brings speedup", {
   withr::with_options(
-    list("styler.use_cache" = TRUE, "styler.cache_subdir" = "testthat"), {
+    list("styler.use_cache" = TRUE, "styler.cache_name" = "testthat"), {
       cache_clear(ask = FALSE)
       first <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
       second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
@@ -11,7 +11,7 @@ test_that("activated cache brings speedup", {
 
 test_that("unactivated cache does not bring speedup", {
   withr::with_options(
-    list("styler.use_cache" = FALSE, "styler.cache_subdir" = "testthat"), {
+    list("styler.use_cache" = FALSE, "styler.cache_name" = "testthat"), {
       cache_clear(ask = FALSE)
       first <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
       second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
