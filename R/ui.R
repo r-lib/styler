@@ -246,14 +246,15 @@ style_file <- function(path,
 #' Clear the cache
 #'
 #' Clears the cache that stores which files' styling is up-to-date. You won't be
-#' able to undo this. Note that the file corresponding to the cache won't be
-#' deleted.
+#' able to undo this. Note that the file corresponding to the cache (a folder
+#' on our file stystem) won't be deleted, but it will be empty after calling
+#' `cache_clear`.
 #' If the cache is used at all or not is determined via the R option
 #' `styler.use_cache`, defaulting to `TRUE`.
 #' @param cache_subdir Each version of styler has it's own cache, because
 #'   styling is potentially different with different versions of styler. If
-#'   `cache_subdir` is `NULL`, the option "styler.cache_subdir" is considered.
-#'   If unset, the value is resolved the currently installed version of styler.
+#'   `cache_subdir` is `NULL`, the option "styler.cache_subdir" is considered
+#'   which defaults to the version of styler used.
 #' @param ask Whether or not to interactively ask the user again.
 #' @family cache managers
 #' @export
@@ -270,19 +271,55 @@ cache_clear <- function(cache_subdir = NULL, ask = TRUE) {
 #' @inheritParams cache_clear
 #' @param format Either "lucid" for a printed summary or "tabular" for a
 #'   tabular summary from [base::file.info()].
+#' @family cache managers
 #' @export
 cache_info <- function(cache_subdir = NULL, format = "lucid") {
   assert_R.cache_installation(installation_only = TRUE)
   rlang::arg_match(format, c("tabular", "lucid"))
   path_cache <- cache_find_path(cache_subdir)
-  tbl <- file_info(path_cache)
+  files <- list.files(path_cache, full.names = TRUE)
+  file_info <- file_info(files)
+  tbl <- tibble(
+    n = nrow(file_info),
+    size = sum(file_info$size),
+    last_modified = suppressWarnings(max(file_info$mtime)),
+    created = file.info(path_cache)$ctime
+  )
   if (format == "lucid") {
     cat(
-      "Size:\t\t", tbl$size, " bytes\nLast modified:\t",
-      as.character(tbl$mtime), "\nCreated:\t",
-      as.character(tbl$ctime), "\nLocation:\t", path_cache
+      "Size:\t\t", tbl$size, " bytes (", tbl$n, " cached expressions)",
+      "\nLast modified:\t", as.character(tbl$last_modified),
+      "\nCreated:\t", as.character(tbl$created),
+      "\nLocation:\t", path_cache,
+      "\nActivated:\t", getOption("styler.use_cache"),
+      sep = ""
     )
   } else {
     tbl
   }
+}
+
+#' Activate or deactivate the styler cache
+#'
+#' Helper functions to control the behavior of caching. Simple wrappers around
+#' [base::options()].
+#' @param cache_subdir The sub-directory you want to use under the R.cache
+#'   location. If `NULL`, the option "styler.cache_subdir" is considered
+#'   which defaults to the version of styler used.
+#' @family cache managers
+#' @export
+cache_activate <- function(cache_subdir = NULL) {
+  options("styler.use_cache" = TRUE)
+  if (!is.null(cache_subdir)) {
+    options("styler.cache_subdir" = cache_subdir)
+  }
+  cat("Using cache at", cache_find_path(cache_subdir), ".")
+}
+
+#' @rdname cache_activate
+cache_deactivate <- function() {
+  options("styler.use_cache" = FALSE)
+  options("styler.cache_subdir" = NULL)
+
+  cat("Deactivated cache.")
 }

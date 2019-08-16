@@ -9,16 +9,21 @@ cache_clear(cache_subdir = NULL, ask = TRUE)
 \arguments{
 \item{cache_subdir}{Each version of styler has it's own cache, because
 styling is potentially different with different versions of styler. If
-\code{cache_subdir} is \code{NULL}, the option "styler.cache_subdir" is considered.
-If unset, the value is resolved the currently installed version of styler.}
+\code{cache_subdir} is \code{NULL}, the option "styler.cache_subdir" is considered
+which defaults to the version of styler used.}
 
 \item{ask}{Whether or not to interactively ask the user again.}
 }
 \description{
 Clears the cache that stores which files' styling is up-to-date. You won't be
-able to undo this. Note that the file corresponding to the cache won't be
-deleted.
+able to undo this. Note that the file corresponding to the cache (a folder
+on our file stystem) won't be deleted, but it will be empty after calling
+\code{cache_clear}.
 If the cache is used at all or not is determined via the R option
 \code{styler.use_cache}, defaulting to \code{TRUE}.
+}
+\seealso{
+Other cache managers: \code{\link{cache_activate}},
+  \code{\link{cache_info}}
 }
 \concept{cache managers}

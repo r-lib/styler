@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-cache.R
 \name{cache_find_path}
 \alias{cache_find_path}
-\title{Where is the cache}
+\title{Where is the cache?}
 \usage{
 cache_find_path(cache_subdir = NULL)
 }
@@ -12,6 +12,6 @@ R.cache subdir when adding "styler" as a parent directory to
 \code{cache_subdir}.}
 }
 \description{
-Finds the path to the cache and creates it if it does not exist
+Finds the path to the cache and creates it if it does not exist.
 }
 \keyword{internal}

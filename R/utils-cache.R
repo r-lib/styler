@@ -8,9 +8,9 @@ hash_standardize <- function(x) {
   list(x)
 }
 
-#' Where is the cache
+#' Where is the cache?
 #'
-#' Finds the path to the cache and creates it if it does not exist
+#' Finds the path to the cache and creates it if it does not exist.
 #' @param cache_subdir The subdir of the cache. Is equivalent to the
 #'   R.cache subdir when adding "styler" as a parent directory to
 #'   `cache_subdir`.

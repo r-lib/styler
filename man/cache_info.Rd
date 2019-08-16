@@ -9,8 +9,8 @@ cache_info(cache_subdir = NULL, format = "lucid")
 \arguments{
 \item{cache_subdir}{Each version of styler has it's own cache, because
 styling is potentially different with different versions of styler. If
-\code{cache_subdir} is \code{NULL}, the option "styler.cache_subdir" is considered.
-If unset, the value is resolved the currently installed version of styler.}
+\code{cache_subdir} is \code{NULL}, the option "styler.cache_subdir" is considered
+which defaults to the version of styler used.}
 
 \item{format}{Either "lucid" for a printed summary or "tabular" for a
 tabular summary from \code{\link[base:file.info]{base::file.info()}}.}
@@ -19,3 +19,8 @@ tabular summary from \code{\link[base:file.info]{base::file.info()}}.}
 If the cache is used at all or not is determined via the R option
 \code{styler.use_cache}.
 }
+\seealso{
+Other cache managers: \code{\link{cache_activate}},
+  \code{\link{cache_clear}}
+}
+\concept{cache managers}
