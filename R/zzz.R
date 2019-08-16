@@ -4,7 +4,7 @@
   op.styler <- list(
     styler.colored_print.vertical = TRUE,
     styler.use_cache = TRUE,
-    styler.cache_name = utils::packageDescription("styler", fields = "Version"),
+    styler.cache_name = cache_derive_name(),
     styler.addins_style_transformer = "styler::tidyverse_style()"
   )
   toset <- !(names(op.styler) %in% names(op))

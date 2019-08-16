@@ -15,11 +15,15 @@ hash_standardize <- function(x) {
 #' @keywords internal
 cache_find_path <- function(cache_name = NULL) {
   if (is.null(cache_name)) {
-    cache_name <- get_cache_name()
+    cache_name <- cache_get_name()
   }
   R.cache::getCachePath(c("styler", cache_name))
 }
 
-get_cache_name <- function() {
+cache_derive_name <- function() {
+  utils::packageDescription("styler", fields = "Version")
+}
+
+cache_get_name <- function() {
   getOption("styler.cache_name")
 }

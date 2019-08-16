@@ -312,6 +312,8 @@ cache_activate <- function(cache_name = NULL) {
   options("styler.use_cache" = TRUE)
   if (!is.null(cache_name)) {
     options("styler.cache_name" = cache_name)
+  } else {
+    options("styler.cache_name" = cache_derive_name())
   }
   cat("Using cache at ", cache_find_path(cache_name), ".", sep = "")
 }
