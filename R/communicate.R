@@ -36,17 +36,34 @@ assert_data.tree_installation <- function() {
 }
 
 #' R.cache needs to be installed if caching functionality is enabled
-#'
+#' @param installation_only Whether or not to only check if R.cache is
+#'   installed.
 #' @keywords internal
-assert_R.cache_installation <- function(installation_only = FALSE) {
+assert_R.cache_installation <- function(installation_only = FALSE,
+                                        action = "abort") {
+  browser()
   if (!rlang::is_installed("R.cache") &&
-      ifelse(installation_only, TRUE, getOption("styler.use_cache")
+      !ifelse(installation_only, TRUE, getOption("styler.use_cache")
   )) {
-    rlang::abort(paste(
-      "R package R.cache is not installed, which is needed when the option ",
-      "`styler.use_cache` is `TRUE`. Please install the package to enable the ",
-      "caching feature of styler or set `options(styler.use_cache = FALSE)` ",
-      "in your .Rprofile to use styler without that feature."
-    ))
+    msg_basic <- paste(
+      "R package R.cache is not installed, which is needed when the caching ",
+      "feature is activated. Please install the package with ",
+      "`install.packages('R.cache')` and then restart R to enable the ",
+      "caching feature of styler or permanently deactivate the feature by ",
+      "adding `styler::cache_deactivate()` to your .Rprofile, e.g. via ",
+      "`usethis::edit_r_profile()`."
+    )
+
+    if (action == "abort") {
+      rlang::abort(msg_basic)
+    } else {
+      rlang::warn(paste0(
+        msg_basic, " ",
+        "Deactivating the caching feature for the current session.",
+        ""
+      ))
+      cache_deactivate()
+    }
+
   }
 }
