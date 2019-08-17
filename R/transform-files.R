@@ -77,9 +77,9 @@ make_transformer <- function(transformers,
                              warn_empty = TRUE) {
   force(transformers)
   cache_dir <- c("styler", cache_get_name())
-  assert_R.cache_installation()
+  assert_R.cache_installation(action = "warn")
   function(text) {
-    is_cached <- !is.null(
+    is_cached <- rlang::is_installed("R.cache") && !is.null(
       R.cache::findCache(key = hash_standardize(text), dir = cache_dir)
     )
     should_use_cache <- getOption("styler.use_cache")
