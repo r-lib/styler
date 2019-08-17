@@ -315,7 +315,7 @@ cache_activate <- function(cache_name = NULL) {
   } else {
     options("styler.cache_name" = cache_derive_name())
   }
-  cat("Using cache at ", cache_find_path(cache_name), ".", sep = "")
+  cat("Using cache at ", cache_find_path(cache_name), ".\n", sep = "")
 }
 
 #' @rdname cache_activate
@@ -324,5 +324,5 @@ cache_deactivate <- function() {
   options("styler.use_cache" = FALSE)
   options("styler.cache_name" = NULL)
 
-  cat("Deactivated cache.")
+  cat("Deactivated cache.\n")
 }
