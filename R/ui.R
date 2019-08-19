@@ -249,8 +249,6 @@ style_file <- function(path,
 #' able to undo this. Note that the file corresponding to the cache (a folder
 #' on our file stystem) won't be deleted, but it will be empty after calling
 #' `cache_clear`.
-#' If the cache is used at all or not is determined via the R option
-#' `styler.use_cache`, defaulting to `TRUE`.
 #' @param cache_name The name of the cache to use. If
 #'   `NULL`, the option "styler.cache_name" is considered which defaults to
 #'   the version of styler used.
@@ -268,9 +266,10 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 
 #' Show information about the styler cache
 #'
-#' If the cache is used at all or not is determined via the R option
-#' `styler.use_cache`.
-#' @inheritParams cache_clear
+#' Gives information about the cache
+#' @param cache_name The name of the cache for which to show details. If
+#'   `NULL`, the option "styler.cache_name" is considered which defaults to
+#'   the version of styler used.
 #' @param format Either "lucid" for a printed summary or "tabular" for a
 #'   tabular summary from [base::file.info()].
 #' @family cache managers
@@ -285,7 +284,9 @@ cache_info <- function(cache_name = NULL, format = "lucid") {
     n = nrow(file_info),
     size = sum(file_info$size),
     last_modified = suppressWarnings(max(file_info$mtime)),
-    created = file.info(path_cache)$ctime
+    created = file.info(path_cache)$ctime,
+    location = path_cache,
+    activated = cache_is_activated()
   )
   if (format == "lucid") {
     cat(
@@ -293,7 +294,7 @@ cache_info <- function(cache_name = NULL, format = "lucid") {
       "\nLast modified:\t", as.character(tbl$last_modified),
       "\nCreated:\t", as.character(tbl$created),
       "\nLocation:\t", path_cache,
-      "\nActivated:\t", getOption("styler.use_cache"),
+      "\nActivated:\t", cache_is_activated(),
       sep = ""
     )
   } else {
@@ -309,20 +310,29 @@ cache_info <- function(cache_name = NULL, format = "lucid") {
 #' @family cache managers
 #' @export
 cache_activate <- function(cache_name = NULL) {
-  options("styler.use_cache" = TRUE)
+  assert_R.cache_installation(installation_only = TRUE)
   if (!is.null(cache_name)) {
     options("styler.cache_name" = cache_name)
   } else {
     options("styler.cache_name" = cache_derive_name())
   }
-  cat("Using cache at ", cache_find_path(cache_name), ".\n", sep = "")
+  path <- cache_find_path(cache_name)
+  cat(
+    "Using cache ", cache_get_name(), " at ",
+    path, ".\n",
+    sep = ""
+  )
+  path
 }
 
 #' @rdname cache_activate
 #' @export
 cache_deactivate <- function() {
-  options("styler.use_cache" = FALSE)
   options("styler.cache_name" = NULL)
 
   cat("Deactivated cache.\n")
+}
+
+cache_is_activated <- function() {
+  !is.null(cache_get_name())
 }
