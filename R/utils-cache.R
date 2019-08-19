@@ -16,6 +16,9 @@ hash_standardize <- function(x) {
 cache_find_path <- function(cache_name = NULL) {
   if (is.null(cache_name)) {
     cache_name <- cache_get_name()
+    if (is.null(cache_name)) {
+      cache_name <- cache_derive_name()
+    }
   }
   R.cache::getCachePath(c("styler", cache_name))
 }
