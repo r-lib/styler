@@ -1,5 +1,5 @@
-Package: styler
 Type: Package
+Package: styler
 Title: Non-Invasive Pretty Printing of R Code
 Version: 1.2.0.9000
 Authors@R: 
@@ -34,11 +34,12 @@ Suggests:
     here,
     knitr,
     prettycode,
+    R.cache,
     rmarkdown,
     rstudioapi (>= 0.7),
-    testthat (>= 2.1.0),
-    R.cache
-VignetteBuilder: knitr
+    testthat (>= 2.1.0)
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
