@@ -337,6 +337,19 @@ cache_deactivate <- function() {
   cat("Deactivated cache.\n")
 }
 
-cache_is_activated <- function() {
-  !is.null(cache_get_name())
+#' Check if a cache is activated
+#'
+#' @param cache_name The name of the cache to check. If `NULL`, we check if
+#'   any cache is activated. If not `NULL`, we check if a specific cache is
+#'   activated.
+#' @keywords internal
+cache_is_activated <- function(cache_name = NULL) {
+  current_cache <- cache_get_name()
+  if (is.null(cache_name)) {
+    !is.null(current_cache)
+  } else if (!is.null(current_cache)) {
+    cache_name == current_cache
+  } else {
+    FALSE
+  }
 }
