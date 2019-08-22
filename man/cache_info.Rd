@@ -8,8 +8,8 @@ cache_info(cache_name = NULL, format = "both")
 }
 \arguments{
 \item{cache_name}{The name of the cache for which to show details. If
-\code{NULL}, the option "styler.cache_name" is considered which defaults to
-the version of styler used.}
+\code{NULL}, the active cache is used. If none is active the cache corresponding
+to the installed styler version is used.}
 
 \item{format}{Either "lucid" for a summary emitted with \code{\link[base:cat]{base::cat()}},
 "tabular" for a tabular summary from \code{\link[base:file.info]{base::file.info()}} or "both" for

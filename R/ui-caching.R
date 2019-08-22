@@ -24,8 +24,8 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #'
 #' Gives information about the cache.
 #' @param cache_name The name of the cache for which to show details. If
-#'   `NULL`, the option "styler.cache_name" is considered which defaults to
-#'   the version of styler used.
+#'   `NULL`, the active cache is used. If none is active the cache corresponding
+#'   to the installed styler version is used.
 #' @param format Either "lucid" for a summary emitted with [base::cat()],
 #'   "tabular" for a tabular summary from [base::file.info()] or "both" for
 #'   both.
@@ -36,7 +36,8 @@ cache_info <- function(cache_name = NULL, format = "both") {
   rlang::arg_match(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
-  file_info <- file_info(files)
+  file_info <- file.info(files) %>%
+    as_tibble()
   tbl <- tibble(
     n = nrow(file_info),
     size = sum(file_info$size),
@@ -52,6 +53,7 @@ cache_info <- function(cache_name = NULL, format = "both") {
       "\nCreated:\t", as.character(tbl$created),
       "\nLocation:\t", path_cache,
       "\nActivated:\t", tbl$activated,
+      "\n",
       sep = ""
     )
   }

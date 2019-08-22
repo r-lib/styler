@@ -2,7 +2,7 @@
 % Please edit documentation in R/communicate.R
 \name{assert_R.cache_installation}
 \alias{assert_R.cache_installation}
-\title{R.cache needs to be installed if caching functionality is enabled}
+\title{Assert the R.cache installation in conjunction with the cache config}
 \usage{
 assert_R.cache_installation(installation_only = FALSE,
   action = "abort")

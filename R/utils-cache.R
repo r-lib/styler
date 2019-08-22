@@ -1,11 +1,13 @@
+#' Standardize text for hashing
+#'
 #' Make sure text after styling results in the same hash as text before styling
 #' if it is indeed identical.
-#' @param x A character vector.
+#' @param text A character vector.
 #' @keywords internal
-hash_standardize <- function(x) {
-  x <- ensure_last_is_empty(x)
-  Encoding(x) <- "UTF-8"
-  list(x)
+hash_standardize <- function(text) {
+  text <- ensure_last_is_empty(text)
+  Encoding(text) <- "UTF-8"
+  list(text)
 }
 
 #' Where is the cache?

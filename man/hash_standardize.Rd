@@ -2,13 +2,12 @@
 % Please edit documentation in R/utils-cache.R
 \name{hash_standardize}
 \alias{hash_standardize}
-\title{Make sure text after styling results in the same hash as text before styling
-if it is indeed identical.}
+\title{Standardize text for hashing}
 \usage{
-hash_standardize(x)
+hash_standardize(text)
 }
 \arguments{
-\item{x}{A character vector.}
+\item{text}{A character vector.}
 }
 \description{
 Make sure text after styling results in the same hash as text before styling

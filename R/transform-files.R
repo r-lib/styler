@@ -83,8 +83,8 @@ make_transformer <- function(transformers,
       R.cache::findCache(key = hash_standardize(text), dir = cache_dir)
     )
     should_use_cache <- cache_is_activated()
-    can_use_cache <- is_cached && should_use_cache
-    if (!can_use_cache) {
+    use_cache <- is_cached && should_use_cache
+    if (!use_cache) {
       transformed_code <- text %>%
         parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
         when(

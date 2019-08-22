@@ -35,6 +35,8 @@ assert_data.tree_installation <- function() {
   }
 }
 
+#' Assert the R.cache installation in conjunction with the cache config
+#'
 #' R.cache needs to be installed if caching functionality is enabled
 #' @param installation_only Whether or not to only check if R.cache is
 #'   installed.
@@ -60,8 +62,7 @@ assert_R.cache_installation <- function(installation_only = FALSE,
     } else {
       rlang::warn(paste0(
         msg_basic, " ",
-        "Deactivating the caching feature for the current session.",
-        ""
+        "Deactivating the caching feature for the current session."
       ))
       cache_deactivate(verbose = FALSE)
     }
