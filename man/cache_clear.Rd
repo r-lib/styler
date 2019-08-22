@@ -18,8 +18,6 @@ Clears the cache that stores which files' styling is up-to-date. You won't be
 able to undo this. Note that the file corresponding to the cache (a folder
 on our file stystem) won't be deleted, but it will be empty after calling
 \code{cache_clear}.
-If the cache is used at all or not is determined via the R option
-\code{styler.use_cache}, defaulting to \code{TRUE}.
 }
 \details{
 Each version of styler has it's own cache by default, because styling is
