@@ -78,14 +78,14 @@ capture.output(test_that("cached expressions are displayed propperly", {
   cache_activate("testthat")
   style_text("1+1")
   cache_info <- cache_info(format = "tabular")
-  cache_info$size <- round(cache_info$size, -1)
+  cache_info$size <- round(cache_info$size, -2)
   expect_known_value(
     cache_info[, c("n", "size", "activated")],
     file = test_path("reference-objects/cache-info-2")
   )
   style_text("a <-function() NULL")
   cache_info <- cache_info(format = "tabular")
-  cache_info$size <- round(cache_info$size, -1)
+  cache_info$size <- round(cache_info$size, -2)
   expect_known_value(
     cache_info[, c("n", "size", "activated")],
     file = test_path("reference-objects/cache-info-3")
