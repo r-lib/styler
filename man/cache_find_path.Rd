@@ -7,7 +7,7 @@
 cache_find_path(cache_name = NULL)
 }
 \arguments{
-\item{cache_name}{The name of the cache to use. If
+\item{cache_name}{The name of the styler cache to use. If
 \code{NULL}, the option "styler.cache_name" is considered which defaults to
 the version of styler used.}
 }
