@@ -2,7 +2,7 @@
 
 ## Exported functions
 
-cache_activate(cache_name = NULL)
+cache_activate(cache_name = NULL, verbose = TRUE)
 cache_clear(cache_name = NULL, ask = TRUE)
 cache_deactivate(verbose = TRUE)
 cache_info(cache_name = NULL, format = "both")

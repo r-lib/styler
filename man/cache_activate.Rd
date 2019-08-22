@@ -5,7 +5,7 @@
 \alias{cache_deactivate}
 \title{Activate or deactivate the styler cache}
 \usage{
-cache_activate(cache_name = NULL)
+cache_activate(cache_name = NULL, verbose = TRUE)
 
 cache_deactivate(verbose = TRUE)
 }
@@ -13,6 +13,9 @@ cache_deactivate(verbose = TRUE)
 \item{cache_name}{The name of the styler cache to use. If
 \code{NULL}, the option "styler.cache_name" is considered which defaults to
 the version of styler used.}
+
+\item{verbose}{Whether or not to print an informative message about what the
+function is doing.}
 }
 \description{
 Helper functions to control the behavior of caching. Simple wrappers around

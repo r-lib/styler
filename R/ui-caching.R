@@ -18,7 +18,6 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
   path_cache <- cache_find_path(cache_name)
   R.cache::clearCache(path_cache, prompt = ask)
   cache_deactivate(verbose = FALSE)
-
 }
 
 #' Show information about the styler cache
@@ -68,9 +67,11 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #' Helper functions to control the behavior of caching. Simple wrappers around
 #' [base::options()].
 #' @inheritParams cache_clear
+#' @param verbose Whether or not to print an informative message about what the
+#'   function is doing.
 #' @family cache managers
 #' @export
-cache_activate <- function(cache_name = NULL) {
+cache_activate <- function(cache_name = NULL, verbose = TRUE) {
   assert_R.cache_installation(installation_only = TRUE)
   if (!is.null(cache_name)) {
     options("styler.cache_name" = cache_name)
@@ -78,11 +79,13 @@ cache_activate <- function(cache_name = NULL) {
     options("styler.cache_name" = cache_derive_name())
   }
   path <- cache_find_path(cache_name)
-  cat(
-    "Using cache ", cache_get_name(), " at ",
-    path, ".\n",
-    sep = ""
-  )
+  if (verbose) {
+    cat(
+      "Using cache ", cache_get_name(), " at ",
+      path, ".\n",
+      sep = ""
+    )
+  }
   invisible(path)
 }
 
