@@ -4,19 +4,19 @@
 \alias{cache_info}
 \title{Show information about the styler cache}
 \usage{
-cache_info(cache_name = NULL, format = "lucid")
+cache_info(cache_name = NULL, format = "both")
 }
 \arguments{
-\item{cache_name}{The name of the cache to use. If
+\item{cache_name}{The name of the cache for which to show details. If
 \code{NULL}, the option "styler.cache_name" is considered which defaults to
 the version of styler used.}
 
-\item{format}{Either "lucid" for a printed summary or "tabular" for a
-tabular summary from \code{\link[base:file.info]{base::file.info()}}.}
+\item{format}{Either "lucid" for a summary emitted with \code{\link[base:cat]{base::cat()}} or
+"tabular" for a tabular summary from \code{\link[base:file.info]{base::file.info()}} or "both" for
+both.}
 }
 \description{
-If the cache is used at all or not is determined via the R option
-\code{styler.use_cache}.
+Gives information about the cache
 }
 \seealso{
 Other cache managers: \code{\link{cache_activate}},

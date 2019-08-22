@@ -270,13 +270,14 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' @param cache_name The name of the cache for which to show details. If
 #'   `NULL`, the option "styler.cache_name" is considered which defaults to
 #'   the version of styler used.
-#' @param format Either "lucid" for a printed summary or "tabular" for a
-#'   tabular summary from [base::file.info()].
+#' @param format Either "lucid" for a summary emitted with [base::cat()] or
+#'   "tabular" for a tabular summary from [base::file.info()] or "both" for
+#'   both.
 #' @family cache managers
 #' @export
-cache_info <- function(cache_name = NULL, format = "lucid") {
+cache_info <- function(cache_name = NULL, format = "both") {
   assert_R.cache_installation(installation_only = TRUE)
-  rlang::arg_match(format, c("tabular", "lucid"))
+  rlang::arg_match(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
   file_info <- file_info(files)
@@ -286,19 +287,22 @@ cache_info <- function(cache_name = NULL, format = "lucid") {
     last_modified = suppressWarnings(max(file_info$mtime)),
     created = file.info(path_cache)$ctime,
     location = path_cache,
-    activated = cache_is_activated()
+    activated = cache_is_activated(cache_name)
   )
-  if (format == "lucid") {
+  if (format %in% c("lucid", "both")) {
     cat(
       "Size:\t\t", tbl$size, " bytes (", tbl$n, " cached expressions)",
       "\nLast modified:\t", as.character(tbl$last_modified),
       "\nCreated:\t", as.character(tbl$created),
       "\nLocation:\t", path_cache,
-      "\nActivated:\t", cache_is_activated(),
+      "\nActivated:\t", tbl$activated,
       sep = ""
     )
-  } else {
+  }
+  if (format == "tabular") {
     tbl
+  } else if (format == "both") {
+    invisible(tbl)
   }
 }
 
@@ -322,7 +326,7 @@ cache_activate <- function(cache_name = NULL) {
     path, ".\n",
     sep = ""
   )
-  path
+  invisible(path)
 }
 
 #' @rdname cache_activate
