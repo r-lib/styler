@@ -63,7 +63,7 @@ assert_R.cache_installation <- function(installation_only = FALSE,
         "Deactivating the caching feature for the current session.",
         ""
       ))
-      cache_deactivate()
+      cache_deactivate(verbose = FALSE)
     }
   }
 }

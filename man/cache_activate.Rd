@@ -7,7 +7,7 @@
 \usage{
 cache_activate(cache_name = NULL)
 
-cache_deactivate()
+cache_deactivate(verbose = TRUE)
 }
 \arguments{
 \item{cache_name}{The name of the cache to use. If

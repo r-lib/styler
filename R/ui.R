@@ -262,6 +262,8 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
   assert_R.cache_installation(installation_only = TRUE)
   path_cache <- cache_find_path(cache_name)
   R.cache::clearCache(path_cache, prompt = ask)
+  cache_deactivate(verbose = FALSE)
+
 }
 
 #' Show information about the styler cache
@@ -331,10 +333,12 @@ cache_activate <- function(cache_name = NULL) {
 
 #' @rdname cache_activate
 #' @export
-cache_deactivate <- function() {
+cache_deactivate <- function(verbose = TRUE) {
   options("styler.cache_name" = NULL)
 
-  cat("Deactivated cache.\n")
+  if (verbose) {
+    cat("Deactivated cache.\n")
+  }
 }
 
 #' Check if a cache is activated
