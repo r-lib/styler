@@ -13,23 +13,29 @@ test_that("Cache management fails mostly when R.cache is not installed", {
 
 
 test_that("styling works when R.cache is not installed", {
+  skip_if(rlang::is_installed("R.cache"))
   # warning for first time
-  expect_warning(capture.output(
-    withr::with_options(
-      # simulate .onLoad() in fresh R session
-      list(styler.cache_name = cache_derive_name()),
-      style_text("1+1")
-    )),
+  expect_warning(
+    capture.output(
+      withr::with_options(
+        # simulate .onLoad() in fresh R session
+        list(styler.cache_name = cache_derive_name()),
+        style_text("1+1")
+      )
+    ),
     "Deactivating the caching feature for the current session"
   )
 
   # No warnings subsequently
-  expect_warning(capture.output(
-    withr::with_options(
-      list(styler.cache_name = cache_derive_name()), {
-        suppressWarnings(style_text("1+1"))
-        style_text("1+1")
-      })),
+  expect_warning(
+    capture.output(
+      withr::with_options(
+        list(styler.cache_name = cache_derive_name()), {
+          suppressWarnings(style_text("1+1"))
+          style_text("1+1")
+        }
+      )
+    ),
     NA
   )
 })
