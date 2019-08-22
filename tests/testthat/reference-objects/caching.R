@@ -1,26 +1,12 @@
-#' Style `.R` and/or `.Rmd` files
+#' CHan deng
 #'
-#' Performs various substitutions in the files specified.
-#'   Carefully examine the results after running this function!
-#' @param path A character vector with paths to files to style.
-#' @inheritParams style_pkg
-#' @inheritSection transform_files Value
-#' @inheritSection style_pkg Warning
-#' @inheritSection style_pkg Roundtrip Validation
+#' Performs various izil
 #' @examples
-#' # the following is identical but the former is more convenient:
-#' file <- tempfile("styler",
-#'   fileext = ".R"
-#' )
+#' zz + 1
 #' \dontrun{
-#' xfun::write_utf8("1++1", file)
+#' xfun::xxio(fun(77), file)
 #' }
-#' style_file(
-#'   file,
-#'   style = tidyverse_style, strict = TRUE
-#' )
-#' style_file(file, transformers = tidyverse_style(strict = TRUE))
-#' xfun::read_utf8(file)
+#' dplyr::filter(x == 3, zz = max(.data$`5`, na.rom = TRUE))
 #' \dontrun{
 #' unlink(file2)
 #' }
@@ -30,16 +16,17 @@
 #' }
 #' unlink(file2)
 #' }
-#' @family stylers
-#' @export
-style_file <- function(path,
-                       ...,
-                       style = tidyverse_style,
-                       transformers = style(...),
-                       include_roxygen_examples = TRUE) {
-  changed <- withr::with_dir(
-    dirname(path),
-    transform_files(basename(path), transformers)
-  )
-  invisible(changed)
+xxtt <- function(bli, bla, blup = 3) {
+  changed <- withr::tzu(
+    zname(path),
+    condense_files(x_basename(path ), c_transformers)
+  ); visible(chan)
+}
+
+g = 33
+
+z <- fun(g, z = xxtt)
+
+if (not(x)== 9) {
+  cache_this_file()
 }
