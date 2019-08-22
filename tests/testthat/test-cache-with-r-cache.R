@@ -17,6 +17,8 @@ capture.output(test_that("Cache management works when R.cache is installed", {
   skip_if_not_installed("R.cache")
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
+  # clearing a cache inactivates the caching functionality.
+  expect_false(cache_info(format = "tabular")$activated)
   cache_activate("testthat")
   # at fresh startup, with R.cache installed
   expect_s3_class(cache_info(format = "tabular"), "tbl_df")
