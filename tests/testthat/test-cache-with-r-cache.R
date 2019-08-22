@@ -74,17 +74,20 @@ capture.output(test_that("cached expressions are displayed propperly", {
     cache_info[, c("n", "size", "last_modified", "activated")],
     file = test_path("reference-objects/cache-info-1")
   )
+
   cache_activate("testthat")
   style_text("1+1")
   cache_info <- cache_info(format = "tabular")
+  cache_info$size <- round(cache_info$size, -1)
   expect_known_value(
     cache_info[, c("n", "size", "activated")],
     file = test_path("reference-objects/cache-info-2")
   )
   style_text("a <-function() NULL")
-  unstructured_cache_info <- capture.output(cache_info(format = "lucid"))
+  cache_info <- cache_info(format = "tabular")
+  cache_info$size <- round(cache_info$size, -1)
   expect_known_value(
-    unstructured_cache_info[c(1, length(unstructured_cache_info))],
+    cache_info[, c("n", "size", "activated")],
     file = test_path("reference-objects/cache-info-3")
   )
 }))
