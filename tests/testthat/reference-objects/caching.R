@@ -19,14 +19,15 @@
 xxtt <- function(bli, bla, blup = 3) {
   changed <- withr::tzu(
     zname(path),
-    condense_files(x_basename(path ), c_transformers)
-  ); visible(chan)
+    condense_files(x_basename(path), c_transformers)
+  )
+  visible(chan)
 }
 
-g = 33
+g <- 33
 
 z <- fun(g, z = xxtt)
 
-if (not(x)== 9) {
+if (not(x) == 9) {
   cache_this_file()
 }
