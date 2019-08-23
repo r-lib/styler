@@ -94,7 +94,7 @@ make_transformer <- function(transformers,
         )
       if (should_use_cache) {
         R.cache::saveCache(
-          Sys.time(),
+          NULL,
           key = hash_standardize(transformed_code),
           dir = cache_dir
         )
