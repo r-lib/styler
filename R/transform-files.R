@@ -96,7 +96,7 @@ make_transformer <- function(transformers,
         R.cache::saveCache(
           NULL,
           key = hash_standardize(transformed_code),
-          dir = cache_dir
+          dir = cache_dir, shallow = TRUE
         )
       }
       transformed_code
