@@ -3,6 +3,7 @@ repos:
     rev: v0.0.0.9016
     hooks: 
     -   id: style-files
+    -   id: lintr
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: readme-rmd-rendered
