@@ -11,6 +11,10 @@ if (git2r::in_repository()) {
 out <- lapply(files, function(path) {
   lints <- lintr::lint(path)
   if (length(lints) > 0) {
-    stop("File ", path, " is not lint free", call. = FALSE)  
+    stop(
+      "File ", path, " is not lint free\n",
+      "Run lintr::lint('", path, "') to check the lintr output.",
+      call. = FALSE
+    )
   }
 })

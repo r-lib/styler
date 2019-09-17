@@ -44,20 +44,23 @@ A collection of git pre-commit hooks to use with
     alphabetically and fields are in standard order.
 
   - `lintr`: A hook to run `lintr::lint()` to check that R files are
-    lint free.
+    lint
+free.
+
+![pre-commit-hook](https://media.giphy.com/media/Z9KJUt3zRYfhUDmLXG/giphy.gif)
 
 To add a pre-commit hook to your project, install pre-commit as
 described in the [official documentation](https://pre-commit.com/#intro)
-and make sure the executable `pre-commit` is in a place that is on your
-`$PATH`.
+and make sure that the executable `pre-commit` is in a place that is on
+your `$PATH`.
 
-If you installed pre-commit, you can add it to a specific project by
+If you’ve installed pre-commit, you can add it to a specific project by
 adding a `.pre-commit-config.yaml` file that has a structure like this:
 
 ``` yaml
 repos:
 -   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: v0.0.0.9008
+    rev: v0.0.0.9016
     hooks: 
     -   id: style-files
     -   id: parsable-R
@@ -103,7 +106,7 @@ You can also add other hooks from other repos, by extending the
 
 To update the hook revisions, just run `pre-commit autoupdate`.
 
-# why using hooks?
+# Why use hooks?
 
 The goal of pre-commit hooks is to improve the quality of commits. This
 is achieved by making sure your commits meet some (formal) requirements,
@@ -123,27 +126,27 @@ service. For example, creating auto-commits at a CI service for styling
 code creates unnecessary extra commits, as styling can be checked at the
 time of committing and is relatively inexpensive.
 
-# why using the pre-commit framework?
+# Why use the pre-commit framework?
 
 Implementing hooks in a framework such as
 [pre-commit.com](https://pre-commit.com) has multiple benefits compared
-to use simple bash scripts in `.git/hooks`:
+to using simple bash scripts in `.git/hooks`:
 
-  - easily use hooks other people wrote, in bash, R, python and other
-    languages. There is a wealth of useful hooks available, most listed
-    [here](https://pre-commit.com/hooks.html). For example,
+  - easily use hooks other people have created, in bash, R, python and
+    other languages. There is a wealth of useful hooks available, most
+    listed [here](https://pre-commit.com/hooks.html). For example,
     `check-added-large-files` prevents you from committing big files,
     other hooks validate json or yaml files and so on.
 
   - No need to worry about dependencies, testing, different versions of
-    hooks, file filtering for specific hooks etc. It’s handled by
+    hooks, file filtering for specific hooks etc. It’s all handled by
     pre-commit.
 
   - Hooks are maintained in *one* place, and you just need a
     `.pre-commit-config.yaml` file. No need to c/p hooks from one
     project to another.
 
-You have an idea for a hook? Please file an issue.
+Have an idea for a hook? Please file an issue.
 
 -----
 
