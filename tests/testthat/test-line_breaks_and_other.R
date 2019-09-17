@@ -6,6 +6,12 @@ test_that("line breaks involing curly brackets", {
 })
 
 test_that("line breaks involing curly brackets", {
+  expect_warning(test_collection("line_breaks_and_other", "braces-fun-calls",
+                                 transformer = style_text), NA)
+})
+
+
+test_that("line breaks involing curly brackets", {
   expect_warning(test_collection("line_breaks_and_other", "edge_comment_and_curly",
                                  transformer = style_text), NA)
 })

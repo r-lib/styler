@@ -1,14 +1,26 @@
 # A { should never go on its own line
 remove_line_break_before_curly_opening <- function(pd) {
-  rm_break_idx <- which((pd$token_after == "'{'") & (pd$token != "COMMENT"))
-  rm_break_idx <- setdiff(rm_break_idx, nrow(pd))
-  if (length(rm_break_idx) > 0) {
+  line_break_to_set_idx <- which((pd$token_after == "'{'") & (pd$token != "COMMENT"))
+  line_break_to_set_idx <- setdiff(line_break_to_set_idx, nrow(pd))
+  if (length(line_break_to_set_idx) > 0) {
     is_not_curly_curly <- map_chr(
-      rm_break_idx + 1L,
+      line_break_to_set_idx + 1L,
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
-    is_not_curly_curly_idx <- rm_break_idx[is_not_curly_curly]
+    last_expr_idx <- max(which(pd$token == "expr"))
+    is_last_expr <- ifelse(pd$token[1] == "IF",
+      # rule not applicable for IF
+      TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
+    )
+    eq_sub_before <- pd$token[line_break_to_set_idx] == "EQ_SUB"
+    should_be_on_same_line <- is_not_curly_curly & (is_last_expr | eq_sub_before)
+    is_not_curly_curly_idx <- line_break_to_set_idx[should_be_on_same_line]
     pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
+
+    should_not_be_on_same_line <- is_not_curly_curly & (!is_last_expr & !eq_sub_before)
+    should_not_be_on_same_line_idx <- line_break_to_set_idx[should_not_be_on_same_line]
+
+    pd$lag_newlines[1 + should_not_be_on_same_line_idx] <- 1L
   }
   pd
 }
