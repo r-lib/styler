@@ -7,17 +7,31 @@
 set_line_break_before_curly_opening(pd)
 }
 \description{
-Rule: Function arguments that consist of a braced expression always need to
-start on a new line, unless it's the last argument and all other arguments
-fit on the line of the function call or they are named. Also, expressions
-following on braced expressions also cause a line trigger.
+Rule:
+\itemize{
+\item Principle: Function arguments that consist of a braced expression always
+need to start on a new line
+\item Exception: \link{...} unless it's the last argument and all other
+arguments fit on the line of the function call
+\item Exception: \link{...} or they are named.
+\item Extension: Also, expressions following on braced expressions also cause a
+line trigger.
+}
 }
 \examples{
 \dontrun{
+tryCatch(
+  {
+    f(8)
+  },
+  error = function(e) NULL
+)
+# last-argument case
 testthat("braces braces are cool", {
   code(to = execute)
 })
-call2(x = 2,
+call2(
+  x = 2,
   {
     code(to = execute)
   },
