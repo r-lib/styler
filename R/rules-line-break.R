@@ -1,17 +1,48 @@
 #' Set line break before a curly brace
 #'
-#' Rule: Function arguments that consist of a braced expression always need to
-#' start on a new line, unless it's the last argument and all other arguments
-#' fit on the line of the function call or they are named.
+#' Rule:
+#' * Principle: Function arguments that consist of a braced expression always
+#'   need to start on a new line
+#' * Exception: [...] unless it's the last argument and all other
+#'   arguments fit on the line of the function call
+#' * Exception: [...] or they are named.
+#' * Extension: Also, expressions following on braced expressions also cause a
+#'   line trigger.
 #' @keywords internal
 #' @examples
 #' \dontrun{
+#' tryCatch(
+#'   {
+#'     f(8)
+#'   },
+#'   error = function(e) NULL
+#' )
+#' # last-argument case
 #' testthat("braces braces are cool", {
 #'   code(to = execute)
 #' })
+#' call2(
+#'   x = 2,
+#'   {
+#'     code(to = execute)
+#'   },
+#'   c = { # this is the named case
+#'     g(x = 7)
+#'   }
+#' )
+#' tryGugus(
+#'   {
+#'     g5(k = na)
+#'   },
+#'   a + b # line break also here because
+#'   # proceded by brace expression
+#' )
 #' }
 set_line_break_before_curly_opening <- function(pd) {
-  line_break_to_set_idx <- which((pd$token_after == "'{'") & (pd$token != "COMMENT"))
+  line_break_to_set_idx <- which(
+    (pd$token_after == "'{'") & (pd$token != "COMMENT")
+  )
+
   line_break_to_set_idx <- setdiff(line_break_to_set_idx, nrow(pd))
   if (length(line_break_to_set_idx) > 0) {
     is_not_curly_curly <- map_chr(
@@ -36,10 +67,17 @@ set_line_break_before_curly_opening <- function(pd) {
     pd$lag_newlines[1 + should_not_be_on_same_line_idx] <- 1L
 
     # non-curly expressions after curly expressions must have line breaks
-    exprs_idx <- which(pd$token == "expr")
-    exprs_after_last_expr_with_line_break_idx <-
-    exprs_idx[exprs_idx > should_not_be_on_same_line_idx[1] + 1L]
-    pd$lag_newlines[exprs_after_last_expr_with_line_break_idx] <- 1L
+    if (length(should_not_be_on_same_line_idx) > 0) {
+      comma_exprs_idx <- which(pd$token == "','")
+      comma_exprs_idx <- setdiff(comma_exprs_idx, 1 + is_not_curly_curly_idx)
+      non_comment_after_comma <- map_int(comma_exprs_idx,
+        next_non_comment,
+        pd = pd
+      )
+      non_comment_after_expr <-
+        non_comment_after_comma[non_comment_after_comma > should_not_be_on_same_line_idx[1]]
+      pd$lag_newlines[non_comment_after_comma] <- 1L
+    }
   }
   pd
 }

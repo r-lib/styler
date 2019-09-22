@@ -80,7 +80,8 @@ call("test", {
 call(
   {
     1
-  }, a + b,
+  },
+  a + b,
   {
     33 / f(c)
   }
