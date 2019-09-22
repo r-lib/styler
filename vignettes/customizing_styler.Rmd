@@ -308,10 +308,11 @@ a <- function() # comments should remain EOL {
 The easiest way of taking care of that is not applying the rule if there is a
 comment before the token of interest, which can be checked for within your
 transformer function. The transformer function from the tidyverse style that
-removes line breaks before the curly opening bracket looks as follows:
+removes line breaks before the round closing bracket that comes after a curly 
+brace looks as follows:
 
 ```{r}
-styler:::remove_line_break_before_curly_opening
+styler:::remove_line_break_before_round_closing_after_curly
 ```
 
 With our example function `set_line_break_before_curly_opening()` we don't need
