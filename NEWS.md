@@ -16,29 +16,32 @@
   [definition for aligned function calls](https://styler.r-lib.org/articles/detect-alignment.html)
   (#537).
 
-* curlyl-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
+* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
   explicitly handled, as opposed previously where it was just treated as two
-  consequtive curly braces (#528).
+  consecutive curly braces (#528).
 
 * `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and
   hidden files are now also styled (#530).
 
 ## Minor improvements and fixes
 
-* brace expressions in function calls are formatted in a less compact way. This
-  improves the formatting of `tryCatch()` in many cases (#543).
-  
-* escape characters in roxygen code examples are now correctly escaped (#512).
+* Brace expressions in function calls are formatted in a less compact way to 
+  improve readability. Typical use case: `tryCatch()` (#543).
 
-* style selection Addin now preserves line break when the last line selected is
+* Arguments in function declarations in a context which is indented multiple 
+  times should now be correct. This typically affects `R6::R6Class()` (#546).
+
+* Escape characters in roxygen code examples are now correctly escaped (#512).
+
+* Style selection Addin now preserves line break when the last line selected is
   an entire line (#520).
 
-* style file Addin can now properly handle cancelling (#511).
+* Style file Addin can now properly handle cancelling (#511).
 
 * The body of a multi-line function declaration is now indented correctly for
   `strict = FALSE` and also wrapped in curly braces for `strict = TRUE` (#536).
 
-* advice for contributors in `CONTRIBUTING.md` was updated (#508).
+* Advice for contributors in `CONTRIBUTING.md` was updated (#508).
 
 ## Adaption
 
