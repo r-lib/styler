@@ -1,17 +1,87 @@
-# A { should never go on its own line
-remove_line_break_before_curly_opening <- function(pd) {
-  rm_break_idx <- which((pd$token_after == "'{'") & (pd$token != "COMMENT"))
-  rm_break_idx <- setdiff(rm_break_idx, nrow(pd))
-  if (length(rm_break_idx) > 0) {
+#' Set line break before a curly brace
+#'
+#' Rule:
+#' * Principle: Function arguments that consist of a braced expression always
+#'   need to start on a new line
+#' * Exception: [...] unless it's the last argument and all other
+#'   arguments fit on the line of the function call
+#' * Exception: [...] or they are named.
+#' * Extension: Also, expressions following on braced expressions also cause a
+#'   line trigger.
+#' @keywords internal
+#' @examples
+#' \dontrun{
+#' tryCatch(
+#'   {
+#'     f(8)
+#'   },
+#'   error = function(e) NULL
+#' )
+#' # last-argument case
+#' testthat("braces braces are cool", {
+#'   code(to = execute)
+#' })
+#' call2(
+#'   x = 2,
+#'   {
+#'     code(to = execute)
+#'   },
+#'   c = { # this is the named case
+#'     g(x = 7)
+#'   }
+#' )
+#' tryGugus(
+#'   {
+#'     g5(k = na)
+#'   },
+#'   a + b # line break also here because
+#'   # proceded by brace expression
+#' )
+#' }
+set_line_break_before_curly_opening <- function(pd) {
+  line_break_to_set_idx <- which(
+    (pd$token_after == "'{'") & (pd$token != "COMMENT")
+  )
+
+  line_break_to_set_idx <- setdiff(line_break_to_set_idx, nrow(pd))
+  if (length(line_break_to_set_idx) > 0) {
     is_not_curly_curly <- map_chr(
-      rm_break_idx + 1L,
+      line_break_to_set_idx + 1L,
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
-    is_not_curly_curly_idx <- rm_break_idx[is_not_curly_curly]
+    last_expr_idx <- max(which(pd$token == "expr"))
+    is_last_expr <- ifelse(pd$token[1] == "IF",
+      # rule not applicable for IF
+      TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
+    )
+    eq_sub_before <- pd$token[line_break_to_set_idx] == "EQ_SUB"
+    # no line break before last brace expression and named brace expression to
+    should_be_on_same_line <- is_not_curly_curly & (is_last_expr | eq_sub_before)
+    is_not_curly_curly_idx <- line_break_to_set_idx[should_be_on_same_line]
     pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
+
+    # other cases: line breaks
+    should_not_be_on_same_line <- is_not_curly_curly & (!is_last_expr & !eq_sub_before)
+    should_not_be_on_same_line_idx <- line_break_to_set_idx[should_not_be_on_same_line]
+
+    pd$lag_newlines[1 + should_not_be_on_same_line_idx] <- 1L
+
+    # non-curly expressions after curly expressions must have line breaks
+    if (length(should_not_be_on_same_line_idx) > 0) {
+      comma_exprs_idx <- which(pd$token == "','")
+      comma_exprs_idx <- setdiff(comma_exprs_idx, 1 + is_not_curly_curly_idx)
+      non_comment_after_comma <- map_int(comma_exprs_idx,
+        next_non_comment,
+        pd = pd
+      )
+      non_comment_after_expr <-
+        non_comment_after_comma[non_comment_after_comma > should_not_be_on_same_line_idx[1]]
+      pd$lag_newlines[non_comment_after_comma] <- 1L
+    }
   }
   pd
 }
+
 
 set_line_break_around_comma <- function(pd) {
   comma_with_line_break_that_can_be_removed_before <-

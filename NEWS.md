@@ -25,6 +25,9 @@
 
 ## Minor improvements and fixes
 
+* brace expressions in function calls are formatted in a less compact way. This
+  improves the formatting of `tryCatch()` in many cases (#543).
+  
 * escape characters in roxygen code examples are now correctly escaped (#512).
 
 * style selection Addin now preserves line break when the last line selected is
