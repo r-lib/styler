@@ -55,13 +55,20 @@ set_line_break_before_curly_opening <- function(pd) {
       TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
     )
     eq_sub_before <- pd$token[line_break_to_set_idx] == "EQ_SUB"
+    linebreak_before_curly <- ifelse(is_function_call(pd),
+      any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1])] > 0),
+      FALSE
+    )
     # no line break before last brace expression and named brace expression to
-    should_be_on_same_line <- is_not_curly_curly & (is_last_expr | eq_sub_before)
+    should_be_on_same_line <- is_not_curly_curly &
+      ((is_last_expr & !linebreak_before_curly) | eq_sub_before)
     is_not_curly_curly_idx <- line_break_to_set_idx[should_be_on_same_line]
     pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
 
+
     # other cases: line breaks
-    should_not_be_on_same_line <- is_not_curly_curly & (!is_last_expr & !eq_sub_before)
+    should_not_be_on_same_line <- is_not_curly_curly &
+      ((!is_last_expr | linebreak_before_curly) & !eq_sub_before)
     should_not_be_on_same_line_idx <- line_break_to_set_idx[should_not_be_on_same_line]
 
     pd$lag_newlines[1 + should_not_be_on_same_line_idx] <- 1L

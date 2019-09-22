@@ -64,7 +64,8 @@ call("test", {
 })
 
 call(
-  "test", {
+  "test",
+  {
     1
   }
 )
