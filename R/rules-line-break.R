@@ -35,7 +35,7 @@
 #'     g5(k = na)
 #'   },
 #'   a + b # line break also here because
-#'   # proceded by brace expression
+#'   # preceded by brace expression
 #' )
 #' }
 set_line_break_before_curly_opening <- function(pd) {
