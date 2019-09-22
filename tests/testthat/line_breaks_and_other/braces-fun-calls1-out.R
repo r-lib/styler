@@ -14,14 +14,16 @@ tryCatch(
   {
     exp(x)
   },
-  error = function(x) x
+  error =
+    function(x) x
 )
 
 tryCatch(
   {
     exp(x)
   },
-  error = function(x) x
+  error =
+    function(x) x
 )
 
 call(

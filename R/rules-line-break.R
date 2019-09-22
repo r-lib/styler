@@ -1,5 +1,16 @@
-# A { should never go on its own line
-remove_line_break_before_curly_opening <- function(pd) {
+#' Set line break before a curly brace
+#'
+#' Rule: Function arguments that consist of a braced expression always need to
+#' start on a new line, unless it's the last argument and all other arguments
+#' fit on the line of the function call or they are named.
+#' @keywords internal
+#' @examples
+#' \dontrun{
+#' testthat("braces braces are cool", {
+#'   code(to = execute)
+#' })
+#' }
+set_line_break_before_curly_opening <- function(pd) {
   line_break_to_set_idx <- which((pd$token_after == "'{'") & (pd$token != "COMMENT"))
   line_break_to_set_idx <- setdiff(line_break_to_set_idx, nrow(pd))
   if (length(line_break_to_set_idx) > 0) {
@@ -13,17 +24,26 @@ remove_line_break_before_curly_opening <- function(pd) {
       TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
     )
     eq_sub_before <- pd$token[line_break_to_set_idx] == "EQ_SUB"
+    # no line break before last brace expression and named brace expression to
     should_be_on_same_line <- is_not_curly_curly & (is_last_expr | eq_sub_before)
     is_not_curly_curly_idx <- line_break_to_set_idx[should_be_on_same_line]
     pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
 
+    # other cases: line breaks
     should_not_be_on_same_line <- is_not_curly_curly & (!is_last_expr & !eq_sub_before)
     should_not_be_on_same_line_idx <- line_break_to_set_idx[should_not_be_on_same_line]
 
     pd$lag_newlines[1 + should_not_be_on_same_line_idx] <- 1L
+
+    # non-curly expressions after curly expressions must have line breaks
+    exprs_idx <- which(pd$token == "expr")
+    exprs_after_last_expr_with_line_break_idx <-
+    exprs_idx[exprs_idx > should_not_be_on_same_line_idx[1] + 1L]
+    pd$lag_newlines[exprs_after_last_expr_with_line_break_idx] <- 1L
   }
   pd
 }
+
 
 set_line_break_around_comma <- function(pd) {
   comma_with_line_break_that_can_be_removed_before <-
