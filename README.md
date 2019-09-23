@@ -137,7 +137,7 @@ notably
     styler, containing various vignettes function documentation as well
     as a change-log.
   - [Blog
-    post](https://lorenzwalthert.netlify.com/posts/customizing-styler-the-quick-way/)
+    post](https://lorenzwalthert.netlify.com/post/customizing-styler-the-quick-way/)
     about how you can customize styler without being an expert.
   - A [tidyverse.org blog
     post](https://www.tidyverse.org/articles/2017/12/styler-1.0.0/)
