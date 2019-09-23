@@ -37,8 +37,10 @@ cache_is_activated <- function(cache_name = NULL) {
   }
 }
 
+desc <- read.dcf("DESCRIPTION")
+
 cache_derive_name <- function() {
-  utils::packageDescription("styler", fields = "Version")
+  unlist(unname(desc[, "Version"]))
 }
 
 cache_get_name <- function() {
