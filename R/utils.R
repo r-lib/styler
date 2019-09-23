@@ -13,6 +13,17 @@ ensure_last_is_empty <- function(x) {
   }
 }
 
+#' Replace the newline character with a line break
+#'
+#' @param text A character vector
+#' @examples
+#' ensure_newline_is_linebreak("x\n2")
+#' ensure_newline_is_linebreak(c("x", "2"))
+#' @keywords internal
+convert_newlines_to_linebreaks <- function(text) {
+  unlist(strsplit(text, "\n", fixed = TRUE))
+}
+
 #' Check whether two columns match
 #'
 #' @param col1,col2 Column names as string.

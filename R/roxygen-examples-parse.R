@@ -33,8 +33,7 @@ parse_roxygen <- function(roxygen) {
 #' @param raw Raw code to post-process.
 #' @keywords internal
 post_parse_roxygen <- function(raw) {
-  split <- raw %>%
+  raw %>%
     paste0(collapse = "") %>%
-    strsplit("\n", fixed = TRUE)
-  split[[1]]
+    convert_newlines_to_linebreaks()
 }
