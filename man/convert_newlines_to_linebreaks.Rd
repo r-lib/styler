@@ -14,6 +14,9 @@ Replace the newline character with a line break
 }
 \examples{
 ensure_newline_is_linebreak("x\\n2")
+# a simple strsplit approach does not cover both cases
+unlist(strsplit("x\\n\\n2", "\\n", fixed = TRUE))
+unlist(strsplit(c("x", "", "2"), "\\n", fixed = TRUE))
 ensure_newline_is_linebreak(c("x", "2"))
 }
 \keyword{internal}
