@@ -14,7 +14,7 @@ the version of styler used.}
 \item{ask}{Whether or not to interactively ask the user again.}
 }
 \description{
-Clears the cache that stores which files' styling is up-to-date. You won't be
+Clears the cache that stores which files are already styled. You won't be
 able to undo this. Note that the file corresponding to the cache (a folder
 on your file stystem) won't be deleted, but it will be empty after calling
 \code{cache_clear}.
