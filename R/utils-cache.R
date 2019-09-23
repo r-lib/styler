@@ -37,11 +37,7 @@ cache_is_activated <- function(cache_name = NULL) {
   }
 }
 
-desc <- read.dcf("DESCRIPTION")
-
-cache_derive_name <- function() {
-  unlist(unname(desc[, "Version"]))
-}
+styler_version <- unlist(unname(read.dcf("DESCRIPTION")[, "Version"]))
 
 cache_get_name <- function() {
   getOption("styler.cache_name")
@@ -51,7 +47,7 @@ cache_get_or_derive_name <- function(cache_name) {
   if (is.null(cache_name)) {
     cache_name <- cache_get_name()
     if (is.null(cache_name)) {
-      cache_name <- cache_derive_name()
+      cache_name <- styler_version
     }
   }
   cache_name

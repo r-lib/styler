@@ -78,7 +78,7 @@ cache_activate <- function(cache_name = NULL, verbose = TRUE) {
   if (!is.null(cache_name)) {
     options("styler.cache_name" = cache_name)
   } else {
-    options("styler.cache_name" = cache_derive_name())
+    options("styler.cache_name" = styler_version)
   }
   path <- cache_find_path(cache_name)
   if (verbose) {
