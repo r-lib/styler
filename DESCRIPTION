@@ -27,8 +27,7 @@ Imports:
     tibble (>= 1.4.2),
     tools,
     withr (>= 1.0.0),
-    xfun (>= 0.1),
-    R.cache (>= 0.13.0.9000)
+    xfun (>= 0.1)
 Suggests: 
     data.tree (>= 0.1.6),
     dplyr,
@@ -37,6 +36,7 @@ Suggests:
     prettycode,
     rmarkdown,
     rstudioapi (>= 0.7),
+    R.cache (>= 0.13.0.9000),
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
