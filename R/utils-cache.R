@@ -6,7 +6,7 @@
 #' @keywords internal
 hash_standardize <- function(text) {
   text <- ensure_last_is_empty(text)
-  Encoding(text) <- "UTF-8"
+  text <- enc2utf8(text)
   list(text)
 }
 
