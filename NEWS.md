@@ -19,7 +19,7 @@
   hook](https://github.com/lorenzwalthert/pre-commit-hooks). See the README for
   details (#538).
 
-* Aligned function calls are detected and kept as is if they match the styler
+* Aligned function calls are detected and remain unchanged if they match the styler
   [definition for aligned function
   calls](https://styler.r-lib.org/articles/detect-alignment.html) (#537).
 
