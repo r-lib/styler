@@ -74,7 +74,9 @@ context_to_terminals <- function(pd_nested,
   }
 
   pd_transformed <- context_towards_terminals(
-    pd_nested, outer_lag_newlines, outer_indent, outer_spaces, outer_indention_refs
+    pd_nested,
+    outer_lag_newlines, outer_indent,
+    outer_spaces, outer_indention_refs
   )
 
   pd_transformed$child <- pmap(
@@ -110,7 +112,11 @@ context_towards_terminals <- function(pd_nested,
                                       outer_indent,
                                       outer_spaces,
                                       outer_indention_refs) {
-  pd_nested$indent <- pd_nested$indent + outer_indent
+  pd_nested$indent <- pd_nested$indent + ifelse(
+    is.na(pd_nested$indention_ref_pos_id),
+    outer_indent,
+    0
+  )
   ref_pos_id_is_na <- !is.na(pd_nested$indention_ref_pos_id)
   pd_nested$indention_ref_pos_id[!ref_pos_id_is_na] <- outer_indention_refs
   pd_nested$lag_newlines[1] <- pd_nested$lag_newlines[1] + outer_lag_newlines
