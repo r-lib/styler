@@ -22,7 +22,7 @@ call(
 ```
 
 Until styler 1.1.1.9002 (with `strict = TRUE`, e.g. as in
-`styler_style_file(..., strict = TRUE)`), this was formatted as follows:
+`styler::style_file(..., strict = TRUE)`), this was formatted as follows:
 
 ```{r}
 call(
