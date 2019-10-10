@@ -22,6 +22,6 @@ NULL
 #' things
 #'
 #' @examples
-#' call('\n') # FIXME when single quotes are used, the newline is evaluated
+#' call('\n') # fixed: when single quotes are used, the newline is evaluated
 #' ano("\\.", further = X)
 NULL

@@ -18,3 +18,14 @@ test_that("files with and without blank EOF line are read correctly", {
     test_path("reference-objects/return-read-utf8-non-missing-EOF")
   )
 })
+
+
+test_that("escape characters are properly recognized", {
+  one <- "jlkaf\n"
+  multiple <- "\\n3"
+  expect_true(is_one_character(one))
+  expect_false(is_one_character(multiple))
+  expect_false(is_multiple_characters(one))
+  expect_true(is_multiple_characters(multiple))
+
+})

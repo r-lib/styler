@@ -13,7 +13,7 @@ test <- function() {
   single quotes are used
   .'
 
-  'strings with embeded\nline breaks are unfortunately split'
+  'strings with embeded\nline breaks are no longer split'
 
   # Comments are always preserved
 

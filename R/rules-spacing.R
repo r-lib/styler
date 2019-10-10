@@ -115,27 +115,6 @@ remove_space_after_unary_pm_nested <- function(pd) {
   pd
 }
 
-#' Replace single quotes with double quotes
-#'
-#' We do not use `deparse()` as in previous implementations but `paste0()` since
-#' the former approach escapes the reverse backslash in the line break character
-#' `\\n` whereas the solution with `paste0()` does not.
-#' @examples
-#' style_text("'here
-#' is a string
-#' '")
-#' @importFrom purrr map map_chr
-#' @param pd_flat A flat parse table.
-#' @keywords internal
-fix_quotes <- function(pd_flat) {
-  str_const <- pd_flat$token == "STR_CONST"
-  str_const_change <- grepl("^'([^\"]*)'$", pd_flat$text[str_const])
-  pd_flat$text[str_const][str_const_change] <-
-    map(pd_flat$text[str_const][str_const_change], parse_text) %>%
-    map_chr(~ paste0("\"", .x, "\""))
-  pd_flat
-}
-
 remove_space_before_opening_paren <- function(pd_flat) {
   paren_after <- pd_flat$token == "'('"
   if (!any(paren_after)) {

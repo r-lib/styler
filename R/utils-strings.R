@@ -27,3 +27,21 @@ add_newlines <- function(n) {
 add_spaces <- function(n) {
   rep_char(" ", n)
 }
+
+
+has_one_backslash <- function(x) {
+  x <- char2raw_as_char(x)
+  any(substr(x, 1, 1) == "0" & substr(x, 2, 2) %in% letters)
+}
+
+has_multiple_backslashes <- function(x) {
+  x <- char2raw_as_char(x)
+  any(x == "5c")
+}
+
+char2raw_as_char <- function(x) {
+  x <- charToRaw(x)
+  class(x) <- "character"
+  x
+}
+
