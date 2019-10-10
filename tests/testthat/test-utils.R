@@ -23,9 +23,9 @@ test_that("files with and without blank EOF line are read correctly", {
 test_that("escape characters are properly recognized", {
   one <- "jlkaf\n"
   multiple <- "\\n3"
-  expect_true(is_one_character(one))
-  expect_false(is_one_character(multiple))
-  expect_false(is_multiple_characters(one))
-  expect_true(is_multiple_characters(multiple))
+  expect_true(has_one_backslash(one))
+  expect_false(has_one_backslash(multiple))
+  expect_false(has_multiple_backslashes(one))
+  expect_true(has_multiple_backslashes(multiple))
 
 })
