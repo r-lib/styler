@@ -24,7 +24,7 @@ resolve_semicolon <- function(pd) {
 #' whether it is used to create a special character, we either use:
 #'
 #' - `deparse(parse_text(...))`
-#' - `parse(paste("\"", ., "\""))`
+#' - `paste("\"", parse_text(...), "\""))`
 #'
 #' To make sure esaping is done correctly.
 #' @examples

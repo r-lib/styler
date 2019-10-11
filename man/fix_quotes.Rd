@@ -17,7 +17,7 @@ Depending on whether the backslash represents a character on its own or
 whether it is used to create a special character, we either use:
 \itemize{
 \item \code{deparse(parse_text(...))}
-\item \code{parse(paste("\"", ., "\""))}
+\item \code{paste("\"", parse_text(...), "\""))}
 }
 
 To make sure esaping is done correctly.
