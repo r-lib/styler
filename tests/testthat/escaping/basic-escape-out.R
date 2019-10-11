@@ -32,3 +32,9 @@ with \\n double quotes. Too hard sorry.' # FIXME
 
 
 x <- "	2" # there is a tab emebbed (created with writeLines("x <- '\t2'"))
+
+x <- "\001"
+"\001"
+
+# FIXME: "\01" gives an error when not in a comment
+# '\01'

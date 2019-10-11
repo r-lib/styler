@@ -34,4 +34,14 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {33}                     
  ¦   °--expr:  [0/0] {35}                              
  ¦       °--STR_CONST: '	2' [0/0] {34}                
- °--COMMENT: # the [0/0] {36}                          
+ ¦--COMMENT: # the [0/0] {36}                          
+ ¦--expr:  [2/0] {37}                                  
+ ¦   ¦--expr:  [0/1] {39}                              
+ ¦   ¦   °--SYMBOL: x [0/0] {38}                       
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {40}                     
+ ¦   °--expr:  [0/0] {42}                              
+ ¦       °--STR_CONST: '\001 [0/0] {41}               
+ ¦--expr:  [1/0] {44}                                  
+ ¦   °--STR_CONST: '\x01 [0/0] {43}                   
+ ¦--COMMENT: # FIX [2/0] {45}                          
+ °--COMMENT: # '\0 [1/0] {46}                         
