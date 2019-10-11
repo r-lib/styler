@@ -31,7 +31,7 @@ add_spaces <- function(n) {
 
 has_one_backslash <- function(x) {
   x <- char2raw_as_char(x)
-  any(substr(x, 1, 1) == "0" & substr(x, 2, 2) %in% letters)
+  any(substr(x, 1, 1) == "0")
 }
 
 has_multiple_backslashes <- function(x) {

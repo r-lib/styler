@@ -28,4 +28,7 @@ NULL
 
 'single quotes with
 embedded and \n not embedded line breaks will not be replaced
-with \\n double quotes. Too hard sorry.'
+with \\n double quotes. Too hard sorry.' # FIXME
+
+
+x <- "	2" # there is a tab emebbed (created with writeLines("x <- '\t2'"))
