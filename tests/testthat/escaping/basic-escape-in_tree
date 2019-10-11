@@ -23,5 +23,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' @e [1/0] {22}                          
  ¦--COMMENT: #' ca [1/0] {23}                          
  ¦--COMMENT: #' an [1/0] {24}                          
- °--expr:  [1/0] {26}                                  
-     °--NULL_CONST: NULL [0/0] {25}                    
+ ¦--expr:  [1/0] {26}                                  
+ ¦   °--NULL_CONST: NULL [0/0] {25}                    
+ °--expr:  [2/0] {28}                                  
+     °--STR_CONST: 'sing [0/0] {27}                    
