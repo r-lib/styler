@@ -13,8 +13,13 @@ test <- function() {
   single quotes are used
   ."
 
-  "strings with embeded
-line breaks are unfortunately split"
+  "strings with embedded\nline breaks are handled correctly"
+
+  "\\"
+  "\\'"
+  "\\\\"
+  "\\\\'"
+  "'\\\\'"
 
   # Comments are always preserved
 

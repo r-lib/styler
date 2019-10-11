@@ -23,5 +23,24 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' @e [1/0] {22}                          
  ¦--COMMENT: #' ca [1/0] {23}                          
  ¦--COMMENT: #' an [1/0] {24}                          
- °--expr:  [1/0] {26}                                  
-     °--NULL_CONST: NULL [0/0] {25}                    
+ ¦--expr:  [1/0] {26}                                  
+ ¦   °--NULL_CONST: NULL [0/0] {25}                    
+ ¦--expr:  [2/0] {28}                                  
+ ¦   °--STR_CONST: 'sing [0/0] {27}                    
+ ¦--expr:  [2/1] {29}                                  
+ ¦   ¦--expr:  [0/1] {31}                              
+ ¦   ¦   °--SYMBOL: x [0/0] {30}                       
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {32}                     
+ ¦   °--expr:  [0/0] {34}                              
+ ¦       °--STR_CONST: '	2' [0/0] {33}                
+ ¦--COMMENT: # the [0/0] {35}                          
+ ¦--expr:  [2/0] {36}                                  
+ ¦   ¦--expr:  [0/1] {38}                              
+ ¦   ¦   °--SYMBOL: x [0/0] {37}                       
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {39}                     
+ ¦   °--expr:  [0/0] {41}                              
+ ¦       °--STR_CONST: '\001 [0/0] {40}               
+ ¦--expr:  [1/0] {43}                                  
+ ¦   °--STR_CONST: '\x01 [0/0] {42}                   
+ ¦--COMMENT: # FIX [2/0] {44}                          
+ °--COMMENT: # FIX [1/0] {45}                          
