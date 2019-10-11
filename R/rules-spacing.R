@@ -130,8 +130,9 @@ remove_space_after_unary_pm_nested <- function(pd) {
 #' @keywords internal
 fix_quotes <- function(pd_flat) {
   str_const <- which(pd_flat$token == "STR_CONST")
-  # Shortcut for performance
-  if (is_empty(str_const)) return(pd_flat)
+  if (is_empty(str_const)) {
+    return(pd_flat)
+  }
 
   pd_flat$text[str_const] <- map(pd_flat$text[str_const], fix_quotes_one)
   pd_flat
@@ -141,12 +142,14 @@ fix_quotes <- function(pd_flat) {
 fix_quotes_one <- function(x) {
   rx <- "^'([^\"]*)'$"
   i <- grep(rx, x)
-  # Shortcut for performance
-  if (is_empty(i)) return(x)
+  if (is_empty(i)) {
+    return(x)
+  }
 
+  # replace outer single quotes
   xi <- gsub(rx, '"\\1"', x[i])
 
-  # Replace all \' by ' and keep all other instances of \., including \\
+  # Replace inner escaped quotes (\') by ' and keep all other instances of \., including \\
   x[i] <- gsub("\\\\(')|(\\\\[^'])", "\\1\\2", xi)
   x
 }
