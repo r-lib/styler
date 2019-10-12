@@ -12,6 +12,12 @@ run_test_impl(path_executable, path_candidate, error_msg, cmd_args, copy)
 \item{path_candidate}{The path to a file that should be modified by the
 executable.}
 
+\item{error_msg}{An expected error message. If no error is expected, this
+can be \code{NULL}. In that case, the \code{comparator} is applied.}
+
+\item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
+described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
+
 \item{copy}{Path with files to copy to the temp directory where the test
 is run.}
 }
