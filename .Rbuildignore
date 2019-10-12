@@ -2,4 +2,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .pre-commit-config.yaml
-^bin$
+^LICENSE\.md$
+^\.pre-commit-hooks\.yaml$
+^\.travis\.yml$
+^CONTRIBUTING\.md$
+^appveyor\.yml$
+^tic\.R$
