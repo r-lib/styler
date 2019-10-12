@@ -2,17 +2,26 @@
 % Please edit documentation in R/setup.R
 \name{use_precommit}
 \alias{use_precommit}
-\title{Set up a pre-com
-Copy a default pre-commit-config.yaml in the root of your project}
+\title{Set up a pre-comit config file for your git repo}
 \usage{
-use_precommit(hooks = NULL, path_root = here::here(), force = FALSE)
+use_precommit(path_root = here::here(), force = FALSE, open = TRUE)
 }
 \arguments{
-\item{hooks}{Ignored.}
-
 \item{path_root}{The path to the root directory of your project.}
+
+\item{force}{Whether to replace an existing config file.}
+
+\item{open}{Whether or not to open the .pre-commit-config.yaml after
+it's been placed in your repo.}
 }
 \description{
-Set up a pre-com
-Copy a default pre-commit-config.yaml in the root of your project
+Copies a default pre-commit-config.yaml in the root of your project and open
+it. Note that this function \strong{does not install pre-commit} on your system,
+this needs to be done once in advance of calling this function. Follow the
+instructions \href{https://pre-commit.com/#install}{here} and make sure the
+executable is on your path.
 }
+\seealso{
+Other helpers: \code{\link{open_config}}
+}
+\concept{helpers}
