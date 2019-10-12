@@ -1,7 +1,7 @@
 ^README\.Rmd$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-.pre-commit-config.yaml
+^\.pre-commit-config\.yaml$
 ^LICENSE\.md$
 ^\.pre-commit-hooks\.yaml$
 ^\.travis\.yml$
