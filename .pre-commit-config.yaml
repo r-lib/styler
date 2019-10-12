@@ -5,7 +5,8 @@ repos:
     hooks: 
     # any R project
     -   id: style-files
-    # -   id: lintr
+        args: [--style_pkg=styler, --style_fun=tidyverse_style]
+    -   id: lintr
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: readme-rmd-rendered
@@ -14,6 +15,6 @@ repos:
     # -   id: use-tidy-description
     # -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v1.2.3
     hooks: 
     -   id: check-added-large-files
