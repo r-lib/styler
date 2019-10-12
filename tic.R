@@ -1,8 +1,8 @@
 do_package_checks(error_on =  "note")
 
 get_stage("script") %>%
-  add_code_step(install_precommit()) %>%
-  add_code_step(use_precommit())
+  add_code_step(precommit::install_precommit()) %>%
+  add_code_step(precommit::use_precommit())
 
 if (Sys.getenv("id_rsa") != "" && ci()$get_branch() == "master") {
   # pkgdown documentation can be built optionally. Other example criteria:
