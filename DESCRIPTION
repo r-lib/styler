@@ -21,7 +21,8 @@ Imports:
     rstudioapi,
     rlang,
     rprojroot,
-    desc
+    desc,
+    reticulate
 Remotes: 
     lorenzwalthert/oneliner,
     r-lib/styler,
