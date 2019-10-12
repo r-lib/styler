@@ -2,4 +2,4 @@
 
 export(open_config)
 export(open_wordlist)
-export(use_precommit_hook_config)
+export(use_precommit)
