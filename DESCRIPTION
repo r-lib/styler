@@ -22,7 +22,8 @@ Imports:
     rlang,
     rprojroot,
     desc,
-    reticulate
+    reticulate,
+    magrittr
 Remotes: 
     lorenzwalthert/oneliner,
     r-lib/styler,
