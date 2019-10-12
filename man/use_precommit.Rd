@@ -2,9 +2,10 @@
 % Please edit documentation in R/setup.R
 \name{use_precommit}
 \alias{use_precommit}
-\title{Set up a pre-comit config file for your git repo}
+\title{Set up pre-commit}
 \usage{
-use_precommit(path_root = here::here(), force = FALSE, open = TRUE)
+use_precommit(path_root = here::here(), force = FALSE, open = TRUE,
+  skip_install = FALSE)
 }
 \arguments{
 \item{path_root}{The path to the root directory of your project.}
@@ -13,13 +14,27 @@ use_precommit(path_root = here::here(), force = FALSE, open = TRUE)
 
 \item{open}{Whether or not to open the .pre-commit-config.yaml after
 it's been placed in your repo.}
+
+\item{skip_install}{Skip the installation with conda. We'll assume you have
+installed the executable otherwise, preferrably as described in the
+\href{https://pre-commit.com/#install}{official installation guide}. This might
+make sense if you don't want to use conda. In that case, please set the
+R option \code{precommithooks.executable} in your \code{.Rprofile} to make sure
+this package finds the executable and you can perform other operations such
+as \code{\link[=autoupdate]{autoupdate()}}.}
 }
 \description{
-Copies a default pre-commit-config.yaml in the root of your project and open
-it. Note that this function \strong{does not install pre-commit} on your system,
-this needs to be done once in advance of calling this function. Follow the
-instructions \href{https://pre-commit.com/#install}{here} and make sure the
-executable is on your path.
+Set up pre-commit
+}
+\details{
+\itemize{
+\item installs pre-commit on your system with \code{\link[=install_precommit]{install_precommit()}}.
+\item installs pre-commit in your current directory with.
+\item sets up a template \code{.pre-commit-config.yaml}.
+\item autoupdates the template to make sure you get the latest versions of the
+hooks.
+\item Open the config file if RStudio is running.
+}
 }
 \seealso{
 Other helpers: \code{\link{open_config}}
