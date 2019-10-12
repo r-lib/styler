@@ -1,4 +1,4 @@
-do_package_checks(error_on =  "note")
+do_package_checks(error_on = "error")
 
 if (Sys.getenv("id_rsa") != "" && ci()$get_branch() == "master") {
   # pkgdown documentation can be built optionally. Other example criteria:
@@ -8,9 +8,8 @@ if (Sys.getenv("id_rsa") != "" && ci()$get_branch() == "master") {
   # - `Sys.getenv("TRAVIS_EVENT_TYPE") == "cron"`: Only for Travis cron jobs
   get_stage("before_deploy") %>%
     add_step(step_setup_ssh())
-  
+
   get_stage("deploy") %>%
     add_step(step_build_pkgdown()) %>%
     add_step(step_push_deploy("docs", "gh-pages"))
 }
-

@@ -1,5 +1,5 @@
 #' Set up pre-commit
-#' 
+#'
 #' @details
 #' * installs pre-commit in your current directory with.
 #' * sets up a template `.pre-commit-config.yaml`.
@@ -58,12 +58,15 @@ install_repo <- function() {
 }
 
 use_precommit_config <- function(force) {
-  name_config <- ".pre-commit-config.yaml"
+  name_origin <- "pre-commit-config.yaml"
+  escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
+  name_target <- ".pre-commit-config.yaml"
+  # workaround for RCMD CHECK warning about hidden top-level directories.
   path_root <- getwd()
-  if (!fs::file_exists(fs::path(name_config)) | force) {
+  if (!fs::file_exists(fs::path(name_target)) | force) {
     fs::file_copy(
-      system.file(name_config, package = "precommit"),
-      ".",
+      system.file(name_origin, package = "precommit"),
+      fs::path(".", name_target),
       overwrite = TRUE
     )
   } else {
@@ -75,7 +78,7 @@ use_precommit_config <- function(force) {
   }
   usethis::ui_done("Copied .pre-commit-config.yaml {path_root}")
   if (is_package(".")) {
-    usethis::write_union(".Rbuildignore", name_config)
+    usethis::write_union(".Rbuildignore", escaped_name_target)
     usethis::ui_done("Added .pre-commit-config.yaml to your .Rbuildignore.")
   }
   usethis::ui_todo(c(
