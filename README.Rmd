@@ -29,6 +29,8 @@ example:
 
 ## Installation
 
+Please make sure you have conda installed. The rest can be handled from R:
+
 ```{r, eval = FALSE}
 # once
 remotes::install_github("lorenzwalthert/precommit")
@@ -39,7 +41,7 @@ precommit::use_precommit()
 ```
 
 This installs pre-commit and performs some other set-up tasks. If you want more
-control over the installation, see `vignette("manual-installation")`.
+control over the installation, see `vignette("manual-installation")`. 
 
 # Usage 
 

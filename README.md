@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.org/lorenzwalthert/pre-commit-hooks.svg?branch=master)](https://travis-ci.org/lorenzwalthert/pre-commit-hooks)
+status](https://travis-ci.org/lorenzwalthert/pre-commit-hooks.svg?branch=master)](https://travis-ci.org/lorenzwalthert/precommit)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
@@ -20,6 +20,9 @@ is best illustrated with an example:
 ![](https://media.giphy.com/media/Z9KJUt3zRYfhUDmLXG/giphy.gif)
 
 ## Installation
+
+Please make sure you have conda installed. The rest can be handled from
+R:
 
 ``` r
 # once
@@ -48,14 +51,14 @@ hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you
 succeed, it should look like
 this:
 
-![](/Users/lorenz/datasciencecoursera/pre-commit-hooks/man/figs/screenshot.png)<!-- -->
+![](/Users/lorenz/datasciencecoursera/precommit/man/figs/screenshot.png)<!-- -->
 
 See the hooks provided by this repo under `vignette("available-hooks")`.
 You can also add other hooks from other repos, by extending the
 `.pre-commit-config.yaml` file, e.g. like this:
 
 ``` yaml
--   repo: https://github.com/pre-commit/pre-commit-hooks
+-   repo: https://github.com/pre-commit/precommit
     rev: v1.2.3
     hooks: 
     -   id: check-added-large-files
