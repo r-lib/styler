@@ -1,4 +1,4 @@
-Package: precommithooks
+Package: precommit
 Description: Useful pre-commit hooks for R.
 Title: Pre commit hooks
 Version: 0.0.0.9017

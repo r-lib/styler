@@ -32,7 +32,7 @@ example:
 ```{r, eval = FALSE}
 # once
 remotes::install_github("lorenzwalthert/precommit")
-precommithooks::install_precommit()
+precommit::install_precommit()
 
 # in every project
 precommithooks::use_precommit()

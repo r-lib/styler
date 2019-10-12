@@ -23,11 +23,11 @@ is best illustrated with an example:
 
 ``` r
 # once
-remotes::install_github("lorenzwalthert/pre-commit-hooks")
-precommithooks::install_precommit()
+remotes::install_github("lorenzwalthert/precommit")
+precommit::install_precommit()
 
 # in every project
-precommithooks::use_precommit()
+precommit::use_precommit()
 ```
 
 This installs pre-commit and performs some other set-up tasks. If you
@@ -38,7 +38,7 @@ want more control over the installation, see
 
 The next time you run `git commit`, the hooks listed in your
 `.pre-commit-config.yaml` will get executed before the commit. The
-helper function `precommithooks::open_config()` let’s you open the
+helper function `precommit::open_config()` let’s you open the
 `.pre-commit-config.yaml` conveniently from the RStudio console. When
 any file is changed due to running a hook, the commit will fail. You can
 inspect the changes introduced by the hook and if satisfied, you can
@@ -62,7 +62,7 @@ You can also add other hooks from other repos, by extending the
 ```
 
 To update the hook revisions, just run `pre-commit autoupdate` in your
-terminal of `precommithooks::autoupdate()`.
+terminal of `precommit::autoupdate()`.
 
 # Caution
 

@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Apart from `precommithooks::use_precommit()`, you can install pre-commit
+Apart from `precommit::use_precommit()`, you can install pre-commit
 manually as described in the [official
 documentation](https://pre-commit.com/#intro). Then, set the R option
 `precommithooks.executable` to the path where the pre-commit executable lives.

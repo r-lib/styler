@@ -20,7 +20,7 @@ use_precommit <- function(path_root = here::here(),
     if (!is_installed()) {
       rlang::abort(paste0(
         "pre-commit is not installed on your system. Please install it with ",
-        "`precommithooks::install_precommit()` or an installation ",
+        "`precommit::install_precommit()` or an installation ",
         "method in the official installation guide ",
         "(https://pre-commit.com/#install)."
       ))
