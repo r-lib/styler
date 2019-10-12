@@ -10,7 +10,7 @@ vignette: >
 Apart from `precommit::use_precommit()`, you can install pre-commit
 manually as described in the [official
 documentation](https://pre-commit.com/#intro). Then, set the R option
-`precommithooks.executable` to the path where the pre-commit executable lives.
+`precommit.executable` to the path where the pre-commit executable lives.
 
 If you've installed pre-commit, you can add it to a specific project by adding a
 `.pre-commit-config.yaml` file that has a structure like this:

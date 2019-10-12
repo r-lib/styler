@@ -1,4 +1,4 @@
 library(testthat)
-library(precommithooks)
+library(precommit)
 
-test_check("precommithooks")
+test_check("precommit")

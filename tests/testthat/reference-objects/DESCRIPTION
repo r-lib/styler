@@ -1,4 +1,4 @@
-Package: precommithooks
+Package: precommit
 Title: Pre commit hooks
 Version: 0.0.0.9007
 Author: Lorenz Walthert

@@ -39,7 +39,7 @@ install_system <- function() {
     usethis::ui_info("Installing pre-commit with conda into r-reticulate env.")
     install_precommit_impl()
     usethis::ui_done("Sucessfully installed pre-commit on your system.")
-    options(precommithooks.executable = derive_path_precommit_exec())
+    options(precommit.executable = derive_path_precommit_exec())
   }
 }
 
@@ -62,7 +62,7 @@ use_precommit_config <- function(force) {
   path_root <- getwd()
   if (!fs::file_exists(fs::path(name_config)) | force) {
     fs::file_copy(
-      system.file(name_config, package = "precommithooks"),
+      system.file(name_config, package = "precommit"),
       ".",
       overwrite = TRUE
     )
@@ -113,7 +113,7 @@ autoupdate <- function() {
 #' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
 find_pre_commit_exec <- function(check_if_exists = TRUE) {
-  final <- getOption("precommithooks.executable") %>%
+  final <- getOption("precommit.executable") %>%
     as.character()
   if (!check_if_exists) {
     return(final)
@@ -123,7 +123,7 @@ find_pre_commit_exec <- function(check_if_exists = TRUE) {
       "pre-commit executable does not exist at ",
       final,
       ". Please locate your pre-commit ",
-      "executable and set the R option `precommithooks.executable` to this ",
+      "executable and set the R option `precommit.executable` to this ",
       "path so it can be used to perform various pre-commit commands from R."
     ))
   }

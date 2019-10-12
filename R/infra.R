@@ -28,7 +28,7 @@ run_test <- function(hook_name,
                      copy = NULL) {
   path_executable <- system.file(
     fs::path("bin", hook_name),
-    package = "precommithooks"
+    package = "precommit"
   )
   test_ancestor <- testthat::test_path("in", file_name)
   path_candidate <- paste0(test_ancestor, suffix)
