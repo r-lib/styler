@@ -1,12 +1,8 @@
-source(here::here("R", "infra.R"))
-
-
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### style-files                                                             ####
 
 # success
 run_test("style-files", suffix = "-success.R")
-
 # fail
 run_test("style-files", suffix = "-fail.R", error_msg = NA)
 
