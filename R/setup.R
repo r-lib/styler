@@ -63,6 +63,7 @@ open_config <- function() {
 }
 
 #' @export
+#' @rdname open_config
 open_wordlist <- function() {
   rstudioapi::navigateToFile("inst/WORDLIST")
 }

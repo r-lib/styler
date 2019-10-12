@@ -2,9 +2,12 @@
 % Please edit documentation in R/setup.R
 \name{open_config}
 \alias{open_config}
+\alias{open_wordlist}
 \title{Open pre-commit related files}
 \usage{
 open_config()
+
+open_wordlist()
 }
 \description{
 Open pre-commit related files
