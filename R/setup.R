@@ -133,15 +133,15 @@ find_pre_commit_exec <- function(check_if_exists = TRUE) {
   final
 }
 
-derive_path_precommit_exec <- function(check_existance = FALSE) {
-  ls <- reticulate::conda_list()
-  derived <- fs::path(fs::path_dir(ls[ls == "r-reticulate", ]$python), "pre-commit")
-  derived
-  if (check_existance) {
-    ifelse(fs::file_exists(derived), derived, "")
-  } else {
-    derived
-  }
+derive_path_precommit_exec <- function() {
+  tryCatch(
+    {
+      ls <- reticulate::conda_list()
+      derived <- fs::path(fs::path_dir(ls[ls == "r-reticulate", ]$python[1]), "pre-commit")
+      unname(ifelse(fs::file_exists(derived), derived, ""))
+    },
+    error = function(e) ""
+  )
 }
 
 
