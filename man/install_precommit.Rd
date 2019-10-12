@@ -2,11 +2,11 @@
 % Please edit documentation in R/setup.R
 \name{install_precommit}
 \alias{install_precommit}
-\title{Install pre-commit on your system with conda}
+\title{Install pre-commit on your system.}
 \usage{
 install_precommit()
 }
 \description{
-Install pre-commit on your system with conda
+This installs pre-commit in the default conda environment of reticulate. It
+will be available to use accross different git repositories.
 }
-\keyword{internal}

@@ -4,8 +4,7 @@
 \alias{use_precommit}
 \title{Set up pre-commit}
 \usage{
-use_precommit(path_root = here::here(), force = FALSE, open = TRUE,
-  skip_install = FALSE)
+use_precommit(path_root = here::here(), force = FALSE, open = TRUE)
 }
 \arguments{
 \item{path_root}{The path to the root directory of your project.}
@@ -14,21 +13,12 @@ use_precommit(path_root = here::here(), force = FALSE, open = TRUE,
 
 \item{open}{Whether or not to open the .pre-commit-config.yaml after
 it's been placed in your repo.}
-
-\item{skip_install}{Skip the installation with conda. We'll assume you have
-installed the executable otherwise, preferrably as described in the
-\href{https://pre-commit.com/#install}{official installation guide}. This might
-make sense if you don't want to use conda. In that case, please set the
-R option \code{precommithooks.executable} in your \code{.Rprofile} to make sure
-this package finds the executable and you can perform other operations such
-as \code{\link[=autoupdate]{autoupdate()}}.}
 }
 \description{
 Set up pre-commit
 }
 \details{
 \itemize{
-\item installs pre-commit on your system with \code{\link[=install_precommit]{install_precommit()}}.
 \item installs pre-commit in your current directory with.
 \item sets up a template \code{.pre-commit-config.yaml}.
 \item autoupdates the template to make sure you get the latest versions of the

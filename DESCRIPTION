@@ -30,3 +30,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 License: GPL-3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

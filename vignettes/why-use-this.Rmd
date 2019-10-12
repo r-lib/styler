@@ -1,0 +1,46 @@
+---
+title: "Why is this useful?"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{why-use-this}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Why use hooks?
+
+The goal of pre-commit hooks is to improve the quality of commits. This is
+achieved by making sure your commits meet some (formal) requirements, e.g:
+
+- that they comply to a certain coding style (with the hook `style-files`).
+
+- that you commit derivatives such as `README.md` or `.Rd` files with their
+  source instead of spreading them over multiple commits.
+
+- and so on.
+
+As all changes enter a repository history with a commit, we believe many checks
+should be performed at that point, and not only later on a CI service. For
+example, creating auto-commits at a CI service for styling code creates
+unnecessary extra commits, as styling can be checked at the time of committing
+and is relatively inexpensive.
+
+# Why use the pre-commit framework?
+
+Implementing hooks in a framework such as
+[pre-commit.com](https://pre-commit.com) has multiple benefits compared to using simple bash scripts in `.git/hooks`:
+
+* easily use hooks other people have created, in bash, R, python and other languages.
+  There is a wealth of useful hooks available, most listed
+  [here](https://pre-commit.com/hooks.html). For example,
+  `check-added-large-files` prevents you from committing big files, other hooks
+  validate json or yaml files and so on.
+
+* No need to worry about dependencies, testing, different versions of hooks,
+  file filtering for specific hooks etc. It's all handled by pre-commit.
+
+* Hooks are maintained in *one* place, and you just need a
+  `.pre-commit-config.yaml` file. No need to c/p hooks from one project to
+  another.
+
+Have an idea for a hook? Please file an issue.

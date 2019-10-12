@@ -51,6 +51,7 @@ run_test <- function(hook_name,
 #'   can be `NULL`. In that case, the `comparator` is applied.
 #' @param cmd_args More arguments passed to the file. Pre-commit handles it as
 #'   described [here](https://pre-commit.com/#arguments-pattern-in-hooks).
+#' @keywords internal
 run_test_impl <- function(path_executable,
                           path_candidate,
                           error_msg,
