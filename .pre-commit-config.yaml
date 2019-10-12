@@ -5,8 +5,7 @@ repos:
     hooks: 
     # any R project
     -   id: style-files
-        args: ['styler::tidyverse_style']
-    -   id: lintr
+    # -   id: lintr
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: readme-rmd-rendered
