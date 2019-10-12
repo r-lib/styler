@@ -110,7 +110,7 @@ autoupdate <- function() {
 
 #' Locate the pre-comit executable
 #'
-#' @param check_if_exist Whether or not to make sure the returned path also
+#' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
 find_pre_commit_exec <- function(check_if_exists = TRUE) {
   final <- getOption("precommithooks.executable") %>%

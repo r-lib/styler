@@ -7,7 +7,7 @@
 find_pre_commit_exec(check_if_exists = TRUE)
 }
 \arguments{
-\item{check_if_exist}{Whether or not to make sure the returned path also
+\item{check_if_exists}{Whether or not to make sure the returned path also
 exists.}
 }
 \description{
