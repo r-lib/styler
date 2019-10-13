@@ -130,6 +130,8 @@ notably
   - Adding styler as a fixer to the [ale
     Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966)
     for VIM.
+  - Adding styler to [Emacs with
+    reformatter](https://github.com/r-lib/styler/issues/517#issuecomment-541446109).
 
 ## Further resources
 
