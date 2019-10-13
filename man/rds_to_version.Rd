@@ -2,7 +2,7 @@
 % Please edit documentation in R/testing.R
 \name{rds_to_version}
 \alias{rds_to_version}
-\title{Convert a serialized R object to a certaion verion.}
+\title{Convert a serialized R object to a certaion version.}
 \usage{
 rds_to_version(path, version = 2)
 }

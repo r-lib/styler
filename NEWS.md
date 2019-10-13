@@ -33,7 +33,7 @@
 
 * Escape characters in roxygen code examples are now correctly escaped (#512).
 
-* Special characters such as `\n` in strings are now preseved in text and not 
+* Special characters such as `\n` in strings are now preserved in text and not 
   turned into literal values like a line break (#554).
 
 * Style selection Addin now preserves line break when the last line selected is

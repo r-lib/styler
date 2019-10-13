@@ -1,6 +1,6 @@
 #' Set spaces around operators
 #'
-#' Alignement is kept, if detected.
+#' Alignment is kept, if detected.
 #' @include token-define.R
 #' @keywords internal
 #' @include token-define.R

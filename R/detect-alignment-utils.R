@@ -140,7 +140,7 @@ alignment_serialize <- function(pd_sub) {
   }
 }
 
-#' Check if spacing around comma is correcr
+#' Check if spacing around comma is correct
 #'
 #' At least one space after comma, none before, for all but the last comma on
 #' the line
