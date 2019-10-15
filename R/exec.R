@@ -25,6 +25,9 @@ derive_path_precommit_exec <- function() {
   tryCatch(
     {
       ls <- reticulate::conda_list()
+      cat("ls is:", ls)
+      message("ls is:", ls)
+
       path_reticulate <- fs::path_dir(ls[ls == "r-reticulate", ]$python[1])
       derived <- fs::path(path_reticulate, "pre-commit")
       unname(ifelse(fs::file_exists(derived), derived, ""))
