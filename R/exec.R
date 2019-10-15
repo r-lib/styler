@@ -36,6 +36,7 @@ derive_path_precommit_exec <- function() {
       cat("derived: ", derived)
       out <- unname(ifelse(fs::file_exists(derived), derived, ""))
       cat("derived that exists: ", out)
+      cat("directory", paste(fs::dir_ls("C:/conda/envs/r-reticulate/")))
       out
     },
     error = function(e) ""
