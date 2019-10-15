@@ -71,7 +71,7 @@ run_test_impl <- function(path_executable,
   path_stderr <- tempfile()
   withr::with_dir(
     fs::path_dir(path_candidate_temp),
-    { 
+    {
       # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
       system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
         args = c(path_executable, cmd_args, fs::path_file(path_candidate_temp)),

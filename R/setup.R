@@ -14,7 +14,7 @@
 #' @family helpers
 #' @export
 use_precommit <- function(force = FALSE,
-                          open = TRUE, 
+                          open = TRUE,
                           path_root = here::here()) {
   withr::with_dir(path_root, {
     if (!is_installed()) {
@@ -87,4 +87,3 @@ autoupdate <- function() {
     "Ran `pre-commit autoupdate` to get the latest version of the hooks."
   ))
 }
-
