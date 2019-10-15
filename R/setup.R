@@ -41,6 +41,10 @@ install_system <- function() {
     usethis::ui_done("Sucessfully installed pre-commit on your system.")
     usethis::ui_todo("To use it with this project, run `precommit::use_precommit()`")
     options(precommit.executable = derive_path_precommit_exec())
+  } else {
+    path_exec <- find_pre_commit_exec(check_if_exists = FALSE)
+    usethis::ui_info(paste0("pre-commit already installed at ", path_exec, "."))
+
   }
 }
 
