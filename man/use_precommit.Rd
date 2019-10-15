@@ -4,11 +4,9 @@
 \alias{use_precommit}
 \title{Set up pre-commit}
 \usage{
-use_precommit(path_root = here::here(), force = FALSE, open = TRUE)
+use_precommit(force = FALSE, open = TRUE, path_root = here::here())
 }
 \arguments{
-\item{path_root}{The path to the root directory of your project.}
-
 \item{force}{Whether to replace an existing config file.}
 
 \item{open}{Whether or not to open the .pre-commit-config.yaml after
@@ -19,7 +17,7 @@ Set up pre-commit
 }
 \details{
 \itemize{
-\item installs pre-commit in your current directory with.
+\item installs pre-commit in your current directory.
 \item sets up a template \code{.pre-commit-config.yaml}.
 \item autoupdates the template to make sure you get the latest versions of the
 hooks.

@@ -34,7 +34,8 @@ install_precommit <- function() {
 #'   project, but you will be able to use it in other projects. With "global",
 #'   you remove the pre-commit executable in the virtual python environment
 #'   r-reticulate so it won't be available in any project.
-#' @param path_root
+#' @inheritParams fallback_doc
+#' @export
 uninstall_precommit <- function(scope = "repo",
                                 ask = "global",
                                 path_root = ".") {
