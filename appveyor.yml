@@ -46,6 +46,15 @@ environment:
   # Please follow https://ci.appveyor.com/tools/encrypt .
   #GITHUB_PAT:
   #  secure: VXO22OHLkl4YhVIomSMwCZyOTx03Xf2WICaVng9xH7gISlAg8a+qrt1DtFtk8sK5
+  PYTHON: "C:\\conda"
+  CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\ci-helpers\\appveyor\\windows_sdk.cmd"
+  PYTHON_ARCH: "64" # needs to be set for CMD_IN_ENV to succeed. If a mix
+                    # of 32 bit and 64 bit builds are needed, move this
+                    # to the matrix section.
+  #CONDA_CHANNELS: "https://conda.anaconda.org/t/%ANACONDA_ORG_TOKEN%/binstar conda-kapsel"
+  #CONDA_DEPENDENCIES: "pip setuptools=23.0.0 clyent pillow psutil nbformat anaconda-project mock"
+  #PIP_DEPENDENCIES_2: "coverage==3.7.1"
+  PYTHON_VERSION: "2.7"
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
