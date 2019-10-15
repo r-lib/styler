@@ -1,28 +1,33 @@
 #' Set up pre-commit
 #'
 #' @details
-#' * installs pre-commit in your current directory with.
+#' * installs pre-commit in your current directory.
 #' * sets up a template `.pre-commit-config.yaml`.
 #' * autoupdates the template to make sure you get the latest versions of the
 #'   hooks.
 #' * Open the config file if RStudio is running.
 #'
-#' @param path_root The path to the root directory of your project.
 #' @param force Whether to replace an existing config file.
 #' @param open Whether or not to open the .pre-commit-config.yaml after
 #'   it's been placed in your repo.
+#' @inheritParams fallback_doc
 #' @family helpers
 #' @export
-use_precommit <- function(path_root = here::here(),
-                          force = FALSE,
-                          open = TRUE) {
+use_precommit <- function(force = FALSE,
+                          open = TRUE, 
+                          path_root = here::here()) {
   withr::with_dir(path_root, {
     if (!is_installed()) {
       rlang::abort(paste0(
-        "pre-commit is not installed on your system. Please install it with ",
+        "pre-commit is not installed on your system (or we can't find it). ",
+        "If you have it installed, please set the R option ",
+        "`precommit.executable` to this ",
+        "path so it can be used to perform various pre-commit commands from R.",
+        "If not, install it with ",
         "`precommit::install_precommit()` or an installation ",
         "method in the official installation guide ",
-        "(https://pre-commit.com/#install)."
+        "(https://pre-commit.com/#install). The latter requires you to set",
+        "the R option `precommit.executable` as well after the installation."
       ))
     }
     install_repo()
@@ -32,34 +37,6 @@ use_precommit <- function(path_root = here::here(),
       open_config()
     }
   })
-}
-
-install_system <- function() {
-  if (!is_installed()) {
-    usethis::ui_info("Installing pre-commit with conda into r-reticulate env.")
-    install_precommit_impl()
-    usethis::ui_done("Sucessfully installed pre-commit on your system.")
-    usethis::ui_todo("To use it with this project, run `precommit::use_precommit()`")
-    options(precommit.executable = derive_path_precommit_exec())
-  } else {
-    path_exec <- find_pre_commit_exec(check_if_exists = FALSE)
-    usethis::ui_info(c("pre-commit already installed at the following locations:", paste0("- ", path_exec)))
-
-  }
-}
-
-#' Install pre-commit on your system.
-#'
-#' This installs pre-commit in the default conda environment of reticulate. It
-#' will be available to use accross different git repositories.
-#' @export
-install_precommit <- function() {
-  install_system()
-}
-
-install_repo <- function() {
-  system2(find_pre_commit_exec(), "install")
-  usethis::ui_done("Sucessfully installed pre-commit for this repo.")
 }
 
 use_precommit_config <- function(force) {
@@ -81,10 +58,9 @@ use_precommit_config <- function(force) {
       ". Use `force = TRUE` to replace .pre-commit-config.yaml"
     ))
   }
-  usethis::ui_done("Copied .pre-commit-config.yaml {path_root}")
+  usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
   if (is_package(".")) {
     usethis::write_union(".Rbuildignore", escaped_name_target)
-    usethis::ui_done("Added .pre-commit-config.yaml to your .Rbuildignore.")
   }
   usethis::ui_todo(c(
     "Edit .precommit-hooks.yaml to (de)activate the hooks you want to use. ",
@@ -101,10 +77,6 @@ install_precommit_impl <- function() {
   reticulate::conda_install(packages = "pre-commit")
 }
 
-is_installed <- function() {
-  fs::file_exists(find_pre_commit_exec(check_if_exists = FALSE))
-}
-
 #' Auto-update your hooks
 #'
 #' Runs `pre-commit autoupdate`.
@@ -116,68 +88,3 @@ autoupdate <- function() {
   ))
 }
 
-#' Locate the pre-comit executable
-#'
-#' @param check_if_exists Whether or not to make sure the returned path also
-#'  exists.
-find_pre_commit_exec <- function(check_if_exists = TRUE) {
-  final <- getOption("precommit.executable") %>%
-    as.character()
-  if (!check_if_exists) {
-    return(final)
-  }
-  if (!fs::file_exists(final)) {
-    rlang::abort(paste0(
-      "pre-commit executable does not exist at ",
-      final,
-      ". Please locate your pre-commit ",
-      "executable and set the R option `precommit.executable` to this ",
-      "path so it can be used to perform various pre-commit commands from R."
-    ))
-  }
-  final
-}
-
-derive_path_precommit_exec <- function() {
-  tryCatch(
-    {
-      ls <- reticulate::conda_list()
-      derived <- fs::path(fs::path_dir(ls[ls == "r-reticulate", ]$python[1]), "pre-commit")
-      unname(ifelse(fs::file_exists(derived), derived, ""))
-    },
-    error = function(e) ""
-  )
-}
-
-
-
-#' Open pre-commit related files
-#'
-#' @details
-#' * `open_config()`: opens the pre-commit config file.
-#' * `open_wordlist()`: opens the the WORDLIST file for the check-spelling hook
-#'   in inst/WORDLIST.
-#' @family helpers
-#' @export
-open_config <- function() {
-  if (rstudioapi::isAvailable()) {
-    rstudioapi::navigateToFile(".pre-commit-config.yaml")
-  } else {
-    rlang::abort("Can't open if you don't have RStudio running.")
-  }
-}
-
-#' @export
-#' @rdname open_config
-open_wordlist <- function() {
-  rstudioapi::navigateToFile("inst/WORDLIST")
-}
-
-
-
-is_package <- function(base_path = here::here()) {
-  res <- tryCatch(rprojroot::find_package_root_file(path = base_path),
-    error = function(e) NULL
-  )
-  !is.null(res)
-}
