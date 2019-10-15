@@ -13,8 +13,10 @@ install:
   - cmd: Rscript -e "getOption('repos')"
   - cmd: Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
   - cmd: Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
-  - cmd: Rscript -e "remotes::install_cran('tic', type = 'binary', upgrade = 'always'); print(tic::dsl_load()); tic::prepare_all_stages()"
-
+  - cmd: Rscript -e "remotes::install_github('ropenscilabs/tic'); print(tic::dsl_load()); tic::prepare_all_stages()"
+  - git clone https://github.com/StatisKit/appveyor-ci.git appveyor-ci
+  - cd appveyor-ci
+  - call install.bat
 cache:
 - C:\RLibrary
 
