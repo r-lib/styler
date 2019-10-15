@@ -41,7 +41,7 @@ test_that("can install pre-commit", {
       uninstall_precommit(scope = "repo", path_root = tempdir)
     },
     paste(
-      "Uninstalled pre-commit from repo scope.*",
+      "Uninstalled pre-commit from repo scope.*"
     )
   )
 })
