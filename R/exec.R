@@ -2,6 +2,7 @@
 #'
 #' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
+#' @export
 find_pre_commit_exec <- function(check_if_exists = TRUE) {
   final <- getOption("precommit.executable") %>%
     as.character()
