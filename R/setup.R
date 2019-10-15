@@ -39,6 +39,7 @@ install_system <- function() {
     usethis::ui_info("Installing pre-commit with conda into r-reticulate env.")
     install_precommit_impl()
     usethis::ui_done("Sucessfully installed pre-commit on your system.")
+    usethis::ui_todo("To use it with this project, run `precommit::use_precommit()`")
     options(precommit.executable = derive_path_precommit_exec())
   }
 }
