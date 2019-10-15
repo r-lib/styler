@@ -34,7 +34,9 @@ derive_path_precommit_exec <- function() {
       cat("path_reticulate: ", path_reticulate)
       derived <- fs::path(path_reticulate, "pre-commit")
       cat("derived: ", derived)
-      unname(ifelse(fs::file_exists(derived), derived, ""))
+      out <- unname(ifelse(fs::file_exists(derived), derived, ""))
+      cat("derived that exists: ", out)
+      out
     },
     error = function(e) ""
   )
