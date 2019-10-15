@@ -43,7 +43,7 @@ install_system <- function() {
     options(precommit.executable = derive_path_precommit_exec())
   } else {
     path_exec <- find_pre_commit_exec(check_if_exists = FALSE)
-    usethis::ui_info(paste0("pre-commit already installed at ", path_exec, "."))
+    usethis::ui_info(c("pre-commit already installed at the following locations:", paste0("- ", path_exec)))
 
   }
 }
