@@ -54,7 +54,7 @@ environment:
   #CONDA_CHANNELS: "https://conda.anaconda.org/t/%ANACONDA_ORG_TOKEN%/binstar conda-kapsel"
   #CONDA_DEPENDENCIES: "pip setuptools=23.0.0 clyent pillow psutil nbformat anaconda-project mock"
   #PIP_DEPENDENCIES_2: "coverage==3.7.1"
-  PYTHON_VERSION: "2.7"
+  PYTHON_VERSION: "3.6"
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
