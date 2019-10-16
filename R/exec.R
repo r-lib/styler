@@ -32,11 +32,11 @@ derive_path_precommit_exec <- function() {
 
       path_reticulate <- fs::path_dir(ls[ls$name == "r-reticulate", "python"][1])
       cat("path_reticulate: ", path_reticulate)
-      derived <- fs::path(path_reticulate, "pre-commit")
+      derived <- fs::path(path_reticulate, "Scripts", "pre-commit.exe")
       cat("derived: ", derived)
       out <- unname(ifelse(fs::file_exists(derived), derived, ""))
       cat("derived that exists: ", out)
-      cat("directory", paste(fs::dir_ls("C:/conda/envs/r-reticulate/", recurse = TRUE, regexp = "commit")))
+      # cat("directory", paste(fs::dir_ls("C:/conda/envs/r-reticulate/", recurse = TRUE, regexp = "commit")))
       out
     },
     error = function(e) ""
