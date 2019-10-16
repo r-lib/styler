@@ -115,8 +115,9 @@ map(x, f,
 
 **Examples**
 
+These typical examples match stylers definition of alignment.
+
 ```{r}
-# tribble
 tibble::tribble(
   ~key_here,  ~value_here,
   "left",         "right", # comments are allowed
