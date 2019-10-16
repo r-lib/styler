@@ -69,12 +69,17 @@ run_test("spell-check", suffix = "-fail.md", error_msg = "Spell check failed")
 # success with wordlist
 test_temp <- function() {
   tempdir <- tempdir()
+  cat("tempdir is", tempdir)
   path_inst <- fs::path(tempdir, "inst")
+  cat("path inst is", path_inst)
   path_wordlist <- fs::path(path_inst, "WORDLIST")
+  cat("path_wordlist: ", path_wordlist)
   fs::dir_create(path_inst)
+  cat("dir created")
   fs::file_create(path_wordlist)
+  cat("file created")
   writeLines(c("fsssile", ""), path_wordlist)
-
+  cat("running test")
   run_test("spell-check",
     suffix = "-wordlist-success.md",
     error_msg = NULL,
