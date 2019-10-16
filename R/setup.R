@@ -82,7 +82,7 @@ install_precommit_impl <- function() {
 #' Runs `pre-commit autoupdate`.
 #' @export
 autoupdate <- function() {
-  system2(find_pre_commit_exec(), "autoupdate")
+  system2(path_pre_commit_exec(), "autoupdate")
   usethis::ui_done(paste0(
     "Ran `pre-commit autoupdate` to get the latest version of the hooks."
   ))

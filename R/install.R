@@ -9,9 +9,9 @@ install_system <- function() {
     usethis::ui_todo(
       "To use it with this project, run `precommit::use_precommit()`"
     )
-    options(precommit.executable = derive_path_precommit_exec())
+    options(precommit.executable = path_derive_precommit_exec())
   } else {
-    path_exec <- find_pre_commit_exec(check_if_exists = FALSE)
+    path_exec <- path_pre_commit_exec(check_if_exists = FALSE)
     usethis::ui_info(c(
       "pre-commit already installed at the following locations:",
       paste0("- ", path_exec)
@@ -74,7 +74,7 @@ uninstall_precommit_system <- function(ask = TRUE) {
 
     if (trimws(tolower(answer)) == "yes") {
       is_conda_installation <- grepl(
-        "anaconda[0-9]/envs/.*/bin/pre-commit",
+        "/envs/r-reticulate/(bin|Scripts)/pre-commit(\\.exe)?",
         getOption("precommit.executable")
       )
       if (!is_conda_installation) {
@@ -85,7 +85,7 @@ uninstall_precommit_system <- function(ask = TRUE) {
           "Can only uninstall when installed with conda. ",
           "Please remove manually or set the R option to the appropriate ",
           "executable that lives in a conda environment. You find it with",
-          "`precommit::find_pre_commit_exec()`."
+          "`precommit::path_pre_commit_exec()`."
         ))
       } else {
         out <- system2(
@@ -110,7 +110,7 @@ uninstall_precommit_system <- function(ask = TRUE) {
 uninstall_precommit_repo <- function(ask) {
   if (ask) {
     answer <- readline(paste0(
-      "Are you sure you want to remove pre-commit from this repo? ", 
+      "Are you sure you want to remove pre-commit from this repo? ",
       "Then type 'yes'."
     ))
     if (trimws(tolower(answer)) == "yes") {
@@ -122,7 +122,7 @@ uninstall_precommit_repo <- function(ask) {
   if (continue) {
     success <- grepl(
       "pre-commit uninstalled",
-      system2(find_pre_commit_exec(), "uninstall", stdout = TRUE)
+      system2(path_pre_commit_exec(), "uninstall", stdout = TRUE)
     )
     if (isTRUE(success)) {
       usethis::ui_done("Uninstalled pre-commit from repo scope.")
@@ -152,10 +152,10 @@ uninstall_precommit_repo <- function(ask) {
 }
 
 install_repo <- function() {
-  system2(find_pre_commit_exec(), "install")
+  system2(path_pre_commit_exec(), "install")
   usethis::ui_done("Sucessfully installed pre-commit for this repo.")
 }
 
 is_installed <- function() {
-  fs::file_exists(find_pre_commit_exec(check_if_exists = FALSE))
+  fs::file_exists(path_pre_commit_exec(check_if_exists = FALSE))
 }

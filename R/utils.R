@@ -4,3 +4,7 @@ is_package <- function(base_path = here::here()) {
   )
   !is.null(res)
 }
+
+is_windows <- function() {
+  identical(.Platform$OS.type, "windows")
+}

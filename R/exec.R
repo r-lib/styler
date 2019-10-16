@@ -3,7 +3,7 @@
 #' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
 #' @export
-find_pre_commit_exec <- function(check_if_exists = TRUE) {
+path_pre_commit_exec <- function(check_if_exists = TRUE) {
   final <- getOption("precommit.executable") %>%
     as.character()
   if (!check_if_exists) {
@@ -21,23 +21,19 @@ find_pre_commit_exec <- function(check_if_exists = TRUE) {
   final
 }
 
-derive_path_precommit_exec <- function() {
+
+path_derive_precommit_exec <- function() {
   tryCatch(
     {
       ls <- reticulate::conda_list()
 
-      cat("ls is:", nrow(ls))
-      cat("python is:", ls$python)
-      cat("name is:", ls$name)
-
       path_reticulate <- fs::path_dir(ls[ls$name == "r-reticulate", "python"][1])
-      cat("path_reticulate: ", path_reticulate)
-      derived <- fs::path(path_reticulate, "Scripts", "pre-commit.exe")
-      cat("derived: ", derived)
-      out <- unname(ifelse(fs::file_exists(derived), derived, ""))
-      cat("derived that exists: ", out)
-      # cat("directory", paste(fs::dir_ls("C:/conda/envs/r-reticulate/", recurse = TRUE, regexp = "commit")))
-      out
+      derived <- fs::path(
+        path_reticulate,
+        ifelse(is_windows(), "Scripts", ""),
+        ifelse(is_windows(), "pre-commit.exe", "pre-commit")
+      )
+      unname(ifelse(fs::file_exists(derived), derived, ""))
     },
     error = function(e) ""
   )

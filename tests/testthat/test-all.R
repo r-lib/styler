@@ -74,7 +74,6 @@ test_temp <- function() {
   fs::dir_create(path_inst)
   fs::file_create(path_wordlist)
   writeLines(c("fsssile", ""), path_wordlist)
-  on.exit(fs::file_delete(path_wordlist))
 
   run_test("spell-check",
     suffix = "-wordlist-success.md",
@@ -102,7 +101,6 @@ test_temp <- function(suffix, error_msg) {
   new_desc <- desc::description$new(path_desc_temp)
   new_desc$set_dep("bliblablupp")
   new_desc$write()
-  on.exit(fs::file_delete(path_desc_temp))
   run_test("deps-in-desc",
     suffix = suffix,
     error_msg = error_msg,
