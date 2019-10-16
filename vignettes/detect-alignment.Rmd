@@ -115,7 +115,7 @@ map(x, f,
 
 **Examples**
 
-These typical examples match stylers definition of alignment.
+These typical examples match styler's definition of alignment.
 
 ```{r}
 tibble::tribble(
