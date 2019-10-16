@@ -7,8 +7,8 @@
   This is also reflected in the invisible return value of the function (#522).
 
 * `style_file()` and friends do not write content back to a file when styling
-  does not cause any changes in the file. This means the modification date of
-  files styled is only changed when the content is changed (#532).
+  does not cause any changes in the file. This means the modification date of 
+  styled files is only changed when the content is changed (#532).
 
 ## New features
 
@@ -16,9 +16,9 @@
   [definition for aligned function calls](https://styler.r-lib.org/articles/detect-alignment.html)
   (#537).
 
-* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
-  explicitly handled, as opposed previously where it was just treated as two
-  consecutive curly braces (#528).
+* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now 
+  explicitly handled, where previously it was just treated as two consecutive 
+  curly braces (#528).
 
 * `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and
   hidden files are now also styled (#530).
