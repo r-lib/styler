@@ -2,7 +2,7 @@
 % Please edit documentation in R/detect-alignment-utils.R
 \name{alignment_has_correct_spacing_around_comma}
 \alias{alignment_has_correct_spacing_around_comma}
-\title{Check if spacing around comma is correcr}
+\title{Check if spacing around comma is correct}
 \usage{
 alignment_has_correct_spacing_around_comma(pd_sub)
 }

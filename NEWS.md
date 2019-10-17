@@ -1,4 +1,4 @@
-# styler 1.1.1.9000
+# styler 1.2.0
 
 ## Breaking changes
 
@@ -7,8 +7,8 @@
   This is also reflected in the invisible return value of the function (#522).
 
 * `style_file()` and friends do not write content back to a file when styling
-  does not cause any changes in the file. This means the modification date of
-  files styled is only changed when the content is changed (#532).
+  does not cause any changes in the file. This means the modification date of 
+  styled files is only changed when the content is changed (#532).
 
 ## New features
 
@@ -16,9 +16,9 @@
   [definition for aligned function calls](https://styler.r-lib.org/articles/detect-alignment.html)
   (#537).
 
-* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
-  explicitly handled, as opposed previously where it was just treated as two
-  consecutive curly braces (#528).
+* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now 
+  explicitly handled, where previously it was just treated as two consecutive 
+  curly braces (#528).
 
 * `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and
   hidden files are now also styled (#530).
@@ -33,7 +33,7 @@
 
 * Escape characters in roxygen code examples are now correctly escaped (#512).
 
-* Special characters such as `\n` in strings are now preseved in text and not 
+* Special characters such as `\n` in strings are now preserved in text and not 
   turned into literal values like a line break (#554).
 
 * Style selection Addin now preserves line break when the last line selected is
@@ -50,6 +50,10 @@
 
 * styler is now available through the pre-commit hook `style-files` in
   https://github.com/lorenzwalthert/pre-commit-hooks.
+
+Thanks to all contributors involved, in particular
+
+[&#x0040;Banana1530](https://github.com/Banana1530), [&#x0040;batpigandme](https://github.com/batpigandme), [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;ellessenne](https://github.com/ellessenne), [&#x0040;Emiller88](https://github.com/Emiller88), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lwjohnst86](https://github.com/lwjohnst86), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;Moohan](https://github.com/Moohan), [&#x0040;nxskok](https://github.com/nxskok), [&#x0040;oliverbeagley](https://github.com/oliverbeagley), [&#x0040;pat-s](https://github.com/pat-s), [&#x0040;reddy-ia](https://github.com/reddy-ia), and [&#x0040;russHyde](https://github.com/russHyde)
 
 # styler 1.1.1
 
