@@ -67,26 +67,11 @@ run_test("spell-check", suffix = "-success.md", error_msg = NULL)
 run_test("spell-check", suffix = "-fail.md", error_msg = "Spell check failed")
 
 # success with wordlist
-test_temp <- function() {
-  tempdir <- tempdir()
-  cat("tempdir is", tempdir)
-  path_inst <- fs::path(tempdir, "inst")
-  cat("path inst is", path_inst)
-  path_wordlist <- fs::path(path_inst, "WORDLIST")
-  cat("path_wordlist: ", path_wordlist)
-  fs::dir_create(path_inst)
-  cat("dir created")
-  fs::file_create(path_wordlist)
-  cat("file created")
-  writeLines(c("fsssile", ""), path_wordlist)
-  cat("running test")
-  run_test("spell-check",
-    suffix = "-wordlist-success.md",
-    error_msg = NULL,
-    copy = path_wordlist
-  )
-}
-test_temp()
+run_test("spell-check",
+  suffix = "-wordlist-success.md",
+  error_msg = NULL,
+  copy = c("inst/WORDLIST" = test_path("in/WORDLIST"))
+)
 
 # success with ignored files
 # basic failure
@@ -99,25 +84,10 @@ run_test("spell-check", suffix = "-language-success.md", cmd_args = "--lang=en_G
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### depds-in-desc                                                           ####
-test_temp <- function(suffix, error_msg) {
-  path_desc <- testthat::test_path("reference-objects/DESCRIPTION")
-  path_desc_temp <- fs::path(tempdir(), fs::path_file(path_desc))
-  fs::file_copy(path_desc, tempdir(), overwrite = TRUE)
-  new_desc <- desc::description$new(path_desc_temp)
-  new_desc$set_dep("bliblablupp")
-  new_desc$write()
-  run_test("deps-in-desc",
-    suffix = suffix,
-    error_msg = error_msg,
-    copy = path_desc_temp
-  )
-}
-
 # succeed (call to library that is in description)
-test_temp(suffix = "-success.R", error_msg = NULL)
-
+run_test("deps-in-desc", suffix = "-success.R", error_msg = NULL)
 # fail (call to library that is not in description)
-test_temp(suffix = "-fail.R", error_msg = "Dependency check failed")
+run_test("deps-in-desc", suffix = "-fail.R", error_msg = "Dependency check failed")
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### lintr                                                                   ####

@@ -21,7 +21,12 @@ can be \code{NULL}. In that case, the \code{comparator} is applied.}
 described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
 
 \item{copy}{Path with files to copy to the temp directory where the test
-is run.}
+is run. If the target destination relative to the temp dir where the hook
+is tested is not identical to the path from where a file should be copied,
+you can pass a named vector. The name is the target directory relative to
+the temp directory where the hook is executed (the temp directory will be
+the working directory at that time) and the value is the path that points
+to the place where the artifact is currently stored.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in

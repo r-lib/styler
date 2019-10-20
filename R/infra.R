@@ -46,7 +46,12 @@ run_test <- function(hook_name,
 #' @param path_candidate The path to a file that should be modified by the
 #'   executable.
 #' @param copy Path with files to copy to the temp directory where the test
-#'   is run.
+#'   is run. If the target destination relative to the temp dir where the hook
+#'   is tested is not identical to the path from where a file should be copied,
+#'   you can pass a named vector. The name is the target directory relative to
+#'   the temp directory where the hook is executed (the temp directory will be
+#'   the working directory at that time) and the value is the path that points
+#'   to the place where the artifact is currently stored.
 #' @param error_msg An expected error message. If no error is expected, this
 #'   can be `NULL`. In that case, the `comparator` is applied.
 #' @param cmd_args More arguments passed to the file. Pre-commit handles it as
@@ -60,9 +65,16 @@ run_test_impl <- function(path_executable,
   expect_success <- is.null(error_msg)
   tempdir <- tempdir()
   if (!is.null(copy)) {
-    new_dirs <- fs::path(tempdir, fs::path_dir(copy))
-    fs::dir_create(new_dirs)
-    paths_copy <- fs::path(new_dirs, fs::path_file(copy))
+    if (is.null(names(copy))) {
+      # no names, take basename
+      new_dirs <- fs::path(tempdir, fs::path_dir(copy))
+      fs::dir_create(new_dirs)
+      paths_copy <- fs::path(new_dirs, fs::path_file(copy))
+    } else {
+      paths_copy <- fs::path(tempdir, names(copy))
+      new_dirs <- fs::path_dir(paths_copy)
+      fs::dir_create(new_dirs)
+    }
     on.exit(fs::file_delete(paths_copy))
     fs::file_copy(copy, paths_copy, overwrite = TRUE)
   }
