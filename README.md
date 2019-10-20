@@ -48,10 +48,9 @@ inspect the changes introduced by the hook and if satisfied, you can
 attempt to commit again. If all hooks pass, the commit is made. You can
 also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you
-succeed, it should look like
-this:
+succeed, it should look like this:
 
-![](/Users/lorenz/datasciencecoursera/precommit/man/figs/screenshot.png)<!-- -->
+![](man/figs/screenshot.png)<!-- -->
 
 See the hooks provided by this repo under `vignette("available-hooks")`.
 You can also add other hooks from other repos, by extending the
