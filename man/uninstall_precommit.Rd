@@ -11,6 +11,11 @@ uninstall_precommit(scope = "repo", ask = "global", path_root = ".")
 project, but you will be able to use it in other projects. With "global",
 you remove the pre-commit executable in the virtual python environment
 r-reticulate so it won't be available in any project.}
+
+\item{ask}{Either "global", "repo" or "none" to determine in which case
+a prompt should show up to let the user confirm his action.#'}
+
+\item{path_root}{The path to the root directory of your project.}
 }
 \description{
 Unistall pre-commit

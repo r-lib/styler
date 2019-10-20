@@ -11,6 +11,8 @@ use_precommit(force = FALSE, open = TRUE, path_root = here::here())
 
 \item{open}{Whether or not to open the .pre-commit-config.yaml after
 it's been placed in your repo.}
+
+\item{path_root}{The path to the root directory of your project.}
 }
 \description{
 Set up pre-commit

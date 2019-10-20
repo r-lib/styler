@@ -34,6 +34,8 @@ install_precommit <- function() {
 #'   project, but you will be able to use it in other projects. With "global",
 #'   you remove the pre-commit executable in the virtual python environment
 #'   r-reticulate so it won't be available in any project.
+#' @param ask Either "global", "repo" or "none" to determine in which case
+#'   a prompt should show up to let the user confirm his action.#'
 #' @inheritParams fallback_doc
 #' @export
 uninstall_precommit <- function(scope = "repo",
@@ -41,21 +43,18 @@ uninstall_precommit <- function(scope = "repo",
                                 path_root = ".") {
   rlang::arg_match(scope, c("repo", "global"))
   rlang::arg_match(ask, c("repo", "global", "both", "none"))
-  withr::with_dir(
-    path_root,
-    {
-      if (scope == "repo") {
-        uninstall_precommit_repo(ask = (ask %in% c("repo", "both")))
-        path_config <- ".pre-commit-config.yaml"
-        if (fs::file_exists(path_config)) {
-          fs::file_delete(path_config)
-          usethis::ui_done("Removed .pre-commit-config.yaml")
-        }
-      } else if (scope == "global") {
-        uninstall_precommit_system(ask = (ask %in% c("global", "both")))
+  withr::with_dir(path_root, {
+    if (scope == "repo") {
+      uninstall_precommit_repo(ask = (ask %in% c("repo", "both")))
+      path_config <- ".pre-commit-config.yaml"
+      if (fs::file_exists(path_config)) {
+        fs::file_delete(path_config)
+        usethis::ui_done("Removed .pre-commit-config.yaml")
       }
+    } else if (scope == "global") {
+      uninstall_precommit_system(ask = (ask %in% c("global", "both")))
     }
-  )
+  })
 }
 
 uninstall_precommit_system <- function(ask = TRUE) {
