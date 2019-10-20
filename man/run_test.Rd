@@ -20,9 +20,13 @@ can be \code{NULL}. In that case, the \code{comparator} is applied.}
 \item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
 described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
 
-\item{comparator}{A function thtat takes two paths as arguments: One to
-a file \emph{after} the hooks has been applied and one to a reference file. Only
-used if \code{error_msg} is not \code{NULL}.}
+\item{copy}{Path with files to copy to the temp directory where the test
+is run. If the target destination relative to the temp dir where the hook
+is tested is not identical to the path from where a file should be copied,
+you can pass a named vector. The name is the target directory relative to
+the temp directory where the hook is executed (the temp directory will be
+the working directory at that time) and the value is the path that points
+to the place where the artifact is currently stored.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in

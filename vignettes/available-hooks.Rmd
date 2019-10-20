@@ -1,0 +1,43 @@
+---
+title: "Available hooks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{available-hooks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This repocontains a collection of git pre-commit hooks to use with
+[pre-commit.com](https://pre-commit.com). Currently, we have:
+
+* `style-files`: A hook to style files with [styler](https://styler.r-lib.org).
+  Only commit code corresponding to the tidyverse style guide. NOTE: devel
+  version of styler strongly suggested. Install via
+  `remotes::install_github('r-lib/styler')`. To customize, see *Hooks arguments*
+  below.
+
+* `readme-rmd-rendered`: Make sure `README.Rmd` hasn't been edited more recently
+  than `README.md`, i.e. remind you to render the `.Rmd` to `.md` before
+  committing.
+
+* `parsable-R`: Checks if your `.R` files are "valid" R code.
+
+* `no-browser-statement`: Guarantees you that you don't accidentally commit code
+  with a `browser()` statement in it.
+
+* `spell-check`: Checks spelling with `spelling::spell_check_files()`. Excluded
+  are R and python scrips as well as .gitignore. To customize, see *Hooks
+  arguments* below.
+
+* `roxygenize`: A hook to run `roxygen2::roxygenize()`. Makes sure you commit
+  your `.Rd` changes with the source changes.
+
+* `deps-in-desc`: Checks if packagese used in the `pkgname::fun()` syntax are
+  listed in your DESCRIPTION file.
+
+* `use-tidy-description`: A hook to run `usethis::use_tidy_description()` to
+  ensure dependencies are ordered alphabetically and fields are in standard
+  order.
+
+* `lintr`: A hook to run `lintr::lint()` to check that R files are lint free.
+

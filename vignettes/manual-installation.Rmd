@@ -1,0 +1,41 @@
+---
+title: "Manual installation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{manual-installation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Apart from `precommit::use_precommit()`, you can install pre-commit
+manually as described in the [official
+documentation](https://pre-commit.com/#intro). Then, set the R option
+`precommit.executable` to the path where the pre-commit executable lives.
+
+If you've installed pre-commit, you can add it to a specific project by adding a
+`.pre-commit-config.yaml` file that has a structure like this:
+
+``` yaml
+repos:
+-   repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.0.0.9016
+    hooks: 
+    -   id: style-files
+    -   id: parsable-R
+    -   id: no-browser-statement
+    -   id: readme-rmd-rendered
+    -   id: roxygenize
+    -   id: use-tidy-description
+    -   id: deps-in-desc
+    -   id: lintr
+```
+The `repo` key points to the place where the source code of the hooks are stored, 
+not the repo you want to apply them to.
+
+Some hooks also take arguments, see `vignette("hook-arguments")`.
+
+If you want to see the file `.pre-commit-config.yaml` in RStudio, you have to
+enable "Show Hidden Files" in the *Files* Pane of RStudio under *More*.
+
+Next, run `pre-commit install` in your repo and you are done.
+

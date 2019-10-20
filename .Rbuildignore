@@ -1,3 +1,13 @@
 ^README\.Rmd$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$
+^\.pre-commit-hooks\.yaml$
+^\.travis\.yml$
+^CONTRIBUTING\.md$
+^appveyor\.yml$
+^tic\.R$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.pre-commit-config\.yaml$

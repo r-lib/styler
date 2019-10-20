@@ -1,6 +1,7 @@
-Package: precommithooks
+Package: precommit
+Description: Useful pre-commit hooks for R.
 Title: Pre commit hooks
-Version: 0.0.0.9007
+Version: 0.0.0.9017
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Imports:
@@ -16,7 +17,13 @@ Imports:
     testthat,
     tic,
     usethis,
-    withr
+    withr,
+    rstudioapi,
+    rlang,
+    rprojroot,
+    desc,
+    reticulate,
+    magrittr
 Remotes: 
     lorenzwalthert/oneliner,
     r-lib/styler,
@@ -24,3 +31,8 @@ Remotes:
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+License: GPL-3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

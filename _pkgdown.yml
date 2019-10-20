@@ -1,0 +1,14 @@
+destination: docs
+navbar:
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: 'Why hooks?'
+        href: articles/why-hooks.html
+      - text: 'Manual Installation'
+        href: articles/manual-installation.html
+      - text: 'Available hooks'
+        href: articles/available-hooks.html
+      - text: 'Hook arguments'
+        href: articles/hook-arguments.html
