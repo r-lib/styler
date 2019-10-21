@@ -8,7 +8,7 @@ vignette: >
 ---
 
 This repocontains a collection of git pre-commit hooks to use with
-[pre-commit.com](https://pre-commit.com). Currently, we have:
+[pre-commit.com](https://pre-commit.com). Currently, this repo hosts:
 
 * `style-files`: A hook to style files with [styler](https://styler.r-lib.org).
   Only commit code corresponding to the tidyverse style guide. NOTE: devel
@@ -40,4 +40,7 @@ This repocontains a collection of git pre-commit hooks to use with
   order.
 
 * `lintr`: A hook to run `lintr::lint()` to check that R files are lint free.
+
+Other repos also host hooks, many are listed
+[here](https://pre-commit.com/hooks.html).
 
