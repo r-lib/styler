@@ -1,6 +1,7 @@
 # precommit 0.0.0.9017
 
-- **BREAKING:** If you used precommit < 0.0.0.9017, you can link your existing 
+- **BREAKING:** If you used precommit < 0.0.0.9017 (and if you choose a 
+  different installation strategy than `precommit::install_precommit()), you can link your existing 
   executable by setting the R option `precommit.executable` to the path where 
   you stored the pre-commit executable.
   
