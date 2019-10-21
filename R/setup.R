@@ -84,9 +84,14 @@ install_precommit_impl <- function() {
 #' @export
 autoupdate <- function(path_root = here::here()) {
   withr::with_dir(path_root, {
-    system2(path_pre_commit_exec(), "autoupdate")
-    usethis::ui_done(paste0(
+    out <- system2(path_pre_commit_exec(), "autoupdate")
+    if (out == 0) {
+      usethis::ui_done(paste0(
       "Ran `pre-commit autoupdate` to get the latest version of the hooks."
     ))
+    } else {
+      rlang::abort("Running precommit autoupdate failed.")
+    }
   })
+  
 }
