@@ -97,7 +97,7 @@ run_test_impl <- function(path_executable,
     # file not changed + no stderr
     contents <- readLines(path_stderr)
     if (!identical(contents, character(0))) {
-      testthat::fail("Expected: No error. Found:", contents, call. = FALSE)
+      testthat::fail("Expected: No error. Found:", contents)
     }
     testthat::expect_equivalent(candidate, reference)
   } else if (!expect_success) {
