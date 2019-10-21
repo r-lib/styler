@@ -19,6 +19,10 @@ if (file.exists(path_wordlist)) {
   ignore <- readLines(path_wordlist, encoding = "UTF-8")
   action <- "update"
 } else {
+  if (!dir.exists(dirname(path_wordlist))) {
+    dir.create(dirname(path_wordlist))
+  }
+  file.create(path_wordlist)
   ignore <- character()
   action <- "create"
 }
@@ -32,13 +36,16 @@ spelling_errors <- spelling::spell_check_files(
 if (nrow(spelling_errors) > 0) {
   cat("The following spelling errors were found:\n" )
   print(spelling_errors)
+  ignore <- sort(unique(c(ignore, spelling_errors$word)))
+  writeLines(c(ignore, ""), path_wordlist)
   cat(
-    "You can", action, "the file inst/WORDLIST if some of the shown words are",
-    " not errors, but you want them to be included in your dictionary. If ", 
-    "these are many, you can also interactively run ", 
-    "`cat(spelling::spell_check_files('paths/to/your/files'), sep = '\\n')` ",
-    "on the files you just tried to commit. This gives you a list of files ", 
-    "you can c/p into your inst/WORDLIST file easily."
+    "All spelling errors found were copied to inst/WORDLIST assuming they were", 
+    "not spelling errors and will be ignored in the future. Please ", 
+    "review the above list and for each word that is an actual typo:\n", 
+    "- fix it in the source code.\n",
+    "- remove it again manually from inst/WORDLIST to make sure it's not\n", 
+    "  ignored in the future.\n",
+    "Then, try commiting again.\n"
   )
   stop("Spell check failed", call. = FALSE)
 }
