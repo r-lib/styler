@@ -8,8 +8,19 @@ vignette: >
 ---
 
 Arguments are specified as described in the [pre-commit.com
-documentation](https://pre-commit.com/#passing-arguments-to-hooks), that is, as
-children in the `.pre-commit-config.yaml`. The following hooks take arguments:
+documentation](https://pre-commit.com/#passing-arguments-to-hooks), i.e. the 
+arguments for the `style-files` hook can be set like this:
+
+```{yaml}
+repos:
+-   repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.0.0.9016
+    hooks: 
+    -   id: style-files
+        args: [--style_pkg=styler, --style_fun=tidyverse_style]
+```
+
+The following hooks take arguments:
 
 * `style-files`: Argument `style_pkg` and `style_fun` if you want to use another
   style guide than the default. The below example styles code according to the
