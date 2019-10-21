@@ -27,6 +27,9 @@ example:
 
 ![](https://media.giphy.com/media/Z9KJUt3zRYfhUDmLXG/giphy.gif)
 
+To learn more about available hooks and why to use them consult the 
+[online documentation](https://lorenzwalthert.github.io/precommit/index.html).
+
 ## Installation
 
 Please make sure you have conda installed. The rest can be handled from R:
