@@ -6,7 +6,7 @@ navbar:
       menu:
       - text: 'Why hooks?'
         href: articles/why-use-hooks.html
-      - text: 'Manual Installation'
+      - text: 'Manual installation'
         href: articles/manual-installation.html
       - text: 'Available hooks'
         href: articles/available-hooks.html

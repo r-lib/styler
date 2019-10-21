@@ -2,7 +2,7 @@
 title: "Why is this useful?"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{why-use-this}
+  %\VignetteIndexEntry{why-use-hooks}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

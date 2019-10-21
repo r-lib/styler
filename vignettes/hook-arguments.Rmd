@@ -1,8 +1,8 @@
 ---
-title: "Hook-arguments"
+title: "Hook arguments"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Hook-arguments}
+  %\VignetteIndexEntry{hook-arguments}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
