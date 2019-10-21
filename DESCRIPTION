@@ -10,10 +10,9 @@ Imports:
     git2r,
     here,
     lintr,
-    oneliner (>= 0.1.0),
     roxygen2,
     spelling,
-    styler (>= 1.1.1.9002),
+    styler (>= 1.2),
     testthat,
     tic,
     usethis,
@@ -26,7 +25,6 @@ Imports:
     magrittr
 Remotes: 
     lorenzwalthert/oneliner,
-    r-lib/styler,
     ropenscilabs/tic
 URL: https://github.com/lorenzwalthert/precommit
 Encoding: UTF-8
@@ -36,5 +34,6 @@ RoxygenNote: 6.1.1
 License: GPL-3
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    oneliner (>= 0.1.0)
 VignetteBuilder: knitr
