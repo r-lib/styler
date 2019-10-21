@@ -80,10 +80,13 @@ install_precommit_impl <- function() {
 #' Auto-update your hooks
 #'
 #' Runs `pre-commit autoupdate`.
+#' @inheritParams fallback_doc
 #' @export
-autoupdate <- function() {
-  system2(path_pre_commit_exec(), "autoupdate")
-  usethis::ui_done(paste0(
-    "Ran `pre-commit autoupdate` to get the latest version of the hooks."
-  ))
+autoupdate <- function(path_root = here::here()) {
+  withr::with_dir(path_root, {
+    system2(path_pre_commit_exec(), "autoupdate")
+    usethis::ui_done(paste0(
+      "Ran `pre-commit autoupdate` to get the latest version of the hooks."
+    ))
+  })
 }

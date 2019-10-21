@@ -4,7 +4,10 @@
 \alias{autoupdate}
 \title{Auto-update your hooks}
 \usage{
-autoupdate()
+autoupdate(path_root = here::here())
+}
+\arguments{
+\item{path_root}{The path to the root directory of your project.}
 }
 \description{
 Runs \code{pre-commit autoupdate}.

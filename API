@@ -2,10 +2,10 @@
 
 ## Exported functions
 
-autoupdate()
+autoupdate(path_root = here::here())
 install_precommit()
-open_config()
-open_wordlist()
+open_config(path_root = here::here())
+open_wordlist(path_root = here::here())
 path_pre_commit_exec(check_if_exists = TRUE)
 uninstall_precommit(scope = "repo", ask = "global", path_root = ".")
 use_precommit(force = FALSE, open = TRUE, path_root = here::here())
