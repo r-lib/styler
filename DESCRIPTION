@@ -30,7 +30,8 @@ Remotes:
     ropenscilabs/tic
 URL: https://github.com/lorenzwalthert/precommit
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
+Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
+    "collate", "pkgapi::api_roclet"))
 RoxygenNote: 6.1.1
 License: GPL-3
 Suggests: 

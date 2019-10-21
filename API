@@ -1,0 +1,11 @@
+# API for precommit package
+
+## Exported functions
+
+autoupdate()
+install_precommit()
+open_config()
+open_wordlist()
+path_pre_commit_exec(check_if_exists = TRUE)
+uninstall_precommit(scope = "repo", ask = "global", path_root = ".")
+use_precommit(force = FALSE, open = TRUE, path_root = here::here())
