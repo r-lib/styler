@@ -1,5 +1,16 @@
 # precommit 0.0.0.9017
 
-* Adding tools to work with hooks: ` install_precommit()`, `use_precommit()`, `open_config()` and 
-  `open_wordlist()`.
-* Make repo a fully R CMD CHECK compliant R package (includes moving hooks to `inst/bin` from `bin`.)
+- **BREAKING:** If you used precommit < 0.0.0.9017, you can link your existing 
+  executable by setting the R option `precommit.executable` to the path where 
+  you stored the pre-commit executable.
+  
+- Adding tools to work with hooks: ` install_precommit()`, `use_precommit()`,
+  `uninstall_precommit()`, `open_config()` and `open_wordlist()` using conda 
+  environments on all plattforms.
+
+- Make repo a fully R CMD CHECK compliant R package (includes moving hooks to
+  `inst/bin` from `bin`.)
+
+- renamed repo from pre-commit-hooks to precommit.
+
+- added pkgdown website, restructured README.
