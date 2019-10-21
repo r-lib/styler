@@ -6,8 +6,7 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  fig.path = "man/figures/"
 )
 ```
 
@@ -58,7 +57,9 @@ again. If all hooks pass, the commit is made. You can also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you succeed, it
 should look like this:
 
-![](./man/figs/screenshot.png)
+```{r, echo = FALSE}
+knitr::include_graphics("man/figs/screenshot.png")
+```
 
 See the hooks provided by this repo under `vignette("available-hooks")`. You can
 also add other hooks from other repos, by extending the
