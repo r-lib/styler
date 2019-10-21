@@ -58,7 +58,7 @@ hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you succeed, it
 should look like this:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("man/figs/screenshot.png")
+knitr::include_graphics("man/figures/screenshot.png")
 ```
 
 See the hooks provided by this repo under `vignette("available-hooks")`. You can
