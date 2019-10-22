@@ -24,6 +24,18 @@
 #'
 #' @importFrom purrr map_int map_lgl map compact
 #' @importFrom rlang seq2
+#' @examples
+#' library("magrittr")
+#' transformers <- tidyverse_style()
+#' pd_nested <- styler:::compute_parse_data_nested(c(
+#'   "call(",
+#'   "  ab = 1,",
+#'   "  a  = 2",
+#'   ")"
+#' )) %>%
+#' styler:::post_visit(transformers$initialize)
+#' nest <- pd_nested$child[[1]]
+#' styler:::token_is_on_aligned_line(nest)
 token_is_on_aligned_line <- function(pd_flat) {
 
   line_idx <- 1 + cumsum(pd_flat$lag_newlines)

@@ -34,3 +34,16 @@ this reason, the following approach is taken:
 sure we can stop as soon as we found that columns are not aligned.
 }
 }
+\examples{
+library("magrittr")
+transformers <- tidyverse_style()
+pd_nested <- styler:::compute_parse_data_nested(c(
+  "call(",
+  "  ab = 1,",
+  "  a  = 2",
+  ")"
+)) \%>\%
+styler:::post_visit(transformers$initialize)
+nest <- pd_nested$child[[1]]
+styler:::token_is_on_aligned_line(nest)
+}
