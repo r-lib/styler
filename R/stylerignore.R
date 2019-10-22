@@ -90,25 +90,30 @@ apply_stylerignore <- function(flattened_pd) {
     by = "pos_id", all.x = TRUE
   ) %>%
     as_tibble()
-  flattened_pd$lag_newlines <- ifelse(is.na(flattened_pd$lag_newlines.y),
-    flattened_pd$lag_newlines.x,
-    flattened_pd$lag_newlines.y
-  )
-  flattened_pd$lag_newlines.x <- NULL
-  flattened_pd$lag_newlines.y <- NULL
+  flattened_pd %>%
+    stylerignore_consolidate_col("lag_newlines") %>%
+    stylerignore_consolidate_col("lag_spaces") %>%
+    stylerignore_consolidate_col("text")
+}
 
-  flattened_pd$lag_spaces <- ifelse(is.na(flattened_pd$lag_spaces.y),
-    flattened_pd$lag_spaces.x,
-    flattened_pd$lag_spaces.y
+#' Consolidate columns after a merge
+#'
+#' After [base::merge()], all non-id columns that were present in `x` and `y`
+#' do get a suffix `.x` and `.y`. If the `y` value is missing, use the `x`
+#' value (because the information for this token was not stylerignored),
+#' otherwise the `y` value (i.e. the styled value).
+#' @param col A string indicating the name of the column that should be
+#'   consolidated.
+#' @inheritParams apply_stylerignore
+#' @keywords internal
+stylerignore_consolidate_col <- function(flattened_pd, col) {
+  col_x <- paste0(col, ".x")
+  col_y <- paste0(col, ".y")
+  flattened_pd[[col]] <- ifelse(is.na(flattened_pd[[col_y]]),
+    flattened_pd[[col_x]],
+    flattened_pd[[col_y]]
   )
-  flattened_pd$lag_spaces.x <- NULL
-  flattened_pd$lag_spaces.y <- NULL
-
-  flattened_pd$text <- ifelse(is.na(flattened_pd$text.y),
-    flattened_pd$text.x,
-    flattened_pd$text.y
-  )
-  flattened_pd$text.x <- NULL
-  flattened_pd$text.y <- NULL
+  flattened_pd[[col_x]] <- NULL
+  flattened_pd[[col_y]] <- NULL
   flattened_pd
 }
