@@ -24,4 +24,4 @@ to check early in the runtime if this is the case and then if so, take
 as many short-cuts as possible. See \link{stylerignore} for details.
 }
 }
-\keyword{datasets}
+\keyword{internal}

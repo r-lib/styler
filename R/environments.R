@@ -58,4 +58,5 @@ parser_version_find <- function(pd) {
 #' * `any_stylerignore`: Whether there is any stylerignore marker. The idea is
 #'   to check early in the runtime if this is the case and then if so, take
 #'   as many short-cuts as possible. See [stylerignore] for details.
+#' @keywords internal
 env_current <- rlang::new_environment(parent = rlang::empty_env())
