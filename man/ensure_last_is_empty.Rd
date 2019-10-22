@@ -10,8 +10,8 @@ ensure_last_is_empty(x)
 Ensure there is one (and only one) blank line at the end of a vector
 }
 \examples{
-ensure_last_is_empty("")
-ensure_last_is_empty(letters)
-ensure_last_is_empty(c(letters, "", "", ""))
+styler:::ensure_last_is_empty("")
+styler:::ensure_last_is_empty(letters)
+styler:::ensure_last_is_empty(c(letters, "", "", ""))
 }
 \keyword{internal}
