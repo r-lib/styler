@@ -1,6 +1,6 @@
 repos:
--   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: v0.0.0.9008
+-   repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.0.0.9018
     hooks:
     -   id: roxygenize
     -   id: no-browser-statement
