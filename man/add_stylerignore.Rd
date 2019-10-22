@@ -10,7 +10,18 @@ add_stylerignore(pd_flat)
 \item{pd_flat}{A parse table.}
 }
 \description{
-If a token falls within a stylerignore tag, the column is set to \code{TRUE},
+If a token should be ignored, the column is set to \code{TRUE},
 otherwise to \code{FALSE}.
+}
+\details{
+A token is ignored iff one of the two conditions hold:
+\itemize{
+\item it falls between a start and a stop marker whereas the markers are on
+their own line. Which tokens are recognized as markers is controlled with
+the R options \code{styler.ignore_start} and \code{styler.ignore_stop}.
+\item it is not a comment, but the last token on the line is a marker.
+}
+
+See examples in \link{stylerignore}.
 }
 \keyword{internal}

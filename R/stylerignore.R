@@ -20,8 +20,17 @@ env_add_stylerignore <- function(pd_flat) {
 
 #' Adds the stylerignore column
 #'
-#' If a token falls within a stylerignore tag, the column is set to `TRUE`,
+#' If a token should be ignored, the column is set to `TRUE`,
 #' otherwise to `FALSE`.
+#' @details
+#' A token is ignored iff one of the two conditions hold:
+#'
+#' - it falls between a start and a stop marker whereas the markers are on
+#'   their own line. Which tokens are recognized as markers is controlled with
+#'   the R options `styler.ignore_start` and `styler.ignore_stop`.
+#' - it is not a comment, but the last token on the line is a marker.
+#'
+#' See examples in [stylerignore].
 #' @param pd_flat A parse table.
 #' @keywords internal
 add_stylerignore <- function(pd_flat) {
@@ -63,7 +72,7 @@ add_stylerignore <- function(pd_flat) {
 #' @param flattened_pd A flattened parse table.
 #' @details
 #' * Get the positional information for tokens with a stylerignore tag from
-#' `env_current`, which recorded that information from the input text.
+#'   `env_current`, which recorded that information from the input text.
 #' * Replace the computed lag_newlines and lag_spaces information in the parse
 #'   table with this information.
 #' @keywords internal

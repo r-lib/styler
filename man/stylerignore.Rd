@@ -38,7 +38,7 @@ style_text(
   "
 )
 
-# if there is an stop marker before a start marker, styler won't be able
+# if there is a stop marker before a start marker, styler won't be able
 # to figure out which lines you want to ignore and won't ignore anything,
 # issuing a warning.
 \dontrun{
