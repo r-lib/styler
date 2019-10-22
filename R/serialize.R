@@ -1,7 +1,7 @@
 #' Serialize flattened parse data
 #'
 #' Collapses a flattened parse table into character vector representation.
-#' @param flattened_pd A flattened parse table.
+#' @inheritParams apply_stylerignore
 #' @param start_line The line number on which the code starts.
 #' @keywords internal
 serialize_parse_data_flattened <- function(flattened_pd, start_line = 1) {

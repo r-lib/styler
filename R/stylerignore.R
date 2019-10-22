@@ -3,36 +3,41 @@
 #' This is needed because at serialization time, we also have terminals only
 #' and positional argument of non-terminals were already propagated to terminals
 #' with [context_to_terminals()].
-env_add_stylerignore <- function(pd) {
+#' @inheritParams add_stylerignore
+#' @keywords internal
+env_add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
-    env_current$stylerignore <- pd[0, ]
+    env_current$stylerignore <- pd_flat[0, ]
     return()
   }
-  pd_temp <- pd[pd$terminal, ] %>%
+  pd_flat_temp <- pd_flat[pd_flat$terminal, ] %>%
     default_style_guide_attributes()
-  pd_temp$lag_newlines <- pd_temp$lag_newlines
-  pd_temp$lag_spaces <- lag(pd_temp$spaces, default = 0)
-  env_current$stylerignore <- pd_temp[pd_temp$terminal & pd_temp$stylerignore, ]
+  pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
+  pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0)
+  is_terminal_to_ignore <- pd_flat_temp$terminal & pd_flat_temp$stylerignore
+  env_current$stylerignore <- pd_flat_temp[is_terminal_to_ignore, ]
 }
 
 #' Adds the stylerignore column
 #'
 #' If a token falls within a stylerignore tag, the column is set to `TRUE`,
 #' otherwise to `FALSE`.
-add_stylerignore <- function(parse_data) {
-  parse_text <- trimws(parse_data$text)
+#' @param pd_flat A parse table.
+#' @keywords internal
+add_stylerignore <- function(pd_flat) {
+  parse_text <- trimws(pd_flat$text)
   start_candidate <- parse_text == option_read("styler.ignore_start")
-  parse_data$stylerignore <- FALSE
+  pd_flat$stylerignore <- rep(FALSE, length(start_candidate))
   env_current$any_stylerignore <- any(start_candidate)
   if (!env_current$any_stylerignore) {
-    return(parse_data)
+    return(pd_flat)
   }
-  parse_data_terminals <- parse_data[parse_data$terminal, ]
-  parse_data_lat_line1 <- lag(parse_data$line2, default = 0)
-  on_same_line <- parse_data$line1 == parse_data_lat_line1
+  pd_flat_terminals <- pd_flat[pd_flat$terminal, ]
+  pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0)
+  on_same_line <- pd_flat$line1 == pd_flat_lat_line1
   cumsum_start <- cumsum(start_candidate & !on_same_line)
   cumsum_stop <- cumsum(parse_text == option_read("styler.ignore_stop"))
-  parse_data$indicator_off <- cumsum_start + cumsum_stop
+  pd_flat$indicator_off <- cumsum_start + cumsum_stop
   is_invalid <- cumsum_start - cumsum_stop < 0 | cumsum_start - cumsum_stop > 1
   if (any(is_invalid)) {
     rlang::warn(c(
@@ -44,22 +49,24 @@ add_stylerignore <- function(parse_data) {
     ))
   }
 
-  to_ignore <- as.logical(parse_data$indicator_off %% 2)
+  to_ignore <- as.logical(pd_flat$indicator_off %% 2)
   to_ignore[is_invalid] <- FALSE
-  single_lines_to_ignore <- parse_data$line1[start_candidate & on_same_line]
-  to_ignore[parse_data$line1 %in% single_lines_to_ignore] <- TRUE
-  parse_data$indicator_off <- NULL
-  parse_data[to_ignore & parse_data$terminal, "stylerignore"] <- TRUE
-  parse_data
+  single_lines_to_ignore <- pd_flat$line1[start_candidate & on_same_line]
+  to_ignore[pd_flat$line1 %in% single_lines_to_ignore] <- TRUE
+  pd_flat$indicator_off <- NULL
+  pd_flat[to_ignore & pd_flat$terminal, "stylerignore"] <- TRUE
+  pd_flat
 }
 
 #' Ensure correct positional information for stylerignore expressions
 #'
+#' @param flattened_pd A flattened parse table.
+#' @details
 #' * Get the positional information for tokens with a stylerignore tag from
 #' `env_current`, which recorded that information from the input text.
 #' * Replace the computed lag_newlines and lag_spaces information in the parse
 #'   table with this information.
-#' TODO also take token, as rules-replacement may have modified the tokens too.
+#' @keywords internal
 apply_stylerignore <- function(flattened_pd) {
   if (!env_current$any_stylerignore) {
     return(flattened_pd)

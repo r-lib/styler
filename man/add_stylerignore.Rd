@@ -4,9 +4,13 @@
 \alias{add_stylerignore}
 \title{Adds the stylerignore column}
 \usage{
-add_stylerignore(parse_data)
+add_stylerignore(pd_flat)
+}
+\arguments{
+\item{pd_flat}{A parse table.}
 }
 \description{
 If a token falls within a stylerignore tag, the column is set to \code{TRUE},
 otherwise to \code{FALSE}.
 }
+\keyword{internal}

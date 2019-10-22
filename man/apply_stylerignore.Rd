@@ -6,12 +6,18 @@
 \usage{
 apply_stylerignore(flattened_pd)
 }
+\arguments{
+\item{flattened_pd}{A flattened parse table.}
+}
 \description{
+Ensure correct positional information for stylerignore expressions
+}
+\details{
 \itemize{
 \item Get the positional information for tokens with a stylerignore tag from
 \code{env_current}, which recorded that information from the input text.
 \item Replace the computed lag_newlines and lag_spaces information in the parse
 table with this information.
-TODO also take token, as rules-replacement may have modified the tokens too.
 }
 }
+\keyword{internal}

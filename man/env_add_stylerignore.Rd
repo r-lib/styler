@@ -4,10 +4,14 @@
 \alias{env_add_stylerignore}
 \title{Add positional information of token to next terminal}
 \usage{
-env_add_stylerignore(pd)
+env_add_stylerignore(pd_flat)
+}
+\arguments{
+\item{pd_flat}{A parse table.}
 }
 \description{
 This is needed because at serialization time, we also have terminals only
 and positional argument of non-terminals were already propagated to terminals
 with \code{\link[=context_to_terminals]{context_to_terminals()}}.
 }
+\keyword{internal}
