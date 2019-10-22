@@ -73,6 +73,7 @@ Collate:
     'set-assert-args.R'
     'style-guides.R'
     'styler.R'
+    'stylerignore.R'
     'testing-mocks.R'
     'testing-public-api.R'
     'testing.R'
