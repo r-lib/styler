@@ -25,7 +25,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=m
 [![cran
 version](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
 
- 
+
 The goal of styler is to provide non-invasive pretty-printing of R source code
 while adhering to the [tidyverse](https://style.tidyverse.org) formatting rules.
 styler can be customized to format code according to other style guides too.
@@ -40,7 +40,7 @@ install.packages("styler")
 
 Or get the development version from GitHub:
 
-```{r, eval = FALSE} 
+```{r, eval = FALSE}
 # install.packages("remotes")
 remotes::install_github("r-lib/styler")
 ```
@@ -95,7 +95,7 @@ While spaces still got styled (around `=` in `(x)`).
 
 If you wish to keep alignment as is, you can use `strict = FALSE`:
 
-```{r} 
+```{r}
 style_text(
   c(
     "first  <- 4",
@@ -127,15 +127,16 @@ styler functionality is made available through other packages, most notably
   knitr. use `tidy = "styler"` in the header of a code chunks (e.g. ` ```{r
   name-of-the-chunk, tidy = "styler"}`), or `knitr::opts_chunk$set(tidy =
   "styler")` at the top of your RMarkdown script.
-* as a pre-commit hook `style-files` in 
+* as a pre-commit hook `style-files` in
   https://github.com/lorenzwalthert/pre-commit-hooks.
 * pretty-printing of [drake](https://github.com/ropensci/drake) workflow data
   frames with `drake::drake_plan_source()`.
-* Adding styler as a fixer to the 
-  [ale Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966) 
+* Adding styler as a fixer to the
+  [ale Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966)
   for VIM.
-* Adding styler to
-  [Emacs with reformatter](https://github.com/r-lib/styler/issues/517#issuecomment-541446109).
+* Adding styler with
+  [emacs-format-all-the-code](https://github.com/lassik/emacs-format-all-the-code)
+  for Emacs.
 
 ## Further resources
 
