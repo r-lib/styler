@@ -14,13 +14,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [Pre-commit hooks](https://pre-commit.com) are tests that run each time
 you attempt to commit. If the tests pass, the commit will be made,
 otherwise not. A very basic test is to check if the code is parsable,
-making sure you have not forgotten a comma, brace or quote. The workflow
-is best illustrated with an example:
-
-![](https://media.giphy.com/media/Z9KJUt3zRYfhUDmLXG/giphy.gif)
-
-To learn more about available hooks and why to use them consult the
-[online
+making sure you have not forgotten a comma, brace or quote. To learn
+more about available hooks and why to use them consult the [online
 documentation](https://lorenzwalthert.github.io/precommit/index.html).
 
 ## Installation
