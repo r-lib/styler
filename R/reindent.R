@@ -77,10 +77,10 @@ update_indention_ref_fun_dec <- function(pd_nested) {
 #' @keywords internal
 apply_ref_indention <- function(flattened_pd) {
   target_tokens <- which(flattened_pd$pos_id %in% flattened_pd$indention_ref_pos_id)
-  flattened_pd <- reduce(
-    target_tokens,
+  flattened_pd <- Reduce(
     apply_ref_indention_one,
-    .init = flattened_pd
+    target_tokens,
+    init = flattened_pd
   )
   flattened_pd
 }

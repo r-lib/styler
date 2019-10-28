@@ -40,18 +40,14 @@ post_visit <- function(pd_nested, funs) {
 
 #' Transform a flat parse table with a list of transformers
 #'
-#' Uses [purrr::reduce()] to apply each function of `funs` sequentially to
+#' Uses [Reduce()] to apply each function of `funs` sequentially to
 #'   `pd_flat`.
 #' @param pd_flat A flat parse table.
 #' @param funs A list of transformer functions.
 #' @family visitors
-#' @importFrom purrr reduce
 #' @keywords internal
 visit_one <- function(pd_flat, funs) {
-  reduce(
-    funs, function(x, fun) fun(x),
-    .init = pd_flat
-  )
+  Reduce(function(x, fun) fun(x), funs, init = pd_flat)
 }
 
 #' Propagate context to terminals

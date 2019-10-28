@@ -1,7 +1,6 @@
-#' @importFrom purrr reduce
 add_brackets_in_pipe <- function(pd) {
   is_pipe <- pd$token == "SPECIAL-PIPE"
-  reduce(which(is_pipe), add_brackets_in_pipe_one, .init = pd)
+  Reduce(add_brackets_in_pipe_one, which(is_pipe), init = pd)
 }
 
 add_brackets_in_pipe_one <- function(pd, pos) {
