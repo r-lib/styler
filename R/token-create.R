@@ -89,7 +89,7 @@ find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) 
     ifelse(after, max(candidates), min(candidates)) + by * direction
   } else {
     find_start_pos_id(
-      pd$child[[pos]], if_else(after, nrow(pd$child[[pos]]), 1L),
+      pd$child[[pos]], ifelse(after, nrow(pd$child[[pos]]), 1L),
       by, direction, after, candidates
     )
   }

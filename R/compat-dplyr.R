@@ -32,14 +32,6 @@ arrange <- function(.data, ...) {
   .data[ord, , drop = FALSE]
 }
 
-#' @importFrom rlang abort
-if_else <- function(condition, true, false, missing = NULL) {
-  stopifnot(length(condition) == length(true))
-  stopifnot(length(condition) == length(false))
-  if (!is.null(missing)) abort("missing arg not yet implemented")
-  ifelse(condition, true, false)
-}
-
 bind_rows <- function(x, y = NULL, ...) {
   if (is.null(x) && is.null(y)) {
     return(tibble())
