@@ -30,10 +30,9 @@ flatten_operators_one <- function(pd_nested) {
     special_token, "LEFT_ASSIGN", if (parser_version_get() > 1) "EQ_ASSIGN",
     "'+'", "'-'"
   )
-  bound <- pd_nested %>%
+  pd_nested %>%
     flatten_pd(pd_token_left, left = TRUE) %>%
     flatten_pd(pd_token_right, left = FALSE)
-  bound
 }
 
 
