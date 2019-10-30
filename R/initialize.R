@@ -11,7 +11,6 @@
 #' @export
 #' @keywords internal
 default_style_guide_attributes <- function(pd_flat) {
-  init_pd <-
     initialize_newlines(pd_flat) %>%
     initialize_spaces() %>%
     remove_attributes(c("line1", "line2", "col1", "col2", "parent", "id")) %>%
@@ -19,7 +18,6 @@ default_style_guide_attributes <- function(pd_flat) {
     initialize_indention_ref_pos_id() %>%
     initialize_indent() %>%
     validate_parse_data()
-  init_pd
 }
 
 #' Initialize attributes

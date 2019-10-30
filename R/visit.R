@@ -20,10 +20,10 @@ pre_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
   }
-  pd_transformed <- visit_one(pd_nested, funs)
+  pd_nested <- visit_one(pd_nested, funs)
 
-  pd_transformed$child <- map(pd_transformed$child, pre_visit, funs = funs)
-  pd_transformed
+  pd_nested$child <- map(pd_nested$child, pre_visit, funs = funs)
+  pd_nested
 }
 
 #' @rdname visit
@@ -32,10 +32,9 @@ post_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
   }
-  pd_transformed <- pd_nested
 
-  pd_transformed$child <- map(pd_transformed$child, post_visit, funs = funs)
-  visit_one(pd_transformed, funs)
+  pd_nested$child <- map(pd_nested$child, post_visit, funs = funs)
+  visit_one(pd_nested, funs)
 }
 
 #' Transform a flat parse table with a list of transformers
