@@ -16,6 +16,14 @@ arrange <- function(.data, ...) {
   .data[ord, , drop = FALSE]
 }
 
+arrange_pos_id <- function(data) {
+  pos_id <- data$pos_id
+  if (is.unsorted(pos_id)) {
+    data <- data[order(pos_id), , drop = FALSE]
+  }
+  data
+}
+
 bind_rows <- function(x, y = NULL, ...) {
   if (is.null(x) && is.null(y)) {
     return(tibble())

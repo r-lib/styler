@@ -82,7 +82,7 @@ bind_with_child <- function(pd_nested, pos) {
   pd_nested %>%
     slice(-pos) %>%
     bind_rows(pd_nested$child[[pos]]) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 }
 
 #' Wrap an expression into an expression
@@ -217,7 +217,7 @@ relocate_eq_assign_one <- function(pd) {
   eq_expr$parent <- NA
   non_eq_expr <- pd[-eq_ind, ]
   pd <- bind_rows(eq_expr, non_eq_expr) %>%
-    arrange(pos_id)
+    arrange_pos_id()
   pd
 }
 

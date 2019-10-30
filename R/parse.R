@@ -161,7 +161,7 @@ ensure_correct_str_txt <- function(pd, text) {
     pd[is_unaffected_token, ],
     pd[is_parent_of_problematic_string, ]
   ) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 }
 
 #' Ensure that the parse data is valid

@@ -19,7 +19,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
       pd$child[[next_non_comment]],
       new_pd
     ) %>%
-      arrange(pos_id)
+      arrange_pos_id()
   }
   pd
 }
@@ -134,7 +134,7 @@ wrap_subexpr_in_curly <- function(pd,
     slice(-ind_to_be_wrapped) %>%
     bind_rows(new_expr_in_expr) %>%
     set_multi_line() %>%
-    arrange(pos_id)
+    arrange_pos_id()
 }
 
 #' Check if if, for or while loop expression require a braces.
