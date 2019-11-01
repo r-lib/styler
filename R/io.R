@@ -61,7 +61,7 @@ read_utf8 <- function(path) {
   }
 }
 
-#' Drop-in replacement for [xfun::read_utf8()], with an optional `warn`
+#' Drop-in replacement for `xfun::read_utf8()`, with an optional `warn`
 #' argument.
 #' @keywords internal
 read_utf8_bare <- function(con, warn = TRUE) {

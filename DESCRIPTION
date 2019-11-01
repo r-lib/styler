@@ -30,16 +30,19 @@ Imports:
     xfun (>= 0.1)
 Suggests: 
     data.tree (>= 0.1.6),
+    digest,
     dplyr,
     here,
     knitr,
     prettycode,
+    R.cache (>= 0.13.0.9000),
     rmarkdown,
     rstudioapi (>= 0.7),
-    R.cache (>= 0.13.0.9000),
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
+Remotes: 
+    lorenzwalthert/R.cache@shallow
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
@@ -92,5 +95,3 @@ Collate:
     'vertical.R'
     'visit.R'
     'zzz.R'
-Remotes:  
-    lorenzwalthert/R.cache@shallow
