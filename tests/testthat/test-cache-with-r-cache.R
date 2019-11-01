@@ -95,6 +95,21 @@ capture.output(test_that("activated cache brings speedup on style_text() API on 
   expect_true(first["elapsed"] / 2 > second["elapsed"])
 }))
 
+
+capture.output(test_that("no speedup when tranformer changes", {
+  skip_if_not_installed("R.cache")
+  cache_activate("testthat")
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  cache_activate("testthat")
+  t1 <- tidyverse_style()
+  first <- system.time(style_text(text, transformers = t1))
+  t1$use_raw_indention <- !t1$use_raw_indention
+  second <- system.time(style_text(text, transformers = t1))
+  expect_false(first["elapsed"] / 2 > second["elapsed"])
+}))
+
+
 capture.output(
   test_that(paste0(
     "activated cache brings speedup on style_text() API on ",
