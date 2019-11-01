@@ -80,7 +80,9 @@ make_transformer <- function(transformers,
   assert_R.cache_installation(action = "warn")
   function(text) {
     is_cached <- rlang::is_installed("R.cache") && !is.null(
-      R.cache::findCache(key = hash_standardize(text), dir = cache_dir)
+      R.cache::findCache(
+        key = cache_make_key(text, transformers),
+                         dir = cache_dir)
     )
     should_use_cache <- cache_is_activated()
     use_cache <- is_cached && should_use_cache
@@ -95,12 +97,13 @@ make_transformer <- function(transformers,
       if (should_use_cache) {
         R.cache::saveCache(
           NULL,
-          key = hash_standardize(transformed_code),
+          key = cache_make_key(transformed_code, transformers),
           dir = cache_dir, shallow = TRUE
         )
       }
       transformed_code
     } else {
+      cat("cached value:\n")
       text
     }
   }

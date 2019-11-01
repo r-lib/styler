@@ -13,6 +13,16 @@ hash_standardize <- function(text) {
     list()
 }
 
+cache_make_key <- function(text, transformers) {
+  print("---")
+  text <- hash_standardize(text)
+  print(digest::digest(text))
+  print(digest::digest(transformers))
+  out <- c(text = text, transfoermers = as.character(transformers))
+  print(digest::digest(out))
+  out
+}
+
 #' Where is the cache?
 #'
 #' Finds the path to the cache and creates it if it does not exist.
