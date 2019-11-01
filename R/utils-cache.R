@@ -13,6 +13,29 @@ hash_standardize <- function(text) {
     list()
 }
 
+#' Make a key for `R.cache`
+#'
+#' @details
+#'
+#' This function standardizes text and converts transformers to character (to
+#' avoid issues described in details).
+#' This means that the same code in `transformers`,
+#' calling other code not in `transformers` that was modified, will lead
+#' styler into thinking we can use the cache, although we should not. We believe
+#' this is a highly unlikely event, in particular because we already invalidate
+#' the cache when the styler version changes. Hence, our cache will cause
+#' styler to return *not correctly styled* code iff one of these conditions
+#' holds:
+#' - An improperly versioned version of styler is used, e.g. the development
+#'   version on GitHub.
+#' - A style guide from outside styler is used.
+#'
+#' Plus for both cases: the code in transformers does not change and changes in
+#' code the transformers depend on result in different styling.
+#' @section Experiments:
+#'
+#' There is unexamplainable behavior in conjunction with hashin and
+#' environments:
 #' * Functions created with `purrr::partial()` are not identical when compared
 #'   with `identical()`
 #'   ([StackOverflow](https://stackoverflow.com/questions/58656033/when-are-purrrpartial-ized-functions-identical))
@@ -25,8 +48,10 @@ hash_standardize <- function(text) {
 #'   `R.cache:::getChecksum.default` (which uses `digest::digest()`) to hash the
 #'   input. The latter does not seem to care if the environments are exactly
 #'   equal (see 'Exampels').
-#' * However, when passing a list to `digest::digest()` that contains other
-#'   components, it seems to care.
+#' * However, under stome circumstances, it does: Commit 9c94c022 (if not
+#'   overwritten / rebased by now) contains a reprex. Otherwise, search for
+#'   43219ixmypi in commit messages and restore this commit to reproduce the
+#'   behavior.
 #' @examples
 #' add <- function(x, y) {
 #' x + y
@@ -36,18 +61,10 @@ hash_standardize <- function(text) {
 #' identical(add1, add2)
 #' identical(digest::digest(add1), digest::digest(add2))
 #' identical(digest::digest(styler::tidyverse_style()), digest::digest(styler::tidyverse_style()))
-#' Complicating elements:
-#'
-
-#' *
+#' @keywords internal
 cache_make_key <- function(text, transformers) {
-  cat("---")
   text <- hash_standardize(text)
-  print(digest::digest(text))
-  print(digest::digest(transformers))
-  out <- c(text = text, transformers = transformers)
-  print(digest::digest(out))
-  out
+  c(text = text, transformers = as.character(transformers))
 }
 
 #' Where is the cache?

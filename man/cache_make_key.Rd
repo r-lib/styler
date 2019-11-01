@@ -2,26 +2,37 @@
 % Please edit documentation in R/utils-cache.R
 \name{cache_make_key}
 \alias{cache_make_key}
-\title{\itemize{
-\item Functions created with \code{purrr::partial()} are not identical when compared
-with \code{identical()}
-(\href{https://stackoverflow.com/questions/58656033/when-are-purrrpartial-ized-functions-identical}{StackOverflow})
-\item except when they have the exact same parent environment, which must be an
-object created and then passed to \code{purrr::partial(.env = ...)}, not
-created in-place.
-\item \code{purrr::partial()} seems to ignore \code{.env} after version 0.2.5, so until
-this is fixed, we'd have to work with version 0.2.5.
-\item Our caching backend package, \code{R.cache}, uses
-\code{R.cache:::getChecksum.default} (which uses \code{digest::digest()}) to hash the
-input. The latter does not seem to care if the environments are exactly
-equal (see 'Exampels').
-\item However, when passing a list to \code{digest::digest()} that contains other
-components, it seems to care.
-}}
+\title{Make a key for \code{R.cache}}
 \usage{
 cache_make_key(text, transformers)
 }
 \description{
+Make a key for \code{R.cache}
+}
+\details{
+This function standardizes text and converts transformers to character (to
+avoid issues described in details).
+This means that the same code in \code{transformers},
+calling other code not in \code{transformers} that was modified, will lead
+styler into thinking we can use the cache, although we should not. We believe
+this is a highly unlikely event, in particular because we already invalidate
+the cache when the styler version changes. Hence, our cache will cause
+styler to return \emph{not correctly styled} code iff one of these conditions
+holds:
+\itemize{
+\item An improperly versioned version of styler is used, e.g. the development
+version on GitHub.
+\item A style guide from outside styler is used.
+}
+
+Plus for both cases: the code in transformers does not change and changes in
+code the transformers depend on result in different styling.
+}
+\section{Experiments}{
+
+
+There is unexamplainable behavior in conjunction with hashin and
+environments:
 \itemize{
 \item Functions created with \code{purrr::partial()} are not identical when compared
 with \code{identical()}
@@ -35,10 +46,13 @@ this is fixed, we'd have to work with version 0.2.5.
 \code{R.cache:::getChecksum.default} (which uses \code{digest::digest()}) to hash the
 input. The latter does not seem to care if the environments are exactly
 equal (see 'Exampels').
-\item However, when passing a list to \code{digest::digest()} that contains other
-components, it seems to care.
+\item However, under stome circumstances, it does: Commit 9c94c022 (if not
+overwritten / rebased by now) contains a reprex. Otherwise, search for
+43219ixmypi in commit messages and restore this commit to reproduce the
+behavior.
 }
 }
+
 \examples{
 add <- function(x, y) {
 x + y
@@ -48,7 +62,5 @@ add2 <- purrr::partial(add, x = 1)
 identical(add1, add2)
 identical(digest::digest(add1), digest::digest(add2))
 identical(digest::digest(styler::tidyverse_style()), digest::digest(styler::tidyverse_style()))
-Complicating elements:
-
-*
 }
+\keyword{internal}
