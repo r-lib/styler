@@ -13,12 +13,39 @@ hash_standardize <- function(text) {
     list()
 }
 
+#' * Functions created with `purrr::partial()` are not identical when compared
+#'   with `identical()`
+#'   ([StackOverflow](https://stackoverflow.com/questions/58656033/when-are-purrrpartial-ized-functions-identical))
+#' * except when they have the exact same parent environment, which must be an
+#'   object created and then passed to `purrr::partial(.env = ...)`, not
+#'   created in-place.
+#' * `purrr::partial()` seems to ignore `.env` after version 0.2.5, so until
+#'   this is fixed, we'd have to work with version 0.2.5.
+#' * Our caching backend package, `R.cache`, uses
+#'   `R.cache:::getChecksum.default` (which uses `digest::digest()`) to hash the
+#'   input. The latter does not seem to care if the environments are exactly
+#'   equal (see 'Exampels').
+#' * However, when passing a list to `digest::digest()` that contains other
+#'   components, it seems to care.
+#' @examples
+#' add <- function(x, y) {
+#' x + y
+#' }
+#' add1 <- purrr::partial(add, x = 1)
+#' add2 <- purrr::partial(add, x = 1)
+#' identical(add1, add2)
+#' identical(digest::digest(add1), digest::digest(add2))
+#' identical(digest::digest(styler::tidyverse_style()), digest::digest(styler::tidyverse_style()))
+#' Complicating elements:
+#'
+
+#' *
 cache_make_key <- function(text, transformers) {
-  print("---")
+  cat("---")
   text <- hash_standardize(text)
   print(digest::digest(text))
   print(digest::digest(transformers))
-  out <- c(text = text, transfoermers = as.character(transformers))
+  out <- c(text = text, transformers = transformers)
   print(digest::digest(out))
   out
 }
