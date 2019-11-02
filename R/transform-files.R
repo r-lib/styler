@@ -12,8 +12,9 @@
 transform_files <- function(files, transformers, include_roxygen_examples) {
   transformer <- make_transformer(transformers, include_roxygen_examples)
   max_char <- min(max(nchar(files), 0), getOption("width"))
-  if (length(files) > 0L) {
-    cat("Styling ", length(files), " files:\n")
+  len_files <- length(files)
+  if (len_files > 0L) {
+    cat("Styling ", len_files, " files:\n")
   }
 
   changed <- map_lgl(files, transform_file,
@@ -21,7 +22,7 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
-  tibble(file = files, changed = changed)
+  new_tibble(list(file = files, changed = changed), nrow = len_files)
 }
 
 #' Transform a file and output a customized message

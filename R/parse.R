@@ -92,7 +92,9 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
-  pd <- as_tibble(utils::getParseData(parsed, includeText = include_text)) %>%
+  pd <- as_tibble(
+    utils::getParseData(parsed, includeText = include_text),
+    .name_repair = "minimal") %>%
     add_id_and_short()
   parser_version_set(parser_version_find(pd))
   pd
@@ -144,7 +146,7 @@ ensure_correct_str_txt <- function(pd, text) {
     by.y = "id",
     suffixes = c("", "parent")
   ) %>%
-    as_tibble()
+    as_tibble(.name_repair = "minimal")
 
   if (!lines_and_cols_match(new_strings)) {
     abort(paste(
