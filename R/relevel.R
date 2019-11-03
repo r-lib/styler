@@ -30,10 +30,9 @@ flatten_operators_one <- function(pd_nested) {
     special_token, "LEFT_ASSIGN", if (parser_version_get() > 1) "EQ_ASSIGN",
     "'+'", "'-'"
   )
-  bound <- pd_nested %>%
+  pd_nested %>%
     flatten_pd(pd_token_left, left = TRUE) %>%
     flatten_pd(pd_token_right, left = FALSE)
-  bound
 }
 
 
@@ -57,7 +56,7 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   if (length(token_pos_candidates) == 0) {
     return(pd_nested)
   }
-  token_pos <- token_pos_candidates[if_else(left, 1, length(token_pos_candidates))]
+  token_pos <- token_pos_candidates[ifelse(left, 1, length(token_pos_candidates))]
   if (left) {
     pos <- previous_non_comment(pd_nested, token_pos)
   } else {
@@ -83,7 +82,7 @@ bind_with_child <- function(pd_nested, pos) {
   pd_nested %>%
     slice(-pos) %>%
     bind_rows(pd_nested$child[[pos]]) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 }
 
 #' Wrap an expression into an expression
@@ -218,7 +217,7 @@ relocate_eq_assign_one <- function(pd) {
   eq_expr$parent <- NA
   non_eq_expr <- pd[-eq_ind, ]
   pd <- bind_rows(eq_expr, non_eq_expr) %>%
-    arrange(pos_id)
+    arrange_pos_id()
   pd
 }
 

@@ -12,7 +12,7 @@ visit_one(pd_flat, funs)
 \item{funs}{A list of transformer functions.}
 }
 \description{
-Uses \code{\link[purrr:reduce]{purrr::reduce()}} to apply each function of \code{funs} sequentially to
+Uses \code{\link[=Reduce]{Reduce()}} to apply each function of \code{funs} sequentially to
 \code{pd_flat}.
 }
 \seealso{

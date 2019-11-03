@@ -56,9 +56,13 @@ NULL
 add_terminal_token_after <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 
-  tibble(pos_id = terminals$pos_id, token_after = lead(terminals$token, default = "")) %>%
+  new_tibble(list(
+    pos_id = terminals$pos_id,
+    token_after = lead(terminals$token, default = "")),
+    nrow = nrow(terminals)
+  ) %>%
     left_join(pd_flat, ., by = "pos_id")
 }
 
@@ -67,11 +71,14 @@ add_terminal_token_after <- function(pd_flat) {
 add_terminal_token_before <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 
-  tibble(
-    id = terminals$id,
-    token_before = lag(terminals$token, default = "")
+  new_tibble(
+    list(
+      id = terminals$id,
+      token_before = lag(terminals$token, default = "")
+    ),
+    nrow = nrow(terminals)
   ) %>%
     left_join(pd_flat, ., by = "id")
 }

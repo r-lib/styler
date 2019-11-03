@@ -32,7 +32,8 @@ create_tokens <- function(tokens,
                           terminal = TRUE,
                           child = NULL) {
   len_text <- length(texts)
-  tibble(
+  new_tibble(
+    list(
     token = tokens,
     text = texts,
     short = substr(texts, 1, 5),
@@ -48,6 +49,8 @@ create_tokens <- function(tokens,
     indention_ref_pos_id = indention_ref_pos_ids,
     indent = indents,
     child = rep(list(child), len_text)
+  ),
+    nrow = len_text
   )
 }
 
@@ -89,7 +92,7 @@ find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) 
     ifelse(after, max(candidates), min(candidates)) + by * direction
   } else {
     find_start_pos_id(
-      pd$child[[pos]], if_else(after, nrow(pd$child[[pos]]), 1L),
+      pd$child[[pos]], ifelse(after, nrow(pd$child[[pos]]), 1L),
       by, direction, after, candidates
     )
   }

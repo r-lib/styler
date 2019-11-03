@@ -11,7 +11,6 @@
 #' @export
 #' @keywords internal
 default_style_guide_attributes <- function(pd_flat) {
-  init_pd <-
     initialize_newlines(pd_flat) %>%
     initialize_spaces() %>%
     remove_attributes(c("line1", "line2", "col1", "col2", "parent", "id")) %>%
@@ -19,7 +18,6 @@ default_style_guide_attributes <- function(pd_flat) {
     initialize_indention_ref_pos_id() %>%
     initialize_indent() %>%
     validate_parse_data()
-  init_pd
 }
 
 #' Initialize attributes
@@ -43,7 +41,7 @@ initialize_newlines <- function(pd_flat) {
 #' @keywords internal
 initialize_spaces <- function(pd_flat) {
   pd_flat$col3 <- lead(pd_flat$col1, default = tail(pd_flat$col2, 1) + 1L)
-  pd_flat$col2_nl <- if_else(pd_flat$newlines > 0L,
+  pd_flat$col2_nl <- ifelse(pd_flat$newlines > 0L,
     rep(0L, nrow(pd_flat)), pd_flat$col2
   )
   pd_flat$spaces <- pd_flat$col3 - pd_flat$col2_nl - 1L
@@ -61,7 +59,7 @@ remove_attributes <- function(pd_flat, attributes) {
 #' @keywords internal
 initialize_multi_line <- function(pd_flat) {
   nrow <- nrow(pd_flat)
-  pd_flat$multi_line <- if_else(pd_flat$terminal,
+  pd_flat$multi_line <- ifelse(pd_flat$terminal,
     rep(FALSE, nrow),
     rep(NA, nrow)
   )

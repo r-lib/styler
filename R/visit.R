@@ -20,10 +20,10 @@ pre_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
   }
-  pd_transformed <- visit_one(pd_nested, funs)
+  pd_nested <- visit_one(pd_nested, funs)
 
-  pd_transformed$child <- map(pd_transformed$child, pre_visit, funs = funs)
-  pd_transformed
+  pd_nested$child <- map(pd_nested$child, pre_visit, funs = funs)
+  pd_nested
 }
 
 #' @rdname visit
@@ -32,26 +32,21 @@ post_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
   }
-  pd_transformed <- pd_nested
 
-  pd_transformed$child <- map(pd_transformed$child, post_visit, funs = funs)
-  visit_one(pd_transformed, funs)
+  pd_nested$child <- map(pd_nested$child, post_visit, funs = funs)
+  visit_one(pd_nested, funs)
 }
 
 #' Transform a flat parse table with a list of transformers
 #'
-#' Uses [purrr::reduce()] to apply each function of `funs` sequentially to
+#' Uses [Reduce()] to apply each function of `funs` sequentially to
 #'   `pd_flat`.
 #' @param pd_flat A flat parse table.
 #' @param funs A list of transformer functions.
 #' @family visitors
-#' @importFrom purrr reduce
 #' @keywords internal
 visit_one <- function(pd_flat, funs) {
-  reduce(
-    funs, function(x, fun) fun(x),
-    .init = pd_flat
-  )
+  Reduce(function(x, fun) fun(x), funs, init = pd_flat)
 }
 
 #' Propagate context to terminals
@@ -132,11 +127,10 @@ context_towards_terminals <- function(pd_nested,
 #' @param pd_nested A nested parse table.
 #' @keywords internal
 extract_terminals <- function(pd_nested) {
-  if (is.null(pd_nested)) {
-    return(pd)
-  }
-  pd_split <- split(pd_nested, seq_len(nrow(pd_nested)))
-  bind_rows(if_else(pd_nested$terminal, pd_split, pd_nested$child))
+  bind_rows(
+    ifelse(pd_nested$terminal, split(pd_nested, seq_len(nrow(pd_nested))),
+    pd_nested$child
+  ))
 }
 
 #' Enrich flattened parse table
@@ -199,7 +193,7 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #' @keywords internal
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
-    flattened_pd$lag_spaces <- if_else(flattened_pd$lag_newlines > 0,
+    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0,
       flattened_pd$indent,
       flattened_pd$lag_spaces
     )

@@ -1,48 +1,32 @@
-lag <- function(x, n = 1L, default = NA, ...) {
-  if (n == 0) {
-    return(x)
-  }
+lag <- function(x, n = 1L, default = NA) {
   xlen <- length(x)
   n <- pmin(n, xlen)
-  out <- c(rep(default, n), x[seq_len(xlen - n)])
-  attributes(out) <- attributes(x)
-  out
+  c(rep(default, n), x[seq_len(xlen - n)])
 }
 
-lead <- function(x, n = 1L, default = NA, ...) {
-  if (n == 0) {
-    return(x)
-  }
+lead <- function(x, n = 1L, default = NA) {
   xlen <- length(x)
   n <- pmin(n, xlen)
-  out <- c(x[-seq_len(n)], rep(default, n))
-  attributes(out) <- attributes(x)
-  out
+  c(x[-seq_len(n)], rep(default, n))
 }
 
 #' @importFrom rlang abort
 arrange <- function(.data, ...) {
-  stopifnot(is.data.frame(.data))
   ord <- eval(substitute(order(...)), .data, parent.frame())
-  if (length(ord) != nrow(.data)) {
-    abort(
-      "Length of ordering vectors don't match data frame size"
-    )
-  }
   .data[ord, , drop = FALSE]
 }
 
-#' @importFrom rlang abort
-if_else <- function(condition, true, false, missing = NULL) {
-  stopifnot(length(condition) == length(true))
-  stopifnot(length(condition) == length(false))
-  if (!is.null(missing)) abort("missing arg not yet implemented")
-  ifelse(condition, true, false)
+arrange_pos_id <- function(data) {
+  pos_id <- data$pos_id
+  if (is.unsorted(pos_id)) {
+    data <- data[order(pos_id), , drop = FALSE]
+  }
+  data
 }
 
 bind_rows <- function(x, y = NULL, ...) {
   if (is.null(x) && is.null(y)) {
-    return(tibble())
+    return(new_tibble(list(), nrow = 0))
   }
   if (is.null(x)) {
     if (inherits(y, "data.frame")) {
@@ -86,26 +70,9 @@ left_join <- function(x, y, by, ...) {
   res
 }
 
-nth <- function(x, n, order_by = NULL, default = x[NA_real_]) {
-  stopifnot(length(n) == 1, is.numeric(n))
-  n <- trunc(n)
-  if (n == 0 || n > length(x) || n < -length(x)) {
-    return(default)
-  }
-  if (n < 0) {
-    n <- length(x) + n + 1
-  }
-  if (is.null(order_by)) {
-    x[[n]]
-  }
-  else {
-    x[[order(order_by)[[n]]]]
-  }
-}
 
-
-last <- function(x, order_by = NULL, default = x[NA_real_]) {
-  nth(x, -1L, order_by = order_by, default = default)
+last <- function(x) {
+  x[[length(x)]]
 }
 
 slice <- function(.data, ...) {

@@ -33,7 +33,7 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
   )
 
   bind_rows(candidates, non_candidates) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 }
 
 #' Unindent a child
