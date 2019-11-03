@@ -69,6 +69,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/lorenzwalthert/some_r
 
 ## Functionality of styler
 
+* style plain R, Rmd, .Rprofile and Rnw files.
+* style roxygen2 code examples.
+* not re-style deliberate code alignment ([vignette](https://styler.r-lib.org/articles/detect-alignment.html)).
+
+
 **scope**
 
 You can decide on the level of invasiveness with the scope argument. You can
