@@ -6,14 +6,13 @@ Usage:
 " -> doc
 
 # We only care about the files that are staged. If roxygen::roxygenize() would 
-#also udpate the cache, it would be a different story. The preliminary use case
-#for this is when we previously attempted to commit but check failed, so on 
-#the second try, all files will already be roxygenized, and if we have not 
+# also udpate the cache, it would be a different story. The preliminary use case
+# for this is when we previously attempted to commit but check failed, so on 
+# the second try, all files will already be roxygenized, and if we have not 
 # that are not staged, which is why we need to the intersect() call. Also, this 
-##changed anything, the test should pass. We don't care if we modified other files
-#check should run *after* check that modify the files that are passed to them 
-#(like styler) because they will never modify their input files.
-
+# changed anything, the test should pass. We don't care if we modified other files
+# check should run *after* check that modify the files that are passed to them 
+# (like styler) because they will never modify their input files.
 arguments <- docopt::docopt(doc)
 library("R.cache")
 path_relative_cache <- file.path("precommit", "roxygenize")
@@ -21,9 +20,8 @@ candidates <- c(list.files("R", full.names = TRUE), "DESCRIPTION")
 
 cache <- loadCache(key = list(getwd()), dirs = path_relative_cache)
 if (!is.null(cache)) {
-  last_modified <- precommit:::last_modified(path_relative_cache, c(
-    intersect(candidates, arguments$files)
-  ))
+  all_files <- file.info(intersect(candidates, arguments$files))
+  last_modified <- all_files[order(all_files$mtime, decreasing = TRUE)[1], ]
   if (last_modified$mtime > cache[[1]]) {
     roxygen2::roxygenise()
     saveCache(object = Sys.time(), key = list(getwd()), dirs = path_relative_cache)
