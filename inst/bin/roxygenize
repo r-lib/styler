@@ -1,10 +1,10 @@
 #!/usr/bin/env Rscript
+
 "Run roxygenize()
 Usage:
   roxygenize <files>...
-
 " -> doc
-
+arguments <- docopt::docopt(doc)
 # We only care about the files that are staged. If roxygen::roxygenize() would 
 # also udpate the cache, it would be a different story. The preliminary use case
 # for this is when we previously attempted to commit but check failed, so on 
@@ -13,7 +13,7 @@ Usage:
 # changed anything, the test should pass. We don't care if we modified other files
 # check should run *after* check that modify the files that are passed to them 
 # (like styler) because they will never modify their input files.
-arguments <- docopt::docopt(doc)
+
 library("R.cache")
 path_relative_cache <- file.path("precommit", "roxygenize")
 candidates <- c(list.files("R", full.names = TRUE), "DESCRIPTION")
