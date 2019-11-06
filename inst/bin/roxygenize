@@ -1,3 +1,30 @@
 #!/usr/bin/env Rscript
+"Run roxygenize()
+Usage:
+  roxygenize <files>...
 
-roxygen2::roxygenize()
+" -> doc
+
+# We only care about the files that are staged. If roxygen::roxygenize() would 
+#also udpate the cache, it would be a different story. The preliminary use case
+#for this is when we previously attempted to commit but check failed, so on 
+#the second try, all files will already be roxygenized, and if we have not 
+# that are not staged, which is why we need to the intersect() call. Also, this 
+##changed anything, the test should pass. We don't care if we modified other files
+#check should run *after* check that modify the files that are passed to them 
+#(like styler) because they will never modify their input files.
+
+arguments <- docopt::docopt(doc)
+path_relative_cache <- file.path("precommit", "roxygenize")
+candidates <- c(list.files("R", full.names = TRUE), "DESCRIPTION")
+
+last_modified <- precommit:::last_modified(path_relative_cache, c(
+  intersect(candidates, arguments$files)
+))
+
+cache_relevant <- list(last_modified$mtime, getwd())
+if (!precommit:::is_cached(cache_relevant, path_relative_cache = path_relative_cache)) {
+  roxygen2::roxygenise()
+  R.cache::saveCache(object = NULL, key = cache_relevant, dirs = path_relative_cache)
+}
+
