@@ -22,7 +22,8 @@ Imports:
     rprojroot,
     desc,
     reticulate,
-    magrittr
+    magrittr,
+    R.cache
 Remotes: 
     lorenzwalthert/oneliner,
     ropenscilabs/tic
