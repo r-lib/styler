@@ -17,16 +17,18 @@ arguments <- docopt::docopt(doc)
 library("R.cache")
 path_relative_cache <- file.path("precommit", "roxygenize")
 candidates <- c(list.files("R", full.names = TRUE), "DESCRIPTION")
-
-cache <- loadCache(key = list(getwd()), dirs = path_relative_cache)
+wd <- list(getwd())
+cache <- loadCache(key = wd, dirs = path_relative_cache)
 if (!is.null(cache)) {
   all_files <- file.info(intersect(candidates, arguments$files))
-  last_modified <- all_files[order(all_files$mtime, decreasing = TRUE)[1], ]
-  if (last_modified$mtime > cache[[1]]) {
-    roxygen2::roxygenise()
-    saveCache(object = Sys.time(), key = list(getwd()), dirs = path_relative_cache)
+  if (nrow(all_files) >= 1L) {
+    last_modified <- all_files[order(all_files$mtime, decreasing = TRUE)[1], ]
+    if (last_modified$mtime > cache[[1]]) {
+      roxygen2::roxygenise()
+      saveCache(object = Sys.time(), key = wd, dirs = path_relative_cache)
+    }
   }
 } else {
   roxygen2::roxygenise()
-  saveCache(object = Sys.time(), key = list(getwd()), dirs = path_relative_cache)
+  saveCache(object = Sys.time(), key = wd, dirs = path_relative_cache)
 }
