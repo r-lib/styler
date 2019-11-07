@@ -3,7 +3,7 @@
     description: run roxygen2::roxygenize()
     entry: inst/bin/roxygenize
     language: script
-    files: '^R/'
+    files: '^(R|man)/'
 -   id: use-tidy-description
     name: use-tidy-description
     description: run usethis::use_tidy_description()
