@@ -11,9 +11,9 @@ repos:
     -   id: no-browser-statement
     -   id: readme-rmd-rendered
     #  R package development
-    # -   id: roxygenize
-    # -   id: use-tidy-description
-    # -   id: deps-in-desc
+    -   id: roxygenize
+    -   id: use-tidy-description
+    -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v1.2.3
     hooks: 
