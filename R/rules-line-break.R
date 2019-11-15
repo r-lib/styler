@@ -273,3 +273,33 @@ remove_line_break_in_empty_fun_call <- function(pd) {
   }
   pd
 }
+
+mk_add_line_break_at_pos_id <- function(ids) {
+  ids <- ids
+  
+  function(pd_flat){
+    min_child_ids <- sapply(seq_len(nrow(pd_flat)), function(i){
+      row <- pd_flat[i,]
+      m <- row$pos_id
+      while(!row$terminal){
+        row <- row$child[[1]][1,]
+        m <- min(m, row$pos_id)
+      }
+      m
+    })
+
+    max_child_ids <- sapply(seq_len(nrow(pd_flat)), function(i){
+      row <- pd_flat[i,]
+      m <- row$pos_id
+      while(!row$terminal){
+        row <- row$child[[1]][nrow(row$child[[1]]),]
+        m <- max(m, row$pos_id)
+      }
+      m
+    })
+    
+    nls <- apply(cbind(min_child_ids, max_child_ids), 1 , function(x) sum(ids >= x[1] & ids <= x[2]))
+    pd_flat$lag_newlines <- pd_flat$lag_newlines + nls
+    pd_flat
+  }
+}
