@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # adapted from https://github.com/r-lib/usethis/blob/master/inst/templates/readme-rmd-pre-commit.sh
-README=($(git diff --cached --name-only | grep -Ei '^README\.[R]?md$'))
-
-if [[ ${#README[@]} == 0 ]]; then
-  exit 0
+# No rmd readme means nothing to check
+if [[ ! -f "README.Rmd" ]] 
+then 
+    exit 0
 fi
 
 if [[ README.Rmd -nt README.md ]]
