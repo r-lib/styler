@@ -1,20 +1,35 @@
 #!/usr/bin/env Rscript
-files <- commandArgs(trailing = TRUE)
+
+
+'Run lintr on a package.
+Usage:
+  lintr [--warn_only] <files>...
+Options:
+  --warn_only  Print lint warnings instead of blocking the commit. Should be
+               used with `verbose: True` in `.pre-commit-config.yaml`.
+' -> doc
+
+arguments <- docopt::docopt(doc)
 
 if (git2r::in_repository()) {
   git_status <- git2r::status(staged = FALSE)
   if (any(unlist(git_status) == ".lintr")) {
-    stop("Unstaged changes to .lintr file. Stage the .lintr file or discard the changes to it. ", call. = FALSE)
+    stop("Unstaged changes to .lintr file. Stage the .lintr file or discard ",
+         "the changes to it. ", call. = FALSE)
   }
 }
 
-out <- lapply(files, function(path) {
+for (path in arguments$files) {
   lints <- lintr::lint(path)
-  if (length(lints) > 0) {
+  if (length(lints) && arguments$warn_only) {
+    cat("Warning: File `", path, "` is not lint free\n", sep = "")
+    print(lints)
+  } else if (length(lints)) {
     stop(
       "File ", path, " is not lint free\n",
       "Run lintr::lint('", path, "') to check the lintr output.",
       call. = FALSE
     )
   }
-})
+}
+

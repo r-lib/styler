@@ -8,14 +8,14 @@ vignette: >
 ---
 
 Arguments are specified as described in the [pre-commit.com
-documentation](https://pre-commit.com/#passing-arguments-to-hooks), i.e. the 
+documentation](https://pre-commit.com/#passing-arguments-to-hooks), i.e. the
 arguments for the `style-files` hook can be set like this:
 
 ```{yaml}
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
     rev: v0.0.0.9016
-    hooks: 
+    hooks:
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
 ```
@@ -31,8 +31,16 @@ The following hooks take arguments:
   `base::grep()` to ignore further files from the hook. Argument `lang` is
   passed to `spelling::spell_check_files()`.
 
-* `lintr`: Arguments are not supported. Instead, `lintr` config should be
-  specified in a `.lintr` config file in Debian Control Field Format as
-  specified in the [`.lintr`
-  documentation](https://github.com/jimhester/lintr#project-configuration).
+* `lintr`: Argument `--warning_only` changes the behavior of the pre-commit to
+  be non-blocking. You should set this with the field verbose:true.
 
+  ```
+  id: lintr
+  args: [--warning_only]
+  vebose: True
+  ```
+  When configured this way, lintr prints lint errors as they appear. Other
+  arguments are not supported. Instead, `lintr` config should be specified in a
+  `.lintr` config file in Debian Control Field Format as specified in the
+  [`.lintr`
+  documentation](https://github.com/jimhester/lintr#project-configuration).
