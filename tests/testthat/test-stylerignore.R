@@ -92,7 +92,7 @@ test_that("works with other markers", {
           as.character()
       }
     ),
-    "Multiple"
+    "Invalid stylerignore sequence"
   )
 })
 

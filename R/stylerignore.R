@@ -49,12 +49,9 @@ add_stylerignore <- function(pd_flat) {
   pd_flat$indicator_off <- cumsum_start + cumsum_stop
   is_invalid <- cumsum_start - cumsum_stop < 0 | cumsum_start - cumsum_stop > 1
   if (any(is_invalid)) {
-    rlang::warn(c(
-      "Invalid stylerignore sequences found. The order in which the markers",
-      "must appear in code is `# styler: off`, always followed by",
-      "`# styler: on`. Multiple sequences are allowed but can't be nested,",
-      "the very last `# styler: on` can be omitted. stylerignore markers are",
-      "ignored after the first invalid marker."
+    warn(paste0(
+      "Invalid stylerignore sequences found, potentially ignoring some of the ",
+      "markers set.\nSee `help(\"stylerignore\", \"styler\")`."
     ))
   }
 
