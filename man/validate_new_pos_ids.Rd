@@ -19,8 +19,9 @@ x.5 and ids created with \code{after = FALSE} can have \code{pos_id} values betw
 reference to create the new \code{pos_ids}.
 }
 \seealso{
-Other token creators: \code{\link{create_pos_ids}},
-  \code{\link{create_tokens}}
+Other token creators: 
+\code{\link{create_pos_ids}()},
+\code{\link{create_tokens}()}
 }
 \concept{token creators}
 \keyword{internal}

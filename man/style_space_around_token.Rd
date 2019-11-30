@@ -4,8 +4,13 @@
 \alias{style_space_around_token}
 \title{Set spacing of token to a certain level}
 \usage{
-style_space_around_token(pd_flat, strict, tokens, level_before,
-  level_after = level_before)
+style_space_around_token(
+  pd_flat,
+  strict,
+  tokens,
+  level_before,
+  level_after = level_before
+)
 }
 \arguments{
 \item{pd_flat}{A nest or a flat parse table.}

@@ -4,8 +4,15 @@
 \alias{transform_file}
 \title{Transform a file and output a customized message}
 \usage{
-transform_file(path, fun, max_char_path, message_before = "",
-  message_after = " [DONE]", message_after_if_changed = " *", ...)
+transform_file(
+  path,
+  fun,
+  max_char_path,
+  message_before = "",
+  message_after = " [DONE]",
+  message_after_if_changed = " *",
+  ...
+)
 }
 \arguments{
 \item{path}{A vector with file paths to transform.}

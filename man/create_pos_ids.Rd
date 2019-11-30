@@ -27,8 +27,9 @@ create one. The validation is done with \code{\link[=validate_new_pos_ids]{valid
 Create valid pos_ids if possible
 }
 \seealso{
-Other token creators: \code{\link{create_tokens}},
-  \code{\link{validate_new_pos_ids}}
+Other token creators: 
+\code{\link{create_tokens}()},
+\code{\link{validate_new_pos_ids}()}
 }
 \concept{token creators}
 \keyword{internal}

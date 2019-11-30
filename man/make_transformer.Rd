@@ -4,8 +4,7 @@
 \alias{make_transformer}
 \title{Closure to return a transformer function}
 \usage{
-make_transformer(transformers, include_roxygen_examples,
-  warn_empty = TRUE)
+make_transformer(transformers, include_roxygen_examples, warn_empty = TRUE)
 }
 \arguments{
 \item{transformers}{A list of transformer functions that operate on flat

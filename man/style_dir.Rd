@@ -4,10 +4,16 @@
 \alias{style_dir}
 \title{Prettify arbitrary R code}
 \usage{
-style_dir(path = ".", ..., style = tidyverse_style,
-  transformers = style(...), filetype = c("R", "Rprofile"),
-  recursive = TRUE, exclude_files = NULL,
-  include_roxygen_examples = TRUE)
+style_dir(
+  path = ".",
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  filetype = c("R", "Rprofile"),
+  recursive = TRUE,
+  exclude_files = NULL,
+  include_roxygen_examples = TRUE
+)
 }
 \arguments{
 \item{path}{Path to a directory with files to transform.}
@@ -89,8 +95,10 @@ style_dir(file_type = "r")
 }
 }
 \seealso{
-Other stylers: \code{\link{style_file}},
-  \code{\link{style_pkg}}, \code{\link{style_text}},
-  \code{\link{styler_addins}}
+Other stylers: 
+\code{\link{style_file}()},
+\code{\link{style_pkg}()},
+\code{\link{style_text}()},
+\code{\link{styler_addins}}
 }
 \concept{stylers}
