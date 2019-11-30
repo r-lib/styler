@@ -30,7 +30,8 @@ create_tokens <- function(tokens,
                           indention_ref_pos_ids = NA,
                           indents = 0,
                           terminal = TRUE,
-                          child = NULL) {
+                          child = NULL,
+                          stylerignore = FALSE) {
   len_text <- length(texts)
   new_tibble(
     list(
@@ -48,7 +49,8 @@ create_tokens <- function(tokens,
     multi_line = rep(FALSE, len_text),
     indention_ref_pos_id = indention_ref_pos_ids,
     indent = indents,
-    child = rep(list(child), len_text)
+    child = rep(list(child), len_text),
+    stylerignore = stylerignore
   ),
     nrow = len_text
   )

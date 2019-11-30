@@ -15,7 +15,8 @@ create_tokens(
   indention_ref_pos_ids = NA,
   indents = 0,
   terminal = TRUE,
-  child = NULL
+  child = NULL,
+  stylerignore = FALSE
 )
 }
 \arguments{

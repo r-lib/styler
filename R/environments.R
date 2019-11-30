@@ -46,5 +46,17 @@ parser_version_find <- function(pd) {
 }
 
 
-
+#' The elements that are added to this environment are:
+#'
+#' @details
+#' * `parser_version`: Needed to dispatch between parser versions, see
+#'   [parser_version_set()] for details.
+#' * `stylerignore`: A tibble with parse data containing tokens that fall within
+#'   a stylerignore sequence. This is used after serializing the flattened
+#'   parse table to apply the initial formatting to these tokens. See
+#'   [stylerignore] for details.
+#' * `any_stylerignore`: Whether there is any stylerignore marker. The idea is
+#'   to check early in the runtime if this is the case and then if so, take
+#'   as many short-cuts as possible. See [stylerignore] for details.
+#' @keywords internal
 env_current <- rlang::new_environment(parent = rlang::empty_env())

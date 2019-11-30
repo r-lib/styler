@@ -47,3 +47,4 @@ styler:::post_visit(transformers$initialize)
 nest <- pd_nested$child[[1]]
 styler:::token_is_on_aligned_line(nest)
 }
+\keyword{internal}
