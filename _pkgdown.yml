@@ -2,9 +2,6 @@ template:
   params:
     bootswatch: flatly # https://bootswatch.com/flatly/
 
-development:
-  mode: auto
-
 authors:
   Kirill Müller:
     href: http://krlmlr.info
