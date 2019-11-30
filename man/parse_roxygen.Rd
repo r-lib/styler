@@ -11,8 +11,8 @@ parse_roxygen(roxygen)
 }
 \description{
 Used to parse roxygen code examples. Removes line break before
-\code{\\dontrun{...}} and friends because it does not occurr for segments other
-than \code{\\dont{...}} and friends.
+\verb{\\\dontrun{...}} and friends because it does not occurr for segments other
+than \verb{\\\\dont\{...\}} and friends.
 }
 \examples{
 styler:::parse_roxygen(c(

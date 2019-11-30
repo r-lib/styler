@@ -8,7 +8,7 @@ get_engine_pattern()
 }
 \description{
 The function returns the regular expression pattern that identifies
-all r engines in Rmd chunks. Defaults to \code{[Rr]}. You probably only want to
+all r engines in Rmd chunks. Defaults to \verb{[Rr]}. You probably only want to
 change this if you create a knitr engine that processes R code but is not
 the default engine \code{r}.
 The pattern must be followed by a space (in the case the chunk is given

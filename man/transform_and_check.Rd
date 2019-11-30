@@ -4,9 +4,17 @@
 \alias{transform_and_check}
 \title{Transform a file an check the result}
 \usage{
-transform_and_check(in_item, out_item, in_name = in_item,
-  out_name = out_item, transformer, write_back, write_tree = NA,
-  out_tree = "_tree", ...)
+transform_and_check(
+  in_item,
+  out_item,
+  in_name = in_item,
+  out_name = out_item,
+  transformer,
+  write_back,
+  write_tree = NA,
+  out_tree = "_tree",
+  ...
+)
 }
 \arguments{
 \item{in_item}{An path to an file to transform.}

@@ -16,7 +16,8 @@ Uses \code{\link[purrr:reduce]{purrr::reduce()}} to apply each function of \code
 \code{pd_flat}.
 }
 \seealso{
-Other visitors: \code{\link{visit}}
+Other visitors: 
+\code{\link{visit}}
 }
 \concept{visitors}
 \keyword{internal}

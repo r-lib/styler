@@ -4,8 +4,12 @@
 \alias{next_terminal}
 \title{Tell me what the next terminal is}
 \usage{
-next_terminal(pd, stack = FALSE, vars = c("pos_id", "token", "text"),
-  tokens_exclude = c())
+next_terminal(
+  pd,
+  stack = FALSE,
+  vars = c("pos_id", "token", "text"),
+  tokens_exclude = c()
+)
 }
 \arguments{
 \item{pd}{A nest.}

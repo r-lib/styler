@@ -4,9 +4,15 @@
 \alias{style_pkg}
 \title{Prettify R source code}
 \usage{
-style_pkg(pkg = ".", ..., style = tidyverse_style,
-  transformers = style(...), filetype = c("R", "Rprofile"),
-  exclude_files = "R/RcppExports.R", include_roxygen_examples = TRUE)
+style_pkg(
+  pkg = ".",
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  filetype = c("R", "Rprofile"),
+  exclude_files = "R/RcppExports.R",
+  include_roxygen_examples = TRUE
+)
 }
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package.}
@@ -91,8 +97,10 @@ style_pkg(
 }
 }
 \seealso{
-Other stylers: \code{\link{style_dir}},
-  \code{\link{style_file}}, \code{\link{style_text}},
-  \code{\link{styler_addins}}
+Other stylers: 
+\code{\link{style_dir}()},
+\code{\link{style_file}()},
+\code{\link{style_text}()},
+\code{\link{styler_addins}}
 }
 \concept{stylers}

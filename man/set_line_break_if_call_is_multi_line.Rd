@@ -7,8 +7,11 @@
 \alias{remove_line_break_in_empty_fun_call}
 \title{Set line break for multi-line function calls}
 \usage{
-set_line_break_after_opening_if_call_is_multi_line(pd,
-  except_token_after = NULL, except_text_before = NULL)
+set_line_break_after_opening_if_call_is_multi_line(
+  pd,
+  except_token_after = NULL,
+  except_text_before = NULL
+)
 
 set_line_break_before_closing_call(pd, except_token_before)
 

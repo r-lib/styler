@@ -4,9 +4,15 @@
 \alias{create_style_guide}
 \title{Create a style guide}
 \usage{
-create_style_guide(initialize = default_style_guide_attributes,
-  line_break = NULL, space = NULL, token = NULL, indention = NULL,
-  use_raw_indention = FALSE, reindention = tidyverse_reindention())
+create_style_guide(
+  initialize = default_style_guide_attributes,
+  line_break = NULL,
+  space = NULL,
+  token = NULL,
+  indention = NULL,
+  use_raw_indention = FALSE,
+  reindention = tidyverse_reindention()
+)
 }
 \arguments{
 \item{initialize}{The bare name of a function that initializes various

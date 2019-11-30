@@ -24,7 +24,8 @@ before applying the functions (meaning it first applies the functions
 to the innermost level of nesting first and then going outwards).
 }
 \seealso{
-Other visitors: \code{\link{visit_one}}
+Other visitors: 
+\code{\link{visit_one}()}
 }
 \concept{visitors}
 \keyword{internal}

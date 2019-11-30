@@ -4,9 +4,12 @@
 \alias{print.vertical}
 \title{Print styled code}
 \usage{
-\method{print}{vertical}(x, ...,
+\method{print}{vertical}(
+  x,
+  ...,
   colored = getOption("styler.colored_print.vertical"),
-  style = prettycode::default_style())
+  style = prettycode::default_style()
+)
 }
 \arguments{
 \item{x}{A character vector, one element corresponds to one line of code.}
