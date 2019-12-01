@@ -79,14 +79,21 @@ make_transformer <- function(transformers,
   force(transformers)
   cache_dir <- c("styler", cache_get_name())
   assert_R.cache_installation(action = "warn")
+
+  is_R.cache_installed <- rlang::is_installed("R.cache")
+
   function(text) {
-    is_cached <- rlang::is_installed("R.cache") && !is.null(
-      R.cache::findCache(
+    should_use_cache <- is_R.cache_installed && cache_is_activated()
+
+    if (should_use_cache) {
+      use_cache <- !is.null(R.cache::findCache(
         key = cache_make_key(text, transformers),
-                         dir = cache_dir)
-    )
-    should_use_cache <- cache_is_activated()
-    use_cache <- is_cached && should_use_cache
+        dir = cache_dir
+      ))
+    } else {
+      use_cache <- FALSE
+    }
+
     if (!use_cache) {
       transformed_code <- text %>%
         parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
@@ -99,12 +106,12 @@ make_transformer <- function(transformers,
         R.cache::saveCache(
           NULL,
           key = cache_make_key(transformed_code, transformers),
-          dir = cache_dir, shallow = TRUE
+          dir = cache_dir
         )
       }
       transformed_code
     } else {
-      cat("cached value:\n")
+      cat("(cached)")
       text
     }
   }
