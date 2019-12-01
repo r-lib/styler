@@ -61,6 +61,11 @@ region.
 
 ## Functionality of styler
 
+  - style plain R, Rmd, .Rprofile and Rnw files.
+  - style roxygen2 code examples.
+  - not re-style deliberate code alignment
+    ([vignette](https://styler.r-lib.org/articles/detect-alignment.html)).
+
 **scope**
 
 You can decide on the level of invasiveness with the scope argument. You
@@ -108,8 +113,8 @@ style_text(
 
 This was just the tip of the iceberg. Learn more about customization
 with the tidyverse style guide in in this
-[vignette](https://styler.r-lib.org/articles/introducing_styler.html). If
-this is not flexible enough for you, you can implement your own style
+[vignette](https://styler.r-lib.org/articles/introducing_styler.html).
+If this is not flexible enough for you, you can implement your own style
 guide, as explained in the corresponding
 [vignette](https://styler.r-lib.org/articles/customizing_styler.html).
 

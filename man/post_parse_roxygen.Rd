@@ -10,7 +10,7 @@ post_parse_roxygen(raw)
 \item{raw}{Raw code to post-process.}
 }
 \description{
-Input: New line denoted with \code{\\n}. Lines can span across elements.
+Input: New line denoted with \verb{\\\\n}. Lines can span across elements.
 Output: Each element in the vector is one line.
 }
 \keyword{internal}

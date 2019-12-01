@@ -4,8 +4,13 @@
 \alias{prettify_any}
 \title{Prettify R code in current working directory}
 \usage{
-prettify_any(transformers, filetype, recursive, exclude_files,
-  include_roxygen_examples)
+prettify_any(
+  transformers,
+  filetype,
+  recursive,
+  exclude_files,
+  include_roxygen_examples
+)
 }
 \arguments{
 \item{transformers}{A set of transformer functions. This argument is most

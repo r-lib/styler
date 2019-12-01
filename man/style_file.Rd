@@ -4,8 +4,13 @@
 \alias{style_file}
 \title{Style \code{.R}, \code{.Rmd} or \code{.Rnw} files}
 \usage{
-style_file(path, ..., style = tidyverse_style,
-  transformers = style(...), include_roxygen_examples = TRUE)
+style_file(
+  path,
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  include_roxygen_examples = TRUE
+)
 }
 \arguments{
 \item{path}{A character vector with paths to files to style.}
@@ -85,8 +90,10 @@ xfun::read_utf8(file)
 unlink(file)
 }
 \seealso{
-Other stylers: \code{\link{style_dir}},
-  \code{\link{style_pkg}}, \code{\link{style_text}},
-  \code{\link{styler_addins}}
+Other stylers: 
+\code{\link{style_dir}()},
+\code{\link{style_pkg}()},
+\code{\link{style_text}()},
+\code{\link{styler_addins}}
 }
 \concept{stylers}

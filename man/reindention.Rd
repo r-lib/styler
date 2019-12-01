@@ -6,8 +6,7 @@
 \alias{tidyverse_reindention}
 \title{Specify what is re-indented how}
 \usage{
-specify_reindention(regex_pattern = NULL, indention = 0,
-  comments_only = TRUE)
+specify_reindention(regex_pattern = NULL, indention = 0, comments_only = TRUE)
 
 tidyverse_reindention()
 }

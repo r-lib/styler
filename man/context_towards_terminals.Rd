@@ -4,8 +4,13 @@
 \alias{context_towards_terminals}
 \title{Update the a parse table given outer context}
 \usage{
-context_towards_terminals(pd_nested, outer_lag_newlines, outer_indent,
-  outer_spaces, outer_indention_refs)
+context_towards_terminals(
+  pd_nested,
+  outer_lag_newlines,
+  outer_indent,
+  outer_spaces,
+  outer_indention_refs
+)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}

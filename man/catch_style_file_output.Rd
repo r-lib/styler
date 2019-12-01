@@ -5,8 +5,10 @@
 \title{Capture and post-process the output of \code{style_file} without causing side
 effects}
 \usage{
-catch_style_file_output(file_in = c("public-api", "xyzdir-dirty",
-  "dirty-sample-with-scope-tokens.R"), encoding)
+catch_style_file_output(
+  file_in = c("public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"),
+  encoding
+)
 }
 \arguments{
 \item{file_in}{A vector passed to \code{\link[=testthat_file]{testthat_file()}} to construct the path

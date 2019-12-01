@@ -11,8 +11,8 @@ is_shebang(pd)
 }
 \description{
 Shebangs should be preserved and no space should be inserted between
-# and !. A comment is a shebang if it is the first top level token
-(identified with \code{pos_id}) and if it starts with \code{#!}.
+\# and !. A comment is a shebang if it is the first top level token
+(identified with \code{pos_id}) and if it starts with \verb{#!}.
 }
 \examples{
 style_text("#!/usr/bin/env Rscript")

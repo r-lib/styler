@@ -10,7 +10,10 @@
 compute_parse_data_nested <- function(text) {
   parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
-    add_terminal_token_after()
+    add_terminal_token_after() %>%
+    add_stylerignore()
+
+  env_add_stylerignore(parse_data)
 
   parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
@@ -20,6 +23,57 @@ compute_parse_data_nested <- function(text) {
 
   pd_nested
 }
+
+#' Turn off styling for parts of the code
+#'
+#' Using stylerignore markers, you can temporarily turn off styler. See a
+#' few illustrative examples below.
+#' @details
+#' Styling is on by default when you run styler.
+#' - To mark the start of a sequence where you want to turn styling off, use
+#'   `# styler: off`.
+#' - To mark the end of this sequence, put `# styler: on` in your code. After
+#'   that line, styler will again format your code.
+#' - To ignore an inline statement (i.e. just one line), place `# styler: off`
+#'   at the end of the line. Note that inline statements cannot contain other
+#'   comments apart from the marker, i.e. a line like
+#'   `1 # comment # styler: off` won't be ignored.
+#'
+#' To use something else as start and stop markers, set the R options
+#' `styler.ignore_start` and
+#' `styler.ignore_stop` using [options()]. If you want these
+#' settings to persist over mulitple R sessions, consider setting them in your
+#' R profile, e.g. with `usethis::edit_rprofile()`.
+#' @name stylerignore
+#' @examples
+#' # as long as the order of the markers is correct, the lines are ignored.
+#' style_text(
+#'   "
+#'   1+1
+#'   # styler: off
+#'   1+1
+#'   # styler: on
+#'   1+1
+#'   "
+#')
+#'
+#' # if there is a stop marker before a start marker, styler won't be able
+#' # to figure out which lines you want to ignore and won't ignore anything,
+#' # issuing a warning.
+#' \dontrun{
+#' style_text(
+#'   "
+#'   1+1
+#'   # styler: off
+#'   1+1
+#'   # styler: off
+#'   1+1
+#'   "
+#')
+#'}
+#'
+NULL
+
 
 #' Enhance the mapping of text to the token "SPECIAL"
 #'
@@ -56,9 +110,13 @@ NULL
 add_terminal_token_after <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 
-  tibble(pos_id = terminals$pos_id, token_after = lead(terminals$token, default = "")) %>%
+  new_tibble(list(
+    pos_id = terminals$pos_id,
+    token_after = lead(terminals$token, default = "")),
+    nrow = nrow(terminals)
+  ) %>%
     left_join(pd_flat, ., by = "pos_id")
 }
 
@@ -67,11 +125,14 @@ add_terminal_token_after <- function(pd_flat) {
 add_terminal_token_before <- function(pd_flat) {
   terminals <- pd_flat %>%
     filter(terminal) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 
-  tibble(
-    id = terminals$id,
-    token_before = lag(terminals$token, default = "")
+  new_tibble(
+    list(
+      id = terminals$id,
+      token_before = lag(terminals$token, default = "")
+    ),
+    nrow = nrow(terminals)
   ) %>%
     left_join(pd_flat, ., by = "id")
 }

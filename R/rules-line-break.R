@@ -225,7 +225,7 @@ set_line_break_after_opening_if_call_is_multi_line <-
 
     exception_pos <- c(
       which(pd$token %in% except_token_after),
-      if_else(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
+      ifelse(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
     )
     pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
     pd

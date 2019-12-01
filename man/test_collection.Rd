@@ -4,8 +4,14 @@
 \alias{test_collection}
 \title{Run a collection of tests}
 \usage{
-test_collection(test, sub_test = NULL, write_back = TRUE,
-  write_tree = NA, transformer, ...)
+test_collection(
+  test,
+  sub_test = NULL,
+  write_back = TRUE,
+  write_tree = NA,
+  transformer,
+  ...
+)
 }
 \arguments{
 \item{test}{The test to run. It corresponds to a folder name in

@@ -15,3 +15,4 @@ excluding first and last column.}
 \description{
 Serialize one line for a column
 }
+\keyword{internal}

@@ -1,3 +1,11 @@
+# styler 1.2.0.9000
+
+* ignore certain lines using `# styler: off` and `#styler: on` or custom 
+  markers, see `help("stylerignore")` (#560).
+
+* function documentation now contains many more linebreaks due to roxygen2 
+  update to version 7.0.1 (#566).
+  
 # styler 1.2.0
 
 ## Breaking changes

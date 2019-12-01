@@ -2,10 +2,15 @@
 % Please edit documentation in R/testing-mocks.R
 \name{style_text_without_curly_curly}
 \alias{style_text_without_curly_curly}
-\title{\code{style_text()} without rules for \code{\{\{}}
+\title{\code{style_text()} without rules for \verb{\\\{\\\{}}
 \usage{
-style_text_without_curly_curly(text, ..., style = tidyverse_style,
-  transformers = style(...), include_roxygen_examples = TRUE)
+style_text_without_curly_curly(
+  text,
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  include_roxygen_examples = TRUE
+)
 }
 \description{
 This function mocks \code{\link[=style_text]{style_text()}}, but without taking into consideration the
@@ -18,7 +23,7 @@ same line in the tidyverse style guide because we should
 ensure the underlaying mechanics for indention work correctly. When
 indention mechanisms are changed later, e.g. by simplifying
 \code{\link[=compute_indent_indices]{compute_indent_indices()}}, we must have
-a way of testing this without the interaction of \code{\{\{}.
+a way of testing this without the interaction of \verb{\\\{\\\{}.
 }
 \examples{
 styler:::style_text_without_curly_curly("rlang::list2({{ x }} := 2)")

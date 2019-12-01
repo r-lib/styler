@@ -4,9 +4,20 @@
 \alias{create_tokens}
 \title{Create a terminal token}
 \usage{
-create_tokens(tokens, texts, lag_newlines = 0, spaces = 0, pos_ids,
-  token_before = NA, token_after = NA, indention_ref_pos_ids = NA,
-  indents = 0, terminal = TRUE, child = NULL)
+create_tokens(
+  tokens,
+  texts,
+  lag_newlines = 0,
+  spaces = 0,
+  pos_ids,
+  token_before = NA,
+  token_after = NA,
+  indention_ref_pos_ids = NA,
+  indents = 0,
+  terminal = TRUE,
+  child = NULL,
+  stylerignore = FALSE
+)
 }
 \arguments{
 \item{tokens}{Character vector with tokens to create.}
@@ -41,8 +52,9 @@ not.}
 Creates a terminal token represented as (a row of) a parse table.
 }
 \seealso{
-Other token creators: \code{\link{create_pos_ids}},
-  \code{\link{validate_new_pos_ids}}
+Other token creators: 
+\code{\link{create_pos_ids}()},
+\code{\link{validate_new_pos_ids}()}
 }
 \concept{token creators}
 \keyword{internal}

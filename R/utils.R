@@ -85,3 +85,19 @@ calls_sys <- function(sys_call, ...) {
     error <- system(sys_call, ...)
   }
 }
+
+#' Get the value of an option
+#'
+#' Basically a `getOptions()` that fails fast by default.
+#' @inheritParams base::getOption
+#' @param error_if_not_found Whether or not an error should be returned if the
+#'   option was not set.
+#' @keywords internal
+option_read <- function(x, default = NULL, error_if_not_found = TRUE) {
+  if (x %in% names(options()) | !error_if_not_found) {
+    getOption(x, default)
+  } else {
+    rlang::abort(paste("R option", x, "most be set."))
+  }
+
+}
