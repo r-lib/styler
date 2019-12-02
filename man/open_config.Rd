@@ -23,6 +23,7 @@ in inst/WORDLIST.
 }
 }
 \seealso{
-Other helpers: \code{\link{use_precommit}}
+Other helpers: 
+\code{\link{use_precommit}()}
 }
 \concept{helpers}
