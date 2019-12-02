@@ -51,14 +51,15 @@ use_precommit_config <- function(force) {
       fs::path(".", name_target),
       overwrite = TRUE
     )
+    usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
   } else {
-    rlang::abort(paste0(
+    usethis::ui_warn(paste0(
       "There is already a pre-commit configuration file in ",
       path_root,
       ". Use `force = TRUE` to replace .pre-commit-config.yaml"
     ))
   }
-  usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
+  
   if (is_package(".")) {
     usethis::write_union(".Rbuildignore", escaped_name_target)
   }
