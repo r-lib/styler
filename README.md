@@ -35,8 +35,8 @@ precommit::use_precommit()
 ```
 
 This installs pre-commit and performs some other set-up tasks. If you
-want more control over the installation, see
-`vignette("manual-installation")`.
+don’t want to use conda, see `vignette("manual-installation")` for
+alternative installation methods.
 
 # Usage
 
