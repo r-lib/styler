@@ -1,4 +1,12 @@
 #' Set up pre-commit
+#' 
+#' This function should be called in two situations: 
+#' 
+#' * You want to add pre-commit support to a git repo. This involves adding
+#'   a pre-commit config file and making sure git will call the hooks before
+#'   the next commit.
+#' * You use a repo that has such a config file but for pre-commit to become 
+#'   active, you need to make sure git knows that it should call pre-commit.
 #'
 #' @details
 #' * installs pre-commit in your current directory.

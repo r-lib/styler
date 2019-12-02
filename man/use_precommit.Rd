@@ -15,10 +15,15 @@ it's been placed in your repo.}
 \item{path_root}{The path to the root directory of your project.}
 }
 \description{
-Set up pre-commit
+This function should be called in two situations:
 }
 \details{
 \itemize{
+\item You want to add pre-commit support to a git repo. This involves adding
+a pre-commit config file and making sure git will call the hooks before
+the next commit.
+\item You use a repo that has such a config file but for pre-commit to become
+active, you need to make sure git knows that it should call pre-commit.
 \item installs pre-commit in your current directory.
 \item sets up a template \code{.pre-commit-config.yaml}.
 \item autoupdates the template to make sure you get the latest versions of the
@@ -27,6 +32,7 @@ hooks.
 }
 }
 \seealso{
-Other helpers: \code{\link{open_config}}
+Other helpers: 
+\code{\link{open_config}()}
 }
 \concept{helpers}

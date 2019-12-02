@@ -1,7 +1,7 @@
 # All available hooks: https://pre-commit.com/hooks.html
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9016
+    rev: v0.0.0.9024
     hooks: 
     # any R project
     -   id: style-files
@@ -15,6 +15,6 @@ repos:
     -   id: use-tidy-description
     -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v1.2.3
+    rev: v2.4.0
     hooks: 
     -   id: check-added-large-files

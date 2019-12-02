@@ -24,11 +24,13 @@ Please make sure you have conda installed. The rest can be handled from
 R:
 
 ``` r
-# once
+# once on your system
 remotes::install_github("lorenzwalthert/precommit")
 precommit::install_precommit()
 
-# in every project
+# once in every git repo either
+# * after cloning a repo that already uses pre-commit or
+# * if you want introduce pre-commit to this repo
 precommit::use_precommit()
 ```
 
