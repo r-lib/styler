@@ -29,13 +29,15 @@ install_precommit <- function() {
 }
 
 #' Unistall pre-commit
-#'
+#' 
+#' Remove pre-commit from a repo or from your system.
 #' @param scope Either "repo" or "global". "repo" removes pre-commit from your
 #'   project, but you will be able to use it in other projects. With "global",
 #'   you remove the pre-commit executable in the virtual python environment
-#'   r-reticulate so it won't be available in any project.
+#'   r-reticulate so it won't be available in any project. When you want to
+#'   remove pre-commit globally, you should remote it locally first.
 #' @param ask Either "global", "repo" or "none" to determine in which case
-#'   a prompt should show up to let the user confirm his action.#'
+#'   a prompt should show up to let the user confirm his action.
 #' @inheritParams fallback_doc
 #' @export
 uninstall_precommit <- function(scope = "repo",
@@ -138,7 +140,12 @@ uninstall_precommit_repo <- function(ask) {
     path_file <- ".pre-commit-config.yaml"
     if (fs::file_exists(path_file)) {
       fs::file_delete(path_file)
-      usethis::ui_done("Removed .pre-commit-config.yaml.")
+      usethis::ui_done(paste0(
+        "Removed .pre-commit-config.yaml. If you want your collaborators",
+        "to be able to\ncontinue to use pre-commit in this repo, you should", 
+        "undo the deletion of this file,\ne.g. with `$ git checkout", 
+        ".pre-commit-config.yaml`."
+      ))
     }
 
     usethis::ui_info(paste(

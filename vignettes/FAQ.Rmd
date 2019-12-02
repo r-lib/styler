@@ -1,0 +1,59 @@
+---
+title: "FAQ"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FAQ}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# How does it work? What's the magic?
+
+No magic. Git [provides a mechanism for pre-commit
+hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). Since it's
+cumbersome to copy bash scripts and keep them updated in some hidden `.git/`
+directory, people wrote frameworks to basically maintain these files. One of
+them is [pre-commit.com](pre-commit.com). So you call git to commit, git calls
+its internal hooks, these hooks (bash scripts in the simplest case) are provided
+by the pre-commit framework. And where does pre-commit get all it's nice hooks
+from? From us.
+
+# How are hooks accessed? What happens if there's no internet connection?
+
+No internet connection required, except during installation
+(`precommit::install_precommit()`and `precommit::use_precommit()`). Hooks will
+be placed into `.git/` during calling the `precommit::use_precommit()` and
+afterwards you can `precommit::autoupdate()` to basically do a `git pull`
+(that's what I think happens).
+
+# Can you use it outside RStudio?
+
+Yes, all but the `open_config()` and `open_wordlist()` to open files in RStudio. 
+
+# Can I use the hooks provided in this package without installing the R package?
+
+Yes. The hooks are working even if you don't have the R package installed 
+because all you need to have for the hooks to work is the pre-commit executable. 
+It will `git clone` the hooks from this repo into `.git/hooks` or similar. All
+exported functions of this package are just for the users convenience.
+
+# What if not all people who are committing to this repo want to use the hooks?
+
+This is not a problem, git will only run the hooks in a local repo after
+`precommit::use_precommit()` ran successfully in this very repo on your machine.
+You can also uninstall anytime with `precommit::uninstall_precommit()`. Anyone
+who does not want to use the hooks simply should not run
+`precommit::use_precommit()`. You can also temporarily disable hooks as 
+described [here](https://pre-commit.com/#temporarily-disabling-hooks).
+
+
+# How does one create a new pre-commit hook?
+
+How to contribute new hooks is explained in `CONTRIBUTING.md`.

@@ -10,13 +10,14 @@ uninstall_precommit(scope = "repo", ask = "global", path_root = ".")
 \item{scope}{Either "repo" or "global". "repo" removes pre-commit from your
 project, but you will be able to use it in other projects. With "global",
 you remove the pre-commit executable in the virtual python environment
-r-reticulate so it won't be available in any project.}
+r-reticulate so it won't be available in any project. When you want to
+remove pre-commit globally, you should remote it locally first.}
 
 \item{ask}{Either "global", "repo" or "none" to determine in which case
-a prompt should show up to let the user confirm his action.#'}
+a prompt should show up to let the user confirm his action.}
 
 \item{path_root}{The path to the root directory of your project.}
 }
 \description{
-Unistall pre-commit
+Remove pre-commit from a repo or from your system.
 }

@@ -14,9 +14,16 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 [Pre-commit hooks](https://pre-commit.com) are tests that run each time
 you attempt to commit. If the tests pass, the commit will be made,
 otherwise not. A very basic test is to check if the code is parsable,
-making sure you have not forgotten a comma, brace or quote. To learn
-more about available hooks and why to use them consult the [online
-documentation](https://lorenzwalthert.github.io/precommit/index.html).
+making sure you have not forgotten a comma, brace or quote.
+
+The goal of this package is to twofold:
+
+  - Provide a set of hooks that are useful when your git repo contains R
+    code. You can find them under `vignette("available-hooks")`.
+
+  - Provide [usethis](https://github.com/r-lib/usethis)-like
+    functionality for common tasks such as installation and set-up and
+    config file modification.
 
 ## Installation
 
@@ -38,7 +45,7 @@ This installs pre-commit and performs some other set-up tasks. If you
 don’t want to use conda, see `vignette("manual-installation")` for
 alternative installation methods.
 
-# Usage
+## Usage
 
 The next time you run `git commit`, the hooks listed in your
 `.pre-commit-config.yaml` will get executed before the commit. The
@@ -67,8 +74,21 @@ You can also add other hooks from other repos, by extending the
 To update the hook revisions, just run `pre-commit autoupdate` in your
 terminal of `precommit::autoupdate()`.
 
-# Caution
+## Caution
 
 **Do not abort while hooks are running.** Non-staged changes are stashed
 to a temp directory when the hooks are run and may not easily be
 recovered afterwards.
+
+## Documentation
+
+The [online
+documentation](https://lorenzwalthert.github.io/precommit/index.html) of
+this package only covers the functionality added on top of pre-commit by
+this package. Everything else is covered in the extensive [online
+documentation](https://pre-commit.com) of the pre-commit framework
+itself, including how to:
+
+  - create pre-push hooks
+  - create local hooks
+  - and more
