@@ -54,11 +54,11 @@ methods.
 
 The next time you run `git commit`, the hooks listed in your
 `.pre-commit-config.yaml` will get executed before the commit. The helper
-function `precommit::open_config()` let's you open the `.pre-commit-config.yaml`
-conveniently from the RStudio console. When any file is changed due to running a
-hook, the commit will fail. You can inspect the changes introduced by the hook
-and if satisfied, you can attempt to commit again. If all hooks pass, the commit
-is made. You can also [temporarily disable
+function `precommit::open_config()` let's you open and edit the
+`.pre-commit-config.yaml` conveniently from the RStudio console. When any file
+is changed due to running a hook, the commit will fail. You can inspect the
+changes introduced by the hook and if satisfied, you can attempt to commit
+again. If all hooks pass, the commit is made. You can also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you succeed, it
 should look like this:
 
@@ -77,8 +77,7 @@ also add other hooks from other repos, by extending the
     -   id: check-added-large-files
 ```
 
-To update the hook revisions, just run `pre-commit autoupdate` in your terminal
-of `precommit::autoupdate()`.
+To update the hook revisions, run `precommit::autoupdate()`.
 
 ## Caution 
 
@@ -86,7 +85,7 @@ of `precommit::autoupdate()`.
   temp directory when the hooks are run and may not easily be recovered
   afterwards.
 
-- because R is not officially supported as a langauge in the pre-commit
+- Because R is not officially supported as a langauge in the pre-commit
   framework (yet), there is no R package dependency management for the R hooks
   provided in this repo. If an R package that is needed by a hook is not yet
   installed, you might get this error:
@@ -100,7 +99,6 @@ of `precommit::autoupdate()`.
   dependencies of this R package, so if you want to install them all, just 
   `remotes::install_github("lorenzwalthert/precommit", dependencies = c("Imports", "Suggests"))`.
   
-
 ## Documentation
 
 The [online

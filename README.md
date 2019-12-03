@@ -49,7 +49,7 @@ alternative installation methods.
 
 The next time you run `git commit`, the hooks listed in your
 `.pre-commit-config.yaml` will get executed before the commit. The
-helper function `precommit::open_config()` let’s you open the
+helper function `precommit::open_config()` let’s you open and edit the
 `.pre-commit-config.yaml` conveniently from the RStudio console. When
 any file is changed due to running a hook, the commit will fail. You can
 inspect the changes introduced by the hook and if satisfied, you can
@@ -71,8 +71,7 @@ You can also add other hooks from other repos, by extending the
     -   id: check-added-large-files
 ```
 
-To update the hook revisions, just run `pre-commit autoupdate` in your
-terminal of `precommit::autoupdate()`.
+To update the hook revisions, run `precommit::autoupdate()`.
 
 ## Caution
 
@@ -80,7 +79,7 @@ terminal of `precommit::autoupdate()`.
     stashed to a temp directory when the hooks are run and may not
     easily be recovered afterwards.
 
-  - because R is not officially supported as a langauge in the
+  - Because R is not officially supported as a langauge in the
     pre-commit framework (yet), there is no R package dependency
     management for the R hooks provided in this repo. If an R package
     that is needed by a hook is not yet installed, you might get this
