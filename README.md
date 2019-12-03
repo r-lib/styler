@@ -76,9 +76,28 @@ terminal of `precommit::autoupdate()`.
 
 ## Caution
 
-**Do not abort while hooks are running.** Non-staged changes are stashed
-to a temp directory when the hooks are run and may not easily be
-recovered afterwards.
+  - **Do not abort while hooks are running.** Non-staged changes are
+    stashed to a temp directory when the hooks are run and may not
+    easily be recovered afterwards.
+
+  - because R is not officially supported as a langauge in the
+    pre-commit framework (yet), there is no R package dependency
+    management for the R hooks provided in this repo. If an R package
+    that is needed by a hook is not yet installed, you might get this
+    error:
+
+<!-- end list -->
+
+``` r
+#> Error in loadNamespace(name) : there is no package called ‘__name_of_package__’
+```
+
+In that case, just install the package with `install.packages()` once
+and try to commit again. All R dependencies of the pre-commit hooks
+provided in this repo are suggested dependencies of this R package, so
+if you want to install them all, just
+`remotes::install_github("lorenzwalthert/precommit", dependencies =
+c("Imports", "Suggests"))`.
 
 ## Documentation
 
@@ -90,5 +109,7 @@ documentation](https://pre-commit.com) of the pre-commit framework
 itself, including how to:
 
   - create pre-push hooks
+
   - create local hooks
+
   - and more
