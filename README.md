@@ -112,3 +112,10 @@ itself, including how to:
   - create local hooks
 
   - and more
+
+## Uninstallation
+
+``` r
+uninstall_precommit("repo") # just for the repo you are in.
+uninstall_precommit("global") # remove the pre-commit conda executable.
+```

@@ -6,7 +6,8 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  fig.path = "man/figures/"
+  fig.path = "man/figures/", 
+  eval = FALSE
 )
 ```
 
@@ -35,7 +36,7 @@ The goal of this package is to twofold:
 
 Please make sure you have conda installed. The rest can be handled from R:
 
-```{r, eval = FALSE}
+```{r}
 # once on your system
 remotes::install_github("lorenzwalthert/precommit")
 precommit::install_precommit()
@@ -62,7 +63,7 @@ again. If all hooks pass, the commit is made. You can also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you succeed, it
 should look like this:
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = TRUE}
 knitr::include_graphics("man/figures/screenshot.png")
 ```
 
@@ -90,7 +91,7 @@ To update the hook revisions, run `precommit::autoupdate()`.
   provided in this repo. If an R package that is needed by a hook is not yet
   installed, you might get this error:
 
-```{r, eval = FALSE}
+```{r}
 #> Error in loadNamespace(name) : there is no package called ‘__name_of_package__’
 ```
   In that case, just install the package with `install.packages()` once and 
@@ -113,4 +114,11 @@ including how to:
 - create local hooks
 
 - and more
+
+## Uninstallation
+
+```{r}
+uninstall_precommit("repo") # just for the repo you are in.
+uninstall_precommit("global") # remove the pre-commit conda executable.
+```
 
