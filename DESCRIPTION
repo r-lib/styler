@@ -23,7 +23,8 @@ Imports:
     desc,
     reticulate,
     magrittr,
-    R.cache
+    R.cache,
+    yaml
 Remotes: 
     lorenzwalthert/oneliner,
     ropenscilabs/tic

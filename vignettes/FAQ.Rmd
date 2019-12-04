@@ -10,6 +10,7 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  eval = FALSE,
   comment = "#>"
 )
 ```
@@ -27,11 +28,13 @@ from? From us.
 
 ## How are hooks accessed? What happens if there's no internet connection?
 
-No internet connection required, except during installation
-(`precommit::install_precommit()`and `precommit::use_precommit()`). Hooks will
-be placed into `.git/` during calling the `precommit::use_precommit()` and
-afterwards you can `precommit::autoupdate()` to basically do a `git pull`
-(that's what I think happens).
+Internet connection is required during installation 
+(`precommit::install_precommit()`) and project initialization 
+(`precommit::use_precommit()`) as well as when hooks are updated 
+(`precommit::autoupdate()`). Otherwise, no internet connection is required. 
+Hooks will be placed into `.git/` during calling the 
+`precommit::use_precommit()` and afterwards you can `precommit::autoupdate()` 
+to replace the hooks with their new version (that's what I think happens).
 
 ## Can you use it outside RStudio?
 
@@ -43,6 +46,18 @@ Yes. The hooks are working even if you don't have the R package installed
 because all you need to have for the hooks to work is the pre-commit executable. 
 It will `git clone` the hooks from this repo into `.git/hooks` or similar. All
 exported functions of this package are just for the users convenience.
+
+## How can I make sure that my contributors are using the hooks?
+
+They must follow the installation instruction on the README, i.e. run 
+```{r}
+remotes::install_github("lorenzwalthert/precommit")
+precommit::install_precommit()
+precommit::use_precommit()
+```
+
+The last call can be omitted by useres who have [automatically enabled 
+pre-commit hooks](https://pre-commit.com/#automatically-enabling-pre-commit-on-repositories).
 
 ## What if not all people who are committing to this repo want to use the hooks?
 

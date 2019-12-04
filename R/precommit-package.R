@@ -12,3 +12,11 @@ NULL
 #' @param path_root The path to the root directory of your project.
 #' @name fallback_doc
 NULL
+
+
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(c(
+    ".",
+    NULL
+  ))
+}

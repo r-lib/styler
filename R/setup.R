@@ -93,6 +93,7 @@ install_precommit_impl <- function() {
 #' @export
 autoupdate <- function(path_root = here::here()) {
   withr::with_dir(path_root, {
+    assert_correct_upstream_repo_url()
     out <- system2(path_pre_commit_exec(), "autoupdate")
     if (out == 0) {
       usethis::ui_done(paste0(
@@ -102,5 +103,21 @@ autoupdate <- function(path_root = here::here()) {
       rlang::abort("Running precommit autoupdate failed.")
     }
   })
-  
+
+}
+
+assert_correct_upstream_repo_url <- function() {
+  if (upstream_repo_url_is_outdated()) {
+    usethis::ui_info(c(
+      "The repo https://github.com/lorenzwalthert/pre-commit-hooks ", 
+      "has moved to https://github.com/lorenzwalthert/precommit. ", 
+      "Please update your .pre-commit-config.yaml to reflect this."
+    ))
+  }
+}
+
+upstream_repo_url_is_outdated <- function() {
+  purrr::map_chr(yaml::read_yaml(".pre-commit-config.yaml")$repos, ~.x$repo) %>%
+    grepl("https://github.com/lorenzwalthert/pre-commit-hooks", .) %>%
+    any()
 }
