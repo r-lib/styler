@@ -13,10 +13,10 @@ convert_newlines_to_linebreaks(text)
 Replace the newline character with a line break
 }
 \examples{
-styler:::convert_newlines_to_linebreaks("x\\n2")
+styler:::convert_newlines_to_linebreaks("x\n2")
 # a simple strsplit approach does not cover both cases
-unlist(strsplit("x\\n\\n2", "\\n", fixed = TRUE))
-unlist(strsplit(c("x", "", "2"), "\\n", fixed = TRUE))
+unlist(strsplit("x\n\n2", "\n", fixed = TRUE))
+unlist(strsplit(c("x", "", "2"), "\n", fixed = TRUE))
 styler:::convert_newlines_to_linebreaks(c("x", "2"))
 }
 \keyword{internal}

@@ -19,7 +19,8 @@ both.}
 Gives information about the cache.
 }
 \seealso{
-Other cache managers: \code{\link{cache_activate}},
-  \code{\link{cache_clear}}
+Other cache managers: 
+\code{\link{cache_activate}()},
+\code{\link{cache_clear}()}
 }
 \concept{cache managers}

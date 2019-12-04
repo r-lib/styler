@@ -24,7 +24,8 @@ Each version of styler has it's own cache by default, because styling is
 potentially different with different versions of styler.
 }
 \seealso{
-Other cache managers: \code{\link{cache_activate}},
-  \code{\link{cache_info}}
+Other cache managers: 
+\code{\link{cache_activate}()},
+\code{\link{cache_info}()}
 }
 \concept{cache managers}
