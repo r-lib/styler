@@ -42,7 +42,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    lorenzwalthert/R.cache@shallow
+    HenrikBengtsson/R.cache@develop
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",

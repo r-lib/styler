@@ -86,10 +86,11 @@ make_transformer <- function(transformers,
     should_use_cache <- is_R.cache_installed && cache_is_activated()
 
     if (should_use_cache) {
-      use_cache <- !is.null(R.cache::findCache(
+      use_cache <- R.cache::generateCache(
         key = cache_make_key(text, transformers),
-        dir = cache_dir
-      ))
+        dirs = cache_dir
+      ) %>%
+        file.exists()
     } else {
       use_cache <- FALSE
     }
@@ -103,11 +104,11 @@ make_transformer <- function(transformers,
           ~.
         )
       if (should_use_cache) {
-        R.cache::saveCache(
-          NULL,
+        R.cache::generateCache(
           key = cache_make_key(transformed_code, transformers),
-          dir = cache_dir
-        )
+          dirs = cache_dir
+        ) %>%
+          file.create()
       }
       transformed_code
     } else {
