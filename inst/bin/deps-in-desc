@@ -1,10 +1,12 @@
 #!/usr/bin/env Rscript
 
-"Ensure all dependencies of the form pkg::fun are in DESCRIPTION
+'Ensure all dependencies of the form pkg::fun are in DESCRIPTION
 Usage:
-  deps-in-desc <files>...
+  deps-in-desc [--allow_private_imports=<private-imports>] <files>...
 
-" -> doc
+Options:
+  --allow_private_imports=<private-imports> Whether or not to allow the use of ::: on imported functions [default: false].
+' -> doc
 pre_installed <- c(
   "base", "boot", "class", "cluster", "codetools", "compiler",
   "datasets", "foreign", "graphics", "grDevices", "grid", "KernSmooth",
@@ -14,6 +16,7 @@ pre_installed <- c(
 )
 
 arguments <- docopt::docopt(doc)
+
 deps_in_desc <- function(file, arguments) {
   parse_data <- getParseData(parse(file = file, keep.source = TRUE))
   used <- parse_data[parse_data$token == "SYMBOL_PACKAGE", ]$text
@@ -34,9 +37,24 @@ deps_in_desc <- function(file, arguments) {
     )
     out <- FALSE
   }
+  if (as.logical(toupper(arguments$allow_private_imports))) {
+    return(out)
+  }
+  private <- setdiff(
+    parse_data[c(parse_data$token[-1], FALSE) == "NS_GET_INT", ]$text,
+    local_pkg_name
+  )
+  if (length(private) > 0) {
+    cat(
+      "You should not call any function with `:::` unless it's a function you ",
+      "define yourself in this package. The following files have such function calls: ",
+      paste0(file, collapse = ", "),
+      sep = ""
+    )
+    out <- FALSE
+  }
   out
 }
-
 out <- lapply(arguments$files, deps_in_desc, arguments = arguments)
 if (!all(unlist(out))) {
   stop("Dependency check failed", call. = FALSE)

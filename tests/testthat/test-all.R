@@ -105,6 +105,15 @@ run_test("deps-in-desc",
          copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
+run_test("deps-in-desc",
+         "deps-in-desc-dot3",
+         suffix = "-fail.R", error_msg = NULL, 
+         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")), 
+         cmd_args = "--allow_private_imports=true"
+)
+
+
+
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### lintr                                                                   ####
