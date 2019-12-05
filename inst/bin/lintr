@@ -6,7 +6,7 @@ Usage:
   lintr [--warn_only] <files>...
 Options:
   --warn_only  Print lint warnings instead of blocking the commit. Should be
-               used with `verbose: True` in `.pre-commit-config.yaml`.
+               used with `verbose: true` in `.pre-commit-config.yaml`.
 ' -> doc
 
 arguments <- docopt::docopt(doc)
@@ -32,4 +32,3 @@ for (path in arguments$files) {
     )
   }
 }
-
