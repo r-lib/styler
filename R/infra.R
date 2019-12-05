@@ -18,7 +18,7 @@
 #'
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension).
-#' @param suffix The fuffix of `file_name`.
+#' @param suffix The suffix of `file_name`.
 #' @inheritParams run_test_impl
 run_test <- function(hook_name,
                      file_name = hook_name,

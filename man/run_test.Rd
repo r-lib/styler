@@ -18,7 +18,7 @@ run_test(
 
 \item{file_name}{The file to test in \verb{tests/in} (without extension).}
 
-\item{suffix}{The fuffix of \code{file_name}.}
+\item{suffix}{The suffix of \code{file_name}.}
 
 \item{error_msg}{An expected error message. If no error is expected, this
 can be \code{NULL}. In that case, the \code{comparator} is applied.}
