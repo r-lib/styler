@@ -11,8 +11,6 @@ Options:
 
 arguments <- docopt::docopt(doc)
 
-print(Sys.getenv())
-
 if (git2r::in_repository()) {
   git_status <- git2r::status(staged = FALSE)
   if (any(unlist(git_status) == ".lintr")) {
