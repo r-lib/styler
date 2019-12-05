@@ -39,7 +39,7 @@
     description: make sure codemeta.json is in sync with DESCRIPTION
     entry: inst/bin/codemeta-description-updated
     language: script
-    files: 'README\.[Rr]?md$'
+    files: 'DESCRIPTION|codemeta\.json'
 -   id: spell-check 
     name: spell-check
     description: perform a spell check with spelling::spell_check_files()
@@ -57,4 +57,4 @@
     description: check if a .R file is lint free (using lintr)
     entry: inst/bin/lintr
     language: script
-    files: 'DESCRIPTION|codemeta\.json'
+    files: '\.[rR]$'
