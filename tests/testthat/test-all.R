@@ -26,7 +26,6 @@ run_test("style-files",
 # success
 run_test("use-tidy-description", "DESCRIPTION", suffix = "")
 
-
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### no-browser-statement                                                    ####
 # success
@@ -89,6 +88,19 @@ run_test("deps-in-desc", suffix = "-success.R", error_msg = NULL)
 # fail (call to library that is not in description)
 run_test("deps-in-desc", suffix = "-fail.R", error_msg = "Dependency check failed")
 
+# with :::
+run_test("deps-in-desc",
+         "deps-in-desc-dot3",
+         suffix = "-fail.R", error_msg = "Dependency check failed"
+)
+
+run_test("deps-in-desc",
+         "deps-in-desc-dot3",
+         suffix = "-success.R", error_msg = NULL, 
+         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+)
+
+
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### lintr                                                                   ####
 
@@ -100,3 +112,4 @@ run_test("lintr",
 
 # failure
 run_test("lintr", suffix = "-fail.R", error_msg = "not lint free")
+

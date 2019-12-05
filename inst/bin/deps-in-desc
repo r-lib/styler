@@ -17,9 +17,10 @@ arguments <- docopt::docopt(doc)
 deps_in_desc <- function(file, arguments) {
   parse_data <- getParseData(parse(file = file, keep.source = TRUE))
   used <- parse_data[parse_data$token == "SYMBOL_PACKAGE", ]$text
+  local_pkg_name <- unname(desc::desc_get("Package"))
   unregistered <- setdiff(
     unique(used),
-    c(pre_installed, desc::desc_get_deps(file = ".")$package)
+    c(pre_installed, desc::desc_get_deps(file = ".")$package, local_pkg_name)
   )
   if (length(unregistered) > 0) {
     cat(
