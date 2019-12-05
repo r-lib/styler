@@ -1,15 +1,17 @@
 #!/usr/bin/env Rscript
 
 
-'Run lintr on a package.
+"Run lintr on R files during a precommit.
 Usage:
   lintr [--warn_only] <files>...
 Options:
   --warn_only  Print lint warnings instead of blocking the commit. Should be
                used with `verbose: True` in `.pre-commit-config.yaml`.
-' -> doc
+" -> doc
 
 arguments <- docopt::docopt(doc)
+
+print(Sys.getenv())
 
 if (git2r::in_repository()) {
   git_status <- git2r::status(staged = FALSE)
@@ -32,4 +34,3 @@ for (path in arguments$files) {
     )
   }
 }
-
