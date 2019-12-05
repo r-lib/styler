@@ -16,17 +16,20 @@ print(Sys.getenv())
 if (git2r::in_repository()) {
   git_status <- git2r::status(staged = FALSE)
   if (any(unlist(git_status) == ".lintr")) {
-    stop("Unstaged changes to .lintr file. Stage the .lintr file or discard ",
-         "the changes to it. ", call. = FALSE)
+    stop(
+      "Unstaged changes to .lintr file. Stage the .lintr file or discard ",
+      "the changes to it. ",
+      call. = FALSE
+    )
   }
 }
 
 for (path in arguments$files) {
   lints <- lintr::lint(path)
-  if (length(lints) && arguments$warn_only) {
+  if (length(lints) > 0 && arguments$warn_only) {
     cat("Warning: File `", path, "` is not lint free\n", sep = "")
     print(lints)
-  } else if (length(lints)) {
+  } else if (length(lints) > 0) {
     stop(
       "File ", path, " is not lint free\n",
       "Run lintr::lint('", path, "') to check the lintr output.",

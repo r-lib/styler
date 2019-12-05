@@ -32,7 +32,7 @@ The following hooks take arguments:
   passed to `spelling::spell_check_files()`.
 
 * `lintr`: Argument `--warning_only` changes the behavior of the pre-commit to
-  be non-blocking. You should set this with the field verbose:true.
+  be non-blocking. You should set this with the field `verbose: true`.
 
   ```
   id: lintr
