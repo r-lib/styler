@@ -39,7 +39,7 @@
     description: make sure codemeta.json is in sync with DESCRIPTION
     entry: inst/bin/codemeta-description-updated
     language: script
-    files: 'DESCRIPTION|codemeta\.json'
+    files: '^DESCRIPTION$'
 -   id: spell-check 
     name: spell-check
     description: perform a spell check with spelling::spell_check_files()
