@@ -24,7 +24,7 @@ for (path in arguments$files) {
   if (length(lints) > 0 && arguments$warn_only) {
     cat("Warning: File `", path, "` is not lint free\n", sep = "")
     print(lints)
-  } else if (length(lints)) {
+  } else if (length(lints) > 0) {
     stop(
       "File ", path, " is not lint free\n",
       "Run lintr::lint('", path, "') to check the lintr output.",
