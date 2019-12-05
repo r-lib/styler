@@ -84,14 +84,19 @@ run_test("spell-check", suffix = "-language-success.md", cmd_args = "--lang=en_G
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### depds-in-desc                                                           ####
 # succeed (call to library that is in description)
-run_test("deps-in-desc", suffix = "-success.R", error_msg = NULL)
+run_test("deps-in-desc", suffix = "-success.R", error_msg = NULL, 
+         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+)
 # fail (call to library that is not in description)
-run_test("deps-in-desc", suffix = "-fail.R", error_msg = "Dependency check failed")
+run_test("deps-in-desc", 
+         suffix = "-fail.R", error_msg = "Dependency check failed",  
+         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")))
 
 # with :::
 run_test("deps-in-desc",
          "deps-in-desc-dot3",
-         suffix = "-fail.R", error_msg = "Dependency check failed"
+         suffix = "-fail.R", error_msg = "Dependency check failed",
+         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 run_test("deps-in-desc",
