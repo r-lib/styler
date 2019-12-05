@@ -41,6 +41,9 @@ This repocontains a collection of git pre-commit hooks to use with
 
 * `lintr`: A hook to run `lintr::lint()` to check that R files are lint free.
 
+* `codemeta-description-updated`: Make sure `DESCRIPTION` hasn't been edited more recently
+  than `codemeta.json`, i.e. remind you to run `codemetar::write_codemeta()` in order to keep `codemeta.json` in sync with `DESCRIPTION`.
+
 Other repos also host hooks, many are listed
 [here](https://pre-commit.com/hooks.html).
 
