@@ -14,7 +14,8 @@ arguments <- docopt::docopt(doc)
 if (git2r::in_repository()) {
   git_status <- git2r::status(staged = FALSE)
   if (any(unlist(git_status) == ".lintr")) {
-    stop("Unstaged changes to .lintr file. Stage the .lintr file or discard ",
+    stop(
+      "Unstaged changes to .lintr file. Stage the .lintr file or discard ",
          "the changes to it. ", call. = FALSE)
   }
 }
