@@ -21,7 +21,7 @@ if (git2r::in_repository()) {
 
 for (path in arguments$files) {
   lints <- lintr::lint(path)
-  if (length(lints) && arguments$warn_only) {
+  if (length(lints) > 0 && arguments$warn_only) {
     cat("Warning: File `", path, "` is not lint free\n", sep = "")
     print(lints)
   } else if (length(lints)) {
