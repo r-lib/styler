@@ -57,4 +57,4 @@
     description: check if a .R file is lint free (using lintr)
     entry: inst/bin/lintr
     language: script
-    files: '\.[rR]$'
+    files: 'DESCRIPTION|codemeta\.json'
