@@ -51,10 +51,13 @@ The next time you run `git commit`, the hooks listed in your
 `.pre-commit-config.yaml` will get executed before the commit. The
 helper function `precommit::open_config()` let’s you open and edit the
 `.pre-commit-config.yaml` conveniently from the RStudio console. When
-any file is changed due to running a hook, the commit will fail. You can
-inspect the changes introduced by the hook and if satisfied, you can
-attempt to commit again. If all hooks pass, the commit is made. You can
-also [temporarily disable
+any file is changed due to running a hook or the hook script errors, the
+commit will fail. You can inspect the changes introduced by the hook and
+if satisfied, you can attempt to commit again. Note that while some
+hooks change files (like the styler hook) so that they won’t fail when
+you attempt to commit again, some (like the lintr hook) will need your
+action before they pass at the next attempt. If all hooks pass, the
+commit is made. You can also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you
 succeed, it should look like this:
 
