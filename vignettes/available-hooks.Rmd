@@ -26,8 +26,8 @@ This repocontains a collection of git pre-commit hooks to use with
   with a `browser()` statement in it.
 
 * `spell-check`: Checks spelling with `spelling::spell_check_files()`. Excluded
-  are R and python scrips as well as .gitignore. To customize, see *Hooks
-  arguments* below.
+  are R and python scrips as well as .gitignore. To customize, see the vignette
+  *Hooks arguments*.
 
 * `roxygenize`: A hook to run `roxygen2::roxygenize()`. Makes sure you commit
   your `.Rd` changes with the source changes.
