@@ -2,10 +2,10 @@
 
 'Ensure all dependencies of the form pkg::fun are in DESCRIPTION
 Usage:
-  deps-in-desc [--allow_private_imports=<private-imports>] <files>...
+  deps-in-desc [--allow_private_imports] <files>...
 
 Options:
-  --allow_private_imports=<private-imports> Whether or not to allow the use of ::: on imported functions [default: false].
+  --allow_private_imports  Whether or not to allow the use of ::: on imported functions.
 ' -> doc
 pre_installed <- c(
   "base", "boot", "class", "cluster", "codetools", "compiler",
@@ -16,7 +16,6 @@ pre_installed <- c(
 )
 
 arguments <- docopt::docopt(doc)
-
 deps_in_desc <- function(file, arguments) {
   parse_data <- getParseData(parse(file = file, keep.source = TRUE))
   used <- parse_data[parse_data$token == "SYMBOL_PACKAGE", ]$text
@@ -37,7 +36,7 @@ deps_in_desc <- function(file, arguments) {
     )
     out <- FALSE
   }
-  if (as.logical(toupper(arguments$allow_private_imports))) {
+  if (isTRUE(arguments$allow_private_imports)) {
     return(out)
   }
   private <- setdiff(

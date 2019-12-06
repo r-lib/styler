@@ -35,7 +35,7 @@ The following hooks take arguments:
   specified in the [`.lintr`
   documentation](https://github.com/jimhester/lintr#project-configuration).
 
-* `deps-in-desc`: Argument `allow_private_imports` lets the user specify if
+* `deps-in-desc`: Flag `allow_private_imports` lets the user specify that
   private imports into the package namespace are tolarable, e.g. 
-  `somepkg:::x()`. Defaults to `false`, i.e. the hook will fail by default if 
+  `somepkg:::x()`. Flag not set by default, i.e. the hook will fail if 
   such a call is found.
