@@ -23,9 +23,8 @@ repos:
 The following hooks take arguments:
 
 * `style-files`: Argument `style_pkg` and `style_fun` if you want to use another
-  style guide than the default. The below example styles code according to the
-  [one-line-style](https://github.com/lorenzwalthert/oneliner): `args:
-  [--style_pkg=oneliner, --style_fun=one_line_style]`.
+  style guide than the default. Defaults: `styler` for `style_pkg` and 
+  `tidyverse_style` for `style_fun`.
 
 * `spell-check`: Argument `ignore_files` takes a regular expression matched with
   `base::grep()` to ignore further files from the hook. Argument `lang` is
@@ -36,3 +35,7 @@ The following hooks take arguments:
   specified in the [`.lintr`
   documentation](https://github.com/jimhester/lintr#project-configuration).
 
+* `deps-in-desc`: Flag `allow_private_imports` lets the user specify that
+  private imports into the package namespace are tolarable, e.g. 
+  `somepkg:::x()`. Flag not set by default, i.e. the hook will fail if 
+  such a call is found.

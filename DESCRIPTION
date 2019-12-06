@@ -17,7 +17,8 @@ Imports:
     rprojroot,
     rstudioapi,
     usethis,
-    withr
+    withr,
+    purrr
 Suggests: 
     desc,
     git2r,
@@ -30,15 +31,6 @@ Suggests:
     styler (>= 1.2),
     testthat,
     tic,
-    usethis,
-    withr,
-    rstudioapi,
-    rlang,
-    rprojroot,
-    desc,
-    reticulate,
-    magrittr,
-    R.cache,
     yaml
 Remotes: 
     lorenzwalthert/oneliner,

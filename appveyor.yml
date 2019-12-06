@@ -18,9 +18,6 @@ install:
   - "powershell ci-helpers/appveyor/install-miniconda.ps1"
   - cmd: "rm *.exe"
   - cmd: "rm -rf ci-helpers"
-  
-cache:
-- C:\RLibrary
 
 before_build: Rscript -e "tic::before_install()"
 build_script: Rscript -e "tic::install()"
