@@ -4,15 +4,21 @@
 \alias{run_test}
 \title{Run a test}
 \usage{
-run_test(hook_name, file_name = hook_name, suffix = ".R",
-  error_msg = NULL, cmd_args = NULL, copy = NULL)
+run_test(
+  hook_name,
+  file_name = hook_name,
+  suffix = ".R",
+  error_msg = NULL,
+  cmd_args = NULL,
+  copy = NULL
+)
 }
 \arguments{
-\item{hook_name}{The name of the hook in \code{bin/}.}
+\item{hook_name}{The name of the hook in \verb{bin/}.}
 
-\item{file_name}{The file to test in \code{tests/in} (without extension).}
+\item{file_name}{The file to test in \verb{tests/in} (without extension).}
 
-\item{suffix}{The fuffix of \code{file_name}.}
+\item{suffix}{The suffix of \code{file_name}.}
 
 \item{error_msg}{An expected error message. If no error is expected, this
 can be \code{NULL}. In that case, the \code{comparator} is applied.}

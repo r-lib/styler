@@ -10,5 +10,5 @@ autoupdate(path_root = here::here())
 \item{path_root}{The path to the root directory of your project.}
 }
 \description{
-Runs \code{pre-commit autoupdate}.
+Runs \verb{pre-commit autoupdate}.
 }

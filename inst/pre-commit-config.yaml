@@ -14,6 +14,7 @@ repos:
     # -   id: roxygenize
     # -   id: use-tidy-description
     # -   id: deps-in-desc
+    # -   id: codemeta-description-updated
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v1.2.3
     hooks: 

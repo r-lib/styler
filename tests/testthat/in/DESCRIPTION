@@ -1,9 +1,10 @@
-Package: precommit
+Package: prec3
 Title: Pre commit hooks
 Version: 1.0.0
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Imports:
+    artific,
     bliblablupp
 Remotes: 
     ropenscilabs/tic

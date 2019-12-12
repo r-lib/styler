@@ -1,4 +1,12 @@
 #' Set up pre-commit
+#' 
+#' This function should be called in two situations: 
+#' 
+#' * You want to add pre-commit support to a git repo. This involves adding
+#'   a pre-commit config file and making sure git will call the hooks before
+#'   the next commit.
+#' * You use a repo that has such a config file but for pre-commit to become 
+#'   active, you need to make sure git knows that it should call pre-commit.
 #'
 #' @details
 #' * installs pre-commit in your current directory.
@@ -51,14 +59,15 @@ use_precommit_config <- function(force) {
       fs::path(".", name_target),
       overwrite = TRUE
     )
+    usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
   } else {
-    rlang::abort(paste0(
+    usethis::ui_warn(paste0(
       "There is already a pre-commit configuration file in ",
       path_root,
       ". Use `force = TRUE` to replace .pre-commit-config.yaml"
     ))
   }
-  usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
+  
   if (is_package(".")) {
     usethis::write_union(".Rbuildignore", escaped_name_target)
   }
@@ -84,6 +93,7 @@ install_precommit_impl <- function() {
 #' @export
 autoupdate <- function(path_root = here::here()) {
   withr::with_dir(path_root, {
+    assert_correct_upstream_repo_url()
     out <- system2(path_pre_commit_exec(), "autoupdate")
     if (out == 0) {
       usethis::ui_done(paste0(
@@ -93,5 +103,22 @@ autoupdate <- function(path_root = here::here()) {
       rlang::abort("Running precommit autoupdate failed.")
     }
   })
-  
+
+}
+
+assert_correct_upstream_repo_url <- function() {
+  if (upstream_repo_url_is_outdated()) {
+    usethis::ui_info(c(
+      "The repo https://github.com/lorenzwalthert/pre-commit-hooks ", 
+      "has moved to https://github.com/lorenzwalthert/precommit. ", 
+      "Please fix the URL in .pre-commit-config.yaml, ", 
+      "most confortably with `precommit::open_config()`."
+    ))
+  }
+}
+
+upstream_repo_url_is_outdated <- function() {
+  purrr::map_chr(yaml::read_yaml(".pre-commit-config.yaml")$repos, ~.x$repo) %>%
+    grepl("https://github.com/lorenzwalthert/pre-commit-hooks", .) %>%
+    any()
 }

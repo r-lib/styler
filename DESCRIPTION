@@ -1,40 +1,41 @@
 Package: precommit
-Description: Useful pre-commit hooks for R.
 Title: Pre commit hooks
 Version: 0.0.0.9017
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
+Description: Useful pre-commit hooks for R.
+License: GPL-3
+URL: https://github.com/lorenzwalthert/precommit
 Imports:
     docopt,
     fs,
-    git2r,
     here,
+    magrittr,
+    R.cache,
+    reticulate,
+    rlang,
+    rprojroot,
+    rstudioapi,
+    usethis,
+    withr,
+    purrr
+Suggests: 
+    desc,
+    git2r,
+    knitr,
     lintr,
+    oneliner (>= 0.1.0),
+    rmarkdown,
     roxygen2,
     spelling,
     styler (>= 1.2),
     testthat,
     tic,
-    usethis,
-    withr,
-    rstudioapi,
-    rlang,
-    rprojroot,
-    desc,
-    reticulate,
-    magrittr,
-    R.cache
+    yaml
 Remotes: 
     lorenzwalthert/oneliner,
     ropenscilabs/tic
-URL: https://github.com/lorenzwalthert/precommit
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
     "collate", "pkgapi::api_roclet"))
-RoxygenNote: 6.1.1
-License: GPL-3
-Suggests: 
-    knitr,
-    rmarkdown,
-    oneliner (>= 0.1.0)
-VignetteBuilder: knitr
+RoxygenNote: 7.0.1
