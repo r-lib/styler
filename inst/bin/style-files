@@ -17,7 +17,7 @@ if (packageVersion("styler") < "1.2.0") {
   stop(
     "Your styler version is outdated. ", 
     "Please install a newer version of styler with ", 
-    "`install.packages('styler')`"
+    "`install.packages('styler')`."
   )
 } else {
   styler::style_file(
