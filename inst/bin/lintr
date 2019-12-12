@@ -29,9 +29,8 @@ for (path in arguments$files) {
     cat("File `", path, "` is not lint free\n", sep = "")
     rendered_lints <- capture.output(print(lints))
     cat(rendered_lints, sep = "\n")
-  }
-
-  if (!arguments$warn_only) {
-    stop("File ", path, " is not lint free", call. = FALSE)
+    if (!arguments$warn_only) {
+      stop("File ", path, " is not lint free", call. = FALSE)
+    }
   }
 }
