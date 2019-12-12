@@ -111,7 +111,8 @@ assert_correct_upstream_repo_url <- function() {
     usethis::ui_info(c(
       "The repo https://github.com/lorenzwalthert/pre-commit-hooks ", 
       "has moved to https://github.com/lorenzwalthert/precommit. ", 
-      "Please update your .pre-commit-config.yaml to reflect this."
+      "Please fix the URL in .pre-commit-config.yaml, ", 
+      "most confortably with `precommit::open_config()`."
     ))
   }
 }
