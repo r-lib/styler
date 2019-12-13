@@ -39,3 +39,4 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
     "collate", "pkgapi::api_roclet"))
 RoxygenNote: 7.0.1
+VignetteBuilder: knitr
