@@ -35,14 +35,12 @@ Suggests:
     here,
     knitr,
     prettycode,
-    R.cache (>= 0.13.0.9000),
+    R.cache (>= 0.14.0),
     rmarkdown,
     rstudioapi (>= 0.7),
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
-Remotes: 
-    HenrikBengtsson/R.cache@develop
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
