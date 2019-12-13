@@ -11,14 +11,14 @@ Imports:
     fs,
     here,
     magrittr,
+    purrr,
     R.cache,
     reticulate,
     rlang,
     rprojroot,
     rstudioapi,
     usethis,
-    withr,
-    purrr
+    withr
 Suggests: 
     desc,
     git2r,
@@ -32,6 +32,8 @@ Suggests:
     testthat,
     tic,
     yaml
+VignetteBuilder: 
+    knitr
 Remotes: 
     lorenzwalthert/oneliner,
     ropenscilabs/tic
@@ -39,4 +41,3 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
     "collate", "pkgapi::api_roclet"))
 RoxygenNote: 7.0.1
-VignetteBuilder: knitr
