@@ -127,3 +127,7 @@ run_test("lintr",
 # failure
 run_test("lintr", suffix = "-fail.R", error_msg = "not lint free")
 
+# warning
+run_test(
+  "lintr", suffix = "-fail.R", cmd_args = "--warn_only", error_msg = NULL
+)

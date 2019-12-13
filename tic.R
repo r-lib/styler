@@ -1,5 +1,5 @@
+Sys.setenv(LINTR_COMMENT_BOT="false")
 do_package_checks(error_on = "error")
-
 if (Sys.getenv("id_rsa") != "" && ci()$get_branch() == "master") {
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
