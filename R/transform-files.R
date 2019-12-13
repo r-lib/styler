@@ -112,7 +112,6 @@ make_transformer <- function(transformers,
       }
       transformed_code
     } else {
-      cat("(cached)")
       text
     }
   }
