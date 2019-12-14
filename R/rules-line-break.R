@@ -273,3 +273,16 @@ remove_line_break_in_empty_fun_call <- function(pd) {
   }
   pd
 }
+
+
+set_linebreak_after_ggplot2_plus <- function(pd) {
+  is_plus <- pd$token == "'+'" &
+    (pd$token_after == "SYMBOL_FUNCTION_CALL" | pd$token_after == "SYMBOL_PACKAGE")
+  if (any(is_plus)) {
+     gg_call <- pd$child[[which(is_plus)[1] - 1]]$child[[1]]
+    if (!is.null(gg_call) && gg_call$text[gg_call$token == "SYMBOL_FUNCTION_CALL"] == "ggplot") {
+      pd$lag_newlines[lag(is_plus)] <- 1L
+    }
+  }
+  pd
+}
