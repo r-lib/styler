@@ -268,7 +268,7 @@ style_file <- function(path,
                        style = tidyverse_style,
                        transformers = style(...),
                        include_roxygen_examples = TRUE) {
-  path <- set_and_assert_arg_paths(path)
+  path <- set_arg_paths(path)
   changed <- transform_files(path, transformers, include_roxygen_examples)
   invisible(changed)
 }
