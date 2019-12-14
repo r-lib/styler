@@ -25,6 +25,9 @@ NULL
 #'   standardization) are: "r", "rprofile", "rmd", "rnw".
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
+#' @param exclude_dirs Character vector with directories to exclude. Note that
+#'   the default values were set for consistency with [style_dir()] and as
+#'   these directories are anyways not styled.
 #' @param include_roxygen_examples Whether or not to style code in roxygen
 #'   examples.
 #' @section Warning:
@@ -192,7 +195,8 @@ style_text <- function(text,
 #' @param path Path to a directory with files to transform.
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
-#' @inheritParams style_pkg
+#' @param exclude_dirs Character vector with directories to exclude.
+##' @inheritParams style_pkg
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @inheritSection style_pkg Round trip validation
@@ -279,6 +283,7 @@ style_file <- function(path,
                        style = tidyverse_style,
                        transformers = style(...),
                        include_roxygen_examples = TRUE) {
+  path <- set_and_assert_arg_paths(path)
   changed <- transform_files(path, transformers, include_roxygen_examples)
   invisible(changed)
 }

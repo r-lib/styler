@@ -29,6 +29,10 @@ should be styled as well.}
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
 
+\item{exclude_dirs}{Character vector with directories to exclude. Note that
+the default values were set for consistency with \code{\link[=style_dir]{style_dir()}} and as
+these directories are anyways not styled.}
+
 \item{include_roxygen_examples}{Whether or not to style code in roxygen
 examples.}
 }
