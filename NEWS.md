@@ -1,3 +1,5 @@
+* lines are now broken after `+` in `ggplot2` calls for `strict = TRUE`.
+
 # styler 1.2.0.9000
 
 ## Breaking changes
