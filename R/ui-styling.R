@@ -91,6 +91,8 @@ prettify_pkg <- function(transformers,
                          include_roxygen_examples) {
   filetype <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
+  exclude_files <- set_and_assert_arg_paths(exclude_files)
+  exclude_dirs <- set_and_assert_arg_paths(exclude_dirs)
   without_excluded <- purrr::partial(setdiff, y = exclude_dirs)
   if ("\\.r" %in% filetype) {
     r_files <- dir_without_.(
@@ -231,6 +233,8 @@ prettify_any <- function(transformers,
                          exclude_files,
                          exclude_dirs,
                          include_roxygen_examples) {
+  exclude_files <- set_and_assert_arg_paths(exclude_files)
+  exclude_dirs <- set_and_assert_arg_paths(exclude_dirs)
   files_root <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),
     ignore.case = TRUE, recursive = FALSE, all.files = TRUE
