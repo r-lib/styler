@@ -243,13 +243,18 @@ prettify_any <- function(transformers,
     path = ".", pattern = map_filetype_to_pattern(filetype),
     ignore.case = TRUE, recursive = FALSE, all.files = TRUE
   )
-  files_other <- list.dirs(full.names = FALSE) %>%
-    setdiff(c("", exclude_dirs)) %>%
-    dir_without_.(
-      pattern = map_filetype_to_pattern(filetype),
-      ignore.case = TRUE, recursive = recursive,
-      all.files = TRUE
-    )
+  if (recursive) {
+    files_other <- list.dirs(full.names = FALSE, recursive = TRUE) %>%
+      setdiff(c("", exclude_dirs)) %>%
+      dir_without_.(
+        pattern = map_filetype_to_pattern(filetype),
+        ignore.case = TRUE, recursive = FALSE,
+        all.files = TRUE
+      )
+
+  } else {
+    files_other <- c()
+  }
   transform_files(
     setdiff(c(files_root, files_other), exclude_files),
     transformers, include_roxygen_examples
