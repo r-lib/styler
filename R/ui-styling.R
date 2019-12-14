@@ -93,24 +93,27 @@ prettify_pkg <- function(transformers,
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
   without_excluded <- purrr::partial(setdiff, y = exclude_dirs)
   if ("\\.r" %in% filetype) {
-    r_files <- dir(
+    r_files <- dir_without_.(
       path = without_excluded(c("R", "tests", "data-raw", "demo")),
-      pattern = "\\.r$", ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      pattern = "\\.r$",
+      ignore.case = TRUE,
+      recursive = TRUE
     )
   }
 
   if ("\\.rprofile" %in% filetype) {
-    rprofile_files <- dir(
+    rprofile_files <- dir_without_.(
       path = without_excluded("."), pattern = "^\\.rprofile$",
-      ignore.case = TRUE, recursive = FALSE, all.files = TRUE, full.names = TRUE
+      ignore.case = TRUE, recursive = FALSE, all.files = TRUE
     )
   }
   if ("\\.rmd" %in% filetype) {
-    vignette_files <- dir(
+    vignette_files <- dir_without_.(
       path = without_excluded("vignettes"), pattern = "\\.rmd$",
-      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      ignore.case = TRUE, recursive = TRUE,
     )
-    readme <- dir(
+    readme <- dir_without_.(
+      path = ".",
       pattern = without_excluded("^readme\\.rmd$"), ignore.case = TRUE
     )
   }
@@ -118,9 +121,9 @@ prettify_pkg <- function(transformers,
   if ("\\.rnw" %in% filetype) {
     vignette_files <- append(
       vignette_files,
-      dir(
+      dir_without_.(
         path = without_excluded("vignettes"), pattern = "\\.rnw$",
-        ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+        ignore.case = TRUE, recursive = TRUE
       )
     )
   }
@@ -131,6 +134,25 @@ prettify_pkg <- function(transformers,
   )
   transform_files(files, transformers, include_roxygen_examples)
 }
+
+
+dir_without_. <- function(path, ...) {
+  purrr::map(path, dir_without_._one, ...) %>%
+    unlist()
+}
+
+dir_without_._one <- function(path, ...) {
+  relative <- dir(
+    path = path,
+    ...
+  )
+  if (path == ".") {
+    return(relative)
+  }
+  file.path(path, relative)
+}
+
+
 
 
 #' Style a string
@@ -211,14 +233,14 @@ prettify_any <- function(transformers,
                          include_roxygen_examples) {
   files_root <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),
-    ignore.case = TRUE, recursive = FALSE, all.files = TRUE, full.names = TRUE
+    ignore.case = TRUE, recursive = FALSE, all.files = TRUE
   )
-  files_other <- list.dirs() %>%
-    setdiff(c(".", exclude_dirs)) %>%
-    dir(
+  files_other <- list.dirs(full.names = FALSE) %>%
+    setdiff(c("", exclude_dirs)) %>%
+    dir_without_.(
       pattern = map_filetype_to_pattern(filetype),
       ignore.case = TRUE, recursive = recursive,
-      all.files = TRUE, full.names = TRUE
+      all.files = TRUE
     )
   transform_files(
     setdiff(c(files_root, files_other), exclude_files),
