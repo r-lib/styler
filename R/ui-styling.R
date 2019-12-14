@@ -140,26 +140,6 @@ prettify_pkg <- function(transformers,
   transform_files(files, transformers, include_roxygen_examples)
 }
 
-
-dir_without_. <- function(path, ...) {
-  purrr::map(path, dir_without_._one, ...) %>%
-    unlist()
-}
-
-dir_without_._one <- function(path, ...) {
-  relative <- dir(
-    path = path,
-    ...
-  )
-  if (path == ".") {
-    return(relative)
-  }
-  file.path(path, relative)
-}
-
-
-
-
 #' Style a string
 #'
 #' Styles a character vector. Each element of the character vector corresponds

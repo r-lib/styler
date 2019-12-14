@@ -13,6 +13,9 @@ set_and_assert_arg_paths(path)
 Standardization required to use \code{setdiff()} with paths.
 }
 \examples{
-set_and_assert_arg_paths(c("./file.R", "file.R", "../another-file.R"))
+styler:::set_and_assert_arg_paths(c("./file.R", "file.R", "../another-file.R"))
+}
+\seealso{
+dir_without_.
 }
 \keyword{internal}
