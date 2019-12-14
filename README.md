@@ -59,12 +59,19 @@ region.
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
 
-## Functionality of styler
+## Features
 
   - style plain R, Rmd, .Rprofile and Rnw files.
+
   - style roxygen2 code examples.
-  - not re-style deliberate code alignment
-    ([vignette](https://styler.r-lib.org/articles/detect-alignment.html)).
+
+  - do not re-style [deliberate code
+    alignment](https://styler.r-lib.org/articles/detect-alignment.html).
+
+  - [ignore some
+    lines](https://styler.r-lib.org/reference/stylerignore.html) for
+    styling (GitHub development version), also see
+    `help("stylerignore")`.
 
 **scope**
 
@@ -131,11 +138,19 @@ because different versions potentially format code differently. See
 
 ## Adaption of styler
 
-styler functionality is made available through other packages, most
-notably
+styler functionality is made available through other tools, most notably
+
+  - as a pre-commit hook `style-files` in
+    <https://github.com/lorenzwalthert/pre-commit-hooks>.
 
   - `usethis::use_tidy_style()` styles your project according to the
     tidyverse style guide.
+
+  - via commenting a PR on GitHub with `\style` when the [GitHub
+    Action](https://github.com/features/actions) [*Tidyverse
+    CI*](https://github.com/r-lib/actions/tree/master/examples#tidyverse-ci-workflow)
+    is used. The most convenient way to set this up is via
+    [`usethis::use_github_actions_tidy()`](https://usethis.r-lib.org/reference/github_actions.html?q=ghactions#use-github-actions-tidy-).
 
   - `reprex::reprex(style = TRUE)` to prettify reprex code before
     printing. To permanently use `style = TRUE` without specifying it
@@ -149,15 +164,13 @@ notably
     `knitr::opts_chunk$set(tidy = "styler")` at the top of your
     RMarkdown script.
 
-  - as a pre-commit hook `style-files` in
-    <https://github.com/lorenzwalthert/pre-commit-hooks>.
+  - Adding styler as a fixer to the [ale
+    Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966)
+    for VIM.
 
   - pretty-printing of [drake](https://github.com/ropensci/drake)
     workflow data frames with `drake::drake_plan_source()`.
 
-  - Adding styler as a fixer to the [ale
-    Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966)
-    for VIM.
   - Adding styler with
     [emacs-format-all-the-code](https://github.com/lassik/emacs-format-all-the-code)
     for Emacs.
@@ -174,7 +187,9 @@ notably
 
   - A [tidyverse.org blog
     post](https://www.tidyverse.org/articles/2017/12/styler-1.0.0/)
-    introducing the functionality of styler.
+    introducing the functionality of styler and a [follow-up
+    post](https://www.tidyverse.org/blog/2019/11/styler-1-2-0/) that
+    introduces the new features since release 1.0.0.
 
   - The wiki of [Google Summer of Code
     2017](https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting)
