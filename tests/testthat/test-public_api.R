@@ -9,10 +9,41 @@ test_that("styler can style package", {
   }))
 })
 
+test_that("styler can style package and exclude some directories", {
+  capture_output(expect_true({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
+        exclude_dirs = "tests"
+    )
+    length(styled) == 2
+  }))
+})
+
+
+test_that("styler can style package and exclude some directories and files", {
+  capture_output(expect_true({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
+                        exclude_dirs = "tests",
+                        exclude_files = "./.Rprofile"
+    )
+    length(styled) == 1
+  }))
+})
+
+
 test_that("styler can style directory", {
   capture_output(expect_false({
     styled <- style_dir(testthat_file("public-api", "xyzdir"))
     any(styled$changed)
+  }))
+})
+
+test_that("styler can style directories and exclude", {
+  capture_output(expect_true({
+    styled <- style_dir(
+      testthat_file("public-api", "xyzpackage_renv"),
+      exclude_dirs = "./renv"
+    )
+    length(styled) == 3
   }))
 })
 

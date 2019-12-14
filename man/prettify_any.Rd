@@ -9,6 +9,7 @@ prettify_any(
   filetype,
   recursive,
   exclude_files,
+  exclude_dirs,
   include_roxygen_examples
 )
 }

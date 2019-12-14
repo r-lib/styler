@@ -12,6 +12,7 @@ style_dir(
   filetype = c("R", "Rprofile"),
   recursive = TRUE,
   exclude_files = NULL,
+  exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE
 )
 }

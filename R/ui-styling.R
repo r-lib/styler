@@ -74,10 +74,12 @@ style_pkg <- function(pkg = ".",
                       transformers = style(...),
                       filetype = c("R", "Rprofile"),
                       exclude_files = "R/RcppExports.R",
+                      exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   changed <- withr::with_dir(pkg_root, prettify_pkg(
-    transformers, filetype, exclude_files, include_roxygen_examples
+    transformers,
+    filetype, exclude_files, exclude_dirs, include_roxygen_examples
   ))
   invisible(changed)
 }
@@ -85,37 +87,39 @@ style_pkg <- function(pkg = ".",
 prettify_pkg <- function(transformers,
                          filetype,
                          exclude_files,
+                         exclude_dirs,
                          include_roxygen_examples) {
   filetype <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
-
+  without_excluded <- purrr::partial(setdiff, y = exclude_dirs)
   if ("\\.r" %in% filetype) {
     r_files <- dir(
-      path = c("R", "tests", "data-raw", "demo"), pattern = "\\.r$",
-      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      path = without_excluded(c("R", "tests", "data-raw", "demo")),
+      pattern = "\\.r$", ignore.case = TRUE, recursive = TRUE, full.names = TRUE
     )
   }
 
   if ("\\.rprofile" %in% filetype) {
     rprofile_files <- dir(
-      path = ".", pattern = "^\\.rprofile$",
-      ignore.case = TRUE, recursive = FALSE, full.names = TRUE,
-      all.files = TRUE
+      path = without_excluded("."), pattern = "^\\.rprofile$",
+      ignore.case = TRUE, recursive = FALSE, all.files = TRUE, full.names = TRUE
     )
   }
   if ("\\.rmd" %in% filetype) {
     vignette_files <- dir(
-      path = "vignettes", pattern = "\\.rmd$",
+      path = without_excluded("vignettes"), pattern = "\\.rmd$",
       ignore.case = TRUE, recursive = TRUE, full.names = TRUE
     )
-    readme <- dir(pattern = "^readme\\.rmd$", ignore.case = TRUE)
+    readme <- dir(
+      pattern = without_excluded("^readme\\.rmd$"), ignore.case = TRUE
+    )
   }
 
   if ("\\.rnw" %in% filetype) {
     vignette_files <- append(
       vignette_files,
       dir(
-        path = "vignettes", pattern = "\\.rnw$",
+        path = without_excluded("vignettes"), pattern = "\\.rnw$",
         ignore.case = TRUE, recursive = TRUE, full.names = TRUE
       )
     )
@@ -181,10 +185,12 @@ style_dir <- function(path = ".",
                       filetype = c("R", "Rprofile"),
                       recursive = TRUE,
                       exclude_files = NULL,
+                      exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE) {
   changed <- withr::with_dir(
     path, prettify_any(
-      transformers, filetype, recursive, exclude_files, include_roxygen_examples
+      transformers,
+      filetype, recursive, exclude_files, exclude_dirs, include_roxygen_examples
     )
   )
   invisible(changed)
@@ -201,14 +207,22 @@ prettify_any <- function(transformers,
                          filetype,
                          recursive,
                          exclude_files,
+                         exclude_dirs,
                          include_roxygen_examples) {
-  files <- dir(
+  files_root <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),
-    ignore.case = TRUE, recursive = recursive, full.names = TRUE,
-    all.files = TRUE
+    ignore.case = TRUE, recursive = FALSE, all.files = TRUE, full.names = TRUE
   )
+  files_other <- list.dirs() %>%
+    setdiff(c(".", exclude_dirs)) %>%
+    dir(
+      pattern = map_filetype_to_pattern(filetype),
+      ignore.case = TRUE, recursive = recursive,
+      all.files = TRUE, full.names = TRUE
+    )
   transform_files(
-    setdiff(files, exclude_files), transformers, include_roxygen_examples
+    setdiff(c(files_root, files_other), exclude_files),
+    transformers, include_roxygen_examples
   )
 }
 

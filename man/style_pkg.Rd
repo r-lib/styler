@@ -11,6 +11,7 @@ style_pkg(
   transformers = style(...),
   filetype = c("R", "Rprofile"),
   exclude_files = "R/RcppExports.R",
+  exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE
 )
 }
