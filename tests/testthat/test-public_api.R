@@ -48,14 +48,14 @@ test_that("styler can style directory", {
 test_that("styler can style directories and exclude", {
   capture_output(expect_true({
     styled <- style_dir(
-      testthat_file("public-api", "xyzpackage_renv"),
+      testthat_file("public-api", "renvpkg"),
       exclude_dirs = "renv"
     )
     nrow(styled) == 3
   }))
   capture_output(expect_true({
     styled <- style_dir(
-      testthat_file("public-api", "xyzpackage_renv"),
+      testthat_file("public-api", "renvpkg"),
       exclude_dirs = c("renv", "tests/testthat")
     )
     nrow(styled) == 2
@@ -63,7 +63,7 @@ test_that("styler can style directories and exclude", {
 
   capture_output(expect_true({
     styled <- style_dir(
-      testthat_file("public-api", "xyzpackage_renv"),
+      testthat_file("public-api", "renvpkg"),
       exclude_dirs = "./renv"
     )
     nrow(styled) == 3
@@ -71,7 +71,7 @@ test_that("styler can style directories and exclude", {
 
   capture_output(expect_true({
     styled <- style_dir(
-      testthat_file("public-api", "xyzpackage_renv"),
+      testthat_file("public-api", "renvpkg"),
       exclude_dirs = "./renv", recursive = FALSE
     )
     nrow(styled) == 1
@@ -79,7 +79,7 @@ test_that("styler can style directories and exclude", {
 
   capture_output(expect_true({
     styled <- style_dir(
-      testthat_file("public-api", "xyzpackage_renv"),
+      testthat_file("public-api", "renvpkg"),
       recursive = FALSE
     )
     nrow(styled) == 1
