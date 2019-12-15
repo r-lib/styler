@@ -196,10 +196,14 @@ tidyverse_style <- function(scope = "tokens",
 #' @param reindention A list of parameters for regex re-indention, most
 #'   conveniently constructed using [specify_reindention()].
 #' @param style_guide_name The name of the style guide. Used as a meta attribute
-#'   inside the created style guide, for example for caching. It is a string
-#'   consisting of: "
-#' @param style_guide_version The version of the style guide. Used as a meta attribute
-#'   inside the created style guide, for example for caching.
+#'   inside the created style guide, for example for caching. By convention,
+#'   this is the style guide qualified by the package namespace plus the
+#'   location of the style guide, separated by `@`. For example,
+#'   `"styler::tidyverse_style@https://github.com/r-lib"`.
+#' @param style_guide_version The version of the style guide. Used as a meta
+#'   attribute inside the created style guide, for example for caching. This
+#'   should correspond to the version of the R package that exports the
+#'   style guide.
 #' @examples
 #' set_line_break_before_curly_opening <- function(pd_flat) {
 #'   op <- pd_flat$token %in% "'{'"

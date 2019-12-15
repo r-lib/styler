@@ -37,11 +37,15 @@ should be used.}
 conveniently constructed using \code{\link[=specify_reindention]{specify_reindention()}}.}
 
 \item{style_guide_name}{The name of the style guide. Used as a meta attribute
-inside the created style guide, for example for caching. It is a string
-consisting of: "}
+inside the created style guide, for example for caching. By convention,
+this is the style guide qualified by the package namespace plus the
+location of the style guide, separated by \code{@}. For example,
+\code{"styler::tidyverse_style@https://github.com/r-lib"}.}
 
-\item{style_guide_version}{The version of the style guide. Used as a meta attribute
-inside the created style guide, for example for caching.}
+\item{style_guide_version}{The version of the style guide. Used as a meta
+attribute inside the created style guide, for example for caching. This
+should correspond to the version of the R package that exports the
+style guide.}
 }
 \description{
 This is a helper function to create a style guide, which is technically

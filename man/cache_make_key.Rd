@@ -7,31 +7,29 @@
 cache_make_key(text, transformers)
 }
 \description{
-Make a key for \code{R.cache}
+This is used to determine if caching already corresponds to a style guide.
 }
 \details{
-This function standardizes text and converts transformers to character (to
-avoid issues described in details).
-This means that the same code in \code{transformers},
-calling other code not in \code{transformers} that was modified, will lead
-styler into thinking we can use the cache, although we should not. We believe
-this is a highly unlikely event, in particular because we already invalidate
-the cache when the styler version changes. Hence, our cache will cause
-styler to return \emph{not correctly styled} code iff one of these conditions
-holds:
+We need to compare:
 \itemize{
-\item An improperly versioned version of styler is used, e.g. the development
-version on GitHub.
-\item A style guide from outside styler is used.
+\item text to style. Will be passed to hash function as is.
+\item styler version. Not an issue because for every version of styler, we build
+a new cache.
+\item transformers. Cannot easily hash them because two environments won't be
+identical even if they contain the same objects (see 'Experiments'). Simple
+\code{as.character(transformers)} will not consider infinitively recursive
+code dependencies.
+To fix this, transformers must have names and version number as described
+in \code{\link[=create_style_guide]{create_style_guide()}}. Now, the only way to fool the cache invalidation
+is to replace a transformer with the same function body (but changing
+the function definition of the functions called in that body) interactively
+without changing version number of name at the same time.
 }
-
-Plus for both cases: the code in transformers does not change and changes in
-code the transformers depend on result in different styling.
 }
 \section{Experiments}{
 
 
-There is unexamplainable behavior in conjunction with hashin and
+There is unexplainable behavior in conjunction with hashing and
 environments:
 \itemize{
 \item Functions created with \code{purrr::partial()} are not identical when compared
