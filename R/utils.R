@@ -4,13 +4,39 @@ line_col_names <- function() {
   c("line1", "line2", "col1", "col2")
 }
 
+#' Ensure there is one (and only one) blank line at the end of a vector
+#' @examples
+#' styler:::ensure_last_is_empty("")
+#' styler:::ensure_last_is_empty(letters)
+#' styler:::ensure_last_is_empty(c(letters, "", "", ""))
+#' @keywords internal
 ensure_last_is_empty <- function(x) {
-  has_line_break_at_eof <- x[length(x)] == ""
-  if (has_line_break_at_eof) {
-    return(x)
-  } else {
-    append(x, "")
+  if (all(x == "")) {
+    return("")
   }
+  x <- c(x, "", "")
+  x <- x[seq(1, length(x) - which(rev(x) != "")[1] + 2L)]
+  x
+}
+
+#' Replace the newline character with a line break
+#'
+#' @param text A character vector
+#' @examples
+#' styler:::convert_newlines_to_linebreaks("x\n2")
+#' # a simple strsplit approach does not cover both cases
+#' unlist(strsplit("x\n\n2", "\n", fixed = TRUE))
+#' unlist(strsplit(c("x", "", "2"), "\n", fixed = TRUE))
+#' styler:::convert_newlines_to_linebreaks(c("x", "2"))
+#' @keywords internal
+convert_newlines_to_linebreaks <- function(text) {
+  split <- strsplit(text, "\n", fixed = TRUE)
+  map(split, ~ if (identical(.x, character(0))) {
+    ""
+    } else {
+      .x
+    }) %>%
+    unlist()
 }
 
 #' Check whether two columns match

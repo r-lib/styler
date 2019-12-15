@@ -61,7 +61,7 @@ read_utf8 <- function(path) {
   }
 }
 
-#' Drop-in replacement for [xfun::read_utf8()], with an optional `warn`
+#' Drop-in replacement for `xfun::read_utf8()`, with an optional `warn`
 #' argument.
 #' @keywords internal
 read_utf8_bare <- function(con, warn = TRUE) {
@@ -80,7 +80,7 @@ read_utf8_bare <- function(con, warn = TRUE) {
   x
 }
 
-#' Drop-in replacement for `xfun:::invalid_utf8()`.
+#' Drop-in replacement for [xfun:::invalid_utf8()]
 #' @keywords internal
 invalid_utf8 <- function(x) {
   which(!is.na(x) & is.na(iconv(x, "UTF-8", "UTF-8")))

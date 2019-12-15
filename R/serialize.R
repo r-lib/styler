@@ -14,5 +14,5 @@ serialize_parse_data_flattened <- function(flattened_pd, start_line = 1) {
       map(lag_newlines, add_newlines), map(lag_spaces, add_spaces), text
     )
   )
-  strsplit(res, "\n")[[1L]]
+  convert_newlines_to_linebreaks(res)
 }

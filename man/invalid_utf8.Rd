@@ -2,11 +2,11 @@
 % Please edit documentation in R/io.R
 \name{invalid_utf8}
 \alias{invalid_utf8}
-\title{Drop-in replacement for \code{xfun:::invalid_utf8()}.}
+\title{Drop-in replacement for \code{\link[xfun:::invalid_utf8]{xfun::::invalid_utf8()}}}
 \usage{
 invalid_utf8(x)
 }
 \description{
-Drop-in replacement for \code{xfun:::invalid_utf8()}.
+Drop-in replacement for \code{\link[xfun:::invalid_utf8]{xfun::::invalid_utf8()}}
 }
 \keyword{internal}

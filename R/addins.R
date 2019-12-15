@@ -141,7 +141,7 @@ set_style_transformers <- function() {
 #'
 #' @keywords internal
 get_addins_style_transformer_name <- function() {
-  getOption("styler.addins_style_transformer", default = "styler::tidyverse_style()")
+  getOption("styler.addins_style_transformer")
 }
 
 #' @rdname get_addins_style_transformer_name
