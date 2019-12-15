@@ -56,7 +56,7 @@ style_text(ugly_code)
 
 There are a few variants of `style_text()`:
 
-* `style_file()` styles .R and/or .Rmd files.
+* `style_file()` styles .R, .Rmd .Rnw and .Rprofile, files.
 
 * `style_dir()` styles all .R and/or .Rmd files in a directory.
 
@@ -71,19 +71,19 @@ knitr::include_graphics("https://raw.githubusercontent.com/lorenzwalthert/some_r
 
 ## Features
 
-* style plain R, Rmd, .Rprofile and Rnw files.
-
 * style roxygen2 code examples.
 
 * do not re-style [deliberate code
   alignment](https://styler.r-lib.org/articles/detect-alignment.html).
 
-* [ignore some lines](https://styler.r-lib.org/reference/stylerignore.html) for
-  styling (GitHub development version), also see `help("stylerignore")`.
+* ignore some lines for styling (GitHub development version), see 
+  [`help("stylerignore")`](https://styler.r-lib.org/reference/stylerignore.html).
 
-* cache styled expressions for speed. See `help("caching")` to learn more.
+* cache styled expressions for speed (GitHub development version). 
+  See [`help("caching")`](https://styler.r-lib.org/reference/caching.html) to 
+  learn more.
 
-**scope**
+## Configuration
 
 You can decide on the level of invasiveness with the scope argument. You can
 style:
@@ -109,26 +109,11 @@ Note that compared to the default used above `scope = "tokens"`:
 
 While spaces still got styled (around `=` in `(x)`).
 
-**strict**
-
-If you wish to keep alignment as is, you can use `strict = FALSE`:
-
-```{r}
-style_text(
-  c(
-    "first  <- 4",
-    "second <- 1+1"
-  ),
-  strict = FALSE
-)
-```
-
-This was just the tip of the iceberg. Learn more about customization with the
-tidyverse style guide in in this
-[vignette](https://styler.r-lib.org/articles/introducing_styler.html). If this
-is not flexible enough for you, you can implement your own style guide, as
-explained in the corresponding
-[vignette](https://styler.r-lib.org/articles/customizing_styler.html).
+This was just the tip of the iceberg. To learn more about custoization options 
+with the tidyverse style guide, see
+[`help("tidyverse_style")`](https://styler.r-lib.org/reference/tidyverse_style.html)
+for a quick overview or the 
+[introductory vignette](https://styler.r-lib.org/articles/introducing_styler.html).
 
 
 ## Adaption of styler
