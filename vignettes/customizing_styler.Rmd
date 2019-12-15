@@ -127,10 +127,10 @@ convention outlined in `create_style_guide()`.
 space_after_opening_style <- function(are_you_sure) {
   create_style_guide(
     space = tibble::lst(remove_space_after_opening_paren = 
-    if (are_you_sure) styler:::remove_space_after_opening_paren,
+    if (are_you_sure) styler:::remove_space_after_opening_paren),
     style_guide_name = "styler::space_after_opening_style@https://github.com/r-lib/styler",
-    styler_version = read.dcf(here::here("DESCRIPTION"))[, "Version"]
-  ))
+    style_guide_version = read.dcf(here::here("DESCRIPTION"))[, "Version"]
+  )
 }
 ```
 
@@ -285,7 +285,7 @@ set_line_break_before_curly_opening_style <- function() {
   create_style_guide(
     line_break = lst(set_line_break_before_curly_opening),
     style_guide_name = "styler::set_line_break_before_curly_opening_style@https://github.com/r-lib/styler",
-    styler_version = read.dcf(here::here("DESCRIPTION"))[, "Version"]
+    style_guide_version = read.dcf(here::here("DESCRIPTION"))[, "Version"]
   )
 }
 ```
@@ -331,7 +331,7 @@ them.
 # Cache invalidation
 
 Note that it if you re-distribute the style guide, it's your responsibility to
-set the version and the style guide name in `crete_style_guide()` correctly. If
+set the version and the style guide name in `create_style_guide()` correctly. If
 you distribute a new version of your style guide and you don't increment the
 version number, it might have drastic consequences for your user: Under some
 circumstances (see `help("cache_make_key")`), your new style guide won't
