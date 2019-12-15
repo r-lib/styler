@@ -11,7 +11,9 @@ create_style_guide(
   token = NULL,
   indention = NULL,
   use_raw_indention = FALSE,
-  reindention = tidyverse_reindention()
+  reindention = tidyverse_reindention(),
+  style_guide_name = NULL,
+  style_guide_version = NULL
 )
 }
 \arguments{
@@ -33,6 +35,13 @@ should be used.}
 
 \item{reindention}{A list of parameters for regex re-indention, most
 conveniently constructed using \code{\link[=specify_reindention]{specify_reindention()}}.}
+
+\item{style_guide_name}{The name of the style guide. Used as a meta attribute
+inside the created style guide, for example for caching. It is a string
+consisting of: "}
+
+\item{style_guide_version}{The version of the style guide. Used as a meta attribute
+inside the created style guide, for example for caching.}
 }
 \description{
 This is a helper function to create a style guide, which is technically

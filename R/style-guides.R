@@ -163,14 +163,16 @@ tidyverse_style <- function(scope = "tokens",
 
   create_style_guide(
     # transformer functions
-    initialize        = default_style_guide_attributes,
-    line_break        = line_break_manipulators,
-    space             = space_manipulators,
-    token             = token_manipulators,
-    indention         = indention_modifier,
+    initialize          = default_style_guide_attributes,
+    line_break          = line_break_manipulators,
+    space               = space_manipulators,
+    token               = token_manipulators,
+    indention           = indention_modifier,
     # transformer options
-    use_raw_indention = use_raw_indention,
-    reindention       = reindention
+    use_raw_indention   = use_raw_indention,
+    reindention         = reindention,
+    style_guide_name    = "https://github.com/r-lib/styler::tidyverse_style",
+    style_guide_version = styler_version
   )
 }
 
@@ -193,6 +195,11 @@ tidyverse_style <- function(scope = "tokens",
 #'   should be used.
 #' @param reindention A list of parameters for regex re-indention, most
 #'   conveniently constructed using [specify_reindention()].
+#' @param style_guide_name The name of the style guide. Used as a meta attribute
+#'   inside the created style guide, for example for caching. It is a string
+#'   consisting of: "
+#' @param style_guide_version The version of the style guide. Used as a meta attribute
+#'   inside the created style guide, for example for caching.
 #' @examples
 #' set_line_break_before_curly_opening <- function(pd_flat) {
 #'   op <- pd_flat$token %in% "'{'"
@@ -211,7 +218,9 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                token = NULL,
                                indention = NULL,
                                use_raw_indention = FALSE,
-                               reindention = tidyverse_reindention()) {
+                               reindention = tidyverse_reindention(),
+                               style_guide_name = NULL,
+                               style_guide_version = NULL) {
   lst(
     # transformer functions
     initialize = lst(initialize),
@@ -221,7 +230,9 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
     indention,
     # transformer options
     use_raw_indention,
-    reindention
+    reindention,
+    style_guide_name,
+    style_guide_version
   ) %>%
     map(compact)
 }
