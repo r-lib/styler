@@ -20,6 +20,21 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
   cache_deactivate(verbose = FALSE)
 }
 
+
+#' Remember the past to be quicker in the future
+#'
+#' styler by default uses caching. It may prompt you to install the R package
+#' `R.cache` the first time you want to use it. R.cache will also ask you to let
+#' it create a permanent cache on your file system that styler will use.
+#' This is needed if you want to cache across R sessions and not just within.
+#' The cache is specific to a version of styler by default, because different
+#' versions potentially format code differently. This means after upgrading
+#' styler or a style guide you use, the cache will be re-built.
+#' See [cache_info()],
+#' [cache_activate()], [cache_clear()] for utilities to manage the cache.
+#' @name caching
+NULL
+
 #' Show information about the styler cache
 #'
 #' Gives information about the cache. Note that the size consumed by the cache

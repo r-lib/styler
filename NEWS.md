@@ -1,5 +1,13 @@
 # styler 1.2.0.9000
 
+* styler caches results of styling, so applying styler to code it has styled
+  before will be instantaneous. This brings large speed boosts in many
+  situations, e.g. when `style_pkg()` is run but only a few files have changed
+  since the last styling or when using the [styler pre-commit
+  hook](https://github.com/lorenzwalthert/precommit). See `help("caching")`
+  for details (#538).
+
+
 * ignore certain lines using `# styler: off` and `#styler: on` or custom 
   markers, see `help("stylerignore")` (#560).
 
@@ -19,13 +27,6 @@
   styled files is only changed when the content is changed (#532).
 
 ## New features
-
-* styler caches results of styling, so applying styler to code it has styled
-  before will be instantaneous. This brings large speed boosts in many
-  situations, e.g. when `style_pkg()` is run but only a few files have changed
-  since the last styling or when using the [styler pre-commit
-  hook](https://github.com/lorenzwalthert/pre-commit-hooks). See the README for
-  details (#538).
 
 * Aligned function calls are detected and remain unchanged if they match the styler
   [definition for aligned function

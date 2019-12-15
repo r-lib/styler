@@ -73,6 +73,9 @@ region.
     styling (GitHub development version), also see
     `help("stylerignore")`.
 
+  - cache styled expressions for speed. See `help("caching")` to learn
+    more.
+
 **scope**
 
 You can decide on the level of invasiveness with the scope argument. You
@@ -124,17 +127,6 @@ with the tidyverse style guide in in this
 If this is not flexible enough for you, you can implement your own style
 guide, as explained in the corresponding
 [vignette](https://styler.r-lib.org/articles/customizing_styler.html).
-
-**caching**
-
-In styler 1.1.1,9004, caching was introduced, which makes repeated
-styling almost instantaneous. By default, it’s enabled, but you need to
-have the `R.cache` package installed. At first use, `R.cache` will ask
-you to let it create a permanent cache on your file system that styler
-will use. This is needed if you want to cache across R sessions and not
-just within. The cache is specific to a version of styler by default,
-because different versions potentially format code differently. See
-`?styler::cache_info()` for more details on how to configure caching.
 
 ## Adaption of styler
 
