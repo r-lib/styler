@@ -66,12 +66,13 @@ region.
   - do not re-style [deliberate code
     alignment](https://styler.r-lib.org/articles/detect-alignment.html).
 
-  - ignore some lines for styling (GitHub development version), see
-    [`help("stylerignore")`](https://styler.r-lib.org/reference/stylerignore.html).
+  - [ignore some
+    lines](https://styler.r-lib.org/reference/stylerignore.html) for
+    styling (GitHub development version).
 
-  - cache styled expressions for speed (GitHub development version). See
-    [`help("caching")`](https://styler.r-lib.org/reference/caching.html)
-    to learn more.
+  - [cache styled
+    expressions](https://styler.r-lib.org/reference/caching.html) for
+    speed (GitHub development version).
 
 ## Configuration
 
@@ -102,9 +103,9 @@ Note that compared to the default used above `scope = "tokens"`:
 
 While spaces still got styled (around `=` in `(x)`).
 
-This was just the tip of the iceberg. To learn more about custoization
-options with the tidyverse style guide, see
-[`help("tidyverse_style")`](https://styler.r-lib.org/reference/tidyverse_style.html)
+This was just the tip of the iceberg. To learn more about customization
+options with the tidyverse style guide, see the [help file for
+\`tidyverse\_style](https://styler.r-lib.org/reference/tidyverse_style.html)
 for a quick overview or the [introductory
 vignette](https://styler.r-lib.org/articles/introducing_styler.html).
 
