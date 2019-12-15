@@ -171,7 +171,7 @@ tidyverse_style <- function(scope = "tokens",
     # transformer options
     use_raw_indention   = use_raw_indention,
     reindention         = reindention,
-    style_guide_name    = "https://github.com/r-lib/styler::tidyverse_style",
+    style_guide_name    = "styler::tidyverse_style@https://github.com/r-lib",
     style_guide_version = styler_version
   )
 }
