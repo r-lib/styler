@@ -22,7 +22,10 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 
 #' Show information about the styler cache
 #'
-#' Gives information about the cache.
+#' Gives information about the cache. Note that the size consumed by the cache
+#' will always be displayed as zero because all the cache does is creating an
+#' empty file of size 0 bytes for every cached expression. The innode is
+#' excluded from this displayed size but negligible.
 #' @param cache_name The name of the cache for which to show details. If
 #'   `NULL`, the active cache is used. If none is active the cache corresponding
 #'   to the installed styler version is used.

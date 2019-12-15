@@ -16,7 +16,10 @@ to the installed styler version is used.}
 both.}
 }
 \description{
-Gives information about the cache.
+Gives information about the cache. Note that the size consumed by the cache
+will always be displayed as zero because all the cache does is creating an
+empty file of size 0 bytes for every cached expression. The innode is
+excluded from this displayed size but negligible.
 }
 \seealso{
 Other cache managers: 
