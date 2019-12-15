@@ -24,7 +24,7 @@ assert_transformers <- function(transformers) {
   no_name <- is.null(transformers$style_guide_name)
   no_version <- is.null(transformers$style_guide_version)
   if (no_name || no_version) {
-    action <- ifelse(packageVersion("styler") >= 1.4,
+    action <- ifelse(utils::packageVersion("styler") >= 1.4,
       "are not supported", "won't be supported"
     )
     message <- paste(
@@ -37,7 +37,7 @@ assert_transformers <- function(transformers) {
       "non-NULL. See help(\"create_style_guide\") for how to set them."
     )
 
-    if (packageVersion("styler") >= 1.4) {
+    if (utils::packageVersion("styler") >= 1.4) {
       rlang::abort(message)
     } else {
       rlang::warn(message)
