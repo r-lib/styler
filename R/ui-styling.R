@@ -115,7 +115,7 @@ prettify_pkg <- function(transformers,
   if ("\\.rmd" %in% filetype) {
     vignette_files <- dir_without_.(
       path = without_excluded("vignettes"), pattern = "\\.rmd$",
-      ignore.case = TRUE, recursive = TRUE,
+      ignore.case = TRUE, recursive = TRUE
     )
     readme <- dir_without_.(
       path = ".",
