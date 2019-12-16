@@ -25,6 +25,9 @@ NULL
 #'   standardization) are: "r", "rprofile", "rmd", "rnw".
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
+#' @param exclude_dirs Character vector with directories to exclude. Note that
+#'   the default values were set for consistency with [style_dir()] and as
+#'   these directories are anyways not styled.
 #' @param include_roxygen_examples Whether or not to style code in roxygen
 #'   examples.
 #' @section Warning:
@@ -74,10 +77,12 @@ style_pkg <- function(pkg = ".",
                       transformers = style(...),
                       filetype = c("R", "Rprofile"),
                       exclude_files = "R/RcppExports.R",
+                      exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   changed <- withr::with_dir(pkg_root, prettify_pkg(
-    transformers, filetype, exclude_files, include_roxygen_examples
+    transformers,
+    filetype, exclude_files, exclude_dirs, include_roxygen_examples
   ))
   invisible(changed)
 }
@@ -85,38 +90,45 @@ style_pkg <- function(pkg = ".",
 prettify_pkg <- function(transformers,
                          filetype,
                          exclude_files,
+                         exclude_dirs,
                          include_roxygen_examples) {
   filetype <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
-
+  exclude_files <- set_arg_paths(exclude_files)
+  exclude_dirs <- set_arg_paths(exclude_dirs)
+  without_excluded <- purrr::partial(setdiff, y = exclude_dirs)
   if ("\\.r" %in% filetype) {
-    r_files <- dir(
-      path = c("R", "tests", "data-raw", "demo"), pattern = "\\.r$",
-      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+    r_files <- dir_without_.(
+      path = without_excluded(c("R", "tests", "data-raw", "demo")),
+      pattern = "\\.r$",
+      ignore.case = TRUE,
+      recursive = TRUE
     )
   }
 
   if ("\\.rprofile" %in% filetype) {
-    rprofile_files <- dir(
-      path = ".", pattern = "^\\.rprofile$",
-      ignore.case = TRUE, recursive = FALSE, full.names = TRUE,
-      all.files = TRUE
+    rprofile_files <- dir_without_.(
+      path = without_excluded("."), pattern = "^\\.rprofile$",
+      ignore.case = TRUE, recursive = FALSE, all.files = TRUE
     )
   }
   if ("\\.rmd" %in% filetype) {
-    vignette_files <- dir(
-      path = "vignettes", pattern = "\\.rmd$",
-      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+    vignette_files <- dir_without_.(
+      path = without_excluded("vignettes"), pattern = "\\.rmd$",
+      ignore.case = TRUE, recursive = TRUE
     )
-    readme <- dir(pattern = "^readme\\.rmd$", ignore.case = TRUE)
+    readme <- dir_without_.(
+      path = ".",
+      pattern = without_excluded("^readme\\.rmd$"), ignore.case = TRUE
+    )
   }
 
   if ("\\.rnw" %in% filetype) {
     vignette_files <- append(
       vignette_files,
-      dir(
-        path = "vignettes", pattern = "\\.rnw$",
-        ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      dir_without_.(
+        path = without_excluded("vignettes"), pattern = "\\.rnw$",
+        ignore.case = TRUE, recursive = TRUE
       )
     )
   }
@@ -127,7 +139,6 @@ prettify_pkg <- function(transformers,
   )
   transform_files(files, transformers, include_roxygen_examples)
 }
-
 
 #' Style a string
 #'
@@ -164,7 +175,8 @@ style_text <- function(text,
 #' @param path Path to a directory with files to transform.
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
-#' @inheritParams style_pkg
+#' @param exclude_dirs Character vector with directories to exclude.
+##' @inheritParams style_pkg
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @inheritSection style_pkg Round trip validation
@@ -181,10 +193,12 @@ style_dir <- function(path = ".",
                       filetype = c("R", "Rprofile"),
                       recursive = TRUE,
                       exclude_files = NULL,
+                      exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE) {
   changed <- withr::with_dir(
     path, prettify_any(
-      transformers, filetype, recursive, exclude_files, include_roxygen_examples
+      transformers,
+      filetype, recursive, exclude_files, exclude_dirs, include_roxygen_examples
     )
   )
   invisible(changed)
@@ -201,14 +215,29 @@ prettify_any <- function(transformers,
                          filetype,
                          recursive,
                          exclude_files,
+                         exclude_dirs,
                          include_roxygen_examples) {
-  files <- dir(
+  exclude_files <- set_arg_paths(exclude_files)
+  exclude_dirs <- set_arg_paths(exclude_dirs)
+  files_root <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),
-    ignore.case = TRUE, recursive = recursive, full.names = TRUE,
-    all.files = TRUE
+    ignore.case = TRUE, recursive = FALSE, all.files = TRUE
   )
+  if (recursive) {
+    files_other <- list.dirs(full.names = FALSE, recursive = TRUE) %>%
+      setdiff(c("", exclude_dirs)) %>%
+      dir_without_.(
+        pattern = map_filetype_to_pattern(filetype),
+        ignore.case = TRUE, recursive = FALSE,
+        all.files = TRUE
+      )
+
+  } else {
+    files_other <- c()
+  }
   transform_files(
-    setdiff(files, exclude_files), transformers, include_roxygen_examples
+    setdiff(c(files_root, files_other), exclude_files),
+    transformers, include_roxygen_examples
   )
 }
 
@@ -239,6 +268,7 @@ style_file <- function(path,
                        style = tidyverse_style,
                        transformers = style(...),
                        include_roxygen_examples = TRUE) {
+  path <- set_arg_paths(path)
   changed <- transform_files(path, transformers, include_roxygen_examples)
   invisible(changed)
 }

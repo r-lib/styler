@@ -12,6 +12,7 @@ style_dir(
   filetype = c("R", "Rprofile"),
   recursive = TRUE,
   exclude_files = NULL,
+  exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE
 )
 }
@@ -39,6 +40,8 @@ of \code{path} should be styled as well.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
+
+\item{exclude_dirs}{Character vector with directories to exclude.}
 
 \item{include_roxygen_examples}{Whether or not to style code in roxygen
 examples.}

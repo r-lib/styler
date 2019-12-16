@@ -74,3 +74,17 @@ assert_tokens <- function(tokens) {
     ))
   }
 }
+
+#' Standardize paths in root
+#'
+#' Standardization required to use `setdiff()` with paths.
+#' @param path A path.
+#' @keywords internal
+#' @seealso dir_without_.
+#' @examples
+#' styler:::set_arg_paths(c("./file.R", "file.R", "../another-file.R"))
+set_arg_paths <- function(path) {
+  starts_with_. <- substr(path, 1, 2) == "./"
+  path[starts_with_.] <- substring(path[starts_with_.], 3)
+  path
+}

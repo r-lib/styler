@@ -1,5 +1,18 @@
 # styler 1.2.0.9000
 
+## Breaking changes
+
+* `style_pkg()` and `style_dir()` gain a new argument `exclude_dirs` to exclude 
+  directories from styling, by default `renv` and `packrat`. Note that the 
+  defaults won't change the behavior of `style_pkg()` because it does anyways 
+  does not style these directories and they were set for consistency.
+  
+
+## New features
+
+* ignore certain lines using `# styler: off` and `#styler: on` or custom 
+  markers, see `help("stylerignore")` (#560).
+
 * styler caches results of styling, so applying styler to code it has styled
   before will be instantaneous. This brings large speed boosts in many
   situations, e.g. when `style_pkg()` is run but only a few files have changed
@@ -8,12 +21,14 @@
   for details (#538).
 
 
-* ignore certain lines using `# styler: off` and `#styler: on` or custom 
-  markers, see `help("stylerignore")` (#560).
+## Minor changes and fixes
+
+* `style_file()` and friends now strip `./` in file paths returned invisibly,
+  i.e. `./script.R` becomes `script.R`.
 
 * function documentation now contains many more linebreaks due to roxygen2 
   update to version 7.0.1 (#566).
-  
+
 # styler 1.2.0
 
 ## Breaking changes
