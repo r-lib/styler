@@ -1,0 +1,11 @@
+pandoc: '2.2'
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  customizing_styler: customizing_styler.html
+  detect-alignment: detect-alignment.html
+  data_structures: gsoc_proposal/data_structures.html
+  manipulating_nested_parse_data: gsoc_proposal/manipulating_nested_parse_data.html
+  introducing_styler: introducing_styler.html
+  performance_improvements: performance_improvements.html
+
