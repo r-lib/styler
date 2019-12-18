@@ -18,3 +18,10 @@ repos:
     rev: v2.4.0
     hooks: 
     -   id: check-added-large-files
+-   repo: local
+    hooks:
+    -   id: consistent_release_tag
+        name: consistent_release_tag
+        entry: 
+        language: script
+        stages: ["push"]
