@@ -1,6 +1,5 @@
 #!/usr/bin/env Rscript
 
-
 path_config <- c(
   fs::path("inst", "pre-commit-config.yaml"),
   fs::path(".pre-commit-config.yaml")
