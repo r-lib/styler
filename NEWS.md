@@ -1,3 +1,4 @@
+
 # styler 1.2.0.9000
 
 ## Breaking changes
@@ -23,8 +24,10 @@
 
 ## Minor changes and fixes
 
+* lines are now broken after `+` in `ggplot2` calls for `strict = TRUE` (#569).
+
 * `style_file()` and friends now strip `./` in file paths returned invisibly,
-  i.e. `./script.R` becomes `script.R`.
+  i.e. `./script.R` becomes `script.R` (#568).
 
 * function documentation now contains many more linebreaks due to roxygen2 
   update to version 7.0.1 (#566).
