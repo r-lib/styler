@@ -91,7 +91,7 @@ To update the hook revisions, run `precommit::autoupdate()`.
 <!-- end list -->
 
 ``` r
-#> Error in loadNamespace(name) : there is no package called ‘__name_of_package__’
+# > Error in loadNamespace(name) : there is no package called ‘__name_of_package__’
 ```
 
 In that case, just install the package with `install.packages()` once
