@@ -14,6 +14,37 @@ set_arg_write_tree <- function(write_tree) {
   write_tree
 }
 
+#' Assert the transformers
+#'
+#' Actually only assert name and version of style guide in order to make sure
+#' caching works correctly.
+#' @inheritParams make_transformer
+#' @keywords internal
+assert_transformers <- function(transformers) {
+  no_name <- is.null(transformers$style_guide_name)
+  no_version <- is.null(transformers$style_guide_version)
+  if (no_name || no_version) {
+    action <- ifelse(utils::packageVersion("styler") >= 1.4,
+      "are not supported", "won't be supported"
+    )
+    message <- paste(
+      "Style guides without a name and a version field are depreciated and",
+      action, " in styler >= 1.4. \nIf you are a user: Open an issue on",
+      "https://github.com/r-lib/styler and provide a reproducible example",
+      "of this error. \nIf you are a developer:",
+      "When you create a style guide with `styler::create_style_guide()`, the",
+      "argument `style_guide_name` and `style_guide_version` should be",
+      "non-NULL. See help(\"create_style_guide\") for how to set them."
+    )
+
+    if (utils::packageVersion("styler") >= 1.4) {
+      rlang::abort(message)
+    } else {
+      rlang::warn(message)
+    }
+  }
+}
+
 #' Set the file type argument
 #'
 #' Sets and asserts the file type argument to a standard format for further internal

@@ -77,6 +77,7 @@ make_transformer <- function(transformers,
                              include_roxygen_examples,
                              warn_empty = TRUE) {
   force(transformers)
+  assert_transformers(transformers)
   cache_dir <- c("styler", cache_get_name())
   assert_R.cache_installation(action = "warn")
 

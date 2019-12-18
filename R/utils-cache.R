@@ -15,26 +15,26 @@ hash_standardize <- function(text) {
 
 #' Make a key for `R.cache`
 #'
+#' This is used to determine if caching already corresponds to a style guide.
 #' @details
 #'
-#' This function standardizes text and converts transformers to character (to
-#' avoid issues described in details).
-#' This means that the same code in `transformers`,
-#' calling other code not in `transformers` that was modified, will lead
-#' styler into thinking we can use the cache, although we should not. We believe
-#' this is a highly unlikely event, in particular because we already invalidate
-#' the cache when the styler version changes. Hence, our cache will cause
-#' styler to return *not correctly styled* code iff one of these conditions
-#' holds:
-#' - An improperly versioned version of styler is used, e.g. the development
-#'   version on GitHub.
-#' - A style guide from outside styler is used.
+#' We need to compare:
 #'
-#' Plus for both cases: the code in transformers does not change and changes in
-#' code the transformers depend on result in different styling.
+#' * text to style. Will be passed to hash function as is.
+#' * styler version. Not an issue because for every version of styler, we build
+#'   a new cache.
+#' * transformers. Cannot easily hash them because two environments won't be
+#'   identical even if they contain the same objects (see 'Experiments'). Simple
+#'   `as.character(transformers)` will not consider infinitively recursive
+#'   code dependencies.
+#'   To fix this, transformers must have names and version number as described
+#'   in [create_style_guide()]. Now, the only way to fool the cache invalidation
+#'   is to replace a transformer with the same function body (but changing
+#'   the function definition of the functions called in that body) interactively
+#'   without changing version number of name at the same time.
 #' @section Experiments:
 #'
-#' There is unexamplainable behavior in conjunction with hashin and
+#' There is unexplainable behavior in conjunction with hashing and
 #' environments:
 #' * Functions created with `purrr::partial()` are not identical when compared
 #'   with `identical()`
@@ -63,8 +63,12 @@ hash_standardize <- function(text) {
 #' identical(digest::digest(styler::tidyverse_style()), digest::digest(styler::tidyverse_style()))
 #' @keywords internal
 cache_make_key <- function(text, transformers) {
-  text <- hash_standardize(text)
-  c(text = text, transformers = as.character(transformers))
+  list(
+    text = hash_standardize(text),
+    style_guide_name = transformers$style_guide_name,
+    style_guide_version = transformers$style_guide_version,
+    style_guide_text = as.character(transformers)
+  )
 }
 
 #' Where is the cache?

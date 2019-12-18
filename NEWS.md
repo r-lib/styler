@@ -20,6 +20,12 @@
   since the last styling or when using the [styler pre-commit
   hook](https://github.com/lorenzwalthert/precommit). See `help("caching")`
   for details (#538).
+  
+* `create_style_guide()` gains two arguments `style_guide_name` and 
+  `style_guide_version` that are carried as meta data, in particular to version 
+  third-party style guides and ensure the proper functioning of caching. This 
+  change is completely invisible to users who don't create and distribute their
+  own style guide like `tidyverse_style()` (#572).
 
 
 ## Minor changes and fixes
