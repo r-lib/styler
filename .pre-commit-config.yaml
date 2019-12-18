@@ -1,7 +1,7 @@
 # All available hooks: https://pre-commit.com/hooks.html
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9025
+    rev: v0.0.0.9026
     hooks: 
     # any R project
     -   id: style-files
@@ -22,6 +22,6 @@ repos:
     hooks:
     -   id: consistent_release_tag
         name: consistent_release_tag
-        entry: 
+        entry: inst/consistent_release_tag.sh
         language: script
         stages: ["push"]
