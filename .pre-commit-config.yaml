@@ -1,8 +1,8 @@
 # All available hooks: https://pre-commit.com/hooks.html
+default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
     rev: v0.0.0.9026
-    default_stages: [push]
     hooks: 
     # any R project
     -   id: style-files
