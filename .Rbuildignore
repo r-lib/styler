@@ -12,4 +12,4 @@
 ^pkgdown$
 ^\.pre-commit-config\.yaml$
 ^API$
-^inst/consistent_release_tag.sh$
+^inst/consistent_release_tag$
