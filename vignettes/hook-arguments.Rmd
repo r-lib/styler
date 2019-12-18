@@ -36,7 +36,7 @@ The following hooks take arguments:
   ```
   id: lintr
   args: [--warning_only]
-  vebose: True
+  verbose: True
   ```
   When configured this way, lintr prints lint errors as they appear. Other
   arguments are not supported. Instead, `lintr` config should be specified in a
