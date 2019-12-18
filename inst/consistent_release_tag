@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 
 path_config <- c(
   fs::path("inst", "pre-commit-config.yaml"),
@@ -14,7 +15,7 @@ assert_config_has_rev <- function(path_config) {
   rev <- file$repos[[lorenzwalthert_precommit_idx]]$rev
   
   tags <- names(git2r::tags("."))
-  latest_tag <- max(as.numeric_version(gsub("^v", "", names(tags))))
+  latest_tag <- paste0("v", max(as.numeric_version(gsub("^v", "", tags))))
   
   if (latest_tag != rev) {
     rlang::abort(glue::glue(
