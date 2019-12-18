@@ -25,18 +25,25 @@ The following hooks take arguments:
 * `style-files`: Argument `style_pkg` and `style_fun` if you want to use another
   style guide than the default. Defaults: `styler` for `style_pkg` and 
   `tidyverse_style` for `style_fun`.
-
+  ```
+  id: style-files
+  args: [--style_pkg=styler, --style_fun=tidyverse_style]
+  ```
 * `spell-check`: Argument `ignore_files` takes a regular expression matched with
   `base::grep()` to ignore further files from the hook. Argument `lang` is
   passed to `spelling::spell_check_files()`.
+  ```
+  id: spell-check
+  args: [--ignore_files=<ignored_files>, --lang=<language>]
+  ```
 
-* `lintr`: Argument `--warning_only` changes the behavior of the pre-commit to
+* `lintr`: Argument `warning_only` changes the behavior of the pre-commit to
   be non-blocking. You should set this with the field `verbose: true`.
 
   ```
   id: lintr
-  args: [--warning_only]
-  verbose: True
+  args: [--warn_only]
+  verbose: true
   ```
   When configured this way, lintr prints lint errors as they appear. Other
   arguments are not supported. Instead, `lintr` config should be specified in a
@@ -48,3 +55,7 @@ The following hooks take arguments:
   private imports into the package namespace are tolarable, e.g. 
   `somepkg:::x()`. Flag not set by default, i.e. the hook will fail if 
   such a call is found.
+  ```
+  id: deps-in-desc
+  args: [--allow_private_imports]
+  ```
