@@ -1,6 +1,7 @@
 #' Set up pre-commit
 #' 
-#' This function should be called in two situations: 
+#' Get started.
+#' @section When to call this function?:
 #' 
 #' * You want to add pre-commit support to a git repo. This involves adding
 #'   a pre-commit config file and making sure git will call the hooks before
@@ -8,7 +9,7 @@
 #' * You use a repo that has such a config file but for pre-commit to become 
 #'   active, you need to make sure git knows that it should call pre-commit.
 #'
-#' @details
+#' @section What it does the funciton do?:
 #' * installs pre-commit in your current directory.
 #' * sets up a template `.pre-commit-config.yaml`.
 #' * autoupdates the template to make sure you get the latest versions of the
