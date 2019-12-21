@@ -5,8 +5,12 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/lorenzwalthert/pre-commit-hooks.svg?branch=master)](https://travis-ci.org/lorenzwalthert/precommit)
+[![Build
+Status](https://travis-ci.org/lorenzwalthert/precommit.svg?branch=master)](https://travis-ci.org/lorenzwalthert/precommit)
+[![Build
+status](https://ci.appveyor.com/api/projects/status/6xfoh8b4ik3pg6da/branch/master?svg=true)](https://ci.appveyor.com/project/lorenzwalthert/precommit/branch/master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.org/package=precommit)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
