@@ -15,7 +15,7 @@ it's been placed in your repo.}
 \item{path_root}{The path to the root directory of your project.}
 }
 \description{
-Set up pre-commit
+Get started.
 }
 \section{When to call this function?}{
 
