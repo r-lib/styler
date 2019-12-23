@@ -11,13 +11,23 @@ Arguments are specified as described in the [pre-commit.com
 documentation](https://pre-commit.com/#passing-arguments-to-hooks), i.e. the
 arguments for the `style-files` hook can be set like this:
 
-```{yaml}
+```{r, echo = FALSE, output = "asis", comment = ""}
+config <- yaml::read_yaml(here::here(".pre-commit-config.yaml"))
+rev <- purrr::imap(config$repos, function(x, y) {
+  if (x$repo == "https://github.com/lorenzwalthert/precommit") {
+    return(x$rev)
+  }
+}) %>%
+  purrr::compact() %>%
+  unlist()
+cat(glue::glue("
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9016
+    rev: v{rev}
     hooks:
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
+"))
 ```
 
 The following hooks take arguments:
