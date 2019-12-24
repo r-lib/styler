@@ -12,6 +12,7 @@ documentation](https://pre-commit.com/#passing-arguments-to-hooks), i.e. the
 arguments for the `style-files` hook can be set like this:
 
 ```{r, echo = FALSE, output = "asis", comment = ""}
+library(magrittr)
 config <- yaml::read_yaml(here::here(".pre-commit-config.yaml"))
 rev <- purrr::imap(config$repos, function(x, y) {
   if (x$repo == "https://github.com/lorenzwalthert/precommit") {
