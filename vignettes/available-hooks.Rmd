@@ -13,7 +13,7 @@ This repocontains a collection of git pre-commit hooks to use with
 * `style-files`: A hook to style files with [styler](https://styler.r-lib.org).
   Only commit code corresponding to the tidyverse style guide. NOTE: devel
   version of styler strongly suggested. Install via
-  `remotes::install_github('r-lib/styler')`. To customize, see 
+  `remotes::install_github('r-lib/styler')`. To customize, see
   `vignette("available-hooks")`.
 
 * `readme-rmd-rendered`: Make sure `README.Rmd` hasn't been edited more recently
@@ -41,8 +41,10 @@ This repocontains a collection of git pre-commit hooks to use with
 
 * `lintr`: A hook to run `lintr::lint()` to check that R files are lint free.
 
-* `codemeta-description-updated`: Make sure `DESCRIPTION` hasn't been edited more recently
-  than `codemeta.json`, i.e. remind you to run `codemetar::write_codemeta()` in order to keep `codemeta.json` in sync with `DESCRIPTION`.
+* `codemeta-description-updated`: Make sure `DESCRIPTION` hasn't been edited
+  more recently than `codemeta.json`, i.e. remind you to run
+  `codemetar::write_codemeta()` in order to keep `codemeta.json` in sync with
+  `DESCRIPTION`.
 
 Other repos also host hooks, many are listed
 [here](https://pre-commit.com/hooks.html).
