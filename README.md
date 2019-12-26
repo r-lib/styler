@@ -114,7 +114,7 @@ vignette](https://styler.r-lib.org/articles/introducing_styler.html).
 styler functionality is made available through other tools, most notably
 
   - as a pre-commit hook `style-files` in
-    <https://github.com/lorenzwalthert/pre-commit>
+    <https://github.com/lorenzwalthert/precommit>
 
   - `usethis::use_tidy_style()` styles your project according to the
     tidyverse style guide.
