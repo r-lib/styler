@@ -22,7 +22,7 @@ deps_in_desc <- function(file, arguments) {
   local_pkg_name <- unname(desc::desc_get("Package"))
   unregistered <- setdiff(
     unique(used),
-    c(pre_installed, desc::desc_get_deps(file = ".")$package, local_pkg_name)
+    c(pre_installed, desc::desc_get_deps(file = file)$package, local_pkg_name)
   )
   out <- TRUE
   if (length(unregistered) > 0) {
