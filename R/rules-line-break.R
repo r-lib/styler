@@ -285,7 +285,7 @@ set_linebreak_after_ggplot2_plus <- function(pd) {
       (pd$token_after == "SYMBOL_FUNCTION_CALL" | pd$token_after == "SYMBOL_PACKAGE")
     if (any(is_plus_or_comment_after_plus_before_fun_call)) {
       gg_call <- pd$child[[previous_non_comment(pd, first_plus)]]$child[[1]]
-      if (!is.null(gg_call) && gg_call$text[gg_call$token == "SYMBOL_FUNCTION_CALL"] == "ggplot") {
+      if (!is.null(gg_call) && isTRUE(gg_call$text[gg_call$token == "SYMBOL_FUNCTION_CALL"] == "ggplot")) {
         plus_without_comment_after <- setdiff(
           which(is_plus_raw),
           which(lead(pd$token == "COMMENT"))
