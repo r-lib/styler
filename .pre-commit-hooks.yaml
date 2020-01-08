@@ -36,8 +36,7 @@
     files: 'README\.[Rr]?md$'
 -   id: codemeta-description-updated
     name: codemeta-description-updated
-    description: make sure codemeta.json is in sync with DESCRIPTION. It should 
-    be run after use-tidy-description.
+    description: make sure codemeta.json is in sync with DESCRIPTION. It should be run after use-tidy-description.
     entry: inst/bin/codemeta-description-updated
     language: script
     files: '^DESCRIPTION$'
