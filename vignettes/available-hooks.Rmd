@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This repocontains a collection of git pre-commit hooks to use with
+This repo contains a collection of git pre-commit hooks to use with
 [pre-commit.com](https://pre-commit.com). Currently, this repo hosts:
 
 * `style-files`: A hook to style files with [styler](https://styler.r-lib.org).

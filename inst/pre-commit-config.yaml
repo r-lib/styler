@@ -12,10 +12,12 @@ repos:
     -   id: no-browser-statement
     -   id: readme-rmd-rendered
     #  R package development
+    # the first hook below
+    # must be listed above use-tidy-description when both are used
+    # -   id: codemeta-description-updated
     # -   id: roxygenize
     # -   id: use-tidy-description
     # -   id: deps-in-desc
-    # -   id: codemeta-description-updated
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v1.2.3
     hooks: 
