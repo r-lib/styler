@@ -7,3 +7,6 @@ authors:
     href: http://krlmlr.info
   Lorenz Walthert:
     href: http://lorenzwalthert.netlify.com
+
+development:
+  mode: auto
