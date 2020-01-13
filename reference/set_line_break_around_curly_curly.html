@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Styling around <code>\{\{</code> — set_line_break_around_curly_curly • styler</title>
+<title>Styling around <code>{{</code> — set_line_break_around_curly_curly • styler</title>
 
 
 <!-- jquery -->
@@ -35,22 +35,22 @@
 
 
 
-<meta property="og:title" content="Styling around <code>\{\{</code> — set_line_break_around_curly_curly" />
-<meta property="og:description" content="With {rlang} version 0.4, a new syntactic sugar is introduced, the
+<meta property="og:title" content="Styling around <code>{{</code> — set_line_break_around_curly_curly" />
+<meta property="og:description" content="With rlang version 0.4, a new syntactic sugar is introduced, the
 curly-curly operator. It interprets this code in a special way:
-call(\{\{ x \}\}). See this
+call({{ x }}). See this
 blog post
 on the topic. Here, the curly-curly sugar is understood as two opening
 curly braces, followed by an expression followed by two closing curly braces,
-e.g. \{\{1\}\}. \{\{1\} + 1\} does not contain the curly-curly syntactic
-sugar according to the above definition. On the other hand \{\{ x + y \}\}
+e.g. {{1}}. {{1} + 1} does not contain the curly-curly syntactic
+sugar according to the above definition. On the other hand {{ x + y }}
 is recognized by styler as containing it (and is parsable code)
 but will most likely give an error at runtime because the way the syntactic
 suggar is defined in rlang is to use a single token within curly-curly. In
-addition, because rlang parses \{\{ in a special way (just as !!), the
-expression \{\{ x \}\} will give a runtime error when used outside of a
+addition, because rlang parses {{ in a special way (just as !!), the
+expression {{ x }} will give a runtime error when used outside of a
 context that is capable of handling it, e.g. on the top level (that is, not
-within function call like rlang_fun(\{\{ x \}\})) or within a base R
+within function call like rlang_fun({{ x }})) or within a base R
 function such as c(). However, these differences are assumed to be
 irrelevant for styling curly-curly, as much as they were for styling !!.
 curly-curly affects styling of line break and spaces, namely:" />
@@ -86,7 +86,7 @@ curly-curly affects styling of line break and spaces, namely:" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -152,27 +152,27 @@ curly-curly affects styling of line break and spaces, namely:" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Styling around <code>\{\{</code></h1>
+    <h1>Styling around <code>{{</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/rules-line-break.R'><code>R/rules-line-break.R</code></a>, <a href='https://github.com/r-lib/styler/blob/master/R/rules-spacing.R'><code>R/rules-spacing.R</code></a></small>
     <div class="hidden name"><code>set_line_break_around_curly_curly.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>With {rlang} version 0.4, a new syntactic sugar is introduced, the
+    <p>With rlang version 0.4, a new syntactic sugar is introduced, the
 curly-curly operator. It interprets this code in a special way:
-<code>call(\{\{ x \}\})</code>. See this
+<code><a href='https://rdrr.io/r/base/call.html'>call({{ x }})</a></code>. See this
 <a href='https://www.tidyverse.org/articles/2019/06/rlang-0-4-0/'>blog post</a>
 on the topic. Here, the curly-curly sugar is understood as two opening
 curly braces, followed by an expression followed by two closing curly braces,
-e.g. <code>\{\{1\}\}</code>. <code>\{\{1\} + 1\}</code> does not contain the curly-curly syntactic
-sugar according to the above definition. On the other hand <code>\{\{ x + y \}\}</code>
+e.g. <code>{{1}}</code>. <code>{{1} + 1}</code> does not contain the curly-curly syntactic
+sugar according to the above definition. On the other hand <code>{{ x + y }}</code>
 is recognized by styler as containing it (and is parsable code)
 but will most likely give an error at runtime because the way the syntactic
 suggar is defined in rlang is to use a single token within curly-curly. In
-addition, because rlang parses <code>\{\{</code> in a special way (just as <code>!!</code>), the
-expression <code>\{\{ x \}\}</code> will give a runtime error when used outside of a
+addition, because rlang parses <code>{{</code> in a special way (just as <code>!!</code>), the
+expression <code>{{ x }}</code> will give a runtime error when used outside of a
 context that is capable of handling it, e.g. on the top level (that is, not
-within function call like <code>rlang_fun(\{\{ x \}\})</code>) or within a base R
+within function call like <code>rlang_fun({{ x }})</code>) or within a base R
 function such as <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code>. However, these differences are assumed to be
 irrelevant for styling curly-curly, as much as they were for styling <code>!!</code>.
 curly-curly affects styling of line break and spaces, namely:</p>
@@ -195,10 +195,10 @@ curly-curly affects styling of line break and spaces, namely:</p>
 
     
 <ul>
-<li><p>No line break after first or second <code>\{</code>, before third and fourth <code>\{</code>.</p></li>
-<li><p>No space after first and third <code>\{</code>, one space after second and before third
-<code>\}</code>.</p></li>
-<li><p>No line breaks within curly-curly, e.g. <code>\{\{ x \}\}</code> can only contain line
+<li><p>No line break after first or second <code>{</code>, before third and fourth <code>{</code>.</p></li>
+<li><p>No space after first and third <code>{</code>, one space after second and before third
+<code>}</code>.</p></li>
+<li><p>No line breaks within curly-curly, e.g. <code>{{ x }}</code> can only contain line
 breaks after the last brace or before the first brace. But these are not
 dependent on curly-curly specifically.</p></li>
 </ul>

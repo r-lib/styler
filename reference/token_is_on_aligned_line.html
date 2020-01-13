@@ -71,7 +71,7 @@ recycled conveniently later if needed as a vector with length &amp;gt; 1." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -179,25 +179,12 @@ sure we can stop as soon as we found that columns are not aligned.</p></li>
 </ul>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"magrittr"</span>)
-<span class='no'>transformers</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>()
-<span class='no'>pd_nested</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/compute_parse_data_nested.html'>compute_parse_data_nested</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
-  <span class='st'>"call("</span>,
-  <span class='st'>"  ab = 1,"</span>,
-  <span class='st'>"  a  = 2"</span>,
-  <span class='st'>")"</span>
-)) <span class='kw'>%&gt;%</span>
-<span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/visit.html'>post_visit</a></span>(<span class='no'>transformers</span>$<span class='no'>initialize</span>)
-<span class='no'>nest</span> <span class='kw'>&lt;-</span> <span class='no'>pd_nested</span>$<span class='no'>child</span><span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/token_is_on_aligned_line.html'>token_is_on_aligned_line</a></span>(<span class='no'>nest</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

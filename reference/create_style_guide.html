@@ -73,7 +73,7 @@ like style_text() and friends." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -152,15 +152,9 @@ function can be used as an argument for <code>style</code> in top level function
 like <code><a href='style_text.html'>style_text()</a></code> and friends.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_style_guide</span>(
-  <span class='kw'>initialize</span> <span class='kw'>=</span> <span class='no'>default_style_guide_attributes</span>,
-  <span class='kw'>line_break</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>space</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>indention</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_raw_indention</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>reindention</span> <span class='kw'>=</span> <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span>()
-)</pre>
+    <pre class="usage"><span class='fu'>create_style_guide</span>(<span class='kw'>initialize</span> <span class='kw'>=</span> <span class='no'>default_style_guide_attributes</span>,
+  <span class='kw'>line_break</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>space</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>indention</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use_raw_indention</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>reindention</span> <span class='kw'>=</span> <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,8 +204,8 @@ conveniently constructed using <code><a href='reindention.html'>specify_reindent
 <span class='no'>set_line_break_before_curly_opening_style</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() {
   <span class='fu'>create_style_guide</span>(<span class='kw'>line_break</span> <span class='kw'>=</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/lst.html'>lst</a></span>(<span class='no'>set_line_break_before_curly_opening</span>))
 }
-<span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"a &lt;- function(x) { x }"</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>set_line_break_before_curly_opening_style</span>)</div><div class='output co'>#&gt; a <span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span><span>x</span><span style='color: #BBBB00;'>)</span><span>
-#&gt; </span><span style='color: #BBBB00;'>{</span><span> x </span><span style='color: #BBBB00;'>}</span><span></div></span></pre>
+<span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"a &lt;- function(x) { x }"</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>set_line_break_before_curly_opening_style</span>)</div><div class='output co'>#&gt; a <span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span>(x)
+#&gt; { x }</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@
 ##     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L
 ##     pd_flat
 ## }
-## &lt;bytecode: 0x55de300&gt;
+## &lt;bytecode: 0x7f96eb8f7cf0&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>As the name says, this function removes spaces after the opening parenthesis. But how? Its input is a <em>nest</em>. Since the visitor will go through all levels of nesting, we just need a function that can be applied to a <em>nest</em>, that is, to a parse table at one level of nesting. We can compute the nested parse table and look at one of the levels of nesting that is interesting for us (more on the data structure in the vignettes “Data structures” and “Manipulating the parse table”):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">string_to_format &lt;-<span class="st"> "call( 3)"</span></a>
@@ -164,9 +164,9 @@
 ##   token terminal text  newlines spaces
 ##   &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;
 ## 1 expr  FALSE    ""           0      0
-## 2 '('   TRUE     (            0      1
+## 2 '('   TRUE     "("          0      1
 ## 3 expr  FALSE    ""           0      0
-## 4 ')'   TRUE     )            0      0</code></pre>
+## 4 ')'   TRUE     ")"          0      0</code></pre>
 <p><code><a href="../reference/default_style_guide_attributes.html">default_style_guide_attributes()</a></code> is called to initialize some variables, it does not actually transform the parse table.</p>
 <p>All the function <code>remove_space_after_opening_paren()</code> now does is to look for the opening bracket and set the column <code>spaces</code> of the token to zero. Note that it is very important to check whether there is also a line break following after that token. If so, <code>spaces</code> should not be touched because of the way <code>spaces</code> and <code>newlines</code> are defined. <code>spaces</code> are the number of spaces after a token and <code>newlines</code>. Hence, if a line break follows, spaces are not EOL spaces, but rather the spaces directly before the next token. If there was a line break after the token and the rule did not check for that, indention for the token following <code>(</code> would be removed. This would be unwanted for example if <code>use_raw_indention</code> is set to <code>TRUE</code> (which means indention should not be touched). If we apply the rule to our parse table, we can see that the column <code>spaces</code> changes and is now zero for all tokens:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">styler<span class="op">:::</span><span class="kw">remove_space_after_opening_paren</span>(pd<span class="op">$</span>child[[<span class="dv">1</span>]]) <span class="op">%&gt;%</span></a>
@@ -175,9 +175,9 @@
 ##   token terminal text  newlines spaces
 ##   &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;
 ## 1 expr  FALSE    ""           0      0
-## 2 '('   TRUE     (            0      0
+## 2 '('   TRUE     "("          0      0
 ## 3 expr  FALSE    ""           0      0
-## 4 ')'   TRUE     )            0      0</code></pre>
+## 4 ')'   TRUE     ")"          0      0</code></pre>
 <p>All top-level styling functions have a <code>style</code> argument (which defaults to <code>tidyverse_style</code>). If you check out the help file, you can see that the argument <code>style</code> is only used to create the default <code>transformers</code> argument, which defaults to <code>style(...)</code>. This allows for the styling options to be set without having to specify them inside the function passed to <code>transformers</code>.</p>
 <p>Let’s clarify this with an example. The following yields the same result:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(</a>
@@ -225,7 +225,7 @@
 ##         outer_indention_refs = NA)
 ##     transformed_absolute_indent
 ## }
-## &lt;bytecode: 0x4798228&gt;
+## &lt;bytecode: 0x7f96e87cc710&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>This means that the order of the styling is clearly defined and it is for example not possible to modify line breaks based on spacing, because spacing will be set after line breaks are set. Do not rely on the column <code>col1</code>, <code>col2</code>, <code>line1</code> and <code>line2</code> in the parse table in any of your functions since these columns only reflect the position of tokens at the point of parsing, i.e. they are not kept up to date throughout the process of styling.</p>
 <p>Also, as indicated above, work with <code>lag_newlines</code> only in your line break rules. For development purposes, you may also want to use the unexported function <code><a href="../reference/test_collection.html">test_collection()</a></code> to help you with testing your style guide. You can find more information in the help file for the function.</p>
@@ -270,14 +270,14 @@
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">pd &lt;-<span class="st"> </span>styler<span class="op">:::</span><span class="kw"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span>(code)</a></code></pre></div>
 <p>The token of interest here has id number 10. Let’s navigate there. Since line break rules manipulate the lags <em>before</em> the token, we need to change <code>lag_newlines</code> at the token “‘{’”.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">pd<span class="op">$</span>child[[<span class="dv">1</span>]]<span class="op">$</span>child[[<span class="dv">3</span>]]<span class="op">$</span>child[[<span class="dv">5</span>]]</a></code></pre></div>
-<pre><code>## # A tibble: 3 x 16
+<pre><code>## # A tibble: 3 x 15
 ##      id pos_id line1  col1 line2  col2 parent token terminal text  short
 ##   &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt; &lt;chr&gt;
-## 1     9     11     1    24     1    24     19 '{'   TRUE     {     {    
+## 1     9     11     1    24     1    24     19 '{'   TRUE     "{"   "{"  
 ## 2    16     12     1    26     1    30     19 expr  FALSE    ""    ""   
-## 3    15     18     1    32     1    32     19 '}'   TRUE     }     }    
-## # … with 5 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   stylerignore &lt;lgl&gt;, internal &lt;lgl&gt;, child &lt;named list&gt;</code></pre>
+## 3    15     18     1    32     1    32     19 '}'   TRUE     "}"   "}"  
+## # … with 4 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
+## #   internal &lt;lgl&gt;, child &lt;named list&gt;</code></pre>
 <p>Remember what we said above: A transformer takes a flat parse table as input, updates it and returns it. So here it’s actually simple:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">set_line_break_before_curly_opening &lt;-<span class="st"> </span><span class="cf">function</span>(pd_flat) {</a>
 <a class="sourceLine" id="cb27-2" data-line-number="2">  op &lt;-<span class="st"> </span>pd_flat<span class="op">$</span>token <span class="op">%in%</span><span class="st"> "'{'"</span></a>
@@ -310,7 +310,7 @@
 ##     pd$lag_newlines[round_after_curly] &lt;- 0L
 ##     pd
 ## }
-## &lt;bytecode: 0x5679940&gt;
+## &lt;bytecode: 0x7f96eb993818&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>With our example function <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to worry about that as we are only adding line breaks, but we don’t remove them.</p>
 </div>

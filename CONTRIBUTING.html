@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -146,10 +146,10 @@
 <h2 class="hasAnchor">
 <a href="#how-to-dive-in-and-understanding-the-source-code" class="anchor"></a>How to dive in and understanding the source code</h2>
 <p>Read the vignettes. If you are done, come back here.</p>
-<p><code>devtools::load_all()</code></p>
+<p><code><a href="https://rdrr.io/pkg/devtools/man/load_all.html">devtools::load_all()</a></code></p>
 <p><code><a href="https://rdrr.io/r/base/debug.html">debug(style_text)</a></code></p>
 <p><code><a href="reference/style_text.html">style_text("call(1, 2 + 1)")</a></code></p>
-<p>Go broad before you go deep. Before going into the very deep layers of function calls of <code><a href="reference/style_text.html">style_text()</a></code>, try to understand that <code><a href="reference/style_text.html">style_text()</a></code> consists of a few function calls only. Go into each of them and try to understand one layer deep. That is, try to understand what <code><a href="reference/make_transformer.html">make_transformer()</a></code> does by reading the names of the functions that get called, the name of the objects that are created by assigning the output of these function calls. Before looking into a functions source code, look at the documentation for that function. All internal important functions are documented and documentation is available also for unexported objects via <code>?</code> (if you did <code>devtools::load_all()</code>. Then, go into <code>parse_transform_serialize()</code> and so on.</p>
+<p>Go broad before you go deep. Before going into the very deep layers of function calls of <code><a href="reference/style_text.html">style_text()</a></code>, try to understand that <code><a href="reference/style_text.html">style_text()</a></code> consists of a few function calls only. Go into each of them and try to understand one layer deep. That is, try to understand what <code><a href="reference/make_transformer.html">make_transformer()</a></code> does by reading the names of the functions that get called, the name of the objects that are created by assigning the output of these function calls. Before looking into a functions source code, look at the documentation for that function. All internal important functions are documented and documentation is available also for unexported objects via <code>?</code> (if you did <code><a href="https://rdrr.io/pkg/devtools/man/load_all.html">devtools::load_all()</a></code>. Then, go into <code>parse_transform_serialize()</code> and so on.</p>
 <p>To understand the most fundamental operation in styler, the manipulation of the columns related to spacing and line break information, pick a rule from <code>R/rules-*.R</code>, e.g. <code>R/rules-spacing</code>, add a break point to a rule and style a string where you think this rule will be active. Then, see what happens and how this rule is applied on each level of nesting.</p>
 </div>
 <div id="static-code-analysis" class="section level2">
@@ -367,7 +367,7 @@
 <div id="testing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#testing" class="anchor"></a>Testing</h2>
-<p>We have a testing framework powered by <code><a href="reference/test_collection.html">test_collection()</a></code>. Essentially, there is an *-in.R file and a *-out.R file. The *-in.R file is the input that is transformed and - if it matches the *-out.R file, the test has passed. You can create an *-in.R file, run <code>devtools::test(f = "[your file]")</code> and an *-out.R file is generated. If the file matches your expectation, you can commit it. Note that files are overwritten and version control should be used to track failed tests. The files are placed in <code>tests/testthat</code> under the category they fit. Please have a look at the documentation for <code><a href="reference/test_collection.html">test_collection()</a></code> and see other unit tests. Let me know if there is anything unclear about this.</p>
+<p>We have a testing framework powered by <code><a href="reference/test_collection.html">test_collection()</a></code>. Essentially, there is an *-in.R file and a *-out.R file. The *-in.R file is the input that is transformed and - if it matches the *-out.R file, the test has passed. You can create an *-in.R file, run <code><a href="https://rdrr.io/pkg/devtools/man/test.html">devtools::test(f = "[your file]")</a></code> and an *-out.R file is generated. If the file matches your expectation, you can commit it. Note that files are overwritten and version control should be used to track failed tests. The files are placed in <code>tests/testthat</code> under the category they fit. Please have a look at the documentation for <code><a href="reference/test_collection.html">test_collection()</a></code> and see other unit tests. Let me know if there is anything unclear about this.</p>
 </div>
 <div id="contributing-code" class="section level2">
 <h2 class="hasAnchor">

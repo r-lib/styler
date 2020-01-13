@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -144,20 +144,9 @@
     <p>Creates a terminal token represented as (a row of) a parse table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_tokens</span>(
-  <span class='no'>tokens</span>,
-  <span class='no'>texts</span>,
-  <span class='kw'>lag_newlines</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>spaces</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='no'>pos_ids</span>,
-  <span class='kw'>token_before</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>token_after</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>indention_ref_pos_ids</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>indents</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>terminal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>child</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stylerignore</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>create_tokens</span>(<span class='no'>tokens</span>, <span class='no'>texts</span>, <span class='kw'>lag_newlines</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>spaces</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>pos_ids</span>,
+  <span class='kw'>token_before</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>token_after</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>indention_ref_pos_ids</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>indents</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>terminal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>child</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,9 +205,8 @@ not.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other token creators: 
-<code><a href='create_pos_ids.html'>create_pos_ids</a>()</code>,
-<code><a href='validate_new_pos_ids.html'>validate_new_pos_ids</a>()</code></p></div>
+    <div class='dont-index'><p>Other token creators: <code><a href='create_pos_ids.html'>create_pos_ids</a></code>,
+  <code><a href='validate_new_pos_ids.html'>validate_new_pos_ids</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
