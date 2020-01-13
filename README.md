@@ -17,6 +17,12 @@ source code while adhering to the
 [tidyverse](https://style.tidyverse.org) formatting rules. styler can be
 customized to format code according to other style guides too.
 
+The following online docs are available:
+
+  - [latest CRAN release](https://styler.r-lib.org).
+
+  - [GitHub development version](https://styler.r-lib.org/dev).
+
 ## Installation
 
 You can install the package from CRAN:
