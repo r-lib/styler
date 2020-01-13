@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Page not found (404) • styler</title>
+<title>Update the newlines attribute — update_newlines • styler</title>
 
 
 <!-- jquery -->
@@ -29,16 +29,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Page not found (404)" />
+<meta property="og:title" content="Update the newlines attribute — update_newlines" />
+<meta property="og:description" content="As we work only with the lag_newlines attribute for setting the line
+breaks, (R/rules-line_break.R) but we need newlines to determine
+whether or not to set spaces (R/rules-spacing.R), we have to update the
+attribute. We cannot simply use dplyr::lead(pd$lag_newlines) since we would
+lose information for the last token. spaces is left as is in
+R/rules-spacing.R for tokens at the end of a line since this allows styling
+without touching indention." />
+<meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -54,7 +62,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -66,21 +74,21 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <a class="navbar-link" href="../index.html">styler</a>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -90,27 +98,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/customizing_styler.html">Customizing styler</a>
+      <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
     <li>
-      <a href="articles/detect-alignment.html">Alignment detection</a>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
     </li>
     <li>
-      <a href="articles/gsoc_proposal/data_structures.html">Data Structures</a>
+      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
     </li>
     <li>
-      <a href="articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
+      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
     </li>
     <li>
-      <a href="articles/introducing_styler.html">An introduction to styler</a>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
-      <a href="articles/performance_improvements.html">Performance Improvements</a>
+      <a href="../articles/performance_improvements.html">Performance Improvements</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -131,17 +139,52 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Page not found (404)</h1>
+    <h1>Update the newlines attribute</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/indent.R'><code>R/indent.R</code></a></small>
+    <div class="hidden name"><code>update_newlines.Rd</code></div>
     </div>
 
-Content not found. Please use links in the navbar.
+    <div class="ref-description">
+    <p>As we work only with the <code>lag_newlines</code> attribute for setting the line
+breaks, (R/rules-line_break.R) but we need <code>newlines</code> to determine
+whether or not to set <code>spaces</code> (R/rules-spacing.R), we have to update the
+attribute. We cannot simply use <code><a href='https://dplyr.tidyverse.org/reference/lead-lag.html'>dplyr::lead(pd$lag_newlines)</a></code> since we would
+lose information for the last token. <code>spaces</code> is left as is in
+R/rules-spacing.R for tokens at the end of a line since this allows styling
+without touching indention.</p>
+    </div>
+
+    <pre class="usage"><span class='fu'>update_newlines</span>(<span class='no'>pd</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pd</th>
+      <td><p>A parse table.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A parse table with synchronized <code>lag_newlines</code> and <code>newlines</code> columns.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>choose_indention</p></div>
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
+    </ul>
 
+  </div>
 </div>
-
 
 
       <footer>
