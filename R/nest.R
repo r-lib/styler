@@ -5,10 +5,13 @@
 #' @param text A character vector to parse.
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
+#' @inheritParams tokenize
 #' @importFrom purrr when
 #' @keywords internal
-compute_parse_data_nested <- function(text) {
-  parse_data <- tokenize(text) %>%
+compute_parse_data_nested <- function(text,
+                                      transformers = NULL,
+                                      cache_dir = NULL) {
+  parse_data <- tokenize(text, transformers, cache_dir) %>%
     add_terminal_token_before() %>%
     add_terminal_token_after() %>%
     add_stylerignore()

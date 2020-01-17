@@ -10,7 +10,8 @@ style_roxygen_code_example_segment(one_dont, transformers)
 \item{one_dont}{Bare R code containing at most one \verb{\\\dontrun{...}} or
 friends.}
 
-\item{transformers}{A list of \emph{named} transformer functions}
+\item{transformers}{A list of transformer functions. Used only to determine
+if the code to style was previously cached.}
 }
 \description{
 A roxygen code example segment corresponds to roxygen example code that

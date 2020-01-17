@@ -4,10 +4,15 @@
 \alias{tokenize}
 \title{Obtain token table from text}
 \usage{
-tokenize(text)
+tokenize(text, transformers = NULL, cache_dir = NULL)
 }
 \arguments{
 \item{text}{A character vector.}
+
+\item{transformers}{A list of transformer functions. Used only to determine
+if the code to style was previously cached.}
+
+\item{cache_dir}{The directory to look for the cache.}
 }
 \value{
 A flat parse table

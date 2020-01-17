@@ -13,6 +13,23 @@ hash_standardize <- function(text) {
     list()
 }
 
+#' Check if text is cached
+#'
+#' This boilds down to check if the hash exists at the caching dir as a file.
+#' @param text,transformers Passed to [cache_make_key()] to generate a key.
+#' @param cache_dir The caching directory relative to the `.Rcache` root to
+#'   look for a cached value.
+#' @keywords internal
+is_cached <- function(text, transformers, cache_dir) {
+  R.cache::generateCache(
+    key = cache_make_key(text, transformers),
+    dirs = cache_dir
+  ) %>%
+    file.exists()
+
+}
+
+
 #' Make a key for `R.cache`
 #'
 #' This is used to determine if caching already corresponds to a style guide.

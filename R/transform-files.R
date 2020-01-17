@@ -87,11 +87,7 @@ make_transformer <- function(transformers,
     should_use_cache <- is_R.cache_installed && cache_is_activated()
 
     if (should_use_cache) {
-      use_cache <- R.cache::generateCache(
-        key = cache_make_key(text, transformers),
-        dirs = cache_dir
-      ) %>%
-        file.exists()
+      use_cache <- is_cached(text, transformers, cache_dir)
     } else {
       use_cache <- FALSE
     }
@@ -197,7 +193,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @keywords internal
 parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
   text <- assert_text(text)
-  pd_nested <- compute_parse_data_nested(text)
+  pd_nested <- compute_parse_data_nested(text, transformers)
   start_line <- find_start_line(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {

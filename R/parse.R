@@ -71,11 +71,18 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
 #'   * A column "child" that contains *nest*s.
 #'
 #' @param text A character vector.
+#' @inheritParams get_parse_data
 #' @return A flat parse table
 #' @importFrom rlang seq2
 #' @keywords internal
-tokenize <- function(text) {
-  get_parse_data(text, include_text = NA) %>%
+tokenize <- function(text,
+                     transformers = NULL,
+                     cache_dir = NULL) {
+  get_parse_data(text,
+    include_text = NA,
+    transformers = transformers,
+    cache_dir = cache_dir
+  ) %>%
     ensure_correct_str_txt(text) %>%
     enhance_mapping_special()
 }
@@ -83,12 +90,21 @@ tokenize <- function(text) {
 #' Obtain robust parse data
 #'
 #' Wrapper around `utils::getParseData(parse(text = text))` that returns a flat
-#' parse table.
+#' parse table. When caching information should be added, make sure that
+#' the cache is activated with `cache_activate()` and both `transformers` and
+#' `cache_dir` are non-`NULL`.
 #' @param text The text to parse.
 #' @param include_text Passed to [utils::getParseData()] as `includeText`.
 #' @param ... Other arguments passed to [utils::getParseData()].
+#' @param transformers A list of transformer functions. Used only to determine
+#'   if the code to style was previously cached.
+#' @param cache_dir The directory to look for the cache.
 #' @keywords internal
-get_parse_data <- function(text, include_text = TRUE, ...) {
+get_parse_data <- function(text,
+                           include_text = TRUE,
+                           transformers = NULL,
+                           cache_dir = NULL,
+                           ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
@@ -96,6 +112,15 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
     utils::getParseData(parsed, includeText = include_text),
     .name_repair = "minimal") %>%
     add_id_and_short()
+
+  pd$block <- seq_len(nrow(pd))
+  pd$is_cached <- NA
+  top_level_exprs <- which(pd$parent <= 0)
+  if (cache_is_activated() && !is.null(cache_dir) && !is.null(transformers)) {
+    for (idx in top_level_exprs) {
+      pd$is_cached[idx] <- is_cached(pd$text[idx], transformers, cache_dir)
+    }
+  }
   parser_version_set(parser_version_find(pd))
   pd
 }

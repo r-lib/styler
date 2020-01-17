@@ -4,17 +4,30 @@
 \alias{get_parse_data}
 \title{Obtain robust parse data}
 \usage{
-get_parse_data(text, include_text = TRUE, ...)
+get_parse_data(
+  text,
+  include_text = TRUE,
+  transformers = NULL,
+  cache_dir = NULL,
+  ...
+)
 }
 \arguments{
 \item{text}{The text to parse.}
 
 \item{include_text}{Passed to \code{\link[utils:getParseData]{utils::getParseData()}} as \code{includeText}.}
 
+\item{transformers}{A list of transformer functions. Used only to determine
+if the code to style was previously cached.}
+
+\item{cache_dir}{The directory to look for the cache.}
+
 \item{...}{Other arguments passed to \code{\link[utils:getParseData]{utils::getParseData()}}.}
 }
 \description{
 Wrapper around \code{utils::getParseData(parse(text = text))} that returns a flat
-parse table.
+parse table. When caching information should be added, make sure that
+the cache is activated with \code{cache_activate()} and both \code{transformers} and
+\code{cache_dir} are non-\code{NULL}.
 }
 \keyword{internal}

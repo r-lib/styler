@@ -9,7 +9,8 @@ style_roxygen_code_example(example, transformers)
 \arguments{
 \item{example}{Roxygen example code.}
 
-\item{transformers}{A list of \emph{named} transformer functions}
+\item{transformers}{A list of transformer functions. Used only to determine
+if the code to style was previously cached.}
 }
 \description{
 Parses roxygen2 comments into code, breaks it into dont* (dontrun, dontest,
