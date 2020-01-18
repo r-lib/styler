@@ -9,9 +9,8 @@
 #' @importFrom purrr when
 #' @keywords internal
 compute_parse_data_nested <- function(text,
-                                      transformers = NULL,
-                                      cache_dir = NULL) {
-  parse_data <- tokenize(text, transformers, cache_dir) %>%
+                                      transformers = NULL) {
+  parse_data <- tokenize(text, transformers) %>%
     add_terminal_token_before() %>%
     add_terminal_token_after() %>%
     add_stylerignore()

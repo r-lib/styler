@@ -131,3 +131,7 @@ cache_get_or_derive_name <- function(cache_name) {
   cache_name
 }
 
+cache_dir_default <- function() {
+  c("styler", cache_get_name())
+}
+

@@ -81,6 +81,7 @@ Collate:
     'testing-public-api.R'
     'testing.R'
     'token-create.R'
+    'transform-block.R'
     'transform-code.R'
     'transform-files.R'
     'ui-caching.R'

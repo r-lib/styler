@@ -78,7 +78,7 @@ make_transformer <- function(transformers,
                              warn_empty = TRUE) {
   force(transformers)
   assert_transformers(transformers)
-  cache_dir <- c("styler", cache_get_name())
+  cache_dir <- cache_dir_default()
   assert_R.cache_installation(action = "warn")
 
   is_R.cache_installed <- rlang::is_installed("R.cache")
@@ -93,8 +93,13 @@ make_transformer <- function(transformers,
     }
 
     if (!use_cache) {
+      #TODO just info: if the whole expression is in the cache, don't even
+      # compute the parse data nested
       transformed_code <- text %>%
-        parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
+        parse_transform_serialize_r(
+          transformers,
+          warn_empty = warn_empty
+          ) %>%
         when(
           include_roxygen_examples ~
           parse_transform_serialize_roxygen(., transformers),
@@ -191,7 +196,10 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @seealso [parse_transform_serialize_roxygen()]
 #' @importFrom rlang abort
 #' @keywords internal
-parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
+parse_transform_serialize_r <- function(text,
+                                        transformers,
+                                        warn_empty = TRUE
+                                        ) {
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text, transformers)
   start_line <- find_start_line(pd_nested)
@@ -201,22 +209,14 @@ parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
     }
     return("")
   }
-  transformed_pd <- apply_transformers(pd_nested, transformers)
-  flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
-    enrich_terminals(transformers$use_raw_indention) %>%
-    apply_ref_indention() %>%
-    set_regex_indention(
-      pattern = transformers$reindention$regex_pattern,
-      target_indention = transformers$reindention$indention,
-      comments_only = transformers$reindention$comments_only
-    )
-  serialized_transformed_text <-
-    serialize_parse_data_flattened(flattened_pd, start_line = start_line)
 
-  if (can_verify_roundtrip(transformers)) {
-    verify_roundtrip(text, serialized_transformed_text)
-  }
-  serialized_transformed_text
+  pd_nested %>%
+    split(pd_nested$block) %>%
+    map(parse_transform_serialize_r_block,
+        start_line = start_line,
+        transformers = transformers
+    ) %>%
+    unlist()
 }
 
 #' Apply transformers to a parse table
