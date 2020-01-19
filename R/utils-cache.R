@@ -115,6 +115,20 @@ cache_is_activated <- function(cache_name = NULL) {
   }
 }
 
+#' Cache text
+cache_by_expression <- function(text, transformers) {
+  expressions <- parse(text = text) %>%
+    map(~deparse(.x) %>% cache_write(transformers = transformers))
+}
+
+cache_write <- function(text, transformers) {
+  R.cache::generateCache(
+    key = cache_make_key(text, transformers),
+    dirs = cache_dir_default()
+  ) %>%
+    file.create()
+}
+
 styler_version <- unlist(unname(read.dcf("DESCRIPTION")[, "Version"]))
 
 cache_get_name <- function() {

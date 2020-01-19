@@ -14,16 +14,6 @@ parse_transform_serialize_r_block <- function(pd_nested,
         comments_only = transformers$reindention$comments_only
       )
     serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
-
-    if (can_verify_roundtrip(transformers)) {
-      #TODO do recreate or pass text here
-      #verify_roundtrip(text, serialized_transformed_text)
-    }
-    R.cache::generateCache(
-      key = cache_make_key(serialized_transformed_text, transformers),
-      dirs = cache_dir_default()
-    ) %>%
-      file.create()
     c(rep("", start_line - 1), serialized_transformed_text)
   } else {
     pd_nested$text

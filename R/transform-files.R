@@ -96,10 +96,7 @@ make_transformer <- function(transformers,
       # TODO just info: if the whole expression is in the cache, don't even
       # compute the parse data nested
       transformed_code <- text %>%
-        parse_transform_serialize_r(
-          transformers,
-          warn_empty = warn_empty
-        ) %>%
+        parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
         when(
           include_roxygen_examples ~
           parse_transform_serialize_roxygen(., transformers),
@@ -203,7 +200,9 @@ parse_transform_serialize_r <- function(text,
   pd_nested <- compute_parse_data_nested(text)
 
   # TODO move this into a function, potentially not attaching to parse table.
-
+  # Potentially move this into compute_parse_data_nested() again, right before
+  # relocate_eq_assign, also because it has nothing todo with transform and
+  # serialize and we should make it available as early as possible.
   if (cache_is_activated()) {
     pd_nested$block <- cache_find_block(pd_nested)
 
@@ -224,7 +223,7 @@ parse_transform_serialize_r <- function(text,
     return("")
   }
 
-  pd_nested %>%
+  text_out <- pd_nested %>%
     split(pd_nested$block) %>%
     unname() %>%
     map2(blank_lines_to_next_expr,
@@ -232,6 +231,13 @@ parse_transform_serialize_r <- function(text,
       transformers = transformers
     ) %>%
     unlist()
+
+  if (can_verify_roundtrip(transformers)) {
+    verify_roundtrip(text, text_out)
+  }
+
+  cache_by_expression(text_out, transformers)
+  text_out
 }
 
 #' Apply transformers to a parse table

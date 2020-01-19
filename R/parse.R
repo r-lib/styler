@@ -93,7 +93,6 @@ tokenize <- function(text) {
 #' @keywords internal
 get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
-  #TODO do not add the is_cached variable to the parse table here.
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
   pd <- as_tibble(
