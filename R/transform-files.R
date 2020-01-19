@@ -201,7 +201,17 @@ parse_transform_serialize_r <- function(text,
                                         warn_empty = TRUE
                                         ) {
   text <- assert_text(text)
-  pd_nested <- compute_parse_data_nested(text, transformers)
+  pd_nested <- compute_parse_data_nested(text)
+
+  #TODO move this into a function, potentially not attaching to parse table.
+  pd_nested$block <- cache_find_block(pd_nested)
+  if (cache_is_activated()) {
+      pd_nested$is_cached <- map_lgl(pd_nested$text, is_cached,
+        transformers = transformers, cache_dir = cache_dir_default()
+      )
+    }
+
+
   start_line <- find_start_line(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {

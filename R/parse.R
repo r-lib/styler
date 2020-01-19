@@ -75,13 +75,8 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
 #' @return A flat parse table
 #' @importFrom rlang seq2
 #' @keywords internal
-tokenize <- function(text,
-                     transformers = NULL
-                     ) {
-  get_parse_data(text,
-    include_text = TRUE,
-    transformers = transformers
-  ) %>%
+tokenize <- function(text) {
+  get_parse_data(text, include_text = TRUE) %>%
     ensure_correct_str_txt(text) %>%
     enhance_mapping_special()
 }
@@ -99,10 +94,7 @@ tokenize <- function(text,
 #'   if the code to style was previously cached.
 #' @param cache_dir The directory to look for the cache.
 #' @keywords internal
-get_parse_data <- function(text,
-                           include_text = TRUE,
-                           transformers = NULL,
-                           ...) {
+get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   #TODO do not add the is_cached variable to the parse table here.
   parse_safely(text, keep.source = TRUE)
@@ -112,14 +104,6 @@ get_parse_data <- function(text,
     .name_repair = "minimal") %>%
     add_id_and_short()
 
-  pd$block <- cache_find_block(pd)
-  pd$is_cached <- FALSE
-  top_level_exprs <- which(pd$parent <= 0)
-  if (cache_is_activated() && !is.null(transformers)) {
-    for (idx in top_level_exprs) {
-      pd$is_cached[idx] <- is_cached(pd$text[idx], transformers, cache_dir_default())
-    }
-  }
   parser_version_set(parser_version_find(pd))
   pd
 }

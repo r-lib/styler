@@ -16,9 +16,7 @@ create_tokens(
   indents = 0,
   terminal = TRUE,
   child = NULL,
-  stylerignore = FALSE,
-  block = NA,
-  is_cached = NA
+  stylerignore = FALSE
 )
 }
 \arguments{

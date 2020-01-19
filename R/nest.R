@@ -8,9 +8,8 @@
 #' @inheritParams tokenize
 #' @importFrom purrr when
 #' @keywords internal
-compute_parse_data_nested <- function(text,
-                                      transformers = NULL) {
-  parse_data <- tokenize(text, transformers) %>%
+compute_parse_data_nested <- function(text) {
+  parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
     add_terminal_token_after() %>%
     add_stylerignore()

@@ -9,8 +9,7 @@ parse_transform_serialize_r(text, transformers, warn_empty = TRUE)
 \arguments{
 \item{text}{A character vector to parse.}
 
-\item{transformers}{A list of transformer functions. Used only to determine
-if the code to style was previously cached.}
+\item{transformers}{A list of \emph{named} transformer functions}
 
 \item{warn_empty}{Whether or not a warning should be displayed when \code{text}
 does not contain any tokens.}

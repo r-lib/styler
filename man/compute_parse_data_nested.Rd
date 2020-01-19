@@ -4,13 +4,10 @@
 \alias{compute_parse_data_nested}
 \title{Obtain a nested parse table from a character vector}
 \usage{
-compute_parse_data_nested(text, transformers = NULL)
+compute_parse_data_nested(text)
 }
 \arguments{
 \item{text}{A character vector to parse.}
-
-\item{transformers}{A list of transformer functions. Used only to determine
-if the code to style was previously cached.}
 }
 \value{
 A nested parse table. See \code{\link[=tokenize]{tokenize()}} for details on the columns

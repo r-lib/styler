@@ -9,8 +9,7 @@ style_roxygen_example_snippet(code_snippet, transformers, is_dont)
 \arguments{
 \item{code_snippet}{A character vector with code to style.}
 
-\item{transformers}{A list of transformer functions. Used only to determine
-if the code to style was previously cached.}
+\item{transformers}{A list of \emph{named} transformer functions}
 
 \item{is_dont}{Whether the snippet to process is a dontrun, dontshow,
 donttest segment or not.}
