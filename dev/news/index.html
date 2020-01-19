@@ -145,8 +145,8 @@
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
-<li>
-<code><a href="../reference/style_pkg.html">style_pkg()</a></code> and <code><a href="../reference/style_dir.html">style_dir()</a></code> gain a new argument <code>exclude_dirs</code> to exclude directories from styling, by default <code>renv</code> and <code>packrat</code>. Note that the defaults won’t change the behavior of <code><a href="../reference/style_pkg.html">style_pkg()</a></code> because it does anyways does not style these directories and they were set for consistency.</li>
+<li><p><code><a href="../reference/style_pkg.html">style_pkg()</a></code> and <code><a href="../reference/style_dir.html">style_dir()</a></code> gain a new argument <code>exclude_dirs</code> to exclude directories from styling, by default <code>renv</code> and <code>packrat</code>. Note that the defaults won’t change the behavior of <code><a href="../reference/style_pkg.html">style_pkg()</a></code> because it does anyways does not style these directories and they were set for consistency.</p></li>
+<li><p><code><a href="../reference/style_file.html">style_file()</a></code> and friends now strip <code>./</code> in file paths returned invisibly, i.e. <code>./script.R</code> becomes <code>script.R</code> (<a href='https://github.com/r-lib/styler/issues/568'>#568</a>).</p></li>
 </ul>
 </div>
 <div id="new-features" class="section level2">
@@ -163,8 +163,8 @@
 <a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li><p>lines are now broken after <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> in <code>ggplot2</code> calls for <code>strict = TRUE</code> (<a href='https://github.com/r-lib/styler/issues/569'>#569</a>).</p></li>
-<li><p><code><a href="../reference/style_file.html">style_file()</a></code> and friends now strip <code>./</code> in file paths returned invisibly, i.e. <code>./script.R</code> becomes <code>script.R</code> (<a href='https://github.com/r-lib/styler/issues/568'>#568</a>).</p></li>
 <li><p>function documentation now contains many more linebreaks due to roxygen2 update to version 7.0.1 (<a href='https://github.com/r-lib/styler/issues/566'>#566</a>).</p></li>
+<li><p>spaces next to the braces in subsetting expressions <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> are now removed (<a href='https://github.com/r-lib/styler/issues/580'>#580</a>).</p></li>
 </ul>
 </div>
 </div>
