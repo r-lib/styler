@@ -11,7 +11,8 @@ compute_parse_data_nested <- function(text) {
   parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
     add_terminal_token_after() %>%
-    add_stylerignore()
+    add_stylerignore() %>%
+    add_attributes_caching()
 
   env_add_stylerignore(parse_data)
 
@@ -135,6 +136,14 @@ add_terminal_token_before <- function(pd_flat) {
     nrow = nrow(terminals)
   ) %>%
     left_join(pd_flat, ., by = "id")
+}
+
+#' Initialiye variables related to caching
+#' @describeIn add_token_terminal Initializes `newlines` and `lag_newlines`.
+#' @keywords internal
+add_attributes_caching <- function(pd_flat) {
+  pd_flat$block <- pd_flat$is_cached <- rep(NA, nrow(pd_flat))
+  pd_flat
 }
 
 #' @describeIn add_token_terminal Removes column `terimnal_token_before`. Might

@@ -7,7 +7,6 @@
 \alias{initialize_multi_line}
 \alias{initialize_indention_ref_pos_id}
 \alias{initialize_indent}
-\alias{initialize_caching}
 \alias{validate_parse_data}
 \title{Initialize attributes}
 \usage{
@@ -21,8 +20,6 @@ initialize_indention_ref_pos_id(pd_flat)
 
 initialize_indent(pd_flat)
 
-initialize_caching(pd_flat)
-
 validate_parse_data(pd_flat)
 }
 \arguments{
@@ -30,8 +27,6 @@ validate_parse_data(pd_flat)
 }
 \description{
 Initialize attributes
-
-Initialiye variables related to caching
 }
 \section{Functions}{
 \itemize{
@@ -44,8 +39,6 @@ Initialiye variables related to caching
 \item \code{initialize_indention_ref_pos_id}: Initializes \code{indention_ref_ind}.
 
 \item \code{initialize_indent}: Initializes \code{indent}.
-
-\item \code{initialize_caching}: Initializes \code{newlines} and \code{lag_newlines}.
 
 \item \code{validate_parse_data}: validates the parse data.
 }}
