@@ -15,5 +15,5 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' } [1/0] {14}                           
  ¦--COMMENT: #' ca [1/0] {15}                          
  ¦--COMMENT: #' @e [1/0] {16}                          
- °--expr:  [1/0] {18}                                  
+ °--expr: NULL [1/0] {18}                              
      °--NULL_CONST: NULL [0/0] {17}                    

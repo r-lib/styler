@@ -5,9 +5,9 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' Ca [1/0] {4}                           
  ¦--COMMENT: #' @e [1/0] {5}                           
  ¦--COMMENT: #' @n [1/0] {6}                           
- °--expr:  [1/0] {7}                                   
-     ¦--expr:  [0/0] {9}                               
+ °--expr: a<- 2 [1/0] {7}                              
+     ¦--expr: a [0/0] {9}                              
      ¦   °--SYMBOL: a [0/0] {8}                        
      ¦--LEFT_ASSIGN: <- [0/1] {10}                     
-     °--expr:  [0/0] {12}                              
+     °--expr: 2 [0/0] {12}                             
          °--NUM_CONST: 2 [0/0] {11}                    

@@ -25,94 +25,97 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' } [1/0] {24}                                         
  ¦--COMMENT: #' @i [1/0] {25}                                        
  ¦--COMMENT: #' @e [1/0] {26}                                        
- ¦--expr:  [1/0] {27}                                                
- ¦   ¦--expr:  [0/1] {29}                                            
+ ¦--expr: creat [1/0] {27}                                           
+ ¦   ¦--expr: creat [0/1] {29}                                       
  ¦   ¦   °--SYMBOL: creat [0/0] {28}                                 
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {30}                                   
- ¦   °--expr:  [0/0] {31}                                            
+ ¦   °--expr: funct [0/0] {31}                                       
  ¦       ¦--FUNCTION: funct [0/0] {32}                               
  ¦       ¦--'(': ( [0/0] {33}                                        
  ¦       ¦--SYMBOL_FORMALS: initi [0/1] {34}                         
  ¦       ¦--EQ_FORMALS: = [0/1] {35}                                 
- ¦       ¦--expr:  [0/0] {37}                                        
+ ¦       ¦--expr: defau [0/0] {37}                                   
  ¦       ¦   °--SYMBOL: defau [0/0] {36}                             
  ¦       ¦--',': , [0/31] {38}                                       
  ¦       ¦--SYMBOL_FORMALS: line_ [1/1] {39}                         
  ¦       ¦--EQ_FORMALS: = [0/1] {40}                                 
- ¦       ¦--expr:  [0/0] {42}                                        
+ ¦       ¦--expr: NULL [0/0] {42}                                    
  ¦       ¦   °--NULL_CONST: NULL [0/0] {41}                          
  ¦       ¦--',': , [0/31] {43}                                       
  ¦       ¦--SYMBOL_FORMALS: space [1/1] {44}                         
  ¦       ¦--EQ_FORMALS: = [0/1] {45}                                 
- ¦       ¦--expr:  [0/0] {47}                                        
+ ¦       ¦--expr: NULL [0/0] {47}                                    
  ¦       ¦   °--NULL_CONST: NULL [0/0] {46}                          
  ¦       ¦--',': , [0/31] {48}                                       
  ¦       ¦--SYMBOL_FORMALS: token [1/1] {49}                         
  ¦       ¦--EQ_FORMALS: = [0/1] {50}                                 
- ¦       ¦--expr:  [0/0] {52}                                        
+ ¦       ¦--expr: NULL [0/0] {52}                                    
  ¦       ¦   °--NULL_CONST: NULL [0/0] {51}                          
  ¦       ¦--',': , [0/31] {53}                                       
  ¦       ¦--SYMBOL_FORMALS: inden [1/1] {54}                         
  ¦       ¦--EQ_FORMALS: = [0/1] {55}                                 
- ¦       ¦--expr:  [0/0] {57}                                        
+ ¦       ¦--expr: NULL [0/0] {57}                                    
  ¦       ¦   °--NULL_CONST: NULL [0/0] {56}                          
  ¦       ¦--',': , [0/31] {58}                                       
  ¦       ¦--SYMBOL_FORMALS: use_r [1/1] {59}                         
  ¦       ¦--EQ_FORMALS: = [0/1] {60}                                 
- ¦       ¦--expr:  [0/0] {62}                                        
+ ¦       ¦--expr: FALSE [0/0] {62}                                   
  ¦       ¦   °--NUM_CONST: FALSE [0/0] {61}                          
  ¦       ¦--',': , [0/31] {63}                                       
  ¦       ¦--SYMBOL_FORMALS: reind [1/1] {64}                         
  ¦       ¦--EQ_FORMALS: = [0/1] {65}                                 
- ¦       ¦--expr:  [0/0] {66}                                        
- ¦       ¦   ¦--expr:  [0/0] {68}                                    
+ ¦       ¦--expr: tidyv [0/0] {66}                                   
+ ¦       ¦   ¦--expr: tidyv [0/0] {68}                               
  ¦       ¦   ¦   °--SYMBOL_FUNCTION_CALL: tidyv [0/0] {67}           
  ¦       ¦   ¦--'(': ( [0/0] {69}                                    
  ¦       ¦   °--')': ) [0/0] {70}                                    
  ¦       ¦--')': ) [0/1] {71}                                        
- ¦       °--expr:  [0/0] {72}                                        
+ ¦       °--expr: {
+  l [0/0] {72}                                  
  ¦           ¦--'{': { [0/2] {73}                                    
- ¦           ¦--expr:  [1/0] {74}                                    
- ¦           ¦   ¦--expr:  [0/1] {75}                                
- ¦           ¦   ¦   ¦--expr:  [0/0] {77}                            
+ ¦           ¦--expr: lst(
+ [1/0] {74}                              
+ ¦           ¦   ¦--expr: lst(
+ [0/1] {75}                          
+ ¦           ¦   ¦   ¦--expr: lst [0/0] {77}                         
  ¦           ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: lst [0/0] {76}     
  ¦           ¦   ¦   ¦--'(': ( [0/4] {78}                            
  ¦           ¦   ¦   ¦--COMMENT: # tra [1/4] {79}                    
  ¦           ¦   ¦   ¦--SYMBOL_SUB: initi [1/1] {80}                 
  ¦           ¦   ¦   ¦--EQ_SUB: = [0/1] {81}                         
- ¦           ¦   ¦   ¦--expr:  [0/0] {82}                            
- ¦           ¦   ¦   ¦   ¦--expr:  [0/0] {84}                        
+ ¦           ¦   ¦   ¦--expr: lst(i [0/0] {82}                       
+ ¦           ¦   ¦   ¦   ¦--expr: lst [0/0] {84}                     
  ¦           ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: lst [0/0] {83} 
  ¦           ¦   ¦   ¦   ¦--'(': ( [0/0] {85}                        
- ¦           ¦   ¦   ¦   ¦--expr:  [0/0] {87}                        
+ ¦           ¦   ¦   ¦   ¦--expr: initi [0/0] {87}                   
  ¦           ¦   ¦   ¦   ¦   °--SYMBOL: initi [0/0] {86}             
  ¦           ¦   ¦   ¦   °--')': ) [0/0] {88}                        
  ¦           ¦   ¦   ¦--',': , [0/4] {89}                            
- ¦           ¦   ¦   ¦--expr:  [1/0] {91}                            
+ ¦           ¦   ¦   ¦--expr: line_ [1/0] {91}                       
  ¦           ¦   ¦   ¦   °--SYMBOL: line_ [0/0] {90}                 
  ¦           ¦   ¦   ¦--',': , [0/4] {92}                            
- ¦           ¦   ¦   ¦--expr:  [1/0] {94}                            
+ ¦           ¦   ¦   ¦--expr: space [1/0] {94}                       
  ¦           ¦   ¦   ¦   °--SYMBOL: space [0/0] {93}                 
  ¦           ¦   ¦   ¦--',': , [0/4] {95}                            
- ¦           ¦   ¦   ¦--expr:  [1/0] {97}                            
+ ¦           ¦   ¦   ¦--expr: token [1/0] {97}                       
  ¦           ¦   ¦   ¦   °--SYMBOL: token [0/0] {96}                 
  ¦           ¦   ¦   ¦--',': , [0/4] {98}                            
- ¦           ¦   ¦   ¦--expr:  [1/0] {100}                           
+ ¦           ¦   ¦   ¦--expr: inden [1/0] {100}                      
  ¦           ¦   ¦   ¦   °--SYMBOL: inden [0/0] {99}                 
  ¦           ¦   ¦   ¦--',': , [0/4] {101}                           
  ¦           ¦   ¦   ¦--COMMENT: # tra [1/4] {102}                   
- ¦           ¦   ¦   ¦--expr:  [1/0] {104}                           
+ ¦           ¦   ¦   ¦--expr: use_r [1/0] {104}                      
  ¦           ¦   ¦   ¦   °--SYMBOL: use_r [0/0] {103}                
  ¦           ¦   ¦   ¦--',': , [0/4] {105}                           
- ¦           ¦   ¦   ¦--expr:  [1/2] {107}                           
+ ¦           ¦   ¦   ¦--expr: reind [1/2] {107}                      
  ¦           ¦   ¦   ¦   °--SYMBOL: reind [0/0] {106}                
  ¦           ¦   ¦   °--')': ) [1/0] {108}                           
  ¦           ¦   ¦--SPECIAL-PIPE: %>% [0/4] {109}                    
- ¦           ¦   °--expr:  [1/0] {110}                               
- ¦           ¦       ¦--expr:  [0/0] {112}                           
+ ¦           ¦   °--expr: map(c [1/0] {110}                          
+ ¦           ¦       ¦--expr: map [0/0] {112}                        
  ¦           ¦       ¦   °--SYMBOL_FUNCTION_CALL: map [0/0] {111}    
  ¦           ¦       ¦--'(': ( [0/0] {113}                           
- ¦           ¦       ¦--expr:  [0/0] {115}                           
+ ¦           ¦       ¦--expr: compa [0/0] {115}                      
  ¦           ¦       ¦   °--SYMBOL: compa [0/0] {114}                
  ¦           ¦       °--')': ) [0/0] {116}                           
  ¦           °--'}': } [1/0] {117}                                   
@@ -140,94 +143,97 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #'  } [1/0] {139}                                       
  ¦--COMMENT: #' @i [1/0] {140}                                       
  ¦--COMMENT: #' @e [1/0] {141}                                       
- °--expr:  [1/0] {142}                                               
-     ¦--expr:  [0/1] {144}                                           
+ °--expr: creat [1/0] {142}                                          
+     ¦--expr: creat [0/1] {144}                                      
      ¦   °--SYMBOL: creat [0/0] {143}                                
      ¦--LEFT_ASSIGN: <- [0/1] {145}                                  
-     °--expr:  [0/0] {146}                                           
+     °--expr: funct [0/0] {146}                                      
          ¦--FUNCTION: funct [0/0] {147}                              
          ¦--'(': ( [0/0] {148}                                       
          ¦--SYMBOL_FORMALS: initi [0/1] {149}                        
          ¦--EQ_FORMALS: = [0/1] {150}                                
-         ¦--expr:  [0/0] {152}                                       
+         ¦--expr: defau [0/0] {152}                                  
          ¦   °--SYMBOL: defau [0/0] {151}                            
          ¦--',': , [0/31] {153}                                      
          ¦--SYMBOL_FORMALS: line_ [1/1] {154}                        
          ¦--EQ_FORMALS: = [0/1] {155}                                
-         ¦--expr:  [0/0] {157}                                       
+         ¦--expr: NULL [0/0] {157}                                   
          ¦   °--NULL_CONST: NULL [0/0] {156}                         
          ¦--',': , [0/31] {158}                                      
          ¦--SYMBOL_FORMALS: space [1/1] {159}                        
          ¦--EQ_FORMALS: = [0/1] {160}                                
-         ¦--expr:  [0/0] {162}                                       
+         ¦--expr: NULL [0/0] {162}                                   
          ¦   °--NULL_CONST: NULL [0/0] {161}                         
          ¦--',': , [0/31] {163}                                      
          ¦--SYMBOL_FORMALS: token [1/1] {164}                        
          ¦--EQ_FORMALS: = [0/1] {165}                                
-         ¦--expr:  [0/0] {167}                                       
+         ¦--expr: NULL [0/0] {167}                                   
          ¦   °--NULL_CONST: NULL [0/0] {166}                         
          ¦--',': , [0/31] {168}                                      
          ¦--SYMBOL_FORMALS: inden [1/1] {169}                        
          ¦--EQ_FORMALS: = [0/1] {170}                                
-         ¦--expr:  [0/0] {172}                                       
+         ¦--expr: NULL [0/0] {172}                                   
          ¦   °--NULL_CONST: NULL [0/0] {171}                         
          ¦--',': , [0/31] {173}                                      
          ¦--SYMBOL_FORMALS: use_r [1/1] {174}                        
          ¦--EQ_FORMALS: = [0/1] {175}                                
-         ¦--expr:  [0/0] {177}                                       
+         ¦--expr: FALSE [0/0] {177}                                  
          ¦   °--NUM_CONST: FALSE [0/0] {176}                         
          ¦--',': , [0/31] {178}                                      
          ¦--SYMBOL_FORMALS: reind [1/1] {179}                        
          ¦--EQ_FORMALS: = [0/1] {180}                                
-         ¦--expr:  [0/0] {181}                                       
-         ¦   ¦--expr:  [0/0] {183}                                   
+         ¦--expr: tidyv [0/0] {181}                                  
+         ¦   ¦--expr: tidyv [0/0] {183}                              
          ¦   ¦   °--SYMBOL_FUNCTION_CALL: tidyv [0/0] {182}          
          ¦   ¦--'(': ( [0/0] {184}                                   
          ¦   °--')': ) [0/0] {185}                                   
          ¦--')': ) [0/1] {186}                                       
-         °--expr:  [0/0] {187}                                       
+         °--expr: {
+  l [0/0] {187}                                 
              ¦--'{': { [0/2] {188}                                   
-             ¦--expr:  [1/0] {189}                                   
-             ¦   ¦--expr:  [0/0] {190}                               
-             ¦   ¦   ¦--expr:  [0/0] {192}                           
+             ¦--expr: lst(
+ [1/0] {189}                             
+             ¦   ¦--expr: lst(
+ [0/0] {190}                         
+             ¦   ¦   ¦--expr: lst [0/0] {192}                        
              ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: lst [0/0] {191}    
              ¦   ¦   ¦--'(': ( [0/4] {193}                           
              ¦   ¦   ¦--COMMENT: #tran [1/4] {194}                   
              ¦   ¦   ¦--SYMBOL_SUB: initi [1/1] {195}                
              ¦   ¦   ¦--EQ_SUB: = [0/1] {196}                        
-             ¦   ¦   ¦--expr:  [0/0] {197}                           
-             ¦   ¦   ¦   ¦--expr:  [0/0] {199}                       
+             ¦   ¦   ¦--expr: lst(i [0/0] {197}                      
+             ¦   ¦   ¦   ¦--expr: lst [0/0] {199}                    
              ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: lst [0/0] {198}
              ¦   ¦   ¦   ¦--'(': ( [0/0] {200}                       
-             ¦   ¦   ¦   ¦--expr:  [0/0] {202}                       
+             ¦   ¦   ¦   ¦--expr: initi [0/0] {202}                  
              ¦   ¦   ¦   ¦   °--SYMBOL: initi [0/0] {201}            
              ¦   ¦   ¦   °--')': ) [0/0] {203}                       
              ¦   ¦   ¦--',': , [0/4] {204}                           
-             ¦   ¦   ¦--expr:  [1/0] {206}                           
+             ¦   ¦   ¦--expr: line_ [1/0] {206}                      
              ¦   ¦   ¦   °--SYMBOL: line_ [0/0] {205}                
              ¦   ¦   ¦--',': , [0/4] {207}                           
-             ¦   ¦   ¦--expr:  [1/0] {209}                           
+             ¦   ¦   ¦--expr: space [1/0] {209}                      
              ¦   ¦   ¦   °--SYMBOL: space [0/0] {208}                
              ¦   ¦   ¦--',': , [0/4] {210}                           
-             ¦   ¦   ¦--expr:  [1/0] {212}                           
+             ¦   ¦   ¦--expr: token [1/0] {212}                      
              ¦   ¦   ¦   °--SYMBOL: token [0/0] {211}                
              ¦   ¦   ¦--',': , [0/4] {213}                           
-             ¦   ¦   ¦--expr:  [1/0] {215}                           
+             ¦   ¦   ¦--expr: inden [1/0] {215}                      
              ¦   ¦   ¦   °--SYMBOL: inden [0/0] {214}                
              ¦   ¦   ¦--',': , [0/4] {216}                           
              ¦   ¦   ¦--COMMENT: # tra [1/4] {217}                   
-             ¦   ¦   ¦--expr:  [1/0] {219}                           
+             ¦   ¦   ¦--expr: use_r [1/0] {219}                      
              ¦   ¦   ¦   °--SYMBOL: use_r [0/0] {218}                
              ¦   ¦   ¦--',': , [0/4] {220}                           
-             ¦   ¦   ¦--expr:  [1/2] {222}                           
+             ¦   ¦   ¦--expr: reind [1/2] {222}                      
              ¦   ¦   ¦   °--SYMBOL: reind [0/0] {221}                
              ¦   ¦   °--')': ) [1/0] {223}                           
              ¦   ¦--SPECIAL-PIPE: %>% [0/4] {224}                    
-             ¦   °--expr:  [1/0] {225}                               
-             ¦       ¦--expr:  [0/0] {227}                           
+             ¦   °--expr: map(c [1/0] {225}                          
+             ¦       ¦--expr: map [0/0] {227}                        
              ¦       ¦   °--SYMBOL_FUNCTION_CALL: map [0/0] {226}    
              ¦       ¦--'(': ( [0/0] {228}                           
-             ¦       ¦--expr:  [0/0] {230}                           
+             ¦       ¦--expr: compa [0/0] {230}                      
              ¦       ¦   °--SYMBOL: compa [0/0] {229}                
              ¦       °--')': ) [0/0] {231}                           
              °--'}': } [1/0] {232}                                   

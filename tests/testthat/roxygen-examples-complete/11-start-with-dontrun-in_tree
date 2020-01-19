@@ -11,102 +11,103 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' ) [1/0] {10}                                          
  ¦--COMMENT: #' } [1/0] {11}                                          
  ¦--COMMENT: #' @e [1/0] {12}                                         
- °--expr:  [1/0] {13}                                                 
-     ¦--expr:  [0/1] {15}                                             
+ °--expr: style [1/0] {13}                                            
+     ¦--expr: style [0/1] {15}                                        
      ¦   °--SYMBOL: style [0/0] {14}                                  
      ¦--LEFT_ASSIGN: <- [0/1] {16}                                    
-     °--expr:  [0/0] {17}                                             
+     °--expr: funct [0/0] {17}                                        
          ¦--FUNCTION: funct [0/0] {18}                                
          ¦--'(': ( [0/0] {19}                                         
          ¦--SYMBOL_FORMALS: pkg [0/1] {20}                            
          ¦--EQ_FORMALS: = [0/1] {21}                                  
-         ¦--expr:  [0/0] {23}                                         
+         ¦--expr: "." [0/0] {23}                                      
          ¦   °--STR_CONST: "." [0/0] {22}                             
          ¦--',': , [0/22] {24}                                        
          ¦--SYMBOL_FORMALS: ... [1/0] {25}                            
          ¦--',': , [0/22] {26}                                        
          ¦--SYMBOL_FORMALS: style [1/1] {27}                          
          ¦--EQ_FORMALS: = [0/1] {28}                                  
-         ¦--expr:  [0/0] {30}                                         
+         ¦--expr: tidyv [0/0] {30}                                    
          ¦   °--SYMBOL: tidyv [0/0] {29}                              
          ¦--',': , [0/22] {31}                                        
          ¦--SYMBOL_FORMALS: trans [1/1] {32}                          
          ¦--EQ_FORMALS: = [0/1] {33}                                  
-         ¦--expr:  [0/0] {34}                                         
-         ¦   ¦--expr:  [0/0] {36}                                     
+         ¦--expr: style [0/0] {34}                                    
+         ¦   ¦--expr: style [0/0] {36}                                
          ¦   ¦   °--SYMBOL_FUNCTION_CALL: style [0/0] {35}            
          ¦   ¦--'(': ( [0/0] {37}                                     
-         ¦   ¦--expr:  [0/0] {39}                                     
+         ¦   ¦--expr: ... [0/0] {39}                                  
          ¦   ¦   °--SYMBOL: ... [0/0] {38}                            
          ¦   °--')': ) [0/0] {40}                                     
          ¦--',': , [0/22] {41}                                        
          ¦--SYMBOL_FORMALS: filet [1/1] {42}                          
          ¦--EQ_FORMALS: = [0/1] {43}                                  
-         ¦--expr:  [0/0] {45}                                         
+         ¦--expr: "R" [0/0] {45}                                      
          ¦   °--STR_CONST: "R" [0/0] {44}                             
          ¦--',': , [0/22] {46}                                        
          ¦--SYMBOL_FORMALS: exclu [1/1] {47}                          
          ¦--EQ_FORMALS: = [0/1] {48}                                  
-         ¦--expr:  [0/0] {50}                                         
+         ¦--expr: "R/Rc [0/0] {50}                                    
          ¦   °--STR_CONST: "R/Rc [0/0] {49}                           
          ¦--',': , [0/22] {51}                                        
          ¦--SYMBOL_FORMALS: inclu [1/1] {52}                          
          ¦--EQ_FORMALS: = [0/1] {53}                                  
-         ¦--expr:  [0/0] {55}                                         
+         ¦--expr: TRUE [0/0] {55}                                     
          ¦   °--NUM_CONST: TRUE [0/0] {54}                            
          ¦--')': ) [0/1] {56}                                         
-         °--expr:  [0/0] {57}                                         
+         °--expr: {
+  p [0/0] {57}                                   
              ¦--'{': { [0/2] {58}                                     
-             ¦--expr:  [1/2] {59}                                     
-             ¦   ¦--expr:  [0/1] {61}                                 
+             ¦--expr: pkg_r [1/2] {59}                                
+             ¦   ¦--expr: pkg_r [0/1] {61}                            
              ¦   ¦   °--SYMBOL: pkg_r [0/0] {60}                      
              ¦   ¦--LEFT_ASSIGN: <- [0/1] {62}                        
-             ¦   °--expr:  [0/0] {63}                                 
-             ¦       ¦--expr:  [0/0] {64}                             
+             ¦   °--expr: rproj [0/0] {63}                            
+             ¦       ¦--expr: rproj [0/0] {64}                        
              ¦       ¦   ¦--SYMBOL_PACKAGE: rproj [0/0] {65}          
              ¦       ¦   ¦--NS_GET: :: [0/0] {66}                     
              ¦       ¦   °--SYMBOL_FUNCTION_CALL: find_ [0/0] {67}    
              ¦       ¦--'(': ( [0/0] {68}                             
              ¦       ¦--SYMBOL_SUB: path [0/1] {69}                   
              ¦       ¦--EQ_SUB: = [0/1] {70}                          
-             ¦       ¦--expr:  [0/0] {72}                             
+             ¦       ¦--expr: pkg [0/0] {72}                          
              ¦       ¦   °--SYMBOL: pkg [0/0] {71}                    
              ¦       °--')': ) [0/0] {73}                             
-             ¦--expr:  [1/2] {74}                                     
-             ¦   ¦--expr:  [0/1] {76}                                 
+             ¦--expr: chang [1/2] {74}                                
+             ¦   ¦--expr: chang [0/1] {76}                            
              ¦   ¦   °--SYMBOL: chang [0/0] {75}                      
              ¦   ¦--LEFT_ASSIGN: <- [0/1] {77}                        
-             ¦   °--expr:  [0/0] {78}                                 
-             ¦       ¦--expr:  [0/0] {79}                             
+             ¦   °--expr: withr [0/0] {78}                            
+             ¦       ¦--expr: withr [0/0] {79}                        
              ¦       ¦   ¦--SYMBOL_PACKAGE: withr [0/0] {80}          
              ¦       ¦   ¦--NS_GET: :: [0/0] {81}                     
              ¦       ¦   °--SYMBOL_FUNCTION_CALL: with_ [0/0] {82}    
              ¦       ¦--'(': ( [0/0] {83}                             
-             ¦       ¦--expr:  [0/0] {85}                             
+             ¦       ¦--expr: pkg_r [0/0] {85}                        
              ¦       ¦   °--SYMBOL: pkg_r [0/0] {84}                  
              ¦       ¦--',': , [0/1] {86}                             
-             ¦       ¦--expr:  [0/0] {87}                             
-             ¦       ¦   ¦--expr:  [0/0] {89}                         
+             ¦       ¦--expr: prett [0/0] {87}                        
+             ¦       ¦   ¦--expr: prett [0/0] {89}                    
              ¦       ¦   ¦   °--SYMBOL_FUNCTION_CALL: prett [0/0] {88}
              ¦       ¦   ¦--'(': ( [0/4] {90}                         
-             ¦       ¦   ¦--expr:  [1/0] {92}                         
+             ¦       ¦   ¦--expr: trans [1/0] {92}                    
              ¦       ¦   ¦   °--SYMBOL: trans [0/0] {91}              
              ¦       ¦   ¦--',': , [0/1] {93}                         
-             ¦       ¦   ¦--expr:  [0/0] {95}                         
+             ¦       ¦   ¦--expr: filet [0/0] {95}                    
              ¦       ¦   ¦   °--SYMBOL: filet [0/0] {94}              
              ¦       ¦   ¦--',': , [0/1] {96}                         
-             ¦       ¦   ¦--expr:  [0/0] {98}                         
+             ¦       ¦   ¦--expr: exclu [0/0] {98}                    
              ¦       ¦   ¦   °--SYMBOL: exclu [0/0] {97}              
              ¦       ¦   ¦--',': , [0/1] {99}                         
-             ¦       ¦   ¦--expr:  [0/2] {101}                        
+             ¦       ¦   ¦--expr: inclu [0/2] {101}                   
              ¦       ¦   ¦   °--SYMBOL: inclu [0/0] {100}             
              ¦       ¦   °--')': ) [1/0] {102}                        
              ¦       °--')': ) [0/0] {103}                            
-             ¦--expr:  [1/0] {104}                                    
-             ¦   ¦--expr:  [0/0] {106}                                
+             ¦--expr: invis [1/0] {104}                               
+             ¦   ¦--expr: invis [0/0] {106}                           
              ¦   ¦   °--SYMBOL_FUNCTION_CALL: invis [0/0] {105}       
              ¦   ¦--'(': ( [0/0] {107}                                
-             ¦   ¦--expr:  [0/0] {109}                                
+             ¦   ¦--expr: chang [0/0] {109}                           
              ¦   ¦   °--SYMBOL: chang [0/0] {108}                     
              ¦   °--')': ) [0/0] {110}                                
              °--'}': } [1/0] {111}                                    

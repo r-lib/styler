@@ -1,22 +1,22 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #!/us [0/0] {1}                           
  ¦--COMMENT: #!/us [1/0] {2}                           
- ¦--expr:  [1/0] {3}                                   
- ¦   ¦--expr:  [0/1] {5}                               
+ ¦--expr: a <-  [1/0] {3}                              
+ ¦   ¦--expr: a [0/1] {5}                              
  ¦   ¦   °--SYMBOL: a [0/0] {4}                        
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {6}                      
- ¦   °--expr:  [0/0] {8}                               
+ ¦   °--expr: 3 [0/0] {8}                              
  ¦       °--NUM_CONST: 3 [0/0] {7}                     
  ¦--COMMENT: #!/us [2/0] {9}                           
- ¦--expr:  [1/0] {10}                                  
- ¦   ¦--expr:  [0/1] {12}                              
+ ¦--expr: dd <- [1/0] {10}                             
+ ¦   ¦--expr: dd [0/1] {12}                            
  ¦   ¦   °--SYMBOL: dd [0/0] {11}                      
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {13}                     
- ¦   °--expr:  [0/0] {15}                              
+ ¦   °--expr: 33 [0/0] {15}                            
  ¦       °--NUM_CONST: 33 [0/0] {14}                   
  ¦--COMMENT: #!/us [1/0] {16}                          
- ¦--expr:  [1/0] {17}                                  
- ¦   ¦--expr:  [0/0] {19}                              
+ ¦--expr: c() [1/0] {17}                               
+ ¦   ¦--expr: c [0/0] {19}                             
  ¦   ¦   °--SYMBOL_FUNCTION_CALL: c [0/0] {18}         
  ¦   ¦--'(': ( [0/0] {20}                              
  ¦   °--')': ) [0/0] {21}                              
