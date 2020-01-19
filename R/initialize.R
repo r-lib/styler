@@ -17,8 +17,11 @@ default_style_guide_attributes <- function(pd_flat) {
     initialize_multi_line() %>%
     initialize_indention_ref_pos_id() %>%
     initialize_indent() %>%
+    initialize_caching() %>%
     validate_parse_data()
 }
+
+
 
 #' Initialize attributes
 #'
@@ -81,6 +84,17 @@ initialize_indent <- function(pd_flat) {
   }
   pd_flat
 }
+
+#' Initialiye variables related to caching
+#' @describeIn initialize_attributes Initializes `newlines` and `lag_newlines`.
+#' @keywords internal
+initialize_caching <- function(pd_flat) {
+ pd_flat$is_cached <- NA
+ pd_flat$block <- NA
+ pd_flat
+}
+
+
 
 #' @importFrom rlang abort
 #' @describeIn initialize_attributes validates the parse data.
