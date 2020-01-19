@@ -8,6 +8,8 @@
   defaults won't change the behavior of `style_pkg()` because it does anyways 
   does not style these directories and they were set for consistency.
   
+* `style_file()` and friends now strip `./` in file paths returned invisibly,
+  i.e. `./script.R` becomes `script.R` (#568).
 
 ## New features
 
@@ -32,11 +34,11 @@
 
 * lines are now broken after `+` in `ggplot2` calls for `strict = TRUE` (#569).
 
-* `style_file()` and friends now strip `./` in file paths returned invisibly,
-  i.e. `./script.R` becomes `script.R` (#568).
-
 * function documentation now contains many more linebreaks due to roxygen2 
   update to version 7.0.1 (#566).
+  
+* spaces next to the braces in subsetting expressions `[` and `[[` are now
+  removed (#580).
 
 # styler 1.2.0
 
