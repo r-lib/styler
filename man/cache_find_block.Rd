@@ -20,3 +20,11 @@ break separating them. To avoid this, we put top level expressions that sit
 on the same line into one block, so the assumption that there is a line break
 between each block of expressions holds.
 }
+\details{
+we want to for turning points:
+\itemize{
+\item change in cache state is a turning point
+\item expressions that are not on a new line cannot be a turning point. In this
+case, the turning point is moved to the first expression on the line
+}
+}

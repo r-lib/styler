@@ -14,10 +14,15 @@ parse_transform_serialize_r_block <- function(pd_nested,
         comments_only = transformers$reindention$comments_only
       )
     serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
-    c(rep("", start_line - 1), serialized_transformed_text)
   } else {
-    pd_nested$text
+    serialized_transformed_text <- map2(
+      c(0, find_blank_lines_to_next_expr(pd_nested)[-1] - 1L),
+      pd_nested$text,
+      ~ c(rep("", .x), .y)
+    ) %>%
+      unlist()
   }
+  c(rep("", start_line - 1), serialized_transformed_text)
 }
 
 #' Find the groups of expressions that should be processed together
@@ -31,10 +36,31 @@ parse_transform_serialize_r_block <- function(pd_nested,
 #' break separating them. To avoid this, we put top level expressions that sit
 #' on the same line into one block, so the assumption that there is a line break
 #' between each block of expressions holds.
+#' @details
+#' we want to for turning points:
+#' - change in cache state is a turning point
+#' - expressions that are not on a new line cannot be a turning point. In this
+#'   case, the turning point is moved to the first expression on the line
 #' @param pd A top level nest.
 cache_find_block <- function(pd) {
-  on_new_line <- find_blank_lines_to_next_expr(pd) != 0
-  cumsum(on_new_line)
+
+  first_after_cache_state_switch <- pd$is_cached != lag(pd$is_cached, default = !pd$is_cached[1])
+
+  not_first_on_line <- find_blank_lines_to_next_expr(pd) == 0
+  invalid_turning_point_idx <- which(
+    not_first_on_line & first_after_cache_state_switch
+  )
+
+  first_on_line_idx <- which(!not_first_on_line)
+  valid_replacements <- map_int(invalid_turning_point_idx, function(x) {
+    last(which(x > first_on_line_idx))
+  })
+  sort(unique(c(
+    setdiff(which(first_after_cache_state_switch), invalid_turning_point_idx),
+    valid_replacements
+  ))) %>%
+    unwhich(nrow(pd)) %>%
+    cumsum()
 }
 
 

@@ -122,8 +122,10 @@ cache_is_activated <- function(cache_name = NULL) {
 #' @param transformers The transformers.
 #' @keywords internal
 cache_by_expression <- function(text, transformers) {
-  expressions <- parse(text = text) %>%
-    map(~deparse(.x) %>% cache_write(transformers = transformers))
+  expressions <- parse(text = text, keep.source = TRUE) %>%
+      getParseData(includeText = TRUE)
+  expressions[expressions$parent == 0, "text"] %>%
+    map(~cache_write(.x, transformers = transformers))
 }
 
 cache_write <- function(text, transformers) {
