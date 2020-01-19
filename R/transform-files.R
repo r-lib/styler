@@ -93,13 +93,13 @@ make_transformer <- function(transformers,
     }
 
     if (!use_cache) {
-      #TODO just info: if the whole expression is in the cache, don't even
+      # TODO just info: if the whole expression is in the cache, don't even
       # compute the parse data nested
       transformed_code <- text %>%
         parse_transform_serialize_r(
           transformers,
           warn_empty = warn_empty
-          ) %>%
+        ) %>%
         when(
           include_roxygen_examples ~
           parse_transform_serialize_roxygen(., transformers),
@@ -198,20 +198,22 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @keywords internal
 parse_transform_serialize_r <- function(text,
                                         transformers,
-                                        warn_empty = TRUE
-                                        ) {
+                                        warn_empty = TRUE) {
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text)
 
-  #TODO move this into a function, potentially not attaching to parse table.
-  pd_nested$block <- cache_find_block(pd_nested)
+  # TODO move this into a function, potentially not attaching to parse table.
+
   if (cache_is_activated()) {
-      pd_nested$is_cached <- map_lgl(pd_nested$text, is_cached,
-        transformers = transformers, cache_dir = cache_dir_default()
-      )
+    pd_nested$block <- cache_find_block(pd_nested)
+
+    pd_nested$is_cached <- map_lgl(pd_nested$text, is_cached,
+      transformers = transformers, cache_dir = cache_dir_default()
+    )
   } else {
-      pd_nested$is_cached <- rep(FALSE, nrow(pd_nested))
-    }
+    pd_nested$is_cached <- rep(FALSE, nrow(pd_nested))
+    pd_nested$block <- rep(1, nrow(pd_nested))
+  }
 
 
   blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
@@ -226,8 +228,8 @@ parse_transform_serialize_r <- function(text,
     split(pd_nested$block) %>%
     unname() %>%
     map2(blank_lines_to_next_expr,
-         parse_transform_serialize_r_block,
-        transformers = transformers
+      parse_transform_serialize_r_block,
+      transformers = transformers
     ) %>%
     unlist()
 }
