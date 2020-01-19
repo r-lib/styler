@@ -90,9 +90,6 @@ tokenize <- function(text) {
 #' @param text The text to parse.
 #' @param include_text Passed to [utils::getParseData()] as `includeText`.
 #' @param ... Other arguments passed to [utils::getParseData()].
-#' @param transformers A list of transformer functions. Used only to determine
-#'   if the code to style was previously cached.
-#' @param cache_dir The directory to look for the cache.
 #' @keywords internal
 get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041

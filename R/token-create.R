@@ -31,8 +31,7 @@ create_tokens <- function(tokens,
                           indents = 0,
                           terminal = TRUE,
                           child = NULL,
-                          stylerignore = FALSE
-                          ) {
+                          stylerignore = FALSE) {
   len_text <- length(texts)
   new_tibble(
     list(

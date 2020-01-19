@@ -12,11 +12,6 @@ get_parse_data(text, include_text = TRUE, ...)
 \item{include_text}{Passed to \code{\link[utils:getParseData]{utils::getParseData()}} as \code{includeText}.}
 
 \item{...}{Other arguments passed to \code{\link[utils:getParseData]{utils::getParseData()}}.}
-
-\item{transformers}{A list of transformer functions. Used only to determine
-if the code to style was previously cached.}
-
-\item{cache_dir}{The directory to look for the cache.}
 }
 \description{
 Wrapper around \code{utils::getParseData(parse(text = text))} that returns a flat
