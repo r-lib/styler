@@ -4,12 +4,10 @@
 \alias{serialize_parse_data_flattened}
 \title{Serialize flattened parse data}
 \usage{
-serialize_parse_data_flattened(flattened_pd, start_line = 1)
+serialize_parse_data_flattened(flattened_pd)
 }
 \arguments{
 \item{flattened_pd}{A flattened parse table.}
-
-\item{start_line}{The line number on which the code starts.}
 }
 \description{
 Collapses a flattened parse table into character vector representation.

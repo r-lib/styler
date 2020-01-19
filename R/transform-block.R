@@ -1,4 +1,5 @@
 #' @param pd_nested A block of the nested parse table
+#' @param start_line The line number on which the code starts.
 parse_transform_serialize_r_block <- function(pd_nested,
                                               start_line,
                                               transformers) {
@@ -12,8 +13,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
         target_indention = transformers$reindention$indention,
         comments_only = transformers$reindention$comments_only
       )
-    serialized_transformed_text <-
-      serialize_parse_data_flattened(flattened_pd, start_line = start_line)
+    serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
 
     if (can_verify_roundtrip(transformers)) {
       #TODO do recreate or pass text here
@@ -24,7 +24,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
       dirs = cache_dir_default()
     ) %>%
       file.create()
-    serialized_transformed_text
+    c(rep("", start_line - 1), serialized_transformed_text)
   } else {
     pd_nested$text
   }
