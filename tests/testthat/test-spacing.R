@@ -62,5 +62,10 @@ test_that("spacing around tilde", {
     transformer = style_text, strict = TRUE), NA)
 })
 
+test_that("spacing around square brackets / braces", {
+  expect_warning(test_collection(
+    "spacing", "spacing-square",
+    transformer = style_text, strict = TRUE), NA)
+})
 
 
