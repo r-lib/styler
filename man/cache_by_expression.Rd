@@ -6,6 +6,12 @@
 \usage{
 cache_by_expression(text, transformers)
 }
-\description{
-Cache text
+\arguments{
+\item{text}{A character vector with one or more expressions.}
+
+\item{transformers}{The transformers.}
 }
+\description{
+Splits \code{text} into expressions and adds these to the cache.
+}
+\keyword{internal}

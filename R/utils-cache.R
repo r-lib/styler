@@ -116,6 +116,11 @@ cache_is_activated <- function(cache_name = NULL) {
 }
 
 #' Cache text
+#'
+#' Splits `text` into expressions and adds these to the cache.
+#' @param text A character vector with one or more expressions.
+#' @param transformers The transformers.
+#' @keywords internal
 cache_by_expression <- function(text, transformers) {
   expressions <- parse(text = text) %>%
     map(~deparse(.x) %>% cache_write(transformers = transformers))
