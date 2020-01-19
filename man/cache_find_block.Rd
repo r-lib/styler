@@ -2,12 +2,21 @@
 % Please edit documentation in R/transform-block.R
 \name{cache_find_block}
 \alias{cache_find_block}
-\title{Every expression is an expression itself, but consecutive comments are one
-expression (potentially)}
+\title{Find the groups of expressions that should be processed together}
 \usage{
 cache_find_block(pd)
 }
+\arguments{
+\item{pd}{A top level nest.}
+}
 \description{
-Every expression is an expression itself, but consecutive comments are one
-expression (potentially)
+Every expression is an expression itself, Expressions on same line are in
+same block.
+Multiple expressions can sit on one row, e.g. in line comment and commands
+seperated with ";". This creates a problem when processing each expression
+separately because when putting them together, we need complicated handling
+of line breaks between them, as it is not apriory clear that there is a line
+break separating them. To avoid this, we put top level expressions that sit
+on the same line into one block, so the assumption that there is a line break
+between each block of expressions holds.
 }

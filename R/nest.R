@@ -220,13 +220,3 @@ combine_children <- function(child, internal_child) {
   }
   bound[order(bound$pos_id), ]
 }
-
-#' Get the start right
-#'
-#' On what line does the first token occur?
-#' @param pd_nested A nested parse table.
-#' @return The line number on which the first token occurs.
-#' @keywords internal
-find_start_line <- function(pd_nested) {
-  pd_nested$line1[1]
-}

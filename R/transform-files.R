@@ -209,10 +209,12 @@ parse_transform_serialize_r <- function(text,
       pd_nested$is_cached <- map_lgl(pd_nested$text, is_cached,
         transformers = transformers, cache_dir = cache_dir_default()
       )
+  } else {
+      pd_nested$is_cached <- rep(FALSE, nrow(pd_nested))
     }
 
 
-  start_line <- find_start_line(pd_nested)
+  blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {
       warn("Text to style did not contain any tokens. Returning empty string.")
@@ -222,8 +224,9 @@ parse_transform_serialize_r <- function(text,
 
   pd_nested %>%
     split(pd_nested$block) %>%
-    map(parse_transform_serialize_r_block,
-        start_line = start_line,
+    unname() %>%
+    map2(blank_lines_to_next_expr,
+         parse_transform_serialize_r_block,
         transformers = transformers
     ) %>%
     unlist()
