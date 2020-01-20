@@ -237,7 +237,9 @@ parse_transform_serialize_r <- function(text,
     verify_roundtrip(text, text_out)
   }
 
-  cache_by_expression(text_out, transformers)
+  if (cache_is_activated()) {
+    cache_by_expression(text_out, transformers)
+  }
   text_out
 }
 
