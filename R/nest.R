@@ -7,23 +7,99 @@
 #'   of the parse table.
 #' @importFrom purrr when
 #' @keywords internal
-compute_parse_data_nested <- function(text) {
+compute_parse_data_nested <- function(text,
+                                      transformers) {
   parse_data <- tokenize(text) %>%
     add_terminal_token_before() %>%
     add_terminal_token_after() %>%
     add_stylerignore() %>%
-    add_attributes_caching()
+    add_attributes_caching() %>%
+    drop_cached_children(transformers)
 
   env_add_stylerignore(parse_data)
 
   parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
     nest_parse_data() %>%
+    add_cache_block() %>%
     flatten_operators() %>%
     when(any(parse_data$token == "EQ_ASSIGN") ~ relocate_eq_assign(.), ~.)
 
   pd_nested
 }
+
+#' Must be after [nest_parse_data()] because requires a nested parse table as
+#' input
+#' @importFrom rlang seq2
+add_cache_block <- function(pd_nested) {
+  #TODO reduce calls to cache_is_activated() everywhere.
+  if (cache_is_activated()) {
+    pd_nested$block <- cache_find_block(pd_nested)
+  } else {
+    pd_nested$block <- rep(1, nrow(pd_nested))
+  }
+  pd_nested
+}
+
+#' Drop all children of a top level expression that are cached
+#'
+#' @details
+#' Because we process in blocks of expressions for speed, a cached expression
+#' will always end up in a block that won't be styled again (usual case), unless
+#' it's on a line where multiple expressions sit and at least one is not styled
+#' (exception).
+#'
+#' **usual case: All other expressions in a block are cached**
+#'
+#' Cached expressiond don't need to be transformed with `transformers` in
+#' [parse_transform_serialize_r_block()], we simply return `text` for the top
+#' level token. For that
+#' reason, the nested parse table can, at the rows where these expressions are
+#' located, be shallow, i.e. it does not have to contain a children, because it
+#' will neighter be transformerd nor serialized anytime. This function drop all
+#' associated tokens except the top-level token for such expressions, which will
+#' result in large speed improvements in [compute_parse_data_nested()] because
+#' nesting is expensive and will not be done for cached expressions.
+#'
+#' **exception: Not all other expressions in a block are cached**
+#'
+#' As described in [cache_find_block()], expressions on the same line are always
+#' put into one block. If any element of a block is not cached, the block will
+#' be styled as a whole. If the parse table was made shallow (and the top level)
+#' expresion is still marked as non-terminal, `text` will never be used in the
+#' transformation process and eventually lost. Hence, we must change the top
+#' level expression to a terminal. It will act like a comment in the sense that
+#' it is a fixed `text`.
+#'
+#' Because for the usual case, it does not even matter if the cached expression
+#' is a terminal or not (because it is not processed), we can safely set
+#' `terminal = TRUE` in general.
+drop_cached_children <- function(pd, transformers) {
+  if (cache_is_activated()) {
+    pd %>%
+      split(cumsum(pd$parent < 1)) %>%
+      map(drop_cached_children_impl) %>%
+      bind_rows()
+  } else {
+    pd
+  }
+
+}
+
+drop_cached_children_impl <- function(pd) {
+    pd$is_cached[1] <- is_cached(
+      pd$text[1], transformers, cache_dir_default()
+    )
+    # cat("[cached]")
+    if (pd$is_cached[1]) {
+      pd$terminal[1] <- TRUE
+      pd[1,]
+    } else {
+      #cat("[not cached]")
+      pd
+    }
+  }
+
 
 #' Turn off styling for parts of the code
 #'

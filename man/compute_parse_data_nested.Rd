@@ -4,7 +4,7 @@
 \alias{compute_parse_data_nested}
 \title{Obtain a nested parse table from a character vector}
 \usage{
-compute_parse_data_nested(text)
+compute_parse_data_nested(text, transformers)
 }
 \arguments{
 \item{text}{A character vector to parse.}

@@ -197,24 +197,7 @@ parse_transform_serialize_r <- function(text,
                                         transformers,
                                         warn_empty = TRUE) {
   text <- assert_text(text)
-  pd_nested <- compute_parse_data_nested(text)
-
-  # TODO move this into a function, potentially not attaching to parse table.
-  # Potentially move this into compute_parse_data_nested() again, right before
-  # relocate_eq_assign, also because it has nothing todo with transform and
-  # serialize and we should make it available as early as possible.
-  if (cache_is_activated()) {
-    pd_nested$is_cached <- map_lgl(pd_nested$text, is_cached,
-      transformers = transformers, cache_dir = cache_dir_default()
-    )
-
-    pd_nested$block <- cache_find_block(pd_nested)
-
-  } else {
-    pd_nested$is_cached <- rep(FALSE, nrow(pd_nested))
-    pd_nested$block <- rep(1, nrow(pd_nested))
-  }
-
+  pd_nested <- compute_parse_data_nested(text, transformers)
 
   blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
   if (nrow(pd_nested) == 0) {
