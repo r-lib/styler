@@ -124,7 +124,7 @@ cache_is_activated <- function(cache_name = NULL) {
 cache_by_expression <- function(text, transformers) {
   expressions <- parse(text = text, keep.source = TRUE) %>%
       utils::getParseData(includeText = TRUE)
-  expressions[expressions$parent == 0, "text"] %>%
+  expressions[expressions$parent < 1, "text"] %>%
     map(~cache_write(.x, transformers = transformers))
 }
 
