@@ -15,6 +15,7 @@
 #'
 #' * version 1: Before fix mentioned in #419.
 #' * version 2: After #419.
+#' # version 3: After #582.
 #'
 #' The following utilities are available:
 #'
@@ -42,7 +43,13 @@ parser_version_get <- function() {
 
 #' @rdname parser_version_set
 parser_version_find <- function(pd) {
-  ifelse(any(pd$token == "equal_assign"), 2, 1)
+  ifelse(any(pd$token == "equal_assign"),
+    2,
+    ifelse(any(pd$token == "expr_or_assign_or_help"),
+      3,
+      1
+    )
+  )
 }
 
 
