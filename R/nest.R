@@ -74,29 +74,37 @@ add_cache_block <- function(pd_nested) {
 #' Because for the usual case, it does not even matter if the cached expression
 #' is a terminal or not (because it is not processed), we can safely set
 #' `terminal = TRUE` in general.
+#' @section Implementation:
+#' Because the structure of the parse table is not always "top-level expression
+#' first, then children", we create a temporary parse table that has this
+#' property and then extract the ids and subset the original parse table so it
+#' is shallow in the right places.
 drop_cached_children <- function(pd, transformers) {
   if (cache_is_activated()) {
-    pd %>%
-      split(cumsum(pd$parent < 1)) %>%
-      map(drop_cached_children_impl) %>%
-      bind_rows()
+    pd$is_cached[pd$parent < 1] <- map_lgl(pd$text[pd$parent < 1],
+      is_cached, transformers, cache_dir_default()
+    )
+
+    pd_parent_first <- pd[order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal)),]
+    pos_ids_to_keep <- pd_parent_first %>%
+      split(cumsum(pd_parent_first$parent < 1)) %>%
+      map(find_pos_id_to_keep, transformers = transformers) %>%
+      unlist() %>%
+      unname()
+    pd[pd$pos_id %in% pos_ids_to_keep,]
   } else {
     pd
   }
 
 }
 
-drop_cached_children_impl <- function(pd) {
-    pd$is_cached[1] <- is_cached(
-      pd$text[1], transformers, cache_dir_default()
-    )
+find_pos_id_to_keep <- function(pd, transformers) {
     # cat("[cached]")
     if (pd$is_cached[1]) {
-      pd$terminal[1] <- TRUE
-      pd[1,]
+      pd$pos_id[1]
     } else {
       #cat("[not cached]")
-      pd
+      pd$pos_id
     }
   }
 

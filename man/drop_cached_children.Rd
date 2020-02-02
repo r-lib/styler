@@ -41,3 +41,11 @@ Because for the usual case, it does not even matter if the cached expression
 is a terminal or not (because it is not processed), we can safely set
 \code{terminal = TRUE} in general.
 }
+\section{Implementation}{
+
+Because the structure of the parse table is not always "top-level expression
+first, then children", we create a temporary parse table that has this
+property and then extract the ids and subset the original parse table so it
+is shallow in the right places.
+}
+
