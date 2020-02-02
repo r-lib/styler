@@ -48,6 +48,7 @@ look at what those are.
 
 ```{r, message = FALSE}
 library("styler")
+cache_deactivate()
 library("dplyr")
 names(tidyverse_style())
 str(tidyverse_style(), give.attr = FALSE, list.len = 3)
