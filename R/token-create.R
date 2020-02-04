@@ -18,6 +18,10 @@
 #' @param terminal Boolean vector indicating whether a token is a terminal or
 #'   not.
 #' @param child The children of the tokens.
+#' @param stylerignore Boolean to indicate if the line should be ignored by
+#'   styler.
+#' @param block The block (of caching) to which the token belongs. An integer.
+#' @param is_cached Whether the token is cached already.
 #' @family token creators
 #' @keywords internal
 create_tokens <- function(tokens,

@@ -4,7 +4,10 @@
 \alias{drop_cached_children}
 \title{Drop all children of a top level expression that are cached}
 \usage{
-drop_cached_children(pd, transformers)
+drop_cached_children(pd)
+}
+\arguments{
+\item{pd}{A top-level nest.}
 }
 \description{
 Note that we do cache top-level comments. Because package code has a lot of
@@ -51,3 +54,4 @@ this property and then extract the ids and subset the original parse table so
 it is shallow in the right places.
 }
 
+\keyword{internal}

@@ -13,8 +13,8 @@ compute_parse_data_nested <- function(text,
     add_terminal_token_before() %>%
     add_terminal_token_after() %>%
     add_stylerignore() %>%
-    add_attributes_caching() %>%
-    drop_cached_children(transformers)
+    add_attributes_caching(transformers) %>%
+    drop_cached_children()
 
   env_add_stylerignore(parse_data)
 
@@ -31,7 +31,8 @@ compute_parse_data_nested <- function(text,
 #' Add the block id to a parse table
 #'
 #' Must be after [nest_parse_data()] because requires a nested parse table as
-#' input
+#' input.
+#' @param pd_nested A top level nest.
 #' @keywords internal
 #' @importFrom rlang seq2
 add_cache_block <- function(pd_nested) {
@@ -48,6 +49,7 @@ add_cache_block <- function(pd_nested) {
 #' Note that we do cache top-level comments. Because package code has a lot of
 #' roxygen comments and each of them is a top level expresion, so checking is
 #' very expensive.
+#' @param pd A top-level nest.
 #' @details
 #' Because we process in blocks of expressions for speed, a cached expression
 #' will always end up in a block that won't be styled again (usual case), unless
@@ -84,19 +86,15 @@ add_cache_block <- function(pd_nested) {
 #' first, then children", this function creates a temporary parse table that has
 #' this property and then extract the ids and subset the original parse table so
 #' it is shallow in the right places.
-drop_cached_children <- function(pd, transformers) {
+#' @keywords internal
+drop_cached_children <- function(pd) {
 
   if (cache_is_activated()) {
-    pd$is_cached[pd$parent == 0] <- map_lgl(pd$text[pd$parent == 0],
-      is_cached, transformers, cache_dir_default()
-    )
-    is_comment <- pd$token == "COMMENT"
-    pd$is_cached[is_comment] <- rep(FALSE, sum(is_comment))
 
     pd_parent_first <- pd[order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal)),]
     pos_ids_to_keep <- pd_parent_first %>%
       split(cumsum(pd_parent_first$parent == 0)) %>%
-      map(find_pos_id_to_keep, transformers = transformers) %>%
+      map(find_pos_id_to_keep) %>%
       unlist() %>%
       unname()
     pd[pd$pos_id %in% pos_ids_to_keep,]
@@ -106,7 +104,7 @@ drop_cached_children <- function(pd, transformers) {
 
 }
 
-find_pos_id_to_keep <- function(pd, transformers) {
+find_pos_id_to_keep <- function(pd) {
     if (pd$is_cached[1]) {
       pd$pos_id[1]
     } else {
@@ -228,11 +226,22 @@ add_terminal_token_before <- function(pd_flat) {
     left_join(pd_flat, ., by = "id")
 }
 
-#' Initialiye variables related to caching
+#' Initialise variables related to caching
+#'
+#' @param transformers A list with transformer functions, used to check if
+#'   the code is cached.
 #' @describeIn add_token_terminal Initializes `newlines` and `lag_newlines`.
 #' @keywords internal
-add_attributes_caching <- function(pd_flat) {
+add_attributes_caching <- function(pd_flat, transformers) {
   pd_flat$block <- pd_flat$is_cached <- rep(NA, nrow(pd_flat))
+  if (cache_is_activated()) {
+    pd_flat$is_cached[pd_flat$parent == 0] <- map_lgl(
+      pd_flat$text[pd_flat$parent == 0],
+      is_cached, transformers, cache_dir_default()
+    )
+    is_comment <- pd_flat$token == "COMMENT"
+    pd_flat$is_cached[is_comment] <- rep(FALSE, sum(is_comment))
+  }
   pd_flat
 }
 

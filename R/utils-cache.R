@@ -20,7 +20,7 @@ hash_standardize <- function(text) {
 #' @param cache_dir The caching directory relative to the `.Rcache` root to
 #'   look for a cached value.
 #' @keywords internal
-is_cached <- function(text, transformers, cache_dir) {
+is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
   R.cache::generateCache(
     key = cache_make_key(text, transformers),
     dirs = cache_dir
@@ -33,8 +33,12 @@ is_cached <- function(text, transformers, cache_dir) {
 #' Make a key for `R.cache`
 #'
 #' This is used to determine if caching already corresponds to a style guide.
+#' @param text Code to create a cache for. This should be styled text, as the
+#'   approach used by styler does not cache input, but styled code.
+#' @param transformers A list of transformer functions, because we can only
+#'   know if text is already correct if we know which transformer function it
+#'   should be styled with.
 #' @details
-#'
 #' We need to compare:
 #'
 #' * text to style. Will be passed to hash function as is.

@@ -12,17 +12,20 @@ add_terminal_token_after(pd_flat)
 
 add_terminal_token_before(pd_flat)
 
-add_attributes_caching(pd_flat)
+add_attributes_caching(pd_flat, transformers)
 
 remove_terminal_token_before_and_after(pd_flat)
 }
 \arguments{
 \item{pd_flat}{A flat parse table.}
+
+\item{transformers}{A list with transformer functions, used to check if
+the code is cached.}
 }
 \description{
 Add information about previous / next token to each terminal
 
-Initialiye variables related to caching
+Initialise variables related to caching
 }
 \section{Functions}{
 \itemize{

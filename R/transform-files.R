@@ -78,7 +78,6 @@ make_transformer <- function(transformers,
                              warn_empty = TRUE) {
   force(transformers)
   assert_transformers(transformers)
-  cache_dir <- cache_dir_default()
   assert_R.cache_installation(action = "warn")
 
   is_R.cache_installed <- rlang::is_installed("R.cache")
