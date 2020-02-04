@@ -86,7 +86,7 @@ make_transformer <- function(transformers,
     should_use_cache <- is_R.cache_installed && cache_is_activated()
 
     if (should_use_cache) {
-      use_cache <- is_cached(text, transformers, cache_dir)
+      use_cache <- is_cached(text, transformers)
     } else {
       use_cache <- FALSE
     }
