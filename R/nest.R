@@ -21,9 +21,9 @@ compute_parse_data_nested <- function(text,
   parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
     nest_parse_data() %>%
-    add_cache_block() %>%
     flatten_operators() %>%
-    when(any(parse_data$token == "EQ_ASSIGN") ~ relocate_eq_assign(.), ~.)
+    when(any(parse_data$token == "EQ_ASSIGN") ~ relocate_eq_assign(.), ~.) %>%
+    add_cache_block()
 
   pd_nested
 }
@@ -233,7 +233,7 @@ add_terminal_token_before <- function(pd_flat) {
 #' @describeIn add_token_terminal Initializes `newlines` and `lag_newlines`.
 #' @keywords internal
 add_attributes_caching <- function(pd_flat, transformers) {
-  pd_flat$block <- pd_flat$is_cached <- rep(NA, nrow(pd_flat))
+  pd_flat$is_cached <- rep(NA, nrow(pd_flat))
   if (cache_is_activated()) {
     pd_flat$is_cached[pd_flat$parent == 0] <- map_lgl(
       pd_flat$text[pd_flat$parent == 0],
