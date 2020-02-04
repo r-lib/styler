@@ -56,7 +56,7 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
   cache_deactivate()
   not_cached_benchmark <- system.time(style_text(text_styled))
   expect_lt(
-    partially_cached_benchmark['elapsed'] * 2,
+    partially_cached_benchmark['elapsed'] * 5,
     not_cached_benchmark['elapsed']
   )
 })
