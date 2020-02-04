@@ -117,14 +117,15 @@ cache_is_activated <- function(cache_name = NULL) {
 
 #' Cache text
 #'
-#' Splits `text` into expressions and adds these to the cache.
+#' Splits `text` into expressions and adds these to the cache. Note that
+#' comments are **not** cached because caching them is too expensive.
 #' @param text A character vector with one or more expressions.
 #' @param transformers The transformers.
 #' @keywords internal
 cache_by_expression <- function(text, transformers) {
   expressions <- parse(text = text, keep.source = TRUE) %>%
       utils::getParseData(includeText = TRUE)
-  expressions[expressions$parent < 1, "text"] %>%
+  expressions[expressions$parent == 0 & expressions$token != "COMMENT", "text"] %>%
     map(~cache_write(.x, transformers = transformers))
 }
 

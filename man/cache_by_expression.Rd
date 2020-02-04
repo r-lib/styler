@@ -12,6 +12,7 @@ cache_by_expression(text, transformers)
 \item{transformers}{The transformers.}
 }
 \description{
-Splits \code{text} into expressions and adds these to the cache.
+Splits \code{text} into expressions and adds these to the cache. Note that
+comments are \strong{not} cached because caching them is too expensive.
 }
 \keyword{internal}

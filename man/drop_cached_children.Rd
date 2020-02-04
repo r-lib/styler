@@ -46,8 +46,8 @@ is a terminal or not (because it is not processed), we can safely set
 \section{Implementation}{
 
 Because the structure of the parse table is not always "top-level expression
-first, then children", we create a temporary parse table that has this
-property and then extract the ids and subset the original parse table so it
-is shallow in the right places.
+first, then children", this function creates a temporary parse table that has
+this property and then extract the ids and subset the original parse table so
+it is shallow in the right places.
 }
 

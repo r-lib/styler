@@ -81,18 +81,21 @@ add_cache_block <- function(pd_nested) {
 #' `terminal = TRUE` in general.
 #' @section Implementation:
 #' Because the structure of the parse table is not always "top-level expression
-#' first, then children", we create a temporary parse table that has this
-#' property and then extract the ids and subset the original parse table so it
-#' is shallow in the right places.
+#' first, then children", this function creates a temporary parse table that has
+#' this property and then extract the ids and subset the original parse table so
+#' it is shallow in the right places.
 drop_cached_children <- function(pd, transformers) {
+
   if (cache_is_activated()) {
-    pd$is_cached[pd$parent < 1] <- map_lgl(pd$text[pd$parent < 1],
+    pd$is_cached[pd$parent == 0] <- map_lgl(pd$text[pd$parent == 0],
       is_cached, transformers, cache_dir_default()
     )
+    is_comment <- pd$token == "COMMENT"
+    pd$is_cached[is_comment] <- rep(FALSE, sum(is_comment))
 
     pd_parent_first <- pd[order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal)),]
     pos_ids_to_keep <- pd_parent_first %>%
-      split(cumsum(pd_parent_first$parent < 1)) %>%
+      split(cumsum(pd_parent_first$parent == 0)) %>%
       map(find_pos_id_to_keep, transformers = transformers) %>%
       unlist() %>%
       unname()
