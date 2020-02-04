@@ -42,7 +42,7 @@ The main caching features were implemented in the following two pull requests:
   the function definition, but not `another(call)` and all other expressions
   that were not changed.
 
-```{r}
+```{r, eval = FALSE}
 function() {
   # a comment 
   x = 2 # <- change this line
