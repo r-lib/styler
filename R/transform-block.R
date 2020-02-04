@@ -1,5 +1,11 @@
-#' @param pd_nested A block of the nested parse table
+#' Parse, transform and serialize a nested parse table
+#'
+#' We process blocks of nested parse tables for speed. See [cache_find_block()]
+#' for details on how a top level nest is split into blocks.
+#' @param pd_nested A block of the nested parse table.
 #' @param start_line The line number on which the code starts.
+#' @inheritParams apply_transformers
+#' @keywords internal
 parse_transform_serialize_r_block <- function(pd_nested,
                                               start_line,
                                               transformers) {
@@ -36,12 +42,14 @@ parse_transform_serialize_r_block <- function(pd_nested,
 #' break separating them. To avoid this, we put top level expressions that sit
 #' on the same line into one block, so the assumption that there is a line break
 #' between each block of expressions holds.
+#' @param pd A top level parse table.
 #' @details
 #' we want to for turning points:
 #' - change in cache state is a turning point
 #' - expressions that are not on a new line cannot be a turning point. In this
 #'   case, the turning point is moved to the first expression on the line
 #' @param pd A top level nest.
+#' @keywords internal
 cache_find_block <- function(pd) {
 
   first_after_cache_state_switch <- pd$is_cached != lag(pd$is_cached, default = !pd$is_cached[1])

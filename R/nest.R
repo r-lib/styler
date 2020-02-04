@@ -28,11 +28,13 @@ compute_parse_data_nested <- function(text,
   pd_nested
 }
 
+#' Add the block id to a parse table
+#'
 #' Must be after [nest_parse_data()] because requires a nested parse table as
 #' input
+#' @keywords internal
 #' @importFrom rlang seq2
 add_cache_block <- function(pd_nested) {
-  #TODO reduce calls to cache_is_activated() everywhere.
   if (cache_is_activated()) {
     pd_nested$block <- cache_find_block(pd_nested)
   } else {
@@ -43,6 +45,9 @@ add_cache_block <- function(pd_nested) {
 
 #' Drop all children of a top level expression that are cached
 #'
+#' Note that we do cache top-level comments. Because package code has a lot of
+#' roxygen comments and each of them is a top level expresion, so checking is
+#' very expensive.
 #' @details
 #' Because we process in blocks of expressions for speed, a cached expression
 #' will always end up in a block that won't be styled again (usual case), unless
@@ -99,11 +104,9 @@ drop_cached_children <- function(pd, transformers) {
 }
 
 find_pos_id_to_keep <- function(pd, transformers) {
-    # cat("[cached]")
     if (pd$is_cached[1]) {
       pd$pos_id[1]
     } else {
-      #cat("[not cached]")
       pd$pos_id
     }
   }

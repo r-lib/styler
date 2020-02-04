@@ -2,8 +2,7 @@
 % Please edit documentation in R/nest.R
 \name{add_cache_block}
 \alias{add_cache_block}
-\title{Must be after \code{\link[=nest_parse_data]{nest_parse_data()}} because requires a nested parse table as
-input}
+\title{Add the block id to a parse table}
 \usage{
 add_cache_block(pd_nested)
 }
@@ -11,3 +10,4 @@ add_cache_block(pd_nested)
 Must be after \code{\link[=nest_parse_data]{nest_parse_data()}} because requires a nested parse table as
 input
 }
+\keyword{internal}

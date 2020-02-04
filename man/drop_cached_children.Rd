@@ -7,7 +7,9 @@
 drop_cached_children(pd, transformers)
 }
 \description{
-Drop all children of a top level expression that are cached
+Note that we do cache top-level comments. Because package code has a lot of
+roxygen comments and each of them is a top level expresion, so checking is
+very expensive.
 }
 \details{
 Because we process in blocks of expressions for speed, a cached expression
