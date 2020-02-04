@@ -198,3 +198,27 @@ test_that("caching utils make right blocks with comments", {
   expect_equal(blocks_edge, c(1, 2, 2))
 })
 
+
+################################################################################
+
+test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  text <- test_path("cache-with-r-cache/mlflow-1-in.R") %>%
+    readLines()
+  cache_activate("testthat")
+  benchmark <- system.time(text_styled <- style_text(text))
+  full_cached_benchmark <- system.time(style_text(text_styled))
+  expect_lt(full_cached_benchmark['elapsed'], .1)
+  # modify one function declaration
+  text_styled[2] <-gsub(")", " )", text_styled[2], fixed = TRUE)
+  partially_cached_benchmark <- system.time(style_text(text_styled))
+  cache_deactivate()
+  not_cached_benchmark <- system.time(style_text(text_styled))
+  expect_lt(
+    partially_cached_benchmark['elapsed'] * 2,
+    not_cached_benchmark['elapsed']
+  )
+})
+
+
