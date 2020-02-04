@@ -1,5 +1,3 @@
-styler_version <- utils::packageDescription("styler", fields = "Version")
-clear_testthat_cache <- purrr::partial(cache_clear, "testthat", ask = FALSE)
 
 capture.output(test_that("No warnings are issued when R.cache is installed", {
   skip_if_not_installed("R.cache")
@@ -7,7 +5,7 @@ capture.output(test_that("No warnings are issued when R.cache is installed", {
   expect_silent(assert_R.cache_installation(installation_only = TRUE))
   expect_silent(assert_R.cache_installation())
   expect_warning(style_text("1+1"), NA)
-  expect_warning(cache_activate("testthat"), NA)
+  expect_warning(activate_testthat_cache(), NA)
   expect_warning(style_text("1+1"), NA)
   expect_silent(assert_R.cache_installation(installation_only = TRUE))
   expect_silent(assert_R.cache_installation())
@@ -19,7 +17,7 @@ capture.output(test_that("Cache management works when R.cache is installed", {
   clear_testthat_cache()
   # clearing a cache inactivates the caching functionality.
   expect_false(cache_info(format = "tabular")$activated)
-  cache_activate("testthat")
+  activate_testthat_cache()
   # at fresh startup, with R.cache installed
   expect_s3_class(cache_info(format = "tabular"), "tbl_df")
   expect_error(cache_info(), NA)
@@ -43,99 +41,26 @@ capture.output(test_that("Cache management works when R.cache is installed", {
   expect_error(cache_clear(ask = FALSE), NA)
 }))
 
-
-
-capture.output(test_that("activated cache brings speedup on style_file() API", {
-  skip_if_not_installed("R.cache")
-  cache_activate("testthat")
+test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
-  cache_activate("testthat")
-  first <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
-  second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-}))
-
-text <- c(
-  "#' Roxygen",
-  "#' Comment",
-  "#' @examples",
-  "#' 1 + 1",
-  "k <- function() {",
-  "  1 + 1",
-  "  if (x) {",
-  "    k()",
-  "  }",
-  "}",
-  ""
-) %>%
-  rep(10)
-
-capture.output(test_that("activated cache brings speedup on style_text() API on character vector", {
-  skip_if_not_installed("R.cache")
-  cache_activate("testthat")
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  cache_activate("testthat")
-
-  first <- system.time(styler::style_text(text))
-  second <- system.time(styler::style_text(text))
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-}))
-
-capture.output(test_that("activated cache brings speedup on style_text() API on character scalar", {
-  skip_if_not_installed("R.cache")
-  cache_activate("testthat")
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  cache_activate("testthat")
-
-  first <- system.time(styler::style_text(paste0(text, collapse = "\n")))
-  second <- system.time(styler::style_text(paste0(text, collapse = "\n")))
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-}))
-
-
-capture.output(test_that("no speedup when tranformer changes", {
-  skip_if_not_installed("R.cache")
-  cache_activate("testthat")
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  cache_activate("testthat")
-  t1 <- tidyverse_style()
-  first <- system.time(style_text(text, transformers = t1))
-  t1$use_raw_indention <- !t1$use_raw_indention
-  second <- system.time(style_text(text, transformers = t1))
-  expect_false(first["elapsed"] / 2 > second["elapsed"])
-}))
-
-
-capture.output(
-  test_that(paste0(
-    "activated cache brings speedup on style_text() API on ",
-    "character scalar and character vector (mixed)"
-  ), {
-  skip_if_not_installed("R.cache")
-  cache_activate("testthat")
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  cache_activate("testthat")
-
-  first <- system.time(styler::style_text(text))
-  second <- system.time(styler::style_text(paste0(text, collapse = "\n")))
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-}))
-
-
-capture.output(test_that("unactivated cache does not bring speedup", {
-  skip_if_not_installed("R.cache")
-  on.exit(clear_testthat_cache)
-  clear_testthat_cache()
+  text <- test_path("cache-with-r-cache/mlflow-1-in.R") %>%
+    readLines()
+  activate_testthat_cache()
+  benchmark <- system.time(text_styled <- style_text(text))
+  full_cached_benchmark <- system.time(style_text(text_styled))
+  expect_lt(full_cached_benchmark['elapsed'], .1)
+  # modify one function declaration
+  text_styled[2] <-gsub(")", " )", text_styled[2], fixed = TRUE)
+  partially_cached_benchmark <- system.time(style_text(text_styled))
   cache_deactivate()
-  first <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
-  second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
-  expect_false(first["elapsed"] / 2 > second["elapsed"])
-}))
+  not_cached_benchmark <- system.time(style_text(text_styled))
+  expect_lt(
+    partially_cached_benchmark['elapsed'] * 2,
+    not_cached_benchmark['elapsed']
+  )
+})
+
 
 capture.output(test_that("cached expressions are displayed propperly", {
   on.exit(clear_testthat_cache())
@@ -146,7 +71,7 @@ capture.output(test_that("cached expressions are displayed propperly", {
     file = test_path("reference-objects/cache-info-1")
   )
 
-  cache_activate("testthat")
+  activate_testthat_cache()
   style_text("1+1")
   cache_info <- cache_info(format = "tabular")
   cache_info$size <- round(cache_info$size, -2)
@@ -163,61 +88,36 @@ capture.output(test_that("cached expressions are displayed propperly", {
   )
 }))
 
-test_that("caching utils make right blocks with semi-colon", {
-  blocks_simple_uncached <- compute_parse_data_nested(c("1 + 1", "2; 1+1")) %>%
-    dplyr::mutate(is_cached = FALSE) %>%
-    cache_find_block()
-  expect_equal(blocks_simple_uncached, c(1, 1, 1, 1))
 
-  blocks_simple_cached <- compute_parse_data_nested(c("1 + 1", "2; 1+1")) %>%
-    dplyr::mutate(is_cached = TRUE) %>%
-    cache_find_block()
-  expect_equal(blocks_simple_cached, c(1, 1, 1, 1))
-
-  blocks_edge <- compute_parse_data_nested(c("1 + 1", "2; 1+1")) %>%
-    dplyr::mutate(is_cached = c(TRUE, TRUE, FALSE, FALSE)) %>%
-    cache_find_block()
-  expect_equal(blocks_edge, c(1, 2, 2, 2))
-})
-
-
-test_that("caching utils make right blocks with comments", {
-  blocks_simple_uncached <- compute_parse_data_nested(c("1 + 1", "2 # comment")) %>%
-    dplyr::mutate(is_cached = FALSE) %>%
-    cache_find_block()
-  expect_equal(blocks_simple_uncached, c(1, 1, 1))
-
-  blocks_simple_cached <- compute_parse_data_nested(c("1 + 1", "2 # comment2")) %>%
-    dplyr::mutate(is_cached = TRUE) %>%
-    cache_find_block()
-  expect_equal(blocks_simple_cached, c(1, 1, 1))
-
-  blocks_edge <- compute_parse_data_nested(c("1 + 1", "2 # 1+1")) %>%
-    dplyr::mutate(is_cached = c(TRUE, TRUE, FALSE)) %>%
-    cache_find_block()
-  expect_equal(blocks_edge, c(1, 2, 2))
-})
-
-
-################################################################################
-
-test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
+test_that("When expressions are cached, number of newlines between them are preserved", {
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
-  text <- test_path("cache-with-r-cache/mlflow-1-in.R") %>%
-    readLines()
-  cache_activate("testthat")
-  benchmark <- system.time(text_styled <- style_text(text))
-  full_cached_benchmark <- system.time(style_text(text_styled))
-  expect_lt(full_cached_benchmark['elapsed'], .1)
-  # modify one function declaration
-  text_styled[2] <-gsub(")", " )", text_styled[2], fixed = TRUE)
-  partially_cached_benchmark <- system.time(style_text(text_styled))
-  cache_deactivate()
-  not_cached_benchmark <- system.time(style_text(text_styled))
-  expect_lt(
-    partially_cached_benchmark['elapsed'] * 2,
-    not_cached_benchmark['elapsed']
+  activate_testthat_cache()
+  text <- c(
+    "1 + 1",
+    "",
+    "",
+    "f(x)",
+    "",
+    "",
+    "",
+    "x < 3",
+    "function() NULL"
+  )
+  # add to cache
+  expect_equal(
+    text[1:4],
+    as.character(style_text(text[1:4]))
+  )
+  # applied cache
+  expect_equal(
+    text[1:4],
+    as.character(style_text(text[1:4]))
+  )
+
+  expect_equal(
+    text,
+    as.character(style_text(text))
   )
 })
 
