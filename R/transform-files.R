@@ -103,11 +103,7 @@ make_transformer <- function(transformers,
           ~.
         )
       if (should_use_cache) {
-        R.cache::generateCache(
-          key = cache_make_key(transformed_code, transformers),
-          dirs = cache_dir
-        ) %>%
-          file.create()
+        cache_write(transformed_code, transformers)
       }
       transformed_code
     } else {
