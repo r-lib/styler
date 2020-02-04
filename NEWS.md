@@ -20,8 +20,10 @@
   before will be instantaneous. This brings large speed boosts in many
   situations, e.g. when `style_pkg()` is run but only a few files have changed
   since the last styling or when using the [styler pre-commit
-  hook](https://github.com/lorenzwalthert/precommit). See `help("caching")`
-  for details (#538).
+  hook](https://github.com/lorenzwalthert/precommit). Because styler caches
+  by expression, you will also get speed boosts in large files with many 
+  expressions when you only change a few o them. See `help("caching")` for 
+  details (#538, #578).
   
 * `create_style_guide()` gains two arguments `style_guide_name` and 
   `style_guide_version` that are carried as meta data, in particular to version 
