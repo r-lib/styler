@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9001</span>
       </span>
     </div>
 
@@ -89,6 +89,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -154,7 +157,7 @@
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
 <li><p>ignore certain lines using <code># styler: off</code> and <code>#styler: on</code> or custom markers, see <code><a href="https://rdrr.io/r/utils/help.html">help("stylerignore")</a></code> (<a href='https://github.com/r-lib/styler/issues/560'>#560</a>).</p></li>
-<li><p>styler caches results of styling, so applying styler to code it has styled before will be instantaneous. This brings large speed boosts in many situations, e.g. when <code><a href="../reference/style_pkg.html">style_pkg()</a></code> is run but only a few files have changed since the last styling or when using the <a href="https://github.com/lorenzwalthert/precommit">styler pre-commit hook</a>. See <code><a href="https://rdrr.io/r/utils/help.html">help("caching")</a></code> for details (<a href='https://github.com/r-lib/styler/issues/538'>#538</a>).</p></li>
+<li><p>styler caches results of styling, so applying styler to code it has styled before will be instantaneous. This brings large speed boosts in many situations, e.g. when <code><a href="../reference/style_pkg.html">style_pkg()</a></code> is run but only a few files have changed since the last styling or when using the <a href="https://github.com/lorenzwalthert/precommit">styler pre-commit hook</a>. Because styler caches by expression, you will also get speed boosts in large files with many expressions when you only change a few o them. See <code><a href="https://rdrr.io/r/utils/help.html">help("caching")</a></code> for details (<a href='https://github.com/r-lib/styler/issues/538'>#538</a>, <a href='https://github.com/r-lib/styler/issues/578'>#578</a>).</p></li>
 <li><p><code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> gains two arguments <code>style_guide_name</code> and <code>style_guide_version</code> that are carried as meta data, in particular to version third-party style guides and ensure the proper functioning of caching. This change is completely invisible to users who don’t create and distribute their own style guide like <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> (<a href='https://github.com/r-lib/styler/issues/572'>#572</a>).</p></li>
 </ul>
 </div>

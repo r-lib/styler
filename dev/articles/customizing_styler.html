@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9001</span>
       </span>
     </div>
 
@@ -55,6 +55,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
+    <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
     <li>
@@ -122,12 +125,14 @@
 </ol>
 <p>The <code>transformers</code> argument is, apart from the code to style, the key argument of functions such as <code><a href="../reference/style_text.html">style_text()</a></code> and friends. By default, it is created via the <code>style</code> argument. The transformers are a named list of transformer functions and other arguments passed to styler. To use the default style guide of styler (<a href="http://style.tidyverse.org/">the tidyverse style guide</a>), call <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> to get the list of the transformer functions. Let’s quickly look at what those are.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"styler"</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"dplyr"</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span>())</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="../reference/cache_activate.html">cache_deactivate</a></span>()</a></code></pre></div>
+<pre><code>## Deactivated cache.</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"dplyr"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span>())</a></code></pre></div>
 <pre><code>## [1] "initialize"          "line_break"          "space"              
 ## [4] "token"               "indention"           "use_raw_indention"  
 ## [7] "reindention"         "style_guide_name"    "style_guide_version"</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span>(), <span class="dt">give.attr =</span> <span class="ot">FALSE</span>, <span class="dt">list.len =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span>(), <span class="dt">give.attr =</span> <span class="ot">FALSE</span>, <span class="dt">list.len =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## List of 9
 ##  $ initialize         :List of 1
 ##   ..$ initialize:function (pd_flat)  
@@ -143,7 +148,7 @@
 ##   .. [list output truncated]
 ##   [list output truncated]</code></pre>
 <p>We note that there are different types of transformer functions. <code>initialize</code> initializes some variables in the nested parse table (so it is not actually a transformer), and the other elements modify either spacing, line breaks or tokens. <code>use_raw_indention</code> is not a function, it is just an option. All transformer functions have a similar structure. Let’s take a look at one:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span>()<span class="op">$</span>space<span class="op">$</span>remove_space_after_opening_paren</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span>()<span class="op">$</span>space<span class="op">$</span>remove_space_after_opening_paren</a></code></pre></div>
 <pre><code>## function (pd_flat) 
 ## {
 ##     paren_after &lt;- pd_flat$token %in% c("'('", "'['", "LBB")
@@ -153,52 +158,52 @@
 ##     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L
 ##     pd_flat
 ## }
-## &lt;bytecode: 0x5ec8e38&gt;
+## &lt;bytecode: 0x6de97d0&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>As the name says, this function removes spaces after the opening parenthesis. But how? Its input is a <em>nest</em>. Since the visitor will go through all levels of nesting, we just need a function that can be applied to a <em>nest</em>, that is, to a parse table at one level of nesting. We can compute the nested parse table and look at one of the levels of nesting that is interesting for us (more on the data structure in the vignettes “Data structures” and “Manipulating the parse table”):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">string_to_format &lt;-<span class="st"> "call( 3)"</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">pd &lt;-<span class="st"> </span>styler<span class="op">:::</span><span class="kw"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span>(string_to_format) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span>styler<span class="op">:::</span><span class="kw"><a href="../reference/visit.html">pre_visit</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(default_style_guide_attributes))</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">pd<span class="op">$</span>child[[<span class="dv">1</span>]] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(token, terminal, text, newlines, spaces)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">string_to_format &lt;-<span class="st"> "call( 3)"</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">pd &lt;-<span class="st"> </span>styler<span class="op">:::</span><span class="kw"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span>(string_to_format) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span>styler<span class="op">:::</span><span class="kw"><a href="../reference/visit.html">pre_visit</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(default_style_guide_attributes))</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">pd<span class="op">$</span>child[[<span class="dv">1</span>]] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(token, terminal, text, newlines, spaces)</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 5
 ##   token terminal text  newlines spaces
 ##   &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;
-## 1 expr  FALSE    ""           0      0
-## 2 '('   TRUE     "("          0      1
-## 3 expr  FALSE    ""           0      0
-## 4 ')'   TRUE     ")"          0      0</code></pre>
+## 1 expr  FALSE    call         0      0
+## 2 '('   TRUE     (            0      1
+## 3 expr  FALSE    3            0      0
+## 4 ')'   TRUE     )            0      0</code></pre>
 <p><code><a href="../reference/default_style_guide_attributes.html">default_style_guide_attributes()</a></code> is called to initialize some variables, it does not actually transform the parse table.</p>
 <p>All the function <code>remove_space_after_opening_paren()</code> now does is to look for the opening bracket and set the column <code>spaces</code> of the token to zero. Note that it is very important to check whether there is also a line break following after that token. If so, <code>spaces</code> should not be touched because of the way <code>spaces</code> and <code>newlines</code> are defined. <code>spaces</code> are the number of spaces after a token and <code>newlines</code>. Hence, if a line break follows, spaces are not EOL spaces, but rather the spaces directly before the next token. If there was a line break after the token and the rule did not check for that, indention for the token following <code>(</code> would be removed. This would be unwanted for example if <code>use_raw_indention</code> is set to <code>TRUE</code> (which means indention should not be touched). If we apply the rule to our parse table, we can see that the column <code>spaces</code> changes and is now zero for all tokens:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">styler<span class="op">:::</span><span class="kw">remove_space_after_opening_paren</span>(pd<span class="op">$</span>child[[<span class="dv">1</span>]]) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(token, terminal, text, newlines, spaces)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">styler<span class="op">:::</span><span class="kw">remove_space_after_opening_paren</span>(pd<span class="op">$</span>child[[<span class="dv">1</span>]]) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(token, terminal, text, newlines, spaces)</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 5
 ##   token terminal text  newlines spaces
 ##   &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;
-## 1 expr  FALSE    ""           0      0
-## 2 '('   TRUE     "("          0      0
-## 3 expr  FALSE    ""           0      0
-## 4 ')'   TRUE     ")"          0      0</code></pre>
+## 1 expr  FALSE    call         0      0
+## 2 '('   TRUE     (            0      0
+## 3 expr  FALSE    3            0      0
+## 4 ')'   TRUE     )            0      0</code></pre>
 <p>All top-level styling functions have a <code>style</code> argument (which defaults to <code>tidyverse_style</code>). If you check out the help file, you can see that the argument <code>style</code> is only used to create the default <code>transformers</code> argument, which defaults to <code>style(...)</code>. This allows for the styling options to be set without having to specify them inside the function passed to <code>transformers</code>.</p>
 <p>Let’s clarify this with an example. The following yields the same result:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="kw"><a href="../reference/style_text.html">style_text</a></span>(string_to_format, <span class="dt">transformers =</span> <span class="kw"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span>(<span class="dt">strict =</span> <span class="ot">FALSE</span>)),</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="kw"><a href="../reference/style_text.html">style_text</a></span>(string_to_format, <span class="dt">style =</span> tidyverse_style, <span class="dt">strict =</span> <span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">  <span class="kw"><a href="../reference/style_text.html">style_text</a></span>(string_to_format, <span class="dt">strict =</span> <span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="kw"><a href="../reference/style_text.html">style_text</a></span>(string_to_format, <span class="dt">transformers =</span> <span class="kw"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span>(<span class="dt">strict =</span> <span class="ot">FALSE</span>)),</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="kw"><a href="../reference/style_text.html">style_text</a></span>(string_to_format, <span class="dt">style =</span> tidyverse_style, <span class="dt">strict =</span> <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="kw"><a href="../reference/style_text.html">style_text</a></span>(string_to_format, <span class="dt">strict =</span> <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Now let’s do the whole styling of a string with just this one transformer introduced above. We do this by first creating a style guide with the designated wrapper function <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code>. It takes transformer functions as input and returns them in a named list that meets the formal requirements for styling functions. We also set a name and version of the style guide according to the convention outlined in <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">space_after_opening_style &lt;-<span class="st"> </span><span class="cf">function</span>(are_you_sure) {</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="kw"><a href="../reference/create_style_guide.html">create_style_guide</a></span>(</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">    <span class="dt">space =</span> tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/lst.html">lst</a></span>(<span class="dt">remove_space_after_opening_paren =</span> </a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">    <span class="cf">if</span> (are_you_sure) styler<span class="op">:::</span>remove_space_after_opening_paren),</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">    <span class="dt">style_guide_name =</span> <span class="st">"styler::space_after_opening_style@https://github.com/r-lib/styler"</span>,</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="dt">style_guide_version =</span> <span class="kw"><a href="https://rdrr.io/r/base/dcf.html">read.dcf</a></span>(here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"DESCRIPTION"</span>))[, <span class="st">"Version"</span>]</a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">  )</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">space_after_opening_style &lt;-<span class="st"> </span><span class="cf">function</span>(are_you_sure) {</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">  <span class="kw"><a href="../reference/create_style_guide.html">create_style_guide</a></span>(</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">    <span class="dt">space =</span> tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/lst.html">lst</a></span>(<span class="dt">remove_space_after_opening_paren =</span> </a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">    <span class="cf">if</span> (are_you_sure) styler<span class="op">:::</span>remove_space_after_opening_paren),</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    <span class="dt">style_guide_name =</span> <span class="st">"styler::space_after_opening_style@https://github.com/r-lib/styler"</span>,</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">    <span class="dt">style_guide_version =</span> <span class="kw"><a href="https://rdrr.io/r/base/dcf.html">read.dcf</a></span>(here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"DESCRIPTION"</span>))[, <span class="st">"Version"</span>]</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">  )</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">}</a></code></pre></div>
 <p>Make sure to also disable caching during development with <code><a href="../reference/cache_activate.html">cache_deactivate()</a></code> because styling the same text with a different style guide that has the same version and name will fool the cache invalidation in the case your style guide has transformer functions with different function bodies. Make sure to increment the version number of your style guide with every release. It should correspond to the version of the package from which you export your style guide.</p>
 <p>We can not try the style guide:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"call( 1,1)"</span>, <span class="dt">style =</span> space_after_opening_style, <span class="dt">are_you_sure =</span> <span class="ot">TRUE</span>)  </a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"call( 1,1)"</span>, <span class="dt">style =</span> space_after_opening_style, <span class="dt">are_you_sure =</span> <span class="ot">TRUE</span>)  </a></code></pre></div>
 <pre><code>## call(1,1)</code></pre>
 <p>Note that the return value of your <code>style</code> function may not contain <code>NULL</code> elements.</p>
 <p>I hope you have acquired a basic understanding of how styler transforms code. You can provide your own transformer functions and use <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> to create customized code styling. If you do so, there are a few more things you should be aware of, which are described in the next section.</p>
@@ -216,7 +221,7 @@
 <li><p>modify the indention by changing <code>indention_ref_id</code> (based on <code>newlines</code> <code>lag_newlines</code>, <code>spaces</code> <code>multi_line</code>, <code>token</code>, <code>token_before</code>, <code>token_after</code> and <code>text</code>).</p></li>
 </ul>
 <p>You can also look this up in the function that applies the transformers: <code><a href="../reference/apply_transformers.html">apply_transformers()</a></code>:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">styler<span class="op">:::</span>apply_transformers</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">styler<span class="op">:::</span>apply_transformers</a></code></pre></div>
 <pre><code>## function (pd_nested, transformers) 
 ## {
 ##     transformed_updated_multi_line &lt;- post_visit(pd_nested, c(transformers$initialize, 
@@ -228,7 +233,7 @@
 ##         outer_indention_refs = NA)
 ##     transformed_absolute_indent
 ## }
-## &lt;bytecode: 0x53dd1a0&gt;
+## &lt;bytecode: 0x6259080&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>This means that the order of the styling is clearly defined and it is for example not possible to modify line breaks based on spacing, because spacing will be set after line breaks are set. Do not rely on the column <code>col1</code>, <code>col2</code>, <code>line1</code> and <code>line2</code> in the parse table in any of your functions since these columns only reflect the position of tokens at the point of parsing,</p>
 <p>i.e. they are not kept up to date throughout the process of styling.</p>
@@ -240,61 +245,62 @@
 <h1 class="hasAnchor">
 <a href="#showcasing-the-development-of-a-styling-rule" class="anchor"></a>Showcasing the development of a styling rule</h1>
 <p>For illustrative purposes, we create a new style guide that has one rule only: Curly braces are always on a new line. So for example:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">add_one &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">  x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">add_one &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">}</a></code></pre></div>
 <p>Should be transformed to:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">add_one &lt;-<span class="st"> </span><span class="cf">function</span>(x) </a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">{</a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">  x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">add_one &lt;-<span class="st"> </span><span class="cf">function</span>(x) </a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">  x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">}</a></code></pre></div>
 <p>We first need to get familiar with the structure of the nested parse table. Note that the structure of the nested parse table is not affected by the position of line breaks and spaces. Let’s first create the nested parse table.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">code &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"add_one &lt;- function(x) { x + 1 }"</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">styler<span class="op">:::</span><span class="kw"><a href="../reference/create_tree.html">create_tree</a></span>(code)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">code &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"add_one &lt;- function(x) { x + 1 }"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">styler<span class="op">:::</span><span class="kw"><a href="../reference/create_tree.html">create_tree</a></span>(code)</a></code></pre></div>
 <div id="levelname-1-root-token-short_text-lag_newlinesspaces-id-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#levelname-1-root-token-short_text-lag_newlinesspaces-id-2" class="anchor"></a>levelName ## 1 ROOT (token: short_text [lag_newlines/spaces] {id}) ## 2</h2>
 <p>°–expr: [0/0] {23} ## 3 ¦–expr: [0/1] {3} ## 4 ¦ °–SYMBOL: add_o [0/0] {1} ## 5 ¦–LEFT_ASSIGN: &lt;- [0/1] {2} ## 6 °–expr: [0/0] {22} ## 7 ¦–FUNCTION: funct [0/0] {4} ## 8 ¦–‘(’: ( [0/0] {5} ## 9 ¦–SYMBOL_FORMALS: x [0/0] {6} ## 10 ¦–‘)’: ) [0/1] {7} ## 11 °–expr: [0/0] {19} ## 12 ¦–‘{’: { [0/1] {9} ## 13 ¦–expr: [0/1] {16} ## 14 ¦ ¦–expr: [0/1] {12} ## 15 ¦ ¦ °–SYMBOL: x [0/0] {10} ## 16 ¦ ¦–‘+’: + [0/1] {11} ## 17 ¦ °–expr: [0/0] {14} ## 18 ¦ °–NUM_CONST: 1 [0/0] {13} ## 19 °–‘}’: } [0/0] {15}</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">pd &lt;-<span class="st"> </span>styler<span class="op">:::</span><span class="kw"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span>(code)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">pd &lt;-<span class="st"> </span>styler<span class="op">:::</span><span class="kw"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span>(code)</a></code></pre></div>
 <p>The token of interest here has id number 10. Let’s navigate there. Since line break rules manipulate the lags <em>before</em> the token, we need to change <code>lag_newlines</code> at the token “‘{’”.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">pd<span class="op">$</span>child[[<span class="dv">1</span>]]<span class="op">$</span>child[[<span class="dv">3</span>]]<span class="op">$</span>child[[<span class="dv">5</span>]]</a></code></pre></div>
-<pre><code>## # A tibble: 3 x 16
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">pd<span class="op">$</span>child[[<span class="dv">1</span>]]<span class="op">$</span>child[[<span class="dv">3</span>]]<span class="op">$</span>child[[<span class="dv">5</span>]]</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 18
 ##      id pos_id line1  col1 line2  col2 parent token terminal text  short
 ##   &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt; &lt;chr&gt;
-## 1     9     11     1    24     1    24     19 '{'   TRUE     "{"   "{"  
-## 2    16     12     1    26     1    30     19 expr  FALSE    ""    ""   
-## 3    15     18     1    32     1    32     19 '}'   TRUE     "}"   "}"  
-## # … with 5 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   stylerignore &lt;lgl&gt;, internal &lt;lgl&gt;, child &lt;named list&gt;</code></pre>
+## 1     9     11     1    24     1    24     19 '{'   TRUE     {     {    
+## 2    16     12     1    26     1    30     19 expr  FALSE    x + 1 x + 1
+## 3    15     18     1    32     1    32     19 '}'   TRUE     }     }    
+## # … with 7 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
+## #   stylerignore &lt;lgl&gt;, is_cached &lt;lgl&gt;, block &lt;lgl&gt;, internal &lt;lgl&gt;,
+## #   child &lt;named list&gt;</code></pre>
 <p>Remember what we said above: A transformer takes a flat parse table as input, updates it and returns it. So here it’s actually simple:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">set_line_break_before_curly_opening &lt;-<span class="st"> </span><span class="cf">function</span>(pd_flat) {</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">  op &lt;-<span class="st"> </span>pd_flat<span class="op">$</span>token <span class="op">%in%</span><span class="st"> "'{'"</span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">  pd_flat<span class="op">$</span>lag_newlines[op] &lt;-<span class="st"> </span>1L</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">  pd_flat</a>
-<a class="sourceLine" id="cb25-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">set_line_break_before_curly_opening &lt;-<span class="st"> </span><span class="cf">function</span>(pd_flat) {</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">  op &lt;-<span class="st"> </span>pd_flat<span class="op">$</span>token <span class="op">%in%</span><span class="st"> "'{'"</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">  pd_flat<span class="op">$</span>lag_newlines[op] &lt;-<span class="st"> </span>1L</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">  pd_flat</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">}</a></code></pre></div>
 <p>Almost done. Now, the last thing we need to do is to use <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> to create our style guide consisting of that function.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">set_line_break_before_curly_opening_style &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">  <span class="kw"><a href="../reference/create_style_guide.html">create_style_guide</a></span>(</a>
-<a class="sourceLine" id="cb26-3" data-line-number="3">    <span class="dt">line_break =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">lst</a></span>(set_line_break_before_curly_opening),</a>
-<a class="sourceLine" id="cb26-4" data-line-number="4">    <span class="dt">style_guide_name =</span> <span class="st">"styler::set_line_break_before_curly_opening_style@https://github.com/r-lib/styler"</span>,</a>
-<a class="sourceLine" id="cb26-5" data-line-number="5">    <span class="dt">style_guide_version =</span> <span class="kw"><a href="https://rdrr.io/r/base/dcf.html">read.dcf</a></span>(here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"DESCRIPTION"</span>))[, <span class="st">"Version"</span>]</a>
-<a class="sourceLine" id="cb26-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb26-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">set_line_break_before_curly_opening_style &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="kw"><a href="../reference/create_style_guide.html">create_style_guide</a></span>(</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="dt">line_break =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">lst</a></span>(set_line_break_before_curly_opening),</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">    <span class="dt">style_guide_name =</span> <span class="st">"styler::set_line_break_before_curly_opening_style@https://github.com/r-lib/styler"</span>,</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">    <span class="dt">style_guide_version =</span> <span class="kw"><a href="https://rdrr.io/r/base/dcf.html">read.dcf</a></span>(here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"DESCRIPTION"</span>))[, <span class="st">"Version"</span>]</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6">  )</a>
+<a class="sourceLine" id="cb28-7" data-line-number="7">}</a></code></pre></div>
 <p>Now you can style your string according to it.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="../reference/style_text.html">style_text</a></span>(code, <span class="dt">style =</span> set_line_break_before_curly_opening_style)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw"><a href="../reference/style_text.html">style_text</a></span>(code, <span class="dt">style =</span> set_line_break_before_curly_opening_style)</a></code></pre></div>
 <pre><code>## add_one &lt;- function(x)
 ## { x + 1 }</code></pre>
 <p>Note that when removing line breaks, always take care of comments, since you don’t want:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="co"># comments should remain EOL</span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">{ </a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">  <span class="dv">3</span></a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="co"># comments should remain EOL</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">{ </a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">  <span class="dv">3</span></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">}</a></code></pre></div>
 <p>To become:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="co"># comments should remain EOL { </span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">  <span class="dv">3</span></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="er">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="co"># comments should remain EOL { </span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">  <span class="dv">3</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="er">}</span></a></code></pre></div>
 <p>The easiest way of taking care of that is not applying the rule if there is a comment before the token of interest, which can be checked for within your transformer function. The transformer function from the tidyverse style that removes line breaks before the round closing bracket that comes after a curly brace looks as follows:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">styler<span class="op">:::</span>remove_line_break_before_round_closing_after_curly</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">styler<span class="op">:::</span>remove_line_break_before_round_closing_after_curly</a></code></pre></div>
 <pre><code>## function (pd) 
 ## {
 ##     round_after_curly &lt;- pd$token == "')'" &amp; (pd$token_before == 
@@ -302,7 +308,7 @@
 ##     pd$lag_newlines[round_after_curly] &lt;- 0L
 ##     pd
 ## }
-## &lt;bytecode: 0x5f5a9c0&gt;
+## &lt;bytecode: 0x6e61e48&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>With our example function <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to worry about that as we are only adding line breaks, but we don’t remove them.</p>
 </div>

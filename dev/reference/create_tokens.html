@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9001</span>
       </span>
     </div>
 
@@ -91,6 +91,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -156,7 +159,9 @@
   <span class='kw'>indents</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>terminal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>child</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stylerignore</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>stylerignore</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>block</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>is_cached</span> <span class='kw'>=</span> <span class='fl'>NA</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -211,6 +216,19 @@ not.</p></td>
     <tr>
       <th>child</th>
       <td><p>The children of the tokens.</p></td>
+    </tr>
+    <tr>
+      <th>stylerignore</th>
+      <td><p>Boolean to indicate if the line should be ignored by
+styler.</p></td>
+    </tr>
+    <tr>
+      <th>block</th>
+      <td><p>The block (of caching) to which the token belongs. An integer.</p></td>
+    </tr>
+    <tr>
+      <th>is_cached</th>
+      <td><p>Whether the token is cached already.</p></td>
     </tr>
     </table>
 

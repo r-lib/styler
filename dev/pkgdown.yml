@@ -2,6 +2,7 @@ pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  caching: caching.html
   customizing_styler: customizing_styler.html
   detect-alignment: detect-alignment.html
   data_structures: gsoc_proposal/data_structures.html

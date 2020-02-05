@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the start right — find_start_line • styler</title>
+<title>Cache text — cache_by_expression • styler</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Get the start right — find_start_line" />
-<meta property="og:description" content="On what line does the first token occur?" />
+<meta property="og:title" content="Cache text — cache_by_expression" />
+<meta property="og:description" content="Splits text into expressions and adds these to the cache. Note that
+comments are not cached because caching them is too expensive." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9001</span>
       </span>
     </div>
 
@@ -91,6 +92,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -135,36 +139,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the start right</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/nest.R'><code>R/nest.R</code></a></small>
-    <div class="hidden name"><code>find_start_line.Rd</code></div>
+    <h1>Cache text</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/utils-cache.R'><code>R/utils-cache.R</code></a></small>
+    <div class="hidden name"><code>cache_by_expression.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>On what line does the first token occur?</p>
+    <p>Splits <code>text</code> into expressions and adds these to the cache. Note that
+comments are <strong>not</strong> cached because caching them is too expensive.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>find_start_line</span>(<span class='no'>pd_nested</span>)</pre>
+    <pre class="usage"><span class='fu'>cache_by_expression</span>(<span class='no'>text</span>, <span class='no'>transformers</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pd_nested</th>
-      <td><p>A nested parse table.</p></td>
+      <th>text</th>
+      <td><p>A character vector with one or more expressions.</p></td>
+    </tr>
+    <tr>
+      <th>transformers</th>
+      <td><p>The transformers.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The line number on which the first token occurs.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

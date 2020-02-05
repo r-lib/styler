@@ -36,7 +36,8 @@
 
 
 <meta property="og:title" content="Add information about previous / next token to each terminal — add_token_terminal" />
-<meta property="og:description" content="Add information about previous / next token to each terminal" />
+<meta property="og:description" content="Add information about previous / next token to each terminal
+Initialise variables related to caching" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.0.9001</span>
       </span>
     </div>
 
@@ -91,6 +92,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -142,11 +146,14 @@
 
     <div class="ref-description">
     <p>Add information about previous / next token to each terminal</p>
+<p>Initialise variables related to caching</p>
     </div>
 
     <pre class="usage"><span class='fu'>add_terminal_token_after</span>(<span class='no'>pd_flat</span>)
 
 <span class='fu'>add_terminal_token_before</span>(<span class='no'>pd_flat</span>)
+
+<span class='fu'>add_attributes_caching</span>(<span class='no'>pd_flat</span>, <span class='no'>transformers</span>)
 
 <span class='fu'>remove_terminal_token_before_and_after</span>(<span class='no'>pd_flat</span>)</pre>
 
@@ -157,12 +164,18 @@
       <th>pd_flat</th>
       <td><p>A flat parse table.</p></td>
     </tr>
+    <tr>
+      <th>transformers</th>
+      <td><p>A list with transformer functions, used to check if
+the code is cached.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 <ul>
+<li><p><code>add_attributes_caching</code>: Initializes <code>newlines</code> and <code>lag_newlines</code>.</p></li>
 <li><p><code>remove_terminal_token_before_and_after</code>: Removes column <code>terimnal_token_before</code>. Might
 be used to prevent the use of invalidated information, e.g. if tokens were
 added to the nested parse table.</p></li>
