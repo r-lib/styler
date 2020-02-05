@@ -63,7 +63,7 @@ add_cache_block <- function(pd_nested) {
 #' level token. For that
 #' reason, the nested parse table can, at the rows where these expressions are
 #' located, be shallow, i.e. it does not have to contain a child, because it
-#' will neither be transformed nor serialized anytime. This function drop all
+#' will neither be transformed nor serialized anytime. This function drops all
 #' associated tokens except the top-level token for such expressions, which will
 #' result in large speed improvements in [compute_parse_data_nested()] because
 #' nesting is expensive and will not be done for cached expressions.

@@ -79,19 +79,18 @@ cache_find_block <- function(pd) {
 #' @return The line number on which the first token occurs.
 #' @keywords internal
 find_blank_lines_to_next_expr <- function(pd_nested) {
-  # TODO think about naming: prefix with cache here also or just ui functions?
   pd_nested$line1 - lag(pd_nested$line2, default = 0)
 }
 
 #' Number of lines between cache blocks
 #'
 #' This is relevant when putting expressions together into a block and preserve
-#' blank lines between them.
+#' blank lines between them. Note that because code does not need to start on
+#' line 1, the first element of the output is the number of lines until the
+#' first block.
 #' @param pd A top level nest.
 find_blank_lines_to_next_block <- function(pd) {
   block_boundary <- pd$block != lag(pd$block, default = 0)
-  # TODO everywhere: block is ambiguous. use cache block since we also have
-  # block_id and other things in other places
   find_blank_lines_to_next_expr(pd)[block_boundary]
 }
 

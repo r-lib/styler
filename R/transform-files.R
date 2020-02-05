@@ -92,8 +92,6 @@ make_transformer <- function(transformers,
     }
 
     if (!use_cache) {
-      # TODO just info: if the whole expression is in the cache, don't even
-      # compute the parse data nested
       transformed_code <- text %>%
         parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
         when(

@@ -27,7 +27,7 @@ Cached expressiond don't need to be transformed with \code{transformers} in
 level token. For that
 reason, the nested parse table can, at the rows where these expressions are
 located, be shallow, i.e. it does not have to contain a child, because it
-will neither be transformed nor serialized anytime. This function drop all
+will neither be transformed nor serialized anytime. This function drops all
 associated tokens except the top-level token for such expressions, which will
 result in large speed improvements in \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}} because
 nesting is expensive and will not be done for cached expressions.
