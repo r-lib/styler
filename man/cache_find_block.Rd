@@ -13,7 +13,7 @@ cache_find_block(pd)
 Every expression is an expression itself, Expressions on same line are in
 same block.
 Multiple expressions can sit on one row, e.g. in line comment and commands
-seperated with ";". This creates a problem when processing each expression
+separated with ";". This creates a problem when processing each expression
 separately because when putting them together, we need complicated handling
 of line breaks between them, as it is not apriory clear that there is a line
 break separating them. To avoid this, we put top level expressions that sit

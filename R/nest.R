@@ -47,7 +47,7 @@ add_cache_block <- function(pd_nested) {
 #' Drop all children of a top level expression that are cached
 #'
 #' Note that we do cache top-level comments. Because package code has a lot of
-#' roxygen comments and each of them is a top level expresion, so checking is
+#' roxygen comments and each of them is a top level expresion, checking is
 #' very expensive.
 #' @param pd A top-level nest.
 #' @details
@@ -62,8 +62,8 @@ add_cache_block <- function(pd_nested) {
 #' [parse_transform_serialize_r_block()], we simply return `text` for the top
 #' level token. For that
 #' reason, the nested parse table can, at the rows where these expressions are
-#' located, be shallow, i.e. it does not have to contain a children, because it
-#' will neighter be transformerd nor serialized anytime. This function drop all
+#' located, be shallow, i.e. it does not have to contain a child, because it
+#' will neither be transformed nor serialized anytime. This function drop all
 #' associated tokens except the top-level token for such expressions, which will
 #' result in large speed improvements in [compute_parse_data_nested()] because
 #' nesting is expensive and will not be done for cached expressions.

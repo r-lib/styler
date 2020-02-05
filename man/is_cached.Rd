@@ -13,6 +13,6 @@ is_cached(text, transformers, cache_dir = cache_dir_default())
 look for a cached value.}
 }
 \description{
-This boilds down to check if the hash exists at the caching dir as a file.
+This boils down to check if the hash exists at the caching dir as a file.
 }
 \keyword{internal}

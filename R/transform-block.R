@@ -36,7 +36,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
 #' Every expression is an expression itself, Expressions on same line are in
 #' same block.
 #' Multiple expressions can sit on one row, e.g. in line comment and commands
-#' seperated with ";". This creates a problem when processing each expression
+#' separated with ";". This creates a problem when processing each expression
 #' separately because when putting them together, we need complicated handling
 #' of line breaks between them, as it is not apriory clear that there is a line
 #' break separating them. To avoid this, we put top level expressions that sit
@@ -90,7 +90,7 @@ find_blank_lines_to_next_expr <- function(pd_nested) {
 #' @param pd A top level nest.
 find_blank_lines_to_next_block <- function(pd) {
   block_boundary <- pd$block != lag(pd$block, default = 0)
-  # TODO everywhere: block is not ambiguous. use cache block since we also have
+  # TODO everywhere: block is ambiguous. use cache block since we also have
   # block_id and other things in other places
   find_blank_lines_to_next_expr(pd)[block_boundary]
 }

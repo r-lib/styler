@@ -84,10 +84,6 @@ initialize_indent <- function(pd_flat) {
   pd_flat
 }
 
-
-
-
-
 #' @importFrom rlang abort
 #' @describeIn initialize_attributes validates the parse data.
 #' @keywords internal
