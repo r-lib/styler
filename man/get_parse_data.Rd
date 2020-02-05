@@ -15,6 +15,8 @@ get_parse_data(text, include_text = TRUE, ...)
 }
 \description{
 Wrapper around \code{utils::getParseData(parse(text = text))} that returns a flat
-parse table.
+parse table. When caching information should be added, make sure that
+the cache is activated with \code{cache_activate()} and both \code{transformers} and
+\code{cache_dir} are non-\code{NULL}.
 }
 \keyword{internal}

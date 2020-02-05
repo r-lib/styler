@@ -1,86 +1,86 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--expr:  [0/0] {1}                                   
+ ¦--expr: if(TR [0/0] {1}                              
  ¦   ¦--IF: if [0/0] {2}                               
  ¦   ¦--'(': ( [0/0] {3}                               
- ¦   ¦--expr:  [0/0] {5}                               
+ ¦   ¦--expr: TRUE [0/0] {5}                           
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {4}                  
  ¦   ¦--')': ) [0/0] {6}                               
- ¦   ¦--expr:  [0/1] {8}                               
+ ¦   ¦--expr: NULL [0/1] {8}                           
  ¦   ¦   °--NULL_CONST: NULL [0/0] {7}                 
  ¦   ¦--ELSE: else [0/1] {9}                           
- ¦   °--expr:  [0/0] {11}                              
+ ¦   °--expr: NULL [0/0] {11}                          
  ¦       °--NULL_CONST: NULL [0/0] {10}                
- ¦--expr:  [2/1] {12}                                  
+ ¦--expr: if(TR [2/1] {12}                             
  ¦   ¦--IF: if [0/0] {13}                              
  ¦   ¦--'(': ( [0/0] {14}                              
- ¦   ¦--expr:  [0/0] {16}                              
+ ¦   ¦--expr: TRUE [0/0] {16}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {15}                 
  ¦   ¦--')': ) [0/0] {17}                              
- ¦   ¦--expr:  [0/1] {19}                              
+ ¦   ¦--expr: NULL [0/1] {19}                          
  ¦   ¦   °--NULL_CONST: NULL [0/0] {18}                
  ¦   ¦--ELSE: else [0/1] {20}                          
- ¦   °--expr:  [0/0] {22}                              
+ ¦   °--expr: NULL [0/0] {22}                          
  ¦       °--NULL_CONST: NULL [0/0] {21}                
  ¦--COMMENT: # com [0/0] {23}                          
- ¦--expr:  [3/0] {24}                                  
+ ¦--expr: if(TR [3/0] {24}                             
  ¦   ¦--IF: if [0/0] {25}                              
  ¦   ¦--'(': ( [0/0] {26}                              
- ¦   ¦--expr:  [0/0] {28}                              
+ ¦   ¦--expr: TRUE [0/0] {28}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {27}                 
  ¦   ¦--')': ) [0/0] {29}                              
- ¦   ¦--expr:  [0/1] {31}                              
+ ¦   ¦--expr: NULL [0/1] {31}                          
  ¦   ¦   °--NULL_CONST: NULL [0/0] {30}                
  ¦   ¦--ELSE: else [0/1] {32}                          
  ¦   ¦--COMMENT: # com [0/1] {33}                      
- ¦   °--expr:  [1/0] {35}                              
+ ¦   °--expr: NULL [1/0] {35}                          
  ¦       °--NULL_CONST: NULL [0/0] {34}                
  ¦--COMMENT: # if( [2/0] {36}                          
  ¦--COMMENT: #  el [1/0] {37}                          
- ¦--expr:  [2/0] {38}                                  
+ ¦--expr: if(TR [2/0] {38}                             
  ¦   ¦--IF: if [0/0] {39}                              
  ¦   ¦--'(': ( [0/0] {40}                              
- ¦   ¦--expr:  [0/0] {42}                              
+ ¦   ¦--expr: TRUE [0/0] {42}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {41}                 
  ¦   ¦--')': ) [0/1] {43}                              
  ¦   ¦--COMMENT: # com [0/0] {44}                      
- ¦   ¦--expr:  [1/1] {46}                              
+ ¦   ¦--expr: NULL [1/1] {46}                          
  ¦   ¦   °--NULL_CONST: NULL [0/0] {45}                
  ¦   ¦--ELSE: else [0/1] {47}                          
- ¦   °--expr:  [0/0] {49}                              
+ ¦   °--expr: NULL [0/0] {49}                          
  ¦       °--NULL_CONST: NULL [0/0] {48}                
- ¦--expr:  [2/0] {50}                                  
+ ¦--expr: if(TR [2/0] {50}                             
  ¦   ¦--IF: if [0/0] {51}                              
  ¦   ¦--'(': ( [0/0] {52}                              
- ¦   ¦--expr:  [0/1] {54}                              
+ ¦   ¦--expr: TRUE [0/1] {54}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {53}                 
  ¦   ¦--COMMENT: # com [0/0] {55}                      
  ¦   ¦--')': ) [1/0] {56}                              
- ¦   ¦--expr:  [0/1] {58}                              
+ ¦   ¦--expr: NULL [0/1] {58}                          
  ¦   ¦   °--NULL_CONST: NULL [0/0] {57}                
  ¦   ¦--ELSE: else [0/1] {59}                          
- ¦   °--expr:  [0/0] {61}                              
+ ¦   °--expr: NULL [0/0] {61}                          
  ¦       °--NULL_CONST: NULL [0/0] {60}                
- ¦--expr:  [2/0] {62}                                  
+ ¦--expr: if( # [2/0] {62}                             
  ¦   ¦--IF: if [0/0] {63}                              
  ¦   ¦--'(': ( [0/1] {64}                              
  ¦   ¦--COMMENT: # com [0/0] {65}                      
- ¦   ¦--expr:  [1/0] {67}                              
+ ¦   ¦--expr: TRUE [1/0] {67}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {66}                 
  ¦   ¦--')': ) [0/0] {68}                              
- ¦   ¦--expr:  [0/1] {70}                              
+ ¦   ¦--expr: NULL [0/1] {70}                          
  ¦   ¦   °--NULL_CONST: NULL [0/0] {69}                
  ¦   ¦--ELSE: else [0/1] {71}                          
- ¦   °--expr:  [0/0] {73}                              
+ ¦   °--expr: NULL [0/0] {73}                          
  ¦       °--NULL_CONST: NULL [0/0] {72}                
- °--expr:  [2/0] {74}                                  
+ °--expr: if #  [2/0] {74}                             
      ¦--IF: if [0/1] {75}                              
      ¦--COMMENT: # com [0/0] {76}                      
      ¦--'(': ( [1/0] {77}                              
-     ¦--expr:  [0/0] {79}                              
+     ¦--expr: TRUE [0/0] {79}                          
      ¦   °--NUM_CONST: TRUE [0/0] {78}                 
      ¦--')': ) [0/0] {80}                              
-     ¦--expr:  [0/1] {82}                              
+     ¦--expr: NULL [0/1] {82}                          
      ¦   °--NULL_CONST: NULL [0/0] {81}                
      ¦--ELSE: else [0/1] {83}                          
-     °--expr:  [0/0] {85}                              
+     °--expr: NULL [0/0] {85}                          
          °--NULL_CONST: NULL [0/0] {84}                

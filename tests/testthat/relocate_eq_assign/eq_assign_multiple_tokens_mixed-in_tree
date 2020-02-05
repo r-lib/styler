@@ -1,25 +1,25 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- °--equal_assign:  [0/0] {1}                           
-     ¦--expr:  [0/1] {3}                               
+ °--equal_assign: a = b [0/0] {1}                      
+     ¦--expr: a [0/1] {3}                              
      ¦   °--SYMBOL: a [0/0] {2}                        
      ¦--EQ_ASSIGN: = [0/1] {4}                         
-     ¦--expr:  [0/1] {7}                               
+     ¦--expr: b [0/1] {7}                              
      ¦   °--SYMBOL: b [0/0] {6}                        
      ¦--EQ_ASSIGN: = [0/1] {8}                         
-     ¦--expr:  [0/1] {11}                              
+     ¦--expr: c [0/1] {11}                             
      ¦   °--SYMBOL: c [0/0] {10}                       
      ¦--EQ_ASSIGN: = [0/1] {12}                        
-     ¦--expr:  [0/1] {15}                              
+     ¦--expr: d [0/1] {15}                             
      ¦   °--SYMBOL: d [0/0] {14}                       
      ¦--EQ_ASSIGN: = [0/1] {16}                        
-     ¦--expr:  [0/1] {19}                              
+     ¦--expr: e [0/1] {19}                             
      ¦   °--SYMBOL: e [0/0] {18}                       
      ¦--EQ_ASSIGN: = [0/1] {20}                        
-     ¦--expr:  [0/7] {23}                              
+     ¦--expr: f [0/7] {23}                             
      ¦   °--SYMBOL: f [0/0] {22}                       
      ¦--EQ_ASSIGN: = [0/1] {24}                        
-     ¦--expr:  [0/1] {27}                              
+     ¦--expr: g [0/1] {27}                             
      ¦   °--SYMBOL: g [0/0] {26}                       
      ¦--LEFT_ASSIGN: <- [0/1] {28}                     
-     °--expr:  [0/0] {30}                              
+     °--expr: 4 [0/0] {30}                             
          °--NUM_CONST: 4 [0/0] {29}                    

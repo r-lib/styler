@@ -1,54 +1,54 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: # = r [0/0] {1}                           
- ¦--equal_assign:  [1/0] {2}                           
- ¦   ¦--expr:  [0/1] {4}                               
+ ¦--equal_assign: a = 3 [1/0] {2}                      
+ ¦   ¦--expr: a [0/1] {4}                              
  ¦   ¦   °--SYMBOL: a [0/0] {3}                        
  ¦   ¦--EQ_ASSIGN: = [0/1] {5}                         
- ¦   °--expr:  [0/0] {7}                               
+ ¦   °--expr: 3 [0/0] {7}                              
  ¦       °--NUM_CONST: 3 [0/0] {6}                     
- ¦--expr:  [1/0] {8}                                   
- ¦   ¦--expr:  [0/0] {10}                              
+ ¦--expr: data_ [1/0] {8}                              
+ ¦   ¦--expr: data_ [0/0] {10}                         
  ¦   ¦   °--SYMBOL_FUNCTION_CALL: data_ [0/0] {9}      
  ¦   ¦--'(': ( [0/0] {11}                              
  ¦   ¦--SYMBOL_SUB: a [0/1] {12}                       
  ¦   ¦--EQ_SUB: = [0/1] {13}                           
- ¦   ¦--expr:  [0/0] {15}                              
+ ¦   ¦--expr: 3 [0/0] {15}                             
  ¦   ¦   °--NUM_CONST: 3 [0/0] {14}                    
  ¦   °--')': ) [0/0] {16}                              
  ¦--COMMENT: # sem [2/0] {17}                          
- ¦--expr:  [1/0] {19}                                  
+ ¦--expr: a [1/0] {19}                                 
  ¦   °--SYMBOL: a [0/0] {18}                           
  ¦--';': ; [0/1] {20}                                  
- ¦--expr:  [0/1] {22}                                  
+ ¦--expr: b [0/1] {22}                                 
  ¦   °--SYMBOL: b [0/0] {21}                           
  ¦--';': ; [0/0] {23}                                  
- ¦--expr:  [0/0] {25}                                  
+ ¦--expr: c [0/0] {25}                                 
  ¦   °--SYMBOL: c [0/0] {24}                           
  ¦--';': ; [0/0] {26}                                  
- ¦--expr:  [0/0] {28}                                  
+ ¦--expr: d [0/0] {28}                                 
  ¦   °--SYMBOL: d [0/0] {27}                           
  ¦--COMMENT: # quo [3/0] {29}                          
- ¦--expr:  [1/0] {31}                                  
+ ¦--expr: "text [1/0] {31}                             
  ¦   °--STR_CONST: "text [0/0] {30}                    
- ¦--expr:  [1/0] {33}                                  
+ ¦--expr: 'text [1/0] {33}                             
  ¦   °--STR_CONST: 'text [0/0] {32}                    
  ¦--COMMENT: # add [4/0] {34}                          
- ¦--expr:  [1/0] {35}                                  
- ¦   ¦--expr:  [0/1] {38}                              
+ ¦--expr: a %>% [1/0] {35}                             
+ ¦   ¦--expr: a [0/1] {38}                             
  ¦   ¦   °--SYMBOL: a [0/0] {37}                       
  ¦   ¦--SPECIAL-PIPE: %>% [0/2] {39}                   
- ¦   ¦--expr:  [1/1] {41}                              
+ ¦   ¦--expr: b [1/1] {41}                             
  ¦   ¦   °--SYMBOL: b [0/0] {40}                       
  ¦   ¦--SPECIAL-PIPE: %>% [0/2] {42}                   
- ¦   °--expr:  [1/0] {44}                              
+ ¦   °--expr: c [1/0] {44}                             
  ¦       °--SYMBOL: c [0/0] {43}                       
  ¦--COMMENT: # add [2/0] {45}                          
- °--expr:  [1/0] {46}                                  
-     ¦--expr:  [0/1] {49}                              
+ °--expr: a %>% [1/0] {46}                             
+     ¦--expr: a [0/1] {49}                             
      ¦   °--SYMBOL: a [0/0] {48}                       
      ¦--SPECIAL-PIPE: %>% [0/1] {50}                   
-     ¦--expr:  [0/1] {52}                              
+     ¦--expr: b [0/1] {52}                             
      ¦   °--SYMBOL: b [0/0] {51}                       
      ¦--SPECIAL-PIPE: %>% [0/2] {53}                   
-     °--expr:  [1/0] {55}                              
+     °--expr: c [1/0] {55}                             
          °--SYMBOL: c [0/0] {54}                       

@@ -20,11 +20,11 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' un [1/0] {19}                                             
  ¦--COMMENT: #' @f [1/0] {20}                                             
  ¦--COMMENT: #' @e [1/0] {21}                                             
- °--expr:  [1/0] {22}                                                     
-     ¦--expr:  [0/1] {24}                                                 
+ °--expr: style [1/0] {22}                                                
+     ¦--expr: style [0/1] {24}                                            
      ¦   °--SYMBOL: style [0/0] {23}                                      
      ¦--LEFT_ASSIGN: <- [0/1] {25}                                        
-     °--expr:  [0/0] {26}                                                 
+     °--expr: funct [0/0] {26}                                            
          ¦--FUNCTION: funct [0/0] {27}                                    
          ¦--'(': ( [0/0] {28}                                             
          ¦--SYMBOL_FORMALS: path [0/0] {29}                               
@@ -33,65 +33,66 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
          ¦--',': , [0/23] {32}                                            
          ¦--SYMBOL_FORMALS: style [1/1] {33}                              
          ¦--EQ_FORMALS: = [0/1] {34}                                      
-         ¦--expr:  [0/0] {36}                                             
+         ¦--expr: tidyv [0/0] {36}                                        
          ¦   °--SYMBOL: tidyv [0/0] {35}                                  
          ¦--',': , [0/23] {37}                                            
          ¦--SYMBOL_FORMALS: trans [1/1] {38}                              
          ¦--EQ_FORMALS: = [0/1] {39}                                      
-         ¦--expr:  [0/0] {40}                                             
-         ¦   ¦--expr:  [0/0] {42}                                         
+         ¦--expr: style [0/0] {40}                                        
+         ¦   ¦--expr: style [0/0] {42}                                    
          ¦   ¦   °--SYMBOL_FUNCTION_CALL: style [0/0] {41}                
          ¦   ¦--'(': ( [0/0] {43}                                         
-         ¦   ¦--expr:  [0/0] {45}                                         
+         ¦   ¦--expr: ... [0/0] {45}                                      
          ¦   ¦   °--SYMBOL: ... [0/0] {44}                                
          ¦   °--')': ) [0/0] {46}                                         
          ¦--',': , [0/23] {47}                                            
          ¦--SYMBOL_FORMALS: inclu [1/1] {48}                              
          ¦--EQ_FORMALS: = [0/1] {49}                                      
-         ¦--expr:  [0/0] {51}                                             
+         ¦--expr: TRUE [0/0] {51}                                         
          ¦   °--NUM_CONST: TRUE [0/0] {50}                                
          ¦--')': ) [0/1] {52}                                             
-         °--expr:  [0/0] {53}                                             
+         °--expr: {
+  c [0/0] {53}                                       
              ¦--'{': { [0/2] {54}                                         
-             ¦--expr:  [1/2] {55}                                         
-             ¦   ¦--expr:  [0/0] {57}                                     
+             ¦--expr: chang [1/2] {55}                                    
+             ¦   ¦--expr: chang [0/0] {57}                                
              ¦   ¦   °--SYMBOL: chang [0/0] {56}                          
              ¦   ¦--LEFT_ASSIGN: <- [0/1] {58}                            
-             ¦   °--expr:  [0/0] {59}                                     
-             ¦       ¦--expr:  [0/0] {60}                                 
+             ¦   °--expr: withr [0/0] {59}                                
+             ¦       ¦--expr: withr [0/0] {60}                            
              ¦       ¦   ¦--SYMBOL_PACKAGE: withr [0/0] {61}              
              ¦       ¦   ¦--NS_GET: :: [0/0] {62}                         
              ¦       ¦   °--SYMBOL_FUNCTION_CALL: with_ [0/0] {63}        
              ¦       ¦--'(': ( [0/4] {64}                                 
-             ¦       ¦--expr:  [1/0] {65}                                 
-             ¦       ¦   ¦--expr:  [0/0] {67}                             
+             ¦       ¦--expr: dirna [1/0] {65}                            
+             ¦       ¦   ¦--expr: dirna [0/0] {67}                        
              ¦       ¦   ¦   °--SYMBOL_FUNCTION_CALL: dirna [0/0] {66}    
              ¦       ¦   ¦--'(': ( [0/0] {68}                             
-             ¦       ¦   ¦--expr:  [0/12] {70}                            
+             ¦       ¦   ¦--expr: path [0/12] {70}                        
              ¦       ¦   ¦   °--SYMBOL: path [0/0] {69}                   
              ¦       ¦   °--')': ) [1/0] {71}                             
              ¦       ¦--',': , [0/4] {72}                                 
-             ¦       ¦--expr:  [1/2] {73}                                 
-             ¦       ¦   ¦--expr:  [0/0] {75}                             
+             ¦       ¦--expr: trans [1/2] {73}                            
+             ¦       ¦   ¦--expr: trans [0/0] {75}                        
              ¦       ¦   ¦   °--SYMBOL_FUNCTION_CALL: trans [0/0] {74}    
              ¦       ¦   ¦--'(': ( [0/0] {76}                             
-             ¦       ¦   ¦--expr:  [0/0] {77}                             
-             ¦       ¦   ¦   ¦--expr:  [0/0] {79}                         
+             ¦       ¦   ¦--expr: basen [0/0] {77}                        
+             ¦       ¦   ¦   ¦--expr: basen [0/0] {79}                    
              ¦       ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: basen [0/0] {78}
              ¦       ¦   ¦   ¦--'(': ( [0/0] {80}                         
-             ¦       ¦   ¦   ¦--expr:  [0/0] {82}                         
+             ¦       ¦   ¦   ¦--expr: path [0/0] {82}                     
              ¦       ¦   ¦   ¦   °--SYMBOL: path [0/0] {81}               
              ¦       ¦   ¦   °--')': ) [0/0] {83}                         
              ¦       ¦   ¦--',': , [0/1] {84}                             
-             ¦       ¦   ¦--expr:  [0/0] {86}                             
+             ¦       ¦   ¦--expr: trans [0/0] {86}                        
              ¦       ¦   ¦   °--SYMBOL: trans [0/0] {85}                  
              ¦       ¦   °--')': ) [0/0] {87}                             
              ¦       °--')': ) [1/0] {88}                                 
-             ¦--expr:  [1/0] {89}                                         
-             ¦   ¦--expr:  [0/0] {91}                                     
+             ¦--expr: invis [1/0] {89}                                    
+             ¦   ¦--expr: invis [0/0] {91}                                
              ¦   ¦   °--SYMBOL_FUNCTION_CALL: invis [0/0] {90}            
              ¦   ¦--'(': ( [0/0] {92}                                     
-             ¦   ¦--expr:  [0/0] {94}                                     
+             ¦   ¦--expr: chang [0/0] {94}                                
              ¦   ¦   °--SYMBOL: chang [0/0] {93}                          
              ¦   °--')': ) [0/0] {95}                                     
              °--'}': } [1/0] {96}                                         

@@ -9,8 +9,8 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' } [1/0] {8}                            
  ¦--COMMENT: #' [1/0] {9}                              
  ¦--COMMENT: #' @e [1/0] {10}                          
- °--expr:  [1/0] {11}                                  
-     ¦--expr:  [0/0] {13}                              
+ °--expr: g() [1/0] {11}                               
+     ¦--expr: g [0/0] {13}                             
      ¦   °--SYMBOL_FUNCTION_CALL: g [0/0] {12}         
      ¦--'(': ( [0/0] {14}                              
      °--')': ) [0/0] {15}                              

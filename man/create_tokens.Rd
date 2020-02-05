@@ -16,7 +16,9 @@ create_tokens(
   indents = 0,
   terminal = TRUE,
   child = NULL,
-  stylerignore = FALSE
+  stylerignore = FALSE,
+  block = NA,
+  is_cached = NA
 )
 }
 \arguments{
@@ -47,6 +49,13 @@ corresponding to the tokens.}
 not.}
 
 \item{child}{The children of the tokens.}
+
+\item{stylerignore}{Boolean to indicate if the line should be ignored by
+styler.}
+
+\item{block}{The block (of caching) to which the token belongs. An integer.}
+
+\item{is_cached}{Whether the token is cached already.}
 }
 \description{
 Creates a terminal token represented as (a row of) a parse table.

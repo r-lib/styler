@@ -20,6 +20,8 @@ default_style_guide_attributes <- function(pd_flat) {
     validate_parse_data()
 }
 
+
+
 #' Initialize attributes
 #'
 #' @name initialize_attributes
