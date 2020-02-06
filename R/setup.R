@@ -40,20 +40,19 @@ use_precommit <- function(force = FALSE,
       ))
     }
     install_repo()
-    use_precommit_config(force)
-    autoupdate()
+    use_precommit_config(force, path_root)
+    autoupdate(path_root)
     if (open) {
-      open_config()
+      open_config(path_root)
     }
   })
 }
 
-use_precommit_config <- function(force) {
+use_precommit_config <- function(force, path_root = here::here()) {
   name_origin <- "pre-commit-config.yaml"
   escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
   name_target <- ".pre-commit-config.yaml"
   # workaround for RCMD CHECK warning about hidden top-level directories.
-  path_root <- getwd()
   if (!fs::file_exists(fs::path(name_target)) | force) {
     fs::file_copy(
       system.file(name_origin, package = "precommit"),
@@ -68,7 +67,7 @@ use_precommit_config <- function(force) {
       ". Use `force = TRUE` to replace .pre-commit-config.yaml"
     ))
   }
-
+  
   if (is_package(".")) {
     usethis::write_union(".Rbuildignore", escaped_name_target)
   }
