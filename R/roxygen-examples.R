@@ -68,7 +68,6 @@ style_roxygen_example_snippet <- function(code_snippet,
     mask <- decomposed$mask
   }
   code_snippet <- post_parse_roxygen(code_snippet) %>%
-    paste0(collapse = "\n") %>%
     parse_transform_serialize_r(transformers, warn_empty = FALSE)
 
   if (is_dont) {
