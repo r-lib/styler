@@ -93,7 +93,7 @@ drop_cached_children <- function(pd) {
 
     pd_parent_first <- pd[order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal)),]
     pos_ids_to_keep <- pd_parent_first %>%
-      split(cumsum(pd_parent_first$parent == 0)) %>%
+      split(cumsum(pd_parent_first$parent < 1)) %>%
       map(find_pos_id_to_keep) %>%
       unlist() %>%
       unname()

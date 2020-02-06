@@ -89,3 +89,29 @@ capture.output(test_that("unactivated cache does not bring speedup", {
   second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
   expect_false(first["elapsed"] / 2 > second["elapsed"])
 }))
+
+
+capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
+
+  skip_if_not_installed("R.cache")
+  on.exit(clear_testthat_cache)
+  clear_testthat_cache()
+  activate_testthat_cache()
+  text <- c(
+    "1 + 1",
+    "# Comment",
+    "# another",
+    "NULL"
+    )
+  style_text(text)
+  text2 <- c(
+    "1 + 1",
+    "# x",
+    "# another",
+    "NULL"
+  )
+  expect_equal(
+    as.character(style_text(text2)),
+    text2
+  )
+}))
