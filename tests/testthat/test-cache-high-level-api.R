@@ -115,3 +115,34 @@ capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
     text2
   )
 }))
+
+
+capture.output(test_that("avoid removing roxygen mask (see commit messages in #584)", {
+
+  skip_if_not_installed("R.cache")
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  activate_testthat_cache()
+  text <- c(
+    "c(",
+    " 1, 2,",
+    "  x - 2",
+    ")"
+  )
+  style_text(text)
+  text2 <- c(
+    "#' Stuff",
+    "#'",
+    "#' @examples",
+    "#' c(",
+    "#'   1, 2,",
+    "#'   x - 2",
+    "#' )",
+    "#' x",
+    "NULL"
+  )
+  expect_equal(
+    as.character(style_text(text2)),
+    text2
+  )
+}))
