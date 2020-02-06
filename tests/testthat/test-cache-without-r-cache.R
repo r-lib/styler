@@ -1,8 +1,8 @@
 test_that("Cache management fails mostly when R.cache is not installed", {
   skip_if(rlang::is_installed("R.cache"))
   expect_error(cache_info(), "is needed when the caching feature is activated")
-  expect_error(cache_activate(), "is needed when the caching feature is activated")
-  expect_error(cache_clear(), "is needed when the caching feature is activated")
+  expect_error(activate_testthat_cache(), "is needed when the caching feature is activated")
+  expect_error(cache_clear("testthat"), "is needed when the caching feature is activated")
   expect_error(capture.output(cache_deactivate()), NA)
   expect_silent(assert_R.cache_installation())
   expect_error(

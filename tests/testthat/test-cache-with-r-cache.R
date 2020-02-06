@@ -38,7 +38,7 @@ capture.output(test_that("Cache management works when R.cache is installed", {
   )
   expect_false(cache_info(format = "tabular")$activated)
   expect_equal(getOption("styler.cache_location"), NULL)
-  expect_error(cache_clear(ask = FALSE), NA)
+  expect_error(cache_clear("testthat", ask = FALSE), NA)
 }))
 
 test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
