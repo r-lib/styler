@@ -116,13 +116,12 @@ drop_cached_children <- function(pd) {
 #'   top level expression, potentially cached.
 #' @keywords internal
 find_pos_id_to_keep <- function(pd) {
-    if (pd$is_cached[1]) {
-      idx_comment <- which(pd$token == "COMMENT")
-      pd$pos_id[unique(c(1, idx_comment))]
-    } else {
-      pd$pos_id
-    }
+  if (pd$is_cached[1]) {
+    pd$pos_id[c(TRUE, pd[-1L, "token"] == "COMMENT")]
+  } else {
+    pd$pos_id
   }
+}
 
 
 #' Turn off styling for parts of the code
