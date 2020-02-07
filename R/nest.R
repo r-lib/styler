@@ -39,7 +39,7 @@ add_cache_block <- function(pd_nested) {
   if (cache_is_activated()) {
     pd_nested$block <- cache_find_block(pd_nested)
   } else {
-    pd_nested$block <- rep(1, nrow(pd_nested))
+    pd_nested$block <- rep(1, length(pd_nested$block))
   }
   pd_nested
 }
@@ -101,16 +101,27 @@ drop_cached_children <- function(pd) {
   } else {
     pd
   }
-
 }
 
+#' Find the pos ids to keep
+#'
+#' To make a parse table shallow, we must know which ids to keep.
+#' `split(cumsum(pd_parent_first$parent < 1))` above puts comments with negative
+#' parents in the same block as proceeding expressions. `find_pos_id_to_keep()`
+#' must hence alyways keep comments. We did not use
+#' `split(cumsum(pd_parent_first$parent < 1))` because then every comment is an
+#' expression on its own and processing takes much longer for typical roxygen
+#' annotated code
+#' @param pd A temporary top level nest where the first expression is always a
+#'   top level expression, potentially cached.
+#' @keywords internal
 find_pos_id_to_keep <- function(pd) {
-    if (pd$is_cached[1]) {
-      pd$pos_id[1]
-    } else {
-      pd$pos_id
-    }
+  if (pd$is_cached[1]) {
+    pd$pos_id[c(TRUE, pd[-1L, "token"] == "COMMENT")]
+  } else {
+    pd$pos_id
   }
+}
 
 
 #' Turn off styling for parts of the code
@@ -235,9 +246,10 @@ add_terminal_token_before <- function(pd_flat) {
 add_attributes_caching <- function(pd_flat, transformers) {
   pd_flat$block <- pd_flat$is_cached <- rep(NA, nrow(pd_flat))
   if (cache_is_activated()) {
-    pd_flat$is_cached[pd_flat$parent == 0] <- map_lgl(
+    is_parent <- pd_flat$parent == 0
+    pd_flat$is_cached[is_parent] <- map_lgl(
       pd_flat$text[pd_flat$parent == 0],
-      is_cached, transformers, cache_dir_default()
+      is_cached, transformers
     )
     is_comment <- pd_flat$token == "COMMENT"
     pd_flat$is_cached[is_comment] <- rep(FALSE, sum(is_comment))

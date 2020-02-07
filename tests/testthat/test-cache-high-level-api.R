@@ -82,10 +82,67 @@ capture.output(
 
 capture.output(test_that("unactivated cache does not bring speedup", {
   skip_if_not_installed("R.cache")
-  on.exit(clear_testthat_cache)
+  on.exit(clear_testthat_cache())
   clear_testthat_cache()
   cache_deactivate()
   first <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
   second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
   expect_false(first["elapsed"] / 2 > second["elapsed"])
+}))
+
+
+capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
+
+  skip_if_not_installed("R.cache")
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  activate_testthat_cache()
+  text <- c(
+    "1 + 1",
+    "# Comment",
+    "# another",
+    "NULL"
+    )
+  style_text(text)
+  text2 <- c(
+    "1 + 1",
+    "# x",
+    "# another",
+    "NULL"
+  )
+  expect_equal(
+    as.character(style_text(text2)),
+    text2
+  )
+}))
+
+
+capture.output(test_that("avoid removing roxygen mask (see commit messages in #584)", {
+
+  skip_if_not_installed("R.cache")
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  activate_testthat_cache()
+  text <- c(
+    "c(",
+    " 1, 2,",
+    "  x - 2",
+    ")"
+  )
+  style_text(text)
+  text2 <- c(
+    "#' Stuff",
+    "#'",
+    "#' @examples",
+    "#' c(",
+    "#'   1, 2,",
+    "#'   x - 2",
+    "#' )",
+    "#' x",
+    "NULL"
+  )
+  expect_equal(
+    as.character(style_text(text2)),
+    text2
+  )
 }))

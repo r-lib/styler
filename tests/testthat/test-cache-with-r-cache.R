@@ -38,7 +38,7 @@ capture.output(test_that("Cache management works when R.cache is installed", {
   )
   expect_false(cache_info(format = "tabular")$activated)
   expect_equal(getOption("styler.cache_location"), NULL)
-  expect_error(cache_clear(ask = FALSE), NA)
+  expect_error(cache_clear("testthat", ask = FALSE), NA)
 }))
 
 test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
@@ -56,7 +56,7 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
   cache_deactivate()
   not_cached_benchmark <- system.time(style_text(text_styled))
   expect_lt(
-    partially_cached_benchmark['elapsed'] * 5,
+    partially_cached_benchmark['elapsed'] * 3,
     not_cached_benchmark['elapsed']
   )
 })
