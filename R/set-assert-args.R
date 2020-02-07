@@ -29,7 +29,7 @@ assert_transformers <- function(transformers) {
     )
     message <- paste(
       "Style guides without a name and a version field are depreciated and",
-      action, " in styler >= 1.4. \nIf you are a user: Open an issue on",
+      action, "in styler >= 1.4. \nIf you are a user: Open an issue on",
       "https://github.com/r-lib/styler and provide a reproducible example",
       "of this error. \nIf you are a developer:",
       "When you create a style guide with `styler::create_style_guide()`, the",
