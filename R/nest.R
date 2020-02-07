@@ -39,7 +39,7 @@ add_cache_block <- function(pd_nested) {
   if (cache_is_activated()) {
     pd_nested$block <- cache_find_block(pd_nested)
   } else {
-    pd_nested$block <- rep(1, nrow(pd_nested))
+    pd_nested$block <- rep(1, length(pd_nested$block))
   }
   pd_nested
 }
@@ -247,9 +247,10 @@ add_terminal_token_before <- function(pd_flat) {
 add_attributes_caching <- function(pd_flat, transformers) {
   pd_flat$block <- pd_flat$is_cached <- rep(NA, nrow(pd_flat))
   if (cache_is_activated()) {
-    pd_flat$is_cached[pd_flat$parent == 0] <- map_lgl(
+    is_parent <- pd_flat$parent == 0
+    pd_flat$is_cached[is_parent] <- map_lgl(
       pd_flat$text[pd_flat$parent == 0],
-      is_cached, transformers, cache_dir_default()
+      is_cached, transformers
     )
     is_comment <- pd_flat$token == "COMMENT"
     pd_flat$is_cached[is_comment] <- rep(FALSE, sum(is_comment))
