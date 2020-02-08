@@ -214,9 +214,14 @@ tidyverse_style <- function(scope = "tokens",
 #'   pd_flat
 #' }
 #' set_line_break_before_curly_opening_style <- function() {
-#'   create_style_guide(line_break = tibble::lst(set_line_break_before_curly_opening))
+#'   create_style_guide(
+#'     line_break = tibble::lst(set_line_break_before_curly_opening)
+#'   )
 #' }
-#' style_text("a <- function(x) { x }", style = set_line_break_before_curly_opening_style)
+#' style_text(
+#'   "a <- function(x) { x }",
+#'   style = set_line_break_before_curly_opening_style
+#' )
 #' @importFrom purrr compact
 #' @export
 create_style_guide <- function(initialize = default_style_guide_attributes,

@@ -61,7 +61,12 @@ set_line_break_before_curly_opening <- function(pd_flat) {
   pd_flat
 }
 set_line_break_before_curly_opening_style <- function() {
-  create_style_guide(line_break = tibble::lst(set_line_break_before_curly_opening))
+  create_style_guide(
+    line_break = tibble::lst(set_line_break_before_curly_opening)
+  )
 }
-style_text("a <- function(x) { x }", style = set_line_break_before_curly_opening_style)
+style_text(
+  "a <- function(x) { x }",
+  style = set_line_break_before_curly_opening_style
+)
 }
