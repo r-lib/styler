@@ -34,11 +34,10 @@
 #'   "  a  = 2",
 #'   ")"
 #' )) %>%
-#' styler:::post_visit(transformers$initialize)
+#'   styler:::post_visit(transformers$initialize)
 #' nest <- pd_nested$child[[1]]
 #' styler:::token_is_on_aligned_line(nest)
 token_is_on_aligned_line <- function(pd_flat) {
-
   line_idx <- 1 + cumsum(pd_flat$lag_newlines)
   pd_flat$.lag_spaces <- lag(pd_flat$spaces)
   pd_by_line <- split(pd_flat, line_idx)

@@ -33,9 +33,9 @@ convert_newlines_to_linebreaks <- function(text) {
   split <- strsplit(text, "\n", fixed = TRUE)
   map(split, ~ if (identical(.x, character(0))) {
     ""
-    } else {
-      .x
-    }) %>%
+  } else {
+    .x
+  }) %>%
     unlist()
 }
 

@@ -120,16 +120,17 @@ set_style_transformers <- function() {
       current_style
     )
   if (!is.null(new_style)) {
-    parsed_new_style <- with_handlers({
-      transformers <- eval(parse(text = new_style))
-      style_text(c("a = 2", "function() {", "NULL", "}"))
-    },
-    error = function(e) {
-      abort(paste0(
-        "The selected style transformers \"",
-        new_style, "\" is not valid: ", e$message
-      ))
-    }
+    parsed_new_style <- with_handlers(
+      {
+        transformers <- eval(parse(text = new_style))
+        style_text(c("a = 2", "function() {", "NULL", "}"))
+      },
+      error = function(e) {
+        abort(paste0(
+          "The selected style transformers \"",
+          new_style, "\" is not valid: ", e$message
+        ))
+      }
     )
     options(styler.addins_style_transformer = new_style)
   }

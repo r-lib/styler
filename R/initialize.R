@@ -11,7 +11,7 @@
 #' @export
 #' @keywords internal
 default_style_guide_attributes <- function(pd_flat) {
-    initialize_newlines(pd_flat) %>%
+  initialize_newlines(pd_flat) %>%
     initialize_spaces() %>%
     remove_attributes(c("line1", "line2", "col1", "col2", "parent", "id")) %>%
     initialize_multi_line() %>%

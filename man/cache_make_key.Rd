@@ -61,7 +61,7 @@ behavior.
 
 \examples{
 add <- function(x, y) {
-x + y
+  x + y
 }
 add1 <- purrr::partial(add, x = 1)
 add2 <- purrr::partial(add, x = 1)

@@ -129,8 +129,9 @@ context_towards_terminals <- function(pd_nested,
 extract_terminals <- function(pd_nested) {
   bind_rows(
     ifelse(pd_nested$terminal, split(pd_nested, seq_len(nrow(pd_nested))),
-    pd_nested$child
-  ))
+      pd_nested$child
+    )
+  )
 }
 
 #' Enrich flattened parse table

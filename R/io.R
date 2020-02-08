@@ -15,20 +15,23 @@ transform_utf8 <- function(path, fun, write_back = TRUE) {
 
 #' @importFrom rlang with_handlers warn
 transform_utf8_one <- function(path, fun, write_back) {
-  with_handlers({
-    file_with_info <- read_utf8(path)
-    # only write back when changed OR when there was a missing newline
-    new <- fun(file_with_info$text)
-    identical_content <- identical(unclass(file_with_info$text), unclass(new))
-    identical <- identical_content && !file_with_info$missing_EOF_line_break
-    if (!identical && write_back) {
-      xfun::write_utf8(new, path)
+  with_handlers(
+    {
+      file_with_info <- read_utf8(path)
+      # only write back when changed OR when there was a missing newline
+      new <- fun(file_with_info$text)
+      identical_content <- identical(unclass(file_with_info$text), unclass(new))
+      identical <- identical_content && !file_with_info$missing_EOF_line_break
+      if (!identical && write_back) {
+        xfun::write_utf8(new, path)
+      }
+      !identical
+    },
+    error = function(e) {
+      warn(paste0("When processing ", path, ": ", conditionMessage(e)))
+      NA
     }
-    !identical
-  }, error = function(e) {
-    warn(paste0("When processing ", path, ": ", conditionMessage(e)))
-    NA
-  })
+  )
 }
 
 #' Read UTF-8

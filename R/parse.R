@@ -97,7 +97,8 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   parsed <- parse_safely(text, keep.source = TRUE)
   pd <- as_tibble(
     utils::getParseData(parsed, includeText = include_text),
-    .name_repair = "minimal") %>%
+    .name_repair = "minimal"
+  ) %>%
     add_id_and_short()
 
   parser_version_set(parser_version_find(pd))

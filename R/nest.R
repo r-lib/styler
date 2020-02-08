@@ -88,16 +88,14 @@ add_cache_block <- function(pd_nested) {
 #' it is shallow in the right places.
 #' @keywords internal
 drop_cached_children <- function(pd) {
-
   if (cache_is_activated()) {
-
-    pd_parent_first <- pd[order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal)),]
+    pd_parent_first <- pd[order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal)), ]
     pos_ids_to_keep <- pd_parent_first %>%
       split(cumsum(pd_parent_first$parent == 0)) %>%
       map(find_pos_id_to_keep) %>%
       unlist() %>%
       unname()
-    pd[pd$pos_id %in% pos_ids_to_keep,]
+    pd[pd$pos_id %in% pos_ids_to_keep, ]
   } else {
     pd
   }
@@ -155,7 +153,7 @@ find_pos_id_to_keep <- function(pd) {
 #'   # styler: on
 #'   1+1
 #'   "
-#')
+#' )
 #'
 #' # if there is a stop marker before a start marker, styler won't be able
 #' # to figure out which lines you want to ignore and won't ignore anything,
@@ -169,8 +167,8 @@ find_pos_id_to_keep <- function(pd) {
 #'   # styler: off
 #'   1+1
 #'   "
-#')
-#'}
+#' )
+#' }
 #'
 NULL
 
@@ -214,8 +212,9 @@ add_terminal_token_after <- function(pd_flat) {
 
   new_tibble(list(
     pos_id = terminals$pos_id,
-    token_after = lead(terminals$token, default = "")),
-    nrow = nrow(terminals)
+    token_after = lead(terminals$token, default = "")
+  ),
+  nrow = nrow(terminals)
   ) %>%
     left_join(pd_flat, ., by = "pos_id")
 }
