@@ -43,7 +43,7 @@ pd_nested <- styler:::compute_parse_data_nested(c(
   "  a  = 2",
   ")"
 )) \%>\%
-styler:::post_visit(transformers$initialize)
+  styler:::post_visit(transformers$initialize)
 nest <- pd_nested$child[[1]]
 styler:::token_is_on_aligned_line(nest)
 }

@@ -231,7 +231,6 @@ prettify_any <- function(transformers,
         ignore.case = TRUE, recursive = FALSE,
         all.files = TRUE
       )
-
   } else {
     files_other <- c()
   }

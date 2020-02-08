@@ -58,7 +58,7 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
       )
   }
   if (any(pd_flat$token %in% one)) {
-    pd_flat <-  pd_flat %>%
+    pd_flat <- pd_flat %>%
       style_space_around_token(
         strict = strict, tokens = one, level_before = 1L, level_after = 1L
       )

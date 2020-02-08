@@ -26,7 +26,6 @@ is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
     dirs = cache_dir
   ) %>%
     file.exists()
-
 }
 
 
@@ -75,7 +74,7 @@ is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
 #'   behavior.
 #' @examples
 #' add <- function(x, y) {
-#' x + y
+#'   x + y
 #' }
 #' add1 <- purrr::partial(add, x = 1)
 #' add2 <- purrr::partial(add, x = 1)
@@ -128,9 +127,9 @@ cache_is_activated <- function(cache_name = NULL) {
 #' @keywords internal
 cache_by_expression <- function(text, transformers) {
   expressions <- parse(text = text, keep.source = TRUE) %>%
-      utils::getParseData(includeText = TRUE)
+    utils::getParseData(includeText = TRUE)
   expressions[expressions$parent == 0 & expressions$token != "COMMENT", "text"] %>%
-    map(~cache_write(.x, transformers = transformers))
+    map(~ cache_write(.x, transformers = transformers))
 }
 
 cache_write <- function(text, transformers) {
@@ -160,4 +159,3 @@ cache_get_or_derive_name <- function(cache_name) {
 cache_dir_default <- function() {
   c("styler", cache_get_name())
 }
-
