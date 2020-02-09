@@ -39,7 +39,7 @@
 <meta property="og:description" content="To make a parse table shallow, we must know which ids to keep.
 split(cumsum(pd_parent_first$parent &amp;lt; 1)) above puts comments with negative
 parents in the same block as proceeding expressions. find_pos_id_to_keep()
-must hence alyways keep comments. We did not use
+must hence always keep comments. We did not use
 split(cumsum(pd_parent_first$parent &amp;lt; 1)) because then every comment is an
 expression on its own and processing takes much longer for typical roxygen
 annotated code" />
@@ -153,7 +153,7 @@ annotated code" />
     <p>To make a parse table shallow, we must know which ids to keep.
 <code>split(cumsum(pd_parent_first$parent &lt; 1))</code> above puts comments with negative
 parents in the same block as proceeding expressions. <code>find_pos_id_to_keep()</code>
-must hence alyways keep comments. We did not use
+must hence always keep comments. We did not use
 <code>split(cumsum(pd_parent_first$parent &lt; 1))</code> because then every comment is an
 expression on its own and processing takes much longer for typical roxygen
 annotated code</p>

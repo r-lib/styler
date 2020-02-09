@@ -200,8 +200,8 @@ this is fixed, we'd have to work with version 0.2.5.</p></li>
 <li><p>Our caching backend package, <code>R.cache</code>, uses
 <code>R.cache:::getChecksum.default</code> (which uses <code><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest::digest()</a></code>) to hash the
 input. The latter does not seem to care if the environments are exactly
-equal (see 'Exampels').</p></li>
-<li><p>However, under stome circumstances, it does: Commit 9c94c022 (if not
+equal (see 'Examples').</p></li>
+<li><p>However, under some circumstances, it does: Commit 9c94c022 (if not
 overwritten / rebased by now) contains a reprex. Otherwise, search for
 43219ixmypi in commit messages and restore this commit to reproduce the
 behavior.</p></li>

@@ -169,7 +169,7 @@ will always end up in a block that won't be styled again (usual case), unless
 it's on a line where multiple expressions sit and at least one is not styled
 (exception).</p>
 <p><strong>usual case: All other expressions in a block are cached</strong></p>
-<p>Cached expressiond don't need to be transformed with <code>transformers</code> in
+<p>Cached expressions don't need to be transformed with <code>transformers</code> in
 <code><a href='parse_transform_serialize_r_block.html'>parse_transform_serialize_r_block()</a></code>, we simply return <code>text</code> for the top
 level token. For that
 reason, the nested parse table can, at the rows where these expressions are

@@ -46,7 +46,7 @@ e.g. \{\{1\}\}. \{\{1\} + 1\} does not contain the curly-curly syntactic
 sugar according to the above definition. On the other hand \{\{ x + y \}\}
 is recognized by styler as containing it (and is parsable code)
 but will most likely give an error at runtime because the way the syntactic
-suggar is defined in rlang is to use a single token within curly-curly. In
+sugar is defined in rlang is to use a single token within curly-curly. In
 addition, because rlang parses \{\{ in a special way (just as !!), the
 expression \{\{ x \}\} will give a runtime error when used outside of a
 context that is capable of handling it, e.g. on the top level (that is, not
@@ -171,7 +171,7 @@ e.g. <code>\{\{1\}\}</code>. <code>\{\{1\} + 1\}</code> does not contain the cur
 sugar according to the above definition. On the other hand <code>\{\{ x + y \}\}</code>
 is recognized by styler as containing it (and is parsable code)
 but will most likely give an error at runtime because the way the syntactic
-suggar is defined in rlang is to use a single token within curly-curly. In
+sugar is defined in rlang is to use a single token within curly-curly. In
 addition, because rlang parses <code>\{\{</code> in a special way (just as <code>!!</code>), the
 expression <code>\{\{ x \}\}</code> will give a runtime error when used outside of a
 context that is capable of handling it, e.g. on the top level (that is, not
