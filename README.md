@@ -29,15 +29,12 @@ You can install the package from CRAN.
 
 ``` r
 install.packages("styler")
-
-# if you want to benefit from caching, styler will ask you to install R.cache
-# if you don't have it already
-install.packages("R.cache")
-
-# If you just installed R.cache, you need to authorise it to create a permanent 
-# caching directory on your computer once.
-cache_info() # then type 'y' for Yes.
 ```
+
+You will be prompted to decide on how to use the [caching
+feature](https://styler.r-lib.org/dev/reference/caching.html). See
+`?caching` for details, in particular when you don’t use styler
+interactively (i.e. not from the R prompt or Rstudio Addin, )
 
 Or get the development version from GitHub:
 
@@ -45,8 +42,6 @@ Or get the development version from GitHub:
 # install.packages("remotes")
 remotes::install_github("r-lib/styler")
 ```
-
-And set up caching the same way as for the CRAN version.
 
 ## API
 
