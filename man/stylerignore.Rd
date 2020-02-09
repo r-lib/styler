@@ -23,7 +23,7 @@ comments apart from the marker, i.e. a line like
 To use something else as start and stop markers, set the R options
 \code{styler.ignore_start} and
 \code{styler.ignore_stop} using \code{\link[=options]{options()}}. If you want these
-settings to persist over mulitple R sessions, consider setting them in your
+settings to persist over multiple R sessions, consider setting them in your
 R profile, e.g. with \code{usethis::edit_rprofile()}.
 }
 \examples{

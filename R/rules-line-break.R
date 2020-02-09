@@ -127,7 +127,7 @@ style_line_break_around_curly <- function(strict, pd) {
 #' sugar according to the above definition. On the other hand `\{\{ x + y \}\}`
 #' is recognized by styler as containing it (and is parsable code)
 #' but will most likely give an error at runtime because the way the syntactic
-#' suggar is defined in rlang is to use a single token within curly-curly. In
+#' sugar is defined in rlang is to use a single token within curly-curly. In
 #' addition, because rlang parses `\{\{` in a special way (just as `!!`), the
 #' expression `\{\{ x \}\}` will give a runtime error when used outside of a
 #' context that is capable of handling it, e.g. on the top level (that is, not

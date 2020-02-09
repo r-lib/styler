@@ -1,7 +1,7 @@
 #' Parse roxygen comments into text
 #'
 #' Used to parse roxygen code examples. Removes line break before
-#' `\\dontrun{...}` and friends because it does not occurr for segments other
+#' `\\dontrun{...}` and friends because it does not occur for segments other
 #' than `\\dont{...}` and friends.
 #' @param roxygen Roxygen comments.
 #' @examples

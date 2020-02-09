@@ -32,7 +32,7 @@ The main caching features were implemented in the following two pull requests:
   use. Changing one line in a file with hundreds of lines means each line will
   be styled again. This is a major drawback and makes the cache only useful for
   a use with a pre-commit framework (the initial motivation) or when functions
-  like `style_pkg()` are runn often and most files were not changed.
+  like `style_pkg()` are run often and most files were not changed.
 
 - #578: Adds a second layer of caching by caching top-level expressions
   individually. This will bring speed boosts to the situation where very little

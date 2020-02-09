@@ -36,7 +36,7 @@
 
 * lines are now broken after `+` in `ggplot2` calls for `strict = TRUE` (#569).
 
-* function documentation now contains many more linebreaks due to roxygen2 
+* function documentation now contains many more line breaks due to roxygen2 
   update to version 7.0.1 (#566).
   
 * spaces next to the braces in subsetting expressions `[` and `[[` are now

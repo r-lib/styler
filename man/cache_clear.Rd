@@ -16,7 +16,7 @@ the version of styler used.}
 \description{
 Clears the cache that stores which files are already styled. You won't be
 able to undo this. Note that the file corresponding to the cache (a folder
-on your file stystem) won't be deleted, but it will be empty after calling
+on your file system) won't be deleted, but it will be empty after calling
 \code{cache_clear}.
 }
 \details{

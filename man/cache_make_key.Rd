@@ -51,8 +51,8 @@ this is fixed, we'd have to work with version 0.2.5.
 \item Our caching backend package, \code{R.cache}, uses
 \code{R.cache:::getChecksum.default} (which uses \code{digest::digest()}) to hash the
 input. The latter does not seem to care if the environments are exactly
-equal (see 'Exampels').
-\item However, under stome circumstances, it does: Commit 9c94c022 (if not
+equal (see 'Examples').
+\item However, under some circumstances, it does: Commit 9c94c022 (if not
 overwritten / rebased by now) contains a reprex. Otherwise, search for
 43219ixmypi in commit messages and restore this commit to reproduce the
 behavior.

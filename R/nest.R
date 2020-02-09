@@ -58,7 +58,7 @@ add_cache_block <- function(pd_nested) {
 #'
 #' **usual case: All other expressions in a block are cached**
 #'
-#' Cached expressiond don't need to be transformed with `transformers` in
+#' Cached expressions don't need to be transformed with `transformers` in
 #' [parse_transform_serialize_r_block()], we simply return `text` for the top
 #' level token. For that
 #' reason, the nested parse table can, at the rows where these expressions are
@@ -106,7 +106,7 @@ drop_cached_children <- function(pd) {
 #' To make a parse table shallow, we must know which ids to keep.
 #' `split(cumsum(pd_parent_first$parent < 1))` above puts comments with negative
 #' parents in the same block as proceeding expressions. `find_pos_id_to_keep()`
-#' must hence alyways keep comments. We did not use
+#' must hence always keep comments. We did not use
 #' `split(cumsum(pd_parent_first$parent < 1))` because then every comment is an
 #' expression on its own and processing takes much longer for typical roxygen
 #' annotated code
@@ -140,7 +140,7 @@ find_pos_id_to_keep <- function(pd) {
 #' To use something else as start and stop markers, set the R options
 #' `styler.ignore_start` and
 #' `styler.ignore_stop` using [options()]. If you want these
-#' settings to persist over mulitple R sessions, consider setting them in your
+#' settings to persist over multiple R sessions, consider setting them in your
 #' R profile, e.g. with `usethis::edit_rprofile()`.
 #' @name stylerignore
 #' @examples

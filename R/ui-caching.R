@@ -2,7 +2,7 @@
 #'
 #' Clears the cache that stores which files are already styled. You won't be
 #' able to undo this. Note that the file corresponding to the cache (a folder
-#' on your file stystem) won't be deleted, but it will be empty after calling
+#' on your file system) won't be deleted, but it will be empty after calling
 #' `cache_clear`.
 #' @param cache_name The name of the styler cache to use. If
 #'   `NULL`, the option "styler.cache_name" is considered which defaults to

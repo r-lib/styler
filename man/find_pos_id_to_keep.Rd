@@ -14,7 +14,7 @@ top level expression, potentially cached.}
 To make a parse table shallow, we must know which ids to keep.
 \code{split(cumsum(pd_parent_first$parent < 1))} above puts comments with negative
 parents in the same block as proceeding expressions. \code{find_pos_id_to_keep()}
-must hence alyways keep comments. We did not use
+must hence always keep comments. We did not use
 \code{split(cumsum(pd_parent_first$parent < 1))} because then every comment is an
 expression on its own and processing takes much longer for typical roxygen
 annotated code
