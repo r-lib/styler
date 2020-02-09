@@ -38,15 +38,10 @@ assert_data.tree_installation <- function() {
 #' Assert the R.cache installation in conjunction with the cache config
 #'
 #' R.cache needs to be installed if caching functionality is enabled
-#' @param installation_only Whether or not to only check if R.cache is
-#'   installed.
 #' @keywords internal
-assert_R.cache_installation <- function(installation_only = FALSE,
-                                        action = "abort") {
+assert_R.cache_installation <- function(action = "abort") {
   # fail if R.cache is not installed but feature is actiavted.
-  if (!rlang::is_installed("R.cache") &&
-    ifelse(installation_only, TRUE, cache_is_activated())
-  ) {
+  if (!rlang::is_installed("R.cache")) {
     msg_basic <- paste(
       "R package R.cache is not installed, which is needed when the caching ",
       "feature is activated. Please install the package with ",

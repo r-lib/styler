@@ -4,11 +4,7 @@
 \alias{assert_R.cache_installation}
 \title{Assert the R.cache installation in conjunction with the cache config}
 \usage{
-assert_R.cache_installation(installation_only = FALSE, action = "abort")
-}
-\arguments{
-\item{installation_only}{Whether or not to only check if R.cache is
-installed.}
+assert_R.cache_installation(action = "abort")
 }
 \description{
 R.cache needs to be installed if caching functionality is enabled

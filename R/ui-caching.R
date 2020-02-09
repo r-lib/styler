@@ -14,7 +14,7 @@
 #' @family cache managers
 #' @export
 cache_clear <- function(cache_name = NULL, ask = TRUE) {
-  assert_R.cache_installation(installation_only = TRUE)
+  assert_R.cache_installation()
   path_cache <- cache_find_path(cache_name)
   R.cache::clearCache(path_cache, prompt = ask)
   cache_deactivate(verbose = FALSE)
@@ -50,7 +50,7 @@ NULL
 #' @family cache managers
 #' @export
 cache_info <- function(cache_name = NULL, format = "both") {
-  assert_R.cache_installation(installation_only = TRUE)
+  assert_R.cache_installation()
   rlang::arg_match(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
@@ -92,7 +92,7 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #' @family cache managers
 #' @export
 cache_activate <- function(cache_name = NULL, verbose = TRUE) {
-  assert_R.cache_installation(installation_only = TRUE)
+  assert_R.cache_installation()
   if (!is.null(cache_name)) {
     options("styler.cache_name" = cache_name)
   } else {
