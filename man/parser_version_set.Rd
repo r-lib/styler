@@ -36,6 +36,9 @@ We version the parser as follows:
 \item version 1: Before fix mentioned in #419.
 \item version 2: After #419.
 }
+}
+\keyword{internal}
+\section{version 3: After #582.}{
 
 The following utilities are available:
 \itemize{
@@ -50,4 +53,3 @@ contain \code{EQ_ASSIGN} is parsed the same way with version 1 and 2. If the
 behavior is identical, the version is set to 1.
 }
 }
-\keyword{internal}
