@@ -25,10 +25,18 @@ The following online docs are available:
 
 ## Installation
 
-You can install the package from CRAN:
+You can install the package from CRAN.
 
 ``` r
 install.packages("styler")
+
+# if you want to benefit from caching, styler will ask you to install R.cache
+# if you don't have it already
+install.packages("R.cache")
+
+# If you just installed R.cache, you need to authorise it to create a permanent 
+# caching directory on your computer once.
+cache_info() # then type 'y' for Yes.
 ```
 
 Or get the development version from GitHub:
@@ -37,6 +45,8 @@ Or get the development version from GitHub:
 # install.packages("remotes")
 remotes::install_github("r-lib/styler")
 ```
+
+And set up caching the same way as for the CRAN version.
 
 ## API
 
@@ -64,21 +74,6 @@ There are a few variants of `style_text()`:
 region.
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
-
-## Features
-
-  - style roxygen2 code examples.
-
-  - do not re-style [deliberate code
-    alignment](https://styler.r-lib.org/articles/detect-alignment.html).
-
-  - [ignore some
-    lines](https://styler.r-lib.org/reference/stylerignore.html) for
-    styling (GitHub development version).
-
-  - [cache styled
-    expressions](https://styler.r-lib.org/reference/caching.html) for
-    speed (GitHub development version).
 
 ## Configuration
 
@@ -114,6 +109,21 @@ options with the tidyverse style guide, see the [help file for
 \`tidyverse\_style](https://styler.r-lib.org/reference/tidyverse_style.html)
 for a quick overview or the [introductory
 vignette](https://styler.r-lib.org/articles/introducing_styler.html).
+
+## Features
+
+  - style roxygen2 code examples.
+
+  - do not re-style [deliberate code
+    alignment](https://styler.r-lib.org/articles/detect-alignment.html).
+
+  - [ignore some
+    lines](https://styler.r-lib.org/dev/reference/stylerignore.html) for
+    styling.
+
+  - [cache styled
+    expressions](https://styler.r-lib.org/dev/reference/caching.html)
+    for speed.
 
 ## Adaption of styler
 
