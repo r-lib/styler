@@ -2,12 +2,10 @@
 capture.output(test_that("No warnings are issued when R.cache is installed", {
   skip_if_not_installed("R.cache")
   on.exit(clear_testthat_cache())
-  expect_silent(assert_R.cache_installation(installation_only = TRUE))
   expect_silent(assert_R.cache_installation())
   expect_warning(style_text("1+1"), NA)
   expect_warning(activate_testthat_cache(), NA)
   expect_warning(style_text("1+1"), NA)
-  expect_silent(assert_R.cache_installation(installation_only = TRUE))
   expect_silent(assert_R.cache_installation())
 }))
 
