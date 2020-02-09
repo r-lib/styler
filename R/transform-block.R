@@ -38,7 +38,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
 #' Multiple expressions can sit on one row, e.g. in line comment and commands
 #' separated with ";". This creates a problem when processing each expression
 #' separately because when putting them together, we need complicated handling
-#' of line breaks between them, as it is not apriory clear that there is a line
+#' of line breaks between them, as it is not apriori clear that there is a line
 #' break separating them. To avoid this, we put top level expressions that sit
 #' on the same line into one block, so the assumption that there is a line break
 #' between each block of expressions holds.

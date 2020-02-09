@@ -22,7 +22,7 @@ it's on a line where multiple expressions sit and at least one is not styled
 
 \strong{usual case: All other expressions in a block are cached}
 
-Cached expressiond don't need to be transformed with \code{transformers} in
+Cached expressions don't need to be transformed with \code{transformers} in
 \code{\link[=parse_transform_serialize_r_block]{parse_transform_serialize_r_block()}}, we simply return \code{text} for the top
 level token. For that
 reason, the nested parse table can, at the rows where these expressions are

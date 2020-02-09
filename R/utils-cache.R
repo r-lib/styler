@@ -67,8 +67,8 @@ is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
 #' * Our caching backend package, `R.cache`, uses
 #'   `R.cache:::getChecksum.default` (which uses `digest::digest()`) to hash the
 #'   input. The latter does not seem to care if the environments are exactly
-#'   equal (see 'Exampels').
-#' * However, under stome circumstances, it does: Commit 9c94c022 (if not
+#'   equal (see 'Examples').
+#' * However, under some circumstances, it does: Commit 9c94c022 (if not
 #'   overwritten / rebased by now) contains a reprex. Otherwise, search for
 #'   43219ixmypi in commit messages and restore this commit to reproduce the
 #'   behavior.

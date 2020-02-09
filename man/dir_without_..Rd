@@ -13,7 +13,7 @@ dir_without_.(path, ...)
 }
 \description{
 When using \code{dir()}, you can set \code{full.names = FALSE}, but then you can only
-pass a character vector of lenght one as \code{path} to not loose the information
+pass a character vector of length one as \code{path} to not loose the information
 about where the files are. This function solves that case. It's needed when
 one wants to standardize paths to use set operations on them, i.e. when the
 user supplied input does not have a dot prefix. See 'Examples'.
