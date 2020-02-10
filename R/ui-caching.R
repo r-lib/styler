@@ -36,7 +36,7 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' directory for caching, because otherwise, the cache is lost at restart of R.
 #'
 #' @section Non-interactive use:
-#' Note that if you have never authorized `{R.cache}` to create the cache in a
+#' Note that if you have never authorised `{R.cache}` to create the cache in a
 #' permenent directory, it wil build the cache in a temporary directory. To
 #' create a permenent cache, just open an interactive R session and type
 #' `cache_info()`. You can see under `Location:` if a permanent directory is
