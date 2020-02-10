@@ -114,8 +114,9 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the package from CRAN:</p>
+<p>You can install the package from CRAN.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"styler"</span>)</a></code></pre></div>
+<p>If you don’t use styler interactively (i.e. not from the R prompt or Rstudio Addin), make sure you authorise <code>{R.cache}</code> once to set up a permanent cache. If you use it interactively, you will be asked to grant this permission once. See <code><a href="reference/caching.html">?caching</a></code> for details.</p>
 <p>Or get the development version from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"r-lib/styler"</span>)</a></code></pre></div>
@@ -139,16 +140,6 @@
 </ul>
 <p><img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px"></p>
 </div>
-<div id="features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h2>
-<ul>
-<li><p>style roxygen2 code examples.</p></li>
-<li><p>do not re-style <a href="https://styler.r-lib.org/articles/detect-alignment.html">deliberate code alignment</a>.</p></li>
-<li><p><a href="https://styler.r-lib.org/reference/stylerignore.html">ignore some lines</a> for styling (GitHub development version).</p></li>
-<li><p><a href="https://styler.r-lib.org/reference/caching.html">cache styled expressions</a> for speed (GitHub development version).</p></li>
-</ul>
-</div>
 <div id="configuration" class="section level2">
 <h2 class="hasAnchor">
 <a href="#configuration" class="anchor"></a>Configuration</h2>
@@ -169,6 +160,16 @@
 </ul>
 <p>While spaces still got styled (around <code>=</code> in <code>(x)</code>).</p>
 <p>This was just the tip of the iceberg. To learn more about customization options with the tidyverse style guide, see the <a href="https://styler.r-lib.org/reference/tidyverse_style.html">help file for `tidyverse_style</a> for a quick overview or the <a href="https://styler.r-lib.org/articles/introducing_styler.html">introductory vignette</a>.</p>
+</div>
+<div id="features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features" class="anchor"></a>Features</h2>
+<ul>
+<li><p>style roxygen2 code examples.</p></li>
+<li><p>do not re-style <a href="https://styler.r-lib.org/articles/detect-alignment.html">deliberate code alignment</a>.</p></li>
+<li><p><a href="https://styler.r-lib.org/dev/reference/stylerignore.html">ignore some lines</a> for styling.</p></li>
+<li><p><a href="https://styler.r-lib.org/dev/reference/caching.html">cache styled expressions</a> for speed.</p></li>
+</ul>
 </div>
 <div id="adaption-of-styler" class="section level2">
 <h2 class="hasAnchor">
