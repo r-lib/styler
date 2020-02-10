@@ -43,6 +43,13 @@
 * Adapt to changes in the R parser to make styler pass R CMD check again.
   (#583).
 
+Thanks to all contributors involved, in particular
+[&#x0040;colearendt](https://github.com/colearendt), 
+[&#x0040;davidski](https://github.com/davidski), 
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
+[&#x0040;pat-s](https://github.com/pat-s), and 
+[&#x0040;programming-wizard](https://github.com/programming-wizard)
+
 # styler 1.2.0
 
 ## Breaking changes
