@@ -1,36 +1,34 @@
-
-# styler 1.2.0.9000
+# styler 1.2.9001
 
 ## Breaking changes
 
-* `style_pkg()` and `style_dir()` gain a new argument `exclude_dirs` to exclude 
-  directories from styling, by default `renv` and `packrat`. Note that the 
-  defaults won't change the behavior of `style_pkg()` because it does anyways 
+* `style_pkg()` and `style_dir()` gain a new argument `exclude_dirs` to exclude
+  directories from styling, by default `renv` and `packrat`. Note that the
+  defaults won't change the behavior of `style_pkg()` because it does anyways
   does not style these directories and they were set for consistency.
-  
-* `style_file()` and friends now strip `./` in file paths returned invisibly,
+
+* `style_file()` and friends now strip `./` in file paths returned invisibly, 
   i.e. `./script.R` becomes `script.R` (#568).
 
 ## New features
 
-* ignore certain lines using `# styler: off` and `#styler: on` or custom 
-  markers, see `help("stylerignore")` (#560).
+* ignore certain lines using `# styler: off` and `#styler: on` or custom
+  markers, see `?stylerignore` (#560).
 
 * styler caches results of styling, so applying styler to code it has styled
   before will be instantaneous. This brings large speed boosts in many
   situations, e.g. when `style_pkg()` is run but only a few files have changed
   since the last styling or when using the [styler pre-commit
-  hook](https://github.com/lorenzwalthert/precommit). Because styler caches
-  by expression, you will also get speed boosts in large files with many 
-  expressions when you only change a few o them. See `help("caching")` for 
-  details (#538, #578).
-  
-* `create_style_guide()` gains two arguments `style_guide_name` and 
-  `style_guide_version` that are carried as meta data, in particular to version 
-  third-party style guides and ensure the proper functioning of caching. This 
+  hook](https://github.com/lorenzwalthert/precommit). Because styler caches by
+  expression, you will also get speed boosts in large files with many
+  expressions when you only change a few of them. See `?caching` for details
+  (#538, #578).
+
+* `create_style_guide()` gains two arguments `style_guide_name` and
+  `style_guide_version` that are carried as meta data, in particular to version
+  third-party style guides and ensure the proper functioning of caching. This
   change is completely invisible to users who don't create and distribute their
   own style guide like `tidyverse_style()` (#572).
-
 
 ## Minor changes and fixes
 
@@ -38,9 +36,12 @@
 
 * function documentation now contains many more line breaks due to roxygen2 
   update to version 7.0.1 (#566).
-  
+
 * spaces next to the braces in subsetting expressions `[` and `[[` are now
   removed (#580).
+
+* Adapt to changes in the R parser to make styler pass R CMD check again.
+  (#583).
 
 # styler 1.2.0
 
@@ -51,17 +52,17 @@
   This is also reflected in the invisible return value of the function (#522).
 
 * `style_file()` and friends do not write content back to a file when styling
-  does not cause any changes in the file. This means the modification date of 
+  does not cause any changes in the file. This means the modification date of
   styled files is only changed when the content is changed (#532).
 
 ## New features
 
-* Aligned function calls are detected and remain unchanged if they match the styler
-  [definition for aligned function
+* Aligned function calls are detected and remain unchanged if they match the
+  styler [definition for aligned function
   calls](https://styler.r-lib.org/articles/detect-alignment.html) (#537).
 
-* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now 
-  explicitly handled, where previously it was just treated as two consecutive 
+* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
+  explicitly handled, where previously it was just treated as two consecutive
   curly braces (#528).
 
 * `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and
@@ -69,15 +70,15 @@
 
 ## Minor improvements and fixes
 
-* Brace expressions in function calls are formatted in a less compact way to 
+* Brace expressions in function calls are formatted in a less compact way to
   improve readability. Typical use case: `tryCatch()` (#543).
 
-* Arguments in function declarations in a context which is indented multiple 
+* Arguments in function declarations in a context which is indented multiple
   times should now be correct. This typically affects `R6::R6Class()` (#546).
 
 * Escape characters in roxygen code examples are now correctly escaped (#512).
 
-* Special characters such as `\n` in strings are now preserved in text and not 
+* Special characters such as `\n` in strings are now preserved in text and not
   turned into literal values like a line break (#554).
 
 * Style selection Addin now preserves line break when the last line selected is

@@ -3,7 +3,7 @@
 # Usually you shouldn't need to change the first part of the file
 
 # DO NOT CHANGE THE CODE BELOW
-before_install: R -q -e 'install.packages(c("remotes", "curl", "knitr", "rmarkdown")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); remotes::install_deps(dependencies = TRUE); if (isTRUE(as.logical(toupper(Sys.getenv("R_REMOVE_RCACHE"))))) remove.packages("R.cache"); tic::before_install()'
+before_install: R -q -e 'install.packages(c("remotes", "curl", "knitr", "rmarkdown")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); remotes::install_deps(dependencies = TRUE); tic::before_install()'
 install: R -q -e 'tic::install()'
 after_install: R -q -e 'tic::after_install()'
 before_script: R -q -e 'tic::before_script()'
@@ -38,9 +38,6 @@ matrix:
   - r: release
     env:
     - BUILD_PKGDOWN: true
-  - r: release
-    env:
-    - R_REMOVE_RCACHE: true
   - r: devel
 
 #env

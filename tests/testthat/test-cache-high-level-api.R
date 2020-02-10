@@ -1,5 +1,4 @@
 capture.output(test_that("activated cache brings speedup on style_file() API", {
-  skip_if_not_installed("R.cache")
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
   activate_testthat_cache()
@@ -25,7 +24,7 @@ text <- c(
   rep(10)
 
 capture.output(test_that("activated cache brings speedup on style_text() API on character vector", {
-  skip_if_not_installed("R.cache")
+
   activate_testthat_cache()
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
@@ -37,7 +36,7 @@ capture.output(test_that("activated cache brings speedup on style_text() API on 
 }))
 
 capture.output(test_that("activated cache brings speedup on style_text() API on character scalar", {
-  skip_if_not_installed("R.cache")
+
   activate_testthat_cache()
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
@@ -50,7 +49,7 @@ capture.output(test_that("activated cache brings speedup on style_text() API on 
 
 
 capture.output(test_that("no speedup when tranformer changes", {
-  skip_if_not_installed("R.cache")
+
   activate_testthat_cache()
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
@@ -68,7 +67,6 @@ capture.output(
     "activated cache brings speedup on style_text() API on ",
     "character scalar and character vector (mixed)"
   ), {
-    skip_if_not_installed("R.cache")
     activate_testthat_cache()
     on.exit(clear_testthat_cache())
     clear_testthat_cache()
@@ -81,7 +79,7 @@ capture.output(
 
 
 capture.output(test_that("unactivated cache does not bring speedup", {
-  skip_if_not_installed("R.cache")
+
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
   cache_deactivate()
@@ -93,7 +91,6 @@ capture.output(test_that("unactivated cache does not bring speedup", {
 
 capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
 
-  skip_if_not_installed("R.cache")
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
   activate_testthat_cache()
@@ -119,7 +116,6 @@ capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
 
 capture.output(test_that("avoid removing roxygen mask (see commit messages in #584)", {
 
-  skip_if_not_installed("R.cache")
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
   activate_testthat_cache()

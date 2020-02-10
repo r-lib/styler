@@ -4,13 +4,52 @@
 \alias{caching}
 \title{Remember the past to be quicker in the future}
 \description{
-styler by default uses caching. It may prompt you to install the R package
-\code{R.cache} the first time you want to use it. R.cache will also ask you to let
-it create a permanent cache on your file system that styler will use.
-This is needed if you want to cache across R sessions and not just within.
+Caching makes styler faster on repeated styling. It does not cache input
+but output code. That means if you style code that already complies to a
+style guide and you have previously styled that code, it will be quicker.
+Code is cached by expression and the cache is shared across all APIs (e.g.
+\code{style_text()} and Addin.
+}
+\section{Setup}{
+
+styler by default uses caching, via the \code{{R.cache}} package. You will be
+asked you to let it create a permanent cache on your file system that styler
+will use in case it is not set that up already for another tool that
+uses \code{{R.cache}}. We encourage users to let \code{{R.cache}} create a permanent
+directory for caching, because otherwise, the cache is lost at restart of R.
+}
+
+\section{Non-interactive use}{
+
+Note that if you have never authorised \code{{R.cache}} to create the cache in a
+permenent directory, it wil build the cache in a temporary directory. To
+create a permenent cache, just open an interactive R session and type
+\code{cache_info()}. You can see under \verb{Location:} if a permanent directory is
+used and if not, \code{{R.cache}} will ask you to create one the first time you
+use \code{{R.cache}} in an R session.
+}
+
+\section{Invalidation}{
+
 The cache is specific to a version of styler by default, because different
 versions potentially format code differently. This means after upgrading
 styler or a style guide you use, the cache will be re-built.
-See \code{\link[=cache_info]{cache_info()}},
-\code{\link[=cache_activate]{cache_activate()}}, \code{\link[=cache_clear]{cache_clear()}} for utilities to manage the cache.
 }
+
+\section{Manage the cache}{
+
+See \code{\link[=cache_info]{cache_info()}},
+\code{\link[=cache_activate]{cache_activate()}}, \code{\link[=cache_clear]{cache_clear()}} for utilities to manage the cache. Since
+we leverage \code{{R.cache}} to manage the cache, you can also use any \code{{R.cache}}
+functionality to manipulate it.
+}
+
+\section{Using a cache for styler in CI/CD}{
+
+If you want to set up caching in a CI/CD pipeline, we suggest to set the
+\code{{R.cache}} root path to a directory for which you have the cache enabled.
+The former can be done with \code{R.cache::setCacheRootPath("/path/to/cache")},
+the latter can often be set in config files of CI/CD tools, e.g. see the
+the \href{https://docs.travis-ci.com/user/caching}{Travis documentation on caching}.
+}
+

@@ -25,11 +25,16 @@ The following online docs are available:
 
 ## Installation
 
-You can install the package from CRAN:
+You can install the package from CRAN.
 
 ``` r
 install.packages("styler")
 ```
+
+If you don’t use styler interactively (i.e. not from the R prompt or
+Rstudio Addin), make sure you authorise `{R.cache}` once to set up a
+permanent cache. If you use it interactively, you will be asked to grant
+this permission once. See `?caching` for details.
 
 Or get the development version from GitHub:
 
@@ -65,21 +70,6 @@ region.
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
 
-## Features
-
-  - style roxygen2 code examples.
-
-  - do not re-style [deliberate code
-    alignment](https://styler.r-lib.org/articles/detect-alignment.html).
-
-  - [ignore some
-    lines](https://styler.r-lib.org/reference/stylerignore.html) for
-    styling (GitHub development version).
-
-  - [cache styled
-    expressions](https://styler.r-lib.org/reference/caching.html) for
-    speed (GitHub development version).
-
 ## Configuration
 
 You can decide on the level of invasiveness with the scope argument. You
@@ -114,6 +104,21 @@ options with the tidyverse style guide, see the [help file for
 \`tidyverse\_style](https://styler.r-lib.org/reference/tidyverse_style.html)
 for a quick overview or the [introductory
 vignette](https://styler.r-lib.org/articles/introducing_styler.html).
+
+## Features
+
+  - style roxygen2 code examples.
+
+  - do not re-style [deliberate code
+    alignment](https://styler.r-lib.org/articles/detect-alignment.html).
+
+  - [ignore some
+    lines](https://styler.r-lib.org/dev/reference/stylerignore.html) for
+    styling.
+
+  - [cache styled
+    expressions](https://styler.r-lib.org/dev/reference/caching.html)
+    for speed.
 
 ## Adaption of styler
 

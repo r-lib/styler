@@ -27,7 +27,7 @@ version](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.or
 
 The goal of styler is to provide non-invasive pretty-printing of R source code
 while adhering to the [tidyverse](https://style.tidyverse.org) formatting rules.
-styler can be customized to format code according to other style guides too. 
+styler can be customized to format code according to other style guides too.
 
 The following online docs are available:
 
@@ -35,14 +35,19 @@ The following online docs are available:
 
 - [GitHub development version](https://styler.r-lib.org/dev).
 
-
 ## Installation
 
-You can install the package from CRAN:
+You can install the package from CRAN.
 
 ```{r, eval = FALSE}
 install.packages("styler")
 ```
+
+If you don't use styler interactively (i.e. not from the R prompt or Rstudio 
+Addin), make sure you authorise `{R.cache}` once to set up a permanent cache. 
+If you use it interactively, you will be asked to grant this permission once.
+See `?caching` for details.
+
 
 Or get the development version from GitHub:
 
@@ -76,20 +81,6 @@ There are a few variants of `style_text()`:
 knitr::include_graphics("https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif")
 ```
 
-## Features
-
-* style roxygen2 code examples.
-
-* do not re-style [deliberate code
-  alignment](https://styler.r-lib.org/articles/detect-alignment.html).
-
-* [ignore some lines](https://styler.r-lib.org/reference/stylerignore.html) for 
-  styling (GitHub development version).
-
-* [cache styled expressions](https://styler.r-lib.org/reference/caching.html) 
-  for speed (GitHub development version). 
-  
-
 ## Configuration
 
 You can decide on the level of invasiveness with the scope argument. You can
@@ -116,11 +107,24 @@ Note that compared to the default used above `scope = "tokens"`:
 
 While spaces still got styled (around `=` in `(x)`).
 
-This was just the tip of the iceberg. To learn more about customization options 
-with the tidyverse style guide, see the [help file for `tidyverse_style](https://styler.r-lib.org/reference/tidyverse_style.html) for a
-quick overview or the 
-[introductory vignette](https://styler.r-lib.org/articles/introducing_styler.html).
+This was just the tip of the iceberg. To learn more about customization options
+with the tidyverse style guide, see the [help file for
+`tidyverse_style](https://styler.r-lib.org/reference/tidyverse_style.html) for a
+quick overview or the [introductory
+vignette](https://styler.r-lib.org/articles/introducing_styler.html).
 
+## Features
+
+* style roxygen2 code examples.
+
+* do not re-style [deliberate code
+  alignment](https://styler.r-lib.org/articles/detect-alignment.html).
+
+* [ignore some lines](https://styler.r-lib.org/dev/reference/stylerignore.html)
+  for styling.
+
+* [cache styled
+  expressions](https://styler.r-lib.org/dev/reference/caching.html) for speed.
 
 ## Adaption of styler
 
