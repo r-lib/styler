@@ -31,9 +31,9 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' @section Setup:
 #' styler by default uses caching, via the `{R.cache}` package. You will be
 #' asked you to let it create a permanent cache on your file system that styler
-#' will use in case you have not set that up already for another tool that
-#' uses `{R.cache}`.
-#' This is needed if you want to cache across R sessions and not just within.
+#' will use in case it is not set that up already for another tool that
+#' uses `{R.cache}`. We encourage users to let `{R.cache}` create a permanent
+#' directory for caching, because otherwise, the cache is lost at restart of R.
 #'
 #' @section Non-interactive use:
 #' Note that if you have never authorized `{R.cache}` to create the cache in a

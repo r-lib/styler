@@ -14,9 +14,9 @@ Code is cached by expression and the cache is shared across all APIs (e.g.
 
 styler by default uses caching, via the \code{{R.cache}} package. You will be
 asked you to let it create a permanent cache on your file system that styler
-will use in case you have not set that up already for another tool that
-uses \code{{R.cache}}.
-This is needed if you want to cache across R sessions and not just within.
+will use in case it is not set that up already for another tool that
+uses \code{{R.cache}}. We encourage users to let \code{{R.cache}} create a permanent
+directory for caching, because otherwise, the cache is lost at restart of R.
 }
 
 \section{Non-interactive use}{
