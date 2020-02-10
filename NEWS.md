@@ -48,7 +48,7 @@ Thanks to all contributors involved, in particular
 [&#x0040;davidski](https://github.com/davidski), 
 [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
 [&#x0040;pat-s](https://github.com/pat-s), and 
-[&#x0040;programming-wizard](https://github.com/programming-wizard)
+[&#x0040;programming-wizard](https://github.com/programming-wizard).
 
 # styler 1.2.0
 
