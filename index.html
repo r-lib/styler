@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -55,6 +55,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/caching.html">Caching</a>
+    </li>
+    <li>
       <a href="articles/customizing_styler.html">Customizing styler</a>
     </li>
     <li>
@@ -102,11 +105,17 @@
 <a href="#styler" class="anchor"></a>styler</h1></div>
 
 <p>The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to the <a href="https://style.tidyverse.org">tidyverse</a> formatting rules. styler can be customized to format code according to other style guides too.</p>
+<p>The following online docs are available:</p>
+<ul>
+<li><p><a href="https://styler.r-lib.org">latest CRAN release</a>.</p></li>
+<li><p><a href="https://styler.r-lib.org/dev">GitHub development version</a>.</p></li>
+</ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the package from CRAN:</p>
+<p>You can install the package from CRAN.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"styler"</span>)</a></code></pre></div>
+<p>If you don’t use styler interactively (i.e. not from the R prompt or Rstudio Addin), make sure you authorise <code>{R.cache}</code> once to set up a permanent cache. If you use it interactively, you will be asked to grant this permission once. See <code><a href="reference/caching.html">?caching</a></code> for details.</p>
 <p>Or get the development version from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"r-lib/styler"</span>)</a></code></pre></div>
@@ -123,74 +132,67 @@
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; }</span></a></code></pre></div>
 <p>There are a few variants of <code><a href="reference/style_text.html">style_text()</a></code>:</p>
 <ul>
-<li>
-<code><a href="reference/style_file.html">style_file()</a></code> styles .R and/or .Rmd files.</li>
-<li>
-<code><a href="reference/style_dir.html">style_dir()</a></code> styles all .R and/or .Rmd files in a directory.</li>
-<li>
-<code><a href="reference/style_pkg.html">style_pkg()</a></code> styles the source files of an R package.</li>
-<li>RStudio Addins for styling the active file, styling the current package and styling the highlighted code region.</li>
+<li><p><code><a href="reference/style_file.html">style_file()</a></code> styles .R, .Rmd .Rnw and .Rprofile, files.</p></li>
+<li><p><code><a href="reference/style_dir.html">style_dir()</a></code> styles all .R and/or .Rmd files in a directory.</p></li>
+<li><p><code><a href="reference/style_pkg.html">style_pkg()</a></code> styles the source files of an R package.</p></li>
+<li><p>RStudio Addins for styling the active file, styling the current package and styling the highlighted code region.</p></li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px"></p>
 </div>
-<div id="functionality-of-styler" class="section level2">
+<div id="configuration" class="section level2">
 <h2 class="hasAnchor">
-<a href="#functionality-of-styler" class="anchor"></a>Functionality of styler</h2>
-<p><strong>scope</strong></p>
+<a href="#configuration" class="anchor"></a>Configuration</h2>
 <p>You can decide on the level of invasiveness with the scope argument. You can style:</p>
 <ul>
-<li>just spaces.</li>
-<li>spaces and indention.</li>
-<li>spaces, indention and line breaks.</li>
-<li>spaces, indention, line breaks and tokens.</li>
+<li><p>just spaces.</p></li>
+<li><p>spaces and indention.</p></li>
+<li><p>spaces, indention and line breaks.</p></li>
+<li><p>spaces, indention, line breaks and tokens.</p></li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ugly_code &lt;-<span class="st"> "a=function( x){1+1}           "</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/style_text.html">style_text</a></span>(ugly_code, <span class="dt">scope =</span> <span class="st">"spaces"</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; a = function(x) {1 + 1}</span></a></code></pre></div>
 <p>Note that compared to the default used above <code>scope = "tokens"</code>:</p>
 <ul>
-<li>no line breaks were added.</li>
-<li>
-<code>&lt;-</code> was not replaced with <code>=</code>.</li>
+<li><p>no line breaks were added.</p></li>
+<li><p><code>&lt;-</code> was not replaced with <code>=</code>.</p></li>
 </ul>
 <p>While spaces still got styled (around <code>=</code> in <code>(x)</code>).</p>
-<p><strong>strict</strong></p>
-<p>If you wish to keep alignment as is, you can use <code>strict = FALSE</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/style_text.html">style_text</a></span>(</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">    <span class="st">"first  &lt;- 4"</span>,</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="st">"second &lt;- 1+1"</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">  ),</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="dt">strict =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; first  &lt;- 4</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; second &lt;- 1 + 1</span></a></code></pre></div>
-<p>This was just the tip of the iceberg. Learn more about customization with the tidyverse style guide in in this <a href="https://styler.r-lib.org/articles/introducing_styler.html">vignette</a>. If this is not flexible enough for you, you can implement your own style guide, as explained in the corresponding <a href="https://styler.r-lib.org/articles/customizing_styler.html">vignette</a>.</p>
+<p>This was just the tip of the iceberg. To learn more about customization options with the tidyverse style guide, see the <a href="https://styler.r-lib.org/reference/tidyverse_style.html">help file for `tidyverse_style</a> for a quick overview or the <a href="https://styler.r-lib.org/articles/introducing_styler.html">introductory vignette</a>.</p>
+</div>
+<div id="features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features" class="anchor"></a>Features</h2>
+<ul>
+<li><p>style roxygen2 code examples.</p></li>
+<li><p>do not re-style <a href="https://styler.r-lib.org/articles/detect-alignment.html">deliberate code alignment</a>.</p></li>
+<li><p><a href="https://styler.r-lib.org/dev/reference/stylerignore.html">ignore some lines</a> for styling.</p></li>
+<li><p><a href="https://styler.r-lib.org/dev/reference/caching.html">cache styled expressions</a> for speed.</p></li>
+</ul>
 </div>
 <div id="adaption-of-styler" class="section level2">
 <h2 class="hasAnchor">
 <a href="#adaption-of-styler" class="anchor"></a>Adaption of styler</h2>
-<p>styler functionality is made available through other packages, most notably</p>
+<p>styler functionality is made available through other tools, most notably</p>
 <ul>
-<li>
-<code><a href="https://usethis.r-lib.org/reference/tidyverse.html">usethis::use_tidy_style()</a></code> styles your project according to the tidyverse style guide.</li>
-<li>
-<code><a href="https://reprex.tidyverse.org/reference/reprex.html">reprex::reprex(style = TRUE)</a></code> to prettify reprex code before printing. To permanently use <code>style = TRUE</code> without specifying it every time, you can add the following line to your <code>.Rprofile</code> (via <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code>): <code><a href="https://rdrr.io/r/base/options.html">options(reprex.styler = TRUE)</a></code>.</li>
-<li>you can pretty-print your R code in RMarkdown reports without having styler modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g. <code>```{r name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy = "styler")</code> at the top of your RMarkdown script.</li>
-<li>as a pre-commit hook <code>style-files</code> in <a href="https://github.com/lorenzwalthert/pre-commit-hooks" class="uri">https://github.com/lorenzwalthert/pre-commit-hooks</a>.</li>
-<li>pretty-printing of <a href="https://github.com/ropensci/drake">drake</a> workflow data frames with <code>drake::drake_plan_source()</code>.</li>
-<li>Adding styler as a fixer to the <a href="https://github.com/w0rp/ale/pull/2401#issuecomment-485942966">ale Plug-in</a> for VIM.</li>
+<li><p>as a pre-commit hook <code>style-files</code> in <a href="https://github.com/lorenzwalthert/precommit" class="uri">https://github.com/lorenzwalthert/precommit</a></p></li>
+<li><p><code>usethis::use_tidy_style()</code> styles your project according to the tidyverse style guide.</p></li>
+<li><p>via commenting a PR on GitHub with <code>\style</code> when the <a href="https://github.com/features/actions">GitHub Action</a> <a href="https://github.com/r-lib/actions/tree/master/examples#tidyverse-ci-workflow"><em>Tidyverse CI</em></a> is used. The most convenient way to set this up is via <a href="https://usethis.r-lib.org/reference/github_actions.html?q=ghactions#use-github-actions-tidy-"><code>usethis::use_github_actions_tidy()</code></a>.</p></li>
+<li><p><code>reprex::reprex(style = TRUE)</code> to prettify reprex code before printing. To permanently use <code>style = TRUE</code> without specifying it every time, you can add the following line to your <code>.Rprofile</code> (via <code>usethis::edit_r_profile()</code>): <code><a href="https://rdrr.io/r/base/options.html">options(reprex.styler = TRUE)</a></code>.</p></li>
+<li><p>you can pretty-print your R code in RMarkdown reports without having styler modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g. <code>```{r name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy = "styler")</code> at the top of your RMarkdown script.</p></li>
+<li><p>Adding styler as a fixer to the <a href="https://github.com/w0rp/ale/pull/2401#issuecomment-485942966">ale Plug-in</a> for VIM.</p></li>
+<li><p>pretty-printing of <a href="https://github.com/ropensci/drake">drake</a> workflow data frames with <code>drake::drake_plan_source()</code>.</p></li>
+<li><p>Adding styler with <a href="https://github.com/lassik/emacs-format-all-the-code">emacs-format-all-the-code</a> for Emacs.</p></li>
 </ul>
 </div>
 <div id="further-resources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#further-resources" class="anchor"></a>Further resources</h2>
 <ul>
-<li>The official <a href="https://styler.r-lib.org/">web documentation</a> of styler, containing various vignettes function documentation as well as a change-log.</li>
-<li>
-<a href="https://lorenzwalthert.netlify.com/post/customizing-styler-the-quick-way/">Blog post</a> about how you can customize styler without being an expert.</li>
-<li>A <a href="https://www.tidyverse.org/articles/2017/12/styler-1.0.0/">tidyverse.org blog post</a> introducing the functionality of styler.</li>
-<li>The wiki of <a href="https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting">Google Summer of Code 2017</a> or the <a href="https://r-lib.github.io/styler/">pkgdown</a> page contain information related to the initial development phase during Google Summer of Code 2017.</li>
+<li><p>The official <a href="https://styler.r-lib.org/">web documentation</a> of styler, containing various vignettes function documentation as well as a change-log.</p></li>
+<li><p><a href="https://lorenzwalthert.netlify.com/post/customizing-styler-the-quick-way/">Blog post</a> about how you can customize styler without being an expert.</p></li>
+<li><p>A <a href="https://www.tidyverse.org/articles/2017/12/styler-1.0.0/">tidyverse.org blog post</a> introducing the functionality of styler and a <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">follow-up post</a> that introduces the new features since release 1.0.0.</p></li>
+<li><p>The wiki of <a href="https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting">Google Summer of Code 2017</a> or the <a href="https://r-lib.github.io/styler/">pkgdown</a> page contain information related to the initial development phase during Google Summer of Code 2017.</p></li>
 </ul>
 </div>
 </div>

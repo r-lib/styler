@@ -37,7 +37,9 @@
 
 <meta property="og:title" content="Obtain robust parse data — get_parse_data" />
 <meta property="og:description" content="Wrapper around utils::getParseData(parse(text = text)) that returns a flat
-parse table." />
+parse table. When caching information should be added, make sure that
+the cache is activated with cache_activate() and both transformers and
+cache_dir are non-NULL." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -70,7 +72,7 @@ parse table." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -92,6 +94,9 @@ parse table." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -143,7 +148,9 @@ parse table." />
 
     <div class="ref-description">
     <p>Wrapper around <code><a href='https://rdrr.io/r/utils/getParseData.html'>utils::getParseData(parse(text = text))</a></code> that returns a flat
-parse table.</p>
+parse table. When caching information should be added, make sure that
+the cache is activated with <code><a href='cache_activate.html'>cache_activate()</a></code> and both <code>transformers</code> and
+<code>cache_dir</code> are non-<code>NULL</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_parse_data</span>(<span class='no'>text</span>, <span class='kw'>include_text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>

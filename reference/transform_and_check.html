@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -91,6 +91,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -144,9 +147,17 @@
     <p>Transform an file and check whether it is identical to a reference.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>transform_and_check</span>(<span class='no'>in_item</span>, <span class='no'>out_item</span>, <span class='kw'>in_name</span> <span class='kw'>=</span> <span class='no'>in_item</span>,
-  <span class='kw'>out_name</span> <span class='kw'>=</span> <span class='no'>out_item</span>, <span class='no'>transformer</span>, <span class='no'>write_back</span>, <span class='kw'>write_tree</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>out_tree</span> <span class='kw'>=</span> <span class='st'>"_tree"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>transform_and_check</span>(
+  <span class='no'>in_item</span>,
+  <span class='no'>out_item</span>,
+  <span class='kw'>in_name</span> <span class='kw'>=</span> <span class='no'>in_item</span>,
+  <span class='kw'>out_name</span> <span class='kw'>=</span> <span class='no'>out_item</span>,
+  <span class='no'>transformer</span>,
+  <span class='no'>write_back</span>,
+  <span class='kw'>write_tree</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>out_tree</span> <span class='kw'>=</span> <span class='st'>"_tree"</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

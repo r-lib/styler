@@ -37,10 +37,10 @@
 
 <meta property="og:title" content="Style a roxygen code example segment — style_roxygen_code_example_segment" />
 <meta property="og:description" content="A roxygen code example segment corresponds to roxygen example code that
-contains at most one \dontrun{...} or friends.
+contains at most one \\dontrun{...} or friends.
 We drop all newline characters first because otherwise the code segment
 passed to this function was previously parsed with parse_roxygen() and
-line-breaks in and after the \dontrun{...} are expressed with &quot;\n&quot;, which
+line-breaks in and after the \\dontrun{...} are expressed with &quot;\n&quot;, which
 contradicts to the definition used elsewhere in this package, where every
 element in a vector corresponds to a line. These line-breaks don't get
 eliminated because they move to the front of a code_segment and
@@ -78,7 +78,7 @@ eliminated." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -100,6 +100,9 @@ eliminated." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -151,10 +154,10 @@ eliminated." />
 
     <div class="ref-description">
     <p>A roxygen code example segment corresponds to roxygen example code that
-contains at most one <code>\dontrun{...}</code> or friends.
+contains at most one <code>\\dontrun{...}</code> or friends.
 We drop all newline characters first because otherwise the code segment
 passed to this function was previously parsed with <code><a href='parse_roxygen.html'>parse_roxygen()</a></code> and
-line-breaks in and after the <code>\dontrun{...}</code> are expressed with <code>"\n"</code>, which
+line-breaks in and after the <code>\\dontrun{...}</code> are expressed with <code>"\n"</code>, which
 contradicts to the definition used elsewhere in this package, where every
 element in a vector corresponds to a line. These line-breaks don't get
 eliminated because they move to the front of a <code>code_segment</code> and
@@ -169,7 +172,7 @@ eliminated.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>one_dont</th>
-      <td><p>Bare R code containing at most one <code>\dontrun{...}</code> or
+      <td><p>Bare R code containing at most one <code>\\dontrun{...}</code> or
 friends.</p></td>
     </tr>
     <tr>

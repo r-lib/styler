@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -91,6 +91,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -144,7 +147,7 @@
     <p>Collapses a flattened parse table into character vector representation.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>serialize_parse_data_flattened</span>(<span class='no'>flattened_pd</span>, <span class='kw'>start_line</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>serialize_parse_data_flattened</span>(<span class='no'>flattened_pd</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,10 +155,6 @@
     <tr>
       <th>flattened_pd</th>
       <td><p>A flattened parse table.</p></td>
-    </tr>
-    <tr>
-      <th>start_line</th>
-      <td><p>The line number on which the code starts.</p></td>
     </tr>
     </table>
 

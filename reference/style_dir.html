@@ -71,7 +71,7 @@ Carefully examine the results after running this function!" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -93,6 +93,9 @@ Carefully examine the results after running this function!" />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -138,7 +141,7 @@ Carefully examine the results after running this function!" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Prettify arbitrary R code</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/ui.R'><code>R/ui.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/ui-styling.R'><code>R/ui-styling.R</code></a></small>
     <div class="hidden name"><code>style_dir.Rd</code></div>
     </div>
 
@@ -148,10 +151,17 @@ in a directory (by default only <code>.R</code> files are styled - see <code>fil
 Carefully examine the results after running this function!</p>
     </div>
 
-    <pre class="usage"><span class='fu'>style_dir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='no'>...</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
-  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>), <span class='kw'>filetype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"R"</span>, <span class='st'>"Rprofile"</span>),
-  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exclude_files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>style_dir</span>(
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
+  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>),
+  <span class='kw'>filetype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"R"</span>, <span class='st'>"Rprofile"</span>),
+  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>exclude_files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>exclude_dirs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"packrat"</span>, <span class='st'>"renv"</span>),
+  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,6 +203,10 @@ of <code>path</code> should be styled as well.</p></td>
       <th>exclude_files</th>
       <td><p>Character vector with paths to files that should be
 excluded from styling.</p></td>
+    </tr>
+    <tr>
+      <th>exclude_dirs</th>
+      <td><p>Character vector with directories to exclude.</p></td>
     </tr>
     <tr>
       <th>include_roxygen_examples</th>
@@ -239,9 +253,11 @@ inspect the changes.</p>
 <p>See section 'Warning' for a good strategy to apply styling safely.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other stylers: <code><a href='style_file.html'>style_file</a></code>,
-  <code><a href='style_pkg.html'>style_pkg</a></code>, <code><a href='style_text.html'>style_text</a></code>,
-  <code><a href='styler_addins.html'>styler_addins</a></code></p></div>
+    <div class='dont-index'><p>Other stylers: 
+<code><a href='style_file.html'>style_file</a>()</code>,
+<code><a href='style_pkg.html'>style_pkg</a>()</code>,
+<code><a href='style_text.html'>style_text</a>()</code>,
+<code><a href='styler_addins.html'>styler_addins</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

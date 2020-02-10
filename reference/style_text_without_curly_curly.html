@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>style_text()</code> without rules for <code>{{</code> — style_text_without_curly_curly • styler</title>
+<title><code>style_text()</code> without rules for <code>\{\{</code> — style_text_without_curly_curly • styler</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="<code>style_text()</code> without rules for <code>{{</code> — style_text_without_curly_curly" />
+<meta property="og:title" content="<code>style_text()</code> without rules for <code>\{\{</code> — style_text_without_curly_curly" />
 <meta property="og:description" content="This function mocks style_text(), but without taking into consideration the
 rules for the curly-curly syntactic sugar (introduced in rlang 0.4).
 This function (style_text_without_curly_curly()) is needed for testing
@@ -43,10 +43,10 @@ only, namely to test indention
 with multiple curly braces in a sequence. It is important to maintain testing
 for indention rules even as the curly-curly expression is always kept on the
 same line in the tidyverse style guide because we should
-ensure the underlaying mechanics for indention work correctly. When
+ensure the underlying mechanics for indention work correctly. When
 indention mechanisms are changed later, e.g. by simplifying
 compute_indent_indices(), we must have
-a way of testing this without the interaction of {{." />
+a way of testing this without the interaction of \{\{." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -79,7 +79,7 @@ a way of testing this without the interaction of {{." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -101,6 +101,9 @@ a way of testing this without the interaction of {{." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
@@ -145,7 +148,7 @@ a way of testing this without the interaction of {{." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>style_text()</code> without rules for <code>{{</code></h1>
+    <h1><code>style_text()</code> without rules for <code>\{\{</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/testing-mocks.R'><code>R/testing-mocks.R</code></a></small>
     <div class="hidden name"><code>style_text_without_curly_curly.Rd</code></div>
     </div>
@@ -158,14 +161,19 @@ only, namely to test indention
 with multiple curly braces in a sequence. It is important to maintain testing
 for indention rules even as the curly-curly expression is always kept on the
 same line in the tidyverse style guide because we should
-ensure the underlaying mechanics for indention work correctly. When
+ensure the underlying mechanics for indention work correctly. When
 indention mechanisms are changed later, e.g. by simplifying
 <code><a href='compute_indent_indices.html'>compute_indent_indices()</a></code>, we must have
-a way of testing this without the interaction of <code>{{</code>.</p>
+a way of testing this without the interaction of <code>\{\{</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>style_text_without_curly_curly</span>(<span class='no'>text</span>, <span class='no'>...</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
-  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>), <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>style_text_without_curly_curly</span>(
+  <span class='no'>text</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
+  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>),
+  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -173,11 +181,11 @@ a way of testing this without the interaction of <code>{{</code>.</p>
     <div class='dont-index'><p>set_line_break_around_curly_curly</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/style_text_without_curly_curly.html'>style_text_without_curly_curly</a></span>(<span class='st'>"rlang::list2({{ x }} := 2)"</span>)</div><div class='output co'>#&gt; rlang::<span style='color: #00BBBB;'>list2</span><span>({
-#&gt;   {
+    <pre class="examples"><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/style_text_without_curly_curly.html'>style_text_without_curly_curly</a></span>(<span class='st'>"rlang::list2({{ x }} := 2)"</span>)</div><div class='output co'>#&gt; rlang::<span style='color: #00BBBB;'>list2</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>{</span><span>
+#&gt;   </span><span style='color: #00BBBB;'>{</span><span>
 #&gt;     x
-#&gt;   }
-#&gt; } </span><span style='color: #00BB00;'>:=</span><span> </span><span style='color: #0000BB;'>2</span><span>)</div><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/style_text.html'>style_text</a></span>(<span class='st'>"rlang::list2({{ x }} := 3)"</span>)</div><div class='output co'>#&gt; rlang::</span><span style='color: #00BBBB;'>list2</span><span>({{ x }} </span><span style='color: #00BB00;'>:=</span><span> </span><span style='color: #0000BB;'>3</span><span>)</div></span></pre>
+#&gt;   </span><span style='color: #00BBBB;'>}</span><span>
+#&gt; </span><span style='color: #0000BB;'>}</span><span> </span><span style='color: #00BB00;'>:=</span><span> </span><span style='color: #0000BB;'>2</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/style_text.html'>style_text</a></span>(<span class='st'>"rlang::list2({{ x }} := 3)"</span>)</div><div class='output co'>#&gt; rlang::</span><span style='color: #00BBBB;'>list2</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>{</span><span style='color: #00BBBB;'>{</span><span> x </span><span style='color: #00BBBB;'>}</span><span style='color: #0000BB;'>}</span><span> </span><span style='color: #00BB00;'>:=</span><span> </span><span style='color: #0000BB;'>3</span><span style='color: #BBBB00;'>)</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
