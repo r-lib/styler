@@ -1,4 +1,4 @@
-# styler 1.2.9001
+# styler 1.3.0
 
 ## Breaking changes
 
