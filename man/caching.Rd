@@ -7,13 +7,15 @@
 Caching makes styler faster on repeated styling. It does not cache input
 but output code. That means if you style code that already complies to a
 style guide and you have previously styled that code, it will be quicker.
-Code is cached by expression and the cache is shared across all APIs.
+Code is cached by expression and the cache is shared across all APIs (e.g.
+\code{style_text()} and Addin.
 }
 \section{Setup}{
 
-styler by default uses caching. It may prompt you to install the R package
-\code{R.cache} the first time you want to use it. R.cache will also ask you to let
-it create a permanent cache on your file system that styler will use.
+styler by default uses caching, via the \code{{R.cache}} package. You will be
+asked you to let it create a permanent cache on your file system that styler
+will use in case you have not set that up already for another tool that
+uses \code{{R.cache}}.
 This is needed if you want to cache across R sessions and not just within.
 }
 
@@ -23,7 +25,8 @@ Note that if you have never authorized \code{{R.cache}} to create the cache in a
 permenent directory, it wil build the cache in a temporary directory. To
 create a permenent cache, just open an interactive R session and type
 \code{cache_info()}. You can see under \verb{Location:} if a permanent directory is
-used and if not, \code{{R.cache}} will ask you to create one.
+used and if not, \code{{R.cache}} will ask you to create one the first time you
+use \code{{R.cache}} in an R session.
 }
 
 \section{Invalidation}{

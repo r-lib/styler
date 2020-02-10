@@ -78,10 +78,9 @@ make_transformer <- function(transformers,
                              warn_empty = TRUE) {
   force(transformers)
   assert_transformers(transformers)
-  if (cache_is_activated()) assert_R.cache_installation(action = "warn")
 
   function(text) {
-    should_use_cache <- cache_is_activated() && rlang::is_installed("R.cache")
+    should_use_cache <- cache_is_activated()
 
     if (should_use_cache) {
       use_cache <- is_cached(text, transformers)

@@ -14,7 +14,6 @@
 #' @family cache managers
 #' @export
 cache_clear <- function(cache_name = NULL, ask = TRUE) {
-  assert_R.cache_installation()
   path_cache <- cache_find_path(cache_name)
   R.cache::clearCache(path_cache, prompt = ask)
   cache_deactivate(verbose = FALSE)
@@ -26,12 +25,14 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' Caching makes styler faster on repeated styling. It does not cache input
 #' but output code. That means if you style code that already complies to a
 #' style guide and you have previously styled that code, it will be quicker.
-#' Code is cached by expression and the cache is shared across all APIs.
+#' Code is cached by expression and the cache is shared across all APIs (e.g.
+#' `style_text()` and Addin.
 #'
 #' @section Setup:
-#' styler by default uses caching. It may prompt you to install the R package
-#' `R.cache` the first time you want to use it. R.cache will also ask you to let
-#' it create a permanent cache on your file system that styler will use.
+#' styler by default uses caching, via the `{R.cache}` package. You will be
+#' asked you to let it create a permanent cache on your file system that styler
+#' will use in case you have not set that up already for another tool that
+#' uses `{R.cache}`.
 #' This is needed if you want to cache across R sessions and not just within.
 #'
 #' @section Non-interactive use:
@@ -39,7 +40,8 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' permenent directory, it wil build the cache in a temporary directory. To
 #' create a permenent cache, just open an interactive R session and type
 #' `cache_info()`. You can see under `Location:` if a permanent directory is
-#' used and if not, `{R.cache}` will ask you to create one.
+#' used and if not, `{R.cache}` will ask you to create one the first time you
+#' use `{R.cache}` in an R session.
 #'
 #' @section Invalidation:
 #' The cache is specific to a version of styler by default, because different
@@ -77,7 +79,6 @@ NULL
 #' @family cache managers
 #' @export
 cache_info <- function(cache_name = NULL, format = "both") {
-  assert_R.cache_installation()
   rlang::arg_match(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
@@ -119,7 +120,6 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #' @family cache managers
 #' @export
 cache_activate <- function(cache_name = NULL, verbose = TRUE) {
-  assert_R.cache_installation()
   if (!is.null(cache_name)) {
     options("styler.cache_name" = cache_name)
   } else {

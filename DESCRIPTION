@@ -21,6 +21,7 @@ Imports:
     cli (>= 1.1.0),
     magrittr (>= 1.0.1),
     purrr (>= 0.2.3),
+    R.cache (>= 0.14.0),
     rematch2 (>= 2.0.1),
     rlang (>= 0.1.1),
     rprojroot (>= 1.1),
@@ -35,7 +36,6 @@ Suggests:
     here,
     knitr,
     prettycode,
-    R.cache (>= 0.14.0),
     rmarkdown,
     rstudioapi (>= 0.7),
     testthat (>= 2.1.0)

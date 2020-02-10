@@ -1,22 +1,10 @@
-
-capture.output(test_that("No warnings are issued when R.cache is installed", {
-  skip_if_not_installed("R.cache")
-  on.exit(clear_testthat_cache())
-  expect_silent(assert_R.cache_installation())
-  expect_warning(style_text("1+1"), NA)
-  expect_warning(activate_testthat_cache(), NA)
-  expect_warning(style_text("1+1"), NA)
-  expect_silent(assert_R.cache_installation())
-}))
-
-capture.output(test_that("Cache management works when R.cache is installed", {
-  skip_if_not_installed("R.cache")
+capture.output(test_that("Cache management works", {
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
   # clearing a cache inactivates the caching functionality.
   expect_false(cache_info(format = "tabular")$activated)
   activate_testthat_cache()
-  # at fresh startup, with R.cache installed
+  # at fresh startup
   expect_s3_class(cache_info(format = "tabular"), "tbl_df")
   expect_error(cache_info(), NA)
   expect_equal(basename(cache_activate()), styler_version)
