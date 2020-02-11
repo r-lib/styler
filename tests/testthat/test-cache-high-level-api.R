@@ -48,6 +48,43 @@ capture.output(test_that("activated cache brings speedup on style_text() API on 
 }))
 
 
+test_that("trailing line breaks are ignored for caching", {
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  activate_testthat_cache()
+
+  first <- system.time(styler::style_text(paste0(text, collapse = "\n")))
+  second <- system.time(
+    styler::style_text(c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n"))
+  )
+  expect_true(first["elapsed"] / 2 > second["elapsed"])
+  # check we only have three different expressions. Top-level, example and fun.
+  cache_info <- cache_info()
+  expect_equal(
+    cache_info$n,
+    3
+  )
+})
+
+test_that("trailing line breaks are ignored for caching in one scalar", {
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  activate_testthat_cache()
+
+  first <- system.time(styler::style_text(paste0(text, collapse = "\n")))
+  second <- system.time(
+    styler::style_text(
+      paste0(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n", collapse = "")
+  ))
+  expect_true(first["elapsed"] / 2 > second["elapsed"])
+  # check we only have three different expressions. Top-level, example and fun.
+  cache_info <- cache_info()
+  expect_equal(
+    cache_info$n,
+    3
+  )
+})
+
 capture.output(test_that("no speedup when tranformer changes", {
 
   activate_testthat_cache()
