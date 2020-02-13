@@ -179,3 +179,19 @@ capture.output(test_that("avoid removing roxygen mask (see commit messages in #5
     text2
   )
 }))
+
+
+capture.output(test_that("partial caching of multiple expressions on one line works", {
+
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  activate_testthat_cache()
+  text <- "1"
+  style_text(text)
+  text2 <- "1 # comment"
+  styled <- style_text(text)
+  expect_equal(
+    as.character(styled),
+    text2
+  )
+}))
