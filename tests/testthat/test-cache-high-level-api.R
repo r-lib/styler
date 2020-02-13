@@ -191,12 +191,10 @@ capture.output(test_that("partial caching of multiple expressions on one line wo
   )
 
   style_text("mtcars")
-  style_text("mtcars %>%
-  f()")
-  final_text <- "mtcars %>%
-  f() #"
+  style_text(c("mtcars %>%", "f()"))
+  final_text <- c("mtcars %>%", "  f() #")
   expect_equal(
     as.character(style_text(final_text)),
-    final_text,
+    final_text
   )
 }))
