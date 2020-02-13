@@ -60,7 +60,7 @@ cache_find_block <- function(pd) {
 
   first_on_line_idx <- which(!not_first_on_line)
   valid_replacements <- map_int(invalid_turning_point_idx, function(x) {
-    last(which(x > first_on_line_idx))
+    first_on_line_idx[last(which(x > first_on_line_idx))]
   })
   sort(unique(c(
     setdiff(which(first_after_cache_state_switch), invalid_turning_point_idx),
