@@ -18,7 +18,7 @@ create_tokens(
   child = NULL,
   stylerignore = FALSE,
   block = NA,
-  is_cached = NA
+  is_cached = FALSE
 )
 }
 \arguments{

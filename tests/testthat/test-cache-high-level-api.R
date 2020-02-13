@@ -189,7 +189,7 @@ capture.output(test_that("partial caching of multiple expressions on one line wo
   text <- "1"
   style_text(text)
   text2 <- "1 # comment"
-  styled <- style_text(text)
+  styled <- style_text(text2)
   expect_equal(
     as.character(styled),
     text2
