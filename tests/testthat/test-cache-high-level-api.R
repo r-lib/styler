@@ -24,7 +24,6 @@ text <- c(
   rep(10)
 
 capture.output(test_that("activated cache brings speedup on style_text() API on character vector", {
-
   activate_testthat_cache()
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
@@ -36,7 +35,6 @@ capture.output(test_that("activated cache brings speedup on style_text() API on 
 }))
 
 capture.output(test_that("activated cache brings speedup on style_text() API on character scalar", {
-
   activate_testthat_cache()
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
@@ -75,7 +73,8 @@ test_that("trailing line breaks are ignored for caching in one scalar", {
   second <- system.time(
     styler::style_text(
       paste0(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n", collapse = "")
-  ))
+    )
+  )
   expect_true(first["elapsed"] / 2 > second["elapsed"])
   # check we only have three different expressions. Top-level, example and fun.
   cache_info <- cache_info()
@@ -86,7 +85,6 @@ test_that("trailing line breaks are ignored for caching in one scalar", {
 })
 
 capture.output(test_that("no speedup when tranformer changes", {
-
   activate_testthat_cache()
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
@@ -112,11 +110,11 @@ capture.output(
     first <- system.time(styler::style_text(text))
     second <- system.time(styler::style_text(paste0(text, collapse = "\n")))
     expect_true(first["elapsed"] / 2 > second["elapsed"])
-  }))
+  })
+)
 
 
 capture.output(test_that("unactivated cache does not bring speedup", {
-
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
   cache_deactivate()
@@ -127,7 +125,6 @@ capture.output(test_that("unactivated cache does not bring speedup", {
 
 
 capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
-
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
   activate_testthat_cache()
@@ -136,7 +133,7 @@ capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
     "# Comment",
     "# another",
     "NULL"
-    )
+  )
   style_text(text)
   text2 <- c(
     "1 + 1",
@@ -152,7 +149,6 @@ capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
 
 
 capture.output(test_that("avoid removing roxygen mask (see commit messages in #584)", {
-
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
   activate_testthat_cache()
@@ -177,5 +173,28 @@ capture.output(test_that("avoid removing roxygen mask (see commit messages in #5
   expect_equal(
     as.character(style_text(text2)),
     text2
+  )
+}))
+
+
+capture.output(test_that("partial caching of multiple expressions on one line works", {
+  on.exit(clear_testthat_cache())
+  clear_testthat_cache()
+  activate_testthat_cache()
+  text <- "1"
+  style_text(text)
+  text2 <- "1 # comment"
+  styled <- style_text(text2)
+  expect_equal(
+    as.character(styled),
+    text2
+  )
+
+  style_text("mtcars")
+  style_text(c("mtcars %>%", "f()"))
+  final_text <- c("mtcars %>%", "  f() #")
+  expect_equal(
+    as.character(style_text(final_text)),
+    final_text
   )
 }))

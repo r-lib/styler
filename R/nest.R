@@ -243,7 +243,8 @@ add_terminal_token_before <- function(pd_flat) {
 #' @describeIn add_token_terminal Initializes `newlines` and `lag_newlines`.
 #' @keywords internal
 add_attributes_caching <- function(pd_flat, transformers) {
-  pd_flat$block <- pd_flat$is_cached <- rep(NA, nrow(pd_flat))
+  pd_flat$block  <- rep(NA, nrow(pd_flat))
+  pd_flat$is_cached <- rep(FALSE, nrow(pd_flat))
   if (cache_is_activated()) {
     is_parent <- pd_flat$parent == 0
     pd_flat$is_cached[is_parent] <- map_lgl(

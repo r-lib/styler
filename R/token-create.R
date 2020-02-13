@@ -37,7 +37,7 @@ create_tokens <- function(tokens,
                           child = NULL,
                           stylerignore = FALSE,
                           block = NA,
-                          is_cached = NA) {
+                          is_cached = FALSE) {
   len_text <- length(texts)
   new_tibble(
     list(
