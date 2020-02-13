@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.1.9000</span>
       </span>
     </div>
 
@@ -140,6 +140,22 @@
       <small>Source: <a href='https://github.com/r-lib/styler/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="styler-1-3-1" class="section level1">
+<h1 class="page-header">
+<a href="#styler-1-3-1" class="anchor"></a>styler 1.3.1<small> 2020-02-13 </small>
+</h1>
+<p>Emergency release. In case multiple expressions are on one line and only some of them are cached, styler can remove code. To reach this state, some of the expressions must have been styled previously alone and the cache must be active. Example:</p>
+<pre><code><a href="https://rdrr.io/r/base/library.html">library(styler)
+cache_activate()
+#&gt; Using cache 1.3.0 at ~/.Rcache/styler/1.3.0.
+style_text("1")
+#&gt; 1
+style_text("1 # comment")
+#&gt; # comment</a></code></pre>
+<p>This is obviously detrimental. We have added additional tests and fixed the problem (<a href='https://github.com/r-lib/styler/issues/593'>#593</a>, <a href='https://github.com/r-lib/styler/issues/595'>#595</a>), but we want repeat the warning from <code><a href="../reference/style_file.html">?style_file</a></code> that all style APIs apart from <code><a href="../reference/style_text.html">style_text()</a></code> overwrite code and that styler can only check the AST remains valid with <code>scope &lt; "tokens"</code>. So use this if you are conservative. Or deactivate the cache with <code>deactivate_cache()</code> until it has fully matured.</p>
+<p>We thank the people who have contributed to this release:</p>
+<p><a href="https://github.com/ellessenne">@ellessenne</a> and <a href="https://github.com/renkun-ken">@renkun-ken</a>.</p>
+</div>
     <div id="styler-1-3-0" class="section level1">
 <h1 class="page-header">
 <a href="#styler-1-3-0" class="anchor"></a>styler 1.3.0<small> 2020-02-10 </small>
@@ -423,6 +439,7 @@ initialize_default_attributes(pd_flat)</a></code></pre>
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#styler-1-3-1">1.3.1</a></li>
         <li><a href="#styler-1-3-0">1.3.0</a></li>
         <li><a href="#styler-1-2-0">1.2.0</a></li>
         <li><a href="#styler-1-1-1">1.1.1</a></li>
