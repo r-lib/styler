@@ -21,22 +21,25 @@ test_that("tree hierarchy is the same no matter whether = or <- is used", {
   expect_equal(assign_eq, assign_left)
 
   assign_left <- create_tree(
-    "x = b =  5", structure_only = TRUE
+    "x = b =  5",
+    structure_only = TRUE
   )
-  assign_eq <-  create_tree(
-    "x <- b <-  5", structure_only = TRUE
+  assign_eq <- create_tree(
+    "x <- b <-  5",
+    structure_only = TRUE
   )
   expect_equal(assign_eq, assign_left)
 
 
   assign_left_many <- create_tree(
-    "x = b = c = d = r=  5", structure_only = TRUE
+    "x = b = c = d = r=  5",
+    structure_only = TRUE
   )
-  assign_eq_many <-  create_tree(
-    "x <- b <- c <- d <- r <- 5", structure_only = TRUE
+  assign_eq_many <- create_tree(
+    "x <- b <- c <- d <- r <- 5",
+    structure_only = TRUE
   )
   expect_equal(assign_eq_many, assign_left_many)
-
 })
 
 test_that("braces are added in the right place in ifelse if eq_assign is in expr", {

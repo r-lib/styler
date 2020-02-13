@@ -15,7 +15,7 @@ test_that("create_trees outputs are not identical structure if trees have differ
   eq <- "a <- fun(a = 1:3)"
   arrow <- "a <- data.frame(x = qq)"
   expect_true(
-      nrow(create_tree(eq, structure_only = TRUE)) !=
-    nrow(create_tree(arrow, structure_only = TRUE))
+    nrow(create_tree(eq, structure_only = TRUE)) !=
+      nrow(create_tree(arrow, structure_only = TRUE))
   )
 })

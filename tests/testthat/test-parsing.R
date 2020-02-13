@@ -1,11 +1,14 @@
 context("circumvent parsing bugs")
 
 test_that("repreated parsing solves wrong parent assignment", {
-  expect_warning(test_collection(
-    "parsing", "repeated_parsing",
-    transformer = style_text,
-    strict = FALSE),
-    NA)
+  expect_warning(
+    test_collection(
+      "parsing", "repeated_parsing",
+      transformer = style_text,
+      strict = FALSE
+    ),
+    NA
+  )
 
   # move to temp dir
   dir <- tempfile("styler")

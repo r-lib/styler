@@ -22,7 +22,7 @@ test_that("pos_id can be created", {
       create_tokens("XZY_TEST", "test", pos_ids = new_id),
       pd
     ),
-  NA
+    NA
   )
 })
 
@@ -47,4 +47,3 @@ test_that("unambiguous pos_id won't be created (up)", {
   )
   expect_error(create_pos_id(pd, 1L, by = 0.4, after = TRUE))
 })
-

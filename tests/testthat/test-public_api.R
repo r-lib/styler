@@ -12,7 +12,7 @@ test_that("styler can style package", {
 test_that("styler can style package and exclude some directories", {
   capture_output(expect_true({
     styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
-        exclude_dirs = "tests"
+      exclude_dirs = "tests"
     )
     nrow(styled) == 1
   }))
@@ -22,16 +22,16 @@ test_that("styler can style package and exclude some directories", {
 test_that("styler can style package and exclude some directories and files", {
   capture_output(expect_true({
     styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
-                        exclude_dirs = "tests",
-                        exclude_files = ".Rprofile"
+      exclude_dirs = "tests",
+      exclude_files = ".Rprofile"
     )
     nrow(styled) == 1
   }))
 
   capture_output(expect_true({
     styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
-                        exclude_dirs = "tests",
-                        exclude_files = "./.Rprofile"
+      exclude_dirs = "tests",
+      exclude_files = "./.Rprofile"
     )
     nrow(styled) == 1
   }))
@@ -148,16 +148,16 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
 context("messages are correct")
 
 test_that("messages (via cat()) of style_file are correct", {
-
   for (encoding in ls_testable_encodings()) {
     withr::with_options(
-      list(cli.unicode = encoding == "utf8"), {
+      list(cli.unicode = encoding == "utf8"),
+      {
         # Message if scope > line_breaks and code changes
         output <- catch_style_file_output(c(
           "public-api",
-            "xyzdir-dirty",
-            "dirty-sample-with-scope-tokens.R"
-          ), encoding = encoding)
+          "xyzdir-dirty",
+          "dirty-sample-with-scope-tokens.R"
+        ), encoding = encoding)
         expect_known_value(
           output,
           testthat_file(paste0(

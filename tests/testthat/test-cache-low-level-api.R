@@ -1,5 +1,4 @@
 test_that("caching utils make right blocks with semi-colon", {
-
   blocks_simple_uncached <- compute_parse_data_nested(c("1 + 1", "2; 1+1")) %>%
     dplyr::mutate(is_cached = FALSE) %>%
     cache_find_block()
@@ -33,12 +32,12 @@ test_that("caching utils make right blocks with comments", {
   blocks_simple_uncached <- compute_parse_data_nested(text) %>%
     dplyr::mutate(is_cached = c(
       FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE,
-      TRUE, FALSE, FALSE, FALSE)
-    ) %>%
+      TRUE, FALSE, FALSE, FALSE
+    )) %>%
     cache_find_block()
   expect_equal(blocks_simple_uncached, c(1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 4, 4, 4))
 
-  text <- '
+  text <- "
    ### comment
    x = 1
    y = 2 # comment
@@ -47,14 +46,13 @@ test_that("caching utils make right blocks with comments", {
 
    # something something
    tau1 = 1 # here?
-   '
+   "
   blocks_simple_cached <- compute_parse_data_nested(text) %>%
     dplyr::mutate(is_cached = c(
-      FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)
-    ) %>%
+      FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE
+    )) %>%
     cache_find_block()
   expect_equal(blocks_simple_cached, c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2))
-
 })
 
 

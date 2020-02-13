@@ -35,15 +35,15 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
   activate_testthat_cache()
   benchmark <- system.time(text_styled <- style_text(text))
   full_cached_benchmark <- system.time(style_text(text_styled))
-  expect_lt(full_cached_benchmark['elapsed'], .1)
+  expect_lt(full_cached_benchmark["elapsed"], .1)
   # modify one function declaration
-  text_styled[2] <-gsub(")", " )", text_styled[2], fixed = TRUE)
+  text_styled[2] <- gsub(")", " )", text_styled[2], fixed = TRUE)
   partially_cached_benchmark <- system.time(style_text(text_styled))
   cache_deactivate()
   not_cached_benchmark <- system.time(style_text(text_styled))
   expect_lt(
-    partially_cached_benchmark['elapsed'] * 3,
-    not_cached_benchmark['elapsed']
+    partially_cached_benchmark["elapsed"] * 3,
+    not_cached_benchmark["elapsed"]
   )
 })
 
@@ -106,5 +106,3 @@ test_that("When expressions are cached, number of newlines between them are pres
     as.character(style_text(text))
   )
 })
-
-
