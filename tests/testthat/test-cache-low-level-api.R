@@ -16,6 +16,48 @@ test_that("caching utils make right blocks with semi-colon", {
   expect_equal(blocks_edge, c(1, 2, 2, 2))
 })
 
+test_that("caching utils make right blocks with comments", {
+  text <- '
+   ### comment
+   x = 1 ### comment
+   y = 2 # comment
+   x<-1 ###comment
+   y <- 2 # comment
+   "a string here"
+
+   # something something
+   tau1 = 1 # here?
+   '
+
+
+  blocks_simple_uncached <- compute_parse_data_nested(text) %>%
+    dplyr::mutate(is_cached = c(
+      FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE,
+      TRUE, FALSE, FALSE, FALSE)
+    ) %>%
+    cache_find_block()
+  expect_equal(blocks_simple_uncached, c(1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 4, 4, 4))
+
+  text <- '
+   ### comment
+   x = 1
+   y = 2 # comment
+   x<-1
+   y <- 2 # comment
+
+   # something something
+   tau1 = 1 # here?
+   '
+  blocks_simple_cached <- compute_parse_data_nested(text) %>%
+    dplyr::mutate(is_cached = c(
+      FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)
+    ) %>%
+    cache_find_block()
+  expect_equal(blocks_simple_cached, c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2))
+
+})
+
+
 test_that("blank lines are correctly identified", {
   on.exit(clear_testthat_cache())
   clear_testthat_cache()

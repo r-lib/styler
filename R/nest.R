@@ -46,9 +46,10 @@ add_cache_block <- function(pd_nested) {
 
 #' Drop all children of a top level expression that are cached
 #'
-#' Note that we do cache top-level comments. Because package code has a lot of
-#' roxygen comments and each of them is a top level expresion, checking is
-#' very expensive.
+#' Note that we do not cache top-level comments. Because package code has a lot
+#' of roxygen comments and each of them is a top level expresion, checking is
+#' very expensive. More expensive than styling, because comments are always
+#' terminals.
 #' @param pd A top-level nest.
 #' @details
 #' Because we process in blocks of expressions for speed, a cached expression
