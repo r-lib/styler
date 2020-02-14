@@ -10,7 +10,7 @@ env_add_stylerignore <- function(pd_flat) {
     env_current$stylerignore <- pd_flat[0, ]
     return()
   }
-  pd_flat_temp <- pd_flat[pd_flat$terminal, ] %>%
+  pd_flat_temp <- pd_flat[pd_flat$terminal | pd_flat$is_cached, ] %>%
     default_style_guide_attributes()
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
   pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0)
