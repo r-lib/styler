@@ -126,10 +126,10 @@ drop_cached_children <- function(pd) {
 #'   top level expression, potentially cached.
 #' @examples
 #' # Note that top-level comments **above** code have negative parents
-#' (the negative value of the parent of the code expression that follows after,
-#' another comment might be in the way though), all comments that are not top
-#' level have positive ids. All comments for which no code follows afterwards
-#' have parent 0.
+#' # (the negative value of the parent of the code expression that follows after,
+#' # a nother comment might be in the way though), all comments that are not top
+#' # level have positive ids. All comments for which no code follows afterwards
+#' # have parent 0.
 #' styler:::get_parse_data(c("#", "1"))
 #' styler:::get_parse_data(c("c(#", "1)"))
 #' styler:::get_parse_data(c("", "c(#", "1)", "#"))
