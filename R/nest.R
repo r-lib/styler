@@ -9,15 +9,8 @@
 #' @keywords internal
 compute_parse_data_nested <- function(text,
                                       transformers) {
-  parse_data <- tokenize(text) %>%
-    add_terminal_token_before() %>%
-    add_terminal_token_after() %>%
-    add_stylerignore() %>%
-    add_attributes_caching(transformers) %>%
-    drop_cached_children()
-
+  parse_data <- text_to_flat_pd(text, transformers)
   env_add_stylerignore(parse_data)
-
   parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
     nest_parse_data() %>%
@@ -26,6 +19,23 @@ compute_parse_data_nested <- function(text,
     add_cache_block()
 
   pd_nested
+}
+
+#' Creates a flat parse table with minimal initialization.
+#'
+#' @inheritParams tokenize
+#' @inheritParams add_attributes_caching
+#' @details
+#' Note that the parse table might be shallow if caching is enabled and some
+#' values are cached.
+#' @keywords internal
+text_to_flat_pd <- function(text, transformers) {
+  tokenize(text) %>%
+    add_terminal_token_before() %>%
+    add_terminal_token_after() %>%
+    add_stylerignore() %>%
+    add_attributes_caching(transformers) %>%
+    drop_cached_children()
 }
 
 #' Add the block id to a parse table
@@ -239,12 +249,18 @@ add_terminal_token_before <- function(pd_flat) {
 
 #' Initialise variables related to caching
 #'
+#' Note that this does function must be called in [compute_parse_data_nested()]
+#' and we cannot wait to initialize this attribute until [appy_transformers()],
+#' where all other attributes are initialized with
+#' [default_style_guide_attributes()] (when using [tidyverse_style()]) because
+#' for cached code, we don't build up the nested structure and leave it shallow,
+#' see also [drop_cached_children()].
 #' @param transformers A list with transformer functions, used to check if
 #'   the code is cached.
 #' @describeIn add_token_terminal Initializes `newlines` and `lag_newlines`.
 #' @keywords internal
 add_attributes_caching <- function(pd_flat, transformers) {
-  pd_flat$block  <- rep(NA, nrow(pd_flat))
+  pd_flat$block <- rep(NA, nrow(pd_flat))
   pd_flat$is_cached <- rep(FALSE, nrow(pd_flat))
   if (cache_is_activated()) {
     is_parent <- pd_flat$parent == 0
