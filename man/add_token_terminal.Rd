@@ -23,9 +23,12 @@ remove_terminal_token_before_and_after(pd_flat)
 the code is cached.}
 }
 \description{
-Add information about previous / next token to each terminal
-
-Initialise variables related to caching
+Note that this does function must be called in \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}
+and we cannot wait to initialize this attribute until \code{\link[=apply_transformers]{apply_transformers()}},
+where all other attributes are initialized with
+\code{\link[=default_style_guide_attributes]{default_style_guide_attributes()}} (when using \code{\link[=tidyverse_style]{tidyverse_style()}}) because
+for cached code, we don't build up the nested structure and leave it shallow,
+see also \code{\link[=drop_cached_children]{drop_cached_children()}}.
 }
 \section{Functions}{
 \itemize{
