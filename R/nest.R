@@ -115,18 +115,28 @@ drop_cached_children <- function(pd) {
 #' Find the pos ids to keep
 #'
 #' To make a parse table shallow, we must know which ids to keep.
-#' `split(cumsum(pd_parent_first$parent < 1))` above puts comments with negative
-#' parents in the same block as proceeding expressions. `find_pos_id_to_keep()`
-#' must hence always keep comments. We did not use
-#' `split(cumsum(pd_parent_first$parent < 1))` because then every comment is an
+#' `split(cumsum(pd_parent_first$parent == 0))` above puts comments with negative
+#' parents in the same block as proceeding expressions (but also with positive).
+#' `find_pos_id_to_keep()` must hence always keep negative comments. We did not
+#' use `split(cumsum(pd_parent_first$parent < 1))` because then every top-level
+#' comment is an
 #' expression on its own and processing takes much longer for typical roxygen
 #' annotated code
 #' @param pd A temporary top level nest where the first expression is always a
 #'   top level expression, potentially cached.
+#' @examples
+#' # Note that top-level comments **above** code have negative parents
+#' (the negative value of the parent of the code expression that follows after,
+#' another comment might be in the way though), all comments that are not top
+#' level have positive ids. All comments for which no code follows afterwards
+#' have parent 0.
+#' styler:::get_parse_data(c("#", "1"))
+#' styler:::get_parse_data(c("c(#", "1)"))
+#' styler:::get_parse_data(c("", "c(#", "1)", "#"))
 #' @keywords internal
 find_pos_id_to_keep <- function(pd) {
   if (pd$is_cached[1]) {
-    pd$pos_id[c(TRUE, pd[-1L, "token"] == "COMMENT")]
+    pd$pos_id[pd$parent <= 0]
   } else {
     pd$pos_id
   }
