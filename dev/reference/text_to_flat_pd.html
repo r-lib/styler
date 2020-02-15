@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add information about previous / next token to each terminal — add_token_terminal • styler</title>
+<title>Creates a flat parse table with minimal initialization. — text_to_flat_pd • styler</title>
 
 
 <!-- jquery -->
@@ -35,13 +35,8 @@
 
 
 
-<meta property="og:title" content="Add information about previous / next token to each terminal — add_token_terminal" />
-<meta property="og:description" content="Note that this does function must be called in compute_parse_data_nested()
-and we cannot wait to initialize this attribute until apply_transformers(),
-where all other attributes are initialized with
-default_style_guide_attributes() (when using tidyverse_style()) because
-for cached code, we don't build up the nested structure and leave it shallow,
-see also drop_cached_children()." />
+<meta property="og:title" content="Creates a flat parse table with minimal initialization. — text_to_flat_pd" />
+<meta property="og:description" content="Creates a flat parse table with minimal initialization." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -143,34 +138,23 @@ see also drop_cached_children()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add information about previous / next token to each terminal</h1>
+    <h1>Creates a flat parse table with minimal initialization.</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/nest.R'><code>R/nest.R</code></a></small>
-    <div class="hidden name"><code>add_token_terminal.Rd</code></div>
+    <div class="hidden name"><code>text_to_flat_pd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Note that this does function must be called in <code><a href='compute_parse_data_nested.html'>compute_parse_data_nested()</a></code>
-and we cannot wait to initialize this attribute until <code><a href='apply_transformers.html'>apply_transformers()</a></code>,
-where all other attributes are initialized with
-<code><a href='default_style_guide_attributes.html'>default_style_guide_attributes()</a></code> (when using <code><a href='tidyverse_style.html'>tidyverse_style()</a></code>) because
-for cached code, we don't build up the nested structure and leave it shallow,
-see also <code><a href='drop_cached_children.html'>drop_cached_children()</a></code>.</p>
+    <p>Creates a flat parse table with minimal initialization.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_terminal_token_after</span>(<span class='no'>pd_flat</span>)
-
-<span class='fu'>add_terminal_token_before</span>(<span class='no'>pd_flat</span>)
-
-<span class='fu'>add_attributes_caching</span>(<span class='no'>pd_flat</span>, <span class='no'>transformers</span>)
-
-<span class='fu'>remove_terminal_token_before_and_after</span>(<span class='no'>pd_flat</span>)</pre>
+    <pre class="usage"><span class='fu'>text_to_flat_pd</span>(<span class='no'>text</span>, <span class='no'>transformers</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pd_flat</th>
-      <td><p>A flat parse table.</p></td>
+      <th>text</th>
+      <td><p>A character vector.</p></td>
     </tr>
     <tr>
       <th>transformers</th>
@@ -179,22 +163,17 @@ the code is cached.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
-<li><p><code>add_attributes_caching</code>: Initializes <code>newlines</code> and <code>lag_newlines</code>.</p></li>
-<li><p><code>remove_terminal_token_before_and_after</code>: Removes column <code>terimnal_token_before</code>. Might
-be used to prevent the use of invalidated information, e.g. if tokens were
-added to the nested parse table.</p></li>
-</ul>
+    <p>Note that the parse table might be shallow if caching is enabled and some
+values are cached.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#functions">Functions</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>
