@@ -24,7 +24,7 @@ the code is cached.}
 }
 \description{
 Note that this does function must be called in \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}
-and we cannot wait to initialize this attribute until \code{\link[=appy_transformers]{appy_transformers()}},
+and we cannot wait to initialize this attribute until \code{\link[=apply_transformers]{apply_transformers()}},
 where all other attributes are initialized with
 \code{\link[=default_style_guide_attributes]{default_style_guide_attributes()}} (when using \code{\link[=tidyverse_style]{tidyverse_style()}}) because
 for cached code, we don't build up the nested structure and leave it shallow,

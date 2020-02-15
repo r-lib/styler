@@ -260,7 +260,7 @@ add_terminal_token_before <- function(pd_flat) {
 #' Initialise variables related to caching
 #'
 #' Note that this does function must be called in [compute_parse_data_nested()]
-#' and we cannot wait to initialize this attribute until [appy_transformers()],
+#' and we cannot wait to initialize this attribute until [apply_transformers()],
 #' where all other attributes are initialized with
 #' [default_style_guide_attributes()] (when using [tidyverse_style()]) because
 #' for cached code, we don't build up the nested structure and leave it shallow,
