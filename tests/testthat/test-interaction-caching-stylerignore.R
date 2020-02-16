@@ -1,8 +1,7 @@
 test_that("caching works with stylerignore for multi-token lines when partly cached before", {
+  on.exit(cache_deactivate())
+  fresh_testthat_cache()
   text1 <- "1 + 1"
-  activate_testthat_cache()
-  cache_clear(ask = FALSE)
-  activate_testthat_cache()
   expect_equal(
     as.character(style_text(text1)),
     text1
@@ -22,6 +21,7 @@ test_that("caching works with stylerignore for multi-token lines when partly cac
 
 test_that("caching works with stylerignore for multi-token lines", {
   on.exit(cache_deactivate())
+  fresh_testthat_cache()
   text3 <- c(
     "# styler: off",
     "1 + 1 #comment2",

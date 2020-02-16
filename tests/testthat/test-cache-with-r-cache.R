@@ -29,10 +29,9 @@ capture.output(test_that("Cache management works", {
 
 test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
   on.exit(clear_testthat_cache())
-  clear_testthat_cache()
+  fresh_testthat_cache()
   text <- test_path("cache-with-r-cache/mlflow-1-in.R") %>%
     readLines()
-  activate_testthat_cache()
   benchmark <- system.time(text_styled <- style_text(text))
   full_cached_benchmark <- system.time(style_text(text_styled))
   expect_lt(full_cached_benchmark["elapsed"], .1)
@@ -77,8 +76,7 @@ capture.output(test_that("cached expressions are displayed propperly", {
 
 test_that("When expressions are cached, number of newlines between them are preserved", {
   on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
+  fresh_testthat_cache()
   text <- c(
     "1 + 1",
     "",
