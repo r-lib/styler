@@ -1,3 +1,13 @@
+# styler 1.3.1.9000
+
+## Minor changes and fixes
+
+- code is now correctly formatted in stylerignore sequence for tokens that would
+  have been modified outside the stylerignore sequence with the style guide in 
+  use (#602).
+- styler formats now correctly when code in stylerignore sequence is partially 
+  cached (#600).
+
 # styler 1.3.1
 
 Emergency release. In case multiple expressions are on one line and only 
