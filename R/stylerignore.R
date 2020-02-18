@@ -101,9 +101,9 @@ apply_stylerignore <- function(flattened_pd) {
   if (!env_current$any_stylerignore) {
     return(flattened_pd)
   }
-  pos_ids <- env_current$stylerignore$pos_id
+  env_current$stylerignore$pos_id_ <- env_current$stylerignore$pos_id
   colnames_required_apply_stylerignore <- c(
-    "pos_id", "lag_newlines", "lag_spaces", "text", "first_pos_id_in_segment"
+    "pos_id_", "lag_newlines", "lag_spaces", "text", "first_pos_id_in_segment"
   )
   # cannot rely on flattened_pd$text == option_read("styler.ignore_start")
   # because if the marker logic is not correct (twice off in a row), we'll
@@ -124,7 +124,7 @@ apply_stylerignore <- function(flattened_pd) {
     stylerignore_consolidate_col("lag_newlines") %>%
     stylerignore_consolidate_col("lag_spaces") %>%
     stylerignore_consolidate_col("text") %>%
-    stylerignore_consolidate_col("pos_id", "pos_id", "pos_id.y")
+    stylerignore_consolidate_col("pos_id", "pos_id", "pos_id_")
 }
 
 #' Consolidate columns after a merge
