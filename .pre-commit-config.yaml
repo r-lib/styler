@@ -4,7 +4,7 @@ repos:
     rev: v0.0.0.9027
     hooks:
     # -   id: lintr
-    -   id: style-files
+    # -   id: style-files Does style *-in.R files in tests otherwise!
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: readme-rmd-rendered

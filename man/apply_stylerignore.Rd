@@ -18,6 +18,12 @@ Ensure correct positional information for stylerignore expressions
 \code{env_current}, which recorded that information from the input text.
 \item Replace the computed lag_newlines and lag_spaces information in the parse
 table with this information.
+\item Because we may remove or add tokens when appling the transformers, it is
+not save to merge
+via the pos_id of each token in a stylerignore sequence. We assume
+that the start and stop markers are the same after styling, so we join
+all tokens that were initially in a stylerignore sequence via the first
+pos_id in that stylerignore sequence.
 }
 }
 \keyword{internal}
