@@ -123,7 +123,8 @@ apply_stylerignore <- function(flattened_pd) {
   flattened_pd %>%
     stylerignore_consolidate_col("lag_newlines") %>%
     stylerignore_consolidate_col("lag_spaces") %>%
-    stylerignore_consolidate_col("text")
+    stylerignore_consolidate_col("text") %>%
+    stylerignore_consolidate_col("pos_id", "pos_id", "pos_id.y")
 }
 
 #' Consolidate columns after a merge
@@ -134,16 +135,25 @@ apply_stylerignore <- function(flattened_pd) {
 #' otherwise the `y` value (i.e. the styled value).
 #' @param col A string indicating the name of the column that should be
 #'   consolidated.
+#' @param col_x,col_y The name of the column from the left (right) parent to
+#'   consolidate.
 #' @inheritParams apply_stylerignore
 #' @keywords internal
-stylerignore_consolidate_col <- function(flattened_pd, col) {
-  col_x <- paste0(col, ".x")
-  col_y <- paste0(col, ".y")
+stylerignore_consolidate_col <- function(flattened_pd,
+                                         col,
+                                         col_x = paste0(col, ".x"),
+                                         col_y = paste0(col, ".y")) {
+
   flattened_pd[[col]] <- ifelse(is.na(flattened_pd[[col_y]]),
     flattened_pd[[col_x]],
     flattened_pd[[col_y]]
   )
-  flattened_pd[[col_x]] <- NULL
-  flattened_pd[[col_y]] <- NULL
+  if (col != col_x) {
+    flattened_pd[[col_x]] <- NULL
+  }
+  if (col != col_y) {
+    flattened_pd[[col_y]] <- NULL
+  }
+
   flattened_pd
 }

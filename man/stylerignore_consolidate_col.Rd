@@ -4,13 +4,21 @@
 \alias{stylerignore_consolidate_col}
 \title{Consolidate columns after a merge}
 \usage{
-stylerignore_consolidate_col(flattened_pd, col)
+stylerignore_consolidate_col(
+  flattened_pd,
+  col,
+  col_x = paste0(col, ".x"),
+  col_y = paste0(col, ".y")
+)
 }
 \arguments{
 \item{flattened_pd}{A flattened parse table.}
 
 \item{col}{A string indicating the name of the column that should be
 consolidated.}
+
+\item{col_x, col_y}{The name of the column from the left (right) parent to
+consolidate.}
 }
 \description{
 After \code{\link[base:merge]{base::merge()}}, all non-id columns that were present in \code{x} and \code{y}
