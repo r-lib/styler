@@ -2,9 +2,15 @@
 #'
 #' This is needed because at serialization time, we also have terminals only
 #' and positional argument of non-terminals were already propagated to terminals
-#' with [context_to_terminals()].
+#' with [context_to_terminals()]. Because tokens can be added or removed during
+#' styling, we must not only keep the pos_id, but rather we must remember the
+#' pos_id of the first token in the stylerignore seuquence (the marker), for
+#' which we know it will still be there, and join these markers later with all
+#' tokens in the stylerignore sequence (this is a one to many join, i.e. one
+#' start marker can have many tokens).
 #' @inheritParams add_stylerignore
 #' @keywords internal
+#' @importFrom purrr map
 env_add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
     env_current$stylerignore <- pd_flat[0, ]
@@ -12,6 +18,15 @@ env_add_stylerignore <- function(pd_flat) {
   }
   pd_flat_temp <- pd_flat[pd_flat$terminal | pd_flat$is_cached, ] %>%
     default_style_guide_attributes()
+  is_stylerignore_switchpoint <- pd_flat_temp$stylerignore != lag(
+    pd_flat_temp$stylerignore,
+    default = pd_flat_temp$stylerignore[1]
+  )
+  pd_flat_temp$first_pos_id_in_segment <- split(
+    pd_flat_temp$pos_id, cumsum(is_stylerignore_switchpoint)
+  ) %>%
+    map(~ rep(.x[1], length(.x))) %>%
+    unlist()
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
   pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0)
   is_terminal_to_ignore <- pd_flat_temp$terminal & pd_flat_temp$stylerignore
@@ -30,7 +45,10 @@ env_add_stylerignore <- function(pd_flat) {
 #'   the R options `styler.ignore_start` and `styler.ignore_stop`.
 #' - it is not a comment, but the last token on the line is a marker.
 #'
-#' See examples in [stylerignore].
+#' See examples in [stylerignore]. Note that you should reuse the stylerignore
+#' column to compute switchpoints or similar and not a plain
+#' `pd$text == option_read("styler.ignore_start")` because that will fail to
+#' give correct switchpoints in the case stylerignore sequences are invalid.
 #' @param pd_flat A parse table.
 #' @keywords internal
 add_stylerignore <- function(pd_flat) {
@@ -72,6 +90,12 @@ add_stylerignore <- function(pd_flat) {
 #'   `env_current`, which recorded that information from the input text.
 #' * Replace the computed lag_newlines and lag_spaces information in the parse
 #'   table with this information.
+#' * Because we may remove or add tokens when appling the transformers, it is
+#'   not save to merge
+#'   via the pos_id of each token in a stylerignore sequence. We assume
+#'   that the start and stop markers are the same after styling, so we join
+#'   all tokens that were initially in a stylerignore sequence via the first
+#'   pos_id in that stylerignore sequence.
 #' @keywords internal
 apply_stylerignore <- function(flattened_pd) {
   if (!env_current$any_stylerignore) {
@@ -79,12 +103,21 @@ apply_stylerignore <- function(flattened_pd) {
   }
   pos_ids <- env_current$stylerignore$pos_id
   colnames_required_apply_stylerignore <- c(
-    "pos_id", "lag_newlines", "lag_spaces", "text"
+    "pos_id", "lag_newlines", "lag_spaces", "text", "first_pos_id_in_segment"
   )
+  # cannot rely on flattened_pd$text == option_read("styler.ignore_start")
+  # because if the marker logic is not correct (twice off in a row), we'll
+  # get it wrong.
+  to_ignore <- flattened_pd$stylerignore == TRUE
+  not_first <- flattened_pd$stylerignore == lag(
+    flattened_pd$stylerignore,
+    default = FALSE
+  )
+
   flattened_pd <- merge(
-    flattened_pd,
+    flattened_pd[!(to_ignore & not_first), ],
     env_current$stylerignore[, colnames_required_apply_stylerignore],
-    by = "pos_id", all.x = TRUE
+    by.x = "pos_id", by.y = "first_pos_id_in_segment", all.x = TRUE
   ) %>%
     as_tibble()
   flattened_pd %>%

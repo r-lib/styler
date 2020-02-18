@@ -22,6 +22,9 @@ the R options \code{styler.ignore_start} and \code{styler.ignore_stop}.
 \item it is not a comment, but the last token on the line is a marker.
 }
 
-See examples in \link{stylerignore}.
+See examples in \link{stylerignore}. Note that you should reuse the stylerignore
+column to compute switchpoints or similar and not a plain
+\code{pd$text == option_read("styler.ignore_start")} because that will fail to
+give correct switchpoints in the case stylerignore sequences are invalid.
 }
 \keyword{internal}

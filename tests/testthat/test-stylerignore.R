@@ -98,7 +98,13 @@ test_that("works with other markers", {
 
 
 test_that("Simple example works", {
-  expect_warning(test_collection("stylerignore",
+  expect_warning(test_collection("stylerignore", "simple",
+    transformer = style_text
+  ), NA)
+})
+
+test_that("token adding or removing works in stylerignore", {
+  expect_warning(test_collection("stylerignore", "adding-removing",
     transformer = style_text
   ), NA)
 })
