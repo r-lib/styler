@@ -103,6 +103,12 @@ test_that("Simple example works", {
   ), NA)
 })
 
+test_that("stylerignore does not need coincidence with top-level expressions", {
+  expect_warning(test_collection("stylerignore", "crossing",
+                                 transformer = style_text
+  ), NA)
+})
+
 test_that("token adding or removing works in stylerignore", {
   expect_warning(test_collection("stylerignore", "adding-removing",
     transformer = style_text
