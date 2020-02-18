@@ -148,13 +148,15 @@ wrap_expr_in_curly <- function(pd,
 
   opening <- create_tokens("'{'", "{",
     pos_ids = create_pos_ids(pd, 1, after = FALSE),
-    spaces = 1 - as.integer(stretch_out[1])
+    spaces = 1 - as.integer(stretch_out[1]),
+    stylerignore = pd$stylerignore[1]
   )
 
   closing <- create_tokens(
     "'}'", "}",
     spaces = space_after, lag_newlines = as.integer(stretch_out[2]),
-    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE)
+    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
+    stylerignore = pd$stylerignore[1]
   )
 
   bind_rows(opening, pd, closing) %>%
