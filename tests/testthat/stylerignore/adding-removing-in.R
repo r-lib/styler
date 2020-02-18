@@ -49,3 +49,12 @@ for (i in 1:3)
 
 # styler: on
 1+ 547809
+
+
+1 +1 # styler: off
+
+1;1 # styler: off
+
+# styler: off
+1 +1;3 # commnet
+# styler: on
