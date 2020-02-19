@@ -223,6 +223,37 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
   file.path(dir, base)
 }
 
+#' Times two function calls with temporarily enabled cache
+#'
+#' This can be helpful for benchmarking.
+#' @param ... Arguments passed to `fun`.
+#' @param fun The function that should be timed.
+#' @param n The number of times the experiment should be repeated.
+#' @return
+#' A scalar indicating the relative difference of the second compared to the
+#'   first run.
+#' @keywords internal
+n_times_faster_with_cache <- function(x1, x2 = x1, ...,
+                                fun = styler::style_text,
+                                n = 4,
+                                clear = TRUE) {
+  purrr::map(1:n, function(x, ...) {
+    fresh_testthat_cache()
+    if (clear) {
+      on.exit(clear_testthat_cache())
+    }
+    list(
+      first = system.time(fun(x1, ...)),
+      second =  system.time(fun(x2, ...))
+    )
+  }, ...) %>%
+    purrr::map_dbl(
+      ~ unname(.x$first["elapsed"] / .x$second["elapsed"])) %>%
+    mean()
+}
+
+
+
 #' Generate a comprehensive collection test cases for comment / insertion
 #' interaction
 #' Test consist of if / if-else / if-else-if-else cases, paired with various
