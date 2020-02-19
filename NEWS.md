@@ -7,6 +7,8 @@
   use (#602).
 - styler formats now correctly when code in stylerignore sequence is partially 
   cached (#600).
+- skip timing tests on CRAN as requested by CRAN team as they did not pass on 
+  all machines (#603).
 
 # styler 1.3.1
 
