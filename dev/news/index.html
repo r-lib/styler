@@ -140,6 +140,19 @@
       <small>Source: <a href='https://github.com/r-lib/styler/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="styler-1-3-1-9000" class="section level1">
+<h1 class="page-header">
+<a href="#styler-1-3-1-9000" class="anchor"></a>styler 1.3.1.9000<small> Unreleased </small>
+</h1>
+<div id="minor-changes-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
+<ul>
+<li>code is now correctly formatted in stylerignore sequence for tokens that would have been modified outside the stylerignore sequence with the style guide in use (<a href='https://github.com/r-lib/styler/issues/602'>#602</a>).</li>
+<li>styler formats now correctly when code in stylerignore sequence is partially cached (<a href='https://github.com/r-lib/styler/issues/600'>#600</a>).</li>
+</ul>
+</div>
+</div>
     <div id="styler-1-3-1" class="section level1">
 <h1 class="page-header">
 <a href="#styler-1-3-1" class="anchor"></a>styler 1.3.1<small> 2020-02-13 </small>
@@ -177,9 +190,9 @@ style_text("1 # comment")
 <li><p><code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> gains two arguments <code>style_guide_name</code> and <code>style_guide_version</code> that are carried as meta data, in particular to version third-party style guides and ensure the proper functioning of caching. This change is completely invisible to users who don’t create and distribute their own style guide like <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> (<a href='https://github.com/r-lib/styler/issues/572'>#572</a>).</p></li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes" class="section level2">
+<div id="minor-changes-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-1" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li><p>lines are now broken after <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> in <code>ggplot2</code> calls for <code>strict = TRUE</code> (<a href='https://github.com/r-lib/styler/issues/569'>#569</a>).</p></li>
 <li><p>function documentation now contains many more line breaks due to roxygen2 update to version 7.0.1 (<a href='https://github.com/r-lib/styler/issues/566'>#566</a>).</p></li>
@@ -439,6 +452,7 @@ initialize_default_attributes(pd_flat)</a></code></pre>
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#styler-1-3-1-9000">1.3.1.9000</a></li>
         <li><a href="#styler-1-3-1">1.3.1</a></li>
         <li><a href="#styler-1-3-0">1.3.0</a></li>
         <li><a href="#styler-1-2-0">1.2.0</a></li>
