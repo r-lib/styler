@@ -263,3 +263,12 @@ generate_test_samples <- function() {
     file = "tests/testthat/insertion_comment_interaction/if_else_if_else-in.R"
   )
 }
+
+#' @include ui-caching.R
+clear_testthat_cache <- purrr::partial(cache_clear, "testthat", ask = FALSE)
+activate_testthat_cache <- purrr::partial(cache_activate, "testthat")
+fresh_testthat_cache <- function() {
+  clear_testthat_cache()
+  activate_testthat_cache()
+}
+
