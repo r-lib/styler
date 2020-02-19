@@ -9,8 +9,8 @@ n_times_faster_with_cache(
   x2 = x1,
   ...,
   fun = styler::style_text,
-  n = 4,
-  clear = TRUE
+  n = 3,
+  clear = "always"
 )
 }
 \arguments{

@@ -32,18 +32,29 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
   fresh_testthat_cache()
   text <- test_path("cache-with-r-cache/mlflow-1-in.R") %>%
     readLines()
-  benchmark <- system.time(text_styled <- style_text(text))
-  full_cached_benchmark <- system.time(style_text(text_styled))
-  expect_lt(full_cached_benchmark["elapsed"], .1)
+  benchmark <- system.time(text_styled <- as.character(style_text(text)))
+  expect_equal(text, text_styled)
+  full_cached_benchmark <- system.time(text_styled2 <- as.character(style_text(text_styled)))
+  expect_equal(text, text_styled2)
+
   # modify one function declaration
   text_styled[2] <- gsub(")", " )", text_styled[2], fixed = TRUE)
-  partially_cached_benchmark <- system.time(style_text(text_styled))
+  partially_cached_benchmark <- system.time(
+    text_cached_partially <- as.character(style_text(text_styled))
+  )
+  expect_equal(text, text_cached_partially)
   cache_deactivate()
-  not_cached_benchmark <- system.time(style_text(text_styled))
+  not_cached_benchmark <- system.time(
+    text_not_cached <- as.character(style_text(text_styled))
+  )
+  expect_equal(text, text_not_cached)
+
+  skip_on_cran()
   expect_lt(
     partially_cached_benchmark["elapsed"] * 3,
     not_cached_benchmark["elapsed"]
   )
+  expect_lt(full_cached_benchmark["elapsed"] * 80, benchmark["elapsed"])
 })
 
 
@@ -89,18 +100,9 @@ test_that("When expressions are cached, number of newlines between them are pres
     "function() NULL"
   )
   # add to cache
-  expect_equal(
-    text[1:4],
-    as.character(style_text(text[1:4]))
-  )
+  expect_equal(text[1:4], as.character(style_text(text[1:4])))
   # applied cache
-  expect_equal(
-    text[1:4],
-    as.character(style_text(text[1:4]))
-  )
+  expect_equal(text[1:4], as.character(style_text(text[1:4])))
 
-  expect_equal(
-    text,
-    as.character(style_text(text))
-  )
+  expect_equal(text, as.character(style_text(text)))
 })

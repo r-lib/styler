@@ -1,12 +1,12 @@
-capture.output(test_that("activated cache brings speedup on style_file() API", {
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
-
-  first <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
-  second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-}))
+test_that("activated cache brings speedup on style_file() API", {
+  skip_on_cran()
+  n <- n_times_faster_with_cache(
+    test_path("reference-objects/caching.R"),
+    test_path("reference-objects/caching.R"),
+    fun = style_file
+  )
+  expect_gt(n, 30)
+})
 
 text <- c(
   "#' Roxygen",
@@ -23,72 +23,61 @@ text <- c(
 ) %>%
   rep(10)
 
-capture.output(test_that("activated cache brings speedup on style_text() API on character vector", {
-  activate_testthat_cache()
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
+test_that("activated cache brings speedup on style_text() API on character vector", {
+  skip_on_cran()
+  n <- n_times_faster_with_cache(
+    text, text,
+    fun = style_text
+  )
+  expect_gt(n, 80)
+})
 
-  first <- system.time(styler::style_text(text))
-  second <- system.time(styler::style_text(text))
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-}))
+test_that("activated cache brings speedup on style_text() API on character scalar", {
+  skip_on_cran()
+  text2 <- paste0(text, collapse = "\n")
 
-capture.output(test_that("activated cache brings speedup on style_text() API on character scalar", {
-  activate_testthat_cache()
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
-
-  first <- system.time(styler::style_text(paste0(text, collapse = "\n")))
-  second <- system.time(styler::style_text(paste0(text, collapse = "\n")))
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-}))
+  n <- n_times_faster_with_cache(
+    text2, text2,
+    fun = style_text
+  )
+  expect_gt(n, 80)
+})
 
 
 test_that("trailing line breaks are ignored for caching", {
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
-
-  first <- system.time(styler::style_text(paste0(text, collapse = "\n")))
-  second <- system.time(
-    styler::style_text(c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n"))
-  )
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-  # check we only have three different expressions. Top-level, example and fun.
-  cache_info <- cache_info()
-  expect_equal(
-    cache_info$n,
-    3
-  )
+  text1 <- paste0(text, collapse = "\n")
+  text2 <- c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n")
+  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
+  expect_equal(cache_info()$n, 3)
+  skip_on_cran()
+  expect_gt(n, 80)
 })
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
+  text1 <- paste0(text, collapse = "\n")
+  tetx2 <- c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n")
+  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
+  expect_equal(cache_info()$n, 3)
+  skip_on_cran()
+  expect_gt(n, 80)
+})
 
-  first <- system.time(styler::style_text(paste0(text, collapse = "\n")))
-  second <- system.time(
-    styler::style_text(
-      paste0(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n", collapse = "")
-    )
+test_that("trailing line breaks are ignored for caching in one scalar", {
+  text1 <- paste0(text, collapse = "\n")
+  text2 <- paste0(
+    paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n",
+    collapse = ""
   )
-  expect_true(first["elapsed"] / 2 > second["elapsed"])
-  # check we only have three different expressions. Top-level, example and fun.
-  cache_info <- cache_info()
-  expect_equal(
-    cache_info$n,
-    3
-  )
+  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
+  expect_equal(cache_info()$n, 3)
+  skip_on_cran()
+  expect_gt(n, 80)
 })
 
 capture.output(test_that("no speedup when tranformer changes", {
-  activate_testthat_cache()
+  skip_on_cran()
   on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
+  fresh_testthat_cache()
   t1 <- tidyverse_style()
   first <- system.time(style_text(text, transformers = t1))
   t1$use_raw_indention <- !t1$use_raw_indention
@@ -97,32 +86,14 @@ capture.output(test_that("no speedup when tranformer changes", {
 }))
 
 
-capture.output(
-  test_that(paste0(
-    "activated cache brings speedup on style_text() API on ",
-    "character scalar and character vector (mixed)"
-  ), {
-    activate_testthat_cache()
-    on.exit(clear_testthat_cache())
-    clear_testthat_cache()
-    activate_testthat_cache()
-
-    first <- system.time(styler::style_text(text))
-    second <- system.time(styler::style_text(paste0(text, collapse = "\n")))
-    expect_true(first["elapsed"] / 2 > second["elapsed"])
-  })
-)
-
-
 capture.output(test_that("unactivated cache does not bring speedup", {
+  skip_on_cran()
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
-  cache_deactivate()
   first <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
   second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
-  expect_false(first["elapsed"] / 2 > second["elapsed"])
+  expect_false(first["elapsed"] / 4 > second["elapsed"])
 }))
-
 
 capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
   on.exit(clear_testthat_cache())
@@ -141,12 +112,8 @@ capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
     "# another",
     "NULL"
   )
-  expect_equal(
-    as.character(style_text(text2)),
-    text2
-  )
+  expect_equal(as.character(style_text(text2)), text2)
 }))
-
 
 capture.output(test_that("avoid removing roxygen mask (see commit messages in #584)", {
   on.exit(clear_testthat_cache())
@@ -170,12 +137,8 @@ capture.output(test_that("avoid removing roxygen mask (see commit messages in #5
     "#' x",
     "NULL"
   )
-  expect_equal(
-    as.character(style_text(text2)),
-    text2
-  )
+  expect_equal(as.character(style_text(text2)), text2)
 }))
-
 
 capture.output(test_that("partial caching of multiple expressions on one line works", {
   on.exit(clear_testthat_cache())
@@ -193,8 +156,5 @@ capture.output(test_that("partial caching of multiple expressions on one line wo
   style_text("mtcars")
   style_text(c("mtcars %>%", "f()"))
   final_text <- c("mtcars %>%", "  f() #")
-  expect_equal(
-    as.character(style_text(final_text)),
-    final_text
-  )
+  expect_equal(as.character(style_text(final_text)), final_text)
 }))

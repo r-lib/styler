@@ -235,21 +235,28 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
 #' @keywords internal
 n_times_faster_with_cache <- function(x1, x2 = x1, ...,
                                 fun = styler::style_text,
-                                n = 4,
-                                clear = TRUE) {
-  purrr::map(1:n, function(x, ...) {
+                                n = 3,
+                                clear = "always") {
+  rlang::arg_match(clear, c("always", "final", "never", "all but last"))
+  capture.output(
+    out <- purrr::map(1:n, function(i, n, ...) {
     fresh_testthat_cache()
-    if (clear) {
+    if ((clear == "always") || (clear == "all but last" & n != i)) {
       on.exit(clear_testthat_cache())
     }
     list(
       first = system.time(fun(x1, ...)),
       second =  system.time(fun(x2, ...))
     )
-  }, ...) %>%
+  }, ..., n = n) %>%
     purrr::map_dbl(
       ~ unname(.x$first["elapsed"] / .x$second["elapsed"])) %>%
     mean()
+  )
+  if (clear %in% c("always", "final")) {
+    clear_testthat_cache()
+  }
+  out
 }
 
 
