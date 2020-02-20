@@ -55,7 +55,7 @@ test_that("trailing line breaks are ignored for caching", {
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
   text1 <- paste0(text, collapse = "\n")
-  tetx2 <- c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n")
+  text2 <- c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n")
   n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
   expect_equal(cache_info()$n, 3)
   skip_on_cran()

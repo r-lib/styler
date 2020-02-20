@@ -39,8 +39,7 @@ matrix:
     env:
     - BUILD_PKGDOWN: true
   - r: devel
-  - stage: full
-    os: osx
+  - os: osx
 #env
 env:
   global:
