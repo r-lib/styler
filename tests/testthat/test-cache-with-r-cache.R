@@ -51,10 +51,10 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
 
   skip_on_cran()
   expect_lt(
-    partially_cached_benchmark["elapsed"] * 3,
+    partially_cached_benchmark["elapsed"] * 2.5,
     not_cached_benchmark["elapsed"]
   )
-  expect_lt(full_cached_benchmark["elapsed"] * 80, benchmark["elapsed"])
+  expect_lt(full_cached_benchmark["elapsed"] * 75, benchmark["elapsed"])
 })
 
 
