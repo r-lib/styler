@@ -1,5 +1,5 @@
-do_package_checks(error_on = ifelse(getRversion() >= "3.2", "note", "error"))
+do_package_checks(codecov = ci_has_env("CODECOV"))
 
-if (Sys.getenv("id_rsa") != "" && ci()$get_branch() == "master" && Sys.getenv("BUILD_PKGDOWN") != "") {
-  do_pkgdown(orphan = FALSE)
+if (ci_has_env("BUILD_PKGDOWN")) {
+  do_pkgdown()
 }
