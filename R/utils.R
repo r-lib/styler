@@ -6,17 +6,17 @@ line_col_names <- function() {
 
 #' Ensure there is one (and only one) blank line at the end of a vector
 #' @examples
-#' styler:::ensure_last_is_empty("")
-#' styler:::ensure_last_is_empty(letters)
-#' styler:::ensure_last_is_empty(c(letters, "", "", ""))
+#' styler:::ensure_last_n_empty("")
+#' styler:::ensure_last_n_empty(letters)
+#' styler:::ensure_last_n_empty(c(letters, "", "", ""))
 #' @keywords internal
-ensure_last_is_empty <- function(x) {
+ensure_last_n_empty <- function(x, n = 1) {
   if (all(x == "")) {
     return("")
   }
   x <- c(x, "", "")
-  x <- x[seq(1, length(x) - which(rev(x) != "")[1] + 2L)]
-  x
+  x <- x[seq(1, length(x) - which(rev(x) != "")[1] + 1L)]
+  c(x, rep("", n))
 }
 
 #' Replace the newline character with a line break

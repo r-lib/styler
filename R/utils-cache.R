@@ -7,7 +7,7 @@
 hash_standardize <- function(text) {
   text %>%
     convert_newlines_to_linebreaks() %>%
-    ensure_last_is_empty() %>%
+    ensure_last_n_empty() %>%
     enc2utf8() %>%
     paste0(collapse = "\n") %>%
     list()
