@@ -38,8 +38,9 @@ matrix:
   - r: release
     env:
     - BUILD_PKGDOWN: true
+    - CODECOV: true
   - r: devel
-
+  - os: osx
 #env
 env:
   global:
