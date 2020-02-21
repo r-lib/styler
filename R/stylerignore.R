@@ -29,8 +29,8 @@ env_add_stylerignore <- function(pd_flat) {
     unlist()
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
   pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0)
-  is_terminal_to_ignore <- pd_flat_temp$terminal & pd_flat_temp$stylerignore
-  env_current$stylerignore <- pd_flat_temp[is_terminal_to_ignore, ]
+  is_to_ignore <- (pd_flat_temp$terminal | pd_flat_temp$is_cached) & pd_flat_temp$stylerignore
+  env_current$stylerignore <- pd_flat_temp[is_to_ignore, ]
 }
 
 #' Adds the stylerignore column
