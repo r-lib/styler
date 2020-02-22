@@ -1,5 +1,7 @@
 # styler 1.3.2
 
+Release upon the request by the CRAN team.
+
 ## Minor changes and fixes
 
 - various fixes to handle special cases for caching and stylerignore and their
