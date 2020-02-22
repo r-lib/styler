@@ -70,15 +70,15 @@ style_roxygen_example_snippet <- function(code_snippet,
   code_snippet <- post_parse_roxygen(code_snippet)
 
   cache_is_active <- cache_is_activated()
-
-  if (!cache_is_active | !is_cached(code_snippet, transformers)) {
+  is_cached <- is_cached(code_snippet, transformers)
+  if (!is_cached || !cache_is_active) {
     code_snippet <- code_snippet %>%
       parse_transform_serialize_r(transformers, warn_empty = FALSE)
   } else {
     code_snippet <- ensure_last_n_empty(code_snippet, n = 0)
   }
 
-  if (cache_is_active) {
+  if (!is_cached && cache_is_active) {
     cache_write(code_snippet, transformers)
   }
 
