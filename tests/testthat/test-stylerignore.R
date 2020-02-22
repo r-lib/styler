@@ -114,3 +114,9 @@ test_that("token adding or removing works in stylerignore", {
     transformer = style_text
   ), NA)
 })
+
+test_that("no token added or removed in complex case", {
+  expect_warning(test_collection("stylerignore", "braces",
+                                 transformer = style_text
+  ), NA)
+})
