@@ -7,7 +7,7 @@
 text_to_flat_pd(text, transformers)
 }
 \arguments{
-\item{text}{A character vector.}
+\item{text}{The text to parse.}
 
 \item{transformers}{A list with transformer functions, used to check if
 the code is cached.}

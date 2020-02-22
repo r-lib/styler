@@ -70,7 +70,6 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
 #'     column corresponds to n as long as no tokens are inserted.
 #'   * A column "child" that contains *nest*s.
 #'
-#' @param text A character vector.
 #' @inheritParams get_parse_data
 #' @return A flat parse table
 #' @importFrom rlang seq2
