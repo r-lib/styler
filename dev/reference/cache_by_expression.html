@@ -37,7 +37,10 @@
 
 <meta property="og:title" content="Cache text — cache_by_expression" />
 <meta property="og:description" content="Splits text into expressions and adds these to the cache. Note that
-comments are not cached because caching them is too expensive." />
+comments are not cached because caching them is too expensive. Also, we
+must not cache stylerignore sequence, because we might see the same
+expression that does not comply with the style guide outside a stylerignore
+sequence and wrongly think we should leave it as is." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -146,7 +149,10 @@ comments are not cached because caching them is too expensive." />
 
     <div class="ref-description">
     <p>Splits <code>text</code> into expressions and adds these to the cache. Note that
-comments are <strong>not</strong> cached because caching them is too expensive.</p>
+comments are <strong>not</strong> cached because caching them is too expensive. Also, we
+must not cache stylerignore sequence, because we might see the same
+expression that does not comply with the style guide outside a stylerignore
+sequence and wrongly think we should leave it as is.</p>
     </div>
 
     <pre class="usage"><span class='fu'>cache_by_expression</span>(<span class='no'>text</span>, <span class='no'>transformers</span>)</pre>
