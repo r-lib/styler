@@ -13,6 +13,9 @@ cache_by_expression(text, transformers)
 }
 \description{
 Splits \code{text} into expressions and adds these to the cache. Note that
-comments are \strong{not} cached because caching them is too expensive.
+comments are \strong{not} cached because caching them is too expensive. Also, we
+must not cache stylerignore sequence, because we might see the same
+expression that does not comply with the style guide outside a stylerignore
+sequence and wrongly think we should leave it as is.
 }
 \keyword{internal}
