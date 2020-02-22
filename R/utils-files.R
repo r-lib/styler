@@ -37,7 +37,7 @@ map_filetype_to_pattern <- function(filetype) {
 #' @param path A path.
 #' @param ... Passed to [base::dir()].
 #' @seealso set_and_assert_arg_paths
-#' @keywords internal.
+#' @keywords internal
 #' @examples
 #' setdiff("./file.R", "file.R") # you want to standardize first.
 dir_without_. <- function(path, ...) {

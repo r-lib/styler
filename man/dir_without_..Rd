@@ -24,4 +24,4 @@ setdiff("./file.R", "file.R") # you want to standardize first.
 \seealso{
 set_and_assert_arg_paths
 }
-\keyword{internal.}
+\keyword{internal}

@@ -88,6 +88,7 @@ find_blank_lines_to_next_expr <- function(pd_nested) {
 #' line 1, the first element of the output is the number of lines until the
 #' first block.
 #' @param pd A top level nest.
+#' @keywords internal
 find_blank_lines_to_next_block <- function(pd) {
   block_boundary <- pd$block != lag(pd$block, default = 0)
   find_blank_lines_to_next_expr(pd)[block_boundary]
