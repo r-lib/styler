@@ -1,13 +1,17 @@
 context("test-varia")
 
-test_that("ensure_last_is_empty", {
+test_that("ensure_last_n_empty", {
   expect_equal(
-    ensure_last_is_empty("x"),
+    ensure_last_n_empty("x"),
     c("x", "")
   )
   expect_equal(
-    ensure_last_is_empty(c("x", "")),
+    ensure_last_n_empty(c("x", "")),
     c("x", "")
+  )
+  expect_equal(
+    ensure_last_n_empty(c("1", "2")),
+    c("1", "2", "")
   )
 })
 

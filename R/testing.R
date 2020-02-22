@@ -239,16 +239,9 @@ n_times_faster_with_cache <- function(x1, x2 = x1, ...,
                                 clear = "always") {
   rlang::arg_match(clear, c("always", "final", "never", "all but last"))
   capture.output(
-    out <- purrr::map(1:n, function(i, n, ...) {
-    fresh_testthat_cache()
-    if ((clear == "always") || (clear == "all but last" & n != i)) {
-      on.exit(clear_testthat_cache())
-    }
-    list(
-      first = system.time(fun(x1, ...)),
-      second =  system.time(fun(x2, ...))
-    )
-  }, ..., n = n) %>%
+    out <- purrr::map(1:n, n_times_faster_bench,
+      x1 = x1, x2 = x2, fun = fun,
+      ..., n = n, clear = clear) %>%
     purrr::map_dbl(
       ~ unname(.x$first["elapsed"] / .x$second["elapsed"])) %>%
     mean()
@@ -259,6 +252,24 @@ n_times_faster_with_cache <- function(x1, x2 = x1, ...,
   out
 }
 
+
+n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
+  fresh_testthat_cache()
+  if ((clear == "always") || (clear == "all but last" & n != i)) {
+    on.exit(clear_testthat_cache())
+  }
+  first <- system.time(fun(x1, ...))
+
+  if (is.null(x2)) {
+    second <- c(elapsed = 1)
+  } else {
+    second <- system.time(fun(x2, ...))
+  }
+  list(
+    first = first,
+    second =  second
+  )
+}
 
 
 #' Generate a comprehensive collection test cases for comment / insertion

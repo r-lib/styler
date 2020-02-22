@@ -7,7 +7,7 @@
 hash_standardize <- function(text) {
   text %>%
     convert_newlines_to_linebreaks() %>%
-    ensure_last_is_empty() %>%
+    ensure_last_n_empty() %>%
     enc2utf8() %>%
     paste0(collapse = "\n") %>%
     list()
@@ -121,7 +121,10 @@ cache_is_activated <- function(cache_name = NULL) {
 #' Cache text
 #'
 #' Splits `text` into expressions and adds these to the cache. Note that
-#' comments are **not** cached because caching them is too expensive. Also, we
+#' top-level comments are **not** cached because caching and in particular
+#' checking  if they are cached is too expensive. Comments may be cached as part
+#' of the whole text (as opposed to on an expression by expression basis) using
+#' `cache_write()` directly. Also, we
 #' must not cache stylerignore sequence, because we might see the same
 #' expression that does not comply with the style guide outside a stylerignore
 #' sequence and wrongly think we should leave it as is.
