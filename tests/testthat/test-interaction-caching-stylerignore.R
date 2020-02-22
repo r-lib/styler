@@ -170,3 +170,7 @@ test_that("indention preserved in stylerignore when caching activated", {
     text6
   )
 })
+
+test_that("cache is deactivated at end of caching related testthat file", {
+  expect_false(cache_is_activated())
+})

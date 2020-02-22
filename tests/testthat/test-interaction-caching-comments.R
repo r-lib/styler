@@ -33,3 +33,7 @@ test_that("Correclty removes comments that are not top-level when making pd shal
     text7
   )
 })
+
+test_that("cache is deactivated at end of caching related testthat file", {
+  expect_false(cache_is_activated())
+})

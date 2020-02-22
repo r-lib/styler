@@ -54,7 +54,7 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
     partially_cached_benchmark["elapsed"] * 2.5,
     not_cached_benchmark["elapsed"]
   )
-  expect_lt(full_cached_benchmark["elapsed"] * 70, benchmark["elapsed"])
+  expect_lt(full_cached_benchmark["elapsed"] * 65, benchmark["elapsed"])
 })
 
 
@@ -83,6 +83,10 @@ capture.output(test_that("cached expressions are displayed propperly", {
     file = test_path("reference-objects/cache-info-3")
   )
 }))
+
+test_that("cache is deactivated at end of caching related testthat file", {
+  expect_false(cache_is_activated())
+})
 
 
 test_that("When expressions are cached, number of newlines between them are preserved", {
