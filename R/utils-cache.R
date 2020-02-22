@@ -121,16 +121,26 @@ cache_is_activated <- function(cache_name = NULL) {
 #' Cache text
 #'
 #' Splits `text` into expressions and adds these to the cache. Note that
-#' comments are **not** cached because caching them is too expensive.
+#' comments are **not** cached because caching them is too expensive. Also, we
+#' must not cache stylerignore sequence, because we might see the same
+#' expression that does not comply with the style guide outside a stylerignore
+#' sequence and wrongly think we should leave it as is.
 #' @param text A character vector with one or more expressions.
 #' @param transformers The transformers.
 #' @keywords internal
 cache_by_expression <- function(text, transformers) {
   expressions <- parse(text = text, keep.source = TRUE) %>%
     utils::getParseData(includeText = TRUE)
-  expressions[expressions$parent == 0 & expressions$token != "COMMENT", "text"] %>%
+  if (env_current$any_stylerignore) {
+    expressions <- expressions %>%
+      add_stylerignore()
+  } else {
+    expressions$stylerignore <- rep(FALSE, length(expressions$text))
+  }
+  expressions[expressions$parent == 0 & expressions$token != "COMMENT" & !expressions$stylerignore, "text"] %>%
     map(~ cache_write(.x, transformers = transformers))
 }
+
 
 cache_write <- function(text, transformers) {
   R.cache::generateCache(

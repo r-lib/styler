@@ -134,3 +134,23 @@ test_that("caching works for non-top-level expressions", {
   )
 })
 
+test_that("does not cache stylerignore sequences", {
+  on.exit(clear_testthat_cache())
+  fresh_testthat_cache()
+  text <- c(
+    "1+1# styler: off"
+  )
+  style_text(text)
+  expect_false(
+    is_cached("1+1", tidyverse_style())
+  )
+  fresh_testthat_cache()
+  text <- c(
+    "# styler: off",
+    "1+1"
+  )
+  style_text(text)
+  expect_false(
+    is_cached("1+1", tidyverse_style())
+  )
+})
