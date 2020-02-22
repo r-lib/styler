@@ -16,7 +16,7 @@ Splits \code{text} into expressions and adds these to the cache. Note that
 top-level comments are \strong{not} cached because caching and in particular
 checking  if they are cached is too expensive. Comments may be cached as part
 of the whole text (as opposed to on an expression by expression basis) using
-\code{\link[=cache_write]{cache_write()}} directly. Also, we
+\code{cache_write()} directly. Also, we
 must not cache stylerignore sequence, because we might see the same
 expression that does not comply with the style guide outside a stylerignore
 sequence and wrongly think we should leave it as is.
