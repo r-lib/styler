@@ -195,3 +195,7 @@ capture.output(test_that("partial caching of multiple expressions on one line wo
   final_text <- c("mtcars %>%", "  f() #")
   expect_equal(as.character(style_text(final_text)), final_text)
 }))
+
+test_that("cache is deactivated at end of caching related testthat file", {
+  expect_false(cache_is_activated())
+})

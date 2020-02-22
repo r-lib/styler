@@ -125,3 +125,7 @@ test_that("Individual comment expressions are not cached", {
   # expressions now
   expect_equal(cache_info$n, 2)
 })
+
+test_that("cache is deactivated at end of caching related testthat file", {
+  expect_false(cache_is_activated())
+})

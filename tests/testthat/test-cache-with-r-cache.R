@@ -84,6 +84,10 @@ capture.output(test_that("cached expressions are displayed propperly", {
   )
 }))
 
+test_that("cache is deactivated at end of caching related testthat file", {
+  expect_false(cache_is_activated())
+})
+
 
 test_that("When expressions are cached, number of newlines between them are preserved", {
   on.exit(clear_testthat_cache())
