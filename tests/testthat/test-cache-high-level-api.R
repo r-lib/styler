@@ -59,7 +59,7 @@ test_that("trailing line breaks are ignored for caching in one scalar", {
   n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
   expect_equal(cache_info()$n, 3)
   skip_on_cran()
-  expect_gt(n, 65)
+  expect_gt(n, 70)
 })
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
@@ -73,6 +73,43 @@ test_that("trailing line breaks are ignored for caching in one scalar", {
   skip_on_cran()
   expect_gt(n, 70)
 })
+
+test_that("speedup higher when cached roxygen example code is multiple expressions", {
+  skip_on_cran()
+
+  text_long <- c(
+    "#' Roxygen",
+    "#' Comment",
+    "#' @examples",
+    "#' 1 + 1",
+    "#' if (x > 4)",
+    "#' bb = 3",
+    "#' call(x,y=2)",
+    "k <- function() {",
+    "  1 + 1",
+    "  if (x) {",
+    "    k()",
+    "  }",
+    "}",
+    ""
+  )
+  text_long_styled <- style_text(text_long)
+  text_long_styled_changed <- text_long_styled
+  text_long_styled_changed[14] <- "    }"
+  speedup_multiple_roygen_example <- n_times_faster_with_cache(
+    text_long_styled, text_long_styled_changed
+  )
+  text_short_styled <- text_long_styled[-c(5:8)]
+  text_short_styled_changed <- text_short_styled
+  text_short_styled_changed[10] <- "   }"
+  speedup_many_roygen_examples <- n_times_faster_with_cache(
+    text_short_styled, text_short_styled_changed
+  )
+  # the speed gain for longer expression is 1.2x higher
+  expect_true(speedup_multiple_roygen_example > 1.2 * speedup_many_roygen_examples)
+})
+
+
 
 capture.output(test_that("no speedup when tranformer changes", {
   skip_on_cran()
