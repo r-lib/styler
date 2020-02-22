@@ -154,3 +154,19 @@ test_that("does not cache stylerignore sequences", {
     is_cached("1+1", tidyverse_style())
   )
 })
+
+test_that("indention preserved in stylerignore when caching activated", {
+  on.exit(cache_deactivate())
+  fresh_testthat_cache()
+  text6 <- c(
+    "# styler: off",
+    "1 + 1",
+    "    x(5)",
+    "# styler: on",
+    "# a comment"
+  )
+  expect_equal(
+    as.character(style_text(text6)),
+    text6
+  )
+})
