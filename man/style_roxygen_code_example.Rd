@@ -12,7 +12,7 @@ style_roxygen_code_example(example, transformers)
 \item{transformers}{A list of \emph{named} transformer functions}
 }
 \description{
-Parses roxygen2 comments into code, breaks it into dont* (dontrun, dontest,
+Parses roxygen2 comments into code, breaks it into dont* (dontrun, donttest,
 dontshow) and run sections and processes each segment individually using
 \code{\link[=style_roxygen_example_snippet]{style_roxygen_example_snippet()}}.
 }

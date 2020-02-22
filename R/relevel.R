@@ -182,7 +182,7 @@ relocate_eq_assign_nest <- function(pd) {
 #'
 #' Two assignment tokens `EQ_ASSIGN` belong to the same block if they are not
 #' separated by more than one token. Token between `EQ_ASSIGN` tokens belong
-#' to the `EQ_ASSIGN` token occuring before them, except the token right before
+#' to the `EQ_ASSIGN` token occurring before them, except the token right before
 #' `EQ_ASSING` already belongs to the `EQ_ASSING` after it. Note that this
 #' notion is unrelated to the column *block* in the parse table, which is used
 #' to [parse_transform_serialize_r()] code blocks and leave out the ones that

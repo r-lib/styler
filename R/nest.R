@@ -21,8 +21,16 @@ compute_parse_data_nested <- function(text,
   pd_nested
 }
 
-#' Creates a flat parse table with minimal initialization.
+#' Creates a flat parse table with minimal initialization
 #'
+#' Creates a flat parse table with minimal initialization and makes the parse
+#' table shallow where appropriate.
+#' @details
+#' This includes:
+#'
+#' * token before and after.
+#' * stylerignore attribute.
+#' * caching attributes.
 #' @inheritParams tokenize
 #' @inheritParams add_attributes_caching
 #' @details
@@ -57,7 +65,7 @@ add_cache_block <- function(pd_nested) {
 #' Drop all children of a top level expression that are cached
 #'
 #' Note that we do not cache top-level comments. Because package code has a lot
-#' of roxygen comments and each of them is a top level expresion, checking is
+#' of roxygen comments and each of them is a top level expression, checking is
 #' very expensive. More expensive than styling, because comments are always
 #' terminals.
 #' @param pd A top-level nest.
@@ -84,7 +92,7 @@ add_cache_block <- function(pd_nested) {
 #' As described in [cache_find_block()], expressions on the same line are always
 #' put into one block. If any element of a block is not cached, the block will
 #' be styled as a whole. If the parse table was made shallow (and the top level)
-#' expresion is still marked as non-terminal, `text` will never be used in the
+#' expression is still marked as non-terminal, `text` will never be used in the
 #' transformation process and eventually lost. Hence, we must change the top
 #' level expression to a terminal. It will act like a comment in the sense that
 #' it is a fixed `text`.
@@ -119,17 +127,17 @@ drop_cached_children <- function(pd) {
 #' parents in the same block as proceeding expressions (but also with positive).
 #' `find_pos_id_to_keep()` must hence always keep negative comments. We did not
 #' use `split(cumsum(pd_parent_first$parent < 1))` because then every top-level
-#' comment is an
-#' expression on its own and processing takes much longer for typical roxygen
-#' annotated code
+#' comment is an expression on its own and processing takes much longer for
+#' typical roxygen annotated code.
 #' @param pd A temporary top level nest where the first expression is always a
 #'   top level expression, potentially cached.
+#' @details
+#' Note that top-level comments **above** code have negative parents
+#' (the negative value of the parent of the code expression that follows after,
+#' a nother comment might be in the way though), all comments that are not top
+#' level have positive ids. All comments for which no code follows afterwards
+#' have parent 0.
 #' @examples
-#' # Note that top-level comments **above** code have negative parents
-#' # (the negative value of the parent of the code expression that follows after,
-#' # a nother comment might be in the way though), all comments that are not top
-#' # level have positive ids. All comments for which no code follows afterwards
-#' # have parent 0.
 #' styler:::get_parse_data(c("#", "1"))
 #' styler:::get_parse_data(c("c(#", "1)"))
 #' styler:::get_parse_data(c("", "c(#", "1)", "#"))
@@ -149,6 +157,7 @@ find_pos_id_to_keep <- function(pd) {
 #' few illustrative examples below.
 #' @details
 #' Styling is on by default when you run styler.
+#'
 #' - To mark the start of a sequence where you want to turn styling off, use
 #'   `# styler: off`.
 #' - To mark the end of this sequence, put `# styler: on` in your code. After
@@ -263,8 +272,8 @@ add_terminal_token_before <- function(pd_flat) {
 #' and we cannot wait to initialize this attribute until [apply_transformers()],
 #' where all other attributes are initialized with
 #' [default_style_guide_attributes()] (when using [tidyverse_style()]) because
-#' for cached code, we don't build up the nested structure and leave it shallow,
-#' see also [drop_cached_children()].
+#' for cached code, we don't build up the nested structure and leave it shallow
+#' (to speed up things), see also [drop_cached_children()].
 #' @param transformers A list with transformer functions, used to check if
 #'   the code is cached.
 #' @describeIn add_token_terminal Initializes `newlines` and `lag_newlines`.

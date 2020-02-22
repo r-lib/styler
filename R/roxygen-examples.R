@@ -1,6 +1,6 @@
 #' Style a roxygen code example that may contain dontrun and friends
 #'
-#' Parses roxygen2 comments into code, breaks it into dont* (dontrun, dontest,
+#' Parses roxygen2 comments into code, breaks it into dont* (dontrun, donttest,
 #' dontshow) and run sections and processes each segment individually using
 #' [style_roxygen_example_snippet()].
 #' @inheritParams parse_transform_serialize_r

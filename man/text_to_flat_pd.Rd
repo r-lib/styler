@@ -2,7 +2,7 @@
 % Please edit documentation in R/nest.R
 \name{text_to_flat_pd}
 \alias{text_to_flat_pd}
-\title{Creates a flat parse table with minimal initialization.}
+\title{Creates a flat parse table with minimal initialization}
 \usage{
 text_to_flat_pd(text, transformers)
 }
@@ -13,9 +13,17 @@ text_to_flat_pd(text, transformers)
 the code is cached.}
 }
 \description{
-Creates a flat parse table with minimal initialization.
+Creates a flat parse table with minimal initialization and makes the parse
+table shallow where appropriate.
 }
 \details{
+This includes:
+\itemize{
+\item token before and after.
+\item stylerignore attribute.
+\item caching attributes.
+}
+
 Note that the parse table might be shallow if caching is enabled and some
 values are cached.
 }

@@ -16,16 +16,17 @@ To make a parse table shallow, we must know which ids to keep.
 parents in the same block as proceeding expressions (but also with positive).
 \code{find_pos_id_to_keep()} must hence always keep negative comments. We did not
 use \code{split(cumsum(pd_parent_first$parent < 1))} because then every top-level
-comment is an
-expression on its own and processing takes much longer for typical roxygen
-annotated code
+comment is an expression on its own and processing takes much longer for
+typical roxygen annotated code.
+}
+\details{
+Note that top-level comments \strong{above} code have negative parents
+(the negative value of the parent of the code expression that follows after,
+a nother comment might be in the way though), all comments that are not top
+level have positive ids. All comments for which no code follows afterwards
+have parent 0.
 }
 \examples{
-# Note that top-level comments **above** code have negative parents
-# (the negative value of the parent of the code expression that follows after,
-# a nother comment might be in the way though), all comments that are not top
-# level have positive ids. All comments for which no code follows afterwards
-# have parent 0.
 styler:::get_parse_data(c("#", "1"))
 styler:::get_parse_data(c("c(#", "1)"))
 styler:::get_parse_data(c("", "c(#", "1)", "#"))

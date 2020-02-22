@@ -32,7 +32,7 @@ install.packages("styler")
 ```
 
 If you don’t use styler interactively (i.e. not from the R prompt or
-Rstudio Addin), make sure you authorise `{R.cache}` once to set up a
+RStudio Addin), make sure you authorize `{R.cache}` once to set up a
 permanent cache. If you use it interactively, you will be asked to grant
 this permission once. See `?caching` for details.
 

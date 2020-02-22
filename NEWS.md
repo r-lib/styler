@@ -1,6 +1,6 @@
 # styler 1.3.2
 
-Release upon the request by the CRAN team.
+Release upon request by the CRAN team.
 
 ## Minor changes and fixes
 

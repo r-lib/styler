@@ -123,8 +123,8 @@ add_id_and_short <- function(pd) {
 #' replace offending `text` in the terminal expressions with the text of their
 #' parents if their line / col position matches and return an error otherwise.
 #' @param pd A parse table.
-#' @param text The text from which `pd` was created. Needed
-#'   for potential reparsing.
+#' @param text The text from which `pd` was created. Needed potentially
+#'   for another round of parsing.
 #' @importFrom rlang abort
 #' @keywords internal
 ensure_correct_str_txt <- function(pd, text) {
