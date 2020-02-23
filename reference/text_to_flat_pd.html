@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find the index of the next or previous non-comment in a parse table. — next_non_comment • styler</title>
+<title>Creates a flat parse table with minimal initialization — text_to_flat_pd • styler</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Find the index of the next or previous non-comment in a parse table. — next_non_comment" />
-<meta property="og:description" content="Find the index of the next or previous non-comment in a parse table." />
+<meta property="og:title" content="Creates a flat parse table with minimal initialization — text_to_flat_pd" />
+<meta property="og:description" content="Creates a flat parse table with minimal initialization and makes the parse
+table shallow where appropriate." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -138,38 +139,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find the index of the next or previous non-comment in a parse table.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/utils-navigate-nest.R'><code>R/utils-navigate-nest.R</code></a></small>
-    <div class="hidden name"><code>next_non_comment.Rd</code></div>
+    <h1>Creates a flat parse table with minimal initialization</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/nest.R'><code>R/nest.R</code></a></small>
+    <div class="hidden name"><code>text_to_flat_pd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Find the index of the next or previous non-comment in a parse table.</p>
+    <p>Creates a flat parse table with minimal initialization and makes the parse
+table shallow where appropriate.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>next_non_comment</span>(<span class='no'>pd</span>, <span class='no'>pos</span>)
-
-<span class='fu'>previous_non_comment</span>(<span class='no'>pd</span>, <span class='no'>pos</span>)</pre>
+    <pre class="usage"><span class='fu'>text_to_flat_pd</span>(<span class='no'>text</span>, <span class='no'>transformers</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pd</th>
-      <td><p>A parse table.</p></td>
+      <th>text</th>
+      <td><p>The text to parse.</p></td>
     </tr>
     <tr>
-      <th>pos</th>
-      <td><p>The position of the token to start the search from.</p></td>
+      <th>transformers</th>
+      <td><p>A list with transformer functions, used to check if
+the code is cached.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This includes:</p><ul>
+<li><p>token before and after.</p></li>
+<li><p>stylerignore attribute.</p></li>
+<li><p>caching attributes.</p></li>
+</ul>
+
+<p>Note that the parse table might be shallow if caching is enabled and some
+values are cached.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>

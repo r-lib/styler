@@ -72,7 +72,7 @@ otherwise the y value (i.e. the styled value)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -153,7 +153,12 @@ value (because the information for this token was not stylerignored),
 otherwise the <code>y</code> value (i.e. the styled value).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stylerignore_consolidate_col</span>(<span class='no'>flattened_pd</span>, <span class='no'>col</span>)</pre>
+    <pre class="usage"><span class='fu'>stylerignore_consolidate_col</span>(
+  <span class='no'>flattened_pd</span>,
+  <span class='no'>col</span>,
+  <span class='kw'>col_x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>col</span>, <span class='st'>".x"</span>),
+  <span class='kw'>col_y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>col</span>, <span class='st'>".y"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,6 +171,11 @@ otherwise the <code>y</code> value (i.e. the styled value).</p>
       <th>col</th>
       <td><p>A string indicating the name of the column that should be
 consolidated.</p></td>
+    </tr>
+    <tr>
+      <th>col_x, col_y</th>
+      <td><p>The name of the column from the left (right) parent to
+consolidate.</p></td>
     </tr>
     </table>
 

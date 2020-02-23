@@ -37,7 +37,7 @@
 
 <meta property="og:title" content="Drop all children of a top level expression that are cached — drop_cached_children" />
 <meta property="og:description" content="Note that we do not cache top-level comments. Because package code has a lot
-of roxygen comments and each of them is a top level expresion, checking is
+of roxygen comments and each of them is a top level expression, checking is
 very expensive. More expensive than styling, because comments are always
 terminals." />
 <meta name="twitter:card" content="summary" />
@@ -72,7 +72,7 @@ terminals." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -148,7 +148,7 @@ terminals." />
 
     <div class="ref-description">
     <p>Note that we do not cache top-level comments. Because package code has a lot
-of roxygen comments and each of them is a top level expresion, checking is
+of roxygen comments and each of them is a top level expression, checking is
 very expensive. More expensive than styling, because comments are always
 terminals.</p>
     </div>
@@ -184,7 +184,7 @@ nesting is expensive and will not be done for cached expressions.</p>
 <p>As described in <code><a href='cache_find_block.html'>cache_find_block()</a></code>, expressions on the same line are always
 put into one block. If any element of a block is not cached, the block will
 be styled as a whole. If the parse table was made shallow (and the top level)
-expresion is still marked as non-terminal, <code>text</code> will never be used in the
+expression is still marked as non-terminal, <code>text</code> will never be used in the
 transformation process and eventually lost. Hence, we must change the top
 level expression to a terminal. It will act like a comment in the sense that
 it is a fixed <code>text</code>.</p>

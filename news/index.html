@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -140,9 +140,24 @@
       <small>Source: <a href='https://github.com/r-lib/styler/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="styler-1-3-2" class="section level1">
+<h1 class="page-header">
+<a href="#styler-1-3-2" class="anchor"></a>styler 1.3.2<small> 2020-02-23 </small>
+</h1>
+<p>Release upon request by the CRAN team.</p>
+<div id="minor-changes-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
+<ul>
+<li>various fixes to handle special cases for caching and stylerignore and their interaction (<a href='https://github.com/r-lib/styler/issues/611'>#611</a>, <a href='https://github.com/r-lib/styler/issues/610'>#610</a>, <a href='https://github.com/r-lib/styler/issues/609'>#609</a>, <a href='https://github.com/r-lib/styler/issues/607'>#607</a>, <a href='https://github.com/r-lib/styler/issues/602'>#602</a>, <a href='https://github.com/r-lib/styler/issues/600'>#600</a>).</li>
+<li>also test on macOS (<a href='https://github.com/r-lib/styler/issues/604'>#604</a>).</li>
+<li>skip timing tests on CRAN as requested by CRAN team because they did not pass on all machines (<a href='https://github.com/r-lib/styler/issues/603'>#603</a>).</li>
+</ul>
+</div>
+</div>
     <div id="styler-1-3-1" class="section level1">
 <h1 class="page-header">
-<a href="#styler-1-3-1" class="anchor"></a>styler 1.3.1<small> Unreleased </small>
+<a href="#styler-1-3-1" class="anchor"></a>styler 1.3.1<small> 2020-02-13 </small>
 </h1>
 <p>Emergency release. In case multiple expressions are on one line and only some of them are cached, styler can remove code. To reach this state, some of the expressions must have been styled previously alone and the cache must be active. Example:</p>
 <pre><code><a href="https://rdrr.io/r/base/library.html">library(styler)
@@ -177,9 +192,9 @@ style_text("1 # comment")
 <li><p><code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> gains two arguments <code>style_guide_name</code> and <code>style_guide_version</code> that are carried as meta data, in particular to version third-party style guides and ensure the proper functioning of caching. This change is completely invisible to users who don’t create and distribute their own style guide like <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> (<a href='https://github.com/r-lib/styler/issues/572'>#572</a>).</p></li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes" class="section level2">
+<div id="minor-changes-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-1" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li><p>lines are now broken after <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> in <code>ggplot2</code> calls for <code>strict = TRUE</code> (<a href='https://github.com/r-lib/styler/issues/569'>#569</a>).</p></li>
 <li><p>function documentation now contains many more line breaks due to roxygen2 update to version 7.0.1 (<a href='https://github.com/r-lib/styler/issues/566'>#566</a>).</p></li>
@@ -439,6 +454,7 @@ initialize_default_attributes(pd_flat)</a></code></pre>
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#styler-1-3-2">1.3.2</a></li>
         <li><a href="#styler-1-3-1">1.3.1</a></li>
         <li><a href="#styler-1-3-0">1.3.0</a></li>
         <li><a href="#styler-1-2-0">1.2.0</a></li>
