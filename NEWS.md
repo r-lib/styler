@@ -1,14 +1,14 @@
-# styler 1.3.1.9000
+# styler 1.3.2
+
+Release upon request by the CRAN team.
 
 ## Minor changes and fixes
 
-- code is now correctly formatted in stylerignore sequence for tokens that would
-  have been modified outside the stylerignore sequence with the style guide in 
-  use (#602).
-- styler formats now correctly when code in stylerignore sequence is partially 
-  cached (#600).
-- skip timing tests on CRAN as requested by CRAN team as they did not pass on 
-  all machines (#603).
+- various fixes to handle special cases for caching and stylerignore and their
+  interaction (#611, #610, #609, #607, #602, #600).
+- also test on macOS (#604).
+- skip timing tests on CRAN as requested by CRAN team because they did not pass 
+  on all machines (#603).
 
 # styler 1.3.1
 

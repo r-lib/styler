@@ -124,10 +124,10 @@ cache_is_activated <- function(cache_name = NULL) {
 #' top-level comments are **not** cached because caching and in particular
 #' checking  if they are cached is too expensive. Comments may be cached as part
 #' of the whole text (as opposed to on an expression by expression basis) using
-#' `cache_write()` directly. Also, we
-#' must not cache stylerignore sequence, because we might see the same
-#' expression that does not comply with the style guide outside a stylerignore
-#' sequence and wrongly think we should leave it as is.
+#' `cache_write()` directly. Also, we must not cache stylerignore sequence,
+#' because we might see the same expression that does not comply with the style
+#' guide outside a stylerignore sequence and wrongly think we should leave it as
+#' is.
 #' @param text A character vector with one or more expressions.
 #' @param transformers The transformers.
 #' @keywords internal

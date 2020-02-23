@@ -7,7 +7,7 @@
 tokenize(text)
 }
 \arguments{
-\item{text}{A character vector.}
+\item{text}{The text to parse.}
 }
 \value{
 A flat parse table

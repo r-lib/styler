@@ -29,7 +29,7 @@ test_that("activated cache brings speedup on style_text() API on character vecto
     text, text,
     fun = style_text
   )
-  expect_gt(n, 65)
+  expect_gt(n, 60)
 })
 
 test_that("activated cache brings speedup on style_text() API on character scalar", {
@@ -127,8 +127,8 @@ capture.output(test_that("unactivated cache does not bring speedup", {
   skip_on_cran()
   on.exit(clear_testthat_cache())
   clear_testthat_cache()
-  first <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
-  second <- system.time(styler::style_file(test_path("reference-objects/caching.R")))
+  first <- system.time(style_file(test_path("reference-objects/caching.R")))
+  second <- system.time(style_file(test_path("reference-objects/caching.R")))
   expect_false(first["elapsed"] / 4 > second["elapsed"])
 }))
 

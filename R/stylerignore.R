@@ -4,7 +4,8 @@
 #' and positional argument of non-terminals were already propagated to terminals
 #' with [context_to_terminals()]. Because tokens can be added or removed during
 #' styling, we must not only keep the pos_id, but rather we must remember the
-#' pos_id of the first token in the stylerignore seuquence (the marker), for
+#' pos_id of the first token in the stylerignore sequence (the marker, or the
+#' first token on a line if the stylerignore marker is an inline marker), for
 #' which we know it will still be there, and join these markers later with all
 #' tokens in the stylerignore sequence (this is a one to many join, i.e. one
 #' start marker can have many tokens).
@@ -46,9 +47,9 @@ env_add_stylerignore <- function(pd_flat) {
 #' - it is not a comment, but the last token on the line is a marker.
 #'
 #' See examples in [stylerignore]. Note that you should reuse the stylerignore
-#' column to compute switchpoints or similar and not a plain
+#' column to compute switch points or similar and not a plain
 #' `pd$text == option_read("styler.ignore_start")` because that will fail to
-#' give correct switchpoints in the case stylerignore sequences are invalid.
+#' give correct switch points in the case stylerignore sequences are invalid.
 #' @param pd_flat A parse table.
 #' @keywords internal
 add_stylerignore <- function(pd_flat) {
@@ -90,12 +91,11 @@ add_stylerignore <- function(pd_flat) {
 #'   `env_current`, which recorded that information from the input text.
 #' * Replace the computed lag_newlines and lag_spaces information in the parse
 #'   table with this information.
-#' * Because we may remove or add tokens when appling the transformers, it is
-#'   not save to merge
-#'   via the pos_id of each token in a stylerignore sequence. We assume
-#'   that the start and stop markers are the same after styling, so we join
-#'   all tokens that were initially in a stylerignore sequence via the first
-#'   pos_id in that stylerignore sequence.
+#' * Because we may remove or add tokens when applying the transformers, it is
+#'   not save to merge via the pos_id of each token in a stylerignore sequence.
+#'   We assume that the start and stop markers are the same after styling, so we
+#'   join all tokens that were initially in a stylerignore sequence via the
+#'   first pos_id in that stylerignore sequence.
 #' @keywords internal
 apply_stylerignore <- function(flattened_pd) {
   if (!env_current$any_stylerignore) {

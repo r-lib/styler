@@ -12,7 +12,7 @@ find_block_id(pd)
 \description{
 Two assignment tokens \code{EQ_ASSIGN} belong to the same block if they are not
 separated by more than one token. Token between \code{EQ_ASSIGN} tokens belong
-to the \code{EQ_ASSIGN} token occuring before them, except the token right before
+to the \code{EQ_ASSIGN} token occurring before them, except the token right before
 \code{EQ_ASSING} already belongs to the \code{EQ_ASSING} after it. Note that this
 notion is unrelated to the column \emph{block} in the parse table, which is used
 to \code{\link[=parse_transform_serialize_r]{parse_transform_serialize_r()}} code blocks and leave out the ones that

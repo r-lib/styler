@@ -21,9 +21,9 @@ directory for caching, because otherwise, the cache is lost at restart of R.
 
 \section{Non-interactive use}{
 
-Note that if you have never authorised \code{{R.cache}} to create the cache in a
-permenent directory, it wil build the cache in a temporary directory. To
-create a permenent cache, just open an interactive R session and type
+Note that if you have never authorized \code{{R.cache}} to create the cache in a
+permanent directory, it will build the cache in a temporary directory. To
+create a permanent cache, just open an interactive R session and type
 \code{cache_info()}. You can see under \verb{Location:} if a permanent directory is
 used and if not, \code{{R.cache}} will ask you to create one the first time you
 use \code{{R.cache}} in an R session.
