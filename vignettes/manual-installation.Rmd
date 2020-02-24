@@ -10,7 +10,17 @@ vignette: >
 Apart from `precommit::use_precommit()`, you can install pre-commit
 manually as described in the [official
 documentation](https://pre-commit.com/#intro). Then, set the R option
-`precommit.executable` to the path where the pre-commit executable lives.
+`precommit.executable` to the path where the pre-commit executable lives, 
+preferrably in your `.Rprofile` to make sure it is set in a new R session too.
+You can find the path to the pre-commit executable with 
+
+```bash
+$where pre-commit
+# should give /bin/pre-commit or similar
+```
+
+if it's on your `$PATH`.
+
 
 If you've installed pre-commit, you can add it to a specific project by adding a
 `.pre-commit-config.yaml` file that has a structure like this:
@@ -18,17 +28,18 @@ If you've installed pre-commit, you can add it to a specific project by adding a
 ``` yaml
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9016
+    rev: v0.0.0.9027
     hooks: 
     -   id: style-files
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: readme-rmd-rendered
-    -   id: roxygenize
-    -   id: use-tidy-description
-    -   id: deps-in-desc
+    # -   id: roxygenize            # for repos that are a package.
+    # -   id: use-tidy-description  # for repos that are a package.
+    # -   id: deps-in-desc          # for repos that are a package.
     -   id: lintr
 ```
+
 The `repo` key points to the place where the source code of the hooks are stored, 
 not the repo you want to apply them to.
 
@@ -37,5 +48,6 @@ Some hooks also take arguments, see `vignette("hook-arguments")`.
 If you want to see the file `.pre-commit-config.yaml` in RStudio, you have to
 enable "Show Hidden Files" in the *Files* Pane of RStudio under *More*.
 
-Next, run `pre-commit install` in your repo and you are done.
+Next, run `pre-commit install` in your repo and you are done. To make sure you
+are using the latest versions of the hooks, also run `pre-commit autoupdate`.
 
