@@ -46,6 +46,7 @@
     entry: inst/bin/spell-check
     language: script
     exclude: '(\.[rR]$|\.py$|/?\.gitignore$|^\.pre-commit|^NAMESPACE$|^inst/WORDLIST$)'
+    require_serial: true
 -   id: deps-in-desc
     name: deps-in-desc
     description: Check if dependencies that can be parsed from code are in DESCRIPTION.
