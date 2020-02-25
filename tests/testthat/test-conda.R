@@ -29,7 +29,7 @@ test_that("Can uninstall pre-commit (repo scope)", {
     uninstall_precommit(scope = "repo", path_root = tempdir),
     "You can re-install"
   )
-  
+
   # when there is no pre-commit.yaml anymore
   use_precommit(tempdir, open = FALSE, force = TRUE)
   fs::file_delete(fs::path(tempdir, ".pre-commit-config.yaml"))
@@ -41,11 +41,11 @@ test_that("Can uninstall pre-commit (repo scope)", {
 
 test_that("Can uninstall (globally)", {
   expect_output(
-    uninstall_precommit(scope = "global", ask = "none"), 
+    uninstall_precommit(scope = "global", ask = "none"),
     "Removed pre-commit from"
   )
   expect_error(
-    uninstall_precommit(scope = "global", ask = "none"), 
+    uninstall_precommit(scope = "global", ask = "none"),
     "No installation found."
   )
   expect_error(install_precommit(), NA)

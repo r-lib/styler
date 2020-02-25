@@ -67,7 +67,7 @@ use_precommit_config <- function(force, path_root = here::here()) {
       ". Use `force = TRUE` to replace .pre-commit-config.yaml"
     ))
   }
-  
+
   if (is_package(".")) {
     usethis::write_union(".Rbuildignore", escaped_name_target)
   }

@@ -84,32 +84,34 @@ run_test("spell-check", suffix = "-language-success.md", cmd_args = "--lang=en_G
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### depds-in-desc                                                           ####
 # succeed (call to library that is in description)
-run_test("deps-in-desc", suffix = "-success.R", error_msg = NULL, 
-         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+run_test("deps-in-desc",
+  suffix = "-success.R", error_msg = NULL,
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 # fail (call to library that is not in description)
-run_test("deps-in-desc", 
-         suffix = "-fail.R", error_msg = "Dependency check failed",  
-         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")))
+run_test("deps-in-desc",
+  suffix = "-fail.R", error_msg = "Dependency check failed",
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+)
 
 # with :::
 run_test("deps-in-desc",
-         "deps-in-desc-dot3",
-         suffix = "-fail.R", error_msg = "Dependency check failed",
-         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  "deps-in-desc-dot3",
+  suffix = "-fail.R", error_msg = "Dependency check failed",
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 run_test("deps-in-desc",
-         "deps-in-desc-dot3",
-         suffix = "-success.R", error_msg = NULL, 
-         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  "deps-in-desc-dot3",
+  suffix = "-success.R", error_msg = NULL,
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 run_test("deps-in-desc",
-         "deps-in-desc-dot3",
-         suffix = "-fail.R", error_msg = NULL, 
-         copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")), 
-         cmd_args = "--allow_private_imports"
+  "deps-in-desc-dot3",
+  suffix = "-fail.R", error_msg = NULL,
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+  cmd_args = "--allow_private_imports"
 )
 
 
@@ -129,5 +131,6 @@ run_test("lintr", suffix = "-fail.R", error_msg = "not lint free")
 
 # warning
 run_test(
-  "lintr", suffix = "-fail.R", cmd_args = "--warn_only", error_msg = NULL
+  "lintr",
+  suffix = "-fail.R", cmd_args = "--warn_only", error_msg = NULL
 )
