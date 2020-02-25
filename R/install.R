@@ -29,7 +29,7 @@ install_precommit <- function() {
 }
 
 #' Unistall pre-commit
-#' 
+#'
 #' Remove pre-commit from a repo or from your system.
 #' @param scope Either "repo" or "global". "repo" removes pre-commit from your
 #'   project, but you will be able to use it in other projects. With "global",
@@ -85,7 +85,8 @@ uninstall_precommit_system <- function(ask = TRUE) {
           " from where we try to uninstall. ",
           "Can only uninstall when installed with conda. ",
           "Please remove manually or set the R option to the appropriate ",
-          "executable that lives in a conda environment. You find it with",
+          "executable that lives in a conda environment. You find the ",
+          "currently used executable (conda or other) with ",
           "`precommit::path_pre_commit_exec()`."
         ))
       } else {
@@ -142,8 +143,8 @@ uninstall_precommit_repo <- function(ask) {
       fs::file_delete(path_file)
       usethis::ui_done(paste0(
         "Removed .pre-commit-config.yaml. If you want your collaborators",
-        "to be able to\ncontinue to use pre-commit in this repo, you should", 
-        "undo the deletion of this file,\ne.g. with `$ git checkout", 
+        "to be able to\ncontinue to use pre-commit in this repo, you should",
+        "undo the deletion of this file,\ne.g. with `$ git checkout",
         ".pre-commit-config.yaml`."
       ))
     }
