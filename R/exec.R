@@ -21,8 +21,29 @@ path_pre_commit_exec <- function(check_if_exists = TRUE) {
   final
 }
 
-
+#' Derive the path to the pre-commit executable
+#'
+#' First check if there is an executable on the `$PATH`, then check if the
+#' conda installation was used. Returns `""` if no executable is found.
+#' @keywords internal
 path_derive_precommit_exec <- function() {
+  path <- path_derive_precommit_exec_path()
+  if (path == "") {
+    path <- path_derive_precommit_exec_conda()
+  }
+  path
+}
+
+#' Derive the pre-commit executable from the path
+#'
+#' Tries to derive the `pre-commit` executable from the `$PATH`.
+#' Returns `""` if no executable is found.
+#' @keywords internal
+path_derive_precommit_exec_path <- function() {
+  unname(Sys.which("pre-commit")[1])
+}
+
+path_derive_precommit_exec_conda <- function() {
   tryCatch(
     {
       ls <- reticulate::conda_list()
