@@ -8,6 +8,7 @@ path_derive_precommit_exec()
 }
 \description{
 First check if there is an executable on the \verb{$PATH}, then check if the
-conda installation was used. Returns \code{""} if no executable is found.
+conda installation was used. Returns \code{""} if no executable is found. If not,
+search other possible locations that are OS dependent.
 }
 \keyword{internal}
