@@ -15,8 +15,10 @@ close the log of this process, you might need it later!). Then, you must make
 sure R finds the executable. To check that, start a new R session after the
 installation process of pre-commit succeeded and run this command:
 
-```{r}
+```{r, eval = FALSE}
 precommit::path_pre_commit_exec()
+#> "/usr/local/bin/pre-commit"
+
 ```
 If it shows a path (like above), you are all set. Skip the rest of this
 paragraph and go to *Configuration*. If not, you must manually 
