@@ -18,7 +18,6 @@ installation process of pre-commit succeeded and run this command:
 ```{r, eval = FALSE}
 precommit::path_pre_commit_exec()
 #> "/usr/local/bin/pre-commit"
-
 ```
 If it shows a path (like above), you are all set. Skip the rest of this
 paragraph and go to *Configuration*. If not, you must manually 
