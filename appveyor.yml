@@ -42,7 +42,7 @@ environment:
   # Please follow https://ci.appveyor.com/tools/encrypt .
   #GITHUB_PAT:
   #  secure: VXO22OHLkl4YhVIomSMwCZyOTx03Xf2WICaVng9xH7gISlAg8a+qrt1DtFtk8sK5
-  PYTHON: "C:\\conda"
+  PYTHON: "C:\Python36"
   PYTHON_ARCH: "64"
   USE_RTOOLS: true
 
