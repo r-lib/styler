@@ -46,6 +46,8 @@ environment:
   # Please follow https://ci.appveyor.com/tools/encrypt .
   #GITHUB_PAT:
   #  secure: VXO22OHLkl4YhVIomSMwCZyOTx03Xf2WICaVng9xH7gISlAg8a+qrt1DtFtk8sK5
+  global:
+    USE_RTOOLS: true
 artifacts:
   - path: '*.Rcheck\**\*.log'
     name: Logs
