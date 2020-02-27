@@ -14,10 +14,6 @@ install:
   - cmd: Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
   - cmd: Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
   - cmd: Rscript -e "remotes::install_github('ropenscilabs/tic'); print(tic::dsl_load()); tic::prepare_all_stages()"
-  - "git clone git://github.com/astropy/ci-helpers.git"
-  - "powershell ci-helpers/appveyor/install-miniconda.ps1"
-  - cmd: "rm *.exe"
-  - cmd: "rm -rf ci-helpers"
 
 before_build: Rscript -e "tic::before_install()"
 build_script: Rscript -e "tic::install()"
@@ -41,6 +37,7 @@ environment:
   # R_QPDF=true makes sure that R CMD check doesn't complain
   # about a missing qpdf executable
   R_QPDF: "true"
+  PATH: C:\Miniconda3;C:\Miniconda3\Scripts;%PATH%
   # The example below will not work for your repository,
   # you need to encrypt your own token.
   # Please follow https://ci.appveyor.com/tools/encrypt .
