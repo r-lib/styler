@@ -18,12 +18,13 @@
 #'
 #' @param force Whether to replace an existing config file.
 #' @param open Whether or not to open the .pre-commit-config.yaml after
-#'   it's been placed in your repo.
+#'   it's been placed in your repo. The default is `TRUE` when working in
+#'   RStudio. Otherwise, we recommend manually inspecting the file.
 #' @inheritParams fallback_doc
 #' @family helpers
 #' @export
 use_precommit <- function(force = FALSE,
-                          open = TRUE,
+                          open = rstudiapi::isAvailable(),
                           path_root = here::here()) {
   withr::with_dir(path_root, {
     if (!is_installed()) {
