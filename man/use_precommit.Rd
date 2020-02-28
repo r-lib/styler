@@ -4,13 +4,18 @@
 \alias{use_precommit}
 \title{Set up pre-commit}
 \usage{
-use_precommit(force = FALSE, open = TRUE, path_root = here::here())
+use_precommit(
+  force = FALSE,
+  open = rstudiapi::isAvailable(),
+  path_root = here::here()
+)
 }
 \arguments{
 \item{force}{Whether to replace an existing config file.}
 
 \item{open}{Whether or not to open the .pre-commit-config.yaml after
-it's been placed in your repo.}
+it's been placed in your repo. The default is \code{TRUE} when working in
+RStudio. Otherwise, we recommend manually inspecting the file.}
 
 \item{path_root}{The path to the root directory of your project.}
 }
