@@ -24,7 +24,7 @@
 #' @family helpers
 #' @export
 use_precommit <- function(force = FALSE,
-                          open = rstudiapi::isAvailable(),
+                          open = rstudioapi::isAvailable(),
                           path_root = here::here()) {
   withr::with_dir(path_root, {
     if (!is_installed()) {
