@@ -50,3 +50,13 @@ test_that("Can uninstall (globally)", {
   )
   expect_error(install_precommit(), NA)
 })
+
+
+test_that("can use precommit", {
+  expect_error({
+    tempdir <- tempdir()
+    git2r::init(tempdir)
+    use_precommit(path_root = tempdir)
+  }, NA)
+  
+})
