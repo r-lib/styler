@@ -6,7 +6,7 @@
 \usage{
 use_precommit(
   force = FALSE,
-  open = rstudiapi::isAvailable(),
+  open = rstudioapi::isAvailable(),
   path_root = here::here()
 )
 }
