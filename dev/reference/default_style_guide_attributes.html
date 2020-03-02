@@ -162,9 +162,14 @@ table.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>string_to_format</span> <span class='kw'>&lt;-</span> <span class='st'>"call( 3)"</span>
-<span class='no'>pd</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/compute_parse_data_nested.html'>compute_parse_data_nested</a></span>(<span class='no'>string_to_format</span>)
-<span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/visit.html'>pre_visit</a></span>(<span class='no'>pd</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>default_style_guide_attributes</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 18</span><span>
+    <pre class="examples"><div class='input'><span class='kw pkg'>withr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/withr/man/with_options.html'>with_options</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>styler.cache_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>), <span class='co'># temporarily deactivate cache</span>
+  {
+    <span class='no'>string_to_format</span> <span class='kw'>&lt;-</span> <span class='st'>"call( 3)"</span>
+    <span class='no'>pd</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/compute_parse_data_nested.html'>compute_parse_data_nested</a></span>(<span class='no'>string_to_format</span>)
+    <span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/visit.html'>pre_visit</a></span>(<span class='no'>pd</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>default_style_guide_attributes</span>))
+  }
+)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 18</span><span>
 #&gt;   pos_id token terminal text  short token_before token_after stylerignore block
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>      1 expr  FALSE    call… call( </span><span style='color: #BB0000;'>NA</span><span>           </span><span style='color: #BB0000;'>NA</span><span>          FALSE            1
