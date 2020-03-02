@@ -37,7 +37,12 @@ If the first is a terminal, return it. If not, go inside it and search the
 next terminal
 }
 \examples{
-pd <- styler:::compute_parse_data_nested("if (TRUE) f()")
-styler:::next_terminal(pd)
+withr::with_options(
+  list(styler.cache_name = NULL), # temporarily deactivate cache
+  {
+    pd <- styler:::compute_parse_data_nested("if (TRUE) f()")
+    styler:::next_terminal(pd)
+  }
+)
 }
 \keyword{internal}
