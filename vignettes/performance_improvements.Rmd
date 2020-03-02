@@ -11,12 +11,9 @@ vignette: >
 ---
 
 We want to make styler faster.
-```{r, echo = FALSE}
-knitr::opts_chunk$set(eval = FALSE)
+
+
 ```
-
-
-```{r}
 library(styler)
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),
@@ -28,7 +25,9 @@ microbenchmark::microbenchmark(
 ```
 
 Replacing mutate statements.
-```{r}
+
+```
+
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),
   times = 2
@@ -39,7 +38,8 @@ microbenchmark::microbenchmark(
 ```
 
 Move `opening` argument out of needs indention.
-```{r}
+
+```
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),
   times = 5
@@ -51,7 +51,8 @@ microbenchmark::microbenchmark(
 ```
 
 Dropping unnecessary select statements and arrange stuff.
-```{r}
+
+```
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),
   times = 5
@@ -63,7 +64,8 @@ microbenchmark::microbenchmark(
 
 
 Some more stuff (early return, purr)
-```{r}
+
+```
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),
   times = 5
@@ -74,7 +76,8 @@ microbenchmark::microbenchmark(
 ```
 
 Various changes (positive and negative in terms of speed)
-```{r}
+
+```
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),
   times = 10
@@ -87,7 +90,8 @@ microbenchmark::microbenchmark(
 
 
 Removed tibble bottlenecks (tibble 1.4.2, https://github.com/tidyverse/tibble/pull/348)
-```{r}
+
+```
 microbenchmark::microbenchmark(
   base = style_file("tests/testthat/indention_multiple/overall-in.R"),
   times = 10
