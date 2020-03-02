@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Creates a flat parse table with minimal initialization. — text_to_flat_pd • styler</title>
+<title>Creates a flat parse table with minimal initialization — text_to_flat_pd • styler</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Creates a flat parse table with minimal initialization. — text_to_flat_pd" />
-<meta property="og:description" content="Creates a flat parse table with minimal initialization." />
+<meta property="og:title" content="Creates a flat parse table with minimal initialization — text_to_flat_pd" />
+<meta property="og:description" content="Creates a flat parse table with minimal initialization and makes the parse
+table shallow where appropriate." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.2.9000</span>
       </span>
     </div>
 
@@ -138,13 +139,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Creates a flat parse table with minimal initialization.</h1>
+    <h1>Creates a flat parse table with minimal initialization</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/nest.R'><code>R/nest.R</code></a></small>
     <div class="hidden name"><code>text_to_flat_pd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Creates a flat parse table with minimal initialization.</p>
+    <p>Creates a flat parse table with minimal initialization and makes the parse
+table shallow where appropriate.</p>
     </div>
 
     <pre class="usage"><span class='fu'>text_to_flat_pd</span>(<span class='no'>text</span>, <span class='no'>transformers</span>)</pre>
@@ -154,7 +156,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>text</th>
-      <td><p>A character vector.</p></td>
+      <td><p>The text to parse.</p></td>
     </tr>
     <tr>
       <th>transformers</th>
@@ -165,7 +167,13 @@ the code is cached.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that the parse table might be shallow if caching is enabled and some
+    <p>This includes:</p><ul>
+<li><p>token before and after.</p></li>
+<li><p>stylerignore attribute.</p></li>
+<li><p>caching attributes.</p></li>
+</ul>
+
+<p>Note that the parse table might be shallow if caching is enabled and some
 values are cached.</p>
 
   </div>

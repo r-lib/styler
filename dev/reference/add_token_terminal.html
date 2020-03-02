@@ -40,8 +40,8 @@
 and we cannot wait to initialize this attribute until apply_transformers(),
 where all other attributes are initialized with
 default_style_guide_attributes() (when using tidyverse_style()) because
-for cached code, we don't build up the nested structure and leave it shallow,
-see also drop_cached_children()." />
+for cached code, we don't build up the nested structure and leave it shallow
+(to speed up things), see also drop_cached_children()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -74,7 +74,7 @@ see also drop_cached_children()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.2.9000</span>
       </span>
     </div>
 
@@ -153,8 +153,8 @@ see also drop_cached_children()." />
 and we cannot wait to initialize this attribute until <code><a href='apply_transformers.html'>apply_transformers()</a></code>,
 where all other attributes are initialized with
 <code><a href='default_style_guide_attributes.html'>default_style_guide_attributes()</a></code> (when using <code><a href='tidyverse_style.html'>tidyverse_style()</a></code>) because
-for cached code, we don't build up the nested structure and leave it shallow,
-see also <code><a href='drop_cached_children.html'>drop_cached_children()</a></code>.</p>
+for cached code, we don't build up the nested structure and leave it shallow
+(to speed up things), see also <code><a href='drop_cached_children.html'>drop_cached_children()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>add_terminal_token_after</span>(<span class='no'>pd_flat</span>)
