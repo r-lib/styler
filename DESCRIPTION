@@ -25,7 +25,6 @@ Suggests:
     glue,
     knitr,
     lintr,
-    pkgapi,
     oneliner (>= 0.1.0),
     rmarkdown,
     roxygen2,
@@ -38,9 +37,15 @@ VignetteBuilder:
     knitr
 Remotes: 
     lorenzwalthert/oneliner,
-    r-lib/pkgapi,
     ropenscilabs/tic
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
-    "collate", "pkgapi::api_roclet"))
+Roxygen: list(
+    markdown = TRUE,
+    roclets = c(
+      "rd",
+      "namespace",
+      "collate",
+      if (require(pkgapi)) "pkgapi::api_roclet" else NULL
+    )
+  )
 RoxygenNote: 7.0.2
