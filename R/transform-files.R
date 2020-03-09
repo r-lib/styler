@@ -20,9 +20,11 @@ transform_files <- function(files,
     cat("Styling ", len_files, " files:\n")
   }
 
-  changed <- furrr::future_map_lgl(files, transform_file,
+  changed <- future.apply::future_sapply(
+    files, transform_file,
     fun = transformer, max_char_path = max_char, root = root
   )
+
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
   new_tibble(list(file = files, changed = changed), nrow = len_files)

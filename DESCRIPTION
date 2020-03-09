@@ -29,7 +29,7 @@ Imports:
     tools,
     withr (>= 1.0.0),
     xfun (>= 0.1),
-    furrr
+    future.apply
 Suggests: 
     data.tree (>= 0.1.6),
     digest,
