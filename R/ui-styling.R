@@ -82,7 +82,7 @@ style_pkg <- function(pkg = ".",
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   changed <- withr::with_dir(pkg_root, prettify_pkg(
     transformers,
-    filetype, exclude_files, exclude_dirs, include_roxygen_examples
+    filetype, exclude_files, exclude_dirs, include_roxygen_examples, pkg_root
   ))
   invisible(changed)
 }
@@ -91,7 +91,8 @@ prettify_pkg <- function(transformers,
                          filetype,
                          exclude_files,
                          exclude_dirs,
-                         include_roxygen_examples) {
+                         include_roxygen_examples,
+                         pkg_root = ".") {
   filetype <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
   exclude_files <- set_arg_paths(exclude_files)
@@ -137,7 +138,7 @@ prettify_pkg <- function(transformers,
     c(r_files, rprofile_files, vignette_files, readme),
     exclude_files
   )
-  transform_files(files, transformers, include_roxygen_examples)
+  transform_files(files, transformers, include_roxygen_examples, pkg_root)
 }
 
 #' Style a string

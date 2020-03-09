@@ -9,7 +9,10 @@
 #' Invisibly returns a data frame that indicates for each file considered for
 #' styling whether or not it was actually changed.
 #' @keywords internal
-transform_files <- function(files, transformers, include_roxygen_examples) {
+transform_files <- function(files,
+                            transformers,
+                            include_roxygen_examples,
+                            pkg_root = ".") {
   transformer <- make_transformer(transformers, include_roxygen_examples)
   max_char <- min(max(nchar(files), 0), getOption("width"))
   len_files <- length(files)
@@ -17,8 +20,8 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
     cat("Styling ", len_files, " files:\n")
   }
 
-  changed <- map_lgl(files, transform_file,
-    fun = transformer, max_char_path = max_char
+  changed <- furrr::future_map_lgl(files, transform_file,
+    fun = transformer, max_char_path = max_char, pkg_root = pkg_root
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
@@ -43,6 +46,7 @@ transform_file <- function(path,
                            message_before = "",
                            message_after = " [DONE]",
                            message_after_if_changed = " *",
+                           pkg_root = ".",
                            ...) {
   char_after_path <- nchar(message_before) + nchar(path) + 1
   max_char_after_message_path <- nchar(message_before) + max_char_path + 1
@@ -53,6 +57,7 @@ transform_file <- function(path,
     rep_char(" ", max(0L, n_spaces_before_message_after)),
     append = FALSE
   )
+  setwd(pkg_root)
   changed <- transform_code(path, fun = fun, ...)
 
   bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
