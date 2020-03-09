@@ -199,7 +199,8 @@ style_dir <- function(path = ".",
   changed <- withr::with_dir(
     path, prettify_any(
       transformers,
-      filetype, recursive, exclude_files, exclude_dirs, include_roxygen_examples
+      filetype, recursive, exclude_files, exclude_dirs,
+      include_roxygen_examples, path
     )
   )
   invisible(changed)
@@ -217,7 +218,8 @@ prettify_any <- function(transformers,
                          recursive,
                          exclude_files,
                          exclude_dirs,
-                         include_roxygen_examples) {
+                         include_roxygen_examples,
+                         path = ".") {
   exclude_files <- set_arg_paths(exclude_files)
   exclude_dirs <- set_arg_paths(exclude_dirs)
   files_root <- dir(
@@ -237,7 +239,7 @@ prettify_any <- function(transformers,
   }
   transform_files(
     setdiff(c(files_root, files_other), exclude_files),
-    transformers, include_roxygen_examples
+    transformers, include_roxygen_examples, path
   )
 }
 
