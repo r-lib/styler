@@ -13,7 +13,7 @@ Release upon request by the CRAN team.
 ## New features
 
 * `style_pkg()` and `style_dir()` gain the ability to run in parallel using 
-  `future` backends.
+  `future` backends (#277).
 
 # styler 1.3.1
 
