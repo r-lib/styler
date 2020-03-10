@@ -10,6 +10,11 @@ Release upon request by the CRAN team.
 - skip timing tests on CRAN as requested by CRAN team because they did not pass 
   on all machines (#603).
 
+## New features
+
+* `style_pkg()` and `style_dir()` gain the ability to run in parallel using 
+  `future` backends.
+
 # styler 1.3.1
 
 Emergency release. In case multiple expressions are on one line and only 
