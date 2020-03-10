@@ -95,6 +95,10 @@ See section 'Warning' for a good strategy to apply styling safely.
 \examples{
 \dontrun{
 style_dir(file_type = "r")
+# For parallel operation:
+library(future)
+plan(multisession, workers = 4)
+style_dir()
 }
 }
 \seealso{

@@ -69,6 +69,10 @@ NULL
 #'   scope = "line_breaks",
 #'   math_token_spacing = specify_math_token_spacing(zero = "'+'")
 #' )
+#' # For parallel operation:
+#' library(future)
+#' plan(multisession, workers = 4)
+#' style_pkg()
 #' }
 #' @export
 style_pkg <- function(pkg = ".",
@@ -185,6 +189,10 @@ style_text <- function(text,
 #' @examples
 #' \dontrun{
 #' style_dir(file_type = "r")
+#' # For parallel operation:
+#' library(future)
+#' plan(multisession, workers = 4)
+#' style_dir()
 #' }
 #' @export
 style_dir <- function(path = ".",

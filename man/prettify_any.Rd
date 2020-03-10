@@ -10,7 +10,8 @@ prettify_any(
   recursive,
   exclude_files,
   exclude_dirs,
-  include_roxygen_examples
+  include_roxygen_examples,
+  path = "."
 )
 }
 \arguments{

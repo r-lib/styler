@@ -11,6 +11,7 @@ transform_file(
   message_before = "",
   message_after = " [DONE]",
   message_after_if_changed = " *",
+  root = ".",
   ...
 )
 }

@@ -4,7 +4,7 @@
 \alias{transform_files}
 \title{Transform files with transformer functions}
 \usage{
-transform_files(files, transformers, include_roxygen_examples)
+transform_files(files, transformers, include_roxygen_examples, root = ".")
 }
 \arguments{
 \item{files}{A character vector with paths to the file that should be

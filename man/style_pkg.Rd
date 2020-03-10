@@ -99,6 +99,10 @@ style_pkg(
   scope = "line_breaks",
   math_token_spacing = specify_math_token_spacing(zero = "'+'")
 )
+# For parallel operation:
+library(future)
+plan(multisession, workers = 4)
+style_pkg()
 }
 }
 \seealso{
