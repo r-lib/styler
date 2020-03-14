@@ -104,7 +104,7 @@
       <h1>An introduction to styler</h1>
                         <h4 class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2020-03-02</h4>
+            <h4 class="date">2020-03-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/introducing_styler.Rmd"><code>vignettes/introducing_styler.Rmd</code></a></small>
       <div class="hidden name"><code>introducing_styler.Rmd</code></div>
@@ -123,7 +123,7 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"a=3; 2"</span>, <span class="dt">scope =</span> <span class="st">"tokens"</span>)</a></code></pre></div>
 <pre><code>a &lt;- 3
 2</code></pre>
-<p><code>scope</code> always includes less-invasive styling than the option chosen, e.g. <code>spaces = "line_breaks"</code> includes styling spaces and indention in addition to line breaks.</p>
+<p><code>scope</code> always includes less-invasive styling than the option chosen, e.g. <code>scope = "line_breaks"</code> includes styling spaces and indention in addition to line breaks.</p>
 <p>We can also choose to style line breaks but not tokens:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"if(x) {66 } else {a=3}"</span>, <span class="dt">scope =</span> <span class="st">"line_breaks"</span>)</a></code></pre></div>
 <pre><code>if (x) {
