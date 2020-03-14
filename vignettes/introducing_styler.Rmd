@@ -55,7 +55,7 @@ style_text("a=3; 2", scope = "tokens")
 
 
 `scope` always includes less-invasive styling than the option chosen, 
-e.g. `spaces = "line_breaks"` includes styling spaces and indention in addition 
+e.g. `scope = "line_breaks"` includes styling spaces and indention in addition 
 to line breaks.
 
 
