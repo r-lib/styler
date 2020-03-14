@@ -14,7 +14,8 @@ install:
   - cmd: Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
   - cmd: Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl')"
   - cmd: Rscript -e "remotes::install_github('ropenscilabs/tic'); print(tic::dsl_load()); tic::prepare_all_stages()"
-
+  - cmd: Rscript -e "install.packages('reticulate'); reticulate::install_miniconda()"
+  
 before_build: Rscript -e "tic::before_install()"
 build_script: Rscript -e "tic::install()"
 after_build: Rscript -e "tic::after_install()"
