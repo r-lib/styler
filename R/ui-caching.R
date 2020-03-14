@@ -29,11 +29,11 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' `style_text()` and Addin.
 #'
 #' @section Setup:
-#' styler by default uses caching, via the `{R.cache}` package. You will be
-#' asked you to let it create a permanent cache on your file system that styler
-#' will use in case it is not set that up already for another tool that
+#' styler by default uses caching via the `{R.cache}` package. You will be
+#' asked to let it create a permanent cache on your file system that styler
+#' will use in case it is not set already up for another tool that
 #' uses `{R.cache}`. We encourage users to let `{R.cache}` create a permanent
-#' directory for caching, because otherwise, the cache is lost at restart of R.
+#' directory for caching because, otherwise, the cache is lost at restart of R.
 #'
 #' @section Non-interactive use:
 #' Note that if you have never authorized `{R.cache}` to create the cache in a
