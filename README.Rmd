@@ -91,13 +91,13 @@ To update the hook revisions, run `precommit::autoupdate()`.
 
 - **Do not abort while hooks are running in RStudio git tab.** Non-staged
   changes are stashed to a temp directory and when you abort in RStudio, these
-  changes are not brought back to you repo. This is tracked in [this
-  issue](https://github.com/pre-commit/pre-commit/issues/1362) and we hope that
-  in the future, the changes will be recovered in RStudio too. Note that this is
-  only an issue with RStudio. Stashes are restored when you abort a `git commit`
-  with `INT` (e.g. Ctrl+C) on the command line. To restore stashes, manually
-  after hitting *abort* in the RStudio git tab, you can `git stash apply
-  /path/to/patch_with_id` whereas you find the patch under your pre-commit
+  changes are not brought back to you repo. Upvote [this
+  issue](https://github.com/rstudio/rstudio/issues/6471) to change this. We hope
+  that in the future, the changes will be recovered in RStudio too. Note that
+  this is only an issue with RStudio. Stashes are restored when you abort a `git
+  commit` with `INT` (e.g. Ctrl+C) on the command line. To restore stashes,
+  manually after hitting *abort* in the RStudio git tab, you can `git stash
+  apply /path/to/patch_with_id` whereas you find the patch under your pre-commit
   cache, which is usually under `$HOME/.cache/pre-commit/`.
 
 - Because R is not officially supported as a langauge in the pre-commit
