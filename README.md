@@ -65,7 +65,7 @@ commit is made. You can also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you
 succeed, it should look like this:
 
-![](man/figures/screenshot.png)<!-- -->
+<img src="man/figures/screenshot.png" width="639" />
 
 See the hooks provided by this repo under `vignette("available-hooks")`.
 You can also add other hooks from other repos, by extending the
@@ -82,9 +82,18 @@ To update the hook revisions, run `precommit::autoupdate()`.
 
 ## Caution
 
-  - **Do not abort while hooks are running.** Non-staged changes are
-    stashed to a temp directory when the hooks are run and may not
-    easily be recovered afterwards.
+  - **Do not abort while hooks are running in RStudio git tab.**
+    Non-staged changes are stashed to a temp directory and when you
+    abort in RStudio, these changes are not brought back to you repo.
+    This is tracked in [this
+    issue](https://github.com/pre-commit/pre-commit/issues/1362) and we
+    hope that in the future, the changes will be recovered in RStudio
+    too. Note that this is only an issue with RStudio. Stashes are
+    restored when you abort a `git commit` with `INT` (e.g. Ctrl+C) on
+    the command line. To restore stashes, manually after hitting *abort*
+    in the RStudio git tab, you can `git stash apply
+    /path/to/patch_with_id` whereas you find the patch under your
+    pre-commit cache, which is usually under `$HOME/.cache/pre-commit/`.
 
   - Because R is not officially supported as a langauge in the
     pre-commit framework (yet), there is no R package dependency
