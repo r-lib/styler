@@ -20,6 +20,7 @@
 #' @param file_name The file to test in `tests/in` (without extension).
 #' @param suffix The suffix of `file_name`.
 #' @inheritParams run_test_impl
+#' @keywords internal
 run_test <- function(hook_name,
                      file_name = hook_name,
                      suffix = ".R",
