@@ -13,11 +13,11 @@ Options:
 arguments <- docopt::docopt(doc)
 
 
-if (packageVersion("styler") < "1.2.0") {
+if (packageVersion("styler") < "1.3.2") {
   stop(
     "Your styler version is outdated. ", 
     "Please install a newer version of styler with ", 
-    "`install.packages('styler')`."
+    "`install.packages('styler')`. This will get you big speed-ups."
   )
 } else {
   styler::style_file(
