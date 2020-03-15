@@ -25,11 +25,12 @@ Get started.
 \section{When to call this function?}{
 
 \itemize{
-\item You want to add pre-commit support to a git repo. This involves adding
+\item You want to add pre-commit support to a git repo which does not have a
+\code{.pre-commit-config.yaml}. This involves adding
 a pre-commit config file and making sure git will call the hooks before
 the next commit.
-\item You use a repo that has such a config file but for pre-commit to become
-active, you need to make sure git knows that it should call pre-commit.
+\item You cloned a repo that has a \code{.pre-commit-config.yaml} already. You need
+to make sure git calls the hooks before the next commit.
 }
 }
 

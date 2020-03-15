@@ -3,11 +3,12 @@
 #' Get started.
 #' @section When to call this function?:
 #'
-#' * You want to add pre-commit support to a git repo. This involves adding
+#' * You want to add pre-commit support to a git repo which does not have a
+#'   `.pre-commit-config.yaml`. This involves adding
 #'   a pre-commit config file and making sure git will call the hooks before
 #'   the next commit.
-#' * You use a repo that has such a config file but for pre-commit to become
-#'   active, you need to make sure git knows that it should call pre-commit.
+#' * You cloned a repo that has a `.pre-commit-config.yaml` already. You need
+#'   to make sure git calls the hooks before the next commit.
 #'
 #' @section What it does the funciton do?:
 #' * installs pre-commit in your current directory.
