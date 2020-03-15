@@ -8,7 +8,7 @@ vignette: >
 ---
 
 Arguments are specified as described in the [pre-commit.com
-documentation](https://pre-commit.com/#passing-arguments-to-hooks), i.e. the
+documentation](https://pre-commit.com/#passing-arguments-to-hooks), e.g. the
 arguments for the `style-files` hook can be set like this:
 
 ```{r, echo = FALSE, output = "asis", comment = ""}
@@ -63,7 +63,7 @@ The following hooks take arguments:
   documentation](https://github.com/jimhester/lintr#project-configuration).
 
 * `deps-in-desc`: Flag `allow_private_imports` lets the user specify that
-  private imports into the package namespace are tolarable, e.g. 
+  private imports into the package namespace are tolerable, e.g. 
   `somepkg:::x()`. Flag not set by default, i.e. the hook will fail if 
   such a call is found.
   ```
