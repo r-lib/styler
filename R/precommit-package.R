@@ -11,6 +11,7 @@ NULL
 #' Fallback doc
 #' @param path_root The path to the root directory of your project.
 #' @name fallback_doc
+#' @keywords internal
 NULL
 
 
