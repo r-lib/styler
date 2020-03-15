@@ -24,7 +24,7 @@ rev <- purrr::imap(config$repos, function(x, y) {
 cat(glue::glue("
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v{rev}
+    rev: {rev}
     hooks:
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
