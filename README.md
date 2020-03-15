@@ -12,7 +12,8 @@ status](https://ci.appveyor.com/api/projects/status/6xfoh8b4ik3pg6da/branch/mast
 [![CRAN
 status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.org/package=precommit)
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
 <!-- badges: end -->
 
 [Pre-commit hooks](https://pre-commit.com) are tests that run each time

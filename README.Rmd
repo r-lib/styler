@@ -2,6 +2,8 @@
 output: github_document
 ---
 
+
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
@@ -13,14 +15,14 @@ knitr::opts_chunk$set(
 
 # Useful git pre-commit hooks for R related projects
 
-<!-- badges: start --> [![Build
-Status](https://travis-ci.org/lorenzwalthert/precommit.svg?branch=master)](https://travis-ci.org/lorenzwalthert/precommit)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/6xfoh8b4ik3pg6da/branch/master?svg=true)](https://ci.appveyor.com/project/lorenzwalthert/precommit/branch/master)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.org/package=precommit)
-[![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+<!-- badges: start --> 
+
+[![Build Status](https://travis-ci.org/lorenzwalthert/precommit.svg?branch=master)](https://travis-ci.org/lorenzwalthert/precommit)
+[![Build status](https://ci.appveyor.com/api/projects/status/6xfoh8b4ik3pg6da/branch/master?svg=true)](https://ci.appveyor.com/project/lorenzwalthert/precommit/branch/master)
+[![CRAN status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.org/package=precommit)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+
 <!-- badges: end -->
 
 [Pre-commit hooks](https://pre-commit.com) are tests that run each time you
