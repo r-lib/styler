@@ -7,32 +7,31 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Installation 
+## Installation
 
 Apart from `precommit::use_precommit()`, you can install pre-commit manually as
 described in the [official documentation](https://pre-commit.com/#intro) (do not
-close the log of this process, you might need it later!). Then, you must make
+close the log of this process as you might need it later!). Then, you must make
 sure R finds the executable. To check that, start a new R session after the
-installation process of pre-commit succeeded and run this command:
+installation process of pre-commit has completely successfully and run this command:
 
 ```{r, eval = FALSE}
 precommit::path_pre_commit_exec()
 #> "/usr/local/bin/pre-commit"
 ```
-If it shows a path (like above), you are all set. Skip the rest of this
-paragraph and go to *Configuration*. If not, you must manually 
-link the executable.Set the R option
-`precommit.executable` to the path where the pre-commit executable lives.
-Note that the PATH variable that was used in the above command to find the 
-executable might be different in your R session from what you
-have in your shell, so you can try your luck there:
+If it shows a path (like above), you are all set. Skip the rest of this 
+paragraph and go to *Configuration*. If not, you must manually link the 
+executable. Set the R option `precommit.executable` to the path where the 
+pre-commit executable lives. Note that the PATH variable that was used 
+in the above command to find the executable might be different in your R 
+session from what you have in your shell, so you can try your luck there:
 
 ```bash
 $where pre-commit
 # should give /bin/pre-commit or similar
 ```
 
-If this returns a path, set the R option to it, preferrably in your `.Rprofile`
+If this returns a path, set the R option to it, preferably in your `.Rprofile`
 to make sure it is set in a new R session too.
 
 ```{r, eval = FALSE}
@@ -42,18 +41,18 @@ options(precommit.executable = "/path/to/pre-commit")
 Now, proceed in the below section on *Configuration*. If `$where pre-commit` did
 not give you a path either, you need to go back to the installation method you
 used and figure out where the executable got placed. This depends on the
-installation method and oerating system, so it's hard for us to give general
+installation method and operating system, so it's hard for us to give general
 advice. You may use a Google search like *where does pip install executable on
 Ubuntu?* to find the path to the executable.
 
-We are working towards making `precommit::path_pre_commit_exec()` finding
+We are working towards making `precommit::path_pre_commit_exec()` find
 executables automatically with any operating system and installation method, so
 please open up an [issue](https://github.com/lorenzwalthert/precommit/issues) on
 GitHub and tell us your installation method, platform and the location of the
 executable so we can adapt the search heuristic of
 `precommit::path_pre_commit_exec()`.
 
-If you can't get it righ, you can still install via conda, where linking the 
+If you can't get it right, you can still install via conda, where linking the 
 executable is not required.
 
 

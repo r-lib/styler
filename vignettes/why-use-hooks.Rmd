@@ -30,8 +30,8 @@ and is relatively inexpensive.
 Implementing hooks in a framework such as
 [pre-commit.com](https://pre-commit.com) has multiple benefits compared to using simple bash scripts in `.git/hooks`:
 
-* easily use hooks other people have created, in bash, R, python and other languages.
-  There is a wealth of useful hooks available, most listed
+* Easily use hooks other people have created, in bash, R, python and other languages.
+  There are a wealth of useful hooks available, most listed
   [here](https://pre-commit.com/hooks.html). For example,
   `check-added-large-files` prevents you from committing big files, other hooks
   validate json or yaml files and so on.
@@ -43,4 +43,4 @@ Implementing hooks in a framework such as
   `.pre-commit-config.yaml` file. No need to c/p hooks from one project to
   another.
 
-Have an idea for a hook? Please file an issue.
+Have an idea for a hook? Please [file an issue](https://github.com/lorenzwalthert/precommit/issues).
