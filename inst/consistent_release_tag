@@ -8,16 +8,14 @@ path_config <- c(
 )
 
 
-assert_config_has_rev <- function(path_config) {
+
+assert_config_has_rev <- function(path_config, latest_tag) {
   file <- yaml::read_yaml(path_config) 
   repo <- purrr::map(file$repos, "repo") 
   
   lorenzwalthert_precommit_idx <- which(repo == "https://github.com/lorenzwalthert/precommit")
   stopifnot(length(lorenzwalthert_precommit_idx) == 1)
   rev <- file$repos[[lorenzwalthert_precommit_idx]]$rev
-  
-  tags <- names(git2r::tags("."))
-  latest_tag <- paste0("v", max(as.numeric_version(gsub("^v", "", tags))))
   
   if (latest_tag != rev) {
     rlang::abort(glue::glue(
@@ -27,4 +25,15 @@ assert_config_has_rev <- function(path_config) {
   }
 }
 
-purrr::walk(path_config, assert_config_has_rev)
+get_latest_tag <- function() {
+  tags <- names(git2r::tags("."))
+  paste0("v", max(as.numeric_version(gsub("^v", "", tags))))
+}
+
+latest_tag <- get_latest_tag()
+
+purrr::walk(path_config, assert_config_has_rev, latest_tag = latest_tag)
+
+if (latest_tag != desc::desc_get_field('Version')) {
+  rlang::abort("DESCRIPTION version is not equivalent to latest git tag.")
+}
