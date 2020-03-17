@@ -61,7 +61,7 @@ executable is not required.
 If you've installed pre-commit, you can add it to a specific project by adding a
 `.pre-commit-config.yaml` file that has a structure like this:
 
-```{r,results='asis'}
+```{r,results='asis',echo=FALSE}
 tags <- names(git2r::tags("."))
 latest_tag <- paste0("v", max(as.numeric_version(gsub("^v", "", tags))))
   
