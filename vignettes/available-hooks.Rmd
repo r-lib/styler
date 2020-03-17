@@ -11,9 +11,7 @@ This repo contains a collection of git pre-commit hooks to use with
 [pre-commit.com](https://pre-commit.com). Currently, this repo hosts:
 
 * `style-files`: A hook to style files with [styler](https://styler.r-lib.org).
-  Only commit code corresponding to the tidyverse style guide. NOTE: devel
-  version of styler strongly suggested. Install via
-  `remotes::install_github('r-lib/styler')`. To customize, see
+  Only commit code corresponding to the tidyverse style guide. To customize, see
   `vignette("available-hooks")`.
 
 * `readme-rmd-rendered`: Make sure `README.Rmd` hasn't been edited more recently
