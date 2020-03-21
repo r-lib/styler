@@ -168,15 +168,13 @@ verbose: true
 When configured this way, lintr prints lint errors as they appear. Other
 arguments are not supported. Instead, `lintr` config should be specified in a
 `.lintr` config file in Debian Control Field Format as specified in the
-[`.lintr`
-documentation](https://github.com/jimhester/lintr#project-configuration).
+[`.lintr` documentation](https://github.com/jimhester/lintr#project-configuration).
 
 This hook does not modify any file.
 
 ## `codemeta-description-updated`
 
 Make sure `DESCRIPTION` hasn't been edited more recently than `codemeta.json`,
-
 i.e. remind you to run `codemetar::write_codemeta()` in order to keep
 `codemeta.json` in sync with `DESCRIPTION`.
 
