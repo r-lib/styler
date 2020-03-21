@@ -11,7 +11,7 @@ Below is a comprehensive list with all hooks from {precommit} as well well as
 their arguments or flags, if they take any. Other repos also host hooks, many
 are listed [here](https://pre-commit.com/hooks.html).
 
-# File modification
+**File modification**
 
 Some hooks will fail without changing the files you want to commit, like the
 `lintr` hook - and you need to make manual changes for the hook to pass on the
@@ -20,7 +20,7 @@ changes the file, the hook will fail, but this means you won't need to modify
 the file manually, just stage the changes and try to commit again. Below, we
 indicate for every hook if it modifies files or not.
 
-# Arguments 
+**Arguments**
 
 Arguments are specified as described in the [pre-commit.com
 documentation](https://pre-commit.com/#passing-arguments-to-hooks), e.g. we can
