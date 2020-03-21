@@ -1,3 +1,7 @@
+# precommit post v0.0.0.9028
+
+- Unify vignettes on available hooks and arguments (#109).
+
 # precommit 0.0.0.9017
 
 - **BREAKING:** If you used precommit < 0.0.0.9017 (and if you choose a 
