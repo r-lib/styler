@@ -32,6 +32,7 @@ Suggests:
     styler (>= 1.2),
     testthat,
     tic,
+    versions,
     yaml
 VignetteBuilder: 
     knitr
