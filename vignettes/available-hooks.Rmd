@@ -29,7 +29,6 @@ for the hook `style-files` like this:
 
 ```{r, echo = FALSE, output = "asis", comment = "", message = FALSE}
 library(magrittr)
-devtools::load_all(here::here())
 config <- yaml::read_yaml(system.file("pre-commit-config.yaml", package = "precommit", mustWork = TRUE))
 rev <- purrr::imap(config$repos, function(x, y) {
   if (x$repo == "https://github.com/lorenzwalthert/precommit") {
@@ -93,6 +92,13 @@ following regex are excluded by default (as of `r paste0("v",
 desc::desc_get_version())`):
 
 ```{r, echo = FALSE, comment = ""}
+extract_spell_check_regex <- function() {
+  yaml::read_yaml(here::here(".pre-commit-hooks.yaml")) %>%
+    purrr::keep(~ .x$id == "spell-check") %>%
+    magrittr::extract2(1) %>%
+    magrittr::extract2("exclude")
+}
+
 cat(extract_spell_check_regex())
 ```
 
