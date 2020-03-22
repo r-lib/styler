@@ -107,7 +107,7 @@ set_path_cp_config_from <- function(path_cp_config_from) {
 #' defaults to the R option `precommit.path_cp_config_from`, so you may want to
 #' set this option in your `.Rprofile` for convenience.
 #' Note that this is **not** equivalent
-#' to the `--config` option in the CLI command `precommit install` and similar,
+#' to the `--config` option in the CLI command `pre-commit install` and similar,
 #' which do *not* copy a config file into a project root (and allow to put it
 #' under version control), but rather link it in some more or less transparent
 #' way.

@@ -60,7 +60,7 @@ an existing config file into your repo. For convenience, this argument
 defaults to the R option \code{precommit.path_cp_config_from}, so you may want to
 set this option in your \code{.Rprofile} for convenience.
 Note that this is \strong{not} equivalent
-to the \code{--config} option in the CLI command \verb{precommit install} and similar,
+to the \code{--config} option in the CLI command \verb{pre-commit install} and similar,
 which do \emph{not} copy a config file into a project root (and allow to put it
 under version control), but rather link it in some more or less transparent
 way.
