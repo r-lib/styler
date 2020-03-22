@@ -59,7 +59,11 @@ executable is not required.
 ## Configuration
 
 If you've installed pre-commit, you can add it to a specific project by adding a
-`.pre-commit-config.yaml` file that has a structure like this:
+`.pre-commit-config.yaml` file, either from a template with 
+`use_precommit_config()` or manually. Note the former allows you to specify a 
+location from which to copy a template if you don't want to use the default 
+template. Set the R option `precommit.path_cp_config_from` to the path where 
+your custom template is located. The file should have a structure like this:
 
 ```{r,results='asis',echo=FALSE}
 tags <- names(git2r::tags("."))
