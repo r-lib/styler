@@ -1,7 +1,6 @@
 tempdir <- fs::path(tempdir(), "test-precommit")
 fs::dir_create(tempdir)
 
-
 test_that("can install pre-commit", {
   expect_error(install_precommit(), NA)
 
@@ -13,6 +12,37 @@ test_that("can install pre-commit", {
     "to get the latest"
   )
 })
+
+test_that("fails early if repo is not a git repo ", {
+  expect_error(
+    {
+      tempdir <- fs::path(tempdir(), "t9")
+      fs::dir_create(tempdir)
+      use_precommit(path_root = tempdir)
+    },
+    "is not a git repo"
+  )
+})
+
+test_that("can use custom config file ", {
+  tempdir <- fs::path(tempdir(), "t10")
+  fs::dir_create(tempdir)
+  tempdir2 <- fs::path(tempdir(), "t11")
+  fs::dir_create(tempdir2)
+  path_custom <- fs::path(tempdir2, "some-precommit.yaml")
+  new_text <- "# 4js93"
+  readLines(system.file("pre-commit-config.yaml", package = "precommit")) %>%
+    c(new_text) %>%
+    writeLines(path_custom)
+  git2r::init(tempdir)
+  use_precommit(path_cp_config_from = path_custom, path_root = tempdir, force = TRUE)
+  config <- readLines(fs::path(tempdir, ".pre-commit-config.yaml"))
+  expect_equal(
+    config[length(config)],
+    new_text
+  )
+})
+
 
 
 test_that("Can uninstall pre-commit (repo scope)", {
@@ -49,47 +79,8 @@ test_that("Can uninstall (globally)", {
     uninstall_precommit(scope = "global", ask = "none"),
     "No installation found."
   )
-  expect_error(install_precommit(), NA)
 })
 
-test_that("can use precommit ", {
-  expect_error(
-    {
-      tempdir <- fs::path(tempdir(), "t7")
-      fs::dir_create(tempdir)
-      git2r::init(tempdir)
-      use_precommit(path_root = tempdir)
-    },
-    NA
-  )
-})
-
-test_that("fails early if repo is not a git repo ", {
-  expect_error(
-    {
-      tempdir <- fs::path(tempdir(), "t9")
-      fs::dir_create(tempdir)
-      use_precommit(path_root = tempdir)
-    },
-    "is not a git repo"
-  )
-})
-
-test_that("can use custom config file ", {
-  tempdir <- fs::path(tempdir(), "t10")
-  fs::dir_create(tempdir)
-  tempdir2 <- fs::path(tempdir(), "t11")
-  fs::dir_create(tempdir2)
-  path_custom <- fs::path(tempdir2, "some-precommit.yaml")
-  new_text <- "# 4js93"
-  readLines(system.file("pre-commit-config.yaml", package = "precommit")) %>%
-    c(new_text) %>%
-    writeLines(path_custom)
-  git2r::init(tempdir)
-  use_precommit(path_cp_config_from = path_custom, path_root = tempdir, force = TRUE)
-  config <- readLines(fs::path(tempdir, ".pre-commit-config.yaml"))
-  expect_equal(
-    config[length(config)],
-    new_text
-  )
+test_that("use_precommit fails when no global installation is found", {
+  expect_error(use_precommit(path_root = tempdir), "installed on your system")
 })
