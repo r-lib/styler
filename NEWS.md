@@ -1,6 +1,11 @@
 # precommit post v0.0.0.9028
 
+- `use_precommit()` gains new argument `path_cp_config_from` to copy an existing
+  config file into the repo at initialization. The argument defaults to 
+  `options('precommit.path_cp_config_from')` to make it easy for users to use 
+  their preferred hooks in every repo they initialize (#111).
 - Unify vignettes on available hooks and arguments (#109).
+- Fail fast when repo is not a git repo (#111).
 
 # precommit 0.0.0.9017
 
