@@ -32,7 +32,7 @@ test_that("Can uninstall pre-commit (repo scope)", {
   )
 
   # when there is no pre-commit.yaml anymore
-  use_precommit(tempdir, open = FALSE, force = TRUE)
+  use_precommit(open = FALSE, force = TRUE, path_root = tempdir)
   fs::file_delete(fs::path(tempdir, ".pre-commit-config.yaml"))
   expect_output(
     uninstall_precommit(scope = "repo", path_root = tempdir),
@@ -86,7 +86,7 @@ test_that("can use custom config file ", {
     c(new_text) %>%
     writeLines(path_custom)
   git2r::init(tempdir)
-  use_precommit(path_cp_config_from = path_custom, path_root = tempdir)
+  use_precommit(path_cp_config_from = path_custom, path_root = tempdir, force = TRUE)
   config <- readLines(fs::path(tempdir, ".pre-commit-config.yaml"))
   expect_equal(
     config[length(config)],

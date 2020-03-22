@@ -85,6 +85,8 @@ assert_is_installed <- function() {
 
 set_path_cp_config_from <- function(path_cp_config_from) {
   if (is.null(path_cp_config_from)) {
+    # workaround for R CMD CHECK warning about hidden top-level directories.
+    name_origin <- "pre-commit-config.yaml"
     path_cp_config_from <- system.file(name_origin, package = "precommit")
   }
   if (!fs::file_exists(path_cp_config_from)) {
@@ -94,16 +96,22 @@ set_path_cp_config_from <- function(path_cp_config_from) {
       "`.pre-commit.yaml` or `NULL` to use the template config."
     ))
   }
+  file_type <- as.character(fs::file_info(path_cp_config_from)$type)
+  if (!(file_type %in% c("file", "symlink"))) {
+    rlang::abort(paste0(
+      "File ", path_cp_config_from, " must be a file or a symlink, not a ",
+      file_type, ". Please change the argument `path_cp_config_from` ",
+      "accordingly."
+    ))
+  }
   path_cp_config_from
 }
 
 use_precommit_config <- function(path_cp_config_from,
                                  force,
                                  path_root = here::here()) {
-  name_origin <- "pre-commit-config.yaml"
   escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
   name_target <- ".pre-commit-config.yaml"
-  # workaround for RCMD CHECK warning about hidden top-level directories.
   if (!fs::file_exists(fs::path(path_root, name_target)) | force) {
     fs::file_copy(
       path_cp_config_from,
