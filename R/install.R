@@ -158,9 +158,11 @@ uninstall_precommit_repo <- function(ask) {
   }
 }
 
-install_repo <- function() {
-  system2(path_pre_commit_exec(), "install")
-  usethis::ui_done("Sucessfully installed pre-commit for this repo.")
+install_repo <- function(path_root) {
+  withr::with_dir(path_root, {
+    system2(path_pre_commit_exec(), "install")
+    usethis::ui_done("Sucessfully installed pre-commit for {path_root}.")
+  })
 }
 
 is_installed <- function() {

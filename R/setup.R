@@ -1,6 +1,16 @@
 #' Set up pre-commit
 #'
 #' Get started.
+#' @param path_cp_config_from Path to a `.pre-commit-config.yaml`. This config file
+#'   will be hard-copied into `path_root`. If `NULL`, we use
+#'   a default config from the path returned by
+#'   `system.file("pre-commit-config.yaml", package = "precommit")`. See
+#'   section 'Copying an existing config file'.
+#' @param force Whether to replace an existing config file.
+#' @param open Whether or not to open the .pre-commit-config.yaml after
+#'   it's been placed in your repo. The default is `TRUE` when working in
+#'   RStudio. Otherwise, we recommend manually inspecting the file.
+#' @inheritParams fallback_doc
 #' @section When to call this function?:
 #'
 #' * You want to add pre-commit support to a git repo which does not have a
@@ -16,49 +26,88 @@
 #' * autoupdates the template to make sure you get the latest versions of the
 #'   hooks.
 #' * Open the config file if RStudio is running.
-#'
-#' @param force Whether to replace an existing config file.
-#' @param open Whether or not to open the .pre-commit-config.yaml after
-#'   it's been placed in your repo. The default is `TRUE` when working in
-#'   RStudio. Otherwise, we recommend manually inspecting the file.
-#' @inheritParams fallback_doc
+#' @section Copying an existing config file:
+#' You can use an existing `.pre-commit-config.yaml` file when intiializing
+#' pre-commit with [use_precommit()] using the argument `path_cp_config_from` to copy
+#' an existing config file into your repo. For convenience, this argument
+#' defaults to the R option `precommit.path_cp_config_from`, so you may want to
+#' set this option in your `.Rprofile` for convenience.
+#' Note that this is **not** equivalent
+#' to the `--config` option in the CLI command `precommit install` and similar,
+#' which do *not* copy a config file into a project root (and allow to put it
+#' under version control), but rather link it in some more or less transparent
+#' way.
 #' @family helpers
 #' @export
-use_precommit <- function(force = FALSE,
+use_precommit <- function(path_cp_config_from = getOption("precommit.path_cp_config_from"),
+                          force = FALSE,
                           open = rstudioapi::isAvailable(),
                           path_root = here::here()) {
-  withr::with_dir(path_root, {
-    if (!is_installed()) {
-      rlang::abort(paste0(
-        "pre-commit is not installed on your system (or we can't find it). ",
-        "If you have it installed, please set the R option ",
-        "`precommit.executable` to this ",
-        "path so it can be used to perform various pre-commit commands from R.",
-        "If not, install it with ",
-        "`precommit::install_precommit()` or an installation ",
-        "method in the official installation guide ",
-        "(https://pre-commit.com/#install). The latter requires you to set",
-        "the R option `precommit.executable` as well after the installation."
-      ))
-    }
-    install_repo()
-    use_precommit_config(force, path_root)
-    autoupdate(path_root)
-    if (open) {
-      open_config(path_root)
-    }
-  })
+  assert_is_installed()
+  assert_is_git_repo(path_root)
+  path_cp_config_from <- set_path_cp_config_from(path_cp_config_from)
+  install_repo(path_root)
+  use_precommit_config(path_cp_config_from, force, path_root)
+  autoupdate(path_root)
+  if (open) {
+    open_config(path_root)
+  }
 }
 
-use_precommit_config <- function(force, path_root = here::here()) {
+assert_is_git_repo <- function(path_root) {
+  if (is.null(git2r::discover_repository(path_root))) {
+    rlang::abort(paste0(
+      "The directory ", path_root, " is not a git repo. Please navigate to ",
+      path_root, " and init git in ",
+      "this directory with `$ git init` from the command line or ",
+      "`> usethis::use_git()` from the R prompt."
+    ))
+  }
+}
+assert_is_installed <- function() {
+  if (!is_installed()) {
+    rlang::abort(paste0(
+      "pre-commit is not installed on your system (or we can't find it). ",
+      "If you have it installed, please set the R option ",
+      "`precommit.executable` to this ",
+      "path so it can be used to perform various pre-commit commands from R.",
+      "If not, install it with ",
+      "`precommit::install_precommit()` or an installation ",
+      "method in the official installation guide ",
+      "(https://pre-commit.com/#install). The latter requires you to set",
+      "the R option `precommit.executable` as well after the installation."
+    ))
+  }
+}
+
+
+
+
+set_path_cp_config_from <- function(path_cp_config_from) {
+  if (is.null(path_cp_config_from)) {
+    path_cp_config_from <- system.file(name_origin, package = "precommit")
+  }
+  if (!fs::file_exists(path_cp_config_from)) {
+    rlang::abort(paste0(
+      "File ", path_cp_config_from, " does not exist. Please use the ",
+      "argument `path_cp_config_from` to provide a path to an existing ",
+      "`.pre-commit.yaml` or `NULL` to use the template config."
+    ))
+  }
+  path_cp_config_from
+}
+
+use_precommit_config <- function(path_cp_config_from,
+                                 force,
+                                 path_root = here::here()) {
   name_origin <- "pre-commit-config.yaml"
   escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
   name_target <- ".pre-commit-config.yaml"
   # workaround for RCMD CHECK warning about hidden top-level directories.
-  if (!fs::file_exists(fs::path(name_target)) | force) {
+  if (!fs::file_exists(fs::path(path_root, name_target)) | force) {
     fs::file_copy(
-      system.file(name_origin, package = "precommit"),
-      fs::path(".", name_target),
+      path_cp_config_from,
+      fs::path(path_root, name_target),
       overwrite = TRUE
     )
     usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
