@@ -40,7 +40,11 @@ The goal of this package is to twofold:
 
 ## Installation
 
-Please make sure you have conda installed. The rest can be handled from R:
+**With conda**
+
+Please make sure you have [conda](https://docs.conda.io/en/latest/) installed, 
+either manualy or with `reticulate::install_miniconda()`. The rest can be 
+handled from R:
 
 ```{r}
 # once on your system
@@ -53,9 +57,12 @@ precommit::install_precommit()
 precommit::use_precommit()
 ```
 
-This installs pre-commit and performs some other set-up tasks. If you don't want
-to use conda, see `vignette("manual-installation")` for alternative installation
-methods.
+This installs pre-commit and performs some other set-up tasks.
+
+**Without conda**
+
+If you don't want to use conda, see `vignette("manual-installation")` for 
+alternative installation methods.
 
 ## Usage 
 
