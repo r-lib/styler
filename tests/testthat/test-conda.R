@@ -91,7 +91,7 @@ test_that("can install pre-commit with remote config", {
   expect_output(
     {
       git2r::init(path = tempdir)
-      use_precommit(example_config(),
+      use_precommit(example_remote_config(),
         open = FALSE, force = TRUE, path_root = tempdir
       )
     },
