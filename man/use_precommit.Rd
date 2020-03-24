@@ -12,7 +12,7 @@ use_precommit(
 )
 }
 \arguments{
-\item{path_cp_config_from}{Path to a \code{.pre-commit-config.yaml}. This config file
+\item{path_cp_config_from}{Path or URL to a \code{.pre-commit-config.yaml}. This config file
 will be hard-copied into \code{path_root}. If \code{NULL}, we use
 a default config from the path returned by
 \code{system.file("pre-commit-config.yaml", package = "precommit")}. See

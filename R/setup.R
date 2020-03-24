@@ -46,6 +46,7 @@ assert_is_git_repo <- function(path_root) {
     ))
   }
 }
+
 assert_is_installed <- function() {
   if (!is_installed()) {
     rlang::abort(paste0(
@@ -60,91 +61,6 @@ assert_is_installed <- function() {
       "the R option `precommit.executable` as well after the installation."
     ))
   }
-}
-
-
-
-
-set_path_cp_config_from <- function(path_cp_config_from) {
-  if (is.null(path_cp_config_from)) {
-    # workaround for R CMD CHECK warning about hidden top-level directories.
-    name_origin <- "pre-commit-config.yaml"
-    path_cp_config_from <- system.file(name_origin, package = "precommit")
-  }
-  if (!fs::file_exists(path_cp_config_from)) {
-    rlang::abort(paste0(
-      "File ", path_cp_config_from, " does not exist. Please use the ",
-      "argument `path_cp_config_from` to provide a path to an existing ",
-      "`.pre-commit.yaml` or `NULL` to use the template config."
-    ))
-  }
-  file_type <- as.character(fs::file_info(path_cp_config_from)$type)
-  if (!(file_type %in% c("file", "symlink"))) {
-    rlang::abort(paste0(
-      "File ", path_cp_config_from, " must be a file or a symlink, not a ",
-      file_type, ". Please change the argument `path_cp_config_from` ",
-      "accordingly."
-    ))
-  }
-  path_cp_config_from
-}
-
-#' Initiate a pre-commit config file
-#'
-#' @param path_cp_config_from Path to a `.pre-commit-config.yaml`. This config file
-#'   will be hard-copied into `path_root`. If `NULL`, we use
-#'   a default config from the path returned by
-#'   `system.file("pre-commit-config.yaml", package = "precommit")`. See
-#'   section 'Copying an existing config file'.
-#' @param force Whether to replace an existing config file.
-#' @param open Whether or not to open the .pre-commit-config.yaml after
-#'   it's been placed in your repo. The default is `TRUE` when working in
-#'   RStudio. Otherwise, we recommend manually inspecting the file.
-#' @section Copying an existing config file:
-#' You can use an existing `.pre-commit-config.yaml` file when intiializing
-#' pre-commit with [use_precommit()] using the argument `path_cp_config_from` to copy
-#' an existing config file into your repo. For convenience, this argument
-#' defaults to the R option `precommit.path_cp_config_from`, so you may want to
-#' set this option in your `.Rprofile` for convenience.
-#' Note that this is **not** equivalent
-#' to the `--config` option in the CLI command `pre-commit install` and similar,
-#' which do *not* copy a config file into a project root (and allow to put it
-#' under version control), but rather link it in some more or less transparent
-#' way.
-#' @inheritParams fallback_doc
-#' @export
-use_precommit_config <- function(path_cp_config_from = getOption("precommit.path_cp_config_from"),
-                                 force,
-                                 open = rstudioapi::isAvailable(),
-                                 path_root = here::here()) {
-  path_cp_config_from <- set_path_cp_config_from(path_cp_config_from)
-  escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
-  name_target <- ".pre-commit-config.yaml"
-  if (!fs::file_exists(fs::path(path_root, name_target)) | force) {
-    fs::file_copy(
-      path_cp_config_from,
-      fs::path(path_root, name_target),
-      overwrite = TRUE
-    )
-    usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
-  } else {
-    usethis::ui_warn(paste0(
-      "There is already a pre-commit configuration file in ",
-      path_root,
-      ". Use `force = TRUE` to replace .pre-commit-config.yaml"
-    ))
-  }
-
-  if (is_package(".")) {
-    usethis::write_union(".Rbuildignore", escaped_name_target)
-  }
-  usethis::ui_todo(c(
-    "Edit .precommit-hooks.yaml to (de)activate the hooks you want to use. ",
-    "All available hooks: ",
-    "https://pre-commit.com/hooks.html",
-    "R specific hooks:",
-    "https://github.com/lorenzwalthert/precommit."
-  ))
 }
 
 #' Install pre-commit on your system with conda

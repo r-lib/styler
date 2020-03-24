@@ -84,3 +84,17 @@ test_that("Can uninstall (globally)", {
 test_that("use_precommit fails when no global installation is found", {
   expect_error(use_precommit(path_root = tempdir), "installed on your system")
 })
+
+test_that("can install pre-commit with remote config", {
+  expect_error(install_precommit(), NA)
+
+  expect_output(
+    {
+      git2r::init(path = tempdir)
+      use_precommit(example_config(),
+        open = FALSE, force = TRUE, path_root = tempdir
+      )
+    },
+    "to get the latest"
+  )
+})

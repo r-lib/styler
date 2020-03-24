@@ -8,3 +8,13 @@ is_package <- function(base_path = here::here()) {
 is_windows <- function() {
   identical(.Platform$OS.type, "windows")
 }
+
+is_url <- function(text) {
+  if (length(text) < 1) {
+    return(FALSE)
+  }
+  conn <- file(text)
+  on.exit(close(conn))
+  conn %>%
+    inherits("url")
+}

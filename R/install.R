@@ -130,7 +130,7 @@ uninstall_precommit_repo <- function(ask) {
       usethis::ui_done("Uninstalled pre-commit from repo scope.")
     }
     if (is_package(".")) {
-      lines <- readLines(".Rbuildignore")
+      lines <- readLines(".Rbuildignore", encoding = "UTF-8")
       pre_commit_hooks_idx <- which(lines == "^\\.pre-commit-hooks\\.yaml$")
       remaining <- rlang::seq2(1, length(lines)) %>% setdiff(pre_commit_hooks_idx)
       if (length(pre_commit_hooks_idx) > 0) {
@@ -159,9 +159,14 @@ uninstall_precommit_repo <- function(ask) {
 }
 
 install_repo <- function(path_root) {
+  tmp <- tempfile()
   withr::with_dir(path_root, {
-    system2(path_pre_commit_exec(), "install")
-    usethis::ui_done("Sucessfully installed pre-commit for {path_root}.")
+    out <- suppressWarnings(system2(path_pre_commit_exec(), "install", stdout = NULL, stderr = tmp))
+    if (out == 0) {
+      usethis::ui_done("Sucessfully installed pre-commit for {path_root}.")
+    } else {
+      rlang::abort(paste0("Error during initialization: ", readLines(tmp)))
+    }
   })
 }
 

@@ -18,7 +18,8 @@ Imports:
     rprojroot,
     rstudioapi,
     usethis (>= 1.5.0),
-    withr
+    withr,
+    yaml
 Suggests: 
     desc,
     git2r,
@@ -30,10 +31,9 @@ Suggests:
     roxygen2,
     spelling,
     styler (>= 1.2),
-    testthat,
+    testthat (>= 2.1.0),
     tic,
-    versions,
-    yaml
+    versions
 VignetteBuilder: 
     knitr
 Remotes: 
