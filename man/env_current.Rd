@@ -4,7 +4,9 @@
 \name{env_current}
 \alias{env_current}
 \title{The elements that are added to this environment are:}
-\format{An object of class \code{environment} of length 0.}
+\format{
+An object of class \code{environment} of length 0.
+}
 \usage{
 env_current
 }

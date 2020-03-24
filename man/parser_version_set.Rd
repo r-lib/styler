@@ -37,9 +37,7 @@ We version the parser as follows:
 \item version 2: After #419.
 }
 }
-\keyword{internal}
 \section{version 3: After #582.}{
-
 The following utilities are available:
 \itemize{
 \item \code{parser_version_set()} sets the parser version in the environment
@@ -53,3 +51,5 @@ contain \code{EQ_ASSIGN} is parsed the same way with version 1 and 2. If the
 behavior is identical, the version is set to 1.
 }
 }
+
+\keyword{internal}

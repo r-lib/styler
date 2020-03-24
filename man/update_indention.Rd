@@ -15,7 +15,8 @@ indent_braces(pd, indent_by)
 indent_op(
   pd,
   indent_by,
-  token = c(math_token, logical_token, special_token, "LEFT_ASSIGN", "EQ_ASSIGN", "'$'")
+  token = c(math_token, logical_token, special_token, "LEFT_ASSIGN", "EQ_ASSIGN",
+    "'$'")
 )
 
 indent_eq_sub(pd, indent_by, token = c("EQ_SUB", "EQ_FORMALS"))
