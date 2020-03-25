@@ -1,6 +1,8 @@
 # precommit post v0.0.0.9028
 
+- Create `r-reticulate` env if not existant before installing into it (#114).
 - Unify vignettes on available hooks and arguments (#109).
+
 
 # precommit 0.0.0.9017
 
