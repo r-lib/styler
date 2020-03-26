@@ -8,7 +8,6 @@
 - Unify vignettes on available hooks and arguments (#109).
 - Fail fast when repo is not a git repo (#111).
 
-
 # precommit 0.0.0.9017
 
 - **BREAKING:** If you used precommit < 0.0.0.9017 (and if you choose a 
