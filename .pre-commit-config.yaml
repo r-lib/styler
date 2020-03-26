@@ -12,6 +12,7 @@ repos:
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: readme-rmd-rendered
+    -   id: spell-check
     #  R package development
     -   id: roxygenize
     -   id: use-tidy-description
