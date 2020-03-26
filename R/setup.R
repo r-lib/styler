@@ -29,7 +29,10 @@ use_precommit <- function(path_cp_config_from = getOption("precommit.path_cp_con
   assert_is_git_repo(path_root)
   path_cp_config_from <- set_path_cp_config_from(path_cp_config_from)
   install_repo(path_root)
-  use_precommit_config(path_cp_config_from, force, path_root, open = FALSE)
+  use_precommit_config(
+    path_cp_config_from, force, path_root,
+    open = FALSE, verbose = FALSE
+  )
   autoupdate(path_root)
   if (open) {
     open_config(path_root)

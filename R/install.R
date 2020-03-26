@@ -163,7 +163,7 @@ install_repo <- function(path_root) {
   withr::with_dir(path_root, {
     out <- suppressWarnings(system2(path_pre_commit_exec(), "install", stdout = NULL, stderr = tmp))
     if (out == 0) {
-      usethis::ui_done("Sucessfully installed pre-commit for {path_root}.")
+      usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(path_root)}.")
     } else {
       rlang::abort(paste0("Error during initialization: ", readLines(tmp)))
     }

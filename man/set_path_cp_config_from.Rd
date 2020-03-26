@@ -4,7 +4,7 @@
 \alias{set_path_cp_config_from}
 \title{Set the location to a config file}
 \usage{
-set_path_cp_config_from(path_cp_config_from)
+set_path_cp_config_from(path_cp_config_from, verbose = TRUE)
 }
 \description{
 If a remote location is specified, the file is downloaded to a temporary
@@ -12,3 +12,4 @@ location and the path to this location is returned. If \code{NULL}, we'll resort
 to a default config. We'll perform some checks on the existance of the file
 too.
 }
+\keyword{internal}

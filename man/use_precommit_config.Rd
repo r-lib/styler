@@ -8,7 +8,8 @@ use_precommit_config(
   path_cp_config_from = getOption("precommit.path_cp_config_from"),
   force,
   open = rstudioapi::isAvailable(),
-  path_root = here::here()
+  path_root = here::here(),
+  verbose = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ it's been placed in your repo. The default is \code{TRUE} when working in
 RStudio. Otherwise, we recommend manually inspecting the file.}
 
 \item{path_root}{The path to the root directory of your project.}
+
+\item{verbose}{Whether or not to communicate what's happening.}
 }
 \description{
 Initiate a pre-commit config file

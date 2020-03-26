@@ -9,6 +9,7 @@
 #' @param open Whether or not to open the .pre-commit-config.yaml after
 #'   it's been placed in your repo. The default is `TRUE` when working in
 #'   RStudio. Otherwise, we recommend manually inspecting the file.
+#' @param verbose Whether or not to communicate what's happening.
 #' @section Copying an existing config file:
 #' You can use an existing `.pre-commit-config.yaml` file when intiializing
 #' pre-commit with [use_precommit()] using the argument `path_cp_config_from` to copy
@@ -25,8 +26,12 @@
 use_precommit_config <- function(path_cp_config_from = getOption("precommit.path_cp_config_from"),
                                  force,
                                  open = rstudioapi::isAvailable(),
-                                 path_root = here::here()) {
-  path_cp_config_from <- set_path_cp_config_from(path_cp_config_from)
+                                 path_root = here::here(),
+                                 verbose = FALSE) {
+  path_cp_config_from <- set_path_cp_config_from(
+    path_cp_config_from,
+    verbose = verbose
+  )
   escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
   name_target <- ".pre-commit-config.yaml"
   if (!fs::file_exists(fs::path(path_root, name_target)) | force) {
@@ -62,9 +67,12 @@ use_precommit_config <- function(path_cp_config_from = getOption("precommit.path
 #' location and the path to this location is returned. If `NULL`, we'll resort
 #' to a default config. We'll perform some checks on the existance of the file
 #' too.
-set_path_cp_config_from <- function(path_cp_config_from) {
+#' @keywords internal
+set_path_cp_config_from <- function(path_cp_config_from, verbose = TRUE) {
   if (is_url(path_cp_config_from)) {
-    usethis::ui_info("Downloading remote config.")
+    if (verbose) {
+      usethis::ui_info("Downloading remote config from {path_cp_config_from}.")
+    }
     tmp <- tempfile()
 
     target <- fs::path_ext_set(tmp, fs::path_ext(path_cp_config_from))
@@ -99,6 +107,9 @@ set_path_cp_config_from <- function(path_cp_config_from) {
       file_type, ". Please change the argument `path_cp_config_from` ",
       "accordingly."
     ))
+  }
+  if (verbose) {
+    usethis::ui_info("Using local conifig from {path_cp_config_from}.")
   }
   path_cp_config_from
 }
