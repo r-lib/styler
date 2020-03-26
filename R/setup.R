@@ -66,6 +66,9 @@ assert_is_installed <- function() {
 #' Install pre-commit on your system with conda
 #' @keywords internal
 install_precommit_impl <- function() {
+  if (!"r-reticulate" %in% reticulate::conda_list()$name) {
+    reticulate::conda_create("r-reticulate")
+  }
   reticulate::conda_install(packages = "pre-commit")
 }
 
