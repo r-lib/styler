@@ -1,6 +1,9 @@
 template:
   params:
     bootswatch: flatly # https://bootswatch.com/flatly/
+    docsearch:
+      api_key: 13580d327d8a7159f83a7cff178d2141
+      index_name: r-lib_styler
 
 authors:
   Kirill Müller:
