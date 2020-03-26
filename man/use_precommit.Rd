@@ -56,7 +56,7 @@ hooks.
 
 You can use an existing \code{.pre-commit-config.yaml} file when intiializing
 pre-commit with \code{\link[=use_precommit]{use_precommit()}} using the argument \code{path_cp_config_from} to copy
-an existing config file into your repo. For convenience, this argument
+an existing config file into your repo. This argument
 defaults to the R option \code{precommit.path_cp_config_from}, so you may want to
 set this option in your \code{.Rprofile} for convenience.
 Note that this is \strong{not} equivalent

@@ -13,7 +13,7 @@
 #' @section Copying an existing config file:
 #' You can use an existing `.pre-commit-config.yaml` file when intiializing
 #' pre-commit with [use_precommit()] using the argument `path_cp_config_from` to copy
-#' an existing config file into your repo. For convenience, this argument
+#' an existing config file into your repo. This argument
 #' defaults to the R option `precommit.path_cp_config_from`, so you may want to
 #' set this option in your `.Rprofile` for convenience.
 #' Note that this is **not** equivalent
