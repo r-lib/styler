@@ -4,7 +4,7 @@
   config file into the repo at initialization. The argument defaults to 
   `options('precommit.path_cp_config_from')` to make it easy for users to use 
   their preferred hooks in every repo they initialize (#111).
-- Create `r-reticulate` env if not existant before installing into it (#114).
+- Create `r-reticulate` env if not existent before installing into it (#114).
 - Unify vignettes on available hooks and arguments (#109).
 - Fail fast when repo is not a git repo (#111).
 
