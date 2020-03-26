@@ -29,14 +29,7 @@ for the hook `style-files` like this:
 
 ```{r, echo = FALSE, output = "asis", comment = "", message = FALSE}
 library(magrittr)
-config <- yaml::read_yaml(here::here(".pre-commit-config.yaml"))
-rev <- purrr::imap(config$repos, function(x, y) {
-  if (x$repo == "https://github.com/lorenzwalthert/precommit") {
-    return(x$rev)
-  }
-}) %>%
-  purrr::compact() %>%
-  unlist()
+rev <- paste0("v", packageVersion("precommit"))
 cat(glue::glue("
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
