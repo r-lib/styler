@@ -76,7 +76,7 @@ set_path_cp_config_from <- function(path_cp_config_from, verbose = TRUE) {
     tmp <- tempfile()
 
     target <- fs::path_ext_set(tmp, fs::path_ext(path_cp_config_from))
-    download.file(path_cp_config_from, target, quiet = TRUE)
+    utils::download.file(path_cp_config_from, target, quiet = TRUE)
     rlang::with_handlers(
       yaml::read_yaml(target, fileEncoding = "UTF-8"),
       error = function(e) {
