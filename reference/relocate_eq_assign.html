@@ -11,23 +11,27 @@ parse table — relocate_eq_assign • styler</title>
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -51,7 +55,6 @@ Since wrap_expr_in_curly() is called from within a visitor
 (and relocate_eq_assign() not), we need to
 wrap the the implementation relocate_eq_assign_nest() that operates on
 nests into a visitor call." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -69,7 +72,7 @@ nests into a visitor call." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -134,7 +137,7 @@ nests into a visitor call." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/r-lib/styler">
+  <a href="https://github.com/r-lib/styler/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -187,7 +190,7 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/get_parse_data.html'>get_parse_data</a></span>(<span class='st'>"a &lt;- b &lt;- 3"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 10 x 11</span><span>
+    <pre class="examples"><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span>(<span class='st'>"a &lt;- b &lt;- 3"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 10 x 11</span><span>
 #&gt;    line1  col1 line2  col2    id parent token    terminal text     pos_id short 
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
 #&gt; </span><span style='color: #555555;'> 1</span><span>     1     1     1    11    11      0 expr     FALSE    a &lt;- b …      1 </span><span style='color: #555555;'>"</span><span>a &lt;-…
@@ -199,7 +202,7 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 #&gt; </span><span style='color: #555555;'> 7</span><span>     1     6     1     6     6     10 expr     FALSE    b             7 </span><span style='color: #555555;'>"</span><span>b</span><span style='color: #555555;'>"</span><span>   
 #&gt; </span><span style='color: #555555;'> 8</span><span>     1     8     1     9     5     10 LEFT_AS… TRUE     &lt;-            8 </span><span style='color: #555555;'>"</span><span>&lt;-</span><span style='color: #555555;'>"</span><span>  
 #&gt; </span><span style='color: #555555;'> 9</span><span>     1    11     1    11     7      8 NUM_CON… TRUE     3             9 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   
-#&gt; </span><span style='color: #555555;'>10</span><span>     1    11     1    11     8     10 expr     FALSE    3            10 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   </div><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/get_parse_data.html'>get_parse_data</a></span>(<span class='st'>"a  = b = 3"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 11</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span>     1    11     1    11     8     10 expr     FALSE    3            10 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   </div><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span>(<span class='st'>"a  = b = 3"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 11</span><span>
 #&gt;    line1  col1 line2  col2    id parent token     terminal text    pos_id short 
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
 #&gt; </span><span style='color: #555555;'> 1</span><span>     1     1     1    10    13      0 equal_as… FALSE    a  = b…      1 </span><span style='color: #555555;'>"</span><span>a  =…
@@ -211,7 +214,7 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 #&gt; </span><span style='color: #555555;'> 7</span><span>     1     6     1     6     6     11 expr      FALSE    b            7 </span><span style='color: #555555;'>"</span><span>b</span><span style='color: #555555;'>"</span><span>   
 #&gt; </span><span style='color: #555555;'> 8</span><span>     1     8     1     8     5     11 EQ_ASSIGN TRUE     =            8 </span><span style='color: #555555;'>"</span><span>=</span><span style='color: #555555;'>"</span><span>   
 #&gt; </span><span style='color: #555555;'> 9</span><span>     1    10     1    10     7      8 NUM_CONST TRUE     3            9 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   
-#&gt; </span><span style='color: #555555;'>10</span><span>     1    10     1    10     8     11 expr      FALSE    3           10 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   </div><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/get_parse_data.html'>get_parse_data</a></span>(
+#&gt; </span><span style='color: #555555;'>10</span><span>     1    10     1    10     8     11 expr      FALSE    3           10 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   </div><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span>(
   <span class='st'>"x = 5
   if(x &gt;= 5)
   y = TRUE else
@@ -229,7 +232,7 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 #&gt; </span><span style='color: #555555;'> 8</span><span>     2     3     2     4    11     41 IF      TRUE     </span><span style='color: #555555;'>"</span><span>if</span><span style='color: #555555;'>"</span><span>            8 </span><span style='color: #555555;'>"</span><span>if</span><span style='color: #555555;'>"</span><span> 
 #&gt; </span><span style='color: #555555;'> 9</span><span>     2     5     2     5    12     41 '('     TRUE     </span><span style='color: #555555;'>"</span><span>(</span><span style='color: #555555;'>"</span><span>             9 </span><span style='color: #555555;'>"</span><span>(</span><span style='color: #555555;'>"</span><span>  
 #&gt; </span><span style='color: #555555;'>10</span><span>     2     6     2    11    19     41 expr    FALSE    </span><span style='color: #555555;'>"</span><span>x &gt;= 5</span><span style='color: #555555;'>"</span><span>       10 </span><span style='color: #555555;'>"</span><span>x &gt;…
-#&gt; </span><span style='color: #555555;'># … with 19 more rows</span><span></div><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/styler/man/get_parse_data.html'>get_parse_data</a></span>(
+#&gt; </span><span style='color: #555555;'># … with 19 more rows</span><span></div><div class='input'><span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span>(
   <span class='st'>"x &lt;- 5
   if(x &gt;= 5)
   y &lt;- TRUE else
@@ -249,13 +252,10 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 #&gt; </span><span style='color: #555555;'>10</span><span>     2     6     2    11    18     38 expr   FALSE    </span><span style='color: #555555;'>"</span><span>x &gt;= 5</span><span style='color: #555555;'>"</span><span>        10 </span><span style='color: #555555;'>"</span><span>x &gt;…
 #&gt; </span><span style='color: #555555;'># … with 19 more rows</span><span></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -266,7 +266,7 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>
