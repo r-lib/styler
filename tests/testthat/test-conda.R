@@ -65,10 +65,17 @@ test_that("Can uninstall pre-commit (repo scope)", {
   # when there is no pre-commit.yaml anymore
   use_precommit(open = FALSE, force = TRUE, path_root = tempdir)
   fs::file_delete(fs::path(tempdir, ".pre-commit-config.yaml"))
-  expect_output(
-    uninstall_precommit(scope = "repo", path_root = tempdir),
-    paste("Uninstalled pre-commit from repo scope.*")
-  )
+  if (isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
+    expect_error(
+      uninstall_precommit(scope = "repo", path_root = tempdir),
+      "installed with conda"
+    )
+  } else {
+    expect_output(
+      uninstall_precommit(scope = "repo", path_root = tempdir),
+      paste("Uninstalled pre-commit from repo scope.*")
+    )
+  }
 })
 
 test_that("Can uninstall (globally)", {
