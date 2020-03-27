@@ -2,6 +2,7 @@ tempdir <- fs::path(tempdir(), "test-precommit")
 fs::dir_create(tempdir)
 
 test_that("can install pre-commit", {
+  skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
   expect_error(install_precommit(), NA)
 
   expect_output(
@@ -71,6 +72,7 @@ test_that("Can uninstall pre-commit (repo scope)", {
 })
 
 test_that("Can uninstall (globally)", {
+  skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
   expect_output(
     uninstall_precommit(scope = "global", ask = "none"),
     "Removed pre-commit from"
@@ -86,7 +88,8 @@ test_that("use_precommit fails when no global installation is found", {
 })
 
 test_that("can install pre-commit with remote config", {
-  expect_error(install_precommit(), NA)
+f(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))  
+expect_error(install_precommit(), NA)
 
   expect_output(
     {
