@@ -18,3 +18,11 @@ is_url <- function(text) {
   conn %>%
     inherits("url")
 }
+
+#' The Hook configuration
+#'
+#' The file `.pre-commit-hooks.yaml` is the internal configuration file
+#' (as opposed to `.pre-commit-config.yaml` that the user needs). Most users
+#' won't ever need this.
+#' @export
+hooks <- yaml::read_yaml(".pre-commit-hooks.yaml")

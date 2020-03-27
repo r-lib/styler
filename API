@@ -10,3 +10,7 @@ path_pre_commit_exec(check_if_exists = TRUE)
 uninstall_precommit(scope = "repo", ask = "global", path_root = ".")
 use_precommit(path_cp_config_from = getOption("precommit.path_cp_config_from"), force = FALSE, open = rstudioapi::isAvailable(), path_root = here::here())
 use_precommit_config(path_cp_config_from = getOption("precommit.path_cp_config_from"), force, open = rstudioapi::isAvailable(), path_root = here::here(), verbose = FALSE)
+
+## Exported data
+
+hooks: list (list[10])
