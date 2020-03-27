@@ -36,8 +36,10 @@ after_script: R -q -e 'tic::after_script()'
 # Custom parts:
 jobs:
   include:
-  - name: r # install pre-commit from R
-  - name: external # install pre-commit outside
+  - name: r_linux # install pre-commit from R
+  - name: r_macOs
+    os: osx
+  - name: external_linux # install pre-commit outside
     env: 
     - EXTERNAL_INSTALLATION = "TRUE"
     before_install:
