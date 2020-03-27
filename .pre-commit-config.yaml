@@ -27,4 +27,4 @@ repos:
         name: consistent_release_tag
         entry: inst/consistent_release_tag
         language: script
-        stages: ["commit", "push"]
+        stages: [commit, push]
