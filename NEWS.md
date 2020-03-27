@@ -7,6 +7,7 @@
 - Create `r-reticulate` env if not existent before installing into it (#114).
 - Unify vignettes on available hooks and arguments (#109).
 - Fail fast when repo is not a git repo (#111).
+- default config file has spell-check activated (#118).
 
 # precommit 0.0.0.9017
 
@@ -17,7 +18,7 @@
   
 - Adding tools to work with hooks: ` install_precommit()`, `use_precommit()`,
   `uninstall_precommit()`, `open_config()` and `open_wordlist()` using conda 
-  environments on all plattforms.
+  environments on all platforms.
 
 - Make repo a fully R CMD CHECK compliant R package (includes moving hooks to
   `inst/bin` from `bin`.)
