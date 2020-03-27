@@ -27,4 +27,9 @@ repos:
         name: consistent_release_tag
         entry: inst/consistent_release_tag
         language: script
-        stages: ["commit", "push"]
+        stages: [commit, push]
+    -   id: up_to_data_hooks_config_inst
+        name: up_to_data_hooks_config_inst
+        entry: inst/up_to_data_hooks_config_inst
+        language: script
+        stages: [commit, push]

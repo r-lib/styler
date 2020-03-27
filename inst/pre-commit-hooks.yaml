@@ -1,0 +1,61 @@
+-   id: roxygenize
+    name: roxygenize
+    description: run roxygen2::roxygenize()
+    entry: inst/bin/roxygenize
+    language: script
+    files: '^(R|man)/'
+-   id: use-tidy-description
+    name: use-tidy-description
+    description: run usethis::use_tidy_description()
+    entry: inst/bin/use-tidy-description
+    language: script
+    files: '^DESCRIPTION$'
+-   id: style-files
+    name: style-files
+    description: style files with styler
+    entry: inst/bin/style-files
+    language: script
+    files: '(\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
+-   id: no-browser-statement
+    name: no-browser-statement
+    description: check if a .R file contains a `browser()` statement
+    entry: inst/bin/no-browser-statement
+    language: script
+    files: '\.[rR]$'
+-   id: parsable-R
+    name: parsable-R
+    description: check if a .R file is parsable
+    entry: inst/bin/parsable-R
+    language: script
+    files: '\.[rR]$'
+-   id: readme-rmd-rendered
+    name: readme-rmd-rendered
+    description: make sure README.Rmd hasn't been edited more recently than README.md
+    entry: inst/bin/readme-rmd-rendered
+    language: script
+    files: 'README\.[Rr]?md$'
+-   id: codemeta-description-updated
+    name: codemeta-description-updated
+    description: make sure codemeta.json is in sync with DESCRIPTION. It should be run after use-tidy-description.
+    entry: inst/bin/codemeta-description-updated
+    language: script
+    files: '^DESCRIPTION$'
+-   id: spell-check 
+    name: spell-check
+    description: perform a spell check with spelling::spell_check_files()
+    entry: inst/bin/spell-check
+    language: script
+    exclude: '(\.[rR]$|\.py$|/?\.gitignore$|^\.pre-commit|^NAMESPACE$|^inst/WORDLIST$)'
+    require_serial: true
+-   id: deps-in-desc
+    name: deps-in-desc
+    description: Check if dependencies that can be parsed from code are in DESCRIPTION.
+    entry: inst/bin/deps-in-desc
+    language: script
+    files: '\.[rR]$'
+-   id: lintr
+    name: lintr
+    description: check if a .R file is lint free (using lintr)
+    entry: inst/bin/lintr
+    language: script
+    files: '\.[rR]$'

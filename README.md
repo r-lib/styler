@@ -49,7 +49,17 @@ precommit::install_precommit()
 precommit::use_precommit()
 ```
 
-This installs pre-commit and performs some other set-up tasks.
+This installs pre-commit and performs some other set-up tasks like
+creating the config file `.pre-commit-config.yaml`, where the hooks that
+will be run on `git commit` are specified. If you want to use a custom
+`.pre-commit-config.yaml` you can set the R option
+`precommit.path_cp_config_from` to the path where this config file is
+stored, like
+this:
+
+``` r
+options("precommit.path_cp_config_from" = "~/default-precommit-config.yaml")
+```
 
 **Without conda**
 

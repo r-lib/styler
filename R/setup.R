@@ -1,6 +1,9 @@
 #' Set up pre-commit
 #'
 #' Get started.
+#' @inheritParams fallback_doc
+#' @inheritParams use_precommit_config
+#' @inheritSection use_precommit_config Copying an existing config file
 #' @section When to call this function?:
 #'
 #' * You want to add pre-commit support to a git repo which does not have a
@@ -16,70 +19,51 @@
 #' * autoupdates the template to make sure you get the latest versions of the
 #'   hooks.
 #' * Open the config file if RStudio is running.
-#'
-#' @param force Whether to replace an existing config file.
-#' @param open Whether or not to open the .pre-commit-config.yaml after
-#'   it's been placed in your repo. The default is `TRUE` when working in
-#'   RStudio. Otherwise, we recommend manually inspecting the file.
-#' @inheritParams fallback_doc
 #' @family helpers
 #' @export
-use_precommit <- function(force = FALSE,
+use_precommit <- function(path_cp_config_from = getOption("precommit.path_cp_config_from"),
+                          force = FALSE,
                           open = rstudioapi::isAvailable(),
                           path_root = here::here()) {
-  withr::with_dir(path_root, {
-    if (!is_installed()) {
-      rlang::abort(paste0(
-        "pre-commit is not installed on your system (or we can't find it). ",
-        "If you have it installed, please set the R option ",
-        "`precommit.executable` to this ",
-        "path so it can be used to perform various pre-commit commands from R.",
-        "If not, install it with ",
-        "`precommit::install_precommit()` or an installation ",
-        "method in the official installation guide ",
-        "(https://pre-commit.com/#install). The latter requires you to set",
-        "the R option `precommit.executable` as well after the installation."
-      ))
-    }
-    install_repo()
-    use_precommit_config(force, path_root)
-    autoupdate(path_root)
-    if (open) {
-      open_config(path_root)
-    }
-  })
+  assert_is_installed()
+  assert_is_git_repo(path_root)
+  path_cp_config_from <- set_path_cp_config_from(path_cp_config_from)
+  install_repo(path_root)
+  use_precommit_config(
+    path_cp_config_from, force, path_root,
+    open = FALSE, verbose = FALSE
+  )
+  autoupdate(path_root)
+  if (open) {
+    open_config(path_root)
+  }
 }
 
-use_precommit_config <- function(force, path_root = here::here()) {
-  name_origin <- "pre-commit-config.yaml"
-  escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
-  name_target <- ".pre-commit-config.yaml"
-  # workaround for RCMD CHECK warning about hidden top-level directories.
-  if (!fs::file_exists(fs::path(name_target)) | force) {
-    fs::file_copy(
-      system.file(name_origin, package = "precommit"),
-      fs::path(".", name_target),
-      overwrite = TRUE
-    )
-    usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
-  } else {
-    usethis::ui_warn(paste0(
-      "There is already a pre-commit configuration file in ",
-      path_root,
-      ". Use `force = TRUE` to replace .pre-commit-config.yaml"
+assert_is_git_repo <- function(path_root) {
+  if (is.null(git2r::discover_repository(path_root))) {
+    rlang::abort(paste0(
+      "The directory ", path_root, " is not a git repo. Please navigate to ",
+      path_root, " and init git in ",
+      "this directory with `$ git init` from the command line or ",
+      "`> usethis::use_git()` from the R prompt."
     ))
   }
+}
 
-  if (is_package(".")) {
-    usethis::write_union(".Rbuildignore", escaped_name_target)
+assert_is_installed <- function() {
+  if (!is_installed()) {
+    rlang::abort(paste0(
+      "pre-commit is not installed on your system (or we can't find it). ",
+      "If you have it installed, please set the R option ",
+      "`precommit.executable` to this ",
+      "path so it can be used to perform various pre-commit commands from R.",
+      "If not, install it with ",
+      "`precommit::install_precommit()` or an installation ",
+      "method in the official installation guide ",
+      "(https://pre-commit.com/#install). The latter requires you to set",
+      "the R option `precommit.executable` as well after the installation."
+    ))
   }
-  usethis::ui_todo(c(
-    "Edit .precommit-hooks.yaml to (de)activate the hooks you want to use. ",
-    "All available hooks: ",
-    "https://pre-commit.com/hooks.html",
-    "R specific hooks:",
-    "https://github.com/lorenzwalthert/precommit."
-  ))
 }
 
 #' Install pre-commit on your system with conda
