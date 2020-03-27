@@ -95,8 +95,9 @@ test_that("use_precommit fails when no global installation is found", {
 })
 
 test_that("can install pre-commit with remote config", {
-f(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))  
-expect_error(install_precommit(), NA)
+  if (isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
+    expect_error(install_precommit(), NA)
+  }
 
   expect_output(
     {
