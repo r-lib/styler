@@ -1,18 +1,22 @@
 
 args
+autoupdate
 cmd
 CMD
 codemeta
 conda
 config
+cp
 deps
 desc
 env
 fs
+getOption
 github
 gitignore
 https
 icloud
+isAvailable
 json
 lintr
 lorenz
@@ -38,6 +42,7 @@ RoxygenNote
 rR
 Rr
 Rscript
+RStudio
 rstudioapi
 styler
 testthat

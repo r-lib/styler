@@ -81,11 +81,11 @@ This hook does not modify files.
 
 Checks spelling with `spelling::spell_check_files()`. Excluded are R and python
 scripts as well as `.gitignore` and similar. To be precise, files matching the
-following regex are excluded by default (as of `r paste0("v", packageVersion('precommit'))`):
+following regex are excluded by default (as of `r paste0("v", packageVersion("precommit"))`):
 
 ```{r, echo = FALSE, comment = ""}
 extract_spell_check_regex <- function() {
-  precommit::hooks %>%
+  yaml::read_yaml(system.file("pre-commit-hooks.yaml", package = "precommit")) %>%
     purrr::keep(~ .x$id == "spell-check") %>%
     magrittr::extract2(1) %>%
     magrittr::extract2("exclude")
