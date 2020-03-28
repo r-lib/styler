@@ -4,7 +4,7 @@ Release upon request by the CRAN team.
 
 ## Minor changes and fixes
 
-- Add search to pkgdown webpage (#623).
+- Add search and reference sections to pkgdown webpage (#623, #625).
 - various fixes to handle special cases for caching and stylerignore and their
   interaction (#611, #610, #609, #607, #602, #600).
 - also test on macOS (#604).
