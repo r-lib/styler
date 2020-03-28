@@ -34,6 +34,11 @@ latest_tag <- get_latest_tag()
 
 purrr::walk(path_config, assert_config_has_rev, latest_tag = latest_tag)
 
-if (gsub("^v", "", latest_tag) != desc::desc_get_field('Version')) {
-  rlang::abort("DESCRIPTION version is not equivalent to latest git tag.")
+if (!(gsub("^v", "", latest_tag) < desc::desc_get_field('Version'))) {
+  rlang::abort(paste(
+    "DESCRIPTION version must be larger than git tag. Only exception:",
+    "Revision is a release. Then, git tag and DESCRIPTION version should", 
+    "match. In this case, ignore the warning and commit with --no-verify."
+    
+  ))
 }
