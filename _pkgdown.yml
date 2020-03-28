@@ -1,3 +1,35 @@
+reference:
+- title: "Styling API"
+  desc: >
+    Functions for styling code
+- contents:
+  - style_text
+  - style_file
+  - style_pkg
+  - style_dir
+  - styler_addins
+- title: "Fine-tune styling"
+  desc: "Customize style guildes"
+- contents:
+  - create_style_guide
+  - specify_math_token_spacing
+  - specify_reindention
+  - tidyverse_reindention
+  - tidyverse_math_token_spacing
+- title: "Non-functional documentation"
+  desc: "Explaining features"
+  contents:
+    - caching
+    - stylerignore
+    - styler-package
+- title: "Caching"
+  desc: "Utilities to help manage the styler cache"
+- contents:
+  - starts_with("cache")
+- title: "Other"
+  contents:
+  - print.vertical
+
 template:
   params:
     bootswatch: flatly # https://bootswatch.com/flatly/
