@@ -11,7 +11,7 @@
 - also test on macOS (#120).
 - test if pre-commit was installed via pip (#120).
 - template `.pre-commit-config.yaml` includes hook to check files have a EOF
-  blank line (#125).
+  blank line (#126).
 
 # precommit 0.0.0.9017
 
