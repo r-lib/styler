@@ -35,8 +35,8 @@ The goal of this package is to twofold:
 **With conda**
 
 Please make sure you have [conda](https://docs.conda.io/en/latest/)
-installed, either manualy or with `reticulate::install_miniconda()`. The
-rest can be handled from R:
+installed, either manually or with `reticulate::install_miniconda()`.
+The rest can be handled from R:
 
 ``` r
 # once on your system
@@ -51,15 +51,10 @@ precommit::use_precommit()
 
 This installs pre-commit and performs some other set-up tasks like
 creating the config file `.pre-commit-config.yaml`, where the hooks that
-will be run on `git commit` are specified. If you want to use a custom
-`.pre-commit-config.yaml` you can set the R option
-`precommit.path_cp_config_from` to the path where this config file is
-stored, like
-this:
-
-``` r
-options("precommit.path_cp_config_from" = "~/default-precommit-config.yaml")
-```
+will be run on `git commit` are specified. See
+`?precommit::use_precommit()` to see how you can use a custom
+`.pre-commit-config.yaml` instead of the default at initialization. You
+can (obviously) change edit the file manually at any time.
 
 **Without conda**
 
@@ -112,7 +107,7 @@ To update the hook revisions, run `precommit::autoupdate()`.
     your pre-commit cache, which is usually under
     `$HOME/.cache/pre-commit/`.
 
-  - Because R is not officially supported as a langauge in the
+  - Because R is not officially supported as a language in the
     pre-commit framework (yet), there is no R package dependency
     management for the R hooks provided in this repo. If an R package
     that is needed by a hook is not yet installed, you might get this

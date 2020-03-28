@@ -7,6 +7,7 @@ codemeta
 conda
 config
 cp
+Ctrl
 deps
 desc
 env
@@ -18,6 +19,7 @@ https
 icloud
 isAvailable
 json
+Lifecycle
 lintr
 lorenz
 lorenzwalthert
@@ -48,6 +50,8 @@ rstudioapi
 styler
 testthat
 tidyverse
+Uninstallation
+Upvote
 usethis
 usr
 walthert
