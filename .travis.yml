@@ -42,7 +42,7 @@ jobs:
     os: osx
     stage: before_script
     script: 
-      - R -e -q 'if (!requireNamespace("reticulate")) install.packages("reticulate"); reticulate::install_miniconda()'
+      - R -q -e 'if (!requireNamespace("reticulate")) install.packages("reticulate"); reticulate::install_miniconda()'
       - R -q -e 'tic::before_script()'
   - name: external_linux # install pre-commit outside
     env: 
