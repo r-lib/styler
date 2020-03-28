@@ -29,8 +29,7 @@ after_script: R -q -e 'tic::after_script()'
 jobs:
   include:
   - name: r_linux # install pre-commit from R
-    stages: 
-      after_install: 
+    stage: after_install
       - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
       - bash miniconda.sh -b -p $HOME/miniconda
       - source "$HOME/miniconda/etc/profile.d/conda.sh"
@@ -41,16 +40,15 @@ jobs:
       - R -q -e 'tic::after_install()'
   - name: r_macOs
     os: osx
-    after_install: 
+    stage: after_install
       - R -e -q 'if (!requireNamespace("reticulate")) install.packages("reticulate"); reticulate::install_miniconda()'
       - R -q -e 'tic::after_install()'
   - name: external_linux # install pre-commit outside
     env: 
       - EXTERNAL_INSTALLATION="TRUE"
-    stages: 
-      after_install:
-        - pip install pre-commit --user
-        - R -q -e 'tic::after_install()'
+    stage: after_install
+      - pip install pre-commit --user
+      - R -q -e 'tic::after_install()'
 
 language: r
 sudo: false
