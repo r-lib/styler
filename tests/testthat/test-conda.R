@@ -5,7 +5,9 @@ git2r::init(path = tempdir)
 test_that("can install pre-commit", {
   skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
   expect_error(install_precommit(), NA)
+})
 
+test_that("can use pre-commit", {
   expect_output(
     use_precommit(open = FALSE, force = TRUE, path_root = tempdir),
     "to get the latest"
