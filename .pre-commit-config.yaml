@@ -21,6 +21,7 @@ repos:
     rev: v2.5.0
     hooks: 
     -   id: check-added-large-files
+    -   id: end-of-file-fixer
 -   repo: local
     hooks:
     -   id: consistent_release_tag
