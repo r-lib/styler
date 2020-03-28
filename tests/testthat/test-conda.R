@@ -1,15 +1,13 @@
 tempdir <- fs::path(tempdir(), "test-precommit")
 fs::dir_create(tempdir)
+git2r::init(path = tempdir)
 
 test_that("can install pre-commit", {
   skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
   expect_error(install_precommit(), NA)
 
   expect_output(
-    {
-      git2r::init(path = tempdir)
-      use_precommit(open = FALSE, force = TRUE, path_root = tempdir)
-    },
+    use_precommit(open = FALSE, force = TRUE, path_root = tempdir),
     "to get the latest"
   )
 })
@@ -91,6 +89,7 @@ test_that("Can uninstall (globally)", {
 })
 
 test_that("use_precommit fails when no global installation is found", {
+  skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
   expect_error(use_precommit(path_root = tempdir), "installed on your system")
 })
 
