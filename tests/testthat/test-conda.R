@@ -63,33 +63,31 @@ test_that("Can uninstall pre-commit (repo scope)", {
   # when there is no pre-commit.yaml anymore
   use_precommit(open = FALSE, force = TRUE, path_root = tempdir)
   fs::file_delete(fs::path(tempdir, ".pre-commit-config.yaml"))
+  expect_output(
+    uninstall_precommit(scope = "repo", path_root = tempdir),
+    paste("Uninstalled pre-commit from repo scope.*")
+  )
+})
+
+test_that("Can uninstall (globally)", {
   if (isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
     expect_error(
-      uninstall_precommit(scope = "repo", path_root = tempdir),
+      uninstall_precommit(scope = "global", path_root = tempdir),
       "installed with conda"
     )
   } else {
     expect_output(
-      uninstall_precommit(scope = "repo", path_root = tempdir),
-      paste("Uninstalled pre-commit from repo scope.*")
+      uninstall_precommit(scope = "global", ask = "none"),
+      "Removed pre-commit from"
+    )
+    expect_error(
+      uninstall_precommit(scope = "global", ask = "none"),
+      "No installation found."
     )
   }
 })
 
-test_that("Can uninstall (globally)", {
-  skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
-  expect_output(
-    uninstall_precommit(scope = "global", ask = "none"),
-    "Removed pre-commit from"
-  )
-  expect_error(
-    uninstall_precommit(scope = "global", ask = "none"),
-    "No installation found."
-  )
-})
-
 test_that("use_precommit fails when no global installation is found", {
-  skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
   expect_error(use_precommit(path_root = tempdir), "installed on your system")
 })
 
