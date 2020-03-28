@@ -1,3 +1,23 @@
+reference:
+- title: "Setup tools"
+  desc: >
+    Get started
+- contents: 
+  - install_precommit
+  - use_precommit
+  - use_precommit_config
+- title: "Workflow"
+  desc: >
+    Edit the pre-commit configuration
+- contents: 
+  - open_config
+  - open_wordlist
+  - autoupdate
+- title: "Other"
+- contents: 
+  - uninstall_precommit
+  - path_pre_commit_exec
+
 destination: docs
 navbar:
   components:
