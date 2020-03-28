@@ -41,7 +41,7 @@ jobs:
     os: osx
   - name: external_linux # install pre-commit outside
     env: 
-    - EXTERNAL_INSTALLATION = "TRUE"
+    - EXTERNAL_INSTALLATION="TRUE"
     before_install:
     - R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
     - R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
