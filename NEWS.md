@@ -12,6 +12,7 @@
 - test if pre-commit was installed via pip (#120).
 - template `.pre-commit-config.yaml` includes hook to check files have a EOF
   blank line (#126).
+- spell-check hook now removes blank lines hand has no blank line at EOF (#127).
 
 # precommit 0.0.0.9017
 
