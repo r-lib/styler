@@ -8,6 +8,8 @@
 - Unify vignettes on available hooks and arguments (#109).
 - Fail fast when repo is not a git repo (#111).
 - default config file has spell-check activated (#118).
+- also test on macOS (#120).
+- test if pre-commit was installed via pip (#120).
 
 # precommit 0.0.0.9017
 
