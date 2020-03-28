@@ -11,6 +11,7 @@ Ctrl
 deps
 desc
 env
+EOF
 fs
 getOption
 github
@@ -61,4 +62,3 @@ Walthert
 withr
 wordlist
 yaml
-

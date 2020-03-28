@@ -24,3 +24,4 @@ repos:
     hooks: 
     -   id: check-added-large-files
         args: ['--maxkb=200']
+    -   id: end-of-file-fixer
