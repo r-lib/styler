@@ -59,7 +59,7 @@ path_derive_precommit_exec_linux <- function() {
 }
 
 path_derive_precommit_exec_win <- function() {
-  path_derive_precommit_exec_impl("~\\AppData\\Roaming\\Python\\Scripts")
+  path_derive_precommit_exec_impl(fs::path_home("AppData/Roaming/Python/Scripts"))
 }
 
 path_derive_precommit_exec_macOS <- function() {
@@ -68,7 +68,7 @@ path_derive_precommit_exec_macOS <- function() {
     "/usr/local/bin" # homebrew
   ) %>%
     path_derive_precommit_exec_impl()
-} 
+}
 
 
 path_derive_precommit_exec_impl <- function(candidate) {
