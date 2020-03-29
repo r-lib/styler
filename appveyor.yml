@@ -22,6 +22,7 @@ after_build: Rscript -e "tic::after_install()"
 before_test: Rscript -e "tic::before_script()"
 test_script: 
    - cmd: Rscript -e "tic::script()"
+   - cmd: Rscript -e "devtools::install()"
    - cmd: pip install pre-commit --user
    - cmd: Rscript -e "if (precommit:::path_derive_precommit_exec_win() == '') stop('Could not find pip executable.')"
 on_success: Rscript -e "try(tic::after_success(), silent = TRUE)"
