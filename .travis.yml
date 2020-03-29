@@ -39,6 +39,7 @@ jobs:
       - R -q -e 'tic::before_script()'
   - name: macOS_conda
     os: osx
+    python: 3.5
     before_script: 
       - R -q -e 'if (!requireNamespace("reticulate")) install.packages("reticulate"); reticulate::install_miniconda()'
       - R -q -e 'tic::before_script()'
@@ -54,6 +55,7 @@ jobs:
     env: 
       - EXTERNAL_INSTALLATION="TRUE"
     before_script:
+      - brew unlink python@2
       - brew install pre-commit
       - R -q -e 'tic::before_script()'
   - name: linux_pip # install pre-commit outside
