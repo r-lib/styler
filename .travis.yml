@@ -27,9 +27,8 @@ after_script: R -q -e 'tic::after_script()'
 # Custom parts:
 jobs:
   include:
-  - name: r_linux # install pre-commit from R
-    stage: before_script
-    script:
+  - name: inux_conda # install pre-commit from R
+    before_script:
       - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
       - bash miniconda.sh -b -p $HOME/miniconda
       - source "$HOME/miniconda/etc/profile.d/conda.sh"
@@ -38,21 +37,27 @@ jobs:
       - conda update -q conda
       - rm miniconda.sh
       - R -q -e 'tic::before_script()'
-  - name: r_macOs
+  - name: macOS_conda
     os: osx
-    stage: before_script
-    script: 
+    before_script: 
       - R -q -e 'if (!requireNamespace("reticulate")) install.packages("reticulate"); reticulate::install_miniconda()'
       - R -q -e 'tic::before_script()'
-  - name: external_linux # install pre-commit outside
+  - name: macOS_pip # install pre-commit outside
+    os: osx
     env: 
       - EXTERNAL_INSTALLATION="TRUE"
-    stage: before_script
-    script:
+    before_script:
+      - pip install pre-commit --user
+      - R -q -e 'tic::before_script()'
+  - name: linux_pip # install pre-commit outside
+    env: 
+      - EXTERNAL_INSTALLATION="TRUE"
+    before_script:
       - pip install pre-commit --user
       - R -q -e 'tic::before_script()'
 
 language: r
+cache: packages
 sudo: false
 dist: xenial
 latex: false

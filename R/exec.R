@@ -42,21 +42,24 @@ path_derive_precommit_exec <- function() {
   if (path == "") {
     os <- tolower(Sys.info()[["sysname"]])
     if (os == "darwin") {
-      # path <- path_derive_precommit_exec_mac()
+      path <- path_derive_precommit_exec_impl(
+        fs::path(fs::dir_ls(path_if_exist("~/Library/Python/")), "bin")
+      )
     } else if (os == "windows") {
-      # path <- path_derive_precommit_exec_windows()
+      # path <- path_derive_precommit_exec_impl("~/.local/bin")
     } else if (os == "linux") {
-      path <- path_derive_precommit_exec_linux()
+      # pip: https://unix.stackexchange.com/questions/240037/why-did-pip-install-a-package-into-local-bin
+      path <- path_derive_precommit_exec_impl("~/.local/bin")
     }
   }
   path
 }
 
-# https://unix.stackexchange.com/questions/240037/why-did-pip-install-a-package-into-local-bin
-path_derive_precommit_exec_linux <- function() {
-  assumed <- fs::path("~/.local/bin", "pre-commit")
-  if (fs::file_exists(assumed)) {
-    assumed
+path_derive_precommit_exec_impl <- function(candidate) {
+  assumed <- fs::path(candidate, "pre-commit")
+  existant <- assumed[fs::file_exists(assumed)]
+  if (length(existant) > 0) {
+    existant[1]
   } else {
     ""
   }
