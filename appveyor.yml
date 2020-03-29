@@ -9,7 +9,6 @@ init:
 
 install:
   - ps: Bootstrap
-  - cmd: pip install pre-commit --user
   - cmd: Rscript -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
   - cmd: Rscript -e "getOption('repos')"
   - cmd: Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
@@ -21,7 +20,10 @@ before_build: Rscript -e "tic::before_install()"
 build_script: Rscript -e "tic::install()"
 after_build: Rscript -e "tic::after_install()"
 before_test: Rscript -e "tic::before_script()"
-test_script: Rscript -e "tic::script()"
+test_script: 
+   - cmd: Rscript -e "tic::script()"
+   - cmd: pip install pre-commit --user
+   - cmd: Rscript -e 'if (precommit:::path_derive_precommit_exec_win() == "") stop("Could not find pip executable.")'
 on_success: Rscript -e "try(tic::after_success(), silent = TRUE)"
 on_failure: Rscript -e "tic::after_failure()"
 before_deploy: Rscript -e "tic::before_deploy()"

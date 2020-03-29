@@ -42,21 +42,34 @@ path_derive_precommit_exec <- function() {
   if (path == "") {
     os <- tolower(Sys.info()[["sysname"]])
     if (os == "darwin") {
-      path <- c(
-        fs::path(fs::dir_ls(path_if_exist("~/Library/Python/")), "bin"), # pip
-        "/usr/local/bin" # homebrew
-      ) %>%
-        path_derive_precommit_exec_impl()
+      path <- path_derive_precommit_exec_macOS()
     } else if (os == "windows") {
-      # path <- path_derive_precommit_exec_impl("~/.local/bin")
+      path <- path_derive_precommit_exec_win()
     } else if (os == "linux") {
-      path <- path_derive_precommit_exec_impl(
-        "~/.local/bin" # pip: https://unix.stackexchange.com/questions/240037/why-did-pip-install-a-package-into-local-bin
-      )
+      path <- path_derive_precommit_exec_linux()
     }
   }
   path
 }
+
+path_derive_precommit_exec_linux <- function() {
+  path_derive_precommit_exec_impl(
+    "~/.local/bin" # pip: https://unix.stackexchange.com/questions/240037/why-did-pip-install-a-package-into-local-bin
+  )
+}
+
+path_derive_precommit_exec_win <- function() {
+  path_derive_precommit_exec_impl("~\\AppData\\Roaming\\Python\\Scripts")
+}
+
+path_derive_precommit_exec_macOS <- function() {
+  c(
+    fs::path(fs::dir_ls(path_if_exist("~/Library/Python/")), "bin"), # pip
+    "/usr/local/bin" # homebrew
+  ) %>%
+    path_derive_precommit_exec_impl()
+} 
+
 
 path_derive_precommit_exec_impl <- function(candidate) {
   assumed <- fs::path(candidate, "pre-commit")
