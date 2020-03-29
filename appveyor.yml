@@ -9,6 +9,7 @@ init:
 
 install:
   - ps: Bootstrap
+  - cmd: pip install pre-commit --user
   - cmd: Rscript -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
   - cmd: Rscript -e "getOption('repos')"
   - cmd: Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
