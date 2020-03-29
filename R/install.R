@@ -11,7 +11,7 @@ install_system <- function() {
     )
     options(precommit.executable = path_derive_precommit_exec())
   } else {
-    path_exec <- path_pre_commit_exec(check_if_exists = FALSE)
+    path_exec <- path_precommit_exec(check_if_exists = FALSE)
     usethis::ui_info(c(
       "pre-commit already installed at the following locations:",
       paste0("- ", path_exec)
@@ -87,7 +87,7 @@ uninstall_precommit_system <- function(ask = TRUE) {
           "Please remove manually or set the R option to the appropriate ",
           "executable that lives in a conda environment. You find the ",
           "currently used executable (conda or other) with ",
-          "`precommit::path_pre_commit_exec()`."
+          "`precommit::path_precommit_exec()`."
         ))
       } else {
         out <- system2(
@@ -124,16 +124,16 @@ uninstall_precommit_repo <- function(ask) {
   if (continue) {
     success <- grepl(
       "pre-commit uninstalled",
-      system2(path_pre_commit_exec(), "uninstall", stdout = TRUE)
+      system2(path_precommit_exec(), "uninstall", stdout = TRUE)
     )
     if (isTRUE(success)) {
       usethis::ui_done("Uninstalled pre-commit from repo scope.")
     }
     if (is_package(".")) {
       lines <- readLines(".Rbuildignore", encoding = "UTF-8")
-      pre_commit_hooks_idx <- which(lines == "^\\.pre-commit-hooks\\.yaml$")
-      remaining <- rlang::seq2(1, length(lines)) %>% setdiff(pre_commit_hooks_idx)
-      if (length(pre_commit_hooks_idx) > 0) {
+      precommit_hooks_idx <- which(lines == "^\\.pre-commit-hooks\\.yaml$")
+      remaining <- rlang::seq2(1, length(lines)) %>% setdiff(precommit_hooks_idx)
+      if (length(precommit_hooks_idx) > 0) {
         usethis::ui_info("Removing .pre-commit-hooks.yaml from .Rbuildignore")
         usethis::write_over(".Rbuildignore", lines[remaining])
       }
@@ -161,7 +161,7 @@ uninstall_precommit_repo <- function(ask) {
 install_repo <- function(path_root) {
   tmp <- tempfile()
   withr::with_dir(path_root, {
-    out <- suppressWarnings(system2(path_pre_commit_exec(), "install", stdout = NULL, stderr = tmp))
+    out <- suppressWarnings(system2(path_precommit_exec(), "install", stdout = NULL, stderr = tmp))
     if (out == 0) {
       usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(path_root)}.")
     } else {
@@ -171,5 +171,5 @@ install_repo <- function(path_root) {
 }
 
 is_installed <- function() {
-  fs::file_exists(path_pre_commit_exec(check_if_exists = FALSE))
+  fs::file_exists(path_precommit_exec(check_if_exists = FALSE))
 }

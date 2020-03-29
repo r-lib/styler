@@ -1,9 +1,9 @@
-#' Locate the pre-comit executable
+#' Locate the pre-commit executable
 #'
 #' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
 #' @export
-path_pre_commit_exec <- function(check_if_exists = TRUE) {
+path_precommit_exec <- function(check_if_exists = TRUE) {
   final <- getOption("precommit.executable") %>%
     as.character()
   if (!check_if_exists) {
@@ -19,6 +19,13 @@ path_pre_commit_exec <- function(check_if_exists = TRUE) {
     ))
   }
   final
+}
+
+#' @rdname path_precommit_exec
+#' @export
+path_pre_commit_exec <- function(check_if_exists = TRUE) {
+  .Deprecated("path_precommit_exec", old = "path_pre_commit_exec")
+  path_precommit_exec(check_if_exists = check_if_exists)
 }
 
 #' Derive the path to the pre-commit executable

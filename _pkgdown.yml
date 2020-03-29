@@ -16,7 +16,7 @@ reference:
 - title: "Other"
 - contents: 
   - uninstall_precommit
-  - path_pre_commit_exec
+  - path_precommit_exec
 
 destination: docs
 navbar:

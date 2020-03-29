@@ -83,7 +83,7 @@ install_precommit_impl <- function() {
 autoupdate <- function(path_root = here::here()) {
   withr::with_dir(path_root, {
     assert_correct_upstream_repo_url()
-    out <- system2(path_pre_commit_exec(), "autoupdate")
+    out <- system2(path_precommit_exec(), "autoupdate")
     if (out == 0) {
       usethis::ui_done(paste0(
         "Ran `pre-commit autoupdate` to get the latest version of the hooks."
