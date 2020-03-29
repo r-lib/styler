@@ -1,5 +1,8 @@
 # precommit post v0.0.0.9028
 
+- auto-detect pre-commit executable when installed via pip for Linux (#120), 
+  macOS (#131).
+- auto-detect pre-commit executable when installed via brew for macOS (#132).
 - `use_precommit()` gains new argument `path_cp_config_from` to copy an existing
   config file into the repo at initialization. The argument defaults to 
   `options('precommit.path_cp_config_from')` to make it easy for users to use 
@@ -9,10 +12,11 @@
 - Fail fast when repo is not a git repo (#111).
 - default config file has spell-check activated (#118).
 - also test on macOS (#120).
-- test if pre-commit was installed via pip (#120).
 - template `.pre-commit-config.yaml` includes hook to check files have a EOF
   blank line (#126).
 - spell-check hook now removes blank lines hand has no blank line at EOF (#127).
+- depreciate `path_pre_commit_exec()` in favor of `path_precommit_exec()` 
+  and adapt internals to replace `pre_commit` with `precommit` (#130).
 
 # precommit 0.0.0.9017
 

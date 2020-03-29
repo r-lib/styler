@@ -27,7 +27,7 @@ after_script: R -q -e 'tic::after_script()'
 # Custom parts:
 jobs:
   include:
-  - name: inux_conda # install pre-commit from R
+  - name: linux_conda # install pre-commit from R
     before_script:
       - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
       - bash miniconda.sh -b -p $HOME/miniconda
@@ -48,6 +48,15 @@ jobs:
       - EXTERNAL_INSTALLATION="TRUE"
     before_script:
       - pip install pre-commit --user
+      - R -q -e 'tic::before_script()'
+  - name: macOS_brew # install pre-commit outside
+    os: osx
+    python: 3.5
+    env: 
+      - EXTERNAL_INSTALLATION="TRUE"
+    before_script:
+      - brew unlink python@2
+      - brew install pre-commit
       - R -q -e 'tic::before_script()'
   - name: linux_pip # install pre-commit outside
     env: 

@@ -20,6 +20,7 @@ is_url <- function(text) {
 }
 
 
-path_if_exist <- function(path) {
+path_if_exist <- function(...) {
+  path <- c(...)
   path[fs::file_exists(path)]
 }
