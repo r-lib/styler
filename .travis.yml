@@ -50,13 +50,6 @@ jobs:
     before_script:
       - pip install pre-commit --user
       - R -q -e 'tic::before_script()'
-  - name: win_pip # install pre-commit outside
-    os: windows
-    env: 
-      - EXTERNAL_INSTALLATION="TRUE"
-    before_script:
-      - pip install pre-commit --user
-      - R -q -e 'tic::before_script()'
   - name: macOS_brew # install pre-commit outside
     os: osx
     python: 3.5
