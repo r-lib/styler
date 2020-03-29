@@ -9,7 +9,7 @@ init:
 
 install:
   - ps: Bootstrap
-  - cmd: pip3 install pre-commit --user
+  - cmd: pip install pre-commit --user
   - cmd: Rscript -e "writeLines('options(repos = \'https://cloud.r-project.org\')', '~/.Rprofile')"
   - cmd: Rscript -e "getOption('repos')"
   - cmd: Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes')"
@@ -46,6 +46,7 @@ environment:
   #  secure: VXO22OHLkl4YhVIomSMwCZyOTx03Xf2WICaVng9xH7gISlAg8a+qrt1DtFtk8sK5
   PYTHON: "C:\Python36"
   PYTHON_ARCH: "64"
+  PYTHON_VERSION: "3.6.0"
   USE_RTOOLS: true
 
 artifacts:
