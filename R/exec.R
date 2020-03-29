@@ -36,7 +36,7 @@ path_derive_precommit_exec <- function() {
     os <- tolower(Sys.info()[["sysname"]])
     if (os == "darwin") {
       path <- path_derive_precommit_exec_impl(
-        fs::path(fs::dir_ls("~/Library/Python/"), "bin")
+        fs::path(fs::dir_ls("~/Library/Python/", fail = FALSE), "bin")
       )
     } else if (os == "windows") {
       # path <- path_derive_precommit_exec_impl("~/.local/bin")
