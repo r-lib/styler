@@ -26,6 +26,7 @@ after_script: R -q -e 'tic::after_script()'
 
 # Custom parts:
 jobs:
+  fast_finish: true
   include:
   - name: linux_conda # install pre-commit from R
     before_script:
@@ -75,5 +76,3 @@ env:
   global:
   - _R_CHECK_FORCE_SUGGESTS_=false
   - MAKEFLAGS="-j 2"
-matrix:
-  fast_finish: true
