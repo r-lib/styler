@@ -57,6 +57,7 @@ jobs:
       - R -q -e 'tic::before_script()'
 
 language: r
+cache: packages
 sudo: false
 dist: xenial
 latex: false
