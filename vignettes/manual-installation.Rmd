@@ -16,7 +16,7 @@ sure R finds the executable. To check that, start a new R session after the
 installation process of pre-commit has completely successfully and run this command:
 
 ```{r, eval = FALSE}
-precommit::path_pre_commit_exec()
+precommit::path_precommit_exec()
 #> "/usr/local/bin/pre-commit"
 ```
 If it shows a path (like above), you are all set. Skip the rest of this 
@@ -45,12 +45,12 @@ installation method and operating system, so it's hard for us to give general
 advice. You may use a Google search like *where does pip install executable on
 Ubuntu?* to find the path to the executable.
 
-We are working towards making `precommit::path_pre_commit_exec()` find
+We are working towards making `precommit::path_precommit_exec()` find
 executables automatically with any operating system and installation method, so
 please open up an [issue](https://github.com/lorenzwalthert/precommit/issues) on
 GitHub and tell us your installation method, platform and the location of the
 executable so we can adapt the search heuristic of
-`precommit::path_pre_commit_exec()`.
+`precommit::path_precommit_exec()`.
 
 If you can't get it right, you can still install via conda, where linking the 
 executable is not required.
