@@ -18,3 +18,8 @@ is_url <- function(text) {
   conn %>%
     inherits("url")
 }
+
+
+path_if_exist <- function(path) {
+  path[fs::file_exists(path)]
+}
