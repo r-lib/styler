@@ -20,7 +20,11 @@ before_build: Rscript -e "tic::before_install()"
 build_script: Rscript -e "tic::install()"
 after_build: Rscript -e "tic::after_install()"
 before_test: Rscript -e "tic::before_script()"
-test_script: Rscript -e "tic::script()"
+test_script: 
+   - cmd: Rscript -e "tic::script()"
+   - cmd: "R CMD INSTALL ."
+   - cmd: pip install pre-commit --user
+   - cmd: Rscript -e "if (precommit:::path_derive_precommit_exec_win() == '') stop('Could not find pip executable.')"
 on_success: Rscript -e "try(tic::after_success(), silent = TRUE)"
 on_failure: Rscript -e "tic::after_failure()"
 before_deploy: Rscript -e "tic::before_deploy()"
@@ -45,6 +49,7 @@ environment:
   #  secure: VXO22OHLkl4YhVIomSMwCZyOTx03Xf2WICaVng9xH7gISlAg8a+qrt1DtFtk8sK5
   PYTHON: "C:\Python36"
   PYTHON_ARCH: "64"
+  PYTHON_VERSION: "3.6.0"
   USE_RTOOLS: true
 
 artifacts:
