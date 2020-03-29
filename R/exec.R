@@ -72,7 +72,7 @@ path_derive_precommit_exec_macOS <- function() {
 
 
 path_derive_precommit_exec_impl <- function(candidate) {
-  assumed <- fs::path(candidate, "pre-commit")
+  assumed <- fs::path(candidate, precommit_executable())
   existant <- assumed[fs::file_exists(assumed)]
   if (length(existant) > 0) {
     existant[1]
@@ -87,7 +87,7 @@ path_derive_precommit_exec_impl <- function(candidate) {
 #' Returns `""` if no executable is found.
 #' @keywords internal
 path_derive_precommit_exec_path <- function() {
-  unname(Sys.which("pre-commit")[1])
+  unname(Sys.which(precommit_executable())[1])
 }
 
 path_derive_precommit_exec_conda <- function() {
@@ -99,10 +99,14 @@ path_derive_precommit_exec_conda <- function() {
       derived <- fs::path(
         path_reticulate,
         ifelse(is_windows(), "Scripts", ""),
-        ifelse(is_windows(), "pre-commit.exe", "pre-commit")
+        precommit_executable()
       )
       unname(ifelse(fs::file_exists(derived), derived, ""))
     },
     error = function(e) ""
   )
+}
+
+precommit_executable <- function() {
+  ifelse(is_windows(), "pre-commit.exe", "pre-commit")
 }
