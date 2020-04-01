@@ -28,6 +28,7 @@ lorenzwalthert
 macOS
 maxkb
 md
+miniconda
 navbar
 parsable
 pkgdown
@@ -38,6 +39,7 @@ py
 readme
 repo
 repos
+reticulate
 rmd
 rnw
 Rnw

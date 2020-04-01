@@ -32,34 +32,45 @@ The goal of this package is to twofold:
 
 ## Installation
 
-**With conda**
-
-Please make sure you have [conda](https://docs.conda.io/en/latest/)
-installed, either manually or with `reticulate::install_miniconda()`.
-The rest can be handled from R:
+You can install the package from GitHub:
 
 ``` r
-# once on your system
 remotes::install_github("lorenzwalthert/precommit")
-precommit::install_precommit()
+```
 
+To access pre-commit functionality from R, you also need to install the
+pre-commit framework. The following command line methods are tested to
+work with this R package:
+
+  - `$ pip install pre-commit --user` (macOS, Linux and Windows)
+    **outside** a conda or virtual environment.
+
+  - `$ brew install pre-commit` (macOS).
+
+Alternatively, you can handle the installation from R using
+[miniconda](https://docs.conda.io/en/latest/miniconda.html):
+
+  - install conda if you don’t have it already:
+    `reticulate::install_miniconda()`. This needs reticulate \>= 1.14.
+
+  - install the pre-commit framework with
+    `precommit::install_precommit()` or from the command line.
+
+Then, in a fresh R session:
+
+``` r
 # once in every git repo either
 # * after cloning a repo that already uses pre-commit or
 # * if you want introduce pre-commit to this repo
 precommit::use_precommit()
 ```
 
-This installs pre-commit and performs some other set-up tasks like
-creating the config file `.pre-commit-config.yaml`, where the hooks that
-will be run on `git commit` are specified. See
+The last command initializes pre-commit in your repo and performs some
+set-up tasks like creating the config file `.pre-commit-config.yaml`,
+where the hooks that will be run on `git commit` are specified. See
 `?precommit::use_precommit()` to see how you can use a custom
 `.pre-commit-config.yaml` instead of the default at initialization. You
 can (obviously) change edit the file manually at any time.
-
-**Without conda**
-
-If you don’t want to use conda, see `vignette("manual-installation")`
-for alternative installation methods.
 
 ## Usage
 

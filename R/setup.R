@@ -53,15 +53,21 @@ assert_is_git_repo <- function(path_root) {
 assert_is_installed <- function() {
   if (!is_installed()) {
     rlang::abort(paste0(
-      "pre-commit is not installed on your system (or we can't find it). ",
-      "If you have it installed, please set the R option ",
+      "pre-commit is not installed on your system (or we can't find it).\n\n",
+      "If you have it installed and you know where it is, please set the R option ",
       "`precommit.executable` to this ",
-      "path so it can be used to perform various pre-commit commands from R.",
-      "If not, install it with ",
-      "`precommit::install_precommit()` or an installation ",
-      "method in the official installation guide ",
-      "(https://pre-commit.com/#install). The latter requires you to set",
-      "the R option `precommit.executable` as well after the installation."
+      "path so it can be used to perform various pre-commit commands from R. ",
+      "If you think this is a standard location, please open an issue on GitHub ",
+      "so we can auto-detect this location in the future and spare new users some",
+      "set-up troubles.\n\n",
+      "If you don't know where the executable is stored, go back to the log output ",
+      "that resulted from the installation of pre-commit for hints. If you found ",
+      "it and you think it's a standard location, please open an issue on GitHub ",
+      "so we can auto-detect this location in the future and spare unexpereienced",
+      "users some trouble.\n\n",
+      "In case you are totally lost with these messages, you can most likely ",
+      "solve the problems with just using the conda installation method, see ",
+      "https://lorenzwalthert.github.io/precommit/ for how to do this."
     ))
   }
 }

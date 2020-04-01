@@ -1,7 +1,7 @@
 install_system <- function() {
   if (!is_installed()) {
     usethis::ui_info(paste(
-      "Installing pre-commit with conda into the virtual environment",
+      "Installing pre-commit into the conda environment",
       "`r-reticulate`."
     ))
     install_precommit_impl()
@@ -83,11 +83,10 @@ uninstall_precommit_system <- function(ask = TRUE) {
           "R option `precommit.executable` points to ",
           getOption("precommit.executable"),
           " from where we try to uninstall. ",
-          "Can only uninstall when installed with conda. ",
-          "Please remove manually or set the R option to the appropriate ",
-          "executable that lives in a conda environment. You find the ",
-          "currently used executable (conda or other) with ",
-          "`precommit::path_precommit_exec()`."
+          "Can only uninstall when installed with conda into env r-reticulate. ",
+          "Please remove pre-commit manually from the comamnd line with ",
+          "`$ conda uninstall pre-commit` after you activated \nyour environment",
+          " of choice."
         ))
       } else {
         out <- system2(
