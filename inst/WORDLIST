@@ -19,6 +19,7 @@ gitignore
 href
 https
 icloud
+impl
 isAvailable
 json
 Lifecycle
@@ -30,6 +31,7 @@ maxkb
 md
 miniconda
 navbar
+os
 parsable
 pkgdown
 pre

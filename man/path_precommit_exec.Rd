@@ -14,5 +14,6 @@ path_pre_commit_exec(check_if_exists = TRUE)
 exists.}
 }
 \description{
-Locate the pre-commit executable
+\code{\link[=path_precommit_exec]{path_precommit_exec()}} simply reads the R option \code{precommit.executable}, ]
+\code{\link[=path_derive_precommit_exec]{path_derive_precommit_exec()}} uses a heuristic to derive it from scratch.
 }
