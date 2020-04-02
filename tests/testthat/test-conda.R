@@ -113,3 +113,22 @@ test_that("can install pre-commit with remote config", {
     "to get the latest"
   )
 })
+
+test_that("fails gracefully when there are", {
+  if (!isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
+    expect_error(install_precommit(), NA)
+  }
+  withr::with_dir(
+    tempdir,
+    {
+      git2r::init()
+      on.exit(call_and_capture("git", "config --unset-all core.hooksPath"))
+      call_and_capture("git", "config core.hooksPath .githooks")
+      expect_error(
+        use_precommit(open = FALSE, force = TRUE),
+        "stdout: [ERROR] Cowardly refusing to install hooks with `core.hooksPath` set.",
+        fixed = TRUE
+      )
+    }
+  )
+})

@@ -52,6 +52,8 @@ Rr
 Rscript
 RStudio
 rstudioapi
+stderr
+stdout
 styler
 testthat
 tidyverse
