@@ -161,7 +161,7 @@ install_repo <- function(path_root) {
   tmp2 <- tempfile()
   writeLines('', tmp2)
   withr::with_dir(path_root, {
-    out <- suppressWarnings(system2(path_precommit_exec(),"install", stdout = tmp2, stderr = tmp2))
+    out <- suppressWarnings(system2(path_precommit_exec(),"install", stdout = tmp1, stderr = tmp2))
     if (out == 0) {
       usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(path_root)}.")
     } else {
