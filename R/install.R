@@ -168,7 +168,9 @@ install_repo <- function(path_root) {
       usethis::ui_oops("Failed to install pre-commit for repo {fs::path_file(path_root)}.")
       rlang::abort(paste0(
         "Problems during initialization: \nstderr: ", 
-        readLines(tmp2), "\n\nstdout:", readLines(tmp1)
+        paste0(readLines(tmp2), collapse = "\n"), "\n\nstdout:", 
+        paste0(readLines(tmp1), collapse = "\n"),
+        collapse = "\n"
       ))
     }
   })
