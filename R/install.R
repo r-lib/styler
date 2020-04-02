@@ -157,9 +157,9 @@ uninstall_precommit_repo <- function(ask) {
 
 install_repo <- function(path_root) {
   tmp1 <- tempfile()
-  writeLines('none', tmp1)
+  writeLines('', tmp1)
   tmp2 <- tempfile()
-  writeLines('none', tmp2)
+  writeLines('', tmp2)
   withr::with_dir(path_root, {
     out <- suppressWarnings(system2(path_precommit_exec(),"install", stdout = tmp2, stderr = tmp2))
     if (out == 0) {
