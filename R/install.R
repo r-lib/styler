@@ -85,7 +85,7 @@ uninstall_precommit_system <- function(ask = TRUE) {
           " from where we try to uninstall. ",
           "Can only uninstall when installed with conda into env r-reticulate. ",
           "Please remove pre-commit manually from the comamnd line with ",
-          "`$ conda uninstall pre-commit` after you activated \nyour environment",
+          "`$ conda uninstall pre-commit` after you activated your environment",
           " of choice."
         ))
       } else {
