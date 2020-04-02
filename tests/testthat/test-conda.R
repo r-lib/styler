@@ -12,6 +12,10 @@ test_that("can use pre-commit", {
     use_precommit(open = FALSE, force = TRUE, path_root = tempdir),
     "to get the latest"
   )
+  expect_output(
+    use_precommit(open = FALSE, force = FALSE, path_root = tempdir),
+    "There is already "
+  )
 })
 
 test_that("fails early if repo is not a git repo ", {
