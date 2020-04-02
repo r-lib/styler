@@ -42,10 +42,10 @@ use_precommit_config <- function(path_cp_config_from = getOption("precommit.path
     )
     usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
   } else {
-    usethis::ui_warn(paste0(
+    usethis::ui_info(paste0(
       "There is already a pre-commit configuration file in ",
       path_root,
-      ". Use `force = TRUE` to replace .pre-commit-config.yaml"
+      ". Use `force = TRUE` to replace .pre-commit-config.yaml."
     ))
   }
 
