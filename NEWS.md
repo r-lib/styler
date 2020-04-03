@@ -17,6 +17,8 @@
 - spell-check hook now removes blank lines hand has no blank line at EOF (#127).
 - depreciate `path_pre_commit_exec()` in favor of `path_precommit_exec()` 
   and adapt internals to replace `pre_commit` with `precommit` (#130).
+- more coherent error catching for system calls (#135).
+- internal refactoring (#136).
 
 # precommit 0.0.0.9017
 
