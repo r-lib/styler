@@ -2,7 +2,7 @@
 % Please edit documentation in R/call.R
 \name{call_and_capture}
 \alias{call_and_capture}
-\title{Calls and capture}
+\title{Make a call with \code{\link[=system2]{system2()}} and capture the effects.}
 \usage{
 call_and_capture(...)
 }
@@ -20,4 +20,3 @@ A list with:
 \description{
 Make a call with \code{\link[=system2]{system2()}} and capture the effects.
 }
-\keyword{internal}

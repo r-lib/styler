@@ -30,22 +30,6 @@ call_and_capture <- function(...) {
   )
 }
 
-install_repo <- function(path_root) {
-  tmp1 <- tempfile()
-  writeLines("", tmp1)
-  tmp2 <- tempfile()
-  writeLines("", tmp2)
-  withr::with_dir(path_root, {
-    out <- call_and_capture(path_precommit_exec(), "install")
-    if (out$exit_status == 0) {
-      usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(path_root)}.")
-    } else {
-      usethis::ui_oops("Failed to install pre-commit for repo {fs::path_file(path_root)}.")
-      communicate_captured_call(out, preamble = "Problems during initialization:")
-    }
-  })
-}
-
 #' @param x The output of [call_and_capture()].
 communicate_captured_call <- function(x, preamble = "") {
   if (x$exit_status != 0) {
