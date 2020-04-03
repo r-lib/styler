@@ -15,7 +15,7 @@ call_and_capture <- function(...) {
   )
   stderr <- readLines(stderr)
   if (exit_status != 0) {
-    
+
     if (length(stderr) < 1) {
       stderr <- paste0(
         "Could not recover stderr. Run the following command to get the error",
