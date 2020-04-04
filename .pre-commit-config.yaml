@@ -24,9 +24,9 @@ repos:
     -   id: end-of-file-fixer
 -   repo: local
     hooks:
-    -   id: consistent_release_tag
-        name: consistent_release_tag
-        entry: inst/consistent_release_tag
+    -   id: consistent-release-tag
+        name: consistent-release-tag
+        entry: inst/consistent-release-tag
         language: script
         stages: [commit, push]
     -   id: up_to_data_hooks_config_inst
