@@ -3,7 +3,7 @@
  is used by precommit to clone the repo is identical.
 
 Usage:
-  consistent-release-tag [--release-mode]
+  consistent-release-tag [--release-mode] <files>...
 
 ' -> doc
 arguments <- docopt::docopt(doc)
