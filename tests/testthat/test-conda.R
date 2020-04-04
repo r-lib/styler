@@ -132,3 +132,10 @@ test_that("fails gracefully when there are", {
     }
   )
 })
+
+
+test_that("fails gracefully when reticulate is not available", {
+  if (isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
+    expect_error(install_precommit(), "Please install the R package reticulate")
+  }
+})

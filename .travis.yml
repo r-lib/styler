@@ -50,6 +50,7 @@ jobs:
     before_script:
       - pip install pre-commit --user
       - R -q -e 'tic::before_script()'
+      - R -q -e 'remove.packages("reticulate")' # only used for installation and uninstallation.
   - name: macOS_brew # install pre-commit outside
     os: osx
     python: 3.5
@@ -59,12 +60,14 @@ jobs:
       - brew unlink python@2
       - brew install pre-commit
       - R -q -e 'tic::before_script()'
+      - R -q -e 'remove.packages("reticulate")' # only used for installation and uninstallation.
   - name: linux_pip # install pre-commit outside
     env: 
       - EXTERNAL_INSTALLATION="TRUE"
     before_script:
       - pip install pre-commit --user
       - R -q -e 'tic::before_script()'
+      - R -q -e 'remove.packages("reticulate")' # only used for installation and uninstallation.
 
 language: r
 cache: packages
