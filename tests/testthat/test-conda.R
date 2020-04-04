@@ -125,7 +125,7 @@ test_that("fails gracefully when there are", {
       on.exit(call_and_capture("git", "config --unset-all core.hooksPath"))
       call_and_capture("git", "config core.hooksPath .githooks")
       expect_error(
-        use_precommit(open = FALSE, force = TRUE),
+        use_precommit(open = FALSE, force = TRUE, path_root = tempdir),
         "stdout: [ERROR] Cowardly refusing to install hooks with `core.hooksPath` set.",
         fixed = TRUE
       )
