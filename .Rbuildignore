@@ -13,6 +13,5 @@
 ^\.pre-commit-config\.yaml$
 ^API$
 ^inst/consistent-release-tag$
-^inst/bin$
 ^inst/WORDLIST$
 ^inst/hooks-config-to-inst$
