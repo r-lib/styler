@@ -44,7 +44,7 @@ to make sure git calls the hooks before the next commit.
 \section{What it does the funciton do?}{
 
 \itemize{
-\item installs pre-commit in your current directory.
+\item sets up pre-commit in your current directory with \verb{$ pre-commit install}.
 \item sets up a template \code{.pre-commit-config.yaml}.
 \item autoupdates the template to make sure you get the latest versions of the
 hooks.

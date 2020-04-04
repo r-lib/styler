@@ -14,7 +14,7 @@
 #'   to make sure git calls the hooks before the next commit.
 #'
 #' @section What it does the funciton do?:
-#' * installs pre-commit in your current directory.
+#' * sets up pre-commit in your current directory with `$ pre-commit install`.
 #' * sets up a template `.pre-commit-config.yaml`.
 #' * autoupdates the template to make sure you get the latest versions of the
 #'   hooks.
