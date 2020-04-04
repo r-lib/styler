@@ -59,6 +59,8 @@ precommit::use_precommit()
 The last call can be omitted by users who have [automatically enabled 
 pre-commit hooks](https://pre-commit.com/#automatically-enabling-pre-commit-on-repositories).
 
+To enforce all hooks pass, you can follow the [advice on how to use pre-commit in a CI/CD setup](https://pre-commit.com/#usage-in-continuous-integration).
+
 ## What if not all people who are committing to this repo want to use the hooks?
 
 This is not a problem, git will only run the hooks in a local repo after
