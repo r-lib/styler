@@ -79,7 +79,7 @@ update_rev_in_config <- function(new_version,
   others <- setdiff(grep("-   repo:", config, fixed = TRUE), ours)
   next_after_ours <- others[others > ours]
   rev <- grep("rev:", config)
-  our_rev <- rev[rev > is_ours & rev < next_after_ours]
+  our_rev <- rev[rev > ours & rev < next_after_ours]
 
   our_rev_without_comments <- gsub("#.*", "", config[our_rev])
   if (grepl("#", config[our_rev])) {
