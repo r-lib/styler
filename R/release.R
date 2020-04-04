@@ -16,11 +16,12 @@
 #' @keywords internal
 release_gh <- function(bump = "patch") {
   usethis::ui_nope("Did you prepare NEWS.md for this version?")
+  autoupdate()
   if (length(unlist(git2r::status()) > 0)) {
     rlang::abort("Need clean git directory before starting release process.")
   }
 
-  if (!git2r::is_branch("master")) {
+  if (git2r::repository_head()$name != "master") {
     rlang::abort(paste(
       "Need to be on branch 'master' to create a release, otherwise autoudate",
       "won't use the new ref."
