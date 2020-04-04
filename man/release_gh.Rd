@@ -4,7 +4,7 @@
 \alias{release_gh}
 \title{Create a new release on GitHub}
 \usage{
-release_gh(bump = "dev", check_fun = rlang::abort)
+release_gh(bump = "dev")
 }
 \arguments{
 \item{bump}{The bump increment, either "dev", "patch", "minor" or "major".}

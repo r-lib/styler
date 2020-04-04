@@ -14,7 +14,7 @@
 #' - bump description with dev
 #' - commit and push DESCRIPTION and .pre-commit-config.yaml
 #' @keywords internal
-release_gh <- function(bump = "dev", check_fun = rlang::abort) {
+release_gh <- function(bump = "dev") {
   sys_call <- function(...) {
     status <- system2(...)
     if (status != 0) {
@@ -65,11 +65,11 @@ release_prechecks <- function() {
   abort_if_not_yes("Did you prepare NEWS.md for this version?")
   autoupdate()
   if (length(unlist(git2r::status()) > 0)) {
-    check_fun("Need clean git directory before starting release process.")
+    rlang::abort("Need clean git directory before starting release process.")
   }
 
   if (git2r::repository_head()$name != "master") {
-    check_fun(paste(
+    rlang::abort(paste(
       "Need to be on branch 'master' to create a release, otherwise autoudate",
       "won't use the new ref."
     ))
