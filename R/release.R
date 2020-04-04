@@ -21,18 +21,7 @@ release_gh <- function(bump = "dev", check_fun = rlang::abort) {
       rlang::abort("system2 failed.")
     }
   }
-  abort_if_not_yes("Did you prepare NEWS.md for this version?")
-  autoupdate()
-  if (length(unlist(git2r::status()) > 0)) {
-    check_fun("Need clean git directory before starting release process.")
-  }
-
-  if (git2r::repository_head()$name != "master") {
-    check_fun(paste(
-      "Need to be on branch 'master' to create a release, otherwise autoudate",
-      "won't use the new ref."
-    ))
-  }
+  release_prechecks()
 
   path_template_config <- "inst/pre-commit-config.yaml"
 
@@ -70,6 +59,27 @@ release_gh <- function(bump = "dev", check_fun = rlang::abort) {
 
   sys_call("git", glue::glue("push"))
   usethis::ui_done("Committed and pushed dev version.")
+}
+
+release_prechecks <- function() {
+  abort_if_not_yes("Did you prepare NEWS.md for this version?")
+  autoupdate()
+  if (length(unlist(git2r::status()) > 0)) {
+    check_fun("Need clean git directory before starting release process.")
+  }
+
+  if (git2r::repository_head()$name != "master") {
+    check_fun(paste(
+      "Need to be on branch 'master' to create a release, otherwise autoudate",
+      "won't use the new ref."
+    ))
+  } else {
+    tmp <- tempfile()
+    system2("git", "diff HEAD..origin/master", stdout = tmp)
+    if (length(readLines(tmp) > 0)) {
+      rlang::abort("remote master must be even with local master before release process can start.")
+    }
+  }
 }
 
 #' Updates the hook version ref of {precommit} in a `.pre-commit-config` file
