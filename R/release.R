@@ -14,15 +14,21 @@
 #' - bump description with dev
 #' - commit and push DESCRIPTION and .pre-commit-config.yaml
 #' @keywords internal
-release_gh <- function(bump = "patch") {
-  usethis::ui_nope("Did you prepare NEWS.md for this version?")
+release_gh <- function(bump = "dev", check_fun = rlang::abort) {
+  sys_call <- function(...) {
+    status <- system2(...)
+    if (status != 0) {
+      rlang::abort("system2 failed.")
+    }
+  }
+  abort_if_not_yes("Did you prepare NEWS.md for this version?")
   autoupdate()
   if (length(unlist(git2r::status()) > 0)) {
-    rlang::abort("Need clean git directory before starting release process.")
+    check_fun("Need clean git directory before starting release process.")
   }
 
   if (git2r::repository_head()$name != "master") {
-    rlang::abort(paste(
+    check_fun(paste(
       "Need to be on branch 'master' to create a release, otherwise autoudate",
       "won't use the new ref."
     ))
@@ -31,35 +37,38 @@ release_gh <- function(bump = "patch") {
   path_template_config <- "inst/pre-commit-config.yaml"
 
   old_version <- paste0("v", desc::desc_get_version())
-  desc::desc_bump_version(bump)
+  dsc <- desc::description$new()
+  suppressMessages(dsc$bump_version(bump))
+  new_version <- paste0("v", dsc$get_version())
+  abort_if_not_yes("Your target release has version {new_version}, correct?")
+  dsc$write()
   usethis::ui_done("Bumped version.")
-  new_version <- paste0("v", desc::desc_get_version())
 
   update_rev_in_config(new_version, path_template_config)
   usethis::ui_done("Updated version in default config.")
-  system2("./inst/consistent-release-tag", "--release-mode")
   msg <- glue::glue("Release {new_version}, see NEWS.md for details.")
-  system2("git", glue::glue('commit DESCRIPTION {path_template_config} -m "{msg}"'),
+  sys_call("git", glue::glue('commit DESCRIPTION {path_template_config} -m "{msg}"'),
     env = "SKIP=spell-check,consistent-release-tag"
   )
   usethis::ui_done("Committed DESCRIPTION and config template")
-  system2("git", glue::glue('tag -a {new_version} -m "{msg}"'))
+  sys_call("git", glue::glue('tag -a {new_version} -m "{msg}"'))
+  sys_call("./inst/consistent-release-tag", "--release-mode")
   usethis::ui_done("Tagged last commit with release version.")
-  system2("git", glue::glue("push --tags"),
+  sys_call("git", glue::glue("push --tags"),
     env = "SKIP=consistent-release-tag"
   )
-  system2("git", glue::glue("push"),
+  sys_call("git", glue::glue("push"),
     env = "SKIP=consistent-release-tag"
   )
   usethis::ui_done("Pushed commits and tags.")
   precommit::autoupdate() # only updates if tag is on the master branch
   desc::desc_bump_version("dev")
   usethis::ui_done("Bumped version to dev")
-  system2("git", glue::glue('commit DESCRIPTION .pre-commit-config.yaml -m "use latest release"'),
+  sys_call("git", glue::glue('commit DESCRIPTION .pre-commit-config.yaml -m "use latest release"'),
     env = "SKIP=spell-check"
   )
 
-  system2("git", glue::glue("push"))
+  sys_call("git", glue::glue("push"))
   usethis::ui_done("Committed and pushed dev version.")
 }
 
@@ -95,4 +104,11 @@ update_rev_in_config <- function(new_version,
     writeLines(config, path)
   }
 
+}
+
+abort_if_not_yes <- function(...) {
+  answer <- usethis::ui_yeah(..., .envir = parent.frame(n = 1))
+  if (!answer) {
+    rlang::abort("Assertion failed")
+  }
 }
