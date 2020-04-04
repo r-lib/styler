@@ -1,4 +1,11 @@
 install_system <- function() {
+  if (!rlang::is_installed("reticulate")) {
+    rlang::abort(paste(
+      "Please install the R package reticulate to use this installation",
+      "method. You can also use alternative installation methods that don't",
+      "require reticulate. See https://lorenzwalthert.github.io/precommit."
+    ))
+  }
   if (!is_installed()) {
     usethis::ui_info(paste(
       "Installing pre-commit into the conda environment",
@@ -109,6 +116,9 @@ uninstall_system <- function(ask = TRUE) {
           "Please remove pre-commit manually from the comamnd line. "
         ))
       } else {
+        if (!rlang::is_installed("reticulate")) {
+          rlang::abort("Must install the R package reticulate to use this functionality.")
+        }
         out <- call_and_capture(
           reticulate::conda_binary(),
           "remove -n r-reticulate pre-commit --yes"

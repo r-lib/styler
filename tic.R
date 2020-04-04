@@ -1,5 +1,7 @@
 Sys.setenv(LINTR_COMMENT_BOT = "false")
-do_package_checks(error_on = "note")
+do_package_checks(
+  error_on = ifelse(tic::ci_has_env("EXTERNAL_INSTALLATION"), "warning", "note")
+)
 if (Sys.getenv("id_rsa") != "" && ci()$get_branch() == "master") {
   # pkgdown documentation can be built optionally. Other example criteria:
   # - `inherits(ci(), "TravisCI")`: Only for Travis CI
