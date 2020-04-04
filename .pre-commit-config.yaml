@@ -3,7 +3,7 @@
 default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9033
+    rev: v0.0.0.9035
     hooks: 
     # any R project
     -   id: style-files
