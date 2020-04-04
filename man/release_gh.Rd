@@ -6,6 +6,9 @@
 \usage{
 release_gh(bump = "patch")
 }
+\arguments{
+\item{bump}{The bump increment, either "dev", "patch", "minor" or "major".}
+}
 \description{
 This must be done \strong{before} a CRAN release.
 }
@@ -15,11 +18,12 @@ This must be done \strong{before} a CRAN release.
 \item update default config in inst/
 \item commit
 \item git tag
-\item run conistent-release-tag hook with --release-mode (passing args to hooks
-not possible interactivley, hence we run in advance).
-\item commit and push with skipping conistent-release-tag
+\item run \code{inst/consistent-release-tag} hook with --release-mode (passing args to hooks
+not possible interactively, hence we run in advance).
+\item commit and push with skipping \code{inst/consistent-release-tag}.
 \item autoupdate own config file
 \item bump description with dev
 \item commit and push DESCRIPTION and .pre-commit-config.yaml
 }
 }
+\keyword{internal}

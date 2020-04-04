@@ -1,4 +1,3 @@
-
 args
 autoupdate
 cmd
@@ -10,10 +9,12 @@ cp
 Ctrl
 deps
 desc
+dev
 env
 EOF
 fs
 getOption
+gh
 github
 gitignore
 href

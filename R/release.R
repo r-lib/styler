@@ -1,17 +1,19 @@
 #' Create a new release on GitHub
 #'
 #' This must be done **before** a CRAN release.
+#' @param bump The bump increment, either "dev", "patch", "minor" or "major".
 #' @details
 #' - bump description.
 #' - update default config in inst/
 #' - commit
 #' - git tag
-#' - run conistent-release-tag hook with --release-mode (passing args to hooks
-#'   not possible interactivley, hence we run in advance).
-#' - commit and push with skipping conistent-release-tag
+#' - run `inst/consistent-release-tag` hook with --release-mode (passing args to hooks
+#'   not possible interactively, hence we run in advance).
+#' - commit and push with skipping `inst/consistent-release-tag`.
 #' - autoupdate own config file
 #' - bump description with dev
 #' - commit and push DESCRIPTION and .pre-commit-config.yaml
+#' @keywords internal
 release_gh <- function(bump = "patch") {
   usethis::ui_nope("Did you prepare NEWS.md for this version?")
   if (length(unlist(git2r::status()) > 0)) {
@@ -70,8 +72,8 @@ release_gh <- function(bump = "patch") {
 #' @apram new_version The version string of the new version.
 #' @param path The path to a pre-commit config file.
 #' @keywords internal
-release_update_rev_in_config <- function(new_version,
-                                         path = "inst/pre-commit-config.yaml") {
+update_rev_in_config <- function(new_version,
+                                 path = "inst/pre-commit-config.yaml") {
   config <- readLines(path)
   ours <- grep("-   repo: https://github.com/lorenzwalthert/precommit", config, fixed = TRUE)
   others <- setdiff(grep("-   repo:", config, fixed = TRUE), ours)
