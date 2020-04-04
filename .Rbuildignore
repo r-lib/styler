@@ -14,6 +14,5 @@
 ^API$
 ^inst/consistent-release-tag$
 ^inst/bin$
-^inst/release-gh$
 ^inst/WORDLIST$
-^hooks-config-to-inst$
+^inst/hooks-config-to-inst$
