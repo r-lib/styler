@@ -12,4 +12,6 @@
 ^pkgdown$
 ^\.pre-commit-config\.yaml$
 ^API$
-^inst/consistent_release_tag$
+^inst/consistent-release-tag$
+^inst/WORDLIST$
+^inst/hooks-config-to-inst$
