@@ -1,4 +1,10 @@
-# precommit v0.0.0.9031 and higher
+# precommit v0.0.0.9039 (unreleased)
+
+- conda is a suggested dependency now, so those who choose a different 
+  installation method have a more lightweight dependenc graph (#136).
+
+
+# precommit v0.0.0.9031 up to v0.0.0.9038
 
 Test release process.
 
