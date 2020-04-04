@@ -1,0 +1,52 @@
+#!/usr/bin/env Rscript
+
+'Create a new release on GitHub:
+ - bump description.
+ - update default config in inst/.
+ - commit
+ - git tag
+ - run conistent-release-tag hook with --release-mode
+ - push with skipping conistent-release-tag
+ - autoupdate own config file
+ - bump description with dev 
+ - commit DESCRIPTION and .pre-commit-config.yaml
+ - push
+ 
+Usage:
+  release-gh <bump>
+
+Options:
+  <bump>  The bump increment, either "dev", "patch", "minor" or "major".
+
+' -> doc
+if (length(unlist(git2r::status()) > 0)) {
+  rlang::abort("Need clean git directory before starting release process.")
+}
+arguments <- docopt::docopt(doc)
+path_template_config <- "inst/pre-commit-hooks.yaml"
+old_version <- paste0("v", desc::desc_get_version())
+desc::desc_bump_version(args$bump)
+new_version <- paste0("v", desc::desc_get_version())
+
+precommit:::update_rev_in_config(new_version, path_template_config)
+
+system2('git', glue::glue('tag -a {new_version} -m "{msg}"'))
+system2('./inst/consistent-release-tag', '--release-mode')
+
+msg <- glue::glue("Release {new_version}, see NEWS.md for details.")
+system2('git', glue::glue('commit DESCRIPTION {path_template_config} -m "{msg}"'),
+  env = "SKIP=spell-check,consistent-release-tag"
+)
+
+system2('git', glue::glue('push --tags'),
+  env = "SKIP=consistent-release-tag"
+)
+system2('git', glue::glue('push'),
+  env = "SKIP=consistent-release-tag"
+)
+
+precommit::autoupdate()
+desc::desc_bump_version('dev')
+system2('git', glue::glue('commit DESCRIPTION .pre-commit-config.yaml -m "use latest release"'),
+  env = "SKIP=spell-check"
+)
