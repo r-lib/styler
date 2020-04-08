@@ -1,7 +1,9 @@
 test_that("can set path to local config", {
+  tmp <- tempdir()
+  test.pkg <- fs::dir_create(tmp, "test.proj")
   expect_equal(
-    set_path_cp_config_from(NULL),
-    system.file("pre-commit-config.yaml", package = "precommit")
+    set_path_cp_config_from(NULL, path_root = test.pkg),
+    system.file("pre-commit-config-proj.yaml", package = "precommit")
   )
   expect_error(
     set_path_cp_config_from(tempfile()),
