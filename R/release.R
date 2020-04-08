@@ -23,7 +23,10 @@ release_gh <- function(bump = "dev") {
   }
   release_prechecks()
 
-  path_template_config <- "inst/pre-commit-config.yaml"
+  path_template_config <- c(
+    "inst/pre-commit-config-pkg.yaml",
+    "inst/pre-commit-config-proj.yaml"
+  )
 
   old_version <- paste0("v", desc::desc_get_version())
   dsc <- desc::description$new()
@@ -33,10 +36,12 @@ release_gh <- function(bump = "dev") {
   dsc$write()
   usethis::ui_done("Bumped version.")
 
-  update_rev_in_config(new_version, path_template_config)
+  purrr::walk(path_template_config, update_rev_in_config,
+    new_version = new_version
+  )
   usethis::ui_done("Updated version in default config.")
   msg <- glue::glue("Release {new_version}, see NEWS.md for details.")
-  sys_call("git", glue::glue('commit DESCRIPTION {path_template_config} -m "{msg}"'),
+  sys_call("git", glue::glue('commit DESCRIPTION {paste0(path_template_config, collapse = " ")} -m "{msg}"'),
     env = "SKIP=spell-check,consistent-release-tag"
   )
   usethis::ui_done("Committed DESCRIPTION and config template")
