@@ -11,7 +11,7 @@ repos:
     -   id: deps-in-desc
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
-    -   id: roxygenize # before spell check
+    -   id: roxygenize # spell-check needs up-to date doc.
     -   id: spell-check
     -   id: use-tidy-description
 -   repo: https://github.com/pre-commit/pre-commit-hooks
@@ -19,7 +19,7 @@ repos:
     hooks: 
     -   id: check-added-large-files
     -   id: end-of-file-fixer
-        exclude: '\.Rd'
+        exclude: '\.Rd' # sometimes roxygen fails to generate EOF blank line.
 -   repo: local
     hooks:
     -   id: consistent-release-tag
