@@ -13,7 +13,7 @@
 #' * You cloned a repo that has a `.pre-commit-config.yaml` already. You need
 #'   to make sure git calls the hooks before the next commit.
 #'
-#' @section What it does the funciton do?:
+#' @section What it does the function do?:
 #' * sets up pre-commit in your current directory with `$ pre-commit install`.
 #' * sets up a template `.pre-commit-config.yaml`.
 #' * autoupdates the template to make sure you get the latest versions of the

@@ -1,10 +1,3 @@
-is_package <- function(base_path = here::here()) {
-  res <- tryCatch(rprojroot::find_package_root_file(path = base_path),
-    error = function(e) NULL
-  )
-  !is.null(res)
-}
-
 is_windows <- function() {
   identical(.Platform$OS.type, "windows")
 }
@@ -23,4 +16,13 @@ is_url <- function(text) {
 path_if_exist <- function(...) {
   path <- c(...)
   path[fs::file_exists(path)]
+}
+
+is_package <- function(path_root = here::here()) {
+  rlang::with_handlers(
+    rprojroot::find_package_root_file(path = path_root),
+    error = function(e) NULL
+  ) %>%
+    is.null() %>%
+    magrittr::not()
 }

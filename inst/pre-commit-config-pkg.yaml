@@ -1,34 +1,25 @@
 # All available hooks: https://pre-commit.com/hooks.html
 # R specific hooks: https://github.com/lorenzwalthert/precommit
-default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
     rev: v0.0.0.9038
     hooks: 
     -   id: parsable-R
     -   id: no-browser-statement
+    -   id: lintr
     -   id: readme-rmd-rendered
+    -   id: spell-check
     -   id: deps-in-desc
     -   id: style-files
-        args: [--style_pkg=styler, --style_fun=tidyverse_style]
-    -   id: roxygenize # before spell check
-    -   id: spell-check
+        args: [--style_pkg=styler, --style_fun=tidyverse_style]    
+    -   id: roxygenize
+    # codemeta must be above use-tidy-description when both are used
+    # -   id: codemeta-description-updated
     -   id: use-tidy-description
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
+    rev: v1.2.3
     hooks: 
     -   id: check-added-large-files
+        args: ['--maxkb=200']
     -   id: end-of-file-fixer
         exclude: '\.Rd'
--   repo: local
-    hooks:
-    -   id: consistent-release-tag
-        name: consistent-release-tag
-        entry: inst/consistent-release-tag
-        language: script
-        stages: [commit, push]
-    -   id: hooks-config-to-inst
-        name: hooks-config-to-inst
-        entry: inst/hooks-config-to-inst
-        language: script
-        stages: [commit, push]

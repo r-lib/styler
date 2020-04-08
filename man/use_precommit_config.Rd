@@ -13,11 +13,11 @@ use_precommit_config(
 )
 }
 \arguments{
-\item{path_cp_config_from}{Path or URL to a \code{.pre-commit-config.yaml}. This config file
-will be hard-copied into \code{path_root}. If \code{NULL}, we use
-a default config from the path returned by
-\code{system.file("pre-commit-config.yaml", package = "precommit")}. See
-section 'Copying an existing config file'.}
+\item{path_cp_config_from}{Path or URL to a \code{.pre-commit-config.yaml}. This
+config file will be hard-copied into \code{path_root}. If \code{NULL}, we check if
+\code{path_root} is a package or project directory using
+\code{\link[rprojroot:find_package_root_file]{rprojroot::find_package_root_file()}}, and resort to an appropriate default
+config. See section 'Copying an existing config file'.}
 
 \item{force}{Whether to replace an existing config file.}
 
@@ -34,12 +34,11 @@ Initiate a pre-commit config file
 }
 \section{Copying an existing config file}{
 
-You can use an existing \code{.pre-commit-config.yaml} file when intiializing
-pre-commit with \code{\link[=use_precommit]{use_precommit()}} using the argument \code{path_cp_config_from} to copy
-an existing config file into your repo. This argument
-defaults to the R option \code{precommit.path_cp_config_from}, so you may want to
-set this option in your \code{.Rprofile} for convenience.
-Note that this is \strong{not} equivalent
+You can use an existing \code{.pre-commit-config.yaml} file when initializing
+pre-commit with \code{\link[=use_precommit]{use_precommit()}} using the argument \code{path_cp_config_from} to
+copy an existing config file into your repo. This argument defaults to the R
+option \code{precommit.path_cp_config_from}, so you may want to set this option in
+your \code{.Rprofile} for convenience. Note that this is \strong{not} equivalent
 to the \code{--config} option in the CLI command \verb{pre-commit install} and similar,
 which do \emph{not} copy a config file into a project root (and allow to put it
 under version control), but rather link it in some more or less transparent
