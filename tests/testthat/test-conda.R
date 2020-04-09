@@ -36,7 +36,7 @@ test_that("can use custom config file ", {
   fs::dir_create(tempdir2)
   path_custom <- fs::path(tempdir2, "some-precommit.yaml")
   new_text <- "# 4js93"
-  readLines(system.file("pre-commit-config.yaml", package = "precommit")) %>%
+  readLines(system.file("pre-commit-config-proj.yaml", package = "precommit")) %>%
     c(new_text) %>%
     writeLines(path_custom)
   git2r::init(tempdir)

@@ -1,5 +1,6 @@
 args
 autoupdate
+CLI
 cmd
 CMD
 codemeta
@@ -10,6 +11,8 @@ Ctrl
 deps
 desc
 dev
+docopt
+emph
 env
 EOF
 fs
@@ -17,9 +20,11 @@ getOption
 gh
 github
 gitignore
+gsub
 href
 https
 icloud
+idx
 impl
 isAvailable
 json
@@ -38,6 +43,8 @@ pkgdown
 pre
 precommit
 precommithooks
+proj
+purrr
 py
 readme
 repo
@@ -51,13 +58,17 @@ ropenscilabs
 roxygen
 roxygenize
 RoxygenNote
+Rprofile
+rprojroot
 rR
 Rr
 Rscript
 RStudio
 rstudioapi
+seealso
 stderr
 stdout
+stopifnot
 styler
 testthat
 tidyverse

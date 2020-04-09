@@ -18,7 +18,8 @@ arguments <- docopt::docopt(doc)
 # - release new version on CRAN, make sure all tags correspond to 0.2.0.
 
 path_config <- c(
-  fs::path("inst", "pre-commit-config.yaml"),
+  fs::path("inst", "pre-commit-config-pkg.yaml"),
+  fs::path("inst", "pre-commit-config-proj.yaml"),
   if (!arguments$`release-mode`) fs::path(".pre-commit-config.yaml")
 )
 
