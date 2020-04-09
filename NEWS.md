@@ -1,8 +1,8 @@
 # precommit v0.0.0.9039 (unreleased)
 
 - conda is a suggested dependency now, so those who choose a different 
-  installation method have a more lightweight dependenc graph (#136).
-
+  installation method have a more lightweight dependency graph (#136).
+- Use more thoughtful order for hooks, between pkg and project (#142).
 
 # precommit v0.0.0.9031 up to v0.0.0.9038
 
