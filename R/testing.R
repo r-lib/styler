@@ -82,7 +82,7 @@ run_test_impl <- function(path_executable,
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
   fs::file_copy(path_candidate, tempdir, overwrite = TRUE)
   path_stderr <- tempfile()
-  withr::with_dir(
+  status <- withr::with_dir(
     fs::path_dir(path_candidate_temp),
     {
       # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
@@ -97,7 +97,7 @@ run_test_impl <- function(path_executable,
   if (expect_success) {
     # file not changed + no stderr
     contents <- readLines(path_stderr)
-    if (!identical(contents, character(0))) {
+    if (status != 0) {
       testthat::fail("Expected: No error. Found:", contents)
     }
     testthat::expect_equivalent(candidate, reference)
