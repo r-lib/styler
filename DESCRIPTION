@@ -16,7 +16,7 @@ Imports:
     rlang,
     rprojroot,
     rstudioapi,
-    usethis (>= 1.5.0),
+    usethis (>= 1.6.0),
     withr,
     yaml
 Suggests: 
