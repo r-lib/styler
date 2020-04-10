@@ -8,11 +8,11 @@ test_that("can install pre-commit", {
 })
 
 test_that("can use pre-commit", {
-  expect_output(
+  expect_message(
     use_precommit(open = FALSE, force = TRUE, path_root = tempdir),
     "to get the latest"
   )
-  expect_output(
+  expect_message(
     use_precommit(open = FALSE, force = FALSE, path_root = tempdir),
     "There is already "
   )
@@ -52,7 +52,7 @@ test_that("can use custom config file ", {
 
 test_that("Can uninstall pre-commit (repo scope)", {
   # with all files there
-  expect_output(
+  expect_message(
     uninstall_precommit(scope = "repo", path_root = tempdir),
     paste(
       "Uninstalled pre-commit from repo scope.*",
@@ -61,7 +61,7 @@ test_that("Can uninstall pre-commit (repo scope)", {
   )
   expect_false(fs::file_exists(fs::path(tempdir, ".pre-commit-config.yaml")))
   # second time
-  expect_output(
+  expect_message(
     uninstall_precommit(scope = "repo", path_root = tempdir),
     "You can re-install"
   )
@@ -69,7 +69,7 @@ test_that("Can uninstall pre-commit (repo scope)", {
   # when there is no pre-commit.yaml anymore
   use_precommit(open = FALSE, force = TRUE, path_root = tempdir)
   fs::file_delete(fs::path(tempdir, ".pre-commit-config.yaml"))
-  expect_output(
+  expect_message(
     uninstall_precommit(scope = "repo", path_root = tempdir),
     paste("Uninstalled pre-commit from repo scope.*")
   )
@@ -82,7 +82,7 @@ test_that("Can uninstall (globally)", {
       "installed with conda"
     )
   } else {
-    expect_output(
+    expect_message(
       uninstall_precommit(scope = "global", ask = "none"),
       "Removed pre-commit from"
     )
@@ -103,7 +103,7 @@ test_that("can install pre-commit with remote config", {
     expect_error(install_precommit(), NA)
   }
 
-  expect_output(
+  expect_message(
     {
       git2r::init(path = tempdir)
       use_precommit(example_remote_config(),
