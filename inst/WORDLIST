@@ -1,3 +1,4 @@
+api
 args
 autoupdate
 CLI
@@ -28,17 +29,21 @@ idx
 impl
 isAvailable
 json
+knitr
 Lifecycle
 lintr
 lorenz
 lorenzwalthert
 macOS
+magrittr
 maxkb
 md
 miniconda
 navbar
+oneliner
 os
 parsable
+pkgapi
 pkgdown
 pre
 precommit
@@ -51,9 +56,12 @@ repo
 repos
 reticulate
 rlang
+rmarkdown
 rmd
 rnw
 Rnw
+roclet
+roclets
 ropenscilabs
 roxygen
 roxygenize
@@ -76,6 +84,7 @@ Uninstallation
 Upvote
 usethis
 usr
+VignetteBuilder
 walthert
 Walthert
 withr
