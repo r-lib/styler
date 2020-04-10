@@ -54,10 +54,7 @@ test_that("Can uninstall pre-commit (repo scope)", {
   # with all files there
   expect_message(
     uninstall_precommit(scope = "repo", path_root = tempdir),
-    paste(
-      "Uninstalled pre-commit from repo scope.*",
-      "Removed \\.pre-commit-config\\.yaml.*"
-    )
+    "Uninstalled pre-commit from repo scope.*"
   )
   expect_false(fs::file_exists(fs::path(tempdir, ".pre-commit-config.yaml")))
   # second time
