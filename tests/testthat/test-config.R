@@ -29,12 +29,12 @@ test_that("defaults to right config depending on whether or not root is a pkg", 
     desc$set(Package = "test.pkg")
     desc$write("DESCRIPTION")
   })
-  expect_output(
+  expect_message(
     set_path_cp_config_from(NULL, path_root = test.pkg),
     "pkg\\.yaml"
   )
   fs::file_delete(fs::path(test.pkg, "DESCRIPTION"))
-  expect_output(
+  expect_message(
     set_path_cp_config_from(NULL, path_root = test.pkg),
     "proj\\.yaml"
   )

@@ -121,5 +121,5 @@ set_path_cp_config_from <- function(path_cp_config_from,
 
 
 example_remote_config <- function() {
-  "https://raw.githubusercontent.com/lorenzwalthert/precommit/master/inst/pre-commit-config.yaml"
+  "https://raw.githubusercontent.com/lorenzwalthert/precommit/master/inst/pre-commit-config-proj.yaml"
 }
