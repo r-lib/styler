@@ -139,7 +139,7 @@ tidyverse_style <- function(scope = "tokens",
           except_token_before = "COMMENT"
         )
       },
-      remove_line_break_in_empty_fun_call,
+      purrr::partial(remove_line_break_in_fun_call, strict = strict),
       add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
       set_linebreak_after_ggplot2_plus = if (strict) set_linebreak_after_ggplot2_plus
     )

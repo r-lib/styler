@@ -4,7 +4,7 @@
 \alias{set_line_break_if_call_is_multi_line}
 \alias{set_line_break_after_opening_if_call_is_multi_line}
 \alias{set_line_break_before_closing_call}
-\alias{remove_line_break_in_empty_fun_call}
+\alias{remove_line_break_in_fun_call}
 \title{Set line break for multi-line function calls}
 \usage{
 set_line_break_after_opening_if_call_is_multi_line(
@@ -15,7 +15,7 @@ set_line_break_after_opening_if_call_is_multi_line(
 
 set_line_break_before_closing_call(pd, except_token_before)
 
-remove_line_break_in_empty_fun_call(pd)
+remove_line_break_in_fun_call(pd, strict)
 }
 \arguments{
 \item{pd}{A parse table.}
