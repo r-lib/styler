@@ -165,16 +165,6 @@ styler functionality is made available through other tools, most notably
     styler, containing various vignettes function documentation as well
     as a change-log.
 
-  - [Blog
-    post](https://lorenzwalthert.netlify.com/post/customizing-styler-the-quick-way/)
-    about how you can customize styler without being an expert.
-
-  - A [tidyverse.org blog
-    post](https://www.tidyverse.org/articles/2017/12/styler-1.0.0/)
-    introducing the functionality of styler and a [follow-up
-    post](https://www.tidyverse.org/blog/2019/11/styler-1-2-0/) that
-    introduces the new features since release 1.0.0.
-
   - The wiki of [Google Summer of Code
     2017](https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting)
     or the [pkgdown](https://r-lib.github.io/styler/) page contain
