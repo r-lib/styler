@@ -170,9 +170,10 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
   pd
 }
 
-remove_line_break_before_round_closing_fun_dec <- function(pd) {
+remove_line_breaks_in_fun_dec <- function(pd) {
   if (is_function_dec(pd)) {
     round_after <- pd$token == "')'" & pd$token_before != "COMMENT"
+    pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
     pd$lag_newlines[round_after] <- 0L
   }
   pd
