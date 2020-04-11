@@ -1,23 +1,20 @@
 # All available hooks: https://pre-commit.com/hooks.html
+# R specific hooks: https://github.com/lorenzwalthert/precommit
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9027
+    rev: v0.0.0.9038
     hooks:
-    # -   id: lintr
-    # -   id: style-files Does style *-in.R files in tests otherwise!
     -   id: parsable-R
     -   id: no-browser-statement
+    # -   id: lintr
     -   id: readme-rmd-rendered
-    #  R package development
-    -   id: roxygenize
-    -   id: use-tidy-description
-    -   id: deps-in-desc
+    -   id: spell-check
+    -   id: style-files
+        args: [--style_pkg=styler, --style_fun=tidyverse_style]
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.4.0
+    rev: v2.5.0
     hooks:
     -   id: check-added-large-files
         args: ['--maxkb=200']
--   repo: https://github.com/lorenzwalthert/precommit-markdown-link-check
-    rev: v0.0.0.9002  # Use the sha / tag you want to point at
-    hooks:
-    -   id: markdown-link-check
+    -   id: end-of-file-fixer
+        exclude: '\.Rd'
