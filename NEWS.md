@@ -23,6 +23,12 @@
 
 ## Major changes
 
+
+- The environment variable `save_after_styling` is deprecated in favor of 
+  the R option `styler.save_after_styling` to control if a file is saved after 
+  styling with the RStudio Addin. Note than in RStudio >= 1.3.0, you can 
+  auto-save edits in general (Code -> Saving -> Auto-Save), e.g. on idle editor 
+  or focus loss, so this feature becomes less relevant. (#631).
 - blank lines in function calls and headers are now removed, for the former only 
   when there are no comments before or after the blank line (#629, #630, #635).
 - speed improvements: (~10%) when cache is activated because transformers are not 
