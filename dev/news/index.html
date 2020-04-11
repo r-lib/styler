@@ -156,6 +156,24 @@
       <small>Source: <a href='https://github.com/r-lib/styler/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="styler-1-3-2-9000-development" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.2.9000">
+<a href="#styler-1-3-2-9000-development" class="anchor"></a>styler 1.3.2.9000 (Development)<small> Unreleased </small>
+</h1>
+<div id="major-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major changes</h2>
+</div>
+<div id="minor-chnages-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-chnages-and-fixes" class="anchor"></a>Minor chnages and fixes</h2>
+<ul>
+<li>overhaul pgkdown site: Add search (<a href='https://github.com/r-lib/styler/issues/623'>#623</a>), group function in Reference (<a href='https://github.com/r-lib/styler/issues/625'>#625</a>).</li>
+<li>always strip trailing spaces and make cache insensitive to it (<a href='https://github.com/r-lib/styler/issues/626'>#626</a>).</li>
+<li>typos in documentation (<a href='https://github.com/r-lib/styler/issues/618'>#618</a>, <a href='https://github.com/r-lib/styler/issues/614'>#614</a>).</li>
+</ul>
+</div>
+</div>
     <div id="styler-1-3-2" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.2">
 <a href="#styler-1-3-2" class="anchor"></a>styler 1.3.2<small> 2020-02-23 </small>
@@ -271,9 +289,9 @@ style_text("1 # comment")
 <a href="#styler-1-1-1" class="anchor"></a>styler 1.1.1<small> 2019-05-06 </small>
 </h1>
 <p>This is primarily a maintenance release upon the request of the CRAN team (<a href='https://github.com/r-lib/styler/issues/490'>#490</a>).</p>
-<div id="major-changes" class="section level2">
+<div id="major-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major-changes" class="anchor"></a>Major changes</h2>
+<a href="#major-changes-1" class="anchor"></a>Major changes</h2>
 <ul>
 <li><p>Users can now control style configurations for styler Addins (<a href='https://github.com/r-lib/styler/issues/463'>#463</a>, <a href='https://github.com/r-lib/styler/issues/500'>#500</a>), using the <code>Set style</code> Addin. See <code><a href="../reference/styler_addins.html">?styler::styler_addins</a></code> for details.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/function.html">return()</a></code> is now always put in braces and put on a new line when used in a conditional statement (<a href='https://github.com/r-lib/styler/issues/492'>#492</a>).</p></li>
@@ -313,9 +331,9 @@ style_text("1 # comment")
 <a href="#styler-1-1-0" class="anchor"></a>styler 1.1.0<small> 2018-11-20 </small>
 </h1>
 <p>This release introduces new features and is fully backward-compatible. It also adapts to changes in the R parser committed into R devel (<a href='https://github.com/r-lib/styler/issues/419'>#419</a>).</p>
-<div id="major-changes-1" class="section level2">
+<div id="major-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major-changes-1" class="anchor"></a>Major Changes</h2>
+<a href="#major-changes-2" class="anchor"></a>Major Changes</h2>
 <ul>
 <li><p>styler can now style roxygen code examples in the source code of package (<a href='https://github.com/r-lib/styler/issues/332'>#332</a>) as well as Rnw files (<a href='https://github.com/r-lib/styler/issues/431'>#431</a>).</p></li>
 <li><p>the print method for the output of <code><a href="../reference/style_text.html">style_text()</a></code> (<code><a href="../reference/print.vertical.html">print.vertical()</a></code>) now returns syntax-highlighted code by default, controllable via the option <code>styler.colored_print.vertical</code> (<a href='https://github.com/r-lib/styler/issues/417'>#417</a>).</p></li>
@@ -343,9 +361,9 @@ style_text("1 # comment")
 <a href="#styler-1-0-2" class="anchor"></a>styler 1.0.2<small> 2018-06-26 </small>
 </h1>
 <p>This is a maintenance release without any breaking API changes.</p>
-<div id="major-changes-2" class="section level2">
+<div id="major-changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major-changes-2" class="anchor"></a>Major Changes</h2>
+<a href="#major-changes-3" class="anchor"></a>Major Changes</h2>
 <ul>
 <li><p>Fixed indention for named multi-line function calls (<a href='https://github.com/r-lib/styler/issues/372'>#372</a>).</p></li>
 <li><p>Non-R code chunks in <code>.Rmd</code> files are now respected and won’t get styled (<a href='https://github.com/r-lib/styler/issues/386'>#386</a>).</p></li>
@@ -482,7 +500,7 @@ initialize_default_attributes(pd_flat)</a></code></pre>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

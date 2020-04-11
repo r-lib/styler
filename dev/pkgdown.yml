@@ -1,5 +1,5 @@
 pandoc: '2.2'
-pkgdown: 1.5.0
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   caching: caching.html
@@ -9,7 +9,7 @@ articles:
   manipulating_nested_parse_data: gsoc_proposal/manipulating_nested_parse_data.html
   introducing_styler: introducing_styler.html
   performance_improvements: performance_improvements.html
-last_built: 2020-03-28T17:58Z
+last_built: 2020-04-11T11:13Z
 urls:
   reference: https://styler.r-lib.org/reference
   article: https://styler.r-lib.org/articles
