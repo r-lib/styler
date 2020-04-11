@@ -18,6 +18,13 @@ path_if_exist <- function(...) {
   path[fs::file_exists(path)]
 }
 
+is_conda_installation <- function() {
+  grepl(
+    "/envs/r-precommit/(bin|Scripts)/pre-commit(\\.exe)?",
+    getOption("precommit.executable")
+  )
+}
+
 is_package <- function(path_root = here::here()) {
   rlang::with_handlers(
     rprojroot::find_package_root_file(path = path_root),

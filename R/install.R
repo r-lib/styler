@@ -107,7 +107,7 @@ uninstall_system <- function(ask = TRUE) {
         "/envs/r-reticulate/(bin|Scripts)/pre-commit(\\.exe)?",
         getOption("precommit.executable")
       )
-      if (!is_conda_installation) {
+      if (!is_conda_installation()) {
         rlang::abort(paste0(
           "R option `precommit.executable` points to ",
           getOption("precommit.executable"),

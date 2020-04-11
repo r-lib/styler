@@ -1,6 +1,8 @@
+ae
 api
 args
 autoupdate
+beaefa
 CLI
 cmd
 CMD
@@ -13,6 +15,7 @@ deps
 desc
 dev
 docopt
+docsearch
 emph
 env
 EOF
@@ -42,6 +45,7 @@ miniconda
 navbar
 oneliner
 os
+params
 parsable
 pkgapi
 pkgdown

@@ -32,3 +32,9 @@ navbar:
         href: articles/FAQ.html
       - text: 'Manual installation'
         href: articles/manual-installation.html
+
+template:
+  params:
+    docsearch:
+      api_key: 'ae5363c86f48f4117b4f2b9beaefa28f'
+      index_name: 'lorenzwalthert_precommit'
