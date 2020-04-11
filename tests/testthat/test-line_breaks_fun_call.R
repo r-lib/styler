@@ -19,7 +19,7 @@ test_that("blank lines in function calls are removed for strict = TRUE", {
 
   expect_warning(test_collection("line_breaks_fun_call",
     "blank-non-strict",
-    transformer = style_text
+    transformer = style_text, strict = FALSE
   ), NA)
 })
 
