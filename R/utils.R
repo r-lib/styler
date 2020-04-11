@@ -20,7 +20,7 @@ path_if_exist <- function(...) {
 
 is_conda_installation <- function() {
   grepl(
-    "/envs/r-precommit/(bin|Scripts)/pre-commit(\\.exe)?",
+    "/envs/r-reticulate/(bin|Scripts)/pre-commit(\\.exe)?",
     getOption("precommit.executable")
   )
 }
