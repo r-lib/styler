@@ -6,7 +6,7 @@ test_that("gives warning markers are not correct", {
   )))
 })
 
-test_that("trailing spaces are stripped when checking marker, but not written back", {
+test_that("trailing spaces are stripped when checking marker and written back", {
   expect_equal(
     style_text(c(
       "# styler: off ",
@@ -14,7 +14,7 @@ test_that("trailing spaces are stripped when checking marker, but not written ba
       "# styler: on "
     )) %>%
       as.character(),
-    c("# styler: off ", "1+1", "# styler: on")
+    c("# styler: off", "1+1", "# styler: on")
   )
 })
 
