@@ -1,3 +1,16 @@
+# styler 1.3.2.9000 (Development)
+
+## Major changes
+
+
+## Minor chnages and fixes
+
+- overhaul pgkdown site: Add search (#623), group function in Reference (#625).
+- always strip trailing spaces and make cache insensitive to it (#626).
+- typos in documentation (#618, #614).
+
+
+
 # styler 1.3.2
 
 Release upon request by the CRAN team.

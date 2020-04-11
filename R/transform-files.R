@@ -80,6 +80,7 @@ make_transformer <- function(transformers,
   assert_transformers(transformers)
 
   function(text) {
+    text <- trimws(text, which = "right")
     should_use_cache <- cache_is_activated()
 
     if (should_use_cache) {
