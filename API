@@ -3,6 +3,7 @@
 ## Exported functions
 
 autoupdate(path_root = here::here())
+diff_requires_run_roxygenize(path_root = here::here())
 install_precommit()
 open_config(path_root = here::here())
 open_wordlist(path_root = here::here())

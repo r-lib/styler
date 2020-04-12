@@ -33,3 +33,7 @@ is_package <- function(path_root = here::here()) {
     is.null() %>%
     magrittr::not()
 }
+
+add_trailing_linebreak <- function(x) {
+  paste0(x, "\n")
+}
