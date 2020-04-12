@@ -22,6 +22,8 @@ extract_diff_files <- function(files) {
 #'
 #' This is useful to detect within a hook script if the core function
 #' from a hook such as [roxygen2::roxygenize()] must run at all or not.
+#' @param path_root The root of project.
+#' @keywords internal
 extract_diff_root <- function(path_root = here::here()) {
   assert_is_git_repo(path_root)
   repo <- git2r::repository(path_root)
@@ -43,7 +45,7 @@ extract_diff_root <- function(path_root = here::here()) {
 #'
 #' This is the case if a new or replaced/removed line contains a roxygen2
 #' comment in a file that is staged.
-#' @param path_root The root of project.
+#' @inheritParams extract_diff_root
 #' @export
 diff_requires_run_roxygenize <- function(path_root = here::here()) {
   if (!rlang::is_installed("git2r")) {

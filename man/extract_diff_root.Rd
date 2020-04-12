@@ -6,7 +6,11 @@
 \usage{
 extract_diff_root(path_root = here::here())
 }
+\arguments{
+\item{path_root}{The root of project.}
+}
 \description{
 This is useful to detect within a hook script if the core function
 from a hook such as \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} must run at all or not.
 }
+\keyword{internal}
