@@ -40,8 +40,8 @@ cache <- loadCache(key = wd, dirs = path_relative_cache)
 if (!is.null(cache)) {
   candidates <- list.files(c("R", "man"), full.names = TRUE)
   all_files <- file.info(candidates)
-  last_modified <- all_files[order(all_files$mtime, decreasing = TRUE)[1], ]
-  if (last_modified$mtime > cache[[1]]) {
+  last_modified <- max(all_files$mtime)
+  if (last_modified > cache[[1]]) {
     roxygenize_with_cache(key = wd, dirs = path_relative_cache)
   }
 } else {
