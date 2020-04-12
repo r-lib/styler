@@ -11,6 +11,7 @@ test_that("roxygen runs are done if necessary", {
       writeLines(text, "second.R")
       expect_error(extract_diff_root("."), "is not a git repo")
       git2r::init(".")
+      git2r::config(user.name = "testthat", user.email = "no-reply@testthat.com")
       expect_equal(extract_diff_root("."), NULL)
       expect_false(diff_requires_run_roxygenize("."))
       git2r::add(".", "first.R")
