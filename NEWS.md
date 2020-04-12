@@ -1,5 +1,7 @@
-# precommit v0.0.0.9039 (unreleased)
+# precommit v0.0.0.9040
 
+- roxygenize hook now only ran when `git diff --cached` contains roxygen 
+  comments (#151).
 - conda is a suggested dependency now, so those who choose a different 
   installation method have a more lightweight dependency graph (#136).
 - Use more thoughtful order for hooks, between pkg and project (#142).
