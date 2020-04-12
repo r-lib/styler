@@ -1,6 +1,5 @@
 test_that("roxygen runs are done if necessary", {
   path <- fs::path(tempdir(), "a12")
-  on.exit(fs::dir_delete(path))
   fs::dir_create(path)
   path_r <- fs::path(path, "R")
   fs::dir_create(path_r)
