@@ -10,13 +10,9 @@ extract_diff_lines <- function(lines) {
   purrr::map(lines, extract_diff_one_line)
 }
 
-
 extract_diff_hunks <- function(hunks) {
   purrr::map(hunks, ~ extract_diff_lines(.x$lines))
 }
-
-
-
 
 extract_diff_files <- function(files) {
   purrr::map(files, ~ extract_diff_hunks(.x$hunks))
