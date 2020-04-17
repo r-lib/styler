@@ -22,8 +22,8 @@ NULL
 #' @inheritParams prettify_pkg
 #' @section Warning:
 #' This function overwrites files (if styling results in a change of the
-#' code to be formatted). It is strongly suggested to only style files
-#' that are under version control or to create a backup copy.
+#' code to be formatted and `dry = "off"`). It is strongly suggested to only
+#' style files that are under version control or to create a backup copy.
 #'
 #' We suggest to first style with `scope < "tokens"` and inspect and commit
 #' changes, because these changes are guaranteed to leave the abstract syntax
