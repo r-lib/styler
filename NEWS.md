@@ -4,6 +4,8 @@
 
 - blank lines in function calls and headers are now removed, for the former only 
   when there are no comments before or after the blank line (#629, #630, #635).
+- `style_file()` and friends gain argument `dry` to control if changes should 
+  be applied to files or not (#634).
 
 ## Minor chnages and fixes
 
