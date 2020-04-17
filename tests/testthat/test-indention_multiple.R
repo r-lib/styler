@@ -33,16 +33,14 @@ test_that("multiple curly and round brackets don't cause extraindention", {
 test_that("multiple curly and round brackets overall test", {
   expect_warning(test_collection("indention_multiple",
     "overall",
-    transformer = style_text,
-    write_back = TRUE
+    transformer = style_text
   ), NA)
 })
 
 test_that("if and ifelse interacting with curly braces works", {
   expect_warning(test_collection("indention_multiple",
     "if_else_curly",
-    transformer = style_text,
-    write_back = TRUE, strict = FALSE
+    transformer = style_text, strict = FALSE
   ), NA)
 })
 
