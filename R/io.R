@@ -15,9 +15,10 @@ transform_utf8 <- function(path, fun, dry) {
 #' @param path A vector with file paths to transform.
 #' @param fun A function that returns a character vector.
 #' @param dry To indicate whether styler should run in *dry* mode, i.e. refrain
-#'   from write back to files .`"on"` and `"fail"` both don't write back, the
-#'   latter returns an error if styling *would* change contents. "off", the
-#'   default, writes back if the input and output of styling are not identical.
+#'   from writing back to files .`"on"` and `"fail"` both don't write back, the
+#'   latter returns an error if the input code is not identical to the result
+#'   of styling. "off", the default, writes back if the input and output of
+#'   styling are not identical.
 #' @importFrom rlang with_handlers warn
 #' @keywords internal
 transform_utf8_one <- function(path, fun, dry) {
