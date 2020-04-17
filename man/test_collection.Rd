@@ -7,7 +7,7 @@
 test_collection(
   test,
   sub_test = NULL,
-  write_back = TRUE,
+  dry = "off",
   write_tree = NA,
   transformer,
   ...
@@ -21,8 +21,10 @@ tests/testthat.}
 to be tested in the test. \code{sub_test} must match the beginning of file
 names in tests/testthat. \code{NULL} matches all files.}
 
-\item{write_back}{Whether the results of the transformation should be written
-to the output file.}
+\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+from write back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if styling \emph{would} change contents. "off", the
+default, writes back if the input and output of styling are not identical.}
 
 \item{write_tree}{Whether or not the tree structure of the test should be
 computed and written to a file. Note that this needs R >= 3.2

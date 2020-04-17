@@ -1,20 +1,27 @@
 #' Apply a function to the contents of a file
 #'
 #' Transforms a file with a function.
-#' @param path A vector with file paths to transform.
-#' @param fun A function that returns a character vector.
-#' @param write_back Whether or not the results of the transformation should
-#'   be written back to the file.
 #' @importFrom magrittr set_names
 #' @importFrom rlang abort
+#' @inheritParams transform_utf8_one
 #' @keywords internal
-transform_utf8 <- function(path, fun, write_back = TRUE) {
-  map_lgl(path, transform_utf8_one, fun = fun, write_back = write_back) %>%
+transform_utf8 <- function(path, fun, dry) {
+  map_lgl(path, transform_utf8_one, fun = fun, dry = dry) %>%
     set_names(path)
 }
 
+#' Potentially transform a file
+#'
+#' @param path A vector with file paths to transform.
+#' @param fun A function that returns a character vector.
+#' @param dry To indicate whether styler should run in *dry* mode, i.e. refrain
+#'   from write back to files .`"on"` and `"fail"` both don't write back, the
+#'   latter returns an error if styling *would* change contents. "off", the
+#'   default, writes back if the input and output of styling are not identical.
 #' @importFrom rlang with_handlers warn
-transform_utf8_one <- function(path, fun, write_back) {
+#' @keywords internal
+transform_utf8_one <- function(path, fun, dry) {
+  rlang::arg_match(dry, c("on", "off", "fail"))
   with_handlers(
     {
       file_with_info <- read_utf8(path)
@@ -22,13 +29,28 @@ transform_utf8_one <- function(path, fun, write_back) {
       new <- fun(file_with_info$text)
       identical_content <- identical(unclass(file_with_info$text), unclass(new))
       identical <- identical_content && !file_with_info$missing_EOF_line_break
-      if (!identical && write_back) {
-        xfun::write_utf8(new, path)
+      if (!identical) {
+        if (dry == "fail") {
+          rlang::abort(
+            paste0("File `", path, "` would be modified by styler and `dry` = 'fail'."),
+            class = "dryError"
+          )
+        } else if (dry == "on") {
+          # don't do anything
+        } else if (dry == "off") {
+          xfun::write_utf8(new, path)
+        } else {
+          # not implemented
+        }
       }
       !identical
     },
     error = function(e) {
-      warn(paste0("When processing ", path, ": ", conditionMessage(e)))
+      if (inherits(e, "dryError")) {
+        rlang::abort(conditionMessage(e))
+      } else {
+        warn(paste0("When processing ", path, ": ", conditionMessage(e)))
+      }
       NA
     }
   )

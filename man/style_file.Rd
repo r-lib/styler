@@ -9,7 +9,8 @@ style_file(
   ...,
   style = tidyverse_style,
   transformers = style(...),
-  include_roxygen_examples = TRUE
+  include_roxygen_examples = TRUE,
+  dry = "off"
 )
 }
 \arguments{
@@ -28,6 +29,11 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 
 \item{include_roxygen_examples}{Whether or not to style code in roxygen
 examples.}
+
+\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+from write back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if styling \emph{would} change contents. "off", the
+default, writes back if the input and output of styling are not identical.}
 }
 \description{
 Performs various substitutions in the files specified.
@@ -42,7 +48,8 @@ before applying styler.
 \section{Value}{
 
 Invisibly returns a data frame that indicates for each file considered for
-styling whether or not it was actually changed.
+styling whether or not it was actually changed (or would be changed when
+\code{dry} is not "off").
 }
 
 \section{Warning}{

@@ -312,3 +312,23 @@ test_that("styler can style Rnw files only via style_pkg()", {
   expect_true(any(grepl("random.Rnw", msg, fixed = TRUE)))
   expect_false(any(grepl("RcppExports.R", msg, fixed = TRUE)))
 })
+
+test_that("dry run options work:", {
+  path <- test_path("public-api/dry/unstyled.R")
+  # test the testing function
+  expect_error(test_dry(path, style_file, styled = TRUE))
+
+  # real tests
+  ## R
+  test_dry(path, style_file)
+  path <- test_path("public-api/dry/styled.R")
+  test_dry(path, style_file, styled = TRUE)
+
+  ## Rmd
+  test_dry(test_path("public-api/dry/unstyled.Rmd"), style_file, styled = FALSE)
+  test_dry(test_path("public-api/dry/styled.Rmd"), style_file, styled = TRUE)
+
+  ## Rmd
+  test_dry(test_path("public-api/dry/unstyled.Rnw"), style_file, styled = FALSE)
+  test_dry(test_path("public-api/dry/styled.Rnw"), style_file, styled = TRUE)
+})

@@ -12,7 +12,8 @@ style_pkg(
   filetype = c("R", "Rprofile"),
   exclude_files = "R/RcppExports.R",
   exclude_dirs = c("packrat", "renv"),
-  include_roxygen_examples = TRUE
+  include_roxygen_examples = TRUE,
+  dry = "off"
 )
 }
 \arguments{
@@ -43,6 +44,11 @@ these directories are anyways not styled.}
 
 \item{include_roxygen_examples}{Whether or not to style code in roxygen
 examples.}
+
+\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+from write back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if styling \emph{would} change contents. "off", the
+default, writes back if the input and output of styling are not identical.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package
@@ -88,7 +94,8 @@ See section 'Warning' for a good strategy to apply styling safely.
 \section{Value}{
 
 Invisibly returns a data frame that indicates for each file considered for
-styling whether or not it was actually changed.
+styling whether or not it was actually changed (or would be changed when
+\code{dry} is not "off").
 }
 
 \examples{

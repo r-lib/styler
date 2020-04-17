@@ -5,11 +5,13 @@
 #' @param files A character vector with paths to the file that should be
 #'   transformed.
 #' @inheritParams make_transformer
+#' @inheritParams transform_file
 #' @section Value:
 #' Invisibly returns a data frame that indicates for each file considered for
-#' styling whether or not it was actually changed.
+#' styling whether or not it was actually changed (or would be changed when
+#' `dry` is not "off").
 #' @keywords internal
-transform_files <- function(files, transformers, include_roxygen_examples) {
+transform_files <- function(files, transformers, include_roxygen_examples, dry) {
   transformer <- make_transformer(transformers, include_roxygen_examples)
   max_char <- min(max(nchar(files), 0), getOption("width"))
   len_files <- length(files)
@@ -18,7 +20,7 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
   }
 
   changed <- map_lgl(files, transform_file,
-    fun = transformer, max_char_path = max_char
+    fun = transformer, max_char_path = max_char, dry = dry
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
@@ -34,7 +36,7 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
 #' @param message_after The message to print after the path.
 #' @param message_after_if_changed The message to print after `message_after` if
 #'   any file was transformed.
-#' @inheritParams transform_utf8
+#' @inheritParams transform_code
 #' @param ... Further arguments passed to [transform_utf8()].
 #' @keywords internal
 transform_file <- function(path,
@@ -43,7 +45,8 @@ transform_file <- function(path,
                            message_before = "",
                            message_after = " [DONE]",
                            message_after_if_changed = " *",
-                           ...) {
+                           ...,
+                           dry) {
   char_after_path <- nchar(message_before) + nchar(path) + 1
   max_char_after_message_path <- nchar(message_before) + max_char_path + 1
   n_spaces_before_message_after <-
@@ -53,7 +56,7 @@ transform_file <- function(path,
     rep_char(" ", max(0L, n_spaces_before_message_after)),
     append = FALSE
   )
-  changed <- transform_code(path, fun = fun, ...)
+  changed <- transform_code(path, fun = fun, ..., dry = dry)
 
   bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
 

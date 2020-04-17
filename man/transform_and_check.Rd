@@ -10,7 +10,7 @@ transform_and_check(
   in_name = in_item,
   out_name = out_item,
   transformer,
-  write_back,
+  dry,
   write_tree = NA,
   out_tree = "_tree",
   ...
@@ -27,8 +27,10 @@ transform_and_check(
 
 \item{transformer}{A function to apply to the content of \code{in_item}.}
 
-\item{write_back}{Whether the results of the transformation should be written
-to the output file.}
+\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+from write back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if styling \emph{would} change contents. "off", the
+default, writes back if the input and output of styling are not identical.}
 
 \item{write_tree}{Whether or not the tree structure of the test should be
 computed and written to a file. Note that this needs R >= 3.2
