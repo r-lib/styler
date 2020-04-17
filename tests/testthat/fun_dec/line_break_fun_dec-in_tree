@@ -9,8 +9,8 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦       ¦--SYMBOL_FORMALS: x [0/0] {8}                
  ¦       ¦--',': , [0/1] {9}                           
  ¦       ¦--COMMENT: # [0/14] {10}                     
- ¦       ¦--SYMBOL_FORMALS: y [1/14] {11}              
- ¦       ¦--')': ) [1/1] {12}                          
+ ¦       ¦--SYMBOL_FORMALS: y [1/0] {11}               
+ ¦       ¦--')': ) [0/1] {12}                          
  ¦       °--expr: {
   x [0/0] {13}                    
  ¦           ¦--'{': { [0/2] {14}                      
@@ -51,7 +51,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦       ¦--',': , [0/1] {48}                          
  ¦       ¦--COMMENT: # [0/14] {49}                     
  ¦       ¦--SYMBOL_FORMALS: y [1/1] {50}               
- ¦       ¦--COMMENT: # [0/12] {51}                     
+ ¦       ¦--COMMENT: # [0/0] {51}                      
  ¦       ¦--')': ) [1/1] {52}                          
  ¦       °--expr: {
   y [0/0] {53}                    
@@ -69,7 +69,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦       ¦--SYMBOL_FORMALS: x [0/0] {65}               
  ¦       ¦--',': , [0/14] {66}                         
  ¦       ¦--SYMBOL_FORMALS: y [1/0] {67}               
- ¦       ¦--')': ) [1/1] {68}                          
+ ¦       ¦--')': ) [0/1] {68}                          
  ¦       °--expr: {
   x [0/0] {69}                    
  ¦           ¦--'{': { [0/2] {70}                      
@@ -91,7 +91,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦       ¦--',': , [0/14] {86}                         
  ¦       ¦--COMMENT: # [1/14] {87}                     
  ¦       ¦--SYMBOL_FORMALS: y [1/0] {88}               
- ¦       ¦--')': ) [1/1] {89}                          
+ ¦       ¦--')': ) [0/1] {89}                          
  ¦       °--expr: {
   x [0/0] {90}                    
  ¦           ¦--'{': { [0/2] {91}                      
@@ -112,7 +112,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
          ¦--SYMBOL_FORMALS: x [0/0] {106}              
          ¦--',': , [0/14] {107}                        
          ¦--SYMBOL_FORMALS: y [2/0] {108}              
-         ¦--')': ) [1/1] {109}                         
+         ¦--')': ) [0/1] {109}                         
          °--expr: {
   x [0/0] {110}                   
              ¦--'{': { [0/2] {111}                     
