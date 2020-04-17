@@ -20,7 +20,7 @@
 #' @importFrom rlang abort
 #' @keywords internal
 test_collection <- function(test, sub_test = NULL,
-                            write_back = TRUE,
+                            dry = "off",
                             write_tree = NA,
                             transformer,
                             ...) {
@@ -49,7 +49,7 @@ test_collection <- function(test, sub_test = NULL,
   pwalk(list(in_items, out_items, in_names, out_names, out_trees),
     transform_and_check,
     transformer = transformer,
-    write_back = write_back,
+    dry = dry,
     write_tree = write_tree,
     ...
   )
@@ -87,20 +87,19 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param in_name The label of the in_item, defaults to `in_item`.
 #' @param out_name The label of the out_item, defaults to `out_item`.
 #' @param transformer A function to apply to the content of `in_item`.
-#' @param write_back Whether the results of the transformation should be written
-#'   to the output file.
 #' @param write_tree Whether or not the tree structure of the test should be
 #'   computed and written to a file. Note that this needs R >= 3.2
 #'   (see [set_arg_write_tree()]). If the argument is set to `NA`, the function
 #'   determines whether R >= 3.2 is in use and if so, trees will be written.
 #' @param ... Parameters passed to transformer function.
 #' @param out_tree Name of tree file if written out.
+#' @inheritParams transform_utf8
 #' @importFrom utils write.table
 #' @importFrom rlang warn
 #' @keywords internal
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
-                                transformer, write_back,
+                                transformer, dry,
                                 write_tree = NA,
                                 out_tree = "_tree", ...) {
   write_tree <- set_arg_write_tree(write_tree)
@@ -121,7 +120,7 @@ transform_and_check <- function(in_item, out_item,
   transformed <- transform_utf8(
     out_item,
     function(x) transformed_text,
-    write_back = write_back
+    dry = dry
   )
 
   if (transformed) {
@@ -234,17 +233,19 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
 #'   first run.
 #' @keywords internal
 n_times_faster_with_cache <- function(x1, x2 = x1, ...,
-                                fun = styler::style_text,
-                                n = 3,
-                                clear = "always") {
+                                      fun = styler::style_text,
+                                      n = 3,
+                                      clear = "always") {
   rlang::arg_match(clear, c("always", "final", "never", "all but last"))
   capture.output(
     out <- purrr::map(1:n, n_times_faster_bench,
       x1 = x1, x2 = x2, fun = fun,
-      ..., n = n, clear = clear) %>%
-    purrr::map_dbl(
-      ~ unname(.x$first["elapsed"] / .x$second["elapsed"])) %>%
-    mean()
+      ..., n = n, clear = clear
+    ) %>%
+      purrr::map_dbl(
+        ~ unname(.x$first["elapsed"] / .x$second["elapsed"])
+      ) %>%
+      mean()
   )
   if (clear %in% c("always", "final")) {
     clear_testthat_cache()
@@ -267,7 +268,7 @@ n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
   }
   list(
     first = first,
-    second =  second
+    second = second
   )
 }
 
@@ -320,4 +321,3 @@ fresh_testthat_cache <- function() {
   clear_testthat_cache()
   activate_testthat_cache()
 }
-
