@@ -11,6 +11,7 @@ repos:
     -   id: spell-check
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
+        exclude: 'tests/testthat/.*/*\.R'
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.5.0
     hooks:

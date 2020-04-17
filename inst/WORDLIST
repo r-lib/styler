@@ -22,6 +22,7 @@ emacs
 EOF
 EOL
 EOLs
+EQ
 expr
 expr EQ
 filetype
@@ -64,6 +65,7 @@ rplumber
 rprofile
 Rprofile
 StackOverflow
+STR
 styler
 stylerignore
 stylerignored

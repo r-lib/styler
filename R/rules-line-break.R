@@ -273,9 +273,7 @@ remove_line_break_in_fun_call <- function(pd, strict) {
   if (is_function_call(pd)) {
     # no blank lines within function calls
     if (strict) {
-      pd$lag_newlines[lag(pd$token == "','") & pd$lag_newlines > 1] <- 1L
-
-      pd$lag_newlines[lag(pd$token == "COMMENT") & pd$lag_newlines > 0] <- 1L
+      pd$lag_newlines[lag(pd$token == "','") & pd$lag_newlines > 1 & pd$token != "COMMENT"] <- 1L
     }
     if (nrow(pd) == 3) {
       pd$lag_newlines[3] <- 0L
