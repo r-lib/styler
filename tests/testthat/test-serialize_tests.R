@@ -9,8 +9,7 @@ test_that("No files to compare returns error", {
 test_that("properly detects non-match", {
   expect_warning(
     test_collection("serialize_tests", "k3",
-      transformer = identity,
-      write_back = FALSE
+      transformer = identity
     ),
     "different"
   )

@@ -3,16 +3,14 @@ context("unindention")
 test_that("round brackets are unindented correctly", {
   expect_warning(test_collection("unindention",
     "mixed",
-    transformer = style_text_without_curly_curly,
-    write_back = TRUE
+    transformer = style_text_without_curly_curly
   ), NA)
 })
 
 test_that("tokens are not dropped in named vector", {
   expect_warning(test_collection("unindention",
     "vec",
-    transformer = style_text,
-    write_back = TRUE
+    transformer = style_text
   ), NA)
 })
 
@@ -23,7 +21,6 @@ test_that(paste(
 ), {
   expect_warning(test_collection("unindention",
     "vec",
-    transformer = style_text,
-    write_back = TRUE
+    transformer = style_text
   ), NA)
 })
