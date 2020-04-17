@@ -48,9 +48,10 @@ excluded from styling.}
 examples.}
 
 \item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
-from write back to files .\code{"on"} and \code{"fail"} both don't write back, the
-latter returns an error if styling \emph{would} change contents. "off", the
-default, writes back if the input and output of styling are not identical.}
+from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.}
 }
 \description{
 Performs various substitutions in all \code{.R}, \code{.Rmd} and/or \code{.Rnw} files
