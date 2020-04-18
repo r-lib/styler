@@ -23,10 +23,10 @@
 #' @inheritParams fallback_doc
 #' @export
 use_precommit_config <- function(path_cp_config_from = getOption("precommit.path_cp_config_from"),
-                                 force,
+                                 force = FALSE,
                                  open = rstudioapi::isAvailable(),
-                                 path_root = here::here(),
-                                 verbose = FALSE) {
+                                 verbose = FALSE,
+                                 path_root = here::here()) {
   path_cp_config_from <- set_path_cp_config_from(
     path_cp_config_from,
     path_root = path_root,
