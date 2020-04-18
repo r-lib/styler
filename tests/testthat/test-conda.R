@@ -40,7 +40,7 @@ test_that("can use custom config file ", {
     c(new_text) %>%
     writeLines(path_custom)
   git2r::init(tempdir)
-  use_precommit(path_cp_config_from = path_custom, root = tempdir, force = TRUE)
+  use_precommit(config_source = path_custom, root = tempdir, force = TRUE)
   config <- readLines(fs::path(tempdir, ".pre-commit-config.yaml"))
   expect_equal(
     config[length(config)],
