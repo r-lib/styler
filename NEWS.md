@@ -1,3 +1,20 @@
+# precommit v0.0.0.9042
+
+**Breaking Changes**
+
+A major API review was conducted to make the package ready for a CRAN 
+submission in #152:
+
+- all functions have the argument `path_root` renamed to `root`.
+- argument `root` now always defaults to `here::here()` for consistency.
+- argument `path_cp_config_from` was renamed to `config_source` in 
+  `use_precommit_config()` and `use_precommit()`.
+- `use_precommit_config`'s argument `force` gains a default value for 
+  consistency with `use_config()`.
+- `use_precommit_config`'s argument `verbose` now is in the same position as
+  in `use_config()`.
+
+
 # precommit v0.0.0.9040
 
 - roxygenize hook now only ran when `git diff --cached` contains roxygen 
