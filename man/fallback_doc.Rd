@@ -4,7 +4,7 @@
 \alias{fallback_doc}
 \title{Fallback doc}
 \arguments{
-\item{path_root}{The path to the root directory of your project.}
+\item{root}{The path to the root directory of your project.}
 }
 \description{
 Fallback doc

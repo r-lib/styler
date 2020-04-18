@@ -5,12 +5,12 @@
 \alias{open_wordlist}
 \title{Open pre-commit related files}
 \usage{
-open_config(path_root = here::here())
+open_config(root = here::here())
 
-open_wordlist(path_root = here::here())
+open_wordlist(root = here::here())
 }
 \arguments{
-\item{path_root}{The path to the root directory of your project.}
+\item{root}{The path to the root directory of your project.}
 }
 \description{
 Open pre-commit related files

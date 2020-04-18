@@ -24,18 +24,18 @@
 use_precommit <- function(config_source = getOption("precommit.config_source"),
                           force = FALSE,
                           open = rstudioapi::isAvailable(),
-                          path_root = here::here()) {
+                          root = here::here()) {
   assert_is_installed()
-  assert_is_git_repo(path_root)
+  assert_is_git_repo(root)
   config_source <- set_config_source(config_source)
-  install_repo(path_root)
+  install_repo(root)
   use_precommit_config(
-    config_source, force, path_root,
+    config_source, force, root,
     open = FALSE, verbose = FALSE
   )
-  autoupdate(path_root)
+  autoupdate(root)
   if (open) {
-    open_config(path_root)
+    open_config(root)
   }
 }
 
@@ -44,8 +44,8 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 #' Runs `pre-commit autoupdate`.
 #' @inheritParams fallback_doc
 #' @export
-autoupdate <- function(path_root = here::here()) {
-  withr::with_dir(path_root, {
+autoupdate <- function(root = here::here()) {
+  withr::with_dir(root, {
     assert_correct_upstream_repo_url()
     out <- call_and_capture(path_precommit_exec(), "autoupdate")
     if (out$exit_status == 0) {

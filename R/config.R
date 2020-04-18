@@ -1,8 +1,8 @@
 #' Initiate a pre-commit config file
 #'
 #' @param config_source Path or URL to a `.pre-commit-config.yaml`. This
-#'   config file will be hard-copied into `path_root`. If `NULL`, we check if
-#'   `path_root` is a package or project directory using
+#'   config file will be hard-copied into `root`. If `NULL`, we check if
+#'   `root` is a package or project directory using
 #'   [rprojroot::find_package_root_file()], and resort to an appropriate default
 #'   config. See section 'Copying an existing config file'.
 #' @param force Whether to replace an existing config file.
@@ -26,30 +26,30 @@ use_precommit_config <- function(config_source = getOption("precommit.config_sou
                                  force = FALSE,
                                  open = rstudioapi::isAvailable(),
                                  verbose = FALSE,
-                                 path_root = here::here()) {
+                                 root = here::here()) {
   config_source <- set_config_source(
     config_source,
-    path_root = path_root,
+    root = root,
     verbose = verbose
   )
   escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
   name_target <- ".pre-commit-config.yaml"
-  if (!fs::file_exists(fs::path(path_root, name_target)) | force) {
+  if (!fs::file_exists(fs::path(root, name_target)) | force) {
     fs::file_copy(
       config_source,
-      fs::path(path_root, name_target),
+      fs::path(root, name_target),
       overwrite = TRUE
     )
-    usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
+    usethis::ui_done("Copied .pre-commit-config.yaml to {root}")
   } else {
     usethis::ui_info(paste0(
       "There is already a pre-commit configuration file in ",
-      path_root,
+      root,
       ". Use `force = TRUE` to replace .pre-commit-config.yaml."
     ))
   }
 
-  if (is_package(path_root)) {
+  if (is_package(root)) {
     usethis::write_union(".Rbuildignore", escaped_name_target)
   }
   usethis::ui_todo(c(
@@ -69,7 +69,7 @@ use_precommit_config <- function(config_source = getOption("precommit.config_sou
 #' too.
 #' @keywords internal
 set_config_source <- function(config_source,
-                              path_root,
+                              root,
                               verbose = TRUE) {
   if (is_url(config_source)) {
     if (verbose) {
@@ -92,7 +92,7 @@ set_config_source <- function(config_source,
   }
   if (is.null(config_source)) {
     # workaround for R CMD CHECK warning about hidden top-level directories.
-    name_origin <- ifelse(is_package(path_root),
+    name_origin <- ifelse(is_package(root),
       "pre-commit-config-pkg.yaml",
       "pre-commit-config-proj.yaml"
     )

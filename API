@@ -2,13 +2,13 @@
 
 ## Exported functions
 
-autoupdate(path_root = here::here())
-diff_requires_run_roxygenize(path_root = here::here())
+autoupdate(root = here::here())
+diff_requires_run_roxygenize(root = here::here())
 install_precommit()
-open_config(path_root = here::here())
-open_wordlist(path_root = here::here())
+open_config(root = here::here())
+open_wordlist(root = here::here())
 path_pre_commit_exec(check_if_exists = TRUE)
 path_precommit_exec(check_if_exists = TRUE)
-uninstall_precommit(scope = "repo", ask = "global", path_root = here::here())
-use_precommit(config_source = getOption("precommit.config_source"), force = FALSE, open = rstudioapi::isAvailable(), path_root = here::here())
-use_precommit_config(config_source = getOption("precommit.config_source"), force = FALSE, open = rstudioapi::isAvailable(), verbose = FALSE, path_root = here::here())
+uninstall_precommit(scope = "repo", ask = "global", root = here::here())
+use_precommit(config_source = getOption("precommit.config_source"), force = FALSE, open = rstudioapi::isAvailable(), root = here::here())
+use_precommit_config(config_source = getOption("precommit.config_source"), force = FALSE, open = rstudioapi::isAvailable(), verbose = FALSE, root = here::here())

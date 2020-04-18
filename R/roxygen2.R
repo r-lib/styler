@@ -22,11 +22,11 @@ extract_diff_files <- function(files) {
 #'
 #' This is useful to detect within a hook script if the core function
 #' from a hook such as [roxygen2::roxygenize()] must run at all or not.
-#' @param path_root The root of project.
+#' @param root The root of project.
 #' @keywords internal
-extract_diff_root <- function(path_root = here::here()) {
-  assert_is_git_repo(path_root)
-  repo <- git2r::repository(path_root)
+extract_diff_root <- function(root = here::here()) {
+  assert_is_git_repo(root)
+  repo <- git2r::repository(root)
   if (length(git2r::reflog(repo)) == 0) {
     # nothing committed yet
     all_files <- git2r::status()$staged
@@ -47,10 +47,10 @@ extract_diff_root <- function(path_root = here::here()) {
 #' comment in a file that is staged.
 #' @inheritParams extract_diff_root
 #' @export
-diff_requires_run_roxygenize <- function(path_root = here::here()) {
+diff_requires_run_roxygenize <- function(root = here::here()) {
   if (!rlang::is_installed("git2r")) {
     rlang::abort("You need to install the R package git2r to run this hook.")
   }
-  changed_lines_content <- extract_diff_root(path_root)
+  changed_lines_content <- extract_diff_root(root)
   any(grepl("^#'", changed_lines_content))
 }

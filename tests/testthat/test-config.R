@@ -2,7 +2,7 @@ test_that("can set path to local config", {
   tmp <- tempdir()
   test.pkg <- fs::dir_create(tmp, "test.proj")
   expect_equal(
-    set_path_cp_config_from(NULL, path_root = test.pkg),
+    set_path_cp_config_from(NULL, root = test.pkg),
     system.file("pre-commit-config-proj.yaml", package = "precommit")
   )
   expect_error(
@@ -30,12 +30,12 @@ test_that("defaults to right config depending on whether or not root is a pkg", 
     desc$write("DESCRIPTION")
   })
   expect_message(
-    set_path_cp_config_from(NULL, path_root = test.pkg),
+    set_path_cp_config_from(NULL, root = test.pkg),
     "pkg\\.yaml"
   )
   fs::file_delete(fs::path(test.pkg, "DESCRIPTION"))
   expect_message(
-    set_path_cp_config_from(NULL, path_root = test.pkg),
+    set_path_cp_config_from(NULL, root = test.pkg),
     "proj\\.yaml"
   )
 })

@@ -8,13 +8,13 @@ use_precommit(
   config_source = getOption("precommit.config_source"),
   force = FALSE,
   open = rstudioapi::isAvailable(),
-  path_root = here::here()
+  root = here::here()
 )
 }
 \arguments{
 \item{config_source}{Path or URL to a \code{.pre-commit-config.yaml}. This
-config file will be hard-copied into \code{path_root}. If \code{NULL}, we check if
-\code{path_root} is a package or project directory using
+config file will be hard-copied into \code{root}. If \code{NULL}, we check if
+\code{root} is a package or project directory using
 \code{\link[rprojroot:find_package_root_file]{rprojroot::find_package_root_file()}}, and resort to an appropriate default
 config. See section 'Copying an existing config file'.}
 
@@ -24,7 +24,7 @@ config. See section 'Copying an existing config file'.}
 it's been placed in your repo. The default is \code{TRUE} when working in
 RStudio. Otherwise, we recommend manually inspecting the file.}
 
-\item{path_root}{The path to the root directory of your project.}
+\item{root}{The path to the root directory of your project.}
 }
 \description{
 Get started.

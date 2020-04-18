@@ -7,9 +7,9 @@
 #' @inheritParams fallback_doc
 #' @family helpers
 #' @export
-open_config <- function(path_root = here::here()) {
+open_config <- function(root = here::here()) {
   if (rstudioapi::isAvailable()) {
-    rstudioapi::navigateToFile(fs::path(path_root, ".pre-commit-config.yaml"))
+    rstudioapi::navigateToFile(fs::path(root, ".pre-commit-config.yaml"))
   } else {
     rlang::abort("Can't open if you don't have RStudio running.")
   }
@@ -17,6 +17,6 @@ open_config <- function(path_root = here::here()) {
 
 #' @export
 #' @rdname open_config
-open_wordlist <- function(path_root = here::here()) {
-  rstudioapi::navigateToFile(fs::path(path_root, "inst", "WORDLIST"))
+open_wordlist <- function(root = here::here()) {
+  rstudioapi::navigateToFile(fs::path(root, "inst", "WORDLIST"))
 }

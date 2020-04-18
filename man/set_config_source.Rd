@@ -4,7 +4,7 @@
 \alias{set_config_source}
 \title{Set the location to a config file}
 \usage{
-set_config_source(config_source, path_root, verbose = TRUE)
+set_config_source(config_source, root, verbose = TRUE)
 }
 \description{
 If a remote location is specified, the file is downloaded to a temporary

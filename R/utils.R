@@ -25,9 +25,9 @@ is_conda_installation <- function() {
   )
 }
 
-is_package <- function(path_root = here::here()) {
+is_package <- function(root = here::here()) {
   rlang::with_handlers(
-    rprojroot::find_package_root_file(path = path_root),
+    rprojroot::find_package_root_file(path = root),
     error = function(e) NULL
   ) %>%
     is.null() %>%
