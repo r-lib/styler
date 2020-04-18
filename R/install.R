@@ -71,7 +71,7 @@ install_repo <- function(path_root) {
 #' @export
 uninstall_precommit <- function(scope = "repo",
                                 ask = "global",
-                                path_root = ".") {
+                                path_root = here::here()) {
   rlang::arg_match(scope, c("repo", "global"))
   rlang::arg_match(ask, c("repo", "global", "both", "none"))
   withr::with_dir(path_root, {
