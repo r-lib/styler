@@ -2,9 +2,9 @@
 % Please edit documentation in R/install.R
 \name{uninstall_precommit}
 \alias{uninstall_precommit}
-\title{Unistall pre-commit}
+\title{Uninstall pre-commit}
 \usage{
-uninstall_precommit(scope = "repo", ask = "global", path_root = ".")
+uninstall_precommit(scope = "repo", ask = "global", path_root = here::here())
 }
 \arguments{
 \item{scope}{Either "repo" or "global". "repo" removes pre-commit from your

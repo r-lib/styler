@@ -57,7 +57,7 @@ install_repo <- function(path_root) {
 }
 
 
-#' Unistall pre-commit
+#' Uninstall pre-commit
 #'
 #' Remove pre-commit from a repo or from your system.
 #' @param scope Either "repo" or "global". "repo" removes pre-commit from your
