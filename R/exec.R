@@ -112,11 +112,31 @@ path_derive_precommit_exec_path <- function() {
 #' If we can't find the executable, the empty string is returned.
 #' @keywords internal
 path_derive_precommit_exec_conda <- function() {
+  path <- path_derive_precommit_exec_impl("r-precommit")
+  if (path == "") {
+    path <- path_derive_precommit_exec_impl("r-reticulate")
+    if (path != "") {
+      rlang::abort(paste0(
+        "The R packae {precommit} now requires the executable to live ",
+        "in the conda environment r-precommit, not r-reticulate anymore ",
+        "where it is currently installed. ",
+        "Please run `precommit::install_precommit()` to re-install with conda ",
+        "or choose another installation method as described in the README. To save ",
+        "space on disk, you probably want to remove the installation in the ",
+        "conda environment r-reticulate with ",
+        "`reticulate::conda_remove('r-reticulate', 'precommit')`."
+      ))
+    }
+  }
+  path
+}
+
+path_derive_precommit_exec_impl <- function(conda_env) {
   tryCatch(
     {
       ls <- reticulate::conda_list()
 
-      path_reticulate <- fs::path_dir(ls[ls$name == "r-precommit", "python"][1])
+      path_reticulate <- fs::path_dir(ls[ls$name == conda_env, "python"][1])
       derived <- fs::path(
         path_reticulate,
         ifelse(is_windows(), "Scripts", ""),
