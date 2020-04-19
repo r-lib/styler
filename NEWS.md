@@ -18,6 +18,11 @@ Additional breaking changes are:
 
 - use env `r-precommit` instead of `r-reticulate` to avoid conflicts with other 
   packages commonly installed in `r-reticulate` (#147).
+- the hook `spell-check` does no longer take the hook argument `ignore-files` 
+  since this was inconsistent with the pre-commit framework. To exclude 
+  additional files, specify the `exclude:` key in your `.pre-commit-config.yaml`
+  file. If you like to keep excluding the default files, make sure you include 
+  the [default regex](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#spell-check).
 
 # precommit v0.0.0.9040
 
