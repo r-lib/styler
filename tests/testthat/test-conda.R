@@ -53,13 +53,13 @@ test_that("can use custom config file ", {
 test_that("Can uninstall pre-commit (repo scope)", {
   # with all files there
   expect_message(
-    uninstall_precommit(".", scope = "repo", root = tempdir),
+    uninstall_precommit(scope = "repo", root = tempdir),
     "Uninstalled pre-commit from repo scope.*"
   )
   expect_false(fs::file_exists(fs::path(tempdir, ".pre-commit-config.yaml")))
   # second time
   expect_message(
-    uninstall_precommit(".", scope = "repo", root = tempdir),
+    uninstall_precommit(scope = "repo", root = tempdir),
     "You can re-install"
   )
 
@@ -67,7 +67,7 @@ test_that("Can uninstall pre-commit (repo scope)", {
   use_precommit(open = FALSE, force = TRUE, root = tempdir)
   fs::file_delete(fs::path(tempdir, ".pre-commit-config.yaml"))
   expect_message(
-    uninstall_precommit(".", scope = "repo", root = tempdir),
+    uninstall_precommit(scope = "repo", root = tempdir),
     paste("Uninstalled pre-commit from repo scope.*")
   )
 })
@@ -75,16 +75,16 @@ test_that("Can uninstall pre-commit (repo scope)", {
 test_that("Can uninstall (globally)", {
   if (isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
     expect_error(
-      uninstall_precommit(".", scope = "global", ask = "none", root = tempdir),
+      uninstall_precommit(scope = "global", ask = "none", root = tempdir),
       "installed with conda"
     )
   } else {
     expect_message(
-      uninstall_precommit(".", scope = "global", ask = "none"),
+      uninstall_precommit(scope = "global", ask = "none", root = "."),
       "Removed pre-commit from"
     )
     expect_error(
-      uninstall_precommit(".", scope = "global", ask = "none"),
+      uninstall_precommit(scope = "global", ask = "none", root = "."),
       "No installation found."
     )
   }
