@@ -108,7 +108,7 @@ path_derive_precommit_exec_path <- function() {
 
 #' Derive the path to the conda pre-commit executable
 #'
-#' Only checks the conda env `r-reticulate`.
+#' Only checks the conda env `r-precommit`.
 #' If we can't find the executable, the empty string is returned.
 #' @keywords internal
 path_derive_precommit_exec_conda <- function() {
@@ -116,7 +116,7 @@ path_derive_precommit_exec_conda <- function() {
     {
       ls <- reticulate::conda_list()
 
-      path_reticulate <- fs::path_dir(ls[ls$name == "r-reticulate", "python"][1])
+      path_reticulate <- fs::path_dir(ls[ls$name == "r-precommit", "python"][1])
       derived <- fs::path(
         path_reticulate,
         ifelse(is_windows(), "Scripts", ""),

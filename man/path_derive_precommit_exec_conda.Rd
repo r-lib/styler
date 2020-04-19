@@ -7,7 +7,7 @@
 path_derive_precommit_exec_conda()
 }
 \description{
-Only checks the conda env \code{r-reticulate}.
+Only checks the conda env \code{r-precommit}.
 If we can't find the executable, the empty string is returned.
 }
 \keyword{internal}

@@ -9,7 +9,7 @@ install_system <- function() {
   if (!is_installed()) {
     usethis::ui_info(paste(
       "Installing pre-commit into the conda environment",
-      "`r-reticulate`."
+      "`r-precommit`."
     ))
     install_impl()
     usethis::ui_done("Sucessfully installed pre-commit on your system.")
@@ -28,8 +28,8 @@ install_system <- function() {
 
 #' Install pre-commit on your system.
 #'
-#' This installs pre-commit in the conda environment r-reticulate. It
-#' will be available to use accross different git repositories.
+#' This installs pre-commit in the conda environment r-precommit. It
+#' will be available to use across different git repositories.
 #' @export
 install_precommit <- function() {
   install_system()
@@ -38,15 +38,15 @@ install_precommit <- function() {
 #' Install pre-commit on your system with conda
 #' @keywords internal
 install_impl <- function() {
-  if (!"r-reticulate" %in% reticulate::conda_list()$name) {
-    reticulate::conda_create("r-reticulate")
+  if (!"r-precommit" %in% reticulate::conda_list()$name) {
+    reticulate::conda_create("r-precommit")
   }
-  reticulate::conda_install(packages = "pre-commit")
+  reticulate::conda_install("r-precommit", packages = "pre-commit")
 }
 
 install_repo <- function(root) {
   withr::with_dir(root, {
-    out <- call_and_capture(path_precommit_exec(), "install")
+    out <- call_precommit("install")
     if (out$exit_status == 0) {
       usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(root)}.")
     } else {
@@ -63,7 +63,7 @@ install_repo <- function(root) {
 #' @param scope Either "repo" or "global". "repo" removes pre-commit from your
 #'   project, but you will be able to use it in other projects. With "global",
 #'   you remove the pre-commit executable in the virtual python environment
-#'   r-reticulate so it won't be available in any project. When you want to
+#'   r-precommit so it won't be available in any project. When you want to
 #'   remove pre-commit globally, you should remote it locally first.
 #' @param ask Either "global", "repo" or "none" to determine in which case
 #'   a prompt should show up to let the user confirm his action.
@@ -92,7 +92,7 @@ uninstall_system <- function(ask = TRUE) {
   if (is_installed()) {
     if (ask) {
       answer <- readline(paste(
-        "You are about to uninstall pre-commit from the conda env r-reticulate.",
+        "You are about to uninstall pre-commit from the conda env r-precommit.",
         "It won't be available to any git repo anymore. Do you want to",
         "proceed? You can re-install at any time later with",
         "`precommit::install_precommit()`.",
@@ -108,7 +108,7 @@ uninstall_system <- function(ask = TRUE) {
           "R option `precommit.executable` points to ",
           getOption("precommit.executable"),
           " from where we try to uninstall. ",
-          "Can only uninstall when installed with conda into env r-reticulate. ",
+          "Can only uninstall when installed with conda into env r-precommit. ",
           "Please remove pre-commit manually from the comamnd line. "
         ))
       } else {
@@ -117,10 +117,10 @@ uninstall_system <- function(ask = TRUE) {
         }
         out <- call_and_capture(
           reticulate::conda_binary(),
-          "remove -n r-reticulate pre-commit --yes"
+          "remove -n r-precommit pre-commit --yes"
         )
         if (out$exit_status == 0) {
-          usethis::ui_done("Removed pre-commit from conda env r-reticulate.")
+          usethis::ui_done("Removed pre-commit from conda env r-precommit.")
         } else {
           communicate_captured_call(out)
         }
@@ -149,7 +149,7 @@ uninstall_repo <- function(ask) {
     continue <- TRUE
   }
   if (continue) {
-    out <- call_and_capture(path_precommit_exec(), "uninstall")
+    out <- call_precommit("uninstall")
     if (out$exit_status == 0) {
       usethis::ui_done("Uninstalled pre-commit from repo scope.")
     } else {

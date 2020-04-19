@@ -47,7 +47,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 autoupdate <- function(root = here::here()) {
   withr::with_dir(root, {
     assert_correct_upstream_repo_url()
-    out <- call_and_capture(path_precommit_exec(), "autoupdate")
+    out <- call_precommit("autoupdate")
     if (out$exit_status == 0) {
       usethis::ui_done(paste0(
         "Ran `pre-commit autoupdate` to get the latest version of the hooks."
