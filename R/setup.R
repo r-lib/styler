@@ -27,7 +27,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
                           root = here::here()) {
   assert_is_installed()
   assert_is_git_repo(root)
-  config_source <- set_config_source(config_source)
+  config_source <- set_config_source(config_source, root = root)
   install_repo(root)
   use_precommit_config(
     config_source, force, root,
