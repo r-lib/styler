@@ -4,10 +4,10 @@
 \alias{extract_diff_root}
 \title{Extract old and new lines from \verb{git diff --cached}}
 \usage{
-extract_diff_root(path_root = here::here())
+extract_diff_root(root = here::here())
 }
 \arguments{
-\item{path_root}{The root of project.}
+\item{root}{The root of project.}
 }
 \description{
 This is useful to detect within a hook script if the core function

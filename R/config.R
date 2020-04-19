@@ -1,8 +1,8 @@
 #' Initiate a pre-commit config file
 #'
-#' @param path_cp_config_from Path or URL to a `.pre-commit-config.yaml`. This
-#'   config file will be hard-copied into `path_root`. If `NULL`, we check if
-#'   `path_root` is a package or project directory using
+#' @param config_source Path or URL to a `.pre-commit-config.yaml`. This
+#'   config file will be hard-copied into `root`. If `NULL`, we check if
+#'   `root` is a package or project directory using
 #'   [rprojroot::find_package_root_file()], and resort to an appropriate default
 #'   config. See section 'Copying an existing config file'.
 #' @param force Whether to replace an existing config file.
@@ -12,9 +12,9 @@
 #' @param verbose Whether or not to communicate what's happening.
 #' @section Copying an existing config file:
 #' You can use an existing `.pre-commit-config.yaml` file when initializing
-#' pre-commit with [use_precommit()] using the argument `path_cp_config_from` to
+#' pre-commit with [use_precommit()] using the argument `config_source` to
 #' copy an existing config file into your repo. This argument defaults to the R
-#' option `precommit.path_cp_config_from`, so you may want to set this option in
+#' option `precommit.config_source`, so you may want to set this option in
 #' your `.Rprofile` for convenience. Note that this is **not** equivalent
 #' to the `--config` option in the CLI command `pre-commit install` and similar,
 #' which do *not* copy a config file into a project root (and allow to put it
@@ -22,34 +22,34 @@
 #' way.
 #' @inheritParams fallback_doc
 #' @export
-use_precommit_config <- function(path_cp_config_from = getOption("precommit.path_cp_config_from"),
-                                 force,
+use_precommit_config <- function(config_source = getOption("precommit.config_source"),
+                                 force = FALSE,
                                  open = rstudioapi::isAvailable(),
-                                 path_root = here::here(),
-                                 verbose = FALSE) {
-  path_cp_config_from <- set_path_cp_config_from(
-    path_cp_config_from,
-    path_root = path_root,
+                                 verbose = FALSE,
+                                 root = here::here()) {
+  config_source <- set_config_source(
+    config_source,
+    root = root,
     verbose = verbose
   )
   escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
   name_target <- ".pre-commit-config.yaml"
-  if (!fs::file_exists(fs::path(path_root, name_target)) | force) {
+  if (!fs::file_exists(fs::path(root, name_target)) | force) {
     fs::file_copy(
-      path_cp_config_from,
-      fs::path(path_root, name_target),
+      config_source,
+      fs::path(root, name_target),
       overwrite = TRUE
     )
-    usethis::ui_done("Copied .pre-commit-config.yaml to {path_root}")
+    usethis::ui_done("Copied .pre-commit-config.yaml to {root}")
   } else {
     usethis::ui_info(paste0(
       "There is already a pre-commit configuration file in ",
-      path_root,
+      root,
       ". Use `force = TRUE` to replace .pre-commit-config.yaml."
     ))
   }
 
-  if (is_package(path_root)) {
+  if (is_package(root)) {
     usethis::write_union(".Rbuildignore", escaped_name_target)
   }
   usethis::ui_todo(c(
@@ -68,17 +68,17 @@ use_precommit_config <- function(path_cp_config_from = getOption("precommit.path
 #' to a default config. We'll perform some checks on the existence of the file
 #' too.
 #' @keywords internal
-set_path_cp_config_from <- function(path_cp_config_from,
-                                    path_root,
-                                    verbose = TRUE) {
-  if (is_url(path_cp_config_from)) {
+set_config_source <- function(config_source,
+                              root,
+                              verbose = TRUE) {
+  if (is_url(config_source)) {
     if (verbose) {
-      usethis::ui_info("Downloading remote config from {path_cp_config_from}.")
+      usethis::ui_info("Downloading remote config from {config_source}.")
     }
     tmp <- tempfile()
 
-    target <- fs::path_ext_set(tmp, fs::path_ext(path_cp_config_from))
-    utils::download.file(path_cp_config_from, target, quiet = TRUE)
+    target <- fs::path_ext_set(tmp, fs::path_ext(config_source))
+    utils::download.file(config_source, target, quiet = TRUE)
     rlang::with_handlers(
       yaml::read_yaml(target, fileEncoding = "UTF-8"),
       error = function(e) {
@@ -90,33 +90,33 @@ set_path_cp_config_from <- function(path_cp_config_from,
     )
     return(target)
   }
-  if (is.null(path_cp_config_from)) {
+  if (is.null(config_source)) {
     # workaround for R CMD CHECK warning about hidden top-level directories.
-    name_origin <- ifelse(is_package(path_root),
+    name_origin <- ifelse(is_package(root),
       "pre-commit-config-pkg.yaml",
       "pre-commit-config-proj.yaml"
     )
-    path_cp_config_from <- system.file(name_origin, package = "precommit")
+    config_source <- system.file(name_origin, package = "precommit")
   }
-  if (!fs::file_exists(path_cp_config_from)) {
+  if (!fs::file_exists(config_source)) {
     rlang::abort(paste0(
-      "File ", path_cp_config_from, " does not exist. Please use the ",
-      "argument `path_cp_config_from` to provide a path to an existing ",
+      "File ", config_source, " does not exist. Please use the ",
+      "argument `config_source` to provide a path to an existing ",
       "`.pre-commit.yaml` or `NULL` to use the template config."
     ))
   }
-  file_type <- as.character(fs::file_info(path_cp_config_from)$type)
+  file_type <- as.character(fs::file_info(config_source)$type)
   if (!(file_type %in% c("file", "symlink"))) {
     rlang::abort(paste0(
-      "File ", path_cp_config_from, " must be a file or a symlink, not a ",
-      file_type, ". Please change the argument `path_cp_config_from` ",
+      "File ", config_source, " must be a file or a symlink, not a ",
+      file_type, ". Please change the argument `config_source` ",
       "accordingly."
     ))
   }
   if (verbose) {
-    usethis::ui_info("Using local conifig from {path_cp_config_from}.")
+    usethis::ui_info("Using local conifig from {config_source}.")
   }
-  path_cp_config_from
+  config_source
 }
 
 

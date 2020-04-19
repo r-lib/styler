@@ -2,9 +2,9 @@
 % Please edit documentation in R/install.R
 \name{uninstall_precommit}
 \alias{uninstall_precommit}
-\title{Unistall pre-commit}
+\title{Uninstall pre-commit}
 \usage{
-uninstall_precommit(scope = "repo", ask = "global", path_root = ".")
+uninstall_precommit(scope = "repo", ask = "global", root = here::here())
 }
 \arguments{
 \item{scope}{Either "repo" or "global". "repo" removes pre-commit from your
@@ -16,7 +16,7 @@ remove pre-commit globally, you should remote it locally first.}
 \item{ask}{Either "global", "repo" or "none" to determine in which case
 a prompt should show up to let the user confirm his action.}
 
-\item{path_root}{The path to the root directory of your project.}
+\item{root}{The path to the root directory of your project.}
 }
 \description{
 Remove pre-commit from a repo or from your system.

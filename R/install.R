@@ -44,20 +44,20 @@ install_impl <- function() {
   reticulate::conda_install(packages = "pre-commit")
 }
 
-install_repo <- function(path_root) {
-  withr::with_dir(path_root, {
+install_repo <- function(root) {
+  withr::with_dir(root, {
     out <- call_and_capture(path_precommit_exec(), "install")
     if (out$exit_status == 0) {
-      usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(path_root)}.")
+      usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(root)}.")
     } else {
-      usethis::ui_oops("Failed to install pre-commit for repo {fs::path_file(path_root)}.")
+      usethis::ui_oops("Failed to install pre-commit for repo {fs::path_file(root)}.")
       communicate_captured_call(out, preamble = "Problems during initialization:")
     }
   })
 }
 
 
-#' Unistall pre-commit
+#' Uninstall pre-commit
 #'
 #' Remove pre-commit from a repo or from your system.
 #' @param scope Either "repo" or "global". "repo" removes pre-commit from your
@@ -71,10 +71,10 @@ install_repo <- function(path_root) {
 #' @export
 uninstall_precommit <- function(scope = "repo",
                                 ask = "global",
-                                path_root = ".") {
+                                root = here::here()) {
   rlang::arg_match(scope, c("repo", "global"))
   rlang::arg_match(ask, c("repo", "global", "both", "none"))
-  withr::with_dir(path_root, {
+  withr::with_dir(root, {
     if (scope == "repo") {
       uninstall_repo(ask = (ask %in% c("repo", "both")))
       path_config <- ".pre-commit-config.yaml"

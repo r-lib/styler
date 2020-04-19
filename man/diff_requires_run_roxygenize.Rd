@@ -4,10 +4,10 @@
 \alias{diff_requires_run_roxygenize}
 \title{Check if we should run roxygen.}
 \usage{
-diff_requires_run_roxygenize(path_root = here::here())
+diff_requires_run_roxygenize(root = here::here())
 }
 \arguments{
-\item{path_root}{The root of project.}
+\item{root}{The root of project.}
 }
 \description{
 This is the case if a new or replaced/removed line contains a roxygen2

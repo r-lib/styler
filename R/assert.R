@@ -1,8 +1,8 @@
-assert_is_git_repo <- function(path_root) {
-  if (is.null(git2r::discover_repository(path_root))) {
+assert_is_git_repo <- function(root) {
+  if (is.null(git2r::discover_repository(root))) {
     rlang::abort(paste0(
-      "The directory ", path_root, " is not a git repo. Please navigate to ",
-      path_root, " and init git in ",
+      "The directory ", root, " is not a git repo. Please navigate to ",
+      root, " and init git in ",
       "this directory with `$ git init` from the command line or ",
       "`> usethis::use_git()` from the R prompt."
     ))

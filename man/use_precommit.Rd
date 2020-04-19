@@ -5,16 +5,16 @@
 \title{Set up pre-commit}
 \usage{
 use_precommit(
-  path_cp_config_from = getOption("precommit.path_cp_config_from"),
+  config_source = getOption("precommit.config_source"),
   force = FALSE,
   open = rstudioapi::isAvailable(),
-  path_root = here::here()
+  root = here::here()
 )
 }
 \arguments{
-\item{path_cp_config_from}{Path or URL to a \code{.pre-commit-config.yaml}. This
-config file will be hard-copied into \code{path_root}. If \code{NULL}, we check if
-\code{path_root} is a package or project directory using
+\item{config_source}{Path or URL to a \code{.pre-commit-config.yaml}. This
+config file will be hard-copied into \code{root}. If \code{NULL}, we check if
+\code{root} is a package or project directory using
 \code{\link[rprojroot:find_package_root_file]{rprojroot::find_package_root_file()}}, and resort to an appropriate default
 config. See section 'Copying an existing config file'.}
 
@@ -24,7 +24,7 @@ config. See section 'Copying an existing config file'.}
 it's been placed in your repo. The default is \code{TRUE} when working in
 RStudio. Otherwise, we recommend manually inspecting the file.}
 
-\item{path_root}{The path to the root directory of your project.}
+\item{root}{The path to the root directory of your project.}
 }
 \description{
 Get started.
@@ -55,9 +55,9 @@ hooks.
 \section{Copying an existing config file}{
 
 You can use an existing \code{.pre-commit-config.yaml} file when initializing
-pre-commit with \code{\link[=use_precommit]{use_precommit()}} using the argument \code{path_cp_config_from} to
+pre-commit with \code{\link[=use_precommit]{use_precommit()}} using the argument \code{config_source} to
 copy an existing config file into your repo. This argument defaults to the R
-option \code{precommit.path_cp_config_from}, so you may want to set this option in
+option \code{precommit.config_source}, so you may want to set this option in
 your \code{.Rprofile} for convenience. Note that this is \strong{not} equivalent
 to the \code{--config} option in the CLI command \verb{pre-commit install} and similar,
 which do \emph{not} copy a config file into a project root (and allow to put it
