@@ -112,11 +112,11 @@ path_derive_precommit_exec_path <- function() {
 #' If we can't find the executable, the empty string is returned.
 #' @keywords internal
 path_derive_precommit_exec_conda <- function() {
-  path <- path_derive_precommit_exec_impl("r-precommit")
+  path <- path_derive_precommit_exec_conda_impl("r-precommit")
   if (path == "") {
-    path <- path_derive_precommit_exec_impl("r-reticulate")
+    path <- path_derive_precommit_exec_conda_impl("r-reticulate")
     if (path != "") {
-      rlang::abort(paste0(
+      rlang::warn(paste0(
         "The R packae {precommit} now requires the executable to live ",
         "in the conda environment r-precommit, not r-reticulate anymore ",
         "where it is currently installed. ",
@@ -131,7 +131,7 @@ path_derive_precommit_exec_conda <- function() {
   path
 }
 
-path_derive_precommit_exec_impl <- function(conda_env) {
+path_derive_precommit_exec_conda_impl <- function(conda_env) {
   tryCatch(
     {
       ls <- reticulate::conda_list()
