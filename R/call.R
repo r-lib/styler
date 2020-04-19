@@ -14,7 +14,7 @@ call_and_capture <- function(...) {
     system2(..., stdout = stdout, stderr = stderr)
   )
   stderr <- readLines(stderr)
-  if (isTRUE(grepl("error", stderr, ignore.case = TRUE))) {
+  if (isTRUE(any(grepl("error", stderr, ignore.case = TRUE)))) {
     # conda run has exit status 0 but stderr with ERROR, we need to set exit
     # code in that case.
     exit_status <- -999
