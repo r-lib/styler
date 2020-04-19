@@ -30,6 +30,7 @@ github
 gitignore
 gsub
 href
+http
 https
 icloud
 idx
@@ -48,6 +49,7 @@ maxkb
 md
 miniconda
 navbar
+netlify
 nrow
 oneliner
 os
