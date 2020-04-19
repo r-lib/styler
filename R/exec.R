@@ -120,9 +120,10 @@ path_derive_precommit_exec_conda <- function() {
         "The R packae {precommit} now requires the executable to live ",
         "in the conda environment r-precommit, not r-reticulate anymore ",
         "where it is currently installed. ",
-        "Please run `precommit::install_precommit()` to re-install with conda ",
+        "Please run `precommit::install_precommit(force = TRUE)` to re-install with conda ",
         "or choose another installation method as described in the README. To save ",
-        "space on disk, you probably want to remove the installation in the ",
+        "space on disk, you probably want to delete the pre-commit executable at ",
+        path, " and the package sources in the ",
         "conda environment r-reticulate with ",
         "`reticulate::conda_remove('r-reticulate', 'precommit')`."
       ))

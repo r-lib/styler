@@ -1,4 +1,4 @@
-install_system <- function() {
+install_system <- function(force) {
   if (!rlang::is_installed("reticulate")) {
     rlang::abort(paste(
       "Please install the R package reticulate to use this installation",
@@ -6,7 +6,7 @@ install_system <- function() {
       "require reticulate. See https://lorenzwalthert.github.io/precommit."
     ))
   }
-  if (!is_installed()) {
+  if (!is_installed() | force) {
     usethis::ui_info(paste(
       "Installing pre-commit into the conda environment",
       "`r-precommit`."
@@ -30,9 +30,10 @@ install_system <- function() {
 #'
 #' This installs pre-commit in the conda environment r-precommit. It
 #' will be available to use across different git repositories.
+#' @param force Whether or not to force a re-installation.
 #' @export
-install_precommit <- function() {
-  install_system()
+install_precommit <- function(force = FALSE) {
+  install_system(force = force)
 }
 
 #' Install pre-commit on your system with conda

@@ -4,7 +4,10 @@
 \alias{install_precommit}
 \title{Install pre-commit on your system.}
 \usage{
-install_precommit()
+install_precommit(force = FALSE)
+}
+\arguments{
+\item{force}{Whether or not to force a re-installation.}
 }
 \description{
 This installs pre-commit in the conda environment r-precommit. It
