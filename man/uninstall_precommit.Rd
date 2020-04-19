@@ -10,7 +10,7 @@ uninstall_precommit(scope = "repo", ask = "global", root = here::here())
 \item{scope}{Either "repo" or "global". "repo" removes pre-commit from your
 project, but you will be able to use it in other projects. With "global",
 you remove the pre-commit executable in the virtual python environment
-r-reticulate so it won't be available in any project. When you want to
+r-precommit so it won't be available in any project. When you want to
 remove pre-commit globally, you should remote it locally first.}
 
 \item{ask}{Either "global", "repo" or "none" to determine in which case

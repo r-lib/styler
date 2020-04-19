@@ -103,7 +103,7 @@ id: spell-check
 args: [--ignore_files=<ignored_files>, --lang=<language>]
 ```
 
-This hook does not modify files. It will add all words not found in the
+This hook modifies files. It will add all words not found in the
 dictionary to `inst/WORDLIST`, assuming they were spelled correctly but were not
 in the dictionary. An example might be "RStudio". The hook error message will
 contain all words written to `inst/WORDLIST`, so if there were really some
@@ -171,4 +171,3 @@ i.e. remind you to run `codemetar::write_codemeta()` in order to keep
 `codemeta.json` in sync with `DESCRIPTION`.
 
 This hook does not modify any file.
-

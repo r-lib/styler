@@ -7,6 +7,10 @@
 install_precommit()
 }
 \description{
-This installs pre-commit in the conda environment r-reticulate. It
-will be available to use accross different git repositories.
+<<<<<<< HEAD
+This installs pre-commit in the conda environment r-precommit. It
+=======
+This installs pre-commit in the conda environment r-precommit It
+>>>>>>> switch to env r-precommit to avoid conflicts
+will be available to use across different git repositories.
 }
