@@ -14,6 +14,10 @@ submission in #152:
 - `use_precommit_config`'s argument `verbose` now is in the same position as
   in `use_config()`.
 
+Additional breaking changes are:
+
+- use env `r-precommit` instead of `r-reticulate` to avoid conflicts with other 
+  packages commonly installed in `r-reticulate` (#147).
 
 # precommit v0.0.0.9040
 
@@ -22,8 +26,6 @@ submission in #152:
 - conda is a suggested dependency now, so those who choose a different 
   installation method have a more lightweight dependency graph (#136).
 - Use more thoughtful order for hooks, between pkg and project (#142).
-- use env `r-precommit` instead of `r-reticulate` to avoid conflicts with other 
-  packages commonly installed in `r-reticulate` (#147).
 
 # precommit v0.0.0.9031 up to v0.0.0.9038
 
