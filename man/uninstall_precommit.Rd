@@ -4,16 +4,16 @@
 \alias{uninstall_precommit}
 \title{Uninstall pre-commit}
 \usage{
-uninstall_precommit(scope = "repo", ask = "global", root = here::here())
+uninstall_precommit(scope = "repo", ask = "user", root = here::here())
 }
 \arguments{
-\item{scope}{Either "repo" or "global". "repo" removes pre-commit from your
-project, but you will be able to use it in other projects. With "global",
+\item{scope}{Either "repo" or "user". "repo" removes pre-commit from your
+project, but you will be able to use it in other projects. With "user",
 you remove the pre-commit executable in the virtual python environment
-r-precommit so it won't be available in any project. When you want to
-remove pre-commit globally, you should remote it locally first.}
+r-precommit so it won't be available in any project. When you want to do
+the latter, you should first do the former.}
 
-\item{ask}{Either "global", "repo" or "none" to determine in which case
+\item{ask}{Either "user", "repo" or "none" to determine in which case
 a prompt should show up to let the user confirm his action.}
 
 \item{root}{The path to the root directory of your project.}

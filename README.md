@@ -156,5 +156,5 @@ itself, including how to:
 
 ``` r
 uninstall_precommit("repo") # just for the repo you are in.
-uninstall_precommit("global") # remove the pre-commit conda executable.
+uninstall_precommit("user") # remove the pre-commit conda executable.
 ```

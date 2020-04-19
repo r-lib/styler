@@ -72,25 +72,25 @@ test_that("Can uninstall pre-commit (repo scope)", {
   )
 })
 
-test_that("Can uninstall (globally)", {
+test_that("Can uninstall (userly)", {
   if (isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
     expect_error(
-      uninstall_precommit(scope = "global", ask = "none", root = tempdir),
+      uninstall_precommit(scope = "user", ask = "none", root = tempdir),
       "installed with conda"
     )
   } else {
     expect_message(
-      uninstall_precommit(scope = "global", ask = "none", root = "."),
+      uninstall_precommit(scope = "user", ask = "none", root = "."),
       "Removed pre-commit from"
     )
     expect_error(
-      uninstall_precommit(scope = "global", ask = "none", root = "."),
+      uninstall_precommit(scope = "user", ask = "none", root = "."),
       "No installation found."
     )
   }
 })
 
-test_that("use_precommit fails when no global installation is found", {
+test_that("use_precommit fails when no user installation is found", {
   skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
   expect_error(use_precommit(root = tempdir), "installed on your system")
 })

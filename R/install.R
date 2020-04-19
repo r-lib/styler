@@ -60,20 +60,20 @@ install_repo <- function(root) {
 #' Uninstall pre-commit
 #'
 #' Remove pre-commit from a repo or from your system.
-#' @param scope Either "repo" or "global". "repo" removes pre-commit from your
-#'   project, but you will be able to use it in other projects. With "global",
+#' @param scope Either "repo" or "user". "repo" removes pre-commit from your
+#'   project, but you will be able to use it in other projects. With "user",
 #'   you remove the pre-commit executable in the virtual python environment
-#'   r-precommit so it won't be available in any project. When you want to
-#'   remove pre-commit globally, you should remote it locally first.
-#' @param ask Either "global", "repo" or "none" to determine in which case
+#'   r-precommit so it won't be available in any project. When you want to do
+#'   the latter, you should first do the former.
+#' @param ask Either "user", "repo" or "none" to determine in which case
 #'   a prompt should show up to let the user confirm his action.
 #' @inheritParams fallback_doc
 #' @export
 uninstall_precommit <- function(scope = "repo",
-                                ask = "global",
+                                ask = "user",
                                 root = here::here()) {
-  rlang::arg_match(scope, c("repo", "global"))
-  rlang::arg_match(ask, c("repo", "global", "both", "none"))
+  rlang::arg_match(scope, c("repo", "user"))
+  rlang::arg_match(ask, c("repo", "user", "both", "none"))
   withr::with_dir(root, {
     if (scope == "repo") {
       uninstall_repo(ask = (ask %in% c("repo", "both")))
@@ -82,8 +82,8 @@ uninstall_precommit <- function(scope = "repo",
         fs::file_delete(path_config)
         usethis::ui_done("Removed .pre-commit-config.yaml")
       }
-    } else if (scope == "global") {
-      uninstall_system(ask = (ask %in% c("global", "both")))
+    } else if (scope == "user") {
+      uninstall_system(ask = (ask %in% c("user", "both")))
     }
   })
 }

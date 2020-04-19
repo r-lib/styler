@@ -22,7 +22,10 @@ Additional breaking changes are:
   since this was inconsistent with the pre-commit framework. To exclude 
   additional files, specify the `exclude:` key in your `.pre-commit-config.yaml`
   file. If you like to keep excluding the default files, make sure you include 
-  the [default regex](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#spell-check).
+  the [default regex](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#spell-check)
+  (#153).
+- `uninstall_precommit()`'s `scope` argument value `"global"` was renamed to 
+  `"user"`.
 
 # precommit v0.0.0.9040
 
