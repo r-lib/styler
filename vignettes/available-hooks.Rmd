@@ -7,9 +7,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+
 Below is a comprehensive list with all hooks from {precommit} as well well as
 their arguments or flags, if they take any. Other repos also host hooks, many
 are listed [here](https://pre-commit.com/hooks.html).
+
+# Good to know
 
 **File modification**
 
@@ -39,6 +42,14 @@ repos:
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
 "))
 ```
+
+**Other hook settings**
+
+Apart from specifying the `args` key as described above, there are other hooks
+settings you can specify. If you don't, they are inherited from the default 
+repository's configuration (i.e. the `.pre-commit-hooks.yaml` file in 
+https://github.com/lorenzwalthert/precommit). See the [pre-commit documentation](https://pre-commit.com/#pre-commit-configyaml---hooks), for the
+available keys.
 
 # Hooks
 
@@ -79,9 +90,11 @@ This hook does not modify files.
 
 ## `spell-check`
 
-Checks spelling with `spelling::spell_check_files()`. Excluded are R and python
-scripts as well as `.gitignore` and similar. To be precise, files matching the
-following regex are excluded by default (as of `r paste0("v", packageVersion("precommit"))`):
+Checks spelling with `spelling::spell_check_files()`. Excluded are a range of 
+files such `.R` files, files in `data/` etc. As of 
+`r paste0("v", packageVersion("precommit"))`, the following regex is used to 
+exclude files following the 
+[verbose python regex syntax](https://pre-commit.com/#regular-expressions):
 
 ```{r, echo = FALSE, comment = ""}
 extract_spell_check_regex <- function() {
@@ -94,16 +107,17 @@ extract_spell_check_regex <- function() {
 cat(extract_spell_check_regex())
 ```
 
-Argument `ignore_files` takes a regular expression matched with `base::grep()`
-to ignore further files from the hook. Argument `lang` is passed to
-`spelling::spell_check_files()`.
+If you provide an `exclude:` key in your `.pre-commit-config.yaml` under the 
+`spell-check` hook, you can specify a regex that will overscope the default
+regex from above, also see section *Other hook settings* above. The `lang` 
+arg will be passed to `spelling::spell_check_files()`.
 
 ```
 id: spell-check
-args: [--ignore_files=<ignored_files>, --lang=<language>]
+args: [--lang=<language>]
 ```
 
-This hook modifies files. It will add all words not found in the
+This hook does not modify input files. It will add all words not found in the
 dictionary to `inst/WORDLIST`, assuming they were spelled correctly but were not
 in the dictionary. An example might be "RStudio". The hook error message will
 contain all words written to `inst/WORDLIST`, so if there were really some
@@ -116,7 +130,7 @@ should pass.
 A hook to run `roxygen2::roxygenize()`. Makes sure you commit your `.Rd` changes
 with the source changes.
 
-This hook modifies files.
+This hook does not modify input files, but writes to `.Rd` files in `man/`.
 
 ## `deps-in-desc`
 
