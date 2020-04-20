@@ -5,7 +5,8 @@ Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Description: Useful pre-commit hooks for R.
 License: GPL-3
-URL: https://github.com/lorenzwalthert/precommit
+URL: https://lorenzwalthert.github.io/precommit/,
+    https://github.com/lorenzwalthert/precommit
 Imports:
     docopt,
     fs,

@@ -27,6 +27,11 @@ Additional breaking changes are:
 - `uninstall_precommit()`'s `scope` argument value `"global"` was renamed to 
   `"user"`.
 
+**Minor Changes**
+
+- `DESCRIPTION` now links the pkgdown website in addition to the GitHub repo (#155).
+
+
 # precommit v0.0.0.9040
 
 - roxygenize hook now only ran when `git diff --cached` contains roxygen 
