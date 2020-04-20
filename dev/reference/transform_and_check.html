@@ -188,7 +188,7 @@
   <span class='kw'>in_name</span> <span class='kw'>=</span> <span class='no'>in_item</span>,
   <span class='kw'>out_name</span> <span class='kw'>=</span> <span class='no'>out_item</span>,
   <span class='no'>transformer</span>,
-  <span class='no'>write_back</span>,
+  <span class='no'>dry</span>,
   <span class='kw'>write_tree</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>out_tree</span> <span class='kw'>=</span> <span class='st'>"_tree"</span>,
   <span class='no'>...</span>
@@ -218,9 +218,12 @@
       <td><p>A function to apply to the content of <code>in_item</code>.</p></td>
     </tr>
     <tr>
-      <th>write_back</th>
-      <td><p>Whether the results of the transformation should be written
-to the output file.</p></td>
+      <th>dry</th>
+      <td><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
+from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.</p></td>
     </tr>
     <tr>
       <th>write_tree</th>

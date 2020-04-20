@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run a collection of tests — test_collection • styler</title>
+<title>Potentially transform a file — transform_utf8_one • styler</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,8 @@
 
 
 
-<meta property="og:title" content="Run a collection of tests — test_collection" />
-<meta property="og:description" content="Run transformations on all *-in.R files in a test directory and compare them
-with their *-out.R counterpart." />
+<meta property="og:title" content="Potentially transform a file — transform_utf8_one" />
+<meta property="og:description" content="Potentially transform a file" />
 
 
 <meta name="robots" content="noindex">
@@ -174,38 +173,27 @@ with their *-out.R counterpart." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run a collection of tests</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/testing.R'><code>R/testing.R</code></a></small>
-    <div class="hidden name"><code>test_collection.Rd</code></div>
+    <h1>Potentially transform a file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/io.R'><code>R/io.R</code></a></small>
+    <div class="hidden name"><code>transform_utf8_one.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Run transformations on all *-in.R files in a test directory and compare them
-with their *-out.R counterpart.</p>
+    <p>Potentially transform a file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>test_collection</span>(
-  <span class='no'>test</span>,
-  <span class='kw'>sub_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dry</span> <span class='kw'>=</span> <span class='st'>"off"</span>,
-  <span class='kw'>write_tree</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='no'>transformer</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>transform_utf8_one</span>(<span class='no'>path</span>, <span class='no'>fun</span>, <span class='no'>dry</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>test</th>
-      <td><p>The test to run. It corresponds to a folder name in
-tests/testthat.</p></td>
+      <th>path</th>
+      <td><p>A vector with file paths to transform.</p></td>
     </tr>
     <tr>
-      <th>sub_test</th>
-      <td><p>A regex pattern to further reduce the amount of test files
-to be tested in the test. <code>sub_test</code> must match the beginning of file
-names in tests/testthat. <code>NULL</code> matches all files.</p></td>
+      <th>fun</th>
+      <td><p>A function that returns a character vector.</p></td>
     </tr>
     <tr>
       <th>dry</th>
@@ -215,31 +203,8 @@ latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
 styling are not identical.</p></td>
     </tr>
-    <tr>
-      <th>write_tree</th>
-      <td><p>Whether or not the tree structure of the test should be
-computed and written to a file. Note that this needs R &gt;= 3.2
-(see <code><a href='set_arg_write_tree.html'>set_arg_write_tree()</a></code>). If the argument is set to <code>NA</code>, the function
-determines whether R &gt;= 3.2 is in use and if so, trees will be written.</p></td>
-    </tr>
-    <tr>
-      <th>transformer</th>
-      <td><p>A function to apply to the content of <code>in_item</code>.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Parameters passed to transformer function.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Each file name that matches <code>test</code> and <code>sub_test</code> and ends with
-"-in.R" is considered as an input to test. Its counterpart,
-the reference to compare it against is the *-out.R file. It is constructed
-by taking the substring of the *-in.R file before the
-last dash and adding -out.R. In contrast to older versions of this
-function, every *-out.R file has just one in file.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

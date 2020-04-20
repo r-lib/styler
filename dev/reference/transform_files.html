@@ -184,7 +184,7 @@ the result." />
 the result.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>transform_files</span>(<span class='no'>files</span>, <span class='no'>transformers</span>, <span class='no'>include_roxygen_examples</span>)</pre>
+    <pre class="usage"><span class='fu'>transform_files</span>(<span class='no'>files</span>, <span class='no'>transformers</span>, <span class='no'>include_roxygen_examples</span>, <span class='no'>dry</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,6 +204,14 @@ parse tables.</p></td>
       <td><p>Whether or not to style code in roxygen
 examples.</p></td>
     </tr>
+    <tr>
+      <th>dry</th>
+      <td><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
+from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -211,7 +219,8 @@ examples.</p></td>
     
 
 <p>Invisibly returns a data frame that indicates for each file considered for
-styling whether or not it was actually changed.</p>
+styling whether or not it was actually changed (or would be changed when
+<code>dry</code> is not "off").</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

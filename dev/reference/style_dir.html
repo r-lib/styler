@@ -195,7 +195,8 @@ Carefully examine the results after running this function!</p>
   <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>exclude_files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>exclude_dirs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"packrat"</span>, <span class='st'>"renv"</span>),
-  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dry</span> <span class='kw'>=</span> <span class='st'>"off"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -248,6 +249,14 @@ excluded from styling.</p></td>
       <td><p>Whether or not to style code in roxygen
 examples.</p></td>
     </tr>
+    <tr>
+      <th>dry</th>
+      <td><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
+from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -255,7 +264,8 @@ examples.</p></td>
     
 
 <p>Invisibly returns a data frame that indicates for each file considered for
-styling whether or not it was actually changed.</p>
+styling whether or not it was actually changed (or would be changed when
+<code>dry</code> is not "off").</p>
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     

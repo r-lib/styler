@@ -186,7 +186,7 @@ either R, Rmd or Rnw files by passing the relevant transformer function for each
 case.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>transform_code</span>(<span class='no'>path</span>, <span class='no'>fun</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>transform_code</span>(<span class='no'>path</span>, <span class='no'>fun</span>, <span class='no'>...</span>, <span class='no'>dry</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,6 +202,14 @@ case.</p>
     <tr>
       <th>...</th>
       <td><p>Further arguments passed to <code><a href='transform_utf8.html'>transform_utf8()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>dry</th>
+      <td><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
+from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.</p></td>
     </tr>
     </table>
 

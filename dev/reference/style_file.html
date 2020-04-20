@@ -189,7 +189,8 @@ Carefully examine the results after running this function!</p>
   <span class='no'>...</span>,
   <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
   <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>),
-  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dry</span> <span class='kw'>=</span> <span class='st'>"off"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -221,6 +222,14 @@ conveniently constructed via the <code>style</code> argument and <code>...</code
       <td><p>Whether or not to style code in roxygen
 examples.</p></td>
     </tr>
+    <tr>
+      <th>dry</th>
+      <td><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
+from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="encoding"><a class="anchor" href="#encoding"></a>Encoding</h2>
@@ -234,7 +243,8 @@ before applying styler.</p>
     
 
 <p>Invisibly returns a data frame that indicates for each file considered for
-styling whether or not it was actually changed.</p>
+styling whether or not it was actually changed (or would be changed when
+<code>dry</code> is not "off").</p>
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     
@@ -278,7 +288,7 @@ inspect the changes.</p>
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='st'>"styler"</span>, <span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".R"</span>)
 <span class='kw pkg'>xfun</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>write_utf8</a></span>(<span class='st'>"1++1"</span>, <span class='no'>file</span>)
 <span class='fu'>style_file</span>(<span class='no'>file</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /tmp/RtmpCVBZyy/styler467c57c9f73d.R ℹ 
+#&gt;  /tmp/Rtmp4HTAND/styler44107d7c7ab5.R ℹ 
 #&gt; ────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	0	File unchanged.
@@ -286,7 +296,7 @@ inspect the changes.</p>
 #&gt; ✖ 	0	Styling threw an error.
 #&gt; ────────────────────────────────────────
 #&gt; Please review the changes carefully!</div><div class='input'><span class='fu'>style_file</span>(<span class='no'>file</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(<span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /tmp/RtmpCVBZyy/styler467c57c9f73d.R ✔ 
+#&gt;  /tmp/Rtmp4HTAND/styler44107d7c7ab5.R ✔ 
 #&gt; ────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.

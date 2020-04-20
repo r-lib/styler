@@ -182,7 +182,7 @@
     <p>Transforms a file with a function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>transform_utf8</span>(<span class='no'>path</span>, <span class='no'>fun</span>, <span class='kw'>write_back</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>transform_utf8</span>(<span class='no'>path</span>, <span class='no'>fun</span>, <span class='no'>dry</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,9 +196,12 @@
       <td><p>A function that returns a character vector.</p></td>
     </tr>
     <tr>
-      <th>write_back</th>
-      <td><p>Whether or not the results of the transformation should
-be written back to the file.</p></td>
+      <th>dry</th>
+      <td><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
+from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.</p></td>
     </tr>
     </table>
 
