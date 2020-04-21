@@ -66,6 +66,9 @@ proj
 purrr
 py
 Rbuildignore
+RData
+rds
+Rds
 readLines
 readme
 repo

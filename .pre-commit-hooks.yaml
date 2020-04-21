@@ -47,8 +47,13 @@
     language: script
     exclude: >
       (?x)^(
+      .pre-commit-.*\.yaml|
       .*\.[rR]|
       .*\.py|
+      .*\.feather|
+      .*\.rds|
+      .*\.Rds|
+      .*\.RData|
       (.*/|)\.gitignore|
       (.*/|)\.pre-commit-.*|
       (.*/|)NAMESPACE|
