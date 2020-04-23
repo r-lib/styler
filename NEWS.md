@@ -30,7 +30,8 @@ Additional breaking changes are:
 **Minor Changes**
 
 - `DESCRIPTION` now links the pkgdown website in addition to the GitHub repo (#155).
-
+- `.Renviron`, `.Rrofile`, `.RData`, `.feather` and `.Rds` is now also excluded
+  from the spell checking hook.
 
 # precommit v0.0.0.9040
 

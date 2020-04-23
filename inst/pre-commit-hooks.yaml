@@ -54,6 +54,8 @@
       .*\.rds|
       .*\.Rds|
       .*\.RData|
+      (.*/|)\.Rprofile|
+      (.*/|)\.Renviron|
       (.*/|)\.gitignore|
       (.*/|)\.pre-commit-.*|
       (.*/|)NAMESPACE|
