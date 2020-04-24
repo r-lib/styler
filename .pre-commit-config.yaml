@@ -32,3 +32,9 @@ repos:
         entry: inst/hooks-config-to-inst
         language: script
         stages: [commit, push]
+    -   id: spell-check-exclude-to-config
+        name: spell-check-exclude-to-config
+        entry: inst/spell-check-exclude-to-config
+        language: script
+        stages: [commit, push]
+    
