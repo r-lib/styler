@@ -49,7 +49,7 @@ Apart from specifying the `args` key as described above, there are other hooks
 settings you can specify. If you don't, they are inherited from the default 
 repository's configuration (i.e. the `.pre-commit-hooks.yaml` file in 
 https://github.com/lorenzwalthert/precommit). See the [pre-commit documentation](https://pre-commit.com/#pre-commit-configyaml---hooks), for the
-available keys.
+available settings.
 
 # Hooks
 
@@ -90,8 +90,16 @@ This hook does not modify files.
 
 ## `spell-check`
 
-Checks spelling with `spelling::spell_check_files()`. Excluded are a range of 
-files such `.R` files, files in `data/` etc. As of 
+Checks spelling with `spelling::spell_check_files()`. 
+
+**Excluded files**
+
+When you invoke `precommit::use_precommit()` and `.pre-commit-config.yaml` is
+written to your repo (unless you specify `config_source` otherwise), we copy 
+the expression in the `exclude:` key from
+spell check hook the default repository's configuration (i.e. the 
+`.pre-commit-hooks.yaml` file in https://github.com/lorenzwalthert/precommit)
+into your config file, so you can easily add or remove some files. As of 
 `r paste0("v", packageVersion("precommit"))`, the following regex is used to 
 exclude files following the 
 [verbose python regex syntax](https://pre-commit.com/#regular-expressions):
@@ -104,17 +112,19 @@ extract_spell_check_regex <- function() {
     magrittr::extract2("exclude")
 }
 
-cat(extract_spell_check_regex())
+extract_spell_check_regex() %>%
+  gsub("\\| +", "\\|\n", .) %>%
+  cat()
 ```
 
-If you provide an `exclude:` key in your `.pre-commit-config.yaml` under the 
-`spell-check` hook, you can specify a regex that will overscope the default
-regex from above, also see section *Other hook settings* above. The `lang` 
-arg will be passed to `spelling::spell_check_files()`.
+**language**
+
+The `lang` arg will be passed to `spelling::spell_check_files()`.
 
 ```
 id: spell-check
 args: [--lang=<language>]
+exclude: <regular expresion>
 ```
 
 This hook does not modify input files. It will add all words not found in the

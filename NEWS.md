@@ -27,6 +27,12 @@ Additional breaking changes are:
 - `uninstall_precommit()`'s `scope` argument value `"global"` was renamed to 
   `"user"`.
 
+**Major Changes**
+
+- By default, the spell check hook now exposes a regex pattern in the default
+  `.pre-commit-config-config.yaml` for the spell check hook for easy 
+  manipulation.
+
 **Minor Changes**
 
 - `DESCRIPTION` now links the pkgdown website in addition to the GitHub repo (#155).
