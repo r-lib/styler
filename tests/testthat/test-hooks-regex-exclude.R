@@ -15,8 +15,8 @@ test_that("multiplication works", {
     )
     if (any(!matches)) {
       rlang::abort(paste(
-        "the following expressions don't match the pattern:",
-        paste0(x[!matches], collapse = ", ")
+        "The following expressions don't match the pattern: ",
+        paste0(x[!matches], collapse = ", "), ". Did you forget a trailing |?"
       ))
     }
   }

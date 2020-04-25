@@ -29,6 +29,7 @@ repos:
           .*\.feather|
           .*\.rds|
           .*\.Rds|
+          .*\.sh|
           .*\.RData
           )$
     -   id: style-files

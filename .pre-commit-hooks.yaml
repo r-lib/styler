@@ -65,6 +65,7 @@
       .*\.feather|
       .*\.rds|
       .*\.Rds|
+      .*\.sh|
       .*\.RData
       )$
     require_serial: true
