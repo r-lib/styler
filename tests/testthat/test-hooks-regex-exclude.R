@@ -1,5 +1,4 @@
 test_that("multiplication works", {
-  reticulate::use_condaenv(required = TRUE)
   re <- reticulate::import("re")
   pattern <- readLines(system.file("pre-commit-hooks.yaml", package = "precommit")) %>%
     gsub("^ *exclude *: *>", "    exclude: |", .) %>%
