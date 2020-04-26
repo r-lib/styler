@@ -53,7 +53,10 @@ autoupdate <- function(root = here::here()) {
         "Ran `pre-commit autoupdate` to get the latest version of the hooks."
       ))
     } else {
-      rlang::abort("Running precommit autoupdate failed.")
+      communicate_captured_call(
+        out,
+        preamble = "Running precommit autoupdate failed."
+      )
     }
   })
 }
