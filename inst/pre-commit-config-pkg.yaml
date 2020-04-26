@@ -11,9 +11,7 @@ repos:
     -   id: spell-check
         exclude: >
           (?x)^(
-          # directories
-          data/.*|
-          # files anywhere
+          data/.*| 
           (.*/|)\.Rprofile|
           (.*/|)\.Renviron|
           (.*/|)\.gitignore|
@@ -23,7 +21,6 @@ repos:
           (.*/|)appveyor.yml|
           (.*/|)\.Rbuildignore|
           (.*/|)\.pre-commit-.*|
-          # file extensions anywhere
           .*\.[rR]|
           .*\.py|
           .*\.feather|

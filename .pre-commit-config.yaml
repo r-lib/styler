@@ -13,6 +13,26 @@ repos:
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
     -   id: roxygenize # spell-check needs up-to date doc.
     -   id: spell-check
+        exclude: >
+          (?x)^(
+          data/.*| 
+          (.*/|)\.Rprofile|
+          (.*/|)\.Renviron|
+          (.*/|)\.gitignore|
+          (.*/|)NAMESPACE|
+          (.*/|)WORDLIST|
+          (.*/|)\.travis.yml|
+          (.*/|)appveyor.yml|
+          (.*/|)\.Rbuildignore|
+          (.*/|)\.pre-commit-.*|
+          .*\.[rR]|
+          .*\.py|
+          .*\.feather|
+          .*\.rds|
+          .*\.Rds|
+          .*\.sh|
+          .*\.RData
+          )$
     -   id: use-tidy-description
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.5.0

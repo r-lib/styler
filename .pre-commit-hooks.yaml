@@ -47,9 +47,7 @@
     language: script
     exclude: >
       (?x)^(
-      # directories
-      data/.*|
-      # files anywhere
+      data/.*| 
       (.*/|)\.Rprofile|
       (.*/|)\.Renviron|
       (.*/|)\.gitignore|
@@ -59,7 +57,6 @@
       (.*/|)appveyor.yml|
       (.*/|)\.Rbuildignore|
       (.*/|)\.pre-commit-.*|
-      # file extensions anywhere
       .*\.[rR]|
       .*\.py|
       .*\.feather|
