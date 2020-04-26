@@ -31,7 +31,7 @@ Additional breaking changes are:
 
 - By default, the spell check hook now exposes a regex pattern in the default
   `.pre-commit-config-config.yaml` for the spell check hook for easy 
-  manipulation.
+  manipulation (#157).
 
 **Minor Changes**
 
