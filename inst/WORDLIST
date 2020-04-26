@@ -20,6 +20,7 @@ dir
 dirname
 docopt
 docsearch
+docType
 emph
 env
 EOF

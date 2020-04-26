@@ -21,7 +21,6 @@ call_and_capture <- function(...) {
   }
 
   if (exit_status != 0) {
-
     if (length(stderr) < 1) {
       stderr <- paste0(
         "Could not recover stderr. Run the following command to get the error",
@@ -36,6 +35,13 @@ call_and_capture <- function(...) {
   )
 }
 
+#' Call pre-commit
+#'
+#' Either via `conda run` (because conda env needs to be activated in general to
+#' ensure an executable to runs successfully) or, if the installation method was
+#' not conda, as a plain bash command.
+#' @param ... Passed to [call_and_capture()]
+#' @keywords internal
 call_precommit <- function(...) {
   if (is_conda_installation()) {
     call_and_capture(
