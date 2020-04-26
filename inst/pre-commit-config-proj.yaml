@@ -2,7 +2,7 @@
 # R specific hooks: https://github.com/lorenzwalthert/precommit
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9042
+    rev: v0.0.0.9044
     hooks: 
     -   id: parsable-R
     -   id: no-browser-statement
