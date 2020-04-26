@@ -1,3 +1,23 @@
+# precommit v0.0.0.9044
+
+**Breaking Changes**
+
+- `uninstall_precommit()`'s `scope` argument value `"global"` was renamed to 
+  `"user"`.
+
+**Major Changes**
+
+- By default, the spell check hook now exposes a regex pattern in the default
+  `.pre-commit-config-config.yaml` for the spell check hook for easy 
+  manipulation. Also, additional patterns were excluded such as `.sh` (#157).
+
+**Minor Changes**
+
+- `DESCRIPTION` now links the pkgdown website in addition to the GitHub repo (#155).
+- `.Renviron`, `.Rrofile`, `.RData`, `.feather` and `.Rds` is now also excluded
+  from the spell checking hook.
+
+
 # precommit v0.0.0.9042
 
 **Breaking Changes**
@@ -24,20 +44,6 @@ Additional breaking changes are:
   file. If you like to keep excluding the default files, make sure you include 
   the [default regex](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#spell-check)
   (#153).
-- `uninstall_precommit()`'s `scope` argument value `"global"` was renamed to 
-  `"user"`.
-
-**Major Changes**
-
-- By default, the spell check hook now exposes a regex pattern in the default
-  `.pre-commit-config-config.yaml` for the spell check hook for easy 
-  manipulation (#157).
-
-**Minor Changes**
-
-- `DESCRIPTION` now links the pkgdown website in addition to the GitHub repo (#155).
-- `.Renviron`, `.Rrofile`, `.RData`, `.feather` and `.Rds` is now also excluded
-  from the spell checking hook.
 
 # precommit v0.0.0.9040
 
