@@ -9,6 +9,26 @@ repos:
     -   id: lintr
     -   id: readme-rmd-rendered
     -   id: spell-check
+        exclude: >
+          (?x)^(
+          data/.*| 
+          (.*/|)\.Rprofile|
+          (.*/|)\.Renviron|
+          (.*/|)\.gitignore|
+          (.*/|)NAMESPACE|
+          (.*/|)WORDLIST|
+          (.*/|)\.travis.yml|
+          (.*/|)appveyor.yml|
+          (.*/|)\.Rbuildignore|
+          (.*/|)\.pre-commit-.*|
+          .*\.[rR]|
+          .*\.py|
+          .*\.feather|
+          .*\.rds|
+          .*\.Rds|
+          .*\.sh|
+          .*\.RData
+          )$
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]    
 -   repo: https://github.com/pre-commit/pre-commit-hooks

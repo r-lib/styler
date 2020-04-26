@@ -47,23 +47,23 @@
     language: script
     exclude: >
       (?x)^(
-      .pre-commit-.*\.yaml|
-      .*\.[rR]|
-      .*\.py|
-      .*\.feather|
-      .*\.rds|
-      .*\.Rds|
-      .*\.RData|
+      data/.*| 
       (.*/|)\.Rprofile|
       (.*/|)\.Renviron|
       (.*/|)\.gitignore|
-      (.*/|)\.pre-commit-.*|
       (.*/|)NAMESPACE|
       (.*/|)WORDLIST|
       (.*/|)\.travis.yml|
       (.*/|)appveyor.yml|
       (.*/|)\.Rbuildignore|
-      data/.*
+      (.*/|)\.pre-commit-.*|
+      .*\.[rR]|
+      .*\.py|
+      .*\.feather|
+      .*\.rds|
+      .*\.Rds|
+      .*\.sh|
+      .*\.RData
       )$
     require_serial: true
 -   id: deps-in-desc

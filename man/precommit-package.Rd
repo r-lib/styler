@@ -11,6 +11,7 @@ Useful pre-commit hooks for R.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://lorenzwalthert.github.io/precommit/}
   \item \url{https://github.com/lorenzwalthert/precommit}
 }
 
