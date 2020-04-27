@@ -41,7 +41,8 @@ test_that("exclude regex for spell check hook matches expected files", {
       "data/data.feather",
       "more/data.rds",
       "things/xx.Rds",
-      ".pre-commit-"
+      ".pre-commit-",
+      ".Rproj"
     )
   )))
 })

@@ -66,4 +66,5 @@ communicate_captured_call <- function(x, preamble = "") {
     paste0(x$stdout, collapse = "\n"),
     collapse = "\n"
   ))
+  x$exit_status
 }

@@ -26,6 +26,7 @@ repos:
           (.*/|)\.Rbuildignore|
           (.*/|)\.pre-commit-.*|
           .*\.[rR]|
+          .*\.Rproj|
           .*\.py|
           .*\.feather|
           .*\.rds|
