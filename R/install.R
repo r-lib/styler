@@ -45,9 +45,13 @@ install_impl <- function() {
   reticulate::conda_install("r-precommit", packages = "pre-commit")
 }
 
-install_repo <- function(root) {
+install_repo <- function(root, install_hooks) {
   withr::with_dir(root, {
-    out <- call_precommit("install")
+    args <- list("install")
+    if (install_hooks) {
+      args <- c(args, list("--install-hooks"))
+    }
+    out <- do.call(call_precommit, args)
     if (out$exit_status == 0) {
       usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(root)}.")
     } else {

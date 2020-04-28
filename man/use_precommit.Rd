@@ -8,6 +8,7 @@ use_precommit(
   config_source = getOption("precommit.config_source"),
   force = FALSE,
   open = rstudioapi::isAvailable(),
+  install_hooks = TRUE,
   root = here::here()
 )
 }
@@ -23,6 +24,9 @@ config. See section 'Copying an existing config file'.}
 \item{open}{Whether or not to open the .pre-commit-config.yaml after
 it's been placed in your repo. The default is \code{TRUE} when working in
 RStudio. Otherwise, we recommend manually inspecting the file.}
+
+\item{install_hooks}{Whether to install environments for all available hooks.
+If \code{FALSE}, environments are installed with first commit.}
 
 \item{root}{The path to the root directory of your project.}
 }
@@ -41,14 +45,15 @@ to make sure git calls the hooks before the next commit.
 }
 }
 
-\section{What it does the function do?}{
+\section{What does the function do?}{
 
 \itemize{
-\item sets up pre-commit in your current directory with \verb{$ pre-commit install}.
-\item sets up a template \code{.pre-commit-config.yaml}.
-\item autoupdates the template to make sure you get the latest versions of the
+\item Sets up a template \code{.pre-commit-config.yaml}.
+\item Autoupdates the template to make sure you get the latest versions of the
 hooks.
-\item Open the config file if RStudio is running.
+\item Installs the pre-commit script along with the hook environments with
+\verb{$ pre-commit install --install-hooks}.
+\item Opens the config file if RStudio is running.
 }
 }
 
