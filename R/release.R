@@ -94,7 +94,7 @@ release_prechecks <- function() {
 #' is up-to date. Also, after we pushed the release to GitHub, we want to update
 #' the hooks from our own hook repo in the source repo too (we could also do that
 #' with `precommit::autoupdate()` though).
-#' @apram new_version The version string of the new version.
+#' @param new_version The version string of the new version.
 #' @param path The path to a pre-commit config file.
 #' @keywords internal
 update_rev_in_config <- function(new_version,
