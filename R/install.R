@@ -47,11 +47,7 @@ install_impl <- function() {
 
 install_repo <- function(root, install_hooks) {
   withr::with_dir(root, {
-    args <- list("install")
-    if (install_hooks) {
-      args <- c(args, list("--install-hooks"))
-    }
-    out <- do.call(call_precommit, args)
+    out <- call_precommit("install", if (install_hooks) "--install-hooks")
     if (out$exit_status == 0) {
       usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(root)}.")
     } else {
