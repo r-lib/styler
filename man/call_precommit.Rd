@@ -7,7 +7,7 @@
 call_precommit(...)
 }
 \arguments{
-\item{...}{Passed to \code{\link[=call_and_capture]{call_and_capture()}}}
+\item{...}{Arguments passed to the command line call \code{pre-commit}.}
 }
 \description{
 Either via \verb{conda run} (because conda env needs to be activated in general to
