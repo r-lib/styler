@@ -1,5 +1,5 @@
 test_that("call capturing for pass", {
-  expect_silent(captured <- call_and_capture("echo", 1))
+  expect_silent(captured <- call_and_capture("echo", "1"))
   expect_true(
     captured$exit_status == 0
   )
@@ -17,7 +17,7 @@ test_that("call capturing for pass", {
 })
 
 test_that("call capturing for error (command that does not exist)", {
-  expect_silent(captured <- call_and_capture("j23lkjsdi", 1))
+  expect_silent(captured <- call_and_capture("j23lkjsdi", "1"))
   expect_true(
     captured$exit_status != 0
   )
@@ -55,4 +55,9 @@ test_that("call capturing for error fo command that exists (but arguments that d
     communicate_captured_call(captured),
     "invalid choice"
   )
+})
+
+test_that("inputs meet requirements", {
+  expect_error(captured <- call_and_capture("echo", 1), "character vector.")
+  expect_error(captured <- call_and_capture("echo", list("x")), "character vector.")
 })

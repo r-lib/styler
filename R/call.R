@@ -1,17 +1,28 @@
 #' Make a call with [system2()] and capture the effects.
+#' @param command The command to issue. A character string of length one.
+#' @param args The command line arguments.
 #' @param ... Arguments passed to [system2()].
 #' @return
 #' A list with:
 #' * content of stderr
 #' * content of stdout
 #' * exit status
-call_and_capture <- function(...) {
+call_and_capture <- function(command, args, ...) {
+  if (length(command) != 1 | !inherits(command, "character")) {
+    rlang::abort("The command must be a character string of length 1.")
+  }
   stdout <- tempfile()
   writeLines("", stdout)
   stderr <- tempfile()
   writeLines("", stderr)
+  if (!is.character(args)) {
+    rlang::abort(paste0(
+      "command line arguments must be a character vector, not of class `",
+      class(args)[1], "`."
+    ))
+  }
   exit_status <- suppressWarnings(
-    system2(..., stdout = stdout, stderr = stderr)
+    system2(command, args, ..., stdout = stdout, stderr = stderr)
   )
   stderr <- readLines(stderr)
   if (isTRUE(any(grepl("error", stderr, ignore.case = TRUE)))) {
@@ -40,7 +51,7 @@ call_and_capture <- function(...) {
 #' Either via `conda run` (because conda env needs to be activated in general to
 #' ensure an executable to runs successfully) or, if the installation method was
 #' not conda, as a plain bash command.
-#' @param ... Passed to [call_and_capture()]
+#' @param ... Arguments passed to the command line call `pre-commit`.
 #' @keywords internal
 call_precommit <- function(...) {
   if (is_conda_installation()) {
@@ -49,7 +60,7 @@ call_precommit <- function(...) {
       c("run", "-n", "r-precommit", path_precommit_exec(), ...)
     )
   } else {
-    call_and_capture(path_precommit_exec(), ...)
+    call_and_capture(path_precommit_exec(), c(...))
   }
 }
 
@@ -66,4 +77,5 @@ communicate_captured_call <- function(x, preamble = "") {
     paste0(x$stdout, collapse = "\n"),
     collapse = "\n"
   ))
+  x$exit_status
 }
