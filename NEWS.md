@@ -4,7 +4,7 @@
 
 - `use_precommit()` gains new `install_hooks = TRUE` parameter. Now all hook
   environments defined in yaml config are by default installed in advance.
-  (#158)
+  (#163)
 
 # precommit v0.0.0.9044
 
