@@ -110,7 +110,7 @@ uninstall_system <- function(ask = TRUE) {
           getOption("precommit.executable"),
           " from where we try to uninstall. ",
           "Can only uninstall when installed with conda into env r-precommit. ",
-          "Please remove pre-commit manually from the comamnd line. "
+          "Please remove pre-commit manually from the command line. "
         ))
       } else {
         if (!rlang::is_installed("reticulate")) {
