@@ -194,7 +194,7 @@ uninstall_repo <- function(ask) {
     path_file <- ".pre-commit-config.yaml"
     if (fs::file_exists(path_file)) {
       fs::file_delete(path_file)
-      usethis::ui_done(paste0(
+      usethis::ui_done(paste(
         "Removed .pre-commit-config.yaml. If you want your collaborators",
         "to be able to\ncontinue to use pre-commit in this repo, you should",
         "undo the deletion of this file,\ne.g. with `$ git checkout",
