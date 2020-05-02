@@ -24,3 +24,4 @@ A list with:
 \description{
 Make a call with \code{\link[=system2]{system2()}} and capture the effects.
 }
+\keyword{internal}

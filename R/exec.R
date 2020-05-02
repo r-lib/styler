@@ -3,9 +3,10 @@
 #' [path_precommit_exec()] simply reads the R option `precommit.executable`, ]
 #' [path_derive_precommit_exec()] uses a heuristic to derive it from scratch.
 #'
-#'
 #' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
+#'  @return
+#'  A character vector of length one with the path to the pre-commit executable.
 #' @export
 path_precommit_exec <- function(check_if_exists = TRUE) {
   final <- getOption("precommit.executable") %>%

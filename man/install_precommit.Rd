@@ -9,6 +9,9 @@ install_precommit(force = FALSE)
 \arguments{
 \item{force}{Whether or not to force a re-installation.}
 }
+\value{
+The path to the pre-commit executable.
+}
 \description{
 This installs pre-commit in the conda environment r-precommit. It
 will be available to use across different git repositories.

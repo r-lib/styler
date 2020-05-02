@@ -29,6 +29,9 @@ RStudio. Otherwise, we recommend manually inspecting the file.}
 
 \item{root}{The path to the root directory of your project.}
 }
+\value{
+Character vector of length one with the path to the config file used.
+}
 \description{
 Initiate a pre-commit config file
 }

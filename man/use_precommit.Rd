@@ -30,6 +30,9 @@ If \code{FALSE}, environments are installed with first commit.}
 
 \item{root}{The path to the root directory of your project.}
 }
+\value{
+\code{NULL} (invisibly). The function is called for its side effects.
+}
 \description{
 Get started.
 }
