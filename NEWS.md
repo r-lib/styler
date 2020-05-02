@@ -1,3 +1,7 @@
+# precommit v0.1.0
+
+Initial CRAN release. See https://lorenzwalthert.github.io/precommit/.
+
 # precommit v0.0.0.9046
 
 **Major Changes**

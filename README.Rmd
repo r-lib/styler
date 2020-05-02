@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Useful git pre-commit hooks for R related projects
+# Useful git pre-commit hooks for R
 
 <!-- badges: start -->
 

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Useful git pre-commit hooks for R related projects
+# Useful git pre-commit hooks for R
 
 <!-- badges: start -->
 
