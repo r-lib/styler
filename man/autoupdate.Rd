@@ -9,6 +9,9 @@ autoupdate(root = here::here())
 \arguments{
 \item{root}{The path to the root directory of your project.}
 }
+\value{
+The exit status from \verb{pre-commit autoupdate}.
+}
 \description{
-Runs \verb{pre-commit autoupdate}.
+Runs \href{https://pre-commit.com/#pre-commit-autoupdate}{\verb{pre-commit autoupdate}}.
 }

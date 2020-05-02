@@ -23,6 +23,8 @@
 #'   `$ pre-commit install --install-hooks`.
 #' * Opens the config file if RStudio is running.
 #' @family helpers
+#' @return
+#' `NULL` (invisibly). The function is called for its side effects.
 #' @export
 use_precommit <- function(config_source = getOption("precommit.config_source"),
                           force = FALSE,
@@ -41,11 +43,14 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
   if (open) {
     open_config(root)
   }
+  invisible(NULL)
 }
 
 #' Auto-update your hooks
 #'
-#' Runs `pre-commit autoupdate`.
+#' Runs [`pre-commit autoupdate`](https://pre-commit.com/#pre-commit-autoupdate).
+#' @return
+#' The exit status from `pre-commit autoupdate`.
 #' @inheritParams fallback_doc
 #' @export
 autoupdate <- function(root = here::here()) {
@@ -62,6 +67,7 @@ autoupdate <- function(root = here::here()) {
         preamble = "Running precommit autoupdate failed."
       )
     }
+    out$exit_status
   })
 }
 

@@ -18,6 +18,9 @@ a prompt should show up to let the user confirm his action.}
 
 \item{root}{The path to the root directory of your project.}
 }
+\value{
+\code{NULL} (invisibly). The function is called for its side effects.
+}
 \description{
 Remove pre-commit from a repo or from your system.
 }

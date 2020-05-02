@@ -21,6 +21,8 @@
 #' under version control), but rather link it in some more or less transparent
 #' way.
 #' @inheritParams fallback_doc
+#' @return
+#' Character vector of length one with the path to the config file used.
 #' @export
 use_precommit_config <- function(config_source = getOption("precommit.config_source"),
                                  force = FALSE,
@@ -59,6 +61,7 @@ use_precommit_config <- function(config_source = getOption("precommit.config_sou
     "R specific hooks:",
     "https://github.com/lorenzwalthert/precommit."
   ))
+  config_source
 }
 
 #' Set the location to a config file

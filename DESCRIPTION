@@ -1,9 +1,10 @@
 Package: precommit
-Title: Pre commit hooks
+Title: Pre-commit hooks for R
 Version: 0.0.0.9045
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
-Description: Useful pre-commit hooks for R.
+Description: Useful git hooks for R building on top of the
+    multi-language framework 'pre-commit' for hook management.
 License: GPL-3
 URL: https://lorenzwalthert.github.io/precommit/,
     https://github.com/lorenzwalthert/precommit
@@ -27,7 +28,7 @@ Suggests:
     knitr,
     lintr,
     oneliner (>= 0.1.0),
-    reticulate,
+    reticulate (>= 1.14),
     rmarkdown,
     roxygen2,
     spelling,

@@ -16,7 +16,8 @@ install_system <- function(force) {
     usethis::ui_todo(
       "To use it with this project, run `precommit::use_precommit()`"
     )
-    options(precommit.executable = path_derive_precommit_exec())
+    path_exec <- path_derive_precommit_exec()
+    options(precommit.executable = path_exec)
   } else {
     path_exec <- path_precommit_exec(check_if_exists = FALSE)
     usethis::ui_info(c(
@@ -24,6 +25,7 @@ install_system <- function(force) {
       paste0("- ", path_exec)
     ))
   }
+  path_exec
 }
 
 #' Install pre-commit on your system.
@@ -31,6 +33,8 @@ install_system <- function(force) {
 #' This installs pre-commit in the conda environment r-precommit. It
 #' will be available to use across different git repositories.
 #' @param force Whether or not to force a re-installation.
+#' @return
+#' The path to the pre-commit executable.
 #' @export
 install_precommit <- function(force = FALSE) {
   install_system(force = force)
@@ -69,6 +73,8 @@ install_repo <- function(root, install_hooks) {
 #' @param ask Either "user", "repo" or "none" to determine in which case
 #'   a prompt should show up to let the user confirm his action.
 #' @inheritParams fallback_doc
+#' @return
+#' `NULL` (invisibly). The function is called for its side effects.
 #' @export
 uninstall_precommit <- function(scope = "repo",
                                 ask = "user",
@@ -87,6 +93,7 @@ uninstall_precommit <- function(scope = "repo",
       uninstall_system(ask = (ask %in% c("user", "both")))
     }
   })
+  invisible(NULL)
 }
 
 uninstall_system <- function(ask = TRUE) {
@@ -127,7 +134,7 @@ uninstall_system <- function(ask = TRUE) {
         }
       }
     } else {
-      usethis::ui_info("You did not type 'yes', uninstallation process aborted.")
+      rlang::abort("You did not type 'yes', uninstallation process aborted.")
     }
   } else {
     rlang::abort(paste(

@@ -4,9 +4,10 @@
 \name{precommit-package}
 \alias{precommit}
 \alias{precommit-package}
-\title{precommit: Pre commit hooks}
+\title{precommit: Pre-commit hooks for R}
 \description{
-Useful pre-commit hooks for R.
+Useful git hooks for R building on top of the
+    multi-language framework 'pre-commit' for hook management.
 }
 \seealso{
 Useful links:

@@ -7,6 +7,7 @@
 #' * content of stderr
 #' * content of stdout
 #' * exit status
+#' @keywords internal
 call_and_capture <- function(command, args, ...) {
   if (length(command) != 1 | !inherits(command, "character")) {
     rlang::abort("The command must be a character string of length 1.")

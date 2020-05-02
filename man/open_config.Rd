@@ -12,6 +12,9 @@ open_wordlist(root = here::here())
 \arguments{
 \item{root}{The path to the root directory of your project.}
 }
+\value{
+\code{NULL} (invisibly). The function is called for its side effects.
+}
 \description{
 Open pre-commit related files
 }
