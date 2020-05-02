@@ -2,7 +2,9 @@
 #'
 #' This must be done **before** a CRAN release.
 #' @param bump The bump increment, either "dev", "patch", "minor" or "major".
+#' @param is_cran Is this release a CRAN release?
 #' @details
+#' This function does the following:
 #' - bump description.
 #' - update default config in inst/
 #' - commit
@@ -13,15 +15,15 @@
 #' - autoupdate own config file
 #' - bump description with dev
 #' - commit and push DESCRIPTION and .pre-commit-config.yaml
+#'
+#' @section CRAN release:
+#' If `is_cran` is `TRUE`, the workflow is changed slightly:
+#' - push to release branch, not master.
+#' - doesn't run [release_complete()]. This must be done manually after accepted
+#'   on CRAN.
 #' @keywords internal
-release_gh <- function(bump = "dev") {
-  sys_call <- function(...) {
-    status <- system2(...)
-    if (status != 0) {
-      rlang::abort("system2 failed.")
-    }
-  }
-  release_prechecks()
+release_gh <- function(bump = "dev", is_cran = bump != "dev") {
+  release_prechecks(bump, is_cran)
 
   path_template_config <- c(
     "inst/pre-commit-config-pkg.yaml",
@@ -55,34 +57,66 @@ release_gh <- function(bump = "dev") {
     env = "SKIP=consistent-release-tag"
   )
   usethis::ui_done("Pushed commits and tags.")
+  if (is_cran) {
+    usethis::ui_info(paste(
+      "Once on cran, call `precommit::release_complete()` to bump to the devel",
+      "version."
+    ))
+  } else {
+    release_complete()
+  }
+}
+
+#' Complete the release
+#'
+#' Bumps the version to devel.
+#' @keywords internal
+release_complete <- function(ask = TRUE) {
+  if (!git2r::repository_head()$name != "master") {
+    rlang::abort("Must be on master to complete the release.")
+  }
+  if (ask) {
+    abort_if_not_yes("Did you merge the release branch into master?")
+    abort_if_not_yes("Did you pull the latest master from origin?")
+  }
   precommit::autoupdate() # only updates if tag is on the master branch
   desc::desc_bump_version("dev")
   usethis::ui_done("Bumped version to dev")
   sys_call("git", glue::glue('commit DESCRIPTION .pre-commit-config.yaml -m "use latest release"'),
     env = "SKIP=spell-check"
   )
-
   sys_call("git", glue::glue("push"))
   usethis::ui_done("Committed and pushed dev version.")
 }
 
-release_prechecks <- function() {
+
+release_prechecks <- function(bump, is_cran) {
   abort_if_not_yes("Did you prepare NEWS.md for this version?")
   autoupdate()
   if (length(unlist(git2r::status()) > 0)) {
     rlang::abort("Need clean git directory before starting release process.")
   }
 
-  if (git2r::repository_head()$name != "master") {
-    rlang::abort(paste(
-      "Need to be on branch 'master' to create a release, otherwise autoudate",
-      "won't use the new ref."
-    ))
+  if (is_cran) {
+    old_version <- paste0("v", desc::desc_get_version())
+    dsc <- desc::description$new()
+    suppressMessages(dsc$bump_version(bump))
+    branch_name <- paste0("r-v", desc::desc_get_version())
+    on.exit(sys_call("git ", c("checkout", "-")))
+    sys_call("git ", c("checkout", "-b", branch_name))
+    usethis::ui_done("Checked out branch {branchname} for CRAN release process.")
   } else {
-    tmp <- tempfile()
-    system2("git", "diff HEAD..origin/master", stdout = tmp)
-    if (length(readLines(tmp) > 0)) {
-      rlang::abort("remote master must be even with local master before release process can start.")
+    if (git2r::repository_head()$name != "master") {
+      rlang::abort(paste(
+        "Need to be on branch 'master' to create a release, otherwise autoudate",
+        "won't use the new ref."
+      ))
+    } else {
+      tmp <- tempfile()
+      system2("git", "diff HEAD..origin/master", stdout = tmp)
+      if (length(readLines(tmp) > 0)) {
+        rlang::abort("remote master must be even with local master before release process can start.")
+      }
     }
   }
 }
@@ -118,12 +152,19 @@ update_rev_in_config <- function(new_version,
     config[our_rev] <- gsub(old_version, new_version, config[our_rev])
     writeLines(config, path)
   }
-
 }
 
 abort_if_not_yes <- function(...) {
   answer <- usethis::ui_yeah(..., .envir = parent.frame(n = 1))
   if (!answer) {
     rlang::abort("Assertion failed")
+  }
+}
+
+
+sys_call <- function(...) {
+  status <- system2(...)
+  if (status != 0) {
+    rlang::abort("system2 failed.")
   }
 }

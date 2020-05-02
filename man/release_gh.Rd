@@ -4,15 +4,18 @@
 \alias{release_gh}
 \title{Create a new release on GitHub}
 \usage{
-release_gh(bump = "dev")
+release_gh(bump = "dev", is_cran = bump != "dev")
 }
 \arguments{
 \item{bump}{The bump increment, either "dev", "patch", "minor" or "major".}
+
+\item{is_cran}{Is this release a CRAN release?}
 }
 \description{
 This must be done \strong{before} a CRAN release.
 }
 \details{
+This function does the following:
 \itemize{
 \item bump description.
 \item update default config in inst/
@@ -26,4 +29,14 @@ not possible interactively, hence we run in advance).
 \item commit and push DESCRIPTION and .pre-commit-config.yaml
 }
 }
+\section{CRAN release}{
+
+If \code{is_cran} is \code{TRUE}, the workflow is changed slightly:
+\itemize{
+\item push to release branch, not master.
+\item doesn't run \code{\link[=release_complete]{release_complete()}}. This must be done manually after accepted
+on CRAN.
+}
+}
+
 \keyword{internal}
