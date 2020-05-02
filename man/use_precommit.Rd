@@ -7,6 +7,7 @@
 use_precommit(
   config_source = getOption("precommit.config_source"),
   force = FALSE,
+  legacy_hooks = "forbid",
   open = rstudioapi::isAvailable(),
   install_hooks = TRUE,
   root = here::here()
@@ -20,6 +21,11 @@ config file will be hard-copied into \code{root}. If \code{NULL}, we check if
 config. See section 'Copying an existing config file'.}
 
 \item{force}{Whether to replace an existing config file.}
+
+\item{legacy_hooks}{How to treat hooks already in the repo which are not
+managed by pre-commit. "forbid", the default, will cause  \code{use_precommit()}
+to fail if there are such hooks. "allow" will run these along with
+pre-commit. "remove" will delete them.}
 
 \item{open}{Whether or not to open the .pre-commit-config.yaml after
 it's been placed in your repo. The default is \code{TRUE} when working in

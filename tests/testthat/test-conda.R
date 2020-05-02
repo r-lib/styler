@@ -1,4 +1,5 @@
 tempdir <- fs::path(tempdir(), "test-precommit")
+rlang::with_handlers(unlink(tempdir), error = function(e) NULL)
 fs::dir_create(tempdir)
 git2r::init(path = tempdir)
 
@@ -24,7 +25,7 @@ test_that("fails early if repo is not a git repo ", {
     {
       tempdir <- fs::path(tempdir(), "t9")
       fs::dir_create(tempdir)
-      use_precommit(root = tempdir)
+      use_precommit(open = FALSE, root = tempdir)
     },
     "is not a git repo"
   )
@@ -41,7 +42,7 @@ test_that("can use custom config file ", {
     c(new_text) %>%
     writeLines(path_custom)
   git2r::init(tempdir)
-  use_precommit(config_source = path_custom, root = tempdir, force = TRUE)
+  use_precommit(config_source = path_custom, open = FALSE, force = TRUE, root = tempdir)
   config <- readLines(fs::path(tempdir, ".pre-commit-config.yaml"))
   expect_equal(
     config[length(config)],
@@ -49,6 +50,40 @@ test_that("can use custom config file ", {
   )
 })
 
+test_that("existing hooks are recognized", {
+  tempdir <- fs::path(tempdir(), "t13")
+  on.exit(rlang::with_handlers(unlink(tempdir), error = function(e) NULL))
+  fs::dir_create(tempdir)
+  withr::with_dir(tempdir, {
+    git2r::init()
+    usethis::proj_set(".")
+    usethis::use_readme_rmd(open = FALSE)
+    
+    # usethis hook is removed without error
+    expect_message(
+      use_precommit(legacy_hooks = 'forbid', open = FALSE, root = "."),
+      "Removed the render-README hook,"
+    )
+    writeLines(letters, ".git/hooks/pre-commit")
+    expect_error(
+      use_precommit(legacy_hooks = 'forbid', open = FALSE, root = "."),
+      "existing hooks installed"
+    )
+
+    # tolerate other hook scripts in migration mode
+    expect_message(
+      use_precommit(legacy_hooks = "allow", force = TRUE, open = FALSE, root = "."),
+      "Running in migration"
+    )
+
+    # can also remove other hooks
+    writeLines(letters, ".git/hooks/pre-commit")
+    expect_message(
+      use_precommit(legacy_hooks = "remove", force = TRUE, open = FALSE, root = "."),
+      "Sucessfully installed"
+    )
+  })
+})
 
 
 test_that("Can uninstall pre-commit (repo scope)", {
@@ -93,7 +128,7 @@ test_that("Can uninstall (userly)", {
 
 test_that("use_precommit fails when no user installation is found", {
   skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
-  expect_error(use_precommit(root = tempdir), "installed on your system")
+  expect_error(use_precommit(open = FALSE, root = tempdir), "installed on your system")
 })
 
 test_that("can install pre-commit with remote config", {

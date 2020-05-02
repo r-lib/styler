@@ -10,7 +10,7 @@ autoupdate(root = here::here())
 \item{root}{The path to the root directory of your project.}
 }
 \value{
-The exit status from \verb{pre-commit autoupdate}.
+The exit status from \verb{pre-commit autoupdate} (invisibly).
 }
 \description{
 Runs \href{https://pre-commit.com/#pre-commit-autoupdate}{\verb{pre-commit autoupdate}}.

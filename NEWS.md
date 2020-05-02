@@ -1,3 +1,12 @@
+# precommit v0.1.0
+
+Initial CRAN release. See https://lorenzwalthert.github.io/precommit/.
+
+# precommit v0.0.0.9047
+
+- Don't allow legacy hooks by default, delete README hook from usethis 
+  informatively (#167).
+
 # precommit v0.0.0.9046
 
 **Major Changes**
