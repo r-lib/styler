@@ -27,14 +27,12 @@ Suggests:
     glue,
     knitr,
     lintr,
-    oneliner (>= 0.1.0),
     reticulate (>= 1.14),
     rmarkdown,
     roxygen2,
     spelling,
     styler (>= 1.2),
     testthat (>= 2.1.0),
-    tic,
     versions
 VignetteBuilder: 
     knitr
