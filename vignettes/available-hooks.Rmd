@@ -105,16 +105,13 @@ exclude files following the
 [verbose python regex syntax](https://pre-commit.com/#regular-expressions):
 
 ```{r, echo = FALSE, comment = ""}
-extract_spell_check_regex <- function() {
-  yaml::read_yaml(system.file("pre-commit-hooks.yaml", package = "precommit")) %>%
-    purrr::keep(~ .x$id == "spell-check") %>%
-    magrittr::extract2(1) %>%
-    magrittr::extract2("exclude")
-}
-
-extract_spell_check_regex() %>%
-  gsub("\\| +", "\\|\n", .) %>%
-  cat()
+readLines(system.file("pre-commit-hooks.yaml", package = "precommit")) %>%
+  gsub("^ *exclude *: *>", "    exclude: |", .) %>%
+  yaml::yaml.load() %>%
+  purrr::keep(~ .x$id == "spell-check") %>%
+  magrittr::extract2(1) %>%
+  magrittr::extract2("exclude") %>%
+  cat(sep = "\n")
 ```
 
 **language**
