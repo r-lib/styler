@@ -25,7 +25,7 @@ install_system <- function(force) {
       paste0("- ", path_exec)
     ))
   }
-  path_exec
+  invisible(path_exec)
 }
 
 #' Install pre-commit on your system.
@@ -34,7 +34,7 @@ install_system <- function(force) {
 #' will be available to use across different git repositories.
 #' @param force Whether or not to force a re-installation.
 #' @return
-#' The path to the pre-commit executable.
+#' The path to the pre-commit executable (invisibly).
 #' @export
 install_precommit <- function(force = FALSE) {
   install_system(force = force)
@@ -49,13 +49,32 @@ install_impl <- function() {
   reticulate::conda_install("r-precommit", packages = "pre-commit")
 }
 
-install_repo <- function(root, install_hooks) {
+install_repo <- function(root, install_hooks, allow_legacy) {
   withr::with_dir(root, {
     out <- call_precommit("install", if (install_hooks) "--install-hooks")
     if (out$exit_status == 0) {
-      usethis::ui_done("Sucessfully installed pre-commit for repo {fs::path_file(root)}.")
+      if (any(grepl("Use -f to use only pre-commit.", out$stdout, fixed = TRUE))) {
+        if (!allow_legacy) {
+          rlang::abort(paste(
+            "There are existing hooks installed for this repo and the argument",
+            "`allow_legacy` is `FALSE`. We recommend removing these and",
+            "try again. If you want to continue to use these hooks, set",
+            "`allow_legacy` to `TRUE`, which means pre-commit will run in ",
+            "legacy mode and run these hooks as well as pre-commit hooks."
+          ))
+          call_precommit("uninstall")
+        } else {
+          usethis::ui_done(paste(
+            "Sucessfully installed pre-commit for repo.",
+            "Existing hooks found and argument `allow_legacy = TRUE`. Running",
+            "in migration mode."
+          ))
+        }
+      } else {
+        usethis::ui_done("Sucessfully installed pre-commit for repo.")
+      }
     } else {
-      usethis::ui_oops("Failed to install pre-commit for repo {fs::path_file(root)}.")
+      usethis::ui_oops("Failed to install pre-commit for repo.")
       communicate_captured_call(out, preamble = "Problems during initialization:")
     }
   })

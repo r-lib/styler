@@ -2,6 +2,10 @@
 
 Initial CRAN release. See https://lorenzwalthert.github.io/precommit/.
 
+# precommit v0.0.0.9047
+
+- Don't allow legacy hooks by default (#167).
+
 # precommit v0.0.0.9046
 
 **Major Changes**

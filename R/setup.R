@@ -3,6 +3,8 @@
 #' Get started.
 #' @param install_hooks Whether to install environments for all available hooks.
 #'   If `FALSE`, environments are installed with first commit.
+#' @param allow_legacy Whether or not to allow existing hooks alongside with
+#'   pre-commit.
 #' @inheritParams fallback_doc
 #' @inheritParams use_precommit_config
 #' @inheritSection use_precommit_config Copying an existing config file
@@ -28,18 +30,19 @@
 #' @export
 use_precommit <- function(config_source = getOption("precommit.config_source"),
                           force = FALSE,
+                          allow_legacy = FALSE,
                           open = rstudioapi::isAvailable(),
                           install_hooks = TRUE,
                           root = here::here()) {
   assert_is_installed()
   assert_is_git_repo(root)
+  install_repo(root, install_hooks, allow_legacy)
   config_source <- set_config_source(config_source, root = root)
   use_precommit_config(
     config_source, force, root,
     open = FALSE, verbose = FALSE
   )
   autoupdate(root)
-  install_repo(root, install_hooks)
   if (open) {
     open_config(root)
   }
@@ -50,7 +53,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 #'
 #' Runs [`pre-commit autoupdate`](https://pre-commit.com/#pre-commit-autoupdate).
 #' @return
-#' The exit status from `pre-commit autoupdate`.
+#' The exit status from `pre-commit autoupdate` (invisibly).
 #' @inheritParams fallback_doc
 #' @export
 autoupdate <- function(root = here::here()) {
@@ -67,7 +70,7 @@ autoupdate <- function(root = here::here()) {
         preamble = "Running precommit autoupdate failed."
       )
     }
-    out$exit_status
+    invisible(out$exit_status)
   })
 }
 

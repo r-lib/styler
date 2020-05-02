@@ -49,6 +49,22 @@ test_that("can use custom config file ", {
   )
 })
 
+test_that("can use custom config file ", {
+  tempdir <- fs::path(tempdir(), "t13")
+  fs::dir_create(tempdir)
+  withr::with_dir(tempdir, {
+    git2r::init()
+    usethis::use_readme_rmd(open = FALSE)
+    expect_error(
+      use_precommit(allow_legacy = FALSE, force = TRUE),
+      "existing hooks installed"
+    )
+    expect_message(
+      use_precommit(allow_legacy = TRUE, force = TRUE),
+      "Running in migration"
+    )
+  })
+})
 
 
 test_that("Can uninstall pre-commit (repo scope)", {
