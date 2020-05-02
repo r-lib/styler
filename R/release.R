@@ -23,15 +23,15 @@
 #'   on CRAN.
 #' @keywords internal
 release_gh <- function(bump = "dev", is_cran = bump != "dev") {
-  # on.exit(sys_call("git ", c("checkout", "-")), add = TRUE)
+  on.exit(sys_call("git ", c("checkout", "-")), add = TRUE)
   # if we fail, must reset version, if we succeed, it's not stage
   # on.exit(sys_call("git", c("reset", "HEAD", '--hard')), add = TRUE)
 
   new_dsc <- release_prechecks(bump, is_cran)
+  git_branch_set(is_cran)
   new_dsc$write()
   new_version <- paste0("v", as.character(new_dsc$get_version()))
   usethis::ui_done("Bumped version.")
-
   path_template_config <- c(
     "inst/pre-commit-config-pkg.yaml",
     "inst/pre-commit-config-proj.yaml"
@@ -58,7 +58,7 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
   usethis::ui_done("Pushed commits and tags.")
   if (is_cran) {
     usethis::ui_info(paste(
-      "Once on cran, call `precommit::release_complete()` to bump to the devel",
+      "Once on CRAN, call `precommit::release_complete()` to bump to the devel",
       "version."
     ))
   } else {
@@ -71,7 +71,7 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
 #' Bumps the version to devel.
 #' @keywords internal
 release_complete <- function(ask = TRUE) {
-  if (git2r::repository_head()$name != "master") {
+  if (git_branch_get() != "master") {
     rlang::abort("Must be on master to complete the release.")
   }
   if (ask) {
@@ -100,20 +100,6 @@ release_prechecks <- function(bump, is_cran) {
   new_version <- paste0("v", dsc$get_version())
   abort_if_not_yes("Your target release has version {new_version}, correct?")
   abort_if_not_yes("Did you prepare NEWS.md for this version ({new_version})?")
-
-  if (is_cran) {
-    branch_name <- paste0("r-v", desc::desc_get_version())
-    sys_call("git ", c("checkout", "-b", branch_name))
-    usethis::ui_done("Checked out branch {branchname} for CRAN release process.")
-  } else {
-    if (git2r::repository_head()$name != "master") {
-      rlang::abort(paste(
-        "Need to be on branch 'master' to create a release, otherwise autoudate",
-        "won't use the new ref."
-      ))
-    }
-  }
-  git_assert_even_with_origin()
   dsc
 }
 
@@ -165,6 +151,29 @@ sys_call <- function(...) {
   }
 }
 
+git_branch_set <- function(is_cran) {
+  if (is_cran) {
+    branch_name <- paste0("r-v", desc::desc_get_version())
+
+    sys_call(
+      "git",
+      c(
+        "checkout",
+        if (!(branch_name %in% names(git2r::branches()))) "-b",
+        branch_name
+      )
+    )
+    usethis::ui_done("Checked out branch {branch_name} for CRAN release process.")
+  } else {
+    if (git_branch_get() != "master") {
+      rlang::abort(paste(
+        "Need to be on branch 'master' to create a release, otherwise autoudate",
+        "won't use the new ref."
+      ))
+    }
+    git_assert_even_with_origin()
+  }
+}
 
 git_assert_even_with_origin <- function() {
   tmp <- tempfile()
@@ -178,4 +187,8 @@ git_assert_clean <- function() {
   if (length(unlist(git2r::status()) > 0)) {
     rlang::abort("Need clean git directory before starting release process.")
   }
+}
+
+git_branch_get <- function() {
+  git2r::repository_head()$name
 }
