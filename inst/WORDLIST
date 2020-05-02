@@ -5,6 +5,7 @@ arg
 args
 autoupdate
 beaefa
+ci
 CLI
 cmd
 CMD
@@ -106,6 +107,7 @@ styler
 testthat
 tidyverse
 travis
+ubuntu
 Uninstallation
 Upvote
 usethis

@@ -15,3 +15,4 @@
 ^inst/consistent-release-tag$
 ^inst/WORDLIST$
 ^inst/hooks-config-to-inst$
+^cran-comments\.md$
