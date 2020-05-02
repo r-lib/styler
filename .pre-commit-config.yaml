@@ -3,7 +3,7 @@
 default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9044
+    rev: v0.0.0.9046
     hooks: 
     -   id: parsable-R
     -   id: no-browser-statement
