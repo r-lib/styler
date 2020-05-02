@@ -23,7 +23,7 @@
 #'   on CRAN.
 #' @keywords internal
 release_gh <- function(bump = "dev", is_cran = bump != "dev") {
-  on.exit(sys_call("git ", c("checkout", "-")), add = TRUE)
+  on.exit(sys_call("git", c("checkout", "-")), add = TRUE)
   # if we fail, must reset version, if we succeed, it's not stage
   # on.exit(sys_call("git", c("reset", "HEAD", '--hard')), add = TRUE)
 
