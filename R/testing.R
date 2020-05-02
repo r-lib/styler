@@ -119,3 +119,7 @@ run_test_impl <- function(path_executable,
     }
   }
 }
+
+on_cran <- function() {
+  !identical(Sys.getenv("NOT_CRAN"), "true")
+}
