@@ -23,20 +23,18 @@
 #'   on CRAN.
 #' @keywords internal
 release_gh <- function(bump = "dev", is_cran = bump != "dev") {
-  release_prechecks(bump, is_cran)
+  # on.exit(sys_call("git ", c("checkout", "-")), add = TRUE)
+  # if we fail, must reset version, if we succeed, it's not stage
+  on.exit(sys_call("git", c("reset", "HEAD")), add = TRUE)
+
+  new_dsc <- release_prechecks(bump, is_cran)
+  new_dsc$write()
+  usethis::ui_done("Bumped version.")
 
   path_template_config <- c(
     "inst/pre-commit-config-pkg.yaml",
     "inst/pre-commit-config-proj.yaml"
   )
-
-  old_version <- paste0("v", desc::desc_get_version())
-  dsc <- desc::description$new()
-  suppressMessages(dsc$bump_version(bump))
-  new_version <- paste0("v", dsc$get_version())
-  abort_if_not_yes("Your target release has version {new_version}, correct?")
-  dsc$write()
-  usethis::ui_done("Bumped version.")
 
   purrr::walk(path_template_config, update_rev_in_config,
     new_version = new_version
@@ -50,6 +48,7 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
   sys_call("git", glue::glue('tag -a {new_version} -m "{msg}"'))
   sys_call("./inst/consistent-release-tag", "--release-mode")
   usethis::ui_done("Tagged last commit with release version.")
+  browser()
   sys_call("git", glue::glue("push --tags"),
     env = "SKIP=consistent-release-tag"
   )
@@ -91,18 +90,19 @@ release_complete <- function(ask = TRUE) {
 
 
 release_prechecks <- function(bump, is_cran) {
-  abort_if_not_yes("Did you prepare NEWS.md for this version?")
+  git_assert_clean()
+  usethis::ui_info("autoupdating hooks.")
   autoupdate()
-  if (length(unlist(git2r::status()) > 0)) {
-    rlang::abort("Need clean git directory before starting release process.")
-  }
+  git_assert_clean()
+  old_version <- paste0("v", desc::desc_get_version())
+  dsc <- desc::description$new()
+  suppressMessages(dsc$bump_version(bump))
+  new_version <- paste0("v", dsc$get_version())
+  abort_if_not_yes("Your target release has version {new_version}, correct?")
+  abort_if_not_yes("Did you prepare NEWS.md for this version ({new_version})?")
 
   if (is_cran) {
-    old_version <- paste0("v", desc::desc_get_version())
-    dsc <- desc::description$new()
-    suppressMessages(dsc$bump_version(bump))
     branch_name <- paste0("r-v", desc::desc_get_version())
-    on.exit(sys_call("git ", c("checkout", "-")))
     sys_call("git ", c("checkout", "-b", branch_name))
     usethis::ui_done("Checked out branch {branchname} for CRAN release process.")
   } else {
@@ -111,14 +111,10 @@ release_prechecks <- function(bump, is_cran) {
         "Need to be on branch 'master' to create a release, otherwise autoudate",
         "won't use the new ref."
       ))
-    } else {
-      tmp <- tempfile()
-      system2("git", "diff HEAD..origin/master", stdout = tmp)
-      if (length(readLines(tmp) > 0)) {
-        rlang::abort("remote master must be even with local master before release process can start.")
-      }
     }
   }
+  git_assert_even_with_origin()
+  dsc
 }
 
 #' Updates the hook version ref of {precommit} in a `.pre-commit-config` file
@@ -166,5 +162,20 @@ sys_call <- function(...) {
   status <- system2(...)
   if (status != 0) {
     rlang::abort("system2 failed.")
+  }
+}
+
+
+git_assert_even_with_origin <- function() {
+  tmp <- tempfile()
+  system2("git", "diff HEAD..origin/master", stdout = tmp)
+  if (length(readLines(tmp) > 0)) {
+    rlang::abort("remote master must be even with local master before release process can start.")
+  }
+}
+
+git_assert_clean <- function() {
+  if (length(unlist(git2r::status()) > 0)) {
+    rlang::abort("Need clean git directory before starting release process.")
   }
 }
