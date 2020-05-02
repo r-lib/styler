@@ -25,10 +25,11 @@
 release_gh <- function(bump = "dev", is_cran = bump != "dev") {
   # on.exit(sys_call("git ", c("checkout", "-")), add = TRUE)
   # if we fail, must reset version, if we succeed, it's not stage
-  on.exit(sys_call("git", c("reset", "HEAD")), add = TRUE)
+  # on.exit(sys_call("git", c("reset", "HEAD", '--hard')), add = TRUE)
 
   new_dsc <- release_prechecks(bump, is_cran)
   new_dsc$write()
+  new_version <- paste0("v", as.character(new_dsc$get_version()))
   usethis::ui_done("Bumped version.")
 
   path_template_config <- c(
@@ -48,7 +49,6 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
   sys_call("git", glue::glue('tag -a {new_version} -m "{msg}"'))
   sys_call("./inst/consistent-release-tag", "--release-mode")
   usethis::ui_done("Tagged last commit with release version.")
-  browser()
   sys_call("git", glue::glue("push --tags"),
     env = "SKIP=consistent-release-tag"
   )
@@ -62,7 +62,7 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
       "version."
     ))
   } else {
-    release_complete()
+    release_complete(ask = FALSE)
   }
 }
 
@@ -71,7 +71,7 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
 #' Bumps the version to devel.
 #' @keywords internal
 release_complete <- function(ask = TRUE) {
-  if (!git2r::repository_head()$name != "master") {
+  if (git2r::repository_head()$name != "master") {
     rlang::abort("Must be on master to complete the release.")
   }
   if (ask) {
@@ -132,12 +132,12 @@ update_rev_in_config <- function(new_version,
   config <- readLines(path)
   ours <- grep("-   repo: https://github.com/lorenzwalthert/precommit", config, fixed = TRUE)
   others <- setdiff(grep("-   repo:", config, fixed = TRUE), ours)
-  next_after_ours <- others[others > ours]
+  next_after_ours <- others[others > ours][1]
   rev <- grep("rev:", config)
   our_rev <- rev[rev > ours & rev < next_after_ours]
 
   our_rev_without_comments <- gsub("#.*", "", config[our_rev])
-  if (grepl("#", config[our_rev])) {
+  if (any(grepl("#", config[our_rev]))) {
     rlang::warn("removed comment on rev. Please add manually")
   }
   old_version <- trimws(gsub(".*rev:", "", our_rev_without_comments))
