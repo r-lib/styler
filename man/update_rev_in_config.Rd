@@ -7,6 +7,8 @@
 update_rev_in_config(new_version, path = "inst/pre-commit-config.yaml")
 }
 \arguments{
+\item{new_version}{The version string of the new version.}
+
 \item{path}{The path to a pre-commit config file.}
 }
 \description{

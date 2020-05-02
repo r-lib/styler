@@ -1,6 +1,8 @@
 #' Set up pre-commit
 #'
 #' Get started.
+#' @param install_hooks Whether to install environments for all available hooks.
+#'   If `FALSE`, environments are installed with first commit.
 #' @inheritParams fallback_doc
 #' @inheritParams use_precommit_config
 #' @inheritSection use_precommit_config Copying an existing config file
@@ -13,27 +15,29 @@
 #' * You cloned a repo that has a `.pre-commit-config.yaml` already. You need
 #'   to make sure git calls the hooks before the next commit.
 #'
-#' @section What it does the function do?:
-#' * sets up pre-commit in your current directory with `$ pre-commit install`.
-#' * sets up a template `.pre-commit-config.yaml`.
-#' * autoupdates the template to make sure you get the latest versions of the
+#' @section What does the function do?:
+#' * Sets up a template `.pre-commit-config.yaml`.
+#' * Autoupdates the template to make sure you get the latest versions of the
 #'   hooks.
-#' * Open the config file if RStudio is running.
+#' * Installs the pre-commit script along with the hook environments with
+#'   `$ pre-commit install --install-hooks`.
+#' * Opens the config file if RStudio is running.
 #' @family helpers
 #' @export
 use_precommit <- function(config_source = getOption("precommit.config_source"),
                           force = FALSE,
                           open = rstudioapi::isAvailable(),
+                          install_hooks = TRUE,
                           root = here::here()) {
   assert_is_installed()
   assert_is_git_repo(root)
   config_source <- set_config_source(config_source, root = root)
-  install_repo(root)
   use_precommit_config(
     config_source, force, root,
     open = FALSE, verbose = FALSE
   )
   autoupdate(root)
+  install_repo(root, install_hooks)
   if (open) {
     open_config(root)
   }
