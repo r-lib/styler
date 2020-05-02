@@ -8,16 +8,16 @@ run_test("style-files", suffix = "-fail.R", error_msg = NA)
 
 # success with cmd args
 run_test("style-files",
-  file_name = "style-files-one-line",
+  file_name = "style-files-cmd",
   suffix = "-success.R",
-  cmd_args = c("--style_pkg=oneliner", "--style_fun=one_line_style")
+  cmd_args = c("--style_pkg=styler", "--style_fun=tidyverse_style")
 )
 
 run_test("style-files",
-  file_name = "style-files-one-line",
+  file_name = "style-files-cmd",
   suffix = "-fail.R",
   error_msg = NA,
-  cmd_args = c("--style_pkg=oneliner", "--style_fun=one_line_style")
+  cmd_args = c("--style_pkg=styler", "--style_fun=tidyverse_style")
 )
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..

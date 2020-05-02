@@ -38,9 +38,6 @@ Suggests:
     versions
 VignetteBuilder: 
     knitr
-Remotes: 
-    lorenzwalthert/oneliner,
-    ropenscilabs/tic
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace",
     "collate", if (rlang::is_installed("pkgapi")) "pkgapi::api_roclet"
