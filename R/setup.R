@@ -3,8 +3,10 @@
 #' Get started.
 #' @param install_hooks Whether to install environments for all available hooks.
 #'   If `FALSE`, environments are installed with first commit.
-#' @param allow_legacy Whether or not to allow existing hooks alongside with
-#'   pre-commit.
+#' @param legacy_hooks How to treat hooks already in the repo which are not 
+#'   managed by pre-commit. "forbid", the default, will cause  `use_precommit()`
+#'   to fail if there are such hooks. "allow" will run these along with 
+#'   pre-commit. "remove" will delete them.
 #' @inheritParams fallback_doc
 #' @inheritParams use_precommit_config
 #' @inheritSection use_precommit_config Copying an existing config file
@@ -30,10 +32,11 @@
 #' @export
 use_precommit <- function(config_source = getOption("precommit.config_source"),
                           force = FALSE,
-                          allow_legacy = FALSE,
+                          legacy_hooks = 'forbid',
                           open = rstudioapi::isAvailable(),
                           install_hooks = TRUE,
                           root = here::here()) {
+  rlang::arg_match(legacy_hooks, c("forbid", "allow", "remove"))
   assert_is_installed()
   assert_is_git_repo(root)
   config_source <- set_config_source(config_source, root = root)
@@ -41,8 +44,8 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
     config_source, force, root,
     open = FALSE, verbose = FALSE
   )
+  install_repo(root, install_hooks, legacy_hooks)
   autoupdate(root)
-  install_repo(root, install_hooks, allow_legacy)
   if (open) {
     open_config(root)
   }

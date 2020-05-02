@@ -49,21 +49,30 @@ install_impl <- function() {
   reticulate::conda_install("r-precommit", packages = "pre-commit")
 }
 
-install_repo <- function(root, install_hooks, allow_legacy) {
+install_repo <- function(root, install_hooks, legacy_hooks) {
+  
   withr::with_dir(root, {
-    out <- call_precommit("install", if (install_hooks) "--install-hooks")
+    remove_usethis_readme_hook()
+    out <- call_precommit(
+      "install", 
+      if (install_hooks) "--install-hooks", 
+      if (legacy_hooks == 'remove') "--overwrite"
+    )
     if (out$exit_status == 0) {
       if (any(grepl("Use -f to use only pre-commit.", out$stdout, fixed = TRUE))) {
-        if (!allow_legacy) {
+        if (legacy_hooks == 'forbid') {
           rlang::abort(paste(
             "There are existing hooks installed for this repo and the argument",
-            "`allow_legacy` is `FALSE`. We recommend removing these and",
-            "try again. If you want to continue to use these hooks, set",
-            "`allow_legacy` to `TRUE`, which means pre-commit will run in ",
+            "`legacy_hooks` is set to `'forbid'`. We recommend inspecting these" , 
+            "and removing them manually or - if you are sure you don't need",
+            "them anymore - call this function again with", 
+            "`legacy_hooks = 'remove'` to remove them for you.",
+            "If you want to continue to use these hooks, set",
+            "`legacy_hooks` to `'allow'`, which means pre-commit will run in ",
             "legacy mode and run these hooks as well as pre-commit hooks."
           ))
           call_precommit("uninstall")
-        } else {
+        } else if (legacy_hooks == "allow") {
           usethis::ui_done(paste(
             "Sucessfully installed pre-commit for repo.",
             "Existing hooks found and argument `allow_legacy = TRUE`. Running",
@@ -78,6 +87,26 @@ install_repo <- function(root, install_hooks, allow_legacy) {
       communicate_captured_call(out, preamble = "Problems during initialization:")
     }
   })
+}
+
+remove_usethis_readme_hook <- function() {
+  legacy <- readLines(
+    system.file("usethis-legacy-hook", package = 'precommit'), 
+    encoding = "UTF-8"
+  )
+  candidate <- ".git/hooks/pre-commit"
+  if (fs::file_exists(candidate)) {
+    if (identical(readLines(candidate, encoding = "UTF-8"), legacy)) {
+      fs::file_delete(candidate)
+      usethis::ui_info(paste(
+        "Removed the render-README hook, which was added with", 
+        "`usethis::use_readme_rmd()` to this repo at some point in the past.",
+        "{{precommit}}'s equivalent is the hook with the id 'readme-rmd-rendered'.", 
+        "Add the hook to your .pre-commit-config.yaml as described here:", 
+        "https://lorenzwalthert.github.io/precommit/#usage."
+      ))
+    }
+  }
 }
 
 
