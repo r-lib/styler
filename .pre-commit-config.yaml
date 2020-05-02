@@ -58,4 +58,9 @@ repos:
         entry: inst/spell-check-exclude-to-config
         language: script
         stages: [commit, push]
-    
+    -   id: forbid-to-commit
+        name: Don't commit common R artifacts
+        entry: Cannot commit .Rhistory, .Rdata, .csv and similar.
+        language: fail
+        files: '\.Rhistory|\.csv|\.RData|\.Rds|\.rds$'
+        # `exclude: <regex>` to allow committing specific files.
