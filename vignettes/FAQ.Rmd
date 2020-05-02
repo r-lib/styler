@@ -21,7 +21,7 @@ No magic. Git [provides a mechanism for pre-commit
 hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). Since it's
 cumbersome to copy bash scripts and keep them updated in some hidden `.git/`
 directory, people wrote frameworks to basically maintain these files. One of
-them is [pre-commit.com](pre-commit.com). So you call git to commit, git calls
+them is [pre-commit.com](https://pre-commit.com). So you call git to commit, git calls
 its internal hooks, these hooks (bash scripts in the simplest case) are provided
 by the pre-commit framework. And where does pre-commit get all it's nice hooks
 from? From us.
