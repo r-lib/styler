@@ -1,5 +1,5 @@
 Package: precommit
-Title: Pre-commit hooks for R
+Title: Pre-commit Hooks for R
 Version: 0.0.0.9047
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>

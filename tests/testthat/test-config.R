@@ -12,6 +12,7 @@ test_that("can set path to local config", {
 })
 
 test_that("can set path to remote config", {
+  skip_on_cran()
   path <- set_config_source(
     example_remote_config()
   )
