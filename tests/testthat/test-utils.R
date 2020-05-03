@@ -40,7 +40,7 @@ test_that("call capturing for error (command that does not exist)", {
 })
 
 test_that("call capturing for error fo command that exists (but arguments that don't)", {
-  expect_silent(captured <- call_precommit("hdif dijf"))
+  expect_silent(captured <- call_and_capture("ls", "djdfjdoidj"))
   expect_true(
     captured$exit_status != 0
   )

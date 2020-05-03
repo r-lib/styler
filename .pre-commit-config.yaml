@@ -11,6 +11,7 @@ repos:
     -   id: deps-in-desc
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
+        exclude: '^tests/testthat/.*/*\.R'
     -   id: roxygenize # spell-check needs up-to date doc.
     -   id: spell-check
         exclude: >
