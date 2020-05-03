@@ -49,11 +49,11 @@ test_that("call capturing for error fo command that exists (but arguments that d
   )
 
   expect_true(
-    length(captured$stderr) > 1
+    length(captured$stderr) > 0
   )
   expect_error(
     communicate_captured_call(captured),
-    "invalid choice"
+    "No such file or "
   )
 })
 
