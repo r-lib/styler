@@ -3,16 +3,15 @@
 default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9046
+    rev: v0.1.0
     hooks: 
-    -   id: parsable-R
-    -   id: no-browser-statement
-    -   id: readme-rmd-rendered
-    -   id: deps-in-desc
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
         exclude: '^tests/testthat/.*/*\.R'
-    -   id: roxygenize # spell-check needs up-to date doc.
+    -   id: roxygenize
+    # codemeta must be above use-tidy-description when both are used
+    # -   id: codemeta-description-updated
+    -   id: use-tidy-description
     -   id: spell-check
         exclude: >
           (?x)^(
@@ -35,7 +34,11 @@ repos:
           .*\.sh|
           .*\.RData
           )$
-    -   id: use-tidy-description
+    -   id: lintr
+    -   id: readme-rmd-rendered
+    -   id: parsable-R
+    -   id: no-browser-statement
+    -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.5.0
     hooks: 
