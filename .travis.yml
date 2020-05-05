@@ -40,6 +40,8 @@ jobs:
       - R -q -e 'tic::before_script()'
   - name: macOS_conda
     os: osx
+    env: 
+      - BUILD_PKGDOWN='TRUE'
     before_script: 
       - R -q -e 'if (!requireNamespace("reticulate")) install.packages("reticulate"); reticulate::install_miniconda()'
       - R -q -e 'tic::before_script()'
