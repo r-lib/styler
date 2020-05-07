@@ -271,8 +271,8 @@ styling whether or not it was actually changed (or would be changed when
     
 
 <p>This function overwrites files (if styling results in a change of the
-code to be formatted). It is strongly suggested to only style files
-that are under version control or to create a backup copy.</p>
+code to be formatted and <code>dry = "off"</code>). It is strongly suggested to only
+style files that are under version control or to create a backup copy.</p>
 <p>We suggest to first style with <code>scope &lt; "tokens"</code> and inspect and commit
 changes, because these changes are guaranteed to leave the abstract syntax
 tree (AST) unchanged. See section 'Round trip validation' for details.</p>

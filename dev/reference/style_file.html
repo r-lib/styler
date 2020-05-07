@@ -250,8 +250,8 @@ styling whether or not it was actually changed (or would be changed when
     
 
 <p>This function overwrites files (if styling results in a change of the
-code to be formatted). It is strongly suggested to only style files
-that are under version control or to create a backup copy.</p>
+code to be formatted and <code>dry = "off"</code>). It is strongly suggested to only
+style files that are under version control or to create a backup copy.</p>
 <p>We suggest to first style with <code>scope &lt; "tokens"</code> and inspect and commit
 changes, because these changes are guaranteed to leave the abstract syntax
 tree (AST) unchanged. See section 'Round trip validation' for details.</p>
@@ -288,7 +288,7 @@ inspect the changes.</p>
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='st'>"styler"</span>, <span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".R"</span>)
 <span class='kw pkg'>xfun</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>write_utf8</a></span>(<span class='st'>"1++1"</span>, <span class='no'>file</span>)
 <span class='fu'>style_file</span>(<span class='no'>file</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /tmp/Rtmp4HTAND/styler44107d7c7ab5.R ℹ 
+#&gt;  /tmp/RtmpVixGr4/styler794227bc2bbe.R ℹ 
 #&gt; ────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	0	File unchanged.
@@ -296,7 +296,7 @@ inspect the changes.</p>
 #&gt; ✖ 	0	Styling threw an error.
 #&gt; ────────────────────────────────────────
 #&gt; Please review the changes carefully!</div><div class='input'><span class='fu'>style_file</span>(<span class='no'>file</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(<span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /tmp/Rtmp4HTAND/styler44107d7c7ab5.R ✔ 
+#&gt;  /tmp/RtmpVixGr4/styler794227bc2bbe.R ✔ 
 #&gt; ────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.
