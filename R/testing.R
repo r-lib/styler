@@ -41,11 +41,17 @@ test_collection <- function(test, sub_test = NULL,
 
   out_names <- construct_out(in_names)
 
-  in_items <- file.path(path, in_names)
-  out_items <- file.path(tempdir(), out_names)
-  ref_items <- file.path(path, out_names)
-  file.copy(ref_items, out_items, overwrite = TRUE, copy.mode = FALSE)
-  out_trees <- file.path(tempdir(), construct_tree(in_names))
+  if (getOption("styler.test_dir_unwritable")) {
+    in_items <- file.path(path, in_names)
+    out_items <- file.path(tempdir(), out_names)
+    ref_items <- file.path(path, out_names)
+    file.copy(ref_items, out_items, overwrite = TRUE, copy.mode = FALSE)
+    out_trees <- file.path(tempdir(), construct_tree(in_names))
+  } else {
+    out_items <- file.path(path, out_names)
+    in_items <- file.path(path, in_names)
+    out_trees <- construct_tree(in_items)
+  }
 
   pwalk(list(in_items, out_items, in_names, out_names, out_trees),
     transform_and_check,
@@ -107,7 +113,8 @@ transform_and_check <- function(in_item, out_item,
   read_in <- xfun::read_utf8(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
-      write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE, fileEncoding = "UTF-8")
+      write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE,
+        fileEncoding = "UTF-8")
   }
   transformed_text <- read_in %>%
     transformer(...) %>%
