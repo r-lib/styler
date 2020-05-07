@@ -33,7 +33,10 @@ transform_utf8_one <- function(path, fun, dry) {
       if (!identical) {
         if (dry == "fail") {
           rlang::abort(
-            paste0("File `", path, "` would be modified by styler and `dry` = 'fail'."),
+            paste0(
+              "File `", path, "` would be modified by styler and argument dry",
+              " is set to 'fail'."
+            ),
             class = "dryError"
           )
         } else if (dry == "on") {
