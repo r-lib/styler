@@ -2,13 +2,13 @@
 % Please edit documentation in R/io.R
 \name{read_utf8_bare}
 \alias{read_utf8_bare}
-\title{Drop-in replacement for \code{\link[xfun:read_utf8]{xfun::read_utf8()}}, with an optional \code{warn}
+\title{Drop-in replacement for \code{xfun::read_utf8()}, with an optional \code{warn}
 argument.}
 \usage{
 read_utf8_bare(con, warn = TRUE)
 }
 \description{
-Drop-in replacement for \code{\link[xfun:read_utf8]{xfun::read_utf8()}}, with an optional \code{warn}
+Drop-in replacement for \code{xfun::read_utf8()}, with an optional \code{warn}
 argument.
 }
 \keyword{internal}

@@ -7,7 +7,8 @@ test_that("invalid tokens return error", {
     style = tidyverse_style,
     scope = "spaces",
     math_token_spacing = specify_math_token_spacing("hdk"),
-    strict = FALSE), "lookup")
+    strict = FALSE
+  ), "lookup")
 })
 
 test_that("non-strict default: spacing around all", {
@@ -17,7 +18,8 @@ test_that("non-strict default: spacing around all", {
     style = tidyverse_style,
     scope = "spaces",
     math_token_spacing = specify_math_token_spacing(),
-    strict = FALSE), NA)
+    strict = FALSE
+  ), NA)
 })
 
 test_that("strict default: spacing around all", {
@@ -27,7 +29,8 @@ test_that("strict default: spacing around all", {
     style = tidyverse_style,
     scope = "spaces",
     math_token_spacing = tidyverse_math_token_spacing(),
-    strict = TRUE), NA)
+    strict = TRUE
+  ), NA)
 })
 
 test_that("strict no space around +", {
@@ -37,7 +40,7 @@ test_that("strict no space around +", {
     style = tidyverse_style,
     scope = "spaces",
     math_token_spacing = specify_math_token_spacing(zero = "'+'")
-    ), NA)
+  ), NA)
 })
 
 test_that("strict no space around all but ^", {

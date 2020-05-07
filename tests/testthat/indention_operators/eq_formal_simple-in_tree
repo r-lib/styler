@@ -1,29 +1,30 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})       
- °--expr:  [0/0] {1}                                          
-     ¦--expr:  [0/1] {3}                                      
+ °--expr: abbbb [0/0] {1}                                     
+     ¦--expr: abbbb [0/1] {3}                                 
      ¦   °--SYMBOL: abbbb [0/0] {2}                           
      ¦--LEFT_ASSIGN: <- [0/1] {4}                             
-     °--expr:  [0/0] {5}                                      
+     °--expr: funct [0/0] {5}                                 
          ¦--FUNCTION: funct [0/0] {6}                         
          ¦--'(': ( [0/0] {7}                                  
          ¦--SYMBOL_FORMALS: x [0/1] {8}                       
          ¦--EQ_FORMALS: = [0/18] {9}                          
-         ¦--expr:  [1/18] {11}                                
+         ¦--expr: 22 [1/18] {11}                              
          ¦   °--NUM_CONST: 22 [0/0] {10}                      
          ¦--')': ) [1/1] {12}                                 
-         °--expr:  [0/0] {13}                                 
+         °--expr: {
+  d [0/0] {13}                           
              ¦--'{': { [0/2] {14}                             
-             ¦--expr:  [1/0] {15}                             
-             ¦   ¦--expr:  [0/0] {17}                         
+             ¦--expr: data_ [1/0] {15}                        
+             ¦   ¦--expr: data_ [0/0] {17}                    
              ¦   ¦   °--SYMBOL_FUNCTION_CALL: data_ [0/0] {16}
              ¦   ¦--'(': ( [0/4] {18}                         
              ¦   ¦--SYMBOL_SUB: x [1/1] {19}                  
              ¦   ¦--EQ_SUB: = [0/6] {20}                      
-             ¦   ¦--expr:  [1/2] {21}                         
-             ¦   ¦   ¦--expr:  [0/1] {23}                     
+             ¦   ¦--expr: long_ [1/2] {21}                    
+             ¦   ¦   ¦--expr: long_ [0/1] {23}                
              ¦   ¦   ¦   °--SYMBOL: long_ [0/0] {22}          
              ¦   ¦   ¦--'*': * [0/1] {24}                     
-             ¦   ¦   °--expr:  [0/0] {26}                     
+             ¦   ¦   °--expr: x [0/0] {26}                    
              ¦   ¦       °--SYMBOL: x [0/0] {25}              
              ¦   °--')': ) [1/0] {27}                         
              °--'}': } [1/0] {28}                             

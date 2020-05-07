@@ -9,8 +9,8 @@ ensure_correct_str_txt(pd, text)
 \arguments{
 \item{pd}{A parse table.}
 
-\item{text}{The text from which \code{pd} was created. Needed
-for potential reparsing.}
+\item{text}{The text from which \code{pd} was created. Needed potentially
+for another round of parsing.}
 }
 \description{
 Make sure \code{text} of the tokens \code{STR_CONST} is correct and adapt if necessary.

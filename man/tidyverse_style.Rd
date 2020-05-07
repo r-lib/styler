@@ -4,10 +4,14 @@
 \alias{tidyverse_style}
 \title{The tidyverse style}
 \usage{
-tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2,
+tidyverse_style(
+  scope = "tokens",
+  strict = TRUE,
+  indent_by = 2,
   start_comments_with_one_space = FALSE,
   reindention = tidyverse_reindention(),
-  math_token_spacing = tidyverse_math_token_spacing())
+  math_token_spacing = tidyverse_math_token_spacing()
+)
 }
 \arguments{
 \item{scope}{The extent of manipulation. Can range from "none" (least

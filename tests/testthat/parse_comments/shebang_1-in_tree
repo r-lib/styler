@@ -2,22 +2,22 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #A co [0/0] {1}                           
  ¦--COMMENT: #!/us [1/0] {2}                           
  ¦--COMMENT: #!/us [1/0] {3}                           
- ¦--expr:  [1/0] {4}                                   
- ¦   ¦--expr:  [0/1] {6}                               
+ ¦--expr: a <-  [1/0] {4}                              
+ ¦   ¦--expr: a [0/1] {6}                              
  ¦   ¦   °--SYMBOL: a [0/0] {5}                        
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {7}                      
- ¦   °--expr:  [0/0] {9}                               
+ ¦   °--expr: 3 [0/0] {9}                              
  ¦       °--NUM_CONST: 3 [0/0] {8}                     
  ¦--COMMENT: #!/us [2/0] {10}                          
- ¦--expr:  [1/0] {11}                                  
- ¦   ¦--expr:  [0/1] {13}                              
+ ¦--expr: dd <- [1/0] {11}                             
+ ¦   ¦--expr: dd [0/1] {13}                            
  ¦   ¦   °--SYMBOL: dd [0/0] {12}                      
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {14}                     
- ¦   °--expr:  [0/0] {16}                              
+ ¦   °--expr: 33 [0/0] {16}                            
  ¦       °--NUM_CONST: 33 [0/0] {15}                   
  ¦--COMMENT: #!/us [1/0] {17}                          
- ¦--expr:  [1/0] {18}                                  
- ¦   ¦--expr:  [0/0] {20}                              
+ ¦--expr: c() [1/0] {18}                               
+ ¦   ¦--expr: c [0/0] {20}                             
  ¦   ¦   °--SYMBOL_FUNCTION_CALL: c [0/0] {19}         
  ¦   ¦--'(': ( [0/0] {21}                              
  ¦   °--')': ) [0/0] {22}                              

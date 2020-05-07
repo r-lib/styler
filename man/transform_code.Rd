@@ -4,7 +4,7 @@
 \alias{transform_code}
 \title{Transform code from R, Rmd or Rnw files}
 \usage{
-transform_code(path, fun, ...)
+transform_code(path, fun, ..., dry)
 }
 \arguments{
 \item{path}{A vector with file paths to transform.}
@@ -12,6 +12,12 @@ transform_code(path, fun, ...)
 \item{fun}{A function that returns a character vector.}
 
 \item{...}{Further arguments passed to \code{\link[=transform_utf8]{transform_utf8()}}.}
+
+\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.}
 }
 \description{
 A wrapper which initiates the styling of

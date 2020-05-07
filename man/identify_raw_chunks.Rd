@@ -4,8 +4,7 @@
 \alias{identify_raw_chunks}
 \title{Identifies raw Rmd or Rnw code chunks}
 \usage{
-identify_raw_chunks(lines, filetype,
-  engine_pattern = get_engine_pattern())
+identify_raw_chunks(lines, filetype, engine_pattern = get_engine_pattern())
 }
 \arguments{
 \item{lines}{A character vector of lines from an Rmd or Rnw file.}

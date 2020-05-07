@@ -4,8 +4,12 @@
 \alias{set_regex_indention}
 \title{Set indention of tokens that match regex}
 \usage{
-set_regex_indention(flattened_pd, pattern, target_indention = 0,
-  comments_only = TRUE)
+set_regex_indention(
+  flattened_pd,
+  pattern,
+  target_indention = 0,
+  comments_only = TRUE
+)
 }
 \arguments{
 \item{flattened_pd}{A flattened parse table.}

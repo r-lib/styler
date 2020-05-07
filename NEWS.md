@@ -1,4 +1,112 @@
-# styler 1.1.1.9000
+# styler 1.3.2.9000 (Development)
+
+## Major changes
+
+- blank lines in function calls and headers are now removed, for the former only 
+  when there are no comments before or after the blank line (#629, #630, #635).
+
+## Minor chnages and fixes
+
+- overhaul pgkdown site: Add search (#623), group function in Reference (#625).
+- always strip trailing spaces and make cache insensitive to it (#626).
+- typos in documentation (#618, #614).
+
+
+# styler 1.3.2
+
+Release upon request by the CRAN team.
+
+## Minor changes and fixes
+
+- Add search and reference sections to pkgdown webpage (#623, #625).
+- various fixes to handle special cases for caching and stylerignore and their
+  interaction (#611, #610, #609, #607, #602, #600).
+- also test on macOS (#604).
+- skip timing tests on CRAN as requested by CRAN team because they did not pass 
+  on all machines (#603).
+
+# styler 1.3.1
+
+Emergency release. In case multiple expressions are on one line and only 
+some of them are cached, styler can remove code. To reach this state, 
+some of the expressions must have been styled previously alone and the cache
+must be active. Example:
+
+```
+library(styler)
+cache_activate()
+#> Using cache 1.3.0 at ~/.Rcache/styler/1.3.0.
+style_text("1")
+#> 1
+style_text("1 # comment")
+#> # comment
+```
+
+This is obviously detrimental. We have added additional tests and fixed the 
+problem (#593, #595), but we want repeat the warning from `?style_file` that all 
+style APIs apart from `style_text()` overwrite code and that styler can only 
+check the AST remains valid with `scope < "tokens"`. So use this if you are 
+conservative. Or deactivate the cache with `deactivate_cache()` until it has 
+fully matured.
+
+We thank the people who have contributed to this release:
+
+[&#x0040;ellessenne](https://github.com/ellessenne) and 
+[&#x0040;renkun-ken](https://github.com/renkun-ken).
+
+# styler 1.3.0
+
+## Breaking changes
+
+* `style_pkg()` and `style_dir()` gain a new argument `exclude_dirs` to exclude
+  directories from styling, by default `renv` and `packrat`. Note that the
+  defaults won't change the behavior of `style_pkg()` because it does anyways
+  does not style these directories and they were set for consistency.
+
+* `style_file()` and friends now strip `./` in file paths returned invisibly, 
+  i.e. `./script.R` becomes `script.R` (#568).
+
+## New features
+
+* ignore certain lines using `# styler: off` and `#styler: on` or custom
+  markers, see `?stylerignore` (#560).
+
+* styler caches results of styling, so applying styler to code it has styled
+  before will be instantaneous. This brings large speed boosts in many
+  situations, e.g. when `style_pkg()` is run but only a few files have changed
+  since the last styling or when using the [styler pre-commit
+  hook](https://github.com/lorenzwalthert/precommit). Because styler caches by
+  expression, you will also get speed boosts in large files with many
+  expressions when you only change a few of them. See `?caching` for details
+  (#538, #578).
+
+* `create_style_guide()` gains two arguments `style_guide_name` and
+  `style_guide_version` that are carried as meta data, in particular to version
+  third-party style guides and ensure the proper functioning of caching. This
+  change is completely invisible to users who don't create and distribute their
+  own style guide like `tidyverse_style()` (#572).
+
+## Minor changes and fixes
+
+* lines are now broken after `+` in `ggplot2` calls for `strict = TRUE` (#569).
+
+* function documentation now contains many more line breaks due to roxygen2 
+  update to version 7.0.1 (#566).
+
+* spaces next to the braces in subsetting expressions `[` and `[[` are now
+  removed (#580).
+
+* Adapt to changes in the R parser to make styler pass R CMD check again.
+  (#583).
+
+Thanks to all contributors involved, in particular
+[&#x0040;colearendt](https://github.com/colearendt), 
+[&#x0040;davidski](https://github.com/davidski), 
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
+[&#x0040;pat-s](https://github.com/pat-s), and 
+[&#x0040;programming-wizard](https://github.com/programming-wizard).
+
+# styler 1.2.0
 
 ## Breaking changes
 
@@ -8,42 +116,52 @@
 
 * `style_file()` and friends do not write content back to a file when styling
   does not cause any changes in the file. This means the modification date of
-  files styled is only changed when the content is changed (#532).
+  styled files is only changed when the content is changed (#532).
 
 ## New features
 
-* Aligned function calls are detected and kept as is if they match the styler 
-  [definition for aligned function calls](https://styler.r-lib.org/articles/detect-alignment.html)
-  (#537).
+* Aligned function calls are detected and remain unchanged if they match the
+  styler [definition for aligned function
+  calls](https://styler.r-lib.org/articles/detect-alignment.html) (#537).
 
-* curlyl-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
-  explicitly handled, as opposed previously where it was just treated as two
-  consequtive curly braces (#528).
+* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
+  explicitly handled, where previously it was just treated as two consecutive
+  curly braces (#528).
 
 * `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and
   hidden files are now also styled (#530).
 
 ## Minor improvements and fixes
 
-* brace expressions in function calls are formatted in a less compact way. This
-  improves the formatting of `tryCatch()` in many cases (#543).
-  
-* escape characters in roxygen code examples are now correctly escaped (#512).
+* Brace expressions in function calls are formatted in a less compact way to
+  improve readability. Typical use case: `tryCatch()` (#543).
 
-* style selection Addin now preserves line break when the last line selected is
+* Arguments in function declarations in a context which is indented multiple
+  times should now be correct. This typically affects `R6::R6Class()` (#546).
+
+* Escape characters in roxygen code examples are now correctly escaped (#512).
+
+* Special characters such as `\n` in strings are now preserved in text and not
+  turned into literal values like a line break (#554).
+
+* Style selection Addin now preserves line break when the last line selected is
   an entire line (#520).
 
-* style file Addin can now properly handle cancelling (#511).
+* Style file Addin can now properly handle cancelling (#511).
 
 * The body of a multi-line function declaration is now indented correctly for
   `strict = FALSE` and also wrapped in curly braces for `strict = TRUE` (#536).
 
-* advice for contributors in `CONTRIBUTING.md` was updated (#508).
+* Advice for contributors in `CONTRIBUTING.md` was updated (#508).
 
 ## Adaption
 
 * styler is now available through the pre-commit hook `style-files` in
   https://github.com/lorenzwalthert/pre-commit-hooks.
+
+Thanks to all contributors involved, in particular
+
+[&#x0040;Banana1530](https://github.com/Banana1530), [&#x0040;batpigandme](https://github.com/batpigandme), [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;ellessenne](https://github.com/ellessenne), [&#x0040;Emiller88](https://github.com/Emiller88), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lwjohnst86](https://github.com/lwjohnst86), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;Moohan](https://github.com/Moohan), [&#x0040;nxskok](https://github.com/nxskok), [&#x0040;oliverbeagley](https://github.com/oliverbeagley), [&#x0040;pat-s](https://github.com/pat-s), [&#x0040;reddy-ia](https://github.com/reddy-ia), and [&#x0040;russHyde](https://github.com/russHyde)
 
 # styler 1.1.1
 
@@ -318,4 +436,3 @@ specify_reindention(
 )
 initialize_default_attributes(pd_flat)
 ```
-

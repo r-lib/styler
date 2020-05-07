@@ -70,12 +70,12 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
 #'     column corresponds to n as long as no tokens are inserted.
 #'   * A column "child" that contains *nest*s.
 #'
-#' @param text A character vector.
+#' @inheritParams get_parse_data
 #' @return A flat parse table
 #' @importFrom rlang seq2
 #' @keywords internal
 tokenize <- function(text) {
-  get_parse_data(text, include_text = NA) %>%
+  get_parse_data(text, include_text = TRUE) %>%
     ensure_correct_str_txt(text) %>%
     enhance_mapping_special()
 }
@@ -83,7 +83,9 @@ tokenize <- function(text) {
 #' Obtain robust parse data
 #'
 #' Wrapper around `utils::getParseData(parse(text = text))` that returns a flat
-#' parse table.
+#' parse table. When caching information should be added, make sure that
+#' the cache is activated with `cache_activate()` and both `transformers` and
+#' `cache_dir` are non-`NULL`.
 #' @param text The text to parse.
 #' @param include_text Passed to [utils::getParseData()] as `includeText`.
 #' @param ... Other arguments passed to [utils::getParseData()].
@@ -92,8 +94,12 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
-  pd <- as_tibble(utils::getParseData(parsed, includeText = include_text)) %>%
+  pd <- as_tibble(
+    utils::getParseData(parsed, includeText = include_text),
+    .name_repair = "minimal"
+  ) %>%
     add_id_and_short()
+
   parser_version_set(parser_version_find(pd))
   pd
 }
@@ -117,8 +123,8 @@ add_id_and_short <- function(pd) {
 #' replace offending `text` in the terminal expressions with the text of their
 #' parents if their line / col position matches and return an error otherwise.
 #' @param pd A parse table.
-#' @param text The text from which `pd` was created. Needed
-#'   for potential reparsing.
+#' @param text The text from which `pd` was created. Needed potentially
+#'   for another round of parsing.
 #' @importFrom rlang abort
 #' @keywords internal
 ensure_correct_str_txt <- function(pd, text) {
@@ -144,7 +150,7 @@ ensure_correct_str_txt <- function(pd, text) {
     by.y = "id",
     suffixes = c("", "parent")
   ) %>%
-    as_tibble()
+    as_tibble(.name_repair = "minimal")
 
   if (!lines_and_cols_match(new_strings)) {
     abort(paste(
@@ -161,7 +167,7 @@ ensure_correct_str_txt <- function(pd, text) {
     pd[is_unaffected_token, ],
     pd[is_parent_of_problematic_string, ]
   ) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 }
 
 #' Ensure that the parse data is valid

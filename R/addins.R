@@ -69,7 +69,7 @@ style_active_file <- function() {
   }
   rstudioapi::modifyRange(
     c(1, 1, length(context$contents) + 1, 1),
-    paste0(ensure_last_is_empty(out), collapse = "\n"),
+    paste0(ensure_last_n_empty(out), collapse = "\n"),
     id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
@@ -120,16 +120,17 @@ set_style_transformers <- function() {
       current_style
     )
   if (!is.null(new_style)) {
-    parsed_new_style <- with_handlers({
-      transformers <- eval(parse(text = new_style))
-      style_text(c("a = 2", "function() {", "NULL", "}"))
-    },
-    error = function(e) {
-      abort(paste0(
-        "The selected style transformers \"",
-        new_style, "\" is not valid: ", e$message
-      ))
-    }
+    parsed_new_style <- with_handlers(
+      {
+        transformers <- eval(parse(text = new_style))
+        style_text(c("a = 2", "function() {", "NULL", "}"))
+      },
+      error = function(e) {
+        abort(paste0(
+          "The selected style transformers \"",
+          new_style, "\" is not valid: ", e$message
+        ))
+      }
     )
     options(styler.addins_style_transformer = new_style)
   }
@@ -141,7 +142,7 @@ set_style_transformers <- function() {
 #'
 #' @keywords internal
 get_addins_style_transformer_name <- function() {
-  getOption("styler.addins_style_transformer", default = "styler::tidyverse_style()")
+  getOption("styler.addins_style_transformer")
 }
 
 #' @rdname get_addins_style_transformer_name

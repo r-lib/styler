@@ -1,5 +1,5 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--expr:  [0/0] {2}                                   
+ ¦--expr: a [0/0] {2}                                  
  ¦   °--SYMBOL: a [0/0] {1}                            
- °--expr:  [1/0] {4}                                   
+ °--expr: b [1/0] {4}                                  
      °--SYMBOL: b [0/0] {3}                            

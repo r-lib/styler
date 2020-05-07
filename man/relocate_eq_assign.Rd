@@ -12,7 +12,7 @@ relocate_eq_assign(pd)
 }
 \description{
 Although syntactically identical, \code{\link[utils:getParseData]{utils::getParseData()}} does not produce
-the same hierarchy of the parse table (parent and id relationship) for \code{<-}
+the same hierarchy of the parse table (parent and id relationship) for \verb{<-}
 and \code{=} (See 'Examples').
 This is considered to be a bug and causes problems because the
 nested parse table constructed with \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}} is not

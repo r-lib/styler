@@ -1,27 +1,27 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--expr:  [0/0] {1}                                   
+ ¦--expr: if (X [0/0] {1}                              
  ¦   ¦--IF: if [0/1] {2}                               
  ¦   ¦--'(': ( [0/0] {3}                               
- ¦   ¦--expr:  [0/0] {5}                               
+ ¦   ¦--expr: X [0/0] {5}                              
  ¦   ¦   °--SYMBOL: X [0/0] {4}                        
  ¦   ¦--')': ) [0/2] {6}                               
- ¦   °--expr:  [1/0] {7}                               
- ¦       ¦--expr:  [0/0] {9}                           
+ ¦   °--expr: retur [1/0] {7}                          
+ ¦       ¦--expr: retur [0/0] {9}                      
  ¦       ¦   °--SYMBOL_FUNCTION_CALL: retur [0/0] {8}  
  ¦       ¦--'(': ( [0/0] {10}                          
- ¦       ¦--expr:  [0/0] {12}                          
+ ¦       ¦--expr: TRUE [0/0] {12}                      
  ¦       ¦   °--NUM_CONST: TRUE [0/0] {11}             
  ¦       °--')': ) [0/0] {13}                          
- °--expr:  [2/0] {14}                                  
+ °--expr: if (X [2/0] {14}                             
      ¦--IF: if [0/1] {15}                              
      ¦--'(': ( [0/0] {16}                              
-     ¦--expr:  [0/0] {18}                              
+     ¦--expr: X [0/0] {18}                             
      ¦   °--SYMBOL: X [0/0] {17}                       
      ¦--')': ) [0/1] {19}                              
-     °--expr:  [0/0] {20}                              
-         ¦--expr:  [0/0] {22}                          
+     °--expr: retur [0/0] {20}                         
+         ¦--expr: retur [0/0] {22}                     
          ¦   °--SYMBOL_FUNCTION_CALL: retur [0/0] {21} 
          ¦--'(': ( [0/0] {23}                          
-         ¦--expr:  [0/0] {25}                          
+         ¦--expr: FALSE [0/0] {25}                     
          ¦   °--NUM_CONST: FALSE [0/0] {24}            
          °--')': ) [0/0] {26}                          

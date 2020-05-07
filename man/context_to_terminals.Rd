@@ -4,8 +4,13 @@
 \alias{context_to_terminals}
 \title{Propagate context to terminals}
 \usage{
-context_to_terminals(pd_nested, outer_lag_newlines, outer_indent,
-  outer_spaces, outer_indention_refs)
+context_to_terminals(
+  pd_nested,
+  outer_lag_newlines,
+  outer_indent,
+  outer_spaces,
+  outer_indention_refs
+)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}

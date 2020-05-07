@@ -4,8 +4,12 @@
 \alias{next_terminal}
 \title{Tell me what the next terminal is}
 \usage{
-next_terminal(pd, stack = FALSE, vars = c("pos_id", "token", "text"),
-  tokens_exclude = c())
+next_terminal(
+  pd,
+  stack = FALSE,
+  vars = c("pos_id", "token", "text"),
+  tokens_exclude = c()
+)
 }
 \arguments{
 \item{pd}{A nest.}
@@ -33,7 +37,12 @@ If the first is a terminal, return it. If not, go inside it and search the
 next terminal
 }
 \examples{
-pd <- styler:::compute_parse_data_nested("if (TRUE) f()")
-styler:::next_terminal(pd)
+withr::with_options(
+  list(styler.cache_name = NULL), # temporarily deactivate cache
+  {
+    pd <- styler:::compute_parse_data_nested("if (TRUE) f()")
+    styler:::next_terminal(pd)
+  }
+)
 }
 \keyword{internal}

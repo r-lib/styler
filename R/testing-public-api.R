@@ -37,3 +37,24 @@ catch_style_file_output <- function(file_in = c(
 ls_testable_encodings <- function() {
   c("non-utf8", if (cli::is_utf8_output()) "utf8")
 }
+
+#' Test the dry argument
+#' @param path A path to pass to the `styler`.
+#' @param styler A function that takes `path`, typically a user exposed styler
+#'   function that has side effects, like [style_file()].
+#' @keywords internal
+test_dry <- function(path, styler, styled = FALSE) {
+  before <- readLines(path)
+  summary <- styler(path, dry = "on")
+  checker <- ifelse(styled, expect_false, expect_true)
+  checker(summary$changed)
+  expect_true(identical(before, readLines(path)))
+
+  if (styled) {
+    expect_error(styler(path, dry = "fail"), NA)
+  } else {
+    expect_error(styler(path, dry = "fail"), "would be modified")
+  }
+  expect_error(styler(path, dry = "other option"), "one of")
+
+}

@@ -20,7 +20,7 @@
 #' @importFrom rlang abort
 #' @keywords internal
 test_collection <- function(test, sub_test = NULL,
-                            write_back = TRUE,
+                            dry = "off",
                             write_tree = NA,
                             transformer,
                             ...) {
@@ -50,7 +50,7 @@ test_collection <- function(test, sub_test = NULL,
   pwalk(list(in_items, out_items, in_names, out_names, out_trees),
     transform_and_check,
     transformer = transformer,
-    write_back = write_back,
+    dry = dry,
     write_tree = write_tree,
     ...
   )
@@ -88,20 +88,19 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param in_name The label of the in_item, defaults to `in_item`.
 #' @param out_name The label of the out_item, defaults to `out_item`.
 #' @param transformer A function to apply to the content of `in_item`.
-#' @param write_back Whether the results of the transformation should be written
-#'   to the output file.
 #' @param write_tree Whether or not the tree structure of the test should be
 #'   computed and written to a file. Note that this needs R >= 3.2
 #'   (see [set_arg_write_tree()]). If the argument is set to `NA`, the function
 #'   determines whether R >= 3.2 is in use and if so, trees will be written.
 #' @param ... Parameters passed to transformer function.
 #' @param out_tree Name of tree file if written out.
+#' @inheritParams transform_utf8
 #' @importFrom utils write.table
 #' @importFrom rlang warn
 #' @keywords internal
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
-                                transformer, write_back,
+                                transformer, dry,
                                 write_tree = NA,
                                 out_tree = "_tree", ...) {
   write_tree <- set_arg_write_tree(write_tree)
@@ -122,7 +121,7 @@ transform_and_check <- function(in_item, out_item,
   transformed <- transform_utf8(
     out_item,
     function(x) transformed_text,
-    write_back = write_back
+    dry = dry
   )
 
   if (transformed) {
@@ -197,7 +196,7 @@ testthat_file <- function(...) {
   file.path(rprojroot::find_testthat_root_file(), ...)
 }
 
-#' Convert a serialized R object to a certaion verion.
+#' Convert a serialized R object to a certain version.
 #'
 #' Needed to make [testthat::expect_known_value()] work on R < 3.6.
 #' @param path A path to an rds file.
@@ -223,6 +222,57 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
   base <- basename(path_perm)
   file.path(dir, base)
 }
+
+#' Times two function calls with temporarily enabled cache
+#'
+#' This can be helpful for benchmarking.
+#' @param ... Arguments passed to `fun`.
+#' @param fun The function that should be timed.
+#' @param n The number of times the experiment should be repeated.
+#' @return
+#' A scalar indicating the relative difference of the second compared to the
+#'   first run.
+#' @keywords internal
+n_times_faster_with_cache <- function(x1, x2 = x1, ...,
+                                      fun = styler::style_text,
+                                      n = 3,
+                                      clear = "always") {
+  rlang::arg_match(clear, c("always", "final", "never", "all but last"))
+  capture.output(
+    out <- purrr::map(1:n, n_times_faster_bench,
+      x1 = x1, x2 = x2, fun = fun,
+      ..., n = n, clear = clear
+    ) %>%
+      purrr::map_dbl(
+        ~ unname(.x$first["elapsed"] / .x$second["elapsed"])
+      ) %>%
+      mean()
+  )
+  if (clear %in% c("always", "final")) {
+    clear_testthat_cache()
+  }
+  out
+}
+
+
+n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
+  fresh_testthat_cache()
+  if ((clear == "always") || (clear == "all but last" & n != i)) {
+    on.exit(clear_testthat_cache())
+  }
+  first <- system.time(fun(x1, ...))
+
+  if (is.null(x2)) {
+    second <- c(elapsed = 1)
+  } else {
+    second <- system.time(fun(x2, ...))
+  }
+  list(
+    first = first,
+    second = second
+  )
+}
+
 
 #' Generate a comprehensive collection test cases for comment / insertion
 #' interaction
@@ -263,4 +313,12 @@ generate_test_samples <- function() {
     ))),
     file = "tests/testthat/insertion_comment_interaction/if_else_if_else-in.R"
   )
+}
+
+#' @include ui-caching.R
+clear_testthat_cache <- purrr::partial(cache_clear, "testthat", ask = FALSE)
+activate_testthat_cache <- purrr::partial(cache_activate, "testthat")
+fresh_testthat_cache <- function() {
+  clear_testthat_cache()
+  activate_testthat_cache()
 }

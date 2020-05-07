@@ -4,15 +4,18 @@
 \alias{transform_utf8}
 \title{Apply a function to the contents of a file}
 \usage{
-transform_utf8(path, fun, write_back = TRUE)
+transform_utf8(path, fun, dry)
 }
 \arguments{
 \item{path}{A vector with file paths to transform.}
 
 \item{fun}{A function that returns a character vector.}
 
-\item{write_back}{Whether or not the results of the transformation should
-be written back to the file.}
+\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.}
 }
 \description{
 Transforms a file with a function.

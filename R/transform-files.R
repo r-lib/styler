@@ -5,23 +5,26 @@
 #' @param files A character vector with paths to the file that should be
 #'   transformed.
 #' @inheritParams make_transformer
+#' @inheritParams transform_file
 #' @section Value:
 #' Invisibly returns a data frame that indicates for each file considered for
-#' styling whether or not it was actually changed.
+#' styling whether or not it was actually changed (or would be changed when
+#' `dry` is not "off").
 #' @keywords internal
-transform_files <- function(files, transformers, include_roxygen_examples) {
+transform_files <- function(files, transformers, include_roxygen_examples, dry) {
   transformer <- make_transformer(transformers, include_roxygen_examples)
   max_char <- min(max(nchar(files), 0), getOption("width"))
-  if (length(files) > 0L) {
-    cat("Styling ", length(files), " files:\n")
+  len_files <- length(files)
+  if (len_files > 0L) {
+    cat("Styling ", len_files, " files:\n")
   }
 
   changed <- map_lgl(files, transform_file,
-    fun = transformer, max_char_path = max_char
+    fun = transformer, max_char_path = max_char, dry = dry
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
-  tibble(file = files, changed = changed)
+  new_tibble(list(file = files, changed = changed), nrow = len_files)
 }
 
 #' Transform a file and output a customized message
@@ -33,7 +36,7 @@ transform_files <- function(files, transformers, include_roxygen_examples) {
 #' @param message_after The message to print after the path.
 #' @param message_after_if_changed The message to print after `message_after` if
 #'   any file was transformed.
-#' @inheritParams transform_utf8
+#' @inheritParams transform_code
 #' @param ... Further arguments passed to [transform_utf8()].
 #' @keywords internal
 transform_file <- function(path,
@@ -42,7 +45,8 @@ transform_file <- function(path,
                            message_before = "",
                            message_after = " [DONE]",
                            message_after_if_changed = " *",
-                           ...) {
+                           ...,
+                           dry) {
   char_after_path <- nchar(message_before) + nchar(path) + 1
   max_char_after_message_path <- nchar(message_before) + max_char_path + 1
   n_spaces_before_message_after <-
@@ -52,7 +56,7 @@ transform_file <- function(path,
     rep_char(" ", max(0L, n_spaces_before_message_after)),
     append = FALSE
   )
-  changed <- transform_code(path, fun = fun, ...)
+  changed <- transform_code(path, fun = fun, ..., dry = dry)
 
   bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
 
@@ -72,17 +76,37 @@ transform_file <- function(path,
 #' @inheritParams parse_transform_serialize_r
 #' @keywords internal
 #' @importFrom purrr when
-make_transformer <- function(transformers, include_roxygen_examples, warn_empty = TRUE) {
+make_transformer <- function(transformers,
+                             include_roxygen_examples,
+                             warn_empty = TRUE) {
   force(transformers)
+  assert_transformers(transformers)
+
   function(text) {
-    transformed_code <- text %>%
-      parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
-      when(
-        include_roxygen_examples ~
-        parse_transform_serialize_roxygen(., transformers),
-        ~.
-      )
-    transformed_code
+    text <- trimws(text, which = "right")
+    should_use_cache <- cache_is_activated()
+
+    if (should_use_cache) {
+      use_cache <- is_cached(text, transformers)
+    } else {
+      use_cache <- FALSE
+    }
+
+    if (!use_cache) {
+      transformed_code <- text %>%
+        parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
+        when(
+          include_roxygen_examples ~
+          parse_transform_serialize_roxygen(., transformers),
+          ~.
+        )
+      if (should_use_cache) {
+        cache_write(transformed_code, transformers)
+      }
+      transformed_code
+    } else {
+      text
+    }
   }
 }
 
@@ -163,32 +187,37 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @seealso [parse_transform_serialize_roxygen()]
 #' @importFrom rlang abort
 #' @keywords internal
-parse_transform_serialize_r <- function(text, transformers, warn_empty = TRUE) {
+parse_transform_serialize_r <- function(text,
+                                        transformers,
+                                        warn_empty = TRUE) {
   text <- assert_text(text)
-  pd_nested <- compute_parse_data_nested(text)
-  start_line <- find_start_line(pd_nested)
+  pd_nested <- compute_parse_data_nested(text, transformers)
+
+  blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {
       warn("Text to style did not contain any tokens. Returning empty string.")
     }
     return("")
   }
-  transformed_pd <- apply_transformers(pd_nested, transformers)
-  flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
-    enrich_terminals(transformers$use_raw_indention) %>%
-    apply_ref_indention() %>%
-    set_regex_indention(
-      pattern = transformers$reindention$regex_pattern,
-      target_indention = transformers$reindention$indention,
-      comments_only = transformers$reindention$comments_only
-    )
-  serialized_transformed_text <-
-    serialize_parse_data_flattened(flattened_pd, start_line = start_line)
+
+  text_out <- pd_nested %>%
+    split(pd_nested$block) %>%
+    unname() %>%
+    map2(blank_lines_to_next_expr,
+      parse_transform_serialize_r_block,
+      transformers = transformers
+    ) %>%
+    unlist()
 
   if (can_verify_roundtrip(transformers)) {
-    verify_roundtrip(text, serialized_transformed_text)
+    verify_roundtrip(text, text_out)
   }
-  serialized_transformed_text
+  text_out <- convert_newlines_to_linebreaks(text_out)
+  if (cache_is_activated()) {
+    cache_by_expression(text_out, transformers)
+  }
+  text_out
 }
 
 #' Apply transformers to a parse table

@@ -90,12 +90,13 @@ set_line_break_before_curly_opening <- function(pd) {
 }
 
 
-set_line_break_around_comma <- function(pd) {
+set_line_break_around_comma <- function(pd, strict) {
   comma_with_line_break_that_can_be_removed_before <-
     (pd$token == "','") &
       (pd$lag_newlines > 0) &
       (pd$token_before != "COMMENT") &
       (lag(pd$token) != "'['")
+
   pd$lag_newlines[comma_with_line_break_that_can_be_removed_before] <- 0L
   pd$lag_newlines[lag(comma_with_line_break_that_can_be_removed_before)] <- 1L
   pd
@@ -127,7 +128,7 @@ style_line_break_around_curly <- function(strict, pd) {
 #' sugar according to the above definition. On the other hand `\{\{ x + y \}\}`
 #' is recognized by styler as containing it (and is parsable code)
 #' but will most likely give an error at runtime because the way the syntactic
-#' suggar is defined in rlang is to use a single token within curly-curly. In
+#' sugar is defined in rlang is to use a single token within curly-curly. In
 #' addition, because rlang parses `\{\{` in a special way (just as `!!`), the
 #' expression `\{\{ x \}\}` will give a runtime error when used outside of a
 #' context that is capable of handling it, e.g. on the top level (that is, not
@@ -169,9 +170,10 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
   pd
 }
 
-remove_line_break_before_round_closing_fun_dec <- function(pd) {
+remove_line_breaks_in_fun_dec <- function(pd) {
   if (is_function_dec(pd)) {
     round_after <- pd$token == "')'" & pd$token_before != "COMMENT"
+    pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
     pd$lag_newlines[round_after] <- 0L
   }
   pd
@@ -207,8 +209,8 @@ NULL
 #' @keywords internal
 set_line_break_after_opening_if_call_is_multi_line <-
   function(pd,
-             except_token_after = NULL,
-             except_text_before = NULL) {
+           except_token_after = NULL,
+           except_text_before = NULL) {
     if (!is_function_call(pd) && !is_subset_expr(pd)) {
       return(pd)
     }
@@ -225,7 +227,7 @@ set_line_break_after_opening_if_call_is_multi_line <-
 
     exception_pos <- c(
       which(pd$token %in% except_token_after),
-      if_else(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
+      ifelse(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
     )
     pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
     pd
@@ -267,9 +269,39 @@ set_line_break_before_closing_call <- function(pd, except_token_before) {
 
 #' @rdname set_line_break_if_call_is_multi_line
 #' @keywords internal
-remove_line_break_in_empty_fun_call <- function(pd) {
-  if (is_function_call(pd) && nrow(pd) == 3) {
-    pd$lag_newlines[3] <- 0L
+remove_line_break_in_fun_call <- function(pd, strict) {
+  if (is_function_call(pd)) {
+    # no blank lines within function calls
+    if (strict) {
+      pd$lag_newlines[lag(pd$token == "','") & pd$lag_newlines > 1 & pd$token != "COMMENT"] <- 1L
+    }
+    if (nrow(pd) == 3) {
+      pd$lag_newlines[3] <- 0L
+    }
+  }
+  pd
+}
+
+
+set_linebreak_after_ggplot2_plus <- function(pd) {
+  is_plus_raw <- pd$token == "'+'"
+  if (any(is_plus_raw)) {
+    first_plus <- which(is_plus_raw)[1]
+    next_non_comment <- next_non_comment(pd, first_plus)
+    is_plus_or_comment_after_plus_before_fun_call <-
+      lag(is_plus_raw, next_non_comment - first_plus - 1, default = FALSE) &
+        (pd$token_after == "SYMBOL_FUNCTION_CALL" | pd$token_after == "SYMBOL_PACKAGE")
+    if (any(is_plus_or_comment_after_plus_before_fun_call)) {
+      gg_call <- pd$child[[previous_non_comment(pd, first_plus)]]$child[[1]]
+      if (!is.null(gg_call) && isTRUE(gg_call$text[gg_call$token == "SYMBOL_FUNCTION_CALL"] == "ggplot")) {
+        plus_without_comment_after <- setdiff(
+          which(is_plus_raw),
+          which(lead(pd$token == "COMMENT"))
+        )
+
+        pd$lag_newlines[plus_without_comment_after + 1] <- 1L
+      }
+    }
   }
   pd
 }

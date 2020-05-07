@@ -9,7 +9,7 @@ context("test-roxygen-examples-identify.R")
 test_that("one function, last tag, properly formatted, no dontrun", {
   expect_equal(
     identify_start_to_stop_of_roxygen_examples(testthat_file(
-    "roxygen-examples-identify/1-one-function-example-last-proper-run.R"
+      "roxygen-examples-identify/1-one-function-example-last-proper-run.R"
     )),
     list(c(6))
   )

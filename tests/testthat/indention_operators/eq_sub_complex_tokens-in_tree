@@ -1,25 +1,25 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--expr:  [0/0] {1}                                   
- ¦   ¦--expr:  [0/0] {3}                               
+ ¦--expr: call( [0/0] {1}                              
+ ¦   ¦--expr: call [0/0] {3}                           
  ¦   ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {2}       
  ¦   ¦--'(': ( [0/0] {4}                               
  ¦   ¦--SYMBOL_SUB: a [0/1] {5}                        
  ¦   ¦--EQ_SUB: = [0/7] {6}                            
- ¦   ¦--expr:  [1/0] {8}                               
+ ¦   ¦--expr: 5 [1/0] {8}                              
  ¦   ¦   °--NUM_CONST: 5 [0/0] {7}                     
  ¦   ¦--',': , [0/5] {9}                               
- ¦   ¦--expr:  [1/0] {11}                              
+ ¦   ¦--expr: b [1/0] {11}                             
  ¦   ¦   °--SYMBOL: b [0/0] {10}                       
  ¦   °--')': ) [0/0] {12}                              
- °--expr:  [2/0] {13}                                  
-     ¦--expr:  [0/0] {15}                              
+ °--expr: call( [2/0] {13}                             
+     ¦--expr: call [0/0] {15}                          
      ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {14}      
      ¦--'(': ( [0/0] {16}                              
      ¦--SYMBOL_SUB: a [0/1] {17}                       
      ¦--EQ_SUB: = [0/7] {18}                           
-     ¦--expr:  [1/0] {20}                              
+     ¦--expr: 5 [1/0] {20}                             
      ¦   °--NUM_CONST: 5 [0/0] {19}                    
      ¦--',': , [0/5] {21}                              
-     ¦--expr:  [1/5] {23}                              
+     ¦--expr: b [1/5] {23}                             
      ¦   °--SYMBOL: b [0/0] {22}                       
      °--')': ) [1/0] {24}                              

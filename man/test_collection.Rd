@@ -4,8 +4,14 @@
 \alias{test_collection}
 \title{Run a collection of tests}
 \usage{
-test_collection(test, sub_test = NULL, write_back = TRUE,
-  write_tree = NA, transformer, ...)
+test_collection(
+  test,
+  sub_test = NULL,
+  dry = "off",
+  write_tree = NA,
+  transformer,
+  ...
+)
 }
 \arguments{
 \item{test}{The test to run. It corresponds to a folder name in
@@ -15,8 +21,11 @@ tests/testthat.}
 to be tested in the test. \code{sub_test} must match the beginning of file
 names in tests/testthat. \code{NULL} matches all files.}
 
-\item{write_back}{Whether the results of the transformation should be written
-to the output file.}
+\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.}
 
 \item{write_tree}{Whether or not the tree structure of the test should be
 computed and written to a file. Note that this needs R >= 3.2

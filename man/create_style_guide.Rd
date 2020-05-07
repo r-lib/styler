@@ -4,9 +4,17 @@
 \alias{create_style_guide}
 \title{Create a style guide}
 \usage{
-create_style_guide(initialize = default_style_guide_attributes,
-  line_break = NULL, space = NULL, token = NULL, indention = NULL,
-  use_raw_indention = FALSE, reindention = tidyverse_reindention())
+create_style_guide(
+  initialize = default_style_guide_attributes,
+  line_break = NULL,
+  space = NULL,
+  token = NULL,
+  indention = NULL,
+  use_raw_indention = FALSE,
+  reindention = tidyverse_reindention(),
+  style_guide_name = NULL,
+  style_guide_version = NULL
+)
 }
 \arguments{
 \item{initialize}{The bare name of a function that initializes various
@@ -27,6 +35,17 @@ should be used.}
 
 \item{reindention}{A list of parameters for regex re-indention, most
 conveniently constructed using \code{\link[=specify_reindention]{specify_reindention()}}.}
+
+\item{style_guide_name}{The name of the style guide. Used as a meta attribute
+inside the created style guide, for example for caching. By convention,
+this is the style guide qualified by the package namespace plus the
+location of the style guide, separated by \code{@}. For example,
+\code{"styler::tidyverse_style@https://github.com/r-lib"}.}
+
+\item{style_guide_version}{The version of the style guide. Used as a meta
+attribute inside the created style guide, for example for caching. This
+should correspond to the version of the R package that exports the
+style guide.}
 }
 \description{
 This is a helper function to create a style guide, which is technically
@@ -42,7 +61,12 @@ set_line_break_before_curly_opening <- function(pd_flat) {
   pd_flat
 }
 set_line_break_before_curly_opening_style <- function() {
-  create_style_guide(line_break = tibble::lst(set_line_break_before_curly_opening))
+  create_style_guide(
+    line_break = tibble::lst(set_line_break_before_curly_opening)
+  )
 }
-style_text("a <- function(x) { x }", style = set_line_break_before_curly_opening_style)
+style_text(
+  "a <- function(x) { x }",
+  style = set_line_break_before_curly_opening_style
+)
 }

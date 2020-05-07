@@ -4,6 +4,7 @@
 \alias{add_token_terminal}
 \alias{add_terminal_token_after}
 \alias{add_terminal_token_before}
+\alias{add_attributes_caching}
 \alias{remove_terminal_token_before_and_after}
 \title{Add information about previous / next token to each terminal}
 \usage{
@@ -11,16 +12,28 @@ add_terminal_token_after(pd_flat)
 
 add_terminal_token_before(pd_flat)
 
+add_attributes_caching(pd_flat, transformers)
+
 remove_terminal_token_before_and_after(pd_flat)
 }
 \arguments{
 \item{pd_flat}{A flat parse table.}
+
+\item{transformers}{A list with transformer functions, used to check if
+the code is cached.}
 }
 \description{
-Add information about previous / next token to each terminal
+Note that this does function must be called in \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}
+and we cannot wait to initialize this attribute until \code{\link[=apply_transformers]{apply_transformers()}},
+where all other attributes are initialized with
+\code{\link[=default_style_guide_attributes]{default_style_guide_attributes()}} (when using \code{\link[=tidyverse_style]{tidyverse_style()}}) because
+for cached code, we don't build up the nested structure and leave it shallow
+(to speed up things), see also \code{\link[=drop_cached_children]{drop_cached_children()}}.
 }
 \section{Functions}{
 \itemize{
+\item \code{add_attributes_caching}: Initializes \code{newlines} and \code{lag_newlines}.
+
 \item \code{remove_terminal_token_before_and_after}: Removes column \code{terimnal_token_before}. Might
 be used to prevent the use of invalidated information, e.g. if tokens were
 added to the nested parse table.

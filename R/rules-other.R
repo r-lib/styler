@@ -1,7 +1,6 @@
-#' @importFrom purrr reduce
 add_brackets_in_pipe <- function(pd) {
   is_pipe <- pd$token == "SPECIAL-PIPE"
-  reduce(which(is_pipe), add_brackets_in_pipe_one, .init = pd)
+  Reduce(add_brackets_in_pipe_one, which(is_pipe), init = pd)
 }
 
 add_brackets_in_pipe_one <- function(pd, pos) {
@@ -20,7 +19,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
       pd$child[[next_non_comment]],
       new_pd
     ) %>%
-      arrange(pos_id)
+      arrange_pos_id()
   }
   pd
 }
@@ -68,7 +67,7 @@ wrap_multiline_curly <- function(pd, indent_by, space_after = 1, key_token) {
     pd, which(pd$token == key_token)[1]
   )
   next_terminal <- next_terminal(pd[to_be_wrapped_expr_with_child, ])$text
-  requires_braces <- if_for_while_part_requires_braces(pd, key_token)
+  requires_braces <- if_for_while_part_requires_braces(pd, key_token) && !any(pd$stylerignore)
   if (requires_braces | next_terminal == "return") {
     closing_brace_ind <- which(pd$token == key_token)[1]
     pd$spaces[closing_brace_ind] <- 1L
@@ -95,7 +94,8 @@ wrap_multiline_curly <- function(pd, indent_by, space_after = 1, key_token) {
 wrap_else_multiline_curly <- function(pd, indent_by = 2, space_after = 0) {
   if (contains_else_expr(pd) &&
     pd_is_multi_line(pd) &&
-    contains_else_expr_that_needs_braces(pd)) {
+    contains_else_expr_that_needs_braces(pd) &&
+    !any(pd$stylerignore)) {
     else_idx <- which(pd$token == "ELSE")
     pd$spaces[else_idx] <- 1L
     all_to_be_wrapped_ind <- seq2(else_idx + 1L, nrow(pd))
@@ -135,7 +135,7 @@ wrap_subexpr_in_curly <- function(pd,
     slice(-ind_to_be_wrapped) %>%
     bind_rows(new_expr_in_expr) %>%
     set_multi_line() %>%
-    arrange(pos_id)
+    arrange_pos_id()
 }
 
 #' Check if if, for or while loop expression require a braces.

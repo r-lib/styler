@@ -1,6 +1,21 @@
+# All available hooks: https://pre-commit.com/hooks.html
+# R specific hooks: https://github.com/lorenzwalthert/precommit
 repos:
--   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: v0.0.0.9008
+-   repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.0.0.9040
     hooks:
-    -   id: roxygenize
+    -   id: parsable-R
     -   id: no-browser-statement
+    # -   id: lintr
+    -   id: readme-rmd-rendered
+    -   id: spell-check
+    -   id: style-files
+        args: [--style_pkg=styler, --style_fun=tidyverse_style]
+        exclude: 'tests/testthat/.*/*\.R'
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+    -   id: check-added-large-files
+        args: ['--maxkb=200']
+    -   id: end-of-file-fixer
+        exclude: '\.Rd'

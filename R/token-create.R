@@ -18,6 +18,10 @@
 #' @param terminal Boolean vector indicating whether a token is a terminal or
 #'   not.
 #' @param child The children of the tokens.
+#' @param stylerignore Boolean to indicate if the line should be ignored by
+#'   styler.
+#' @param block The block (of caching) to which the token belongs. An integer.
+#' @param is_cached Whether the token is cached already.
 #' @family token creators
 #' @keywords internal
 create_tokens <- function(tokens,
@@ -30,24 +34,33 @@ create_tokens <- function(tokens,
                           indention_ref_pos_ids = NA,
                           indents = 0,
                           terminal = TRUE,
-                          child = NULL) {
+                          child = NULL,
+                          stylerignore = FALSE,
+                          block = NA,
+                          is_cached = FALSE) {
   len_text <- length(texts)
-  tibble(
-    token = tokens,
-    text = texts,
-    short = substr(texts, 1, 5),
-    lag_newlines = lag_newlines,
-    newlines = lead(lag_newlines),
-    pos_id = pos_ids,
-    token_before = token_before,
-    token_after = token_after,
-    terminal = rep(terminal, len_text),
-    internal = rep(FALSE, len_text),
-    spaces = spaces,
-    multi_line = rep(FALSE, len_text),
-    indention_ref_pos_id = indention_ref_pos_ids,
-    indent = indents,
-    child = rep(list(child), len_text)
+  new_tibble(
+    list(
+      token = tokens,
+      text = texts,
+      short = substr(texts, 1, 5),
+      lag_newlines = lag_newlines,
+      newlines = lead(lag_newlines),
+      pos_id = pos_ids,
+      token_before = token_before,
+      token_after = token_after,
+      terminal = rep(terminal, len_text),
+      internal = rep(FALSE, len_text),
+      spaces = spaces,
+      multi_line = rep(FALSE, len_text),
+      indention_ref_pos_id = indention_ref_pos_ids,
+      indent = indents,
+      child = rep(list(child), len_text),
+      stylerignore = stylerignore,
+      block = block,
+      is_cached = is_cached
+    ),
+    nrow = len_text
   )
 }
 
@@ -89,7 +102,7 @@ find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) 
     ifelse(after, max(candidates), min(candidates)) + by * direction
   } else {
     find_start_pos_id(
-      pd$child[[pos]], if_else(after, nrow(pd$child[[pos]]), 1L),
+      pd$child[[pos]], ifelse(after, nrow(pd$child[[pos]]), 1L),
       by, direction, after, candidates
     )
   }
@@ -135,13 +148,15 @@ wrap_expr_in_curly <- function(pd,
 
   opening <- create_tokens("'{'", "{",
     pos_ids = create_pos_ids(pd, 1, after = FALSE),
-    spaces = 1 - as.integer(stretch_out[1])
+    spaces = 1 - as.integer(stretch_out[1]),
+    stylerignore = pd$stylerignore[1]
   )
 
   closing <- create_tokens(
     "'}'", "}",
     spaces = space_after, lag_newlines = as.integer(stretch_out[2]),
-    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE)
+    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
+    stylerignore = pd$stylerignore[1]
   )
 
   bind_rows(opening, pd, closing) %>%

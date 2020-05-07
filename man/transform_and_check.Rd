@@ -4,9 +4,17 @@
 \alias{transform_and_check}
 \title{Transform a file an check the result}
 \usage{
-transform_and_check(in_item, out_item, in_name = in_item,
-  out_name = out_item, transformer, write_back, write_tree = NA,
-  out_tree = "_tree", ...)
+transform_and_check(
+  in_item,
+  out_item,
+  in_name = in_item,
+  out_name = out_item,
+  transformer,
+  dry,
+  write_tree = NA,
+  out_tree = "_tree",
+  ...
+)
 }
 \arguments{
 \item{in_item}{An path to an file to transform.}
@@ -19,8 +27,11 @@ transform_and_check(in_item, out_item, in_name = in_item,
 
 \item{transformer}{A function to apply to the content of \code{in_item}.}
 
-\item{write_back}{Whether the results of the transformation should be written
-to the output file.}
+\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
+latter returns an error if the input code is not identical to the result
+of styling. "off", the default, writes back if the input and output of
+styling are not identical.}
 
 \item{write_tree}{Whether or not the tree structure of the test should be
 computed and written to a file. Note that this needs R >= 3.2

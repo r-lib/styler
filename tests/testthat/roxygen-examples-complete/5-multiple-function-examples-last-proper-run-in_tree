@@ -8,11 +8,11 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' st [1/0] {7}                           
  ¦--COMMENT: #' st [1/0] {8}                           
  ¦--COMMENT: #' st [1/0] {9}                           
- ¦--expr:  [1/0] {10}                                  
- ¦   ¦--expr:  [0/1] {12}                              
+ ¦--expr: a <-  [1/0] {10}                             
+ ¦   ¦--expr: a [0/1] {12}                             
  ¦   ¦   °--SYMBOL: a [0/0] {11}                       
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {13}                     
- ¦   °--expr:  [0/0] {15}                              
+ ¦   °--expr: call [0/0] {15}                          
  ¦       °--SYMBOL: call [0/0] {14}                    
  ¦--COMMENT: #' Pr [2/0] {16}                          
  ¦--COMMENT: #' [1/0] {17}                             
@@ -20,9 +20,9 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' (c [1/0] {19}                          
  ¦--COMMENT: #' Ca [1/0] {20}                          
  ¦--COMMENT: #' @e [1/0] {21}                          
- °--expr:  [1/0] {22}                                  
-     ¦--expr:  [0/1] {24}                              
+ °--expr: a <-  [1/0] {22}                             
+     ¦--expr: a [0/1] {24}                             
      ¦   °--SYMBOL: a [0/0] {23}                       
      ¦--LEFT_ASSIGN: <- [0/3] {25}                     
-     °--expr:  [0/0] {27}                              
+     °--expr: 2 [0/0] {27}                             
          °--NUM_CONST: 2 [0/0] {26}                    

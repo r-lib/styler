@@ -1,7 +1,7 @@
 #' Parse roxygen comments into text
 #'
 #' Used to parse roxygen code examples. Removes line break before
-#' `\\dontrun{...}` and friends because it does not occurr for segments other
+#' `\\dontrun{...}` and friends because it does not occur for segments other
 #' than `\\dont{...}` and friends.
 #' @param roxygen Roxygen comments.
 #' @examples
@@ -33,8 +33,7 @@ parse_roxygen <- function(roxygen) {
 #' @param raw Raw code to post-process.
 #' @keywords internal
 post_parse_roxygen <- function(raw) {
-  split <- raw %>%
+  raw %>%
     paste0(collapse = "") %>%
-    strsplit("\n", fixed = TRUE)
-  split[[1]]
+    convert_newlines_to_linebreaks()
 }

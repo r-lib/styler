@@ -7,7 +7,7 @@
 #' with multiple curly braces in a sequence. It is important to maintain testing
 #' for indention rules even as the curly-curly expression is always kept on the
 #' same line in the tidyverse style guide because we should
-#' ensure the underlaying mechanics for indention work correctly. When
+#' ensure the underlying mechanics for indention work correctly. When
 #' indention mechanisms are changed later, e.g. by simplifying
 #' [compute_indent_indices()], we must have
 #' a way of testing this without the interaction of `\{\{`.

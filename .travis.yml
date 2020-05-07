@@ -26,6 +26,7 @@ after_script: R -q -e 'tic::after_script()'
 language: r
 sudo: false
 dist: trusty
+cache: packages
 latex: false
 
 matrix:
@@ -37,8 +38,9 @@ matrix:
   - r: release
     env:
     - BUILD_PKGDOWN: true
+    - CODECOV: true
   - r: devel
-
+  - os: osx
 #env
 env:
   global:

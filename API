@@ -2,13 +2,17 @@
 
 ## Exported functions
 
-create_style_guide(initialize = default_style_guide_attributes, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE, reindention = tidyverse_reindention())
+cache_activate(cache_name = NULL, verbose = TRUE)
+cache_clear(cache_name = NULL, ask = TRUE)
+cache_deactivate(verbose = TRUE)
+cache_info(cache_name = NULL, format = "both")
+create_style_guide(initialize = default_style_guide_attributes, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE, reindention = tidyverse_reindention(), style_guide_name = NULL, style_guide_version = NULL)
 default_style_guide_attributes(pd_flat)
 specify_math_token_spacing(zero = "'^'", one = c("'+'", "'-'", "'*'", "'/'"))
 specify_reindention(regex_pattern = NULL, indention = 0, comments_only = TRUE)
-style_dir(path = ".", ..., style = tidyverse_style, transformers = style(...), filetype = c("R", "Rprofile"), recursive = TRUE, exclude_files = NULL, include_roxygen_examples = TRUE)
-style_file(path, ..., style = tidyverse_style, transformers = style(...), include_roxygen_examples = TRUE)
-style_pkg(pkg = ".", ..., style = tidyverse_style, transformers = style(...), filetype = c("R", "Rprofile"), exclude_files = "R/RcppExports.R", include_roxygen_examples = TRUE)
+style_dir(path = ".", ..., style = tidyverse_style, transformers = style(...), filetype = c("R", "Rprofile"), recursive = TRUE, exclude_files = NULL, exclude_dirs = c("packrat", "renv"), include_roxygen_examples = TRUE, dry = "off")
+style_file(path, ..., style = tidyverse_style, transformers = style(...), include_roxygen_examples = TRUE, dry = "off")
+style_pkg(pkg = ".", ..., style = tidyverse_style, transformers = style(...), filetype = c("R", "Rprofile"), exclude_files = "R/RcppExports.R", exclude_dirs = c("packrat", "renv"), include_roxygen_examples = TRUE, dry = "off")
 style_text(text, ..., style = tidyverse_style, transformers = style(...), include_roxygen_examples = TRUE)
 tidyverse_math_token_spacing()
 tidyverse_reindention()

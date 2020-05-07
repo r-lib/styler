@@ -9,10 +9,80 @@ test_that("styler can style package", {
   }))
 })
 
+test_that("styler can style package and exclude some directories", {
+  capture_output(expect_true({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
+      exclude_dirs = "tests"
+    )
+    nrow(styled) == 1
+  }))
+})
+
+
+test_that("styler can style package and exclude some directories and files", {
+  capture_output(expect_true({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
+      exclude_dirs = "tests",
+      exclude_files = ".Rprofile"
+    )
+    nrow(styled) == 1
+  }))
+
+  capture_output(expect_true({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
+      exclude_dirs = "tests",
+      exclude_files = "./.Rprofile"
+    )
+    nrow(styled) == 1
+  }))
+})
+
+
 test_that("styler can style directory", {
   capture_output(expect_false({
     styled <- style_dir(testthat_file("public-api", "xyzdir"))
     any(styled$changed)
+  }))
+})
+
+test_that("styler can style directories and exclude", {
+  capture_output(expect_true({
+    styled <- style_dir(
+      testthat_file("public-api", "renvpkg"),
+      exclude_dirs = "renv"
+    )
+    nrow(styled) == 2
+  }))
+  capture_output(expect_true({
+    styled <- style_dir(
+      testthat_file("public-api", "renvpkg"),
+      exclude_dirs = c("renv", "tests/testthat")
+    )
+    nrow(styled) == 1
+  }))
+
+  capture_output(expect_true({
+    styled <- style_dir(
+      testthat_file("public-api", "renvpkg"),
+      exclude_dirs = "./renv"
+    )
+    nrow(styled) == 2
+  }))
+
+  capture_output(expect_true({
+    styled <- style_dir(
+      testthat_file("public-api", "renvpkg"),
+      exclude_dirs = "./renv", recursive = FALSE
+    )
+    nrow(styled) == 0
+  }))
+
+  capture_output(expect_true({
+    styled <- style_dir(
+      testthat_file("public-api", "renvpkg"),
+      recursive = FALSE
+    )
+    nrow(styled) == 0
   }))
 })
 
@@ -78,16 +148,16 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
 context("messages are correct")
 
 test_that("messages (via cat()) of style_file are correct", {
-
   for (encoding in ls_testable_encodings()) {
     withr::with_options(
-      list(cli.unicode = encoding == "utf8"), {
+      list(cli.unicode = encoding == "utf8"),
+      {
         # Message if scope > line_breaks and code changes
         output <- catch_style_file_output(c(
           "public-api",
-            "xyzdir-dirty",
-            "dirty-sample-with-scope-tokens.R"
-          ), encoding = encoding)
+          "xyzdir-dirty",
+          "dirty-sample-with-scope-tokens.R"
+        ), encoding = encoding)
         expect_known_value(
           output,
           testthat_file(paste0(
@@ -241,4 +311,24 @@ test_that("styler can style Rnw files only via style_pkg()", {
   expect_false(any(grepl("random.Rmd", msg, fixed = TRUE)))
   expect_true(any(grepl("random.Rnw", msg, fixed = TRUE)))
   expect_false(any(grepl("RcppExports.R", msg, fixed = TRUE)))
+})
+
+test_that("dry run options work:", {
+  path <- test_path("public-api/dry/unstyled.R")
+  # test the testing function
+  expect_error(test_dry(path, style_file, styled = TRUE))
+
+  # real tests
+  ## R
+  test_dry(path, style_file)
+  path <- test_path("public-api/dry/styled.R")
+  test_dry(path, style_file, styled = TRUE)
+
+  ## Rmd
+  test_dry(test_path("public-api/dry/unstyled.Rmd"), style_file, styled = FALSE)
+  test_dry(test_path("public-api/dry/styled.Rmd"), style_file, styled = TRUE)
+
+  ## Rmd
+  test_dry(test_path("public-api/dry/unstyled.Rnw"), style_file, styled = FALSE)
+  test_dry(test_path("public-api/dry/styled.Rnw"), style_file, styled = TRUE)
 })

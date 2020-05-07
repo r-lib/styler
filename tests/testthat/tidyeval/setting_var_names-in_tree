@@ -1,46 +1,46 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})      
- °--expr:  [0/0] {1}                                         
-     ¦--expr:  [0/1] {4}                                     
+ °--expr: mtcar [0/0] {1}                                    
+     ¦--expr: mtcar [0/1] {4}                                
      ¦   °--SYMBOL: mtcar [0/0] {3}                          
      ¦--SPECIAL-PIPE: %>% [0/2] {5}                          
-     ¦--expr:  [1/1] {6}                                     
-     ¦   ¦--expr:  [0/0] {8}                                 
+     ¦--expr: group [1/1] {6}                                
+     ¦   ¦--expr: group [0/0] {8}                            
      ¦   ¦   °--SYMBOL_FUNCTION_CALL: group [0/0] {7}        
      ¦   ¦--'(': ( [0/0] {9}                                 
-     ¦   ¦--expr:  [0/0] {11}                                
+     ¦   ¦--expr: am [0/0] {11}                              
      ¦   ¦   °--SYMBOL: am [0/0] {10}                        
      ¦   °--')': ) [0/0] {12}                                
      ¦--SPECIAL-PIPE: %>% [0/2] {13}                         
-     °--expr:  [1/0] {14}                                    
-         ¦--expr:  [0/0] {16}                                
+     °--expr: summa [1/0] {14}                               
+         ¦--expr: summa [0/0] {16}                           
          ¦   °--SYMBOL_FUNCTION_CALL: summa [0/0] {15}       
          ¦--'(': ( [0/4] {17}                                
-         ¦--expr:  [1/0] {18}                                
-         ¦   ¦--expr:  [0/0] {19}                            
+         ¦--expr: !!mea [1/0] {18}                           
+         ¦   ¦--expr: !!mea [0/0] {19}                       
          ¦   ¦   ¦--'!': ! [0/0] {20}                        
-         ¦   ¦   °--expr:  [0/0] {21}                        
+         ¦   ¦   °--expr: !mean [0/0] {21}                   
          ¦   ¦       ¦--'!': ! [0/0] {22}                    
-         ¦   ¦       °--expr:  [0/0] {24}                    
+         ¦   ¦       °--expr: mean_ [0/0] {24}               
          ¦   ¦           °--SYMBOL: mean_ [0/0] {23}         
          ¦   ¦--LEFT_ASSIGN: := [0/0] {25}                   
-         ¦   °--expr:  [0/0] {26}                            
-         ¦       ¦--expr:  [0/0] {28}                        
+         ¦   °--expr: mean( [0/0] {26}                       
+         ¦       ¦--expr: mean [0/0] {28}                    
          ¦       ¦   °--SYMBOL_FUNCTION_CALL: mean [0/0] {27}
          ¦       ¦--'(': ( [0/0] {29}                        
-         ¦       ¦--expr:  [0/0] {31}                        
+         ¦       ¦--expr: cyl [0/0] {31}                     
          ¦       ¦   °--SYMBOL: cyl [0/0] {30}               
          ¦       °--')': ) [0/0] {32}                        
          ¦--',': , [0/4] {33}                                
-         ¦--expr:  [1/2] {34}                                
-         ¦   ¦--expr:  [0/4] {35}                            
+         ¦--expr: !!cou [1/2] {34}                           
+         ¦   ¦--expr: !!cou [0/4] {35}                       
          ¦   ¦   ¦--'!': ! [0/0] {36}                        
-         ¦   ¦   °--expr:  [0/0] {37}                        
+         ¦   ¦   °--expr: !coun [0/0] {37}                   
          ¦   ¦       ¦--'!': ! [0/0] {38}                    
-         ¦   ¦       °--expr:  [0/0] {40}                    
+         ¦   ¦       °--expr: count [0/0] {40}               
          ¦   ¦           °--SYMBOL: count [0/0] {39}         
          ¦   ¦--LEFT_ASSIGN: := [0/0] {41}                   
-         ¦   °--expr:  [0/0] {42}                            
-         ¦       ¦--expr:  [0/0] {44}                        
+         ¦   °--expr: n() [0/0] {42}                         
+         ¦       ¦--expr: n [0/0] {44}                       
          ¦       ¦   °--SYMBOL_FUNCTION_CALL: n [0/0] {43}   
          ¦       ¦--'(': ( [0/0] {45}                        
          ¦       °--')': ) [0/0] {46}                        

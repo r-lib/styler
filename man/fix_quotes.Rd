@@ -12,7 +12,7 @@ fix_quotes(pd_flat)
 \description{
 We do not use \code{deparse()} as in previous implementations but \code{paste0()} since
 the former approach escapes the reverse backslash in the line break character
-\code{\\n} whereas the solution with \code{paste0()} does not.
+\verb{\\\\n} whereas the solution with \code{paste0()} does not.
 }
 \examples{
 style_text("'here

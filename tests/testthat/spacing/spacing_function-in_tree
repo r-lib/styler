@@ -1,5 +1,5 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- °--expr:  [0/0] {1}                                   
+ °--expr: funct [0/0] {1}                              
      ¦--FUNCTION: funct [0/2] {2}                      
      ¦--'(': ( [0/0] {3}                               
      ¦--SYMBOL_FORMALS: x [0/0] {4}                    
@@ -8,12 +8,13 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
      ¦--',': , [0/1] {7}                               
      ¦--SYMBOL_FORMALS: z [0/0] {8}                    
      ¦--')': ) [0/1] {9}                               
-     °--expr:  [0/0] {10}                              
+     °--expr: {
+  3 [0/0] {10}                        
          ¦--'{': { [0/2] {11}                          
-         ¦--expr:  [1/0] {12}                          
-         ¦   ¦--expr:  [0/1] {14}                      
+         ¦--expr: 3 + 1 [1/0] {12}                     
+         ¦   ¦--expr: 3 [0/1] {14}                     
          ¦   ¦   °--NUM_CONST: 3 [0/0] {13}            
          ¦   ¦--'+': + [0/1] {15}                      
-         ¦   °--expr:  [0/0] {17}                      
+         ¦   °--expr: 1 [0/0] {17}                     
          ¦       °--NUM_CONST: 1 [0/0] {16}            
          °--'}': } [1/0] {18}                          

@@ -7,6 +7,6 @@
 set_space_around_op(pd_flat, strict)
 }
 \description{
-Alignement is kept, if detected.
+Alignment is kept, if detected.
 }
 \keyword{internal}

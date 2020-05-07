@@ -30,10 +30,9 @@ flatten_operators_one <- function(pd_nested) {
     special_token, "LEFT_ASSIGN", if (parser_version_get() > 1) "EQ_ASSIGN",
     "'+'", "'-'"
   )
-  bound <- pd_nested %>%
+  pd_nested %>%
     flatten_pd(pd_token_left, left = TRUE) %>%
     flatten_pd(pd_token_right, left = FALSE)
-  bound
 }
 
 
@@ -57,7 +56,7 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   if (length(token_pos_candidates) == 0) {
     return(pd_nested)
   }
-  token_pos <- token_pos_candidates[if_else(left, 1, length(token_pos_candidates))]
+  token_pos <- token_pos_candidates[ifelse(left, 1, length(token_pos_candidates))]
   if (left) {
     pos <- previous_non_comment(pd_nested, token_pos)
   } else {
@@ -83,7 +82,7 @@ bind_with_child <- function(pd_nested, pos) {
   pd_nested %>%
     slice(-pos) %>%
     bind_rows(pd_nested$child[[pos]]) %>%
-    arrange(pos_id)
+    arrange_pos_id()
 }
 
 #' Wrap an expression into an expression
@@ -184,7 +183,10 @@ relocate_eq_assign_nest <- function(pd) {
 #' Two assignment tokens `EQ_ASSIGN` belong to the same block if they are not
 #' separated by more than one token. Token between `EQ_ASSIGN` tokens belong
 #' to the `EQ_ASSIGN` token occurring before them, except the token right before
-#' `EQ_ASSING` already belongs to the `EQ_ASSING` after it.
+#' `EQ_ASSING` already belongs to the `EQ_ASSING` after it. Note that this
+#' notion is unrelated to the column *block* in the parse table, which is used
+#' to [parse_transform_serialize_r()] code blocks and leave out the ones that
+#' are cached.
 #' @param pd A parse table.
 #' @keywords internal
 find_block_id <- function(pd) {
@@ -218,7 +220,7 @@ relocate_eq_assign_one <- function(pd) {
   eq_expr$parent <- NA
   non_eq_expr <- pd[-eq_ind, ]
   pd <- bind_rows(eq_expr, non_eq_expr) %>%
-    arrange(pos_id)
+    arrange_pos_id()
   pd
 }
 

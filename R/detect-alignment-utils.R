@@ -101,6 +101,7 @@ alignment_serialize_column <- function(relevant_pd_by_line, column) {
 #'
 #' @inheritParams alignment_serialize_column
 #' @inheritParams alignment_col1_is_named
+#' @keywords internal
 alignment_serialize_line <- function(relevant_pd_by_line, column) {
   # TODO
   # better also add lover bound for column. If you already checked up to comma 2,
@@ -140,7 +141,7 @@ alignment_serialize <- function(pd_sub) {
   }
 }
 
-#' Check if spacing around comma is correcr
+#' Check if spacing around comma is correct
 #'
 #' At least one space after comma, none before, for all but the last comma on
 #' the line
