@@ -114,7 +114,8 @@ transform_and_check <- function(in_item, out_item,
   if (write_tree) {
     create_tree(read_in) %>%
       write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE,
-        fileEncoding = "UTF-8")
+        fileEncoding = "UTF-8"
+      )
   }
   transformed_text <- read_in %>%
     transformer(...) %>%
