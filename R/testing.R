@@ -41,16 +41,16 @@ test_collection <- function(test, sub_test = NULL,
 
   out_names <- construct_out(in_names)
 
-  if (getOption("styler.test_dir_unwritable")) {
+  if (getOption("styler.test_dir_writable", TRUE)) {
+    out_items <- file.path(path, out_names)
+    in_items <- file.path(path, in_names)
+    out_trees <- construct_tree(in_items)
+  } else {
     in_items <- file.path(path, in_names)
     out_items <- file.path(tempdir(), out_names)
     ref_items <- file.path(path, out_names)
     file.copy(ref_items, out_items, overwrite = TRUE, copy.mode = FALSE)
     out_trees <- file.path(tempdir(), construct_tree(in_names))
-  } else {
-    out_items <- file.path(path, out_names)
-    in_items <- file.path(path, in_names)
-    out_trees <- construct_tree(in_items)
   }
 
   pwalk(list(in_items, out_items, in_names, out_names, out_trees),

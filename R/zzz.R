@@ -7,7 +7,7 @@
     styler.addins_style_transformer = "styler::tidyverse_style()",
     styler.ignore_start = "# styler: off",
     styler.ignore_stop = "# styler: on",
-    styler.test_dir_unwritable = FALSE
+    styler.test_dir_writable = TRUE
   )
   toset <- !(names(op.styler) %in% names(op))
   if (any(toset)) options(op.styler[toset])
