@@ -7,7 +7,7 @@
 - `style_file()` and friends gain argument `dry` to control if changes should 
   be applied to files or not (#634).
 - added an option for disabling all communication when using the package
-  (styler.quiet) (#640).
+  (`styler.quiet`) (#640).
 
 ## Minor chnages and fixes
 
