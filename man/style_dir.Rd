@@ -68,8 +68,8 @@ styling whether or not it was actually changed (or would be changed when
 \section{Warning}{
 
 This function overwrites files (if styling results in a change of the
-code to be formatted). It is strongly suggested to only style files
-that are under version control or to create a backup copy.
+code to be formatted and \code{dry = "off"}). It is strongly suggested to only
+style files that are under version control or to create a backup copy.
 
 We suggest to first style with \code{scope < "tokens"} and inspect and commit
 changes, because these changes are guaranteed to leave the abstract syntax

@@ -6,6 +6,8 @@
   when there are no comments before or after the blank line (#629, #630, #635).
 - added an option (`styler.test_dir_writeable`) that changes test behavior
   to not directly modify test files in the current directory (#548).
+- `style_file()` and friends gain argument `dry` to control if changes should 
+  be applied to files or not (#634).
 
 ## Minor chnages and fixes
 
