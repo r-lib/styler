@@ -194,6 +194,21 @@ test_that("messages (via cat()) of style_file are correct", {
   }
 })
 
+test_that("Messages can be suppressed", {
+  for (encoding in ls_testable_encodings()) {
+    withr::with_options(
+      list(cli.unicode = encoding == "utf8", styler.quiet = TRUE),
+      {
+        output <- catch_style_file_output(c(
+          "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
+        ), encoding = encoding)
+        print(output)
+        expect_equal(output, character(0))
+      }
+    )
+  }
+})
+
 context("public API - Rmd in style_dir()")
 
 test_that("styler can style R and Rmd files via style_dir()", {
