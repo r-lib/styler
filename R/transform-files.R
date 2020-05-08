@@ -15,7 +15,7 @@ transform_files <- function(files, transformers, include_roxygen_examples, dry) 
   transformer <- make_transformer(transformers, include_roxygen_examples)
   max_char <- min(max(nchar(files), 0), getOption("width"))
   len_files <- length(files)
-  if (len_files > 0L && getOption("styler.communicate", TRUE)) {
+  if (len_files > 0L && !getOption("styler.quiet", FALSE)) {
     cat("Styling ", len_files, " files:\n")
   }
 
@@ -51,7 +51,7 @@ transform_file <- function(path,
   max_char_after_message_path <- nchar(message_before) + max_char_path + 1
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
-  if (getOption("styler.communicate", TRUE)) {
+  if (!getOption("styler.quiet", FALSE)) {
       cat(
         message_before, path,
         rep_char(" ", max(0L, n_spaces_before_message_after)),
@@ -62,7 +62,7 @@ transform_file <- function(path,
 
   bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
 
-  if (getOption("styler.communicate", TRUE)) {
+  if (!getOption("styler.quiet", FALSE)) {
     cli::cat_bullet(bullet = bullet)
   }
   invisible(changed)

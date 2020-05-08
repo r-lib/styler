@@ -9,7 +9,7 @@
 communicate_warning <- function(changed, transformers) {
   if (any(changed, na.rm = TRUE) && 
     !can_verify_roundtrip(transformers) &&
-    getOption("styler.communicate", TRUE)
+    !getOption("styler.quiet", FALSE)
   ) {
     cat("Please review the changes carefully!", fill = TRUE)
   }
@@ -22,7 +22,7 @@ communicate_warning <- function(changed, transformers) {
 #' @param ruler_width Integer used to determine the width of the ruler.
 #' @keywords internal
 communicate_summary <- function(changed, ruler_width) {
-  if (getOption("styler.communicate", TRUE)) {
+  if (!getOption("styler.quiet", FALSE)) {
     cli::cat_rule(width = max(40, ruler_width))
     cat("Status\tCount\tLegend \n")
     cli::cat_bullet("\t", sum(!changed, na.rm = TRUE), "\tFile unchanged.", bullet = "tick")
