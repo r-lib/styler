@@ -4,13 +4,14 @@
 
 - blank lines in function calls and headers are now removed, for the former only 
   when there are no comments before or after the blank line (#629, #630, #635).
+- added an option (`styler.test_dir_writeable`) that changes test behavior
+  to not directly modify test files in the current directory (#548).
 
 ## Minor chnages and fixes
 
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
 - always strip trailing spaces and make cache insensitive to it (#626).
 - typos in documentation (#618, #614).
-
 
 # styler 1.3.2
 
