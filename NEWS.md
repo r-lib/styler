@@ -2,15 +2,18 @@
 
 ## Major changes
 
-- blank lines in function calls and headers are now removed, for the former only 
-  when there are no comments before or after the blank line (#629, #630, #635).
+-   blank lines in function calls and headers are now removed, for the former
+    only when there are no comments before or after the blank line
+    (#629, #630, #635).
+-   added an option for disabling all communication when using the package
+    (styler.quiet) (#640).
 
 ## Minor chnages and fixes
 
-- overhaul pgkdown site: Add search (#623), group function in Reference (#625).
-- always strip trailing spaces and make cache insensitive to it (#626).
-- typos in documentation (#618, #614).
-
+-   overhaul pgkdown site: Add search (#623), group function in Reference
+    (#625).
+-   always strip trailing spaces and make cache insensitive to it (#626).
+-   typos in documentation (#618, #614).
 
 # styler 1.3.2
 
@@ -18,19 +21,19 @@ Release upon request by the CRAN team.
 
 ## Minor changes and fixes
 
-- Add search and reference sections to pkgdown webpage (#623, #625).
-- various fixes to handle special cases for caching and stylerignore and their
-  interaction (#611, #610, #609, #607, #602, #600).
-- also test on macOS (#604).
-- skip timing tests on CRAN as requested by CRAN team because they did not pass 
-  on all machines (#603).
+-   Add search and reference sections to pkgdown webpage (#623, #625).
+-   various fixes to handle special cases for caching and stylerignore and their
+    interaction (#611, #610, #609, #607, #602, #600).
+-   also test on macOS (#604).
+-   skip timing tests on CRAN as requested by CRAN team because they did not
+    pass on all machines (#603).
 
 # styler 1.3.1
 
-Emergency release. In case multiple expressions are on one line and only 
-some of them are cached, styler can remove code. To reach this state, 
-some of the expressions must have been styled previously alone and the cache
-must be active. Example:
+Emergency release. In case multiple expressions are on one line and only some of
+them are cached, styler can remove code. To reach this state, some of the
+expressions must have been styled previously alone and the cache must be active.
+Example:
 
 ```
 library(styler)
@@ -42,126 +45,147 @@ style_text("1 # comment")
 #> # comment
 ```
 
-This is obviously detrimental. We have added additional tests and fixed the 
-problem (#593, #595), but we want repeat the warning from `?style_file` that all 
-style APIs apart from `style_text()` overwrite code and that styler can only 
-check the AST remains valid with `scope < "tokens"`. So use this if you are 
-conservative. Or deactivate the cache with `deactivate_cache()` until it has 
+This is obviously detrimental. We have added additional tests and fixed the
+problem (#593, #595), but we want repeat the warning from `?style_file` that all
+style APIs apart from `style_text()` overwrite code and that styler can only
+check the AST remains valid with `scope < "tokens"`. So use this if you are
+conservative. Or deactivate the cache with `deactivate_cache()` until it has
 fully matured.
 
 We thank the people who have contributed to this release:
 
-[&#x0040;ellessenne](https://github.com/ellessenne) and 
+[&#x0040;ellessenne](https://github.com/ellessenne) and
 [&#x0040;renkun-ken](https://github.com/renkun-ken).
 
 # styler 1.3.0
 
 ## Breaking changes
 
-* `style_pkg()` and `style_dir()` gain a new argument `exclude_dirs` to exclude
-  directories from styling, by default `renv` and `packrat`. Note that the
-  defaults won't change the behavior of `style_pkg()` because it does anyways
-  does not style these directories and they were set for consistency.
+*   `style_pkg()` and `style_dir()` gain a new argument `exclude_dirs` to
+    exclude directories from styling, by default `renv` and `packrat`. Note that
+    the defaults won't change the behavior of `style_pkg()` because it does
+    anyways does not style these directories and they were set for consistency.
 
-* `style_file()` and friends now strip `./` in file paths returned invisibly, 
-  i.e. `./script.R` becomes `script.R` (#568).
+*   `style_file()` and friends now strip `./` in file paths returned invisibly,
+    i.e. `./script.R` becomes `script.R` (#568).
 
 ## New features
 
-* ignore certain lines using `# styler: off` and `#styler: on` or custom
-  markers, see `?stylerignore` (#560).
+*   ignore certain lines using `# styler: off` and `#styler: on` or custom
+    markers, see `?stylerignore` (#560).
 
-* styler caches results of styling, so applying styler to code it has styled
-  before will be instantaneous. This brings large speed boosts in many
-  situations, e.g. when `style_pkg()` is run but only a few files have changed
-  since the last styling or when using the [styler pre-commit
-  hook](https://github.com/lorenzwalthert/precommit). Because styler caches by
-  expression, you will also get speed boosts in large files with many
-  expressions when you only change a few of them. See `?caching` for details
-  (#538, #578).
+*   styler caches results of styling, so applying styler to code it has styled
+    before will be instantaneous. This brings large speed boosts in many
+    situations, e.g. when `style_pkg()` is run but only a few files have changed
+    since the last styling or when using the
+    [styler pre-commit hook](https://github.com/lorenzwalthert/precommit).
+    Because styler caches by expression, you will also get speed boosts in large
+    files with many expressions when you only change a few of them. See
+    `?caching` for details (#538, #578).
 
-* `create_style_guide()` gains two arguments `style_guide_name` and
-  `style_guide_version` that are carried as meta data, in particular to version
-  third-party style guides and ensure the proper functioning of caching. This
-  change is completely invisible to users who don't create and distribute their
-  own style guide like `tidyverse_style()` (#572).
+*   `create_style_guide()` gains two arguments `style_guide_name` and
+    `style_guide_version` that are carried as meta data, in particular to
+    version third-party style guides and ensure the proper functioning of
+    caching. This change is completely invisible to users who don't create and
+    distribute their own style guide like `tidyverse_style()` (#572).
 
 ## Minor changes and fixes
 
-* lines are now broken after `+` in `ggplot2` calls for `strict = TRUE` (#569).
+*   lines are now broken after `+` in `ggplot2` calls for `strict = TRUE`
+    (#569).
 
-* function documentation now contains many more line breaks due to roxygen2 
-  update to version 7.0.1 (#566).
+*   function documentation now contains many more line breaks due to roxygen2
+    update to version 7.0.1 (#566).
 
-* spaces next to the braces in subsetting expressions `[` and `[[` are now
-  removed (#580).
+*   spaces next to the braces in subsetting expressions `[` and `[[` are now
+    removed (#580).
 
-* Adapt to changes in the R parser to make styler pass R CMD check again.
-  (#583).
+*   Adapt to changes in the R parser to make styler pass R CMD check again.
+    (#583).
 
 Thanks to all contributors involved, in particular
-[&#x0040;colearendt](https://github.com/colearendt), 
-[&#x0040;davidski](https://github.com/davidski), 
-[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
-[&#x0040;pat-s](https://github.com/pat-s), and 
+[&#x0040;colearendt](https://github.com/colearendt),
+[&#x0040;davidski](https://github.com/davidski),
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil),
+[&#x0040;pat-s](https://github.com/pat-s), and
 [&#x0040;programming-wizard](https://github.com/programming-wizard).
 
 # styler 1.2.0
 
 ## Breaking changes
 
-* `style_file()` now correctly styles multiple files from different directories.
-  We no longer display the file name of the styled file, but the absolute path.
-  This is also reflected in the invisible return value of the function (#522).
+*   `style_file()` now correctly styles multiple files from different
+    directories. We no longer display the file name of the styled file, but the
+    absolute path. This is also reflected in the invisible return value of the
+    function (#522).
 
-* `style_file()` and friends do not write content back to a file when styling
-  does not cause any changes in the file. This means the modification date of
-  styled files is only changed when the content is changed (#532).
+*   `style_file()` and friends do not write content back to a file when styling
+    does not cause any changes in the file. This means the modification date of
+    styled files is only changed when the content is changed (#532).
 
 ## New features
 
-* Aligned function calls are detected and remain unchanged if they match the
-  styler [definition for aligned function
-  calls](https://styler.r-lib.org/articles/detect-alignment.html) (#537).
+*   Aligned function calls are detected and remain unchanged if they match the
+    styler
+    [definition for aligned function calls](https://styler.r-lib.org/articles/detect-alignment.html)
+    (#537).
 
-* curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
-  explicitly handled, where previously it was just treated as two consecutive
-  curly braces (#528).
+*   curly-curly (`{{`) syntactic sugar introduced with rlang 0.4.0 is now
+    explicitly handled, where previously it was just treated as two consecutive
+    curly braces (#528).
 
-* `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and
-  hidden files are now also styled (#530).
+*   `style_pkg()`, `style_dir()` and the Addins can now style `.Rprofile`, and
+    hidden files are now also styled (#530).
 
 ## Minor improvements and fixes
 
-* Brace expressions in function calls are formatted in a less compact way to
-  improve readability. Typical use case: `tryCatch()` (#543).
+*   Brace expressions in function calls are formatted in a less compact way to
+    improve readability. Typical use case: `tryCatch()` (#543).
 
-* Arguments in function declarations in a context which is indented multiple
-  times should now be correct. This typically affects `R6::R6Class()` (#546).
+*   Arguments in function declarations in a context which is indented multiple
+    times should now be correct. This typically affects `R6::R6Class()` (#546).
 
-* Escape characters in roxygen code examples are now correctly escaped (#512).
+*   Escape characters in roxygen code examples are now correctly escaped (#512).
 
-* Special characters such as `\n` in strings are now preserved in text and not
-  turned into literal values like a line break (#554).
+*   Special characters such as `\n` in strings are now preserved in text and not
+    turned into literal values like a line break (#554).
 
-* Style selection Addin now preserves line break when the last line selected is
-  an entire line (#520).
+*   Style selection Addin now preserves line break when the last line selected
+    is an entire line (#520).
 
-* Style file Addin can now properly handle cancelling (#511).
+*   Style file Addin can now properly handle cancelling (#511).
 
-* The body of a multi-line function declaration is now indented correctly for
-  `strict = FALSE` and also wrapped in curly braces for `strict = TRUE` (#536).
+*   The body of a multi-line function declaration is now indented correctly for
+    `strict = FALSE` and also wrapped in curly braces for `strict = TRUE`
+    (#536).
 
-* Advice for contributors in `CONTRIBUTING.md` was updated (#508).
+*   Advice for contributors in `CONTRIBUTING.md` was updated (#508).
 
 ## Adaption
 
-* styler is now available through the pre-commit hook `style-files` in
-  https://github.com/lorenzwalthert/pre-commit-hooks.
+*   styler is now available through the pre-commit hook `style-files` in
+    https://github.com/lorenzwalthert/pre-commit-hooks.
 
 Thanks to all contributors involved, in particular
 
-[&#x0040;Banana1530](https://github.com/Banana1530), [&#x0040;batpigandme](https://github.com/batpigandme), [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;ellessenne](https://github.com/ellessenne), [&#x0040;Emiller88](https://github.com/Emiller88), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lwjohnst86](https://github.com/lwjohnst86), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;Moohan](https://github.com/Moohan), [&#x0040;nxskok](https://github.com/nxskok), [&#x0040;oliverbeagley](https://github.com/oliverbeagley), [&#x0040;pat-s](https://github.com/pat-s), [&#x0040;reddy-ia](https://github.com/reddy-ia), and [&#x0040;russHyde](https://github.com/russHyde)
+[&#x0040;Banana1530](https://github.com/Banana1530),
+[&#x0040;batpigandme](https://github.com/batpigandme),
+[&#x0040;cpsievert](https://github.com/cpsievert),
+[&#x0040;ellessenne](https://github.com/ellessenne),
+[&#x0040;Emiller88](https://github.com/Emiller88),
+[&#x0040;hadley](https://github.com/hadley),
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil),
+[&#x0040;krlmlr](https://github.com/krlmlr),
+[&#x0040;lorenzwalthert](https://github.com/lorenzwalthert),
+[&#x0040;lwjohnst86](https://github.com/lwjohnst86),
+[&#x0040;michaelquinn32](https://github.com/michaelquinn32),
+[&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel),
+[&#x0040;Moohan](https://github.com/Moohan),
+[&#x0040;nxskok](https://github.com/nxskok),
+[&#x0040;oliverbeagley](https://github.com/oliverbeagley),
+[&#x0040;pat-s](https://github.com/pat-s),
+[&#x0040;reddy-ia](https://github.com/reddy-ia), and
+[&#x0040;russHyde](https://github.com/russHyde)
 
 # styler 1.1.1
 
@@ -170,63 +194,63 @@ This is primarily a maintenance release upon the request of the CRAN team
 
 ## Major changes
 
-- Users can now control style configurations for styler Addins (#463, #500),
-  using the `Set style` Addin. See `?styler::styler_addins` for details.
+-   Users can now control style configurations for styler Addins (#463, #500),
+    using the `Set style` Addin. See `?styler::styler_addins` for details.
 
-- `return()` is now always put in braces and put on a new line when used in a
-  conditional statement (#492).
+-   `return()` is now always put in braces and put on a new line when used in a
+    conditional statement (#492).
 
-- `%>%` almost always causes a line break now for `strict = TRUE` (#503).
+-   `%>%` almost always causes a line break now for `strict = TRUE` (#503).
 
 ## Minor changes
 
-- `style_pkg()` now also styles the "demo" directory by default (#453).
+-   `style_pkg()` now also styles the "demo" directory by default (#453).
 
-- multi-line strings are now styled more consistently (#459).
+-   multi-line strings are now styled more consistently (#459).
 
-- indention in roxygen code example styling (#455) and EOF spacing (#469) was
-  fixed.
+-   indention in roxygen code example styling (#455) and EOF spacing (#469) was
+    fixed.
 
-- indention for for loop edge case (#457) and comments in pipe chain (#482) were
-  fixed.
+-   indention for for loop edge case (#457) and comments in pipe chain (#482)
+    were fixed.
 
-- line-break styling around comma is improved (#479).
+-   line-break styling around comma is improved (#479).
 
-- bug that can cause an error when the variable `text` in any name space before
-  styler on the search path was defined and did not have length 1 is fixed
-  (#484).
+-   bug that can cause an error when the variable `text` in any name space
+    before styler on the search path was defined and did not have length 1 is
+    fixed (#484).
 
-- slightly confusing warning about empty strings caused with roxygen code
-  examples and Rmd was removed.
+-   slightly confusing warning about empty strings caused with roxygen code
+    examples and Rmd was removed.
 
-- right apostrophe to let package pass R CMD Check in strict Latin-1 locale was
-  removed (#490, reason for release).
+-   right apostrophe to let package pass R CMD Check in strict Latin-1 locale
+    was removed (#490, reason for release).
 
 ## Adaption of styler
 
 Since it's never been mentioned in the release notes, we also mention here where
 else you can use styler functionality:
 
-* `usethis::use_tidy_style()` styles your project according to the tidyverse
-  style guide.
+*   `usethis::use_tidy_style()` styles your project according to the tidyverse
+    style guide.
 
-* `reprex::reprex(style = TRUE)` to prettify reprex code before printing. To
-  permanently use `style = TRUE` without specifying it every time, you can add
-  the following line to your `.Rprofile` (via `usethis::edit_r_profile()`):
-  `options(reprex.styler = TRUE)`.
+*   `reprex::reprex(style = TRUE)` to prettify reprex code before printing. To
+    permanently use `style = TRUE` without specifying it every time, you can add
+    the following line to your `.Rprofile` (via `usethis::edit_r_profile()`):
+    `options(reprex.styler = TRUE)`.
 
-* you can pretty-print your R code in RMarkdown reports without having styler
-  modifying the source. This feature is implemented as a code chunk option in
-  knitr. use `tidy = "styler"` in the header of a code chunks (e.g. ` ```{r
-  name-of-the-chunk, tidy = "styler"}`), or `knitr::opts_chunk$set(tidy =
-  "styler")` at the top of your RMarkdown script.
+*   you can pretty-print your R code in RMarkdown reports without having styler
+    modifying the source. This feature is implemented as a code chunk option in
+    knitr. use `tidy = "styler"` in the header of a code chunks (e.g. ` ```{r
+    name-of-the-chunk, tidy = "styler"}`), or `knitr::opts_chunk$set(tidy =
+    "styler")` at the top of your RMarkdown script.
 
-* pretty-printing of [drake](https://github.com/ropensci/drake) workflow data
-  frames with `drake::drake_plan_source()`.
+*   pretty-printing of [drake](https://github.com/ropensci/drake) workflow data
+    frames with `drake::drake_plan_source()`.
 
-* Adding styler as a fixer to the [ale
-  Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966) for
-  VIM.
+*   Adding styler as a fixer to the
+    [ale Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966)
+    for VIM.
 
 Thanks to all contributors involved, in particular
 [&#x0040;ArthurPERE](https://github.com/ArthurPERE),
@@ -261,34 +285,34 @@ adapts to changes in the R parser committed into R devel (#419).
 
 ## Major Changes
 
-* styler can now style roxygen code examples in the source code of package
-  (#332) as well as Rnw files (#431).
+*   styler can now style roxygen code examples in the source code of package
+    (#332) as well as Rnw files (#431).
 
-* the print method for the output of `style_text()` (`print.vertical()`) now
-  returns syntax-highlighted code by default, controllable via the option
-  `styler.colored_print.vertical` (#417).
+*   the print method for the output of `style_text()` (`print.vertical()`) now
+    returns syntax-highlighted code by default, controllable via the option
+    `styler.colored_print.vertical` (#417).
 
-* the README was redesigned (#413).
+*   the README was redesigned (#413).
 
-* semi-colon expression that contained multiple assignments was fixed (#404).
+*   semi-colon expression that contained multiple assignments was fixed (#404).
 
 ## Minor Changes
 
-* cursor position is remembered for styling via Addin (#416).
+*   cursor position is remembered for styling via Addin (#416).
 
-* adapt spacing around tilde for multi-token expressions(#424) and brace edge
-  case (#425).
+*   adapt spacing around tilde for multi-token expressions(#424) and brace edge
+    case (#425).
 
-* only add brackets to piped function call if RHS is a symbol (#422).
+*   only add brackets to piped function call if RHS is a symbol (#422).
 
-* increase coverage again to over 90% (#412).
+*   increase coverage again to over 90% (#412).
 
-* move rule that turns single quotes into double quotes to token modifier in
-  `tidyverse_style_guide() (#406).
+*   move rule that turns single quotes into double quotes to token modifier in
+    `tidyverse_style_guide() (#406).
 
-* remove line-breaks before commas (#405).
+*   remove line-breaks before commas (#405).
 
-* removed package dependency enc in favor of xfun (#442).
+*   removed package dependency enc in favor of xfun (#442).
 
 Thanks to all contributors for patches, issues and the like: @jonmcalder,
 @krlmlr, @IndrajeetPatil, @kalibera, @Hasnep, @kiranmaiganji, @dirkschumacher,
@@ -300,26 +324,26 @@ This is a maintenance release without any breaking API changes.
 
 ## Major Changes
 
-* Fixed indention for named multi-line function calls (#372).
+*   Fixed indention for named multi-line function calls (#372).
 
-* Non-R code chunks in `.Rmd` files are now respected and won't get styled
-  (#386).
+*   Non-R code chunks in `.Rmd` files are now respected and won't get styled
+    (#386).
 
 ## Minor Changes
 
-* Fixing an edge case in which, if very long strings were present in the code,
-  tokens could be replaced with wrong text (#384).
+*   Fixing an edge case in which, if very long strings were present in the code,
+    tokens could be replaced with wrong text (#384).
 
-* Spacing around tilde in formulas depends now on whether there is a LHS in the
-  formula (#379).
+*   Spacing around tilde in formulas depends now on whether there is a LHS in
+    the formula (#379).
 
-* Spaces are now also added around `EQ_SUB` (`=`) (#380).
+*   Spaces are now also added around `EQ_SUB` (`=`) (#380).
 
-* Added `CONTRIBUTING.md` to outline guidelines for contributing to styler.
+*   Added `CONTRIBUTING.md` to outline guidelines for contributing to styler.
 
-* More informative error messages for parsing problems (#401, #400).
+*   More informative error messages for parsing problems (#401, #400).
 
-* Improved documentation (#387).
+*   Improved documentation (#387).
 
 Thanks to all contributors for patches, issues and the like: @katrinleinweber,
 @krlmlr, @dchiu911, @ramnathv, @aedobbyn, @Bio7, @tonytonov, @samhinshaw, @fny,
@@ -331,35 +355,35 @@ This is a maintenance release without any breaking API changes.
 
 ## Major & dependency related changes
 
-* Removed implicit `dplyr` dependency via `purrr:::map_dfr()` (thanks
-  @jimhester, #324).
+*   Removed implicit `dplyr` dependency via `purrr:::map_dfr()` (thanks
+    @jimhester, #324).
 
-* Added required minimal version dependency for purr (`>= 0.2.3`) (#338).
+*   Added required minimal version dependency for purr (`>= 0.2.3`) (#338).
 
-* We rely on the tibble package which was optimized for speed in `v1.4.2` so
-  styler should run ~2x as fast
-  [(#348)](https://github.com/tidyverse/tibble/pull/348). For that reason,
-  styler now depends on `tibble >= 1.4.2`.
+*   We rely on the tibble package which was optimized for speed in `v1.4.2` so
+    styler should run ~2x as fast
+    [(#348)](https://github.com/tidyverse/tibble/pull/348). For that reason,
+    styler now depends on `tibble >= 1.4.2`.
 
-* In the dependency `enc`, a bug was fixed that removed/changed non-ASCII
-  characters. Hence, styler now depends on `enc >= 0.2` (#348).
+*   In the dependency `enc`, a bug was fixed that removed/changed non-ASCII
+    characters. Hence, styler now depends on `enc >= 0.2` (#348).
 
 ## Minor changes
 
-* We're now recognizing and respecting more DSLs used in R comments: rplumber
-  (`#*`, #306), shebang `#/!` (#345), knitr chunk headers for spinning (`#+` /
-  `#-`, #362).
+*   We're now recognizing and respecting more DSLs used in R comments: rplumber
+    (`#*`, #306), shebang `#/!` (#345), knitr chunk headers for spinning (`#+` /
+    `#-`, #362).
 
-* Named arguments can stay on the first line if call is multi-line (#318).
+*   Named arguments can stay on the first line if call is multi-line (#318).
 
-* No space anymore with `tidyverse_style()` after `!!` since with `rlang 0.2`,
-  `!!` now binds tighter (#322), spacing around `~` (#316), no space anymore
-  around `^` (#308).
+*   No space anymore with `tidyverse_style()` after `!!` since with `rlang 0.2`,
+    `!!` now binds tighter (#322), spacing around `~` (#316), no space anymore
+    around `^` (#308).
 
-* Code chunks in Rmd documents that don't use the R engine are no longer
-  formatted (#313).
+*   Code chunks in Rmd documents that don't use the R engine are no longer
+    formatted (#313).
 
-* Various bug fixes and edge case improvements.
+*   Various bug fixes and edge case improvements.
 
 Thanks to all contributors for patches, issues and the like: @devSJR, @klrmlr,
 @yutannihilation, @samhinshaw, @martin-mfg, @jjramsey, @RMHogervorst, @wlandau,
@@ -370,68 +394,47 @@ Thanks to all contributors for patches, issues and the like: @devSJR, @klrmlr,
 Initial release.
 
 ## stylers
+
 These are functions used to style code. They style a directory, a whole package,
-a file or a string.
-```
-style_dir(path = ".", 
-  ..., style = tidyverse_style, transformers = style(...), 
-  filetype = "R", recursive = TRUE, exclude_files = NULL
-)
+a file or a string. ``` style_dir(path = ".", ..., style = tidyverse_style,
+transformers = style(...), filetype = "R", recursive = TRUE, exclude_files =
+NULL )
 
-style_pkg(pkg = ".", 
-  ..., style = tidyverse_style, transformers = style(...), filetype = "R", 
-  exclude_files = "R/RcppExports.R"
-)
+style_pkg(pkg = ".", ..., style = tidyverse_style, transformers = style(...),
+filetype = "R", exclude_files = "R/RcppExports.R" )
 
+style_file(path, ..., style = tidyverse_style, transformers = style(...) )
 
-style_file(path, 
-  ..., style = tidyverse_style, transformers = style(...)
-)
-
-style_text(text, ..., style = tidyverse_style, transformers = style(...))
-```
+style_text(text, ..., style = tidyverse_style, transformers = style(...)) ```
 
 ## style guides
-These functions are the style guides implemented.
-```
-tidyverse_style(
-  scope = "tokens", 
-  strict = TRUE, 
-  indent_by = 2, 
-  start_comments_with_one_space = FALSE, 
-  reindention = tidyverse_reindention(), 
-  math_token_spacing = tidyverse_math_token_spacing()
-)
-tidyverse_reindention()
-tidyverse_math_token_spacing())
-```
+
+These functions are the style guides implemented. `tidyverse_style( scope =
+"tokens", strict = TRUE, indent_by = 2, start_comments_with_one_space = FALSE,
+reindention = tidyverse_reindention(), math_token_spacing =
+tidyverse_math_token_spacing() ) tidyverse_reindention()
+tidyverse_math_token_spacing())`
 
 ## style guide creators
-This function is used to create a style guide.
-```
-create_style_guide(
-  initialize = default_style_guide_attributes, 
-  line_break = NULL, 
-  space = NULL, 
-  token = NULL, 
-  indention = NULL, 
-  use_raw_indention = FALSE, 
-  reindention = tidyverse_reindention()
-)
-```
+
+This function is used to create a style guide. `create_style_guide( initialize =
+default_style_guide_attributes, line_break = NULL, space = NULL, token = NULL,
+indention = NULL, use_raw_indention = FALSE, reindention =
+tidyverse_reindention() )`
 
 ## Helpers
+
 These are helper functions used to specify the style guides in use.
 
 ```
 specify_math_token_spacing(
-  zero = NULL, 
+  zero = NULL,
   one = c("'+'", "'-'", "'*'", "'/'", "'^'")
 )
 
 specify_reindention(
-  regex_pattern = NULL, 
-  indention = 0, 
+  regex_pattern = NULL,
+  indention = 0,
   comments_only = TRUE
 )
 initialize_default_attributes(pd_flat)
