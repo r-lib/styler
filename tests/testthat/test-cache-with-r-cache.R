@@ -64,7 +64,8 @@ capture.output(test_that("cached expressions are displayed propperly", {
   cache_info <- cache_info("testthat", format = "tabular")
   expect_known_value(
     cache_info[, c("n", "size", "last_modified", "activated")],
-    file = test_path("reference-objects/cache-info-1")
+    file = test_path("reference-objects/cache-info-1"),
+    update = getOption("styler.test_dir_writable", TRUE)
   )
 
   activate_testthat_cache()
@@ -73,14 +74,18 @@ capture.output(test_that("cached expressions are displayed propperly", {
   cache_info$size <- round(cache_info$size, -2)
   expect_known_value(
     cache_info[, c("n", "size", "activated")],
-    file = test_path("reference-objects/cache-info-2")
+    file = test_path("reference-objects/cache-info-2"),
+    update = getOption("styler.test_dir_writable", TRUE)
+
   )
   style_text("a <-function() NULL")
   cache_info <- cache_info(format = "tabular")
   cache_info$size <- round(cache_info$size, -2)
   expect_known_value(
     cache_info[, c("n", "size", "activated")],
-    file = test_path("reference-objects/cache-info-3")
+    file = test_path("reference-objects/cache-info-3"),
+    update = getOption("styler.test_dir_writable", TRUE)
+
   )
 }))
 

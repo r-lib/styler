@@ -163,7 +163,8 @@ test_that("messages (via cat()) of style_file are correct", {
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
             encoding
-          ))
+          )),
+          update = getOption("styler.test_dir_writable", TRUE)
         )
 
         # No message if scope > line_breaks and code does not change
@@ -175,7 +176,8 @@ test_that("messages (via cat()) of style_file are correct", {
           testthat_file(paste0(
             "public-api/xyzdir-dirty/clean-reference-with-scope-tokens-",
             encoding
-          ))
+          )),
+          update = getOption("styler.test_dir_writable", TRUE)
         )
 
         # No message if scope <= line_breaks even if code is changed.
@@ -187,7 +189,8 @@ test_that("messages (via cat()) of style_file are correct", {
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-spaces-",
             encoding
-          ))
+          )),
+          update = getOption("styler.test_dir_writable", TRUE)
         )
       }
     )
