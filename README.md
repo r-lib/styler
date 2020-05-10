@@ -32,10 +32,10 @@ The goal of this package is to twofold:
 
 ## Installation
 
-You can install the package from GitHub:
+You can install the package from CRAN:
 
 ``` r
-remotes::install_github("lorenzwalthert/precommit")
+install.packages("precommit")
 ```
 
 To access pre-commit functionality from R, you also need to install the
@@ -81,11 +81,13 @@ helper function `precommit::open_config()` let’s you open and edit the
 `.pre-commit-config.yaml` conveniently from the RStudio console. When
 any file is changed due to running a hook or the hook script errors, the
 commit will fail. You can inspect the changes introduced by the hook and
-if satisfied, you can attempt to commit again. Note that while some
-hooks change files (like the styler hook) so that they won’t fail when
-you attempt to commit again, some (like the lintr hook) will need your
-action before they pass at the next attempt. If all hooks pass, the
-commit is made. You can also [temporarily disable
+if satisfied, you can add the changes made by the hook to the index with
+`git add path/to/file` and attempt to commit again. Some hooks change
+files, like the styler hook, so all you need to do to make the hook pass
+is `git add` the changes introduced by the hook. Other hooks, like the
+parsable-R hook, will need your action, e.g. add a missing closing brace
+to a call like `library(styler`, before they pass at the next attempt.
+If all hooks pass, the commit is made. You can also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you
 succeed, it should look like this:
 
@@ -115,9 +117,8 @@ To update the hook revisions, run `precommit::autoupdate()`.
     RStudio. Stashes are restored when you abort a `git commit` with
     `INT` (e.g. Ctrl+C) on the command line. To restore stashes,
     manually after hitting *abort* in the RStudio git tab, you can `git
-    stash apply /path/to/patch_with_id` whereas you find the patch under
-    your pre-commit cache, which is usually under
-    `$HOME/.cache/pre-commit/`.
+    apply /path/to/patch_with_id` whereas you find the patch under your
+    pre-commit cache, which is usually under `$HOME/.cache/pre-commit/`.
 
   - Because R is not officially supported as a language in the
     pre-commit framework (yet), there is no R package dependency
@@ -134,9 +135,8 @@ To update the hook revisions, run `precommit::autoupdate()`.
 In that case, just install the package with `install.packages()` once
 and try to commit again. All R dependencies of the pre-commit hooks
 provided in this repo are suggested dependencies of this R package, so
-if you want to install them all, just
-`remotes::install_github("lorenzwalthert/precommit", dependencies =
-c("Imports", "Suggests"))`.
+if you want to install them all, just `install.packages("precommit",
+dependencies = c("Imports", "Suggests"))`.
 
 ## Documentation
 
