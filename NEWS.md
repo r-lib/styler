@@ -1,3 +1,9 @@
+# precommit v0.1.0.90001
+
+- Roxygen hook cache only includes files that are part of the index and 
+  will hence be able to use the cache in cases it was previously invalidated 
+  without need (#171).
+
 # precommit v0.1.0
 
 Initial CRAN release. See https://lorenzwalthert.github.io/precommit/.

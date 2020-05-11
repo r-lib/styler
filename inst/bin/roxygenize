@@ -38,7 +38,10 @@ wd <- list(getwd())
 cache <- loadCache(key = wd, dirs = path_relative_cache)
 
 if (!is.null(cache)) {
-  candidates <- list.files(c("R", "man"), full.names = TRUE)
+  candidates <- intersect(
+    list.files(c("R", "man"), full.names = TRUE),
+    arguments$files
+  )
   all_files <- file.info(candidates)
   last_modified <- max(all_files$mtime)
   if (last_modified > cache[[1]]) {
