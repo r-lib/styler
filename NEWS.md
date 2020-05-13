@@ -8,6 +8,8 @@
   to not directly modify test files in the current directory (#548).
 - `style_file()` and friends gain argument `dry` to control if changes should 
   be applied to files or not (#634).
+- added an option for disabling all communication when using the package
+  (`styler.quiet`) (#640).
 
 ## Minor chnages and fixes
 
@@ -439,3 +441,4 @@ specify_reindention(
 )
 initialize_default_attributes(pd_flat)
 ```
+
