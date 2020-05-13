@@ -130,21 +130,18 @@ test_that("styler can style Rmd file", {
   }))
 
   capture_output(expect_warning(
-    styled <- style_file(testthat_file("public-api", "xyzfile_rmd",
-        "random2.Rmd"), strict = FALSE)
+    styled <- style_file(testthat_file("public-api", "xyzfile_rmd", "random2.Rmd"), strict = FALSE)
   ))
   expect_false(styled$changed)
 })
 
 test_that("styler handles malformed Rmd file and invalid R code in chunk", {
   capture_output(expect_warning(
-    style_file(testthat_file("public-api", "xyzfile_rmd", "random3.Rmd"), strict
-      = FALSE)
+    style_file(testthat_file("public-api", "xyzfile_rmd", "random3.Rmd"), strict = FALSE)
   ))
 
   capture_output(expect_warning(
-    style_file(testthat_file("public-api", "xyzfile_rmd", "random4.Rmd"), strict
-      = FALSE)
+    style_file(testthat_file("public-api", "xyzfile_rmd", "random4.Rmd"), strict = FALSE)
   ))
 })
 
@@ -290,21 +287,18 @@ test_that("styler can style Rnw file", {
   }))
 
   capture_output(expect_warning(
-    styled <- style_file(testthat_file("public-api", "xyzfile-rnw",
-        "random2.Rnw"), strict = FALSE)
+    styled <- style_file(testthat_file("public-api", "xyzfile-rnw", "random2.Rnw"), strict = FALSE)
   ))
   expect_false(styled$changed)
 })
 
 test_that("styler handles malformed Rnw file and invalid R code in chunk", {
   capture_output(expect_warning(
-    style_file(testthat_file("public-api", "xyzfile-rnw", "random3.Rnw"), strict
-      = FALSE)
+    style_file(testthat_file("public-api", "xyzfile-rnw", "random3.Rnw"), strict = FALSE)
   ))
 
   capture_output(expect_warning(
-    style_file(testthat_file("public-api", "xyzfile-rnw", "random4.Rnw"), strict
-      = FALSE)
+    style_file(testthat_file("public-api", "xyzfile-rnw", "random4.Rnw"), strict = FALSE)
   ))
 })
 
