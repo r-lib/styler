@@ -17,7 +17,6 @@
 - always strip trailing spaces and make cache insensitive to it (#626).
 - typos in documentation (#618, #614).
 
-
 # styler 1.3.2
 
 Release upon request by the CRAN team.
