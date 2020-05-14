@@ -5,7 +5,7 @@
 #'
 #' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
-#'  @return
+#' @return
 #'  A character vector of length one with the path to the pre-commit executable.
 #' @export
 path_precommit_exec <- function(check_if_exists = TRUE) {

@@ -11,9 +11,10 @@ path_pre_commit_exec(check_if_exists = TRUE)
 }
 \arguments{
 \item{check_if_exists}{Whether or not to make sure the returned path also
-exists.
-@return
-A character vector of length one with the path to the pre-commit executable.}
+exists.}
+}
+\value{
+A character vector of length one with the path to the pre-commit executable.
 }
 \description{
 \code{\link[=path_precommit_exec]{path_precommit_exec()}} simply reads the R option \code{precommit.executable}, ]
