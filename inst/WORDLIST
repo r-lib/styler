@@ -29,6 +29,7 @@ EOF
 exlucded
 fs
 getOption
+getwd
 gh
 github
 gitignore
@@ -46,6 +47,7 @@ knitr
 lang
 Lifecycle
 lintr
+loadCache
 lorenz
 lorenzwalthert
 macOS
@@ -53,12 +55,14 @@ magrittr
 maxkb
 md
 miniconda
+mtime
 navbar
 netlify
 nrow
 oneliner
 os
 overscope
+packageVersion
 params
 parsable
 pkgapi
@@ -89,6 +93,7 @@ roclet
 roclets
 ropenscilabs
 roxygen
+roxygenise
 roxygenize
 RoxygenNote
 Rprofile
@@ -99,11 +104,13 @@ Rr
 Rscript
 RStudio
 rstudioapi
+saveCache
 seealso
 stderr
 stdout
 stopifnot
 styler
+Sys
 testthat
 tidyverse
 travis
@@ -115,6 +122,7 @@ usr
 VignetteBuilder
 walthert
 Walthert
+wd
 withr
 wordlist
 writeLines
