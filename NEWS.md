@@ -7,6 +7,7 @@ Initial CRAN release. See https://lorenzwalthert.github.io/precommit/.
 - Roxygen hook cache only includes files that are part of the index and 
   will hence be able to use the cache in cases it was previously invalidated 
   without need (#171).
+- styler hook should fail if styling any file fails (#174).
 
 
 # precommit v0.0.0.9048
