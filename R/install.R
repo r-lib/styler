@@ -35,6 +35,10 @@ install_system <- function(force) {
 #' @param force Whether or not to force a re-installation.
 #' @return
 #' The path to the pre-commit executable (invisibly).
+#' @examples
+#' \dontrun{
+#' install_precommit()
+#' }
 #' @export
 install_precommit <- function(force = FALSE) {
   install_system(force = force)
@@ -50,22 +54,21 @@ install_impl <- function() {
 }
 
 install_repo <- function(root, install_hooks, legacy_hooks) {
-  
   withr::with_dir(root, {
     remove_usethis_readme_hook()
     out <- call_precommit(
-      "install", 
-      if (install_hooks) "--install-hooks", 
-      if (legacy_hooks == 'remove') "--overwrite"
+      "install",
+      if (install_hooks) "--install-hooks",
+      if (legacy_hooks == "remove") "--overwrite"
     )
     if (out$exit_status == 0) {
       if (any(grepl("Use -f to use only pre-commit.", out$stdout, fixed = TRUE))) {
-        if (legacy_hooks == 'forbid') {
+        if (legacy_hooks == "forbid") {
           rlang::abort(paste(
             "There are existing hooks installed for this repo and the argument",
-            "`legacy_hooks` is set to `'forbid'`. We recommend inspecting these" , 
+            "`legacy_hooks` is set to `'forbid'`. We recommend inspecting these",
             "and removing them manually or - if you are sure you don't need",
-            "them anymore - call this function again with", 
+            "them anymore - call this function again with",
             "`legacy_hooks = 'remove'` to remove them for you.",
             "If you want to continue to use these hooks, set",
             "`legacy_hooks` to `'allow'`, which means pre-commit will run in ",
@@ -91,7 +94,7 @@ install_repo <- function(root, install_hooks, legacy_hooks) {
 
 remove_usethis_readme_hook <- function() {
   legacy <- readLines(
-    system.file("usethis-legacy-hook", package = 'precommit'), 
+    system.file("usethis-legacy-hook", package = "precommit"),
     encoding = "UTF-8"
   )
   candidate <- ".git/hooks/pre-commit"
@@ -99,10 +102,10 @@ remove_usethis_readme_hook <- function() {
     if (identical(readLines(candidate, encoding = "UTF-8"), legacy)) {
       fs::file_delete(candidate)
       usethis::ui_info(paste(
-        "Removed the render-README hook, which was added with", 
+        "Removed the render-README hook, which was added with",
         "`usethis::use_readme_rmd()` to this repo at some point in the past.",
-        "{{precommit}}'s equivalent is the hook with the id 'readme-rmd-rendered'.", 
-        "Add the hook to your .pre-commit-config.yaml as described here:", 
+        "{{precommit}}'s equivalent is the hook with the id 'readme-rmd-rendered'.",
+        "Add the hook to your .pre-commit-config.yaml as described here:",
         "https://lorenzwalthert.github.io/precommit/#usage."
       ))
     }
@@ -123,6 +126,10 @@ remove_usethis_readme_hook <- function() {
 #' @inheritParams fallback_doc
 #' @return
 #' `NULL` (invisibly). The function is called for its side effects.
+#' @examples
+#' \dontrun{
+#' uninstall_precommit()
+#' }
 #' @export
 uninstall_precommit <- function(scope = "repo",
                                 ask = "user",

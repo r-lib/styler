@@ -50,6 +50,10 @@ extract_diff_root <- function(root = here::here()) {
 #' @return
 #' A logical vector of length 1.
 #' @inheritParams extract_diff_root
+#' @examples
+#' \dontrun{
+#' diff_requires_run_roxygenize()
+#' }
 #' @export
 diff_requires_run_roxygenize <- function(root = here::here()) {
   if (!rlang::is_installed("git2r")) {

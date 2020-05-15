@@ -24,6 +24,7 @@ dirname
 docopt
 docsearch
 docType
+dontrun
 emph
 env
 EOF
@@ -84,6 +85,7 @@ readme
 Renviron
 repo
 repos
+Resubmission
 reticulate
 Rhistory
 rlang

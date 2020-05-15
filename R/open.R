@@ -8,6 +8,10 @@
 #' @return
 #' `NULL` (invisibly). The function is called for its side effects.
 #' @family helpers
+#' @examples
+#' \dontrun{
+#' open_config()
+#' }
 #' @export
 open_config <- function(root = here::here()) {
   if (rstudioapi::isAvailable()) {
@@ -18,8 +22,12 @@ open_config <- function(root = here::here()) {
   invisible(NULL)
 }
 
-#' @export
 #' @rdname open_config
+#' @examples
+#' \dontrun{
+#' open_wordlist()
+#' }
+#' @export
 open_wordlist <- function(root = here::here()) {
   rstudioapi::navigateToFile(fs::path(root, "inst", "WORDLIST"))
   invisible(NULL)

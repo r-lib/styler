@@ -24,3 +24,8 @@ a prompt should show up to let the user confirm his action.}
 \description{
 Remove pre-commit from a repo or from your system.
 }
+\examples{
+\dontrun{
+uninstall_precommit()
+}
+}

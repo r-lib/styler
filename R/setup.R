@@ -3,9 +3,9 @@
 #' Get started.
 #' @param install_hooks Whether to install environments for all available hooks.
 #'   If `FALSE`, environments are installed with first commit.
-#' @param legacy_hooks How to treat hooks already in the repo which are not 
+#' @param legacy_hooks How to treat hooks already in the repo which are not
 #'   managed by pre-commit. "forbid", the default, will cause  `use_precommit()`
-#'   to fail if there are such hooks. "allow" will run these along with 
+#'   to fail if there are such hooks. "allow" will run these along with
 #'   pre-commit. "remove" will delete them.
 #' @inheritParams fallback_doc
 #' @inheritParams use_precommit_config
@@ -29,10 +29,14 @@
 #' @family helpers
 #' @return
 #' `NULL` (invisibly). The function is called for its side effects.
+#' @examples
+#' \dontrun{
+#' use_precommit()
+#' }
 #' @export
 use_precommit <- function(config_source = getOption("precommit.config_source"),
                           force = FALSE,
-                          legacy_hooks = 'forbid',
+                          legacy_hooks = "forbid",
                           open = rstudioapi::isAvailable(),
                           install_hooks = TRUE,
                           root = here::here()) {
@@ -58,6 +62,10 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 #' @return
 #' The exit status from `pre-commit autoupdate` (invisibly).
 #' @inheritParams fallback_doc
+#' @examples
+#' \dontrun{
+#' autoupdate()
+#' }
 #' @export
 autoupdate <- function(root = here::here()) {
   withr::with_dir(root, {

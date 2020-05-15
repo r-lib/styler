@@ -20,3 +20,11 @@ A character vector of length one with the path to the pre-commit executable.
 \code{\link[=path_precommit_exec]{path_precommit_exec()}} simply reads the R option \code{precommit.executable}, ]
 \code{\link[=path_derive_precommit_exec]{path_derive_precommit_exec()}} uses a heuristic to derive it from scratch.
 }
+\examples{
+\dontrun{
+path_precommit_exec()
+}
+\dontrun{
+path_pre_commit_exec()
+}
+}

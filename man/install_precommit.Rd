@@ -16,3 +16,8 @@ The path to the pre-commit executable (invisibly).
 This installs pre-commit in the conda environment r-precommit. It
 will be available to use across different git repositories.
 }
+\examples{
+\dontrun{
+install_precommit()
+}
+}
