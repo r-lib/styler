@@ -4,7 +4,9 @@
 # success
 run_test("style-files", suffix = "-success.R")
 # fail
-run_test("style-files", suffix = "-fail.R", error_msg = NA)
+run_test("style-files", suffix = "-fail-changed.R", error_msg = NA)
+
+run_test("style-files", suffix = "-fail-parse.R", error_msg = "unexpected")
 
 # success with cmd args
 run_test("style-files",

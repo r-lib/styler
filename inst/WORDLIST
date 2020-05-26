@@ -11,6 +11,7 @@ cmd
 CMD
 codemeta
 conda
+conditionMessage
 config
 cp
 cran
@@ -26,6 +27,7 @@ docType
 emph
 env
 EOF
+eval
 exlucded
 fs
 getOption
@@ -114,6 +116,7 @@ Sys
 testthat
 tidyverse
 travis
+tryCatch
 ubuntu
 Uninstallation
 Upvote

@@ -34,7 +34,6 @@ repos:
           .*\.sh|
           .*\.RData
           )$
-    -   id: lintr
     -   id: readme-rmd-rendered
     -   id: parsable-R
     -   id: no-browser-statement
