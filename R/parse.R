@@ -129,7 +129,7 @@ add_id_and_short <- function(pd) {
 #' @keywords internal
 ensure_correct_str_txt <- function(pd, text) {
   ensure_valid_pd(pd)
-  is_problematic_string <- identify_insufficiently_parsed_stings(pd, text)
+  is_problematic_string <- identify_insufficiently_parsed_strings(pd, text)
   problematic_strings <- pd[is_problematic_string, ]
   is_parent_of_problematic_string <-
     pd$id %in% problematic_strings$parent
@@ -205,7 +205,7 @@ ensure_valid_pd <- function(pd) {
 #' @param pd A parse table.
 #' @param text The initial code to style.
 #' @keywords internal
-identify_insufficiently_parsed_stings <- function(pd, text) {
+identify_insufficiently_parsed_strings <- function(pd, text) {
   is_problematic_string <- pd$token == "STR_CONST"
   candidate_substring <- substr(
     pd$text[is_problematic_string], 1, 1
