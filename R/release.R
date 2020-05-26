@@ -23,13 +23,13 @@
 #'   on CRAN.
 #' @keywords internal
 release_gh <- function(bump = "dev", is_cran = bump != "dev") {
+  new_dsc <- release_prechecks(bump, is_cran)
+  new_dsc$write()
+  git_branch_set(is_cran)
   on.exit(sys_call("git", c("checkout", "-")), add = TRUE)
   # if we fail, must reset version, if we succeed, it's not stage
   # on.exit(sys_call("git", c("reset", "HEAD", '--hard')), add = TRUE)
 
-  new_dsc <- release_prechecks(bump, is_cran)
-  new_dsc$write()
-  git_branch_set(is_cran)
   new_version <- paste0("v", as.character(new_dsc$get_version()))
   usethis::ui_done("Bumped version.")
   path_template_config <- c(
