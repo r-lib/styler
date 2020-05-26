@@ -50,7 +50,7 @@ jobs:
     env: 
       - EXTERNAL_INSTALLATION="TRUE"
     before_script:
-      - pip install pre-commit --user
+      - pip install pre-commit==v1.21.0 --user 
       - R -q -e 'tic::before_script()'
       - R -q -e 'remove.packages("reticulate")' # only used for installation and uninstallation.
   - name: macOS_brew # install pre-commit outside
@@ -67,7 +67,7 @@ jobs:
     env: 
       - EXTERNAL_INSTALLATION="TRUE"
     before_script:
-      - pip install pre-commit --user
+      - pip install pre-commit==v1.21.0 --user 
       - R -q -e 'tic::before_script()'
       - R -q -e 'remove.packages("reticulate")' # only used for installation and uninstallation.
 
