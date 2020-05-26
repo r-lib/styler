@@ -49,28 +49,32 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
   sys_call("git", glue::glue('tag -a {new_version} -m "{msg}"'))
   sys_call("./inst/consistent-release-tag", "--release-mode")
   usethis::ui_done("Tagged last commit with release version.")
-  sys_call("git", glue::glue("push --tags"),
-    env = "SKIP=consistent-release-tag"
-  )
+  if (!is_cran) {
+    sys_call("git", glue::glue("push origin {new_version}"),
+      env = "SKIP=consistent-release-tag"
+    )
+  }
+
   sys_call("git", glue::glue("push"),
     env = "SKIP=consistent-release-tag"
   )
   usethis::ui_done("Pushed commits and tags.")
   if (is_cran) {
     usethis::ui_info(paste(
-      "Once on CRAN, call `precommit::release_complete()` to bump to the devel",
+      "Once on CRAN, call `precommit::release_complete(is_cran = TRUE)` to bump to the devel",
       "version."
     ))
   } else {
-    release_complete(ask = FALSE)
+    release_complete(ask = FALSE, tag = new_version, is_cran = FALSE)
   }
 }
 
 #' Complete the release
 #'
 #' Bumps the version to devel.
+#' @param tag The tag to push. `NULL` will derive the tag from `DESCRIPTION`.
 #' @keywords internal
-release_complete <- function(ask = TRUE) {
+release_complete <- function(ask = TRUE, is_cran = ask, tag = NULL) {
   if (git_branch_get() != "master") {
     rlang::abort("Must be on master to complete the release.")
   }
@@ -78,6 +82,16 @@ release_complete <- function(ask = TRUE) {
     abort_if_not_yes("Did you merge the release branch into master?")
     abort_if_not_yes("Did you pull the latest master from origin?")
   }
+  if (is_cran) {
+    if (is.null(tag)) {
+      tag <- paste0("v", desc::desc_get_version())
+    }
+    if (substr(tag, 1, 1) == "v") {
+      rlang::abort("tag must start with v.")
+    }
+    sys_call("git", glue::glue("push {tag}"))
+  }
+
   precommit::autoupdate() # only updates if tag is on the master branch
   desc::desc_bump_version("dev")
   usethis::ui_done("Bumped version to dev")

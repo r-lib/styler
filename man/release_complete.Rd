@@ -4,7 +4,10 @@
 \alias{release_complete}
 \title{Complete the release}
 \usage{
-release_complete(ask = TRUE)
+release_complete(ask = TRUE, is_cran = ask, tag = NULL)
+}
+\arguments{
+\item{tag}{The tag to push. \code{NULL} will derive the tag from \code{DESCRIPTION}.}
 }
 \description{
 Bumps the version to devel.
