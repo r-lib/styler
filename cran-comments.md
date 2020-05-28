@@ -19,8 +19,8 @@ None.
 This is the first re-submission. I have: 
 
 - removed the redundant 'for R' from the `Title:` in DESCRIPTION.
-- extended `Description:` to be a longer description of what the package does in 
-  `DESCRIPTION`.
+- extended the `Description:` field in `DESCRIPTION` to be a longer description 
+  of what the package does.
 - added return value documentation for exported function in the case there was 
   none before.
 - added examples to the exported functions.
