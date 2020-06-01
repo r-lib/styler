@@ -174,3 +174,15 @@ styler functionality is made available through other tools, most notably
   or the [pkgdown](https://r-lib.github.io/styler/) page contain information
   related to the initial development phase during Google Summer of Code 2017.
 
+## Contributing
+
+Please have a look at `CONTRIBUTING.md`, in particular, make sure to use the 
+pre-commit hooks and if you skip a hook, describe why in the PR. 
+See the `{precommit}` [README.md](https://github.com/lorenzwalthert/precommit) 
+on how to install the pre-commit framework and the R package on your system and 
+then run
+```{r, eval = FALSE}
+precommit::use_precommit()
+```
+
+to make sure the hooks are activated in your local styler clone.

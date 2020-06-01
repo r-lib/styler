@@ -2,16 +2,39 @@
 # R specific hooks: https://github.com/lorenzwalthert/precommit
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.0.0.9040
+    rev: v0.1.0
     hooks:
-    -   id: parsable-R
-    -   id: no-browser-statement
-    # -   id: lintr
-    -   id: readme-rmd-rendered
-    -   id: spell-check
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
         exclude: 'tests/testthat/.*/*\.R'
+    -   id: roxygenize
+    -   id: use-tidy-description
+    -   id: spell-check
+        exclude: >
+          (?x)^(
+          data/.*|
+          (.*/|)\.Rprofile|
+          (.*/|)\.Renviron|
+          (.*/|)\.gitignore|
+          (.*/|)NAMESPACE|
+          (.*/|)WORDLIST|
+          (.*/|)\.travis.yml|
+          (.*/|)appveyor.yml|
+          (.*/|)\.Rbuildignore|
+          (.*/|)\.pre-commit-.*|
+          .*\.[rR]|
+          .*\.Rproj|
+          .*\.py|
+          .*\.feather|
+          .*\.rds|
+          .*\.Rds|
+          .*\.sh|
+          .*\.RData
+          )$
+    -   id: readme-rmd-rendered
+    -   id: parsable-R
+    -   id: no-browser-statement
+    -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.5.0
     hooks:
@@ -19,3 +42,11 @@ repos:
         args: ['--maxkb=200']
     -   id: end-of-file-fixer
         exclude: '\.Rd'
+-   repo: local
+    hooks:
+    -   id: forbid-to-commit
+        name: Don't commit common R artifacts
+        entry: Cannot commit .Rhistory, .RData, .Rds or .rds.
+        language: fail
+        files: '\.Rhistory|\.RData|\.Rds|\.rds$'
+        # `exclude: <regex>` to allow committing specific files.
