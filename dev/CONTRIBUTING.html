@@ -181,6 +181,15 @@
 <a href="#intro" class="anchor"></a>Intro</h2>
 <p>This project follows the contributing recommendations outlined by <a href="https://lorenzwalthert.github.io/saamwerk/">saamwerk</a>. In particular, issues labelled with <code>Status: Postponed</code> are closed even if they are not resolved.</p>
 </div>
+<div id="contributing-code" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributing-code" class="anchor"></a>Contributing code</h2>
+<ul>
+<li>Only open a PR when your idea was approved of by a contributor in an issue.</li>
+<li>Add a bullet to NEWS.md referencing the PR, also following the guide lines in <a href="http://style.tidyverse.org">tidyverse style guide</a>, as for your code contributions.</li>
+<li>Make sure your commit pass the pre-commit hooks in this repo. See the <code>{precommit}</code> <a href="https://github.com/lorenzwalthert/precommit">README.md</a> on how to install the pre-commit framework and the R package on your system and then run <code>precommit::use_precommit()</code> to make sure the hooks are activated in your local styler clone. If you skip a hook, describe why in the PR.</li>
+</ul>
+</div>
 <div id="how-to-dive-in-and-understanding-the-source-code" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-to-dive-in-and-understanding-the-source-code" class="anchor"></a>How to dive in and understanding the source code</h2>
@@ -407,14 +416,6 @@
 <h2 class="hasAnchor">
 <a href="#testing" class="anchor"></a>Testing</h2>
 <p>We have a testing framework powered by <code><a href="reference/test_collection.html">test_collection()</a></code>. Essentially, there is an *-in.R file and a *-out.R file. The *-in.R file is the input that is transformed and - if it matches the *-out.R file, the test has passed. You can create an *-in.R file, run <code>devtools::test(f = "[your file]")</code> and an *-out.R file is generated. If the file matches your expectation, you can commit it. Note that files are overwritten and version control should be used to track failed tests. The files are placed in <code>tests/testthat</code> under the category they fit. Please have a look at the documentation for <code><a href="reference/test_collection.html">test_collection()</a></code> and see other unit tests. Let me know if there is anything unclear about this.</p>
-</div>
-<div id="contributing-code" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributing-code" class="anchor"></a>Contributing code</h2>
-<ul>
-<li>Only open a PR when your idea was approved of by a contributor in an issue.</li>
-<li>Add a bullet to NEWS.md referencing the PR, also following the guide lines in <a href="http://style.tidyverse.org">tidyverse style guide</a>, as for your code contributions.</li>
-</ul>
 </div>
 
 
