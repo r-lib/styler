@@ -4,6 +4,19 @@ This project follows the contributing recommendations outlined by [saamwerk](htt
 In particular, issues labelled with `Status: Postponed` are closed even if they
 are not resolved.
 
+## Contributing code
+
+* Only open a PR when your idea was approved of by a contributor in an issue.
+* Add a bullet to NEWS.md referencing the PR, also following the guide lines in 
+  [tidyverse style guide](http://style.tidyverse.org), as for your code 
+  contributions.
+* Make sure your commit pass the pre-commit hooks in this repo. See the 
+  `{precommit}` [README.md](https://github.com/lorenzwalthert/precommit) 
+  on how to install the pre-commit framework and the R package on your system and 
+  then run `precommit::use_precommit()` to make sure the hooks are activated 
+  in your local styler clone. If you skip a hook, describe why in the PR. 
+
+
 ## How to dive in and understanding the source code
 
 Read the vignettes. If you are done, come back here.
@@ -191,10 +204,3 @@ used to track failed tests.
 The files are placed in `tests/testthat` under the category they fit. 
 Please have a look at the documentation for `test_collection()` and see other 
 unit tests. Let me know if there is anything unclear about this.
-
-## Contributing code
-
-* Only open a PR when your idea was approved of by a contributor in an issue.
-* Add a bullet to NEWS.md referencing the PR, also following the guide lines in 
-  [tidyverse style guide](http://style.tidyverse.org), as for your code 
-  contributions.
