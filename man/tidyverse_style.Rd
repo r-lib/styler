@@ -15,7 +15,7 @@ tidyverse_style(
 }
 \arguments{
 \item{scope}{The extent of manipulation. Can range from "none" (least
-invasive) to "token" (most invasive). See 'Details'. This argument is a
+invasive) to "tokens" (most invasive). See 'Details'. This argument is a
 vector of length one.}
 
 \item{strict}{A logical value indicating whether a set of strict
