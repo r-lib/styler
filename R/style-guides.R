@@ -13,7 +13,7 @@ NULL
 #'
 #' Style code according to the tidyverse style guide.
 #' @param scope The extent of manipulation. Can range from "none" (least
-#'   invasive) to "token" (most invasive). See 'Details'. This argument is a
+#'   invasive) to "tokens" (most invasive). See 'Details'. This argument is a
 #'   vector of length one.
 #' @param indent_by How many spaces of indention should be inserted after
 #'   operators such as '('.
