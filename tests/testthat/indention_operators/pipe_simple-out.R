@@ -5,11 +5,3 @@ a %>%
   g_out()
 
 a <- function(jon_the_pipe) {}
-
-x %>%
-  # break
-  call()
-
-
-y %>%
-  call() # mor
