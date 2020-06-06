@@ -16,6 +16,18 @@ None.
 
 ## Resubmission 
 
+This is the second re-submission. I changed the following.
+
+- put the word 'styler' in the Description field in DESCRIPTION in quotes since
+  it's a package name to fix *Possibly mis-spelled words in DESCRIPTION*.
+
+Some help files have examples which are wrapped into \dontrun and I was asked to
+unwrap them if they are executable. They are not because they depend on the 
+pre-commit executable which is not available on the CRAN machines.
+
+***
+
+
 This is the first re-submission. I have: 
 
 - removed the redundant 'for R' from the `Title:` in DESCRIPTION.
