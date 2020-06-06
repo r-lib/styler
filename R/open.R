@@ -9,7 +9,7 @@
 #' `NULL` (invisibly). The function is called for its side effects.
 #' @family helpers
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' open_config()
 #' }
 #' @export
@@ -24,7 +24,7 @@ open_config <- function(root = here::here()) {
 
 #' @rdname open_config
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' open_wordlist()
 #' }
 #' @export

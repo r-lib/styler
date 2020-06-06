@@ -30,7 +30,7 @@
 #' @return
 #' `NULL` (invisibly). The function is called for its side effects.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' use_precommit()
 #' }
 #' @export
@@ -63,7 +63,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 #' The exit status from `pre-commit autoupdate` (invisibly).
 #' @inheritParams fallback_doc
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' autoupdate()
 #' }
 #' @export

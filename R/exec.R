@@ -8,7 +8,7 @@
 #' @return
 #'  A character vector of length one with the path to the pre-commit executable.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' path_precommit_exec()
 #' }
 #' @export
@@ -32,7 +32,7 @@ path_precommit_exec <- function(check_if_exists = TRUE) {
 
 #' @rdname path_precommit_exec
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' path_pre_commit_exec()
 #' }
 #' @export

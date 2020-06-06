@@ -51,7 +51,7 @@ extract_diff_root <- function(root = here::here()) {
 #' A logical vector of length 1.
 #' @inheritParams extract_diff_root
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' diff_requires_run_roxygenize()
 #' }
 #' @export

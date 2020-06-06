@@ -36,7 +36,7 @@ install_system <- function(force) {
 #' @return
 #' The path to the pre-commit executable (invisibly).
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' install_precommit()
 #' }
 #' @export
@@ -127,7 +127,7 @@ remove_usethis_readme_hook <- function() {
 #' @return
 #' `NULL` (invisibly). The function is called for its side effects.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' uninstall_precommit()
 #' }
 #' @export

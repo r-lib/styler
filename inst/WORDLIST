@@ -25,6 +25,7 @@ docopt
 docsearch
 docType
 dontrun
+donttest
 emph
 env
 EOF
