@@ -46,9 +46,9 @@ ls_testable_encodings <- function() {
 test_dry <- function(path, styler, styled = FALSE) {
   before <- readLines(path)
   summary <- styler(path, dry = "on")
-  checker <- ifelse(styled, expect_false, expect_true)
+  checker <- ifelse(styled, testthat::expect_false, testthat::expect_true)
   checker(summary$changed)
-  expect_true(identical(before, readLines(path)))
+  testthat::expect_true(identical(before, readLines(path)))
 
   if (styled) {
     expect_error(styler(path, dry = "fail"), NA)
@@ -56,5 +56,4 @@ test_dry <- function(path, styler, styled = FALSE) {
     expect_error(styler(path, dry = "fail"), "would be modified")
   }
   expect_error(styler(path, dry = "other option"), "one of")
-
 }
