@@ -26,10 +26,10 @@ in inst/WORDLIST.
 }
 }
 \examples{
-\donttest{
+\dontrun{
 open_config()
 }
-\donttest{
+\dontrun{
 open_wordlist()
 }
 }

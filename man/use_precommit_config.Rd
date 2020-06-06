@@ -49,7 +49,7 @@ way.
 }
 
 \examples{
-\donttest{
+\dontrun{
 use_precommit_config()
 }
 }

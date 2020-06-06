@@ -19,7 +19,7 @@ in a hook script: It's not intended to be called by users of {precommit}
 directly.
 }
 \examples{
-\donttest{
+\dontrun{
 diff_requires_run_roxygenize()
 }
 }

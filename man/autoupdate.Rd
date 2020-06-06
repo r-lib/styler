@@ -16,7 +16,7 @@ The exit status from \verb{pre-commit autoupdate} (invisibly).
 Runs \href{https://pre-commit.com/#pre-commit-autoupdate}{\verb{pre-commit autoupdate}}.
 }
 \examples{
-\donttest{
+\dontrun{
 autoupdate()
 }
 }

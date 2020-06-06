@@ -24,7 +24,7 @@
 #' @return
 #' Character vector of length one with the path to the config file used.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' use_precommit_config()
 #' }
 #' @export

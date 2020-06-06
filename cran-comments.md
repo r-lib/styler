@@ -20,9 +20,10 @@ This is the second re-submission. I changed the following.
 
 - put the word 'styler' in the Description field in DESCRIPTION in quotes since
   it's a package name to fix *Possibly mis-spelled words in DESCRIPTION*.
-- wrap all examples that were wrapped in \dontrun in \donttest, as they can be
-  run if the user has the pre-commit executable installed, but not on CRAN, 
-  because we don't expect the pre-commit executable to be installed there.
+
+Some help files have examples which are wrapped into \dontrun and I was asked to
+unwrap them if they are executable. They are not because they depend on the 
+pre-commit executable which is not available on the CRAN machines.
 
 ***
 
