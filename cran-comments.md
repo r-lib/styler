@@ -13,3 +13,32 @@
 ## Downstream Dependencies
 
 None.
+
+## Resubmission 
+
+This is the second re-submission. I changed the following.
+
+- put the word 'styler' in the Description field in DESCRIPTION in quotes since
+  it's a package name to fix *Possibly mis-spelled words in DESCRIPTION*.
+
+Some help files have examples which are wrapped into \dontrun and I was asked to
+unwrap them if they can be executed during R CMD Check on CRAN. The cannot 
+because they depend on the pre-commit executable which is not available on the 
+CRAN machines. Also \donttest is not suitable because as of R 4.0.0, donttest
+is run for R CMD Check. 
+
+***
+
+
+This is the first re-submission. I have: 
+
+- removed the redundant 'for R' from the `Title:` in DESCRIPTION.
+- extended the `Description:` field in `DESCRIPTION` to be a longer description 
+  of what the package does.
+- added return value documentation for exported function in the case there was 
+  none before.
+- added examples to the exported functions.
+
+I was also asked to add references for the methods I implement but there are 
+none as this is a tooling package that does not implement any statistical 
+method.

@@ -79,6 +79,11 @@ under version control), but rather link it in some more or less transparent
 way.
 }
 
+\examples{
+\dontrun{
+use_precommit()
+}
+}
 \seealso{
 Other helpers: 
 \code{\link{open_config}()}

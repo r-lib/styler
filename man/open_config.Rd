@@ -25,6 +25,14 @@ Open pre-commit related files
 in inst/WORDLIST.
 }
 }
+\examples{
+\dontrun{
+open_config()
+}
+\dontrun{
+open_wordlist()
+}
+}
 \seealso{
 Other helpers: 
 \code{\link{use_precommit}()}

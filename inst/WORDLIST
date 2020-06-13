@@ -24,6 +24,8 @@ dirname
 docopt
 docsearch
 docType
+dontrun
+donttest
 emph
 env
 EOF
@@ -57,6 +59,7 @@ magrittr
 maxkb
 md
 miniconda
+mis
 mtime
 navbar
 netlify
@@ -84,6 +87,7 @@ readme
 Renviron
 repo
 repos
+Resubmission
 reticulate
 Rhistory
 rlang

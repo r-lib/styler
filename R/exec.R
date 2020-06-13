@@ -5,8 +5,12 @@
 #'
 #' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
-#'  @return
+#' @return
 #'  A character vector of length one with the path to the pre-commit executable.
+#' @examples
+#' \dontrun{
+#' path_precommit_exec()
+#' }
 #' @export
 path_precommit_exec <- function(check_if_exists = TRUE) {
   final <- getOption("precommit.executable") %>%
@@ -27,6 +31,10 @@ path_precommit_exec <- function(check_if_exists = TRUE) {
 }
 
 #' @rdname path_precommit_exec
+#' @examples
+#' \dontrun{
+#' path_pre_commit_exec()
+#' }
 #' @export
 path_pre_commit_exec <- function(check_if_exists = TRUE) {
   .Deprecated("path_precommit_exec", old = "path_pre_commit_exec")

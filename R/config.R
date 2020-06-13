@@ -23,6 +23,10 @@
 #' @inheritParams fallback_doc
 #' @return
 #' Character vector of length one with the path to the config file used.
+#' @examples
+#' \dontrun{
+#' use_precommit_config()
+#' }
 #' @export
 use_precommit_config <- function(config_source = getOption("precommit.config_source"),
                                  force = FALSE,
