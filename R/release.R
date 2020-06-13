@@ -86,10 +86,10 @@ release_complete <- function(ask = TRUE, is_cran = ask, tag = NULL) {
     if (is.null(tag)) {
       tag <- paste0("v", desc::desc_get_version())
     }
-    if (substr(tag, 1, 1) == "v") {
+    if (substr(tag, 1, 1) != "v") {
       rlang::abort("tag must start with v.")
     }
-    sys_call("git", glue::glue("push {tag}"))
+    sys_call("git", glue::glue("push origin {tag}"))
   }
 
   precommit::autoupdate() # only updates if tag is on the master branch
