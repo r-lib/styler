@@ -40,5 +40,8 @@ template:
 authors:
   Lorenz Walthert:
     href: http://lorenzwalthert.netlify.com
-    
+
+development:
+  mode: auto
+
 url: https://lorenzwalthert.github.io/precommit/
