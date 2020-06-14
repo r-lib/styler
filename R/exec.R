@@ -1,12 +1,14 @@
 #' Locate the pre-commit executable
 #'
-#' [path_precommit_exec()] simply reads the R option `precommit.executable`, ]
-#' [path_derive_precommit_exec()] uses a heuristic to derive it from scratch.
+#' [path_precommit_exec()] simply reads the R option `precommit.executable`,
+#' [path_pre_commit_exec()] is the old spelling and deprecated.
 #'
 #' @param check_if_exists Whether or not to make sure the returned path also
 #'  exists.
 #' @return
 #'  A character vector of length one with the path to the pre-commit executable.
+#' @seealso
+#' [path_derive_precommit_exec()] for the heuristic to derive it from scratch.
 #' @examples
 #' \dontrun{
 #' path_precommit_exec()

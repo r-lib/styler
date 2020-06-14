@@ -17,8 +17,8 @@ exists.}
 A character vector of length one with the path to the pre-commit executable.
 }
 \description{
-\code{\link[=path_precommit_exec]{path_precommit_exec()}} simply reads the R option \code{precommit.executable}, ]
-\code{\link[=path_derive_precommit_exec]{path_derive_precommit_exec()}} uses a heuristic to derive it from scratch.
+\code{\link[=path_precommit_exec]{path_precommit_exec()}} simply reads the R option \code{precommit.executable},
+\code{\link[=path_pre_commit_exec]{path_pre_commit_exec()}} is the old spelling and deprecated.
 }
 \examples{
 \dontrun{
@@ -27,4 +27,7 @@ path_precommit_exec()
 \dontrun{
 path_pre_commit_exec()
 }
+}
+\seealso{
+\code{\link[=path_derive_precommit_exec]{path_derive_precommit_exec()}} for the heuristic to derive it from scratch.
 }

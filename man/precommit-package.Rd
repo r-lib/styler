@@ -9,7 +9,7 @@
 Useful git hooks for R building on top of the
     multi-language framework 'pre-commit' for hook management. This
     package provides git hooks for common tasks like formatting files with
-    styler or spell checking as well as wrapper functions to access the
+    'styler' or spell checking as well as wrapper functions to access the
     'pre-commit' executable.
 }
 \seealso{
