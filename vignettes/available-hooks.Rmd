@@ -8,7 +8,7 @@ vignette: >
 ---
 
 
-Below is a comprehensive list with all hooks from {precommit} as well well as
+Below is a comprehensive list with all hooks from {precommit} as well as
 their arguments or flags, if they take any. Other repos also host hooks, many
 are listed [here](https://pre-commit.com/hooks.html).
 
