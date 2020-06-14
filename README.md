@@ -39,8 +39,8 @@ install.packages("precommit")
 ```
 
 To access pre-commit functionality from R, you also need to install the
-pre-commit framework. The following command line methods are tested to
-work with this R package:
+[pre-commit framework](https://pre-commit.com). The following command
+line methods are tested to work with this R package:
 
   - `$ pip install pre-commit --user` (macOS, Linux and Windows)
     **outside** a conda or virtual environment.
