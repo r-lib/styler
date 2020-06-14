@@ -135,7 +135,9 @@ should pass.
 ## `roxygenize`
 
 A hook to run `roxygen2::roxygenize()`. Makes sure you commit your `.Rd` changes
-with the source changes.
+with the source changes. To take advantage of caching, you don't need to run 
+`roxygen2::roxygenize()` manually anymore.
+
 
 This hook does not modify input files, but writes to `.Rd` files in `man/`.
 
