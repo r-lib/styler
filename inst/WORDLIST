@@ -12,6 +12,7 @@ cancelling
 chnages
 CMD
 codecov
+coercible
 compat
 config
 CONST
@@ -28,6 +29,7 @@ dplyr
 DSLs
 emacs
 emph
+env
 EOF
 EOL
 EOLs
@@ -38,10 +40,12 @@ fileext
 filetype
 forcond
 funct
+getChecksum
 getOption
 github
 gitsum
 GSOC
+href
 http
 https
 infinitively
@@ -51,6 +55,7 @@ interaces
 invasiveness
 io
 ixmypi
+ized
 Kirill
 knitr
 labelled
@@ -58,6 +63,7 @@ levelName
 LF
 lifecycle
 lorenzwalthert
+lst
 macOS
 md
 Müller
@@ -75,6 +81,8 @@ precommit
 prefill
 prettycode
 PRs
+purrr
+purrrpartial
 RcppExports
 rds
 readme
@@ -88,6 +96,7 @@ renv
 repo
 reprex
 rlang
+rlang's
 rmarkdown
 RMarkdown
 rmd
@@ -105,6 +114,7 @@ RStudio
 RStudio's
 saamwerk
 seealso
+stackoverflow
 StackOverflow
 STR
 styler

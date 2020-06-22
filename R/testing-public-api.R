@@ -51,9 +51,9 @@ test_dry <- function(path, styler, styled = FALSE) {
   testthat::expect_true(identical(before, readLines(path)))
 
   if (styled) {
-    expect_error(styler(path, dry = "fail"), NA)
+    testthat::expect_error(styler(path, dry = "fail"), NA)
   } else {
-    expect_error(styler(path, dry = "fail"), "would be modified")
+    testthat::expect_error(styler(path, dry = "fail"), "would be modified")
   }
-  expect_error(styler(path, dry = "other option"), "one of")
+  testthat::expect_error(styler(path, dry = "other option"), "one of")
 }

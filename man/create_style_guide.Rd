@@ -13,7 +13,8 @@ create_style_guide(
   use_raw_indention = FALSE,
   reindention = tidyverse_reindention(),
   style_guide_name = NULL,
-  style_guide_version = NULL
+  style_guide_version = NULL,
+  more_specs = NULL
 )
 }
 \arguments{
@@ -46,13 +47,24 @@ location of the style guide, separated by \code{@}. For example,
 attribute inside the created style guide, for example for caching. This
 should correspond to the version of the R package that exports the
 style guide.}
+
+\item{more_specs}{Named vector (coercible to character) specifying arguments
+\code{args} in \verb{transformer <- list(t1 = purrr::partial(f, arg)} because when
+such functions are converted to characters in \code{\link[styler:cache_make_key]{styler::cache_make_key()}},
+they will yield generic code and we loose the specific value of \code{arg} (see
+\code{\link[styler:cache_make_key]{styler::cache_make_key()}}), even when unquoting these inputs with \verb{!!}
+beforehand in \code{purrr::partial()}.}
 }
 \description{
 This is a helper function to create a style guide, which is technically
 speaking a named list of groups of transformer functions where each
 transformer function corresponds to one styling rule. The output of this
 function can be used as an argument for \code{style} in top level functions
-like \code{\link[=style_text]{style_text()}} and friends.
+like \code{\link[=style_text]{style_text()}} and friends. Note that for caching to work properly,
+unquote all inputs to the transformer function if possible with rlang's \verb{!!},
+otherwise, they will be passed as references (generic variable names) instead
+of literals and \code{styler:::is_cached()} won't pick up changes. See how it's
+done in \code{\link[=tidyverse_style]{tidyverse_style()}} with \code{indent_by} and other arguments.
 }
 \examples{
 set_line_break_before_curly_opening <- function(pd_flat) {

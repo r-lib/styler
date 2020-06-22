@@ -32,6 +32,10 @@ in \code{\link[=create_style_guide]{create_style_guide()}}. Now, the only way to
 is to replace a transformer with the same function body (but changing
 the function definition of the functions called in that body) interactively
 without changing version number of name at the same time.
+Remaining problem: \code{purrr::partial()} calls will render generic code, e.g.
+see \code{as.character(list(purrr::partial(sum, x = 4)))}. For that reason,
+all arguments passed to a \code{purrr::partial()} call must be put in the
+style guide under \code{more_specs}.
 }
 }
 \section{Experiments}{
