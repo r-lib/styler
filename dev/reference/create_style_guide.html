@@ -50,7 +50,11 @@
 speaking a named list of groups of transformer functions where each
 transformer function corresponds to one styling rule. The output of this
 function can be used as an argument for style in top level functions
-like style_text() and friends." />
+like style_text() and friends. Note that for caching to work properly,
+unquote all inputs to the transformer function if possible with rlang's !!,
+otherwise, they will be passed as references (generic variable names) instead
+of literals and styler:::is_cached() won't pick up changes. See how it's
+done in tidyverse_style() with indent_by and other arguments." />
 
 
 <meta name="robots" content="noindex">
@@ -187,7 +191,11 @@ like style_text() and friends." />
 speaking a named list of groups of transformer functions where each
 transformer function corresponds to one styling rule. The output of this
 function can be used as an argument for <code>style</code> in top level functions
-like <code><a href='style_text.html'>style_text()</a></code> and friends.</p>
+like <code><a href='style_text.html'>style_text()</a></code> and friends. Note that for caching to work properly,
+unquote all inputs to the transformer function if possible with rlang's <code>!!</code>,
+otherwise, they will be passed as references (generic variable names) instead
+of literals and <code>styler:::is_cached()</code> won't pick up changes. See how it's
+done in <code><a href='tidyverse_style.html'>tidyverse_style()</a></code> with <code>indent_by</code> and other arguments.</p>
     </div>
 
     <pre class="usage"><span class='fu'>create_style_guide</span>(
@@ -199,7 +207,8 @@ like <code><a href='style_text.html'>style_text()</a></code> and friends.</p>
   <span class='kw'>use_raw_indention</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>reindention</span> <span class='kw'>=</span> <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span>(),
   <span class='kw'>style_guide_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>style_guide_version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>style_guide_version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>more_specs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -252,6 +261,15 @@ location of the style guide, separated by <code>@</code>. For example,
 attribute inside the created style guide, for example for caching. This
 should correspond to the version of the R package that exports the
 style guide.</p></td>
+    </tr>
+    <tr>
+      <th>more_specs</th>
+      <td><p>Named vector (coercible to character) specifying arguments
+<code>args</code> in <code>transformer &lt;- list(t1 = purrr::partial(f, arg)</code> because when
+such functions are converted to characters in <code><a href='cache_make_key.html'>styler::cache_make_key()</a></code>,
+they will yield generic code and we loose the specific value of <code>arg</code> (see
+<code><a href='cache_make_key.html'>styler::cache_make_key()</a></code>), even when unquoting these inputs with <code>!!</code>
+beforehand in <code><a href='https://purrr.tidyverse.org/reference/partial.html'>purrr::partial()</a></code>.</p></td>
     </tr>
     </table>
 

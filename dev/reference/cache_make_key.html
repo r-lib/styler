@@ -214,7 +214,11 @@ To fix this, transformers must have names and version number as described
 in <code><a href='create_style_guide.html'>create_style_guide()</a></code>. Now, the only way to fool the cache invalidation
 is to replace a transformer with the same function body (but changing
 the function definition of the functions called in that body) interactively
-without changing version number of name at the same time.</p></li>
+without changing version number of name at the same time.
+Remaining problem: <code><a href='https://purrr.tidyverse.org/reference/partial.html'>purrr::partial()</a></code> calls will render generic code, e.g.
+see <code><a href='https://rdrr.io/r/base/character.html'>as.character(list(purrr::partial(sum, x = 4)))</a></code>. For that reason,
+all arguments passed to a <code><a href='https://purrr.tidyverse.org/reference/partial.html'>purrr::partial()</a></code> call must be put in the
+style guide under <code>more_specs</code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="experiments"><a class="anchor" href="#experiments"></a>Experiments</h2>
