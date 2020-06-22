@@ -52,6 +52,10 @@ is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
 #'   is to replace a transformer with the same function body (but changing
 #'   the function definition of the functions called in that body) interactively
 #'   without changing version number of name at the same time.
+#'   Remaining problem: `purrr::partial()` calls will render generic code, e.g.
+#'   see `as.character(list(purrr::partial(sum, x = 4)))`. For that reason,
+#'   all arguments passed to a `purrr::partial()` call must be put in the
+#'   style guide under `more_specs`.
 #' @section Experiments:
 #'
 #' There is unexplainable behavior in conjunction with hashing and
@@ -87,7 +91,9 @@ cache_make_key <- function(text, transformers) {
     text = hash_standardize(text),
     style_guide_name = transformers$style_guide_name,
     style_guide_version = transformers$style_guide_version,
-    style_guide_text = as.character(transformers)
+    style_guide_text = as.character(transformers),
+    more_specs = as.character(transformers$more_specs) %>%
+      set_names(names(transformers$more_specs))
   )
 }
 
