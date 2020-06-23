@@ -1,3 +1,14 @@
+# precommit v0.1.2.9000
+
+**API changes**
+
+- style-files hook gains new argument `style_transformers` that allows 
+  to specify a style guide like this: 
+  `--'style_transformers=tidyverse_style(scope = "spaces")'`, which gives the 
+  user the flexibility to also specify arguments of the style guide. The 
+  argument `--style_fun` is deprecated and will be removed in a future release.
+  (#183).
+
 # precommit v0.1.2
 
 Initial CRAN release. See https://lorenzwalthert.github.io/precommit/.
