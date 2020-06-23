@@ -39,7 +39,7 @@ repos:
     rev: {rev}
     hooks:
     -   id: style-files
-        args: [--style_pkg=styler, --style_fun=tidyverse_style]
+        args: [--style_pkg=styler, '--style_transformers=tidyverse_style(scope = \"tokens\")']
 "))
 ```
 
@@ -65,13 +65,12 @@ e.g. `'--style_transformers="tidyverse_style(scope='spaces')".
 
 ```
   id: style-files
-  args: [--style_pkg=<styler>, --style_transformers=<tidyverse_style()>, --style_fun=<tidyverse_style>]
+  args: [--style_pkg=<styler>, '--style_transformers=<tidyverse_style(scope = "tokens")'>, --style_fun=<tidyverse_style>]
 ```
 
 Note that not all combinations of quotes will be parsed correctly, e.g. 
-`'--style_transformers=tidyverse_style(scope = "none")'` works (you can also 
-drop the outer quotes), but other combinations of single, double and escaped 
-versions of these quoting characters may not work.
+reversing inner and outer quotes won't work and escaping quotes may also not 
+work.
 
 This hook modifies files.
 
