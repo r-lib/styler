@@ -13,9 +13,11 @@
 
 ## Minor chnages and fixes
 
+- cache is now correctly invalidated when style guide arguments change (#647).
+- empty lines are now removed between pipes (#645).
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
 - always strip trailing spaces and make cache insensitive to it (#626).
-- typos in documentation (#618, #614).
+- typos in documentation (#643, #618, #614).
 
 # styler 1.3.2
 
@@ -441,4 +443,3 @@ specify_reindention(
 )
 initialize_default_attributes(pd_flat)
 ```
-
