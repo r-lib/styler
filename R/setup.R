@@ -48,8 +48,8 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
     config_source, force, root,
     open = FALSE, verbose = FALSE
   )
-  install_repo(root, install_hooks, legacy_hooks)
   autoupdate(root)
+  install_repo(root, install_hooks, legacy_hooks)
   if (open) {
     open_config(root)
   }

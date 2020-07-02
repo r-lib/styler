@@ -8,6 +8,7 @@
   user the flexibility to also specify arguments of the style guide. The 
   argument `--style_fun` is deprecated and will be removed in a future release.
   (#183).
+- install_hooks in `use_precommit()` should now work as expected (#185).
 
 # precommit v0.1.2
 
