@@ -50,9 +50,9 @@ style guide.}
 
 \item{more_specs}{Named vector (coercible to character) specifying arguments
 \code{args} in \verb{transformer <- list(t1 = purrr::partial(f, arg)} because when
-such functions are converted to characters in \code{\link[styler:cache_make_key]{styler::cache_make_key()}},
+such functions are converted to characters in \code{\link[=cache_make_key]{cache_make_key()}},
 they will yield generic code and we loose the specific value of \code{arg} (see
-\code{\link[styler:cache_make_key]{styler::cache_make_key()}}), even when unquoting these inputs with \verb{!!}
+\code{\link[=cache_make_key]{cache_make_key()}}), even when unquoting these inputs with \verb{!!}
 beforehand in \code{purrr::partial()}.}
 }
 \description{

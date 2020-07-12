@@ -8,10 +8,13 @@
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
 #' @importFrom purrr map flatten_chr
 #' @keywords internal
-style_roxygen_code_example <- function(example, transformers) {
+style_roxygen_code_example <- function(example, transformers, base_indention) {
   bare <- parse_roxygen(example)
   one_dont <- split(bare, factor(cumsum(bare %in% dont_keywords())))
-  map(one_dont, style_roxygen_code_example_segment, transformers) %>%
+  map(one_dont, style_roxygen_code_example_segment,
+    transformers = transformers,
+    base_indention = base_indention
+  ) %>%
     flatten_chr() %>%
     add_roxygen_mask()
 }
@@ -35,7 +38,9 @@ style_roxygen_code_example <- function(example, transformers) {
 #' @importFrom rlang seq2
 #' @importFrom purrr map2 flatten_chr
 #' @keywords internal
-style_roxygen_code_example_segment <- function(one_dont, transformers) {
+style_roxygen_code_example_segment <- function(one_dont,
+                                               transformers,
+                                               base_indention) {
   if (length(one_dont) < 1L) {
     return(character())
   }
@@ -46,7 +51,8 @@ style_roxygen_code_example_segment <- function(one_dont, transformers) {
 
   map2(split_segments$separated, is_dont,
     style_roxygen_example_snippet,
-    transformers = transformers
+    transformers = transformers,
+    base_indention = base_indention
   ) %>%
     flatten_chr()
 }
@@ -61,7 +67,8 @@ style_roxygen_code_example_segment <- function(one_dont, transformers) {
 #' @keywords internal
 style_roxygen_example_snippet <- function(code_snippet,
                                           transformers,
-                                          is_dont) {
+                                          is_dont,
+                                          base_indention) {
   if (is_dont) {
     decomposed <- remove_dont_mask(code_snippet)
     code_snippet <- decomposed$code
@@ -73,7 +80,9 @@ style_roxygen_example_snippet <- function(code_snippet,
   is_cached <- is_cached(code_snippet, transformers)
   if (!is_cached || !cache_is_active) {
     code_snippet <- code_snippet %>%
-      parse_transform_serialize_r(transformers, warn_empty = FALSE)
+      parse_transform_serialize_r(transformers,
+        base_indention = base_indention, warn_empty = FALSE
+      )
   } else {
     code_snippet <- ensure_last_n_empty(code_snippet, n = 0)
   }

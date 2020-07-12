@@ -50,7 +50,9 @@ style_active_file <- function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
   transformer <- make_transformer(get_addins_style_transformer(),
-    include_roxygen_examples = TRUE, warn_empty = is_plain_r_file(context$path)
+    include_roxygen_examples = TRUE,
+    base_indention = 0,
+    warn_empty = is_plain_r_file(context$path)
   )
   is_r_file <- any(
     is_plain_r_file(context$path),

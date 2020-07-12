@@ -9,7 +9,7 @@ dir_without_.(path, ...)
 \arguments{
 \item{path}{A path.}
 
-\item{...}{Passed to \code{\link[base:dir]{base::dir()}}.}
+\item{...}{Passed to \code{\link[base:list.files]{base::dir()}}.}
 }
 \description{
 When using \code{dir()}, you can set \code{full.names = FALSE}, but then you can only

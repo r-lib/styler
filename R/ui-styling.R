@@ -69,11 +69,14 @@ style_pkg <- function(pkg = ".",
                       exclude_files = "R/RcppExports.R",
                       exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE,
+                      base_indention = 0,
                       dry = "off") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   changed <- withr::with_dir(pkg_root, prettify_pkg(
     transformers,
-    filetype, exclude_files, exclude_dirs, include_roxygen_examples, dry
+    filetype, exclude_files, exclude_dirs, include_roxygen_examples,
+    base_indention,
+    dry
   ))
   invisible(changed)
 }
@@ -96,6 +99,7 @@ prettify_pkg <- function(transformers,
                          exclude_files,
                          exclude_dirs,
                          include_roxygen_examples,
+                         base_indention,
                          dry) {
   filetype <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
@@ -142,7 +146,12 @@ prettify_pkg <- function(transformers,
     c(r_files, rprofile_files, vignette_files, readme),
     exclude_files
   )
-  transform_files(files, transformers, include_roxygen_examples, dry)
+  transform_files(files,
+    transformers = transformers,
+    include_roxygen_examples = include_roxygen_examples,
+    base_indention = base_indention,
+    dry = dry
+  )
 }
 
 #' Style a string
@@ -166,8 +175,12 @@ style_text <- function(text,
                        ...,
                        style = tidyverse_style,
                        transformers = style(...),
-                       include_roxygen_examples = TRUE) {
-  transformer <- make_transformer(transformers, include_roxygen_examples)
+                       include_roxygen_examples = TRUE,
+                       base_indention = 0) {
+  transformer <- make_transformer(transformers,
+    include_roxygen_examples = include_roxygen_examples,
+    base_indention = base_indention
+  )
   styled_text <- transformer(text)
   construct_vertical(styled_text)
 }
@@ -200,12 +213,13 @@ style_dir <- function(path = ".",
                       exclude_files = NULL,
                       exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE,
+                      base_indention = 0,
                       dry = "off") {
   changed <- withr::with_dir(
     path, prettify_any(
       transformers,
       filetype, recursive, exclude_files, exclude_dirs,
-      include_roxygen_examples, dry
+      include_roxygen_examples, base_indention, dry
     )
   )
   invisible(changed)
@@ -224,6 +238,7 @@ prettify_any <- function(transformers,
                          exclude_files,
                          exclude_dirs,
                          include_roxygen_examples,
+                         base_indention = 0,
                          dry) {
   exclude_files <- set_arg_paths(exclude_files)
   exclude_dirs <- set_arg_paths(exclude_dirs)
@@ -244,7 +259,7 @@ prettify_any <- function(transformers,
   }
   transform_files(
     setdiff(c(files_root, files_other), exclude_files),
-    transformers, include_roxygen_examples, dry
+    transformers, include_roxygen_examples, base_indention, dry
   )
 }
 
@@ -275,8 +290,14 @@ style_file <- function(path,
                        style = tidyverse_style,
                        transformers = style(...),
                        include_roxygen_examples = TRUE,
+                       base_indention = 0,
                        dry = "off") {
   path <- set_arg_paths(path)
-  changed <- transform_files(path, transformers, include_roxygen_examples, dry)
+  changed <- transform_files(path,
+    transformers = transformers,
+    include_roxygen_examples = include_roxygen_examples,
+    base_indention = base_indention,
+    dry = dry
+  )
   invisible(changed)
 }

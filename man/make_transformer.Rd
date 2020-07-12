@@ -4,7 +4,12 @@
 \alias{make_transformer}
 \title{Closure to return a transformer function}
 \usage{
-make_transformer(transformers, include_roxygen_examples, warn_empty = TRUE)
+make_transformer(
+  transformers,
+  include_roxygen_examples,
+  base_indention,
+  warn_empty = TRUE
+)
 }
 \arguments{
 \item{transformers}{A list of transformer functions that operate on flat
@@ -12,6 +17,11 @@ parse tables.}
 
 \item{include_roxygen_examples}{Whether or not to style code in roxygen
 examples.}
+
+\item{base_indention}{Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a \code{base_indention} spaces before the code in the case
+multi-line strings are present. See 'Examples'.}
 
 \item{warn_empty}{Whether or not a warning should be displayed when \code{text}
 does not contain any tokens.}

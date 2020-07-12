@@ -4,12 +4,17 @@
 \alias{style_roxygen_code_example}
 \title{Style a roxygen code example that may contain dontrun and friends}
 \usage{
-style_roxygen_code_example(example, transformers)
+style_roxygen_code_example(example, transformers, base_indention)
 }
 \arguments{
 \item{example}{Roxygen example code.}
 
 \item{transformers}{A list of \emph{named} transformer functions}
+
+\item{base_indention}{Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a \code{base_indention} spaces before the code in the case
+multi-line strings are present. See 'Examples'.}
 }
 \description{
 Parses roxygen2 comments into code, breaks it into dont* (dontrun, donttest,

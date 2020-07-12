@@ -4,7 +4,12 @@
 \alias{parse_transform_serialize_r_block}
 \title{Parse, transform and serialize a nested parse table}
 \usage{
-parse_transform_serialize_r_block(pd_nested, start_line, transformers)
+parse_transform_serialize_r_block(
+  pd_nested,
+  start_line,
+  transformers,
+  base_indention
+)
 }
 \arguments{
 \item{pd_nested}{A block of the nested parse table.}
@@ -12,9 +17,25 @@ parse_transform_serialize_r_block(pd_nested, start_line, transformers)
 \item{start_line}{The line number on which the code starts.}
 
 \item{transformers}{A list of \emph{named} transformer functions}
+
+\item{base_indention}{Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a \code{base_indention} spaces before the code in the case
+multi-line strings are present. See 'Examples'.}
 }
 \description{
 We process blocks of nested parse tables for speed. See \code{\link[=cache_find_block]{cache_find_block()}}
 for details on how a top level nest is split into blocks.
+}
+\examples{
+text_in <- 'x<- function()
+"here
+is"
+NULL
+1+ 1
+'
+style_text(text_in, base_indention = 3)
+# not equal to the naive approach
+styler:::construct_vertical(paste0(styler:::add_spaces(3), style_text(text_in), sep = ""))
 }
 \keyword{internal}

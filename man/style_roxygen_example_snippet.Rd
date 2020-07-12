@@ -4,7 +4,12 @@
 \alias{style_roxygen_example_snippet}
 \title{Given a code snippet is dont* or run, style it}
 \usage{
-style_roxygen_example_snippet(code_snippet, transformers, is_dont)
+style_roxygen_example_snippet(
+  code_snippet,
+  transformers,
+  is_dont,
+  base_indention
+)
 }
 \arguments{
 \item{code_snippet}{A character vector with code to style.}
@@ -13,6 +18,11 @@ style_roxygen_example_snippet(code_snippet, transformers, is_dont)
 
 \item{is_dont}{Whether the snippet to process is a dontrun, dontshow,
 donttest segment or not.}
+
+\item{base_indention}{Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a \code{base_indention} spaces before the code in the case
+multi-line strings are present. See 'Examples'.}
 }
 \description{
 Given a code snippet is dont* or run, style it
