@@ -4,7 +4,7 @@
 \alias{parse_transform_serialize_roxygen}
 \title{Parse, transform and serialize roxygen comments}
 \usage{
-parse_transform_serialize_roxygen(text, transformers)
+parse_transform_serialize_roxygen(text, transformers, base_indention)
 }
 \description{
 Splits \code{text} into roxygen code examples and non-roxygen code examples and

@@ -4,13 +4,18 @@
 \alias{style_roxygen_code_example_segment}
 \title{Style a roxygen code example segment}
 \usage{
-style_roxygen_code_example_segment(one_dont, transformers)
+style_roxygen_code_example_segment(one_dont, transformers, base_indention)
 }
 \arguments{
 \item{one_dont}{Bare R code containing at most one \verb{\\\dontrun{...}} or
 friends.}
 
 \item{transformers}{A list of \emph{named} transformer functions}
+
+\item{base_indention}{Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a \code{base_indention} spaces before the code in the case
+multi-line strings are present. See 'Examples'.}
 }
 \description{
 A roxygen code example segment corresponds to roxygen example code that

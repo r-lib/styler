@@ -349,3 +349,32 @@ test_that("dry run options work:", {
   test_dry(test_path("public-api/dry/unstyled.Rnw"), style_file, styled = FALSE)
   test_dry(test_path("public-api/dry/styled.Rnw"), style_file, styled = TRUE)
 })
+
+test_that("base indention works", {
+  # for single-line strings
+  n_spaces <- 5
+  text_in <- "x<- function() NULL"
+  expect_equal(
+    style_text(text_in, base_indention = n_spaces),
+    construct_vertical(paste0(add_spaces(n_spaces), style_text(text_in)))
+  )
+  # for multi-line strings
+  text_in <- c(
+    "x<- function()",
+    '"here\nis"',
+    "NULL",
+    "1+ 1"
+  )
+  text_out <- c(
+    "     x <- function() {",
+    '       "here',
+    'is"',
+    "     }",
+    "     NULL",
+    "     1 + 1"
+  )
+  expect_equal(
+    as.character(style_text(text_in, base_indention = n_spaces)),
+    text_out
+  )
+})

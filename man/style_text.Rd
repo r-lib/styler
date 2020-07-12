@@ -9,7 +9,8 @@ style_text(
   ...,
   style = tidyverse_style,
   transformers = style(...),
-  include_roxygen_examples = TRUE
+  include_roxygen_examples = TRUE,
+  base_indention = 0
 )
 }
 \arguments{
@@ -28,6 +29,11 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 
 \item{include_roxygen_examples}{Whether or not to style code in roxygen
 examples.}
+
+\item{base_indention}{Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a \code{base_indention} spaces before the code in the case
+multi-line strings are present. See 'Examples'.}
 }
 \description{
 Styles a character vector. Each element of the character vector corresponds

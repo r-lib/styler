@@ -4,12 +4,22 @@
 \alias{parse_transform_serialize_r}
 \title{Parse, transform and serialize text}
 \usage{
-parse_transform_serialize_r(text, transformers, warn_empty = TRUE)
+parse_transform_serialize_r(
+  text,
+  transformers,
+  base_indention,
+  warn_empty = TRUE
+)
 }
 \arguments{
 \item{text}{A character vector to parse.}
 
 \item{transformers}{A list of \emph{named} transformer functions}
+
+\item{base_indention}{Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a \code{base_indention} spaces before the code in the case
+multi-line strings are present. See 'Examples'.}
 
 \item{warn_empty}{Whether or not a warning should be displayed when \code{text}
 does not contain any tokens.}

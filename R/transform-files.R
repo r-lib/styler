@@ -11,8 +11,8 @@
 #' styling whether or not it was actually changed (or would be changed when
 #' `dry` is not "off").
 #' @keywords internal
-transform_files <- function(files, transformers, include_roxygen_examples, dry) {
-  transformer <- make_transformer(transformers, include_roxygen_examples)
+transform_files <- function(files, transformers, include_roxygen_examples, base_indention, dry) {
+  transformer <- make_transformer(transformers, include_roxygen_examples, base_indention)
   max_char <- min(max(nchar(files), 0), getOption("width"))
   len_files <- length(files)
   if (len_files > 0L && !getOption("styler.quiet", FALSE)) {
@@ -52,12 +52,12 @@ transform_file <- function(path,
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
   if (!getOption("styler.quiet", FALSE)) {
-      cat(
-        message_before, path,
-        rep_char(" ", max(0L, n_spaces_before_message_after)),
-        append = FALSE
-      )
-    }
+    cat(
+      message_before, path,
+      rep_char(" ", max(0L, n_spaces_before_message_after)),
+      append = FALSE
+    )
+  }
   changed <- transform_code(path, fun = fun, ..., dry = dry)
 
   bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
@@ -82,6 +82,7 @@ transform_file <- function(path,
 #' @importFrom purrr when
 make_transformer <- function(transformers,
                              include_roxygen_examples,
+                             base_indention,
                              warn_empty = TRUE) {
   force(transformers)
   assert_transformers(transformers)
@@ -98,10 +99,15 @@ make_transformer <- function(transformers,
 
     if (!use_cache) {
       transformed_code <- text %>%
-        parse_transform_serialize_r(transformers, warn_empty = warn_empty) %>%
+        parse_transform_serialize_r(transformers,
+          base_indention = base_indention,
+          warn_empty = warn_empty
+        ) %>%
         when(
           include_roxygen_examples ~
-          parse_transform_serialize_roxygen(., transformers),
+          parse_transform_serialize_roxygen(.,
+            transformers = transformers, base_indention = base_indention
+          ),
           ~.
         )
       if (should_use_cache) {
@@ -140,7 +146,7 @@ make_transformer <- function(transformers,
 #' [parse_transform_serialize_r()].
 #' @importFrom purrr map_at flatten_chr
 #' @keywords internal
-parse_transform_serialize_roxygen <- function(text, transformers) {
+parse_transform_serialize_roxygen <- function(text, transformers, base_indention) {
   roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
   if (length(roxygen_seqs) < 1L) {
     return(text)
@@ -148,7 +154,8 @@ parse_transform_serialize_roxygen <- function(text, transformers) {
   split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
   map_at(split_segments$separated, split_segments$selectors,
     style_roxygen_code_example,
-    transformers = transformers
+    transformers = transformers,
+    base_indention = base_indention
   ) %>%
     flatten_chr()
 }
@@ -187,12 +194,13 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @param warn_empty Whether or not a warning should be displayed when `text`
 #'   does not contain any tokens.
 #' @inheritParams compute_parse_data_nested
-#' @inheritParams apply_transformers
+#' @inheritParams parse_transform_serialize_r_block
 #' @seealso [parse_transform_serialize_roxygen()]
 #' @importFrom rlang abort
 #' @keywords internal
 parse_transform_serialize_r <- function(text,
                                         transformers,
+                                        base_indention,
                                         warn_empty = TRUE) {
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text, transformers)
@@ -210,7 +218,8 @@ parse_transform_serialize_r <- function(text,
     unname() %>%
     map2(blank_lines_to_next_expr,
       parse_transform_serialize_r_block,
-      transformers = transformers
+      transformers = transformers,
+      base_indention = base_indention
     ) %>%
     unlist()
 

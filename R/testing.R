@@ -113,7 +113,8 @@ transform_and_check <- function(in_item, out_item,
   read_in <- xfun::read_utf8(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
-      write.table(out_tree, col.names = FALSE, row.names = FALSE, quote = FALSE,
+      write.table(out_tree,
+        col.names = FALSE, row.names = FALSE, quote = FALSE,
         fileEncoding = "UTF-8"
       )
   }
@@ -160,7 +161,7 @@ NULL
 #'   transformations but remove EOL spaces and indention due to the way the
 #'   serialization is set up.
 #' @keywords internal
-style_empty <- function(text) {
+style_empty <- function(text, base_indention = 0) {
   transformers <- list(
     # transformer functions
     initialize = default_style_guide_attributes,
@@ -172,13 +173,16 @@ style_empty <- function(text) {
     reindention       = specify_reindention(),
     NULL
   )
-  transformed_text <- parse_transform_serialize_r(text, transformers)
+  transformed_text <- parse_transform_serialize_r(text,
+    transformers = transformers,
+    base_indention = base_indention
+  )
   transformed_text
 }
 
 #' @describeIn test_transformer Transformations for indention based on operators
 #' @keywords internal
-style_op <- function(text) {
+style_op <- function(text, base_indention = 0) {
   transformers <- list(
     # transformer functions
     initialize        = default_style_guide_attributes,
@@ -191,7 +195,10 @@ style_op <- function(text) {
     NULL
   )
 
-  transformed_text <- parse_transform_serialize_r(text, transformers)
+  transformed_text <- parse_transform_serialize_r(text,
+    transformers = transformers,
+    base_indention = base_indention
+  )
   transformed_text
 }
 
@@ -246,16 +253,16 @@ n_times_faster_with_cache <- function(x1, x2 = x1, ...,
                                       n = 3,
                                       clear = "always") {
   rlang::arg_match(clear, c("always", "final", "never", "all but last"))
-  capture.output(
-    out <- purrr::map(1:n, n_times_faster_bench,
-      x1 = x1, x2 = x2, fun = fun,
-      ..., n = n, clear = clear
+
+  out <- purrr::map(1:n, n_times_faster_bench,
+    x1 = x1, x2 = x2, fun = fun,
+    ..., n = n, clear = clear
+  ) %>%
+    purrr::map_dbl(
+      ~ unname(.x$first["elapsed"] / .x$second["elapsed"])
     ) %>%
-      purrr::map_dbl(
-        ~ unname(.x$first["elapsed"] / .x$second["elapsed"])
-      ) %>%
-      mean()
-  )
+    mean()
+
   if (clear %in% c("always", "final")) {
     clear_testthat_cache()
   }

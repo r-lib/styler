@@ -4,7 +4,13 @@
 \alias{transform_files}
 \title{Transform files with transformer functions}
 \usage{
-transform_files(files, transformers, include_roxygen_examples, dry)
+transform_files(
+  files,
+  transformers,
+  include_roxygen_examples,
+  base_indention,
+  dry
+)
 }
 \arguments{
 \item{files}{A character vector with paths to the file that should be
@@ -15,6 +21,11 @@ parse tables.}
 
 \item{include_roxygen_examples}{Whether or not to style code in roxygen
 examples.}
+
+\item{base_indention}{Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a \code{base_indention} spaces before the code in the case
+multi-line strings are present. See 'Examples'.}
 
 \item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
 from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the

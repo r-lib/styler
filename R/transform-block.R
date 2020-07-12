@@ -4,11 +4,26 @@
 #' for details on how a top level nest is split into blocks.
 #' @param pd_nested A block of the nested parse table.
 #' @param start_line The line number on which the code starts.
+#' @param base_indention Integer scalar indicating by how many spaces the whole
+#'   output text should be indented. Note that this is not the same as splitting
+#'   by line and add a `base_indention` spaces before the code in the case
+#'   multi-line strings are present. See 'Examples'.
 #' @inheritParams apply_transformers
+#' @examples
+#' text_in <- 'x<- function()
+#' "here
+#' is"
+#' NULL
+#' 1+ 1
+#' '
+#' style_text(text_in, base_indention = 3)
+#' # not equal to the naive approach
+#' styler:::construct_vertical(paste0(styler:::add_spaces(3), style_text(text_in), sep = ""))
 #' @keywords internal
 parse_transform_serialize_r_block <- function(pd_nested,
                                               start_line,
-                                              transformers) {
+                                              transformers,
+                                              base_indention) {
   if (!all(pd_nested$is_cached, na.rm = TRUE) || !cache_is_activated()) {
     transformed_pd <- apply_transformers(pd_nested, transformers)
     flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
@@ -19,6 +34,9 @@ parse_transform_serialize_r_block <- function(pd_nested,
         target_indention = transformers$reindention$indention,
         comments_only = transformers$reindention$comments_only
       )
+    is_on_newline <- flattened_pd$lag_newlines > 0
+    is_on_newline[1] <- TRUE
+    flattened_pd$lag_spaces[is_on_newline] <- flattened_pd$lag_spaces[is_on_newline] + base_indention
     serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
   } else {
     serialized_transformed_text <- map2(
