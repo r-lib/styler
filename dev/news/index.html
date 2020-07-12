@@ -180,24 +180,32 @@
 <h1 class="page-header" data-toc-text="1.3.2.9000">
 <a href="#styler-1-3-2-9000-development" class="anchor"></a>styler 1.3.2.9000 (Development)<small> Unreleased </small>
 </h1>
+<div id="api-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#api-changes" class="anchor"></a>API Changes</h2>
+<ul>
+<li><p><code><a href="../reference/style_file.html">style_file()</a></code> and friends gain argument <code>dry</code> to control if changes should be applied to files or not (<a href='https://github.com/r-lib/styler/issues/634'>#634</a>).</p></li>
+<li><p><code><a href="../reference/style_file.html">style_file()</a></code> and friends gain argument <code>base_indention</code> (defaulting to 0) to control by how much the output code is indented (<a href='https://github.com/r-lib/styler/issues/649'>#649</a>).</p></li>
+<li><p>added an option (<code>styler.test_dir_writeable</code>) that changes test behavior to not directly modify test files in the current directory (<a href='https://github.com/r-lib/styler/issues/548'>#548</a>).</p></li>
+<li><p>added an option for disabling all communication when using the package (<code>styler.quiet</code>) (<a href='https://github.com/r-lib/styler/issues/640'>#640</a>).</p></li>
+</ul>
+</div>
 <div id="major-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
 <li>blank lines in function calls and headers are now removed, for the former only when there are no comments before or after the blank line (<a href='https://github.com/r-lib/styler/issues/629'>#629</a>, <a href='https://github.com/r-lib/styler/issues/630'>#630</a>, <a href='https://github.com/r-lib/styler/issues/635'>#635</a>).</li>
-<li>added an option (<code>styler.test_dir_writeable</code>) that changes test behavior to not directly modify test files in the current directory (<a href='https://github.com/r-lib/styler/issues/548'>#548</a>).</li>
-<li>
-<code><a href="../reference/style_file.html">style_file()</a></code> and friends gain argument <code>dry</code> to control if changes should be applied to files or not (<a href='https://github.com/r-lib/styler/issues/634'>#634</a>).</li>
-<li>added an option for disabling all communication when using the package (<code>styler.quiet</code>) (<a href='https://github.com/r-lib/styler/issues/640'>#640</a>).</li>
 </ul>
 </div>
 <div id="minor-chnages-and-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-chnages-and-fixes" class="anchor"></a>Minor chnages and fixes</h2>
 <ul>
+<li>cache is now correctly invalidated when style guide arguments change (<a href='https://github.com/r-lib/styler/issues/647'>#647</a>).</li>
+<li>empty lines are now removed between pipes (<a href='https://github.com/r-lib/styler/issues/645'>#645</a>).</li>
 <li>overhaul pgkdown site: Add search (<a href='https://github.com/r-lib/styler/issues/623'>#623</a>), group function in Reference (<a href='https://github.com/r-lib/styler/issues/625'>#625</a>).</li>
 <li>always strip trailing spaces and make cache insensitive to it (<a href='https://github.com/r-lib/styler/issues/626'>#626</a>).</li>
-<li>typos in documentation (<a href='https://github.com/r-lib/styler/issues/618'>#618</a>, <a href='https://github.com/r-lib/styler/issues/614'>#614</a>).</li>
+<li>typos in documentation (<a href='https://github.com/r-lib/styler/issues/643'>#643</a>, <a href='https://github.com/r-lib/styler/issues/618'>#618</a>, <a href='https://github.com/r-lib/styler/issues/614'>#614</a>).</li>
 </ul>
 </div>
 </div>
