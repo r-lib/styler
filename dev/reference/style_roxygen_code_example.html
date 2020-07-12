@@ -186,7 +186,7 @@ dontshow) and run sections and processes each segment individually using
 <code><a href='style_roxygen_example_snippet.html'>style_roxygen_example_snippet()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>style_roxygen_code_example</span>(<span class='no'>example</span>, <span class='no'>transformers</span>)</pre>
+    <pre class="usage"><span class='fu'>style_roxygen_code_example</span>(<span class='no'>example</span>, <span class='no'>transformers</span>, <span class='no'>base_indention</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,6 +198,13 @@ dontshow) and run sections and processes each segment individually using
     <tr>
       <th>transformers</th>
       <td><p>A list of <em>named</em> transformer functions</p></td>
+    </tr>
+    <tr>
+      <th>base_indention</th>
+      <td><p>Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a <code>base_indention</code> spaces before the code in the case
+multi-line strings are present. See 'Examples'.</p></td>
     </tr>
     </table>
 

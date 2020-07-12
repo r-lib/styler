@@ -189,7 +189,8 @@ to one line of code.</p>
   <span class='no'>...</span>,
   <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
   <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>),
-  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>base_indention</span> <span class='kw'>=</span> <span class='fl'>0</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -220,6 +221,13 @@ conveniently constructed via the <code>style</code> argument and <code>...</code
       <th>include_roxygen_examples</th>
       <td><p>Whether or not to style code in roxygen
 examples.</p></td>
+    </tr>
+    <tr>
+      <th>base_indention</th>
+      <td><p>Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a <code>base_indention</code> spaces before the code in the case
+multi-line strings are present. See 'Examples'.</p></td>
     </tr>
     </table>
 

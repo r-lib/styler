@@ -184,7 +184,12 @@ for details on how a top level nest is split into blocks." />
 for details on how a top level nest is split into blocks.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_transform_serialize_r_block</span>(<span class='no'>pd_nested</span>, <span class='no'>start_line</span>, <span class='no'>transformers</span>)</pre>
+    <pre class="usage"><span class='fu'>parse_transform_serialize_r_block</span>(
+  <span class='no'>pd_nested</span>,
+  <span class='no'>start_line</span>,
+  <span class='no'>transformers</span>,
+  <span class='no'>base_indention</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,9 +206,35 @@ for details on how a top level nest is split into blocks.</p>
       <th>transformers</th>
       <td><p>A list of <em>named</em> transformer functions</p></td>
     </tr>
+    <tr>
+      <th>base_indention</th>
+      <td><p>Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a <code>base_indention</code> spaces before the code in the case
+multi-line strings are present. See 'Examples'.</p></td>
+    </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>text_in</span> <span class='kw'>&lt;-</span> <span class='st'>'x&lt;- function()
+"here
+is"
+NULL
+1+ 1
+'</span>
+<span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='no'>text_in</span>, <span class='kw'>base_indention</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt;    x <span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span><span> </span><span style='color: #BBBB00;'>{</span><span>
+#&gt;      "here
+#&gt; is"
+#&gt;    </span><span style='color: #BBBB00;'>}</span><span>
+#&gt;    </span><span style='color: #0000BB;font-weight: bold;'>NULL</span><span>
+#&gt;    </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='co'># not equal to the naive approach</span>
+<span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='construct_vertical.html'>construct_vertical</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='add_spaces_or_newlines.html'>add_spaces</a></span>(<span class='fl'>3</span>), <span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='no'>text_in</span>), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>""</span>))</div><div class='output co'>#&gt;    x </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span><span> </span><span style='color: #BBBB00;'>{</span><span>
+#&gt;      "here
+#&gt;    is"
+#&gt;    </span><span style='color: #BBBB00;'>}</span><span>
+#&gt;    </span><span style='color: #0000BB;font-weight: bold;'>NULL</span><span>
+#&gt;    </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

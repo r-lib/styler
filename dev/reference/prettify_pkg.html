@@ -188,6 +188,7 @@
   <span class='no'>exclude_files</span>,
   <span class='no'>exclude_dirs</span>,
   <span class='no'>include_roxygen_examples</span>,
+  <span class='no'>base_indention</span>,
   <span class='no'>dry</span>
 )</pre>
 
@@ -221,6 +222,13 @@ these directories are anyways not styled.</p></td>
       <th>include_roxygen_examples</th>
       <td><p>Whether or not to style code in roxygen
 examples.</p></td>
+    </tr>
+    <tr>
+      <th>base_indention</th>
+      <td><p>Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a <code>base_indention</code> spaces before the code in the case
+multi-line strings are present. See 'Examples'.</p></td>
     </tr>
     <tr>
       <th>dry</th>

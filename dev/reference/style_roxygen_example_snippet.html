@@ -182,7 +182,12 @@
     <p>Given a code snippet is dont* or run, style it</p>
     </div>
 
-    <pre class="usage"><span class='fu'>style_roxygen_example_snippet</span>(<span class='no'>code_snippet</span>, <span class='no'>transformers</span>, <span class='no'>is_dont</span>)</pre>
+    <pre class="usage"><span class='fu'>style_roxygen_example_snippet</span>(
+  <span class='no'>code_snippet</span>,
+  <span class='no'>transformers</span>,
+  <span class='no'>is_dont</span>,
+  <span class='no'>base_indention</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,6 +204,13 @@
       <th>is_dont</th>
       <td><p>Whether the snippet to process is a dontrun, dontshow,
 donttest segment or not.</p></td>
+    </tr>
+    <tr>
+      <th>base_indention</th>
+      <td><p>Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a <code>base_indention</code> spaces before the code in the case
+multi-line strings are present. See 'Examples'.</p></td>
     </tr>
     </table>
 

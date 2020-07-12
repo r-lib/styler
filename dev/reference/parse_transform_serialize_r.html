@@ -182,7 +182,12 @@
     <p>Wrapper function for the common three operations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_transform_serialize_r</span>(<span class='no'>text</span>, <span class='no'>transformers</span>, <span class='kw'>warn_empty</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>parse_transform_serialize_r</span>(
+  <span class='no'>text</span>,
+  <span class='no'>transformers</span>,
+  <span class='no'>base_indention</span>,
+  <span class='kw'>warn_empty</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,6 +199,13 @@
     <tr>
       <th>transformers</th>
       <td><p>A list of <em>named</em> transformer functions</p></td>
+    </tr>
+    <tr>
+      <th>base_indention</th>
+      <td><p>Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a <code>base_indention</code> spaces before the code in the case
+multi-line strings are present. See 'Examples'.</p></td>
     </tr>
     <tr>
       <th>warn_empty</th>
