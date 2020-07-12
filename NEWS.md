@@ -1,15 +1,23 @@
 # styler 1.3.2.9000 (Development)
 
+## API Changes
+
+- `style_file()` and friends gain argument `dry` to control if changes should 
+  be applied to files or not (#634).
+
+- `style_file()` and friends gain argument `base_indention` (defaulting to 0) to
+  control by how much the output code is indented (#649).
+  
+- added an option (`styler.test_dir_writeable`) that changes test behavior
+  to not directly modify test files in the current directory (#548).
+
+- added an option for disabling all communication when using the package
+  (`styler.quiet`) (#640).
+
 ## Major changes
 
 - blank lines in function calls and headers are now removed, for the former only 
   when there are no comments before or after the blank line (#629, #630, #635).
-- added an option (`styler.test_dir_writeable`) that changes test behavior
-  to not directly modify test files in the current directory (#548).
-- `style_file()` and friends gain argument `dry` to control if changes should 
-  be applied to files or not (#634).
-- added an option for disabling all communication when using the package
-  (`styler.quiet`) (#640).
 
 ## Minor chnages and fixes
 
