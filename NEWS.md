@@ -19,7 +19,7 @@
 - blank lines in function calls and headers are now removed, for the former only 
   when there are no comments before or after the blank line (#629, #630, #635).
 
-## Minor chnages and fixes
+## Minor changes and fixes
 
 - cache is now correctly invalidated when style guide arguments change (#647).
 - empty lines are now removed between pipes (#645).
