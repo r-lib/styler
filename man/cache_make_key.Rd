@@ -4,7 +4,7 @@
 \alias{cache_make_key}
 \title{Make a key for \code{R.cache}}
 \usage{
-cache_make_key(text, transformers)
+cache_make_key(text, transformers, more_specs)
 }
 \arguments{
 \item{text}{Code to create a cache for. This should be styled text, as the
@@ -13,6 +13,10 @@ approach used by styler does not cache input, but styled code.}
 \item{transformers}{A list of transformer functions, because we can only
 know if text is already correct if we know which transformer function it
 should be styled with.}
+
+\item{more_args}{A named vector coercible to it character that determine the
+styling but are style guide independent, such as \code{include_roxygen_examples}
+or \code{base_indention}.}
 }
 \description{
 This is used to determine if caching already corresponds to a style guide.
@@ -35,7 +39,7 @@ without changing version number of name at the same time.
 Remaining problem: \code{purrr::partial()} calls will render generic code, e.g.
 see \code{as.character(list(purrr::partial(sum, x = 4)))}. For that reason,
 all arguments passed to a \code{purrr::partial()} call must be put in the
-style guide under \code{more_specs}.
+style guide under \code{more_specs_style_guide}.
 }
 }
 \section{Experiments}{

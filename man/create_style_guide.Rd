@@ -14,7 +14,7 @@ create_style_guide(
   reindention = tidyverse_reindention(),
   style_guide_name = NULL,
   style_guide_version = NULL,
-  more_specs = NULL
+  more_specs_style_guide = NULL
 )
 }
 \arguments{
@@ -48,8 +48,9 @@ attribute inside the created style guide, for example for caching. This
 should correspond to the version of the R package that exports the
 style guide.}
 
-\item{more_specs}{Named vector (coercible to character) specifying arguments
-\code{args} in \verb{transformer <- list(t1 = purrr::partial(f, arg)} because when
+\item{more_specs_style_guide}{Named vector (coercible to character)
+specifying arguments \code{args} in
+\verb{transformer <- list(t1 = purrr::partial(f, arg)} because when
 such functions are converted to characters in \code{\link[=cache_make_key]{cache_make_key()}},
 they will yield generic code and we loose the specific value of \code{arg} (see
 \code{\link[=cache_make_key]{cache_make_key()}}), even when unquoting these inputs with \verb{!!}

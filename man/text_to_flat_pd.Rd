@@ -4,13 +4,16 @@
 \alias{text_to_flat_pd}
 \title{Creates a flat parse table with minimal initialization}
 \usage{
-text_to_flat_pd(text, transformers)
+text_to_flat_pd(text, transformers, more_specs)
 }
 \arguments{
 \item{text}{The text to parse.}
 
-\item{transformers}{A list with transformer functions, used to check if
-the code is cached.}
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
+
+\item{more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
 }
 \description{
 Creates a flat parse table with minimal initialization and makes the parse

@@ -1,6 +1,7 @@
 test_that("roxzgen code examples are written to cache as both individual expressions and as whole text", {
   on.exit(clear_testthat_cache())
   fresh_testthat_cache()
+  more_specs <- cache_more_specs_default()
   text <- c(
     "#' Comment",
     "#'",
@@ -20,25 +21,25 @@ test_that("roxzgen code examples are written to cache as both individual express
   # 2 roxzgen individula
   # total: 6
   expect_true(
-    is_cached(as.character(styled), tidyverse_style())
+    is_cached(as.character(styled), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
-    is_cached(c("1 + 1", "f(x)"), tidyverse_style())
+    is_cached(c("1 + 1", "f(x)"), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
-    is_cached(c("1 + 1"), tidyverse_style())
+    is_cached(c("1 + 1"), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
-    is_cached(c("f(x)"), tidyverse_style())
+    is_cached(c("f(x)"), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
-    is_cached(c("NULL"), tidyverse_style())
+    is_cached(c("NULL"), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
-    is_cached(c("103"), tidyverse_style())
+    is_cached(c("103"), tidyverse_style(), more_specs = more_specs)
   )
   expect_false(
-    is_cached(c("f(x )"), tidyverse_style())
+    is_cached(c("f(x )"), tidyverse_style(), more_specs = more_specs)
   )
 })
 

@@ -77,7 +77,13 @@ style_roxygen_example_snippet <- function(code_snippet,
   code_snippet <- post_parse_roxygen(code_snippet)
 
   cache_is_active <- cache_is_activated()
-  is_cached <- is_cached(code_snippet, transformers)
+  is_cached <- is_cached(
+    code_snippet, transformers,
+    cache_more_specs(
+      include_roxygen_examples = TRUE,
+      base_indention = base_indention
+    )
+  )
   if (!is_cached || !cache_is_active) {
     code_snippet <- code_snippet %>%
       parse_transform_serialize_r(transformers,
@@ -88,7 +94,12 @@ style_roxygen_example_snippet <- function(code_snippet,
   }
 
   if (!is_cached && cache_is_active) {
-    cache_write(code_snippet, transformers)
+    cache_write(
+      code_snippet, transformers,
+      cache_more_specs(
+        include_roxygen_examples = TRUE, base_indention = base_indention
+      )
+    )
   }
 
   if (is_dont) {

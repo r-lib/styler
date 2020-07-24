@@ -92,7 +92,13 @@ make_transformer <- function(transformers,
     should_use_cache <- cache_is_activated()
 
     if (should_use_cache) {
-      use_cache <- is_cached(text, transformers)
+      use_cache <- is_cached(
+        text, transformers,
+        cache_more_specs(
+          include_roxygen_examples = include_roxygen_examples,
+          base_indention = base_indention
+        )
+      )
     } else {
       use_cache <- FALSE
     }
@@ -111,7 +117,10 @@ make_transformer <- function(transformers,
           ~.
         )
       if (should_use_cache) {
-        cache_write(transformed_code, transformers)
+        cache_write(
+          transformed_code, transformers,
+          cache_more_specs(include_roxygen_examples, base_indention)
+        )
       }
       transformed_code
     } else {
@@ -202,9 +211,12 @@ parse_transform_serialize_r <- function(text,
                                         transformers,
                                         base_indention,
                                         warn_empty = TRUE) {
-  text <- assert_text(text)
-  pd_nested <- compute_parse_data_nested(text, transformers)
+  more_specs <- cache_more_specs(
+    include_roxygen_examples = TRUE, base_indention = base_indention
+  )
 
+  text <- assert_text(text)
+  pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
   blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {
@@ -228,7 +240,10 @@ parse_transform_serialize_r <- function(text,
   }
   text_out <- convert_newlines_to_linebreaks(text_out)
   if (cache_is_activated()) {
-    cache_by_expression(text_out, transformers)
+    cache_by_expression(
+      text_out, transformers,
+      more_specs = more_specs
+    )
   }
   text_out
 }

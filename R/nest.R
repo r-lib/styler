@@ -2,14 +2,15 @@
 #'
 #' Parses `text` to a flat parse table and subsequently changes its
 #' representation into a nested parse table with [nest_parse_data()].
-#' @param text A character vector to parse.
+#' @inheritParams text_to_flat_pd
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
 #' @importFrom purrr when
 #' @keywords internal
 compute_parse_data_nested <- function(text,
-                                      transformers) {
-  parse_data <- text_to_flat_pd(text, transformers)
+                                      transformers,
+                                      more_specs) {
+  parse_data <- text_to_flat_pd(text, transformers, more_specs = more_specs)
   env_add_stylerignore(parse_data)
   parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
@@ -37,12 +38,12 @@ compute_parse_data_nested <- function(text,
 #' Note that the parse table might be shallow if caching is enabled and some
 #' values are cached.
 #' @keywords internal
-text_to_flat_pd <- function(text, transformers) {
+text_to_flat_pd <- function(text, transformers, more_specs) {
   tokenize(text) %>%
     add_terminal_token_before() %>%
     add_terminal_token_after() %>%
     add_stylerignore() %>%
-    add_attributes_caching(transformers) %>%
+    add_attributes_caching(transformers, more_specs = more_specs) %>%
     drop_cached_children()
 }
 
@@ -274,18 +275,18 @@ add_terminal_token_before <- function(pd_flat) {
 #' [default_style_guide_attributes()] (when using [tidyverse_style()]) because
 #' for cached code, we don't build up the nested structure and leave it shallow
 #' (to speed up things), see also [drop_cached_children()].
-#' @param transformers A list with transformer functions, used to check if
-#'   the code is cached.
+#' @inheritParams is_cached
 #' @describeIn add_token_terminal Initializes `newlines` and `lag_newlines`.
 #' @keywords internal
-add_attributes_caching <- function(pd_flat, transformers) {
+add_attributes_caching <- function(pd_flat, transformers, more_specs) {
   pd_flat$block <- rep(NA, nrow(pd_flat))
   pd_flat$is_cached <- rep(FALSE, nrow(pd_flat))
   if (cache_is_activated()) {
     is_parent <- pd_flat$parent == 0
     pd_flat$is_cached[is_parent] <- map_lgl(
       pd_flat$text[pd_flat$parent == 0],
-      is_cached, transformers
+      is_cached, transformers,
+      more_specs = more_specs
     )
     is_comment <- pd_flat$token == "COMMENT"
     pd_flat$is_cached[is_comment] <- rep(FALSE, sum(is_comment))
