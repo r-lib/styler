@@ -88,6 +88,7 @@ md
 Müller
 mutli
 NUM
+oldrel
 os
 ourself
 packagemanager
@@ -98,6 +99,7 @@ parsesum
 pgkdown
 pkgapi
 pkgdown
+pkgs
 pos
 pre
 precommit
@@ -149,6 +151,7 @@ saamwerk
 saveRDS
 seealso
 sep
+sessioninfo
 setdiff
 setenv
 sprintf
