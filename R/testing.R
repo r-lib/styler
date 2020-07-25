@@ -339,8 +339,5 @@ fresh_testthat_cache <- function() {
 }
 
 cache_more_specs_default <- function() {
-  cache_more_specs(
-    include_roxygen_examples = TRUE,
-    base_indention = 0
-  )
+  cache_more_specs(include_roxygen_examples = TRUE, base_indention = 0)
 }

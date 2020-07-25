@@ -73,10 +73,11 @@ test_that("blank lines are correctly identified", {
   )
   # when not cached, all code in same block
   more_specs <- cache_more_specs_default()
-  pd_nested <- compute_parse_data_nested(text, tidyverse_style(), more_specs = more_specs)
-  cache_by_expression(
-    text, tidyverse_style(), more_specs = more_specs
+  pd_nested <- compute_parse_data_nested(text,
+    transformers = tidyverse_style(),
+    more_specs = more_specs
   )
+  cache_by_expression(text, tidyverse_style(), more_specs = more_specs)
   expect_equal(
     pd_nested$block, rep(1, 4)
   )

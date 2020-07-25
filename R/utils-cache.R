@@ -25,7 +25,6 @@ is_cached <- function(text,
                       transformers,
                       more_specs,
                       cache_dir = cache_dir_default()) {
-
   R.cache::generateCache(
     key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir
@@ -166,8 +165,6 @@ cache_by_expression <- function(text,
 #' @inheritParams cache_make_key
 #' @keywords internal
 cache_write <- function(text, transformers, more_specs) {
-  # print(c("writing cahce for text: ", substr(paste0(text, collapse = "\n"), 1, 15)))
-  # print(c("more_specs: ", more_specs))
   R.cache::generateCache(
     key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir_default()

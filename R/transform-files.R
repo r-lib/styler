@@ -240,10 +240,7 @@ parse_transform_serialize_r <- function(text,
   }
   text_out <- convert_newlines_to_linebreaks(text_out)
   if (cache_is_activated()) {
-    cache_by_expression(
-      text_out, transformers,
-      more_specs = more_specs
-    )
+    cache_by_expression(text_out, transformers, more_specs = more_specs)
   }
   text_out
 }

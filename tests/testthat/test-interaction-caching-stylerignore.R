@@ -154,7 +154,7 @@ test_that("does not cache stylerignore sequences", {
     is_cached(
       "1+1",
       tidyverse_style(),
-      more_specs = cache_more_specs(include_roxygen_examples = FALSE, base_indention = 0)
+      more_specs = cache_more_specs_default()
     )
   )
 })
