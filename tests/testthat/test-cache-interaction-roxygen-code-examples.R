@@ -56,5 +56,8 @@ test_that("roxzgen code examples are written to cache as whole expressions bring
   expect_gt(first["elapsed"], 6 * second["elapsed"])
 })
 
+test_that("cache is deactivated at end of caching related testthat file", {
+  expect_false(cache_is_activated())
+})
 
 # consider dropping transformer text from cache key to speed up.
