@@ -296,21 +296,21 @@ inspect the changes.</p>
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='st'>"styler"</span>, <span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".R"</span>)
 <span class='kw pkg'>xfun</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>write_utf8</a></span>(<span class='st'>"1++1"</span>, <span class='no'>file</span>)
 <span class='fu'>style_file</span>(<span class='no'>file</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJfyjJt/styler849c2309b3.R ℹ 
-#&gt; ───────────────────────────────────────────────────────────────────────────────
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpkTWIOB/styler7af364294e8.R ℹ 
+#&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	0	File unchanged.
 #&gt; ℹ 	1	File changed.
 #&gt; ✖ 	0	Styling threw an error.
-#&gt; ───────────────────────────────────────────────────────────────────────────────
+#&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Please review the changes carefully!</div><div class='input'><span class='fu'>style_file</span>(<span class='no'>file</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(<span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJfyjJt/styler849c2309b3.R ✔ 
-#&gt; ───────────────────────────────────────────────────────────────────────────────
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpkTWIOB/styler7af364294e8.R ✔ 
+#&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.
 #&gt; ℹ 	0	File changed.
 #&gt; ✖ 	0	Styling threw an error.
-#&gt; ───────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='kw pkg'>xfun</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>read_utf8</a></span>(<span class='no'>file</span>)</div><div class='output co'>#&gt; [1] "1 + +1"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>file</span>)</div></pre>
+#&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='kw pkg'>xfun</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>read_utf8</a></span>(<span class='no'>file</span>)</div><div class='output co'>#&gt; [1] "1 + +1"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>file</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
