@@ -19,3 +19,4 @@ revdep
 ^tests/testmanual$
 ^\.pre-commit-config\.yaml$
 ^brew\-log$
+^\.github$
