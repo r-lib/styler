@@ -126,13 +126,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="introducing_styler_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>An introduction to styler</h1>
                         <h4 class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2020-07-13</h4>
+            <h4 class="date">2020-07-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/introducing_styler.Rmd"><code>vignettes/introducing_styler.Rmd</code></a></small>
       <div class="hidden name"><code>introducing_styler.Rmd</code></div>
@@ -151,7 +151,7 @@
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"a=3; 2"</span>, <span class="kw">scope</span> <span class="kw">=</span> <span class="st">"tokens"</span>)</pre></body></html></div>
 <pre><code>a &lt;- 3
 2</code></pre>
-<p><code>scope</code> always includes less-invasive styling than the option chosen, e.g. <code>scope = "line_breaks"</code> includes styling spaces and indention in addition to line breaks.</p>
+<p><code>scope</code> always includes less-invasive styling than the option chosen, e.g. <code>scope = "line_breaks"</code> includes styling spaces and indention in addition to line breaks.</p>
 <p>We can also choose to style line breaks but not tokens:</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"if(x) {66 } else {a=3}"</span>, <span class="kw">scope</span> <span class="kw">=</span> <span class="st">"line_breaks"</span>)</pre></body></html></div>
 <pre><code>if (x) {

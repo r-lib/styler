@@ -126,13 +126,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="manipulating_nested_parse_data_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Manipulating the nested parse table</h1>
                         <h4 class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2020-07-13</h4>
+            <h4 class="date">2020-07-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/gsoc_proposal/manipulating_nested_parse_data.Rmd"><code>vignettes/gsoc_proposal/manipulating_nested_parse_data.Rmd</code></a></small>
       <div class="hidden name"><code>manipulating_nested_parse_data.Rmd</code></div>
@@ -167,7 +167,7 @@ visit_one
 <p>This comes with two advantages.</p>
 <ul>
 <li><p>We go through the whole structure only as many times as we call the visitor (instead of every *_nested() function going through it once, which is more efficient in terms of speed.</p></li>
-<li>We don’t need a *_nested() version of every function we want to apply to the parse tables, in particular the rules in R/rules.R</li>
+<li><p>We don’t need a *_nested() version of every function we want to apply to the parse tables, in particular the rules in R/rules.R</p></li>
 <li><p>We go through the whole structure only as many times as we call the visitor (instead of every *_nested() function going through it once), which is more efficient in terms of speed.</p></li>
 </ul>
 <p><code>create_filler()</code> was adapted to also initialize indention and lag_newlines.</p>

@@ -126,7 +126,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="detect-alignment_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Alignment detection</h1>
@@ -215,7 +215,7 @@
 <h3 class="hasAnchor">
 <a href="#technical-definition" class="anchor"></a>Technical definition</h3>
 <p>This section closely follows the implementation of the alignment detection and is mostly aimed at developers for understanding <em>styler</em> internals.</p>
-<p>Function calls are aligned if <strong>all</strong> of the following conditions hold (for all but the very first line (i.e. <code>call(</code> below):</p>
+<p>Function calls are aligned if <strong>all</strong> of the following conditions hold (for all but the very first line (i.e. <code>call(</code> below):</p>
 <ul>
 <li>all rows in first column have the same number of lag spaces. This basically means that the indention is identical for all columns (except for the closing brace if it is on its own line). The below example has one column, because the maximal number of commas on one line is one.</li>
 </ul>
@@ -281,8 +281,8 @@
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p>With <code>strict = FALSE</code>, the spacing would have been kept, however, <code>strict = FALSE</code> has a number of other implications because it is in general less invasive. For example, it would not add braces and line breaks to “if (TRUE) return()”.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>In the below example, the first argument of the first column is named (<code>p = 2</code>). The second argument of the first column is not (<code>31</code>).<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>With <code>strict = FALSE</code>, the spacing would have been kept, however, <code>strict = FALSE</code> has a number of other implications because it is in general less invasive. For example, it would not add braces and line breaks to “if (TRUE) return()”.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>In the below example, the first argument of the first column is named (<code>p = 2</code>). The second argument of the first column is not (<code>31</code>).<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
