@@ -18,15 +18,15 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}, ${{ matrix.config.installation_method }})
 
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-brew,   r: 'release', installation_method: 'brew'}
-          - {os: macOS-pip,   r: 'release', installation_method: 'pip'}
-          - {os: windows-pip, r: 'release', installation_method: 'pip'}
+          - {os: macOS-latest,   r: 'release', installation_method: 'brew'}
+          - {os: macOS-latest,   r: 'release', installation_method: 'pip'}
+          - {os: windows-latest, r: 'release', installation_method: 'pip'}
 #          - {os: ubuntu-16.04,   r: 'devel', installation_method: 'conda', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest", http-user-agent: "R/4.0.0 (ubuntu-16.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
 #          - {os: ubuntu-16.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
 #          - {os: ubuntu-16.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
@@ -70,7 +70,7 @@ jobs:
         run: brew install pre-commit
       - name: Install system dependencies (pip)
         if: matrix.config.installation_method == 'pip'
-        run: pip3 install pre-commit --user
+        run: pip install pre-commit --user
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
