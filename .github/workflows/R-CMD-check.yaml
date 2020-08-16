@@ -71,6 +71,10 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
+          # installation methods other than conda don't need reticulate
+          if (Sys.getenv("PRECOMMIT_INSTALLATION_METHOD") != 'conda') {
+            remove.packages('reticulate') 
+          }
         shell: Rscript {0}
 
       - name: Session info
