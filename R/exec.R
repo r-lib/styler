@@ -91,7 +91,7 @@ path_derive_precommit_exec_impl <- function(candidate) {
 
 path_derive_precommit_exec_linux <- function() {
   path_derive_precommit_exec_impl(
-    "~/.local/bin" # pip: https://unix.stackexchange.com/questions/240037/why-did-pip-install-a-package-into-local-bin
+    path_if_exist("~/.local/bin") # pip: https://unix.stackexchange.com/questions/240037/why-did-pip-install-a-package-into-local-bin
   )
 }
 
