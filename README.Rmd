@@ -15,15 +15,12 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![Build
-Status](https://travis-ci.org/lorenzwalthert/precommit.svg?branch=master)](https://travis-ci.org/lorenzwalthert/precommit)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/6xfoh8b4ik3pg6da/branch/master?svg=true)](https://ci.appveyor.com/project/lorenzwalthert/precommit/branch/master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.org/package=precommit)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
+[![R build status](https://github.com/lorenzwalthert/precommit/workflows/R-CMD-check/badge.svg)](https://github.com/lorenzwalthert/precommit/actions)
 <!-- badges: end -->
 
 [Pre-commit hooks](https://pre-commit.com) are tests that run each time you

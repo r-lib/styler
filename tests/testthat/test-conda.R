@@ -5,7 +5,7 @@ if (!on_cran()) {
   git2r::init(path = tempdir)
 
   test_that("can install pre-commit", {
-    skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
+    skip_if(not_conda())
     expect_error(install_precommit(), NA)
     expect_error(install_precommit(force = TRUE), NA)
   })
@@ -110,7 +110,7 @@ if (!on_cran()) {
   })
 
   test_that("Can uninstall (userly)", {
-    if (isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
+    if (not_conda()) {
       expect_error(
         uninstall_precommit(scope = "user", ask = "none", root = tempdir),
         "installed with conda"
@@ -128,12 +128,12 @@ if (!on_cran()) {
   })
 
   test_that("use_precommit fails when no user installation is found", {
-    skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
+    skip_if(not_conda())
     expect_error(use_precommit(open = FALSE, root = tempdir), "installed on your system")
   })
 
   test_that("can install pre-commit with remote config", {
-    if (!isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
+    if (!not_conda()) {
       expect_error(install_precommit(), NA)
     }
 
@@ -149,7 +149,7 @@ if (!on_cran()) {
   })
 
   test_that("fails gracefully when there are", {
-    if (!isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
+    if (!not_conda()) {
       expect_error(install_precommit(), NA)
     }
     withr::with_dir(
@@ -168,7 +168,7 @@ if (!on_cran()) {
   })
 
   test_that("fails gracefully when reticulate is not available", {
-    if (isTRUE(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))) {
+    if (not_conda()) {
       expect_error(install_precommit(), "Please install the R package reticulate")
     }
   })

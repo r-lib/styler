@@ -123,3 +123,9 @@ run_test_impl <- function(path_executable,
 on_cran <- function() {
   !identical(Sys.getenv("NOT_CRAN"), "true")
 }
+
+#' The testing environment does not use a conda environment if the env variable
+#' PRECOMMIT_INSTALLATION_METHOD is not 'conda'.
+not_conda <- function() {
+  Sys.getenv("PRECOMMIT_INSTALLATION_METHOD") != "conda"
+}
