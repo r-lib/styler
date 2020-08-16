@@ -96,8 +96,31 @@ path_derive_precommit_exec_linux <- function() {
 }
 
 path_derive_precommit_exec_win <- function() {
-  path_derive_precommit_exec_impl(fs::path_home("AppData/Roaming/Python/Scripts"))
+  path_derive_precommit_exec_impl(
+    path_derive_precommit_exec_win_python3plus_base(), # Python3+
+    fs::path_home("AppData/Roaming/Python/Scripts") # default python
+  )
 }
+
+#' Where are executables on Windows for Python 3 and higher?
+#'
+#' Heuristic to determine the directory where the pre-commit executable on
+#' Windows lives for Python versions 3 and above.
+#' @keywords internal
+path_derive_precommit_exec_win_python3plus_base <- function() {
+  # exclude default Python
+  candidates_python3plus <- path_derive_precommit_exec_win_python3plus_candidates()
+  sorted_versions <- gsub(".*/Python", "", candidates_python3plus) %>%
+    as.numeric() %>%
+    sort(decreasing = TRUE)
+  fs::path(fs::path_home("AppData/Roaming/Python"), paste0("Python", sorted_versions), "Scripts")
+}
+
+# Only reason to capsule this: mock test.
+path_derive_precommit_exec_win_python3plus_candidates <- function() {
+  fs::dir_ls(fs::path_home("AppData/Roaming/Python/"), regexp = "Python[0-9]+$")
+}
+
 
 path_derive_precommit_exec_macOS <- function() {
   c(
