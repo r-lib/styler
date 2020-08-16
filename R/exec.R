@@ -96,10 +96,10 @@ path_derive_precommit_exec_linux <- function() {
 }
 
 path_derive_precommit_exec_win <- function() {
-  path_derive_precommit_exec_impl(
+  path_derive_precommit_exec_impl(c(
     path_derive_precommit_exec_win_python3plus_base(), # Python3+
     fs::path_home("AppData/Roaming/Python/Scripts") # default python
-  )
+  ))
 }
 
 #' Where are executables on Windows for Python 3 and higher?
