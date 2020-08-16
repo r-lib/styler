@@ -109,27 +109,24 @@ path_derive_precommit_exec_win <- function() {
 #' @keywords internal
 path_derive_precommit_exec_win_python3plus_base <- function() {
   # exclude default Python
-  candidates_python3plus <- path_derive_precommit_exec_win_python3plus_candidates()
-  sorted_versions <- gsub(".*/Python", "", candidates_python3plus) %>%
-    as.numeric() %>%
-    sort(decreasing = TRUE)
-  fs::path(fs::path_home("AppData/Roaming/Python"), paste0("Python", sorted_versions), "Scripts")
+  path_derive_precommit_exec_win_python3plus_candidates() %>%
+    sort(decreasing = TRUE) %>%
+    fs::path("Scripts")
 }
 
 # Only reason to capsule this: mock test.
 path_derive_precommit_exec_win_python3plus_candidates <- function() {
-  fs::dir_ls(fs::path_home("AppData/Roaming/Python/"), regexp = "Python[0-9]+$")
+  fs::dir_ls(path_if_exist(fs::path_home("AppData/Roaming/Python/"), regexp = "Python[0-9]+$"))
 }
 
 
 path_derive_precommit_exec_macOS <- function() {
   c(
-    fs::path(fs::dir_ls(path_if_exist("~/Library/Python/")), "bin"), # pip
+    fs::path(sort(fs::dir_ls(path_if_exist("~/Library/Python/")), decreasing = TRUE), "bin"), # pip
     "/usr/local/bin" # homebrew
   ) %>%
     path_derive_precommit_exec_impl()
 }
-
 
 #' Derive the pre-commit executable from the path
 #'
