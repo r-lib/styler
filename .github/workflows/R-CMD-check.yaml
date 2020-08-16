@@ -70,7 +70,9 @@ jobs:
         run: brew install pre-commit
       - name: Install system dependencies (pip)
         if: matrix.config.installation_method == 'pip'
-        run: pip3 install setuptools pre-commit --user
+        run: |
+          pip3 install setuptools --user
+          pip3 install pre-commit --user
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
