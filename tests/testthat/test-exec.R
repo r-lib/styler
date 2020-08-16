@@ -1,6 +1,6 @@
 test_that("Path can be derived for windows Python >= 3.0", {
   paths_base <- with_mock(
-    path_derive_precommit_exec_win_python3plus_candidates = function() {
+    "precommit::path_derive_precommit_exec_win_python3plus_candidates" = function() {
       c(
         fs::path("C:/Users/runneradmin/AppData/Roaming/Python/Python35"),
         fs::path("C:/Users/runneradmin/AppData/Roaming/Python/Python37")
