@@ -26,7 +26,7 @@ jobs:
         config:
           # macOS
           - {os: macOS-latest,   r: 'release', installation_method: 'brew'}
-          - {os: macOS-latest,   r: 'release', installation_method: 'conda'}
+#           - {os: macOS-latest,   r: 'release', installation_method: 'conda'}
           - {os: macOS-latest,   r: 'release', installation_method: 'pip'}
           # Windows
           - {os: windows-latest, r: 'release', installation_method: 'pip'}
@@ -99,11 +99,6 @@ jobs:
         if: matrix.config.installation_method == 'conda'
         run: |
           reticulate::install_miniconda()
-          miniconda_global_cache <- "/usr/local/miniconda/"
-          if (dir.exists(miniconda_global_cache)) {
-            unlink(miniconda_global_cache, recursive = TRUE)
-          }
-          
         shell: Rscript {0}
       - name: Session info
         run: |
