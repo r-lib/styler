@@ -99,6 +99,11 @@ jobs:
         if: matrix.config.installation_method == 'conda'
         run: |
           reticulate::install_miniconda()
+          miniconda_global_cache <- "/usr/local/miniconda/"
+          if (dir.exists(miniconda_global_cache)) {
+            unlink(miniconda_global_cache, recursive = TRUE)
+          }
+          
         shell: Rscript {0}
       - name: Session info
         run: |
