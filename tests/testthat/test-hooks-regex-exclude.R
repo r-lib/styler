@@ -1,5 +1,5 @@
 test_that("exclude regex for spell check hook matches expected files", {
-  skip_if(as.logical(Sys.getenv("EXTERNAL_INSTALLATION")))
+  skip_if(not_conda())
   skip_if(on_cran())
   re <- reticulate::import("re")
   pattern <- readLines(system.file("pre-commit-hooks.yaml", package = "precommit")) %>%

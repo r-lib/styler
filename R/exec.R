@@ -91,22 +91,42 @@ path_derive_precommit_exec_impl <- function(candidate) {
 
 path_derive_precommit_exec_linux <- function() {
   path_derive_precommit_exec_impl(
-    "~/.local/bin" # pip: https://unix.stackexchange.com/questions/240037/why-did-pip-install-a-package-into-local-bin
+    path_if_exist(fs::path_home(".local/bin")) # 18.04 and 16.04 with pip3.
   )
 }
 
 path_derive_precommit_exec_win <- function() {
-  path_derive_precommit_exec_impl(fs::path_home("AppData/Roaming/Python/Scripts"))
+  path_derive_precommit_exec_impl(c(
+    path_derive_precommit_exec_win_python3plus_base(), # Python3+
+    fs::path_home("AppData/Roaming/Python/Scripts") # default python
+  ))
 }
+
+#' Where are executables on Windows for Python 3 and higher?
+#'
+#' Heuristic to determine the directory where the pre-commit executable on
+#' Windows lives for Python versions 3 and above.
+#' @keywords internal
+path_derive_precommit_exec_win_python3plus_base <- function() {
+  # exclude default Python
+  path_derive_precommit_exec_win_python3plus_candidates() %>%
+    sort(decreasing = TRUE) %>%
+    fs::path("Scripts")
+}
+
+# Only reason to capsule this: mock test.
+path_derive_precommit_exec_win_python3plus_candidates <- function() {
+  fs::dir_ls(path_if_exist(fs::path_home("AppData/Roaming/Python/"), regexp = "Python[0-9]+$"))
+}
+
 
 path_derive_precommit_exec_macOS <- function() {
   c(
-    fs::path(fs::dir_ls(path_if_exist("~/Library/Python/")), "bin"), # pip
+    fs::path(sort(fs::dir_ls(path_if_exist("~/Library/Python/")), decreasing = TRUE), "bin"), # pip
     "/usr/local/bin" # homebrew
   ) %>%
     path_derive_precommit_exec_impl()
 }
-
 
 #' Derive the pre-commit executable from the path
 #'

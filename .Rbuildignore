@@ -16,3 +16,4 @@
 ^inst/WORDLIST$
 ^inst/hooks-config-to-inst$
 ^cran-comments\.md$
+^\.github$

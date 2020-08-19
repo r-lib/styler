@@ -6,7 +6,7 @@ repos:
     rev: v0.1.2
     hooks: 
     -   id: style-files
-        args: [--style_pkg=styler, '--style_transformers=tidyverse_style(scope = "tokens")']
+        args: [--style_pkg=styler, '--style_fun=tidyverse_style']
         exclude: '^tests/testthat/.*/*\.R'
     -   id: roxygenize
     # codemeta must be above use-tidy-description when both are used
@@ -32,7 +32,8 @@ repos:
           .*\.rds|
           .*\.Rds|
           .*\.sh|
-          .*\.RData
+          .*\.RData|
+          \.github/workflows/.*
           )$
     -   id: readme-rmd-rendered
     -   id: parsable-R
