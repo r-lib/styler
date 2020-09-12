@@ -8,7 +8,7 @@ Caching makes styler faster on repeated styling. It does not cache input
 but output code. That means if you style code that already complies to a
 style guide and you have previously styled that code, it will be quicker.
 Code is cached by expression and the cache is shared across all APIs (e.g.
-\code{style_text()} and Addin.
+\code{style_text()} and Addin).
 }
 \section{Setup}{
 

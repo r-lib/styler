@@ -26,7 +26,7 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' but output code. That means if you style code that already complies to a
 #' style guide and you have previously styled that code, it will be quicker.
 #' Code is cached by expression and the cache is shared across all APIs (e.g.
-#' `style_text()` and Addin.
+#' `style_text()` and Addin).
 #'
 #' @section Setup:
 #' styler by default uses caching via the `{R.cache}` package. You will be
