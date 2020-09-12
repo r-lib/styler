@@ -9,9 +9,12 @@ AST
 aut
 backport
 benchmarking
+bootswatch
 BugReports
 cancelling
+cff
 chnages
+ci
 cli
 CMD
 codecov
@@ -25,9 +28,11 @@ cran
 cre
 dec
 deps
+desc
 dev
 devtools
 dir
+docsearch
 dont
 dontrun
 dontshow
@@ -87,6 +92,8 @@ magrittr
 md
 Müller
 mutli
+navbar
+netlify
 NUM
 oldrel
 os
@@ -94,6 +101,7 @@ ourself
 packagemanager
 packrat
 pandoc
+params
 parsable
 parsesum
 pgkdown
@@ -152,6 +160,7 @@ saveRDS
 seealso
 sep
 sessioninfo
+setCacheRootPath
 setdiff
 setenv
 sprintf
@@ -175,6 +184,7 @@ tidyeval
 tidyr
 tidyverse
 Tidyverse
+travis
 ubuntu
 ui
 uncached
@@ -192,6 +202,7 @@ walthert
 Walthert
 withr
 writeLines
+www
 xenial
 xfun
 Xie
