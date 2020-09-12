@@ -57,23 +57,21 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/caching.html">Caching</a>
-    </li>
+<li class="divider">
+    <li class="dropdown-header">End-users</li>
     <li>
-      <a href="articles/customizing_styler.html">Customizing styler</a>
+      <a href="articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="articles/detect-alignment.html">Alignment detection</a>
     </li>
+    <li class="divider">
+    <li class="dropdown-header">Developers</li>
     <li>
-      <a href="articles/gsoc_proposal/data_structures.html">Data Structures</a>
+      <a href="articles/caching.html">Caching</a>
     </li>
     <li>
-      <a href="articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="articles/introducing_styler.html">An introduction to styler</a>
+      <a href="articles/customizing_styler.html">Customizing styler</a>
     </li>
     <li>
       <a href="articles/performance_improvements.html">Performance Improvements</a>
@@ -143,22 +141,28 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the package from CRAN.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"styler"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"styler"</span>)
+</pre></div>
 <p>If you don’t use styler interactively (i.e. not from the R prompt or RStudio Addin), make sure you authorize <code>{R.cache}</code> once to set up a permanent cache. If you use it interactively, you will be asked to grant this permission once. See <code><a href="reference/caching.html">?caching</a></code> for details.</p>
 <p>Or get the development version from GitHub:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("remotes")</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-lib/styler"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># install.packages("remotes")</span>
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-lib/styler"</span>)
+</pre></div>
 </div>
 <div id="api" class="section level2">
 <h2 class="hasAnchor">
 <a href="#api" class="anchor"></a>API</h2>
 <p>You can style a simple character vector of code with <code><a href="reference/style_text.html">style_text()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"styler"</span>)
-<span class="no">ugly_code</span> <span class="kw">&lt;-</span> <span class="st">"a=function( x){1+1}           "</span>
-<span class="fu"><a href="reference/style_text.html">style_text</a></span>(<span class="no">ugly_code</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/r-lib/styler">"styler"</a></span>)
+<span class="kw">ugly_code</span> <span class="op">&lt;-</span> <span class="st">"a=function( x){1+1}           "</span>
+<span class="fu"><a href="reference/style_text.html">style_text</a></span>(<span class="kw">ugly_code</span>)
 <span class="co">#&gt; a &lt;- function(x) {</span>
 <span class="co">#&gt;   1 + 1</span>
-<span class="co">#&gt; }</span></pre></div>
+<span class="co">#&gt; }</span>
+</pre></div>
 <p>There are a few variants of <code><a href="reference/style_text.html">style_text()</a></code>:</p>
 <ul>
 <li><p><code><a href="reference/style_file.html">style_file()</a></code> styles .R, .Rmd .Rnw and .Rprofile, files.</p></li>
@@ -178,15 +182,17 @@
 <li><p>spaces, indention and line breaks.</p></li>
 <li><p>spaces, indention, line breaks and tokens.</p></li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb4"><pre class="r"><span class="no">ugly_code</span> <span class="kw">&lt;-</span> <span class="st">"a=function( x){1+1}           "</span>
-<span class="fu"><a href="reference/style_text.html">style_text</a></span>(<span class="no">ugly_code</span>, <span class="kw">scope</span> <span class="kw">=</span> <span class="st">"spaces"</span>)
-<span class="co">#&gt; a = function(x) {1 + 1}</span></pre></div>
+<!-- end list --><div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">ugly_code</span> <span class="op">&lt;-</span> <span class="st">"a=function( x){1+1}           "</span>
+<span class="fu"><a href="reference/style_text.html">style_text</a></span>(<span class="kw">ugly_code</span>, scope = <span class="st">"spaces"</span>)
+<span class="co">#&gt; a = function(x) {1 + 1}</span>
+</pre></div>
 <p>Note that compared to the default used above <code>scope = "tokens"</code>:</p>
 <ul>
 <li><p>no line breaks were added.</p></li>
-<li><p><code>&lt;-</code> was not replaced with <code>=</code>.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> was not replaced with <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>.</p></li>
 </ul>
-<p>While spaces still got styled (around <code>=</code> in <code>(x)</code>).</p>
+<p>While spaces still got styled (around <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> in <code>(x)</code>).</p>
 <p>This was just the tip of the iceberg. To learn more about customization options with the tidyverse style guide, see the <a href="https://styler.r-lib.org/reference/tidyverse_style.html">help file for `tidyverse_style</a> for a quick overview or the <a href="https://styler.r-lib.org/articles/introducing_styler.html">introductory vignette</a>.</p>
 </div>
 <div id="features" class="section level2">
@@ -226,7 +232,9 @@
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>Please have a look at <code>CONTRIBUTING.md</code>, in particular, make sure to use the pre-commit hooks and if you skip a hook, describe why in the PR. See the <code>{precommit}</code> <a href="https://github.com/lorenzwalthert/precommit">README.md</a> on how to install the pre-commit framework and the R package on your system and then run</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="kw pkg">precommit</span><span class="kw ns">::</span><span class="fu">use_precommit</span>()</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">precommit</span>::<span class="fu">use_precommit</span>()
+</pre></div>
 <p>to make sure the hooks are activated in your local styler clone.</p>
 </div>
 </div>
@@ -285,7 +293,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

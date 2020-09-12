@@ -101,23 +101,21 @@ few illustrative examples below." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -215,7 +213,8 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
   # styler: on
   1+1
   "</span>
-)</div><div class='output co'>#&gt; 
+)
+</div><div class='output co'>#&gt; 
 #&gt; <span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span>
 #&gt;   </span><span style='color: #555555;font-style: italic;'># styler: off</span><span>
 #&gt;   </span><span style='color: #0000BB;'>1</span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span>
@@ -224,7 +223,7 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
 <span class='co'># if there is a stop marker before a start marker, styler won't be able</span>
 <span class='co'># to figure out which lines you want to ignore and won't ignore anything,</span>
 <span class='co'># issuing a warning.</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'><a href='style_text.html'>style_text</a></span>(
   <span class='st'>"
   1+1
@@ -234,7 +233,9 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
   1+1
   "</span>
 )
-}</div></span></pre>
+}
+
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -250,7 +251,7 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -110,23 +110,21 @@ active file.
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -212,9 +210,22 @@ active file.</p></li>
 </ul>
 
 </div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p><strong>Maintainer</strong>: Lorenz Walthert <a href='mailto:lorenz.walthert@icloud.com'>lorenz.walthert@icloud.com</a></p>
+<p>Authors:</p><ul>
+<li><p>Kirill Müller <a href='mailto:krlmlr+r@mailbox.org'>krlmlr+r@mailbox.org</a></p></li>
+</ul>
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"call( 1)"</span>)</div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>1</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"1    + 1"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'>1</span><span>    </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"a%&gt;%b"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"spaces"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b</div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"a%&gt;%b; a"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"line_breaks"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b; a</div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"a%&gt;%b; a"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"tokens"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> </span><span style='color: #00BBBB;'>b</span><span style='color: #BBBB00;'>()</span><span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"call( 1)"</span>)
+</div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>1</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"1    + 1"</span>, strict = <span class='fl'>FALSE</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'>1</span><span>    </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"a%&gt;%b"</span>, scope = <span class='st'>"spaces"</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b</div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"a%&gt;%b; a"</span>, scope = <span class='st'>"line_breaks"</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b; a</div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"a%&gt;%b; a"</span>, scope = <span class='st'>"tokens"</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> </span><span style='color: #00BBBB;'>b</span><span style='color: #BBBB00;'>()</span><span>
 #&gt; a</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -231,7 +242,7 @@ active file.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

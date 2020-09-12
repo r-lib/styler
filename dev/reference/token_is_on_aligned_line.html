@@ -102,23 +102,21 @@ recycled conveniently later if needed as a vector with length &amp;gt; 1." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -186,7 +184,7 @@ function only checks for alignment of function calls. This can be
 recycled conveniently later if needed as a vector with length &gt; 1.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>token_is_on_aligned_line</span>(<span class='no'>pd_flat</span>)</pre>
+    <pre class="usage"><span class='fu'>token_is_on_aligned_line</span>(<span class='kw'>pd_flat</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,7 +200,7 @@ recycled conveniently later if needed as a vector with length &gt; 1.</p>
     <p>Multiple lines are called aligned if the following conditions hold for all
 but the first line of the expression:</p><ul>
 <li><p>lag spaces of column 1 must agree.</p></li>
-<li><p>spacing around comma (0 before, &gt; 1 after) and spacing around <code>=</code> (at least
+<li><p>spacing around comma (0 before, &gt; 1 after) and spacing around <code><a href='https://rdrr.io/r/base/assignOps.html'>=</a></code> (at least
 one around).</p></li>
 <li><p>all positions of commas of col &gt; 2 must agree (needs recursive creation of
 <code>text</code>).</p></li>
@@ -219,20 +217,21 @@ sure we can stop as soon as we found that columns are not aligned.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"magrittr"</span>)
-<span class='kw pkg'>withr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/withr/man/with_options.html'>with_options</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>styler.cache_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>), <span class='co'># temporarily deactivate cache</span>
+<span class='kw'>withr</span>::<span class='fu'><a href='https://withr.r-lib.org/reference/with_options.html'>with_options</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(styler.cache_name = <span class='kw'>NULL</span>), <span class='co'># temporarily deactivate cache</span>
   {
-<span class='no'>transformers</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>()
-<span class='no'>pd_nested</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='compute_parse_data_nested.html'>compute_parse_data_nested</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+<span class='kw'>transformers</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>()
+<span class='kw'>pd_nested</span> <span class='op'>&lt;-</span> <span class='kw'>styler</span>:::<span class='fu'><a href='compute_parse_data_nested.html'>compute_parse_data_nested</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='st'>"call("</span>,
   <span class='st'>"  ab = 1,"</span>,
   <span class='st'>"  a  = 2"</span>,
   <span class='st'>")"</span>
-)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='visit.html'>post_visit</a></span>(<span class='no'>transformers</span>$<span class='no'>initialize</span>)
-<span class='no'>nest</span> <span class='kw'>&lt;-</span> <span class='no'>pd_nested</span>$<span class='no'>child</span><span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'>token_is_on_aligned_line</span>(<span class='no'>nest</span>)
-})</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+)) <span class='op'>%&gt;%</span>
+  <span class='kw'>styler</span>:::<span class='fu'><a href='visit.html'>post_visit</a></span>(<span class='kw'>transformers</span><span class='op'>$</span><span class='kw'>initialize</span>)
+<span class='kw'>nest</span> <span class='op'>&lt;-</span> <span class='kw'>pd_nested</span><span class='op'>$</span><span class='kw'>child</span>[[<span class='fl'>1</span>]]
+<span class='kw'>styler</span>:::<span class='fu'>token_is_on_aligned_line</span>(<span class='kw'>nest</span>)
+})
+</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -248,7 +247,7 @@ sure we can stop as soon as we found that columns are not aligned.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

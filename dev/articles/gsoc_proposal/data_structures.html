@@ -56,23 +56,21 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/caching.html">Caching</a>
-    </li>
+<li class="divider">
+    <li class="dropdown-header">End-users</li>
     <li>
-      <a href="../../articles/customizing_styler.html">Customizing styler</a>
+      <a href="../../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../../articles/detect-alignment.html">Alignment detection</a>
     </li>
+    <li class="divider">
+    <li class="dropdown-header">Developers</li>
     <li>
-      <a href="../../articles/gsoc_proposal/data_structures.html">Data Structures</a>
+      <a href="../../articles/caching.html">Caching</a>
     </li>
     <li>
-      <a href="../../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../../articles/introducing_styler.html">An introduction to styler</a>
+      <a href="../../articles/customizing_styler.html">Customizing styler</a>
     </li>
     <li>
       <a href="../../articles/performance_improvements.html">Performance Improvements</a>
@@ -132,7 +130,7 @@
       <h1 data-toc-skip>Data Structures</h1>
                         <h4 class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2020-08-12</h4>
+            <h4 class="date">2020-09-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/gsoc_proposal/data_structures.Rmd"><code>vignettes/gsoc_proposal/data_structures.Rmd</code></a></small>
       <div class="hidden name"><code>data_structures.Rmd</code></div>
@@ -149,7 +147,7 @@
 <h2 class="hasAnchor">
 <a href="#status-quo---the-flat-approach" class="anchor"></a>Status quo - the flat approach</h2>
 <p>Roughly speaking, a string containing code to be formatted is parsed with <code>parse</code> and the output is passed to <code>getParseData</code> in order to obtain a parse table with detailed information about every token. For a simple example string “<code>a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }</code>” to be formatted, the parse table on which <code>styler</code> performs the manipulations looks similar to the one presented below.</p>
-<pre><code><a href="https://rdrr.io/pkg/styler/man">library("styler")
+<pre><code><a href="https://github.com/r-lib/styler">library("styler")
 library("dplyr")
 
 code &lt;- "a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"
@@ -278,7 +276,7 @@ serialize(x) %&gt;% unlist
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

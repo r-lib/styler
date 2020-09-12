@@ -103,23 +103,21 @@ a line are of concern." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -188,7 +186,7 @@ already embedded in the column <code>lag_spaces</code>, only tokens at the begin
 a line are of concern.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>find_tokens_to_update</span>(<span class='no'>flattened_pd</span>, <span class='no'>target_token</span>)</pre>
+    <pre class="usage"><span class='fu'>find_tokens_to_update</span>(<span class='kw'>flattened_pd</span>, <span class='kw'>target_token</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -212,13 +210,15 @@ should be applied to other tokens.</p></td>
     <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"function(a =
 b,
 dd
-) {}"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"indention"</span>)</div><div class='output co'>#&gt; <span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span><span>a =
+) {}"</span>, scope = <span class='st'>"indention"</span>)
+</div><div class='output co'>#&gt; <span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span><span>a =
 #&gt;            b,
 #&gt;          dd
 #&gt; </span><span style='color: #BBBB00;'>)</span><span> </span><span style='color: #BBBB00;'>{}</span><span></div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"function(a,
 b,
 dd
-) {}"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"indention"</span>)</div><div class='output co'>#&gt; </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span><span>a,
+) {}"</span>, scope = <span class='st'>"indention"</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span><span>a,
 #&gt;          b,
 #&gt;          dd
 #&gt; </span><span style='color: #BBBB00;'>)</span><span> </span><span style='color: #BBBB00;'>{}</span><span></div></span></pre>
@@ -237,7 +237,7 @@ dd
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

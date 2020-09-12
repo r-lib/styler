@@ -99,23 +99,21 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="articles/performance_improvements.html">Performance Improvements</a>
@@ -197,7 +195,7 @@
 <p><code>devtools::load_all()</code></p>
 <p><code><a href="https://rdrr.io/r/base/debug.html">debug(style_text)</a></code></p>
 <p><code><a href="reference/style_text.html">style_text("call(1, 2 + 1)")</a></code></p>
-<p>Go broad before you go deep. Before going into the very deep layers of function calls of <code><a href="reference/style_text.html">style_text()</a></code>, try to understand that <code><a href="reference/style_text.html">style_text()</a></code> consists of a few function calls only. Go into each of them and try to understand one layer deep. That is, try to understand what <code><a href="reference/make_transformer.html">make_transformer()</a></code> does by reading the names of the functions that get called, the name of the objects that are created by assigning the output of these function calls. Before looking into a functions source code, look at the documentation for that function. All internal important functions are documented and documentation is available also for unexported objects via <code>?</code> (if you did <code>devtools::load_all()</code>. Then, go into <code>parse_transform_serialize()</code> and so on.</p>
+<p>Go broad before you go deep. Before going into the very deep layers of function calls of <code><a href="reference/style_text.html">style_text()</a></code>, try to understand that <code><a href="reference/style_text.html">style_text()</a></code> consists of a few function calls only. Go into each of them and try to understand one layer deep. That is, try to understand what <code><a href="reference/make_transformer.html">make_transformer()</a></code> does by reading the names of the functions that get called, the name of the objects that are created by assigning the output of these function calls. Before looking into a functions source code, look at the documentation for that function. All internal important functions are documented and documentation is available also for unexported objects via <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code> (if you did <code>devtools::load_all()</code>. Then, go into <code>parse_transform_serialize()</code> and so on.</p>
 <p>To understand the most fundamental operation in styler, the manipulation of the columns related to spacing and line break information, pick a rule from <code>R/rules-*.R</code>, e.g. <code>R/rules-spacing</code>, add a break point to a rule and style a string where you think this rule will be active. Then, see what happens and how this rule is applied on each level of nesting.</p>
 </div>
 <div id="static-code-analysis" class="section level2">
@@ -437,7 +435,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

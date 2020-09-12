@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make a key for <code>R.cache</code> — cache_make_key • styler</title>
+<title>Make a key for R.cache — cache_make_key • styler</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="Make a key for <code>R.cache</code> — cache_make_key" />
+<meta property="og:title" content="Make a key for R.cache — cache_make_key" />
 <meta property="og:description" content="This is used to determine if caching already corresponds to a style guide." />
 
 
@@ -100,23 +100,21 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -182,7 +180,7 @@
     <p>This is used to determine if caching already corresponds to a style guide.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cache_make_key</span>(<span class='no'>text</span>, <span class='no'>transformers</span>)</pre>
+    <pre class="usage"><span class='fu'>cache_make_key</span>(<span class='kw'>text</span>, <span class='kw'>transformers</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -248,12 +246,15 @@ behavior.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>add</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>y</span>) {
-  <span class='no'>x</span> + <span class='no'>y</span>
+    <pre class="examples"><div class='input'><span class='kw'>add</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>, <span class='kw'>y</span>) {
+  <span class='kw'>x</span> <span class='op'>+</span> <span class='kw'>y</span>
 }
-<span class='no'>add1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span>(<span class='no'>add</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>add2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span>(<span class='no'>add</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='no'>add1</span>, <span class='no'>add2</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw pkg'>digest</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest</a></span>(<span class='no'>add1</span>), <span class='kw pkg'>digest</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest</a></span>(<span class='no'>add2</span>))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw pkg'>digest</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest</a></span>(<span class='kw pkg'>styler</span><span class='kw ns'>::</span><span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>()), <span class='kw pkg'>digest</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest</a></span>(<span class='kw pkg'>styler</span><span class='kw ns'>::</span><span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>()))</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+<span class='kw'>add1</span> <span class='op'>&lt;-</span> <span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span>(<span class='kw'>add</span>, x = <span class='fl'>1</span>)
+<span class='kw'>add2</span> <span class='op'>&lt;-</span> <span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span>(<span class='kw'>add</span>, x = <span class='fl'>1</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>add1</span>, <span class='kw'>add2</span>)
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>digest</span>::<span class='fu'><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest</a></span>(<span class='kw'>add1</span>), <span class='kw'>digest</span>::<span class='fu'><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest</a></span>(<span class='kw'>add2</span>))
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>digest</span>::<span class='fu'><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest</a></span>(<span class='kw'>styler</span>::<span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>()), <span class='kw'>digest</span>::<span class='fu'><a href='https://rdrr.io/pkg/digest/man/digest.html'>digest</a></span>(<span class='kw'>styler</span>::<span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>()))
+</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -269,7 +270,7 @@ behavior.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -99,23 +99,21 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -230,7 +228,7 @@
 <a href="#styler-131" class="anchor"></a>styler 1.3.1<small> 2020-02-13 </small>
 </h1>
 <p>Emergency release. In case multiple expressions are on one line and only some of them are cached, styler can remove code. To reach this state, some of the expressions must have been styled previously alone and the cache must be active. Example:</p>
-<pre><code><a href="https://rdrr.io/pkg/styler/man">library(styler)
+<pre><code><a href="https://github.com/r-lib/styler">library(styler)
 cache_activate()
 #&gt; Using cache 1.3.0 at ~/.Rcache/styler/1.3.0.
 style_text("1")
@@ -330,7 +328,7 @@ style_text("1 # comment")
 <ul>
 <li><p>Users can now control style configurations for styler Addins (<a href='https://github.com/r-lib/styler/issues/463'>#463</a>, <a href='https://github.com/r-lib/styler/issues/500'>#500</a>), using the <code>Set style</code> Addin. See <code><a href="../reference/styler_addins.html">?styler::styler_addins</a></code> for details.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/function.html">return()</a></code> is now always put in braces and put on a new line when used in a conditional statement (<a href='https://github.com/r-lib/styler/issues/492'>#492</a>).</p></li>
-<li><p><code>%&gt;%</code> almost always causes a line break now for <code>strict = TRUE</code> (<a href='https://github.com/r-lib/styler/issues/503'>#503</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></code> almost always causes a line break now for <code>strict = TRUE</code> (<a href='https://github.com/r-lib/styler/issues/503'>#503</a>).</p></li>
 </ul>
 </div>
 <div id="minor-changes" class="section level2">
@@ -410,7 +408,7 @@ style_text("1 # comment")
 <ul>
 <li><p>Fixing an edge case in which, if very long strings were present in the code, tokens could be replaced with wrong text (<a href='https://github.com/r-lib/styler/issues/384'>#384</a>).</p></li>
 <li><p>Spacing around tilde in formulas depends now on whether there is a LHS in the formula (<a href='https://github.com/r-lib/styler/issues/379'>#379</a>).</p></li>
-<li><p>Spaces are now also added around <code>EQ_SUB</code> (<code>=</code>) (<a href='https://github.com/r-lib/styler/issues/380'>#380</a>).</p></li>
+<li><p>Spaces are now also added around <code>EQ_SUB</code> (<code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>) (<a href='https://github.com/r-lib/styler/issues/380'>#380</a>).</p></li>
 <li><p>Added <code>CONTRIBUTING.md</code> to outline guidelines for contributing to styler.</p></li>
 <li><p>More informative error messages for parsing problems (<a href='https://github.com/r-lib/styler/issues/401'>#401</a>, <a href='https://github.com/r-lib/styler/issues/400'>#400</a>).</p></li>
 <li><p>Improved documentation (<a href='https://github.com/r-lib/styler/issues/387'>#387</a>).</p></li>
@@ -439,7 +437,7 @@ style_text("1 # comment")
 <ul>
 <li><p>We’re now recognizing and respecting more DSLs used in R comments: rplumber (<code>#*</code>, <a href='https://github.com/r-lib/styler/issues/306'>#306</a>), shebang <code>#/!</code> (<a href='https://github.com/r-lib/styler/issues/345'>#345</a>), knitr chunk headers for spinning (<code>#+</code> / <code>#-</code>, <a href='https://github.com/r-lib/styler/issues/362'>#362</a>).</p></li>
 <li><p>Named arguments can stay on the first line if call is multi-line (<a href='https://github.com/r-lib/styler/issues/318'>#318</a>).</p></li>
-<li><p>No space anymore with <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> after <code>!!</code> since with <code>rlang 0.2</code>, <code>!!</code> now binds tighter (<a href='https://github.com/r-lib/styler/issues/322'>#322</a>), spacing around <code>~</code> (<a href='https://github.com/r-lib/styler/issues/316'>#316</a>), no space anymore around <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code> (<a href='https://github.com/r-lib/styler/issues/308'>#308</a>).</p></li>
+<li><p>No space anymore with <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> after <code>!!</code> since with <code>rlang 0.2</code>, <code>!!</code> now binds tighter (<a href='https://github.com/r-lib/styler/issues/322'>#322</a>), spacing around <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> (<a href='https://github.com/r-lib/styler/issues/316'>#316</a>), no space anymore around <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code> (<a href='https://github.com/r-lib/styler/issues/308'>#308</a>).</p></li>
 <li><p>Code chunks in Rmd documents that don’t use the R engine are no longer formatted (<a href='https://github.com/r-lib/styler/issues/313'>#313</a>).</p></li>
 <li><p>Various bug fixes and edge case improvements.</p></li>
 </ul>
@@ -535,7 +533,7 @@ initialize_default_attributes(pd_flat)</a></code></pre>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

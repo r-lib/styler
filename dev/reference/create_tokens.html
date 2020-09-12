@@ -100,23 +100,21 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -183,20 +181,20 @@
     </div>
 
     <pre class="usage"><span class='fu'>create_tokens</span>(
-  <span class='no'>tokens</span>,
-  <span class='no'>texts</span>,
-  <span class='kw'>lag_newlines</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>spaces</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='no'>pos_ids</span>,
-  <span class='kw'>token_before</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>token_after</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>indention_ref_pos_ids</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>indents</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>terminal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>child</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stylerignore</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>block</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>is_cached</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>tokens</span>,
+  <span class='kw'>texts</span>,
+  lag_newlines = <span class='fl'>0</span>,
+  spaces = <span class='fl'>0</span>,
+  <span class='kw'>pos_ids</span>,
+  token_before = <span class='fl'>NA</span>,
+  token_after = <span class='fl'>NA</span>,
+  indention_ref_pos_ids = <span class='fl'>NA</span>,
+  indents = <span class='fl'>0</span>,
+  terminal = <span class='fl'>TRUE</span>,
+  child = <span class='kw'>NULL</span>,
+  stylerignore = <span class='fl'>FALSE</span>,
+  block = <span class='fl'>NA</span>,
+  is_cached = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -288,7 +286,7 @@ styler.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

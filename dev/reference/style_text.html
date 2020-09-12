@@ -101,23 +101,21 @@ to one line of code." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -185,12 +183,12 @@ to one line of code.</p>
     </div>
 
     <pre class="usage"><span class='fu'>style_text</span>(
-  <span class='no'>text</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
-  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>),
-  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>base_indention</span> <span class='kw'>=</span> <span class='fl'>0</span>
+  <span class='kw'>text</span>,
+  <span class='kw'>...</span>,
+  style = <span class='kw'>tidyverse_style</span>,
+  transformers = <span class='fu'>style</span>(<span class='kw'>...</span>),
+  include_roxygen_examples = <span class='fl'>TRUE</span>,
+  base_indention = <span class='fl'>0</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -240,9 +238,16 @@ multi-line strings are present. See 'Examples'.</p></td>
 <code><a href='styler_addins.html'>styler_addins</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>style_text</span>(<span class='st'>"call( 1)"</span>)</div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>1</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"1    + 1"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'>1</span><span>    </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"spaces"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b</div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b; a"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"line_breaks"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b; a</div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b; a"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"tokens"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> </span><span style='color: #00BBBB;'>b</span><span style='color: #BBBB00;'>()</span><span>
+    <pre class="examples"><div class='input'><span class='fu'>style_text</span>(<span class='st'>"call( 1)"</span>)
+</div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>1</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"1    + 1"</span>, strict = <span class='fl'>FALSE</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'>1</span><span>    </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b"</span>, scope = <span class='st'>"spaces"</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b</div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b; a"</span>, scope = <span class='st'>"line_breaks"</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b; a</div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b; a"</span>, scope = <span class='st'>"tokens"</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> </span><span style='color: #00BBBB;'>b</span><span style='color: #BBBB00;'>()</span><span>
 #&gt; a</div><div class='input'><span class='co'># the following is identical but the former is more convenient:</span>
-<span class='fu'>style_text</span>(<span class='st'>"a&lt;-3++1"</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a&lt;-3++1"</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(<span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div></span></pre>
+<span class='fu'>style_text</span>(<span class='st'>"a&lt;-3++1"</span>, style = <span class='kw'>tidyverse_style</span>, strict = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a&lt;-3++1"</span>, transformers = <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(strict = <span class='fl'>TRUE</span>))
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -258,7 +263,7 @@ multi-line strings are present. See 'Examples'.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

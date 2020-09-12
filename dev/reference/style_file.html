@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Style <code>.R</code>, <code>.Rmd</code> or <code>.Rnw</code> files — style_file • styler</title>
+<title>Style .R, .Rmd or .Rnw files — style_file • styler</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="Style <code>.R</code>, <code>.Rmd</code> or <code>.Rnw</code> files — style_file" />
+<meta property="og:title" content="Style .R, .Rmd or .Rnw files — style_file" />
 <meta property="og:description" content="Performs various substitutions in the files specified.
 Carefully examine the results after running this function!" />
 
@@ -101,23 +101,21 @@ Carefully examine the results after running this function!" />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">End-users</li>
+    <li>
+      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+    </li>
+    <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
     <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
     </li>
     <li>
       <a href="../articles/performance_improvements.html">Performance Improvements</a>
@@ -185,13 +183,13 @@ Carefully examine the results after running this function!</p>
     </div>
 
     <pre class="usage"><span class='fu'>style_file</span>(
-  <span class='no'>path</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
-  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>),
-  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>base_indention</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>dry</span> <span class='kw'>=</span> <span class='st'>"off"</span>
+  <span class='kw'>path</span>,
+  <span class='kw'>...</span>,
+  style = <span class='kw'>tidyverse_style</span>,
+  transformers = <span class='fu'>style</span>(<span class='kw'>...</span>),
+  include_roxygen_examples = <span class='fl'>TRUE</span>,
+  base_indention = <span class='fl'>0</span>,
+  dry = <span class='st'>"off"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -293,24 +291,28 @@ inspect the changes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># the following is identical but the former is more convenient:</span>
-<span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='st'>"styler"</span>, <span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".R"</span>)
-<span class='kw pkg'>xfun</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>write_utf8</a></span>(<span class='st'>"1++1"</span>, <span class='no'>file</span>)
-<span class='fu'>style_file</span>(<span class='no'>file</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpFbIdFR/styler6fd647fa740.R ℹ 
+<span class='kw'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='st'>"styler"</span>, fileext = <span class='st'>".R"</span>)
+<span class='kw'>xfun</span>::<span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>write_utf8</a></span>(<span class='st'>"1++1"</span>, <span class='kw'>file</span>)
+<span class='fu'>style_file</span>(<span class='kw'>file</span>, style = <span class='kw'>tidyverse_style</span>, strict = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; Styling  1  files:
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpZMmXNB/stylere4e32aa8910.R ℹ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	0	File unchanged.
 #&gt; ℹ 	1	File changed.
 #&gt; ✖ 	0	Styling threw an error.
 #&gt; ────────────────────────────────────────────────────────────────────────────────
-#&gt; Please review the changes carefully!</div><div class='input'><span class='fu'>style_file</span>(<span class='no'>file</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(<span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpFbIdFR/styler6fd647fa740.R ✔ 
+#&gt; Please review the changes carefully!</div><div class='input'><span class='fu'>style_file</span>(<span class='kw'>file</span>, transformers = <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(strict = <span class='fl'>TRUE</span>))
+</div><div class='output co'>#&gt; Styling  1  files:
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpZMmXNB/stylere4e32aa8910.R ✔ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.
 #&gt; ℹ 	0	File changed.
 #&gt; ✖ 	0	Styling threw an error.
-#&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='kw pkg'>xfun</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>read_utf8</a></span>(<span class='no'>file</span>)</div><div class='output co'>#&gt; [1] "1 + +1"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>file</span>)</div></pre>
+#&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='kw'>xfun</span>::<span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>read_utf8</a></span>(<span class='kw'>file</span>)
+</div><div class='output co'>#&gt; [1] "1 + +1"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>file</span>)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -326,7 +328,7 @@ inspect the changes.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
