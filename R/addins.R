@@ -91,6 +91,13 @@ style_active_pkg <- function() {
 #' @importFrom rlang abort
 #' @keywords internal
 style_selection <- function() {
+  if (rstudio_has_selection_apis())
+    style_selection_v2()
+  else
+    style_selection_v1()
+}
+
+style_selection_v1 <- function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
@@ -103,6 +110,31 @@ style_selection <- function() {
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
     invisible(rstudioapi::documentSave(context$id))
   }
+}
+
+style_selection_v2 <- function() {
+  communicate_addins_style_transformers()
+  id <- rstudioapi::documentId()
+  selection <- rstudioapi::selectionGet(id = id)
+  text <- selection$value
+  if (!nzchar(text)) abort("No code selected")
+  out <- style_text(text, transformers = get_addins_style_transformer())
+  rstudioapi::selectionSet(value = out, id = id)
+
+  if (Sys.getenv("save_after_styling") == TRUE &&
+      !is.null(rstudioapi::documentPath(id))) {
+    invisible(rstudioapi::documentSave(id))
+  }
+
+}
+
+rstudio_has_selection_apis <- function() {
+
+  rstudioapi::hasFun("selectionGet") &&
+    rstudioapi::hasFun("selectionSet") &&
+    rstudioapi::hasFun("documentId") &&
+    rstudioapi::hasFun("documentPath")
+
 }
 
 get_rstudio_context <- function() {
