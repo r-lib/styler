@@ -26,6 +26,7 @@
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
 - always strip trailing spaces and make cache insensitive to it (#626).
 - typos in documentation (#643, #618, #614).
+- `style_selection()` now uses RStudio's new selection-based API when available
 
 # styler 1.3.2
 
