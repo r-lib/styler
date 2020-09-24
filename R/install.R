@@ -66,7 +66,7 @@ update_impl <- function() {
   # capture_and_call should only be used for testing or for very short calls maybe too.
   system2(
     reticulate::conda_binary(), c(
-      "update", "-n", "r-precommit",
+      "update", "--yes", "-n", "r-precommit",
       "-c", "defaults", "-c", "conda-forge",
       "pre-commit"
     )

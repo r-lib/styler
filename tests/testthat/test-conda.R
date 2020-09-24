@@ -173,4 +173,24 @@ if (!on_cran()) {
       expect_error(install_precommit(), "Please install the R package reticulate")
     }
   })
+  test_that("can update via conda", {
+    if (not_conda()) {
+      expect_error(
+        update_precommit(), 
+        paste(
+          "You can only update your pre-commit executable via the R API if you",
+          "chose the installation method via conda"
+        )
+      )
+      
+      expect_match(version_precommit(), "[0-9]+\\.[0-9]+\\.[0-9]+")
+    } else {
+      uninstall_precommit(scope = "user", ask = "none", root = ".")
+      conda_install('r-precommit', 'pre-commit==2.3.0')
+      expect_equal(version_precommit(), "2.3.0")
+      expect_equal(update_precommit(), 0)
+    }
+  })
+  
+  
 }
