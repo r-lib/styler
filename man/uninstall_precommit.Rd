@@ -29,3 +29,10 @@ Remove pre-commit from a repo or from your system.
 uninstall_precommit()
 }
 }
+\seealso{
+Other executable managers: 
+\code{\link{install_precommit}()},
+\code{\link{update_precommit}()},
+\code{\link{version_precommit}()}
+}
+\concept{executable managers}

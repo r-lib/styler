@@ -13,6 +13,8 @@ framework.
 }
 \seealso{
 Other executable managers: 
+\code{\link{install_precommit}()},
+\code{\link{uninstall_precommit}()},
 \code{\link{version_precommit}()}
 }
 \concept{executable managers}

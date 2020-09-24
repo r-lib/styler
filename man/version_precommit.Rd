@@ -11,6 +11,8 @@ Retrieves the version of the pre-commit executable used.
 }
 \seealso{
 Other executable managers: 
+\code{\link{install_precommit}()},
+\code{\link{uninstall_precommit}()},
 \code{\link{update_precommit}()}
 }
 \concept{executable managers}

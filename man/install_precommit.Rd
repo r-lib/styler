@@ -22,3 +22,10 @@ refer to \code{\link[=update_precommit]{update_precommit()}}.
 install_precommit()
 }
 }
+\seealso{
+Other executable managers: 
+\code{\link{uninstall_precommit}()},
+\code{\link{update_precommit}()},
+\code{\link{version_precommit}()}
+}
+\concept{executable managers}

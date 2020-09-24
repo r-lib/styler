@@ -40,6 +40,7 @@ assert_reticulate_is_installed <- function() {
 #' @param force Whether or not to force a re-installation.
 #' @return
 #' The path to the pre-commit executable (invisibly).
+#' @family executable managers
 #' @examples
 #' \dontrun{
 #' install_precommit()
@@ -145,6 +146,7 @@ remove_usethis_readme_hook <- function() {
 #' @inheritParams fallback_doc
 #' @return
 #' `NULL` (invisibly). The function is called for its side effects.
+#' @family executable managers
 #' @examples
 #' \dontrun{
 #' uninstall_precommit()
