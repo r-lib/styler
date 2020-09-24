@@ -82,11 +82,12 @@ How to contribute new hooks is explained in [`CONTRIBUTING.md`](https://github.c
 Some of the hooks depend on R functions that run slowly, e.g. the `style-files` 
 hook depends on `styler`, which is not very fast. Also, note that for each hook,
 R is started. Make sure your startup process is quick for non-interactive use, 
-e.g. your `.Rprofile` and related files do not have a long execution time. E.g. 
-wrap code in `if (interactive()) ` if possible, so it won't run when pre-commit 
-hooks are ran. Find out more about the startup process with `?startup`. We'd 
-like to support the `--vanilla` option but it's 
-[not easily possible we believe](https://github.com/lorenzwalthert/precommit/issues/165).
+e.g. your `.Rprofile` and related files do not have a long execution time when 
+pre-commit calls them. You can wrap code in `if (interactive()) ` to only 
+execute it in an interactive session or wrap it in 
+`if (Sys.getenv("PRE_COMMIT") != "1")` (if you have `pre-commit >= 2.5.0`), so 
+it won't run when pre-commit hooks are ran. Find out more about the startup 
+process with `?startup`.
 
 *** 
 
