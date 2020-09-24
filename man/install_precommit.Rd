@@ -2,7 +2,7 @@
 % Please edit documentation in R/install.R
 \name{install_precommit}
 \alias{install_precommit}
-\title{Install pre-commit on your system.}
+\title{Install pre-commit on your system}
 \usage{
 install_precommit(force = FALSE)
 }
@@ -14,7 +14,8 @@ The path to the pre-commit executable (invisibly).
 }
 \description{
 This installs pre-commit in the conda environment r-precommit. It
-will be available to use across different git repositories.
+will be available to use across different git repositories. To update,
+refer to \code{\link[=update_precommit]{update_precommit()}}.
 }
 \examples{
 \dontrun{

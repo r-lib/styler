@@ -1,11 +1,5 @@
 install_system <- function(force) {
-  if (!rlang::is_installed("reticulate")) {
-    rlang::abort(paste(
-      "Please install the R package reticulate to use this installation",
-      "method. You can also use alternative installation methods that don't",
-      "require reticulate. See https://lorenzwalthert.github.io/precommit."
-    ))
-  }
+  assert_reticulate_is_installed()
   if (!is_installed() | force) {
     usethis::ui_info(paste(
       "Installing pre-commit into the conda environment",
@@ -28,10 +22,21 @@ install_system <- function(force) {
   invisible(path_exec)
 }
 
-#' Install pre-commit on your system.
+assert_reticulate_is_installed <- function() {
+  if (!rlang::is_installed("reticulate")) {
+    rlang::abort(paste(
+      "Please install the R package reticulate to use this installation",
+      "method. You can also use alternative installation methods that don't",
+      "require reticulate. See https://lorenzwalthert.github.io/precommit."
+    ))
+  }
+}
+
+#' Install pre-commit on your system
 #'
 #' This installs pre-commit in the conda environment r-precommit. It
-#' will be available to use across different git repositories.
+#' will be available to use across different git repositories. To update,
+#' refer to [update_precommit()].
 #' @param force Whether or not to force a re-installation.
 #' @return
 #' The path to the pre-commit executable (invisibly).
@@ -51,6 +56,20 @@ install_impl <- function() {
     reticulate::conda_create("r-precommit")
   }
   reticulate::conda_install("r-precommit", packages = "pre-commit")
+}
+
+#' Updates pre-commit on your system with conda
+#' @keywords internal
+update_impl <- function() {
+  # TODO all update calls should be transparent and return output.
+  # capture_and_call should only be used for testing or for very short calls maybe too.
+  system2(
+    reticulate::conda_binary(), c(
+      "update", "-n", "r-precommit",
+      "-c", "defaults", "-c", "conda-forge",
+      "pre-commit"
+    )
+  )
 }
 
 install_repo <- function(root, install_hooks, legacy_hooks) {
