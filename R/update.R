@@ -3,6 +3,7 @@
 #' Updates the conda installation of the upstream framework pre-commit. This
 #' does not update the R package `{precommit}`. it only works if you
 #' framework.
+#' @family executable managers
 #' @export
 update_precommit <- function() {
   assert_reticulate_is_installed()
@@ -24,6 +25,8 @@ update_precommit <- function() {
 
 #' Retrieve the version of the pre-commit executable used
 #'
+#' Retrieves the version of the pre-commit executable used.
+#' @family executable managers
 #' @export
 version_precommit <- function() {
   out <- call_precommit("--version")

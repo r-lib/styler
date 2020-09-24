@@ -7,5 +7,10 @@
 version_precommit()
 }
 \description{
-Retrieve the version of the pre-commit executable used
+Retrieves the version of the pre-commit executable used.
 }
+\seealso{
+Other executable managers: 
+\code{\link{update_precommit}()}
+}
+\concept{executable managers}

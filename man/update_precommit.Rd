@@ -11,3 +11,8 @@ Updates the conda installation of the upstream framework pre-commit. This
 does not update the R package \code{{precommit}}. it only works if you
 framework.
 }
+\seealso{
+Other executable managers: 
+\code{\link{version_precommit}()}
+}
+\concept{executable managers}
