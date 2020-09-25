@@ -10,6 +10,12 @@
   (#183).
 - install_hooks in `use_precommit()` should now work as expected (#185).
 
+**Minor changes**
+
+- `precommit::uninstall_precommit()` now correctly removes 
+  `^\\.pre-commit-config.yaml$`from `.Rbuildignore` and does not show a 
+  prompt (#199).
+
 # precommit v0.1.2
 
 Initial CRAN release. See https://lorenzwalthert.github.io/precommit/.
