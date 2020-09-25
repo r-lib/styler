@@ -6,6 +6,7 @@
 #' @family executable managers
 #' @export
 update_precommit <- function() {
+  old <- version_precommit()
   assert_reticulate_is_installed()
   if (!is_conda_installation()) {
     rlang::abort(paste0(
@@ -21,6 +22,13 @@ update_precommit <- function() {
     ))
   }
   update_impl()
+  new <- version_precommit()
+  if (new == old) {
+    usethis::ui_info('Nothing to update, your version {old} is the latest available.')
+  } else {
+    usethis::ui_done("Successfully updated pre-commit from version {old} to {new}.")
+  }
+
 }
 
 #' Retrieve the version of the pre-commit executable used
