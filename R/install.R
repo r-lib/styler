@@ -220,11 +220,11 @@ uninstall_repo <- function(ask) {
     }
     if (is_package(".")) {
       lines <- readLines(".Rbuildignore", encoding = "UTF-8")
-      precommit_hooks_idx <- which(lines == "^\\.pre-commit-hooks\\.yaml$")
+      precommit_hooks_idx <- which(lines == "^\\.pre-commit-config\\.yaml$")
       remaining <- rlang::seq2(1, length(lines)) %>% setdiff(precommit_hooks_idx)
       if (length(precommit_hooks_idx) > 0) {
         usethis::ui_info("Removing .pre-commit-hooks.yaml from .Rbuildignore")
-        usethis::write_over(".Rbuildignore", lines[remaining])
+        writeLines(enc2utf8(lines[remaining]), ".Rbuildignore")
       }
     }
     path_file <- ".pre-commit-config.yaml"
