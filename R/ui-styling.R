@@ -241,7 +241,9 @@ prettify_any <- function(transformers,
                          base_indention = 0,
                          dry) {
   exclude_files <- set_arg_paths(exclude_files)
-  exclude_dirs <- set_arg_paths(exclude_dirs)
+  exclude_dirs <- exclude_dirs %>%
+    list.dirs(recursive = TRUE, full.names = TRUE) %>%
+    set_arg_paths()
   files_root <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),
     ignore.case = TRUE, recursive = FALSE, all.files = TRUE
