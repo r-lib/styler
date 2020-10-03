@@ -39,7 +39,7 @@ repos:
     rev: {rev}
     hooks:
     -   id: style-files
-        args: [--style_pkg=styler, '--style_transformers=tidyverse_style(scope = \"tokens\")']
+        args: [--style_pkg=styler, --style_fun=tidyverse_style]
 "))
 ```
 
@@ -57,20 +57,13 @@ available settings.
 
 A hook to style files with [styler](https://styler.r-lib.org). Only commit code
 corresponding to the tidyverse style guide. Set argument `style_pkg` and
-`style_transformers` if you want to use another style guide than the tidyverse
-style guide. Argument `style_fun` is deprecated as of version `0.1.2.9001` and 
-will be removed in a future release because `style_transformers` is more 
-flexible, e.g. you can specify scope and other arguments of the style guide, 
-e.g. `'--style_transformers="tidyverse_style(scope='spaces')". 
+`style_fun` if you want to use another style guide than the tidyverse style
+guide.
 
 ```
   id: style-files
-  args: [--style_pkg=<styler>, '--style_transformers=<tidyverse_style(scope = "tokens")'>, --style_fun=<tidyverse_style>]
+  args: [--style_pkg=<styler>, --style_fun=<tidyverse_style>]
 ```
-
-Note that not all combinations of quotes will be parsed correctly, e.g. 
-reversing inner and outer quotes won't work and escaping quotes may also not 
-work.
 
 This hook modifies files.
 
