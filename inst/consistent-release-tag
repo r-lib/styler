@@ -57,7 +57,7 @@ if (!(latest_tag_without_prefix < desc::desc_get_field('Version'))) {
       "git tag should never be greater than description. At most they should",
       "be equal."
     ))
-  } else if (!arguments$release_modef) {
+  } else if (!arguments$release_mode) {
     rlang::abort(paste(
       "DESCRIPTION version must be larger than git tag unless the check is",
       " performed during a release. Then turn this off with --release-mode"
