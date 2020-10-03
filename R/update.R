@@ -1,8 +1,11 @@
 #' Update the pre-commit executable
 #'
 #' Updates the conda installation of the upstream framework pre-commit. This
-#' does not update the R package `{precommit}`. it only works if you
-#' framework.
+#' does not update the R package `{precommit}` and only works if you choose
+#' conda as your installation method. If you have problems updating, we suggest
+#' deleting the conda environment `r-precommit` (if you are sure nothing but
+#' pre-commit depend on it) and do a fresh installation with
+#' [install_precommit()].
 #' @return
 #' The exit status of the conda update command (invisible).
 #' @family executable managers

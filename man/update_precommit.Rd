@@ -11,8 +11,11 @@ The exit status of the conda update command (invisible).
 }
 \description{
 Updates the conda installation of the upstream framework pre-commit. This
-does not update the R package \code{{precommit}}. it only works if you
-framework.
+does not update the R package \code{{precommit}} and only works if you choose
+conda as your installation method. If you have problems updating, we suggest
+deleting the conda environment \code{r-precommit} (if you are sure nothing but
+pre-commit depend on it) and do a fresh installation with
+\code{\link[=install_precommit]{install_precommit()}}.
 }
 \seealso{
 Other executable managers: 
