@@ -91,7 +91,6 @@ release_complete <- function(ask = TRUE, is_cran = ask, tag = NULL) {
     }
     sys_call("git", glue::glue("push origin {tag}"))
   }
-
   precommit::autoupdate() # only updates if tag is on the master branch
   desc::desc_bump_version("dev")
   usethis::ui_done("Bumped version to dev")
