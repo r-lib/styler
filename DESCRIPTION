@@ -12,7 +12,7 @@ License: GPL-3
 URL: https://lorenzwalthert.github.io/precommit/,
     https://github.com/lorenzwalthert/precommit
 Imports:
-    docopt (>= 0.7),
+    docopt,
     fs,
     here,
     magrittr,
