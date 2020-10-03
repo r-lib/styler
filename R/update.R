@@ -3,6 +3,8 @@
 #' Updates the conda installation of the upstream framework pre-commit. This
 #' does not update the R package `{precommit}`. it only works if you
 #' framework.
+#' @return
+#' The exit status of the conda update command (invisible).
 #' @family executable managers
 #' @export
 update_precommit <- function() {
@@ -21,14 +23,14 @@ update_precommit <- function() {
       "installation method."
     ))
   }
-  update_impl()
+  exit_status <- update_impl()
   new <- version_precommit()
   if (new == old) {
-    usethis::ui_info('Nothing to update, your version {old} is the latest available.')
+    usethis::ui_info("Nothing to update, your version {old} is the latest available.")
   } else {
     usethis::ui_done("Successfully updated pre-commit from version {old} to {new}.")
   }
-
+  invisible(exit_status)
 }
 
 #' Retrieve the version of the pre-commit executable used

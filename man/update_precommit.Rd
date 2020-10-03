@@ -6,6 +6,9 @@
 \usage{
 update_precommit()
 }
+\value{
+The exit status of the conda update command (invisible).
+}
 \description{
 Updates the conda installation of the upstream framework pre-commit. This
 does not update the R package \code{{precommit}}. it only works if you
