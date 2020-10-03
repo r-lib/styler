@@ -62,8 +62,6 @@ install_impl <- function() {
 #' Updates pre-commit on your system with conda
 #' @keywords internal
 update_impl <- function() {
-  # TODO all update calls should be transparent and return output.
-  # capture_and_call should only be used for testing or for very short calls maybe too.
   system2(
     reticulate::conda_binary(), c(
       "update", "--yes", "-n", "r-precommit",
