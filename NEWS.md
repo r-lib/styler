@@ -21,7 +21,7 @@
 
 ## Minor changes and fixes
 
-- `style_dir()` and friends now apply directory exclusion recursively with 
+- `style_dir()` and `style_pkg()` now apply directory exclusion recursively with 
   `exclude_dirs` (#676).
 - cache is now correctly invalidated when style guide arguments change (#647).
 - empty lines are now removed between pipes (#645).
