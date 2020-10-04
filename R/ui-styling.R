@@ -89,9 +89,9 @@ style_pkg <- function(pkg = ".",
 #'   standardization) are: "r", "rprofile", "rmd", "rnw".
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
-#' @param exclude_dirs Character vector with directories to exclude. Note that
-#'   the default values were set for consistency with [style_dir()] and as
-#'   these directories are anyways not styled.
+#' @param exclude_dirs Character vector with directories to exclude
+#'   (recursively). Note that the default values were set for consistency with
+#'   [style_dir()] and as these directories are anyways not styled.
 #' @inheritParams transform_files
 #' @keywords internal
 prettify_pkg <- function(transformers,
@@ -193,7 +193,8 @@ style_text <- function(text,
 #' @param path Path to a directory with files to transform.
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   of `path` should be styled as well.
-#' @param exclude_dirs Character vector with directories to exclude.
+#' @param exclude_dirs Character vector with directories to exclude
+#'   (recursively).
 ##' @inheritParams style_pkg
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
@@ -241,7 +242,9 @@ prettify_any <- function(transformers,
                          base_indention = 0,
                          dry) {
   exclude_files <- set_arg_paths(exclude_files)
-  exclude_dirs <- set_arg_paths(exclude_dirs)
+  exclude_dirs <- exclude_dirs %>%
+    list.dirs(recursive = TRUE, full.names = TRUE) %>%
+    set_arg_paths()
   files_root <- dir(
     path = ".", pattern = map_filetype_to_pattern(filetype),
     ignore.case = TRUE, recursive = FALSE, all.files = TRUE
