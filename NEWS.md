@@ -1,17 +1,21 @@
 # precommit v0.1.3
 
-**API changes**
+This is mainly a CRAN maintenance release because of #201 and includes some 
+bug fixes and no API changes.
 
-- style-files hook gains new argument `style_transformers` that allows 
-  to specify a style guide like this: 
-  `--'style_transformers=tidyverse_style(scope = "spaces")'`, which gives the 
-  user the flexibility to also specify arguments of the style guide. The 
-  argument `--style_fun` is deprecated and will be removed in a future release.
-  (#183).
+A big hand to all the contributors of this release:
+[&#x0040;fschoner](https://github.com/fschoner), [&#x0040;krzyslom](https://github.com/krzyslom),
+[&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;maurolepore](https://github.com/maurolepore),
+[&#x0040;pat-s](https://github.com/pat-s), and [&#x0040;zkamvar](https://github.com/zkamvar).
+
+
+**Minor Changes**
+
 - install_hooks in `use_precommit()` should now work as expected (#185).
-
-**Minor changes**
-
+- Switching from Travis to GitHub Actions (#191).
+- `use_precommit()` now writes to the right `.Rbuildignore` when `root` is not 
+  the current working directory (#188, @krzyslom).
+- Documentation improvements (#179, @maurolepore)
 - `precommit::uninstall_precommit()` now correctly removes 
   `^\\.pre-commit-config.yaml$`from `.Rbuildignore` and does not show a 
   prompt (#199).
