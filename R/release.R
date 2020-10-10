@@ -26,7 +26,10 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
   new_dsc <- release_prechecks(bump, is_cran)
   new_dsc$write()
   git_branch_set(is_cran)
-  on.exit(sys_call("git", c("checkout", "master")), add = TRUE)
+  if (!is_cran) {
+    on.exit(sys_call("git", c("checkout", "master")), add = TRUE)
+  }
+
   # if we fail, must reset version, if we succeed, it's not stage
   # on.exit(sys_call("git", c("reset", "HEAD", '--hard')), add = TRUE)
 
@@ -99,6 +102,9 @@ release_complete <- function(ask = TRUE, is_cran = ask, tag = NULL) {
   )
   sys_call("git", glue::glue("push"))
   usethis::ui_done("Committed and pushed dev version.")
+  if (is_cran) {
+    usethis::ui_todo("Go to GitHub and draft a new release from the tag {tag}.")
+  }
 }
 
 
