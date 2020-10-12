@@ -26,7 +26,7 @@ jobs:
         config:
           # macOS
           - {os: macOS-latest,   r: 'release', installation_method: 'brew'}
-#           - {os: macOS-latest,   r: 'release', installation_method: 'conda'}
+           - {os: macOS-latest,   r: 'release', installation_method: 'conda'}
           - {os: macOS-latest,   r: 'release', installation_method: 'pip'}
           # Windows
           - {os: windows-latest, r: 'release', installation_method: 'pip'}
@@ -96,11 +96,11 @@ jobs:
           }
         shell: Rscript {0}
       - name: Install system dependencies (conda)
-        if: matrix.config.installation_method == 'conda'
+        if: matrix.config.installation_method == 'conda' 
         run: |
           reticulate::install_miniconda()
         shell: Rscript {0}
-      - if: runner.os == 'macOS'
+      - if: matrix.config.installation_method == 'conda' && runner.os == 'macOS'
         run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
       - name: Session info
         run: |
