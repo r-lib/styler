@@ -13,13 +13,6 @@ A big hand to all the contributors of this release:
 [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;maurolepore](https://github.com/maurolepore),
 [&#x0040;pat-s](https://github.com/pat-s), and [&#x0040;zkamvar](https://github.com/zkamvar).
 
-- style-files hook gains new argument `style_transformers` that allows 
-  to specify a style guide like this: 
-  `--'style_transformers=tidyverse_style(scope = "spaces")'`, which gives the 
-  user the flexibility to also specify arguments of the style guide. The 
-  argument `--style_fun` is deprecated and will be removed in a future release.
-  (#183).
-- install_hooks in `use_precommit()` should now work as expected (#185).
 
 **Minor Changes**
 
