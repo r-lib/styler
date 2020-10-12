@@ -26,7 +26,7 @@ jobs:
         config:
           # macOS
           - {os: macOS-latest,   r: 'release', installation_method: 'brew'}
-           - {os: macOS-latest,   r: 'release', installation_method: 'conda'}
+          - {os: macOS-latest,   r: 'release', installation_method: 'conda'}
           - {os: macOS-latest,   r: 'release', installation_method: 'pip'}
           # Windows
           - {os: windows-latest, r: 'release', installation_method: 'pip'}
