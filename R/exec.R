@@ -116,7 +116,7 @@ path_derive_precommit_exec_win_python3plus_base <- function() {
 
 # Only reason to capsule this: mock test.
 path_derive_precommit_exec_win_python3plus_candidates <- function() {
-  fs::dir_ls(path_if_exist(fs::path_home("AppData/Roaming/Python/"), regexp = "Python[0-9]+$"))
+  fs::dir_ls(path_if_exist(fs::path_home("AppData/Roaming/Python/")), regexp = "Python[0-9]+$")
 }
 
 
