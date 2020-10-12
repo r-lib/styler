@@ -35,8 +35,7 @@ Suggests:
     roxygen2,
     spelling,
     styler (>= 1.2),
-    testthat (>= 2.1.0),
-    versions
+    testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
 Remotes: 
