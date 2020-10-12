@@ -101,7 +101,7 @@ jobs:
           reticulate::install_miniconda()
         shell: Rscript {0}
       - if: runner.os == 'macOS'
-         run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
+        run: echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
       - name: Session info
         run: |
           options(width = 100)
