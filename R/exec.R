@@ -156,7 +156,7 @@ path_derive_precommit_exec_conda <- function() {
         "space on disk, you probably want to delete the pre-commit executable at ",
         path, " and the package sources in the ",
         "conda environment r-reticulate with ",
-        "`reticulate::conda_remove('r-reticulate', 'precommit')`."
+        "`reticulate::conda_remove('r-reticulate', 'pre-commit')`."
       ))
     }
   }

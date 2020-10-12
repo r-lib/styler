@@ -53,7 +53,7 @@ Alternatively, you can handle the installation from R using
 
   - install the pre-commit framework with
     `precommit::install_precommit()` into the conda environment
-    `r-precommit`.
+    `r-precommit`. Do not install other packages into this environment.
 
 Then, in a fresh R session:
 
@@ -150,6 +150,15 @@ itself, including how to:
   - create local hooks
 
   - and more
+
+## Update
+
+To update the pre-commit executable, use the update utilities provided
+by your installation method. If you chose conda, you can use
+`precommit::update_precommit()`.
+
+You can check the version of you executable with
+`precommit::version_precommit()`.
 
 ## Uninstallation
 

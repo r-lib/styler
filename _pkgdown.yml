@@ -16,6 +16,8 @@ reference:
 - title: "Other"
 - contents: 
   - uninstall_precommit
+  - update_precommit
+  - version_precommit
   - path_precommit_exec
 
 destination: docs
