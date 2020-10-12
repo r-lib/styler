@@ -16,4 +16,13 @@ test_that("Path can be derived for windows Python >= 3.0", {
       fs::path(fs::path_home(), "AppData/Roaming/Python/Python35/Scripts")
     )
   )
+  skip_if(!is_windows())
+  skip_if(!not_conda())
+  print(path_derive_precommit_exec_win_python3plus_candidates())
+  cat(path_derive_precommit_exec_win_python3plus_candidates())
+  expect_match(path_derive_precommit_exec_win_python3plus_base(), 'AppData/Roaming')
+  expect_equal(
+    fs::path_file(path_derive_precommit_exec_win()), 
+    precommit_executable_file()
+  )
 })
