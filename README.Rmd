@@ -140,7 +140,7 @@ styler functionality is made available through other tools, most notably
   Action](https://github.com/features/actions) [*Tidyverse
   CI*](https://github.com/r-lib/actions/tree/master/examples#tidyverse-ci-workflow)
   is used. The most convenient way to set this up is via
-  [`usethis::use_github_actions_tidy()`](https://usethis.r-lib.org/reference/github_actions.html?q=ghactions#use-github-actions-tidy-).
+  [`usethis::use_tidy_github_actions()`](https://usethis.r-lib.org/reference/tidyverse.html).
 
 * `reprex::reprex(style = TRUE)` to prettify reprex code before printing. To
   permanently use `style = TRUE` without specifying it every time, you can add

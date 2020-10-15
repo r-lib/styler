@@ -65,8 +65,7 @@ There are a few variants of `style_text()`:
   - `style_pkg()` styles the source files of an R package.
 
   - RStudio Addins for styling the active file, styling the current
-    package and styling the highlighted code
-region.
+    package and styling the highlighted code region.
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
 
@@ -134,7 +133,7 @@ styler functionality is made available through other tools, most notably
     Action](https://github.com/features/actions) [*Tidyverse
     CI*](https://github.com/r-lib/actions/tree/master/examples#tidyverse-ci-workflow)
     is used. The most convenient way to set this up is via
-    [`usethis::use_github_actions_tidy()`](https://usethis.r-lib.org/reference/github_actions.html?q=ghactions#use-github-actions-tidy-).
+    [`usethis::use_tidy_github_actions()`](https://usethis.r-lib.org/reference/tidyverse.html).
 
   - `reprex::reprex(style = TRUE)` to prettify reprex code before
     printing. To permanently use `style = TRUE` without specifying it
@@ -144,7 +143,7 @@ styler functionality is made available through other tools, most notably
   - you can pretty-print your R code in RMarkdown reports without having
     styler modifying the source. This feature is implemented as a code
     chunk option in knitr. use `tidy = "styler"` in the header of a code
-    chunks (e.g. ` ```{r name-of-the-chunk, tidy = "styler"}`), or
+    chunks (e.g. ` ```{r name-of-the-chunk, tidy = "styler"} `), or
     `knitr::opts_chunk$set(tidy = "styler")` at the top of your
     RMarkdown script.
 
