@@ -19,7 +19,7 @@ marker <- purrr::partial(
 
 with_cache <- marker(
   with_cache = {
-    style_pkg(path)
+    style_pkg(path, filetype = c("R", "rmd"))
   }
 )
 cache_info()
@@ -28,7 +28,7 @@ cache_deactivate()
 
 without_cache <- marker(
   without_cache = {
-    style_pkg(path)
+    style_pkg(path, filetype = c("R", "rmd"))
   }
 )
 latest_bm <- bench::cb_read()$benchmarks[[1]]
