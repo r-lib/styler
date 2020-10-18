@@ -13,7 +13,7 @@ plot_against_base <- function(new_bm,
   last_commit_base_branch <- branches[branches$name == Sys.getenv("GITHUB_BASE_REF"), "commit", drop = TRUE]
   bm <- bench::cb_read()
   commit_is_reference <- bm$commit_hash == last_commit_base_branch
-  if (any(commit_is_reference) && Sys.getenv("GITHUB_BASE_REF") != "") {
+  if (any(commit_is_reference) && Sys.getenv("GITHUB_BASE_REF") != "" && !is.null(bm) && nrow(bm) > 0) {
     # if a pull request
     reference <- bm[commit_is_reference, "benchmarks"][[1]][[1]] %>%
       dplyr::filter(.data$name %in% !!name)
