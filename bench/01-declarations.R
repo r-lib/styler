@@ -12,6 +12,8 @@ plot_against_base <- function(new_bm,
   branches <- gert::git_branch_list()
   last_commit_base_branch <- branches[branches$name == Sys.getenv("GITHUB_BASE_REF"), "commit", drop = TRUE]
   bm <- bench::cb_read()
+  print("bm is")
+  print(bm)
   commit_is_reference <- bm$commit_hash == last_commit_base_branch
   if (any(commit_is_reference) && Sys.getenv("GITHUB_BASE_REF") != "" && !is.null(bm) && nrow(bm) > 0) {
     # if a pull request
