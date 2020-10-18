@@ -43,8 +43,8 @@ jobs:
       - name: Checkout benchmarking repo
         uses: actions/checkout@v2
         with:
-          repository: r-lib/here
-          ref: v0.1
+          repository: lorenzwalthert/here
+          ref: ca9c8e69c727def88d8ba1c8b85b0e0bcea87b3f
           path: bench/sources/here
       - name: Fetch existing benchmarks
         run: Rscript -e 'bench::cb_fetch()'
