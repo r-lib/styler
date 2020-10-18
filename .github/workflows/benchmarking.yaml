@@ -47,7 +47,7 @@ jobs:
           ref: v0.1
           path: bench/sources/here
       - name: Fetch existing benchmarks
-        run: Rscript -e '#bench::cb_fetch()'
+        run: Rscript -e 'bench::cb_fetch()'
       - name: Run benchmarks
         run: Rscript -e 'bench::cb_run()'
       - name: Show benchmarks
