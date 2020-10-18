@@ -1,0 +1,61 @@
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+name: Continuous Benchmarks
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repo
+        with:
+          fetch-depth: 0
+        uses: actions/checkout@master
+      - name: Ensure base branch is fetched
+        if: ${{ github.event_name == 'pull_request' }}
+        run: git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF; git branch
+      - name: Setup R
+        uses: r-lib/actions/setup-r@master
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ hashFiles('.github/R-version') }}-1-
+
+      - name: Install dependencies
+        run: |
+          Rscript -e "install.packages(c('gert', 'ggplot2', 'purrr'))" -e "remotes::install_deps(dependencies = TRUE); remotes::install_github('r-lib/bench')"
+          R CMD INSTALL .
+      - name: Checkout benchmarking repo
+        uses: actions/checkout@v2
+        with:
+          repository: lorenzwalthert/here
+          ref: ca9c8e69c727def88d8ba1c8b85b0e0bcea87b3f
+          path: bench/sources/here
+      - name: Fetch existing benchmarks
+        run: Rscript -e 'rlang::with_handlers(bench::cb_fetch(), error = function(e) paste("Could not fetch benchmarks, skipping. The error was", conditionMessage(e)))'
+      - name: Run benchmarks
+        run: Rscript -e 'bench::cb_run()'
+      - name: Show benchmarks
+        run: git notes --ref benchmarks show
+      - uses: actions/upload-artifact@v2
+        with:
+          name: visual-benchmarks
+          path: bench/plots/
+      - name: Push benchmarks
+        if: ${{ github.event_name == 'push' }}
+        run: Rscript -e "bench::cb_push()"

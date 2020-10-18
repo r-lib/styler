@@ -13,6 +13,7 @@ repos:
         exclude: >
           (?x)^(
           data/.*|
+          \.github/.*\.yaml|
           (.*/|)\.Rprofile|
           (.*/|)\.Renviron|
           (.*/|)\.gitignore|
@@ -35,6 +36,10 @@ repos:
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: deps-in-desc
+        exclude: >
+          (?x)^(
+          bench/.*
+          )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
