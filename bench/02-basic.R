@@ -33,4 +33,4 @@ without_cache <- marker(
 )
 latest_bm <- bench::cb_read()$benchmarks[[1]]
 split(latest_bm, latest_bm$name) %>%
-  purrr::imap(plot_against_master)
+  purrr::imap(plot_against_base)
