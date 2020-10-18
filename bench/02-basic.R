@@ -23,7 +23,7 @@ with_cache <- marker(
   }
 )
 cache_info()
-gert::git_reset("hard", repo = path)
+gert::git_reset_hard(repo = path)
 cache_deactivate()
 
 without_cache <- marker(
