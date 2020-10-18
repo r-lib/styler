@@ -47,7 +47,7 @@ jobs:
           ref: ca9c8e69c727def88d8ba1c8b85b0e0bcea87b3f
           path: bench/sources/here
       - name: Fetch existing benchmarks
-        run: Rscript -e 'bench::cb_fetch()'
+        run: Rscript -e 'rlang::with_handlers(bench::cb_fetch(), error = function(e) paste("Could not fetch benchmarks, skipping. The error was", conditionMessage(e)))'
       - name: Run benchmarks
         run: Rscript -e 'bench::cb_run()'
       - name: Show benchmarks
