@@ -11,6 +11,7 @@
 #' styling whether or not it was actually changed (or would be changed when
 #' `dry` is not "off").
 #' @keywords internal
+#' @importFrom rlang local_options
 transform_files <- function(files, transformers, include_roxygen_examples, base_indention, dry) {
   transformer <- make_transformer(transformers, include_roxygen_examples, base_indention)
   max_char <- min(max(nchar(files), 0), getOption("width"))
@@ -19,9 +20,23 @@ transform_files <- function(files, transformers, include_roxygen_examples, base_
     cat("Styling ", len_files, " files:\n")
   }
 
-  changed <- map_lgl(files, transform_file,
-    fun = transformer, max_char_path = max_char, dry = dry
-  )
+  if (rlang::is_installed("furrr")) {
+    if (inherits(future::plan(), "uniprocess")) {
+      local_options(future.supportsMulticore.unstable = "quiet")
+      oplan <- future::plan("multiprocess")
+      on.exit(future::plan(oplan), add = TRUE)
+    }
+
+    changed <- furrr::future_map_lgl(files, transform_file,
+      fun = transformer, max_char_path = max_char, dry = dry,
+      .progress = TRUE
+    )
+  } else {
+    changed <- map_lgl(files, transform_file,
+      fun = transformer, max_char_path = max_char, dry = dry
+    )
+  }
+
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
   new_tibble(list(file = files, changed = changed), nrow = len_files)
