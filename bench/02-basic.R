@@ -30,7 +30,12 @@ with_cache <- marker(
 # style guide (some but not all expressions are)
 with_cache <- marker(
   cache_recording = {
-    gert::git_reset_hard(repo = path)
+    cat(
+      bench::system_time(gert::git_reset_hard(repo = path))[["process"]],
+      sep = "\n",
+      file = "timing-reset",
+      append = TRUE
+    )
     style_pkg(path, filetype = c("R", "rmd"))
   }
 )
@@ -41,9 +46,19 @@ cache_info()
 # recording and applying, transformers always ran on all expressions.
 gert::git_reset_hard(repo = path)
 cache_deactivate()
-
+time_for_git_reset <- as.numeric(readLines("timing-reset"))
+cat(
+  "Waiting ",
+  round(mean(time_for_git_reset), 3),
+  " seconds on average to simulate git reset. That way, `without_cache` and ",
+  "`cache_recording` are comparable. The 95% interval for reset are (",
+  round(quantile(time_for_git_reset, 0.025), 3), ", ",
+  round(quantile(time_for_git_reset, 0.975), 3), ").",
+  sep = ""
+)
 without_cache <- marker(
   without_cache = {
+    Sys.sleep(mean(time_for_git_reset))
     style_pkg(path, filetype = c("R", "rmd"))
   }
 )
