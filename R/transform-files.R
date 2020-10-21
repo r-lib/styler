@@ -20,7 +20,7 @@ transform_files <- function(files, transformers, include_roxygen_examples, base_
     cat("Styling ", len_files, " files:\n")
   }
 
-  if (rlang::is_installed("furrr")) {
+  if (!identical(Sys.getenv("TESTTHAT"), "true") && rlang::is_installed("furrr")) {
     if (inherits(future::plan(), "uniprocess")) {
       local_options(future.supportsMulticore.unstable = "quiet")
       oplan <- future::plan("multiprocess")
