@@ -7,6 +7,7 @@ path <- "sources/here"
 dir.create("plots")
 cache_clear(ask = FALSE)
 
+
 marker <- purrr::partial(
   bench::mark,
   min_iterations = 20,
@@ -19,6 +20,7 @@ marker <- purrr::partial(
 # No transformer is ran ever because all code is already compliant.
 cache_activate()
 cache_info()
+Sys.sleep(3) # make system more idle
 with_cache <- marker(
   cache_appyling = {
     style_pkg(path, filetype = c("R", "rmd"))
@@ -28,6 +30,7 @@ with_cache <- marker(
 # basically recording cache only
 # transformers are always ran on expressions that were not compliant with the
 # style guide (some but not all expressions are)
+Sys.sleep(3) # make system more idle
 with_cache <- marker(
   cache_recording = {
     cat(
@@ -56,6 +59,7 @@ cat(
   round(quantile(time_for_git_reset, 0.975), 3), ").",
   sep = ""
 )
+Sys.sleep(3) # make system more idle
 without_cache <- marker(
   without_cache = {
     Sys.sleep(mean(time_for_git_reset))
