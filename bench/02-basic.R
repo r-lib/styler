@@ -46,7 +46,7 @@ cache_info()
 # recording and applying, transformers always ran on all expressions.
 gert::git_reset_hard(repo = path)
 cache_deactivate()
-time_for_git_reset <- as.numeric(readLines("timing-reset"))
+time_for_git_reset <- as.numeric(readLines("timing-reset"))[-1]
 cat(
   "Waiting ",
   round(mean(time_for_git_reset), 3),
