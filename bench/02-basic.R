@@ -59,11 +59,10 @@ cat(
   round(quantile(time_for_git_reset, 0.975), 3), ").",
   sep = ""
 )
-mean_time_for_git_reset <- mean(time_for_git_reset)
 Sys.sleep(3) # make system more idle
 without_cache <- marker(
   without_cache = {
-    Sys.sleep(mean_time_for_git_reset)
+    Sys.sleep(mean(time_for_git_reset))
     style_pkg(path, filetype = c("R", "rmd"))
   }
 )
