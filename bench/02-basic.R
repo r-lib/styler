@@ -62,7 +62,6 @@ cat(
 Sys.sleep(3) # make system more idle
 without_cache <- marker(
   without_cache = {
-    Sys.sleep(mean(time_for_git_reset))
     style_pkg(path, filetype = c("R", "rmd"))
   }
 )
