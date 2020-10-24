@@ -40,7 +40,14 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ hashFiles('.github/R-version') }}-1-
-
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo -s eval "$sysreqs"
       - name: Install dependencies
         run: |
           Rscript -e "install.packages(c('gert', 'ggplot2', 'purrr'))" -e "remotes::install_deps(dependencies = TRUE); remotes::install_github('r-lib/bench')"
