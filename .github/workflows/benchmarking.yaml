@@ -21,6 +21,11 @@ jobs:
         run: git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF; git branch
       - name: Setup R
         uses: r-lib/actions/setup-r@master
+        with:
+          r: '4.0.0'
+          rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/291"
+          http-user-agent: "R/4.0.0 (ubuntu-16.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
