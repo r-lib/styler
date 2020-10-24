@@ -10,7 +10,7 @@ name: Continuous Benchmarks
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: ubuntu-18.04
     steps:
       - name: Checkout repo
         with:
@@ -23,8 +23,8 @@ jobs:
         uses: r-lib/actions/setup-r@master
         with:
           r: '4.0.0'
-          rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/291"
-          http-user-agent: "R/4.0.0 (ubuntu-16.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
+          rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/291"
+          http-user-agent: "R/4.0.0 (ubuntu-18.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
 
       - name: Query dependencies
         run: |
