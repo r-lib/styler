@@ -70,7 +70,9 @@ jobs:
       - name: Fetch existing benchmarks
         run: Rscript -e 'rlang::with_handlers(bench::cb_fetch(), error = function(e) paste("Could not fetch benchmarks, skipping. The error was", conditionMessage(e)))'
       - name: Prepare PR comment
-        run: echo 'Here is how the current PR would change benchmark results:\n' > bench/pr-comment
+        run: |
+          mkdir -p bench/pr-comment
+          echo 'Here is how the current PR would change benchmark results:\n' > bench/pr-comment/info.txt
       - name: Run benchmarks
         run: Rscript -e 'bench::cb_run()'
       - name: Show benchmarks
