@@ -26,9 +26,10 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@master
         with:
-          r: '4.0.0'
-          rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/291"
+          r-version: '4.0.0'
           http-user-agent: "R/4.0.0 (ubuntu-18.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions"
+        env:
+          RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/291"
 
       - name: Query dependencies
         run: |
