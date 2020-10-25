@@ -21,11 +21,12 @@ hash_standardize <- function(text) {
 #' @param cache_dir The caching directory relative to the `.Rcache` root to
 #'   look for a cached value.
 #' @keywords internal
+#' @importFrom R.cache generateCache
 is_cached <- function(text,
                       transformers,
                       more_specs,
                       cache_dir = cache_dir_default()) {
-  R.cache::generateCache(
+  generateCache(
     key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir
   ) %>%
@@ -109,9 +110,10 @@ cache_make_key <- function(text, transformers, more_specs) {
 #' Finds the path to the cache and creates it if it does not exist.
 #' @inheritParams cache_clear
 #' @keywords internal
+#' @importFrom R.cache getCachePath
 cache_find_path <- function(cache_name = NULL) {
   cache_name <- cache_get_or_derive_name(cache_name)
-  R.cache::getCachePath(c("styler", cache_name))
+  getCachePath(c("styler", cache_name))
 }
 
 #' Check if a cache is activated
@@ -143,12 +145,13 @@ cache_is_activated <- function(cache_name = NULL) {
 #' is.
 #' @param text A character vector with one or more expressions.
 #' @inheritParams cache_write
+#' @importFrom utils getParseData
 #' @keywords internal
-cache_by_expression <- function(text,
+cache_by_expression <- function(text, 
                                 transformers,
                                 more_specs) {
   expressions <- parse(text = text, keep.source = TRUE) %>%
-    utils::getParseData(includeText = TRUE)
+    getParseData(includeText = TRUE)
   if (env_current$any_stylerignore) {
     expressions <- expressions %>%
       add_stylerignore()
@@ -164,8 +167,9 @@ cache_by_expression <- function(text,
 #'
 #' @inheritParams cache_make_key
 #' @keywords internal
+#' @importFrom R.cache generateCache
 cache_write <- function(text, transformers, more_specs) {
-  R.cache::generateCache(
+  generateCache(
     key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir_default()
   ) %>%

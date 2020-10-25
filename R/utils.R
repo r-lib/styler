@@ -93,11 +93,12 @@ calls_sys <- function(sys_call, ...) {
 #' @param error_if_not_found Whether or not an error should be returned if the
 #'   option was not set.
 #' @keywords internal
+#' @importFrom rlang abort
 option_read <- function(x, default = NULL, error_if_not_found = TRUE) {
   if (x %in% names(options()) | !error_if_not_found) {
     getOption(x, default)
   } else {
-    rlang::abort(paste("R option", x, "most be set."))
+    abort(paste("R option", x, "most be set."))
   }
 }
 

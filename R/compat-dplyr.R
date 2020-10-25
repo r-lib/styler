@@ -52,8 +52,9 @@ filter <- function(.data, ...) {
   subset(.data, ...)
 }
 
+#' @importFrom rlang is_named
 left_join <- function(x, y, by) {
-  if (rlang::is_named(by)) {
+  if (is_named(by)) {
     by_x <- names(by)
     by_y <- unname(by)
   } else {

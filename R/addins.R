@@ -45,6 +45,7 @@ NULL
 
 
 #' @importFrom rlang abort
+#' @importFrom rstudioapi modifyRange documentSave setCursorPosition
 #' @keywords internal
 style_active_file <- function() {
   communicate_addins_style_transformers()
@@ -69,15 +70,15 @@ style_active_file <- function() {
   } else {
     abort("Can only style .R, .Rmd and .Rnw files.")
   }
-  rstudioapi::modifyRange(
+  modifyRange(
     c(1, 1, length(context$contents) + 1, 1),
     paste0(ensure_last_n_empty(out), collapse = "\n"),
     id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
-    rstudioapi::documentSave(context$id)
+    documentSave(context$id)
   }
-  rstudioapi::setCursorPosition(context$selection[[1]]$range)
+  setCursorPosition(context$selection[[1]]$range)
 }
 
 #' Wrapper around [style_pkg()] for access via Addin.
@@ -89,6 +90,7 @@ style_active_pkg <- function() {
 
 #' Styles the highlighted selection in a `.R` or `.Rmd` file.
 #' @importFrom rlang abort
+#' @importFrom rstudioapi documentSave
 #' @keywords internal
 style_selection <- function() {
   communicate_addins_style_transformers()
@@ -101,12 +103,13 @@ style_selection <- function() {
     id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
-    invisible(rstudioapi::documentSave(context$id))
+    invisible(documentSave(context$id))
   }
 }
 
+#' @importFrom rstudioapi getActiveDocumentContext
 get_rstudio_context <- function() {
-  rstudioapi::getActiveDocumentContext()
+  getActiveDocumentContext()
 }
 
 #' Asks the user to supply a style

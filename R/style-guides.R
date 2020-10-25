@@ -86,7 +86,7 @@ tidyverse_style <- function(scope = "tokens",
         style_space_around_tilde,
         strict = strict
       ),
-      spacing_around_op = purrr::partial(set_space_around_op,
+      spacing_around_op = partial(set_space_around_op,
         strict = strict
       ),
       remove_space_after_opening_paren,
@@ -140,7 +140,7 @@ tidyverse_style <- function(scope = "tokens",
           except_token_before = "COMMENT"
         )
       },
-      purrr::partial(remove_line_break_in_fun_call, strict = strict),
+      partial(remove_line_break_in_fun_call, strict = strict),
       add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
       set_linebreak_after_ggplot2_plus = if (strict) set_linebreak_after_ggplot2_plus
     )

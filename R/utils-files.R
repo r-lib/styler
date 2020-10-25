@@ -38,10 +38,11 @@ map_filetype_to_pattern <- function(filetype) {
 #' @param ... Passed to [base::dir()].
 #' @seealso set_and_assert_arg_paths
 #' @keywords internal
+#' @importFrom purrr map
 #' @examples
 #' setdiff("./file.R", "file.R") # you want to standardize first.
 dir_without_. <- function(path, ...) {
-  purrr::map(path, dir_without_._one, ...) %>%
+  map(path, dir_without_._one, ...) %>%
     unlist()
 }
 

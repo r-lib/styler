@@ -292,6 +292,7 @@ set_space_between_levels <- function(pd_flat) {
 #' @param force_one Whether or not to force one space or allow multiple spaces
 #'   after the regex "^#+'*".
 #' @importFrom purrr map_chr
+#' @importFrom rematch2 re_match
 #' @keywords internal
 start_comments_with_space <- function(pd, force_one = FALSE) {
   is_comment <- is_comment(pd)
@@ -305,7 +306,7 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
     return(pd)
   }
 
-  comments <- rematch2::re_match(
+  comments <- re_match(
     pd$text[is_comment],
     "^(?<prefix>#+['\\*]*)(?<space_after_prefix> *)(?<text>.*)$"
   )

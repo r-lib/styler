@@ -14,11 +14,12 @@
 #'   "#'1+  1"
 #' ))
 #' @keywords internal
+#' @importFrom tools parse_Rd
 parse_roxygen <- function(roxygen) {
   connection <- remove_roxygen_mask(roxygen) %>%
     textConnection()
   parsed <- connection %>%
-    tools::parse_Rd(fragment = TRUE) %>%
+    parse_Rd(fragment = TRUE) %>%
     as.character(deparse = TRUE)
   is_line_break <- parsed[1] == "\n"
   close(connection)

@@ -12,10 +12,11 @@
 #' potentially different with different versions of styler.
 #' @param ask Whether or not to interactively ask the user again.
 #' @family cache managers
+#' @importFrom R.cache clearCache
 #' @export
 cache_clear <- function(cache_name = NULL, ask = TRUE) {
   path_cache <- cache_find_path(cache_name)
-  R.cache::clearCache(path_cache, prompt = ask)
+  clearCache(path_cache, prompt = ask)
   cache_deactivate(verbose = FALSE)
 }
 
@@ -77,9 +78,10 @@ NULL
 #'   "tabular" for a tabular summary from [base::file.info()] or "both" for
 #'   both.
 #' @family cache managers
+#' @importFrom rlang arg_match
 #' @export
 cache_info <- function(cache_name = NULL, format = "both") {
-  rlang::arg_match(format, c("tabular", "lucid", "both"))
+  arg_match(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
   file_info <- file.info(files) %>%
