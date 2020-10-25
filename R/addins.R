@@ -90,7 +90,7 @@ style_active_pkg <- function() {
 
 #' Styles the highlighted selection in a `.R` or `.Rmd` file.
 #' @importFrom rlang abort
-#' @importFrom rstudioapi documentSave
+#' @importFrom rstudioapi documentSave modifyRange
 #' @keywords internal
 style_selection <- function() {
   communicate_addins_style_transformers()
@@ -98,7 +98,7 @@ style_selection <- function() {
   text <- context$selection[[1]]$text
   if (all(nchar(text) == 0)) abort("No code selected")
   out <- style_text(text, transformers = get_addins_style_transformer())
-  rstudioapi::modifyRange(
+  modifyRange(
     context$selection[[1]]$range, paste0(c(out, if (context$selection[[1]]$range$end[2] == 1) ""), collapse = "\n"),
     id = context$id
   )
@@ -116,10 +116,11 @@ get_rstudio_context <- function() {
 #' @importFrom rlang abort
 #' @keywords internal
 #' @importFrom rlang with_handlers abort
+#' @importFrom rstudioapi showPrompt
 set_style_transformers <- function() {
   current_style <- get_addins_style_transformer_name()
   new_style <-
-    rstudioapi::showPrompt(
+    showPrompt(
       "Select a style",
       "Enter the name of a style transformer, e.g. `styler::tidyverse_style()`",
       current_style
