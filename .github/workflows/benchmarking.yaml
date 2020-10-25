@@ -17,9 +17,9 @@ jobs:
           fetch-depth: 0
         uses: actions/checkout@master
       - name: Set up git user
-	      run: |
-	        git config --local user.name "GitHub Actions"
-	        git config --local user.email "actions@github.com"
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
       - name: Ensure base branch is fetched
         if: ${{ github.event_name == 'pull_request' }}
         run: git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF; git branch
