@@ -90,8 +90,5 @@ jobs:
         with:
           name: results
       - name: comment PR
-        uses: machine-learning-apps/pr-comment@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          path: results/info.txt
+        #uses: machine-learning-apps/pr-comment@master
+        run: cat bench/pr-comment/info.txt
