@@ -70,7 +70,8 @@ jobs:
       - name: Prepare PR comment
         run: |
           mkdir -p bench/pr-comment
-          echo 'Here is how the current PR would change benchmark results:\n' > bench/pr-comment/info.txt
+          echo "Here is how the current PR would change benchmark results when merged into $GITHUB_BASE_REF:" > bench/pr-comment/info.txt
+          echo "$GITHUB_EVENT_PULL_REQUEST_HEAD_SHA" >> bench/pr-comment/info.txt
       - name: Run benchmarks
         run: Rscript -e 'bench::cb_run()'
       - name: Show benchmarks
