@@ -82,9 +82,16 @@ jobs:
       - name: Push benchmarks
         if: ${{ github.event_name == 'push' }}
         run: Rscript -e "bench::cb_push()"
+      - uses: actions/upload-artifact@v1
+        with:
+          name: pr-comment
+          path: bench/pr-comment
+      - uses: actions/download-artifact@v1
+        with:
+          name: pr-comment
       - name: comment PR
         uses: machine-learning-apps/pr-comment@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: bench/pr-comment
+          path: pr-comment
