@@ -32,9 +32,7 @@ plot_against_base <- function(new_bm,
         stopifnot(nrow(new_bm) == 2)
         diff_in_percent <- round(100 * diff(new_bm$p50) / new_bm$p50[1])
         pr_comment <- glue::glue("* {name}: {new_bm$p50[1]} -> {new_bm$p50[2]} ({diff_in_percent}%)\n")
-        file <- "pr-comment/info.txt"
-        dir.create(dirname(file))
-        cat(pr_comment, file = file, append = TRUE)
+        cat(pr_comment, file = "pr-comment/info.txt", append = TRUE)
       }
     }
   }
