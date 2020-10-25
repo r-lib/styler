@@ -56,7 +56,7 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
-          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install libcurl4-openssl-dev libgit2-dev
       - name: Install dependencies
         run: |
           Rscript -e "install.packages(c('gert', 'ggplot2', 'purrr'))" -e "remotes::install_deps(dependencies = TRUE); remotes::install_github('r-lib/bench')"
