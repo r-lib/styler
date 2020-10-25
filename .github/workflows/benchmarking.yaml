@@ -7,10 +7,19 @@ on:
     branches:
     - master
 env:
-  RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/291"
+  RSPM:
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-18.04,   r: '4.0.0', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/291"}
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
         with:
@@ -25,9 +34,6 @@ jobs:
         run: git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF; git branch
       - name: Setup R
         uses: r-lib/actions/setup-r@master
-        with:
-          r-version: '4.0.0'
-          http-user-agent: "R/4.0.0 (ubuntu-18.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions"
       - name: Query dependencies
         run: |
           install.packages('remotes')
