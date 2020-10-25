@@ -10,7 +10,7 @@ cache_clear(ask = FALSE)
 
 marker <- purrr::partial(
   bench::mark,
-  min_iterations = 25,
+  min_iterations = 5,
   check = FALSE,
   filter_gc = FALSE,
   memory = TRUE # skip uncached first round
