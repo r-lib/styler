@@ -6,8 +6,6 @@ on:
   pull_request:
     branches:
     - master
-env:
-  RSPM:
 jobs:
   build:
     runs-on: ${{ matrix.config.os }}
