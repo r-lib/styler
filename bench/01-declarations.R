@@ -22,6 +22,10 @@ plot_against_base <- function(new_bm,
         dplyr::filter(.data$name %in% !!name)
       reference$expression <- bench:::new_bench_expr(Sys.getenv("GITHUB_BASE_REF"))
       new_bm <- dplyr::bind_rows(reference, new_bm)
+      stopifnot(nrow(new_bm) == 2)
+      diff_in_percent <- round(100 * diff(new_bm$p50) / new_bm$p50[1])
+      pr_comment <- glue::glue("* {name}: {new_bm$p50[1]} -> {new_bm$p50[2]} ({diff_in_percent}%)\n")
+      cat(pr_comment, file = "pr-comment", append = TRUE)
     }
   }
   new_bm$branch <- factor(new_bm$expression)

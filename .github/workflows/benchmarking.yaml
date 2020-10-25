@@ -69,6 +69,8 @@ jobs:
           path: bench/sources/here
       - name: Fetch existing benchmarks
         run: Rscript -e 'rlang::with_handlers(bench::cb_fetch(), error = function(e) paste("Could not fetch benchmarks, skipping. The error was", conditionMessage(e)))'
+      - name: Prepare PR comment
+        run: echo 'Here is how the current PR would change benchmark results:\n' > bench/pr-comment
       - name: Run benchmarks
         run: Rscript -e 'bench::cb_run()'
       - name: Show benchmarks
@@ -80,3 +82,9 @@ jobs:
       - name: Push benchmarks
         if: ${{ github.event_name == 'push' }}
         run: Rscript -e "bench::cb_push()"
+      - name: comment PR
+        uses: machine-learning-apps/pr-comment@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: bench/pr-comment
