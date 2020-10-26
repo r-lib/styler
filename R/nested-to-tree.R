@@ -7,7 +7,7 @@
 #' @importFrom purrr when
 #' @keywords internal
 create_tree <- function(text, structure_only = FALSE) {
-  compute_parse_data_nested(text) %>%
+  compute_parse_data_nested(text, transformers = NULL) %>%
     pre_visit(c(default_style_guide_attributes)) %>%
     create_tree_from_pd_with_default_style_attributes(structure_only)
 }
