@@ -205,7 +205,7 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># as long as the order of the markers is correct, the lines are ignored.</span>
-<span class='fu'><a href='style_text.html'>style_text</a></span>(
+<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
   <span class='st'>"
   1+1
   # styler: off
@@ -213,7 +213,7 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
   # styler: on
   1+1
   "</span>
-)
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; <span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span>
 #&gt;   </span><span style='color: #555555;font-style: italic;'># styler: off</span><span>
@@ -223,8 +223,8 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
 <span class='co'># if there is a stop marker before a start marker, styler won't be able</span>
 <span class='co'># to figure out which lines you want to ignore and won't ignore anything,</span>
 <span class='co'># issuing a warning.</span>
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='style_text.html'>style_text</a></span>(
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
   <span class='st'>"
   1+1
   # styler: off
@@ -232,8 +232,8 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
   # styler: off
   1+1
   "</span>
-)
-}
+<span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></span></pre>
   </div>
