@@ -44,4 +44,3 @@ For this reason, always test the hook manually end-to-end with
 
 - add a description of the new hook to the `README.Rmd`. Both description and
   `yaml` example code.
-

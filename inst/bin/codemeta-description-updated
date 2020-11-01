@@ -7,4 +7,3 @@ then
     echo >&2 "codemeta.json is out of date; please re-run codemetar::write_codemeta()."
     exit 1
 fi
-

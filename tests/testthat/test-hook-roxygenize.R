@@ -1,9 +1,9 @@
+path <- fs::path(tempdir(), "a12")
+fs::dir_create(path)
+path_r <- fs::path(path, "R")
+fs::dir_create(path_r)
+
 test_that("roxygen runs are done if necessary", {
-  path <- fs::path(tempdir(), "a12")
-  fs::dir_create(path)
-  path_r <- fs::path(path, "R")
-  fs::dir_create(path_r)
-  setwd(path)
   withr::with_dir(
     path,
     {
@@ -24,7 +24,7 @@ test_that("roxygen runs are done if necessary", {
       git2r::commit(".", "add roxgen2 file")
 
       # when non roxygen lines are added
-      text2 <- c("x <- function()", "  NULL")
+      text2 <- c("if (x) {", " TRUE", "} else {", "  not_TRue(sinux(-i))", "}")
       writeLines(text2, "R/third.R")
       expect_equal(extract_diff_root("."), NULL)
       git2r::add(".", "R/third.R")
@@ -51,6 +51,33 @@ test_that("roxygen runs are done if necessary", {
       git2r::add(".", "R/first.R")
       expect_equal(length(extract_diff_root(".")), 5)
       expect_true(diff_requires_run_roxygenize("."))
+      git2r::commit(".", "when reomved")
+    }
+  )
+})
+
+test_that("change in formals alone triggers invalidation", {
+  # when the function formals change but nothing else
+  withr::with_dir(
+    path,
+    {
+      # when new lines are added
+      text <- c("#' Roxygen comment", "#'", "#' more things", "x <- function(a = 2) {", "  a", "}")
+      writeLines(text, "R/fifth.R")
+      expect_equal(length(extract_diff_root(".")), 0)
+      expect_false(diff_requires_run_roxygenize("."))
+      git2r::add(".", "R/fifth.R")
+
+      expect_equal(extract_diff_root("."), add_trailing_linebreak(text))
+      expect_true(diff_requires_run_roxygenize("."))
+      git2r::commit(".", "add file 5")
+      # change signature
+      text <- c("#' Roxygen comment", "#'", "#' more things", "x <- function(a = 3) {", "  a", "}")
+      writeLines(text, "R/fifth.R")
+      git2r::add(".", "R/fifth.R")
+      expect_equal(extract_diff_root("."), add_trailing_linebreak(c("x <- function(a = 2) {", "x <- function(a = 3) {")))
+      expect_true(diff_requires_run_roxygenize("."))
+      git2r::commit(".", "clear case 5")
     }
   )
 })
