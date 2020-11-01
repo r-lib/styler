@@ -27,7 +27,15 @@
 - empty lines are now removed between pipes (#645).
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
 - always strip trailing spaces and make cache insensitive to it (#626).
-- minor documentation improvements (#643, #618, #614, #677).
+- minor documentation improvements (#643, #618, #614, #677, #651, #667, #672, 
+  #687).
+- The internal `create_tree()` only used in testing of styler now works when the 
+  cache is activated (#688).
+
+## Infrastructure changes
+
+- switched from travis and AppVeyor to GitHub Actions (#653, #660).
+- Added basic continuous benchmarking (#674, #684).
 
 # styler 1.3.2
 
