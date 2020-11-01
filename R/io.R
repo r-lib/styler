@@ -96,6 +96,8 @@ read_utf8 <- function(path) {
 #' @keywords internal
 #' @importFrom utils head
 read_utf8_bare <- function(con, warn = TRUE) {
+  opts <- options(encoding = "native.enc")
+  on.exit(options(opts), add = TRUE)
   x <- readLines(con, encoding = "UTF-8", warn = warn)
   i <- invalid_utf8(x)
   n <- length(i)
