@@ -60,5 +60,15 @@ diff_requires_run_roxygenize <- function(root = here::here()) {
     rlang::abort("You need to install the R package git2r to run this hook.")
   }
   changed_lines_content <- extract_diff_root(root)
-  any(grepl("^#'", changed_lines_content))
+  is_roxygen <- grepl("^#'", changed_lines_content)
+  if (any(is_roxygen)) {
+    return(TRUE)
+  } else {
+    # check if formals were changed
+    # we invalidate the cache on formal change, even if it is not sure they are
+    # documented with roxygen. This is easy, cheap and safe. Might give false
+    # positive (invalidates in cases where it's not necessary).
+    without_comments <- gsub("#.*", "", changed_lines_content)
+    any(grep("function(", without_comments, fixed = TRUE))
+  }
 }
