@@ -45,7 +45,6 @@ NULL
 
 
 #' @importFrom rlang abort
-#' @importFrom rstudioapi modifyRange documentSave setCursorPosition
 #' @keywords internal
 style_active_file <- function() {
   communicate_addins_style_transformers()
@@ -70,15 +69,15 @@ style_active_file <- function() {
   } else {
     abort("Can only style .R, .Rmd and .Rnw files.")
   }
-  modifyRange(
+  rstudioapi::modifyRange(
     c(1, 1, length(context$contents) + 1, 1),
     paste0(ensure_last_n_empty(out), collapse = "\n"),
     id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
-    documentSave(context$id)
+    rstudioapi::documentSave(context$id)
   }
-  setCursorPosition(context$selection[[1]]$range)
+  rstudioapi::setCursorPosition(context$selection[[1]]$range)
 }
 
 #' Wrapper around [style_pkg()] for access via Addin.
@@ -90,7 +89,6 @@ style_active_pkg <- function() {
 
 #' Styles the highlighted selection in a `.R` or `.Rmd` file.
 #' @importFrom rlang abort
-#' @importFrom rstudioapi documentSave modifyRange
 #' @keywords internal
 style_selection <- function() {
   communicate_addins_style_transformers()
@@ -98,12 +96,12 @@ style_selection <- function() {
   text <- context$selection[[1]]$text
   if (all(nchar(text) == 0)) abort("No code selected")
   out <- style_text(text, transformers = get_addins_style_transformer())
-  modifyRange(
+  rstudioapi::modifyRange(
     context$selection[[1]]$range, paste0(c(out, if (context$selection[[1]]$range$end[2] == 1) ""), collapse = "\n"),
     id = context$id
   )
   if (Sys.getenv("save_after_styling") == TRUE && context$path != "") {
-    invisible(documentSave(context$id))
+    invisible(rstudioapi::documentSave(context$id))
   }
 }
 
@@ -116,11 +114,10 @@ get_rstudio_context <- function() {
 #' @importFrom rlang abort
 #' @keywords internal
 #' @importFrom rlang with_handlers abort
-#' @importFrom rstudioapi showPrompt
 set_style_transformers <- function() {
   current_style <- get_addins_style_transformer_name()
   new_style <-
-    showPrompt(
+    rstudioapi::showPrompt(
       "Select a style",
       "Enter the name of a style transformer, e.g. `styler::tidyverse_style()`",
       current_style

@@ -25,6 +25,7 @@ Imports:
     rematch2 (>= 2.0.1),
     rlang (>= 0.1.1),
     rprojroot (>= 1.1),
+    rstudioapi (>= 0.7),
     tibble (>= 1.4.2),
     tools,
     withr (>= 1.0.0),
@@ -37,7 +38,6 @@ Suggests:
     knitr,
     prettycode,
     rmarkdown,
-    rstudioapi (>= 0.7),
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
