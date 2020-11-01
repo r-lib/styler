@@ -1,7 +1,15 @@
-#precommit v0.1.3.9000
+# precommit v0.2.0-rc (Development)
+
+**API changes**
 
 - `version_precommit()` and `update_precommit()` are new functions to check the
   version of the installed pre-commit executable and to update it (#197).
+
+**Minor changes**
+
+- The cache for the roxygen2 hook is now also invalidated for changes in formals 
+  if there are no changes in roxygen comments (#214).
+  
 
 # precommit v0.1.3
 
