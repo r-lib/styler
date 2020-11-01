@@ -18,7 +18,6 @@ plot_against_base <- function(new_bm,
     # if a pull request
     reference <- bm[commit_is_reference, "benchmarks"][[1]][[1]]
     # if benchmark exists in base branch
-<<<<<<< HEAD
     if ("name" %in% names(reference)) {
       reference <- reference %>%
         dplyr::filter(.data$name %in% !!name)
@@ -31,22 +30,6 @@ plot_against_base <- function(new_bm,
         pr_comment <- glue::glue("* {name}: {round(new_bm$p50[1], 3)} -> {round(new_bm$p50[2], 3)} ({diff_in_percent}%)")
         cat(pr_comment, file = "pr-comment/info.txt", sep = "\n", append = TRUE)
       }
-=======
-    reference <- reference %>%
-      dplyr::filter(.data$name %in% !!name)
-    if (nrow(reference) > 0) {
-      # if benchmark exists in base branch
-      reference$expression <- bench:::new_bench_expr(Sys.getenv("GITHUB_BASE_REF"))
-      new_bm <- dplyr::bind_rows(reference, new_bm)
-      stopifnot(nrow(new_bm) == 2)
-      diff_in_percent <- round(100 * diff(new_bm$p50) / new_bm$p50[1])
-      diff_in_percent <- ifelse(diff_in_percent > 0,
-        paste0("+", diff_in_percent),
-        diff_in_percent
-      )
-      pr_comment <- glue::glue("* {name}: {round(new_bm$p50[1], 3)} -> {round(new_bm$p50[2], 3)} ({diff_in_percent}%)")
-      cat(pr_comment, file = "pr-comment/info.txt", sep = "\n", append = TRUE)
->>>>>>> show + if positive
     }
   }
   new_bm$branch <- factor(new_bm$expression)
