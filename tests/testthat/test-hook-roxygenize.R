@@ -77,7 +77,7 @@ test_that("change in formals alone triggers invalidation", {
       git2r::add(".", "R/fifth.R")
       expect_equal(extract_diff_root("."), add_trailing_linebreak(c("x <- function(a = 2) {", "x <- function(a = 3) {")))
       expect_true(diff_requires_run_roxygenize("."))
-      git2r::commit("clear case 5")
+      git2r::commit(".", "clear case 5")
     }
   )
 })
