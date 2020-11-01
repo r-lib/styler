@@ -182,7 +182,7 @@
 *-out.R file, everything after the first dash is replaced by *-out.R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>construct_out</span><span class='op'>(</span><span class='va'>in_paths</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>construct_out</span>(<span class='kw'>in_paths</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,10 +195,10 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>construct_out</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <pre class="examples"><div class='input'><span class='kw'>styler</span>:::<span class='fu'>construct_out</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='st'>"path/to/file/first-in.R"</span>,
   <span class='st'>"path/to/file/first-extended-in.R"</span>
-<span class='op'>)</span><span class='op'>)</span>
+))
 </div><div class='output co'>#&gt; [1] "path/to/file/first-out.R"          "path/to/file/first-extended-out.R"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

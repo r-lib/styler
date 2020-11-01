@@ -180,7 +180,7 @@
     <p>See https://yihui.name/knitr/demo/stitch/#spin-comment-out-texts for details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_code_chunk_header</span><span class='op'>(</span><span class='va'>pd</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>is_code_chunk_header</span>(<span class='kw'>pd</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,12 +193,12 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='st'>"# title"</span>,
   <span class='st'>"some_code &lt;- function() {}"</span>,
   <span class='st'>"#+ chunk-label, opt1=value1"</span>,
   <span class='st'>"call(3, 2, c(3:2))"</span>
-<span class='op'>)</span><span class='op'>)</span>
+))
 </div><div class='output co'>#&gt; <span style='color: #555555;font-style: italic;'># title</span><span>
 #&gt; some_code </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span><span> </span><span style='color: #BBBB00;'>{}</span><span>
 #&gt; </span><span style='color: #555555;font-style: italic;'>#+ chunk-label, opt1=value1</span><span>

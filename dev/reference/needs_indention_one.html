@@ -186,7 +186,7 @@ cause indention, considering that there might be other potential triggers
 Indention is needed if the two conditions apply:</p>
     </div>
 
-    <pre class="usage"><span class='fu'>needs_indention_one</span><span class='op'>(</span><span class='va'>pd</span>, <span class='va'>potential_trigger_pos</span>, <span class='va'>other_trigger_tokens</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>needs_indention_one</span>(<span class='kw'>pd</span>, <span class='kw'>potential_trigger_pos</span>, <span class='kw'>other_trigger_tokens</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,10 +229,10 @@ the trigger is passive.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='st'>"call(named = c,"</span>,
   <span class='st'>"named = b)"</span>
-<span class='op'>)</span>, strict <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+), strict = <span class='fl'>FALSE</span>)
 </div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span>named = c,
 #&gt;   named = b</span><span style='color: #BBBB00;'>)</span><span></div></span></pre>
   </div>

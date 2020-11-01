@@ -196,18 +196,18 @@ of literals and <code>styler:::is_cached()</code> won't pick up changes. See how
 done in <code><a href='tidyverse_style.html'>tidyverse_style()</a></code> with <code>indent_by</code> and other arguments.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_style_guide</span><span class='op'>(</span>
-  initialize <span class='op'>=</span> <span class='va'>default_style_guide_attributes</span>,
-  line_break <span class='op'>=</span> <span class='cn'>NULL</span>,
-  space <span class='op'>=</span> <span class='cn'>NULL</span>,
-  token <span class='op'>=</span> <span class='cn'>NULL</span>,
-  indention <span class='op'>=</span> <span class='cn'>NULL</span>,
-  use_raw_indention <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  reindention <span class='op'>=</span> <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span><span class='op'>(</span><span class='op'>)</span>,
-  style_guide_name <span class='op'>=</span> <span class='cn'>NULL</span>,
-  style_guide_version <span class='op'>=</span> <span class='cn'>NULL</span>,
-  more_specs <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>create_style_guide</span>(
+  initialize = <span class='kw'>default_style_guide_attributes</span>,
+  line_break = <span class='kw'>NULL</span>,
+  space = <span class='kw'>NULL</span>,
+  token = <span class='kw'>NULL</span>,
+  indention = <span class='kw'>NULL</span>,
+  use_raw_indention = <span class='fl'>FALSE</span>,
+  reindention = <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span>(),
+  style_guide_name = <span class='kw'>NULL</span>,
+  style_guide_version = <span class='kw'>NULL</span>,
+  more_specs = <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -273,20 +273,20 @@ beforehand in <code><a href='https://purrr.tidyverse.org/reference/partial.html'
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>set_line_break_before_curly_opening</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pd_flat</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>op</span> <span class='op'>&lt;-</span> <span class='va'>pd_flat</span><span class='op'>$</span><span class='va'>token</span> <span class='op'>%in%</span> <span class='st'>"'{'"</span>
-  <span class='va'>pd_flat</span><span class='op'>$</span><span class='va'>lag_newlines</span><span class='op'>[</span><span class='va'>op</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1L</span>
-  <span class='va'>pd_flat</span>
-<span class='op'>}</span>
-<span class='va'>set_line_break_before_curly_opening_style</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>create_style_guide</span><span class='op'>(</span>
-    line_break <span class='op'>=</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/lst.html'>lst</a></span><span class='op'>(</span><span class='va'>set_line_break_before_curly_opening</span><span class='op'>)</span>
-  <span class='op'>)</span>
-<span class='op'>}</span>
-<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
+    <pre class="examples"><div class='input'><span class='kw'>set_line_break_before_curly_opening</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>pd_flat</span>) {
+  <span class='kw'>op</span> <span class='op'>&lt;-</span> <span class='kw'>pd_flat</span><span class='op'>$</span><span class='kw'>token</span> <span class='op'>%in%</span> <span class='st'>"'{'"</span>
+  <span class='kw'>pd_flat</span><span class='op'>$</span><span class='kw'>lag_newlines</span>[<span class='kw'>op</span>] <span class='op'>&lt;-</span> <span class='fl'>1L</span>
+  <span class='kw'>pd_flat</span>
+}
+<span class='kw'>set_line_break_before_curly_opening_style</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>() {
+  <span class='fu'>create_style_guide</span>(
+    line_break = <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/lst.html'>lst</a></span>(<span class='kw'>set_line_break_before_curly_opening</span>)
+  )
+}
+<span class='fu'><a href='style_text.html'>style_text</a></span>(
   <span class='st'>"a &lt;- function(x) { x }"</span>,
-  style <span class='op'>=</span> <span class='va'>set_line_break_before_curly_opening_style</span>
-<span class='op'>)</span>
+  style = <span class='kw'>set_line_break_before_curly_opening_style</span>
+)
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Style guides without a name and a version field are depreciated and won't be supported in styler &gt;= 1.4. </span>
 #&gt; <span class='warning'>If you are a user: Open an issue on https://github.com/r-lib/styler and provide a reproducible example of this error. </span>
 #&gt; <span class='warning'>If you are a developer: When you create a style guide with `styler::create_style_guide()`, the argument `style_guide_name` and `style_guide_version` should be non-NULL. See help("create_style_guide") for how to set them.</span></div><div class='output co'>#&gt; a <span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span><span>x</span><span style='color: #BBBB00;'>)</span><span>

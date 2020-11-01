@@ -184,7 +184,7 @@ than \\dont{...} and friends." />
 than <code>\\dont{...}</code> and friends.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_roxygen</span><span class='op'>(</span><span class='va'>roxygen</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>parse_roxygen</span>(<span class='kw'>roxygen</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,14 +197,14 @@ than <code>\\dont{...}</code> and friends.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>parse_roxygen</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <pre class="examples"><div class='input'><span class='kw'>styler</span>:::<span class='fu'>parse_roxygen</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='st'>"#' @examples"</span>,
   <span class='st'>"#' 1+  1"</span>
-<span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "1+  1\n"</div><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>parse_roxygen</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+))
+</div><div class='output co'>#&gt; [1] "1+  1\n"</div><div class='input'><span class='kw'>styler</span>:::<span class='fu'>parse_roxygen</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='st'>"#' @examples 33"</span>,
   <span class='st'>"#'1+  1"</span>
-<span class='op'>)</span><span class='op'>)</span>
+))
 </div><div class='output co'>#&gt; [1] "33\n"    "1+  1\n"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

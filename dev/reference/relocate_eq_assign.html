@@ -207,7 +207,7 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 <em>nests</em> into a visitor call.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>relocate_eq_assign</span><span class='op'>(</span><span class='va'>pd</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>relocate_eq_assign</span>(<span class='kw'>pd</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,7 +220,7 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span><span class='op'>(</span><span class='st'>"a &lt;- b &lt;- 3"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'>styler</span>:::<span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span>(<span class='st'>"a &lt;- b &lt;- 3"</span>)
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 10 x 11</span><span>
 #&gt;    line1  col1 line2  col2    id parent token    terminal text     pos_id short 
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
@@ -233,7 +233,7 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 #&gt; </span><span style='color: #555555;'> 7</span><span>     1     6     1     6     6     10 expr     FALSE    b             7 </span><span style='color: #555555;'>"</span><span>b</span><span style='color: #555555;'>"</span><span>   
 #&gt; </span><span style='color: #555555;'> 8</span><span>     1     8     1     9     5     10 LEFT_AS… TRUE     &lt;-            8 </span><span style='color: #555555;'>"</span><span>&lt;-</span><span style='color: #555555;'>"</span><span>  
 #&gt; </span><span style='color: #555555;'> 9</span><span>     1    11     1    11     7      8 NUM_CON… TRUE     3             9 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   
-#&gt; </span><span style='color: #555555;'>10</span><span>     1    11     1    11     8     10 expr     FALSE    3            10 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   </div><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span><span class='op'>(</span><span class='st'>"a  = b = 3"</span><span class='op'>)</span>
+#&gt; </span><span style='color: #555555;'>10</span><span>     1    11     1    11     8     10 expr     FALSE    3            10 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>   </div><div class='input'><span class='kw'>styler</span>:::<span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span>(<span class='st'>"a  = b = 3"</span>)
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 11</span><span>
 #&gt;    line1  col1 line2  col2    id parent token      terminal text    pos_id short
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
@@ -246,12 +246,12 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 #&gt; </span><span style='color: #555555;'> 7</span><span>     1     6     1     6     7     13 expr       FALSE    b            7 </span><span style='color: #555555;'>"</span><span>b</span><span style='color: #555555;'>"</span><span>  
 #&gt; </span><span style='color: #555555;'> 8</span><span>     1     8     1     8     6     13 EQ_ASSIGN  TRUE     =            8 </span><span style='color: #555555;'>"</span><span>=</span><span style='color: #555555;'>"</span><span>  
 #&gt; </span><span style='color: #555555;'> 9</span><span>     1    10     1    10     9     10 NUM_CONST  TRUE     3            9 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>  
-#&gt; </span><span style='color: #555555;'>10</span><span>     1    10     1    10    10     13 expr       FALSE    3           10 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>  </div><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span><span class='op'>(</span>
+#&gt; </span><span style='color: #555555;'>10</span><span>     1    10     1    10    10     13 expr       FALSE    3           10 </span><span style='color: #555555;'>"</span><span>3</span><span style='color: #555555;'>"</span><span>  </div><div class='input'><span class='kw'>styler</span>:::<span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span>(
   <span class='st'>"x = 5
   if(x &gt;= 5)
   y = TRUE else
   y = FALSE"</span>,
-<span class='op'>)</span>
+)
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 29 x 11</span><span>
 #&gt;    line1  col1 line2  col2    id parent token    terminal text      pos_id short
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
@@ -265,12 +265,12 @@ wrap the the implementation <code><a href='relocate_eq_assign_nest.html'>relocat
 #&gt; </span><span style='color: #555555;'> 8</span><span>     2     3     2     4    11     42 IF       TRUE     </span><span style='color: #555555;'>"</span><span>if</span><span style='color: #555555;'>"</span><span>           8 </span><span style='color: #555555;'>"</span><span>if</span><span style='color: #555555;'>"</span><span> 
 #&gt; </span><span style='color: #555555;'> 9</span><span>     2     5     2     5    12     42 '('      TRUE     </span><span style='color: #555555;'>"</span><span>(</span><span style='color: #555555;'>"</span><span>            9 </span><span style='color: #555555;'>"</span><span>(</span><span style='color: #555555;'>"</span><span>  
 #&gt; </span><span style='color: #555555;'>10</span><span>     2     6     2    11    19     42 expr     FALSE    </span><span style='color: #555555;'>"</span><span>x &gt;= 5</span><span style='color: #555555;'>"</span><span>      10 </span><span style='color: #555555;'>"</span><span>x &gt;…
-#&gt; </span><span style='color: #555555;'># … with 19 more rows</span><span></div><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span><span class='op'>(</span>
+#&gt; </span><span style='color: #555555;'># … with 19 more rows</span><span></div><div class='input'><span class='kw'>styler</span>:::<span class='fu'><a href='get_parse_data.html'>get_parse_data</a></span>(
   <span class='st'>"x &lt;- 5
   if(x &gt;= 5)
   y &lt;- TRUE else
   y &lt;- FALSE"</span>,
-<span class='op'>)</span>
+)
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 29 x 11</span><span>
 #&gt;    line1  col1 line2  col2    id parent token  terminal text        pos_id short
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>

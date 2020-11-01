@@ -182,14 +182,14 @@ to one line of code." />
 to one line of code.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>style_text</span><span class='op'>(</span>
-  <span class='va'>text</span>,
-  <span class='va'>...</span>,
-  style <span class='op'>=</span> <span class='va'>tidyverse_style</span>,
-  transformers <span class='op'>=</span> <span class='fu'>style</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>,
-  include_roxygen_examples <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  base_indention <span class='op'>=</span> <span class='fl'>0</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>style_text</span>(
+  <span class='kw'>text</span>,
+  <span class='kw'>...</span>,
+  style = <span class='kw'>tidyverse_style</span>,
+  transformers = <span class='fu'>style</span>(<span class='kw'>...</span>),
+  include_roxygen_examples = <span class='fl'>TRUE</span>,
+  base_indention = <span class='fl'>0</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -238,15 +238,15 @@ multi-line strings are present. See 'Examples'.</p></td>
 <code><a href='styler_addins.html'>styler_addins</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"call( 1)"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>1</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"1    + 1"</span>, strict <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'>1</span><span>    </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a%&gt;%b"</span>, scope <span class='op'>=</span> <span class='st'>"spaces"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b</div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a%&gt;%b; a"</span>, scope <span class='op'>=</span> <span class='st'>"line_breaks"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b; a</div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a%&gt;%b; a"</span>, scope <span class='op'>=</span> <span class='st'>"tokens"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'>style_text</span>(<span class='st'>"call( 1)"</span>)
+</div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>1</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"1    + 1"</span>, strict = <span class='fl'>FALSE</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'>1</span><span>    </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b"</span>, scope = <span class='st'>"spaces"</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b</div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b; a"</span>, scope = <span class='st'>"line_breaks"</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b; a</div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b; a"</span>, scope = <span class='st'>"tokens"</span>)
 </div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> </span><span style='color: #00BBBB;'>b</span><span style='color: #BBBB00;'>()</span><span>
 #&gt; a</div><div class='input'><span class='co'># the following is identical but the former is more convenient:</span>
-<span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a&lt;-3++1"</span>, style <span class='op'>=</span> <span class='va'>tidyverse_style</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a&lt;-3++1"</span>, transformers <span class='op'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span><span class='op'>(</span>strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>style_text</span>(<span class='st'>"a&lt;-3++1"</span>, style = <span class='kw'>tidyverse_style</span>, strict = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a&lt;-3++1"</span>, transformers = <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(strict = <span class='fl'>TRUE</span>))
 </div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

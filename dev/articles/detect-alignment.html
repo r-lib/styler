@@ -140,25 +140,28 @@
     
 <p>Sometimes, you deliberately align code to make it more readable.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
-  a <span class="op">=</span>       <span class="fl">3</span>,
-  b <span class="op">=</span> <span class="fl">3213232</span>
-<span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
+  a =       <span class="fl">3</span>,
+  b = <span class="fl">3213232</span>
+)
+</pre></div>
 <p>Until styler 1.1.1.9002 (with <code>strict = TRUE</code>, e.g. as in <code><a href="../reference/style_file.html">styler::style_file(..., strict = TRUE)</a></code>), this was formatted as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
-  a <span class="op">=</span> <span class="fl">3</span>,
-  b <span class="op">=</span> <span class="fl">3213232</span>
-<span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
+  a = <span class="fl">3</span>,
+  b = <span class="fl">3213232</span>
+)
+</pre></div>
 <p>because no alignment detection was built in.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>styler &gt;= 1.1.1.9003 detects aforementioned alignment for function calls. This vignette describes how aligned code is defined in styler and gives some examples so users can format their aligned code to match the definition styler uses to ensure their code is not unintentionally reformatted.</p>
 <p>An important definition used in the remainder is the one of a <strong>column</strong>. All arguments of a function call that have the same position but are placed on different lines form a column. The below call shows a call with two columns and two rows. Columns separate arguments of the function call, so the separator is the comma. The first row is named because all arguments are named, the second is unnamed:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
   <span class="co"># column 1  | column 2 |</span>
-  abkj <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,         <span class="fl">7</span>,
-  more_ <span class="op">=</span> <span class="st">"a"</span>, <span class="fl">2</span> <span class="co"># more</span>
-<span class="op">)</span></pre></div>
+  abkj = <span class="fu">f</span>(<span class="fl">2</span>),         <span class="fl">7</span>,
+  more_ = <span class="st">"a"</span>, <span class="fl">2</span> <span class="co"># more</span>
+)
+</pre></div>
 <div id="function-calls" class="section level2">
 <h2 class="hasAnchor">
 <a href="#function-calls" class="anchor"></a>Function calls</h2>
@@ -171,18 +174,19 @@
 <span class="co"># all arguments of first column named -&gt; must right align</span>
 <span class="co"># aligned if the (imaginary) comma on the last line is in line with the commas </span>
 <span class="co"># from the two top lines.</span>
-<span class="fu">fell</span><span class="op">(</span>
-  x  <span class="op">=</span>    <span class="fl">1</span>, 
-  y  <span class="op">=</span>   <span class="fl">23</span>,
-  zz <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span>
+<span class="fu">fell</span>(
+  x  =    <span class="fl">1</span>, 
+  y  =   <span class="fl">23</span>,
+  zz = <span class="kw">NULL</span>
+)
 
 <span class="co"># this works also with more than one column</span>
-<span class="fu">fell</span><span class="op">(</span>
-  x  <span class="op">=</span>    <span class="fl">1</span>, annoying <span class="op">=</span> <span class="fl">3</span>, 
-  y  <span class="op">=</span>   <span class="fl">23</span>, <span class="co"># nothing in column 2 for row 2</span>
-  zz <span class="op">=</span> <span class="cn">NULL</span>, finally <span class="op">=</span> <span class="st">""</span>
-<span class="op">)</span></pre></div>
+<span class="fu">fell</span>(
+  x  =    <span class="fl">1</span>, annoying = <span class="fl">3</span>, 
+  y  =   <span class="fl">23</span>, <span class="co"># nothing in column 2 for row 2</span>
+  zz = <span class="kw">NULL</span>, finally = <span class="st">""</span>
+)
+</pre></div>
 <p><strong>If not all arguments of the first column are named:</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Make <strong>all except the first column’s commas</strong> match position</p>
 <ul>
 <li><p>vertically</p></li>
@@ -193,29 +197,32 @@
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="co"># not all arguments of first column named, hence, only </span>
 <span class="co"># commas of all but the first column must agree.</span>
-<span class="fu">gell</span><span class="op">(</span>
-  p <span class="op">=</span> <span class="fl">2</span>,   g <span class="op">=</span> <span class="fu">gg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,  n <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span>
-  <span class="fl">31</span>,    fds <span class="op">=</span>    <span class="op">-</span><span class="fl">1</span>, gz <span class="op">=</span> <span class="va">f</span> <span class="op">/</span> <span class="fl">3</span>,
-<span class="op">)</span></pre></div>
+<span class="fu">gell</span>(
+  p = <span class="fl">2</span>,   g = <span class="fu">gg</span>(<span class="kw">x</span>),  n = <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span>
+  <span class="fl">31</span>,    fds =    <span class="op">-</span><span class="fl">1</span>, gz = <span class="kw">f</span> <span class="op">/</span> <span class="fl">3</span>,
+)
+</pre></div>
 <p>By <em>align everything in between the commas</em>, we mean put zero space before a comma and at least one after. Note that the arguments on the first line are ignored when detecting alignment, which is best shown when code is formatted such that no line breaks will be modified by <em>styler</em>. This applies if all names on the first line are unnamed and all subsequent are named:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu">map</span><span class="op">(</span><span class="va">x</span>, <span class="va">f</span>, 
- arg1 <span class="op">=</span>  <span class="fl">121</span>,
- arg2 <span class="op">=</span>    <span class="fl">1</span>
-<span class="op">)</span></pre></div>
+<span class="fu">map</span>(<span class="kw">x</span>, <span class="kw">f</span>, 
+ arg1 =  <span class="fl">121</span>,
+ arg2 =    <span class="fl">1</span>
+)
+</pre></div>
 <p><strong>Examples</strong></p>
 <p>These typical examples match <em>styler</em>’s definition of alignment.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">key_here</span>,  <span class="op">~</span><span class="va">value_here</span>,
+<span class="kw">tibble</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(
+  <span class="op">~</span><span class="kw">key_here</span>,  <span class="op">~</span><span class="kw">value_here</span>,
   <span class="st">"left"</span>,         <span class="st">"right"</span>, <span class="co"># comments are allowed</span>
   <span class="st">"long string"</span>,   <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span>
-<span class="op">)</span>
+)
 
-<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
-  arg2  <span class="op">=</span>    <span class="fl">2</span>, 
-  ar    <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="op">)</span></pre></div>
+<span class="kw">purrr</span>::<span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="kw">x</span>, <span class="kw">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
+  arg2  =    <span class="fl">2</span>, 
+  ar    = <span class="fu">f</span>(<span class="kw">x</span>)
+)
+</pre></div>
 </div>
 <div id="technical-definition" class="section level3">
 <h3 class="hasAnchor">
@@ -227,55 +234,59 @@
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="co"># holds</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
-  a <span class="op">=</span>  <span class="fl">3</span>,
-  b <span class="op">=</span> <span class="fl">32</span>
-<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
+  a =  <span class="fl">3</span>,
+  b = <span class="fl">32</span>
+)
 
 <span class="co"># doesn't hold</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
-  a <span class="op">=</span>  <span class="fl">3</span>,
-   b <span class="op">=</span> <span class="fl">32</span>
-<span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
+  a =  <span class="fl">3</span>,
+   b = <span class="fl">32</span>
+)
+</pre></div>
 <ul>
 <li>spacing around comma (0 before, &gt; 1 after, &gt;= 0 after last column on line) and spacing around <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> (at least one before and after).</li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="co"># holds</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
-  a <span class="op">=</span>  <span class="fl">3</span>, k  <span class="op">=</span> <span class="fl">3</span>,
-  b <span class="op">=</span> <span class="fl">32</span>,    <span class="fl">222</span>
-<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
+  a =  <span class="fl">3</span>, k  = <span class="fl">3</span>,
+  b = <span class="fl">32</span>,    <span class="fl">222</span>
+)
 
 <span class="co"># doesn't hold</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
-  a <span class="op">=</span>  <span class="fl">3</span> ,
-  b <span class="op">=</span> <span class="fl">32</span>
-<span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
+  a =  <span class="fl">3</span> ,
+  b = <span class="fl">32</span>
+)
+</pre></div>
 <ul>
 <li>All commas from all columns are aligned. This means that for every column, all commas must be on the same positions as the commas from the other lines. If not all arguments are named in the first column, this column is not considered. The reason to exclude the first column is that, as in the example below, it is possible that some arguments are named while others are not. Then, it is not generally possible to keep the first rule (i.e. indention identical across lines). Also ensuring that the comma does not have any spaces before it and its alignment with other lines does not hold true. This is shown below with the line <code>f(x, y),</code>. For this reason, the requirements exclude the first column in such cases. The <em>holds</em> example shows that is is possible (but not required) for named arguments to also have the commas separating the first and second column aligned.</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="co"># holds</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
-  a <span class="op">=</span>  <span class="fu">ff</span><span class="op">(</span><span class="st">"pk"</span><span class="op">)</span>, k  <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span>  <span class="fl">2</span>,
-  b <span class="op">=</span>     <span class="fu">f</span><span class="op">(</span><span class="op">-</span><span class="va">g</span><span class="op">)</span>, <span class="fl">22</span> <span class="op">+</span> <span class="fl">1</span>, yy <span class="op">=</span> <span class="fl">1</span>,
-  c <span class="op">=</span>         <span class="fl">1</span>,
-  <span class="fu">f</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, 
-  <span class="va">k</span>
-<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
+  a =  <span class="fu">ff</span>(<span class="st">"pk"</span>), k  = <span class="fl">3</span>, x =  <span class="fl">2</span>,
+  b =     <span class="fu">f</span>(<span class="op">-</span><span class="kw">g</span>), <span class="fl">22</span> <span class="op">+</span> <span class="fl">1</span>, yy = <span class="fl">1</span>,
+  c =         <span class="fl">1</span>,
+  <span class="fu">f</span>(<span class="kw">x</span>, <span class="kw">y</span>), 
+  <span class="kw">k</span>
+)
 
 <span class="co"># doesn't hold</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
-  a <span class="op">=</span>   <span class="fl">3</span>,
-  b <span class="op">=</span> <span class="fl">32</span>, c <span class="op">=</span> <span class="fl">2</span>
-<span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span>(
+  a =   <span class="fl">3</span>,
+  b = <span class="fl">32</span>, c = <span class="fl">2</span>
+)
+</pre></div>
 <p>Note that the above definition does not check alignment of <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>, so <em>styler</em> will treat the following as aligned:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu">rge</span><span class="op">(</span>
-  x  <span class="op">=</span> <span class="fl">99</span>, x <span class="op">=</span>  <span class="fl">2</span>,
-  fs <span class="op">=</span>  <span class="fl">1</span>,  y <span class="op">=</span> <span class="fl">1</span>,
-<span class="op">)</span></pre></div>
+<span class="fu">rge</span>(
+  x  = <span class="fl">99</span>, x =  <span class="fl">2</span>,
+  fs =  <span class="fl">1</span>,  y = <span class="fl">1</span>,
+)
+</pre></div>
 </div>
 </div>
 <div id="comments" class="section level2">

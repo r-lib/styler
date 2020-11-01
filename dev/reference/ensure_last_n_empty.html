@@ -180,15 +180,15 @@
     <p>Ensure there is one (and only one) blank line at the end of a vector</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ensure_last_n_empty</span><span class='op'>(</span><span class='va'>x</span>, n <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ensure_last_n_empty</span>(<span class='kw'>x</span>, n = <span class='fl'>1</span>)</pre>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>ensure_last_n_empty</span><span class='op'>(</span><span class='st'>""</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] ""</div><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>ensure_last_n_empty</span><span class='op'>(</span><span class='va'>letters</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'>styler</span>:::<span class='fu'>ensure_last_n_empty</span>(<span class='st'>""</span>)
+</div><div class='output co'>#&gt; [1] ""</div><div class='input'><span class='kw'>styler</span>:::<span class='fu'>ensure_last_n_empty</span>(<span class='kw'>letters</span>)
 </div><div class='output co'>#&gt;  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
-#&gt; [20] "t" "u" "v" "w" "x" "y" "z" "" </div><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>ensure_last_n_empty</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; [20] "t" "u" "v" "w" "x" "y" "z" "" </div><div class='input'><span class='kw'>styler</span>:::<span class='fu'>ensure_last_n_empty</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>letters</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))
 </div><div class='output co'>#&gt;  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
 #&gt; [20] "t" "u" "v" "w" "x" "y" "z" "" </div></pre>
   </div>
