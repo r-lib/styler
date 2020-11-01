@@ -91,7 +91,6 @@ cache_make_key <- function(text, transformers) {
     text = hash_standardize(text),
     style_guide_name = transformers$style_guide_name,
     style_guide_version = transformers$style_guide_version,
-    style_guide_text = as.character(transformers),
     more_specs = as.character(transformers$more_specs) %>%
       set_names(names(transformers$more_specs))
   )
