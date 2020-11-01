@@ -24,7 +24,7 @@ test_that("roxygen runs are done if necessary", {
       git2r::commit(".", "add roxgen2 file")
 
       # when non roxygen lines are added
-      text2 <- c("x <- function()", "  NULL")
+      text2 <- c("if (x) {", " TRUE", "} else {", "  not_TRue(sinux(-i))", "}")
       writeLines(text2, "R/third.R")
       expect_equal(extract_diff_root("."), NULL)
       git2r::add(".", "R/third.R")
