@@ -19,6 +19,13 @@
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension).
 #' @param suffix The suffix of `file_name`.
+#' @param transform_file A function that takes the file name as input and is ran
+#'   right before the hook script is invoked.  This can be useful if you need to
+#'   make in-place modifications to the file, e.g. to test hooks that operate on
+#'   `.Rprofile`. You can't have different names for different tests on that
+#'   file because it must be called `.Rprofile` all the time. The transformation
+#'   is also applied to a temp copy of the reference file becore a comparison is
+#'   made.
 #' @inheritParams run_test_impl
 #' @keywords internal
 run_test <- function(hook_name,
@@ -26,7 +33,8 @@ run_test <- function(hook_name,
                      suffix = ".R",
                      error_msg = NULL,
                      cmd_args = NULL,
-                     copy = NULL) {
+                     copy = NULL,
+                     transform_file = function(file) NULL) {
   path_executable <- system.file(
     fs::path("bin", hook_name),
     package = "precommit"
@@ -37,7 +45,8 @@ run_test <- function(hook_name,
     path_executable, path_candidate[1],
     error_msg = error_msg,
     cmd_args = cmd_args,
-    copy = copy
+    copy = copy,
+    transform_file = transform_file
   )
 }
 
@@ -62,7 +71,8 @@ run_test_impl <- function(path_executable,
                           path_candidate,
                           error_msg,
                           cmd_args,
-                          copy) {
+                          copy,
+                          transform_file) {
   expect_success <- is.null(error_msg)
   tempdir <- tempdir()
   if (!is.null(copy)) {
@@ -85,15 +95,20 @@ run_test_impl <- function(path_executable,
   status <- withr::with_dir(
     fs::path_dir(path_candidate_temp),
     {
+      files <- fs::path_file(path_candidate_temp)
+      transform_file(files)
       # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
       system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
-        args = c(path_executable, cmd_args, fs::path_file(path_candidate_temp)),
+        args = c(path_executable, cmd_args, files),
         stderr = path_stderr
       )
     }
   )
   candidate <- readLines(path_candidate_temp)
-  reference <- readLines(path_candidate)
+  path_temp <- tempfile()
+  fs::file_copy(path_candidate, path_temp)
+  transform_file(path_temp)
+  reference <- readLines(path_temp)
   if (expect_success) {
     # file not changed + no stderr
     contents <- readLines(path_stderr)

@@ -10,7 +10,8 @@ run_test(
   suffix = ".R",
   error_msg = NULL,
   cmd_args = NULL,
-  copy = NULL
+  copy = NULL,
+  transform_file = function(file) NULL
 )
 }
 \arguments{
@@ -33,6 +34,14 @@ you can pass a named vector. The name is the target directory relative to
 the temp directory where the hook is executed (the temp directory will be
 the working directory at that time) and the value is the path that points
 to the place where the artifact is currently stored.}
+
+\item{transform_file}{A function that takes the file name as input and is ran
+right before the hook script is invoked.  This can be useful if you need to
+make in-place modifications to the file, e.g. to test hooks that operate on
+\code{.Rprofile}. You can't have different names for different tests on that
+file because it must be called \code{.Rprofile} all the time. The transformation
+is also applied to a temp copy of the reference file becore a comparison is
+made.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in

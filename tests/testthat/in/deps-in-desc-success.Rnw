@@ -1,0 +1,11 @@
+\documentclass{article}
+
+\begin{document}
+
+<<>>=
+utils::head(mtcars)
+@
+
+
+
+\end{document}

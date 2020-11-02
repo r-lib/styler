@@ -113,7 +113,55 @@ run_test("deps-in-desc",
   cmd_args = "--allow_private_imports"
 )
 
+# Rmd
+run_test("deps-in-desc",
+  "deps-in-desc",
+  suffix = "-fail.Rmd", error_msg = "Dependency check failed",
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+)
 
+run_test("deps-in-desc",
+  "deps-in-desc",
+  suffix = "-success.Rmd", error_msg = NULL,
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+)
+
+
+# Rnw
+run_test("deps-in-desc",
+  "deps-in-desc",
+  suffix = "-fail.Rnw", error_msg = "Dependency check failed",
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+)
+
+run_test("deps-in-desc",
+  "deps-in-desc",
+  suffix = "-success.Rnw", error_msg = NULL,
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+)
+
+# Rprofile
+# because .Rprofile is executed on startup, this must be an installed
+# package (to not give an error staight away) not listed in
+# test_path("in/DESCRIPTION")
+expect_true(rlang::is_installed("R.cache"))
+run_test("deps-in-desc",
+  ".Rprofile",
+  suffix = "", error_msg = "Dependency check failed",
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+  transform_file = function(files) {
+    writeLines("R.cache::findCache", files)
+  }
+)
+
+run_test("deps-in-desc",
+  ".Rprofile",
+  suffix = "", error_msg = NULL,
+  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+  transform_file = function(files) {
+    writeLines("utils::head", files)
+  }
+)
 
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
