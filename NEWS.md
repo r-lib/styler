@@ -9,7 +9,8 @@
 
 - The cache for the roxygen2 hook is now also invalidated for changes in formals 
   if there are no changes in roxygen comments (#214).
-  
+- `deps-in-desc` now checks `.Rprofile`, `.Rmd` and `.Rnw` files in addition to 
+  `.R` files (#216).  
 
 # precommit v0.1.3
 
