@@ -146,20 +146,28 @@ run_test("deps-in-desc",
 # test_path("in/DESCRIPTION")
 expect_true(rlang::is_installed("R.cache"))
 run_test("deps-in-desc",
-  ".Rprofile",
+  "Rprofile",
   suffix = "", error_msg = "Dependency check failed",
   copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
   transform_file = function(files) {
     writeLines("R.cache::findCache", files)
+    fs::file_move(
+      files,
+      fs::path(fs::path_dir(files), paste0(".", fs::path_file(files)))
+    )
   }
 )
 
 run_test("deps-in-desc",
-  ".Rprofile",
+  "Rprofile",
   suffix = "", error_msg = NULL,
   copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
   transform_file = function(files) {
     writeLines("utils::head", files)
+    fs::file_move(
+      files,
+      fs::path(fs::path_dir(files), paste0(".", fs::path_file(files)))
+    )
   }
 )
 

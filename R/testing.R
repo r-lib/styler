@@ -90,13 +90,13 @@ run_test_impl <- function(path_executable,
     fs::file_copy(copy, paths_copy, overwrite = TRUE)
   }
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
-  fs::file_copy(path_candidate, tempdir, overwrite = TRUE)
+  fs::file_copy(path_candidate, path_candidate_temp, overwrite = TRUE)
+  path_candidate_temp <- transform_file(path_candidate_temp)
   path_stderr <- tempfile()
   status <- withr::with_dir(
     fs::path_dir(path_candidate_temp),
     {
       files <- fs::path_file(path_candidate_temp)
-      transform_file(files)
       # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
       system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
         args = c(path_executable, cmd_args, files),
@@ -107,7 +107,7 @@ run_test_impl <- function(path_executable,
   candidate <- readLines(path_candidate_temp)
   path_temp <- tempfile()
   fs::file_copy(path_candidate, path_temp)
-  transform_file(path_temp)
+  path_temp <- transform_file(path_temp)
   reference <- readLines(path_temp)
   if (expect_success) {
     # file not changed + no stderr
