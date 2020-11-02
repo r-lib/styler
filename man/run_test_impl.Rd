@@ -10,7 +10,7 @@ run_test_impl(
   error_msg,
   cmd_args,
   copy,
-  transform_file
+  file_transformer
 )
 }
 \arguments{

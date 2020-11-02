@@ -10,6 +10,7 @@ CLI
 cmd
 CMD
 codemeta
+comparator
 conda
 conditionMessage
 config
@@ -27,6 +28,7 @@ docType
 dontrun
 donttest
 emph
+entrypoint
 env
 EOF
 eval
@@ -61,6 +63,7 @@ md
 miniconda
 mis
 modef
+msg
 mtime
 navbar
 netlify
@@ -117,6 +120,7 @@ saveCache
 seealso
 stderr
 stdout
+sterr
 stopifnot
 styler
 Sys

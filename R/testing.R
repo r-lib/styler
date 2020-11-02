@@ -12,19 +12,21 @@
 #'   nothing was written to sterr and the file content does not change.
 #'
 #' * If we expect failure, it can be due to changed file or due to failed
-#'   executable. To check for failed executalble, we set `error_msg` to
+#'   executable. To check for failed executable, we set `error_msg` to
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
 #'
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension).
 #' @param suffix The suffix of `file_name`.
-#' @param transform_file A function that takes the file name as input and is ran
-#'   right before the hook script is invoked.  This can be useful if you need to
+#' @param file_transformer A function that takes the file names as input and is
+#'   ran right before the hook script is invoked, returning the path to the
+#'   files, potentially modified (if renamed). This can be useful if you need to
 #'   make in-place modifications to the file, e.g. to test hooks that operate on
 #'   `.Rprofile`. You can't have different names for different tests on that
-#'   file because it must be called `.Rprofile` all the time. The transformation
-#'   is also applied to a temp copy of the reference file becore a comparison is
+#'   file because it must be called `.Rprofile` all the time. And R CMD check
+#'   seems to remove hidden files, so we must also rename it. The transformation
+#'   is also applied to a temp copy of the reference file before a comparison is
 #'   made.
 #' @inheritParams run_test_impl
 #' @keywords internal
@@ -34,7 +36,7 @@ run_test <- function(hook_name,
                      error_msg = NULL,
                      cmd_args = NULL,
                      copy = NULL,
-                     transform_file = function(file) NULL) {
+                     file_transformer = function(files) files) {
   path_executable <- system.file(
     fs::path("bin", hook_name),
     package = "precommit"
@@ -46,7 +48,7 @@ run_test <- function(hook_name,
     error_msg = error_msg,
     cmd_args = cmd_args,
     copy = copy,
-    transform_file = transform_file
+    file_transformer = file_transformer
   )
 }
 
@@ -72,7 +74,7 @@ run_test_impl <- function(path_executable,
                           error_msg,
                           cmd_args,
                           copy,
-                          transform_file) {
+                          file_transformer) {
   expect_success <- is.null(error_msg)
   tempdir <- tempdir()
   if (!is.null(copy)) {
@@ -91,7 +93,7 @@ run_test_impl <- function(path_executable,
   }
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
   fs::file_copy(path_candidate, path_candidate_temp, overwrite = TRUE)
-  path_candidate_temp <- transform_file(path_candidate_temp)
+  path_candidate_temp <- file_transformer(path_candidate_temp)
   path_stderr <- tempfile()
   status <- withr::with_dir(
     fs::path_dir(path_candidate_temp),
@@ -107,7 +109,7 @@ run_test_impl <- function(path_executable,
   candidate <- readLines(path_candidate_temp)
   path_temp <- tempfile()
   fs::file_copy(path_candidate, path_temp)
-  path_temp <- transform_file(path_temp)
+  path_temp <- file_transformer(path_temp)
   reference <- readLines(path_temp)
   if (expect_success) {
     # file not changed + no stderr

@@ -149,7 +149,7 @@ run_test("deps-in-desc",
   "Rprofile",
   suffix = "", error_msg = "Dependency check failed",
   copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
-  transform_file = function(files) {
+  file_transformer = function(files) {
     writeLines("R.cache::findCache", files)
     fs::file_move(
       files,
@@ -162,7 +162,7 @@ run_test("deps-in-desc",
   "Rprofile",
   suffix = "", error_msg = NULL,
   copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
-  transform_file = function(files) {
+  file_transformer = function(files) {
     writeLines("utils::head", files)
     fs::file_move(
       files,
