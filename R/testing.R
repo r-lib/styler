@@ -88,12 +88,13 @@ run_test_impl <- function(path_executable,
       new_dirs <- fs::path_dir(paths_copy)
       fs::dir_create(new_dirs)
     }
-    on.exit(fs::file_delete(paths_copy))
+    withr::defer(fs::file_delete(paths_copy))
     fs::file_copy(copy, paths_copy, overwrite = TRUE)
   }
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
   fs::file_copy(path_candidate, path_candidate_temp, overwrite = TRUE)
   path_candidate_temp <- file_transformer(path_candidate_temp)
+  withr::defer(fs::file_delete(path_candidate_temp))
   path_stderr <- tempfile()
   status <- withr::with_dir(
     fs::path_dir(path_candidate_temp),
