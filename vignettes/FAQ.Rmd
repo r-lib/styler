@@ -63,6 +63,12 @@ pre-commit hooks](https://pre-commit.com/#automatically-enabling-pre-commit-on-r
 
 To enforce all hooks pass, you can follow the [advice on how to use pre-commit in a CI/CD setup](https://pre-commit.com/#usage-in-continuous-integration).
 
+## Should I list `{precommit}` as a dependency of my package in DESCRIPTION?
+
+No, precommit is a dev dependency like `{devtools}`, so it should not be listed 
+in `DESCRIPTION`.
+
+
 ## What if not all people who are committing to this repo want to use the hooks?
 
 This is not a problem, git will only run the hooks in a local repo after
@@ -88,6 +94,7 @@ execute it in an interactive session or wrap it in
 `if (Sys.getenv("PRE_COMMIT") != "1")` (if you have `pre-commit >= 2.5.0`), so 
 it won't run when pre-commit hooks are ran. Find out more about the startup 
 process with `?startup`.
+
 
 *** 
 
