@@ -17,6 +17,9 @@ pre_installed <- c(
 
 arguments <- docopt::docopt(doc)
 deps_in_desc <- function(file, arguments) {
+  if (grepl("(\\.Rmd|\\.Rnw|\\.rmd|\\.rnw)$", file)) {
+    file <- knitr::purl(file, output = tempfile())
+  }
   parse_data <- getParseData(parse(file = file, keep.source = TRUE))
   used <- parse_data[parse_data$token == "SYMBOL_PACKAGE", ]$text
   local_pkg_name <- unname(desc::desc_get("Package"))

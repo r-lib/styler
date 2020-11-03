@@ -1,0 +1,12 @@
+---
+title: "Available Hooks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{available-hooks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, eval = FALSE}
+R.cache::clearCache()
+```

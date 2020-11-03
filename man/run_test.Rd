@@ -10,7 +10,8 @@ run_test(
   suffix = ".R",
   error_msg = NULL,
   cmd_args = NULL,
-  copy = NULL
+  copy = NULL,
+  file_transformer = function(files) files
 )
 }
 \arguments{
@@ -33,6 +34,16 @@ you can pass a named vector. The name is the target directory relative to
 the temp directory where the hook is executed (the temp directory will be
 the working directory at that time) and the value is the path that points
 to the place where the artifact is currently stored.}
+
+\item{file_transformer}{A function that takes the file names as input and is
+ran right before the hook script is invoked, returning the path to the
+files, potentially modified (if renamed). This can be useful if you need to
+make in-place modifications to the file, e.g. to test hooks that operate on
+\code{.Rprofile}. You can't have different names for different tests on that
+file because it must be called \code{.Rprofile} all the time. And R CMD check
+seems to remove hidden files, so we must also rename it. The transformation
+is also applied to a temp copy of the reference file before a comparison is
+made.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in
@@ -47,7 +58,7 @@ We check if the executable passes as follows:
 \item If we expect success (by setting \code{error_msg} to \code{NULL}), we make sure
 nothing was written to sterr and the file content does not change.
 \item If we expect failure, it can be due to changed file or due to failed
-executable. To check for failed executalble, we set \code{error_msg} to
+executable. To check for failed executable, we set \code{error_msg} to
 the message we expect. To check changed file content, we set \code{error_msg} to
 \code{NA}.
 }

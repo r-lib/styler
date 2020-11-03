@@ -12,13 +12,22 @@
 #'   nothing was written to sterr and the file content does not change.
 #'
 #' * If we expect failure, it can be due to changed file or due to failed
-#'   executable. To check for failed executalble, we set `error_msg` to
+#'   executable. To check for failed executable, we set `error_msg` to
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
 #'
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension).
 #' @param suffix The suffix of `file_name`.
+#' @param file_transformer A function that takes the file names as input and is
+#'   ran right before the hook script is invoked, returning the path to the
+#'   files, potentially modified (if renamed). This can be useful if you need to
+#'   make in-place modifications to the file, e.g. to test hooks that operate on
+#'   `.Rprofile`. You can't have different names for different tests on that
+#'   file because it must be called `.Rprofile` all the time. And R CMD check
+#'   seems to remove hidden files, so we must also rename it. The transformation
+#'   is also applied to a temp copy of the reference file before a comparison is
+#'   made.
 #' @inheritParams run_test_impl
 #' @keywords internal
 run_test <- function(hook_name,
@@ -26,7 +35,8 @@ run_test <- function(hook_name,
                      suffix = ".R",
                      error_msg = NULL,
                      cmd_args = NULL,
-                     copy = NULL) {
+                     copy = NULL,
+                     file_transformer = function(files) files) {
   path_executable <- system.file(
     fs::path("bin", hook_name),
     package = "precommit"
@@ -37,7 +47,8 @@ run_test <- function(hook_name,
     path_executable, path_candidate[1],
     error_msg = error_msg,
     cmd_args = cmd_args,
-    copy = copy
+    copy = copy,
+    file_transformer = file_transformer
   )
 }
 
@@ -62,7 +73,8 @@ run_test_impl <- function(path_executable,
                           path_candidate,
                           error_msg,
                           cmd_args,
-                          copy) {
+                          copy,
+                          file_transformer) {
   expect_success <- is.null(error_msg)
   tempdir <- tempdir()
   if (!is.null(copy)) {
@@ -76,24 +88,30 @@ run_test_impl <- function(path_executable,
       new_dirs <- fs::path_dir(paths_copy)
       fs::dir_create(new_dirs)
     }
-    on.exit(fs::file_delete(paths_copy))
+    withr::defer(fs::file_delete(paths_copy))
     fs::file_copy(copy, paths_copy, overwrite = TRUE)
   }
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
-  fs::file_copy(path_candidate, tempdir, overwrite = TRUE)
+  fs::file_copy(path_candidate, path_candidate_temp, overwrite = TRUE)
+  path_candidate_temp <- file_transformer(path_candidate_temp)
+  withr::defer(fs::file_delete(path_candidate_temp))
   path_stderr <- tempfile()
   status <- withr::with_dir(
     fs::path_dir(path_candidate_temp),
     {
+      files <- fs::path_file(path_candidate_temp)
       # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
       system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
-        args = c(path_executable, cmd_args, fs::path_file(path_candidate_temp)),
+        args = c(path_executable, cmd_args, files),
         stderr = path_stderr
       )
     }
   )
   candidate <- readLines(path_candidate_temp)
-  reference <- readLines(path_candidate)
+  path_temp <- tempfile()
+  fs::file_copy(path_candidate, path_temp)
+  path_temp <- file_transformer(path_temp)
+  reference <- readLines(path_temp)
   if (expect_success) {
     # file not changed + no stderr
     contents <- readLines(path_stderr)

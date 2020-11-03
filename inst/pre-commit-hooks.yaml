@@ -72,7 +72,7 @@
     description: Check if dependencies that can be parsed from code are in DESCRIPTION.
     entry: inst/bin/deps-in-desc
     language: script
-    files: '\.[rR]$'
+    files: '(\.[rR]profile|\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
 -   id: lintr
     name: lintr
     description: check if a .R file is lint free (using lintr)
