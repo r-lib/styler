@@ -65,7 +65,7 @@ left_join <- function(x, y, by) {
   res <- new_tibble(res, nrow = nrow(res))
   # dplyr::left_join set unknown list columns to NULL, merge sets them
   # to NA
-  if (exists("child", res) && anyNA(res$child)) {
+  if (exists("child", res) && any(is.na(res$child))) {
     res$child[is.na(res$child)] <- list(NULL)
   }
   res
