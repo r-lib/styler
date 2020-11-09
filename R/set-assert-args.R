@@ -115,7 +115,5 @@ assert_tokens <- function(tokens) {
 #' @examples
 #' styler:::set_arg_paths(c("./file.R", "file.R", "../another-file.R"))
 set_arg_paths <- function(path) {
-  starts_with_. <- substr(path, 1, 2) == "./"
-  path[starts_with_.] <- substring(path[starts_with_.], 3)
-  path
+  gsub("^[.]/", "", path)
 }
