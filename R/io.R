@@ -75,7 +75,7 @@ read_utf8 <- function(path) {
     warning = function(w) w,
     error = function(e) e
   )
-  if (inherits(out, "character")) {
+  if (is.character(out)) {
     list(
       text = out,
       missing_EOF_line_break = FALSE
