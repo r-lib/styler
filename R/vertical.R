@@ -5,7 +5,7 @@
 #' @param x A character vector or an object of class "vertical".
 #' @keywords internal
 construct_vertical <- function(x) {
-  stopifnot(inherits(x, what = c("utf8", "character", "vertical")))
+  stopifnot(is.character(x))
   structure(x, class = "vertical")
 }
 

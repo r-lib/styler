@@ -29,6 +29,8 @@
 - empty lines are now removed between pipes (#645).
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
 - always strip trailing spaces and make cache insensitive to it (#626).
+- `style_text()` can now style all input that `is.character()`, not just if it 
+  inherits from classes `character`, `utf8` or `vertical` (#693).
 - minor documentation improvements (#643, #618, #614, #677, #651, #667, #672, 
   #687).
 - The internal `create_tree()` only used in testing of styler now works when the 
