@@ -202,6 +202,7 @@
 <ul>
 <li>
 <code><a href="../reference/style_dir.html">style_dir()</a></code> and <code><a href="../reference/style_pkg.html">style_pkg()</a></code> now apply directory exclusion recursively with <code>exclude_dirs</code> (<a href='https://github.com/r-lib/styler/issues/676'>#676</a>).</li>
+<li>unary <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> before a function call does not give an error anymore, as before version 1.3.0 (<a href='https://github.com/r-lib/styler/issues/697'>#697</a>).</li>
 <li>cache is now correctly invalidated when style guide arguments change (<a href='https://github.com/r-lib/styler/issues/647'>#647</a>).</li>
 <li>empty lines are now removed between pipes (<a href='https://github.com/r-lib/styler/issues/645'>#645</a>).</li>
 <li>overhaul pgkdown site: Add search (<a href='https://github.com/r-lib/styler/issues/623'>#623</a>), group function in Reference (<a href='https://github.com/r-lib/styler/issues/625'>#625</a>).</li>
@@ -313,7 +314,7 @@ style_text("1 # comment")
 <a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li><p>Brace expressions in function calls are formatted in a less compact way to improve readability. Typical use case: <code><a href="https://rdrr.io/r/base/conditions.html">tryCatch()</a></code> (<a href='https://github.com/r-lib/styler/issues/543'>#543</a>).</p></li>
-<li><p>Arguments in function declarations in a context which is indented multiple times should now be correct. This typically affects <code><a href="https://rdrr.io/pkg/R6/man/R6Class.html">R6::R6Class()</a></code> (<a href='https://github.com/r-lib/styler/issues/546'>#546</a>).</p></li>
+<li><p>Arguments in function declarations in a context which is indented multiple times should now be correct. This typically affects <code><a href="https://r6.r-lib.org/reference/R6Class.html">R6::R6Class()</a></code> (<a href='https://github.com/r-lib/styler/issues/546'>#546</a>).</p></li>
 <li><p>Escape characters in roxygen code examples are now correctly escaped (<a href='https://github.com/r-lib/styler/issues/512'>#512</a>).</p></li>
 <li><p>Special characters such as <code>\n</code> in strings are now preserved in text and not turned into literal values like a line break (<a href='https://github.com/r-lib/styler/issues/554'>#554</a>).</p></li>
 <li><p>Style selection Addin now preserves line break when the last line selected is an entire line (<a href='https://github.com/r-lib/styler/issues/520'>#520</a>).</p></li>
@@ -343,7 +344,7 @@ style_text("1 # comment")
 <ul>
 <li><p>Users can now control style configurations for styler Addins (<a href='https://github.com/r-lib/styler/issues/463'>#463</a>, <a href='https://github.com/r-lib/styler/issues/500'>#500</a>), using the <code>Set style</code> Addin. See <code><a href="../reference/styler_addins.html">?styler::styler_addins</a></code> for details.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/function.html">return()</a></code> is now always put in braces and put on a new line when used in a conditional statement (<a href='https://github.com/r-lib/styler/issues/492'>#492</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></code> almost always causes a line break now for <code>strict = TRUE</code> (<a href='https://github.com/r-lib/styler/issues/503'>#503</a>).</p></li>
+<li><p><code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code> almost always causes a line break now for <code>strict = TRUE</code> (<a href='https://github.com/r-lib/styler/issues/503'>#503</a>).</p></li>
 </ul>
 </div>
 <div id="minor-changes" class="section level2">

@@ -184,7 +184,7 @@ the former approach escapes the reverse backslash in the line break character
 <code>\\n</code> whereas the solution with <code><a href='https://rdrr.io/r/base/paste.html'>paste0()</a></code> does not.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fix_quotes</span>(<span class='kw'>pd_flat</span>)</pre>
+    <pre class="usage"><span class='fu'>fix_quotes</span><span class='op'>(</span><span class='va'>pd_flat</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,9 +197,9 @@ the former approach escapes the reverse backslash in the line break character
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span>(<span class='st'>"'here
+    <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='st'>"'here
 is a string
-'"</span>)
+'"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; "here
 #&gt; is a string
 #&gt; "</div></pre>

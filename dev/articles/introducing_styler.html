@@ -131,7 +131,7 @@
       <h1 data-toc-skip>An introduction to styler</h1>
                         <h4 class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2020-11-12</h4>
+            <h4 class="date">2020-11-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/introducing_styler.Rmd"><code>vignettes/introducing_styler.Rmd</code></a></small>
       <div class="hidden name"><code>introducing_styler.Rmd</code></div>
@@ -142,58 +142,52 @@
     
 <p>This vignette introduces the basic functionality of styler and showcases how styler applies a few rules of the <a href="http://style.tidyverse.org/index.html">tidyverse style guide</a> to example code. Note that you can create your own style guide and customize styler even further, as described in the vignette “Customizing styler”.</p>
 <p>It’s possible to use different levels of ‘invasiveness’, as described in the help file for the only style guide implemented so far, which is the <a href="http://style.tidyverse.org/index.html">tidyverse style guide</a>. The style guide in use is passed to the styling function (i.e <code><a href="../reference/style_text.html">style_text()</a></code> and friends) via the <code>style</code> argument, which defaults to <code>tidyverse_style</code>. In addition to this argument, there are further customization options. For example, we can limit ourselves to styling just spacing information by indicating this with the <code>scope</code> argument:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/r-lib/styler">"styler"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"magrittr"</span>)
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"a=3; 2"</span>, scope = <span class="st">"spaces"</span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-lib/styler">"styler"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://magrittr.tidyverse.org">"magrittr"</a></span><span class="op">)</span>
+<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=3; 2"</span>, scope <span class="op">=</span> <span class="st">"spaces"</span><span class="op">)</span></code></pre></div>
 <pre><code>a = 3; 2</code></pre>
 <p>Or, on the other extreme of the scale, styling spaces, indention, line breaks and tokens (which is the default):</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"a=3; 2"</span>, scope = <span class="st">"tokens"</span>)
-</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=3; 2"</span>, scope <span class="op">=</span> <span class="st">"tokens"</span><span class="op">)</span></code></pre></div>
 <pre><code>a &lt;- 3
 2</code></pre>
 <p><code>scope</code> always includes less-invasive styling than the option chosen, e.g. <code>scope = "line_breaks"</code> includes styling spaces and indention in addition to line breaks.</p>
 <p>We can also choose to style line breaks but not tokens:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(<span class="st">"if(x) {66 } else {a=3}"</span>, scope = <span class="st">"line_breaks"</span>)
-</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"if(x) {66 } else {a=3}"</span>, scope <span class="op">=</span> <span class="st">"line_breaks"</span><span class="op">)</span></code></pre></div>
 <pre><code>if (x) {
   66
 } else {
   a = 3
 }</code></pre>
 <p>Note that <code>scope = "spaces"</code> does not touch indention</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
     <span class="st">"a &lt;- function() { "</span>, 
     <span class="st">"                a=3"</span>, 
     <span class="st">"}"</span>
-)
+<span class="op">)</span>
 
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(<span class="kw">code</span>, scope = <span class="st">"spaces"</span>)
-</pre></div>
+<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">code</span>, scope <span class="op">=</span> <span class="st">"spaces"</span><span class="op">)</span></code></pre></div>
 <pre><code>a &lt;- function() {
                 a = 3
 }</code></pre>
 <p>But <code>scope = "indention"</code> - as the name says - does.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(<span class="kw">code</span>, scope = <span class="st">"indention"</span>)
-</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">code</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></code></pre></div>
 <pre><code>a &lt;- function() {
   a = 3
 }</code></pre>
 <p>Another option that is helpful to determine the level of ‘invasiveness’ is <code>strict</code>. If set to <code>TRUE</code>, spaces and line breaks before or after tokens are set to either zero or one. However, in some situations this might be undesirable, as the following example shows:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
   <span class="st">"data_frame(
      small  = 2 ,
      medium = 4,#comment without space
      large  = 6
-   )"</span>, strict = <span class="fl">FALSE</span>
-)
-</pre></div>
+   )"</span>, strict <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
 <pre><code><a href="https://tibble.tidyverse.org/reference/deprecated.html">data_frame(
   small  = 2,
   medium = 4, # comment without space
@@ -201,13 +195,12 @@
 )</a></code></pre>
 <p>We prefer to keep the equal sign after “small”, “medium” and large aligned, so we set <code>strict = FALSE</code> to set spacing to <em>at least</em> one around <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>.</p>
 <p>Also, spaces before comments are preserved with that option.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
   <span class="st">"a &lt;-   'one'   #just one
    abc &lt;- 'three' # three"</span>, 
-  strict = <span class="fl">FALSE</span>
-)
-</pre></div>
+  strict <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
 <pre><code>a &lt;-   "one"   # just one
 abc &lt;- "three" # three</code></pre>
 <p>Though simple, hopefully the above examples convey some of the flexibility of the configuration options available in <code>styler</code>. Let us for now focus on a configuration with <code>strict = TRUE</code> and <code>scope = "tokens"</code> and illustrate a few more examples of code before and after styling.</p>
@@ -217,12 +210,11 @@ abc &lt;- "three" # three</code></pre>
 <pre><code># After
 1 + +1 - 1 - 1 / 2</code></pre>
 <p>This is tidyverse style. However, styler offers very granular control for math token spacing. Assuming you like spacing around <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code>, but not around <code><a href="https://rdrr.io/r/base/Arithmetic.html">/</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>, do the following:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
   <span class="st">"1++1/2*2^2"</span>, 
-  math_token_spacing = <span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span>(zero = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"'/'"</span>, <span class="st">"'*'"</span>, <span class="st">"'^'"</span>))
-)
-</pre></div>
+  math_token_spacing <span class="op">=</span> <span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span><span class="op">(</span>zero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"'/'"</span>, <span class="st">"'*'"</span>, <span class="st">"'^'"</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <pre><code>1 + +1/2*2^2</code></pre>
 <p>It can also format complicated expressions that involve line breaking and indention based on both brace expressions and operators:</p>
 <pre class="styler"><code># Before
@@ -294,19 +286,18 @@ mtcars %&gt;%
 mtcars %&gt;%
   group_by(!!my_vars)</code></pre>
 <p>If you, say, don’t want comments starting with <code>###</code> to be indented, you can formulate an unindention rule:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit">
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span>(
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
     <span class="st">"a &lt;- function() {"</span>,
     <span class="st">"### not to be indented"</span>,
     <span class="st">"# indent normally"</span>,
     <span class="st">"33"</span>,
     <span class="st">"}"</span>
-  ),
-  reindention = <span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span>(regex_pattern = <span class="st">"###"</span>, indention = <span class="fl">0</span>)
+  <span class="op">)</span>,
+  reindention <span class="op">=</span> <span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span><span class="op">(</span>regex_pattern <span class="op">=</span> <span class="st">"###"</span>, indention <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
   
-)
-</pre></div>
+<span class="op">)</span></code></pre></div>
 <pre><code>a &lt;- function() {
 ### not to be indented
   # indent normally
