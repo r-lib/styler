@@ -25,6 +25,8 @@
 
 - `style_dir()` and `style_pkg()` now apply directory exclusion recursively with 
   `exclude_dirs` (#676).
+- unary `+` before a function call does not give an error anymore, as before 
+  version 1.3.0 (#697).
 - cache is now correctly invalidated when style guide arguments change (#647).
 - empty lines are now removed between pipes (#645).
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).

@@ -299,7 +299,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦   °--expr: q [0/0] {300}                        
  ¦   ¦       °--SYMBOL: q [0/0] {299}                  
  ¦   °--')': ) [0/0] {301}                             
- ¦--equal_assign: z = a [2/0] {302}                    
+ ¦--expr_or_assign_or_help: z = a [2/0] {302}          
  ¦   ¦--expr: z [0/1] {304}                            
  ¦   ¦   °--SYMBOL: z [0/0] {303}                      
  ¦   ¦--EQ_ASSIGN: = [0/1] {305}                       

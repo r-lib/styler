@@ -286,7 +286,8 @@ remove_line_break_in_fun_call <- function(pd, strict) {
 
 
 set_linebreak_after_ggplot2_plus <- function(pd) {
-  is_plus_raw <- pd$token == "'+'"
+  # if expression is unary, first token is +. Exclude this case.
+  is_plus_raw <- c(FALSE, pd$token[-1] == "'+'")
   if (any(is_plus_raw)) {
     first_plus <- which(is_plus_raw)[1]
     next_non_comment <- next_non_comment(pd, first_plus)

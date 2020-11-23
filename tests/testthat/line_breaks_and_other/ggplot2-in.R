@@ -36,3 +36,6 @@ x[1]+ c()
 g() + x[1]
 
 g()[2] + x[1]
+
+# don't do anything on unary + and function call
++sin(x)
