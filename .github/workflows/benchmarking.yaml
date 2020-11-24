@@ -35,6 +35,7 @@ jobs:
           echo "$GITHUB_REF_NAME"
           # git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF
           git branch
+          git branch -va
       - name: Setup R
         uses: r-lib/actions/setup-r@master
       - name: Query dependencies
