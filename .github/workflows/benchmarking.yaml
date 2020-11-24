@@ -21,16 +21,20 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
-        with:
-          fetch-depth: 0
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
       - name: Set up git user
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
       - name: Ensure base branch is fetched
         if: ${{ github.event_name == 'pull_request' }}
-        run: git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF; git branch
+        uses: FranzDiebold/github-env-vars-action@v1.2.1
+        run: |
+          git checkout -b $GITHUB_REF_NAME
+          echo "$GITHUB_REF_NAME" > github_ref_name
+          echo "$GITHUB_REF_NAME"
+          git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF
+          git branch
       - name: Setup R
         uses: r-lib/actions/setup-r@master
       - name: Query dependencies
@@ -57,39 +61,33 @@ jobs:
           sudo apt-get install libcurl4-openssl-dev libgit2-dev
       - name: Install dependencies
         run: |
-          Rscript -e "install.packages(c('gert', 'ggplot2', 'purrr'))" -e "remotes::install_deps(dependencies = TRUE); remotes::install_github('r-lib/bench')"
+          Rscript -e "install.packages(c('ggplot2', 'purrr'))" -e "remotes::install_deps(dependencies = TRUE); remotes::install_github(c('r-lib/bench', 'lorenzwalthert/touchstone')); "
           R CMD INSTALL .
       - name: Checkout benchmarking repo
         uses: actions/checkout@v2
         with:
           repository: lorenzwalthert/here
           ref: ca9c8e69c727def88d8ba1c8b85b0e0bcea87b3f
-          path: bench/sources/here
-      - name: Fetch existing benchmarks
-        run: Rscript -e 'rlang::with_handlers(bench::cb_fetch(), error = function(e) paste("Could not fetch benchmarks, skipping. The error was", conditionMessage(e)))'
+          path: touchstone/sources/here
       - name: Prepare PR comment
         run: |
-          mkdir -p bench/pr-comment
-          echo "Here is how the current PR would change benchmark results when merged into $GITHUB_BASE_REF:" > bench/pr-comment/info.txt
-          echo "$GITHUB_EVENT_PULL_REQUEST_HEAD_SHA" >> bench/pr-comment/info.txt
+          mkdir -p touchstone/sources
+          mkdir -p touchstone/pr-comment
+          echo "Here is how the current PR would change benchmark results when merged into $GITHUB_BASE_REF:" > touchstone/pr-comment/info.txt
+          echo "$GITHUB_EVENT_PULL_REQUEST_HEAD_SHA" >> touchstone/pr-comment/info.txt
       - name: Run benchmarks
-        run: Rscript -e 'bench::cb_run()'
-      - name: Show benchmarks
-        run: git notes --ref benchmarks show
+        run: Rscript 'touchstone/script.R'
       - uses: actions/upload-artifact@v2
         with:
           name: visual-benchmarks
-          path: bench/plots/
-      - name: Push benchmarks
-        if: ${{ github.event_name == 'push' }}
-        run: Rscript -e "bench::cb_push()"
+          path: touchstone/plots/
       - uses: actions/upload-artifact@v1
         with:
           name: results
-          path: bench/pr-comment
+          path: touchstone/pr-comment
       - uses: actions/download-artifact@v1
         with:
           name: results
       - name: comment PR
         #uses: machine-learning-apps/pr-comment@master
-        run: cat bench/pr-comment/info.txt
+        run: cat touchstone/pr-comment/info.txt
