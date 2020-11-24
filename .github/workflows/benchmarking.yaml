@@ -75,6 +75,7 @@ jobs:
         run: |
           mkdir -p touchstone/sources
           mkdir -p touchstone/pr-comment
+          mkdir -p touchstone/plots
           echo "Here is how the current PR would change benchmark results when merged into $GITHUB_BASE_REF:" > touchstone/pr-comment/info.txt
           echo "$GITHUB_EVENT_PULL_REQUEST_HEAD_SHA" >> touchstone/pr-comment/info.txt
       - name: Run benchmarks
