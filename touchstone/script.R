@@ -1,7 +1,6 @@
 touchstone:::touchstone_clear()
-warning(Sys.getenv("GITHUB_HEAD_SHA"))
 
-refs <- c(Sys.getenv("GITHUB_BASE_REF"), readLines("github_ref_name"))
+refs <- c(Sys.getenv("GITHUB_BASE_REF"), Sys.getenv("GITHUB_HEAD_REF"))
 warning(refs)
 timings <- touchstone::benchmark_run_ref(
   refs,
