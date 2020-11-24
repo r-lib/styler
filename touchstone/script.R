@@ -1,5 +1,4 @@
-touchstone:::touchstone_clear()
-
+# touchstone:::touchstone_clear() # deletes itself and sources
 refs <- c(Sys.getenv("GITHUB_BASE_REF"), Sys.getenv("GITHUB_HEAD_REF"))
 warning(refs)
 timings <- touchstone::benchmark_run_ref(
