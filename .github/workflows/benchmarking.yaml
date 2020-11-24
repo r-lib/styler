@@ -33,7 +33,7 @@ jobs:
           git checkout -b $GITHUB_REF_NAME
           echo "$GITHUB_REF_NAME" > github_ref_name
           echo "$GITHUB_REF_NAME"
-          git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF
+          # git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF
           git branch
       - name: Setup R
         uses: r-lib/actions/setup-r@master
