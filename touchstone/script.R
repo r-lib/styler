@@ -1,5 +1,5 @@
 touchstone:::touchstone_clear()
-warning(Sys.getenv("GITHUB_EVENT_PULL_REQUEST_HEAD_SHA"))
+warning(Sys.getenv("GITHUB_HEAD_SHA"))
 
 refs <- c(Sys.getenv("GITHUB_BASE_REF"), readLines("github_ref_name"))
 warning(refs)

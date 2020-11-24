@@ -29,8 +29,8 @@ jobs:
       - name: Ensure base branch is fetched
         if: ${{ github.event_name == 'pull_request' }}
         run: |
-          git checkout -b $GITHUB_EVENT_PULL_REQUEST_HEAD_SHA
-          echo "$GITHUB_REF_NAME"
+          git checkout -b $GITHUB_HEAD_SHA
+          echo "$GITHUB_HEAD_SHA"
           echo "$GITHUB_BASE_REF"
           git branch
           git branch -va
