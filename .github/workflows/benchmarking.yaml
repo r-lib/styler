@@ -26,9 +26,9 @@ jobs:
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
-      - name: Ensure base branch is fetched
+      - uses: FranzDiebold/github-env-vars-action@v1.2.1
+        name: Ensure base branch is fetched
         if: ${{ github.event_name == 'pull_request' }}
-        uses: FranzDiebold/github-env-vars-action@v1.2.1
         run: |
           git checkout -b $GITHUB_REF_NAME
           echo "$GITHUB_REF_NAME" > github_ref_name
