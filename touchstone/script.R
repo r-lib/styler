@@ -5,7 +5,7 @@ timings <- touchstone::benchmark_run_ref(
   refs,
   expr_before_benchmark = c("library(styler)", "cache_deactivate()"),
   expr_to_benchmark = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))',
-  n = 2,
+  n = 10,
 )
 
 timings <- touchstone::benchmark_read(refs)
@@ -24,4 +24,4 @@ tbl <- timings %>%
   tibble::deframe()
 
 diff_percent <- round(100 * (tbl[refs[2]] - tbl[refs[1]]) / tbl[refs[1]])
-writeLines(glue::glue("{tbl[refs[2]]} -> {tbl[refs[1]]} ({diff_percent}%)"), "touchstone/pr-comment/info.txt")
+writeLines(glue::glue("{round(tbl[refs[1]], 2)} -> {round(tbl[refs[2]], 2)} ({diff_percent}%)"), "touchstone/pr-comment/info.txt")
