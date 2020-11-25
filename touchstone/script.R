@@ -23,5 +23,5 @@ tbl <- timings %>%
   dplyr::summarise(m = mean(.data$elapsed)) %>%
   tibble::deframe()
 
-diff_percent <- round(100 * (tbl[ref[2]] - tbl[ref[1]]) / tbl[ref[1]])
-writeLines(glue::glue('{tbl[ref[2]]} -> {tbl[ref[1]]} ({diff_percent}%)'), 'touchstone/pr-comment/info.txt')
+diff_percent <- round(100 * (tbl[refs[2]] - tbl[refs[1]]) / tbl[refs[1]])
+writeLines(glue::glue("{tbl[refs[2]]} -> {tbl[refs[1]]} ({diff_percent}%)"), "touchstone/pr-comment/info.txt")
