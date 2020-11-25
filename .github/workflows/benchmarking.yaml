@@ -32,10 +32,6 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           git checkout -b $GITHUB_HEAD_REF
-          echo "$GITHUB_HEAD_REF"
-          echo "$GITHUB_BASE_REF"
-          git branch
-          git branch -va
           git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF
       - name: Setup R
         uses: r-lib/actions/setup-r@master
@@ -92,5 +88,4 @@ jobs:
         with:
           name: results
       - name: comment PR
-        #uses: machine-learning-apps/pr-comment@master
         run: cat touchstone/pr-comment/info.txt
