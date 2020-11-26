@@ -5,20 +5,35 @@ timer <- purrr::partial(touchstone::benchmark_run_ref,
   refs = refs, n = 10
 )
 
+styler::cache_clear()
+
 timer(
   expr_before_benchmark = c("library(styler)", "cache_deactivate()"),
   without_cache = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
 )
+
+styler::cache_clear()
 
 timer(
   expr_before_benchmark = c("library(styler)", "cache_activate()"),
   cache_applying = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
 )
 
+styler::cache_clear()
+
 timer(
-  expr_before_benchmark = c("library(styler)", "gert::git_reset_hard(repo = 'touchstone/sources/here')", "cache_activate()"),
-  cache_recording = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
+  expr_before_benchmark = c(
+    "library(styler)",
+    "cache_activate()"
+  ),
+  cache_recording = c(
+    "gert::git_reset_hard(repo = 'touchstone/sources/here')",
+    'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
+  )
 )
+
+styler::cache_clear()
+
 
 
 for (benchmark in touchstone::benchmark_ls()) {
@@ -40,7 +55,7 @@ for (benchmark in touchstone::benchmark_ls()) {
 
   diff_percent <- round(100 * (tbl[refs[2]] - tbl[refs[1]]) / tbl[refs[1]], 1)
   cat(
-    glue::glue("{benchmark}: round(tbl[refs[1]], 2)} -> {round(tbl[refs[2]], 2)} ({diff_percent}%)"),
+    glue::glue("{benchmark}: {round(tbl[refs[1]], 2)} -> {round(tbl[refs[2]], 2)} ({diff_percent}%)"),
     fill = TRUE,
     file = "touchstone/pr-comment/info.txt",
     append = TRUE
