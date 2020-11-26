@@ -1,16 +1,27 @@
 # touchstone:::touchstone_clear() # deletes itself and sources
 refs <- c(Sys.getenv("GITHUB_BASE_REF", "touchstone"), Sys.getenv("GITHUB_HEAD_REF", "touchstone"))
-exprs_to_benchmark <- list(
+
+timer <- purrr::partial(touchstone::benchmark_run_ref,
+  refs = refs, n = 10
+)
+
+timer(
+  expr_before_benchmark = c("library(styler)", "cache_deactivate()"),
+  without_cache = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
+)
+
+timer(
+  expr_before_benchmark = c("library(styler)", "cache_activate()"),
   cache_applying = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
 )
-for (benchmark in names(exprs_to_benchmark)) {
-  timings <- touchstone::benchmark_run_ref(
-    refs,
-    expr_before_benchmark = c("library(styler)", "cache_deactivate()"),
-    !!!exprs_to_benchmark[[benchmark]],
-    n = 10
-  )
 
+timer(
+  expr_before_benchmark = c("library(styler)", "gert::git_reset_hard(repo = 'touchstone/sources/here')", "cache_activate()"),
+  cache_recording = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
+)
+
+
+for (benchmark in touchstone::benchmark_ls()) {
   timings <- touchstone::benchmark_read(benchmark, refs[1])
 
   library(ggplot2)
@@ -30,6 +41,7 @@ for (benchmark in names(exprs_to_benchmark)) {
   diff_percent <- round(100 * (tbl[refs[2]] - tbl[refs[1]]) / tbl[refs[1]], 1)
   cat(
     glue::glue("{benchmark}: round(tbl[refs[1]], 2)} -> {round(tbl[refs[2]], 2)} ({diff_percent}%)"),
+    fill = TRUE,
     file = "touchstone/pr-comment/info.txt",
     append = TRUE
   )
