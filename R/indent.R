@@ -306,7 +306,7 @@ pd_is_multi_line <- function(pd) {
 #' @seealso choose_indention
 #' @keywords internal
 update_newlines <- function(pd) {
-  npd <- nrow(pd) - 1
-  pd$newlines[seq_len(npd)] <- pd$lag_newlines[seq_len(npd) + 1]
+  seq_pd <- seq_len(nrow(pd) - 1)
+  pd$newlines[seq_pd] <- pd$lag_newlines[seq_pd + 1]
   pd
 }

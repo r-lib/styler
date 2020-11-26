@@ -259,7 +259,10 @@ parse_transform_serialize_r <- function(text,
 apply_transformers <- function(pd_nested, transformers) {
   transformed_updated_multi_line <- post_visit(
     pd_nested,
-    c(transformers$initialize, transformers$line_break, set_multi_line, update_newlines)
+    c(
+      transformers$initialize, transformers$line_break, set_multi_line,
+      if (!is.null(transformers$line_break)) update_newlines
+    )
   )
 
   transformed_all <- pre_visit(

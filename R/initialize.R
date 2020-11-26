@@ -52,8 +52,7 @@ initialize_spaces <- function(pd_flat) {
     rep(0L, nrow(pd_flat)), pd_flat$col2
   )
   pd_flat$spaces <- pd_flat$col3 - pd_flat$col2_nl - 1L
-  pd_flat$col3 <- NULL
-  pd_flat$col2_nl <- NULL
+  pd_flat$col3 <- pd_flat$col2_nl <- NULL
   pd_flat
 }
 

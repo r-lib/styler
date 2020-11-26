@@ -312,14 +312,15 @@ remove_terminal_token_before_and_after <- function(pd_flat) {
 #' @return An integer vector of length spaces_after_prefix, which is either
 #'   one (if `force_one = TRUE`) or `space_after_prefix` with all values
 #'   below one set to one.
+#' @return
+#' Numeric vector indicating the number of spaces.
 #' @keywords internal
 set_spaces <- function(spaces_after_prefix, force_one) {
   if (force_one) {
-    n_of_spaces <- rep(1, length(spaces_after_prefix))
+    rep(1, length(spaces_after_prefix))
   } else {
-    n_of_spaces <- pmax(spaces_after_prefix, 1L)
+    pmax(spaces_after_prefix, 1L)
   }
-  n_of_spaces
 }
 
 #' Nest a flat parse table

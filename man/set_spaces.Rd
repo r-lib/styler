@@ -17,6 +17,8 @@ cases.}
 An integer vector of length spaces_after_prefix, which is either
 one (if \code{force_one = TRUE}) or \code{space_after_prefix} with all values
 below one set to one.
+
+Numeric vector indicating the number of spaces.
 }
 \description{
 Helper for setting spaces
