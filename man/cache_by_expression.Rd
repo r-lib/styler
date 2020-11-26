@@ -4,12 +4,14 @@
 \alias{cache_by_expression}
 \title{Cache text}
 \usage{
-cache_by_expression(text, transformers)
+cache_by_expression(text, transformers, more_specs)
 }
 \arguments{
 \item{text}{A character vector with one or more expressions.}
 
-\item{transformers}{The transformers.}
+\item{transformers}{A list of transformer functions, because we can only
+know if text is already correct if we know which transformer function it
+should be styled with.}
 }
 \description{
 Splits \code{text} into expressions and adds these to the cache. Note that

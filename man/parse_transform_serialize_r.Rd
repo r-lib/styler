@@ -12,9 +12,10 @@ parse_transform_serialize_r(
 )
 }
 \arguments{
-\item{text}{A character vector to parse.}
+\item{text}{The text to parse.}
 
-\item{transformers}{A list of \emph{named} transformer functions}
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
 
 \item{base_indention}{Integer scalar indicating by how many spaces the whole
 output text should be indented. Note that this is not the same as splitting

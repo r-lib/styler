@@ -16,13 +16,17 @@ hash_standardize <- function(text) {
 #' Check if text is cached
 #'
 #' This boils down to check if the hash exists at the caching dir as a file.
-#' @param text,transformers Passed to [cache_make_key()] to generate a key.
+#' @param text,transformers,more_specs Passed to [cache_make_key()] to generate
+#'   a key.
 #' @param cache_dir The caching directory relative to the `.Rcache` root to
 #'   look for a cached value.
 #' @keywords internal
-is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
+is_cached <- function(text,
+                      transformers,
+                      more_specs,
+                      cache_dir = cache_dir_default()) {
   R.cache::generateCache(
-    key = cache_make_key(text, transformers),
+    key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir
   ) %>%
     file.exists()
@@ -37,6 +41,9 @@ is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
 #' @param transformers A list of transformer functions, because we can only
 #'   know if text is already correct if we know which transformer function it
 #'   should be styled with.
+#' @param more_args A named vector coercible to it character that determine the
+#'   styling but are style guide independent, such as `include_roxygen_examples`
+#'   or `base_indention`.
 #' @details
 #' We need to compare:
 #'
@@ -55,7 +62,7 @@ is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
 #'   Remaining problem: `purrr::partial()` calls will render generic code, e.g.
 #'   see `as.character(list(purrr::partial(sum, x = 4)))`. For that reason,
 #'   all arguments passed to a `purrr::partial()` call must be put in the
-#'   style guide under `more_specs`.
+#'   style guide under `more_specs_style_guide`.
 #' @section Experiments:
 #'
 #' There is unexplainable behavior in conjunction with hashing and
@@ -86,13 +93,14 @@ is_cached <- function(text, transformers, cache_dir = cache_dir_default()) {
 #' identical(digest::digest(add1), digest::digest(add2))
 #' identical(digest::digest(styler::tidyverse_style()), digest::digest(styler::tidyverse_style()))
 #' @keywords internal
-cache_make_key <- function(text, transformers) {
+cache_make_key <- function(text, transformers, more_specs) {
   list(
     text = hash_standardize(text),
     style_guide_name = transformers$style_guide_name,
     style_guide_version = transformers$style_guide_version,
-    more_specs = as.character(transformers$more_specs) %>%
-      set_names(names(transformers$more_specs))
+    more_specs_style_guide = as.character(transformers$more_specs_style_guide) %>%
+      set_names(names(transformers$more_specs_style_guide)),
+    more_specs = more_specs
   )
 }
 
@@ -134,9 +142,11 @@ cache_is_activated <- function(cache_name = NULL) {
 #' guide outside a stylerignore sequence and wrongly think we should leave it as
 #' is.
 #' @param text A character vector with one or more expressions.
-#' @param transformers The transformers.
+#' @inheritParams cache_write
 #' @keywords internal
-cache_by_expression <- function(text, transformers) {
+cache_by_expression <- function(text,
+                                transformers,
+                                more_specs) {
   expressions <- parse(text = text, keep.source = TRUE) %>%
     utils::getParseData(includeText = TRUE)
   if (env_current$any_stylerignore) {
@@ -146,13 +156,17 @@ cache_by_expression <- function(text, transformers) {
     expressions$stylerignore <- rep(FALSE, length(expressions$text))
   }
   expressions[expressions$parent == 0 & expressions$token != "COMMENT" & !expressions$stylerignore, "text"] %>%
-    map(~ cache_write(.x, transformers = transformers))
+    map(~ cache_write(.x, transformers = transformers, more_specs))
 }
 
 
-cache_write <- function(text, transformers) {
+#' Write to the cache
+#'
+#' @inheritParams cache_make_key
+#' @keywords internal
+cache_write <- function(text, transformers, more_specs) {
   R.cache::generateCache(
-    key = cache_make_key(text, transformers),
+    key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir_default()
   ) %>%
     file.create()
@@ -176,4 +190,17 @@ cache_get_or_derive_name <- function(cache_name) {
 
 cache_dir_default <- function() {
   c("styler", cache_get_name())
+}
+
+
+#' Create more specs
+#'
+#' Syntactic suggar for creating more specs. This is useful when we want to add
+#' more arguments (because we can search for this function in the source code).
+#' @keywords internal
+cache_more_specs <- function(include_roxygen_examples, base_indention) {
+  list(
+    include_roxygen_examples = include_roxygen_examples,
+    base_indention = base_indention
+  )
 }

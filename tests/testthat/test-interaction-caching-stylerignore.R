@@ -142,7 +142,7 @@ test_that("does not cache stylerignore sequences", {
   )
   style_text(text)
   expect_false(
-    is_cached("1+1", tidyverse_style())
+    is_cached("1+1", tidyverse_style(), more_specs = cache_more_specs_default())
   )
   fresh_testthat_cache()
   text <- c(
@@ -151,7 +151,11 @@ test_that("does not cache stylerignore sequences", {
   )
   style_text(text)
   expect_false(
-    is_cached("1+1", tidyverse_style())
+    is_cached(
+      "1+1",
+      tidyverse_style(),
+      more_specs = cache_more_specs_default()
+    )
   )
 })
 

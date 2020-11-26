@@ -11,7 +11,7 @@ test_that("Correclty removes comments that are not top-level when making pd shal
     "# styler"
   )
   style_text(text7) # only making pd shallow when call is cached.
-  pd_flat <- text_to_flat_pd(text7, tidyverse_style())
+  pd_flat <- text_to_flat_pd(text7, tidyverse_style(), more_specs = cache_more_specs_default())
   expect_false(any(pd_flat$text == "# inline-comment"))
 })
 

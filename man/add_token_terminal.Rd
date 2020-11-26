@@ -12,15 +12,18 @@ add_terminal_token_after(pd_flat)
 
 add_terminal_token_before(pd_flat)
 
-add_attributes_caching(pd_flat, transformers)
+add_attributes_caching(pd_flat, transformers, more_specs)
 
 remove_terminal_token_before_and_after(pd_flat)
 }
 \arguments{
 \item{pd_flat}{A flat parse table.}
 
-\item{transformers}{A list with transformer functions, used to check if
-the code is cached.}
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
+
+\item{more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
 }
 \description{
 Note that this does function must be called in \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}

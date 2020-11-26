@@ -167,17 +167,17 @@ tidyverse_style <- function(scope = "tokens",
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
   create_style_guide(
     # transformer functions
-    initialize          = default_style_guide_attributes,
-    line_break          =        line_break_manipulators,
-    space               =             space_manipulators,
-    token               =             token_manipulators,
-    indention           =             indention_modifier,
+    initialize             = default_style_guide_attributes,
+    line_break             =        line_break_manipulators,
+    space                  =             space_manipulators,
+    token                  =             token_manipulators,
+    indention              =             indention_modifier,
     # transformer options
-    use_raw_indention   =              use_raw_indention,
-    reindention         =                    reindention,
-    style_guide_name    =               style_guide_name,
-    style_guide_version =                 styler_version,
-    more_specs          =                           args
+    use_raw_indention      =              use_raw_indention,
+    reindention            =                    reindention,
+    style_guide_name       =               style_guide_name,
+    style_guide_version    =                 styler_version,
+    more_specs_style_guide =                            args
   )
 }
 
@@ -213,8 +213,9 @@ tidyverse_style <- function(scope = "tokens",
 #'   attribute inside the created style guide, for example for caching. This
 #'   should correspond to the version of the R package that exports the
 #'   style guide.
-#' @param more_specs Named vector (coercible to character) specifying arguments
-#'   `args` in `transformer <- list(t1 = purrr::partial(f, arg)` because when
+#' @param more_specs_style_guide Named vector (coercible to character)
+#'   specifying arguments `args` in
+#'   `transformer <- list(t1 = purrr::partial(f, arg)` because when
 #'   such functions are converted to characters in [styler::cache_make_key()],
 #'   they will yield generic code and we loose the specific value of `arg` (see
 #'   [styler::cache_make_key()]), even when unquoting these inputs with `!!`
@@ -245,7 +246,7 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                reindention = tidyverse_reindention(),
                                style_guide_name = NULL,
                                style_guide_version = NULL,
-                               more_specs = NULL) {
+                               more_specs_style_guide = NULL) {
   lst(
     # transformer functions
     initialize = lst(initialize),
@@ -258,7 +259,7 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
     reindention,
     style_guide_name,
     style_guide_version,
-    more_specs
+    more_specs_style_guide
   ) %>%
     map(compact)
 }

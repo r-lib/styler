@@ -4,10 +4,11 @@
 \alias{is_cached}
 \title{Check if text is cached}
 \usage{
-is_cached(text, transformers, cache_dir = cache_dir_default())
+is_cached(text, transformers, more_specs, cache_dir = cache_dir_default())
 }
 \arguments{
-\item{text, transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate a key.}
+\item{text, transformers, more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
 
 \item{cache_dir}{The caching directory relative to the \code{.Rcache} root to
 look for a cached value.}

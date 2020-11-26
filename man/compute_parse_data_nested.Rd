@@ -4,10 +4,16 @@
 \alias{compute_parse_data_nested}
 \title{Obtain a nested parse table from a character vector}
 \usage{
-compute_parse_data_nested(text, transformers)
+compute_parse_data_nested(text, transformers, more_specs)
 }
 \arguments{
-\item{text}{A character vector to parse.}
+\item{text}{The text to parse.}
+
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
+
+\item{more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
 }
 \value{
 A nested parse table. See \code{\link[=tokenize]{tokenize()}} for details on the columns

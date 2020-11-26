@@ -14,7 +14,8 @@ style_roxygen_example_snippet(
 \arguments{
 \item{code_snippet}{A character vector with code to style.}
 
-\item{transformers}{A list of \emph{named} transformer functions}
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
+a key.}
 
 \item{is_dont}{Whether the snippet to process is a dontrun, dontshow,
 donttest segment or not.}
