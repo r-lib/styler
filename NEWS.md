@@ -6,7 +6,7 @@
   be applied to files or not (#634).
 
 - `style_file()` and friends gain argument `base_indention` (defaulting to 0) to
-  control by how much the output code is indented (#649).
+  control by how much the output code is indented (#649, #692).
   
 - added an option (`styler.test_dir_writeable`) that changes test behavior
   to not directly modify test files in the current directory (#548).
@@ -18,8 +18,9 @@
 
 - blank lines in function calls and headers are now removed, for the former only 
   when there are no comments before or after the blank line (#629, #630, #635).
-- speed improvement (~10%) when cache is activated because transformers are not 
-  captured as character anymore (#679).
+- speed improvements: (~10%) when cache is activated because transformers are not 
+  captured as character anymore (#679), ~ 3% in low-level optimization (#691). 
+  Require magrittr 2.0 gives about 7% speed improvement (#681).
 
 ## Minor changes and fixes
 
@@ -37,11 +38,13 @@
   #687).
 - The internal `create_tree()` only used in testing of styler now works when the 
   cache is activated (#688).
+- simplification of internals (#692).
 
 ## Infrastructure changes
 
 - switched from travis and AppVeyor to GitHub Actions (#653, #660).
-- Added basic continuous benchmarking (#674, #684).
+- Added basic continuous benchmarking with [lorenzwalthert/touchstone](https://github.com/lorenzwalthert/touchstone) 
+  (#674, #684, #698).
 
 # styler 1.3.2
 
