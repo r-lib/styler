@@ -206,7 +206,7 @@ done in <code><a href='tidyverse_style.html'>tidyverse_style()</a></code> with <
   reindention <span class='op'>=</span> <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span><span class='op'>(</span><span class='op'>)</span>,
   style_guide_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   style_guide_version <span class='op'>=</span> <span class='cn'>NULL</span>,
-  more_specs <span class='op'>=</span> <span class='cn'>NULL</span>
+  more_specs_style_guide <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -261,9 +261,10 @@ should correspond to the version of the R package that exports the
 style guide.</p></td>
     </tr>
     <tr>
-      <th>more_specs</th>
-      <td><p>Named vector (coercible to character) specifying arguments
-<code>args</code> in <code>transformer &lt;- list(t1 = purrr::partial(f, arg)</code> because when
+      <th>more_specs_style_guide</th>
+      <td><p>Named vector (coercible to character)
+specifying arguments <code>args</code> in
+<code>transformer &lt;- list(t1 = purrr::partial(f, arg)</code> because when
 such functions are converted to characters in <code><a href='cache_make_key.html'>cache_make_key()</a></code>,
 they will yield generic code and we loose the specific value of <code>arg</code> (see
 <code><a href='cache_make_key.html'>cache_make_key()</a></code>), even when unquoting these inputs with <code>!!</code>

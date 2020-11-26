@@ -180,14 +180,15 @@
     <p>This boils down to check if the hash exists at the caching dir as a file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_cached</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span>, cache_dir <span class='op'>=</span> <span class='fu'>cache_dir_default</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>is_cached</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span>, <span class='va'>more_specs</span>, cache_dir <span class='op'>=</span> <span class='fu'>cache_dir_default</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>text, transformers</th>
-      <td><p>Passed to <code><a href='cache_make_key.html'>cache_make_key()</a></code> to generate a key.</p></td>
+      <th>text, transformers, more_specs</th>
+      <td><p>Passed to <code><a href='cache_make_key.html'>cache_make_key()</a></code> to generate
+a key.</p></td>
     </tr>
     <tr>
       <th>cache_dir</th>

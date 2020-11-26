@@ -180,7 +180,7 @@
     <p>This is used to determine if caching already corresponds to a style guide.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cache_make_key</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cache_make_key</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span>, <span class='va'>more_specs</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,6 +195,12 @@ approach used by styler does not cache input, but styled code.</p></td>
       <td><p>A list of transformer functions, because we can only
 know if text is already correct if we know which transformer function it
 should be styled with.</p></td>
+    </tr>
+    <tr>
+      <th>more_args</th>
+      <td><p>A named vector coercible to it character that determine the
+styling but are style guide independent, such as <code>include_roxygen_examples</code>
+or <code>base_indention</code>.</p></td>
     </tr>
     </table>
 
@@ -216,7 +222,7 @@ without changing version number of name at the same time.
 Remaining problem: <code><a href='https://purrr.tidyverse.org/reference/partial.html'>purrr::partial()</a></code> calls will render generic code, e.g.
 see <code><a href='https://rdrr.io/r/base/character.html'>as.character(list(purrr::partial(sum, x = 4)))</a></code>. For that reason,
 all arguments passed to a <code><a href='https://purrr.tidyverse.org/reference/partial.html'>purrr::partial()</a></code> call must be put in the
-style guide under <code>more_specs</code>.</p></li>
+style guide under <code>more_specs_style_guide</code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="experiments"><a class="anchor" href="#experiments"></a>Experiments</h2>

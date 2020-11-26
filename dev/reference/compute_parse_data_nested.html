@@ -182,14 +182,24 @@ representation into a nested parse table with nest_parse_data()." />
 representation into a nested parse table with <code><a href='nest_parse_data.html'>nest_parse_data()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compute_parse_data_nested</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>compute_parse_data_nested</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span>, <span class='va'>more_specs</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>text</th>
-      <td><p>A character vector to parse.</p></td>
+      <td><p>The text to parse.</p></td>
+    </tr>
+    <tr>
+      <th>transformers</th>
+      <td><p>Passed to <code><a href='cache_make_key.html'>cache_make_key()</a></code> to generate
+a key.</p></td>
+    </tr>
+    <tr>
+      <th>more_specs</th>
+      <td><p>Passed to <code><a href='cache_make_key.html'>cache_make_key()</a></code> to generate
+a key.</p></td>
     </tr>
     </table>
 

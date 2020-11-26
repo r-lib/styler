@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cache text — cache_by_expression • styler</title>
+<title>Create more specs — cache_more_specs • styler</title>
 
 
 <!-- jquery -->
@@ -45,15 +45,9 @@
 
 
 
-<meta property="og:title" content="Cache text — cache_by_expression" />
-<meta property="og:description" content="Splits text into expressions and adds these to the cache. Note that
-top-level comments are not cached because caching and in particular
-checking  if they are cached is too expensive. Comments may be cached as part
-of the whole text (as opposed to on an expression by expression basis) using
-cache_write() directly. Also, we must not cache stylerignore sequence,
-because we might see the same expression that does not comply with the style
-guide outside a stylerignore sequence and wrongly think we should leave it as
-is." />
+<meta property="og:title" content="Create more specs — cache_more_specs" />
+<meta property="og:description" content="Syntactic suggar for creating more specs. This is useful when we want to add
+more arguments (because we can search for this function in the source code)." />
 
 
 <meta name="robots" content="noindex">
@@ -178,38 +172,18 @@ is." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Cache text</h1>
+    <h1>Create more specs</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/utils-cache.R'><code>R/utils-cache.R</code></a></small>
-    <div class="hidden name"><code>cache_by_expression.Rd</code></div>
+    <div class="hidden name"><code>cache_more_specs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Splits <code>text</code> into expressions and adds these to the cache. Note that
-top-level comments are <strong>not</strong> cached because caching and in particular
-checking  if they are cached is too expensive. Comments may be cached as part
-of the whole text (as opposed to on an expression by expression basis) using
-<code><a href='cache_write.html'>cache_write()</a></code> directly. Also, we must not cache stylerignore sequence,
-because we might see the same expression that does not comply with the style
-guide outside a stylerignore sequence and wrongly think we should leave it as
-is.</p>
+    <p>Syntactic suggar for creating more specs. This is useful when we want to add
+more arguments (because we can search for this function in the source code).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cache_by_expression</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span>, <span class='va'>more_specs</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cache_more_specs</span><span class='op'>(</span><span class='va'>include_roxygen_examples</span>, <span class='va'>base_indention</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>text</th>
-      <td><p>A character vector with one or more expressions.</p></td>
-    </tr>
-    <tr>
-      <th>transformers</th>
-      <td><p>A list of transformer functions, because we can only
-know if text is already correct if we know which transformer function it
-should be styled with.</p></td>
-    </tr>
-    </table>
 
 
   </div>

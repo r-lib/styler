@@ -182,7 +182,7 @@ table shallow where appropriate." />
 table shallow where appropriate.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>text_to_flat_pd</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>text_to_flat_pd</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>transformers</span>, <span class='va'>more_specs</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,8 +193,13 @@ table shallow where appropriate.</p>
     </tr>
     <tr>
       <th>transformers</th>
-      <td><p>A list with transformer functions, used to check if
-the code is cached.</p></td>
+      <td><p>Passed to <code><a href='cache_make_key.html'>cache_make_key()</a></code> to generate
+a key.</p></td>
+    </tr>
+    <tr>
+      <th>more_specs</th>
+      <td><p>Passed to <code><a href='cache_make_key.html'>cache_make_key()</a></code> to generate
+a key.</p></td>
     </tr>
     </table>
 
