@@ -22,7 +22,7 @@ timer(
 
 
 for (benchmark in touchstone::benchmark_ls()) {
-  timings <- touchstone::benchmark_read(benchmark, refs[1])
+  timings <- touchstone::benchmark_read(benchmark, refs)
 
   library(ggplot2)
   library(magrittr)
