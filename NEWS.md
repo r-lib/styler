@@ -21,6 +21,8 @@
 - speed improvements: (~10%) when cache is activated because transformers are not 
   captured as character anymore (#679), ~ 3% in low-level optimization (#691). 
   Require magrittr 2.0 gives about 7% speed improvement (#681).
+- `#<<` is now recognized as the xaringan marker and no space is added after`#` 
+  (#700).
 
 ## Minor changes and fixes
 

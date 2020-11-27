@@ -55,6 +55,13 @@ test_that("hashbangs are respected", {
   ), NA)
 })
 
+test_that("xaringan markers are respected", {
+  expect_warning(test_collection("parse_comments",
+    "xaringan",
+    transformer = style_text
+  ), NA)
+})
+
 test_that("code chunk headers for spinning are respected", {
   expect_warning(test_collection("parse_comments",
     "spinning_code_chunk_headers",
