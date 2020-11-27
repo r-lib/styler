@@ -110,7 +110,7 @@ is_subset_expr <- function(pd) {
 #' style_text("#!/usr/bin/env Rscript")
 #' @keywords internal
 is_shebang <- function(pd) {
-  is_first_comment <- is_comment(pd) & (pd$pos_id == 1L)
+  is_first_comment <- pd$pos_id == 1L
   is_first_comment[is_first_comment] <- grepl(
     "^#!", pd$text[is_first_comment],
     perl = TRUE
@@ -118,8 +118,10 @@ is_shebang <- function(pd) {
   is_first_comment
 }
 
-#' Identify spinning code chunk header
+#' Identify spinning code chunk header or xaringan
 #'
+#' Wrongly identifies a comment without a preceding line break as a code chunk
+#' header.
 #' See https://yihui.name/knitr/demo/stitch/#spin-comment-out-texts for details.
 #' @examples
 #' style_text(c(
@@ -130,10 +132,10 @@ is_shebang <- function(pd) {
 #' ))
 #' @param pd A parse table.
 #' @keywords internal
-is_code_chunk_header <- function(pd) {
+is_code_chunk_header_or_xaringan <- function(pd) {
   is_comment <- is_comment(pd)
   is_comment[is_comment] <- grepl(
-    "^#[\\+|\\-]", pd$text[is_comment],
+    "^#[\\+|\\-|<<]", pd$text[is_comment],
     perl = TRUE
   )
   is_comment

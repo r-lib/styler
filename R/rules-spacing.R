@@ -294,13 +294,19 @@ set_space_between_levels <- function(pd_flat) {
 #' @importFrom purrr map_chr
 #' @keywords internal
 start_comments_with_space <- function(pd, force_one = FALSE) {
-  comment_pos <- is_comment(pd) & !is_shebang(pd) & !is_code_chunk_header(pd)
-  if (!any(comment_pos)) {
+  is_comment <- is_comment(pd)
+
+  if (any(is_comment)) {
+    is_comment <- is_comment & !is_shebang(pd) & !is_code_chunk_header_or_xaringan(pd)
+    if (!any(is_comment)) {
+      return(pd)
+    }
+  } else {
     return(pd)
   }
 
   comments <- rematch2::re_match(
-    pd$text[comment_pos],
+    pd$text[is_comment],
     "^(?<prefix>#+['\\*]*)(?<space_after_prefix> *)(?<text>.*)$"
   )
   comments$space_after_prefix <- nchar(
@@ -312,14 +318,14 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
     force_one
   )
 
-  pd$text[comment_pos] <-
+  pd$text[is_comment] <-
     paste0(
       comments$prefix,
       map_chr(comments$space_after_prefix, rep_char, char = " "),
       comments$text
     ) %>%
     trimws("right")
-  pd$short[comment_pos] <- substr(pd$text[comment_pos], 1, 5)
+  pd$short[is_comment] <- substr(pd$text[is_comment], 1, 5)
   pd
 }
 
