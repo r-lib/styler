@@ -44,16 +44,14 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
       - name: Cache R packages
-        if: ${{ github.event_name == 'pull_request' }}
-        if: runner.os != 'Windows'
+        if: ${{ github.event_name == 'pull_request' }} && runner.os != 'Windows'
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-3-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-3-
       - name: Install system dependencies
-        if: ${{ github.event_name == 'pull_request' }}
-        if: runner.os == 'Linux'
+        if: ${{ github.event_name == 'pull_request' }} && runner.os == 'Linux'
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
