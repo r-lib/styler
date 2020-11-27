@@ -57,8 +57,8 @@ test_that("hashbangs are respected", {
 
 test_that("xaringan markers are respected", {
   expect_warning(test_collection("parse_comments",
-                                 "xaringan",
-                                 transformer = style_text
+    "xaringan",
+    transformer = style_text
   ), NA)
 })
 
