@@ -8,12 +8,13 @@ on:
     - master
 jobs:
   build:
+    if: github.event_name == 'pull_request'
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-18.04,   r: '4.0.0', rspm: 'https://packagemanager.rstudio.com/all/__linux__/bionic/291'}
+          - {os: ubuntu-18.04, r: '4.0.0', rspm: 'https://packagemanager.rstudio.com/all/__linux__/bionic/291'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -29,29 +30,26 @@ jobs:
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
       - name: Ensure base branch is fetched
-        if: ${{ github.event_name == 'pull_request' }}
         run: |
           git checkout -b $GITHUB_HEAD_REF
           git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF
       - name: Setup R
-        if: ${{ github.event_name == 'pull_request' }}
         uses: r-lib/actions/setup-r@master
       - name: Query dependencies
-        if: ${{ github.event_name == 'pull_request' }}
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
       - name: Cache R packages
-        if: ${{ github.event_name == 'pull_request' }} && runner.os != 'Windows'
+        if: runner.os != 'Windows'
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-3-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-3-
       - name: Install system dependencies
-        if: ${{ github.event_name == 'pull_request' }} && runner.os == 'Linux'
+        if: runner.os == 'Linux'
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
@@ -60,19 +58,16 @@ jobs:
           sudo -s eval "$sysreqs"
           sudo apt-get install libcurl4-openssl-dev libgit2-dev
       - name: Install dependencies
-        if: ${{ github.event_name == 'pull_request' }}
         run: |
           Rscript -e "install.packages(c('ggplot2', 'purrr'))" -e "remotes::install_deps(dependencies = TRUE); remotes::install_github(c('r-lib/bench', 'lorenzwalthert/touchstone')); "
           R CMD INSTALL .
       - name: Checkout benchmarking repo
-        if: ${{ github.event_name == 'pull_request' }}
         uses: actions/checkout@v2
         with:
           repository: lorenzwalthert/here
           ref: ca9c8e69c727def88d8ba1c8b85b0e0bcea87b3f
           path: touchstone/sources/here
       - name: Prepare PR comment
-        if: ${{ github.event_name == 'pull_request' }}
         run: |
           mkdir -p touchstone/sources
           mkdir -p touchstone/pr-comment
@@ -80,22 +75,17 @@ jobs:
           echo "Here is how the current PR would change benchmark results when merged into $GITHUB_BASE_REF:" > touchstone/pr-comment/info.txt
           echo "$GITHUB_EVENT_PULL_REQUEST_HEAD_SHA" >> touchstone/pr-comment/info.txt
       - name: Run benchmarks
-        if: ${{ github.event_name == 'pull_request' }}
         run: Rscript 'touchstone/script.R'
       - uses: actions/upload-artifact@v2
-        if: ${{ github.event_name == 'pull_request' }}
         with:
           name: visual-benchmarks
           path: touchstone/plots/
       - uses: actions/upload-artifact@v1
-        if: ${{ github.event_name == 'pull_request' }}
         with:
           name: results
           path: touchstone/pr-comment
       - uses: actions/download-artifact@v1
-        if: ${{ github.event_name == 'pull_request' }}
         with:
           name: results
       - name: comment PR
-        if: ${{ github.event_name == 'pull_request' }}
         run: cat touchstone/pr-comment/info.txt
