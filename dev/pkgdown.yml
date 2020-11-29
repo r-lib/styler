@@ -9,7 +9,7 @@ articles:
   gsoc_proposal/manipulating_nested_parse_data: manipulating_nested_parse_data.html
   introducing_styler: introducing_styler.html
   performance_improvements: performance_improvements.html
-last_built: 2020-11-28T11:33Z
+last_built: 2020-11-29T22:58Z
 urls:
   reference: https://styler.r-lib.org/reference
   article: https://styler.r-lib.org/articles
