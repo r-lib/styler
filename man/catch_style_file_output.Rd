@@ -5,17 +5,15 @@
 \title{Capture and post-process the output of \code{style_file} without causing side
 effects}
 \usage{
-catch_style_file_output(
-  file_in = c("public-api", "xyzdir-dirty", "dirty-sample-with-scope-tokens.R"),
-  encoding
-)
+catch_style_file_output(file_in)
 }
 \arguments{
-\item{file_in}{A vector passed to \code{\link[=testthat_file]{testthat_file()}} to construct the path
+\item{file_in}{A vector with paths relative to \code{tests/testthat} the path
 to the reference file.}
 }
 \value{
-A character vector with the captured output of \code{\link[=style_file]{style_file()}} called on
+A list. Each element is a character vector with the captured output of
+\code{\link[=style_file]{style_file()}} called on
 \code{file_in} ran in a temp dir to avoid side effects on the input file (because
 the next time the test would ran, the file would not need styling). The
 styling is carried out with a temporary working directory change to keep
