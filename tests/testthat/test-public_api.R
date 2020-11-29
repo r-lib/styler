@@ -153,7 +153,7 @@ test_that("messages (via cat()) of style_file are correct", {
       list(cli.unicode = encoding == "utf8"),
       {
         # Message if scope > line_breaks and code changes
-        output <- catch_style_file_output(c(
+        output <- catch_style_file_output(file.path(
           "public-api",
           "xyzdir-dirty",
           "dirty-sample-with-scope-tokens.R"
@@ -168,7 +168,7 @@ test_that("messages (via cat()) of style_file are correct", {
         )
 
         # No message if scope > line_breaks and code does not change
-        output <- catch_style_file_output(c(
+        output <- catch_style_file_output(file.path(
           "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
         ), encoding = encoding)
         expect_known_value(
@@ -181,7 +181,7 @@ test_that("messages (via cat()) of style_file are correct", {
         )
 
         # No message if scope <= line_breaks even if code is changed.
-        output <- catch_style_file_output(c(
+        output <- catch_style_file_output(file.path(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
         ), encoding = encoding)
         expect_known_value(
@@ -202,7 +202,7 @@ test_that("Messages can be suppressed", {
     withr::with_options(
       list(cli.unicode = encoding == "utf8", styler.quiet = TRUE),
       {
-        output <- catch_style_file_output(c(
+        output <- catch_style_file_output(file.path(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
         ), encoding = encoding)
         expect_equal(output, character(0))

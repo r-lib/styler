@@ -1,10 +1,11 @@
 #' Capture and post-process the output of `style_file` without causing side
 #' effects
 #'
-#' @param file_in A vector passed to [testthat_file()] to construct the path
+#' @param file_in A vector with paths relative to `tests/testthat` the path
 #'   to the reference file.
 #' @return
-#' A character vector with the captured output of [style_file()] called on
+#' A list. Each element is a character vector with the captured output of
+#' [style_file()] called on
 #' `file_in` ran in a temp dir to avoid side effects on the input file (because
 #' the next time the test would ran, the file would not need styling). The
 #' styling is carried out with a temporary working directory change to keep
@@ -16,13 +17,8 @@
 #' how many characters the path of the temporary directory has.
 #' @importFrom utils capture.output
 #' @keywords internal
-catch_style_file_output <- function(file_in = c(
-                                      "public-api",
-                                      "xyzdir-dirty",
-                                      "dirty-sample-with-scope-tokens.R"
-                                    ),
-                                    encoding) {
-  file_in <- do.call(testthat_file, as.list(file_in))
+catch_style_file_output <- function(file_in, encoding) {
+  file_in <- testthat_file(file_in)
   temp_path <- copy_to_tempdir(file_in)
   raw_output <- withr::with_dir(
     dirname(temp_path),
