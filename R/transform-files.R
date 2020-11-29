@@ -17,21 +17,33 @@ transform_files <- function(files, transformers, include_roxygen_examples, base_
   max_char <- min(max(nchar(files), 0), getOption("width"))
   len_files <- length(files)
   if (len_files > 0L && !getOption("styler.quiet", FALSE)) {
-    cat("Styling ", len_files, " files:\n")
+    cat("Styling ", len_files, " files:\n") # TODO should only have one space between words
   }
 
-  if (!identical(Sys.getenv("TESTTHAT"), "true") && rlang::is_installed("furrr")) {
-    if (inherits(future::plan(), "uniprocess")) {
+  future_strategy_no_override <- tolower(Sys.getenv("R_STYLER_FUTURE_NO_OVERRIDE", "FALSE")) == "true"
+  if (rlang::is_installed("furrr")) {
+    # only parallelise when furrr is installed
+    if (!future_strategy_no_override && length(files) > 2) {
+      # only override when env not set and more than two files.
       local_options(future.supportsMulticore.unstable = "quiet")
-      oplan <- future::plan("multiprocess")
-      on.exit(future::plan(oplan), add = TRUE)
-    }
+      oplan <- future::plan("multisession") # not sure we should use
 
+      # withr::defer() gives C stack overflow on macOS, on.exit not.
+      on.exit(future::plan(oplan), add = TRUE, after = FALSE)
+    }
     changed <- furrr::future_map_lgl(files, transform_file,
       fun = transformer, max_char_path = max_char, dry = dry,
       .progress = TRUE
     )
   } else {
+    if (future_strategy_no_override) {
+      rlang::warn(paste(
+        "Environment variable `R_STYLER_FUTURE_NO_OVERRIDE` is not respected",
+        "because package {furrr} is not installed. Falling back to ",
+        "`purrr::map_lgl()` to iterate over files to style instead of",
+        "`furrr::future_map_lgl()`."
+      ))
+    }
     changed <- map_lgl(files, transform_file,
       fun = transformer, max_char_path = max_char, dry = dry
     )

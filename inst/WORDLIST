@@ -54,6 +54,7 @@ fileext
 filetype
 forcond
 funct
+furrr
 gcc
 getChecksum
 getOption
@@ -91,6 +92,7 @@ macOS
 magrittr
 md
 Müller
+multiprocess
 mutli
 navbar
 netlify
@@ -101,6 +103,8 @@ ourself
 packagemanager
 packrat
 pandoc
+parallelization
+Parallelization
 params
 parsable
 parsesum
@@ -113,6 +117,7 @@ pre
 precommit
 prefill
 prettycode
+progressr
 PRs
 purrr
 rcmdcheck

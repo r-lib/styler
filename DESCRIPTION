@@ -57,6 +57,7 @@ Collate:
     'detect-alignment.R'
     'environments.R'
     'expr-is.R'
+    'future.R'
     'indent.R'
     'initialize.R'
     'io.R'

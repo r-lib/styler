@@ -16,6 +16,10 @@
 
 ## Major changes
 
+- `style_file()`, `style_dir()` and `style_pkg()` now process input files in 
+  parallel and display process bars if `{furrr}` is installed. This feature is
+  experimental, please see `help(styler_future, package = "styler")` for 
+  details. 
 - blank lines in function calls and headers are now removed, for the former only 
   when there are no comments before or after the blank line (#629, #630, #635).
 - speed improvements: (~10%) when cache is activated because transformers are not 

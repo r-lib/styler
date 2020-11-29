@@ -18,6 +18,7 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      R_STYLER_FUTURE_NO_OVERRIDE: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
