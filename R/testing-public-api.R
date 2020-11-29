@@ -17,7 +17,7 @@
 #' how many characters the path of the temporary directory has.
 #' @importFrom utils capture.output
 #' @keywords internal
-catch_style_file_output <- function(file_in, encoding) {
+catch_style_file_output <- function(file_in) {
   file_in <- testthat_file(file_in)
   temp_path <- copy_to_tempdir(file_in)
   raw_output <- withr::with_dir(

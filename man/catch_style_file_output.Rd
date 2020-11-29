@@ -5,7 +5,7 @@
 \title{Capture and post-process the output of \code{style_file} without causing side
 effects}
 \usage{
-catch_style_file_output(file_in, encoding)
+catch_style_file_output(file_in)
 }
 \arguments{
 \item{file_in}{A vector with paths relative to \code{tests/testthat} the path
