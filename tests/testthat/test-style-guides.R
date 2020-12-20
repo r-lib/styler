@@ -1,50 +1,50 @@
 test_that("inconsistent scope intput raises an error", {
   # inexistant scope
-  expect_error(scope_normalise('animal'), 'must be one of ')
-  expect_error(scope_normalise(I('animal')), 'must be one of ')
-  expect_error(scope_normalise(I(c('animal', 'spaces'))), 'must be one of ')
+  expect_error(scope_normalize('animal'), 'must be one of ')
+  expect_error(scope_normalize(I('animal')), 'must be one of ')
+  expect_error(scope_normalize(I(c('animal', 'spaces'))), 'must be one of ')
 
   # other than one with character
-  expect_error(scope_normalise(c("none", "tokens")), 'either of class `AsIs` or length')
+  expect_error(scope_normalize(c("none", "tokens")), 'either of class `AsIs` or length')
 })
 
 test_that('consistent input yields right output', {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
   expect_equal(
-    scope_normalise(I('tokens')),
+    scope_normalize(I('tokens')),
     factor('tokens', levels = levels, ordered = TRUE)
   )
   expect_equal(
-    scope_normalise(I('none')),
+    scope_normalize(I('none')),
     factor('none', levels = levels, ordered = TRUE)
   )
 
   expect_equal(
-    scope_normalise(I('indention')),
+    scope_normalize(I('indention')),
     factor('indention', levels = levels, ordered = TRUE)
   )
 
   expect_equal(
-    scope_normalise(I(c('indention', 'tokens'))),
+    scope_normalize(I(c('indention', 'tokens'))),
     factor(c('indention', 'tokens'), levels = levels, ordered = TRUE)
   )
 
   expect_equal(
-    scope_normalise('spaces'),
+    scope_normalize('spaces'),
     factor(c('none', 'spaces'), levels = levels, ordered = TRUE)
   )
 
   expect_equal(
-    scope_normalise('indention'),
+    scope_normalize('indention'),
     factor(c('none', 'spaces', 'indention'), levels = levels, ordered = TRUE)
   )
 
   expect_equal(
-    scope_normalise('line_breaks'),
+    scope_normalize('line_breaks'),
     factor(c('none', 'spaces', 'indention', 'line_breaks'), levels = levels, ordered = TRUE)
   )
   expect_equal(
-    scope_normalise('tokens'),
+    scope_normalize('tokens'),
     factor(levels, levels = levels, ordered = TRUE)
   )
 
