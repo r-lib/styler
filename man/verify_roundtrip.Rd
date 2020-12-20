@@ -15,7 +15,7 @@ verify_roundtrip(old_text, new_text)
 If scope was set to "line_breaks" or lower (compare \code{\link[=tidyverse_style]{tidyverse_style()}}),
 we can compare the expression before and after styling and return an error if
 it is not the same. Note that this method ignores comments and no
-verification can be conducted if scope > "line_breaks".
+verification can be conducted if tokens are in the styling scope.
 }
 \examples{
 styler:::verify_roundtrip("a+1", "a + 1")

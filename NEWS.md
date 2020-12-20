@@ -14,6 +14,10 @@
 - added an option for disabling all communication when using the package
   (`styler.quiet`) (#640).
 
+- `scope` in [tidyverse_style()] can now be specified with higher granularity
+  through [I()], e.g. `I(c('spaces', 'tokens'))` allows it to style tokens
+  without styling line breaks and indention (#704). 
+
 ## Major changes
 
 - blank lines in function calls and headers are now removed, for the former only 
