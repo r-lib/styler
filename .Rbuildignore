@@ -21,3 +21,4 @@ revdep
 ^brew\-log$
 ^\.github/$
 ^bench/$
+^.github/$
