@@ -332,6 +332,7 @@ tidyverse_reindention <- function() {
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
 #' @keywords internal
+#' @importFrom rlang abort
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
   if (!all((scope %in% levels))) {
@@ -347,7 +348,7 @@ scope_normalize <- function(scope, name = substitute(scope)) {
     scope <- levels[as.logical(rev(cumsum(scope == rev(levels))))]
     factor(scope, levels = levels, ordered = TRUE)
   } else {
-    rlang::abort(
+    abort(
       "argument `scope` has to be either of class `AsIs` or length one."
     )
   }
