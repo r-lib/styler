@@ -47,8 +47,8 @@
 
 <meta property="og:title" content="Update the newlines attribute — update_newlines" />
 <meta property="og:description" content="As we work only with the lag_newlines attribute for setting the line
-breaks, (R/rules-line_break.R) but we need newlines to determine
-whether or not to set spaces (R/rules-spacing.R), we have to update the
+breaks (R/rules-line_breaks.R), but we need newlines to determine
+whether or not to set spaces (R/rules-spaces.R), we have to update the
 attribute. We cannot simply use dplyr::lead(pd$lag_newlines) since we would
 lose information for the last token. spaces is left as is in
 R/rules-spacing.R for tokens at the end of a line since this allows styling
@@ -184,8 +184,8 @@ without touching indention." />
 
     <div class="ref-description">
     <p>As we work only with the <code>lag_newlines</code> attribute for setting the line
-breaks, (R/rules-line_break.R) but we need <code>newlines</code> to determine
-whether or not to set <code>spaces</code> (R/rules-spacing.R), we have to update the
+breaks (<code>R/rules-line_breaks.R</code>), but we need <code>newlines</code> to determine
+whether or not to set <code>spaces</code> (<code>R/rules-spaces.R</code>), we have to update the
 attribute. We cannot simply use <code><a href='https://dplyr.tidyverse.org/reference/lead-lag.html'>dplyr::lead(pd$lag_newlines)</a></code> since we would
 lose information for the last token. <code>spaces</code> is left as is in
 R/rules-spacing.R for tokens at the end of a line since this allows styling
