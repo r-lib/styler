@@ -14,9 +14,9 @@
 - added an option for disabling all communication when using the package
   (`styler.quiet`) (#640).
 
-- `scope` in [tidyverse_style()] can now be specified with higher granularity
-  through [I()], e.g. `I(c('spaces', 'tokens'))` allows it to style tokens
-  without styling line breaks and indention (#704). 
+- `scope` in `tidyverse_style()` can now be specified with higher granularity
+  through `I()`, e.g. `I(c('spaces', 'tokens'))` allows it to style tokens
+  without styling line breaks and indention (#705, #707). 
 
 ## Major changes
 
