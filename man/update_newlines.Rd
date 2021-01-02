@@ -14,8 +14,8 @@ A parse table with synchronized \code{lag_newlines} and \code{newlines} columns.
 }
 \description{
 As we work only with the \code{lag_newlines} attribute for setting the line
-breaks, (R/rules-line_break.R) but we need \code{newlines} to determine
-whether or not to set \code{spaces} (R/rules-spacing.R), we have to update the
+breaks (\code{R/rules-line_breaks.R}), but we need \code{newlines} to determine
+whether or not to set \code{spaces} (\code{R/rules-spaces.R}), we have to update the
 attribute. We cannot simply use \code{dplyr::lead(pd$lag_newlines)} since we would
 lose information for the last token. \code{spaces} is left as is in
 R/rules-spacing.R for tokens at the end of a line since this allows styling

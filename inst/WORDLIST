@@ -47,6 +47,7 @@ env
 EOF
 EOL
 EOLs
+eq
 EQ
 eval
 expr
@@ -103,6 +104,7 @@ packagemanager
 packrat
 pandoc
 params
+paren
 parsable
 parsesum
 pgkdown
