@@ -40,7 +40,7 @@ test_that("activated cache brings speedup on style_text() API on character scala
     text2, text2,
     fun = style_text
   )
-  expect_gt(n, 65)
+  expect_gt(n, 55)
 })
 
 
@@ -50,7 +50,7 @@ test_that("trailing line breaks are ignored for caching", {
   n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
   expect_equal(cache_info()$n, 3)
   skip_on_cran()
-  expect_gt(n, 65)
+  expect_gt(n, 55)
 })
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
@@ -59,7 +59,7 @@ test_that("trailing line breaks are ignored for caching in one scalar", {
   n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
   expect_equal(cache_info()$n, 3)
   skip_on_cran()
-  expect_gt(n, 65)
+  expect_gt(n, 55)
 })
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
@@ -71,7 +71,7 @@ test_that("trailing line breaks are ignored for caching in one scalar", {
   n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
   expect_equal(cache_info()$n, 3)
   skip_on_cran()
-  expect_gt(n, 65)
+  expect_gt(n, 55)
 })
 
 test_that("speedup higher when cached roxygen example code is multiple expressions", {
