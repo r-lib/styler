@@ -2,14 +2,14 @@ context("scope AsIs")
 
 test_that("no indention manipulation but spaces manipulation", {
   expect_warning(test_collection(
-    "scope-AsIs", "scope_spaces",
+    "scope-AsIs", "scope_spaces-",
     transformer = style_text, style = tidyverse_style, scope = I("spaces")
   ), NA)
 })
 
 test_that("just indention", {
   expect_warning(test_collection(
-    "scope-AsIs", "scope_indention",
+    "scope-AsIs", "scope_indention-",
     transformer = style_text,
     style = tidyverse_style, scope = I("indention")
   ), NA)
@@ -17,7 +17,7 @@ test_that("just indention", {
 
 test_that("indention and spaces", {
   expect_warning(test_collection(
-    "scope-AsIs", "scope_spaces_indention",
+    "scope-AsIs", "scope_spaces_indention-",
     transformer = style_text,
     style = tidyverse_style, scope = I(c("indention", "spaces"))
   ), NA)
@@ -26,7 +26,7 @@ test_that("indention and spaces", {
 
 test_that("line-break manipulation", {
   expect_warning(test_collection(
-    "scope-AsIs", "scope_line_breaks",
+    "scope-AsIs", "scope_line_breaks-",
     transformer = style_text,
     style = tidyverse_style,
     scope = I("line_breaks")
@@ -36,7 +36,7 @@ test_that("line-break manipulation", {
 
 test_that("line-break manipulation", {
   expect_warning(test_collection(
-    "scope-AsIs", "scope_spaces_line_breaks",
+    "scope-AsIs", "scope_spaces_line_breaks-",
     transformer = style_text,
     style = tidyverse_style,
     scope = I(c("line_breaks", "spaces"))
@@ -46,7 +46,7 @@ test_that("line-break manipulation", {
 
 test_that("tokens and indention", {
   expect_warning(test_collection(
-    "scope-AsIs", "scope_indention_tokens",
+    "scope-AsIs", "scope_indention_tokens-",
     transformer = style_text,
     style = tidyverse_style,
     scope = I(c("tokens", "indention"))
@@ -55,7 +55,7 @@ test_that("tokens and indention", {
 
 test_that("tokens and indention", {
   expect_warning(test_collection(
-    "scope-AsIs", "scope_spaces_tokens",
+    "scope-AsIs", "scope_spaces_tokens-",
     transformer = style_text,
     style = tidyverse_style,
     scope = I(c("spaces", "tokens"))
@@ -64,7 +64,7 @@ test_that("tokens and indention", {
 
 test_that("no manipulation at all", {
   expect_warning(test_collection(
-    "scope-AsIs", "scope_none",
+    "scope-AsIs", "scope_none-",
     transformer = style_text,
     style = tidyverse_style,
     scope = I("none")
