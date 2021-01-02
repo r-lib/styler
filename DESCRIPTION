@@ -69,7 +69,7 @@ Collate:
     'roxygen-examples-parse.R'
     'roxygen-examples.R'
     'rules-indention.R'
-    'rules-line-break.R'
+    'rules-line-breaks.R'
     'rules-other.R'
     'rules-replacement.R'
     'rules-spacing.R'
