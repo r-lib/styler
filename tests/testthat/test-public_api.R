@@ -376,3 +376,21 @@ test_that("base indention works", {
     text_out
   )
 })
+
+
+test_that("scope can be specified as is", {
+  capture_output(expect_false({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"), scope = I("spaces"))
+    any(styled$changed)
+  }))
+
+  file <- testthat_file("public-api", "xyzpackage", "R", "hello-world.R")
+  capture_output(expect_false({
+    styled <- style_file(file, scope = I("line_breaks"))
+    any(styled$changed)
+  }))
+  expect_equal(
+    style_text(c("1+14;x=2"), scope = I(c("line_breaks", "tokens"))),
+    construct_vertical(c("1+14", "x<-2"))
+  )
+})

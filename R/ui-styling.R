@@ -36,14 +36,14 @@ NULL
 #' The following section describes when and how styling is guaranteed to
 #' yield correct code.
 #'
-#' If the style guide has `scope < "tokens"`, no tokens are changed and the
-#' abstract syntax tree (AST) should not change.
+#' If tokens are to be styled (as specified with the `scope` argument), no tokens
+#' are changed and the abstract syntax tree (AST) should not change.
 #' Hence, it is possible to validate the styling by comparing whether the parsed
 #' expression before and after styling have the same AST.
 #' This comparison omits comments. styler compares
 #' error if the AST has changed through styling.
 #'
-#' Note that with `scope = "tokens"` such a comparison is not conducted because
+#' Note that if tokens are to be styled, such a comparison is not conducted because
 #' the AST might well change and such a change is intended. There is no way
 #' styler can validate styling, that is why we inform the user to carefully
 #' inspect the changes.

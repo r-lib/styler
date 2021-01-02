@@ -5,6 +5,7 @@ api
 AppVeyor
 apriori
 arg
+AsIs
 AST
 aut
 backport
@@ -139,6 +140,7 @@ rnw
 Rnw
 roclet
 roclets
+roundtrip
 roxgen
 roxygen
 Roxygen

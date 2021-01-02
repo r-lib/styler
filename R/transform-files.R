@@ -311,7 +311,7 @@ can_verify_roundtrip <- function(transformers) {
 #' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
 #' we can compare the expression before and after styling and return an error if
 #' it is not the same. Note that this method ignores comments and no
-#' verification can be conducted if scope > "line_breaks".
+#' verification can be conducted if tokens are in the styling scope.
 #' @inheritParams expressions_are_identical
 #' @importFrom rlang abort
 #' @examples

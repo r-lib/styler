@@ -14,7 +14,7 @@ NULL
 #' Style code according to the tidyverse style guide.
 #' @param scope The extent of manipulation. Can range from "none" (least
 #'   invasive) to "tokens" (most invasive). See 'Details'. This argument is a
-#'   vector of length one.
+#'   string or a vector of class `AsIs`.
 #' @param indent_by How many spaces of indention should be inserted after
 #'   operators such as '('.
 #' @param strict A logical value indicating whether a set of strict
@@ -29,19 +29,28 @@ NULL
 #' @inheritParams create_style_guide
 #' @param math_token_spacing A list of parameters that define spacing around
 #'   math token, conveniently constructed using [specify_math_token_spacing()].
-#' @details The following options for `scope` are available.
+#' @details
+#'
+#' The following levels for `scope` are available:
 #'
 #' * "none": Performs no transformation at all.
 #' * "spaces": Manipulates spacing between token on the same line.
-#' * "indention": In addition to "spaces", this option also manipulates the
-#'   indention level.
-#' * "line_breaks": In addition to "indention", this option also manipulates
-#'   line breaks.
-#' * "tokens": In addition to "line_breaks", this option also manipulates
-#'   tokens.
+#' * "indention": Manipulates the indention, i.e. number of spaces at the
+#'   beginning of each line.
+#' * "line_breaks": Manipulates line breaks between tokens.
+#' * "tokens": manipulates tokens.
 #'
-#' As it becomes clear from this description, more invasive operations can only
-#' be performed if all less invasive operations are performed too.
+#' `scope` can be specified in two ways:
+#'
+#' - As a string: In this case all less invasive scope levels are implied, e.g.
+#'   "line_breaks" includes "indention", "spaces". This is brief and what most
+#'   users need.
+#' - As vector of class `AsIs`: Each level has to be listed explicitly by
+#'   wrapping one ore more levels of the scope in [I()]. This offers more
+#'   granular control at the expense of more verbosity.
+#'
+#' See 'Examples' for details.
+#'
 #' @family obtain transformers
 #' @family style_guides
 #' @examples
@@ -49,6 +58,9 @@ NULL
 #' style_text("call( 1)", transformers = tidyverse_style(strict = TRUE))
 #' style_text(c("ab <- 3", "a  <-3"), strict = FALSE) # keeps alignment of "<-"
 #' style_text(c("ab <- 3", "a  <-3"), strict = TRUE) # drops alignment of "<-"
+#'
+#' # styling line breaks only without spaces
+#' style_text(c("ab <- 3", "a =3"), strict = TRUE, scope = I(c("line_breaks", "tokens")))
 #' @importFrom purrr partial
 #' @export
 tidyverse_style <- function(scope = "tokens",
@@ -58,12 +70,10 @@ tidyverse_style <- function(scope = "tokens",
                             reindention = tidyverse_reindention(),
                             math_token_spacing = tidyverse_math_token_spacing()) {
   args <- as.list(environment())
-  scope <- character_to_ordered(
-    scope,
-    c("none", "spaces", "indention", "line_breaks", "tokens")
-  )
+  scope <- scope_normalize(scope)
 
-  space_manipulators <- if (scope >= "spaces") {
+
+  space_manipulators <- if ("indention" %in% scope) {
     lst(
       indent_braces = partial(indent_braces, indent_by = indent_by),
       unindent_fun_dec,
@@ -71,48 +81,55 @@ tidyverse_style <- function(scope = "tokens",
       indent_eq_sub = partial(indent_eq_sub, indent_by = indent_by),
       indent_without_paren = partial(indent_without_paren,
         indent_by = indent_by
-      ),
-      remove_space_before_closing_paren,
-      remove_space_before_opening_paren = if (strict) remove_space_before_opening_paren,
-      add_space_after_for_if_while,
-      add_space_before_brace,
-      remove_space_before_comma,
-      style_space_around_math_token = partial(
-        style_space_around_math_token, strict,
-        math_token_spacing$zero,
-        math_token_spacing$one
-      ),
-      style_space_around_tilde = partial(
-        style_space_around_tilde,
-        strict = strict
-      ),
-      spacing_around_op = purrr::partial(set_space_around_op,
-        strict = strict
-      ),
-      remove_space_after_opening_paren,
-      remove_space_after_excl,
-      set_space_after_bang_bang,
-      remove_space_before_dollar,
-      remove_space_after_fun_dec,
-      remove_space_around_colons,
-      start_comments_with_space = partial(start_comments_with_space,
-        force_one = start_comments_with_one_space
-      ),
-      remove_space_after_unary_pm_nested,
-      spacing_before_comments = if (strict) {
-        set_space_before_comments
-      } else {
-        add_space_before_comments
-      },
-      set_space_between_levels,
-      set_space_between_eq_sub_and_comma,
-      set_space_in_curly_curly
+      )
+    )
+  }
+  if ("spaces" %in% scope) {
+    space_manipulators <- append(
+      space_manipulators,
+      lst(
+        remove_space_before_closing_paren,
+        remove_space_before_opening_paren = if (strict) remove_space_before_opening_paren,
+        add_space_after_for_if_while,
+        add_space_before_brace,
+        remove_space_before_comma,
+        style_space_around_math_token = partial(
+          style_space_around_math_token, strict,
+          math_token_spacing$zero,
+          math_token_spacing$one
+        ),
+        style_space_around_tilde = partial(
+          style_space_around_tilde,
+          strict = strict
+        ),
+        spacing_around_op = purrr::partial(set_space_around_op,
+          strict = strict
+        ),
+        remove_space_after_opening_paren,
+        remove_space_after_excl,
+        set_space_after_bang_bang,
+        remove_space_before_dollar,
+        remove_space_after_fun_dec,
+        remove_space_around_colons,
+        start_comments_with_space = partial(start_comments_with_space,
+          force_one = start_comments_with_one_space
+        ),
+        remove_space_after_unary_pm_nested,
+        spacing_before_comments = if (strict) {
+          set_space_before_comments
+        } else {
+          add_space_before_comments
+        },
+        set_space_between_levels,
+        set_space_between_eq_sub_and_comma,
+        set_space_in_curly_curly
+      )
     )
   }
 
-  use_raw_indention <- scope < "indention"
+  use_raw_indention <- !("indention" %in% scope)
 
-  line_break_manipulators <- if (scope >= "line_breaks") {
+  line_break_manipulators <- if ("line_breaks" %in% scope) {
     lst(
       set_line_break_around_comma,
       set_line_break_before_curly_opening,
@@ -146,7 +163,7 @@ tidyverse_style <- function(scope = "tokens",
     )
   }
 
-  token_manipulators <- if (scope >= "tokens") {
+  token_manipulators <- if ("tokens" %in% scope) {
     lst(
       fix_quotes,
       force_assignment_op,
@@ -162,7 +179,7 @@ tidyverse_style <- function(scope = "tokens",
   indention_modifier <-
     lst(
       update_indention_ref_fun_dec =
-        if (scope >= "indention") update_indention_ref_fun_dec
+        if ("indention" %in% scope) update_indention_ref_fun_dec
     )
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
   create_style_guide(
@@ -177,7 +194,7 @@ tidyverse_style <- function(scope = "tokens",
     reindention            =                    reindention,
     style_guide_name       =               style_guide_name,
     style_guide_version    =                 styler_version,
-    more_specs_style_guide =                            args
+    more_specs_style_guide =                           args
   )
 }
 
@@ -310,24 +327,38 @@ tidyverse_reindention <- function() {
   )
 }
 
-#' Convert a character vector to an ordered factor
+#' Convert the styling scope to its lower-level representation
 #'
-#' Convert a vector to an ordered factor but stop if any of the values in
-#'   `x` does not match the predefined levels in `levels.`
-#' @param x A character vector.
-#' @param levels A vector with levels.
+#' If `scope` is of class `character` and of length one, the value of the
+#' argument and all less-invasive levels are included too (e.g.
+#' styling tokens includes styling spaces). If
+#' `scope` is of class `AsIs`, every level to be included has to be declared
+#' individually. See compare [tidyverse_style()] for the possible levels and
+#' their order.
+#' @param scope A character vector of length one or a vector of class `AsIs`.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
 #' @keywords internal
 #' @importFrom rlang abort
-character_to_ordered <- function(x, levels, name = substitute(x)) {
-  if (!all((x %in% levels))) {
+scope_normalize <- function(scope, name = substitute(scope)) {
+  levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
+  if (!all((scope %in% levels))) {
     abort(paste(
       "all values in", name, "must be one of the following:",
       paste(levels, collapse = ", ")
     ))
   }
-  factor(x, levels = levels, ordered = TRUE)
+
+  if (inherits(scope, "AsIs")) {
+    factor(as.character(scope), levels = levels, ordered = TRUE)
+  } else if (length(scope) == 1) {
+    scope <- levels[as.logical(rev(cumsum(scope == rev(levels))))]
+    factor(scope, levels = levels, ordered = TRUE)
+  } else {
+    abort(
+      "argument `scope` has to be either of class `AsIs` or length one."
+    )
+  }
 }
 
 #' Specify spacing around math tokens

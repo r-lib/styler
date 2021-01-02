@@ -20,4 +20,5 @@ revdep
 ^\.pre-commit-config\.yaml$
 ^brew\-log$
 ^\.github/$
-^bench/$
+^touchstone/$
+^.github/$
