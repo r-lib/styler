@@ -167,3 +167,42 @@ if_for_while_part_requires_braces <- function(pd, key_token) {
   child <- pd$child[[next_non_comment(pd, pos_first_key_token)]]
   pd_is_multi_line(pd) && !is_curly_expr(child)
 }
+
+#' Replace single quotes with double quotes
+#'
+#' We do not use `deparse()` as in previous implementations but `paste0()` since
+#' the former approach escapes the reverse backslash in the line break character
+#' `\\n` whereas the solution with `paste0()` does not.
+#' @examples
+#' style_text("'here
+#' is a string
+#' '")
+#' @importFrom purrr map map_chr
+#' @param pd_flat A flat parse table.
+#' @importFrom rlang is_empty
+#' @keywords internal
+fix_quotes <- function(pd_flat) {
+  str_const <- which(pd_flat$token == "STR_CONST")
+  if (is_empty(str_const)) {
+    return(pd_flat)
+  }
+
+  pd_flat$text[str_const] <- map(pd_flat$text[str_const], fix_quotes_one)
+  pd_flat
+}
+
+#' @importFrom rlang is_empty
+fix_quotes_one <- function(x) {
+  rx <- "^'([^\"]*)'$"
+  i <- grep(rx, x)
+  if (is_empty(i)) {
+    return(x)
+  }
+
+  # replace outer single quotes
+  xi <- gsub(rx, '"\\1"', x[i])
+
+  # Replace inner escaped quotes (\') by ' and keep all other instances of \., including \\
+  x[i] <- gsub("\\\\(')|(\\\\[^'])", "\\1\\2", xi)
+  x
+}
