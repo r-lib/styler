@@ -297,7 +297,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦           ¦   ¦--RIGHT_ASSIGN: -> [0/0] {287}                   
  ¦           ¦   °--expr: b [0/0] {289}                            
  ¦           ¦       °--SYMBOL: b [0/0] {288}                      
- ¦           ¦--equal_assign: a=b [1/2] {290}                      
+ ¦           ¦--expr_or_assign_or_help: a=b [1/2] {290}            
  ¦           ¦   ¦--expr: a [0/0] {292}                            
  ¦           ¦   ¦   °--SYMBOL: a [0/0] {291}                      
  ¦           ¦   ¦--EQ_ASSIGN: = [0/0] {293}                       

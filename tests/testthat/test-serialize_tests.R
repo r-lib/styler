@@ -7,6 +7,9 @@ test_that("No files to compare returns error", {
 })
 
 test_that("properly detects non-match", {
+  path_out <- test_path('serialize_tests', 'k3-out.R')
+  before <- readLines(path_out)
+  withr::defer(writeLines(before, path_out))
   expect_warning(
     test_collection("serialize_tests", "k3",
       transformer = identity

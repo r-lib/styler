@@ -47,6 +47,7 @@ env
 EOF
 EOL
 EOLs
+eq
 EQ
 eval
 expr
@@ -93,6 +94,7 @@ magrittr
 md
 Müller
 mutli
+na
 navbar
 netlify
 NUM
@@ -103,6 +105,7 @@ packagemanager
 packrat
 pandoc
 params
+paren
 parsable
 parsesum
 pgkdown
@@ -173,6 +176,7 @@ styler
 stylerignore
 stylerignored
 stylers
+subexpr
 sudo
 summarises
 Sys
@@ -187,6 +191,8 @@ tidyr
 tidyverse
 Tidyverse
 travis
+tryCatch
+tryGugus
 ubuntu
 ui
 uncached

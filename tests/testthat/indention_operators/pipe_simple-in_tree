@@ -42,15 +42,35 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦       ¦   °--SYMBOL_FUNCTION_CALL: g_out [0/0] {43}          
  ¦       ¦--'(': ( [0/0] {45}                                   
  ¦       °--')': ) [0/0] {46}                                   
- °--expr: a <-  [2/0] {47}                                      
-     ¦--expr: a [0/1] {49}                                      
-     ¦   °--SYMBOL: a [0/0] {48}                                
-     ¦--LEFT_ASSIGN: <- [0/1] {50}                              
-     °--expr: funct [0/0] {51}                                  
-         ¦--FUNCTION: funct [0/0] {52}                          
-         ¦--'(': ( [0/0] {53}                                   
-         ¦--SYMBOL_FORMALS: jon_t [0/0] {54}                    
-         ¦--')': ) [0/1] {55}                                   
-         °--expr: {} [0/0] {56}                                 
-             ¦--'{': { [0/0] {57}                               
-             °--'}': } [0/0] {58}                               
+ ¦--expr: a <-  [2/0] {47}                                      
+ ¦   ¦--expr: a [0/1] {49}                                      
+ ¦   ¦   °--SYMBOL: a [0/0] {48}                                
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {50}                              
+ ¦   °--expr: funct [0/0] {51}                                  
+ ¦       ¦--FUNCTION: funct [0/0] {52}                          
+ ¦       ¦--'(': ( [0/0] {53}                                   
+ ¦       ¦--SYMBOL_FORMALS: jon_t [0/0] {54}                    
+ ¦       ¦--')': ) [0/1] {55}                                   
+ ¦       °--expr: {} [0/0] {56}                                 
+ ¦           ¦--'{': { [0/0] {57}                               
+ ¦           °--'}': } [0/0] {58}                               
+ ¦--expr: x %>% [2/0] {59}                                      
+ ¦   ¦--expr: x [0/1] {61}                                      
+ ¦   ¦   °--SYMBOL: x [0/0] {60}                                
+ ¦   ¦--SPECIAL-PIPE: %>% [0/2] {62}                            
+ ¦   ¦--COMMENT: # bre [2/2] {63}                               
+ ¦   °--expr: call( [1/0] {64}                                  
+ ¦       ¦--expr: call [0/0] {66}                               
+ ¦       ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {65}           
+ ¦       ¦--'(': ( [0/0] {67}                                   
+ ¦       °--')': ) [0/0] {68}                                   
+ ¦--expr: y %>% [3/1] {69}                                      
+ ¦   ¦--expr: y [0/1] {71}                                      
+ ¦   ¦   °--SYMBOL: y [0/0] {70}                                
+ ¦   ¦--SPECIAL-PIPE: %>% [0/2] {72}                            
+ ¦   °--expr: call( [3/0] {73}                                  
+ ¦       ¦--expr: call [0/0] {75}                               
+ ¦       ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {74}           
+ ¦       ¦--'(': ( [0/0] {76}                                   
+ ¦       °--')': ) [0/0] {77}                                   
+ °--COMMENT: # mor [0/0] {78}                                   

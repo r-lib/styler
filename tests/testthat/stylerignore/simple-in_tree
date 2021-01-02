@@ -26,14 +26,14 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦--expr: 43 [0/9] {26}                            
  ¦   ¦   °--NUM_CONST: 43 [0/0] {25}                   
  ¦   °--')': ) [1/0] {27}                              
- ¦--equal_assign: x="ne [3/1] {28}                     
+ ¦--expr_or_assign_or_help: x="ne [3/1] {28}           
  ¦   ¦--expr: x [0/0] {30}                             
  ¦   ¦   °--SYMBOL: x [0/0] {29}                       
  ¦   ¦--EQ_ASSIGN: = [0/0] {31}                        
  ¦   °--expr: "new" [0/0] {33}                         
  ¦       °--STR_CONST: "new" [0/0] {32}                
  ¦--COMMENT: # sty [0/0] {34}                          
- ¦--equal_assign: y=1 [1/1] {35}                       
+ ¦--expr_or_assign_or_help: y=1 [1/1] {35}             
  ¦   ¦--expr: y [0/0] {37}                             
  ¦   ¦   °--SYMBOL: y [0/0] {36}                       
  ¦   ¦--EQ_ASSIGN: = [0/0] {38}                        
@@ -69,14 +69,14 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦       °--SYMBOL: b [0/0] {67}                   
  ¦   °--')': ) [0/0] {69}                              
  ¦--COMMENT: # --- [3/0] {70}                          
- ¦--equal_assign: x="ne [1/1] {71}                     
+ ¦--expr_or_assign_or_help: x="ne [1/1] {71}           
  ¦   ¦--expr: x [0/0] {73}                             
  ¦   ¦   °--SYMBOL: x [0/0] {72}                       
  ¦   ¦--EQ_ASSIGN: = [0/0] {74}                        
  ¦   °--expr: "new" [0/0] {76}                         
  ¦       °--STR_CONST: "new" [0/0] {75}                
  ¦--COMMENT: # sty [0/0] {77}                          
- ¦--equal_assign: y=1 [1/1] {78}                       
+ ¦--expr_or_assign_or_help: y=1 [1/1] {78}             
  ¦   ¦--expr: y [0/0] {80}                             
  ¦   ¦   °--SYMBOL: y [0/0] {79}                       
  ¦   ¦--EQ_ASSIGN: = [0/0] {81}                        

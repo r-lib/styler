@@ -48,7 +48,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦   °--'}': } [1/0] {47}                             
  ¦   °--')': ) [0/0] {48}                                 
  ¦--COMMENT: # do  [2/0] {49}                             
- ¦--equal_assign: a = 3 [1/0] {50}                        
+ ¦--expr_or_assign_or_help: a = 3 [1/0] {50}              
  ¦   ¦--expr: a [0/1] {52}                                
  ¦   ¦   °--SYMBOL: a [0/0] {51}                          
  ¦   ¦--EQ_ASSIGN: = [0/1] {53}                           

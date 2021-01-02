@@ -73,7 +73,7 @@ tidyverse_style <- function(scope = "tokens",
   scope <- scope_normalize(scope)
 
 
-  space_manipulators <- if ("indention" %in% scope) {
+  indention_manipulators <- if ("indention" %in% scope) {
     lst(
       indent_braces = partial(indent_braces, indent_by = indent_by),
       unindent_fun_dec,
@@ -81,49 +81,48 @@ tidyverse_style <- function(scope = "tokens",
       indent_eq_sub = partial(indent_eq_sub, indent_by = indent_by),
       indent_without_paren = partial(indent_without_paren,
         indent_by = indent_by
-      )
+      ),
+      update_indention_ref_fun_dec =
+        if ("indention" %in% scope) update_indention_ref_fun_dec
     )
   }
-  if ("spaces" %in% scope) {
-    space_manipulators <- append(
-      space_manipulators,
-      lst(
-        remove_space_before_closing_paren,
-        remove_space_before_opening_paren = if (strict) remove_space_before_opening_paren,
-        add_space_after_for_if_while,
-        add_space_before_brace,
-        remove_space_before_comma,
-        style_space_around_math_token = partial(
-          style_space_around_math_token, strict,
-          math_token_spacing$zero,
-          math_token_spacing$one
-        ),
-        style_space_around_tilde = partial(
-          style_space_around_tilde,
-          strict = strict
-        ),
-        spacing_around_op = purrr::partial(set_space_around_op,
-          strict = strict
-        ),
-        remove_space_after_opening_paren,
-        remove_space_after_excl,
-        set_space_after_bang_bang,
-        remove_space_before_dollar,
-        remove_space_after_fun_dec,
-        remove_space_around_colons,
-        start_comments_with_space = partial(start_comments_with_space,
-          force_one = start_comments_with_one_space
-        ),
-        remove_space_after_unary_pm_nested,
-        spacing_before_comments = if (strict) {
-          set_space_before_comments
-        } else {
-          add_space_before_comments
-        },
-        set_space_between_levels,
-        set_space_between_eq_sub_and_comma,
-        set_space_in_curly_curly
-      )
+  space_manipulators <- if ("spaces" %in% scope) {
+    lst(
+      remove_space_before_closing_paren,
+      remove_space_before_opening_paren = if (strict) remove_space_before_opening_paren,
+      add_space_after_for_if_while,
+      add_space_before_brace,
+      remove_space_before_comma,
+      style_space_around_math_token = partial(
+        style_space_around_math_token, strict,
+        math_token_spacing$zero,
+        math_token_spacing$one
+      ),
+      style_space_around_tilde = partial(
+        style_space_around_tilde,
+        strict = strict
+      ),
+      spacing_around_op = purrr::partial(set_space_around_op,
+        strict = strict
+      ),
+      remove_space_after_opening_paren,
+      remove_space_after_excl,
+      set_space_after_bang_bang,
+      remove_space_before_dollar,
+      remove_space_after_fun_dec,
+      remove_space_around_colons,
+      start_comments_with_space = partial(start_comments_with_space,
+        force_one = start_comments_with_one_space
+      ),
+      remove_space_after_unary_pm_nested,
+      spacing_before_comments = if (strict) {
+        set_space_before_comments
+      } else {
+        add_space_before_comments
+      },
+      set_space_between_levels,
+      set_space_between_eq_sub_and_comma,
+      set_space_in_curly_curly
     )
   }
 
@@ -175,12 +174,6 @@ tidyverse_style <- function(scope = "tokens",
     )
   }
 
-
-  indention_modifier <-
-    lst(
-      update_indention_ref_fun_dec =
-        if ("indention" %in% scope) update_indention_ref_fun_dec
-    )
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
   create_style_guide(
     # transformer functions
@@ -188,7 +181,7 @@ tidyverse_style <- function(scope = "tokens",
     line_break             =        line_break_manipulators,
     space                  =             space_manipulators,
     token                  =             token_manipulators,
-    indention              =             indention_modifier,
+    indention              =         indention_manipulators,
     # transformer options
     use_raw_indention      =              use_raw_indention,
     reindention            =                    reindention,

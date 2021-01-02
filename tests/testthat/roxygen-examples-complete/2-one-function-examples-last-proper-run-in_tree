@@ -10,7 +10,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #'    [1/0] {9}                           
  ¦--COMMENT: #'    [1/0] {10}                          
  ¦--COMMENT: #' ) [1/0] {11}                           
- °--equal_assign: a = c [1/0] {12}                     
+ °--expr_or_assign_or_help: a = c [1/0] {12}           
      ¦--expr: a [0/1] {14}                             
      ¦   °--SYMBOL: a [0/0] {13}                       
      ¦--EQ_ASSIGN: = [0/1] {15}                        

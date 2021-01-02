@@ -1,11 +1,3 @@
-
-#' Update the indention reference
-#'
-#' @param pd_nested A nested parse table.
-#' @name update_indention_ref
-#' @keywords internal
-NULL
-
 # @describeIn update_indention_ref Updates the reference pos_id for all
 #   tokens in `pd_nested` if `pd_nested` contains a function call. Tokens that
 #   start on the same line as the opening parenthesis, are not themselves
@@ -44,28 +36,6 @@ NULL
 #   }
 #   pd_nested
 # }
-
-#' @describeIn update_indention_ref Updates the reference pos_id for all
-#'   tokens in `pd_nested` if `pd_nested` contains a function declaration.
-#'   Tokens inside a function declaration are are re-indented,
-#'   that is, they are indented up to the level at which the token FUNCTION
-#'   ends in terms of col2.
-#' @examples
-#' \dontrun{
-#' a <- function(x,
-#'               y) {
-#'   x + y
-#' }
-#' }
-#' @importFrom rlang seq2
-#' @keywords internal
-update_indention_ref_fun_dec <- function(pd_nested) {
-  if (pd_nested$token[1] == "FUNCTION") {
-    seq <- seq2(3, nrow(pd_nested) - 2)
-    pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2]
-  }
-  pd_nested
-}
 
 #' Apply reference indention to tokens
 #'

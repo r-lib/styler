@@ -27,13 +27,13 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦--')': ) [0/2] {26}                              
  ¦   °--expr: 3 [1/0] {28}                             
  ¦       °--NUM_CONST: 3 [0/0] {27}                    
- ¦--equal_assign: x = 3 [1/0] {29}                     
+ ¦--expr_or_assign_or_help: x = 3 [1/0] {29}           
  ¦   ¦--expr: x [0/1] {31}                             
  ¦   ¦   °--SYMBOL: x [0/0] {30}                       
  ¦   ¦--EQ_ASSIGN: = [0/1] {32}                        
  ¦   °--expr: 3 [0/0] {34}                             
  ¦       °--NUM_CONST: 3 [0/0] {33}                    
- ¦--equal_assign: y = 2 [2/1] {35}                     
+ ¦--expr_or_assign_or_help: y = 2 [2/1] {35}           
  ¦   ¦--expr: y [0/1] {37}                             
  ¦   ¦   °--SYMBOL: y [0/0] {36}                       
  ¦   ¦--EQ_ASSIGN: = [0/1] {38}                        
