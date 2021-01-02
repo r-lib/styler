@@ -70,7 +70,7 @@ Collate:
     'roxygen-examples.R'
     'rules-indention.R'
     'rules-line-breaks.R'
-    'rules-spacing.R'
+    'rules-spaces.R'
     'rules-tokens.R'
     'serialize.R'
     'set-assert-args.R'
