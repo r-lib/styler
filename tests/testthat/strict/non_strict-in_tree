@@ -313,7 +313,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦           ¦   ¦--RIGHT_ASSIGN: -> [0/0] {303}                   
  ¦           ¦   °--expr: b [0/0] {305}                            
  ¦           ¦       °--SYMBOL: b [0/0] {304}                      
- ¦           ¦--equal_assign: a=b [1/2] {306}                      
+ ¦           ¦--expr_or_assign_or_help: a=b [1/2] {306}            
  ¦           ¦   ¦--expr: a [0/0] {308}                            
  ¦           ¦   ¦   °--SYMBOL: a [0/0] {307}                      
  ¦           ¦   ¦--EQ_ASSIGN: = [0/0] {309}                       

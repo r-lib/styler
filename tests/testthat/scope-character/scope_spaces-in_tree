@@ -16,7 +16,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
              ¦   ¦--'+': + [0/0] {14}                  
              ¦   °--expr: 1 [0/0] {16}                 
              ¦       °--NUM_CONST: 1 [0/0] {15}        
-             ¦--equal_assign: d=3 [1/4] {17}           
+             ¦--expr_or_assign_or_help: d=3 [1/4] {17} 
              ¦   ¦--expr: d [0/0] {19}                 
              ¦   ¦   °--SYMBOL: d [0/0] {18}           
              ¦   ¦--EQ_ASSIGN: = [0/0] {20}            

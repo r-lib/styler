@@ -47,14 +47,14 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦--expr: 43 [0/9] {47}                            
  ¦   ¦   °--NUM_CONST: 43 [0/0] {46}                   
  ¦   °--')': ) [1/0] {48}                              
- ¦--equal_assign: x="ne [3/1] {49}                     
+ ¦--expr_or_assign_or_help: x="ne [3/1] {49}           
  ¦   ¦--expr: x [0/0] {51}                             
  ¦   ¦   °--SYMBOL: x [0/0] {50}                       
  ¦   ¦--EQ_ASSIGN: = [0/0] {52}                        
  ¦   °--expr: "new" [0/0] {54}                         
  ¦       °--STR_CONST: "new" [0/0] {53}                
  ¦--COMMENT: # sty [0/0] {55}                          
- ¦--equal_assign: y=1 [1/1] {56}                       
+ ¦--expr_or_assign_or_help: y=1 [1/1] {56}             
  ¦   ¦--expr: y [0/0] {58}                             
  ¦   ¦   °--SYMBOL: y [0/0] {57}                       
  ¦   ¦--EQ_ASSIGN: = [0/0] {59}                        
