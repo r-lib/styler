@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set line break for multi-line function calls — set_line_break_if_call_is_multi_line • styler</title>
+<title>Convert the styling scope to its lower-level representation — scope_normalize • styler</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,13 @@
 
 
 
-<meta property="og:title" content="Set line break for multi-line function calls — set_line_break_if_call_is_multi_line" />
-<meta property="og:description" content="Set line break for multi-line function calls" />
+<meta property="og:title" content="Convert the styling scope to its lower-level representation — scope_normalize" />
+<meta property="og:description" content="If scope is of class character and of length one, the value of the
+argument and all less-invasive levels are included too (e.g.
+styling tokens includes styling spaces). If
+scope is of class AsIs, every level to be included has to be declared
+individually. See compare tidyverse_style() for the possible levels and
+their order." />
 
 
 <meta name="robots" content="noindex">
@@ -171,58 +176,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set line break for multi-line function calls</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/rules-line-break.R'><code>R/rules-line-break.R</code></a></small>
-    <div class="hidden name"><code>set_line_break_if_call_is_multi_line.Rd</code></div>
+    <h1>Convert the styling scope to its lower-level representation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/style-guides.R'><code>R/style-guides.R</code></a></small>
+    <div class="hidden name"><code>scope_normalize.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Set line break for multi-line function calls</p>
+    <p>If <code>scope</code> is of class <code>character</code> and of length one, the value of the
+argument and all less-invasive levels are included too (e.g.
+styling tokens includes styling spaces). If
+<code>scope</code> is of class <code>AsIs</code>, every level to be included has to be declared
+individually. See compare <code><a href='tidyverse_style.html'>tidyverse_style()</a></code> for the possible levels and
+their order.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_line_break_after_opening_if_call_is_multi_line</span><span class='op'>(</span>
-  <span class='va'>pd</span>,
-  except_token_after <span class='op'>=</span> <span class='cn'>NULL</span>,
-  except_text_before <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span>
-
-<span class='fu'>set_line_break_before_closing_call</span><span class='op'>(</span><span class='va'>pd</span>, <span class='va'>except_token_before</span><span class='op'>)</span>
-
-<span class='fu'>remove_line_break_in_fun_call</span><span class='op'>(</span><span class='va'>pd</span>, <span class='va'>strict</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>scope_normalize</span><span class='op'>(</span><span class='va'>scope</span>, name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>scope</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pd</th>
-      <td><p>A parse table.</p></td>
+      <th>scope</th>
+      <td><p>A character vector of length one or a vector of class <code>AsIs</code>.</p></td>
     </tr>
     <tr>
-      <th>except_token_after</th>
-      <td><p>A character vector with tokens after "'('" that do
-not cause a line break after "'('".</p></td>
-    </tr>
-    <tr>
-      <th>except_text_before</th>
-      <td><p>A character vector with text before "'('" that do
-not cause a line break after "'('".</p></td>
-    </tr>
-    <tr>
-      <th>except_token_before</th>
-      <td><p>A character vector with text before "')'" that do
-not cause a line break before "')'".</p></td>
+      <th>name</th>
+      <td><p>The name of the character vector to be displayed if the
+construction of the factor fails.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
-
-    
-<ul>
-<li><p><code>set_line_break_after_opening_if_call_is_multi_line</code>: Sets line break after
-opening parenthesis.</p></li>
-<li><p><code>set_line_break_before_closing_call</code>: Sets line break before
-closing parenthesis.</p></li>
-</ul>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -118,9 +118,6 @@
     <loc>https://styler.r-lib.org/reference/catch_style_file_output.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/character_to_ordered.html</loc>
-  </url>
-  <url>
     <loc>https://styler.r-lib.org/reference/choose_indention.html</loc>
   </url>
   <url>
@@ -410,6 +407,9 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/rep_char.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/reference/scope_normalize.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/separate_chunks.html</loc>

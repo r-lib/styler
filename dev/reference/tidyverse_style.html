@@ -86,7 +86,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -148,7 +148,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -196,7 +196,7 @@
       <th>scope</th>
       <td><p>The extent of manipulation. Can range from "none" (least
 invasive) to "tokens" (most invasive). See 'Details'. This argument is a
-vector of length one.</p></td>
+string or a vector of class <code>AsIs</code>.</p></td>
     </tr>
     <tr>
       <th>strict</th>
@@ -232,19 +232,25 @@ math token, conveniently constructed using <code><a href='math_token_spacing.htm
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The following options for <code>scope</code> are available.</p><ul>
+    <p>The following levels for <code>scope</code> are available:</p><ul>
 <li><p>"none": Performs no transformation at all.</p></li>
 <li><p>"spaces": Manipulates spacing between token on the same line.</p></li>
-<li><p>"indention": In addition to "spaces", this option also manipulates the
-indention level.</p></li>
-<li><p>"line_breaks": In addition to "indention", this option also manipulates
-line breaks.</p></li>
-<li><p>"tokens": In addition to "line_breaks", this option also manipulates
-tokens.</p></li>
+<li><p>"indention": Manipulates the indention, i.e. number of spaces at the
+beginning of each line.</p></li>
+<li><p>"line_breaks": Manipulates line breaks between tokens.</p></li>
+<li><p>"tokens": manipulates tokens.</p></li>
 </ul>
 
-<p>As it becomes clear from this description, more invasive operations can only
-be performed if all less invasive operations are performed too.</p>
+<p><code>scope</code> can be specified in two ways:</p><ul>
+<li><p>As a string: In this case all less invasive scope levels are implied, e.g.
+"line_breaks" includes "indention", "spaces". This is brief and what most
+users need.</p></li>
+<li><p>As vector of class <code>AsIs</code>: Each level has to be listed explicitly by
+wrapping one ore more levels of the scope in <code><a href='https://rdrr.io/r/base/AsIs.html'>I()</a></code>. This offers more
+granular control at the expense of more verbosity.</p></li>
+</ul>
+
+<p>See 'Examples' for details.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='st'>"call( 1)"</span>, style <span class='op'>=</span> <span class='va'>tidyverse_style</span>, scope <span class='op'>=</span> <span class='st'>"spaces"</span><span class='op'>)</span>
@@ -253,7 +259,11 @@ be performed if all less invasive operations are performed too.</p>
 </div><div class='output co'>#&gt; ab </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span>
 #&gt; a  </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span></div><div class='input'><span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ab &lt;- 3"</span>, <span class='st'>"a  &lt;-3"</span><span class='op'>)</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># drops alignment of "&lt;-"</span>
 </div><div class='output co'>#&gt; ab </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span>
-#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span></div></span></pre>
+#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span></div><div class='input'>
+<span class='co'># styling line breaks only without spaces</span>
+<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ab &lt;- 3"</span>, <span class='st'>"a =3"</span><span class='op'>)</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span>, scope <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"line_breaks"</span>, <span class='st'>"tokens"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ab </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span>
+#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span style='color: #0000BB;'>3</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

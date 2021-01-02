@@ -88,7 +88,7 @@ Carefully examine the results after running this function!" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -150,7 +150,7 @@ Carefully examine the results after running this function!" />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -292,13 +292,13 @@ that invalidates code.</p>
 
 <p>The following section describes when and how styling is guaranteed to
 yield correct code.</p>
-<p>If the style guide has <code>scope &lt; "tokens"</code>, no tokens are changed and the
-abstract syntax tree (AST) should not change.
+<p>If tokens are to be styled (as specified with the <code>scope</code> argument), no tokens
+are changed and the abstract syntax tree (AST) should not change.
 Hence, it is possible to validate the styling by comparing whether the parsed
 expression before and after styling have the same AST.
 This comparison omits comments. styler compares
 error if the AST has changed through styling.</p>
-<p>Note that with <code>scope = "tokens"</code> such a comparison is not conducted because
+<p>Note that if tokens are to be styled, such a comparison is not conducted because
 the AST might well change and such a change is intended. There is no way
 styler can validate styling, that is why we inform the user to carefully
 inspect the changes.</p>
