@@ -15,8 +15,11 @@
   (`styler.quiet`) (#640).
 
 - `scope` in `tidyverse_style()` can now be specified with higher granularity
-  through `I()`, e.g. `I(c('spaces', 'tokens'))` allows it to style tokens
-  without styling line breaks and indention (#705, #707). 
+  through `I()`, e.g. `I(c('spaces', 'tokens'))` allows us to style spaces and 
+  tokens without styling line breaks and indention. Previously, only a string 
+  was allowed and all less invasive scopes were included, e.g. if you wanted to 
+  style tokens, you had to always also style spaces, indention, line breaks as 
+  well (#705, #707).
 
 ## Major changes
 
