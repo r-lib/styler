@@ -98,19 +98,13 @@ tidyverse_style <- function(scope = "tokens",
         math_token_spacing$zero,
         math_token_spacing$one
       ),
-      style_space_around_tilde = partial(
-        style_space_around_tilde,
-        strict = strict
-      ),
       spacing_around_op = purrr::partial(set_space_around_op,
         strict = strict
       ),
       remove_space_after_opening_paren,
       remove_space_after_excl,
-      set_space_after_bang_bang,
       remove_space_before_dollar,
       remove_space_after_fun_dec,
-      remove_space_around_colons,
       start_comments_with_space = partial(start_comments_with_space,
         force_one = start_comments_with_one_space
       ),
@@ -120,9 +114,7 @@ tidyverse_style <- function(scope = "tokens",
       } else {
         add_space_before_comments
       },
-      set_space_between_levels,
-      set_space_between_eq_sub_and_comma,
-      set_space_in_curly_curly
+      set_space_between_levels
     )
   }
 
@@ -135,8 +127,6 @@ tidyverse_style <- function(scope = "tokens",
       set_line_break_before_curly_opening,
       remove_line_break_before_round_closing_after_curly =
         if (strict) remove_line_break_before_round_closing_after_curly,
-      remove_line_breaks_in_fun_dec =
-        if (strict) remove_line_breaks_in_fun_dec,
       style_line_break_around_curly = partial(
         style_line_break_around_curly,
         strict
@@ -158,21 +148,12 @@ tidyverse_style <- function(scope = "tokens",
         )
       },
       purrr::partial(remove_line_break_in_fun_call, strict = strict),
-      add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
-      set_linebreak_after_ggplot2_plus = if (strict) set_linebreak_after_ggplot2_plus
+      add_line_break_after_pipe = if (strict) add_line_break_after_pipe
     )
   }
 
   token_manipulators <- if ("tokens" %in% scope) {
-    lst(
-      fix_quotes,
-      force_assignment_op,
-      resolve_semicolon,
-      add_brackets_in_pipe,
-      remove_terminal_token_before_and_after,
-      wrap_if_else_while_for_fun_multi_line_in_curly =
-        if (strict) wrap_if_else_while_for_fun_multi_line_in_curly
-    )
+    lst()
   }
 
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
