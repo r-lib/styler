@@ -130,7 +130,7 @@ tidyverse_style <- function(scope = "tokens",
 
   line_break_manipulators <- if ("line_breaks" %in% scope) {
     lst(
-      set_line_break_around_comma,
+      set_line_break_around_comma_and_or,
       set_line_break_before_curly_opening,
       remove_line_break_before_round_closing_after_curly =
         if (strict) remove_line_break_before_round_closing_after_curly,
