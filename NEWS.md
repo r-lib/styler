@@ -38,7 +38,7 @@
 - unary `+` before a function call does not give an error anymore, as before 
   version 1.3.0 (#697).
 - cache is now correctly invalidated when style guide arguments change (#647).
-- empty lines are now removed between pipes (#645).
+- empty lines are now removed between pipes and assignments (#645, #710).
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
 - always strip trailing spaces and make cache insensitive to it (#626).
 - `style_text()` can now style all input that `is.character()`, not just if it 
