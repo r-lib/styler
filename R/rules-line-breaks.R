@@ -180,7 +180,6 @@ remove_line_breaks_in_fun_dec <- function(pd) {
   pd
 }
 
-
 #' @importFrom rlang seq2
 add_line_break_after_pipe <- function(pd) {
   is_pipe <- pd$token == c("SPECIAL-PIPE")
@@ -189,6 +188,14 @@ add_line_break_after_pipe <- function(pd) {
   if (sum(is_pipe & pd$token_after != "COMMENT") > 1 &&
     !(next_terminal(pd, vars = "token_before")$token_before %in% c("'('", "EQ_SUB", "','"))) {
     pd$lag_newlines[lag(is_pipe)] <- 1L
+  }
+  pd
+}
+
+set_line_break_after_assignment <- function(pd) {
+  is_assignment <- lag(pd$token, default = FALSE) %in% c("LEFT_ASSIGN", "EQ_ASSIGN")
+  if (any(is_assignment)) {
+    pd$lag_newlines[is_assignment] <- min(1, pd$lag_newlines[is_assignment])
   }
   pd
 }
