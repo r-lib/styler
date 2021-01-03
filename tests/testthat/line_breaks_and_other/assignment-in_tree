@@ -12,33 +12,35 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦--LEFT_ASSIGN: <- [0/1] {10}                     
  ¦   °--expr: 3 [0/0] {12}                             
  ¦       °--NUM_CONST: 3 [0/0] {11}                    
+ ¦--COMMENT: # FIX [2/0] {13}                          
+ ¦--COMMENT: # not [1/0] {14}                          
  ¦--expr: x <-
- [2/0] {13}                            
- ¦   ¦--expr: x [0/1] {15}                             
- ¦   ¦   °--SYMBOL: x [0/0] {14}                       
- ¦   ¦--LEFT_ASSIGN: <- [0/2] {16}                     
- ¦   ¦--COMMENT: # com [2/2] {17}                      
- ¦   °--expr: 3 [1/0] {19}                             
- ¦       °--NUM_CONST: 3 [0/0] {18}                    
- ¦--expr_or_assign_or_help: x = # [3/0] {20}           
- ¦   ¦--expr: x [0/1] {22}                             
- ¦   ¦   °--SYMBOL: x [0/0] {21}                       
- ¦   ¦--EQ_ASSIGN: = [0/1] {23}                        
- ¦   ¦--COMMENT: # [0/2] {24}                          
- ¦   °--expr: 2 [1/0] {26}                             
- ¦       °--NUM_CONST: 2 [0/0] {25}                    
- ¦--expr_or_assign_or_help: x = 3 [3/0] {27}           
- ¦   ¦--expr: x [0/1] {29}                             
- ¦   ¦   °--SYMBOL: x [0/0] {28}                       
- ¦   ¦--EQ_ASSIGN: = [0/1] {30}                        
- ¦   °--expr: 3 [0/0] {32}                             
- ¦       °--NUM_CONST: 3 [0/0] {31}                    
+ [1/0] {15}                            
+ ¦   ¦--expr: x [0/1] {17}                             
+ ¦   ¦   °--SYMBOL: x [0/0] {16}                       
+ ¦   ¦--LEFT_ASSIGN: <- [0/2] {18}                     
+ ¦   ¦--COMMENT: # the [1/2] {19}                      
+ ¦   °--expr: 3 [2/0] {21}                             
+ ¦       °--NUM_CONST: 3 [0/0] {20}                    
+ ¦--expr_or_assign_or_help: x = # [3/0] {22}           
+ ¦   ¦--expr: x [0/1] {24}                             
+ ¦   ¦   °--SYMBOL: x [0/0] {23}                       
+ ¦   ¦--EQ_ASSIGN: = [0/1] {25}                        
+ ¦   ¦--COMMENT: # [0/2] {26}                          
+ ¦   °--expr: 2 [1/0] {28}                             
+ ¦       °--NUM_CONST: 2 [0/0] {27}                    
+ ¦--expr_or_assign_or_help: x = 3 [3/0] {29}           
+ ¦   ¦--expr: x [0/1] {31}                             
+ ¦   ¦   °--SYMBOL: x [0/0] {30}                       
+ ¦   ¦--EQ_ASSIGN: = [0/1] {32}                        
+ ¦   °--expr: 3 [0/0] {34}                             
+ ¦       °--NUM_CONST: 3 [0/0] {33}                    
  °--expr_or_assign_or_help: x =
 
- [2/0] {33}         
-     ¦--expr: x [0/1] {35}                             
-     ¦   °--SYMBOL: x [0/0] {34}                       
-     ¦--EQ_ASSIGN: = [0/2] {36}                        
-     ¦--COMMENT: # com [2/2] {37}                      
-     °--expr: 3 [1/0] {39}                             
-         °--NUM_CONST: 3 [0/0] {38}                    
+ [2/0] {35}         
+     ¦--expr: x [0/1] {37}                             
+     ¦   °--SYMBOL: x [0/0] {36}                       
+     ¦--EQ_ASSIGN: = [0/2] {38}                        
+     ¦--COMMENT: # com [2/2] {39}                      
+     °--expr: 3 [1/0] {41}                             
+         °--NUM_CONST: 3 [0/0] {40}                    
