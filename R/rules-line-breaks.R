@@ -90,9 +90,10 @@ set_line_break_before_curly_opening <- function(pd) {
 }
 
 
-set_line_break_around_comma <- function(pd, strict) {
+set_line_break_around_comma_and_or <- function(pd, strict) {
+  ops <- c("','", "AND", "OR", "AND2", "OR2")
   comma_with_line_break_that_can_be_removed_before <-
-    (pd$token == "','") &
+    (pd$token %in% ops) &
       (pd$lag_newlines > 0) &
       (pd$token_before != "COMMENT") &
       (lag(pd$token) != "'['")
