@@ -175,6 +175,38 @@ tidyverse_style <- function(scope = "tokens",
     )
   }
 
+  subset_transformers <- list(
+    force_assignment_op = "EQ_ASSIGN",
+    add_line_break_after_pipe = "SPECIAL-PIPE",
+    wrap_if_else_while_for_fun_multi_line_in_curly = c("IF", "WHILE", "FOR", "FUNCTION"),
+    remove_line_breaks_in_fun_dec = "FUNCTION",
+    set_space_in_curly_curly = c("'{'", "'}'"),
+    set_space_between_eq_sub_and_comma = "EQ_SUB",
+    remove_space_around_colons = c("':'", "NS_GET_INT", "NS_GET"),
+    remove_space_after_fun_dec = "FUNCTION",
+    remove_space_before_dollar = "'$'",
+    set_space_after_bang_bang = "'!'",
+    remove_space_after_excl = "'!'",
+    style_space_around_tilde = "'~'",
+    add_space_after_for_if_while = c("IF", "WHILE", "FOR"),
+    set_line_break_around_curly_curly = "'{'",
+    indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),
+    unindent_fun_dec = "FUNCTION",
+    indent_eq_sub = c("EQ_SUB", "EQ_FORMALS"), # TODO rename
+    update_indention_ref_fun_dec = "FUNCTION",
+    remove_space_before_closing_paren = c("')'", "']'"),
+    remove_space_before_opening_paren = c("'('", "'['", "LBB"),
+    remove_space_before_comma = "','",
+    style_space_around_math_token = c(
+      math_token_spacing$zero,
+      math_token_spacing$one
+    ),
+    remove_space_after_opening_paren = c("'('", "'['", "LBB"),
+    start_comments_with_space = "COMMENT",
+    remove_line_break_before_round_closing_after_curly = "'}'",
+    style_line_break_around_curly = "'{'"
+  )
+
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
   create_style_guide(
     # transformer functions
@@ -188,7 +220,8 @@ tidyverse_style <- function(scope = "tokens",
     reindention            =                    reindention,
     style_guide_name       =               style_guide_name,
     style_guide_version    =                 styler_version,
-    more_specs_style_guide =                           args
+    more_specs_style_guide =                           args,
+    subset_transformers    =            subset_transformers
   )
 }
 
@@ -257,7 +290,8 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                reindention = tidyverse_reindention(),
                                style_guide_name = NULL,
                                style_guide_version = NULL,
-                               more_specs_style_guide = NULL) {
+                               more_specs_style_guide = NULL,
+                               subset_transformers = NULL) {
   lst(
     # transformer functions
     initialize = lst(initialize),
@@ -270,7 +304,8 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
     reindention,
     style_guide_name,
     style_guide_version,
-    more_specs_style_guide
+    more_specs_style_guide,
+    subset_transformers
   ) %>%
     map(compact)
 }

@@ -217,13 +217,18 @@ parse_transform_serialize_r <- function(text,
 
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
-  blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {
       warn("Text to style did not contain any tokens. Returning empty string.")
     }
     return("")
   }
+  transformers <- transformers_subset(
+    pd_nested$text[!pd_nested$is_cached],
+    transformers
+  )
+  blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
+
 
   text_out <- pd_nested %>%
     split(pd_nested$block) %>%
@@ -243,6 +248,38 @@ parse_transform_serialize_r <- function(text,
     cache_by_expression(text_out, transformers, more_specs = more_specs)
   }
   text_out
+}
+
+transformers_subset_impl <- function(x, token) {
+  if (!any(x %in% token)) {
+    x
+  }
+}
+
+#' Remove transformers that are not needed
+#' For every transformer, at least one token must be given to make subsetting.
+#' active.
+transformers_subset <- function(text, transformers) {
+  is_colon <- text == ";"
+  if (any(is_colon)) {
+    # ; can only be parsed when on the same line as other token, not the case
+    # here since text is output of compute_parse_data_nested.
+    text <- c(text[!is_colon], "1;")
+  }
+  token <- unique(tokenize(text)$token)
+  to_remove <- purrr::map(
+    transformers$subset_transformers,
+    transformers_subset_impl, token
+  ) %>%
+    compact() %>% # ise imap, return names directly, save compact()
+    names()
+  if (length(to_remove) > 0) {
+    for (scope in c("initialize", "line_break", "space", "token", "indention")) {
+      transformers[[scope]][to_remove] <- NULL
+      transformers[[scope]] <- purrr::compact(transformers[[scope]])
+    }
+  }
+  transformers
 }
 
 #' Apply transformers to a parse table

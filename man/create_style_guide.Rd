@@ -14,7 +14,8 @@ create_style_guide(
   reindention = tidyverse_reindention(),
   style_guide_name = NULL,
   style_guide_version = NULL,
-  more_specs_style_guide = NULL
+  more_specs_style_guide = NULL,
+  subset_transformers = NULL
 )
 }
 \arguments{
