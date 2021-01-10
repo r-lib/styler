@@ -250,15 +250,34 @@ parse_transform_serialize_r <- function(text,
   text_out
 }
 
-transformers_subset_impl <- function(x, token) {
-  if (!any(x %in% token)) {
-    x
+#' Removes the transformers if tokens in x
+#' @param transformers The style full style guide, i.e. the result of
+#'   [create_style_guide()].
+#' @param token Named character vector: Names are rules and values are the token
+#'   that trigger are required to be absent to trigger a removal.
+#' @param scope The low-level scope, e.g. 'token'.
+#' @param code tokenized code for which we check if `token` is in them.
+transformers_subset_impl <- function(transformers, token, scope, code) {
+  transformer_names <- names(token)
+  for (i in seq_along(token)) {
+    if (!any(token[i] %in% code)) {
+      transformers[[scope]][[transformer_names[i]]] <- NULL
+    }
   }
+  transformers
 }
 
 #' Remove transformers that are not needed
+#'
 #' For every transformer, at least one token must be given to make subsetting.
 #' active.
+#' @param text Text to parse. Can also be the column `text` of the output of
+#'   [compute_parse_data_nested()], where each element is a token (instead of a
+#'   line).
+#' @return
+#' Returns `transformers`, but stripped away those rules that are not used when
+#' styling `text`.
+#' @keywords internal
 transformers_subset <- function(text, transformers) {
   is_colon <- text == ";"
   if (any(is_colon)) {
@@ -266,20 +285,12 @@ transformers_subset <- function(text, transformers) {
     # here since text is output of compute_parse_data_nested.
     text <- c(text[!is_colon], "1;")
   }
-  token <- unique(tokenize(text)$token)
-  to_remove <- purrr::map(
+  purrr::reduce2(
     transformers$subset_transformers,
-    transformers_subset_impl, token
-  ) %>%
-    compact() %>% # ise imap, return names directly, save compact()
-    names()
-  if (length(to_remove) > 0) {
-    for (scope in c("initialize", "line_break", "space", "token", "indention")) {
-      transformers[[scope]][to_remove] <- NULL
-      transformers[[scope]] <- purrr::compact(transformers[[scope]])
-    }
-  }
-  transformers
+    names(transformers$subset_transformers),
+    transformers_subset_impl,  unique(tokenize(text)$token),
+    .init = transformers
+  )
 }
 
 #' Apply transformers to a parse table

@@ -2,14 +2,21 @@
 % Please edit documentation in R/transform-files.R
 \name{transformers_subset}
 \alias{transformers_subset}
-\title{Remove transformers that are not needed
-For every transformer, at least one token must be given to make subsetting.
-active.}
+\title{Remove transformers that are not needed}
 \usage{
 transformers_subset(text, transformers)
 }
+\arguments{
+\item{text}{Text to parse. Can also be the column \code{text} of the output of
+\code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}, where each element is a token (instead of a
+line).}
+}
+\value{
+Returns \code{transformers}, but stripped away those rules that are not used when
+styling \code{text}.
+}
 \description{
-Remove transformers that are not needed
 For every transformer, at least one token must be given to make subsetting.
 active.
 }
+\keyword{internal}

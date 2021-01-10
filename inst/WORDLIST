@@ -68,6 +68,7 @@ href
 http
 https
 icloud
+impl
 infinitively
 initializer
 innode
@@ -192,6 +193,7 @@ tidyeval
 tidyr
 tidyverse
 Tidyverse
+tokenized
 travis
 tryCatch
 tryGugus

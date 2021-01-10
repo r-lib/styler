@@ -176,35 +176,49 @@ tidyverse_style <- function(scope = "tokens",
   }
 
   subset_transformers <- list(
-    force_assignment_op = "EQ_ASSIGN",
-    add_line_break_after_pipe = "SPECIAL-PIPE",
-    wrap_if_else_while_for_fun_multi_line_in_curly = c("IF", "WHILE", "FOR", "FUNCTION"),
-    remove_line_breaks_in_fun_dec = "FUNCTION",
-    set_space_in_curly_curly = c("'{'", "'}'"),
-    set_space_between_eq_sub_and_comma = "EQ_SUB",
-    remove_space_around_colons = c("':'", "NS_GET_INT", "NS_GET"),
-    remove_space_after_fun_dec = "FUNCTION",
-    remove_space_before_dollar = "'$'",
-    set_space_after_bang_bang = "'!'",
-    remove_space_after_excl = "'!'",
-    style_space_around_tilde = "'~'",
-    add_space_after_for_if_while = c("IF", "WHILE", "FOR"),
-    set_line_break_around_curly_curly = "'{'",
-    indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),
-    unindent_fun_dec = "FUNCTION",
-    indent_eq_sub = c("EQ_SUB", "EQ_FORMALS"), # TODO rename
-    update_indention_ref_fun_dec = "FUNCTION",
-    remove_space_before_closing_paren = c("')'", "']'"),
-    remove_space_before_opening_paren = c("'('", "'['", "LBB"),
-    remove_space_before_comma = "','",
-    style_space_around_math_token = c(
-      math_token_spacing$zero,
-      math_token_spacing$one
+    token = list(
+      resolve_semicolon = "';'",
+      add_brackets_in_pipe = "SPECIAL-PIPE",
+      force_assignment_op = c("token" = "EQ_ASSIGN"),
+      wrap_if_else_while_for_fun_multi_line_in_curly = c("IF", "WHILE", "FOR", "FUNCTION")
     ),
-    remove_space_after_opening_paren = c("'('", "'['", "LBB"),
-    start_comments_with_space = "COMMENT",
-    remove_line_break_before_round_closing_after_curly = "'}'",
-    style_line_break_around_curly = "'{'"
+    line_break = list(
+      set_line_break_before_curly_opening = "'{'",
+      remove_line_break_before_round_closing_after_curly = "'}'",
+      remove_line_breaks_in_fun_dec = "FUNCTION",
+      set_line_break_around_curly_curly = "'{'",
+      style_line_break_around_curly = "'{'",
+      add_line_break_after_pipe = "SPECIAL-PIPE"
+    ),
+    space = list(
+      remove_space_before_closing_paren = c("')'", "']'"),
+      remove_space_before_opening_paren = c("'('", "'['", "LBB"),
+      add_space_after_for_if_while = c("IF", "WHILE", "FOR"),
+      add_space_before_brace = "'{'",
+      remove_space_before_comma = "','",
+      set_space_between_eq_sub_and_comma = "EQ_SUB",
+      style_space_around_math_token = c(
+        math_token_spacing$zero,
+        math_token_spacing$one
+      ),
+      style_space_around_tilde = "'~'",
+      remove_space_after_opening_paren = c("'('", "'['", "LBB"),
+      remove_space_after_excl = "'!'",
+      set_space_after_bang_bang = "'!'",
+      remove_space_before_dollar = "'$'",
+      remove_space_after_fun_dec = "FUNCTION",
+      remove_space_around_colons = c("':'", "NS_GET_INT", "NS_GET"),
+      start_comments_with_space = "COMMENT",
+      remove_space_after_unary_pm_nested = c("'+'", "'-'"),
+      spacing_before_comments = "COMMENT",
+      set_space_in_curly_curly = c("'{'", "'}'")
+    ),
+    indent = list(
+      indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),
+      unindent_fun_dec = "FUNCTION",
+      indent_eq_sub = c("EQ_SUB", "EQ_FORMALS"), # TODO rename
+      update_indention_ref_fun_dec = "FUNCTION"
+    )
   )
 
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
