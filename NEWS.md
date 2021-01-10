@@ -45,6 +45,7 @@
   inherits from classes `character`, `utf8` or `vertical` (#693).
 - logical operators within square braces are now moved from the start of a line
   to the end of the previous line (#709).
+- spaces are now removed before `[` and `[[` (#713).
 - minor documentation improvements (#643, #618, #614, #677, #651, #667, #672, 
   #687).
 - The internal `create_tree()` only used in testing of styler now works when the 
