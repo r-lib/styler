@@ -260,7 +260,7 @@ parse_transform_serialize_r <- function(text,
 transformers_subset_impl <- function(transformers, token, scope, code) {
   transformer_names <- names(token)
   for (i in seq_along(token)) {
-    if (!any(token[i] %in% code)) {
+    if (!any(token[[i]] %in% code)) {
       transformers[[scope]][[transformer_names[i]]] <- NULL
     }
   }

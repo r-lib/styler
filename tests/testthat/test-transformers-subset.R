@@ -63,7 +63,7 @@ test_that("if no subset_transformers is specified, no transformer is removed and
 
 test_that('semi-colon is parsed without error', {
   expect_equal(
-    transformers_subset(c("a", ";", "b"), t_fun),
-    t_fun
+    transformers_subset(c("!a", ";", "b"), t),
+    t
   )
 })
