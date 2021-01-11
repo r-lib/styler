@@ -377,7 +377,6 @@ test_that("base indention works", {
   )
 })
 
-
 test_that("scope can be specified as is", {
   capture_output(expect_false({
     styled <- style_pkg(testthat_file("public-api", "xyzpackage"), scope = I("spaces"))
@@ -393,4 +392,34 @@ test_that("scope can be specified as is", {
     style_text(c("1+14;x=2"), scope = I(c("line_breaks", "tokens"))),
     construct_vertical(c("1+14", "x<-2"))
   )
+})
+
+test_that("Can properly determine style_after_saving", {
+  withr::with_envvar(list(save_after_styling = TRUE), {
+    expect_warning(op <- save_after_styling_is_active(), "is depreciated")
+    expect_equal(op, TRUE)
+  })
+
+  withr::with_envvar(list(save_after_styling = FALSE), {
+    expect_warning(op <- save_after_styling_is_active(), "is depreciated")
+    expect_equal(op, FALSE)
+  })
+
+
+  withr::with_options(list(styler.save_after_styling = TRUE), {
+    expect_silent(op <- save_after_styling_is_active())
+    expect_equal(op, TRUE)
+  })
+
+  withr::with_options(list(styler.save_after_styling = TRUE), {
+    withr::with_envvar(list(save_after_styling = FALSE), {
+      expect_warning(op <- save_after_styling_is_active(), "is depreciated")
+      expect_equal(op, TRUE)
+    })
+  })
+
+  withr::with_options(list(styler.save_after_styling = FALSE), {
+    expect_silent(op <- save_after_styling_is_active())
+    expect_equal(op, FALSE)
+  })
 })
