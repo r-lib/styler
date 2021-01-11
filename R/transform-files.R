@@ -257,13 +257,14 @@ parse_transform_serialize_r <- function(text,
 #'   that trigger are required to be absent to trigger a removal.
 #' @param scope The low-level scope, e.g. 'token'.
 #' @param code tokenized code for which we check if `token` is in them.
+#' @importFrom purrr walk
 transformers_subset_impl <- function(transformers, token, scope, code) {
   transformer_names <- names(token)
-  for (i in seq_along(token)) {
+  walk(seq_along(token), function(i) {
     if (!any(token[[i]] %in% code)) {
       transformers[[scope]][[transformer_names[i]]] <- NULL
     }
-  }
+  })
   transformers
 }
 
