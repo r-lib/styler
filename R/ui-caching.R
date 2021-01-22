@@ -44,10 +44,10 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #'
 #' @section Non-interactive setup:
 #' In some cases, you want to avoid the interactive prompt described above. In
-#' that situation, use `R.cache::setCacheRootPath("/path/to/cache")` to an
-#' existent directory and set the R option `R.cache.rootPath` or the environment
-#' variable `R_CACHE_ROOTPATH` to this path before you call the styler API. This
-#' should avoid the prompt.
+#' that situation, you can set the path to the cache with
+#' `R.cache::setCacheRootPath("/path/to/cache")`, the R option
+#' `R.cache.rootPath` or the environment variable `R_CACHE_ROOTPATH` to an
+#' existent path before you call the styler API. This should avoid the prompt.
 #'
 #' @section Non-interactive use:
 #' Note that if you have never authorized `{R.cache}` to create the cache in a
