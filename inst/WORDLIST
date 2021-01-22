@@ -143,6 +143,8 @@ rnw
 Rnw
 roclet
 roclets
+rootPath
+ROOTPATH
 roundtrip
 roxgen
 roxygen
