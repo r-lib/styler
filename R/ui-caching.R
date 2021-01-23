@@ -29,13 +29,13 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' `style_text()` and Addin).
 #'
 #' @section Manage the cache:
-#' See [cache_info()],[cache_deactivate()] or [cache_clear()] for utilities to
-#' manage the cache. You can deactivate it altogether with [cache_activate()].
+#' See [cache_info()],[cache_activate()] or [cache_clear()] for utilities to
+#' manage the cache. You can deactivate it altogether with [cache_deactivate()].
 #' Since we leverage `{R.cache}` to manage the cache, you can also use any
 #' `{R.cache}` functionality to manipulate it.
 #'
 #' @section Interactive setup:
-#' styler by default uses caching via the `{R.cache}` package. When interacting
+#'  `{styler}` by default uses caching via the `{R.cache}` package. When interacting
 #' with `{styler}`, you will be asked to let it create a permanent cache on your
 #' file system that styler will use in case it is not set already up for another
 #' tool that uses `{R.cache}`. We encourage users to let `{R.cache}` create a
@@ -52,7 +52,7 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #'
 #' @section Non-interactive use:
 #' Note that if you have never authorized `{R.cache}` to create the cache in a
-#' permanent directory and you use styler non-interactively, it will build the
+#' permanent directory and you use `{styler}` non-interactively, it will build the
 #' cache in a temporary directory. To create a permanent cache, follow the
 #' section 'Non-interactive setup' or 'Interactive setup' above.
 #'
