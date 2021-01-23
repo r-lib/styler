@@ -31,10 +31,11 @@ restart of R.
 \section{Non-interactive setup}{
 
 In some cases, you want to avoid the interactive prompt described above. In
-that situation, you can set the path to the cache with
-\code{R.cache::setCacheRootPath("/path/to/cache")}, the R option
+that situation, you can set the path to the cache with the R option
 \code{R.cache.rootPath} or the environment variable \code{R_CACHE_ROOTPATH} to an
 existent path before you call the styler API. This should avoid the prompt.
+\code{R.cache::setCacheRootPath("/path/to/cache")} is also programmatic but will
+probably give the prompt anyways if called interactively.
 }
 
 \section{Non-interactive use}{
