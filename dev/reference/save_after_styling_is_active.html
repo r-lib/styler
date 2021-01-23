@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remember the past to be quicker in the future — caching • styler</title>
+<title>Heuristic to see if a file styled with the addin should be saved or not. — save_after_styling_is_active • styler</title>
 
 
 <!-- jquery -->
@@ -45,12 +45,9 @@
 
 
 
-<meta property="og:title" content="Remember the past to be quicker in the future — caching" />
-<meta property="og:description" content="Caching makes styler faster on repeated styling. It does not cache input
-but output code. That means if you style code that already complies to a
-style guide and you have previously styled that code, it will be quicker.
-Code is cached by expression and the cache is shared across all APIs (e.g.
-style_text() and Addin)." />
+<meta property="og:title" content="Heuristic to see if a file styled with the addin should be saved or not. — save_after_styling_is_active" />
+<meta property="og:description" content="Using the R option &quot;styler.save_after_styling&quot; and if unset, checks legacy
+method via environment variable save_after_styling." />
 
 
 <meta name="robots" content="noindex">
@@ -175,73 +172,19 @@ style_text() and Addin)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remember the past to be quicker in the future</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/ui-caching.R'><code>R/ui-caching.R</code></a></small>
-    <div class="hidden name"><code>caching.Rd</code></div>
+    <h1>Heuristic to see if a file styled with the addin should be saved or not.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/addins.R'><code>R/addins.R</code></a></small>
+    <div class="hidden name"><code>save_after_styling_is_active.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Caching makes styler faster on repeated styling. It does not cache input
-but output code. That means if you style code that already complies to a
-style guide and you have previously styled that code, it will be quicker.
-Code is cached by expression and the cache is shared across all APIs (e.g.
-<code><a href='style_text.html'>style_text()</a></code> and Addin).</p>
+    <p>Using the R option <code>"styler.save_after_styling"</code> and if unset, checks legacy
+method via environment variable <code>save_after_styling</code>.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>save_after_styling_is_active</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
-    <h2 class="hasAnchor" id="manage-the-cache"><a class="anchor" href="#manage-the-cache"></a>Manage the cache</h2>
-
-    
-
-<p>See <code><a href='cache_info.html'>cache_info()</a></code>,<code><a href='cache_activate.html'>cache_activate()</a></code> or <code><a href='cache_clear.html'>cache_clear()</a></code> for utilities to
-manage the cache. You can deactivate it altogether with <code><a href='cache_activate.html'>cache_deactivate()</a></code>.
-Since we leverage <code>{R.cache}</code> to manage the cache, you can also use any
-<code>{R.cache}</code> functionality to manipulate it.</p>
-    <h2 class="hasAnchor" id="interactive-setup"><a class="anchor" href="#interactive-setup"></a>Interactive setup</h2>
-
-    
-
-<p><code>{styler}</code> by default uses caching via the <code>{R.cache}</code> package. When interacting
-with <code>{styler}</code>, you will be asked to let it create a permanent cache on your
-file system that styler will use in case it is not set already up for another
-tool that uses <code>{R.cache}</code>. We encourage users to let <code>{R.cache}</code> create a
-permanent directory for caching because, otherwise, the cache is lost at
-restart of R.</p>
-    <h2 class="hasAnchor" id="non-interactive-setup"><a class="anchor" href="#non-interactive-setup"></a>Non-interactive setup</h2>
-
-    
-
-<p>In some cases, you want to avoid the interactive prompt described above. In
-that situation, you can set the path to the cache with the R option
-<code>R.cache.rootPath</code> or the environment variable <code>R_CACHE_ROOTPATH</code> to an
-existent path before you call the styler API. This should avoid the prompt.
-<code><a href='https://rdrr.io/pkg/R.cache/man/setCacheRootPath.html'>R.cache::setCacheRootPath("/path/to/cache")</a></code> is also programmatic but will
-probably give the prompt anyways if called interactively.</p>
-    <h2 class="hasAnchor" id="non-interactive-use"><a class="anchor" href="#non-interactive-use"></a>Non-interactive use</h2>
-
-    
-
-<p>Note that if you have never authorized <code>{R.cache}</code> to create the cache in a
-permanent directory and you use <code>{styler}</code> non-interactively, it will build the
-cache in a temporary directory. To create a permanent cache, follow the
-section 'Non-interactive setup' or 'Interactive setup' above.</p>
-    <h2 class="hasAnchor" id="invalidation"><a class="anchor" href="#invalidation"></a>Invalidation</h2>
-
-    
-
-<p>The cache is specific to a version of styler by default, because different
-versions potentially format code differently. This means after upgrading
-styler or a style guide you use, the cache will be re-built.</p>
-    <h2 class="hasAnchor" id="using-a-cache-for-styler-in-ci-cd"><a class="anchor" href="#using-a-cache-for-styler-in-ci-cd"></a>Using a cache for styler in CI/CD</h2>
-
-    
-
-<p>If you want to set up caching in a CI/CD pipeline, we suggest to set the
-<code>{R.cache}</code> root path to a directory for which you have the cache enabled as
-described above in the section 'Non-interactive setup'. This can often be set
-in config files of CI/CD tools, e.g. see the
-<a href='https://docs.travis-ci.com/user/caching'>Travis documentation on caching</a>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
