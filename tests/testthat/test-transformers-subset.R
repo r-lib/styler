@@ -10,6 +10,8 @@ remove_space_after_excl_ <- function(pd_flat) {
 t <- create_style_guide(
   space = lst(remove_space_after_excl_),
   subset_transformers = list(space = list(remove_space_after_excl_ = c("'!'"))),
+  style_guide_name = "styler::t@https://github.com/r-lib",
+  style_guide_version = as.character(packageVersion("styler"))
 )
 
 t_no_subset <- create_style_guide(
@@ -65,5 +67,35 @@ test_that('semi-colon is parsed without error', {
   expect_equal(
     transformers_subset(c("!a", ";", "b"), t),
     t
+  )
+})
+
+
+test_that('can handle old style guide without transformer object', {
+  t_new <- t
+  t_new$subset_transformers <- NULL
+  expect_error(
+    transformers_subset(c("!a", ";", "b"), t_new),
+    NA
+  )
+  expect_error(
+    style_text('1;3', transformers = t_new),
+    NA
+  )
+})
+
+test_that("can handle default", {
+  t_no_subset <- create_style_guide(
+    space = lst(remove_space_after_excl_),
+    style_guide_name = "styler::t@https://github.com/r-lib",
+    style_guide_version = as.character(packageVersion("styler"))
+  )
+  expect_error(
+    transformers_subset(c("!a", ";", "b"), t_no_subset),
+    NA
+  )
+  expect_error(
+    style_text('a =2 ', transformers = t_new),
+    NA
   )
 })
