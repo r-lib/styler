@@ -179,7 +179,11 @@ tidyverse_style <- function(scope = "tokens",
     token = list(
       resolve_semicolon = "';'",
       add_brackets_in_pipe = "SPECIAL-PIPE",
-      force_assignment_op = c("token" = "EQ_ASSIGN"),
+      # before 3.6, these assignments are not wrapped into top level expression
+      # and `text` supplied to transformer_subset() is "", so it appears to not
+      # contain EQ_ASSIGN, and the transformer is falsely removed.
+      # compute_parse_data_nested / text_to_flat_pd ('a = 4')
+      if (getRversion() >= 3.6) force_assignment_op <- "EQ_ASSIGN",
       wrap_if_else_while_for_fun_multi_line_in_curly = c("IF", "WHILE", "FOR", "FUNCTION")
     ),
     line_break = list(
