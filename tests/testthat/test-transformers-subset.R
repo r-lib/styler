@@ -95,7 +95,7 @@ test_that("can handle default", {
     NA
   )
   expect_error(
-    style_text('a =2 ', transformers = t_new),
+    style_text('a =2 ', transformers = t_no_subset),
     NA
   )
 })
