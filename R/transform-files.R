@@ -224,7 +224,7 @@ parse_transform_serialize_r <- function(text,
     return("")
   }
   transformers <- transformers_subset(
-    pd_nested$text[!pd_nested$is_cached],
+    ifelse(getRversion() < 3.4, text, pd_nested$text[!pd_nested$is_cached]),
     transformers
   )
   blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
