@@ -157,7 +157,7 @@ tidyverse_style <- function(scope = "tokens",
           except_token_before = "COMMENT"
         )
       },
-      purrr::partial(remove_line_break_in_fun_call, strict = strict),
+      remove_line_break_in_fun_call = purrr::partial(remove_line_break_in_fun_call, strict = strict),
       add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
       set_linebreak_after_ggplot2_plus = if (strict) set_linebreak_after_ggplot2_plus
     )
@@ -217,7 +217,7 @@ tidyverse_style <- function(scope = "tokens",
       spacing_before_comments = "COMMENT",
       set_space_in_curly_curly = c("'{'", "'}'")
     ),
-    indent = list(
+    indention = list(
       indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),
       unindent_fun_dec = "FUNCTION",
       indent_eq_sub = c("EQ_SUB", "EQ_FORMALS"), # TODO rename
