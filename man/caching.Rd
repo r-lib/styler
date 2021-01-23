@@ -12,15 +12,15 @@ Code is cached by expression and the cache is shared across all APIs (e.g.
 }
 \section{Manage the cache}{
 
-See \code{\link[=cache_info]{cache_info()}},\code{\link[=cache_deactivate]{cache_deactivate()}} or \code{\link[=cache_clear]{cache_clear()}} for utilities to
-manage the cache. You can deactivate it altogether with \code{\link[=cache_activate]{cache_activate()}}.
+See \code{\link[=cache_info]{cache_info()}},\code{\link[=cache_activate]{cache_activate()}} or \code{\link[=cache_clear]{cache_clear()}} for utilities to
+manage the cache. You can deactivate it altogether with \code{\link[=cache_deactivate]{cache_deactivate()}}.
 Since we leverage \code{{R.cache}} to manage the cache, you can also use any
 \code{{R.cache}} functionality to manipulate it.
 }
 
 \section{Interactive setup}{
 
-styler by default uses caching via the \code{{R.cache}} package. When interacting
+\code{{styler}} by default uses caching via the \code{{R.cache}} package. When interacting
 with \code{{styler}}, you will be asked to let it create a permanent cache on your
 file system that styler will use in case it is not set already up for another
 tool that uses \code{{R.cache}}. We encourage users to let \code{{R.cache}} create a
@@ -41,7 +41,7 @@ probably give the prompt anyways if called interactively.
 \section{Non-interactive use}{
 
 Note that if you have never authorized \code{{R.cache}} to create the cache in a
-permanent directory and you use styler non-interactively, it will build the
+permanent directory and you use \code{{styler}} non-interactively, it will build the
 cache in a temporary directory. To create a permanent cache, follow the
 section 'Non-interactive setup' or 'Interactive setup' above.
 }
