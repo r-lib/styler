@@ -10,13 +10,13 @@ transformers_subset(text, transformers)
 \item{text}{Text to parse. Can also be the column \code{text} of the output of
 \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}}, where each element is a token (instead of a
 line).}
-}
-\value{
-Returns \code{transformers}, but stripped away those rules that are not used when
-styling \code{text}.
+
+\item{transformers}{the transformers.}
 }
 \description{
-For every transformer, at least one token must be given to make subsetting.
-active.
+The goal is to speed up styling by removing all rules that are only
+applicable in contexts that don't occur often, e.g. for most code, we don't
+expect ";" to be in it, so we don't need to apply \code{\link[=resolve_semicolon]{resolve_semicolon()}} on
+every \emph{nest}.
 }
 \keyword{internal}

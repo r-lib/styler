@@ -250,34 +250,17 @@ parse_transform_serialize_r <- function(text,
   text_out
 }
 
-#' Removes the transformers if tokens in x
-#' @param transformers The style full style guide, i.e. the result of
-#'   [create_style_guide()].
-#' @param token Named character vector: Names are rules and values are the token
-#'   that trigger are required to be absent to trigger a removal.
-#' @param scope The low-level scope, e.g. 'token'.
-#' @param code tokenized code for which we check if `token` is in them.
-#' @importFrom purrr walk
-transformers_subset_impl <- function(transformers, token, scope, code) {
-  transformer_names <- names(token)
-  walk(seq_along(token), function(i) {
-    if (!any(token[[i]] %in% code)) {
-      transformers[[scope]][[transformer_names[i]]] <- NULL
-    }
-  })
-  transformers
-}
 
 #' Remove transformers that are not needed
 #'
-#' For every transformer, at least one token must be given to make subsetting.
-#' active.
+#' The goal is to speed up styling by removing all rules that are only
+#' applicable in contexts that don't occur often, e.g. for most code, we don't
+#' expect ";" to be in it, so we don't need to apply [resolve_semicolon()] on
+#' every *nest*.
 #' @param text Text to parse. Can also be the column `text` of the output of
 #'   [compute_parse_data_nested()], where each element is a token (instead of a
 #'   line).
-#' @return
-#' Returns `transformers`, but stripped away those rules that are not used when
-#' styling `text`.
+#' @param transformers the transformers.
 #' @keywords internal
 transformers_subset <- function(text, transformers) {
   is_colon <- text == ";"
@@ -286,12 +269,16 @@ transformers_subset <- function(text, transformers) {
     # here since text is output of compute_parse_data_nested.
     text <- c(text[!is_colon], "1;")
   }
-  purrr::reduce2(
-    transformers$subset_transformers,
-    names(transformers$subset_transformers),
-    transformers_subset_impl,  unique(tokenize(text)$token),
-    .init = transformers
-  )
+  token <- unique(tokenize(text)$token)
+  for (scope in c("line_break", "space", "token", "indention")) {
+    rules <- transformers$subset_transformers[[scope]]
+    for (rule in names(rules)) {
+      if (!any(rules[[rule]] %in% token)) {
+        transformers[[scope]][rule] <- NULL
+      }
+    }
+  }
+  transformers
 }
 
 #' Apply transformers to a parse table

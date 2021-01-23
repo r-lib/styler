@@ -56,6 +56,11 @@ such functions are converted to characters in \code{\link[=cache_make_key]{cache
 they will yield generic code and we loose the specific value of \code{arg} (see
 \code{\link[=cache_make_key]{cache_make_key()}}), even when unquoting these inputs with \verb{!!}
 beforehand in \code{purrr::partial()}.}
+
+\item{subset_transformers}{A list specifying under which conditions
+transformer functions can be dropped since they have no effect on the
+code to format. This is argument experimental and may change in future
+releases without prior notification.}
 }
 \description{
 This is a helper function to create a style guide, which is technically

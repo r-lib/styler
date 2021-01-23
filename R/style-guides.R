@@ -278,6 +278,10 @@ tidyverse_style <- function(scope = "tokens",
 #'   they will yield generic code and we loose the specific value of `arg` (see
 #'   [styler::cache_make_key()]), even when unquoting these inputs with `!!`
 #'   beforehand in `purrr::partial()`.
+#' @param subset_transformers A list specifying under which conditions
+#'   transformer functions can be dropped since they have no effect on the
+#'   code to format. This is argument experimental and may change in future
+#'   releases without prior notification.
 #' @examples
 #' set_line_break_before_curly_opening <- function(pd_flat) {
 #'   op <- pd_flat$token %in% "'{'"
