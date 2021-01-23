@@ -255,7 +255,7 @@ parse_transform_serialize_r <- function(text,
 #'
 #' The goal is to speed up styling by removing all rules that are only
 #' applicable in contexts that don't occur often, e.g. for most code, we don't
-#' expect ";" to be in it, so we don't need to apply [resolve_semicolon()] on
+#' expect ";" to be in it, so we don't need to apply `resolve_semicolon()` on
 #' every *nest*.
 #' @param text Text to parse. Can also be the column `text` of the output of
 #'   [compute_parse_data_nested()], where each element is a token (instead of a

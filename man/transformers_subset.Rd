@@ -16,7 +16,7 @@ line).}
 \description{
 The goal is to speed up styling by removing all rules that are only
 applicable in contexts that don't occur often, e.g. for most code, we don't
-expect ";" to be in it, so we don't need to apply \code{\link[=resolve_semicolon]{resolve_semicolon()}} on
+expect ";" to be in it, so we don't need to apply \code{resolve_semicolon()} on
 every \emph{nest}.
 }
 \keyword{internal}
