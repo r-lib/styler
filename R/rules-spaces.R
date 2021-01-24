@@ -185,20 +185,6 @@ set_space_in_curly_curly <- function(pd) {
   pd
 }
 
-add_space_before_brace <- function(pd_flat) {
-  # TODO remove this, it has no effect since { can only appear in the first
-  # position of the nest and taking lead(op_after, default = FALSE) will always
-  # yield a vector of FALSE only.
-  op_after <- pd_flat$token %in% "'{'"
-  if (!any(op_after)) {
-    return(pd_flat)
-  }
-  op_before <- lead(op_after, default = FALSE)
-  idx_before <- op_before & (pd_flat$newlines == 0L) & pd_flat$token != "'('"
-  pd_flat$spaces[idx_before] <- pmax(pd_flat$spaces[idx_before], 1L)
-  pd_flat
-}
-
 add_space_after_comma <- function(pd_flat) {
   comma_after <- (pd_flat$token == "','") & (pd_flat$newlines == 0L)
   pd_flat$spaces[comma_after] <- pmax(pd_flat$spaces[comma_after], 1L)
