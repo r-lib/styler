@@ -187,7 +187,7 @@ parse_transform_serialize_roxygen <- function(text, transformers, base_indention
 #' @keywords internal
 split_roxygen_segments <- function(text, roxygen_examples) {
   if (is.null(roxygen_examples)) {
-    return(lst(separated = list(text), selectors = NULL))
+    return(list(separated = list(text), selectors = NULL))
   }
   all_lines <- seq2(1L, length(text))
   active_segment <- as.integer(all_lines %in% roxygen_examples)
@@ -195,7 +195,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
   separated <- split(text, factor(segment_id))
   restyle_selector <- ifelse(roxygen_examples[1] == 1L, odd_index, even_index)
 
-  lst(separated, selectors = restyle_selector(separated))
+  list(separated = separated, selectors = restyle_selector(separated))
 }
 
 #' Parse, transform and serialize text

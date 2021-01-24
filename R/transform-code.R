@@ -64,7 +64,7 @@ separate_chunks <- function(lines, filetype) {
     c(1, r_raw_chunks$ends), c(r_raw_chunks$starts, length(lines)),
     ~ lines[seq2(.x, .y)]
   )
-  lst(r_chunks, text_chunks)
+  list(r_chunks = r_chunks, text_chunks = text_chunks)
 }
 
 #' Identifies raw Rmd or Rnw code chunks
