@@ -82,8 +82,7 @@ tidyverse_style <- function(scope = "tokens",
       indent_without_paren = partial(indent_without_paren,
         indent_by = indent_by
       ),
-      update_indention_ref_fun_dec =
-        if ("indention" %in% scope) update_indention_ref_fun_dec
+      update_indention_ref_fun_dec = update_indention_ref_fun_dec
     )
   }
   space_manipulators <- if ("spaces" %in% scope) {
