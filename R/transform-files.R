@@ -169,6 +169,7 @@ parse_transform_serialize_roxygen <- function(text, transformers, base_indention
     flatten_chr()
 }
 
+
 #' Split text into roxygen and non-roxygen example segments
 #'
 #' @param text Roxygen comments
@@ -208,46 +209,46 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @importFrom rlang abort
 #' @keywords internal
 parse_transform_serialize_r <- function(text,
-transformers,
-base_indention,
-warn_empty = TRUE) {
-more_specs <- cache_more_specs(
-include_roxygen_examples = TRUE, base_indention = base_indention
-)
+                                        transformers,
+                                        base_indention,
+                                        warn_empty = TRUE) {
+  more_specs <- cache_more_specs(
+    include_roxygen_examples = TRUE, base_indention = base_indention
+  )
 
-text <- assert_text(text)
-pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
-if (nrow(pd_nested) == 0) {
-if (warn_empty) {
-warn("Text to style did not contain any tokens. Returning empty string.")
-}
-return("")
-}
-transformers <- transformers_subset(
-if(getRversion() < 3.4) text else pd_nested$text[!pd_nested$is_cached],
-transformers
-)
-blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
+  text <- assert_text(text)
+  pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
+  if (nrow(pd_nested) == 0) {
+    if (warn_empty) {
+      warn("Text to style did not contain any tokens. Returning empty string.")
+    }
+    return("")
+  }
+  transformers <- transformers_subset(
+    if (getRversion() < 3.4) text else pd_nested$text[!pd_nested$is_cached],
+    transformers
+  )
+  blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
 
 
-text_out <- pd_nested %>%
-  split(pd_nested$block) %>%
-  unname() %>%
-  map2(blank_lines_to_next_expr,
-  parse_transform_serialize_r_block,
-  transformers = transformers,
-  base_indention = base_indention
-  ) %>%
-  unlist()
+  text_out <- pd_nested %>%
+    split(pd_nested$block) %>%
+    unname() %>%
+    map2(blank_lines_to_next_expr,
+      parse_transform_serialize_r_block,
+      transformers = transformers,
+      base_indention = base_indention
+    ) %>%
+    unlist()
 
-if (can_verify_roundtrip(transformers)) {
-verify_roundtrip(text, text_out)
-}
-text_out <- convert_newlines_to_linebreaks(text_out)
-if (cache_is_activated()) {
-cache_by_expression(text_out, transformers, more_specs = more_specs)
-}
-text_out
+  if (can_verify_roundtrip(transformers)) {
+    verify_roundtrip(text, text_out)
+  }
+  text_out <- convert_newlines_to_linebreaks(text_out)
+  if (cache_is_activated()) {
+    cache_by_expression(text_out, transformers, more_specs = more_specs)
+  }
+  text_out
 }
 
 
