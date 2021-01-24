@@ -228,13 +228,11 @@ parse_transform_serialize_r <- function(text,
     if (getRversion() < 3.4) text else pd_nested$text[!pd_nested$is_cached],
     transformers
   )
-  blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
-
 
   text_out <- pd_nested %>%
     split(pd_nested$block) %>%
     unname() %>%
-    map2(blank_lines_to_next_expr,
+    map2(find_blank_lines_to_next_block(pd_nested),
       parse_transform_serialize_r_block,
       transformers = transformers,
       base_indention = base_indention
