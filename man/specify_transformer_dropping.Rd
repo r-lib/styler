@@ -2,7 +2,7 @@
 % Please edit documentation in R/style-guides.R
 \name{specify_transformer_dropping}
 \alias{specify_transformer_dropping}
-\title{Specify which token must be absent for a transformer to be dropped}
+\title{Specify which tokens must be absent for a transformer to be dropped}
 \usage{
 specify_transformer_dropping(
   spaces = NULL,
@@ -12,21 +12,21 @@ specify_transformer_dropping(
 )
 }
 \arguments{
-\item{spaces, indention, line_breaks, tokens}{Each a list #TODO or \code{NULL} where
+\item{spaces, indention, line_breaks, tokens}{Each a list or \code{NULL} where
 the name of each element is the concerning transformer, the value is an
-unnamed vector with tokens that match the rule. See 'Examples'}
+unnamed vector with tokens that match the rule. See 'Examples'.}
 }
 \description{
 Transformer functions can be safely removed from the list of transformers
-to be applied on every \emph{nest} with \code{\link[=transformers_drop]{transformers_drop()}} if the tokens that trigger a manipulation of
-the parse data are absent in the text to style.
+to be applied on every \emph{nest} with \code{\link[=transformers_drop]{transformers_drop()}} if the tokens that
+trigger a manipulation of the parse data are absent in the text to style.
 }
 \details{
 Note that the negative formulation (must be absent in order to be dropped)
 means that when you add a new rule and you forget
 to add a rule for when to drop it, it will not be dropped. If we required to
-specify the complement (which token must be present for the transformer to be
-kept), the transformer would be silently removed, which is less save.
+specify the complement (which tokens must be present for the transformer to
+be kept), the transformer would be silently removed, which is less save.
 }
 \section{Warning}{
 

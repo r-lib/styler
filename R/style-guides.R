@@ -329,20 +329,20 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
     map(compact)
 }
 
-#' Specify which token must be absent for a transformer to be dropped
+#' Specify which tokens must be absent for a transformer to be dropped
 #'
 #' Transformer functions can be safely removed from the list of transformers
-#' to be applied on every *nest* with [transformers_drop()] if the tokens that trigger a manipulation of
-#' the parse data are absent in the text to style.
+#' to be applied on every *nest* with [transformers_drop()] if the tokens that
+#' trigger a manipulation of the parse data are absent in the text to style.
 #'
 #' Note that the negative formulation (must be absent in order to be dropped)
 #' means that when you add a new rule and you forget
 #' to add a rule for when to drop it, it will not be dropped. If we required to
-#' specify the complement (which token must be present for the transformer to be
-#' kept), the transformer would be silently removed, which is less save.
-#' @param spaces,indention,line_breaks,tokens Each a list #TODO or `NULL` where
+#' specify the complement (which tokens must be present for the transformer to
+#' be kept), the transformer would be silently removed, which is less save.
+#' @param spaces,indention,line_breaks,tokens Each a list or `NULL` where
 #'   the name of each element is the concerning transformer, the value is an
-#'   unnamed vector with tokens that match the rule. See 'Examples'
+#'   unnamed vector with tokens that match the rule. See 'Examples'.
 #'
 #' @section Warning:
 #' It is the responsibility of the developer to ensure expected behavior, in
