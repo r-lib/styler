@@ -193,8 +193,8 @@ tidyverse_style <- function(scope = "tokens",
       add_line_break_after_pipe = "SPECIAL-PIPE"
     ),
     space = list(
-      remove_space_before_closing_paren = c("')'", "']'"),
-      remove_space_before_opening_paren = c("'('", "'['", "LBB"),
+      # remove_space_before_closing_paren = c("')'", "']'"),
+      # remove_space_before_opening_paren = c("'('", "'['", "LBB"),
       add_space_after_for_if_while = c("IF", "WHILE", "FOR"),
       add_space_before_brace = "'{'",
       set_space_between_eq_sub_and_comma = "EQ_SUB",
@@ -203,7 +203,7 @@ tidyverse_style <- function(scope = "tokens",
         math_token_spacing$one
       ),
       style_space_around_tilde = "'~'",
-      remove_space_after_opening_paren = c("'('", "'['", "LBB"),
+      # remove_space_after_opening_paren = c("'('", "'['", "LBB"),
       remove_space_after_excl = "'!'",
       set_space_after_bang_bang = "'!'",
       remove_space_before_dollar = "'$'",
@@ -215,7 +215,7 @@ tidyverse_style <- function(scope = "tokens",
       set_space_in_curly_curly = c("'{'", "'}'")
     ),
     indention = list(
-      indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),
+      # indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),
       unindent_fun_dec = "FUNCTION",
       indent_eq_sub = c("EQ_SUB", "EQ_FORMALS"), # TODO rename
       update_indention_ref_fun_dec = "FUNCTION"
