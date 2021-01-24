@@ -15,7 +15,7 @@ create_style_guide(
   style_guide_name = NULL,
   style_guide_version = NULL,
   more_specs_style_guide = NULL,
-  subset_transformers = NULL
+  transformers_drop = specify_transformer_dropping()
 )
 }
 \arguments{
@@ -57,7 +57,7 @@ they will yield generic code and we loose the specific value of \code{arg} (see
 \code{\link[=cache_make_key]{cache_make_key()}}), even when unquoting these inputs with \verb{!!}
 beforehand in \code{purrr::partial()}.}
 
-\item{subset_transformers}{A list specifying under which conditions
+\item{transformers_drop}{A list specifying under which conditions
 transformer functions can be dropped since they have no effect on the
 code to format. This is argument experimental and may change in future
 releases without prior notification.}

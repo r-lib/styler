@@ -224,7 +224,7 @@ parse_transform_serialize_r <- function(text,
     }
     return("")
   }
-  transformers <- transformers_subset(
+  transformers <- transformers_drop(
     if (getRversion() < 3.4) text else pd_nested$text[!pd_nested$is_cached],
     transformers
   )
@@ -261,7 +261,8 @@ parse_transform_serialize_r <- function(text,
 #'   line).
 #' @param transformers the transformers.
 #' @keywords internal
-transformers_subset <- function(text, transformers) {
+#' @seealso specify_transformer_dropping
+transformers_drop <- function(text, transformers) {
   is_colon <- text == ";"
   if (any(is_colon)) {
     # ; can only be parsed when on the same line as other token, not the case
@@ -270,7 +271,7 @@ transformers_subset <- function(text, transformers) {
   }
   token <- unique(tokenize(text)$token)
   for (scope in c("line_break", "space", "token", "indention")) {
-    rules <- transformers$subset_transformers[[scope]]
+    rules <- transformers$transformers_drop[[scope]]
     for (rule in names(rules)) {
       if (!any(rules[[rule]] %in% token)) {
         transformers[[scope]][rule] <- NULL
@@ -308,7 +309,7 @@ apply_transformers <- function(pd_nested, transformers) {
     pd_nested,
     c(
       transformers$initialize, transformers$line_break, set_multi_line,
-      if (!is.null(transformers$line_break)) update_newlines
+      if (length(transformers$line_break) != 0) update_newlines
     )
   )
 
@@ -338,7 +339,7 @@ apply_transformers <- function(pd_nested, transformers) {
 #'   Needed for reverse engineering the scope.
 #' @keywords internal
 can_verify_roundtrip <- function(transformers) {
-  is.null(transformers$token)
+  length(transformers$token) == 0
 }
 
 #' Verify the styling

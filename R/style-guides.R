@@ -173,26 +173,8 @@ tidyverse_style <- function(scope = "tokens",
     )
   }
 
-  subset_transformers <- list(
-    token = list(
-      resolve_semicolon = "';'",
-      add_brackets_in_pipe = "SPECIAL-PIPE",
-      # before 3.6, these assignments are not wrapped into top level expression
-      # and `text` supplied to transformer_subset() is "", so it appears to not
-      # contain EQ_ASSIGN, and the transformer is falsely removed.
-      # compute_parse_data_nested / text_to_flat_pd ('a = 4')
-      if (getRversion() >= 3.6) force_assignment_op <- "EQ_ASSIGN",
-      wrap_if_else_while_for_fun_multi_line_in_curly = c("IF", "WHILE", "FOR", "FUNCTION")
-    ),
-    line_break = list(
-      set_line_break_before_curly_opening = "'{'",
-      remove_line_break_before_round_closing_after_curly = "'}'",
-      remove_line_breaks_in_fun_dec = "FUNCTION",
-      set_line_break_around_curly_curly = "'{'",
-      style_line_break_around_curly = "'{'",
-      add_line_break_after_pipe = "SPECIAL-PIPE"
-    ),
-    space = list(
+  transformers_drop <- specify_transformer_dropping(
+    spaces = list(
       # remove_space_before_closing_paren = c("')'", "']'"),
       # remove_space_before_opening_paren = c("'('", "'['", "LBB"),
       add_space_after_for_if_while = c("IF", "WHILE", "FOR"),
@@ -219,6 +201,24 @@ tidyverse_style <- function(scope = "tokens",
       unindent_fun_dec = "FUNCTION",
       indent_eq_sub = c("EQ_SUB", "EQ_FORMALS"), # TODO rename
       update_indention_ref_fun_dec = "FUNCTION"
+    ),
+    line_breaks = list(
+      set_line_break_before_curly_opening = "'{'",
+      remove_line_break_before_round_closing_after_curly = "'}'",
+      remove_line_breaks_in_fun_dec = "FUNCTION",
+      set_line_break_around_curly_curly = "'{'",
+      style_line_break_around_curly = "'{'",
+      add_line_break_after_pipe = "SPECIAL-PIPE"
+    ),
+    tokens = list(
+      resolve_semicolon = "';'",
+      add_brackets_in_pipe = "SPECIAL-PIPE",
+      # before 3.6, these assignments are not wrapped into top level expression
+      # and `text` supplied to transformers_drop() is "", so it appears to not
+      # contain EQ_ASSIGN, and the transformer is falsely removed.
+      # compute_parse_data_nested / text_to_flat_pd ('a = 4')
+      if (getRversion() >= 3.6) force_assignment_op <- "EQ_ASSIGN",
+      wrap_if_else_while_for_fun_multi_line_in_curly = c("IF", "WHILE", "FOR", "FUNCTION")
     )
   )
 
@@ -236,7 +236,7 @@ tidyverse_style <- function(scope = "tokens",
     style_guide_name       =               style_guide_name,
     style_guide_version    =                 styler_version,
     more_specs_style_guide =                           args,
-    subset_transformers    =            subset_transformers
+    transformers_drop      =              transformers_drop
   )
 }
 
@@ -279,7 +279,7 @@ tidyverse_style <- function(scope = "tokens",
 #'   they will yield generic code and we loose the specific value of `arg` (see
 #'   [styler::cache_make_key()]), even when unquoting these inputs with `!!`
 #'   beforehand in `purrr::partial()`.
-#' @param subset_transformers A list specifying under which conditions
+#' @param transformers_drop A list specifying under which conditions
 #'   transformer functions can be dropped since they have no effect on the
 #'   code to format. This is argument experimental and may change in future
 #'   releases without prior notification.
@@ -310,7 +310,7 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                style_guide_name = NULL,
                                style_guide_version = NULL,
                                more_specs_style_guide = NULL,
-                               subset_transformers = NULL) {
+                               transformers_drop = specify_transformer_dropping()) {
   lst(
     # transformer functions
     initialize = lst(initialize),
@@ -324,11 +324,70 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
     style_guide_name,
     style_guide_version,
     more_specs_style_guide,
-    subset_transformers
+    transformers_drop
   ) %>%
     map(compact)
 }
 
+#' Specify which token must be absent for a transformer to be dropped
+#'
+#' Transformer functions can be safely removed from the list of transformers
+#' to be applied on every *nest* with [transformers_drop()] if the tokens that trigger a manipulation of
+#' the parse data are absent in the text to style.
+#'
+#' Note that the negative formulation (must be absent in order to be dropped)
+#' means that when you add a new rule and you forget
+#' to add a rule for when to drop it, it will not be dropped. If we required to
+#' specify the complement (which token must be present for the transformer to be
+#' kept), the transformer would be silently removed, which is less save.
+#' @param spaces,indention,line_breaks,tokens Each a list #TODO or `NULL` where
+#'   the name of each element is the concerning transformer, the value is an
+#'   unnamed vector with tokens that match the rule. See 'Examples'
+#'
+#' @section Warning:
+#' It is the responsibility of the developer to ensure expected behavior, in
+#' particular that:
+#' * the name of the supplied dropping criteria matches the name of the
+#'   transformer function.
+#' * the dropping criteria (name + token) reflects correctly under which
+#'   circumstances the transformer does not have an impact on styling and can
+#'   therefore be safely removed without affecting the styling outcome.
+#'
+#' @examples
+#' dropping <- specify_transformer_dropping(
+#'   spaces = c(remove_space_after_excl = "'!'")
+#' )
+#' style_guide <- create_style_guide(
+#'   space = list(remove_space_after_excl = styler:::remove_space_after_excl),
+#'   transformers_drop = dropping
+#' )
+#' # transformers_drop() will remove the transformer when the code does not
+#' # contain an exclamation mark
+#' style_guide_with_some_transformers_dropped <- styler:::transformers_drop(
+#'   "x <- 3;2", style_guide
+#' )
+#' setdiff(
+#'   names(style_guide$space),
+#'   names(style_guide_with_some_transformers_dropped)
+#' )
+#' # note that dropping all transformers of a scope means that this scope
+#' # has an empty named list for this scope
+#' style_guide_with_some_transformers_dropped$space
+#' # this is not the same as if this scope was never specified.
+#' tidyverse_style(scope = "none")$space
+#' # Hence, styler should check for length 0 to decide if a scope is present or
+#' # not, not via `is.null()` and we can use the `is.null()` check to see if
+#' # this scope was initially required by the user.
+#' @export
+specify_transformer_dropping <- function(spaces = NULL,
+                                         indention = NULL,
+                                         line_breaks = NULL,
+                                         tokens = NULL) {
+  lst(
+    space = spaces, indention, line_break = line_breaks,
+    token = tokens
+  )
+}
 
 #' Specify what is re-indented how
 #'
