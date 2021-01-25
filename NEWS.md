@@ -21,6 +21,11 @@
   style tokens, you had to always also style spaces, indention, line breaks as 
   well (#705, #707).
 
+- New argument `transformers_drop` in `create_style_guide()` to be populated with
+  new helper function `specify_transformers_drop()` for specifying conditions
+  under which transformers are not going to be used and can therefore be 
+  omitted without effecting the result of styling (#711).
+
 ## Major changes
 
 
@@ -31,9 +36,10 @@
   or focus loss, so this feature becomes less relevant. (#631).
 - blank lines in function calls and headers are now removed, for the former only 
   when there are no comments before or after the blank line (#629, #630, #635).
-- speed improvements: (~10%) when cache is activated because transformers are not 
-  captured as character anymore (#679), ~ 3% in low-level optimization (#691). 
-  Require magrittr 2.0 gives about 7% speed improvement (#681).
+- speed improvements: ~10% when cache is activated because transformers are not 
+  captured as character anymore (#679), ~3% in low-level optimization (#691). 
+  7% by requiring magrittr 2.0 (#681), ~8% by dropping unused transformers 
+  (#711) .
 - `#<<` is now recognized as the xaringan marker and no space is added after`#` 
   (#700).
 
