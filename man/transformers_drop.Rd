@@ -20,6 +20,6 @@ expect ";" to be in it, so we don't need to apply \code{resolve_semicolon()} on
 every \emph{nest}.
 }
 \seealso{
-specify_transformer_dropping
+specify_transformers_drop
 }
 \keyword{internal}

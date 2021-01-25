@@ -9,7 +9,7 @@ remove_space_after_excl_ <- function(pd_flat) {
 
 t <- create_style_guide(
   space = lst(remove_space_after_excl_),
-  transformers_drop = specify_transformer_dropping(
+  transformers_drop = specify_transformers_drop(
     spaces = list(remove_space_after_excl_ = c("'!'"))
   ),
   style_guide_name = "styler::t@https://github.com/r-lib",
@@ -50,7 +50,7 @@ test_that("transformers are removed if they are unused", {
 test_that("tidyverse transformers are correctly named", {
   # test that all dropping rules match an actual rule in the style guide
   expect_silent(
-    test_transformers_dropping(tidyverse_style())
+    test_transformers_drop(tidyverse_style())
   )
 })
 

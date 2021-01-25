@@ -15,7 +15,7 @@ create_style_guide(
   style_guide_name = NULL,
   style_guide_version = NULL,
   more_specs_style_guide = NULL,
-  transformers_drop = specify_transformer_dropping()
+  transformers_drop = specify_transformers_drop()
 )
 }
 \arguments{
@@ -60,7 +60,7 @@ beforehand in \code{purrr::partial()}.}
 \item{transformers_drop}{A list specifying under which conditions
 transformer functions can be dropped since they have no effect on the
 code to format, most easily constructed with
-\code{\link[=specify_transformer_dropping]{specify_transformer_dropping()}}. This is argument experimental and may
+\code{\link[=specify_transformers_drop]{specify_transformers_drop()}}. This is argument experimental and may
 change in future releases without prior notification. It was mainly
 introduced to improve speed. Listing transformers here that occur almost
 always in code does not make sense because the process of excluding them

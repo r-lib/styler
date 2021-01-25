@@ -173,7 +173,7 @@ tidyverse_style <- function(scope = "tokens",
     )
   }
 
-  transformers_drop <- specify_transformer_dropping(
+  transformers_drop <- specify_transformers_drop(
     spaces = list(
       # remove_space_before_closing_paren = c("')'", "']'"),
       # remove_space_before_opening_paren = c("'('", "'['", "LBB"),
@@ -286,7 +286,7 @@ tidyverse_style <- function(scope = "tokens",
 #' @param transformers_drop A list specifying under which conditions
 #'   transformer functions can be dropped since they have no effect on the
 #'   code to format, most easily constructed with
-#'   [specify_transformer_dropping()]. This is argument experimental and may
+#'   [specify_transformers_drop()]. This is argument experimental and may
 #'   change in future releases without prior notification. It was mainly
 #'   introduced to improve speed. Listing transformers here that occur almost
 #'   always in code does not make sense because the process of excluding them
@@ -318,7 +318,7 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                style_guide_name = NULL,
                                style_guide_version = NULL,
                                more_specs_style_guide = NULL,
-                               transformers_drop = specify_transformer_dropping()) {
+                               transformers_drop = specify_transformers_drop()) {
   list(
     # transformer functions
     initialize = list(initialize = initialize),
@@ -342,7 +342,7 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' `{styler}` can remove transformer functions safely removed from the list of
 #' transformers to be applied on every *nest* with [transformers_drop()] if the
 #' tokens that trigger a manipulation of the parse data are absent in the text
-#' to style. `specify_transformer_dropping()` helps you specify these
+#' to style. `specify_transformers_drop()` helps you specify these
 #' conditions.
 #'
 #' Note that the negative formulation (must be absent in order to be dropped)
@@ -363,10 +363,10 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #'   circumstances the transformer does not have an impact on styling and can
 #'   therefore be safely removed without affecting the styling outcome.
 #'
-#' You can use the unexported function [test_transformers_dropping()] for some
+#' You can use the unexported function [test_transformers_drop()] for some
 #' checks.
 #' @examples
-#' dropping <- specify_transformer_dropping(
+#' dropping <- specify_transformers_drop(
 #'   spaces = c(remove_space_after_excl = "'!'")
 #' )
 #' style_guide <- create_style_guide(
@@ -391,10 +391,10 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' # not, not via `is.null()` and we can use the `is.null()` check to see if
 #' # this scope was initially required by the user.
 #' @export
-specify_transformer_dropping <- function(spaces = NULL,
-                                         indention = NULL,
-                                         line_breaks = NULL,
-                                         tokens = NULL) {
+specify_transformers_drop <- function(spaces = NULL,
+                                      indention = NULL,
+                                      line_breaks = NULL,
+                                      tokens = NULL) {
   list(
     space = spaces, indention = indention, line_break = line_breaks,
     token = tokens

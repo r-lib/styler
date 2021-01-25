@@ -261,7 +261,7 @@ parse_transform_serialize_r <- function(text,
 #'   line).
 #' @param transformers the transformers.
 #' @keywords internal
-#' @seealso specify_transformer_dropping
+#' @seealso specify_transformers_drop
 transformers_drop <- function(text, transformers) {
   is_colon <- text == ";"
   if (any(is_colon)) {
