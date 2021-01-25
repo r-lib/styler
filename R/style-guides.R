@@ -178,7 +178,7 @@ tidyverse_style <- function(scope = "tokens",
       # remove_space_before_closing_paren = c("')'", "']'"),
       # remove_space_before_opening_paren = c("'('", "'['", "LBB"),
       add_space_after_for_if_while = c("IF", "WHILE", "FOR"),
-      add_space_before_brace = "'{'",
+      # remove_space_before_comma = "','",
       set_space_between_eq_sub_and_comma = "EQ_SUB",
       style_space_around_math_token = c(
         math_token_spacing$zero,
@@ -222,7 +222,7 @@ tidyverse_style <- function(scope = "tokens",
     )
   )
 
-  if (getRversion() >= 3.6) {
+  if (getRversion() < 3.6) {
     transformers_drop$token$force_assignment_op <- NULL
   }
 
