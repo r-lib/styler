@@ -12,7 +12,7 @@ specify_transformers_drop(
 )
 }
 \arguments{
-\item{spaces, indention, line_breaks, tokens}{Each a list or \code{NULL} where
+\item{spaces, indention, line_breaks, tokens}{Each a list (or \code{NULL}) where
 the name of each element is the concerning transformer, the value is an
 unnamed vector with tokens that match the rule. See 'Examples'.}
 }

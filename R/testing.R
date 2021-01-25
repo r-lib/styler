@@ -342,8 +342,10 @@ cache_more_specs_default <- function() {
   cache_more_specs(include_roxygen_examples = TRUE, base_indention = 0)
 }
 
-#' Check if the transformers_drop in [create_style_guide()] is consistent
-#' with the transformers specified.
+#' Test `transformers_drop` for consistency
+#'
+#' Check if the argument `transformers_drop` in [create_style_guide()] is
+#' consistent with the transformers specified in that function.
 #' @param transformers The output of [create_style_guide()] we want to test.
 #' @keywords internal
 test_transformers_drop <- function(transformers) {

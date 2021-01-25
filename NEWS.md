@@ -21,8 +21,8 @@
   style tokens, you had to always also style spaces, indention, line breaks as 
   well (#705, #707).
 
-- New argument `transformer_drop` in `create_style_guide()` to be populated with
-  new helper function `specify_transformer_dropping()` for specifying conditions
+- New argument `transformers_drop` in `create_style_guide()` to be populated with
+  new helper function `specify_transformers_drop()` for specifying conditions
   under which transformers are not going to be used and can therefore be 
   omitted without effecting the result of styling (#711).
 

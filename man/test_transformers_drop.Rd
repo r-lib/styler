@@ -2,8 +2,7 @@
 % Please edit documentation in R/testing.R
 \name{test_transformers_drop}
 \alias{test_transformers_drop}
-\title{Check if the transformers_drop in \code{\link[=create_style_guide]{create_style_guide()}} is consistent
-with the transformers specified.}
+\title{Test \code{transformers_drop} for consistency}
 \usage{
 test_transformers_drop(transformers)
 }
@@ -11,7 +10,7 @@ test_transformers_drop(transformers)
 \item{transformers}{The output of \code{\link[=create_style_guide]{create_style_guide()}} we want to test.}
 }
 \description{
-Check if the transformers_drop in \code{\link[=create_style_guide]{create_style_guide()}} is consistent
-with the transformers specified.
+Check if the argument \code{transformers_drop} in \code{\link[=create_style_guide]{create_style_guide()}} is
+consistent with the transformers specified in that function.
 }
 \keyword{internal}

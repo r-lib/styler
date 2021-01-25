@@ -350,7 +350,7 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' to add a rule for when to drop it, it will not be dropped. If we required to
 #' specify the complement (which tokens must be present for the transformer to
 #' be kept), the transformer would be silently removed, which is less save.
-#' @param spaces,indention,line_breaks,tokens Each a list or `NULL` where
+#' @param spaces,indention,line_breaks,tokens Each a list (or `NULL`) where
 #'   the name of each element is the concerning transformer, the value is an
 #'   unnamed vector with tokens that match the rule. See 'Examples'.
 #'
