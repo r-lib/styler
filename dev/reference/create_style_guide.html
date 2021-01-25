@@ -206,7 +206,8 @@ done in <code><a href='tidyverse_style.html'>tidyverse_style()</a></code> with <
   reindention <span class='op'>=</span> <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span><span class='op'>(</span><span class='op'>)</span>,
   style_guide_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   style_guide_version <span class='op'>=</span> <span class='cn'>NULL</span>,
-  more_specs_style_guide <span class='op'>=</span> <span class='cn'>NULL</span>
+  more_specs_style_guide <span class='op'>=</span> <span class='cn'>NULL</span>,
+  transformers_drop <span class='op'>=</span> <span class='fu'><a href='specify_transformers_drop.html'>specify_transformers_drop</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -269,6 +270,17 @@ such functions are converted to characters in <code><a href='cache_make_key.html
 they will yield generic code and we loose the specific value of <code>arg</code> (see
 <code><a href='cache_make_key.html'>cache_make_key()</a></code>), even when unquoting these inputs with <code>!!</code>
 beforehand in <code><a href='https://purrr.tidyverse.org/reference/partial.html'>purrr::partial()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>transformers_drop</th>
+      <td><p>A list specifying under which conditions
+transformer functions can be dropped since they have no effect on the
+code to format, most easily constructed with
+<code><a href='specify_transformers_drop.html'>specify_transformers_drop()</a></code>. This is argument experimental and may
+change in future releases without prior notification. It was mainly
+introduced to improve speed. Listing transformers here that occur almost
+always in code does not make sense because the process of excluding them
+also takes some time.</p></td>
     </tr>
     </table>
 

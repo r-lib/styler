@@ -463,6 +463,9 @@
     <loc>https://styler.r-lib.org/reference/set_unindention_child.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/specify_transformers_drop.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/split_roxygen_segments.html</loc>
   </url>
   <url>
@@ -529,6 +532,9 @@
     <loc>https://styler.r-lib.org/reference/test_transformer.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/test_transformers_drop.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/testthat_file.html</loc>
   </url>
   <url>
@@ -563,6 +569,9 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/transform_utf8_one.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/reference/transformers_drop.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/try_transform_as_r_file.html</loc>

@@ -160,18 +160,18 @@
 <pre><code>##  [1] "initialize"             "line_break"             "space"                 
 ##  [4] "token"                  "indention"              "use_raw_indention"     
 ##  [7] "reindention"            "style_guide_name"       "style_guide_version"   
-## [10] "more_specs_style_guide"</code></pre>
+## [10] "more_specs_style_guide" "transformers_drop"</code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span>, give.attr <span class="op">=</span> <span class="cn">FALSE</span>, list.len <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
-<pre><code>## List of 10
+<pre><code>## List of 11
 ##  $ initialize            :List of 1
 ##   ..$ initialize:function (pd_flat)  
 ##  $ line_break            :List of 12
-##   ..$ set_line_break_around_comma_and_or                            :function (pd, strict)  
-##   ..$ set_line_break_after_assignment                               :function (pd)  
-##   ..$ set_line_break_before_curly_opening                           :function (pd)  
+##   ..$ set_line_break_around_comma_and_or                :function (pd, strict)  
+##   ..$ set_line_break_after_assignment                   :function (pd)  
+##   ..$ set_line_break_before_curly_opening               :function (pd)  
 ##   .. [list output truncated]
-##  $ space                 :List of 20
+##  $ space                 :List of 19
 ##   ..$ remove_space_before_closing_paren :function (pd_flat)  
 ##   ..$ remove_space_before_opening_paren :function (pd_flat)  
 ##   ..$ add_space_after_for_if_while      :function (pd_flat)  
@@ -189,7 +189,7 @@
 ##     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L
 ##     pd_flat
 ## }
-## &lt;bytecode: 0x7fcad3a17640&gt;
+## &lt;bytecode: 0x7fd5956f6408&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>As the name says, this function removes spaces after the opening parenthesis. But how? Its input is a <em>nest</em>. Since the visitor will go through all levels of nesting, we just need a function that can be applied to a <em>nest</em>, that is, to a parse table at one level of nesting. We can compute the nested parse table and look at one of the levels of nesting that is interesting for us (more on the data structure in the vignettes “Data structures” and “Manipulating the parse table”):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -262,7 +262,8 @@
 <pre><code>## function (pd_nested, transformers) 
 ## {
 ##     transformed_updated_multi_line &lt;- post_visit(pd_nested, c(transformers$initialize, 
-##         transformers$line_break, set_multi_line, if (!is.null(transformers$line_break)) update_newlines))
+##         transformers$line_break, set_multi_line, if (length(transformers$line_break) != 
+##             0) update_newlines))
 ##     transformed_all &lt;- pre_visit(transformed_updated_multi_line, 
 ##         c(transformers$space, transformers$indention, transformers$token))
 ##     transformed_absolute_indent &lt;- context_to_terminals(transformed_all, 
@@ -270,7 +271,7 @@
 ##         outer_indention_refs = NA)
 ##     transformed_absolute_indent
 ## }
-## &lt;bytecode: 0x7fcad390dab0&gt;
+## &lt;bytecode: 0x7fd5941de1d0&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>This means that the order of the styling is clearly defined and it is for example not possible to modify line breaks based on spacing, because spacing will be set after line breaks are set. Do not rely on the column <code>col1</code>, <code>col2</code>, <code>line1</code> and <code>line2</code> in the parse table in any of your functions since these columns only reflect the position of tokens at the point of parsing,</p>
 <p>i.e. they are not kept up to date throughout the process of styling.</p>
@@ -372,7 +373,7 @@
 ##     pd$lag_newlines[round_after_curly] &lt;- 0L
 ##     pd
 ## }
-## &lt;bytecode: 0x7fcad3a92450&gt;
+## &lt;bytecode: 0x7fd59572bf70&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>With our example function <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to worry about that as we are only adding line breaks, but we don’t remove them.</p>
 </div>
