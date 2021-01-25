@@ -217,10 +217,14 @@ tidyverse_style <- function(scope = "tokens",
       # and `text` supplied to transformers_drop() is "", so it appears to not
       # contain EQ_ASSIGN, and the transformer is falsely removed.
       # compute_parse_data_nested / text_to_flat_pd ('a = 4')
-      force_assignment_op = if (getRversion() >= 3.6) "EQ_ASSIGN",
+      force_assignment_op = "EQ_ASSIGN",
       wrap_if_else_while_for_fun_multi_line_in_curly = c("IF", "WHILE", "FOR", "FUNCTION")
     )
   )
+
+  if (getRversion() >= 3.6) {
+    transformers_drop$token$force_assignment_op <- NULL
+  }
 
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
   create_style_guide(
