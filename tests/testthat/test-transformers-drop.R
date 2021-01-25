@@ -9,7 +9,9 @@ remove_space_after_excl_ <- function(pd_flat) {
 
 t <- create_style_guide(
   space = lst(remove_space_after_excl_),
-  transformers_drop = list(space = list(remove_space_after_excl_ = c("'!'"))),
+  transformers_drop = specify_transformer_dropping(
+    spaces = list(remove_space_after_excl_ = c("'!'"))
+  ),
   style_guide_name = "styler::t@https://github.com/r-lib",
   style_guide_version = as.character(packageVersion("styler"))
 )
@@ -45,28 +47,18 @@ test_that("transformers are removed if they are unused", {
   expect_equal(t_fun, t_manual)
 })
 
-test_that("tidyverse transformers are correctly dropped", {
-  t_style <- tidyverse_style()
-
-  t_fun <- transformers_drop(
-    "x", t_style
-  )
+test_that("tidyverse transformers are correctly named", {
   # test that all dropping rules match an actual rule in the style guide
-  scopes <- intersect(
-    names(t_fun$transformers_drop),
-    names(t_fun)
+  expect_silent(
+    test_transformers_dropping(tidyverse_style())
   )
-  purrr::map2(t_fun$transformers_drop, t_style[scopes], function(x, y) {
-    # all x must be in y. select the x that are not in y
-    diff <- setdiff(names(x),names(y))
-    if (length(diff) > 0) {
-      rlang::abort(paste(
-        "transformer_dropping specifies exclusion rules for transformers that ",
-        "are not in the style guilde. Please add the rule to the style guide ",
-        "or remove the dropping rules:", paste(diff, collapse = ", "))
-      )
-    }
-  })
+})
+
+test_that("tidyverse transformers are correctly dropped", {
+  # TODO maybe there is a more minimal test than this.
+  t_style <- tidyverse_style()
+  t_fun <- transformers_drop("x", t_style)
+
   names_line_break <- c(
     "set_line_break_around_comma_and_or",
     "set_line_break_after_assignment",
@@ -97,7 +89,6 @@ test_that("tidyverse transformers are correctly dropped", {
     "remove_terminal_token_before_and_after"
   )
   expect_setequal(names(t_fun$token), names_tokens)
-
 })
 
 

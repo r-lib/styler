@@ -59,8 +59,12 @@ beforehand in \code{purrr::partial()}.}
 
 \item{transformers_drop}{A list specifying under which conditions
 transformer functions can be dropped since they have no effect on the
-code to format. This is argument experimental and may change in future
-releases without prior notification.}
+code to format, most easily constructed with
+\code{\link[=specify_transformer_dropping]{specify_transformer_dropping()}}. This is argument experimental and may
+change in future releases without prior notification. It was mainly
+introduced to improve speed. Listing transformers here that occur almost
+always in code does not make sense because the process of excluding them
+also takes some time.}
 }
 \description{
 This is a helper function to create a style guide, which is technically

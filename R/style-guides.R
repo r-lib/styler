@@ -285,8 +285,12 @@ tidyverse_style <- function(scope = "tokens",
 #'   beforehand in `purrr::partial()`.
 #' @param transformers_drop A list specifying under which conditions
 #'   transformer functions can be dropped since they have no effect on the
-#'   code to format. This is argument experimental and may change in future
-#'   releases without prior notification.
+#'   code to format, most easily constructed with
+#'   [specify_transformer_dropping()]. This is argument experimental and may
+#'   change in future releases without prior notification. It was mainly
+#'   introduced to improve speed. Listing transformers here that occur almost
+#'   always in code does not make sense because the process of excluding them
+#'   also takes some time.
 #' @examples
 #' set_line_break_before_curly_opening <- function(pd_flat) {
 #'   op <- pd_flat$token %in% "'{'"
@@ -335,9 +339,11 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 
 #' Specify which tokens must be absent for a transformer to be dropped
 #'
-#' Transformer functions can be safely removed from the list of transformers
-#' to be applied on every *nest* with [transformers_drop()] if the tokens that
-#' trigger a manipulation of the parse data are absent in the text to style.
+#' `{styler}` can remove transformer functions safely removed from the list of
+#' transformers to be applied on every *nest* with [transformers_drop()] if the
+#' tokens that trigger a manipulation of the parse data are absent in the text
+#' to style. `specify_transformer_dropping()` helps you specify these
+#' conditions.
 #'
 #' Note that the negative formulation (must be absent in order to be dropped)
 #' means that when you add a new rule and you forget
@@ -357,6 +363,8 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #'   circumstances the transformer does not have an impact on styling and can
 #'   therefore be safely removed without affecting the styling outcome.
 #'
+#' You can use the unexported function [test_transformers_dropping()] for some
+#' checks.
 #' @examples
 #' dropping <- specify_transformer_dropping(
 #'   spaces = c(remove_space_after_excl = "'!'")

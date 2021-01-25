@@ -26,3 +26,26 @@ test_that("properly detects match", {
     "identical"
   )
 })
+
+test_that('detects non-matching style guides', {
+  sg <- create_style_guide(
+    space = list(
+      a1 = function(...) NULL,
+      b1 = function(... ) 1
+    ),
+    transformers_drop = specify_transformer_dropping(
+      spaces = c(a1 = "'+'")
+    )
+  )
+  expect_silent(test_transformers_dropping(sg))
+
+  sg <- create_style_guide(
+    space = list(
+      a1 = function(...) NULL
+    ),
+    transformers_drop = specify_transformer_dropping(
+      spaces = c(a2 = "'+'")
+    )
+  )
+  expect_error(test_transformers_dropping(sg))
+})

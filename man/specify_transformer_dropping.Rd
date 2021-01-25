@@ -17,9 +17,11 @@ the name of each element is the concerning transformer, the value is an
 unnamed vector with tokens that match the rule. See 'Examples'.}
 }
 \description{
-Transformer functions can be safely removed from the list of transformers
-to be applied on every \emph{nest} with \code{\link[=transformers_drop]{transformers_drop()}} if the tokens that
-trigger a manipulation of the parse data are absent in the text to style.
+\code{{styler}} can remove transformer functions safely removed from the list of
+transformers to be applied on every \emph{nest} with \code{\link[=transformers_drop]{transformers_drop()}} if the
+tokens that trigger a manipulation of the parse data are absent in the text
+to style. \code{specify_transformer_dropping()} helps you specify these
+conditions.
 }
 \details{
 Note that the negative formulation (must be absent in order to be dropped)
@@ -39,6 +41,9 @@ transformer function.
 circumstances the transformer does not have an impact on styling and can
 therefore be safely removed without affecting the styling outcome.
 }
+
+You can use the unexported function \code{\link[=test_transformers_dropping]{test_transformers_dropping()}} for some
+checks.
 }
 
 \examples{
