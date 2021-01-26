@@ -56,9 +56,7 @@ use_precommit_config <- function(config_source = getOption("precommit.config_sou
   }
 
   if (is_package(root)) {
-    usethis::with_project(root, {
-      usethis::write_union(fs::path(root, ".Rbuildignore"), escaped_name_target)
-    })
+    usethis::write_union(fs::path(root, ".Rbuildignore"), escaped_name_target)
   }
   usethis::ui_todo(c(
     "Edit .precommit-hooks.yaml to (de)activate the hooks you want to use. ",
