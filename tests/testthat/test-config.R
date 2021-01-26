@@ -41,9 +41,26 @@ test_that("defaults to right config depending on whether or not root is a pkg", 
   )
 })
 
-test_that(".Rbuildignore is written to the right directory", {
+test_that(".Rbuildignore is written to the right directory when root is relative", {
   root <- tempfile()
   fs::dir_create(root)
+
+  withr::with_dir(root, {
+    desc <- desc::description$new("!new")
+    desc$set(Package = "test.pkg")
+    desc$write("DESCRIPTION")
+  })
+  withr::with_dir(
+    fs::path_dir(root),
+    use_precommit_config(root = fs::path_file(root))
+  )
+  expect_true(fs::file_exists(fs::path(root, ".Rbuildignore")))
+})
+
+test_that(".Rbuildignore is written to the right directory when root is absolute", {
+  root <- tempfile()
+  fs::dir_create(root)
+
   withr::with_dir(root, {
     desc <- desc::description$new("!new")
     desc$set(Package = "test.pkg")
