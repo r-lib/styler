@@ -131,7 +131,7 @@ if (!on_cran()) {
     if (!not_conda()) {
       expect_error(install_precommit(), NA)
     }
-
+    tempdir <- local_test_setup()
     expect_message(
       use_precommit(
         example_remote_config(),
