@@ -147,3 +147,26 @@ on_cran <- function() {
 not_conda <- function() {
   Sys.getenv("PRECOMMIT_INSTALLATION_METHOD") != "conda"
 }
+
+#' Testing utilities
+#'
+#' Similar to the `local_()` family from `{withr}`, this function creates a
+#' temporary directory and optionally initiates git and pre-commit in it.
+#' @inheritParams withr::local_tempdir
+#' @param git Whether or not to init git in the local directory.
+#' @param use_precommmit Whether or not to [use_precommit()].
+#' @keywords internal
+local_test_setup <- function(.local_envir = parent.frame(),
+                             git = TRUE,
+                             use_precommit = FALSE,
+                             ...) {
+  dir <- withr::local_tempdir(.local_envir = .local_envir)
+  if (git) {
+    git2r::init(path = dir)
+    withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
+  }
+  if (use_precommit) {
+    suppressMessages(use_precommit(...))
+  }
+  dir
+}
