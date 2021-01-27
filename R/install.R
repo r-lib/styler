@@ -111,13 +111,18 @@ install_repo <- function(root, install_hooks, legacy_hooks) {
 }
 
 remove_usethis_readme_hook <- function() {
+  message("Starting to investigate readme usethis hook")
   legacy <- readLines(
     system.file("usethis-legacy-hook", package = "precommit"),
     encoding = "UTF-8"
   )
+  message("legacy hook", legacy)
   candidate <- ".git/hooks/pre-commit"
   if (fs::file_exists(candidate)) {
+    message("a hook exists at", candidate)
     if (identical(readLines(candidate, encoding = "UTF-8"), legacy)) {
+      message("candidate hook", readLines(candidate, encoding = "UTF-8"))
+      message("the hook is identical to the legacy hook")
       fs::file_delete(candidate)
       usethis::ui_info(paste(
         "Removed the render-README hook, which was added with",
@@ -126,6 +131,8 @@ remove_usethis_readme_hook <- function() {
         "Add the hook to your .pre-commit-config.yaml as described here:",
         "https://lorenzwalthert.github.io/precommit/#usage."
       ))
+    } else {
+      message("the hook is not identical to the legacy hook")
     }
   }
 }
