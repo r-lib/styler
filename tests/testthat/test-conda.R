@@ -1,6 +1,6 @@
 if (!on_cran()) {
   tempdir <- fs::path(tempdir(), "test-precommit")
-  rlang::with_handlers(unlink(tempdir), error = function(e) NULL)
+  rlang::with_handlers(fs::dir_delete(tempdir), error = function(e) NULL)
   fs::dir_create(tempdir)
   git2r::init(path = tempdir)
 
@@ -53,7 +53,7 @@ if (!on_cran()) {
 
   test_that("existing hooks are recognized", {
     tempdir <- fs::path(tempdir(), "t13")
-    on.exit(rlang::with_handlers(unlink(tempdir), error = function(e) NULL))
+    on.exit(rlang::with_handlers(fs::dir_delete(tempdir), error = function(e) NULL))
     fs::dir_create(tempdir)
     withr::with_dir(tempdir, {
       git2r::init()
@@ -182,17 +182,15 @@ if (!on_cran()) {
           "chose the installation method via conda"
         )
       )
-      
+
       expect_match(version_precommit(), "[0-9]+\\.[0-9]+\\.[0-9]+")
     } else {
       uninstall_precommit(scope = "user", ask = "none", root = ".")
       version <- "2.3.0"
-      reticulate::conda_install('r-precommit', paste0('pre-commit==', version))
+      reticulate::conda_install("r-precommit", paste0("pre-commit==", version))
       expect_equal(version_precommit(), version)
       expect_invisible(update_precommit(), 0)
       expect_false(version_precommit() == version)
     }
   })
-  
-  
 }
