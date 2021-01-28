@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.org/package=precommit)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-
 [![R build status](https://github.com/lorenzwalthert/precommit/workflows/R-CMD-check/badge.svg)](https://github.com/lorenzwalthert/precommit/actions)
 <!-- badges: end -->
 
@@ -30,8 +29,8 @@ forgotten a comma, brace or quote.
 
 The goal of this package is to twofold:
 
-- Provide a set of hooks that are useful when your git repo contains R code. You
-  can find them under `vignette("available-hooks")`.
+- Provide a [set of hooks](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html)
+  that are useful when your git repo contains R code.
 
 - Provide [usethis](https://github.com/r-lib/usethis)-like functionality for
   common tasks such as installation and set-up and config file modification.
