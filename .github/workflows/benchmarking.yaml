@@ -1,7 +1,7 @@
 name: Continuous Benchmarks
+on: pull_reqeust
 jobs:
   build:
-    if: github.event_name == 'pull_request'
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
