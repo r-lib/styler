@@ -1,5 +1,5 @@
 name: Continuous Benchmarks
-on: pull_reqeust
+on: pull_request
 jobs:
   build:
     runs-on: ${{ matrix.config.os }}
