@@ -1,11 +1,4 @@
 name: Continuous Benchmarks
-on:
-  push:
-    branches:
-    - master
-  pull_request:
-    branches:
-    - master
 jobs:
   build:
     if: github.event_name == 'pull_request'
