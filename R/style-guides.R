@@ -152,7 +152,8 @@ tidyverse_style <- function(scope = "tokens",
         partial(
           set_line_break_after_opening_if_call_is_multi_line,
           except_token_after = "COMMENT",
-          except_text_before = c("switch", "ifelse", "if_else")
+          except_text_before = c("ifelse", "if_else"), # don't modify line break here
+          force_text_before = c("switch") # force line break after first token
         )
       },
       remove_line_break_in_fun_call = purrr::partial(remove_line_break_in_fun_call, strict = strict),
