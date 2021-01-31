@@ -124,7 +124,11 @@ style_selection <- function() {
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
   if (all(nchar(text) == 0)) abort("No code selected")
-  out <- style_text(text, transformers = get_addins_style_transformer())
+  out <- style_text(
+    text,
+    transformers = get_addins_style_transformer(),
+    base_indention = nchar(gsub("^( *).*", "\\1", text))
+  )
   rstudioapi::modifyRange(
     context$selection[[1]]$range, paste0(c(out, if (context$selection[[1]]$range$end[2] == 1) ""), collapse = "\n"),
     id = context$id
