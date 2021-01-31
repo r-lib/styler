@@ -46,11 +46,25 @@ if (packageVersion("styler") < "1.3.2") {
   style <- eval(parse(text = paste(arguments$style_pkg, "::", arguments$style_fun)))
   tryCatch(
     {
-      dot_args <- list(arguments$files, style = style)
+      dot_args <- list(path = arguments$files, style = style)
       if (length(keys) > 0) {
+        print(arguments[bare_keys])
         dot_args <- append(dot_args, lapply(arguments[bare_keys], function(x) {
-          eval(parse(text = tryCatch(yaml::yaml.load(x), error = x)))
+          tryCatch(
+            tryCatch(
+              # 1 try yaml.load() -> parse
+              eval(parse(text = tryCatch(yaml::yaml.load(x),
+                # 2 try parse
+                error = function(...) x
+              ))),
+              # 3 try yaml.load
+              error = yaml::yaml.load(x)
+              # 4 try as is.
+            ),
+            error = function(...) x
+          )
         }))
+        print(dot_args)
       }
       do.call(styler::style_file, dot_args)
     },
