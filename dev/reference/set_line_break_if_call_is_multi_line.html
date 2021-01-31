@@ -180,13 +180,7 @@
     <p>Set line break for multi-line function calls</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_line_break_after_opening_if_call_is_multi_line</span><span class='op'>(</span>
-  <span class='va'>pd</span>,
-  except_token_after <span class='op'>=</span> <span class='cn'>NULL</span>,
-  except_text_before <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span>
-
-<span class='fu'>set_line_break_before_closing_call</span><span class='op'>(</span><span class='va'>pd</span>, <span class='va'>except_token_before</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>set_line_break_before_closing_call</span><span class='op'>(</span><span class='va'>pd</span>, <span class='va'>except_token_before</span><span class='op'>)</span>
 
 <span class='fu'>remove_line_break_in_fun_call</span><span class='op'>(</span><span class='va'>pd</span>, <span class='va'>strict</span><span class='op'>)</span></pre>
 
@@ -196,6 +190,11 @@
     <tr>
       <th>pd</th>
       <td><p>A parse table.</p></td>
+    </tr>
+    <tr>
+      <th>except_token_before</th>
+      <td><p>A character vector with text before "')'" that do
+not cause a line break before "')'".</p></td>
     </tr>
     <tr>
       <th>except_token_after</th>
@@ -208,9 +207,9 @@ not cause a line break after "'('".</p></td>
 not cause a line break after "'('".</p></td>
     </tr>
     <tr>
-      <th>except_token_before</th>
-      <td><p>A character vector with text before "')'" that do
-not cause a line break before "')'".</p></td>
+      <th>force_text_before</th>
+      <td><p>A character vector with text before "'('" that
+forces a line break after every argument in the call.</p></td>
     </tr>
     </table>
 
@@ -218,8 +217,6 @@ not cause a line break before "')'".</p></td>
 
     
 <ul>
-<li><p><code>set_line_break_after_opening_if_call_is_multi_line</code>: Sets line break after
-opening parenthesis.</p></li>
 <li><p><code>set_line_break_before_closing_call</code>: Sets line break before
 closing parenthesis.</p></li>
 </ul>

@@ -430,6 +430,9 @@
     <loc>https://styler.r-lib.org/reference/set_arg_write_tree.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/set_line_break_after_opening_if_call_is_multi_line.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/set_line_break_around_curly_curly.html</loc>
   </url>
   <url>

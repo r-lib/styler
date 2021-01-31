@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Turn off styling for parts of the code — stylerignore • styler</title>
+<title>Sets line break after opening parenthesis — set_line_break_after_opening_if_call_is_multi_line • styler</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,8 @@
 
 
 
-<meta property="og:title" content="Turn off styling for parts of the code — stylerignore" />
-<meta property="og:description" content="Using stylerignore markers, you can temporarily turn off styler. See a
-few illustrative examples below." />
+<meta property="og:title" content="Sets line break after opening parenthesis — set_line_break_after_opening_if_call_is_multi_line" />
+<meta property="og:description" content="Sets line break after opening parenthesis" />
 
 
 <meta name="robots" content="noindex">
@@ -172,70 +171,38 @@ few illustrative examples below." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Turn off styling for parts of the code</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/nest.R'><code>R/nest.R</code></a></small>
-    <div class="hidden name"><code>stylerignore.Rd</code></div>
+    <h1>Sets line break after opening parenthesis</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/rules-line-breaks.R'><code>R/rules-line-breaks.R</code></a></small>
+    <div class="hidden name"><code>set_line_break_after_opening_if_call_is_multi_line.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Using stylerignore markers, you can temporarily turn off styler. See a
-few illustrative examples below.</p>
+    <p>Sets line break after opening parenthesis</p>
     </div>
 
+    <pre class="usage"><span class='fu'>set_line_break_after_opening_if_call_is_multi_line</span><span class='op'>(</span>
+  <span class='va'>pd</span>,
+  except_token_after <span class='op'>=</span> <span class='cn'>NULL</span>,
+  except_text_before <span class='op'>=</span> <span class='cn'>NULL</span>,
+  force_text_before <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Styling is on by default when you run styler.</p><ul>
-<li><p>To mark the start of a sequence where you want to turn styling off, use
-<code># styler: off</code>.</p></li>
-<li><p>To mark the end of this sequence, put <code># styler: on</code> in your code. After
-that line, styler will again format your code.</p></li>
-<li><p>To ignore an inline statement (i.e. just one line), place <code># styler: off</code>
-at the end of the line. Note that inline statements cannot contain other
-comments apart from the marker, i.e. a line like
-<code>1 # comment # styler: off</code> won't be ignored.</p></li>
+    <p>In general, every call that is multi-line has a line break after the opening
+parenthesis. Exceptions:</p><ul>
+<li><p>The token right after the parenthesis is a comment, then, the line should
+be broken after the comment only. Governed by <code>except_token_after</code>.</p></li>
+<li><p>The name of the function called is <code><a href='https://rdrr.io/r/base/ifelse.html'>ifelse()</a></code> or similar, where we can
+allow the condition on the same line as the function name, and we don't
+impose rules on the line breaks for the subsequent arguments. Governed
+by <code>except_text_before</code>.</p></li>
+<li><p>Some calls like <code><a href='https://rdrr.io/r/base/switch.html'>switch()</a></code> statements are always forced to become multi-
+line. Governed by <code>force_text_before</code>.</p></li>
 </ul>
 
-<p>To use something else as start and stop markers, set the R options
-<code>styler.ignore_start</code> and
-<code>styler.ignore_stop</code> using <code><a href='https://rdrr.io/r/base/options.html'>options()</a></code>. If you want these
-settings to persist over multiple R sessions, consider setting them in your
-R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># as long as the order of the markers is correct, the lines are ignored.</span>
-<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
-  <span class='st'>"
-  1+1
-  # styler: off
-  1+1
-  # styler: on
-  1+1
-  "</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; <span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span>
-#&gt;   </span><span style='color: #9E9E9E;font-style: italic;'># styler: off</span><span>
-#&gt;   </span><span style='color: #0000BB;'>1</span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span>
-#&gt; </span><span style='color: #9E9E9E;font-style: italic;'># styler: on</span><span>
-#&gt; </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'>
-<span class='co'># if there is a stop marker before a start marker, styler won't be able</span>
-<span class='co'># to figure out which lines you want to ignore and won't ignore anything,</span>
-<span class='co'># issuing a warning.</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
-  <span class='st'>"
-  1+1
-  # styler: off
-  1+1
-  # styler: off
-  1+1
-  "</span>
-<span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
