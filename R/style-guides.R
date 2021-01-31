@@ -142,17 +142,17 @@ tidyverse_style <- function(scope = "tokens",
       # must be after style_line_break_around_curly as it remove line
       # breaks again for {{.
       set_line_break_around_curly_curly = set_line_break_around_curly_curly,
+      set_line_break_before_closing_call = if (strict) {
+        partial(
+          set_line_break_before_closing_call,
+          except_token_before = "COMMENT"
+        )
+      },
       set_line_break_after_opening_if_call_is_multi_line = if (strict) {
         partial(
           set_line_break_after_opening_if_call_is_multi_line,
           except_token_after = "COMMENT",
           except_text_before = c("switch", "ifelse", "if_else")
-        )
-      },
-      set_line_break_before_closing_call = if (strict) {
-        partial(
-          set_line_break_before_closing_call,
-          except_token_before = "COMMENT"
         )
       },
       remove_line_break_in_fun_call = purrr::partial(remove_line_break_in_fun_call, strict = strict),

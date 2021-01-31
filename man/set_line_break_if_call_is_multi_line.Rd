@@ -10,7 +10,8 @@
 set_line_break_after_opening_if_call_is_multi_line(
   pd,
   except_token_after = NULL,
-  except_text_before = NULL
+  except_text_before = NULL,
+  force_text_before = NULL
 )
 
 set_line_break_before_closing_call(pd, except_token_before)
@@ -25,6 +26,9 @@ not cause a line break after "'('".}
 
 \item{except_text_before}{A character vector with text before "'('" that do
 not cause a line break after "'('".}
+
+\item{force_text_before}{A character vector with text before "'('" that
+forces a line break after every argument in the call.}
 
 \item{except_token_before}{A character vector with text before "')'" that do
 not cause a line break before "')'".}
