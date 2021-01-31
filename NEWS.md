@@ -47,6 +47,8 @@
 
 - `style_dir()` and `style_pkg()` now apply directory exclusion recursively with 
   `exclude_dirs` (#676).
+- `switch()` now has line breaks after every argument to match the tidyverse 
+  style guide (#722).
 - unary `+` before a function call does not give an error anymore, as before 
   version 1.3.0 (#697).
 - cache is now correctly invalidated when style guide arguments change (#647).
