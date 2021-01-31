@@ -198,15 +198,15 @@ test_that("messages (via cat()) of style_file are correct", {
 })
 
 test_that("Messages can be suppressed", {
-    withr::with_options(
-      list(styler.quiet = TRUE),
-      {
-        output <- catch_style_file_output(file.path(
-          "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
-        ))
-        expect_equal(output, character(0))
-      }
-    )
+  withr::with_options(
+    list(styler.quiet = TRUE),
+    {
+      output <- catch_style_file_output(file.path(
+        "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
+      ))
+      expect_equal(output, character(0))
+    }
+  )
 })
 
 context("public API - Rmd in style_dir()")

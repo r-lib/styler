@@ -76,7 +76,6 @@ capture.output(test_that("cached expressions are displayed propperly", {
     cache_info[, c("n", "size", "activated")],
     file = test_path("reference-objects/cache-info-2"),
     update = getOption("styler.test_dir_writable", TRUE)
-
   )
   style_text("a <-function() NULL")
   cache_info <- cache_info(format = "tabular")
@@ -85,7 +84,6 @@ capture.output(test_that("cached expressions are displayed propperly", {
     cache_info[, c("n", "size", "activated")],
     file = test_path("reference-objects/cache-info-3"),
     update = getOption("styler.test_dir_writable", TRUE)
-
   )
 }))
 

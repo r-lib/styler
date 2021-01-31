@@ -109,7 +109,7 @@ test_that("if no transformers_drop is specified, no transformer is removed and n
   expect_equal(t_fun, t_empty_drop2)
 })
 
-test_that('semi-colon is parsed without error', {
+test_that("semi-colon is parsed without error", {
   expect_equal(
     transformers_drop(c("!a", ";", "b"), t),
     t
@@ -117,7 +117,7 @@ test_that('semi-colon is parsed without error', {
 })
 
 
-test_that('can handle old style guide without transformer object', {
+test_that("can handle old style guide without transformer object", {
   t_new <- t
   t_new$transformers_drop <- NULL
   expect_error(
@@ -125,7 +125,7 @@ test_that('can handle old style guide without transformer object', {
     NA
   )
   expect_error(
-    style_text('1;3', transformers = t_new),
+    style_text("1;3", transformers = t_new),
     NA
   )
 })
@@ -141,7 +141,7 @@ test_that("can handle default", {
     NA
   )
   expect_error(
-    style_text('a =2 ', transformers = t_no_drop),
+    style_text("a =2 ", transformers = t_no_drop),
     NA
   )
 })
