@@ -6,7 +6,9 @@
   be applied to files or not (#634).
 
 - `style_file()` and friends gain argument `base_indention` (defaulting to 0) to
-  control by how much the output code is indented (#649, #692).
+  control by how much the output code is indented (#649, #692). The Addin for 
+  styling a selection picks that up, e.g. you can style a function body and 
+  indention is preserved (#725).
   
 - added an option (`styler.test_dir_writeable`) that changes test behavior
   to not directly modify test files in the current directory (#548).
