@@ -65,6 +65,7 @@
 - The internal `create_tree()` only used in testing of styler now works when the 
   cache is activated (#688).
 - simplification of internals (#692).
+- include `test-*` files in styling pre-commit hook (#724).
 
 ## Infrastructure changes
 

@@ -89,7 +89,7 @@ test_that("blank lines are correctly identified", {
 
   # when partly cached, not all code in same block
   text[4] <- "f (x)"
-  pd_nested <- compute_parse_data_nested(text, tidyverse_style(),  more_specs = more_specs)
+  pd_nested <- compute_parse_data_nested(text, tidyverse_style(), more_specs = more_specs)
   expect_equal(
     pd_nested$block, c(1, 2, 3, 3)
   )
