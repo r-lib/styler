@@ -133,7 +133,7 @@ style_selection <- function() {
     context$selection[[1]]$range, paste0(c(out, if (context$selection[[1]]$range$end[2] == 1) ""), collapse = "\n"),
     id = context$id
   )
-  if (getOption("styler.save_after_styling") == TRUE && context$path != "") {
+  if (save_after_styling_is_active() == TRUE && context$path != "") {
     invisible(rstudioapi::documentSave(context$id))
   }
 }
