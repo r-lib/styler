@@ -35,7 +35,8 @@
   auto-save edits in general (Code -> Saving -> Auto-Save), e.g. on idle editor 
   or focus loss, so this feature becomes less relevant. (#631).
 - blank lines in function calls and headers are now removed, for the former only 
-  when there are no comments before or after the blank line (#629, #630, #635).
+  when there are no comments before or after the blank line (#629, #630, #635, 
+  #723).
 - speed improvements: ~10% when cache is activated because transformers are not 
   captured as character anymore (#679), ~3% in low-level optimization (#691). 
   7% by requiring magrittr 2.0 (#681), ~8% by dropping unused transformers 
