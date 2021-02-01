@@ -24,14 +24,14 @@ run_test("style-files",
 run_test("style-files",
   file_name = "style-files-cmd",
   suffix = "-success.R",
-  cmd_args = c("--scope='I(\"spaces\")'")
+  cmd_args = c('--scope="I(\'spaces\')"')
 )
 
 run_test("style-files",
   file_name = "style-files-cmd",
   suffix = "-success.R",
   cmd_args = c(
-    "--scope='I(\"spaces\")'",
+    '--scope=\'I("spaces")\'',
     "--base_indention=0",
     "--include_roxygen_examples=TRUE"
   )
