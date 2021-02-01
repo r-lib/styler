@@ -4,6 +4,10 @@
 
 - `version_precommit()` and `update_precommit()` are new functions to check the
   version of the installed pre-commit executable and to update it (#197).
+- `style-files` hook now supports the full [`style_file()`](https://styler.r-lib.org/dev/reference/style_file.html) API,
+  e.g. you can supply `--scope=spaces` and similar via `args:` in your
+  `.pre-commit-config.yaml`. See the [docs](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#style-files-1)
+  for details.
 
 **Minor changes**
 
