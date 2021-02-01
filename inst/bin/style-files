@@ -12,13 +12,6 @@ Options:
 # provided passed to `style_text(...), passed as --key=value. This way, we
 # can rely on {docopt} to do the parsing for us afterwards.
 # We'll use yaml.load() to convert from string to numeric/logical.
-
-# test cases:
-# no additional key value pair
-# key value pair with _
-# key value pair that has int value
-# key value pair that has boolean value
-# key value pariw with multiple keys
 library(styler)
 args <- commandArgs(trailingOnly = TRUE)
 non_file_args <- args[!grepl("^[^-][^-]", args)]
@@ -48,7 +41,6 @@ if (packageVersion("styler") < "1.3.2") {
     {
       dot_args <- list(path = arguments$files, style = style)
       if (length(keys) > 0) {
-        print(arguments[bare_keys])
         dot_args <- append(dot_args, lapply(arguments[bare_keys], function(x) {
           tryCatch(
             tryCatch(
@@ -64,7 +56,6 @@ if (packageVersion("styler") < "1.3.2") {
             error = function(...) x
           )
         }))
-        print(dot_args)
       }
       do.call(style_file, dot_args)
     },
