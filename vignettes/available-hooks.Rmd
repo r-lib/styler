@@ -7,10 +7,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
-Below is a comprehensive list with all hooks from {precommit} as well as
-their arguments or flags, if they take any. Other repos also host hooks, many
-are listed [here](https://pre-commit.com/hooks.html).
+Below is a comprehensive list with all hooks from {precommit} as well as their
+arguments or flags, if they take any. With the standard config file that gets
+placed in your project with `precommit::use_precommit()` all hooks should work
+out of the box, but you can further customize them as described below. Other
+repos also host hooks, many are listed
+[here](https://pre-commit.com/hooks.html).
 
 # Good to know
 
@@ -25,10 +27,12 @@ indicate for every hook if it modifies files or not.
 
 **Arguments**
 
-Arguments are specified as described in the [pre-commit.com
-documentation](https://pre-commit.com/#passing-arguments-to-hooks), e.g. we can
-set the argument `style_pkg` to `styler` and `style_fun` to `tidyverse_style`
-for the hook `style-files` like this:
+Arguments for the hooks are specified as described in the [pre-commit.com
+documentation](https://pre-commit.com/#passing-arguments-to-hooks).^[Note that
+there might be issues with arguments that contain special characters and you
+might have to quote them and the order of single, double and escaped quotes may
+not give identical results on one platform and may not be portable to all
+platforms either.] You can specify arguments like this:
 
 ```{r, echo = FALSE, output = "asis", comment = "", message = FALSE}
 library(magrittr)
@@ -38,17 +42,18 @@ repos:
 -   repo: https://github.com/lorenzwalthert/precommit
     rev: {rev}
     hooks:
-    -   id: style-files
-        args: [--style_pkg=styler, --style_fun=tidyverse_style]
+    -   id: lintr
+        args: [--warn-only, --key=value]
 "))
 ```
 
 **Other hook settings**
 
 Apart from specifying the `args` key as described above, there are other hooks
-settings you can specify. If you don't, they are inherited from the default 
-repository's configuration (i.e. the `.pre-commit-hooks.yaml` file in 
-https://github.com/lorenzwalthert/precommit). See the [pre-commit documentation](https://pre-commit.com/#pre-commit-configyaml---hooks), for the
+settings you can specify, e.g. file exclusion. If you don't, they are inherited
+from the default repository's configuration (i.e. the `.pre-commit-hooks.yaml`
+file in https://github.com/lorenzwalthert/precommit). See the [pre-commit
+documentation](https://pre-commit.com/#pre-commit-configyaml---hooks), for the
 available settings.
 
 # Hooks
@@ -56,13 +61,21 @@ available settings.
 ## `style-files`
 
 A hook to style files with [styler](https://styler.r-lib.org). Only commit code
-corresponding to the tidyverse style guide. Set argument `style_pkg` and
-`style_fun` if you want to use another style guide than the tidyverse style
-guide.
+corresponding to the tidyverse style guide. You can pass arguments to
+`style_file(...)` using the `--key=value` syntax like this:
 
 ```
   id: style-files
-  args: [--style_pkg=<styler>, --style_fun=<tidyverse_style>]
+  args: [--scope=spaces, --reindention=specify_reindention('#')]
+```
+
+Argument `style_pkg` and `style_fun` default to `styler` and `tidyverse_style`.
+If you want to use another style guide than the tidyverse style guide, you can
+specify it like this:
+
+```
+  id: style-files
+  args: [--style_pkg=pkg.with.style.guide, --style_fun=exported.style.function]
 ```
 
 This hook modifies files.
@@ -77,7 +90,7 @@ This hook does not modify files.
 ## `parsable-R`
 
 Checks if your `.R` files are "valid" R code by checking if running `parse()` on
-it returns an error.
+them returns an error.
 
 This hook does not modify files.
 
@@ -90,19 +103,19 @@ This hook does not modify files.
 
 ## `spell-check`
 
-Checks spelling with `spelling::spell_check_files()`. 
+Checks spelling with `spelling::spell_check_files()`.
 
 **Excluded files**
 
 When you invoke `precommit::use_precommit()` and `.pre-commit-config.yaml` is
-written to your repo (unless you specify `config_source` otherwise), we copy 
-the expression in the `exclude:` key from
-spell check hook the default repository's configuration (i.e. the 
-`.pre-commit-hooks.yaml` file in https://github.com/lorenzwalthert/precommit)
-into your config file, so you can easily add or remove some files. As of 
-`r paste0("v", packageVersion("precommit"))`, the following regex is used to 
-exclude files following the 
-[verbose python regex syntax](https://pre-commit.com/#regular-expressions):
+written to your repo (unless you specify `config_source` otherwise), we copy the
+expression in the `exclude:` key from spell check hook the default repository's
+configuration (i.e. the `.pre-commit-hooks.yaml` file in
+https://github.com/lorenzwalthert/precommit) into your config file, so you can
+easily add or remove some files. As of `r paste0("v",
+packageVersion("precommit"))`, the following regex is used to exclude files
+following the [verbose python regex
+syntax](https://pre-commit.com/#regular-expressions):
 
 ```{r, echo = FALSE, comment = ""}
 readLines(system.file("pre-commit-hooks.yaml", package = "precommit")) %>%
@@ -121,7 +134,6 @@ The `lang` arg will be passed to `spelling::spell_check_files()`.
 ```
 id: spell-check
 args: [--lang=<language>]
-exclude: <regular expresion>
 ```
 
 This hook does not modify input files. It will add all words not found in the
@@ -135,9 +147,8 @@ should pass.
 ## `roxygenize`
 
 A hook to run `roxygen2::roxygenize()`. Makes sure you commit your `.Rd` changes
-with the source changes. To take advantage of caching, you don't need to run 
+with the source changes. To take advantage of caching, you don't need to run
 `roxygen2::roxygenize()` manually anymore.
-
 
 This hook does not modify input files, but writes to `.Rd` files in `man/`.
 
@@ -183,13 +194,15 @@ verbose: true
 When configured this way, lintr prints lint errors as they appear. Other
 arguments are not supported. Instead, `lintr` config should be specified in a
 `.lintr` config file in Debian Control Field Format as specified in the
-[`.lintr` documentation](https://github.com/jimhester/lintr#project-configuration).
+[`.lintr`
+documentation](https://github.com/jimhester/lintr#project-configuration).
 
 This hook does not modify any file.
 
 ## `codemeta-description-updated`
 
 Make sure `DESCRIPTION` hasn't been edited more recently than `codemeta.json`,
+
 i.e. remind you to run `codemetar::write_codemeta()` in order to keep
 `codemeta.json` in sync with `DESCRIPTION`.
 
