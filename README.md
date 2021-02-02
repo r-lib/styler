@@ -28,6 +28,13 @@ The goal of this package is to twofold:
     functionality for common tasks such as installation and set-up and
     config file modification.
 
+The following online docs are available:
+
+-   [latest CRAN release](https://lorenzwalthert.github.io/precommit/).
+
+-   [GitHub development
+    version](https://lorenzwalthert.github.io/precommit/dev/).
+
 ## Installation
 
 You can install the package from CRAN:
