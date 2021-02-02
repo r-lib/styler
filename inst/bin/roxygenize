@@ -14,7 +14,11 @@ This check should run *after* check that modify the files that are passed to
 them (like styler) because they will never modify their input .R files.
 
 Usage:
-  roxygenize <files>...
+  roxygenize [--temporary-cache] <files>...
+
+Options:
+  --temporary-cache  Suppress the warning about a missing permanent cache.
+
 " -> doc
 arguments <- docopt::docopt(doc)
 
@@ -24,6 +28,7 @@ if (packageVersion('precommit') < "0.0.0.9039") {
     'Please upgrade with `remotes::install_github("lorenzwalthert/precommit")`.'
   ))
 }
+precommit::may_require_permanent_cache(arguments$temporary_cache)
 
 roxygenize_with_cache <- function(key, dirs) {
   if (precommit::diff_requires_run_roxygenize()) {

@@ -3,6 +3,7 @@
 export(autoupdate)
 export(diff_requires_run_roxygenize)
 export(install_precommit)
+export(may_require_permanent_cache)
 export(open_config)
 export(open_wordlist)
 export(path_pre_commit_exec)
