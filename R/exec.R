@@ -49,16 +49,13 @@ path_pre_commit_exec <- function(check_if_exists = TRUE) {
 #' @section Heuristic:
 #' - First check if there is an executable on the `$PATH` using
 #'   [path_derive_precommit_exec_path()]
-#' - If not, check if we can find one in a conda environment with
-#'   [path_derive_precommit_exec_conda()].
 #' - Search os dependent for other possible locations for common installation
 #'   methods.
+#' - If not, check if we can find one in a conda environment with
+#'   [path_derive_precommit_exec_conda()]. Do this last as it's the slowest.
 #' @keywords internal
 path_derive_precommit_exec <- function() {
   path <- path_derive_precommit_exec_path()
-  if (path == "") {
-    path <- path_derive_precommit_exec_conda()
-  }
   if (path == "") {
     os <- tolower(Sys.info()[["sysname"]])
     if (os == "darwin") {
@@ -68,6 +65,9 @@ path_derive_precommit_exec <- function() {
     } else if (os == "linux") {
       path <- path_derive_precommit_exec_linux()
     }
+  }
+  if (path == "") {
+    path <- path_derive_precommit_exec_conda()
   }
   path
 }
