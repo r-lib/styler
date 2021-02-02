@@ -239,7 +239,7 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
   if (!is_function_call(pd) && !is_subset_expr(pd)) {
     return(pd)
   }
-  has_force_text_before <- pd$text[next_non_comment(pd, 0)] %in% force_text_before
+  has_force_text_before <- last(pd$child[[1]]$text) %in% force_text_before
   if (has_force_text_before) {
     break_pos <- c(
       which(lag(pd$token %in% c("','", "COMMENT"))),
@@ -253,7 +253,7 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
   }
   exception_pos <- c(
     which(pd$token %in% except_token_after),
-    ifelse(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
+    ifelse(last(pd$child[[1]]$text) %in% except_text_before, break_pos, NA)
   )
   pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
   if (has_force_text_before) {
