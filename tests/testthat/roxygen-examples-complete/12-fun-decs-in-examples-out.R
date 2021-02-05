@@ -14,12 +14,12 @@
 #' }
 #' style_text("a <- function(x) { x }
 #' ", style = set_line_break_before_curly_opening_style)
-#' {
-#'   set_line_break_before_crly_opening <- function(pd_flat) {
-#'     op <- pd_flat$token %in% "'{'"
-#'     pd_flat$lag_newlines[op] <- 1L
-#'     pd_flat
-#'   }
+#' \donttest{
+#' set_line_break_before_crly_opening <- function(pd_flat) {
+#'   op <- pd_flat$token %in% "'{'"
+#'   pd_flat$lag_newlines[op] <- 1L
+#'   pd_flat
+#' }
 #' }
 #' @importFrom purrr compact
 #' @export
