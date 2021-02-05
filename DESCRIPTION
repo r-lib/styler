@@ -37,6 +37,7 @@ Suggests:
     knitr,
     prettycode,
     rmarkdown,
+    roxygen2,
     rstudioapi (>= 0.7),
     testthat (>= 2.1.0)
 VignetteBuilder: 
