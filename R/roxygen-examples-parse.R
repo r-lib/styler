@@ -34,12 +34,12 @@ parse_roxygen <- function(roxygen) {
   )
   parsed <- rlang::with_handlers(
     {
-      # dont match word boundary, check this matches all keywords
-      parse_safely(paste0(gsub("^\\\\[[:alpha:]]*\\b", "", parsed, perl = TRUE), collapse = ""))
+      parse_safely(paste0(gsub("^\\\\[[:alpha:]]*", "", parsed, perl = TRUE), collapse = ""))
       parsed
     },
     error = function(e) {
-      parsed_ <- gsub("\\\\.*\\w", "", parsed)
+      # remove \\dont* so we can display the parsing error
+      parsed_ <- gsub("\\\\[[:alpha:]]*", "", parsed)
       if (any(parsed == "}")) {
         parsed <- parsed[-last(which(parsed == "}"))]
         parsed[-last(which(parsed == "\n"))]
