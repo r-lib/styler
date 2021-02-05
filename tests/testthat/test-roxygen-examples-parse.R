@@ -2,6 +2,19 @@ context("test-roxygen-examples-parse")
 
 test_that("simple examples can be parsed", {
   expect_equal(parse_roxygen(c("#' @examples", "#' x <- 1")), "x <- 1\n")
+  expect_equal(parse_roxygen(c("#'\t@examples", "#' x <- 1")), "x <- 1\n")
+  expect_equal(parse_roxygen(c("#'@examples ", "#' x <- 1")), "x <- 1\n")
+  expect_equal(parse_roxygen(c("#'@examples \t", "#' x <- 1")), "x <- 1\n")
+  expect_equal(parse_roxygen(c("#'\t@examples \t", "#' x <- 1")), "x <- 1\n")
+  expect_equal(parse_roxygen(c("#' \t@examples \t", "#' x <- 1")), "x <- 1\n")
+
+  # with code on same line
+  expect_equal(parse_roxygen(c("#' @examples 2", "#' x <- 1")), c("2\n", "x <- 1\n"))
+  expect_equal(parse_roxygen(c("#'\t@examples 2", "#' x <- 1")), c("2\n", "x <- 1\n"))
+  expect_equal(parse_roxygen(c("#'@examples  2", "#' x <- 1")), c("2\n", "x <- 1\n"))
+  expect_equal(parse_roxygen(c("#'@examples \t 2", "#' x <- 1")), c("2\n", "x <- 1\n"))
+  expect_equal(parse_roxygen(c("#'\t@examples \t 2", "#' x <- 1")), c("2\n", "x <- 1\n"))
+  expect_equal(parse_roxygen(c("#' \t@examples \t2", "#' x <- 1")), c("2\n", "x <- 1\n"))
 })
 
 test_that("donts can be parsed", {

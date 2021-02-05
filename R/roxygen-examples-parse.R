@@ -17,7 +17,7 @@
 parse_roxygen <- function(roxygen) {
   roxygen <- c(
     "#' Example", "#' @examples",
-    gsub("^#'\\s*@examples\\s*(.*)", "#' \\1", roxygen, perl = TRUE),
+    gsub("^#'\\s*@examples\\s*(.*)", "#' \\1", roxygen),
     "x <- 1"
   )
 
