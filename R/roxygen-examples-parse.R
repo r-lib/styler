@@ -43,11 +43,12 @@ parse_roxygen <- function(roxygen) {
       if (any(parsed == "}")) {
         parsed[-last(which(parsed == "}"))]
       } else {
-        parse_safely(gsub("\\\\.*\\w", "", parsed)) # this will error informatively
+        parse_safely(gsub("\\\\.*\\w", "", parsed_)) # this will error informatively
       }
     }
   )
-  parsed <- parsed[parsed != ""]
+  parsed <- parsed[parsed != ""] %>%
+    ensure_last_n_are_character(n = 1, char = "\n")
   is_line_break <- parsed[1] == "\n"
   close(connection)
   c(parsed[1][!is_line_break], parsed[-1])

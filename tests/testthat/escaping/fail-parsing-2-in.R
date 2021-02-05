@@ -1,4 +1,5 @@
 #' Example
 #'
 #' @examples
+#' x <-
 NULL
