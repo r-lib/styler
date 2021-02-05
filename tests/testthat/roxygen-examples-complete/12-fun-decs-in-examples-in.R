@@ -43,3 +43,35 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
   ) %>%
     map(compact)
 }
+
+#' Another
+#' @examples
+#' \donttest{
+#' op= pd_flat$token %in% "'('"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "')'"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in%  "("
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% ")"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "{"
+#' }
+#' \donttest{
+#' op<- pd_flat$token %in% "}"
+#' }
+#' op <-pd_flat$token %in% "'['"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "']'"
+#' }
+#' \donttest{
+#' op <- pd_flat$token%in% "["
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in%"]"
+NULL
