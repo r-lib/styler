@@ -1,0 +1,9 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--COMMENT: #' Ex [0/0] {1}                           
+ ¦--COMMENT: #' [1/0] {2}                              
+ ¦--COMMENT: #' @e [1/0] {3}                           
+ ¦--COMMENT: #' fu [1/0] {4}                           
+ ¦--COMMENT: #' [1/0] {5}                              
+ ¦--COMMENT: #' } [1/0] {6}                            
+ °--expr: NULL [1/0] {8}                               
+     °--NULL_CONST: NULL [0/0] {7}                     
