@@ -61,7 +61,6 @@ test_that("braces examples can be parsed", {
       "\\donttest", "{", "\n",
       "fu(x = 3)\n",
       "}",
-      "\n",
       "\n"
     )
   )
@@ -80,7 +79,7 @@ test_that("braces examples can be parsed", {
       "x <- '", "{", "'\n",
       "\\dontrun", "{", "\n",
       "fu(x = 3)\n",
-      "}", "\n", "\n"
+      "}", "\n"
     )
   )
 })

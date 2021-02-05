@@ -41,14 +41,14 @@ parse_roxygen <- function(roxygen) {
     error = function(e) {
       parsed_ <- gsub("\\\\.*\\w", "", parsed)
       if (any(parsed == "}")) {
-        parsed[-last(which(parsed == "}"))]
+        parsed <- parsed[-last(which(parsed == "}"))]
+        parsed[-last(which(parsed == "\n"))]
       } else {
         parse_safely(gsub("\\\\.*\\w", "", parsed_)) # this will error informatively
       }
     }
   )
-  parsed <- parsed[parsed != ""] %>%
-    ensure_last_n_are_character(n = 1, char = "\n")
+  parsed <- parsed[parsed != ""]
   is_line_break <- parsed[1] == "\n"
   close(connection)
   c(parsed[1][!is_line_break], parsed[-1])
