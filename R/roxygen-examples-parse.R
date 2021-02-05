@@ -34,7 +34,7 @@ parse_roxygen <- function(roxygen) {
   )
   parsed <- rlang::with_handlers(
     {
-      parse_safely(paste0(gsub("^\\\\[[:alpha:]]*", "", parsed, perl = TRUE), collapse = ""))
+      parse_safely(paste0(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
       parsed
     },
     error = function(e) {
@@ -48,7 +48,6 @@ parse_roxygen <- function(roxygen) {
       }
     }
   )
-  parsed <- parsed[parsed != ""]
   is_line_break <- parsed[1] == "\n"
   close(connection)
   c(parsed[1][!is_line_break], parsed[-1])
