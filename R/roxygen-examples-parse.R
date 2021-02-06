@@ -134,7 +134,8 @@ emulate_rd <- function(roxygen) {
 #' Check if rd emulation is required with [roxygen2::roc_proc_text()]
 #' @keywords internal
 needs_rd_emulation <- function(roxygen) {
-  any(grepl("\\\\|%", roxygen))
+  # escape characters \ and % count, but not macros like \dontrun
+  any(grepl("\\\\|%", gsub("^#'\\s*\\\\[[:alpha:]]*", "", roxygen)))
 }
 
 #' Changing the line definition
