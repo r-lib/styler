@@ -15,42 +15,111 @@
 #' ))
 #' @keywords internal
 parse_roxygen <- function(roxygen) {
-  roxygen <- c(
-    "#' Example", "#' @examples",
-    gsub("^#'\\s*@examples\\s*(.*)", "#' \\1", roxygen),
-    "x <- 1"
-  )
-
-  connection <- roxygen2::roc_proc_text(
-    roxygen2::rd_roclet(),
-    paste(roxygen, collapse = "\n")
-  )[[1]]$get_section("examples") %>%
-    as.character() %>%
-    .[-1] %>%
-    textConnection()
+  connection <- textConnection(emulate_rd(roxygen))
   suppressWarnings(
     parsed <- tools::parse_Rd(connection, fragment = TRUE) %>%
       as.character(deparse = FALSE)
   )
+  parsed <- roxygen_remove_extra_brace(parsed)
+  is_line_break <- parsed[1] == "\n"
+  close(connection)
+  c(parsed[1][!is_line_break], parsed[-1])
+}
+
+#' Fix [tools::parse_Rd()] output
+#'
+#' Since [tools::parse_Rd()] treats braces in quotes as literal braces when
+#' determining brace symmetry, a brace might be added in error to the parsed
+#' data (at the end). We'll remove one at the time, check if output is parsable
+#' until no braces are left. If we end up with no braces left, we signal a
+#' parsing error, otherwise, we return the initial (not parsable input due to
+#' *dont* sequence) with the trailing braces removed.
+#' @examples
+#' parse_roxygen(
+#'   c(
+#'     "#' @examples",
+#'     "#' x <- '{'",
+#'     "#' \\dontrun{",
+#'     "#' fu(x = 3)",
+#'     "#' }"
+#'   )
+#' )
+#' @keywords internal
+roxygen_remove_extra_brace <- function(parsed) {
   parsed <- rlang::with_handlers(
     {
       parse_safely(paste0(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
       parsed
     },
     error = function(e) {
-      # remove \\dont* so we can display the parsing error
+      # might have extra braces that are not needed: try to remove them
+
+      # if fails, you need initial input for best error message
       parsed_ <- gsub("\\\\[[:alpha:]]*", "", parsed)
       if (any(parsed == "}")) {
-        parsed <- parsed[-last(which(parsed == "}"))]
-        parsed[-last(which(parsed == "\n"))]
+        # try to remove one and see if you can parse. If not, another one, until
+        # you don't have any brace left.
+        worth_trying_to_remove_brace <- TRUE
+        while (worth_trying_to_remove_brace) {
+          # remove brace
+          parsed <- parsed[-last(which(parsed == "}"))]
+          parsed <- parsed[-last(which(parsed == "\n"))]
+          # try if can be parsed (need remve dontrun)
+          worth_trying_to_remove_brace <- rlang::with_handlers(
+            {
+              parse_safely(gsub("\\\\[[:alpha:]]*", "", parsed)) # this will error informatively
+              FALSE # if parsing succeeds, we can stop tryint to remove brace and move on with parsed
+            },
+            error = function(...) {
+              # continue if braces are left, otherwise give up
+              if (any(last(parsed) %in% c("}", "\n"))) {
+                TRUE
+              } else {
+                # this will error informatively. If not, outer loop will fail informatively
+                parse_safely(gsub("\\\\[[:alpha:]]*", "", parsed_))
+                FALSE
+              }
+            }
+          )
+        }
       } else {
-        parse_safely(gsub("\\\\.*\\w", "", parsed_)) # this will error informatively
+        parse_safely(gsub("\\\\[[:alpha:]]*", "", parsed_)) # this will error informatively
       }
+      parsed
     }
   )
-  is_line_break <- parsed[1] == "\n"
-  close(connection)
-  c(parsed[1][!is_line_break], parsed[-1])
+}
+
+#' Convert roxygen comments to Rd code
+#'
+#' We leverage roxygen2 workhorse function [roxygen2::roc_proc_text()] if
+#' our input contains character that have to be escaped. Since this is an
+#' expensive operation, we opt out of it and perform a simple
+#' [remove_roxygen_mask()] when there are no characters to escape.
+#' @keywords internal
+emulate_rd <- function(roxygen) {
+  if (needs_rd_emulation(roxygen)) {
+    roxygen <- c(
+      "#' Example", "#' @examples",
+      gsub("^#'\\s*@examples\\s*(.*)", "#' \\1", roxygen),
+      "x <- 1"
+    )
+
+    roxygen2::roc_proc_text(
+      roxygen2::rd_roclet(),
+      paste(roxygen, collapse = "\n")
+    )[[1]]$get_section("examples") %>%
+      as.character() %>%
+      .[-1]
+  } else {
+    remove_roxygen_mask(roxygen)
+  }
+}
+
+#' Check if rd emulation is required with [roxygen2::roc_proc_text()]
+#' @keywords internal
+needs_rd_emulation <- function(roxygen) {
+  any(grepl("\\\\|%", roxygen))
 }
 
 #' Changing the line definition
