@@ -35,7 +35,7 @@ parse_roxygen <- function(roxygen) {
 #' parsing error, otherwise, we return the initial (not parsable input due to
 #' *dont* sequence) with the trailing braces removed.
 #' @examples
-#' parse_roxygen(
+#' styler:::parse_roxygen(
 #'   c(
 #'     "#' @examples",
 #'     "#' x <- '{'",
@@ -44,7 +44,7 @@ parse_roxygen <- function(roxygen) {
 #'     "#' }"
 #'   )
 #' )
-#' parse_roxygen(
+#' styler:::parse_roxygen(
 #'   c(
 #'     "#' @examples",
 #'     "#' x <- '{'",
