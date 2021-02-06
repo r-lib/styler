@@ -28,7 +28,7 @@ test_that("donts can be parsed", {
       c(
         "#' @examples",
         "#' \\donttest{",
-        "#' fu(x = 3)\n", "#' }"
+        "#' fu(x = 3)", "#' }"
       )
     ),
     c(
@@ -46,7 +46,7 @@ test_that("Duplicate tags can be parsed", {
     parse_roxygen(
       c(
         "#' @examples",
-        "#' fu(x = 3)\n",
+        "#' fu(x = 3)",
         "#'@examples # more",
         "#' x == 3"
       )
@@ -66,7 +66,7 @@ test_that("braces examples can be parsed", {
         "#' @examples",
         "#' x <- '{'",
         "#' \\donttest{",
-        "#' fu(x = 3)\n", "#' }"
+        "#' fu(x = 3)", "#' }"
       )
     ),
     c(
@@ -85,7 +85,7 @@ test_that("braces examples can be parsed", {
         "#' @examples",
         "#' x <- '{'",
         "#' \\dontrun{",
-        "#' fu(x = 3)\n",
+        "#' fu(x = 3)",
         "#' }"
       )
     ),
@@ -94,6 +94,41 @@ test_that("braces examples can be parsed", {
       "\\dontrun", "{", "\n",
       "fu(x = 3)\n",
       "}", "\n"
+    )
+  )
+
+  expect_equal(
+    parse_roxygen(
+      c(
+        "#' @examples",
+        "#' x <- '{'",
+        "#' \\dontrun{",
+        "#' c('{', \"'{{{\" ,\"[\")",
+        "#' }"
+      )
+    ),
+    c(
+      "x <- '", "", "{", "'\n",
+      "\\dontrun", "{", "\n",
+      "c('{', \"'{{{\" ,\"[\")\n",
+      "}\n"
+    )
+  )
+  expect_equal(
+    parse_roxygen(
+      c(
+        "#' @examples",
+        "#' x <- '{'",
+        "#' \\dontrun{",
+        "#' x<-'{'",
+        "#' }"
+      )
+    ),
+    c(
+      "x <- '", "", "{", "'\n",
+      "\\dontrun", "{", "\n",
+      "x<-'{'\n",
+      "}\n"
     )
   )
 })
