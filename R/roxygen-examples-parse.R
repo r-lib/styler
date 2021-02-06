@@ -57,18 +57,19 @@ parse_roxygen <- function(roxygen) {
 roxygen_remove_extra_brace <- function(parsed) {
   parsed <- rlang::with_handlers(
     {
-      parse_safely(paste0(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
+      parse(text = paste0(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
       parsed
     },
     error = function(e) {
       # might have extra braces that are not needed: try to remove them
 
       # if fails, you need initial input for best error message
-      parsed_ <- gsub("\\\\[[:alpha:]]+", "", parsed)
-      if (any(parsed == "}")) {
+      parsed_ <- gsub("^\\\\[[:alpha:]]+", "", parsed)
+      worth_trying_to_remove_brace <- any(parsed == "}")
+      if (worth_trying_to_remove_brace) {
         # try to remove one and see if you can parse. If not, another one, until
         # you don't have any brace left.
-        worth_trying_to_remove_brace <- TRUE
+
         while (worth_trying_to_remove_brace) {
           # remove brace
           brace <- which(parsed == "}")
@@ -82,7 +83,7 @@ roxygen_remove_extra_brace <- function(parsed) {
           # try if can be parsed (need remve dontrun)
           worth_trying_to_remove_brace <- rlang::with_handlers(
             {
-              parse_safely(gsub("\\\\[[:alpha:]]+", "", parsed)) # this will error informatively
+              parse(text = gsub("^\\\\[[:alpha:]]+", "", parsed)) # this will error informatively
               FALSE # if parsing succeeds, we can stop tryint to remove brace and move on with parsed
             },
             error = function(...) {
@@ -91,14 +92,14 @@ roxygen_remove_extra_brace <- function(parsed) {
                 TRUE
               } else {
                 # this will error informatively. If not, outer loop will fail informatively
-                parse_safely(gsub("\\\\[[:alpha:]]+", "", parsed_))
+                parse(text = gsub("^\\\\[[:alpha:]]+", "", parsed_))
                 FALSE
               }
             }
           )
         }
       } else {
-        parse_safely(gsub("\\\\[[:alpha:]]*", "", parsed_)) # this will error informatively
+        parse(text = gsub("^\\\\[[:alpha:]]*", "", parsed_)) # this will error informatively
       }
       parsed
     }
