@@ -10,4 +10,12 @@ test_that("escaping of characters works", {
   expect_error(test_collection("escaping", "fail-parsing-2",
     transformer = style_text
   ), "x <-")
+
+  expect_error(test_collection("escaping", "fail-parsing-3",
+    transformer = style_text
+  ), "<text>:3:3: unexpected input\n2")
+
+  expect_error(test_collection("escaping", "fail-parsing-4",
+    transformer = style_text
+  ), "<text>:6:0:")
 })
