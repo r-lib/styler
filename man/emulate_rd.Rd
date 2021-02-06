@@ -10,6 +10,6 @@ emulate_rd(roxygen)
 We leverage roxygen2 workhorse function \code{\link[roxygen2:roc_proc_text]{roxygen2::roc_proc_text()}} if
 our input contains character that have to be escaped. Since this is an
 expensive operation, we opt out of it and perform a simple
-\code{\link[=remove_roxygen_mask]{remove_roxygen_mask()}} when there are no characters to escape.
+\code{remove_roxygen_mask()} when there are no characters to escape.
 }
 \keyword{internal}

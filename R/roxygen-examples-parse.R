@@ -110,7 +110,7 @@ roxygen_remove_extra_brace <- function(parsed) {
 #' We leverage roxygen2 workhorse function [roxygen2::roc_proc_text()] if
 #' our input contains character that have to be escaped. Since this is an
 #' expensive operation, we opt out of it and perform a simple
-#' [remove_roxygen_mask()] when there are no characters to escape.
+#' `remove_roxygen_mask()` when there are no characters to escape.
 #' @keywords internal
 emulate_rd <- function(roxygen) {
   if (needs_rd_emulation(roxygen)) {
