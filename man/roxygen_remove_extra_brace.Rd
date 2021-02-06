@@ -24,5 +24,14 @@ parse_roxygen(
     "#' }"
   )
 )
+parse_roxygen(
+  c(
+    "#' @examples",
+    "#' x <- '{'",
+    "#' \\\\dontrun{",
+    "#' c('{', \"'{{{\" ,\"[\")",
+    "#' }"
+  )
+)
 }
 \keyword{internal}

@@ -164,4 +164,24 @@ test_that("braces examples can be parsed", {
       "}", "\n"
     )
   )
+
+  expect_equal(
+    parse_roxygen(c(
+      "#' @examples",
+      "#' parse_roxygen(",
+      "#'   c(",
+      "#'     \"#' @examples\",",
+      "#'     \"#' c(\\\"'{{{\\\")\"",
+      "#'   )",
+      "#' )"
+    )),
+    c(
+      "parse_roxygen(\n",
+      "  c(\n",
+      "    \"#' @examples\",\n",
+      "    \"#' c(\\\"'", "", "{", "", "{", "", "{", "\\\")\"\n",
+      "  )\n",
+      ")\n"
+    )
+  )
 })
