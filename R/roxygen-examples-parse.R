@@ -16,11 +16,21 @@
 #' @keywords internal
 parse_roxygen <- function(roxygen) {
   connection <- textConnection(emulate_rd(roxygen))
-  suppressWarnings(
-    parsed <- tools::parse_Rd(connection, fragment = TRUE) %>%
-      as.character(deparse = FALSE)
+  had_warning <- FALSE
+  parsed <- withCallingHandlers(
+    {
+      parsed <- as.character(tools::parse_Rd(connection, fragment = TRUE), deparse = FALSE)
+      if (had_warning) {
+        roxygen_remove_extra_brace(parsed)
+      } else {
+        parsed
+      }
+    },
+    warning = function(w) {
+      had_warning <<- TRUE
+      invokeRestart("muffleWarning")
+    }
   )
-  # parsed <- roxygen_remove_extra_brace(parsed)
   is_line_break <- parsed[1] == "\n"
   close(connection)
   c(parsed[1][!is_line_break], parsed[-1])
