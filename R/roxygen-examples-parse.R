@@ -20,7 +20,7 @@ parse_roxygen <- function(roxygen) {
     parsed <- tools::parse_Rd(connection, fragment = TRUE) %>%
       as.character(deparse = FALSE)
   )
-  parsed <- roxygen_remove_extra_brace(parsed)
+  # parsed <- roxygen_remove_extra_brace(parsed)
   is_line_break <- parsed[1] == "\n"
   close(connection)
   c(parsed[1][!is_line_break], parsed[-1])
