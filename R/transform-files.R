@@ -160,6 +160,13 @@ parse_transform_serialize_roxygen <- function(text, transformers, base_indention
   if (length(roxygen_seqs) < 1L) {
     return(text)
   }
+  if (!rlang::is_installed("roxygen2")) {
+    rlang::abort(paste0(
+      "To style roxygen code examples, you need to have the package ",
+      "`{roxygen2}` installed. To exclude them from styling, set ",
+      "`include_roxygen_examples = FALSE`."
+    ))
+  }
   split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
   map_at(split_segments$separated, split_segments$selectors,
     style_roxygen_code_example,

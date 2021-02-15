@@ -1,5 +1,21 @@
 test_that("escaping of characters works", {
-  expect_warning(test_collection("escaping",
+  expect_warning(test_collection("escaping", "basic",
     transformer = style_text
-  ), "macro '")
+  ), NA)
+
+  expect_error(test_collection("escaping", "fail-parsing-1",
+    transformer = style_text
+  ), "<text>:1:7: unexpected ")
+
+  expect_error(test_collection("escaping", "fail-parsing-2",
+    transformer = style_text
+  ), "x <-")
+
+  expect_error(test_collection("escaping", "fail-parsing-3",
+    transformer = style_text
+  ), "<text>:1:3: unexpected input\n1: 1 _\n")
+
+  expect_error(test_collection("escaping", "fail-parsing-4",
+    transformer = style_text
+  ), "<text>:6:0:")
 })

@@ -14,6 +14,13 @@
 #' }
 #' style_text("a <- function(x) { x }
 #' ", style = set_line_break_before_curly_opening_style)
+#' \donttest{
+#' set_line_break_before_crly_opening <- function(pd_flat) {
+#'   op <- pd_flat$token %in% "'{'"
+#'   pd_flat$lag_newlines[op] <- 1L
+#'   pd_flat
+#' }
+#' }
 #' @importFrom purrr compact
 #' @export
 create_style_guide <- function(initialize = default_style_guide_attributes,
@@ -36,3 +43,35 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
   ) %>%
     map(compact)
 }
+
+#' Another
+#' @examples
+#' \donttest{
+#' op <- pd_flat$token %in% "'('"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "')'"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "("
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% ")"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "{"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "}"
+#' }
+#' op <- pd_flat$token %in% "'['"
+#' \donttest{
+#' op <- pd_flat$token %in% "']'"
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "["
+#' }
+#' \donttest{
+#' op <- pd_flat$token %in% "]"
+#' }
+NULL

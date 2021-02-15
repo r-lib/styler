@@ -197,6 +197,10 @@ Thanks to all contributors involved, in particular
 
 ## Minor improvements and fixes
 
+* Roxygen code examples: leverage `roxygen2` for correct
+  escaping of expressions that contain `\`, in particular in `dontrun{}` and 
+  friends, allow quoted braces that are not matched (#729).
+  
 * Brace expressions in function calls are formatted in a less compact way to
   improve readability. Typical use case: `tryCatch()` (#543).
 

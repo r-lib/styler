@@ -1,0 +1,7 @@
+#' Example
+#'
+#' @examples
+#' fun() {
+#'
+#' }
+NULL
