@@ -187,6 +187,9 @@
     <loc>https://styler.r-lib.org/reference/drop_cached_children.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/emulate_rd.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/enhance_mapping_special.html</loc>
   </url>
   <url>
@@ -331,6 +334,9 @@
     <loc>https://styler.r-lib.org/reference/needs_indention_one.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/needs_rd_emulation.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/nest_parse_data.html</loc>
   </url>
   <url>
@@ -407,6 +413,9 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/rep_char.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/reference/roxygen_remove_extra_brace.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/save_after_styling_is_active.html</loc>

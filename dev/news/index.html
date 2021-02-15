@@ -325,6 +325,7 @@ style_text("1 # comment")
 <h2 class="hasAnchor">
 <a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
+<li><p>Roxygen code examples: leverage <code>roxygen2</code> for correct escaping of expressions that contain <code>\</code>, in particular in <code>dontrun{}</code> and friends, allow quoted braces that are not matched (<a href='https://github.com/r-lib/styler/issues/729'>#729</a>).</p></li>
 <li><p>Brace expressions in function calls are formatted in a less compact way to improve readability. Typical use case: <code><a href="https://rdrr.io/r/base/conditions.html">tryCatch()</a></code> (<a href='https://github.com/r-lib/styler/issues/543'>#543</a>).</p></li>
 <li><p>Arguments in function declarations in a context which is indented multiple times should now be correct. This typically affects <code><a href="https://r6.r-lib.org/reference/R6Class.html">R6::R6Class()</a></code> (<a href='https://github.com/r-lib/styler/issues/546'>#546</a>).</p></li>
 <li><p>Escape characters in roxygen code examples are now correctly escaped (<a href='https://github.com/r-lib/styler/issues/512'>#512</a>).</p></li>
