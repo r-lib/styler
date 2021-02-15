@@ -58,7 +58,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: lorenzwalthert/here
-          ref: 767cb616e992191dabe329a39548da6fca32b633
+          ref: 98ba67fcaa241ac1f2a3ebaf3c3a70a3c8fffdd3
           path: touchstone/sources/here
       - name: Prepare PR comment
         run: |
