@@ -24,6 +24,7 @@ test_that("R api works", {
 })
 
 test_that("CLI API works for style-files", {
+  skip_if(is_windows(), "env not supported in system2 on Windows")
   R.cache_root <- fs::file_temp("R.cache")
   fs::dir_create(R.cache_root)
   run_test(
@@ -44,13 +45,9 @@ test_that("CLI API works for style-files", {
 })
 
 test_that("CLI API works for roxygenize", {
+  skip_if(is_windows(), "env not supported in system2 on Windows")
   R.cache_root <- fs::file_temp("R.cache")
   fs::dir_create(R.cache_root)
-  # run_test("deps-in-desc",
-  #          "deps-in-desc-dot3",
-  #          suffix = "-fail.R", error_msg = "Dependency check failed",
-  #          copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
-  # )
   run_test(
     "roxygenize",
     suffix = "-cache-success.R",
