@@ -27,9 +27,9 @@ if (packageVersion('precommit') < "0.0.0.9039") {
     "This hooks only works with the R package {precommit} >= 0.0.0.9039",
     'Please upgrade with `remotes::install_github("lorenzwalthert/precommit")`.'
   ))
+} else {
+  precommit::may_require_permanent_cache(arguments$temporary_cache)
 }
-
-# precommit::may_require_permanent_cache(arguments$temporary_cache)
 
 roxygenize_with_cache <- function(key, dirs) {
   if (precommit::diff_requires_run_roxygenize()) {
