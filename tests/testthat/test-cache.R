@@ -1,5 +1,4 @@
 test_that("R api works", {
-  skip_if(TRUE, "see if test-cache.R causes side effects that make other tests fail")
   withr::with_options(
     list(R.cache.rootPath = fs::file_temp(".Rcache")),
     {
@@ -25,8 +24,6 @@ test_that("R api works", {
 })
 
 test_that("CLI API works for style-files", {
-  skip_if(TRUE, "see if test-cache.R causes side effects that make other tests fail")
-
   R.cache_root <- fs::file_temp("R.cache")
   fs::dir_create(R.cache_root)
   run_test(
@@ -47,8 +44,6 @@ test_that("CLI API works for style-files", {
 })
 
 test_that("CLI API works for roxygenize", {
-  skip_if(TRUE, "see if test-cache.R causes side effects that make other tests fail")
-
   R.cache_root <- fs::file_temp("R.cache")
   fs::dir_create(R.cache_root)
   # run_test("deps-in-desc",
