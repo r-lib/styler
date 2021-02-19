@@ -54,6 +54,7 @@ test_that("change in formals alone triggers invalidation", {
   withr::with_tempdir({
     fs::dir_create("R")
     git2r::init(".")
+    git2r::config(user.name = "testthat", user.email = "no-reply@testthat.com")
     # when new lines are added
     text <- c("#' Roxygen comment", "#'", "#' more things", "x <- function(a = 2) {", "  a", "}")
     writeLines(text, "R/fifth.R")
