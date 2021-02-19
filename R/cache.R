@@ -1,9 +1,14 @@
 #' Check if the R cache is persistent
 has_persistent_R.cache <- function() {
+  temp_dirs <- path_if_exist(
+    fs::path_norm(fs::path_dir(tempdir())),
+    "/tmp", "/var/tmp"
+  )
   !fs::path_has_parent(
     fs::path_norm(R.cache::getCacheRootPath()), # when no cache exists, it create temp cache
-    fs::path_norm(fs::path_dir(tempdir()))
-  )
+    temp_dirs
+  ) %>%
+    any()
 }
 
 #' Issue a warning if `{R.cache}` uses temporary cache only
