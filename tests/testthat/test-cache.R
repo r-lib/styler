@@ -1,19 +1,19 @@
 test_that("R api works", {
   withr::with_options(
-    list(R.cache.rootPath = fs::path_temp(".Rcache")),
+    list(R.cache.rootPath = fs::file_temp(".Rcache")),
     {
       expect_false(has_persistent_R.cache())
     }
   )
   withr::with_options(
-    list(R.cache.rootPath = fs::path_temp(".Rcache")),
+    list(R.cache.rootPath = fs::file_temp(".Rcache")),
     {
       expect_output(may_require_permanent_cache(), "This means you")
     }
   )
 
   withr::with_options(
-    list(R.cache.rootPath = fs::path_temp(".Rcache")),
+    list(R.cache.rootPath = fs::file_temp(".Rcache")),
     {
       expect_output(
         may_require_permanent_cache(temporary_cache = TRUE),
@@ -24,7 +24,7 @@ test_that("R api works", {
 })
 
 test_that("CLI API works for style-files", {
-  R.cache_root <- fs::path_temp("R.cache")
+  R.cache_root <- fs::file_temp("R.cache")
   fs::dir_create(R.cache_root)
   run_test(
     "style-files",
@@ -44,7 +44,7 @@ test_that("CLI API works for style-files", {
 })
 
 test_that("CLI API works for roxygenize", {
-  R.cache_root <- fs::path_temp("R.cache")
+  R.cache_root <- fs::file_temp("R.cache")
   fs::dir_create(R.cache_root)
   # run_test("deps-in-desc",
   #          "deps-in-desc-dot3",
