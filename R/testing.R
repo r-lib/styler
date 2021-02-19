@@ -34,9 +34,11 @@ run_test <- function(hook_name,
                      file_name = hook_name,
                      suffix = ".R",
                      error_msg = NULL,
+                     msg = NULL,
                      cmd_args = NULL,
                      copy = NULL,
-                     file_transformer = function(files) files) {
+                     file_transformer = function(files) files,
+                     env = character()) {
   path_executable <- system.file(
     fs::path("bin", hook_name),
     package = "precommit"
@@ -46,9 +48,11 @@ run_test <- function(hook_name,
   run_test_impl(
     path_executable, path_candidate[1],
     error_msg = error_msg,
+    msg = msg,
     cmd_args = cmd_args,
     copy = copy,
-    file_transformer = file_transformer
+    file_transformer = file_transformer,
+    env = env
   )
 }
 
@@ -66,17 +70,21 @@ run_test <- function(hook_name,
 #'   to the place where the artifact is currently stored.
 #' @param error_msg An expected error message. If no error is expected, this
 #'   can be `NULL`. In that case, the `comparator` is applied.
+#' @param msg The expected stdout message. If `NULL`, this check is omitted.
 #' @param cmd_args More arguments passed to the file. Pre-commit handles it as
 #'   described [here](https://pre-commit.com/#arguments-pattern-in-hooks).
+#' @param env The environment variables to set with [base::system2()].
 #' @keywords internal
 run_test_impl <- function(path_executable,
                           path_candidate,
                           error_msg,
+                          msg,
                           cmd_args,
                           copy,
-                          file_transformer) {
+                          file_transformer,
+                          env) {
   expect_success <- is.null(error_msg)
-  tempdir <- tempdir()
+  tempdir <- fs::dir_create(fs::file_temp())
   if (!is.null(copy)) {
     if (is.null(names(copy))) {
       # no names, take basename
@@ -93,9 +101,13 @@ run_test_impl <- function(path_executable,
   }
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
   fs::file_copy(path_candidate, path_candidate_temp, overwrite = TRUE)
-  path_candidate_temp <- file_transformer(path_candidate_temp)
+  path_candidate_temp <- withr::with_dir(
+    fs::path_dir(path_candidate_temp),
+    file_transformer(path_candidate_temp)
+  )
   withr::defer(fs::file_delete(path_candidate_temp))
   path_stderr <- tempfile()
+  path_stdout <- tempfile()
   status <- withr::with_dir(
     fs::path_dir(path_candidate_temp),
     {
@@ -103,14 +115,17 @@ run_test_impl <- function(path_executable,
       # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
       system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
         args = c(path_executable, cmd_args, files),
-        stderr = path_stderr
+        stderr = path_stderr, stdout = path_stdout, env = env
       )
     }
   )
   candidate <- readLines(path_candidate_temp)
   path_temp <- tempfile()
   fs::file_copy(path_candidate, path_temp)
-  path_temp <- file_transformer(path_temp)
+  path_temp <- withr::with_dir(
+    fs::path_dir(path_candidate_temp),
+    file_transformer(path_temp)
+  )
   reference <- readLines(path_temp)
   if (expect_success) {
     # file not changed + no stderr
@@ -119,6 +134,13 @@ run_test_impl <- function(path_executable,
       testthat::fail("Expected: No error. Found:", contents)
     }
     testthat::expect_equivalent(candidate, reference)
+    if (!is.null(msg)) {
+      contents <- readLines(path_stdout)
+      testthat::expect_match(
+        paste(contents, collapse = "\n"), msg,
+        fixed = TRUE
+      )
+    }
   } else if (!expect_success) {
     # either file changed or stderr
     if (is.na(error_msg)) {

@@ -9,9 +9,11 @@ run_test(
   file_name = hook_name,
   suffix = ".R",
   error_msg = NULL,
+  msg = NULL,
   cmd_args = NULL,
   copy = NULL,
-  file_transformer = function(files) files
+  file_transformer = function(files) files,
+  env = character()
 )
 }
 \arguments{
@@ -23,6 +25,8 @@ run_test(
 
 \item{error_msg}{An expected error message. If no error is expected, this
 can be \code{NULL}. In that case, the \code{comparator} is applied.}
+
+\item{msg}{The expected stdout message. If \code{NULL}, this check is omitted.}
 
 \item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
 described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
@@ -44,6 +48,8 @@ file because it must be called \code{.Rprofile} all the time. And R CMD check
 seems to remove hidden files, so we must also rename it. The transformation
 is also applied to a temp copy of the reference file before a comparison is
 made.}
+
+\item{env}{The environment variables to set with \code{\link[base:system2]{base::system2()}}.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in

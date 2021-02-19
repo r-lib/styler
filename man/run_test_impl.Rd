@@ -8,9 +8,11 @@ run_test_impl(
   path_executable,
   path_candidate,
   error_msg,
+  msg,
   cmd_args,
   copy,
-  file_transformer
+  file_transformer,
+  env
 )
 }
 \arguments{
@@ -22,6 +24,8 @@ executable.}
 \item{error_msg}{An expected error message. If no error is expected, this
 can be \code{NULL}. In that case, the \code{comparator} is applied.}
 
+\item{msg}{The expected stdout message. If \code{NULL}, this check is omitted.}
+
 \item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
 described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
 
@@ -32,6 +36,8 @@ you can pass a named vector. The name is the target directory relative to
 the temp directory where the hook is executed (the temp directory will be
 the working directory at that time) and the value is the path that points
 to the place where the artifact is currently stored.}
+
+\item{env}{The environment variables to set with \code{\link[base:system2]{base::system2()}}.}
 }
 \description{
 Implement a test run
