@@ -25,7 +25,7 @@ test_that("R api works", {
 
 test_that("CLI API works for style-files", {
   skip_if(is_windows(), "env not supported in system2 on Windows")
-  R.cache_root <- fs::file_temp("R.cache")
+  R.cache_root <- fs::path_abs(fs::file_temp("R.cacheTemp"))
   fs::dir_create(R.cache_root)
   run_test(
     "style-files",
@@ -33,7 +33,7 @@ test_that("CLI API works for style-files", {
     env = paste0("R_CACHE_ROOTPATH=", R.cache_root),
     msg = "You can silent this"
   )
-  R.cache_root <- fs::dir_create("R.cache")
+  R.cache_root <- fs::path_abs(fs::dir_create("R.cachePerm"))
   fs::dir_create(R.cache_root)
   withr::defer(fs::dir_delete(R.cache_root))
   run_test(
@@ -46,7 +46,7 @@ test_that("CLI API works for style-files", {
 
 test_that("CLI API works for roxygenize", {
   skip_if(is_windows(), "env not supported in system2 on Windows")
-  R.cache_root <- fs::file_temp("R.cache")
+  R.cache_root <- fs::path_abs(fs::file_temp("R.cacheTemp"))
   fs::dir_create(R.cache_root)
   run_test(
     "roxygenize",
@@ -59,7 +59,7 @@ test_that("CLI API works for roxygenize", {
       x
     }
   )
-  R.cache_root <- fs::dir_create("R.cache")
+  R.cache_root <- fs::path_abs(fs::dir_create("R.cachePerm"))
   fs::dir_create(R.cache_root)
   withr::defer(fs::dir_delete(R.cache_root))
   run_test(
