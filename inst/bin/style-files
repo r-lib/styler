@@ -37,7 +37,7 @@ if (packageVersion("styler") < "1.3.2") {
   )
 }
 
-precommit::may_require_permanent_cache(arguments$temporary_cache)
+# precommit::may_require_permanent_cache(arguments$temporary_cache)
  
 style <- eval(parse(text = paste(arguments$style_pkg, "::", arguments$style_fun)))
 tryCatch(
