@@ -62,12 +62,14 @@ available settings.
 
 A hook to style files with [styler](https://styler.r-lib.org). Only commit code
 corresponding to the tidyverse style guide. You can pass arguments to
-`style_file(...)` using the `--key=value` syntax like this:
+[`style_file(...)`](https://styler.r-lib.org/reference/style_file.html) using 
+the `--key=value` syntax like this:
 
 ```
   id: style-files
   args: [--scope=spaces, --reindention=specify_reindention('#')]
 ```
+
 
 Argument `style_pkg` and `style_fun` default to `styler` and `tidyverse_style`.
 If you want to use another style guide than the tidyverse style guide, you can
@@ -81,7 +83,9 @@ specify it like this:
 If no permanent `{R.cache}` cache exists, the hook emits a warning which you 
 can silence it with `--no-warn-cache`.
 
-This hook modifies files.
+This hook modifies files unless you specify `--dry=fail` (requires 
+`{styler} > 1.3.2`), which implies the hook failed if applying styler *would* 
+change any code.
 
 ## `readme-rmd-rendered`
 
