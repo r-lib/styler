@@ -17,6 +17,7 @@ reference:
   - create_style_guide
   - specify_math_token_spacing
   - specify_reindention
+  - specify_transformers_drop
 - title: "Non-functional documentation"
   desc: "Explaining features"
   contents:
