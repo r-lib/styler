@@ -163,7 +163,9 @@ exists, the hook emits a warning which you can silence with
   args: [--no-warn-cache] 
 ```
 
-This hook does not modify input files, but writes to `.Rd` files in `man/`.
+This hook does not modify input files, but writes to `.Rd` files in `man/`, 
+`NAMESPACE` and potentially others depending on which roxygen roclets you 
+specified in `DESCRIPTION`.
 
 ## `deps-in-desc`
 
