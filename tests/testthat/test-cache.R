@@ -16,7 +16,7 @@ test_that("R api works", {
     list(R.cache.rootPath = fs::file_temp(".Rcache")),
     {
       expect_output(
-        may_require_permanent_cache(temporary_cache = TRUE),
+        may_require_permanent_cache(temp_cache_is_enough = TRUE),
         "Using temporary cache at"
       )
     }

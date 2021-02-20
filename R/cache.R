@@ -15,15 +15,15 @@ has_persistent_R.cache <- function() {
 #'
 #' This function is only exported to have a clean API, but it's not intended to
 #' be used by the end-user, only in hook scripts.
-#' @param temporary_cache Whether a temporary cache is accepted or not. `TRUE`
+#' @param temp_cache_is_enough Whether a temporary cache is accepted or not. `TRUE`
 #'   means no warning will be issued, `FALSE` means a warning will be issued if
 #'   no permanent cache is available.
 #' @export
-may_require_permanent_cache <- function(temporary_cache = FALSE) {
+may_require_permanent_cache <- function(temp_cache_is_enough = FALSE) {
   if (has_persistent_R.cache()) {
     cat("Using persistant cache at", R.cache::getCacheRootPath(), "\n")
   } else {
-    if (temporary_cache) {
+    if (temp_cache_is_enough) {
       cat("Using temporary cache at", R.cache::getCacheRootPath(), "\n")
     } else {
       cat(paste0(
@@ -33,7 +33,7 @@ may_require_permanent_cache <- function(temporary_cache = FALSE) {
         "`R.cache::getCachePath()` and confirm the prompt or \n\n2) ",
         "non-interactively by setting the environment variable ",
         "`R_CACHE_ROOTPATH` to the location you want to put the cache. \n\nYou can ",
-        "silent this warning with setting `args: [--temporary-cache]` in your ",
+        "silent this warning with setting `args: [----no-warn-cache]` in your ",
         ".pre-commit-config.yaml.\n\n"
       ))
     }

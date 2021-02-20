@@ -4,10 +4,10 @@
 \alias{may_require_permanent_cache}
 \title{Issue a warning if \code{{R.cache}} uses temporary cache only}
 \usage{
-may_require_permanent_cache(temporary_cache = FALSE)
+may_require_permanent_cache(temp_cache_is_enough = FALSE)
 }
 \arguments{
-\item{temporary_cache}{Whether a temporary cache is accepted or not. \code{TRUE}
+\item{temp_cache_is_enough}{Whether a temporary cache is accepted or not. \code{TRUE}
 means no warning will be issued, \code{FALSE} means a warning will be issued if
 no permanent cache is available.}
 }
