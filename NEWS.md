@@ -10,7 +10,7 @@
   for details.
 - `style-files` and `roxygenize` hooks now warn if there is no permanent 
   `{R.cache}` cache set up. You can silence the warning with the hook argument 
-  `--no-warn-cache`.
+  `--no-warn-cache` (#225).
 
 **Minor changes**
 
