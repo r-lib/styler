@@ -21,18 +21,18 @@ Options:
 
 " -> doc
 arguments <- docopt::docopt(doc)
-library(precommit)
+
 if (packageVersion('precommit') < "0.0.0.9039") {
   rlang::abort(paste(
     "This hooks only works with the R package {precommit} >= 0.0.0.9039",
     'Please upgrade with `remotes::install_github("lorenzwalthert/precommit")`.'
   ))
 } else {
-  may_require_permanent_cache(arguments$temporary_cache)
+  precommit::may_require_permanent_cache(arguments$temporary_cache)
 }
 
 roxygenize_with_cache <- function(key, dirs) {
-  if (diff_requires_run_roxygenize()) {
+  if (precommit::diff_requires_run_roxygenize()) {
     roxygen2::roxygenise()
     saveCache(object = Sys.time(), key = key, dirs = dirs)
   }
