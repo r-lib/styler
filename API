@@ -5,6 +5,7 @@
 autoupdate(root = here::here())
 diff_requires_run_roxygenize(root = here::here())
 install_precommit(force = FALSE)
+may_require_permanent_cache(temp_cache_is_enough = FALSE)
 open_config(root = here::here())
 open_wordlist(root = here::here())
 path_pre_commit_exec(check_if_exists = TRUE)

@@ -8,6 +8,9 @@
   e.g. you can supply `--scope=spaces` and similar via `args:` in your
   `.pre-commit-config.yaml`. See the [docs](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#style-files-1)
   for details.
+- `style-files` and `roxygenize` hooks now warn if there is no permanent 
+  `{R.cache}` cache set up. You can silence the warning with the hook argument 
+  `--no-warn-cache` (#225).
 
 **Minor changes**
 
