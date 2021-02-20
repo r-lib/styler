@@ -114,6 +114,7 @@ jobs:
           if (Sys.getenv("PRECOMMIT_INSTALLATION_METHOD") != 'conda') {
             Sys.setenv("_R_CHECK_FORCE_SUGGESTS_" = "False")
           }
+          remotes::install_local() # circumvent https://github.com/r-lib/rcmdcheck/issues/136
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
