@@ -81,7 +81,7 @@ specify it like this:
 ```
 
 If no permanent `{R.cache}` cache exists, the hook emits a warning which you 
-can silence it with `--no-warn-cache`.
+can silence with `--no-warn-cache`.
 
 This hook modifies files unless you specify `--dry=fail` (requires 
 `{styler} > 1.3.2`), which implies the hook failed if applying styler *would* 
@@ -156,7 +156,7 @@ should pass.
 A hook to run `roxygen2::roxygenize()`. Makes sure you commit your `.Rd` changes
 with the source changes. To take advantage of caching, you don't need to run
 `roxygen2::roxygenize()` manually anymore. If no permanent `{R.cache}` cache 
-exists, the hook emits a warning which you can silence it with 
+exists, the hook emits a warning which you can silence with 
 `--no-warn-cache`.
 ```
   id: royxgenize
