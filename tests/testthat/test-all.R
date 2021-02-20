@@ -1,4 +1,10 @@
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+### use-tidy-description                                                    ####
+
+# success
+run_test("use-tidy-description", "DESCRIPTION", suffix = "")
+
+### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### style-files                                                             ####
 
 # success
@@ -74,12 +80,6 @@ run_test("style-files",
   error_msg = NA,
   cmd_args = c("--style_pkg=styler", "--style_fun=tidyverse_style")
 )
-
-### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
-### use-tidy-description                                                    ####
-
-# success
-run_test("use-tidy-description", "DESCRIPTION", suffix = "")
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### no-browser-statement                                                    ####
