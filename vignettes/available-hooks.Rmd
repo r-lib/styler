@@ -78,6 +78,9 @@ specify it like this:
   args: [--style_pkg=pkg.with.style.guide, --style_fun=exported.style.function]
 ```
 
+If no permanent `{R.cache}` cache exists, the hook emits a warning which you 
+can silence it with `--no-warn-cache`.
+
 This hook modifies files.
 
 ## `readme-rmd-rendered`
@@ -132,8 +135,8 @@ readLines(system.file("pre-commit-hooks.yaml", package = "precommit")) %>%
 The `lang` arg will be passed to `spelling::spell_check_files()`.
 
 ```
-id: spell-check
-args: [--lang=<language>]
+  id: spell-check
+  args: [--lang=<language>]
 ```
 
 This hook does not modify input files. It will add all words not found in the
@@ -148,7 +151,13 @@ should pass.
 
 A hook to run `roxygen2::roxygenize()`. Makes sure you commit your `.Rd` changes
 with the source changes. To take advantage of caching, you don't need to run
-`roxygen2::roxygenize()` manually anymore.
+`roxygen2::roxygenize()` manually anymore. If no permanent `{R.cache}` cache 
+exists, the hook emits a warning which you can silence it with 
+`--no-warn-cache`.
+```
+  id: royxgenize
+  args: [--no-warn-cache] 
+```
 
 This hook does not modify input files, but writes to `.Rd` files in `man/`.
 
@@ -160,7 +169,8 @@ private imports into the package namespace are tolerable, e.g. `somepkg:::x()`.
 Flag not set by default, i.e. the hook will fail if such a call is found.
 
 ```
-id: deps-in-desc args: [--allow_private_imports] 
+  id: deps-in-desc 
+  args: [--allow_private_imports] 
 ```
 
 This hook does not modify the file `DESCRIPTION` because the user should decide
@@ -186,9 +196,9 @@ A hook to run `lintr::lint()` to check that R files are lint free. Argument
 should set this with the field `verbose: true`.
 
 ```
-id: lintr
-args: [--warn_only]
-verbose: true
+  id: lintr
+  args: [--warn_only]
+  verbose: true
 ```
 
 When configured this way, lintr prints lint errors as they appear. Other
