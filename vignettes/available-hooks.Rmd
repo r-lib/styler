@@ -20,10 +20,11 @@ repos also host hooks, many are listed
 
 Some hooks will fail without changing the files you want to commit, like the
 `lintr` hook - and you need to make manual changes for the hook to pass on the
-next attempt. Other hooks like the `styler` hook write to files, and if that
-changes the file, the hook will fail, but this means you won't need to modify
-the file manually, just stage the changes and try to commit again. Below, we
-indicate for every hook if it modifies files or not.
+next attempt. Other hooks like the `roxygenize` hook write to files, and if that
+changes the file, the hook will fail, but this means for most hooks you won't
+need to modify the file manually after the attempted commit, just stage the 
+changes and try to commit again. Below, we indicate for every hook if it 
+modifies files or not.
 
 **Arguments**
 
@@ -70,22 +71,23 @@ the `--key=value` syntax like this:
   args: [--scope=spaces, --reindention=specify_reindention('#')]
 ```
 
+In addition, the hook takes the following arguments that are not passed to 
+[`style_file(...)`](https://styler.r-lib.org/reference/style_file.html):
 
-Argument `style_pkg` and `style_fun` default to `styler` and `tidyverse_style`.
-If you want to use another style guide than the tidyverse style guide, you can
-specify it like this:
+* Argument `style_pkg` and `style_fun` default to `styler` and `tidyverse_style`.
+  If you want to use another style guide than the tidyverse style guide, you can
+  specify it like this:
 
 ```
   id: style-files
   args: [--style_pkg=pkg.with.style.guide, --style_fun=exported.style.function]
 ```
 
-If no permanent `{R.cache}` cache exists, the hook emits a warning which you 
-can silence with `--no-warn-cache`.
+* If no permanent `{R.cache}` cache exists, the hook emits a warning which you 
+  can silence with `--no-warn-cache`.
 
 This hook modifies files unless you specify `--dry=fail` (requires 
-`{styler} > 1.3.2`), which implies the hook failed if applying styler *would* 
-change any code.
+`{styler} > 1.3.2`).
 
 ## `readme-rmd-rendered`
 
