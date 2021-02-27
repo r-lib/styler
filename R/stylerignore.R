@@ -117,14 +117,16 @@ apply_stylerignore <- function(flattened_pd) {
   flattened_pd <- merge(
     flattened_pd[!(to_ignore & not_first), ],
     env_current$stylerignore[, colnames_required_apply_stylerignore],
-    by.x = "pos_id", by.y = "first_pos_id_in_segment", all.x = TRUE
+    by.x = "pos_id", by.y = "first_pos_id_in_segment", all.x = TRUE,
+    sort = FALSE
   ) %>%
     as_tibble()
   flattened_pd %>%
     stylerignore_consolidate_col("lag_newlines") %>%
     stylerignore_consolidate_col("lag_spaces") %>%
     stylerignore_consolidate_col("text") %>%
-    stylerignore_consolidate_col("pos_id", "pos_id", "pos_id_")
+    stylerignore_consolidate_col("pos_id", "pos_id", "pos_id_") %>%
+    arrange_pos_id()
 }
 
 #' Consolidate columns after a merge
@@ -143,7 +145,6 @@ stylerignore_consolidate_col <- function(flattened_pd,
                                          col,
                                          col_x = paste0(col, ".x"),
                                          col_y = paste0(col, ".y")) {
-
   flattened_pd[[col]] <- ifelse(is.na(flattened_pd[[col_y]]),
     flattened_pd[[col_x]],
     flattened_pd[[col_y]]
