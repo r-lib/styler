@@ -50,12 +50,10 @@ should correspond to the version of the R package that exports the
 style guide.}
 
 \item{more_specs_style_guide}{Named vector (coercible to character)
-specifying arguments \code{args} in
-\verb{transformer <- list(t1 = purrr::partial(f, arg)} because when
-such functions are converted to characters in \code{\link[=cache_make_key]{cache_make_key()}},
-they will yield generic code and we loose the specific value of \code{arg} (see
-\code{\link[=cache_make_key]{cache_make_key()}}), even when unquoting these inputs with \verb{!!}
-beforehand in \code{purrr::partial()}.}
+with all arguments passed to the style guide and used for cache
+invalidation. You can easily capture them in your style guide function
+declaration with \code{as.list(environment())} (compare source code of
+\code{tidyverse_style()}).}
 
 \item{transformers_drop}{A list specifying under which conditions
 transformer functions can be dropped since they have no effect on the
