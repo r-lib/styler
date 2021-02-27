@@ -3,18 +3,29 @@
 
 # styler
 
+<!-- badges: start -->
+
 [![R build
 status](https://github.com/r-lib/styler/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/styler/actions)
+[![Life cycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![codecov test
+coverage](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
+[![CRAN
+Status](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
+<!-- badges: end -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![codecov](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
-[![cran
-version](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
+# Overview
 
 styler formats your code according to the [tidyverse style
-guide](https://style.tidyverse.org)[1] so you can direct your attention
-to the content of your code. styler helps to keep the coding style
-consistent across projects and facilitate collaboration.
+guide](https://style.tidyverse.org) (or your custom style guide) so you
+can direct your attention to the content of your code. It helps to keep
+the coding style consistent across projects and facilitate
+collaboration. You can access styler through
+
+-   the RStudio Addin as demonstrated below,
+-   R functions like `style_pkg()`, `style_file()` or `style_text()`.
+-   various third-party interactions described in `vignette("adoption")`
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
 
@@ -46,4 +57,4 @@ The following online docs are available:
 
 -   [GitHub development version](https://styler.r-lib.org/dev).
 
-[1] or your custom style guide
+------------------------------------------------------------------------

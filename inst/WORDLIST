@@ -56,11 +56,13 @@ expr EQ
 fileext
 filetype
 forcond
+formatter
 funct
 gcc
 getChecksum
 getOption
 getRversion
+ggplot
 github
 gitsum
 GSOC
@@ -69,6 +71,7 @@ href
 http
 https
 icloud
+ifelse
 impl
 infinitively
 initializer
@@ -78,6 +81,7 @@ invasiveness
 io
 ixmypi
 ized
+Jupyterlab
 Kirill
 knitr
 krlmlr
