@@ -60,7 +60,7 @@ left_join <- function(x, y, by) {
     by_x <- by_y <- by
   }
 
-  res <- merge(x, y, by.x = by_x, by.y = by_y, all.x = TRUE) %>%
+  res <- merge(x, y, by.x = by_x, by.y = by_y, all.x = TRUE, sort = FALSE) %>%
     arrange_pos_id()
   res <- new_tibble(res, nrow = nrow(res))
   # dplyr::left_join set unknown list columns to NULL, merge sets them
