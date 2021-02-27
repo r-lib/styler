@@ -24,6 +24,7 @@ excluded from this displayed size but negligible.
 \seealso{
 Other cache managers: 
 \code{\link{cache_activate}()},
-\code{\link{cache_clear}()}
+\code{\link{cache_clear}()},
+\code{\link{caching}}
 }
 \concept{cache managers}

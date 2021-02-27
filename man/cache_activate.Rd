@@ -24,6 +24,7 @@ Helper functions to control the behavior of caching. Simple wrappers around
 \seealso{
 Other cache managers: 
 \code{\link{cache_clear}()},
-\code{\link{cache_info}()}
+\code{\link{cache_info}()},
+\code{\link{caching}}
 }
 \concept{cache managers}

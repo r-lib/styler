@@ -22,12 +22,10 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 
 #' Remember the past to be quicker in the future
 #'
-#' Caching makes styler faster on repeated styling. It does not cache input
-#' but output code. That means if you style code that already complies to a
+#' Caching makes styler faster on repeated styling and is shared across all APIs
+#' (e.g. `style_text()` and Addin).
+#' That means if you style code that already complies to a
 #' style guide and you have previously styled that code, it will be quicker.
-#' Code is cached by expression and the cache is shared across all APIs (e.g.
-#' `style_text()` and Addin).
-#'
 #' @section Manage the cache:
 #' See [cache_info()],[cache_activate()] or [cache_clear()] for utilities to
 #' manage the cache. You can deactivate it altogether with [cache_deactivate()].
@@ -61,6 +59,11 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' versions potentially format code differently. This means after upgrading
 #' styler or a style guide you use, the cache will be re-built.
 #'
+#' @section Mechanism and size:
+#' The cache works by storing hashed output code as a whole and by expression,
+#' which is why it takes zero space on disk (the cache is a directory with
+#' empty files which have the hash of output code as name).
+#'
 #' @section Using a cache for styler in CI/CD:
 #' If you want to set up caching in a CI/CD pipeline, we suggest to set the
 #' `{R.cache}` root path to a directory for which you have the cache enabled as
@@ -69,6 +72,7 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' [Travis documentation on caching](https://docs.travis-ci.com/user/caching).
 #'
 #' @name caching
+#' @family cache managers
 NULL
 
 #' Show information about the styler cache
