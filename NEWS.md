@@ -54,6 +54,8 @@
   style guide (#722, #727).
 - unary `+` before a function call does not give an error anymore, as before 
   version 1.3.0 (#697).
+- certain combinations of `stylerignore` markers and cached expressions now 
+  don't give an error anymore (#738).
 - cache is now correctly invalidated when style guide arguments change (#647).
 - empty lines are now removed between pipes and assignments (#645, #710).
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
