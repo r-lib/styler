@@ -1,10 +1,10 @@
 ---
-title: "An introduction to styler"
+title: "Get started"
 author: "Lorenz Walthert"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{An introduction to styler}
+  %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

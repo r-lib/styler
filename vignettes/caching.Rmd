@@ -2,7 +2,7 @@
 title: "Caching"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{caching}
+  %\VignetteIndexEntry{Caching}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
