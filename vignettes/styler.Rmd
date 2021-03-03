@@ -171,7 +171,7 @@ file(s) you want to format. The following options are available:
 - *off* (default): Write back to the file if applying styling changes the
   input.
 
-- *on*: Like *off*, but not writing back.
+- *on*: Applies styling and returns the results without writing changes (if any) back to the file(s).
 
 - *fail*: returns an error if the result of styling is not identical to the
   input.
