@@ -194,7 +194,7 @@ out
 
 ### Roxygen code example styling
 
-This is enabled by default, you can turn it of with `include_roxygen_examples`.
+This is enabled by default, you can turn it off with `include_roxygen_examples = FALSE`.
 
 ### Custom math token spacing
 
