@@ -31,8 +31,8 @@
 ## Major changes
 
 - Documentation overhaul: New README, new "Get started" pkgdown page, new 
-  vignettes on `strict = FALSE`, `adoption` renamed to 
-  `third-party integrations`, minor other consistency edits.
+  vignettes on `strict = FALSE`, `Adoption` renamed to 
+  `Third-party integrations`, minor other consistency edits.
 - The environment variable `save_after_styling` is deprecated in favor of 
   the R option `styler.save_after_styling` to control if a file is saved after 
   styling with the RStudio Addin. Note than in RStudio >= 1.3.0, you can 

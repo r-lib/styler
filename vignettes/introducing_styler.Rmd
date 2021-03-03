@@ -39,7 +39,7 @@ styler provides the following API to format code:
   styling the highlighted selection, see `help("styler_addins")`.
 
 Beyond that, styler can be used through other tools documented in the
-`vignette("third-party-integration")`.
+`vignette("third-party-integrations")`.
 
 ### Passing arguments to the style guide
 

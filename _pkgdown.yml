@@ -69,7 +69,7 @@ articles:
   - styler
   - detect-alignment
   - strict
-  - third-party-integration
+  - third-party-integrations
 
 - title: Developers
   navbar: Developers

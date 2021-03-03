@@ -1,8 +1,8 @@
 ---
-title: "Third-party integration of styler"
+title: "Third-party integrations"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Third-party integration of styler}
+  %\VignetteIndexEntry{Third-party integrations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
