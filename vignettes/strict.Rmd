@@ -78,7 +78,6 @@ call(
 call(2,
   more
 )
-
 ```
 
 * No line break inserted after pipes nor ggplot2 or pipe expressions.
