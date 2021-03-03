@@ -23,8 +23,8 @@ can direct your attention to the content of your code. It helps to keep
 the coding style consistent across projects and facilitate
 collaboration. You can access styler through
 
--   the RStudio Addin as demonstrated below,
--   R functions like `style_pkg()`, `style_file()` or `style_text()`.
+-   the RStudio Addin as demonstrated below
+-   R functions like `style_pkg()`, `style_file()` or `style_text()`
 -   various third-party interactions described in `vignette("adoption")`
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
@@ -45,9 +45,9 @@ remotes::install_github("r-lib/styler")
 ```
 
 If you don’t use styler interactively (i.e. not from the R prompt or
-RStudio Addin), make sure you authorize `{R.cache}` once to set up a
-permanent cache. If you use it interactively, you will be asked to grant
-this permission once. See `?caching` for details.
+RStudio Addin), make sure you authorize the R package R.cache once to
+set up a permanent cache. If you use it interactively, you will be asked
+to grant this permission once. See `?caching` for details.
 
 ## Documentation
 
@@ -56,5 +56,3 @@ The following online docs are available:
 -   [latest CRAN release](https://styler.r-lib.org).
 
 -   [GitHub development version](https://styler.r-lib.org/dev).
-
-------------------------------------------------------------------------
