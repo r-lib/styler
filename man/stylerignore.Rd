@@ -4,8 +4,10 @@
 \alias{stylerignore}
 \title{Turn off styling for parts of the code}
 \description{
-Using stylerignore markers, you can temporarily turn off styler. See a
-few illustrative examples below.
+Using stylerignore markers, you can temporarily turn off styler. Beware that
+for \verb{styler > 1.2.0}, some alignment is
+\href{https://styler.r-lib.org/articles/detect-alignment.html}{detected by styler},
+making stylerignore redundant. See a few illustrative examples below.
 }
 \details{
 Styling is on by default when you run styler.
@@ -52,5 +54,11 @@ style_text(
   "
 )
 }
-
+# some alignment of code is detected, so you don't need to use stylerignore
+style_text(
+  "call(
+    xyz =  3,
+    x   = 11
+  )"
+)
 }

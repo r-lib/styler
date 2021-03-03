@@ -278,12 +278,10 @@ tidyverse_style <- function(scope = "tokens",
 #'   should correspond to the version of the R package that exports the
 #'   style guide.
 #' @param more_specs_style_guide Named vector (coercible to character)
-#'   specifying arguments `args` in
-#'   `transformer <- list(t1 = purrr::partial(f, arg)` because when
-#'   such functions are converted to characters in [styler::cache_make_key()],
-#'   they will yield generic code and we loose the specific value of `arg` (see
-#'   [styler::cache_make_key()]), even when unquoting these inputs with `!!`
-#'   beforehand in `purrr::partial()`.
+#'   with all arguments passed to the style guide and used for cache
+#'   invalidation. You can easily capture them in your style guide function
+#'   declaration with `as.list(environment())` (compare source code of
+#'   `tidyverse_style()`).
 #' @param transformers_drop A list specifying under which conditions
 #'   transformer functions can be dropped since they have no effect on the
 #'   code to format, most easily constructed with

@@ -1,15 +1,11 @@
 ---
-title: "An introduction to styler"
+title: "Get started"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{An introduction to styler}
+  %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-> This is an old vignette superseded by *Get started*. It might be outdated and 
-  is not yet deleted to avoid HTTP 404 errors until re-directs are implemented 
-  in pkgdown: https://github.com/r-lib/pkgdown/issues/1259
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = "")

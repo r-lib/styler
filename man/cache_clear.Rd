@@ -26,6 +26,7 @@ potentially different with different versions of styler.
 \seealso{
 Other cache managers: 
 \code{\link{cache_activate}()},
-\code{\link{cache_info}()}
+\code{\link{cache_info}()},
+\code{\link{caching}}
 }
 \concept{cache managers}

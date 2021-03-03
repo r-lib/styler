@@ -1,3 +1,6 @@
+home:
+  strip_header: true
+
 reference:
 - title: "Styling API"
   desc: >
@@ -60,15 +63,16 @@ news:
     href: https://lorenzwalthert.netlify.com/post/styler-1-3-0/
 
 articles:
-- title: End-users
-  navbar: End-users
+- title: Get started
+  navbar: ~
   contents:
-  - introducing_styler
+  - styler
   - detect-alignment
+  - strict
+  - third-party-integration
 
 - title: Developers
   navbar: Developers
   contents:
   - caching
   - customizing_styler
-  - performance_improvements

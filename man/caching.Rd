@@ -4,11 +4,10 @@
 \alias{caching}
 \title{Remember the past to be quicker in the future}
 \description{
-Caching makes styler faster on repeated styling. It does not cache input
-but output code. That means if you style code that already complies to a
+Caching makes styler faster on repeated styling and is shared across all APIs
+(e.g. \code{style_text()} and Addin).
+That means if you style code that already complies to a
 style guide and you have previously styled that code, it will be quicker.
-Code is cached by expression and the cache is shared across all APIs (e.g.
-\code{style_text()} and Addin).
 }
 \section{Manage the cache}{
 
@@ -53,6 +52,13 @@ versions potentially format code differently. This means after upgrading
 styler or a style guide you use, the cache will be re-built.
 }
 
+\section{Mechanism and size}{
+
+The cache works by storing hashed output code as a whole and by expression,
+which is why it takes zero space on disk (the cache is a directory with
+empty files which have the hash of output code as name).
+}
+
 \section{Using a cache for styler in CI/CD}{
 
 If you want to set up caching in a CI/CD pipeline, we suggest to set the
@@ -62,3 +68,10 @@ in config files of CI/CD tools, e.g. see the
 \href{https://docs.travis-ci.com/user/caching}{Travis documentation on caching}.
 }
 
+\seealso{
+Other cache managers: 
+\code{\link{cache_activate}()},
+\code{\link{cache_clear}()},
+\code{\link{cache_info}()}
+}
+\concept{cache managers}
