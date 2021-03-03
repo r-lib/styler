@@ -25,7 +25,7 @@ collaboration. You can access styler through
 
 -   the RStudio Addin as demonstrated below
 -   R functions like `style_pkg()`, `style_file()` or `style_text()`
--   various interactions described in
+-   various other tools described in
     `vignette("third-party-integrations")`
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />

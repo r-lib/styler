@@ -33,7 +33,7 @@ You can access styler through
 
 * the RStudio Addin as demonstrated below
 * R functions like `style_pkg()`, `style_file()` or `style_text()`
-* various interactions described in `vignette("third-party-integrations")`
+* various other tools described in `vignette("third-party-integrations")`
 
 
 ```{r, out.width = "650px", echo = FALSE}
