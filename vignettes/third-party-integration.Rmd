@@ -1,8 +1,8 @@
 ---
-title: "Adoption of styler"
+title: "Third-party integration of styler"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Adoption of styler}
+  %\VignetteIndexEntry{Third-party integration of styler}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

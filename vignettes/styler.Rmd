@@ -35,7 +35,7 @@ styler provides the following API to format code:
   styling the highlighted selection, see `help("styler_addins")`.
 
 Beyond that, styler can be used through other tools documented in the
-`vignette("adoption")`.
+`vignette("third-party-integration")`.
 
 ### Passing arguments to the style guide
 
