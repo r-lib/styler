@@ -104,10 +104,7 @@ Another option that is helpful to determine the level of 'invasiveness' is
 `strict` (defaulting to `TRUE`). Some rules won't be applied so strictly with
 `strict = FALSE`, assuming you deliberately formatted things the way they are.
 Please see in `vignette("strict")`. For `styler >= 1.2` alignment in function
-calls is detected and preserved even with `strict = TRUE`,
-
-e.g.
-
+calls is detected and preserved so you don't need `strict = FALSE`, e.g.
 ```{r}
 style_text(
   "tibble::tibble(
