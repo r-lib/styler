@@ -1,7 +1,5 @@
 ---
 title: "An introduction to styler"
-author: "Lorenz Walthert"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{An introduction to styler}
@@ -9,11 +7,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette introduces the basic functionality of styler and showcases
-how styler applies a few rules of the 
-[tidyverse style guide](http://style.tidyverse.org/index.html) to example code.
-Note that you can create your own style guide and customize styler even further, 
-as described in the vignette "Customizing styler".
+> This is an old vignette superseded by *Get started*. It might be outdated and 
+  is not yet deleted to avoid HTTP 404 errors until re-directs are implemented 
+  in pkgdown: https://github.com/r-lib/pkgdown/issues/1259
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = "")
@@ -22,98 +18,184 @@ knitr::knit_engines$set(list(
     options$comment <- ""
     knitr::engine_output(
       options,
-      
       c("# Before", options$code),
       c("# After", styler::style_text(options$code))
     )
   }
 ))
-
 ```
 
-It's possible to use different levels of 'invasiveness', as described in the 
-help file for the only style guide implemented so far, which is the 
-[tidyverse style guide](http://style.tidyverse.org/index.html). The style guide 
-in use is passed to the styling function (i.e `style_text()` and friends) via 
-the `style` argument, which defaults to `tidyverse_style`. In addition to this 
-argument, there are further customization options. For example, we can limit 
-ourselves to styling just spacing information by indicating this with the 
-`scope` argument:
+# Entry-points
+
+styler provides the following API to format code:
+
+* `style_file()` styles .R, .Rmd .Rnw and .Rprofile files.
+
+* `style_dir()` styles all .R and/or .Rmd files in a directory.
+
+* `style_pkg()` styles the source files of an R package.
+
+* RStudio Addins for styling the active file, styling the current package and
+  styling the highlighted selection, see `help("styler_addins")`.
+
+Beyond that, styler can be used through other tools documented in the
+`vignette("third-party-integration")`.
+
+### Passing arguments to the style guide
+
+styler separates the abstract definition of a style guide from the application
+of it. That's why you must supply a style guide via `transformers` when
+styling (in case you don't want to rely on the defaults):
 
 ```{r}
-library("styler")
-library("magrittr")
-style_text("a=3; 2", scope = "spaces")
+library(styler)
+style_text("a + b", transformers = tidyverse_style(scope = "indention"))
 ```
 
-Or, on the other extreme of the scale, styling spaces, indention, line breaks 
-and tokens (which is the default):
+The styler API was designed so that you can pass arguments to the style guide
+via the styling function (e.g. `style_file()`) to allow more concise syntax:
+
+```{r, results = 'hide'}
+# equivalent
+style_text("a + b", transformers = tidyverse_style(scope = "indention"))
+style_text("a + b", scope = "indention")
+```
+
+The magic is possible thanks to `...`. See `style_text()` for details.
+
+# Invasiveness 
+
+### `scope`: What to style? 
+
+This argument of `tidyverse_style()` determines the invasiveness of styling. The
+following levels for `scope` are available (in increasing order):
+
+* "none": Performs no transformation at all.
+
+* "spaces": Manipulates spacing between token on the same line.
+
+* "indention": Manipulates the indention, i.e. number of spaces at the beginning
+  of each line.
+
+* "line_breaks": Manipulates line breaks between tokens.
+
+* "tokens": manipulates tokens.
+
+There are two ways to specify the scope of styling.
+
+* As a string: In this case all less invasive scope levels are implied, e.g.
+  `"line_breaks"` includes `"indention"`, `"spaces"`. This is brief and what
+  most users need. This is supported in `styler >= 1.0.0`.
+
+* As vector of class `AsIs`: Each level has to be listed explicitly by wrapping
+  one ore more levels of the scope in `I()`. This offers more granular control
+  at the expense of more verbosity. This is supported in `styler > 1.3.2`.
 
 ```{r}
-style_text("a=3; 2", scope = "tokens")
+# tokens and everything less invasive
+style_text("a=2", scope = "tokens")
+
+# just tokens and indention
+style_text("a=2", scope = I(c("tokens", "indention")))
 ```
 
+As you can see from the output, the assignment operator `=` is replaced with
+`<-` in both cases, but spacing remained unchanged in the second example.
 
-`scope` always includes less-invasive styling than the option chosen, 
-e.g. `scope = "line_breaks"` includes styling spaces and indention in addition 
-to line breaks.
-
-
-We can also choose to style line breaks but not tokens:
-```{r}
-style_text("if(x) {66 } else {a=3}", scope = "line_breaks")
-```
-
-Note that `scope = "spaces"` does not touch indention
-```{r}
-code <- c(
-    "a <- function() { ", 
-    "                a=3", 
-    "}"
-)
-
-style_text(code, scope = "spaces")
-```
-
-But `scope = "indention"` - as the name says - does.
-```{r}
-style_text(code, scope = "indention")
-```
-
+### How `strict` do you want styler to be?
 
 Another option that is helpful to determine the level of 'invasiveness' is
-`strict`. If set to `TRUE`, spaces and line breaks before or after tokens are
-set to either zero or one. However, in some situations this might be undesirable,
-as the following example shows:
-
+`strict` (defaulting to `TRUE`). Some rules won't be applied so strictly with
+`strict = FALSE`, assuming you deliberately formatted things the way they are.
+Please see in `vignette("strict")`. For `styler >= 1.2` alignment in function
+calls is detected and preserved so you don't need `strict = FALSE`, e.g.
 ```{r}
 style_text(
-  "data_frame(
+  "tibble::tibble(
      small  = 2 ,
      medium = 4,#comment without space
      large  = 6
-   )", strict = FALSE
+   )"
 )
 ```
 
-We prefer to keep the equal sign after "small", "medium" and large aligned,
-so we set `strict = FALSE` to set spacing to *at least* one around `=`.
+The details are in `vignette("detect-alignment")`.
 
-Also, spaces before comments are preserved with that option.
+# Ignoring certain lines
+
+You can tell styler to ignore some lines if you want to keep current formatting.
+You can mark whole blocks or inline expressions with `styler: on` and `styler:
+off`:
 
 ```{r}
-style_text(
-  "a <-   'one'   #just one
-   abc <- 'three' # three", 
-  strict = FALSE
+styler::style_text(
+  "
+  #> blocks
+  blibala= 3
+  # styler: off
+  I_have(good+reasons, to = turn_off,
+    styler
+  )
+  # styler: on
+  1+1
+
+  #> inline
+  ignore( this) # styler: off
+  f( ) # not ignored anymore
+"
 )
 ```
+You can also use custom markers as described in 
+`help("stylerignore", package = "styler")`. As described above and in
+`vignette("detect-alignment")`,
+some alignment is recognized and hence, *stylerignore* should not 
+be necessary in that context.
 
+# Caching
 
-Though simple, hopefully the above examples convey some of the flexibility of 
-the configuration options available in `styler`. Let us for now focus on a 
-configuration with `strict = TRUE` and `scope = "tokens"` and illustrate a few 
-more examples of code before and after styling.
+styler is rather slow, so leveraging a cache for styled code brings big speedups
+in many situations. Starting with version `1.3.0`, you can benefit from it. For
+people using styler interactively (e.g. in RStudio), typing
+`styler::cache_info()` and then confirming the creation of a permanent cache is
+sufficient. Please refer to `help("caching")` for more information. The cache is
+by default dependent on the version of styler which means if you upgrade, the
+cache will be re-built. Also, the cache takes literally 0 disk space because
+only the hash of styled code is stored.
+
+# Dry mode
+
+As of version `1.3.2`, styler has a dry mode which avoids writing output to the
+file(s) you want to format. The following options are available:
+
+- *off* (default): Write back to the file if applying styling changes the
+  input.
+
+- *on*: Applies styling and returns the results without writing changes (if any) back to the file(s).
+
+- *fail*: returns an error if the result of styling is not identical to the
+  input.
+
+In any case, you can use the (invisible) return value of `style_file()` and
+friends to learn how files were changed (or would have changed):
+
+```{r}
+out <- withr::with_tempfile(
+  "code.R",
+  {
+    writeLines("1+1", "code.R")
+    style_file("code.R", dry = "on")
+  }
+)
+out
+```
+
+# More configuration options
+
+### Roxygen code example styling
+
+This is enabled by default, you can turn it off with `include_roxygen_examples = FALSE`.
+
+### Custom math token spacing
 
 `styler` can identify and handle unary operators and other math tokens:
 
@@ -121,74 +203,23 @@ more examples of code before and after styling.
 1++1-1-1/2
 ```
 
-This is tidyverse style. However, styler offers very granular control for 
-math token spacing. Assuming you like spacing around `+` and `-`, but not 
-around `/` and `*` and `^`, do the following:
+This is tidyverse style. However, styler offers very granular control for math
+token spacing. Assuming you like spacing around `+` and `-`, but not around `/`
+and `*` and `^`, do the following:
+
 ```{r}
 style_text(
-  "1++1/2*2^2", 
+  "1++1/2*2^2",
   math_token_spacing = specify_math_token_spacing(zero = c("'/'", "'*'", "'^'"))
 )
 ```
 
-It can also format complicated expressions that involve line breaking and 
-indention based on both brace expressions and operators:
+### Custom indention
 
-```{styler}
-if (x >3) {stop("this is an error")} else {
-c(there_are_fairly_long,
-1 / 33 * 
-2 * long_long_variable_names)%>% k(
+If you, say, don't want comments starting with `###` to be indented and
+indention to be 4 instead of two spaces, you can formulate an unindention rule
+and set `indent_by` to 4:
 
-) }
-```
-
-Lines are broken after `(` if a function call spans multiple lines:
-
-```{styler}
-do_a_long_and_complicated_fun_cal("which", has, way, to, 
-                              "and longer then lorem ipsum in its full length"
-                              )
-```
-
-`styler` replaces `=` with `<-` for assignment:
-```{styler}
-one = "one string"
-```
-
-It converts single quotes within strings if necessary:
-```{styler}
-one <- 'one string'
-two <- "one string in a 'string'"
-```
-
-And adds braces to function calls in pipes:
-
-```{styler}
-a %>%
-  b %>%
-  c
-```
-
-Function declarations are indented if multi-line:
-
-```{styler}
-my_fun <- function(x, 
-y, 
-z) {
-  just(z)
-}
-```
-
-`styler` can also deal with tidyeval syntax:
-
-```{styler}
-mtcars %>%
-  group_by( !!my_vars )
-```
-
-If you, say, don't want comments starting with `###` to be indented, you can 
-formulate an unindention rule:
 ```{r}
 style_text(
   c(
@@ -198,8 +229,14 @@ style_text(
     "33",
     "}"
   ),
-  reindention = specify_reindention(regex_pattern = "###", indention = 0)
-  
+  reindention = specify_reindention(regex_pattern = "###", indention = 0),
+  indent_by = 4
 )
 ```
 
+### Custom style guides
+
+These verse some (not all) configurations exposed in `style_file()` and friends
+as well as `tidyverse_style()`. If the above did not give you the flexibility
+you hoped for, your can create your own style guide and customize styler even
+further, as described in `vignette("customizing_styler")`.
