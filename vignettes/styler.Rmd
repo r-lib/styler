@@ -1,7 +1,5 @@
 ---
 title: "Get started"
-author: "Lorenz Walthert"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get started}
@@ -43,7 +41,7 @@ Beyond that, styler can be used through other tools documented in the
 
 styler separates the abstract definition of a style guide from the application
 of it. That's why you must supply a style guide via `transformers` when
-styling:
+styling (in case you don't want to rely on the defaults):
 
 ```{r}
 library(styler)
