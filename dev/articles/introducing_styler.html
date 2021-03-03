@@ -47,6 +47,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/styler.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -56,13 +59,14 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="divider">
-    <li class="dropdown-header">End-users</li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
+<li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
     </li>
     <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integration.html">Third-party integration of styler</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Developers</li>
@@ -71,9 +75,6 @@
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
     </li>
   </ul>
 </li>
@@ -128,9 +129,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>An introduction to styler</h1>
-                        <h4 class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2021-02-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/introducing_styler.Rmd"><code>vignettes/introducing_styler.Rmd</code></a></small>
       <div class="hidden name"><code>introducing_styler.Rmd</code></div>
@@ -139,153 +138,189 @@
 
     
     
-<p>This vignette introduces the basic functionality of styler and showcases how styler applies a few rules of the <a href="http://style.tidyverse.org/index.html">tidyverse style guide</a> to example code. Note that you can create your own style guide and customize styler even further, as described in the vignette “Customizing styler”.</p>
-<p>It’s possible to use different levels of ‘invasiveness’, as described in the help file for the only style guide implemented so far, which is the <a href="http://style.tidyverse.org/index.html">tidyverse style guide</a>. The style guide in use is passed to the styling function (i.e <code><a href="../reference/style_text.html">style_text()</a></code> and friends) via the <code>style</code> argument, which defaults to <code>tidyverse_style</code>. In addition to this argument, there are further customization options. For example, we can limit ourselves to styling just spacing information by indicating this with the <code>scope</code> argument:</p>
+<blockquote>
+<p>This is an old vignette superseded by <em>Get started</em>. It might be outdated and is not yet deleted to avoid HTTP 404 errors until re-directs are implemented in pkgdown: <a href="https://github.com/r-lib/pkgdown/issues/1259" class="uri">https://github.com/r-lib/pkgdown/issues/1259</a></p>
+</blockquote>
+<div id="entry-points" class="section level1">
+<h1 class="hasAnchor">
+<a href="#entry-points" class="anchor"></a>Entry-points</h1>
+<p>styler provides the following API to format code:</p>
+<ul>
+<li><p><code><a href="../reference/style_file.html">style_file()</a></code> styles .R, .Rmd .Rnw and .Rprofile files.</p></li>
+<li><p><code><a href="../reference/style_dir.html">style_dir()</a></code> styles all .R and/or .Rmd files in a directory.</p></li>
+<li><p><code><a href="../reference/style_pkg.html">style_pkg()</a></code> styles the source files of an R package.</p></li>
+<li><p>RStudio Addins for styling the active file, styling the current package and styling the highlighted selection, see <code><a href="../reference/styler_addins.html">help("styler_addins")</a></code>.</p></li>
+</ul>
+<p>Beyond that, styler can be used through other tools documented in the <code><a href="../articles/third-party-integration.html">vignette("third-party-integration")</a></code>.</p>
+<div id="passing-arguments-to-the-style-guide" class="section level3">
+<h3 class="hasAnchor">
+<a href="#passing-arguments-to-the-style-guide" class="anchor"></a>Passing arguments to the style guide</h3>
+<p>styler separates the abstract definition of a style guide from the application of it. That’s why you must supply a style guide via <code>transformers</code> when styling (in case you don’t want to rely on the defaults):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-lib/styler">"styler"</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://magrittr.tidyverse.org">"magrittr"</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=3; 2"</span>, scope <span class="op">=</span> <span class="st">"spaces"</span><span class="op">)</span></code></pre></div>
-<pre><code>a = 3; 2</code></pre>
-<p>Or, on the other extreme of the scale, styling spaces, indention, line breaks and tokens (which is the default):</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler">styler</a></span><span class="op">)</span>
+<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>a + b</code></pre>
+<p>The styler API was designed so that you can pass arguments to the style guide via the styling function (e.g. <code><a href="../reference/style_file.html">style_file()</a></code>) to allow more concise syntax:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=3; 2"</span>, scope <span class="op">=</span> <span class="st">"tokens"</span><span class="op">)</span></code></pre></div>
-<pre><code>a &lt;- 3
-2</code></pre>
-<p><code>scope</code> always includes less-invasive styling than the option chosen, e.g. <code>scope = "line_breaks"</code> includes styling spaces and indention in addition to line breaks.</p>
-<p>We can also choose to style line breaks but not tokens:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"if(x) {66 } else {a=3}"</span>, scope <span class="op">=</span> <span class="st">"line_breaks"</span><span class="op">)</span></code></pre></div>
-<pre><code>if (x) {
-  66
-} else {
-  a = 3
-}</code></pre>
-<p>Note that <code>scope = "spaces"</code> does not touch indention</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-    <span class="st">"a &lt;- function() { "</span>, 
-    <span class="st">"                a=3"</span>, 
-    <span class="st">"}"</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">code</span>, scope <span class="op">=</span> <span class="st">"spaces"</span><span class="op">)</span></code></pre></div>
-<pre><code>a &lt;- function() {
-                a = 3
-}</code></pre>
-<p>But <code>scope = "indention"</code> - as the name says - does.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">code</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></code></pre></div>
-<pre><code>a &lt;- function() {
-  a = 3
-}</code></pre>
-<p>Another option that is helpful to determine the level of ‘invasiveness’ is <code>strict</code>. If set to <code>TRUE</code>, spaces and line breaks before or after tokens are set to either zero or one. However, in some situations this might be undesirable, as the following example shows:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># equivalent</span>
+<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></code></pre></div>
+<p>The magic is possible thanks to <code>...</code>. See <code><a href="../reference/style_text.html">style_text()</a></code> for details.</p>
+</div>
+</div>
+<div id="invasiveness" class="section level1">
+<h1 class="hasAnchor">
+<a href="#invasiveness" class="anchor"></a>Invasiveness</h1>
+<div id="scope-what-to-style" class="section level3">
+<h3 class="hasAnchor">
+<a href="#scope-what-to-style" class="anchor"></a><code>scope</code>: What to style?</h3>
+<p>This argument of <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> determines the invasiveness of styling. The following levels for <code>scope</code> are available (in increasing order):</p>
+<ul>
+<li><p>“none”: Performs no transformation at all.</p></li>
+<li><p>“spaces”: Manipulates spacing between token on the same line.</p></li>
+<li><p>“indention”: Manipulates the indention, i.e. number of spaces at the beginning of each line.</p></li>
+<li><p>“line_breaks”: Manipulates line breaks between tokens.</p></li>
+<li><p>“tokens”: manipulates tokens.</p></li>
+</ul>
+<p>There are two ways to specify the scope of styling.</p>
+<ul>
+<li><p>As a string: In this case all less invasive scope levels are implied, e.g. <code>"line_breaks"</code> includes <code>"indention"</code>, <code>"spaces"</code>. This is brief and what most users need. This is supported in <code>styler &gt;= 1.0.0</code>.</p></li>
+<li><p>As vector of class <code>AsIs</code>: Each level has to be listed explicitly by wrapping one ore more levels of the scope in <code><a href="https://rdrr.io/r/base/AsIs.html">I()</a></code>. This offers more granular control at the expense of more verbosity. This is supported in <code>styler &gt; 1.3.2</code>.</p></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># tokens and everything less invasive</span>
+<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="st">"tokens"</span><span class="op">)</span></code></pre></div>
+<pre><code>a &lt;- 2</code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># just tokens and indention</span>
+<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tokens"</span>, <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>a&lt;-2</code></pre>
+<p>As you can see from the output, the assignment operator <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> is replaced with <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> in both cases, but spacing remained unchanged in the second example.</p>
+</div>
+<div id="how-strict-do-you-want-styler-to-be" class="section level3">
+<h3 class="hasAnchor">
+<a href="#how-strict-do-you-want-styler-to-be" class="anchor"></a>How <code>strict</code> do you want styler to be?</h3>
+<p>Another option that is helpful to determine the level of ‘invasiveness’ is <code>strict</code> (defaulting to <code>TRUE</code>). Some rules won’t be applied so strictly with <code>strict = FALSE</code>, assuming you deliberately formatted things the way they are. Please see in <code><a href="../articles/strict.html">vignette("strict")</a></code>. For <code>styler &gt;= 1.2</code> alignment in function calls is detected and preserved so you don’t need <code>strict = FALSE</code>, e.g.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
-  <span class="st">"data_frame(
+  <span class="st">"tibble::tibble(
      small  = 2 ,
      medium = 4,#comment without space
      large  = 6
-   )"</span>, strict <span class="op">=</span> <span class="cn">FALSE</span>
+   )"</span>
 <span class="op">)</span></code></pre></div>
-<pre><code><a href="https://tibble.tidyverse.org/reference/deprecated.html">data_frame(
+<pre><code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble(
   small  = 2,
   medium = 4, # comment without space
   large  = 6
 )</a></code></pre>
-<p>We prefer to keep the equal sign after “small”, “medium” and large aligned, so we set <code>strict = FALSE</code> to set spacing to <em>at least</em> one around <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>.</p>
-<p>Also, spaces before comments are preserved with that option.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
-  <span class="st">"a &lt;-   'one'   #just one
-   abc &lt;- 'three' # three"</span>, 
-  strict <span class="op">=</span> <span class="cn">FALSE</span>
+<p>The details are in <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>.</p>
+</div>
+</div>
+<div id="ignoring-certain-lines" class="section level1">
+<h1 class="hasAnchor">
+<a href="#ignoring-certain-lines" class="anchor"></a>Ignoring certain lines</h1>
+<p>You can tell styler to ignore some lines if you want to keep current formatting. You can mark whole blocks or inline expressions with <code>styler: on</code> and <code>styler: off</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">styler</span><span class="fu">::</span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
+  <span class="st">"
+  #&gt; blocks
+  blibala= 3
+  # styler: off
+  I_have(good+reasons, to = turn_off,
+    styler
+  )
+  # styler: on
+  1+1
+
+  #&gt; inline
+  ignore( this) # styler: off
+  f( ) # not ignored anymore
+"</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>a &lt;-   "one"   # just one
-abc &lt;- "three" # three</code></pre>
-<p>Though simple, hopefully the above examples convey some of the flexibility of the configuration options available in <code>styler</code>. Let us for now focus on a configuration with <code>strict = TRUE</code> and <code>scope = "tokens"</code> and illustrate a few more examples of code before and after styling.</p>
+<pre><code>
+# &gt; blocks
+blibala &lt;- 3
+  # styler: off
+  I_have(good+reasons, to = turn_off,
+    styler
+  )
+# styler: on
+1 + 1
+
+# &gt; inline
+  ignore( this) # styler: off
+f() # not ignored anymore</code></pre>
+<p>You can also use custom markers as described in <code><a href="../reference/stylerignore.html">help("stylerignore", package = "styler")</a></code>. As described above and in <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>, some alignment is recognized and hence, <em>stylerignore</em> should not be necessary in that context.</p>
+</div>
+<div id="caching" class="section level1">
+<h1 class="hasAnchor">
+<a href="#caching" class="anchor"></a>Caching</h1>
+<p>styler is rather slow, so leveraging a cache for styled code brings big speedups in many situations. Starting with version <code>1.3.0</code>, you can benefit from it. For people using styler interactively (e.g. in RStudio), typing <code><a href="../reference/cache_info.html">styler::cache_info()</a></code> and then confirming the creation of a permanent cache is sufficient. Please refer to <code><a href="../reference/caching.html">help("caching")</a></code> for more information. The cache is by default dependent on the version of styler which means if you upgrade, the cache will be re-built. Also, the cache takes literally 0 disk space because only the hash of styled code is stored.</p>
+</div>
+<div id="dry-mode" class="section level1">
+<h1 class="hasAnchor">
+<a href="#dry-mode" class="anchor"></a>Dry mode</h1>
+<p>As of version <code>1.3.2</code>, styler has a dry mode which avoids writing output to the file(s) you want to format. The following options are available:</p>
+<ul>
+<li><p><em>off</em> (default): Write back to the file if applying styling changes the input.</p></li>
+<li><p><em>on</em>: Applies styling and returns the results without writing changes (if any) back to the file(s).</p></li>
+<li><p><em>fail</em>: returns an error if the result of styling is not identical to the input.</p></li>
+</ul>
+<p>In any case, you can use the (invisible) return value of <code><a href="../reference/style_file.html">style_file()</a></code> and friends to learn how files were changed (or would have changed):</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_tempfile.html">with_tempfile</a></span><span class="op">(</span>
+  <span class="st">"code.R"</span>,
+  <span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="st">"1+1"</span>, <span class="st">"code.R"</span><span class="op">)</span>
+    <span class="fu"><a href="../reference/style_file.html">style_file</a></span><span class="op">(</span><span class="st">"code.R"</span>, dry <span class="op">=</span> <span class="st">"on"</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">)</span></code></pre></div>
+<pre><code>Styling  1  files:
+ code.R ℹ 
+────────────────────────────────────────
+Status  Count   Legend 
+✔   0   File unchanged.
+ℹ   1   File changed.
+✖   0   Styling threw an error.
+────────────────────────────────────────
+Please review the changes carefully!</code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">out</span></code></pre></div>
+<pre><code># A tibble: 1 x 2
+  file   changed
+  &lt;chr&gt;  &lt;lgl&gt;  
+1 code.R TRUE   </code></pre>
+</div>
+<div id="more-configuration-options" class="section level1">
+<h1 class="hasAnchor">
+<a href="#more-configuration-options" class="anchor"></a>More configuration options</h1>
+<div id="roxygen-code-example-styling" class="section level3">
+<h3 class="hasAnchor">
+<a href="#roxygen-code-example-styling" class="anchor"></a>Roxygen code example styling</h3>
+<p>This is enabled by default, you can turn it off with <code>include_roxygen_examples = FALSE</code>.</p>
+</div>
+<div id="custom-math-token-spacing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#custom-math-token-spacing" class="anchor"></a>Custom math token spacing</h3>
 <p><code>styler</code> can identify and handle unary operators and other math tokens:</p>
 <pre class="styler"><code># Before
 1++1-1-1/2</code></pre>
 <pre><code># After
 1 + +1 - 1 - 1 / 2</code></pre>
 <p>This is tidyverse style. However, styler offers very granular control for math token spacing. Assuming you like spacing around <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code>, but not around <code><a href="https://rdrr.io/r/base/Arithmetic.html">/</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>, do the following:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
-  <span class="st">"1++1/2*2^2"</span>, 
+  <span class="st">"1++1/2*2^2"</span>,
   math_token_spacing <span class="op">=</span> <span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span><span class="op">(</span>zero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"'/'"</span>, <span class="st">"'*'"</span>, <span class="st">"'^'"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <pre><code>1 + +1/2*2^2</code></pre>
-<p>It can also format complicated expressions that involve line breaking and indention based on both brace expressions and operators:</p>
-<pre class="styler"><code># Before
-if (x &gt;3) {stop("this is an error")} else {
-c(there_are_fairly_long,
-1 / 33 * 
-2 * long_long_variable_names)%&gt;% k(
-
-) }</code></pre>
-<pre><code># After
-if (x &gt; 3) {
-  stop("this is an error")
-} else {
-  c(
-    there_are_fairly_long,
-    1 / 33 *
-      2 * long_long_variable_names
-  ) %&gt;% k()
-}</code></pre>
-<p>Lines are broken after <code>(</code> if a function call spans multiple lines:</p>
-<pre class="styler"><code># Before
-do_a_long_and_complicated_fun_cal("which", has, way, to, 
-                              "and longer then lorem ipsum in its full length"
-                              )</code></pre>
-<pre><code># After
-do_a_long_and_complicated_fun_cal(
-  "which", has, way, to,
-  "and longer then lorem ipsum in its full length"
-)</code></pre>
-<p><code>styler</code> replaces <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> with <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> for assignment:</p>
-<pre class="styler"><code># Before
-one = "one string"</code></pre>
-<pre><code># After
-one &lt;- "one string"</code></pre>
-<p>It converts single quotes within strings if necessary:</p>
-<pre class="styler"><code># Before
-one &lt;- 'one string'
-two &lt;- "one string in a 'string'"</code></pre>
-<pre><code># After
-one &lt;- "one string"
-two &lt;- "one string in a 'string'"</code></pre>
-<p>And adds braces to function calls in pipes:</p>
-<pre class="styler"><code># Before
-a %&gt;%
-  b %&gt;%
-  c</code></pre>
-<pre><code># After
-a %&gt;%
-  b() %&gt;%
-  c()</code></pre>
-<p>Function declarations are indented if multi-line:</p>
-<pre class="styler"><code># Before
-my_fun &lt;- function(x, 
-y, 
-z) {
-  just(z)
-}</code></pre>
-<pre><code># After
-my_fun &lt;- function(x,
-                   y,
-                   z) {
-  just(z)
-}</code></pre>
-<p><code>styler</code> can also deal with tidyeval syntax:</p>
-<pre class="styler"><code># Before
-mtcars %&gt;%
-  group_by( !!my_vars )</code></pre>
-<pre><code># After
-mtcars %&gt;%
-  group_by(!!my_vars)</code></pre>
-<p>If you, say, don’t want comments starting with <code>###</code> to be indented, you can formulate an unindention rule:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+</div>
+<div id="custom-indention" class="section level3">
+<h3 class="hasAnchor">
+<a href="#custom-indention" class="anchor"></a>Custom indention</h3>
+<p>If you, say, don’t want comments starting with <code>###</code> to be indented and indention to be 4 instead of two spaces, you can formulate an unindention rule and set <code>indent_by</code> to 4:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
     <span class="st">"a &lt;- function() {"</span>,
@@ -294,19 +329,28 @@ mtcars %&gt;%
     <span class="st">"33"</span>,
     <span class="st">"}"</span>
   <span class="op">)</span>,
-  reindention <span class="op">=</span> <span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span><span class="op">(</span>regex_pattern <span class="op">=</span> <span class="st">"###"</span>, indention <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-  
+  reindention <span class="op">=</span> <span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span><span class="op">(</span>regex_pattern <span class="op">=</span> <span class="st">"###"</span>, indention <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
+  indent_by <span class="op">=</span> <span class="fl">4</span>
 <span class="op">)</span></code></pre></div>
 <pre><code>a &lt;- function() {
 ### not to be indented
-  # indent normally
-  33
+    # indent normally
+    33
 }</code></pre>
+</div>
+<div id="custom-style-guides" class="section level3">
+<h3 class="hasAnchor">
+<a href="#custom-style-guides" class="anchor"></a>Custom style guides</h3>
+<p>These verse some (not all) configurations exposed in <code><a href="../reference/style_file.html">style_file()</a></code> and friends as well as <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>. If the above did not give you the flexibility you hoped for, your can create your own style guide and customize styler even further, as described in <code><a href="../articles/customizing_styler.html">vignette("customizing_styler")</a></code>.</p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

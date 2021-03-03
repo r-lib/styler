@@ -657,4 +657,13 @@
   <url>
     <loc>https://styler.r-lib.org/articles/performance_improvements.html</loc>
   </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/strict.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/styler.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/third-party-integration.html</loc>
+  </url>
 </urlset>

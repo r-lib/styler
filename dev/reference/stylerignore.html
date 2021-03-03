@@ -46,8 +46,10 @@
 
 
 <meta property="og:title" content="Turn off styling for parts of the code — stylerignore" />
-<meta property="og:description" content="Using stylerignore markers, you can temporarily turn off styler. See a
-few illustrative examples below." />
+<meta property="og:description" content="Using stylerignore markers, you can temporarily turn off styler. Beware that
+for styler &amp;gt; 1.2.0, some alignment is
+detected by styler,
+making stylerignore redundant. See a few illustrative examples below." />
 
 
 <meta name="robots" content="noindex">
@@ -92,6 +94,9 @@ few illustrative examples below." />
   </a>
 </li>
 <li>
+  <a href="../articles/styler.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -101,13 +106,14 @@ few illustrative examples below." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="divider"></li>
-    <li class="dropdown-header">End-users</li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
     <li>
       <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integration.html">Third-party integration of styler</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Developers</li>
@@ -116,9 +122,6 @@ few illustrative examples below." />
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
     </li>
   </ul>
 </li>
@@ -178,8 +181,10 @@ few illustrative examples below." />
     </div>
 
     <div class="ref-description">
-    <p>Using stylerignore markers, you can temporarily turn off styler. See a
-few illustrative examples below.</p>
+    <p>Using stylerignore markers, you can temporarily turn off styler. Beware that
+for <code>styler &gt; 1.2.0</code>, some alignment is
+<a href='https://styler.r-lib.org/articles/detect-alignment.html'>detected by styler</a>,
+making stylerignore redundant. See a few illustrative examples below.</p>
     </div>
 
 
@@ -234,8 +239,17 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
   "</span>
 <span class='op'>)</span>
 <span class='op'>}</span>
-
-</div></span></pre>
+<span class='co'># some alignment of code is detected, so you don't need to use stylerignore</span>
+<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
+  <span class='st'>"call(
+    xyz =  3,
+    x   = 11
+  )"</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span>
+#&gt;   xyz =  </span><span style='color: #0000BB;'>3</span><span>,
+#&gt;   x   = </span><span style='color: #0000BB;'>11</span><span>
+#&gt; </span><span style='color: #BBBB00;'>)</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

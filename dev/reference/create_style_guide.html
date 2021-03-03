@@ -99,6 +99,9 @@ done in tidyverse_style() with indent_by and other arguments." />
   </a>
 </li>
 <li>
+  <a href="../articles/styler.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -108,13 +111,14 @@ done in tidyverse_style() with indent_by and other arguments." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="divider"></li>
-    <li class="dropdown-header">End-users</li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
     <li>
       <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integration.html">Third-party integration of styler</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Developers</li>
@@ -123,9 +127,6 @@ done in tidyverse_style() with indent_by and other arguments." />
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
     </li>
   </ul>
 </li>
@@ -264,12 +265,10 @@ style guide.</p></td>
     <tr>
       <th>more_specs_style_guide</th>
       <td><p>Named vector (coercible to character)
-specifying arguments <code>args</code> in
-<code>transformer &lt;- list(t1 = purrr::partial(f, arg)</code> because when
-such functions are converted to characters in <code><a href='cache_make_key.html'>cache_make_key()</a></code>,
-they will yield generic code and we loose the specific value of <code>arg</code> (see
-<code><a href='cache_make_key.html'>cache_make_key()</a></code>), even when unquoting these inputs with <code>!!</code>
-beforehand in <code><a href='https://purrr.tidyverse.org/reference/partial.html'>purrr::partial()</a></code>.</p></td>
+with all arguments passed to the style guide and used for cache
+invalidation. You can easily capture them in your style guide function
+declaration with <code><a href='https://rdrr.io/r/base/list.html'>as.list(environment())</a></code> (compare source code of
+<code><a href='tidyverse_style.html'>tidyverse_style()</a></code>).</p></td>
     </tr>
     <tr>
       <th>transformers_drop</th>

@@ -90,6 +90,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/styler.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -99,13 +102,14 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="divider"></li>
-    <li class="dropdown-header">End-users</li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
     <li>
       <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integration.html">Third-party integration of styler</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Developers</li>
@@ -114,9 +118,6 @@
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
     </li>
   </ul>
 </li>
@@ -194,10 +195,11 @@
 <h2 class="hasAnchor">
 <a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
+<li>Documentation overhaul: New README, new “Get started” pkgdown page, new vignettes on <code>strict = FALSE</code>, <code>adoption</code> renamed to <code>third-party integrations</code>, minor other consistency edits.</li>
 <li>The environment variable <code>save_after_styling</code> is deprecated in favor of the R option <code>styler.save_after_styling</code> to control if a file is saved after styling with the RStudio Addin. Note than in RStudio &gt;= 1.3.0, you can auto-save edits in general (Code -&gt; Saving -&gt; Auto-Save), e.g. on idle editor or focus loss, so this feature becomes less relevant (<a href='https://github.com/r-lib/styler/issues/631'>#631</a>, <a href='https://github.com/r-lib/styler/issues/726'>#726</a>).</li>
 <li>blank lines in function calls and headers are now removed, for the former only when there are no comments before or after the blank line (<a href='https://github.com/r-lib/styler/issues/629'>#629</a>, <a href='https://github.com/r-lib/styler/issues/630'>#630</a>, <a href='https://github.com/r-lib/styler/issues/635'>#635</a>,
 <a href='https://github.com/r-lib/styler/issues/723'>#723</a>).</li>
-<li>speed improvements: ~10% when cache is activated because transformers are not captured as character anymore (<a href='https://github.com/r-lib/styler/issues/679'>#679</a>), ~3% in low-level optimization (<a href='https://github.com/r-lib/styler/issues/691'>#691</a>). 7% by requiring magrittr 2.0 (<a href='https://github.com/r-lib/styler/issues/681'>#681</a>), ~8% by dropping unused transformers (<a href='https://github.com/r-lib/styler/issues/711'>#711</a>) .</li>
+<li>speed improvements: ~10% when cache is activated because transformers are not captured as character anymore (<a href='https://github.com/r-lib/styler/issues/679'>#679</a>), ~3% in low-level optimization (<a href='https://github.com/r-lib/styler/issues/691'>#691</a>). 7% by requiring magrittr 2.0 (<a href='https://github.com/r-lib/styler/issues/681'>#681</a>), ~8% by dropping unused transformers (<a href='https://github.com/r-lib/styler/issues/711'>#711</a>), 4% by avoiding unnecessary sorting in internals (<a href='https://github.com/r-lib/styler/issues/739'>#739</a>).</li>
 <li>
 <code>#&lt;&lt;</code> is now recognized as the xaringan marker and no space is added after<code>#</code> (<a href='https://github.com/r-lib/styler/issues/700'>#700</a>).</li>
 </ul>
@@ -211,6 +213,7 @@
 <li>
 <code><a href="https://rdrr.io/r/base/switch.html">switch()</a></code> now has line breaks after every argument to match the tidyverse style guide (<a href='https://github.com/r-lib/styler/issues/722'>#722</a>, <a href='https://github.com/r-lib/styler/issues/727'>#727</a>).</li>
 <li>unary <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> before a function call does not give an error anymore, as before version 1.3.0 (<a href='https://github.com/r-lib/styler/issues/697'>#697</a>).</li>
+<li>certain combinations of <code>stylerignore</code> markers and cached expressions now don’t give an error anymore (<a href='https://github.com/r-lib/styler/issues/738'>#738</a>).</li>
 <li>cache is now correctly invalidated when style guide arguments change (<a href='https://github.com/r-lib/styler/issues/647'>#647</a>).</li>
 <li>empty lines are now removed between pipes and assignments (<a href='https://github.com/r-lib/styler/issues/645'>#645</a>, <a href='https://github.com/r-lib/styler/issues/710'>#710</a>).</li>
 <li>overhaul pgkdown site: Add search (<a href='https://github.com/r-lib/styler/issues/623'>#623</a>), group function in Reference (<a href='https://github.com/r-lib/styler/issues/625'>#625</a>).</li>
