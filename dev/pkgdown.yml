@@ -12,7 +12,7 @@ articles:
   strict: strict.html
   styler: styler.html
   third-party-integrations: third-party-integrations.html
-last_built: 2021-03-03T22:25Z
+last_built: 2021-03-03T22:28Z
 urls:
   reference: https://styler.r-lib.org/reference
   article: https://styler.r-lib.org/articles
