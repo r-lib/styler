@@ -61,10 +61,9 @@ function()
 ```{styler}
 test({
   1
-  
+
 }
 )
-
 ```
 
 * Multi-line calls don't  put the closing brace on a new line nor trigger a line
