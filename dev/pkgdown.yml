@@ -11,8 +11,8 @@ articles:
   performance_improvements: performance_improvements.html
   strict: strict.html
   styler: styler.html
-  third-party-integration: third-party-integration.html
-last_built: 2021-03-03T21:55Z
+  third-party-integrations: third-party-integrations.html
+last_built: 2021-03-03T22:25Z
 urls:
   reference: https://styler.r-lib.org/reference
   article: https://styler.r-lib.org/articles
