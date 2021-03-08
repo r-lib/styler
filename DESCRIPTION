@@ -1,13 +1,14 @@
+Type: Package
 Package: precommit
 Title: Pre-Commit Hooks
 Version: 0.1.3.9000
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
-Description: Useful git hooks for R building on top of the
-    multi-language framework 'pre-commit' for hook management. This
-    package provides git hooks for common tasks like formatting files with
-    'styler' or spell checking as well as wrapper functions to access the
-    'pre-commit' executable.
+Description: Useful git hooks for R building on top of the multi-language
+    framework 'pre-commit' for hook management. This package provides git
+    hooks for common tasks like formatting files with 'styler' or spell
+    checking as well as wrapper functions to access the 'pre-commit'
+    executable.
 License: GPL-3
 URL: https://lorenzwalthert.github.io/precommit/,
     https://github.com/lorenzwalthert/precommit
@@ -41,8 +42,8 @@ VignetteBuilder:
 Remotes: 
     r-lib/styler
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace",
-    "collate", if (rlang::is_installed("pkgapi")) "pkgapi::api_roclet"
-    else { warning("Please install r-lib/pkgapi to make sure the file API
-    is kept up to date"); NULL} ) )
+Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace", "collate",
+    if (rlang::is_installed("pkgapi")) "pkgapi::api_roclet" else {
+    warning("Please install r-lib/pkgapi to make sure the file API is kept
+    up to date"); NULL} ) )
 RoxygenNote: 7.1.1
