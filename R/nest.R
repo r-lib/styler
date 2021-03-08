@@ -154,8 +154,10 @@ find_pos_id_to_keep <- function(pd) {
 
 #' Turn off styling for parts of the code
 #'
-#' Using stylerignore markers, you can temporarily turn off styler. See a
-#' few illustrative examples below.
+#' Using stylerignore markers, you can temporarily turn off styler. Beware that
+#' for `styler > 1.2.0`, some alignment is
+#' [detected by styler](https://styler.r-lib.org/articles/detect-alignment.html),
+#' making stylerignore redundant. See a few illustrative examples below.
 #' @details
 #' Styling is on by default when you run styler.
 #'
@@ -200,7 +202,13 @@ find_pos_id_to_keep <- function(pd) {
 #'   "
 #' )
 #' }
-#'
+#' # some alignment of code is detected, so you don't need to use stylerignore
+#' style_text(
+#'   "call(
+#'     xyz =  3,
+#'     x   = 11
+#'   )"
+#' )
 NULL
 
 

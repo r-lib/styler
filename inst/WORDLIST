@@ -1,3 +1,4 @@
+addin
 Addin
 addins
 Addins
@@ -5,6 +6,7 @@ api
 AppVeyor
 apriori
 arg
+AsIs
 AST
 aut
 backport
@@ -46,6 +48,7 @@ env
 EOF
 EOL
 EOLs
+eq
 EQ
 eval
 expr
@@ -53,12 +56,14 @@ expr EQ
 fileext
 filetype
 forcond
+formatter
 funct
 furrr
 gcc
 getChecksum
 getOption
 getRversion
+ggplot
 github
 gitsum
 GSOC
@@ -67,14 +72,18 @@ href
 http
 https
 icloud
+ifelse
+impl
 infinitively
 initializer
 innode
+integrations
 interaces
 invasiveness
 io
 ixmypi
 ized
+Jupyterlab
 Kirill
 knitr
 krlmlr
@@ -94,6 +103,7 @@ md
 Müller
 multiprocess
 mutli
+na
 navbar
 netlify
 NUM
@@ -106,6 +116,7 @@ pandoc
 parallelization
 Parallelization
 params
+paren
 parsable
 parsesum
 pgkdown
@@ -144,6 +155,9 @@ rnw
 Rnw
 roclet
 roclets
+rootPath
+ROOTPATH
+roundtrip
 roxgen
 roxygen
 Roxygen
@@ -176,6 +190,7 @@ styler
 stylerignore
 stylerignored
 stylers
+subexpr
 sudo
 summarises
 Sys
@@ -189,7 +204,10 @@ tidyeval
 tidyr
 tidyverse
 Tidyverse
+tokenized
 travis
+tryCatch
+tryGugus
 ubuntu
 ui
 uncached

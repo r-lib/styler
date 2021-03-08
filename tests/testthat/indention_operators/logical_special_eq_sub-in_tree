@@ -38,8 +38,8 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦   ¦--'(': ( [0/0] {34}                          
  ¦   ¦   °--')': ) [0/0] {35}                          
  ¦   °--')': ) [1/0] {36}                              
- °--equal_assign: b =
-3 [1/0] {37}                    
+ °--expr_or_assign_or_help: b =
+3 [1/0] {37}          
      ¦--expr: b [0/1] {39}                             
      ¦   °--SYMBOL: b [0/0] {38}                       
      ¦--EQ_ASSIGN: = [0/0] {40}                        

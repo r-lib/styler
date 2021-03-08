@@ -6,7 +6,9 @@
   be applied to files or not (#634).
 
 - `style_file()` and friends gain argument `base_indention` (defaulting to 0) to
-  control by how much the output code is indented (#649, #692).
+  control by how much the output code is indented (#649, #692). The Addin for 
+  styling a selection picks that up, e.g. you can style a function body and 
+  indention is preserved (#725).
   
 - added an option (`styler.test_dir_writeable`) that changes test behavior
   to not directly modify test files in the current directory (#548).
@@ -14,17 +16,35 @@
 - added an option for disabling all communication when using the package
   (`styler.quiet`) (#640).
 
+- `scope` in `tidyverse_style()` can now be specified with higher granularity
+  through `I()`, e.g. `I(c('spaces', 'tokens'))` allows us to style spaces and 
+  tokens without styling line breaks and indention. Previously, only a string 
+  was allowed and all less invasive scopes were included, e.g. if you wanted to 
+  style tokens, you had to always also style spaces, indention, line breaks as 
+  well (#705, #707).
+
+- New argument `transformers_drop` in `create_style_guide()` to be populated with
+  new helper function `specify_transformers_drop()` for specifying conditions
+  under which transformers are not going to be used and can therefore be 
+  omitted without effecting the result of styling (#711).
+
 ## Major changes
 
-- `style_file()`, `style_dir()` and `style_pkg()` now process input files in 
-  parallel and display process bars if `{furrr}` is installed. This feature is
-  experimental, please see `help(styler_future, package = "styler")` for 
-  details. 
+- Documentation overhaul: New README, new "Get started" pkgdown page, new 
+  vignettes on `strict = FALSE`, `Adoption` renamed to 
+  `Third-party integrations`, minor other consistency edits.
+- The environment variable `save_after_styling` is deprecated in favor of 
+  the R option `styler.save_after_styling` to control if a file is saved after 
+  styling with the RStudio Addin. Note than in RStudio >= 1.3.0, you can 
+  auto-save edits in general (Code -> Saving -> Auto-Save), e.g. on idle editor 
+  or focus loss, so this feature becomes less relevant (#631, #726).
 - blank lines in function calls and headers are now removed, for the former only 
-  when there are no comments before or after the blank line (#629, #630, #635).
-- speed improvements: (~10%) when cache is activated because transformers are not 
-  captured as character anymore (#679), ~ 3% in low-level optimization (#691). 
-  Require magrittr 2.0 gives about 7% speed improvement (#681).
+  when there are no comments before or after the blank line (#629, #630, #635, 
+  #723).
+- speed improvements: ~10% when cache is activated because transformers are not 
+  captured as character anymore (#679), ~3% in low-level optimization (#691). 
+  7% by requiring magrittr 2.0 (#681), ~8% by dropping unused transformers 
+  (#711), 4% by avoiding unnecessary sorting in internals (#739).
 - `#<<` is now recognized as the xaringan marker and no space is added after`#` 
   (#700).
 
@@ -32,19 +52,27 @@
 
 - `style_dir()` and `style_pkg()` now apply directory exclusion recursively with 
   `exclude_dirs` (#676).
+- `switch()` now has line breaks after every argument to match the tidyverse 
+  style guide (#722, #727).
 - unary `+` before a function call does not give an error anymore, as before 
   version 1.3.0 (#697).
+- certain combinations of `stylerignore` markers and cached expressions now 
+  don't give an error anymore (#738).
 - cache is now correctly invalidated when style guide arguments change (#647).
-- empty lines are now removed between pipes (#645).
+- empty lines are now removed between pipes and assignments (#645, #710).
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
 - always strip trailing spaces and make cache insensitive to it (#626).
 - `style_text()` can now style all input that `is.character()`, not just if it 
   inherits from classes `character`, `utf8` or `vertical` (#693).
+- logical operators within square braces are now moved from the start of a line
+  to the end of the previous line (#709).
+- spaces are now removed before `[` and `[[` (#713).
 - minor documentation improvements (#643, #618, #614, #677, #651, #667, #672, 
   #687).
 - The internal `create_tree()` only used in testing of styler now works when the 
   cache is activated (#688).
 - simplification of internals (#692).
+- include `test-*` files in styling pre-commit hook (#724).
 
 ## Infrastructure changes
 
@@ -173,6 +201,10 @@ Thanks to all contributors involved, in particular
 
 ## Minor improvements and fixes
 
+* Roxygen code examples: leverage `roxygen2` for correct
+  escaping of expressions that contain `\`, in particular in `dontrun{}` and 
+  friends, allow quoted braces that are not matched (#729).
+  
 * Brace expressions in function calls are formatted in a less compact way to
   improve readability. Typical use case: `tryCatch()` (#543).
 

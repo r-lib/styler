@@ -42,5 +42,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦       °--STR_CONST: '\001 [0/0] {40}               
  ¦--expr: '\x01 [1/0] {43}                            
  ¦   °--STR_CONST: '\x01 [0/0] {42}                   
- ¦--COMMENT: # FIX [2/0] {44}                          
- °--COMMENT: # FIX [1/0] {45}                          
+ ¦--expr: "\01" [2/0] {45}                            
+ ¦   °--STR_CONST: "\0" [0/0] {44}                    
+ °--expr: '\01' [1/0] {47}                            
+     °--STR_CONST: '\0' [0/0] {46}                    

@@ -3,12 +3,45 @@ call(
   3
 )
 
-switch(abc,
-  wei9
+switch(
+  x,
+  a = 2,
+  y = 3
 )
 
-switch(abc,
-  wei9
+
+switch( #
+  x,
+  a = 2,
+  y = 3
+)
+
+
+
+switch(
+  x,
+  a = 2, #
+
+
+  y = 3
+)
+
+
+switch(
+       x,a = 2,
+       y = 3
+)
+
+switch(x,a = 2,
+  y = 3
+)
+
+switch(x,a = 2, y = 3)
+
+switch(x,a = 2, y = 3
+) #
+
+switch(x,a = 2, y = 3 #
 )
 
 if_else(a,
@@ -17,4 +50,26 @@ if_else(a,
 
 ifelse(x,
   y, z
+)
+
+
+# namespacing
+base::switch(f,
+             x = 2,
+             y = 3
+)
+
+base::switch(
+  f,
+             x = 2,
+             y = 3
+)
+
+dplyr::ifelse(x,
+              1, 32
+)
+
+dplyr::ifelse(
+  x,
+              1, 32
 )

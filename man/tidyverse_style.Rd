@@ -16,7 +16,7 @@ tidyverse_style(
 \arguments{
 \item{scope}{The extent of manipulation. Can range from "none" (least
 invasive) to "tokens" (most invasive). See 'Details'. This argument is a
-vector of length one.}
+string or a vector of class \code{AsIs}.}
 
 \item{strict}{A logical value indicating whether a set of strict
 or not so strict transformer functions should be returned. Compare the
@@ -42,26 +42,36 @@ math token, conveniently constructed using \code{\link[=specify_math_token_spaci
 Style code according to the tidyverse style guide.
 }
 \details{
-The following options for \code{scope} are available.
+The following levels for \code{scope} are available:
 \itemize{
 \item "none": Performs no transformation at all.
 \item "spaces": Manipulates spacing between token on the same line.
-\item "indention": In addition to "spaces", this option also manipulates the
-indention level.
-\item "line_breaks": In addition to "indention", this option also manipulates
-line breaks.
-\item "tokens": In addition to "line_breaks", this option also manipulates
-tokens.
+\item "indention": Manipulates the indention, i.e. number of spaces at the
+beginning of each line.
+\item "line_breaks": Manipulates line breaks between tokens.
+\item "tokens": manipulates tokens.
 }
 
-As it becomes clear from this description, more invasive operations can only
-be performed if all less invasive operations are performed too.
+\code{scope} can be specified in two ways:
+\itemize{
+\item As a string: In this case all less invasive scope levels are implied, e.g.
+"line_breaks" includes "indention", "spaces". This is brief and what most
+users need.
+\item As vector of class \code{AsIs}: Each level has to be listed explicitly by
+wrapping one ore more levels of the scope in \code{\link[=I]{I()}}. This offers more
+granular control at the expense of more verbosity.
+}
+
+See 'Examples' for details.
 }
 \examples{
 style_text("call( 1)", style = tidyverse_style, scope = "spaces")
 style_text("call( 1)", transformers = tidyverse_style(strict = TRUE))
 style_text(c("ab <- 3", "a  <-3"), strict = FALSE) # keeps alignment of "<-"
 style_text(c("ab <- 3", "a  <-3"), strict = TRUE) # drops alignment of "<-"
+
+# styling line breaks only without spaces
+style_text(c("ab <- 3", "a =3"), strict = TRUE, scope = I(c("line_breaks", "tokens")))
 }
 \concept{obtain transformers}
 \concept{style_guides}

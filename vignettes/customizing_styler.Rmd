@@ -1,7 +1,5 @@
 ---
 title: "Customizing styler"
-author: "Lorenz Walthert"
-date: "8/10/2017"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Customizing styler}

@@ -105,7 +105,7 @@ test_that("Simple example works", {
 
 test_that("stylerignore does not need coincidence with top-level expressions", {
   expect_warning(test_collection("stylerignore", "crossing",
-                                 transformer = style_text
+    transformer = style_text
   ), NA)
 })
 
@@ -117,6 +117,6 @@ test_that("token adding or removing works in stylerignore", {
 
 test_that("no token added or removed in complex case", {
   expect_warning(test_collection("stylerignore", "braces",
-                                 transformer = style_text
+    transformer = style_text
   ), NA)
 })

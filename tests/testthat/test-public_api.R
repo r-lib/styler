@@ -198,15 +198,15 @@ test_that("messages (via cat()) of style_file are correct", {
 })
 
 test_that("Messages can be suppressed", {
-    withr::with_options(
-      list(styler.quiet = TRUE),
-      {
-        output <- catch_style_file_output(file.path(
-          "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
-        ))
-        expect_equal(output, character(0))
-      }
-    )
+  withr::with_options(
+    list(styler.quiet = TRUE),
+    {
+      output <- catch_style_file_output(file.path(
+        "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
+      ))
+      expect_equal(output, character(0))
+    }
+  )
 })
 
 context("public API - Rmd in style_dir()")
@@ -375,4 +375,51 @@ test_that("base indention works", {
     as.character(style_text(text_in, base_indention = n_spaces)),
     text_out
   )
+})
+
+test_that("scope can be specified as is", {
+  capture_output(expect_false({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"), scope = I("spaces"))
+    any(styled$changed)
+  }))
+
+  file <- testthat_file("public-api", "xyzpackage", "R", "hello-world.R")
+  capture_output(expect_false({
+    styled <- style_file(file, scope = I("line_breaks"))
+    any(styled$changed)
+  }))
+  expect_equal(
+    style_text(c("1+14;x=2"), scope = I(c("line_breaks", "tokens"))),
+    construct_vertical(c("1+14", "x<-2"))
+  )
+})
+
+test_that("Can properly determine style_after_saving", {
+  withr::with_envvar(list(save_after_styling = TRUE), {
+    expect_warning(op <- save_after_styling_is_active(), "is depreciated")
+    expect_equal(op, TRUE)
+  })
+
+  withr::with_envvar(list(save_after_styling = FALSE), {
+    expect_warning(op <- save_after_styling_is_active(), "is depreciated")
+    expect_equal(op, FALSE)
+  })
+
+
+  withr::with_options(list(styler.save_after_styling = TRUE), {
+    expect_silent(op <- save_after_styling_is_active())
+    expect_equal(op, TRUE)
+  })
+
+  withr::with_options(list(styler.save_after_styling = TRUE), {
+    withr::with_envvar(list(save_after_styling = FALSE), {
+      expect_warning(op <- save_after_styling_is_active(), "is depreciated")
+      expect_equal(op, TRUE)
+    })
+  })
+
+  withr::with_options(list(styler.save_after_styling = FALSE), {
+    expect_silent(op <- save_after_styling_is_active())
+    expect_equal(op, FALSE)
+  })
 })

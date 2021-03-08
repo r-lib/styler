@@ -49,3 +49,9 @@ test_that("line break added for ggplot2 call", {
     transformer = style_text
   ), NA)
 })
+
+test_that("drop redundant line breaks in assignments", {
+  expect_warning(test_collection("line_breaks_and_other", "assignment",
+    transformer = style_text, scope = I(c("line_breaks", "tokens"))
+  ), NA)
+})

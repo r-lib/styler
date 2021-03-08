@@ -341,3 +341,28 @@ fresh_testthat_cache <- function() {
 cache_more_specs_default <- function() {
   cache_more_specs(include_roxygen_examples = TRUE, base_indention = 0)
 }
+
+#' Test `transformers_drop` for consistency
+#'
+#' Check if the argument `transformers_drop` in [create_style_guide()] is
+#' consistent with the transformers specified in that function.
+#' @param transformers The output of [create_style_guide()] we want to test.
+#' @keywords internal
+test_transformers_drop <- function(transformers) {
+  scopes <- intersect(
+    names(transformers$transformers_drop),
+    names(transformers)
+  )
+
+  purrr::walk2(transformers$transformers_drop, transformers[scopes], function(x, y) {
+    # all x must be in y. select the x that are not in y
+    diff <- setdiff(names(x), names(y))
+    if (length(diff) > 0) {
+      rlang::abort(paste(
+        "transformers_drop specifies exclusion rules for transformers that ",
+        "are not in the style guilde. Please add the rule to the style guide ",
+        "or remove the dropping rules:", paste(diff, collapse = ", ")
+      ))
+    }
+  })
+}

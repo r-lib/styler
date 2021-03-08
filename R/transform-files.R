@@ -187,6 +187,13 @@ parse_transform_serialize_roxygen <- function(text, transformers, base_indention
   if (length(roxygen_seqs) < 1L) {
     return(text)
   }
+  if (!rlang::is_installed("roxygen2")) {
+    rlang::abort(paste0(
+      "To style roxygen code examples, you need to have the package ",
+      "`{roxygen2}` installed. To exclude them from styling, set ",
+      "`include_roxygen_examples = FALSE`."
+    ))
+  }
   split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
   map_at(split_segments$separated, split_segments$selectors,
     style_roxygen_code_example,
@@ -195,6 +202,7 @@ parse_transform_serialize_roxygen <- function(text, transformers, base_indention
   ) %>%
     flatten_chr()
 }
+
 
 #' Split text into roxygen and non-roxygen example segments
 #'
@@ -213,7 +221,7 @@ parse_transform_serialize_roxygen <- function(text, transformers, base_indention
 #' @keywords internal
 split_roxygen_segments <- function(text, roxygen_examples) {
   if (is.null(roxygen_examples)) {
-    return(lst(separated = list(text), selectors = NULL))
+    return(list(separated = list(text), selectors = NULL))
   }
   all_lines <- seq2(1L, length(text))
   active_segment <- as.integer(all_lines %in% roxygen_examples)
@@ -221,7 +229,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
   separated <- split(text, factor(segment_id))
   restyle_selector <- ifelse(roxygen_examples[1] == 1L, odd_index, even_index)
 
-  lst(separated, selectors = restyle_selector(separated))
+  list(separated = separated, selectors = restyle_selector(separated))
 }
 
 #' Parse, transform and serialize text
@@ -244,18 +252,21 @@ parse_transform_serialize_r <- function(text,
 
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
-  blank_lines_to_next_expr <- find_blank_lines_to_next_block(pd_nested)
   if (nrow(pd_nested) == 0) {
     if (warn_empty) {
       warn("Text to style did not contain any tokens. Returning empty string.")
     }
     return("")
   }
+  transformers <- transformers_drop(
+    if (getRversion() < 3.4) text else pd_nested$text[!pd_nested$is_cached],
+    transformers
+  )
 
   text_out <- pd_nested %>%
     split(pd_nested$block) %>%
     unname() %>%
-    map2(blank_lines_to_next_expr,
+    map2(find_blank_lines_to_next_block(pd_nested),
       parse_transform_serialize_r_block,
       transformers = transformers,
       base_indention = base_indention
@@ -270,6 +281,38 @@ parse_transform_serialize_r <- function(text,
     cache_by_expression(text_out, transformers, more_specs = more_specs)
   }
   text_out
+}
+
+
+#' Remove transformers that are not needed
+#'
+#' The goal is to speed up styling by removing all rules that are only
+#' applicable in contexts that don't occur often, e.g. for most code, we don't
+#' expect ";" to be in it, so we don't need to apply `resolve_semicolon()` on
+#' every *nest*.
+#' @param text Text to parse. Can also be the column `text` of the output of
+#'   [compute_parse_data_nested()], where each element is a token (instead of a
+#'   line).
+#' @param transformers the transformers.
+#' @keywords internal
+#' @seealso specify_transformers_drop
+transformers_drop <- function(text, transformers) {
+  is_colon <- text == ";"
+  if (any(is_colon)) {
+    # ; can only be parsed when on the same line as other token, not the case
+    # here since text is output of compute_parse_data_nested.
+    text <- c(text[!is_colon], "1;")
+  }
+  token <- unique(tokenize(text)$token)
+  for (scope in c("line_break", "space", "token", "indention")) {
+    rules <- transformers$transformers_drop[[scope]]
+    for (rule in names(rules)) {
+      if (!any(rules[[rule]] %in% token)) {
+        transformers[[scope]][rule] <- NULL
+      }
+    }
+  }
+  transformers
 }
 
 #' Apply transformers to a parse table
@@ -300,7 +343,7 @@ apply_transformers <- function(pd_nested, transformers) {
     pd_nested,
     c(
       transformers$initialize, transformers$line_break, set_multi_line,
-      if (!is.null(transformers$line_break)) update_newlines
+      if (length(transformers$line_break) != 0) update_newlines
     )
   )
 
@@ -330,7 +373,7 @@ apply_transformers <- function(pd_nested, transformers) {
 #'   Needed for reverse engineering the scope.
 #' @keywords internal
 can_verify_roundtrip <- function(transformers) {
-  is.null(transformers$token)
+  length(transformers$token) == 0
 }
 
 #' Verify the styling
@@ -338,7 +381,7 @@ can_verify_roundtrip <- function(transformers) {
 #' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
 #' we can compare the expression before and after styling and return an error if
 #' it is not the same. Note that this method ignores comments and no
-#' verification can be conducted if scope > "line_breaks".
+#' verification can be conducted if tokens are in the styling scope.
 #' @inheritParams expressions_are_identical
 #' @importFrom rlang abort
 #' @examples

@@ -121,47 +121,8 @@ remove_space_after_unary_pm_nested <- function(pd) {
   pd
 }
 
-#' Replace single quotes with double quotes
-#'
-#' We do not use `deparse()` as in previous implementations but `paste0()` since
-#' the former approach escapes the reverse backslash in the line break character
-#' `\\n` whereas the solution with `paste0()` does not.
-#' @examples
-#' style_text("'here
-#' is a string
-#' '")
-#' @importFrom purrr map map_chr
-#' @param pd_flat A flat parse table.
-#' @importFrom rlang is_empty
-#' @keywords internal
-fix_quotes <- function(pd_flat) {
-  str_const <- which(pd_flat$token == "STR_CONST")
-  if (is_empty(str_const)) {
-    return(pd_flat)
-  }
-
-  pd_flat$text[str_const] <- map(pd_flat$text[str_const], fix_quotes_one)
-  pd_flat
-}
-
-#' @importFrom rlang is_empty
-fix_quotes_one <- function(x) {
-  rx <- "^'([^\"]*)'$"
-  i <- grep(rx, x)
-  if (is_empty(i)) {
-    return(x)
-  }
-
-  # replace outer single quotes
-  xi <- gsub(rx, '"\\1"', x[i])
-
-  # Replace inner escaped quotes (\') by ' and keep all other instances of \., including \\
-  x[i] <- gsub("\\\\(')|(\\\\[^'])", "\\1\\2", xi)
-  x
-}
-
 remove_space_before_opening_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token == "'('"
+  paren_after <- pd_flat$token %in% c("'('", "'['", "LBB")
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -222,20 +183,6 @@ set_space_in_curly_curly <- function(pd) {
     }
   }
   pd
-}
-
-add_space_before_brace <- function(pd_flat) {
-  # TODO remove this, it has no effect since { can only appear in the first
-  # position of the nest and taking lead(op_after, default = FALSE) will always
-  # yield a vector of FALSE only.
-  op_after <- pd_flat$token %in% "'{'"
-  if (!any(op_after)) {
-    return(pd_flat)
-  }
-  op_before <- lead(op_after, default = FALSE)
-  idx_before <- op_before & (pd_flat$newlines == 0L) & pd_flat$token != "'('"
-  pd_flat$spaces[idx_before] <- pmax(pd_flat$spaces[idx_before], 1L)
-  pd_flat
 }
 
 add_space_after_comma <- function(pd_flat) {

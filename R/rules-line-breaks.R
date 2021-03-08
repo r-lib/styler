@@ -90,9 +90,10 @@ set_line_break_before_curly_opening <- function(pd) {
 }
 
 
-set_line_break_around_comma <- function(pd, strict) {
+set_line_break_around_comma_and_or <- function(pd, strict) {
+  ops <- c("','", "AND", "OR", "AND2", "OR2")
   comma_with_line_break_that_can_be_removed_before <-
-    (pd$token == "','") &
+    (pd$token %in% ops) &
       (pd$lag_newlines > 0) &
       (pd$token_before != "COMMENT") &
       (lag(pd$token) != "'['")
@@ -172,13 +173,12 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
 
 remove_line_breaks_in_fun_dec <- function(pd) {
   if (is_function_dec(pd)) {
-    round_after <- pd$token == "')'" & pd$token_before != "COMMENT"
+    round_after <- (pd$token == "')'" | pd$token_before == "'('") & pd$token_before != "COMMENT"
     pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
     pd$lag_newlines[round_after] <- 0L
   }
   pd
 }
-
 
 #' @importFrom rlang seq2
 add_line_break_after_pipe <- function(pd) {
@@ -192,6 +192,14 @@ add_line_break_after_pipe <- function(pd) {
   pd
 }
 
+set_line_break_after_assignment <- function(pd) {
+  is_assignment <- lag(pd$token, default = FALSE) %in% c("LEFT_ASSIGN", "EQ_ASSIGN")
+  if (any(is_assignment)) {
+    pd$lag_newlines[is_assignment] <- min(1, pd$lag_newlines[is_assignment])
+  }
+  pd
+}
+
 
 #' Set line break for multi-line function calls
 #' @param pd A parse table.
@@ -201,39 +209,61 @@ add_line_break_after_pipe <- function(pd) {
 #'   not cause a line break after "'('".
 #' @param except_token_before A character vector with text before "')'" that do
 #'   not cause a line break before "')'".
+#' @param force_text_before A character vector with text before "'('" that
+#'   forces a line break after every argument in the call.
 #' @name set_line_break_if_call_is_multi_line
 #' @importFrom rlang seq2
 #' @keywords internal
 NULL
 
-#' @describeIn set_line_break_if_call_is_multi_line Sets line break after
-#'   opening parenthesis.
+#' Sets line break after opening parenthesis
+#'
+#' @details
+#' In general, every call that is multi-line has a line break after the opening
+#' parenthesis. Exceptions:
+#'
+#' * The token right after the parenthesis is a comment, then, the line should
+#'   be broken after the comment only. Governed by `except_token_after`.
+#' * The name of the function called is `ifelse()` or similar, where we can
+#'   allow the condition on the same line as the function name, and we don't
+#'   impose rules on the line breaks for the subsequent arguments. Governed
+#'   by `except_text_before`.
+#' * Some calls like `switch()` statements are always forced to become multi-
+#'   line. Governed by `force_text_before`.
+#'
 #' @keywords internal
-set_line_break_after_opening_if_call_is_multi_line <-
-  function(pd,
-           except_token_after = NULL,
-           except_text_before = NULL) {
-    if (!is_function_call(pd) && !is_subset_expr(pd)) {
-      return(pd)
-    }
-    npd <- nrow(pd)
-    seq_x <- seq2(3L, npd - 1L)
-    is_multi_line <- any(
-      (pd$lag_newlines[seq_x] > 0) |
-        (pd$token[seq_x] == "COMMENT")
+set_line_break_after_opening_if_call_is_multi_line <- function(pd,
+                                                               except_token_after = NULL,
+                                                               except_text_before = NULL,
+                                                               force_text_before = NULL) {
+  if (!is_function_call(pd) && !is_subset_expr(pd)) {
+    return(pd)
+  }
+  has_force_text_before <- last(pd$child[[1]]$text) %in% force_text_before
+  if (has_force_text_before) {
+    break_pos <- c(
+      which(lag(pd$token %in% c("','", "COMMENT"))),
+      nrow(pd) # always break before last because this is multi-line
     )
-    if (!is_multi_line) {
+  } else {
+    if (!any(pd$lag_newlines[seq2(3L, nrow(pd))] > 0)) {
       return(pd)
     }
     break_pos <- find_line_break_position_in_multiline_call(pd)
-
-    exception_pos <- c(
-      which(pd$token %in% except_token_after),
-      ifelse(pd$child[[1]]$text[1] %in% except_text_before, break_pos, NA)
-    )
-    pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
-    pd
   }
+  exception_pos <- c(
+    which(pd$token %in% except_token_after),
+    ifelse(last(pd$child[[1]]$text) %in% except_text_before, break_pos, NA)
+  )
+  pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
+  if (has_force_text_before) {
+    first_arg <- which(pd$token == "expr")[2]
+    if (lag(pd$token)[first_arg] != "COMMENT") {
+      pd$lag_newlines[first_arg] <- 0L
+    }
+  }
+  pd
+}
 
 
 #' Find index of the token before which the line should be broken

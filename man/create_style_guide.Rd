@@ -14,7 +14,8 @@ create_style_guide(
   reindention = tidyverse_reindention(),
   style_guide_name = NULL,
   style_guide_version = NULL,
-  more_specs_style_guide = NULL
+  more_specs_style_guide = NULL,
+  transformers_drop = specify_transformers_drop()
 )
 }
 \arguments{
@@ -49,12 +50,19 @@ should correspond to the version of the R package that exports the
 style guide.}
 
 \item{more_specs_style_guide}{Named vector (coercible to character)
-specifying arguments \code{args} in
-\verb{transformer <- list(t1 = purrr::partial(f, arg)} because when
-such functions are converted to characters in \code{\link[=cache_make_key]{cache_make_key()}},
-they will yield generic code and we loose the specific value of \code{arg} (see
-\code{\link[=cache_make_key]{cache_make_key()}}), even when unquoting these inputs with \verb{!!}
-beforehand in \code{purrr::partial()}.}
+with all arguments passed to the style guide and used for cache
+invalidation. You can easily capture them in your style guide function
+declaration with \code{as.list(environment())} (compare source code of
+\code{tidyverse_style()}).}
+
+\item{transformers_drop}{A list specifying under which conditions
+transformer functions can be dropped since they have no effect on the
+code to format, most easily constructed with
+\code{\link[=specify_transformers_drop]{specify_transformers_drop()}}. This is argument experimental and may
+change in future releases without prior notification. It was mainly
+introduced to improve speed. Listing transformers here that occur almost
+always in code does not make sense because the process of excluding them
+also takes some time.}
 }
 \description{
 This is a helper function to create a style guide, which is technically

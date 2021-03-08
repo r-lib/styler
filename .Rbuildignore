@@ -5,10 +5,8 @@
 ^API$
 ^README\.Rmd$
 ^README-.*\.png$
-^.travis.yml
 ^appveyor\.yml$
 ^tic\.R$
-^\.travis\.yml$
 ^docs$
 ^_pkgdown\.yml$
 CONTRIBUTING.md
@@ -20,4 +18,5 @@ revdep
 ^\.pre-commit-config\.yaml$
 ^brew\-log$
 ^\.github/$
-^bench/$
+^touchstone$
+^\.github$
