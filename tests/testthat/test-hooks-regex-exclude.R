@@ -22,28 +22,35 @@ test_that("exclude regex for spell check hook matches expected files", {
     }
   }
 
+  files_to_match <- c(
+    "data/x",
+    ".Rprofile",
+    ".Renviron",
+    "renv.lock",
+    "vignettes/.gitignore",
+    "NAMESPACE",
+    "inst/WORDLIST",
+    ".travis.yml",
+    "appveyor.yml",
+    "file.RData",
+    ".Rbuildignore",
+    "analysis.R",
+    "linked/yids/gg.r",
+    "things.py",
+    "data/data.feather",
+    "more/data.rds",
+    "things/xx.Rds",
+    ".pre-commit-",
+    ".Rproj"
+  )
+  individual_patterns <- setdiff(
+    unlist(strsplit(pattern, "\n", fixed = TRUE)),
+    c("(?x)^(", ")$")
+  )
 
+  expect_equal(length(individual_patterns), length(files_to_match))
   expect_silent(all(is_match(
     pattern,
-    c(
-      "data/x",
-      ".Rprofile",
-      ".Renviron",
-      "vignettes/.gitignore",
-      "NAMESPACE",
-      "inst/WORDLIST",
-      ".travis.yml",
-      "appveyor.yml",
-      "file.RData",
-      ".Rbuildignore",
-      "analysis.R",
-      "linked/yids/gg.r",
-      "things.py",
-      "data/data.feather",
-      "more/data.rds",
-      "things/xx.Rds",
-      ".pre-commit-",
-      ".Rproj"
-    )
+    files_to_match
   )))
 })
