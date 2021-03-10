@@ -31,9 +31,8 @@ parse_roxygen <- function(roxygen) {
       invokeRestart("muffleWarning")
     }
   )
-  is_line_break <- parsed[1] == "\n"
   close(connection)
-  c(parsed[1][!is_line_break], parsed[-1])
+  parsed
 }
 
 #' Fix [tools::parse_Rd()] output

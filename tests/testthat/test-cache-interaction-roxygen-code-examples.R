@@ -24,7 +24,7 @@ test_that("roxzgen code examples are written to cache as both individual express
     is_cached(as.character(styled), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
-    is_cached(c("1 + 1", "f(x)"), tidyverse_style(), more_specs = more_specs)
+    is_cached(c("", "1 + 1", "f(x)"), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
     is_cached(c("1 + 1"), tidyverse_style(), more_specs = more_specs)
