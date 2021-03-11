@@ -13,7 +13,7 @@ test_that("base_indention is respected in caching", {
 
 test_that("include_roxygen_exmples is respected in caching", {
   on.exit(clear_testthat_cache())
-  text <- c("#' Roxygen", "#'", "#' @examples", "#' 1+1", "1 + 1")
+  text <- c("#' Roxygen", "#'", "#' @examplesIf", "#' 1+1", "1 + 1")
   fresh_testthat_cache()
   with_examples <- style_text(text)
   fresh_testthat_cache()
