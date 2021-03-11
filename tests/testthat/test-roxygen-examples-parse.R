@@ -43,25 +43,6 @@ test_that("donts can be parsed", {
   )
 })
 
-test_that("Duplicate tags can be parsed", {
-  expect_equal(
-    parse_roxygen(
-      c(
-        "#' @examples",
-        "#' fu(x = 3)",
-        "#'@examplesIf 3 # more",
-        "#' x == 3"
-      )
-    )$text,
-    c(
-      "\n",
-      "fu(x = 3)\n",
-      "# more\n",
-      "x == 3\n"
-    )
-  )
-})
-
 test_that("braces examples can be parsed", {
   expect_equal(
     parse_roxygen(
