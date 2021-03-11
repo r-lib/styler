@@ -35,6 +35,8 @@
   integrations`, minor other consistency edits (#741, #643, #618, #614, #677,
   #651, #667, #672, #687).
 
+- `@exampleIsf` roxygen tag for conditional examples is now supported (#743).
+
 - The environment variable `save_after_styling` is deprecated in favor of the R
   option `styler.save_after_styling` to control if a file is saved after styling
   with the RStudio Addin. Note than in RStudio >= 1.3.0, you can auto-save edits
