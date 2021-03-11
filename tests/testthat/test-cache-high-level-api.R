@@ -80,7 +80,7 @@ test_that("speedup higher when cached roxygen example code is multiple expressio
     "#' Roxygen",
     "#' Comment",
     "#' @examples",
-    "#' 1 + 1",
+    "#' call(1 + 1, 33)",
     "#' if (x > 4)",
     "#' bb = 3",
     "#' call(x,y=2)",
