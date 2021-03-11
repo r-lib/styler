@@ -46,7 +46,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate",
     "pkgapi::api_roclet"))
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9001
 Collate: 
     'addins.R'
     'communicate.R'
