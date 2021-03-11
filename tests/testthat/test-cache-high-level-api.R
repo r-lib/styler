@@ -104,9 +104,9 @@ test_that("speedup higher when cached roxygen example code is multiple expressio
   speedup_many_roygen_examples <- n_times_faster_with_cache(
     text_short_styled, text_short_styled_changed
   )
-  # the speed gain for longer expression is 1.2x higher
+  # the speed gain for longer expression is 1.1x higher
   expect_true(
-    speedup_multiple_roygen_example / speedup_many_roygen_examples > 1.2
+    speedup_multiple_roygen_example / speedup_many_roygen_examples > 1.1
   )
 })
 
