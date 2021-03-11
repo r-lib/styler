@@ -32,7 +32,8 @@
 
 - Documentation overhaul: New README, new "Get started" pkgdown page, new 
   vignettes on `strict = FALSE`, `Adoption` renamed to 
-  `Third-party integrations`, minor other consistency edits.
+  `Third-party integrations`, minor other consistency edits (#741, #643, #618, 
+  #614, #677, #651, #667, #672, #687).
 - The environment variable `save_after_styling` is deprecated in favor of 
   the R option `styler.save_after_styling` to control if a file is saved after 
   styling with the RStudio Addin. Note than in RStudio >= 1.3.0, you can 
@@ -61,14 +62,16 @@
 - cache is now correctly invalidated when style guide arguments change (#647).
 - empty lines are now removed between pipes and assignments (#645, #710).
 - overhaul pgkdown site: Add search (#623), group function in Reference (#625).
+- multiple `@examples` roxygen tags in a code block of `#'` are no longer 
+  squashed (#748).
+- roxygen code examples starting on the same line as the `@examples` tag are
+  no longer moved to the next line (#748).
 - always strip trailing spaces and make cache insensitive to it (#626).
 - `style_text()` can now style all input that `is.character()`, not just if it 
   inherits from classes `character`, `utf8` or `vertical` (#693).
 - logical operators within square braces are now moved from the start of a line
   to the end of the previous line (#709).
 - spaces are now removed before `[` and `[[` (#713).
-- minor documentation improvements (#643, #618, #614, #677, #651, #667, #672, 
-  #687).
 - The internal `create_tree()` only used in testing of styler now works when the 
   cache is activated (#688).
 - simplification of internals (#692).
