@@ -33,10 +33,7 @@ parse_roxygen <- function(roxygen) {
     }
   )
   close(connection)
-  list(
-    text = parsed,
-    example_type = emulated$example_type
-  )
+  list(text = parsed, example_type = emulated$example_type)
 }
 
 #' Fix [tools::parse_Rd()] output

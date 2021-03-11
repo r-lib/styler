@@ -37,15 +37,22 @@ remove_roxygen_header <- function(text) {
     example_type <- "examples"
   }
 
-  starts_with_blank <- text[1] == "\n" # TODO i think this condition never holds -> remove
   list(
-    text = c(text[1][!starts_with_blank], text[-1]),
+    text = text,
     example_type = example_type
   )
 }
 
+#' Add the roxygen mask to code
+#'
+#' @param text Character vector with code.
+#' @param example_type Either 'examples' or 'examplesIf'.
+#' @keywords internal
 #' @importFrom purrr map2_chr
 add_roxygen_mask <- function(text, example_type) {
   space <- ifelse(text == "", "", " ")
-  c(paste0("#' @", example_type, space[1], text[1]), map2_chr(space[-1], text[-1], ~ paste0("#'", .x, .y)))
+  c(
+    paste0("#' @", example_type, space[1], text[1]),
+    map2_chr(space[-1], text[-1], ~ paste0("#'", .x, .y))
+  )
 }
