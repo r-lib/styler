@@ -17,16 +17,20 @@ style_roxygen_code_example <- function(example, transformers, base_indention) {
     flatten_chr()
 }
 
-
+#' Style a roxygen code example with exactly one `@example` or `@exampleIf`
+#' @inheritParams style_roxygen_code_example
+#' @param example_one A character vector, one element per line, that contains in
+#'   total at most one example tag.
+#' @keywords internal
 style_roxygen_code_example_one <- function(example_one, transformers, base_indention) {
   bare <- parse_roxygen(example_one)
-  one_dont <- split(bare, factor(cumsum(bare %in% dont_keywords())))
+  one_dont <- split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
   map(one_dont, style_roxygen_code_example_segment,
     transformers = transformers,
     base_indention = base_indention
   ) %>%
     flatten_chr() %>%
-    add_roxygen_mask()
+    add_roxygen_mask(bare$example_type)
 }
 
 #' Style a roxygen code example segment

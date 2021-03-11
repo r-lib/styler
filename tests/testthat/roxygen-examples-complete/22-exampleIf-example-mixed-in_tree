@@ -1,0 +1,32 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--COMMENT: #' Th [0/0] {1}                           
+ ¦--COMMENT: #' [1/0] {2}                              
+ ¦--COMMENT: #' St [1/0] {3}                           
+ ¦--COMMENT: #' @f [1/0] {4}                           
+ ¦--COMMENT: #' @e [1/0] {5}                           
+ ¦--COMMENT: #' c( [1/0] {6}                           
+ ¦--COMMENT: #' @e [1/0] {7}                           
+ ¦--COMMENT: #' x= [1/0] {8}                           
+ ¦--COMMENT: #' @i [1/0] {9}                           
+ ¦--COMMENT: #' @e [1/0] {10}                          
+ ¦--expr: x <-  [1/0] {11}                             
+ ¦   ¦--expr: x [0/1] {13}                             
+ ¦   ¦   °--SYMBOL: x [0/0] {12}                       
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {14}                     
+ ¦   °--expr: 3 [0/0] {16}                             
+ ¦       °--NUM_CONST: 3 [0/0] {15}                    
+ ¦--COMMENT: #' So [2/0] {17}                          
+ ¦--COMMENT: #' [1/0] {18}                             
+ ¦--COMMENT: #' St [1/0] {19}                          
+ ¦--COMMENT: #' @f [1/0] {20}                          
+ ¦--COMMENT: #' @e [1/0] {21}                          
+ ¦--COMMENT: #' x= [1/0] {22}                          
+ ¦--COMMENT: #' @e [1/0] {23}                          
+ ¦--COMMENT: #' c( [1/0] {24}                          
+ ¦--COMMENT: #' @e [1/0] {25}                          
+ °--expr: funct [1/0] {26}                             
+     ¦--FUNCTION: funct [0/0] {27}                     
+     ¦--'(': ( [0/0] {28}                              
+     ¦--')': ) [0/2] {29}                              
+     °--expr: NULL [1/0] {31}                          
+         °--NULL_CONST: NULL [0/0] {30}                

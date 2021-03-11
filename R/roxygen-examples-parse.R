@@ -15,7 +15,8 @@
 #' ))
 #' @keywords internal
 parse_roxygen <- function(roxygen) {
-  connection <- textConnection(emulate_rd(roxygen))
+  emulated <- emulate_rd(roxygen)
+  connection <- textConnection(emulated$text)
   had_warning <- FALSE
   parsed <- withCallingHandlers(
     {
@@ -32,7 +33,10 @@ parse_roxygen <- function(roxygen) {
     }
   )
   close(connection)
-  parsed
+  list(
+    text = parsed,
+    example_type = emulated$example_type
+  )
 }
 
 #' Fix [tools::parse_Rd()] output
@@ -124,18 +128,26 @@ roxygen_remove_extra_brace <- function(parsed) {
 #' @keywords internal
 emulate_rd <- function(roxygen) {
   if (needs_rd_emulation(roxygen)) {
+    example_type <- gsub("^#'\\s*@examples(If)?.*", "examples\\1", roxygen[1])
+
     roxygen <- c(
-      "#' Example", "#' @examples",
-      gsub("^#'\\s*@examples\\s*(.*)", "#' \\1", roxygen),
+      "#' Example",
+      gsub("^#'\\s*@examples(If)?\\s*(.*)", "#' @examples \\2", roxygen),
       "x <- 1"
     )
-
-    roxygen2::roc_proc_text(
+    text <- roxygen2::roc_proc_text(
       roxygen2::rd_roclet(),
       paste(roxygen, collapse = "\n")
     )[[1]]$get_section("examples") %>%
       as.character() %>%
       .[-1]
+    list(
+      text = c(
+        if (grepl("^#'\\s*\\t*@examples\\s*\\t*$", roxygen[2])) "",
+        text
+      ),
+      example_type = example_type
+    )
   } else {
     remove_roxygen_mask(roxygen)
   }
