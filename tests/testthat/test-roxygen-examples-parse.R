@@ -1,7 +1,7 @@
 context("test-roxygen-examples-parse")
 
 test_that("simple examples can be parsed", {
-  expected_out <- "x <- 1\n"
+  expected_out <- c("\n", "x <- 1\n")
   expect_equal(parse_roxygen(c("#' @examples", "#' x <- 1")), expected_out)
   expect_equal(parse_roxygen(c("#'\t@examples", "#' x <- 1")), expected_out)
   expect_equal(parse_roxygen(c("#'@examples ", "#' x <- 1")), expected_out)
@@ -10,18 +10,19 @@ test_that("simple examples can be parsed", {
   expect_equal(parse_roxygen(c("#' \t@examples \t", "#' x <- 1")), expected_out)
 
   # with code on same line
-  expect_equal(parse_roxygen(c("#' @examples 2", "#' x <- 1")), c("2\n", expected_out))
-  expect_equal(parse_roxygen(c("#'\t@examples 2", "#' x <- 1")), c("2\n", expected_out))
-  expect_equal(parse_roxygen(c("#'@examples  2", "#' x <- 1")), c("2\n", expected_out))
-  expect_equal(parse_roxygen(c("#'@examples \t 2", "#' x <- 1")), c("2\n", expected_out))
-  expect_equal(parse_roxygen(c("#'\t@examples \t 2", "#' x <- 1")), c("2\n", expected_out))
-  expect_equal(parse_roxygen(c("#' \t@examples \t2", "#' x <- 1")), c("2\n", expected_out))
+  expected_out <- c("2\n", "x <- 1\n")
+  expect_equal(parse_roxygen(c("#' @examples 2", "#' x <- 1")), expected_out)
+  expect_equal(parse_roxygen(c("#'\t@examples 2", "#' x <- 1")), expected_out)
+  expect_equal(parse_roxygen(c("#'@examples  2", "#' x <- 1")), expected_out)
+  expect_equal(parse_roxygen(c("#'@examples \t 2", "#' x <- 1")), expected_out)
+  expect_equal(parse_roxygen(c("#'\t@examples \t 2", "#' x <- 1")), expected_out)
+  expect_equal(parse_roxygen(c("#' \t@examples \t2", "#' x <- 1")), expected_out)
 })
 
 test_that("donts can be parsed", {
   expect_equal(
     parse_roxygen(c("#' @examples", "#' \\dontrun{1}")),
-    c("\\dontrun", "{", "1", "}", "\n")
+    c("\n", "\\dontrun", "{", "1", "}", "\n")
   )
   expect_equal(
     parse_roxygen(
@@ -32,6 +33,7 @@ test_that("donts can be parsed", {
       )
     ),
     c(
+      "\n",
       "\\donttest",
       "{", "\n",
       "fu(x = 3)\n",
@@ -52,6 +54,7 @@ test_that("Duplicate tags can be parsed", {
       )
     ),
     c(
+      "\n",
       "fu(x = 3)\n",
       "# more\n",
       "x == 3\n"
@@ -70,6 +73,7 @@ test_that("braces examples can be parsed", {
       )
     ),
     c(
+      "\n",
       "x <- '", "",
       "{", "'\n",
       "\\donttest", "{", "\n",
@@ -82,8 +86,7 @@ test_that("braces examples can be parsed", {
   expect_equal(
     parse_roxygen(
       c(
-        "#' @examples",
-        "#' x <- '{'",
+        "#' @examples x <- '{'",
         "#' \\dontrun{",
         "#' fu(x = 3)",
         "#' }"
@@ -112,6 +115,7 @@ test_that("braces examples can be parsed", {
       )
     ),
     c(
+      "\n",
       "x <- '", "", "{", "'\n",
       "\\dontrun", "{", "\n",
       "c('{', \"'{{{\" ,\"[\")\n",
@@ -130,6 +134,7 @@ test_that("braces examples can be parsed", {
       )
     ),
     c(
+      "\n",
       "x <- '", "", "{", "'\n",
       "\\dontrun", "{", "\n",
       "x<-'{'\n",
@@ -140,8 +145,7 @@ test_that("braces examples can be parsed", {
   expect_equal(
     parse_roxygen(
       c(
-        "#' @examples",
-        "#' x <- '{'",
+        "#' @examples x <- '{'",
         "#' {",
         "#' 1 + 1",
         "#' }",
@@ -167,8 +171,7 @@ test_that("braces examples can be parsed", {
 
   expect_equal(
     parse_roxygen(c(
-      "#' @examples",
-      "#' parse_roxygen(",
+      "#' @examples parse_roxygen(",
       "#'   c(",
       "#'     \"#' @examples\",",
       "#'     \"#' c(\\\"'{{{\\\")\"",

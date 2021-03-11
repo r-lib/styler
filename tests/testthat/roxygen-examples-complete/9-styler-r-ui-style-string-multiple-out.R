@@ -13,6 +13,7 @@
 #' style_text("a%>%b; a", scope = "tokens")
 #' # the following is identical but the former is more convenient:
 #' style_text("a<-3++1", style = tidyverse_style, strict = TRUE)
+#' @examples
 #' \dontrun{
 #' style_text("a<-3++1", transformers = tidyverse_style(strict = TRUE))
 #' }

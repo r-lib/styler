@@ -11,10 +11,9 @@ test_that("activated cache brings speedup on style_file() API", {
 text <- c(
   "#' Roxygen",
   "#' Comment",
-  "#' @examples",
-  "#' 1 + 1",
+  "#' @examples 1 + 1",
   "k <- function() {",
-  "  1 + 1",
+  "  1 + 3",
   "  if (x) {",
   "    k()",
   "  }",
