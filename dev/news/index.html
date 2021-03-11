@@ -195,46 +195,47 @@
 <h2 class="hasAnchor">
 <a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
-<li>Documentation overhaul: New README, new “Get started” pkgdown page, new vignettes on <code>strict = FALSE</code>, <code>Adoption</code> renamed to <code>Third-party integrations</code>, minor other consistency edits.</li>
-<li>The environment variable <code>save_after_styling</code> is deprecated in favor of the R option <code>styler.save_after_styling</code> to control if a file is saved after styling with the RStudio Addin. Note than in RStudio &gt;= 1.3.0, you can auto-save edits in general (Code -&gt; Saving -&gt; Auto-Save), e.g. on idle editor or focus loss, so this feature becomes less relevant (<a href='https://github.com/r-lib/styler/issues/631'>#631</a>, <a href='https://github.com/r-lib/styler/issues/726'>#726</a>).</li>
-<li>blank lines in function calls and headers are now removed, for the former only when there are no comments before or after the blank line (<a href='https://github.com/r-lib/styler/issues/629'>#629</a>, <a href='https://github.com/r-lib/styler/issues/630'>#630</a>, <a href='https://github.com/r-lib/styler/issues/635'>#635</a>,
-<a href='https://github.com/r-lib/styler/issues/723'>#723</a>).</li>
-<li>speed improvements: ~10% when cache is activated because transformers are not captured as character anymore (<a href='https://github.com/r-lib/styler/issues/679'>#679</a>), ~3% in low-level optimization (<a href='https://github.com/r-lib/styler/issues/691'>#691</a>). 7% by requiring magrittr 2.0 (<a href='https://github.com/r-lib/styler/issues/681'>#681</a>), ~8% by dropping unused transformers (<a href='https://github.com/r-lib/styler/issues/711'>#711</a>), 4% by avoiding unnecessary sorting in internals (<a href='https://github.com/r-lib/styler/issues/739'>#739</a>).</li>
 <li>
-<code>#&lt;&lt;</code> is now recognized as the xaringan marker and no space is added after<code>#</code> (<a href='https://github.com/r-lib/styler/issues/700'>#700</a>).</li>
+<p>Documentation overhaul: New README, new “Get started” pkgdown page, new vignettes on <code>strict = FALSE</code>, <code>Adoption</code> renamed to <code>Third-party integrations</code>, minor other consistency edits (<a href='https://github.com/r-lib/styler/issues/741'>#741</a>, <a href='https://github.com/r-lib/styler/issues/643'>#643</a>, <a href='https://github.com/r-lib/styler/issues/618'>#618</a>, <a href='https://github.com/r-lib/styler/issues/614'>#614</a>, <a href='https://github.com/r-lib/styler/issues/677'>#677</a>,</p>
+<p><a href='https://github.com/r-lib/styler/issues/651'>#651</a>, <a href='https://github.com/r-lib/styler/issues/667'>#667</a>, <a href='https://github.com/r-lib/styler/issues/672'>#672</a>, <a href='https://github.com/r-lib/styler/issues/687'>#687</a>).</p>
+</li>
+<li><p>The environment variable <code>save_after_styling</code> is deprecated in favor of the R option <code>styler.save_after_styling</code> to control if a file is saved after styling with the RStudio Addin. Note than in RStudio &gt;= 1.3.0, you can auto-save edits in general (Code -&gt; Saving -&gt; Auto-Save), e.g. on idle editor or focus loss, so this feature becomes less relevant (<a href='https://github.com/r-lib/styler/issues/631'>#631</a>, <a href='https://github.com/r-lib/styler/issues/726'>#726</a>).</p></li>
+<li>
+<p>blank lines in function calls and headers are now removed, for the former only when there are no comments before or after the blank line (<a href='https://github.com/r-lib/styler/issues/629'>#629</a>, <a href='https://github.com/r-lib/styler/issues/630'>#630</a>, <a href='https://github.com/r-lib/styler/issues/635'>#635</a>,</p>
+<p><a href='https://github.com/r-lib/styler/issues/723'>#723</a>).</p>
+</li>
+<li><p>speed improvements: ~10% when cache is activated because transformers are not captured as character anymore (<a href='https://github.com/r-lib/styler/issues/679'>#679</a>), ~3% in low-level optimization (<a href='https://github.com/r-lib/styler/issues/691'>#691</a>). 7% by requiring magrittr 2.0 (<a href='https://github.com/r-lib/styler/issues/681'>#681</a>), ~8% by dropping unused transformers (<a href='https://github.com/r-lib/styler/issues/711'>#711</a>), 4% by avoiding unnecessary sorting in internals (<a href='https://github.com/r-lib/styler/issues/739'>#739</a>).</p></li>
+<li><p><code>#&lt;&lt;</code> is now recognized as the xaringan marker and no space is added after<code>#</code> (<a href='https://github.com/r-lib/styler/issues/700'>#700</a>).</p></li>
 </ul>
 </div>
 <div id="minor-changes-and-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
-<li>
-<code><a href="../reference/style_dir.html">style_dir()</a></code> and <code><a href="../reference/style_pkg.html">style_pkg()</a></code> now apply directory exclusion recursively with <code>exclude_dirs</code> (<a href='https://github.com/r-lib/styler/issues/676'>#676</a>).</li>
-<li>
-<code><a href="https://rdrr.io/r/base/switch.html">switch()</a></code> now has line breaks after every argument to match the tidyverse style guide (<a href='https://github.com/r-lib/styler/issues/722'>#722</a>, <a href='https://github.com/r-lib/styler/issues/727'>#727</a>).</li>
-<li>unary <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> before a function call does not give an error anymore, as before version 1.3.0 (<a href='https://github.com/r-lib/styler/issues/697'>#697</a>).</li>
-<li>certain combinations of <code>stylerignore</code> markers and cached expressions now don’t give an error anymore (<a href='https://github.com/r-lib/styler/issues/738'>#738</a>).</li>
-<li>cache is now correctly invalidated when style guide arguments change (<a href='https://github.com/r-lib/styler/issues/647'>#647</a>).</li>
-<li>empty lines are now removed between pipes and assignments (<a href='https://github.com/r-lib/styler/issues/645'>#645</a>, <a href='https://github.com/r-lib/styler/issues/710'>#710</a>).</li>
-<li>overhaul pgkdown site: Add search (<a href='https://github.com/r-lib/styler/issues/623'>#623</a>), group function in Reference (<a href='https://github.com/r-lib/styler/issues/625'>#625</a>).</li>
-<li>always strip trailing spaces and make cache insensitive to it (<a href='https://github.com/r-lib/styler/issues/626'>#626</a>).</li>
-<li>
-<code><a href="../reference/style_text.html">style_text()</a></code> can now style all input that <code><a href="https://rdrr.io/r/base/character.html">is.character()</a></code>, not just if it inherits from classes <code>character</code>, <code>utf8</code> or <code>vertical</code> (<a href='https://github.com/r-lib/styler/issues/693'>#693</a>).</li>
-<li>logical operators within square braces are now moved from the start of a line to the end of the previous line (<a href='https://github.com/r-lib/styler/issues/709'>#709</a>).</li>
-<li>spaces are now removed before <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> (<a href='https://github.com/r-lib/styler/issues/713'>#713</a>).</li>
-<li>minor documentation improvements (<a href='https://github.com/r-lib/styler/issues/643'>#643</a>, <a href='https://github.com/r-lib/styler/issues/618'>#618</a>, <a href='https://github.com/r-lib/styler/issues/614'>#614</a>, <a href='https://github.com/r-lib/styler/issues/677'>#677</a>, <a href='https://github.com/r-lib/styler/issues/651'>#651</a>, <a href='https://github.com/r-lib/styler/issues/667'>#667</a>, <a href='https://github.com/r-lib/styler/issues/672'>#672</a>,
-<a href='https://github.com/r-lib/styler/issues/687'>#687</a>).</li>
-<li>The internal <code><a href="../reference/create_tree.html">create_tree()</a></code> only used in testing of styler now works when the cache is activated (<a href='https://github.com/r-lib/styler/issues/688'>#688</a>).</li>
-<li>simplification of internals (<a href='https://github.com/r-lib/styler/issues/692'>#692</a>).</li>
-<li>include <code>test-*</code> files in styling pre-commit hook (<a href='https://github.com/r-lib/styler/issues/724'>#724</a>).</li>
+<li><p><code><a href="../reference/style_dir.html">style_dir()</a></code> and <code><a href="../reference/style_pkg.html">style_pkg()</a></code> now apply directory exclusion recursively with <code>exclude_dirs</code> (<a href='https://github.com/r-lib/styler/issues/676'>#676</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/switch.html">switch()</a></code> now has line breaks after every argument to match the tidyverse style guide (<a href='https://github.com/r-lib/styler/issues/722'>#722</a>, <a href='https://github.com/r-lib/styler/issues/727'>#727</a>).</p></li>
+<li><p>unary <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> before a function call does not give an error anymore, as before version 1.3.0 (<a href='https://github.com/r-lib/styler/issues/697'>#697</a>).</p></li>
+<li><p>certain combinations of <code>stylerignore</code> markers and cached expressions now don’t give an error anymore (<a href='https://github.com/r-lib/styler/issues/738'>#738</a>).</p></li>
+<li><p>cache is now correctly invalidated when style guide arguments change (<a href='https://github.com/r-lib/styler/issues/647'>#647</a>).</p></li>
+<li><p>empty lines are now removed between pipes and assignments (<a href='https://github.com/r-lib/styler/issues/645'>#645</a>, <a href='https://github.com/r-lib/styler/issues/710'>#710</a>).</p></li>
+<li><p>overhaul pgkdown site: Add search (<a href='https://github.com/r-lib/styler/issues/623'>#623</a>), group function in Reference (<a href='https://github.com/r-lib/styler/issues/625'>#625</a>).</p></li>
+<li><p>multiple <code>@examples</code> roxygen tags in a code block of <code>#'</code> are no longer squashed (<a href='https://github.com/r-lib/styler/issues/748'>#748</a>).</p></li>
+<li><p>roxygen code examples starting on the same line as the <code>@examples</code> tag are no longer moved to the next line (<a href='https://github.com/r-lib/styler/issues/748'>#748</a>).</p></li>
+<li><p>always strip trailing spaces and make cache insensitive to it (<a href='https://github.com/r-lib/styler/issues/626'>#626</a>).</p></li>
+<li><p><code><a href="../reference/style_text.html">style_text()</a></code> can now style all input that <code><a href="https://rdrr.io/r/base/character.html">is.character()</a></code>, not just if it inherits from classes <code>character</code>, <code>utf8</code> or <code>vertical</code> (<a href='https://github.com/r-lib/styler/issues/693'>#693</a>).</p></li>
+<li><p>logical operators within square braces are now moved from the start of a line to the end of the previous line (<a href='https://github.com/r-lib/styler/issues/709'>#709</a>).</p></li>
+<li><p>spaces are now removed before <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">[[</a></code> (<a href='https://github.com/r-lib/styler/issues/713'>#713</a>).</p></li>
+<li><p>The internal <code><a href="../reference/create_tree.html">create_tree()</a></code> only used in testing of styler now works when the cache is activated (<a href='https://github.com/r-lib/styler/issues/688'>#688</a>).</p></li>
+<li><p>simplification of internals (<a href='https://github.com/r-lib/styler/issues/692'>#692</a>).</p></li>
+<li><p>include <code>test-*</code> files in styling pre-commit hook (<a href='https://github.com/r-lib/styler/issues/724'>#724</a>).</p></li>
 </ul>
 </div>
 <div id="infrastructure-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#infrastructure-changes" class="anchor"></a>Infrastructure changes</h2>
 <ul>
-<li>switched from travis and AppVeyor to GitHub Actions (<a href='https://github.com/r-lib/styler/issues/653'>#653</a>, <a href='https://github.com/r-lib/styler/issues/660'>#660</a>).</li>
-<li>Added basic continuous benchmarking with <a href="https://github.com/lorenzwalthert/touchstone">lorenzwalthert/touchstone</a> (<a href='https://github.com/r-lib/styler/issues/674'>#674</a>, <a href='https://github.com/r-lib/styler/issues/684'>#684</a>, <a href='https://github.com/r-lib/styler/issues/698'>#698</a>).</li>
+<li><p>switched from travis and AppVeyor to GitHub Actions (<a href='https://github.com/r-lib/styler/issues/653'>#653</a>, <a href='https://github.com/r-lib/styler/issues/660'>#660</a>).</p></li>
+<li><p>Added basic continuous benchmarking with <a href="https://github.com/lorenzwalthert/touchstone">lorenzwalthert/touchstone</a> (<a href='https://github.com/r-lib/styler/issues/674'>#674</a>, <a href='https://github.com/r-lib/styler/issues/684'>#684</a>, <a href='https://github.com/r-lib/styler/issues/698'>#698</a>).</p></li>
 </ul>
 </div>
 </div>
