@@ -140,7 +140,7 @@ emulate_rd <- function(roxygen) {
       .[-1]
     list(
       text = c(
-        if (grepl("^#'\\s*\\t*@examples\\s*\\t*$", roxygen[2])) "",
+        if (grepl("^#'\\s*@examples\\s*$", roxygen[2])) "",
         text
       ),
       example_type = example_type

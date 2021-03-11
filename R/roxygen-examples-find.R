@@ -7,7 +7,7 @@
 #' @importFrom rlang seq2
 #' @keywords internal
 identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
-  starts <- grep("^#'\\s*@examples(If\\s|\\s|\\t|$)", text, perl = TRUE)
+  starts <- grep("^#'\\s*@examples(If\\s|\\s|$)", text, perl = TRUE)
   if (length(starts) < 1L) {
     return(integer())
   }
