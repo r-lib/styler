@@ -29,18 +29,7 @@ remove_roxygen_mask <- function(text) {
 #' #' @examples c(1, 2)
 #' @keywords internal
 remove_roxygen_header <- function(text) {
-  text <- gsub("^\\s*@examples(If\\s|\\s|$)", "", text, perl = TRUE)
-  if (grepl("^If ", text[1])) {
-    text[1] <- gsub("^If\\s*", "", text[1])
-    example_type <- "examplesIf"
-  } else {
-    example_type <- "examples"
-  }
-
-  list(
-    text = text,
-    example_type = example_type
-  )
+  gsub("^\\s*@examples(If)?(\\s|\t)*", "", text, perl = TRUE)
 }
 
 #' Add the roxygen mask to code

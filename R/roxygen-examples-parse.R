@@ -124,12 +124,11 @@ roxygen_remove_extra_brace <- function(parsed) {
 #' `remove_roxygen_mask()` when there are no characters to escape.
 #' @keywords internal
 emulate_rd <- function(roxygen) {
+  example_type <- gsub("^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "examples\\2", roxygen[1])
   if (needs_rd_emulation(roxygen)) {
-    example_type <- gsub("^#'\\s*@examples(If)?.*", "examples\\1", roxygen[1])
-
     roxygen <- c(
       "#' Example",
-      gsub("^#'\\s*@examples(If)?\\s*(.*)", "#' @examples \\2", roxygen),
+      gsub("^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "#' @examples \\4", roxygen),
       "x <- 1"
     )
     text <- roxygen2::roc_proc_text(
@@ -138,16 +137,17 @@ emulate_rd <- function(roxygen) {
     )[[1]]$get_section("examples") %>%
       as.character() %>%
       .[-1]
-    list(
-      text = c(
-        if (grepl("^#'\\s*@examples\\s*$", roxygen[2])) "",
-        text
-      ),
-      example_type = example_type
+    text <- c(
+      if (grepl("^#'(\\s|\t)*@examples(\\s|\t)*$", roxygen[2])) "",
+      text
     )
   } else {
-    remove_roxygen_mask(roxygen)
+    text <- remove_roxygen_mask(roxygen)
   }
+  list(
+    text = text,
+    example_type = example_type
+  )
 }
 
 #' Check if rd emulation is required with [roxygen2::roc_proc_text()]
