@@ -13,6 +13,9 @@
     <loc>https://styler.r-lib.org/reference/add_line_col_to_wrapped_expr.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/add_roxygen_mask.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/add_spaces_or_newlines.html</loc>
   </url>
   <url>
@@ -500,6 +503,9 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/style_roxygen_code_example.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/reference/style_roxygen_code_example_one.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/style_roxygen_code_example_segment.html</loc>

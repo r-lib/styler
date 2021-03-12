@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse roxygen comments into text — parse_roxygen • styler</title>
+<title>Add the roxygen mask to code — add_roxygen_mask • styler</title>
 
 
 <!-- jquery -->
@@ -45,10 +45,8 @@
 
 
 
-<meta property="og:title" content="Parse roxygen comments into text — parse_roxygen" />
-<meta property="og:description" content="Used to parse roxygen code examples. Removes line break before
-\\dontrun{...} and friends because it does not occur for segments other
-than \\dont{...} and friends." />
+<meta property="og:title" content="Add the roxygen mask to code — add_roxygen_mask" />
+<meta property="og:description" content="Add the roxygen mask to code" />
 
 
 <meta name="robots" content="noindex">
@@ -174,49 +172,31 @@ than \\dont{...} and friends." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse roxygen comments into text</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/roxygen-examples-parse.R'><code>R/roxygen-examples-parse.R</code></a></small>
-    <div class="hidden name"><code>parse_roxygen.Rd</code></div>
+    <h1>Add the roxygen mask to code</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/roxygen-examples-add-remove.R'><code>R/roxygen-examples-add-remove.R</code></a></small>
+    <div class="hidden name"><code>add_roxygen_mask.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Used to parse roxygen code examples. Removes line break before
-<code>\\dontrun{...}</code> and friends because it does not occur for segments other
-than <code>\\dont{...}</code> and friends.</p>
+    <p>Add the roxygen mask to code</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_roxygen</span><span class='op'>(</span><span class='va'>roxygen</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>add_roxygen_mask</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>example_type</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>roxygen</th>
-      <td><p>Roxygen comments.</p></td>
+      <th>text</th>
+      <td><p>Character vector with code.</p></td>
+    </tr>
+    <tr>
+      <th>example_type</th>
+      <td><p>Either 'examples' or 'examplesIf'</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>parse_roxygen</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-  <span class='st'>"#' @examples"</span>,
-  <span class='st'>"#' 1+  1"</span>
-<span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $text
-#&gt; [1] "\n"      "1+  1\n"
-#&gt; 
-#&gt; $example_type
-#&gt; [1] "examples"
-#&gt; </div><div class='input'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>parse_roxygen</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-  <span class='st'>"#' @examples 33"</span>,
-  <span class='st'>"#'1+  1"</span>
-<span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $text
-#&gt; [1] "33\n"    "1+  1\n"
-#&gt; 
-#&gt; $example_type
-#&gt; [1] "examples"
-#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
