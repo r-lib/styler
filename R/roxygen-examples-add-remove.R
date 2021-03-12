@@ -29,7 +29,7 @@ remove_roxygen_mask <- function(text) {
 #' #' @examples c(1, 2)
 #' @keywords internal
 remove_roxygen_header <- function(text) {
-  gsub("^\\s*@examples(If)?(\\s|\t)*", "", text, perl = TRUE)
+  gsub("^[\\s\t]*@examples(If)?(\\s|\t)*", "", text, perl = TRUE)
 }
 
 #' Add the roxygen mask to code
