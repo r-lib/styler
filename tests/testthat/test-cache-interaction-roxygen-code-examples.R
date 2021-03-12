@@ -53,7 +53,7 @@ test_that("roxzgen code examples are written to cache as whole expressions bring
   # don't use full cache, only roxygen cache
   styled[1] <- "#' This is a nother text"
   second <- system.time(style_text(styled))
-  expect_gt(first["elapsed"], 6 * second["elapsed"])
+  expect_gt(first["elapsed"], 5 * second["elapsed"])
 })
 
 test_that("cache is deactivated at end of caching related testthat file", {

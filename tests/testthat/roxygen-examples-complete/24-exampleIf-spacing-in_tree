@@ -1,0 +1,37 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--COMMENT: #' Th [0/0] {1}                           
+ ¦--COMMENT: #' [1/0] {2}                              
+ ¦--COMMENT: #' St [1/0] {3}                           
+ ¦--COMMENT: #' @f [1/0] {4}                           
+ ¦--COMMENT: #' @e [1/0] {5}                           
+ ¦--COMMENT: #' c( [1/0] {6}                           
+ ¦--COMMENT: #' @e [1/0] {7}                           
+ ¦--COMMENT: #' c( [1/0] {8}                           
+ ¦--COMMENT: #'    [1/0] {9}                           
+ ¦--COMMENT: #' c( [1/0] {10}                          
+ ¦--COMMENT: #' @i [1/0] {11}                          
+ ¦--COMMENT: #' @e [1/0] {12}                          
+ ¦--expr: x <-  [1/0] {13}                             
+ ¦   ¦--expr: x [0/1] {15}                             
+ ¦   ¦   °--SYMBOL: x [0/0] {14}                       
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {16}                     
+ ¦   °--expr: 3 [0/0] {18}                             
+ ¦       °--NUM_CONST: 3 [0/0] {17}                    
+ ¦--COMMENT: #' No [3/0] {19}                          
+ ¦--COMMENT: #' [1/0] {20}                             
+ ¦--COMMENT: #' St [1/0] {21}                          
+ ¦--COMMENT: #' @f [1/0] {22}                          
+ ¦--COMMENT: #' @e [1/0] {23}                          
+ ¦--COMMENT: #' a  [1/0] {24}                          
+ ¦--COMMENT: #' @e [1/0] {25}                          
+ ¦--COMMENT: #' a  [1/0] {26}                          
+ ¦--COMMENT: #'    [1/0] {27}                          
+ ¦--COMMENT: #' a  [1/0] {28}                          
+ ¦--COMMENT: #' @i [1/0] {29}                          
+ ¦--COMMENT: #' @e [1/0] {30}                          
+ °--expr: x <-  [1/0] {31}                             
+     ¦--expr: x [0/1] {33}                             
+     ¦   °--SYMBOL: x [0/0] {32}                       
+     ¦--LEFT_ASSIGN: <- [0/1] {34}                     
+     °--expr: 33 [0/0] {36}                            
+         °--NUM_CONST: 33 [0/0] {35}                   

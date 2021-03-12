@@ -29,16 +29,19 @@ remove_roxygen_mask <- function(text) {
 #' #' @examples c(1, 2)
 #' @keywords internal
 remove_roxygen_header <- function(text) {
-  text <- gsub("^\\s*@examples\\s*", "", text, perl = TRUE)
-  starts_with_blank <- text[1] == "\n"
-  c(text[1][!starts_with_blank], text[-1])
+  gsub("^[\\s\t]*@examples(If)?(\\s|\t)*", "", text, perl = TRUE)
 }
 
+#' Add the roxygen mask to code
+#'
+#' @param text Character vector with code.
+#' @param example_type Either 'examples' or 'examplesIf'.
+#' @keywords internal
 #' @importFrom purrr map2_chr
-add_roxygen_mask <- function(text) {
+add_roxygen_mask <- function(text, example_type) {
   space <- ifelse(text == "", "", " ")
   c(
-    paste0("#' @examples", space[1], text[1]),
+    paste0("#' @", example_type, space[1], text[1]),
     map2_chr(space[-1], text[-1], ~ paste0("#'", .x, .y))
   )
 }
