@@ -74,9 +74,11 @@
     entry: inst/bin/deps-in-desc
     language: script
     files: '(\.[rR]profile|\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
+    exclude: 'renv/activate\.R'
 -   id: lintr
     name: lintr
     description: check if a .R file is lint free (using lintr)
     entry: inst/bin/lintr
     language: script
     files: '\.[rR]$'
+    exclude: 'renv/activate\.R'
