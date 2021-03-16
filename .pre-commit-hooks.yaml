@@ -16,6 +16,7 @@
     entry: inst/bin/style-files
     language: script
     files: '(\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
+    exclude: 'renv/activate\.R'
 -   id: no-browser-statement
     name: no-browser-statement
     description: check if a .R file contains a `browser()` statement
