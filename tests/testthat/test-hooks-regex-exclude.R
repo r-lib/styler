@@ -27,6 +27,7 @@ test_that("exclude regex for spell check hook matches expected files", {
     ".Rprofile",
     ".Renviron",
     "renv.lock",
+    "renv/settings.dcf",
     "vignettes/.gitignore",
     "NAMESPACE",
     "inst/WORDLIST",
