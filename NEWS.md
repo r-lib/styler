@@ -12,6 +12,12 @@
   `{R.cache}` cache set up. You can silence the warning with the hook argument 
   `--no-warn-cache` (#225).
 
+**Major Changes**
+
+- {precommit} now uses [`language: r`](https://pre-commit.com/#r) instead of 
+  `language: script` from the [pre-commit framework](https://pre-commit.com). 
+  This requires `pre-commit >= 2.11.1`. All hooks and dependencies are now 
+  contained in a virtual environment with [`{renv}`](https://rstudio.github.io/renv/).
 
 **Minor changes**
 
