@@ -51,6 +51,7 @@ jobs:
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "18.04"), sep = "\n")')
       - name: Prepare virtual environment
         run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           source('renv/activate.R')
           renv::restore()
           # needed to make sure renv is activated in run_test() 
@@ -58,7 +59,7 @@ jobs:
         shell: Rscript {0}
       - name: Session info
         run: |
-          install.packages('sessioninfo', repos = 'cloud.r-project.org')
+          renv::install('sessioninfo', repos = 'cloud.r-project.org')
           options(width = 100)
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
@@ -68,7 +69,7 @@ jobs:
           renv::install('testthat')
           renv::install(getwd()) # circumvent https://github.com/r-lib/rcmdcheck/issues/136
           test_file('tests/testthat/test-hooks.R')
-        shell: Rscript {0}
+        shell: Rscript --vanilla {0}
 
       - name: Show testthat output
         if: always()
