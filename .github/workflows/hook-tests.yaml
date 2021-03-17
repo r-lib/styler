@@ -57,6 +57,10 @@ jobs:
           # needed to make sure renv is activated in run_test() 
           writeLines(paste0("source('", getwd(), "/renv/activate.R')"), '~/.Rprofile') 
         shell: Rscript {0}
+      - name: Build package in virtual environment
+        run: |
+          renv::install(getwd(), dependencies = FALSE) 
+        shell: Rscript {0}
       - name: Session info
         run: |
           renv::install('sessioninfo', repos = 'cloud.r-project.org')
@@ -67,8 +71,7 @@ jobs:
       - name: Test
         run: |
           renv::install('testthat')
-          renv::install(getwd()) # circumvent https://github.com/r-lib/rcmdcheck/issues/136
-          test_file('tests/testthat/test-hooks.R')
+          testthat::test_file('tests/testthat/test-hooks.R')
         shell: Rscript --vanilla {0}
 
       - name: Show testthat output
