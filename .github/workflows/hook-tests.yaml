@@ -57,6 +57,28 @@ jobs:
           # needed to make sure renv is activated in run_test() 
           writeLines(paste0("source('", getwd(), "/renv/activate.R')"), '~/.Rprofile') 
         shell: Rscript {0}
+      - name: Build package in virtual environment
+        run: |
+          renv::install(getwd(), dependencies = FALSE) 
+        shell: Rscript {0}
+      - name: Session info
+        run: |
+          renv::install('sessioninfo', repos = 'cloud.r-project.org')
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript --vanilla {0}
+      - name: Test
+        run: |
+          renv::install('testthat')
+          testthat::test_file('tests/testthat/test-hooks.R')
+        shell: Rscript --vanilla {0}
+
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
