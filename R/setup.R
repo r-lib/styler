@@ -1,6 +1,6 @@
-#' Set up pre-commit
+#' Get started with pre-commit
 #'
-#' Get started.
+#' This function sets up pre-commit for your git repo.
 #' @param install_hooks Whether to install environments for all available hooks.
 #'   If `FALSE`, environments are installed with first commit.
 #' @param legacy_hooks How to treat hooks already in the repo which are not

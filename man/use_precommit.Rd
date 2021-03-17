@@ -2,7 +2,7 @@
 % Please edit documentation in R/setup.R
 \name{use_precommit}
 \alias{use_precommit}
-\title{Set up pre-commit}
+\title{Get started with pre-commit}
 \usage{
 use_precommit(
   config_source = getOption("precommit.config_source"),
@@ -40,7 +40,7 @@ If \code{FALSE}, environments are installed with first commit.}
 \code{NULL} (invisibly). The function is called for its side effects.
 }
 \description{
-Get started.
+This function sets up pre-commit for your git repo.
 }
 \section{When to call this function?}{
 
