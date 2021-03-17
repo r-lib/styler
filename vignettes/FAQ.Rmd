@@ -41,10 +41,11 @@ generic hook helper in `.git/hooks/`.
 Note that starting with `precommit > 0.1.3`, hooks run in an isolated 
 [`{renv}`](https://rstudio.github.io/renv/), leveraging [R as a supported language](https://pre-commit.com/#r) in the pre-commit framework. The version of a package you use interactively 
 (e.g. `{roxygen2}` to document) might for that reason be different from the one 
-`{precommit}` uses. Since pre-commit will do all the work for you and sometimes
-even caches results for speed, we don't recommend running these things manually.
-If you need to know which package versions are used, look for the `renv.lock`
-file in https://github.com/lorenzwalthert/precommit at the tag specified under 
+pre-commit uses. The point of using pre-commit is to take mental burden off your
+shoulders (and sometimes even caches results for speed), so there is no need to 
+run functionality covered by the hooks manually anyways. If you need to know 
+which package versions are used, look for the `renv.lock` file in 
+https://github.com/lorenzwalthert/precommit at the git tag specified under 
 `rev:` in your `.pre-commit-config.yaml`.
 
 ## Can you use it outside RStudio?
