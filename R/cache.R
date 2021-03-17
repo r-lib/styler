@@ -13,11 +13,12 @@ has_persistent_R.cache <- function() {
 
 #' Issue a warning if `{R.cache}` uses temporary cache only
 #'
-#' This function is only exported to have a clean API, but it's not intended to
-#' be used by the end-user, only in hook scripts.
+#' This function is only exported for use in hook scripts, but it's not intended
+#' to be called by the end-user directly.
 #' @param temp_cache_is_enough Whether a temporary cache is accepted or not. `TRUE`
 #'   means no warning will be issued, `FALSE` means a warning will be issued if
 #'   no permanent cache is available.
+#' @family hook script helpers
 #' @export
 may_require_permanent_cache <- function(temp_cache_is_enough = FALSE) {
   if (has_persistent_R.cache()) {

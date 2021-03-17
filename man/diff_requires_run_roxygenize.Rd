@@ -14,12 +14,17 @@ A logical vector of length 1.
 }
 \description{
 This is the case if a new or replaced/removed line contains a roxygen2
-comment in a file that is staged. This is only exported because it's used
-in a hook script: It's not intended to be called by users of {precommit}
-directly.
+comment in a file that is staged.
+This function is only exported for use in hook scripts, but it's not intended
+to be called by the end-user directly.
 }
 \examples{
 \dontrun{
 diff_requires_run_roxygenize()
 }
 }
+\seealso{
+Other hook script helpers: 
+\code{\link{may_require_permanent_cache}()}
+}
+\concept{hook script helpers}

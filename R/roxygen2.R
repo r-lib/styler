@@ -44,12 +44,13 @@ extract_diff_root <- function(root = here::here()) {
 #' Check if we should run roxygen.
 #'
 #' This is the case if a new or replaced/removed line contains a roxygen2
-#' comment in a file that is staged. This is only exported because it's used
-#' in a hook script: It's not intended to be called by users of {precommit}
-#' directly.
+#' comment in a file that is staged.
+#' This function is only exported for use in hook scripts, but it's not intended
+#' to be called by the end-user directly.
 #' @return
 #' A logical vector of length 1.
 #' @inheritParams extract_diff_root
+#' @family hook script helpers
 #' @examples
 #' \dontrun{
 #' diff_requires_run_roxygenize()

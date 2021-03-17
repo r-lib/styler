@@ -12,6 +12,11 @@ means no warning will be issued, \code{FALSE} means a warning will be issued if
 no permanent cache is available.}
 }
 \description{
-This function is only exported to have a clean API, but it's not intended to
-be used by the end-user, only in hook scripts.
+This function is only exported for use in hook scripts, but it's not intended
+to be called by the end-user directly.
 }
+\seealso{
+Other hook script helpers: 
+\code{\link{diff_requires_run_roxygenize}()}
+}
+\concept{hook script helpers}

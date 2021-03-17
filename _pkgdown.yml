@@ -13,13 +13,18 @@ reference:
   - open_config
   - open_wordlist
   - autoupdate
-- title: "Other"
+- title: "Manage the pre-commit executable"
 - contents: 
   - uninstall_precommit
   - update_precommit
   - version_precommit
   - path_precommit_exec
-
+- title: "Hook script helpers"
+  desc: >
+    Functions used in hook scripts. Not intended to be called by the end user.
+- contents: 
+  - has_concept("hook script helpers")
+  
 destination: docs
 navbar:
   components:
