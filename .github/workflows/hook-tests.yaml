@@ -70,7 +70,13 @@ jobs:
         shell: Rscript --vanilla {0}
       - name: Test
         run: |
-          renv::install('testthat')
+          # testing dependencies (incl. {precommit}) live in global R library, 
+          # hook dependencies in renv, which is only activated when child R
+          # process is invoked, e.g. as in run_test()
+          renv::install(c('testthat', 'devtools'))
+          # some testing infrastructure we need is in R/testing.R
+          renv::install(getwd(), dependencies = TRUE) 
+          devtools::load_all()
           testthat::test_file('tests/testthat/test-hooks.R')
         shell: Rscript --vanilla {0}
 
