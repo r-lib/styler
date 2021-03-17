@@ -54,6 +54,7 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           source('renv/activate.R')
           renv::restore()
+          library(styler)
           # needed to make sure renv is activated in run_test() 
           writeLines(paste0("source('", getwd(), "/renv/activate.R')"), '~/.Rprofile') 
         shell: Rscript {0}
