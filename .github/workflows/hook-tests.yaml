@@ -58,7 +58,7 @@ jobs:
         shell: Rscript {0}
       - name: Session info
         run: |
-          install.packages('sessioninfo')
+          install.packages('sessioninfo', repos = 'cloud.r-project.org')
           options(width = 100)
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
