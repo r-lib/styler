@@ -26,7 +26,7 @@
 #' initiated from `run_test()`, the
 #' only way to do this is to set an env variable when running `run_test()` and
 #' check in the user R profile if it is set, and then activate the renv. This is
-#' done with `R_PRECOMMIT_HOOK_TESTING`.
+#' done with `R_PRECOMMIT_HOOK_ENV`.
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension).
 #' @param suffix The suffix of `file_name`.
@@ -50,7 +50,7 @@ run_test <- function(hook_name,
                      copy = NULL,
                      file_transformer = function(files) files,
                      env = character()) {
-  withr::local_envvar(list(R_PRECOMMIT_HOOK_TESTING = "1"))
+  withr::local_envvar(list(R_PRECOMMIT_HOOK_ENV = "1"))
   path_executable <- system.file(
     fs::path("bin", hook_name),
     package = "precommit"

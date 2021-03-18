@@ -81,7 +81,7 @@ testing environment. Since \code{--vanilla} is inherited in the child process
 initiated from \code{run_test()}, the
 only way to do this is to set an env variable when running \code{run_test()} and
 check in the user R profile if it is set, and then activate the renv. This is
-done with \code{R_PRECOMMIT_HOOK_TESTING}.
+done with \code{R_PRECOMMIT_HOOK_ENV}.
 }
 
 \keyword{internal}

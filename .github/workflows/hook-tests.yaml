@@ -57,7 +57,7 @@ jobs:
           renv::install(getwd(), dependencies = FALSE) 
           # needed to make sure renv is activated in run_test() 
           activate <- c(
-            "if (nzchar(Sys.getenv('R_PRECOMMIT_HOOK_TESTING')))",
+            "if (nzchar(Sys.getenv('R_PRECOMMIT_HOOK_ENV')))",
             paste0("    renv::activate('", getwd(), "')")
           )
           writeLines(activate, '~/.Rprofile') 
