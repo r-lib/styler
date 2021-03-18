@@ -3,7 +3,7 @@
 default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: fb49127c2535e7037c8c9353206176bc21e0fde3
+    rev: 9709dbf3743aba1ecf51f2821ffd9006c62b5ce3
     hooks: 
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
