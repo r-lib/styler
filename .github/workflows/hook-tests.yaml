@@ -33,7 +33,6 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
       - name: Query dependencies
         run: |
-          install.packages('remotes') # needed for sys reqs
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
       - name: Cache R packages
@@ -61,6 +60,7 @@ jobs:
       - name: Install system dependencies (Linux)
         if: runner.os == 'Linux'
         run: |
+          Rscript -e "install.packages('remotes', repos = Sys.getenv('RSPM'))"
           while read -r cmd
           do
             eval sudo $cmd
