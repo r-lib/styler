@@ -35,21 +35,21 @@ jobs:
         run: |
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
-      - name: Cache R packages
+      - name: Cache R packages (macOs)
         if: startsWith(runner.os, 'macOS')
         uses: actions/cache@v2
         with:
           path: ~/Library/Application Support/renv
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('renv.lock') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
-      - name: Cache R packages
+      - name: Cache R packages (Linux)
         if: startsWith(runner.os, 'Linux')
         uses: actions/cache@v2
         with:
           path: ~/.local/share/renv
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('renv.lock') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
-      - name: Cache R packages
+      - name: Cache R packages (Windows)
         if: startsWith(runner.os, 'Windows')
         uses: actions/cache@v2
         with:
