@@ -113,7 +113,7 @@ jobs:
       - name: Assert no leakage from testing to hook env (1/2)
         run: |
           Rscript -e "renv::deactivate(); renv::install('usethis'); path_pkg <- file.path(tempdir(), 'someP'); usethis::create_package(path_pkg); renv::install(path_pkg)"
-      - name: Assert no leakage from testing to hook env (1/2)
+      - name: Assert no leakage from testing to hook env (2/2)
         env: 
             R_PRECOMMIT_HOOK_ENV: "1"
         run: |
