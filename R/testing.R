@@ -1,7 +1,8 @@
 #' Run a test
 #'
 #' Tests for the executables used as pre-commit hooks via `entrypoint` in
-#' `.pre-commit-config.yaml`.
+#' `.pre-commit-config.yaml`. Set's the env variable `R_PRECOMMIT_HOOK_ENV` to 
+#' when running. 
 #' @details
 #' Two potential outcomes of a hooks are pass or fail. This is reflected on the
 #' level of the executable: Fail means the executable fails or the file is
@@ -15,18 +16,6 @@
 #'   executable. To check for failed executable, we set `error_msg` to
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
-#' @section renv:
-#' pre-commit >= 2.11.0 supports R as a language and each hook repo has its own
-#' virtual environment with package versions locked. For that reason, we should
-#' also test with exactly these versions. To avoid convolution of the testing
-#' environment (that contains testthat and other packages) and the hook
-#' environment (specified in `renv.lock`), we must only activate the hook
-#' environment right when the script is called, but `run_test()` must run in the
-#' testing environment. Since `--vanilla` is inherited in the child process
-#' initiated from `run_test()`, the
-#' only way to do this is to set an env variable when running `run_test()` and
-#' check in the user R profile if it is set, and then activate the renv. This is
-#' done with `R_PRECOMMIT_HOOK_ENV`.
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension).
 #' @param suffix The suffix of `file_name`.
