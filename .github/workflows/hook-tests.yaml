@@ -83,7 +83,7 @@ jobs:
           # hook dependencies in renv, which is only activated when child R
           # process is invoked, e.g. as in run_test()
           if (!requireNamespace("renv", quietly = TRUE)) {
-            install.packages("renv", repos = "cloud.r-project.org")
+            install.packages("renv", repos = c(CRAN = "cloud.r-project.org"))
           }
           renv::install(c('testthat', 'devtools'))
           # some testing infrastructure we need is in R/testing.R
