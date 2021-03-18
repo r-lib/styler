@@ -54,13 +54,13 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           source('renv/activate.R')
           renv::restore()
-          library(styler)
-          # needed to make sure renv is activated in run_test() 
-          writeLines(paste0("source('", getwd(), "/renv/activate.R')"), '~/.Rprofile') 
-        shell: Rscript {0}
-      - name: Build package in virtual environment
-        run: |
           renv::install(getwd(), dependencies = FALSE) 
+          # needed to make sure renv is activated in run_test() 
+          activate <- c(
+            "if (nzchar(Sys.getenv('R_PRECOMMIT_HOOK_TESTING')))",
+            paste0("    renv::activate('", getwd(), "')")
+          )
+          writeLines(activate, '~/.Rprofile') 
         shell: Rscript {0}
       - name: Session info
         run: |

@@ -15,7 +15,18 @@
 #'   executable. To check for failed executable, we set `error_msg` to
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
-#'
+#' @section renv:
+#' pre-commit >= 2.11.0 supports R as a language and each hook repo has its own
+#' virtual environment with package versions locked. For that reason, we should
+#' also test with exactly these versions. To avoid convolution of the testing
+#' environment (that contains testthat and other packages) and the hook
+#' environment (specified in `renv.lock`), we must only activate the hook
+#' environment right when the script is called, but `run_test()` must run in the
+#' testing environment. Since `--vanilla` is inherited in the child process
+#' initiated from `run_test()`, the
+#' only way to do this is to set an env variable when running `run_test()` and
+#' check in the user R profile if it is set, and then activate the renv. This is
+#' done with `R_PRECOMMIT_HOOK_TESTING`.
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension).
 #' @param suffix The suffix of `file_name`.
@@ -39,6 +50,7 @@ run_test <- function(hook_name,
                      copy = NULL,
                      file_transformer = function(files) files,
                      env = character()) {
+  withr::local_envvar(list(R_PRECOMMIT_HOOK_TESTING = "1"))
   path_executable <- system.file(
     fs::path("bin", hook_name),
     package = "precommit"
