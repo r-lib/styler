@@ -96,10 +96,10 @@ jobs:
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
-      - name: Assert random package is not available in hook env (1/2)
+      - name: Assert no leakage from testing to hook env (1/2)
         run: |
           Rscript -e "renv::install('usethis'); path_pkg <- file.path(tempdir(), 'someP'); usethis::create_package(path_pkg); renv::install(path_pkg)"
-      - name: Assert random package is not available in hook env (2/2)
+      - name: Assert no leakage from testing to hook env (1/2)
         run: |
           Rscript -e "if ('someP' %in% rownames(installed.packages())) stop('environment isolation not working: You installed a package into the testing environment and it is available in the hook environment')"
         env: 
