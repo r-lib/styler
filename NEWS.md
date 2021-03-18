@@ -30,6 +30,8 @@
 
 ## Major changes
 
+- styler is now distributed under the MIT license (#751).
+
 - Documentation overhaul: New README, new "Get started" pkgdown page, new
   vignettes on `strict = FALSE`, `Adoption` renamed to `Third-party
   integrations`, minor other consistency edits (#741, #643, #618, #614, #677,
