@@ -1,51 +1,51 @@
 -   id: roxygenize
     name: roxygenize
     description: run roxygen2::roxygenize()
-    entry: inst/bin/roxygenize
-    language: script
+    entry: Rscript inst/bin/roxygenize
+    language: r
     files: '^(R|man)/'
 -   id: use-tidy-description
     name: use-tidy-description
     description: run usethis::use_tidy_description()
-    entry: inst/bin/use-tidy-description
-    language: script
+    entry: Rscript inst/bin/use-tidy-description
+    language: r
     files: '^DESCRIPTION$'
 -   id: style-files
     name: style-files
     description: style files with styler
-    entry: inst/bin/style-files
-    language: script
+    entry: Rscript inst/bin/style-files
+    language: r
     files: '(\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
     exclude: 'renv/activate\.R'
 -   id: no-browser-statement
     name: no-browser-statement
     description: check if a .R file contains a `browser()` statement
-    entry: inst/bin/no-browser-statement
-    language: script
+    entry: Rscript inst/bin/no-browser-statement
+    language: r
     files: '\.[rR]$'
 -   id: parsable-R
     name: parsable-R
     description: check if a .R file is parsable
-    entry: inst/bin/parsable-R
-    language: script
+    entry: Rscript inst/bin/parsable-R
+    language: r
     files: '\.[rR]$'
 -   id: readme-rmd-rendered
     name: readme-rmd-rendered
     description: make sure README.Rmd hasn't been edited more recently than README.md
-    entry: inst/bin/readme-rmd-rendered
-    language: script
+    entry: Rscript inst/bin/readme-rmd-rendered
+    language: r
     files: 'README\.[Rr]?md$'
 -   id: codemeta-description-updated
     name: codemeta-description-updated
     description: make sure codemeta.json is in sync with DESCRIPTION. It should be run after use-tidy-description.
-    entry: inst/bin/codemeta-description-updated
-    language: script
+    entry: Rscript inst/bin/codemeta-description-updated
+    language: r
     files: '^DESCRIPTION$'
 -   id: spell-check 
     name: spell-check
     description: perform a spell check with spelling::spell_check_files()
-    entry: inst/bin/spell-check
-    language: script
+    entry: Rscript inst/bin/spell-check
+    language: r
     exclude: >
       (?x)^(
       data/.*| 
@@ -73,14 +73,14 @@
 -   id: deps-in-desc
     name: deps-in-desc
     description: Check if dependencies that can be parsed from code are in DESCRIPTION.
-    entry: inst/bin/deps-in-desc
-    language: script
+    entry: Rscript inst/bin/deps-in-desc
+    language: r
     files: '(\.[rR]profile|\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
     exclude: 'renv/activate\.R'
 -   id: lintr
     name: lintr
     description: check if a .R file is lint free (using lintr)
-    entry: inst/bin/lintr
-    language: script
+    entry: Rscript inst/bin/lintr
+    language: r
     files: '\.[rR]$'
     exclude: 'renv/activate\.R'
