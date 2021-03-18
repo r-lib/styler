@@ -49,7 +49,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "18.04"), sep = "\n")')
-      - name: Prepare virtual environment
+      - name: Prepare hook environment
         run: |
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           source('renv/activate.R')
@@ -62,14 +62,7 @@ jobs:
           )
           writeLines(activate, '~/.Rprofile') 
         shell: Rscript {0}
-      - name: Session info
-        run: |
-          renv::install('sessioninfo', repos = 'cloud.r-project.org')
-          options(width = 100)
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript --vanilla {0}
-      - name: Test
+      - name: Perpare testing environment
         run: |
           # testing dependencies (incl. {precommit}) live in global R library, 
           # hook dependencies in renv, which is only activated when child R
@@ -77,9 +70,24 @@ jobs:
           renv::install(c('testthat', 'devtools'))
           # some testing infrastructure we need is in R/testing.R
           renv::install(getwd(), dependencies = TRUE) 
+        shell: Rscript {0}
+      - name: Session info (testing environment)
+        run: |
+          renv::install('sessioninfo', repos = 'cloud.r-project.org')
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+      - name: Test
+        run: |
           devtools::load_all()
-          testthat::test_file('tests/testthat/test-hooks.R')
-        shell: Rscript --vanilla {0}
+          testthat::test_file(
+            "tests/testthat/test-exec.R",
+            reporter = testthat::MultiReporter$new(list(
+              testthat::CheckReporter$new(), testthat::FailReporter$new()
+            ))
+          )
+        shell: Rscript {0}
 
       - name: Show testthat output
         if: always()
