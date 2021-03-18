@@ -51,6 +51,7 @@ EOLs
 eq
 EQ
 eval
+examplesIf
 expr
 expr EQ
 fileext

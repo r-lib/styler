@@ -9,7 +9,7 @@ add_roxygen_mask(text, example_type)
 \arguments{
 \item{text}{Character vector with code.}
 
-\item{example_type}{Either 'examples' or 'examplesIf'}
+\item{example_type}{Either 'examples' or 'examplesIf'.}
 }
 \description{
 Add the roxygen mask to code
