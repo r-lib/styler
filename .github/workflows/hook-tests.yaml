@@ -89,3 +89,32 @@ jobs:
           # some testing infrastructure we need is in R/testing.R
           renv::install(getwd(), dependencies = TRUE) 
         shell: Rscript {0}
+      - name: Session info (testing environment)
+        run: |
+          renv::install('sessioninfo', repos = 'cloud.r-project.org')
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+      - name: Test
+        run: |
+          devtools::load_all()
+          testthat::test_file(
+            "tests/testthat/test-hooks.R",
+            reporter = testthat::MultiReporter$new(list(
+              testthat::CheckReporter$new(), testthat::FailReporter$new()
+            ))
+          )
+        shell: Rscript {0}
+
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
