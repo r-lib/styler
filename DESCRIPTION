@@ -13,7 +13,7 @@ Authors@R:
              email = "lorenz.walthert@icloud.com"))
 Description: Pretty-prints R code without changing the user's formatting
     intent.
-License: GPL-3
+License: MIT + file LICENSE
 URL: https://github.com/r-lib/styler, https://styler.r-lib.org
 BugReports: https://github.com/r-lib/styler/issues
 Imports: 
