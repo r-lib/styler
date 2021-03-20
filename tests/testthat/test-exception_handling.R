@@ -32,6 +32,6 @@ test_that("warning is given when transformers does not contain a version", {
   }
   expect_fun(
     assert_transformers(sg),
-    "name and a version field are depreciated and won't be supported in styler >= 1.4"
+    "name and a version field are depreciated and are not supported in styler >= 1.4"
   )
 })
