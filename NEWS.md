@@ -49,10 +49,10 @@
   when there are no comments before or after the blank line (#629, #630, #635,
   #723).
 
-- speed improvements: ~10% when cache is activated because transformers are not
-  captured as character anymore (#679), ~3% in low-level optimization (#691). 7%
-  by requiring magrittr 2.0 (#681), ~8% by dropping unused transformers (#711),
-  4% by avoiding unnecessary sorting in internals (#739).
+- speed improvements: 15% faster on new code, 70% on repeated styling of 
+  compliant code (The latter is not so relevant because it was almost 
+  instantaneous already). Most relevant contributions were #679, #691, #681, 
+  #711, #739.
 
 - `#<<` is now recognized as the xaringan marker and no space is added after`#`
   (#700).
