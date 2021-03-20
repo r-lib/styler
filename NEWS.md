@@ -35,7 +35,7 @@
 - Documentation overhaul: New README, new "Get started" pkgdown page, new
   vignettes on `strict = FALSE`, `Adoption` renamed to `Third-party
   integrations`, minor other doc improvements (#741, #643, #618, #614, #677,
-  #651, #667, #672, #687, #752).
+  #651, #667, #672, #687, #752, #754).
 
 - `@exampleIsf` roxygen tag for conditional examples is now supported (#743).
 
