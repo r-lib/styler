@@ -40,7 +40,7 @@ The `transformers` argument is, apart from the code to style, the key argument
 of functions such as `style_text()` and friends. By default, it is created via
 the `style` argument. The transformers are a named list of transformer functions
 and other arguments passed to styler. To use the default style guide of styler
-([the tidyverse style guide](http://style.tidyverse.org/)), call
+([the tidyverse style guide](https://style.tidyverse.org/)), call
 `tidyverse_style()` to get the list of the transformer functions. Let's quickly
 look at what those are.
 

@@ -200,7 +200,7 @@ Thanks to all contributors involved, in particular
 [&#x0040;davidski](https://github.com/davidski), 
 [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
 [&#x0040;pat-s](https://github.com/pat-s), and 
-[&#x0040;programming-wizard](https://github.com/programming-wizard).
+[&#x0040;programming-wizard](https://github.com).
 
 # styler 1.2.0
 
@@ -325,7 +325,7 @@ else you can use styler functionality:
   frames with `drake::drake_plan_source()`.
 
 * Adding styler as a fixer to the [ale
-  Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966) for
+  Plug-in](https://github.com/dense-analysis/ale/pull/2401) for
   VIM.
 
 Thanks to all contributors involved, in particular

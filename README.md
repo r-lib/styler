@@ -8,7 +8,7 @@
 [![R build
 status](https://github.com/r-lib/styler/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/styler/actions)
 [![Life cycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![codecov test
 coverage](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
 [![CRAN
@@ -56,4 +56,4 @@ The following online docs are available:
 
 -   [latest CRAN release](https://styler.r-lib.org).
 
--   [GitHub development version](https://styler.r-lib.org/dev).
+-   [GitHub development version](https://styler.r-lib.org/dev/).

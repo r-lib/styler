@@ -16,7 +16,7 @@ set_space_in_curly_curly(pd)
 With \{rlang\} version 0.4, a new syntactic sugar is introduced, the
 curly-curly operator. It interprets this code in a special way:
 \verb{call(\\\{\\\{ x \\\}\\\})}. See this
-\href{https://www.tidyverse.org/articles/2019/06/rlang-0-4-0/}{blog post}
+\href{https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/}{blog post}
 on the topic. Here, the curly-curly sugar is understood as two opening
 curly braces, followed by an expression followed by two closing curly braces,
 e.g. \verb{\\\{\\\{1\\\}\\\}}. \verb{\\\{\\\{1\\\} + 1\\\}} does not contain the curly-curly syntactic
