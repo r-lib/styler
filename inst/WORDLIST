@@ -9,8 +9,10 @@ arg
 AsIs
 AST
 aut
+autothresholdr
 backport
 benchmarking
+biocthis
 bootswatch
 BugReports
 cancelling
@@ -28,6 +30,7 @@ coventions
 covr
 cran
 cre
+datastructures
 dec
 deps
 desc
@@ -48,10 +51,12 @@ env
 EOF
 EOL
 EOLs
+epigraphdb
 eq
 EQ
 eval
 examplesIf
+exampletestr
 expr
 expr EQ
 fileext
@@ -88,6 +93,7 @@ Kirill
 knitr
 krlmlr
 labelled
+languageserver
 LazyData
 levelName
 LF
@@ -106,7 +112,9 @@ mutli
 na
 navbar
 netlify
+netReg
 NONINFRINGEMENT
+nph
 NUM
 oldrel
 os
@@ -129,6 +137,7 @@ prefill
 prettycode
 PRs
 purrr
+questionr
 rcmdcheck
 RcppExports
 rds
@@ -142,6 +151,7 @@ relevel
 renv
 repo
 reprex
+revdepcheck
 RHUB
 rlang
 rlang's
@@ -180,6 +190,10 @@ sessioninfo
 setCacheRootPath
 setdiff
 setenv
+shinydashboardPlus
+shinyMonacoEditor
+shinyobjects
+ShinyQuickStarter
 sprintf
 StackOverflow
 startsWith
@@ -195,6 +209,7 @@ summarises
 Sys
 sysreq
 sysreqs
+systemPipeShiny
 tempfile
 testthat
 tibble
@@ -217,6 +232,7 @@ unlink
 unlinkunindention
 unnest
 unstyled
+usethis
 utf
 VignetteBuilder
 Visit'em
