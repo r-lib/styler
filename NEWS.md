@@ -108,6 +108,11 @@
   [lorenzwalthert/touchstone](https://github.com/lorenzwalthert/touchstone)
   (#674, #684, #698).
 
+
+Thanks to all the people who made this release possible:
+
+[&#x0040;assignUser](https://github.com/assignUser), [&#x0040;ColmanHumphrey](https://github.com/ColmanHumphrey), [&#x0040;davidchall](https://github.com/davidchall), [&#x0040;espinielli](https://github.com/espinielli), [&#x0040;giko45](https://github.com/giko45), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;intiben](https://github.com/intiben), [&#x0040;jamespeapen](https://github.com/jamespeapen), [&#x0040;jthomasmock](https://github.com/jthomasmock), [&#x0040;Kalaschnik](https://github.com/Kalaschnik), [&#x0040;kevinushey](https://github.com/kevinushey), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lcolladotor](https://github.com/lcolladotor), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;pat-s](https://github.com/pat-s), [&#x0040;PMassicotte](https://github.com/PMassicotte), [&#x0040;QuLogic](https://github.com/QuLogic), [&#x0040;renkun-ken](https://github.com/renkun-ken), [&#x0040;RichardJActon](https://github.com/RichardJActon), [&#x0040;seed-of-apricot](https://github.com/seed-of-apricot), [&#x0040;select-id-from-users](https://github.com/select-id-from-users), [&#x0040;SimonDedman](https://github.com/SimonDedman), [&#x0040;stefanoborini](https://github.com/stefanoborini), [&#x0040;swsoyee](https://github.com/swsoyee), and [&#x0040;Winterstorm-j](https://github.com/Winterstorm-j).
+
 # styler 1.3.2
 
 Release upon request by the CRAN team.
