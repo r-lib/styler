@@ -123,7 +123,8 @@ path_derive_precommit_exec_win_python3plus_candidates <- function() {
 path_derive_precommit_exec_macOS <- function() {
   c(
     fs::path(sort(fs::dir_ls(path_if_exist("~/Library/Python/")), decreasing = TRUE), "bin"), # pip
-    "/usr/local/bin" # homebrew
+    "/usr/local/bin", # homebrew
+    "/opt/homebrew/bin" # homebrew Apple Silicon (M1 chip)
   ) %>%
     path_derive_precommit_exec_impl()
 }

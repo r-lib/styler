@@ -12,6 +12,7 @@
   `{R.cache}` cache set up. You can silence the warning with the hook argument 
   `--no-warn-cache` (#225).
 
+
 **Minor changes**
 
 - The cache for the roxygen2 hook is now also invalidated for changes in formals 
@@ -19,7 +20,9 @@
 - `{renv}` infra files are not checked anymore by default (#237).
 - `deps-in-desc` now checks `.Rprofile`, `.Rmd` and `.Rnw` files in addition to 
   `.R` files (#216).  
-
+- The location of the pre-commit executable is now also recognised on Apple Silicon
+  when installed with Homebrew (#240).
+  
 # precommit v0.1.3
 
 This is mainly a CRAN maintenance release because of #201 and includes some 
