@@ -2,6 +2,8 @@
 
 ## API Changes
 
+**new**
+
 - `style_file()` and friends gain argument `dry` to control if changes should be
   applied to files or not (#634).
 
@@ -9,9 +11,6 @@
   control by how much the output code is indented (#649, #692). The Addin for
   styling a selection picks that up, e.g. you can style a function body and
   indention is preserved (#725).
-
-- added an option (`styler.test_dir_writeable`) that changes test behavior to
-  not directly modify test files in the current directory (#548).
 
 - added an option for disabling all communication when using the package
   (`styler.quiet`) (#640).
@@ -23,10 +22,22 @@
   style tokens, you had to always also style spaces, indention, line breaks as
   well (#705, #707).
 
+- added an option (`styler.test_dir_writeable`) that changes test behavior to
+  not directly modify test files in the current directory (#548).
+
 - New argument `transformers_drop` in `create_style_guide()` to be populated
   with new helper function `specify_transformers_drop()` for specifying
   conditions under which transformers are not going to be used and can therefore
   be omitted without effecting the result of styling (#711).
+
+**deprecated**
+
+- The environment variable `save_after_styling` is deprecated in favor of the R
+  option `styler.save_after_styling` to control if a file is saved after styling
+  with the RStudio Addin. Note than in RStudio >= 1.3.0, you can auto-save edits
+  in general (Code -> Saving -> Auto-Save), e.g. on idle editor or focus loss,
+  so this feature becomes less relevant (#631, #726).
+
 
 ## Major changes
 
@@ -34,16 +45,11 @@
 
 - Documentation overhaul: New README, new "Get started" pkgdown page, new
   vignettes on `strict = FALSE`, `Adoption` renamed to `Third-party
-  integrations`, minor other doc improvements (#741, #643, #618, #614, #677,
-  #651, #667, #672, #687, #752, #754).
+  integrations` (#741), adding search to pkgdown (#623), group functions in
+  pkgdown reference page (#625), minor other doc improvements (#643, #618, #614,
+  #677, #651, #667, #672, #687, #752, #754).
 
 - `@exampleIsf` roxygen tag for conditional examples is now supported (#743).
-
-- The environment variable `save_after_styling` is deprecated in favor of the R
-  option `styler.save_after_styling` to control if a file is saved after styling
-  with the RStudio Addin. Note than in RStudio >= 1.3.0, you can auto-save edits
-  in general (Code -> Saving -> Auto-Save), e.g. on idle editor or focus loss,
-  so this feature becomes less relevant (#631, #726).
 
 - blank lines in function calls and headers are now removed, for the former only
   when there are no comments before or after the blank line (#629, #630, #635,
@@ -75,8 +81,6 @@
 
 - empty lines are now removed between pipes and assignments (#645, #710).
 
-- overhaul pgkdown site: Add search (#623), group function in Reference (#625).
-
 - multiple `@examples` roxygen tags in a code block of `#'` are no longer
   squashed (#748).
 
@@ -98,8 +102,6 @@
 
 - simplification of internals (#692).
 
-- include `test-*` files in styling pre-commit hook (#724).
-
 ## Infrastructure changes
 
 - switched from travis and AppVeyor to GitHub Actions (#653, #660).
@@ -107,6 +109,8 @@
 - Added basic continuous benchmarking with
   [lorenzwalthert/touchstone](https://github.com/lorenzwalthert/touchstone)
   (#674, #684, #698).
+
+- include `test-*` files in styling pre-commit hook (#724).
 
 
 Thanks to all the people who made this release possible:
