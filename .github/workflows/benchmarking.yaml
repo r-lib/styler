@@ -60,9 +60,9 @@ jobs:
       - name: Checkout benchmarking repo
         uses: actions/checkout@v2
         with:
-          repository: {{ env.BENCHMARKING_REPO }}
-          ref: {{ env.BENCHMARKING_REPO }}
-          path: {{ env.BENCHMARKING_PATH }}
+          repository: ${{ env.BENCHMARKING_REPO }}
+          ref: ${{ env.BENCHMARKING_REPO }}
+          path: ${{ env.BENCHMARKING_PATH }}
       - name: Prepare PR comment
         run: |
           mkdir -p touchstone/sources
