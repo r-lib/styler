@@ -122,7 +122,7 @@ style_line_break_around_curly <- function(strict, pd) {
 #' With \{rlang\} version 0.4, a new syntactic sugar is introduced, the
 #' curly-curly operator. It interprets this code in a special way:
 #' `call(\{\{ x \}\})`. See this
-#' [blog post](https://www.tidyverse.org/articles/2019/06/rlang-0-4-0/)
+#' [blog post](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/)
 #' on the topic. Here, the curly-curly sugar is understood as two opening
 #' curly braces, followed by an expression followed by two closing curly braces,
 #' e.g. `\{\{1\}\}`. `\{\{1\} + 1\}` does not contain the curly-curly syntactic

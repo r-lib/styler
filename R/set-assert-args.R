@@ -21,15 +21,17 @@ set_arg_write_tree <- function(write_tree) {
 #' @inheritParams make_transformer
 #' @keywords internal
 assert_transformers <- function(transformers) {
+  version_cutoff <- 1.5
   no_name <- is.null(transformers$style_guide_name)
   no_version <- is.null(transformers$style_guide_version)
   if (no_name || no_version) {
-    action <- ifelse(utils::packageVersion("styler") >= 1.4,
-      "are not supported", "won't be supported"
+    action <- ifelse(utils::packageVersion("styler") >= version_cutoff,
+      "are not supported anymore",
+      "depreciated and will be removed in a future version of styler."
     )
     message <- paste(
-      "Style guides without a name and a version field are depreciated and",
-      action, "in styler >= 1.4. \nIf you are a user: Open an issue on",
+      "Style guides without a name and a version field are",
+      action, "\nIf you are a user: Open an issue on",
       "https://github.com/r-lib/styler and provide a reproducible example",
       "of this error. \nIf you are a developer:",
       "When you create a style guide with `styler::create_style_guide()`, the",
@@ -37,7 +39,7 @@ assert_transformers <- function(transformers) {
       "non-NULL. See help(\"create_style_guide\") for how to set them."
     )
 
-    if (utils::packageVersion("styler") >= 1.4) {
+    if (utils::packageVersion("styler") >= version_cutoff) {
       rlang::abort(message)
     } else {
       rlang::warn(message)
