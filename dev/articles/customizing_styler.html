@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.0.9000</span>
       </span>
     </div>
 
@@ -148,7 +148,7 @@
 <li><p>Apply transformer functions at each level of the nested parse table. We use a visitor approach, i.e. a function that takes functions as arguments and applies them to every level of nesting. You can find out more about it on the help file for <code><a href="../reference/visit.html">visit()</a></code>. Note that the function is not exported by styler. The visitor will take care of applying the functions on every level of nesting - and we can supply transformer functions that operate on one level of nesting. In the sequel, we use the term <em>nest</em> to refer to such a parse table at one level of nesting. A <em>nest</em> always represents a complete expression. Before we apply the transformers, we have to initialize two columns <code>lag_newlines</code> and <code>spaces</code>, which contain the number of line breaks before the token and the number of spaces after the token. These will be the columns that most of our transformer functions will modify.</p></li>
 <li><p>Serialize the nested parse table, that is, extract the terminal tokens from the nested parse table and add spaces and line breaks between them as specified in the nested parse table.</p></li>
 </ol>
-<p>The <code>transformers</code> argument is, apart from the code to style, the key argument of functions such as <code><a href="../reference/style_text.html">style_text()</a></code> and friends. By default, it is created via the <code>style</code> argument. The transformers are a named list of transformer functions and other arguments passed to styler. To use the default style guide of styler (<a href="http://style.tidyverse.org/">the tidyverse style guide</a>), call <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> to get the list of the transformer functions. Let’s quickly look at what those are.</p>
+<p>The <code>transformers</code> argument is, apart from the code to style, the key argument of functions such as <code><a href="../reference/style_text.html">style_text()</a></code> and friends. By default, it is created via the <code>style</code> argument. The transformers are a named list of transformer functions and other arguments passed to styler. To use the default style guide of styler (<a href="https://style.tidyverse.org/">the tidyverse style guide</a>), call <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> to get the list of the transformer functions. Let’s quickly look at what those are.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-lib/styler">"styler"</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/cache_activate.html">cache_deactivate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -188,7 +188,7 @@
 ##     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L
 ##     pd_flat
 ## }
-## &lt;bytecode: 0x7fed8c795a98&gt;
+## &lt;bytecode: 0x7fa585ec01e8&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>As the name says, this function removes spaces after the opening parenthesis. But how? Its input is a <em>nest</em>. Since the visitor will go through all levels of nesting, we just need a function that can be applied to a <em>nest</em>, that is, to a parse table at one level of nesting. We can compute the nested parse table and look at one of the levels of nesting that is interesting for us (more on the data structure in the vignettes “Data structures” and “Manipulating the parse table”):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -270,7 +270,7 @@
 ##         outer_indention_refs = NA)
 ##     transformed_absolute_indent
 ## }
-## &lt;bytecode: 0x7fed87092310&gt;
+## &lt;bytecode: 0x7fa582041eb0&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>This means that the order of the styling is clearly defined and it is for example not possible to modify line breaks based on spacing, because spacing will be set after line breaks are set. Do not rely on the column <code>col1</code>, <code>col2</code>, <code>line1</code> and <code>line2</code> in the parse table in any of your functions since these columns only reflect the position of tokens at the point of parsing,</p>
 <p>i.e. they are not kept up to date throughout the process of styling.</p>
@@ -372,7 +372,7 @@
 ##     pd$lag_newlines[round_after_curly] &lt;- 0L
 ##     pd
 ## }
-## &lt;bytecode: 0x7fed8c7d04a8&gt;
+## &lt;bytecode: 0x7fa585ef6ce8&gt;
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>With our example function <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to worry about that as we are only adding line breaks, but we don’t remove them.</p>
 </div>

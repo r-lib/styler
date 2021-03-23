@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.0.9000</span>
       </span>
     </div>
 
@@ -145,7 +145,7 @@
 <li><p>through commenting a PR on GitHub with <code>\style</code> when the <a href="https://github.com/features/actions">GitHub Action</a> <a href="https://github.com/r-lib/actions/tree/master/examples#tidyverse-ci-workflow"><em>Tidyverse CI</em></a> is used. The most convenient way to set this up is via <a href="https://usethis.r-lib.org/reference/tidyverse.html"><code>usethis::use_tidy_github_actions()</code></a>.</p></li>
 <li><p>in <code>reprex::reprex(..., style = TRUE)</code> to prettify reprex code before printing. To permanently use <code>style = TRUE</code> without specifying it every time, you can add the following line to your <code>.Rprofile</code> (via <code>usethis::edit_r_profile()</code>): <code><a href="https://rdrr.io/r/base/options.html">options(reprex.styler = TRUE)</a></code>.</p></li>
 <li><p>as a formatter for RMarkdown without modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g.<code>```{r name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy = "styler")</code> at the top of your RMarkdown script.</p></li>
-<li><p>As a fixer to the <a href="https://github.com/w0rp/ale/pull/2401#issuecomment-485942966">ale Plug-in</a> for VIM.</p></li>
+<li><p>As a fixer to the <a href="https://github.com/dense-analysis/ale/pull/2401">ale Plug-in</a> for VIM.</p></li>
 <li><p>in the <em>format-all</em> command for Emacs in <a href="https://github.com/lassik/emacs-format-all-the-code">emacs-format-all-the-code</a>.</p></li>
 <li><p>As a <a href="https://jupyterlab-code-formatter.readthedocs.io/en/latest/installation.html#r-code-formatters">Jupyterlab code formatter</a>.</p></li>
 <li><p>for pretty-printing <a href="https://github.com/ropensci/drake">drake</a> workflow data frames with <code>drake::drake_plan_source()</code>.</p></li>
