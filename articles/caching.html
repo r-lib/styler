@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -41,9 +41,12 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="../articles/styler.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -56,36 +59,52 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integrations.html">Third-party integrations</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Developers</li>
+    <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
-    </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    </li>
+    <li>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -105,7 +124,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="caching_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Caching</h1>
@@ -118,19 +137,21 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">styler</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler">styler</a></span><span class="op">)</span></code></pre></div>
 <p>This is a developer vignette to explain how caching works and what we learned on the way. To use the caching feature, please have a look at the README.</p>
 <p>The main caching features were implemented in the following two pull requests:</p>
 <ul>
 <li><p>#538: Implemented simple caching and utilities for managing caches. Input text is styled as a whole and added to the cache afterwards. This makes most sense given that the very same expression will probably never be passed to styler, unless it is already compliant with the style guide. Apart from the (negligible) innode, caching text has a memory cost of 0. Speed boosts only result if the whole text passed to styler is compliant to the style guide in use. Changing one line in a file with hundreds of lines means each line will be styled again. This is a major drawback and makes the cache only useful for a use with a pre-commit framework (the initial motivation) or when functions like <code><a href="../reference/style_pkg.html">style_pkg()</a></code> are run often and most files were not changed.</p></li>
 <li><p>#578: Adds a second layer of caching by caching top-level expressions individually. This will bring speed boosts to the situation where very little is changed but there are many top-level expressions. Hence, changing one line in a big file will invalidate the cache for the expression the line is part of, i.e. when changing <code>x &lt;- 2</code> to <code>x = 2</code> below, styler will have to restyle the function definition, but not <code>another(call)</code> and all other expressions that were not changed.</p></li>
 </ul>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="kw">function</span>() {
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># a comment </span>
-  <span class="no">x</span> <span class="kw">=</span> <span class="fl">2</span> <span class="co"># &lt;- change this line</span>
-}
+  <span class="va">x</span> <span class="op">=</span> <span class="fl">2</span> <span class="co"># &lt;- change this line</span>
+<span class="op">}</span>
 
-<span class="fu">another</span>(<span class="no">call</span>)</pre></body></html></div>
+<span class="fu">another</span><span class="op">(</span><span class="va">call</span><span class="op">)</span></code></pre></div>
 <p>While #538 also required a lot of thought, this is not necessarily visible in the diff. The main challenge was to figure out how the caching should work conceptually and where we best insert the functionality as well as how to make caching work for edge cases like trailing blank lines etc. For details on the conceptual side and requirements, see #538.</p>
 <p>In comparison, the diff in #578 is much larger. We can walk through the main changes introduced here:</p>
 <ul>
@@ -156,7 +177,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -46,11 +46,10 @@
 
 
 <meta property="og:title" content="Remember the past to be quicker in the future — caching" />
-<meta property="og:description" content="Caching makes styler faster on repeated styling. It does not cache input
-but output code. That means if you style code that already complies to a
-style guide and you have previously styled that code, it will be quicker.
-Code is cached by expression and the cache is shared across all APIs (e.g.
-style_text() and Addin." />
+<meta property="og:description" content="Caching makes styler faster on repeated styling and is shared across all APIs
+(e.g. style_text() and Addin).
+That means if you style code that already complies to a
+style guide and you have previously styled that code, it will be quicker." />
 
 
 
@@ -82,7 +81,7 @@ style_text() and Addin." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -90,9 +89,12 @@ style_text() and Addin." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="../articles/styler.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -105,36 +107,52 @@ style_text() and Addin." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integrations.html">Third-party integrations</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
+    <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
-    </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    </li>
+    <li>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -163,34 +181,50 @@ style_text() and Addin." />
     </div>
 
     <div class="ref-description">
-    <p>Caching makes styler faster on repeated styling. It does not cache input
-but output code. That means if you style code that already complies to a
-style guide and you have previously styled that code, it will be quicker.
-Code is cached by expression and the cache is shared across all APIs (e.g.
-<code><a href='style_text.html'>style_text()</a></code> and Addin.</p>
+    <p>Caching makes styler faster on repeated styling and is shared across all APIs
+(e.g. <code><a href='style_text.html'>style_text()</a></code> and Addin).
+That means if you style code that already complies to a
+style guide and you have previously styled that code, it will be quicker.</p>
     </div>
 
 
 
-    <h2 class="hasAnchor" id="setup"><a class="anchor" href="#setup"></a>Setup</h2>
+    <h2 class="hasAnchor" id="manage-the-cache"><a class="anchor" href="#manage-the-cache"></a>Manage the cache</h2>
 
     
 
-<p>styler by default uses caching, via the <code>{R.cache}</code> package. You will be
-asked you to let it create a permanent cache on your file system that styler
-will use in case it is not set that up already for another tool that
-uses <code>{R.cache}</code>. We encourage users to let <code>{R.cache}</code> create a permanent
-directory for caching, because otherwise, the cache is lost at restart of R.</p>
+<p>See <code><a href='cache_info.html'>cache_info()</a></code>,<code><a href='cache_activate.html'>cache_activate()</a></code> or <code><a href='cache_clear.html'>cache_clear()</a></code> for utilities to
+manage the cache. You can deactivate it altogether with <code><a href='cache_activate.html'>cache_deactivate()</a></code>.
+Since we leverage <code>{R.cache}</code> to manage the cache, you can also use any
+<code>{R.cache}</code> functionality to manipulate it.</p>
+    <h2 class="hasAnchor" id="interactive-setup"><a class="anchor" href="#interactive-setup"></a>Interactive setup</h2>
+
+    
+
+<p><code>{styler}</code> by default uses caching via the <code>{R.cache}</code> package. When interacting
+with <code>{styler}</code>, you will be asked to let it create a permanent cache on your
+file system that styler will use in case it is not set already up for another
+tool that uses <code>{R.cache}</code>. We encourage users to let <code>{R.cache}</code> create a
+permanent directory for caching because, otherwise, the cache is lost at
+restart of R.</p>
+    <h2 class="hasAnchor" id="non-interactive-setup"><a class="anchor" href="#non-interactive-setup"></a>Non-interactive setup</h2>
+
+    
+
+<p>In some cases, you want to avoid the interactive prompt described above. In
+that situation, you can set the path to the cache with the R option
+<code>R.cache.rootPath</code> or the environment variable <code>R_CACHE_ROOTPATH</code> to an
+existent path before you call the styler API. This should avoid the prompt.
+<code><a href='https://rdrr.io/pkg/R.cache/man/setCacheRootPath.html'>R.cache::setCacheRootPath("/path/to/cache")</a></code> is also programmatic but will
+probably give the prompt anyways if called interactively.</p>
     <h2 class="hasAnchor" id="non-interactive-use"><a class="anchor" href="#non-interactive-use"></a>Non-interactive use</h2>
 
     
 
 <p>Note that if you have never authorized <code>{R.cache}</code> to create the cache in a
-permanent directory, it will build the cache in a temporary directory. To
-create a permanent cache, just open an interactive R session and type
-<code><a href='cache_info.html'>cache_info()</a></code>. You can see under <code>Location:</code> if a permanent directory is
-used and if not, <code>{R.cache}</code> will ask you to create one the first time you
-use <code>{R.cache}</code> in an R session.</p>
+permanent directory and you use <code>{styler}</code> non-interactively, it will build the
+cache in a temporary directory. To create a permanent cache, follow the
+section 'Non-interactive setup' or 'Interactive setup' above.</p>
     <h2 class="hasAnchor" id="invalidation"><a class="anchor" href="#invalidation"></a>Invalidation</h2>
 
     
@@ -198,23 +232,28 @@ use <code>{R.cache}</code> in an R session.</p>
 <p>The cache is specific to a version of styler by default, because different
 versions potentially format code differently. This means after upgrading
 styler or a style guide you use, the cache will be re-built.</p>
-    <h2 class="hasAnchor" id="manage-the-cache"><a class="anchor" href="#manage-the-cache"></a>Manage the cache</h2>
+    <h2 class="hasAnchor" id="mechanism-and-size"><a class="anchor" href="#mechanism-and-size"></a>Mechanism and size</h2>
 
     
 
-<p>See <code><a href='cache_info.html'>cache_info()</a></code>,
-<code><a href='cache_activate.html'>cache_activate()</a></code>, <code><a href='cache_clear.html'>cache_clear()</a></code> for utilities to manage the cache. Since
-we leverage <code>{R.cache}</code> to manage the cache, you can also use any <code>{R.cache}</code>
-functionality to manipulate it.</p>
+<p>The cache works by storing hashed output code as a whole and by expression,
+which is why it takes zero space on disk (the cache is a directory with
+empty files which have the hash of output code as name).</p>
     <h2 class="hasAnchor" id="using-a-cache-for-styler-in-ci-cd"><a class="anchor" href="#using-a-cache-for-styler-in-ci-cd"></a>Using a cache for styler in CI/CD</h2>
 
     
 
 <p>If you want to set up caching in a CI/CD pipeline, we suggest to set the
-<code>{R.cache}</code> root path to a directory for which you have the cache enabled.
-The former can be done with <code><a href='https://rdrr.io/pkg/R.cache/man/setCacheRootPath.html'>R.cache::setCacheRootPath("/path/to/cache")</a></code>,
-the latter can often be set in config files of CI/CD tools, e.g. see the
-the <a href='https://docs.travis-ci.com/user/caching'>Travis documentation on caching</a>.</p>
+<code>{R.cache}</code> root path to a directory for which you have the cache enabled as
+described above in the section 'Non-interactive setup'. This can often be set
+in config files of CI/CD tools, e.g. see the
+<a href='https://docs.travis-ci.com/user/caching'>Travis documentation on caching</a>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other cache managers: 
+<code><a href='cache_activate.html'>cache_activate</a>()</code>,
+<code><a href='cache_clear.html'>cache_clear</a>()</code>,
+<code><a href='cache_info.html'>cache_info</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -231,7 +270,7 @@ the <a href='https://docs.travis-ci.com/user/caching'>Travis documentation on ca
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

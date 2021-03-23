@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -42,9 +42,12 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="articles/styler.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -57,36 +60,52 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="articles/third-party-integrations.html">Third-party integrations</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Developers</li>
+    <li>
       <a href="articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="articles/customizing_styler.html">Customizing styler</a>
     </li>
-    <li>
-      <a href="articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="articles/introducing_styler.html">An introduction to styler</a>
-    </li>
-    <li>
-      <a href="articles/performance_improvements.html">Performance Improvements</a>
-    </li>
   </ul>
 </li>
-<li>
-  <a href="news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    </li>
+    <li>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -108,102 +127,47 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="styler" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#styler" class="anchor"></a>styler</h1></div>
 
-<p>The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to the <a href="https://style.tidyverse.org">tidyverse</a> formatting rules. styler can be customized to format code according to other style guides too.</p>
-<p>The following online docs are available:</p>
+<div id="styler" class="section level1">
+
+<!-- badges: start -->
+
+</div>
+<div id="overview" class="section level1">
+<h1 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h1>
+<p>styler formats your code according to the <a href="https://style.tidyverse.org">tidyverse style guide</a> (or your custom style guide) so you can direct your attention to the content of your code. It helps to keep the coding style consistent across projects and facilitate collaboration. You can access styler through</p>
 <ul>
-<li><p><a href="https://styler.r-lib.org">latest CRAN release</a>.</p></li>
-<li><p><a href="https://styler.r-lib.org/dev">GitHub development version</a>.</p></li>
+<li>the RStudio Addin as demonstrated below</li>
+<li>R functions like <code><a href="reference/style_pkg.html">style_pkg()</a></code>, <code><a href="reference/style_file.html">style_file()</a></code> or <code><a href="reference/style_text.html">style_text()</a></code>
+</li>
+<li>various other tools described in <code><a href="articles/third-party-integrations.html">vignette("third-party-integrations")</a></code>
+</li>
 </ul>
+<p><img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px"></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the package from CRAN.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"styler"</span>)</pre></div>
-<p>If you don’t use styler interactively (i.e. not from the R prompt or RStudio Addin), make sure you authorize <code>{R.cache}</code> once to set up a permanent cache. If you use it interactively, you will be asked to grant this permission once. See <code><a href="reference/caching.html">?caching</a></code> for details.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"styler"</span><span class="op">)</span></code></pre></div>
 <p>Or get the development version from GitHub:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("remotes")</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-lib/styler"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"r-lib/styler"</span><span class="op">)</span></code></pre></div>
+<p>If you don’t use styler interactively (i.e. not from the R prompt or RStudio Addin), make sure you authorize the R package R.cache once to set up a permanent cache. If you use it interactively, you will be asked to grant this permission once. See <code><a href="reference/caching.html">?caching</a></code> for details.</p>
 </div>
-<div id="api" class="section level2">
+<div id="documentation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#api" class="anchor"></a>API</h2>
-<p>You can style a simple character vector of code with <code><a href="reference/style_text.html">style_text()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"styler"</span>)
-<span class="no">ugly_code</span> <span class="kw">&lt;-</span> <span class="st">"a=function( x){1+1}           "</span>
-<span class="fu"><a href="reference/style_text.html">style_text</a></span>(<span class="no">ugly_code</span>)
-<span class="co">#&gt; a &lt;- function(x) {</span>
-<span class="co">#&gt;   1 + 1</span>
-<span class="co">#&gt; }</span></pre></div>
-<p>There are a few variants of <code><a href="reference/style_text.html">style_text()</a></code>:</p>
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<p>The following online docs are available:</p>
 <ul>
-<li><p><code><a href="reference/style_file.html">style_file()</a></code> styles .R, .Rmd .Rnw and .Rprofile, files.</p></li>
-<li><p><code><a href="reference/style_dir.html">style_dir()</a></code> styles all .R and/or .Rmd files in a directory.</p></li>
-<li><p><code><a href="reference/style_pkg.html">style_pkg()</a></code> styles the source files of an R package.</p></li>
-<li><p>RStudio Addins for styling the active file, styling the current package and styling the highlighted code region.</p></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px"></p>
-</div>
-<div id="configuration" class="section level2">
-<h2 class="hasAnchor">
-<a href="#configuration" class="anchor"></a>Configuration</h2>
-<p>You can decide on the level of invasiveness with the scope argument. You can style:</p>
-<ul>
-<li><p>just spaces.</p></li>
-<li><p>spaces and indention.</p></li>
-<li><p>spaces, indention and line breaks.</p></li>
-<li><p>spaces, indention, line breaks and tokens.</p></li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb4"><pre class="r"><span class="no">ugly_code</span> <span class="kw">&lt;-</span> <span class="st">"a=function( x){1+1}           "</span>
-<span class="fu"><a href="reference/style_text.html">style_text</a></span>(<span class="no">ugly_code</span>, <span class="kw">scope</span> <span class="kw">=</span> <span class="st">"spaces"</span>)
-<span class="co">#&gt; a = function(x) {1 + 1}</span></pre></div>
-<p>Note that compared to the default used above <code>scope = "tokens"</code>:</p>
-<ul>
-<li><p>no line breaks were added.</p></li>
-<li><p><code>&lt;-</code> was not replaced with <code>=</code>.</p></li>
-</ul>
-<p>While spaces still got styled (around <code>=</code> in <code>(x)</code>).</p>
-<p>This was just the tip of the iceberg. To learn more about customization options with the tidyverse style guide, see the <a href="https://styler.r-lib.org/reference/tidyverse_style.html">help file for `tidyverse_style</a> for a quick overview or the <a href="https://styler.r-lib.org/articles/introducing_styler.html">introductory vignette</a>.</p>
-</div>
-<div id="features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h2>
-<ul>
-<li><p>style roxygen2 code examples.</p></li>
-<li><p>do not re-style <a href="https://styler.r-lib.org/articles/detect-alignment.html">deliberate code alignment</a>.</p></li>
-<li><p><a href="https://styler.r-lib.org/dev/reference/stylerignore.html">ignore some lines</a> for styling.</p></li>
-<li><p><a href="https://styler.r-lib.org/dev/reference/caching.html">cache styled expressions</a> for speed.</p></li>
-</ul>
-</div>
-<div id="adaption-of-styler" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adaption-of-styler" class="anchor"></a>Adaption of styler</h2>
-<p>styler functionality is made available through other tools, most notably</p>
-<ul>
-<li><p>as a pre-commit hook <code>style-files</code> in <a href="https://github.com/lorenzwalthert/precommit" class="uri">https://github.com/lorenzwalthert/precommit</a></p></li>
-<li><p><code><a href="https://usethis.r-lib.org/reference/tidyverse.html">usethis::use_tidy_style()</a></code> styles your project according to the tidyverse style guide.</p></li>
-<li><p>via commenting a PR on GitHub with <code>\style</code> when the <a href="https://github.com/features/actions">GitHub Action</a> <a href="https://github.com/r-lib/actions/tree/master/examples#tidyverse-ci-workflow"><em>Tidyverse CI</em></a> is used. The most convenient way to set this up is via <a href="https://usethis.r-lib.org/reference/github_actions.html?q=ghactions#use-github-actions-tidy-"><code>usethis::use_github_actions_tidy()</code></a>.</p></li>
-<li><p><code><a href="https://reprex.tidyverse.org/reference/reprex.html">reprex::reprex(style = TRUE)</a></code> to prettify reprex code before printing. To permanently use <code>style = TRUE</code> without specifying it every time, you can add the following line to your <code>.Rprofile</code> (via <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code>): <code><a href="https://rdrr.io/r/base/options.html">options(reprex.styler = TRUE)</a></code>.</p></li>
-<li><p>you can pretty-print your R code in RMarkdown reports without having styler modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g. <code>```{r name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy = "styler")</code> at the top of your RMarkdown script.</p></li>
-<li><p>Adding styler as a fixer to the <a href="https://github.com/w0rp/ale/pull/2401#issuecomment-485942966">ale Plug-in</a> for VIM.</p></li>
-<li><p>pretty-printing of <a href="https://github.com/ropensci/drake">drake</a> workflow data frames with <code>drake::drake_plan_source()</code>.</p></li>
-<li><p>Adding styler with <a href="https://github.com/lassik/emacs-format-all-the-code">emacs-format-all-the-code</a> for Emacs.</p></li>
-</ul>
-</div>
-<div id="further-resources" class="section level2">
-<h2 class="hasAnchor">
-<a href="#further-resources" class="anchor"></a>Further resources</h2>
-<ul>
-<li><p>The official <a href="https://styler.r-lib.org/">web documentation</a> of styler, containing various vignettes function documentation as well as a change-log.</p></li>
-<li><p><a href="https://lorenzwalthert.netlify.com/post/customizing-styler-the-quick-way/">Blog post</a> about how you can customize styler without being an expert.</p></li>
-<li><p>A <a href="https://www.tidyverse.org/articles/2017/12/styler-1.0.0/">tidyverse.org blog post</a> introducing the functionality of styler and a <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">follow-up post</a> that introduces the new features since release 1.0.0.</p></li>
-<li><p>The wiki of <a href="https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting">Google Summer of Code 2017</a> or the <a href="https://r-lib.github.io/styler/">pkgdown</a> page contain information related to the initial development phase during Google Summer of Code 2017.</p></li>
+<li><p><a href="https://styler.r-lib.org">latest CRAN release</a>.</p></li>
+<li><p><a href="https://styler.r-lib.org/dev/">GitHub development version</a>.</p></li>
 </ul>
 </div>
 </div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -221,7 +185,8 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="community">
@@ -243,11 +208,10 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/r-lib/styler"><img src="https://travis-ci.org/r-lib/styler.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/r-lib/styler"><img src="https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="lifecycle"></a></li>
-<li><a href="https://codecov.io/gh/r-lib/styler"><img src="https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="https://cran.r-project.org/package=styler"><img src="https://www.r-pkg.org/badges/version/styler" alt="cran version"></a></li>
+<li><a href="https://github.com/r-lib/styler/actions"><img src="https://github.com/r-lib/styler/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle: stable"></a></li>
+<li><a href="https://codecov.io/gh/r-lib/styler"><img src="https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg" alt="codecov test coverage"></a></li>
+<li><a href="https://cran.r-project.org/package=styler"><img src="https://www.r-pkg.org/badges/version/styler" alt="CRAN Status"></a></li>
 </ul>
 </div>
 </div>
@@ -259,7 +223,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

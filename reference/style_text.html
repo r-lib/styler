@@ -79,7 +79,7 @@ to one line of code." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -87,9 +87,12 @@ to one line of code." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="../articles/styler.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -102,36 +105,52 @@ to one line of code." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integrations.html">Third-party integrations</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
+    <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
-    </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    </li>
+    <li>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -164,13 +183,14 @@ to one line of code." />
 to one line of code.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>style_text</span>(
-  <span class='no'>text</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>,
-  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>style</span>(<span class='no'>...</span>),
-  <span class='kw'>include_roxygen_examples</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>style_text</span><span class='op'>(</span>
+  <span class='va'>text</span>,
+  <span class='va'>...</span>,
+  style <span class='op'>=</span> <span class='va'>tidyverse_style</span>,
+  transformers <span class='op'>=</span> <span class='fu'>style</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>,
+  include_roxygen_examples <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  base_indention <span class='op'>=</span> <span class='fl'>0</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,6 +221,13 @@ conveniently constructed via the <code>style</code> argument and <code>...</code
       <td><p>Whether or not to style code in roxygen
 examples.</p></td>
     </tr>
+    <tr>
+      <th>base_indention</th>
+      <td><p>Integer scalar indicating by how many spaces the whole
+output text should be indented. Note that this is not the same as splitting
+by line and add a <code>base_indention</code> spaces before the code in the case
+multi-line strings are present. See 'Examples'.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -212,9 +239,16 @@ examples.</p></td>
 <code><a href='styler_addins.html'>styler_addins</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>style_text</span>(<span class='st'>"call( 1)"</span>)</div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>1</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"1    + 1"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'>1</span><span>    </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"spaces"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b</div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b; a"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"line_breaks"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b; a</div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a%&gt;%b; a"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"tokens"</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> </span><span style='color: #00BBBB;'>b</span><span style='color: #BBBB00;'>()</span><span>
+    <pre class="examples"><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"call( 1)"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span style='color: #0000BB;'>1</span><span style='color: #BBBB00;'>)</span><span></div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"1    + 1"</span>, strict <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'>1</span><span>    </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a%&gt;%b"</span>, scope <span class='op'>=</span> <span class='st'>"spaces"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b</div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a%&gt;%b; a"</span>, scope <span class='op'>=</span> <span class='st'>"line_breaks"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> b; a</div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a%&gt;%b; a"</span>, scope <span class='op'>=</span> <span class='st'>"tokens"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>%&gt;%</span><span> </span><span style='color: #00BBBB;'>b</span><span style='color: #BBBB00;'>()</span><span>
 #&gt; a</div><div class='input'><span class='co'># the following is identical but the former is more convenient:</span>
-<span class='fu'>style_text</span>(<span class='st'>"a&lt;-3++1"</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>tidyverse_style</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span>(<span class='st'>"a&lt;-3++1"</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span>(<span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div></span></pre>
+<span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a&lt;-3++1"</span>, style <span class='op'>=</span> <span class='va'>tidyverse_style</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='fu'>style_text</span><span class='op'>(</span><span class='st'>"a&lt;-3++1"</span>, transformers <span class='op'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span><span class='op'>(</span>strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; a </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #0000BB;'>3</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -230,7 +264,7 @@ examples.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -85,9 +85,12 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="../articles/styler.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -100,36 +103,52 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integrations.html">Third-party integrations</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
+    <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
-    </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    </li>
+    <li>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -166,8 +185,125 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-styling-api" class="hasAnchor"><a href="#section-styling-api" class="anchor"></a>Styling API</h2>
+          <p class="section-desc"><p>Functions for styling code</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="style_text.html">style_text()</a></code> </p>
+        </td>
+        <td><p>Style a string</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="style_file.html">style_file()</a></code> </p>
+        </td>
+        <td><p>Style <code>.R</code>, <code>.Rmd</code> or <code>.Rnw</code> files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="style_pkg.html">style_pkg()</a></code> </p>
+        </td>
+        <td><p>Prettify R source code</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="style_dir.html">style_dir()</a></code> </p>
+        </td>
+        <td><p>Prettify arbitrary R code</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="styler_addins.html">styler_addins</a></code> </p>
+        </td>
+        <td><p>Stylers for RStudio Addins</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-fine-tune-styling" class="hasAnchor"><a href="#section-fine-tune-styling" class="anchor"></a>Fine-tune styling</h2>
+          <p class="section-desc"><p>Customize style guides</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="tidyverse_style.html">tidyverse_style()</a></code> </p>
+        </td>
+        <td><p>The tidyverse style</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="reindention.html">specify_reindention()</a></code> <code><a href="reindention.html">tidyverse_reindention()</a></code> </p>
+        </td>
+        <td><p>Specify what is re-indented how</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="math_token_spacing.html">specify_math_token_spacing()</a></code> <code><a href="math_token_spacing.html">tidyverse_math_token_spacing()</a></code> </p>
+        </td>
+        <td><p>Specify spacing around math tokens</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_style_guide.html">create_style_guide()</a></code> </p>
+        </td>
+        <td><p>Create a style guide</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="specify_transformers_drop.html">specify_transformers_drop()</a></code> </p>
+        </td>
+        <td><p>Specify which tokens must be absent for a transformer to be dropped</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-non-functional-documentation" class="hasAnchor"><a href="#section-non-functional-documentation" class="anchor"></a>Non-functional documentation</h2>
+          <p class="section-desc"><p>Explaining features</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="caching.html">caching</a></code> </p>
+        </td>
+        <td><p>Remember the past to be quicker in the future</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="stylerignore.html">stylerignore</a></code> </p>
+        </td>
+        <td><p>Turn off styling for parts of the code</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="styler-package.html">styler-package</a></code> </p>
+        </td>
+        <td><p>Non-invasive pretty printing of R code</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-caching" class="hasAnchor"><a href="#section-caching" class="anchor"></a>Caching</h2>
+          <p class="section-desc"><p>Utilities to help manage the styler cache</p></p>
         </th>
       </tr>
       
@@ -193,84 +329,25 @@
           <p><code><a href="cache_info.html">cache_info()</a></code> </p>
         </td>
         <td><p>Show information about the styler cache</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="caching.html">caching</a></code> </p>
-        </td>
-        <td><p>Remember the past to be quicker in the future</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_style_guide.html">create_style_guide()</a></code> </p>
-        </td>
-        <td><p>Create a style guide</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="math_token_spacing.html">specify_math_token_spacing()</a></code> <code><a href="math_token_spacing.html">tidyverse_math_token_spacing()</a></code> </p>
-        </td>
-        <td><p>Specify spacing around math tokens</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-other" class="hasAnchor"><a href="#section-other" class="anchor"></a>Other</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="print.vertical.html">print(<i>&lt;vertical&gt;</i>)</a></code> </p>
         </td>
         <td><p>Print styled code</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="reindention.html">specify_reindention()</a></code> <code><a href="reindention.html">tidyverse_reindention()</a></code> </p>
-        </td>
-        <td><p>Specify what is re-indented how</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="style_dir.html">style_dir()</a></code> </p>
-        </td>
-        <td><p>Prettify arbitrary R code</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="style_file.html">style_file()</a></code> </p>
-        </td>
-        <td><p>Style <code>.R</code>, <code>.Rmd</code> or <code>.Rnw</code> files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="style_pkg.html">style_pkg()</a></code> </p>
-        </td>
-        <td><p>Prettify R source code</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="style_text.html">style_text()</a></code> </p>
-        </td>
-        <td><p>Style a string</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="styler-package.html">styler-package</a></code> </p>
-        </td>
-        <td><p>Non-invasive pretty printing of R code</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="styler_addins.html">styler_addins</a></code> </p>
-        </td>
-        <td><p>Stylers for RStudio Addins</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stylerignore.html">stylerignore</a></code> </p>
-        </td>
-        <td><p>Turn off styling for parts of the code</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tidyverse_style.html">tidyverse_style()</a></code> </p>
-        </td>
-        <td><p>The tidyverse style</p></td>
       </tr>
     </tbody>
     </table>
@@ -290,7 +367,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

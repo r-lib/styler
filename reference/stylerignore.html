@@ -46,8 +46,10 @@
 
 
 <meta property="og:title" content="Turn off styling for parts of the code — stylerignore" />
-<meta property="og:description" content="Using stylerignore markers, you can temporarily turn off styler. See a
-few illustrative examples below." />
+<meta property="og:description" content="Using stylerignore markers, you can temporarily turn off styler. Beware that
+for styler &amp;gt; 1.2.0, some alignment is
+detected by styler,
+making stylerignore redundant. See a few illustrative examples below." />
 
 
 
@@ -79,7 +81,7 @@ few illustrative examples below." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -87,9 +89,12 @@ few illustrative examples below." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="../articles/styler.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -102,36 +107,52 @@ few illustrative examples below." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integrations.html">Third-party integrations</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
+    <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
-    </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    </li>
+    <li>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,8 +181,10 @@ few illustrative examples below." />
     </div>
 
     <div class="ref-description">
-    <p>Using stylerignore markers, you can temporarily turn off styler. See a
-few illustrative examples below.</p>
+    <p>Using stylerignore markers, you can temporarily turn off styler. Beware that
+for <code>styler &gt; 1.2.0</code>, some alignment is
+<a href='https://styler.r-lib.org/articles/detect-alignment.html'>detected by styler</a>,
+making stylerignore redundant. See a few illustrative examples below.</p>
     </div>
 
 
@@ -187,7 +210,7 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># as long as the order of the markers is correct, the lines are ignored.</span>
-<span class='fu'><a href='style_text.html'>style_text</a></span>(
+<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
   <span class='st'>"
   1+1
   # styler: off
@@ -195,17 +218,18 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
   # styler: on
   1+1
   "</span>
-)</div><div class='output co'>#&gt; 
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; <span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span>
-#&gt;   </span><span style='color: #555555;font-style: italic;'># styler: off</span><span>
+#&gt;   </span><span style='color: #9E9E9E;font-style: italic;'># styler: off</span><span>
 #&gt;   </span><span style='color: #0000BB;'>1</span><span style='color: #00BB00;'>+</span><span style='color: #0000BB;'>1</span><span>
-#&gt; </span><span style='color: #555555;font-style: italic;'># styler: on</span><span>
+#&gt; </span><span style='color: #9E9E9E;font-style: italic;'># styler: on</span><span>
 #&gt; </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'>
 <span class='co'># if there is a stop marker before a start marker, styler won't be able</span>
 <span class='co'># to figure out which lines you want to ignore and won't ignore anything,</span>
 <span class='co'># issuing a warning.</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='style_text.html'>style_text</a></span>(
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
   <span class='st'>"
   1+1
   # styler: off
@@ -213,8 +237,19 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
   # styler: off
   1+1
   "</span>
-)
-}</div></span></pre>
+<span class='op'>)</span>
+<span class='op'>}</span>
+<span class='co'># some alignment of code is detected, so you don't need to use stylerignore</span>
+<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
+  <span class='st'>"call(
+    xyz =  3,
+    x   = 11
+  )"</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #00BBBB;'>call</span><span style='color: #BBBB00;'>(</span><span>
+#&gt;   xyz =  </span><span style='color: #0000BB;'>3</span><span>,
+#&gt;   x   = </span><span style='color: #0000BB;'>11</span><span>
+#&gt; </span><span style='color: #BBBB00;'>)</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -230,7 +265,7 @@ R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

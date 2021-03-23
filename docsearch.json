@@ -2,21 +2,21 @@
   "index_name": "r-lib_styler",
   "start_urls": [
     {
-      "url": "/index.html",
+      "url": "https://styler.r-lib.org/index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "/reference",
+      "url": "https://styler.r-lib.org/reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "/articles",
+      "url": "https://styler.r-lib.org/articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "/sitemap.xml"
+    "https://styler.r-lib.org/sitemap.xml"
   ],
   "selectors": {
     "homepage": {

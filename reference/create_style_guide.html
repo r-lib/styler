@@ -50,7 +50,11 @@
 speaking a named list of groups of transformer functions where each
 transformer function corresponds to one styling rule. The output of this
 function can be used as an argument for style in top level functions
-like style_text() and friends." />
+like style_text() and friends. Note that for caching to work properly,
+unquote all inputs to the transformer function if possible with rlang's !!,
+otherwise, they will be passed as references (generic variable names) instead
+of literals and styler:::is_cached() won't pick up changes. See how it's
+done in tidyverse_style() with indent_by and other arguments." />
 
 
 
@@ -82,7 +86,7 @@ like style_text() and friends." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -90,9 +94,12 @@ like style_text() and friends." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="../articles/styler.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -105,36 +112,52 @@ like style_text() and friends." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/detect-alignment.html">Alignment detection</a>
+    </li>
+    <li>
+      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    </li>
+    <li>
+      <a href="../articles/third-party-integrations.html">Third-party integrations</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Developers</li>
+    <li>
       <a href="../articles/caching.html">Caching</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
-    <li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/data_structures.html">Data Structures</a>
-    </li>
-    <li>
-      <a href="../articles/gsoc_proposal/manipulating_nested_parse_data.html">Manipulating the nested parse table</a>
-    </li>
-    <li>
-      <a href="../articles/introducing_styler.html">An introduction to styler</a>
-    </li>
-    <li>
-      <a href="../articles/performance_improvements.html">Performance Improvements</a>
-    </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    </li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    </li>
+    <li>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -167,20 +190,26 @@ like style_text() and friends." />
 speaking a named list of groups of transformer functions where each
 transformer function corresponds to one styling rule. The output of this
 function can be used as an argument for <code>style</code> in top level functions
-like <code><a href='style_text.html'>style_text()</a></code> and friends.</p>
+like <code><a href='style_text.html'>style_text()</a></code> and friends. Note that for caching to work properly,
+unquote all inputs to the transformer function if possible with rlang's <code>!!</code>,
+otherwise, they will be passed as references (generic variable names) instead
+of literals and <code>styler:::is_cached()</code> won't pick up changes. See how it's
+done in <code><a href='tidyverse_style.html'>tidyverse_style()</a></code> with <code>indent_by</code> and other arguments.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_style_guide</span>(
-  <span class='kw'>initialize</span> <span class='kw'>=</span> <span class='no'>default_style_guide_attributes</span>,
-  <span class='kw'>line_break</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>space</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>indention</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_raw_indention</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>reindention</span> <span class='kw'>=</span> <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span>(),
-  <span class='kw'>style_guide_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>style_guide_version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>create_style_guide</span><span class='op'>(</span>
+  initialize <span class='op'>=</span> <span class='va'>default_style_guide_attributes</span>,
+  line_break <span class='op'>=</span> <span class='cn'>NULL</span>,
+  space <span class='op'>=</span> <span class='cn'>NULL</span>,
+  token <span class='op'>=</span> <span class='cn'>NULL</span>,
+  indention <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use_raw_indention <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  reindention <span class='op'>=</span> <span class='fu'><a href='reindention.html'>tidyverse_reindention</a></span><span class='op'>(</span><span class='op'>)</span>,
+  style_guide_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  style_guide_version <span class='op'>=</span> <span class='cn'>NULL</span>,
+  more_specs_style_guide <span class='op'>=</span> <span class='cn'>NULL</span>,
+  transformers_drop <span class='op'>=</span> <span class='fu'><a href='specify_transformers_drop.html'>specify_transformers_drop</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -223,7 +252,7 @@ conveniently constructed using <code><a href='reindention.html'>specify_reindent
       <td><p>The name of the style guide. Used as a meta attribute
 inside the created style guide, for example for caching. By convention,
 this is the style guide qualified by the package namespace plus the
-location of the style guide, separated by <code>@</code>. For example,
+location of the style guide, separated by <code><a href='https://rdrr.io/r/base/slotOp.html'>@</a></code>. For example,
 <code>"styler::tidyverse_style@https://github.com/r-lib"</code>.</p></td>
     </tr>
     <tr>
@@ -233,26 +262,46 @@ attribute inside the created style guide, for example for caching. This
 should correspond to the version of the R package that exports the
 style guide.</p></td>
     </tr>
+    <tr>
+      <th>more_specs_style_guide</th>
+      <td><p>Named vector (coercible to character)
+with all arguments passed to the style guide and used for cache
+invalidation. You can easily capture them in your style guide function
+declaration with <code><a href='https://rdrr.io/r/base/list.html'>as.list(environment())</a></code> (compare source code of
+<code><a href='tidyverse_style.html'>tidyverse_style()</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>transformers_drop</th>
+      <td><p>A list specifying under which conditions
+transformer functions can be dropped since they have no effect on the
+code to format, most easily constructed with
+<code><a href='specify_transformers_drop.html'>specify_transformers_drop()</a></code>. This is argument experimental and may
+change in future releases without prior notification. It was mainly
+introduced to improve speed. Listing transformers here that occur almost
+always in code does not make sense because the process of excluding them
+also takes some time.</p></td>
+    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>set_line_break_before_curly_opening</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>pd_flat</span>) {
-  <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='no'>pd_flat</span>$<span class='no'>token</span> <span class='kw'>%in%</span> <span class='st'>"'{'"</span>
-  <span class='no'>pd_flat</span>$<span class='no'>lag_newlines</span>[<span class='no'>op</span>] <span class='kw'>&lt;-</span> <span class='fl'>1L</span>
-  <span class='no'>pd_flat</span>
-}
-<span class='no'>set_line_break_before_curly_opening_style</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() {
-  <span class='fu'>create_style_guide</span>(
-    <span class='kw'>line_break</span> <span class='kw'>=</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/lst.html'>lst</a></span>(<span class='no'>set_line_break_before_curly_opening</span>)
-  )
-}
-<span class='fu'><a href='style_text.html'>style_text</a></span>(
+    <pre class="examples"><div class='input'><span class='va'>set_line_break_before_curly_opening</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pd_flat</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>op</span> <span class='op'>&lt;-</span> <span class='va'>pd_flat</span><span class='op'>$</span><span class='va'>token</span> <span class='op'>%in%</span> <span class='st'>"'{'"</span>
+  <span class='va'>pd_flat</span><span class='op'>$</span><span class='va'>lag_newlines</span><span class='op'>[</span><span class='va'>op</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1L</span>
+  <span class='va'>pd_flat</span>
+<span class='op'>}</span>
+<span class='va'>set_line_break_before_curly_opening_style</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>create_style_guide</span><span class='op'>(</span>
+    line_break <span class='op'>=</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/lst.html'>lst</a></span><span class='op'>(</span><span class='va'>set_line_break_before_curly_opening</span><span class='op'>)</span>,
+    style_guide_name <span class='op'>=</span> <span class='st'>"some-style-guide"</span>,
+    style_guide_version <span class='op'>=</span> <span class='st'>"some-version"</span>
+  <span class='op'>)</span>
+<span class='op'>}</span>
+<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
   <span class='st'>"a &lt;- function(x) { x }"</span>,
-  <span class='kw'>style</span> <span class='kw'>=</span> <span class='no'>set_line_break_before_curly_opening_style</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: Style guides without a name and a version field are depreciated and won't be supported in styler &gt;= 1.4. </span>
-#&gt; <span class='warning'>If you are a user: Open an issue on https://github.com/r-lib/styler and provide a reproducible example of this error. </span>
-#&gt; <span class='warning'>If you are a developer: When you create a style guide with `styler::create_style_guide()`, the argument `style_guide_name` and `style_guide_version` should be non-NULL. See help("create_style_guide") for how to set them.</span></div><div class='output co'>#&gt; a <span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span><span>x</span><span style='color: #BBBB00;'>)</span><span>
+  style <span class='op'>=</span> <span class='va'>set_line_break_before_curly_opening_style</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; a <span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span><span>x</span><span style='color: #BBBB00;'>)</span><span>
 #&gt; </span><span style='color: #BBBB00;'>{</span><span> x </span><span style='color: #BBBB00;'>}</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -269,7 +318,7 @@ style guide.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
