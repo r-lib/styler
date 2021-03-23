@@ -1,3 +1,7 @@
+# styler 1.4.0.9000 (Development)
+
+*No news yet*
+
 # styler 1.4.0
 
 ## API Changes
