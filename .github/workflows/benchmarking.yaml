@@ -13,6 +13,9 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      BENCHMARKING_REPO: lorenzwalthert/here
+      BENCHMARKING_REF: ca9c8e69c727def88d8ba1c8b85b0e0bcea87b3f
+      BENCHMARKING_PATH: touchstone/sources/here
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -57,9 +60,9 @@ jobs:
       - name: Checkout benchmarking repo
         uses: actions/checkout@v2
         with:
-          repository: lorenzwalthert/here
-          ref: ca9c8e69c727def88d8ba1c8b85b0e0bcea87b3f
-          path: touchstone/sources/here
+          repository: {{ env.BENCHMARKING_REPO }}
+          ref: {{ env.BENCHMARKING_REPO }}
+          path: {{ env.BENCHMARKING_PATH }}
       - name: Prepare PR comment
         run: |
           mkdir -p touchstone/sources
