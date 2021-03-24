@@ -61,7 +61,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.BENCHMARKING_REPO }}
-          ref: ${{ env.BENCHMARKING_REPO }}
+          ref: ${{ env.BENCHMARKING_REF }}
           path: ${{ env.BENCHMARKING_PATH }}
       - name: Prepare PR comment
         run: |
