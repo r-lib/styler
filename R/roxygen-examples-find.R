@@ -7,11 +7,11 @@
 #' @importFrom rlang seq2
 #' @keywords internal
 identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
-  starts <- grep("^#'\\s*@examples", text, perl = TRUE)
+  starts <- grep("^#'(\\s|\t)*@examples(If\\s|\\s|\t|$)", text, perl = TRUE)
   if (length(starts) < 1L) {
     return(integer())
   }
-  stop_candidates <- grep("^[^#]|^#'\\s*@", text, perl = TRUE)
+  stop_candidates <- grep("(^[^#]|^#'[\\s\t]*@)", text, perl = TRUE)
   stops <- map(starts, match_stop_to_start, stop_candidates) %>%
     flatten_int()
   if (length(stops) < 1L) {

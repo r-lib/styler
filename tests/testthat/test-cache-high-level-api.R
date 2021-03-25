@@ -11,10 +11,9 @@ test_that("activated cache brings speedup on style_file() API", {
 text <- c(
   "#' Roxygen",
   "#' Comment",
-  "#' @examples",
-  "#' 1 + 1",
+  "#' @examples 1 + 1",
   "k <- function() {",
-  "  1 + 1",
+  "  1 + 3",
   "  if (x) {",
   "    k()",
   "  }",
@@ -81,7 +80,7 @@ test_that("speedup higher when cached roxygen example code is multiple expressio
     "#' Roxygen",
     "#' Comment",
     "#' @examples",
-    "#' 1 + 1",
+    "#' call(1 + 1, 33)",
     "#' if (x > 4)",
     "#' bb = 3",
     "#' call(x,y=2)",
@@ -105,8 +104,10 @@ test_that("speedup higher when cached roxygen example code is multiple expressio
   speedup_many_roygen_examples <- n_times_faster_with_cache(
     text_short_styled, text_short_styled_changed
   )
-  # the speed gain for longer expression is 1.2x higher
-  expect_true(speedup_multiple_roygen_example > 1.2 * speedup_many_roygen_examples)
+  # the speed gain for longer expression is 1.1x higher
+  expect_true(
+    speedup_multiple_roygen_example / speedup_many_roygen_examples > 1.1
+  )
 })
 
 

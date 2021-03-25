@@ -44,5 +44,18 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   °--STR_CONST: '\x01 [0/0] {42}                   
  ¦--expr: "\01" [2/0] {45}                            
  ¦   °--STR_CONST: "\0" [0/0] {44}                    
- °--expr: '\01' [1/0] {47}                            
-     °--STR_CONST: '\0' [0/0] {46}                    
+ ¦--expr: '\01' [1/0] {47}                            
+ ¦   °--STR_CONST: '\0' [0/0] {46}                    
+ ¦--COMMENT: #' th [2/0] {48}                          
+ ¦--COMMENT: #' [1/0] {49}                             
+ ¦--COMMENT: #' @e [1/0] {50}                          
+ ¦--COMMENT: #' ca [1/0] {51}                          
+ ¦--COMMENT: #' an [1/0] {52}                          
+ ¦--expr: NULL [1/0] {54}                              
+ ¦   °--NULL_CONST: NULL [0/0] {53}                    
+ ¦--COMMENT: #' th [2/0] {55}                          
+ ¦--COMMENT: #' [1/0] {56}                             
+ ¦--COMMENT: #' @e [1/0] {57}                          
+ ¦--COMMENT: #' an [1/0] {58}                          
+ °--expr: NULL [1/0] {60}                              
+     °--NULL_CONST: NULL [0/0] {59}                    

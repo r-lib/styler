@@ -36,3 +36,16 @@ x <- "\001"
 
 "\0"
 "\0"
+
+#' things
+#'
+#' @examplesIf N
+#' call("\n")
+#' ano("\\.", further = X)
+NULL
+
+#' things
+#'
+#' @examplesIf call("\n")
+#' ano("\\.", further = X)
+NULL

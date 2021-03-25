@@ -55,3 +55,21 @@ test_that("multiple functions, not last, tag, properly formatted, no dontrun", {
     list(seq(5, 5), seq(13, 17))
   )
 })
+
+test_that("basic exampleIf", {
+  expect_equal(
+    identify_start_to_stop_of_roxygen_examples(testthat_file(
+      "roxygen-examples-identify/20-exampleIf-simple-in.R"
+    )),
+    list(seq(5, 6))
+  )
+})
+
+test_that("multiple exampleIf", {
+  expect_equal(
+    identify_start_to_stop_of_roxygen_examples(testthat_file(
+      "roxygen-examples-identify/21-exampleIf-multiple-in.R"
+    )),
+    list(seq(5, 6), seq(7, 8))
+  )
+})

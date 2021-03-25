@@ -1,7 +1,7 @@
 Type: Package
 Package: styler
 Title: Non-Invasive Pretty Printing of R Code
-Version: 1.3.2.9000
+Version: 1.4.0.9000
 Authors@R: 
     c(person(given = "Kirill",
              family = "Müller",
@@ -13,7 +13,7 @@ Authors@R:
              email = "lorenz.walthert@icloud.com"))
 Description: Pretty-prints R code without changing the user's formatting
     intent.
-License: GPL-3
+License: MIT + file LICENSE
 URL: https://github.com/r-lib/styler, https://styler.r-lib.org
 BugReports: https://github.com/r-lib/styler/issues
 Imports: 
@@ -46,7 +46,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate",
     "pkgapi::api_roclet"))
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9001
 Collate: 
     'addins.R'
     'communicate.R'

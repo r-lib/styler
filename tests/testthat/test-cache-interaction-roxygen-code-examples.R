@@ -24,7 +24,7 @@ test_that("roxzgen code examples are written to cache as both individual express
     is_cached(as.character(styled), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
-    is_cached(c("1 + 1", "f(x)"), tidyverse_style(), more_specs = more_specs)
+    is_cached(c("", "1 + 1", "f(x)"), tidyverse_style(), more_specs = more_specs)
   )
   expect_true(
     is_cached(c("1 + 1"), tidyverse_style(), more_specs = more_specs)
@@ -53,7 +53,7 @@ test_that("roxzgen code examples are written to cache as whole expressions bring
   # don't use full cache, only roxygen cache
   styled[1] <- "#' This is a nother text"
   second <- system.time(style_text(styled))
-  expect_gt(first["elapsed"], 6 * second["elapsed"])
+  expect_gt(first["elapsed"], 5 * second["elapsed"])
 })
 
 test_that("cache is deactivated at end of caching related testthat file", {

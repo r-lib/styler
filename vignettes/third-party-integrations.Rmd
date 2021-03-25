@@ -40,8 +40,7 @@ styler functionality is available in other tools, most notably
   script.
 
 * As a fixer to the [ale
-  Plug-in](https://github.com/w0rp/ale/pull/2401#issuecomment-485942966) for
-  VIM.
+  Plug-in](https://github.com/dense-analysis/ale/pull/2401) for VIM.
 
 * in the *format-all* command for Emacs in 
   [emacs-format-all-the-code](https://github.com/lassik/emacs-format-all-the-code).
