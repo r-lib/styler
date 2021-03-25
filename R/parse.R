@@ -126,13 +126,17 @@ add_id_and_short <- function(pd) {
 #' @param text The text from which `pd` was created. Needed potentially
 #'   for another round of parsing.
 #' @importFrom rlang abort
+#' @importFrom magrittr or
 #' @keywords internal
 ensure_correct_str_txt <- function(pd, text) {
   ensure_valid_pd(pd)
-  is_problematic_string <- identify_insufficiently_parsed_strings(pd, text)
-  problematic_strings <- pd[is_problematic_string, ]
+  is_problematic_string <- or(
+    is_insufficiently_parsed_strings(pd),
+    is_insufficiently_parsed_num_const(pd)
+  )
+  problematictext <- pd[is_problematic_string, ]
   is_parent_of_problematic_string <-
-    pd$id %in% problematic_strings$parent
+    pd$id %in% problematictext$parent
 
   is_unaffected_token <- !(is_problematic_string | is_parent_of_problematic_string)
   if (!any(is_problematic_string)) {
@@ -141,29 +145,29 @@ ensure_correct_str_txt <- function(pd, text) {
 
   pd_with_all_text <- get_parse_data(text, include_text = TRUE)
   parent_cols_for_merge <- c("id", "text", "short", line_col_names())
-  parent_of_problematic_strings <-
+  parent_of_problematictext <-
     pd_with_all_text[is_parent_of_problematic_string, parent_cols_for_merge]
-  problematic_strings$text <- NULL
-  problematic_strings$short <- NULL
-  new_strings <- merge(problematic_strings, parent_of_problematic_strings,
+  problematictext$text <- NULL
+  problematictext$short <- NULL
+  newtext <- merge(problematictext, parent_of_problematictext,
     by.x = "parent",
     by.y = "id",
     suffixes = c("", "parent")
   ) %>%
     as_tibble(.name_repair = "minimal")
 
-  if (!lines_and_cols_match(new_strings)) {
+  if (!lines_and_cols_match(newtext)) {
     abort(paste(
       "Error in styler:::ensure_correct_str_txt().",
       "Please file an issue on GitHub (https://github.com/r-lib/styler/issues)",
     ))
   }
   names_to_keep <- setdiff(
-    names(new_strings),
+    names(newtext),
     paste0(line_col_names(), "parent")
   )
   bind_rows(
-    new_strings[, names_to_keep],
+    newtext[, names_to_keep],
     pd[is_unaffected_token, ],
     pd[is_parent_of_problematic_string, ]
   ) %>%
@@ -205,15 +209,23 @@ ensure_valid_pd <- function(pd) {
 #' @param pd A parse table.
 #' @param text The initial code to style.
 #' @keywords internal
-identify_insufficiently_parsed_strings <- function(pd, text) {
+is_insufficiently_parsed_strings <- function(pd) {
   is_problematic_string <- pd$token == "STR_CONST"
   candidate_substring <- substr(
-    pd$text[is_problematic_string], 1, 1
+    pd$text[is_problematic_string], 1L, 1L
   )
   is_problematic_string[is_problematic_string] <- candidate_substring == "["
   is_problematic_string
 }
 
+is_insufficiently_parsed_num_const <- function(pd) {
+  is_problematic_num_const <- pd$token == "NUM_CONST"
+  candidate_substring <- substr(
+    pd$text[is_problematic_num_const], 1L, 2L
+  )
+  is_problematic_num_const[is_problematic_num_const] <- candidate_substring == "0x"
+  is_problematic_num_const
+}
 #' @importFrom purrr map2_lgl
 lines_and_cols_match <- function(data) {
   left <- paste0(line_col_names(), "")

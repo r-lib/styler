@@ -36,6 +36,14 @@ test_that("long strings are parsed correctly", {
   )
 })
 
+test_that("0x number representation is preserved with(out) L", {
+  text <- "0x00000002L"
+  expect_true(all(tokenize(text)$text == text))
+  text <- "0x00000002"
+  expect_true(all(tokenize(text)$text == text))
+})
+
+
 test_that("issues with parsing long strings on R 3.1 can be detected", {
   if (getRversion() >= "3.2") {
     skip("skip on R >= 3.2 because parsing probmes don't appear")
