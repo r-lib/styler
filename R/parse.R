@@ -76,7 +76,7 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
 #' @keywords internal
 tokenize <- function(text) {
   get_parse_data(text, include_text = TRUE) %>%
-    ensure_correct_str_txt(text) %>%
+    ensure_correct_txt(text) %>%
     enhance_mapping_special()
 }
 
@@ -116,19 +116,17 @@ add_id_and_short <- function(pd) {
 }
 
 
-#' Ensure a correct `text` of all strings
+#' Ensure a correct `text` of all strings and numeric constants
 #'
-#' Make sure `text` of the tokens `STR_CONST` is correct and adapt if necessary.
-#' We first parse `text` again and include also non-terminal text. Then, we
-#' replace offending `text` in the terminal expressions with the text of their
-#' parents if their line / col position matches and return an error otherwise.
+#' Make sure `text` of the tokens `STR_CONST` and `NUM_CONST` is correct and
+#' adapt if necessary. We replace offending `text` in the terminal expressions
+#' with the text of their parents if their line / col position matches and
+#' return an error otherwise.
 #' @param pd A parse table.
-#' @param text The text from which `pd` was created. Needed potentially
-#'   for another round of parsing.
 #' @importFrom rlang abort
 #' @importFrom magrittr or
 #' @keywords internal
-ensure_correct_str_txt <- function(pd, text) {
+ensure_correct_txt <- function(pd, text) {
   ensure_valid_pd(pd)
   is_problematic_string <- or(
     is_insufficiently_parsed_strings(pd),
@@ -158,7 +156,7 @@ ensure_correct_str_txt <- function(pd, text) {
 
   if (!lines_and_cols_match(newtext)) {
     abort(paste(
-      "Error in styler:::ensure_correct_str_txt().",
+      "Error in styler:::ensure_correct_txt().",
       "Please file an issue on GitHub (https://github.com/r-lib/styler/issues)",
     ))
   }
