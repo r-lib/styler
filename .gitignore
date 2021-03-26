@@ -13,3 +13,4 @@ revdep/
 !revdep/problems.md
 touchstone/*
 !touchstone/script.R
+!touchstone/config.json

@@ -1,0 +1,8 @@
+{
+  "os": "ubuntu-18.04",
+  "r": "4.0.0",
+  "benchmarking_repo": "lorenzwalthert/here",
+  "benchmarking_ref": "ca9c8e69c727def88d8ba1c8b85b0e0bcea87b3f",
+  "benchmarking_path": "touchstone/sources/here",
+  "rspm": "https://packagemanager.rstudio.com/all/__linux__/bionic/291"
+}
