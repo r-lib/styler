@@ -128,17 +128,17 @@ add_id_and_short <- function(pd) {
 #' @keywords internal
 ensure_correct_txt <- function(pd, text) {
   ensure_valid_pd(pd)
-  is_problematic_string <- or(
+  is_problematic_text <- or(
     is_insufficiently_parsed_string(pd),
     is_insufficiently_parsed_number(pd)
   )
-  problematic_text <- pd[is_problematic_string, ]
+  problematic_text <- pd[is_problematic_text, ]
   is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
 
   is_unaffected_token <- !or(
-    is_problematic_string, is_parent_of_problematic_string
+    is_problematic_text, is_parent_of_problematic_string
   )
-  if (!any(is_problematic_string)) {
+  if (!any(is_problematic_text)) {
     return(pd)
   }
 
