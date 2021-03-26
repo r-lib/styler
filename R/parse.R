@@ -132,22 +132,23 @@ ensure_correct_txt <- function(pd, text) {
     is_insufficiently_parsed_strings(pd),
     is_insufficiently_parsed_num_const(pd)
   )
-  problematictext <- pd[is_problematic_string, ]
-  is_parent_of_problematic_string <-
-    pd$id %in% problematictext$parent
+  problematic_text <- pd[is_problematic_string, ]
+  is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
 
-  is_unaffected_token <- !(is_problematic_string | is_parent_of_problematic_string)
+  is_unaffected_token <- !or(
+    is_problematic_string, is_parent_of_problematic_string
+  )
   if (!any(is_problematic_string)) {
     return(pd)
   }
 
   pd_with_all_text <- get_parse_data(text, include_text = TRUE)
   parent_cols_for_merge <- c("id", "text", "short", line_col_names())
-  parent_of_problematictext <-
+  parent_of_problematic_text <-
     pd_with_all_text[is_parent_of_problematic_string, parent_cols_for_merge]
-  problematictext$text <- NULL
-  problematictext$short <- NULL
-  newtext <- merge(problematictext, parent_of_problematictext,
+  problematic_text$text <- NULL
+  problematic_text$short <- NULL
+  newtext <- merge(problematic_text, parent_of_problematic_text,
     by.x = "parent",
     by.y = "id",
     suffixes = c("", "parent")
