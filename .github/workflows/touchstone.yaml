@@ -71,7 +71,12 @@ jobs:
           sudo apt-get install libcurl4-openssl-dev libgit2-dev
       - name: Install dependencies
         run: |
-          Rscript -e "remotes::install_deps(dependencies = TRUE)"
+          remotes::install_deps(dependencies = TRUE)
+          pkg <- basename(getwd())
+          if (pkg %in% rownames(installed.packages())) {
+            remove.packages(pkg)
+          }
+        shell: Rscript {0}
       - name: Checkout benchmarking repo
         uses: actions/checkout@v2
         with:
