@@ -129,8 +129,8 @@ add_id_and_short <- function(pd) {
 ensure_correct_txt <- function(pd, text) {
   ensure_valid_pd(pd)
   is_problematic_string <- or(
-    is_insufficiently_parsed_strings(pd),
-    is_insufficiently_parsed_num_const(pd)
+    is_insufficiently_parsed_string(pd),
+    is_insufficiently_parsed_number(pd)
   )
   problematic_text <- pd[is_problematic_string, ]
   is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
@@ -208,22 +208,12 @@ ensure_valid_pd <- function(pd) {
 #' @param pd A parse table.
 #' @param text The initial code to style.
 #' @keywords internal
-is_insufficiently_parsed_strings <- function(pd) {
-  is_problematic_string <- pd$token == "STR_CONST"
-  candidate_substring <- substr(
-    pd$text[is_problematic_string], 1L, 1L
-  )
-  is_problematic_string[is_problematic_string] <- candidate_substring == "["
-  is_problematic_string
+is_insufficiently_parsed_string <- function(pd) {
+  grepl("^\\[", pd$text) & pd$token == "STR_CONST"
 }
 
-is_insufficiently_parsed_num_const <- function(pd) {
-  is_problematic_num_const <- pd$token == "NUM_CONST"
-  candidate_substring <- substr(
-    pd$text[is_problematic_num_const], 1L, 2L
-  )
-  is_problematic_num_const[is_problematic_num_const] <- candidate_substring == "0x"
-  is_problematic_num_const
+is_insufficiently_parsed_number <- function(pd) {
+  grepl("^0x", pd$text)
 }
 #' @importFrom purrr map2_lgl
 lines_and_cols_match <- function(data) {
