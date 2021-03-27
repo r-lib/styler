@@ -1,6 +1,8 @@
 library(touchstone)
 
-styler::cache_clear()
+if (rlang::is_installed("styler")) {
+  styler::cache_clear()
+}
 
 benchmark_run_ref(
   expr_before_benchmark = c("library(styler)", "cache_deactivate()"),
