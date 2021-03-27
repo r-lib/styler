@@ -72,6 +72,7 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
+          remotes::install_github("lorenzwalthert/touchstone@devel")
           pkg <- basename(getwd())
           if (pkg %in% rownames(installed.packages())) {
             remove.packages(pkg)
