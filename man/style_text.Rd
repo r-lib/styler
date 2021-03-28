@@ -42,12 +42,20 @@ to one line of code.
 \examples{
 style_text("call( 1)")
 style_text("1    + 1", strict = FALSE)
+
+# the following is identical (because of ... and defaults)
+# but the first is most convenient:
+style_text("a<-3++1", strict = TRUE)
+style_text("a<-3++1", style = tidyverse_style, strict = TRUE)
+style_text("a<-3++1", transformers = tidyverse_style(strict = TRUE))
+
+# more invasive scopes include less invasive scopes by default
 style_text("a\%>\%b", scope = "spaces")
 style_text("a\%>\%b; a", scope = "line_breaks")
 style_text("a\%>\%b; a", scope = "tokens")
-# the following is identical but the former is more convenient:
-style_text("a<-3++1", style = tidyverse_style, strict = TRUE)
-style_text("a<-3++1", transformers = tidyverse_style(strict = TRUE))
+
+# opt out with I() to only style specific levels
+style_text("a\%>\%b; a", scope = I("tokens"))
 }
 \seealso{
 Other stylers: 

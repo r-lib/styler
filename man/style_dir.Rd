@@ -110,7 +110,13 @@ See section 'Warning' for a good strategy to apply styling safely.
 
 \examples{
 \dontrun{
-style_dir(file_type = "r")
+style_dir("path/to/dir", file_type = c("rmd", ".R"))
+
+# the following is identical (because of ... and defaults)
+# but the first is most convenient:
+style_dir(strict = TRUE)
+style_dir(style = tidyverse_style, strict = TRUE)
+style_dir(transformers = tidyverse_style(strict = TRUE))
 }
 }
 \seealso{
