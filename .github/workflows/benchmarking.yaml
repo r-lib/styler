@@ -52,7 +52,7 @@ jobs:
           sudo apt-get install libcurl4-openssl-dev libgit2-dev
       - name: Install dependencies
         run: |
-          Rscript -e "install.packages(c('ggplot2', 'purrr'))" -e "remotes::install_deps(dependencies = TRUE); remotes::install_github(c('r-lib/bench', 'lorenzwalthert/touchstone')); "
+          Rscript -e "install.packages(c('ggplot2', 'purrr'))" -e "remotes::install_deps(dependencies = TRUE); remotes::install_github(c('r-lib/bench', 'lorenzwalthert/touchstone@bc22d23')); "
           R CMD INSTALL .
       - name: Checkout benchmarking repo
         uses: actions/checkout@v2
