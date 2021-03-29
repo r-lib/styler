@@ -41,8 +41,9 @@ test_that("0x number representation is preserved with(out) L", {
   expect_true(all(tokenize(text)$text == text))
   text <- "0x00000002"
   expect_true(all(tokenize(text)$text == text))
-  text <- "a <- '0x2L'"
-  expect_true(all(tokenize(text)$text == text))
+  text <- "a <- 0x2L"
+  pd <- get_parse_data(text)
+  expect_equal(gsub("0x2L?", "0x2L", pd$text), tokenize(text)$text)
 })
 
 
