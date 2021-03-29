@@ -213,7 +213,7 @@ is_insufficiently_parsed_string <- function(pd) {
 }
 
 is_insufficiently_parsed_number <- function(pd) {
-  grepl("^0x", pd$text)
+  grepl("^0x", pd$text) & pd$token == "NUM_CONST"
 }
 #' @importFrom purrr map2_lgl
 lines_and_cols_match <- function(data) {
