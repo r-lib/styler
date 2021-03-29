@@ -2,6 +2,7 @@
 
 *No news yet*
 
+* Add more examples to `styler_*` helpfiles (#762).
 # styler 1.4.0
 
 ## API Changes
