@@ -132,6 +132,9 @@ ensure_correct_txt <- function(pd, text) {
     is_insufficiently_parsed_string(pd),
     is_insufficiently_parsed_number(pd)
   )
+  if (!any(is_problematic_text)) {
+    return(pd)
+  }
   problematic_text <- pd[is_problematic_text, ]
   is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
 
