@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse, transform and serialize a nested parse table — parse_transform_serialize_r_block • styler</title>
+<title>Identify strings that were not fully parsed — is_insufficiently_parsed_string • styler</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,8 @@
 
 
 
-<meta property="og:title" content="Parse, transform and serialize a nested parse table — parse_transform_serialize_r_block" />
-<meta property="og:description" content="We process blocks of nested parse tables for speed. See cache_find_block()
-for details on how a top level nest is split into blocks." />
+<meta property="og:title" content="Identify strings that were not fully parsed — is_insufficiently_parsed_string" />
+<meta property="og:description" content="Identifies strings that were not fully parsed due to their vast length." />
 
 
 
@@ -176,69 +175,36 @@ for details on how a top level nest is split into blocks." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse, transform and serialize a nested parse table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/transform-block.R'><code>R/transform-block.R</code></a></small>
-    <div class="hidden name"><code>parse_transform_serialize_r_block.Rd</code></div>
+    <h1>Identify strings that were not fully parsed</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/parse.R'><code>R/parse.R</code></a></small>
+    <div class="hidden name"><code>is_insufficiently_parsed_string.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>We process blocks of nested parse tables for speed. See <code><a href='cache_find_block.html'>cache_find_block()</a></code>
-for details on how a top level nest is split into blocks.</p>
+    <p>Identifies strings that were not fully parsed due to their vast length.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_transform_serialize_r_block</span><span class='op'>(</span>
-  <span class='va'>pd_nested</span>,
-  <span class='va'>start_line</span>,
-  <span class='va'>transformers</span>,
-  <span class='va'>base_indention</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>is_insufficiently_parsed_string</span><span class='op'>(</span><span class='va'>pd</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pd_nested</th>
-      <td><p>A block of the nested parse table.</p></td>
+      <th>pd</th>
+      <td><p>A parse table.</p></td>
     </tr>
     <tr>
-      <th>start_line</th>
-      <td><p>The line number on which the code starts.</p></td>
-    </tr>
-    <tr>
-      <th>transformers</th>
-      <td><p>A list of <em>named</em> transformer functions</p></td>
-    </tr>
-    <tr>
-      <th>base_indention</th>
-      <td><p>Integer scalar indicating by how many spaces the whole
-output text should be indented. Note that this is not the same as splitting
-by line and add a <code>base_indention</code> spaces before the code in the case
-multi-line strings are present. See 'Examples'.</p></td>
+      <th>text</th>
+      <td><p>The initial code to style.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>text_in</span> <span class='op'>&lt;-</span> <span class='st'>'x&lt;- function()
-"here
-is"
-NULL
-1+ 1
-'</span>
-<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='va'>text_in</span>, base_indention <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    x <span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span><span> </span><span style='color: #BBBB00;'>{</span><span>
-#&gt;      "here
-#&gt; is"
-#&gt;    </span><span style='color: #BBBB00;'>}</span><span>
-#&gt;    </span><span style='color: #0000BB;font-weight: bold;'>NULL</span><span>
-#&gt;    </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div><div class='input'><span class='co'># not equal to the naive approach</span>
-<span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='construct_vertical.html'>construct_vertical</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='add_spaces_or_newlines.html'>add_spaces</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='va'>text_in</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    x </span><span style='color: #00BB00;'>&lt;-</span><span> </span><span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span><span> </span><span style='color: #BBBB00;'>{</span><span>
-#&gt;      "here
-#&gt;    is"
-#&gt;    </span><span style='color: #BBBB00;'>}</span><span>
-#&gt;    </span><span style='color: #0000BB;font-weight: bold;'>NULL</span><span>
-#&gt;    </span><span style='color: #0000BB;'>1</span><span> </span><span style='color: #00BB00;'>+</span><span> </span><span style='color: #0000BB;'>1</span><span></div></span></pre>
+    <p>The meaning of the variable <code>is_problematic_string</code> in the source code
+changes from "all strings" to "all problematic strings", is partly
+misleading and this approach was chosen for performance reasons only.</p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -79,7 +79,7 @@ Carefully examine the results after running this function!" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -139,6 +139,9 @@ Carefully examine the results after running this function!" />
     </li>
     <li>
       <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    </li>
+    <li>
+      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/">Version 1.4.0</a>
     </li>
     <li class="divider"></li>
     <li>
@@ -292,27 +295,57 @@ inspect the changes.</p>
 <code><a href='styler_addins.html'>styler_addins</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># the following is identical but the former is more convenient:</span>
-<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='st'>"styler"</span>, fileext <span class='op'>=</span> <span class='st'>".R"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='st'>"styler"</span>, fileext <span class='op'>=</span> <span class='st'>".R"</span><span class='op'>)</span>
 <span class='fu'>xfun</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>write_utf8</a></span><span class='op'>(</span><span class='st'>"1++1"</span>, <span class='va'>file</span><span class='op'>)</span>
-<span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, style <span class='op'>=</span> <span class='va'>tidyverse_style</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='co'># the following is identical (because of ... and defaults),</span>
+<span class='co'># but the first is most convenient:</span>
+<span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp7T0tNB/styler6ad3d544534.R ℹ 
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp4elm5b/styler6ff188b0010.R ℹ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	0	File unchanged.
 #&gt; ℹ 	1	File changed.
 #&gt; ✖ 	0	Styling threw an error.
 #&gt; ────────────────────────────────────────────────────────────────────────────────
-#&gt; Please review the changes carefully!</div><div class='input'><span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, transformers <span class='op'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span><span class='op'>(</span>strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; Please review the changes carefully!</div><div class='input'><span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, style <span class='op'>=</span> <span class='va'>tidyverse_style</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp7T0tNB/styler6ad3d544534.R ✔ 
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp4elm5b/styler6ff188b0010.R ✔ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.
 #&gt; ℹ 	0	File changed.
 #&gt; ✖ 	0	Styling threw an error.
-#&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='fu'>xfun</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>read_utf8</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
+#&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, transformers <span class='op'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span><span class='op'>(</span>strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Styling  1  files:
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp4elm5b/styler6ff188b0010.R ✔ 
+#&gt; ────────────────────────────────────────────────────────────────────────────────
+#&gt; Status	Count	Legend 
+#&gt; ✔ 	1	File unchanged.
+#&gt; ℹ 	0	File changed.
+#&gt; ✖ 	0	Styling threw an error.
+#&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'>
+<span class='co'># only style indention and less invasive  levels (i.e. spaces)</span>
+<span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, scope <span class='op'>=</span> <span class='st'>"indention"</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Styling  1  files:
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp4elm5b/styler6ff188b0010.R ✔ 
+#&gt; ────────────────────────────────────────────────────────────────────────────────
+#&gt; Status	Count	Legend 
+#&gt; ✔ 	1	File unchanged.
+#&gt; ℹ 	0	File changed.
+#&gt; ✖ 	0	Styling threw an error.
+#&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='co'># name levels explicitly to not style less invasive levels</span>
+<span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, scope <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"tokens"</span>, <span class='st'>"spaces"</span><span class='op'>)</span><span class='op'>)</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Styling  1  files:
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp4elm5b/styler6ff188b0010.R ✔ 
+#&gt; ────────────────────────────────────────────────────────────────────────────────
+#&gt; Status	Count	Legend 
+#&gt; ✔ 	1	File unchanged.
+#&gt; ℹ 	0	File changed.
+#&gt; ✖ 	0	Styling threw an error.
+#&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'>
+<span class='fu'>xfun</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/xfun/man/read_utf8.html'>read_utf8</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "1 + +1"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span>
 </div></pre>
   </div>
