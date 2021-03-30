@@ -1,6 +1,6 @@
 # styler 1.4.0.9000 (Development)
 
-*No news yet*
+* Hexadecimal integers now preserve the trailing `L` when styled (#761).
 
 * Add more examples to `styler_*` helpfiles (#762).
 # styler 1.4.0
