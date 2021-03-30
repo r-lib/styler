@@ -1,5 +1,7 @@
 # All available hooks: https://pre-commit.com/hooks.html
 # R specific hooks: https://github.com/lorenzwalthert/precommit
+default_stages: [commit]
+
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
     rev: v0.1.2.9001
