@@ -1,3 +1,7 @@
+This is a follow-up release to version 1.4.0 (2021-03-22) because a major bug
+(https://github.com/r-lib/styler/issues/763) had to be resolved. The last 
+update of styler was more than a year ago. 
+
 ## Test environments
 
 * local OS X install (10.15.7): R 4.0.3

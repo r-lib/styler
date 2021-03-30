@@ -1,6 +1,7 @@
-# styler 1.4.0.9000 (Development)
+# styler 1.4.1
 
-* Fix interaction between cache and `base_indention` (#764).
+* Fix interaction between cache and `base_indention`. This also fixes
+  the Addin for styling a selection with base indention repeatedly (#764).
 * Add more examples to `styler_*` helpfiles (#762).
 * Hexadecimal integers now preserve the trailing `L` when styled (#761).
 * Add a pre-push hook to make sure news bullets are added to each PR (#765).
