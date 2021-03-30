@@ -1,8 +1,9 @@
 # styler 1.4.0.9000 (Development)
 
 * Hexadecimal integers now preserve the trailing `L` when styled (#761).
-
 * Add more examples to `styler_*` helpfiles (#762).
+* Add a pre-push hook to make sure news bullets are added to each PR (#765).
+
 # styler 1.4.0
 
 ## API Changes

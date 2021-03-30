@@ -21,3 +21,5 @@ revdep
 ^touchstone$
 ^\.github$
 ^LICENSE\.md$
+^inst/hooks/$
+^inst/WORDLIST$

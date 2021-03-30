@@ -1,5 +1,7 @@
 # All available hooks: https://pre-commit.com/hooks.html
 # R specific hooks: https://github.com/lorenzwalthert/precommit
+default_stages: [commit]
+
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
     rev: v0.1.2.9001
@@ -56,3 +58,10 @@ repos:
         language: fail
         files: '\.Rhistory|\.RData|\.Rds|\.rds$'
         # `exclude: <regex>` to allow committing specific files.
+    -   id: require-news-on-push
+        name: Require bullet in NEWS.md
+        description: NEWS.md must be updated with every PR.
+        entry: inst/hooks/require-news-update.R
+        stages: [push]
+        language: script
+        files: ""
