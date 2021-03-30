@@ -41,7 +41,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
   } else {
     serialized_transformed_text <- map2(
       c(0, find_blank_lines_to_next_expr(pd_nested)[-1] - 1L),
-      pd_nested$text,
+      paste0(rep_char(" ", base_indention), pd_nested$text),
       ~ c(rep("", .x), .y)
     ) %>%
       unlist()
