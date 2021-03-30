@@ -141,9 +141,6 @@ ensure_correct_txt <- function(pd, text) {
   is_unaffected_token <- !or(
     is_problematic_text, is_parent_of_problematic_string
   )
-  if (!any(is_problematic_text)) {
-    return(pd)
-  }
 
   pd_with_all_text <- get_parse_data(text, include_text = TRUE)
   parent_cols_for_merge <- c("id", "text", "short", line_col_names())
