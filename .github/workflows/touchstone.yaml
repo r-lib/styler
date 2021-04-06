@@ -76,6 +76,7 @@ jobs:
           pkg <- basename(getwd())
           if (pkg %in% rownames(installed.packages())) {
             remove.packages(pkg)
+            cat('removed package ', pkg, '.', sep = "")
           }
         shell: Rscript {0}
       - name: Checkout benchmarking repo
