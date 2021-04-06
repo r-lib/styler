@@ -73,6 +73,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("lorenzwalthert/touchstone")
+          remotes::install_cran('ggplot2')
           pkg <- basename(getwd())
           if (pkg %in% rownames(installed.packages())) {
             remove.packages(pkg)
