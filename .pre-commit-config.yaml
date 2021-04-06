@@ -16,6 +16,7 @@ repos:
           (?x)^(
           data/.*|
           \.github/.*\.yaml|
+          touchstone/config\.json|
           (.*/|)\.Rprofile|
           (.*/|)\.Renviron|
           (.*/|)\.gitignore|
