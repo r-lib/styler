@@ -4,6 +4,7 @@
     entry: Rscript inst/bin/roxygenize
     language: r
     files: '^(R|man)/'
+    require_serial: true
 -   id: use-tidy-description
     name: use-tidy-description
     description: run usethis::use_tidy_description()

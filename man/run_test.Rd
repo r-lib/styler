@@ -53,7 +53,8 @@ made.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in
-\code{.pre-commit-config.yaml}.
+\code{.pre-commit-config.yaml}. Set's the env variable \code{R_PRECOMMIT_HOOK_ENV} to
+when running.
 }
 \details{
 Two potential outcomes of a hooks are pass or fail. This is reflected on the
@@ -69,19 +70,4 @@ the message we expect. To check changed file content, we set \code{error_msg} to
 \code{NA}.
 }
 }
-\section{renv}{
-
-pre-commit >= 2.11.0 supports R as a language and each hook repo has its own
-virtual environment with package versions locked. For that reason, we should
-also test with exactly these versions. To avoid convolution of the testing
-environment (that contains testthat and other packages) and the hook
-environment (specified in \code{renv.lock}), we must only activate the hook
-environment right when the script is called, but \code{run_test()} must run in the
-testing environment. Since \code{--vanilla} is inherited in the child process
-initiated from \code{run_test()}, the
-only way to do this is to set an env variable when running \code{run_test()} and
-check in the user R profile if it is set, and then activate the renv. This is
-done with \code{R_PRECOMMIT_HOOK_ENV}.
-}
-
 \keyword{internal}
