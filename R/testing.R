@@ -88,7 +88,7 @@ run_test_impl <- function(path_executable,
   tempdir <- fs::dir_create(fs::file_temp())
   if (!is.null(copy)) {
     if (is.null(names(copy))) {
-      # no names, take dirname
+      # not namesm take directory name
       new_dirs <- fs::path(tempdir, fs::path_dir(copy))
       fs::dir_create(new_dirs)
       paths_copy <- fs::path(new_dirs, fs::path_file(copy))
