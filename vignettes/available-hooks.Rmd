@@ -165,10 +165,21 @@ exists, the hook emits a warning which you can silence with
   args: [--no-warn-cache] 
 ```
 
-Because the hook will write the version of `{roxygen2}` to `DESCRIPTON`, you
-should either make sure the version you use when you call `{roxygen2}` 
-interactively matches the one 
+Because the hook will write the version of {roxygen2} to `DESCRIPTON`, you
+should either make sure the version you use when you call {roxygen2}
+interactively matches the one from in {precommit} or simply not run {roxygen2}
+manually. 
 
+If you specify additional roclets through the `Roxygen:` field in `DESCRIPTION`,
+e.g. from [{pkgapi}](https://github.com/r-lib/pkgapi) you must specify the 
+dependencies explicitly such that `renv::install()` understands it, e.g.
+
+```
+  id: roxygenize
+  additional_dependencies:
+  - r-lib/pkgapi
+
+```
 
 This hook does not modify input files, but writes to `.Rd` files in `man/`, 
 `NAMESPACE` and potentially others depending on which roxygen roclets you 
@@ -212,8 +223,7 @@ should set this with the field `verbose: true`.
 When configured this way, lintr prints lint errors as they appear. Other
 arguments are not supported. Instead, `lintr` config should be specified in a
 `.lintr` config file in Debian Control Field Format as specified in the
-[`.lintr`
-documentation](https://github.com/jimhester/lintr#project-configuration).
+[`.lintr` documentation](https://github.com/jimhester/lintr#project-configuration).
 
 This hook does not modify any file.
 
