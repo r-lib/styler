@@ -133,12 +133,7 @@ is_shebang <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 is_code_chunk_header_or_xaringan <- function(pd) {
-  is_comment <- is_comment(pd)
-  is_comment[is_comment] <- grepl(
-    "^#[\\+|\\-|<<]", pd$text[is_comment],
-    perl = TRUE
-  )
-  is_comment
+  grepl("^#[\\+|\\-|<<]", pd$text, perl = TRUE)
 }
 
 #' Identify output comments
