@@ -1,0 +1,19 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--expr: this( [0/0] {1}                              
+ ¦   ¦--expr: this [0/0] {3}                           
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: this [0/0] {2}       
+ ¦   ¦--'(': ( [0/0] {4}                               
+ ¦   °--')': ) [0/0] {5}                               
+ ¦--COMMENT: #> is [1/0] {6}                           
+ ¦--expr: this( [3/1] {7}                              
+ ¦   ¦--expr: this [0/0] {9}                           
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: this [0/0] {8}       
+ ¦   ¦--'(': ( [0/0] {10}                              
+ ¦   °--')': ) [0/0] {11}                              
+ ¦--COMMENT: #> is [0/0] {12}                          
+ ¦--expr: this( [2/0] {13}                             
+ ¦   ¦--expr: this [0/0] {15}                          
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: this [0/0] {14}      
+ ¦   ¦--'(': ( [0/0] {16}                              
+ ¦   °--')': ) [0/0] {17}                              
+ °--COMMENT: # > n [1/0] {18}                          

@@ -250,7 +250,10 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
   is_comment <- is_comment(pd)
 
   if (any(is_comment)) {
-    is_comment <- is_comment & !is_shebang(pd) & !is_code_chunk_header_or_xaringan(pd)
+    is_comment <- is_comment &
+      !is_shebang(pd) &
+      !is_code_chunk_header_or_xaringan(pd) &
+      !is_output_prefix(pd)
     if (!any(is_comment)) {
       return(pd)
     }
