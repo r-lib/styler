@@ -3,7 +3,6 @@
 * `#>` on the start of a line is recognized as an output marker and no space
   is added after `#` (#737).
 
-
 # styler 1.4.1
 
 * Fix interaction between cache and `base_indention`. This also fixes
