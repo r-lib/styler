@@ -127,22 +127,13 @@ is_shebang <- function(pd) {
 #'   "# title",
 #'   "some_code <- function() {}",
 #'   "#+ chunk-label, opt1=value1",
-#'   "call(3, 2, c(3:2))"
+#'   "call(3, 2, c(3:2))",
+#'   "#> 99"
 #' ))
 #' @param pd A parse table.
 #' @keywords internal
-is_code_chunk_header_or_xaringan <- function(pd) {
-  grepl("^#[\\+|\\-|<<]", pd$text, perl = TRUE)
-}
-
-#' Identify output comments
-#'
-#' Determines if parse table contains `#>` at the beginning of a line, which is
-#' often used to prefix the output value of previous R code.
-#' @param pd A parse table.
-#' @keywords internal
-is_output_prefix <- function(pd) {
-  grepl("^#>", pd$text) & pd$lag_newlines > 0L
+is_code_chunk_header_or_xaringan_or_code_output <- function(pd) {
+  grepl("^#[\\+|\\-|<<|>]", pd$text, perl = TRUE)
 }
 
 contains_else_expr <- function(pd) {
