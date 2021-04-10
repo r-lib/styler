@@ -143,7 +143,7 @@ is_code_chunk_header_or_xaringan <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 is_output_prefix <- function(pd) {
-  grepl("^#>", pd$text, perl = TRUE) & (pd$lag_newlines > 0L | pd$pos_id == 1)
+  grepl("^#>", pd$text, perl = TRUE) & pd$lag_newlines > 0L
 }
 
 contains_else_expr <- function(pd) {
