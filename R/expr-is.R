@@ -112,8 +112,7 @@ is_subset_expr <- function(pd) {
 is_shebang <- function(pd) {
   is_first_comment <- pd$pos_id == 1L
   is_first_comment[is_first_comment] <- grepl(
-    "^#!", pd$text[is_first_comment],
-    perl = TRUE
+    "^#!", pd$text[is_first_comment]
   )
   is_first_comment
 }
@@ -143,7 +142,7 @@ is_code_chunk_header_or_xaringan <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 is_output_prefix <- function(pd) {
-  grepl("^#>", pd$text, perl = TRUE) & pd$lag_newlines > 0L
+  grepl("^#>", pd$text) & pd$lag_newlines > 0L
 }
 
 contains_else_expr <- function(pd) {
