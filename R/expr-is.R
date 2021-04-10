@@ -112,8 +112,7 @@ is_subset_expr <- function(pd) {
 is_shebang <- function(pd) {
   is_first_comment <- pd$pos_id == 1L
   is_first_comment[is_first_comment] <- grepl(
-    "^#!", pd$text[is_first_comment],
-    perl = TRUE
+    "^#!", pd$text[is_first_comment]
   )
   is_first_comment
 }
@@ -128,17 +127,13 @@ is_shebang <- function(pd) {
 #'   "# title",
 #'   "some_code <- function() {}",
 #'   "#+ chunk-label, opt1=value1",
-#'   "call(3, 2, c(3:2))"
+#'   "call(3, 2, c(3:2))",
+#'   "#> 99"
 #' ))
 #' @param pd A parse table.
 #' @keywords internal
-is_code_chunk_header_or_xaringan <- function(pd) {
-  is_comment <- is_comment(pd)
-  is_comment[is_comment] <- grepl(
-    "^#[\\+|\\-|<<]", pd$text[is_comment],
-    perl = TRUE
-  )
-  is_comment
+is_code_chunk_header_or_xaringan_or_code_output <- function(pd) {
+  grepl("^#[\\+|\\-|<<|>]", pd$text, perl = TRUE)
 }
 
 contains_else_expr <- function(pd) {

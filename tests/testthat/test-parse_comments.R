@@ -62,6 +62,13 @@ test_that("xaringan markers are respected", {
   ), NA)
 })
 
+test_that("output prefix markers are respected", {
+  expect_warning(test_collection("parse_comments",
+    "output-prefix",
+    transformer = style_text
+  ), NA)
+})
+
 test_that("code chunk headers for spinning are respected", {
   expect_warning(test_collection("parse_comments",
     "spinning_code_chunk_headers",

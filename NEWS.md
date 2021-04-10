@@ -1,7 +1,6 @@
 # styler 1.4.1.9000 (Development version)
 
-
-
+* `#>` is recognized as an output marker and no space is added after `#` (#771).
 
 # styler 1.4.1
 

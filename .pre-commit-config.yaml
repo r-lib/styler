@@ -10,6 +10,8 @@ repos:
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
         exclude: 'tests/testthat/.*/.*\.R'
     -   id: roxygenize
+        additional_dependencies:
+        - r-lib/pkgapi
     -   id: use-tidy-description
     -   id: spell-check
         exclude: >
