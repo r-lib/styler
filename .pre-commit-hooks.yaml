@@ -5,14 +5,14 @@
     language: r
     files: '^(R|man)/'
     require_serial: true
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: use-tidy-description
     name: use-tidy-description
     description: run usethis::use_tidy_description()
     entry: Rscript inst/bin/use-tidy-description
     language: r
     files: '^DESCRIPTION$'
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: style-files
     name: style-files
     description: style files with styler
@@ -20,35 +20,35 @@
     language: r
     files: '(\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
     exclude: 'renv/activate\.R'
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: no-browser-statement
     name: no-browser-statement
     description: check if a .R file contains a `browser()` statement
     entry: Rscript inst/bin/no-browser-statement
     language: r
     files: '\.[rR]$'
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: parsable-R
     name: parsable-R
     description: check if a .R file is parsable
     entry: Rscript inst/bin/parsable-R
     language: r
     files: '\.[rR]$'
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: readme-rmd-rendered
     name: readme-rmd-rendered
     description: make sure README.Rmd hasn't been edited more recently than README.md
     entry: Rscript inst/bin/readme-rmd-rendered
     language: r
     files: 'README\.[Rr]?md$'
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: codemeta-description-updated
     name: codemeta-description-updated
     description: make sure codemeta.json is in sync with DESCRIPTION. It should be run after use-tidy-description.
     entry: Rscript inst/bin/codemeta-description-updated
     language: r
     files: '^DESCRIPTION$'
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: spell-check 
     name: spell-check
     description: perform a spell check with spelling::spell_check_files()
@@ -78,7 +78,7 @@
       .*\.RData
       )$
     require_serial: true
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: deps-in-desc
     name: deps-in-desc
     description: Check if dependencies that can be parsed from code are in DESCRIPTION.
@@ -86,7 +86,7 @@
     language: r
     files: '(\.[rR]profile|\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
     exclude: 'renv/activate\.R'
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
 -   id: lintr
     name: lintr
     description: check if a .R file is lint free (using lintr)
@@ -94,4 +94,4 @@
     language: r
     files: '\.[rR]$'
     exclude: 'renv/activate\.R'
-    minimum_pre_commit_version: 2.11.1
+    minimum_pre_commit_version: 2.12
