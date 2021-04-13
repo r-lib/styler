@@ -119,7 +119,7 @@ token_is_on_aligned_line <- function(pd_flat) {
 
     # when match via comma unsuccessful, matching by = must yield at least one =
     is_aligned <- length(unique(start_after_eq + previous_line)) == 1 && length(start_after_eq) > 1
-    previous_line <- nchar(by_line)
+    previous_line <- nchar(by_line) + previous_line
     if (column >= start_eval && !is_aligned) {
       # when not all are named, we need colum 1 for previous_line
       return(FALSE)

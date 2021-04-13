@@ -192,9 +192,15 @@ ca(
   m  =  c(rm.na = 7)
 )
 
-# aligned
+# aligned =, first all named
 fell(
   x  = 8, annoying   = 3,
   y  = 23, # nothing in column 2 for row 2
   zz = NULL, finally = "stuff"
+)
+
+# aligned =, first not all named
+gell(
+  p = 2,   g = gg(x), n = 3 * 3, #
+  31,    fds = -1, gz   = f / 3 + 1,
 )
