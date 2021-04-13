@@ -39,16 +39,17 @@ library("magrittr")
 withr::with_options(
   list(styler.cache_name = NULL), # temporarily deactivate cache
   {
-transformers <- tidyverse_style()
-pd_nested <- styler:::compute_parse_data_nested(c(
-  "call(",
-  "  ab = 1,",
-  "  a  = 2",
-  ")"
-)) \%>\%
-  styler:::post_visit(transformers$initialize)
-nest <- pd_nested$child[[1]]
-styler:::token_is_on_aligned_line(nest)
-})
+    transformers <- tidyverse_style()
+    pd_nested <- styler:::compute_parse_data_nested(c(
+      "call(",
+      "  ab = 1,",
+      "  a  = 2",
+      ")"
+    )) \%>\%
+      styler:::post_visit(transformers$initialize)
+    nest <- pd_nested$child[[1]]
+    styler:::token_is_on_aligned_line(nest)
+  }
+)
 }
 \keyword{internal}

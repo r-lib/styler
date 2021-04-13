@@ -30,19 +30,21 @@
 #' withr::with_options(
 #'   list(styler.cache_name = NULL), # temporarily deactivate cache
 #'   {
-#' transformers <- tidyverse_style()
-#' pd_nested <- styler:::compute_parse_data_nested(c(
-#'   "call(",
-#'   "  ab = 1,",
-#'   "  a  = 2",
-#'   ")"
-#' )) %>%
-#'   styler:::post_visit(transformers$initialize)
-#' nest <- pd_nested$child[[1]]
-#' styler:::token_is_on_aligned_line(nest)
-#' })
+#'     transformers <- tidyverse_style()
+#'     pd_nested <- styler:::compute_parse_data_nested(c(
+#'       "call(",
+#'       "  ab = 1,",
+#'       "  a  = 2",
+#'       ")"
+#'     )) %>%
+#'       styler:::post_visit(transformers$initialize)
+#'     nest <- pd_nested$child[[1]]
+#'     styler:::token_is_on_aligned_line(nest)
+#'   }
+#' )
 token_is_on_aligned_line <- function(pd_flat) {
   line_idx <- 1 + cumsum(pd_flat$lag_newlines)
+  pd_flat$lag_newlines <- pd_flat$pos_id <- NULL
   pd_flat$.lag_spaces <- lag(pd_flat$spaces)
   pd_by_line <- split(pd_flat, line_idx)
   last_line_is_closing_brace_only <- nrow(last(pd_by_line)) == 1
@@ -87,22 +89,16 @@ token_is_on_aligned_line <- function(pd_flat) {
   # now, pd only contains arguments separated by values, ideal for iterating
   # over columns.
   # cannot use lag_newlines anymore since we removed tokens.
-  pd_by_line <- map(pd_by_line, function(pd_sub) {
-    pd_sub$lag_newlines <- NULL
-    pd_sub
-  })
 
   n_cols <- map_int(pd_by_line, ~ sum(.x$token == "','"))
   start <- ifelse(all(alignment_col1_is_named(pd_by_line)), 1, 2)
 
   for (column in seq2(start, max(n_cols))) {
-    char_len <- alignment_serialize_column(pd_by_line, column) %>%
+    by_line <- alignment_serialize_column(pd_by_line, column) %>%
       compact() %>%
       unlist() %>%
-      trimws(which = "right") %>%
-      nchar()
-
-    is_aligned <- length(unique(char_len)) == 1
+      trimws(which = "right")
+    is_aligned <- length(unique(nchar(by_line))) == 1
 
     if (!is_aligned) {
       return(FALSE)
