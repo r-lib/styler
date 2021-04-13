@@ -191,3 +191,10 @@ ca(
   y2 = "hi",
   m  =  c(rm.na = 7)
 )
+
+# aligned
+fell(
+  x  = 8, annoying   = 3,
+  y  = 23, # nothing in column 2 for row 2
+  zz = NULL, finally = "stuff"
+)
