@@ -1,8 +1,24 @@
 # styler 1.4.1.9000 (Development version)
 
 * `#>` is recognized as an output marker and no space is added after `#` (#771).
-* speeding up alignment detection (#774).
-
+* code with left alignment after `=` in function calls is now recognized as 
+  aligned and won't be reformatted (#774).
+  ```
+  # newly detected
+  call(
+    x  = 12345,
+    y2 = 17
+  )
+  
+  # already detected previously
+  call(
+    x  = 12345,
+    y2 =    17
+  )
+  ```
+  Also see `vignette("detect-alignment")`:
+  
+  
 # styler 1.4.1
 
 * Fix interaction between cache and `base_indention`. This also fixes
