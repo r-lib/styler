@@ -176,3 +176,18 @@ call(
   y  = f(
   ),
 )
+
+
+# aligned (left after `=`)
+ca(
+  x  = 23200,
+  y2 = "hi",
+  m  = c(rm.na = 7)
+)
+
+# not aligned (left after `=`)
+ca(
+  x  = 23200,
+  y2 = "hi",
+  m  =  c(rm.na = 7)
+)

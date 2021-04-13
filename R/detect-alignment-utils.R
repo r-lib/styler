@@ -113,11 +113,9 @@ alignment_serialize_line <- function(relevant_pd_by_line, column) {
   if (column > n_cols) {
     # line does not have values at that column
     return(NULL)
-  } else {
-    relevant_comma <- comma_idx[column]
   }
-
-  relevant_pd_by_line <- relevant_pd_by_line[seq2(1, relevant_comma), ]
+  between_commas <- seq2(max(1, comma_idx[column - 1L]), comma_idx[column])
+  relevant_pd_by_line <- relevant_pd_by_line[between_commas, ]
   alignment_serialize(relevant_pd_by_line)
 }
 

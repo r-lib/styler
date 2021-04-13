@@ -91,16 +91,37 @@ token_is_on_aligned_line <- function(pd_flat) {
   # cannot use lag_newlines anymore since we removed tokens.
 
   n_cols <- map_int(pd_by_line, ~ sum(.x$token == "','"))
-  start <- ifelse(all(alignment_col1_is_named(pd_by_line)), 1, 2)
-
-  for (column in seq2(start, max(n_cols))) {
+  previous_line <- 0
+  start_eval <- ifelse(all(alignment_col1_is_named(pd_by_line)), 1, 2)
+  for (column in seq2(1, max(n_cols))) {
     by_line <- alignment_serialize_column(pd_by_line, column) %>%
       compact() %>%
       unlist() %>%
       trimws(which = "right")
-    is_aligned <- length(unique(nchar(by_line))) == 1
+    # check 1: match by comma
+    # might have fewer lines in subsequent columns.
+    current_col <- nchar(by_line)
+    if (column > 1) {
+      # must add previous columns, as first column might not align
+      current_col <- current_col +
+        previous_line[intersect(names(previous_line), names(by_line))]
+    }
 
-    if (!is_aligned) {
+    is_aligned <- length(unique(current_col)) == 1L
+    if (is_aligned) {
+      previous_line <- nchar(by_line)
+      next
+    }
+    # check 2: match by = (no extra spaces around it allowed.)
+    # match left aligned after =
+    match <- regexpr("= [^ ]", by_line)
+    match <- match[match > 0]
+
+    # when match via comma unsuccessful, matching by = must yield at least one =
+    is_aligned <- length(unique(match + previous_line)) == 1 && length(match) > 1
+    previous_line <- nchar(by_line)
+    if (column >= start_eval && !is_aligned) {
+      # when not all are named, we need colum 1 for previous_line
       return(FALSE)
     }
   }
