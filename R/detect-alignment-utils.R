@@ -50,20 +50,21 @@ alignment_drop_comments <- function(pd_by_line) {
 #' @keywords internal
 alignment_ensure_trailing_comma <- function(pd_by_line) {
   last_pd <- last(pd_by_line)
-  # needed to make sure comma is aded without space
+  # needed to make sure comma is added without space
   last_pd$spaces[nrow(last_pd)] <- 0
   if (last(last_pd$token) == "','") {
     return(pd_by_line)
   } else {
-    pos_id <- create_pos_ids(last_pd, nrow(last_pd), after = TRUE)
     tokens <- create_tokens(
       tokens = "','",
       texts = ",",
       lag_newlines = 0,
       spaces = 0,
-      pos_ids = pos_id,
+      pos_ids = NA,
     )
     tokens$.lag_spaces <- 0
+
+    tokens$lag_newlines <- tokens$pos_id <- NULL
     pd_by_line[[length(pd_by_line)]] <- rbind(last_pd, tokens)
     pd_by_line
   }
@@ -112,11 +113,9 @@ alignment_serialize_line <- function(relevant_pd_by_line, column) {
   if (column > n_cols) {
     # line does not have values at that column
     return(NULL)
-  } else {
-    relevant_comma <- comma_idx[column]
   }
-
-  relevant_pd_by_line <- relevant_pd_by_line[seq2(1, relevant_comma), ]
+  between_commas <- seq2(max(1, comma_idx[column - 1L]), comma_idx[column])
+  relevant_pd_by_line <- relevant_pd_by_line[between_commas, ]
   alignment_serialize(relevant_pd_by_line)
 }
 
