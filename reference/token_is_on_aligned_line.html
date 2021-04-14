@@ -224,17 +224,18 @@ sure we can stop as soon as we found that columns are not aligned.</p></li>
 <span class='fu'>withr</span><span class='fu'>::</span><span class='fu'><a href='https://withr.r-lib.org/reference/with_options.html'>with_options</a></span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>styler.cache_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>, <span class='co'># temporarily deactivate cache</span>
   <span class='op'>{</span>
-<span class='va'>transformers</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>pd_nested</span> <span class='op'>&lt;-</span> <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='compute_parse_data_nested.html'>compute_parse_data_nested</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-  <span class='st'>"call("</span>,
-  <span class='st'>"  ab = 1,"</span>,
-  <span class='st'>"  a  = 2"</span>,
-  <span class='st'>")"</span>
-<span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='visit.html'>post_visit</a></span><span class='op'>(</span><span class='va'>transformers</span><span class='op'>$</span><span class='va'>initialize</span><span class='op'>)</span>
-<span class='va'>nest</span> <span class='op'>&lt;-</span> <span class='va'>pd_nested</span><span class='op'>$</span><span class='va'>child</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-<span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>token_is_on_aligned_line</span><span class='op'>(</span><span class='va'>nest</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
+    <span class='va'>transformers</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span><span class='op'>(</span><span class='op'>)</span>
+    <span class='va'>pd_nested</span> <span class='op'>&lt;-</span> <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='compute_parse_data_nested.html'>compute_parse_data_nested</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+      <span class='st'>"call("</span>,
+      <span class='st'>"  ab = 1,"</span>,
+      <span class='st'>"  a  = 2"</span>,
+      <span class='st'>")"</span>
+    <span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='visit.html'>post_visit</a></span><span class='op'>(</span><span class='va'>transformers</span><span class='op'>$</span><span class='va'>initialize</span><span class='op'>)</span>
+    <span class='va'>nest</span> <span class='op'>&lt;-</span> <span class='va'>pd_nested</span><span class='op'>$</span><span class='va'>child</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+    <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>token_is_on_aligned_line</span><span class='op'>(</span><span class='va'>nest</span><span class='op'>)</span>
+  <span class='op'>}</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

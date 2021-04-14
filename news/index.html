@@ -183,8 +183,22 @@
 <a href="#styler-1419000-development-version" class="anchor"></a>styler 1.4.1.9000 (Development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p><code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</p></li>
 <li>
-<code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</li>
+<p>code with left alignment after <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> in function calls is now recognized as aligned and won’t be reformatted (<a href='https://github.com/r-lib/styler/issues/774'>#774</a>).</p>
+<pre><code><a href="https://rdrr.io/r/base/call.html"># newly detected
+call(
+  x  = 12345,
+  y2 = 17
+)
+
+# already detected previously
+call(
+  x  = 12345,
+  y2 =    17
+)</a></code></pre>
+<p>Also see <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>:</p>
+</li>
 </ul>
 </div>
     <div id="styler-141" class="section level1">
