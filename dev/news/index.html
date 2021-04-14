@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.1.9000</span>
       </span>
     </div>
 
@@ -178,12 +178,35 @@
       <small>Source: <a href='https://github.com/r-lib/styler/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="styler-1409000-development" class="section level1">
-<h1 class="page-header" data-toc-text="1.4.0.9000">
-<a href="#styler-1409000-development" class="anchor"></a>styler 1.4.0.9000 (Development)<small> Unreleased </small>
+    <div id="styler-1419000-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="1.4.1.9000">
+<a href="#styler-1419000-development-version" class="anchor"></a>styler 1.4.1.9000 (Development version)<small> Unreleased </small>
 </h1>
 <ul>
-<li>Fix interaction between cache and <code>base_indention</code> (<a href='https://github.com/r-lib/styler/issues/764'>#764</a>).</li>
+<li><p><code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</p></li>
+<li>
+<p>code with left alignment after <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> in function calls is now recognized as aligned and won’t be reformatted (<a href='https://github.com/r-lib/styler/issues/774'>#774</a>).</p>
+<pre><code><a href="https://rdrr.io/r/base/call.html"># newly detected
+call(
+  x  = 12345,
+  y2 = 17
+)
+
+# already detected previously
+call(
+  x  = 12345,
+  y2 =    17
+)</a></code></pre>
+<p>Also see <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>:</p>
+</li>
+</ul>
+</div>
+    <div id="styler-141" class="section level1">
+<h1 class="page-header" data-toc-text="1.4.1">
+<a href="#styler-141" class="anchor"></a>styler 1.4.1<small> 2021-03-30 </small>
+</h1>
+<ul>
+<li>Fix interaction between cache and <code>base_indention</code>. This also fixes the Addin for styling a selection with base indention repeatedly (<a href='https://github.com/r-lib/styler/issues/764'>#764</a>).</li>
 <li>Add more examples to <code>styler_*</code> helpfiles (<a href='https://github.com/r-lib/styler/issues/762'>#762</a>).</li>
 <li>Hexadecimal integers now preserve the trailing <code>L</code> when styled (<a href='https://github.com/r-lib/styler/issues/761'>#761</a>).</li>
 <li>Add a pre-push hook to make sure news bullets are added to each PR (<a href='https://github.com/r-lib/styler/issues/765'>#765</a>).</li>
