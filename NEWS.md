@@ -18,6 +18,7 @@
   ```
   Also see `vignette("detect-alignment")`:
   
+* improve pkgdown author URLs (#775).
   
 # styler 1.4.1
 
