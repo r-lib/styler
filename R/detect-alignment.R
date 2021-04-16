@@ -116,15 +116,26 @@ token_is_on_aligned_line <- function(pd_flat) {
     # check 2: match by = (no extra spaces around it allowed.)
     # match left aligned after =
     start_after_eq <- regexpr("= [^ ]", by_line)
+    names(start_after_eq) <- names(by_line)
     start_after_eq <- start_after_eq[start_after_eq > 0]
 
-    # when match via comma unsuccessful, matching by = must yield at least one =
-    is_aligned <- length(unique(start_after_eq + previous_line)) == 1 && length(start_after_eq) > 1
-    previous_line <- nchar(by_line) + previous_line
-    if (column >= start_eval && !is_aligned) {
-      # when not all are named, we need colum 1 for previous_line
-      return(FALSE)
+    if (column >= start_eval) {
+      if (length(start_after_eq) == 0) {
+        return(FALSE)
+      }
+      # when match via comma unsuccessful, matching by = must yield at least one =
+      if (column == 1) {
+        current_col <- start_after_eq
+      } else {
+        current_col <- start_after_eq +
+          previous_line[intersect(names(previous_line), names(start_after_eq))]
+      }
+      is_aligned <- length(unique(current_col)) == 1 && length(start_after_eq) > 1
+      if (!is_aligned) {
+        return(FALSE)
+      }
     }
+    previous_line <- nchar(by_line) + previous_line
   }
   TRUE
 }
