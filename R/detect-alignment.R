@@ -43,7 +43,7 @@
 #'   }
 #' )
 token_is_on_aligned_line <- function(pd_flat) {
-  line_idx <- 1 + cumsum(pd_flat$lag_newlines)
+  line_idx <- 1L + cumsum(pd_flat$lag_newlines)
   # cannot use lag_newlines anymore since we removed tokens
   # pos_id too expensive to construct in alignment_ensure_trailing_comma()
   pd_flat$lag_newlines <- pd_flat$pos_id <- NULL

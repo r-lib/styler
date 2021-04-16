@@ -58,8 +58,8 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
     tokens <- create_tokens(
       tokens = "','",
       texts = ",",
-      lag_newlines = 0,
-      spaces = 0,
+      lag_newlines = 0L,
+      spaces = 0L,
       pos_ids = NA,
     )
     tokens$.lag_spaces <- 0

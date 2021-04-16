@@ -163,7 +163,7 @@ needs_indention <- function(pd,
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
-  before_first_break <- which(pd$lag_newlines > 0)[1] - 1
+  before_first_break <- which(pd$lag_newlines > 0)[1] - 1L
   if (is.na(before_first_break)) {
     return(FALSE)
   }
