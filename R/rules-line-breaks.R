@@ -289,7 +289,7 @@ set_line_break_before_closing_call <- function(pd, except_token_before) {
   }
   npd <- nrow(pd)
   is_multi_line <- any(pd$lag_newlines[seq2(3L, npd - 1L)] > 0)
-  if (!is_multi_line) {
+  if (is_multi_line == 0) {
     exception <- which(pd$token_before %in% except_token_before)
     pd$lag_newlines[setdiff(npd, exception)] <- 0L
     return(pd)

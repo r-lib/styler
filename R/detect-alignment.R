@@ -80,7 +80,7 @@ token_is_on_aligned_line <- function(pd_flat) {
   if (any(starting_with_comma)) {
     return(FALSE)
   }
-  pd_is_multi_line <- map_lgl(pd_by_line, ~ any(.x$multi_line, na.rm = TRUE))
+  pd_is_multi_line <- map_lgl(pd_by_line, ~ any(.x$multi_line > 0, na.rm = TRUE))
   if (any(pd_is_multi_line)) {
     return(FALSE)
   }
