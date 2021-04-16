@@ -110,7 +110,7 @@ token_is_on_aligned_line <- function(pd_flat) {
 
     is_aligned <- length(unique(current_col)) == 1L
     if (is_aligned) {
-      previous_line <- nchar(by_line)
+      previous_line <- previous_line + nchar(by_line)
       next
     }
     # check 2: match by = (no extra spaces around it allowed.)
