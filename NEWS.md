@@ -2,7 +2,7 @@
 
 * `#>` is recognized as an output marker and no space is added after `#` (#771).
 * code with left alignment after `=` in function calls is now recognized as 
-  aligned and won't be reformatted (#774).
+  aligned and won't be reformatted (#774, #777).
   ```
   # newly detected
   call(
