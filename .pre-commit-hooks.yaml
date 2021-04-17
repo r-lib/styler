@@ -38,8 +38,8 @@
 -   id: readme-rmd-rendered
     name: readme-rmd-rendered
     description: make sure README.Rmd hasn't been edited more recently than README.md
-    entry: Rscript inst/bin/readme-rmd-rendered
-    language: r
+    entry: inst/bin/readme-rmd-rendered
+    language: script
     files: 'README\.[Rr]?md$'
     minimum_pre_commit_version: "2.12"
 -   id: codemeta-description-updated
