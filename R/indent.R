@@ -201,7 +201,7 @@ needs_indention_one <- function(pd,
 #' @importFrom purrr map_lgl
 #' @keywords internal
 set_multi_line <- function(pd) {
-  pd$multi_line <- unname(map_int(pd$child, pd_is_multi_line))
+  pd$multi_line <- unname(map_int(pd$child, pd_multi_line))
   pd
 }
 
@@ -214,6 +214,10 @@ set_multi_line <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 pd_is_multi_line <- function(pd) {
+  pd_multi_line(pd)
+}
+
+pd_multi_line <- function(pd) {
   sum(pd$multi_line, pd$lag_newlines)
 }
 
