@@ -98,7 +98,7 @@ save_after_styling_is_active <- function() {
   if (!is.na(op_old)) {
     rlang::warn(paste(
       "Using the environment variable save_after_styling is depreciated and",
-      "won't work in a future version of styler. Please use the R option",
+      "won't work in a future version of {styler}. Please use the R option",
       "`styler.save_after_styling` to control the behavior. If both are set,",
       "the R option is taken."
     ))

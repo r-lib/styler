@@ -36,7 +36,7 @@ knitr::knit_engines$set(list(
 ))
 ```
 
-This vignette shows how output from styler might differ when `strict = FALSE`. 
+This vignette shows how output from {styler} might differ when `strict = FALSE`. 
 For brevity, we don't show the output of `strict = TRUE`, but it should be 
 pretty simple for the user to derive it from the bullet point(s) or simply paste the 
 code in the console to see the output.

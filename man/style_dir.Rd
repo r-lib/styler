@@ -54,7 +54,7 @@ output text should be indented. Note that this is not the same as splitting
 by line and add a \code{base_indention} spaces before the code in the case
 multi-line strings are present. See 'Examples'.}
 
-\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+\item{dry}{To indicate whether \{styler\} should run in \emph{dry} mode, i.e. refrain
 from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
@@ -102,7 +102,7 @@ error if the AST has changed through styling.
 
 Note that if tokens are to be styled, such a comparison is not conducted because
 the AST might well change and such a change is intended. There is no way
-styler can validate styling, that is why we inform the user to carefully
+\{styler\} can validate styling, that is why we inform the user to carefully
 inspect the changes.
 
 See section 'Warning' for a good strategy to apply styling safely.

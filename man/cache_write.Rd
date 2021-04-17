@@ -8,7 +8,7 @@ cache_write(text, transformers, more_specs)
 }
 \arguments{
 \item{text}{Code to create a cache for. This should be styled text, as the
-approach used by styler does not cache input, but styled code.}
+approach used by \{styler\} does not cache input, but styled code.}
 
 \item{transformers}{A list of transformer functions, because we can only
 know if text is already correct if we know which transformer function it

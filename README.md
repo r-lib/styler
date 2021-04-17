@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# styler
+# {styler}
 
 <!-- badges: start -->
 
@@ -21,7 +21,7 @@ styler formats your code according to the [tidyverse style
 guide](https://style.tidyverse.org) (or your custom style guide) so you
 can direct your attention to the content of your code. It helps to keep
 the coding style consistent across projects and facilitate
-collaboration. You can access styler through
+collaboration. You can access {styler} through
 
 -   the RStudio Addin as demonstrated below
 -   R functions like `style_pkg()`, `style_file()` or `style_text()`
@@ -45,7 +45,7 @@ Or get the development version from GitHub:
 remotes::install_github("r-lib/styler")
 ```
 
-If you don’t use styler interactively (i.e. not from the R prompt or
+If you don’t use {styler} interactively (i.e. not from the R prompt or
 RStudio Addin), make sure you authorize the R package R.cache once to
 set up a permanent cache. If you use it interactively, you will be asked
 to grant this permission once. See `?caching` for details.

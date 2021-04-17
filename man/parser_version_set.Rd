@@ -19,8 +19,8 @@ parser_version_find(pd)
 \code{utils::getParseData(parse(text = text))}.}
 }
 \description{
-The structure of the parse data affects many operations in styler. There was
-unexpected behavior of the parser that styler was initially designed to work
+The structure of the parse data affects many operations in \{styler\}. There was
+unexpected behavior of the parser that \{styler\} was initially designed to work
 around. Examples are \href{https://github.com/r-lib/styler/issues/187}{#187},
 \href{https://github.com/r-lib/styler/issues/216}{#216},
 \href{https://github.com/r-lib/styler/issues/100}{#100} and others. With

@@ -2,14 +2,14 @@
 % Please edit documentation in R/ui-caching.R
 \name{cache_info}
 \alias{cache_info}
-\title{Show information about the styler cache}
+\title{Show information about the \{styler\} cache}
 \usage{
 cache_info(cache_name = NULL, format = "both")
 }
 \arguments{
 \item{cache_name}{The name of the cache for which to show details. If
 \code{NULL}, the active cache is used. If none is active the cache corresponding
-to the installed styler version is used.}
+to the installed \{styler\} version is used.}
 
 \item{format}{Either "lucid" for a summary emitted with \code{\link[base:cat]{base::cat()}},
 "tabular" for a tabular summary from \code{\link[base:file.info]{base::file.info()}} or "both" for

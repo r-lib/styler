@@ -19,7 +19,8 @@
   Also see `vignette("detect-alignment")`:
   
 * improve pkgdown author URLs (#775).
-  
+* Consistently using {pkgname} for packages (#778).
+
 # styler 1.4.1
 
 * Fix interaction between cache and `base_indention`. This also fixes

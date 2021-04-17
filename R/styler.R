@@ -1,6 +1,6 @@
 #' Non-invasive pretty printing of R code
 #'
-#' styler allows you to format .R files, packages or entire R source trees
+#' \{styler\} allows you to format .R files, packages or entire R source trees
 #' according to a style guide.
 #' The following functions can be used for styling:
 #' * [style_text()] to style a character vector.

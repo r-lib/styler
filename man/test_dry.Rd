@@ -9,7 +9,7 @@ test_dry(path, styler, styled = FALSE)
 \arguments{
 \item{path}{A path to pass to the \code{styler}.}
 
-\item{styler}{A function that takes \code{path}, typically a user exposed styler
+\item{styler}{A function that takes \code{path}, typically a user exposed \{styler\}
 function that has side effects, like \code{\link[=style_file]{style_file()}}.}
 }
 \description{

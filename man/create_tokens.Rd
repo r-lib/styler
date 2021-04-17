@@ -7,13 +7,13 @@
 create_tokens(
   tokens,
   texts,
-  lag_newlines = 0L,
-  spaces = 0L,
+  lag_newlines = 0,
+  spaces = 0,
   pos_ids,
   token_before = NA,
   token_after = NA,
   indention_ref_pos_ids = NA,
-  indents = 0L,
+  indents = 0,
   terminal = TRUE,
   child = NULL,
   stylerignore = FALSE,
@@ -51,7 +51,7 @@ not.}
 \item{child}{The children of the tokens.}
 
 \item{stylerignore}{Boolean to indicate if the line should be ignored by
-styler.}
+\{styler\}.}
 
 \item{block}{The block (of caching) to which the token belongs. An integer.}
 

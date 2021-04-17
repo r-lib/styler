@@ -51,6 +51,6 @@ styler functionality is available in other tools, most notably
 * for pretty-printing [drake](https://github.com/ropensci/drake) workflow data
   frames with `drake::drake_plan_source()`.
 
-Do you know another way to use styler that is not listed here? Please let us know
+Do you know another way to use {styler} that is not listed here? Please let us know
 by [opening an issue](https://github.com/r-lib/styler/issues) and we'll extend the
 list.

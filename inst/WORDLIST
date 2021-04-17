@@ -130,6 +130,7 @@ parsesum
 pgkdown
 pkgapi
 pkgdown
+pkgname
 pkgs
 pos
 pre

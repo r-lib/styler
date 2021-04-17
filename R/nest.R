@@ -154,12 +154,12 @@ find_pos_id_to_keep <- function(pd) {
 
 #' Turn off styling for parts of the code
 #'
-#' Using stylerignore markers, you can temporarily turn off styler. Beware that
+#' Using \{styler\}ignore markers, you can temporarily turn off styler. Beware that
 #' for `styler > 1.2.0`, some alignment is
 #' [detected by styler](https://styler.r-lib.org/articles/detect-alignment.html),
 #' making stylerignore redundant. See a few illustrative examples below.
 #' @details
-#' Styling is on by default when you run styler.
+#' Styling is on by default when you run \{styler\}.
 #'
 #' - To mark the start of a sequence where you want to turn styling off, use
 #'   `# styler: off`.

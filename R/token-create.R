@@ -19,7 +19,7 @@
 #'   not.
 #' @param child The children of the tokens.
 #' @param stylerignore Boolean to indicate if the line should be ignored by
-#'   styler.
+#'   \{styler\}.
 #' @param block The block (of caching) to which the token belongs. An integer.
 #' @param is_cached Whether the token is cached already.
 #' @family token creators

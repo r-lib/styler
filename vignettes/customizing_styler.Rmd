@@ -1,18 +1,18 @@
 ---
-title: "Customizing styler"
+title: "Customizing {styler}"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Customizing styler}
+  %\VignetteIndexEntry{Customizing {styler}}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette provides a high-level overview of how styler works and how you can
+This vignette provides a high-level overview of how {styler} works and how you can
 define your own style guide and format code according to it.
 
-# How styler works
+# How {styler} works
 
-There are three major steps that styler performs in order to style code:
+There are three major steps that {styler} performs in order to style code:
 
 1. Create an abstract syntax tree (AST) from `utils::getParseData()` that
    contains positional information for every token. We call this a nested parse
@@ -22,7 +22,7 @@ There are three major steps that styler performs in order to style code:
 2. Apply transformer functions at each level of the nested parse table. We use a
    visitor approach, i.e. a function that takes functions as arguments and
    applies them to every level of nesting. You can find out more about it on the
-   help file for `visit()`. Note that the function is not exported by styler.
+   help file for `visit()`. Note that the function is not exported by {styler}.
    The visitor will take care of applying the functions on every level of
    nesting - and we can supply transformer functions that operate on one level
    of nesting. In the sequel, we use the term *nest* to refer to such a parse
@@ -39,7 +39,7 @@ There are three major steps that styler performs in order to style code:
 The `transformers` argument is, apart from the code to style, the key argument
 of functions such as `style_text()` and friends. By default, it is created via
 the `style` argument. The transformers are a named list of transformer functions
-and other arguments passed to styler. To use the default style guide of styler
+and other arguments passed to {styler}. To use the default style guide of {styler}
 ([the tidyverse style guide](https://style.tidyverse.org/)), call
 `tidyverse_style()` to get the list of the transformer functions. Let's quickly
 look at what those are.
@@ -125,8 +125,10 @@ convention outlined in `create_style_guide()`.
 ```{r}
 space_after_opening_style <- function(are_you_sure) {
   create_style_guide(
-    space = tibble::lst(remove_space_after_opening_paren = 
-    if (are_you_sure) styler:::remove_space_after_opening_paren),
+    space = tibble::lst(
+      remove_space_after_opening_paren =
+        if (are_you_sure) styler:::remove_space_after_opening_paren
+    ),
     style_guide_name = "styler::space_after_opening_style@https://github.com/r-lib/styler",
     style_guide_version = read.dcf(here::here("DESCRIPTION"))[, "Version"]
   )
@@ -143,13 +145,13 @@ to the version of the package from which you export your style guide.
 We can not try the style guide:
 
 ```{r}
-style_text("call( 1,1)", style = space_after_opening_style, are_you_sure = TRUE)  
+style_text("call( 1,1)", style = space_after_opening_style, are_you_sure = TRUE)
 ```
 
 Note that the return value of your `style` function may not contain `NULL`
 elements.
 
-I hope you have acquired a basic understanding of how styler transforms code.
+I hope you have acquired a basic understanding of how {styler} transforms code.
 You can provide your own transformer functions and use `create_style_guide()` to
 create customized code styling. If you do so, there are a few more things you
 should be aware of, which are described in the next section.
@@ -164,7 +166,7 @@ described above. These columns are to some degree redundant, but with just lag
 or lead, we would lose information on the first or the last element
 respectively, so we need both.
 
-The sequence in which styler applies rules on each level of nesting is given in
+The sequence in which {styler} applies rules on each level of nesting is given in
 the list below:
 
 * call `default_style_guide_attributes()` to initialize some variables.
@@ -226,8 +228,7 @@ add_one <- function(x) {
 Should be transformed to:
 
 ```{r}
-add_one <- function(x) 
-{
+add_one <- function(x) {
   x + 1
 }
 ```
@@ -312,14 +313,14 @@ don't want:
 
 ```{r, eval = FALSE}
 a <- function() # comments should remain EOL
-{ 
+{
   3
 }
 ```
 
 To become:
 
-```{r, eval = FALSE}
+```r
 a <- function() # comments should remain EOL { 
   3
 }
@@ -348,4 +349,4 @@ version number, it might have drastic consequences for your user: Under some
 circumstances (see `help("cache_make_key")`), your new style guide won't
 invalidate the cache although it should and applying your style guide to code
 that has previously been styled won't result in any change. There is currently 
-no mechanism in styler that prevents you from making this mistake.
+no mechanism in {styler} that prevents you from making this mistake.

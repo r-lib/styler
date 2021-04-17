@@ -4,7 +4,7 @@
 \alias{caching}
 \title{Remember the past to be quicker in the future}
 \description{
-Caching makes styler faster on repeated styling and is shared across all APIs
+Caching makes \{styler\} faster on repeated styling and is shared across all APIs
 (e.g. \code{style_text()} and Addin).
 That means if you style code that already complies to a
 style guide and you have previously styled that code, it will be quicker.
@@ -19,10 +19,10 @@ Since we leverage \code{{R.cache}} to manage the cache, you can also use any
 
 \section{Interactive setup}{
 
-\code{{styler}} by default uses caching via the \code{{R.cache}} package. When interacting
-with \code{{styler}}, you will be asked to let it create a permanent cache on your
-file system that styler will use in case it is not set already up for another
-tool that uses \code{{R.cache}}. We encourage users to let \code{{R.cache}} create a
+\{styler\} by default uses caching via the \{R.cache\} package. When interacting
+with \{styler\}, you will be asked to let it create a permanent cache on your
+file system that \{styler\} will use in case it is not set already up for another
+tool that uses \{R.cache\}. We encourage users to let \{R.cache\} create a
 permanent directory for caching because, otherwise, the cache is lost at
 restart of R.
 }
@@ -32,24 +32,24 @@ restart of R.
 In some cases, you want to avoid the interactive prompt described above. In
 that situation, you can set the path to the cache with the R option
 \code{R.cache.rootPath} or the environment variable \code{R_CACHE_ROOTPATH} to an
-existent path before you call the styler API. This should avoid the prompt.
+existent path before you call the \{styler\} API. This should avoid the prompt.
 \code{R.cache::setCacheRootPath("/path/to/cache")} is also programmatic but will
 probably give the prompt anyways if called interactively.
 }
 
 \section{Non-interactive use}{
 
-Note that if you have never authorized \code{{R.cache}} to create the cache in a
-permanent directory and you use \code{{styler}} non-interactively, it will build the
+Note that if you have never authorized \{R.cache\} to create the cache in a
+permanent directory and you use \{styler\} non-interactively, it will build the
 cache in a temporary directory. To create a permanent cache, follow the
 section 'Non-interactive setup' or 'Interactive setup' above.
 }
 
 \section{Invalidation}{
 
-The cache is specific to a version of styler by default, because different
+The cache is specific to a version of \{styler\} by default, because different
 versions potentially format code differently. This means after upgrading
-styler or a style guide you use, the cache will be re-built.
+\{styler\} or a style guide you use, the cache will be re-built.
 }
 
 \section{Mechanism and size}{
@@ -59,10 +59,10 @@ which is why it takes zero space on disk (the cache is a directory with
 empty files which have the hash of output code as name).
 }
 
-\section{Using a cache for styler in CI/CD}{
+\section{Using a cache for \{styler\} in CI/CD}{
 
 If you want to set up caching in a CI/CD pipeline, we suggest to set the
-\code{{R.cache}} root path to a directory for which you have the cache enabled as
+\{R.cache\} root path to a directory for which you have the cache enabled as
 described above in the section 'Non-interactive setup'. This can often be set
 in config files of CI/CD tools, e.g. see the
 \href{https://docs.travis-ci.com/user/caching}{Travis documentation on caching}.

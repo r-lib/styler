@@ -36,7 +36,7 @@ ls_testable_encodings <- function() {
 
 #' Test the dry argument
 #' @param path A path to pass to the `styler`.
-#' @param styler A function that takes `path`, typically a user exposed styler
+#' @param styler A function that takes `path`, typically a user exposed \{styler\}
 #'   function that has side effects, like [style_file()].
 #' @keywords internal
 test_dry <- function(path, styler, styled = FALSE) {

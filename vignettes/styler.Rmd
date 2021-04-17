@@ -34,7 +34,7 @@ styler provides the following API to format code:
 * RStudio Addins for styling the active file, styling the current package and
   styling the highlighted selection, see `help("styler_addins")`.
 
-Beyond that, styler can be used through other tools documented in the
+Beyond that, {styler} can be used through other tools documented in the
 `vignette("third-party-integrations")`.
 
 ### Passing arguments to the style guide
@@ -48,7 +48,7 @@ library(styler)
 style_text("a + b", transformers = tidyverse_style(scope = "indention"))
 ```
 
-The styler API was designed so that you can pass arguments to the style guide
+The {styler} API was designed so that you can pass arguments to the style guide
 via the styling function (e.g. `style_file()`) to allow more concise syntax:
 
 ```{r, results = 'hide'}
@@ -98,7 +98,7 @@ style_text("a=2", scope = I(c("tokens", "indention")))
 As you can see from the output, the assignment operator `=` is replaced with
 `<-` in both cases, but spacing remained unchanged in the second example.
 
-### How `strict` do you want styler to be?
+### How `strict` do you want {styler} to be?
 
 Another option that is helpful to determine the level of 'invasiveness' is
 `strict` (defaulting to `TRUE`). Some rules won't be applied so strictly with
@@ -119,7 +119,7 @@ The details are in `vignette("detect-alignment")`.
 
 # Ignoring certain lines
 
-You can tell styler to ignore some lines if you want to keep current formatting.
+You can tell {styler} to ignore some lines if you want to keep current formatting.
 You can mark whole blocks or inline expressions with `styler: on` and `styler:
 off`:
 
@@ -151,16 +151,16 @@ be necessary in that context.
 
 styler is rather slow, so leveraging a cache for styled code brings big speedups
 in many situations. Starting with version `1.3.0`, you can benefit from it. For
-people using styler interactively (e.g. in RStudio), typing
+people using {styler} interactively (e.g. in RStudio), typing
 `styler::cache_info()` and then confirming the creation of a permanent cache is
 sufficient. Please refer to `help("caching")` for more information. The cache is
-by default dependent on the version of styler which means if you upgrade, the
+by default dependent on the version of {styler} which means if you upgrade, the
 cache will be re-built. Also, the cache takes literally 0 disk space because
 only the hash of styled code is stored.
 
 # Dry mode
 
-As of version `1.3.2`, styler has a dry mode which avoids writing output to the
+As of version `1.3.2`, {styler} has a dry mode which avoids writing output to the
 file(s) you want to format. The following options are available:
 
 - *off* (default): Write back to the file if applying styling changes the
@@ -199,7 +199,7 @@ This is enabled by default, you can turn it off with `include_roxygen_examples =
 1++1-1-1/2
 ```
 
-This is tidyverse style. However, styler offers very granular control for math
+This is tidyverse style. However, {styler} offers very granular control for math
 token spacing. Assuming you like spacing around `+` and `-`, but not around `/`
 and `*` and `^`, do the following:
 
@@ -234,5 +234,5 @@ style_text(
 
 These verse some (not all) configurations exposed in `style_file()` and friends
 as well as `tidyverse_style()`. If the above did not give you the flexibility
-you hoped for, your can create your own style guide and customize styler even
+you hoped for, your can create your own style guide and customize {styler} even
 further, as described in `vignette("customizing_styler")`.

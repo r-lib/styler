@@ -22,7 +22,7 @@ call(
 )
 ```
 
-Until styler 1.1.1.9002 (with `strict = TRUE`, e.g. as in
+Until {styler} 1.1.1.9002 (with `strict = TRUE`, e.g. as in
 `styler::style_file(..., strict = TRUE)`), this was formatted as follows:
 
 ```{r}
@@ -38,8 +38,8 @@ implications because it is in general less invasive. For example, it would not
 add braces and line breaks to "if (TRUE) return()".]
 
 styler >= 1.1.1.9003 detects aforementioned alignment for function calls. This
-vignette describes how aligned code is defined in styler and gives some examples
-so users can format their aligned code to match the definition styler uses to
+vignette describes how aligned code is defined in {styler} and gives some examples
+so users can format their aligned code to match the definition {styler} uses to
 ensure their code is not unintentionally reformatted.
 
 ## Examples

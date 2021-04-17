@@ -33,7 +33,7 @@ operate on and a list of functions. Concretely, the object is the
 nested parse table. Each function is applied at each level of 
 nesting nesting before the next level of nesting is entered. You can find out
 more about the visitor on the help file for `visit` (note that this function
-is not exported by styler).
+is not exported by {styler}).
     pre_visit
 
     ## function(pd_nested, funs) {

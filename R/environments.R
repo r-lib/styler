@@ -1,7 +1,7 @@
 #' Work with parser versions
 #'
-#' The structure of the parse data affects many operations in styler. There was
-#' unexpected behavior of the parser that styler was initially designed to work
+#' The structure of the parse data affects many operations in \{styler\}. There was
+#' unexpected behavior of the parser that \{styler\} was initially designed to work
 #' around. Examples are [#187](https://github.com/r-lib/styler/issues/187),
 #' [#216](https://github.com/r-lib/styler/issues/216),
 #' [#100](https://github.com/r-lib/styler/issues/100) and others. With

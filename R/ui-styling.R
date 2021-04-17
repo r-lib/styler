@@ -46,7 +46,7 @@ NULL
 #'
 #' Note that if tokens are to be styled, such a comparison is not conducted because
 #' the AST might well change and such a change is intended. There is no way
-#' styler can validate styling, that is why we inform the user to carefully
+#' \{styler\} can validate styling, that is why we inform the user to carefully
 #' inspect the changes.
 #'
 #' See section 'Warning' for a good strategy to apply styling safely.
@@ -295,7 +295,7 @@ prettify_any <- function(transformers,
 #' Carefully examine the results after running this function!
 #' @section Encoding:
 #' UTF-8 encoding is assumed. Please convert your code to UTF-8 if necessary
-#' before applying styler.
+#' before applying \{styler\}.
 #' @param path A character vector with paths to files to style.
 #' @inheritParams style_pkg
 #' @inheritSection transform_files Value

@@ -68,7 +68,7 @@ setdiff(
 style_guide_with_some_transformers_dropped$space
 # this is not the same as if this scope was never specified.
 tidyverse_style(scope = "none")$space
-# Hence, styler should check for length 0 to decide if a scope is present or
+# Hence, \{styler\} should check for length 0 to decide if a scope is present or
 # not, not via `is.null()` and we can use the `is.null()` check to see if
 # this scope was initially required by the user.
 }

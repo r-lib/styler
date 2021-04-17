@@ -7,9 +7,9 @@
 cache_clear(cache_name = NULL, ask = TRUE)
 }
 \arguments{
-\item{cache_name}{The name of the styler cache to use. If
+\item{cache_name}{The name of the \{styler\} cache to use. If
 \code{NULL}, the option "styler.cache_name" is considered which defaults to
-the version of styler used.}
+the version of \{styler\} used.}
 
 \item{ask}{Whether or not to interactively ask the user again.}
 }
@@ -20,8 +20,8 @@ on your file system) won't be deleted, but it will be empty after calling
 \code{cache_clear}.
 }
 \details{
-Each version of styler has it's own cache by default, because styling is
-potentially different with different versions of styler.
+Each version of \{styler\} has it's own cache by default, because styling is
+potentially different with different versions of \{styler\}.
 }
 \seealso{
 Other cache managers: 

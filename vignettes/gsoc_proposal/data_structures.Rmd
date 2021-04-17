@@ -53,7 +53,7 @@ to the one presented below.
 The column `spaces` was computed from the columns `col1` and `col2`,
 `newlines` was computed from `line1` and `line2` respectively.
 
-So far, styler can set the spaces around the operators correctly. In our
+So far, {styler} can set the spaces around the operators correctly. In our
 example, that involves adding spaces around `+`, so in the `spaces`
 column, element nine and ten must be set to one. This means that a space
 is added after `1` and after `+`. To get the spacing right and cover the

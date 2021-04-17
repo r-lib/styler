@@ -32,7 +32,7 @@ any file was transformed.}
 
 \item{...}{Further arguments passed to \code{\link[=transform_utf8]{transform_utf8()}}.}
 
-\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+\item{dry}{To indicate whether \{styler\} should run in \emph{dry} mode, i.e. refrain
 from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of

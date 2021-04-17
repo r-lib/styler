@@ -1,5 +1,5 @@
 Name: Set style
-Description: Prompt for and set the style transformers used by all styler addins
+Description: Prompt for and set the style transformers used by all {styler} addins
 Binding: set_style_transformers
 Interactive: true
 

@@ -14,7 +14,7 @@ are not resolved.
   `{precommit}` [README.md](https://github.com/lorenzwalthert/precommit) 
   on how to install the pre-commit framework and the R package on your system and 
   then run `precommit::use_precommit()` to make sure the hooks are activated 
-  in your local styler clone. If you skip a hook, describe why in the PR. 
+  in your local {styler} clone. If you skip a hook, describe why in the PR. 
 
 
 ## How to dive in and understanding the source code
@@ -39,7 +39,7 @@ are documented and documentation is available also for unexported objects via
 `?` (if you did `devtools::load_all()`. 
 Then, go into `parse_transform_serialize()` and so on.
 
-To understand the most fundamental operation in styler, the manipulation of the 
+To understand the most fundamental operation in {styler}, the manipulation of the 
 columns related to spacing and line break information, pick a rule from 
 `R/rules-*.R`, e.g. `R/rules-spacing`, add a break point to a rule and style a
 string where you think this rule will be active. Then, see what happens and how 
@@ -55,7 +55,7 @@ There are multiple packages that can be used to analyze a code base:
   through parsing. 
 
 Check out the links above to see how the tools listed could help you
-understanding styler.
+understanding {styler}.
 
 ## Project setup
 
@@ -63,10 +63,10 @@ understanding styler.
   documentation, testthat for unit testing, pkgdown for html documentation.
 * Continuous integration is done with the tic (tasks integrating continuously)
   package. 
-* A key development principle of styler is to separate infrastructure from 
+* A key development principle of {styler} is to separate infrastructure from 
   style guide. Hence, whenever possible, transformer functions should be 
   adapted, not the infrastructure should be changed for a specific style guide.
-* styler was created in 2017 by Kirill Müller, then turned from a
+* {styler} was created in 2017 by Kirill Müller, then turned from a
   proof-of-concept into a ready-for-production tool as part of GSOC 2017 with
   Kirill Müller and Yihui Xie as mentors and Lorenz Walthert as student. 
   
@@ -77,10 +77,10 @@ The source code is organized as follows:
 
 | File           | Description                                                |
 | -------------: |:-----------------------------------------------------------|
-| addins.R       | ui and helpers for the Addins of styler.                   |
+| addins.R       | ui and helpers for the Addins of {styler}.                 |
 | communicate.R  | function to communicate to the user via the console.       |
-| compat-dplyr.R | compatibility functions. Since styler does not depend on dplyr, we define the dplyr functions ourself.| 
-| compat-tidyr.R | compatibility functions. Since styler does not depend on tidy, we define the tidyr functions ourself.| 
+| compat-dplyr.R | compatibility functions. Since {styler} does not depend on dplyr, we define the dplyr functions ourself.| 
+| compat-tidyr.R | compatibility functions. Since {styler} does not depend on tidy, we define the tidyr functions ourself.| 
 | expr-is.R      | Functions to check whether an expression matches a predicate (e.g. whether it *is* a function call, a curly brace expression etc.). |
 | indent.R       | Computation of whether indention is needed (needs_indention()), if so which indices are indented and how indention is it is triggered. |
 | initialize.R   | initializer called with the visitor at each nest. | 
@@ -113,7 +113,7 @@ cases that seem unreasonable or otherwise incomprehensible. You can resort to
 the following strategies:
 
 * Use full-text search to see where functions are defined or called and how
-  different parts of styler depend on it.
+  different parts of {styler} depend on it.
 * Use `$git blame` to see where changes were introduced. Look at the commit
   message, check changes that were made to the code in the same commit. If you
   are using the GUI of GitHub, you can easily obtain more contextual information

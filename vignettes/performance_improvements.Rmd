@@ -10,7 +10,7 @@ vignette: >
 
 ---
 
-We want to make styler faster.
+We want to make {styler} faster.
 
 
 ```

@@ -11,7 +11,7 @@ transform_utf8(path, fun, dry)
 
 \item{fun}{A function that returns a character vector.}
 
-\item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
+\item{dry}{To indicate whether \{styler\} should run in \emph{dry} mode, i.e. refrain
 from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of

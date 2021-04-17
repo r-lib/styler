@@ -25,10 +25,10 @@ The main caching features were implemented in the following two pull requests:
 
 - #538: Implemented simple caching and utilities for managing caches. Input text
   is styled as a whole and added to the cache afterwards. This makes most sense
-  given that the very same expression will probably never be passed to styler,
+  given that the very same expression will probably never be passed to {styler},
   unless it is already compliant with the style guide. Apart from the
   (negligible) innode, caching text has a memory cost of 0. Speed boosts only
-  result if the whole text passed to styler is compliant to the style guide in
+  result if the whole text passed to {styler} is compliant to the style guide in
   use. Changing one line in a file with hundreds of lines means each line will
   be styled again. This is a major drawback and makes the cache only useful for
   a use with a pre-commit framework (the initial motivation) or when functions
@@ -38,7 +38,7 @@ The main caching features were implemented in the following two pull requests:
   individually. This will bring speed boosts to the situation where very little
   is changed but there are many top-level expressions. Hence, changing one line
   in a big file will invalidate the cache for the expression the line is part
-  of, i.e. when changing `x <- 2` to `x = 2` below, styler will have to restyle
+  of, i.e. when changing `x <- 2` to `x = 2` below, {styler} will have to restyle
   the function definition, but not `another(call)` and all other expressions
   that were not changed.
 
@@ -78,7 +78,7 @@ changes introduced here:
   cached top-level expressions into a block and then style the uncached ones.
 
 - Apart from the actual styling, a very costly part of formatting code with
-  styler is to compute the nested parse data with `compute_parse_data_nested()`.
+  {styler} is to compute the nested parse data with `compute_parse_data_nested()`.
   When caching top-level expressions, it is evident that building up the nested
   structure for cached code is unnecessary because we don't actually style it,
   but simply return `text`. For this reason, we introduce the concept of a
@@ -107,4 +107,3 @@ changes introduced here:
 
 For more detailed explanation and documentation, please consult the help files
 of the internals.
-
