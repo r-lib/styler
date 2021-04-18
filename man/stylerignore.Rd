@@ -4,7 +4,7 @@
 \alias{stylerignore}
 \title{Turn off styling for parts of the code}
 \description{
-Using \{styler\}ignore markers, you can temporarily turn off styler. Beware that
+Using stylerignore markers, you can temporarily turn off styler. Beware that
 for \verb{styler > 1.2.0}, some alignment is
 \href{https://styler.r-lib.org/articles/detect-alignment.html}{detected by styler},
 making stylerignore redundant. See a few illustrative examples below.
