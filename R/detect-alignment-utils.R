@@ -11,12 +11,12 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
     return(pd_by_line)
   }
   last <- last(pd_by_line)
-  if (nrow(last) == 1) {
+  if (nrow(last) == 1L) {
     # can drop last line completely
     pd_by_line[-length(pd_by_line)]
   } else {
     # only drop last elment of last line
-    pd_by_line[[length(pd_by_line)]] <- last[seq2(1, nrow(last) - 1), ]
+    pd_by_line[[length(pd_by_line)]] <- last[seq2(1, nrow(last) - 1L), ]
     pd_by_line
   }
 }
@@ -32,7 +32,7 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
 alignment_drop_comments <- function(pd_by_line) {
   map(pd_by_line, function(x) {
     out <- x[x$token != "COMMENT", ]
-    if (nrow(out) < 1) {
+    if (nrow(out) < 1L) {
       return(NULL)
     } else {
       out
@@ -51,7 +51,7 @@ alignment_drop_comments <- function(pd_by_line) {
 alignment_ensure_trailing_comma <- function(pd_by_line) {
   last_pd <- last(pd_by_line)
   # needed to make sure comma is added without space
-  last_pd$spaces[nrow(last_pd)] <- 0
+  last_pd$spaces[nrow(last_pd)] <- 0L
   if (last(last_pd$token) == "','") {
     return(pd_by_line)
   } else {
@@ -62,7 +62,7 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
       spaces = 0L,
       pos_ids = NA,
     )
-    tokens$.lag_spaces <- 0
+    tokens$.lag_spaces <- 0L
 
     tokens$lag_newlines <- tokens$pos_id <- NULL
     pd_by_line[[length(pd_by_line)]] <- rbind(last_pd, tokens)
@@ -77,10 +77,10 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
 #' @keywords internal
 alignment_col1_is_named <- function(relevant_pd_by_line) {
   map_lgl(relevant_pd_by_line, function(x) {
-    if (nrow(x) < 3) {
+    if (nrow(x) < 3L) {
       return(FALSE)
     }
-    identical(x$token[c(1, 3)], c("SYMBOL_SUB", "expr")) &&
+    identical(x$token[c(1L, 3L)], c("SYMBOL_SUB", "expr")) &&
       x$token[2] %in% c(
         "EQ_SUB", "SPECIAL-IN", "LT", "GT", "EQ", "NE"
       )
@@ -149,12 +149,12 @@ alignment_serialize <- function(pd_sub) {
 #' @keywords internal
 alignment_has_correct_spacing_around_comma <- function(pd_sub) {
   comma_tokens <- which(pd_sub$token == "','")
-  if (length(comma_tokens) == 0) {
+  if (length(comma_tokens) == 0L) {
     return(TRUE)
   }
   relevant_comma_token <- comma_tokens[seq2(1, length(comma_tokens) - 1L)]
-  correct_spaces_before <- pd_sub$.lag_spaces[relevant_comma_token] == 0
-  correct_spaces_after <- pd_sub$spaces[relevant_comma_token] > 0
+  correct_spaces_before <- pd_sub$.lag_spaces[relevant_comma_token] == 0L
+  correct_spaces_after <- pd_sub$spaces[relevant_comma_token] > 0L
   all(correct_spaces_before) && all(correct_spaces_after)
 }
 
@@ -166,11 +166,11 @@ alignment_has_correct_spacing_around_comma <- function(pd_sub) {
 #' @importFrom rlang seq2
 alignment_has_correct_spacing_around_eq_sub <- function(pd_sub) {
   relevant_eq_sub_token <- which(pd_sub$token == "EQ_SUB")
-  if (length(relevant_eq_sub_token) == 0) {
+  if (length(relevant_eq_sub_token) == 0L) {
     return(TRUE)
   }
 
-  correct_spaces_before <- pd_sub$.lag_spaces[relevant_eq_sub_token] >= 1
-  correct_spaces_after <- pd_sub$spaces[relevant_eq_sub_token] >= 1
+  correct_spaces_before <- pd_sub$.lag_spaces[relevant_eq_sub_token] >= 1L
+  correct_spaces_after <- pd_sub$spaces[relevant_eq_sub_token] >= 1L
   all(correct_spaces_before) && all(correct_spaces_after)
 }

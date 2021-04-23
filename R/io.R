@@ -97,13 +97,13 @@ read_utf8_bare <- function(con, warn = TRUE) {
   x <- readLines(con, encoding = "UTF-8", warn = warn)
   i <- invalid_utf8(x)
   n <- length(i)
-  if (n > 0) {
+  if (n > 0L) {
     stop(
       c(
         "The file ", con, " is not encoded in UTF-8. ",
         "These lines contain invalid UTF-8 characters: "
       ),
-      paste(c(utils::head(i), if (n > 6) "..."), collapse = ", ")
+      paste(c(utils::head(i), if (n > 6L) "..."), collapse = ", ")
     )
   }
   x

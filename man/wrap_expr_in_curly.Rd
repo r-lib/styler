@@ -4,7 +4,7 @@
 \alias{wrap_expr_in_curly}
 \title{Wrap an expression in curly braces}
 \usage{
-wrap_expr_in_curly(pd, stretch_out = c(FALSE, FALSE), space_after = 1)
+wrap_expr_in_curly(pd, stretch_out = c(FALSE, FALSE), space_after = 1L)
 }
 \arguments{
 \item{pd}{A parse table.}

@@ -6,7 +6,7 @@
 \alias{is_symmetric_tilde_expr}
 \title{Check whether a parse table contains a tilde}
 \usage{
-is_tilde_expr(pd, tilde_pos = c(1, 2))
+is_tilde_expr(pd, tilde_pos = c(1L, 2L))
 
 is_asymmetric_tilde_expr(pd)
 

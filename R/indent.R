@@ -21,7 +21,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
     return(pd)
   }
 
-  if (pd$newlines[length(pd$newlines) - 1] == 0) {
+  if (pd$newlines[length(pd$newlines) - 1L] == 0L) {
     return(pd)
   }
   pd$indent[nrow] <- indent_by
@@ -32,14 +32,14 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 #' @importFrom rlang seq2
 #' @keywords internal
 indent_without_paren_if_else <- function(pd, indent_by) {
-  expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
+  expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1L])
   is_if <- pd$token[1] %in% "IF"
   has_if_without_curly <-
     is_if && pd$child[[expr_after_if]]$token[1] != "'{'"
   if (!is_if) {
     return(pd)
   }
-  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "')'"))] > 0
+  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "')'"))] > 0L
 
   if (needs_indention_now) {
     pd$indent[expr_after_if] <- indent_by
@@ -48,19 +48,19 @@ indent_without_paren_if_else <- function(pd, indent_by) {
 
 
   else_idx <- which(pd$token == "ELSE")
-  if (length(else_idx) == 0) {
+  if (length(else_idx) == 0L) {
     return(pd)
   }
   expr_after_else_idx <- next_non_comment(pd, else_idx)
   has_else_without_curly_or_else_chid <-
     any(pd$token == "ELSE") &&
-      pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
-      pd$child[[expr_after_else_idx]]$token[1] != "IF"
+      pd$child[[expr_after_else_idx]]$token[1L] != "'{'" &&
+      pd$child[[expr_after_else_idx]]$token[1L] != "IF"
 
-  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "ELSE"))] > 0
+  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "ELSE"))] > 0L
 
   if (has_else_without_curly_or_else_chid && needs_indention_now) {
-    pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
+    pd$indent[seq(else_idx + 1L, nrow(pd))] <- indent_by
   }
   pd
 }
@@ -97,15 +97,15 @@ compute_indent_indices <- function(pd,
   needs_indention <- needs_indention(pd, potential_triggers,
     other_trigger_tokens = c("EQ_SUB", "EQ_FORMALS")
   )
-  trigger <- potential_triggers[needs_indention][1]
+  trigger <- potential_triggers[needs_indention][1L]
   if (is.na(trigger)) {
-    return(numeric(0))
+    return(numeric(0L))
   }
-  start <- trigger + 1
+  start <- trigger + 1L
   if (is.null(token_closing)) {
     stop <- npd
   } else {
-    stop <- last(which(pd$token %in% token_closing)[needs_indention]) - 1
+    stop <- last(which(pd$token %in% token_closing)[needs_indention]) - 1L
   }
 
   seq2(start, stop)
@@ -163,7 +163,7 @@ needs_indention <- function(pd,
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
-  before_first_break <- which(pd$lag_newlines > 0)[1] - 1L
+  before_first_break <- which(pd$lag_newlines > 0L)[1L] - 1L
   if (is.na(before_first_break)) {
     return(FALSE)
   }
@@ -214,7 +214,7 @@ set_multi_line <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 pd_is_multi_line <- function(pd) {
-  pd_multi_line(pd) > 0
+  pd_multi_line(pd) > 0L
 }
 
 pd_multi_line <- function(pd) {
@@ -235,7 +235,7 @@ pd_multi_line <- function(pd) {
 #' @seealso choose_indention
 #' @keywords internal
 update_newlines <- function(pd) {
-  seq_pd <- seq_len(nrow(pd) - 1)
-  pd$newlines[seq_pd] <- pd$lag_newlines[seq_pd + 1]
+  seq_pd <- seq_len(nrow(pd) - 1L)
+  pd$newlines[seq_pd] <- pd$lag_newlines[seq_pd + 1L]
   pd
 }

@@ -7,7 +7,7 @@
 #' @inheritParams can_verify_roundtrip
 #' @keywords internal
 communicate_warning <- function(changed, transformers) {
-  if (any(changed, na.rm = TRUE) && 
+  if (any(changed, na.rm = TRUE) &&
     !can_verify_roundtrip(transformers) &&
     !getOption("styler.quiet", FALSE)
   ) {
@@ -23,12 +23,12 @@ communicate_warning <- function(changed, transformers) {
 #' @keywords internal
 communicate_summary <- function(changed, ruler_width) {
   if (!getOption("styler.quiet", FALSE)) {
-    cli::cat_rule(width = max(40, ruler_width))
+    cli::cat_rule(width = max(40L, ruler_width))
     cat("Status\tCount\tLegend \n")
     cli::cat_bullet("\t", sum(!changed, na.rm = TRUE), "\tFile unchanged.", bullet = "tick")
     cli::cat_bullet("\t", sum(changed, na.rm = TRUE), "\tFile changed.", bullet = "info")
     cli::cat_bullet(bullet = "cross", "\t", sum(is.na(changed)), "\tStyling threw an error.")
-    cli::cat_rule(width = max(40, ruler_width))
+    cli::cat_rule(width = max(40L, ruler_width))
   }
 }
 

@@ -4,7 +4,7 @@
 \alias{wrap_multiline_curly}
 \title{Wrap a multi-line statement in curly braces}
 \usage{
-wrap_multiline_curly(pd, indent_by, space_after = 1, key_token)
+wrap_multiline_curly(pd, indent_by, space_after = 1L, key_token)
 }
 \arguments{
 \item{pd}{A parse table.}

@@ -84,7 +84,7 @@ assert_filetype <- function(lowercase_filetype) {
 #' @param text The input to style.
 #' @keywords internal
 assert_text <- function(text) {
-  if (length(text) < 1) {
+  if (length(text) < 1L) {
     text <- ""
   }
   text
@@ -98,7 +98,7 @@ assert_text <- function(text) {
 #' @keywords internal
 assert_tokens <- function(tokens) {
   invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
-  if (length(invalid_tokens) > 0) {
+  if (length(invalid_tokens) > 0L) {
     abort(paste(
       "Token(s)", paste0(invalid_tokens, collapse = ", "), "are invalid.",
       "You can lookup all valid tokens and their text",

@@ -24,14 +24,14 @@ add_brackets_in_pipe <- function(pd) {
 add_brackets_in_pipe_one <- function(pd, pos) {
   next_non_comment <- next_non_comment(pd, pos)
   rh_child <- pd$child[[next_non_comment]]
-  if (nrow(rh_child) < 2 && rh_child$token == "SYMBOL") {
+  if (nrow(rh_child) < 2L && rh_child$token == "SYMBOL") {
     child <- pd$child[[next_non_comment]]
-    new_pos_ids <- create_pos_ids(child, 1, after = TRUE, n = 2)
+    new_pos_ids <- create_pos_ids(child, 1L, after = TRUE, n = 2L)
     new_pd <- create_tokens(
       tokens = c("'('", "')'"),
       texts = c("(", ")"),
       pos_ids = new_pos_ids,
-      lag_newlines = rep(0L, 2)
+      lag_newlines = rep(0L, 2L)
     )
     pd$child[[next_non_comment]] <- bind_rows(
       pd$child[[next_non_comment]],
@@ -50,7 +50,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #'   braces. Used for unindention.
 #' @keywords internal
 #' @importFrom purrr when
-wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2) {
+wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
   key_token <- when(
     pd,
     is_cond_expr(.) ~ "')'",
@@ -58,16 +58,16 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2) {
     is_for_expr(.) ~ "forcond",
     is_function_dec(.) ~ "')'"
   )
-  if (length(key_token) > 0) {
+  if (length(key_token) > 0L) {
     pd <- pd %>%
       wrap_multiline_curly(indent_by,
-        space_after = ifelse(contains_else_expr(pd), 1, 0),
+        space_after = ifelse(contains_else_expr(pd), 1L, 0L),
         key_token = key_token
       )
   }
   if (is_cond_expr(pd)) {
     pd <- pd %>%
-      wrap_else_multiline_curly(indent_by, space_after = 0)
+      wrap_else_multiline_curly(indent_by, space_after = 0L)
   }
   pd
 }
@@ -80,14 +80,14 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2) {
 #'   the expression to be wrapped (ignoring comments). For if and while loops,
 #'   this is the closing "')'", for a for-loop it's "forcond".
 #' @keywords internal
-wrap_multiline_curly <- function(pd, indent_by, space_after = 1, key_token) {
+wrap_multiline_curly <- function(pd, indent_by, space_after = 1L, key_token) {
   to_be_wrapped_expr_with_child <- next_non_comment(
-    pd, which(pd$token == key_token)[1]
+    pd, which(pd$token == key_token)[1L]
   )
   next_terminal <- next_terminal(pd[to_be_wrapped_expr_with_child, ])$text
   requires_braces <- if_for_while_part_requires_braces(pd, key_token) && !any(pd$stylerignore)
   if (requires_braces | next_terminal == "return") {
-    closing_brace_ind <- which(pd$token == key_token)[1]
+    closing_brace_ind <- which(pd$token == key_token)[1L]
     pd$spaces[closing_brace_ind] <- 1L
 
     all_to_be_wrapped_ind <- seq2(
@@ -98,7 +98,7 @@ wrap_multiline_curly <- function(pd, indent_by, space_after = 1, key_token) {
       pd, all_to_be_wrapped_ind, indent_by, space_after
     )
 
-    if (nrow(pd) > 5) pd$lag_newlines[6] <- 0L
+    if (nrow(pd) > 5L) pd$lag_newlines[6L] <- 0L
   }
   pd
 }
@@ -109,7 +109,7 @@ wrap_multiline_curly <- function(pd, indent_by, space_after = 1, key_token) {
 #' already wrapped into a such.
 #' @inheritParams wrap_multiline_curly
 #' @keywords internal
-wrap_else_multiline_curly <- function(pd, indent_by = 2, space_after = 0) {
+wrap_else_multiline_curly <- function(pd, indent_by = 2L, space_after = 0L) {
   if (contains_else_expr(pd) &&
     pd_is_multi_line(pd) &&
     contains_else_expr_that_needs_braces(pd) &&
@@ -144,7 +144,7 @@ wrap_subexpr_in_curly <- function(pd,
     stretch_out = c(!to_be_wrapped_starts_with_comment, TRUE),
     space_after = space_after
   )
-  new_expr$indent <- max(pd$indent[last(ind_to_be_wrapped)] - indent_by, 0)
+  new_expr$indent <- max(pd$indent[last(ind_to_be_wrapped)] - indent_by, 0L)
   new_expr_in_expr <- new_expr %>%
     wrap_expr_in_expr() %>%
     remove_attributes(c("token_before", "token_after"))
@@ -163,7 +163,7 @@ wrap_subexpr_in_curly <- function(pd,
 #' @inheritParams wrap_multiline_curly
 #' @keywords internal
 if_for_while_part_requires_braces <- function(pd, key_token) {
-  pos_first_key_token <- which(pd$token == key_token)[1]
+  pos_first_key_token <- which(pd$token == key_token)[1L]
   child <- pd$child[[next_non_comment(pd, pos_first_key_token)]]
   pd_is_multi_line(pd) && !is_curly_expr(child)
 }

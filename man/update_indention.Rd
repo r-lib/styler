@@ -25,7 +25,7 @@ indent_op(
 
 indent_eq_sub(pd, indent_by, token = c("EQ_SUB", "EQ_FORMALS"))
 
-indent_without_paren(pd, indent_by = 2)
+indent_without_paren(pd, indent_by = 2L)
 }
 \arguments{
 \item{pd}{A nested or flat parse table that is already enhanced with

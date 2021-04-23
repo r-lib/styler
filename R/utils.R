@@ -31,7 +31,7 @@ ensure_last_n_empty <- function(x, n = 1) {
 #' @keywords internal
 convert_newlines_to_linebreaks <- function(text) {
   split <- strsplit(text, "\n", fixed = TRUE)
-  map(split, ~ if (identical(.x, character(0))) {
+  map(split, ~ if (identical(.x, character(0L))) {
     ""
   } else {
     .x
@@ -53,21 +53,21 @@ odd <- function(x) {
 }
 
 odd_index <- function(x) {
-  if (length(x) < 1) {
+  if (length(x) < 1L) {
     return(NULL)
   }
-  seq(1L, length(x), by = 2)
+  seq(1L, length(x), by = 2L)
 }
 
 even <- function(x) {
-  if (length(x) < 2) {
+  if (length(x) < 2L) {
     return(NULL)
   }
   x[even_index(x)]
 }
 
 even_index <- function(x) {
-  seq(2L, length(x), by = 2)
+  seq(2L, length(x), by = 2L)
 }
 
 
@@ -79,7 +79,7 @@ even_index <- function(x) {
 #' @param ... Arguments passed to [shell()] or [system()].
 #' @keywords internal
 calls_sys <- function(sys_call, ...) {
-  if (Sys.info()[1] == "Windows") {
+  if (Sys.info()[1L] == "Windows") {
     error <- shell(sys_call, ...)
   } else {
     error <- system(sys_call, ...)

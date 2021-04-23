@@ -83,11 +83,11 @@ roxygen_remove_extra_brace <- function(parsed) {
         while (worth_trying_to_remove_brace) {
           # remove brace
           brace <- which(parsed == "}")
-          if (length(brace) > 0) {
+          if (length(brace) > 0L) {
             parsed <- parsed[-last(brace)]
           }
           linebreak <- which(parsed == "\n")
-          if (length(linebreak) > 0) {
+          if (length(linebreak) > 0L) {
             parsed <- parsed[-last(linebreak)]
           }
           # try if can be parsed (need remve dontrun)
@@ -124,7 +124,7 @@ roxygen_remove_extra_brace <- function(parsed) {
 #' `remove_roxygen_mask()` when there are no characters to escape.
 #' @keywords internal
 emulate_rd <- function(roxygen) {
-  example_type <- gsub("^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "examples\\2", roxygen[1])
+  example_type <- gsub("^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "examples\\2", roxygen[1L])
   if (needs_rd_emulation(roxygen)) {
     roxygen <- c(
       "#' Example",
@@ -134,11 +134,11 @@ emulate_rd <- function(roxygen) {
     text <- roxygen2::roc_proc_text(
       roxygen2::rd_roclet(),
       paste(roxygen, collapse = "\n")
-    )[[1]]$get_section("examples") %>%
+    )[[1L]]$get_section("examples") %>%
       as.character() %>%
-      .[-1]
+      .[-1L]
     text <- c(
-      if (grepl("^#'(\\s|\t)*@examples(\\s|\t)*$", roxygen[2])) "",
+      if (grepl("^#'(\\s|\t)*@examples(\\s|\t)*$", roxygen[2L])) "",
       text
     )
   } else {

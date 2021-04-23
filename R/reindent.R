@@ -19,20 +19,20 @@
 # @importFrom rlang seq2
 # @keywords internal
 # update_indention_ref_fun_call <- function(pd_nested) {
-#   current_is_call <- pd_nested$token_before[2] %in% c("SYMBOL_FUNCTION_CALL")
+#   current_is_call <- pd_nested$token_before[2L] %in% c("SYMBOL_FUNCTION_CALL")
 #   non_comment <- which(pd_nested$token != "COMMENT")
-#   first_non_comment_after_call <- non_comment[non_comment > 2][1]
+#   first_non_comment_after_call <- non_comment[non_comment > 2L][1L]
 #   if ((current_is_call) &&
-#     pd_nested$lag_newlines[first_non_comment_after_call] == 0) {
-#     candidates <- seq2(3, nrow(pd_nested) - 1)
+#     pd_nested$lag_newlines[first_non_comment_after_call] == 0L) {
+#     candidates <- seq2(3L, nrow(pd_nested) - 1L)
 #
 #     child_is_call <- map_lgl(pd_nested$child, is_function_call)
 #     child_is_curly_expr <- map_lgl(pd_nested$child, is_curly_expr)
-#     child_is_on_same_line <- cumsum(pd_nested$lag_newlines) == 0
+#     child_is_on_same_line <- cumsum(pd_nested$lag_newlines) == 0L
 #     call_on_same_line <- child_is_call & child_is_on_same_line
 #     to_indent <- setdiff(candidates, which(call_on_same_line | child_is_curly_expr))
 #
-#     pd_nested$indention_ref_pos_id[to_indent] <- last(pd_nested$child[[1]]$pos_id)
+#     pd_nested$indention_ref_pos_id[to_indent] <- last(pd_nested$child[[1L]]$pos_id)
 #   }
 #   pd_nested
 # }
@@ -69,7 +69,7 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
   token_to_update <- find_tokens_to_update(flattened_pd, target_token)
   # udate spaces
   copied_spaces <- flattened_pd$col2[target_token]
-  old_spaces <- flattened_pd$lag_spaces[token_to_update[1]]
+  old_spaces <- flattened_pd$lag_spaces[token_to_update[1L]]
   shift <- copied_spaces
   flattened_pd$lag_spaces[token_to_update] <-
     flattened_pd$lag_spaces[token_to_update] + shift
@@ -126,13 +126,13 @@ find_tokens_to_update <- function(flattened_pd, target_token) {
 #' @keywords internal
 set_regex_indention <- function(flattened_pd,
                                 pattern,
-                                target_indention = 0,
+                                target_indention = 0L,
                                 comments_only = TRUE) {
   if (comments_only) {
     cond <- which(
-      (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0)
+      (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0L)
     )
-    if (length(cond) < 1) {
+    if (length(cond) < 1L) {
       return(flattened_pd)
     }
     to_check <- flattened_pd[cond, ]

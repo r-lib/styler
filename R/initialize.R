@@ -37,7 +37,7 @@ NULL
 #' @describeIn initialize_attributes Initializes `newlines` and `lag_newlines`.
 #' @keywords internal
 initialize_newlines <- function(pd_flat) {
-  pd_flat$line3 <- lead(pd_flat$line1, default = tail(pd_flat$line2, 1))
+  pd_flat$line3 <- lead(pd_flat$line1, default = tail(pd_flat$line2, 1L))
   pd_flat$newlines <- pd_flat$line3 - pd_flat$line2
   pd_flat$lag_newlines <- lag(pd_flat$newlines, default = 0L)
   pd_flat$line3 <- NULL
@@ -83,7 +83,7 @@ initialize_indention_ref_pos_id <- function(pd_flat) {
 #' @keywords internal
 initialize_indent <- function(pd_flat) {
   if (!("indent" %in% names(pd_flat))) {
-    pd_flat$indent <- 0
+    pd_flat$indent <- 0L
   }
   pd_flat
 }

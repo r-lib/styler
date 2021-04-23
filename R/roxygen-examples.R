@@ -104,7 +104,7 @@ style_roxygen_example_snippet <- function(code_snippet,
         base_indention = base_indention, warn_empty = FALSE
       )
   } else {
-    code_snippet <- ensure_last_n_empty(code_snippet, n = 0)
+    code_snippet <- ensure_last_n_empty(code_snippet, n = 0L)
   }
 
   if (!is_cached && cache_is_active) {

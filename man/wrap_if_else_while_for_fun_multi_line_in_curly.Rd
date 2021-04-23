@@ -4,7 +4,7 @@
 \alias{wrap_if_else_while_for_fun_multi_line_in_curly}
 \title{Wrap if-else, while and for statements in curly braces}
 \usage{
-wrap_if_else_while_for_fun_multi_line_in_curly(pd, indent_by = 2)
+wrap_if_else_while_for_fun_multi_line_in_curly(pd, indent_by = 2L)
 }
 \arguments{
 \item{pd}{A parse table.}

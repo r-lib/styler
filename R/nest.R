@@ -111,7 +111,7 @@ drop_cached_children <- function(pd) {
   if (cache_is_activated()) {
     pd_parent_first <- pd[order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal)), ]
     pos_ids_to_keep <- pd_parent_first %>%
-      split(cumsum(pd_parent_first$parent == 0)) %>%
+      split(cumsum(pd_parent_first$parent == 0L)) %>%
       map(find_pos_id_to_keep) %>%
       unlist() %>%
       unname()
@@ -145,7 +145,7 @@ drop_cached_children <- function(pd) {
 #' @keywords internal
 find_pos_id_to_keep <- function(pd) {
   if (pd$is_cached[1]) {
-    pd$pos_id[pd$parent <= 0]
+    pd$pos_id[pd$parent <= 0L]
   } else {
     pd$pos_id
   }
@@ -290,9 +290,9 @@ add_attributes_caching <- function(pd_flat, transformers, more_specs) {
   pd_flat$block <- rep(NA, nrow(pd_flat))
   pd_flat$is_cached <- rep(FALSE, nrow(pd_flat))
   if (cache_is_activated()) {
-    is_parent <- pd_flat$parent == 0
+    is_parent <- pd_flat$parent == 0L
     pd_flat$is_cached[is_parent] <- map_lgl(
-      pd_flat$text[pd_flat$parent == 0],
+      pd_flat$text[pd_flat$parent == 0L],
       is_cached, transformers,
       more_specs = more_specs
     )
@@ -326,7 +326,7 @@ remove_terminal_token_before_and_after <- function(pd_flat) {
 #' @keywords internal
 set_spaces <- function(spaces_after_prefix, force_one) {
   if (force_one) {
-    rep(1, length(spaces_after_prefix))
+    rep(1L, length(spaces_after_prefix))
   } else {
     pmax(spaces_after_prefix, 1L)
   }
@@ -346,10 +346,10 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @importFrom purrr map2
 #' @keywords internal
 nest_parse_data <- function(pd_flat) {
-  if (all(pd_flat$parent <= 0)) {
+  if (all(pd_flat$parent <= 0L)) {
     return(pd_flat)
   }
-  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
+  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0L))
   split_data <- split(pd_flat, pd_flat$internal)
 
   child <- split_data$`FALSE`
@@ -381,7 +381,7 @@ nest_parse_data <- function(pd_flat) {
 #' @keywords internal
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
-  if (nrow(bound) == 0) {
+  if (nrow(bound) == 0L) {
     return(NULL)
   }
   bound[order(bound$pos_id), ]

@@ -4,7 +4,7 @@
 \alias{wrap_else_multiline_curly}
 \title{Add curly braces to else}
 \usage{
-wrap_else_multiline_curly(pd, indent_by = 2, space_after = 0)
+wrap_else_multiline_curly(pd, indent_by = 2L, space_after = 0L)
 }
 \arguments{
 \item{pd}{A parse table.}

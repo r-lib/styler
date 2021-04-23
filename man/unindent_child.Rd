@@ -4,7 +4,7 @@
 \alias{unindent_child}
 \title{Unindent a child}
 \usage{
-unindent_child(pd, token = c("')'", "'}'"), unindent_by = 2)
+unindent_child(pd, token = c("')'", "'}'"), unindent_by = 2L)
 }
 \arguments{
 \item{pd}{A parse table.}
