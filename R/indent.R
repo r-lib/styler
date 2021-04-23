@@ -214,7 +214,7 @@ set_multi_line <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 pd_is_multi_line <- function(pd) {
-  pd_multi_line(pd)
+  pd_multi_line(pd) > 0
 }
 
 pd_multi_line <- function(pd) {
