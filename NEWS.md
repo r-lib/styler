@@ -1,6 +1,5 @@
 # styler 1.4.1.9000 (Development version)
 
-* `#>` is recognized as an output marker and no space is added after `#` (#771).
 * code with left alignment after `=` in function calls is now recognized as 
   aligned and won't be reformatted (#774, #777).
   ```
@@ -18,7 +17,9 @@
   ```
   Also see `vignette("detect-alignment")`:
   
+* `#>` is recognized as an output marker and no space is added after `#` (#771).
 * improve pkgdown author URLs (#775).
+* `multi_line` attribute in parse table is now integer, not boolean (#782).
   
 # styler 1.4.1
 
