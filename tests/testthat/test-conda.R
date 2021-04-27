@@ -178,7 +178,7 @@ if (!on_cran()) {
       expect_match(version_precommit(), "[0-9]+\\.[0-9]+\\.[0-9]+")
     } else {
       uninstall_precommit(scope = "user", ask = "none", root = ".")
-      version <- "2.3.0"
+      version <- "2.10.0"
       reticulate::conda_install("r-precommit", paste0("pre-commit==", version))
       expect_equal(version_precommit(), version)
       expect_invisible(update_precommit(), 0)
