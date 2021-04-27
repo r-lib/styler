@@ -3,11 +3,15 @@
 default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: 3fd792391a4997ee75d2df464621dc7511c97829
+    rev: acc8657498d5bfb9e9891098ba00b36e82c7ebd6
     hooks: 
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
-        exclude: '^tests/testthat/in/.*\.R'
+        exclude: > 
+          (?x)^(
+          tests/testthat/in/.*\.R|
+          renv/.*
+          )$
     -   id: roxygenize
     # codemeta must be above use-tidy-description when both are used
     # -   id: codemeta-description-updated
