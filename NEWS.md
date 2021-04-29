@@ -18,7 +18,7 @@
   )
   ```
 
-* similarly, `tibble::tribble()`-like alignment for column > 2 is now detected 
+* similarly, `tibble::tribble()`-like alignment for column > 1 is now detected 
   when left aligned (#785).
   ```
   # previously detected
