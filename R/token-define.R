@@ -48,7 +48,7 @@ lookup_new_special <- function(regex = NA) {
   potential_regex <- grep(regex, new_special, value = TRUE, ignore.case = TRUE)
   if (is.na(regex)) {
     mapping <- new_special
-  } else if (length(potential_regex) > 0L) {
+  } else if (length(potential_regex) > 0) {
     mapping <- potential_regex
   } else {
     return(NA)

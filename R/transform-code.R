@@ -40,7 +40,7 @@ transform_mixed <- function(lines, transformer_fun, filetype) {
   chunks <- separate_chunks(lines, filetype)
   chunks$r_chunks <- map(chunks$r_chunks, transformer_fun)
 
-  map2(chunks$text_chunks, c(chunks$r_chunks, list(character(0L))), c) %>%
+  map2(chunks$text_chunks, c(chunks$r_chunks, list(character(0))), c) %>%
     flatten_chr()
 }
 
@@ -57,7 +57,7 @@ separate_chunks <- function(lines, filetype) {
   r_raw_chunks <- identify_raw_chunks(lines, filetype = filetype)
 
   r_chunks <- map2(
-    r_raw_chunks$starts, r_raw_chunks$ends, ~ lines[seq2(.x + 1L, .y - 1L)]
+    r_raw_chunks$starts, r_raw_chunks$ends, ~ lines[seq2(.x + 1, .y - 1)]
   )
 
   text_chunks <- map2(

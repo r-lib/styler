@@ -52,20 +52,20 @@ flatten_operators_one <- function(pd_nested) {
 #'   from left or from right.
 #' @keywords internal
 flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
-  token_pos_candidates <- which(pd_nested$token[-1L] %in% token) + 1L
-  if (length(token_pos_candidates) == 0L) {
+  token_pos_candidates <- which(pd_nested$token[-1] %in% token) + 1
+  if (length(token_pos_candidates) == 0) {
     return(pd_nested)
   }
-  token_pos <- token_pos_candidates[ifelse(left, 1L, length(token_pos_candidates))]
+  token_pos <- token_pos_candidates[ifelse(left, 1, length(token_pos_candidates))]
   if (left) {
     pos <- previous_non_comment(pd_nested, token_pos)
   } else {
     pos <- next_non_comment(pd_nested, token_pos)
   }
-  if (pos < 1L) {
+  if (pos < 1) {
     return(pd_nested)
   }
-  if (!any(pd_nested$child[[pos]]$token[-1L] %in% child_token)) {
+  if (!any(pd_nested$child[[pos]]$token[-1] %in% child_token)) {
     return(pd_nested)
   }
   bind_with_child(pd_nested, pos)
@@ -94,7 +94,7 @@ bind_with_child <- function(pd_nested, pos) {
 wrap_expr_in_expr <- function(pd) {
   create_tokens(
     "expr", "",
-    pos_ids = create_pos_ids(pd, 1L, after = FALSE),
+    pos_ids = create_pos_ids(pd, 1, after = FALSE),
     child = pd,
     terminal = FALSE
   )
@@ -138,7 +138,7 @@ wrap_expr_in_expr <- function(pd) {
 #' )
 #' @keywords internal
 relocate_eq_assign <- function(pd) {
-  if (parser_version_get() < 2L) {
+  if (parser_version_get() < 2) {
     pd %>%
       post_visit(c(relocate_eq_assign_nest))
   } else {
@@ -170,7 +170,7 @@ relocate_eq_assign <- function(pd) {
 #' @keywords internal
 relocate_eq_assign_nest <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  if (length(idx_eq_assign) > 0L) {
+  if (length(idx_eq_assign) > 0) {
     block_id <- find_block_id(pd)
     blocks <- split(pd, block_id)
     pd <- map_dfr(blocks, relocate_eq_assign_one)
@@ -191,10 +191,10 @@ relocate_eq_assign_nest <- function(pd) {
 #' @keywords internal
 find_block_id <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_belongs_to_block <- c(0L, diff(idx_eq_assign) > 2L)
+  eq_belongs_to_block <- c(0, diff(idx_eq_assign) > 2)
 
-  empty_seq <- rep(0L, nrow(pd))
-  empty_seq[idx_eq_assign - 1L] <- eq_belongs_to_block
+  empty_seq <- rep(0, nrow(pd))
+  empty_seq[idx_eq_assign - 1] <- eq_belongs_to_block
   block_id <- cumsum(empty_seq)
   block_id
 }
@@ -208,7 +208,7 @@ find_block_id <- function(pd) {
 #' @keywords internal
 relocate_eq_assign_one <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_ind <- seq2(idx_eq_assign[1L] - 1L, last(idx_eq_assign) + 1L)
+  eq_ind <- seq2(idx_eq_assign[1] - 1L, last(idx_eq_assign) + 1L)
   eq_expr <- pd[eq_ind, ] %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%
@@ -230,10 +230,10 @@ relocate_eq_assign_one <- function(pd) {
 #' @importFrom rlang abort
 #' @keywords internal
 add_line_col_to_wrapped_expr <- function(pd) {
-  if (nrow(pd) > 1L) abort("pd must be a wrapped expression that has one row.")
-  pd$line1 <- pd$child[[1L]]$line1[1L]
-  pd$line2 <- last(pd$child[[1L]]$line2)
-  pd$col1 <- pd$child[[1L]]$col1[1L]
-  pd$col2 <- last(pd$child[[1L]]$col2)
+  if (nrow(pd) > 1) abort("pd must be a wrapped expression that has one row.")
+  pd$line1 <- pd$child[[1]]$line1[1]
+  pd$line2 <- last(pd$child[[1]]$line2)
+  pd$col1 <- pd$child[[1]]$col1[1]
+  pd$col2 <- last(pd$child[[1]]$col2)
   pd
 }

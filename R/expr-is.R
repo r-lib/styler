@@ -12,23 +12,23 @@ is_curly_expr <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
   }
-  pd$token[1L] == "'{'"
+  pd$token[1] == "'{'"
 }
 
 is_for_expr <- function(pd) {
-  pd$token[1L] == "FOR"
+  pd$token[1] == "FOR"
 }
 
 #' @describeIn pd_is Checks whether `pd` contains is a conditional expression.
 #' @keywords internal
 is_cond_expr <- function(pd) {
-  pd$token[1L] == "IF"
+  pd$token[1] == "IF"
 }
 
 #' @describeIn pd_is Checks whether `pd` contains is a while loop.
 #' @keywords internal
 is_while_expr <- function(pd) {
-  pd$token[1L] == "WHILE"
+  pd$token[1] == "WHILE"
 }
 
 #' @describeIn pd_is Checks whether `pd` is a function call.
@@ -49,7 +49,7 @@ is_function_dec <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
   }
-  pd$token[1L] == "FUNCTION"
+  pd$token[1] == "FUNCTION"
 }
 
 #' @describeIn pd_is Checks for every token whether or not it is a comment.
@@ -75,8 +75,8 @@ is_comment <- function(pd) {
 #' expression (like `~column`), in the second row if it is a symmetric tilde
 #' expression (like `a~b`).
 #' @keywords internal
-is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {
-  if (is.null(pd) || nrow(pd) == 1L) {
+is_tilde_expr <- function(pd, tilde_pos = c(1, 2)) {
+  if (is.null(pd) || nrow(pd) == 1) {
     return(FALSE)
   }
   any(pd$token[tilde_pos] == "'~'")
@@ -84,19 +84,19 @@ is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {
 
 #' @rdname is_tilde_expr
 is_asymmetric_tilde_expr <- function(pd) {
-  is_tilde_expr(pd, tilde_pos = 1L)
+  is_tilde_expr(pd, tilde_pos = 1)
 }
 
 #' @rdname is_tilde_expr
 is_symmetric_tilde_expr <- function(pd) {
-  is_tilde_expr(pd, tilde_pos = 2L)
+  is_tilde_expr(pd, tilde_pos = 2)
 }
 
 is_subset_expr <- function(pd) {
-  if (is.null(pd) || nrow(pd) == 1L) {
+  if (is.null(pd) || nrow(pd) == 1) {
     return(FALSE)
   }
-  pd$token[2L] == "'['"
+  pd$token[2] == "'['"
 }
 
 
@@ -150,7 +150,7 @@ contains_else_expr <- function(pd) {
 #' @keywords internal
 contains_else_expr_that_needs_braces <- function(pd) {
   else_idx <- which(pd$token == "ELSE")
-  if (length(else_idx) > 0L) {
+  if (length(else_idx) > 0) {
     non_comment_after_else <- next_non_comment(pd, else_idx)
     sub_expr <- pd$child[[non_comment_after_else]]
     # needs braces if NOT if_condition, NOT curly expr

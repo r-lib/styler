@@ -102,20 +102,20 @@ style_space_around_tilde <- function(pd_flat, strict) {
   if (is_symmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
       strict, "'~'",
-      level_before = 1L, level_after = 1L
+      level_before = 1, level_after = 1
     )
   } else if (is_asymmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
-      strict = TRUE, "'~'", level_before = 1L,
-      level_after = ifelse(nrow(pd_flat$child[[2L]]) > 1L, 1L, 0L)
+      strict = TRUE, "'~'", level_before = 1,
+      level_after = ifelse(nrow(pd_flat$child[[2]]) > 1, 1, 0)
     )
   }
   pd_flat
 }
 
 remove_space_after_unary_pm_nested <- function(pd) {
-  if (any(pd$token[1L] %in% c("'+'", "'-'"))) {
-    pd$spaces[1L] <- 0L
+  if (any(pd$token[1] %in% c("'+'", "'-'"))) {
+    pd$spaces[1] <- 0L
   }
 
   pd
@@ -280,7 +280,7 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
       comments$text
     ) %>%
     trimws("right")
-  pd$short[is_comment] <- substr(pd$text[is_comment], 1L, 5L)
+  pd$short[is_comment] <- substr(pd$text[is_comment], 1, 5)
   pd
 }
 

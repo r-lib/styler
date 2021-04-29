@@ -7,7 +7,7 @@
 set_regex_indention(
   flattened_pd,
   pattern,
-  target_indention = 0L,
+  target_indention = 0,
   comments_only = TRUE
 )
 }

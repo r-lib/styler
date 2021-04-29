@@ -114,7 +114,7 @@ context_towards_terminals <- function(pd_nested,
   )
   ref_pos_id_is_na <- !is.na(pd_nested$indention_ref_pos_id)
   pd_nested$indention_ref_pos_id[!ref_pos_id_is_na] <- outer_indention_refs
-  pd_nested$lag_newlines[1L] <- pd_nested$lag_newlines[1L] + outer_lag_newlines
+  pd_nested$lag_newlines[1] <- pd_nested$lag_newlines[1] + outer_lag_newlines
   pd_nested$spaces[nrow(pd_nested)] <-
     pd_nested$spaces[nrow(pd_nested)] + outer_spaces
   pd_nested
@@ -194,7 +194,7 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #' @keywords internal
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
-    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0L,
+    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0,
       flattened_pd$indent,
       flattened_pd$lag_spaces
     )

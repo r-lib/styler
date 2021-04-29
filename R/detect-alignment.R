@@ -49,16 +49,16 @@ token_is_on_aligned_line <- function(pd_flat) {
   pd_flat$lag_newlines <- pd_flat$pos_id <- NULL
   pd_flat$.lag_spaces <- lag(pd_flat$spaces)
   pd_by_line <- split(pd_flat, line_idx)
-  last_line_is_closing_brace_only <- nrow(last(pd_by_line)) == 1L
-  relevant_idx <- seq2(2L, ifelse(last_line_is_closing_brace_only,
-    length(pd_by_line) - 1L,
+  last_line_is_closing_brace_only <- nrow(last(pd_by_line)) == 1
+  relevant_idx <- seq2(2, ifelse(last_line_is_closing_brace_only,
+    length(pd_by_line) - 1,
     length(pd_by_line)
   ))
   pd_by_line <- pd_by_line[relevant_idx]
 
-  relevant_lag_spaces_col_1 <- map_int(pd_by_line, ~ .x$.lag_spaces[1L])
+  relevant_lag_spaces_col_1 <- map_int(pd_by_line, ~ .x$.lag_spaces[1])
 
-  col1_is_aligned <- length(unique(relevant_lag_spaces_col_1)) == 1L
+  col1_is_aligned <- length(unique(relevant_lag_spaces_col_1)) == 1
   if (!col1_is_aligned) {
     return(FALSE)
   }
@@ -76,7 +76,7 @@ token_is_on_aligned_line <- function(pd_flat) {
   if (!all(has_correct_spacing_around_eq_sub)) {
     return(FALSE)
   }
-  starting_with_comma <- map_lgl(pd_by_line, ~ .x$token[1L] == "','")
+  starting_with_comma <- map_lgl(pd_by_line, ~ .x$token[1] == "','")
   if (any(starting_with_comma)) {
     return(FALSE)
   }
@@ -92,9 +92,9 @@ token_is_on_aligned_line <- function(pd_flat) {
   # over columns.
 
   n_cols <- map_int(pd_by_line, ~ sum(.x$token == "','"))
-  previous_line <- 0L
-  start_eval <- ifelse(all(alignment_col1_is_named(pd_by_line)), 1L, 2L)
-  for (column in seq2(1L, max(n_cols))) {
+  previous_line <- 0
+  start_eval <- ifelse(all(alignment_col1_is_named(pd_by_line)), 1, 2)
+  for (column in seq2(1, max(n_cols))) {
     by_line <- alignment_serialize_column(pd_by_line, column) %>%
       compact() %>%
       unlist() %>%
@@ -102,7 +102,7 @@ token_is_on_aligned_line <- function(pd_flat) {
     # check 1: match by comma
     # might have fewer lines in subsequent columns.
     current_col <- nchar(by_line)
-    if (column > 1L) {
+    if (column > 1) {
       previous_line <- previous_line[intersect(names(previous_line), names(by_line))]
       # must add previous columns, as first column might not align
       current_col <- current_col + previous_line
@@ -117,10 +117,10 @@ token_is_on_aligned_line <- function(pd_flat) {
     # match left aligned after =
     start_after_eq <- regexpr("= [^ ]", by_line)
     names(start_after_eq) <- names(by_line)
-    start_after_eq <- start_after_eq[start_after_eq > 0L]
+    start_after_eq <- start_after_eq[start_after_eq > 0]
 
     if (column >= start_eval) {
-      if (length(start_after_eq) == 0L) {
+      if (length(start_after_eq) == 0) {
         return(FALSE)
       }
       # when match via comma unsuccessful, matching by = must yield at least one =
@@ -130,7 +130,7 @@ token_is_on_aligned_line <- function(pd_flat) {
         current_col <- start_after_eq +
           previous_line[intersect(names(previous_line), names(start_after_eq))]
       }
-      is_aligned <- length(unique(current_col)) == 1L && length(start_after_eq) > 1L
+      is_aligned <- length(unique(current_col)) == 1 && length(start_after_eq) > 1
       if (!is_aligned) {
         return(FALSE)
       }

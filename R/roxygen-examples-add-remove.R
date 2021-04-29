@@ -41,7 +41,7 @@ remove_roxygen_header <- function(text) {
 add_roxygen_mask <- function(text, example_type) {
   space <- ifelse(text == "", "", " ")
   c(
-    paste0("#' @", example_type, space[1L], text[1L]),
-    map2_chr(space[-1L], text[-1L], ~ paste0("#'", .x, .y))
+    paste0("#' @", example_type, space[1], text[1]),
+    map2_chr(space[-1], text[-1], ~ paste0("#'", .x, .y))
   )
 }

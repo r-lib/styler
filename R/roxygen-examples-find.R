@@ -64,6 +64,6 @@ find_dont_closings <- function(bare, dont_openings) {
   match_closing <- intersect(
     seq2(dont_openings + 1L, length(bare)),
     which(diff == level_dont - 1L)
-  )[1L]
+  )[1]
   match_closing + 1L
 }

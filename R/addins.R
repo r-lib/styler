@@ -51,7 +51,7 @@ style_active_file <- function() {
   context <- get_rstudio_context()
   transformer <- make_transformer(get_addins_style_transformer(),
     include_roxygen_examples = TRUE,
-    base_indention = 0L,
+    base_indention = 0,
     warn_empty = is_plain_r_file(context$path)
   )
   is_r_file <- any(
@@ -70,14 +70,14 @@ style_active_file <- function() {
     abort("Can only style .R, .Rmd and .Rnw files.")
   }
   rstudioapi::modifyRange(
-    c(1L, 1L, length(context$contents) + 1L, 1L),
+    c(1, 1, length(context$contents) + 1, 1),
     paste0(ensure_last_n_empty(out), collapse = "\n"),
     id = context$id
   )
   if (save_after_styling_is_active() == TRUE && context$path != "") {
     rstudioapi::documentSave(context$id)
   }
-  rstudioapi::setCursorPosition(context$selection[[1L]]$range)
+  rstudioapi::setCursorPosition(context$selection[[1]]$range)
 }
 
 #' Wrapper around [style_pkg()] for access via Addin.
@@ -122,15 +122,15 @@ save_after_styling_is_active <- function() {
 style_selection <- function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
-  text <- context$selection[[1L]]$text
-  if (all(nchar(text) == 0L)) abort("No code selected")
+  text <- context$selection[[1]]$text
+  if (all(nchar(text) == 0)) abort("No code selected")
   out <- style_text(
     text,
     transformers = get_addins_style_transformer(),
     base_indention = nchar(gsub("^( *).*", "\\1", text))
   )
   rstudioapi::modifyRange(
-    context$selection[[1L]]$range, paste0(c(out, if (context$selection[[1]]$range$end[2L] == 1L) ""), collapse = "\n"),
+    context$selection[[1]]$range, paste0(c(out, if (context$selection[[1]]$range$end[2] == 1) ""), collapse = "\n"),
     id = context$id
   )
   if (save_after_styling_is_active() == TRUE && context$path != "") {

@@ -16,9 +16,9 @@
 #' NULL
 #' 1+ 1
 #' '
-#' style_text(text_in, base_indention = 3L)
+#' style_text(text_in, base_indention = 3)
 #' # not equal to the naive approach
-#' styler:::construct_vertical(paste0(styler:::add_spaces(3L), style_text(text_in), sep = ""))
+#' styler:::construct_vertical(paste0(styler:::add_spaces(3), style_text(text_in), sep = ""))
 #' @keywords internal
 parse_transform_serialize_r_block <- function(pd_nested,
                                               start_line,
@@ -34,19 +34,19 @@ parse_transform_serialize_r_block <- function(pd_nested,
         target_indention = transformers$reindention$indention,
         comments_only = transformers$reindention$comments_only
       )
-    is_on_newline <- flattened_pd$lag_newlines > 0L
-    is_on_newline[1L] <- TRUE
+    is_on_newline <- flattened_pd$lag_newlines > 0
+    is_on_newline[1] <- TRUE
     flattened_pd$lag_spaces[is_on_newline] <- flattened_pd$lag_spaces[is_on_newline] + base_indention
     serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
   } else {
     serialized_transformed_text <- map2(
-      c(0L, find_blank_lines_to_next_expr(pd_nested)[-1L] - 1L),
+      c(0, find_blank_lines_to_next_expr(pd_nested)[-1] - 1L),
       paste0(rep_char(" ", base_indention), pd_nested$text),
       ~ c(rep("", .x), .y)
     ) %>%
       unlist()
   }
-  c(rep("", start_line - 1L), serialized_transformed_text)
+  c(rep("", start_line - 1), serialized_transformed_text)
 }
 
 #' Find the groups of expressions that should be processed together
@@ -69,9 +69,9 @@ parse_transform_serialize_r_block <- function(pd_nested,
 #' @param pd A top level nest.
 #' @keywords internal
 cache_find_block <- function(pd) {
-  first_after_cache_state_switch <- pd$is_cached != lag(pd$is_cached, default = !pd$is_cached[1L])
+  first_after_cache_state_switch <- pd$is_cached != lag(pd$is_cached, default = !pd$is_cached[1])
 
-  not_first_on_line <- find_blank_lines_to_next_expr(pd) == 0L
+  not_first_on_line <- find_blank_lines_to_next_expr(pd) == 0
   invalid_turning_point_idx <- which(
     not_first_on_line & first_after_cache_state_switch
   )
@@ -96,7 +96,7 @@ cache_find_block <- function(pd) {
 #' @return The line number on which the first token occurs.
 #' @keywords internal
 find_blank_lines_to_next_expr <- function(pd_nested) {
-  pd_nested$line1 - lag(pd_nested$line2, default = 0L)
+  pd_nested$line1 - lag(pd_nested$line2, default = 0)
 }
 
 #' Number of lines between cache blocks
@@ -108,6 +108,6 @@ find_blank_lines_to_next_expr <- function(pd_nested) {
 #' @param pd A top level nest.
 #' @keywords internal
 find_blank_lines_to_next_block <- function(pd) {
-  block_boundary <- pd$block != lag(pd$block, default = 0L)
+  block_boundary <- pd$block != lag(pd$block, default = 0)
   find_blank_lines_to_next_expr(pd)[block_boundary]
 }

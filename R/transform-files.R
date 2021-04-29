@@ -13,7 +13,7 @@
 #' @keywords internal
 transform_files <- function(files, transformers, include_roxygen_examples, base_indention, dry) {
   transformer <- make_transformer(transformers, include_roxygen_examples, base_indention)
-  max_char <- min(max(nchar(files), 0L), getOption("width"))
+  max_char <- min(max(nchar(files), 0), getOption("width"))
   len_files <- length(files)
   if (len_files > 0L && !getOption("styler.quiet", FALSE)) {
     cat("Styling ", len_files, " files:\n")
@@ -47,8 +47,8 @@ transform_file <- function(path,
                            message_after_if_changed = " *",
                            ...,
                            dry) {
-  char_after_path <- nchar(message_before) + nchar(path) + 1L
-  max_char_after_message_path <- nchar(message_before) + max_char_path + 1L
+  char_after_path <- nchar(message_before) + nchar(path) + 1
+  max_char_after_message_path <- nchar(message_before) + max_char_path + 1
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
   if (!getOption("styler.quiet", FALSE)) {
@@ -225,7 +225,7 @@ parse_transform_serialize_r <- function(text,
 
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
-  if (nrow(pd_nested) == 0L) {
+  if (nrow(pd_nested) == 0) {
     if (warn_empty) {
       warn("Text to style did not contain any tokens. Returning empty string.")
     }
@@ -316,7 +316,7 @@ apply_transformers <- function(pd_nested, transformers) {
     pd_nested,
     c(
       transformers$initialize, transformers$line_break, set_multi_line,
-      if (length(transformers$line_break) != 0L) update_newlines
+      if (length(transformers$line_break) != 0) update_newlines
     )
   )
 
@@ -346,7 +346,7 @@ apply_transformers <- function(pd_nested, transformers) {
 #'   Needed for reverse engineering the scope.
 #' @keywords internal
 can_verify_roundtrip <- function(transformers) {
-  length(transformers$token) == 0L
+  length(transformers$token) == 0
 }
 
 #' Verify the styling

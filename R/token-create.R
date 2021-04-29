@@ -43,7 +43,7 @@ create_tokens <- function(tokens,
     list(
       token = tokens,
       text = texts,
-      short = substr(texts, 1L, 5L),
+      short = substr(texts, 1, 5),
       lag_newlines = lag_newlines,
       newlines = lead(lag_newlines),
       pos_id = pos_ids,
@@ -78,10 +78,10 @@ create_tokens <- function(tokens,
 #' create one. The validation is done with [validate_new_pos_ids()]
 #' @family token creators
 #' @keywords internal
-create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
+create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
   direction <- ifelse(after, 1L, -1L)
   first <- find_start_pos_id(pd, pos, by, direction, after)
-  new_ids <- seq(first, to = first + direction * (n - 1L) * by, by = by * direction)
+  new_ids <- seq(first, to = first + direction * (n - 1) * by, by = by * direction)
   validate_new_pos_ids(new_ids, after)
   new_ids
 }
@@ -138,25 +138,25 @@ validate_new_pos_ids <- function(new_ids, after) {
 #' @keywords internal
 wrap_expr_in_curly <- function(pd,
                                stretch_out = c(FALSE, FALSE),
-                               space_after = 1L) {
+                               space_after = 1) {
   if (is_curly_expr(pd)) {
     return(pd)
   }
-  if (stretch_out[1L]) {
-    pd$lag_newlines[1L] <- 1L
+  if (stretch_out[1]) {
+    pd$lag_newlines[1] <- 1L
   }
 
   opening <- create_tokens("'{'", "{",
-    pos_ids = create_pos_ids(pd, 1L, after = FALSE),
-    spaces = 1L - as.integer(stretch_out[1L]),
-    stylerignore = pd$stylerignore[1L]
+    pos_ids = create_pos_ids(pd, 1, after = FALSE),
+    spaces = 1 - as.integer(stretch_out[1]),
+    stylerignore = pd$stylerignore[1]
   )
 
   closing <- create_tokens(
     "'}'", "}",
-    spaces = space_after, lag_newlines = as.integer(stretch_out[2L]),
+    spaces = space_after, lag_newlines = as.integer(stretch_out[2]),
     pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
-    stylerignore = pd$stylerignore[1L]
+    stylerignore = pd$stylerignore[1]
   )
 
   bind_rows(opening, pd, closing) %>%

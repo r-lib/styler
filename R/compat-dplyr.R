@@ -26,7 +26,7 @@ arrange_pos_id <- function(data) {
 
 bind_rows <- function(x, y = NULL, ...) {
   if (is.null(x) && is.null(y)) {
-    return(new_tibble(list(), nrow = 0L))
+    return(new_tibble(list(), nrow = 0))
   }
   if (is.null(x)) {
     if (inherits(y, "data.frame")) {

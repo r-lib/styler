@@ -4,7 +4,7 @@
 \alias{create_pos_ids}
 \title{Create valid pos_ids if possible}
 \usage{
-create_pos_ids(pd, pos, by = 0.1, after = FALSE, n = 1L)
+create_pos_ids(pd, pos, by = 0.1, after = FALSE, n = 1)
 }
 \arguments{
 \item{pd}{A parse table.}

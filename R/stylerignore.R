@@ -14,22 +14,22 @@
 #' @importFrom purrr map
 env_add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
-    env_current$stylerignore <- pd_flat[0L, ]
+    env_current$stylerignore <- pd_flat[0, ]
     return()
   }
   pd_flat_temp <- pd_flat[pd_flat$terminal | pd_flat$is_cached, ] %>%
     default_style_guide_attributes()
   is_stylerignore_switchpoint <- pd_flat_temp$stylerignore != lag(
     pd_flat_temp$stylerignore,
-    default = pd_flat_temp$stylerignore[1L]
+    default = pd_flat_temp$stylerignore[1]
   )
   pd_flat_temp$first_pos_id_in_segment <- split(
     pd_flat_temp$pos_id, cumsum(is_stylerignore_switchpoint)
   ) %>%
-    map(~ rep(.x[1L], length(.x))) %>%
+    map(~ rep(.x[1], length(.x))) %>%
     unlist()
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
-  pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0L)
+  pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0)
   is_terminal_to_ignore <- pd_flat_temp$terminal & pd_flat_temp$stylerignore
   env_current$stylerignore <- pd_flat_temp[is_terminal_to_ignore, ]
 }
@@ -61,12 +61,12 @@ add_stylerignore <- function(pd_flat) {
     return(pd_flat)
   }
   pd_flat_terminals <- pd_flat[pd_flat$terminal, ]
-  pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0L)
+  pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0)
   on_same_line <- pd_flat$line1 == pd_flat_lat_line1
   cumsum_start <- cumsum(start_candidate & !on_same_line)
   cumsum_stop <- cumsum(parse_text == option_read("styler.ignore_stop"))
   pd_flat$indicator_off <- cumsum_start + cumsum_stop
-  is_invalid <- cumsum_start - cumsum_stop < 0L | cumsum_start - cumsum_stop > 1L
+  is_invalid <- cumsum_start - cumsum_stop < 0 | cumsum_start - cumsum_stop > 1
   if (any(is_invalid)) {
     warn(paste0(
       "Invalid stylerignore sequences found, potentially ignoring some of the ",
@@ -74,7 +74,7 @@ add_stylerignore <- function(pd_flat) {
     ))
   }
 
-  to_ignore <- as.logical(pd_flat$indicator_off %% 2L)
+  to_ignore <- as.logical(pd_flat$indicator_off %% 2)
   to_ignore[is_invalid] <- FALSE
   single_lines_to_ignore <- pd_flat$line1[start_candidate & on_same_line]
   to_ignore[pd_flat$line1 %in% single_lines_to_ignore] <- TRUE

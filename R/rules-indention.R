@@ -54,11 +54,11 @@ indent_eq_sub <- function(pd,
                           indent_by,
                           token = c("EQ_SUB", "EQ_FORMALS")) {
   eq_sub <- which(pd$token %in% token)
-  if (length(eq_sub) == 0L) {
+  if (length(eq_sub) == 0) {
     return(pd)
   }
-  has_line_break <- which(pd$lag_newlines > 0L)
-  indent_indices <- intersect(eq_sub + 1L, has_line_break)
+  has_line_break <- which(pd$lag_newlines > 0)
+  indent_indices <- intersect(eq_sub + 1, has_line_break)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
 }
@@ -66,7 +66,7 @@ indent_eq_sub <- function(pd,
 #' @describeIn update_indention Is used to indent for / while / if / if-else
 #'   statements that do not have curly parenthesis.
 #' @keywords internal
-indent_without_paren <- function(pd, indent_by = 2L) {
+indent_without_paren <- function(pd, indent_by = 2) {
   pd %>%
     indent_without_paren_for_while_fun(indent_by) %>%
     indent_without_paren_if_else(indent_by)

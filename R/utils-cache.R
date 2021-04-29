@@ -161,7 +161,7 @@ cache_by_expression <- function(text,
   # check if they are cached, if yes, we take the input (from which the indention
   # was removed via parse, same as it is in cache_by_expression) and add the
   # base indention.
-  expressions[expressions$parent == 0L & expressions$token != "COMMENT" & !expressions$stylerignore, "text"] %>%
+  expressions[expressions$parent == 0 & expressions$token != "COMMENT" & !expressions$stylerignore, "text"] %>%
     map(~ cache_write(.x, transformers = transformers, more_specs))
 }
 
