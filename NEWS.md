@@ -1,26 +1,49 @@
 # styler 1.4.1.9000 (Development version)
 
+## Alignment detection
+
 * code with left alignment after `=` in function calls is now recognized as 
   aligned and won't be reformatted (#774, #777).
   ```
-  # newly detected
-  call(
-    x  = 12345,
-    y2 = 17
-  )
-  
   # already detected previously
   call(
     x  = 12345,
     y2 =    17
   )
+  
+  # newly detected
+  call(
+    x  = 12345,
+    y2 = 17
+  )
   ```
-  Also see `vignette("detect-alignment")`:
+
+* similarly, `tibble::tribble()`-like alignment for column > 2 is now detected 
+  when left aligned (#785).
+  ```
+  # previously detected
+  tribble(
+    ~x,        ~d,
+    "axa'fa", 1:6,
+    "b",   422231
+  )
   
+  # newly detected
+  tribble(
+    ~x,       ~d,
+    "axa'fa", 1:6,
+    "b",      422231
+  )
+  ```
+  Also see `vignette("detect-alignment")`.
+
+## Minor changes and fixes
+
 * `#>` is recognized as an output marker and no space is added after `#` (#771).
-* improve pkgdown author URLs (#775).
 * `multi_line` attribute in parse table is now integer, not boolean (#782).
-  
+* improve pkgdown author URLs (#775).
+
+
 # styler 1.4.1
 
 * Fix interaction between cache and `base_indention`. This also fixes

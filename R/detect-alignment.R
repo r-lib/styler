@@ -109,11 +109,21 @@ token_is_on_aligned_line <- function(pd_flat) {
     }
 
     is_aligned <- length(unique(current_col)) == 1L
+    if (!is_aligned && !any(pd_flat$token == "EQ_SUB")) {
+      # check 2: by character after comma, e.g. tribble. Must not have =
+      current_col <- nchar(gsub("^(,[\\s\\t]*)[^ ]*", "\\1", by_line, perl = TRUE))
+
+      if (column > 1) {
+        # must add previous columns, as first column might not align
+        current_col <- current_col + previous_line
+      }
+      is_aligned <- length(unique(current_col)) == 1L
+    }
     if (is_aligned) {
       previous_line <- previous_line + nchar(by_line)
       next
     }
-    # check 2: match by = (no extra spaces around it allowed.)
+    # check 3: match by = (no extra spaces around it allowed.)
     # match left aligned after =
     start_after_eq <- regexpr("= [^ ]", by_line)
     names(start_after_eq) <- names(by_line)
