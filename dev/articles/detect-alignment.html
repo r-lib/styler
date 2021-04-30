@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.1.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.1.9002</span>
       </span>
     </div>
 
@@ -169,6 +169,13 @@
   <span class="st">"long string"</span>,   <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span>
 <span class="op">)</span>
 
+<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+  <span class="op">~</span><span class="va">key_here</span>,     <span class="op">~</span><span class="va">value_here</span>,
+  <span class="st">"left"</span>,        <span class="st">"right"</span>, <span class="co"># comments are allowed</span>
+  <span class="st">"long string"</span>, <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span>
+<span class="op">)</span>
+
+
 <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
   arg2 <span class="op">=</span>       <span class="fl">2</span>,
   ar   <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">k</span>, <span class="va">x</span><span class="op">)</span>
@@ -227,8 +234,8 @@
 
 <span class="co"># this works also with more than one column</span>
 <span class="fu">fell</span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fl">1</span>, annoying <span class="op">=</span> <span class="fl">3</span>,
-  y <span class="op">=</span> <span class="fl">23</span>, <span class="co"># nothing in column 2 for row 2</span>
+  x  <span class="op">=</span> <span class="fl">1</span>,   annoying <span class="op">=</span> <span class="fl">3</span>,
+  y  <span class="op">=</span> <span class="fl">23</span>, <span class="co"># nothing in column 2 for row 2</span>
   zz <span class="op">=</span> <span class="cn">NULL</span>, finally <span class="op">=</span> <span class="st">"stuff"</span>
 <span class="op">)</span></code></pre></div>
 <p><strong>If not all arguments of the first column are named:</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> The same as above, but the first column is ignored.</p>
@@ -244,6 +251,21 @@
 <span class="fu">gell</span><span class="op">(</span>
   p <span class="op">=</span> <span class="fl">2</span>, g <span class="op">=</span> <span class="fu">gg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span>
   <span class="fl">31</span>, fds <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, gz <span class="op">=</span> <span class="va">f</span> <span class="op">/</span> <span class="fl">3</span> <span class="op">+</span> <span class="fl">1</span>,
+<span class="op">)</span></code></pre></div>
+<p><strong>If the function call is tribble-like</strong></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># you can right align, then it's the last case discussed </span>
+<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+  <span class="op">~</span><span class="va">x</span>,        <span class="op">~</span><span class="va">d</span>,
+  <span class="st">"axa'fa"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,
+  <span class="st">"b"</span>,   <span class="fl">422231</span>
+<span class="op">)</span>
+
+<span class="co"># or you left align, then all tokens after commas must match in position</span>
+<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+  <span class="op">~</span><span class="va">x</span>,       <span class="op">~</span><span class="va">d</span>,
+  <span class="st">"axa'fa"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,
+  <span class="st">"b"</span>,      <span class="fl">4</span><span class="op">:</span><span class="fl">6</span>
 <span class="op">)</span></code></pre></div>
 </div>
 <div id="comments" class="section level2">

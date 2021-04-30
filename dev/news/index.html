@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.1.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.4.1.9002</span>
       </span>
     </div>
 
@@ -182,26 +182,54 @@
 <h1 class="page-header" data-toc-text="1.4.1.9000">
 <a href="#styler-1419000-development-version" class="anchor"></a>styler 1.4.1.9000 (Development version)<small> Unreleased </small>
 </h1>
+<div id="alignment-detection" class="section level2">
+<h2 class="hasAnchor">
+<a href="#alignment-detection" class="anchor"></a>Alignment detection</h2>
 <ul>
 <li>
 <p>code with left alignment after <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> in function calls is now recognized as aligned and won’t be reformatted (<a href='https://github.com/r-lib/styler/issues/774'>#774</a>, <a href='https://github.com/r-lib/styler/issues/777'>#777</a>).</p>
-<pre><code><a href="https://rdrr.io/r/base/call.html"># newly detected
-call(
-  x  = 12345,
-  y2 = 17
-)
-
-# already detected previously
+<pre><code><a href="https://rdrr.io/r/base/call.html"># already detected previously
 call(
   x  = 12345,
   y2 =    17
+)
+
+# newly detected
+call(
+  x  = 12345,
+  y2 = 17
 )</a></code></pre>
-<p>Also see <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>:</p>
 </li>
-<li><p><code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</p></li>
-<li><p>improve pkgdown author URLs (<a href='https://github.com/r-lib/styler/issues/775'>#775</a>).</p></li>
-<li><p><code>multi_line</code> attribute in parse table is now integer, not boolean (<a href='https://github.com/r-lib/styler/issues/782'>#782</a>).</p></li>
+<li>
+<p>similarly, <code><a href="https://tibble.tidyverse.org/reference/tribble.html">tibble::tribble()</a></code>-like alignment for column &gt; 1 is now detected when left aligned (<a href='https://github.com/r-lib/styler/issues/785'>#785</a>).</p>
+<pre><code><a href="https://tibble.tidyverse.org/reference/tribble.html"># previously detected
+tribble(
+  ~x,        ~d,
+  "axa'fa", 1:6,
+  "b",   422231
+)
+
+# newly detected
+tribble(
+  ~x,       ~d,
+  "axa'fa", 1:6,
+  "b",      422231
+)</a></code></pre>
+<p>Also see <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>.</p>
+</li>
 </ul>
+</div>
+<div id="minor-changes-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
+<ul>
+<li>
+<code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</li>
+<li>
+<code>multi_line</code> attribute in parse table is now integer, not boolean (<a href='https://github.com/r-lib/styler/issues/782'>#782</a>).</li>
+<li>improve pkgdown author URLs (<a href='https://github.com/r-lib/styler/issues/775'>#775</a>).</li>
+</ul>
+</div>
 </div>
     <div id="styler-141" class="section level1">
 <h1 class="page-header" data-toc-text="1.4.1">
@@ -256,9 +284,9 @@ call(
 <li><p><code>#&lt;&lt;</code> is now recognized as the xaringan marker and no space is added after<code>#</code> (<a href='https://github.com/r-lib/styler/issues/700'>#700</a>).</p></li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes" class="section level2">
+<div id="minor-changes-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-1" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li><p><code><a href="../reference/style_dir.html">style_dir()</a></code> and <code><a href="../reference/style_pkg.html">style_pkg()</a></code> now apply directory exclusion recursively with <code>exclude_dirs</code> (<a href='https://github.com/r-lib/styler/issues/676'>#676</a>).</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/switch.html">switch()</a></code> now has line breaks after every argument to match the tidyverse style guide (<a href='https://github.com/r-lib/styler/issues/722'>#722</a>, <a href='https://github.com/r-lib/styler/issues/727'>#727</a>).</p></li>
@@ -293,9 +321,9 @@ call(
 <a href="#styler-132" class="anchor"></a>styler 1.3.2<small> 2020-02-23 </small>
 </h1>
 <p>Release upon request by the CRAN team.</p>
-<div id="minor-changes-and-fixes-1" class="section level2">
+<div id="minor-changes-and-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-1" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-2" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>Add search and reference sections to pkgdown webpage (<a href='https://github.com/r-lib/styler/issues/623'>#623</a>, <a href='https://github.com/r-lib/styler/issues/625'>#625</a>).</li>
 <li>various fixes to handle special cases for caching and stylerignore and their interaction (<a href='https://github.com/r-lib/styler/issues/611'>#611</a>, <a href='https://github.com/r-lib/styler/issues/610'>#610</a>, <a href='https://github.com/r-lib/styler/issues/609'>#609</a>, <a href='https://github.com/r-lib/styler/issues/607'>#607</a>, <a href='https://github.com/r-lib/styler/issues/602'>#602</a>, <a href='https://github.com/r-lib/styler/issues/600'>#600</a>).</li>
@@ -341,9 +369,9 @@ style_text("1 # comment")
 <li><p><code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> gains two arguments <code>style_guide_name</code> and <code>style_guide_version</code> that are carried as meta data, in particular to version third-party style guides and ensure the proper functioning of caching. This change is completely invisible to users who don’t create and distribute their own style guide like <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> (<a href='https://github.com/r-lib/styler/issues/572'>#572</a>).</p></li>
 </ul>
 </div>
-<div id="minor-changes-and-fixes-2" class="section level2">
+<div id="minor-changes-and-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-and-fixes-2" class="anchor"></a>Minor changes and fixes</h2>
+<a href="#minor-changes-and-fixes-3" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li><p>lines are now broken after <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> in <code>ggplot2</code> calls for <code>strict = TRUE</code> (<a href='https://github.com/r-lib/styler/issues/569'>#569</a>).</p></li>
 <li><p>function documentation now contains many more line breaks due to roxygen2 update to version 7.0.1 (<a href='https://github.com/r-lib/styler/issues/566'>#566</a>).</p></li>
