@@ -18,21 +18,31 @@
   )
   ```
 
-* similarly, `tibble::tribble()`-like alignment for column > 1 is now detected 
-  when left aligned (#785).
+* similarly, left aligned after comma is now detected (#785).
   ```
   # previously detected
+  call(
+    x  = 12345, "It's old",
+    y2 = 17,      "before"
+  )
+  
   tribble(
-    ~x,        ~d,
-    "axa'fa", 1:6,
-    "b",   422231
+    ~x,             ~y,
+    "another",     1:3,
+    "b",       1211234
   )
   
   # newly detected
+  call(
+    x = 2,           p = "another",
+    y = "hhjkjkbew", x = 3
+  )
+
+  
   tribble(
-    ~x,       ~d,
-    "axa'fa", 1:6,
-    "b",      422231
+    ~x,        ~y,
+    "another", 1:3,
+    "b",       1211234
   )
   ```
   Also see `vignette("detect-alignment")`.

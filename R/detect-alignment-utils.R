@@ -75,7 +75,7 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
 #'   excluding first and last column.
 #' @importFrom purrr map_lgl
 #' @keywords internal
-alignment_col1_is_named <- function(relevant_pd_by_line) {
+alignment_col1_all_named <- function(relevant_pd_by_line) {
   map_lgl(relevant_pd_by_line, function(x) {
     if (nrow(x) < 3) {
       return(FALSE)

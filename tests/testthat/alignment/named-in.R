@@ -209,3 +209,15 @@ xgle(
   1212, 232, f(n = 2),
   1,      2,  "kFlya"
 )
+
+# left aligned after ,
+call(
+  x = 2,           y = "another",
+  y = "hhjkjkbew", x = 3
+)
+
+call(
+  k = ff("pk"), k = 3,
+  b = f(-g),    22 + 1,
+  44,           323
+)
