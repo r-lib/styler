@@ -90,7 +90,7 @@ alignment_col1_all_named <- function(relevant_pd_by_line) {
 
 #' Serialize all lines for a given column
 #' @param column The index of the column to serialize.
-#' @inheritParams alignment_col1_is_named
+#' @inheritParams alignment_col1_all_named
 #' @importFrom purrr map
 #' @keywords internal
 alignment_serialize_column <- function(relevant_pd_by_line, column) {
@@ -101,7 +101,7 @@ alignment_serialize_column <- function(relevant_pd_by_line, column) {
 #'
 #'
 #' @inheritParams alignment_serialize_column
-#' @inheritParams alignment_col1_is_named
+#' @inheritParams alignment_col1_all_named
 #' @keywords internal
 alignment_serialize_line <- function(relevant_pd_by_line, column) {
   # TODO
