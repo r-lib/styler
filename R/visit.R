@@ -110,7 +110,7 @@ context_towards_terminals <- function(pd_nested,
   pd_nested$indent <- pd_nested$indent + ifelse(
     is.na(pd_nested$indention_ref_pos_id),
     outer_indent,
-    0
+    0L
   )
   ref_pos_id_is_na <- !is.na(pd_nested$indention_ref_pos_id)
   pd_nested$indention_ref_pos_id[!ref_pos_id_is_na] <- outer_indention_refs

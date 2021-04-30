@@ -163,7 +163,7 @@ needs_indention <- function(pd,
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
-  before_first_break <- which(pd$lag_newlines > 0)[1] - 1
+  before_first_break <- which(pd$lag_newlines > 0)[1] - 1L
   if (is.na(before_first_break)) {
     return(FALSE)
   }
@@ -201,7 +201,7 @@ needs_indention_one <- function(pd,
 #' @importFrom purrr map_lgl
 #' @keywords internal
 set_multi_line <- function(pd) {
-  pd$multi_line <- map_lgl(pd$child, pd_is_multi_line)
+  pd$multi_line <- unname(map_int(pd$child, pd_multi_line))
   pd
 }
 
@@ -214,7 +214,11 @@ set_multi_line <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 pd_is_multi_line <- function(pd) {
-  any(pd$multi_line, pd$lag_newlines > 0)
+  pd_multi_line(pd) > 0
+}
+
+pd_multi_line <- function(pd) {
+  sum(pd$multi_line, pd$lag_newlines)
 }
 
 #' Update the newlines attribute

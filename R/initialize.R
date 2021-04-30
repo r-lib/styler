@@ -66,7 +66,7 @@ remove_attributes <- function(pd_flat, attributes) {
 initialize_multi_line <- function(pd_flat) {
   nrow <- nrow(pd_flat)
   pd_flat$multi_line <- ifelse(pd_flat$terminal,
-    rep(FALSE, nrow),
+    rep(0L, nrow),
     rep(NA, nrow)
   )
   pd_flat

@@ -5,7 +5,7 @@
 #' @keywords internal
 serialize_parse_data_flattened <- function(flattened_pd) {
   flattened_pd <- apply_stylerignore(flattened_pd)
-  flattened_pd$lag_newlines[1] <- 0 # resolve start_line elsewhere
+  flattened_pd$lag_newlines[1] <- 0L # resolve start_line elsewhere
   with(
     flattened_pd,
     paste0(
