@@ -93,7 +93,7 @@ token_is_on_aligned_line <- function(pd_flat) {
 
   n_cols <- map_int(pd_by_line, ~ sum(.x$token == "','"))
   previous_line <- 0
-  start_eval <- ifelse(all(alignment_col1_is_named(pd_by_line)), 1, 2)
+  start_eval <- ifelse(alignment_col1_is_named(pd_by_line), 1, 2)
   for (column in seq2(1, max(n_cols))) {
     by_line <- alignment_serialize_column(pd_by_line, column) %>%
       compact() %>%
@@ -109,8 +109,8 @@ token_is_on_aligned_line <- function(pd_flat) {
     }
 
     is_aligned <- length(unique(current_col)) == 1L
-    if (!is_aligned && !any(pd_flat$token == "EQ_SUB")) {
-      # check 2: by character after comma, e.g. tribble. Must not have =
+    if (!is_aligned) {
+      # check 2: by character after comma, e.g. tribble.
       current_col <- nchar(gsub("^(,[\\s\\t]*)[^ ]*", "\\1", by_line, perl = TRUE))
 
       if (column > 1) {
