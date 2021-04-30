@@ -18,7 +18,7 @@
   )
   ```
 
-* similarly, left aligned after comma is now detected (#785).
+* similarly, left aligned after comma is now detected (#785, #786).
   ```
   # previously detected
   call(
