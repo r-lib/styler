@@ -87,7 +87,7 @@ test <- function() {
   # Only with conservative settings:
   call(
     preserves, distance,
-    after, commas,
+    after,     commas,
     given_has, one
   )
 

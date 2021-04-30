@@ -44,7 +44,9 @@ repos:
     -   id: deps-in-desc
         exclude: >
           (?x)^(
-          bench/.*
+          bench/.*|
+          tests/testthat/.*-in\.R|
+          tests/testthat/.*-out\.R
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
