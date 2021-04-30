@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Obtain token table from text — tokenize • styler</title>
+<title>Checks if all arguments of column 1 are named — alignment_col1_all_named • styler</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,8 @@
 
 
 
-<meta property="og:title" content="Obtain token table from text — tokenize" />
-<meta property="og:description" content="utils::getParseData() is used to obtain a flat parse table from text." />
+<meta property="og:title" content="Checks if all arguments of column 1 are named — alignment_col1_all_named" />
+<meta property="og:description" content="Checks if all arguments of column 1 are named" />
 
 
 <meta name="robots" content="noindex">
@@ -175,39 +175,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Obtain token table from text</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/parse.R'><code>R/parse.R</code></a></small>
-    <div class="hidden name"><code>tokenize.Rd</code></div>
+    <h1>Checks if all arguments of column 1 are named</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/detect-alignment-utils.R'><code>R/detect-alignment-utils.R</code></a></small>
+    <div class="hidden name"><code>alignment_col1_all_named.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='https://rdrr.io/r/utils/getParseData.html'>utils::getParseData()</a></code> is used to obtain a flat parse table from <code>text</code>.</p>
+    <p>Checks if all arguments of column 1 are named</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tokenize</span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>alignment_col1_all_named</span><span class='op'>(</span><span class='va'>relevant_pd_by_line</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>text</th>
-      <td><p>The text to parse.</p></td>
+      <th>relevant_pd_by_line</th>
+      <td><p>A list with parse tables of a multi-line call,
+excluding first and last column.</p></td>
     </tr>
     </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A flat parse table</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Apart from the columns provided by <code><a href='https://rdrr.io/r/utils/getParseData.html'>utils::getParseData()</a></code>, the following
-columns are added:</p><ul>
-<li><p>A column "short" with the first five characters of "text".</p></li>
-<li><p>A column "pos_id" for (positional id) which can be used for sorting
-(because "id" cannot be used in general). Note that the nth value of this
-column corresponds to n as long as no tokens are inserted.</p></li>
-<li><p>A column "child" that contains <em>nest</em>s.</p></li>
-</ul>
 
 
   </div>
