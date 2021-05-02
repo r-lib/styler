@@ -15,7 +15,7 @@ Some text.
 ```
 
 ```{ r }
-1 + 1
+1+1
 ```
 
 More text.

@@ -83,25 +83,28 @@ identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pat
   }
 
   if (filetype == "Rmd") {
-    chunks <- grep("^[\t >]*```+\\s*", lines, perl = TRUE)
-    starts <- odd(chunks)
-    ends <- even(chunks)
-    is_r_code <- grepl(
-      paste0("^[\t >]*```+\\s*\\{\\s*", engine_pattern, "[\\s\\},]"),
-      lines[starts],
-      perl = TRUE
-    )
+    starts <- grep("^[\t >]*```+\\s*\\{([Rr]( *[ ,].*)?)\\}\\s*$", lines, perl = TRUE)
+    ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
+
+    if (length(starts) != length(ends)) {
+      # for each start, match next end, required for nested chunks
+      ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1]]) %>%
+        na.omit()
+      if (length(starts) != length(ends)) {
+        abort("Malformed file!")
+      }
+    }
   } else if (filetype == "Rnw") {
     starts <- grep(pattern$chunk.begin, lines, perl = TRUE)
     ends <- grep(pattern$chunk.end, lines, perl = TRUE)
-    is_r_code <- rep(TRUE, length(starts))
+    if (length(starts) != length(ends)) {
+      abort("Malformed file!")
+    }
   }
 
-  if (length(starts) != length(ends)) {
-    abort("Malformed file!")
-  }
 
-  list(starts = starts[is_r_code], ends = ends[is_r_code])
+
+  list(starts = starts, ends = ends)
 }
 
 #' What's the engine pattern for rmd code chunks?
