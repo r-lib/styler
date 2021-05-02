@@ -21,4 +21,11 @@ test_that("can style .Rmd files", {
     filetype = "Rmd",
     write_tree = FALSE
   ), NA)
+
+  expect_warning(test_collection("rmd", "no-tidy",
+    transformer = transform_mixed,
+    transformer_fun = style_text,
+    filetype = "Rmd",
+    write_tree = FALSE
+  ), NA)
 })

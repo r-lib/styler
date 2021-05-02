@@ -102,9 +102,30 @@ identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pat
     }
   }
 
+  purrr::map2(starts, ends, finalize_raw_chunks,
+    filetype = filetype, lines = lines
+  ) %>%
+    purrr::compact() %>%
+    purrr::transpose()
+}
 
-
-  list(starts = starts, ends = ends)
+#' Drop start / stop, when formatting is turned off
+#'
+#' If `tidy = FALSE` (the knitr code chunk default), code is not styled upon
+#' knitting. If it is explicitly added to a code chunk, the code chunk is in
+#' addition not styled with styler when formatting the document.
+#' @keywords internal
+finalize_raw_chunks <- function(start, end, filetype, lines) {
+  header <- gsub(get_knitr_pattern(filetype)$chunk.begin, "\\1", lines[start])
+  parsed <- get_parse_data(paste0("c(", header, ")"))$text
+  do_not_tidy <- any(parsed == "tidy") &&
+    parsed[which(parsed == "tidy") + 1] == "=" &&
+    parsed[which(parsed == "tidy") + 2] == "FALSE"
+  if (do_not_tidy) {
+    return(NULL)
+  } else {
+    list(starts = start, ends = end)
+  }
 }
 
 #' What's the engine pattern for rmd code chunks?
