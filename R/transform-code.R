@@ -116,7 +116,7 @@ identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pat
 #' addition not styled with styler when formatting the document.
 #' @keywords internal
 finalize_raw_chunks <- function(start, end, filetype, lines) {
-  header <- gsub(get_knitr_pattern(filetype)$chunk.begin, "\\1", lines[start])
+  header <- gsub(get_knitr_pattern(filetype)$chunk.begin, "\\2", lines[start])
   parsed <- get_parse_data(paste0("c(", header, ")"))$text
   do_not_tidy <- any(parsed == "tidy") &&
     parsed[which(parsed == "tidy") + 1] == "=" &&
