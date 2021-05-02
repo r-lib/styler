@@ -51,7 +51,7 @@
 
 * `#>` is recognized as an output marker and no space is added after `#` (#771).
 * R code chunks in nested non-R chunks in R markdown don't yield an error 
-  anymore when styled, but they are still not styled (#788).
+  anymore when document is styled, chunks are still not styled (#788).
 * `multi_line` attribute in parse table is now integer, not boolean (#782).
 * style guide used in Addin is verified when set via R option (#789).
 * improve pkgdown author URLs (#775).
