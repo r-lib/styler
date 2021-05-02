@@ -158,7 +158,10 @@ set_style_transformers <- function() {
     parsed_new_style <- with_handlers(
       {
         transformers <- eval(parse(text = new_style))
-        style_text(c("a = 2", "function() {", "NULL", "}"))
+        style_text(
+          c("a = 2", "function() {", "NULL", "}"),
+          transformers = transformers
+        )
       },
       error = function(e) {
         abort(paste0(
