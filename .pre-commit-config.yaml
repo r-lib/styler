@@ -45,8 +45,8 @@ repos:
         exclude: >
           (?x)^(
           bench/.*|
-          tests/testthat/.*-in\.R|
-          tests/testthat/.*-out\.R
+          tests/testthat/.*-in\.R(md)?|
+          tests/testthat/.*-out\.R(md)?
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
