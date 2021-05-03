@@ -234,6 +234,7 @@ tribble(
 <h2 class="hasAnchor">
 <a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
+<li>styler won’t format code chunks with explicit <code>tidy = FALSE</code> in an Rmd or Rnw code header anymore. This can be handy when the code can’t be parsed, e.g. within a learnr tutorial (<a href='https://github.com/r-lib/styler/issues/790'>#790</a>).</li>
 <li>
 <code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</li>
 <li>R code chunks in nested non-R chunks in R markdown don’t yield an error anymore when document is styled, chunks are still not styled (<a href='https://github.com/r-lib/styler/issues/788'>#788</a>).</li>

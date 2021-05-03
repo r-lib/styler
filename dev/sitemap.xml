@@ -223,6 +223,9 @@
     <loc>https://styler.r-lib.org/reference/extract_terminals.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/finalize_raw_chunks.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/find_blank_lines_to_next_block.html</loc>
   </url>
   <url>
