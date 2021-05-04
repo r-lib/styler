@@ -1,4 +1,3 @@
-Type: Package
 Package: precommit
 Title: Pre-Commit Hooks
 Version: 0.1.3.9000
