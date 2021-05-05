@@ -1,7 +1,8 @@
 #' Run a test
 #'
 #' Tests for the executables used as pre-commit hooks via `entrypoint` in
-#' `.pre-commit-config.yaml`.
+#' `.pre-commit-config.yaml`. Set's the env variable `R_PRECOMMIT_HOOK_ENV` to
+#' when running.
 #' @details
 #' Two potential outcomes of a hooks are pass or fail. This is reflected on the
 #' level of the executable: Fail means the executable fails or the file is
@@ -15,7 +16,6 @@
 #'   executable. To check for failed executable, we set `error_msg` to
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
-#'
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension).
 #' @param suffix The suffix of `file_name`.
@@ -39,6 +39,7 @@ run_test <- function(hook_name,
                      copy = NULL,
                      file_transformer = function(files) files,
                      env = character()) {
+  withr::local_envvar(list(R_PRECOMMIT_HOOK_ENV = "1"))
   path_executable <- system.file(
     fs::path("bin", hook_name),
     package = "precommit"
@@ -87,7 +88,7 @@ run_test_impl <- function(path_executable,
   tempdir <- fs::dir_create(fs::file_temp())
   if (!is.null(copy)) {
     if (is.null(names(copy))) {
-      # no names, take basename
+      # not namesm take directory name
       new_dirs <- fs::path(tempdir, fs::path_dir(copy))
       fs::dir_create(new_dirs)
       paths_copy <- fs::path(new_dirs, fs::path_file(copy))

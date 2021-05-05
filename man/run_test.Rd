@@ -53,7 +53,8 @@ made.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in
-\code{.pre-commit-config.yaml}.
+\code{.pre-commit-config.yaml}. Set's the env variable \code{R_PRECOMMIT_HOOK_ENV} to
+when running.
 }
 \details{
 Two potential outcomes of a hooks are pass or fail. This is reflected on the
