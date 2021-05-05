@@ -135,7 +135,7 @@ release_prechecks <- function(bump, is_cran) {
 update_rev_in_config <- function(new_version,
                                  path = "inst/pre-commit-config.yaml") {
   config <- readLines(path)
-  ours <- grep("-   repo: https://github.com/lorenzwalthert/precommit", config, fixed = TRUE)
+  ours <- grep(paste0("-   repo: ", hooks_repo), config, fixed = TRUE)
   others <- setdiff(grep("-   repo:", config, fixed = TRUE), ours)
   next_after_ours <- others[others > ours][1]
   rev <- grep("rev:", config)

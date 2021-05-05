@@ -63,7 +63,7 @@ use_precommit_config <- function(config_source = getOption("precommit.config_sou
     "All available hooks: ",
     "https://pre-commit.com/hooks.html",
     "R specific hooks:",
-    "https://github.com/lorenzwalthert/precommit."
+    hooks_repo, "."
   ))
   config_source
 }

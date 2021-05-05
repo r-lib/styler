@@ -35,7 +35,7 @@ assert_correct_upstream_repo_url <- function() {
   if (upstream_repo_url_is_outdated()) {
     usethis::ui_info(c(
       "The repo https://github.com/lorenzwalthert/pre-commit-hooks ",
-      "has moved to https://github.com/lorenzwalthert/precommit. ",
+      "has moved to ", hooks_repo, ". ",
       "Please fix the URL in .pre-commit-config.yaml, ",
       "most confortably with `precommit::open_config()`."
     ))
