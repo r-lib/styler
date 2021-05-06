@@ -48,7 +48,11 @@
 <meta property="og:title" content="Identifies raw Rmd or Rnw code chunks — identify_raw_chunks" />
 <meta property="og:description" content="Raw in the sense that these chunks don't contain pure R code, but they
 contain a header and footer of markdown. Only code chunks that have an engine
-whose name matches engine-pattern are considered as R code." />
+whose name matches engine-pattern are considered as R code.
+For every opening, we match the next closing. If there are not the same
+amount of closing and openings after this matching, we throw an error.
+Similarly, if there are two openings before a closing, the closing gets
+matched twice, on which we throw an error." />
 
 
 <meta name="robots" content="noindex">
@@ -185,7 +189,11 @@ whose name matches engine-pattern are considered as R code." />
     <div class="ref-description">
     <p>Raw in the sense that these chunks don't contain pure R code, but they
 contain a header and footer of markdown. Only code chunks that have an engine
-whose name matches <code>engine-pattern</code> are considered as R code.</p>
+whose name matches <code>engine-pattern</code> are considered as R code.
+For every opening, we match the next closing. If there are not the same
+amount of closing and openings after this matching, we throw an error.
+Similarly, if there are two openings before a closing, the closing gets
+matched twice, on which we throw an error.</p>
     </div>
 
     <pre class="usage"><span class='fu'>identify_raw_chunks</span><span class='op'>(</span><span class='va'>lines</span>, <span class='va'>filetype</span>, engine_pattern <span class='op'>=</span> <span class='fu'><a href='get_engine_pattern.html'>get_engine_pattern</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
