@@ -103,8 +103,8 @@ roxygen_assert_additinal_dependencies <- function() {
       "`precommit::snippet_generate('additional-deps-roxygenize')`",
       "and paste the ",
       "output into the file `.pre-commit-config.yaml`. This requires precommit",
-      " > 0.1.3.\n\n",
-      "Context: https://github.com/lorenzwalthert/precommit/issues/243"
+      " > 0.1.3 and assumes you declared all dependencies in `DESCRIPTION`.",
+      "\n\nContext: https://github.com/lorenzwalthert/precommit/issues/243"
     ))
   }
 }
