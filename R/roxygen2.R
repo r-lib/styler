@@ -91,7 +91,7 @@ roxygen_assert_additinal_dependencies <- function() {
   if (inherits(out, "packageNotFoundError")) {
     # case used in package but not installed
     rlang::abort(paste0(
-      "The roxygenize hook requires all dependencies of your package to be listed in ",
+      "The roxygenize hook requires all* dependencies of your package to be listed in ",
       "the file `.pre-commit-config.yaml` under `id: roxygenize` -> ",
       "`additional_dependencies:`, like this:\n\n",
       "    -   id: roxygenize",
@@ -104,7 +104,12 @@ roxygen_assert_additinal_dependencies <- function() {
       "and paste the ",
       "output into the file `.pre-commit-config.yaml`. This requires precommit",
       " > 0.1.3 and assumes you declared all dependencies in `DESCRIPTION`.",
-      "\n\nContext: https://github.com/lorenzwalthert/precommit/issues/243"
+      "\n\nContext: https://github.com/lorenzwalthert/precommit/issues/243",
+      "\n\nThe initial error (from `pkgload::load_all()`) was: ",
+      conditionMessage(out), ".\n\n===================================\n",
+      "*Some packages are already installed in the renv to run the hook, so ",
+      "these technically don't have to be listed as additional dependencies, ",
+      "but we recommend listing all for simplicity and consistency."
     ))
   }
 }
