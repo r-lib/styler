@@ -32,8 +32,7 @@
 foo <- function(x) {
   if (TRUE) {
     1
-  }
-  else {
+  } else {
     2
   }
 }
