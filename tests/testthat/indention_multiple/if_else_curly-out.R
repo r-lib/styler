@@ -27,3 +27,12 @@
     4
   }
 }
+
+# rather space than brace thing, but
+foo <- function(x) {
+  if (TRUE) {
+    1
+  } else {
+    2
+  }
+}

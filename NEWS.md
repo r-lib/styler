@@ -49,6 +49,7 @@
 
 ## Minor changes and fixes
 
+* line breaks between `}` and `else` are removed (#793).
 * styler won't format code chunks with explicit `tidy = FALSE` in an Rmd or Rnw 
   code header anymore. This can be handy when the code can't be parsed, e.g.
   within a learnr tutorial (#790).
