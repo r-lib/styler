@@ -74,3 +74,29 @@ test_that("change in formals alone triggers invalidation", {
     git2r::commit(".", "clear case 5")
   })
 })
+
+
+test_that("asserting installed dependencies", {
+  withr::local_options("usethis.quiet" = TRUE)
+  withr::local_dir(withr::local_tempdir())
+  pkg_name <- "testPkg3"
+  usethis::create_package(pkg_name)
+  withr::local_dir(pkg_name)
+  usethis:::proj_set(".")
+  installed <- c("pkgload", "rlang", "testthat")
+  purrr::walk(installed, usethis::use_package)
+  additional_pkg <- "blabdjfdf83928"
+  if (rlang::is_installed(additional_pkg)) {
+    rlang::abort(paste0(
+      "Package ", additional_pkg,
+      " is installed. This test cannot be ran"
+    ))
+  }
+  writeLines(c("utils::adist", "rlang::is_installed"), "R/blur.R")
+  testthat::expect_silent(roxygen_assert_additinal_dependencies())
+  writeLines(paste0(additional_pkg, "::blu"), "R/core.R")
+  testthat::expect_error(
+    roxygen_assert_additinal_dependencies(),
+    "requires all used packages to be listed"
+  )
+})

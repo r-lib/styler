@@ -19,6 +19,13 @@
   This requires `pre-commit >= 2.11.1`. All hooks and dependencies are now 
   contained in a virtual environment with [`{renv}`](https://rstudio.github.io/renv/)
   (#233).
+- Because hooks run in a virtual environment and the `roxygenize` hook runs
+  `pkgload::load_all()`, you need to list all dependencies of your package in
+  `additional_dependencies` field in `.pre-commit-config.yaml`. You will be 
+  prompted to add them if they are missing, 
+  `precommit::snippet_generate("additional-deps-roxygenize")` generates
+  the code you can copy/paste ().
+
 
 **Minor changes**
 

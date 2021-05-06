@@ -91,3 +91,55 @@ upstream_repo_url_is_outdated <- function() {
     grepl("https://github.com/lorenzwalthert/pre-commit-hooks", ., fixed = TRUE) %>%
     any()
 }
+
+#' Generate code snippets
+#'
+#' Utility function to generate code snippets:
+#'
+#' @details
+#' Currently supported:
+#'
+#' * additional-deps-roxygenize: Code to paste into
+#'   `.pre-commit-config.yaml` for the additional dependencies required by
+#'   roxygen2.
+#' @param snippet Name of the snippet.
+#' @inheritParams fallback_doc
+#' @export
+snippet_generate <- function(snippet = "", root = here::here()) {
+  rlang::arg_match(snippet, c("additional-deps-roxygenize"))
+  if (snippet == "additional-deps-roxygenize") {
+    rlang::inform(
+      "Generating snippet using installed versions of all dependencies.\n"
+    )
+    deps <- desc::desc_get_deps()
+    paste0(
+      "        - ", deps$package, "@",
+      purrr::map_chr(deps$package, ~ as.character(packageVersion(.x))), "\n",
+      collapse = ""
+    ) %>%
+      sort() %>%
+      cat(sep = "")
+    remote_deps <- rlang::with_handlers(
+      desc::desc_get_field("Remotes"),
+      error = function(e) character()
+    )
+    if (length(remote_deps) > 0) {
+      rlang::warn(paste0(
+        "It seems you have remote dependencies in your `DESCRIPTION`. You ",
+        "need to edit the above list manually to match the syntax `renv::install()` ",
+        "understands, i.e. if you have in your `DESCRIPTION`", "
+
+Imports:
+    tidyr
+Remotes:
+    tidyverse/tidyr@2fd80d5
+
+You need in your `.pre-commit-config.yaml`
+
+        additional_dependencies:
+        - tidyverse/tidyr@2fd80d5
+      "
+      ))
+    }
+  }
+}

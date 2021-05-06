@@ -73,3 +73,37 @@ diff_requires_run_roxygenize <- function(root = here::here()) {
     any(grep("function(", without_comments, fixed = TRUE))
   }
 }
+
+#' Assert if all dependencies are installed
+#'
+#' This function is only exported for use in hook scripts, but it's not intended
+#' to be called by the end-user directly.
+#' @family hook script helpers
+#' @export
+roxygen_assert_additinal_dependencies <- function() {
+  out <- rlang::with_handlers(
+    # roxygen2 will load: https://github.com/r-lib/roxygen2/issues/771
+    pkgload::load_all(quiet = TRUE),
+    error = function(e) {
+      e
+    }
+  )
+  if (inherits(out, "packageNotFoundError")) {
+    # case used in package but not installed
+    rlang::abort(paste0(
+      "The roxygenize hook requires all used packages to be listed in ",
+      "the file `.pre-commit-config.yaml` under `id: roxygenize` -> ",
+      "`additional_dependencies:`, like this:\n\n",
+      "    -   id: roxygenize",
+      "
+        additional_dependencies:
+        - tidyr
+        - dplyr\n\n",
+      "Call ",
+      "`precommit::snippet_generate('additional-deps-roxygenize')`",
+      "and paste the ",
+      "output into the file `.pre-commit-config.yaml`.\n\n",
+      "Context: https://github.com/lorenzwalthert/precommit/issues/243"
+    ))
+  }
+}

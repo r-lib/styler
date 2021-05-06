@@ -17,6 +17,7 @@ to be called by the end-user directly.
 }
 \seealso{
 Other hook script helpers: 
-\code{\link{diff_requires_run_roxygenize}()}
+\code{\link{diff_requires_run_roxygenize}()},
+\code{\link{roxygen_assert_additinal_dependencies}()}
 }
 \concept{hook script helpers}
