@@ -28,7 +28,7 @@ test_that("activated cache brings speedup on style_text() API on character vecto
     text, text,
     fun = style_text
   )
-  expect_gt(n, 55)
+  expect_gt(n, 40)
 })
 
 test_that("activated cache brings speedup on style_text() API on character scalar", {
@@ -120,7 +120,7 @@ capture.output(test_that("no speedup when tranformer changes", {
   first <- system.time(style_text(text, transformers = t1))
   t1 <- tidyverse_style(indent_by = 4)
   second <- system.time(style_text(text, transformers = t1))
-  expect_false(first["elapsed"] / 1.2 > second["elapsed"])
+  expect_false(first["elapsed"] / 1.3 > second["elapsed"])
 }))
 
 

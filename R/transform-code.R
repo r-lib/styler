@@ -72,6 +72,10 @@ separate_chunks <- function(lines, filetype) {
 #' Raw in the sense that these chunks don't contain pure R code, but they
 #' contain a header and footer of markdown. Only code chunks that have an engine
 #' whose name matches `engine-pattern` are considered as R code.
+#' For every opening, we match the next closing. If there are not the same
+#' amount of closing and openings after this matching, we throw an error.
+#' Similarly, if there are two openings before a closing, the closing gets
+#' matched twice, on which we throw an error.
 #' @inheritParams separate_chunks
 #' @param engine_pattern A regular expression that must match the engine name.
 #' @importFrom rlang abort
@@ -85,14 +89,10 @@ identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pat
   if (filetype == "Rmd") {
     starts <- grep("^[\t >]*```+\\s*\\{([Rr]( *[ ,].*)?)\\}\\s*$", lines, perl = TRUE)
     ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
-
-    if (length(starts) != length(ends)) {
-      # for each start, match next end, required for nested chunks
-      ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1]]) %>%
-        na.omit()
-      if (length(starts) != length(ends)) {
-        abort("Malformed file!")
-      }
+    ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1]]) %>%
+      na.omit()
+    if (length(starts) != length(ends) || anyDuplicated(ends) != 0) {
+      abort("Malformed file!")
     }
   } else if (filetype == "Rnw") {
     starts <- grep(pattern$chunk.begin, lines, perl = TRUE)

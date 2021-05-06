@@ -28,4 +28,24 @@ test_that("can style .Rmd files", {
     filetype = "Rmd",
     write_tree = FALSE
   ), NA)
+
+  ## new 3-5
+  expect_warning(test_collection("rmd", "random3",
+    transformer = transform_mixed,
+    transformer_fun = style_text,
+    filetype = "Rmd",
+    write_tree = FALSE
+  ), NA)
+  expect_warning(test_collection("rmd", "random5",
+    transformer = transform_mixed,
+    transformer_fun = style_text,
+    filetype = "Rmd",
+    write_tree = FALSE
+  ), NA)
+  expect_warning(test_collection("rmd", "random6",
+    transformer = transform_mixed,
+    transformer_fun = style_text,
+    filetype = "Rmd",
+    write_tree = FALSE
+  ), NA)
 })
