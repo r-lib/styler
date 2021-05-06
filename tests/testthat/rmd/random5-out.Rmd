@@ -14,11 +14,11 @@ g <- function(y) {
 ```
 Final text
 ```{r}
-
+f
 ```
 Final text
 ```md
 ````{r}
 1 + 2
-```
 ````
+```

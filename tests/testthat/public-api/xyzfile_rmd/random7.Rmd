@@ -1,0 +1,23 @@
+Some text
+```{r}
+# Some R code
+f <- function(x) {
+  x
+}
+```
+More text before malformed chunk
+# More R code
+g <- function(y) {
+  y
+}
+```
+Final text
+```{r}
+
+```
+
+Final text
+```{r}
+```{r}
+1 + 2
+```
