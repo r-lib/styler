@@ -37,3 +37,16 @@ is_package <- function(root = here::here()) {
 add_trailing_linebreak <- function(x) {
   paste0(x, "\n")
 }
+
+
+#' Create the path to the precommit R.cache cache
+#'
+#' This function is only exported for use in hook scripts, but it's not intended
+#' to be called by the end-user directly.
+#' @param hook_id The id of the hook for which we want the relative cache
+#'   directory.
+#' @family hook script helpers
+#' @export
+dirs_R.cache <- function(hook_id) {
+  file.path("precommit", hook_id)
+}

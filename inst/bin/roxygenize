@@ -2,15 +2,15 @@
 
 "Run roxygen2::roxygenize()
 
-Obviously, this hook is only activated when any staged file passes the filter 
+Obviously, this hook is only activated when any staged file passes the filter
 specified in .pre-commit-hooks.yaml. Then, we check the time stamp of the last
 time we ran the hook. If any of our R files is younger than that, we consider
 running the hook. We next use {git2r} to inspect the cached diff of all .R files
-in the R/ directory, and not the files passed to this hook. If we find any 
-roxygen2 comment in the diff, we run `roxygen2::roxygenize(). The preliminary 
-use case for this is when we previously attempted to commit but check failed, so 
-on the second try without any other files changed, it will succeed. 
-This check should run *after* check that modify the files that are passed to 
+in the R/ directory, and not the files passed to this hook. If we find any
+roxygen2 comment in the diff, we run `roxygen2::roxygenize(). The preliminary
+use case for this is when we previously attempted to commit but check failed, so
+on the second try without any other files changed, it will succeed.
+This check should run *after* check that modify the files that are passed to
 them (like styler) because they will never modify their input .R files.
 
 Usage:
@@ -32,15 +32,7 @@ if (packageVersion("precommit") < "0.1.3.9001") {
   precommit::roxygen_assert_additinal_dependencies()
 }
 
-roxygenize_with_cache <- function(key, dirs) {
-  if (precommit::diff_requires_run_roxygenize()) {
-    roxygen2::roxygenise()
-    saveCache(object = Sys.time(), key = key, dirs = dirs)
-  }
-}
-
-library("R.cache")
-path_relative_cache <- file.path("precommit", "roxygenize")
+path_relative_cache <- precommit::dirs_R.cache('roxygenize')
 wd <- list(getwd())
 cache <- loadCache(key = wd, dirs = path_relative_cache)
 
@@ -52,8 +44,8 @@ if (!is.null(cache)) {
   all_files <- file.info(candidates)
   last_modified <- max(all_files$mtime)
   if (last_modified > cache[[1]]) {
-    roxygenize_with_cache(key = wd, dirs = path_relative_cache)
+    precommit::roxygenize_with_cache(key = wd, dirs = path_relative_cache)
   }
 } else {
-  roxygenize_with_cache(key = wd, dirs = path_relative_cache)
+  precommit::roxygenize_with_cache(key = wd, dirs = path_relative_cache)
 }

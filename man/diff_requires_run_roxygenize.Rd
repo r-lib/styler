@@ -25,7 +25,9 @@ diff_requires_run_roxygenize()
 }
 \seealso{
 Other hook script helpers: 
+\code{\link{dirs_R.cache}()},
 \code{\link{may_require_permanent_cache}()},
-\code{\link{roxygen_assert_additinal_dependencies}()}
+\code{\link{roxygen_assert_additinal_dependencies}()},
+\code{\link{roxygenize_with_cache}()}
 }
 \concept{hook script helpers}

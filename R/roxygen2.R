@@ -113,3 +113,33 @@ roxygen_assert_additinal_dependencies <- function() {
     ))
   }
 }
+
+#' Roxygen depending on cache state
+#'
+#' This function is only exported for use in hook scripts, but it's not intended
+#' to be called by the end-user directly.
+#' @family hook script helpers
+#' @export
+roxygenize_with_cache <- function(key, dirs) {
+  if (diff_requires_run_roxygenize()) {
+    out <- rlang::with_handlers(
+      roxygen2::roxygenise(),
+      error = function(e) e
+    )
+    if (inherits(out, "packageNotFoundError")) {
+      rlang::abort(paste0(
+        conditionMessage(out),
+        ". Please add the package as a dependency to ",
+        "`.pre-commit-config.yaml` -> `id: roxygenize` -> ",
+        "`additional_dependencies` and try again. The package must be ",
+        "specified so `renv::install()` understands it, e.g. like this:\n\n",
+        "    -   id: roxygenize",
+        "
+        additional_dependencies:
+        - r-lib/pkgapi
+        - dplyr@1.0.0\n\n"
+      ))
+    }
+    R.cache::saveCache(object = Sys.time(), key = key, dirs = dirs)
+  }
+}
