@@ -28,7 +28,7 @@ test_that("activated cache brings speedup on style_text() API on character vecto
     text, text,
     fun = style_text
   )
-  expect_gt(n, 55)
+  expect_gt(n, 40)
 })
 
 test_that("activated cache brings speedup on style_text() API on character scalar", {
