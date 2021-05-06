@@ -78,6 +78,7 @@ params
 parsable
 pkgapi
 pkgdown
+pkgload
 pre
 precommit
 precommithooks

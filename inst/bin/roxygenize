@@ -22,7 +22,7 @@ Options:
 " -> doc
 arguments <- docopt::docopt(doc)
 
-if (packageVersion("precommit") < "0.1.3.90001") {
+if (packageVersion("precommit") < "0.1.3.9001") {
   rlang::abort(paste(
     "This hooks only works with the R package {precommit} >= 0.1.3.9001",
     'Please upgrade with `remotes::install_github("lorenzwalthert/precommit")`.'
