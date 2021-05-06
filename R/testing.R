@@ -333,9 +333,30 @@ generate_test_samples <- function() {
 #' @include ui-caching.R
 clear_testthat_cache <- purrr::partial(cache_clear, "testthat", ask = FALSE)
 activate_testthat_cache <- purrr::partial(cache_activate, "testthat")
+
 fresh_testthat_cache <- function() {
   clear_testthat_cache()
   activate_testthat_cache()
+}
+
+#' Establish testing setup for current environment
+#'
+#' @details
+#' * make styler quiet.
+local_test_setup <- function(testthat_cache = FALSE,
+                             .local_envir = parent.frame()) {
+  ###
+  withr::local_options(list("styler.quiet" = TRUE), .local_envir = .local_envir)
+  if (testthat_cache) {
+    fresh_testthat_cache()
+    withr::defer(
+      {
+        clear_testthat_cache()
+        cache_deactivate()
+      },
+      envir = .local_envir
+    )
+  }
 }
 
 cache_more_specs_default <- function() {
