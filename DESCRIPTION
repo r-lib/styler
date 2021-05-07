@@ -21,7 +21,6 @@ Imports:
     rlang,
     rprojroot,
     rstudioapi,
-    styler,
     usethis (>= 2.0.0),
     withr,
     yaml
@@ -38,6 +37,7 @@ Suggests:
     rmarkdown,
     roxygen2,
     spelling,
+    styler,
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
