@@ -110,7 +110,7 @@ if (!on_cran()) {
         "installed with conda"
       )
     } else {
-      tempdir <- local_test_setup(use_precommit = FALSE)
+      tempdir <- local_test_setup(use_precommit = FALSE, quiet = FALSE)
       expect_message(
         uninstall_precommit(scope = "user", ask = "none", root = tempdir),
         "Removed pre-commit from"
