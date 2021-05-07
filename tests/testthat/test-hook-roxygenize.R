@@ -139,5 +139,3 @@ test_that("warns if there is any other warning", {
     "Missing name"
   )
 })
-
-# todo other warning:   # e.g. when there is a package listed that is not in DESCRIPTION
