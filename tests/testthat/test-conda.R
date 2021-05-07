@@ -6,7 +6,7 @@ if (!on_cran()) {
   })
 
   test_that("can use pre-commit", {
-    tempdir <- local_test_setup()
+    tempdir <- local_test_setup(quiet = FALSE)
     expect_message(
       use_precommit(open = FALSE, force = TRUE, root = tempdir),
       "to get the latest"
@@ -18,7 +18,7 @@ if (!on_cran()) {
   })
 
   test_that("fails early if repo is not a git repo ", {
-    tempdir <- local_test_setup(git = FALSE)
+    tempdir <- local_test_setup(git = FALSE, quiet = FALSE)
 
     expect_error(
       use_precommit(open = FALSE, root = tempdir),
@@ -45,7 +45,7 @@ if (!on_cran()) {
   })
 
   test_that("existing hooks are recognized", {
-    tempdir <- local_test_setup()
+    tempdir <- local_test_setup(quiet = FALSE)
     withr::with_dir(tempdir, {
       git2r::init()
       usethis::proj_set(".")
@@ -80,7 +80,7 @@ if (!on_cran()) {
 
   test_that("Can uninstall pre-commit (repo scope)", {
     # with all files there
-    tempdir <- local_test_setup(use_precommit = TRUE)
+    tempdir <- local_test_setup(use_precommit = TRUE, quiet = FALSE)
     expect_message(
       uninstall_precommit(scope = "repo", root = tempdir),
       "Uninstalled pre-commit from repo scope.*"
@@ -104,7 +104,7 @@ if (!on_cran()) {
 
   test_that("Can uninstall (userly)", {
     if (not_conda()) {
-      tempdir <- local_test_setup(use_precommit = TRUE)
+      tempdir <- local_test_setup(use_precommit = TRUE, quiet = FALSE)
       expect_error(
         uninstall_precommit(scope = "user", ask = "none", root = tempdir),
         "installed with conda"
@@ -131,7 +131,7 @@ if (!on_cran()) {
     if (!not_conda()) {
       expect_error(install_precommit(), NA)
     }
-    tempdir <- local_test_setup()
+    tempdir <- local_test_setup(quiet = FALSE)
     expect_message(
       use_precommit(
         example_remote_config(),
@@ -145,7 +145,7 @@ if (!on_cran()) {
     if (!not_conda()) {
       expect_message(install_precommit(), "already installed")
     }
-    tempdir <- local_test_setup(use_precommit = FALSE)
+    tempdir <- local_test_setup(use_precommit = FALSE, quiet = FALSE)
     withr::with_dir(
       tempdir,
       {

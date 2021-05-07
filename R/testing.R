@@ -182,11 +182,14 @@ not_conda <- function() {
 local_test_setup <- function(git = TRUE,
                              use_precommit = FALSE,
                              package = FALSE,
+                             quiet = TRUE,
                              ...,
                              .local_envir = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = .local_envir)
   withr::local_dir(dir, .local_envir = .local_envir)
-  withr::local_options("usethis.quiet" = TRUE, .local_envir = .local_envir)
+  if (quiet) {
+    withr::local_options("usethis.quiet" = TRUE, .local_envir = .local_envir)
+  }
   if (git) {
     git2r::init()
     withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
