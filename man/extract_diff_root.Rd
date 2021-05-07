@@ -10,7 +10,7 @@ extract_diff_root(root = here::here())
 \item{root}{The root of project.}
 }
 \description{
-This is useful to detect within a hook script if the core function
-from a hook such as \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} must run at all or not.
+This is useful to detect within a hook script if the core function from a
+hook such as \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} must run at all or not.
 }
 \keyword{internal}

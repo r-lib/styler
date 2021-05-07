@@ -20,8 +20,8 @@ extract_diff_files <- function(files) {
 
 #' Extract old and new lines from `git diff --cached`
 #'
-#' This is useful to detect within a hook script if the core function
-#' from a hook such as [roxygen2::roxygenize()] must run at all or not.
+#' This is useful to detect within a hook script if the core function from a
+#' hook such as [roxygen2::roxygenize()] must run at all or not.
 #' @param root The root of project.
 #' @keywords internal
 extract_diff_root <- function(root = here::here()) {
