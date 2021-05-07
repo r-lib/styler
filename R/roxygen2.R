@@ -97,8 +97,8 @@ roxygen_assert_additional_dependencies <- function() {
       "    -   id: roxygenize",
       "
         additional_dependencies:
-        - tidyr
-        - dplyr\n\n",
+        -    tidyr
+        -    dplyr\n\n",
       "Call ",
       "`precommit::snippet_generate('additional-deps-roxygenize')`",
       "and paste the ",
