@@ -21,6 +21,7 @@ Imports:
     rlang,
     rprojroot,
     rstudioapi,
+    styler,
     usethis (>= 2.0.0),
     withr,
     yaml
@@ -37,12 +38,9 @@ Suggests:
     rmarkdown,
     roxygen2,
     spelling,
-    styler (>= 1.3.2.9000),
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
-Remotes: 
-    r-lib/styler
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace", "collate",
     if (rlang::is_installed("pkgapi")) "pkgapi::api_roclet" else {
