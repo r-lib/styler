@@ -8,6 +8,7 @@ local_test_setup(
   git = TRUE,
   use_precommit = FALSE,
   package = FALSE,
+  quiet = TRUE,
   ...,
   .local_envir = parent.frame()
 )
