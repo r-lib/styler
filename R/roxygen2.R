@@ -122,6 +122,7 @@ roxygen_assert_additional_dependencies <- function() {
 #' @family hook script helpers
 #' @export
 #' @importFrom R.cache saveCache
+# fails if accessed with R.cache::saveCache()!
 roxygenize_with_cache <- function(key, dirs) {
   if (diff_requires_run_roxygenize()) {
     out <- rlang::with_handlers(
