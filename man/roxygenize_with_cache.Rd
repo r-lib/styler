@@ -6,6 +6,15 @@
 \usage{
 roxygenize_with_cache(key, dirs)
 }
+\arguments{
+\item{key}{An optional object from which a hexadecimal hash
+    code will be generated and appended to the filename.}
+
+\item{dirs}{A \code{\link[base]{character}} \code{\link[base]{vector}} constituting the path to the
+     cache subdirectory (of the \emph{cache root directory}
+     as returned by \code{\link[R.cache]{getCacheRootPath}}()) to be used.
+     If \code{\link[base]{NULL}}, the path will be the cache root path.}
+}
 \description{
 This function is only exported for use in hook scripts, but it's not intended
 to be called by the end-user directly.

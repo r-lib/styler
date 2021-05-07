@@ -31,6 +31,7 @@ repos:
         - reticulate@1.20
         - rlang@0.4.11
         - rmarkdown@2.8
+        - r-lib/pkgapi
         - roxygen2@7.1.1
         - rprojroot@2.0.2
         - rstudioapi@0.13

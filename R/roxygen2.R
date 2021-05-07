@@ -118,6 +118,7 @@ roxygen_assert_additinal_dependencies <- function() {
 #'
 #' This function is only exported for use in hook scripts, but it's not intended
 #' to be called by the end-user directly.
+#' @inheritParams R.cache::saveCache
 #' @family hook script helpers
 #' @export
 roxygenize_with_cache <- function(key, dirs) {
