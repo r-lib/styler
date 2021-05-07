@@ -6,7 +6,7 @@ test_that("snippet generation works", {
     NA
   )
   expect_match(
-    out, "^        - styler@.+$",
+    out, "^        - testthat@.+\n        - styler@.+$",
   )
   desc::desc_set("Remotes", "r-lib/styler")
   expect_warning(
@@ -14,6 +14,6 @@ test_that("snippet generation works", {
     "you have remote dependencies "
   )
   expect_match(
-    out, "^        - styler@.+$",
+    out, "^        - testthat@.+\n        - styler@.+$",
   )
 })
