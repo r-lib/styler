@@ -9,8 +9,8 @@
 #' - update default config in inst/
 #' - commit
 #' - git tag
-#' - run `inst/consistent-release-tag` hook with --release-mode (passing args to hooks
-#'   not possible interactively, hence we run in advance).
+#' - run `inst/consistent-release-tag` hook with --release-mode (passing args to
+#'   hooks not possible interactively, hence we run in advance).
 #' - commit and push with skipping `inst/consistent-release-tag`.
 #' - autoupdate own config file
 #' - bump description with dev

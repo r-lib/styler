@@ -78,11 +78,7 @@ test_that("change in formals alone triggers invalidation", {
 
 test_that("asserting installed dependencies", {
   withr::local_options("usethis.quiet" = TRUE)
-  withr::local_dir(withr::local_tempdir())
-  pkg_name <- "testPkg3"
-  usethis::create_package(pkg_name)
-  withr::local_dir(pkg_name)
-  usethis:::proj_set(".")
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
   installed <- c("pkgload", "rlang", "testthat")
   purrr::walk(installed, usethis::use_package)
   additional_pkg <- "blabdjfdf83928"
@@ -97,6 +93,33 @@ test_that("asserting installed dependencies", {
   writeLines(paste0(additional_pkg, "::blu"), "R/core.R")
   testthat::expect_error(
     roxygen_assert_additinal_dependencies(),
-    "requires all used packages to be listed"
+    "requires all\\* dependencies of your package"
+  )
+})
+
+test_that("roxygenize with cache gives helpful error", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  writeLines(c("#' This is a title", "#'", "#' More", "#' @name test", "NULL"), "R/blur.R")
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  expect_output(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "test.R"
+  )
+  # add pkg error
+  additional_pkg <- "blabdjfdf83928"
+  if (rlang::is_installed(additional_pkg)) {
+    rlang::abort(paste0(
+      "Package ", additional_pkg,
+      " is installed. This test cannot be ran"
+    ))
+  }
+  roxygen_field <- paste0(
+    'list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "',
+    additional_pkg, '::api_roclet"))'
+  )
+  desc::desc_set(Roxygen = roxygen_field)
+  expect_error(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "Please add the package as a dependency"
   )
 })
