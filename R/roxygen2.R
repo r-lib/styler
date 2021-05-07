@@ -80,7 +80,7 @@ diff_requires_run_roxygenize <- function(root = here::here()) {
 #' to be called by the end-user directly.
 #' @family hook script helpers
 #' @export
-roxygen_assert_additinal_dependencies <- function() {
+roxygen_assert_additional_dependencies <- function() {
   out <- rlang::with_handlers(
     # roxygen2 will load: https://github.com/r-lib/roxygen2/issues/771
     pkgload::load_all(quiet = TRUE),
@@ -121,6 +121,7 @@ roxygen_assert_additinal_dependencies <- function() {
 #' @inheritParams R.cache::saveCache
 #' @family hook script helpers
 #' @export
+#' @importFrom R.cache saveCache
 roxygenize_with_cache <- function(key, dirs) {
   if (diff_requires_run_roxygenize()) {
     out <- rlang::with_handlers(
@@ -145,6 +146,6 @@ roxygenize_with_cache <- function(key, dirs) {
     } else if (inherits(out, "warning")) {
       rlang::warn(conditionMessage(out))
     }
-    R.cache::saveCache(object = Sys.time(), key = key, dirs = dirs)
+    saveCache(object = Sys.time(), key = key, dirs = dirs)
   }
 }

@@ -81,10 +81,10 @@ test_that("asserting installed dependencies", {
   installed <- c("pkgload", "rlang", "testthat")
   purrr::walk(installed, usethis::use_package)
   writeLines(c("utils::adist", "rlang::is_installed"), "R/blur.R")
-  testthat::expect_silent(roxygen_assert_additinal_dependencies())
+  testthat::expect_silent(roxygen_assert_additional_dependencies())
   writeLines(generate_uninstalled_pkg_call(), "R/core.R")
   testthat::expect_error(
-    roxygen_assert_additinal_dependencies(),
+    roxygen_assert_additional_dependencies(),
     "requires all\\* dependencies of your package"
   )
 })
