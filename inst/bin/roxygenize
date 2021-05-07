@@ -21,7 +21,6 @@ Options:
 
 " -> doc
 arguments <- docopt::docopt(doc)
-library(R.cache)
 if (packageVersion("precommit") < "0.1.3.9001") {
   rlang::abort(paste(
     "This hooks only works with the R package {precommit} >= 0.1.3.9001",
@@ -34,7 +33,7 @@ if (packageVersion("precommit") < "0.1.3.9001") {
 
 path_relative_cache <- precommit::dirs_R.cache('roxygenize')
 wd <- list(getwd())
-cache <- loadCache(key = wd, dirs = path_relative_cache)
+cache <- R.cache::loadCache(key = wd, dirs = path_relative_cache)
 
 if (!is.null(cache)) {
   candidates <- intersect(
