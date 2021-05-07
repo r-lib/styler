@@ -81,41 +81,36 @@ test_that("asserting installed dependencies", {
   local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
   installed <- c("pkgload", "rlang", "testthat")
   purrr::walk(installed, usethis::use_package)
-  additional_pkg <- "blabdjfdf83928"
-  if (rlang::is_installed(additional_pkg)) {
-    rlang::abort(paste0(
-      "Package ", additional_pkg,
-      " is installed. This test cannot be ran"
-    ))
-  }
   writeLines(c("utils::adist", "rlang::is_installed"), "R/blur.R")
   testthat::expect_silent(roxygen_assert_additinal_dependencies())
-  writeLines(paste0(additional_pkg, "::blu"), "R/core.R")
+  writeLines(paste0(generate_uninstalled_pkg_call(), "R/core.R"))
   testthat::expect_error(
     roxygen_assert_additinal_dependencies(),
     "requires all\\* dependencies of your package"
   )
 })
 
-test_that("roxygenize with cache gives helpful error", {
+test_that("roxygenize works in general", {
   local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
   writeLines(c("#' This is a title", "#'", "#' More", "#' @name test", "NULL"), "R/blur.R")
+  # works
   mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
   expect_output(
     roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
     "test.R"
   )
-  # add pkg error
-  additional_pkg <- "blabdjfdf83928"
-  if (rlang::is_installed(additional_pkg)) {
-    rlang::abort(paste0(
-      "Package ", additional_pkg,
-      " is installed. This test cannot be ran"
-    ))
-  }
+})
+
+
+test_that("fails when package is called but not installed", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  writeLines(c("NULL"), "R/blur.R")
+  # works
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  # when there is a missing package
   roxygen_field <- paste0(
     'list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "',
-    additional_pkg, '::api_roclet"))'
+    generate_uninstalled_pkg_call(), '"))'
   )
   desc::desc_set(Roxygen = roxygen_field)
   expect_error(
@@ -123,3 +118,27 @@ test_that("roxygenize with cache gives helpful error", {
     "Please add the package as a dependency"
   )
 })
+
+test_that("fails when there is invalid code", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  # when there is a missing package
+  writeLines(c("invalid code stuff /3kj"), "R/more.R")
+  expect_error(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "[Uu]nexpected symbol"
+  )
+})
+
+test_that("warns if there is any other warning", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  writeLines(c("#' This is a title", "#'", "#' More", "NULL"), "R/blur.R")
+
+  expect_warning(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "Missing name"
+  )
+})
+
+# todo other warning:   # e.g. when there is a package listed that is not in DESCRIPTION

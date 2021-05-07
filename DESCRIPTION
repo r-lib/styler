@@ -26,6 +26,7 @@ Imports:
     yaml
 Suggests: 
     desc,
+    digest,
     git2r,
     glue,
     knitr,

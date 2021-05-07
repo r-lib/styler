@@ -198,7 +198,28 @@ local_test_setup <- function(git = TRUE,
     usethis::create_package(dir)
     withr::local_dir(dir)
     usethis::proj_set(dir)
+    usethis::use_testthat()
   }
 
   dir
+}
+
+#' Generate a random package name that is not installed
+#' @param n The number of times we should try
+#' @keywords internal
+generate_uninstalled_pkg_name <- function(n = 10) {
+  additional_pkg <- paste0("package", digest::digest(Sys.time()))
+  if (rlang::is_installed(additional_pkg)) {
+    if (n > 0) {
+      generate_uninstalled_pkg_name(n - 1)
+    } else {
+      rlang::abort("could not find a package name that was not yet installed")
+    }
+  } else {
+    additional_pkg
+  }
+}
+
+generate_uninstalled_pkg_call <- function(n = 10) {
+  paste0(generate_uninstalled_pkg_name(n), "::x")
 }

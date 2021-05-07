@@ -139,6 +139,10 @@ roxygenize_with_cache <- function(key, dirs) {
         - r-lib/pkgapi
         - dplyr@1.0.0\n\n"
       ))
+    } else if (inherits(out, "error")) {
+      rlang::abort(conditionMessage(out))
+    } else if (inherits(out, "warning")) {
+      rlang::warn(conditionMessage(out))
     }
     R.cache::saveCache(object = Sys.time(), key = key, dirs = dirs)
   }
