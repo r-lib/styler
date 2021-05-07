@@ -186,13 +186,13 @@ local_test_setup <- function(git = TRUE,
                              .local_envir = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = .local_envir)
   withr::local_dir(dir, .local_envir = .local_envir)
-  withr::local_options("usethis.quiet" = TRUE)
+  withr::local_options("usethis.quiet" = TRUE, .local_envir = .local_envir)
   if (git) {
     git2r::init()
     withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
   }
   if (use_precommit) {
-    suppressMessages(use_precommit(...))
+    suppressMessages(use_precommit(..., root = dir))
   }
   if (package) {
     usethis::create_package(dir)
