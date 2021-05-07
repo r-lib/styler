@@ -111,7 +111,8 @@ snippet_generate <- function(snippet = "", root = here::here()) {
     rlang::inform(
       "Generating snippet using installed versions of all dependencies.\n"
     )
-    deps <- desc::desc_get_deps()
+    deps <- desc::desc_get_deps() %>%
+      sort()
     paste0(
       "        - ", deps$package, "@",
       purrr::map_chr(deps$package, ~ as.character(packageVersion(.x))), "\n",
