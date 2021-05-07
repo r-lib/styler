@@ -114,7 +114,7 @@ snippet_generate <- function(snippet = "", root = here::here()) {
     deps <- desc::desc_get_deps()
     deps <- deps[order(deps$package), ]
     paste0(
-      "        - ", deps$package, "@",
+      "        -    ", deps$package, "@",
       purrr::map_chr(deps$package, ~ as.character(packageVersion(.x))), "\n",
       collapse = ""
     ) %>%
@@ -138,7 +138,7 @@ Remotes:
 You need in your `.pre-commit-config.yaml`
 
         additional_dependencies:
-        - tidyverse/tidyr@2fd80d5
+        -    tidyverse/tidyr@2fd80d5
       "
       ))
     }
