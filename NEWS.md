@@ -16,6 +16,8 @@
 
 * Break the line between `%>%` and `{` inside and outside function calls (#825).
 
+* improved test setup with fixtures and similar (#798).
+
 # styler 1.5.1
 
 ## Alignment detection
