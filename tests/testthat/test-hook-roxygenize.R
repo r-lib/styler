@@ -74,3 +74,68 @@ test_that("change in formals alone triggers invalidation", {
     git2r::commit(".", "clear case 5")
   })
 })
+
+
+test_that("asserting installed dependencies", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  installed <- c("pkgload", "rlang", "testthat")
+  purrr::walk(installed, usethis::use_package)
+  writeLines(c("utils::adist", "rlang::is_installed"), "R/blur.R")
+  testthat::expect_silent(roxygen_assert_additional_dependencies())
+  writeLines(generate_uninstalled_pkg_call(), "R/core.R")
+  testthat::expect_error(
+    roxygen_assert_additional_dependencies(),
+    "requires all\\* dependencies of your package"
+  )
+})
+
+test_that("roxygenize works in general", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  writeLines(c("#' This is a title", "#'", "#' More", "#' @name test", "NULL"), "R/blur.R")
+  # works
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  expect_output(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "test.R"
+  )
+})
+
+
+test_that("fails when package is called but not installed", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  writeLines(c("NULL"), "R/blur.R")
+  # works
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  # when there is a missing package
+  roxygen_field <- paste0(
+    'list(markdown = TRUE, roclets = c("rd", "namespace", "collate", "',
+    generate_uninstalled_pkg_call(), '"))'
+  )
+  desc::desc_set(Roxygen = roxygen_field)
+  expect_error(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "Please add the package as a dependency"
+  )
+})
+
+test_that("fails when there is invalid code", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  # when there is a missing package
+  writeLines(c("invalid code stuff /3kj"), "R/more.R")
+  expect_error(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "[Uu]nexpected symbol"
+  )
+})
+
+test_that("warns if there is any other warning", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  writeLines(c("#' This is a title", "#'", "#' More", "NULL"), "R/blur.R")
+
+  expect_warning(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "Missing name"
+  )
+})

@@ -5,16 +5,18 @@
 \title{Testing utilities}
 \usage{
 local_test_setup(
-  .local_envir = parent.frame(),
   git = TRUE,
   use_precommit = FALSE,
-  ...
+  package = FALSE,
+  quiet = TRUE,
+  ...,
+  .local_envir = parent.frame()
 )
 }
 \arguments{
-\item{.local_envir}{\verb{[environment]}\cr The environment to use for scoping.}
-
 \item{git}{Whether or not to init git in the local directory.}
+
+\item{.local_envir}{\verb{[environment]}\cr The environment to use for scoping.}
 
 \item{use_precommmit}{Whether or not to \code{\link[=use_precommit]{use_precommit()}}.}
 }

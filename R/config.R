@@ -15,8 +15,8 @@
 #' pre-commit with [use_precommit()] using the argument `config_source` to
 #' copy an existing config file into your repo. This argument defaults to the R
 #' option `precommit.config_source`, so you may want to set this option in
-#' your `.Rprofile` for convenience. Note that this is **not** equivalent
-#' to the `--config` option in the CLI command `pre-commit install` and similar,
+#' your `.Rprofile` for convenience. Note that this is **not** equivalent to the
+#' `--config` option in the CLI command `pre-commit install` and similar,
 #' which do *not* copy a config file into a project root (and allow to put it
 #' under version control), but rather link it in some more or less transparent
 #' way.
@@ -63,7 +63,7 @@ use_precommit_config <- function(config_source = getOption("precommit.config_sou
     "All available hooks: ",
     "https://pre-commit.com/hooks.html",
     "R specific hooks:",
-    "https://github.com/lorenzwalthert/precommit."
+    hooks_repo, "."
   ))
   config_source
 }

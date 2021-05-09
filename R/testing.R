@@ -179,17 +179,50 @@ not_conda <- function() {
 #' @param git Whether or not to init git in the local directory.
 #' @param use_precommmit Whether or not to [use_precommit()].
 #' @keywords internal
-local_test_setup <- function(.local_envir = parent.frame(),
-                             git = TRUE,
+local_test_setup <- function(git = TRUE,
                              use_precommit = FALSE,
-                             ...) {
+                             package = FALSE,
+                             quiet = TRUE,
+                             ...,
+                             .local_envir = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = .local_envir)
+  withr::local_dir(dir, .local_envir = .local_envir)
+  if (quiet) {
+    withr::local_options("usethis.quiet" = TRUE, .local_envir = .local_envir)
+  }
   if (git) {
-    git2r::init(path = dir)
+    git2r::init()
     withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
   }
   if (use_precommit) {
-    suppressMessages(use_precommit(...))
+    suppressMessages(use_precommit(..., root = dir))
   }
+  if (package) {
+    usethis::create_package(dir)
+    withr::local_dir(dir)
+    usethis::proj_set(dir)
+    usethis::use_testthat()
+  }
+
   dir
+}
+
+#' Generate a random package name that is not installed
+#' @param n The number of times we should try
+#' @keywords internal
+generate_uninstalled_pkg_name <- function(n = 10) {
+  additional_pkg <- paste0("package", digest::digest(Sys.time()))
+  if (rlang::is_installed(additional_pkg)) {
+    if (n > 0) {
+      generate_uninstalled_pkg_name(n - 1)
+    } else {
+      rlang::abort("could not find a package name that was not yet installed")
+    }
+  } else {
+    additional_pkg
+  }
+}
+
+generate_uninstalled_pkg_call <- function(n = 10) {
+  paste0(generate_uninstalled_pkg_name(n), "::x")
 }

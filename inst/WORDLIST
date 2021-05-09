@@ -40,6 +40,7 @@ gh
 github
 gitignore
 gsub
+Homebrew
 href
 http
 https
@@ -77,6 +78,7 @@ params
 parsable
 pkgapi
 pkgdown
+pkgload
 pre
 precommit
 precommithooks
@@ -90,6 +92,7 @@ rds
 Rds
 readLines
 readme
+recognised
 renv
 Renviron
 repo

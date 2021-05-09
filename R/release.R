@@ -9,8 +9,8 @@
 #' - update default config in inst/
 #' - commit
 #' - git tag
-#' - run `inst/consistent-release-tag` hook with --release-mode (passing args to hooks
-#'   not possible interactively, hence we run in advance).
+#' - run `inst/consistent-release-tag` hook with --release-mode (passing args to
+#'   hooks not possible interactively, hence we run in advance).
 #' - commit and push with skipping `inst/consistent-release-tag`.
 #' - autoupdate own config file
 #' - bump description with dev
@@ -135,7 +135,7 @@ release_prechecks <- function(bump, is_cran) {
 update_rev_in_config <- function(new_version,
                                  path = "inst/pre-commit-config.yaml") {
   config <- readLines(path)
-  ours <- grep("-   repo: https://github.com/lorenzwalthert/precommit", config, fixed = TRUE)
+  ours <- grep(paste0("-   repo: ", hooks_repo), config, fixed = TRUE)
   others <- setdiff(grep("-   repo:", config, fixed = TRUE), ours)
   next_after_ours <- others[others > ours][1]
   rev <- grep("rev:", config)

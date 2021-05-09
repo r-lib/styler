@@ -19,8 +19,7 @@ arguments <- docopt::docopt(doc)
 
 path_config <- c(
   fs::path("inst", "pre-commit-config-pkg.yaml"),
-  fs::path("inst", "pre-commit-config-proj.yaml"),
-  if (!arguments$release_mode) fs::path(".pre-commit-config.yaml")
+  fs::path("inst", "pre-commit-config-proj.yaml")
 )
 
 
