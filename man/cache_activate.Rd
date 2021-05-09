@@ -5,9 +5,9 @@
 \alias{cache_deactivate}
 \title{Activate or deactivate the styler cache}
 \usage{
-cache_activate(cache_name = NULL, verbose = TRUE)
+cache_activate(cache_name = NULL, verbose = !getOption("styler.quiet", FALSE))
 
-cache_deactivate(verbose = TRUE)
+cache_deactivate(verbose = !getOption("styler.quiet", FALSE))
 }
 \arguments{
 \item{cache_name}{The name of the styler cache to use. If

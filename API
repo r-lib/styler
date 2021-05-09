@@ -2,9 +2,9 @@
 
 ## Exported functions
 
-cache_activate(cache_name = NULL, verbose = TRUE)
+cache_activate(cache_name = NULL, verbose = !getOption("styler.quiet", FALSE))
 cache_clear(cache_name = NULL, ask = TRUE)
-cache_deactivate(verbose = TRUE)
+cache_deactivate(verbose = !getOption("styler.quiet", FALSE))
 cache_info(cache_name = NULL, format = "both")
 create_style_guide(initialize = default_style_guide_attributes, line_break = NULL, space = NULL, token = NULL, indention = NULL, use_raw_indention = FALSE, reindention = tidyverse_reindention(), style_guide_name = NULL, style_guide_version = NULL, more_specs_style_guide = NULL, transformers_drop = specify_transformers_drop())
 default_style_guide_attributes(pd_flat)
