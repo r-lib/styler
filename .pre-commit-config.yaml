@@ -3,7 +3,7 @@
 default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: 1435aba4f2c91753517512d90fe9b4995db59874
+    rev: a632da39a23e806f06261ebf0cf294e1b70428f2
     hooks: 
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
@@ -75,7 +75,7 @@ repos:
     -   id: no-browser-statement
     -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: 11a996eec600aa64d1cc12859d9bffbc6422836c
     hooks: 
     -   id: check-added-large-files
     -   id: end-of-file-fixer
