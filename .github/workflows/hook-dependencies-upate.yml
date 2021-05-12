@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '43 20 12 * *'
+    - cron:  '20 21 12 * *'
 
 name: Hook dependency updates
 
@@ -24,11 +24,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3.9.1
         with:
-          token: ${{ secrets.PAT }}
           commit-message: Update renv dependencies
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
           branch: hook-dependencies-update
           delete-branch: true
           title: 'Hook dependencies update'
