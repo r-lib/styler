@@ -21,6 +21,7 @@ Imports:
     rlang,
     rprojroot,
     rstudioapi,
+    tibble,
     usethis (>= 2.0.0),
     withr,
     yaml

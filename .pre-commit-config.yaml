@@ -38,6 +38,7 @@ repos:
         -    spelling@2.2
         -    styler@1.4.1
         -    testthat@3.0.2
+        -    tibble@3.1.1
         -    usethis@2.0.1
         -    withr@2.4.2
         -    yaml@2.2.1    # codemeta must be above use-tidy-description when both are used

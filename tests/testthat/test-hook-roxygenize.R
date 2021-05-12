@@ -131,15 +131,15 @@ test_that("fails gratefully when not installed package is called (packageNotFoun
   )
 })
 
-test_that("fails gratefully when not installed package is required (not packageNotFoundError)", {
+test_that("fails gratefully when not installed package is required according to `DESCRIPTION`", {
   local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
-  writeLines(generate_uninstalled_pkg_call(), "tests/test-xyr.R")
-  # works
+  desc::desc_set_deps(
+    tibble::tibble(type = "Imports", package = generate_uninstalled_pkg_name(), version = "*")
+  )
   mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
-  # when there is a missing package
   expect_error(
     roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
-    "Please add the package as a dependency"
+    "Please add the package"
   )
 })
 
