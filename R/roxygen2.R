@@ -129,7 +129,10 @@ roxygenize_with_cache <- function(key, dirs) {
       roxygen2::roxygenise(),
       error = function(e) e
     )
-    if (inherits(out, "packageNotFoundError")) {
+    otherwise_missing <- grepl(
+      "Dependency package\\(s\\) .* not available", out$message
+    )
+    if (inherits(out, "packageNotFoundError") || otherwise_missing) {
       rlang::abort(paste0(
         conditionMessage(out),
         ". Please add the package as a dependency to ",
