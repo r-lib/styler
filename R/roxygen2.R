@@ -129,10 +129,13 @@ roxygenize_with_cache <- function(key, dirs) {
       roxygen2::roxygenise(),
       error = function(e) e
     )
-    if (inherits(out, "packageNotFoundError")) {
+    if (
+      inherits(out, "packageNotFoundError") ||
+        ("message" %in% names(out) && grepl("Dependency package(\\(s\\))? .* not available", out$message))
+    ) {
       rlang::abort(paste0(
         conditionMessage(out),
-        ". Please add the package as a dependency to ",
+        " Please add the package as a dependency to ",
         "`.pre-commit-config.yaml` -> `id: roxygenize` -> ",
         "`additional_dependencies` and try again. The package must be ",
         "specified so `renv::install()` understands it, e.g. like this:\n\n",

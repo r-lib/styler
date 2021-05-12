@@ -130,6 +130,7 @@ stopifnot
 styler
 Sys
 testthat
+tibble
 tidyverse
 travis
 tryCatch
