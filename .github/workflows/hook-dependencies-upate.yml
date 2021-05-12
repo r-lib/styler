@@ -1,12 +1,12 @@
 on:
   schedule:
-    - cron:  '20 21 12 * *'
+    - cron:  '30 21 12 * *'
 
 name: Hook dependency updates
 
 jobs:
   hook-dependencies-update:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
