@@ -5,7 +5,7 @@ refs_install()
 benchmark_run_ref(
   expr_before_benchmark = c("library(styler)", "cache_deactivate()"),
   without_cache = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))',
-  n = 10
+  n = 30
 )
 
 styler::cache_clear()
@@ -13,7 +13,7 @@ styler::cache_clear()
 benchmark_run_ref(
   expr_before_benchmark = c("library(styler)", "cache_activate()"),
   cache_applying = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))',
-  n = 10
+  n = 30
 )
 
 styler::cache_clear()
@@ -27,7 +27,7 @@ benchmark_run_ref(
     "gert::git_reset_hard(repo = 'touchstone/sources/here')",
     'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
   ),
-  n = 10
+  n = 30
 )
 
 styler::cache_clear()
