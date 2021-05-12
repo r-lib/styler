@@ -119,9 +119,21 @@ test_that("fails when package is called but not installed in roclets", {
 })
 
 
-test_that("fails when package is called but not installed", {
+test_that("fails gratefully when not installed package is called (packageNotFoundError)", {
   local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
   writeLines(generate_uninstalled_pkg_call(), "R/blur.R")
+  # works
+  mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
+  # when there is a missing package
+  expect_error(
+    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    "Please add the package as a dependency"
+  )
+})
+
+test_that("fails gratefully when not installed package is required (not packageNotFoundError)", {
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  writeLines(generate_uninstalled_pkg_call(), "tests/test-xyr.R")
   # works
   mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
   # when there is a missing package
