@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '00 21 14 * *'
+    - cron:  '37 21 14 * *'
 
 name: Hook dependency updates
 
