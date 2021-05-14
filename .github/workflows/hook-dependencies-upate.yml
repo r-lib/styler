@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '20 18 14 * *'
+    - cron:  '00 21 14 * *'
 
 name: Hook dependency updates
 
@@ -29,6 +29,7 @@ jobs:
           install.packages('jsonlite')
           renv_deps <- names(jsonlite::read_json('renv.lock')$Packages)
           renv::load()
+          renv::restore()
           can_be_updated <- renv::update(renv_deps)
           renv::snapshot(packages = renv_deps)
         shell: Rscript {0}
