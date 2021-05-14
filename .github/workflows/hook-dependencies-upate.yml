@@ -26,6 +26,7 @@ jobs:
       - name: renv update
         run: |
           install.packages('renv')
+          install.packages('jsonlite')
           renv::load()
           renv_deps <- names(jsonlite::read_json('renv.lock')$Packages)
           can_be_updated <- renv::update(renv_deps)
