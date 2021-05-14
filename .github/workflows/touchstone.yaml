@@ -1,5 +1,5 @@
 name: Continuous Benchmarks
-on: pull_request
+on: pull_request_target
 jobs:
   prepare:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
       - name: Ensure base branch is fetched
         run: |
           git checkout -b $GITHUB_HEAD_REF
-          git branch $GITHUB_BASE_REF remotes/origin/$GITHUB_BASE_REF
+          # git branch $GITHUB_BASE_REF origin/$GITHUB_BASE_REF
       - name: Setup R
         uses: r-lib/actions/setup-r@master
       - name: Query dependencies
@@ -73,7 +73,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("lorenzwalthert/touchstone")
-          remotes::install_cran('ggplot2')
+          remotes::install_cran(c('ggplot2', 'dplyr'))
           pkg <- basename(getwd())
           if (pkg %in% rownames(installed.packages())) {
             remove.packages(pkg)
@@ -91,7 +91,7 @@ jobs:
           mkdir -p touchstone/sources
           mkdir -p touchstone/pr-comment
           mkdir -p touchstone/plots
-          echo "Here is how the current PR would change benchmark results when merged into $GITHUB_BASE_REF:" > touchstone/pr-comment/info.txt
+          echo "This is how benchmark results would change (along with a 95% confience interval in relative change) if $(git rev-parse HEAD) and ancestors are merged into $GITHUB_BASE_REF:" > touchstone/pr-comment/info.txt
           echo "$GITHUB_EVENT_PULL_REQUEST_HEAD_SHA" >> touchstone/pr-comment/info.txt
       - name: Run benchmarks
         run: Rscript -e 'touchstone::with_touchstone_lib("touchstone/script.R")'
@@ -108,3 +108,11 @@ jobs:
           name: results
       - name: comment PR
         run: cat touchstone/pr-comment/info.txt
+      - name: c/p text artifact to right location
+        run: |
+          mv touchstone/pr-comment/info.txt .github/workflows/info.txt
+      - uses: harupy/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: info.txt
