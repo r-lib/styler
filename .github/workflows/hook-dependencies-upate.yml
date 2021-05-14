@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '30 22 12 * *'
+    - cron:  '30 12 14 * *'
 
 name: Hook dependency updates
 
@@ -27,8 +27,9 @@ jobs:
         run: |
           install.packages('renv')
           renv::load()
-          can_be_updated <- renv::update()
-          renv::snapshot(packages = names(jsonlite::read_json('renv.lock')$Packages))
+          renv_deps <- names(jsonlite::read_json('renv.lock')$Packages)
+          can_be_updated <- renv::update(renv_deps)
+          renv::snapshot(packages = renv_deps)
         shell: Rscript {0}
 
       - name: Create Pull Request
