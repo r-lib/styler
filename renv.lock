@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.3",
+    "Version": "4.0.5",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -532,15 +532,10 @@
     },
     "styler": {
       "Package": "styler",
-      "Version": "1.4.1.9001",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "r-lib",
-      "RemoteRepo": "styler",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "4250d57bd638e745dd7a09aee8cf49064d672a40",
-      "RemoteHost": "api.github.com",
-      "Hash": "c19fb6d7c036e4b733594db58061420c"
+      "Version": "1.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2ec6308547ffe73208cef3ef3766fc33"
     },
     "sys": {
       "Package": "sys",
