@@ -61,7 +61,7 @@
 * `multi_line` attribute in parse table is now integer, not boolean (#782).
 * style guide used in Addin is verified when set via R option (#789).
 * improve pkgdown author URLs (#775).
-
+* Upgrade touchstone infra ().
 
 # styler 1.4.1
 
