@@ -341,6 +341,9 @@ fresh_testthat_cache <- function() {
 
 #' Establish testing setup for current environment
 #'
+#' @param testthat_cache Whether or not to create and activate a fresh testthat
+#'   cache.
+#' @param .local_envir The environment to use for scoping.
 #' @details
 #' * make styler quiet.
 local_test_setup <- function(testthat_cache = FALSE,
