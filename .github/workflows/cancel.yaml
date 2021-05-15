@@ -1,7 +1,7 @@
 name: Cancel
 on:
   workflow_run:
-    workflows: ["R-CMD-check", "Continuous Benchmarks", "pkgdown", "Commands", "test-coverage"]
+    workflows: ["R-CMD-check", "Continuous Benchmarks (Comment)", "Continuous Benchmarks (Receive)", "pkgdown", "Commands", "test-coverage"]
     types:
       - requested
 jobs:
