@@ -48,9 +48,16 @@ deps_in_desc <- function(file, arguments) {
   )
   if (length(private) > 0) {
     cat(
-      "You should not call any function with `:::` unless it's a function you ",
+      "You should generally not call any function with `:::` unless it's a function you ",
       "define yourself in this package. The following files have such function calls: ",
-      paste0(file, collapse = ", "),
+      paste0(file, collapse = ", "), "\n\n",
+      "If you still think `:::` is a good idea, you can ",
+      "allow private imports in your `.pre-commit-config.yaml` like this:
+      
+    -   id: deps-in-desc
+        args: [--allow_private_imports]
+        
+      ",
       sep = ""
     )
     out <- FALSE
