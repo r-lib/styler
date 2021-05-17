@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '47 22 17 * *'
+    - cron:  '47 21 17 * *'
 
 name: Hook dependency updates
 
@@ -59,14 +59,14 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             await octokit.request('PATCH /repos/{owner}/{repo}/pulls/{pull_number}', {
-              owner: {owner},
-              repo: {repo},
-              pull_number: {pull_number},
+              owner: '{owner}',
+              repo: '{repo}',
+              pull_number: '{pull_number}',
               state: 'closed'
             });
             await octokit.request('PATCH /repos/{owner}/{repo}/pulls/{pull_number}', {
-              owner: {owner},
-              repo: {repo},
-              pull_number: {pull_number},
+              owner: '{owner}',
+              repo: '{repo}',
+              pull_number: '{pull_number}',
               state: 'open'
             })
