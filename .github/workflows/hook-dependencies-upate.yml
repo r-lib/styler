@@ -10,6 +10,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RENV_PATHS_ROOT: ~/.local/share/renv
+      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"
     steps:
       - uses: actions/checkout@v2
 
