@@ -18,20 +18,19 @@
   `language: script` from the [pre-commit framework](https://pre-commit.com). 
   This requires `pre-commit >= 2.11.1`. All hooks and dependencies are now 
   contained in a virtual environment with [`{renv}`](https://rstudio.github.io/renv/)
-  (#233). Thanks to {renv}'s excellent 
+  (#233, #250, #260). Thanks to {renv}'s excellent 
   [caching](https://rstudio.github.io/renv/articles/renv.html#cache-1), this 
   does not consume much space and is fast. This makes output
   of hooks more consistent across different local setups, make manual dependency
   management redundant and will facilitate running R hooks as part of CI/CD, 
   e.g. https://pre-commit.ci or [GitHub Actions](https://github.com/pre-commit/action)
-  along with arbitrary other hooks.
-  
+  along with arbitrary other hooks. 
 - Because hooks run in a virtual environment and the `roxygenize` hook runs
   `pkgload::load_all()`, you need to list all dependencies of your package in
   `additional_dependencies` field in `.pre-commit-config.yaml`. You will be 
   prompted to add them if they are missing, 
   `precommit::snippet_generate("additional-deps-roxygenize")` generates
-  the code you can copy/paste ().
+  the code you can copy/paste (#247, #248, #249).
 
 
 **Minor changes**
