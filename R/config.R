@@ -60,10 +60,8 @@ use_precommit_config <- function(config_source = getOption("precommit.config_sou
   }
   usethis::ui_todo(c(
     "Edit .precommit-hooks.yaml to (de)activate the hooks you want to use. ",
-    "All available hooks: ",
-    "https://pre-commit.com/hooks.html",
-    "R specific hooks:",
-    hooks_repo, "."
+    "All available hooks: https://pre-commit.com/hooks.html",
+    paste("R specific hooks:", hooks_repo)
   ))
   config_source
 }
