@@ -57,7 +57,6 @@ jobs:
             [1]: https://github.com/peter-evans/create-pull-request
       - name: Close and re-open PR to trigger GH actions (1)
         uses: octokit/request-action@v2.0.2
-        id: close PR
         with:
           route: PATCH /repos/{owner}/{repo}/pulls/{pull_number}
           owner: lorenzwalthert
@@ -68,7 +67,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Close and re-open PR to trigger GH actions (2)
         uses: octokit/request-action@v2.0.2
-        id: re-open PR
         with:
           route: PATCH /repos/{owner}/{repo}/pulls/{pull_number}
           owner: lorenzwalthert
