@@ -6,8 +6,7 @@ on:
     branches:
       - master
 
-name: Hook tests
-
+name: Legacy hook tests
 jobs:
   hook-test:
     runs-on: ${{ matrix.config.os }}
