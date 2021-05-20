@@ -34,6 +34,7 @@ jobs:
         run: |
           git fetch origin refs/tags/v0.1.3:refs/tags/v0.1.3
           git checkout v0.1.3 -- inst/bin
+          git checkout v0.1.3 -- tests/testthat/test-all.R  
       - name: Query dependencies
         run: |
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
