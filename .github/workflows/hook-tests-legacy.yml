@@ -6,8 +6,7 @@ on:
     branches:
       - master
 
-name: Hook tests
-
+name: Legacy hook tests
 jobs:
   hook-test:
     runs-on: ${{ matrix.config.os }}
@@ -31,6 +30,11 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
+      - name: checkout old hook scripts
+        run: |
+          git fetch origin refs/tags/v0.1.3:refs/tags/v0.1.3
+          git checkout v0.1.3 -- inst/bin
+          git checkout v0.1.3 -- tests/testthat/test-all.R  
       - name: Query dependencies
         run: |
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
@@ -65,18 +69,6 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "18.04"), sep = "\n")')
-      - name: Prepare hook environment
-        run: |
-          source('renv/activate.R')
-          renv::restore()
-          renv::install(getwd(), dependencies = FALSE) 
-          # needed to make sure renv is activated in run_test() 
-          activate <- c(
-            "if (nzchar(Sys.getenv('R_PRECOMMIT_HOOK_ENV')))",
-            paste0("renv::load('", getwd(), "')")
-          )
-          writeLines(activate, '~/.Rprofile') 
-        shell: Rscript {0}
       - name: Perpare testing environment
         run: |
           # testing dependencies (incl. {precommit}) live in global R library, 
@@ -85,9 +77,9 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) {
             install.packages("renv", repos = c(CRAN = "https://cloud.r-project.org"))
           }
-          renv::install(c('testthat', 'devtools'))
-          # some testing infrastructure we need is in R/testing.R
-          renv::install(getwd())
+          renv::install(c('testthat', 'devtools', 'desc'))
+          renv::install(desc::desc_get_deps()$package) # install all deps
+          renv::install(getwd()) 
         shell: Rscript {0}
       - name: Session info (testing environment)
         run: |
@@ -100,7 +92,7 @@ jobs:
         run: |
           devtools::load_all()
           testthat::test_file(
-            "tests/testthat/test-hooks.R",
+            "tests/testthat/test-all.R",
             reporter = testthat::MultiReporter$new(list(
               testthat::CheckReporter$new(), testthat::FailReporter$new()
             ))
@@ -110,14 +102,6 @@ jobs:
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
-      - name: Assert no leakage from testing to hook env (1/2)
-        run: |
-          Rscript -e "renv::install('usethis'); path_pkg <- file.path(tempdir(), 'someP'); usethis::create_package(path_pkg); renv::install(path_pkg)"
-      - name: Assert no leakage from testing to hook env (2/2)
-        env: 
-            R_PRECOMMIT_HOOK_ENV: "1"
-        run: |
-          Rscript -e "if ('someP' %in% rownames(installed.packages())) stop('environment isolation not working: You installed a package into the testing environment and it is available in the hook environment')"
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
