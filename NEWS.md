@@ -18,7 +18,7 @@
   `language: script` from the [pre-commit framework](https://pre-commit.com). 
   This requires `pre-commit >= 2.11.1`. All hooks and dependencies are now 
   contained in a virtual environment with [`{renv}`](https://rstudio.github.io/renv/)
-  (#233, #250, #260). Thanks to {renv}'s excellent 
+  (#233, #250, #260, #264). Thanks to {renv}'s excellent 
   [caching](https://rstudio.github.io/renv/articles/renv.html#cache-1), this 
   does not consume much space and is fast. This makes output
   of hooks more consistent across different local setups, make manual dependency
