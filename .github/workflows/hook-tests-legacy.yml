@@ -78,8 +78,8 @@ jobs:
             install.packages("renv", repos = c(CRAN = "https://cloud.r-project.org"))
           }
           renv::install(c('testthat', 'devtools'))
-          # some testing infrastructure we need is in R/testing.R
-          renv::install(getwd(), dependencies = TRUE) 
+          renv::settings$package.dependency.fields(c("Imports", "Depends", "LinkingTo", "Suggests"))
+          renv::install(getwd()) 
         shell: Rscript {0}
       - name: Session info (testing environment)
         run: |
