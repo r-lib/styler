@@ -92,7 +92,7 @@ jobs:
         run: |
           devtools::load_all()
           testthat::test_file(
-            "tests/testthat/test-hooks.R",
+            "tests/testthat/test-all.R",
             reporter = testthat::MultiReporter$new(list(
               testthat::CheckReporter$new(), testthat::FailReporter$new()
             ))
