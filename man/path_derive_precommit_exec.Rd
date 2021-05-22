@@ -7,7 +7,7 @@
 path_derive_precommit_exec()
 }
 \description{
-All these functions return "" if search was not successful.
+Returns "" if search was not successful, the path otherwise.
 }
 \section{Heuristic}{
 
