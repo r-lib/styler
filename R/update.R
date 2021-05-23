@@ -21,8 +21,9 @@ update_precommit <- function() {
       "does not seem you installed via conda, because the path to the ",
       "executable in use is ", path_precommit_exec(), ". Please use the ",
       "update utilities of the installation method you chose. Alternatively, ",
-      "you can uninstall with the utility of your installation method and ",
-      " run `precommit::install_precommit()` to switch to the conda ",
+      "you can uninstall with the utility of your installation method / ",
+      "delete the executable and ",
+      "run `precommit::install_precommit()` to switch to the conda ",
       "installation method."
     ))
   }
