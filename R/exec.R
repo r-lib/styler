@@ -64,7 +64,7 @@ path_derive_precommit_exec <- function() {
   } else if (os == "linux") {
     path <- c(path, path_derive_precommit_exec_linux())
   }
-  path <- path[path != ""]
+  path <- unique(path[path != ""])
   if (length(path) == 0) {
     path_derive_precommit_exec_conda()
   } else if (length(path) == 1) {

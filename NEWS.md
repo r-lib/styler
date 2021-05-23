@@ -1,18 +1,10 @@
 # precommit v0.2.0-rc (Development)
 
-**New installation**
+**Installation**
 
-If you did not user {precommit} before, follow the installation instructions
-in the README.
-
-**Upgrading installation**
-
-If you used {precommit} before, upgrade these three components for maximal 
-compatibility:
-
-* the R package {precommit} with `install.packages("precommit")`.
-* the upstream pre-commit framework (compare installation methods in README).
-* the hook revisions with `precommit::autoupdate()`.
+Please follow the instructions in the [README](https://lorenzwalthert.github.io/precommit/dev/)
+if you are a new user of pre-commit or if you want to update a current 
+installation.
 
 **API changes**
 
