@@ -3,16 +3,18 @@
 **Installation**
 
 Please follow the instructions in the [README](https://lorenzwalthert.github.io/precommit/dev/)
-if you are a new user of pre-commit or if you want to update a current 
+if you are a new user of pre-commit or if you want to update a current  
 installation.
 
 **API changes**
 
 - `version_precommit()` and `update_precommit()` are new functions to check the
   version of the installed pre-commit executable and to update it (#197).
-- `style-files` hook now supports the full [`style_file()`](https://styler.r-lib.org/dev/reference/style_file.html) API,
+- `style-files` hook now supports the full
+  [`style_file()`](https://styler.r-lib.org/dev/reference/style_file.html) API,
   e.g. you can supply `--scope=spaces` and similar via `args:` in your
-  `.pre-commit-config.yaml`. See the [docs](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#style-files-1)
+  `.pre-commit-config.yaml`. See the
+  [docs](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#style-files-1)
   for details.
 - `style-files` and `roxygenize` hooks now warn if there is no permanent 
   `{R.cache}` cache set up. You can silence the warning with the hook argument 
@@ -22,15 +24,16 @@ installation.
 
 - {precommit} now uses [`language: r`](https://pre-commit.com/#r) instead of 
   `language: script` from the [pre-commit framework](https://pre-commit.com). 
-  This requires `pre-commit >= 2.11.1`. All hooks and dependencies are now 
-  contained in a virtual environment with [`{renv}`](https://rstudio.github.io/renv/)
-  (#233, #250, #260, #264). Thanks to {renv}'s excellent 
+  This requires `pre-commit >= 2.11.1` (ideally even `>= 2.13.0`). All hooks and 
+  dependencies are now contained in a virtual environment with
+  [`{renv}`](https://rstudio.github.io/renv/). Thanks to {renv}'s excellent 
   [caching](https://rstudio.github.io/renv/articles/renv.html#cache-1), this 
-  does not consume much space and is fast. This makes output
+  hardly consumes any space and is fast. This makes output
   of hooks more consistent across different local setups, make manual dependency
-  management redundant and will facilitate running R hooks as part of CI/CD, 
-  e.g. https://pre-commit.ci or [GitHub Actions](https://github.com/pre-commit/action)
-  along with arbitrary other hooks. 
+  management redundant and will facilitate running R hooks as part of CI/CD in
+  the future, e.g. via https://pre-commit.ci or 
+  [GitHub Actions](https://github.com/pre-commit/action) along with hook 
+  implemented in other languages (#233, #250, #260, #264).
 - Because hooks run in a virtual environment and the `roxygenize` hook runs
   `pkgload::load_all()`, you need to list all dependencies of your package in
   `additional_dependencies` field in `.pre-commit-config.yaml`. You will be 
@@ -41,17 +44,20 @@ installation.
 
 **Minor changes**
 
+- In order to avoid multiple installations of the pre-commit framework, a 
+  warning is issued if multiple are found so the user can remove them (#266).
 - The cache for the roxygen2 hook is now also invalidated for changes in formals 
   if there are no changes in roxygen comments (#214).
-- `{renv}` infra files are not checked anymore by default (#237).
+- `{renv}` infra files are not checked anymore by default in the template config
+  files (#237).
 - `deps-in-desc` now checks `.Rprofile`, `.Rmd` and `.Rnw` files in addition to 
   `.R` files (#216).  
-- The location of the pre-commit executable is now also recognized on Apple Silicon
-  when installed with Homebrew (#240).
+- The location of the pre-commit executable is now also recognized on Apple 
+  Silicon when installed with Homebrew (#240).
 - The `deps-in-desc` hook now points to the hook argument 
   `--allow_private_imports` when the hook fails due to private imports (#254).
 - Hook dependency updates are proposed by an automatic monthly pull request 
-  (#430).
+  to `lorenzwalthert/precommit`. This does not affect users directly (#430).
 
 # precommit v0.1.3
 

@@ -138,11 +138,13 @@ patch under your pre-commit cache, which is usually under
 If you used {precommit} before, upgrade these three components for
 maximal compatibility:
 
--   the R package {precommit} with `install.packages("precommit")`.
+-   the R package {precommit} from CRAN with
+    `install.packages("precommit")`.
 
 -   the hook revisions in your `.pre-commit-config.yaml` with
     `precommit::autoupdate()`. Hook revision updates are released in
-    sync with R package updates (exception: Patch releases for hooks).
+    sync with R package updates (exception: Patch releases for hooks
+    don’t have a corresponding CRAN release).
 
 -   the upstream pre-commit framework. Use the update utilities provided
     by your installation method (i.e. `pip3` or
