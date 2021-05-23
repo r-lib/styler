@@ -45,7 +45,7 @@ path_pre_commit_exec <- function(check_if_exists = TRUE) {
 
 #' Derive the path to the pre-commit executable
 #'
-#' All these functions return "" if search was not successful.
+#' Returns "" if search was not successful, the path otherwise.
 #' @section Heuristic:
 #' - First check if there is an executable on the `$PATH` using
 #'   [path_derive_precommit_exec_path()]
@@ -56,20 +56,23 @@ path_pre_commit_exec <- function(check_if_exists = TRUE) {
 #' @keywords internal
 path_derive_precommit_exec <- function() {
   path <- path_derive_precommit_exec_path()
-  if (path == "") {
-    os <- tolower(Sys.info()[["sysname"]])
-    if (os == "darwin") {
-      path <- path_derive_precommit_exec_macOS()
-    } else if (os == "windows") {
-      path <- path_derive_precommit_exec_win()
-    } else if (os == "linux") {
-      path <- path_derive_precommit_exec_linux()
-    }
+  os <- tolower(Sys.info()[["sysname"]])
+  if (os == "darwin") {
+    path <- c(path, path_derive_precommit_exec_macOS())
+  } else if (os == "windows") {
+    path <- c(path, path_derive_precommit_exec_win())
+  } else if (os == "linux") {
+    path <- c(path, path_derive_precommit_exec_linux())
   }
-  if (path == "") {
-    path <- path_derive_precommit_exec_conda()
+  path <- unique(path[path != ""])
+  if (length(path) == 0) {
+    path_derive_precommit_exec_conda()
+  } else if (length(path) == 1) {
+    path
+  } else {
+    path_warn_multiple_execs(path)
+    path[1]
   }
-  path
 }
 
 #' Find an executable
@@ -80,13 +83,30 @@ path_derive_precommit_exec <- function() {
 #'   directory may also not exist.
 #' @keywords internal
 path_derive_precommit_exec_impl <- function(candidate) {
-  assumed <- fs::path(candidate, precommit_executable_file())
-  existant <- assumed[fs::file_exists(assumed)]
-  if (length(existant) > 0) {
+  existant <- path_candidate_to_actual(candidate)
+  if (length(existant) == 1) {
     existant[1]
+  } else if (length(existant) > 1) {
+    path_warn_multiple_execs(existant)
   } else {
     ""
   }
+}
+
+path_warn_multiple_execs <- function(paths) {
+  rlang::warn(paste0(
+    "We detected multiple pre-commit executables. This is likely ",
+    "going to get you into trouble in the future, e.g. when you want to ",
+    "upgrade, as you easily loose track of different versions. We strongly ",
+    "suggest to only keep one pre-commit executable and delete the other ",
+    "ones. Here are the locations where we detected executables:\n\n",
+    "- ", paste0(paths, collapse = "\n- ")
+  ))
+}
+
+path_candidate_to_actual <- function(candidate) {
+  assumed <- fs::path(candidate, precommit_executable_file())
+  assumed[fs::file_exists(assumed)]
 }
 
 path_derive_precommit_exec_linux <- function() {

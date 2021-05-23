@@ -14,9 +14,10 @@ install_system <- function(force) {
     options(precommit.executable = path_exec)
   } else {
     path_exec <- path_precommit_exec(check_if_exists = FALSE)
-    usethis::ui_info(c(
-      "pre-commit already installed at the following locations:",
-      paste0("- ", path_exec)
+    usethis::ui_info(paste0(
+      "pre-commit already installed at the following locations:\n\n",
+      paste0("- ", path_exec), "\n\nUse `precommit::update_precommit()` to ",
+      "update the executable."
     ))
   }
   invisible(path_exec)

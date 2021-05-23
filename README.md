@@ -135,12 +135,22 @@ patch under your pre-commit cache, which is usually under
 
 ## Update
 
-To update the pre-commit executable, use the update utilities provided
-by your installation method. If you chose conda, you can use
-`precommit::update_precommit()`.
+If you used {precommit} before, upgrade these three components for
+maximal compatibility:
 
-You can check the version of you executable with
-`precommit::version_precommit()`.
+-   the R package {precommit} from CRAN with
+    `install.packages("precommit")`.
+
+-   the hook revisions in your `.pre-commit-config.yaml` with
+    `precommit::autoupdate()`. Hook revision updates are released in
+    sync with R package updates (exception: Patch releases for hooks
+    don’t have a corresponding CRAN release).
+
+-   the upstream pre-commit framework. Use the update utilities provided
+    by your installation method (i.e. `pip3` or
+    ``` brew``). If you chose conda, you can use ```precommit::update\_precommit()`. If you don't remember the installation method   you chose, just choose any and then upgrade. We'll warn you if you have   multiple executables installed and point you to their location so you can get   rid of all but one. You can check the version of you executable with`precommit::version\_precommit()\`.
+    Updates to the pre-commit framework are not released in sync with
+    the R or hook revision updates.
 
 ## Uninstallation
 
