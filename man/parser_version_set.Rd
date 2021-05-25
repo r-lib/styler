@@ -33,11 +33,11 @@ but internally.
 \details{
 We version the parser as follows:
 \itemize{
-\item version 1: Before fix mentioned in #419.
-\item version 2: After #419.
+\item version 1: Before fix mentioned in #419. R < 3.6
+\item version 2: After #419. R >= 3.6
 }
 }
-\section{version 3: After #582.}{
+\section{version 3: After #582. R >= 4.0}{
 The following utilities are available:
 \itemize{
 \item \code{parser_version_set()} sets the parser version in the environment

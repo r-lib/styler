@@ -13,9 +13,9 @@
 #'
 #' We version the parser as follows:
 #'
-#' * version 1: Before fix mentioned in #419.
-#' * version 2: After #419.
-#' # version 3: After #582.
+#' * version 1: Before fix mentioned in #419. R < 3.6
+#' * version 2: After #419. R >= 3.6
+#' # version 3: After #582. R >= 4.0
 #'
 #' The following utilities are available:
 #'
