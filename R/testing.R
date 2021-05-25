@@ -103,14 +103,14 @@ run_test_impl <- function(path_executable,
   path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
   fs::file_copy(path_candidate, path_candidate_temp, overwrite = TRUE)
   path_candidate_temp <- withr::with_dir(
-    fs::path_dir(path_candidate_temp),
+    tempdir,
     file_transformer(path_candidate_temp)
   )
   withr::defer(fs::file_delete(path_candidate_temp))
   path_stderr <- tempfile()
   path_stdout <- tempfile()
   status <- withr::with_dir(
-    fs::path_dir(path_candidate_temp),
+    tempdir,
     {
       files <- fs::path_file(path_candidate_temp)
       # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
@@ -124,7 +124,7 @@ run_test_impl <- function(path_executable,
   path_temp <- tempfile()
   fs::file_copy(path_candidate, path_temp)
   path_temp <- withr::with_dir(
-    fs::path_dir(path_candidate_temp),
+    tempdir,
     file_transformer(path_temp)
   )
   reference <- readLines(path_temp)
