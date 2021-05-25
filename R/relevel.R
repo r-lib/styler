@@ -25,9 +25,9 @@ flatten_operators <- function(pd_nested) {
 #' @include token-define.R
 #' @keywords internal
 flatten_operators_one <- function(pd_nested) {
-  pd_token_left <- c(special_token, math_token, "'$'")
+  pd_token_left <- c(special_token, "PIPE", math_token, "'$'")
   pd_token_right <- c(
-    special_token, "LEFT_ASSIGN", if (parser_version_get() > 1) "EQ_ASSIGN",
+    special_token, "PIPE", "LEFT_ASSIGN", if (parser_version_get() > 1) "EQ_ASSIGN",
     "'+'", "'-'"
   )
   pd_nested %>%

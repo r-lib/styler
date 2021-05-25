@@ -44,6 +44,12 @@ test_that("line break before comma is removed and placed after comma ", {
   ), NA)
 })
 
+test_that("Can handle base R pie", {
+  expect_warning(test_collection("line_breaks_and_other", "base-pipe-line",
+    transformer = style_text
+  ), NA)
+})
+
 test_that("line break added for ggplot2 call", {
   expect_warning(test_collection("line_breaks_and_other", "ggplot2",
     transformer = style_text

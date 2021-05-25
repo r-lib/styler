@@ -47,6 +47,11 @@
   ```
   Also see `vignette("detect-alignment")`.
 
+## Other new features
+
+* The base R pipe as introduced in R 4.1.0 is now styled the same way the 
+  magrittr pipe is (#803).
+
 ## Minor changes and fixes
 
 * line breaks between `}` and `else` are removed (#793).

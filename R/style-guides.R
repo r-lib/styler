@@ -209,11 +209,11 @@ tidyverse_style <- function(scope = "tokens",
       remove_line_breaks_in_fun_dec = "FUNCTION",
       set_line_break_around_curly_curly = "'{'",
       style_line_break_around_curly = "'{'",
-      add_line_break_after_pipe = "SPECIAL-PIPE"
+      add_line_break_after_pipe = c("SPECIAL-PIPE", "PIPE")
     ),
     tokens = list(
       resolve_semicolon = "';'",
-      add_brackets_in_pipe = "SPECIAL-PIPE",
+      add_brackets_in_pipe = c("SPECIAL-PIPE", "PIPE"),
       # before 3.6, these assignments are not wrapped into top level expression
       # and `text` supplied to transformers_drop() is "", so it appears to not
       # contain EQ_ASSIGN, and the transformer is falsely removed.
