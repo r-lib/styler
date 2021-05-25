@@ -8,6 +8,7 @@ test_that("pipe is indended correctly", {
 })
 
 test_that("base pipe is indended correctly", {
+  skip_if(getRversion() < 4.1)
   expect_warning(test_collection("indention_operators",
     "base_pipe",
     transformer = style_text

@@ -45,6 +45,7 @@ test_that("line break before comma is removed and placed after comma ", {
 })
 
 test_that("Can handle base R pie", {
+  skip_if(getRversion() < 4.1)
   expect_warning(test_collection("line_breaks_and_other", "base-pipe-line",
     transformer = style_text
   ), NA)
