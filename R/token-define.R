@@ -60,6 +60,7 @@ special_token <- lookup_new_special()
 
 op_token <- c(
   special_token,
+  "PIPE",
   logical_token,
   left_assignment_token,
   right_assignment_token,

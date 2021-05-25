@@ -7,6 +7,14 @@ test_that("pipe is indended correctly", {
   ), NA)
 })
 
+test_that("base pipe is indended correctly", {
+  skip_if(getRversion() < 4.1)
+  expect_warning(test_collection("indention_operators",
+    "base_pipe",
+    transformer = style_text
+  ), NA)
+})
+
 test_that("mathematical operators are indended correctly", {
   expect_warning(test_collection("indention_operators",
     "plus_minus",

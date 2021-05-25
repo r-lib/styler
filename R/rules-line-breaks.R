@@ -188,7 +188,7 @@ remove_line_breaks_in_fun_dec <- function(pd) {
 
 #' @importFrom rlang seq2
 add_line_break_after_pipe <- function(pd) {
-  is_pipe <- pd$token == c("SPECIAL-PIPE")
+  is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
   pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1] <- 1L
 
   if (sum(is_pipe & pd$token_after != "COMMENT") > 1 &&

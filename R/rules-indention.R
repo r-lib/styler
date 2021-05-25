@@ -35,6 +35,7 @@ indent_op <- function(pd,
                         math_token,
                         logical_token,
                         special_token,
+                        "PIPE",
                         "LEFT_ASSIGN",
                         "EQ_ASSIGN",
                         "'$'"
