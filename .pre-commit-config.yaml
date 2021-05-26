@@ -44,7 +44,7 @@ repos:
     -   id: deps-in-desc
         exclude: >
           (?x)^(
-          bench/.*|
+          touchstone/.*|
           tests/testthat/.*-in\.R(md)?|
           tests/testthat/.*-out\.R(md)?
           )$

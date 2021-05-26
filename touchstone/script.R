@@ -8,20 +8,20 @@ benchmark_run_ref(
   n = 30
 )
 
-styler::cache_clear()
+styler::cache_clear(gert::git_branch())
 
 benchmark_run_ref(
-  expr_before_benchmark = c("library(styler)", "cache_activate()"),
+  expr_before_benchmark = c("library(styler)", "cache_activate(gert::git_branch())"),
   cache_applying = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))',
   n = 30
 )
 
-styler::cache_clear()
+styler::cache_clear(gert::git_branch())
 
 benchmark_run_ref(
   expr_before_benchmark = c(
     "library(styler)",
-    "cache_activate()"
+    "cache_activate(gert::git_branch())"
   ),
   cache_recording = c(
     "gert::git_reset_hard(repo = 'touchstone/sources/here')",
@@ -30,6 +30,6 @@ benchmark_run_ref(
   n = 30
 )
 
-styler::cache_clear()
+styler::cache_clear(gert::git_branch())
 
 benchmarks_analyze()
