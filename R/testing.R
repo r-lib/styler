@@ -17,7 +17,9 @@
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
 #' @param hook_name The name of the hook in `bin/`.
-#' @param file_name The file to test in `tests/in` (without extension).
+#' @param file_name The file to test in `tests/in` (without extension). Can be
+#'   a named vector of length one where the name is the target location relative
+#'   to the temporary location and the value is the source of the file.
 #' @param suffix The suffix of `file_name`.
 #' @param file_transformer A function that takes the file names as input and is
 #'   ran right before the hook script is invoked, returning the path to the
@@ -45,7 +47,9 @@ run_test <- function(hook_name,
     package = "precommit"
   )
   test_ancestor <- testthat::test_path("in", file_name)
+  names(test_ancestor) <- names(file_name)
   path_candidate <- paste0(test_ancestor, suffix)
+  names(path_candidate) <- names(test_ancestor)
   run_test_impl(
     path_executable, path_candidate[1],
     error_msg = error_msg,
@@ -62,13 +66,10 @@ run_test <- function(hook_name,
 #' @param path_executable The path to the executable bash script.
 #' @param path_candidate The path to a file that should be modified by the
 #'   executable.
-#' @param copy Path with files to copy to the temp directory where the test
-#'   is run. If the target destination relative to the temp dir where the hook
-#'   is tested is not identical to the path from where a file should be copied,
-#'   you can pass a named vector. The name is the target directory relative to
-#'   the temp directory where the hook is executed (the temp directory will be
-#'   the working directory at that time) and the value is the path that points
-#'   to the place where the artifact is currently stored.
+#' @param copy Path with artifact files to copy to the temp directory root where
+#'   the test is run. If you don't target the root, this can be a named vector
+#'   of length one where the name is the target location relative to the
+#'   temporary location and the value is the source of the file.
 #' @param error_msg An expected error message. If no error is expected, this
 #'   can be `NULL`. In that case, the `comparator` is applied.
 #' @param msg The expected stdout message. If `NULL`, this check is omitted.
@@ -86,40 +87,83 @@ run_test_impl <- function(path_executable,
                           env) {
   expect_success <- is.null(error_msg)
   tempdir <- fs::dir_create(fs::file_temp())
-  if (!is.null(copy)) {
-    if (is.null(names(copy))) {
-      # not namesm take directory name
-      new_dirs <- fs::path(tempdir, fs::path_dir(copy))
-      fs::dir_create(new_dirs)
-      paths_copy <- fs::path(new_dirs, fs::path_file(copy))
-    } else {
-      paths_copy <- fs::path(tempdir, names(copy))
-      new_dirs <- fs::path_dir(paths_copy)
-      fs::dir_create(new_dirs)
-    }
-    withr::defer(fs::file_delete(paths_copy))
-    fs::file_copy(copy, paths_copy, overwrite = TRUE)
-  }
-  path_candidate_temp <- fs::path(tempdir, basename(path_candidate))
+  copy_artifacts(copy, tempdir)
+  # if name set use this, otherwise put in root
+  path_candidate_temp <- fs::path(
+    tempdir,
+    ifelse(is.null(names(path_candidate)), basename(path_candidate),
+      names(path_candidate)
+    )
+  )
+  fs::dir_create(fs::path_dir(path_candidate_temp))
   fs::file_copy(path_candidate, path_candidate_temp, overwrite = TRUE)
   path_candidate_temp <- withr::with_dir(
     tempdir,
     file_transformer(path_candidate_temp)
   )
-  withr::defer(fs::file_delete(path_candidate_temp))
   path_stderr <- tempfile()
   path_stdout <- tempfile()
-  status <- withr::with_dir(
+  exit_status <- hook_state_create(
     tempdir,
-    {
-      files <- fs::path_file(path_candidate_temp)
-      # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
-      system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
-        args = c(path_executable, cmd_args, files),
-        stderr = path_stderr, stdout = path_stdout, env = env
-      )
-    }
+    path_candidate_temp,
+    path_executable,
+    cmd_args,
+    files,
+    path_stdout,
+    path_stderr,
+    env
   )
+  hook_state_assert(
+    path_candidate,
+    tempdir,
+    path_candidate_temp,
+    file_transformer,
+    path_stdout,
+    path_stderr,
+    expect_success,
+    error_msg,
+    msg,
+    exit_status
+  )
+}
+
+
+#' Create a hook state
+#'
+#' Runs the hook script to create a hook state, i.e. exit code, transformed
+#' files and emitted messages of the hook run.
+#' @keywords internal
+hook_state_create <- function(tempdir,
+                              path_candidate_temp,
+                              path_executable,
+                              cmd_args,
+                              files,
+                              path_stdout,
+                              path_stderr,
+                              env) {
+  withr::local_dir(tempdir)
+  files <- fs::path_rel(path_candidate_temp, tempdir)
+  # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
+  system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
+    args = c(path_executable, cmd_args, files),
+    stderr = path_stderr, stdout = path_stdout, env = env
+  )
+}
+
+#' Check if the hook produced what you want
+#'
+#' Match the resulting state after the hook run with the expected state
+#' @keywords internal
+hook_state_assert <- function(path_candidate,
+                              tempdir,
+                              path_candidate_temp,
+                              file_transformer,
+                              path_stdout,
+                              path_stderr,
+                              expect_success,
+                              error_msg,
+                              msg,
+                              exit_status) {
   candidate <- readLines(path_candidate_temp)
   path_temp <- tempfile()
   fs::file_copy(path_candidate, path_temp)
@@ -131,7 +175,7 @@ run_test_impl <- function(path_executable,
   if (expect_success) {
     # file not changed + no stderr
     contents <- readLines(path_stderr)
-    if (status != 0) {
+    if (exit_status != 0) {
       testthat::fail("Expected: No error. Found:", contents)
     }
     testthat::expect_equivalent(candidate, reference)
@@ -226,4 +270,23 @@ generate_uninstalled_pkg_name <- function(n = 10) {
 
 generate_uninstalled_pkg_call <- function(n = 10) {
   paste0(generate_uninstalled_pkg_name(n), "::x")
+}
+
+
+#' Copy some file to the test directory that must be present, but are not
+#' passed to the hook as a file argument.
+copy_artifacts <- function(copy, tempdir) {
+  if (!is.null(copy)) {
+    if (is.null(names(copy))) {
+      # not namesm take directory name
+      new_dirs <- fs::path(tempdir, fs::path_dir(copy))
+      fs::dir_create(new_dirs)
+      paths_copy <- fs::path(new_dirs, fs::path_file(copy))
+    } else {
+      paths_copy <- fs::path(tempdir, names(copy))
+      new_dirs <- fs::path_dir(paths_copy)
+      fs::dir_create(new_dirs)
+    }
+    fs::file_copy(copy, paths_copy, overwrite = TRUE)
+  }
 }
