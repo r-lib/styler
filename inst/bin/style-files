@@ -61,6 +61,5 @@ tryCatch(
       }))
     }
     do.call(style_file, dot_args)
-  },
-  warning = function(w) stop(conditionMessage(w), call. = FALSE)
+  }
 )
