@@ -1,5 +1,15 @@
 library(touchstone)
 
+
+clear_ref_caches <- function() {
+  purrr::walk(c(ref_get_or_fail("GITHUB_BASE_REF"), ref_get_or_fail("GITHUB_HEAD_REF")),
+    styler::cache_clear,
+    ask = FALSE
+  )
+}
+
+clear_ref_caches()
+
 refs_install()
 
 benchmark_run_ref(
@@ -8,16 +18,14 @@ benchmark_run_ref(
   n = 30
 )
 
-styler::cache_clear(gert::git_branch())
-
+clear_ref_caches()
 benchmark_run_ref(
   expr_before_benchmark = c("library(styler)", "cache_activate(gert::git_branch())"),
   cache_applying = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))',
   n = 30
 )
 
-styler::cache_clear(gert::git_branch())
-
+clear_ref_caches()
 benchmark_run_ref(
   expr_before_benchmark = c(
     "library(styler)",
@@ -30,6 +38,6 @@ benchmark_run_ref(
   n = 30
 )
 
-styler::cache_clear(gert::git_branch())
+clear_ref_caches()
 
 benchmarks_analyze()
