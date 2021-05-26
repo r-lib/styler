@@ -140,6 +140,7 @@ run_test("deps-in-desc",
   suffix = "-success.R", error_msg = NULL,
   copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
+
 # fail (call to library that is not in description)
 run_test("deps-in-desc",
   suffix = "-fail.R", error_msg = "Dependency check failed",
@@ -241,4 +242,21 @@ run_test("lintr", suffix = "-fail.R", error_msg = "not lint free")
 run_test(
   "lintr",
   suffix = "-fail.R", cmd_args = "--warn_only", error_msg = NULL
+)
+
+### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+### roxygenize                                                              ####
+run_test("roxygenize",
+  file_name = c("R/roxygenize.R" = "roxygenize.R"),
+  suffix = "",
+  error_msg = NULL,
+  msg = "Writing flie.Rd",
+  copy = c(
+    "DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf")
+  ),
+  file_transformer = function(files) {
+    git2r::init()
+    git2r::add(path = files)
+    files
+  }
 )

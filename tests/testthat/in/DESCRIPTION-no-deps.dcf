@@ -1,0 +1,6 @@
+Package: prec3
+Title: Pre commit hooks
+Version: 1.0.0
+Author: Lorenz Walthert
+Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
+Encoding: UTF-8
