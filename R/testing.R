@@ -46,16 +46,14 @@ run_test <- function(hook_name,
     fs::path("bin", hook_name),
     package = "precommit"
   )
-  test_ancestor <- testthat::test_path("in", file_name)
-  names(test_ancestor) <- names(file_name)
-  path_candidate <- paste0(test_ancestor, suffix)
-  names(path_candidate) <- names(test_ancestor)
+  path_candidate <- paste0(testthat::test_path("in", file_name), suffix) %>%
+    ensure_named(names(file_name), fs::path_file)
   run_test_impl(
     path_executable, path_candidate[1],
     error_msg = error_msg,
     msg = msg,
     cmd_args = cmd_args,
-    artifacts = artifacts,
+    artifacts = ensure_named(artifacts),
     file_transformer = file_transformer,
     env = env
   )
@@ -89,12 +87,7 @@ run_test_impl <- function(path_executable,
   tempdir <- fs::dir_create(fs::file_temp())
   copy_artifacts(artifacts, tempdir)
   # if name set use this, otherwise put in root
-  path_candidate_temp <- fs::path(
-    tempdir,
-    ifelse(is.null(names(path_candidate)), basename(path_candidate),
-      names(path_candidate)
-    )
-  )
+  path_candidate_temp <- fs::path(tempdir, names(path_candidate))
   fs::dir_create(fs::path_dir(path_candidate_temp))
   fs::file_copy(path_candidate, path_candidate_temp, overwrite = TRUE)
   path_candidate_temp <- withr::with_dir(
@@ -278,16 +271,9 @@ generate_uninstalled_pkg_call <- function(n = 10) {
 #' @keywords internal
 copy_artifacts <- function(artifacts, tempdir) {
   if (!is.null(artifacts)) {
-    if (is.null(names(artifacts))) {
-      # not namesm take directory name
-      new_dirs <- fs::path(tempdir, fs::path_dir(artifacts))
-      fs::dir_create(new_dirs)
-      paths_artifacts <- fs::path(new_dirs, fs::path_file(artifacts))
-    } else {
-      paths_artifacts <- fs::path(tempdir, names(artifacts))
-      new_dirs <- fs::path_dir(paths_artifacts)
-      fs::dir_create(new_dirs)
-    }
+    paths_artifacts <- fs::path(tempdir, names(artifacts))
+    new_dirs <- fs::path_dir(paths_artifacts)
+    fs::dir_create(new_dirs)
     fs::file_copy(artifacts, paths_artifacts, overwrite = TRUE)
   }
 }

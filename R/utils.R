@@ -38,6 +38,22 @@ add_trailing_linebreak <- function(x) {
   paste0(x, "\n")
 }
 
+#' Name the input
+#'
+#' @param x A vector.
+#' @param f How to transform the input `x` into a name.
+#' @keywords internal
+ensure_named <- function(x, candidate_name = NULL, f = identity) {
+  if (is.null(names(x))) {
+    if (is.null(candidate_name)) {
+      names(x) <- f(x)
+    } else {
+      names(x) <- candidate_name
+    }
+  }
+  x
+}
+
 
 #' Create the path to the precommit R.cache cache
 #'
