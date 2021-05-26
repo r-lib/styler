@@ -1,5 +1,6 @@
 library(touchstone)
 
+refs_install()
 
 clear_ref_caches <- function() {
   purrr::walk(c(ref_get_or_fail("GITHUB_BASE_REF"), ref_get_or_fail("GITHUB_HEAD_REF")),
@@ -10,7 +11,6 @@ clear_ref_caches <- function() {
 
 clear_ref_caches()
 
-refs_install()
 
 benchmark_run_ref(
   expr_before_benchmark = c("library(styler)", "cache_deactivate()"),
