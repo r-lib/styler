@@ -9,7 +9,6 @@ hook_state_create(
   path_candidate_temp,
   path_executable,
   cmd_args,
-  files,
   path_stdout,
   path_stderr,
   env

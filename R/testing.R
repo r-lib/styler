@@ -38,7 +38,7 @@ run_test <- function(hook_name,
                      error_msg = NULL,
                      msg = NULL,
                      cmd_args = NULL,
-                     copy = NULL,
+                     artifacts = NULL,
                      file_transformer = function(files) files,
                      env = character()) {
   withr::local_envvar(list(R_PRECOMMIT_HOOK_ENV = "1"))
@@ -55,7 +55,7 @@ run_test <- function(hook_name,
     error_msg = error_msg,
     msg = msg,
     cmd_args = cmd_args,
-    copy = copy,
+    artifacts = artifacts,
     file_transformer = file_transformer,
     env = env
   )
@@ -66,7 +66,7 @@ run_test <- function(hook_name,
 #' @param path_executable The path to the executable bash script.
 #' @param path_candidate The path to a file that should be modified by the
 #'   executable.
-#' @param copy Path with artifact files to copy to the temp directory root where
+#' @param artifacts Path with artifact files to copy to the temp directory root where
 #'   the test is run. If you don't target the root, this can be a named vector
 #'   of length one where the name is the target location relative to the
 #'   temporary location and the value is the source of the file.
@@ -82,12 +82,12 @@ run_test_impl <- function(path_executable,
                           error_msg,
                           msg,
                           cmd_args,
-                          copy,
+                          artifacts,
                           file_transformer,
                           env) {
   expect_success <- is.null(error_msg)
   tempdir <- fs::dir_create(fs::file_temp())
-  copy_artifacts(copy, tempdir)
+  copy_artifacts(artifacts, tempdir)
   # if name set use this, otherwise put in root
   path_candidate_temp <- fs::path(
     tempdir,
@@ -108,7 +108,6 @@ run_test_impl <- function(path_executable,
     path_candidate_temp,
     path_executable,
     cmd_args,
-    files,
     path_stdout,
     path_stderr,
     env
@@ -137,7 +136,6 @@ hook_state_create <- function(tempdir,
                               path_candidate_temp,
                               path_executable,
                               cmd_args,
-                              files,
                               path_stdout,
                               path_stderr,
                               env) {
@@ -275,18 +273,21 @@ generate_uninstalled_pkg_call <- function(n = 10) {
 
 #' Copy some file to the test directory that must be present, but are not
 #' passed to the hook as a file argument.
-copy_artifacts <- function(copy, tempdir) {
-  if (!is.null(copy)) {
-    if (is.null(names(copy))) {
+#' @param artifacts Artifacts to copy.
+#' @param tempdir The temporary directory.
+#' @keywords internal
+copy_artifacts <- function(artifacts, tempdir) {
+  if (!is.null(artifacts)) {
+    if (is.null(names(artifacts))) {
       # not namesm take directory name
-      new_dirs <- fs::path(tempdir, fs::path_dir(copy))
+      new_dirs <- fs::path(tempdir, fs::path_dir(artifacts))
       fs::dir_create(new_dirs)
-      paths_copy <- fs::path(new_dirs, fs::path_file(copy))
+      paths_artifacts <- fs::path(new_dirs, fs::path_file(artifacts))
     } else {
-      paths_copy <- fs::path(tempdir, names(copy))
-      new_dirs <- fs::path_dir(paths_copy)
+      paths_artifacts <- fs::path(tempdir, names(artifacts))
+      new_dirs <- fs::path_dir(paths_artifacts)
       fs::dir_create(new_dirs)
     }
-    fs::file_copy(copy, paths_copy, overwrite = TRUE)
+    fs::file_copy(artifacts, paths_artifacts, overwrite = TRUE)
   }
 }

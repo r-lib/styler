@@ -5,9 +5,15 @@
 \title{Copy some file to the test directory that must be present, but are not
 passed to the hook as a file argument.}
 \usage{
-copy_artifacts(copy, tempdir)
+copy_artifacts(artifacts, tempdir)
+}
+\arguments{
+\item{artifacts}{Artifacts to copy.}
+
+\item{tempdir}{The temporary directory.}
 }
 \description{
 Copy some file to the test directory that must be present, but are not
 passed to the hook as a file argument.
 }
+\keyword{internal}

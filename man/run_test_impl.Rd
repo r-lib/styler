@@ -10,7 +10,7 @@ run_test_impl(
   error_msg,
   msg,
   cmd_args,
-  copy,
+  artifacts,
   file_transformer,
   env
 )
@@ -29,7 +29,7 @@ can be \code{NULL}. In that case, the \code{comparator} is applied.}
 \item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
 described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
 
-\item{copy}{Path with artifact files to copy to the temp directory root where
+\item{artifacts}{Path with artifact files to copy to the temp directory root where
 the test is run. If you don't target the root, this can be a named vector
 of length one where the name is the target location relative to the
 temporary location and the value is the source of the file.}
