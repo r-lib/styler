@@ -201,7 +201,7 @@ hook_state_assert <- function(path_candidate,
         paste(contents, collapse = "\n"), error_msg,
         fixed = TRUE
       )
-      testthat::expect_false(status == 0)
+      testthat::expect_false(exit_status == 0)
     }
   }
 }
