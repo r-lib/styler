@@ -154,7 +154,7 @@ compatibility:
   corresponding CRAN release).
 
 * the upstream pre-commit framework. Use the update utilities provided by your
-  installation method (i.e. `pip3` or `brew``). If you chose conda, you can use
+  installation method (i.e. `pip3` or `brew`). If you chose conda, you can use
   `precommit::update_precommit()`. If you don't remember the installation method
   you chose, just choose any and then upgrade. We'll warn you if you have
   multiple executables installed and point you to their location so you can get
