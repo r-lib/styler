@@ -157,6 +157,7 @@ run_test_impl <- function(path_executable,
         paste(contents, collapse = "\n"), error_msg,
         fixed = TRUE
       )
+      testthat::expect_false(status == 0)
     }
   }
 }
