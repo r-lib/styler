@@ -40,7 +40,9 @@ installation.
   prompted to add them if they are missing, 
   `precommit::snippet_generate("additional-deps-roxygenize")` generates
   the code you can copy/paste (#247, #248, #249).
-
+- Warnings are no longer promoted to errors in the styler hook, which is 
+  particularly relevant for the apparently random error 
+  `Unknown or uninitialised column: text`(#268).
 
 **Minor changes**
 
