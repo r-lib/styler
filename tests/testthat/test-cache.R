@@ -53,7 +53,7 @@ test_that("CLI API works for roxygenize", {
     suffix = "-cache-success.R",
     env = paste0("R_CACHE_ROOTPATH=", R.cache_root),
     msg = "You can silent this",
-    copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+    artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
     file_transformer = function(x) {
       git2r::init()
       x

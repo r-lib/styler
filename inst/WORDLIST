@@ -80,6 +80,7 @@ pkgapi
 pkgdown
 pkgload
 pre
+prec
 precommit
 precommithooks
 proj

@@ -124,7 +124,7 @@ run_test("spell-check", suffix = "-fail.md", error_msg = "Spell check failed")
 run_test("spell-check",
   suffix = "-wordlist-success.md",
   error_msg = NULL,
-  copy = c("inst/WORDLIST" = test_path("in/WORDLIST"))
+  artifacts = c("inst/WORDLIST" = test_path("in/WORDLIST"))
 )
 
 # success with ignored files
@@ -138,31 +138,32 @@ run_test("spell-check", suffix = "-language-success.md", cmd_args = "--lang=en_G
 # succeed (call to library that is in description)
 run_test("deps-in-desc",
   suffix = "-success.R", error_msg = NULL,
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
+
 # fail (call to library that is not in description)
 run_test("deps-in-desc",
   suffix = "-fail.R", error_msg = "Dependency check failed",
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 # with :::
 run_test("deps-in-desc",
   "deps-in-desc-dot3",
   suffix = "-fail.R", error_msg = "Dependency check failed",
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 run_test("deps-in-desc",
   "deps-in-desc-dot3",
   suffix = "-success.R", error_msg = NULL,
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 run_test("deps-in-desc",
   "deps-in-desc-dot3",
   suffix = "-fail.R", error_msg = NULL,
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
   cmd_args = "--allow_private_imports"
 )
 
@@ -170,13 +171,13 @@ run_test("deps-in-desc",
 run_test("deps-in-desc",
   "deps-in-desc",
   suffix = "-fail.Rmd", error_msg = "Dependency check failed",
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 run_test("deps-in-desc",
   "deps-in-desc",
   suffix = "-success.Rmd", error_msg = NULL,
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 
@@ -184,13 +185,13 @@ run_test("deps-in-desc",
 run_test("deps-in-desc",
   "deps-in-desc",
   suffix = "-fail.Rnw", error_msg = "Dependency check failed",
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 run_test("deps-in-desc",
   "deps-in-desc",
   suffix = "-success.Rnw", error_msg = NULL,
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
 # Rprofile
@@ -201,7 +202,7 @@ expect_true(rlang::is_installed("R.cache"))
 run_test("deps-in-desc",
   "Rprofile",
   suffix = "", error_msg = "Dependency check failed",
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
   file_transformer = function(files) {
     writeLines("R.cache::findCache", files)
     fs::file_move(
@@ -214,7 +215,7 @@ run_test("deps-in-desc",
 run_test("deps-in-desc",
   "Rprofile",
   suffix = "", error_msg = NULL,
-  copy = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
   file_transformer = function(files) {
     writeLines("utils::head", files)
     fs::file_move(
@@ -241,4 +242,21 @@ run_test("lintr", suffix = "-fail.R", error_msg = "not lint free")
 run_test(
   "lintr",
   suffix = "-fail.R", cmd_args = "--warn_only", error_msg = NULL
+)
+
+### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+### roxygenize                                                              ####
+run_test("roxygenize",
+  file_name = c("R/roxygenize.R" = "roxygenize.R"),
+  suffix = "",
+  error_msg = NULL,
+  msg = "Writing flie.Rd",
+  artifacts = c(
+    "DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf")
+  ),
+  file_transformer = function(files) {
+    git2r::init()
+    git2r::add(path = files)
+    files
+  }
 )

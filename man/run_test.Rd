@@ -11,7 +11,7 @@ run_test(
   error_msg = NULL,
   msg = NULL,
   cmd_args = NULL,
-  copy = NULL,
+  artifacts = NULL,
   file_transformer = function(files) files,
   env = character()
 )
@@ -19,7 +19,9 @@ run_test(
 \arguments{
 \item{hook_name}{The name of the hook in \verb{bin/}.}
 
-\item{file_name}{The file to test in \verb{tests/in} (without extension).}
+\item{file_name}{The file to test in \verb{tests/in} (without extension). Can be
+a named vector of length one where the name is the target location relative
+to the temporary location and the value is the source of the file.}
 
 \item{suffix}{The suffix of \code{file_name}.}
 
@@ -31,13 +33,10 @@ can be \code{NULL}. In that case, the \code{comparator} is applied.}
 \item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
 described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
 
-\item{copy}{Path with files to copy to the temp directory where the test
-is run. If the target destination relative to the temp dir where the hook
-is tested is not identical to the path from where a file should be copied,
-you can pass a named vector. The name is the target directory relative to
-the temp directory where the hook is executed (the temp directory will be
-the working directory at that time) and the value is the path that points
-to the place where the artifact is currently stored.}
+\item{artifacts}{Path with artifact files to copy to the temp directory root where
+the test is run. If you don't target the root, this can be a named vector
+of length one where the name is the target location relative to the
+temporary location and the value is the source of the file.}
 
 \item{file_transformer}{A function that takes the file names as input and is
 ran right before the hook script is invoked, returning the path to the
