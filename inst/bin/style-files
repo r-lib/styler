@@ -9,6 +9,13 @@ Options:
   --no-warn-cache  Suppress the warning about a missing permanent cache.
 ' -> doc
 
+if (packageVersion("precommit") < "0.1.3.9002") {
+  rlang::abort(paste(
+    "This hooks only works with the R package {precommit} >= 0.1.3.9002",
+    'Please upgrade with `remotes::install_github("lorenzwalthert/precommit")`.'
+  ))
+}
+
 # the code bellow will basically expand `doc` with the additional key values
 # provided passed to `style_text(...), passed as --key=value. This way, we
 # can rely on {docopt} to do the parsing for us afterwards.
