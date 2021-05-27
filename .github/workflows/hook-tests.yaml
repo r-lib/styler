@@ -85,7 +85,7 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) {
             install.packages("renv", repos = c(CRAN = "https://cloud.r-project.org"))
           }
-          renv::install(c('testthat', 'devtools'))
+          renv::install(c('testthat', 'devtools', 'git2r'))
           # some testing infrastructure we need is in R/testing.R
           renv::install(getwd())
         shell: Rscript {0}
