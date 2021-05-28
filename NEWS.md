@@ -33,7 +33,7 @@ installation.
   management redundant and will facilitate running R hooks as part of CI/CD in
   the future, e.g. via https://pre-commit.ci or 
   [GitHub Actions](https://github.com/pre-commit/action) along with hook 
-  implemented in other languages (#233, #250, #260, #264).
+  implemented in other languages (#233, #250, #260, #264, #273).
 - Because hooks run in a virtual environment and the `roxygenize` hook runs
   `pkgload::load_all()`, you need to list all dependencies of your package in
   `additional_dependencies` field in `.pre-commit-config.yaml`. You will be 
