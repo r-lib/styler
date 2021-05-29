@@ -100,7 +100,12 @@ path_warn_multiple_execs <- function(paths) {
     "upgrade, as you easily loose track of different versions. We strongly ",
     "suggest to only keep one pre-commit executable and delete the other ",
     "ones. Here are the locations where we detected executables:\n\n",
-    "- ", paste0(paths, collapse = "\n- ")
+    "- ", paste0(paths, collapse = "\n- "), "\n\n",
+    "Note that in all local repos where you used pre-commit, the executable ",
+    "is hardcoded (in .git/hooks/pre-commit). Deleting a referenced ",
+    "executable will break pre-commit for that local repo. A simple ",
+    "re-initialization with `precommit::use_precommit()` or ",
+    "`$ pre-commit install` will fix this."
   ))
 }
 
