@@ -119,7 +119,7 @@ set_config_source <- function(config_source,
     ))
   }
   if (verbose) {
-    usethis::ui_info("Using local conifig from {config_source}.")
+    usethis::ui_info("Using local config from {config_source}.")
   }
   config_source
 }
