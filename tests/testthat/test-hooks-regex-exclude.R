@@ -50,6 +50,7 @@ test_that("exclude regex for spell check hook matches expected files", {
     ".Rproj",
     "some/X.pdf",
     "figure.png",
+    "pciture.jpeg",
     ".github/workflows/r-cmd-check.yaml"
   )
 
