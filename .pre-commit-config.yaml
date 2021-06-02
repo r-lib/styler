@@ -47,7 +47,7 @@ repos:
     -   id: no-browser-statement
     -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v4.0.1
     hooks: 
     -   id: check-added-large-files
     -   id: end-of-file-fixer
