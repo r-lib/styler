@@ -1,8 +1,7 @@
 #' Run a test
 #'
 #' Tests for the executables used as pre-commit hooks via `entrypoint` in
-#' `.pre-commit-config.yaml`. Set's the env variable `R_PRECOMMIT_HOOK_ENV` to
-#' when running.
+#' `.pre-commit-config.yaml`.
 #' @details
 #' Two potential outcomes of a hooks are pass or fail. This is reflected on the
 #' level of the executable: Fail means the executable fails or the file is
@@ -16,6 +15,7 @@
 #'   executable. To check for failed executable, we set `error_msg` to
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
+#'
 #' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension). Can be
 #'   a named vector of length one where the name is the target location relative
@@ -41,7 +41,6 @@ run_test <- function(hook_name,
                      artifacts = NULL,
                      file_transformer = function(files) files,
                      env = character()) {
-  withr::local_envvar(list(R_PRECOMMIT_HOOK_ENV = "1"))
   path_executable <- system.file(
     fs::path("bin", hook_name),
     package = "precommit"
@@ -215,31 +214,18 @@ not_conda <- function() {
 #' @param git Whether or not to init git in the local directory.
 #' @param use_precommmit Whether or not to [use_precommit()].
 #' @keywords internal
-local_test_setup <- function(git = TRUE,
+local_test_setup <- function(.local_envir = parent.frame(),
+                             git = TRUE,
                              use_precommit = FALSE,
-                             package = FALSE,
-                             quiet = TRUE,
-                             ...,
-                             .local_envir = parent.frame()) {
+                             ...) {
   dir <- withr::local_tempdir(.local_envir = .local_envir)
-  withr::local_dir(dir, .local_envir = .local_envir)
-  if (quiet) {
-    withr::local_options("usethis.quiet" = TRUE, .local_envir = .local_envir)
-  }
   if (git) {
-    git2r::init()
+    git2r::init(path = dir)
     withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
   }
   if (use_precommit) {
-    suppressMessages(use_precommit(..., root = dir))
+    suppressMessages(use_precommit(...))
   }
-  if (package) {
-    usethis::create_package(dir)
-    withr::local_dir(dir)
-    usethis::proj_set(dir)
-    usethis::use_testthat()
-  }
-
   dir
 }
 

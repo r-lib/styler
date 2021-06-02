@@ -1,4 +1,16 @@
-# precommit v0.2.0-rc (Development)
+# precommit v0.1.3.9005 (Development)
+
+This is a pre-release for `v0.2.0` and imposes a minimal version requirement 
+on the [pre-commit framework](https://pre-commit.com/) (`v2.13.0`). Please see
+*Installation* below for how to satisfy it. This will ensure future releases of 
+{precommit} building on the newly supported 
+[`language: r`](https://pre-commit.com/#r) will work out of the box instead of 
+issuing messages that are confusing for most end-users. We aspire the transition
+to `language: r` due to the following benefits: No more manual dependency management
+for hooks nor conflicts with your global R library plus eventually it will 
+enable the easy use of continuous integration services (enforcing hooks and 
+auto-fixing problems with pre-commit.ci, GitHub Actions).
+
 
 **Installation**
 
@@ -20,36 +32,15 @@ installation.
   `{R.cache}` cache set up. You can silence the warning with the hook argument 
   `--no-warn-cache` (#225).
 
-**Major Changes**
-
-- {precommit} now uses [`language: r`](https://pre-commit.com/#r) instead of 
-  `language: script` from the [pre-commit framework](https://pre-commit.com). 
-  This requires `pre-commit >= 2.11.1` (ideally even `>= 2.13.0`). All hooks and 
-  dependencies are now contained in a virtual environment with
-  [`{renv}`](https://rstudio.github.io/renv/). Thanks to {renv}'s excellent 
-  [caching](https://rstudio.github.io/renv/articles/renv.html#cache-1), this 
-  hardly consumes any space and is fast. This makes output
-  of hooks more consistent across different local setups, make manual dependency
-  management redundant and will facilitate running R hooks as part of CI/CD in
-  the future, e.g. via https://pre-commit.ci or 
-  [GitHub Actions](https://github.com/pre-commit/action) along with hook 
-  implemented in other languages (#233, #250, #260, #264, #273).
-- Because hooks run in a virtual environment and the `roxygenize` hook runs
-  `pkgload::load_all()`, you need to list all dependencies of your package in
-  `additional_dependencies` field in `.pre-commit-config.yaml`. You will be 
-  prompted to add them if they are missing, 
-  `precommit::snippet_generate("additional-deps-roxygenize")` generates
-  the code you can copy/paste (#247, #248, #249).
-- Warnings are no longer promoted to errors in the styler hook, which is 
-  particularly relevant for the apparently random error 
-  `Unknown or uninitialised column: text`(#268).
-- `deps-in-desc` now checks `.Rprofile`, `.Rmd` and `.Rnw` files in addition to 
-  `.R` files (#216).  
-
 **Minor changes**
 
+- Warnings are no longer promoted to errors in the styler hook, which is 
+  particularly relevant for the apparently random error 
+  `Unknown or uninitialised column: text` (#268).
+- `deps-in-desc` now checks `.Rprofile`, `.Rmd` and `.Rnw` files in addition to 
+  `.R` files (#216).  
 - In order to avoid multiple installations of the pre-commit framework, a 
-  warning is issued if multiple are found so the user can remove them (#266).
+  warning is issued if multiple are found so the user can remove them (#266, #273).
 - The cache for the roxygen2 hook is now also invalidated for changes in formals 
   if there are no changes in roxygen comments (#214).
 - `{renv}` infra files are not checked anymore by default in the template config
@@ -63,8 +54,6 @@ installation.
 - The `deps-in-desc` hook now points to the hook argument 
   `--allow_private_imports` when the hook fails due to private imports (#254).
 - roxygenize hook is now fully tested (#267).
-- Hook dependency updates are proposed by an automatic monthly pull request 
-  to `lorenzwalthert/precommit`. This does not affect users directly (#430).
 
 # precommit v0.1.3
 

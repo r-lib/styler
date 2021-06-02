@@ -93,7 +93,6 @@ rds
 Rds
 readLines
 readme
-recognised
 renv
 Renviron
 repo
@@ -131,7 +130,6 @@ stopifnot
 styler
 Sys
 testthat
-tibble
 tidyverse
 travis
 tryCatch

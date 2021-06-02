@@ -1,6 +1,6 @@
 Package: precommit
 Title: Pre-Commit Hooks
-Version: 0.1.3.9002
+Version: 0.1.3.9005
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Description: Useful git hooks for R building on top of the multi-language
@@ -21,7 +21,6 @@ Imports:
     rlang,
     rprojroot,
     rstudioapi,
-    tibble,
     usethis (>= 2.0.0),
     withr,
     yaml
@@ -32,19 +31,20 @@ Suggests:
     glue,
     knitr,
     lintr,
-    mockery,
     pkgload,
     reticulate (>= 1.16),
     rmarkdown,
     roxygen2,
     spelling,
-    styler,
+    styler (>= 1.3.2.9000),
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
+Remotes: 
+    r-lib/styler
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace", "collate",
     if (rlang::is_installed("pkgapi")) "pkgapi::api_roclet" else {
     warning("Please install r-lib/pkgapi to make sure the file API is kept
     up to date"); NULL} ) )
-RoxygenNote: 7.1.1.9001
+RoxygenNote: 7.1.1
