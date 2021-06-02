@@ -43,6 +43,8 @@ installation.
 - Warnings are no longer promoted to errors in the styler hook, which is 
   particularly relevant for the apparently random error 
   `Unknown or uninitialised column: text`(#268).
+- `deps-in-desc` now checks `.Rprofile`, `.Rmd` and `.Rnw` files in addition to 
+  `.R` files (#216).  
 
 **Minor changes**
 
@@ -52,8 +54,10 @@ installation.
   if there are no changes in roxygen comments (#214).
 - `{renv}` infra files are not checked anymore by default in the template config
   files (#237).
-- `deps-in-desc` now checks `.Rprofile`, `.Rmd` and `.Rnw` files in addition to 
-  `.R` files (#216).  
+- `.png`, `.jpeg`, `.pdf` and files in `.github/workflows` are no longer 
+  spell-checked in the template config file (#276).
+- All sub-patterns in the `exclude:` pattern of the spell check hook are now 
+  ordered alphabetically (#276).
 - The location of the pre-commit executable is now also recognized on Apple 
   Silicon when installed with Homebrew (#240).
 - The `deps-in-desc` hook now points to the hook argument 
