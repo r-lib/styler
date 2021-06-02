@@ -47,29 +47,32 @@ repos:
     -   id: spell-check
         exclude: >
           (?x)^(
-          (.*/|)\.Rprofile|
-          (.*/|)\.Renviron|
-          (.*/|)renv\.lock|
-          (.*/|)renv/settings\.dcf|
-          (.*/|)\.gitignore|
-          (.*/|)NAMESPACE|
-          (.*/|)WORDLIST|
-          (.*/|)\.travis.yml|
-          (.*/|)appveyor.yml|
-          (.*/|)\.Rbuildignore|
-          (.*/|)\.pre-commit-.*|
           .*\.[rR]|
-          .*\.Rproj|
-          .*\.py|
           .*\.feather|
+          .*\.jpeg|
+          .*\.pdf|
+          .*\.png|
+          .*\.py|
+          .*\.RData|
           .*\.rds|
           .*\.Rds|
+          .*\.Rproj|
           .*\.sh|
-          .*\.RData|
+          (.*/|)\.gitignore|
+          (.*/|)\.pre-commit-.*|
+          (.*/|)\.Rbuildignore|
+          (.*/|)\.Renviron|
+          (.*/|)\.Rprofile|
+          (.*/|)\.travis\.yml|
+          (.*/|)appveyor\.yml|
+          (.*/|)NAMESPACE|
+          (.*/|)renv/settings\.dcf|
+          (.*/|)renv\.lock|
+          (.*/|)WORDLIST|
           \.github/workflows/.*|
-          data/.*| 
+          data/.*|
           inst/bin/.*|
-          inst/pre-commit-.*
+          inst/pre-commit-.*|
           )$
     -   id: readme-rmd-rendered
     -   id: parsable-R
@@ -104,3 +107,9 @@ repos:
         language: fail
         files: '\.Rhistory|\.csv|\.RData|\.Rds|\.rds$'
         # `exclude: <regex>` to allow committing specific files.
+    -   id: spell-check-ordered-exclude
+        name: Ordered regex pattern for spell-check exclusion
+        description: Ensure alphabetical order in `exclude:` key of spell check.
+        entry: inst/spell-check-ordered-exclude.R
+        language: script
+        files: '^(.*/|)\.?pre-commit-config.*\.yaml$'

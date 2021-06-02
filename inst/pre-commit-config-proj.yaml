@@ -9,26 +9,30 @@ repos:
     -   id: spell-check
         exclude: >
           (?x)^(
-          data/.*| 
-          (.*/|)\.Rprofile|
-          (.*/|)\.Renviron|
-          (.*/|)renv\.lock|
-          (.*/|)renv/settings\.dcf|
-          (.*/|)\.gitignore|
-          (.*/|)NAMESPACE|
-          (.*/|)WORDLIST|
-          (.*/|)\.travis.yml|
-          (.*/|)appveyor.yml|
-          (.*/|)\.Rbuildignore|
-          (.*/|)\.pre-commit-.*|
           .*\.[rR]|
-          .*\.Rproj|
-          .*\.py|
           .*\.feather|
+          .*\.jpeg|
+          .*\.pdf|
+          .*\.png|
+          .*\.py|
+          .*\.RData|
           .*\.rds|
           .*\.Rds|
+          .*\.Rproj|
           .*\.sh|
-          .*\.RData
+          (.*/|)\.gitignore|
+          (.*/|)\.pre-commit-.*|
+          (.*/|)\.Rbuildignore|
+          (.*/|)\.Renviron|
+          (.*/|)\.Rprofile|
+          (.*/|)\.travis\.yml|
+          (.*/|)appveyor\.yml|
+          (.*/|)NAMESPACE|
+          (.*/|)renv/settings\.dcf|
+          (.*/|)renv\.lock|
+          (.*/|)WORDLIST|
+          \.github/workflows/.*|
+          data/.*|
           )$
     -   id: lintr
     -   id: readme-rmd-rendered
