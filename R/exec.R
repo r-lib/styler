@@ -84,10 +84,8 @@ path_derive_precommit_exec <- function() {
 #' @keywords internal
 path_derive_precommit_exec_impl <- function(candidate) {
   existant <- path_candidate_to_actual(candidate)
-  if (length(existant) == 1) {
-    existant[1]
-  } else if (length(existant) > 1) {
-    path_warn_multiple_execs(existant)
+  if (length(existant) >= 1) {
+    existant
   } else {
     ""
   }
@@ -102,10 +100,13 @@ path_warn_multiple_execs <- function(paths) {
     "ones. Here are the locations where we detected executables:\n\n",
     "- ", paste0(paths, collapse = "\n- "), "\n\n",
     "Note that in all local repos where you used pre-commit, the executable ",
-    "is hardcoded (in .git/hooks/pre-commit). Deleting a referenced ",
+    "path is hardcoded (in .git/hooks/pre-commit). Deleting a referenced ",
     "executable will break pre-commit for that local repo. A simple ",
     "re-initialization with `precommit::use_precommit()` or ",
-    "`$ pre-commit install` will fix this."
+    "`$ pre-commit install` will fix this for pre-commit hooks.\n\nIf you ",
+    "have hook types other than pre-commit such as pre-push (you can check ",
+    "which files are in .git/hooks/), you need to name the type and use the ",
+    "command line, i.e. `$ pre-commit install -t pre-push`. "
   ))
 }
 
@@ -160,7 +161,7 @@ path_derive_precommit_exec_macOS <- function() {
 #' Returns `""` if no executable is found.
 #' @keywords internal
 path_derive_precommit_exec_path <- function() {
-  unname(Sys.which(precommit_executable_file())[1])
+  unname(Sys.which(precommit_executable_file()))
 }
 
 #' Derive the path to the conda pre-commit executable
