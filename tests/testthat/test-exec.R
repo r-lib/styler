@@ -26,25 +26,49 @@ test_that("Path can be derived for windows Python >= 3.0", {
 })
 
 
-test_that("Warns when there are multiple installations found", {
+test_that("Warns when there are multiple installations found (2x os)", {
   expect_warning(
     with_mock(
-      "precommit::path_candidate_to_actual" = function(candidate) {
-        candidate
+      "precommit::path_derive_precommit_exec_path" = function(candidate) {
+        fs::path_home("AppData/Roaming/Python/Python35")
       },
-      path_derive_precommit_exec_impl(
+      "Sys.info" = function(...) {
+        c(sysname = "windows")
+      },
+      "precommit:::path_derive_precommit_exec_win" = function() {
         c(
-          fs::path_home("AppData/Roaming/Python/Python35"),
+          fs::path_home("AppData/Roaming/Python/Python34"),
           fs::path_home("AppData/Roaming/Python/Python37")
         )
-      )
+      },
+      path_derive_precommit_exec()
     ),
     "We detected multiple pre-commit executables"
   )
 })
 
+test_that("Warns when there are multiple installations found (2x path)", {
+  expect_warning(
+    with_mock(
+      "precommit::path_derive_precommit_exec_path" = function(candidate) {
+        c(
+          fs::path_home("AppData/Roaming/Python/Python35"),
+          fs::path_home("AppData/Roaming/Python/Python37")
+        )
+      },
+      "Sys.info" = function(...) {
+        c(sysname = "windows")
+      },
+      "precommit:::path_derive_precommit_exec_win" = function() {
+        fs::path_home("AppData/Roaming/Python/Python34")
+      },
+      path_derive_precommit_exec()
+    ),
+    "We detected multiple pre-commit executables"
+  )
+})
 
-test_that("Warns when there are multiple installations found", {
+test_that("Warns when there are multiple installations found (path and os)", {
   expect_warning(
     with_mock(
       "precommit::path_derive_precommit_exec_path" = function(candidate) {
