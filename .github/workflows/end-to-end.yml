@@ -52,7 +52,7 @@ jobs:
       - name: Prepare pre-commit
         run: |
           config_name <- '.pre-commit-config.yaml'
-          ref_config <- test_path('reference-objects', config_name)
+          ref_config <- file.path('tests', 'testthat', 'reference-objects', config_name)
           len_declared <- length(yaml::read_yaml('.pre-commit-hooks.yaml'))
           len_testing <- length(yaml::read_yaml(ref_config)$repos[[1]]$hooks)
           if (len_declared != len_testing) {
