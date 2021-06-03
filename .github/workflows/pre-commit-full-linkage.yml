@@ -60,4 +60,5 @@ jobs:
           echo 'one' >> README.md
           git add README*
           pre-commit run --files README.Rmd
-      
+        env:
+          SKIP: consistent-release-tag
