@@ -69,6 +69,7 @@ jobs:
           pre-commit run --files DESCRIPTION 
           echo 'one' >> README.Rmd
           echo 'one' >> README.md
+          echo 'one' >> codemeta.json
           git add README*
           pre-commit run --files README.Rmd
         env:
