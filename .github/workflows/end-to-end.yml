@@ -41,14 +41,6 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
       
-      - name: Update Hook revision to current push
-        run: |
-          # config <- yaml::read_yaml('.pre-commit-config.yaml')
-          # ours <- which(purrr::map_chr(config$repos, 'repo') == "https://github.com/lorenzwalthert/precommit")
-          # config$repos[[ours]]$rev <- Sys.getenv("GITHUB_SHA")
-          # yaml::write_yaml(config, '.pre-commit-config.yaml')
-          # https://stackoverflow.com/questions/30871868/sed-replace-first-occurence-in-place-with-big-files
-          sed -i ''  -e "1,/rev:.*/{s/rev:.*/rev: $GITHUB_SHA/;}" .pre-commit-config.yaml
       - name: Prepare pre-commit
         run: |
           config_name <- '.pre-commit-config.yaml'
@@ -60,17 +52,25 @@ jobs:
           }
           fs::file_delete(config_name)
           fs::file_copy(ref_config, config_name)
+
+      - name: Update Hook revision to current push
+        run: |
+          # https://stackoverflow.com/questions/30871868/sed-replace-first-occurence-in-place-with-big-files
+          sed -i ''  -e "1,/rev:.*/{s/rev:.*/rev: $GITHUB_SHA/;}" .pre-commit-config.yaml
         shell: Rscript {0}
+
       - name: Run pre-commit
         run: | 
+          echo 'one' >> README.Rmd
+          echo 'one' >> codemeta.json
+          echo 'one' >> README.md
+          echo "#' some code\n#'\n#' @param here.\n#' @name somethings\nNULL" > R/test.R # overwrite if anything there
           brew install pre-commit
           pre-commit install
-          pre-commit run --files R/config.R 
+          pre-commit run --files R/test.R 
           pre-commit run --files DESCRIPTION 
-          echo 'one' >> README.Rmd
-          echo 'one' >> README.md
-          echo 'one' >> codemeta.json
           git add README*
           pre-commit run --files README.Rmd
+          git reset HEAD --hard # restore initial state
         env:
           SKIP: consistent-release-tag
