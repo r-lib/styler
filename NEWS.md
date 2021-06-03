@@ -2,8 +2,8 @@
 
 This is a pre-release for `v0.2.0` and imposes a minimal version requirement 
 on the [pre-commit framework](https://pre-commit.com/) (`v2.13.0`). Please see
-*Installation* below for how to satisfy it. This will ensure future releases of 
-{precommit} building on the newly supported 
+*Installation/Update* below for how to satisfy it. This will ensure future 
+releases of {precommit} building on the newly supported 
 [`language: r`](https://pre-commit.com/#r) will work out of the box instead of 
 issuing messages that are confusing for most end-users. We aspire the transition
 to `language: r` due to the following benefits: No more manual dependency management
@@ -12,11 +12,12 @@ enable the easy use of continuous integration services (enforcing hooks and
 auto-fixing problems with pre-commit.ci, GitHub Actions).
 
 
-**Installation**
+**Installation/Update**
 
-Please follow the instructions in the [README](https://lorenzwalthert.github.io/precommit/dev/)
-if you are a new user of pre-commit or if you want to update a current  
-installation.
+Please follow the 
+[update instructions](https://lorenzwalthert.github.io/precommit/dev/#update) or
+[installation instructions](https://lorenzwalthert.github.io/precommit/dev/#installation)
+depending on whether or not you previously used pre-commit.
 
 **API changes**
 
@@ -41,7 +42,7 @@ installation.
   `.R` files (#216).  
 - In order to avoid multiple installations of the pre-commit framework, a 
   warning is issued if multiple are found so the user can remove them (#266, 
-  #273, #277).
+  #273, #277, #278).
 - The cache for the roxygen2 hook is now also invalidated for changes in formals 
   if there are no changes in roxygen comments (#214).
 - `{renv}` infra files are not checked anymore by default in the template config
