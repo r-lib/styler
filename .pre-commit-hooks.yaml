@@ -94,7 +94,7 @@
 -   id: lintr
     name: lintr
     description: check if a .R file is lint free (using lintr)
-    entry: inst/hooks/exported/lintrs.R
+    entry: inst/hooks/exported/lintr.R
     language: script
     files: '\.[rR]$'
     exclude: 'renv/activate\.R'
