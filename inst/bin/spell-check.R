@@ -1,13 +1,13 @@
 #!/usr/bin/env Rscript
 
-'Spell check for files
+"Spell check for files
 Usage:
   spell-check [--lang=<language>] <files>...
 
 Options:
   --lang=<language> Passed to `spelling::spell_check_files()` [default: en_US]
 
-' -> doc
+" -> doc
 
 arguments <- docopt::docopt(doc)
 path_wordlist <- file.path("inst", "WORDLIST")
@@ -26,23 +26,23 @@ if (file.exists(path_wordlist)) {
 
 
 spelling_errors <- spelling::spell_check_files(
-  files, 
-  ignore = ignore, 
+  files,
+  ignore = ignore,
   lang = arguments$lang
 )
 
 if (nrow(spelling_errors) > 0) {
-  cat("The following spelling errors were found:\n" )
+  cat("The following spelling errors were found:\n")
   print(spelling_errors)
   ignore <- sort(unique(c(ignore, spelling_errors$word)))
   ignore <- ignore[ignore != ""] # drop blanks if any
   writeLines(ignore, path_wordlist)
   cat(
-    "All spelling errors found were copied to inst/WORDLIST assuming they were", 
-    "not spelling errors and will be ignored in the future. Please ", 
-    "review the above list and for each word that is an actual typo:\n", 
+    "All spelling errors found were copied to inst/WORDLIST assuming they were",
+    "not spelling errors and will be ignored in the future. Please ",
+    "review the above list and for each word that is an actual typo:\n",
     "- fix it in the source code.\n",
-    "- remove it again manually from inst/WORDLIST to make sure it's not\n", 
+    "- remove it again manually from inst/WORDLIST to make sure it's not\n",
     "  ignored in the future.\n",
     "Then, try committing again.\n"
   )

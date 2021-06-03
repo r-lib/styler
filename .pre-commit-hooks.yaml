@@ -1,7 +1,7 @@
 -   id: roxygenize
     name: roxygenize
     description: run roxygen2::roxygenize()
-    entry: inst/bin/roxygenize
+    entry: inst/bin/roxygenize.R
     language: script
     files: '^(R|man)/'
     require_serial: true
@@ -9,14 +9,14 @@
 -   id: use-tidy-description
     name: use-tidy-description
     description: run usethis::use_tidy_description()
-    entry: inst/bin/use-tidy-description
+    entry: inst/bin/use-tidy-description.R
     language: script
     files: '^DESCRIPTION$'
     minimum_pre_commit_version: "2.13.0"
 -   id: style-files
     name: style-files
     description: style files with styler
-    entry: inst/bin/style-files
+    entry: inst/bin/style-files.R
     language: script
     files: '(\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
     exclude: 'renv/activate\.R'
@@ -24,14 +24,14 @@
 -   id: no-browser-statement
     name: no-browser-statement
     description: check if a .R file contains a `browser()` statement
-    entry: inst/bin/no-browser-statement
+    entry: inst/bin/no-browser-statement.R
     language: script
     files: '\.[rR]$'
     minimum_pre_commit_version: "2.13.0"
 -   id: parsable-R
     name: parsable-R
     description: check if a .R file is parsable
-    entry: inst/bin/parsable-R
+    entry: inst/bin/parsable-R.R
     language: script
     files: '\.[rR]$'
     minimum_pre_commit_version: "2.13.0"
@@ -52,7 +52,7 @@
 -   id: spell-check 
     name: spell-check
     description: perform a spell check with spelling::spell_check_files()
-    entry: inst/bin/spell-check
+    entry: inst/bin/spell-check.R
     language: script
     exclude: >
       (?x)^(
@@ -86,7 +86,7 @@
 -   id: deps-in-desc
     name: deps-in-desc
     description: Check if dependencies that can be parsed from code are in DESCRIPTION.
-    entry: inst/bin/deps-in-desc
+    entry: inst/bin/deps-in-desc.R
     language: script
     files: '(\.[rR]profile|\.R|\.Rmd|\.Rnw|\.r|\.rmd|\.rnw)$'
     exclude: 'renv/activate\.R'
@@ -94,7 +94,7 @@
 -   id: lintr
     name: lintr
     description: check if a .R file is lint free (using lintr)
-    entry: inst/bin/lintr
+    entry: inst/bin/lintr.R
     language: script
     files: '\.[rR]$'
     exclude: 'renv/activate\.R'

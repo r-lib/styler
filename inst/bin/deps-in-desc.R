@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 
-'Ensure all dependencies of the form pkg::fun are in DESCRIPTION
+"Ensure all dependencies of the form pkg::fun are in DESCRIPTION
 Usage:
   deps-in-desc [--allow_private_imports] <files>...
 
 Options:
   --allow_private_imports  Whether or not to allow the use of ::: on imported functions.
-' -> doc
+" -> doc
 pre_installed <- c(
   "base", "boot", "class", "cluster", "codetools", "compiler",
   "datasets", "foreign", "graphics", "grDevices", "grid", "KernSmooth",
@@ -32,8 +32,8 @@ deps_in_desc <- function(file, arguments) {
     cat(
       "Not all packages used in your code are listed in DESCRIPTION. ",
       "The following are missing in file `", file, "`: ",
-      paste(unregistered, collapse = ", "), ".\n", 
-      "You can add them with `usethis::use_package()` or ", 
+      paste(unregistered, collapse = ", "), ".\n",
+      "You can add them with `usethis::use_package()` or ",
       "`usethis::use_dev_package()`.\n",
       sep = ""
     )
@@ -53,10 +53,10 @@ deps_in_desc <- function(file, arguments) {
       paste0(file, collapse = ", "), "\n\n",
       "If you still think `:::` is a good idea, you can ",
       "allow private imports in your `.pre-commit-config.yaml` like this:
-      
+
     -   id: deps-in-desc
         args: [--allow_private_imports]
-        
+
       ",
       sep = ""
     )
