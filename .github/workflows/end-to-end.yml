@@ -52,7 +52,7 @@ jobs:
           }
           fs::file_delete(config_name)
           fs::file_copy(ref_config, config_name)
-
+        shell: Rscript {0}
       - name: Update Hook revision to current push
         run: |
           # https://stackoverflow.com/questions/30871868/sed-replace-first-occurence-in-place-with-big-files
