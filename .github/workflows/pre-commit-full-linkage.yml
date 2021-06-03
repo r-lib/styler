@@ -1,4 +1,10 @@
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 name: pre-commit
 
@@ -9,6 +15,8 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: r-lib/actions/setup-r@v1
+      
+      - uses: actions/checkout@v2
 
       - name: Query dependencies
         run: |
