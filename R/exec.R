@@ -194,7 +194,6 @@ path_derive_precommit_exec_conda_impl <- function(conda_env) {
   tryCatch(
     {
       ls <- reticulate::conda_list()
-
       path_reticulate <- fs::path_dir(ls[ls$name == conda_env, "python"][1])
       derived <- fs::path(
         path_reticulate,
