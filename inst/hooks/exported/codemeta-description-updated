@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# adapted from https://github.com/lorenzwalthert/precommit/blob/f4413cfe6282c84f7176160d06e1560860c8bd3d/inst/bin/readme-rmd-rendered
+# adapted from https://github.com/lorenzwalthert/precommit/blob/f4413cfe6282c84f7176160d06e1560860c8bd3d/inst/hooks/exported/readme-rmd-rendered
 
 if [[ DESCRIPTION -nt codemeta.json ]]
 then

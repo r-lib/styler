@@ -8,7 +8,7 @@ This repo uses the [tic](https://github.com/ropenscilabs/tic) package for CI.
 
 To create a new hook, have a look at the [official
 documentation](https://pre-commit.com/#new-hooks) on creating new hooks, then have a look
-at existing hooks in this repo. The actual executables are defined in [`inst/bin/`](https://github.com/lorenzwalthert/precommit/tree/master/inst/bin). In
+at existing hooks in this repo. The actual executables are defined in [`inst/hooks/`](https://github.com/lorenzwalthert/precommit/tree/master/inst/hooks). In
 the script, you can expect the passed command line arguments to be all options, 
 finally the files that should be processed with the hook.
 

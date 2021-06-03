@@ -16,7 +16,7 @@
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
 #'
-#' @param hook_name The name of the hook in `bin/`.
+#' @param hook_name The name of the hook in `inst/hooks/exported/`.
 #' @param file_name The file to test in `tests/in` (without extension). Can be
 #'   a named vector of length one where the name is the target location relative
 #'   to the temporary location and the value is the source of the file.
@@ -42,7 +42,7 @@ run_test <- function(hook_name,
                      file_transformer = function(files) files,
                      env = character()) {
   path_executable <- system.file(
-    fs::path("bin", hook_name),
+    fs::path("hooks", "exported", hook_name),
     package = "precommit"
   )
   path_candidate <- paste0(testthat::test_path("in", file_name), suffix) %>%
