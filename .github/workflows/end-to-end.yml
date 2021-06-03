@@ -6,10 +6,10 @@ on:
     branches:
       - master
 
-name: pre-commit
+name: end-2-end
 
 jobs:
-  pre-commit:
+  end-2-end:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
