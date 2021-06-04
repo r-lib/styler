@@ -21,10 +21,10 @@ Options:
 
 " -> doc
 arguments <- docopt::docopt(doc)
-if (packageVersion("precommit") < "0.1.3.9002") {
+if (packageVersion("precommit") < "0.1.3.9010") {
   rlang::abort(paste(
-    "This hooks only works with the R package {precommit} >= 0.1.3.9002",
-    'Please upgrade with `remotes::install_github("lorenzwalthert/precommit")`.'
+    "This hooks only works with the R package {precommit} >= 0.1.3.9010",
+    'Please upgrade with `remotes::install_github("lorenzwalthert/precommit@v0.1.3.9010")`.'
   ))
 } else {
   precommit::may_require_permanent_cache(arguments$no_warn_cache)
