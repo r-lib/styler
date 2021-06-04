@@ -21,9 +21,9 @@ This function does the following:
 \item update default config in inst/
 \item commit
 \item git tag
-\item run \code{inst/hooks/local/consistent-release-tag} hook with --release-mode (passing args to hooks
+\item run \code{inst/hooks/local/consistent-release-tag.R} hook with --release-mode (passing args to hooks
 not possible interactively, hence we run in advance).
-\item commit and push with skipping \code{inst/hooks/local/consistent-release-tag}.
+\item commit and push with skipping \code{inst/hooks/local/consistent-release-tag.R}.
 \item autoupdate own config file
 \item bump description with dev
 \item commit and push DESCRIPTION and .pre-commit-config.yaml
