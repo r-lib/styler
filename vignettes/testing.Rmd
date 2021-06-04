@@ -52,5 +52,5 @@ This package has five testing workflows:
 * end-2-end testing: This simulates closely what happens when you run 
   `git commit` with pre-commit activated: We update the `.pre-commit-config.yaml` 
   to the pushed SHA and run `pre-commit run`, covering all hooks, to ensure in 
-  particular file linking in `.pre-commit-hooks.yaml` is correct for exported 
-  hooks.
+  particular file linking, file permissions etc. in `.pre-commit-hooks.yaml` are
+  correct for exported hooks.
