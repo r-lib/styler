@@ -9,9 +9,8 @@
 ^pkgdown$
 ^\.pre-commit-config\.yaml$
 ^API$
-^inst/consistent-release-tag$
 ^inst/WORDLIST$
-^inst/hooks-config-to-inst$
+^inst/hooks/local$
 ^cran-comments\.md$
 ^\.github$
 ^scratch/$
