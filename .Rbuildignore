@@ -3,10 +3,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^\.pre-commit-hooks\.yaml$
-^\.travis\.yml$
 ^CONTRIBUTING\.md$
-^appveyor\.yml$
-^tic\.R$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
@@ -17,3 +14,4 @@
 ^inst/hooks-config-to-inst$
 ^cran-comments\.md$
 ^\.github$
+^scratch/$
