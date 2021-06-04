@@ -16,7 +16,9 @@ conditionMessage
 config
 cp
 cran
+csv
 Ctrl
+dcf
 deps
 desc
 dev
@@ -50,6 +52,7 @@ impl
 init
 io
 isAvailable
+jpeg
 json
 knitr
 lang
@@ -79,6 +82,7 @@ parsable
 pkgapi
 pkgdown
 pkgload
+png
 pre
 prec
 precommit
@@ -88,6 +92,7 @@ purrr
 py
 Rbuildignore
 rc
+Rdata
 RData
 rds
 Rds
