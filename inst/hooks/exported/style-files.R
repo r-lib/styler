@@ -9,10 +9,10 @@ Options:
   --no-warn-cache  Suppress the warning about a missing permanent cache.
 ' -> doc
 
-if (packageVersion("precommit") < "0.1.3.9002") {
+if (packageVersion("precommit") < "0.1.3.9010") {
   rlang::abort(paste(
-    "This hooks only works with the R package {precommit} >= 0.1.3.9002",
-    'Please upgrade with `remotes::install_github("lorenzwalthert/precommit")`.'
+    "This hooks only works with the R package {precommit} >= 0.1.3.9010",
+    'Please upgrade with `remotes::install_github("lorenzwalthert/precommit@v0.1.3.9010")`.'
   ))
 }
 
