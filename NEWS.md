@@ -1,4 +1,4 @@
-# precommit v0.1.3.9010 (Development)
+# precommit v0.1.3.9012 (Development)
 
 This is a pre-release for `v0.2.0` and imposes a minimal version requirement 
 on the [pre-commit framework](https://pre-commit.com/) (`v2.13.0`). Please see
