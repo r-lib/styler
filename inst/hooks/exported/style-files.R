@@ -71,7 +71,7 @@ tryCatch(
   },
   warning = function(w) {
     msg <- conditionMessage(w)
-    if (grepl('Unknown or uninitialised column', msg, ignore.case = TRUE)) {
+    if (grepl("Unknown or uninitialised column", msg, ignore.case = TRUE)) {
       warning(msg, call. = FALSE)
     } else {
       stop(msg, call. = FALSE)

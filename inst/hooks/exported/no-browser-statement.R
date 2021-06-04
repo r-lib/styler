@@ -2,10 +2,10 @@
 
 files <- commandArgs(trailing = TRUE)
 no_browser_statement <- function(path) {
-  pd <- getParseData(parse(path,  keep.source = TRUE))
+  pd <- getParseData(parse(path, keep.source = TRUE))
   if (any(pd$text[pd$token == "SYMBOL_FUNCTION_CALL"] == "browser")) {
     stop("File `", path, "` contains a `browser()` statement.", call. = FALSE)
-  } 
+  }
 }
 
 for (file in files) {

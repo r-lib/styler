@@ -18,7 +18,7 @@ pre-commit >= 2.11.0 supports R as a language and each hook repo has its own
 virtual environment with package versions locked. For that reason, we should
 also test with exactly these versions.
 
-This package has four testing workflows:
+This package has five testing workflows:
 
 * hook testing. Tests the hooks (as well as hook script helpers?) in the renv in
   which they'll be shipped. No R CMD Check or pre-commit executable needed.
@@ -48,3 +48,9 @@ This package has four testing workflows:
 
 * CRAN testing. On CRAN, complete testing is ran, tests that check pre-commit
   executable access are disabled.
+
+* end-2-end testing: This simulates closely what happens when you run 
+  `git commit` with pre-commit activated: We update the `.pre-commit-config.yaml` 
+  to the pushed SHA and run `pre-commit run`, covering all hooks, to ensure in 
+  particular file linking, file permissions etc. in `.pre-commit-hooks.yaml` are
+  correct for exported hooks.

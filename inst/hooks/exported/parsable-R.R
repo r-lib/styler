@@ -3,7 +3,7 @@ files <- commandArgs(trailing = TRUE)
 
 out <- lapply(files, function(path) {
   tryCatch(
-    parse(path), 
+    parse(path),
     error = function(x) stop("File ", path, " is not parsable", call. = FALSE)
   )
 })

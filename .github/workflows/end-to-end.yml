@@ -1,0 +1,76 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+name: end-2-end
+
+jobs:
+  end-2-end:
+    runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: r-lib/actions/setup-r@v1
+      
+      - uses: actions/checkout@v2
+
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran('yaml')
+        shell: Rscript {0}
+
+      - name: Install package
+        run: R CMD INSTALL .
+      
+      - name: Prepare pre-commit
+        run: |
+          config_name <- ".pre-commit-config.yaml"
+          ref_config <- file.path("tests", "testthat", "reference-objects", config_name)
+          len_declared <- length(yaml::read_yaml(".pre-commit-hooks.yaml"))
+          len_testing <- length(yaml::read_yaml(ref_config)$repos[[1]]$hooks)
+          if (len_declared != len_testing) {
+            rlang::abort("You don't test all hooks. Add them to `test_path('reference-objects/.pre-commit-config.yaml')`")
+          }
+          fs::file_delete(config_name)
+          fs::file_copy(ref_config, config_name)
+        shell: Rscript {0}
+      - name: Update Hook revision to current push
+        run: |
+          # hacky, maybe can use pre-commit try-repo?
+          # https://stackoverflow.com/questions/30871868/sed-replace-first-occurence-in-place-with-big-files
+          sed -i ''  -e "1,/rev:.*/{s/rev:.*/rev: $GITHUB_SHA/;}" .pre-commit-config.yaml
+
+      - name: Run pre-commit
+        run: | 
+          echo 'one' >> README.Rmd
+          echo 'one' >> codemeta.json
+          echo 'one' >> README.md
+          echo "#' some code\n#'\n#' @param here.\n#' @name somethings\nNULL" > R/test.R # overwrite if anything there
+          brew install pre-commit
+          pre-commit install
+          pre-commit run --files R/test.R 
+          pre-commit run --files DESCRIPTION 
+          git add README*
+          pre-commit run --files README.Rmd
+          git reset HEAD --hard # restore initial state
+        env:
+          SKIP: consistent-release-tag

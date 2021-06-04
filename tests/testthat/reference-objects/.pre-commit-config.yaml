@@ -1,3 +1,4 @@
+# config used to run all hooks we have defined in this repo in .github/workflows/end-2-end.yml
 # All available hooks: https://pre-commit.com/hooks.html
 # R specific hooks: https://github.com/lorenzwalthert/precommit
 default_stages: ["commit"]
@@ -10,7 +11,8 @@ repos:
         exclude: '^tests/testthat/in/.*\.R'
     -   id: roxygenize
     # codemeta must be above use-tidy-description when both are used
-    # -   id: codemeta-description-updated
+    -   id: codemeta-description-updated
+    -   id: lintr
     -   id: use-tidy-description
     -   id: spell-check
         exclude: >
@@ -46,12 +48,6 @@ repos:
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: deps-in-desc
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
-    hooks: 
-    -   id: check-added-large-files
-    -   id: end-of-file-fixer
-        exclude: '\.Rd' # sometimes roxygen fails to generate EOF blank line.
 -   repo: local
     hooks:
     -   id: consistent-release-tag
