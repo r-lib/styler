@@ -13,4 +13,4 @@
 ^LICENSE\.md$
 ^pkgdown$
 ^README\.Rmd$
-^scratch/$
+^scratch$
