@@ -9,9 +9,9 @@
 #' - update default config in inst/
 #' - commit
 #' - git tag
-#' - run `inst/hooks/local/consistent-release-tag` hook with --release-mode (passing args to hooks
+#' - run `inst/hooks/local/consistent-release-tag.R` hook with --release-mode (passing args to hooks
 #'   not possible interactively, hence we run in advance).
-#' - commit and push with skipping `inst/hooks/local/consistent-release-tag`.
+#' - commit and push with skipping `inst/hooks/local/consistent-release-tag.R`.
 #' - autoupdate own config file
 #' - bump description with dev
 #' - commit and push DESCRIPTION and .pre-commit-config.yaml
@@ -50,7 +50,7 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
   )
   usethis::ui_done("Committed DESCRIPTION and config template")
   sys_call("git", glue::glue('tag -a {new_version} -m "{msg}"'))
-  sys_call("./inst/hooks/local/consistent-release-tag", "--release-mode")
+  sys_call("./inst/hooks/local/consistent-release-tag.R", "--release-mode")
   usethis::ui_done("Tagged last commit with release version.")
   if (!is_cran) {
     sys_call("git", glue::glue("push origin {new_version}"),
