@@ -62,9 +62,9 @@ jobs:
 
       - name: Run pre-commit
         run: | 
-          echo 'one' >> README.Rmd
+          echo 'one' > README.Rmd
           echo 'one' >> codemeta.json
-          echo 'one' >> README.md
+          echo 'one' > README.md
           echo "#' some code\n#'\n#' @param here.\n#' @name somethings\nNULL" > R/test.R # overwrite if anything there
           brew install pre-commit
           pre-commit install
