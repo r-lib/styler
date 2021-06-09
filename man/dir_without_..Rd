@@ -2,9 +2,9 @@
 % Please edit documentation in R/utils-files.R
 \name{dir_without_.}
 \alias{dir_without_.}
-\title{\code{dir()}, but without dot-prefix}
+\title{\code{dir()}, but without dot-prefix and different defaults}
 \usage{
-dir_without_.(path, ...)
+dir_without_.(path, recursive = TRUE, ...)
 }
 \arguments{
 \item{path}{A path.}
@@ -17,6 +17,9 @@ pass a character vector of length one as \code{path} to not loose the informatio
 about where the files are. This function solves that case. It's needed when
 one wants to standardize paths to use set operations on them, i.e. when the
 user supplied input does not have a dot prefix. See 'Examples'.
+}
+\details{
+For different defaults, see \code{dir_without_._one}.
 }
 \examples{
 setdiff("./file.R", "file.R") # you want to standardize first.
