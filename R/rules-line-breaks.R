@@ -201,7 +201,7 @@ add_line_break_after_pipe <- function(pd) {
 set_line_break_after_assignment <- function(pd) {
   is_assignment <- lag(pd$token, default = FALSE) %in% c("LEFT_ASSIGN", "EQ_ASSIGN")
   if (any(is_assignment)) {
-    pd$lag_newlines[is_assignment] <- min(1L, pd$lag_newlines[is_assignment])
+    pd$lag_newlines[is_assignment] <- pmin(1L, pd$lag_newlines[is_assignment])
   }
   pd
 }

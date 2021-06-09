@@ -59,6 +59,8 @@
   code header anymore. This can be handy when the code can't be parsed, e.g.
   within a learnr tutorial (#790).
 * `#>` is recognized as an output marker and no space is added after `#` (#771).
+* multi-expressions containing multiple assignments no longer remove line breaks
+  if they are not causing blank lines (#809).
 * R code chunks in nested non-R chunks in R markdown don't yield an error 
   anymore when document is styled, chunks are still not styled (#788, #794).
 * `cache_activate()` and `cache_deactivate()` now respect the R 
