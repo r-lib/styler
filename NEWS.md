@@ -69,8 +69,9 @@
 * style guide used in Addin is verified when set via R option (#789).
 * improve pkgdown author URLs (#775).
 * Upgrade touchstone infra (#799, #805).
-* Don't test on R 3.3. anymore as tidyverse 
-  [supports only four previous releases](https://www.tidyverse.org/blog/2019/04/r-version-support/) (#804).
+* Don't test on R 3.3 anymore as tidyverse [supports only four previous
+  releases](https://www.tidyverse.org/blog/2019/04/r-version-support/) (#804).
+* Update Github Actions workflow (#810).
 
 # styler 1.4.1
 
