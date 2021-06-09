@@ -110,42 +110,42 @@ prettify_pkg <- function(transformers,
                          include_roxygen_examples,
                          base_indention,
                          dry) {
-  filetype <- set_and_assert_arg_filetype(filetype)
+  filetype_ <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
-  exclude_files <- set_arg_paths(exclude_files)
-  exclude_dirs <- set_arg_paths(exclude_dirs)
-  without_excluded <- purrr::partial(setdiff, y = exclude_dirs)
-  if ("\\.r" %in% filetype) {
+  exclude_files <- c(
+    set_arg_paths(exclude_files),
+    dir_without_.(exclude_dirs, pattern = map_filetype_to_pattern(filetype))
+  )
+  if ("\\.r" %in% filetype_) {
     r_files <- dir_without_.(
-      path = without_excluded(c("R", "tests", "data-raw", "demo")),
+      path = c("R", "tests", "data-raw", "demo"),
       pattern = "\\.r$"
     )
   }
 
-  if ("\\.rprofile" %in% filetype) {
+  if ("\\.rprofile" %in% filetype_) {
     rprofile_files <- dir_without_.(
-      path = without_excluded("."), pattern = "^\\.rprofile$"
+      path = ".", pattern = "^\\.rprofile$"
     )
   }
-  if ("\\.rmd" %in% filetype) {
+  if ("\\.rmd" %in% filetype_) {
     vignette_files <- dir_without_.(
-      path = without_excluded("vignettes"), pattern = "\\.rmd$"
+      path = "vignettes", pattern = "\\.rmd$"
     )
     readme <- dir_without_.(
       path = ".",
-      pattern = without_excluded("^readme\\.rmd$")
+      pattern = "^readme\\.rmd$"
     )
   }
 
-  if ("\\.rnw" %in% filetype) {
+  if ("\\.rnw" %in% filetype_) {
     vignette_files <- append(
       vignette_files,
       dir_without_.(
-        path = without_excluded("vignettes"), pattern = "\\.rnw$"
+        path = "vignettes", pattern = "\\.rnw$"
       )
     )
   }
-
   files <- setdiff(
     c(r_files, rprofile_files, vignette_files, readme),
     exclude_files
