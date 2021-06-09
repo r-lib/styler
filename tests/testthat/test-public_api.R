@@ -18,6 +18,16 @@ test_that("styler can style package and exclude some directories", {
   }))
 })
 
+test_that("styler can style package and exclude some sub-directories", {
+  capture_output(expect_true({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
+      exclude_dirs = "tests/testthat"
+    )
+    nrow(styled) == 2
+  }))
+})
+
+
 
 test_that("styler can style package and exclude some directories and files", {
   capture_output(expect_true({
