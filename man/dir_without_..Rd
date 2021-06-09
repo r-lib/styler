@@ -4,7 +4,7 @@
 \alias{dir_without_.}
 \title{\code{dir()}, but without dot-prefix and different defaults}
 \usage{
-dir_without_.(path, ...)
+dir_without_.(path, recursive = TRUE, ...)
 }
 \arguments{
 \item{path}{A path.}

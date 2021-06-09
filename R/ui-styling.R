@@ -272,8 +272,7 @@ prettify_any <- function(transformers,
       setdiff(c("", exclude_dirs)) %>%
       dir_without_.(
         pattern = map_filetype_to_pattern(filetype),
-        ignore.case = TRUE, recursive = FALSE,
-        all.files = TRUE
+        recursive = FALSE
       )
   } else {
     files_other <- c()

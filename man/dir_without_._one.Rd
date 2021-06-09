@@ -5,7 +5,7 @@
 \title{\code{dir()}, but with full names, ignored case, and included hidden files and
 recursive.}
 \usage{
-dir_without_._one(path, ...)
+dir_without_._one(path, recursive, ...)
 }
 \description{
 \code{dir()}, but with full names, ignored case, and included hidden files and
