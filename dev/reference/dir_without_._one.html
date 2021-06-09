@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>dir(), but without dot-prefix and different defaults — dir_without_. • styler</title>
+<title>dir(), but with full names, ignored case, and included hidden files and
+recursive. — dir_without_._one • styler</title>
 
 
 <!-- jquery -->
@@ -45,12 +46,10 @@
 
 
 
-<meta property="og:title" content="dir(), but without dot-prefix and different defaults — dir_without_." />
-<meta property="og:description" content="When using dir(), you can set full.names = FALSE, but then you can only
-pass a character vector of length one as path to not loose the information
-about where the files are. This function solves that case. It's needed when
-one wants to standardize paths to use set operations on them, i.e. when the
-user supplied input does not have a dot prefix. See 'Examples'." />
+<meta property="og:title" content="dir(), but with full names, ignored case, and included hidden files and
+recursive. — dir_without_._one" />
+<meta property="og:description" content="dir(), but with full names, ignored case, and included hidden files and
+recursive." />
 
 
 <meta name="robots" content="noindex">
@@ -179,44 +178,21 @@ user supplied input does not have a dot prefix. See 'Examples'." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>dir()</code>, but without dot-prefix and different defaults</h1>
+    <h1><code>dir()</code>, but with full names, ignored case, and included hidden files and
+recursive.</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/utils-files.R'><code>R/utils-files.R</code></a></small>
-    <div class="hidden name"><code>dir_without_..Rd</code></div>
+    <div class="hidden name"><code>dir_without_._one.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>When using <code><a href='https://rdrr.io/r/base/list.files.html'>dir()</a></code>, you can set <code>full.names = FALSE</code>, but then you can only
-pass a character vector of length one as <code>path</code> to not loose the information
-about where the files are. This function solves that case. It's needed when
-one wants to standardize paths to use set operations on them, i.e. when the
-user supplied input does not have a dot prefix. See 'Examples'.</p>
+    <p><code><a href='https://rdrr.io/r/base/list.files.html'>dir()</a></code>, but with full names, ignored case, and included hidden files and
+recursive.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dir_without_.</span><span class='op'>(</span><span class='va'>path</span>, recursive <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>dir_without_._one</span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>recursive</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>A path.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Passed to <code><a href='https://rdrr.io/r/base/list.files.html'>base::dir()</a></code>.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For different defaults, see <code>dir_without_._one</code>.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>set_and_assert_arg_paths</p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sets.html'>setdiff</a></span><span class='op'>(</span><span class='st'>"./file.R"</span>, <span class='st'>"file.R"</span><span class='op'>)</span> <span class='co'># you want to standardize first.</span>
-</div><div class='output co'>#&gt; [1] "./file.R"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
