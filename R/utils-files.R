@@ -49,6 +49,9 @@ dir_without_._one <- function(path, ...) {
   relative <- dir(
     path = path,
     full.names = FALSE,
+    ignore.case = TRUE,
+    recursive = TRUE,
+    all.files = TRUE,
     ...
   )
   if (path == ".") {

@@ -118,26 +118,22 @@ prettify_pkg <- function(transformers,
   if ("\\.r" %in% filetype) {
     r_files <- dir_without_.(
       path = without_excluded(c("R", "tests", "data-raw", "demo")),
-      pattern = "\\.r$",
-      ignore.case = TRUE,
-      recursive = TRUE
+      pattern = "\\.r$"
     )
   }
 
   if ("\\.rprofile" %in% filetype) {
     rprofile_files <- dir_without_.(
-      path = without_excluded("."), pattern = "^\\.rprofile$",
-      ignore.case = TRUE, recursive = FALSE, all.files = TRUE
+      path = without_excluded("."), pattern = "^\\.rprofile$"
     )
   }
   if ("\\.rmd" %in% filetype) {
     vignette_files <- dir_without_.(
-      path = without_excluded("vignettes"), pattern = "\\.rmd$",
-      ignore.case = TRUE, recursive = TRUE
+      path = without_excluded("vignettes"), pattern = "\\.rmd$"
     )
     readme <- dir_without_.(
       path = ".",
-      pattern = without_excluded("^readme\\.rmd$"), ignore.case = TRUE
+      pattern = without_excluded("^readme\\.rmd$")
     )
   }
 
@@ -145,8 +141,7 @@ prettify_pkg <- function(transformers,
     vignette_files <- append(
       vignette_files,
       dir_without_.(
-        path = without_excluded("vignettes"), pattern = "\\.rnw$",
-        ignore.case = TRUE, recursive = TRUE
+        path = without_excluded("vignettes"), pattern = "\\.rnw$"
       )
     )
   }
