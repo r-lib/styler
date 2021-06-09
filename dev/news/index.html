@@ -245,6 +245,7 @@ tribble(
 <li>styler won’t format code chunks with explicit <code>tidy = FALSE</code> in an Rmd or Rnw code header anymore. This can be handy when the code can’t be parsed, e.g. within a learnr tutorial (<a href='https://github.com/r-lib/styler/issues/790'>#790</a>).</li>
 <li>
 <code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</li>
+<li>multi-expressions containing multiple assignments no longer remove line breaks if they are not causing blank lines (<a href='https://github.com/r-lib/styler/issues/809'>#809</a>).</li>
 <li>R code chunks in nested non-R chunks in R markdown don’t yield an error anymore when document is styled, chunks are still not styled (<a href='https://github.com/r-lib/styler/issues/788'>#788</a>, <a href='https://github.com/r-lib/styler/issues/794'>#794</a>).</li>
 <li>
 <code><a href="../reference/cache_activate.html">cache_activate()</a></code> and <code><a href="../reference/cache_activate.html">cache_deactivate()</a></code> now respect the R option <code>styler.quiet</code> (<a href='https://github.com/r-lib/styler/issues/797'>#797</a>).</li>
