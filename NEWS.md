@@ -59,6 +59,7 @@ depending on whether or not you previously used pre-commit.
   `--allow_private_imports` when the hook fails due to private imports (#254).
 - roxygenize hook is now fully tested (#267).
 - Hook scripts were relocated and R hooks now have a file extension (#280).
+- Updated GitHub Action workflows (#288).
 
 # precommit v0.1.3
 
