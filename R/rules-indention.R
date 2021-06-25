@@ -58,8 +58,17 @@ indent_eq_sub <- function(pd,
   if (!any(eq_sub)) {
     return(pd)
   }
-  has_line_break <- pd$lag_newlines > 0
-  indent_indices <- lag(eq_sub, default = FALSE) & has_line_break
+  has_line_break <- pd$lag_newlines > 0 | pd$token == "COMMENT"
+  indent_indices <- which(lag(eq_sub, default = FALSE) & has_line_break)
+  if (any(pd$token[indent_indices] == "COMMENT")) {
+    indent_indices <- purrr::map_int(indent_indices, function(idx) {
+      if (pd$token[idx] == "COMMENT") {
+        next_non_comment(pd, idx)
+      } else {
+        idx
+      }
+    })
+  }
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
 }
