@@ -242,6 +242,7 @@ tribble(
 <a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>line breaks between <code>}</code> and <code>else</code> are removed (<a href='https://github.com/r-lib/styler/issues/793'>#793</a>).</li>
+<li>in function calls, code after <code>= #\n</code> is indented correctly (<a href='https://github.com/r-lib/styler/issues/814'>#814</a>).</li>
 <li>styler won’t format code chunks with explicit <code>tidy = FALSE</code> in an Rmd or Rnw code header anymore. This can be handy when the code can’t be parsed, e.g. within a learnr tutorial (<a href='https://github.com/r-lib/styler/issues/790'>#790</a>).</li>
 <li>
 <code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</li>
