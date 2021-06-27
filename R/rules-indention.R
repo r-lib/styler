@@ -54,12 +54,21 @@ indent_op <- function(pd,
 indent_eq_sub <- function(pd,
                           indent_by,
                           token = c("EQ_SUB", "EQ_FORMALS")) {
-  eq_sub <- which(pd$token %in% token)
-  if (length(eq_sub) == 0) {
+  eq_sub <- pd$token %in% token
+  if (!any(eq_sub)) {
     return(pd)
   }
-  has_line_break <- which(pd$lag_newlines > 0)
-  indent_indices <- intersect(eq_sub + 1, has_line_break)
+  has_line_break <- pd$lag_newlines > 0 | pd$token == "COMMENT"
+  indent_indices <- which(lag(eq_sub, default = FALSE) & has_line_break)
+  if (any(pd$token[indent_indices] == "COMMENT")) {
+    indent_indices <- purrr::map_int(indent_indices, function(idx) {
+      if (pd$token[idx] == "COMMENT") {
+        next_non_comment(pd, idx)
+      } else {
+        idx
+      }
+    })
+  }
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
 }
