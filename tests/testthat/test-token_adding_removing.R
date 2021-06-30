@@ -36,3 +36,10 @@ test_that("braces only added to pipe if RHS is a symbol", {
     transformer = style_text
   ), NA)
 })
+
+
+test_that("No braces are added if conditional statement is within pipe", {
+  expect_warning(test_collection("token_adding_removing", "else-pipe",
+    transformer = style_text
+  ), NA)
+})

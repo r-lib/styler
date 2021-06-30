@@ -54,6 +54,9 @@
 
 ## Minor changes and fixes
 
+* No curly braces are added to else statements if they are within a pipe, as 
+  this can change evaluation logic of code involving the magrittr dot in rare 
+  cases (#816).
 * line breaks between `}` and `else` are removed (#793).
 * in function calls, code after `= #\n` is indented correctly (#814).
 * styler won't format code chunks with explicit `tidy = FALSE` in an Rmd or Rnw 

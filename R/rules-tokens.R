@@ -113,7 +113,8 @@ wrap_else_multiline_curly <- function(pd, indent_by = 2, space_after = 0) {
   if (contains_else_expr(pd) &&
     pd_is_multi_line(pd) &&
     contains_else_expr_that_needs_braces(pd) &&
-    !any(pd$stylerignore)) {
+    !any(pd$stylerignore) &&
+    pd$token_before[1] != "SPECIAL-PIPE") {
     else_idx <- which(pd$token == "ELSE")
     pd$spaces[else_idx] <- 1L
     all_to_be_wrapped_ind <- seq2(else_idx + 1L, nrow(pd))
