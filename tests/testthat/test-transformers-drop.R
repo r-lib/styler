@@ -85,8 +85,7 @@ test_that("tidyverse transformers are correctly dropped", {
 
   names_tokens <- c(
     "fix_quotes",
-    if (getRversion() < 3.6) "force_assignment_op",
-    "remove_terminal_token_before_and_after"
+    if (getRversion() < 3.6) "force_assignment_op"
   )
   expect_setequal(names(t_fun$token), names_tokens)
 })
