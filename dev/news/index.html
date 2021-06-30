@@ -241,6 +241,7 @@ tribble(
 <h2 class="hasAnchor">
 <a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
+<li>No curly braces are added to else statements if they are within a pipe, as this can change evaluation logic of code involving the magrittr dot in rare cases (<a href='https://github.com/r-lib/styler/issues/816'>#816</a>).</li>
 <li>line breaks between <code>}</code> and <code>else</code> are removed (<a href='https://github.com/r-lib/styler/issues/793'>#793</a>).</li>
 <li>in function calls, code after <code>= #\n</code> is indented correctly (<a href='https://github.com/r-lib/styler/issues/814'>#814</a>).</li>
 <li>styler won’t format code chunks with explicit <code>tidy = FALSE</code> in an Rmd or Rnw code header anymore. This can be handy when the code can’t be parsed, e.g. within a learnr tutorial (<a href='https://github.com/r-lib/styler/issues/790'>#790</a>).</li>

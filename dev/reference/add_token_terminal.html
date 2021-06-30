@@ -198,9 +198,7 @@ for cached code, we don't build up the nested structure and leave it shallow
 
 <span class='fu'>add_terminal_token_before</span><span class='op'>(</span><span class='va'>pd_flat</span><span class='op'>)</span>
 
-<span class='fu'>add_attributes_caching</span><span class='op'>(</span><span class='va'>pd_flat</span>, <span class='va'>transformers</span>, <span class='va'>more_specs</span><span class='op'>)</span>
-
-<span class='fu'>remove_terminal_token_before_and_after</span><span class='op'>(</span><span class='va'>pd_flat</span><span class='op'>)</span></pre>
+<span class='fu'>add_attributes_caching</span><span class='op'>(</span><span class='va'>pd_flat</span>, <span class='va'>transformers</span>, <span class='va'>more_specs</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,9 +224,6 @@ a key.</p></td>
     
 <ul>
 <li><p><code>add_attributes_caching</code>: Initializes <code>newlines</code> and <code>lag_newlines</code>.</p></li>
-<li><p><code>remove_terminal_token_before_and_after</code>: Removes column <code>terimnal_token_before</code>. Might
-be used to prevent the use of invalidated information, e.g. if tokens were
-added to the nested parse table.</p></li>
 </ul>
 
   </div>
