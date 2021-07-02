@@ -22,7 +22,7 @@ has_persistent_R.cache <- function() {
 #' @export
 may_require_permanent_cache <- function(temp_cache_is_enough = FALSE) {
   if (has_persistent_R.cache()) {
-    cat("Using persistant cache at", R.cache::getCacheRootPath(), "\n")
+    cat("Using persistent cache at", R.cache::getCacheRootPath(), "\n")
   } else {
     if (temp_cache_is_enough) {
       cat("Using temporary cache at", R.cache::getCacheRootPath(), "\n")
