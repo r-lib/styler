@@ -200,34 +200,10 @@ style guide and you have previously styled that code, it will be quicker.</p>
 manage the cache. You can deactivate it altogether with <code><a href='cache_activate.html'>cache_deactivate()</a></code>.
 Since we leverage <code>{R.cache}</code> to manage the cache, you can also use any
 <code>{R.cache}</code> functionality to manipulate it.</p>
-    <h2 class="hasAnchor" id="interactive-setup"><a class="anchor" href="#interactive-setup"></a>Interactive setup</h2>
-
-    
-
-<p><code>{styler}</code> by default uses caching via the <code>{R.cache}</code> package. When interacting
-with <code>{styler}</code>, you will be asked to let it create a permanent cache on your
-file system that styler will use in case it is not set already up for another
-tool that uses <code>{R.cache}</code>. We encourage users to let <code>{R.cache}</code> create a
-permanent directory for caching because, otherwise, the cache is lost at
-restart of R.</p>
-    <h2 class="hasAnchor" id="non-interactive-setup"><a class="anchor" href="#non-interactive-setup"></a>Non-interactive setup</h2>
-
-    
-
-<p>In some cases, you want to avoid the interactive prompt described above. In
+<p>In some cases, you want to use a non-standard cache location. In
 that situation, you can set the path to the cache with the R option
 <code>R.cache.rootPath</code> or the environment variable <code>R_CACHE_ROOTPATH</code> to an
-existent path before you call the styler API. This should avoid the prompt.
-<code><a href='https://rdrr.io/pkg/R.cache/man/setCacheRootPath.html'>R.cache::setCacheRootPath("/path/to/cache")</a></code> is also programmatic but will
-probably give the prompt anyways if called interactively.</p>
-    <h2 class="hasAnchor" id="non-interactive-use"><a class="anchor" href="#non-interactive-use"></a>Non-interactive use</h2>
-
-    
-
-<p>Note that if you have never authorized <code>{R.cache}</code> to create the cache in a
-permanent directory and you use <code>{styler}</code> non-interactively, it will build the
-cache in a temporary directory. To create a permanent cache, follow the
-section 'Non-interactive setup' or 'Interactive setup' above.</p>
+existent path before you call the styler API.</p>
     <h2 class="hasAnchor" id="invalidation"><a class="anchor" href="#invalidation"></a>Invalidation</h2>
 
     
@@ -248,8 +224,7 @@ empty files which have the hash of output code as name).</p>
 
 <p>If you want to set up caching in a CI/CD pipeline, we suggest to set the
 <code>{R.cache}</code> root path to a directory for which you have the cache enabled as
-described above in the section 'Non-interactive setup'. This can often be set
-in config files of CI/CD tools, e.g. see the
+This can often be set in config files of CI/CD tools, e.g. see the
 <a href='https://docs.travis-ci.com/user/caching'>Travis documentation on caching</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
