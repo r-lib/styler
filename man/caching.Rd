@@ -15,34 +15,11 @@ See \code{\link[=cache_info]{cache_info()}},\code{\link[=cache_activate]{cache_a
 manage the cache. You can deactivate it altogether with \code{\link[=cache_deactivate]{cache_deactivate()}}.
 Since we leverage \code{{R.cache}} to manage the cache, you can also use any
 \code{{R.cache}} functionality to manipulate it.
-}
 
-\section{Interactive setup}{
-
-\code{{styler}} by default uses caching via the \code{{R.cache}} package. When interacting
-with \code{{styler}}, you will be asked to let it create a permanent cache on your
-file system that styler will use in case it is not set already up for another
-tool that uses \code{{R.cache}}. We encourage users to let \code{{R.cache}} create a
-permanent directory for caching because, otherwise, the cache is lost at
-restart of R.
-}
-
-\section{Non-interactive setup}{
-
-In some cases, you want to avoid the interactive prompt described above. In
+In some cases, you want to use a non-standard cache location. In
 that situation, you can set the path to the cache with the R option
 \code{R.cache.rootPath} or the environment variable \code{R_CACHE_ROOTPATH} to an
-existent path before you call the styler API. This should avoid the prompt.
-\code{R.cache::setCacheRootPath("/path/to/cache")} is also programmatic but will
-probably give the prompt anyways if called interactively.
-}
-
-\section{Non-interactive use}{
-
-Note that if you have never authorized \code{{R.cache}} to create the cache in a
-permanent directory and you use \code{{styler}} non-interactively, it will build the
-cache in a temporary directory. To create a permanent cache, follow the
-section 'Non-interactive setup' or 'Interactive setup' above.
+existent path before you call the styler API.
 }
 
 \section{Invalidation}{
@@ -63,8 +40,7 @@ empty files which have the hash of output code as name).
 
 If you want to set up caching in a CI/CD pipeline, we suggest to set the
 \code{{R.cache}} root path to a directory for which you have the cache enabled as
-described above in the section 'Non-interactive setup'. This can often be set
-in config files of CI/CD tools, e.g. see the
+This can often be set in config files of CI/CD tools, e.g. see the
 \href{https://docs.travis-ci.com/user/caching}{Travis documentation on caching}.
 }
 
