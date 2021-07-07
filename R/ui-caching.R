@@ -32,27 +32,10 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' Since we leverage `{R.cache}` to manage the cache, you can also use any
 #' `{R.cache}` functionality to manipulate it.
 #'
-#' @section Interactive setup:
-#'  `{styler}` by default uses caching via the `{R.cache}` package. When interacting
-#' with `{styler}`, you will be asked to let it create a permanent cache on your
-#' file system that styler will use in case it is not set already up for another
-#' tool that uses `{R.cache}`. We encourage users to let `{R.cache}` create a
-#' permanent directory for caching because, otherwise, the cache is lost at
-#' restart of R.
-#'
-#' @section Non-interactive setup:
-#' In some cases, you want to avoid the interactive prompt described above. In
+#' In some cases, you want to use a non-standard cache location. In
 #' that situation, you can set the path to the cache with the R option
 #' `R.cache.rootPath` or the environment variable `R_CACHE_ROOTPATH` to an
-#' existent path before you call the styler API. This should avoid the prompt.
-#' `R.cache::setCacheRootPath("/path/to/cache")` is also programmatic but will
-#' probably give the prompt anyways if called interactively.
-#'
-#' @section Non-interactive use:
-#' Note that if you have never authorized `{R.cache}` to create the cache in a
-#' permanent directory and you use `{styler}` non-interactively, it will build the
-#' cache in a temporary directory. To create a permanent cache, follow the
-#' section 'Non-interactive setup' or 'Interactive setup' above.
+#' existent path before you call the styler API.
 #'
 #' @section Invalidation:
 #' The cache is specific to a version of styler by default, because different
@@ -67,8 +50,7 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' @section Using a cache for styler in CI/CD:
 #' If you want to set up caching in a CI/CD pipeline, we suggest to set the
 #' `{R.cache}` root path to a directory for which you have the cache enabled as
-#' described above in the section 'Non-interactive setup'. This can often be set
-#' in config files of CI/CD tools, e.g. see the
+#' This can often be set in config files of CI/CD tools, e.g. see the
 #' [Travis documentation on caching](https://docs.travis-ci.com/user/caching).
 #'
 #' @name caching

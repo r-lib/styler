@@ -68,6 +68,9 @@
 * `exclude_dirs` in `style_pkg()` is now properly respected if it is a 
   sub-directory of a directory that is scheduled for styling (e.g. 
   `test/testthat/some/dir`) (#811).
+* the user is not prompted anymore to confirm the creation of a permanent cache 
+  as R.cache >= 0.15.0 uses a standard location in line with CRAN policies 
+  (#819).
 * R code chunks in nested non-R chunks in R markdown don't yield an error 
   anymore when document is styled, chunks are still not styled (#788, #794).
 * `cache_activate()` and `cache_deactivate()` now respect the R 
