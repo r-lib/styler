@@ -187,7 +187,7 @@
 <a href="#alignment-detection" class="anchor"></a>Alignment detection</h2>
 <ul>
 <li>
-<p>code with left alignment after <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> in function calls is now recognized as aligned and won’t be reformatted (<a href='https://github.com/r-lib/styler/issues/774'>#774</a>, <a href='https://github.com/r-lib/styler/issues/777'>#777</a>).</p>
+<p>Code with left alignment after <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> in function calls is now recognized as aligned and won’t be reformatted (<a href='https://github.com/r-lib/styler/issues/774'>#774</a>, <a href='https://github.com/r-lib/styler/issues/777'>#777</a>).</p>
 <pre><code><a href="https://rdrr.io/r/base/call.html"># already detected previously
 call(
   x  = 12345,
@@ -201,7 +201,7 @@ call(
 )</a></code></pre>
 </li>
 <li>
-<p>similarly, left aligned after comma is now detected (<a href='https://github.com/r-lib/styler/issues/785'>#785</a>, <a href='https://github.com/r-lib/styler/issues/786'>#786</a>).</p>
+<p>Similarly, left aligned after comma is now detected (<a href='https://github.com/r-lib/styler/issues/785'>#785</a>, <a href='https://github.com/r-lib/styler/issues/786'>#786</a>).</p>
 <pre><code><a href="https://rdrr.io/r/base/call.html"># previously detected
 call(
   x  = 12345, "It's old",
@@ -235,6 +235,9 @@ tribble(
 <a href="#other-new-features" class="anchor"></a>Other new features</h2>
 <ul>
 <li>The base R pipe as introduced in R 4.1.0 is now styled the same way the magrittr pipe is (<a href='https://github.com/r-lib/styler/issues/803'>#803</a>).</li>
+<li>code chunks with explicit <code>tidy = FALSE</code> in an Rmd or Rnw code header are not styled anymore. This can be handy when the code can’t be parsed, e.g. within a learnr tutorial (<a href='https://github.com/r-lib/styler/issues/790'>#790</a>).</li>
+<li>
+<code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</li>
 </ul>
 </div>
 <div id="minor-changes-and-fixes" class="section level2">
@@ -242,22 +245,19 @@ tribble(
 <a href="#minor-changes-and-fixes" class="anchor"></a>Minor changes and fixes</h2>
 <ul>
 <li>No curly braces are added to else statements if they are within a pipe, as this can change evaluation logic of code involving the magrittr dot in rare cases (<a href='https://github.com/r-lib/styler/issues/816'>#816</a>).</li>
-<li>line breaks between <code>}</code> and <code>else</code> are removed (<a href='https://github.com/r-lib/styler/issues/793'>#793</a>).</li>
-<li>in function calls, code after <code>= #\n</code> is indented correctly (<a href='https://github.com/r-lib/styler/issues/814'>#814</a>).</li>
-<li>styler won’t format code chunks with explicit <code>tidy = FALSE</code> in an Rmd or Rnw code header anymore. This can be handy when the code can’t be parsed, e.g. within a learnr tutorial (<a href='https://github.com/r-lib/styler/issues/790'>#790</a>).</li>
-<li>
-<code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href='https://github.com/r-lib/styler/issues/771'>#771</a>).</li>
-<li>multi-expressions containing multiple assignments no longer remove line breaks if they are not causing blank lines (<a href='https://github.com/r-lib/styler/issues/809'>#809</a>).</li>
+<li>Line breaks between <code>}</code> and <code>else</code> are removed (<a href='https://github.com/r-lib/styler/issues/793'>#793</a>).</li>
+<li>In function calls, code after <code>= #\n</code> is indented correctly (<a href='https://github.com/r-lib/styler/issues/814'>#814</a>).</li>
+<li>Multi-expressions containing multiple assignments no longer remove line breaks if they are not causing blank lines (<a href='https://github.com/r-lib/styler/issues/809'>#809</a>).</li>
 <li>
 <code>exclude_dirs</code> in <code><a href="../reference/style_pkg.html">style_pkg()</a></code> is now properly respected if it is a sub-directory of a directory that is scheduled for styling (e.g.  <code>test/testthat/some/dir</code>) (<a href='https://github.com/r-lib/styler/issues/811'>#811</a>).</li>
-<li>the user is not prompted anymore to confirm the creation of a permanent cache as R.cache &gt;= 0.15.0 uses a standard location in line with CRAN policies (<a href='https://github.com/r-lib/styler/issues/819'>#819</a>).</li>
+<li>The user is not prompted anymore to confirm the creation of a permanent cache as R.cache &gt;= 0.15.0 uses a standard location in line with CRAN policies (<a href='https://github.com/r-lib/styler/issues/819'>#819</a>).</li>
 <li>R code chunks in nested non-R chunks in R markdown don’t yield an error anymore when document is styled, chunks are still not styled (<a href='https://github.com/r-lib/styler/issues/788'>#788</a>, <a href='https://github.com/r-lib/styler/issues/794'>#794</a>).</li>
 <li>
 <code><a href="../reference/cache_activate.html">cache_activate()</a></code> and <code><a href="../reference/cache_activate.html">cache_deactivate()</a></code> now respect the R option <code>styler.quiet</code> (<a href='https://github.com/r-lib/styler/issues/797'>#797</a>).</li>
 <li>
 <code>multi_line</code> attribute in parse table is now integer, not boolean (<a href='https://github.com/r-lib/styler/issues/782'>#782</a>).</li>
-<li>style guide used in Addin is verified when set via R option (<a href='https://github.com/r-lib/styler/issues/789'>#789</a>).</li>
-<li>improve pkgdown author URLs (<a href='https://github.com/r-lib/styler/issues/775'>#775</a>).</li>
+<li>The style guide used in Addin is verified when set via R option (<a href='https://github.com/r-lib/styler/issues/789'>#789</a>).</li>
+<li>Improve pkgdown author URLs (<a href='https://github.com/r-lib/styler/issues/775'>#775</a>).</li>
 <li>Upgrade touchstone infra (<a href='https://github.com/r-lib/styler/issues/799'>#799</a>, <a href='https://github.com/r-lib/styler/issues/805'>#805</a>).</li>
 <li>Don’t test on R 3.3 anymore as tidyverse <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/">supports only four previous releases</a> (<a href='https://github.com/r-lib/styler/issues/804'>#804</a>).</li>
 <li>Update Github Actions workflow (<a href='https://github.com/r-lib/styler/issues/810'>#810</a>).</li>
@@ -269,10 +269,10 @@ tribble(
 <a href="#styler-141" class="anchor"></a>styler 1.4.1<small> 2021-03-30 </small>
 </h1>
 <ul>
-<li>Fix interaction between cache and <code>base_indention</code>. This also fixes the Addin for styling a selection with base indention repeatedly (<a href='https://github.com/r-lib/styler/issues/764'>#764</a>).</li>
-<li>Add more examples to <code>styler_*</code> helpfiles (<a href='https://github.com/r-lib/styler/issues/762'>#762</a>).</li>
-<li>Hexadecimal integers now preserve the trailing <code>L</code> when styled (<a href='https://github.com/r-lib/styler/issues/761'>#761</a>).</li>
-<li>Add a pre-push hook to make sure news bullets are added to each PR (<a href='https://github.com/r-lib/styler/issues/765'>#765</a>).</li>
+<li>fix interaction between cache and <code>base_indention</code>. This also fixes the Addin for styling a selection with base indention repeatedly (<a href='https://github.com/r-lib/styler/issues/764'>#764</a>).</li>
+<li>add more examples to <code>styler_*</code> helpfiles (<a href='https://github.com/r-lib/styler/issues/762'>#762</a>).</li>
+<li>hexadecimal integers now preserve the trailing <code>L</code> when styled (<a href='https://github.com/r-lib/styler/issues/761'>#761</a>).</li>
+<li>add a pre-push hook to make sure news bullets are added to each PR (<a href='https://github.com/r-lib/styler/issues/765'>#765</a>).</li>
 </ul>
 </div>
     <div id="styler-140" class="section level1">
