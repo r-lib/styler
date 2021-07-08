@@ -2,7 +2,7 @@
 
 ## Alignment detection
 
-* code with left alignment after `=` in function calls is now recognized as 
+* Code with left alignment after `=` in function calls is now recognized as 
   aligned and won't be reformatted (#774, #777).
   ```
   # already detected previously
@@ -18,7 +18,7 @@
   )
   ```
 
-* similarly, left aligned after comma is now detected (#785, #786).
+* Similarly, left aligned after comma is now detected (#785, #786).
   ```
   # previously detected
   call(
@@ -51,24 +51,24 @@
 
 * The base R pipe as introduced in R 4.1.0 is now styled the same way the 
   magrittr pipe is (#803).
+* code chunks with explicit `tidy = FALSE` in an Rmd or Rnw code header are not 
+  styled anymore. This can be handy when the code can't be parsed, e.g.
+  within a learnr tutorial (#790).
+* `#>` is recognized as an output marker and no space is added after `#` (#771).
 
 ## Minor changes and fixes
 
 * No curly braces are added to else statements if they are within a pipe, as 
   this can change evaluation logic of code involving the magrittr dot in rare 
   cases (#816).
-* line breaks between `}` and `else` are removed (#793).
-* in function calls, code after `= #\n` is indented correctly (#814).
-* styler won't format code chunks with explicit `tidy = FALSE` in an Rmd or Rnw 
-  code header anymore. This can be handy when the code can't be parsed, e.g.
-  within a learnr tutorial (#790).
-* `#>` is recognized as an output marker and no space is added after `#` (#771).
-* multi-expressions containing multiple assignments no longer remove line breaks
+* Line breaks between `}` and `else` are removed (#793).
+* In function calls, code after `= #\n` is indented correctly (#814).
+* Multi-expressions containing multiple assignments no longer remove line breaks
   if they are not causing blank lines (#809).
 * `exclude_dirs` in `style_pkg()` is now properly respected if it is a 
   sub-directory of a directory that is scheduled for styling (e.g. 
   `test/testthat/some/dir`) (#811).
-* the user is not prompted anymore to confirm the creation of a permanent cache 
+* The user is not prompted anymore to confirm the creation of a permanent cache 
   as R.cache >= 0.15.0 uses a standard location in line with CRAN policies 
   (#819).
 * R code chunks in nested non-R chunks in R markdown don't yield an error 
@@ -76,8 +76,8 @@
 * `cache_activate()` and `cache_deactivate()` now respect the R 
   option `styler.quiet` (#797).
 * `multi_line` attribute in parse table is now integer, not boolean (#782).
-* style guide used in Addin is verified when set via R option (#789).
-* improve pkgdown author URLs (#775).
+* The style guide used in Addin is verified when set via R option (#789).
+* Improve pkgdown author URLs (#775).
 * Upgrade touchstone infra (#799, #805).
 * Don't test on R 3.3 anymore as tidyverse [supports only four previous
   releases](https://www.tidyverse.org/blog/2019/04/r-version-support/) (#804).
@@ -85,11 +85,11 @@
 
 # styler 1.4.1
 
-* Fix interaction between cache and `base_indention`. This also fixes
+* fix interaction between cache and `base_indention`. This also fixes
   the Addin for styling a selection with base indention repeatedly (#764).
-* Add more examples to `styler_*` helpfiles (#762).
-* Hexadecimal integers now preserve the trailing `L` when styled (#761).
-* Add a pre-push hook to make sure news bullets are added to each PR (#765).
+* add more examples to `styler_*` helpfiles (#762).
+* hexadecimal integers now preserve the trailing `L` when styled (#761).
+* add a pre-push hook to make sure news bullets are added to each PR (#765).
 
 
 # styler 1.4.0
