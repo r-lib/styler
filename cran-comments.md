@@ -1,11 +1,8 @@
-This is a follow-up release to version 1.4.0 (2021-03-22) because a major bug
-(https://github.com/r-lib/styler/issues/763) had to be resolved. The last 
-update of styler was more than a year ago. 
 
 ## Test environments
 
 * local OS X install (10.15.7): R 4.0.3
-* ubuntu 16.04 (on GitHub Actions): R devel, R 4.0.3, R 3.6, R 3.5, R 3.4, R 3.3
+* ubuntu 18.04 (on GitHub Actions): R devel, R 4.0.3, R 3.6, R 3.5, R 3.4, R 3.3
 * Windows Server 10 (on GitHub Actions): R 3.6, R 4.0.3
 * win-builder: R devel
 
@@ -35,11 +32,14 @@ I also ran R CMD check on all downstream dependencies of styler using the
 revdepcheck package. The 
 downstream dependencies are: 
 
-* Reverse imports:	biocthis, exampletestr, languageserver, questionr,
-  shinyobjects, ShinyQuickStarter, systemPipeShiny.
-* Reverse suggests:	autothresholdr, crunch, datastructures, drake, epigraphdb,
-  knitr, netReg, nph, precommit, reprex, shinydashboardPlus, shinyMonacoEditor,
-  usethis
+* Reverse imports: biocthis, exampletestr, iNZightTools, languageserver, 
+  questionr, shinymeta, shinyobjects, ShinyQuickStarter, systemPipeShiny, 
+  tidypaleo.
+  	
+* Reverse suggests:	autothresholdr, crunch, datastructures, drake, epigraphdb, 
+  knitr, multiverse, nph, precommit, reprex, shinydashboardPlus, 
+  shinyMonacoEditor, usethis.
+
 
 All of them finished R CMD CHECK with the same number of ERRORS, WARNINGS and 
 NOTES as with the current CRAN version of styler, which means the new 
