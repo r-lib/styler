@@ -1,4 +1,4 @@
-# styler 1.5.0
+# styler 1.5.1
 
 ## Alignment detection
 
