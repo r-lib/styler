@@ -25,7 +25,7 @@ test_that("style_file with no tokens returns empty string and warning", {
 
 test_that("warning is given when transformers does not contain a version", {
   sg <- create_style_guide(style_guide_version = NULL)
-  if (packageVersion("styler") < "1.5") {
+  if (packageVersion("styler") < "2.0") {
     expect_fun <- expect_warning
   } else {
     expect_fun <- expect_error

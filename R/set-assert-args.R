@@ -21,7 +21,7 @@ set_arg_write_tree <- function(write_tree) {
 #' @inheritParams make_transformer
 #' @keywords internal
 assert_transformers <- function(transformers) {
-  version_cutoff <- 1.5
+  version_cutoff <- 2.0
   no_name <- is.null(transformers$style_guide_name)
   no_version <- is.null(transformers$style_guide_version)
   if (no_name || no_version) {
