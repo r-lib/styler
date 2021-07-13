@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>dir(), but without dot-prefix — dir_without_. • styler</title>
+<title>dir(), but without dot-prefix and different defaults — dir_without_. • styler</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="dir(), but without dot-prefix — dir_without_." />
+<meta property="og:title" content="dir(), but without dot-prefix and different defaults — dir_without_." />
 <meta property="og:description" content="When using dir(), you can set full.names = FALSE, but then you can only
 pass a character vector of length one as path to not loose the information
 about where the files are. This function solves that case. It's needed when
@@ -82,7 +82,7 @@ user supplied input does not have a dot prefix. See 'Examples'." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
       </span>
     </div>
 
@@ -179,7 +179,7 @@ user supplied input does not have a dot prefix. See 'Examples'." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>dir()</code>, but without dot-prefix</h1>
+    <h1><code>dir()</code>, but without dot-prefix and different defaults</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/utils-files.R'><code>R/utils-files.R</code></a></small>
     <div class="hidden name"><code>dir_without_..Rd</code></div>
     </div>
@@ -192,7 +192,7 @@ one wants to standardize paths to use set operations on them, i.e. when the
 user supplied input does not have a dot prefix. See 'Examples'.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dir_without_.</span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>dir_without_.</span><span class='op'>(</span><span class='va'>path</span>, recursive <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,6 +207,9 @@ user supplied input does not have a dot prefix. See 'Examples'.</p>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For different defaults, see <code>dir_without_._one</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>set_and_assert_arg_paths</p></div>
@@ -225,7 +228,7 @@ user supplied input does not have a dot prefix. See 'Examples'.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://krlmlr.info'>Kirill Müller</a>, <a href='http://lorenzwalthert.netlify.com'>Lorenz Walthert</a>.</p>
+  <p>Developed by <a href='https://krlmlr.info'>Kirill Müller</a>, <a href='https://lorenzwalthert.com'>Lorenz Walthert</a>.</p>
 </div>
 
 <div class="pkgdown">

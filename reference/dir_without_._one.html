@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Split text into roxygen and non-roxygen example segments — split_roxygen_segments • styler</title>
+<title>dir(), but with full names, ignored case, and included hidden files and
+recursive. — dir_without_._one • styler</title>
 
 
 <!-- jquery -->
@@ -45,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Split text into roxygen and non-roxygen example segments — split_roxygen_segments" />
-<meta property="og:description" content="Split text into roxygen and non-roxygen example segments" />
+<meta property="og:title" content="dir(), but with full names, ignored case, and included hidden files and
+recursive. — dir_without_._one" />
+<meta property="og:description" content="dir(), but with full names, ignored case, and included hidden files and
+recursive." />
 
 
 
@@ -175,40 +178,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Split text into roxygen and non-roxygen example segments</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/transform-files.R'><code>R/transform-files.R</code></a></small>
-    <div class="hidden name"><code>split_roxygen_segments.Rd</code></div>
+    <h1><code>dir()</code>, but with full names, ignored case, and included hidden files and
+recursive.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/utils-files.R'><code>R/utils-files.R</code></a></small>
+    <div class="hidden name"><code>dir_without_._one.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Split text into roxygen and non-roxygen example segments</p>
+    <p><code><a href='https://rdrr.io/r/base/list.files.html'>dir()</a></code>, but with full names, ignored case, and included hidden files and
+recursive.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>split_roxygen_segments</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>roxygen_examples</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>dir_without_._one</span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>recursive</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>text</th>
-      <td><p>Roxygen comments</p></td>
-    </tr>
-    <tr>
-      <th>roxygen_examples</th>
-      <td><p>Integer sequence that indicates which lines in <code>text</code>
-are roxygen examples. Most conveniently obtained with
-<a href='identify_start_to_stop_of_roxygen_examples_from_text.html'>identify_start_to_stop_of_roxygen_examples_from_text</a>.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A list with two elements:</p><ul>
-<li><p>A list that contains elements grouped into roxygen and non-roxygen
-sections. This list is named <code>separated</code>.</p></li>
-<li><p>An integer vector with the indices that correspond to roxygen code
-examples in <code>separated</code>.</p></li>
-</ul>
 
 
   </div>

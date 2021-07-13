@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Split text into roxygen and non-roxygen example segments — split_roxygen_segments • styler</title>
+<title>Drop start / stop, when formatting is turned off — finalize_raw_chunks • styler</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="Split text into roxygen and non-roxygen example segments — split_roxygen_segments" />
-<meta property="og:description" content="Split text into roxygen and non-roxygen example segments" />
+<meta property="og:title" content="Drop start / stop, when formatting is turned off — finalize_raw_chunks" />
+<meta property="og:description" content="If tidy = FALSE (the knitr code chunk default), code is not styled upon
+knitting. If it is explicitly added to a code chunk, the code chunk is in
+addition not styled with styler when formatting the document." />
 
 
 
@@ -175,40 +177,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Split text into roxygen and non-roxygen example segments</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/transform-files.R'><code>R/transform-files.R</code></a></small>
-    <div class="hidden name"><code>split_roxygen_segments.Rd</code></div>
+    <h1>Drop start / stop, when formatting is turned off</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/transform-code.R'><code>R/transform-code.R</code></a></small>
+    <div class="hidden name"><code>finalize_raw_chunks.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Split text into roxygen and non-roxygen example segments</p>
+    <p>If <code>tidy = FALSE</code> (the knitr code chunk default), code is not styled upon
+knitting. If it is explicitly added to a code chunk, the code chunk is in
+addition not styled with styler when formatting the document.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>split_roxygen_segments</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>roxygen_examples</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>finalize_raw_chunks</span><span class='op'>(</span><span class='va'>start</span>, <span class='va'>end</span>, <span class='va'>filetype</span>, <span class='va'>lines</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>text</th>
-      <td><p>Roxygen comments</p></td>
-    </tr>
-    <tr>
-      <th>roxygen_examples</th>
-      <td><p>Integer sequence that indicates which lines in <code>text</code>
-are roxygen examples. Most conveniently obtained with
-<a href='identify_start_to_stop_of_roxygen_examples_from_text.html'>identify_start_to_stop_of_roxygen_examples_from_text</a>.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A list with two elements:</p><ul>
-<li><p>A list that contains elements grouped into roxygen and non-roxygen
-sections. This list is named <code>separated</code>.</p></li>
-<li><p>An integer vector with the indices that correspond to roxygen code
-examples in <code>separated</code>.</p></li>
-</ul>
 
 
   </div>
