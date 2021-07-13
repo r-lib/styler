@@ -90,7 +90,7 @@ identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pat
     starts <- grep("^[\t >]*```+\\s*\\{([Rr]( *[ ,].*)?)\\}\\s*$", lines, perl = TRUE)
     ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
     ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1]]) %>%
-      na.omit()
+      stats::na.omit()
     if (length(starts) != length(ends) || anyDuplicated(ends) != 0) {
       abort("Malformed file!")
     }
