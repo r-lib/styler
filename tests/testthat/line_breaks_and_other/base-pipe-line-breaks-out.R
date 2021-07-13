@@ -88,3 +88,8 @@ blew(y = 2, x |>
 {
   a |> c() + 1
 }
+
+b |>
+  f() |> # never move comment to next line as it can be styler: off or nolint
+  k() |>
+  x()

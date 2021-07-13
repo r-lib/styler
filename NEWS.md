@@ -1,3 +1,7 @@
+# styler 1.5.1.9000 (Development version)
+
+* Don't break line before comments in pipes (#822).
+
 # styler 1.5.1
 
 ## Alignment detection
