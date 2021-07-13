@@ -193,7 +193,7 @@ add_line_break_after_pipe <- function(pd) {
 
   if (sum(is_pipe & pd$token_after != "COMMENT") > 1 &&
     !(next_terminal(pd, vars = "token_before")$token_before %in% c("'('", "EQ_SUB", "','"))) {
-    pd$lag_newlines[lag(is_pipe)] <- 1L
+    pd$lag_newlines[lag(is_pipe) & pd$token != "COMMENT"] <- 1L
   }
   pd
 }
