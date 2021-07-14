@@ -37,6 +37,20 @@
 #'   a + b # line break also here because
 #'   # preceded by brace expression
 #' )
+#'
+#' # brace expressions go on new line if part of a pipe, in function call...
+#' c(
+#'   data %>%
+#'     filter(bar) %>% {
+#'       cor(.$col1, .$col2, use = "complete.obs")
+#'     }
+#' )
+#' # ... or outside
+#' data %>%
+#'   filter(bar) %>%
+#'   {
+#'     cor(.$col1, .$col2, use = "complete.obs")
+#'   }
 #' }
 set_line_break_before_curly_opening <- function(pd) {
   line_break_to_set_idx <- which(
@@ -54,21 +68,25 @@ set_line_break_before_curly_opening <- function(pd) {
       # rule not applicable for IF
       TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
     )
-    eq_sub_before <- pd$token[line_break_to_set_idx] == "EQ_SUB"
+
+    no_line_break_before_curly_idx <- pd$token[line_break_to_set_idx] %in% "EQ_SUB"
     linebreak_before_curly <- ifelse(is_function_call(pd),
+      # if in function call and has pipe, it is not recognized as function call and
+      # goes to else case
       any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1])] > 0),
-      FALSE
+      # if not a function call, only break line if it is a pipe followed by {}
+      pd$token[line_break_to_set_idx] %in% c("SPECIAL-PIPE", "PIPE")
     )
     # no line break before last brace expression and named brace expression to
     should_be_on_same_line <- is_not_curly_curly &
-      ((is_last_expr & !linebreak_before_curly) | eq_sub_before)
+      ((is_last_expr & !linebreak_before_curly) | no_line_break_before_curly_idx)
     is_not_curly_curly_idx <- line_break_to_set_idx[should_be_on_same_line]
     pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
 
 
     # other cases: line breaks
     should_not_be_on_same_line <- is_not_curly_curly &
-      ((!is_last_expr | linebreak_before_curly) & !eq_sub_before)
+      ((!is_last_expr | linebreak_before_curly) & !no_line_break_before_curly_idx)
     should_not_be_on_same_line_idx <- line_break_to_set_idx[should_not_be_on_same_line]
 
     pd$lag_newlines[1 + should_not_be_on_same_line_idx] <- 1L

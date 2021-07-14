@@ -89,3 +89,68 @@ b %>%
   f() %>% # never move comment to next line as it can be styler: off or nolint
   k() %>%
   x()
+
+
+# line break before { inserted inside and outside function calls
+c(
+data %>%
+  filter(bar) %>% {
+    cor(.$col1, .$col2, use = "complete.obs")
+  }
+)
+
+data %>%
+  filter(bar) %>% {
+    cor(.$col1, .$col2, use = "complete.obs")
+  }
+
+# line break before { kept inside and outside function calls
+c(
+  data %>%
+    filter(bar) %>%
+    {
+      cor(.$col1, .$col2, use = "complete.obs")
+    }
+)
+
+data %>%
+  filter(bar) %>%
+  {
+    cor(.$col1, .$col2, use = "complete.obs")
+  }
+
+# redundant blank lines removed
+c(
+  data %>%
+    filter(bar) %>%
+
+    {
+      cor(.$col1, .$col2, use = "complete.obs")
+    }
+)
+
+data %>%
+  filter(bar) %>%
+
+  {
+    cor(.$col1, .$col2, use = "complete.obs")
+  }
+
+# blank lines kept when around comment
+c(
+  data %>%
+    filter(bar) %>%
+    # comment
+
+    {
+      cor(.$col1, .$col2, use = "complete.obs")
+    }
+)
+
+data %>%
+  filter(bar) %>%
+  # comment
+
+  {
+    cor(.$col1, .$col2, use = "complete.obs")
+  }
