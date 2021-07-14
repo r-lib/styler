@@ -46,6 +46,20 @@ tryGugus(
   a + b # line break also here because
   # preceded by brace expression
 )
+
+# brace expressions go on new line if part of a pipe, in function call...
+c(
+  data \%>\%
+    filter(bar) \%>\% {
+      cor(.$col1, .$col2, use = "complete.obs")
+    }
+)
+# ... or outside
+data \%>\%
+  filter(bar) \%>\%
+  {
+    cor(.$col1, .$col2, use = "complete.obs")
+  }
 }
 }
 \keyword{internal}
