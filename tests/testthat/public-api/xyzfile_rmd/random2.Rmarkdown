@@ -1,0 +1,18 @@
+```{r}
+# Start with chunk
+```
+Some text before empty chunk
+```{r}
+
+```
+Final text before longer code chunk
+This text chunk has multiple lines
+```{R}
+# random
+this(is_a_call(x))
+if (x) {
+  r()
+  a    <- 3
+  bcds <- 5
+}
+```
