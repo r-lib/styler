@@ -6,7 +6,7 @@ NULL
 #' Prettify R source code
 #'
 #' Performs various substitutions in all `.R` files in a package
-#' (code and tests). One can also (optionally) style `.Rmd` `.Rmarkdown` and/or
+#' (code and tests). One can also (optionally) style `.Rmd`, `.Rmarkdown` and/or
 #' `.Rnw` files (vignettes and readme) by changing the `filetype` argument.
 #' Carefully examine the results after running this function!
 #'
