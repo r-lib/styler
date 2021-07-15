@@ -28,6 +28,13 @@
     language: r
     files: '\.[rR]$'
     minimum_pre_commit_version: "2.13.0"
+-   id: no-debug-statement
+    name: no-debug-statement
+    description: check if a .R file contains a `debug()` or `debugonce()` statement
+    entry: inst/hooks/exported/no-debug-statement.R
+    language: script
+    files: '\.[rR]$'
+    minimum_pre_commit_version: "2.13.0"
 -   id: parsable-R
     name: parsable-R
     description: check if a .R file is parsable
