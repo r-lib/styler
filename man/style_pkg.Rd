@@ -34,7 +34,7 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 \item{filetype}{Vector of file extensions indicating which file types should
 be styled. Case is ignored, and the \code{.} is optional, e.g.
 \code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after
-standardization) are: "r", "rprofile", "rmd", "rnw".}
+standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
@@ -59,7 +59,7 @@ styling are not identical.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package
-(code and tests). One can also (optionally) style \code{.Rmd} and/or
+(code and tests). One can also (optionally) style \code{.Rmd} \code{.Rmarkdown} and/or
 \code{.Rnw} files (vignettes and readme) by changing the \code{filetype} argument.
 Carefully examine the results after running this function!
 }
