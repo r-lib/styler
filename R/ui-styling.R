@@ -138,6 +138,21 @@ prettify_pkg <- function(transformers,
     )
   }
 
+  if ("\\.rmarkdown" %in% filetype_) {
+    vignette_files <- append(
+      vignette_files,
+      dir_without_.(
+        path = "vignettes", pattern = "\\.rmarkdown$"
+      )
+    )
+    readme <- append(
+      readme,
+      dir_without_.(
+        path = ".", pattern = "^readme\\.rmarkdown$"
+      )
+    )
+  }
+
   if ("\\.rnw" %in% filetype_) {
     vignette_files <- append(
       vignette_files,
