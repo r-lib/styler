@@ -6,7 +6,7 @@ is_rprofile_file <- function(path) {
   grepl(".rprofile", path, ignore.case = TRUE)
 }
 is_rmd_file <- function(path) {
-  grepl("\\.Rmd$", path, ignore.case = TRUE)
+  grepl("\\.(Rmd|Rmarkdown)$", path, ignore.case = TRUE)
 }
 
 is_rnw_file <- function(path) {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ui-styling.R
 \name{style_file}
 \alias{style_file}
-\title{Style \code{.R}, \code{.Rmd} or \code{.Rnw} files}
+\title{Style \code{.R}, \code{.Rmd}, \code{.Rmarkdown} or \code{.Rnw} files}
 \usage{
 style_file(
   path,

@@ -6,7 +6,7 @@ NULL
 #' Prettify R source code
 #'
 #' Performs various substitutions in all `.R` files in a package
-#' (code and tests). One can also (optionally) style `.Rmd` and/or
+#' (code and tests). One can also (optionally) style `.Rmd`, `.Rmarkdown` and/or
 #' `.Rnw` files (vignettes and readme) by changing the `filetype` argument.
 #' Carefully examine the results after running this function!
 #'
@@ -95,7 +95,7 @@ style_pkg <- function(pkg = ".",
 #' @param filetype Vector of file extensions indicating which file types should
 #'   be styled. Case is ignored, and the `.` is optional, e.g.
 #'   `c(".R", ".Rmd")`, or `c("r", "rmd")`. Supported values (after
-#'   standardization) are: "r", "rprofile", "rmd", "rnw".
+#'   standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
 #' @param exclude_dirs Character vector with directories to exclude
@@ -135,6 +135,21 @@ prettify_pkg <- function(transformers,
     readme <- dir_without_.(
       path = ".",
       pattern = "^readme\\.rmd$"
+    )
+  }
+
+  if ("\\.rmarkdown" %in% filetype_) {
+    vignette_files <- append(
+      vignette_files,
+      dir_without_.(
+        path = "vignettes", pattern = "\\.rmarkdown$"
+      )
+    )
+    readme <- append(
+      readme,
+      dir_without_.(
+        path = ".", pattern = "^readme\\.rmarkdown$"
+      )
     )
   }
 
@@ -199,7 +214,7 @@ style_text <- function(text,
 
 #' Prettify arbitrary R code
 #'
-#' Performs various substitutions in all `.R`, `.Rmd` and/or `.Rnw` files
+#' Performs various substitutions in all `.R`, `.Rmd`, `.Rmarkdown` and/or `.Rnw` files
 #' in a directory (by default only `.R` files are styled - see `filetype` argument).
 #' Carefully examine the results after running this function!
 #' @param path Path to a directory with files to transform.
@@ -283,7 +298,7 @@ prettify_any <- function(transformers,
   )
 }
 
-#' Style `.R`, `.Rmd` or `.Rnw` files
+#' Style `.R`, `.Rmd`, `.Rmarkdown` or `.Rnw` files
 #'
 #' Performs various substitutions in the files specified.
 #' Carefully examine the results after running this function!

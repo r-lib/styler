@@ -21,7 +21,7 @@ parse tables.}
 \item{filetype}{Vector of file extensions indicating which file types should
 be styled. Case is ignored, and the \code{.} is optional, e.g.
 \code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after
-standardization) are: "r", "rprofile", "rmd", "rnw".}
+standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
