@@ -46,7 +46,7 @@
 
 
 <meta property="og:title" content="Prettify arbitrary R code — style_dir" />
-<meta property="og:description" content="Performs various substitutions in all .R, .Rmd and/or .Rnw files
+<meta property="og:description" content="Performs various substitutions in all .R, .Rmd, .Rmarkdown and/or .Rnw files
 in a directory (by default only .R files are styled - see filetype argument).
 Carefully examine the results after running this function!" />
 
@@ -183,7 +183,7 @@ Carefully examine the results after running this function!" />
     </div>
 
     <div class="ref-description">
-    <p>Performs various substitutions in all <code>.R</code>, <code>.Rmd</code> and/or <code>.Rnw</code> files
+    <p>Performs various substitutions in all <code>.R</code>, <code>.Rmd</code>, <code>.Rmarkdown</code> and/or <code>.Rnw</code> files
 in a directory (by default only <code>.R</code> files are styled - see <code>filetype</code> argument).
 Carefully examine the results after running this function!</p>
     </div>
@@ -231,7 +231,7 @@ conveniently constructed via the <code>style</code> argument and <code>...</code
       <td><p>Vector of file extensions indicating which file types should
 be styled. Case is ignored, and the <code>.</code> is optional, e.g.
 <code><a href='https://rdrr.io/r/base/c.html'>c(".R", ".Rmd")</a></code>, or <code><a href='https://rdrr.io/r/base/c.html'>c("r", "rmd")</a></code>. Supported values (after
-standardization) are: "r", "rprofile", "rmd", "rnw".</p></td>
+standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.</p></td>
     </tr>
     <tr>
       <th>recursive</th>

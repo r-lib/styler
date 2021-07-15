@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Style .R, .Rmd or .Rnw files — style_file • styler</title>
+<title>Style .R, .Rmd, .Rmarkdown or .Rnw files — style_file • styler</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="Style .R, .Rmd or .Rnw files — style_file" />
+<meta property="og:title" content="Style .R, .Rmd, .Rmarkdown or .Rnw files — style_file" />
 <meta property="og:description" content="Performs various substitutions in the files specified.
 Carefully examine the results after running this function!" />
 
@@ -176,7 +176,7 @@ Carefully examine the results after running this function!" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Style <code>.R</code>, <code>.Rmd</code> or <code>.Rnw</code> files</h1>
+    <h1>Style <code>.R</code>, <code>.Rmd</code>, <code>.Rmarkdown</code> or <code>.Rnw</code> files</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/ui-styling.R'><code>R/ui-styling.R</code></a></small>
     <div class="hidden name"><code>style_file.Rd</code></div>
     </div>
@@ -302,7 +302,7 @@ inspect the changes.</p>
 <span class='co'># but the first is most convenient:</span>
 <span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp0t32RD/styler6a14d40fade.R ℹ 
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpXIeNDi/styler175d57184df4.R ℹ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	0	File unchanged.
@@ -311,7 +311,7 @@ inspect the changes.</p>
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Please review the changes carefully!</div><div class='input'><span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, style <span class='op'>=</span> <span class='va'>tidyverse_style</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp0t32RD/styler6a14d40fade.R ✔ 
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpXIeNDi/styler175d57184df4.R ✔ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.
@@ -319,7 +319,7 @@ inspect the changes.</p>
 #&gt; ✖ 	0	Styling threw an error.
 #&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, transformers <span class='op'>=</span> <span class='fu'><a href='tidyverse_style.html'>tidyverse_style</a></span><span class='op'>(</span>strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp0t32RD/styler6a14d40fade.R ✔ 
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpXIeNDi/styler175d57184df4.R ✔ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.
@@ -329,7 +329,7 @@ inspect the changes.</p>
 <span class='co'># only style indention and less invasive  levels (i.e. spaces)</span>
 <span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, scope <span class='op'>=</span> <span class='st'>"indention"</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp0t32RD/styler6a14d40fade.R ✔ 
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpXIeNDi/styler175d57184df4.R ✔ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.
@@ -338,7 +338,7 @@ inspect the changes.</p>
 #&gt; ────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='co'># name levels explicitly to not style less invasive levels</span>
 <span class='fu'>style_file</span><span class='op'>(</span><span class='va'>file</span>, scope <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"tokens"</span>, <span class='st'>"spaces"</span><span class='op'>)</span><span class='op'>)</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Styling  1  files:
-#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp0t32RD/styler6a14d40fade.R ✔ 
+#&gt;  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpXIeNDi/styler175d57184df4.R ✔ 
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Status	Count	Legend 
 #&gt; ✔ 	1	File unchanged.
