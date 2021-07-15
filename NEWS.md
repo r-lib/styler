@@ -2,7 +2,7 @@
 
 * Don't break line before comments in pipes (#822).
 
-* Files with .Rmarkdown extensions are now recognised as an R markdown files in `style_file()` and friends (#824)
+* Files with `.Rmarkdown` extension are now recognised as an R markdown files in `style_file()` and friends (#824)
 
 # styler 1.5.1
 
