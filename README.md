@@ -45,11 +45,6 @@ Or get the development version from GitHub:
 remotes::install_github("r-lib/styler")
 ```
 
-If you don’t use styler interactively (i.e. not from the R prompt or
-RStudio Addin), make sure you authorize the R package R.cache once to
-set up a permanent cache. If you use it interactively, you will be asked
-to grant this permission once. See `?caching` for details.
-
 ## Documentation
 
 The following online docs are available:
