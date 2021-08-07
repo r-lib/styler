@@ -25,24 +25,12 @@ style_roxygen_code_example <- function(example, transformers, base_indention) {
 style_roxygen_code_example_one <- function(example_one, transformers, base_indention) {
   bare <- parse_roxygen(example_one)
   one_dont <- split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
-  styled <- map(one_dont, style_roxygen_code_example_segment,
+  map(one_dont, style_roxygen_code_example_segment,
     transformers = transformers,
     base_indention = base_indention
   ) %>%
     flatten_chr() %>%
-    add_roxygen_mask(bare$example_type)
-
-  ordinary_comment <- grep("^#[^']", example_one, value = TRUE)
-  if (length(ordinary_comment) == 0L) {
-    return(styled)
-  }
-  without_mask <- remove_roxygen_mask(styled)
-  for (idx in seq_along(ordinary_comment)) {
-    to_replace <- which(ordinary_comment[idx] == without_mask)[1]
-    styled[to_replace] <- ordinary_comment[idx]
-    without_mask[to_replace] <- NA
-  }
-  styled
+    add_roxygen_mask(example_one, bare$example_type)
 }
 
 #' Style a roxygen code example segment
