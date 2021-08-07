@@ -37,6 +37,8 @@ remove_roxygen_header <- function(text) {
 #' This function compares `text` with `initial_text` to make sure a mask is only
 #' added to roxygen comments, not ordinary comments
 #' @param text Character vector with code.
+#' @param initial_text The roxygen code example to style with mask and
+#'   potentially ordinary comments.
 #' @param example_type Either 'examples' or 'examplesIf'.
 #' @keywords internal
 #' @importFrom purrr map2_chr

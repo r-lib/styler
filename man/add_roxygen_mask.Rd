@@ -9,6 +9,9 @@ add_roxygen_mask(text, initial_text, example_type)
 \arguments{
 \item{text}{Character vector with code.}
 
+\item{initial_text}{The roxygen code example to style with mask and
+potentially ordinary comments.}
+
 \item{example_type}{Either 'examples' or 'examplesIf'.}
 }
 \description{
