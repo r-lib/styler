@@ -40,6 +40,7 @@ style_roxygen_code_example_one <- function(example_one, transformers, base_inden
   for (idx in seq_along(ordinary_comment)) {
     to_replace <- which(ordinary_comment[idx] == without_mask)[1]
     styled[to_replace] <- ordinary_comment[idx]
+    without_mask[to_replace] <- NA
   }
   styled
 }

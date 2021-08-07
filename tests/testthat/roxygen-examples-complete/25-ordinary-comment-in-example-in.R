@@ -108,3 +108,26 @@ NULL
 # nolint end
 #' df %>% func()
 func <- function() NULL
+
+
+#' Hi
+# Comment
+#' @examples
+#' 1 + 1
+# this
+# this
+#this
+# thi3
+#' c()
+NULL
+
+#' Hi
+# Comment
+#' @examples
+#' 1 + 1
+# this
+# this 
+#this
+# thi3
+#' c()
+NULL
