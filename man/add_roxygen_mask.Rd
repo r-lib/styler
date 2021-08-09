@@ -4,14 +4,18 @@
 \alias{add_roxygen_mask}
 \title{Add the roxygen mask to code}
 \usage{
-add_roxygen_mask(text, example_type)
+add_roxygen_mask(text, initial_text, example_type)
 }
 \arguments{
 \item{text}{Character vector with code.}
 
+\item{initial_text}{The roxygen code example to style with mask and
+potentially ordinary comments.}
+
 \item{example_type}{Either 'examples' or 'examplesIf'.}
 }
 \description{
-Add the roxygen mask to code
+This function compares \code{text} with \code{initial_text} to make sure a mask is only
+added to roxygen comments, not ordinary comments
 }
 \keyword{internal}

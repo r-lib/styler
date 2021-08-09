@@ -30,7 +30,7 @@ style_roxygen_code_example_one <- function(example_one, transformers, base_inden
     base_indention = base_indention
   ) %>%
     flatten_chr() %>%
-    add_roxygen_mask(bare$example_type)
+    add_roxygen_mask(example_one, bare$example_type)
 }
 
 #' Style a roxygen code example segment

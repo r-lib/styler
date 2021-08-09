@@ -1,0 +1,141 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--COMMENT: #' Ex [0/0] {1}                           
+ ¦--COMMENT: # Ran [1/0] {2}                           
+ ¦--COMMENT: #' Ro [1/0] {3}                           
+ ¦--COMMENT: #' @e [1/0] {4}                           
+ ¦--COMMENT: #' 1  [1/0] {5}                           
+ ¦--expr: NULL [1/0] {7}                               
+ ¦   °--NULL_CONST: NULL [0/0] {6}                     
+ ¦--COMMENT: #' Ex [3/0] {8}                           
+ ¦--COMMENT: # Ran [1/0] {9}                           
+ ¦--COMMENT: #' Ro [1/0] {10}                          
+ ¦--COMMENT: #' @e [1/0] {11}                          
+ ¦--COMMENT: #' 1  [1/0] {12}                          
+ ¦--expr: NULL [1/0] {14}                              
+ ¦   °--NULL_CONST: NULL [0/0] {13}                    
+ ¦--COMMENT: #' Ex [2/0] {15}                          
+ ¦--COMMENT: # Ran [1/0] {16}                          
+ ¦--COMMENT: #' Ro [1/0] {17}                          
+ ¦--COMMENT: #' @e [1/0] {18}                          
+ ¦--COMMENT: #' 1  [1/0] {19}                          
+ ¦--COMMENT: # com [1/0] {20}                          
+ ¦--COMMENT: # mor [1/0] {21}                          
+ ¦--expr: NULL [1/0] {23}                              
+ ¦   °--NULL_CONST: NULL [0/0] {22}                    
+ ¦--COMMENT: #' Ex [2/0] {24}                          
+ ¦--COMMENT: # Ran [1/0] {25}                          
+ ¦--COMMENT: #' Ro [1/0] {26}                          
+ ¦--COMMENT: #' @e [1/0] {27}                          
+ ¦--COMMENT: # The [1/0] {28}                          
+ ¦--COMMENT: #' 1  [1/0] {29}                          
+ ¦--COMMENT: # com [1/0] {30}                          
+ ¦--COMMENT: # mor [1/0] {31}                          
+ ¦--expr: NULL [1/0] {33}                              
+ ¦   °--NULL_CONST: NULL [0/0] {32}                    
+ ¦--COMMENT: #' Ex [2/0] {34}                          
+ ¦--COMMENT: #' Ra [1/0] {35}                          
+ ¦--COMMENT: #' Ro [1/0] {36}                          
+ ¦--COMMENT: #' @e [1/0] {37}                          
+ ¦--COMMENT: # The [1/0] {38}                          
+ ¦--COMMENT: #' 1  [1/0] {39}                          
+ ¦--COMMENT: # com [1/0] {40}                          
+ ¦--COMMENT: # mor [1/0] {41}                          
+ ¦--expr: NULL [1/0] {43}                              
+ ¦   °--NULL_CONST: NULL [0/0] {42}                    
+ ¦--COMMENT: #' Ex [2/0] {44}                          
+ ¦--COMMENT: # Ran [1/0] {45}                          
+ ¦--COMMENT: #' Ro [1/0] {46}                          
+ ¦--COMMENT: #' @e [1/0] {47}                          
+ ¦--COMMENT: # The [1/0] {48}                          
+ ¦--COMMENT: #' \d [1/0] {49}                         
+ ¦--COMMENT: #' 1  [1/0] {50}                          
+ ¦--COMMENT: #' } [1/0] {51}                           
+ ¦--COMMENT: # com [1/0] {52}                          
+ ¦--COMMENT: # mor [1/0] {53}                          
+ ¦--expr: NULL [1/0] {55}                              
+ ¦   °--NULL_CONST: NULL [0/0] {54}                    
+ ¦--COMMENT: #' Ex [2/0] {56}                          
+ ¦--COMMENT: # Ran [1/0] {57}                          
+ ¦--COMMENT: #' Ro [1/0] {58}                          
+ ¦--COMMENT: #' @e [1/0] {59}                          
+ ¦--COMMENT: # The [1/0] {60}                          
+ ¦--COMMENT: #' \d [1/0] {61}                         
+ ¦--COMMENT: #' 1  [1/0] {62}                          
+ ¦--COMMENT: #' }  [1/0] {63}                          
+ ¦--COMMENT: # mor [1/0] {64}                          
+ ¦--expr: NULL [1/0] {66}                              
+ ¦   °--NULL_CONST: NULL [0/0] {65}                    
+ ¦--COMMENT: #' Ex [2/0] {67}                          
+ ¦--COMMENT: # Ran [1/0] {68}                          
+ ¦--COMMENT: #' Ro [1/0] {69}                          
+ ¦--COMMENT: #' @e [1/0] {70}                          
+ ¦--COMMENT: # 'Th [1/0] {71}                          
+ ¦--COMMENT: #' \d [1/0] {72}                         
+ ¦--COMMENT: #' 1  [1/0] {73}                          
+ ¦--COMMENT: #' } [1/0] {74}                           
+ ¦--COMMENT: # com [1/0] {75}                          
+ ¦--COMMENT: # mor [1/0] {76}                          
+ ¦--expr: NULL [1/0] {78}                              
+ ¦   °--NULL_CONST: NULL [0/0] {77}                    
+ ¦--COMMENT: #' Ex [2/0] {79}                          
+ ¦--COMMENT: # Ran [1/0] {80}                          
+ ¦--COMMENT: #' Ro [1/0] {81}                          
+ ¦--COMMENT: #' @e [1/0] {82}                          
+ ¦--COMMENT: # The [1/0] {83}                          
+ ¦--COMMENT: #' \d [1/0] {84}                         
+ ¦--COMMENT: # com [1/0] {85}                          
+ ¦--COMMENT: #' 1  [1/0] {86}                          
+ ¦--COMMENT: #' } [1/0] {87}                           
+ ¦--COMMENT: # mor [1/0] {88}                          
+ ¦--expr: NULL [1/0] {90}                              
+ ¦   °--NULL_CONST: NULL [0/0] {89}                    
+ ¦--COMMENT: #' Ex [2/0] {91}                          
+ ¦--COMMENT: # Ran [1/0] {92}                          
+ ¦--COMMENT: #' Ro [1/0] {93}                          
+ ¦--COMMENT: #' @e [1/0] {94}                          
+ ¦--COMMENT: # The [1/0] {95}                          
+ ¦--COMMENT: #' \d [1/0] {96}                         
+ ¦--COMMENT: #' ca [1/0] {97}                          
+ ¦--COMMENT: # com [1/0] {98}                          
+ ¦--COMMENT: #' 1  [1/0] {99}                          
+ ¦--COMMENT: #' ) [1/0] {100}                          
+ ¦--COMMENT: #' } [1/0] {101}                          
+ ¦--COMMENT: # mor [1/0] {102}                         
+ ¦--expr: NULL [1/0] {104}                             
+ ¦   °--NULL_CONST: NULL [0/0] {103}                   
+ ¦--COMMENT: # nol [2/0] {105}                         
+ ¦--COMMENT: #' @e [1/0] {106}                         
+ ¦--COMMENT: # nol [1/0] {107}                         
+ ¦--COMMENT: #' df [1/0] {108}                         
+ ¦--expr: func  [1/0] {109}                            
+ ¦   ¦--expr: func [0/1] {111}                         
+ ¦   ¦   °--SYMBOL: func [0/0] {110}                   
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {112}                    
+ ¦   °--expr: funct [0/0] {113}                        
+ ¦       ¦--FUNCTION: funct [0/0] {114}                
+ ¦       ¦--'(': ( [0/0] {115}                         
+ ¦       ¦--')': ) [0/1] {116}                         
+ ¦       °--expr: NULL [0/0] {118}                     
+ ¦           °--NULL_CONST: NULL [0/0] {117}           
+ ¦--COMMENT: #' Hi [3/0] {119}                         
+ ¦--COMMENT: # Com [1/0] {120}                         
+ ¦--COMMENT: #' @e [1/0] {121}                         
+ ¦--COMMENT: #' 1  [1/0] {122}                         
+ ¦--COMMENT: # thi [1/0] {123}                         
+ ¦--COMMENT: # thi [1/0] {124}                         
+ ¦--COMMENT: #this [1/0] {125}                         
+ ¦--COMMENT: # thi [1/0] {126}                         
+ ¦--COMMENT: #' c( [1/0] {127}                         
+ ¦--expr: NULL [1/0] {129}                             
+ ¦   °--NULL_CONST: NULL [0/0] {128}                   
+ ¦--COMMENT: #' Hi [2/0] {130}                         
+ ¦--COMMENT: # Com [1/0] {131}                         
+ ¦--COMMENT: #' @e [1/0] {132}                         
+ ¦--COMMENT: #' 1  [1/0] {133}                         
+ ¦--COMMENT: # thi [1/0] {134}                         
+ ¦--COMMENT: # thi [1/0] {135}                         
+ ¦--COMMENT: #this [1/0] {136}                         
+ ¦--COMMENT: # thi [1/0] {137}                         
+ ¦--COMMENT: #' c( [1/0] {138}                         
+ °--expr: NULL [1/0] {140}                             
+     °--NULL_CONST: NULL [0/0] {139}                   
