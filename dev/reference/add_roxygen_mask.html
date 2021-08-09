@@ -46,7 +46,8 @@
 
 
 <meta property="og:title" content="Add the roxygen mask to code — add_roxygen_mask" />
-<meta property="og:description" content="Add the roxygen mask to code" />
+<meta property="og:description" content="This function compares text with initial_text to make sure a mask is only
+added to roxygen comments, not ordinary comments" />
 
 
 <meta name="robots" content="noindex">
@@ -78,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.5.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.5.1.9001</span>
       </span>
     </div>
 
@@ -181,10 +182,11 @@
     </div>
 
     <div class="ref-description">
-    <p>Add the roxygen mask to code</p>
+    <p>This function compares <code>text</code> with <code>initial_text</code> to make sure a mask is only
+added to roxygen comments, not ordinary comments</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_roxygen_mask</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>example_type</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>add_roxygen_mask</span><span class='op'>(</span><span class='va'>text</span>, <span class='va'>initial_text</span>, <span class='va'>example_type</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,6 +194,11 @@
     <tr>
       <th>text</th>
       <td><p>Character vector with code.</p></td>
+    </tr>
+    <tr>
+      <th>initial_text</th>
+      <td><p>The roxygen code example to style with mask and
+potentially ordinary comments.</p></td>
     </tr>
     <tr>
       <th>example_type</th>
