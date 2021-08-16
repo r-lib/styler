@@ -1,12 +1,15 @@
 
 # styler 1.5.1.9000 (Development version)
 
-* Files with `.Rmarkdown` extension are now recognized as an R markdown files in `style_file()` and friends (#824).
+* Files with `.Rmarkdown` extension are now recognized as an R markdown files in
+  `style_file()` and friends (#824).
 
 * Don't break line before comments in pipes (#822).
 
 * Ordinary comments (starting with `#`) within a roxygen code example block 
   (starting with `#'`) are now recognized and preserved (#830).
+
+* R Markdown chunk headers are no longer required to be parsable R code (#832).
 
 * Break the line between `%>%` and `{` inside and outside function calls (#825).
 
