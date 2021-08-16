@@ -16,3 +16,49 @@ test + f(1)
 ```{r}
 test + f(1)
 ```
+
+```{r, A = ', tidy = FALSE,'}
+knitr::opts_chunk$set(echo = TRUE ) 
+```
+
+```{r, A = ', tidy = FALSE}'}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, A = ', tidy = FALSE'}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, A = 'tidy = FALSE, and more'}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, tidy = TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, a = ',tidy = FALSE'}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, a = ',tidy = TRUE'}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, tidy = FALSE, aniopts= 3}
+knitr::opts_chunk$set(echo = TRUE )
+```
+
+```{r, tidy= FALSE, aniopts= 3}
+knitr::opts_chunk$set(echo = TRUE )
+```
+
+```{r, tidy =FALSE, aniopts= 3}
+knitr::opts_chunk$set(echo = TRUE )
+```
+
+```{r, aniopts= 3, tidy = FALSE}
+knitr::opts_chunk$set(echo = TRUE )
+```

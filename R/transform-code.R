@@ -117,12 +117,14 @@ identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pat
 #' @keywords internal
 finalize_raw_chunks <- function(start, end, filetype, lines) {
   header <- gsub(get_knitr_pattern(filetype)$chunk.begin, "\\2", lines[start])
-  parsed <- get_parse_data(paste0("c(", header, ")"))$text
-  do_not_tidy <- any(parsed == "tidy") &&
-    parsed[which(parsed == "tidy") + 1] == "=" &&
-    parsed[which(parsed == "tidy") + 2] == "FALSE"
-  if (do_not_tidy) {
-    return(NULL)
+  # matches last , tidy = TRUE, ignoring quotes!
+  extracted_false <- gsub(
+    ".*,\\s*\\t*tidy\\s*\\t*=\\s*\\t*(F|FALSE)(\\s+.*|\\t+.*|,+.*|)$",
+    "\\1",
+    header
+  )
+  if (extracted_false %in% c("F", "FALSE")) {
+    NULL
   } else {
     list(starts = start, ends = end)
   }
