@@ -25,11 +25,24 @@ style_roxygen_code_example <- function(example, transformers, base_indention) {
 style_roxygen_code_example_one <- function(example_one, transformers, base_indention) {
   bare <- parse_roxygen(example_one)
   one_dont <- split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
-  map(one_dont, style_roxygen_code_example_segment,
+  unmasked <- map(one_dont, style_roxygen_code_example_segment,
     transformers = transformers,
     base_indention = base_indention
   ) %>%
-    flatten_chr() %>%
+    flatten_chr()
+  if (bare$example_type == "examplesIf") {
+    with_handlers(
+      parse_text(unmasked[1]),
+      error = function(e) {
+        abort(paste0(
+          "Could not style condition in `@examplesIf` because it would result ",
+          "in multi-line condition, which is currently not supported in ",
+          "{roxygen2} (see https://github.com/r-lib/roxygen2/issues/1242)."
+        ))
+      }
+    )
+  }
+  unmasked %>%
     add_roxygen_mask(example_one, bare$example_type)
 }
 
