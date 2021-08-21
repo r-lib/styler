@@ -185,7 +185,8 @@
 <ul>
 <li><p>Files with <code>.Rmarkdown</code> extension are now recognized as an R markdown files in <code><a href="../reference/style_file.html">style_file()</a></code> and friends (<a href='https://github.com/r-lib/styler/issues/824'>#824</a>).</p></li>
 <li><p>Don’t break line before comments in pipes (<a href='https://github.com/r-lib/styler/issues/822'>#822</a>).</p></li>
-<li><p>Ordinary comments (starting with <code>#</code>) within a roxygen code example block (starting with <code>#'</code>) are now recognized and preserved (<a href='https://github.com/r-lib/styler/issues/830'>#830</a>).</p></li>
+<li><p>Ordinary comments (starting with <code>#</code>) that break a roxygen code example block (starting with <code>#'</code>) are now recognized and preserved (<a href='https://github.com/r-lib/styler/issues/830'>#830</a>).</p></li>
+<li><p><code>@examplesIf</code> conditions longer than one line after styling throw an error for compatibility with {roxygen2} (<a href='https://github.com/r-lib/styler/issues/833'>#833</a>).</p></li>
 <li><p>R Markdown chunk headers are no longer required to be parsable R code (<a href='https://github.com/r-lib/styler/issues/832'>#832</a>).</p></li>
 <li><p>Break the line between <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code> and <code>{</code> inside and outside function calls (<a href='https://github.com/r-lib/styler/issues/825'>#825</a>).</p></li>
 </ul>
