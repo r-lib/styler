@@ -10,6 +10,8 @@
 
 * Break the line between `%>%` and `{` inside and outside function calls (#825).
 
+* Add language server to the integrations (#835).
+
 # styler 1.5.1
 
 ## Alignment detection
