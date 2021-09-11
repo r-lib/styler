@@ -7,10 +7,10 @@
 local_test_setup(cache = FALSE, .local_envir = parent.frame())
 }
 \arguments{
-\item{.local_envir}{The environment to use for scoping.}
+\item{cache}{Whether or not to create and activate a cache in a temporary
+directory.}
 
-\item{testthat_cache}{Whether or not to create and activate a fresh testthat
-cache.}
+\item{.local_envir}{The environment to use for scoping.}
 }
 \description{
 Establish testing setup for current environment

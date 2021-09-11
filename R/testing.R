@@ -332,8 +332,8 @@ activate_testthat_cache <- purrr::partial(cache_activate, "testthat")
 
 #' Establish testing setup for current environment
 #'
-#' @param testthat_cache Whether or not to create and activate a fresh testthat
-#'   cache.
+#' @param cache Whether or not to create and activate a cache in a temporary
+#'   directory.
 #' @param .local_envir The environment to use for scoping.
 #' @details
 #' * make styler quiet.
