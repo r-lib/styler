@@ -1,6 +1,5 @@
 test_that("Correclty removes comments that are not top-level when making pd shallow (low-level)", {
-  fresh_testthat_cache()
-  on.exit(clear_testthat_cache())
+  local_test_setup(cache = TRUE)
   text7 <- c(
     "call(",
     "  # inline-comment",
@@ -16,8 +15,7 @@ test_that("Correclty removes comments that are not top-level when making pd shal
 })
 
 test_that("Correclty removes comments that are not top-level when making pd shallow (high-level)", {
-  fresh_testthat_cache()
-  on.exit(clear_testthat_cache())
+  local_test_setup(cache = TRUE)
   text7 <- c(
     "call(",
     "# styler: off",

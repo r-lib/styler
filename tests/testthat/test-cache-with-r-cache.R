@@ -1,18 +1,16 @@
-capture.output(test_that("Cache management works", {
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
+test_that("Cache management works", {
   # clearing a cache inactivates the caching functionality.
   expect_false(cache_info(format = "tabular")$activated)
-  activate_testthat_cache()
+  local_test_setup(cache = TRUE)
   # at fresh startup
   expect_s3_class(cache_info(format = "tabular"), "tbl_df")
-  expect_error(cache_info(), NA)
+  expect_error(capture.output(cache_info()), NA)
   expect_equal(basename(cache_activate()), styler_version)
   expect_equal(basename(cache_activate("xyz")), "xyz")
   expect_equal(getOption("styler.cache_name"), "xyz")
   # when cache xyz is activated, cache_info() shows deactivated for other caches
   expect_false(cache_info(styler_version, format = "tabular")$activated)
-  expect_error(cache_info(format = "lucid"), NA)
+  expect_error(capture.output(cache_info(format = "lucid")), NA)
   # cache_info() defaults to the currently active cache
   expect_equal(basename(cache_info(format = "tabular")$location), "xyz")
 
@@ -25,11 +23,10 @@ capture.output(test_that("Cache management works", {
   expect_false(cache_info(format = "tabular")$activated)
   expect_equal(getOption("styler.cache_location"), NULL)
   expect_error(cache_clear("testthat", ask = FALSE), NA)
-}))
+})
 
 test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text <- test_path("cache-with-r-cache/mlflow-1-in.R") %>%
     readLines()
   benchmark <- system.time(text_styled <- as.character(style_text(text)))
@@ -58,9 +55,7 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
 })
 
 
-capture.output(test_that("cached expressions are displayed propperly", {
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
+test_that("cached expressions are displayed propperly", {
   cache_info <- cache_info("testthat", format = "tabular")
   expect_known_value(
     cache_info[, c("n", "size", "last_modified", "activated")],
@@ -68,7 +63,7 @@ capture.output(test_that("cached expressions are displayed propperly", {
     update = getOption("styler.test_dir_writable", TRUE)
   )
 
-  activate_testthat_cache()
+  local_test_setup(cache = TRUE)
   style_text("1+1")
   cache_info <- cache_info(format = "tabular")
   cache_info$size <- round(cache_info$size, -2)
@@ -85,13 +80,11 @@ capture.output(test_that("cached expressions are displayed propperly", {
     file = test_path("reference-objects/cache-info-3"),
     update = getOption("styler.test_dir_writable", TRUE)
   )
-}))
-
+})
 
 
 test_that("When expressions are cached, number of newlines between them are preserved", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text <- c(
     "1 + 1",
     "",
