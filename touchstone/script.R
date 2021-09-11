@@ -13,28 +13,34 @@ clear_ref_caches()
 
 
 benchmark_run_ref(
-  expr_before_benchmark = c("library(styler)", "cache_deactivate()"),
-  without_cache = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))',
+  expr_before_benchmark = {
+    library(styler)
+    cache_deactivate()
+  },
+  without_cache = style_pkg("touchstone/sources/here", filetype = c("R", "rmd")),
   n = 30
 )
 
 clear_ref_caches()
 benchmark_run_ref(
-  expr_before_benchmark = c("library(styler)", "cache_activate(gert::git_branch())"),
-  cache_applying = 'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))',
+  expr_before_benchmark = {
+    library(styler)
+    cache_activate(gert::git_branch())
+  },
+  cache_applying = style_pkg("touchstone/sources/here", filetype = c("R", "rmd")),
   n = 30
 )
 
 clear_ref_caches()
 benchmark_run_ref(
-  expr_before_benchmark = c(
-    "library(styler)",
-    "cache_activate(gert::git_branch())"
-  ),
-  cache_recording = c(
-    "gert::git_reset_hard(repo = 'touchstone/sources/here')",
-    'style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))'
-  ),
+  expr_before_benchmark = {
+    library(styler)
+    cache_activate(gert::git_branch())
+  },
+  cache_recording = {
+    gert::git_reset_hard(repo = "touchstone/sources/here")
+    style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))
+  },
   n = 30
 )
 
