@@ -1,4 +1,5 @@
 test_that("activated cache brings speedup on style_file() API", {
+  local_test_setup()
   skip_on_cran()
   n <- n_times_faster_with_cache(
     test_path("reference-objects/caching.R"),
@@ -44,32 +45,41 @@ test_that("activated cache brings speedup on style_text() API on character scala
 
 
 test_that("trailing line breaks are ignored for caching", {
+  local_test_setup(cache = TRUE)
   text1 <- paste0(text, collapse = "\n")
   text2 <- c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n")
-  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
-  expect_equal(cache_info()$n, 3)
+  style_text(text1)
+  style_text(text2)
+  expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
+  local_test_setup(cache = TRUE)
   text1 <- paste0(text, collapse = "\n")
   text2 <- c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n")
-  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
-  expect_equal(cache_info()$n, 3)
+  style_text(text1)
+  style_text(text2)
+  expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
+  local_test_setup(cache = TRUE)
   text1 <- paste0(text, collapse = "\n")
   text2 <- paste0(
     paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n",
     collapse = ""
   )
-  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
-  expect_equal(cache_info()$n, 3)
+  style_text(text1)
+  style_text(text2)
+  expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
 
@@ -112,31 +122,27 @@ test_that("speedup higher when cached roxygen example code is multiple expressio
 
 
 
-capture.output(test_that("no speedup when tranformer changes", {
+test_that("no speedup when tranformer changes", {
   skip_on_cran()
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup()
   t1 <- tidyverse_style()
   first <- system.time(style_text(text, transformers = t1))
   t1 <- tidyverse_style(indent_by = 4)
   second <- system.time(style_text(text, transformers = t1))
   expect_false(first["elapsed"] / 1.3 > second["elapsed"])
-}))
+})
 
 
-capture.output(test_that("unactivated cache does not bring speedup", {
-  skip_on_cran()
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
+test_that("unactivated cache does not bring speedup", {
+  skip_on_cran
+  local_test_setup()
   first <- system.time(style_file(test_path("reference-objects/caching.R")))
   second <- system.time(style_file(test_path("reference-objects/caching.R")))
   expect_false(first["elapsed"] / 4 > second["elapsed"])
-}))
+})
 
-capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
+test_that("avoid deleting comments #584 (see commit messages)", {
+  local_test_setup()
   text <- c(
     "1 + 1",
     "# Comment",
@@ -151,12 +157,10 @@ capture.output(test_that("avoid deleting comments #584 (see commit messages)", {
     "NULL"
   )
   expect_equal(as.character(style_text(text2)), text2)
-}))
+})
 
-capture.output(test_that("avoid removing roxygen mask (see commit messages in #584)", {
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
+test_that("avoid removing roxygen mask (see commit messages in #584)", {
+  local_test_setup()
   text <- c(
     "c(",
     " 1, 2,",
@@ -176,12 +180,10 @@ capture.output(test_that("avoid removing roxygen mask (see commit messages in #5
     "NULL"
   )
   expect_equal(as.character(style_text(text2)), text2)
-}))
+})
 
-capture.output(test_that("partial caching of multiple expressions on one line works", {
-  on.exit(clear_testthat_cache())
-  clear_testthat_cache()
-  activate_testthat_cache()
+test_that("partial caching of multiple expressions on one line works", {
+  local_test_setup()
   text <- "1"
   style_text(text)
   text2 <- "1 # comment"
@@ -195,7 +197,7 @@ capture.output(test_that("partial caching of multiple expressions on one line wo
   style_text(c("mtcars %>%", "f()"))
   final_text <- c("mtcars %>%", "  f() #")
   expect_equal(as.character(style_text(final_text)), final_text)
-}))
+})
 
 test_that("cache is deactivated at end of caching related testthat file", {
   expect_false(cache_is_activated())

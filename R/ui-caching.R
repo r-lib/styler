@@ -112,7 +112,8 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #'   function is doing.
 #' @family cache managers
 #' @export
-cache_activate <- function(cache_name = NULL, verbose = !getOption("styler.quiet", FALSE)) {
+cache_activate <- function(cache_name = NULL,
+                           verbose = !getOption("styler.quiet", FALSE)) {
   if (!is.null(cache_name)) {
     options("styler.cache_name" = cache_name)
   } else {

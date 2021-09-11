@@ -257,24 +257,19 @@ n_times_faster_with_cache <- function(x1, x2 = x1, ...,
   out <- purrr::map(1:n, n_times_faster_bench,
     x1 = x1, x2 = x2, fun = fun,
     ..., n = n, clear = clear
-  ) %>%
+  )
+  out <- out %>%
     purrr::map_dbl(
       ~ unname(.x$first["elapsed"] / .x$second["elapsed"])
     ) %>%
     mean()
 
-  if (clear %in% c("always", "final")) {
-    clear_testthat_cache()
-  }
   out
 }
 
 
 n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
-  fresh_testthat_cache()
-  if ((clear == "always") || (clear == "all but last" & n != i)) {
-    on.exit(clear_testthat_cache())
-  }
+  local_test_setup(cache = TRUE)
   first <- system.time(fun(x1, ...))
 
   if (is.null(x2)) {
@@ -284,7 +279,8 @@ n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
   }
   list(
     first = first,
-    second = second
+    second = second,
+    cache = cache_info(format = "tabular")
   )
 }
 
@@ -333,9 +329,34 @@ generate_test_samples <- function() {
 #' @include ui-caching.R
 clear_testthat_cache <- purrr::partial(cache_clear, "testthat", ask = FALSE)
 activate_testthat_cache <- purrr::partial(cache_activate, "testthat")
-fresh_testthat_cache <- function() {
-  clear_testthat_cache()
-  activate_testthat_cache()
+
+#' Establish testing setup for current environment
+#'
+#' @param cache Whether or not to create and activate a cache in a temporary
+#'   directory.
+#' @param .local_envir The environment to use for scoping.
+#' @details
+#' * make styler quiet.
+local_test_setup <- function(cache = FALSE,
+                             .local_envir = parent.frame()) {
+  current_cache <- cache_info(format = "tabular")
+  withr::local_options(
+    list("styler.quiet" = TRUE, "R.cache.rootPath" = tempfile()),
+    .local_envir = .local_envir
+  )
+  if (cache) {
+    withr::defer(
+      {
+        clear_testthat_cache()
+        cache_activate(basename(current_cache$location))
+        if (!current_cache$activated) {
+          cache_deactivate()
+        }
+      },
+      envir = .local_envir
+    )
+    activate_testthat_cache()
+  }
 }
 
 cache_more_specs_default <- function() {
