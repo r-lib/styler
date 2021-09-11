@@ -177,6 +177,7 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
 
 context("messages are correct")
 
+
 test_that("messages (via cat()) of style_file are correct", {
   for (encoding in ls_testable_encodings()) {
     withr::with_options(
@@ -307,7 +308,7 @@ test_that("styler can style Rmd files only via style_pkg()", {
 test_that("styler can style Rmarkdown files only via style_pkg()", {
   msg <- capture_output(
     style_pkg(testthat_file("public-api", "xyzpackage-rmd"),
-              filetype = "Rmarkdown"
+      filetype = "Rmarkdown"
     )
   )
   expect_false(any(grepl("hello-world.R", msg, fixed = TRUE)))
@@ -323,6 +324,7 @@ test_that("insufficient R version returns error", {
 })
 
 context("public API - Rnw in style_file()")
+
 
 test_that("styler can style Rnw file", {
   capture_output(expect_false({
@@ -378,6 +380,7 @@ test_that("styler can style Rnw files only via style_pkg()", {
 })
 
 test_that("dry run options work:", {
+  local_test_setup()
   path <- test_path("public-api/dry/unstyled.R")
   # test the testing function
   expect_error(test_dry(path, style_file, styled = TRUE))

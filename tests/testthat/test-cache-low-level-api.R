@@ -57,8 +57,7 @@ test_that("caching utils make right blocks with comments", {
 
 
 test_that("blank lines are correctly identified", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
 
   text <- c(
     "1 + 1",
@@ -121,10 +120,9 @@ test_that("caching utils make right blocks with comments", {
 ################################################################################
 
 test_that("Individual comment expressions are not cached", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   style_text(c("# g", "1"))
-  cache_info <- cache_info()
+  cache_info <- cache_info(format = "tabular")
   # because output text is cached as a whole, there should be 2 cached
   # expressions now
   expect_equal(cache_info$n, 2)

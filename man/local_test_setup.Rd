@@ -4,13 +4,13 @@
 \alias{local_test_setup}
 \title{Establish testing setup for current environment}
 \usage{
-local_test_setup(testthat_cache = FALSE, .local_envir = parent.frame())
+local_test_setup(cache = FALSE, .local_envir = parent.frame())
 }
 \arguments{
+\item{.local_envir}{The environment to use for scoping.}
+
 \item{testthat_cache}{Whether or not to create and activate a fresh testthat
 cache.}
-
-\item{.local_envir}{The environment to use for scoping.}
 }
 \description{
 Establish testing setup for current environment

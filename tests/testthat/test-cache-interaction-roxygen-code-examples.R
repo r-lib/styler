@@ -1,6 +1,5 @@
 test_that("roxzgen code examples are written to cache as both individual expressions and as whole text", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   more_specs <- cache_more_specs_default()
   text <- c(
     "#' Comment",
@@ -13,7 +12,7 @@ test_that("roxzgen code examples are written to cache as both individual express
     "103"
   )
   styled <- style_text(text)
-  expect_equal(cache_info()$n, 6)
+  expect_equal(cache_info(format = "tabular")$n, 6)
   # 1 whole (with comments)
   # 1code whole
   # 1 code by expr
@@ -46,8 +45,7 @@ test_that("roxzgen code examples are written to cache as both individual express
 
 test_that("roxzgen code examples are written to cache as whole expressions bring speedgain", {
   skip_on_cran()
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text <- readLines(test_path("cache-with-r-cache/roxygen-cache-1.R"))
   first <- system.time(styled <- style_text(text))
   # don't use full cache, only roxygen cache

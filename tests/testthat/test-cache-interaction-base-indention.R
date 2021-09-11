@@ -1,9 +1,8 @@
 test_that("base_indention is respected in caching", {
-  on.exit(clear_testthat_cache())
   text <- c("1 + 1")
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   without_indention <- style_text(text)
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   style_text(text, base_indention = 5)
   expect_equal(
     style_text(text),
@@ -12,11 +11,10 @@ test_that("base_indention is respected in caching", {
 })
 
 test_that("include_roxygen_exmples is respected in caching", {
-  on.exit(clear_testthat_cache())
   text <- c("#' Roxygen", "#'", "#' @examplesIf", "#' 1+1", "1 + 1")
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   with_examples <- style_text(text)
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   style_text(text, include_roxygen_examples = FALSE)
   expect_equal(
     style_text(text, include_roxygen_examples = TRUE),
@@ -26,8 +24,7 @@ test_that("include_roxygen_exmples is respected in caching", {
 
 
 test_that("expression caching when first expression does not comply", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   more <- 'x<- 1
    "multi
 line string"
@@ -86,8 +83,7 @@ line string"
 })
 
 test_that("expression caching when last expression does not comply", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   more <- '   x <- 1
    "multi
 line string"
@@ -120,8 +116,7 @@ line string"
 })
 
 test_that("expression caching when middle expression does not comply", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   more <- '   x <- 1
    "multi
 line string"

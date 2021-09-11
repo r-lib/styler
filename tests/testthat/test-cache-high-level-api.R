@@ -45,32 +45,41 @@ test_that("activated cache brings speedup on style_text() API on character scala
 
 
 test_that("trailing line breaks are ignored for caching", {
+  local_test_setup(cache = TRUE)
   text1 <- paste0(text, collapse = "\n")
   text2 <- c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n")
-  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
-  expect_equal(cache_info()$n, 3)
+  style_text(text1)
+  style_text(text2)
+  expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
+  local_test_setup(cache = TRUE)
   text1 <- paste0(text, collapse = "\n")
   text2 <- c(paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n")
-  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
-  expect_equal(cache_info()$n, 3)
+  style_text(text1)
+  style_text(text2)
+  expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
 
 test_that("trailing line breaks are ignored for caching in one scalar", {
+  local_test_setup(cache = TRUE)
   text1 <- paste0(text, collapse = "\n")
   text2 <- paste0(
     paste0(text, collapse = "\n"), "\n", "\n", "\n", "\n",
     collapse = ""
   )
-  n <- n_times_faster_with_cache(text1, text2, clear = "all but last")
-  expect_equal(cache_info()$n, 3)
+  style_text(text1)
+  style_text(text2)
+  expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
 
@@ -115,7 +124,6 @@ test_that("speedup higher when cached roxygen example code is multiple expressio
 
 test_that("no speedup when tranformer changes", {
   skip_on_cran()
-  expect_true(TRUE)
   local_test_setup()
   t1 <- tidyverse_style()
   first <- system.time(style_text(text, transformers = t1))

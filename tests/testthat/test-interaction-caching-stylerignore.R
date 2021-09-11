@@ -1,6 +1,5 @@
 test_that("caching works with stylerignore for multi-token lines when partly cached before", {
-  on.exit(cache_deactivate())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text1 <- "1 + 1"
   expect_equal(
     as.character(style_text(text1)),
@@ -20,8 +19,7 @@ test_that("caching works with stylerignore for multi-token lines when partly cac
 })
 
 test_that("caching works with stylerignore for multi-token lines", {
-  on.exit(cache_deactivate())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text3 <- c(
     "# styler: off",
     "1 + 1 #comment2",
@@ -60,8 +58,7 @@ test_that("caching works with stylerignore for multi-token lines", {
 })
 
 test_that("caching works ", {
-  on.exit(cache_deactivate())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text1 <- "1 + 1"
   expect_equal(
     as.character(style_text(text1)),
@@ -88,8 +85,7 @@ test_that("caching works ", {
 
 # if the stylerignore tag is top level
 test_that("caching works for top level expressions", {
-  on.exit(cache_deactivate())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text1 <- "1 + 1"
   expect_equal(
     as.character(style_text(text1)),
@@ -112,8 +108,7 @@ test_that("caching works for top level expressions", {
 # since we only cache top-level expressions, the whole expression is either
 # cached or not, depending on whether it is complying to the style guide.
 test_that("caching works for non-top-level expressions", {
-  on.exit(cache_deactivate())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text1 <- "1 + 1"
   expect_equal(
     as.character(style_text(text1)),
@@ -135,8 +130,7 @@ test_that("caching works for non-top-level expressions", {
 })
 
 test_that("does not cache stylerignore sequences", {
-  on.exit(clear_testthat_cache())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text <- c(
     "1+1# styler: off"
   )
@@ -144,7 +138,7 @@ test_that("does not cache stylerignore sequences", {
   expect_false(
     is_cached("1+1", tidyverse_style(), more_specs = cache_more_specs_default())
   )
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text <- c(
     "# styler: off",
     "1+1"
@@ -160,8 +154,7 @@ test_that("does not cache stylerignore sequences", {
 })
 
 test_that("indention preserved in stylerignore when caching activated", {
-  on.exit(cache_deactivate())
-  fresh_testthat_cache()
+  local_test_setup(cache = TRUE)
   text6 <- c(
     "# styler: off",
     "1 + 1",
