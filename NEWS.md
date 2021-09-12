@@ -1,5 +1,5 @@
 
-# styler 1.5.1.9000 (Development version)
+# styler 1.6.0
 
 * Files with `.Rmarkdown` extension are now recognized as an R markdown files in
   `style_file()` and friends (#824).
@@ -16,7 +16,7 @@
 
 * Break the line between `%>%` and `{` inside and outside function calls (#825).
 
-* Add language server to third-party integrations vignette (#835).
+* Add language server to third-party integration vignette (#835).
 
 * improved test setup with fixtures and similar (#798).
 
