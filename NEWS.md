@@ -20,6 +20,10 @@
 
 * improved test setup with fixtures and similar (#798).
 
+We'd like to thank all people who helped making this release possible:
+
+[&#x0040;bersbersbers](https://github.com/bersbersbers), [&#x0040;eutwt](https://github.com/eutwt), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;j-mammen](https://github.com/j-mammen), [&#x0040;jennybc](https://github.com/jennybc), [&#x0040;JohannesNE](https://github.com/JohannesNE), [&#x0040;jonkeane](https://github.com/jonkeane), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), and [&#x0040;MichaelChirico](https://github.com/MichaelChirico).
+
 
 # styler 1.5.1
 
@@ -127,6 +131,9 @@ release of styler through their contributions in issues and pull requests:
 * hexadecimal integers now preserve the trailing `L` when styled (#761).
 * add a pre-push hook to make sure news bullets are added to each PR (#765).
 
+Thanks to everyone who contributed to this release:
+
+[&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), and [&#x0040;renkun-ken](https://github.com/renkun-ken).
 
 # styler 1.4.0
 
