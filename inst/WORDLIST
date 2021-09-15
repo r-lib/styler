@@ -144,6 +144,7 @@ questionr
 rcmdcheck
 RcppExports
 rds
+readline
 readme
 README
 rebased
@@ -199,6 +200,7 @@ shinyMonacoEditor
 shinyobjects
 ShinyQuickStarter
 sprintf
+stackoverflow
 StackOverflow
 startsWith
 STR

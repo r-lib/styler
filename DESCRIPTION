@@ -19,6 +19,7 @@ BugReports: https://github.com/r-lib/styler/issues
 Imports: 
     backports (>= 1.1.0),
     cli (>= 1.1.0),
+    glue,
     magrittr (>= 2.0.0),
     purrr (>= 0.2.3),
     R.cache (>= 0.15.0),
