@@ -1,4 +1,3 @@
-
 # styler 1.6.0
 
 * Files with `.Rmarkdown` extension are now recognized as an R markdown files in
