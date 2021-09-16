@@ -26,6 +26,9 @@
 remind_removing_old_cache <- function() {
   if (interactive() && getOption("styler.interactive_ask_remove_old_caches", TRUE)) {
     dirs <- list.dirs(R.cache::getCachePath("styler"), recursive = FALSE)
+    if (length(dirs) < 1) {
+      return()
+    }
     dirs <- dirs[unname(sapply(dirs, function(x) length(list.files(x)) > 0))]
     package_versions <- package_version(basename(dirs), strict = FALSE)
     package_versions <- package_versions[!is.na(package_versions)]
