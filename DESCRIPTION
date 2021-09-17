@@ -1,7 +1,7 @@
 Type: Package
 Package: styler
 Title: Non-Invasive Pretty Printing of R Code
-Version: 1.6.1
+Version: 1.6.1.9000
 Authors@R: 
     c(person(given = "Kirill",
              family = "Müller",
@@ -17,12 +17,12 @@ License: MIT + file LICENSE
 URL: https://github.com/r-lib/styler, https://styler.r-lib.org
 BugReports: https://github.com/r-lib/styler/issues
 Imports: 
-    R.cache (>= 0.15.0),
     backports (>= 1.1.0),
     cli (>= 1.1.0),
     glue,
     magrittr (>= 2.0.0),
     purrr (>= 0.2.3),
+    R.cache (>= 0.15.0),
     rematch2 (>= 2.0.1),
     rlang (>= 0.1.1),
     rprojroot (>= 1.1),
