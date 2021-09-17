@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Update the indention reference — update_indention_ref • styler</title>
+<title>Establish testing setup for current environment — local_test_setup • styler</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,8 @@
 
 
 
-<meta property="og:title" content="Update the indention reference — update_indention_ref" />
-<meta property="og:description" content="Update the indention reference" />
+<meta property="og:title" content="Establish testing setup for current environment — local_test_setup" />
+<meta property="og:description" content="Establish testing setup for current environment" />
 
 
 
@@ -175,45 +175,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Update the indention reference</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/rules-indention.R'><code>R/rules-indention.R</code></a></small>
-    <div class="hidden name"><code>update_indention_ref.Rd</code></div>
+    <h1>Establish testing setup for current environment</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/testing.R'><code>R/testing.R</code></a></small>
+    <div class="hidden name"><code>local_test_setup.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Update the indention reference</p>
+    <p>Establish testing setup for current environment</p>
     </div>
 
-    <pre class="usage"><span class='fu'>update_indention_ref_fun_dec</span><span class='op'>(</span><span class='va'>pd_nested</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>local_test_setup</span><span class='op'>(</span>cache <span class='op'>=</span> <span class='cn'>FALSE</span>, .local_envir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pd_nested</th>
-      <td><p>A nested parse table.</p></td>
+      <th>cache</th>
+      <td><p>Whether or not to create and activate a cache in a temporary
+directory.</p></td>
+    </tr>
+    <tr>
+      <th>.local_envir</th>
+      <td><p>The environment to use for scoping.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
 <ul>
-<li><p><code>update_indention_ref_fun_dec</code>: Updates the reference pos_id for all
-tokens in <code>pd_nested</code> if <code>pd_nested</code> contains a function declaration.
-Tokens inside a function declaration are are re-indented,
-that is, they are indented up to the level at which the token FUNCTION
-ends in terms of col2.</p></li>
+<li><p>make styler quiet.</p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,
-              <span class='va'>y</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>x</span> <span class='op'>+</span> <span class='va'>y</span>
-<span class='op'>}</span>
-<span class='op'>}</span>
-</div></pre>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
