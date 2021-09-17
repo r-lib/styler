@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set the write_tree argument — set_arg_write_tree • styler</title>
+<title>Ask people to remove the cache — remind_removing_old_cache • styler</title>
 
 
 <!-- jquery -->
@@ -45,10 +45,10 @@
 
 
 
-<meta property="og:title" content="Set the write_tree argument — set_arg_write_tree" />
-<meta property="og:description" content="Sets the argument write_tree in test_collection() to be TRUE for R
-versions higher or equal to 3.2, and FALSE otherwise since the second-level
-dependency DiagrammeR from data.tree is not available for R &amp;lt; 3.2." />
+<meta property="og:title" content="Ask people to remove the cache — remind_removing_old_cache" />
+<meta property="og:description" content="The way RStudio Startup works does not allow o read the prompt for some
+reasons (https://stackoverflow.com/questions/55772436/readline-does-not-prompt-user-input-from-rprofile-site-in-rstudio)
+So we better don't use the prompt and issue a message only." />
 
 
 <meta name="robots" content="noindex">
@@ -177,27 +177,19 @@ dependency DiagrammeR from data.tree is not available for R &amp;lt; 3.2." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set the write_tree argument</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/set-assert-args.R'><code>R/set-assert-args.R</code></a></small>
-    <div class="hidden name"><code>set_arg_write_tree.Rd</code></div>
+    <h1>Ask people to remove the cache</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/styler/blob/master/R/zzz.R'><code>R/zzz.R</code></a></small>
+    <div class="hidden name"><code>remind_removing_old_cache.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Sets the argument <code>write_tree</code> in <code><a href='test_collection.html'>test_collection()</a></code> to be <code>TRUE</code> for R
-versions higher or equal to 3.2, and <code>FALSE</code> otherwise since the second-level
-dependency <code>DiagrammeR</code> from <code>data.tree</code> is not available for R &lt; 3.2.</p>
+    <p>The way RStudio Startup works does not allow o read the prompt for some
+reasons (https://stackoverflow.com/questions/55772436/readline-does-not-prompt-user-input-from-rprofile-site-in-rstudio)
+So we better don't use the prompt and issue a message only.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_arg_write_tree</span><span class='op'>(</span><span class='va'>write_tree</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remind_removing_old_cache</span><span class='op'>(</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>write_tree</th>
-      <td><p>Whether or not to write tree.</p></td>
-    </tr>
-    </table>
 
 
   </div>
