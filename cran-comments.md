@@ -1,5 +1,6 @@
 This is a submission to fix a problem with persistent caching, reported by 
-Prof Ripley on 07.09.2021.
+Prof Ripley on 07.09.2021, and invalid URLs, based on an email from Uwe Ligges 
+on 17.09.2021.
 
 ## Test environments
 
