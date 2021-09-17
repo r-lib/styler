@@ -1,4 +1,4 @@
-# styler 1.6.0
+# styler 1.6.1
 
 * Files with `.Rmarkdown` extension are now recognized as an R markdown files in
   `style_file()` and friends (#824).
@@ -113,7 +113,7 @@ We’d like to thank everyone who has furthered the development of the latest
 release of styler through their contributions in issues and pull requests:
 
 [&#x0040;ardydavari](https://github.com/ardydavari), 
-[&#x0040;gadenbuie](https://github.com/gadenbuie), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;jasonhan-vassar](https://github.com/jasonhan-vassar), [&#x0040;laresbernardo](https://github.com/laresbernardo), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), 
+[&#x0040;gadenbuie](https://github.com/gadenbuie), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), &#x0040;jasonhan-vassar, [&#x0040;laresbernardo](https://github.com/laresbernardo), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), 
 [&#x0040;Moohan](https://github.com/Moohan), 
 [&#x0040;njtierney](https://github.com/njtierney), 
 [&#x0040;pat-s](https://github.com/pat-s),
@@ -406,7 +406,7 @@ Thanks to all contributors involved, in particular
 
 Thanks to all contributors involved, in particular
 
-[&#x0040;Banana1530](https://github.com/Banana1530), [&#x0040;batpigandme](https://github.com/batpigandme), [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;ellessenne](https://github.com/ellessenne), [&#x0040;Emiller88](https://github.com/Emiller88), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lwjohnst86](https://github.com/lwjohnst86), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;Moohan](https://github.com/Moohan), [&#x0040;nxskok](https://github.com/nxskok), [&#x0040;oliverbeagley](https://github.com/oliverbeagley), [&#x0040;pat-s](https://github.com/pat-s), [&#x0040;reddy-ia](https://github.com/reddy-ia), and [&#x0040;russHyde](https://github.com/russHyde)
+[&#x0040;Banana1530](https://github.com/Banana1530), [&#x0040;batpigandme](https://github.com/batpigandme), [&#x0040;cpsievert](https://github.com/cpsievert), [&#x0040;ellessenne](https://github.com/ellessenne), [&#x0040;Emiller88](https://github.com/Emiller88), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lwjohnst86](https://github.com/lwjohnst86), [&#x0040;michaelquinn32](https://github.com/michaelquinn32), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;Moohan](https://github.com/Moohan), [&#x0040;nxskok](https://github.com/nxskok), [&#x0040;oliverbeagley](https://github.com/oliverbeagley), [&#x0040;pat-s](https://github.com/pat-s), &#x0040;reddy-ia, and [&#x0040;russHyde](https://github.com/russHyde)
 
 # styler 1.1.1
 
