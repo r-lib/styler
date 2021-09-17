@@ -102,6 +102,7 @@ levelName
 LF
 LIBS
 lifecycle
+Ligges
 linux
 lorenz
 lorenzwalthert
@@ -144,6 +145,7 @@ questionr
 rcmdcheck
 RcppExports
 rds
+readline
 readme
 README
 rebased
@@ -199,6 +201,7 @@ shinyMonacoEditor
 shinyobjects
 ShinyQuickStarter
 sprintf
+stackoverflow
 StackOverflow
 startsWith
 STR
@@ -239,6 +242,7 @@ unnest
 unstyled
 usethis
 utf
+Uwe
 VignetteBuilder
 Visit'em
 walthert

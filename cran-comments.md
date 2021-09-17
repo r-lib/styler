@@ -1,9 +1,12 @@
+This is a submission to fix a problem with persistent caching, reported by 
+Prof Ripley on 07.09.2021, and invalid URLs, based on an email from Uwe Ligges 
+on 17.09.2021.
 
 ## Test environments
 
-* local OS X install (10.15.7): R 4.0.3
-* ubuntu 18.04 (on GitHub Actions): R devel, R 4.0.3, R 3.6, R 3.5, R 3.4, R 3.3
-* Windows Server 10 (on GitHub Actions): R 3.6, R 4.0.3
+* local OS X install (10.15.7): R 4.1.0
+* ubuntu 18.04 (on GitHub Actions): R devel, R 4.1.1, R 4.0.5, R 3.6, R 3.5, R 3.4
+* Windows Server 10 (on GitHub Actions): R 3.6, R 4.0.5
 * win-builder: R devel
 
 ## R CMD check results
@@ -32,13 +35,14 @@ I also ran R CMD check on all downstream dependencies of styler using the
 revdepcheck package. The 
 downstream dependencies are: 
 
-* Reverse imports: biocthis, exampletestr, iNZightTools, languageserver, 
-  questionr, shinymeta, shinyobjects, ShinyQuickStarter, systemPipeShiny, 
-  tidypaleo.
+* Reverse imports: biocthis, boomer, exampletestr, flow, iNZightTools, 
+  languageserver, questionr, shinymeta, shinyobjects, ShinyQuickStarter, 
+  systemPipeShiny, tidypaleo
   	
-* Reverse suggests:	autothresholdr, crunch, datastructures, drake, epigraphdb, 
-  knitr, multiverse, nph, precommit, reprex, shinydashboardPlus, 
-  shinyMonacoEditor, usethis.
+* Reverse suggests: autothresholdr, autothresholdr, crunch, datastructures, 
+  drake, epigraphdb, knitr, multiverse, nph, precommit, reprex, shiny.react,
+  shinydashboardPlus, shinyMonacoEditor, usethis.
+
 
 
 All of them finished R CMD CHECK with the same number of ERRORS, WARNINGS and 
