@@ -8,14 +8,19 @@ repos:
     hooks:
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
-        exclude: 'tests/testthat/.*/.*\.R'
+        exclude:  >
+          (?x)^(
+          tests/testthat/.*/.*\.R|
+          vignettes/customizing_styler\.Rmd
+          )$
     -   id: roxygenize
     -   id: use-tidy-description
     -   id: spell-check
         exclude: >
           (?x)^(
-          data/.*|
           \.github/.*\.yaml|
+          data/.*|
+          tests/testthat/.*|
           touchstone/config\.json|
           (.*/|)\.Rprofile|
           (.*/|)\.Renviron|
@@ -38,13 +43,17 @@ repos:
           )$
     -   id: readme-rmd-rendered
     -   id: parsable-R
+        exclude: >
+          (?x)^(
+          tests/testthat/public-api/xyzaddin/addin_region-.*|
+          tests/testmanual/addins/r-invalid\.R
+          )$
     -   id: no-browser-statement
     -   id: deps-in-desc
         exclude: >
           (?x)^(
           touchstone/.*|
-          tests/testthat/.*-in\.R(md)?|
-          tests/testthat/.*-out\.R(md)?
+          tests/testthat/.*\.R(md)?
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
