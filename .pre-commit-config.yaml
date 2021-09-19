@@ -10,7 +10,7 @@ repos:
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
         exclude:  >
           (?x)^(
-          tests/testthat/.*/.*\.R|
+          tests/testthat/.*/.*\.R(md)?|
           vignettes/customizing_styler\.Rmd
           )$
     -   id: roxygenize
@@ -46,13 +46,22 @@ repos:
         exclude: >
           (?x)^(
           tests/testthat/public-api/xyzaddin/addin_region-.*|
-          tests/testmanual/addins/r-invalid\.R
+          tests/testmanual/addins/r-invalid\.R|
+          tests/testthat/escaping/basic-escape-out\.R
           )$
     -   id: no-browser-statement
+        exclude: >
+          (?x)^(
+          tests/testthat/public-api/xyzaddin/addin_region-.*|
+          tests/testmanual/addins/r-invalid\.R|
+          tests/testthat/escaping/basic-escape-out\.R
+          )$
     -   id: deps-in-desc
         exclude: >
           (?x)^(
           touchstone/.*|
+          tests/testmanual/addins/r-invalid\.R|
+          tests/testthat/escaping/basic-escape-out\.R|
           tests/testthat/.*\.R(md)?
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks

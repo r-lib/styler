@@ -1,3 +1,8 @@
+# styler 1.6.1.9000 (Development version)
+
+* Use pre-commit.ci and improve code quality (#841).
+
+
 # styler 1.6.1
 
 * Files with `.Rmarkdown` extension are now recognized as an R markdown files in
