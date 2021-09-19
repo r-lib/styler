@@ -11,7 +11,8 @@ repos:
         exclude:  >
           (?x)^(
           tests/testthat/.*/.*\.R(md)?|
-          vignettes/customizing_styler\.Rmd
+          vignettes/customizing_styler\.Rmd|
+          tests/testthat/public-api/xyzfile-rnw/random4\.Rnw|
           )$
     -   id: roxygenize
     -   id: use-tidy-description
@@ -47,14 +48,18 @@ repos:
           (?x)^(
           tests/testthat/public-api/xyzaddin/addin_region-.*|
           tests/testmanual/addins/r-invalid\.R|
-          tests/testthat/escaping/basic-escape-out\.R
+          tests/testthat/escaping/basic-escape-out\.R|
+          tests/testthat/indention_operators/base_pipe_and_assignment-.*|
+          tests/testthat/exception_handling/parser-error.R|
           )$
     -   id: no-browser-statement
         exclude: >
           (?x)^(
           tests/testthat/public-api/xyzaddin/addin_region-.*|
           tests/testmanual/addins/r-invalid\.R|
-          tests/testthat/escaping/basic-escape-out\.R
+          tests/testthat/escaping/basic-escape-out\.R|
+          tests/testthat/indention_operators/base_pipe_and_assignment-.*|
+          tests/testthat/exception_handling/parser-error.R|
           )$
     -   id: deps-in-desc
         exclude: >
@@ -62,6 +67,7 @@ repos:
           touchstone/.*|
           tests/testmanual/addins/r-invalid\.R|
           tests/testthat/escaping/basic-escape-out\.R|
+          tests/testthat/rnw/011-conditional-eval-out\.Rnw|
           tests/testthat/.*\.R(md)?
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks

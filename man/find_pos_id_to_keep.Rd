@@ -22,7 +22,7 @@ typical roxygen annotated code.
 \details{
 Note that top-level comments \strong{above} code have negative parents
 (the negative value of the parent of the code expression that follows after,
-a nother comment might be in the way though), all comments that are not top
+another comment might be in the way though), all comments that are not top
 level have positive ids. All comments for which no code follows afterwards
 have parent 0.
 }
