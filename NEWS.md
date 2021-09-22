@@ -1,7 +1,6 @@
-# styler 1.6.1.9000 (Development version)
+# styler 1.2
 
-* Use pre-commit.ci and improve code quality (#841).
-
+* clean up cache files older than one week (#842).
 
 # styler 1.6.1
 
