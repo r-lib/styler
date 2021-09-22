@@ -20,7 +20,7 @@
 remove_old_cache_files <- function() {
   all_cached <- list.files(
     R.cache::getCachePath(c("styler", styler_version)),
-    full.names = TRUE
+    full.names = TRUE, recursive = TRUE
   )
   date_boundary <- Sys.time() - 60 * 60 * 24 * 6
   file.remove(
