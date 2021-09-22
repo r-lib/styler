@@ -28,12 +28,7 @@ remove_old_cache_files <- function() {
   )
 }
 
-#' Ask people to remove the cache
-#'
-#' The way RStudio Startup works does not allow o read the prompt for some
-#' reasons (https://stackoverflow.com/questions/55772436/readline-does-not-prompt-user-input-from-rprofile-site-in-rstudio)
-#' So we better don't use the prompt and issue a message only.
-#' @keywords internal
+
 remove_cache_old_versions <- function() {
   dirs <- list.dirs(R.cache::getCachePath("styler"), recursive = FALSE)
   if (length(dirs) < 1) {
