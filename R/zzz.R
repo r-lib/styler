@@ -31,13 +31,7 @@ remove_old_cache_files <- function() {
 
 remove_cache_old_versions <- function() {
   dirs <- list.dirs(R.cache::getCachePath("styler"), recursive = FALSE)
-  if (length(dirs) < 1) {
-    return()
-  }
   old_package_dirs <- dirs[basename(dirs) != as.character(styler_version)]
-  if (length(old_package_dirs) < 1) {
-    return()
-  }
   purrr::walk(old_package_dirs, function(dir) {
     unlink(dir, recursive = TRUE, force = TRUE)
   })
