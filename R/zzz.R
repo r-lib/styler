@@ -39,7 +39,6 @@ remove_cache_old_versions <- function() {
     return()
   }
   purrr::walk(old_package_dirs, function(dir) {
-    cache_clear(basename(dir), ask = FALSE)
-    file.remove(dir)
+    unlink(dir, recursive = TRUE, force = TRUE)
   })
 }
