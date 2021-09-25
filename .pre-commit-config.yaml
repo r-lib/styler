@@ -13,6 +13,7 @@ repos:
           tests/testthat/.*/.*\.R(md|nw)?|
           vignettes/customizing_styler\.Rmd|
           tests/testthat/public-api/xyzfile-rnw/random4\.Rnw|
+          vignettes/detect-alignment\.Rmd|
           )$
     -   id: roxygenize
     -   id: use-tidy-description
