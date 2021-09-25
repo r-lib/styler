@@ -41,7 +41,8 @@
 #' # brace expressions go on new line if part of a pipe, in function call...
 #' c(
 #'   data %>%
-#'     filter(bar) %>% {
+#'     filter(bar) %>%
+#'     {
 #'       cor(.$col1, .$col2, use = "complete.obs")
 #'     }
 #' )

@@ -44,8 +44,8 @@ The main caching features were implemented in the following two pull requests:
 
 ```{r, eval = FALSE}
 function() {
-  # a comment 
-  x = 2 # <- change this line
+  # a comment
+  x <- 2 # <- change this line
 }
 
 another(call)

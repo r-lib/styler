@@ -10,7 +10,7 @@ repos:
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
         exclude:  >
           (?x)^(
-          tests/testthat/.*/.*\.R(md)?|
+          tests/testthat/.*/.*\.R(md|nw)?|
           vignettes/customizing_styler\.Rmd|
           tests/testthat/public-api/xyzfile-rnw/random4\.Rnw|
           )$
@@ -76,7 +76,13 @@ repos:
     -   id: check-added-large-files
         args: ['--maxkb=200']
     -   id: end-of-file-fixer
-        exclude: '\.Rd'
+        exclude: >
+          (?x)^(
+          \.Rd|
+          tests/testthat/exception_handling/empty_file\.R|
+          tests/testthat/parse_comments/eol_eof_spaces-.*|
+          tests/testthat/reference-objects/.*|
+          )$
 -   repo: local
     hooks:
     -   id: forbid-to-commit
