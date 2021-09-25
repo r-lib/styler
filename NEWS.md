@@ -1,3 +1,6 @@
+# styler 1.6.2.9000 (Development version)
+
+
 # styler 1.6.2
 
 * clean up cache files older than one week (#842).
