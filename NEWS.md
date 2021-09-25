@@ -1,4 +1,4 @@
-# styler 1.2
+# styler 1.6.2
 
 * clean up cache files older than one week (#842).
 
