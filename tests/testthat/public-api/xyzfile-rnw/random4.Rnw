@@ -11,7 +11,7 @@ f <- function(x) {
 @
 
 More text
-<<>>=
+<<eval=FALSE>>=
 # More R code which is invalid
 g <- function(y) {
   y

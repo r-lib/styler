@@ -67,7 +67,7 @@ repos:
         exclude: >
           (?x)^(
           touchstone/.*|
-          tests/testmanual/addins/r-invalid\.R|
+          tests/testmanual/addins/.*invalid.*|
           tests/testthat/escaping/basic-escape-out\.R|
           tests/testthat/rnw/011-conditional-eval-out\.Rnw|
           tests/testthat/.*\.R(md)?
