@@ -54,7 +54,7 @@ repos:
           tests/testthat/public-api/xyzaddin/addin_region-.*|
           tests/testmanual/addins/r-invalid\.R|
           tests/testthat/escaping/basic-escape-out\.R|
-          tests/testthat/indention_operators/base_pipe_and_assignment-.*|
+          tests/testthat/indention_operators/.*pipe.*|
           tests/testthat/exception_handling/parser-error.R|
           )$
     -   id: no-browser-statement
@@ -65,6 +65,7 @@ repos:
           tests/testthat/escaping/basic-escape-out\.R|
           tests/testthat/indention_operators/base_pipe_and_assignment-.*|
           tests/testthat/exception_handling/parser-error.R|
+          tests/testthat/indention_operators/.*pipe.*|
           )$
     -   id: deps-in-desc
         exclude: >
