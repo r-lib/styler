@@ -10,8 +10,8 @@ Helper functions for styling via RStudio Addins.
 
 \itemize{
 \item Set style: Select the style transformers to use. For flexibility, the user
-input is passed to the \code{transformers} argument, not the \code{style} argument, so
-entering \code{styler::tidyverse_style(scope = "spaces")} in the Addin is
+input is passed to the \code{transformers} argument, not the \code{style} argument,
+so entering \code{styler::tidyverse_style(scope = "spaces")} in the Addin is
 equivalent to \code{styler::style_text("1+1", scope = "spaces")} and
 \code{styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))}
 if the text to style is \code{1+1}. The style transformers are memorized

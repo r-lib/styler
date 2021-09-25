@@ -18,6 +18,8 @@ repos:
           tests/testmanual/addins/r-valid\.R|
           )$
     -   id: roxygenize
+        additional_dependencies:
+        - r-lib/pkgapi
     -   id: use-tidy-description
     -   id: spell-check
         exclude: >
