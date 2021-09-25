@@ -15,6 +15,7 @@ repos:
           tests/testthat/public-api/xyzfile-rnw/random4\.Rnw|
           vignettes/detect-alignment\.Rmd|
           tests/testmanual/addins/.*invalid.*|
+          tests/testmanual/addins/r-valid\.R|
           )$
     -   id: roxygenize
     -   id: use-tidy-description
