@@ -14,6 +14,7 @@ repos:
           vignettes/customizing_styler\.Rmd|
           tests/testthat/public-api/xyzfile-rnw/random4\.Rnw|
           vignettes/detect-alignment\.Rmd|
+          tests/testmanual/addins/.*invalid.*|
           )$
     -   id: roxygenize
     -   id: use-tidy-description
