@@ -201,7 +201,7 @@ cache_dir_default <- function() {
 
 #' Create more specs
 #'
-#' Syntactic suggar for creating more specs. This is useful when we want to add
+#' Syntactic sugar for creating more specs. This is useful when we want to add
 #' more arguments (because we can search for this function in the source code).
 #' @keywords internal
 cache_more_specs <- function(include_roxygen_examples, base_indention) {

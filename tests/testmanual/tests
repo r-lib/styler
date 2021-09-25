@@ -3,7 +3,7 @@
 ## Addins
 
 * set style:
-  - test setting a valid stlye
+  - test setting a valid style
   - test setting an invalid style
 * style active file:
   - saved .R file (valid and invalid code)
@@ -23,4 +23,3 @@
   - unsaved .Rnw file
   - saved non-R file
   - unsaved R file
-

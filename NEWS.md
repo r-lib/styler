@@ -1,3 +1,7 @@
+# styler 1.2
+
+* clean up cache files older than one week (#842).
+
 # styler 1.6.1
 
 * Files with `.Rmarkdown` extension are now recognized as an R markdown files in

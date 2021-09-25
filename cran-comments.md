@@ -1,6 +1,8 @@
-This is a submission to fix a problem with persistent caching, reported by 
-Prof Ripley on 07.09.2021, and invalid URLs, based on an email from Uwe Ligges 
-on 17.09.2021.
+This is a re-submission to fix a problem with persistent caching. Note that
+all cached files are of size 0 and this is by design to keep the cache small.
+Hence, the cache will still have files of size 0, but we remove all files older
+than a week and remove all caches for versions of styler other than the one 
+running as requested.
 
 ## Test environments
 
