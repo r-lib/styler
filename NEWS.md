@@ -1,5 +1,6 @@
 # styler 1.6.2.9000 (Development version)
 
+* Add vignette on distributing style guide (#846).
 
 # styler 1.6.2
 

@@ -8,7 +8,8 @@ vignette: >
 ---
 
 This vignette provides a high-level overview of how styler works and how you can
-define your own style guide and format code according to it.
+define your own style guide and format code according to it. How to distribute 
+a custom style guide is described in `vignette('distribute_custom_style_guide')`
 
 # How styler works
 
