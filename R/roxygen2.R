@@ -143,8 +143,7 @@ roxygenize_with_cache <- function(key, dirs) {
         "    -   id: roxygenize",
         "
         additional_dependencies:
-        - r-lib/pkgapi
-        - dplyr@1.0.0\n\n"
+        - r-lib/pkgapi\n\n"
       ))
     } else if (inherits(out, "error")) {
       rlang::abort(conditionMessage(out))
