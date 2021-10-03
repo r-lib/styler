@@ -1,9 +1,6 @@
 on:
   schedule:
     - cron:  '50 08 18 * *'
-  push:
-    branches:
-      - '*' 
 
 name: Hook dependency updates
 
