@@ -58,7 +58,7 @@ extract_diff_root <- function(root = here::here()) {
 #' @export
 diff_requires_run_roxygenize <- function(root = here::here()) {
   if (rlang::with_handlers(withr::with_namespace("git2r", FALSE), error = function(...) TRUE)) {
-    rlang::warn("You need to install the R package git2r (and the required system dependency if you are on Linux) to benefit from caching of this hook.")
+    rlang::warn("You need to install the R package {git2r} to benefit from caching of this hook.")
     return(TRUE)
   }
   changed_lines_content <- extract_diff_root(root)
