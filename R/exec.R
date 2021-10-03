@@ -84,10 +84,8 @@ path_derive_precommit_exec <- function() {
 #' @keywords internal
 path_derive_precommit_exec_impl <- function(candidate) {
   existant <- path_candidate_to_actual(candidate)
-  if (length(existant) == 1) {
-    existant[1]
-  } else if (length(existant) > 1) {
-    path_warn_multiple_execs(existant)
+  if (length(existant) >= 1) {
+    existant
   } else {
     ""
   }
@@ -98,14 +96,17 @@ path_warn_multiple_execs <- function(paths) {
     "We detected multiple pre-commit executables. This is likely ",
     "going to get you into trouble in the future, e.g. when you want to ",
     "upgrade, as you easily loose track of different versions. We strongly ",
-    "suggest to only keep one pre-commit executable and delete the other ",
-    "ones. Here are the locations where we detected executables:\n\n",
+    "suggest to only keep one pre-commit executable and uninstall (or delete) ",
+    "the other ones. Here are the locations where we detected executables:\n\n",
     "- ", paste0(paths, collapse = "\n- "), "\n\n",
     "Note that in all local repos where you used pre-commit, the executable ",
-    "is hardcoded (in .git/hooks/pre-commit). Deleting a referenced ",
+    "path is hardcoded (in .git/hooks/pre-commit). Deleting a referenced ",
     "executable will break pre-commit for that local repo. A simple ",
     "re-initialization with `precommit::use_precommit()` or ",
-    "`$ pre-commit install` will fix this."
+    "`$ pre-commit install` will fix this for pre-commit hooks.\n\nIf you ",
+    "have hook types other than pre-commit such as pre-push (you can check ",
+    "which files are in .git/hooks/), you need to name the type and use the ",
+    "command line, i.e. `$ pre-commit install -t pre-push`. "
   ))
 }
 
@@ -160,7 +161,7 @@ path_derive_precommit_exec_macOS <- function() {
 #' Returns `""` if no executable is found.
 #' @keywords internal
 path_derive_precommit_exec_path <- function() {
-  unname(Sys.which(precommit_executable_file())[1])
+  unname(Sys.which(precommit_executable_file()))
 }
 
 #' Derive the path to the conda pre-commit executable
@@ -193,7 +194,6 @@ path_derive_precommit_exec_conda_impl <- function(conda_env) {
   tryCatch(
     {
       ls <- reticulate::conda_list()
-
       path_reticulate <- fs::path_dir(ls[ls$name == conda_env, "python"][1])
       derived <- fs::path(
         path_reticulate,

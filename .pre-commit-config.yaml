@@ -1,14 +1,50 @@
 # All available hooks: https://pre-commit.com/hooks.html
 # R specific hooks: https://github.com/lorenzwalthert/precommit
 default_stages: ["commit"]
+ci:
+    skip: [consistent-release-tag, spell-check-ordered-exclude]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.1.3.9129
+    rev: v0.1.3.9128
     hooks: 
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
-        exclude: '^tests/testthat/in/.*\.R'
+        exclude: > 
+          (?x)^(
+          tests/testthat/in/.*\.R|
+          renv/.*
+          )$
+        require_serial: true
     -   id: roxygenize
+        additional_dependencies:
+        -    desc@1.3.0
+        -    digest@0.6.27
+        -    docopt@0.7.1
+        -    fs@1.5.0
+        -    git2r@0.28.0
+        -    glue@1.4.2
+        -    here@1.0.1
+        -    knitr@1.33
+        -    lintr@2.0.1
+        -    magrittr@2.0.1
+        -    mockery@0.4.2
+        -    pkgload@1.2.1
+        -    purrr@0.3.4
+        -    R.cache@0.15.0
+        -    reticulate@1.20
+        -    rlang@0.4.11
+        -    r-lib/pkgapi@35226e9
+        -    rmarkdown@2.8
+        -    roxygen2@7.1.1
+        -    rprojroot@2.0.2
+        -    rstudioapi@0.13
+        -    spelling@2.2
+        -    styler@1.4.1
+        -    testthat@3.0.2
+        -    tibble@3.1.1
+        -    usethis@2.0.1
+        -    withr@2.4.2
+        -    yaml@2.2.1    
     # codemeta must be above use-tidy-description when both are used
     # -   id: codemeta-description-updated
     -   id: use-tidy-description
@@ -39,15 +75,36 @@ repos:
           (.*/|)WORDLIST|
           \.github/workflows/.*|
           data/.*|
-          inst/bin/.*|
+          inst/hooks/.*|
           inst/pre-commit-.*|
+          inst/usethis-legacy-hook|
+          LICENSE|
+          tests/testthat/in/.*|
           )$
     -   id: readme-rmd-rendered
     -   id: parsable-R
+        exclude: > 
+          (?x)^(
+          tests/testthat/in/style-files-fail-parse\.R|
+          tests/testthat/in/parsable-R-fail\.R|
+          )$
     -   id: no-browser-statement
+        exclude: > 
+          (?x)^(
+          tests/testthat/in/style-files-fail-parse\.R|
+          tests/testthat/in/parsable-R-fail\.R|
+          tests/testthat/in/no-browser-statement-fail\.R|
+          )$
     -   id: deps-in-desc
+        exclude: > 
+          (?x)^(
+          tests/testthat/in/.*|
+          inst/renv-update\.R|
+          renv/activate.R|
+          vignettes/FAQ\.Rmd|
+          )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: 11a996eec600aa64d1cc12859d9bffbc6422836c
     hooks: 
     -   id: check-added-large-files
     -   id: end-of-file-fixer
@@ -56,19 +113,36 @@ repos:
     hooks:
     -   id: consistent-release-tag
         name: consistent-release-tag
-        entry: inst/consistent-release-tag
-        language: script
+        entry: Rscript inst/hooks/local/consistent-release-tag.R
+        language: r
+        additional_dependencies:
+        -    docopt
+        -    fs
+        -    yaml
+        -    purrr 
+        -    rlang 
+        -    git2r
+        -    desc
+        -    glue
         stages: [commit, push]
     -   id: hooks-config-to-inst
         name: hooks-config-to-inst
-        entry: inst/hooks-config-to-inst
-        language: script
+        entry: Rscript inst/hooks/local/hooks-config-to-inst.R
+        language: r
         stages: [commit, push]
+        additional_dependencies:
+        -    fs
     -   id: spell-check-exclude-to-config
         name: spell-check-exclude-to-config
-        entry: inst/spell-check-exclude-to-config
-        language: script
+        entry: Rscript inst/hooks/local/spell-check-exclude-to-config.R
+        language: r
         stages: [commit, push]
+        additional_dependencies:
+        -    magrittr
+        -    purrr
+        -    yaml
+        -    here
+        -    rlang
     -   id: forbid-to-commit
         name: Don't commit common R artifacts
         entry: Cannot commit .Rhistory, .Rdata, .csv and similar.
@@ -78,6 +152,11 @@ repos:
     -   id: spell-check-ordered-exclude
         name: Ordered regex pattern for spell-check exclusion
         description: Ensure alphabetical order in `exclude:` key of spell check.
-        entry: inst/spell-check-ordered-exclude.R
-        language: script
+        entry: Rscript inst/hooks/local/spell-check-ordered-exclude.R
+        language: r
         files: '^(.*/|)\.?pre-commit-config.*\.yaml$'
+        additional_dependencies:
+        -    magrittr
+        -    yaml
+        -    purrr
+        -    rlang

@@ -2,7 +2,7 @@
 % Please edit documentation in R/setup.R
 \name{use_precommit}
 \alias{use_precommit}
-\title{Set up pre-commit}
+\title{Get started with pre-commit}
 \usage{
 use_precommit(
   config_source = getOption("precommit.config_source"),
@@ -40,7 +40,7 @@ If \code{FALSE}, environments are installed with first commit.}
 \code{NULL} (invisibly). The function is called for its side effects.
 }
 \description{
-Get started.
+This function sets up pre-commit for your git repo.
 }
 \section{When to call this function?}{
 
@@ -72,8 +72,8 @@ You can use an existing \code{.pre-commit-config.yaml} file when initializing
 pre-commit with \code{\link[=use_precommit]{use_precommit()}} using the argument \code{config_source} to
 copy an existing config file into your repo. This argument defaults to the R
 option \code{precommit.config_source}, so you may want to set this option in
-your \code{.Rprofile} for convenience. Note that this is \strong{not} equivalent
-to the \code{--config} option in the CLI command \verb{pre-commit install} and similar,
+your \code{.Rprofile} for convenience. Note that this is \strong{not} equivalent to the
+\code{--config} option in the CLI command \verb{pre-commit install} and similar,
 which do \emph{not} copy a config file into a project root (and allow to put it
 under version control), but rather link it in some more or less transparent
 way.

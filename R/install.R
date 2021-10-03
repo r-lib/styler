@@ -1,20 +1,20 @@
 install_system <- function(force) {
   assert_reticulate_is_installed()
   if (!is_installed() | force) {
-    usethis::ui_info(paste(
+    cli::cli_alert_info(paste(
       "Installing pre-commit into the conda environment",
-      "`r-precommit`."
+      "{.code r-precommit }."
     ))
     install_impl()
-    usethis::ui_done("Sucessfully installed pre-commit on your system.")
-    usethis::ui_todo(
+    cli::cli_alert_success("Sucessfully installed pre-commit on your system.")
+    cli::cli_ul(
       "To use it with this project, run `precommit::use_precommit()`"
     )
     path_exec <- path_derive_precommit_exec()
     options(precommit.executable = path_exec)
   } else {
     path_exec <- path_precommit_exec(check_if_exists = FALSE)
-    usethis::ui_info(paste0(
+    cli::cli_alert_info(paste0(
       "pre-commit already installed at the following locations:\n\n",
       paste0("- ", path_exec), "\n\nUse `precommit::update_precommit()` to ",
       "update the executable."
@@ -95,17 +95,17 @@ install_repo <- function(root, install_hooks, legacy_hooks) {
           ))
           call_precommit("uninstall")
         } else if (legacy_hooks == "allow") {
-          usethis::ui_done(paste(
+          cli::cli_alert_success(paste(
             "Sucessfully installed pre-commit for repo.",
-            "Existing hooks found and argument `allow_legacy = TRUE`. Running",
+            "Existing hooks found and argument {.code allow_legacy = TRUE }. Running",
             "in migration mode."
           ))
         }
       } else {
-        usethis::ui_done("Sucessfully installed pre-commit for repo.")
+        cli::cli_alert_success("Sucessfully installed pre-commit for repo.")
       }
     } else {
-      usethis::ui_oops("Failed to install pre-commit for repo.")
+      cli::cli_alert_danger("Failed to install pre-commit for repo.")
       communicate_captured_call(out, preamble = "Problems during initialization:")
     }
   })
@@ -120,7 +120,7 @@ remove_usethis_readme_hook <- function() {
   if (fs::file_exists(candidate)) {
     if (identical(readLines(candidate, encoding = "UTF-8"), legacy)) {
       fs::file_delete(candidate)
-      usethis::ui_info(paste(
+      cli::cli_alert_info(paste(
         "Removed the render-README hook, which was added with",
         "`usethis::use_readme_rmd()` to this repo at some point in the past.",
         "{{precommit}}'s equivalent is the hook with the id 'readme-rmd-rendered'.",
@@ -162,7 +162,7 @@ uninstall_precommit <- function(scope = "repo",
       path_config <- ".pre-commit-config.yaml"
       if (fs::file_exists(path_config)) {
         fs::file_delete(path_config)
-        usethis::ui_done("Removed .pre-commit-config.yaml")
+        cli::cli_alert_success("Removed .pre-commit-config.yaml")
       }
     } else if (scope == "user") {
       uninstall_system(ask = (ask %in% c("user", "both")))
@@ -203,7 +203,7 @@ uninstall_system <- function(ask = TRUE) {
           "remove -n r-precommit pre-commit --yes"
         )
         if (out$exit_status == 0) {
-          usethis::ui_done("Removed pre-commit from conda env r-precommit.")
+          cli::cli_alert_success("Removed pre-commit from conda env r-precommit.")
         } else {
           communicate_captured_call(out)
         }
@@ -234,7 +234,7 @@ uninstall_repo <- function(ask) {
   if (continue) {
     out <- call_precommit("uninstall")
     if (out$exit_status == 0) {
-      usethis::ui_done("Uninstalled pre-commit from repo scope.")
+      cli::cli_alert_success("Uninstalled pre-commit from repo scope.")
     } else {
       communicate_captured_call(out)
     }
@@ -243,14 +243,14 @@ uninstall_repo <- function(ask) {
       precommit_hooks_idx <- which(lines == "^\\.pre-commit-config\\.yaml$")
       remaining <- rlang::seq2(1, length(lines)) %>% setdiff(precommit_hooks_idx)
       if (length(precommit_hooks_idx) > 0) {
-        usethis::ui_info("Removing .pre-commit-hooks.yaml from .Rbuildignore")
+        cli::cli_alert_info("Removing .pre-commit-hooks.yaml from .Rbuildignore")
         writeLines(enc2utf8(lines[remaining]), ".Rbuildignore")
       }
     }
     path_file <- ".pre-commit-config.yaml"
     if (fs::file_exists(path_file)) {
       fs::file_delete(path_file)
-      usethis::ui_done(paste(
+      cli::cli_alert_success(paste(
         "Removed .pre-commit-config.yaml. If you want your collaborators",
         "to be able to\ncontinue to use pre-commit in this repo, you should",
         "undo the deletion of this file,\ne.g. with `$ git checkout",
@@ -258,12 +258,12 @@ uninstall_repo <- function(ask) {
       ))
     }
 
-    usethis::ui_info(paste(
+    cli::cli_alert_info(paste(
       "You can re-install pre-commit for this project at anytime with",
       "`precommit::use_precommit()`."
     ))
   } else {
-    usethis::ui_info("You did not type 'yes', uninstallation process aborted.")
+    cli::cli_alert_info("You did not type 'yes', uninstallation process aborted.")
   }
 }
 

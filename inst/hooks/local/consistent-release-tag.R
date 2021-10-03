@@ -41,8 +41,8 @@ assert_config_has_rev <- function(path_config, latest_tag) {
 }
 
 get_latest_tag <- function() {
-  tags <- names(git2r::tags("."))
-  paste0("v", max(as.numeric_version(gsub("^v", "", tags))))
+  system2("git", c("fetch", "--tags"))
+  system2("git", c("describe", "--tags", "--abbrev=0"), stdout = TRUE)
 }
 
 latest_tag <- get_latest_tag()

@@ -6,7 +6,6 @@ library(magrittr)
 args <- commandArgs(trailingOnly = TRUE)
 run_one_file <- function(file) {
   config <- yaml::read_yaml(file) # pre-commit filter
-  print(config)
   ours <- which(purrr::map_chr(config$repos, "repo") == "https://github.com/lorenzwalthert/precommit")
   nme <- purrr::map_chr(config$repos[[ours]]$hooks, "id")
 
@@ -17,7 +16,7 @@ run_one_file <- function(file) {
   without_mask <- regex[c(-1, -length(regex))]
   if (any(without_mask != sort(without_mask))) {
     cat(paste0(
-      "regular expressions not sorted for spell check hook, paste this ",
+      "regular expressions in file ", file, " not sorted for spell check hook, paste this ",
       "into the pre-commit config file: under the `exclude:` key:"
     ))
 

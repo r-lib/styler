@@ -13,6 +13,7 @@ reference:
   - open_config
   - open_wordlist
   - autoupdate
+  - snippet_generate
 - title: "Manage the pre-commit executable"
 - contents: 
   - uninstall_precommit

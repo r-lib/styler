@@ -1,7 +1,8 @@
 #' Run a test
 #'
 #' Tests for the executables used as pre-commit hooks via `entrypoint` in
-#' `.pre-commit-config.yaml`.
+#' `.pre-commit-config.yaml`. Set's the env variable `R_PRECOMMIT_HOOK_ENV` to
+#' when running.
 #' @details
 #' Two potential outcomes of a hooks are pass or fail. This is reflected on the
 #' level of the executable: Fail means the executable fails or the file is
@@ -16,7 +17,8 @@
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
 #'
-#' @param hook_name The name of the hook in `bin/`.
+#' @param hook_name The name of the hook in `inst/hooks/exported/`, without
+#'   file extension.
 #' @param file_name The file to test in `tests/in` (without extension). Can be
 #'   a named vector of length one where the name is the target location relative
 #'   to the temporary location and the value is the source of the file.
@@ -41,14 +43,18 @@ run_test <- function(hook_name,
                      artifacts = NULL,
                      file_transformer = function(files) files,
                      env = character()) {
-  path_executable <- system.file(
-    fs::path("bin", hook_name),
+  withr::local_envvar(list(R_PRECOMMIT_HOOK_ENV = "1"))
+  path_executable <- fs::dir_ls(system.file(
+    fs::path("hooks", "exported"),
     package = "precommit"
-  )
+  ), regexp = paste0("/", hook_name))
+  if (length(path_executable) != 1) {
+    rlang::abort("Failed to derive hook path")
+  }
   path_candidate <- paste0(testthat::test_path("in", file_name), suffix) %>%
     ensure_named(names(file_name), fs::path_file)
   run_test_impl(
-    path_executable, path_candidate[1],
+    path_executable, path_candidate,
     error_msg = error_msg,
     msg = msg,
     cmd_args = cmd_args,
@@ -154,6 +160,29 @@ hook_state_assert <- function(path_candidate,
                               error_msg,
                               msg,
                               exit_status) {
+  purrr::map2(path_candidate, path_candidate_temp,
+    hook_state_assert_one,
+    tempdir = tempdir,
+    file_transformer = file_transformer,
+    path_stdout = path_stdout,
+    path_stderr = path_stderr,
+    expect_success = expect_success,
+    error_msg = error_msg,
+    msg = msg,
+    exit_status = exit_status
+  )
+}
+
+hook_state_assert_one <- function(path_candidate,
+                                  tempdir,
+                                  path_candidate_temp,
+                                  file_transformer,
+                                  path_stdout,
+                                  path_stderr,
+                                  expect_success,
+                                  error_msg,
+                                  msg,
+                                  exit_status) {
   candidate <- readLines(path_candidate_temp)
   path_temp <- tempfile()
   fs::file_copy(path_candidate, path_temp)
@@ -214,18 +243,31 @@ not_conda <- function() {
 #' @param git Whether or not to init git in the local directory.
 #' @param use_precommmit Whether or not to [use_precommit()].
 #' @keywords internal
-local_test_setup <- function(.local_envir = parent.frame(),
-                             git = TRUE,
+local_test_setup <- function(git = TRUE,
                              use_precommit = FALSE,
-                             ...) {
+                             package = FALSE,
+                             quiet = TRUE,
+                             ...,
+                             .local_envir = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = .local_envir)
+  withr::local_dir(dir, .local_envir = .local_envir)
+  if (quiet) {
+    withr::local_options("usethis.quiet" = TRUE, .local_envir = .local_envir)
+  }
   if (git) {
-    git2r::init(path = dir)
+    git2r::init()
     withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
   }
   if (use_precommit) {
-    suppressMessages(use_precommit(...))
+    suppressMessages(use_precommit(..., root = dir))
   }
+  if (package) {
+    usethis::create_package(dir)
+    withr::local_dir(dir)
+    usethis::proj_set(dir)
+    usethis::use_testthat()
+  }
+
   dir
 }
 

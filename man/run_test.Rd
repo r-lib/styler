@@ -17,7 +17,8 @@ run_test(
 )
 }
 \arguments{
-\item{hook_name}{The name of the hook in \verb{bin/}.}
+\item{hook_name}{The name of the hook in \verb{inst/hooks/exported/}, without
+file extension.}
 
 \item{file_name}{The file to test in \verb{tests/in} (without extension). Can be
 a named vector of length one where the name is the target location relative
@@ -52,7 +53,8 @@ made.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in
-\code{.pre-commit-config.yaml}.
+\code{.pre-commit-config.yaml}. Set's the env variable \code{R_PRECOMMIT_HOOK_ENV} to
+when running.
 }
 \details{
 Two potential outcomes of a hooks are pass or fail. This is reflected on the

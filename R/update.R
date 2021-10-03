@@ -30,9 +30,9 @@ update_precommit <- function() {
   exit_status <- update_impl()
   new <- version_precommit()
   if (new == old) {
-    usethis::ui_info("Nothing to update, your version {old} is the latest available.")
+    cli::cli_alert_info("Nothing to update, your version {old} is the latest available.")
   } else {
-    usethis::ui_done("Successfully updated pre-commit from version {old} to {new}.")
+    cli::cli_alert_success("Successfully updated pre-commit from version {old} to {new}.")
   }
   invisible(exit_status)
 }

@@ -1,6 +1,6 @@
-#' Set up pre-commit
+#' Get started with pre-commit
 #'
-#' Get started.
+#' This function sets up pre-commit for your git repo.
 #' @param install_hooks Whether to install environments for all available hooks.
 #'   If `FALSE`, environments are installed with first commit.
 #' @param legacy_hooks How to treat hooks already in the repo which are not
@@ -72,8 +72,8 @@ autoupdate <- function(root = here::here()) {
     assert_correct_upstream_repo_url()
     out <- call_precommit("autoupdate")
     if (out$exit_status == 0) {
-      usethis::ui_done(paste0(
-        "Ran `pre-commit autoupdate` to get the latest version of the hooks."
+      cli::cli_alert_success(paste0(
+        "Ran {.fun pre-commit autoupdate } to get the latest version of the hooks."
       ))
     } else {
       communicate_captured_call(
@@ -90,4 +90,57 @@ upstream_repo_url_is_outdated <- function() {
   purrr::map_chr(yaml::read_yaml(".pre-commit-config.yaml")$repos, ~ .x$repo) %>%
     grepl("https://github.com/lorenzwalthert/pre-commit-hooks", ., fixed = TRUE) %>%
     any()
+}
+
+#' Generate code snippets
+#'
+#' Utility function to generate code snippets:
+#'
+#' @details
+#' Currently supported:
+#'
+#' * additional-deps-roxygenize: Code to paste into
+#'   `.pre-commit-config.yaml` for the additional dependencies required by
+#'   roxygen2.
+#' @param snippet Name of the snippet.
+#' @inheritParams fallback_doc
+#' @export
+snippet_generate <- function(snippet = "", root = here::here()) {
+  rlang::arg_match(snippet, c("additional-deps-roxygenize"))
+  if (snippet == "additional-deps-roxygenize") {
+    rlang::inform(
+      "Generating snippet using installed versions of all dependencies.\n"
+    )
+    deps <- desc::desc_get_deps()
+    deps <- deps[order(deps$package), ]
+    paste0(
+      "        -    ", deps$package, "@",
+      purrr::map_chr(deps$package, ~ as.character(packageVersion(.x))), "\n",
+      collapse = ""
+    ) %>%
+      sort() %>%
+      cat(sep = "")
+    remote_deps <- rlang::with_handlers(
+      desc::desc_get_field("Remotes"),
+      error = function(e) character()
+    )
+    if (length(remote_deps) > 0) {
+      rlang::warn(paste0(
+        "It seems you have remote dependencies in your `DESCRIPTION`. You ",
+        "need to edit the above list manually to match the syntax `renv::install()` ",
+        "understands, i.e. if you have in your `DESCRIPTION`", "
+
+Imports:
+    tidyr
+Remotes:
+    tidyverse/tidyr@2fd80d5
+
+You need in your `.pre-commit-config.yaml`
+
+        additional_dependencies:
+        -    tidyverse/tidyr@2fd80d5
+      "
+      ))
+    }
+  }
 }

@@ -12,15 +12,15 @@ Options:
 
 arguments <- docopt::docopt(doc)
 
-if (git2r::in_repository()) {
-  git_status <- git2r::status(staged = FALSE)
-  if (any(unlist(git_status) == ".lintr")) {
-    stop(
-      "Unstaged changes to .lintr file. Stage the .lintr file or discard ",
-      "the changes to it. ",
-      call. = FALSE
-    )
-  }
+lintr_staged <- grepl(
+  "modified:.*\\.lintr", system2("git", "status", stdout = TRUE)
+)
+if (any(lintr_staged)) {
+  stop(
+    "Unstaged changes to .lintr file. Stage the .lintr file or discard ",
+    "the changes to it. ",
+    call. = FALSE
+  )
 }
 
 for (path in arguments$files) {

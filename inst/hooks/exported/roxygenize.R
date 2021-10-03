@@ -28,17 +28,10 @@ if (packageVersion("precommit") < "0.1.3.9010") {
   ))
 } else {
   precommit::may_require_permanent_cache(arguments$no_warn_cache)
+  precommit::roxygen_assert_additional_dependencies()
 }
 
-path_relative_cache <- file.path("precommit", "roxygenize")
-
-roxygenize_with_cache <- function(key, dirs) {
-  if (precommit::diff_requires_run_roxygenize()) {
-    roxygen2::roxygenise()
-    R.cache::saveCache(object = Sys.time(), key = key, dirs = dirs)
-  }
-}
-
+path_relative_cache <- precommit::dirs_R.cache("roxygenize")
 wd <- list(getwd())
 cache <- R.cache::loadCache(key = wd, dirs = path_relative_cache)
 
@@ -50,8 +43,8 @@ if (!is.null(cache)) {
   all_files <- file.info(candidates)
   last_modified <- max(all_files$mtime)
   if (last_modified > cache[[1]]) {
-    roxygenize_with_cache(key = wd, dirs = path_relative_cache)
+    precommit::roxygenize_with_cache(key = wd, dirs = path_relative_cache)
   }
 } else {
-  roxygenize_with_cache(key = wd, dirs = path_relative_cache)
+  precommit::roxygenize_with_cache(key = wd, dirs = path_relative_cache)
 }
