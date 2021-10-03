@@ -138,7 +138,9 @@ test_that("fails gratefully when not installed package is required according to 
   )
   mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
   expect_error(
-    roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
+    suppressWarnings(
+      roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize"))
+    ),
     "Please add the package"
   )
 })
