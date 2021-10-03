@@ -3,7 +3,7 @@
 default_stages: ["commit"]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.1.3.9014
+    rev: v0.1.3
     hooks: 
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
@@ -39,7 +39,7 @@ repos:
           (.*/|)WORDLIST|
           \.github/workflows/.*|
           data/.*|
-          inst/hooks/.*|
+          inst/bin/.*|
           inst/pre-commit-.*|
           )$
     -   id: readme-rmd-rendered
@@ -47,7 +47,7 @@ repos:
     -   id: no-browser-statement
     -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v3.2.0
     hooks: 
     -   id: check-added-large-files
     -   id: end-of-file-fixer
@@ -56,17 +56,17 @@ repos:
     hooks:
     -   id: consistent-release-tag
         name: consistent-release-tag
-        entry: inst/hooks/local/consistent-release-tag.R
+        entry: inst/consistent-release-tag
         language: script
         stages: [commit, push]
     -   id: hooks-config-to-inst
         name: hooks-config-to-inst
-        entry: inst/hooks/local/hooks-config-to-inst.R
+        entry: inst/hooks-config-to-inst
         language: script
         stages: [commit, push]
     -   id: spell-check-exclude-to-config
         name: spell-check-exclude-to-config
-        entry: inst/hooks/local/spell-check-exclude-to-config.R
+        entry: inst/spell-check-exclude-to-config
         language: script
         stages: [commit, push]
     -   id: forbid-to-commit
@@ -78,6 +78,6 @@ repos:
     -   id: spell-check-ordered-exclude
         name: Ordered regex pattern for spell-check exclusion
         description: Ensure alphabetical order in `exclude:` key of spell check.
-        entry: inst/hooks/local/spell-check-ordered-exclude.R
+        entry: inst/spell-check-ordered-exclude.R
         language: script
         files: '^(.*/|)\.?pre-commit-config.*\.yaml$'

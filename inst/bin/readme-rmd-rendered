@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# adapted from https://github.com/r-lib/usethis/blob/master/inst/templates/readme-rmd-pre-commit.sh
+# No rmd readme means nothing to check
+if [[ ! -f "README.Rmd" ]] 
+then 
+    exit 0
+fi
+
+if [[ README.Rmd -nt README.md ]]
+then
+    echo >&2 "README.md is out of date; please re-knit README.Rmd."
+    exit 1
+fi
+
+num_readmes=$(git diff --cached --name-only | grep -Eic '^README\.[R]?md$')
+
+if [[ "$num_readmes" -lt 2 ]]
+then
+    echo >&2 "README.Rmd and README.md should be both staged."
+    exit 1
+fi

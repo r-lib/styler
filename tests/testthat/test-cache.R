@@ -40,7 +40,7 @@ test_that("CLI API works for style-files", {
     "style-files",
     suffix = "-cache-success.R",
     env = paste0("R_CACHE_ROOTPATH=", R.cache_root),
-    msg = "Using persistent"
+    msg = "Using persistant"
   )
 })
 
@@ -66,7 +66,7 @@ test_that("CLI API works for roxygenize", {
     "roxygenize",
     suffix = "-cache-success.R",
     env = paste0("R_CACHE_ROOTPATH=", R.cache_root),
-    msg = "Using persistent",
+    msg = "Using persistant",
     file_transformer = function(x) {
       git2r::init()
       x

@@ -1,9 +1,9 @@
-# precommit v0.1.3.9014 (Development)
+# precommit v0.1.3.9005 (Development)
 
 This is a pre-release for `v0.2.0` and imposes a minimal version requirement 
 on the [pre-commit framework](https://pre-commit.com/) (`v2.13.0`). Please see
-*Installation/Update* below for how to satisfy it. This will ensure future 
-releases of {precommit} building on the newly supported 
+*Installation* below for how to satisfy it. This will ensure future releases of 
+{precommit} building on the newly supported 
 [`language: r`](https://pre-commit.com/#r) will work out of the box instead of 
 issuing messages that are confusing for most end-users. We aspire the transition
 to `language: r` due to the following benefits: No more manual dependency management
@@ -12,12 +12,11 @@ enable the easy use of continuous integration services (enforcing hooks and
 auto-fixing problems with pre-commit.ci, GitHub Actions).
 
 
-**Installation/Update**
+**Installation**
 
-Please follow the 
-[update instructions](https://lorenzwalthert.github.io/precommit/dev/#update) or
-[installation instructions](https://lorenzwalthert.github.io/precommit/dev/#installation)
-depending on whether or not you previously used pre-commit.
+Please follow the instructions in the [README](https://lorenzwalthert.github.io/precommit/dev/)
+if you are a new user of pre-commit or if you want to update a current  
+installation.
 
 **API changes**
 
@@ -29,22 +28,19 @@ depending on whether or not you previously used pre-commit.
   `.pre-commit-config.yaml`. See the
   [docs](https://lorenzwalthert.github.io/precommit/articles/available-hooks.html#style-files-1)
   for details.
+- `style-files` and `roxygenize` hooks now warn if there is no permanent 
+  `{R.cache}` cache set up. You can silence the warning with the hook argument 
+  `--no-warn-cache` (#225).
 
 **Minor changes**
 
 - Warnings are no longer promoted to errors in the styler hook, which is 
   particularly relevant for the apparently random error 
   `Unknown or uninitialised column: text` (#268).
-- `style-files` and `roxygenize` hooks now warn if there is no permanent 
-  `{R.cache}` cache set up. You can silence the warning with the hook argument 
-  `--no-warn-cache` (#225).
 - `deps-in-desc` now checks `.Rprofile`, `.Rmd` and `.Rnw` files in addition to 
   `.R` files (#216).  
-- the lintr and styler hook now also check `.Rmd`, `.Rnw` and `.Rprofile` files 
-  (#286).
 - In order to avoid multiple installations of the pre-commit framework, a 
-  warning is issued if multiple are found so the user can remove them (#266, 
-  #273, #277, #278).
+  warning is issued if multiple are found so the user can remove them (#266, #273).
 - The cache for the roxygen2 hook is now also invalidated for changes in formals 
   if there are no changes in roxygen comments (#214).
 - `{renv}` infra files are not checked anymore by default in the template config
@@ -58,8 +54,6 @@ depending on whether or not you previously used pre-commit.
 - The `deps-in-desc` hook now points to the hook argument 
   `--allow_private_imports` when the hook fails due to private imports (#254).
 - roxygenize hook is now fully tested (#267).
-- Hook scripts were relocated and R hooks now have a file extension (#280).
-- Updated GitHub Action workflows (#288).
 
 # precommit v0.1.3
 

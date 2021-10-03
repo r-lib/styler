@@ -16,8 +16,7 @@
 #'   the message we expect. To check changed file content, we set `error_msg` to
 #'   `NA`.
 #'
-#' @param hook_name The name of the hook in `inst/hooks/exported/`, without
-#'   file extension.
+#' @param hook_name The name of the hook in `bin/`.
 #' @param file_name The file to test in `tests/in` (without extension). Can be
 #'   a named vector of length one where the name is the target location relative
 #'   to the temporary location and the value is the source of the file.
@@ -42,13 +41,10 @@ run_test <- function(hook_name,
                      artifacts = NULL,
                      file_transformer = function(files) files,
                      env = character()) {
-  path_executable <- fs::dir_ls(system.file(
-    fs::path("hooks", "exported"),
+  path_executable <- system.file(
+    fs::path("bin", hook_name),
     package = "precommit"
-  ), regexp = paste0("/", hook_name))
-  if (length(path_executable) != 1) {
-    rlang::abort("Failed to derive hook path")
-  }
+  )
   path_candidate <- paste0(testthat::test_path("in", file_name), suffix) %>%
     ensure_named(names(file_name), fs::path_file)
   run_test_impl(

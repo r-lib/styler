@@ -17,8 +17,7 @@ run_test(
 )
 }
 \arguments{
-\item{hook_name}{The name of the hook in \verb{inst/hooks/exported/}, without
-file extension.}
+\item{hook_name}{The name of the hook in \verb{bin/}.}
 
 \item{file_name}{The file to test in \verb{tests/in} (without extension). Can be
 a named vector of length one where the name is the target location relative
