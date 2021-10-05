@@ -66,6 +66,6 @@ test_that(".Rbuildignore is written to the right directory when root is absolute
     desc$set(Package = "test.pkg")
     desc$write("DESCRIPTION")
   })
-  use_precommit_config(install_hooks = FALSE, root = root)
+  use_precommit_config(root = root)
   expect_true(fs::file_exists(fs::path(root, ".Rbuildignore")))
 })
