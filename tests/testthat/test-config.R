@@ -52,7 +52,7 @@ test_that(".Rbuildignore is written to the right directory when root is relative
   })
   withr::with_dir(
     fs::path_dir(root),
-    use_precommit_config(install_hooks = FALSE, root = fs::path_file(root))
+    use_precommit_config(root = fs::path_file(root))
   )
   expect_true(fs::file_exists(fs::path(root, ".Rbuildignore")))
 })

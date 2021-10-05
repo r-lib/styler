@@ -8,7 +8,7 @@ if (!on_cran()) {
   test_that("can use pre-commit", {
     tempdir <- local_test_setup(quiet = FALSE, install_hooks = FALSE)
     expect_message(
-      use_precommit(open = FALSE, force = TRUE, root = tempdir),
+      use_precommit(open = FALSE, force = TRUE, install_hooks = FALSE, root = tempdir),
       "to get the latest"
     )
     expect_message(
