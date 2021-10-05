@@ -1,5 +1,5 @@
 test_that("snippet generation works", {
-  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
+  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE)
   usethis::use_package("styler")
   expect_warning(
     out <- capture_output(snippet_generate("additional-deps-roxygenize")),
