@@ -58,7 +58,21 @@ extract_diff_root <- function(root = here::here()) {
 #' @export
 diff_requires_run_roxygenize <- function(root = here::here()) {
   if (rlang::with_handlers(withr::with_namespace("git2r", FALSE), error = function(...) TRUE)) {
-    rlang::warn("You need to install the R package git2r (and the required system dependency if you are on Linux) to benefit from caching of this hook.")
+    generic <- paste0(
+      " Please add the package as a dependency to ",
+      "`.pre-commit-config.yaml` -> `id: roxygenize` -> ",
+      "`additional_dependencies` and try again. The package must be ",
+      "specified so `renv::install()` understands it, e.g. like this:\n\n",
+      "    -   id: roxygenize",
+      "
+        additional_dependencies:
+        - r-lib/git2r\n\n"
+    )
+    msg <- paste0(
+      "The R package {git2r} must be available to benefit from caching of this hook.",
+      generic
+    )
+    rlang::warn(msg)
     return(TRUE)
   }
   changed_lines_content <- extract_diff_root(root)
@@ -89,7 +103,7 @@ roxygen_assert_additional_dependencies <- function() {
       e
     }
   )
-  if (inherits(out, "packageNotFoundError")) {
+  if (inherits(out, "packageNotFoundError") || ("message" %in% names(out) && grepl("Dependency package(\\(s\\))? .* not available", out$message))) {
     # case used in package but not installed
     rlang::abort(paste0(
       "The roxygenize hook requires all* dependencies of your package to be listed in ",
@@ -143,8 +157,7 @@ roxygenize_with_cache <- function(key, dirs) {
         "    -   id: roxygenize",
         "
         additional_dependencies:
-        - r-lib/pkgapi
-        - dplyr@1.0.0\n\n"
+        - r-lib/pkgapi\n\n"
       ))
     } else if (inherits(out, "error")) {
       rlang::abort(conditionMessage(out))

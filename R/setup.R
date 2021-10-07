@@ -113,12 +113,7 @@ snippet_generate <- function(snippet = "", root = here::here()) {
     )
     deps <- desc::desc_get_deps()
     deps <- deps[order(deps$package), ]
-    paste0(
-      "        -    ", deps$package, "@",
-      purrr::map_chr(deps$package, ~ as.character(packageVersion(.x))), "\n",
-      collapse = ""
-    ) %>%
-      sort() %>%
+    snippet_generate_impl_additional_deps_roxygenize(deps$package) %>%
       cat(sep = "")
     remote_deps <- rlang::with_handlers(
       desc::desc_get_field("Remotes"),
@@ -143,4 +138,13 @@ You need in your `.pre-commit-config.yaml`
       ))
     }
   }
+}
+
+snippet_generate_impl_additional_deps_roxygenize <- function(packages) {
+  paste0(
+    "        -    ", packages, "@",
+    purrr::map_chr(packages, ~ as.character(packageVersion(.x))), "\n",
+    collapse = ""
+  ) %>%
+    sort()
 }

@@ -6,29 +6,29 @@ if (!on_cran()) {
   })
 
   test_that("can use pre-commit", {
-    tempdir <- local_test_setup(quiet = FALSE)
+    tempdir <- local_test_setup(quiet = FALSE, install_hooks = FALSE)
     expect_message(
-      use_precommit(open = FALSE, force = TRUE, root = tempdir),
+      use_precommit(open = FALSE, force = TRUE, install_hooks = FALSE, root = tempdir),
       "to get the latest"
     )
     expect_message(
-      use_precommit(open = FALSE, force = FALSE, root = tempdir),
+      use_precommit(open = FALSE, force = FALSE, install_hooks = FALSE, root = tempdir),
       "There is already "
     )
   })
 
   test_that("fails early if repo is not a git repo ", {
-    tempdir <- local_test_setup(git = FALSE, quiet = FALSE)
+    tempdir <- local_test_setup(git = FALSE, quiet = FALSE, install_hooks = FALSE)
 
     expect_error(
-      use_precommit(open = FALSE, root = tempdir),
+      use_precommit(open = FALSE, install_hooks = FALSE, root = tempdir),
       "is not a git repo"
     )
   })
 
   test_that("can use custom config file ", {
-    tempdir1 <- local_test_setup()
-    tempdir2 <- local_test_setup()
+    tempdir1 <- local_test_setup(install_hooks = FALSE)
+    tempdir2 <- local_test_setup(install_hooks = FALSE)
 
     path_custom <- fs::path(tempdir2, "some-precommit.yaml")
     new_text <- "# 4js93"
@@ -36,7 +36,7 @@ if (!on_cran()) {
       c(new_text) %>%
       writeLines(path_custom)
     git2r::init(tempdir1)
-    use_precommit(config_source = path_custom, open = FALSE, force = TRUE, root = tempdir1)
+    use_precommit(config_source = path_custom, open = FALSE, force = TRUE, install_hooks = FALSE, root = tempdir1)
     config <- readLines(fs::path(tempdir1, ".pre-commit-config.yaml"))
     expect_equal(
       config[length(config)],
@@ -45,7 +45,7 @@ if (!on_cran()) {
   })
 
   test_that("existing hooks are recognized", {
-    tempdir <- local_test_setup(quiet = FALSE)
+    tempdir <- local_test_setup(quiet = FALSE, install_hooks = FALSE)
     withr::with_dir(tempdir, {
       git2r::init()
       usethis::proj_set(".")
@@ -53,25 +53,25 @@ if (!on_cran()) {
 
       # usethis hook is removed without error
       expect_message(
-        use_precommit(legacy_hooks = "forbid", open = FALSE, root = "."),
+        use_precommit(legacy_hooks = "forbid", open = FALSE, install_hooks = FALSE, root = "."),
         "Removed the render-README hook,"
       )
       writeLines(letters, ".git/hooks/pre-commit")
       expect_error(
-        use_precommit(legacy_hooks = "forbid", open = FALSE, root = "."),
+        use_precommit(legacy_hooks = "forbid", open = FALSE, install_hooks = FALSE, root = "."),
         "existing hooks installed"
       )
 
       # tolerate other hook scripts in migration mode
       expect_message(
-        use_precommit(legacy_hooks = "allow", force = TRUE, open = FALSE, root = "."),
+        use_precommit(legacy_hooks = "allow", force = TRUE, open = FALSE, install_hooks = FALSE, root = "."),
         "Running in migration"
       )
 
       # can also remove other hooks
       writeLines(letters, ".git/hooks/pre-commit")
       expect_message(
-        use_precommit(legacy_hooks = "remove", force = TRUE, open = FALSE, root = "."),
+        use_precommit(legacy_hooks = "remove", force = TRUE, open = FALSE, install_hooks = FALSE, root = "."),
         "Sucessfully installed"
       )
     })
@@ -80,7 +80,7 @@ if (!on_cran()) {
 
   test_that("Can uninstall pre-commit (repo scope)", {
     # with all files there
-    tempdir <- local_test_setup(use_precommit = TRUE, quiet = FALSE)
+    tempdir <- local_test_setup(use_precommit = TRUE, quiet = FALSE, install_hooks = FALSE)
     expect_message(
       uninstall_precommit(scope = "repo", root = tempdir),
       "Uninstalled pre-commit from repo scope.*"
@@ -94,7 +94,7 @@ if (!on_cran()) {
     )
 
     # when there is no pre-commit.yaml anymore
-    suppressMessages(use_precommit(open = FALSE, force = TRUE, root = tempdir))
+    suppressMessages(use_precommit(open = FALSE, force = TRUE, install_hooks = FALSE, root = tempdir))
     fs::file_delete(fs::path(tempdir, ".pre-commit-config.yaml"))
     expect_message(
       uninstall_precommit(scope = "repo", root = tempdir),
@@ -104,13 +104,13 @@ if (!on_cran()) {
 
   test_that("Can uninstall (userly)", {
     if (not_conda()) {
-      tempdir <- local_test_setup(use_precommit = TRUE, quiet = FALSE)
+      tempdir <- local_test_setup(use_precommit = TRUE, quiet = FALSE, install_hooks = FALSE)
       expect_error(
         uninstall_precommit(scope = "user", ask = "none", root = tempdir),
         "installed with conda"
       )
     } else {
-      tempdir <- local_test_setup(use_precommit = FALSE, quiet = FALSE)
+      tempdir <- local_test_setup(use_precommit = FALSE, quiet = FALSE, install_hooks = FALSE)
       expect_message(
         uninstall_precommit(scope = "user", ask = "none", root = tempdir),
         "Removed pre-commit from"
@@ -124,18 +124,18 @@ if (!on_cran()) {
 
   test_that("use_precommit fails when no user installation is found", {
     skip_if(not_conda())
-    expect_error(use_precommit(open = FALSE, root = tempdir), "installed on your system")
+    expect_error(use_precommit(open = FALSE, install_hooks = FALSE, root = tempdir), "installed on your system")
   })
 
   test_that("can install pre-commit with remote config", {
     if (!not_conda()) {
       expect_error(install_precommit(), NA)
     }
-    tempdir <- local_test_setup(quiet = FALSE)
+    tempdir <- local_test_setup(quiet = FALSE, install_hooks = FALSE)
     expect_message(
       use_precommit(
         example_remote_config(),
-        open = FALSE, force = TRUE, root = tempdir
+        open = FALSE, force = TRUE, install_hooks = FALSE, root = tempdir
       ),
       "to get the latest"
     )
@@ -145,14 +145,14 @@ if (!on_cran()) {
     if (!not_conda()) {
       expect_message(install_precommit(), "already installed")
     }
-    tempdir <- local_test_setup(use_precommit = FALSE, quiet = FALSE)
+    tempdir <- local_test_setup(use_precommit = FALSE, quiet = FALSE, install_hooks = FALSE)
     withr::with_dir(
       tempdir,
       {
         withr::defer(call_and_capture("git", "config --unset-all core.hooksPath"))
         call_and_capture("git", "config core.hooksPath .githooks")
         expect_error(
-          use_precommit(open = FALSE, force = TRUE, root = tempdir),
+          use_precommit(open = FALSE, force = TRUE, install_hooks = FALSE, root = tempdir),
           "stdout: [ERROR] Cowardly refusing to install hooks with `core.hooksPath` set.",
           fixed = TRUE
         )
