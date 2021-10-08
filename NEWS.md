@@ -1,6 +1,7 @@
 # styler 1.6.2.9000 (Development version)
 
 * Alignment detection respects stylerignore (#850).
+* Enable pre-commit.ci (#843).
 
 # styler 1.6.2
 

@@ -18,4 +18,3 @@ a <- 2
 #' @importFrom purrr partial
 #' @export
 a <- call
-

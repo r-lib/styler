@@ -395,7 +395,7 @@ test_that("dry run options work:", {
   test_dry(test_path("public-api/dry/unstyled.Rmd"), style_file, styled = FALSE)
   test_dry(test_path("public-api/dry/styled.Rmd"), style_file, styled = TRUE)
 
-  ## Rmd
+  ## Rnw
   test_dry(test_path("public-api/dry/unstyled.Rnw"), style_file, styled = FALSE)
   test_dry(test_path("public-api/dry/styled.Rnw"), style_file, styled = TRUE)
 })

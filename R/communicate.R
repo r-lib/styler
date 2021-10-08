@@ -7,7 +7,7 @@
 #' @inheritParams can_verify_roundtrip
 #' @keywords internal
 communicate_warning <- function(changed, transformers) {
-  if (any(changed, na.rm = TRUE) && 
+  if (any(changed, na.rm = TRUE) &&
     !can_verify_roundtrip(transformers) &&
     !getOption("styler.quiet", FALSE)
   ) {

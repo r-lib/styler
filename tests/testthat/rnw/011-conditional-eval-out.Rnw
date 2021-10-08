@@ -7,11 +7,11 @@
 dothis <- TRUE
 @
 
-<<chunk1, eval = dothis>>=
+<<chunk1, eval = FALSE>>=
 print("say hello world")
 @
 
-<<chunk2, eval = !dothis>>=
+<<chunk2, eval = TRUE>>=
 print("silence is gold")
 @
 

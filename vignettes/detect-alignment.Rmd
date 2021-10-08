@@ -60,7 +60,7 @@ tibble::tribble(
   "long string", "shrt" # columns can overlap ('~' above ',')
 )
 
-# right-aligned after = 
+# right-aligned after =
 purrr::map(x, fun, # arguments on same line as opening brace are not considered
   arg2 =       2,
   ar   = f(k, x)
@@ -122,7 +122,6 @@ gell(
   p = 2,   g = gg(x),  n = 3 * 3, #
   31,    fds =    -1, gz = f / 3,
 )
-
 ```
 
 ... or match position of `=` vertically and align everything after this operator

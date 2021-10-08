@@ -3,8 +3,8 @@
 #' Helper functions for styling via RStudio Addins.
 #' @section Addins:
 #' - Set style: Select the style transformers to use. For flexibility, the user
-#'   input is passed to the `transformers` argument, not the `style` argument, so
-#'   entering `styler::tidyverse_style(scope = "spaces")` in the Addin is
+#'   input is passed to the `transformers` argument, not the `style` argument,
+#'   so entering `styler::tidyverse_style(scope = "spaces")` in the Addin is
 #'   equivalent to `styler::style_text("1+1", scope = "spaces")` and
 #'   `styler::style_text("1+1", transformers = styler::tidyverse_style(scope = "spaces"))`
 #'   if the text to style is `1+1`. The style transformers are memorized
