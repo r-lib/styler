@@ -159,20 +159,24 @@ find_pos_id_to_keep <- function(pd) {
 #' [detected by styler](https://styler.r-lib.org/articles/detect-alignment.html),
 #' making stylerignore redundant. See a few illustrative examples below.
 #' @details
-#' Styling is on by default when you run styler.
+#' Styling is on for all lines by default when you run styler.
 #'
 #' - To mark the start of a sequence where you want to turn styling off, use
-#'   `# styler: off`.
+#'   `# styler: off`. For styler version > 1.6.2, `# nolint` and `#nolint start`
+#'   also works by default.
 #' - To mark the end of this sequence, put `# styler: on` in your code. After
-#'   that line, styler will again format your code.
+#'   that line, styler will again format your code. For styler version > 1.6.2,
+#'   `#nolint end` also works by default.
 #' - To ignore an inline statement (i.e. just one line), place `# styler: off`
 #'   at the end of the line. Note that inline statements cannot contain other
 #'   comments apart from the marker, i.e. a line like
-#'   `1 # comment # styler: off` won't be ignored.
+#'   `1 # comment # styler: off` won't be ignored. For styler version > 1.6.2,
+#'   `# nolint` and `#nolint start` also works.
 #'
 #' To use something else as start and stop markers, set the R options
 #' `styler.ignore_start` and
-#' `styler.ignore_stop` using [options()]. If you want these
+#' `styler.ignore_stop` using [options()]. For styler version > 1.6.2, the
+#' option supports character vectors longer than one. If you want these
 #' settings to persist over multiple R sessions, consider setting them in your
 #' R profile, e.g. with `usethis::edit_rprofile()`.
 #' @name stylerignore

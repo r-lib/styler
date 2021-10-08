@@ -1,6 +1,10 @@
 # styler 1.6.2.9000 (Development version)
 
 
+* multiple stylerignore patterns can be specified at once and lintr markers 
+  `# nolint`, `# nolint start` and `# nolint end` are now by default recognized
+  in addition to `# styler: off` and `# styler: on` (#849).
+
 # styler 1.6.2
 
 * clean up cache files older than one week (#842).

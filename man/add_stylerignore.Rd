@@ -24,7 +24,7 @@ the R options \code{styler.ignore_start} and \code{styler.ignore_stop}.
 
 See examples in \link{stylerignore}. Note that you should reuse the stylerignore
 column to compute switch points or similar and not a plain
-\code{pd$text == option_read("styler.ignore_start")} because that will fail to
+\code{pd$text \%in\% option_read("styler.ignore_start")} because that will fail to
 give correct switch points in the case stylerignore sequences are invalid.
 }
 \keyword{internal}

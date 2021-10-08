@@ -77,6 +77,63 @@ test_that("works with other markers", {
   )
 })
 
+test_that("works with multiple markers", {
+  expect_equal(
+    withr::with_options(
+      list(
+        styler.ignore_start = c("# startignore", "#lintstart"),
+        styler.ignore_stop = "# xxx"
+      ),
+      {
+        style_text(c(
+          "1+1",
+          "#lintstart",
+          "1+1",
+          "# xxx",
+          "1+1"
+        )) %>%
+          as.character()
+      }
+    ),
+    c("1 + 1", "#lintstart", "1+1", "# xxx", "1 + 1")
+  )
+})
+
+test_that("works with multiple markers", {
+  expect_equal(
+    withr::with_options(
+      list(
+        styler.ignore_start = "# startignore",
+        styler.ignore_stop = c("# xxx", "# lintstop")
+      ),
+      {
+        style_text(c(
+          "1+1",
+          "# startignore",
+          "1+1",
+          "# lintstop",
+          "1+1"
+        )) %>%
+          as.character()
+      }
+    ),
+    c("1 + 1", "# startignore", "1+1", "# lintstop", "1 + 1")
+  )
+})
+
+test_that("works for multiple markers inline", {
+  withr::local_options(styler.ignore_start = "# noeq", )
+  expect_equal(
+    style_text(c(
+      "1+1",
+      "1+1# noeq",
+      "1+1"
+    )) %>%
+      as.character(),
+    c("1 + 1", "1+1# noeq", "1 + 1")
+  )
+})
+
 test_that("works with other markers", {
   expect_warning(
     withr::with_options(
