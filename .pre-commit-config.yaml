@@ -5,7 +5,7 @@ ci:
     skip: [consistent-release-tag, spell-check-ordered-exclude]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.1.3.9128
+    rev: v0.1.3.9130
     hooks: 
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
@@ -104,7 +104,7 @@ repos:
           vignettes/FAQ\.Rmd|
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 11a996eec600aa64d1cc12859d9bffbc6422836c
+    rev: v4.0.1
     hooks: 
     -   id: check-added-large-files
     -   id: end-of-file-fixer
