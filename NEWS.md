@@ -1,5 +1,6 @@
 # styler 1.6.2.9000 (Development version)
 
+* Alignment detection respects stylerignore (#850).
 
 # styler 1.6.2
 
