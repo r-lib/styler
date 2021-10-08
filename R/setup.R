@@ -141,10 +141,13 @@ You need in your `.pre-commit-config.yaml`
 }
 
 snippet_generate_impl_additional_deps_roxygenize <- function(packages) {
-  paste0(
+  out <- paste0(
     "        -    ", packages, "@",
     purrr::map_chr(packages, ~ as.character(packageVersion(.x))), "\n",
     collapse = ""
   ) %>%
     sort()
+  paste0("    -   id: roxygenize
+        # roxygen requires loading pkg -> add dependencies from DESCRIPTION
+        additional_dependencies:\n", out)
 }
