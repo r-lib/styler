@@ -49,6 +49,10 @@ token_is_on_aligned_line <- function(pd_flat) {
   pd_flat$lag_newlines <- pd_flat$pos_id <- NULL
   pd_flat$.lag_spaces <- lag(pd_flat$spaces)
   pd_by_line <- split(pd_flat, line_idx)
+  pd_by_line[purrr::map_lgl(pd_by_line, ~ any(.x$stylerignore))] <- NULL
+  if (length(pd_by_line) < 1) {
+    return(TRUE)
+  }
   last_line_is_closing_brace_only <- nrow(last(pd_by_line)) == 1
   relevant_idx <- seq2(2, ifelse(last_line_is_closing_brace_only,
     length(pd_by_line) - 1,
@@ -86,7 +90,11 @@ token_is_on_aligned_line <- function(pd_flat) {
   }
 
   pd_by_line <- alignment_drop_comments(pd_by_line) %>%
-    alignment_ensure_no_closing_brace(last_line_is_closing_brace_only) %>%
+    alignment_ensure_no_closing_brace(last_line_is_closing_brace_only)
+  if (length(pd_by_line) < 1) {
+    return(TRUE)
+  }
+  pd_by_line <- pd_by_line %>%
     alignment_ensure_trailing_comma()
   # now, pd only contains arguments separated by values, ideal for iterating
   # over columns.
