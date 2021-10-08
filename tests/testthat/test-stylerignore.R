@@ -120,3 +120,9 @@ test_that("no token added or removed in complex case", {
     transformer = style_text
   ), NA)
 })
+
+test_that("stylerignore sequences are respected in alignment detection", {
+  expect_warning(test_collection("stylerignore", "alignment",
+    transformer = style_text
+  ), NA)
+})
