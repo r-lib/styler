@@ -105,16 +105,23 @@ upstream_repo_url_is_outdated <- function() {
 #' @param snippet Name of the snippet.
 #' @inheritParams fallback_doc
 #' @export
-snippet_generate <- function(snippet = "", root = here::here()) {
+snippet_generate <- function(snippet = "",
+                             open = interactive(),
+                             root = here::here()) {
   rlang::arg_match(snippet, c("additional-deps-roxygenize"))
   if (snippet == "additional-deps-roxygenize") {
-    rlang::inform(
-      "Generating snippet using installed versions of all dependencies.\n"
-    )
+    rlang::inform(paste(
+      "Generating snippet using CRAN versions. If you need another source,",
+      "specify with syntax that `renv::install()` understands (see examples in",
+      "help file).",
+      "\n"
+    ))
     deps <- desc::desc_get_deps()
     deps <- deps[order(deps$package), ]
     snippet_generate_impl_additional_deps_roxygenize(deps$package) %>%
       cat(sep = "")
+    cat("\n")
+    cli::cli_ul("Copy the above into `.pre-commit-config.yaml`.")
     remote_deps <- rlang::with_handlers(
       desc::desc_get_field("Remotes"),
       error = function(e) character()
@@ -134,16 +141,20 @@ You need in your `.pre-commit-config.yaml`
 
         additional_dependencies:
         -    tidyverse/tidyr@2fd80d5
-      "
+
+"
       ))
     }
   }
+  if (open) {
+    precommit::open_config(root)
+  }
 }
 
-snippet_generate_impl_additional_deps_roxygenize <- function(packages) {
+snippet_generate_impl_additional_deps_roxygenize <- function(packages, with_version = FALSE) {
   out <- paste0(
-    "        -    ", packages, "@",
-    purrr::map_chr(packages, ~ as.character(packageVersion(.x))), "\n",
+    "        -    ", packages, if (with_version) "@",
+    if (with_version) purrr::map_chr(packages, ~ as.character(packageVersion(.x))), "\n",
     collapse = ""
   ) %>%
     sort()

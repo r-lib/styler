@@ -4,7 +4,7 @@
 \alias{snippet_generate}
 \title{Generate code snippets}
 \usage{
-snippet_generate(snippet = "", root = here::here())
+snippet_generate(snippet = "", open = interactive(), root = here::here())
 }
 \arguments{
 \item{snippet}{Name of the snippet.}
