@@ -76,6 +76,7 @@ articles:
 - title: Developers
   navbar: Developers
   contents:
-  - caching
+  - remove_rules
   - customizing_styler
   - distribute_custom_style_guide
+  - caching

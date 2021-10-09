@@ -1,8 +1,8 @@
 ---
-title: "distribute_custom_style_guide"
+title: "Distribute custom style guides"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{distribute_custom_style_guide}
+  %\VignetteIndexEntry{Distribute custom style guides}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 This vignette describes how you can distribute your own style guide. It builds
-on `vignette('customizing_styler')` and assumes you understand how to create a 
+on `vignette("customizing_styler")` and assumes you understand how to create a 
 style guide with `create_style_guide()`.
 
 ## Reference implementations
@@ -29,7 +29,7 @@ There are two packages that implement a third-party style guide:
 
 The style guides mentioned above follow best practices and can serve as a good 
 and rather minimal example of how to implement your own style guide. Most 
-importantly, they:
+importantly, these two packages:
 
 * export all functions that {styler} exports, but the `style` argument set
   to the custom style guide, plus custom style guides. 
@@ -37,12 +37,16 @@ importantly, they:
   replacement for styler everywhere. In particular, if you want to use the 
   tidyverse style guide, use `styler::style_pkg()`, if you want to use a 
   third-party style guide, use the other namespace, e.g. `styler.mlr::style_pkg()`
-* depend on {styler} and use styler internals via `:::`.
-  This implies that they won't make it to CRAN because packages calling private
-  methods from other packages don't pass CRAN checks. The only way around this
+* depend on {styler} and use {styler} internals via `:::`.
+  These internals are subject to change without prior notice, which is why the 
+  packages also have unit tests. Also note that importing internals from another
+  package means your package can't be added to CRAN because packages calling 
+  private methods from other packages don't pass CRAN checks. The only way around this
   would be to export some styler internals, e.g. via a {styler.infra} package, 
-  but that would be a lot of work on our side. Another alternative for 
-  developers might be to use https://github.com/wch/staticimports.
+  but that would be a lot of work on our side and therefore not currently on the
+  roadmap. Another alternative for 
+  developers might be to use https://github.com/wch/staticimports, which we have
+  not explored so far.
 * implement unit tests following {styler}'s testing convention with `*-in.R` and 
   `*-out.R` files that are checked with `styler:::test_collection()`.
 
