@@ -23,4 +23,3 @@ more_calls(with(arguments))
 # styler: off
 1 + 1
 a(!b)
-

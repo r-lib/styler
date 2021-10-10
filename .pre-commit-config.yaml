@@ -4,17 +4,22 @@ default_stages: [commit]
 
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.1.3.9014
+    rev: v0.1.3.9127
     hooks:
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
         exclude:  >
           (?x)^(
-          tests/testthat/.*/.*\.R(md)?|
+          tests/testthat/.*/.*\.R(md|nw)?|
           vignettes/customizing_styler\.Rmd|
           tests/testthat/public-api/xyzfile-rnw/random4\.Rnw|
+          vignettes/detect-alignment\.Rmd|
+          tests/testmanual/addins/.*invalid.*|
+          tests/testmanual/addins/r-valid\.R|
           )$
     -   id: roxygenize
+        additional_dependencies:
+        - r-lib/pkgapi
     -   id: use-tidy-description
     -   id: spell-check
         exclude: >
@@ -49,7 +54,8 @@ repos:
           tests/testthat/public-api/xyzaddin/addin_region-.*|
           tests/testmanual/addins/r-invalid\.R|
           tests/testthat/escaping/basic-escape-out\.R|
-          tests/testthat/indention_operators/base_pipe_and_assignment-.*|
+          tests/testthat/indention_operators/.*pipe.*|
+          tests/testthat/line_breaks_and_other/.*pipe.*|
           tests/testthat/exception_handling/parser-error.R|
           )$
     -   id: no-browser-statement
@@ -58,14 +64,15 @@ repos:
           tests/testthat/public-api/xyzaddin/addin_region-.*|
           tests/testmanual/addins/r-invalid\.R|
           tests/testthat/escaping/basic-escape-out\.R|
-          tests/testthat/indention_operators/base_pipe_and_assignment-.*|
+          tests/testthat/indention_operators/.*pipe.*|
+          tests/testthat/line_breaks_and_other/.*pipe.*|
           tests/testthat/exception_handling/parser-error.R|
           )$
     -   id: deps-in-desc
         exclude: >
           (?x)^(
           touchstone/.*|
-          tests/testmanual/addins/r-invalid\.R|
+          tests/testmanual/addins/.*invalid.*|
           tests/testthat/escaping/basic-escape-out\.R|
           tests/testthat/rnw/011-conditional-eval-out\.Rnw|
           tests/testthat/.*\.R(md)?
@@ -76,7 +83,13 @@ repos:
     -   id: check-added-large-files
         args: ['--maxkb=200']
     -   id: end-of-file-fixer
-        exclude: '\.Rd'
+        exclude: >
+          (?x)^(
+          \.Rd|
+          tests/testthat/exception_handling/empty_file\.R|
+          tests/testthat/parse_comments/eol_eof_spaces-.*|
+          tests/testthat/reference-objects/.*|
+          )$
 -   repo: local
     hooks:
     -   id: forbid-to-commit
