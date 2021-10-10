@@ -103,10 +103,13 @@ upstream_repo_url_is_outdated <- function() {
 #'   `.pre-commit-config.yaml` for the additional dependencies required by
 #'   roxygen2.
 #' @param snippet Name of the snippet.
+#' @param open Whether or not to open the .pre-commit-config.yaml. The default
+#' is `TRUE` when working in  RStudio. Otherwise, we recommend manually opening
+#' the file.
 #' @inheritParams fallback_doc
 #' @export
 snippet_generate <- function(snippet = "",
-                             open = interactive(),
+                             open = rstudioapi::isAvailable(),
                              root = here::here()) {
   rlang::arg_match(snippet, c("additional-deps-roxygenize"))
   if (snippet == "additional-deps-roxygenize") {
