@@ -111,6 +111,7 @@ macOS
 magrittr
 md
 MERCHANTABILITY
+mlr
 Müller
 mutli
 na
@@ -121,6 +122,7 @@ NONINFRINGEMENT
 nph
 NUM
 oldrel
+oneliner
 os
 ourself
 packagemanager
@@ -166,6 +168,7 @@ rmd
 Rmd
 rnw
 Rnw
+roadmap
 roclet
 roclets
 rootPath

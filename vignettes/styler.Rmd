@@ -235,4 +235,9 @@ style_text(
 These verse some (not all) configurations exposed in `style_file()` and friends
 as well as `tidyverse_style()`. If the above did not give you the flexibility
 you hoped for, your can create your own style guide and customize styler even
-further, as described in `vignette("customizing_styler")`.
+further:
+
+* either by removing rules from the tidyverse style guide as described in
+  `vignette("remove_rules")`.
+* or by creating your own style guide from scratch as described in 
+  `vignette("customizing_styler")`.

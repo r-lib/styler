@@ -13,6 +13,10 @@ approach used by styler does not cache input, but styled code.}
 \item{transformers}{A list of transformer functions, because we can only
 know if text is already correct if we know which transformer function it
 should be styled with.}
+
+\item{more_specs}{A named vector coercible to it character that determine the
+styling but are style guide independent, such as \code{include_roxygen_examples}
+or \code{base_indention}.}
 }
 \description{
 Write to the cache

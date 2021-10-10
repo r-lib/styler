@@ -41,7 +41,7 @@ is_cached <- function(text,
 #' @param transformers A list of transformer functions, because we can only
 #'   know if text is already correct if we know which transformer function it
 #'   should be styled with.
-#' @param more_args A named vector coercible to it character that determine the
+#' @param more_specs A named vector coercible to character that determines the
 #'   styling but are style guide independent, such as `include_roxygen_examples`
 #'   or `base_indention`.
 #' @details
