@@ -115,8 +115,9 @@ roxygen_assert_additional_dependencies <- function() {
         -    tidyr
         -    dplyr\n\n",
       "Call ",
-      "`precommit::snippet_generate('additional-deps-roxygenize')`",
-      "and paste the ",
+      "`precommit::snippet_generate('additional-deps-roxygenize')` ",
+      "(requires the dev version of {precommit}, install with with ",
+      "`remotes::install_github('lorenzwalthert/precommit')` and paste the ",
       "output into the file `.pre-commit-config.yaml`. This requires precommit",
       " > 0.1.3 and assumes you declared all dependencies in `DESCRIPTION`.",
       "\n\nContext: https://github.com/lorenzwalthert/precommit/issues/243",

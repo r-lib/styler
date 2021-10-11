@@ -4,10 +4,18 @@
 \alias{snippet_generate}
 \title{Generate code snippets}
 \usage{
-snippet_generate(snippet = "", root = here::here())
+snippet_generate(
+  snippet = "",
+  open = rstudioapi::isAvailable(),
+  root = here::here()
+)
 }
 \arguments{
 \item{snippet}{Name of the snippet.}
+
+\item{open}{Whether or not to open the .pre-commit-config.yaml. The default
+is \code{TRUE} when working in  RStudio. Otherwise, we recommend manually opening
+the file.}
 
 \item{root}{The path to the root directory of your project.}
 }
