@@ -12,7 +12,7 @@ define your own style guide and format code according to it. If you simply want
 to customize the tidyverse style guide to your needs, check out 
 `vignette("styler")`, to remove some rules, have a look at 
 `vignette("remove_rules")`. How to distribute a custom style guide is described
-in `vignette("distribute_custom_style_guide")`.
+in `vignette("distribute_custom_style_guides")`.
 
 # How styler works
 

@@ -78,5 +78,5 @@ articles:
   contents:
   - remove_rules
   - customizing_styler
-  - distribute_custom_style_guide
+  - distribute_custom_style_guides
   - caching

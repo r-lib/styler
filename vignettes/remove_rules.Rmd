@@ -38,7 +38,7 @@ are multiple ways:
 
 Once you are happy with your style guide, you might ant to have a look at how to
 distribute it, which is described in 
-`vignette("distribute_custom_style_guide")`.
+`vignette("distribute_custom_style_guides")`.
 
 # Theory
 
