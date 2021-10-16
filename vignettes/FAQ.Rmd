@@ -84,7 +84,8 @@ This is not a problem, git will only run the hooks in a local repo after
 `precommit::use_precommit()` has been run successfully from within this local repo on your machine.
 You can also uninstall anytime with `precommit::uninstall_precommit()`. Anyone
 who does not want to use the hooks simply should not run
-`precommit::use_precommit()`. You can also temporarily disable hooks as 
+`precommit::use_precommit()`. You can also temporarily disable hooks using the 
+environment variable `SKIP` or the argument `--no-verify`, as 
 described [here](https://pre-commit.com/#temporarily-disabling-hooks).
 
 
