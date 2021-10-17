@@ -47,4 +47,7 @@ if (nrow(spelling_errors) > 0) {
     "Then, try committing again.\n"
   )
   stop("Spell check failed", call. = FALSE)
+} else {
+  ignore <- ignore[ignore != ""] # drop blanks if any
+  writeLines(ignore, path_wordlist)
 }
