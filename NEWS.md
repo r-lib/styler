@@ -3,7 +3,9 @@
 This version marks the switch to `language: r` of all existing hooks. This 
 includes switching to R based hook for `readme-rmd-render`, avoiding the 
 {usethis} dependency, integration tests via GitHub Actions, auto-updates for 
-used packages, roxygen snippet generation and more.
+used packages, roxygen snippet generation and more. In addition:
+
+* Always sort `inst/WORDLIST` (#303).
 
 # precommit v0.1.3.9012
 
