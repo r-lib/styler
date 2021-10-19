@@ -242,7 +242,7 @@
 <span class="co">#&gt;     pd$text[to_replace] &lt;- "&lt;-"</span>
 <span class="co">#&gt;     pd</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fdc56e2dbc8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7f8836cdd340&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></code></pre></div>
 <p>Next, you simply set that element to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -266,6 +266,22 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string &lt;- 'hi there'"</span>, style <span class="op">=</span> <span class="va">eq_assign_style</span><span class="op">)</span>
 <span class="co">#&gt; string &lt;- "hi there"</span></code></pre></div>
 <p>If you want to turn <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> into <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>, you need to add a rule as described in <code><a href="../articles/customizing_styler.html">vignette("customizing_styler")</a></code>.</p>
+<p>If you have trouble identifying a rule based on rule names,</p>
+<ul>
+<li>First write an example whose results is not the one you wanted, e.g.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"
+f &lt;- function () {
+
+return (1)
+}"</span></code></pre></div>
+<p>is code that will have the first empty line in the function body removed by styler.</p>
+<ul>
+<li>Then pinpoint the probable rule type (e.g. line breaks if you want less new lines).</li>
+<li>In a local styler clone, add e.g. a <code>return(pd</code> at the top of the body to deactivate the rule quickly, or add a <code><a href="https://rdrr.io/r/base/print.html">print(pd)</a></code> or <code><a href="https://rdrr.io/r/base/browser.html">browser()</a></code> call in the functions of that type (e.g. the different functions of <code>R/rules-line-breaks.R</code>), <code>load_all()</code>, run your example, see if that function made the change. move the <code><a href="https://rdrr.io/r/base/print.html">print(pd)</a></code> or <code><a href="https://rdrr.io/r/base/browser.html">browser()</a></code> call to another function if not.</li>
+<li>Once you’ve identified the culprit (in this case <code>style_line_break_around_curly</code>), set it to <code>NULL</code> as shown earlier.</li>
+</ul>
 </div>
 <div id="some-other-rules-and-their-transformers" class="section level1">
 <h1 class="hasAnchor">
