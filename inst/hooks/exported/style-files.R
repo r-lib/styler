@@ -1,12 +1,13 @@
 #!/usr/bin/env Rscript
 'style files.
 Usage:
-  style_files [--style_pkg=<style_guide_pkg>] [--style_fun=<style_guide_fun>] [--no-warn-cache] <files>...
+  style_files [--style_pkg=<style_guide_pkg>] [--style_fun=<style_guide_fun>] [--cache-root=<cache_root_>] [--no-warn-cache] <files>...
 
 Options:
   --style_pkg=<style_guide_pkg>  Package where the style guide is stored [default: "styler"].
   --style_fun=<style_guide_fun>  The styling function in style_pkg [default: "tidyverse_style"].
   --no-warn-cache  Suppress the warning about a missing permanent cache.
+  --cache-root=<cache_root_> Passed to `options("styler.cache_root")` [default: "styler"].
 ' -> doc
 
 if (packageVersion("precommit") < "0.1.3.9010") {
@@ -25,7 +26,7 @@ args <- commandArgs(trailingOnly = TRUE)
 non_file_args <- args[!grepl("^[^-][^-]", args)]
 keys <- setdiff(
   gsub("(^--[0-9A-Za-z_]+).*", "\\1", non_file_args),
-  c("--style_pkg", "--style_fun", "--no-warn-cache", "cache")
+  c("--style_pkg", "--style_fun", "--no-warn-cache", "--cache-root")
 )
 if (length(keys) > 0) {
   bare_keys <- gsub("^--", "", keys)
@@ -45,6 +46,8 @@ if (packageVersion("styler") < "1.3.2") {
 } else {
   precommit::may_require_permanent_cache(arguments$no_warn_cache)
 }
+options('styler.cache_root' = arguments$cache_root)
+print(c('cache root set to ', arguments$cache_root))
 
 style <- eval(parse(text = paste(arguments$style_pkg, "::", arguments$style_fun)))
 tryCatch(
