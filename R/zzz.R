@@ -3,6 +3,7 @@
   op <- options()
   op.styler <- list(
     styler.addins_style_transformer = "styler::tidyverse_style()",
+    styler.cache_root = "styler",
     styler.cache_name = styler_version,
     styler.colored_print.vertical = TRUE,
     styler.ignore_start = "# styler: off",

@@ -3,6 +3,9 @@
 * Alignment detection respects stylerignore (#850).
 * Add vignette on distributing style guide (#846).
 * Enable pre-commit.ci (#843).
+* new R option `styler.cache_root` (defaulting to `"styler"`) that determines 
+  the sub-directory under the {R.cache} cache directory that {styler} uses. Non-
+  default caches won't be cleaned up by {styler}.
 
 
 # styler 1.6.2
