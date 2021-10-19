@@ -144,6 +144,29 @@ style_text("string <- 'hi there'", style = eq_assign_style)
 If you want to turn `<-` into `=`, you need to add a rule as described in
 `vignette("customizing_styler")`.
 
+If you have trouble identifying a rule based on rule names,
+
+* First write an example whose results is not the one you wanted, e.g.
+
+```r
+code <- "
+f <- function () {
+
+return (1)
+}"
+```
+
+is code that will have the first empty line in the function body removed by styler.
+
+* Then pinpoint the probable rule type (e.g. line breaks if you want less new lines).
+* In a local styler clone, add e.g. a `return(pd` at the top of the body to deactivate
+  the rule quickly, or add a `print(pd)` or `browser()` call in the functions
+ of that type (e.g. the different functions of `R/rules-line-breaks.R`),
+ `load_all()`, run your example, see if that function made the change.
+ move the `print(pd)` or `browser()` call to another function if not.
+ * Once you've identified the culprit (in this case `style_line_break_around_curly`),
+ set it to `NULL` as shown earlier.
+
 # Some other rules and their transformers
 
 * You don't like multi-line ifelse statements getting wrapped around curly
