@@ -110,7 +110,7 @@ See section 'Warning' for a good strategy to apply styling safely.
 
 \examples{
 \dontrun{
-style_dir("path/to/dir", file_type = c("rmd", ".R"))
+style_dir("path/to/dir", filetype = c("rmd", ".R"))
 
 # the following is identical (because of ... and defaults)
 # but the first is most convenient:
