@@ -99,6 +99,10 @@ make_transformer <- function(transformers,
           base_indention = base_indention
         )
       )
+
+      if (!is.null(attr(use_cache, "text"))) {
+        text <- attr(use_cache, "text")
+      }
     } else {
       use_cache <- FALSE
     }
@@ -117,10 +121,9 @@ make_transformer <- function(transformers,
           ~.
         )
       if (should_use_cache) {
-        cache_write(
-          transformed_code, transformers,
-          cache_more_specs(include_roxygen_examples, base_indention)
-        )
+        specs <- cache_more_specs(include_roxygen_examples, base_indention)
+        cache_write(transformed_code, transformers, specs)
+        cache_write(text, transformers, specs, transformed_code)
       }
       transformed_code
     } else {

@@ -25,11 +25,21 @@ is_cached <- function(text,
                       transformers,
                       more_specs,
                       cache_dir = cache_dir_default()) {
-  R.cache::generateCache(
+  cache_path <- R.cache::generateCache(
     key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir
-  ) %>%
-    file.exists()
+  )
+
+  if (!file.exists(cache_path)) {
+    return(FALSE)
+  }
+
+  text <- readLines(cache_path)
+  if (length(text) > 0) {
+    structure(TRUE, text = text)
+  } else {
+    TRUE
+  }
 }
 
 
@@ -170,12 +180,17 @@ cache_by_expression <- function(text,
 #'
 #' @inheritParams cache_make_key
 #' @keywords internal
-cache_write <- function(text, transformers, more_specs) {
-  R.cache::generateCache(
+cache_write <- function(text, transformers, more_specs, text_out = NULL) {
+  cache_path <- R.cache::generateCache(
     key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir_default()
-  ) %>%
-    file.create()
+  )
+
+  if (is.null(text_out)) {
+    file.create(cache_path)
+  } else {
+    writeLines(text_out, cache_path)
+  }
 }
 
 styler_version <- unlist(unname(read.dcf("DESCRIPTION")[, "Version"]))
