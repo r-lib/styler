@@ -6,6 +6,7 @@ context("UTF-6 with 4.2")
 # this behavior is likely to change with R 4.2
 test_that("styling unicode characters on Windows", {
   skip_if_not(.Platform$OS.type[[1]] == "windows")
+  skip_if(getRversion() >= '4.2')
 
   expect_identical(
     styler::style_text('suit <- "♠"'),
