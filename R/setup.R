@@ -120,8 +120,9 @@ snippet_generate <- function(snippet = "",
       "\n"
     ))
     deps <- desc::desc_get_deps()
-    deps <- deps[order(deps$package), ]
-    snippet_generate_impl_additional_deps_roxygenize(deps$package) %>%
+    non_r_deps <- deps[!(deps$type == "Depends" & deps$package == "R"), ]
+    non_r_deps <- non_r_deps[order(non_r_deps$package), ]
+    snippet_generate_impl_additional_deps_roxygenize(non_r_deps$package) %>%
       cat(sep = "")
     cat("\n")
     cli::cli_ul("Copy the above into `.pre-commit-config.yaml`.")
