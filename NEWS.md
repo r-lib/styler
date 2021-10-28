@@ -3,6 +3,7 @@
 * Alignment detection respects stylerignore (#850).
 * Add vignette on distributing style guide (#846).
 * Enable pre-commit.ci (#843).
+* rename default branch to main (#859).
 
 
 # styler 1.6.2
