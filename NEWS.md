@@ -7,7 +7,7 @@
   the sub-directory under the {R.cache} cache directory that {styler} uses. Non-
   default caches won't be cleaned up by {styler}. We suggest `"styler-perm"` 
   (also used by {precommit}).
-
+* Fix argument name `filetype` in Example for `style_dir()` (#855).
 
 # styler 1.6.2
 

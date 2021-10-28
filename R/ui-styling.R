@@ -229,7 +229,7 @@ style_text <- function(text,
 #' @family stylers
 #' @examples
 #' \dontrun{
-#' style_dir("path/to/dir", file_type = c("rmd", ".R"))
+#' style_dir("path/to/dir", filetype = c("rmd", ".R"))
 #'
 #' # the following is identical (because of ... and defaults)
 #' # but the first is most convenient:
