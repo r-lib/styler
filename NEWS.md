@@ -4,7 +4,7 @@
 * Add vignette on distributing style guide (#846).
 * Enable pre-commit.ci (#843).
 * rename default branch to main (#859).
-
+* Fix argument name `filetype` in Example for `style_dir()` (#855).
 
 # styler 1.6.2
 
