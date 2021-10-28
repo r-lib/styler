@@ -10,7 +10,7 @@ status](https://github.com/r-lib/styler/workflows/R-CMD-check/badge.svg)](https:
 [![Life cycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![codecov test
-coverage](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
+coverage](https://codecov.io/gh/r-lib/styler/branch/main/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
 [![CRAN
 Status](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
 <!-- badges: end -->
