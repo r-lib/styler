@@ -25,8 +25,8 @@ library(styler)
 args <- commandArgs(trailingOnly = TRUE)
 non_file_args <- args[!grepl("^[^-][^-]", args)]
 keys <- setdiff(
-  gsub("(^--[0-9A-Za-z_]+).*", "\\1", non_file_args),
-  c("--style_pkg", "--style_fun", "--no-warn-cache", "--cache-root")
+  gsub("(^--[0-9A-Za-z_-]+).*", "\\1", non_file_args),
+  c("--style_pkg", "--style_fun", "--cache-root", "--no-warn-cache")
 )
 if (length(keys) > 0) {
   bare_keys <- gsub("^--", "", keys)

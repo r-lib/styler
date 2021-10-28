@@ -86,6 +86,25 @@ In addition, the hook takes the following arguments that are not passed to
 * If no permanent `{R.cache}` cache exists, the hook emits a warning which you 
   can silence with `--no-warn-cache`.
 
+```
+  id: style-files
+  args: [--no-warn-cache]
+```
+
+  
+* Argument `cache_root` is passed to `options()` to set `"styler.cache_root"`.
+  Default value: `"styler-perm"`. The argument 
+  determines the sub-directory under the {R.cache} cache directory that {styler}
+  uses. If you want {styler} to auto-clean up caches older than 6 days, set this
+  to `styler`. For more information, see 
+  `help("caching", package = "styler")`.
+
+```
+  id: style-files
+  args: [--cache-root=styler]
+```
+
+
 This hook modifies files unless you specify `--dry=fail` (requires 
 `{styler} > 1.3.2`).
 

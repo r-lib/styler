@@ -8,29 +8,34 @@ run_test("use-tidy-description", "DESCRIPTION", suffix = "")
 ### style-files                                                             ####
 
 # success
-run_test("style-files", suffix = "-success.R")
+run_test("style-files", 
+         suffix = "-success.R", cmd_args = c('--cache-root=styler')
+)
 # fail
-run_test("style-files", suffix = "-fail-changed.R", error_msg = NA)
+run_test("style-files",
+         suffix = "-fail-changed.R", cmd_args = c('--cache-root=styler'), 
+         error_msg = NA)
 
-run_test("style-files", suffix = "-fail-parse.R", error_msg = "unexpected")
+run_test("style-files", suffix = "-fail-parse.R", cmd_args = c('--cache-root=styler'), 
+         error_msg = "unexpected")
 
 # success with cmd args
 run_test("style-files",
   file_name = "style-files-cmd",
   suffix = "-success.R",
-  cmd_args = c("--style_pkg=styler", "--style_fun=tidyverse_style")
+  cmd_args = c("--style_pkg=styler", "--style_fun=tidyverse_style", '--cache-root=styler')
 )
 
 run_test("style-files",
   file_name = "style-files-cmd",
   suffix = "-success.R",
-  cmd_args = c("--scope=spaces")
+  cmd_args = c("--scope=spaces", '--cache-root=styler')
 )
 
 run_test("style-files",
   file_name = "style-files-cmd",
   suffix = "-success.R",
-  cmd_args = c('--scope="I(\'spaces\')"')
+  cmd_args = c('--scope="I(\'spaces\')"', '--cache-root=styler')
 )
 
 run_test("style-files",
@@ -39,7 +44,8 @@ run_test("style-files",
   cmd_args = c(
     '--scope="I(\'spaces\')"',
     "--base_indention=0",
-    "--include_roxygen_examples=TRUE"
+    "--include_roxygen_examples=TRUE", 
+    '--cache-root=styler'
   )
 )
 
@@ -50,20 +56,21 @@ run_test("style-files",
     '--scope="I(\'spaces\')"',
     "--base_indention=0",
     "--include_roxygen_examples=TRUE",
-    '--reindention="specify_reindention(\'#\')"'
+    '--reindention="specify_reindention(\'#\')"', 
+    '--cache-root=styler'
   )
 )
 
 run_test("style-files",
   file_name = "style-files",
   suffix = "-base-indention-success.R",
-  cmd_args = c("--base_indention=4")
+  cmd_args = c("--base_indention=4", '--cache-root=styler') 
 )
 
 run_test("style-files",
   file_name = "style-files",
   suffix = "-roxygen-success.R",
-  cmd_args = c("--include_roxygen_examples=FALSE")
+  cmd_args = c("--include_roxygen_examples=FALSE", '--cache-root=styler')
 )
 
 # fail with cmd args
@@ -71,14 +78,16 @@ run_test("style-files",
   file_name = "style-files-cmd",
   suffix = "-success.R",
   error_msg = "scope must be one",
-  cmd_args = c("--scope=space")
+  cmd_args = c("--scope=space", '--cache-root=styler')
 )
 
 run_test("style-files",
   file_name = "style-files-cmd",
   suffix = "-fail.R",
   error_msg = NA,
-  cmd_args = c("--style_pkg=styler", "--style_fun=tidyverse_style")
+  cmd_args = c(
+    "--style_pkg=styler", "--style_fun=tidyverse_style", '--cache-root=styler'
+  )
 )
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
