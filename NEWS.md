@@ -6,7 +6,7 @@ includes switching to R based hook for `readme-rmd-render`, avoiding the
 used packages, roxygen snippet generation and more. In addition:
 
 * Always sort `inst/WORDLIST` (#303).
-* rename default branch to *main* (#859).
+* rename default branch to *main* (#307).
 
 
 # precommit v0.1.3.9012
