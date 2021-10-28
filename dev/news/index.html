@@ -192,6 +192,7 @@
 <li>Alignment detection respects stylerignore (<a href='https://github.com/r-lib/styler/issues/850'>#850</a>).</li>
 <li>Add vignette on distributing style guide (<a href='https://github.com/r-lib/styler/issues/846'>#846</a>).</li>
 <li>Enable pre-commit.ci (<a href='https://github.com/r-lib/styler/issues/843'>#843</a>).</li>
+<li>rename default branch to main (<a href='https://github.com/r-lib/styler/issues/859'>#859</a>).</li>
 <li>Fix argument name <code>filetype</code> in Example for <code><a href="../reference/style_dir.html">style_dir()</a></code> (<a href='https://github.com/r-lib/styler/issues/855'>#855</a>).</li>
 </ul>
 </div>
@@ -487,7 +488,7 @@ style_text("1 # comment")
 <ul>
 <li><p>Roxygen code examples: leverage <code>roxygen2</code> for correct escaping of expressions that contain <code>\</code>, in particular in <code>dontrun{}</code> and friends, allow quoted braces that are not matched (<a href='https://github.com/r-lib/styler/issues/729'>#729</a>).</p></li>
 <li><p>Brace expressions in function calls are formatted in a less compact way to improve readability. Typical use case: <code><a href="https://rdrr.io/r/base/conditions.html">tryCatch()</a></code> (<a href='https://github.com/r-lib/styler/issues/543'>#543</a>).</p></li>
-<li><p>Arguments in function declarations in a context which is indented multiple times should now be correct. This typically affects <code><a href="https://r6.r-lib.org/reference/R6Class.html">R6::R6Class()</a></code> (<a href='https://github.com/r-lib/styler/issues/546'>#546</a>).</p></li>
+<li><p>Arguments in function declarations in a context which is indented multiple times should now be correct. This typically affects <code><a href="https://rdrr.io/pkg/R6/man/R6Class.html">R6::R6Class()</a></code> (<a href='https://github.com/r-lib/styler/issues/546'>#546</a>).</p></li>
 <li><p>Escape characters in roxygen code examples are now correctly escaped (<a href='https://github.com/r-lib/styler/issues/512'>#512</a>).</p></li>
 <li><p>Special characters such as <code>\n</code> in strings are now preserved in text and not turned into literal values like a line break (<a href='https://github.com/r-lib/styler/issues/554'>#554</a>).</p></li>
 <li><p>Style selection Addin now preserves line break when the last line selected is an entire line (<a href='https://github.com/r-lib/styler/issues/520'>#520</a>).</p></li>
