@@ -8,12 +8,12 @@ This repo uses the [tic](https://github.com/ropenscilabs/tic) package for CI.
 
 To create a new hook, have a look at the [official
 documentation](https://pre-commit.com/#new-hooks) on creating new hooks, then have a look
-at existing hooks in this repo. The actual executables are defined in [`inst/hooks/`](https://github.com/lorenzwalthert/precommit/tree/master/inst/hooks). In
+at existing hooks in this repo. The actual executables are defined in [`inst/hooks/`](https://github.com/lorenzwalthert/precommit/tree/main/inst/hooks). In
 the script, you can expect the passed command line arguments to be all options, 
 finally the files that should be processed with the hook.
 
 For the scripts to become a hook, they need to be *registered* in
-[`.pre-commit-hooks.yaml`](https://github.com/lorenzwalthert/precommit/blob/master/.pre-commit-hooks.yaml). As R is not currently a supported language of
+[`.pre-commit-hooks.yaml`](https://github.com/lorenzwalthert/precommit/blob/main/.pre-commit-hooks.yaml). As R is not currently a supported language of
 pre-commit (https://github.com/pre-commit/pre-commit/issues/926), most hooks use
 `language: script` and then a shebang in the `entrypoint` script.
 
@@ -21,7 +21,7 @@ pre-commit (https://github.com/pre-commit/pre-commit/issues/926), most hooks use
 
 Hooks should be tested by checking both the positive outcome (hook passes) and
 the negative outcome (hook fails) by adding two `run_test()` statements to
-[`./tests/testthat/test-all.R`](https://github.com/lorenzwalthert/precommit/blob/master/tests/testthat/test-all.R). Look at existing examples and [the documentation
+[`./tests/testthat/test-all.R`](https://github.com/lorenzwalthert/precommit/blob/main/tests/testthat/test-all.R). Look at existing examples and [the documentation
 of `run_test()`](https://lorenzwalthert.github.io/precommit/reference/run_test.html). Note that this won't actually use pre-commit. It will simply
 call the hook script the same way as pre-commit would, with the difference that
 the test uses a path to the `Rscript` executable whereas with pre-commit, the 

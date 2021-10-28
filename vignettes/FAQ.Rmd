@@ -91,7 +91,7 @@ described [here](https://pre-commit.com/#temporarily-disabling-hooks).
 
 ## How does one create a new pre-commit hook?
 
-How to contribute new hooks is explained in [`CONTRIBUTING.md`](https://github.com/lorenzwalthert/precommit/blob/master/CONTRIBUTING.md).
+How to contribute new hooks is explained in [`CONTRIBUTING.md`](https://github.com/lorenzwalthert/precommit/blob/main/CONTRIBUTING.md).
 
 *** 
 

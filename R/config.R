@@ -126,5 +126,5 @@ set_config_source <- function(config_source,
 
 
 example_remote_config <- function() {
-  "https://raw.githubusercontent.com/lorenzwalthert/precommit/master/inst/pre-commit-config-proj.yaml"
+  "https://raw.githubusercontent.com/lorenzwalthert/precommit/main/inst/pre-commit-config-proj.yaml"
 }
