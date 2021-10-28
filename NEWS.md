@@ -1,9 +1,21 @@
 # styler 1.6.2.9000 (Development version)
 
 
-* multiple stylerignore patterns can be specified at once and lintr markers 
-  `# nolint`, `# nolint start` and `# nolint end` are now by default recognized
-  in addition to `# styler: off` and `# styler: on` (#849).
+* stylerignore markers are now interpreted as regular expressions instead of 
+  comments that must match exactly. This allows to specify multiple markers in 
+  one regular expression for `styler.ignore_start` and `styler.ignore_stop`, 
+  e.g. to use markers for lintr and styler on the same line, you can use
+  `options(styler.ignore_start = "nolint start|styler: off"`:
+
+  ```r
+  # nolint start, styler: off
+  1 +1
+  # nolint end
+  # styler: on
+  ```
+  As a consequence of this approach, the defaults for `styler.ignore_start` and 
+  `styler.ignore_stop` omit the `#` (#849).
+
 
 # styler 1.6.2
 

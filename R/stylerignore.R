@@ -54,7 +54,9 @@ env_add_stylerignore <- function(pd_flat) {
 #' @keywords internal
 add_stylerignore <- function(pd_flat) {
   parse_text <- trimws(pd_flat$text)
-  start_candidate <- parse_text %in% option_read("styler.ignore_start")
+  start_candidate <- grepl(
+    option_read("styler.ignore_start"), parse_text
+  ) & pd_flat$token == "COMMENT"
   pd_flat$stylerignore <- rep(FALSE, length(start_candidate))
   env_current$any_stylerignore <- any(start_candidate)
   if (!env_current$any_stylerignore) {
@@ -64,7 +66,10 @@ add_stylerignore <- function(pd_flat) {
   pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0)
   on_same_line <- pd_flat$line1 == pd_flat_lat_line1
   cumsum_start <- cumsum(start_candidate & !on_same_line)
-  cumsum_stop <- cumsum(parse_text %in% option_read("styler.ignore_stop"))
+  cumsum_stop <- cumsum(
+    grepl(option_read("styler.ignore_stop"), parse_text) &
+      pd_flat$token == "COMMENT"
+  )
   pd_flat$indicator_off <- cumsum_start + cumsum_stop
   is_invalid <- cumsum_start - cumsum_stop < 0 | cumsum_start - cumsum_stop > 1
   if (any(is_invalid)) {
@@ -105,7 +110,7 @@ apply_stylerignore <- function(flattened_pd) {
   colnames_required_apply_stylerignore <- c(
     "pos_id_", "lag_newlines", "lag_spaces", "text", "first_pos_id_in_segment"
   )
-  # cannot rely on flattened_pd$text %in% option_read("styler.ignore_start")
+  # cannot rely on flattened_pd$text == option_read("styler.ignore_start")
   # because if the marker logic is not correct (twice off in a row), we'll
   # get it wrong.
   to_ignore <- flattened_pd$stylerignore == TRUE
