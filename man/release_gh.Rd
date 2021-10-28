@@ -33,7 +33,7 @@ not possible interactively, hence we run in advance).
 
 If \code{is_cran} is \code{TRUE}, the workflow is changed slightly:
 \itemize{
-\item push to release branch, not master.
+\item push to release branch, not main.
 \item doesn't run \code{\link[=release_complete]{release_complete()}}. This must be done manually after accepted
 on CRAN.
 }
