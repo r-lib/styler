@@ -66,7 +66,7 @@ diff_requires_run_roxygenize <- function(root = here::here()) {
       "    -   id: roxygenize",
       "
         additional_dependencies:
-        - r-lib/git2r\n\n"
+        - git2r\n\n"
     )
     msg <- paste0(
       "The R package {git2r} must be available to benefit from caching of this hook.",
