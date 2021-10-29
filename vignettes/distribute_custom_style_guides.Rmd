@@ -32,12 +32,12 @@ Other available style guides include:
 * [ropensci-review-tools/spaceout](https://github.com/ropensci-review-tools/spaceout)
 * [gadenbuie/grkstyle](https://github.com/gadenbuie/grkstyle)
 
-You made one too? Please submit a PR to include it in the list.
-
 To start out, you can use the 
 [GitHub Template](https://github.com/lorenzwalthert/styler.yours) for 
 third-party style guides that has already the right directory structure and 
 patterns described below in place.
+
+You made one too? Please submit a PR to include it in the list.
 
 ## Design patterns
 
