@@ -1,7 +1,7 @@
 # styler 1.6.2.9000 (Development version)
 
 * Alignment detection respects stylerignore (#850).
-* Add vignette on distributing style guide (#846).
+* Add vignette on distributing style guide (#846, #861).
 * Enable pre-commit.ci (#843).
 * rename default branch to main (#859).
 * Fix argument name `filetype` in Example for `style_dir()` (#855).

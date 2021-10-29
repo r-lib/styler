@@ -20,10 +20,24 @@ style guide with `create_style_guide()`.
 
 ## Reference implementations
 
-There are two packages that implement a third-party style guide:
+There are a few packages that implement a third-party style guide that are
+maintained by styler contributors:
 
+* [lorenzwalthert/semicoloner](https://github.com/lorenzwalthert/semicoloner)
 * [lorenzwalthert/oneliner](https://github.com/lorenzwalthert/oneliner)
 * [mlr-org/styler.mlr](https://github.com/mlr-org/styler.mlr)
+
+Other available style guides include:
+
+* [ropensci-review-tools/spaceout](https://github.com/ropensci-review-tools/spaceout)
+* [gadenbuie/grkstyle](https://github.com/gadenbuie/grkstyle)
+
+To start out, you can use the 
+[GitHub Template](https://github.com/lorenzwalthert/styler.yours) for 
+third-party style guides that has already the right directory structure and 
+patterns described below in place.
+
+You made one too? Please submit a PR to include it in the list.
 
 ## Design patterns
 

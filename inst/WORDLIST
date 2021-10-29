@@ -64,6 +64,7 @@ filetype
 forcond
 formatter
 funct
+gadenbuie
 gcc
 getChecksum
 getOption
@@ -71,6 +72,7 @@ getRversion
 ggplot
 github
 gitsum
+grkstyle
 GSOC
 hashFiles
 helpfiles
@@ -173,6 +175,7 @@ roclet
 roclets
 rootPath
 ROOTPATH
+ropensci
 roundtrip
 roxgen
 roxygen
@@ -193,6 +196,7 @@ rstudioapi
 saamwerk
 saveRDS
 seealso
+semicoloner
 sep
 sessioninfo
 setCacheRootPath
@@ -203,6 +207,7 @@ shinymeta
 shinyMonacoEditor
 shinyobjects
 ShinyQuickStarter
+spaceout
 sprintf
 stackoverflow
 StackOverflow
