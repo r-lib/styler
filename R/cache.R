@@ -34,7 +34,7 @@ may_require_permanent_cache <- function(temp_cache_is_enough = FALSE) {
         "`R.cache::getCachePath()` and confirm the prompt or \n\n2) ",
         "non-interactively by setting the environment variable ",
         "`R_CACHE_ROOTPATH` to the location you want to put the cache. \n\nYou can ",
-        "silent this warning with setting `args: [----no-warn-cache]` in your ",
+        "silent this warning with setting `args: [--no-warn-cache]` in your ",
         ".pre-commit-config.yaml.\n\n"
       ))
     }
