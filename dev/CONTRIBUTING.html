@@ -195,7 +195,7 @@
 <ul>
 <li>Only open a PR when your idea was approved of by a contributor in an issue.</li>
 <li>Add a bullet to NEWS.md referencing the PR, also following the guide lines in <a href="http://style.tidyverse.org">tidyverse style guide</a>, as for your code contributions.</li>
-<li>Make sure your commit pass the pre-commit hooks in this repo. See the <code>{precommit}</code> <a href="https://github.com/lorenzwalthert/precommit">README.md</a> on how to install the pre-commit framework and the R package on your system and then run <code>precommit::use_precommit()</code> to make sure the hooks are activated in your local styler clone. If you skip a hook, describe why in the PR.</li>
+<li>Make sure your commit pass the pre-commit hooks in this repo. See the <a href="https://lorenzwalthert.github.io/precommit/">precommit</a> <a href="https://github.com/lorenzwalthert/precommit">README.md</a> on how to install the pre-commit framework and the R package on your system and then run <code>precommit::use_precommit()</code> to make sure the hooks are activated in your local styler clone. If you skip a hook, describe why in the PR.</li>
 </ul>
 </div>
 <div id="how-to-dive-in-and-understanding-the-source-code" class="section level2">
@@ -203,9 +203,9 @@
 <a href="#how-to-dive-in-and-understanding-the-source-code" class="anchor"></a>How to dive in and understanding the source code</h2>
 <p>Read the vignettes. If you are done, come back here.</p>
 <p><code>devtools::load_all()</code></p>
-<p><code><a href="https://rdrr.io/r/base/debug.html">debug(style_text)</a></code></p>
-<p><code><a href="reference/style_text.html">style_text("call(1, 2 + 1)")</a></code></p>
-<p>Go broad before you go deep. Before going into the very deep layers of function calls of <code><a href="reference/style_text.html">style_text()</a></code>, try to understand that <code><a href="reference/style_text.html">style_text()</a></code> consists of a few function calls only. Go into each of them and try to understand one layer deep. That is, try to understand what <code><a href="reference/make_transformer.html">make_transformer()</a></code> does by reading the names of the functions that get called, the name of the objects that are created by assigning the output of these function calls. Before looking into a functions source code, look at the documentation for that function. All internal important functions are documented and documentation is available also for unexported objects via <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code> (if you did <code>devtools::load_all()</code>. Then, go into <code>parse_transform_serialize()</code> and so on.</p>
+<p><code>debug(style_text)</code></p>
+<p><code>style_text("call(1, 2 + 1)")</code></p>
+<p>Go broad before you go deep. Before going into the very deep layers of function calls of <code><a href="reference/style_text.html">style_text()</a></code>, try to understand that <code><a href="reference/style_text.html">style_text()</a></code> consists of a few function calls only. Go into each of them and try to understand one layer deep. That is, try to understand what <code><a href="reference/make_transformer.html">make_transformer()</a></code> does by reading the names of the functions that get called, the name of the objects that are created by assigning the output of these function calls. Before looking into a functions source code, look at the documentation for that function. All internal important functions are documented and documentation is available also for unexported objects via <code>?</code> (if you did <code>devtools::load_all()</code>. Then, go into <code>parse_transform_serialize()</code> and so on.</p>
 <p>To understand the most fundamental operation in styler, the manipulation of the columns related to spacing and line break information, pick a rule from <code>R/rules-*.R</code>, e.g. <code>R/rules-spacing</code>, add a break point to a rule and style a string where you think this rule will be active. Then, see what happens and how this rule is applied on each level of nesting.</p>
 </div>
 <div id="static-code-analysis" class="section level2">

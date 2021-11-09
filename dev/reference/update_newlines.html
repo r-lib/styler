@@ -196,7 +196,7 @@ without touching indention." />
     <p>As we work only with the <code>lag_newlines</code> attribute for setting the line
 breaks (<code>R/rules-line_breaks.R</code>), but we need <code>newlines</code> to determine
 whether or not to set <code>spaces</code> (<code>R/rules-spaces.R</code>), we have to update the
-attribute. We cannot simply use <code><a href='https://dplyr.tidyverse.org/reference/lead-lag.html'>dplyr::lead(pd$lag_newlines)</a></code> since we would
+attribute. We cannot simply use <code>dplyr::lead(pd$lag_newlines)</code> since we would
 lose information for the last token. <code>spaces</code> is left as is in
 R/rules-spacing.R for tokens at the end of a line since this allows styling
 without touching indention.</p>

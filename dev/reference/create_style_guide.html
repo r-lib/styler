@@ -261,7 +261,7 @@ conveniently constructed using <code><a href='reindention.html'>specify_reindent
       <td><p>The name of the style guide. Used as a meta attribute
 inside the created style guide, for example for caching. By convention,
 this is the style guide qualified by the package namespace plus the
-location of the style guide, separated by <code><a href='https://rdrr.io/r/base/slotOp.html'>@</a></code>. For example,
+location of the style guide, separated by <code>@</code>. For example,
 <code>"styler::tidyverse_style@https://github.com/r-lib"</code>.</p></td>
     </tr>
     <tr>
@@ -276,7 +276,7 @@ style guide.</p></td>
       <td><p>Named vector (coercible to character)
 with all arguments passed to the style guide and used for cache
 invalidation. You can easily capture them in your style guide function
-declaration with <code><a href='https://rdrr.io/r/base/list.html'>as.list(environment())</a></code> (compare source code of
+declaration with <code>as.list(environment())</code> (compare source code of
 <code><a href='tidyverse_style.html'>tidyverse_style()</a></code>).</p></td>
     </tr>
     <tr>
@@ -294,24 +294,25 @@ also takes some time.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>set_line_break_before_curly_opening</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pd_flat</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>op</span> <span class='op'>&lt;-</span> <span class='va'>pd_flat</span><span class='op'>$</span><span class='va'>token</span> <span class='op'>%in%</span> <span class='st'>"'{'"</span>
-  <span class='va'>pd_flat</span><span class='op'>$</span><span class='va'>lag_newlines</span><span class='op'>[</span><span class='va'>op</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1L</span>
-  <span class='va'>pd_flat</span>
-<span class='op'>}</span>
-<span class='va'>set_line_break_before_curly_opening_style</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>create_style_guide</span><span class='op'>(</span>
-    line_break <span class='op'>=</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/lst.html'>lst</a></span><span class='op'>(</span><span class='va'>set_line_break_before_curly_opening</span><span class='op'>)</span>,
-    style_guide_name <span class='op'>=</span> <span class='st'>"some-style-guide"</span>,
-    style_guide_version <span class='op'>=</span> <span class='st'>"some-version"</span>
-  <span class='op'>)</span>
-<span class='op'>}</span>
-<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span>
-  <span class='st'>"a &lt;- function(x) { x }"</span>,
-  style <span class='op'>=</span> <span class='va'>set_line_break_before_curly_opening_style</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; a <span style='color: #00BB00;'>&lt;-</span> <span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span>x<span style='color: #BBBB00;'>)</span>
-#&gt; <span style='color: #BBBB00;'>{</span> x <span style='color: #BBBB00;'>}</span></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>set_line_break_before_curly_opening</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pd_flat</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>op</span> <span class='op'>&lt;-</span> <span class='va'>pd_flat</span><span class='op'>$</span><span class='va'>token</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='st'>"'{'"</span></span>
+<span class='r-in'>  <span class='va'>pd_flat</span><span class='op'>$</span><span class='va'>lag_newlines</span><span class='op'>[</span><span class='va'>op</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1L</span></span>
+<span class='r-in'>  <span class='va'>pd_flat</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='va'>set_line_break_before_curly_opening_style</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>create_style_guide</span><span class='op'>(</span></span>
+<span class='r-in'>    line_break <span class='op'>=</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/lst.html'>lst</a></span><span class='op'>(</span><span class='va'>set_line_break_before_curly_opening</span><span class='op'>)</span>,</span>
+<span class='r-in'>    style_guide_name <span class='op'>=</span> <span class='st'>"some-style-guide"</span>,</span>
+<span class='r-in'>    style_guide_version <span class='op'>=</span> <span class='st'>"some-version"</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='st'>"a &lt;- function(x) { x }"</span>,</span>
+<span class='r-in'>  style <span class='op'>=</span> <span class='va'>set_line_break_before_curly_opening_style</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a <span style='color: #00BB00;'>&lt;-</span> <span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>(</span>x<span style='color: #BBBB00;'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBB00;'>{</span> x <span style='color: #BBBB00;'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

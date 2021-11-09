@@ -140,7 +140,7 @@
       <h1 data-toc-skip>Manipulating the nested parse table</h1>
                         <h4 class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2021-10-29</h4>
+            <h4 class="date">2021-11-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/gsoc_proposal/manipulating_nested_parse_data.Rmd"><code>vignettes/gsoc_proposal/manipulating_nested_parse_data.Rmd</code></a></small>
       <div class="hidden name"><code>manipulating_nested_parse_data.Rmd</code></div>
@@ -314,7 +314,7 @@ serialize_parse_data_nested
 ## }
 ## &lt;environment: namespace:styler&gt;</code></pre>
 <p>Before we are done, we need to add information regarding indention to the parse table. We can add indention after every line break that comes after a round bracket with <code>indent_round()</code>. And then serialize it.</p>
-<pre><code><a href="../../reference/visit.html">pre_visit(pd_nested, 
+<pre><code>pre_visit(pd_nested, 
                c(create_filler, 
                  purrr::partial(indent_round, indent_by = 2)))
 
@@ -324,7 +324,7 @@ serialize_parse_data_nested
 ## 1     1     1     1    47    49      0  expr    FALSE            
 ## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
 ## #   internal &lt;lgl&gt;, child &lt;list&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,
-## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</a></code></pre>
+## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</code></pre>
 <p>We can see how indention works with a more complicated example</p>
 <pre><code>indented &lt;- c(
   "call(", 

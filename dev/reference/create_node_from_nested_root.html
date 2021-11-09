@@ -214,56 +214,57 @@ to check whether two structures are identical.</p></td>
     <p>An object of class "Node" and "R6".</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'>rlang</span><span class='fu'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/is_installed.html'>is_installed</a></span><span class='op'>(</span><span class='st'>"data.tree"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>withr</span><span class='fu'>::</span><span class='fu'><a href='https://withr.r-lib.org/reference/with_options.html'>with_options</a></span><span class='op'>(</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>styler.cache_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>, <span class='co'># temporarily deactivate cache</span>
-    <span class='op'>{</span>
-      <span class='va'>code</span> <span class='op'>&lt;-</span> <span class='st'>"a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</span>
-      <span class='va'>nested_pd</span> <span class='op'>&lt;-</span> <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='compute_parse_data_nested.html'>compute_parse_data_nested</a></span><span class='op'>(</span><span class='va'>code</span><span class='op'>)</span>
-      <span class='va'>initialized</span> <span class='op'>&lt;-</span> <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='visit.html'>pre_visit</a></span><span class='op'>(</span><span class='va'>nested_pd</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>default_style_guide_attributes</span><span class='op'>)</span><span class='op'>)</span>
-      <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>create_node_from_nested_root</span><span class='op'>(</span><span class='va'>initialized</span>, structure_only <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-    <span class='op'>}</span>
-  <span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt;                                                  levelName
-#&gt; 1  ROOT (token: short_text [lag_newlines/spaces] {pos_id})
-#&gt; 2   °--expr: a &lt;-  [0/0] {1}                              
-#&gt; 3       ¦--expr: a [0/1] {3}                              
-#&gt; 4       ¦   °--SYMBOL: a [0/0] {2}                        
-#&gt; 5       ¦--LEFT_ASSIGN: &lt;- [0/1] {4}                      
-#&gt; 6       °--expr: funct [0/0] {5}                          
-#&gt; 7           ¦--FUNCTION: funct [0/0] {6}                  
-#&gt; 8           ¦--'(': ( [0/0] {7}                           
-#&gt; 9           ¦--SYMBOL_FORMALS: x [0/0] {8}                
-#&gt; 10          ¦--')': ) [0/1] {9}                           
-#&gt; 11          °--expr: { if( [0/0] {10}                     
-#&gt; 12              ¦--'{': { [0/1] {11}                      
-#&gt; 13              ¦--expr: if(x  [0/1] {12}                 
-#&gt; 14              ¦   ¦--IF: if [0/0] {13}                  
-#&gt; 15              ¦   ¦--'(': ( [0/0] {14}                  
-#&gt; 16              ¦   ¦--expr: x &gt; 1 [0/0] {15}             
-#&gt; 17              ¦   ¦   ¦--expr: x [0/1] {17}             
-#&gt; 18              ¦   ¦   ¦   °--SYMBOL: x [0/0] {16}       
-#&gt; 19              ¦   ¦   ¦--GT: &gt; [0/1] {18}               
-#&gt; 20              ¦   ¦   °--expr: 1 [0/0] {20}             
-#&gt; 21              ¦   ¦       °--NUM_CONST: 1 [0/0] {19}    
-#&gt; 22              ¦   ¦--')': ) [0/1] {21}                  
-#&gt; 23              ¦   ¦--expr: { 1+1 [0/1] {22}             
-#&gt; 24              ¦   ¦   ¦--'{': { [0/1] {23}              
-#&gt; 25              ¦   ¦   ¦--expr: 1+1 [0/1] {24}           
-#&gt; 26              ¦   ¦   ¦   ¦--expr: 1 [0/0] {26}         
-#&gt; 27              ¦   ¦   ¦   ¦   °--NUM_CONST: 1 [0/0] {25}
-#&gt; 28              ¦   ¦   ¦   ¦--'+': + [0/0] {27}          
-#&gt; 29              ¦   ¦   ¦   °--expr: 1 [0/0] {29}         
-#&gt; 30              ¦   ¦   ¦       °--NUM_CONST: 1 [0/0] {28}
-#&gt; 31              ¦   ¦   °--'}': } [0/0] {30}              
-#&gt; 32              ¦   ¦--ELSE: else [0/1] {31}              
-#&gt; 33              ¦   °--expr: {x} [0/0] {32}               
-#&gt; 34              ¦       ¦--'{': { [0/0] {33}              
-#&gt; 35              ¦       ¦--expr: x [0/0] {35}             
-#&gt; 36              ¦       ¦   °--SYMBOL: x [0/0] {34}       
-#&gt; 37              ¦       °--'}': } [0/0] {36}              
-#&gt; 38              °--'}': } [0/0] {37}                      </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'>rlang</span><span class='fu'>::</span><span class='fu'><a href='https://rlang.r-lib.org/reference/is_installed.html'>is_installed</a></span><span class='op'>(</span><span class='st'>"data.tree"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>withr</span><span class='fu'>::</span><span class='fu'><a href='https://withr.r-lib.org/reference/with_options.html'>with_options</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>styler.cache_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>, <span class='co'># temporarily deactivate cache</span></span>
+<span class='r-in'>    <span class='op'>{</span></span>
+<span class='r-in'>      <span class='va'>code</span> <span class='op'>&lt;-</span> <span class='st'>"a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</span></span>
+<span class='r-in'>      <span class='va'>nested_pd</span> <span class='op'>&lt;-</span> <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='compute_parse_data_nested.html'>compute_parse_data_nested</a></span><span class='op'>(</span><span class='va'>code</span><span class='op'>)</span></span>
+<span class='r-in'>      <span class='va'>initialized</span> <span class='op'>&lt;-</span> <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='visit.html'>pre_visit</a></span><span class='op'>(</span><span class='va'>nested_pd</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>default_style_guide_attributes</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>      <span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'>create_node_from_nested_root</span><span class='op'>(</span><span class='va'>initialized</span>, structure_only <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='op'>}</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                  levelName</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  ROOT (token: short_text [lag_newlines/spaces] {pos_id})</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2   °--expr: a &lt;-  [0/0] {1}                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3       ¦--expr: a [0/1] {3}                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4       ¦   °--SYMBOL: a [0/0] {2}                        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5       ¦--LEFT_ASSIGN: &lt;- [0/1] {4}                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6       °--expr: funct [0/0] {5}                          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7           ¦--FUNCTION: funct [0/0] {6}                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8           ¦--'(': ( [0/0] {7}                           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9           ¦--SYMBOL_FORMALS: x [0/0] {8}                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10          ¦--')': ) [0/1] {9}                           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11          °--expr: { if( [0/0] {10}                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12              ¦--'{': { [0/1] {11}                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13              ¦--expr: if(x  [0/1] {12}                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14              ¦   ¦--IF: if [0/0] {13}                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15              ¦   ¦--'(': ( [0/0] {14}                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16              ¦   ¦--expr: x &gt; 1 [0/0] {15}             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17              ¦   ¦   ¦--expr: x [0/1] {17}             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18              ¦   ¦   ¦   °--SYMBOL: x [0/0] {16}       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19              ¦   ¦   ¦--GT: &gt; [0/1] {18}               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20              ¦   ¦   °--expr: 1 [0/0] {20}             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21              ¦   ¦       °--NUM_CONST: 1 [0/0] {19}    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22              ¦   ¦--')': ) [0/1] {21}                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23              ¦   ¦--expr: { 1+1 [0/1] {22}             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24              ¦   ¦   ¦--'{': { [0/1] {23}              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25              ¦   ¦   ¦--expr: 1+1 [0/1] {24}           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26              ¦   ¦   ¦   ¦--expr: 1 [0/0] {26}         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27              ¦   ¦   ¦   ¦   °--NUM_CONST: 1 [0/0] {25}</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28              ¦   ¦   ¦   ¦--'+': + [0/0] {27}          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29              ¦   ¦   ¦   °--expr: 1 [0/0] {29}         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30              ¦   ¦   ¦       °--NUM_CONST: 1 [0/0] {28}</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31              ¦   ¦   °--'}': } [0/0] {30}              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32              ¦   ¦--ELSE: else [0/1] {31}              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33              ¦   °--expr: {x} [0/0] {32}               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34              ¦       ¦--'{': { [0/0] {33}              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35              ¦       ¦--expr: x [0/0] {35}             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36              ¦       ¦   °--SYMBOL: x [0/0] {34}       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37              ¦       °--'}': } [0/0] {36}              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38              °--'}': } [0/0] {37}                      </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

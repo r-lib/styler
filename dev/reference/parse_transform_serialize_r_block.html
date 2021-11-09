@@ -225,26 +225,28 @@ multi-line strings are present. See 'Examples'.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>text_in</span> <span class='op'>&lt;-</span> <span class='st'>'x&lt;- function()
-"here
-is"
-NULL
-1+ 1
-'</span>
-<span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='va'>text_in</span>, base_indention <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    x <span style='color: #00BB00;'>&lt;-</span> <span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span> <span style='color: #BBBB00;'>{</span>
-#&gt;      "here
-#&gt; is"
-#&gt;    <span style='color: #BBBB00;'>}</span>
-#&gt;    <span style='color: #0000BB; font-weight: bold;'>NULL</span>
-#&gt;    <span style='color: #0000BB;'>1</span> <span style='color: #00BB00;'>+</span> <span style='color: #0000BB;'>1</span></div><div class='input'><span class='co'># not equal to the naive approach</span>
-<span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='construct_vertical.html'>construct_vertical</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='add_spaces_or_newlines.html'>add_spaces</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='va'>text_in</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    x <span style='color: #00BB00;'>&lt;-</span> <span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span> <span style='color: #BBBB00;'>{</span>
-#&gt;      "here
-#&gt;    is"
-#&gt;    <span style='color: #BBBB00;'>}</span>
-#&gt;    <span style='color: #0000BB; font-weight: bold;'>NULL</span>
-#&gt;    <span style='color: #0000BB;'>1</span> <span style='color: #00BB00;'>+</span> <span style='color: #0000BB;'>1</span></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>text_in</span> <span class='op'>&lt;-</span> <span class='st'>'x&lt;- function()</span>
+<span class='r-in'>"here</span>
+<span class='r-in'>is"</span>
+<span class='r-in'>NULL</span>
+<span class='r-in'>1+ 1</span>
+<span class='r-in'>'</span></span>
+<span class='r-in'><span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='va'>text_in</span>, base_indention <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    x <span style='color: #00BB00;'>&lt;-</span> <span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span> <span style='color: #BBBB00;'>{</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      "here</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> is"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #BBBB00;'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #0000BB; font-weight: bold;'>NULL</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #0000BB;'>1</span> <span style='color: #00BB00;'>+</span> <span style='color: #0000BB;'>1</span></span>
+<span class='r-in'><span class='co'># not equal to the naive approach</span></span>
+<span class='r-in'><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='construct_vertical.html'>construct_vertical</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>styler</span><span class='fu'>:::</span><span class='fu'><a href='add_spaces_or_newlines.html'>add_spaces</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='style_text.html'>style_text</a></span><span class='op'>(</span><span class='va'>text_in</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    x <span style='color: #00BB00;'>&lt;-</span> <span style='color: #BB0000;'>function</span><span style='color: #BBBB00;'>()</span> <span style='color: #BBBB00;'>{</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      "here</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    is"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #BBBB00;'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #0000BB; font-weight: bold;'>NULL</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #0000BB;'>1</span> <span style='color: #00BB00;'>+</span> <span style='color: #0000BB;'>1</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

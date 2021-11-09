@@ -202,7 +202,7 @@ Note that one assignment expression (such as "a = b = c") can include
 multiple assignment operators, an assignment involves just one assignment
 operator.
 For the relocation of assignment expressions that contain <code>EQ_ASSIGN</code> within
-a <em>nest</em>, we need to first find the expressions that contain <code><a href='https://rdrr.io/r/base/assignOps.html'>=</a></code> and then
+a <em>nest</em>, we need to first find the expressions that contain <code>=</code> and then
 split the <em>nest</em> into parse tables each containing one such assignment
 expression and then relocate each of them separately.
 We can't do all of them together because:</p>

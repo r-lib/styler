@@ -140,7 +140,7 @@
       <h1 data-toc-skip>Data Structures</h1>
                         <h4 class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2021-10-29</h4>
+            <h4 class="date">2021-11-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/gsoc_proposal/data_structures.Rmd"><code>vignettes/gsoc_proposal/data_structures.Rmd</code></a></small>
       <div class="hidden name"><code>data_structures.Rmd</code></div>
@@ -180,7 +180,7 @@ code &lt;- "a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"
 ## # ... with 14 more rows, and 5 more variables: lag_newlines &lt;int&gt;,
 ## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</a></code></pre>
 <p>The column <code>spaces</code> was computed from the columns <code>col1</code> and <code>col2</code>, <code>newlines</code> was computed from <code>line1</code> and <code>line2</code> respectively.</p>
-<p>So far, styler can set the spaces around the operators correctly. In our example, that involves adding spaces around <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>, so in the <code>spaces</code> column, element nine and ten must be set to one. This means that a space is added after <code>1</code> and after <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>. To get the spacing right and cover the various cases, a set of functions has to be applied to the parse table subsequently (and in the right order), which is essentially done via <code><a href="https://rdrr.io/r/base/funprog.html">Reduce()</a></code>. After all modifications on the table are completed, <code>serialize_parse_data()</code> collapses the <code>text</code> column and adds the number of spaces and line breaks specified in <code>spaces</code> and <code>newlines</code> in between the elements of <code>text</code>. If we serialize our table and don’t perform any modification, we obviously just get back what we started with.</p>
+<p>So far, styler can set the spaces around the operators correctly. In our example, that involves adding spaces around <code>+</code>, so in the <code>spaces</code> column, element nine and ten must be set to one. This means that a space is added after <code>1</code> and after <code>+</code>. To get the spacing right and cover the various cases, a set of functions has to be applied to the parse table subsequently (and in the right order), which is essentially done via <code><a href="https://rdrr.io/r/base/funprog.html">Reduce()</a></code>. After all modifications on the table are completed, <code>serialize_parse_data()</code> collapses the <code>text</code> column and adds the number of spaces and line breaks specified in <code>spaces</code> and <code>newlines</code> in between the elements of <code>text</code>. If we serialize our table and don’t perform any modification, we obviously just get back what we started with.</p>
 <pre><code>styler:::serialize_parse_data_flat(parse_table)
 
 ## [1] "a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</code></pre>
@@ -260,7 +260,7 @@ serialize(x) %&gt;% unlist
 <h2 class="hasAnchor">
 <a href="#final-remarks" class="anchor"></a>Final Remarks</h2>
 <p>Although a flat structure would possibly also allow us to solve the problem of indention, it is a less elegant and flexible solution to the problem. It would involve looking for an opening curly bracket in the parse table, set the indention level for all subsequent rows in the parse table until the next opening or closing curly bracket is hit and then intending one level further or setting indention back to where it was at the beginning of the table.</p>
-<p>Note that the vignette just addressed the question of indention caused by curly brackets and has not dealt with other operators that would trigger indention, such as <code>(</code> or <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>.</p>
+<p>Note that the vignette just addressed the question of indention caused by curly brackets and has not dealt with other operators that would trigger indention, such as <code>(</code> or <code>+</code>.</p>
 <p>[1] at commit <code>e6ddee0f510d3c9e3e22ef68586068fa5c6bc140</code></p>
 </div>
 <div class="footnotes">
