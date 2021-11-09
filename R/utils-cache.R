@@ -24,7 +24,7 @@ hash_standardize <- function(text) {
 is_cached <- function(text,
                       transformers,
                       more_specs,
-                      cache_dir = cache_dir_default()) {
+                      cache_dir = get_cache_dir()) {
   R.cache::generateCache(
     key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir
@@ -111,7 +111,7 @@ cache_make_key <- function(text, transformers, more_specs) {
 #' @keywords internal
 cache_find_path <- function(cache_name = NULL) {
   cache_name <- cache_get_or_derive_name(cache_name)
-  R.cache::getCachePath(c("styler", cache_name))
+  R.cache::getCachePath(get_cache_dir(cache_name))
 }
 
 #' Check if a cache is activated
@@ -173,7 +173,7 @@ cache_by_expression <- function(text,
 cache_write <- function(text, transformers, more_specs) {
   R.cache::generateCache(
     key = cache_make_key(text, transformers, more_specs),
-    dirs = cache_dir_default()
+    dirs = get_cache_dir()
   ) %>%
     file.create()
 }
@@ -194,8 +194,8 @@ cache_get_or_derive_name <- function(cache_name) {
   cache_name
 }
 
-cache_dir_default <- function() {
-  c("styler", cache_get_name())
+get_cache_dir <- function(cache_name = cache_get_name()) {
+  c(getOption("styler.cache_root", "styler"), cache_name)
 }
 
 

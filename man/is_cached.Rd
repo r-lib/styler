@@ -4,7 +4,7 @@
 \alias{is_cached}
 \title{Check if text is cached}
 \usage{
-is_cached(text, transformers, more_specs, cache_dir = cache_dir_default())
+is_cached(text, transformers, more_specs, cache_dir = get_cache_dir())
 }
 \arguments{
 \item{text, transformers, more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
