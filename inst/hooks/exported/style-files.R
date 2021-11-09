@@ -7,7 +7,7 @@ Options:
   --style_pkg=<style_guide_pkg>  Package where the style guide is stored [default: "styler"].
   --style_fun=<style_guide_fun>  The styling function in style_pkg [default: "tidyverse_style"].
   --no-warn-cache  Suppress the warning about a missing permanent cache.
-  --cache-root=<cache_root_> Passed to `options("styler.cache_root")` [default: "styler"].
+  --cache-root=<cache_root_> Passed to `options("styler.cache_root")` [default: "styler-perm"].
 ' -> doc
 
 if (packageVersion("precommit") < "0.1.3.9010") {
