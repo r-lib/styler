@@ -401,10 +401,15 @@
     },
     "styler": {
       "Package": "styler",
-      "Version": "1.5.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "eb62a56987abe8fa9d1de47eef53a790"
+      "Version": "1.6.2.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "styler",
+      "RemoteUsername": "r-lib",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "55d0920fcaafa0217f625b9dec491621556e76f6",
+      "Hash": "0b44de206a40a24c8065b1ebe72be129"
     },
     "sys": {
       "Package": "sys",
