@@ -46,8 +46,8 @@ if (packageVersion("styler") < "1.3.2") {
 } else {
   precommit::may_require_permanent_cache(arguments$no_warn_cache)
 }
-options('styler.cache_root' = arguments$cache_root)
-print(c('cache root set to ', arguments$cache_root))
+options("styler.cache_root" = arguments$cache_root)
+print(c("cache root set to ", arguments$cache_root))
 
 style <- eval(parse(text = paste(arguments$style_pkg, "::", arguments$style_fun)))
 tryCatch(
