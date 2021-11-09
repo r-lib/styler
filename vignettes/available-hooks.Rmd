@@ -92,7 +92,7 @@ In addition, the hook takes the following arguments that are not passed to
 ```
 
   
-* Argument `cache_root` is passed to `options()` to set `styler.cache_root`.
+* Argument `cache-root` is passed to `options()` to set `styler.cache_root`.
   Default value: `styler-perm`. The argument 
   determines the sub-directory under the {R.cache} cache directory that {styler}
   uses. If you want {styler} to auto-clean up caches older than 6 days, set this
