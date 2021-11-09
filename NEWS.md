@@ -5,6 +5,9 @@ includes switching to R based hook for `readme-rmd-render`, avoiding the
 {usethis} dependency, integration tests via GitHub Actions, auto-updates for 
 used packages, roxygen snippet generation and more.
 
+* `style-files` hook gains an argument `--cache-root` that is passed to 
+  `options(styler.cache_root = ...)` (#305).
+
 # precommit v0.1.3.9012
 
 This is a pre-release for `v0.2.0` and imposes a minimal version requirement 
