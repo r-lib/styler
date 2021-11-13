@@ -2,13 +2,14 @@
 #' @param command The command to issue. A character string of length one.
 #' @param args The command line arguments.
 #' @param ... Arguments passed to [system2()].
+#' @param wait Passed to [system2()].
 #' @return
 #' A list with:
 #' * content of stderr
 #' * content of stdout
 #' * exit status
 #' @keywords internal
-call_and_capture <- function(command, args, ...) {
+call_and_capture <- function(command, args, ..., wait = TRUE) {
   if (length(command) != 1 | !inherits(command, "character")) {
     rlang::abort("The command must be a character string of length 1.")
   }
@@ -23,7 +24,7 @@ call_and_capture <- function(command, args, ...) {
     ))
   }
   exit_status <- suppressWarnings(
-    system2(command, args, ..., stdout = stdout, stderr = stderr)
+    system2(command, args, ..., wait = wait, stdout = stdout, stderr = stderr)
   )
   stderr <- readLines(stderr)
   if (isTRUE(any(grepl("error", stderr, ignore.case = TRUE)))) {
@@ -53,15 +54,17 @@ call_and_capture <- function(command, args, ...) {
 #' ensure an executable to runs successfully) or, if the installation method was
 #' not conda, as a plain bash command.
 #' @param ... Arguments passed to the command line call `pre-commit`.
+#' @param wait Passed to [base::system2()].
 #' @keywords internal
-call_precommit <- function(...) {
+call_precommit <- function(..., wait = TRUE) {
   if (is_conda_installation()) {
     call_and_capture(
       reticulate::conda_binary(),
-      c("run", "-n", "r-precommit", path_precommit_exec(), ...)
+      c("run", "-n", "r-precommit", path_precommit_exec(), ...),
+      wait = wait
     )
   } else {
-    call_and_capture(path_precommit_exec(), c(...))
+    call_and_capture(path_precommit_exec(), c(...), wait = wait)
   }
 }
 

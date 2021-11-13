@@ -4,7 +4,7 @@
 \alias{call_and_capture}
 \title{Make a call with \code{\link[=system2]{system2()}} and capture the effects.}
 \usage{
-call_and_capture(command, args, ...)
+call_and_capture(command, args, ..., wait = TRUE)
 }
 \arguments{
 \item{command}{The command to issue. A character string of length one.}
@@ -12,6 +12,8 @@ call_and_capture(command, args, ...)
 \item{args}{The command line arguments.}
 
 \item{...}{Arguments passed to \code{\link[=system2]{system2()}}.}
+
+\item{wait}{Passed to \code{\link[=system2]{system2()}}.}
 }
 \value{
 A list with:

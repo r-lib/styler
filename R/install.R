@@ -73,12 +73,16 @@ update_impl <- function() {
 }
 
 install_repo <- function(root, install_hooks, legacy_hooks) {
+  wait_for_hook_installation <- getOption(
+    "precommit.block_install_hooks", FALSE
+  )
   withr::with_dir(root, {
     remove_usethis_readme_hook()
     out <- call_precommit(
       "install",
       if (install_hooks) "--install-hooks",
-      if (legacy_hooks == "remove") "--overwrite"
+      if (legacy_hooks == "remove") "--overwrite",
+      wait = wait_for_hook_installation
     )
     if (out$exit_status == 0) {
       if (any(grepl("Use -f to use only pre-commit.", out$stdout, fixed = TRUE))) {
@@ -102,7 +106,15 @@ install_repo <- function(root, install_hooks, legacy_hooks) {
           ))
         }
       } else {
-        cli::cli_alert_success("Sucessfully installed pre-commit for repo.")
+        if (wait_for_hook_installation) {
+          cli::cli_alert_success("Sucessfully installed pre-commit for repo.")
+        } else {
+          cli::cli_alert_info(paste0(
+            "Installing hooks in non-blocking background process.",
+            " If you experience problems or prefer a blocking process, use ",
+            '{.code options("precommit.block_install_hooks" = TRUE)}.'
+          ))
+        }
       }
     } else {
       cli::cli_alert_danger("Failed to install pre-commit for repo.")
