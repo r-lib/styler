@@ -26,6 +26,15 @@ call_and_capture <- function(command, args, ..., wait = TRUE) {
   exit_status <- suppressWarnings(
     system2(command, args, ..., wait = wait, stdout = stdout, stderr = stderr)
   )
+  # on Windows, there is no output when wait = FALSE
+  if (is_windows() && !wait) {
+    out <- list(
+      stdout = "[cannot recover stdout for Windows when R option `precommit.block_install_hooks` is FALSE]",
+      stderr = "[cannot recover stderr for Windows when R option `precommit.block_install_hooks` is FALSE]",
+      exit_status = exit_status
+    )
+    return(out)
+  }
   stderr <- readLines(stderr)
   if (isTRUE(any(grepl("error", stderr, ignore.case = TRUE)))) {
     # conda run has exit status 0 but stderr with ERROR, we need to set exit
