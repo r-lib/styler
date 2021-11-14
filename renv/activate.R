@@ -1,21 +1,17 @@
-# https://github.com/grantmcdermott/renv-rspm
-repo <- ifelse(Sys.info()[['sysname']] %in% c('Linux', 'Windows'),
-  "https://packagemanager.rstudio.com/all/latest",
-  "https://cran.rstudio.com/"
-)
-options(repos = c(RSPM = repo))
-options(renv.config.repos.override = getOption("repos"))
 
 local({
 
   # the requested version of renv
-  version <- "0.14.0"
+  version <- "0.14.0-37"
 
   # the project directory
   project <- getwd()
 
   # allow environment variable to control activation
-  activate <- Sys.getenv("RENV_ACTIVATE_PROJECT")
+  activate <- Sys.getenv("RENV_AUTOLOADER_ENABLED")
+  if (!nzchar(activate))
+    activate <- Sys.getenv("RENV_ACTIVATE_PROJECT")
+
   if (!nzchar(activate)) {
 
     # don't auto-activate when R CMD INSTALL is running
