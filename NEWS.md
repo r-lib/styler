@@ -5,12 +5,14 @@ includes switching to R based hook for `readme-rmd-render`, avoiding the
 {usethis} dependency, integration tests via GitHub Actions, auto-updates for 
 used packages, roxygen snippet generation and more. In addition:
 
+* New option `precommit.block_install_hooks` (defaults to `FALSE`) governs
+ if `use_precommit(..., install_hooks = TRUE)` should be blocking until 
+ hooks are installed or not.
 * Always sort `inst/WORDLIST` (#303).
 * rename default branch to *main* (#307).
-
-
 * `style-files` hook gains an argument `--cache-root` that is passed to 
   `options(styler.cache_root = ...)` (#305).
+
 
 # precommit v0.1.3.9012
 

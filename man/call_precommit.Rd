@@ -4,10 +4,12 @@
 \alias{call_precommit}
 \title{Call pre-commit}
 \usage{
-call_precommit(...)
+call_precommit(..., wait = TRUE)
 }
 \arguments{
 \item{...}{Arguments passed to the command line call \code{pre-commit}.}
+
+\item{wait}{Passed to \code{\link[base:system2]{base::system2()}}.}
 }
 \description{
 Either via \verb{conda run} (because conda env needs to be activated in general to

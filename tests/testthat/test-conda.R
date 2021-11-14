@@ -54,6 +54,7 @@ if (!on_cran()) {
       git2r::init()
       usethis::proj_set(".")
       usethis::use_readme_rmd(open = FALSE)
+      withr::local_options(precommit.block_install_hooks = TRUE)
 
       # usethis hook is removed without error
       expect_message(
@@ -150,6 +151,7 @@ if (!on_cran()) {
       expect_message(install_precommit(), "already installed")
     }
     tempdir <- local_test_setup(use_precommit = FALSE, quiet = FALSE, install_hooks = FALSE)
+    withr::local_options(precommit.block_install_hooks = TRUE)
     withr::with_dir(
       tempdir,
       {
