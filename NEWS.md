@@ -12,7 +12,8 @@ used packages, roxygen snippet generation and more. In addition:
 * rename default branch to *main* (#307).
 * `style-files` hook gains an argument `--cache-root` that is passed to 
   `options(styler.cache_root = ...)` (#305).
-
+* Use dev version of {lintr} to reduce total dependencies from 71 to 59 that
+  brings down install time.
 
 # precommit v0.1.3.9012
 
