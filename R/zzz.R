@@ -1,5 +1,4 @@
 .onLoad <- function(libname, pkgname) {
-  backports::import(pkgname, "trimws")
   op <- options()
   op.styler <- list(
     styler.addins_style_transformer = "styler::tidyverse_style()",
