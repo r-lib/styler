@@ -30,7 +30,6 @@ Imports:
     tibble (>= 1.4.2),
     tools,
     withr (>= 1.0.0),
-    xfun (>= 0.1)
 Suggests: 
     data.tree (>= 0.1.6),
     digest,

@@ -11,6 +11,7 @@
 * Fix argument name `filetype` in Example for `style_dir()` (#855).
 * Bump minimal R requirement to 3.4 in line with the [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which 
   allowed to remove the dependency at {backports} and some exception handling.
+* Remove dependency on {xfun} (#866).
 
 # styler 1.6.2
 
