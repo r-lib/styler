@@ -36,8 +36,8 @@ ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
       "options(styler.cache_root = \"styler\")\n\nin your `.Rprofile`. This ",
       "message will only be displayed once in a while.\n"
     ))
+    options(styler.cache_root = "styler")
   }
-  options(styler.cache_root = "styler")
 }
 
 remove_old_cache_files <- function() {
