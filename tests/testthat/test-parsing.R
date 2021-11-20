@@ -21,8 +21,8 @@ test_that("repreated parsing solves wrong parent assignment", {
     "R -q -e \"styler::cache_deactivate(); styler::style_file(\\\"", path_temp, "\\\")\""
   )
   calls_sys(sys_call, intern = FALSE, ignore.stdout = TRUE, ignore.stderr = TRUE)
-  ref <- xfun::read_utf8(testthat_file("parsing", "repeated_parsing-out.R"))
-  result <- xfun::read_utf8(path_temp)
+  ref <- read_utf8_bare(testthat_file("parsing", "repeated_parsing-out.R"))
+  result <- read_utf8_bare(path_temp)
   expect_equal(ref, result)
   unlink(dir)
 })

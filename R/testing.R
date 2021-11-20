@@ -110,7 +110,7 @@ transform_and_check <- function(in_item, out_item,
                                 write_tree = NA,
                                 out_tree = "_tree", ...) {
   write_tree <- set_arg_write_tree(write_tree)
-  read_in <- xfun::read_utf8(in_item)
+  read_in <- read_utf8_bare(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
       write.table(out_tree,
