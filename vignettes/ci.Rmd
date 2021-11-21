@@ -1,0 +1,59 @@
+---
+title: "Continuous Integration"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Continuous Integration}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Setting up CI/CD
+
+When initializing pre-commit in your repo with `precommit::use_precommit()`, 
+you can specify the Continuous integration provider with `ci = "native"` if you 
+want to use [pre-commit.ci](https://pre-commit.ci) or `ci = "gha"` if you want 
+to use GitHub Actions. For existing repos, see below.
+
+# Comparison 
+
+Next, we quickly introduce the two options:
+
+## pre-commit.ci
+
+**Pros:**
+
+- by the creator of pre-commit. Certain CI settings in `.pre-commit-config.yaml`
+  [are supported](https://pre-commit.ci).
+- very fast.
+- will at some point also be supported for repos hosted outside of GitHub.
+- No maintenance effort for you.
+- No additional file in the repo.
+
+**Cons:**
+
+- You need to authenticate the pre-commit.ci App in GitHub. 
+- System dependencies are not supported. In particular, since {roxygen2} loads
+  your package for the roxygenize hook, this hook will fail if your package has
+  system dependencies that are not shipped with the package.
+  
+## GitHub Actions
+
+**Pros:**
+
+- more flexible in how you run `pre-commit`.
+- No new authentication needed. 
+- If your package has system dependencies and you want to use the roxygenize 
+  hook, you can install them.
+  
+**Cons:**
+
+- You need to maintain the workflow file, e.g. when GitHub changes the syntax, 
+  you need to adapt.
+- You'll have one additional file per provider (e.g. GitHub, Gitlab).
+
+
+# Migrating existent repos
+
+We provide helper functionality to set up CI/CD. Use `precommit::use_ci("gha")` 
+for GitHub Actions or `precommit::use_ci("native")` for pre-commit.ci 
+respectively.

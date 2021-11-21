@@ -1,0 +1,81 @@
+name: pre-commit
+on:
+  push:
+    branches-ignore:
+      - 'master'
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-18.04
+    if: >-
+      !contains(github.event.head_commit.message, 'ci skip') &&
+      (
+        startsWith(github.ref, 'refs/heads') ||
+        github.event.pull_request.draft == false
+      )
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq || (sudo rm /etc/apt/sources.list.d/* && sudo apt-get update -yqq)
+          sudo apt-get install -y libcurl4-openssl-dev
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+
+      - name: Set up environment
+        run: |
+          echo "UBUNTU_VERSION=`grep DISTRIB_RELEASE /etc/lsb-release | sed 's/.*=//g'`" >> $GITHUB_ENV
+          mkdir -p .local/R/site-packages
+          echo "R_LIBS_USER=`pwd`/.local/R/site-packages" >> $GITHUB_ENV
+      - name: Cache R packages
+        uses: actions/cache@v2
+        if: startsWith(runner.os, 'Linux')
+        with:
+          path: ${{env.R_LIBS_USER}}
+          key: precommit-${{env.UBUNTU_VERSION}}-renv-${{ hashFiles('.pre-commit.r_requirements.txt') }}-
+          restore-keys: |
+            precommit-${{env.UBUNTU_VERSION}}-renv-
+      - name: Install R packages
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+          renv::install(scan(".pre-commit.r_requirements.txt", what=character(), sep="\n"))
+        shell: Rscript {0}
+
+      - name: Cache pre-commit
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}-
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v2.0.0
+
+      - name: Commit files
+        if: failure() && startsWith(github.ref, 'refs/heads')
+        run: |
+          if [[ `git status --porcelain --untracked-files=no` ]]; then
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git checkout -- .github/workflows
+            git commit -m "pre-commit" -a
+          fi
+      - name: Push changes
+        if: failure() && startsWith(github.ref, 'refs/heads')
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

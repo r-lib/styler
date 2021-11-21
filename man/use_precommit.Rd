@@ -10,6 +10,7 @@ use_precommit(
   legacy_hooks = "forbid",
   open = rstudioapi::isAvailable(),
   install_hooks = TRUE,
+  ci = getOption("precommit.ci", "native"),
   root = here::here()
 )
 }
@@ -33,6 +34,14 @@ RStudio. Otherwise, we recommend manually inspecting the file.}
 
 \item{install_hooks}{Whether to install environments for all available hooks.
 If \code{FALSE}, environments are installed with first commit.}
+
+\item{ci}{Specifies which continuous integration service to use. See
+\code{vignette("ci", package = "precommit")} for details. Defaults to
+\code{getOption("precommit.ci", "native")}, which is set to
+\code{"native"} on package loading (if unset). \code{"native"} sets up
+\href{https://pre-commit.ci}{pre-commit.ci}. Alternatively, \code{"gha"} can be used
+to set up \href{https://github.com/features/actions}{GitHub Actions}. Set value
+to \code{NULL} if you don't want to use a continuous integration.}
 
 \item{root}{The path to the root directory of your project.}
 }

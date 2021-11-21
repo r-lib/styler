@@ -3,6 +3,7 @@
 #' This function sets up pre-commit for your git repo.
 #' @param install_hooks Whether to install environments for all available hooks.
 #'   If `FALSE`, environments are installed with first commit.
+#' @inheritParams use_ci
 #' @param legacy_hooks How to treat hooks already in the repo which are not
 #'   managed by pre-commit. "forbid", the default, will cause  `use_precommit()`
 #'   to fail if there are such hooks. "allow" will run these along with
@@ -39,6 +40,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
                           legacy_hooks = "forbid",
                           open = rstudioapi::isAvailable(),
                           install_hooks = TRUE,
+                          ci = getOption("precommit.ci", "native"),
                           root = here::here()) {
   rlang::arg_match(legacy_hooks, c("forbid", "allow", "remove"))
   assert_is_installed()
@@ -52,8 +54,59 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
   install_repo(root, install_hooks, legacy_hooks)
   if (open) {
     open_config(root)
+    if (ci == "native") {
+      use_ci(ci)
+    }
+  } else {
+    if (ci == "gha") {
+      use_ci(ci, force = force, root = root)
+    }
   }
+
   invisible(NULL)
+}
+
+
+#' Use continuous integration with pre-commit
+#'
+#' Sets up continuous integration, or prompts the user to do it manually.
+#'
+#' @param ci Specifies which continuous integration service to use. See
+#'   `vignette("ci", package = "precommit")` for details. Defaults to
+#'   `getOption("precommit.ci", "native")`, which is set to
+#'   `"native"` on package loading (if unset). `"native"` sets up
+#'   [pre-commit.ci](https://pre-commit.ci). Alternatively, `"gha"` can be used
+#'   to set up [GitHub Actions](https://github.com/features/actions). Set value
+#'   to `NULL` if you don't want to use a continuous integration.
+#' @inheritParams fallback_doc
+#' @export
+use_ci <- function(ci = getOption("precommit.ci", "native"),
+                   open = interactive(), root = here::here()) {
+  if (is.na(ci)) {
+    return()
+  } else if (ci == "gha") {
+    dest <- fs::path(root, ".github/workflows/pre-commit.yaml")
+    fs::dir_create(fs::path_dir(dest))
+    fs::file_copy(
+      system.file("pre-commit-gha.yaml", package = "precommit"),
+      dest,
+      overwrite = force
+    )
+    cli::cli_alert_success(paste0(
+      "Added GitHub Action template to ",
+      "{.code .github/workflows/pre-commit.yaml}. Pre-commit hooks will ",
+      "run on pull requests. If workflow fails, please file an issue in ",
+      "{.code https://github.com/lorenzwalthert/precommit}."
+    ))
+  } else if (ci == "native") {
+    cli::cli_ul("Sign in with GitHub to authenticate {.url https://pre-commit.ci}.")
+    Sys.sleep(2)
+    browseURL("https://pre-commit.ci")
+  } else {
+    rlang::abort(
+      'Argument `ci` must be one of `"native"` (default), `"gha"` or `NULL`.'
+    )
+  }
 }
 
 #' Auto-update your hooks

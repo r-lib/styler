@@ -5,6 +5,12 @@ includes switching to R based hook for `readme-rmd-render`, avoiding the
 {usethis} dependency, integration tests via GitHub Actions, auto-updates for 
 used packages, roxygen snippet generation and more. In addition:
 
+* `use_precommit()` gains a `ci` argument, defaulting to `"native"`, which will
+  guide the user to set up continuous integration of the hooks with either 
+  [pre-commit.ci](https://pre-commit.ci) or 
+  [GitHub Actions](https://github.com/features/actions). New exported 
+  function `use_ci(ci = "native")` can be used to migrate existing repos. The
+  default behavior for `ci` is governed by the R option `precommit.ci`.
 * `use_precommit(..., install_hooks = TRUE)` is no longer blocking by default.
   New option `precommit.block_install_hooks` (defaults to `FALSE`) governs the
   behavior (#312).
