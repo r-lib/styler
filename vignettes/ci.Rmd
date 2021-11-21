@@ -16,7 +16,11 @@ to use GitHub Actions. For existing repos, see below.
 
 # Comparison 
 
-Next, we quickly introduce the two options:
+Next, we quickly introduce the two options. We recommend 
+[pre-commit.ci](https://pre-commit.ci) unless your package has system 
+dependencies that are not shipped with the R package on Linux **and** you want
+to use the [roxygenize hook](https://lorenzwalthert.github.io/precommit/dev/articles/available-hooks.html#roxygenize-1).
+
 
 ## pre-commit.ci
 
@@ -40,15 +44,17 @@ Next, we quickly introduce the two options:
 
 **Pros:**
 
-- more flexible in how you run `pre-commit`.
+- more flexible in how you run `pre-commit` if you need it.
+- out-of-the-box action is in [maintenance only mode](https://github.com/pre-commit/action) 
 - No new authentication needed. 
 - If your package has system dependencies and you want to use the roxygenize 
   hook, you can install them.
   
 **Cons:**
 
-- You need to maintain the workflow file, e.g. when GitHub changes the syntax, 
-  you need to adapt.
+- You need to maintain the workflow file with a lot of boilerplate code and 
+  when GitHub changes the syntax, you need to adapt it to prevent failing 
+  builds.
 - You'll have one additional file per provider (e.g. GitHub, Gitlab).
 
 

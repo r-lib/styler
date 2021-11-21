@@ -54,9 +54,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
   install_repo(root, install_hooks, legacy_hooks)
   if (open) {
     open_config(root)
-    if (ci == "native") {
-      use_ci(ci)
-    }
+    use_ci(ci)
   } else {
     if (ci == "gha") {
       use_ci(ci, force = force, root = root)

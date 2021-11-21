@@ -45,15 +45,9 @@ jobs:
         if: startsWith(runner.os, 'Linux')
         with:
           path: ${{env.R_LIBS_USER}}
-          key: precommit-${{env.UBUNTU_VERSION}}-renv-${{ hashFiles('.pre-commit.r_requirements.txt') }}-
+          key: precommit-${{env.UBUNTU_VERSION}}-renv-
           restore-keys: |
             precommit-${{env.UBUNTU_VERSION}}-renv-
-      - name: Install R packages
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
-          renv::install(scan(".pre-commit.r_requirements.txt", what=character(), sep="\n"))
-        shell: Rscript {0}
 
       - name: Cache pre-commit
         uses: actions/cache@v2
@@ -68,7 +62,7 @@ jobs:
         if: failure() && startsWith(github.ref, 'refs/heads')
         run: |
           if [[ `git status --porcelain --untracked-files=no` ]]; then
-            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
             git checkout -- .github/workflows
             git commit -m "pre-commit" -a
