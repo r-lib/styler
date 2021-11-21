@@ -79,7 +79,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 #' @inheritParams fallback_doc
 #' @export
 use_ci <- function(ci = getOption("precommit.ci", "native"),
-                   open = interactive(), root = here::here()) {
+                   open = interactive(), force = FALSE, root = here::here()) {
   if (is.na(ci)) {
     return()
   } else if (ci == "gha") {
