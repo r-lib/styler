@@ -28,6 +28,7 @@ to use the [roxygenize hook](https://lorenzwalthert.github.io/precommit/dev/arti
 
 - by the creator of pre-commit. Certain CI settings in `.pre-commit-config.yaml`
   [are supported](https://pre-commit.ci).
+- actively developed.
 - very fast.
 - will at some point also be supported for repos hosted outside of GitHub.
 - No maintenance effort for you.
@@ -45,13 +46,15 @@ to use the [roxygenize hook](https://lorenzwalthert.github.io/precommit/dev/arti
 **Pros:**
 
 - more flexible in how you run `pre-commit` if you need it.
-- out-of-the-box action is in [maintenance only mode](https://github.com/pre-commit/action) 
 - No new authentication needed. 
 - If your package has system dependencies and you want to use the roxygenize 
   hook, you can install them.
   
 **Cons:**
 
+- out-of-the-box action is in 
+  [maintenance only mode](https://github.com/pre-commit/action) and less 
+  feature complete than [pre-commit.ci](https://pre-commit.ci).
 - You need to maintain the workflow file with a lot of boilerplate code and 
   when GitHub changes the syntax, you need to adapt it to prevent failing 
   builds.
