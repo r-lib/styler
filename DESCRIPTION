@@ -16,8 +16,9 @@ Description: Pretty-prints R code without changing the user's formatting
 License: MIT + file LICENSE
 URL: https://github.com/r-lib/styler, https://styler.r-lib.org
 BugReports: https://github.com/r-lib/styler/issues
+Depends:
+    R (>= 3.4.0)
 Imports: 
-    backports (>= 1.1.0),
     cli (>= 1.1.0),
     glue,
     magrittr (>= 2.0.0),
@@ -29,7 +30,6 @@ Imports:
     tibble (>= 1.4.2),
     tools,
     withr (>= 1.0.0),
-    xfun (>= 0.1)
 Suggests: 
     data.tree (>= 0.1.6),
     digest,

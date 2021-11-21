@@ -232,7 +232,7 @@ parse_transform_serialize_r <- function(text,
     return("")
   }
   transformers <- transformers_drop(
-    if (getRversion() < 3.4) text else pd_nested$text[!pd_nested$is_cached],
+    pd_nested$text[!pd_nested$is_cached],
     transformers
   )
 

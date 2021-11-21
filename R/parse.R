@@ -127,7 +127,6 @@ add_id_and_short <- function(pd) {
 #' @importFrom magrittr or
 #' @keywords internal
 ensure_correct_txt <- function(pd, text) {
-  ensure_valid_pd(pd)
   is_problematic_text <- or(
     is_insufficiently_parsed_string(pd),
     is_insufficiently_parsed_number(pd)
@@ -173,30 +172,6 @@ ensure_correct_txt <- function(pd, text) {
     arrange_pos_id()
 }
 
-#' Ensure that the parse data is valid
-#'
-#' Test whether all non-terminals have at least one child and throw an error
-#' otherwise. As this is check is rather expensive, it is only
-#' carried out for configurations we have good reasons to expect problems.
-#' @param pd A parse table.
-#' @importFrom rlang abort
-#' @keywords internal
-ensure_valid_pd <- function(pd) {
-  if (getRversion() < "3.2") {
-    non_terminals <- pd %>%
-      filter(terminal == FALSE)
-    valid_pd <- non_terminals$id %>%
-      map_lgl(~ .x %in% pd$parent) %>%
-      all()
-    if (!valid_pd) {
-      abort(paste(
-        "The parse data is not valid and the problem is most likely related",
-        "to the parser in base R. Please install R >= 3.2 and try again."
-      ))
-    }
-  }
-  TRUE
-}
 
 #' Identify strings that were not fully parsed
 #'

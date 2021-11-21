@@ -42,7 +42,7 @@ transform_utf8_one <- function(path, fun, dry) {
         } else if (dry == "on") {
           # don't do anything
         } else if (dry == "off") {
-          xfun::write_utf8(new, path)
+          write_utf8(new, path)
         } else {
           # not implemented
         }
@@ -113,4 +113,11 @@ read_utf8_bare <- function(con, warn = TRUE) {
 #' @keywords internal
 invalid_utf8 <- function(x) {
   which(!is.na(x) & is.na(iconv(x, "UTF-8", "UTF-8")))
+}
+
+#' Drop-in replacement for `xfun::write_utf8()`
+#' @keywords internal
+write_utf8 <- function(text, con, ...) {
+  withr::local_options(encoding = "native.enc")
+  writeLines(enc2utf8(text), con, ..., useBytes = TRUE)
 }

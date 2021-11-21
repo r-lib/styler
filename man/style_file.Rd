@@ -97,7 +97,7 @@ See section 'Warning' for a good strategy to apply styling safely.
 
 \examples{
 file <- tempfile("styler", fileext = ".R")
-xfun::write_utf8("1++1", file)
+writeLines("1++1", file)
 
 # the following is identical (because of ... and defaults),
 # but the first is most convenient:
@@ -110,7 +110,7 @@ style_file(file, scope = "indention", strict = TRUE)
 # name levels explicitly to not style less invasive levels
 style_file(file, scope = I(c("tokens", "spaces")), strict = TRUE)
 
-xfun::read_utf8(file)
+readLines(file)
 unlink(file)
 }
 \seealso{
