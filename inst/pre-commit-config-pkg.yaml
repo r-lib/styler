@@ -30,6 +30,8 @@ repos:
           (.*/|)\.Renviron|
           (.*/|)\.Rprofile|
           (.*/|)\.travis\.yml|
+          (.*/|)\.gitlab-ci.yml|
+          (.*/|)\_pkgdown.yml|
           (.*/|)appveyor\.yml|
           (.*/|)NAMESPACE|
           (.*/|)renv/settings\.dcf|
