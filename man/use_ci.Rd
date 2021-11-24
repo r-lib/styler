@@ -7,6 +7,7 @@
 use_ci(
   ci = getOption("precommit.ci", "native"),
   open = interactive(),
+  force = FALSE,
   root = here::here()
 )
 }
