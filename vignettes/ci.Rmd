@@ -18,8 +18,9 @@ to use GitHub Actions. For existing repos, see below.
 
 Next, we quickly introduce the two options. We recommend 
 [pre-commit.ci](https://pre-commit.ci) unless your package has system 
-dependencies that are not shipped with the R package on Linux **and** you want
-to use the [roxygenize hook](https://lorenzwalthert.github.io/precommit/dev/articles/available-hooks.html#roxygenize-1).
+dependencies that are not shipped with the R package on Linux 
+**and at the same time** you want to use the 
+[roxygenize hook](https://lorenzwalthert.github.io/precommit/dev/articles/available-hooks.html#roxygenize-1).
 
 
 ## pre-commit.ci
@@ -45,7 +46,7 @@ to use the [roxygenize hook](https://lorenzwalthert.github.io/precommit/dev/arti
 
 **Pros:**
 
-- more flexible in how you run `pre-commit` if you need it.
+- more control over environment, e.g. system dependencies.
 - No new authentication needed. 
 - If your package has system dependencies and you want to use the roxygenize 
   hook, you can install them.
@@ -54,7 +55,11 @@ to use the [roxygenize hook](https://lorenzwalthert.github.io/precommit/dev/arti
 
 - out-of-the-box action is in 
   [maintenance only mode](https://github.com/pre-commit/action) and less 
-  feature complete than [pre-commit.ci](https://pre-commit.ci).
+  feature complete than [pre-commit.ci](https://pre-commit.ci). For example, 
+  if your hooks fail on first attempt, the corrections are committed and pushed, 
+  but they won't trigger a new CI and you can't make them do it without 
+  [exposing credentials](https://github.com/pre-commit/action/pull/49). The only
+  way is to close and re-open the PR.
 - You need to maintain the workflow file with a lot of boilerplate code and 
   when GitHub changes the syntax, you need to adapt it to prevent failing 
   builds.
