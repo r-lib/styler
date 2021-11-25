@@ -76,10 +76,12 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 #'   [pre-commit.ci](https://pre-commit.ci). Alternatively, `"gha"` can be used
 #'   to set up [GitHub Actions](https://github.com/features/actions). Set value
 #'   to `NULL` if you don't want to use a continuous integration.
+#' @param force Whether or not to overwrite an existing ci config file (only
+#'   relevant for `ci = "gha"`).
 #' @inheritParams fallback_doc
 #' @export
 use_ci <- function(ci = getOption("precommit.ci", "native"),
-                   open = interactive(), force = FALSE, root = here::here()) {
+                   force = FALSE, root = here::here()) {
   if (is.na(ci)) {
     return()
   } else if (ci == "gha") {
@@ -99,7 +101,7 @@ use_ci <- function(ci = getOption("precommit.ci", "native"),
   } else if (ci == "native") {
     cli::cli_ul("Sign in with GitHub to authenticate {.url https://pre-commit.ci}.")
     Sys.sleep(2)
-    browseURL("https://pre-commit.ci")
+    utils::browseURL("https://pre-commit.ci")
   } else {
     rlang::abort(
       'Argument `ci` must be one of `"native"` (default), `"gha"` or `NULL`.'

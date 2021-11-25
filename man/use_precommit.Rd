@@ -21,7 +21,8 @@ config file will be hard-copied into \code{root}. If \code{NULL}, we check if
 \code{\link[rprojroot:find_root_file]{rprojroot::find_package_root_file()}}, and resort to an appropriate default
 config. See section 'Copying an existing config file'.}
 
-\item{force}{Whether to replace an existing config file.}
+\item{force}{Whether or not to overwrite an existing ci config file (only
+relevant for \code{ci = "gha"}).}
 
 \item{legacy_hooks}{How to treat hooks already in the repo which are not
 managed by pre-commit. "forbid", the default, will cause  \code{use_precommit()}

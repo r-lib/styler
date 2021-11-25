@@ -6,7 +6,6 @@
 \usage{
 use_ci(
   ci = getOption("precommit.ci", "native"),
-  open = interactive(),
   force = FALSE,
   root = here::here()
 )
@@ -19,6 +18,9 @@ use_ci(
 \href{https://pre-commit.ci}{pre-commit.ci}. Alternatively, \code{"gha"} can be used
 to set up \href{https://github.com/features/actions}{GitHub Actions}. Set value
 to \code{NULL} if you don't want to use a continuous integration.}
+
+\item{force}{Whether or not to overwrite an existing ci config file (only
+relevant for \code{ci = "gha"}).}
 
 \item{root}{The path to the root directory of your project.}
 }
