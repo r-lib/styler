@@ -3,6 +3,7 @@ on:
   push:
     branches-ignore:
       - 'master'
+      - 'main'
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 
@@ -23,41 +24,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
-          sudo apt-get update -qq || (sudo rm /etc/apt/sources.list.d/* && sudo apt-get update -yqq)
-          sudo apt-get install -y libcurl4-openssl-dev
+          # your system installation code here
+          # sudo apt-get install -y libcurl4-openssl-dev
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: "3.8"
           architecture: "x64"
-
-      - name: Set up environment
-        run: |
-          echo "UBUNTU_VERSION=`grep DISTRIB_RELEASE /etc/lsb-release | sed 's/.*=//g'`" >> $GITHUB_ENV
-          mkdir -p .local/R/site-packages
-          echo "R_LIBS_USER=`pwd`/.local/R/site-packages" >> $GITHUB_ENV
-      - name: Cache R packages
-        uses: actions/cache@v2
-        if: startsWith(runner.os, 'Linux')
-        with:
-          path: ~/.local/share/renv
-          key: precommit-${{env.UBUNTU_VERSION}}-renv-
-          restore-keys: |
-            precommit-${{env.UBUNTU_VERSION}}-renv-
-
-      - name: Install R packages
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
-        shell: Rscript {0}
-
       - name: Run pre-commit
-        uses: pre-commit/action@v2.0.0
-
+        uses: pre-commit/action@v2.0.3
       - name: Commit files
         if: failure() && startsWith(github.ref, 'refs/heads')
         run: |
@@ -73,3 +51,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+    env:
+      RENV_CONFIG_CACHE_ENABLED: FALSE
