@@ -25,13 +25,13 @@ repos:
           .*\.Rproj|
           .*\.sh|
           (.*/|)\.gitignore|
+          (.*/|)\.gitlab-ci.yml|
+          (.*/|)\.lintr|
           (.*/|)\.pre-commit-.*|
           (.*/|)\.Rbuildignore|
           (.*/|)\.Renviron|
           (.*/|)\.Rprofile|
           (.*/|)\.travis\.yml|
-          (.*/|)\.gitlab-ci.yml|
-          (.*/|)\_pkgdown.yml|
           (.*/|)appveyor\.yml|
           (.*/|)NAMESPACE|
           (.*/|)renv/settings\.dcf|
