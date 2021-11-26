@@ -21,7 +21,7 @@ repos:
           .*\.Rproj|
           .*\.sh|
           (.*/|)\.gitignore|
-          (.*/|)\.gitlab-ci.yml|
+          (.*/|)\.gitlab-ci\.yml|
           (.*/|)\.lintr|
           (.*/|)\.pre-commit-.*|
           (.*/|)\.Rbuildignore|
