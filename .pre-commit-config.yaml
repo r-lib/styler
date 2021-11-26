@@ -134,7 +134,7 @@ repos:
         -    fs
     -   id: spell-check-exclude-to-config
         name: spell-check-exclude-to-config
-        entry: Rscript inst/hooks/local/spell-check-exclude-to-config.R
+        entry: Rscript inst/hooks/local/spell-check-exclude-identical.R
         language: r
         stages: [commit, push]
         additional_dependencies:
