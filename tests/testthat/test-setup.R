@@ -1,5 +1,7 @@
 test_that("snippet generation works", {
-  local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE)
+  local_test_setup(
+    git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
+  )
   usethis::use_package("styler")
   usethis::use_package("R", "Depends", "3.6.0")
   expect_warning(
@@ -17,4 +19,22 @@ test_that("snippet generation works", {
   expect_match(
     out, "    -   id: roxygenize\n.*        -    styler\n        -    testthat\n$",
   )
+})
+
+
+test_that("GitHub Action CI setup works", {
+  expect_error(use_ci("stuff"), "must be one of")
+  local_test_setup(
+    git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
+  )
+  use_ci("gha", root = getwd())
+  expect_true(fs::file_exists(".github/workflows/pre-commit.yaml"))
+})
+
+test_that("Pre-commit CI setup works", {
+  local_test_setup(
+    git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
+  )
+  use_ci(root = getwd())
+  expect_false(fs::file_exists(".github/workflows/pre-commit.yaml"))
 })
