@@ -31,6 +31,8 @@ jobs:
           # Windows
           - {os: windows-latest, r: 'release', installation_method: 'pip'}
           - {os: windows-latest, r: 'release', installation_method: 'conda'}
+          - {os: windows-latest, r: 'devel',   installation_method: 'conda'}
+
           # Linux
           - {os: ubuntu-18.04,   r: 'release', installation_method: 'pip', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", http-user-agent: "R/4.0.0 (ubuntu-18.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
           - {os: ubuntu-18.04,   r: 'release', installation_method: 'conda', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", http-user-agent: "R/4.0.0 (ubuntu-18.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
