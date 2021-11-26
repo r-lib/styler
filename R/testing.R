@@ -259,7 +259,7 @@ local_test_setup <- function(git = TRUE,
     git2r::config(
       user.name = "testthat",
       user.email = "agent@testthat.com",
-      core.autocrlf = TRUE
+      core.autocrlf = "true"
     )
     withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
   }
