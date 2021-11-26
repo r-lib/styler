@@ -257,7 +257,7 @@ local_test_setup <- function(git = TRUE,
   if (git) {
     git2r::init()
     git2r::config(
-      user.name = "testthat", 
+      user.name = "testthat",
       user.email = "agent@testthat.com",
       core.autocrlf = TRUE
     )
