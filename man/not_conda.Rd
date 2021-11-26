@@ -11,3 +11,4 @@ not_conda()
 The testing environment does not use a conda environment if the env variable
 PRECOMMIT_INSTALLATION_METHOD is not 'conda'.
 }
+\keyword{internal}

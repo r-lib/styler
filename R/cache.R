@@ -1,4 +1,5 @@
 #' Check if the R cache is persistent
+#' @keywords internal
 has_persistent_R.cache <- function() {
   temp_dirs <- path_if_exist(
     fs::path_norm(fs::path_dir(tempdir())),

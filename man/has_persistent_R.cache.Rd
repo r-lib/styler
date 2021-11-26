@@ -9,3 +9,4 @@ has_persistent_R.cache()
 \description{
 Check if the R cache is persistent
 }
+\keyword{internal}
