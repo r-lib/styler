@@ -16,6 +16,7 @@ used packages, roxygen snippet generation and more. In addition:
   brings down install time.
 * Use LF line endings in git config to ensure passing tests on Windows for R 
   devel (#321).
+* `.lintr` and `.gitlab-ci.yml` are not ignored in the spell check hook (#317).
 
 # precommit v0.1.3.9012
 
