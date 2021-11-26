@@ -5,15 +5,17 @@ includes switching to R based hook for `readme-rmd-render`, avoiding the
 {usethis} dependency, integration tests via GitHub Actions, auto-updates for 
 used packages, roxygen snippet generation and more. In addition:
 
-* New option `precommit.block_install_hooks` (defaults to `FALSE`) governs
- if `use_precommit(..., install_hooks = TRUE)` should be blocking until 
- hooks are installed or not.
+* `use_precommit(..., install_hooks = TRUE)` is no longer blocking by default.
+  New option `precommit.block_install_hooks` (defaults to `FALSE`) governs the
+  behavior (#312).
 * Always sort `inst/WORDLIST` (#303).
 * rename default branch to *main* (#307).
 * `style-files` hook gains an argument `--cache-root` that is passed to 
   `options(styler.cache_root = ...)` (#305).
 * Use dev version of {lintr} to reduce total dependencies from 71 to 59 that
   brings down install time.
+* Use LF line endings in git config to ensure passing tests on Windows for R 
+  devel (#321).
 
 # precommit v0.1.3.9012
 
