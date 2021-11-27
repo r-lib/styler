@@ -60,9 +60,9 @@ repos:
         entry: inst/hooks/local/hooks-config-to-inst.R
         language: script
         stages: [commit, push]
-    -   id: spell-check-exclude-to-config
-        name: spell-check-exclude-to-config
-        entry: inst/hooks/local/spell-check-exclude-to-config.R
+    -   id: spell-check-exclude-identical
+        name: spell-check-exclude-identical
+        entry: inst/hooks/local/spell-check-exclude-identical.R
         language: script
         stages: [commit, push]
     -   id: forbid-to-commit
