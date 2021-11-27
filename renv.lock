@@ -303,16 +303,16 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.14.0-48",
+      "Version": "0.14.0-37",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
+      "RemoteUsername": "lorenzwalthert",
       "RemoteRepo": "renv",
-      "RemoteUsername": "rstudio",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "5bc3c36649925810eaf656645319819307987a00",
-      "Hash": "07a1923dd6771cd4ddb9d24b90f344cb"
-    },
+      "RemoteRef": "issue-837",
+      "RemoteSha": "16361211dee23cefb29d06daabfd84a0ac59b1bf",
+      "Hash": "1b7628b978f0ca61b746c9dd7e2a0494"
+     },
     "rex": {
       "Package": "rex",
       "Version": "1.2.0",
