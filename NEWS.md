@@ -9,6 +9,7 @@
   (also used by {precommit}).
 * rename default branch to main (#859).
 * Fix argument name `filetype` in Example for `style_dir()` (#855).
+* ensure a trailing blank line also if the input is cached (#867).
 * Bump minimal R requirement to 3.4 in line with the [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which 
   allowed to remove the dependency at {backports} and some exception handling.
 * Remove dependency on {xfun} (#866).
