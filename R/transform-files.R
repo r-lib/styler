@@ -88,7 +88,7 @@ make_transformer <- function(transformers,
   assert_transformers(transformers)
 
   function(text) {
-    text <- trimws(text, which = "right")
+    text <- ensure_last_n_empty(trimws(text, which = "right"), n = 0L)
     should_use_cache <- cache_is_activated()
 
     if (should_use_cache) {
