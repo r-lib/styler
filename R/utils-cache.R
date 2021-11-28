@@ -1,13 +1,13 @@
 #' Standardize text for hashing
 #'
 #' Make sure text after styling results in the same hash as text before styling
-#' if it is indeed identical.
+#' if it is indeed identical. This function expects trailing blank lines in
+#' `text` were removed prior to passing it to this function.
 #' @param text A character vector.
 #' @keywords internal
 hash_standardize <- function(text) {
   text %>%
     convert_newlines_to_linebreaks() %>%
-    ensure_last_n_empty() %>%
     enc2utf8() %>%
     paste0(collapse = "\n") %>%
     list()

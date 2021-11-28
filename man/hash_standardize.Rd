@@ -11,6 +11,7 @@ hash_standardize(text)
 }
 \description{
 Make sure text after styling results in the same hash as text before styling
-if it is indeed identical.
+if it is indeed identical. This function expects trailing blank lines in
+\code{text} were removed prior to passing it to this function.
 }
 \keyword{internal}
