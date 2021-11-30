@@ -1,8 +1,7 @@
 # General
 
 Before making a pull request, discuss your ideas in an issue. This repo is
-experimental.
-This repo uses the [tic](https://github.com/ropenscilabs/tic) package for CI.
+maturing.
 
 # Adding new hooks
 
