@@ -63,7 +63,7 @@ depending on whether or not you previously used pre-commit.
   prompted to add them if they are missing, 
   `precommit::snippet_generate("additional-deps-roxygenize")` generates
   the code you can copy/paste (#247, #248, #249).
-
+- the `parsable-R` hook can now also parse `.Rmd` files (#325).
 - In order to avoid multiple installations of the pre-commit framework, a 
   warning is issued if multiple are found so the user can remove them (#266, 
   #273, #277, #278).

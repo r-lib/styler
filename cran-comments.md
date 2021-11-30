@@ -1,7 +1,8 @@
 ## Test environments
 
-* ubuntu 18.04 (on GitHub Actions): R 4.0.3
-* Windows (on GitHub Actions): R 4.0.3
+* ubuntu 18.04 (on GitHub Actions): R 4.1.2
+* Windows (on GitHub Actions): R 4.1.2
+* macOS (on GitHub Actions): R 4.1.2
 * win-builder: R devel
 
 ## R CMD check results
