@@ -21,7 +21,12 @@ Hooks should be tested by checking both the positive outcome (hook passes) and
 the negative outcome (hook fails) by adding two `run_test()` statements to
 [`./tests/testthat/test-hooks.R`](https://github.com/lorenzwalthert/precommit/blob/main/tests/testthat/test-hooks.R). Look at existing examples and [the documentation
 of `run_test()`](https://lorenzwalthert.github.io/precommit/reference/run_test.html). Note that this won't interact with pre-commit. It will simply
-run `Rscript path/to/script.R` (whereas with pre-commit, a {renv} will be activated before running the script). Also, there are [tests](https://github.com/lorenzwalthert/precommit/blob/main/.github/workflows/end-to-end.yml) to ensure that hooks are correctly registered in `.pre-commit-hooks.yaml`.
+run `Rscript path/to/script.R` (whereas with pre-commit, a {renv} will be activated before running the script). 
+
+Also, there are [tests](https://github.com/lorenzwalthert/precommit/blob/main/.github/workflows/end-to-end.yml) to ensure that hooks are correctly registered in `.pre-commit-hooks.yaml`, which you have to adapt if you add a hook. 
+
+You can also test them with `pre-commit try-repo` as described in the [documentation](https://pre-commit.com/#pre-commit-try-repo).
+
 
 # Summary
 
