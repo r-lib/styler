@@ -104,13 +104,13 @@ run_test(
 
 # success
 run_test("parsable-R",
-         suffix = "-success.R",
-         error_msg = NULL
+  suffix = "-success.R",
+  error_msg = NULL
 )
 
 run_test("parsable-R",
-         suffix = "-success.Rmd",
-         error_msg = NULL
+  suffix = "-success.Rmd",
+  error_msg = NULL
 )
 
 # failure
