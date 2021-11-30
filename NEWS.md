@@ -12,7 +12,7 @@ all existing hooks. This means two things:
   hardly consumes any space and is fast.
   This requires the Python package `pre-commit >= 2.11.1` (ideally even
   `>= 2.13.0`). See *Installation/Update** below (#233, #250, #260, #264, #273,
-  #315, #313, #308, #301, #300, #295, #285).
+  #315, #313, #308, #301, #300, #295, #285, #328).
 * support for continuous integration via [pre-commit.ci](https://pre-commit.ci)
   and [GitHub Actions]([GitHub Actions](https://github.com/pre-commit/action), 
   that is, running the pre-commit hooks as part of a CI pipeline. This
