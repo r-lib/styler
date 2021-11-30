@@ -1,0 +1,8 @@
+---
+title: "Parsable Rmd Success"
+output: rmarkdown::html_document
+---
+
+```{r}
+call()
+```

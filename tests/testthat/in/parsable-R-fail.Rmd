@@ -1,0 +1,8 @@
+---
+title: "Parsable Rmd Fail"
+output: rmarkdown::html_document
+---
+
+```{r}
+1 1j1j öj1 
+```
