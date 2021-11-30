@@ -92,6 +92,8 @@ depending on whether or not you previously used pre-commit.
   brings down install time.
 - The location of the pre-commit executable is now also recognized on Apple 
   Silicon when installed with Homebrew (#240).
+- The location of the pre-commit executable is now also recognized on macOS when
+  installed with pip3 and `fs >= 1.5.1` (#330).
 - pinning python version to 3.9 for conda until problems related to 3.10 are
   fixed (#310).
 - The cache for the roxygen2 hook is now also invalidated for changes in formals 
