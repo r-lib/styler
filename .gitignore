@@ -2,6 +2,7 @@
 .Rhistory
 .Rproj.user
 .Ruserdata
+.Rprofile
 docs/
 inst/doc
 scratch/

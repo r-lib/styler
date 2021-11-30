@@ -33,7 +33,7 @@
     description: check if a .R file is parsable
     entry: Rscript inst/hooks/exported/parsable-R.R
     language: r
-    files: '\.[rR]$'
+    files: '\.[rR](md)?$'
     minimum_pre_commit_version: "2.13.0"
 -   id: readme-rmd-rendered
     name: readme-rmd-rendered
