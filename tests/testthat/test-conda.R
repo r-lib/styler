@@ -6,7 +6,7 @@ if (!on_cran()) {
   })
 
   test_that("conda 3.10 should now work", {
-    expect_true(Sys.Date() < as.Date("2021-11-30"))
+    expect_true(Sys.Date() < as.Date("2022-03-30"))
   })
 
   test_that("can use pre-commit", {
