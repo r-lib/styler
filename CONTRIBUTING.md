@@ -12,9 +12,8 @@ the script, you can expect the passed command line arguments to be all options,
 finally the files that should be processed with the hook.
 
 For the scripts to become a hook, they need to be *registered* in
-[`.pre-commit-hooks.yaml`](https://github.com/lorenzwalthert/precommit/blob/main/.pre-commit-hooks.yaml). As R is not currently a supported language of
-pre-commit (https://github.com/pre-commit/pre-commit/issues/926), most hooks use
-`language: script` and then a shebang in the `entrypoint` script.
+[`.pre-commit-hooks.yaml`](https://github.com/lorenzwalthert/precommit/blob/main/.pre-commit-hooks.yaml). As of pre-commit 2.11, R is a [supported language of
+pre-commit](https://pre-commit.com/#r). Hence, it should have `language: r` in `.pre-commit-hooks.yaml` and then (for compatibility) a shebang in the `entrypoint` script.
 
 # Testing hooks
 
