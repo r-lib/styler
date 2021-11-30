@@ -4,10 +4,9 @@ files <- commandArgs(trailing = TRUE)
 out <- lapply(files, function(path) {
   is_rmd <- grepl("\\.[rR]md$", path)
   if (is_rmd) {
-    dir <- tempdir()
     path <- knitr::purl(
       input = path,
-      output = paste0(dir, "/file.R"),
+      output = tempfile(fileext = ".R"),
       quiet = TRUE,
       documentation = FALSE
     )
