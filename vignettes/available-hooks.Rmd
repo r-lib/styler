@@ -117,8 +117,9 @@ This hook does not modify files.
 
 ## `parsable-R`
 
-Checks if your `.R` files are "valid" R code by checking if running `parse()` on
-them returns an error.
+Checks if your `.R` and `.Rmd` files are "valid" R code by checking if running 
+`parse()` on them (or their `knitr::purl()`ed output for `.Rmd`) returns an 
+error.
 
 This hook does not modify files.
 
