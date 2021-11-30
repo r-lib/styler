@@ -21,7 +21,7 @@ pre-commit (https://github.com/pre-commit/pre-commit/issues/926), most hooks use
 
 Hooks should be tested by checking both the positive outcome (hook passes) and
 the negative outcome (hook fails) by adding two `run_test()` statements to
-[`./tests/testthat/test-all.R`](https://github.com/lorenzwalthert/precommit/blob/main/tests/testthat/test-all.R). Look at existing examples and [the documentation
+[`./tests/testthat/test-hooks.R`](https://github.com/lorenzwalthert/precommit/blob/main/tests/testthat/test-hooks.R). Look at existing examples and [the documentation
 of `run_test()`](https://lorenzwalthert.github.io/precommit/reference/run_test.html). Note that this won't actually use pre-commit. It will simply
 call the hook script the same way as pre-commit would, with the difference that
 the test uses a path to the `Rscript` executable whereas with pre-commit, the 
@@ -35,12 +35,11 @@ For this reason, always test the hook manually end-to-end with
 
 # Summary
 
-- add your script to in `inst/bin` and make it executable. Only R scripts are 
-  currently supported as testing is done with `Rscript ...`.
+- add your script in `inst/hooks/exported` and make it executable. Only R scripts are currently supported as testing is done with `Rscript ...`. See other scripts in `inst/hooks/exported` for a starting point for setting up your script.
 
 - register hook in `.pre-commit-hooks.yaml`.
 
 - add two unit tests, test manually with `pre-commit try-repo`.
 
-- add a description of the new hook to the `README.Rmd`. Both description and
+- add a description of the new hook to `vignettes/available-hooks.Rmd`. Both description and
   `yaml` example code.
