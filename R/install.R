@@ -129,7 +129,7 @@ remove_usethis_readme_hook <- function() {
     encoding = "UTF-8"
   )
   candidate <- ".git/hooks/pre-commit"
-  if (fs::file_exists(candidate)) {
+  if (file_exists(candidate)) {
     if (identical(readLines(candidate, encoding = "UTF-8"), legacy)) {
       fs::file_delete(candidate)
       cli::cli_alert_info(paste(
@@ -172,7 +172,7 @@ uninstall_precommit <- function(scope = "repo",
     if (scope == "repo") {
       uninstall_repo(ask = (ask %in% c("repo", "both")))
       path_config <- ".pre-commit-config.yaml"
-      if (fs::file_exists(path_config)) {
+      if (file_exists(path_config)) {
         fs::file_delete(path_config)
         cli::cli_alert_success("Removed .pre-commit-config.yaml")
       }
@@ -260,7 +260,7 @@ uninstall_repo <- function(ask) {
       }
     }
     path_file <- ".pre-commit-config.yaml"
-    if (fs::file_exists(path_file)) {
+    if (file_exists(path_file)) {
       fs::file_delete(path_file)
       cli::cli_alert_success(paste(
         "Removed .pre-commit-config.yaml. If you want your collaborators",
@@ -280,5 +280,5 @@ uninstall_repo <- function(ask) {
 }
 
 is_installed <- function() {
-  fs::file_exists(path_precommit_exec(check_if_exists = FALSE))
+  file_exists(path_precommit_exec(check_if_exists = FALSE))
 }
