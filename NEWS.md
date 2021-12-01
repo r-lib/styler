@@ -14,7 +14,7 @@ all existing hooks. This means two things:
   `>= 2.13.0`). See *Installation/Update** below (#233, #250, #260, #264, #273,
   #315, #313, #308, #301, #300, #295, #285, #328).
 * support for continuous integration via [pre-commit.ci](https://pre-commit.ci)
-  and [GitHub Actions]([GitHub Actions](https://github.com/pre-commit/action), 
+  and [GitHub Actions](https://github.com/pre-commit/action)), 
   that is, running the pre-commit hooks as part of a CI pipeline. This
   means that hook passing can be enforced for pull requests, even if the creator
   did not run the hooks locally. Further, the diff from running the hooks is 
@@ -27,7 +27,7 @@ all existing hooks. This means two things:
 *  `use_precommit()` gains a new argument `ci` defaulting to `"native"` (for 
   [pre-commit](https://pre-commit.ci)) to set up continuous
   integration. Other allowed values are `"gha"` (for  
-  [GitHub Actions]([GitHub Actions](https://github.com/pre-commit/action)) or 
+  [GitHub Actions](https://github.com/pre-commit/action)) or 
   `NULL` (for no CI). 
 * The new exported function `use_ci(ci = "native")` can be used to set up 
   continuous integration for existing repos. The default behavior for `ci` for 
