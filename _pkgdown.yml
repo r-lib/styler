@@ -6,6 +6,7 @@ reference:
   - install_precommit
   - use_precommit
   - use_precommit_config
+  - use_ci
 - title: "Workflow"
   desc: >
     Edit the pre-commit configuration
