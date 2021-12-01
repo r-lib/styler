@@ -22,7 +22,7 @@ all existing hooks. This means two things:
   hook problems in some cases (e.g. `style-files`). See `vignette("ci")` for a
   comparison of the two services (#318). 
   
-*API changes**
+**API changes**
 
 *  `use_precommit()` gains a new argument `ci` defaulting to `"native"` (for 
   [pre-commit](https://pre-commit.ci)) to set up continuous
