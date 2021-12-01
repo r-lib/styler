@@ -8,7 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.org/package=precommit)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R build
 status](https://github.com/lorenzwalthert/precommit/workflows/R-CMD-check/badge.svg)](https://github.com/lorenzwalthert/precommit/actions)
 <!-- badges: end -->
@@ -64,7 +64,7 @@ Alternatively, you can handle the installation from R using
 [miniconda](https://docs.conda.io/en/latest/miniconda.html):
 
 -   install miniconda if you don’t have it already:
-    `reticulate::install_miniconda()`. This needs reticulate &gt;= 1.14.
+    `reticulate::install_miniconda()`. This needs reticulate >= 1.14.
 
 -   install the pre-commit framework with
     `precommit::install_precommit()` into the conda environment
@@ -104,7 +104,7 @@ If all hooks pass, the commit is made. You can also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you
 succeed, it should look like this:
 
-<img src="man/figures/screenshot.png" width="639" />
+![](man/figures/screenshot.png)<!-- -->
 
 See the hooks provided by this repo under `vignette("available-hooks")`.
 You can also add other hooks from other repos, by extending the
