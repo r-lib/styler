@@ -219,7 +219,7 @@ Flag not set by default, i.e. the hook will fail if such a call is found.
 
 Note that for Rmd or Rnw documents, we use `knitr::purl()` to get the R code and
 code chunk headers cannot contain code that has dependencies outside the header, 
-see also [yihui/knitr#1938](/https://github.com/yihui/knitr/issues/1938).
+see also [yihui/knitr#1938](https://github.com/yihui/knitr/issues/1938).
 
 This hook does not modify the file `DESCRIPTION` because the user should decide
 for each package if it should go to `Imports:` or `Suggests:`, which can be done
@@ -247,7 +247,7 @@ should set this with the field `verbose: true`.
 When configured this way, lintr prints lint errors as they appear. Other
 arguments are not supported. Instead, `lintr` config should be specified in a
 `.lintr` config file in Debian Control Field Format as specified in the
-[`.lintr` documentation](https://github.com/jimhester/lintr#project-configuration).
+[`.lintr` documentation](https://github.com/r-lib/lintr#project-configuration).
 
 This hook does not modify any file.
 
