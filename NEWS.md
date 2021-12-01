@@ -27,7 +27,7 @@ all existing hooks. This means two things:
 *  `use_precommit()` gains a new argument `ci` defaulting to `"native"` (for 
   [pre-commit](https://pre-commit.ci)) to set up continuous
   integration. Other allowed values are `"gha"` (for  
-  [GitHub Actions](https://github.com/pre-commit/action)) or 
+  [GitHub Actions]([GitHub Actions](https://github.com/pre-commit/action)) or 
   `NULL` (for no CI). 
 * The new exported function `use_ci(ci = "native")` can be used to set up 
   continuous integration for existing repos. The default behavior for `ci` for 
@@ -119,13 +119,11 @@ A big hand to all the contributors of this release:
 [&#x0040;arbues6](https://github.com/arbues6), 
 [&#x0040;b4D8](https://github.com/b4D8), 
 [&#x0040;bart1](https://github.com/bart1), 
-[&#x0040;dhersz](https://github.com/dhersz), 
-[&#x0040;joelnitta](https://github.com/joelnitta), 
+[&#x0040;dhersz](https://github.com/dhersz), [&#x0040;github-actions[bot]](https://github.com/github-actions[bot]), [&#x0040;joelnitta](https://github.com/joelnitta), 
 [&#x0040;jucor](https://github.com/jucor),
 [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lukasfeick-sw](https://github.com/lukasfeick-sw), [&#x0040;MarkMc1089](https://github.com/MarkMc1089), 
 [&#x0040;njtierney](https://github.com/njtierney), 
-[&#x0040;pat-s](https://github.com/pat-s), 
-[&#x0040;pwildenhain](https://github.com/pwildenhain), and [&#x0040;rossdrucker](https://github.com/rossdrucker)
+[&#x0040;pat-s](https://github.com/pat-s), [&#x0040;pre-commit-ci[bot]](https://github.com/pre-commit-ci[bot]), [&#x0040;pwildenhain](https://github.com/pwildenhain), and [&#x0040;rossdrucker](https://github.com/rossdrucker)
 
 For previous versions of `NEWS.md` with news bullet per patch release, see the 
 [latest `NEWS.md` before gathering](https://github.com/lorenzwalthert/precommit/blob/7a8740714ab868d20e981b8b80898d7be050e34e/NEWS.md).
