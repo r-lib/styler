@@ -36,6 +36,8 @@ navbar:
         href: articles/why-use-hooks.html
       - text: 'Available hooks'
         href: articles/available-hooks.html
+      - text: 'Continuous Integration'
+        href: articles/ci.html
       - text: 'FAQ'
         href: articles/FAQ.html
 
