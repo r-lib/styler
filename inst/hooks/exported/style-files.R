@@ -49,7 +49,24 @@ if (packageVersion("styler") < "1.3.2") {
 options("styler.cache_root" = arguments$cache_root)
 print(c("cache root set to ", arguments$cache_root))
 
+if (!rlang::is_installed(arguments$style_pkg)) {
+  rlang::abort(paste0(
+    "{", arguments$style_pkg,
+    "} must be listed in `additional_dependencies:` with a syntax that `renv::install()` understands, e.g. for a public GitHub package, adapt your `.pre-commit-config.yaml` file:
+
+    -   id: style-files
+        args: [--style_pkg=", arguments$style_pkg, ", --style_fun=", arguments$style_fun, "]
+        additional_dependencies:
+        -     github-org/repo-with-package
+
+See 'Examples' in `help(\"install\", package = \"renv\")` for other supported ways of specifying the dependency.
+"
+  ))
+}
+
 style <- eval(parse(text = paste(arguments$style_pkg, "::", arguments$style_fun)))
+
+
 tryCatch(
   {
     dot_args <- list(path = arguments$files, style = style)

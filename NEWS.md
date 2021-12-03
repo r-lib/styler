@@ -1,3 +1,8 @@
+# precommit v0.2.0.9000 (Development version)
+
+* `style-files` hook fails more informatively if required package is not listed
+  in `additional_dependencies:` (#333).
+
 # precommit v0.2.0
 
 
