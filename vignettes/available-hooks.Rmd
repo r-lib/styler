@@ -208,7 +208,8 @@ specified in `DESCRIPTION`.
 ## `deps-in-desc`
 
 Checks if packages used with the `pkgname::fun()` syntax are listed in your
-DESCRIPTION file. Flag `allow_private_imports` lets the user specify that
+DESCRIPTION file. Note that `README.Rmd` is never checked. Flag 
+`allow_private_imports` lets the user specify that
 private imports into the package namespace are tolerable, e.g. `somepkg:::x()`.
 Flag not set by default, i.e. the hook will fail if such a call is found.
 
@@ -217,9 +218,6 @@ Flag not set by default, i.e. the hook will fail if such a call is found.
   args: [--allow_private_imports] 
 ```
 
-Note that for Rmd or Rnw documents, we use `knitr::purl()` to get the R code and
-code chunk headers cannot contain code that has dependencies outside the header, 
-see also [yihui/knitr#1938](https://github.com/yihui/knitr/issues/1938).
 
 This hook does not modify the file `DESCRIPTION` because the user should decide
 for each package if it should go to `Imports:` or `Suggests:`, which can be done

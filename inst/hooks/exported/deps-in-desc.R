@@ -17,6 +17,10 @@ pre_installed <- c(
 
 arguments <- docopt::docopt(doc)
 deps_in_desc <- function(file, arguments) {
+  if (basename(file) == "README.Rmd") {
+    # is .Rbuildignored, dependencies irrelevant
+    return()
+  }
   if (grepl("(\\.Rmd|\\.Rnw|\\.rmd|\\.rnw)$", file)) {
     file <- knitr::purl(file, output = tempfile())
   }
