@@ -11,7 +11,7 @@ repos:
         args: [--style_pkg=styler, --style_fun=tidyverse_style, --cache-root=styler-perm]
         exclude: > 
           (?x)^(
-          tests/testthat/in/.*\.R(md)?|
+          tests/testthat/in/.*|
           renv/.*
           )$
         require_serial: true
@@ -85,15 +85,12 @@ repos:
     -   id: parsable-R
         exclude: > 
           (?x)^(
-          tests/testthat/in/style-files-fail-parse\.R|
-          tests/testthat/in/parsable-R-fail\.R(md)?|
+          tests/testthat/in/.*|
           )$
     -   id: no-browser-statement
         exclude: > 
           (?x)^(
-          tests/testthat/in/style-files-fail-parse\.R|
-          tests/testthat/in/parsable-R-fail\.R|
-          tests/testthat/in/no-browser-statement-fail\.R|
+          tests/testthat/in/.*|
           )$
     -   id: deps-in-desc
         exclude: > 
