@@ -99,6 +99,8 @@ use_ci <- function(ci = getOption("precommit.ci", "native"),
       "{.code https://github.com/lorenzwalthert/precommit}."
     ))
   } else if (ci == "native") {
+    cli::cli_ul('You may need to skip the roxygenize hook in the CI run as explained in {.code vignette("ci", package = "precommit")}')
+    Sys.sleep(2)
     cli::cli_ul("Sign in with GitHub to authenticate {.url https://pre-commit.ci}.")
     Sys.sleep(2)
     utils::browseURL("https://pre-commit.ci")
