@@ -55,7 +55,7 @@ test_that("CLI API works for roxygenize", {
     msg = "You can silent this",
     artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf")),
     file_transformer = function(x) {
-      git2r::init()
+      git_init()
       x
     }
   )
@@ -68,7 +68,7 @@ test_that("CLI API works for roxygenize", {
     env = paste0("R_CACHE_ROOTPATH=", R.cache_root),
     msg = "Using persistent",
     file_transformer = function(x) {
-      git2r::init()
+      git_init()
       x
     }
   )

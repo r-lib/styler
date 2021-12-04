@@ -256,12 +256,7 @@ local_test_setup <- function(git = TRUE,
     withr::local_options("usethis.quiet" = TRUE, .local_envir = .local_envir)
   }
   if (git) {
-    git2r::init()
-    git2r::config(
-      user.name = "testthat",
-      user.email = "agent@testthat.com",
-      core.autocrlf = "true"
-    )
+    git_init()
     withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
   }
   if (use_precommit) {

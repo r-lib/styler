@@ -2,6 +2,8 @@
 
 * `style-files` hook fails more informatively if required package is not listed
   in `additional_dependencies:` (#333).
+* configure all git operations to use LF (#337).
+
 
 # precommit v0.2.0
 

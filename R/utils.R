@@ -70,3 +70,18 @@ ensure_named <- function(x, candidate_name = NULL, f = identity) {
 dirs_R.cache <- function(hook_id) {
   file.path("precommit", hook_id)
 }
+
+#' Initiate git and configure it
+#'
+#' In particular, to avoid CRAN errors
+#' [lorenzwalthert/precommit#320](https://github.com/lorenzwalthert/precommit/issues/320).
+#' @inheritParams git2r::init
+#' @keywords internal
+git_init <- function(path = ".") {
+  git2r::init(path = path)
+  git2r::config(
+    user.name = "testthat",
+    user.email = "agent@testthat.com",
+    core.autocrlf = "true"
+  )
+}

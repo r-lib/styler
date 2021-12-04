@@ -6,8 +6,7 @@ test_that("roxygen runs are done if necessary", {
     writeLines(text, "R/first.R")
     writeLines(text, "R/second.R")
     expect_error(extract_diff_root("."), "is not a git repo")
-    git2r::init(".")
-    git2r::config(user.name = "testthat", user.email = "no-reply@testthat.com")
+    git_init(".")
     expect_equal(extract_diff_root("."), NULL)
     expect_false(diff_requires_run_roxygenize("."))
     git2r::add(".", "R/first.R")
@@ -53,8 +52,7 @@ test_that("change in formals alone triggers invalidation", {
   # when the function formals change but nothing else
   withr::with_tempdir({
     fs::dir_create("R")
-    git2r::init(".")
-    git2r::config(user.name = "testthat", user.email = "no-reply@testthat.com")
+    git_init(".")
     # when new lines are added
     text <- c("#' Roxygen comment", "#'", "#' more things", "x <- function(a = 2) {", "  a", "}")
     writeLines(text, "R/fifth.R")
