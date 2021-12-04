@@ -93,6 +93,16 @@ run_test("style-files",
   )
 )
 
+run_test("style-files",
+  file_name = "style-files-cmd",
+  suffix = "-fail.R",
+  error_msg = "must be listed in `additional_dependencies:`",
+  cmd_args = c(
+    "--style_pkg=blubliblax", "--style_fun=tidyverse_style", "--cache-root=styler"
+  )
+)
+
+
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### no-browser-statement                                                    ####
 # success
