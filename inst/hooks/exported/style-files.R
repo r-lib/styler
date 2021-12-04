@@ -4,10 +4,10 @@ Usage:
   style_files [--style_pkg=<style_guide_pkg>] [--style_fun=<style_guide_fun>] [--cache-root=<cache_root_>] [--no-warn-cache] <files>...
 
 Options:
-  --style_pkg=<style_guide_pkg>  Package where the style guide is stored [default: "styler"].
-  --style_fun=<style_guide_fun>  The styling function in style_pkg [default: "tidyverse_style"].
+  --style_pkg=<style_guide_pkg>  Package where the style guide is stored [default: styler].
+  --style_fun=<style_guide_fun>  The styling function in style_pkg [default: tidyverse_style].
   --no-warn-cache  Suppress the warning about a missing permanent cache.
-  --cache-root=<cache_root_> Passed to `options("styler.cache_root")` [default: "styler-perm"].
+  --cache-root=<cache_root_> Passed to `options("styler.cache_root")` [default: styler-perm].
 ' -> doc
 
 if (packageVersion("precommit") < "0.1.3.9010") {
@@ -48,7 +48,6 @@ if (packageVersion("styler") < "1.3.2") {
 }
 options("styler.cache_root" = arguments$cache_root)
 print(c("cache root set to ", arguments$cache_root))
-
 if (!rlang::is_installed(arguments$style_pkg)) {
   rlang::abort(paste0(
     "{", arguments$style_pkg,
