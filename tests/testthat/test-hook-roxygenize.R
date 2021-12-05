@@ -83,7 +83,7 @@ test_that("asserting installed dependencies", {
   writeLines(generate_uninstalled_pkg_call(), "R/core.R")
   testthat::expect_error(
     roxygen_assert_additional_dependencies(),
-    "requires all\\* dependencies of your package"
+    "requires all dependencies of your package"
   )
 })
 
