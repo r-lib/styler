@@ -106,26 +106,14 @@ roxygen_assert_additional_dependencies <- function() {
   if (inherits(out, "packageNotFoundError") || ("message" %in% names(out) && grepl("Dependency package(\\(s\\))? .* not available", out$message))) {
     # case used in package but not installed
     rlang::abort(paste0(
-      "The roxygenize hook requires all* dependencies of your package to be listed in ",
-      "the file `.pre-commit-config.yaml` under `id: roxygenize` -> ",
-      "`additional_dependencies:`, like this:\n\n",
-      "    -   id: roxygenize",
-      "
-        additional_dependencies:
-        -    tidyr
-        -    dplyr\n\n",
-      "Call ",
-      "`precommit::snippet_generate('additional-deps-roxygenize')` ",
-      "(requires the dev version of {precommit}, install with with ",
-      "`remotes::install_github('lorenzwalthert/precommit')` and paste the ",
-      "output into the file `.pre-commit-config.yaml`. This requires precommit",
-      " > 0.1.3 and assumes you declared all dependencies in `DESCRIPTION`.",
-      "\n\nContext: https://github.com/lorenzwalthert/precommit/issues/243",
+      "The roxygenize hook requires all dependencies of your package to be listed in ",
+      "the file `.pre-commit-config.yaml`.",
+      "Call `precommit::snippet_generate('additional-deps-roxygenize')` ",
+      "to generate that code or ",
+      "comment out the hook under \n\n",
+      "`    -   id: roxygenize` \n\n to deactivate the hook.",
       "\n\nThe initial error (from `pkgload::load_all()`) was: ",
-      conditionMessage(out), ".\n\n===================================\n",
-      "*Some packages are already installed in the renv to run the hook, so ",
-      "these technically don't have to be listed as additional dependencies, ",
-      "but we recommend listing all for simplicity and consistency."
+      conditionMessage(out), ".\n\n"
     ))
   }
 }

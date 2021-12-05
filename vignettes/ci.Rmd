@@ -37,20 +37,33 @@ roxygenize hook in the ci run under certain circumstances as explained below.
 
 - You need to authenticate the pre-commit.ci App in GitHub. 
 - Limitations for the roxygenize hook:
+  - {roxygen2} [requires loading your package for the roxygenize hook](https://github.com/r-lib/roxygen2/issues/771), which means you must list
+    all dependencies of the package explicitly in `.pre-commit-config.yaml` under
+    `id: roxygenize`. You can generate the required code with 
+    `precommit::snippet_generate('additional-deps-roxygenize')`. This is also 
+    required to run the hook locally.
+  - There is a [timeout of 120s for building a hook environment](https://github.com/pre-commit-ci/runner-image/issues/93#issuecomment-922505301), 
+    which might not be enough to build the hook environment for the roxygenize 
+    hook (if you package has many dependencies)
   - `System dependencies are not supported. In particular, since {roxygen2} 
     [requires loading your package for the roxygenize hook](https://github.com/r-lib/roxygen2/issues/771), 
     this hook will fail if your package has system dependencies or any of your
     package's dependencies has system dependencies that are not shipped with 
     the package.
-  - There is a [timeout of 120s for building a hook environment](https://github.com/pre-commit-ci/runner-image/issues/93#issuecomment-922505301), 
-    which might not be enough to build the hook environment for the roxygenize 
-    hook (if you package has many dependencies), so you had to disable the 
-    roxygenize hook.
+  
 
 **Customization:**
 
-Please see the documentation of [pre-commit.ci](https://pre-commit.ci/) on how
-to skip hooks, whether or not to auto-fix problems etc.
+You can skip a hook on [pre-commit.ci](https://pre-commit.ci/) by setting 
+the respective option in `.pre-commit-config.yaml`:
+
+```yaml
+ci:
+    skip: [pylint]
+```
+
+Please see the documentation of [pre-commit.ci](https://pre-commit.ci/) on 
+whether or not to auto-fix problems as well as other configuration options.
 
 ## GitHub Actions
 
