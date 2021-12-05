@@ -2,6 +2,7 @@
 
 * `style-files` hook fails more informatively if required package is not listed
   in `additional_dependencies:` (#333).
+* configure all git operations to use LF (#337).
 * `deps-in-desc` always excludes `README.md` (#336).
 * Document timeout and other problems with pre-commit.ci (#335).
 

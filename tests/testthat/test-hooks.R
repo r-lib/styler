@@ -291,7 +291,7 @@ run_test("roxygenize",
     "DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf")
   ),
   file_transformer = function(files) {
-    git2r::init()
+    git_init()
     git2r::add(path = files)
     files
   }
@@ -311,7 +311,7 @@ run_test("readme-rmd-rendered",
       content_2 <- readLines(files[2])
       Sys.sleep(2)
       writeLines(content_2, files[2])
-      git2r::init()
+      git_init()
       git2r::add(path = files)
     }
     files
@@ -329,7 +329,7 @@ run_test("readme-rmd-rendered",
       content_2 <- readLines(files[2])
       Sys.sleep(2)
       writeLines(content_2, files[2])
-      git2r::init()
+      git_init()
       git2r::add(path = files)
     }
     files
@@ -349,7 +349,7 @@ run_test("readme-rmd-rendered",
       content_2 <- readLines(files[2])
       Sys.sleep(2)
       writeLines(content_2, files[2])
-      git2r::init()
+      git_init()
       git2r::add(path = files[1])
     }
     files
@@ -363,7 +363,7 @@ run_test("readme-rmd-rendered",
   error_msg = NULL,
   msg = NULL,
   file_transformer = function(files) {
-    git2r::init()
+    git_init()
     git2r::add(path = files[1])
     files
   }
@@ -376,7 +376,7 @@ run_test("readme-rmd-rendered",
   error_msg = NULL,
   msg = NULL,
   file_transformer = function(files) {
-    git2r::init()
+    git_init()
     git2r::add(path = files[1])
     files
   }

@@ -39,7 +39,7 @@ if (!on_cran()) {
     readLines(system.file("pre-commit-config-proj.yaml", package = "precommit")) %>%
       c(new_text) %>%
       writeLines(path_custom)
-    git2r::init(tempdir1)
+    git_init(tempdir1)
     use_precommit(config_source = path_custom, open = FALSE, force = TRUE, install_hooks = FALSE, root = tempdir1)
     config <- readLines(fs::path(tempdir1, ".pre-commit-config.yaml"))
     expect_equal(
@@ -51,7 +51,7 @@ if (!on_cran()) {
   test_that("existing hooks are recognized", {
     tempdir <- local_test_setup(quiet = FALSE, install_hooks = FALSE)
     withr::with_dir(tempdir, {
-      git2r::init()
+      git_init()
       usethis::proj_set(".")
       usethis::use_readme_rmd(open = FALSE)
       withr::local_options(precommit.block_install_hooks = TRUE)
