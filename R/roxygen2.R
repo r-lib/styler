@@ -109,7 +109,7 @@ roxygen_assert_additional_dependencies <- function() {
       "The roxygenize hook requires all dependencies of your package to be listed in ",
       "the file `.pre-commit-config.yaml`.",
       "Call `precommit::snippet_generate('additional-deps-roxygenize')` ",
-      "to generate that code or ",
+      "to generate that list or ",
       "comment out the hook under \n\n",
       "`    -   id: roxygenize` \n\n to deactivate the hook.",
       "\n\nThe initial error (from `pkgload::load_all()`) was: ",
