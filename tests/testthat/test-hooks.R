@@ -208,6 +208,14 @@ run_test("deps-in-desc",
   artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION"))
 )
 
+# README.Rmd is excluded
+run_test("deps-in-desc",
+  "README.Rmd",
+  suffix = "", error_msg = NULL,
+  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf"))
+)
+
+
 
 # Rnw
 run_test("deps-in-desc",

@@ -17,10 +17,8 @@ to use GitHub Actions. For existing repos, see below.
 # Comparison 
 
 Next, we quickly introduce the two options. We recommend 
-[pre-commit.ci](https://pre-commit.ci) unless your package has system 
-dependencies that are not shipped with the R package on Linux 
-**and at the same time** you want to use the 
-[roxygenize hook](https://lorenzwalthert.github.io/precommit/dev/articles/available-hooks.html#roxygenize-1).
+[pre-commit.ci](https://pre-commit.ci), but you might have to skip the 
+roxygenize hook in the ci run under certain circumstances as explained below.
 
 
 ## pre-commit.ci
@@ -38,10 +36,22 @@ dependencies that are not shipped with the R package on Linux
 **Cons:**
 
 - You need to authenticate the pre-commit.ci App in GitHub. 
-- System dependencies are not supported. In particular, since {roxygen2} loads
-  your package for the roxygenize hook, this hook will fail if your package has
-  system dependencies that are not shipped with the package.
-  
+- Limitations for the roxygenize hook:
+  - `System dependencies are not supported. In particular, since {roxygen2} 
+    [requires loading your package for the roxygenize hook](https://github.com/r-lib/roxygen2/issues/771), 
+    this hook will fail if your package has system dependencies or any of your
+    package's dependencies has system dependencies that are not shipped with 
+    the package.
+  - There is a [timeout of 120s for building a hook environment](https://github.com/pre-commit-ci/runner-image/issues/93#issuecomment-922505301), 
+    which might not be enough to build the hook environment for the roxygenize 
+    hook (if you package has many dependencies), so you had to disable the 
+    roxygenize hook.
+
+**Customization:**
+
+Please see the documentation of [pre-commit.ci](https://pre-commit.ci/) on how
+to skip hooks, whether or not to auto-fix problems etc.
+
 ## GitHub Actions
 
 **Pros:**
@@ -60,6 +70,8 @@ dependencies that are not shipped with the R package on Linux
   but they won't trigger a new CI and you can't make them do it without 
   [exposing credentials](https://github.com/pre-commit/action/pull/49). The only
   way is to close and re-open the PR.
+- No configuration options such as hook skipping supported that pre-commit.ci
+  supports.
 - You need to maintain the workflow file with a lot of boilerplate code and 
   when GitHub changes the syntax, you need to adapt it to prevent failing 
   builds.
