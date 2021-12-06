@@ -83,13 +83,7 @@ In addition, the hook takes the following arguments that are not passed to
   args: [--style_pkg=pkg.with.style.guide, --style_fun=exported.style.function]
 ```
 
-* If no permanent `{R.cache}` cache exists, the hook emits a warning which you 
-  can silence with `--no-warn-cache`.
-
-```
-  id: style-files
-  args: [--no-warn-cache]
-```
+* The argument `--no-warn-cache` is ignored but allowed for compatibility.
 
   
 * Argument `cache-root` is passed to `options()` to set `styler.cache_root`.
@@ -177,13 +171,8 @@ should pass.
 
 A hook to run `roxygen2::roxygenize()`. Makes sure you commit your `.Rd` changes
 with the source changes. To take advantage of caching, you don't need to run
-`roxygen2::roxygenize()` manually anymore. If no permanent `{R.cache}` cache 
-exists, the hook emits a warning which you can silence with 
-`--no-warn-cache`.
-```
-  id: royxgenize
-  args: [--no-warn-cache] 
-```
+`roxygen2::roxygenize()` manually anymore. The option `--no-warn-cache` is 
+ignored but allowed for compatibility.
 
 Because the hook will write the version of {roxygen2} to `DESCRIPTON`, you
 should either make sure the version you use when you call {roxygen2}
