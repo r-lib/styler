@@ -7,13 +7,14 @@
 may_require_permanent_cache(temp_cache_is_enough = FALSE)
 }
 \arguments{
-\item{temp_cache_is_enough}{Whether a temporary cache is accepted or not. \code{TRUE}
-means no warning will be issued, \code{FALSE} means a warning will be issued if
-no permanent cache is available.}
+\item{temp_cache_is_enough}{ignored.}
 }
 \description{
-This function is only exported for use in hook scripts, but it's not intended
-to be called by the end-user directly.
+This function used to check if a permanent cache was available and issue a
+warning if not, but since {R.cache} version \verb{0.15.0} (release date
+2021-04-27), a permanent directory will be used automatically, so this check
+if redundant. the function is kept in the package for compatibility, i.e.
+if someone updates the R package {precommit} but not the hook revisions.
 }
 \seealso{
 Other hook script helpers: 
