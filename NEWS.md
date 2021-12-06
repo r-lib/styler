@@ -5,6 +5,7 @@
 * configure all git operations to use LF (#337).
 * `deps-in-desc` always excludes `README.md` (#336).
 * Document timeout and other problems with pre-commit.ci (#335).
+* simplify `roxygenize` problem handling (#338).
 
 # precommit v0.2.0
 

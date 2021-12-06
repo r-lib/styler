@@ -180,7 +180,16 @@ snippet_generate <- function(snippet = "",
     snippet_generate_impl_additional_deps_roxygenize(non_r_deps$package) %>%
       cat(sep = "")
     cat("\n")
-    cli::cli_ul("Copy the above into `.pre-commit-config.yaml`.")
+    cli::cli_ul(
+      "Replace the `id: roxygenize` key in `.pre-commit-config.yaml` with the ",
+      "above code."
+    )
+    cli::cli_alert_info(paste0(
+      "Note that CI services like {.url pre-commit.ci} have build-time ",
+      "restrictions and installing the above dependencies may exceed those. ",
+      "To skip the hook on {.url pre-commit.ci}, see ",
+      '{.code vignette("ci", package = "precommit")}.'
+    ))
     remote_deps <- rlang::with_handlers(
       desc::desc_get_field("Remotes"),
       error = function(e) character()
