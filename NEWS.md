@@ -1,5 +1,12 @@
 # precommit v0.2.0.9000 (Development version)
 
+**API Changes**
+
+
+* The argument `--no-warn-cache` in the `style-files` and the `roxygenize` hook 
+  is deprecated and will be removed in a future release. Please remove it from 
+  your `.pre-commit-config.yaml` (#340. #341).
+
 * `style-files` hook fails more informatively if required package is not listed
   in `additional_dependencies:` (#333).
 * configure all git operations to use LF (#337).
