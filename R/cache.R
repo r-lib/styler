@@ -9,5 +9,11 @@
 #' @family hook script helpers
 #' @export
 may_require_permanent_cache <- function(temp_cache_is_enough = FALSE) {
+  if (temp_cache_is_enough) {
+    rlang::warn(paste0(
+      "The argument `--no-warn-cache` is deprecated and will be removed in a ",
+      "future release. Please remove it from your `.pre-commit-config.yaml`."
+    ))
+  }
   return()
 }
