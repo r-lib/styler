@@ -4,16 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="styler">
 <title>Customizing styler • styler</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
-<link href="../docsearch.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Customizing styler">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Customizing styler">
 <meta property="og:description" content="styler">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -21,240 +19,192 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.6.2.9000</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">styler</a>
+
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.6.2.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../articles/styler.html">Get started</a>
 </li>
-<li>
-  <a href="../articles/styler.html">Get started</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
-    </li>
-    <li>
-      <a href="../articles/third-party-integrations.html">Third-party integrations</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">Developers</li>
-    <li>
-      <a href="../articles/remove_rules.html">Remove rules</a>
-    </li>
-    <li>
-      <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/distribute_custom_style_guides.html">Distribute custom style guides</a>
-    </li>
-    <li>
-      <a href="../articles/caching.html">Caching</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    News
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Releases</li>
-    <li>
-      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
-    </li>
-    <li>
-      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
-    </li>
-    <li>
-      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
-    </li>
-    <li>
-      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/">Version 1.4.0</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="../news/index.html">Changelog</a>
-    </li>
-  </ul>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-<form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
-        <div class="form-group">
-          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
-</div>
-      </form>
-      
-    </div>
-<!--/.nav-collapse -->
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/detect-alignment.html">Alignment detection</a>
+    <a class="dropdown-item" href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    <a class="dropdown-item" href="../articles/third-party-integrations.html">Third-party integrations</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Developers</h6>
+    <a class="dropdown-item" href="../articles/remove_rules.html">Remove rules</a>
+    <a class="dropdown-item" href="../articles/customizing_styler.html">Customizing styler</a>
+    <a class="dropdown-item" href="../articles/distribute_custom_style_guides.html">Distribute custom style guides</a>
+    <a class="dropdown-item" href="../articles/caching.html">Caching</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-news">News</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-news">
+    <h6 class="dropdown-header" data-toc-skip>Releases</h6>
+    <a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    <a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    <a class="external-link dropdown-item" href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    <a class="external-link dropdown-item" href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/">Version 1.4.0</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../news/index.html">Changelog</a>
+  </div>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/r-lib/styler/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
-
-      </header><script src="customizing_styler_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Customizing styler</h1>
+    
+  </div>
+</nav><div class="container template-article">
+<script src="customizing_styler_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Customizing styler</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/customizing_styler.Rmd"><code>vignettes/customizing_styler.Rmd</code></a></small>
-      <div class="hidden name"><code>customizing_styler.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/HEAD/vignettes/customizing_styler.Rmd" class="external-link"><code>vignettes/customizing_styler.Rmd</code></a></small>
+      <div class="d-none name"><code>customizing_styler.Rmd</code></div>
     </div>
 
     
     
 <p>This vignette provides a high-level overview of how styler works and how you can define your own style guide and format code according to it. If you simply want to customize the tidyverse style guide to your needs, check out <code><a href="../articles/styler.html">vignette("styler")</a></code>, to remove some rules, have a look at <code><a href="../articles/remove_rules.html">vignette("remove_rules")</a></code>. How to distribute a custom style guide is described in <code><a href="../articles/distribute_custom_style_guides.html">vignette("distribute_custom_style_guides")</a></code>.</p>
-<div id="how-styler-works" class="section level1">
-<h1 class="hasAnchor">
-<a href="#how-styler-works" class="anchor"></a>How styler works</h1>
+<div class="section level1">
+<h1 id="how-styler-works">How styler works<a class="anchor" aria-label="anchor" href="#how-styler-works"></a>
+</h1>
 <p>There are three major steps that styler performs in order to style code:</p>
 <ol style="list-style-type: decimal">
-<li><p>Create an abstract syntax tree (AST) from <code><a href="https://rdrr.io/r/utils/getParseData.html">utils::getParseData()</a></code> that contains positional information for every token. We call this a nested parse table. You can learn more about how exactly this is done in the vignettes “Data Structures” and “Manipulating the nested parse table”.</p></li>
+<li><p>Create an abstract syntax tree (AST) from <code><a href="https://rdrr.io/r/utils/getParseData.html" class="external-link">utils::getParseData()</a></code> that contains positional information for every token. We call this a nested parse table. You can learn more about how exactly this is done in the vignettes “Data Structures” and “Manipulating the nested parse table”.</p></li>
 <li><p>Apply transformer functions at each level of the nested parse table. We use a visitor approach, i.e. a function that takes functions as arguments and applies them to every level of nesting. You can find out more about it on the help file for <code><a href="../reference/visit.html">visit()</a></code>. Note that the function is not exported by styler. The visitor will take care of applying the functions on every level of nesting - and we can supply transformer functions that operate on one level of nesting. In the sequel, we use the term <em>nest</em> to refer to such a parse table at one level of nesting. A <em>nest</em> always represents a complete expression. Before we apply the transformers, we have to initialize two columns <code>lag_newlines</code> and <code>spaces</code>, which contain the number of line breaks before the token and the number of spaces after the token. These will be the columns that most of our transformer functions will modify.</p></li>
 <li><p>Serialize the nested parse table, that is, extract the terminal tokens from the nested parse table and add spaces and line breaks between them as specified in the nested parse table.</p></li>
 </ol>
-<p>The <code>transformers</code> argument is, apart from the code to style, the key argument of functions such as <code><a href="../reference/style_text.html">style_text()</a></code> and friends. By default, it is created via the <code>style</code> argument. The transformers are a named list of transformer functions and other arguments passed to styler. To use the default style guide of styler (<a href="https://style.tidyverse.org/">the tidyverse style guide</a>), call <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> to get the list of the transformer functions. Let’s quickly look at what those are.</p>
+<p>The <code>transformers</code> argument is, apart from the code to style, the key argument of functions such as <code><a href="../reference/style_text.html">style_text()</a></code> and friends. By default, it is created via the <code>style</code> argument. The transformers are a named list of transformer functions and other arguments passed to styler. To use the default style guide of styler (<a href="https://style.tidyverse.org/" class="external-link">the tidyverse style guide</a>), call <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> to get the list of the transformer functions. Let’s quickly look at what those are.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-lib/styler">"styler"</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-lib/styler" class="external-link">"styler"</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/cache_activate.html">cache_deactivate</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## Deactivated cache.</code></pre>
+<pre><code><span class="co">## Deactivated cache.</span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org">"dplyr"</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] "initialize"             "line_break"             "space"                 
-##  [4] "token"                  "indention"              "use_raw_indention"     
-##  [7] "reindention"            "style_guide_name"       "style_guide_version"   
-## [10] "more_specs_style_guide" "transformers_drop"</code></pre>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##  [1] "initialize"             "line_break"             "space"                 </span>
+<span class="co">##  [4] "token"                  "indention"              "use_raw_indention"     </span>
+<span class="co">##  [7] "reindention"            "style_guide_name"       "style_guide_version"   </span>
+<span class="co">## [10] "more_specs_style_guide" "transformers_drop"</span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span>, give.attr <span class="op">=</span> <span class="cn">FALSE</span>, list.len <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
-<pre><code>## List of 11
-##  $ initialize            :List of 1
-##   ..$ initialize:function (pd_flat)  
-##  $ line_break            :List of 12
-##   ..$ set_line_break_around_comma_and_or                :function (pd, strict)  
-##   ..$ set_line_break_after_assignment                   :function (pd)  
-##   ..$ set_line_break_before_curly_opening               :function (pd)  
-##   .. [list output truncated]
-##  $ space                 :List of 19
-##   ..$ remove_space_before_closing_paren :function (pd_flat)  
-##   ..$ remove_space_before_opening_paren :function (pd_flat)  
-##   ..$ add_space_after_for_if_while      :function (pd_flat)  
-##   .. [list output truncated]
-##   [list output truncated]</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span>, give.attr <span class="op">=</span> <span class="cn">FALSE</span>, list.len <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## List of 11</span>
+<span class="co">##  $ initialize            :List of 1</span>
+<span class="co">##   ..$ initialize:function (pd_flat)  </span>
+<span class="co">##  $ line_break            :List of 12</span>
+<span class="co">##   ..$ set_line_break_around_comma_and_or                :function (pd, strict)  </span>
+<span class="co">##   ..$ set_line_break_after_assignment                   :function (pd)  </span>
+<span class="co">##   ..$ set_line_break_before_curly_opening               :function (pd)  </span>
+<span class="co">##   .. [list output truncated]</span>
+<span class="co">##  $ space                 :List of 19</span>
+<span class="co">##   ..$ remove_space_before_closing_paren :function (pd_flat)  </span>
+<span class="co">##   ..$ remove_space_before_opening_paren :function (pd_flat)  </span>
+<span class="co">##   ..$ add_space_after_for_if_while      :function (pd_flat)  </span>
+<span class="co">##   .. [list output truncated]</span>
+<span class="co">##   [list output truncated]</span></code></pre>
 <p>We note that there are different types of transformer functions. <code>initialize</code> initializes some variables in the nested parse table (so it is not actually a transformer), and the other elements modify either spacing, line breaks or tokens. <code>use_raw_indention</code> is not a function, it is just an option. All transformer functions have a similar structure. Let’s take a look at one:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">space</span><span class="op">$</span><span class="va">remove_space_after_opening_paren</span></code></pre></div>
-<pre><code>## function (pd_flat) 
-## {
-##     paren_after &lt;- pd_flat$token %in% c("'('", "'['", "LBB")
-##     if (!any(paren_after)) {
-##         return(pd_flat)
-##     }
-##     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L
-##     pd_flat
-## }
-## &lt;bytecode: 0x7ffe54a534a0&gt;
-## &lt;environment: namespace:styler&gt;</code></pre>
+<pre><code><span class="co">## function (pd_flat) </span>
+<span class="co">## {</span>
+<span class="co">##     paren_after &lt;- pd_flat$token %in% c("'('", "'['", "LBB")</span>
+<span class="co">##     if (!any(paren_after)) {</span>
+<span class="co">##         return(pd_flat)</span>
+<span class="co">##     }</span>
+<span class="co">##     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L</span>
+<span class="co">##     pd_flat</span>
+<span class="co">## }</span>
+<span class="co">## &lt;bytecode: 0x7fed4d0947f0&gt;</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span></code></pre>
 <p>As the name says, this function removes spaces after the opening parenthesis. But how? Its input is a <em>nest</em>. Since the visitor will go through all levels of nesting, we just need a function that can be applied to a <em>nest</em>, that is, to a parse table at one level of nesting. We can compute the nested parse table and look at one of the levels of nesting that is interesting for us (more on the data structure in the vignettes “Data structures” and “Manipulating the parse table”):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">string_to_format</span> <span class="op">&lt;-</span> <span class="st">"call( 3)"</span>
-<span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">string_to_format</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../reference/visit.html">pre_visit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">default_style_guide_attributes</span><span class="op">)</span><span class="op">)</span>
-<span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">token</span>, <span class="va">terminal</span>, <span class="va">text</span>, <span class="va">newlines</span>, <span class="va">spaces</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 5
-##   token terminal text  newlines spaces
-##   &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;
-## 1 expr  FALSE    call         0      0
-## 2 '('   TRUE     (            0      1
-## 3 expr  FALSE    3            0      0
-## 4 ')'   TRUE     )            0      0</code></pre>
+<span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">string_to_format</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../reference/visit.html">pre_visit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">default_style_guide_attributes</span><span class="op">)</span><span class="op">)</span>
+<span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">token</span>, <span class="va">terminal</span>, <span class="va">text</span>, <span class="va">newlines</span>, <span class="va">spaces</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4 × 5</span></span>
+<span class="co">##   token terminal text  newlines spaces</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> expr  FALSE    call         0      0</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> '('   TRUE     (            0      1</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span> expr  FALSE    3            0      0</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span> ')'   TRUE     )            0      0</span></code></pre>
 <p><code><a href="../reference/default_style_guide_attributes.html">default_style_guide_attributes()</a></code> is called to initialize some variables, it does not actually transform the parse table.</p>
 <p>All the function <code>remove_space_after_opening_paren()</code> now does is to look for the opening bracket and set the column <code>spaces</code> of the token to zero. Note that it is very important to check whether there is also a line break following after that token. If so, <code>spaces</code> should not be touched because of the way <code>spaces</code> and <code>newlines</code> are defined. <code>spaces</code> are the number of spaces after a token and <code>newlines</code>. Hence, if a line break follows, spaces are not EOL spaces, but rather the spaces directly before the next token. If there was a line break after the token and the rule did not check for that, indention for the token following <code>(</code> would be removed. This would be unwanted for example if <code>use_raw_indention</code> is set to <code>TRUE</code> (which means indention should not be touched). If we apply the rule to our parse table, we can see that the column <code>spaces</code> changes and is now zero for all tokens:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">styler</span><span class="fu">:::</span><span class="fu">remove_space_after_opening_paren</span><span class="op">(</span><span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">token</span>, <span class="va">terminal</span>, <span class="va">text</span>, <span class="va">newlines</span>, <span class="va">spaces</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 5
-##   token terminal text  newlines spaces
-##   &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;
-## 1 expr  FALSE    call         0      0
-## 2 '('   TRUE     (            0      0
-## 3 expr  FALSE    3            0      0
-## 4 ')'   TRUE     )            0      0</code></pre>
+<code class="sourceCode R"><span class="fu">styler</span><span class="fu">:::</span><span class="fu">remove_space_after_opening_paren</span><span class="op">(</span><span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">token</span>, <span class="va">terminal</span>, <span class="va">text</span>, <span class="va">newlines</span>, <span class="va">spaces</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4 × 5</span></span>
+<span class="co">##   token terminal text  newlines spaces</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> expr  FALSE    call         0      0</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> '('   TRUE     (            0      0</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span> expr  FALSE    3            0      0</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span> ')'   TRUE     )            0      0</span></code></pre>
 <p>All top-level styling functions have a <code>style</code> argument (which defaults to <code>tidyverse_style</code>). If you check out the help file, you can see that the argument <code>style</code> is only used to create the default <code>transformers</code> argument, which defaults to <code>style(...)</code>. This allows for the styling options to be set without having to specify them inside the function passed to <code>transformers</code>.</p>
 <p>Let’s clarify this with an example. The following yields the same result:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span>
   <span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">string_to_format</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>strict <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>,
   <span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">string_to_format</span>, style <span class="op">=</span> <span class="va">tidyverse_style</span>, strict <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,
   <span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">string_to_format</span>, strict <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,
 <span class="op">)</span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code><span class="co">## [1] TRUE</span></code></pre>
 <p>Now let’s do the whole styling of a string with just this one transformer introduced above. We do this by first creating a style guide with the designated wrapper function <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code>. It takes transformer functions as input and returns them in a named list that meets the formal requirements for styling functions. We also set a name and version of the style guide according to the convention outlined in <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">space_after_opening_style</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">are_you_sure</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/create_style_guide.html">create_style_guide</a></span><span class="op">(</span>
-    space <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html">lst</a></span><span class="op">(</span>remove_space_after_opening_paren <span class="op">=</span> 
+    space <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html" class="external-link">lst</a></span><span class="op">(</span>remove_space_after_opening_paren <span class="op">=</span> 
     <span class="kw">if</span> <span class="op">(</span><span class="va">are_you_sure</span><span class="op">)</span> <span class="fu">styler</span><span class="fu">:::</span><span class="va">remove_space_after_opening_paren</span><span class="op">)</span>,
     style_guide_name <span class="op">=</span> <span class="st">"styler::space_after_opening_style@https://github.com/r-lib/styler"</span>,
-    style_guide_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dcf.html">read.dcf</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="st">"Version"</span><span class="op">]</span>
+    style_guide_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dcf.html" class="external-link">read.dcf</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="st">"Version"</span><span class="op">]</span>
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Make sure to also disable caching during development with <code><a href="../reference/cache_activate.html">cache_deactivate()</a></code> because styling the same text with a different style guide that has the same version and name will fool the cache invalidation in the case your style guide has transformer functions with different function bodies. Make sure to increment the version number of your style guide with every release. It should correspond to the version of the package from which you export your style guide.</p>
 <p>We can not try the style guide:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"call( 1,1)"</span>, style <span class="op">=</span> <span class="va">space_after_opening_style</span>, are_you_sure <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  </code></pre></div>
-<pre><code>## call(1,1)</code></pre>
+<pre><code><span class="co">## <span style="color: #00BBBB;">call</span><span style="color: #BBBB00;">(</span><span style="color: #0000BB;">1</span>,<span style="color: #0000BB;">1</span><span style="color: #BBBB00;">)</span></span></code></pre>
 <p>Note that the return value of your <code>style</code> function may not contain <code>NULL</code> elements.</p>
 <p>I hope you have acquired a basic understanding of how styler transforms code. You can provide your own transformer functions and use <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> to create customized code styling. If you do so, there are a few more things you should be aware of, which are described in the next section.</p>
 </div>
-<div id="implementation-details" class="section level1">
-<h1 class="hasAnchor">
-<a href="#implementation-details" class="anchor"></a>Implementation details</h1>
+<div class="section level1">
+<h1 id="implementation-details">Implementation details<a class="anchor" aria-label="anchor" href="#implementation-details"></a>
+</h1>
 <p>For both spaces and line break information in the nested parse table, we use four attributes in total: <code>newlines</code>, <code>lag_newlines</code>, <code>spaces</code>, and <code>lag_spaces</code>. <code>lag_spaces</code> is created from <code>spaces</code> only just before the parse table is serialized, so it is not relevant for manipulating the parse table as described above. These columns are to some degree redundant, but with just lag or lead, we would lose information on the first or the last element respectively, so we need both.</p>
 <p>The sequence in which styler applies rules on each level of nesting is given in the list below:</p>
 <ul>
@@ -267,29 +217,29 @@
 <p>You can also look this up in the function that applies the transformers: <code><a href="../reference/apply_transformers.html">apply_transformers()</a></code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">styler</span><span class="fu">:::</span><span class="va"><a href="../reference/apply_transformers.html">apply_transformers</a></span></code></pre></div>
-<pre><code>## function (pd_nested, transformers) 
-## {
-##     transformed_updated_multi_line &lt;- post_visit(pd_nested, c(transformers$initialize, 
-##         transformers$line_break, set_multi_line, if (length(transformers$line_break) != 
-##             0) update_newlines))
-##     transformed_all &lt;- pre_visit(transformed_updated_multi_line, 
-##         c(transformers$space, transformers$indention, transformers$token))
-##     transformed_absolute_indent &lt;- context_to_terminals(transformed_all, 
-##         outer_lag_newlines = 0L, outer_indent = 0L, outer_spaces = 0L, 
-##         outer_indention_refs = NA)
-##     transformed_absolute_indent
-## }
-## &lt;bytecode: 0x7ffe502def80&gt;
-## &lt;environment: namespace:styler&gt;</code></pre>
+<pre><code><span class="co">## function (pd_nested, transformers) </span>
+<span class="co">## {</span>
+<span class="co">##     transformed_updated_multi_line &lt;- post_visit(pd_nested, c(transformers$initialize, </span>
+<span class="co">##         transformers$line_break, set_multi_line, if (length(transformers$line_break) != </span>
+<span class="co">##             0) update_newlines))</span>
+<span class="co">##     transformed_all &lt;- pre_visit(transformed_updated_multi_line, </span>
+<span class="co">##         c(transformers$space, transformers$indention, transformers$token))</span>
+<span class="co">##     transformed_absolute_indent &lt;- context_to_terminals(transformed_all, </span>
+<span class="co">##         outer_lag_newlines = 0L, outer_indent = 0L, outer_spaces = 0L, </span>
+<span class="co">##         outer_indention_refs = NA)</span>
+<span class="co">##     transformed_absolute_indent</span>
+<span class="co">## }</span>
+<span class="co">## &lt;bytecode: 0x7fed4cb482e0&gt;</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span></code></pre>
 <p>This means that the order of the styling is clearly defined and it is for example not possible to modify line breaks based on spacing, because spacing will be set after line breaks are set. Do not rely on the column <code>col1</code>, <code>col2</code>, <code>line1</code> and <code>line2</code> in the parse table in any of your functions since these columns only reflect the position of tokens at the point of parsing,</p>
 <p>i.e. they are not kept up to date throughout the process of styling.</p>
 <p>Also, as indicated above, work with <code>lag_newlines</code> only in your line break rules. For development purposes, you may also want to use the unexported function <code><a href="../reference/test_collection.html">test_collection()</a></code> to help you with testing your style guide. You can find more information in the help file for the function.</p>
 <p>If you write functions that modify spaces, don’t forget to make sure that you don’t modify EOL spacing, since that is needed for <code>use_raw_indention</code>, as highlighted previously.</p>
 <p>Finally, take note of the naming convention. All function names starting with <code>set-*</code> correspond to the <code>strict</code> option, that is, setting some value to an exact number. <code>add-*</code> is softer. For example, <code>add_spaces_around_op()</code>, only makes sure that there is at least one space around operators, but if the code to style contains multiple, the transformer will not change that.</p>
 </div>
-<div id="showcasing-the-development-of-a-styling-rule" class="section level1">
-<h1 class="hasAnchor">
-<a href="#showcasing-the-development-of-a-styling-rule" class="anchor"></a>Showcasing the development of a styling rule</h1>
+<div class="section level1">
+<h1 id="showcasing-the-development-of-a-styling-rule">Showcasing the development of a styling rule<a class="anchor" aria-label="anchor" href="#showcasing-the-development-of-a-styling-rule"></a>
+</h1>
 <p>For illustrative purposes, we create a new style guide that has one rule only: Curly braces are always on a new line. So for example:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">add_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -303,47 +253,47 @@
 <span class="op">}</span></code></pre></div>
 <p>We first need to get familiar with the structure of the nested parse table. Note that the structure of the nested parse table is not affected by the position of line breaks and spaces. Let’s first create the nested parse table.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"add_one &lt;- function(x) { x + 1 }"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"add_one &lt;- function(x) { x + 1 }"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../reference/create_tree.html">create_tree</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></code></pre></div>
-<pre><code> ##                                              levelName
- ## 1  ROOT (token: short_text [lag_newlines/spaces] {id})
- ## 2   °--expr:  [0/0] {23}                              
- ## 3       ¦--expr:  [0/1] {3}                           
- ## 4       ¦   °--SYMBOL: add_o [0/0] {1}                
- ## 5       ¦--LEFT_ASSIGN: &lt;- [0/1] {2}                  
- ## 6       °--expr:  [0/0] {22}                          
- ## 7           ¦--FUNCTION: funct [0/0] {4}              
- ## 8           ¦--'(': ( [0/0] {5}                       
- ## 9           ¦--SYMBOL_FORMALS: x [0/0] {6}            
- ## 10          ¦--')': ) [0/1] {7}                       
- ## 11          °--expr:  [0/0] {19}                      
- ## 12              ¦--'{': { [0/1] {9}                   
- ## 13              ¦--expr:  [0/1] {16}                  
- ## 14              ¦   ¦--expr:  [0/1] {12}              
- ## 15              ¦   ¦   °--SYMBOL: x [0/0] {10}       
- ## 16              ¦   ¦--'+': + [0/1] {11}              
- ## 17              ¦   °--expr:  [0/0] {14}              
- ## 18              ¦       °--NUM_CONST: 1 [0/0] {13}    
- ## 19              °--'}': } [0/0] {15}</code></pre>
+<pre><code><span class="co">##                                              levelName</span>
+ <span class="co">## 1  ROOT (token: short_text [lag_newlines/spaces] {id})</span>
+ <span class="co">## 2   °--expr:  [0/0] {23}                              </span>
+ <span class="co">## 3       ¦--expr:  [0/1] {3}                           </span>
+ <span class="co">## 4       ¦   °--SYMBOL: add_o [0/0] {1}                </span>
+ <span class="co">## 5       ¦--LEFT_ASSIGN: &lt;- [0/1] {2}                  </span>
+ <span class="co">## 6       °--expr:  [0/0] {22}                          </span>
+ <span class="co">## 7           ¦--FUNCTION: funct [0/0] {4}              </span>
+ <span class="co">## 8           ¦--'(': ( [0/0] {5}                       </span>
+ <span class="co">## 9           ¦--SYMBOL_FORMALS: x [0/0] {6}            </span>
+ <span class="co">## 10          ¦--')': ) [0/1] {7}                       </span>
+ <span class="co">## 11          °--expr:  [0/0] {19}                      </span>
+ <span class="co">## 12              ¦--'{': { [0/1] {9}                   </span>
+ <span class="co">## 13              ¦--expr:  [0/1] {16}                  </span>
+ <span class="co">## 14              ¦   ¦--expr:  [0/1] {12}              </span>
+ <span class="co">## 15              ¦   ¦   °--SYMBOL: x [0/0] {10}       </span>
+ <span class="co">## 16              ¦   ¦--'+': + [0/1] {11}              </span>
+ <span class="co">## 17              ¦   °--expr:  [0/0] {14}              </span>
+ <span class="co">## 18              ¦       °--NUM_CONST: 1 [0/0] {13}    </span>
+ <span class="co">## 19              °--'}': } [0/0] {15}</span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></code></pre></div>
 <p>The token of interest here has id number 10. Let’s navigate there. Since line break rules manipulate the lags <em>before</em> the token, we need to change <code>lag_newlines</code> at the token “‘{’”.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 18
-##      id pos_id line1  col1 line2  col2 parent token terminal text  short
-##   &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt; &lt;chr&gt;
-## 1     9     11     1    24     1    24     19 '{'   TRUE     {     {    
-## 2    16     12     1    26     1    30     19 expr  FALSE    x + 1 x + 1
-## 3    15     18     1    32     1    32     19 '}'   TRUE     }     }    
-## # … with 7 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   stylerignore &lt;lgl&gt;, block &lt;lgl&gt;, is_cached &lt;lgl&gt;, internal &lt;lgl&gt;,
-## #   child &lt;named list&gt;</code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 18</span></span>
+<span class="co">##      id pos_id line1  col1 line2  col2 parent token terminal text  short</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>     9     11     1    24     1    24     19 '{'   TRUE     {     {    </span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>    16     12     1    26     1    30     19 expr  FALSE    x + 1 x + 1</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>    15     18     1    32     1    32     19 '}'   TRUE     }     }    </span>
+<span class="co">## <span style="color: #949494;"># … with 7 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   stylerignore &lt;lgl&gt;, block &lt;lgl&gt;, is_cached &lt;lgl&gt;, internal &lt;lgl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   child &lt;named list&gt;</span></span></code></pre>
 <p>Remember what we said above: A transformer takes a flat parse table as input, updates it and returns it. So here it’s actually simple:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">set_line_break_before_curly_opening</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">op</span> <span class="op">&lt;-</span> <span class="va">pd_flat</span><span class="op">$</span><span class="va">token</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"'{'"</span>
+  <span class="va">op</span> <span class="op">&lt;-</span> <span class="va">pd_flat</span><span class="op">$</span><span class="va">token</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"'{'"</span>
   <span class="va">pd_flat</span><span class="op">$</span><span class="va">lag_newlines</span><span class="op">[</span><span class="va">op</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1L</span>
   <span class="va">pd_flat</span>
 <span class="op">}</span></code></pre></div>
@@ -351,16 +301,16 @@
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">set_line_break_before_curly_opening_style</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="../reference/create_style_guide.html">create_style_guide</a></span><span class="op">(</span>
-    line_break <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html">lst</a></span><span class="op">(</span><span class="va">set_line_break_before_curly_opening</span><span class="op">)</span>,
+    line_break <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html" class="external-link">lst</a></span><span class="op">(</span><span class="va">set_line_break_before_curly_opening</span><span class="op">)</span>,
     style_guide_name <span class="op">=</span> <span class="st">"styler::set_line_break_before_curly_opening_style@https://github.com/r-lib/styler"</span>,
-    style_guide_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dcf.html">read.dcf</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="st">"Version"</span><span class="op">]</span>
+    style_guide_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dcf.html" class="external-link">read.dcf</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="st">"Version"</span><span class="op">]</span>
   <span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Now you can style your string according to it.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">code</span>, style <span class="op">=</span> <span class="va">set_line_break_before_curly_opening_style</span><span class="op">)</span></code></pre></div>
-<pre><code>## add_one &lt;- function(x)
-## { x + 1 }</code></pre>
+<pre><code><span class="co">## add_one <span style="color: #00BB00;">&lt;-</span> <span style="color: #BB0000;">function</span><span style="color: #BBBB00;">(</span>x<span style="color: #BBBB00;">)</span></span>
+<span class="co">## <span style="color: #BBBB00;">{</span> x <span style="color: #00BB00;">+</span> <span style="color: #0000BB;">1</span> <span style="color: #BBBB00;">}</span></span></code></pre>
 <p>Note that when removing line breaks, always take care of comments, since you don’t want:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="co"># comments should remain EOL</span>
@@ -374,60 +324,43 @@
 <p>The easiest way of taking care of that is not applying the rule if there is a comment before the token of interest, which can be checked for within your transformer function. The transformer function from the tidyverse style that removes line breaks before the round closing bracket that comes after a curly brace looks as follows:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">styler</span><span class="fu">:::</span><span class="va">remove_line_break_before_round_closing_after_curly</span></code></pre></div>
-<pre><code>## function (pd) 
-## {
-##     round_after_curly &lt;- pd$token == "')'" &amp; (pd$token_before == 
-##         "'}'")
-##     pd$lag_newlines[round_after_curly] &lt;- 0L
-##     pd
-## }
-## &lt;bytecode: 0x7ffe54aa4460&gt;
-## &lt;environment: namespace:styler&gt;</code></pre>
+<pre><code><span class="co">## function (pd) </span>
+<span class="co">## {</span>
+<span class="co">##     round_after_curly &lt;- pd$token == "')'" &amp; (pd$token_before == </span>
+<span class="co">##         "'}'")</span>
+<span class="co">##     pd$lag_newlines[round_after_curly] &lt;- 0L</span>
+<span class="co">##     pd</span>
+<span class="co">## }</span>
+<span class="co">## &lt;bytecode: 0x7fed4d0d1d98&gt;</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span></code></pre>
 <p>With our example function <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to worry about that as we are only adding line breaks, but we don’t remove them.</p>
 </div>
-<div id="cache-invalidation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#cache-invalidation" class="anchor"></a>Cache invalidation</h1>
+<div class="section level1">
+<h1 id="cache-invalidation">Cache invalidation<a class="anchor" aria-label="anchor" href="#cache-invalidation"></a>
+</h1>
 <p>Note that it if you re-distribute the style guide, it’s your responsibility to set the version and the style guide name in <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> correctly. If you distribute a new version of your style guide and you don’t increment the version number, it might have drastic consequences for your user: Under some circumstances (see <code><a href="../reference/cache_make_key.html">help("cache_make_key")</a></code>), your new style guide won’t invalidate the cache although it should and applying your style guide to code that has previously been styled won’t result in any change. There is currently no mechanism in styler that prevents you from making this mistake.</p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by <a href="https://krlmlr.info">Kirill Müller</a>, <a href="https://lorenzwalthert.com">Lorenz Walthert</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://lorenzwalthert.com" class="external-link">Lorenz Walthert</a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script><script>
-  docsearch({
-    
-    
-    apiKey: '13580d327d8a7159f83a7cff178d2141',
-    indexName: 'r-lib_styler',
-    inputSelector: 'input#search-input.form-control',
-    transformData: function(hits) {
-      return hits.map(function (hit) {
-        hit.url = updateHitURL(hit);
-        return hit;
-      });
-    }
-  });
-</script>
-</body>
+
+  
+
+  </body>
 </html>

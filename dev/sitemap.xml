@@ -1,690 +1,711 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://styler.r-lib.org/index.html</loc>
+    <loc>https://styler.r-lib.org/dev/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/add_cache_block.html</loc>
+    <loc>https://styler.r-lib.org/dev/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/add_id_and_short.html</loc>
+    <loc>https://styler.r-lib.org/dev/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/add_line_col_to_wrapped_expr.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/caching.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/add_roxygen_mask.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/customizing_styler.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/add_spaces_or_newlines.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/detect-alignment.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/add_stylerignore.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/distribute_custom_style_guides.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/add_token_terminal.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/gsoc_proposal/data_structures.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_col1_all_named.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/gsoc_proposal/manipulating_nested_parse_data.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_drop_comments.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_ensure_no_closing_brace.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/introducing_styler.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_ensure_trailing_comma.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/performance_improvements.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_has_correct_spacing_around_comma.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/remove_rules.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_has_correct_spacing_around_eq_sub.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/strict.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_serialize.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/styler.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_serialize_column.html</loc>
+    <loc>https://styler.r-lib.org/dev/articles/third-party-integrations.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/alignment_serialize_line.html</loc>
+    <loc>https://styler.r-lib.org/dev/authors.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/apply_ref_indention.html</loc>
+    <loc>https://styler.r-lib.org/dev/index.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/apply_ref_indention_one.html</loc>
+    <loc>https://styler.r-lib.org/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/apply_stylerignore.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/add_cache_block.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/apply_transformers.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/add_id_and_short.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/assert_filetype.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/add_line_col_to_wrapped_expr.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/assert_text.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/add_roxygen_mask.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/assert_tokens.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/add_spaces_or_newlines.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/assert_transformers.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/add_stylerignore.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/bind_with_child.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/add_token_terminal.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_activate.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_col1_all_named.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_by_expression.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_drop_comments.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_clear.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_ensure_no_closing_brace.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_find_block.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_ensure_trailing_comma.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_find_path.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_has_correct_spacing_around_comma.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_info.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_has_correct_spacing_around_eq_sub.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_is_activated.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_serialize.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_make_key.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_serialize_column.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_more_specs.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/alignment_serialize_line.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/cache_write.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/apply_ref_indention.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/caching.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/apply_ref_indention_one.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/calls_sys.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/apply_stylerignore.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/can_verify_roundtrip.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/apply_transformers.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/catch_style_file_output.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/assert_filetype.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/choose_indention.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/assert_text.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/combine_children.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/assert_tokens.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/communicate_summary.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/assert_transformers.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/communicate_warning.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/bind_with_child.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/compute_indent_indices.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_activate.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/compute_parse_data_nested.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_by_expression.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/construct_out.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_clear.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/construct_tree.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_find_block.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/construct_vertical.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_find_path.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/contains_else_expr_that_needs_braces.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_info.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/context_to_terminals.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_is_activated.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/context_towards_terminals.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_make_key.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/convert_newlines_to_linebreaks.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_more_specs.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/copy_to_tempdir.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/cache_write.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/create_node_from_nested.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/caching.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/create_node_from_nested_root.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/calls_sys.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/create_pos_ids.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/can_verify_roundtrip.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/create_style_guide.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/catch_style_file_output.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/create_tokens.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/choose_indention.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/create_tree.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/combine_children.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/default_style_guide_attributes.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/communicate_summary.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/dir_without_..html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/communicate_warning.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/dir_without_._one.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/compute_indent_indices.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/drop_cached_children.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/compute_parse_data_nested.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/emulate_rd.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/construct_out.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/enhance_mapping_special.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/construct_tree.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/enrich_terminals.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/construct_vertical.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/ensure_correct_txt.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/contains_else_expr_that_needs_braces.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/ensure_last_n_empty.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/context_to_terminals.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/env_add_stylerignore.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/context_towards_terminals.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/env_current.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/convert_newlines_to_linebreaks.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/expressions_are_identical.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/copy_to_tempdir.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/extend_if_comment.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/create_node_from_nested.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/extract_terminals.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/create_node_from_nested_root.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/finalize_raw_chunks.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/create_pos_ids.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_blank_lines_to_next_block.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/create_style_guide.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_blank_lines_to_next_expr.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/create_tokens.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_block_id.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/create_tree.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_dont_seqs.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/default_style_guide_attributes.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_line_break_position_in_multiline_call.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/dir_without_..html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_pos_id_to_keep.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/dir_without_._one.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_start_pos_id.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/drop_cached_children.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_tokens_to_update.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/emulate_rd.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/fix_quotes.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/enhance_mapping_special.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/flatten_operators.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/enrich_terminals.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/flatten_operators_one.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/ensure_correct_txt.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/flatten_pd.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/ensure_last_n_empty.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/generate_test_samples.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/env_add_stylerignore.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/get_addins_style_transformer_name.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/env_current.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/get_engine_pattern.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/expressions_are_identical.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/get_knitr_pattern.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/extend_if_comment.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/get_parse_data.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/extract_terminals.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/has_crlf_as_first_line_sep.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/finalize_raw_chunks.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/hash_standardize.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/find_blank_lines_to_next_block.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/identify_raw_chunks.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/find_blank_lines_to_next_expr.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/identify_start_to_stop_of_roxygen_examples_from_text.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/find_block_id.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/if_for_while_part_requires_braces.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/find_dont_seqs.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/initialize_attributes.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/find_line_break_position_in_multiline_call.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/invalid_utf8.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/find_pos_id_to_keep.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/is_cached.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/find_start_pos_id.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/is_code_chunk_header_or_xaringan_or_code_output.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/find_tokens_to_update.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/is_insufficiently_parsed_string.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/fix_quotes.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/is_shebang.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/flatten_operators.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/is_tilde_expr.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/flatten_operators_one.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/local_test_setup.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/flatten_pd.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/lookup_new_special.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/generate_test_samples.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/lookup_tokens.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/get_addins_style_transformer_name.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/make_transformer.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/get_engine_pattern.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/map_filetype_to_pattern.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/get_knitr_pattern.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/match_stop_to_start.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/get_parse_data.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/math_token_spacing.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/has_crlf_as_first_line_sep.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/n_times_faster_with_cache.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/hash_standardize.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/needs_indention.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/identify_raw_chunks.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/needs_indention_one.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/identify_start_to_stop_of_roxygen_examples_from_text.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/needs_rd_emulation.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/if_for_while_part_requires_braces.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/nest_parse_data.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/next_non_comment.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/initialize_attributes.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/next_terminal.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/invalid_utf8.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/option_read.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/is_cached.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/parse_roxygen.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/is_code_chunk_header_or_xaringan_or_code_output.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/parse_safely.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/is_insufficiently_parsed_string.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/parse_transform_serialize_r.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/is_shebang.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/parse_transform_serialize_r_block.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/is_tilde_expr.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/parse_transform_serialize_roxygen.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/local_test_setup.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/parser_version_set.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/lookup_new_special.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/pd_is.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/lookup_tokens.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/pd_is_multi_line.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/make_transformer.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/post_parse_roxygen.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/map_filetype_to_pattern.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/prettify_any.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/match_stop_to_start.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/prettify_pkg.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/math_token_spacing.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/print.vertical.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/n_times_faster_with_cache.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/rds_to_version.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/needs_indention.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/read_utf8.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/needs_indention_one.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/read_utf8_bare.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/needs_rd_emulation.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/reindention.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/nest_parse_data.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/relocate_eq_assign.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/next_non_comment.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/relocate_eq_assign_nest.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/next_terminal.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/relocate_eq_assign_one.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/option_read.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/remove_dont_mask.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/parse_roxygen.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/remove_roxygen_header.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/parse_safely.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/rep_char.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/parse_transform_serialize_r.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/roxygen_remove_extra_brace.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/parse_transform_serialize_r_block.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/save_after_styling_is_active.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/parse_transform_serialize_roxygen.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/scope_normalize.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/parser_version_set.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/separate_chunks.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/pd_is.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/serialize_parse_data_flattened.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/pd_is_multi_line.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_and_assert_arg_filetype.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/post_parse_roxygen.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_arg_paths.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/prettify_any.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_arg_write_tree.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/prettify_pkg.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_line_break_after_opening_if_call_is_multi_line.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/print.vertical.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_line_break_around_curly_curly.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/rds_to_version.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_line_break_before_curly_opening.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/read_utf8.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_line_break_if_call_is_multi_line.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/read_utf8_bare.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_multi_line.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/reindention.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_regex_indention.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/relocate_eq_assign.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_space_around_op.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/relocate_eq_assign_nest.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_space_between_eq_sub_and_comma.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/relocate_eq_assign_one.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_space_between_levels.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/remove_dont_mask.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_spaces.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/remove_roxygen_header.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_style_transformers.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/rep_char.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/set_unindention_child.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/roxygen_remove_extra_brace.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/specify_transformers_drop.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/save_after_styling_is_active.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/split_roxygen_segments.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/scope_normalize.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/start_comments_with_space.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/separate_chunks.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_active_pkg.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/serialize_parse_data_flattened.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_dir.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_and_assert_arg_filetype.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_file.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_arg_paths.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_guides.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_arg_write_tree.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_pkg.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_line_break_after_opening_if_call_is_multi_line.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_roxygen_code_example.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_line_break_around_curly_curly.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_roxygen_code_example_one.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_line_break_before_curly_opening.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_roxygen_code_example_segment.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_line_break_if_call_is_multi_line.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_roxygen_example_snippet.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_multi_line.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_selection.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_regex_indention.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_space_around_math_token.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_space_around_op.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_space_around_token.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_space_between_eq_sub_and_comma.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_text.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_space_between_levels.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/style_text_without_curly_curly.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_spaces.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/styler-package.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_style_transformers.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/styler_addins.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/set_unindention_child.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/stylerignore.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/specify_transformers_drop.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/stylerignore_consolidate_col.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/split_roxygen_segments.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/test_collection.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/start_comments_with_space.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/test_dry.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_active_pkg.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/test_transformer.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_dir.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/test_transformers_drop.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_file.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/testthat_file.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_guides.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/text_to_flat_pd.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_pkg.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/tidyverse_style.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_roxygen_code_example.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/token_is_on_aligned_line.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_roxygen_code_example_one.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/tokenize.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_roxygen_code_example_segment.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/transform_and_check.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_roxygen_example_snippet.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/transform_code.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_selection.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/transform_file.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_space_around_math_token.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/transform_files.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_space_around_token.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/transform_mixed.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_text.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/transform_utf8.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/style_text_without_curly_curly.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/transform_utf8_one.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/styler-package.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/transformers_drop.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/styler_addins.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/try_transform_as_r_file.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/stylerignore.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/two_cols_match.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/stylerignore_consolidate_col.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/unindent_child.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/test_collection.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/unindent_fun_dec.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/test_dry.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/update_indention.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/test_transformer.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/update_indention_ref.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/test_transformers_drop.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/update_newlines.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/testthat_file.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/validate_new_pos_ids.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/text_to_flat_pd.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/verify_roundtrip.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/tidyverse_style.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/visit.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/token_is_on_aligned_line.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/visit_one.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/tokenize.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/wrap_else_multiline_curly.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/transform_and_check.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/wrap_expr_in_curly.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/transform_code.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/wrap_expr_in_expr.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/transform_file.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/wrap_if_else_while_for_fun_multi_line_in_curly.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/transform_files.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/wrap_multiline_curly.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/transform_mixed.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/wrap_subexpr_in_curly.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/transform_utf8.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/write_utf8.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/transform_utf8_one.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/caching.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/transformers_drop.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/customizing_styler.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/try_transform_as_r_file.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/detect-alignment.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/two_cols_match.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/distribute_custom_style_guides.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/unindent_child.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/gsoc_proposal/data_structures.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/unindent_fun_dec.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/gsoc_proposal/manipulating_nested_parse_data.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/update_indention.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/introducing_styler.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/update_indention_ref.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/performance_improvements.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/update_newlines.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/remove_rules.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/validate_new_pos_ids.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/strict.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/verify_roundtrip.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/styler.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/visit.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/third-party-integrations.html</loc>
+    <loc>https://styler.r-lib.org/dev/reference/visit_one.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/dev/reference/wrap_else_multiline_curly.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/dev/reference/wrap_expr_in_curly.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/dev/reference/wrap_expr_in_expr.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/dev/reference/wrap_if_else_while_for_fun_multi_line_in_curly.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/dev/reference/wrap_multiline_curly.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/dev/reference/wrap_subexpr_in_curly.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/dev/reference/write_utf8.html</loc>
   </url>
 </urlset>

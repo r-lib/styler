@@ -4,16 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="styler">
 <title>Get started • styler</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
-<link href="../docsearch.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Get started">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get started">
 <meta property="og:description" content="styler">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -21,135 +19,87 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.6.2.9000</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">styler</a>
+
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.6.2.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/styler.html">Get started</a>
 </li>
-<li>
-  <a href="../articles/styler.html">Get started</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/detect-alignment.html">Alignment detection</a>
-    </li>
-    <li>
-      <a href="../articles/strict.html">The effect of `strict = FALSE`</a>
-    </li>
-    <li>
-      <a href="../articles/third-party-integrations.html">Third-party integrations</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">Developers</li>
-    <li>
-      <a href="../articles/remove_rules.html">Remove rules</a>
-    </li>
-    <li>
-      <a href="../articles/customizing_styler.html">Customizing styler</a>
-    </li>
-    <li>
-      <a href="../articles/distribute_custom_style_guides.html">Distribute custom style guides</a>
-    </li>
-    <li>
-      <a href="../articles/caching.html">Caching</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    News
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Releases</li>
-    <li>
-      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
-    </li>
-    <li>
-      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
-    </li>
-    <li>
-      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
-    </li>
-    <li>
-      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/">Version 1.4.0</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="../news/index.html">Changelog</a>
-    </li>
-  </ul>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/r-lib/styler/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-<form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
-        <div class="form-group">
-          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
-</div>
-      </form>
-      
-    </div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/detect-alignment.html">Alignment detection</a>
+    <a class="dropdown-item" href="../articles/strict.html">The effect of `strict = FALSE`</a>
+    <a class="dropdown-item" href="../articles/third-party-integrations.html">Third-party integrations</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Developers</h6>
+    <a class="dropdown-item" href="../articles/remove_rules.html">Remove rules</a>
+    <a class="dropdown-item" href="../articles/customizing_styler.html">Customizing styler</a>
+    <a class="dropdown-item" href="../articles/distribute_custom_style_guides.html">Distribute custom style guides</a>
+    <a class="dropdown-item" href="../articles/caching.html">Caching</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-news">News</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-news">
+    <h6 class="dropdown-header" data-toc-skip>Releases</h6>
+    <a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+    <a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+    <a class="external-link dropdown-item" href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+    <a class="external-link dropdown-item" href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/">Version 1.4.0</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../news/index.html">Changelog</a>
+  </div>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/r-lib/styler/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
-
-      </header><script src="styler_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Get started</h1>
+    
+  </div>
+</nav><div class="container template-article">
+<script src="styler_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Get started</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/styler.Rmd"><code>vignettes/styler.Rmd</code></a></small>
-      <div class="hidden name"><code>styler.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/HEAD/vignettes/styler.Rmd" class="external-link"><code>vignettes/styler.Rmd</code></a></small>
+      <div class="d-none name"><code>styler.Rmd</code></div>
     </div>
 
     
     
-<div id="entry-points" class="section level1">
-<h1 class="hasAnchor">
-<a href="#entry-points" class="anchor"></a>Entry-points</h1>
+<div class="section level1">
+<h1 id="entry-points">Entry-points<a class="anchor" aria-label="anchor" href="#entry-points"></a>
+</h1>
 <p>styler provides the following API to format code:</p>
 <ul>
 <li><p><code><a href="../reference/style_file.html">style_file()</a></code> styles .R, .Rmd .Rnw and .Rprofile files.</p></li>
@@ -158,14 +108,14 @@
 <li><p>RStudio Addins for styling the active file, styling the current package and styling the highlighted selection, see <code><a href="../reference/styler_addins.html">help("styler_addins")</a></code>.</p></li>
 </ul>
 <p>Beyond that, styler can be used through other tools documented in the <code><a href="../articles/third-party-integrations.html">vignette("third-party-integrations")</a></code>.</p>
-<div id="passing-arguments-to-the-style-guide" class="section level3">
-<h3 class="hasAnchor">
-<a href="#passing-arguments-to-the-style-guide" class="anchor"></a>Passing arguments to the style guide</h3>
+<div class="section level3">
+<h3 id="passing-arguments-to-the-style-guide">Passing arguments to the style guide<a class="anchor" aria-label="anchor" href="#passing-arguments-to-the-style-guide"></a>
+</h3>
 <p>styler separates the abstract definition of a style guide from the application of it. That’s why you must supply a style guide via <code>transformers</code> when styling (in case you don’t want to rely on the defaults):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler">styler</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>a + b</code></pre>
+<pre><code>a  [32m+ [39m b</code></pre>
 <p>The styler API was designed so that you can pass arguments to the style guide via the styling function (e.g. <code><a href="../reference/style_file.html">style_file()</a></code>) to allow more concise syntax:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># equivalent</span>
@@ -174,12 +124,13 @@
 <p>The magic is possible thanks to <code>...</code>. See <code><a href="../reference/style_text.html">style_text()</a></code> for details.</p>
 </div>
 </div>
-<div id="invasiveness" class="section level1">
-<h1 class="hasAnchor">
-<a href="#invasiveness" class="anchor"></a>Invasiveness</h1>
-<div id="scope-what-to-style" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scope-what-to-style" class="anchor"></a><code>scope</code>: What to style?</h3>
+<div class="section level1">
+<h1 id="invasiveness">Invasiveness<a class="anchor" aria-label="anchor" href="#invasiveness"></a>
+</h1>
+<div class="section level3">
+<h3 id="scope-what-to-style">
+<code>scope</code>: What to style?<a class="anchor" aria-label="anchor" href="#scope-what-to-style"></a>
+</h3>
 <p>This argument of <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> determines the invasiveness of styling. The following levels for <code>scope</code> are available (in increasing order):</p>
 <ul>
 <li><p>“none”: Performs no transformation at all.</p></li>
@@ -191,21 +142,21 @@
 <p>There are two ways to specify the scope of styling.</p>
 <ul>
 <li><p>As a string: In this case all less invasive scope levels are implied, e.g. <code>"line_breaks"</code> includes <code>"indention"</code>, <code>"spaces"</code>. This is brief and what most users need. This is supported in <code>styler &gt;= 1.0.0</code>.</p></li>
-<li><p>As vector of class <code>AsIs</code>: Each level has to be listed explicitly by wrapping one ore more levels of the scope in <code><a href="https://rdrr.io/r/base/AsIs.html">I()</a></code>. This offers more granular control at the expense of more verbosity. This is supported in <code>styler &gt; 1.3.2</code>.</p></li>
+<li><p>As vector of class <code>AsIs</code>: Each level has to be listed explicitly by wrapping one ore more levels of the scope in <code><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I()</a></code>. This offers more granular control at the expense of more verbosity. This is supported in <code>styler &gt; 1.3.2</code>.</p></li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tokens and everything less invasive</span>
 <span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="st">"tokens"</span><span class="op">)</span></code></pre></div>
-<pre><code>a &lt;- 2</code></pre>
+<pre><code>a  [32m&lt;- [39m  [34m2 [39m</code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># just tokens and indention</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tokens"</span>, <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>a&lt;-2</code></pre>
+<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tokens"</span>, <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>a [32m&lt;- [39m [34m2 [39m</code></pre>
 <p>As you can see from the output, the assignment operator <code>=</code> is replaced with <code>&lt;-</code> in both cases, but spacing remained unchanged in the second example.</p>
 </div>
-<div id="how-strict-do-you-want-styler-to-be" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-strict-do-you-want-styler-to-be" class="anchor"></a>How <code>strict</code> do you want styler to be?</h3>
+<div class="section level3">
+<h3 id="how-strict-do-you-want-styler-to-be">How <code>strict</code> do you want styler to be?<a class="anchor" aria-label="anchor" href="#how-strict-do-you-want-styler-to-be"></a>
+</h3>
 <p>Another option that is helpful to determine the level of ‘invasiveness’ is <code>strict</code> (defaulting to <code>TRUE</code>). Some rules won’t be applied so strictly with <code>strict = FALSE</code>, assuming you deliberately formatted things the way they are. Please see in <code><a href="../articles/strict.html">vignette("strict")</a></code>. For <code>styler &gt;= 1.2</code> alignment in function calls is detected and preserved so you don’t need <code>strict = FALSE</code>, e.g.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
@@ -215,17 +166,17 @@
      large  = 6
    )"</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>tibble::tibble(
-  small  = 2,
-  medium = 4, # comment without space
-  large  = 6
-)</code></pre>
+<pre><code>tibble:: [36mtibble [39m [33m( [39m
+  small  =  [34m2 [39m,
+  medium =  [34m4 [39m,  [38;5;247m [3m# comment without space [23m [39m
+  large  =  [34m6 [39m
+ [33m) [39m</code></pre>
 <p>The details are in <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>.</p>
 </div>
 </div>
-<div id="ignoring-certain-lines" class="section level1">
-<h1 class="hasAnchor">
-<a href="#ignoring-certain-lines" class="anchor"></a>Ignoring certain lines</h1>
+<div class="section level1">
+<h1 id="ignoring-certain-lines">Ignoring certain lines<a class="anchor" aria-label="anchor" href="#ignoring-certain-lines"></a>
+</h1>
 <p>You can tell styler to ignore some lines if you want to keep current formatting. You can mark whole blocks or inline expressions with <code>styler: on</code> and <code>styler: off</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">styler</span><span class="fu">::</span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
@@ -245,28 +196,28 @@
 "</span>
 <span class="op">)</span></code></pre></div>
 <pre><code>
-#&gt; blocks
-blibala &lt;- 3
-  # styler: off
-  I_have(good+reasons, to = turn_off,
+ [38;5;247m [3m#&gt; blocks [23m [39m
+blibala  [32m&lt;- [39m  [34m3 [39m
+   [38;5;247m [3m# styler: off [23m [39m
+   [36mI_have [39m [33m( [39mgood [32m+ [39mreasons, to = turn_off,
     styler
-  )
-# styler: on
-1 + 1
+   [33m) [39m
+ [38;5;247m [3m# styler: on [23m [39m
+ [34m1 [39m  [32m+ [39m  [34m1 [39m
 
-#&gt; inline
-  ignore( this) # styler: off
-f() # not ignored anymore</code></pre>
+ [38;5;247m [3m#&gt; inline [23m [39m
+   [36mignore [39m [33m( [39m this [33m) [39m  [38;5;247m [3m# styler: off [23m [39m
+ [36mf [39m [33m( [39m [33m) [39m  [38;5;247m [3m# not ignored anymore [23m [39m</code></pre>
 <p>You can also use custom markers as described in <code><a href="../reference/stylerignore.html">help("stylerignore", package = "styler")</a></code>. As described above and in <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>, some alignment is recognized and hence, <em>stylerignore</em> should not be necessary in that context.</p>
 </div>
-<div id="caching" class="section level1">
-<h1 class="hasAnchor">
-<a href="#caching" class="anchor"></a>Caching</h1>
+<div class="section level1">
+<h1 id="caching">Caching<a class="anchor" aria-label="anchor" href="#caching"></a>
+</h1>
 <p>styler is rather slow, so leveraging a cache for styled code brings big speedups in many situations. Starting with version <code>1.3.0</code>, you can benefit from it. For people using styler interactively (e.g. in RStudio), typing <code><a href="../reference/cache_info.html">styler::cache_info()</a></code> and then confirming the creation of a permanent cache is sufficient. Please refer to <code><a href="../reference/caching.html">help("caching")</a></code> for more information. The cache is by default dependent on the version of styler which means if you upgrade, the cache will be re-built. Also, the cache takes literally 0 disk space because only the hash of styled code is stored.</p>
 </div>
-<div id="dry-mode" class="section level1">
-<h1 class="hasAnchor">
-<a href="#dry-mode" class="anchor"></a>Dry mode</h1>
+<div class="section level1">
+<h1 id="dry-mode">Dry mode<a class="anchor" aria-label="anchor" href="#dry-mode"></a>
+</h1>
 <p>As of version <code>1.3.2</code>, styler has a dry mode which avoids writing output to the file(s) you want to format. The following options are available:</p>
 <ul>
 <li><p><em>off</em> (default): Write back to the file if applying styling changes the input.</p></li>
@@ -275,10 +226,10 @@ f() # not ignored anymore</code></pre>
 </ul>
 <p>In any case, you can use the (invisible) return value of <code><a href="../reference/style_file.html">style_file()</a></code> and friends to learn how files were changed (or would have changed):</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_tempfile.html">with_tempfile</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">with_tempfile</a></span><span class="op">(</span>
   <span class="st">"code.R"</span>,
   <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="st">"1+1"</span>, <span class="st">"code.R"</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"1+1"</span>, <span class="st">"code.R"</span><span class="op">)</span>
     <span class="fu"><a href="../reference/style_file.html">style_file</a></span><span class="op">(</span><span class="st">"code.R"</span>, dry <span class="op">=</span> <span class="st">"on"</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">)</span></code></pre></div>
@@ -293,42 +244,42 @@ Status  Count   Legend
 Please review the changes carefully!</code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">out</span></code></pre></div>
-<pre><code># A tibble: 1 × 2
+<pre><code> [38;5;246m# A tibble: 1 × 2 [39m
   file   changed
-  &lt;chr&gt;  &lt;lgl&gt;  
-1 code.R TRUE   </code></pre>
+   [3m [38;5;246m&lt;chr&gt; [39m [23m   [3m [38;5;246m&lt;lgl&gt; [39m [23m  
+ [38;5;250m1 [39m code.R TRUE   </code></pre>
 </div>
-<div id="more-configuration-options" class="section level1">
-<h1 class="hasAnchor">
-<a href="#more-configuration-options" class="anchor"></a>More configuration options</h1>
-<div id="roxygen-code-example-styling" class="section level3">
-<h3 class="hasAnchor">
-<a href="#roxygen-code-example-styling" class="anchor"></a>Roxygen code example styling</h3>
+<div class="section level1">
+<h1 id="more-configuration-options">More configuration options<a class="anchor" aria-label="anchor" href="#more-configuration-options"></a>
+</h1>
+<div class="section level3">
+<h3 id="roxygen-code-example-styling">Roxygen code example styling<a class="anchor" aria-label="anchor" href="#roxygen-code-example-styling"></a>
+</h3>
 <p>This is enabled by default, you can turn it off with <code>include_roxygen_examples = FALSE</code>.</p>
 </div>
-<div id="custom-math-token-spacing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#custom-math-token-spacing" class="anchor"></a>Custom math token spacing</h3>
+<div class="section level3">
+<h3 id="custom-math-token-spacing">Custom math token spacing<a class="anchor" aria-label="anchor" href="#custom-math-token-spacing"></a>
+</h3>
 <p><code>styler</code> can identify and handle unary operators and other math tokens:</p>
-<pre class="styler"><code># Before
-1++1-1-1/2</code></pre>
-<pre><code># After
-1 + +1 - 1 - 1 / 2</code></pre>
+<pre class="styler"><code><span class="co"># Before</span>
+<span class="fl">1</span><span class="op">+</span><span class="op">+</span><span class="fl">1</span><span class="op">-</span><span class="fl">1</span><span class="op">-</span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span></code></pre>
+<pre><code><span class="co"># After</span>
+<span class="fl">1</span> <span class="op">+</span> <span class="op">+</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span></code></pre>
 <p>This is tidyverse style. However, styler offers very granular control for math token spacing. Assuming you like spacing around <code>+</code> and <code>-</code>, but not around <code>/</code> and <code>*</code> and <code>^</code>, do the following:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
   <span class="st">"1++1/2*2^2"</span>,
-  math_token_spacing <span class="op">=</span> <span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span><span class="op">(</span>zero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"'/'"</span>, <span class="st">"'*'"</span>, <span class="st">"'^'"</span><span class="op">)</span><span class="op">)</span>
+  math_token_spacing <span class="op">=</span> <span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span><span class="op">(</span>zero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"'/'"</span>, <span class="st">"'*'"</span>, <span class="st">"'^'"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>1 + +1/2*2^2</code></pre>
+<pre><code> [34m1 [39m  [32m+ [39m  [32m+ [39m [34m1 [39m [32m/ [39m [34m2 [39m [32m* [39m [34m2 [39m [32m^ [39m [34m2 [39m</code></pre>
 </div>
-<div id="custom-indention" class="section level3">
-<h3 class="hasAnchor">
-<a href="#custom-indention" class="anchor"></a>Custom indention</h3>
+<div class="section level3">
+<h3 id="custom-indention">Custom indention<a class="anchor" aria-label="anchor" href="#custom-indention"></a>
+</h3>
 <p>If you, say, don’t want comments starting with <code>###</code> to be indented and indention to be 4 instead of two spaces, you can formulate an unindention rule and set <code>indent_by</code> to 4:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
     <span class="st">"a &lt;- function() {"</span>,
     <span class="st">"### not to be indented"</span>,
     <span class="st">"# indent normally"</span>,
@@ -338,15 +289,15 @@ Please review the changes carefully!</code></pre>
   reindention <span class="op">=</span> <span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span><span class="op">(</span>regex_pattern <span class="op">=</span> <span class="st">"###"</span>, indention <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
   indent_by <span class="op">=</span> <span class="fl">4</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>a &lt;- function() {
-### not to be indented
-    # indent normally
-    33
-}</code></pre>
+<pre><code>a  [32m&lt;- [39m  [31mfunction [39m [33m( [39m [33m) [39m  [33m{ [39m
+ [38;5;247m [3m### not to be indented [23m [39m
+     [38;5;247m [3m# indent normally [23m [39m
+     [34m33 [39m
+ [33m} [39m</code></pre>
 </div>
-<div id="custom-style-guides" class="section level3">
-<h3 class="hasAnchor">
-<a href="#custom-style-guides" class="anchor"></a>Custom style guides</h3>
+<div class="section level3">
+<h3 id="custom-style-guides">Custom style guides<a class="anchor" aria-label="anchor" href="#custom-style-guides"></a>
+</h3>
 <p>These verse some (not all) configurations exposed in <code><a href="../reference/style_file.html">style_file()</a></code> and friends as well as <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>. If the above did not give you the flexibility you hoped for, your can create your own style guide and customize styler even further:</p>
 <ul>
 <li>either by removing rules from the tidyverse style guide as described in <code><a href="../articles/remove_rules.html">vignette("remove_rules")</a></code>.</li>
@@ -354,44 +305,28 @@ Please review the changes carefully!</code></pre>
 </ul>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by <a href="https://krlmlr.info">Kirill Müller</a>, <a href="https://lorenzwalthert.com">Lorenz Walthert</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://lorenzwalthert.com" class="external-link">Lorenz Walthert</a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script><script>
-  docsearch({
-    
-    
-    apiKey: '13580d327d8a7159f83a7cff178d2141',
-    indexName: 'r-lib_styler',
-    inputSelector: 'input#search-input.form-control',
-    transformData: function(hits) {
-      return hits.map(function (hit) {
-        hit.url = updateHitURL(hit);
-        return hit;
-      });
-    }
-  });
-</script>
-</body>
+
+  
+
+  </body>
 </html>
