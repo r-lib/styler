@@ -7,6 +7,8 @@
   is deprecated and will be removed in a future release. Please remove it from 
   your `.pre-commit-config.yaml` (#340. #341).
 
+**Other changes**
+
 * `style-files` hook fails more informatively if required package is not listed
   in `additional_dependencies:` (#333).
 * configure all git operations to use LF (#337).
