@@ -1,18 +1,18 @@
 library(touchstone)
 
-refs_install()
+branch_install()
 
-clear_ref_caches <- function() {
-  purrr::walk(c(ref_get_or_fail("GITHUB_BASE_REF"), ref_get_or_fail("GITHUB_HEAD_REF")),
+clear_branch_caches <- function() {
+  purrr::walk(c(branch_get_or_fail("GITHUB_BASE_REF"), branch_get_or_fail("GITHUB_HEAD_REF")),
     styler::cache_clear,
     ask = FALSE
   )
 }
 
-clear_ref_caches()
+clear_branch_caches()
 
 
-benchmark_run_ref(
+benchmark_run(
   expr_before_benchmark = {
     library(styler)
     cache_deactivate()
@@ -21,8 +21,8 @@ benchmark_run_ref(
   n = 30
 )
 
-clear_ref_caches()
-benchmark_run_ref(
+clear_branch_caches()
+benchmark_run(
   expr_before_benchmark = {
     library(styler)
     cache_activate(gert::git_branch())
@@ -31,8 +31,9 @@ benchmark_run_ref(
   n = 30
 )
 
-clear_ref_caches()
-benchmark_run_ref(
+clear_branch_caches()
+
+benchmark_run(
   expr_before_benchmark = {
     library(styler)
     cache_activate(gert::git_branch())
@@ -44,6 +45,6 @@ benchmark_run_ref(
   n = 30
 )
 
-clear_ref_caches()
+clear_branch_caches()
 
-benchmarks_analyze()
+benchmark_analyze()
