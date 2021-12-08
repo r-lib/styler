@@ -7,12 +7,44 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# Setting up CI/CD
+# Setting up CI
 
 When initializing pre-commit in your repo with `precommit::use_precommit()`, 
 you can specify the Continuous integration provider with `ci = "native"` if you 
 want to use [pre-commit.ci](https://pre-commit.ci) or `ci = "gha"` if you want 
 to use GitHub Actions. For existing repos, see below.
+
+Pre-commit will run the hooks on all files, so instead of pushing, waiting and 
+fixing issues locally, we recommend that you fix all problems before pushing by
+invoking pre-commit (roughly) the same way as it happens in the CI, which is 
+described in the next section 
+
+# Emulate a CI run locally
+
+In the CI run, a command roughly equivalent to the following will be ran from 
+the command line:
+
+```bash
+pre-commit run --all-files
+```
+
+If you get an error and `pre-commit` is not on your `$PATH` (e.g. because you 
+installed with `precommit::install_precommit()`), you can locate the executable 
+from R with 
+
+```r
+precommit::path_pre_commit_exec()
+#> "/usr/local/bin/pre-commit" 
+```
+
+And run the command in your bash terminal like this:
+
+```bash
+/usr/local/bin/pre-commit run --all-files
+```
+
+Then fix the problems, stage the files and re-try until the command succeeds
+without more errors.
 
 # Comparison 
 
