@@ -21,7 +21,7 @@ benchmark_run(
   n = 30
 )
 
-clear_ref_caches()
+clear_branch_caches()
 benchmark_run(
   expr_before_benchmark = {
     library(styler)
@@ -47,4 +47,4 @@ benchmark_run(
 
 clear_branch_caches()
 
-benchmarks_analyze()
+benchmark_analyze()
