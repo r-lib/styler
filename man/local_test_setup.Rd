@@ -20,3 +20,4 @@ Establish testing setup for current environment
 \item make styler quiet.
 }
 }
+\keyword{internal}

@@ -337,6 +337,7 @@ activate_testthat_cache <- purrr::partial(cache_activate, "testthat")
 #' @param .local_envir The environment to use for scoping.
 #' @details
 #' * make styler quiet.
+#' @keywords internal
 local_test_setup <- function(cache = FALSE,
                              .local_envir = parent.frame()) {
   current_cache <- cache_info(format = "tabular")
