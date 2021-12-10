@@ -172,7 +172,7 @@ sys_call <- function(...) {
 
 git_branch_set <- function(is_cran) {
   if (is_cran) {
-    branch_name <- paste0("r-v", desc::desc_get_version())
+    branch_name <- paste0("rc-v", desc::desc_get_version())
 
     sys_call(
       "git",
