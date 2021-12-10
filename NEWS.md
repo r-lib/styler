@@ -1,6 +1,7 @@
-# precommit v0.2.0.9001 (Development version)
+# precommit v0.2.1
 
-# precommit v0.2.0.9000
+This is a maintenance release on the request of CRAN (#337) and to improve 
+experience with the `language: r` switch conducted in `v0.2.0`.
 
 **API Changes**
 
