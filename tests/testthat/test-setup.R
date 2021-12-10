@@ -28,7 +28,7 @@ test_that("GitHub Action CI setup works", {
     git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
   )
   use_ci("gha", root = getwd())
-  expect_true(file_exists(".github/workflows/pre-commit.yaml"))
+  expect_true(fs::file_exists(".github/workflows/pre-commit.yaml"))
 })
 
 test_that("Pre-commit CI setup works", {
@@ -36,5 +36,5 @@ test_that("Pre-commit CI setup works", {
     git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
   )
   use_ci(root = getwd())
-  expect_false(file_exists(".github/workflows/pre-commit.yaml"))
+  expect_false(fs::file_exists(".github/workflows/pre-commit.yaml"))
 })

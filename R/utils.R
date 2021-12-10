@@ -12,14 +12,10 @@ is_url <- function(text) {
     inherits("url")
 }
 
-file_exists <- function(...) {
-  fs::file_exists(fs::path_expand(...))
-}
-
 
 path_if_exist <- function(...) {
   path <- c(...)
-  path[file_exists(path)]
+  path[fs::file_exists(path)]
 }
 
 is_conda_installation <- function() {

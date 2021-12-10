@@ -40,7 +40,7 @@ use_precommit_config <- function(config_source = getOption("precommit.config_sou
   )
   escaped_name_target <- "^\\.pre-commit-config\\.yaml$"
   name_target <- ".pre-commit-config.yaml"
-  if (!file_exists(fs::path(root, name_target)) | force) {
+  if (!fs::file_exists(fs::path(root, name_target)) | force) {
     fs::file_copy(
       config_source,
       fs::path(root, name_target),
@@ -103,7 +103,7 @@ set_config_source <- function(config_source,
     )
     config_source <- system.file(name_origin, package = "precommit")
   }
-  if (!file_exists(config_source)) {
+  if (!fs::file_exists(config_source)) {
     rlang::abort(paste0(
       "File ", config_source, " does not exist. Please use the ",
       "argument `config_source` to provide a path to an existing ",
