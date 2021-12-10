@@ -1,9 +1,0 @@
-#!/usr/bin/env Rscript
-
-# because we need access of .pre-commit-hooks.yaml in the vignette 
-# available-hooks and maybe more general in other places, we must put this
-# file under inst/ because otherwise it cannot be accessed (leaving it on top
-# level will fail r cmd check, the same when used as hidden file in inst/)
-fs::file_copy(
-  ".pre-commit-hooks.yaml", "inst/pre-commit-hooks.yaml", overwrite = TRUE
-)
