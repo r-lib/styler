@@ -1,7 +1,10 @@
 name: pre-commit
 on:
-- push
-- pull_request:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
