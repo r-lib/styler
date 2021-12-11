@@ -1,0 +1,55 @@
+name: pre-commit
+on:
+  push:
+    branches-ignore:
+      - 'master'
+      - 'main'
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-18.04
+    if: >-
+      !contains(github.event.head_commit.message, 'ci skip') &&
+      (
+        startsWith(github.ref, 'refs/heads') ||
+        github.event.pull_request.draft == false
+      )
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          # your system installation code here
+          # sudo apt-get install -y libcurl4-openssl-dev
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+      - name: Run pre-commit
+        uses: pre-commit/action@v2.0.3
+      - name: Commit files
+        if: failure() && startsWith(github.ref, 'refs/heads')
+        run: |
+          if [[ `git status --porcelain --untracked-files=no` ]]; then
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git checkout -- .github/workflows
+            git commit -m "pre-commit" -a
+          fi
+      - name: Push changes
+        if: failure() && startsWith(github.ref, 'refs/heads')
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+    env:
+      RENV_CONFIG_CACHE_ENABLED: FALSE

@@ -13,7 +13,7 @@
 * Bump minimal R requirement to 3.4 in line with the [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which 
   allowed to remove the dependency at {backports} and some exception handling.
 * Remove dependency on {xfun} (#866).
-* use bootstrap 5 with {pkgdown} 2.0
+* use pre-commit via GitHub Actions (#872).
 
 # styler 1.6.2
 
