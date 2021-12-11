@@ -46,7 +46,7 @@ NULL
 
 #' @importFrom rlang abort
 #' @keywords internal
-style_active_file <- function() {
+style_active_file <-function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
   transformer <- make_transformer(get_addins_style_transformer(),
