@@ -23,12 +23,23 @@ test_that("snippet generation works", {
 
 
 test_that("GitHub Action CI setup works", {
-  expect_error(use_ci("stuff"), "must be one of")
   local_test_setup(
     git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
   )
+  use_precommit_config(
+    root = getwd(),
+    open = FALSE, verbose = FALSE
+  )
+  expect_error(use_ci("stuff"), "must be one of")
   use_ci("gha", root = getwd())
   expect_true(fs::file_exists(".github/workflows/pre-commit.yaml"))
+})
+
+test_that("Pre-commit CI GitHub Action template is parsable", {
+  expect_error(
+    yaml::read_yaml(system.file("pre-commit-gha.yaml", package = "precommit")),
+    NA
+  )
 })
 
 test_that("Pre-commit CI setup works", {
