@@ -46,7 +46,7 @@ jobs:
             git commit -m "pre-commit" -a
           fi
       - name: Push changes
-        if: failure() && startsWith(github.ref, 'refs/heads')
+        if: failure() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
