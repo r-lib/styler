@@ -99,15 +99,25 @@ use_ci <- function(ci = getOption("precommit.ci", "native"),
       "{.code https://github.com/lorenzwalthert/precommit}."
     ))
   } else if (ci == "native") {
-    cli::cli_ul('You may need to skip the roxygenize hook in the CI run as explained in {.code vignette("ci", package = "precommit")}')
-    Sys.sleep(2)
-    cli::cli_ul("Sign in with GitHub to authenticate {.url https://pre-commit.ci}.")
+    cli::cli_ul(paste0(
+      "Sign in with GitHub to authenticate {.url https://pre-commit.ci} and ",
+      "then come back to complete the set-up process."
+    ))
     Sys.sleep(2)
     utils::browseURL("https://pre-commit.ci")
   } else {
     rlang::abort(
       'Argument `ci` must be one of `"native"` (default), `"gha"` or `NULL`.'
     )
+  }
+  config <- readLines(fs::path(root, ".pre-commit-config.yaml"))
+  if (length(grep("^ *- *id *: *roxygenize", config)) > 0) {
+    cli::cli_ul(paste0(
+      "It seems like you are using the roxygenize hook. This requires further ",
+      "edits in your {.code .pre-commit-config.yaml}, please run ",
+      "{.code precommit::snippet_generate('additional-deps-roxygenize')} to ",
+      "proceed."
+    ))
   }
 }
 
@@ -156,7 +166,7 @@ upstream_repo_url_is_outdated <- function() {
 #'
 #' * additional-deps-roxygenize: Code to paste into
 #'   `.pre-commit-config.yaml` for the additional dependencies required by
-#'   roxygen2.
+#'   the roxygenize hook.
 #' @param snippet Name of the snippet.
 #' @param open Whether or not to open the .pre-commit-config.yaml. The default
 #' is `TRUE` when working in  RStudio. Otherwise, we recommend manually opening
@@ -180,15 +190,15 @@ snippet_generate <- function(snippet = "",
     snippet_generate_impl_additional_deps_roxygenize(non_r_deps$package) %>%
       cat(sep = "")
     cat("\n")
-    cli::cli_ul(
+    cli::cli_ul(paste0(
       "Replace the `id: roxygenize` key in `.pre-commit-config.yaml` with the ",
       "above code."
-    )
+    ))
     cli::cli_alert_info(paste0(
       "Note that CI services like {.url pre-commit.ci} have build-time ",
-      "restrictions and installing the above dependencies may exceed those. ",
-      "To skip the hook on {.url pre-commit.ci}, see ",
-      '{.code vignette("ci", package = "precommit")}.'
+      "restrictions and installing the above dependencies may exceed those, ",
+      "resulting in a timeout. See ",
+      '{.code vignette("ci", package = "precommit")} for details and solutions.'
     ))
     remote_deps <- rlang::with_handlers(
       desc::desc_get_field("Remotes"),
@@ -198,7 +208,7 @@ snippet_generate <- function(snippet = "",
       rlang::warn(paste0(
         "It seems you have remote dependencies in your `DESCRIPTION`. You ",
         "need to edit the above list manually to match the syntax `renv::install()` ",
-        "understands, i.e. if you have in your `DESCRIPTION`", "
+        "understands, i.e. if you have in your `DESCRIPTION`
 
 Imports:
     tidyr
