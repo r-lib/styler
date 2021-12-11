@@ -7,6 +7,7 @@
 use_ci(
   ci = getOption("precommit.ci", "native"),
   force = FALSE,
+  open = rstudioapi::isAvailable(),
   root = here::here()
 )
 }
@@ -21,6 +22,9 @@ to \code{NULL} if you don't want to use a continuous integration.}
 
 \item{force}{Whether or not to overwrite an existing ci config file (only
 relevant for \code{ci = "gha"}).}
+
+\item{open}{Whether or not to open \href{https://pre-commit.ci}{pre-commit.ci}
+(if \code{ci = "native"}). The default is \code{TRUE} when working in RStudio.}
 
 \item{root}{The path to the root directory of your project.}
 }

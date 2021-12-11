@@ -35,6 +35,17 @@ test_that("Pre-commit CI setup works", {
   local_test_setup(
     git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
   )
-  use_ci(root = getwd())
+  use_precommit_config(
+    root = getwd(),
+    open = FALSE, verbose = FALSE
+  )
+  use_ci(root = getwd(), open = FALSE)
   expect_false(fs::file_exists(".github/workflows/pre-commit.yaml"))
+})
+
+test_that("Pre-commit CI setup works", {
+  local_test_setup(
+    git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
+  )
+  expect_error(use_ci(root = getwd(), open = FALSE), "o `.pre-commit-config.yaml`")
 })

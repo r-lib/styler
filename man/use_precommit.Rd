@@ -29,9 +29,10 @@ managed by pre-commit. "forbid", the default, will cause  \code{use_precommit()}
 to fail if there are such hooks. "allow" will run these along with
 pre-commit. "remove" will delete them.}
 
-\item{open}{Whether or not to open the .pre-commit-config.yaml after
-it's been placed in your repo. The default is \code{TRUE} when working in
-RStudio. Otherwise, we recommend manually inspecting the file.}
+\item{open}{Whether or not to open \code{.pre-commit-config.yaml} after
+it's been placed in your repo as well as
+\href{https://pre-commit.ci}{pre-commit.ci} (if \code{ci = "native"}). The default is
+\code{TRUE} when working in RStudio.}
 
 \item{install_hooks}{Whether to install environments for all available hooks.
 If \code{FALSE}, environments are installed with first commit.}

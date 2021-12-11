@@ -8,6 +8,10 @@
 #'   managed by pre-commit. "forbid", the default, will cause  `use_precommit()`
 #'   to fail if there are such hooks. "allow" will run these along with
 #'   pre-commit. "remove" will delete them.
+#' @param open Whether or not to open `.pre-commit-config.yaml` after
+#'   it's been placed in your repo as well as
+#'   [pre-commit.ci](https://pre-commit.ci) (if `ci = "native"`). The default is
+#'   `TRUE` when working in RStudio.
 #' @inheritParams fallback_doc
 #' @inheritParams use_precommit_config
 #' @inheritSection use_precommit_config Copying an existing config file
@@ -54,12 +58,8 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
   install_repo(root, install_hooks, legacy_hooks)
   if (open) {
     open_config(root)
-    use_ci(ci)
-  } else {
-    if (ci == "gha") {
-      use_ci(ci, force = force, root = root)
-    }
   }
+  use_ci(ci, force = force, open = open, root = root)
 
   invisible(NULL)
 }
@@ -78,10 +78,20 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 #'   to `NULL` if you don't want to use a continuous integration.
 #' @param force Whether or not to overwrite an existing ci config file (only
 #'   relevant for `ci = "gha"`).
+#' @param open Whether or not to open [pre-commit.ci](https://pre-commit.ci)
+#'   (if `ci = "native"`). The default is `TRUE` when working in RStudio.
 #' @inheritParams fallback_doc
 #' @export
 use_ci <- function(ci = getOption("precommit.ci", "native"),
-                   force = FALSE, root = here::here()) {
+                   force = FALSE,
+                   open = rstudioapi::isAvailable(),
+                   root = here::here()) {
+  if (!fs::file_exists(fs::path(root, ".pre-commit-config.yaml"))) {
+    rlang::abort(paste0(
+      "Your repo has no `.pre-commit-config.yaml` file, please initialize ",
+      "{precommit} with `precommit::use_precommit()`."
+    ))
+  }
   if (is.na(ci)) {
     return()
   } else if (ci == "gha") {
@@ -104,7 +114,9 @@ use_ci <- function(ci = getOption("precommit.ci", "native"),
       "then come back to complete the set-up process."
     ))
     Sys.sleep(2)
-    utils::browseURL("https://pre-commit.ci")
+    if (open) {
+      utils::browseURL("https://pre-commit.ci")
+    }
   } else {
     rlang::abort(
       'Argument `ci` must be one of `"native"` (default), `"gha"` or `NULL`.'
