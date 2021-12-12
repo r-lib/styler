@@ -182,11 +182,12 @@ ensure_renv_precommit_compat <- function(root = here::here()) {
           "repo. This is not well supported for users of RStudio and ",
           "`precommit > 0.1.3.9014` at the moment (details: ",
           "https://github.com/lorenzwalthert/precommit/issues/342). ",
-          "Autoupdate aborted."
+          "Autoupdate aborted and `rev:` in `.pre-commit-config.yaml` set to ",
+          "a version compatible with {renv}."
         ))
         config_lines <- gsub(
           paste0("^ *rev *: *", "v", as.character(rev)),
-          "    rev: 0.1.3.9014",
+          "    rev: v0.1.3.9014",
           config_lines
         )
         withr::local_options(encoding = "native.enc")
