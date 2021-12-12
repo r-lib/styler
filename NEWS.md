@@ -1,7 +1,10 @@
 # precommit v0.2.1
 
 This is a maintenance release on the request of CRAN (#337) and to improve 
-experience with the `language: r` switch conducted in `v0.2.0`.
+experience with the `language: r` switch conducted in `v0.2.0`. In particular, 
+note that projects using {renv} and RStudio are not very compatible with hook 
+versions > 0.1.3.9014 and `autoupdate()` results in downgrading the hook 
+versions (#346).
 
 **API Changes**
 
@@ -18,6 +21,7 @@ experience with the `language: r` switch conducted in `v0.2.0`.
 * `deps-in-desc` always excludes `README.md` (#336).
 * Document timeout and other problems with pre-commit.ci (#335).
 * simplify `roxygenize` problem handling (#338).
+* More executables on macOS are detected (#344).
 
 # precommit v0.2.0
 
