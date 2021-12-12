@@ -60,7 +60,6 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
     open_config(root)
   }
   use_ci(ci, force = force, open = open, root = root)
-
   invisible(NULL)
 }
 
@@ -158,13 +157,49 @@ autoupdate <- function(root = here::here()) {
         preamble = "Running precommit autoupdate failed."
       )
     }
+    ensure_renv_precommit_compat(root = root)
     invisible(out$exit_status)
   })
 }
 
+ensure_renv_precommit_compat <- function(root = here::here()) {
+  withr::local_dir(root)
+  path_config <- ".pre-commit-config.yaml"
+  config_lines <- readLines(path_config, encoding = "UTF-8")
+  has_renv <- fs::file_exists("renv.lock")
+  if (!has_renv) {
+    return()
+  }
+
+  rev <- rev_read(path_config)
+  rlang::with_handlers(
+    {
+      rev <- rev_as_pkg_version(rev)
+      maximal_rev <- package_version("0.1.3.9014")
+      if (rev > maximal_rev) {
+        rlang::warn(paste0(
+          "It seems like you want to use {renv} and {precommit} in the same ",
+          "repo. This is not well supported for users of RStudio and ",
+          "`precommit > 0.1.3.9014` at the moment (details: ",
+          "https://github.com/lorenzwalthert/precommit/issues/342). ",
+          "Autoupdate aborted."
+        ))
+        config_lines <- gsub(
+          paste0("^ *rev *: *", "v", as.character(rev)),
+          "    rev: 0.1.3.9014",
+          config_lines
+        )
+        withr::local_options(encoding = "native.enc")
+        writeLines(enc2utf8(config_lines), path_config, useBytes = TRUE)
+      }
+    },
+    error = function(e) NULL
+  )
+}
+
 
 upstream_repo_url_is_outdated <- function() {
-  purrr::map_chr(yaml::read_yaml(".pre-commit-config.yaml")$repos, ~ .x$repo) %>%
+  rev_read(".pre-commit-config.yaml") %>%
     grepl("https://github.com/lorenzwalthert/pre-commit-hooks", ., fixed = TRUE) %>%
     any()
 }

@@ -60,3 +60,28 @@ test_that("Pre-commit CI setup works", {
   )
   expect_error(use_ci(root = getwd(), open = FALSE), "o `.pre-commit-config.yaml`")
 })
+
+
+test_that("Autoupdate is not conducted when renv present", {
+  local_test_setup(
+    git = TRUE, use_precommit = TRUE, install_hooks = FALSE, open = FALSE
+  )
+  initial <- rev_read() %>%
+    rev_as_pkg_version()
+  # simulate adding {renv}
+  writeLines("", "renv.lock")
+
+  # should downgrade rev
+  expect_warning(autoupdate(root = getwd()), "Autoupdate aborted")
+  downgraded <- rev_read() %>%
+    rev_as_pkg_version()
+  expect_true(downgraded < initial)
+
+  # simulate removing {renv} should updagradd
+  fs::file_delete("renv.lock")
+  expect_warning(autoupdate(root = getwd()), NA)
+  after_upgrade <- rev_read() %>%
+    rev_as_pkg_version()
+
+  expect_true(after_upgrade > downgraded)
+})
