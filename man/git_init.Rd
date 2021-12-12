@@ -6,6 +6,9 @@
 \usage{
 git_init(path = ".")
 }
+\arguments{
+\item{path}{A path to where to init a git repository}
+}
 \description{
 In particular, to avoid CRAN errors
 \href{https://github.com/lorenzwalthert/precommit/issues/320}{lorenzwalthert/precommit#320}.
