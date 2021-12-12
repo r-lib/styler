@@ -139,7 +139,7 @@ hook_state_create <- function(tempdir,
                               env) {
   withr::local_dir(tempdir)
   files <- fs::path_rel(path_candidate_temp, tempdir)
-  # https://r.789695.n4.nabble.com/Error-message-Rscript-should-not-be-used-without-a-path-td4748071.html
+  # https://stat.ethz.ch/pipermail/r-devel/2018-February/075507.html
   system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
     args = c(path_executable, cmd_args, files),
     stderr = path_stderr, stdout = path_stdout, env = env
