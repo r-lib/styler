@@ -22,6 +22,8 @@ versions (#346).
 * Document timeout and other problems with pre-commit.ci (#335).
 * simplify `roxygenize` problem handling (#338).
 * More executables on macOS are detected (#344).
+* Only hard dependencies are generated with 
+  `snippet_generate("additional-deps-roxygenize")` (#344)
 
 Thanks to all people who contributed to this release: 
 

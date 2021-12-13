@@ -233,9 +233,18 @@ snippet_generate <- function(snippet = "",
       "\n"
     ))
     deps <- desc::desc_get_deps()
-    non_r_deps <- deps[!(deps$type == "Depends" & deps$package == "R"), ]
-    non_r_deps <- non_r_deps[order(non_r_deps$package), ]
-    snippet_generate_impl_additional_deps_roxygenize(non_r_deps$package) %>%
+    hard_dependencies <- deps[(deps$type %in% c("Depends", "Imports")), "package"]
+    hard_dependencies_vec <- hard_dependencies %>%
+      setdiff("R")
+    if (length(hard_dependencies_vec) < 1) {
+      cli::cli_alert_success(paste0(
+        "According to {.code DESCRIPTION}`, there are no hard dependencies of ",
+        "your package. You are set."
+      ))
+      return()
+    }
+    hard_dependencies %>%
+      snippet_generate_impl_additional_deps_roxygenize() %>%
       cat(sep = "")
     cat("\n")
     cli::cli_ul(paste0(
@@ -279,8 +288,7 @@ You need in your `.pre-commit-config.yaml`
 
 snippet_generate_impl_additional_deps_roxygenize <- function(packages, with_version = FALSE) {
   out <- paste0(
-    "        -    ", packages, if (with_version) "@",
-    if (with_version) purrr::map_chr(packages, ~ as.character(packageVersion(.x))), "\n",
+    "        -    ", packages, "\n",
     collapse = ""
   ) %>%
     sort()

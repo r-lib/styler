@@ -2,14 +2,19 @@ test_that("snippet generation works", {
   local_test_setup(
     git = FALSE, use_precommit = FALSE, package = TRUE, install_hooks = FALSE
   )
-  usethis::use_package("styler")
   usethis::use_package("R", "Depends", "3.6.0")
-  expect_warning(
+  expect_error(
     out <- capture_output(snippet_generate("additional-deps-roxygenize")),
-    NA
+    NA,
   )
+  usethis::use_package("styler")
+  expect_error(
+    out <- capture_output(snippet_generate("additional-deps-roxygenize")),
+    NA,
+  )
+
   expect_match(
-    out, "    -   id: roxygenize\n.*        -    styler\n        -    testthat\n$",
+    out, "    -   id: roxygenize\n.*        -    styler\n$",
   )
   desc::desc_set("Remotes", "r-lib/styler")
   expect_warning(
@@ -17,7 +22,23 @@ test_that("snippet generation works", {
     "you have remote dependencies "
   )
   expect_match(
-    out, "    -   id: roxygenize\n.*        -    styler\n        -    testthat\n$",
+    out, "    -   id: roxygenize\n.*        -    styler\n$",
+  )
+})
+
+test_that("snippet generation only includes hard dependencies", {
+  local_test_setup(
+    git = FALSE, use_precommit = FALSE, package = TRUE,
+    install_hooks = FALSE, open = FALSE
+  )
+  usethis::use_package("styler")
+  usethis::use_package("lintr", type = "Suggest")
+  expect_warning(
+    out <- capture_output(snippet_generate("additional-deps-roxygenize")),
+    NA
+  )
+  expect_match(
+    out, "    -   id: roxygenize\n.*        -    styler\n$",
   )
 })
 
