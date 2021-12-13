@@ -90,7 +90,7 @@ if (!on_cran()) {
       uninstall_precommit(scope = "repo", root = tempdir),
       "Uninstalled pre-commit from repo scope.*"
     )
-    expect_false(fs::file_exists(fs::path(tempdir, ".pre-commit-config.yaml")))
+    expect_false(file_exists(fs::path(tempdir, ".pre-commit-config.yaml")))
     expect_false(any(grepl(".pre-commit", readline(fs::path(tempdir, ".Rbuildignore")))))
     # second time
     expect_message(

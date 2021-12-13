@@ -20,7 +20,7 @@ path_precommit_exec <- function(check_if_exists = TRUE) {
   if (!check_if_exists) {
     return(final)
   }
-  if (!fs::file_exists(final)) {
+  if (!file_exists(final)) {
     rlang::abort(paste0(
       "pre-commit executable does not exist at ",
       final,
@@ -112,7 +112,7 @@ path_warn_multiple_execs <- function(paths) {
 
 path_candidate_to_actual <- function(candidate) {
   assumed <- fs::path(candidate, precommit_executable_file())
-  assumed[fs::file_exists(assumed)]
+  assumed[file_exists(assumed)]
 }
 
 path_derive_precommit_exec_linux <- function() {
@@ -212,7 +212,7 @@ path_derive_precommit_exec_conda_impl <- function(conda_env) {
         ifelse(is_windows(), "Scripts", ""),
         precommit_executable_file()
       )
-      unname(ifelse(fs::file_exists(derived), derived, ""))
+      unname(ifelse(file_exists(derived), derived, ""))
     },
     error = function(e) ""
   )

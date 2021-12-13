@@ -32,7 +32,7 @@ test_that("GitHub Action CI setup works", {
   )
   expect_error(use_ci("stuff"), "must be one of")
   use_ci("gha", root = getwd())
-  expect_true(fs::file_exists(".github/workflows/pre-commit.yaml"))
+  expect_true(file_exists(".github/workflows/pre-commit.yaml"))
 })
 
 test_that("Pre-commit CI GitHub Action template is parsable", {
@@ -51,7 +51,7 @@ test_that("Pre-commit CI setup works", {
     open = FALSE, verbose = FALSE
   )
   use_ci(root = getwd(), open = FALSE)
-  expect_false(fs::file_exists(".github/workflows/pre-commit.yaml"))
+  expect_false(file_exists(".github/workflows/pre-commit.yaml"))
 })
 
 test_that("Pre-commit CI setup works", {

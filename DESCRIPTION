@@ -15,7 +15,7 @@ Imports:
     R.cache,
     cli,
     docopt (>= 0.7.1),
-    fs (>= 1.5.2),
+    fs,
     here,
     magrittr,
     purrr,

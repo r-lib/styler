@@ -54,7 +54,7 @@ test_that(".Rbuildignore is written to the right directory when root is relative
     fs::path_dir(root),
     use_precommit_config(root = fs::path_file(root))
   )
-  expect_true(fs::file_exists(fs::path(root, ".Rbuildignore")))
+  expect_true(file_exists(fs::path(root, ".Rbuildignore")))
 })
 
 test_that(".Rbuildignore is written to the right directory when root is absolute", {
@@ -67,5 +67,5 @@ test_that(".Rbuildignore is written to the right directory when root is absolute
     desc$write("DESCRIPTION")
   })
   use_precommit_config(root = root)
-  expect_true(fs::file_exists(fs::path(root, ".Rbuildignore")))
+  expect_true(file_exists(fs::path(root, ".Rbuildignore")))
 })
