@@ -63,6 +63,7 @@ test_that("Pre-commit CI setup works", {
 
 
 test_that("Autoupdate is not conducted when renv present", {
+  skip_on_cran()
   local_test_setup(
     git = TRUE, use_precommit = TRUE, install_hooks = FALSE, open = FALSE
   )
