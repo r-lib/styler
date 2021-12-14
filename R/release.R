@@ -95,7 +95,7 @@ release_complete <- function(ask = TRUE, is_cran = ask, tag = NULL) {
     sys_call("git", glue::glue("push origin {tag}"))
   }
   fs::file_move("renv.lock", ".renv.lock")
-  precommit::autoupdate() # only updates if tag is on the main branch
+  autoupdate() # only updates if tag is on the main branch
   fs::file_move(".renv.lock", "renv.lock")
   desc::desc_bump_version("dev")
   cli::cli_alert_success("Bumped version to dev")
