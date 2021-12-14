@@ -157,7 +157,14 @@ autoupdate <- function(root = here::here()) {
         preamble = "Running precommit autoupdate failed."
       )
     }
-    ensure_renv_precommit_compat(root = root)
+    if (unname(read.dcf("DESCRIPTION")[, "Package"]) == "precommit") {
+      message(paste0(
+        "`autoupdate()` ran in {precommit} package directory, skipping ",
+        "`ensure_renv_precommit_compat()`"
+      ))
+    } else {
+      ensure_renv_precommit_compat(root = root)
+    }
     invisible(out$exit_status)
   })
 }
