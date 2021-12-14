@@ -21,3 +21,9 @@ if (getRversion() >= "2.15.1") {
     NULL
   ))
 }
+
+if (FALSE) {
+  # {here} is only used as a dependency for default arguments.
+  # this is to avoid a false positive CRAN note.
+  here::here
+}

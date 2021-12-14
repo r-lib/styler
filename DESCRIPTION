@@ -14,7 +14,6 @@ URL: https://lorenzwalthert.github.io/precommit/,
 Imports:
     R.cache,
     cli,
-    docopt (>= 0.7.1),
     fs,
     here,
     magrittr,
@@ -22,12 +21,12 @@ Imports:
     rlang,
     rprojroot,
     rstudioapi,
-    tibble,
     withr,
     yaml
 Suggests: 
     desc,
     digest,
+    docopt (>= 0.7.1),
     git2r,
     glue,
     knitr,
@@ -40,6 +39,7 @@ Suggests:
     spelling,
     styler,
     testthat (>= 2.1.0),
+    tibble,
     usethis (>= 2.0.0)
 VignetteBuilder: 
     knitr
