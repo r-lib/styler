@@ -304,7 +304,7 @@ run_test("roxygenize",
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### readme-rmd-rendered                                                     ####
-if (!has_git()) {
+if (has_git()) {
   run_test("readme-rmd-rendered",
     file_name = c("README.md", "README.Rmd"),
     suffix = "",

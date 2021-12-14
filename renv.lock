@@ -114,13 +114,6 @@
       "Repository": "CRAN",
       "Hash": "28763d08fadd0b733e3cee9dab4e12fe"
     },
-    "digest": {
-      "Package": "digest",
-      "Version": "0.6.29",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "cf6b206a045a684728c3267ef7596190"
-    },
     "docopt": {
       "Package": "docopt",
       "Version": "0.7.1",
