@@ -1,3 +1,8 @@
+# precommit v0.2.2
+
+- Fixing more CRAN issues (#348).
+- Use RSMP for all packages (#348).
+
 # precommit v0.2.1
 
 This is a maintenance release on the request of CRAN (#337) and to improve 
