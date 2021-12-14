@@ -147,12 +147,24 @@ path_derive_precommit_exec_win_python3plus_candidates <- function() {
 
 
 path_derive_precommit_exec_macOS <- function() {
+  path_derive_precommit_exec_macOS_candidates() %>%
+    path_derive_precommit_exec_impl()
+}
+
+path_derive_precommit_exec_macOS_candidates <- function() {
+  candidate_system <- fs::dir_ls(
+    path_if_exist("/Library/Frameworks/Python.framework/Versions/"),
+    # avoid alias to /Library/Frameworks/Python.framework/Versions/Current/
+    regexp = "[0-9]$"
+  )
+
+  candidate_user <- fs::dir_ls(path_if_exist("~/Library/Python/"))
   c(
-    fs::path(sort(fs::dir_ls(path_if_exist("~/Library/Python/")), decreasing = TRUE), "bin"), # pip
+    fs::path(sort(candidate_user, decreasing = TRUE), "bin"), # pip
+    fs::path(sort(candidate_system, decreasing = TRUE), "bin"),
     "/usr/local/bin", # homebrew
     "/opt/homebrew/bin" # homebrew Apple Silicon (M1 chip)
-  ) %>%
-    path_derive_precommit_exec_impl()
+  )
 }
 
 #' Derive the pre-commit executable from the path

@@ -1,6 +1,10 @@
-# precommit v0.2.0.9001 (Development version)
+# precommit v0.2.1
 
-# precommit v0.2.0.9000
+This is a maintenance release on the request of CRAN (#337) and to improve 
+experience with the `language: r` switch conducted in `v0.2.0`. In particular, 
+note that projects using {renv} and RStudio are not very compatible with hook 
+versions > 0.1.3.9014 and `autoupdate()` results in downgrading the hook 
+versions (#346).
 
 **API Changes**
 
@@ -17,6 +21,13 @@
 * `deps-in-desc` always excludes `README.md` (#336).
 * Document timeout and other problems with pre-commit.ci (#335).
 * simplify `roxygenize` problem handling (#338).
+* More executables on macOS are detected (#344).
+* Only hard dependencies are generated with 
+  `snippet_generate("additional-deps-roxygenize")` (#344)
+
+Thanks to all people who contributed to this release: 
+
+[&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;pat-s](https://github.com/pat-s), and [&#x0040;smingerson](https://github.com/smingerson).
 
 # precommit v0.2.0
 
@@ -139,11 +150,11 @@ A big hand to all the contributors of this release:
 [&#x0040;arbues6](https://github.com/arbues6), 
 [&#x0040;b4D8](https://github.com/b4D8), 
 [&#x0040;bart1](https://github.com/bart1), 
-[&#x0040;dhersz](https://github.com/dhersz), [&#x0040;github-actions[bot]](https://github.com/github-actions[bot]), [&#x0040;joelnitta](https://github.com/joelnitta), 
+[&#x0040;dhersz](https://github.com/dhersz), [&#x0040;joelnitta](https://github.com/joelnitta), 
 [&#x0040;jucor](https://github.com/jucor),
 [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;lukasfeick-sw](https://github.com/lukasfeick-sw), [&#x0040;MarkMc1089](https://github.com/MarkMc1089), 
 [&#x0040;njtierney](https://github.com/njtierney), 
-[&#x0040;pat-s](https://github.com/pat-s), [&#x0040;pre-commit-ci[bot]](https://github.com/pre-commit-ci[bot]), [&#x0040;pwildenhain](https://github.com/pwildenhain), and [&#x0040;rossdrucker](https://github.com/rossdrucker)
+[&#x0040;pat-s](https://github.com/pat-s), [&#x0040;pwildenhain](https://github.com/pwildenhain), and [&#x0040;rossdrucker](https://github.com/rossdrucker)
 
 For previous versions of `NEWS.md` with news bullet per patch release, see the 
 [latest `NEWS.md` before gathering](https://github.com/lorenzwalthert/precommit/blob/7a8740714ab868d20e981b8b80898d7be050e34e/NEWS.md).

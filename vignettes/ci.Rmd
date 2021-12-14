@@ -12,12 +12,12 @@ vignette: >
 When initializing pre-commit in your repo with `precommit::use_precommit()`, 
 you can specify the Continuous integration provider with `ci = "native"` if you 
 want to use [pre-commit.ci](https://pre-commit.ci) or `ci = "gha"` if you want 
-to use GitHub Actions. For existing repos, see below.
+to use GitHub Actions. For existing repos, use `precommit::use_ci()`.
 
 Pre-commit will run the hooks on all files, so instead of pushing, waiting and 
 fixing issues locally, we recommend that you fix all problems before pushing by
 invoking pre-commit (roughly) the same way as it happens in the CI, which is 
-described in the next section 
+described in the next section.
 
 # Emulate a CI run locally
 
@@ -75,24 +75,26 @@ roxygenize hook in the ci run under certain circumstances as explained below.
     `precommit::snippet_generate('additional-deps-roxygenize')`. This is also 
     required to run the hook locally.
   - There is a [timeout of 120s for building a hook environment](https://github.com/pre-commit-ci/runner-image/issues/93#issuecomment-922505301), 
-    which might not be enough to build the hook environment for the roxygenize 
-    hook (if you package has many dependencies)
+    which might not be enough time to build the hook environment for the 
+    roxygenize hook (if you package has many dependencies). This holds for local
+    and remote execution.
   - `System dependencies are not supported. In particular, since {roxygen2} 
     [requires loading your package for the roxygenize hook](https://github.com/r-lib/roxygen2/issues/771), 
     this hook will fail if your package has system dependencies or any of your
     package's dependencies has system dependencies that are not shipped with 
     the package.
+- To overcome the above limitations, you can: 
+  - Disable the hook completely (by commenting out the respective lines in 
+  `.pre-commit-config.yaml`).
+  - Use GitHub Actions as a CI provider instead with `precommit::use_ci("gha")`.
+  - Skip it on CI as described below
   
+  ```yaml
+  ci:
+      skip: [roxygenize]
+  ```
 
 **Customization:**
-
-You can skip a hook on [pre-commit.ci](https://pre-commit.ci/) by setting 
-the respective option in `.pre-commit-config.yaml`:
-
-```yaml
-ci:
-    skip: [pylint]
-```
 
 Please see the documentation of [pre-commit.ci](https://pre-commit.ci/) on 
 whether or not to auto-fix problems as well as other configuration options.
@@ -121,10 +123,3 @@ whether or not to auto-fix problems as well as other configuration options.
   when GitHub changes the syntax, you need to adapt it to prevent failing 
   builds.
 - You'll have one additional file per provider (e.g. GitHub, Gitlab).
-
-
-# Migrating existent repos
-
-We provide helper functionality to set up CI/CD. Use `precommit::use_ci("gha")` 
-for GitHub Actions or `precommit::use_ci("native")` for pre-commit.ci 
-respectively.

@@ -27,6 +27,6 @@ Currently supported:
 \itemize{
 \item additional-deps-roxygenize: Code to paste into
 \code{.pre-commit-config.yaml} for the additional dependencies required by
-roxygen2.
+the roxygenize hook.
 }
 }

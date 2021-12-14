@@ -107,12 +107,14 @@ roxygen_assert_additional_dependencies <- function() {
     # case used in package but not installed
     rlang::abort(paste0(
       "The roxygenize hook requires all dependencies of your package to be listed in ",
-      "the file `.pre-commit-config.yaml`.",
+      "the file `.pre-commit-config.yaml`. ",
       "Call `precommit::snippet_generate('additional-deps-roxygenize')` ",
-      "to generate that list or ",
-      "comment out the hook under \n\n",
-      "`    -   id: roxygenize` \n\n to deactivate the hook.",
-      "\n\nThe initial error (from `pkgload::load_all()`) was: ",
+      "to generate that list or, to completely deactivate the hook, ",
+      "comment out all lines corresponding to that hook under \n\n",
+      "    -   id: roxygenize\n",
+      "        some_key_under_id_roxygenize: comment-out-as-well\n",
+      "    -   id: some-other-hook-do-not-comment-out\n\n",
+      "The initial error (from `pkgload::load_all()`) was: ",
       conditionMessage(out), ".\n\n"
     ))
   }

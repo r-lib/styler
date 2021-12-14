@@ -8,6 +8,10 @@
 #'   managed by pre-commit. "forbid", the default, will cause  `use_precommit()`
 #'   to fail if there are such hooks. "allow" will run these along with
 #'   pre-commit. "remove" will delete them.
+#' @param open Whether or not to open `.pre-commit-config.yaml` after
+#'   it's been placed in your repo as well as
+#'   [pre-commit.ci](https://pre-commit.ci) (if `ci = "native"`). The default is
+#'   `TRUE` when working in RStudio.
 #' @inheritParams fallback_doc
 #' @inheritParams use_precommit_config
 #' @inheritSection use_precommit_config Copying an existing config file
@@ -54,13 +58,8 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
   install_repo(root, install_hooks, legacy_hooks)
   if (open) {
     open_config(root)
-    use_ci(ci)
-  } else {
-    if (ci == "gha") {
-      use_ci(ci, force = force, root = root)
-    }
   }
-
+  use_ci(ci, force = force, open = open, root = root)
   invisible(NULL)
 }
 
@@ -78,10 +77,20 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
 #'   to `NULL` if you don't want to use a continuous integration.
 #' @param force Whether or not to overwrite an existing ci config file (only
 #'   relevant for `ci = "gha"`).
+#' @param open Whether or not to open [pre-commit.ci](https://pre-commit.ci)
+#'   (if `ci = "native"`). The default is `TRUE` when working in RStudio.
 #' @inheritParams fallback_doc
 #' @export
 use_ci <- function(ci = getOption("precommit.ci", "native"),
-                   force = FALSE, root = here::here()) {
+                   force = FALSE,
+                   open = rstudioapi::isAvailable(),
+                   root = here::here()) {
+  if (!fs::file_exists(fs::path(root, ".pre-commit-config.yaml"))) {
+    rlang::abort(paste0(
+      "Your repo has no `.pre-commit-config.yaml` file, please initialize ",
+      "{precommit} with `precommit::use_precommit()`."
+    ))
+  }
   if (is.na(ci)) {
     return()
   } else if (ci == "gha") {
@@ -99,15 +108,27 @@ use_ci <- function(ci = getOption("precommit.ci", "native"),
       "{.code https://github.com/lorenzwalthert/precommit}."
     ))
   } else if (ci == "native") {
-    cli::cli_ul('You may need to skip the roxygenize hook in the CI run as explained in {.code vignette("ci", package = "precommit")}')
+    cli::cli_ul(paste0(
+      "Sign in with GitHub to authenticate {.url https://pre-commit.ci} and ",
+      "then come back to complete the set-up process."
+    ))
     Sys.sleep(2)
-    cli::cli_ul("Sign in with GitHub to authenticate {.url https://pre-commit.ci}.")
-    Sys.sleep(2)
-    utils::browseURL("https://pre-commit.ci")
+    if (open) {
+      utils::browseURL("https://pre-commit.ci")
+    }
   } else {
     rlang::abort(
       'Argument `ci` must be one of `"native"` (default), `"gha"` or `NULL`.'
     )
+  }
+  config <- readLines(fs::path(root, ".pre-commit-config.yaml"))
+  if (length(grep("^ *- *id *: *roxygenize", config)) > 0) {
+    cli::cli_ul(paste0(
+      "It seems like you are using the roxygenize hook. This requires further ",
+      "edits in your {.code .pre-commit-config.yaml}, please run ",
+      "{.code precommit::snippet_generate('additional-deps-roxygenize')} to ",
+      "proceed."
+    ))
   }
 }
 
@@ -136,13 +157,50 @@ autoupdate <- function(root = here::here()) {
         preamble = "Running precommit autoupdate failed."
       )
     }
+    ensure_renv_precommit_compat(root = root)
     invisible(out$exit_status)
   })
 }
 
+ensure_renv_precommit_compat <- function(root = here::here()) {
+  withr::local_dir(root)
+  path_config <- ".pre-commit-config.yaml"
+  config_lines <- readLines(path_config, encoding = "UTF-8")
+  has_renv <- fs::file_exists("renv.lock")
+  if (!has_renv) {
+    return()
+  }
+
+  rev <- rev_read(path_config)
+  rlang::with_handlers(
+    {
+      rev <- rev_as_pkg_version(rev)
+      maximal_rev <- package_version("0.1.3.9014")
+      if (rev > maximal_rev) {
+        rlang::warn(paste0(
+          "It seems like you want to use {renv} and {precommit} in the same ",
+          "repo. This is not well supported for users of RStudio and ",
+          "`precommit > 0.1.3.9014` at the moment (details: ",
+          "https://github.com/lorenzwalthert/precommit/issues/342). ",
+          "Autoupdate aborted and `rev:` in `.pre-commit-config.yaml` set to ",
+          "a version compatible with {renv}."
+        ))
+        config_lines <- gsub(
+          paste0("^ *rev *: *", "v", as.character(rev)),
+          "    rev: v0.1.3.9014",
+          config_lines
+        )
+        withr::local_options(encoding = "native.enc")
+        writeLines(enc2utf8(config_lines), path_config, useBytes = TRUE)
+      }
+    },
+    error = function(e) NULL
+  )
+}
+
 
 upstream_repo_url_is_outdated <- function() {
-  purrr::map_chr(yaml::read_yaml(".pre-commit-config.yaml")$repos, ~ .x$repo) %>%
+  rev_read(".pre-commit-config.yaml") %>%
     grepl("https://github.com/lorenzwalthert/pre-commit-hooks", ., fixed = TRUE) %>%
     any()
 }
@@ -156,7 +214,7 @@ upstream_repo_url_is_outdated <- function() {
 #'
 #' * additional-deps-roxygenize: Code to paste into
 #'   `.pre-commit-config.yaml` for the additional dependencies required by
-#'   roxygen2.
+#'   the roxygenize hook.
 #' @param snippet Name of the snippet.
 #' @param open Whether or not to open the .pre-commit-config.yaml. The default
 #' is `TRUE` when working in  RStudio. Otherwise, we recommend manually opening
@@ -175,20 +233,29 @@ snippet_generate <- function(snippet = "",
       "\n"
     ))
     deps <- desc::desc_get_deps()
-    non_r_deps <- deps[!(deps$type == "Depends" & deps$package == "R"), ]
-    non_r_deps <- non_r_deps[order(non_r_deps$package), ]
-    snippet_generate_impl_additional_deps_roxygenize(non_r_deps$package) %>%
+    hard_dependencies <- deps[(deps$type %in% c("Depends", "Imports")), "package"]
+    hard_dependencies_vec <- hard_dependencies %>%
+      setdiff("R")
+    if (length(hard_dependencies_vec) < 1) {
+      cli::cli_alert_success(paste0(
+        "According to {.code DESCRIPTION}`, there are no hard dependencies of ",
+        "your package. You are set."
+      ))
+      return()
+    }
+    hard_dependencies %>%
+      snippet_generate_impl_additional_deps_roxygenize() %>%
       cat(sep = "")
     cat("\n")
-    cli::cli_ul(
+    cli::cli_ul(paste0(
       "Replace the `id: roxygenize` key in `.pre-commit-config.yaml` with the ",
       "above code."
-    )
+    ))
     cli::cli_alert_info(paste0(
       "Note that CI services like {.url pre-commit.ci} have build-time ",
-      "restrictions and installing the above dependencies may exceed those. ",
-      "To skip the hook on {.url pre-commit.ci}, see ",
-      '{.code vignette("ci", package = "precommit")}.'
+      "restrictions and installing the above dependencies may exceed those, ",
+      "resulting in a timeout. See ",
+      '{.code vignette("ci", package = "precommit")} for details and solutions.'
     ))
     remote_deps <- rlang::with_handlers(
       desc::desc_get_field("Remotes"),
@@ -198,7 +265,7 @@ snippet_generate <- function(snippet = "",
       rlang::warn(paste0(
         "It seems you have remote dependencies in your `DESCRIPTION`. You ",
         "need to edit the above list manually to match the syntax `renv::install()` ",
-        "understands, i.e. if you have in your `DESCRIPTION`", "
+        "understands, i.e. if you have in your `DESCRIPTION`
 
 Imports:
     tidyr
@@ -221,8 +288,7 @@ You need in your `.pre-commit-config.yaml`
 
 snippet_generate_impl_additional_deps_roxygenize <- function(packages, with_version = FALSE) {
   out <- paste0(
-    "        -    ", packages, if (with_version) "@",
-    if (with_version) purrr::map_chr(packages, ~ as.character(packageVersion(.x))), "\n",
+    "        -    ", packages, "\n",
     collapse = ""
   ) %>%
     sort()

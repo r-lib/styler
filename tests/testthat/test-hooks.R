@@ -138,7 +138,11 @@ run_test("parsable-R",
 # failure
 run_test("parsable-R", suffix = "-fail.R", error_msg = "not parsable")
 
-run_test("parsable-R", suffix = "-fail.Rmd", error_msg = "not parsable")
+run_test(
+  "parsable-R",
+  suffix = "-fail.Rmd",
+  error_msg = "parsable-R-fail.Rmd is not parsable"
+)
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### spell-check                                                             ####
