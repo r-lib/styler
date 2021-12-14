@@ -1,6 +1,5 @@
-This is a re-submission to fix problems related to end of line encoding
-in R devel on windows related to the new UCRT toolchain (https://github.com/lorenzwalthert/precommit/issues/320), missing system
-requirements and other issues.
+This is a re-submission to fix missing system requirements and unused import
+showing up in R devel.
 
 ## Test environments
 
