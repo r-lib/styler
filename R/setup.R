@@ -158,9 +158,9 @@ autoupdate <- function(root = here::here()) {
       )
     }
     is_precommit <- rlang::with_handlers(
-      unname(read.dcf("DESCRIPTION")[, "Package"]) == "precommit", 
+      unname(read.dcf("DESCRIPTION")[, "Package"]) == "precommit",
       error = function(e) FALSE
-    ) 
+    )
     if (is_precommit) {
       message(paste0(
         "`autoupdate()` ran in {precommit} package directory, skipping ",
