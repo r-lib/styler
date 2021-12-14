@@ -238,32 +238,36 @@ run_test("deps-in-desc",
 # because .Rprofile is executed on startup, this must be an installed
 # package (to not give an error staight away) not listed in
 # test_path("in/DESCRIPTION")
-expect_true(rlang::is_installed("R.cache"))
-run_test("deps-in-desc",
-  "Rprofile",
-  suffix = "", error_msg = "Dependency check failed",
-  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
-  file_transformer = function(files) {
-    writeLines("R.cache::findCache", files)
-    fs::file_move(
-      files,
-      fs::path(fs::path_dir(files), paste0(".", fs::path_file(files)))
-    )
-  }
-)
+if (Sys.getenv("GITHUB_WORKFLOW") != "Hook tests") {
+  # seems like .Rprofile with renv activation does not get executed when
+  # argument to Rscript contains Rprofile ?! Skip this
+  expect_true(rlang::is_installed("R.cache"))
+  run_test("deps-in-desc",
+    "Rprofile",
+    suffix = "", error_msg = "Dependency check failed",
+    artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+    file_transformer = function(files) {
+      writeLines("R.cache::findCache", files)
+      fs::file_move(
+        files,
+        fs::path(fs::path_dir(files), paste0(".", fs::path_file(files)))
+      )
+    }
+  )
 
-run_test("deps-in-desc",
-  "Rprofile",
-  suffix = "", error_msg = NULL,
-  artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
-  file_transformer = function(files) {
-    writeLines("utils::head", files)
-    fs::file_move(
-      files,
-      fs::path(fs::path_dir(files), paste0(".", fs::path_file(files)))
-    )
-  }
-)
+  run_test("deps-in-desc",
+    "Rprofile",
+    suffix = "", error_msg = NULL,
+    artifacts = c("DESCRIPTION" = test_path("in/DESCRIPTION")),
+    file_transformer = function(files) {
+      writeLines("utils::head", files)
+      fs::file_move(
+        files,
+        fs::path(fs::path_dir(files), paste0(".", fs::path_file(files)))
+      )
+    }
+  )
+}
 
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
@@ -304,84 +308,68 @@ run_test("roxygenize",
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### readme-rmd-rendered                                                     ####
-run_test("readme-rmd-rendered",
-  file_name = c("README.Rmd", "README.md"),
-  suffix = "",
-  error_msg = NULL,
-  msg = NULL,
-  file_transformer = function(files) {
-    if (length(files) > 1) {
-      # transformer is called once on all files and once per file
-      content_2 <- readLines(files[2])
-      Sys.sleep(2)
-      writeLines(content_2, files[2])
-      git_init()
-      git2r::add(path = files)
+if (has_git()) {
+  run_test("readme-rmd-rendered",
+    file_name = c("README.md", "README.Rmd"),
+    suffix = "",
+    error_msg = "out of date",
+    msg = NULL,
+    file_transformer = function(files) {
+      if (length(files) > 1) {
+        # transformer is called once on all files and once per file
+        content_2 <- readLines(files[2])
+        Sys.sleep(2)
+        writeLines(content_2, files[2])
+        git_init()
+        git2r::add(path = files)
+      }
+      files
     }
-    files
-  }
-)
+  )
 
-run_test("readme-rmd-rendered",
-  file_name = c("README.md", "README.Rmd"),
-  suffix = "",
-  error_msg = "out of date",
-  msg = NULL,
-  file_transformer = function(files) {
-    if (length(files) > 1) {
-      # transformer is called once on all files and once per file
-      content_2 <- readLines(files[2])
-      Sys.sleep(2)
-      writeLines(content_2, files[2])
-      git_init()
-      git2r::add(path = files)
+
+  # only one file staged
+  run_test("readme-rmd-rendered",
+    file_name = c("README.Rmd", "README.md"),
+    suffix = "",
+    error_msg = "should be both staged",
+    msg = NULL,
+    file_transformer = function(files) {
+      if (length(files) > 1) {
+        # transformer is called once on all files and once per file
+        content_2 <- readLines(files[2])
+        Sys.sleep(2)
+        writeLines(content_2, files[2])
+        git_init()
+        git2r::add(path = files[1])
+      }
+      files
     }
-    files
-  }
-)
+  )
 
-
-# only one file staged
-run_test("readme-rmd-rendered",
-  file_name = c("README.Rmd", "README.md"),
-  suffix = "",
-  error_msg = "should be both staged",
-  msg = NULL,
-  file_transformer = function(files) {
-    if (length(files) > 1) {
-      # transformer is called once on all files and once per file
-      content_2 <- readLines(files[2])
-      Sys.sleep(2)
-      writeLines(content_2, files[2])
+  # only has md
+  run_test("readme-rmd-rendered",
+    file_name = "README.md",
+    suffix = "",
+    error_msg = NULL,
+    msg = NULL,
+    file_transformer = function(files) {
       git_init()
       git2r::add(path = files[1])
+      files
     }
-    files
-  }
-)
+  )
 
-# only has md
-run_test("readme-rmd-rendered",
-  file_name = "README.md",
-  suffix = "",
-  error_msg = NULL,
-  msg = NULL,
-  file_transformer = function(files) {
-    git_init()
-    git2r::add(path = files[1])
-    files
-  }
-)
-
-# only has Rmd
-run_test("readme-rmd-rendered",
-  file_name = "README.Rmd",
-  suffix = "",
-  error_msg = NULL,
-  msg = NULL,
-  file_transformer = function(files) {
-    git_init()
-    git2r::add(path = files[1])
-    files
-  }
-)
+  # only has Rmd
+  run_test("readme-rmd-rendered",
+    file_name = "README.Rmd",
+    suffix = "",
+    error_msg = NULL,
+    msg = NULL,
+    file_transformer = function(files) {
+      git_init()
+      git2r::add(path = files[1])
+      files
+    }
+  )
+}

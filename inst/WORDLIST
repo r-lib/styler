@@ -188,6 +188,7 @@ styler
 sublicenses
 Sublicensing
 Sys
+SystemRequirements
 tcltk
 tempfile
 testthat
