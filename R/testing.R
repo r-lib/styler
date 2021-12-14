@@ -141,7 +141,7 @@ hook_state_create <- function(tempdir,
   files <- fs::path_rel(path_candidate_temp, tempdir)
   # https://stat.ethz.ch/pipermail/r-devel/2018-February/075507.html
   system2(paste0(Sys.getenv("R_HOME"), "/bin/Rscript"),
-    args = c(path_executable, cmd_args, files),
+    args = as.character(c(path_executable, cmd_args, files)),
     stderr = path_stderr, stdout = path_stdout, env = env
   )
 }
