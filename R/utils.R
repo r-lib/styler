@@ -99,3 +99,7 @@ rev_read <- function(path = ".pre-commit-config.yaml", repo = hooks_repo) {
 rev_as_pkg_version <- function(rev) {
   package_version(gsub("^v", "", rev))
 }
+
+has_git <- function() {
+  nzchar(Sys.which("git"))
+}

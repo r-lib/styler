@@ -12,12 +12,12 @@ License: GPL-3
 URL: https://lorenzwalthert.github.io/precommit/,
     https://github.com/lorenzwalthert/precommit
 Imports:
-    R.cache,
     cli,
     fs,
     here,
     magrittr,
     purrr,
+    R.cache,
     rlang,
     rprojroot,
     rstudioapi,
@@ -49,3 +49,4 @@ Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace", "collate",
     warning("Please install r-lib/pkgapi to make sure the file API is kept
     up to date"); NULL} ) )
 RoxygenNote: 7.1.2
+SystemRequirements: git
