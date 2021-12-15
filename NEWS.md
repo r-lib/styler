@@ -1,7 +1,7 @@
-# precommit v0.2.3
+# precommit v0.2.9001 (Development version)
 
-- Fixing more CRAN issues (#348).
-- Use RSMP for all packages (#348).
+* updating hook tag.
+
 
 # precommit v0.2.1
 
@@ -29,6 +29,8 @@ versions (#346).
 * More executables on macOS are detected (#344).
 * Only hard dependencies are generated with 
   `snippet_generate("additional-deps-roxygenize")` (#344)
+* Fixing more CRAN issues (#348).
+* Use RSMP for all packages (#348).
 
 Thanks to all people who contributed to this release: 
 
