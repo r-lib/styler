@@ -1,9 +1,9 @@
-# precommit v0.2.9001 (Development version)
+# precommit v0.2.1.9001 (Development version)
 
 * updating hook tag.
 
 
-# precommit v0.2.1
+# precommit v0.2.2
 
 This is a maintenance release on the request of CRAN (#337) and to improve 
 experience with the `language: r` switch conducted in `v0.2.0`. In particular, 
