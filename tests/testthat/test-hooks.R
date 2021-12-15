@@ -307,6 +307,55 @@ run_test("roxygenize",
 
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+### codemeata                                                               ####
+run_test("codemeta-description-update",
+  file_name = c("codemeta.json"),
+  suffix = "",
+  error_msg = "No `DESCRIPTION` found in repository.",
+  msg = NULL,
+)
+
+run_test("codemeta-description-update",
+  file_name = c("DESCRIPTION"),
+  suffix = "",
+  error_msg = "No `codemeta.json` found in repository.",
+  msg = NULL,
+)
+
+
+# outdated
+run_test("codemeta-description-update",
+  file_name = c("DESCRIPTION", "codemeta.json"),
+  suffix = "",
+  error_msg = "out of date",
+  msg = NULL,
+  file_transformer = function(files) {
+    if (length(files) > 1) {
+      # transformer is called once on all files and once per file
+      content_2 <- readLines(files[1])
+      Sys.sleep(2)
+      writeLines(content_2, files[1])
+    }
+    files
+  }
+)
+
+# succeed
+run_test("codemeta-description-update",
+  file_name = c("DESCRIPTION", "codemeta.json"),
+  suffix = "",
+  file_transformer = function(files) {
+    if (length(files) > 1) {
+      # transformer is called once on all files and once per file
+      content_2 <- readLines(files[2])
+      Sys.sleep(2)
+      writeLines(content_2, files[2])
+    }
+    files
+  }
+)
+
+### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### readme-rmd-rendered                                                     ####
 if (has_git()) {
   run_test("readme-rmd-rendered",

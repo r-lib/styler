@@ -46,7 +46,7 @@
     name: codemeta-description-updated
     description: make sure codemeta.json is in sync with DESCRIPTION. It should be run after use-tidy-description.
     entry: inst/hooks/exported/codemeta-description-updated
-    language: script
+    language: r
     files: '^DESCRIPTION$'
     minimum_pre_commit_version: "2.13.0"
 -   id: spell-check 
