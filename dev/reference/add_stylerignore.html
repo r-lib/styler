@@ -130,7 +130,7 @@ the R options <code>styler.ignore_start</code> and <code>styler.ignore_stop</cod
 <li><p>it is not a comment, but the last token on the line is a marker.</p></li>
 </ul><p>See examples in <a href="stylerignore.html">stylerignore</a>. Note that you should reuse the stylerignore
 column to compute switch points or similar and not a plain
-<code>pd$text == option_read("styler.ignore_start")</code> because that will fail to
+<code>pd$text %in% option_read("styler.ignore_start")</code> because that will fail to
 give correct switch points in the case stylerignore sequences are invalid.</p>
     </div>
 

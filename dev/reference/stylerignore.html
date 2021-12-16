@@ -120,20 +120,19 @@ making stylerignore redundant. See a few illustrative examples below.</p>
 
     <div id="details">
     <h2>Details</h2>
-    <p>Styling is on by default when you run styler.</p><ul><li><p>To mark the start of a sequence where you want to turn styling off, use
+    <p>Styling is on for all lines by default when you run styler.</p><ul><li><p>To mark the start of a sequence where you want to turn styling off, use
 <code># styler: off</code>.</p></li>
 <li><p>To mark the end of this sequence, put <code># styler: on</code> in your code. After
 that line, styler will again format your code.</p></li>
 <li><p>To ignore an inline statement (i.e. just one line), place <code># styler: off</code>
-at the end of the line. Note that inline statements cannot contain other
-comments apart from the marker, i.e. a line like
-<code>1 # comment # styler: off</code> won't be ignored.</p></li>
-</ul><p>To use something else as start and stop markers, set the R options
+at the end of the line.
+To use something else as start and stop markers, set the R options
 <code>styler.ignore_start</code> and
-<code>styler.ignore_stop</code> using <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code>. If you want these
-settings to persist over multiple R sessions, consider setting them in your
-R profile, e.g. with <code>usethis::edit_rprofile()</code>.</p>
-    </div>
+<code>styler.ignore_stop</code> using <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code>. For styler version &gt; 1.6.2, the
+option supports character vectors longer than one and the marker are not
+exactly matched, but using a  regular expression, which means you can have
+multiple marker on one line, e.g. <code># nolint start styler: off</code>.</p></li>
+</ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
