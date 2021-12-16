@@ -10,23 +10,21 @@ for \verb{styler > 1.2.0}, some alignment is
 making stylerignore redundant. See a few illustrative examples below.
 }
 \details{
-Styling is on by default when you run styler.
+Styling is on for all lines by default when you run styler.
 \itemize{
 \item To mark the start of a sequence where you want to turn styling off, use
 \verb{# styler: off}.
 \item To mark the end of this sequence, put \verb{# styler: on} in your code. After
 that line, styler will again format your code.
 \item To ignore an inline statement (i.e. just one line), place \verb{# styler: off}
-at the end of the line. Note that inline statements cannot contain other
-comments apart from the marker, i.e. a line like
-\code{1 # comment # styler: off} won't be ignored.
-}
-
+at the end of the line.
 To use something else as start and stop markers, set the R options
 \code{styler.ignore_start} and
-\code{styler.ignore_stop} using \code{\link[=options]{options()}}. If you want these
-settings to persist over multiple R sessions, consider setting them in your
-R profile, e.g. with \code{usethis::edit_rprofile()}.
+\code{styler.ignore_stop} using \code{\link[=options]{options()}}. For styler version > 1.6.2, the
+option supports character vectors longer than one and the marker are not
+exactly matched, but using a  regular expression, which means you can have
+multiple marker on one line, e.g. \verb{# nolint start styler: off}.
+}
 }
 \examples{
 # as long as the order of the markers is correct, the lines are ignored.

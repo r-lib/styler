@@ -48,13 +48,15 @@ env_add_stylerignore <- function(pd_flat) {
 #'
 #' See examples in [stylerignore]. Note that you should reuse the stylerignore
 #' column to compute switch points or similar and not a plain
-#' `pd$text == option_read("styler.ignore_start")` because that will fail to
+#' `pd$text %in% option_read("styler.ignore_start")` because that will fail to
 #' give correct switch points in the case stylerignore sequences are invalid.
 #' @param pd_flat A parse table.
 #' @keywords internal
 add_stylerignore <- function(pd_flat) {
   parse_text <- trimws(pd_flat$text)
-  start_candidate <- parse_text == option_read("styler.ignore_start")
+  start_candidate <- grepl(
+    option_read("styler.ignore_start"), parse_text
+  ) & pd_flat$token == "COMMENT"
   pd_flat$stylerignore <- rep(FALSE, length(start_candidate))
   env_current$any_stylerignore <- any(start_candidate)
   if (!env_current$any_stylerignore) {
@@ -64,7 +66,10 @@ add_stylerignore <- function(pd_flat) {
   pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0)
   on_same_line <- pd_flat$line1 == pd_flat_lat_line1
   cumsum_start <- cumsum(start_candidate & !on_same_line)
-  cumsum_stop <- cumsum(parse_text == option_read("styler.ignore_stop"))
+  cumsum_stop <- cumsum(
+    grepl(option_read("styler.ignore_stop"), parse_text) &
+      pd_flat$token == "COMMENT"
+  )
   pd_flat$indicator_off <- cumsum_start + cumsum_stop
   is_invalid <- cumsum_start - cumsum_stop < 0 | cumsum_start - cumsum_stop > 1
   if (any(is_invalid)) {

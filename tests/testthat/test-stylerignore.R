@@ -77,6 +77,35 @@ test_that("works with other markers", {
   )
 })
 
+
+test_that("works for multiple markers inline", {
+  withr::local_options(styler.ignore_start = "# noeq", )
+  expect_equal(
+    style_text(c(
+      "1+1",
+      "1+1# noeq",
+      "1+1"
+    )) %>%
+      as.character(),
+    c("1 + 1", "1+1# noeq", "1 + 1")
+  )
+})
+
+
+test_that("works for multiple markers inline on one line", {
+  withr::local_options(styler.ignore_start = "nolint start|styler: off")
+  expect_equal(
+    style_text(c(
+      "1+1",
+      "1+1# nolint start styler: off",
+      "1+1"
+    )) %>%
+      as.character(),
+    c("1 + 1", "1+1# nolint start styler: off", "1 + 1")
+  )
+})
+
+
 test_that("works with other markers", {
   expect_warning(
     withr::with_options(

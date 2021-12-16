@@ -5,8 +5,8 @@
     styler.cache_root = NULL,
     styler.cache_name = styler_version,
     styler.colored_print.vertical = TRUE,
-    styler.ignore_start = "# styler: off",
-    styler.ignore_stop = "# styler: on",
+    styler.ignore_start = "styler: off",
+    styler.ignore_stop = "styler: on",
     styler.quiet = FALSE,
     styler.test_dir_writable = TRUE
   )
