@@ -1,5 +1,7 @@
 # styler 1.6.2.9000 (Development version)
 
+* Piped function without brackets `substitute(x %>% y)` don't get `()` added
+  anymore, as this can change outcome of the code (#876).
 * Alignment detection respects stylerignore (#850).
 * Add vignette on distributing style guide (#846, #861).
 * Enable pre-commit.ci (#843).

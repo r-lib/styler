@@ -43,3 +43,9 @@ test_that("No braces are added if conditional statement is within pipe", {
     transformer = style_text
   ), NA)
 })
+
+test_that("No brace is added within `substitute()`", {
+  expect_warning(test_collection("token_adding_removing", "substitute",
+    transformer = style_text
+  ), NA)
+})

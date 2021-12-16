@@ -1,0 +1,39 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})      
+ ¦--expr: expr  [0/0] {1}                                    
+ ¦   ¦--expr: expr [0/1] {3}                                 
+ ¦   ¦   °--SYMBOL: expr [0/0] {2}                           
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {4}                            
+ ¦   °--expr: subst [0/0] {5}                                
+ ¦       ¦--expr: subst [0/0] {7}                            
+ ¦       ¦   °--SYMBOL_FUNCTION_CALL: subst [0/0] {6}        
+ ¦       ¦--'(': ( [0/0] {8}                                 
+ ¦       ¦--expr: airqu [0/0] {9}                            
+ ¦       ¦   ¦--expr: airqu [0/1] {11}                       
+ ¦       ¦   ¦   °--SYMBOL: airqu [0/0] {10}                 
+ ¦       ¦   ¦--SPECIAL-PIPE: %>% [0/1] {12}                 
+ ¦       ¦   °--expr: FUN_E [0/0] {14}                       
+ ¦       ¦       °--SYMBOL: FUN_E [0/0] {13}                 
+ ¦       ¦--',': , [0/1] {15}                                
+ ¦       ¦--SYMBOL_SUB: env [0/1] {16}                       
+ ¦       ¦--EQ_SUB: = [0/1] {17}                             
+ ¦       ¦--expr: list( [0/0] {18}                           
+ ¦       ¦   ¦--expr: list [0/0] {20}                        
+ ¦       ¦   ¦   °--SYMBOL_FUNCTION_CALL: list [0/0] {19}    
+ ¦       ¦   ¦--'(': ( [0/0] {21}                            
+ ¦       ¦   ¦--SYMBOL_SUB: FUN_E [0/1] {22}                 
+ ¦       ¦   ¦--EQ_SUB: = [0/1] {23}                         
+ ¦       ¦   ¦--expr: call( [0/0] {24}                       
+ ¦       ¦   ¦   ¦--expr: call [0/0] {26}                    
+ ¦       ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {25}
+ ¦       ¦   ¦   ¦--'(': ( [0/0] {27}                        
+ ¦       ¦   ¦   ¦--expr: "FUN_ [0/0] {29}                   
+ ¦       ¦   ¦   ¦   °--STR_CONST: "FUN_ [0/0] {28}          
+ ¦       ¦   ¦   °--')': ) [0/0] {30}                        
+ ¦       ¦   °--')': ) [0/0] {31}                            
+ ¦       °--')': ) [0/0] {32}                                
+ °--expr: a %>% [1/0] {33}                                   
+     ¦--expr: a [0/1] {35}                                   
+     ¦   °--SYMBOL: a [0/0] {34}                             
+     ¦--SPECIAL-PIPE: %>% [0/2] {36}                         
+     °--expr: x [1/0] {38}                                   
+         °--SYMBOL: x [0/0] {37}                             
