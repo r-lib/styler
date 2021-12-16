@@ -71,6 +71,7 @@ tidyverse_style <- function(scope = "tokens",
                             math_token_spacing = tidyverse_math_token_spacing()) {
   args <- as.list(environment())
   scope <- scope_normalize(scope)
+  indent_character <- " "
 
 
   indention_manipulators <- if ("indention" %in% scope) {
@@ -240,7 +241,8 @@ tidyverse_style <- function(scope = "tokens",
     style_guide_name       =               style_guide_name,
     style_guide_version    =                 styler_version,
     more_specs_style_guide =                           args,
-    transformers_drop      =              transformers_drop
+    transformers_drop      =              transformers_drop,
+    indent_character       =               indent_character
   )
 }
 
@@ -289,6 +291,7 @@ tidyverse_style <- function(scope = "tokens",
 #'   introduced to improve speed. Listing transformers here that occur almost
 #'   always in code does not make sense because the process of excluding them
 #'   also takes some time.
+#' @inheritParams serialize_parse_data_flattened
 #' @examples
 #' set_line_break_before_curly_opening <- function(pd_flat) {
 #'   op <- pd_flat$token %in% "'{'"
@@ -318,7 +321,8 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                style_guide_name = NULL,
                                style_guide_version = NULL,
                                more_specs_style_guide = NULL,
-                               transformers_drop = specify_transformers_drop()) {
+                               transformers_drop = specify_transformers_drop(),
+                               indent_character = " ") {
   list(
     # transformer functions
     initialize = list(initialize = initialize),
@@ -332,7 +336,8 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
     style_guide_name = style_guide_name,
     style_guide_version = style_guide_version,
     more_specs_style_guide = more_specs_style_guide,
-    transformers_drop = transformers_drop
+    transformers_drop = transformers_drop,
+    indent_character = indent_character
   ) %>%
     map(compact)
 }

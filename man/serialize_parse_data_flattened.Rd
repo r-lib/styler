@@ -4,10 +4,13 @@
 \alias{serialize_parse_data_flattened}
 \title{Serialize flattened parse data}
 \usage{
-serialize_parse_data_flattened(flattened_pd)
+serialize_parse_data_flattened(flattened_pd, indent_character = "")
 }
 \arguments{
 \item{flattened_pd}{A flattened parse table.}
+
+\item{indent_character}{The character that is used for indention. We strongly
+advise for using spaces as indention characters.}
 }
 \description{
 Collapses a flattened parse table into character vector representation.

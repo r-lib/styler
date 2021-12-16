@@ -37,7 +37,10 @@ parse_transform_serialize_r_block <- function(pd_nested,
     is_on_newline <- flattened_pd$lag_newlines > 0
     is_on_newline[1] <- TRUE
     flattened_pd$lag_spaces[is_on_newline] <- flattened_pd$lag_spaces[is_on_newline] + base_indention
-    serialized_transformed_text <- serialize_parse_data_flattened(flattened_pd)
+    serialized_transformed_text <- serialize_parse_data_flattened(
+      flattened_pd,
+      indent_character = transformers$indent_character
+    )
   } else {
     serialized_transformed_text <- map2(
       c(0, find_blank_lines_to_next_expr(pd_nested)[-1] - 1L),
