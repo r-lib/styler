@@ -21,6 +21,7 @@ revdep
 ^touchstone$
 ^\.github$
 ^LICENSE\.md$
-^inst/hooks/$
+^inst/hooks/.*$
 ^inst/WORDLIST$
 ^.*-in_tree$
+^vignettes/gsoc_proposal$

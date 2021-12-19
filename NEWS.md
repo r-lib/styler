@@ -32,6 +32,8 @@
   As a consequence of this approach, the defaults for `styler.ignore_start` and 
   `styler.ignore_stop` omit the `#` (#849).
 
+* the built package size has been reduced by ~50% by listing `*-in_tree` files
+  in `.Rbuildignore` (#879).
 
 # styler 1.6.2
 
