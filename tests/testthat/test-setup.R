@@ -7,6 +7,7 @@ test_that("snippet generation works", {
     out <- capture_output(snippet_generate("additional-deps-roxygenize")),
     NA,
   )
+  expect_equal(out, "")
   usethis::use_package("styler")
   expect_error(
     out <- capture_output(snippet_generate("additional-deps-roxygenize")),
