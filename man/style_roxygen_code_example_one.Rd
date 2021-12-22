@@ -2,7 +2,7 @@
 % Please edit documentation in R/roxygen-examples.R
 \name{style_roxygen_code_example_one}
 \alias{style_roxygen_code_example_one}
-\title{Style a roxygen code example with exactly one \verb{@example} or \verb{@exampleIf}}
+\title{Style a roxygen code example with exactly one \verb{@examples} or \verb{@examplesIf}}
 \usage{
 style_roxygen_code_example_one(example_one, transformers, base_indention)
 }
@@ -19,6 +19,6 @@ by line and add a \code{base_indention} spaces before the code in the case
 multi-line strings are present. See 'Examples'.}
 }
 \description{
-Style a roxygen code example with exactly one \verb{@example} or \verb{@exampleIf}
+Style a roxygen code example with exactly one \verb{@examples} or \verb{@examplesIf}
 }
 \keyword{internal}

@@ -17,7 +17,7 @@ style_roxygen_code_example <- function(example, transformers, base_indention) {
     flatten_chr()
 }
 
-#' Style a roxygen code example with exactly one `@example` or `@exampleIf`
+#' Style a roxygen code example with exactly one `@examples` or `@examplesIf`
 #' @inheritParams style_roxygen_code_example
 #' @param example_one A character vector, one element per line, that contains in
 #'   total at most one example tag.
