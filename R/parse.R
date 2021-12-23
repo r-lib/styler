@@ -103,7 +103,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
     if (any(is_unicode_parsing_error)) {
       rlang::abort(
         "Can't parse input due to unicode restriction in base R. Please ",
-        "upgrade R to style this input. ",
+        "upgrade R to >= 4.2 to style this input. ",
         "Context: https://github.com/r-lib/styler/issues/847"
       )
     }
