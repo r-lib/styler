@@ -108,17 +108,8 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6.2.9000" id="styler-1629000-development-version">styler 1.6.2.9000 (Development version)<a class="anchor" aria-label="anchor" href="#styler-1629000-development-version"></a></h2>
-<ul><li><p>Piped function without brackets <code>substitute(x %&gt;% y)</code> don’t get <code>()</code> added anymore, as this can change outcome of the code (<a href="https://github.com/r-lib/styler/issues/876" class="external-link">#876</a>).</p></li>
-<li><p>Alignment detection respects stylerignore (<a href="https://github.com/r-lib/styler/issues/850" class="external-link">#850</a>).</p></li>
-<li><p>Add vignette on distributing style guide (<a href="https://github.com/r-lib/styler/issues/846" class="external-link">#846</a>, <a href="https://github.com/r-lib/styler/issues/861" class="external-link">#861</a>).</p></li>
-<li><p>Enable pre-commit.ci (<a href="https://github.com/r-lib/styler/issues/843" class="external-link">#843</a>).</p></li>
-<li><p>new R option <code>styler.cache_root</code> (defaulting to <code>"styler"</code>) that determines the sub-directory under the {R.cache} cache directory that {styler} uses. Non- default caches won’t be cleaned up by {styler}. We suggest <code>"styler-perm"</code> (also used by {precommit}).</p></li>
-<li><p>rename default branch to main (<a href="https://github.com/r-lib/styler/issues/859" class="external-link">#859</a>).</p></li>
-<li><p>Fix argument name <code>filetype</code> in Example for <code><a href="../reference/style_dir.html">style_dir()</a></code> (<a href="https://github.com/r-lib/styler/issues/855" class="external-link">#855</a>).</p></li>
-<li><p>ensure a trailing blank line also if the input is cached (<a href="https://github.com/r-lib/styler/issues/867" class="external-link">#867</a>).</p></li>
-<li><p>Bump minimal R requirement to 3.4 in line with the <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/" class="external-link">tidyverse</a>, which allowed to remove the dependency at {backports} and some exception handling.</p></li>
-<li><p>Remove dependency on {xfun} (<a href="https://github.com/r-lib/styler/issues/866" class="external-link">#866</a>).</p></li>
-<li><p>use pre-commit via GitHub Actions (<a href="https://github.com/r-lib/styler/issues/872" class="external-link">#872</a>).</p></li>
+<p><strong>API changes</strong></p>
+<ul><li><p>new R option <code>styler.cache_root</code> (defaulting to <code>"styler"</code>) that determines the sub-directory under the {R.cache} cache directory that {styler} uses. Non- default caches won’t be cleaned up by {styler}. We suggest <code>"styler-perm"</code> (also used by {precommit}).</p></li>
 <li>
 <p>stylerignore markers are now interpreted as regular expressions instead of comments that must match exactly. This allows to specify multiple markers in one regular expression for <code>styler.ignore_start</code> and <code>styler.ignore_stop</code>, e.g. to use markers for lintr and styler on the same line, you can use <code>options(styler.ignore_start = "nolint start|styler: off"</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -130,6 +121,19 @@
 <p>As a consequence of this approach, the defaults for <code>styler.ignore_start</code> and <code>styler.ignore_stop</code> omit the <code>#</code> (<a href="https://github.com/r-lib/styler/issues/849" class="external-link">#849</a>).</p>
 </li>
 <li><p>the built package size has been reduced by ~50% by listing <code>*-in_tree</code> files in <code>.Rbuildignore</code> (<a href="https://github.com/r-lib/styler/issues/879" class="external-link">#879</a>).</p></li>
+<li><p>Bump minimal R requirement to 3.4 in line with the <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/" class="external-link">tidyverse</a>, which allowed to remove the dependency at {backports} and some exception handling.</p></li>
+</ul><p><strong>Other changes</strong></p>
+<ul><li>Piped function without brackets <code>substitute(x %&gt;% y)</code> don’t get <code>()</code> added anymore, as this can change outcome of the code (<a href="https://github.com/r-lib/styler/issues/876" class="external-link">#876</a>).</li>
+<li>Alignment detection respects stylerignore (<a href="https://github.com/r-lib/styler/issues/850" class="external-link">#850</a>).</li>
+<li>Unaligned expressions with quoted key (e.g. <code>c("x" = 2)</code>) are now correctly detected (<a href="https://github.com/r-lib/styler/issues/881" class="external-link">#881</a>).</li>
+<li>Add vignette on distributing style guide (<a href="https://github.com/r-lib/styler/issues/846" class="external-link">#846</a>, <a href="https://github.com/r-lib/styler/issues/861" class="external-link">#861</a>).</li>
+<li>ensure a trailing blank line also if the input is cached (<a href="https://github.com/r-lib/styler/issues/867" class="external-link">#867</a>).</li>
+<li>Fix argument name <code>filetype</code> in Example for <code><a href="../reference/style_dir.html">style_dir()</a></code> (<a href="https://github.com/r-lib/styler/issues/855" class="external-link">#855</a>).</li>
+</ul><p><strong>Infrastructure</strong></p>
+<ul><li>Remove dependency on {xfun} (<a href="https://github.com/r-lib/styler/issues/866" class="external-link">#866</a>).</li>
+<li>rename default branch to main (<a href="https://github.com/r-lib/styler/issues/859" class="external-link">#859</a>).</li>
+<li>Enable pre-commit.ci (<a href="https://github.com/r-lib/styler/issues/843" class="external-link">#843</a>).</li>
+<li>use pre-commit via GitHub Actions (<a href="https://github.com/r-lib/styler/issues/872" class="external-link">#872</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6.2" id="styler-162">styler 1.6.2<small>2021-09-23</small><a class="anchor" aria-label="anchor" href="#styler-162"></a></h2>
