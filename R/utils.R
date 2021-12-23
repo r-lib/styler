@@ -70,6 +70,9 @@ even_index <- function(x) {
   seq(2L, length(x), by = 2)
 }
 
+is_windows <- function() {
+  identical(.Platform$OS.type, "windows")
+}
 
 #' Invoke a system command
 #'
@@ -79,7 +82,7 @@ even_index <- function(x) {
 #' @param ... Arguments passed to [shell()] or [system()].
 #' @keywords internal
 calls_sys <- function(sys_call, ...) {
-  if (Sys.info()[1] == "Windows") {
+  if (is_windows()) {
     error <- shell(sys_call, ...)
   } else {
     error <- system(sys_call, ...)
