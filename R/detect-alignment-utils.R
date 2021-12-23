@@ -80,7 +80,8 @@ alignment_col1_all_named <- function(relevant_pd_by_line) {
     if (nrow(x) < 3) {
       return(FALSE)
     }
-    identical(x$token[c(1, 3)], c("SYMBOL_SUB", "expr")) &&
+    x$token[3] == "expr" &&
+      x$token[1] %in% c("SYMBOL_SUB", "STR_CONST") &&
       x$token[2] %in% c(
         "EQ_SUB", "SPECIAL-IN", "LT", "GT", "EQ", "NE"
       )
