@@ -1,21 +1,11 @@
 # styler 1.6.2.9000 (Development version)
 
-* Piped function without brackets `substitute(x %>% y)` don't get `()` added
-  anymore, as this can change outcome of the code (#876).
-* Alignment detection respects stylerignore (#850).
-* Add vignette on distributing style guide (#846, #861).
-* Enable pre-commit.ci (#843).
+**API changes**
+
 * new R option `styler.cache_root` (defaulting to `"styler"`) that determines 
   the sub-directory under the {R.cache} cache directory that {styler} uses. Non-
   default caches won't be cleaned up by {styler}. We suggest `"styler-perm"` 
   (also used by {precommit}).
-* rename default branch to main (#859).
-* Fix argument name `filetype` in Example for `style_dir()` (#855).
-* ensure a trailing blank line also if the input is cached (#867).
-* Bump minimal R requirement to 3.4 in line with the [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which 
-  allowed to remove the dependency at {backports} and some exception handling.
-* Remove dependency on {xfun} (#866).
-* use pre-commit via GitHub Actions (#872).
 
 * stylerignore markers are now interpreted as regular expressions instead of 
   comments that must match exactly. This allows to specify multiple markers in 
@@ -31,6 +21,28 @@
   ```
   As a consequence of this approach, the defaults for `styler.ignore_start` and 
   `styler.ignore_stop` omit the `#` (#849).
+
+
+* Bump minimal R requirement to 3.4 in line with the [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which 
+  allowed to remove the dependency at {backports} and some exception handling.
+
+**Other changes**
+
+* Piped function without brackets `substitute(x %>% y)` don't get `()` added
+  anymore, as this can change outcome of the code (#876).
+* Alignment detection respects stylerignore (#850).
+* Unaligned expressions with quoted key (e.g. `c("x" = 2)`) are now correctly
+  detected (#881).
+* Add vignette on distributing style guide (#846, #861).
+* ensure a trailing blank line also if the input is cached (#867).
+* Fix argument name `filetype` in Example for `style_dir()` (#855).
+
+**Infrastructure**
+
+* Remove dependency on {xfun} (#866).
+* rename default branch to main (#859).
+* Enable pre-commit.ci (#843).
+* use pre-commit via GitHub Actions (#872).
 
 
 # styler 1.6.2
