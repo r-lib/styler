@@ -138,14 +138,14 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' op [1/0] {134}                                      
  ¦--COMMENT: #' } [1/0] {135}                                       
  ¦--COMMENT: #' op [1/0] {136}                                      
- ¦--COMMENT: #' } [1/0] {137}                                       
- ¦--COMMENT: #' \d [1/0] {138}                                     
- ¦--COMMENT: #' op [1/0] {139}                                      
- ¦--COMMENT: #' } [1/0] {140}                                       
- ¦--COMMENT: #' \d [1/0] {141}                                     
- ¦--COMMENT: #' op [1/0] {142}                                      
- ¦--COMMENT: #' } [1/0] {143}                                       
- ¦--COMMENT: #' \d [1/0] {144}                                     
- ¦--COMMENT: #' op [1/0] {145}                                      
+ ¦--COMMENT: #' \d [1/0] {137}                                     
+ ¦--COMMENT: #' op [1/0] {138}                                      
+ ¦--COMMENT: #' } [1/0] {139}                                       
+ ¦--COMMENT: #' \d [1/0] {140}                                     
+ ¦--COMMENT: #' op [1/0] {141}                                      
+ ¦--COMMENT: #' } [1/0] {142}                                       
+ ¦--COMMENT: #' \d [1/0] {143}                                     
+ ¦--COMMENT: #' op [1/0] {144}                                      
+ ¦--COMMENT: #' } [1/0] {145}                                       
  °--expr: NULL [1/0] {147}                                          
      °--NULL_CONST: NULL [0/0] {146}                                
