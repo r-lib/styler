@@ -265,7 +265,8 @@ snippet_generate <- function(snippet = "",
     cli::cli_alert_info(paste0(
       "Note that CI services like {.url pre-commit.ci} have build-time ",
       "restrictions and installing the above dependencies may exceed those, ",
-      "resulting in a timeout. See ",
+      "resulting in a timeout. In addition, system dependencies are not ", 
+      "supported for {.url pre-commit.ci}. See ",
       '{.code vignette("ci", package = "precommit")} for details and solutions.'
     ))
     remote_deps <- rlang::with_handlers(

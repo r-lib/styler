@@ -16,33 +16,17 @@ repos:
           )$
     -   id: roxygenize
         additional_dependencies:
-        -    desc@1.3.0
-        -    docopt@0.7.1
-        -    fs@1.5.0
-        -    git2r@0.28.0
-        -    glue@1.4.2
-        -    here@1.0.1
-        -    knitr@1.33
-        -    lintr@2.0.1
-        -    magrittr@2.0.1
-        -    mockery@0.4.2
-        -    pkgload@1.2.1
-        -    purrr@0.3.4
-        -    R.cache@0.15.0
-        -    reticulate@1.20
-        -    rlang@0.4.11
-        -    r-lib/pkgapi@35226e9
-        -    rmarkdown@2.8
-        -    roxygen2@7.1.1
-        -    rprojroot@2.0.2
-        -    rstudioapi@0.13
-        -    spelling@2.2
-        -    styler@1.4.1
-        -    testthat@3.0.2
-        -    tibble@3.1.1
-        -    usethis@2.0.1
-        -    withr@2.4.2
-        -    yaml@2.2.1    
+        -    cli
+        -    fs
+        -    here
+        -    magrittr
+        -    purrr
+        -    R.cache
+        -    rlang
+        -    rprojroot
+        -    rstudioapi
+        -    withr
+        -    yaml
     # codemeta must be above use-tidy-description when both are used
     # -   id: codemeta-description-updated
     -   id: use-tidy-description
