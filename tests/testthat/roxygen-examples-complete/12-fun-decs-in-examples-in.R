@@ -65,7 +65,6 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' op<- pd_flat$token %in% "}"
 #' }
 #' op <-pd_flat$token %in% "'['"
-#' }
 #' \donttest{
 #' op <- pd_flat$token %in% "']'"
 #' }
@@ -74,4 +73,5 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' }
 #' \donttest{
 #' op <- pd_flat$token %in%"]"
+#' }
 NULL

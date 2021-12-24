@@ -37,6 +37,7 @@
   detected (#881).
 * Add vignette on distributing style guide (#846, #861).
 * ensure a trailing blank line also if the input is cached (#867).
+* Preserve trailing blank line in roxygen examples to simplify concatenation of examples (#880).
 * Fix argument name `filetype` in Example for `style_dir()` (#855).
 * An error is now thrown on styling if input unicode characters can't be 
   correctly parsed for Windows and R < 4.2 (#883).
