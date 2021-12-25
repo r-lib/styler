@@ -70,6 +70,8 @@ style_roxygen_code_example_segment <- function(one_dont,
                                                base_indention) {
   if (length(one_dont) < 1L) {
     return(character())
+  } else if (identical(one_dont, "\n")) {
+    return(character(1L))
   }
   dont_seqs <- find_dont_seqs(one_dont)
   split_segments <- split_roxygen_segments(one_dont, unlist(dont_seqs))
