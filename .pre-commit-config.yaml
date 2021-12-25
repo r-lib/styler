@@ -92,7 +92,7 @@ repos:
           tests/testthat/reference-objects/.*|
           )$
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: b3eaceb0bf2df137cc80f85b3943b6684f204c48
+    rev: 877130576f072139e2cec2f847c85e87696e358b
     hooks:
     -   id: tidy-gitignore
 -   repo: local
