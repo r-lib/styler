@@ -89,6 +89,10 @@ repos:
     -   id: check-added-large-files
     -   id: end-of-file-fixer
         exclude: '\.Rd' # sometimes roxygen fails to generate EOF blank line.
+-   repo: https://github.com/lorenzwalthert/gitignore-tidy
+    rev: 04b1390
+    hooks: 
+    -   id: tidy-gitignore
 -   repo: local
     hooks:
     -   id: consistent-release-tag

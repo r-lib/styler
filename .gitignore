@@ -1,8 +1,8 @@
 .RData
 .Rhistory
+.Rprofile
 .Rproj.user
 .Ruserdata
-.Rprofile
 docs/
 inst/doc
 scratch/
