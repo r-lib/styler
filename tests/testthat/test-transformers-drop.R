@@ -31,6 +31,17 @@ t_empty_drop2 <- create_style_guide(
   transformers_drop = list(),
 )
 
+test_that("empty string as input can be handled", {
+  t_new <- transformers_drop(
+    "", t
+  )
+
+  t_new2 <- transformers_drop(
+    character(), t
+  )
+  expect_equal(t_new, t_new2)
+})
+
 test_that("transformers are not removed if they are used", {
   t_new <- transformers_drop(
     "!x", t

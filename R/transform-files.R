@@ -270,13 +270,17 @@ parse_transform_serialize_r <- function(text,
 #' @keywords internal
 #' @seealso specify_transformers_drop
 transformers_drop <- function(text, transformers) {
-  is_colon <- text == ";"
-  if (any(is_colon)) {
-    # ; can only be parsed when on the same line as other token, not the case
-    # here since text is output of compute_parse_data_nested.
-    text <- c(text[!is_colon], "1;")
+  if (length(text) > 0) {
+    is_colon <- text == ";"
+    if (any(is_colon)) {
+      # ; can only be parsed when on the same line as other token, not the case
+      # here since text is output of compute_parse_data_nested.
+      text <- c(text[!is_colon], "1;")
+    }
+    token <- unique(tokenize(text)$token)
+  } else {
+    token <- character()
   }
-  token <- unique(tokenize(text)$token)
   for (scope in c("line_break", "space", "token", "indention")) {
     rules <- transformers$transformers_drop[[scope]]
     for (rule in names(rules)) {
