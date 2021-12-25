@@ -249,10 +249,9 @@ snippet_generate <- function(snippet = "",
       "\n"
     ))
     deps <- desc::desc_get_deps()
-    hard_dependencies <- deps[(deps$type %in% c("Depends", "Imports")), "package"]
-    hard_dependencies_vec <- hard_dependencies %>%
+    hard_dependencies <- deps[(deps$type %in% c("Depends", "Imports")), "package"] %>%
       setdiff("R")
-    if (length(hard_dependencies_vec) < 1) {
+    if (length(hard_dependencies) < 1) {
       cli::cli_alert_success(paste0(
         "According to {.code DESCRIPTION}`, there are no hard dependencies of ",
         "your package. You are set."
