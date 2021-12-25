@@ -1,7 +1,10 @@
-# precommit v0.2.1.9001 (Development version)
+# precommit v0.2.2.9001 (Development version)
 
 * updating hook tag.
-
+* `deps-in-desc` and `parsable-R` can now handle code chunk headers with 
+  where `purl` or `eval` are not literals like `TRUE`, but variables defined
+  elsewhere in code (#361).
+  
 
 # precommit v0.2.2
 
