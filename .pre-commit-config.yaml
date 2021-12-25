@@ -52,7 +52,8 @@ repos:
         exclude: >
           (?x)^(
           tests/testthat/public-api/xyzaddin/addin_region-.*|
-          tests/testmanual/addins/r-invalid\.R|
+          tests/testmanual/addins/.*invalid.*|
+          tests/testthat/rmd/no-tidy-out\.Rmd|
           tests/testthat/escaping/basic-escape-out\.R|
           tests/testthat/indention_operators/.*pipe.*|
           tests/testthat/line_breaks_and_other/.*pipe.*|
