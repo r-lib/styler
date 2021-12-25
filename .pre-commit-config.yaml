@@ -83,6 +83,8 @@ repos:
     hooks:
     -   id: check-added-large-files
         args: ['--maxkb=200']
+    -   id: file-contents-sorter
+        files: "\\.Rbuildignore$"
     -   id: end-of-file-fixer
         exclude: >
           (?x)^(
@@ -92,7 +94,7 @@ repos:
           tests/testthat/reference-objects/.*|
           )$
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: 877130576f072139e2cec2f847c85e87696e358b
+    rev: b3eaceb0bf2df137cc80f85b3943b6684f204c48
     hooks:
     -   id: tidy-gitignore
 -   repo: local
