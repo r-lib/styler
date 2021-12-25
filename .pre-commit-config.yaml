@@ -91,6 +91,10 @@ repos:
           tests/testthat/parse_comments/eol_eof_spaces-.*|
           tests/testthat/reference-objects/.*|
           )$
+-   repo: https://github.com/lorenzwalthert/gitignore-tidy
+    rev: b3eaceb0bf2df137cc80f85b3943b6684f204c48
+    hooks:
+    -   id: tidy-gitignore
 -   repo: local
     hooks:
     -   id: forbid-to-commit
