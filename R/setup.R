@@ -189,7 +189,7 @@ ensure_renv_precommit_compat <- function(root = here::here()) {
       maximal_rev <- package_version("0.1.3.9014")
       if (rev > maximal_rev && 
           utils::packageVersion('renv') < '0.14.0-148' && 
-          package_version(version_precommit()) <= '2.16.0'
+          package_version(version_precommit()) <='2.16.0'
       ) {
         rlang::warn(paste0(
           "It seems like you want to use {renv} and {precommit} in the same ",
