@@ -83,8 +83,23 @@ test_that("Pre-commit CI setup works", {
 })
 
 
-test_that("Autoupdate is not conducted when renv present", {
+test_that("Autoupdate is not conducted when renv present in incompatible setup", {
   skip_on_cran()
+
+  # mock old pre-commit and renv versions
+  mockery::stub(ensure_renv_precommit_compat, "version_precommit", "2.13.0")
+  mockery::stub(
+    ensure_renv_precommit_compat,
+    "packageVersion", function(pkg, lib.loc = NULL) {
+      if (pkg == "renv") {
+        base::package_version("0.14.0")
+      } else {
+        utils::packageVersion(pkg, lib.loc = lib.loc)
+      }
+    }
+  )
+
+
   local_test_setup(
     git = TRUE, use_precommit = TRUE, install_hooks = FALSE, open = FALSE
   )
@@ -99,7 +114,7 @@ test_that("Autoupdate is not conducted when renv present", {
     rev_as_pkg_version()
   expect_true(downgraded < initial)
 
-  # simulate removing {renv} should updagradd
+  # simulate removing {renv} should be updated
   fs::file_delete("renv.lock")
   expect_warning(autoupdate(root = getwd()), NA)
   after_upgrade <- rev_read() %>%

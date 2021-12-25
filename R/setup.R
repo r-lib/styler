@@ -188,7 +188,7 @@ ensure_renv_precommit_compat <- function(root = here::here()) {
       rev <- rev_as_pkg_version(rev)
       maximal_rev <- package_version("0.1.3.9014")
       if (rev > maximal_rev && 
-          packageVersion('renv') < '0.14.0-148' && 
+          utils::packageVersion('renv') < '0.14.0-148' && 
           package_version(version_precommit()) <= '2.16.0'
       ) {
         rlang::warn(paste0(
