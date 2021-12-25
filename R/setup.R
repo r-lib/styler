@@ -173,7 +173,8 @@ autoupdate <- function(root = here::here()) {
   })
 }
 
-ensure_renv_precommit_compat <- function(root = here::here()) {
+ensure_renv_precommit_compat <- function(package_version_renv = utils::packageVersion("renv"),
+                                         root = here::here()) {
   withr::local_dir(root)
   path_config <- ".pre-commit-config.yaml"
   config_lines <- readLines(path_config, encoding = "UTF-8")
@@ -187,10 +188,14 @@ ensure_renv_precommit_compat <- function(root = here::here()) {
     {
       rev <- rev_as_pkg_version(rev)
       maximal_rev <- package_version("0.1.3.9014")
-      if (rev > maximal_rev) {
+      if (rev > maximal_rev &&
+        package_version_renv < "0.14.0-148" &&
+        package_version(version_precommit()) <= "2.16.0"
+      ) {
         rlang::warn(paste0(
           "It seems like you want to use {renv} and {precommit} in the same ",
-          "repo. This is not well supported for users of RStudio and ",
+          "repo. This is not well supported for users of RStudio with ",
+          "`pre-commit <= 2.16.0`, `renv < 0.14.0-148` and ",
           "`precommit > 0.1.3.9014` at the moment (details: ",
           "https://github.com/lorenzwalthert/precommit/issues/342). ",
           "Autoupdate aborted and `rev:` in `.pre-commit-config.yaml` set to ",

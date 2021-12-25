@@ -7,5 +7,6 @@
   )
   toset <- !(names(op.precommit) %in% names(op))
   if (any(toset)) options(op.precommit[toset])
+  if (interactive()) ensure_renv_precommit_compat()
   invisible()
 }
