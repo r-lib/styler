@@ -4,7 +4,7 @@ files <- commandArgs(trailing = TRUE)
 out <- lapply(files, function(path) {
   is_rmd <- grepl("\\.[rR]md$", path)
   if (is_rmd) {
-    path_ <- robust_purl(path)
+    path_ <- precommit::robust_purl(path)
   } else {
     path_ <- path
   }
