@@ -23,6 +23,7 @@ style guide with `create_style_guide()`.
 There are a few packages that implement a third-party style guide that are
 maintained by styler contributors:
 
+* [lorenzwalthert/styler.nocomments](https://github.com/lorenzwalthert/styler.nocomments)
 * [lorenzwalthert/semicoloner](https://github.com/lorenzwalthert/semicoloner)
 * [lorenzwalthert/oneliner](https://github.com/lorenzwalthert/oneliner)
 * [mlr-org/styler.mlr](https://github.com/mlr-org/styler.mlr)
