@@ -95,8 +95,8 @@ repos:
     -   id: tidy-gitignore
 -   repo: local
     hooks:
-    -   id: build-local
-        name: build-local
+    -   id: install-local
+        name: install-local
         entry: Rscript -e "renv::deactivate(); callr::r_bg(function() devtools::install())"
         language: r
         additional_dependencies:
