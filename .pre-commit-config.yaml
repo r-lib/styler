@@ -97,7 +97,7 @@ repos:
     hooks:
     -   id: install-local
         name: install-local
-        entry: Rscript -e "renv::deactivate(); callr::r_bg(function() devtools::install()); Sys.sleep(10)"
+        entry: Rscript -e "renv::deactivate(); callr::r(function() devtools::install())"
         language: r
         additional_dependencies:
         -    callr
