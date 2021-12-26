@@ -104,6 +104,7 @@ repos:
         -    devtools
         -    renv
         stages: [push]
+        always_run: True
     -   id: consistent-release-tag
         name: consistent-release-tag
         entry: Rscript inst/hooks/local/consistent-release-tag.R
