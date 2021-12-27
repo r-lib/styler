@@ -84,13 +84,13 @@ repos:
           vignettes/FAQ\.Rmd|
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.1.0
     hooks: 
     -   id: check-added-large-files
     -   id: end-of-file-fixer
         exclude: '\.Rd' # sometimes roxygen fails to generate EOF blank line.
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: 04b1390
+    rev: 14637e2863517af3c946121eb22aff130f660200
     hooks: 
     -   id: tidy-gitignore
 -   repo: local
