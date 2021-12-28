@@ -1,7 +1,7 @@
 name: Continuous Benchmarks (Comment)
 
 concurrency:
-  group: touchstone-comment-${{ github.head_ref }}
+  group: ${{ github.action_path }}-${{ github.head_ref }}
   cancel-in-progress: true
 
 # read-write repo token

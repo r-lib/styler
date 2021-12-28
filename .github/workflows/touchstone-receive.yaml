@@ -1,6 +1,6 @@
 name: Continuous Benchmarks (Receive)
 concurrency:
-  group: touchstone-receive-${{ github.head_ref }}
+  group: ${{ github.action_path }}-${{ github.head_ref }}
   cancel-in-progress: true
 
 on: pull_request

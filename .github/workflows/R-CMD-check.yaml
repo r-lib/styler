@@ -17,7 +17,7 @@ on:
 name: R-CMD-check
 
 concurrency:
-  group: r-cmd-check-${{ github.head_ref }}
+  group: ${{ github.action_path }}-${{ github.head_ref }}
   cancel-in-progress: true
 
 
