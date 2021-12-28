@@ -9,7 +9,7 @@ on:
 name: test-coverage
 
 concurrency:
-  group: ${{ github.action }}-${{ github.event_path }}
+  group: ${{ github.head_ref }}
   cancel-in-progress: true
 
 
