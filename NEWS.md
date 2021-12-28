@@ -1,4 +1,4 @@
-# precommit v0.2.1.900* (Development version)
+# precommit 0.2.1.900* (Development version)
 
 * Port codemeta hook to `language: r` (#350).
 * Don't include `R` as a dependency with 
@@ -6,10 +6,13 @@
 * `roxygenize` hook now fails if it generates an `.Rd` file that is not tracked
   with version control (#363).
 * Ensure compatibility with {renv} (#359).
-* Fix `deps-in-desc` and `parsable-R` hooks for `.Rmd` and `.Rnw` documents when
-  code chunk headers contain non-literal arguments for `purl` or `eval` (#361).
 * updating hook tag.
-
+* `deps-in-desc` and `parsable-R` can now handle code chunk headers with 
+  where `purl` or `eval` are not literals like `TRUE`, but variables defined
+  elsewhere in code (#361).
+* `deps-in-desc` now prints the original file (not a tempfile) also for 
+  `.Rmd` and `.Rnw` files.
+  
 
 
 # precommit v0.2.2

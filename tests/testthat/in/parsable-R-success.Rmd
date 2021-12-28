@@ -5,4 +5,13 @@ output: rmarkdown::html_document
 
 ```{r}
 call()
+is_nice <- FALSE
+```
+
+```{r, eval = is_nice}
+parsable + code
+```
+
+```{r, purl=FALSE}
+ fas / fk 12 -
 ```

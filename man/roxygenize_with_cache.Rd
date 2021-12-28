@@ -24,6 +24,8 @@ Other hook script helpers:
 \code{\link{diff_requires_run_roxygenize}()},
 \code{\link{dirs_R.cache}()},
 \code{\link{may_require_permanent_cache}()},
+\code{\link{robust_purl}()},
 \code{\link{roxygen_assert_additional_dependencies}()}
 }
 \concept{hook script helpers}
+\keyword{internal}

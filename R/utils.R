@@ -66,6 +66,7 @@ ensure_named <- function(x, candidate_name = NULL, f = identity) {
 #' @param hook_id The id of the hook for which we want the relative cache
 #'   directory.
 #' @family hook script helpers
+#' @keywords internal
 #' @export
 dirs_R.cache <- function(hook_id) {
   file.path("precommit", hook_id)

@@ -220,6 +220,13 @@ hook_state_assert_one <- function(path_candidate,
         paste(contents, collapse = "\n"), error_msg,
         fixed = TRUE
       )
+      if (!is.null(msg)) {
+        contents <- readLines(path_stdout)
+        testthat::expect_match(
+          paste(contents, collapse = "\n"), msg,
+          fixed = TRUE
+        )
+      }
       testthat::expect_false(exit_status == 0)
     }
   }

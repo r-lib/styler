@@ -50,6 +50,7 @@ extract_diff_root <- function(root = here::here()) {
 #' @return
 #' A logical vector of length 1.
 #' @inheritParams extract_diff_root
+#' @keywords internal
 #' @family hook script helpers
 #' @examples
 #' \dontrun{
@@ -94,6 +95,7 @@ diff_requires_run_roxygenize <- function(root = here::here()) {
 #' This function is only exported for use in hook scripts, but it's not intended
 #' to be called by the end-user directly.
 #' @family hook script helpers
+#' @keywords internal
 #' @export
 roxygen_assert_additional_dependencies <- function() {
   out <- rlang::with_handlers(
@@ -126,6 +128,7 @@ roxygen_assert_additional_dependencies <- function() {
 #' to be called by the end-user directly.
 #' @inheritParams R.cache::saveCache
 #' @family hook script helpers
+#' @keywords internal
 #' @export
 #' @importFrom R.cache saveCache
 # fails if accessed with R.cache::saveCache()!
