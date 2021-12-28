@@ -34,6 +34,7 @@ if (packageVersion("precommit") < "0.1.3.9010") {
 path_relative_cache <- precommit::dirs_R.cache("roxygenize")
 wd <- list(getwd())
 cache <- R.cache::loadCache(key = wd, dirs = path_relative_cache)
+rd_files_before_roxygen <- list.files("man", pattern = "\\.Rd$")
 
 if (!is.null(cache)) {
   candidates <- intersect(
@@ -47,4 +48,10 @@ if (!is.null(cache)) {
   }
 } else {
   precommit::roxygenize_with_cache(key = wd, dirs = path_relative_cache)
+}
+
+rd_files_after_roxygen <- list.files("man", pattern = "\\.Rd$")
+
+if (length(setdiff(rd_files_after_roxygen, rd_files_before_roxygen)) > 0) {
+  rlang::abort("Please commit the new `.Rd` files in `man/`.")
 }
