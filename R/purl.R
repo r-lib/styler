@@ -12,8 +12,10 @@ robust_purl <- function(path) {
   file.copy(path, path_rmd)
   lines <- readLines(path_rmd)
   has_purl <- grepl("purl.*=.*(TRUE|FALSE|T|F)", lines)
-  lines[!has_purl] <- gsub(
-    "^```\\{.*\\}.*", "```{r purl = TRUE}", lines[!has_purl]
+  has_eval <- grepl("eval.*=.*(TRUE|FALSE|T|F)", lines)
+  should_not_override <- has_purl | has_eval
+  lines[!should_not_override] <- gsub(
+    "^```\\{.*\\}.*", "```{r purl = TRUE}", lines[!should_not_override]
   )
   writeLines(lines, path_rmd)
   path_ <- knitr::purl(
