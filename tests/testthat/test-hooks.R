@@ -291,10 +291,31 @@ run_test(
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### roxygenize                                                              ####
+# with outdated Rd present
+run_test("roxygenize",
+  file_name = c("man/flie.Rd" = "flie.Rd"),
+  suffix = "",
+  error_msg = NA,
+  msg = "Writing NAMESPACE",
+  artifacts = c(
+    "DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf"),
+    "R/roxygenize.R" = test_path("in/roxygenize.R")
+  ),
+  file_transformer = function(files) {
+    git_init()
+    git2r::add(path = files)
+    # hack to add artifact to trigger diff_requires_roxygenize()
+    git2r::add(path = fs::path(fs::path_dir(fs::path_dir(files[1])), "R"))
+    files
+  }
+)
+
+
+# without Rd present
 run_test("roxygenize",
   file_name = c("R/roxygenize.R" = "roxygenize.R"),
   suffix = "",
-  error_msg = NULL,
+  error_msg = "Please commit the new `.Rd` files",
   msg = "Writing flie.Rd",
   artifacts = c(
     "DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf")
@@ -306,6 +327,25 @@ run_test("roxygenize",
   }
 )
 
+
+# with up to date rd present
+run_test("roxygenize",
+  file_name = c("man/flie.Rd" = "flie-true.Rd"),
+  suffix = "",
+  error_msg = NULL,
+  msg = "Writing NAMESPACE",
+  artifacts = c(
+    "DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf"),
+    "R/roxygenize.R" = test_path("in/roxygenize.R")
+  ),
+  file_transformer = function(files) {
+    git_init()
+    git2r::add(path = files)
+    # hack to add artifact to trigger diff_requires_roxygenize()
+    git2r::add(path = fs::path(fs::path_dir(fs::path_dir(files[1])), "R"))
+    files
+  }
+)
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
 ### codemeata                                                               ####
