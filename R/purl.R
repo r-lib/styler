@@ -8,15 +8,23 @@
 #' @keywords internal
 #' @export
 robust_purl <- function(path) {
-  path_rmd <- tempfile(fileext = ".Rmd")
+  ext <- fs::path_ext(path)
+  path_rmd <- tempfile(fileext = paste0(".", ext))
   file.copy(path, path_rmd)
   lines <- readLines(path_rmd)
   has_purl <- grepl("purl.*=.*(TRUE|FALSE|T|F)", lines)
   has_eval <- grepl("eval.*=.*(TRUE|FALSE|T|F)", lines)
   should_not_override <- has_purl | has_eval
-  lines[!should_not_override] <- gsub(
-    "^```\\{.*\\}.*", "```{r purl = TRUE}", lines[!should_not_override]
-  )
+
+  if (tolower(ext) == "rmd") {
+    lines[!should_not_override] <- gsub(
+      "^```\\{.*\\}.*", "```{r purl = TRUE}", lines[!should_not_override]
+    )
+  } else if (tolower(ext) == "rnw") {
+    lines[!should_not_override] <- gsub(
+      "^<<>>=.*", "<<purl=TRUE>>=", lines[!should_not_override]
+    )
+  }
   writeLines(lines, path_rmd)
   path_ <- knitr::purl(
     input = path_rmd,
