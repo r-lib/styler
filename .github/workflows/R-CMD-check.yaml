@@ -16,6 +16,11 @@ on:
 
 name: R-CMD-check
 
+concurrency:
+  group: ${{ github.action }}-${{ github.event_path }}
+  cancel-in-progress: true
+
+
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
