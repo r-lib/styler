@@ -1,6 +1,15 @@
-# precommit v0.2.1.9001 (Development version)
+# precommit v0.2.1.900* (Development version)
 
+* Port codemeta hook to `language: r` (#350).
+* Don't include `R` as a dependency with 
+  `snippet_generate("additional-deps-roxygenize")` (#358).
+* `roxygenize` hook now fails if it generates an `.Rd` file that is not tracked
+  with version control (#363).
+* Ensure compatibility with {renv} (#359).
+* Fix `deps-in-desc` and `parsable-R` hooks for `.Rmd` and `.Rnw` documents when
+  code chunk headers contain non-literal arguments for `purl` or `eval` (#361).
 * updating hook tag.
+
 
 
 # precommit v0.2.2
