@@ -22,11 +22,6 @@
   As a consequence of this approach, the defaults for `styler.ignore_start` and 
   `styler.ignore_stop` omit the `#` (#849).
 
-* the built package size has been reduced by ~50% by listing `*-in_tree` files
-  in `.Rbuildignore` (#879).
-
-* Bump minimal R requirement to 3.4 in line with the [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which 
-  allowed to remove the dependency at {backports} and some exception handling.
 
 **Other changes**
 
@@ -38,7 +33,8 @@
 * Unaligned expressions with quoted key (e.g. `c("x" = 2)`) are now correctly
   detected (#881).
 * ensure a trailing blank line also if the input is cached (#867).
-* Preserve trailing blank line in roxygen examples to simplify concatenation of examples (#880).
+* Preserve trailing blank line in roxygen examples to simplify concatenation of
+  examples (#880).
 * Fix argument name `filetype` in Example for `style_dir()` (#855).
 * An error is now thrown on styling if input unicode characters can't be 
   correctly parsed for Windows and R < 4.2 (#883).
@@ -47,7 +43,12 @@
 **Infrastructure**
 
 * Remove dependency on {xfun} (#866).
+* Bump minimal R requirement to 3.4 in line with the 
+  [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which
+  allowed to remove the dependency at {backports} and some exception handling.
 * rename default branch to main (#859).
+* the built package size has been reduced by ~50% by listing `*-in_tree` files
+  in `.Rbuildignore` (#879).
 * Enable pre-commit.ci (#843).
 * use pre-commit via GitHub Actions (#872).
 
