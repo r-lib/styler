@@ -7,6 +7,7 @@
 #' if someone updates the R package {precommit} but not the hook revisions.
 #' @param temp_cache_is_enough ignored.
 #' @family hook script helpers
+#' @keywords internal
 #' @export
 may_require_permanent_cache <- function(temp_cache_is_enough = FALSE) {
   if (temp_cache_is_enough) {

@@ -18,7 +18,9 @@ to be called by the end-user directly.
 Other hook script helpers: 
 \code{\link{diff_requires_run_roxygenize}()},
 \code{\link{may_require_permanent_cache}()},
+\code{\link{robust_purl}()},
 \code{\link{roxygen_assert_additional_dependencies}()},
 \code{\link{roxygenize_with_cache}()}
 }
 \concept{hook script helpers}
+\keyword{internal}

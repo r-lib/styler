@@ -22,9 +22,11 @@ deps_in_desc <- function(file, arguments) {
     return()
   }
   if (grepl("(\\.Rmd|\\.Rnw|\\.rmd|\\.rnw)$", file)) {
-    file <- knitr::purl(file, output = tempfile())
+    file_ <- precommit::robust_purl(file)
+  } else {
+    file_ <- file
   }
-  parse_data <- getParseData(parse(file = file, keep.source = TRUE))
+  parse_data <- getParseData(parse(file = file_, keep.source = TRUE))
   used <- parse_data[parse_data$token == "SYMBOL_PACKAGE", ]$text
   local_pkg_name <- unname(desc::desc_get("Package"))
   unregistered <- setdiff(
