@@ -25,6 +25,7 @@
 
 **Other changes**
 
+* `.onLoad()` method no longer broken with {cli} >= 3.1 (#893).
 * Piped function without brackets `substitute(x %>% y)` don't get `()` added
   anymore, as this can change outcome of the code (#876).
 * rules that add tokens don't break stylerignore sequences anymore (#891).
