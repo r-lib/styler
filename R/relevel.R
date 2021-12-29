@@ -222,6 +222,7 @@ relocate_eq_assign_one <- function(pd) {
     ))
   eq_expr$id <- NA
   eq_expr$parent <- NA
+  pd$indent <- NULL
   non_eq_expr <- pd[-eq_ind, ]
   pd <- bind_rows(eq_expr, non_eq_expr) %>%
     arrange_pos_id()
