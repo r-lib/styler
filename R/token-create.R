@@ -19,7 +19,7 @@
 #'   not.
 #' @param child The children of the tokens.
 #' @param stylerignore Boolean to indicate if the line should be ignored by
-#'   styler.
+#'   styler. Must take value from token before, can't have a default.
 #' @param block The block (of caching) to which the token belongs. An integer.
 #' @param is_cached Whether the token is cached already.
 #' @family token creators
@@ -32,10 +32,10 @@ create_tokens <- function(tokens,
                           token_before = NA,
                           token_after = NA,
                           indention_ref_pos_ids = NA,
-                          indents = 0L,
+                          indents,
                           terminal = TRUE,
                           child = NULL,
-                          stylerignore = FALSE,
+                          stylerignore,
                           block = NA,
                           is_cached = FALSE) {
   len_text <- length(texts)
@@ -149,14 +149,16 @@ wrap_expr_in_curly <- function(pd,
   opening <- create_tokens("'{'", "{",
     pos_ids = create_pos_ids(pd, 1, after = FALSE),
     spaces = 1 - as.integer(stretch_out[1]),
-    stylerignore = pd$stylerignore[1]
+    stylerignore = pd$stylerignore[1],
+    indents = pd$indent[1]
   )
 
   closing <- create_tokens(
     "'}'", "}",
     spaces = space_after, lag_newlines = as.integer(stretch_out[2]),
     pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
-    stylerignore = pd$stylerignore[1]
+    stylerignore = pd$stylerignore[1],
+    indents = pd$indent[1]
   )
 
   bind_rows(opening, pd, closing) %>%

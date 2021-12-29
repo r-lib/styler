@@ -13,10 +13,10 @@ create_tokens(
   token_before = NA,
   token_after = NA,
   indention_ref_pos_ids = NA,
-  indents = 0L,
+  indents,
   terminal = TRUE,
   child = NULL,
-  stylerignore = FALSE,
+  stylerignore,
   block = NA,
   is_cached = FALSE
 )
@@ -51,7 +51,7 @@ not.}
 \item{child}{The children of the tokens.}
 
 \item{stylerignore}{Boolean to indicate if the line should be ignored by
-styler.}
+styler. Must take value from token before, can't have a default.}
 
 \item{block}{The block (of caching) to which the token belongs. An integer.}
 

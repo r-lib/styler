@@ -96,7 +96,9 @@ wrap_expr_in_expr <- function(pd) {
     "expr", "",
     pos_ids = create_pos_ids(pd, 1, after = FALSE),
     child = pd,
-    terminal = FALSE
+    terminal = FALSE,
+    stylerignore = pd$stylerignore[1],
+    indents = pd$indent[1]
   )
 }
 
