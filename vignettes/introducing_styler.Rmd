@@ -12,7 +12,7 @@ vignette: >
   in pkgdown: https://github.com/r-lib/pkgdown/issues/1259
 
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = "")
+knitr::opts_chunk$set(echo = TRUE, comment = "", eval = FALSE)
 knitr::knit_engines$set(list(
   styler = function(options) {
     options$comment <- ""
