@@ -21,23 +21,27 @@
 
 ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
   if (ask && runif(1) > 0.9 && is.null(getOption("styler.cache_root"))) {
-    cli::cli_inform(paste0(
-      "The R option `styler.cache_root` is not set, which means the cache ",
-      "will get cleaned up after 6 days (and repeated styling will be slower).",
-      " To keep cache files longer, set ",
-      "the option to location within the {{R.cache}} cache where you want to ",
-      "store the cache, e.g. `\"styler-perm\"`.\n\n",
-      "options(styler.cache_root = \"styler-perm\")\n\n",
-      "in your .Rprofile. Note that the cache literally ",
-      "takes zero space on your disk, only the inode, and you can always ",
-      "manually clean up with `styler::cache_clear()`, and if you update the ",
-      "{{styler}} package, the cache is removed in any case. To ignore this ",
-      "message in the future, set the default explictly to \"styler\" with\n\n",
-      "options(styler.cache_root = \"styler\")\n\nin your `.Rprofile`. This ",
-      "message will only be displayed once in a while.\n"
-    ))
+    ask_to_switch_to_non_default_cache_root_impl()
     options(styler.cache_root = "styler")
   }
+}
+
+ask_to_switch_to_non_default_cache_root_impl <- function() {
+  rlang::warn(paste0(
+    "The R option `styler.cache_root` is not set, which means the cache ",
+    "will get cleaned up after 6 days (and repeated styling will be slower).",
+    " To keep cache files longer, set ",
+    "the option to location within the {R.cache} cache where you want to ",
+    "store the cache, e.g. `\"styler-perm\"`.\n\n",
+    "options(styler.cache_root = \"styler-perm\")\n\n",
+    "in your .Rprofile. Note that the cache literally ",
+    "takes zero space on your disk, only the inode, and you can always ",
+    "manually clean up with `styler::cache_clear()`, and if you update the ",
+    "{styler} package, the cache is removed in any case. To ignore this ",
+    "message in the future, set the default explictly to \"styler\" with\n\n",
+    "options(styler.cache_root = \"styler\")\n\nin your `.Rprofile`. This ",
+    "message will only be displayed once in a while.\n"
+  ))
 }
 
 remove_old_cache_files <- function() {
