@@ -121,10 +121,10 @@
   token_before <span class="op">=</span> <span class="cn">NA</span>,
   token_after <span class="op">=</span> <span class="cn">NA</span>,
   indention_ref_pos_ids <span class="op">=</span> <span class="cn">NA</span>,
-  indents <span class="op">=</span> <span class="fl">0L</span>,
+  <span class="va">indents</span>,
   terminal <span class="op">=</span> <span class="cn">TRUE</span>,
   child <span class="op">=</span> <span class="cn">NULL</span>,
-  stylerignore <span class="op">=</span> <span class="cn">FALSE</span>,
+  <span class="va">stylerignore</span>,
   block <span class="op">=</span> <span class="cn">NA</span>,
   is_cached <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
@@ -162,7 +162,7 @@ not.</p></dd>
 <dd><p>The children of the tokens.</p></dd>
 <dt>stylerignore</dt>
 <dd><p>Boolean to indicate if the line should be ignored by
-styler.</p></dd>
+styler. Must take value from token before, can't have a default.</p></dd>
 <dt>block</dt>
 <dd><p>The block (of caching) to which the token belongs. An integer.</p></dd>
 <dt>is_cached</dt>

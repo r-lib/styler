@@ -122,6 +122,7 @@
 </li>
 </ul><p><strong>Other changes</strong></p>
 <ul><li>Piped function without brackets <code>substitute(x %&gt;% y)</code> don’t get <code>()</code> added anymore, as this can change outcome of the code (<a href="https://github.com/r-lib/styler/issues/876" class="external-link">#876</a>).</li>
+<li>rules that add tokens don’t break stylerignore sequences anymore (<a href="https://github.com/r-lib/styler/issues/891" class="external-link">#891</a>).</li>
 <li>Add vignette on distributing style guide (<a href="https://github.com/r-lib/styler/issues/846" class="external-link">#846</a>, <a href="https://github.com/r-lib/styler/issues/861" class="external-link">#861</a>).</li>
 <li>Alignment detection respects stylerignore (<a href="https://github.com/r-lib/styler/issues/850" class="external-link">#850</a>).</li>
 <li>
@@ -129,8 +130,8 @@
 <li>Unaligned expressions with quoted key (e.g. <code>c("x" = 2)</code>) are now correctly detected (<a href="https://github.com/r-lib/styler/issues/881" class="external-link">#881</a>).</li>
 <li>ensure a trailing blank line also if the input is cached (<a href="https://github.com/r-lib/styler/issues/867" class="external-link">#867</a>).</li>
 <li>Preserve trailing blank line in roxygen examples to simplify concatenation of examples (<a href="https://github.com/r-lib/styler/issues/880" class="external-link">#880</a>).</li>
-<li>Fix argument name <code>filetype</code> in Example for <code><a href="../reference/style_dir.html">style_dir()</a></code> (<a href="https://github.com/r-lib/styler/issues/855" class="external-link">#855</a>).</li>
 <li>An error is now thrown on styling if input unicode characters can’t be correctly parsed for Windows and R &lt; 4.2 (<a href="https://github.com/r-lib/styler/issues/883" class="external-link">#883</a>).</li>
+<li>Fix argument name <code>filetype</code> in Example for <code><a href="../reference/style_dir.html">style_dir()</a></code> (<a href="https://github.com/r-lib/styler/issues/855" class="external-link">#855</a>).</li>
 </ul><p><strong>Infrastructure</strong></p>
 <ul><li>Remove dependency on {xfun} (<a href="https://github.com/r-lib/styler/issues/866" class="external-link">#866</a>).</li>
 <li>Bump minimal R requirement to 3.4 in line with the <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/" class="external-link">tidyverse</a>, which allowed to remove the dependency at {backports} and some exception handling.</li>
