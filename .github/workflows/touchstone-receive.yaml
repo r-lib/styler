@@ -1,6 +1,6 @@
 name: Continuous Benchmarks (Receive)
 concurrency:
-  group: ${{ github.action_path }}-${{ github.head_ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
 
 on: pull_request
