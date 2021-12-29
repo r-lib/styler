@@ -212,7 +212,7 @@ relocate_eq_assign_one <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   eq_ind <- seq2(idx_eq_assign[1] - 1L, last(idx_eq_assign) + 1L)
   # initialize because wrap_expr_in_expr -> create_tokens -> requires it
-  pd$indent <- NA
+  pd$indent <- 0
   eq_expr <- pd[eq_ind, ] %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%
