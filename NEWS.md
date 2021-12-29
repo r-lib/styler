@@ -27,6 +27,7 @@
 
 * Piped function without brackets `substitute(x %>% y)` don't get `()` added
   anymore, as this can change outcome of the code (#876).
+* rules that add tokens don't break stylerignore sequences anymore (#891).
 * Add vignette on distributing style guide (#846, #861).
 * Alignment detection respects stylerignore (#850).
 * `Warning: Unknown or uninitialised column:` was fixed (#885).
@@ -35,9 +36,9 @@
 * ensure a trailing blank line also if the input is cached (#867).
 * Preserve trailing blank line in roxygen examples to simplify concatenation of
   examples (#880).
-* Fix argument name `filetype` in Example for `style_dir()` (#855).
 * An error is now thrown on styling if input unicode characters can't be 
   correctly parsed for Windows and R < 4.2 (#883).
+* Fix argument name `filetype` in Example for `style_dir()` (#855).
 
 
 **Infrastructure**
