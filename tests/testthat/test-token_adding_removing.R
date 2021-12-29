@@ -38,6 +38,7 @@ test_that("braces only added to pipe if RHS is a symbol", {
 })
 
 
+
 test_that("No braces are added if conditional statement is within pipe", {
   expect_warning(test_collection("token_adding_removing", "else-pipe",
     transformer = style_text
@@ -46,6 +47,19 @@ test_that("No braces are added if conditional statement is within pipe", {
 
 test_that("No brace is added within `substitute()`", {
   expect_warning(test_collection("token_adding_removing", "substitute",
+    transformer = style_text
+  ), NA)
+})
+
+
+test_that("stylreignore interacts correctly with wrap_expr_in_curly", {
+  expect_warning(test_collection("token_adding_removing", "if_else_stylerignore",
+    transformer = style_text
+  ), NA)
+})
+
+test_that("stylreignore interacts correctly with wrap_expr_in_curly", {
+  expect_warning(test_collection("token_adding_removing", "for_while_stylerignore",
     transformer = style_text
   ), NA)
 })

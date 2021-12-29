@@ -61,6 +61,8 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
       lag_newlines = 0L,
       spaces = 0L,
       pos_ids = NA,
+      stylerignore = last_pd$stylerignore[1],
+      indents = last_pd$indent[1]
     )
     tokens$.lag_spaces <- 0
 

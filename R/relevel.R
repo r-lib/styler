@@ -96,7 +96,9 @@ wrap_expr_in_expr <- function(pd) {
     "expr", "",
     pos_ids = create_pos_ids(pd, 1, after = FALSE),
     child = pd,
-    terminal = FALSE
+    terminal = FALSE,
+    stylerignore = pd$stylerignore[1],
+    indents = pd$indent[1]
   )
 }
 
@@ -209,6 +211,8 @@ find_block_id <- function(pd) {
 relocate_eq_assign_one <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   eq_ind <- seq2(idx_eq_assign[1] - 1L, last(idx_eq_assign) + 1L)
+  # initialize because wrap_expr_in_expr -> create_tokens -> requires it
+  pd$indent <- 0
   eq_expr <- pd[eq_ind, ] %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%
@@ -218,6 +222,7 @@ relocate_eq_assign_one <- function(pd) {
     ))
   eq_expr$id <- NA
   eq_expr$parent <- NA
+  pd$indent <- NULL
   non_eq_expr <- pd[-eq_ind, ]
   pd <- bind_rows(eq_expr, non_eq_expr) %>%
     arrange_pos_id()
