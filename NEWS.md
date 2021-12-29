@@ -51,7 +51,7 @@
   in `.Rbuildignore` (#879).
 * Enable pre-commit.ci (#843).
 * use pre-commit via GitHub Actions (#872).
-
+* terminate running jobs on new push to save resources (#888).
 
 # styler 1.6.2
 
