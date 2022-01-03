@@ -90,7 +90,7 @@ repos:
     -   id: end-of-file-fixer
         exclude: '\.Rd' # sometimes roxygen fails to generate EOF blank line.
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: 14637e2863517af3c946121eb22aff130f660200
+    rev: 65851818058ac40fd8e9640b4dc026e8724c629f
     hooks: 
     -   id: tidy-gitignore
 -   repo: local
