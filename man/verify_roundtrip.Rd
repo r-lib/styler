@@ -4,20 +4,29 @@
 \alias{verify_roundtrip}
 \title{Verify the styling}
 \usage{
-verify_roundtrip(old_text, new_text)
+verify_roundtrip(old_text, new_text, parsable_only = FALSE)
 }
 \arguments{
 \item{old_text}{The initial expression in its character representation.}
 
 \item{new_text}{The styled expression in its character representation.}
+
+\item{parsable_only}{If we should only check for the code to be parsable.}
 }
 \description{
 If scope was set to "line_breaks" or lower (compare \code{\link[=tidyverse_style]{tidyverse_style()}}),
 we can compare the expression before and after styling and return an error if
-it is not the same. Note that this method ignores roxygen code examples and
+it is not the same.
+If that's not possible, a weaker guarantee that we want to give is that the
+resulting code is parsable.
+}
+\section{Limitation}{
+
+Note that this method ignores roxygen code examples and
 comments and no verification can be conducted if tokens are in the styling
 scope.
 }
+
 \examples{
 styler:::verify_roundtrip("a+1", "a + 1")
 styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")

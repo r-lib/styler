@@ -34,8 +34,8 @@ x <- "	2" # there is a tab emebbed (created with writeLines("x <- '\t2'"))
 x <- "\001"
 "\x01"
 
-"\0"
-"\0"
+"\001"
+"\001"
 
 #' things
 #'

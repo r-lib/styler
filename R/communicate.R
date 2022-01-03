@@ -4,11 +4,11 @@
 #' changes carefully.
 #' @param changed Boolean with indicating for each file whether or not it has
 #'   been changed.
-#' @inheritParams can_verify_roundtrip
+#' @inheritParams parse_tree_must_be_identical
 #' @keywords internal
 communicate_warning <- function(changed, transformers) {
   if (any(changed, na.rm = TRUE) &&
-    !can_verify_roundtrip(transformers) &&
+    !parse_tree_must_be_identical(transformers) &&
     !getOption("styler.quiet", FALSE)
   ) {
     cat("Please review the changes carefully!", fill = TRUE)
