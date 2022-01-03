@@ -169,9 +169,6 @@
     <loc>https://styler.r-lib.org/reference/calls_sys.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/can_verify_roundtrip.html</loc>
-  </url>
-  <url>
     <loc>https://styler.r-lib.org/reference/catch_style_file_output.html</loc>
   </url>
   <url>
@@ -428,6 +425,9 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/parse_transform_serialize_roxygen.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/reference/parse_tree_must_be_identical.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/parser_version_set.html</loc>
