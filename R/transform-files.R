@@ -379,7 +379,7 @@ parse_tree_must_be_identical <- function(transformers) {
 verify_roundtrip <- function(old_text, new_text, parsable_only = FALSE) {
   if (parsable_only) {
     rlang::with_handlers(
-      parse_text(new_text),
+      parse_safely(new_text),
       error = function(e) {
         rlang::abort(paste0(
           "Styling resulted in code that isn't parsable. This should not ",
