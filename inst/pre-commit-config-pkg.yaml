@@ -50,6 +50,8 @@ repos:
     hooks: 
     -   id: check-added-large-files
         args: ['--maxkb=200']
+    -   id: file-contents-sorter
+        files: '^\.Rbuildignore$'
     -   id: end-of-file-fixer
         exclude: '\.Rd'
 -   repo: local

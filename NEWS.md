@@ -1,5 +1,7 @@
 # precommit 0.2.1.900* (Development version)
 
+* The template `.pre-commit-config.yaml` does now include `file-contents-sorter`
+  to sort `.Rbuildignore` (#366).
 * Port codemeta hook to `language: r` (#350).
 * Don't include `R` as a dependency with 
   `snippet_generate("additional-deps-roxygenize")` (#358).
