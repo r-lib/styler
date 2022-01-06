@@ -89,6 +89,8 @@ repos:
     -   id: check-added-large-files
     -   id: end-of-file-fixer
         exclude: '\.Rd' # sometimes roxygen fails to generate EOF blank line.
+    -   id: file-contents-sorter
+        files: '^\.Rbuildignore$'
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
     rev: 65851818058ac40fd8e9640b4dc026e8724c629f
     hooks: 
