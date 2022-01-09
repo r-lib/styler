@@ -97,16 +97,6 @@ repos:
     -   id: tidy-gitignore
 -   repo: local
     hooks:
-    -   id: install-local
-        name: install-local
-        entry: Rscript -e "renv::deactivate(); devtools::install(dependencies = c('imports', 'depends'))"
-        language: r
-        additional_dependencies:
-        -    callr
-        -    devtools
-        -    renv
-        stages: [push]
-        always_run: True
     -   id: consistent-release-tag
         name: consistent-release-tag
         entry: Rscript inst/hooks/local/consistent-release-tag.R
