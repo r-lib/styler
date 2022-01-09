@@ -33,12 +33,13 @@ jobs:
           sudo -s eval "$sysreqs"
       - name: update existing packages
         run: |
+          options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/latest"))
           install.packages('renv')
           install.packages('jsonlite')
           renv_deps <- names(jsonlite::read_json('renv.lock')$Packages)
           renv::load()
           renv::restore()
-          can_be_updated <- renv::update(renv_deps)
+          can_be_updated <- renv::update(renv_deps, prompt = FALSE)
           renv::snapshot(packages = renv_deps)
         shell: Rscript {0}
       - name: update dependency graph among packages
@@ -58,7 +59,7 @@ jobs:
             out <- names(renv:::renv_package_dependencies(out))
             return(out)
           }
-          
+          options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/latest"))
           options(renv.snapshot.filter = hook_deps)
           
           renv::snapshot(type = "custom", prompt = FALSE)
