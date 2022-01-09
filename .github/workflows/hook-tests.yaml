@@ -71,12 +71,12 @@ jobs:
           # needed to make sure renv is activated in run_test() 
           activate <- c(
             "if (nzchar(Sys.getenv('R_PRECOMMIT_HOOK_ENV'))) {",
-            "  renv::load()",
-            "  print(renv::status())",
+            paste0("  renv::load(\"", getwd(), "\")"),
+            # "  print(renv::status())",
             "}",
             "print('R profile activated')"
           )
-          writeLines(activate, '.Rprofile') 
+          writeLines(activate, '~/.Rprofile') 
         shell: Rscript {0}
       - name: Perpare testing environment
         run: |
