@@ -1,8 +1,5 @@
 # All available hooks: https://pre-commit.com/hooks.html
 # R specific hooks: https://github.com/lorenzwalthert/precommit
-default_stages: ["commit"]
-ci:
-    skip: [consistent-release-tag, spell-check-ordered-exclude]
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
     rev: v0.2.2.9006
@@ -148,3 +145,9 @@ repos:
         -    yaml
         -    purrr
         -    rlang
+
+default_stages: ["commit"]
+
+ci:
+    skip: [consistent-release-tag, spell-check-ordered-exclude]
+    autoupdate_schedule: monthly

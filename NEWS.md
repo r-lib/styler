@@ -14,7 +14,9 @@
   elsewhere in code (#361).
 * `deps-in-desc` now prints the original file (not a tempfile) also for 
   `.Rmd` and `.Rnw` files.
-  
+* The template `.pre-commit-config.yaml` default to monthly hook updates
+  (instead of weekly) to avoid notification triggers and git version convolution
+  (#370).
 
 
 # precommit v0.2.2
