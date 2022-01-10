@@ -1,4 +1,4 @@
-# precommit 0.2.1.900* (Development version)
+# precommit 0.2.3.900* (Development version)
 
 * The template `.pre-commit-config.yaml` does now include `file-contents-sorter`
   to sort `.Rbuildignore` (#366).
