@@ -89,7 +89,7 @@ repos:
     -   id: file-contents-sorter
         files: '^\.Rbuildignore$'
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: 70a8e13282b4151e4763497e40ba3fd8ab917036
+    rev: 10b77c01834103c1bfcad9115e5bdd3cfb5d1ad8
     hooks: 
     -   id: tidy-gitignore
 -   repo: local
