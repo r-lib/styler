@@ -15,4 +15,4 @@ jobs:
       ${{ github.event.workflow_run.event == 'pull_request' &&
       github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: lorenzwalthert/touchstone/actions/comment@standalone-action
+      - uses: lorenzwalthert/touchstone/actions/comment@main
