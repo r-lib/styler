@@ -1,7 +1,9 @@
 name: Continuous Benchmarks (Comment)
 
-# read-write repo token
-# access to secrets
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 on:
   workflow_run:
     workflows: ["Continuous Benchmarks (Receive)"]
