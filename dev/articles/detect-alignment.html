@@ -145,9 +145,9 @@
 
     
     
-<div class="section level1">
-<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
-</h1>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>Sometimes, you deliberately align code to make it more readable.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
@@ -162,9 +162,9 @@
 <span class="op">)</span></code></pre></div>
 <p>because no alignment detection was built in.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>styler &gt;= 1.1.1.9003 detects aforementioned alignment for function calls. This vignette describes how aligned code is defined in styler and gives some examples so users can format their aligned code to match the definition styler uses to ensure their code is not unintentionally reformatted.</p>
-<div class="section level2">
-<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
-</h2>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
 <p>These typical examples match <em>styler</em>’s definition of alignment. Note the spacing around operators and commas.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
@@ -192,9 +192,9 @@
 <span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
-</h1>
+<div class="section level2">
+<h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
+</h2>
 <p>An important definition used in the remainder is the one of a <strong>column</strong>. All arguments of a function call that have the same position but are placed on different lines form a column. The below call shows a call with two columns and two rows. Columns separate arguments of the function call, so the separator is the comma. The first row is named because all arguments are named, the second is unnamed:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
@@ -203,9 +203,9 @@
   more_ <span class="op">=</span> <span class="st">"a"</span>, <span class="fl">2</span>         <span class="co"># | row 2</span>
 <span class="op">)</span></code></pre></div>
 <p><strong>For alignment detection, the first column is omitted if not all arguments in that column are named</strong></p>
-<div class="section level2">
-<h2 id="function-calls">Function calls<a class="anchor" aria-label="anchor" href="#function-calls"></a>
-</h2>
+<div class="section level3">
+<h3 id="function-calls">Function calls<a class="anchor" aria-label="anchor" href="#function-calls"></a>
+</h3>
 <p>Below, we try to explain in an intuitive way how your code should look like to be recognized as aligned.</p>
 <p>Make commas match position vertically and align everything right before commas:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -268,14 +268,14 @@
   <span class="st">"b"</span>,       <span class="fl">1211234</span>
 <span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="comments">Comments<a class="anchor" aria-label="anchor" href="#comments"></a>
-</h2>
+<div class="section level3">
+<h3 id="comments">Comments<a class="anchor" aria-label="anchor" href="#comments"></a>
+</h3>
 <p>not supported yet.</p>
 </div>
-<div class="section level2">
-<h2 id="assignment">Assignment<a class="anchor" aria-label="anchor" href="#assignment"></a>
-</h2>
+<div class="section level3">
+<h3 id="assignment">Assignment<a class="anchor" aria-label="anchor" href="#assignment"></a>
+</h3>
 <p>not supported yet.</p>
 </div>
 </div>
@@ -304,7 +304,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
