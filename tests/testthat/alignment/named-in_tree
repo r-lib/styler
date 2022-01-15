@@ -255,8 +255,8 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦   ¦--EQ_SUB: = [0/1] {254}                          
  ¦   ¦--expr: 2 [0/0] {256}                            
  ¦   ¦   °--NUM_CONST: 2 [0/0] {255}                   
- ¦   ¦--',': , [0/3] {257}                             
- ¦   ¦--SYMBOL_SUB: n [0/4] {258}                      
+ ¦   ¦--',': , [0/1] {257}                             
+ ¦   ¦--SYMBOL_SUB: n [0/1] {258}                      
  ¦   ¦--EQ_SUB: = [0/1] {259}                          
  ¦   ¦--expr: 33 [0/0] {261}                           
  ¦   ¦   °--NUM_CONST: 33 [0/0] {260}                  
