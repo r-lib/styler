@@ -1,5 +1,11 @@
 name: Continuous Benchmarks (Receive)
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 on: pull_request
+
 jobs:
   prepare:
     runs-on: ubuntu-latest
@@ -9,7 +15,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-           fetch-depth: 0
+          fetch-depth: 0
 
       - id: read_touchstone_config
         run: |
@@ -33,9 +39,9 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: lorenzwalthert/touchstone/actions/receive@main
+      - uses: lorenzwalthert/touchstone/actions/receive@add-pat
         with:
           cache-version: 1
-          benchmarking_repo: ${{matrix.config.benchmarking_repo}}
-          benchmarking_ref: ${{matrix.config.benchmarking_ref}}
-          benchmarking_path: ${{matrix.config.benchmarking_path}}
+          benchmarking_repo: ${{ matrix.config.benchmarking_repo }}
+          benchmarking_ref: ${{ matrix.config.benchmarking_ref }}
+          benchmarking_path: ${{ matrix.config.benchmarking_path }}
