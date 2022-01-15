@@ -35,6 +35,9 @@
 * `Warning: Unknown or uninitialised column:` was fixed (#885).
 * Unaligned expressions with quoted key (e.g. `c("x" = 2)`) are now correctly
   detected (#881).
+* function calls with unequal number of token on different lines are no longer 
+  deemed aligned if there are arbitrary spaces around the tokens on the lines 
+  with most tokens (#902).
 * ensure a trailing blank line also if the input is cached (#867).
 * Preserve trailing blank line in roxygen examples to simplify concatenation of
   examples (#880).
