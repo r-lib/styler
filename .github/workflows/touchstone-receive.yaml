@@ -39,7 +39,7 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: lorenzwalthert/touchstone/actions/receive@main
+      - uses: lorenzwalthert/touchstone/actions/receive@add-pat
         with:
           cache-version: 1
           benchmarking_repo: ${{ matrix.config.benchmarking_repo }}
