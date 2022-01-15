@@ -119,11 +119,11 @@ token_is_on_aligned_line <- function(pd_flat) {
     is_aligned <- length(unique(current_col)) == 1L
     if (!is_aligned) {
       # check 2: left aligned after ,
-      current_col <- nchar(gsub("^(,[\\s\\t]*)[^ ]*.*$", "\\1", by_line, perl = TRUE))
+      current_col <- nchar(gsub("^(,[\\s\\t]*)[^ ]*.*$", "\\1", by_line, perl = TRUE)) - 1
 
       if (column > 1) {
         # must add previous columns, as first column might not align
-        current_col <- current_col + previous_line
+        current_col <- previous_line + current_col
       }
       is_aligned <- length(unique(current_col)) == 1L
       if (is_aligned) {
