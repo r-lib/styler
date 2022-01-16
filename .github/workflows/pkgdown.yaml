@@ -4,6 +4,11 @@ on:
 
 name: pkgdown
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+
 jobs:
   pkgdown:
     runs-on: macOS-latest
