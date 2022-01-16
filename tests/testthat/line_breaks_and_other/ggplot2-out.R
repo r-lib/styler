@@ -48,3 +48,13 @@ g()[2] + x[1]
 
 # don't do anything on unary + and function call
 +sin(x)
+
+# within function call
+qqjflk(
+  log(y + 1) +
+    # sqrt(x1) +
+    sqrt(x2) +
+    # sqrt(x3) +
+    x4 +
+    sqrt(x5)
+)

@@ -349,7 +349,7 @@ set_linebreak_after_ggplot2_plus <- function(pd) {
     is_plus_or_comment_after_plus_before_fun_call <-
       lag(is_plus_raw, next_non_comment - first_plus - 1, default = FALSE) &
         (pd$token_after == "SYMBOL_FUNCTION_CALL" | pd$token_after == "SYMBOL_PACKAGE")
-    if (any(is_plus_or_comment_after_plus_before_fun_call)) {
+    if (any(is_plus_or_comment_after_plus_before_fun_call, na.rm = TRUE)) {
       gg_call <- pd$child[[previous_non_comment(pd, first_plus)]]$child[[1]]
       if (!is.null(gg_call) && isTRUE(gg_call$text[gg_call$token == "SYMBOL_FUNCTION_CALL"] == "ggplot")) {
         plus_without_comment_after <- setdiff(

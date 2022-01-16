@@ -30,6 +30,8 @@
   anymore for one level deep (not more yet, see #889), as this can change 
   outcome of the code (#876).
 * rules that add tokens don't break stylerignore sequences anymore (#891).
+* Function calls containing `+` should no longer give any error on styling when 
+  there are comments and line breaks under certain circumstances (#905). 
 * Add vignette on distributing style guide (#846, #861).
 * Alignment detection respects stylerignore (#850).
 * `Warning: Unknown or uninitialised column:` was fixed (#885).
