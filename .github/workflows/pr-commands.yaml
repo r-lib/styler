@@ -42,6 +42,22 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install dependencies
         run: Rscript -e 'install.packages("styler")'
+      - name: save R.cache location
+        id: save-r-cache-location
+        run: |
+          cat("##[set-output name=r-cache-location;]", R.cache::getCacheRootPath(), "\n", sep = "")
+        shell: Rscript {0}
+      - name: R.cache cache
+        uses: actions/cache@v2
+        env:
+          cache-name: r-cache
+        with:
+          path: ${{ r-cache-location }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+            ${{ runner.os }}-
+
       - name: Style
         run: Rscript -e 'styler::style_pkg()'
       - name: commit
