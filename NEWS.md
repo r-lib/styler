@@ -57,6 +57,7 @@
 * use pre-commit via GitHub Actions (#872).
 * terminate running jobs on new push to save resources (#888).
 * Use the {touchstone} GitHub Action instead of the literal script (#889).
+* upgrade R CMD check Github Actions to use `v2`.
 
 # styler 1.6.2
 
