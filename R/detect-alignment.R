@@ -84,7 +84,10 @@ token_is_on_aligned_line <- function(pd_flat) {
   if (any(starting_with_comma)) {
     return(FALSE)
   }
-  pd_is_multi_line <- map_lgl(pd_by_line, ~ any(.x$multi_line > 0L, na.rm = TRUE))
+  pd_is_multi_line <- map_lgl(
+    pd_by_line,
+    ~ any(.x$multi_line > 0L, na.rm = TRUE)
+  )
   if (any(pd_is_multi_line)) {
     return(FALSE)
   }
@@ -110,9 +113,13 @@ token_is_on_aligned_line <- function(pd_flat) {
     # check 1: match by comma
     # might have fewer lines in subsequent columns.
     max_previous_col <- max(current_col)
-    current_col <- nchar(by_line) - as.integer(column > 1) # fir col has no leading ,
+
+    # first col has no leading ,
+    current_col <- nchar(by_line) - as.integer(column > 1)
     if (column > 1) {
-      previous_line <- previous_line[intersect(names(previous_line), names(by_line))]
+      previous_line <- previous_line[
+        intersect(names(previous_line), names(by_line))
+      ]
       # must add previous columns, as first column might not align
       current_col <- current_col + previous_line
     }
@@ -120,7 +127,10 @@ token_is_on_aligned_line <- function(pd_flat) {
     is_aligned <- length(unique(current_col)) == 1L
     if (!is_aligned || length(current_col) < 2) {
       # check 2: left aligned after ,
-      current_col <- nchar(gsub("^(,[\\s\\t]*)[^ ]*.*$", "\\1", by_line, perl = TRUE)) - 1
+      current_col <- "^(,[\\s\\t]*)[^ ]*.*$" %>%
+        gsub("\\1", by_line, perl = TRUE) %>%
+        nchar() %>%
+        magrittr::subtract(1)
 
       if (column > 1) {
         # must add previous columns, as first column might not align
@@ -142,7 +152,7 @@ token_is_on_aligned_line <- function(pd_flat) {
       previous_line <- current_col
       next
     }
-    # check 3: match by = (no extra spaces around it allowed.)
+    # check 3: match by = (no extra spaces around it allowed)
     # match left aligned after =
     start_after_eq <- regexpr("= [^ ]", by_line)
     names(start_after_eq) <- names(by_line)
@@ -152,14 +162,17 @@ token_is_on_aligned_line <- function(pd_flat) {
       if (length(start_after_eq) == 0) {
         return(FALSE)
       }
-      # when match via comma unsuccessful, matching by = must yield at least one =
+      # when match via , unsuccessful, matching by = must yield at least one =
       if (column == 1) {
         current_col <- start_after_eq
       } else {
         current_col <- start_after_eq +
           previous_line[intersect(names(previous_line), names(start_after_eq))]
       }
-      is_aligned <- length(unique(current_col)) == 1 && length(start_after_eq) > 1
+      is_aligned <- all(
+        length(unique(current_col)) == 1,
+        length(start_after_eq) > 1
+      )
       if (!is_aligned) {
         return(FALSE)
       }
