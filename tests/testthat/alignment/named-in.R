@@ -57,7 +57,7 @@ call(
 # algorithm: aligned. human: aligned.
 call(
   x  = 1,
-  xy = 2,   n    = 33, z = "333"
+  xy = 2, n = 33, z = "333"
 )
 
 # algorithm: aligned. human: aligned.
