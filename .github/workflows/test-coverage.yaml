@@ -8,11 +8,6 @@ on:
 
 name: test-coverage
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
-  cancel-in-progress: true
-
-
 jobs:
   test-coverage:
     runs-on: macOS-latest
@@ -49,3 +44,7 @@ jobs:
       - name: Test coverage
         run: covr::codecov()
         shell: Rscript {0}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
