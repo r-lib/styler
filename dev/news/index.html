@@ -130,6 +130,7 @@
 <li>
 <code>Warning: Unknown or uninitialised column:</code> was fixed (<a href="https://github.com/r-lib/styler/issues/885" class="external-link">#885</a>).</li>
 <li>Unaligned expressions with quoted key (e.g. <code>c("x" = 2)</code>) are now correctly detected (<a href="https://github.com/r-lib/styler/issues/881" class="external-link">#881</a>).</li>
+<li>function calls with unequal number of token on different lines are no longer deemed aligned if there are arbitrary spaces around the tokens on the lines with most tokens (<a href="https://github.com/r-lib/styler/issues/902" class="external-link">#902</a>).</li>
 <li>ensure a trailing blank line also if the input is cached (<a href="https://github.com/r-lib/styler/issues/867" class="external-link">#867</a>).</li>
 <li>Preserve trailing blank line in roxygen examples to simplify concatenation of examples (<a href="https://github.com/r-lib/styler/issues/880" class="external-link">#880</a>).</li>
 <li>added guarantee that styled code is parsable (<a href="https://github.com/r-lib/styler/issues/892" class="external-link">#892</a>).</li>
@@ -144,6 +145,7 @@
 <li>use pre-commit via GitHub Actions (<a href="https://github.com/r-lib/styler/issues/872" class="external-link">#872</a>).</li>
 <li>terminate running jobs on new push to save resources (<a href="https://github.com/r-lib/styler/issues/888" class="external-link">#888</a>).</li>
 <li>Use the {touchstone} GitHub Action instead of the literal script (<a href="https://github.com/r-lib/styler/issues/889" class="external-link">#889</a>).</li>
+<li>upgrade R CMD check Github Actions to use <code>v2</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6.2" id="styler-162">styler 1.6.2<small>2021-09-23</small><a class="anchor" aria-label="anchor" href="#styler-162"></a></h2>
