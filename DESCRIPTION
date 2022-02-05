@@ -20,7 +20,6 @@ Depends:
     R (>= 3.4.0)
 Imports: 
     cli (>= 1.1.0),
-    glue,
     magrittr (>= 2.0.0),
     purrr (>= 0.2.3),
     R.cache (>= 0.15.0),

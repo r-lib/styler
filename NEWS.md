@@ -52,6 +52,7 @@
 **Infrastructure**
 
 * Remove dependency on {xfun} (#866).
+* Move {glue} to `Suggests:` (#910).
 * Bump minimal R requirement to 3.4 in line with the 
   [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which
   allowed to remove the dependency at {backports} and some exception handling.
