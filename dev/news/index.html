@@ -139,6 +139,7 @@
 <li>Fix argument name <code>filetype</code> in Example for <code><a href="../reference/style_dir.html">style_dir()</a></code> (<a href="https://github.com/r-lib/styler/issues/855" class="external-link">#855</a>).</li>
 </ul><p><strong>Infrastructure</strong></p>
 <ul><li>Remove dependency on {xfun} (<a href="https://github.com/r-lib/styler/issues/866" class="external-link">#866</a>).</li>
+<li>Remove {glue} dependency that was only used by {touchstone} script and is declared as a dependency already in the respective action (<a href="https://github.com/r-lib/styler/issues/910" class="external-link">#910</a>).</li>
 <li>Bump minimal R requirement to 3.4 in line with the <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/" class="external-link">tidyverse</a>, which allowed to remove the dependency at {backports} and some exception handling.</li>
 <li>rename default branch to main (<a href="https://github.com/r-lib/styler/issues/859" class="external-link">#859</a>).</li>
 <li>the built package size has been reduced by ~50% by listing <code>*-in_tree</code> files in <code>.Rbuildignore</code> (<a href="https://github.com/r-lib/styler/issues/879" class="external-link">#879</a>).</li>
