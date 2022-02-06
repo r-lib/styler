@@ -52,6 +52,8 @@
 **Infrastructure**
 
 * Remove dependency on {xfun} (#866).
+* Remove {glue} dependency that was only used by {touchstone} script and is 
+  declared as a dependency already in the respective action (#910).
 * Bump minimal R requirement to 3.4 in line with the 
   [tidyverse](https://www.tidyverse.org/blog/2019/04/r-version-support/), which
   allowed to remove the dependency at {backports} and some exception handling.
