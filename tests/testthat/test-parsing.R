@@ -65,7 +65,7 @@ test_that("mixed CRLF / LF EOLs fail", {
 })
 
 test_that("unicode can't be propprely handled on Windows for R < 4.2", {
-  msg <- ifelse(getRversion() < 4.2 && is_windows(),
+  msg <- ifelse(getRversion() < "4.2" && is_windows(),
     "Can't parse input due to unicode restriction in base R\\.",
     NA
   )
