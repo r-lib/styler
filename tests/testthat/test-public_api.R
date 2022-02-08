@@ -486,6 +486,11 @@ test_that("Can display warning on unset styler cache", {
   )
 })
 
+test_that("No sensitive to decimal option", {
+  withr::local_options(OutDec = ",")
+  expect_error(style_text("1"), NA)
+})
+
 test_that("Can display warning on unset styler cache", {
   withr::local_options(styler.cache_root = "styler-perm")
   withr::local_seed(7)
