@@ -1,4 +1,4 @@
-# precommit 0.2.3.900* (Development version)
+# precommit v0.2.3.900* (Development version)
 
 * The template `.pre-commit-config.yaml` does now include `file-contents-sorter`
   to sort `.Rbuildignore` (#366).
@@ -7,7 +7,7 @@
   `snippet_generate("additional-deps-roxygenize")` (#358).
 * `roxygenize` hook now fails if it generates an `.Rd` file that is not tracked
   with version control (#363).
-* Ensure compatibility with {renv} (#359).
+* Ensure compatibility with {renv} (#359, #375).
 * updating hook tag.
 * `deps-in-desc` and `parsable-R` can now handle code chunk headers with 
   where `purl` or `eval` are not literals like `TRUE`, but variables defined
@@ -17,6 +17,7 @@
 * The template `.pre-commit-config.yaml` default to monthly hook updates
   (instead of weekly) to avoid notification triggers and git version convolution
   (#370).
+  
 
 
 # precommit v0.2.2
