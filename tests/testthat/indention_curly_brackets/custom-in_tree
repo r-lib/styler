@@ -1,0 +1,45 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})   
+ ¦--expr: value [0/0] {1}                                 
+ ¦   ¦--expr: value [0/1] {3}                             
+ ¦   ¦   °--SYMBOL: value [0/0] {2}                       
+ ¦   ¦--LEFT_ASSIGN: <- [0/1] {4}                         
+ ¦   °--expr: 5 [0/0] {6}                                 
+ ¦       °--NUM_CONST: 5 [0/0] {5}                        
+ ¦--expr: if (v [1/0] {7}                                 
+ ¦   ¦--IF: if [0/1] {8}                                  
+ ¦   ¦--'(': ( [0/0] {9}                                  
+ ¦   ¦--expr: value [0/0] {10}                            
+ ¦   ¦   ¦--expr: value [0/1] {12}                        
+ ¦   ¦   ¦   °--SYMBOL: value [0/0] {11}                  
+ ¦   ¦   ¦--GT: > [0/1] {13}                              
+ ¦   ¦   °--expr: 0 [0/0] {15}                            
+ ¦   ¦       °--NUM_CONST: 0 [0/0] {14}                   
+ ¦   ¦--')': ) [0/4] {16}                                 
+ ¦   °--expr: print [1/0] {17}                            
+ ¦       ¦--expr: print [0/0] {19}                        
+ ¦       ¦   °--SYMBOL_FUNCTION_CALL: print [0/0] {18}    
+ ¦       ¦--'(': ( [0/0] {20}                             
+ ¦       ¦--expr: value [0/0] {22}                        
+ ¦       ¦   °--SYMBOL: value [0/0] {21}                  
+ ¦       °--')': ) [0/0] {23}                             
+ °--expr: if (v [4/0] {24}                                
+     ¦--IF: if [0/1] {25}                                 
+     ¦--'(': ( [0/0] {26}                                 
+     ¦--expr: value [0/0] {27}                            
+     ¦   ¦--expr: value [0/1] {29}                        
+     ¦   ¦   °--SYMBOL: value [0/0] {28}                  
+     ¦   ¦--GT: > [0/1] {30}                              
+     ¦   °--expr: 0 [0/0] {32}                            
+     ¦       °--NUM_CONST: 0 [0/0] {31}                   
+     ¦--')': ) [0/1] {33}                                 
+     °--expr: {
+pri [0/0] {34}                           
+         ¦--'{': { [0/0] {35}                             
+         ¦--expr: print [1/0] {36}                        
+         ¦   ¦--expr: print [0/0] {38}                    
+         ¦   ¦   °--SYMBOL_FUNCTION_CALL: print [0/0] {37}
+         ¦   ¦--'(': ( [0/0] {39}                         
+         ¦   ¦--expr: value [0/0] {41}                    
+         ¦   ¦   °--SYMBOL: value [0/0] {40}              
+         ¦   °--')': ) [0/0] {42}                         
+         °--'}': } [1/0] {43}                             

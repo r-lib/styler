@@ -169,7 +169,12 @@ tidyverse_style <- function(scope = "tokens",
       resolve_semicolon = resolve_semicolon,
       add_brackets_in_pipe = add_brackets_in_pipe,
       wrap_if_else_while_for_fun_multi_line_in_curly =
-        if (strict) wrap_if_else_while_for_fun_multi_line_in_curly
+        if (strict) {
+          purrr::partial(
+            wrap_if_else_while_for_fun_multi_line_in_curly,
+            indent_by = indent_by
+          )
+        }
     )
   }
 
