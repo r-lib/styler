@@ -15,7 +15,8 @@ create_style_guide(
   style_guide_name = NULL,
   style_guide_version = NULL,
   more_specs_style_guide = NULL,
-  transformers_drop = specify_transformers_drop()
+  transformers_drop = specify_transformers_drop(),
+  indent_character = " "
 )
 }
 \arguments{
@@ -63,6 +64,9 @@ change in future releases without prior notification. It was mainly
 introduced to improve speed. Listing transformers here that occur almost
 always in code does not make sense because the process of excluding them
 also takes some time.}
+
+\item{indent_character}{The character that is used for indention. We strongly
+advise for using spaces as indention characters.}
 }
 \description{
 This is a helper function to create a style guide, which is technically

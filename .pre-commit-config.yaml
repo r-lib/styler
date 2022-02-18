@@ -57,7 +57,9 @@ repos:
           tests/testthat/escaping/basic-escape-out\.R|
           tests/testthat/indention_operators/.*pipe.*|
           tests/testthat/line_breaks_and_other/.*pipe.*|
-          tests/testthat/exception_handling/parser-error.R|
+          tests/testthat/exception_handling/parser-error\.R|
+          tests/testthat/public-api/xyzfile_rmd/random4\.Rmd|
+          tests/testthat/rmd/no-tidy-(in|out)\.Rmd|
           )$
     -   id: no-browser-statement
         exclude: >
@@ -68,6 +70,7 @@ repos:
           tests/testthat/indention_operators/.*pipe.*|
           tests/testthat/line_breaks_and_other/.*pipe.*|
           tests/testthat/exception_handling/parser-error.R|
+          tests/testmanual/|
           )$
     -   id: deps-in-desc
         exclude: >

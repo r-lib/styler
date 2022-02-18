@@ -51,6 +51,8 @@
   statement by {styler} (#915).
 * An error is now thrown on styling if input unicode characters can't be 
   correctly parsed for Windows and R < 4.2 (#883).
+* Developers can now create style guides with indention characters other than 
+  spaces (#916).
 * styling of text does not error anymore when the R option `OutDec` is set to 
   a non-default value (#912).
 * Fix argument name `filetype` in Example for `style_dir()` (#855).
