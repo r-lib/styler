@@ -25,6 +25,9 @@
 
 **Other changes**
 
+* {styler} can be ran via GitHub Actions using 
+  `usethis::use_github_action("style")` (#914).
+
 * `.onLoad()` method no longer broken with {cli} >= 3.1 (#893).
 * Piped function without brackets `substitute(x %>% y)` don't get `()` added
   anymore for one level deep (not more yet, see #889), as this can change 

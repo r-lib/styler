@@ -17,7 +17,9 @@ knitr::opts_chunk$set(
 styler functionality is available in other tools, most notably
 
 * as a pre-commit hook `style-files` in
-  <https://github.com/lorenzwalthert/precommit>
+  <https://github.com/lorenzwalthert/precommit> to format before commit 
+  (locally) and enforced as a continuous integration step in the cloud through
+  <https://pre-commit.ci>.
 
 * via `usethis::use_tidy_style()` styles your project according to the tidyverse
   style guide.
@@ -28,7 +30,10 @@ styler functionality is available in other tools, most notably
   is used. The most convenient way to set this up is via
   [`usethis::use_tidy_github_actions()`](https://usethis.r-lib.org/reference/tidyverse.html).
 
-* as a formatter for RMarkdown without modifying the source. This feature is
+* through the [GitHub Action Workflow](https://github.com/r-lib/actions/tree/v2-branch/examples#style-package) that triggers `styler::style_pkg()`
+  on changes in source files.
+
+* as a formatter for R Markdown without modifying the source. This feature is
   implemented as a code chunk option in knitr. use `tidy = "styler"` in the
   header of a code chunks (e.g.` ```{r name-of-the-chunk, tidy = "styler"} `),
   or `knitr::opts_chunk$set(tidy = "styler")` at the top of your RMarkdown
