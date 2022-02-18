@@ -22,6 +22,13 @@ test_that("indention with multi-line curley and round is correct", {
   ), NA)
 })
 
+test_that("custom indention for curly braces is corretct ", {
+  expect_warning(test_collection("indention_curly_brackets",
+    "custom",
+    transformer = style_text, indent_by = 4
+  ), NA)
+})
+
 
 
 test_that(paste(

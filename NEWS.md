@@ -47,6 +47,8 @@
 * Preserve trailing blank line in roxygen examples to simplify concatenation of
   examples (#880).
 * added guarantee that styled code is parsable (#892).
+* `indenty_by` is now also respected when curly braces are added to an if
+  statement by {styler} (#915).
 * An error is now thrown on styling if input unicode characters can't be 
   correctly parsed for Windows and R < 4.2 (#883).
 * styling of text does not error anymore when the R option `OutDec` is set to 
