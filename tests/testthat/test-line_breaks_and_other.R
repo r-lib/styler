@@ -62,3 +62,9 @@ test_that("drop redundant line breaks in assignments", {
     transformer = style_text, scope = I(c("line_breaks", "tokens"))
   ), NA)
 })
+
+test_that("line is correctly broken around = ", {
+  expect_warning(test_collection("line_breaks_and_other", "around-eq-sub",
+    transformer = style_text
+  ), NA)
+})

@@ -119,6 +119,21 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
 
   pd$lag_newlines[comma_with_line_break_that_can_be_removed_before] <- 0L
   pd$lag_newlines[lag(comma_with_line_break_that_can_be_removed_before)] <- 1L
+
+  comma_with_line_break_that_can_be_moved_two_tokens_left <- which(
+    (pd$token == "EQ_SUB") &
+      (pd$lag_newlines > 0) &
+      (pd$token_before != "COMMENT") &
+      (lag(pd$token) != "'['")
+  )
+
+  pd$lag_newlines[comma_with_line_break_that_can_be_moved_two_tokens_left] <- 0L
+  token_before <- map_int(
+    comma_with_line_break_that_can_be_moved_two_tokens_left,
+    previous_non_comment,
+    pd = pd
+  )
+  pd$lag_newlines[token_before] <- 1L
   pd
 }
 
