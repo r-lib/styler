@@ -18,6 +18,9 @@
   (instead of weekly) to avoid notification triggers and git version convolution
   (#370).
 * Document advantages of pre-commit in vignette (#379).
+* `style-files` now takes `ignore-start` and `ignore-stop` arguments, passed to 
+  `options("styler.ignore_start")` and `options("styler.ignore_stop")`. By 
+  default, {styler} defaults are used.
   
 
 

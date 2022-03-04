@@ -99,6 +99,17 @@ In addition, the hook takes the following arguments that are not passed to
   args: [--cache-root=styler]
 ```
 
+* Argument `ignore-start` and `ignore-stop` is passed to `options()` to set 
+  `styler.ignore_start`   and `styler.ignore_stop` respectively. Not set by 
+  default, so the {styler} defaults apply. This was introduced in {precommit} 
+  0.2.2.9012. For example, if you want to restore 
+  old behavior of styler < 1.6.2, where only the literals `styler: off` and 
+  `styler: on` were accepted, use this regex:
+```
+  id: style-files
+  args: [--ignore-start="^# styler: on$", --ignore-stop="^# styler: off$"]
+```
+
 
 This hook modifies files unless you specify `--dry=fail` (requires 
 `{styler} > 1.3.2`).
