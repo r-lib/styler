@@ -76,22 +76,24 @@ run_test("style-files",
   cmd_args = c("--include_roxygen_examples=FALSE", "--cache-root=styler")
 )
 
-run_test("style-files",
-  file_name = "style-files",
-  suffix = "-ignore-success.R",
-  cmd_args = c(
-    "--cache-root=styler",
-    '--ignore-start="^# styler: off$"',
-    '--ignore-stop="^# styler: on$"'
+if (packageVersion("styler") > "1.6.2") {
+  run_test("style-files",
+    file_name = "style-files",
+    suffix = "-ignore-success.R",
+    cmd_args = c(
+      "--cache-root=styler",
+      '--ignore-start="^# styler: off$"',
+      '--ignore-stop="^# styler: on$"'
+    )
   )
-)
 
-run_test("style-files",
-  file_name = "style-files",
-  suffix = "-ignore-fail.R",
-  cmd_args = "--cache-root=styler",
-  error_msg = "Invalid stylerignore sequences"
-)
+  run_test("style-files",
+    file_name = "style-files",
+    suffix = "-ignore-fail.R",
+    cmd_args = "--cache-root=styler",
+    error_msg = "Invalid stylerignore sequences"
+  )
+}
 
 
 # fail with cmd args
