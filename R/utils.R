@@ -100,7 +100,7 @@ option_read <- function(x, default = NULL, error_if_not_found = TRUE) {
   if (x %in% names(options()) | !error_if_not_found) {
     getOption(x, default)
   } else {
-    rlang::abort(paste("R option", x, "most be set."))
+    rlang::abort(paste("R option", x, "must be set."))
   }
 }
 
