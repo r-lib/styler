@@ -18,7 +18,7 @@ robust_purl <- function(path) {
 
   if (tolower(ext) == "rmd") {
     lines[!should_not_override] <- gsub(
-      "^```\\{.*\\}.*", "```{r purl = TRUE}", lines[!should_not_override]
+      "^```\\{ *[Rr] *.*\\}.*", "```{r purl = TRUE}", lines[!should_not_override]
     )
   } else if (tolower(ext) == "rnw") {
     lines[!should_not_override] <- gsub(
