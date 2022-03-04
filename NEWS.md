@@ -17,6 +17,7 @@
 * The template `.pre-commit-config.yaml` default to monthly hook updates
   (instead of weekly) to avoid notification triggers and git version convolution
   (#370).
+* Document advantages of pre-commit in vignette (#379).
   
 
 
