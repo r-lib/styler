@@ -249,12 +249,15 @@ not_conda <- function() {
 #' temporary directory and optionally initiates git and pre-commit in it.
 #' @inheritParams withr::local_tempdir
 #' @param git Whether or not to init git in the local directory.
+#' @param autoupdate Whether or not to run [autoupdate()] as part of this
+#'   fixture.
 #' @param use_precommmit Whether or not to [use_precommit()].
 #' @keywords internal
 local_test_setup <- function(git = TRUE,
                              use_precommit = FALSE,
                              package = FALSE,
                              quiet = TRUE,
+                             autoupdate = FALSE,
                              ...,
                              .local_envir = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = .local_envir)
@@ -267,7 +270,7 @@ local_test_setup <- function(git = TRUE,
     withr::defer(fs::dir_delete(fs::path(dir, ".git")), envir = .local_envir)
   }
   if (use_precommit) {
-    suppressMessages(use_precommit(..., root = dir))
+    suppressMessages(use_precommit(..., autoupdate = autoupdate, root = dir))
   }
   if (package) {
     usethis::create_package(dir)
