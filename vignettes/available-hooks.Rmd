@@ -136,6 +136,12 @@ statement in it.
 
 This hook does not modify files.
 
+## `no-debug-statement`
+
+Guarantees you that you don't accidentally commit code with a `debug()` or `debugonce()` statement in it.
+
+This hook does not modify files.
+
 ## `spell-check`
 
 Checks spelling with `spelling::spell_check_files()`.
