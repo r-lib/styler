@@ -76,7 +76,10 @@ run_test("style-files",
   cmd_args = c("--include_roxygen_examples=FALSE", "--cache-root=styler")
 )
 
-if (packageVersion("styler") > "1.6.2") {
+if (rlang::is_installed("styler") && packageVersion("styler") > "1.6.2") {
+  if (Sys.Date() > as.Date("2022-0909")) {
+    rlang::abort("remove check, {styler} must have been upgraded on CRAN.")
+  }
   run_test("style-files",
     file_name = "style-files",
     suffix = "-ignore-success.R",
