@@ -11,7 +11,7 @@
 * updating hook tag.
 * `deps-in-desc` and `parsable-R` can now handle code chunk headers with 
   where `purl` or `eval` are not literals like `TRUE`, but variables defined
-  elsewhere in code (#361).
+  elsewhere in code (#361, #382).
 * `deps-in-desc` now prints the original file (not a tempfile) also for 
   `.Rmd` and `.Rnw` files.
 * The template `.pre-commit-config.yaml` default to monthly hook updates
