@@ -15,3 +15,20 @@ parsable + code
 ```{r, purl=FALSE}
  fas / fk 12 -
 ```
+
+
+```{nonR chunk}
+this is 
+```
+
+```{f , x= 2}
+this is 
+```
+
+```{f, x= 2}
+this is 
+```
+
+```{ f, x= 2}
+this is 
+```
