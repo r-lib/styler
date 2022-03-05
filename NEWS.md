@@ -23,19 +23,29 @@
   `styler.ignore_stop` omit the `#` (#849).
 
 
-**Other changes**
+**Features**
 
 * {styler} can be ran via GitHub Actions using 
   `usethis::use_github_action("style")` (#914).
+* added guarantee that styled code is parsable (#892).
+* Developers can now create style guides with indention characters other than 
+  spaces (#916).
 
-* `.onLoad()` method no longer broken with {cli} >= 3.1 (#893).
+**Documentation**
+
+* Add vignette on distributing style guide (#846, #861).
+* Fix argument name `filetype` in Example for `style_dir()` (#855).
+
+
+**Bug fixes**
+
 * Piped function without brackets `substitute(x %>% y)` don't get `()` added
   anymore for one level deep (not more yet, see #889), as this can change 
   outcome of the code (#876).
-* rules that add tokens don't break stylerignore sequences anymore (#891).
+* `.onLoad()` method no longer broken with {cli} >= 3.1 (#893).
 * Function calls containing `+` should no longer give any error on styling when 
   there are comments and line breaks under certain circumstances (#905). 
-* Add vignette on distributing style guide (#846, #861).
+* rules that add tokens don't break stylerignore sequences anymore (#891).
 * Alignment detection respects stylerignore (#850).
 * `Warning: Unknown or uninitialised column:` was fixed (#885).
 * Unaligned expressions with quoted key (e.g. `c("x" = 2)`) are now correctly
@@ -43,19 +53,17 @@
 * function calls with unequal number of token on different lines are no longer 
   deemed aligned if there are arbitrary spaces around the tokens on the lines 
   with most tokens (#902).
+* if a line starts with `EQ_SUB` (`=`), the corresponding key is moved to that
+  line too (#923).
 * ensure a trailing blank line also if the input is cached (#867).
 * Preserve trailing blank line in roxygen examples to simplify concatenation of
   examples (#880).
-* added guarantee that styled code is parsable (#892).
 * `indenty_by` is now also respected when curly braces are added to an if
   statement by {styler} (#915).
 * An error is now thrown on styling if input unicode characters can't be 
   correctly parsed for Windows and R < 4.2 (#883).
-* Developers can now create style guides with indention characters other than 
-  spaces (#916).
 * styling of text does not error anymore when the R option `OutDec` is set to 
   a non-default value (#912).
-* Fix argument name `filetype` in Example for `style_dir()` (#855).
 
 
 **Infrastructure**
