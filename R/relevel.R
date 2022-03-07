@@ -28,7 +28,7 @@ flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, "PIPE", math_token, "'$'")
   pd_token_right <- c(
     special_token, "PIPE", "LEFT_ASSIGN", if (parser_version_get() > 1) "EQ_ASSIGN",
-    "'+'", "'-'"
+    "'+'", "'-'", "'~'"
   )
   pd_nested %>%
     flatten_pd(pd_token_left, left = TRUE) %>%

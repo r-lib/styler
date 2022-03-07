@@ -38,7 +38,8 @@ indent_op <- function(pd,
                         "PIPE",
                         "LEFT_ASSIGN",
                         "EQ_ASSIGN",
-                        "'$'"
+                        "'$'",
+                        "'~'"
                       )) {
   indent_indices <- compute_indent_indices(pd, token)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by

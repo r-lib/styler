@@ -141,6 +141,14 @@ test_that("indents eq_formals correctly with various levels of scope", {
   ), NA)
 })
 
+test_that("tilde causes indention and is flattened out", {
+  expect_warning(test_collection("indention_operators",
+    "tilde",
+    transformer = style_text
+  ), NA)
+})
+
+
 test_that("overall", {
   expect_warning(test_collection("indention_operators",
     "overall",
