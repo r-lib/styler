@@ -1,13 +1,11 @@
-This is a re-submission to fix a problem with persistent caching. Note that
-all cached files are of size 0 and this is by design to keep the cache small.
-Hence, the cache will still have files of size 0, but we remove all files older
-than a week and remove all caches for versions of styler other than the one 
-running as requested.
+This release does not check for a specific error message from `parse()` anymore
+when the input involves unparsable use of `_`. The release was requested by Luke
+Tierney.
 
 ## Test environments
 
-* local OS X install (10.15.7): R 4.1.0
-* ubuntu 18.04 (on GitHub Actions): R devel, R 4.1.1, R 4.0.5, R 3.6, R 3.5, R 3.4
+
+* ubuntu 18.04 (on GitHub Actions): R devel, R 4.1.2, R 4.0.5, R 3.6, R 3.5, R 3.4
 * Windows Server 10 (on GitHub Actions): R 3.6, R 4.0.5
 * win-builder: R devel
 
@@ -39,11 +37,13 @@ downstream dependencies are:
 
 * Reverse imports: biocthis, boomer, exampletestr, flow, iNZightTools, 
   languageserver, questionr, shinymeta, shinyobjects, ShinyQuickStarter, 
-  systemPipeShiny, tidypaleo
+  systemPipeShiny, tidypaleo.
+	
   	
-* Reverse suggests: autothresholdr, autothresholdr, crunch, datastructures, 
-  drake, epigraphdb, knitr, multiverse, nph, precommit, reprex, shiny.react,
-  shinydashboardPlus, shinyMonacoEditor, usethis.
+* Reverse suggests: 	admiral, autothresholdr, crunch, datastructures, drake, 
+  epigraphdb, ghclass, knitr, multiverse, nph, precommit, reprex, shiny.react,
+  shinydashboardPlus, shinyMonacoEditor, upsetjs, usethis.
+
 
 
 

@@ -70,6 +70,7 @@ getChecksum
 getOption
 getRversion
 ggplot
+ghclass
 github
 gitsum
 grkstyle
@@ -236,6 +237,7 @@ tidypaleo
 tidyr
 tidyverse
 Tidyverse
+Tierney
 tokenized
 travis
 tryCatch
@@ -250,7 +252,9 @@ unindention
 unlink
 unlinkunindention
 unnest
+unparsable
 unstyled
+upsetjs
 usethis
 utf
 Uwe

@@ -1,4 +1,4 @@
-# styler 1.6.2.9000 (Development version)
+# styler 1.7.0
 
 **API changes**
 
@@ -47,10 +47,10 @@
   there are comments and line breaks under certain circumstances (#905). 
 * rules that add tokens don't break stylerignore sequences anymore (#891).
 * Alignment detection respects stylerignore (#850).
-* `~` causes now indention, like `+`, `-`, `|` etc. (#902).
-* `Warning: Unknown or uninitialised column:` was fixed (#885).
 * Unaligned expressions with quoted key (e.g. `c("x" = 2)`) are now correctly
   detected (#881).
+* `~` causes now indention, like `+`, `-`, `|` etc. (#902).
+* `Warning: Unknown or uninitialised column:` was fixed (#885).
 * function calls with unequal number of token on different lines are no longer 
   deemed aligned if there are arbitrary spaces around the tokens on the lines 
   with most tokens (#902).
