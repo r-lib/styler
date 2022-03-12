@@ -83,6 +83,8 @@
 * terminate running jobs on new push to save resources (#888).
 * Use the {touchstone} GitHub Action instead of the literal script (#889).
 * upgrade R CMD check Github Actions to use `v2`.
+* {styler} test are relaxed to not assume a specific error message on the 
+  wrong usage of `_` (#929).
 
 # styler 1.6.2
 
