@@ -13,7 +13,7 @@ test_that("escaping of characters works", {
 
   expect_error(test_collection("escaping", "fail-parsing-3",
     transformer = style_text
-  ), "<text>:2:3: unexpected input\n1: \n2: 1 _\n     ^", fixed = TRUE)
+  ))
 
   expect_error(test_collection("escaping", "fail-parsing-4",
     transformer = style_text
