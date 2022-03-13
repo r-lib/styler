@@ -1,7 +1,7 @@
 # precommit v0.2.2.900* (Development version)
 
 * New hook `no-debug-statement` checks for leftover `debug()` and `debugonce()`
-  statements in the committed code (#290, @lukasfeick-sw).
+  statements in the committed code (#385, @lukasfeick-sw).
 * The template `.pre-commit-config.yaml` does now include `file-contents-sorter`
   to sort `.Rbuildignore` (#366).
 * Port codemeta hook to `language: r` (#350).
