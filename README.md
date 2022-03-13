@@ -48,7 +48,7 @@ Averick</a>
 </figcaption>
 </figure>
 
-For a more in-depth explanation and even more reasons, see  
+For a more in-depth explanation and even more reasons, see
 `vignette("why-use-hooks")`.
 
 ## Documentation

@@ -55,7 +55,8 @@ The goal of this package is to twofold:
 <img src="man/figures/pre-commit-meme.jpeg" width="500" align="center" href="https://twitter.com/dataandme/status/1255510799273132032"/>
 <figcaption>By <a href=https://twitter.com/dataandme/status/1255510799273132032>Mara Averick</a></figcaption>
 </figure>
-For a more in-depth explanation and even more reasons, see  
+
+For a more in-depth explanation and even more reasons, see
 `vignette("why-use-hooks")`.
 
 ## Documentation 
