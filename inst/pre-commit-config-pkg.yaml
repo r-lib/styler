@@ -44,6 +44,7 @@ repos:
     -   id: readme-rmd-rendered
     -   id: parsable-R
     -   id: no-browser-statement
+    -   id: no-debug-statement
     -   id: deps-in-desc
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v1.2.3

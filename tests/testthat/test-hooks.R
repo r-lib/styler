@@ -142,6 +142,21 @@ run_test(
   error_msg = "contains a `browser()` statement."
 )
 
+### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+### no-debug-statement                                                    ####
+# success
+run_test(
+  "no-debug-statement",
+  suffix = "-success.R",
+  error_msg = NULL
+)
+
+# failure
+run_test(
+  "no-debug-statement",
+  suffix = "-fail.R",
+  error_msg = "contains a `debug()` or `debugonce()` statement."
+)
 
 
 ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
