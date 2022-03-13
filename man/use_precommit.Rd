@@ -11,7 +11,7 @@ use_precommit(
   open = rstudioapi::isAvailable(),
   install_hooks = TRUE,
   ci = getOption("precommit.ci", "native"),
-  autoupdate = TRUE,
+  autoupdate = install_hooks,
   root = here::here()
 )
 }
