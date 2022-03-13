@@ -86,6 +86,10 @@
 * {styler} test are relaxed to not assume a specific error message on the 
   wrong usage of `_` (#929).
 
+Thanks to all contributors that made this release possible:
+
+[&#x0040;bersbersbers](https://github.com/bersbersbers), [&#x0040;daniel-wrench](https://github.com/daniel-wrench), [&#x0040;dbykova](https://github.com/dbykova), [&#x0040;EngrStudent](https://github.com/EngrStudent), [&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;jam1015](https://github.com/jam1015), [&#x0040;jooyoungseo](https://github.com/jooyoungseo), [&#x0040;kalaschnik](https://github.com/kalaschnik), [&#x0040;kaytif](https://github.com/kaytif), [&#x0040;kpagacz](https://github.com/kpagacz), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lionel-](https://github.com/lionel-), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;maelle](https://github.com/maelle), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel), [&#x0040;neuwirthe](https://github.com/neuwirthe), [&#x0040;Polkas](https://github.com/Polkas), [&#x0040;pwang2](https://github.com/pwang2), [&#x0040;sebffischer](https://github.com/sebffischer), [&#x0040;ShixiangWang](https://github.com/ShixiangWang), [&#x0040;ssh352](https://github.com/ssh352), and [&#x0040;xjtusjtu](https://github.com/xjtusjtu).
+
 # styler 1.6.2
 
 * clean up cache files older than one week (#842).
