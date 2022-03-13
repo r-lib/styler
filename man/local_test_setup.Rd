@@ -9,12 +9,16 @@ local_test_setup(
   use_precommit = FALSE,
   package = FALSE,
   quiet = TRUE,
+  autoupdate = FALSE,
   ...,
   .local_envir = parent.frame()
 )
 }
 \arguments{
 \item{git}{Whether or not to init git in the local directory.}
+
+\item{autoupdate}{Whether or not to run \code{\link[=autoupdate]{autoupdate()}} as part of this
+fixture.}
 
 \item{.local_envir}{\verb{[environment]}\cr The environment to use for scoping.}
 

@@ -11,6 +11,7 @@ use_precommit(
   open = rstudioapi::isAvailable(),
   install_hooks = TRUE,
   ci = getOption("precommit.ci", "native"),
+  autoupdate = TRUE,
   root = here::here()
 )
 }
@@ -44,6 +45,9 @@ If \code{FALSE}, environments are installed with first commit.}
 \href{https://pre-commit.ci}{pre-commit.ci}. Alternatively, \code{"gha"} can be used
 to set up \href{https://github.com/features/actions}{GitHub Actions}. Set value
 to \code{NULL} if you don't want to use a continuous integration.}
+
+\item{autoupdate}{Whether or not to run \code{\link[=autoupdate]{autoupdate()}} as part of this
+function call.}
 
 \item{root}{The path to the root directory of your project.}
 }

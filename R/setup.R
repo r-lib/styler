@@ -12,6 +12,8 @@
 #'   it's been placed in your repo as well as
 #'   [pre-commit.ci](https://pre-commit.ci) (if `ci = "native"`). The default is
 #'   `TRUE` when working in RStudio.
+#' @param autoupdate Whether or not to run [autoupdate()] as part of this
+#'   function call.
 #' @inheritParams fallback_doc
 #' @inheritParams use_precommit_config
 #' @inheritSection use_precommit_config Copying an existing config file
@@ -45,6 +47,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
                           open = rstudioapi::isAvailable(),
                           install_hooks = TRUE,
                           ci = getOption("precommit.ci", "native"),
+                          autoupdate = TRUE,
                           root = here::here()) {
   rlang::arg_match(legacy_hooks, c("forbid", "allow", "remove"))
   assert_is_installed()
@@ -54,7 +57,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
     config_source, force, root,
     open = FALSE, verbose = FALSE
   )
-  autoupdate(root)
+  if (autoupdate) autoupdate(root)
   install_repo(root, install_hooks, legacy_hooks)
   if (open) {
     open_config(root)
