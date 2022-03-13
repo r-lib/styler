@@ -21,3 +21,4 @@ use_ci(ci = getOption("precommit.ci", "native"), force = FALSE, open = rstudioap
 use_precommit(config_source = getOption("precommit.config_source"), force = FALSE, legacy_hooks = "forbid", open = rstudioapi::isAvailable(), install_hooks = TRUE, ci = getOption("precommit.ci", "native"), autoupdate = TRUE, root = here::here())
 use_precommit_config(config_source = getOption("precommit.config_source"), force = FALSE, open = rstudioapi::isAvailable(), verbose = FALSE, root = here::here())
 version_precommit()
+
