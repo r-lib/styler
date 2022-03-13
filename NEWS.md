@@ -21,7 +21,7 @@
 * `use_precommit()` now exposes the argument `autoupdate`, defaulting to `TRUE`.
   This tells {precommit} whether or not to run `autoupdate()` as part of the 
   former function invocation (#386).
-
+* Refactor README into new README and a *Get started* vignette (#388).
 
 # precommit v0.2.2
 
