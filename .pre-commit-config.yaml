@@ -72,7 +72,7 @@ repos:
           (?x)^(
           tests/testthat/in/.*|
           )$
-#     -   id: no-debug-statement
+    -   id: no-debug-statement
     -   id: deps-in-desc
         exclude: > 
           (?x)^(
