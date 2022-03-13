@@ -13,6 +13,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://github.com/lorenzwalthert/precommit/workflows/R-CMD-check/badge.svg)](https://github.com/lorenzwalthert/precommit/actions)
 <!-- badges: end -->
 
+![Credits to Mara Averick](man/figures/pre-commit-meme.jpeg)
+
 [Pre-commit hooks](https://pre-commit.com) are tests that run each time
 you attempt to commit. If the tests pass, the commit will be made,
 otherwise not. A very basic test is to check if the code is parsable,
@@ -64,7 +66,7 @@ Alternatively, you can handle the installation from R using
 [miniconda](https://docs.conda.io/en/latest/miniconda.html):
 
 -   install miniconda if you don’t have it already:
-    `reticulate::install_miniconda()`. This needs reticulate >= 1.14.
+    `reticulate::install_miniconda()`. This needs reticulate \>= 1.14.
 
 -   install the pre-commit framework with
     `precommit::install_precommit()` into the conda environment

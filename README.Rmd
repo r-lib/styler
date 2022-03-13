@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
+
 [![CRAN
 status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.org/package=precommit)
 [![Lifecycle:
@@ -22,6 +23,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R build
 status](https://github.com/lorenzwalthert/precommit/workflows/R-CMD-check/badge.svg)](https://github.com/lorenzwalthert/precommit/actions)
 <!-- badges: end -->
+
+![Credits to Mara Averick](man/figures/pre-commit-meme.jpeg)
+
+
 
 [Pre-commit hooks](https://pre-commit.com) are tests that run each time you
 attempt to commit. If the tests pass, the commit will be made, otherwise not. A
