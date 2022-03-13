@@ -593,7 +593,7 @@ Thanks to all contributors involved, in particular
 [&#x0040;tvatter](https://github.com/tvatter),
 [&#x0040;wdearden](https://github.com/wdearden),
 [&#x0040;wmayner](https://github.com/wmayner), and
-[&#x0040;yech1990](https://github.com/yech1990).
+&#x0040;yech1990.
 
 # styler 1.1.0
 
