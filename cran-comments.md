@@ -45,9 +45,5 @@ downstream dependencies are:
   shinydashboardPlus, shinyMonacoEditor, upsetjs, usethis.
 
 
-
-
-All of them finished R CMD CHECK with the same number of ERRORS, WARNINGS and 
-NOTES as with the current CRAN version of styler, which means the new 
-submission of styler does not introduce any ERRORS, WARNINGS and NOTES in 
-downstream dependencies.
+All of them finished R CMD CHECK with zero (0) ERRORS, WARNINGS and 
+NOTES.
