@@ -47,7 +47,7 @@ use_precommit <- function(config_source = getOption("precommit.config_source"),
                           open = rstudioapi::isAvailable(),
                           install_hooks = TRUE,
                           ci = getOption("precommit.ci", "native"),
-                          autoupdate = TRUE,
+                          autoupdate = install_hooks,
                           root = here::here()) {
   rlang::arg_match(legacy_hooks, c("forbid", "allow", "remove"))
   assert_is_installed()
