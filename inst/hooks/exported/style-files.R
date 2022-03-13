@@ -1,13 +1,15 @@
 #!/usr/bin/env Rscript
 'style files.
 Usage:
-  style_files [--style_pkg=<style_guide_pkg>] [--style_fun=<style_guide_fun>] [--cache-root=<cache_root_>] [--no-warn-cache] <files>...
+  style_files [--style_pkg=<style_guide_pkg>] [--style_fun=<style_guide_fun>] [--cache-root=<cache_root_>] [--no-warn-cache] [--ignore-start=<ignore_start_>] [--ignore-stop=<ignore_stop_>] <files>...
 
 Options:
   --style_pkg=<style_guide_pkg>  Package where the style guide is stored [default: styler].
   --style_fun=<style_guide_fun>  The styling function in style_pkg [default: tidyverse_style].
   --no-warn-cache  Suppress the warning about a missing permanent cache.
   --cache-root=<cache_root_> Passed to `options("styler.cache_root")` [default: styler-perm].
+  --ignore-start=<ignore_start_> Passed to `options("styler.ignore_start")`.
+  --ignore-stop=<ignore_stop_> Passed to `options("styler.ignore_stop")`.
 ' -> doc
 
 if (packageVersion("precommit") < "0.1.3.9010") {
@@ -26,7 +28,7 @@ args <- commandArgs(trailingOnly = TRUE)
 non_file_args <- args[!grepl("^[^-][^-]", args)]
 keys <- setdiff(
   gsub("(^--[0-9A-Za-z_-]+).*", "\\1", non_file_args),
-  c("--style_pkg", "--style_fun", "--cache-root", "--no-warn-cache")
+  c("--style_pkg", "--style_fun", "--cache-root", "--no-warn-cache", "--ignore-start", "--ignore-stop")
 )
 if (length(keys) > 0) {
   bare_keys <- gsub("^--", "", keys)
@@ -47,6 +49,12 @@ if (packageVersion("styler") < "1.3.2") {
   precommit::may_require_permanent_cache(arguments$no_warn_cache)
 }
 options("styler.cache_root" = arguments$cache_root)
+if (!is.null(arguments$ignore_start)) {
+  options("styler.ignore_start" = arguments$ignore_start)
+}
+if (!is.null(arguments$ignore_stop)) {
+  options("styler.ignore_stop" = arguments$ignore_stop)
+}
 print(c("cache root set to ", arguments$cache_root))
 if (!rlang::is_installed(arguments$style_pkg)) {
   rlang::abort(paste0(
@@ -64,7 +72,6 @@ See 'Examples' in `help(\"install\", package = \"renv\")` for other supported wa
 }
 
 style <- eval(parse(text = paste(arguments$style_pkg, "::", arguments$style_fun)))
-
 
 tryCatch(
   {
