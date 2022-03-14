@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/styler.html">Get started</a>
 </li>
@@ -52,7 +48,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,17 +64,24 @@
       <a href="../articles/third-party-integrations.html">Third-party integrations</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Developers</li>
+    </li>
+<li class="dropdown-header">Developers</li>
     <li>
-      <a href="../articles/caching.html">Caching</a>
+      <a href="../articles/remove_rules.html">Remove rules</a>
     </li>
     <li>
       <a href="../articles/customizing_styler.html">Customizing styler</a>
     </li>
+    <li>
+      <a href="../articles/distribute_custom_style_guides.html">Distribute custom style guides</a>
+    </li>
+    <li>
+      <a href="../articles/caching.html">Caching</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -86,19 +89,20 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/" class="external-link">Version 1.0.0</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/" class="external-link">Version 1.2.0</a>
     </li>
     <li>
-      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/" class="external-link">Version 1.3.0</a>
     </li>
     <li>
-      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/">Version 1.4.0</a>
+      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/" class="external-link">Version 1.4.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
@@ -106,7 +110,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/styler/">
+  <a href="https://github.com/r-lib/styler/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -133,74 +137,74 @@
       <h1 data-toc-skip>Alignment detection</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/detect-alignment.Rmd"><code>vignettes/detect-alignment.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/HEAD/vignettes/detect-alignment.Rmd" class="external-link"><code>vignettes/detect-alignment.Rmd</code></a></small>
       <div class="hidden name"><code>detect-alignment.Rmd</code></div>
 
     </div>
 
     
     
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h1>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>Sometimes, you deliberately align code to make it more readable.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
   a   <span class="op">=</span>       <span class="fl">3</span>,
   bre <span class="op">=</span> <span class="fl">3213232</span>
 <span class="op">)</span></code></pre></div>
-<p>Until styler 1.1.1.9002 (with <code>strict = TRUE</code>, e.g. as in <code><a href="../reference/style_file.html">styler::style_file(..., strict = TRUE)</a></code>), this was formatted as follows:</p>
+<p>Until styler 1.1.1.9002 (with <code>strict = TRUE</code>, e.g. as in <code>styler::style_file(..., strict = TRUE)</code>), this was formatted as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
   a <span class="op">=</span> <span class="fl">3</span>,
   bre <span class="op">=</span> <span class="fl">3213232</span>
 <span class="op">)</span></code></pre></div>
 <p>because no alignment detection was built in.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>styler &gt;= 1.1.1.9003 detects aforementioned alignment for function calls. This vignette describes how aligned code is defined in styler and gives some examples so users can format their aligned code to match the definition styler uses to ensure their code is not unintentionally reformatted.</p>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
 <p>These typical examples match <em>styler</em>’s definition of alignment. Note the spacing around operators and commas.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
   <span class="op">~</span><span class="va">key_here</span>,  <span class="op">~</span><span class="va">right_aligned</span>,
   <span class="st">"left"</span>,            <span class="st">"right"</span>, <span class="co"># comments are allowed</span>
   <span class="st">"long string"</span>,      <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span>
 <span class="op">)</span>
 
-<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
   <span class="op">~</span><span class="va">key_here</span>,     <span class="op">~</span><span class="va">left_aligned</span>,
   <span class="st">"left"</span>,        <span class="st">"right"</span>, <span class="co"># comments are allowed</span>
   <span class="st">"long string"</span>, <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span>
 <span class="op">)</span>
 
-<span class="co"># right-aligned after = </span>
-<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
+<span class="co"># right-aligned after =</span>
+<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
   arg2 <span class="op">=</span>       <span class="fl">2</span>,
   ar   <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">k</span>, <span class="va">x</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># left aligned after =</span>
-<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
+<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
   arg2 <span class="op">=</span> <span class="fl">2</span>,
   ar   <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">k</span>, <span class="va">x</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="details" class="section level1">
-<h1 class="hasAnchor">
-<a href="#details" class="anchor"></a>Details</h1>
+<div class="section level2">
+<h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
+</h2>
 <p>An important definition used in the remainder is the one of a <strong>column</strong>. All arguments of a function call that have the same position but are placed on different lines form a column. The below call shows a call with two columns and two rows. Columns separate arguments of the function call, so the separator is the comma. The first row is named because all arguments are named, the second is unnamed:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
   <span class="co"># column 1  | column 2 |</span>
   abkj <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">7</span>,        <span class="co"># | row 1</span>
   more_ <span class="op">=</span> <span class="st">"a"</span>, <span class="fl">2</span>         <span class="co"># | row 2</span>
 <span class="op">)</span></code></pre></div>
 <p><strong>For alignment detection, the first column is omitted if not all arguments in that column are named</strong></p>
-<div id="function-calls" class="section level2">
-<h2 class="hasAnchor">
-<a href="#function-calls" class="anchor"></a>Function calls</h2>
+<div class="section level3">
+<h3 id="function-calls">Function calls<a class="anchor" aria-label="anchor" href="#function-calls"></a>
+</h3>
 <p>Below, we try to explain in an intuitive way how your code should look like to be recognized as aligned.</p>
 <p>Make commas match position vertically and align everything right before commas:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -225,7 +229,7 @@
   p <span class="op">=</span> <span class="fl">2</span>,   g <span class="op">=</span> <span class="fu">gg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,  n <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span>
   <span class="fl">31</span>,    fds <span class="op">=</span>    <span class="op">-</span><span class="fl">1</span>, gz <span class="op">=</span> <span class="va">f</span> <span class="op">/</span> <span class="fl">3</span>,
 <span class="op">)</span></code></pre></div>
-<p>… or match position of <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code> vertically and align everything after this operator left</p>
+<p>… or match position of <code>=</code> vertically and align everything after this operator left</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># all arguments of first column named -&gt; must left align values after `=`,</span>
 <span class="co"># at least one space before `=`, exactly one after, none before and at least one</span>
@@ -252,25 +256,25 @@
 <span class="op">)</span></code></pre></div>
 <p>… or match the start of the token after <code>,</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html">call</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
   x <span class="op">=</span> <span class="fl">2</span>,           p <span class="op">=</span> <span class="st">"another"</span>,
   y <span class="op">=</span> <span class="st">"hhjkjkbew"</span>, x <span class="op">=</span> <span class="fl">3</span>
 <span class="op">)</span>
 
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+<span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
   <span class="op">~</span><span class="va">x</span>,        <span class="op">~</span><span class="va">y</span>,
   <span class="st">"another"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
   <span class="st">"b"</span>,       <span class="fl">1211234</span>
 <span class="op">)</span></code></pre></div>
 </div>
-<div id="comments" class="section level2">
-<h2 class="hasAnchor">
-<a href="#comments" class="anchor"></a>Comments</h2>
+<div class="section level3">
+<h3 id="comments">Comments<a class="anchor" aria-label="anchor" href="#comments"></a>
+</h3>
 <p>not supported yet.</p>
 </div>
-<div id="assignment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#assignment" class="anchor"></a>Assignment</h2>
+<div class="section level3">
+<h3 id="assignment">Assignment<a class="anchor" aria-label="anchor" href="#assignment"></a>
+</h3>
 <p>not supported yet.</p>
 </div>
 </div>
@@ -293,11 +297,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://krlmlr.info">Kirill Müller</a>, <a href="https://lorenzwalthert.com">Lorenz Walthert</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://lorenzwalthert.com" class="external-link">Lorenz Walthert</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

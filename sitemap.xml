@@ -1,7 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://styler.r-lib.org/404.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/caching.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/customizing_styler.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/detect-alignment.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/distribute_custom_style_guides.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/gsoc_proposal/data_structures.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/gsoc_proposal/manipulating_nested_parse_data.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/introducing_styler.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/performance_improvements.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/remove_rules.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/strict.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/styler.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/articles/third-party-integrations.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/authors.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/news/index.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/add_cache_block.html</loc>
@@ -115,9 +172,6 @@
     <loc>https://styler.r-lib.org/reference/calls_sys.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/can_verify_roundtrip.html</loc>
-  </url>
-  <url>
     <loc>https://styler.r-lib.org/reference/catch_style_file_output.html</loc>
   </url>
   <url>
@@ -208,9 +262,6 @@
     <loc>https://styler.r-lib.org/reference/ensure_last_n_empty.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/ensure_valid_pd.html</loc>
-  </url>
-  <url>
     <loc>https://styler.r-lib.org/reference/env_add_stylerignore.html</loc>
   </url>
   <url>
@@ -295,6 +346,9 @@
     <loc>https://styler.r-lib.org/reference/if_for_while_part_requires_braces.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/initialize_attributes.html</loc>
   </url>
   <url>
@@ -374,6 +428,9 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/parse_transform_serialize_roxygen.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/reference/parse_tree_must_be_identical.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/parser_version_set.html</loc>
@@ -652,33 +709,6 @@
     <loc>https://styler.r-lib.org/reference/wrap_subexpr_in_curly.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/caching.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/customizing_styler.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/detect-alignment.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/gsoc_proposal/data_structures.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/gsoc_proposal/manipulating_nested_parse_data.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/introducing_styler.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/performance_improvements.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/strict.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/styler.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/third-party-integrations.html</loc>
+    <loc>https://styler.r-lib.org/reference/write_utf8.html</loc>
   </url>
 </urlset>

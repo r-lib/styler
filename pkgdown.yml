@@ -1,18 +1,20 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   caching: caching.html
   customizing_styler: customizing_styler.html
   detect-alignment: detect-alignment.html
-  gsoc_proposal/data_structures: data_structures.html
-  gsoc_proposal/manipulating_nested_parse_data: manipulating_nested_parse_data.html
+  distribute_custom_style_guides: distribute_custom_style_guides.html
+  data_structures: gsoc_proposal/data_structures.html
+  manipulating_nested_parse_data: gsoc_proposal/manipulating_nested_parse_data.html
   introducing_styler: introducing_styler.html
   performance_improvements: performance_improvements.html
+  remove_rules: remove_rules.html
   strict: strict.html
   styler: styler.html
   third-party-integrations: third-party-integrations.html
-last_built: 2021-09-25T10:31Z
+last_built: 2022-03-14T07:08Z
 urls:
   reference: https://styler.r-lib.org/reference
   article: https://styler.r-lib.org/articles

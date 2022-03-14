@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../../articles/styler.html">Get started</a>
 </li>
@@ -52,7 +48,7 @@
   <a href="../../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,17 +64,24 @@
       <a href="../../articles/third-party-integrations.html">Third-party integrations</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Developers</li>
+    </li>
+<li class="dropdown-header">Developers</li>
     <li>
-      <a href="../../articles/caching.html">Caching</a>
+      <a href="../../articles/remove_rules.html">Remove rules</a>
     </li>
     <li>
       <a href="../../articles/customizing_styler.html">Customizing styler</a>
     </li>
+    <li>
+      <a href="../../articles/distribute_custom_style_guides.html">Distribute custom style guides</a>
+    </li>
+    <li>
+      <a href="../../articles/caching.html">Caching</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -86,19 +89,20 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/" class="external-link">Version 1.0.0</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/" class="external-link">Version 1.2.0</a>
     </li>
     <li>
-      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/" class="external-link">Version 1.3.0</a>
     </li>
     <li>
-      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/">Version 1.4.0</a>
+      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/" class="external-link">Version 1.4.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../../news/index.html">Changelog</a>
     </li>
   </ul>
@@ -106,7 +110,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/styler/">
+  <a href="https://github.com/r-lib/styler/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -131,11 +135,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Data Structures</h1>
-                        <h4 class="author">Lorenz Walthert</h4>
+                        <h4 data-toc-skip class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2021-09-25</h4>
+            <h4 data-toc-skip class="date">2022-03-14</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/gsoc_proposal/data_structures.Rmd"><code>vignettes/gsoc_proposal/data_structures.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/HEAD/vignettes/gsoc_proposal/data_structures.Rmd" class="external-link"><code>vignettes/gsoc_proposal/data_structures.Rmd</code></a></small>
       <div class="hidden name"><code>data_structures.Rmd</code></div>
 
     </div>
@@ -146,114 +150,114 @@
 <p>This vignette is partly outdated since nested structure was implemented completely.</p>
 </blockquote>
 <p>This vignette illustrates how the core of <code>styler</code> currently<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> works, i.e. how rules are applied to a parse table and how limitations of this approach can be overcome with a refined approach.</p>
-<div id="status-quo---the-flat-approach" class="section level2">
-<h2 class="hasAnchor">
-<a href="#status-quo---the-flat-approach" class="anchor"></a>Status quo - the flat approach</h2>
+<div class="section level2">
+<h2 id="status-quo---the-flat-approach">Status quo - the flat approach<a class="anchor" aria-label="anchor" href="#status-quo---the-flat-approach"></a>
+</h2>
 <p>Roughly speaking, a string containing code to be formatted is parsed with <code>parse</code> and the output is passed to <code>getParseData</code> in order to obtain a parse table with detailed information about every token. For a simple example string “<code>a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }</code>” to be formatted, the parse table on which <code>styler</code> performs the manipulations looks similar to the one presented below.</p>
-<pre><code><a href="https://github.com/r-lib/styler">library("styler")
-library("dplyr")
+<pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-lib/styler" class="external-link">"styler"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span>
 
-code &lt;- "a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"
+<span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</span>
 
-(parse_table &lt;- styler:::compute_parse_data_flat_enhanced(code))
+<span class="op">(</span><span class="va">parse_table</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu">compute_parse_data_flat_enhanced</span><span class="op">(</span><span class="va">code</span><span class="op">)</span><span class="op">)</span>
 
-## # A tibble: 24 x 14
-##    line1  col1 line2  col2          token     text terminal short newlines
-##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;          &lt;chr&gt;    &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt;    &lt;int&gt;
-##  1     1     0     1     0          START                NA  &lt;NA&gt;        0
-##  2     1     1     1     1         SYMBOL        a     TRUE     a        0
-##  3     1     3     1     4    LEFT_ASSIGN       &lt;-     TRUE    &lt;-        0
-##  4     1     6     1    13       FUNCTION function     TRUE funct        0
-##  5     1    14     1    14            '('        (     TRUE     (        0
-##  6     1    15     1    15 SYMBOL_FORMALS        x     TRUE     x        0
-##  7     1    16     1    16            ')'        )     TRUE     )        0
-##  8     1    18     1    18            '{'        {     TRUE     {        0
-##  9     1    20     1    21             IF       if     TRUE    if        0
-## 10     1    22     1    22            '('        (     TRUE     (        0
-## # ... with 14 more rows, and 5 more variables: lag_newlines &lt;int&gt;,
-## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</a></code></pre>
+<span class="co">## # A tibble: 24 x 14</span>
+<span class="co">##    line1  col1 line2  col2          token     text terminal short newlines</span>
+<span class="co">##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;          &lt;chr&gt;    &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt;    &lt;int&gt;</span>
+<span class="co">##  1     1     0     1     0          START                NA  &lt;NA&gt;        0</span>
+<span class="co">##  2     1     1     1     1         SYMBOL        a     TRUE     a        0</span>
+<span class="co">##  3     1     3     1     4    LEFT_ASSIGN       &lt;-     TRUE    &lt;-        0</span>
+<span class="co">##  4     1     6     1    13       FUNCTION function     TRUE funct        0</span>
+<span class="co">##  5     1    14     1    14            '('        (     TRUE     (        0</span>
+<span class="co">##  6     1    15     1    15 SYMBOL_FORMALS        x     TRUE     x        0</span>
+<span class="co">##  7     1    16     1    16            ')'        )     TRUE     )        0</span>
+<span class="co">##  8     1    18     1    18            '{'        {     TRUE     {        0</span>
+<span class="co">##  9     1    20     1    21             IF       if     TRUE    if        0</span>
+<span class="co">## 10     1    22     1    22            '('        (     TRUE     (        0</span>
+<span class="co">## # ... with 14 more rows, and 5 more variables: lag_newlines &lt;int&gt;,</span>
+<span class="co">## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</span></code></pre>
 <p>The column <code>spaces</code> was computed from the columns <code>col1</code> and <code>col2</code>, <code>newlines</code> was computed from <code>line1</code> and <code>line2</code> respectively.</p>
-<p>So far, styler can set the spaces around the operators correctly. In our example, that involves adding spaces around <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>, so in the <code>spaces</code> column, element nine and ten must be set to one. This means that a space is added after <code>1</code> and after <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>. To get the spacing right and cover the various cases, a set of functions has to be applied to the parse table subsequently (and in the right order), which is essentially done via <code><a href="https://rdrr.io/r/base/funprog.html">Reduce()</a></code>. After all modifications on the table are completed, <code>serialize_parse_data()</code> collapses the <code>text</code> column and adds the number of spaces and line breaks specified in <code>spaces</code> and <code>newlines</code> in between the elements of <code>text</code>. If we serialize our table and don’t perform any modification, we obviously just get back what we started with.</p>
-<pre><code>styler:::serialize_parse_data_flat(parse_table)
+<p>So far, styler can set the spaces around the operators correctly. In our example, that involves adding spaces around <code>+</code>, so in the <code>spaces</code> column, element nine and ten must be set to one. This means that a space is added after <code>1</code> and after <code>+</code>. To get the spacing right and cover the various cases, a set of functions has to be applied to the parse table subsequently (and in the right order), which is essentially done via <code><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Reduce()</a></code>. After all modifications on the table are completed, <code>serialize_parse_data()</code> collapses the <code>text</code> column and adds the number of spaces and line breaks specified in <code>spaces</code> and <code>newlines</code> in between the elements of <code>text</code>. If we serialize our table and don’t perform any modification, we obviously just get back what we started with.</p>
+<pre><code><span class="fu">styler</span><span class="fu">:::</span><span class="fu">serialize_parse_data_flat</span><span class="op">(</span><span class="va">parse_table</span><span class="op">)</span>
 
-## [1] "a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</code></pre>
+<span class="co">## [1] "a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</span></code></pre>
 </div>
-<div id="refining-the-flat-approach---nesting-the-parse-table" class="section level2">
-<h2 class="hasAnchor">
-<a href="#refining-the-flat-approach---nesting-the-parse-table" class="anchor"></a>Refining the flat approach - nesting the parse table</h2>
+<div class="section level2">
+<h2 id="refining-the-flat-approach---nesting-the-parse-table">Refining the flat approach - nesting the parse table<a class="anchor" aria-label="anchor" href="#refining-the-flat-approach---nesting-the-parse-table"></a>
+</h2>
 <p>Although the flat approach is good place to start, e.g. for fixing spaces between operators, it has its limitations. In particular, it treats each token the same way in the sense that it does not account for the context of the token, i.e. in which sub-expression it appears. To set the indention correctly, we need a hierarchical view on the parse data, since all tokens in a sub-expression have the same indention level. Hence, a natural approach would be to create a nested parse table instead of a flat parse table and then take a recursion over all elements in the table, so for each sub(-sub etc.)-expression, a separate parse table would be created and the modifications would be applied to this table before putting everything back together. A function to create a nested parse table already exists in <code>styler</code>. Let’s have a look at the top level:</p>
-<pre><code>(l1 &lt;- styler:::compute_parse_data_nested(code)[-1])
+<pre><code><span class="op">(</span><span class="va">l1</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
 
-## # A tibble: 1 x 13
-##    col1 line2  col2    id parent token terminal  text short token_before
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;
-## 1     1     1    47    49      0  expr    FALSE                     &lt;NA&gt;
-## # ... with 3 more variables: token_after &lt;chr&gt;, internal &lt;lgl&gt;,
-## #   child &lt;list&gt;</code></pre>
+<span class="co">## # A tibble: 1 x 13</span>
+<span class="co">##    col1 line2  col2    id parent token terminal  text short token_before</span>
+<span class="co">##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;</span>
+<span class="co">## 1     1     1    47    49      0  expr    FALSE                     &lt;NA&gt;</span>
+<span class="co">## # ... with 3 more variables: token_after &lt;chr&gt;, internal &lt;lgl&gt;,</span>
+<span class="co">## #   child &lt;list&gt;</span></code></pre>
 <p>The tibble contains the column <code>child</code>, which itself contains a tibble. If we “enter” the first child, we can see that the expression was split up further.</p>
-<pre><code>l1$child[[1]] %&gt;%
-  select(text, terminal, child, token)
+<pre><code><span class="va">l1</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">text</span>, <span class="va">terminal</span>, <span class="va">child</span>, <span class="va">token</span><span class="op">)</span>
 
-## # A tibble: 3 x 4
-##    text terminal             child       token
-##   &lt;chr&gt;    &lt;lgl&gt;            &lt;list&gt;       &lt;chr&gt;
-## 1          FALSE &lt;tibble [1 x 14]&gt;        expr
-## 2    &lt;-     TRUE            &lt;NULL&gt; LEFT_ASSIGN
-## 3          FALSE &lt;tibble [5 x 14]&gt;        expr</code></pre>
+<span class="co">## # A tibble: 3 x 4</span>
+<span class="co">##    text terminal             child       token</span>
+<span class="co">##   &lt;chr&gt;    &lt;lgl&gt;            &lt;list&gt;       &lt;chr&gt;</span>
+<span class="co">## 1          FALSE &lt;tibble [1 x 14]&gt;        expr</span>
+<span class="co">## 2    &lt;-     TRUE            &lt;NULL&gt; LEFT_ASSIGN</span>
+<span class="co">## 3          FALSE &lt;tibble [5 x 14]&gt;        expr</span></code></pre>
 <p>And further…</p>
-<pre><code>l1$child[[1]]$child[[3]]$child[[5]]
+<pre><code><span class="va">l1</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span>
 
-## # A tibble: 3 x 14
-##   line1  col1 line2  col2    id parent token terminal  text short
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     1    18     1    18     9     45   '{'     TRUE     {     {
-## 2     1    20     1    45    42     45  expr    FALSE            
-## 3     1    47     1    47    40     45   '}'     TRUE     }     }
-## # ... with 4 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   internal &lt;lgl&gt;, child &lt;list&gt;</code></pre>
+<span class="co">## # A tibble: 3 x 14</span>
+<span class="co">##   line1  col1 line2  col2    id parent token terminal  text short</span>
+<span class="co">##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">## 1     1    18     1    18     9     45   '{'     TRUE     {     {</span>
+<span class="co">## 2     1    20     1    45    42     45  expr    FALSE            </span>
+<span class="co">## 3     1    47     1    47    40     45   '}'     TRUE     }     }</span>
+<span class="co">## # ... with 4 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,</span>
+<span class="co">## #   internal &lt;lgl&gt;, child &lt;list&gt;</span></code></pre>
 <p>… and so on. Every child that is not a terminal contains another tibble where the sub-expression is split up further - until we are left with tibbles that only contain terminals.</p>
 <p>Recall the above example. <code>a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }</code>. In the last printed parse table, we can see that see that the whole if condition is a sub-expression of <code>code</code>, surrounded by two curly brackets. Hence, one would like to set the indention level for this sub-expression before doing anything with it in more detail. Later, when we progressed deeper into the nested table, we hit a similar pattern:</p>
-<pre><code>l1$child[[1]]$child[[3]]$child[[5]]$child[[2]]$child[[5]]
+<pre><code><span class="va">l1</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span>
 
-## # A tibble: 3 x 14
-##   line1  col1 line2  col2    id parent token terminal  text short
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     1    30     1    30    20     30   '{'     TRUE     {     {
-## 2     1    32     1    34    27     30  expr    FALSE            
-## 3     1    36     1    36    26     30   '}'     TRUE     }     }
-## # ... with 4 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   internal &lt;lgl&gt;, child &lt;list&gt;</code></pre>
+<span class="co">## # A tibble: 3 x 14</span>
+<span class="co">##   line1  col1 line2  col2    id parent token terminal  text short</span>
+<span class="co">##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">## 1     1    30     1    30    20     30   '{'     TRUE     {     {</span>
+<span class="co">## 2     1    32     1    34    27     30  expr    FALSE            </span>
+<span class="co">## 3     1    36     1    36    26     30   '}'     TRUE     }     }</span>
+<span class="co">## # ... with 4 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,</span>
+<span class="co">## #   internal &lt;lgl&gt;, child &lt;list&gt;</span></code></pre>
 <p>Again, we have two curly brackets and an expression inside. We would like to set the indention level for the expression <code>1+1</code> in the same way as for the whole if condition.</p>
 <p>The simple example above makes it evident that a recursive approach to this problem would be the most natural.</p>
 <p>The code for a function that kind of sketches the idea and illustrates such a recursion is given below.</p>
 <p>It takes a nested parse table as input and then does the recursion over all children. If the child is a terminal, it returns the text, otherwise, it “enters” the child to find the terminals inside of the child and returns them.</p>
-<pre><code>serialize &lt;- function(x) {
-  out &lt;- Map(
-    function(terminal, text, child) {
-      if (terminal)
-        text
-      else
-        serialize(child)
-    },
-    x$terminal, x$text, x$child
-  )
-  out
-}
+<pre><code><span class="va">serialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Map</a></span><span class="op">(</span>
+    <span class="kw">function</span><span class="op">(</span><span class="va">terminal</span>, <span class="va">text</span>, <span class="va">child</span><span class="op">)</span> <span class="op">{</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">terminal</span><span class="op">)</span>
+        <span class="va">text</span>
+      <span class="kw">else</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/serialize.html" class="external-link">serialize</a></span><span class="op">(</span><span class="va">child</span><span class="op">)</span>
+    <span class="op">}</span>,
+    <span class="va">x</span><span class="op">$</span><span class="va">terminal</span>, <span class="va">x</span><span class="op">$</span><span class="va">text</span>, <span class="va">x</span><span class="op">$</span><span class="va">child</span>
+  <span class="op">)</span>
+  <span class="va">out</span>
+<span class="op">}</span>
 
-x &lt;- styler:::compute_parse_data_nested(code)
-serialize(x) %&gt;% unlist
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/serialize.html" class="external-link">serialize</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">unlist</span>
 
-##  [1] "a"        "&lt;-"       "function" "("        "x"        ")"       
-##  [7] "{"        "if"       "("        "x"        "&gt;"        "1"       
-## [13] ")"        "{"        "1"        "+"        "1"        "}"       
-## [19] "else"     "{"        "x"        "}"        "}"</code></pre>
+<span class="co">##  [1] "a"        "&lt;-"       "function" "("        "x"        ")"       </span>
+<span class="co">##  [7] "{"        "if"       "("        "x"        "&gt;"        "1"       </span>
+<span class="co">## [13] ")"        "{"        "1"        "+"        "1"        "}"       </span>
+<span class="co">## [19] "else"     "{"        "x"        "}"        "}"</span></code></pre>
 <p>How to exactly implement a similar recursion to not just return each text token separately, but the styled text as one string (or one string per line) is subject to future work, so would be the functions to be applied to a sub-expression parse table that create correct indention. Similar to <code>compute_parse_data_flat_enhanced</code>, the column <code>spaces</code> and <code>newlines</code> would be required to be computed by <code>compute_parse_data_nested</code> as well as a new column <code>indention</code>.</p>
 </div>
-<div id="final-remarks" class="section level2">
-<h2 class="hasAnchor">
-<a href="#final-remarks" class="anchor"></a>Final Remarks</h2>
+<div class="section level2">
+<h2 id="final-remarks">Final Remarks<a class="anchor" aria-label="anchor" href="#final-remarks"></a>
+</h2>
 <p>Although a flat structure would possibly also allow us to solve the problem of indention, it is a less elegant and flexible solution to the problem. It would involve looking for an opening curly bracket in the parse table, set the indention level for all subsequent rows in the parse table until the next opening or closing curly bracket is hit and then intending one level further or setting indention back to where it was at the beginning of the table.</p>
-<p>Note that the vignette just addressed the question of indention caused by curly brackets and has not dealt with other operators that would trigger indention, such as <code>(</code> or <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>.</p>
+<p>Note that the vignette just addressed the question of indention caused by curly brackets and has not dealt with other operators that would trigger indention, such as <code>(</code> or <code>+</code>.</p>
 <p>[1] at commit <code>e6ddee0f510d3c9e3e22ef68586068fa5c6bc140</code></p>
 </div>
 <div class="footnotes">
@@ -275,11 +279,13 @@ serialize(x) %&gt;% unlist
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://krlmlr.info">Kirill Müller</a>, <a href="https://lorenzwalthert.com">Lorenz Walthert</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://lorenzwalthert.com" class="external-link">Lorenz Walthert</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

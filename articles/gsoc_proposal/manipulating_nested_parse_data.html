@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../../articles/styler.html">Get started</a>
 </li>
@@ -52,7 +48,7 @@
   <a href="../../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -68,17 +64,24 @@
       <a href="../../articles/third-party-integrations.html">Third-party integrations</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Developers</li>
+    </li>
+<li class="dropdown-header">Developers</li>
     <li>
-      <a href="../../articles/caching.html">Caching</a>
+      <a href="../../articles/remove_rules.html">Remove rules</a>
     </li>
     <li>
       <a href="../../articles/customizing_styler.html">Customizing styler</a>
     </li>
+    <li>
+      <a href="../../articles/distribute_custom_style_guides.html">Distribute custom style guides</a>
+    </li>
+    <li>
+      <a href="../../articles/caching.html">Caching</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -86,19 +89,20 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">Version 1.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/" class="external-link">Version 1.0.0</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/">Version 1.2.0</a>
+      <a href="https://www.tidyverse.org/blog/2019/11/styler-1-2-0/" class="external-link">Version 1.2.0</a>
     </li>
     <li>
-      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/">Version 1.3.0</a>
+      <a href="https://lorenzwalthert.netlify.com/post/styler-1-3-0/" class="external-link">Version 1.3.0</a>
     </li>
     <li>
-      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/">Version 1.4.0</a>
+      <a href="https://lorenzwalthert.netlify.app/post/styler-1-4-0/" class="external-link">Version 1.4.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../../news/index.html">Changelog</a>
     </li>
   </ul>
@@ -106,7 +110,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/styler/">
+  <a href="https://github.com/r-lib/styler/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -131,11 +135,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Manipulating the nested parse table</h1>
-                        <h4 class="author">Lorenz Walthert</h4>
+                        <h4 data-toc-skip class="author">Lorenz Walthert</h4>
             
-            <h4 class="date">2021-09-25</h4>
+            <h4 data-toc-skip class="date">2022-03-14</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/master/vignettes/gsoc_proposal/manipulating_nested_parse_data.Rmd"><code>vignettes/gsoc_proposal/manipulating_nested_parse_data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/styler/blob/HEAD/vignettes/gsoc_proposal/manipulating_nested_parse_data.Rmd" class="external-link"><code>vignettes/gsoc_proposal/manipulating_nested_parse_data.Rmd</code></a></small>
       <div class="hidden name"><code>manipulating_nested_parse_data.Rmd</code></div>
 
     </div>
@@ -145,26 +149,26 @@
 <blockquote>
 <p>This vignette is partly outdated since nested structure was implemented completely. In particular, the serialization is now done differently.</p>
 </blockquote>
-<pre><code><a href="https://dplyr.tidyverse.org">library("dplyr")
-library("purrr")
-pkgload::load_all()</a></code></pre>
-<p>This vignette builds on the vignette “Data Structures” and discusses how to go forward with the nested structure of the parse data. In order to compute the white space information in a nested data structure, we use a <a href="https://en.wikipedia.org/wiki/Visitor_pattern">visitor approach</a> to separate the algorithm (computing white space information and later apply transformations) from the object (nested data structure). The function <code>create_filler()</code> (name depreciated, now called <code><a href="../../reference/default_style_guide_attributes.html">default_style_guide_attributes()</a></code>) can then be used to compute current white space information on every level of nesting within the nested parse data if applied in combination with the visitor. In the sequel, a parse table at one level of nesting will be denoted with the term <em>nest</em>, which always represents a complete expression. Our visiting functions <code><a href="../../reference/visit.html">pre_visit()</a></code> and <code><a href="../../reference/visit.html">post_visit()</a></code> take an object to operate on and a list of functions. Concretely, the object is the nested parse table. Each function is applied at each level of nesting nesting before the next level of nesting is entered. You can find out more about the visitor on the help file for <code>visit</code> (note that this function is not exported by styler). pre_visit</p>
-<pre><code>## function(pd_nested, funs) {
-##   if (is.null(pd_nested)) return()
-##   pd_transformed &lt;- visit_one(pd_nested, funs)
-## 
-##   pd_transformed$child &lt;- map(pd_transformed$child, pre_visit, funs = funs)
-##   pd_transformed
-## }
-## &lt;environment: namespace:styler&gt;
+<pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="http://purrr.tidyverse.org" class="external-link">"purrr"</a></span><span class="op">)</span>
+<span class="fu">pkgload</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pkgload/man/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="op">)</span></code></pre>
+<p>This vignette builds on the vignette “Data Structures” and discusses how to go forward with the nested structure of the parse data. In order to compute the white space information in a nested data structure, we use a <a href="https://en.wikipedia.org/wiki/Visitor_pattern" class="external-link">visitor approach</a> to separate the algorithm (computing white space information and later apply transformations) from the object (nested data structure). The function <code>create_filler()</code> (name depreciated, now called <code><a href="../../reference/default_style_guide_attributes.html">default_style_guide_attributes()</a></code>) can then be used to compute current white space information on every level of nesting within the nested parse data if applied in combination with the visitor. In the sequel, a parse table at one level of nesting will be denoted with the term <em>nest</em>, which always represents a complete expression. Our visiting functions <code><a href="../../reference/visit.html">pre_visit()</a></code> and <code><a href="../../reference/visit.html">post_visit()</a></code> take an object to operate on and a list of functions. Concretely, the object is the nested parse table. Each function is applied at each level of nesting nesting before the next level of nesting is entered. You can find out more about the visitor on the help file for <code>visit</code> (note that this function is not exported by styler). pre_visit</p>
+<pre><code><span class="co">## function(pd_nested, funs) {</span>
+<span class="co">##   if (is.null(pd_nested)) return()</span>
+<span class="co">##   pd_transformed &lt;- visit_one(pd_nested, funs)</span>
+<span class="co">## </span>
+<span class="co">##   pd_transformed$child &lt;- map(pd_transformed$child, pre_visit, funs = funs)</span>
+<span class="co">##   pd_transformed</span>
+<span class="co">## }</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span>
 
-visit_one
+<span class="va">visit_one</span>
 
-## function(pd_flat, funs) {
-##   reduce(funs, function(x, fun) fun(x),
-##          .init = pd_flat)
-## }
-## &lt;environment: namespace:styler&gt;</code></pre>
+<span class="co">## function(pd_flat, funs) {</span>
+<span class="co">##   reduce(funs, function(x, fun) fun(x),</span>
+<span class="co">##          .init = pd_flat)</span>
+<span class="co">## }</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span></code></pre>
 <p>This comes with two advantages.</p>
 <ul>
 <li><p>We go through the whole structure only as many times as we call the visitor (instead of every *_nested() function going through it once, which is more efficient in terms of speed.</p></li>
@@ -172,175 +176,175 @@ visit_one
 <li><p>We go through the whole structure only as many times as we call the visitor (instead of every *_nested() function going through it once), which is more efficient in terms of speed.</p></li>
 </ul>
 <p><code>create_filler()</code> was adapted to also initialize indention and lag_newlines.</p>
-<pre><code>create_filler
+<pre><code><span class="va">create_filler</span>
 
-## function(pd_flat) {
-## 
-##   pd_flat$line3 &lt;- lead(pd_flat$line1, default = tail(pd_flat$line2, 1))
-##   pd_flat$col3 &lt;- lead(pd_flat$col1, default = tail(pd_flat$col2, 1) + 1L)
-##   pd_flat$newlines &lt;- pd_flat$line3 - pd_flat$line2
-##   pd_flat$lag_newlines &lt;- lag(pd_flat$newlines, default = 0L)
-##   pd_flat$col2_nl &lt;- if_else(pd_flat$newlines &gt; 0L, 0L, pd_flat$col2)
-##   pd_flat$spaces &lt;- pd_flat$col3 - pd_flat$col2_nl - 1L
-##   pd_flat$multi_line &lt;- ifelse(pd_flat$terminal, FALSE, NA)
-##   pd_flat$indention_ref_id &lt;- NA
-##   ret &lt;- pd_flat[, !(names(pd_flat) %in% c("line3", "col3", "col2_nl"))]
-## 
-## 
-##   if (!("indent" %in% names(ret))) {
-##     ret$indent &lt;- 0
-##   }
-## 
-##   if (any(ret$spaces &lt; 0L)) {
-##     stop("Invalid parse data")
-##   }
-## 
-##   ret
-## }
-## &lt;environment: namespace:styler&gt;
+<span class="co">## function(pd_flat) {</span>
+<span class="co">## </span>
+<span class="co">##   pd_flat$line3 &lt;- lead(pd_flat$line1, default = tail(pd_flat$line2, 1))</span>
+<span class="co">##   pd_flat$col3 &lt;- lead(pd_flat$col1, default = tail(pd_flat$col2, 1) + 1L)</span>
+<span class="co">##   pd_flat$newlines &lt;- pd_flat$line3 - pd_flat$line2</span>
+<span class="co">##   pd_flat$lag_newlines &lt;- lag(pd_flat$newlines, default = 0L)</span>
+<span class="co">##   pd_flat$col2_nl &lt;- if_else(pd_flat$newlines &gt; 0L, 0L, pd_flat$col2)</span>
+<span class="co">##   pd_flat$spaces &lt;- pd_flat$col3 - pd_flat$col2_nl - 1L</span>
+<span class="co">##   pd_flat$multi_line &lt;- ifelse(pd_flat$terminal, FALSE, NA)</span>
+<span class="co">##   pd_flat$indention_ref_id &lt;- NA</span>
+<span class="co">##   ret &lt;- pd_flat[, !(names(pd_flat) %in% c("line3", "col3", "col2_nl"))]</span>
+<span class="co">## </span>
+<span class="co">## </span>
+<span class="co">##   if (!("indent" %in% names(ret))) {</span>
+<span class="co">##     ret$indent &lt;- 0</span>
+<span class="co">##   }</span>
+<span class="co">## </span>
+<span class="co">##   if (any(ret$spaces &lt; 0L)) {</span>
+<span class="co">##     stop("Invalid parse data")</span>
+<span class="co">##   }</span>
+<span class="co">## </span>
+<span class="co">##   ret</span>
+<span class="co">## }</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span>
 
-code &lt;- "a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"
-pd_nested &lt;- compute_parse_data_nested(code)
-pd_nested_enhanced &lt;- pre_visit(pd_nested, c(create_filler))
-pd_nested_enhanced
+<span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</span>
+<span class="va">pd_nested</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span>
+<span class="va">pd_nested_enhanced</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/visit.html">pre_visit</a></span><span class="op">(</span><span class="va">pd_nested</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">create_filler</span><span class="op">)</span><span class="op">)</span>
+<span class="va">pd_nested_enhanced</span>
 
-## # A tibble: 1 x 20
-##   line1  col1 line2  col2    id parent token terminal  text short
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     1     1     1    47    49      0  expr    FALSE            
-## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   internal &lt;lgl&gt;, child &lt;list&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,
-## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</code></pre>
+<span class="co">## # A tibble: 1 x 20</span>
+<span class="co">##   line1  col1 line2  col2    id parent token terminal  text short</span>
+<span class="co">##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">## 1     1     1     1    47    49      0  expr    FALSE            </span>
+<span class="co">## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,</span>
+<span class="co">## #   internal &lt;lgl&gt;, child &lt;list&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,</span>
+<span class="co">## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</span></code></pre>
 <p>As a next step, we need to find a way to serialize the nested tibble, or in other words, to transform it to its character vector representation. As a starting point, consider the function <code>serialize</code> that was introduced in the vignette “Data Structures”.</p>
-<pre><code>serialize &lt;- function(x) {
-  out &lt;- Map(
-    function(terminal, text, child) {
-      if (terminal)
-        text
-      else
-        serialize(child)
-    },
-    x$terminal, x$text, x$child
-  )
-  out
-}
+<pre><code><span class="va">serialize</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Map</a></span><span class="op">(</span>
+    <span class="kw">function</span><span class="op">(</span><span class="va">terminal</span>, <span class="va">text</span>, <span class="va">child</span><span class="op">)</span> <span class="op">{</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">terminal</span><span class="op">)</span>
+        <span class="va">text</span>
+      <span class="kw">else</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/serialize.html" class="external-link">serialize</a></span><span class="op">(</span><span class="va">child</span><span class="op">)</span>
+    <span class="op">}</span>,
+    <span class="va">x</span><span class="op">$</span><span class="va">terminal</span>, <span class="va">x</span><span class="op">$</span><span class="va">text</span>, <span class="va">x</span><span class="op">$</span><span class="va">child</span>
+  <span class="op">)</span>
+  <span class="va">out</span>
+<span class="op">}</span>
 
-serialize(pd_nested) %&gt;% unlist
+<span class="fu"><a href="https://rdrr.io/r/base/serialize.html" class="external-link">serialize</a></span><span class="op">(</span><span class="va">pd_nested</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">unlist</span>
 
-##  [1] "a"        "&lt;-"       "function" "("        "x"        ")"       
-##  [7] "{"        "if"       "("        "x"        "&gt;"        "1"       
-## [13] ")"        "{"        "1"        "+"        "1"        "}"       
-## [19] "else"     "{"        "x"        "}"        "}"</code></pre>
+<span class="co">##  [1] "a"        "&lt;-"       "function" "("        "x"        ")"       </span>
+<span class="co">##  [7] "{"        "if"       "("        "x"        "&gt;"        "1"       </span>
+<span class="co">## [13] ")"        "{"        "1"        "+"        "1"        "}"       </span>
+<span class="co">## [19] "else"     "{"        "x"        "}"        "}"</span></code></pre>
 <p><code>serialize</code> can be combined with <code>serialize_parse_data_flat</code>. The latter pastes together the column “text” of a flat parse table by taking into account space and line break information, splits the string by line break and returns it.</p>
-<pre><code>serialize_parse_data_flat
+<pre><code><span class="va">serialize_parse_data_flat</span>
 
-## function(pd_flat) {
-##   pd_flat %&gt;%
-##     summarize_(
-##       text_ws = ~paste0(
-##         text, newlines_and_spaces(newlines, spaces),
-##         collapse = "")) %&gt;%
-##     .[["text_ws"]] %&gt;%
-##     strsplit("\n", fixed = TRUE) %&gt;%
-##     .[[1L]]
-## }
-## &lt;environment: namespace:styler&gt;</code></pre>
+<span class="co">## function(pd_flat) {</span>
+<span class="co">##   pd_flat %&gt;%</span>
+<span class="co">##     summarize_(</span>
+<span class="co">##       text_ws = ~paste0(</span>
+<span class="co">##         text, newlines_and_spaces(newlines, spaces),</span>
+<span class="co">##         collapse = "")) %&gt;%</span>
+<span class="co">##     .[["text_ws"]] %&gt;%</span>
+<span class="co">##     strsplit("\n", fixed = TRUE) %&gt;%</span>
+<span class="co">##     .[[1L]]</span>
+<span class="co">## }</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span></code></pre>
 <p>However, things get a bit more complicated, mainly because line break and white space information is not only contained in the terminal tibbles of the nested parse data, but even before, as the following example shows.</p>
-<pre><code>pd_nested_enhanced$child[[1]]
+<pre><code><span class="va">pd_nested_enhanced</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 
-## # A tibble: 3 x 20
-##   line1  col1 line2  col2    id parent       token terminal  text short
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;       &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     1     1     1     1     3     49        expr    FALSE            
-## 2     1     3     1     4     2     49 LEFT_ASSIGN     TRUE    &lt;-    &lt;-
-## 3     1     6     1    47    48     49        expr    FALSE            
-## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   internal &lt;lgl&gt;, child &lt;list&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,
-## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;
+<span class="co">## # A tibble: 3 x 20</span>
+<span class="co">##   line1  col1 line2  col2    id parent       token terminal  text short</span>
+<span class="co">##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;       &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">## 1     1     1     1     1     3     49        expr    FALSE            </span>
+<span class="co">## 2     1     3     1     4     2     49 LEFT_ASSIGN     TRUE    &lt;-    &lt;-</span>
+<span class="co">## 3     1     6     1    47    48     49        expr    FALSE            </span>
+<span class="co">## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,</span>
+<span class="co">## #   internal &lt;lgl&gt;, child &lt;list&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,</span>
+<span class="co">## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</span>
 
-pd_nested_enhanced$child[[1]]$child[[1]]
+<span class="va">pd_nested_enhanced</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 
-## # A tibble: 1 x 20
-##   line1  col1 line2  col2    id parent  token terminal  text short
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     1     1     1     1     1      3 SYMBOL     TRUE     a     a
-## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   child &lt;list&gt;, internal &lt;lgl&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,
-## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</code></pre>
+<span class="co">## # A tibble: 1 x 20</span>
+<span class="co">##   line1  col1 line2  col2    id parent  token terminal  text short</span>
+<span class="co">##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">## 1     1     1     1     1     1      3 SYMBOL     TRUE     a     a</span>
+<span class="co">## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,</span>
+<span class="co">## #   child &lt;list&gt;, internal &lt;lgl&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,</span>
+<span class="co">## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</span></code></pre>
 <p>After “a” in <code>code</code>, there is a space, but this information is not contained in the tibble where we find the terminal “a”. In general, we must add newlines and spaces values <em>after</em> we computed character vector representation of the expression. In our example: we know that there is a space after the non-terminal “a” by looking at <code>pd_nested_enhanced$child[[1]]</code>. Therefore, we need to add this space to the very last terminal within <code>pd_nested_enhanced$child[[1]]</code> before we collapse everything together.</p>
-<pre><code>serialize_parse_data_nested_helper
+<pre><code><span class="va">serialize_parse_data_nested_helper</span>
 
-## function(pd_nested, pass_indent) {
-##   out &lt;- pmap(list(pd_nested$terminal, pd_nested$text, pd_nested$child,
-##                    pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent),
-##               function(terminal, text, child, spaces, lag_newlines, indent) {
-##                 total_indent &lt;- pass_indent + indent
-##                 preceding_linebreak &lt;- if_else(lag_newlines &gt; 0, 1, 0)
-##                 if (terminal) {
-##                   c(add_newlines(lag_newlines),
-##                     add_spaces(total_indent * preceding_linebreak),
-##                     text,
-##                     add_spaces(spaces))
-##                 } else {
-##                   c(add_newlines(lag_newlines),
-##                     add_spaces(total_indent * preceding_linebreak),
-##                     serialize_parse_data_nested_helper(child, total_indent),
-##                     add_spaces(spaces))
-##                 }
-##               }
-##   )
-##   out
-## }
-## &lt;environment: namespace:styler&gt;
+<span class="co">## function(pd_nested, pass_indent) {</span>
+<span class="co">##   out &lt;- pmap(list(pd_nested$terminal, pd_nested$text, pd_nested$child,</span>
+<span class="co">##                    pd_nested$spaces, pd_nested$lag_newlines, pd_nested$indent),</span>
+<span class="co">##               function(terminal, text, child, spaces, lag_newlines, indent) {</span>
+<span class="co">##                 total_indent &lt;- pass_indent + indent</span>
+<span class="co">##                 preceding_linebreak &lt;- if_else(lag_newlines &gt; 0, 1, 0)</span>
+<span class="co">##                 if (terminal) {</span>
+<span class="co">##                   c(add_newlines(lag_newlines),</span>
+<span class="co">##                     add_spaces(total_indent * preceding_linebreak),</span>
+<span class="co">##                     text,</span>
+<span class="co">##                     add_spaces(spaces))</span>
+<span class="co">##                 } else {</span>
+<span class="co">##                   c(add_newlines(lag_newlines),</span>
+<span class="co">##                     add_spaces(total_indent * preceding_linebreak),</span>
+<span class="co">##                     serialize_parse_data_nested_helper(child, total_indent),</span>
+<span class="co">##                     add_spaces(spaces))</span>
+<span class="co">##                 }</span>
+<span class="co">##               }</span>
+<span class="co">##   )</span>
+<span class="co">##   out</span>
+<span class="co">## }</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span>
 
-serialize_parse_data_nested
+<span class="va">serialize_parse_data_nested</span>
 
-## function(pd_nested) {
-##   out &lt;- c(add_newlines(start_on_line(pd_nested) - 1),
-##            serialize_parse_data_nested_helper(pd_nested, pass_indent = 0)) %&gt;%
-##     unlist() %&gt;%
-##     paste0(collapse = "") %&gt;%
-##     strsplit("\n", fixed = TRUE) %&gt;%
-##     .[[1L]] %&gt;%
-##     trimws(which = "right")
-##   out
-## }
-## &lt;environment: namespace:styler&gt;</code></pre>
+<span class="co">## function(pd_nested) {</span>
+<span class="co">##   out &lt;- c(add_newlines(start_on_line(pd_nested) - 1),</span>
+<span class="co">##            serialize_parse_data_nested_helper(pd_nested, pass_indent = 0)) %&gt;%</span>
+<span class="co">##     unlist() %&gt;%</span>
+<span class="co">##     paste0(collapse = "") %&gt;%</span>
+<span class="co">##     strsplit("\n", fixed = TRUE) %&gt;%</span>
+<span class="co">##     .[[1L]] %&gt;%</span>
+<span class="co">##     trimws(which = "right")</span>
+<span class="co">##   out</span>
+<span class="co">## }</span>
+<span class="co">## &lt;environment: namespace:styler&gt;</span></code></pre>
 <p>Before we are done, we need to add information regarding indention to the parse table. We can add indention after every line break that comes after a round bracket with <code>indent_round()</code>. And then serialize it.</p>
-<pre><code><a href="../../reference/visit.html">pre_visit(pd_nested, 
-               c(create_filler, 
-                 purrr::partial(indent_round, indent_by = 2)))
+<pre><code><span class="fu"><a href="../../reference/visit.html">pre_visit</a></span><span class="op">(</span><span class="va">pd_nested</span>, 
+               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">create_filler</span>, 
+                 <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">indent_round</span>, indent_by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-## # A tibble: 1 x 20
-##   line1  col1 line2  col2    id parent token terminal  text short
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     1     1     1    47    49      0  expr    FALSE            
-## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,
-## #   internal &lt;lgl&gt;, child &lt;list&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,
-## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</a></code></pre>
+<span class="co">## # A tibble: 1 x 20</span>
+<span class="co">##   line1  col1 line2  col2    id parent token terminal  text short</span>
+<span class="co">##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;chr&gt;    &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;</span>
+<span class="co">## 1     1     1     1    47    49      0  expr    FALSE            </span>
+<span class="co">## # ... with 10 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,</span>
+<span class="co">## #   internal &lt;lgl&gt;, child &lt;list&gt;, newlines &lt;int&gt;, lag_newlines &lt;int&gt;,</span>
+<span class="co">## #   spaces &lt;int&gt;, multi_line &lt;lgl&gt;, indention_ref_id &lt;lgl&gt;, indent &lt;dbl&gt;</span></code></pre>
 <p>We can see how indention works with a more complicated example</p>
-<pre><code>indented &lt;- c(
-  "call(", 
-  "  1,", 
-  "  call2(", 
-  "    2, 3,", 
-  "    call3(1, 2, 22),", 
-  "    5", 
-  "  ),", 
-  "  144",
-  ")"
-)
+<pre><code><span class="va">indented</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
+  <span class="st">"call("</span>, 
+  <span class="st">"  1,"</span>, 
+  <span class="st">"  call2("</span>, 
+  <span class="st">"    2, 3,"</span>, 
+  <span class="st">"    call3(1, 2, 22),"</span>, 
+  <span class="st">"    5"</span>, 
+  <span class="st">"  ),"</span>, 
+  <span class="st">"  144"</span>,
+  <span class="st">")"</span>
+<span class="op">)</span>
 
-not_indented &lt;- trimws(indented)
-back_and_forth &lt;- not_indented %&gt;%
-  compute_parse_data_nested() %&gt;%
-  pre_visit(c(create_filler, 
-        purrr::partial(indent_round, indent_by = 2))) %&gt;%
-  serialize_parse_data_nested()
+<span class="va">not_indented</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/trimws.html" class="external-link">trimws</a></span><span class="op">(</span><span class="va">indented</span><span class="op">)</span>
+<span class="va">back_and_forth</span> <span class="op">&lt;-</span> <span class="va">not_indented</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../../reference/visit.html">pre_visit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">create_filler</span>, 
+        <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">partial</a></span><span class="op">(</span><span class="va">indent_round</span>, indent_by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">serialize_parse_data_nested</span><span class="op">(</span><span class="op">)</span>
 
-identical(indented, back_and_forth)
+<span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">indented</span>, <span class="va">back_and_forth</span><span class="op">)</span>
 
-## [1] TRUE</code></pre>
+<span class="co">## [1] TRUE</span></code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -352,11 +356,13 @@ identical(indented, back_and_forth)
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://krlmlr.info">Kirill Müller</a>, <a href="https://lorenzwalthert.com">Lorenz Walthert</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://lorenzwalthert.com" class="external-link">Lorenz Walthert</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
