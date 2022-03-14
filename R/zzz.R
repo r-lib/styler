@@ -20,7 +20,7 @@
 
 
 ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
-  if (ask && runif(1) > 0.9 && is.null(getOption("styler.cache_root"))) {
+  if (ask && stats::runif(1) > 0.9 && is.null(getOption("styler.cache_root"))) {
     ask_to_switch_to_non_default_cache_root_impl()
     options(styler.cache_root = "styler")
   }

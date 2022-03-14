@@ -22,7 +22,7 @@ If you want to change the behavior of styler to match your desired style, there
 are multiple ways:
 
 - Use the tidyverse style guide, but not with the default options. Starting 
-  point for this approach is the  [help file](http://styler.r-lib.org/reference/tidyverse_style.html) for
+  point for this approach is the  [help file](https://styler.r-lib.org/reference/tidyverse_style.html) for
   the function `tidyverse_style()`, which returns the transformer functions that
   prettify your code. Most of these options are explained in `vignette("styler")`.
 
@@ -77,7 +77,7 @@ names(transformers)
 ```
 
 From the aforementioned
-[vignette](http://styler.r-lib.org/articles/customizing_styler.html):
+[vignette](https://styler.r-lib.org/articles/customizing_styler.html):
 
 > We note that there are different types of transformer functions. initialize
 initializes some variables in the nested parse table (so it is not actually a
@@ -187,7 +187,7 @@ is code that will have the first empty line in the function body removed by styl
   `transformers$space$start_comments_with_space`
 
 I think you get the idea. I nevertheless recommend using the [tidyverse style
-guide](http://style.tidyverse.org/) as is since
+guide](https://style.tidyverse.org/) as is since
 
 - it is a well-established, thought-through style.
 
