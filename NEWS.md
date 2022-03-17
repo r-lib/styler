@@ -1,3 +1,6 @@
+* New R option `styler.ignore_alignment` controls if alignment should be 
+  detected (and preserved) or not (#932).
+
 # styler 1.7.0
 
 * if `else` follows directly after `if`, line breaks are removed (#935).
