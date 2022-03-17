@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.6.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.7.0.9000</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.6.2.9000" id="styler-1629000-development-version">styler 1.6.2.9000 (Development version)<a class="anchor" aria-label="anchor" href="#styler-1629000-development-version"></a></h2>
+<h2 class="page-header" data-toc-text="1.7.0" id="styler-170">styler 1.7.0<small>2022-03-13</small><a class="anchor" aria-label="anchor" href="#styler-170"></a></h2>
 <p><strong>API changes</strong></p>
 <ul><li><p>new R option <code>styler.cache_root</code> (defaulting to <code>"styler"</code>) that determines the sub-directory under the {R.cache} cache directory that {styler} uses. Non- default caches won’t be cleaned up by {styler}. We suggest <code>"styler-perm"</code> (also used by {precommit}).</p></li>
 <li>
@@ -134,11 +134,11 @@
 <li>Function calls containing <code>+</code> should no longer give any error on styling when there are comments and line breaks under certain circumstances (<a href="https://github.com/r-lib/styler/issues/905" class="external-link">#905</a>).</li>
 <li>rules that add tokens don’t break stylerignore sequences anymore (<a href="https://github.com/r-lib/styler/issues/891" class="external-link">#891</a>).</li>
 <li>Alignment detection respects stylerignore (<a href="https://github.com/r-lib/styler/issues/850" class="external-link">#850</a>).</li>
+<li>Unaligned expressions with quoted key (e.g. <code>c("x" = 2)</code>) are now correctly detected (<a href="https://github.com/r-lib/styler/issues/881" class="external-link">#881</a>).</li>
 <li>
 <code>~</code> causes now indention, like <code>+</code>, <code>-</code>, <code>|</code> etc. (<a href="https://github.com/r-lib/styler/issues/902" class="external-link">#902</a>).</li>
 <li>
 <code>Warning: Unknown or uninitialised column:</code> was fixed (<a href="https://github.com/r-lib/styler/issues/885" class="external-link">#885</a>).</li>
-<li>Unaligned expressions with quoted key (e.g. <code>c("x" = 2)</code>) are now correctly detected (<a href="https://github.com/r-lib/styler/issues/881" class="external-link">#881</a>).</li>
 <li>function calls with unequal number of token on different lines are no longer deemed aligned if there are arbitrary spaces around the tokens on the lines with most tokens (<a href="https://github.com/r-lib/styler/issues/902" class="external-link">#902</a>).</li>
 <li>if a line starts with <code>EQ_SUB</code> (<code>=</code>), the corresponding key is moved to that line too (<a href="https://github.com/r-lib/styler/issues/923" class="external-link">#923</a>).</li>
 <li>ensure a trailing blank line also if the input is cached (<a href="https://github.com/r-lib/styler/issues/867" class="external-link">#867</a>).</li>
@@ -159,7 +159,9 @@
 <li>Use the {touchstone} GitHub Action instead of the literal script (<a href="https://github.com/r-lib/styler/issues/889" class="external-link">#889</a>).</li>
 <li>upgrade R CMD check Github Actions to use <code>v2</code>.</li>
 <li>{styler} test are relaxed to not assume a specific error message on the wrong usage of <code>_</code> (<a href="https://github.com/r-lib/styler/issues/929" class="external-link">#929</a>).</li>
-</ul></div>
+</ul><p>Thanks to all contributors that made this release possible:</p>
+<p><a href="https://github.com/bersbersbers" class="external-link">@bersbersbers</a>, <a href="https://github.com/daniel-wrench" class="external-link">@daniel-wrench</a>, <a href="https://github.com/dbykova" class="external-link">@dbykova</a>, <a href="https://github.com/EngrStudent" class="external-link">@EngrStudent</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/jam1015" class="external-link">@jam1015</a>, <a href="https://github.com/jooyoungseo" class="external-link">@jooyoungseo</a>, <a href="https://github.com/kalaschnik" class="external-link">@kalaschnik</a>, <a href="https://github.com/kaytif" class="external-link">@kaytif</a>, <a href="https://github.com/kpagacz" class="external-link">@kpagacz</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lionel-" class="external-link">@lionel-</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/maelle" class="external-link">@maelle</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/mine-cetinkaya-rundel" class="external-link">@mine-cetinkaya-rundel</a>, <a href="https://github.com/neuwirthe" class="external-link">@neuwirthe</a>, <a href="https://github.com/Polkas" class="external-link">@Polkas</a>, <a href="https://github.com/pwang2" class="external-link">@pwang2</a>, <a href="https://github.com/sebffischer" class="external-link">@sebffischer</a>, <a href="https://github.com/ShixiangWang" class="external-link">@ShixiangWang</a>, <a href="https://github.com/ssh352" class="external-link">@ssh352</a>, and <a href="https://github.com/xjtusjtu" class="external-link">@xjtusjtu</a>.</p>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6.2" id="styler-162">styler 1.6.2<small>2021-09-23</small><a class="anchor" aria-label="anchor" href="#styler-162"></a></h2>
 <ul><li>clean up cache files older than one week (<a href="https://github.com/r-lib/styler/issues/842" class="external-link">#842</a>).</li>

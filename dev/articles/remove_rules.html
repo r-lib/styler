@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.6.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.7.0.9000</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@
     
 <p>If you want to change the behavior of styler to match your desired style, there are multiple ways:</p>
 <ul>
-<li><p>Use the tidyverse style guide, but not with the default options. Starting point for this approach is the <a href="http://styler.r-lib.org/reference/tidyverse_style.html" class="external-link">help file</a> for the function <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>, which returns the transformer functions that prettify your code. Most of these options are explained in <code><a href="../articles/styler.html">vignette("styler")</a></code>.</p></li>
+<li><p>Use the tidyverse style guide, but not with the default options. Starting point for this approach is the <a href="https://styler.r-lib.org/reference/tidyverse_style.html">help file</a> for the function <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>, which returns the transformer functions that prettify your code. Most of these options are explained in <code><a href="../articles/styler.html">vignette("styler")</a></code>.</p></li>
 <li><p>If you can’t get styler behaving the way you want using the arguments of <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>, you have another option, which is described in a <code><a href="../articles/customizing_styler.html">vignette("customizing_styler")</a></code>: Creating your own style guide from scratch. Yes, I admit, it’s pretty long and if you don’t want to become a <em>styler expert</em>, it may be a little bit overwhelming.</p></li>
 <li><p>If you don’t care about how to create new rules but you simply want to <em>remove</em> a rule, I have good news for you: There is a quick way to do it. And that’s what the remainder of this vignette focuses on.</p></li>
 </ul>
@@ -180,7 +180,7 @@
 <span class="co">#&gt;  [4] "token"                  "indention"              "use_raw_indention"     </span>
 <span class="co">#&gt;  [7] "reindention"            "style_guide_name"       "style_guide_version"   </span>
 <span class="co">#&gt; [10] "more_specs_style_guide" "transformers_drop"      "indent_character"</span></code></pre></div>
-<p>From the aforementioned <a href="http://styler.r-lib.org/articles/customizing_styler.html" class="external-link">vignette</a>:</p>
+<p>From the aforementioned <a href="https://styler.r-lib.org/articles/customizing_styler.html">vignette</a>:</p>
 <blockquote>
 <p>We note that there are different types of transformer functions. initialize initializes some variables in the nested parse table (so it is not actually a transformer), and the other elements modify either spacing, line breaks or tokens. use_raw_indention is not a function, it is just an option.</p>
 </blockquote>
@@ -240,7 +240,7 @@
 <span class="co">#&gt;     pd$text[to_replace] &lt;- "&lt;-"</span>
 <span class="co">#&gt;     pd</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fdd24a1fd28&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x7f9d2666e438&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></code></pre></div>
 <p>Next, you simply set that element to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -291,7 +291,7 @@ return (1)
 <li><p>You don’t like single quotes to be replaced by double quotes: <code>transformers$space$fix_quotes</code>.</p></li>
 <li><p>You don’t like comments to start with one space: <code>transformers$space$start_comments_with_space</code></p></li>
 </ul>
-<p>I think you get the idea. I nevertheless recommend using the <a href="http://style.tidyverse.org/" class="external-link">tidyverse style guide</a> as is since</p>
+<p>I think you get the idea. I nevertheless recommend using the <a href="https://style.tidyverse.org/" class="external-link">tidyverse style guide</a> as is since</p>
 <ul>
 <li><p>it is a well-established, thought-through style.</p></li>
 <li><p>using a consistent style (no matter which) reduces friction in the community.</p></li>
