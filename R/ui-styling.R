@@ -7,7 +7,8 @@ NULL
 #'
 #' Performs various substitutions in all `.R` files in a package
 #' (code and tests). One can also (optionally) style `.Rmd`, `.Rmarkdown` and/or
-#' `.Rnw` files (vignettes and readme) by changing the `filetype` argument.
+#' `.qmd`, `.Rnw` files (vignettes and readme) by changing the `filetype`
+#' argument.
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package.
@@ -161,6 +162,17 @@ prettify_pkg <- function(transformers,
       )
     )
   }
+
+  if ("\\.qmd" %in% filetype_) {
+    vignette_files <- append(
+      vignette_files,
+      dir_without_.(
+        path = ".",
+        pattern = "\\.qmd$"
+      )
+    )
+  }
+
   files <- setdiff(
     c(r_files, rprofile_files, vignette_files, readme),
     exclude_files
@@ -214,7 +226,8 @@ style_text <- function(text,
 
 #' Prettify arbitrary R code
 #'
-#' Performs various substitutions in all `.R`, `.Rmd`, `.Rmarkdown` and/or `.Rnw` files
+#' Performs various substitutions in all `.R`, `.Rmd`, `.Rmarkdown`, `qmd`
+#' and/or `.Rnw` files
 #' in a directory (by default only `.R` files are styled - see `filetype` argument).
 #' Carefully examine the results after running this function!
 #' @param path Path to a directory with files to transform.
@@ -263,8 +276,8 @@ style_dir <- function(path = ".",
 #'
 #' This is a helper function for style_dir.
 #' @inheritParams style_pkg
-#' @param recursive A logical value indicating whether or not files in subdirectories
-#'   should be styled as well.
+#' @param recursive A logical value indicating whether or not files in
+#'   subdirectories should be styled as well.
 #' @keywords internal
 prettify_any <- function(transformers,
                          filetype,
@@ -298,7 +311,7 @@ prettify_any <- function(transformers,
   )
 }
 
-#' Style `.R`, `.Rmd`, `.Rmarkdown` or `.Rnw` files
+#' Style `.R`, `.Rmd`, `.Rmarkdown`, `.qmd` or `.Rnw` files
 #'
 #' Performs various substitutions in the files specified.
 #' Carefully examine the results after running this function!

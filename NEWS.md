@@ -1,3 +1,9 @@
+# styler 1.7.0.9000 (Development version)
+
+* `filetype` `.qmd` is now supported, but not turned on by default (#931).
+
+
+
 # styler 1.7.0
 
 **API changes**
