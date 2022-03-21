@@ -26,7 +26,7 @@ install.packages("precommit")
 ```
 
 To access pre-commit functionality from R, you also need to install the
-[pre-commit framework](https://pre-commit.com) on which the hook from this repo
+[pre-commit framework](https://pre-commit.com) on which the hooks from this repo
 build. The following command line methods are tested to work with this R package
 (and accessing them from outside R is easier and use is slightly faster):
 
