@@ -108,7 +108,8 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.7.0" id="styler-170">styler 1.7.0<small>2022-03-13</small><a class="anchor" aria-label="anchor" href="#styler-170"></a></h2>
-<p><strong>API changes</strong></p>
+<ul><li>if <code>else</code> follows directly after <code>if</code>, line breaks are removed (<a href="https://github.com/r-lib/styler/issues/935" class="external-link">#935</a>).</li>
+</ul><p><strong>API changes</strong></p>
 <ul><li><p>new R option <code>styler.cache_root</code> (defaulting to <code>"styler"</code>) that determines the sub-directory under the {R.cache} cache directory that {styler} uses. Non- default caches won’t be cleaned up by {styler}. We suggest <code>"styler-perm"</code> (also used by {precommit}).</p></li>
 <li>
 <p>stylerignore markers are now interpreted as regular expressions instead of comments that must match exactly. This allows to specify multiple markers in one regular expression for <code>styler.ignore_start</code> and <code>styler.ignore_stop</code>, e.g. to use markers for lintr and styler on the same line, you can use <code>options(styler.ignore_start = "nolint start|styler: off"</code>:</p>
