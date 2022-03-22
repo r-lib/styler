@@ -326,13 +326,13 @@ test_that("style_pkg() can find qmd anywhere", {
       filetype = ".Qmd"
     )
   )
-  expect_false(any(grepl("hello-world.R", msg, fixed = TRUE)))
-  expect_false(any(grepl("test-package-xyz.R", msg, fixed = TRUE)))
-  expect_false(any(grepl("random.Rmd", msg, fixed = TRUE)))
-  expect_false(any(grepl("random.Rmarkdown", msg, fixed = TRUE)))
-  expect_false(any(grepl("README.Rmd", msg, fixed = TRUE)))
-  expect_false(any(grepl("RcppExports.R", msg, fixed = TRUE)))
-  expect_true(any(grepl("new.qmd", msg, fixed = TRUE)))
+  expect_no_match(msg, "hello-world.R", fixed = TRUE)
+  expect_no_match(msg, "test-package-xyz.R", fixed = TRUE)
+  expect_no_match(msg, "random.Rmd", fixed = TRUE)
+  expect_no_match(msg, "random.Rmarkdown", fixed = TRUE)
+  expect_no_match(msg, "README.Rmd", fixed = TRUE)
+  expect_no_match(msg, "RcppExports.R", fixed = TRUE)
+  expect_match(msg, "new.qmd", fixed = TRUE)
 })
 
 
