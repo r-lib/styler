@@ -1,5 +1,7 @@
 # styler 1.7.0
 
+* if `else` follows directly after `if`, line breaks are removed (#935).
+
 **API changes**
 
 * new R option `styler.cache_root` (defaulting to `"styler"`) that determines 

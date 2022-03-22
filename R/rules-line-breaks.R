@@ -153,6 +153,8 @@ style_line_break_around_curly <- function(strict, pd) {
       pd$lag_newlines[is_else] <- 0L
       pd$spaces[c(is_else, FALSE)[-1]] <- 1L
     }
+    is_if_after_else <- pd$token == "ELSE" & pd$token_after == "IF"
+    pd$lag_newlines[lag(is_if_after_else)] <- 0L
   }
   pd
 }

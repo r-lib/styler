@@ -37,3 +37,18 @@ foo <- function(x) {
     2
   }
 }
+
+
+if (TRUE) {
+  3
+} else
+  if (FALSE) {
+  4
+}
+
+if (TRUE) {
+  3
+} else # comment
+  if (FALSE) {
+    4
+  }

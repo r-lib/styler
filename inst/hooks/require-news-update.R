@@ -1,7 +1,7 @@
 #! /usr/local/bin/Rscript
 args <- system2(
   "git",
-  c("diff", "upstream/main", "--name-only"),
+  c("diff", "origin/main", "--name-only"),
   stdout = TRUE
 )
 
