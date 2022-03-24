@@ -209,6 +209,8 @@ cache_more_specs <- function(include_roxygen_examples,
   list(
     include_roxygen_examples = include_roxygen_examples,
     base_indention = base_indention,
-    ignore_alignment = getOption("styler.ignore_alignment", FALSE)
+    ignore_alignment = getOption("styler.ignore_alignment", FALSE),
+    ignore_start = getOption("styler.ignore_start", .default_ignore_start),
+    ignore_stop = getOption("styler.ignore_start", .default_ignore_stop)
   )
 }

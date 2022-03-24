@@ -21,7 +21,7 @@ test_that("ignore_alignment is respected in caching", {
     as.character(without_detection),
     as.character(text_without_alignment)
   )
-  cache_info(format = "tabular")$size == 2
+  expect_equal(cache_info(format = "tabular")$n, 2)
 })
 
 test_that("cache is deactivated at end of caching related testthat file", {

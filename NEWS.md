@@ -1,5 +1,6 @@
-* New R option `styler.ignore_alignment` controls if alignment should be 
+* new R option `styler.ignore_alignment` controls if alignment should be 
   detected (and preserved) or not (#932).
+* the cache is also invalidated on changing the stylerignore markers (#932).
 
 # styler 1.7.0
 
