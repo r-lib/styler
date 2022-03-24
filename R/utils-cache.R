@@ -204,9 +204,13 @@ get_cache_dir <- function(cache_name = cache_get_name()) {
 #' Syntactic sugar for creating more specs. This is useful when we want to add
 #' more arguments (because we can search for this function in the source code).
 #' @keywords internal
-cache_more_specs <- function(include_roxygen_examples, base_indention) {
+cache_more_specs <- function(include_roxygen_examples,
+                             base_indention) {
   list(
     include_roxygen_examples = include_roxygen_examples,
-    base_indention = base_indention
+    base_indention = base_indention,
+    ignore_alignment = getOption("styler.ignore_alignment", FALSE),
+    ignore_start = getOption("styler.ignore_start", .default_ignore_start),
+    ignore_stop = getOption("styler.ignore_start", .default_ignore_stop)
   )
 }

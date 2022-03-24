@@ -168,6 +168,25 @@ test_that("indention preserved in stylerignore when caching activated", {
   )
 })
 
+test_that("changing ignore markers invalidates cache", {
+  opts <- list(
+    list(styler.ignore_stop = "noqua: stop", n = 1),
+    list(styler.ignore_start = "noqua: start", n = 3)
+  )
+  purrr::walk(opts, function(opt) {
+    local_test_setup(cache = TRUE)
+    text7 <- c(
+      "# styler: off",
+      "1 + 1",
+      "# styler: on"
+    )
+    style_text(text7)
+    rlang::exec(withr::local_options, !!!opt[-length(opt)])
+    style_text(text7)
+    expect_equal(cache_info(format = "tabular")$n, opt[["n"]])
+  })
+})
+
 test_that("cache is deactivated at end of caching related testthat file", {
   expect_false(cache_is_activated())
 })
