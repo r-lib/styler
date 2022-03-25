@@ -61,7 +61,8 @@ of styling. "off", the default, writes back if the input and output of
 styling are not identical.}
 }
 \description{
-Performs various substitutions in all \code{.R}, \code{.Rmd}, \code{.Rmarkdown} and/or \code{.Rnw} files
+Performs various substitutions in all \code{.R}, \code{.Rmd}, \code{.Rmarkdown}, \code{qmd}
+and/or \code{.Rnw} files
 in a directory (by default only \code{.R} files are styled - see \code{filetype} argument).
 Carefully examine the results after running this function!
 }

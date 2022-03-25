@@ -60,7 +60,7 @@ style_active_file <- function() {
     is_rprofile_file(context$path)
   )
 
-  if (is_rmd_file(context$path)) {
+  if (is_rmd_file(context$path) || is_qmd_file(context$path)) {
     out <- transform_mixed(context$contents, transformer, filetype = "Rmd")
   } else if (is_rnw_file(context$path)) {
     out <- transform_mixed(context$contents, transformer, filetype = "Rnw")

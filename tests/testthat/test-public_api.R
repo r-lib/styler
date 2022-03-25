@@ -163,6 +163,22 @@ test_that("styler can style Rmarkdown file", {
   expect_false(styled$changed)
 })
 
+
+test_that("styler can style qmd file", {
+  capture_output(expect_false({
+    out <- style_file(
+      testthat_file("public-api", "xyzfile_qmd", "new.qmd"),
+      strict = FALSE
+    )
+    out$changed
+  }))
+
+  capture_output(expect_warning(
+    styled <- style_file(testthat_file("public-api", "xyzfile_rmd", "random2.Rmarkdown"), strict = FALSE)
+  ))
+  expect_false(styled$changed)
+})
+
 test_that("styler handles malformed Rmd file and invalid R code in chunk", {
   capture_output(expect_warning(
     style_file(testthat_file("public-api", "xyzfile_rmd", "invalid4.Rmd"), strict = FALSE),
@@ -290,6 +306,35 @@ test_that("styler can style R and Rmd files via style_pkg()", {
   expect_true(any(grepl("README.Rmd", msg, fixed = TRUE)))
   expect_false(any(grepl("RcppExports.R", msg, fixed = TRUE)))
 })
+
+test_that("style_pkg() does not style qmd files by default", {
+  msg <- capture_output(
+    style_pkg(testthat_file("public-api", "xyzpackage-qmd"))
+  )
+  expect_true(any(grepl("hello-world.R", msg, fixed = TRUE)))
+  expect_true(any(grepl("test-package-xyz.R", msg, fixed = TRUE)))
+  expect_false(any(grepl("random.Rmd", msg, fixed = TRUE)))
+  expect_false(any(grepl("random.Rmarkdown", msg, fixed = TRUE)))
+  expect_false(any(grepl("README.Rmd", msg, fixed = TRUE)))
+  expect_false(any(grepl("RcppExports.R", msg, fixed = TRUE)))
+  expect_false(any(grepl("new.qmd", msg, fixed = TRUE)))
+})
+
+test_that("style_pkg() can find qmd anywhere", {
+  msg <- capture_output(
+    style_pkg(testthat_file("public-api", "xyzpackage-qmd"),
+      filetype = ".Qmd"
+    )
+  )
+  expect_no_match(msg, "hello-world.R", fixed = TRUE)
+  expect_no_match(msg, "test-package-xyz.R", fixed = TRUE)
+  expect_no_match(msg, "random.Rmd", fixed = TRUE)
+  expect_no_match(msg, "random.Rmarkdown", fixed = TRUE)
+  expect_no_match(msg, "README.Rmd", fixed = TRUE)
+  expect_no_match(msg, "RcppExports.R", fixed = TRUE)
+  expect_match(msg, "new.qmd", fixed = TRUE)
+})
+
 
 test_that("styler can style Rmd files only via style_pkg()", {
   msg <- capture_output(

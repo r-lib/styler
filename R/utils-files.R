@@ -13,6 +13,11 @@ is_rnw_file <- function(path) {
   grepl("\\.Rnw$", path, ignore.case = TRUE)
 }
 
+is_qmd_file <- function(path) {
+  grepl("\\.qmd$", path, ignore.case = TRUE)
+}
+
+
 is_unsaved_file <- function(path) {
   path == ""
 }
