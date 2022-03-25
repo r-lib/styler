@@ -541,3 +541,27 @@ test_that("Can display warning on unset styler cache", {
   withr::local_seed(7)
   expect_silent(ask_to_switch_to_non_default_cache_root(ask = TRUE))
 })
+
+
+test_that("alignment detection can be turned off.", {
+  withr::local_options(
+    "styler.ignore_alignment" = TRUE,
+    "styler.colored_print.vertical" = FALSE
+  )
+  text_in <- paste0(
+    "call(\n",
+    "  xb =  13,\n",
+    "  t  = 'a'\n",
+    ")"
+  )
+  text_out <- c(
+    "call(",
+    "  xb = 13,",
+    "  t = \"a\"",
+    ")"
+  )
+
+  expect_true(all(
+    style_text(text_in) == text_out
+  ))
+})
