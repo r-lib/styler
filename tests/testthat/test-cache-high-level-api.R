@@ -1,6 +1,7 @@
 test_that("activated cache brings speedup on style_file() API", {
   local_test_setup()
   skip_on_cran()
+  skip_on_covr()
   n <- n_times_faster_with_cache(
     test_path("reference-objects/caching.R"),
     test_path("reference-objects/caching.R"),
@@ -25,6 +26,7 @@ text <- c(
 
 test_that("activated cache brings speedup on style_text() API on character vector", {
   skip_on_cran()
+  skip_on_covr()
   n <- n_times_faster_with_cache(
     text, text,
     fun = style_text
@@ -34,6 +36,7 @@ test_that("activated cache brings speedup on style_text() API on character vecto
 
 test_that("activated cache brings speedup on style_text() API on character scalar", {
   skip_on_cran()
+  skip_on_covr()
   text2 <- paste0(text, collapse = "\n")
 
   n <- n_times_faster_with_cache(
@@ -52,6 +55,7 @@ test_that("trailing line breaks are ignored for caching", {
   style_text(text2)
   expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  skip_on_covr()
   n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
@@ -64,6 +68,7 @@ test_that("trailing line breaks are ignored for caching in one scalar", {
   style_text(text2)
   expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  skip_on_covr()
   n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
@@ -79,12 +84,14 @@ test_that("trailing line breaks are ignored for caching in one scalar", {
   style_text(text2)
   expect_equal(cache_info(format = "tabular")$n, 3)
   skip_on_cran()
+  skip_on_covr()
   n <- n_times_faster_with_cache(text1, text2)
   expect_gt(n, 55)
 })
 
 test_that("speedup higher when cached roxygen example code is multiple expressions", {
   skip_on_cran()
+  skip_on_covr()
 
   text_long <- c(
     "#' Roxygen",
@@ -124,6 +131,7 @@ test_that("speedup higher when cached roxygen example code is multiple expressio
 
 test_that("no speedup when tranformer changes", {
   skip_on_cran()
+  skip_on_covr()
   local_test_setup()
   t1 <- tidyverse_style()
   first <- system.time(style_text(text, transformers = t1))
@@ -134,7 +142,8 @@ test_that("no speedup when tranformer changes", {
 
 
 test_that("unactivated cache does not bring speedup", {
-  skip_on_cran
+  skip_on_cran()
+  skip_on_covr()
   local_test_setup()
   first <- system.time(style_file(test_path("reference-objects/caching.R")))
   second <- system.time(style_file(test_path("reference-objects/caching.R")))
