@@ -12,6 +12,6 @@ rds_to_version(path, version = 2)
 \item{version}{The target version.}
 }
 \description{
-Needed to make \code{\link[testthat:expect_known_value]{testthat::expect_known_value()}} work on R < 3.6.
+Needed to make \code{\link[testthat:expect_known_output]{testthat::expect_known_value()}} work on R < 3.6.
 }
 \keyword{internal}

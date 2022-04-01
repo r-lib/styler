@@ -38,10 +38,23 @@ transform_code <- function(path, fun, ..., dry) {
 #' @keywords internal
 transform_mixed <- function(lines, transformer_fun, filetype) {
   chunks <- separate_chunks(lines, filetype)
-  chunks$r_chunks <- map(chunks$r_chunks, transformer_fun)
-
+  chunks$r_chunks <- map(chunks$r_chunks, transform_mixed_non_empty,
+    transformer_fun = transformer_fun
+  )
   map2(chunks$text_chunks, c(chunks$r_chunks, list(character(0))), c) %>%
     flatten_chr()
+}
+
+#' Ensure for `.Rmd` and friends that a code chunk without code is formatted as
+#' a code chunk without any lines.
+#' @keywords internal
+transform_mixed_non_empty <- function(r_chunk, transformer_fun) {
+  trimmed <- trimws(r_chunk)
+  if (all(trimmed == "") || identical(trimmed, character(0L))) {
+    character(0L)
+  } else {
+    transformer_fun(r_chunk)
+  }
 }
 
 #' Separate chunks within Rmd and Rnw contents
