@@ -47,6 +47,7 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
   expect_equal(text, text_not_cached)
 
   skip_on_cran()
+  skip_on_covr()
   expect_lt(
     partially_cached_benchmark["elapsed"] * 2.4,
     not_cached_benchmark["elapsed"]

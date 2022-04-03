@@ -134,48 +134,52 @@ test_that("styler does not return error when there is no file to style", {
 context("public API - Rmd in style_file()")
 
 test_that("styler can style Rmd file", {
-  capture_output(expect_false({
+  expect_false({
     out <- style_file(
       testthat_file("public-api", "xyzfile_rmd", "random.Rmd"),
       strict = FALSE
     )
     out$changed
-  }))
+  })
 
-  capture_output(expect_warning(
-    styled <- style_file(testthat_file("public-api", "xyzfile_rmd", "random2.Rmd"), strict = FALSE)
-  ))
+  styled <- style_file(
+    testthat_file("public-api", "xyzfile_rmd", "random2.Rmd"),
+    strict = FALSE
+  )
   expect_false(styled$changed)
 })
 
 test_that("styler can style Rmarkdown file", {
-  capture_output(expect_false({
+  expect_false({
     out <- style_file(
       testthat_file("public-api", "xyzfile_rmd", "random.Rmarkdown"),
       strict = FALSE
     )
     out$changed
-  }))
+  })
 
-  capture_output(expect_warning(
-    styled <- style_file(testthat_file("public-api", "xyzfile_rmd", "random2.Rmarkdown"), strict = FALSE)
-  ))
+
+  styled <- style_file(
+    testthat_file("public-api", "xyzfile_rmd", "random2.Rmarkdown"),
+    strict = FALSE
+  )
   expect_false(styled$changed)
 })
 
 
 test_that("styler can style qmd file", {
-  capture_output(expect_false({
+  expect_false({
     out <- style_file(
       testthat_file("public-api", "xyzfile_qmd", "new.qmd"),
       strict = FALSE
     )
     out$changed
-  }))
+  })
 
-  capture_output(expect_warning(
-    styled <- style_file(testthat_file("public-api", "xyzfile_rmd", "random2.Rmarkdown"), strict = FALSE)
-  ))
+  styled <- style_file(
+    testthat_file("public-api", "xyzfile_rmd", "random2.Rmarkdown"),
+    strict = FALSE
+  )
   expect_false(styled$changed)
 })
 
@@ -372,17 +376,17 @@ context("public API - Rnw in style_file()")
 
 
 test_that("styler can style Rnw file", {
-  capture_output(expect_false({
+  expect_false({
     out <- style_file(
       testthat_file("public-api", "xyzfile-rnw", "random.Rnw"),
       strict = FALSE
     )
     out$changed
-  }))
-
-  capture_output(expect_warning(
-    styled <- style_file(testthat_file("public-api", "xyzfile-rnw", "random2.Rnw"), strict = FALSE)
-  ))
+  })
+  styled <- style_file(
+    testthat_file("public-api", "xyzfile-rnw", "random2.Rnw"),
+    strict = FALSE
+  )
   expect_false(styled$changed)
 })
 

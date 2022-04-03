@@ -9,7 +9,7 @@
 **Bug Fixes**
 
 * the cache is also invalidated on changing the stylerignore markers (#932).
-
+* If there are only empty lines in a code chunk, they are all removed (#936).
 
 # styler 1.7.0
 

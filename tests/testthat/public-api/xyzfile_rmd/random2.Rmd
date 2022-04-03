@@ -3,7 +3,6 @@
 ```
 Some text before empty chunk
 ```{r}
-
 ```
 Final text before longer code chunk
 This text chunk has multiple lines
