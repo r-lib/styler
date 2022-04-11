@@ -55,7 +55,7 @@
 #' }
 set_line_break_before_curly_opening <- function(pd) {
   line_break_to_set_idx <- which(
-    (pd$token_after == "'{'") & (pd$token != "COMMENT")
+    (pd$token_after == "'{'") & !(pd$token %in% c("COMMENT", "EQ_FORMALS"))
   )
 
   line_break_to_set_idx <- setdiff(line_break_to_set_idx, nrow(pd))
@@ -89,8 +89,12 @@ set_line_break_before_curly_opening <- function(pd) {
     should_not_be_on_same_line <- is_not_curly_curly &
       ((!is_last_expr | linebreak_before_curly) & !no_line_break_before_curly_idx)
     should_not_be_on_same_line_idx <- line_break_to_set_idx[should_not_be_on_same_line]
-
-    pd$lag_newlines[1 + should_not_be_on_same_line_idx] <- 1L
+    if (is_function_dec(pd)) {
+      should_not_be_on_same_line_idx <- setdiff(1 + should_not_be_on_same_line_idx, nrow(pd))
+    } else {
+      should_not_be_on_same_line_idx <- 1 + should_not_be_on_same_line_idx
+    }
+    pd$lag_newlines[should_not_be_on_same_line_idx] <- 1L
 
     # non-curly expressions after curly expressions must have line breaks
     if (length(should_not_be_on_same_line_idx) > 0) {
