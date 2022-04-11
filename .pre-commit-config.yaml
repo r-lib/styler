@@ -86,7 +86,7 @@ repos:
           vignettes/FAQ\.Rmd|
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.2.0
     hooks: 
     -   id: check-added-large-files
     -   id: end-of-file-fixer
@@ -94,7 +94,7 @@ repos:
     -   id: file-contents-sorter
         files: '^\.Rbuildignore$'
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: d3e947d61fba8c6adde2707d3baa6ae36b989d5b
+    rev: 9dd648a2cbce0c0ce09255695b63ea4823699bec
     hooks: 
     -   id: tidy-gitignore
 -   repo: local
