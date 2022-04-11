@@ -61,18 +61,18 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.7",
+      "Version": "1.0.8.3",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "dab19adae4440ae55aa8a9d238b246bb",
+      "Repository": "RSPM",
+      "Hash": "32e79b908fda56ee57fe518a8d37b864",
       "Requirements": []
     },
     "brew": {
       "Package": "brew",
-      "Version": "1.0-6",
+      "Version": "1.0-7",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "92a5f887f9ae3035ac7afde22ba73ee9",
+      "Repository": "RSPM",
+      "Hash": "38875ea52350ff4b4c03849fc69736c8",
       "Requirements": []
     },
     "callr": {
@@ -88,10 +88,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.1.0",
+      "Version": "3.2.0",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "66a3834e54593c89d8beefb312347e58",
+      "Repository": "RSPM",
+      "Hash": "1bdb126893e9ce6aae50ad1d6fc32faf",
       "Requirements": [
         "glue"
       ]
@@ -106,10 +106,10 @@
     },
     "commonmark": {
       "Package": "commonmark",
-      "Version": "1.7",
+      "Version": "1.8.0",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0f22be39ec1d141fd03683c06f3a6e67",
+      "Repository": "RSPM",
+      "Hash": "2ba81b120c1655ab696c935ef33ea716",
       "Requirements": []
     },
     "cpp11": {
@@ -122,17 +122,17 @@
     },
     "crayon": {
       "Package": "crayon",
-      "Version": "1.4.2",
+      "Version": "1.5.1",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0a6a65d92bd45b47b94b84244b528d17",
+      "Repository": "RSPM",
+      "Hash": "8dc45fd8a1ee067a92b85ef274e66d6a",
       "Requirements": []
     },
     "cyclocomp": {
       "Package": "cyclocomp",
       "Version": "1.1.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "53cbed70a2f7472d48fb6aef08442f25",
       "Requirements": [
         "callr",
@@ -144,13 +144,13 @@
     },
     "desc": {
       "Package": "desc",
-      "Version": "1.4.0",
+      "Version": "1.4.1",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "28763d08fadd0b733e3cee9dab4e12fe",
+      "Repository": "RSPM",
+      "Hash": "eebd27ee58fcc58714eedb7aa07d8ad1",
       "Requirements": [
         "R6",
-        "crayon",
+        "cli",
         "rprojroot"
       ]
     },
@@ -166,7 +166,7 @@
       "Package": "docopt",
       "Version": "0.7.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "e9eeef7931ee99ca0093f3f20b88e09b",
       "Requirements": []
     },
@@ -182,18 +182,18 @@
     },
     "evaluate": {
       "Package": "evaluate",
-      "Version": "0.14",
+      "Version": "0.15",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "ec8ca05cffcc70569eaaad8469d2a3a7",
+      "Repository": "RSPM",
+      "Hash": "699a7a93d08c962d9f8950b2d7a227f1",
       "Requirements": []
     },
     "fansi": {
       "Package": "fansi",
-      "Version": "0.5.0",
+      "Version": "1.0.3",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "d447b40982c576a72b779f0a3b3da227",
+      "Repository": "RSPM",
+      "Hash": "83a8afdbe71839506baa9f90eebad7ec",
       "Requirements": []
     },
     "fs": {
@@ -206,18 +206,18 @@
     },
     "git2r": {
       "Package": "git2r",
-      "Version": "0.29.0",
+      "Version": "0.30.1",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "b114135c4749076bd5ef74a5827b6f62",
+      "Repository": "RSPM",
+      "Hash": "e0c6a04a3e7b90e64213d09128f74f1b",
       "Requirements": []
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.6.0",
+      "Version": "1.6.2",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "b8bb7aaf248e45bac08ebed86f3a0aa4",
+      "Repository": "RSPM",
+      "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e",
       "Requirements": []
     },
     "here": {
@@ -244,7 +244,7 @@
       "Package": "hunspell",
       "Version": "3.0.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "3987784c19192ad0f2261c456d936df1",
       "Requirements": [
         "Rcpp",
@@ -253,18 +253,18 @@
     },
     "jsonlite": {
       "Package": "jsonlite",
-      "Version": "1.7.2",
+      "Version": "1.8.0",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "98138e0994d41508c7a6b84a0600cfcb",
+      "Repository": "RSPM",
+      "Hash": "d07e729b27b372429d42d24d503613a0",
       "Requirements": []
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.37",
+      "Version": "1.38",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "a4ec675eb332a33fe7b7fe26f70e1f98",
+      "Repository": "RSPM",
+      "Hash": "10b3dc3c6acb925910edda5d0543b3a2",
       "Requirements": [
         "evaluate",
         "highr",
@@ -277,7 +277,7 @@
       "Package": "lazyeval",
       "Version": "0.2.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "d908914ae53b04d4c0c0fd72ecc35370",
       "Requirements": []
     },
@@ -297,17 +297,18 @@
       "Version": "2.0.1.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "lintr",
       "RemoteUsername": "jimhester",
+      "RemoteRepo": "lintr",
       "RemoteRef": "HEAD",
-      "RemoteSha": "6e0d15257496421266f4f87700be16c8dd3f090b",
-      "Hash": "65e26f34f7b468358660522f48eee28a",
+      "RemoteSha": "f1643b7430a769947a862c4cd37d0e930bd32f50",
+      "RemoteHost": "api.github.com",
+      "Hash": "f6d145857522ca89bfd8e3ca87139b60",
       "Requirements": [
         "codetools",
         "crayon",
         "cyclocomp",
         "digest",
+        "glue",
         "jsonlite",
         "knitr",
         "rex",
@@ -317,23 +318,24 @@
     },
     "magrittr": {
       "Package": "magrittr",
-      "Version": "2.0.1",
+      "Version": "2.0.3",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "41287f1ac7d28a92f0a286ed507928d3",
+      "Repository": "RSPM",
+      "Hash": "7ce2733a9826b3aeb1775d56fd305472",
       "Requirements": []
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.6.4",
+      "Version": "1.7.0",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "60200b6aa32314ac457d3efbb5ccbd98",
+      "Repository": "RSPM",
+      "Hash": "51dfc97e1b7069e9f7e6f83f3589c22e",
       "Requirements": [
         "cli",
         "crayon",
         "ellipsis",
         "fansi",
+        "glue",
         "lifecycle",
         "rlang",
         "utf8",
@@ -366,10 +368,10 @@
     },
     "processx": {
       "Package": "processx",
-      "Version": "3.5.2",
+      "Version": "3.5.3",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0cbca2bc4d16525d009c4dbba156b37c",
+      "Repository": "RSPM",
+      "Hash": "8bbae1a548d0d3fdf6647bdd9d35bf6d",
       "Requirements": [
         "R6",
         "ps"
@@ -416,7 +418,7 @@
       "Package": "rex",
       "Version": "1.2.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "ae34cd56890607370665bee5bd17812f",
       "Requirements": [
         "lazyeval"
@@ -424,10 +426,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "0.4.12",
+      "Version": "1.0.2",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0879f5388fe6e4d56d7ef0b7ccb031e5",
+      "Repository": "RSPM",
+      "Hash": "04884d9a75d778aca22c7154b8333ec9",
       "Requirements": []
     },
     "roxygen2": {
@@ -454,10 +456,10 @@
     },
     "rprojroot": {
       "Package": "rprojroot",
-      "Version": "2.0.2",
+      "Version": "2.0.3",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "249d8cd1e74a8f6a26194a91b47f21d1",
+      "Repository": "RSPM",
+      "Hash": "1de7ab598047a87bba48434ba35d497d",
       "Requirements": []
     },
     "rstudioapi": {
@@ -472,7 +474,7 @@
       "Package": "spelling",
       "Version": "2.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "b8c899a5c83f0d897286550481c91798",
       "Requirements": [
         "commonmark",
@@ -503,19 +505,18 @@
     },
     "styler": {
       "Package": "styler",
-      "Version": "1.6.2.9000",
+      "Version": "1.7.0.9001",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "styler",
       "RemoteRef": "HEAD",
-      "RemoteSha": "bfa83091df9d6c5fab43c09bbb02c321bb304270",
+      "RemoteSha": "ee4731481490616631a25ffd0b0c82f63804cd87",
       "RemoteHost": "api.github.com",
-      "Hash": "c17a74859ab81e9b9e7a1ebfc6fc6155",
+      "Hash": "c4c1c243a8668365dd436be9139636b6",
       "Requirements": [
         "R.cache",
         "cli",
-        "glue",
         "magrittr",
         "purrr",
         "rematch2",
@@ -552,30 +553,30 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.3.8",
+      "Version": "0.4.0",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "ecf749a1b39ea72bd9b51b76292261f1",
+      "Repository": "RSPM",
+      "Hash": "95c2573b232eac82df562f9e300f9790",
       "Requirements": [
-        "ellipsis",
+        "cli",
         "glue",
         "rlang"
       ]
     },
     "withr": {
       "Package": "withr",
-      "Version": "2.4.3",
+      "Version": "2.5.0",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "a376b424c4817cda4920bbbeb3364e85",
+      "Repository": "RSPM",
+      "Hash": "c0e49a9760983e81e55cdd9be92e7182",
       "Requirements": []
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.29",
+      "Version": "0.30",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "e2e5fb1a74fbb68b27d6efc5372635dc",
+      "Repository": "RSPM",
+      "Hash": "e83f48136b041845e50a6658feffb197",
       "Requirements": []
     },
     "xml2": {
@@ -590,16 +591,16 @@
       "Package": "xmlparsedata",
       "Version": "1.0.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "45e4bf3c46476896e821fc0a408fb4fc",
       "Requirements": []
     },
     "yaml": {
       "Package": "yaml",
-      "Version": "2.2.1",
+      "Version": "2.3.5",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "2826c5d9efb0a88f657c7a679c7106db",
+      "Repository": "RSPM",
+      "Hash": "458bb38374d73bf83b1bb85e353da200",
       "Requirements": []
     }
   }
