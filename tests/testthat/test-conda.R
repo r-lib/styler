@@ -5,10 +5,6 @@ if (!on_cran()) {
     expect_error(install_precommit(force = TRUE), NA)
   })
 
-  test_that("conda 3.10 should now work", {
-    expect_true(Sys.Date() < as.Date("2022-03-30"))
-  })
-
   test_that("can use pre-commit", {
     tempdir <- local_test_setup(quiet = FALSE, install_hooks = FALSE)
     expect_message(

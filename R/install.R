@@ -55,7 +55,7 @@ install_precommit <- function(force = FALSE) {
 #' @keywords internal
 install_impl <- function() {
   if (!"r-precommit" %in% reticulate::conda_list()$name) {
-    reticulate::conda_create("r-precommit", python_version = "3.9")
+    reticulate::conda_create("r-precommit")
   }
   reticulate::conda_install("r-precommit", packages = "pre-commit")
 }

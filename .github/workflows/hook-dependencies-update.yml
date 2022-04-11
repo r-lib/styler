@@ -38,7 +38,7 @@ jobs:
           install.packages('jsonlite')
           renv_deps <- names(jsonlite::read_json('renv.lock')$Packages)
           renv::load()
-          renv::restore()
+          renv::restore(prompt = FALSE)
           can_be_updated <- renv::update(renv_deps, prompt = FALSE)
           renv::snapshot(packages = renv_deps)
         shell: Rscript {0}
