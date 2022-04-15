@@ -111,9 +111,9 @@ make_transformer <- function(transformers,
         ) %>%
         when(
           include_roxygen_examples ~
-          parse_transform_serialize_roxygen(.,
-            transformers = transformers, base_indention = base_indention
-          ),
+            parse_transform_serialize_roxygen(.,
+              transformers = transformers, base_indention = base_indention
+            ),
           ~.
         )
       if (should_use_cache) {
