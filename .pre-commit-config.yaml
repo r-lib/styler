@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: b2a735b
+    rev: v0.2.2.9015
     hooks:
     -   id: style-files
         args: ['--ignore-start="^# styler: on$"', '--ignore-stop="^# styler: off$"']
@@ -84,7 +84,7 @@ repos:
           tests/testthat/.*\.R(md)?
           )$
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.2.0
     hooks:
     -   id: check-added-large-files
         args: ['--maxkb=200']
@@ -99,7 +99,7 @@ repos:
           tests/testthat/reference-objects/.*|
           )$
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: d3e947d61fba8c6adde2707d3baa6ae36b989d5b
+    rev: 9dd648a2cbce0c0ce09255695b63ea4823699bec
     hooks:
     -   id: tidy-gitignore
 -   repo: local

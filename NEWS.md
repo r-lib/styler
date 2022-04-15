@@ -12,6 +12,10 @@
 * If there are only empty lines in a code chunk, they are all removed (#936).
 * `{` is not put on a new line after `=` and in `function() {` for some edge
   cases (#939).
+* Parsing of {roxygen2} example comments now also works for edge cases when 
+  there is no literal code immediately following after the end of the example
+  section (#940).
+
 
 # styler 1.7.0
 

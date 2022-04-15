@@ -11,7 +11,10 @@ identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
   if (length(starts) < 1L) {
     return(integer())
   }
-  stop_candidates <- grep("(^[^#]|^#'[\\s\t]*@)", text, perl = TRUE)
+  stop_candidates <- which(or(
+    grepl("(^[^#]|^#'[\\s\t]*@)", text, perl = TRUE),
+    grepl("^ *\t*$", text) & grepl("^#' *", lead(text))
+  ))
   stops <- map(starts, match_stop_to_start, stop_candidates) %>%
     flatten_int()
   if (length(stops) < 1L) {

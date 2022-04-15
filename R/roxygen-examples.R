@@ -9,7 +9,7 @@
 #' @importFrom purrr map flatten_chr
 #' @keywords internal
 style_roxygen_code_example <- function(example, transformers, base_indention) {
-  example <- split(example, cumsum(grepl("^#' *@examples", example))) # TODO can this handle @examples 1
+  example <- split(example, cumsum(grepl("^#' *@examples", example)))
   purrr::map(
     example, style_roxygen_code_example_one,
     transformers = transformers, base_indention = base_indention
