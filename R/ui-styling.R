@@ -311,14 +311,15 @@ prettify_any <- function(transformers,
   )
 }
 
-#' Style `.R`, `.Rmd`, `.Rmarkdown`, `.qmd` or `.Rnw` files
+#' Style files with R source code
 #'
 #' Performs various substitutions in the files specified.
 #' Carefully examine the results after running this function!
 #' @section Encoding:
 #' UTF-8 encoding is assumed. Please convert your code to UTF-8 if necessary
 #' before applying styler.
-#' @param path A character vector with paths to files to style.
+#' @param path A character vector with paths to files to style. Supported
+#'   extensions: `.R`, `.Rmd`, `.Rmarkdown`, `.qmd` and `.Rnw`.
 #' @inheritParams style_pkg
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning

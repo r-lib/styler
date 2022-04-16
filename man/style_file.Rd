@@ -2,7 +2,7 @@
 % Please edit documentation in R/ui-styling.R
 \name{style_file}
 \alias{style_file}
-\title{Style \code{.R}, \code{.Rmd}, \code{.Rmarkdown}, \code{.qmd} or \code{.Rnw} files}
+\title{Style files with R source code}
 \usage{
 style_file(
   path,
@@ -15,7 +15,8 @@ style_file(
 )
 }
 \arguments{
-\item{path}{A character vector with paths to files to style.}
+\item{path}{A character vector with paths to files to style. Supported
+extensions: \code{.R}, \code{.Rmd}, \code{.Rmarkdown}, \code{.qmd} and \code{.Rnw}.}
 
 \item{...}{Arguments passed on to the \code{style} function.}
 
