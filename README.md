@@ -13,6 +13,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 coverage](https://app.codecov.io/gh/r-lib/styler/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/styler)
 [![CRAN
 Status](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
+
 <!-- badges: end -->
 
 # Overview
