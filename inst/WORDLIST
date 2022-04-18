@@ -215,6 +215,7 @@ sprintf
 stackoverflow
 StackOverflow
 startsWith
+staticimports
 STR
 styler
 stylerignore
@@ -262,6 +263,7 @@ VignetteBuilder
 Visit'em
 walthert
 Walthert
+wch
 winbuilder
 withr
 writeLines
