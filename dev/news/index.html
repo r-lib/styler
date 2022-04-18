@@ -113,11 +113,12 @@
 <code>filetype</code> <code>.qmd</code> is now supported, but not turned on by default (<a href="https://github.com/r-lib/styler/issues/931" class="external-link">#931</a>).</li>
 <li>new R option <code>styler.ignore_alignment</code> controls if alignment should be detected (and preserved) or not (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</li>
 </ul><p><strong>Bug Fixes</strong></p>
-<ul><li>the cache is also invalidated on changing the stylerignore markers (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</li>
-<li>If there are only empty lines in a code chunk, they are all removed (<a href="https://github.com/r-lib/styler/issues/936" class="external-link">#936</a>).</li>
-<li>
-<code>{</code> is not put on a new line after <code>=</code> and in <code>function() {</code> for some edge cases (<a href="https://github.com/r-lib/styler/issues/939" class="external-link">#939</a>).</li>
-<li>Parsing of {roxygen2} example comments now also works for edge cases when there is no literal code immediately following after the end of the example section (<a href="https://github.com/r-lib/styler/issues/940" class="external-link">#940</a>).</li>
+<ul><li><p>the cache is also invalidated on changing the stylerignore markers (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</p></li>
+<li><p>If there are only empty lines in a code chunk, they are all removed (<a href="https://github.com/r-lib/styler/issues/936" class="external-link">#936</a>).</p></li>
+<li><p><code>{</code> is not put on a new line after <code>=</code> and in <code>function() {</code> for some edge cases (<a href="https://github.com/r-lib/styler/issues/939" class="external-link">#939</a>).</p></li>
+<li><p>Parsing of {roxygen2} example comments now also works for edge cases when there is no literal code immediately following after the end of the example section (<a href="https://github.com/r-lib/styler/issues/940" class="external-link">#940</a>).</p></li>
+</ul><p><strong>Other</strong></p>
+<ul><li>All (R)md files are now formatted with default pandoc markdown formatter. This conversion is required when using the visual mode in RStudio (<a href="https://github.com/r-lib/styler/issues/941" class="external-link">#941</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.7.0" id="styler-170">styler 1.7.0<small>2022-03-13</small><a class="anchor" aria-label="anchor" href="#styler-170"></a></h2>
@@ -199,44 +200,44 @@
 <h3 id="alignment-detection-1-5-1">Alignment detection<a class="anchor" aria-label="anchor" href="#alignment-detection-1-5-1"></a></h3>
 <ul><li>
 <p>Code with left alignment after <code>=</code> in function calls is now recognized as aligned and won’t be reformatted (<a href="https://github.com/r-lib/styler/issues/774" class="external-link">#774</a>, <a href="https://github.com/r-lib/styler/issues/777" class="external-link">#777</a>).</p>
-<pre><code><span class="co"># already detected previously</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  x  <span class="op">=</span> <span class="fl">12345</span>,
-  y2 <span class="op">=</span>    <span class="fl">17</span>
-<span class="op">)</span>
-
-<span class="co"># newly detected</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  x  <span class="op">=</span> <span class="fl">12345</span>,
-  y2 <span class="op">=</span> <span class="fl">17</span>
-<span class="op">)</span></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># already detected previously</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">call</span>(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">x  =</span> <span class="dv">12345</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">y2 =</span>    <span class="dv">17</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># newly detected</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">call</span>(</span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="dt">x  =</span> <span class="dv">12345</span>,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="dt">y2 =</span> <span class="dv">17</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>)</span></code></pre></div>
 </li>
 <li>
 <p>Similarly, left aligned after comma is now detected (<a href="https://github.com/r-lib/styler/issues/785" class="external-link">#785</a>, <a href="https://github.com/r-lib/styler/issues/786" class="external-link">#786</a>).</p>
-<pre><code><span class="co"># previously detected</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  x  <span class="op">=</span> <span class="fl">12345</span>, <span class="st">"It's old"</span>,
-  y2 <span class="op">=</span> <span class="fl">17</span>,      <span class="st">"before"</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">x</span>,             <span class="op">~</span><span class="va">y</span>,
-  <span class="st">"another"</span>,     <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
-  <span class="st">"b"</span>,       <span class="fl">1211234</span>
-<span class="op">)</span>
-
-<span class="co"># newly detected</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fl">2</span>,           p <span class="op">=</span> <span class="st">"another"</span>,
-  y <span class="op">=</span> <span class="st">"hhjkjkbew"</span>, x <span class="op">=</span> <span class="fl">3</span>
-<span class="op">)</span>
-
-
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">x</span>,        <span class="op">~</span><span class="va">y</span>,
-  <span class="st">"another"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
-  <span class="st">"b"</span>,       <span class="fl">1211234</span>
-<span class="op">)</span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># previously detected</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">call</span>(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">x  =</span> <span class="dv">12345</span>, <span class="st">"It's old"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">y2 =</span> <span class="dv">17</span>,      <span class="st">"before"</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">tribble</span>(</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="op">~</span>x,             <span class="op">~</span>y,</span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="st">"another"</span>,     <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="st">"b"</span>,       <span class="dv">1211234</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>)</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># newly detected</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="kw">call</span>(</span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="dt">x =</span> <span class="dv">2</span>,           <span class="dt">p =</span> <span class="st">"another"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16"></a>  <span class="dt">y =</span> <span class="st">"hhjkjkbew"</span>, <span class="dt">x =</span> <span class="dv">3</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>)</span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="kw">tribble</span>(</span>
+<span id="cb3-21"><a href="#cb3-21"></a>  <span class="op">~</span>x,        <span class="op">~</span>y,</span>
+<span id="cb3-22"><a href="#cb3-22"></a>  <span class="st">"another"</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</span>
+<span id="cb3-23"><a href="#cb3-23"></a>  <span class="st">"b"</span>,       <span class="dv">1211234</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>)</span></code></pre></div>
 <p>Also see <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>.</p>
 </li>
 </ul></div>
@@ -254,7 +255,7 @@
 <li>In function calls, code after <code>= #\n</code> is indented correctly (<a href="https://github.com/r-lib/styler/issues/814" class="external-link">#814</a>).</li>
 <li>Multi-expressions containing multiple assignments no longer remove line breaks if they are not causing blank lines (<a href="https://github.com/r-lib/styler/issues/809" class="external-link">#809</a>).</li>
 <li>
-<code>exclude_dirs</code> in <code><a href="../reference/style_pkg.html">style_pkg()</a></code> is now properly respected if it is a sub-directory of a directory that is scheduled for styling (e.g.  <code>test/testthat/some/dir</code>) (<a href="https://github.com/r-lib/styler/issues/811" class="external-link">#811</a>).</li>
+<code>exclude_dirs</code> in <code><a href="../reference/style_pkg.html">style_pkg()</a></code> is now properly respected if it is a sub-directory of a directory that is scheduled for styling (e.g. <code>test/testthat/some/dir</code>) (<a href="https://github.com/r-lib/styler/issues/811" class="external-link">#811</a>).</li>
 <li>The user is not prompted anymore to confirm the creation of a permanent cache as R.cache &gt;= 0.15.0 uses a standard location in line with CRAN policies (<a href="https://github.com/r-lib/styler/issues/819" class="external-link">#819</a>).</li>
 <li>R code chunks in nested non-R chunks in R markdown don’t yield an error anymore when document is styled, chunks are still not styled (<a href="https://github.com/r-lib/styler/issues/788" class="external-link">#788</a>, <a href="https://github.com/r-lib/styler/issues/794" class="external-link">#794</a>).</li>
 <li>
@@ -296,7 +297,7 @@
 <div class="section level3">
 <h3 id="major-changes-1-4-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-1-4-0"></a></h3>
 <ul><li><p>styler is now distributed under the MIT license (<a href="https://github.com/r-lib/styler/issues/751" class="external-link">#751</a>).</p></li>
-<li><p>Documentation overhaul: New README, new “Get started” pkgdown page, new vignettes on <code>strict = FALSE</code>, <code>Adoption</code> renamed to <code>Third-party integrations</code> (<a href="https://github.com/r-lib/styler/issues/741" class="external-link">#741</a>), adding search to pkgdown (<a href="https://github.com/r-lib/styler/issues/623" class="external-link">#623</a>), group functions in pkgdown reference page (<a href="https://github.com/r-lib/styler/issues/625" class="external-link">#625</a>), minor other doc improvements (<a href="https://github.com/r-lib/styler/issues/643" class="external-link">#643</a>, <a href="https://github.com/r-lib/styler/issues/618" class="external-link">#618</a>, <a href="https://github.com/r-lib/styler/issues/614" class="external-link">#614</a>, <a href="https://github.com/r-lib/styler/issues/677" class="external-link">#677</a>, <a href="https://github.com/r-lib/styler/issues/651" class="external-link">#651</a>, <a href="https://github.com/r-lib/styler/issues/667" class="external-link">#667</a>, <a href="https://github.com/r-lib/styler/issues/672" class="external-link">#672</a>, <a href="https://github.com/r-lib/styler/issues/687" class="external-link">#687</a>, <a href="https://github.com/r-lib/styler/issues/752" class="external-link">#752</a>, <a href="https://github.com/r-lib/styler/issues/754" class="external-link">#754</a>).</p></li>
+<li><p>Documentation overhaul: New README, new “Get started” pkgdown page, new vignettes on <code>strict = FALSE</code>, <code>Adoption</code> renamed to <code>Third-party   integrations</code> (<a href="https://github.com/r-lib/styler/issues/741" class="external-link">#741</a>), adding search to pkgdown (<a href="https://github.com/r-lib/styler/issues/623" class="external-link">#623</a>), group functions in pkgdown reference page (<a href="https://github.com/r-lib/styler/issues/625" class="external-link">#625</a>), minor other doc improvements (<a href="https://github.com/r-lib/styler/issues/643" class="external-link">#643</a>, <a href="https://github.com/r-lib/styler/issues/618" class="external-link">#618</a>, <a href="https://github.com/r-lib/styler/issues/614" class="external-link">#614</a>, <a href="https://github.com/r-lib/styler/issues/677" class="external-link">#677</a>, <a href="https://github.com/r-lib/styler/issues/651" class="external-link">#651</a>, <a href="https://github.com/r-lib/styler/issues/667" class="external-link">#667</a>, <a href="https://github.com/r-lib/styler/issues/672" class="external-link">#672</a>, <a href="https://github.com/r-lib/styler/issues/687" class="external-link">#687</a>, <a href="https://github.com/r-lib/styler/issues/752" class="external-link">#752</a>, <a href="https://github.com/r-lib/styler/issues/754" class="external-link">#754</a>).</p></li>
 <li><p><code>@exampleIsf</code> roxygen tag for conditional examples is now supported (<a href="https://github.com/r-lib/styler/issues/743" class="external-link">#743</a>).</p></li>
 <li><p>blank lines in function calls and headers are now removed, for the former only when there are no comments before or after the blank line (<a href="https://github.com/r-lib/styler/issues/629" class="external-link">#629</a>, <a href="https://github.com/r-lib/styler/issues/630" class="external-link">#630</a>, <a href="https://github.com/r-lib/styler/issues/635" class="external-link">#635</a>, <a href="https://github.com/r-lib/styler/issues/723" class="external-link">#723</a>).</p></li>
 <li><p>speed improvements: 15% faster on new code, 70% on repeated styling of compliant code (The latter is not so relevant because it was almost instantaneous already). Most relevant contributions were <a href="https://github.com/r-lib/styler/issues/679" class="external-link">#679</a>, <a href="https://github.com/r-lib/styler/issues/691" class="external-link">#691</a>, <a href="https://github.com/r-lib/styler/issues/681" class="external-link">#681</a>, <a href="https://github.com/r-lib/styler/issues/711" class="external-link">#711</a>, <a href="https://github.com/r-lib/styler/issues/739" class="external-link">#739</a>.</p></li>
@@ -342,13 +343,13 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.1" id="styler-131">styler 1.3.1<small>2020-02-13</small><a class="anchor" aria-label="anchor" href="#styler-131"></a></h2>
 <p>Emergency release. In case multiple expressions are on one line and only some of them are cached, styler can remove code. To reach this state, some of the expressions must have been styled previously alone and the cache must be active. Example:</p>
-<pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/cache_activate.html">cache_activate</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Using cache 1.3.0 at ~/.Rcache/styler/1.3.0.</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"1"</span><span class="op">)</span>
-<span class="co">#&gt; 1</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"1 # comment"</span><span class="op">)</span>
-<span class="co">#&gt; # comment</span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">library</span>(styler)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">cache_activate</span>()</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Using cache 1.3.0 at ~/.Rcache/styler/1.3.0.</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">style_text</span>(<span class="st">"1"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; 1</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">style_text</span>(<span class="st">"1 # comment"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; # comment</span></span></code></pre></div>
 <p>This is obviously detrimental. We have added additional tests and fixed the problem (<a href="https://github.com/r-lib/styler/issues/593" class="external-link">#593</a>, <a href="https://github.com/r-lib/styler/issues/595" class="external-link">#595</a>), but we want repeat the warning from <code><a href="../reference/style_file.html">?style_file</a></code> that all style APIs apart from <code><a href="../reference/style_text.html">style_text()</a></code> overwrite code and that styler can only check the AST remains valid with <code>scope &lt; "tokens"</code>. So use this if you are conservative. Or deactivate the cache with <code>deactivate_cache()</code> until it has fully matured.</p>
 <p>We thank the people who have contributed to this release:</p>
 <p><a href="https://github.com/ellessenne" class="external-link">@ellessenne</a> and <a href="https://github.com/renkun-ken" class="external-link">@renkun-ken</a>.</p>
@@ -432,7 +433,7 @@
 <p>Since it’s never been mentioned in the release notes, we also mention here where else you can use styler functionality:</p>
 <ul><li><p><code>usethis::use_tidy_style()</code> styles your project according to the tidyverse style guide.</p></li>
 <li><p><code>reprex::reprex(style = TRUE)</code> to prettify reprex code before printing. To permanently use <code>style = TRUE</code> without specifying it every time, you can add the following line to your <code>.Rprofile</code> (via <code>usethis::edit_r_profile()</code>): <code>options(reprex.styler = TRUE)</code>.</p></li>
-<li><p>you can pretty-print your R code in RMarkdown reports without having styler modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g. <code>```{r name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy = "styler")</code> at the top of your RMarkdown script.</p></li>
+<li><p>you can pretty-print your R code in RMarkdown reports without having styler modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g. <code>```{r   name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy =   "styler")</code> at the top of your RMarkdown script.</p></li>
 <li><p>pretty-printing of <a href="https://github.com/ropensci/drake" class="external-link">drake</a> workflow data frames with <code>drake::drake_plan_source()</code>.</p></li>
 <li><p>Adding styler as a fixer to the <a href="https://github.com/dense-analysis/ale/pull/2401" class="external-link">ale Plug-in</a> for VIM.</p></li>
 </ul><p>Thanks to all contributors involved, in particular <a href="https://github.com/ArthurPERE" class="external-link">@ArthurPERE</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>, <a href="https://github.com/igordot" class="external-link">@igordot</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/jackwasey" class="external-link">@jackwasey</a>, <a href="https://github.com/jcrodriguez1989" class="external-link">@jcrodriguez1989</a>, <a href="https://github.com/jennybc" class="external-link">@jennybc</a>, <a href="https://github.com/jonmcalder" class="external-link">@jonmcalder</a>, <a href="https://github.com/katrinleinweber" class="external-link">@katrinleinweber</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/michaelquinn32" class="external-link">@michaelquinn32</a>, <a href="https://github.com/msberends" class="external-link">@msberends</a>, <a href="https://github.com/raynamharris" class="external-link">@raynamharris</a>, <a href="https://github.com/riccardoporreca" class="external-link">@riccardoporreca</a>, <a href="https://github.com/rjake" class="external-link">@rjake</a>, <a href="https://github.com/Robinlovelace" class="external-link">@Robinlovelace</a>, <a href="https://github.com/skirmer" class="external-link">@skirmer</a>, <a href="https://github.com/thalesmello" class="external-link">@thalesmello</a>, <a href="https://github.com/tobiasgerstenberg" class="external-link">@tobiasgerstenberg</a>, <a href="https://github.com/tvatter" class="external-link">@tvatter</a>, <a href="https://github.com/wdearden" class="external-link">@wdearden</a>, <a href="https://github.com/wmayner" class="external-link">@wmayner</a>, and <a href="https://github.com/yech1990" class="external-link">@yech1990</a>.</p>
@@ -505,64 +506,64 @@
 <div class="section level3">
 <h3 id="stylers-1-0-0">stylers<a class="anchor" aria-label="anchor" href="#stylers-1-0-0"></a></h3>
 <p>These are functions used to style code. They style a directory, a whole package, a file or a string.</p>
-<pre><code><span class="fu"><a href="../reference/style_dir.html">style_dir</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span>, 
-  <span class="va">...</span>, style <span class="op">=</span> <span class="va">tidyverse_style</span>, transformers <span class="op">=</span> <span class="fu">style</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>, 
-  filetype <span class="op">=</span> <span class="st">"R"</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span>, exclude_files <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="../reference/style_pkg.html">style_pkg</a></span><span class="op">(</span>pkg <span class="op">=</span> <span class="st">"."</span>, 
-  <span class="va">...</span>, style <span class="op">=</span> <span class="va">tidyverse_style</span>, transformers <span class="op">=</span> <span class="fu">style</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>, filetype <span class="op">=</span> <span class="st">"R"</span>, 
-  exclude_files <span class="op">=</span> <span class="st">"R/RcppExports.R"</span>
-<span class="op">)</span>
-
-
-<span class="fu"><a href="../reference/style_file.html">style_file</a></span><span class="op">(</span><span class="va">path</span>, 
-  <span class="va">...</span>, style <span class="op">=</span> <span class="va">tidyverse_style</span>, transformers <span class="op">=</span> <span class="fu">style</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="va">text</span>, <span class="va">...</span>, style <span class="op">=</span> <span class="va">tidyverse_style</span>, transformers <span class="op">=</span> <span class="fu">style</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">)</span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">style_dir</span>(<span class="dt">path =</span> <span class="st">"."</span>, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  ..., <span class="dt">style =</span> tidyverse_style, <span class="dt">transformers =</span> <span class="kw">style</span>(...), </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dt">filetype =</span> <span class="st">"R"</span>, <span class="dt">recursive =</span> <span class="ot">TRUE</span>, <span class="dt">exclude_files =</span> <span class="ot">NULL</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">style_pkg</span>(<span class="dt">pkg =</span> <span class="st">"."</span>, </span>
+<span id="cb5-7"><a href="#cb5-7"></a>  ..., <span class="dt">style =</span> tidyverse_style, <span class="dt">transformers =</span> <span class="kw">style</span>(...), <span class="dt">filetype =</span> <span class="st">"R"</span>, </span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="dt">exclude_files =</span> <span class="st">"R/RcppExports.R"</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="kw">style_file</span>(path, </span>
+<span id="cb5-13"><a href="#cb5-13"></a>  ..., <span class="dt">style =</span> tidyverse_style, <span class="dt">transformers =</span> <span class="kw">style</span>(...)</span>
+<span id="cb5-14"><a href="#cb5-14"></a>)</span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="kw">style_text</span>(text, ..., <span class="dt">style =</span> tidyverse_style, <span class="dt">transformers =</span> <span class="kw">style</span>(...))</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="style-guides-1-0-0">style guides<a class="anchor" aria-label="anchor" href="#style-guides-1-0-0"></a></h3>
 <p>These functions are the style guides implemented.</p>
-<pre><code>tidyverse_style(
-  scope = "tokens", 
-  strict = TRUE, 
-  indent_by = 2, 
-  start_comments_with_one_space = FALSE, 
-  reindention = tidyverse_reindention(), 
-  math_token_spacing = tidyverse_math_token_spacing()
-)
-tidyverse_reindention()
-tidyverse_math_token_spacing())</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">tidyverse_style</span>(</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="dt">scope =</span> <span class="st">"tokens"</span>, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="dt">strict =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="dt">indent_by =</span> <span class="dv">2</span>, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="dt">start_comments_with_one_space =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="dt">reindention =</span> <span class="kw">tidyverse_reindention</span>(), </span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="dt">math_token_spacing =</span> <span class="kw">tidyverse_math_token_spacing</span>()</span>
+<span id="cb6-8"><a href="#cb6-8"></a>)</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">tidyverse_reindention</span>()</span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="kw">tidyverse_math_token_spacing</span>()<span class="er">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="style-guide-creators-1-0-0">style guide creators<a class="anchor" aria-label="anchor" href="#style-guide-creators-1-0-0"></a></h3>
 <p>This function is used to create a style guide.</p>
-<pre><code><span class="fu"><a href="../reference/create_style_guide.html">create_style_guide</a></span><span class="op">(</span>
-  initialize <span class="op">=</span> <span class="va">default_style_guide_attributes</span>, 
-  line_break <span class="op">=</span> <span class="cn">NULL</span>, 
-  space <span class="op">=</span> <span class="cn">NULL</span>, 
-  token <span class="op">=</span> <span class="cn">NULL</span>, 
-  indention <span class="op">=</span> <span class="cn">NULL</span>, 
-  use_raw_indention <span class="op">=</span> <span class="cn">FALSE</span>, 
-  reindention <span class="op">=</span> <span class="fu"><a href="../reference/reindention.html">tidyverse_reindention</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">create_style_guide</span>(</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="dt">initialize =</span> default_style_guide_attributes, </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="dt">line_break =</span> <span class="ot">NULL</span>, </span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="dt">space =</span> <span class="ot">NULL</span>, </span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="dt">token =</span> <span class="ot">NULL</span>, </span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="dt">indention =</span> <span class="ot">NULL</span>, </span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="dt">use_raw_indention =</span> <span class="ot">FALSE</span>, </span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="dt">reindention =</span> <span class="kw">tidyverse_reindention</span>()</span>
+<span id="cb7-9"><a href="#cb7-9"></a>)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="helpers-1-0-0">Helpers<a class="anchor" aria-label="anchor" href="#helpers-1-0-0"></a></h3>
 <p>These are helper functions used to specify the style guides in use.</p>
-<pre><code><span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span><span class="op">(</span>
-  zero <span class="op">=</span> <span class="cn">NULL</span>, 
-  one <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"'+'"</span>, <span class="st">"'-'"</span>, <span class="st">"'*'"</span>, <span class="st">"'/'"</span>, <span class="st">"'^'"</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span><span class="op">(</span>
-  regex_pattern <span class="op">=</span> <span class="cn">NULL</span>, 
-  indention <span class="op">=</span> <span class="fl">0</span>, 
-  comments_only <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="fu">initialize_default_attributes</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">specify_math_token_spacing</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">zero =</span> <span class="ot">NULL</span>, </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="dt">one =</span> <span class="kw">c</span>(<span class="st">"'+'"</span>, <span class="st">"'-'"</span>, <span class="st">"'*'"</span>, <span class="st">"'/'"</span>, <span class="st">"'^'"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">specify_reindention</span>(</span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="dt">regex_pattern =</span> <span class="ot">NULL</span>, </span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="dt">indention =</span> <span class="dv">0</span>, </span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="dt">comments_only =</span> <span class="ot">TRUE</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>)</span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="kw">initialize_default_attributes</span>(pd_flat)</span></code></pre></div>
 </div>
 </div>
   </div>
