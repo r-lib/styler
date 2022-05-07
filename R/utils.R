@@ -94,7 +94,11 @@ rev_read <- function(path = ".pre-commit-config.yaml", repo = hooks_repo) {
   config <- yaml::read_yaml(path)
   idx <- purrr::map_chr(config$repos, ~ .x$repo) %>%
     grep(repo, ., fixed = TRUE)
-  config$repos[[idx]]$rev
+  if (length(idx) < 1) {
+    return(NA)
+  } else {
+    config$repos[[idx]]$rev
+  }
 }
 
 rev_as_pkg_version <- function(rev) {
