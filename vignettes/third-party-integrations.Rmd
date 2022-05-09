@@ -22,7 +22,7 @@ styler functionality is available in other tools, most notably
 
 -   through commenting a PR on GitHub with `\style` when the [GitHub Action](https://github.com/features/actions) [*Tidyverse CI*](https://github.com/r-lib/actions/tree/master/examples#tidyverse-ci-workflow) is used. The most convenient way to set this up is via [`usethis::use_tidy_github_actions()`](https://usethis.r-lib.org/reference/tidyverse.html).
 
--   through the [GitHub Action Workflow](https://github.com/r-lib/actions/tree/v2-branch/examples#style-package) that triggers `styler::style_pkg()` on changes in source files.
+-   through the [GitHub Action Workflow](https://github.com/r-lib/actions/tree/v2-branch/examples#style-package) that triggers `styler::style_pkg()` on changes in source files. Setting this up is easiest with `usethis::use_github_action("style")`.
 
 -   as a formatter for R Markdown without modifying the source. This feature is implemented as a code chunk option in knitr. use `tidy = "styler"` in the header of a code chunks (e.g.```` ```{r name-of-the-chunk, tidy = "styler"} ````), or `knitr::opts_chunk$set(tidy = "styler")` at the top of your RMarkdown script.
 
