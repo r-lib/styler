@@ -118,12 +118,10 @@
 <li><p><code>{</code> is not put on a new line after <code>=</code> and in <code>function() {</code> for some edge cases (<a href="https://github.com/r-lib/styler/issues/939" class="external-link">#939</a>).</p></li>
 <li><p>Parsing of {roxygen2} example comments now also works for edge cases when there is no literal code immediately following after the end of the example section (<a href="https://github.com/r-lib/styler/issues/940" class="external-link">#940</a>).</p></li>
 </ul><p><strong>Other</strong></p>
-<ul><li>All (R)md files are now formatted with default pandoc markdown formatter. This conversion is required when using the visual mode in RStudio (<a href="https://github.com/r-lib/styler/issues/941" class="external-link">#941</a>).</li>
-</ul></div>
+<ul><li>All (R)md files are now formatted with default pandoc markdown formatter. This conversion is required when using the visual mode in RStudio (<a href="https://github.com/r-lib/styler/issues/941" class="external-link">#941</a>).</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.7.0" id="styler-170">styler 1.7.0<small>2022-03-13</small><a class="anchor" aria-label="anchor" href="#styler-170"></a></h2>
-<ul><li>if <code>else</code> follows directly after <code>if</code>, line breaks are removed (<a href="https://github.com/r-lib/styler/issues/935" class="external-link">#935</a>).</li>
-</ul><p><strong>API changes</strong></p>
+<ul><li>if <code>else</code> follows directly after <code>if</code>, line breaks are removed (<a href="https://github.com/r-lib/styler/issues/935" class="external-link">#935</a>).</li></ul><p><strong>API changes</strong></p>
 <ul><li><p>new R option <code>styler.cache_root</code> (defaulting to <code>"styler"</code>) that determines the sub-directory under the {R.cache} cache directory that {styler} uses. Non- default caches won’t be cleaned up by {styler}. We suggest <code>"styler-perm"</code> (also used by {precommit}).</p></li>
 <li>
 <p>stylerignore markers are now interpreted as regular expressions instead of comments that must match exactly. This allows to specify multiple markers in one regular expression for <code>styler.ignore_start</code> and <code>styler.ignore_stop</code>, e.g. to use markers for lintr and styler on the same line, you can use <code>options(styler.ignore_start = "nolint start|styler: off"</code>:</p>
@@ -179,8 +177,7 @@
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6.2" id="styler-162">styler 1.6.2<small>2021-09-23</small><a class="anchor" aria-label="anchor" href="#styler-162"></a></h2>
-<ul><li>clean up cache files older than one week (<a href="https://github.com/r-lib/styler/issues/842" class="external-link">#842</a>).</li>
-</ul></div>
+<ul><li>clean up cache files older than one week (<a href="https://github.com/r-lib/styler/issues/842" class="external-link">#842</a>).</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6.1" id="styler-161">styler 1.6.1<small>2021-09-17</small><a class="anchor" aria-label="anchor" href="#styler-161"></a></h2>
 <ul><li><p>Files with <code>.Rmarkdown</code> extension are now recognized as an R markdown files in <code><a href="../reference/style_file.html">style_file()</a></code> and friends (<a href="https://github.com/r-lib/styler/issues/824" class="external-link">#824</a>).</p></li>
@@ -292,8 +289,7 @@
 <li><p>added an option (<code>styler.test_dir_writeable</code>) that changes test behavior to not directly modify test files in the current directory (<a href="https://github.com/r-lib/styler/issues/548" class="external-link">#548</a>).</p></li>
 <li><p>New argument <code>transformers_drop</code> in <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> to be populated with new helper function <code><a href="../reference/specify_transformers_drop.html">specify_transformers_drop()</a></code> for specifying conditions under which transformers are not going to be used and can therefore be omitted without effecting the result of styling (<a href="https://github.com/r-lib/styler/issues/711" class="external-link">#711</a>).</p></li>
 </ul><p><strong>deprecated</strong></p>
-<ul><li>The environment variable <code>save_after_styling</code> is deprecated in favor of the R option <code>styler.save_after_styling</code> to control if a file is saved after styling with the RStudio Addin. Note than in RStudio &gt;= 1.3.0, you can auto-save edits in general (Code -&gt; Saving -&gt; Auto-Save), e.g. on idle editor or focus loss, so this feature becomes less relevant (<a href="https://github.com/r-lib/styler/issues/631" class="external-link">#631</a>, <a href="https://github.com/r-lib/styler/issues/726" class="external-link">#726</a>).</li>
-</ul></div>
+<ul><li>The environment variable <code>save_after_styling</code> is deprecated in favor of the R option <code>styler.save_after_styling</code> to control if a file is saved after styling with the RStudio Addin. Note than in RStudio &gt;= 1.3.0, you can auto-save edits in general (Code -&gt; Saving -&gt; Auto-Save), e.g. on idle editor or focus loss, so this feature becomes less relevant (<a href="https://github.com/r-lib/styler/issues/631" class="external-link">#631</a>, <a href="https://github.com/r-lib/styler/issues/726" class="external-link">#726</a>).</li></ul></div>
 <div class="section level3">
 <h3 id="major-changes-1-4-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-1-4-0"></a></h3>
 <ul><li><p>styler is now distributed under the MIT license (<a href="https://github.com/r-lib/styler/issues/751" class="external-link">#751</a>).</p></li>
@@ -403,8 +399,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="adaption-1-2-0">Adaption<a class="anchor" aria-label="anchor" href="#adaption-1-2-0"></a></h3>
-<ul><li>styler is now available through the pre-commit hook <code>style-files</code> in <a href="https://github.com/lorenzwalthert/pre-commit-hooks" class="external-link uri">https://github.com/lorenzwalthert/pre-commit-hooks</a>.</li>
-</ul><p>Thanks to all contributors involved, in particular</p>
+<ul><li>styler is now available through the pre-commit hook <code>style-files</code> in <a href="https://github.com/lorenzwalthert/pre-commit-hooks" class="external-link uri">https://github.com/lorenzwalthert/pre-commit-hooks</a>.</li></ul><p>Thanks to all contributors involved, in particular</p>
 <p><a href="https://github.com/Banana1530" class="external-link">@Banana1530</a>, <a href="https://github.com/batpigandme" class="external-link">@batpigandme</a>, <a href="https://github.com/cpsievert" class="external-link">@cpsievert</a>, <a href="https://github.com/ellessenne" class="external-link">@ellessenne</a>, <a href="https://github.com/Emiller88" class="external-link">@Emiller88</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/lwjohnst86" class="external-link">@lwjohnst86</a>, <a href="https://github.com/michaelquinn32" class="external-link">@michaelquinn32</a>, <a href="https://github.com/mine-cetinkaya-rundel" class="external-link">@mine-cetinkaya-rundel</a>, <a href="https://github.com/Moohan" class="external-link">@Moohan</a>, <a href="https://github.com/nxskok" class="external-link">@nxskok</a>, <a href="https://github.com/oliverbeagley" class="external-link">@oliverbeagley</a>, <a href="https://github.com/pat-s" class="external-link">@pat-s</a>, <a href="https://github.com/reddy-ia" class="external-link">@reddy-ia</a>, and <a href="https://github.com/russHyde" class="external-link">@russHyde</a></p>
 </div>
 </div>
@@ -580,7 +575,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

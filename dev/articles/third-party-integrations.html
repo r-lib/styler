@@ -150,7 +150,7 @@
 <li><p>as a pre-commit hook <code>style-files</code> in <a href="https://github.com/lorenzwalthert/precommit" class="external-link uri">https://github.com/lorenzwalthert/precommit</a> to format before commit (locally) and enforced as a continuous integration step in the cloud through <a href="https://pre-commit.ci" class="external-link uri">https://pre-commit.ci</a>.</p></li>
 <li><p>via <code>usethis::use_tidy_style()</code> styles your project according to the tidyverse style guide.</p></li>
 <li><p>through commenting a PR on GitHub with <code>\style</code> when the <a href="https://github.com/features/actions" class="external-link">GitHub Action</a> <a href="https://github.com/r-lib/actions/tree/master/examples#tidyverse-ci-workflow" class="external-link"><em>Tidyverse CI</em></a> is used. The most convenient way to set this up is via <a href="https://usethis.r-lib.org/reference/tidyverse.html" class="external-link"><code>usethis::use_tidy_github_actions()</code></a>.</p></li>
-<li><p>through the <a href="https://github.com/r-lib/actions/tree/v2-branch/examples#style-package" class="external-link">GitHub Action Workflow</a> that triggers <code><a href="../reference/style_pkg.html">styler::style_pkg()</a></code> on changes in source files.</p></li>
+<li><p>through the <a href="https://github.com/r-lib/actions/tree/v2-branch/examples#style-package" class="external-link">GitHub Action Workflow</a> that triggers <code><a href="../reference/style_pkg.html">styler::style_pkg()</a></code> on changes in source files. Setting this up is easiest with <code>usethis::use_github_action("style")</code>.</p></li>
 <li><p>as a formatter for R Markdown without modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g.<code>```{r name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy = "styler")</code> at the top of your RMarkdown script.</p></li>
 <li><p>via the <a href="https://github.com/REditorSupport/languageserver" class="external-link">R language server</a> to format your code in VS Code, atom and others.</p></li>
 <li><p>As a fixer to the <a href="https://github.com/dense-analysis/ale/pull/2401" class="external-link">ale Plug-in</a> for VIM.</p></li>
@@ -177,7 +177,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
