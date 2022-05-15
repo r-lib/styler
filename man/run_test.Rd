@@ -8,12 +8,13 @@ run_test(
   hook_name,
   file_name = hook_name,
   suffix = ".R",
-  error_msg = NULL,
-  msg = NULL,
+  std_err = NULL,
+  std_out = NULL,
   cmd_args = NULL,
   artifacts = NULL,
   file_transformer = function(files) files,
-  env = character()
+  env = character(),
+  expect_success = is.null(std_err)
 )
 }
 \arguments{
@@ -26,10 +27,10 @@ to the temporary location and the value is the source of the file.}
 
 \item{suffix}{The suffix of \code{file_name}.}
 
-\item{error_msg}{An expected error message. If no error is expected, this
+\item{std_err}{An expected error message. If no error is expected, this
 can be \code{NULL}. In that case, the \code{comparator} is applied.}
 
-\item{msg}{The expected stdout message. If \code{NULL}, this check is omitted.}
+\item{std_out}{The expected stdout message. If \code{NULL}, this check is omitted.}
 
 \item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
 described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
@@ -50,6 +51,10 @@ is also applied to a temp copy of the reference file before a comparison is
 made.}
 
 \item{env}{The environment variables to set with \code{\link[base:system2]{base::system2()}}.}
+
+\item{expect_success}{Whether or not an exit code 0 is expected. This can
+be derived from \code{std_err}, but sometimes, non-empty stderr does not mean
+error, but just a message.}
 }
 \description{
 Tests for the executables used as pre-commit hooks via \code{entrypoint} in
@@ -62,11 +67,11 @@ level of the executable: Fail means the executable fails or the file is
 changed. Pass means the executable succeeds and the file is unchanged.
 We check if the executable passes as follows:
 \itemize{
-\item If we expect success (by setting \code{error_msg} to \code{NULL}), we make sure
+\item If we expect success (by setting \code{std_err} to \code{NULL}), we make sure
 nothing was written to sterr and the file content does not change.
 \item If we expect failure, it can be due to changed file or due to failed
-executable. To check for failed executable, we set \code{error_msg} to
-the message we expect. To check changed file content, we set \code{error_msg} to
+executable. To check for failed executable, we set \code{std_err} to
+the message we expect. To check changed file content, we set \code{std_err} to
 \code{NA}.
 }
 }

@@ -12,8 +12,8 @@ hook_state_assert(
   path_stdout,
   path_stderr,
   expect_success,
-  error_msg,
-  msg,
+  std_err,
+  std_out,
   exit_status
 )
 }
