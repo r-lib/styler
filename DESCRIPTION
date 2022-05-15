@@ -48,5 +48,5 @@ Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace", "collate",
     if (rlang::is_installed("pkgapi")) "pkgapi::api_roclet" else {
     warning("Please install r-lib/pkgapi to make sure the file API is kept
     up to date"); NULL} ) )
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 SystemRequirements: git
