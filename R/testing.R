@@ -9,12 +9,12 @@
 #' changed. Pass means the executable succeeds and the file is unchanged.
 #' We check if the executable passes as follows:
 #'
-#' * If we expect success (by setting `error_msg` to `NULL`), we make sure
+#' * If we expect success (by setting `std_err` to `NULL`), we make sure
 #'   nothing was written to sterr and the file content does not change.
 #'
 #' * If we expect failure, it can be due to changed file or due to failed
-#'   executable. To check for failed executable, we set `error_msg` to
-#'   the message we expect. To check changed file content, we set `error_msg` to
+#'   executable. To check for failed executable, we set `std_err` to
+#'   the message we expect. To check changed file content, we set `std_err` to
 #'   `NA`.
 #'
 #' @param hook_name The name of the hook in `inst/hooks/exported/`, without
@@ -37,12 +37,13 @@
 run_test <- function(hook_name,
                      file_name = hook_name,
                      suffix = ".R",
-                     error_msg = NULL,
-                     msg = NULL,
+                     std_err = NULL,
+                     std_out = NULL,
                      cmd_args = NULL,
                      artifacts = NULL,
                      file_transformer = function(files) files,
-                     env = character()) {
+                     env = character(),
+                     expect_success = is.null(std_err)) {
   withr::local_envvar(list(R_PRECOMMIT_HOOK_ENV = "1"))
   path_executable <- fs::dir_ls(system.file(
     fs::path("hooks", "exported"),
@@ -55,12 +56,13 @@ run_test <- function(hook_name,
     ensure_named(names(file_name), fs::path_file)
   run_test_impl(
     path_executable, path_candidate,
-    error_msg = error_msg,
-    msg = msg,
+    std_err = std_err,
+    std_out = std_out,
     cmd_args = cmd_args,
     artifacts = ensure_named(artifacts),
     file_transformer = file_transformer,
-    env = env
+    env = env,
+    expect_success = expect_success
   )
 }
 
@@ -73,22 +75,25 @@ run_test <- function(hook_name,
 #'   the test is run. If you don't target the root, this can be a named vector
 #'   of length one where the name is the target location relative to the
 #'   temporary location and the value is the source of the file.
-#' @param error_msg An expected error message. If no error is expected, this
+#' @param std_err An expected error message. If no error is expected, this
 #'   can be `NULL`. In that case, the `comparator` is applied.
-#' @param msg The expected stdout message. If `NULL`, this check is omitted.
+#' @param std_out The expected stdout message. If `NULL`, this check is omitted.
 #' @param cmd_args More arguments passed to the file. Pre-commit handles it as
 #'   described [here](https://pre-commit.com/#arguments-pattern-in-hooks).
 #' @param env The environment variables to set with [base::system2()].
+#' @param expect_success Whether or not an exit code 0 is expected. This can
+#'   be derived from `std_err`, but sometimes, non-empty stderr does not mean
+#'   error, but just a message.
 #' @keywords internal
 run_test_impl <- function(path_executable,
                           path_candidate,
-                          error_msg,
-                          msg,
+                          std_err,
+                          std_out,
                           cmd_args,
                           artifacts,
                           file_transformer,
-                          env) {
-  expect_success <- is.null(error_msg)
+                          env,
+                          expect_success) {
   tempdir <- fs::dir_create(fs::file_temp())
   copy_artifacts(artifacts, tempdir)
   # if name set use this, otherwise put in root
@@ -118,8 +123,8 @@ run_test_impl <- function(path_executable,
     path_stdout,
     path_stderr,
     expect_success,
-    error_msg,
-    msg,
+    std_err,
+    std_out,
     exit_status
   )
 }
@@ -157,8 +162,8 @@ hook_state_assert <- function(path_candidate,
                               path_stdout,
                               path_stderr,
                               expect_success,
-                              error_msg,
-                              msg,
+                              std_err,
+                              std_out,
                               exit_status) {
   purrr::map2(path_candidate, path_candidate_temp,
     hook_state_assert_one,
@@ -167,8 +172,8 @@ hook_state_assert <- function(path_candidate,
     path_stdout = path_stdout,
     path_stderr = path_stderr,
     expect_success = expect_success,
-    error_msg = error_msg,
-    msg = msg,
+    std_err = std_err,
+    std_out = std_out,
     exit_status = exit_status
   )
 }
@@ -180,8 +185,8 @@ hook_state_assert_one <- function(path_candidate,
                                   path_stdout,
                                   path_stderr,
                                   expect_success,
-                                  error_msg,
-                                  msg,
+                                  std_err,
+                                  std_out,
                                   exit_status) {
   candidate <- readLines(path_candidate_temp)
   path_temp <- tempfile()
@@ -198,16 +203,16 @@ hook_state_assert_one <- function(path_candidate,
       testthat::fail("Expected: No error. Found:", contents)
     }
     testthat::expect_equivalent(candidate, reference)
-    if (!is.null(msg)) {
+    if (!is.null(std_out)) {
       contents <- readLines(path_stdout)
       testthat::expect_match(
-        paste(contents, collapse = "\n"), msg,
+        paste(contents, collapse = "\n"), std_out,
         fixed = TRUE
       )
     }
   } else if (!expect_success) {
     # either file changed or stderr
-    if (is.na(error_msg)) {
+    if (is.na(std_err)) {
       if (identical(candidate, reference)) {
         testthat::fail(paste0(
           path_candidate, " and ", path_candidate_temp,
@@ -217,13 +222,13 @@ hook_state_assert_one <- function(path_candidate,
     } else {
       contents <- readLines(path_stderr)
       testthat::expect_match(
-        paste(contents, collapse = "\n"), error_msg,
+        paste(contents, collapse = "\n"), std_err,
         fixed = TRUE
       )
-      if (!is.null(msg)) {
+      if (!is.null(std_out)) {
         contents <- readLines(path_stdout)
         testthat::expect_match(
-          paste(contents, collapse = "\n"), msg,
+          paste(contents, collapse = "\n"), std_out,
           fixed = TRUE
         )
       }

@@ -7,12 +7,13 @@
 run_test_impl(
   path_executable,
   path_candidate,
-  error_msg,
-  msg,
+  std_err,
+  std_out,
   cmd_args,
   artifacts,
   file_transformer,
-  env
+  env,
+  expect_success
 )
 }
 \arguments{
@@ -21,10 +22,10 @@ run_test_impl(
 \item{path_candidate}{The path to a file that should be modified by the
 executable.}
 
-\item{error_msg}{An expected error message. If no error is expected, this
+\item{std_err}{An expected error message. If no error is expected, this
 can be \code{NULL}. In that case, the \code{comparator} is applied.}
 
-\item{msg}{The expected stdout message. If \code{NULL}, this check is omitted.}
+\item{std_out}{The expected stdout message. If \code{NULL}, this check is omitted.}
 
 \item{cmd_args}{More arguments passed to the file. Pre-commit handles it as
 described \href{https://pre-commit.com/#arguments-pattern-in-hooks}{here}.}
@@ -35,6 +36,10 @@ of length one where the name is the target location relative to the
 temporary location and the value is the source of the file.}
 
 \item{env}{The environment variables to set with \code{\link[base:system2]{base::system2()}}.}
+
+\item{expect_success}{Whether or not an exit code 0 is expected. This can
+be derived from \code{std_err}, but sometimes, non-empty stderr does not mean
+error, but just a message.}
 }
 \description{
 Implement a test run
