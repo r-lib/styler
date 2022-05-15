@@ -349,7 +349,6 @@ run_test("roxygenize",
   file_name = c("R/roxygenize.R" = "roxygenize.R"),
   suffix = "",
   error_msg = "Please commit the new `.Rd` files",
-  msg = "Writing flie.Rd",
   artifacts = c(
     "DESCRIPTION" = test_path("in/DESCRIPTION-no-deps.dcf")
   ),
