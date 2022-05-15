@@ -92,9 +92,9 @@ test_that("roxygenize works in general", {
   writeLines(c("#' This is a title", "#'", "#' More", "#' @name test", "NULL"), "R/blur.R")
   # works
   mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
-  expect_output(
+  expect_message(
     roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
-    "test.R"
+    "test\\.Rd"
   )
 })
 
@@ -158,10 +158,15 @@ test_that("fails when there is invalid code", {
 test_that("warns if there is any other warning", {
   local_test_setup(git = FALSE, use_precommit = FALSE, package = TRUE)
   mockery::stub(roxygenize_with_cache, "diff_requires_run_roxygenize", TRUE)
-  writeLines(c("#' This is a title", "#'", "#' More", "NULL"), "R/blur.R")
+  writeLines(
+    c(
+      "#' This is a title", "#'", "#' More", "#", "NULL"
+    ),
+    "R/blur.R"
+  )
 
   expect_warning(
     roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
-    "Missing name"
+    "with @name"
   )
 })
