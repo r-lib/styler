@@ -14,9 +14,12 @@ editor_options:
 
 **Bug Fixes**
 
--   the cache is also invalidated on changing the stylerignore markers (#932).
+-   alignment is detected in `tibble::tribble()` (and similar) calls with more
+    than 3 columns when left aligned (#945).
 
 -   If there are only empty lines in a code chunk, they are all removed (#936).
+
+-   the cache is also invalidated on changing the stylerignore markers (#932).
 
 -   `{` is not put on a new line after `=` and in `function() {` for some edge
     cases (#939).
