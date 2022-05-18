@@ -113,8 +113,9 @@
 <code>filetype</code> <code>.qmd</code> is now supported, but not turned on by default (<a href="https://github.com/r-lib/styler/issues/931" class="external-link">#931</a>).</li>
 <li>new R option <code>styler.ignore_alignment</code> controls if alignment should be detected (and preserved) or not (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</li>
 </ul><p><strong>Bug Fixes</strong></p>
-<ul><li><p>the cache is also invalidated on changing the stylerignore markers (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</p></li>
+<ul><li><p>alignment is detected in <code><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tibble::tribble()</a></code> (and similar) calls with more than 3 columns when left aligned (<a href="https://github.com/r-lib/styler/issues/945" class="external-link">#945</a>).</p></li>
 <li><p>If there are only empty lines in a code chunk, they are all removed (<a href="https://github.com/r-lib/styler/issues/936" class="external-link">#936</a>).</p></li>
+<li><p>the cache is also invalidated on changing the stylerignore markers (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</p></li>
 <li><p><code>{</code> is not put on a new line after <code>=</code> and in <code>function() {</code> for some edge cases (<a href="https://github.com/r-lib/styler/issues/939" class="external-link">#939</a>).</p></li>
 <li><p>Parsing of {roxygen2} example comments now also works for edge cases when there is no literal code immediately following after the end of the example section (<a href="https://github.com/r-lib/styler/issues/940" class="external-link">#940</a>).</p></li>
 </ul><p><strong>Other</strong></p>
