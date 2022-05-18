@@ -43,13 +43,25 @@ release_gh <- function(bump = "dev", is_cran = bump != "dev") {
   purrr::walk(path_template_config, update_rev_in_config,
     new_version = new_version
   )
+  last_release <- call_and_capture("git", "tag -l --sort=-taggerdate")$stdout[1]
+
   cli::cli_alert_success("Updated version in default config.")
-  msg <- glue::glue("Release {new_version}, see NEWS.md for details.")
-  sys_call("git", glue::glue('commit DESCRIPTION {paste0(path_template_config, collapse = " ")} -m "{msg}"'),
+  msg1 <- glue::glue("Release {new_version}, see NEWS.md for details.")
+  msg2 <- glue::glue(
+    "Diff to previous release: ",
+    "https://github.com/lorenzwalthert/precommit/compare/",
+    "{last_release}...{new_version}"
+  )
+  sys_call(
+    "git",
+    glue::glue(
+      'commit DESCRIPTION {paste0(path_template_config, collapse = " ")} ',
+      '-m "{msg1}" -m "{msg2}"'
+    ),
     env = "SKIP=spell-check,consistent-release-tag"
   )
   cli::cli_alert_success("Committed DESCRIPTION and config template")
-  sys_call("git", glue::glue('tag -a {new_version} -m "{msg}"'))
+  sys_call("git", glue::glue('tag -a {new_version} -m "{msg1}" -m "{msg2}"'))
   sys_call("./inst/hooks/local/consistent-release-tag.R", "--release-mode")
   cli::cli_alert_success("Tagged last commit with release version.")
   if (!is_cran) {
