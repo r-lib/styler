@@ -9,7 +9,7 @@
   `snippet_generate("additional-deps-roxygenize")` (#358).
 * `roxygenize` hook now fails if it generates an `.Rd` file that is not tracked
   with version control (#363).
-* Ensure compatibility with {renv} (#359, #375).
+* Ensure compatibility with {renv} (#359, #375, #400).
 * updating hook tag.
 * `deps-in-desc` and `parsable-R` can now handle code chunk headers with 
   where `purl` or `eval` are not literals like `TRUE`, but variables defined

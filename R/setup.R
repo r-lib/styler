@@ -149,6 +149,7 @@ use_ci <- function(ci = getOption("precommit.ci", "native"),
 autoupdate <- function(root = here::here()) {
   withr::with_dir(root, {
     assert_correct_upstream_repo_url()
+    ensure_renv_precommit_compat(root = root)
     out <- call_precommit("autoupdate")
     if (out$exit_status == 0) {
       cli::cli_alert_success(paste0(
@@ -160,61 +161,60 @@ autoupdate <- function(root = here::here()) {
         preamble = "Running precommit autoupdate failed."
       )
     }
-    is_precommit <- suppressWarnings(rlang::with_handlers(
-      unname(read.dcf("DESCRIPTION")[, "Package"]) == "precommit",
-      error = function(e) FALSE
-    ))
-    if (is_precommit) {
-      message(paste0(
-        "`autoupdate()` ran in {precommit} package directory, skipping ",
-        "`ensure_renv_precommit_compat()`"
-      ))
-    } else {
-      ensure_renv_precommit_compat(root = root)
-    }
     invisible(out$exit_status)
   })
 }
 
 ensure_renv_precommit_compat <- function(package_version_renv = utils::packageVersion("renv"),
                                          root = here::here()) {
-  withr::local_dir(root)
-  path_config <- ".pre-commit-config.yaml"
-  config_lines <- readLines(path_config, encoding = "UTF-8")
-  has_renv <- fs::file_exists("renv.lock")
-  if (!has_renv) {
-    return()
-  }
+  is_precommit <- suppressWarnings(rlang::with_handlers(
+    unname(read.dcf("DESCRIPTION")[, "Package"]) == "precommit",
+    error = function(e) FALSE
+  ))
+  if (is_precommit) {
+    message(paste0(
+      "`autoupdate()` ran in {precommit} package directory, skipping ",
+      "`ensure_renv_precommit_compat()`"
+    ))
+  } else {
+    withr::local_dir(root)
+    path_config <- ".pre-commit-config.yaml"
+    config_lines <- readLines(path_config, encoding = "UTF-8")
+    has_renv <- fs::file_exists("renv.lock")
+    if (!has_renv) {
+      return()
+    }
 
-  rev <- rev_read(path_config)
-  rlang::with_handlers(
-    {
-      rev <- rev_as_pkg_version(rev)
-      maximal_rev <- package_version("0.1.3.9014")
-      if (rev > maximal_rev &&
-        package_version_renv < "0.14.0-148" &&
-        package_version(version_precommit()) <= "2.16.0"
-      ) {
-        rlang::warn(paste0(
-          "It seems like you want to use {renv} and {precommit} in the same ",
-          "repo. This is not well supported for users of RStudio with ",
-          "`pre-commit <= 2.16.0`, `renv < 0.14.0-148` and ",
-          "`precommit > 0.1.3.9014` at the moment (details: ",
-          "https://github.com/lorenzwalthert/precommit/issues/342). ",
-          "Autoupdate aborted and `rev:` in `.pre-commit-config.yaml` set to ",
-          "a version compatible with {renv}."
-        ))
-        config_lines <- gsub(
-          paste0("^ *rev *: *", "v", as.character(rev)),
-          "    rev: v0.1.3.9014",
-          config_lines
-        )
-        withr::local_options(encoding = "native.enc")
-        writeLines(enc2utf8(config_lines), path_config, useBytes = TRUE)
-      }
-    },
-    error = function(e) NULL
-  )
+    rev <- rev_read(path_config)
+    should_fail <- rlang::with_handlers(
+      {
+        rev <- rev_as_pkg_version(rev)
+        maximal_rev <- package_version("0.1.3.9014")
+        if (rev > maximal_rev &&
+          package_version_renv < "0.14.0-148" &&
+          package_version(version_precommit()) <= "2.16.0"
+        ) {
+          TRUE
+        } else {
+          FALSE
+        }
+      },
+      error = function(e) FALSE
+    )
+    if (should_fail) {
+      rlang::abort(paste0(
+        "It seems like you want to use {renv} and {precommit} in the same ",
+        "repo. This is not well supported for users of RStudio with ",
+        "`pre-commit <= 2.16.0`, `renv < 0.14.0-148` and ",
+        "`precommit > 0.1.3.9014` at the moment (details: ",
+        "https://github.com/lorenzwalthert/precommit/issues/342).\n\n",
+        "Please update update the R package {renv}, the upstream framework ",
+        "pre-commit (instructions at ",
+        "https://lorenzwalthert.github.io/precommit/dev/articles/precommit.html#update)",
+        "the R package {precommit} and try again `precommit::autoupdate()`"
+      ))
+    }
+  }
 }
 
 

@@ -99,15 +99,15 @@ test_that("Autoupdate is not conducted when renv present in incompatible setup",
   writeLines("", "renv.lock")
 
   # should downgrade rev
-  expect_warning(
+  expect_error(
     ensure_renv_precommit_compat(
       package_version_renv = package_version("0.13.0"), root = getwd()
     ),
-    "Autoupdate aborted"
+    "Please update"
   )
   downgraded <- rev_read() %>%
     rev_as_pkg_version()
-  expect_true(downgraded < initial)
+  expect_true(downgraded == initial)
 
   # simulate removing {renv} should be updated
   fs::file_delete("renv.lock")
