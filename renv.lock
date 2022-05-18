@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.0",
+    "Version": "4.0.5",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -67,6 +67,14 @@
       "Hash": "32e79b908fda56ee57fe518a8d37b864",
       "Requirements": []
     },
+    "backports": {
+      "Package": "backports",
+      "Version": "1.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c39fbec8a30d23e721980b8afb31984c",
+      "Requirements": []
+    },
     "brew": {
       "Package": "brew",
       "Version": "1.0-7",
@@ -88,10 +96,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.2.0",
+      "Version": "3.3.0",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "1bdb126893e9ce6aae50ad1d6fc32faf",
+      "Hash": "23abf173c2b783dcc43379ab9bba00ee",
       "Requirements": [
         "glue"
       ]
@@ -261,10 +269,10 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.38",
+      "Version": "1.39",
       "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "10b3dc3c6acb925910edda5d0543b3a2",
+      "Repository": "CRAN",
+      "Hash": "029ab7c4badd3cf8af69016b2ba27493",
       "Requirements": [
         "evaluate",
         "highr",
@@ -300,10 +308,11 @@
       "RemoteUsername": "jimhester",
       "RemoteRepo": "lintr",
       "RemoteRef": "HEAD",
-      "RemoteSha": "f1643b7430a769947a862c4cd37d0e930bd32f50",
+      "RemoteSha": "1ae01287f9c97536e097715beb08e88a25632067",
       "RemoteHost": "api.github.com",
-      "Hash": "f6d145857522ca89bfd8e3ca87139b60",
+      "Hash": "4d0a806974012edb045272ac3fcf9e72",
       "Requirements": [
+        "backports",
         "codetools",
         "crayon",
         "cyclocomp",
@@ -379,10 +388,10 @@
     },
     "ps": {
       "Package": "ps",
-      "Version": "1.6.0",
+      "Version": "1.7.0",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "32620e2001c1dce1af49c49dccbb9420",
+      "Repository": "RSPM",
+      "Hash": "eef74b13f32cae6bb0d495e53317c44c",
       "Requirements": []
     },
     "purrr": {
@@ -434,13 +443,14 @@
     },
     "roxygen2": {
       "Package": "roxygen2",
-      "Version": "7.1.2",
+      "Version": "7.2.0",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "eb9849556c4250305106e82edae35b72",
+      "Repository": "RSPM",
+      "Hash": "b390c1d54fcd977cda48588e6172daba",
       "Requirements": [
         "R6",
         "brew",
+        "cli",
         "commonmark",
         "cpp11",
         "desc",
@@ -451,6 +461,7 @@
         "rlang",
         "stringi",
         "stringr",
+        "withr",
         "xml2"
       ]
     },
@@ -511,9 +522,9 @@
       "RemoteUsername": "r-lib",
       "RemoteRepo": "styler",
       "RemoteRef": "HEAD",
-      "RemoteSha": "ee4731481490616631a25ffd0b0c82f63804cd87",
+      "RemoteSha": "459a03f8221b647b37f8ebd3b848058ce37c647f",
       "RemoteHost": "api.github.com",
-      "Hash": "c4c1c243a8668365dd436be9139636b6",
+      "Hash": "f6fdd7fe24cd5e4e1471de6835ee2155",
       "Requirements": [
         "R.cache",
         "cli",
@@ -528,10 +539,10 @@
     },
     "tibble": {
       "Package": "tibble",
-      "Version": "3.1.6",
+      "Version": "3.1.7",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8a8f02d1934dfd6431c671361510dd0b",
+      "Hash": "08415af406e3dd75049afef9552e7355",
       "Requirements": [
         "ellipsis",
         "fansi",
@@ -553,10 +564,10 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.4.0",
+      "Version": "0.4.1",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "95c2573b232eac82df562f9e300f9790",
+      "Hash": "8b54f22e2a58c4f275479c92ce041a57",
       "Requirements": [
         "cli",
         "glue",
@@ -573,10 +584,10 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.30",
+      "Version": "0.31",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "e83f48136b041845e50a6658feffb197",
+      "Hash": "a318c6f752b8dcfe9fb74d897418ab2b",
       "Requirements": []
     },
     "xml2": {
