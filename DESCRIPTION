@@ -1,6 +1,6 @@
 Package: precommit
 Title: Pre-Commit Hooks
-Version: 0.2.2.9016
+Version: 0.2.2.9017
 Author: Lorenz Walthert
 Maintainer: Lorenz Walthert <lorenz.walthert@icloud.com>
 Description: Useful git hooks for R building on top of the multi-language
