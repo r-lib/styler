@@ -116,6 +116,7 @@ token_is_on_aligned_line <- function(pd_flat) {
 
     # first col has no leading ,
     current_col <- nchar(by_line) - as.integer(column > 1)
+    # Problem `by_line` counting from comma before column 3, previous_line counting 1 space before ~
     if (column > 1) {
       previous_line <- previous_line[
         intersect(names(previous_line), names(by_line))
@@ -126,7 +127,7 @@ token_is_on_aligned_line <- function(pd_flat) {
 
     is_aligned <- length(unique(current_col)) == 1L
     if (!is_aligned || length(current_col) < 2) {
-      # check 2: left aligned after ,
+      # check 2: left aligned after , (comma to next token)
       current_col <- "^(,[\\s\\t]*)[^ ]*.*$" %>%
         gsub("\\1", by_line, perl = TRUE) %>%
         nchar() %>%
@@ -146,10 +147,12 @@ token_is_on_aligned_line <- function(pd_flat) {
       if (is_aligned) {
         # if left aligned after ,
         start_eval <- 2
+        previous_line <- nchar(by_line) - 1 + previous_line # comma to comma
       }
+    } else {
+      previous_line <- current_col
     }
     if (is_aligned) {
-      previous_line <- current_col
       next
     }
     # check 3: match by = (no extra spaces around it allowed)
