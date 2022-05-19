@@ -47,6 +47,20 @@ editor_options:
 -   `deps-in-desc` now prints the original file (not a tempfile) also
     for `.Rmd` and `.Rnw` files.
 
+Thanks to all people who contributed to this release:
+[\@assignUser](https://github.com/assignUser),
+[\@danhalligan](https://github.com/danhalligan),
+[\@gravesti](https://github.com/gravesti),
+[\@hadley](https://github.com/hadley),
+[\@KyleDCox](https://github.com/KyleDCox),
+[\@lorenzwalthert](https://github.com/lorenzwalthert),
+[\@lukasfeick-sw](https://github.com/lukasfeick-sw),
+[\@MarkMc1089](https://github.com/MarkMc1089),
+[\@pat-s](https://github.com/pat-s),
+[\@pre-commit-ci[bot]](https://github.com/pre-commit-ci%5Bbot%5D),
+[\@RoyalTS](https://github.com/RoyalTS), and
+[\@smingerson](https://github.com/smingerson).
+
 # precommit v0.2.2
 
 This is a maintenance release on the request of CRAN (#337) and to
