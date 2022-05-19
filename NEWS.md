@@ -57,7 +57,6 @@ Thanks to all people who contributed to this release:
 [\@lukasfeick-sw](https://github.com/lukasfeick-sw),
 [\@MarkMc1089](https://github.com/MarkMc1089),
 [\@pat-s](https://github.com/pat-s),
-[\@pre-commit-ci[bot]](https://github.com/pre-commit-ci%5Bbot%5D),
 [\@RoyalTS](https://github.com/RoyalTS), and
 [\@smingerson](https://github.com/smingerson).
 
