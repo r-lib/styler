@@ -34,8 +34,12 @@ spelling_errors <- spelling::spell_check_files(
 if (nrow(spelling_errors) > 0) {
   cat("The following spelling errors were found:\n")
   print(spelling_errors)
-  ignore <- sort(unique(c(ignore, spelling_errors$word)))
-  ignore <- ignore[ignore != ""] # drop blanks if any
+  ignore_df <- data.frame(
+    original = unique(c(ignore, spelling_errors$word))
+  )
+  ignore_df$lower <- tolower(ignore_df$original)
+  ignore_df <- ignore_df[order(ignore_df$lower), ]
+  ignore <- ignore_df$original[ignore_df$lower != ""] # drop blanks if any
   writeLines(ignore, path_wordlist)
   cat(
     "All spelling errors found were copied to inst/WORDLIST assuming they were",
