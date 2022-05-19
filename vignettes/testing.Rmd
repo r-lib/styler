@@ -3,8 +3,11 @@ title: "testing"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{testing}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r, include = FALSE}
@@ -14,43 +17,48 @@ knitr::opts_chunk$set(
 )
 ```
 
-pre-commit >= 2.11.0 supports R as a language and each hook repo has its own
-virtual environment with package versions locked. For that reason, we should
-also test with exactly these versions.
+pre-commit \>= 2.11.0 supports R as a language and each hook repo has
+its own virtual environment with package versions locked. For that
+reason, we should also test with exactly these versions.
 
 This package has five testing workflows:
 
-* hook testing. Tests the hooks (as well as hook script helpers?) in the renv in
-  which they'll be shipped. No R CMD Check or pre-commit executable needed.
-  All platforms. To avoid convolution of the testing environment
-  (that contains testthat and other packages) and the hook environment
-  (specified in `renv.lock`), we must only activate the hook environment right
-  when the script is called, but `run_test()` must run in the testing
-  environment. Since `--vanilla` is inherited in the child process initiated
-  from `run_test()`, the only way to do this is to set an env variable when
-  running `run_test()` and check in the user R profile if it is set, and then
-  activate the renv. This is done with `R_PRECOMMIT_HOOK_ENV`.
+-   hook testing. Tests the hooks (as well as hook script helpers?) in
+    the renv in which they'll be shipped. No R CMD Check or pre-commit
+    executable needed. All platforms. To avoid convolution of the
+    testing environment (that contains testthat and other packages) and
+    the hook environment (specified in `renv.lock`), we must only
+    activate the hook environment right when the script is called, but
+    `run_test()` must run in the testing environment. Since `--vanilla`
+    is inherited in the child process initiated from `run_test()`, the
+    only way to do this is to set an env variable when running
+    `run_test()` and check in the user R profile if it is set, and then
+    activate the renv. This is done with `R_PRECOMMIT_HOOK_ENV`.
 
-* Legacy hook testing: It is possible that someone updates the R package 
-  {precommit}, but not the hook revision (e.g. with `precommit::autoupdate()`) 
-  or vice versa. If the hook revision is updated to `>= 0.2.0`, all hook scripts
-  and {precommit} functions called from the hook script are from the same 
-  version of {precommit}, so we don't need to test hook compatibility. If the R
-  package is updated but not the hook revision, old hook scripts are called with 
-  while the {precommit} functions in them are from a new package version. Hence, 
-  we need compatibility between new packages and old hook scripts, which is 
-  exactly what is tested with this workflow. Until there are breaking changes in
-  the *hook script helpers* family of exported functions, there should not be 
-  a problem.
-  
-* complete testing: Tests hooks as well as usethis like access functionality 
-  with latest CRAN packages, on all platforms, with all installation methods.
+-   Legacy hook testing: It is possible that someone updates the R
+    package {precommit}, but not the hook revision (e.g. with
+    `precommit::autoupdate()`) or vice versa. If the hook revision is
+    updated to `>= 0.2.0`, all hook scripts and {precommit} functions
+    called from the hook script are from the same version of
+    {precommit}, so we don't need to test hook compatibility. If the R
+    package is updated but not the hook revision, old hook scripts are
+    called with while the {precommit} functions in them are from a new
+    package version. Hence, we need compatibility between new packages
+    and old hook scripts, which is exactly what is tested with this
+    workflow. Until there are breaking changes in the *hook script
+    helpers* family of exported functions, there should not be a
+    problem.
 
-* CRAN testing. On CRAN, complete testing is ran, tests that check pre-commit
-  executable access are disabled.
+-   complete testing: Tests hooks as well as usethis like access
+    functionality with latest CRAN packages, on all platforms, with all
+    installation methods.
 
-* end-2-end testing: This simulates closely what happens when you run 
-  `git commit` with pre-commit activated: We update the `.pre-commit-config.yaml` 
-  to the pushed SHA and run `pre-commit run`, covering all hooks, to ensure in 
-  particular file linking, file permissions etc. in `.pre-commit-hooks.yaml` are
-  correct for exported hooks.
+-   CRAN testing. On CRAN, complete testing is ran, tests that check
+    pre-commit executable access are disabled.
+
+-   end-2-end testing: This simulates closely what happens when you run
+    `git commit` with pre-commit activated: We update the
+    `.pre-commit-config.yaml` to the pushed SHA and run
+    `pre-commit run`, covering all hooks, to ensure in particular file
+    linking, file permissions etc. in `.pre-commit-hooks.yaml` are
+    correct for exported hooks.

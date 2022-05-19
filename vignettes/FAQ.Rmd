@@ -3,8 +3,11 @@ title: "FAQ"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{FAQ}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r, include = FALSE}
@@ -18,81 +21,89 @@ knitr::opts_chunk$set(
 ## How does it work? What's the magic?
 
 No magic. Git [provides a mechanism for pre-commit
-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). Since it's
-cumbersome to copy bash scripts and keep them updated in some hidden `.git/`
-directory, people wrote frameworks to basically maintain these files. One of
-them is [pre-commit.com](https://pre-commit.com). So you call git to commit, git calls
-its internal hooks, these hooks (bash scripts in the simplest case) are provided
-by the pre-commit framework. And where does pre-commit get all it's nice hooks
-from? From us. 
+hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). Since
+it's cumbersome to copy bash scripts and keep them updated in some
+hidden `.git/` directory, people wrote frameworks to basically maintain
+these files. One of them is [pre-commit.com](https://pre-commit.com). So
+you call git to commit, git calls its internal hooks, these hooks (bash
+scripts in the simplest case) are provided by the pre-commit framework.
+And where does pre-commit get all it's nice hooks from? From us.
 
 ## How are hooks accessed? What happens if there's no internet connection?
 
-Internet connection is required during installation 
-(`precommit::install_precommit()`) and project initialization 
-(`precommit::use_precommit()`) as well as when hooks are updated 
-(`precommit::autoupdate()`). Otherwise, no internet connection is required. 
-During initialization, hooks from this repo will be placed in a virtual 
-environment within the user cache and upon committing, they are called from a 
-generic hook helper in `.git/hooks/`.
+Internet connection is required during installation
+(`precommit::install_precommit()`) and project initialization
+(`precommit::use_precommit()`) as well as when hooks are updated
+(`precommit::autoupdate()`). Otherwise, no internet connection is
+required. During initialization, hooks from this repo will be placed in
+a virtual environment within the user cache and upon committing, they
+are called from a generic hook helper in `.git/hooks/`.
 
 ## Why do some hooks not give me the same results as running the command interactively?
 
-Note that starting with `precommit > 0.1.3`, hooks run in an isolated 
-[`{renv}`](https://rstudio.github.io/renv/), leveraging [R as a supported language](https://pre-commit.com/#r) in the pre-commit framework. The version of a package you use interactively 
-(e.g. `{roxygen2}` to document) might for that reason be different from the one 
-pre-commit uses. The point of using pre-commit is to take mental burden off your
-shoulders (and sometimes even caches results for speed), so there is no need to 
-run functionality covered by the hooks manually anyways. If you need to know 
-which package versions are used, look for the `renv.lock` file in 
-https://github.com/lorenzwalthert/precommit at the git tag specified under 
-`rev:` in your `.pre-commit-config.yaml`.
+Note that starting with `precommit > 0.1.3`, hooks run in an isolated
+[`{renv}`](https://rstudio.github.io/renv/), leveraging [R as a
+supported language](https://pre-commit.com/#r) in the pre-commit
+framework. The version of a package you use interactively (e.g.
+`{roxygen2}` to document) might for that reason be different from the
+one pre-commit uses. The point of using pre-commit is to take mental
+burden off your shoulders (and sometimes even caches results for speed),
+so there is no need to run functionality covered by the hooks manually
+anyways. If you need to know which package versions are used, look for
+the `renv.lock` file in <https://github.com/lorenzwalthert/precommit> at
+the git tag specified under `rev:` in your `.pre-commit-config.yaml`.
 
 ## Can you use it outside RStudio?
 
-Yes, all but the `open_config()` and `open_wordlist()` to open files in RStudio. 
+Yes, all but the `open_config()` and `open_wordlist()` to open files in
+RStudio.
 
 ## Can I use the hooks provided in this package without installing the R package?
 
-Yes, you don't need to manually install this package. Although technically 
-speaking, this package will get installed into a virtual environment isolated 
-from your global and project library.
+Yes, you don't need to manually install this package. Although
+technically speaking, this package will get installed into a virtual
+environment isolated from your global and project library.
 
 ## How can I make sure that my contributors are using the hooks?
 
-They must follow the installation instructions in the README, i.e. run 
+They must follow the installation instructions in the README, i.e. run
+
 ```{r}
 remotes::install_github("lorenzwalthert/precommit")
 precommit::install_precommit()
 precommit::use_precommit()
 ```
 
-The last call can be omitted by users who have [automatically enabled 
-pre-commit hooks](https://pre-commit.com/#automatically-enabling-pre-commit-on-repositories).
+The last call can be omitted by users who have [automatically enabled
+pre-commit
+hooks](https://pre-commit.com/#automatically-enabling-pre-commit-on-repositories).
 
-To enforce all hooks pass, you can follow the [advice on how to use pre-commit in a CI/CD setup](https://pre-commit.com/#usage-in-continuous-integration).
+To enforce all hooks pass, you can follow the [advice on how to use
+pre-commit in a CI/CD
+setup](https://pre-commit.com/#usage-in-continuous-integration).
 
 ## Should I list `{precommit}` as a dependency of my package in DESCRIPTION?
 
-No, precommit is a dev dependency like `{devtools}`, so it should not be listed 
-in `DESCRIPTION`.
-
+No, precommit is a dev dependency like `{devtools}`, so it should not be
+listed in `DESCRIPTION`.
 
 ## What if not all people who are committing to this repo want to use the hooks?
 
 This is not a problem, git will only run the hooks in a local repo after
-`precommit::use_precommit()` has been run successfully from within this local repo on your machine.
-You can also uninstall anytime with `precommit::uninstall_precommit()`. Anyone
-who does not want to use the hooks simply should not run
-`precommit::use_precommit()`. You can also temporarily disable hooks using the 
-environment variable `SKIP` or the argument `--no-verify`, as 
-described [here](https://pre-commit.com/#temporarily-disabling-hooks).
-
+`precommit::use_precommit()` has been run successfully from within this
+local repo on your machine. You can also uninstall anytime with
+`precommit::uninstall_precommit()`. Anyone who does not want to use the
+hooks simply should not run `precommit::use_precommit()`. You can also
+temporarily disable hooks using the environment variable `SKIP` or the
+argument `--no-verify`, as described
+[here](https://pre-commit.com/#temporarily-disabling-hooks).
 
 ## How does one create a new pre-commit hook?
 
-How to contribute new hooks is explained in [`CONTRIBUTING.md`](https://github.com/lorenzwalthert/precommit/blob/main/CONTRIBUTING.md).
+How to contribute new hooks is explained in
+[`CONTRIBUTING.md`](https://github.com/lorenzwalthert/precommit/blob/main/CONTRIBUTING.md).
 
-*** 
+------------------------------------------------------------------------
 
-There is more. Check out the documentation of the [pre-commit](https://pre-commit.com) framework.
+There is more. Check out the documentation of the
+[pre-commit](https://pre-commit.com) framework.
