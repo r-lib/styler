@@ -4,7 +4,7 @@ editor_options:
     wrap: 72
 ---
 
-# {precommit} v0.3.0
+# precommit v0.3.0
 
 **API changes**
 
