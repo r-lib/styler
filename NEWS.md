@@ -30,7 +30,7 @@ editor_options:
 
 **Other**
 
--   All (R)md files are now formatted with default pandoc markdown formatter.
+-   All (R)md files in this project's source code are now formatted with default pandoc markdown formatter.
     This conversion is required when using the visual mode in RStudio (#941).
 
 # styler 1.7.0
