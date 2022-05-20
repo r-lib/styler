@@ -3,70 +3,80 @@ title: "Why is this useful?"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{why-use-hooks}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # Why use pre-commit hooks?
 
 **Better commit quality = better code quality**
 
-The goal of pre-commit hooks is to improve the quality of commits. This is
-achieved by making sure your commits meet some (formal) requirements, e.g:
+The goal of pre-commit hooks is to improve the quality of commits. This
+is achieved by making sure your commits meet some (formal) requirements,
+e.g:
 
-- that they comply to a certain coding style (with the hook `style-files`).
+-   that they comply to a certain coding style (with the hook
+    `style-files`).
 
-- that you commit derivatives such as `README.md` or `.Rd` files with their
-  source instead of spreading them over multiple commits.
+-   that you commit derivatives such as `README.md` or `.Rd` files with
+    their source instead of spreading them over multiple commits.
 
-- and so on.
+-   and so on.
 
 # Why use the pre-commit framework?
 
 Using hooks from a framework like
-[pre-commit.com](https://pre-commit.com) has multiple benefits compared to using 
-simple bash scripts locally in `.git/hooks` or use boilerplate code in other CI 
-services to perform these tasks:
+[pre-commit.com](https://pre-commit.com) has multiple benefits compared
+to using simple bash scripts locally in `.git/hooks` or use boilerplate
+code in other CI services to perform these tasks:
 
-- **Focus on your code**. Hooks are maintained, tested and documented *outside* of 
-  your repo, all you need a `.pre-commit-config.yaml` file to invoke them. No 
-  need to c/p hooks from one project to another or maintain boilerplate code.
+-   **Focus on your code**. Hooks are maintained, tested and documented
+    *outside* of your repo, all you need a `.pre-commit-config.yaml`
+    file to invoke them. No need to c/p hooks from one project to
+    another or maintain boilerplate code.
 
-- **A declarative configuration file for routine checks**. File filtering for 
-  specific hooks, language version of hooks, when to trigger them 
-  (push, commit, merge), configuration options - all
-  controlled via a single configuration file: `.pre-commit-config.yaml`.
+-   **A declarative configuration file for routine checks**. File
+    filtering for specific hooks, language version of hooks, when to
+    trigger them (push, commit, merge), configuration options - all
+    controlled via a single configuration file:
+    `.pre-commit-config.yaml`.
 
-- **Locally and remotely. Or just one of the two**. You can use pre-commit 
-  locally and in the cloud with [pre-commit.ci](pre-commit.ci), where hooks 
-  can auto-fix issues like styling and push them back to GitHub. Exact same 
-  execution and configuration.
+-   **Locally and remotely. Or just one of the two**. You can use
+    pre-commit locally and in the cloud with
+    [pre-commit.ci](https://pre-commit.ci), where hooks can auto-fix
+    issues like styling and push them back to GitHub. Exact same
+    execution and configuration.
 
-- **Dependency isolation.** {precommit} leverages {renv} and hence 
-  ensures that anyone who uses the hooks uses the same version of the underlying
-  tools, producing the same results, and does not touch your global R library
-  or anything else unrelated to the hooks.
+-   **Dependency isolation.** {precommit} leverages {renv} and hence
+    ensures that anyone who uses the hooks uses the same version of the
+    underlying tools, producing the same results, and does not touch
+    your global R library or anything else unrelated to the hooks.
 
-- **No git history convolution**. Pre-commit detects problems before they enter 
-  your version control system, let's you fix them, or fixes them automatically.
-  
+-   **No git history convolution**. Pre-commit detects problems before
+    they enter your version control system, let's you fix them, or fixes
+    them automatically.
 
-- **The power of the crowd.** Easily use hooks other people have created in bash, 
-  R, Python and other languages. There are a wealth of useful hooks available, 
-  most listed [here](https://pre-commit.com/hooks.html). For example,
-  `check-added-large-files` prevents you from committing big files, other hooks
-  validate json or yaml files and so on. 
+-   **The power of the crowd.** Easily use hooks other people have
+    created in bash, R, Python and other languages. There are a wealth
+    of useful hooks available, most listed
+    [here](https://pre-commit.com/hooks.html). For example,
+    `check-added-large-files` prevents you from committing big files,
+    other hooks validate json or yaml files and so on.
 
-- **Extensible.**. You can write your own R code to run as a hook, very easily.
+-   **Extensible.**. You can write your own R code to run as a hook,
+    very easily.
 
-- **Standing on the shoulders of giants.** Leveraging [pre-commit.com](pre-commit.com)
-  drastically reduces complexity and abstracts away a lot of logic that is not 
-  R specific for the maintainers of {precommit}.
+-   **Standing on the shoulders of giants.** Leveraging
+    [pre-commit.com](https://pre-commit.com) drastically reduces
+    complexity and abstracts away a lot of logic that is not R specific
+    for the maintainers of {precommit}.
 
+-   **Independent.** pre-commit is not bound to GitHub, but runs on your
+    local computer upon commit, and [pre-commit.ci](https://pre-commit.ci) will
+    support on other git hosts than GitHub in the future.
 
-- **Independent.** pre-commit is not bound to GitHub, but runs on your local 
-  computer upon commit, and 
-  [pre-commit.ci](pre-commit.ci) will support on other git hosts than GitHub in 
-  the future.
-
-Have an idea for a hook? Please [file an issue](https://github.com/lorenzwalthert/precommit/issues).
+Have an idea for a hook? Please [file an
+issue](https://github.com/lorenzwalthert/precommit/issues).

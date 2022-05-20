@@ -3,123 +3,139 @@ title: "Continuous Integration"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Continuous Integration}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # Setting up CI
 
-When initializing pre-commit in your repo with `precommit::use_precommit()`, 
-you can specify the Continuous integration provider with `ci = "native"` if you 
-want to use [pre-commit.ci](https://pre-commit.ci) or `ci = "gha"` if you want 
-to use GitHub Actions. For existing repos, use `precommit::use_ci()`.
+When initializing pre-commit in your repo with
+`precommit::use_precommit()`, you can specify the Continuous integration
+provider with `ci = "native"` if you want to use
+[pre-commit.ci](https://pre-commit.ci) or `ci = "gha"` if you want to
+use GitHub Actions. For existing repos, use `precommit::use_ci()`.
 
-Pre-commit will run the hooks on all files, so instead of pushing, waiting and 
-fixing issues locally, we recommend that you fix all problems before pushing by
-invoking pre-commit (roughly) the same way as it happens in the CI, which is 
-described in the next section.
+Pre-commit will run the hooks on all files, so instead of pushing,
+waiting and fixing issues locally, we recommend that you fix all
+problems before pushing by invoking pre-commit (roughly) the same way as
+it happens in the CI, which is described in the next section.
 
 # Emulate a CI run locally
 
-In the CI run, a command roughly equivalent to the following will be ran from 
-the command line:
+In the CI run, a command roughly equivalent to the following will be ran
+from the command line:
 
-```bash
+``` bash
 pre-commit run --all-files
 ```
 
-If you get an error and `pre-commit` is not on your `$PATH` (e.g. because you 
-installed with `precommit::install_precommit()`), you can locate the executable 
-from R with 
+If you get an error and `pre-commit` is not on your `$PATH` (e.g.
+because you installed with `precommit::install_precommit()`), you can
+locate the executable from R with
 
-```r
+``` r
 precommit::path_pre_commit_exec()
 #> "/usr/local/bin/pre-commit" 
 ```
 
 And run the command in your bash terminal like this:
 
-```bash
+``` bash
 /usr/local/bin/pre-commit run --all-files
 ```
 
-Then fix the problems, stage the files and re-try until the command succeeds
-without more errors.
+Then fix the problems, stage the files and re-try until the command
+succeeds without more errors.
 
-# Comparison 
+# Comparison
 
-Next, we quickly introduce the two options. We recommend 
-[pre-commit.ci](https://pre-commit.ci), but you might have to skip the 
-roxygenize hook in the ci run under certain circumstances as explained below.
-
+Next, we quickly introduce the two options. We recommend
+[pre-commit.ci](https://pre-commit.ci), but you might have to skip the
+roxygenize hook in the ci run under certain circumstances as explained
+below.
 
 ## pre-commit.ci
 
 **Pros:**
 
-- by the creator of pre-commit. Certain CI settings in `.pre-commit-config.yaml`
-  [are supported](https://pre-commit.ci).
-- actively developed.
-- very fast.
-- will at some point also be supported for repos hosted outside of GitHub.
-- No maintenance effort for you.
-- No additional file in the repo.
+-   by the creator of pre-commit. Certain CI settings in
+    `.pre-commit-config.yaml` [are supported](https://pre-commit.ci).
+-   actively developed.
+-   very fast.
+-   will at some point also be supported for repos hosted outside of
+    GitHub.
+-   No maintenance effort for you.
+-   No additional file in the repo.
 
 **Cons:**
 
-- You need to authenticate the pre-commit.ci App in GitHub. 
-- Limitations for the roxygenize hook:
-  - {roxygen2} [requires loading your package for the roxygenize hook](https://github.com/r-lib/roxygen2/issues/771), which means you must list
-    all dependencies of the package explicitly in `.pre-commit-config.yaml` under
-    `id: roxygenize`. You can generate the required code with 
-    `precommit::snippet_generate('additional-deps-roxygenize')`. This is also 
-    required to run the hook locally.
-  - There is a [timeout of 120s for building a hook environment](https://github.com/pre-commit-ci/runner-image/issues/93#issuecomment-922505301), 
-    which might not be enough time to build the hook environment for the 
-    roxygenize hook (if you package has many dependencies). This holds for local
-    and remote execution.
-  - `System dependencies are not supported. In particular, since {roxygen2} 
-    [requires loading your package for the roxygenize hook](https://github.com/r-lib/roxygen2/issues/771), 
-    this hook will fail if your package has system dependencies or any of your
-    package's dependencies has system dependencies that are not shipped with 
-    the package.
-- To overcome the above limitations, you can: 
-  - Disable the hook completely (by commenting out the respective lines in 
-  `.pre-commit-config.yaml`).
-  - Use GitHub Actions as a CI provider instead with `precommit::use_ci("gha")`.
-  - Skip it on CI as described below
-  
-  ```yaml
-  ci:
-      skip: [roxygenize]
-  ```
+-   You need to authenticate the [pre-commit.ci](https://pre-commit.ci) App in GitHub.
+
+-   Limitations for the roxygenize hook:
+
+    -   {roxygen2} [requires loading your package for the roxygenize
+        hook](https://github.com/r-lib/roxygen2/issues/771), which means
+        you must list all dependencies of the package explicitly in
+        `.pre-commit-config.yaml` under `id: roxygenize`. You can
+        generate the required code with
+        `precommit::snippet_generate('additional-deps-roxygenize')`.
+        This is also required to run the hook locally.
+    -   There is a [timeout of 120s for building a hook
+        environment](https://github.com/pre-commit-ci/runner-image/issues/93#issuecomment-922505301),
+        which might not be enough time to build the hook environment for
+        the roxygenize hook (if you package has many dependencies). This
+        holds for local and remote execution.
+    -   \`System dependencies are not supported. In particular, since
+        {roxygen2} [requires loading your package for the roxygenize
+        hook](https://github.com/r-lib/roxygen2/issues/771), this hook
+        will fail if your package has system dependencies or any of your
+        package's dependencies has system dependencies that are not
+        shipped with the package.
+
+-   To overcome the above limitations, you can:
+
+    -   Disable the hook completely (by commenting out the respective
+        lines in `.pre-commit-config.yaml`).
+    -   Use GitHub Actions as a CI provider instead with
+        `precommit::use_ci("gha")`.
+    -   Skip it on CI as described below
+
+    ``` yaml
+    ci:
+        skip: [roxygenize]
+    ```
 
 **Customization:**
 
-Please see the documentation of [pre-commit.ci](https://pre-commit.ci/) on 
-whether or not to auto-fix problems as well as other configuration options.
+Please see the documentation of [pre-commit.ci](https://pre-commit.ci/)
+on whether or not to auto-fix problems as well as other configuration
+options.
 
 ## GitHub Actions
 
 **Pros:**
 
-- more control over environment, e.g. system dependencies.
-- No new authentication needed. 
-- If your package has system dependencies and you want to use the roxygenize 
-  hook, you can install them.
-  
+-   more control over environment, e.g. system dependencies.
+-   No new authentication needed.
+-   If your package has system dependencies and you want to use the
+    roxygenize hook, you can install them.
+
 **Cons:**
 
-- out-of-the-box action is in 
-  [maintenance only mode](https://github.com/pre-commit/action) and less 
-  feature complete than [pre-commit.ci](https://pre-commit.ci). For example, 
-  if your hooks fail on first attempt, the corrections are committed and pushed, 
-  but they won't trigger a new CI and you can't make them do it without 
-  [exposing credentials](https://github.com/pre-commit/action/pull/49). The only
-  way is to close and re-open the PR.
-- No configuration options such as hook skipping supported that pre-commit.ci
-  supports.
-- You need to maintain the workflow file with a lot of boilerplate code and 
-  when GitHub changes the syntax, you need to adapt it to prevent failing 
-  builds.
-- You'll have one additional file per provider (e.g. GitHub, Gitlab).
+-   out-of-the-box action is in [maintenance only
+    mode](https://github.com/pre-commit/action) and less feature
+    complete than [pre-commit.ci](https://pre-commit.ci). For example,
+    if your hooks fail on first attempt, the corrections are committed
+    and pushed, but they won't trigger a new CI and you can't make them
+    do it without [exposing
+    credentials](https://github.com/pre-commit/action/pull/49). The only
+    way is to close and re-open the PR.
+-   No configuration options such as hook skipping supported that
+    [pre-commit.ci](https://pre-commit.ci) supports.
+-   You need to maintain the workflow file with a lot of boilerplate
+    code and when GitHub changes the syntax, you need to adapt it to
+    prevent failing builds.
+-   You'll have one additional file per provider (e.g. GitHub, Gitlab).

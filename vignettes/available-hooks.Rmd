@@ -3,37 +3,43 @@ title: "Available Hooks"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{available-hooks}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-Below is a comprehensive list with all hooks from {precommit} as well as their
-arguments or flags, if they take any. With the standard config file that gets
-placed in your project with `precommit::use_precommit()` all hooks should work
-out of the box, but you can further customize them as described below. Other
-repos also host hooks, many are listed
+Below is a comprehensive list with all hooks from {precommit} as well as
+their arguments or flags, if they take any. With the standard config
+file that gets placed in your project with `precommit::use_precommit()`
+all hooks should work out of the box, but you can further customize them
+as described below. Other repos also host hooks, many are listed
 [here](https://pre-commit.com/hooks.html).
 
 # Good to know
 
 **File modification**
 
-Some hooks will fail without changing the files you want to commit, like the
-`lintr` hook - and you need to make manual changes for the hook to pass on the
-next attempt. Other hooks like the `roxygenize` hook write to files, and if that
-changes the file, the hook will fail, but this means for most hooks you won't
-need to modify the file manually after the attempted commit, just stage the 
-changes and try to commit again. Below, we indicate for every hook if it 
-modifies files or not.
+Some hooks will fail without changing the files you want to commit, like
+the `lintr` hook - and you need to make manual changes for the hook to
+pass on the next attempt. Other hooks like the `roxygenize` hook write
+to files, and if that changes the file, the hook will fail, but this
+means for most hooks you won't need to modify the file manually after
+the attempted commit, just stage the changes and try to commit again.
+Below, we indicate for every hook if it modifies files or not.
 
 **Arguments**
 
-Arguments for the hooks are specified as described in the [pre-commit.com
-documentation](https://pre-commit.com/#passing-arguments-to-hooks).^[Note that
-there might be issues with arguments that contain special characters and you
-might have to quote them and the order of single, double and escaped quotes may
-not give identical results on one platform and may not be portable to all
-platforms either.] You can specify arguments like this:
+Arguments for the hooks are specified as described in the
+[pre-commit.com
+documentation](https://pre-commit.com/#passing-arguments-to-hooks).[^1]
+You can specify arguments like this:
+
+[^1]: Note that there might be issues with arguments that contain
+    special characters and you might have to quote them and the order of
+    single, double and escaped quotes may not give identical results on
+    one platform and may not be portable to all platforms either.
 
 ```{r, echo = FALSE, output = "asis", comment = "", message = FALSE}
 library(magrittr)
@@ -50,97 +56,104 @@ repos:
 
 **Other hook settings**
 
-Apart from specifying the `args` key as described above, there are other hooks
-settings you can specify, e.g. file exclusion. If you don't, they are inherited
-from the default repository's configuration (i.e. the `.pre-commit-hooks.yaml`
-file in https://github.com/lorenzwalthert/precommit). See the [pre-commit
-documentation](https://pre-commit.com/#pre-commit-configyaml---hooks), for the
-available settings.
+Apart from specifying the `args` key as described above, there are other
+hooks settings you can specify, e.g. file exclusion. If you don't, they
+are inherited from the default repository's configuration (i.e. the
+`.pre-commit-hooks.yaml` file in
+<https://github.com/lorenzwalthert/precommit>). See the [pre-commit
+documentation](https://pre-commit.com/#pre-commit-configyaml---hooks),
+for the available settings.
 
 # Hooks
 
 ## `style-files`
 
-A hook to style files with [styler](https://styler.r-lib.org). Only commit code
-corresponding to the tidyverse style guide. You can pass arguments to
-[`style_file(...)`](https://styler.r-lib.org/reference/style_file.html) using 
-the `--key=value` syntax like this:
+A hook to style files with [styler](https://styler.r-lib.org). Only
+commit code corresponding to the tidyverse style guide. You can pass
+arguments to
+[`style_file(...)`](https://styler.r-lib.org/reference/style_file.html)
+using the `--key=value` syntax like this:
 
-```
-  id: style-files
-  args: [--scope=spaces, --reindention=specify_reindention('#')]
-```
+      id: style-files
+      args: [--scope=spaces, --reindention=specify_reindention('#')]
 
-In addition, the hook takes the following arguments that are not passed to 
+In addition, the hook takes the following arguments that are not passed
+to
 [`style_file(...)`](https://styler.r-lib.org/reference/style_file.html):
 
-* Argument `style_pkg` and `style_fun` default to `styler` and `tidyverse_style`.
-  If you want to use another style guide than the tidyverse style guide, you can
-  specify it like this:
+-   Argument `style_pkg` and `style_fun` default to `styler` and
+    `tidyverse_style`. If you want to use another style guide than the
+    tidyverse style guide, you can specify it like this:
 
+```{=html}
+<!-- -->
 ```
-  id: style-files
-  args: [--style_pkg=pkg.with.style.guide, --style_fun=exported.style.function]
+      id: style-files
+      args: [--style_pkg=pkg.with.style.guide, --style_fun=exported.style.function]
+
+-   The argument `--no-warn-cache` is deprecated and will be removed in
+    a future release. Please remove it from your
+    `.pre-commit-config.yaml`.
+
+-   Argument `cache-root` is passed to `options()` to set
+    `styler.cache_root`. Default value: `styler-perm`. The argument
+    determines the sub-directory under the {R.cache} cache directory
+    that {styler} uses. If you want {styler} to auto-clean up caches
+    older than 6 days, set this to `"styler"`. For more information, see
+    `help("caching", package = "styler")`.
+
+```{=html}
+<!-- -->
 ```
+      id: style-files
+      args: [--cache-root=styler]
 
-* The argument `--no-warn-cache` is deprecated and will be removed in a future
-  release. Please remove it from your `.pre-commit-config.yaml`.
+-   Argument `ignore-start` and `ignore-stop` is passed to `options()`
+    to set `styler.ignore_start` and `styler.ignore_stop` respectively.
+    Not set by default, so the {styler} defaults apply. This was
+    introduced in {precommit} 0.2.2.9012. For example, if you want to
+    restore old behavior of styler \< 1.6.2, where only the literals
+    `styler: off` and `styler: on` were accepted, use this regex:
 
-  
-* Argument `cache-root` is passed to `options()` to set `styler.cache_root`.
-  Default value: `styler-perm`. The argument 
-  determines the sub-directory under the {R.cache} cache directory that {styler}
-  uses. If you want {styler} to auto-clean up caches older than 6 days, set this
-  to `"styler"`. For more information, see 
-  `help("caching", package = "styler")`.
-
+```{=html}
+<!-- -->
 ```
-  id: style-files
-  args: [--cache-root=styler]
-```
+      id: style-files
+      args: [--ignore-start="^# styler: on$", --ignore-stop="^# styler: off$"]
 
-* Argument `ignore-start` and `ignore-stop` is passed to `options()` to set 
-  `styler.ignore_start`   and `styler.ignore_stop` respectively. Not set by 
-  default, so the {styler} defaults apply. This was introduced in {precommit} 
-  0.2.2.9012. For example, if you want to restore 
-  old behavior of styler < 1.6.2, where only the literals `styler: off` and 
-  `styler: on` were accepted, use this regex:
-```
-  id: style-files
-  args: [--ignore-start="^# styler: on$", --ignore-stop="^# styler: off$"]
-```
-
-
-This hook modifies files unless you specify `--dry=fail` (requires 
+This hook modifies files unless you specify `--dry=fail` (requires
 `{styler} > 1.3.2`).
 
 ## `readme-rmd-rendered`
 
-Make sure `README.Rmd` hasn't been edited more recently than `README.md`, i.e.
-remind you to render the `.Rmd` to `.md` before committing.
+Make sure `README.Rmd` hasn't been edited more recently than
+`README.md`, i.e. remind you to render the `.Rmd` to `.md` before
+committing.
 
 This hook does not modify files.
 
 ## `parsable-R`
 
-Checks if your `.R` and `.Rmd` files are "valid" R code by checking if running 
-`parse()` on them (or their `knitr::purl()`ed output for `.Rmd`) returns an 
-error.
+Checks if your `.R` and `.Rmd` files are "valid" R code by checking if
+running `parse()` on them (or their `knitr::purl()`ed output for `.Rmd`)
+returns an error.
 
 This hook does not modify files.
 
 ## `no-browser-statement`
 
-Guarantees you that you don't accidentally commit code with a `browser()`
-statement in it.
+Guarantees you that you don't accidentally commit code with a
+`browser()` statement in it.
 
 This hook does not modify files.
 
 ## `no-debug-statement`
 
-Guarantees you that you don't accidentally commit code with a `debug()` or `debugonce()` statement in it.
+Guarantees you that you don't accidentally commit code with a `debug()`
+or `debugonce()` statement in it.
 
-This hook does not modify files. This hook was added in version 0.2.2.9012.
+This hook does not modify files. This hook was added in version
+0.2.2.9012.
 
 ## `spell-check`
 
@@ -148,14 +161,15 @@ Checks spelling with `spelling::spell_check_files()`.
 
 **Excluded files**
 
-When you invoke `precommit::use_precommit()` and `.pre-commit-config.yaml` is
-written to your repo (unless you specify `config_source` otherwise), we copy the
-expression in the `exclude:` key from spell check hook the default repository's
-configuration (i.e. the `.pre-commit-hooks.yaml` file in
-https://github.com/lorenzwalthert/precommit) into your config file, so you can
-easily add or remove some files. As of `r paste0("v",
-packageVersion("precommit"))`, the following regex is used to exclude files
-following the [verbose python regex
+When you invoke `precommit::use_precommit()` and
+`.pre-commit-config.yaml` is written to your repo (unless you specify
+`config_source` otherwise), we copy the expression in the `exclude:` key
+from spell check hook the default repository's configuration (i.e. the
+`.pre-commit-hooks.yaml` file in
+<https://github.com/lorenzwalthert/precommit>) into your config file, so
+you can easily add or remove some files. As of
+`r paste0("v", packageVersion("precommit"))`, the following regex is
+used to exclude files following the [verbose python regex
 syntax](https://pre-commit.com/#regular-expressions):
 
 ```{r, echo = FALSE, comment = ""}
@@ -172,94 +186,88 @@ readLines(system.file("pre-commit-hooks.yaml", package = "precommit")) %>%
 
 The `lang` arg will be passed to `spelling::spell_check_files()`.
 
-```
-  id: spell-check
-  args: [--lang=<language>]
-```
+      id: spell-check
+      args: [--lang=<language>]
 
-This hook does not modify input files. It will add all words not found in the
-dictionary to `inst/WORDLIST`, assuming they were spelled correctly but were not
-in the dictionary. An example might be "RStudio". The hook error message will
-contain all words written to `inst/WORDLIST`, so if there were really some
-typos, make sure to fix them and remove them from `inst/WORDLIST`. If there were
-not typos, or you fixed all, stage `inst/WORDLIST` and this time, the commit
-should pass.
+This hook does not modify input files. It will add all words not found
+in the dictionary to `inst/WORDLIST`, assuming they were spelled
+correctly but were not in the dictionary. An example might be "RStudio".
+The hook error message will contain all words written to
+`inst/WORDLIST`, so if there were really some typos, make sure to fix
+them and remove them from `inst/WORDLIST`. If there were not typos, or
+you fixed all, stage `inst/WORDLIST` and this time, the commit should
+pass.
 
 ## `roxygenize`
 
-A hook to run `roxygen2::roxygenize()`. Makes sure you commit your `.Rd` changes
-with the source changes. To take advantage of caching, you don't need to run
-`roxygen2::roxygenize()` manually anymore. The argument `--no-warn-cache` is 
-deprecated and will be removed in a future release. Please remove it from your 
-`.pre-commit-config.yaml`.
+A hook to run `roxygen2::roxygenize()`. Makes sure you commit your `.Rd`
+changes with the source changes. To take advantage of caching, you don't
+need to run `roxygen2::roxygenize()` manually anymore. The argument
+`--no-warn-cache` is deprecated and will be removed in a future release.
+Please remove it from your `.pre-commit-config.yaml`.
 
-Because the hook will write the version of {roxygen2} to `DESCRIPTON`, you
-should either make sure the version you use when you call {roxygen2}
-interactively matches the one from in {precommit} or simply not run {roxygen2}
-manually. 
+Because the hook will write the version of {roxygen2} to `DESCRIPTON`,
+you should either make sure the version you use when you call {roxygen2}
+interactively matches the one from in {precommit} or simply not run
+{roxygen2} manually.
 
-If you specify additional roclets through the `Roxygen:` field in `DESCRIPTION`,
-e.g. from [{pkgapi}](https://github.com/r-lib/pkgapi) you must specify the 
-dependencies explicitly such that `renv::install()` understands it, e.g.
+If you specify additional roclets through the `Roxygen:` field in
+`DESCRIPTION`, e.g. from [{pkgapi}](https://github.com/r-lib/pkgapi) you
+must specify the dependencies explicitly such that `renv::install()`
+understands it, e.g.
 
-```
-  id: roxygenize
-  additional_dependencies:
-  - r-lib/pkgapi
+      id: roxygenize
+      additional_dependencies:
+      - r-lib/pkgapi
 
-```
-
-This hook does not modify input files, but writes to `.Rd` files in `man/`, 
-`NAMESPACE` and potentially others depending on which roxygen roclets you 
-specified in `DESCRIPTION`.
+This hook does not modify input files, but writes to `.Rd` files in
+`man/`, `NAMESPACE` and potentially others depending on which roxygen
+roclets you specified in `DESCRIPTION`.
 
 ## `deps-in-desc`
 
-Checks if packages used with the `pkgname::fun()` syntax are listed in your
-DESCRIPTION file. Note that `README.Rmd` is never checked. Flag 
-`allow_private_imports` lets the user specify that
-private imports into the package namespace are tolerable, e.g. `somepkg:::x()`.
-Flag not set by default, i.e. the hook will fail if such a call is found.
+Checks if packages used with the `pkgname::fun()` syntax are listed in
+your DESCRIPTION file. Note that `README.Rmd` is never checked. Flag
+`allow_private_imports` lets the user specify that private imports into
+the package namespace are tolerable, e.g. `somepkg:::x()`. Flag not set
+by default, i.e. the hook will fail if such a call is found.
 
-```
-  id: deps-in-desc 
-  args: [--allow_private_imports] 
-```
+      id: deps-in-desc 
+      args: [--allow_private_imports] 
 
-
-This hook does not modify the file `DESCRIPTION` because the user should decide
-for each package if it should go to `Imports:` or `Suggests:`, which can be done
-easily with `usethis::use_package()`.
+This hook does not modify the file `DESCRIPTION` because the user should
+decide for each package if it should go to `Imports:` or `Suggests:`,
+which can be done easily with `usethis::use_package()`.
 
 ## `use-tidy-description`
 
-A hook to run `usethis::use_tidy_description()` to ensure dependencies are
-ordered alphabetically and fields are in standard order.
+A hook to run `usethis::use_tidy_description()` to ensure dependencies
+are ordered alphabetically and fields are in standard order.
 
 This hook does modify the file `DESCRIPTION`.
 
 ## `lintr`
 
-A hook to run `lintr::lint()` to check that R files are lint free. Argument
-`warning_only` changes the behavior of the pre-commit to be non-blocking. You
-should set this with the field `verbose: true`.
+A hook to run `lintr::lint()` to check that R files are lint free.
+Argument `warning_only` changes the behavior of the pre-commit to be
+non-blocking. You should set this with the field `verbose: true`.
 
-```
-  id: lintr
-  args: [--warn_only]
-  verbose: true
-```
+      id: lintr
+      args: [--warn_only]
+      verbose: true
 
 When configured this way, lintr prints lint errors as they appear. Other
-arguments are not supported. Instead, `lintr` config should be specified in a
-`.lintr` config file in Debian Control Field Format as specified in the
-[`.lintr` documentation](https://github.com/r-lib/lintr#project-configuration).
+arguments are not supported. Instead, `lintr` config should be specified
+in a `.lintr` config file in Debian Control Field Format as specified in
+the [`.lintr`
+documentation](https://github.com/r-lib/lintr#project-configuration).
 
 This hook does not modify any file.
 
 ## `codemeta-description-updated`
 
-Make sure `DESCRIPTION` hasn't been edited more recently than `codemeta.json`,
+Make sure `DESCRIPTION` hasn't been edited more recently than
+`codemeta.json`,
 
 i.e. remind you to run `codemetar::write_codemeta()` in order to keep
 `codemeta.json` in sync with `DESCRIPTION`.
