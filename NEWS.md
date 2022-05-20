@@ -29,6 +29,8 @@ editor_options:
 
 -   All (R)md files are now formatted with default pandoc markdown formatter.
     This conversion is required when using the visual mode in RStudio (#941).
+-   Update {pkgdown} action to always build, but only deploy on default branch
+    (#946).
 
 # styler 1.7.0
 
