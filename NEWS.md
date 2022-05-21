@@ -4,6 +4,11 @@ editor_options:
     wrap: 72
 ---
 
+# precommit v0.3.0.9000
+
+-   `.pre-commit-config.yaml` templates now contain hook to validate the
+    [pre-commit.ci](https://pre-commit.ci) configuration (#407).
+
 # precommit v0.3.0
 
 **API changes**

@@ -93,6 +93,11 @@ repos:
         exclude: '\.Rd' # sometimes roxygen fails to generate EOF blank line.
     -   id: file-contents-sorter
         files: '^\.Rbuildignore$'
+-   repo: https://github.com/pre-commit-ci/pre-commit-ci-config
+    rev: v1.5.1
+    hooks:
+    # Only reuiqred when https://pre-commit.ci is used for config validation
+    -   id: check-pre-commit-ci-config
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
     rev: 9dd648a2cbce0c0ce09255695b63ea4823699bec
     hooks: 
