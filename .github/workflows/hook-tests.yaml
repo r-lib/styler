@@ -86,6 +86,8 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) {
             install.packages("renv", repos = c(CRAN = "https://cloud.r-project.org"))
           }
+          # avoid build-time deps
+          options(install.packages.compile.from.source = "never") 
           renv::install(c('testthat', 'devtools', 'git2r'))
           # some testing infrastructure we need is in R/testing.R
           renv::install(getwd())
