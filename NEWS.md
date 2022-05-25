@@ -6,6 +6,9 @@ editor_options:
 
 # precommit v0.3.0.9000
 
+-   hook `forbid-to-commit` in template `.pre-commit-config.yaml` has
+    now the correct `exclude-files` regular expression to ignore 
+    `.csv`, `.RData`, `.Rds`, `.rds` and `.Rhistory` (#410).
 -   `.pre-commit-config.yaml` templates now contain hook to validate the
     [pre-commit.ci](https://pre-commit.ci) configuration (#407).
 -   `options(install.packages.compile.from.source = "never")` is used in
