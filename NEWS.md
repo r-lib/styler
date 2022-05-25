@@ -8,6 +8,8 @@ editor_options:
 
 -   `.pre-commit-config.yaml` templates now contain hook to validate the
     [pre-commit.ci](https://pre-commit.ci) configuration (#407).
+-   `options(install.packages.compile.from.source = "never")` is used in
+    the CI to avoid failing builds due to missing build-time deps (#412).
 
 # precommit v0.3.0
 
