@@ -70,7 +70,7 @@ repos:
         name: Don't commit common R artifacts
         entry: Cannot commit .Rhistory, .Rdata, .csv and similar.
         language: fail
-        files: '\.Rhistory|\.csv|\.RData|\.Rds|\.rds$'
+        files: '\.(Rhistory|csv|RData|Rds|rds)$'
         # `exclude: <regex>` to allow committing specific files.
     -   id: spell-check-ordered-exclude
         name: Ordered regex pattern for spell-check exclusion
