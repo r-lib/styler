@@ -209,7 +209,7 @@ test_that("messages (via cat()) of style_file are correct", {
           "xyzdir-dirty",
           "dirty-sample-with-scope-tokens.R"
         ))
-        expect_sknown_value(
+        expect_known_value(
           output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
@@ -222,7 +222,7 @@ test_that("messages (via cat()) of style_file are correct", {
         output <- catch_style_file_output(file.path(
           "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
         ))
-        expect_sknown_value(
+        expect_known_value(
           output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/clean-reference-with-scope-tokens-",
@@ -235,7 +235,7 @@ test_that("messages (via cat()) of style_file are correct", {
         output <- catch_style_file_output(file.path(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
         ))
-        expect_sknown_value(
+        expect_known_value(
           output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-spaces-",
