@@ -158,6 +158,7 @@ tidyverse_style <- function(scope = "tokens",
         )
       },
       remove_line_break_in_fun_call = purrr::partial(remove_line_break_in_fun_call, strict = strict),
+      remove_line_break_between_roxygen_and_code = if (strict) remove_line_break_between_roxygen_and_code,
       add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
       set_linebreak_after_ggplot2_plus = if (strict) set_linebreak_after_ggplot2_plus
     )

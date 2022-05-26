@@ -68,3 +68,9 @@ test_that("line is correctly broken around = ", {
     transformer = style_text
   ), NA)
 })
+
+test_that("empty lines between roxygen comments and code are removed", {
+  expect_warning(test_collection("line_breaks_and_other", "line-break-between-roxygen-and-code",
+    transformer = style_text
+  ), NA)
+})

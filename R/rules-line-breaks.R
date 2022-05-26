@@ -384,3 +384,9 @@ set_linebreak_after_ggplot2_plus <- function(pd) {
   }
   pd
 }
+
+
+remove_line_break_between_roxygen_and_code <- function(pd) {
+
+  pd
+}
