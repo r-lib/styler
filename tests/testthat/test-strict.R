@@ -1,4 +1,4 @@
-context("test strict")
+
 
 test_that("can style example source file with strict = TRUE", {
   expect_warning(test_collection(

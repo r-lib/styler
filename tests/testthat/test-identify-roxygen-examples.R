@@ -1,4 +1,4 @@
-context("test-roxygen-examples-identify.R")
+
 
 #' Things to consider:
 #' * one function declaration or many

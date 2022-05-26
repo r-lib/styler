@@ -1,5 +1,5 @@
 library("testthat")
-context("correctly treats comments")
+
 
 test_that("spacing within comments is done correctly", {
   expect_warning(test_collection("parse_comments",

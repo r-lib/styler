@@ -1,4 +1,4 @@
-context("indention operators")
+
 
 test_that("pipe is indended correctly", {
   expect_warning(test_collection("indention_operators",

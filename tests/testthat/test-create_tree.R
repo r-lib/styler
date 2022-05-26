@@ -1,4 +1,4 @@
-context("test tree creation")
+
 
 test_that("create_trees outputs identical structure if trees have same structure", {
   skip_if_not_installed("DiagrammeR")

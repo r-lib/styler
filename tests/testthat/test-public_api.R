@@ -1,4 +1,4 @@
-context("public API")
+
 
 
 
@@ -131,7 +131,7 @@ test_that("styler does not return error when there is no file to style", {
   ), NA))
 })
 
-context("public API - Rmd in style_file()")
+
 
 test_that("styler can style Rmd file", {
   expect_false({
@@ -195,7 +195,7 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
   ))
 })
 
-context("messages are correct")
+
 
 
 test_that("messages (via cat()) of style_file are correct", {
@@ -209,7 +209,7 @@ test_that("messages (via cat()) of style_file are correct", {
           "xyzdir-dirty",
           "dirty-sample-with-scope-tokens.R"
         ))
-        expect_known_value(
+        expect_sknown_value(
           output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
@@ -222,7 +222,7 @@ test_that("messages (via cat()) of style_file are correct", {
         output <- catch_style_file_output(file.path(
           "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
         ))
-        expect_known_value(
+        expect_sknown_value(
           output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/clean-reference-with-scope-tokens-",
@@ -235,7 +235,7 @@ test_that("messages (via cat()) of style_file are correct", {
         output <- catch_style_file_output(file.path(
           "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
         ))
-        expect_known_value(
+        expect_sknown_value(
           output,
           testthat_file(paste0(
             "public-api/xyzdir-dirty/dirty-reference-with-scope-spaces-",
@@ -260,7 +260,7 @@ test_that("Messages can be suppressed", {
   )
 })
 
-context("public API - Rmd in style_dir()")
+
 
 test_that("styler can style R, Rmd and Rmarkdown files via style_dir()", {
   msg <- capture_output(
@@ -295,7 +295,7 @@ test_that("styler can style .r and .rmd files only via style_dir()", {
   expect_false(any(grepl("random-rmd-script.Rmarkdown", msg, fixed = TRUE)))
 })
 
-context("public API - Rmd in style_pkg()")
+
 
 test_that("styler can style R and Rmd files via style_pkg()", {
   msg <- capture_output(
@@ -372,7 +372,7 @@ test_that("insufficient R version returns error", {
   expect_error(stop_insufficient_r_version())
 })
 
-context("public API - Rnw in style_file()")
+
 
 
 test_that("styler can style Rnw file", {
@@ -400,7 +400,7 @@ test_that("styler handles malformed Rnw file and invalid R code in chunk", {
   ))
 })
 
-context("public API - Rnw in style_pkg()")
+
 
 test_that("styler can style R, Rmd and Rnw files via style_pkg()", {
   msg <- capture_output(

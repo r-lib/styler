@@ -39,13 +39,14 @@ Suggests:
     rmarkdown,
     roxygen2,
     rstudioapi (>= 0.7),
-    testthat (>= 2.1.0)
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate",
     "pkgapi::api_roclet"))
 RoxygenNote: 7.1.2
+Config/testthat/edition: 3
 Collate: 
     'addins.R'
     'communicate.R'

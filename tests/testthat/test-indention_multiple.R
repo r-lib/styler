@@ -1,4 +1,4 @@
-context("test indent multiple")
+
 
 test_that("multiple round brackets don't cause extraindention", {
   expect_warning(test_collection("indention_multiple",

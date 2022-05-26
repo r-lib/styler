@@ -1,4 +1,4 @@
-context("test testing functions")
+
 
 test_that("No files to compare returns error", {
   expect_error(test_collection("serialize_tests", "xyz",
