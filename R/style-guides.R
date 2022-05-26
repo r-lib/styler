@@ -86,6 +86,7 @@ tidyverse_style <- function(scope = "tokens",
       update_indention_ref_fun_dec = update_indention_ref_fun_dec
     )
   }
+
   space_manipulators <- if ("spaces" %in% scope) {
     list(
       remove_space_before_closing_paren = remove_space_before_closing_paren,

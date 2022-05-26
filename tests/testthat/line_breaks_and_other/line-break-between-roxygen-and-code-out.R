@@ -1,5 +1,2 @@
 #' @export
-
-
-
 foo <- function() NULL
