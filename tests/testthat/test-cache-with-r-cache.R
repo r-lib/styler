@@ -57,7 +57,7 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
 
 
 test_that("cached expressions are displayed propperly", {
-  skip_if(getRversion() <= "3.6")
+  skip_if(getRversion() <= "4.1")
 
   cache_info <- cache_info("testthat", format = "tabular")
   expect_snapshot({
