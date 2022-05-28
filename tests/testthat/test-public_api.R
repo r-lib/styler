@@ -204,45 +204,27 @@ test_that("messages (via cat()) of style_file are correct", {
       list(cli.unicode = encoding == "utf8"),
       {
         # Message if scope > line_breaks and code changes
-        output <- catch_style_file_output(file.path(
-          "public-api",
-          "xyzdir-dirty",
-          "dirty-sample-with-scope-tokens.R"
-        ))
-        expect_known_value(
-          output,
-          testthat_file(paste0(
-            "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
-            encoding
-          )),
-          update = getOption("styler.test_dir_writable", TRUE)
-        )
+        expect_snapshot({
+          catch_style_file_output(file.path(
+            "public-api",
+            "xyzdir-dirty",
+            "dirty-sample-with-scope-tokens.R"
+          ))
+        })
 
         # No message if scope > line_breaks and code does not change
-        output <- catch_style_file_output(file.path(
-          "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
-        ))
-        expect_known_value(
-          output,
-          testthat_file(paste0(
-            "public-api/xyzdir-dirty/clean-reference-with-scope-tokens-",
-            encoding
-          )),
-          update = getOption("styler.test_dir_writable", TRUE)
-        )
+        expect_snapshot({
+          catch_style_file_output(file.path(
+            "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
+          ))
+        })
 
         # No message if scope <= line_breaks even if code is changed.
-        output <- catch_style_file_output(file.path(
-          "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
-        ))
-        expect_known_value(
-          output,
-          testthat_file(paste0(
-            "public-api/xyzdir-dirty/dirty-reference-with-scope-spaces-",
-            encoding
-          )),
-          update = getOption("styler.test_dir_writable", TRUE)
-        )
+        expect_snapshot({
+          catch_style_file_output(file.path(
+            "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
+          ))
+        })
       }
     )
   }
