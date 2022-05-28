@@ -1,47 +1,47 @@
 # messages (via cat()) of style_file are correct
 
     Code
-      catch_style_file_output(file.path("public-api", "xyzdir-dirty",
-        "dirty-sample-with-scope-tokens.R"))
+      cat(catch_style_file_output(file.path("public-api", "xyzdir-dirty",
+        "dirty-sample-with-scope-tokens.R")), sep = "\n")
     Output
-      [1] "Styling  1  files:"                      
-      [2] " dirty-sample-with-scope-tokens.R i "    
-      [3] "----------------------------------------"
-      [4] "Status\tCount\tLegend "                  
-      [5] "v \t0\tFile unchanged."                  
-      [6] "i \t1\tFile changed."                    
-      [7] "x \t0\tStyling threw an error."          
-      [8] "----------------------------------------"
-      [9] "Please review the changes carefully!"    
+      Styling  1  files:
+       dirty-sample-with-scope-tokens.R i 
+      ----------------------------------------
+      Status	Count	Legend 
+      v 	0	File unchanged.
+      i 	1	File changed.
+      x 	0	Styling threw an error.
+      ----------------------------------------
+      Please review the changes carefully!
 
 ---
 
     Code
-      catch_style_file_output(file.path("public-api", "xyzdir-dirty",
-        "clean-sample-with-scope-tokens.R"))
+      cat(catch_style_file_output(file.path("public-api", "xyzdir-dirty",
+        "clean-sample-with-scope-tokens.R")), sep = "\n")
     Output
-      [1] "Styling  1  files:"                      
-      [2] " clean-sample-with-scope-tokens.R v "    
-      [3] "----------------------------------------"
-      [4] "Status\tCount\tLegend "                  
-      [5] "v \t1\tFile unchanged."                  
-      [6] "i \t0\tFile changed."                    
-      [7] "x \t0\tStyling threw an error."          
-      [8] "----------------------------------------"
+      Styling  1  files:
+       clean-sample-with-scope-tokens.R v 
+      ----------------------------------------
+      Status	Count	Legend 
+      v 	1	File unchanged.
+      i 	0	File changed.
+      x 	0	Styling threw an error.
+      ----------------------------------------
 
 ---
 
     Code
-      catch_style_file_output(file.path("public-api", "xyzdir-dirty",
-        "dirty-sample-with-scope-spaces.R"))
+      cat(catch_style_file_output(file.path("public-api", "xyzdir-dirty",
+        "dirty-sample-with-scope-spaces.R")), sep = "\n")
     Output
-      [1] "Styling  1  files:"                      
-      [2] " dirty-sample-with-scope-spaces.R i "    
-      [3] "----------------------------------------"
-      [4] "Status\tCount\tLegend "                  
-      [5] "v \t0\tFile unchanged."                  
-      [6] "i \t1\tFile changed."                    
-      [7] "x \t0\tStyling threw an error."          
-      [8] "----------------------------------------"
-      [9] "Please review the changes carefully!"    
+      Styling  1  files:
+       dirty-sample-with-scope-spaces.R i 
+      ----------------------------------------
+      Status	Count	Legend 
+      v 	0	File unchanged.
+      i 	1	File changed.
+      x 	0	Styling threw an error.
+      ----------------------------------------
+      Please review the changes carefully!
 

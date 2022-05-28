@@ -205,25 +205,25 @@ test_that("messages (via cat()) of style_file are correct", {
       {
         # Message if scope > line_breaks and code changes
         expect_snapshot({
-          catch_style_file_output(file.path(
+          cat(catch_style_file_output(file.path(
             "public-api",
             "xyzdir-dirty",
             "dirty-sample-with-scope-tokens.R"
-          ))
+          )), sep = "\n")
         })
 
         # No message if scope > line_breaks and code does not change
         expect_snapshot({
-          catch_style_file_output(file.path(
+          cat(catch_style_file_output(file.path(
             "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
-          ))
+          )), sep = "\n")
         })
 
         # No message if scope <= line_breaks even if code is changed.
         expect_snapshot({
-          catch_style_file_output(file.path(
+          cat(catch_style_file_output(file.path(
             "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
-          ))
+          )), sep = "\n")
         })
       }
     )
