@@ -22,7 +22,7 @@ test_that("Cache management works", {
   )
   expect_false(cache_info(format = "tabular")$activated)
   expect_equal(getOption("styler.cache_location"), NULL)
-  expect_invisible(cache_clear("testthat", ask = FALSE))
+  expect_silent(cache_clear("testthat", ask = FALSE))
 })
 
 test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
