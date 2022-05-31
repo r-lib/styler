@@ -1,4 +1,4 @@
-context("adding / removing token")
+
 
 test_that("other manipulations are correct (add braces, semi-colon etc.)", {
   expect_warning(test_collection("token_adding_removing", "mixed_token",

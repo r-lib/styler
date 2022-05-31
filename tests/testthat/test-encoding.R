@@ -1,4 +1,4 @@
-context("non-ASCII characters are handled properly")
+
 
 test_that("non-ASCII characters are handled properly for text styling", {
   expect_equal(

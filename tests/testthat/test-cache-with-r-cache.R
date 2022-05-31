@@ -57,30 +57,26 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
 
 
 test_that("cached expressions are displayed propperly", {
+  skip_if(getRversion() < "4.2")
+
   cache_info <- cache_info("testthat", format = "tabular")
-  expect_known_value(
-    cache_info[, c("n", "size", "last_modified", "activated")],
-    file = test_path("reference-objects/cache-info-1"),
-    update = getOption("styler.test_dir_writable", TRUE)
-  )
+  expect_snapshot({
+    cache_info[, c("n", "size", "last_modified", "activated")]
+  })
 
   local_test_setup(cache = TRUE)
   style_text("1+1")
   cache_info <- cache_info(format = "tabular")
   cache_info$size <- round(cache_info$size, -2)
-  expect_known_value(
-    cache_info[, c("n", "size", "activated")],
-    file = test_path("reference-objects/cache-info-2"),
-    update = getOption("styler.test_dir_writable", TRUE)
-  )
+  expect_snapshot({
+    cache_info[, c("n", "size", "activated")]
+  })
   style_text("a <-function() NULL")
   cache_info <- cache_info(format = "tabular")
   cache_info$size <- round(cache_info$size, -2)
-  expect_known_value(
-    cache_info[, c("n", "size", "activated")],
-    file = test_path("reference-objects/cache-info-3"),
-    update = getOption("styler.test_dir_writable", TRUE)
-  )
+  expect_snapshot({
+    cache_info[, c("n", "size", "activated")]
+  })
 })
 
 

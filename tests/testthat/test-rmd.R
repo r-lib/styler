@@ -1,4 +1,4 @@
-context("rmd")
+
 
 test_that("can style .Rmd files", {
   expect_warning(test_collection("rmd", "simple",

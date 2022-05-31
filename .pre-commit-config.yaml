@@ -97,6 +97,7 @@ repos:
           tests/testthat/exception_handling/empty_file\.R|
           tests/testthat/parse_comments/eol_eof_spaces-.*|
           tests/testthat/reference-objects/.*|
+          tests/testthat/_snaps/.*|
           )$
 -   repo: https://github.com/lorenzwalthert/gitignore-tidy
     rev: 9dd648a2cbce0c0ce09255695b63ea4823699bec

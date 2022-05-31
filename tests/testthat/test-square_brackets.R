@@ -1,4 +1,4 @@
-context("indention square brackets")
+
 
 test_that("square brackets cause indention", {
   expect_warning(test_collection(

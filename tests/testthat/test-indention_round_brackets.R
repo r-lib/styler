@@ -1,4 +1,4 @@
-context("Function calls with round brackets")
+
 
 test_that("one-line function call yields correct indention", {
   expect_warning(test_collection("indention_round_brackets",
@@ -19,7 +19,7 @@ test_that(paste("multi-line function call yields correct indention"), {
 ##  ............................................................................
 
 
-context("grouping arithmetic expressions with round brackets. ")
+
 
 # Does NOT cover indention by operators such as +"
 

@@ -1,4 +1,4 @@
-context("Exception handling")
+
 
 test_that("style_text returns custom error", {
   expect_error(style_text("a <- 3 4"), "unexpected numeric constant")

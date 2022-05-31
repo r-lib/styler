@@ -1,4 +1,4 @@
-context("test comment token insertion interaction")
+
 
 ##  ............................................................................
 ##  strict = TRUE                                                           ####

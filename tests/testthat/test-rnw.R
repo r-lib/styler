@@ -1,4 +1,4 @@
-context("rnw")
+
 
 test_that("can style .Rnw files", {
   expect_warning(test_collection(
