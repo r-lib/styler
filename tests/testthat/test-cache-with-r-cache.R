@@ -4,13 +4,13 @@ test_that("Cache management works", {
   local_test_setup(cache = TRUE)
   # at fresh startup
   expect_s3_class(cache_info(format = "tabular"), "tbl_df")
-  expect_output(cache_info())
+  expect_error(capture.output(cache_info()), NA)
   expect_equal(basename(cache_activate()), styler_version)
   expect_equal(basename(cache_activate("xyz")), "xyz")
   expect_equal(getOption("styler.cache_name"), "xyz")
   # when cache xyz is activated, cache_info() shows deactivated for other caches
   expect_false(cache_info(styler_version, format = "tabular")$activated)
-  expect_output(cache_info(format = "lucid"))
+  expect_error(capture.output(cache_info(format = "lucid")), NA)
   # cache_info() defaults to the currently active cache
   expect_equal(basename(cache_info(format = "tabular")$location), "xyz")
 
@@ -22,7 +22,7 @@ test_that("Cache management works", {
   )
   expect_false(cache_info(format = "tabular")$activated)
   expect_equal(getOption("styler.cache_location"), NULL)
-  expect_silent(cache_clear("testthat", ask = FALSE))
+  expect_error(cache_clear("testthat", ask = FALSE), NA)
 })
 
 test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
