@@ -179,6 +179,9 @@ ensure_renv_precommit_compat <- function(package_version_renv = utils::packageVe
   } else {
     withr::local_dir(root)
     path_config <- ".pre-commit-config.yaml"
+    if (!file_exists(path_config)) {
+      return()
+    }
     config_lines <- readLines(path_config, encoding = "UTF-8")
     has_renv <- fs::file_exists("renv.lock")
     if (!has_renv) {
