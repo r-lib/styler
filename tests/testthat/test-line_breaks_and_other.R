@@ -1,4 +1,4 @@
-context("linebreaking added / removed correctly")
+
 
 test_that("line breaks involing curly brackets", {
   expect_warning(test_collection("line_breaks_and_other", "curly",

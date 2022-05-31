@@ -1,5 +1,5 @@
 library("testthat")
-context("multiple expressions")
+
 
 test_that("simple multiple expressions are styled correctly", {
   expect_warning(test_collection("multiple_expressions",

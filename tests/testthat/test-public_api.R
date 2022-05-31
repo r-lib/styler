@@ -1,4 +1,4 @@
-context("public API")
+
 
 
 
@@ -101,17 +101,18 @@ test_that("styler can style directories and exclude", {
 
 test_that("styler can style files", {
   # just one
-  capture_output(expect_equivalent(
+  capture_output(expect_equal(
     {
       out <- style_file(c(
         testthat_file("public-api", "xyzfile", "random-script.R")
       ), strict = FALSE)
       out$changed
     },
-    rep(FALSE, 1)
+    rep(FALSE, 1),
+    ignore_attr = TRUE
   ))
   # multiple not in the same working directory
-  capture_output(expect_equivalent(
+  capture_output(expect_equal(
     {
       out <- style_file(c(
         testthat_file("public-api", "xyzfile", "random-script.R"),
@@ -119,7 +120,8 @@ test_that("styler can style files", {
       ), strict = FALSE)
       out$changed
     },
-    rep(FALSE, 2)
+    rep(FALSE, 2),
+    ignore_attr = TRUE
   ))
 })
 
@@ -131,7 +133,7 @@ test_that("styler does not return error when there is no file to style", {
   ), NA))
 })
 
-context("public API - Rmd in style_file()")
+
 
 test_that("styler can style Rmd file", {
   expect_false({
@@ -195,7 +197,7 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
   ))
 })
 
-context("messages are correct")
+
 
 
 test_that("messages (via cat()) of style_file are correct", {
@@ -204,45 +206,27 @@ test_that("messages (via cat()) of style_file are correct", {
       list(cli.unicode = encoding == "utf8"),
       {
         # Message if scope > line_breaks and code changes
-        output <- catch_style_file_output(file.path(
-          "public-api",
-          "xyzdir-dirty",
-          "dirty-sample-with-scope-tokens.R"
-        ))
-        expect_known_value(
-          output,
-          testthat_file(paste0(
-            "public-api/xyzdir-dirty/dirty-reference-with-scope-tokens-",
-            encoding
-          )),
-          update = getOption("styler.test_dir_writable", TRUE)
-        )
+        expect_snapshot({
+          cat(catch_style_file_output(file.path(
+            "public-api",
+            "xyzdir-dirty",
+            "dirty-sample-with-scope-tokens.R"
+          )), sep = "\n")
+        })
 
         # No message if scope > line_breaks and code does not change
-        output <- catch_style_file_output(file.path(
-          "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
-        ))
-        expect_known_value(
-          output,
-          testthat_file(paste0(
-            "public-api/xyzdir-dirty/clean-reference-with-scope-tokens-",
-            encoding
-          )),
-          update = getOption("styler.test_dir_writable", TRUE)
-        )
+        expect_snapshot({
+          cat(catch_style_file_output(file.path(
+            "public-api", "xyzdir-dirty", "clean-sample-with-scope-tokens.R"
+          )), sep = "\n")
+        })
 
         # No message if scope <= line_breaks even if code is changed.
-        output <- catch_style_file_output(file.path(
-          "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
-        ))
-        expect_known_value(
-          output,
-          testthat_file(paste0(
-            "public-api/xyzdir-dirty/dirty-reference-with-scope-spaces-",
-            encoding
-          )),
-          update = getOption("styler.test_dir_writable", TRUE)
-        )
+        expect_snapshot({
+          cat(catch_style_file_output(file.path(
+            "public-api", "xyzdir-dirty", "dirty-sample-with-scope-spaces.R"
+          )), sep = "\n")
+        })
       }
     )
   }
@@ -260,7 +244,7 @@ test_that("Messages can be suppressed", {
   )
 })
 
-context("public API - Rmd in style_dir()")
+
 
 test_that("styler can style R, Rmd and Rmarkdown files via style_dir()", {
   msg <- capture_output(
@@ -295,7 +279,7 @@ test_that("styler can style .r and .rmd files only via style_dir()", {
   expect_false(any(grepl("random-rmd-script.Rmarkdown", msg, fixed = TRUE)))
 })
 
-context("public API - Rmd in style_pkg()")
+
 
 test_that("styler can style R and Rmd files via style_pkg()", {
   msg <- capture_output(
@@ -372,7 +356,7 @@ test_that("insufficient R version returns error", {
   expect_error(stop_insufficient_r_version())
 })
 
-context("public API - Rnw in style_file()")
+
 
 
 test_that("styler can style Rnw file", {
@@ -400,7 +384,7 @@ test_that("styler handles malformed Rnw file and invalid R code in chunk", {
   ))
 })
 
-context("public API - Rnw in style_pkg()")
+
 
 test_that("styler can style R, Rmd and Rnw files via style_pkg()", {
   msg <- capture_output(
@@ -537,7 +521,9 @@ test_that("Can display warning on unset styler cache", {
 
 test_that("No sensitive to decimal option", {
   withr::local_options(OutDec = ",")
-  expect_error(style_text("1"), NA)
+  expect_snapshot({
+    style_text("1")
+  })
 })
 
 test_that("Can display warning on unset styler cache", {

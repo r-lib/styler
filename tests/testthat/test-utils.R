@@ -1,4 +1,4 @@
-context("test-utils")
+
 
 test_that("non-comment-helpers", {
   pd <- compute_parse_data_nested("a <- # hi \n x %>% b()")
@@ -8,15 +8,11 @@ test_that("non-comment-helpers", {
 })
 
 test_that("files with and without blank EOF line are read correctly", {
-  expect_known_value(
-    read_utf8(test_path("reference-objects/missing-blank-at-EOF.R")),
-    test_path("reference-objects/return-read-utf8-missing-EOF"),
-    update = getOption("styler.test_dir_writable", TRUE)
-  )
+  expect_snapshot({
+    read_utf8(test_path("reference-objects/missing-blank-at-EOF.R"))
+  })
 
-  expect_known_value(
-    read_utf8(test_path("reference-objects/non-missing-blank-at-EOF.R")),
-    test_path("reference-objects/return-read-utf8-non-missing-EOF"),
-    update = getOption("styler.test_dir_writable", TRUE)
-  )
+  expect_snapshot({
+    read_utf8(test_path("reference-objects/non-missing-blank-at-EOF.R"))
+  })
 })

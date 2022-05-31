@@ -1,4 +1,4 @@
-context("test-roxygen-examples-parse")
+
 
 test_that("simple examples can be parsed", {
   expected_out <- c("\n", "x <- 1\n")

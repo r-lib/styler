@@ -1,4 +1,4 @@
-context("math token spacing")
+
 
 test_that("invalid tokens return error", {
   expect_error(test_collection(

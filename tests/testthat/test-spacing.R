@@ -1,4 +1,4 @@
-context("spacing")
+
 
 test_that("curly braces", {
   expect_warning(test_collection(
