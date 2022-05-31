@@ -101,17 +101,18 @@ test_that("styler can style directories and exclude", {
 
 test_that("styler can style files", {
   # just one
-  capture_output(expect_equivalent(
+  capture_output(expect_equal(
     {
       out <- style_file(c(
         testthat_file("public-api", "xyzfile", "random-script.R")
       ), strict = FALSE)
       out$changed
     },
-    rep(FALSE, 1)
+    rep(FALSE, 1),
+    ignore_attr = TRUE
   ))
   # multiple not in the same working directory
-  capture_output(expect_equivalent(
+  capture_output(expect_equal(
     {
       out <- style_file(c(
         testthat_file("public-api", "xyzfile", "random-script.R"),
@@ -119,7 +120,8 @@ test_that("styler can style files", {
       ), strict = FALSE)
       out$changed
     },
-    rep(FALSE, 2)
+    rep(FALSE, 2),
+    ignore_attr = TRUE
   ))
 })
 
