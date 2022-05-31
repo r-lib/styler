@@ -13,7 +13,9 @@ test_that("parse_tree_must_be_identical works", {
 })
 
 test_that("correct styling does not give an error", {
-  expect_snapshot({verify_roundtrip("1+1", "1 + 1")})
+  expect_snapshot({
+    verify_roundtrip("1+1", "1 + 1")
+  })
 })
 
 test_that("corrupt styling does give an error", {
