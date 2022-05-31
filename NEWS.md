@@ -6,6 +6,8 @@ editor_options:
 
 # precommit v0.3.0.9000
 
+-   Fix bug that prevented pkg load outside directories with precommit files
+    (#413).
 -   hook `forbid-to-commit` in template `.pre-commit-config.yaml` has
     now the correct `exclude-files` regular expression to ignore 
     `.csv`, `.RData`, `.Rds`, `.rds` and `.Rhistory` (#410).
