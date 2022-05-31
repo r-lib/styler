@@ -9,11 +9,9 @@ text_to_flat_pd(text, transformers, more_specs)
 \arguments{
 \item{text}{The text to parse.}
 
-\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
-a key.}
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate a key.}
 
-\item{more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
-a key.}
+\item{more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate a key.}
 }
 \description{
 Creates a flat parse table with minimal initialization and makes the parse

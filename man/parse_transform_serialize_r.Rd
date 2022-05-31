@@ -14,8 +14,7 @@ parse_transform_serialize_r(
 \arguments{
 \item{text}{The text to parse.}
 
-\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
-a key.}
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate a key.}
 
 \item{base_indention}{Integer scalar indicating by how many spaces the whole
 output text should be indented. Note that this is not the same as splitting
