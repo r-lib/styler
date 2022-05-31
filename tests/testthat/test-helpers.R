@@ -1,7 +1,9 @@
 
 
 test_that("can construct and print vertical", {
-  expect_snapshot({construct_vertical(c("1 + 1", "nw"))})
+  expect_snapshot({
+    construct_vertical(c("1 + 1", "nw"))
+  })
 })
 
 
@@ -10,7 +12,9 @@ test_that("file types can be asserted", {
 })
 
 test_that("can lookup tokens", {
-  expect_snapshot({lookup_new_special()})
+  expect_snapshot({
+    lookup_new_special()
+  })
 })
 
 test_that("can extend non-comment", {
