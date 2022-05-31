@@ -30,8 +30,10 @@ editor_options:
 
 **Other**
 
--   All (R)md files in this project's source code are now formatted with default pandoc markdown formatter.
-    This conversion is required when using the visual mode in RStudio (#941).
+-   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
+-   All (R)md files in this project's source code are now formatted with
+    default pandoc markdown formatter. This conversion is required when using
+    the visual mode in RStudio (#941).
 -   Update {pkgdown} action to always build, but only deploy on default branch
     (#946).
 
