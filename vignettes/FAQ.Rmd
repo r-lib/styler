@@ -18,6 +18,15 @@ knitr::opts_chunk$set(
 )
 ```
 
+## It's broken. Missing packages etc. 
+
+Update the hook revisions with 
+`$ pre-commit autoupdate`. This does not help, please follow the
+Update instructions in the README. If that does not work, run 
+`$ pre-commit clean` to clean the 
+pre-commit cache.
+
+
 ## How does it work? What's the magic?
 
 No magic. Git [provides a mechanism for pre-commit
