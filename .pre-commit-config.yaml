@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.2.2.9015
+    rev: v0.3.0
     hooks:
     -   id: style-files
         args: ['--ignore-start="^# styler: on$"', '--ignore-stop="^# styler: off$"']
