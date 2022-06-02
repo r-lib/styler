@@ -18,13 +18,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-## It's broken. Missing packages etc. 
+## It's broken. Missing packages etc. How do I fix it?
 
-Update the hook revisions with 
-`$ pre-commit autoupdate`. This does not help, please follow the
-Update instructions in the README. If that does not work, run 
-`$ pre-commit clean` to clean the 
-pre-commit cache.
+Update the hook revisions with `$ pre-commit autoupdate`. This does not 
+help, please follow the Update instructions in the README. If that does 
+not work, run `$ pre-commit clean` to clean the pre-commit cache. 
+Although you could also clear the {renv} cache, this should only be a 
+strategy of last resort, as it may break other {renv} projects on your 
+machine and you'd have to do some re-storing there.
 
 
 ## How does it work? What's the magic?
