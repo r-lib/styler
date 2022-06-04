@@ -22,6 +22,7 @@ repos:
     -   id: roxygenize
         additional_dependencies:
         - r-lib/pkgapi
+        - dplyr@1.0.9
     -   id: use-tidy-description
     -   id: spell-check
         exclude: >
