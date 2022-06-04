@@ -16,8 +16,9 @@ hash_standardize <- function(text) {
 #' Check if text is cached
 #'
 #' This boils down to check if the hash exists at the caching dir as a file.
-#' @param text,transformers,more_specs Passed to [cache_make_key()] to generate
-#'   a key.
+#' @param text Passed to [cache_make_key()] to generate a key.
+#' @param transformers Passed to [cache_make_key()] to generate a key.
+#' @param more_specs Passed to [cache_make_key()] to generate a key.
 #' @param cache_dir The caching directory relative to the `.Rcache` root to
 #'   look for a cached value.
 #' @keywords internal
