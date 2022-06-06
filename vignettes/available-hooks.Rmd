@@ -85,9 +85,8 @@ to
     `tidyverse_style`. If you want to use another style guide than the
     tidyverse style guide, you can specify it like this:
 
-```{=html}
 <!-- -->
-```
+
       id: style-files
       args: [--style_pkg=pkg.with.style.guide, --style_fun=exported.style.function]
 
@@ -102,9 +101,8 @@ to
     older than 6 days, set this to `"styler"`. For more information, see
     `help("caching", package = "styler")`.
 
-```{=html}
 <!-- -->
-```
+
       id: style-files
       args: [--cache-root=styler]
 
@@ -115,9 +113,8 @@ to
     restore old behavior of styler \< 1.6.2, where only the literals
     `styler: off` and `styler: on` were accepted, use this regex:
 
-```{=html}
 <!-- -->
-```
+
       id: style-files
       args: [--ignore-start="^# styler: on$", --ignore-stop="^# styler: off$"]
 
