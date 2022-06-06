@@ -16,6 +16,13 @@ test_that("call capturing for pass", {
   )
 })
 
+test_that("git repo status can be evaluated", {
+  tmpdir <- local_test_setup(git = FALSE)
+  expect_false(is_git_repo(root = tmpdir))
+  git_init(tmpdir)
+  expect_true(is_git_repo(root = tmpdir))
+})
+
 test_that("call capturing for error (command that does not exist)", {
   expect_silent(captured <- call_and_capture("j23lkjsdi", "1"))
   expect_true(

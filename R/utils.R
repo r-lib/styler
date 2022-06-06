@@ -108,3 +108,21 @@ rev_as_pkg_version <- function(rev) {
 has_git <- function() {
   nzchar(Sys.which("git"))
 }
+
+is_git_repo <- function(root = here::here()) {
+  withr::local_dir(root)
+  if (has_git()) {
+    rlang::with_handlers(
+      {
+        output <- call_and_capture(
+          "git",
+          c("rev-parse", "--is-inside-work-tree")
+        )
+        output$exit_status == 0 && as.logical(toupper(output$stdout))
+      },
+      erorr = function(...) FALSE
+    )
+  } else {
+    dir.exists(".git")
+  }
+}
