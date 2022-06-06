@@ -17,6 +17,14 @@ if (!on_cran()) {
     )
   })
 
+  test_that("can use pre-commit", {
+    tempdir <- local_test_setup(quiet = FALSE, install_hooks = FALSE)
+    expect_message(
+      use_precommit(open = FALSE, force = TRUE, install_hooks = TRUE, root = tempdir),
+      "R specific hooks"
+    )
+  })
+
   test_that("fails early if repo is not a git repo ", {
     tempdir <- local_test_setup(git = FALSE, quiet = FALSE, install_hooks = FALSE)
 
