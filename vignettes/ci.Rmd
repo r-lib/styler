@@ -72,7 +72,8 @@ below.
 
 **Cons:**
 
--   You need to authenticate the [pre-commit.ci](https://pre-commit.ci) App in GitHub.
+-   You need to authenticate the [pre-commit.ci](https://pre-commit.ci)
+    App in GitHub.
 
 -   Limitations for the roxygenize hook:
 

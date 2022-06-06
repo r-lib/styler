@@ -6,15 +6,16 @@ editor_options:
 
 # precommit v0.3.0.9000
 
--   Fix bug that prevented pkg load outside directories with precommit files
-    (@mpadge, #413).
+-   Fix bug that prevented pkg load outside directories with precommit
+    files (@mpadge, #413).
 -   hook `forbid-to-commit` in template `.pre-commit-config.yaml` has
-    now the correct `exclude-files` regular expression to ignore 
-    `.csv`, `.RData`, `.Rds`, `.rds` and `.Rhistory` (#410).
+    now the correct `exclude-files` regular expression to ignore `.csv`,
+    `.RData`, `.Rds`, `.rds` and `.Rhistory` (#410).
 -   `.pre-commit-config.yaml` templates now contain hook to validate the
     [pre-commit.ci](https://pre-commit.ci) configuration (#407).
 -   `options(install.packages.compile.from.source = "never")` is used in
-    the CI to avoid failing builds due to missing build-time deps (#412).
+    the CI to avoid failing builds due to missing build-time deps
+    (#412).
 
 # precommit v0.3.0
 

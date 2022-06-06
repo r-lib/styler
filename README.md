@@ -11,6 +11,7 @@ status](https://www.r-pkg.org/badges/version/precommit)](https://CRAN.R-project.
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R build
 status](https://github.com/lorenzwalthert/precommit/workflows/R-CMD-check/badge.svg)](https://github.com/lorenzwalthert/precommit/actions)
+
 <!-- badges: end -->
 
 [Pre-commit hooks](https://pre-commit.com) are tests that run each time
