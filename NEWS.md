@@ -9,6 +9,7 @@ editor_options:
 -   Ensure sorting for `spell-check` hook is case-insensitive on all
     operating systems. This may re-order your whole `inst/WORDLIST`
     (#405).
+-   {git2r} is no longer needed for user side (#417).
 -   Fix bug that prevented pkg load outside directories with precommit
     files (@mpadge, #413).
 -   hook `forbid-to-commit` in template `.pre-commit-config.yaml` has
