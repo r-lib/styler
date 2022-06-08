@@ -7,8 +7,11 @@
 is_cached(text, transformers, more_specs, cache_dir = get_cache_dir())
 }
 \arguments{
-\item{text, transformers, more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
-a key.}
+\item{text}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate a key.}
+
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate a key.}
+
+\item{more_specs}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate a key.}
 
 \item{cache_dir}{The caching directory relative to the \code{.Rcache} root to
 look for a cached value.}

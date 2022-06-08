@@ -9,8 +9,7 @@ style_roxygen_code_example(example, transformers, base_indention)
 \arguments{
 \item{example}{Roxygen example code.}
 
-\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate
-a key.}
+\item{transformers}{Passed to \code{\link[=cache_make_key]{cache_make_key()}} to generate a key.}
 
 \item{base_indention}{Integer scalar indicating by how many spaces the whole
 output text should be indented. Note that this is not the same as splitting
