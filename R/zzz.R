@@ -10,3 +10,7 @@
   if (interactive()) ensure_renv_precommit_compat()
   invisible()
 }
+
+# here is only used as a default argument, hence the R CMD check warning
+# Namespace in Imports field not imported from
+here::here
