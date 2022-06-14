@@ -4,19 +4,27 @@ editor_options:
     wrap: 72
 ---
 
-# precommit v0.3.0.9000
+# precommit v0.3.1
 
+**User visible changes**
+
+-   `.pre-commit-config.yaml` templates now contain hook to validate the
+    [pre-commit.ci](https://pre-commit.ci) configuration (#407).
+-   {git2r} is no longer needed for user side (#417).
+
+**Bug fixes**
+
+-   Fix bug that prevented pkg load outside directories with precommit
+    files (@mpadge, #413).
 -   Ensure sorting for `spell-check` hook is case-insensitive on all
     operating systems. This may re-order your whole `inst/WORDLIST`
     (#405).
--   {git2r} is no longer needed for user side (#417).
--   Fix bug that prevented pkg load outside directories with precommit
-    files (@mpadge, #413).
 -   hook `forbid-to-commit` in template `.pre-commit-config.yaml` has
     now the correct `exclude-files` regular expression to ignore `.csv`,
     `.RData`, `.Rds`, `.rds` and `.Rhistory` (#410).
--   `.pre-commit-config.yaml` templates now contain hook to validate the
-    [pre-commit.ci](https://pre-commit.ci) configuration (#407).
+
+**Internals**
+
 -   `options(install.packages.compile.from.source = "never")` is used in
     the CI to avoid failing builds due to missing build-time deps
     (#412).
