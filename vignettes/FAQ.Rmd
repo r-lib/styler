@@ -1,6 +1,8 @@
 ---
 title: "FAQ"
 output: rmarkdown::html_vignette
+description: > 
+  Common questions and answers for pre-commit users.
 vignette: >
   %\VignetteIndexEntry{FAQ}
   %\VignetteEncoding{UTF-8}

@@ -25,12 +25,21 @@ reference:
 destination: docs
 articles:
 - title: Get started
+  description: > 
+    All you need to know as a {precommit} (power) user.
   navbar: ~
   contents:
+  - precommit
   - why-use-hooks
   - available-hooks
   - ci
   - FAQ
+- title: Developer Docs
+  description: >
+    You won't need this unless you want to contribute to that repo.
+  contents:
+  - hook-order
+  - testing
 
 template:
   params:

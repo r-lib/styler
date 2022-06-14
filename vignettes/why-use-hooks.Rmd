@@ -1,6 +1,8 @@
 ---
 title: "Why is this useful?"
 output: rmarkdown::html_vignette
+description: > 
+  Understand why we build this and why we think it's useful.
 vignette: >
   %\VignetteIndexEntry{why-use-hooks}
   %\VignetteEncoding{UTF-8}

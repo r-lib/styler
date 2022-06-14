@@ -1,5 +1,7 @@
 ---
 title: "Available Hooks"
+description: > 
+  Check out all hooks this repo contains and how they can be customized
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{available-hooks}
