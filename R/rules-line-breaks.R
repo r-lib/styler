@@ -144,7 +144,7 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
 style_line_break_around_curly <- function(strict, pd) {
   if (is_curly_expr(pd) && nrow(pd) > 2) {
     closing_before <- pd$token == "'}'"
-    opening_before <- (pd$token == "'{'") & (pd$token_after != "COMMENT")
+    opening_before <- (pd$token == "'{'")
     to_break <- lag(opening_before, default = FALSE) | closing_before
     len_to_break <- sum(to_break)
     pd$lag_newlines[to_break] <- ifelse(rep(strict, len_to_break),

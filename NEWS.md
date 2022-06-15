@@ -19,6 +19,8 @@ editor_options:
 
 -   If there are only empty lines in a code chunk, they are all removed (#936).
 
+-   There is now always one line break after `{` and before `#` (#916).
+
 -   the cache is also invalidated on changing the stylerignore markers (#932).
 
 -   `{` is not put on a new line after `=` and in `function() {` for some edge
