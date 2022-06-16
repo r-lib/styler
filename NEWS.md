@@ -41,7 +41,7 @@ editor_options:
 -   Update {pkgdown} action to always build, but only deploy on default branch
     (#946).
 -   turned off `styler.print.Vertical` in vignettes so ANSI output of {prettycode} 
-    not messing with {pkgdown} (#956, \@IndrajeetPatil). 
+    not messing with {pkgdown} (\@IndrajeetPatil, #956, #957). 
 
 # styler 1.7.0
 
