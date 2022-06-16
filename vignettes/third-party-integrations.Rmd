@@ -34,7 +34,7 @@ styler functionality is available in other tools, most notably
 
 -   in the *format-all* command for Emacs in [emacs-format-all-the-code](https://github.com/lassik/emacs-format-all-the-code).
 
--   As a [Jupyterlab code formatter](https://jupyterlab-code-formatter.readthedocs.io/en/latest/installation.html#r-code-formatters).
+<!-- FIXME -   As a [Jupyterlab code formatter](https://jupyterlab-code-formatter.readthedocs.io/en/latest/installation.html#r-code-formatters). -->
 
 -   for pretty-printing [drake](https://github.com/ropensci/drake) workflow data frames with `drake::drake_plan_source()`.
 
