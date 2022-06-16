@@ -40,6 +40,8 @@ editor_options:
     the visual mode in RStudio (#941).
 -   Update {pkgdown} action to always build, but only deploy on default branch
     (#946).
+-   turned off `styler.print.Vertical` in vignettes so ANSI output of {prettycode} 
+    not messing with {pkgdown} (#956, \@IndrajeetPatil). 
 
 # styler 1.7.0
 
