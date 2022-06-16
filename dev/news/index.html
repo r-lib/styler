@@ -120,9 +120,11 @@
 <li><p><code>{</code> is not put on a new line after <code>=</code> and in <code>function() {</code> for some edge cases (<a href="https://github.com/r-lib/styler/issues/939" class="external-link">#939</a>).</p></li>
 <li><p>Parsing of {roxygen2} example comments now also works for edge cases when there is no literal code immediately following after the end of the example section (<a href="https://github.com/r-lib/styler/issues/940" class="external-link">#940</a>).</p></li>
 </ul><p><strong>Other</strong></p>
-<ul><li>Upgrade testing infra to testthat 3e (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/949" class="external-link">#949</a>).</li>
+<ul><li>Old (and outdated) vignettes have been removed (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/955" class="external-link">#955</a>). To access them, do <code>git checkout v1.0.0</code>.</li>
+<li>Upgrade testing infra to testthat 3e (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/949" class="external-link">#949</a>).</li>
 <li>All (R)md files in this project’s source code are now formatted with default pandoc markdown formatter. This conversion is required when using the visual mode in RStudio (<a href="https://github.com/r-lib/styler/issues/941" class="external-link">#941</a>).</li>
 <li>Update {pkgdown} action to always build, but only deploy on default branch (<a href="https://github.com/r-lib/styler/issues/946" class="external-link">#946</a>).</li>
+<li>turned off <code>styler.print.Vertical</code> in vignettes so ANSI output of {prettycode} not messing with {pkgdown} (<a href="https://github.com/r-lib/styler/issues/956" class="external-link">#956</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.7.0" id="styler-170">styler 1.7.0<small>2022-03-13</small><a class="anchor" aria-label="anchor" href="#styler-170"></a></h2>

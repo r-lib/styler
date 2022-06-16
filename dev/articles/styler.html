@@ -163,7 +163,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>a  [32m+ [39m b</code></pre>
+<pre><code><span class="va">a</span> <span class="op">+</span> <span class="va">b</span></code></pre>
 <p>The styler API was designed so that you can pass arguments to the style guide via the styling function (e.g. <code><a href="../reference/style_file.html">style_file()</a></code>) to allow more concise syntax:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># equivalent</span>
@@ -195,11 +195,11 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tokens and everything less invasive</span>
 <span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="st">"tokens"</span><span class="op">)</span></code></pre></div>
-<pre><code>a  [32m&lt;- [39m  [34m2 [39m</code></pre>
+<pre><code><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># just tokens and indention</span>
 <span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tokens"</span>, <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>a [32m&lt;- [39m [34m2 [39m</code></pre>
+<pre><code><span class="va">a</span><span class="op">&lt;-</span><span class="fl">2</span></code></pre>
 <p>As you can see from the output, the assignment operator <code>=</code> is replaced with <code>&lt;-</code> in both cases, but spacing remained unchanged in the second example.</p>
 </div>
 <div class="section level4">
@@ -214,11 +214,11 @@
      large  = 6
    )"</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>tibble:: [36mtibble [39m [33m( [39m
-  small  =  [34m2 [39m,
-  medium =  [34m4 [39m,  [38;5;247m [3m# comment without space [23m [39m
-  large  =  [34m6 [39m
- [33m) [39m</code></pre>
+<pre><code><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
+  small  <span class="op">=</span> <span class="fl">2</span>,
+  medium <span class="op">=</span> <span class="fl">4</span>, <span class="co"># comment without space</span>
+  large  <span class="op">=</span> <span class="fl">6</span>
+<span class="op">)</span></code></pre>
 <p>The details are in <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>.</p>
 </div>
 </div>
@@ -243,19 +243,18 @@
   f( ) # not ignored anymore
 "</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>
- [38;5;247m [3m#&gt; blocks [23m [39m
-blibala  [32m&lt;- [39m  [34m3 [39m
-   [38;5;247m [3m# styler: off [23m [39m
-   [36mI_have [39m [33m( [39mgood [32m+ [39mreasons, to = turn_off,
-    styler
-   [33m) [39m
- [38;5;247m [3m# styler: on [23m [39m
- [34m1 [39m  [32m+ [39m  [34m1 [39m
+<pre><code><span class="co">#&gt; blocks</span>
+<span class="va">blibala</span> <span class="op">&lt;-</span> <span class="fl">3</span>
+  <span class="co"># styler: off</span>
+  <span class="fu">I_have</span><span class="op">(</span><span class="va">good</span><span class="op">+</span><span class="va">reasons</span>, to <span class="op">=</span> <span class="va">turn_off</span>,
+    <span class="va">styler</span>
+  <span class="op">)</span>
+<span class="co"># styler: on</span>
+<span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span>
 
- [38;5;247m [3m#&gt; inline [23m [39m
-   [36mignore [39m [33m( [39m this [33m) [39m  [38;5;247m [3m# styler: off [23m [39m
- [36mf [39m [33m( [39m [33m) [39m  [38;5;247m [3m# not ignored anymore [23m [39m</code></pre>
+<span class="co">#&gt; inline</span>
+  <span class="fu">ignore</span><span class="op">(</span> <span class="va">this</span><span class="op">)</span> <span class="co"># styler: off</span>
+<span class="fu">f</span><span class="op">(</span><span class="op">)</span> <span class="co"># not ignored anymore</span></code></pre>
 <p>You can also use custom markers as described in <code><a href="../reference/stylerignore.html">help("stylerignore", package = "styler")</a></code>. As described above and in <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>, some alignment is recognized and hence, <em>stylerignore</em> should not be necessary in that context.</p>
 </div>
 <div class="section level2">
@@ -319,7 +318,7 @@ Please review the changes carefully!</code></pre>
   <span class="st">"1++1/2*2^2"</span>,
   math_token_spacing <span class="op">=</span> <span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span><span class="op">(</span>zero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"'/'"</span>, <span class="st">"'*'"</span>, <span class="st">"'^'"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<pre><code> [34m1 [39m  [32m+ [39m  [32m+ [39m [34m1 [39m [32m/ [39m [34m2 [39m [32m* [39m [34m2 [39m [32m^ [39m [34m2 [39m</code></pre>
+<pre><code><span class="fl">1</span> <span class="op">+</span> <span class="op">+</span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span><span class="fl">2</span><span class="op">^</span><span class="fl">2</span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="custom-indention">Custom indention<a class="anchor" aria-label="anchor" href="#custom-indention"></a>
@@ -337,11 +336,11 @@ Please review the changes carefully!</code></pre>
   reindention <span class="op">=</span> <span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span><span class="op">(</span>regex_pattern <span class="op">=</span> <span class="st">"###"</span>, indention <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
   indent_by <span class="op">=</span> <span class="fl">4</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>a  [32m&lt;- [39m  [31mfunction [39m [33m( [39m [33m) [39m  [33m{ [39m
- [38;5;247m [3m### not to be indented [23m [39m
-     [38;5;247m [3m# indent normally [23m [39m
-     [34m33 [39m
- [33m} [39m</code></pre>
+<pre><code><span class="va">a</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+<span class="co">### not to be indented</span>
+    <span class="co"># indent normally</span>
+    <span class="fl">33</span>
+<span class="op">}</span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="custom-style-guides">Custom style guides<a class="anchor" aria-label="anchor" href="#custom-style-guides"></a>
