@@ -19,6 +19,8 @@ editor_options:
 
 -   If there are only empty lines in a code chunk, they are all removed (#936).
 
+-   There is now always one line break after `{` and before `#` (#916).
+
 -   the cache is also invalidated on changing the stylerignore markers (#932).
 
 -   `{` is not put on a new line after `=` and in `function() {` for some edge
@@ -30,12 +32,16 @@ editor_options:
 
 **Other**
 
+-   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955).
+    To access them, do `git checkout v1.0.0`.
 -   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
 -   All (R)md files in this project's source code are now formatted with
     default pandoc markdown formatter. This conversion is required when using
     the visual mode in RStudio (#941).
 -   Update {pkgdown} action to always build, but only deploy on default branch
     (#946).
+-   turned off `styler.print.Vertical` in vignettes so ANSI output of {prettycode} 
+    not messing with {pkgdown} (#956, \@IndrajeetPatil). 
 
 # styler 1.7.0
 

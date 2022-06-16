@@ -19,6 +19,8 @@ knitr::knit_engines$set(list(
     )
   }
 ))
+
+options(styler.colored_print.vertical = FALSE)
 ```
 
 # Entry-points
