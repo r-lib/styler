@@ -30,3 +30,11 @@ if (1 > 3) {
 test_that("I am here", {
   a_test(x)
 })
+
+test_that(
+  desc = "bla",
+  code = {
+    # comment
+    expect_equal(1 + 1, 2)
+  }
+)
