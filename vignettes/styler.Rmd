@@ -145,7 +145,7 @@ As of version `1.3.2`, styler has a dry mode which avoids writing output to the 
 
 In any case, you can use the (invisible) return value of `style_file()` and friends to learn how files were changed (or would have changed):
 
-```{r}
+```{r, comment = "#>"}
 out <- withr::with_tempfile(
   "code.R",
   {
