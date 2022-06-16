@@ -149,39 +149,59 @@ done in <code><a href="tidyverse_style.html">tidyverse_style()</a></code> with <
     <dl><dt>initialize</dt>
 <dd><p>The bare name of a function that initializes various
 variables on each level of nesting.</p></dd>
+
+
 <dt>line_break</dt>
 <dd><p>A list of transformer functions that manipulate line_break
 information.</p></dd>
+
+
 <dt>space</dt>
 <dd><p>A list of transformer functions that manipulate spacing
 information.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>A list of transformer functions that manipulate token text.</p></dd>
+
+
 <dt>indention</dt>
 <dd><p>A list of transformer functions that manipulate indention.</p></dd>
+
+
 <dt>use_raw_indention</dt>
 <dd><p>Boolean indicating whether or not the raw indention
 should be used.</p></dd>
+
+
 <dt>reindention</dt>
 <dd><p>A list of parameters for regex re-indention, most
 conveniently constructed using <code><a href="reindention.html">specify_reindention()</a></code>.</p></dd>
+
+
 <dt>style_guide_name</dt>
 <dd><p>The name of the style guide. Used as a meta attribute
 inside the created style guide, for example for caching. By convention,
 this is the style guide qualified by the package namespace plus the
 location of the style guide, separated by <code>@</code>. For example,
 <code>"styler::tidyverse_style@https://github.com/r-lib"</code>.</p></dd>
+
+
 <dt>style_guide_version</dt>
 <dd><p>The version of the style guide. Used as a meta
 attribute inside the created style guide, for example for caching. This
 should correspond to the version of the R package that exports the
 style guide.</p></dd>
+
+
 <dt>more_specs_style_guide</dt>
 <dd><p>Named vector (coercible to character)
 with all arguments passed to the style guide and used for cache
 invalidation. You can easily capture them in your style guide function
 declaration with <code>as.list(environment())</code> (compare source code of
 <code><a href="tidyverse_style.html">tidyverse_style()</a></code>).</p></dd>
+
+
 <dt>transformers_drop</dt>
 <dd><p>A list specifying under which conditions
 transformer functions can be dropped since they have no effect on the
@@ -191,9 +211,12 @@ change in future releases without prior notification. It was mainly
 introduced to improve speed. Listing transformers here that occur almost
 always in code does not make sense because the process of excluding them
 also takes some time.</p></dd>
+
+
 <dt>indent_character</dt>
 <dd><p>The character that is used for indention. We strongly
 advise for using spaces as indention characters.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
@@ -230,7 +253,7 @@ advise for using spaces as indention characters.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

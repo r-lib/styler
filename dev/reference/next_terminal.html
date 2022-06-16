@@ -126,21 +126,30 @@ next terminal</p>
     <h2>Arguments</h2>
     <dl><dt>pd</dt>
 <dd><p>A nest.</p></dd>
+
+
 <dt>stack</dt>
 <dd><p>Whether or not to also return information on the tokens that
 are between <code>pd</code> and the first terminal, so the returned tibble can be
 understood as a transition path from <code>pd</code> to the next terminal, instead of
 the information at the terminal only. The order is inside-out,
 i.e. the first non-terminal on top, the terminal last.</p></dd>
+
+
 <dt>vars</dt>
 <dd><p>The variables to return.</p></dd>
+
+
 <dt>tokens_exclude</dt>
 <dd><p>A vector with tokens to exclude. This can be helpful if
 one wants to find the next token that is not a comment for example.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a tibble (which is <strong>not</strong> a valid parse table for
+    
+
+<p>Returns a tibble (which is <strong>not</strong> a valid parse table for
 <code>stack = TRUE</code>), with <code>vars</code> and another variable <code>position</code> that denotes
 the index each element in the transition. This can be helpful in conjunction
 with <code><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">purrr::pluck()</a></code> or <code><a href="https://purrr.tidyverse.org/reference/modify_in.html" class="external-link">purrr::modify_in()</a></code> to reach the terminal in the
@@ -174,7 +183,7 @@ nested structure.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

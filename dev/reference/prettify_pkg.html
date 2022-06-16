@@ -128,32 +128,45 @@
     <dl><dt>transformers</dt>
 <dd><p>A list of transformer functions that operate on flat
 parse tables.</p></dd>
+
+
 <dt>filetype</dt>
 <dd><p>Vector of file extensions indicating which file types should
 be styled. Case is ignored, and the <code>.</code> is optional, e.g.
 <code>c(".R", ".Rmd")</code>, or <code>c("r", "rmd")</code>. Supported values (after
 standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.</p></dd>
+
+
 <dt>exclude_files</dt>
 <dd><p>Character vector with paths to files that should be
 excluded from styling.</p></dd>
+
+
 <dt>exclude_dirs</dt>
 <dd><p>Character vector with directories to exclude
 (recursively). Note that the default values were set for consistency with
 <code><a href="style_dir.html">style_dir()</a></code> and as these directories are anyways not styled.</p></dd>
+
+
 <dt>include_roxygen_examples</dt>
 <dd><p>Whether or not to style code in roxygen
 examples.</p></dd>
+
+
 <dt>base_indention</dt>
 <dd><p>Integer scalar indicating by how many spaces the whole
 output text should be indented. Note that this is not the same as splitting
 by line and add a <code>base_indention</code> spaces before the code in the case
 multi-line strings are present. See 'Examples'.</p></dd>
+
+
 <dt>dry</dt>
 <dd><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
 from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
 styling are not identical.</p></dd>
+
 </dl></div>
 
   </div>
@@ -168,7 +181,7 @@ styling are not identical.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

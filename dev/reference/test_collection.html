@@ -129,25 +129,36 @@ with their *-out.R counterpart.</p>
     <dl><dt>test</dt>
 <dd><p>The test to run. It corresponds to a folder name in
 tests/testthat.</p></dd>
+
+
 <dt>sub_test</dt>
 <dd><p>A regex pattern to further reduce the amount of test files
 to be tested in the test. <code>sub_test</code> must match the beginning of file
 names in tests/testthat. <code>NULL</code> matches all files.</p></dd>
+
+
 <dt>dry</dt>
 <dd><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
 from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
 styling are not identical.</p></dd>
+
+
 <dt>write_tree</dt>
 <dd><p>Whether or not the tree structure of the test should be
 computed and written to a file. Note that this needs R &gt;= 3.2
 (see <code><a href="set_arg_write_tree.html">set_arg_write_tree()</a></code>). If the argument is set to <code>NA</code>, the function
 determines whether R &gt;= 3.2 is in use and if so, trees will be written.</p></dd>
+
+
 <dt>transformer</dt>
 <dd><p>A function to apply to the content of <code>in_item</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Parameters passed to transformer function.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -171,7 +182,7 @@ function, every *-out.R file has just one in file.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
