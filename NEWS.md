@@ -35,6 +35,7 @@ editor_options:
 -   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955).
     To access them, do `git checkout v1.0.0`.
 -   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
+-   Minor improvements to the documentation (\@IndrajeetPatil, #958).
 -   All (R)md files in this project's source code are now formatted with
     default pandoc markdown formatter. This conversion is required when using
     the visual mode in RStudio (#941).
