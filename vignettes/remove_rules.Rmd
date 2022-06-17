@@ -41,7 +41,7 @@ are multiple ways:
     *remove* a rule, I have good news for you: There is a quick way to do it.
     And that's what the remainder of this vignette focuses on.
 
-Once you are happy with your style guide, you might ant to have a look at how
+Once you are happy with your style guide, you might want to have a look at how
 to distribute it, which is described in
 `vignette("distribute_custom_style_guides")`.
 
