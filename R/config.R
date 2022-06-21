@@ -107,7 +107,7 @@ set_config_source <- function(config_source,
     rlang::abort(paste0(
       "File ", config_source, " does not exist. Please use the ",
       "argument `config_source` to provide a path to an existing ",
-      "`.pre-commit.yaml` or `NULL` to use the template config."
+      "`.pre-commit-config.yaml` or `NULL` to use the template config."
     ))
   }
   file_type <- as.character(fs::file_info(config_source)$type)
