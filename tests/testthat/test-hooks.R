@@ -169,7 +169,7 @@ run_test("parsable-R",
 )
 
 # failure
-run_test("parsable-R", suffix = "-fail.R", std_err = "not parsable")
+run_test("parsable-R", suffix = "-fail.R", std_out = "Full context", std_err = "1 1")
 
 run_test(
   "parsable-R",
