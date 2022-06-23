@@ -4,6 +4,11 @@ editor_options:
     wrap: 72
 ---
 
+# precommit v0.3.1.9000
+
+-   `parsable-R` hook now gives more context on where and how parsing
+    fails (#423).
+
 # precommit v0.3.1
 
 **User visible changes**

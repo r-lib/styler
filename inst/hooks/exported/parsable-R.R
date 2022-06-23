@@ -11,6 +11,9 @@ out <- lapply(files, function(path) {
 
   tryCatch(
     parse(path_),
-    error = function(x) stop("File ", path, " is not parsable", call. = FALSE)
+    error = function(error) {
+      cat(c("File ", path, " is not parsable. Full context:\n"))
+      stop(conditionMessage(error), call. = FALSE)
+    }
   )
 })
