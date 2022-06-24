@@ -20,7 +20,7 @@ on your file system) won't be deleted, but it will be empty after calling
 \code{cache_clear}.
 }
 \details{
-Each version of styler has it's own cache by default, because styling is
+Each version of styler has its own cache by default, because styling is
 potentially different with different versions of styler.
 }
 \seealso{

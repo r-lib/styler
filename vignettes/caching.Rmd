@@ -18,11 +18,11 @@ knitr::opts_chunk$set(
 library(styler)
 ```
 
-This is a developer vignette to explain how caching works and what we learned on the way. To use the caching feature, please have a look at the README.
+This is a developer vignette to explain how caching works and what we learned on the way.
 
 The main caching features were implemented in the following two pull requests:
 
--   #538: Implemented simple caching and utilities for managing caches. Input text is styled as a whole and added to the cache afterwards. This makes most sense given that the very same expression will probably never be passed to styler, unless it is already compliant with the style guide. Apart from the (negligible) innode, caching text has a memory cost of 0. Speed boosts only result if the whole text passed to styler is compliant to the style guide in use. Changing one line in a file with hundreds of lines means each line will be styled again. This is a major drawback and makes the cache only useful for a use with a pre-commit framework (the initial motivation) or when functions like `style_pkg()` are run often and most files were not changed.
+-   #538: Implemented simple caching and utilities for managing caches. Input text is styled as a whole and added to the cache afterwards. This makes most sense given that the very same expression will probably never be passed to styler, unless it is already compliant with the style guide. Apart from the (negligible) inode, caching text has a memory cost of 0. Speed boosts only result if the whole text passed to styler is compliant to the style guide in use. Changing one line in a file with hundreds of lines means each line will be styled again. This is a major drawback and makes the cache only useful for a use with a pre-commit framework (the initial motivation) or when functions like `style_pkg()` are run often and most files were not changed.
 
 -   #578: Adds a second layer of caching by caching top-level expressions individually. This will bring speed boosts to the situation where very little is changed but there are many top-level expressions. Hence, changing one line in a big file will invalidate the cache for the expression the line is part of, i.e. when changing `x <- 2` to `x = 2` below, styler will have to restyle the function definition, but not `another(call)` and all other expressions that were not changed.
 
