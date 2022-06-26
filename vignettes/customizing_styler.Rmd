@@ -13,7 +13,7 @@ This vignette provides a high-level overview of how styler works and how you can
 
 There are three major steps that styler performs in order to style code:
 
-1.  Create an abstract syntax tree (AST) from `utils::getParseData()` that contains positional information for every token. We call this a nested parse table. You can learn more about how exactly this is done in the vignettes "Data Structures" and "Manipulating the nested parse table".
+1.  Create an abstract syntax tree (AST) from `utils::getParseData()` that contains positional information for every token. We call this a nested parse table.
 
 2.  Apply transformer functions at each level of the nested parse table. We use a visitor approach, i.e. a function that takes functions as arguments and applies them to every level of nesting. You can find out more about it on the help file for `visit()`. Note that the function is not exported by styler. The visitor will take care of applying the functions on every level of nesting - and we can supply transformer functions that operate on one level of nesting. In the sequel, we use the term *nest* to refer to such a parse table at one level of nesting. A *nest* always represents a complete expression. Before we apply the transformers, we have to initialize two columns `lag_newlines` and `spaces`, which contain the number of line breaks before the token and the number of spaces after the token. These will be the columns that most of our transformer functions will modify.
 

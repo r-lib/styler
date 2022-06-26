@@ -18,7 +18,7 @@ both.}
 \description{
 Gives information about the cache. Note that the size consumed by the cache
 will always be displayed as zero because all the cache does is creating an
-empty file of size 0 bytes for every cached expression. The innode is
+empty file of size 0 bytes for every cached expression. The inode is
 excluded from this displayed size but negligible.
 }
 \seealso{
