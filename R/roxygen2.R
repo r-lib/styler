@@ -105,7 +105,13 @@ roxygen_assert_additional_dependencies <- function() {
       e
     }
   )
-  if (inherits(out, "packageNotFoundError") || ("message" %in% names(out) && grepl("Dependency package(\\(s\\))? .* not available", out$message))) {
+  if (
+    inherits(out, "packageNotFoundError") ||
+      ("message" %in% names(out) && (
+        grepl("Dependency package(\\(s\\))? .* not available", out$message) ||
+          grepl("Failed to load", out$message)
+      ))
+  ) {
     # case used in package but not installed
     rlang::abort(paste0(
       "The roxygenize hook requires all dependencies of your package to be listed in ",
