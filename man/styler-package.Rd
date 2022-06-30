@@ -6,13 +6,14 @@
 \alias{styler-package}
 \title{Non-invasive pretty printing of R code}
 \description{
-styler allows you to format .R files, packages or entire R source trees
+styler allows you to format \code{.R}, \code{.Rmd}, \code{.Rmarkdown} and/or
+\code{.qmd}, \code{.Rnw} files, R packages, or entire R source trees
 according to a style guide.
 The following functions can be used for styling:
 \itemize{
 \item \code{\link[=style_text]{style_text()}} to style a character vector.
-\item \code{\link[=style_file]{style_file()}} to style a single .R file.
-\item \code{\link[=style_dir]{style_dir()}} to style all .R files in a directory.
+\item \code{\link[=style_file]{style_file()}} to style a single file.
+\item \code{\link[=style_dir]{style_dir()}} to style all files in a directory.
 \item \code{\link[=style_pkg]{style_pkg()}} to style the source files of an R package.
 \item \link{styler_addins} (RStudio Addins) to style either selected code or the
 active file.

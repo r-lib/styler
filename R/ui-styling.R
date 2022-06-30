@@ -1,4 +1,4 @@
-#' @api
+#' @keywords api
 #' @import tibble
 #' @importFrom magrittr %>%
 NULL
