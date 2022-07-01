@@ -83,7 +83,7 @@ test_that("asserting installed dependencies", {
   writeLines(generate_uninstalled_pkg_call(), "R/core.R")
   testthat::expect_error(
     roxygen_assert_additional_dependencies(),
-    "requires all dependencies of your package"
+    "there is no package called"
   )
 })
 
@@ -125,7 +125,7 @@ test_that("fails gratefully when not installed package is called (packageNotFoun
   # when there is a missing package
   expect_error(
     roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize")),
-    "Please add the package as a dependency"
+    "there is no package called"
   )
 })
 
@@ -139,7 +139,7 @@ test_that("fails gratefully when not installed package is required according to 
     suppressWarnings(
       roxygenize_with_cache(list(getwd()), dirs = dirs_R.cache("roxygenize"))
     ),
-    "Please add the package"
+    "The package .* is required"
   )
 })
 

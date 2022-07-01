@@ -8,6 +8,7 @@ editor_options:
 
 -   `parsable-R` hook now gives more context on where and how parsing
     fails (#423).
+-   fixed R CMD check issues in devel
 
 # precommit v0.3.1
 
