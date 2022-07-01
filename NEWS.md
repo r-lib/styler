@@ -11,6 +11,8 @@ editor_options:
 -   fixed R CMD check issues in devel (#425).
 -   move from *experimental* to *stable* (#426).
 
+Thanks to [&#x0040;danielinteractive](https://github.com/danielinteractive), [&#x0040;jonocarroll](https://github.com/jonocarroll) for their contributions.
+
 # precommit v0.3.1
 
 **User visible changes**
@@ -37,6 +39,8 @@ editor_options:
     (#412).
 -   All (R)md files in that repo are now formatted in a pandoc-compliant
     way (#415).
+
+Thanks to [&#x0040;danielinteractive](https://github.com/danielinteractive) and [&#x0040;mpadge](https://github.com/mpadge) for their contributions.
 
 # precommit v0.3.0
 
