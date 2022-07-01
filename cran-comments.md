@@ -1,4 +1,4 @@
-This is a submission due to user regressions.
+This is a submission due to changes in R devel.
 
 ## Test environments
 
