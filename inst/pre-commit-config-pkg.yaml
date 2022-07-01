@@ -2,7 +2,7 @@
 # R specific hooks: https://github.com/lorenzwalthert/precommit
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.3.1
+    rev: v0.3.2
     hooks: 
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]    
