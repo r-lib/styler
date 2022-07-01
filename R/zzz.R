@@ -13,4 +13,6 @@
 
 # here is only used as a default argument, hence the R CMD check warning
 # Namespace in Imports field not imported from
-here::here
+if (FALSE) {
+  here::here()
+}
