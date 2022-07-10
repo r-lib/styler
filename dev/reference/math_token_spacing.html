@@ -114,9 +114,9 @@ tidyverse_style()."><meta name="robots" content="noindex"><!-- mathjax --><scrip
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">specify_math_token_spacing</span><span class="op">(</span>zero <span class="op">=</span> <span class="st">"'^'"</span>, one <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"'+'"</span>, <span class="st">"'-'"</span>, <span class="st">"'*'"</span>, <span class="st">"'/'"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">tidyverse_math_token_spacing</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_math_token_spacing</span><span class="op">(</span>zero <span class="op">=</span> <span class="st">"'^'"</span>, one <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"'+'"</span>, <span class="st">"'-'"</span>, <span class="st">"'*'"</span>, <span class="st">"'/'"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tidyverse_math_token_spacing</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -144,29 +144,29 @@ tidyverse style guide.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"1+1   -3"</span>,</span>
-<span class="r-in">  math_token_spacing <span class="op">=</span> <span class="fu">specify_math_token_spacing</span><span class="op">(</span>zero <span class="op">=</span> <span class="st">"'+'"</span><span class="op">)</span>,</span>
-<span class="r-in">  strict <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"1+1   -3"</span>,</span></span>
+<span class="r-in"><span>  math_token_spacing <span class="op">=</span> <span class="fu">specify_math_token_spacing</span><span class="op">(</span>zero <span class="op">=</span> <span class="st">"'+'"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  strict <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">1</span><span style="color: #00BB00;">+</span><span style="color: #0000BB;">1</span>   <span style="color: #00BB00;">-</span> <span style="color: #0000BB;">3</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"1+1   -3"</span>,</span>
-<span class="r-in">  math_token_spacing <span class="op">=</span> <span class="fu">specify_math_token_spacing</span><span class="op">(</span>zero <span class="op">=</span> <span class="st">"'+'"</span><span class="op">)</span>,</span>
-<span class="r-in">  strict <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"1+1   -3"</span>,</span></span>
+<span class="r-in"><span>  math_token_spacing <span class="op">=</span> <span class="fu">specify_math_token_spacing</span><span class="op">(</span>zero <span class="op">=</span> <span class="st">"'+'"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  strict <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">1</span><span style="color: #00BB00;">+</span><span style="color: #0000BB;">1</span> <span style="color: #00BB00;">-</span> <span style="color: #0000BB;">3</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"1+1   -3"</span>,</span>
-<span class="r-in">  math_token_spacing <span class="op">=</span> <span class="fu">tidyverse_math_token_spacing</span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  strict <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"1+1   -3"</span>,</span></span>
+<span class="r-in"><span>  math_token_spacing <span class="op">=</span> <span class="fu">tidyverse_math_token_spacing</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  strict <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">1</span> <span style="color: #00BB00;">+</span> <span style="color: #0000BB;">1</span>   <span style="color: #00BB00;">-</span> <span style="color: #0000BB;">3</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"1+1   -3"</span>,</span>
-<span class="r-in">  math_token_spacing <span class="op">=</span> <span class="fu">tidyverse_math_token_spacing</span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  strict <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"1+1   -3"</span>,</span></span>
+<span class="r-in"><span>  math_token_spacing <span class="op">=</span> <span class="fu">tidyverse_math_token_spacing</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  strict <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">1</span> <span style="color: #00BB00;">+</span> <span style="color: #0000BB;">1</span> <span style="color: #00BB00;">-</span> <span style="color: #0000BB;">3</span></span>
 </code></pre></div>
     </div>

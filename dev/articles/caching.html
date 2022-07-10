@@ -146,7 +146,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></span></code></pre></div>
 <p>This is a developer vignette to explain how caching works and what we learned on the way.</p>
 <p>The main caching features were implemented in the following two pull requests:</p>
 <ul>
@@ -154,12 +154,12 @@
 <li><p>#578: Adds a second layer of caching by caching top-level expressions individually. This will bring speed boosts to the situation where very little is changed but there are many top-level expressions. Hence, changing one line in a big file will invalidate the cache for the expression the line is part of, i.e. when changing <code>x &lt;- 2</code> to <code>x = 2</code> below, styler will have to restyle the function definition, but not <code>another(call)</code> and all other expressions that were not changed.</p></li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="co"># a comment</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># &lt;- change this line</span>
-<span class="op">}</span>
-
-<span class="fu">another</span><span class="op">(</span><span class="va">call</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># a comment</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># &lt;- change this line</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">another</span><span class="op">(</span><span class="va">call</span><span class="op">)</span></span></code></pre></div>
 <p>While #538 also required a lot of thought, this is not necessarily visible in the diff. The main challenge was to figure out how the caching should work conceptually and where we best insert the functionality as well as how to make caching work for edge cases like trailing blank lines etc. For details on the conceptual side and requirements, see #538.</p>
 <p>In comparison, the diff in #578 is much larger. We can walk through the main changes introduced here:</p>
 <ul>

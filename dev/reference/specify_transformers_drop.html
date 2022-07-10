@@ -120,12 +120,12 @@ conditions.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">specify_transformers_drop</span><span class="op">(</span>
-  spaces <span class="op">=</span> <span class="cn">NULL</span>,
-  indention <span class="op">=</span> <span class="cn">NULL</span>,
-  line_breaks <span class="op">=</span> <span class="cn">NULL</span>,
-  tokens <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specify_transformers_drop</span><span class="op">(</span></span>
+<span>  spaces <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  indention <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  line_breaks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tokens <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -160,33 +160,33 @@ checks.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">dropping</span> <span class="op">&lt;-</span> <span class="fu">specify_transformers_drop</span><span class="op">(</span></span>
-<span class="r-in">  spaces <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>remove_space_after_excl <span class="op">=</span> <span class="st">"'!'"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">style_guide</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_style_guide.html">create_style_guide</a></span><span class="op">(</span></span>
-<span class="r-in">  space <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>remove_space_after_excl <span class="op">=</span> <span class="fu">styler</span><span class="fu">:::</span><span class="va">remove_space_after_excl</span><span class="op">)</span>,</span>
-<span class="r-in">  transformers_drop <span class="op">=</span> <span class="va">dropping</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co"># transformers_drop() will remove the transformer when the code does not</span></span>
-<span class="r-in"><span class="co"># contain an exclamation mark</span></span>
-<span class="r-in"><span class="va">style_guide_with_some_transformers_dropped</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="transformers_drop.html">transformers_drop</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"x &lt;- 3;2"</span>, <span class="va">style_guide</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">style_guide</span><span class="op">$</span><span class="va">space</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">style_guide_with_some_transformers_dropped</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dropping</span> <span class="op">&lt;-</span> <span class="fu">specify_transformers_drop</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  spaces <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>remove_space_after_excl <span class="op">=</span> <span class="st">"'!'"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">style_guide</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_style_guide.html">create_style_guide</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  space <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>remove_space_after_excl <span class="op">=</span> <span class="fu">styler</span><span class="fu">:::</span><span class="va">remove_space_after_excl</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  transformers_drop <span class="op">=</span> <span class="va">dropping</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># transformers_drop() will remove the transformer when the code does not</span></span></span>
+<span class="r-in"><span><span class="co"># contain an exclamation mark</span></span></span>
+<span class="r-in"><span><span class="va">style_guide_with_some_transformers_dropped</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="transformers_drop.html">transformers_drop</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"x &lt;- 3;2"</span>, <span class="va">style_guide</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">style_guide</span><span class="op">$</span><span class="va">space</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">style_guide_with_some_transformers_dropped</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "remove_space_after_excl"</span>
-<span class="r-in"><span class="co"># note that dropping all transformers of a scope means that this scope</span></span>
-<span class="r-in"><span class="co"># has an empty named list for this scope</span></span>
-<span class="r-in"><span class="va">style_guide_with_some_transformers_dropped</span><span class="op">$</span><span class="va">space</span></span>
+<span class="r-in"><span><span class="co"># note that dropping all transformers of a scope means that this scope</span></span></span>
+<span class="r-in"><span><span class="co"># has an empty named list for this scope</span></span></span>
+<span class="r-in"><span><span class="va">style_guide_with_some_transformers_dropped</span><span class="op">$</span><span class="va">space</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
-<span class="r-in"><span class="co"># this is not the same as if this scope was never specified.</span></span>
-<span class="r-in"><span class="fu"><a href="tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span><span class="op">$</span><span class="va">space</span></span>
+<span class="r-in"><span><span class="co"># this is not the same as if this scope was never specified.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span><span class="op">$</span><span class="va">space</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-in"><span class="co"># Hence, styler should check for length 0 to decide if a scope is present or</span></span>
-<span class="r-in"><span class="co"># not, not via `is.null()` and we can use the `is.null()` check to see if</span></span>
-<span class="r-in"><span class="co"># this scope was initially required by the user.</span></span>
+<span class="r-in"><span><span class="co"># Hence, styler should check for length 0 to decide if a scope is present or</span></span></span>
+<span class="r-in"><span><span class="co"># not, not via `is.null()` and we can use the `is.null()` check to see if</span></span></span>
+<span class="r-in"><span><span class="co"># this scope was initially required by the user.</span></span></span>
 </code></pre></div>
     </div>
   </div>

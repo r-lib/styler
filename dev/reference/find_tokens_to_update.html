@@ -118,7 +118,7 @@ a line are of concern.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">find_tokens_to_update</span><span class="op">(</span><span class="va">flattened_pd</span>, <span class="va">target_token</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_tokens_to_update</span><span class="op">(</span><span class="va">flattened_pd</span>, <span class="va">target_token</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -139,18 +139,18 @@ should be applied to other tokens.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="st">"function(a =</span>
-<span class="r-in">b,</span>
-<span class="r-in">dd</span>
-<span class="r-in">) {}"</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="st">"function(a =</span></span></span>
+<span class="r-in"><span><span class="st">b,</span></span></span>
+<span class="r-in"><span><span class="st">dd</span></span></span>
+<span class="r-in"><span><span class="st">) {}"</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">function</span><span style="color: #BBBB00;">(</span>a =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            b,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          dd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">)</span> <span style="color: #BBBB00;">{}</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="st">"function(a,</span>
-<span class="r-in">b,</span>
-<span class="r-in">dd</span>
-<span class="r-in">) {}"</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="st">"function(a,</span></span></span>
+<span class="r-in"><span><span class="st">b,</span></span></span>
+<span class="r-in"><span><span class="st">dd</span></span></span>
+<span class="r-in"><span><span class="st">) {}"</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">function</span><span style="color: #BBBB00;">(</span>a,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          b,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          dd</span>

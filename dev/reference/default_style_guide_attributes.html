@@ -114,7 +114,7 @@ table.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">default_style_guide_attributes</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">default_style_guide_attributes</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -126,14 +126,14 @@ table.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">with_options</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>styler.cache_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, <span class="co"># temporarily deactivate cache</span></span>
-<span class="r-in">  <span class="op">{</span></span>
-<span class="r-in">    <span class="va">string_to_format</span> <span class="op">&lt;-</span> <span class="st">"call( 3)"</span></span>
-<span class="r-in">    <span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">string_to_format</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="visit.html">pre_visit</a></span><span class="op">(</span><span class="va">pd</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">default_style_guide_attributes</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">with_options</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>styler.cache_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, <span class="co"># temporarily deactivate cache</span></span></span>
+<span class="r-in"><span>  <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">string_to_format</span> <span class="op">&lt;-</span> <span class="st">"call( 3)"</span></span></span>
+<span class="r-in"><span>    <span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">string_to_format</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="visit.html">pre_visit</a></span><span class="op">(</span><span class="va">pd</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">default_style_guide_attributes</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pos_id token terminal text   short token_before token_after stylerignore block</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>

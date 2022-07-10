@@ -3,9 +3,9 @@
 contains at most one \\dontrun{...} or friends.
 We drop all newline characters first because otherwise the code segment
 passed to this function was previously parsed with parse_roxygen() and
-line-breaks in and after the \\dontrun{...} are expressed with &quot;\n&quot;, which
-contradicts to the definition used elsewhere in this package, where every
-element in a vector corresponds to a line. These line-breaks don't get
+line-breaks in and after the \\dontrun{...} are expressed with &quot;\n&quot;,
+which contradicts to the definition used elsewhere in this package, where
+every element in a vector corresponds to a line. These line-breaks don't get
 eliminated because they move to the front of a code_segment and
 style_text(&quot;\n1&quot;) gives &quot;\n1&quot;, i.e. trailing newlines are not
 eliminated."><meta name="robots" content="noindex"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -121,16 +121,16 @@ eliminated."><meta name="robots" content="noindex"><!-- mathjax --><script src="
 contains at most one <code>\\dontrun{...}</code> or friends.
 We drop all newline characters first because otherwise the code segment
 passed to this function was previously parsed with <code><a href="parse_roxygen.html">parse_roxygen()</a></code> and
-line-breaks in and after the <code>\\dontrun{...}</code> are expressed with <code>"\n"</code>, which
-contradicts to the definition used elsewhere in this package, where every
-element in a vector corresponds to a line. These line-breaks don't get
+line-breaks in and after the <code>\\dontrun{...}</code> are expressed with <code>"\n"</code>,
+which contradicts to the definition used elsewhere in this package, where
+every element in a vector corresponds to a line. These line-breaks don't get
 eliminated because they move to the front of a <code>code_segment</code> and
 <code>style_text("\n1")</code> gives <code>"\n1"</code>, i.e. trailing newlines are not
 eliminated.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">style_roxygen_code_example_segment</span><span class="op">(</span><span class="va">one_dont</span>, <span class="va">transformers</span>, <span class="va">base_indention</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">style_roxygen_code_example_segment</span><span class="op">(</span><span class="va">one_dont</span>, <span class="va">transformers</span>, <span class="va">base_indention</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

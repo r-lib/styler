@@ -150,16 +150,16 @@
 </h2>
 <p>Sometimes, you deliberately align code to make it more readable.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  a   <span class="op">=</span>       <span class="fl">3</span>,
-  bre <span class="op">=</span> <span class="fl">3213232</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span></span>
+<span>  a   <span class="op">=</span>       <span class="fl">3</span>,</span>
+<span>  bre <span class="op">=</span> <span class="fl">3213232</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Until styler 1.1.1.9002 (with <code>strict = TRUE</code>, e.g. as in <code>styler::style_file(..., strict = TRUE)</code>), this was formatted as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  a <span class="op">=</span> <span class="fl">3</span>,
-  bre <span class="op">=</span> <span class="fl">3213232</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span></span>
+<span>  a <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  bre <span class="op">=</span> <span class="fl">3213232</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>because no alignment detection was built in.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>styler &gt;= 1.1.1.9003 detects aforementioned alignment for function calls. This vignette describes how aligned code is defined in styler and gives some examples so users can format their aligned code to match the definition styler uses to ensure their code is not unintentionally reformatted.</p>
 <div class="section level3">
@@ -167,29 +167,29 @@
 </h3>
 <p>These typical examples match <em>styler</em>’s definition of alignment. Note the spacing around operators and commas.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">key_here</span>,  <span class="op">~</span><span class="va">right_aligned</span>,
-  <span class="st">"left"</span>,            <span class="st">"right"</span>, <span class="co"># comments are allowed</span>
-  <span class="st">"long string"</span>,      <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span>
-<span class="op">)</span>
-
-<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">key_here</span>,     <span class="op">~</span><span class="va">left_aligned</span>,
-  <span class="st">"left"</span>,        <span class="st">"right"</span>, <span class="co"># comments are allowed</span>
-  <span class="st">"long string"</span>, <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span>
-<span class="op">)</span>
-
-<span class="co"># right-aligned after =</span>
-<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
-  arg2 <span class="op">=</span>       <span class="fl">2</span>,
-  ar   <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">k</span>, <span class="va">x</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="co"># left aligned after =</span>
-<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span>
-  arg2 <span class="op">=</span> <span class="fl">2</span>,
-  ar   <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">k</span>, <span class="va">x</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">key_here</span>,  <span class="op">~</span><span class="va">right_aligned</span>,</span>
+<span>  <span class="st">"left"</span>,            <span class="st">"right"</span>, <span class="co"># comments are allowed</span></span>
+<span>  <span class="st">"long string"</span>,      <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">key_here</span>,     <span class="op">~</span><span class="va">left_aligned</span>,</span>
+<span>  <span class="st">"left"</span>,        <span class="st">"right"</span>, <span class="co"># comments are allowed</span></span>
+<span>  <span class="st">"long string"</span>, <span class="st">"shrt"</span> <span class="co"># columns can overlap ('~' above ',')</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># right-aligned after =</span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span></span>
+<span>  arg2 <span class="op">=</span>       <span class="fl">2</span>,</span>
+<span>  ar   <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">k</span>, <span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># left aligned after =</span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="co"># arguments on same line as opening brace are not considered</span></span>
+<span>  arg2 <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  ar   <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">k</span>, <span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -197,11 +197,11 @@
 </h2>
 <p>An important definition used in the remainder is the one of a <strong>column</strong>. All arguments of a function call that have the same position but are placed on different lines form a column. The below call shows a call with two columns and two rows. Columns separate arguments of the function call, so the separator is the comma. The first row is named because all arguments are named, the second is unnamed:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  <span class="co"># column 1  | column 2 |</span>
-  abkj <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">7</span>,        <span class="co"># | row 1</span>
-  more_ <span class="op">=</span> <span class="st">"a"</span>, <span class="fl">2</span>         <span class="co"># | row 2</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span></span>
+<span>  <span class="co"># column 1  | column 2 |</span></span>
+<span>  abkj <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">7</span>,        <span class="co"># | row 1</span></span>
+<span>  more_ <span class="op">=</span> <span class="st">"a"</span>, <span class="fl">2</span>         <span class="co"># | row 2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><strong>For alignment detection, the first column is omitted if not all arguments in that column are named</strong></p>
 <div class="section level3">
 <h3 id="function-calls">Function calls<a class="anchor" aria-label="anchor" href="#function-calls"></a>
@@ -209,64 +209,64 @@
 <p>Below, we try to explain in an intuitive way how your code should look like to be recognized as aligned.</p>
 <p>Make commas match position vertically and align everything right before commas:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># all arguments of first column named -&gt; must right align values after `=`,</span>
-<span class="co"># one or more spaces around `=`, none before and at least one after the comma.</span>
-<span class="co"># aligned if the (imaginary) comma on the last line is in line with the commas</span>
-<span class="fu">fell</span><span class="op">(</span>
-  x  <span class="op">=</span>    <span class="fl">1</span>,
-  y  <span class="op">=</span>   <span class="fl">23</span>,
-  zz <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span>
-
-<span class="co"># this works also with more than one column</span>
-<span class="fu">fell</span><span class="op">(</span>
-  x  <span class="op">=</span>    <span class="fl">1</span>, annoying <span class="op">=</span>       <span class="fl">3</span>,
-  y  <span class="op">=</span>   <span class="fl">23</span>, <span class="co"># nothing in column 2 for row 2</span>
-  zz <span class="op">=</span> <span class="cn">NULL</span>, finally  <span class="op">=</span> <span class="st">"stuff"</span>
-<span class="op">)</span>
-
-<span class="co"># or if not all arguments of the first column are named</span>
-<span class="fu">gell</span><span class="op">(</span>
-  p <span class="op">=</span> <span class="fl">2</span>,   g <span class="op">=</span> <span class="fu">gg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,  n <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span>
-  <span class="fl">31</span>,    fds <span class="op">=</span>    <span class="op">-</span><span class="fl">1</span>, gz <span class="op">=</span> <span class="va">f</span> <span class="op">/</span> <span class="fl">3</span>,
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># all arguments of first column named -&gt; must right align values after `=`,</span></span>
+<span><span class="co"># one or more spaces around `=`, none before and at least one after the comma.</span></span>
+<span><span class="co"># aligned if the (imaginary) comma on the last line is in line with the commas</span></span>
+<span><span class="fu">fell</span><span class="op">(</span></span>
+<span>  x  <span class="op">=</span>    <span class="fl">1</span>,</span>
+<span>  y  <span class="op">=</span>   <span class="fl">23</span>,</span>
+<span>  zz <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># this works also with more than one column</span></span>
+<span><span class="fu">fell</span><span class="op">(</span></span>
+<span>  x  <span class="op">=</span>    <span class="fl">1</span>, annoying <span class="op">=</span>       <span class="fl">3</span>,</span>
+<span>  y  <span class="op">=</span>   <span class="fl">23</span>, <span class="co"># nothing in column 2 for row 2</span></span>
+<span>  zz <span class="op">=</span> <span class="cn">NULL</span>, finally  <span class="op">=</span> <span class="st">"stuff"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># or if not all arguments of the first column are named</span></span>
+<span><span class="fu">gell</span><span class="op">(</span></span>
+<span>  p <span class="op">=</span> <span class="fl">2</span>,   g <span class="op">=</span> <span class="fu">gg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,  n <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span></span>
+<span>  <span class="fl">31</span>,    fds <span class="op">=</span>    <span class="op">-</span><span class="fl">1</span>, gz <span class="op">=</span> <span class="va">f</span> <span class="op">/</span> <span class="fl">3</span>,</span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>… or match position of <code>=</code> vertically and align everything after this operator left</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># all arguments of first column named -&gt; must left align values after `=`,</span>
-<span class="co"># at least one space before `=`, exactly one after, none before and at least one</span>
-<span class="co"># after the comma.</span>
-<span class="co"># aligned if the first values after `=` are aligned (and exactly one space after</span>
-<span class="co"># `=`)</span>
-<span class="fu">fell</span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fl">1</span>,
-  y <span class="op">=</span> <span class="fl">23</span>,
-  zz <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span>
-
-<span class="co"># this works also with more than one column</span>
-<span class="fu">fell</span><span class="op">(</span>
-  x  <span class="op">=</span> <span class="fl">1</span>,   annoying <span class="op">=</span> <span class="fl">3</span>,
-  y  <span class="op">=</span> <span class="fl">23</span>, <span class="co"># nothing in column 2 for row 2</span>
-  zz <span class="op">=</span> <span class="cn">NULL</span>, finally <span class="op">=</span> <span class="st">"stuff"</span>
-<span class="op">)</span>
-
-<span class="co"># or if not all arguments of the first column are named</span>
-<span class="fu">gell</span><span class="op">(</span>
-  p <span class="op">=</span> <span class="fl">2</span>, g <span class="op">=</span> <span class="fu">gg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span>
-  <span class="fl">31</span>, fds <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, gz <span class="op">=</span> <span class="va">f</span> <span class="op">/</span> <span class="fl">3</span> <span class="op">+</span> <span class="fl">1</span>,
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># all arguments of first column named -&gt; must left align values after `=`,</span></span>
+<span><span class="co"># at least one space before `=`, exactly one after, none before and at least one</span></span>
+<span><span class="co"># after the comma.</span></span>
+<span><span class="co"># aligned if the first values after `=` are aligned (and exactly one space after</span></span>
+<span><span class="co"># `=`)</span></span>
+<span><span class="fu">fell</span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  y <span class="op">=</span> <span class="fl">23</span>,</span>
+<span>  zz <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># this works also with more than one column</span></span>
+<span><span class="fu">fell</span><span class="op">(</span></span>
+<span>  x  <span class="op">=</span> <span class="fl">1</span>,   annoying <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  y  <span class="op">=</span> <span class="fl">23</span>, <span class="co"># nothing in column 2 for row 2</span></span>
+<span>  zz <span class="op">=</span> <span class="cn">NULL</span>, finally <span class="op">=</span> <span class="st">"stuff"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># or if not all arguments of the first column are named</span></span>
+<span><span class="fu">gell</span><span class="op">(</span></span>
+<span>  p <span class="op">=</span> <span class="fl">2</span>, g <span class="op">=</span> <span class="fu">gg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span></span>
+<span>  <span class="fl">31</span>, fds <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, gz <span class="op">=</span> <span class="va">f</span> <span class="op">/</span> <span class="fl">3</span> <span class="op">+</span> <span class="fl">1</span>,</span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>… or match the start of the token after <code>,</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fl">2</span>,           p <span class="op">=</span> <span class="st">"another"</span>,
-  y <span class="op">=</span> <span class="st">"hhjkjkbew"</span>, x <span class="op">=</span> <span class="fl">3</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">x</span>,        <span class="op">~</span><span class="va">y</span>,
-  <span class="st">"another"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,
-  <span class="st">"b"</span>,       <span class="fl">1211234</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fl">2</span>,           p <span class="op">=</span> <span class="st">"another"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"hhjkjkbew"</span>, x <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">x</span>,        <span class="op">~</span><span class="va">y</span>,</span>
+<span>  <span class="st">"another"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
+<span>  <span class="st">"b"</span>,       <span class="fl">1211234</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="comments">Comments<a class="anchor" aria-label="anchor" href="#comments"></a>

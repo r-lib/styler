@@ -126,6 +126,7 @@
 <li>All (R)md files in this project’s source code are now formatted with default pandoc markdown formatter. This conversion is required when using the visual mode in RStudio (<a href="https://github.com/r-lib/styler/issues/941" class="external-link">#941</a>).</li>
 <li>Update {pkgdown} action to always build, but only deploy on default branch (<a href="https://github.com/r-lib/styler/issues/946" class="external-link">#946</a>).</li>
 <li>turned off <code>styler.print.Vertical</code> in vignettes so ANSI output of {prettycode} not messing with {pkgdown} (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/956" class="external-link">#956</a>, <a href="https://github.com/r-lib/styler/issues/957" class="external-link">#957</a>).</li>
+<li>Improved code quality by fixing {lintr} warnings (<a href="https://github.com/r-lib/styler/issues/960" class="external-link">#960</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.7.0" id="styler-170">styler 1.7.0<small>2022-03-13</small><a class="anchor" aria-label="anchor" href="#styler-170"></a></h2>
@@ -134,11 +135,11 @@
 <li>
 <p>stylerignore markers are now interpreted as regular expressions instead of comments that must match exactly. This allows to specify multiple markers in one regular expression for <code>styler.ignore_start</code> and <code>styler.ignore_stop</code>, e.g. to use markers for lintr and styler on the same line, you can use <code>options(styler.ignore_start = "nolint start|styler: off"</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># nolint start, styler: off</span>
-<span class="fl">1</span> <span class="op">+</span><span class="fl">1</span>
-<span class="co"># nolint end</span>
-<span class="co"># styler: on</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># nolint start, styler: off</span></span>
+<span><span class="fl">1</span> <span class="op">+</span><span class="fl">1</span></span>
+<span><span class="co"># nolint end</span></span>
+<span><span class="co"># styler: on</span></span></code></pre></div>
 <p>As a consequence of this approach, the defaults for <code>styler.ignore_start</code> and <code>styler.ignore_stop</code> omit the <code>#</code> (<a href="https://github.com/r-lib/styler/issues/849" class="external-link">#849</a>).</p>
 </li>
 </ul><p><strong>Features</strong></p>
@@ -151,7 +152,7 @@
 </ul><p><strong>Bug fixes</strong></p>
 <ul><li>Piped function without brackets <code>substitute(x %&gt;% y)</code> don’t get <code>()</code> added anymore for one level deep (not more yet, see <a href="https://github.com/r-lib/styler/issues/889" class="external-link">#889</a>), as this can change outcome of the code (<a href="https://github.com/r-lib/styler/issues/876" class="external-link">#876</a>).</li>
 <li>
-<code><a href="https://rdrr.io/r/base/ns-hooks.html" class="external-link">.onLoad()</a></code> method no longer broken with {cli} &gt;= 3.1 (<a href="https://github.com/r-lib/styler/issues/893" class="external-link">#893</a>).</li>
+<code>.onLoad()</code> method no longer broken with {cli} &gt;= 3.1 (<a href="https://github.com/r-lib/styler/issues/893" class="external-link">#893</a>).</li>
 <li>Function calls containing <code>+</code> should no longer give any error on styling when there are comments and line breaks under certain circumstances (<a href="https://github.com/r-lib/styler/issues/905" class="external-link">#905</a>).</li>
 <li>rules that add tokens don’t break stylerignore sequences anymore (<a href="https://github.com/r-lib/styler/issues/891" class="external-link">#891</a>).</li>
 <li>Alignment detection respects stylerignore (<a href="https://github.com/r-lib/styler/issues/850" class="external-link">#850</a>).</li>

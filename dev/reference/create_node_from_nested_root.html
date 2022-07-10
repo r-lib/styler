@@ -114,7 +114,7 @@ at once.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_node_from_nested_root</span><span class="op">(</span><span class="va">pd_nested</span>, <span class="va">structure_only</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_node_from_nested_root</span><span class="op">(</span><span class="va">pd_nested</span>, <span class="va">structure_only</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -138,17 +138,21 @@ to check whether two structures are identical.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">is_installed</a></span><span class="op">(</span><span class="st">"data.tree"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">with_options</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>styler.cache_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, <span class="co"># temporarily deactivate cache</span></span>
-<span class="r-in">    <span class="op">{</span></span>
-<span class="r-in">      <span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</span></span>
-<span class="r-in">      <span class="va">nested_pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span>
-<span class="r-in">      <span class="va">initialized</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="visit.html">pre_visit</a></span><span class="op">(</span><span class="va">nested_pd</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">default_style_guide_attributes</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">      <span class="fu">styler</span><span class="fu">:::</span><span class="fu">create_node_from_nested_root</span><span class="op">(</span><span class="va">initialized</span>, structure_only <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">}</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">is_installed</a></span><span class="op">(</span><span class="st">"data.tree"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">with_options</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>styler.cache_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, <span class="co"># temporarily deactivate cache</span></span></span>
+<span class="r-in"><span>    <span class="op">{</span></span></span>
+<span class="r-in"><span>      <span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</span></span></span>
+<span class="r-in"><span>      <span class="va">nested_pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="va">initialized</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="visit.html">pre_visit</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="va">nested_pd</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">default_style_guide_attributes</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="fu">styler</span><span class="fu">:::</span><span class="fu">create_node_from_nested_root</span><span class="op">(</span><span class="va">initialized</span>,</span></span>
+<span class="r-in"><span>        structure_only <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                  levelName</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  ROOT (token: short_text [lag_newlines/spaces] {pos_id})</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   °--expr: a &lt;-  [0/0] {1}                              </span>

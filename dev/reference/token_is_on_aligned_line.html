@@ -116,7 +116,7 @@ recycled conveniently later if needed as a vector with length &gt; 1.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">token_is_on_aligned_line</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">token_is_on_aligned_line</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -142,22 +142,22 @@ sure we can stop as soon as we found that columns are not aligned.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://magrittr.tidyverse.org" class="external-link">"magrittr"</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">with_options</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>styler.cache_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, <span class="co"># temporarily deactivate cache</span></span>
-<span class="r-in">  <span class="op">{</span></span>
-<span class="r-in">    <span class="va">transformers</span> <span class="op">&lt;-</span> <span class="fu"><a href="tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">pd_nested</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="st">"call("</span>,</span>
-<span class="r-in">      <span class="st">"  ab = 1,"</span>,</span>
-<span class="r-in">      <span class="st">"  a  = 2"</span>,</span>
-<span class="r-in">      <span class="st">")"</span></span>
-<span class="r-in">    <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="visit.html">post_visit</a></span><span class="op">(</span><span class="va">transformers</span><span class="op">$</span><span class="va">initialize</span><span class="op">)</span></span>
-<span class="r-in">    <span class="va">nest</span> <span class="op">&lt;-</span> <span class="va">pd_nested</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in">    <span class="fu">styler</span><span class="fu">:::</span><span class="fu">token_is_on_aligned_line</span><span class="op">(</span><span class="va">nest</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://magrittr.tidyverse.org" class="external-link">"magrittr"</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">with_options</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>styler.cache_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, <span class="co"># temporarily deactivate cache</span></span></span>
+<span class="r-in"><span>  <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">transformers</span> <span class="op">&lt;-</span> <span class="fu"><a href="tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">pd_nested</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"call("</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"  ab = 1,"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"  a  = 2"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">")"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="visit.html">post_visit</a></span><span class="op">(</span><span class="va">transformers</span><span class="op">$</span><span class="va">initialize</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="va">nest</span> <span class="op">&lt;-</span> <span class="va">pd_nested</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span>    <span class="fu">styler</span><span class="fu">:::</span><span class="fu">token_is_on_aligned_line</span><span class="op">(</span><span class="va">nest</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
     </div>

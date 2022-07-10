@@ -161,14 +161,14 @@
 </h4>
 <p>styler separates the abstract definition of a style guide from the application of it. That’s why you must supply a style guide via <code>transformers</code> when styling (in case you don’t want to rely on the defaults):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="va">a</span> <span class="op">+</span> <span class="va">b</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="va">a</span> <span class="op">+</span> <span class="va">b</span></span></code></pre>
 <p>The styler API was designed so that you can pass arguments to the style guide via the styling function (e.g. <code><a href="../reference/style_file.html">style_file()</a></code>) to allow more concise syntax:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># equivalent</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># equivalent</span></span>
+<span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span></span></code></pre></div>
 <p>The magic is possible thanks to <code>...</code>. See <code><a href="../reference/style_text.html">style_text()</a></code> for details.</p>
 </div>
 </div>
@@ -193,13 +193,13 @@
 <li><p>As vector of class <code>AsIs</code>: Each level has to be listed explicitly by wrapping one ore more levels of the scope in <code><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I()</a></code>. This offers more granular control at the expense of more verbosity. This is supported in <code>styler &gt; 1.3.2</code>.</p></li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># tokens and everything less invasive</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="st">"tokens"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># tokens and everything less invasive</span></span>
+<span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="st">"tokens"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># just tokens and indention</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tokens"</span>, <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="va">a</span><span class="op">&lt;-</span><span class="fl">2</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># just tokens and indention</span></span>
+<span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a=2"</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tokens"</span>, <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="va">a</span><span class="op">&lt;-</span><span class="fl">2</span></span></code></pre>
 <p>As you can see from the output, the assignment operator <code>=</code> is replaced with <code>&lt;-</code> in both cases, but spacing remained unchanged in the second example.</p>
 </div>
 <div class="section level4">
@@ -207,18 +207,18 @@
 </h4>
 <p>Another option that is helpful to determine the level of ‘invasiveness’ is <code>strict</code> (defaulting to <code>TRUE</code>). Some rules won’t be applied so strictly with <code>strict = FALSE</code>, assuming you deliberately formatted things the way they are. Please see in <code><a href="../articles/strict.html">vignette("strict")</a></code>. For <code>styler &gt;= 1.2</code> alignment in function calls is detected and preserved so you don’t need <code>strict = FALSE</code>, e.g.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
-  <span class="st">"tibble::tibble(
-     small  = 2 ,
-     medium = 4,#comment without space
-     large  = 6
-   )"</span>
-<span class="op">)</span></code></pre></div>
-<pre><code><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
-  small  <span class="op">=</span> <span class="fl">2</span>,
-  medium <span class="op">=</span> <span class="fl">4</span>, <span class="co"># comment without space</span>
-  large  <span class="op">=</span> <span class="fl">6</span>
-<span class="op">)</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span></span>
+<span>  <span class="st">"tibble::tibble(</span></span>
+<span><span class="st">     small  = 2 ,</span></span>
+<span><span class="st">     medium = 4,#comment without space</span></span>
+<span><span class="st">     large  = 6</span></span>
+<span><span class="st">   )"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  small  <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  medium <span class="op">=</span> <span class="fl">4</span>, <span class="co"># comment without space</span></span>
+<span>  large  <span class="op">=</span> <span class="fl">6</span></span>
+<span><span class="op">)</span></span></code></pre>
 <p>The details are in <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>.</p>
 </div>
 </div>
@@ -227,34 +227,35 @@
 </h2>
 <p>You can tell styler to ignore some lines if you want to keep current formatting. You can mark whole blocks or inline expressions with <code>styler: on</code> and <code>styler: off</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">styler</span><span class="fu">::</span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
-  <span class="st">"
-  #&gt; blocks
-  blibala= 3
-  # styler: off
-  I_have(good+reasons, to = turn_off,
-    styler
-  )
-  # styler: on
-  1+1
-
-  #&gt; inline
-  ignore( this) # styler: off
-  f( ) # not ignored anymore
-"</span>
-<span class="op">)</span></code></pre></div>
-<pre><code><span class="co">#&gt; blocks</span>
-<span class="va">blibala</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-  <span class="co"># styler: off</span>
-  <span class="fu">I_have</span><span class="op">(</span><span class="va">good</span><span class="op">+</span><span class="va">reasons</span>, to <span class="op">=</span> <span class="va">turn_off</span>,
-    <span class="va">styler</span>
-  <span class="op">)</span>
-<span class="co"># styler: on</span>
-<span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span>
-
-<span class="co">#&gt; inline</span>
-  <span class="fu">ignore</span><span class="op">(</span> <span class="va">this</span><span class="op">)</span> <span class="co"># styler: off</span>
-<span class="fu">f</span><span class="op">(</span><span class="op">)</span> <span class="co"># not ignored anymore</span></code></pre>
+<code class="sourceCode R"><span><span class="fu">styler</span><span class="fu">::</span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span></span>
+<span>  <span class="st">"</span></span>
+<span><span class="st">  #&gt; blocks</span></span>
+<span><span class="st">  blibala= 3</span></span>
+<span><span class="st">  # styler: off</span></span>
+<span><span class="st">  I_have(good+reasons, to = turn_off,</span></span>
+<span><span class="st">    styler</span></span>
+<span><span class="st">  )</span></span>
+<span><span class="st">  # styler: on</span></span>
+<span><span class="st">  1+1</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">  #&gt; inline</span></span>
+<span><span class="st">  ignore( this) # styler: off</span></span>
+<span><span class="st">  f( ) # not ignored anymore</span></span>
+<span><span class="st">"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span></span>
+<span><span class="co">#&gt; blocks</span></span>
+<span><span class="va">blibala</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span>  <span class="co"># styler: off</span></span>
+<span>  <span class="fu">I_have</span><span class="op">(</span><span class="va">good</span><span class="op">+</span><span class="va">reasons</span>, to <span class="op">=</span> <span class="va">turn_off</span>,</span>
+<span>    <span class="va">styler</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co"># styler: on</span></span>
+<span><span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="co">#&gt; inline</span></span>
+<span>  <span class="fu">ignore</span><span class="op">(</span> <span class="va">this</span><span class="op">)</span> <span class="co"># styler: off</span></span>
+<span><span class="fu">f</span><span class="op">(</span><span class="op">)</span> <span class="co"># not ignored anymore</span></span></code></pre>
 <p>You can also use custom markers as described in <code><a href="../reference/stylerignore.html">help("stylerignore", package = "styler")</a></code>. As described above and in <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>, some alignment is recognized and hence, <em>stylerignore</em> should not be necessary in that context.</p>
 </div>
 <div class="section level2">
@@ -273,28 +274,28 @@
 </ul>
 <p>In any case, you can use the (invisible) return value of <code><a href="../reference/style_file.html">style_file()</a></code> and friends to learn how files were changed (or would have changed):</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">with_tempfile</a></span><span class="op">(</span>
-  <span class="st">"code.R"</span>,
-  <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"1+1"</span>, <span class="st">"code.R"</span><span class="op">)</span>
-    <span class="fu"><a href="../reference/style_file.html">style_file</a></span><span class="op">(</span><span class="st">"code.R"</span>, dry <span class="op">=</span> <span class="st">"on"</span><span class="op">)</span>
-  <span class="op">}</span>
-<span class="op">)</span></code></pre></div>
-<pre><code><span class="co">#&gt; Styling  1  files:</span>
-<span class="co">#&gt;  code.R ℹ </span>
-<span class="co">#&gt; ────────────────────────────────────────</span>
-<span class="co">#&gt; Status   Count   Legend </span>
-<span class="co">#&gt; ✔    0   File unchanged.</span>
-<span class="co">#&gt; ℹ    1   File changed.</span>
-<span class="co">#&gt; ✖    0   Styling threw an error.</span>
-<span class="co">#&gt; ────────────────────────────────────────</span>
-<span class="co">#&gt; Please review the changes carefully!</span></code></pre>
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">with_tempfile</a></span><span class="op">(</span></span>
+<span>  <span class="st">"code.R"</span>,</span>
+<span>  <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"1+1"</span>, <span class="st">"code.R"</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../reference/style_file.html">style_file</a></span><span class="op">(</span><span class="st">"code.R"</span>, dry <span class="op">=</span> <span class="st">"on"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Styling  1  files:</span></span>
+<span><span class="co">#&gt;  code.R ℹ </span></span>
+<span><span class="co">#&gt; ────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; Status   Count   Legend </span></span>
+<span><span class="co">#&gt; ✔    0   File unchanged.</span></span>
+<span><span class="co">#&gt; ℹ    1   File changed.</span></span>
+<span><span class="co">#&gt; ✖    0   Styling threw an error.</span></span>
+<span><span class="co">#&gt; ────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; Please review the changes carefully!</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">out</span></code></pre></div>
-<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span>
-<span class="co">#&gt;   file   changed</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> code.R TRUE</span></code></pre>
+<code class="sourceCode R"><span><span class="va">out</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   file   changed</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> code.R TRUE</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="more-configuration-options">More configuration options<a class="anchor" aria-label="anchor" href="#more-configuration-options"></a>
@@ -308,39 +309,39 @@
 <h4 id="custom-math-token-spacing">Custom math token spacing<a class="anchor" aria-label="anchor" href="#custom-math-token-spacing"></a>
 </h4>
 <p><code>styler</code> can identify and handle unary operators and other math tokens:</p>
-<pre class="styler"><code><span class="co"># Before</span>
-<span class="fl">1</span><span class="op">+</span><span class="op">+</span><span class="fl">1</span><span class="op">-</span><span class="fl">1</span><span class="op">-</span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span></code></pre>
-<pre><code><span class="co"># After</span>
-<span class="fl">1</span> <span class="op">+</span> <span class="op">+</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span></code></pre>
+<pre class="styler"><code><span><span class="co"># Before</span></span>
+<span><span class="fl">1</span><span class="op">+</span><span class="op">+</span><span class="fl">1</span><span class="op">-</span><span class="fl">1</span><span class="op">-</span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span></span></code></pre>
+<pre><code><span><span class="co"># After</span></span>
+<span><span class="fl">1</span> <span class="op">+</span> <span class="op">+</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span></span></code></pre>
 <p>This is tidyverse style. However, styler offers very granular control for math token spacing. Assuming you like spacing around <code>+</code> and <code>-</code>, but not around <code>/</code> and <code>*</code> and <code>^</code>, do the following:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
-  <span class="st">"1++1/2*2^2"</span>,
-  math_token_spacing <span class="op">=</span> <span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span><span class="op">(</span>zero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"'/'"</span>, <span class="st">"'*'"</span>, <span class="st">"'^'"</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
-<pre><code><span class="fl">1</span> <span class="op">+</span> <span class="op">+</span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span><span class="fl">2</span><span class="op">^</span><span class="fl">2</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span></span>
+<span>  <span class="st">"1++1/2*2^2"</span>,</span>
+<span>  math_token_spacing <span class="op">=</span> <span class="fu"><a href="../reference/math_token_spacing.html">specify_math_token_spacing</a></span><span class="op">(</span>zero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"'/'"</span>, <span class="st">"'*'"</span>, <span class="st">"'^'"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="fl">1</span> <span class="op">+</span> <span class="op">+</span><span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span><span class="fl">2</span><span class="op">^</span><span class="fl">2</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="custom-indention">Custom indention<a class="anchor" aria-label="anchor" href="#custom-indention"></a>
 </h4>
 <p>If you, say, don’t want comments starting with <code>###</code> to be indented and indention to be 4 instead of two spaces, you can formulate an unindention rule and set <code>indent_by</code> to 4:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-    <span class="st">"a &lt;- function() {"</span>,
-    <span class="st">"### not to be indented"</span>,
-    <span class="st">"# indent normally"</span>,
-    <span class="st">"33"</span>,
-    <span class="st">"}"</span>
-  <span class="op">)</span>,
-  reindention <span class="op">=</span> <span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span><span class="op">(</span>regex_pattern <span class="op">=</span> <span class="st">"###"</span>, indention <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
-  indent_by <span class="op">=</span> <span class="fl">4</span>
-<span class="op">)</span></code></pre></div>
-<pre><code><span class="va">a</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-<span class="co">### not to be indented</span>
-    <span class="co"># indent normally</span>
-    <span class="fl">33</span>
-<span class="op">}</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"a &lt;- function() {"</span>,</span>
+<span>    <span class="st">"### not to be indented"</span>,</span>
+<span>    <span class="st">"# indent normally"</span>,</span>
+<span>    <span class="st">"33"</span>,</span>
+<span>    <span class="st">"}"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  reindention <span class="op">=</span> <span class="fu"><a href="../reference/reindention.html">specify_reindention</a></span><span class="op">(</span>regex_pattern <span class="op">=</span> <span class="st">"###"</span>, indention <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  indent_by <span class="op">=</span> <span class="fl">4</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="co">### not to be indented</span></span>
+<span>    <span class="co"># indent normally</span></span>
+<span>    <span class="fl">33</span></span>
+<span><span class="op">}</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="custom-style-guides">Custom style guides<a class="anchor" aria-label="anchor" href="#custom-style-guides"></a>

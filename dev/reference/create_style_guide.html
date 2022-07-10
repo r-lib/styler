@@ -128,20 +128,20 @@ done in <code><a href="tidyverse_style.html">tidyverse_style()</a></code> with <
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_style_guide</span><span class="op">(</span>
-  initialize <span class="op">=</span> <span class="va">default_style_guide_attributes</span>,
-  line_break <span class="op">=</span> <span class="cn">NULL</span>,
-  space <span class="op">=</span> <span class="cn">NULL</span>,
-  token <span class="op">=</span> <span class="cn">NULL</span>,
-  indention <span class="op">=</span> <span class="cn">NULL</span>,
-  use_raw_indention <span class="op">=</span> <span class="cn">FALSE</span>,
-  reindention <span class="op">=</span> <span class="fu"><a href="reindention.html">tidyverse_reindention</a></span><span class="op">(</span><span class="op">)</span>,
-  style_guide_name <span class="op">=</span> <span class="cn">NULL</span>,
-  style_guide_version <span class="op">=</span> <span class="cn">NULL</span>,
-  more_specs_style_guide <span class="op">=</span> <span class="cn">NULL</span>,
-  transformers_drop <span class="op">=</span> <span class="fu"><a href="specify_transformers_drop.html">specify_transformers_drop</a></span><span class="op">(</span><span class="op">)</span>,
-  indent_character <span class="op">=</span> <span class="st">" "</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_style_guide</span><span class="op">(</span></span>
+<span>  initialize <span class="op">=</span> <span class="va">default_style_guide_attributes</span>,</span>
+<span>  line_break <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  space <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  indention <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  use_raw_indention <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  reindention <span class="op">=</span> <span class="fu"><a href="reindention.html">tidyverse_reindention</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  style_guide_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  style_guide_version <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  more_specs_style_guide <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  transformers_drop <span class="op">=</span> <span class="fu"><a href="specify_transformers_drop.html">specify_transformers_drop</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  indent_character <span class="op">=</span> <span class="st">" "</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -221,22 +221,22 @@ advise for using spaces as indention characters.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">set_line_break_before_curly_opening</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">op</span> <span class="op">&lt;-</span> <span class="va">pd_flat</span><span class="op">$</span><span class="va">token</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"'{'"</span></span>
-<span class="r-in">  <span class="va">pd_flat</span><span class="op">$</span><span class="va">lag_newlines</span><span class="op">[</span><span class="va">op</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1L</span></span>
-<span class="r-in">  <span class="va">pd_flat</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">set_line_break_before_curly_opening_style</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">create_style_guide</span><span class="op">(</span></span>
-<span class="r-in">    line_break <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html" class="external-link">lst</a></span><span class="op">(</span><span class="va">set_line_break_before_curly_opening</span><span class="op">)</span>,</span>
-<span class="r-in">    style_guide_name <span class="op">=</span> <span class="st">"some-style-guide"</span>,</span>
-<span class="r-in">    style_guide_version <span class="op">=</span> <span class="st">"some-version"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"a &lt;- function(x) { x }"</span>,</span>
-<span class="r-in">  style <span class="op">=</span> <span class="va">set_line_break_before_curly_opening_style</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">set_line_break_before_curly_opening</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">op</span> <span class="op">&lt;-</span> <span class="va">pd_flat</span><span class="op">$</span><span class="va">token</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"'{'"</span></span></span>
+<span class="r-in"><span>  <span class="va">pd_flat</span><span class="op">$</span><span class="va">lag_newlines</span><span class="op">[</span><span class="va">op</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1L</span></span></span>
+<span class="r-in"><span>  <span class="va">pd_flat</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">set_line_break_before_curly_opening_style</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">create_style_guide</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    line_break <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html" class="external-link">lst</a></span><span class="op">(</span><span class="va">set_line_break_before_curly_opening</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    style_guide_name <span class="op">=</span> <span class="st">"some-style-guide"</span>,</span></span>
+<span class="r-in"><span>    style_guide_version <span class="op">=</span> <span class="st">"some-version"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"a &lt;- function(x) { x }"</span>,</span></span>
+<span class="r-in"><span>  style <span class="op">=</span> <span class="va">set_line_break_before_curly_opening_style</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a <span style="color: #00BB00;">&lt;-</span> <span style="color: #BB0000;">function</span><span style="color: #BBBB00;">(</span>x<span style="color: #BBBB00;">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">{</span> x <span style="color: #BBBB00;">}</span></span>
 </code></pre></div>

@@ -4,11 +4,11 @@ unexpected behavior of the parser that styler was initially designed to work
 around. Examples are #187,
 #216,
 #100 and others. With
-#419, the structure of the parse
-data changes and we need to dispatch for older versions. As it is inconvenient
-to pass a parser version down in the call stack in various places, the
-environment env_current is used to store the current version globally
-but internally."><meta name="robots" content="noindex"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+#419, the structure of the
+parse data changes and we need to dispatch for older versions. As it is
+inconvenient to pass a parser version down in the call stack in various
+places, the environment env_current is used to store the current version
+globally but internally."><meta name="robots" content="noindex"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -122,19 +122,19 @@ unexpected behavior of the parser that styler was initially designed to work
 around. Examples are <a href="https://github.com/r-lib/styler/issues/187" class="external-link">#187</a>,
 <a href="https://github.com/r-lib/styler/issues/216" class="external-link">#216</a>,
 <a href="https://github.com/r-lib/styler/issues/100" class="external-link">#100</a> and others. With
-<a href="https://github.com/r-lib/styler/issues/419" class="external-link">#419</a>, the structure of the parse
-data changes and we need to dispatch for older versions. As it is inconvenient
-to pass a parser version down in the call stack in various places, the
-environment <code>env_current</code> is used to store the current version <em>globally</em>
-but internally.</p>
+<a href="https://github.com/r-lib/styler/issues/419" class="external-link">#419</a>, the structure of the
+parse data changes and we need to dispatch for older versions. As it is
+inconvenient to pass a parser version down in the call stack in various
+places, the environment <code>env_current</code> is used to store the current version
+<em>globally</em> but internally.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">parser_version_set</span><span class="op">(</span><span class="va">version</span><span class="op">)</span>
-
-<span class="fu">parser_version_get</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">parser_version_find</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">parser_version_set</span><span class="op">(</span><span class="va">version</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">parser_version_get</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">parser_version_find</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">

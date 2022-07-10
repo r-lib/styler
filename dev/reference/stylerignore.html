@@ -136,44 +136,44 @@ multiple marker on one line, e.g. <code># nolint start styler: off</code>.</p></
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># as long as the order of the markers is correct, the lines are ignored.</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"</span>
-<span class="r-in">  1+1</span>
-<span class="r-in">  # styler: off</span>
-<span class="r-in">  1+1</span>
-<span class="r-in">  # styler: on</span>
-<span class="r-in">  1+1</span>
-<span class="r-in">  "</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># as long as the order of the markers is correct, the lines are ignored.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"</span></span></span>
+<span class="r-in"><span><span class="st">  1+1</span></span></span>
+<span class="r-in"><span><span class="st">  # styler: off</span></span></span>
+<span class="r-in"><span><span class="st">  1+1</span></span></span>
+<span class="r-in"><span><span class="st">  # styler: on</span></span></span>
+<span class="r-in"><span><span class="st">  1+1</span></span></span>
+<span class="r-in"><span><span class="st">  "</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">1</span> <span style="color: #00BB00;">+</span> <span style="color: #0000BB;">1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #9E9E9E; font-style: italic;"># styler: off</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">1</span><span style="color: #00BB00;">+</span><span style="color: #0000BB;">1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #9E9E9E; font-style: italic;"># styler: on</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">1</span> <span style="color: #00BB00;">+</span> <span style="color: #0000BB;">1</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># if there is a stop marker before a start marker, styler won't be able</span></span>
-<span class="r-in"><span class="co"># to figure out which lines you want to ignore and won't ignore anything,</span></span>
-<span class="r-in"><span class="co"># issuing a warning.</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"</span>
-<span class="r-in">  1+1</span>
-<span class="r-in">  # styler: off</span>
-<span class="r-in">  1+1</span>
-<span class="r-in">  # styler: off</span>
-<span class="r-in">  1+1</span>
-<span class="r-in">  "</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="co"># some alignment of code is detected, so you don't need to use stylerignore</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"call(</span>
-<span class="r-in">    xyz =  3,</span>
-<span class="r-in">    x   = 11</span>
-<span class="r-in">  )"</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># if there is a stop marker before a start marker, styler won't be able</span></span></span>
+<span class="r-in"><span><span class="co"># to figure out which lines you want to ignore and won't ignore anything,</span></span></span>
+<span class="r-in"><span><span class="co"># issuing a warning.</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"</span></span></span>
+<span class="r-in"><span><span class="st">  1+1</span></span></span>
+<span class="r-in"><span><span class="st">  # styler: off</span></span></span>
+<span class="r-in"><span><span class="st">  1+1</span></span></span>
+<span class="r-in"><span><span class="st">  # styler: off</span></span></span>
+<span class="r-in"><span><span class="st">  1+1</span></span></span>
+<span class="r-in"><span><span class="st">  "</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co"># some alignment of code is detected, so you don't need to use stylerignore</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"call(</span></span></span>
+<span class="r-in"><span><span class="st">    xyz =  3,</span></span></span>
+<span class="r-in"><span><span class="st">    x   = 11</span></span></span>
+<span class="r-in"><span><span class="st">  )"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">call</span><span style="color: #BBBB00;">(</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   xyz =  <span style="color: #0000BB;">3</span>,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   x   = <span style="color: #0000BB;">11</span></span>

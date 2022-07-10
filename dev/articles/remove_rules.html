@@ -166,114 +166,114 @@
 <h2 id="practice">Practice<a class="anchor" aria-label="anchor" href="#practice"></a>
 </h2>
 <p>Lets assume you want to remove the rule that turns <code>=</code> into <code>&lt;-</code> for assignment. That means you want</p>
-<pre><code><span class="va">string</span> <span class="op">=</span> <span class="st">"hi there"</span></code></pre>
+<pre><code><span><span class="va">string</span> <span class="op">=</span> <span class="st">"hi there"</span> </span></code></pre>
 <p>to remain unchanged after applying styler. This is not the case if you use the default style guide of styler:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string = 'hi there'"</span><span class="op">)</span>
-<span class="va">string</span> <span class="op">&lt;-</span> <span class="st">"hi there"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string = 'hi there'"</span><span class="op">)</span></span>
+<span><span class="va">string</span> <span class="op">&lt;-</span> <span class="st">"hi there"</span></span></code></pre></div>
 <p>So you need to figure out which rule is responsible for this. Let’s check the transformer categories used with the tidyverse style guide.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">transformers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">transformers</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "initialize"             "line_break"             "space"                 </span>
-<span class="co">#&gt;  [4] "token"                  "indention"              "use_raw_indention"     </span>
-<span class="co">#&gt;  [7] "reindention"            "style_guide_name"       "style_guide_version"   </span>
-<span class="co">#&gt; [10] "more_specs_style_guide" "transformers_drop"      "indent_character"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">transformers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">transformers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "initialize"             "line_break"             "space"                 </span></span>
+<span><span class="co">#&gt;  [4] "token"                  "indention"              "use_raw_indention"     </span></span>
+<span><span class="co">#&gt;  [7] "reindention"            "style_guide_name"       "style_guide_version"   </span></span>
+<span><span class="co">#&gt; [10] "more_specs_style_guide" "transformers_drop"      "indent_character"</span></span></code></pre></div>
 <p>From the aforementioned <a href="https://styler.r-lib.org/articles/customizing_styler.html">vignette</a>:</p>
 <blockquote>
 <p>We note that there are different types of transformer functions. initialize initializes some variables in the nested parse table (so it is not actually a transformer), and the other elements modify either spacing, line breaks or tokens. use_raw_indention is not a function, it is just an option.</p>
 </blockquote>
 <p>Now, we can look at the names of the rules that are sub-elements of the transformer categories.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
-<span class="va">levels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"space"</span>, <span class="st">"line_break"</span>, <span class="st">"indention"</span>, <span class="st">"token"</span><span class="op">)</span>
-<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
-  <span class="va">levels</span>,
-  <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">transformers</span><span class="op">[[</span><span class="va">.x</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
-<span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">levels</span><span class="op">)</span>
-<span class="co">#&gt; $space</span>
-<span class="co">#&gt;  [1] "remove_space_before_closing_paren"  "remove_space_before_opening_paren" </span>
-<span class="co">#&gt;  [3] "add_space_after_for_if_while"       "remove_space_before_comma"         </span>
-<span class="co">#&gt;  [5] "style_space_around_math_token"      "style_space_around_tilde"          </span>
-<span class="co">#&gt;  [7] "spacing_around_op"                  "remove_space_after_opening_paren"  </span>
-<span class="co">#&gt;  [9] "remove_space_after_excl"            "set_space_after_bang_bang"         </span>
-<span class="co">#&gt; [11] "remove_space_before_dollar"         "remove_space_after_fun_dec"        </span>
-<span class="co">#&gt; [13] "remove_space_around_colons"         "start_comments_with_space"         </span>
-<span class="co">#&gt; [15] "remove_space_after_unary_pm_nested" "spacing_before_comments"           </span>
-<span class="co">#&gt; [17] "set_space_between_levels"           "set_space_between_eq_sub_and_comma"</span>
-<span class="co">#&gt; [19] "set_space_in_curly_curly"          </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $line_break</span>
-<span class="co">#&gt;  [1] "set_line_break_around_comma_and_or"                </span>
-<span class="co">#&gt;  [2] "set_line_break_after_assignment"                   </span>
-<span class="co">#&gt;  [3] "set_line_break_before_curly_opening"               </span>
-<span class="co">#&gt;  [4] "remove_line_break_before_round_closing_after_curly"</span>
-<span class="co">#&gt;  [5] "remove_line_breaks_in_fun_dec"                     </span>
-<span class="co">#&gt;  [6] "style_line_break_around_curly"                     </span>
-<span class="co">#&gt;  [7] "set_line_break_around_curly_curly"                 </span>
-<span class="co">#&gt;  [8] "set_line_break_before_closing_call"                </span>
-<span class="co">#&gt;  [9] "set_line_break_after_opening_if_call_is_multi_line"</span>
-<span class="co">#&gt; [10] "remove_line_break_in_fun_call"                     </span>
-<span class="co">#&gt; [11] "add_line_break_after_pipe"                         </span>
-<span class="co">#&gt; [12] "set_linebreak_after_ggplot2_plus"                  </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $indention</span>
-<span class="co">#&gt; [1] "indent_braces"                "unindent_fun_dec"            </span>
-<span class="co">#&gt; [3] "indent_op"                    "indent_eq_sub"               </span>
-<span class="co">#&gt; [5] "indent_without_paren"         "update_indention_ref_fun_dec"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $token</span>
-<span class="co">#&gt; [1] "fix_quotes"                                    </span>
-<span class="co">#&gt; [2] "force_assignment_op"                           </span>
-<span class="co">#&gt; [3] "resolve_semicolon"                             </span>
-<span class="co">#&gt; [4] "add_brackets_in_pipe"                          </span>
-<span class="co">#&gt; [5] "wrap_if_else_while_for_fun_multi_line_in_curly"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="va">levels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"space"</span>, <span class="st">"line_break"</span>, <span class="st">"indention"</span>, <span class="st">"token"</span><span class="op">)</span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span></span>
+<span>  <span class="va">levels</span>,</span>
+<span>  <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">transformers</span><span class="op">[[</span><span class="va">.x</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">levels</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $space</span></span>
+<span><span class="co">#&gt;  [1] "remove_space_before_closing_paren"  "remove_space_before_opening_paren" </span></span>
+<span><span class="co">#&gt;  [3] "add_space_after_for_if_while"       "remove_space_before_comma"         </span></span>
+<span><span class="co">#&gt;  [5] "style_space_around_math_token"      "style_space_around_tilde"          </span></span>
+<span><span class="co">#&gt;  [7] "spacing_around_op"                  "remove_space_after_opening_paren"  </span></span>
+<span><span class="co">#&gt;  [9] "remove_space_after_excl"            "set_space_after_bang_bang"         </span></span>
+<span><span class="co">#&gt; [11] "remove_space_before_dollar"         "remove_space_after_fun_dec"        </span></span>
+<span><span class="co">#&gt; [13] "remove_space_around_colons"         "start_comments_with_space"         </span></span>
+<span><span class="co">#&gt; [15] "remove_space_after_unary_pm_nested" "spacing_before_comments"           </span></span>
+<span><span class="co">#&gt; [17] "set_space_between_levels"           "set_space_between_eq_sub_and_comma"</span></span>
+<span><span class="co">#&gt; [19] "set_space_in_curly_curly"          </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $line_break</span></span>
+<span><span class="co">#&gt;  [1] "set_line_break_around_comma_and_or"                </span></span>
+<span><span class="co">#&gt;  [2] "set_line_break_after_assignment"                   </span></span>
+<span><span class="co">#&gt;  [3] "set_line_break_before_curly_opening"               </span></span>
+<span><span class="co">#&gt;  [4] "remove_line_break_before_round_closing_after_curly"</span></span>
+<span><span class="co">#&gt;  [5] "remove_line_breaks_in_fun_dec"                     </span></span>
+<span><span class="co">#&gt;  [6] "style_line_break_around_curly"                     </span></span>
+<span><span class="co">#&gt;  [7] "set_line_break_around_curly_curly"                 </span></span>
+<span><span class="co">#&gt;  [8] "set_line_break_before_closing_call"                </span></span>
+<span><span class="co">#&gt;  [9] "set_line_break_after_opening_if_call_is_multi_line"</span></span>
+<span><span class="co">#&gt; [10] "remove_line_break_in_fun_call"                     </span></span>
+<span><span class="co">#&gt; [11] "add_line_break_after_pipe"                         </span></span>
+<span><span class="co">#&gt; [12] "set_linebreak_after_ggplot2_plus"                  </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $indention</span></span>
+<span><span class="co">#&gt; [1] "indent_braces"                "unindent_fun_dec"            </span></span>
+<span><span class="co">#&gt; [3] "indent_op"                    "indent_eq_sub"               </span></span>
+<span><span class="co">#&gt; [5] "indent_without_paren"         "update_indention_ref_fun_dec"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $token</span></span>
+<span><span class="co">#&gt; [1] "fix_quotes"                                    </span></span>
+<span><span class="co">#&gt; [2] "force_assignment_op"                           </span></span>
+<span><span class="co">#&gt; [3] "resolve_semicolon"                             </span></span>
+<span><span class="co">#&gt; [4] "add_brackets_in_pipe"                          </span></span>
+<span><span class="co">#&gt; [5] "wrap_if_else_while_for_fun_multi_line_in_curly"</span></span></code></pre></div>
 <p>Spotted the rule we want to get rid of? It’s under <code>token</code> and it’s called <code>force_assignment_op</code>. I agree, we could have chosen a better name. If you are not sure if you can guess from the name of the rule what it does you can also have a look at the function declaration of this (unexported) function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">styler</span><span class="fu">:::</span><span class="va">force_assignment_op</span>
-<span class="co">#&gt; function (pd) </span>
-<span class="co">#&gt; {</span>
-<span class="co">#&gt;     to_replace &lt;- pd$token == "EQ_ASSIGN"</span>
-<span class="co">#&gt;     pd$token[to_replace] &lt;- "LEFT_ASSIGN"</span>
-<span class="co">#&gt;     pd$text[to_replace] &lt;- "&lt;-"</span>
-<span class="co">#&gt;     pd</span>
-<span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x562d6b38aa08&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">styler</span><span class="fu">:::</span><span class="va">force_assignment_op</span></span>
+<span><span class="co">#&gt; function (pd) </span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt;     to_replace &lt;- pd$token == "EQ_ASSIGN"</span></span>
+<span><span class="co">#&gt;     pd$token[to_replace] &lt;- "LEFT_ASSIGN"</span></span>
+<span><span class="co">#&gt;     pd$text[to_replace] &lt;- "&lt;-"</span></span>
+<span><span class="co">#&gt;     pd</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x55c26e4f3d20&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>Next, you simply set that element to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">transformers</span><span class="op">$</span><span class="va">token</span><span class="op">$</span><span class="va">force_assignment_op</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">transformers</span><span class="op">$</span><span class="va">token</span><span class="op">$</span><span class="va">force_assignment_op</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
 <p>And you can use the modified transformer list as input to <code><a href="../reference/style_text.html">style_text()</a></code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string = 'hi there'"</span>, transformers <span class="op">=</span> <span class="va">transformers</span><span class="op">)</span>
-<span class="co">#&gt; string = "hi there"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string = 'hi there'"</span>, transformers <span class="op">=</span> <span class="va">transformers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; string = "hi there"</span></span></code></pre></div>
 <p>If you want to use it the same way as <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>, here’s the last step:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">eq_assign_style</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">transformers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-  <span class="va">transformers</span><span class="op">$</span><span class="va">token</span><span class="op">$</span><span class="va">force_assignment_op</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
-  <span class="va">transformers</span>
-<span class="op">}</span>
-
-<span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string = 'hi there'"</span>, style <span class="op">=</span> <span class="va">eq_assign_style</span><span class="op">)</span>
-<span class="co">#&gt; string = "hi there"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">eq_assign_style</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">transformers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span>  <span class="va">transformers</span><span class="op">$</span><span class="va">token</span><span class="op">$</span><span class="va">force_assignment_op</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span>  <span class="va">transformers</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string = 'hi there'"</span>, style <span class="op">=</span> <span class="va">eq_assign_style</span><span class="op">)</span></span>
+<span><span class="co">#&gt; string = "hi there"</span></span></code></pre></div>
 <p>That’s it. Note that the transformer functions and how they are returned by <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> is not part of the exposed API. This means that the order, the naming etc. may change. Also, remember we did not add a rule to replace <code>&lt;-</code> with <code>=</code>, but we only removed a rule to replace <code>=</code> with <code>&lt;-</code>, so <code>&lt;-</code> won’t be touched:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string &lt;- 'hi there'"</span>, style <span class="op">=</span> <span class="va">eq_assign_style</span><span class="op">)</span>
-<span class="co">#&gt; string &lt;- "hi there"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string &lt;- 'hi there'"</span>, style <span class="op">=</span> <span class="va">eq_assign_style</span><span class="op">)</span></span>
+<span><span class="co">#&gt; string &lt;- "hi there"</span></span></code></pre></div>
 <p>If you want to turn <code>&lt;-</code> into <code>=</code>, you need to add a rule as described in <code><a href="../articles/customizing_styler.html">vignette("customizing_styler")</a></code>.</p>
 <p>If you have trouble identifying a rule based on rule names,</p>
 <ul>
 <li>First write an example whose results is not the one you wanted, e.g.</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"
-f &lt;- function () {
-
-return (1)
-}"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
+<span><span class="st">f &lt;- function () {</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">return (1)</span></span>
+<span><span class="st">}"</span></span></code></pre></div>
 <p>is code that will have the first empty line in the function body removed by styler.</p>
 <ul>
 <li>Then pinpoint the probable rule type (e.g. line breaks if you want less new lines).</li>

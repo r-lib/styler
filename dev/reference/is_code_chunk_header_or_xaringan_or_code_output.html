@@ -116,7 +116,7 @@ See https://yihui.name/knitr/demo/stitch/#spin-comment-out-texts for details.</p
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">is_code_chunk_header_or_xaringan_or_code_output</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_code_chunk_header_or_xaringan_or_code_output</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -128,13 +128,13 @@ See https://yihui.name/knitr/demo/stitch/#spin-comment-out-texts for details.</p
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"# title"</span>,</span>
-<span class="r-in">  <span class="st">"some_code &lt;- function() {}"</span>,</span>
-<span class="r-in">  <span class="st">"#+ chunk-label, opt1=value1"</span>,</span>
-<span class="r-in">  <span class="st">"call(3, 2, c(3:2))"</span>,</span>
-<span class="r-in">  <span class="st">"#&gt; 99"</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"# title"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"some_code &lt;- function() {}"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"#+ chunk-label, opt1=value1"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"call(3, 2, c(3:2))"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"#&gt; 99"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #9E9E9E; font-style: italic;"># title</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> some_code <span style="color: #00BB00;">&lt;-</span> <span style="color: #BB0000;">function</span><span style="color: #BBBB00;">()</span> <span style="color: #BBBB00;">{}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #9E9E9E; font-style: italic;">#+ chunk-label, opt1=value1</span></span>

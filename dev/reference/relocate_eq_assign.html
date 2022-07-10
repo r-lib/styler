@@ -139,7 +139,7 @@ wrap the the implementation <code><a href="relocate_eq_assign_nest.html">relocat
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">relocate_eq_assign</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">relocate_eq_assign</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -151,7 +151,7 @@ wrap the the implementation <code><a href="relocate_eq_assign_nest.html">relocat
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span><span class="st">"a &lt;- b &lt;- 3"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span><span class="st">"a &lt;- b &lt;- 3"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    line1  col1 line2  col2    id parent token       terminal text   pos_id short</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -165,7 +165,7 @@ wrap the the implementation <code><a href="relocate_eq_assign_nest.html">relocat
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     1     8     1     9     5     10 LEFT_ASSIGN TRUE     &lt;-          8 <span style="color: #949494;">"</span>&lt;-<span style="color: #949494;">"</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     1    11     1    11     7      8 NUM_CONST   TRUE     3           9 <span style="color: #949494;">"</span>3<span style="color: #949494;">"</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     1    11     1    11     8     10 expr        FALSE    3          10 <span style="color: #949494;">"</span>3<span style="color: #949494;">"</span>  </span>
-<span class="r-in"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span><span class="st">"a  = b = 3"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span><span class="st">"a  = b = 3"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    line1  col1 line2  col2    id parent token        terminal text  pos_id short</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -179,12 +179,12 @@ wrap the the implementation <code><a href="relocate_eq_assign_nest.html">relocat
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     1     8     1     8     6     13 EQ_ASSIGN    TRUE     =          8 <span style="color: #949494;">"</span>=<span style="color: #949494;">"</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     1    10     1    10     9     10 NUM_CONST    TRUE     3          9 <span style="color: #949494;">"</span>3<span style="color: #949494;">"</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     1    10     1    10    10     13 expr         FALSE    3         10 <span style="color: #949494;">"</span>3<span style="color: #949494;">"</span>  </span>
-<span class="r-in"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"x = 5</span>
-<span class="r-in">  if(x &gt;= 5)</span>
-<span class="r-in">  y = TRUE else</span>
-<span class="r-in">  y = FALSE"</span>,</span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"x = 5</span></span></span>
+<span class="r-in"><span><span class="st">  if(x &gt;= 5)</span></span></span>
+<span class="r-in"><span><span class="st">  y = TRUE else</span></span></span>
+<span class="r-in"><span><span class="st">  y = FALSE"</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 29 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    line1  col1 line2  col2    id parent token        terminal text  pos_id short</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -199,12 +199,12 @@ wrap the the implementation <code><a href="relocate_eq_assign_nest.html">relocat
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     2     5     2     5    12     42 '('          TRUE     <span style="color: #949494;">"</span>(<span style="color: #949494;">"</span>        9 <span style="color: #949494;">"</span>(<span style="color: #949494;">"</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     2     6     2    11    19     42 expr         FALSE    <span style="color: #949494;">"</span>x &gt;…     10 <span style="color: #949494;">"</span>x &gt;…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 19 more rows</span></span>
-<span class="r-in"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"x &lt;- 5</span>
-<span class="r-in">  if(x &gt;= 5)</span>
-<span class="r-in">  y &lt;- TRUE else</span>
-<span class="r-in">  y &lt;- FALSE"</span>,</span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"x &lt;- 5</span></span></span>
+<span class="r-in"><span><span class="st">  if(x &gt;= 5)</span></span></span>
+<span class="r-in"><span><span class="st">  y &lt;- TRUE else</span></span></span>
+<span class="r-in"><span><span class="st">  y &lt;- FALSE"</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 29 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    line1  col1 line2  col2    id parent token       terminal text   pos_id short</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>

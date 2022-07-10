@@ -148,44 +148,44 @@
     
 <p>This vignette shows how output from styler might differ when <code>strict = FALSE</code>. For brevity, we don’t show the output of <code>strict = TRUE</code>, but it should be pretty simple for the user to derive it from the bullet point(s) or simply paste the code in the console to see the output.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>multi-line function declarations without curly braces are tolerated.</li>
 </ul>
-<pre class="styler"><code><span class="kw">function</span><span class="op">(</span><span class="op">)</span>
-  <span class="cn">NULL</span></code></pre>
+<pre class="styler"><code><span><span class="kw">function</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="cn">NULL</span></span></code></pre>
 <ul>
 <li>Spaces before opening parenthesis, tilde as well as around comments and math token must be at least one, not exactly one.</li>
 </ul>
-<pre class="styler"><code><span class="fl">1</span>  <span class="op">+</span>    <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fl">3</span><span class="op">)</span>
-<span class="fl">1</span> <span class="op">~</span>  <span class="fu">more</span><span class="op">(</span><span class="op">)</span>   <span class="co">#   comment</span></code></pre>
+<pre class="styler"><code><span><span class="fl">1</span>  <span class="op">+</span>    <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fl">1</span> <span class="op">~</span>  <span class="fu">more</span><span class="op">(</span><span class="op">)</span>   <span class="co">#   comment</span></span></code></pre>
 <ul>
 <li>More than one line break is tolerated before closing curly brace and line breaks between curly and round braces are not removed.</li>
 </ul>
-<pre class="styler"><code><span class="fu">test</span><span class="op">(</span><span class="op">{</span>
-  <span class="fl">1</span>
-
-<span class="op">}</span>
-<span class="op">)</span></code></pre>
+<pre class="styler"><code><span><span class="fu">test</span><span class="op">(</span><span class="op">{</span></span>
+<span>  <span class="fl">1</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre>
 <ul>
 <li>Multi-line calls don’t put the closing brace on a new line nor trigger a line break after the opening brace.</li>
 </ul>
-<pre class="styler"><code><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span>
-  <span class="va">this</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span><span class="fl">2</span>,
-  <span class="va">more</span>
-<span class="op">)</span></code></pre>
+<pre class="styler"><code><span><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span></span>
+<span>  <span class="va">this</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span><span class="fl">2</span>,</span>
+<span>  <span class="va">more</span></span>
+<span><span class="op">)</span></span></code></pre>
 <ul>
 <li>No line break inserted after pipes nor ggplot2 or pipe expressions.</li>
 </ul>
-<pre class="styler"><code><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_x_continuous</span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">this</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">is</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">a</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">long</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">pipe</a></span><span class="op">(</span><span class="op">)</span></code></pre>
+<pre class="styler"><code><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_x_continuous</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">this</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">is</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">a</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">long</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">pipe</a></span><span class="op">(</span><span class="op">)</span></span></code></pre>
 <ul>
 <li>ifelse statements don’t get curly braces added when multi-line.</li>
 </ul>
-<pre class="styler"><code><span class="kw">if</span> <span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="fl">3</span>  <span class="kw">else</span>
-  <span class="fl">5</span></code></pre>
+<pre class="styler"><code><span><span class="kw">if</span> <span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="fl">3</span>  <span class="kw">else</span></span>
+<span>  <span class="fl">5</span></span></code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

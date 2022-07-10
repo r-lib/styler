@@ -112,14 +112,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tidyverse_style</span><span class="op">(</span>
-  scope <span class="op">=</span> <span class="st">"tokens"</span>,
-  strict <span class="op">=</span> <span class="cn">TRUE</span>,
-  indent_by <span class="op">=</span> <span class="fl">2</span>,
-  start_comments_with_one_space <span class="op">=</span> <span class="cn">FALSE</span>,
-  reindention <span class="op">=</span> <span class="fu"><a href="reindention.html">tidyverse_reindention</a></span><span class="op">(</span><span class="op">)</span>,
-  math_token_spacing <span class="op">=</span> <span class="fu"><a href="math_token_spacing.html">tidyverse_math_token_spacing</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tidyverse_style</span><span class="op">(</span></span>
+<span>  scope <span class="op">=</span> <span class="st">"tokens"</span>,</span>
+<span>  strict <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  indent_by <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  start_comments_with_one_space <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  reindention <span class="op">=</span> <span class="fu"><a href="reindention.html">tidyverse_reindention</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  math_token_spacing <span class="op">=</span> <span class="fu"><a href="math_token_spacing.html">tidyverse_math_token_spacing</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -179,19 +179,19 @@ granular control at the expense of more verbosity.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="st">"call( 1)"</span>, style <span class="op">=</span> <span class="va">tidyverse_style</span>, scope <span class="op">=</span> <span class="st">"spaces"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="st">"call( 1)"</span>, style <span class="op">=</span> <span class="va">tidyverse_style</span>, scope <span class="op">=</span> <span class="st">"spaces"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">call</span><span style="color: #BBBB00;">(</span><span style="color: #0000BB;">1</span><span style="color: #BBBB00;">)</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="st">"call( 1)"</span>, transformers <span class="op">=</span> <span class="fu">tidyverse_style</span><span class="op">(</span>strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="st">"call( 1)"</span>, transformers <span class="op">=</span> <span class="fu">tidyverse_style</span><span class="op">(</span>strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">call</span><span style="color: #BBBB00;">(</span><span style="color: #0000BB;">1</span><span style="color: #BBBB00;">)</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ab &lt;- 3"</span>, <span class="st">"a  &lt;-3"</span><span class="op">)</span>, strict <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># keeps alignment of "&lt;-"</span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ab &lt;- 3"</span>, <span class="st">"a  &lt;-3"</span><span class="op">)</span>, strict <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># keeps alignment of "&lt;-"</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ab <span style="color: #00BB00;">&lt;-</span> <span style="color: #0000BB;">3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a  <span style="color: #00BB00;">&lt;-</span> <span style="color: #0000BB;">3</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ab &lt;- 3"</span>, <span class="st">"a  &lt;-3"</span><span class="op">)</span>, strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># drops alignment of "&lt;-"</span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ab &lt;- 3"</span>, <span class="st">"a  &lt;-3"</span><span class="op">)</span>, strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># drops alignment of "&lt;-"</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ab <span style="color: #00BB00;">&lt;-</span> <span style="color: #0000BB;">3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a <span style="color: #00BB00;">&lt;-</span> <span style="color: #0000BB;">3</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># styling line breaks only without spaces</span></span>
-<span class="r-in"><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ab &lt;- 3"</span>, <span class="st">"a =3"</span><span class="op">)</span>, strict <span class="op">=</span> <span class="cn">TRUE</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"line_breaks"</span>, <span class="st">"tokens"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># styling line breaks only without spaces</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="style_text.html">style_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ab &lt;- 3"</span>, <span class="st">"a =3"</span><span class="op">)</span>, strict <span class="op">=</span> <span class="cn">TRUE</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"line_breaks"</span>, <span class="st">"tokens"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ab <span style="color: #00BB00;">&lt;-</span> <span style="color: #0000BB;">3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a <span style="color: #00BB00;">&lt;-</span><span style="color: #0000BB;">3</span></span>
 </code></pre></div>
