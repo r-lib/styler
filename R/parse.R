@@ -27,8 +27,8 @@ parse_safely <- function(text, ...) {
       abort(paste0(
         "The code to style seems to use Windows style line endings (CRLF). ",
         "styler currently only supports Unix style line endings (LF). ",
-        "Please change the EOL character in your editor to Unix style and try again.",
-        "\nThe parsing error was:\n", tried_parsing$message
+        "Please change the EOL character in your editor to Unix style and try ",
+        "again.\nThe parsing error was:\n", tried_parsing$message
       ))
     } else {
       abort(tried_parsing$message)

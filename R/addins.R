@@ -37,8 +37,9 @@
 #' # save after styling when using the Addin
 #' options(styler.save_after_styling = TRUE)
 #' # only style with scope = "spaces" when using the Addin
+#' val <- "styler::tidyverse_style(scope = 'spaces')"
 #' options(
-#'   styler.addins_style_transformer = "styler::tidyverse_style(scope = 'spaces')"
+#'   styler.addins_style_transformer = val
 #' )
 #' }
 NULL
@@ -130,7 +131,11 @@ style_selection <- function() {
     base_indention = nchar(gsub("^( *).*", "\\1", text))
   )
   rstudioapi::modifyRange(
-    context$selection[[1]]$range, paste0(c(out, if (context$selection[[1]]$range$end[2] == 1) ""), collapse = "\n"),
+    context$selection[[1]]$range,
+    paste0(c(
+      out,
+      if (context$selection[[1]]$range$end[2] == 1) ""
+    ), collapse = "\n"),
     id = context$id
   )
   if (save_after_styling_is_active() == TRUE && context$path != "") {
@@ -212,9 +217,9 @@ try_transform_as_r_file <- function(context, transformer) {
     transformer(context$contents),
     error = function(e) {
       preamble_for_unsaved <- paste(
-        "Styling of unsaved files is only supported for R files with valid code.",
-        "Please save the file (as .R or .Rmd) and make sure that the R code in it",
-        "can be parsed. Then, try to style again."
+        "Styling of unsaved files is only supported for R files with valid ",
+        "code. Please save the file (as .R or .Rmd) and make sure that the R ",
+        "code in it can be parsed. Then, try to style again."
       )
 
       if (context$path == "") {

@@ -20,7 +20,8 @@ parse_roxygen <- function(roxygen) {
   had_warning <- FALSE
   parsed <- withCallingHandlers(
     {
-      parsed <- as.character(tools::parse_Rd(connection, fragment = TRUE), deparse = FALSE)
+      parsed <- tools::parse_Rd(connection, fragment = TRUE) %>%
+        as.character(deparse = FALSE)
       if (had_warning) {
         roxygen_remove_extra_brace(parsed)
       } else {
@@ -93,15 +94,19 @@ roxygen_remove_extra_brace <- function(parsed) {
           # try if can be parsed (need remve dontrun)
           worth_trying_to_remove_brace <- rlang::with_handlers(
             {
-              parse(text = gsub("^\\\\[[:alpha:]]+", "", parsed)) # this will error informatively
-              FALSE # if parsing succeeds, we can stop tryint to remove brace and move on with parsed
+              # this will error informatively
+              parse(text = gsub("^\\\\[[:alpha:]]+", "", parsed))
+              # if parsing succeeds, we can stop tryint to remove brace and move
+              # on with parsed
+              FALSE
             },
             error = function(...) {
               # continue if braces are left, otherwise give up
               if (any(last(parsed) %in% c("}", "\n"))) {
                 TRUE
               } else {
-                # this will error informatively. If not, outer loop will fail informatively
+                # this will error informatively. If not, outer loop will fail
+                # informatively
                 parse(text = gsub("^\\\\[[:alpha:]]+", "", parsed_))
                 FALSE
               }
@@ -109,7 +114,8 @@ roxygen_remove_extra_brace <- function(parsed) {
           )
         }
       } else {
-        parse(text = gsub("^\\\\[[:alpha:]]*", "", parsed_)) # this will error informatively
+        # this will error informatively
+        parse(text = gsub("^\\\\[[:alpha:]]*", "", parsed_))
       }
       parsed
     }
@@ -124,11 +130,15 @@ roxygen_remove_extra_brace <- function(parsed) {
 #' `remove_roxygen_mask()` when there are no characters to escape.
 #' @keywords internal
 emulate_rd <- function(roxygen) {
-  example_type <- gsub("^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "examples\\2", roxygen[1])
+  example_type <- gsub(
+    "^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "examples\\2", roxygen[1]
+  )
   if (needs_rd_emulation(roxygen)) {
     roxygen <- c(
       "#' Example",
-      gsub("^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "#' @examples \\4", roxygen),
+      gsub(
+        "^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "#' @examples \\4", roxygen
+      ),
       "x <- 1"
     )
     roxygen <- gsub("(^#)[^']", "#' #", roxygen)

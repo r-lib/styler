@@ -227,12 +227,12 @@ style_text <- function(text,
 #' Prettify arbitrary R code
 #'
 #' Performs various substitutions in all `.R`, `.Rmd`, `.Rmarkdown`, `qmd`
-#' and/or `.Rnw` files
-#' in a directory (by default only `.R` files are styled - see `filetype` argument).
+#' and/or `.Rnw` files in a directory (by default only `.R` files are styled -
+#' see `filetype` argument).
 #' Carefully examine the results after running this function!
 #' @param path Path to a directory with files to transform.
-#' @param recursive A logical value indicating whether or not files in subdirectories
-#'   of `path` should be styled as well.
+#' @param recursive A logical value indicating whether or not files in
+#'   sub directories of `path` should be styled as well.
 #' @param exclude_dirs Character vector with directories to exclude
 #'   (recursively).
 ##' @inheritParams style_pkg

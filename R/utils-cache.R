@@ -158,8 +158,9 @@ cache_by_expression <- function(text,
   }
   # TODO base_indention should be set to 0  on write and on read for expressions
   # (only) to make it possible to use the cache for expressions with different
-  # indention. when not the whole input text is cached, we go trough all expressions and
-  # check if they are cached, if yes, we take the input (from which the indention
+  # indention. when not the whole input text is cached, we go trough all
+  # expressions and check if they are cached, if yes, we take the input (from
+  # which the indention
   # was removed via parse, same as it is in cache_by_expression) and add the
   # base indention.
   expressions[expressions$parent == 0 & expressions$token != "COMMENT" & !expressions$stylerignore, "text"] %>%

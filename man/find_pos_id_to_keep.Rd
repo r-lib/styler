@@ -12,8 +12,9 @@ top level expression, potentially cached.}
 }
 \description{
 To make a parse table shallow, we must know which ids to keep.
-\code{split(cumsum(pd_parent_first$parent == 0))} above puts comments with negative
-parents in the same block as proceeding expressions (but also with positive).
+\code{split(cumsum(pd_parent_first$parent == 0))} above puts comments with
+negative parents in the same block as proceeding expressions (but also with
+positive).
 \code{find_pos_id_to_keep()} must hence always keep negative comments. We did not
 use \code{split(cumsum(pd_parent_first$parent < 1))} because then every top-level
 comment is an expression on its own and processing takes much longer for

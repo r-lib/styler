@@ -116,7 +116,8 @@ token_is_on_aligned_line <- function(pd_flat) {
 
     # first col has no leading ,
     current_col <- nchar(by_line) - as.integer(column > 1)
-    # Problem `by_line` counting from comma before column 3, previous_line counting 1 space before ~
+    # Problem `by_line` counting from comma before column 3, previous_line
+    # counting 1 space before ~
     if (column > 1) {
       previous_line <- previous_line[
         intersect(names(previous_line), names(by_line))

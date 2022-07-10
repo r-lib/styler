@@ -22,7 +22,9 @@ style_roxygen_code_example <- function(example, transformers, base_indention) {
 #' @param example_one A character vector, one element per line, that contains in
 #'   total at most one example tag.
 #' @keywords internal
-style_roxygen_code_example_one <- function(example_one, transformers, base_indention) {
+style_roxygen_code_example_one <- function(example_one,
+                                           transformers,
+                                           base_indention) {
   bare <- parse_roxygen(example_one)
   one_dont <- split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
   unmasked <- map(one_dont, style_roxygen_code_example_segment,
@@ -52,9 +54,9 @@ style_roxygen_code_example_one <- function(example_one, transformers, base_inden
 #' contains at most one `\\dontrun{...}` or friends.
 #' We drop all newline characters first because otherwise the code segment
 #' passed to this function was previously parsed with [parse_roxygen()] and
-#' line-breaks in and after the `\\dontrun{...}` are expressed with `"\n"`, which
-#' contradicts to the definition used elsewhere in this package, where every
-#' element in a vector corresponds to a line. These line-breaks don't get
+#' line-breaks in and after the `\\dontrun{...}` are expressed with `"\n"`,
+#' which contradicts to the definition used elsewhere in this package, where
+#' every element in a vector corresponds to a line. These line-breaks don't get
 #' eliminated because they move to the front of a `code_segment` and
 #' `style_text("\n1")` gives `"\n1"`, i.e. trailing newlines are not
 #' eliminated.

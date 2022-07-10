@@ -15,7 +15,7 @@ transform_mixed(lines, transformer_fun, filetype)
 }
 \description{
 Applies the supplied transformer function to code chunks identified within
-an Rmd or Rnw file and recombines the resulting (styled) code chunks with the text
-chunks.
+an Rmd or Rnw file and recombines the resulting (styled) code chunks with the
+text chunks.
 }
 \keyword{internal}
