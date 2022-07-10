@@ -64,7 +64,10 @@ next_terminal <- function(pd,
   if (pd$terminal[1]) {
     pd[1, c("position", vars)]
   } else {
-    current <- next_terminal(pd$child[[1]], stack = stack, vars = vars, tokens_exclude = tokens_exclude)
+    current <- next_terminal(
+      pd$child[[1]],
+      stack = stack, vars = vars, tokens_exclude = tokens_exclude
+    )
     if (stack) {
       bind_rows(pd[1, c("position", vars)], current)
     } else {

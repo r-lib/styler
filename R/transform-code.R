@@ -1,8 +1,8 @@
 #' Transform code from R, Rmd or Rnw files
 #'
 #' A wrapper which initiates the styling of
-#' either R, Rmd or Rnw files by passing the relevant transformer function for each
-#' case.
+#' either R, Rmd or Rnw files by passing the relevant transformer function for
+#' each case.
 #'
 #' @inheritParams transform_utf8
 #' @param ... Further arguments passed to [transform_utf8()].
@@ -29,8 +29,8 @@ transform_code <- function(path, fun, ..., dry) {
 #' Transform mixed contents
 #'
 #' Applies the supplied transformer function to code chunks identified within
-#' an Rmd or Rnw file and recombines the resulting (styled) code chunks with the text
-#' chunks.
+#' an Rmd or Rnw file and recombines the resulting (styled) code chunks with the
+#' text chunks.
 #'
 #' @param transformer_fun A styler transformer function.
 #' @inheritParams separate_chunks
@@ -93,14 +93,19 @@ separate_chunks <- function(lines, filetype) {
 #' @param engine_pattern A regular expression that must match the engine name.
 #' @importFrom rlang abort
 #' @keywords internal
-identify_raw_chunks <- function(lines, filetype, engine_pattern = get_engine_pattern()) {
+identify_raw_chunks <- function(lines,
+                                filetype,
+                                engine_pattern = get_engine_pattern()) {
   pattern <- get_knitr_pattern(filetype)
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
     abort("Unrecognized chunk pattern!")
   }
 
   if (filetype == "Rmd") {
-    starts <- grep("^[\t >]*```+\\s*\\{([Rr]( *[ ,].*)?)\\}\\s*$", lines, perl = TRUE)
+    starts <- grep(
+      "^[\t >]*```+\\s*\\{([Rr]( *[ ,].*)?)\\}\\s*$", lines,
+      perl = TRUE
+    )
     ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
     ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1]]) %>%
       stats::na.omit()

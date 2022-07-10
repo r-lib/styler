@@ -40,8 +40,8 @@ Update indention information of parse data
 }
 \section{Functions}{
 \itemize{
-\item \code{indent_without_paren_for_while_fun}: Is used to indent for and statements and function
-definitions without parenthesis.
+\item \code{indent_without_paren_for_while_fun}: Is used to indent for and statements and
+function definitions without parenthesis.
 
 \item \code{indent_without_paren_if_else}: Is used to indent if and if-else statements.
 

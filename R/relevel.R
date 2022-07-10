@@ -27,7 +27,8 @@ flatten_operators <- function(pd_nested) {
 flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, "PIPE", math_token, "'$'")
   pd_token_right <- c(
-    special_token, "PIPE", "LEFT_ASSIGN", if (parser_version_get() > 1) "EQ_ASSIGN",
+    special_token, "PIPE", "LEFT_ASSIGN",
+    if (parser_version_get() > 1) "EQ_ASSIGN",
     "'+'", "'-'", "'~'"
   )
   pd_nested %>%
@@ -56,7 +57,9 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   if (length(token_pos_candidates) == 0) {
     return(pd_nested)
   }
-  token_pos <- token_pos_candidates[ifelse(left, 1, length(token_pos_candidates))]
+  token_pos <- token_pos_candidates[
+    ifelse(left, 1, length(token_pos_candidates))
+  ]
   if (left) {
     pos <- previous_non_comment(pd_nested, token_pos)
   } else {

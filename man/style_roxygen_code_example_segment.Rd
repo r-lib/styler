@@ -22,9 +22,9 @@ A roxygen code example segment corresponds to roxygen example code that
 contains at most one \verb{\\\dontrun{...}} or friends.
 We drop all newline characters first because otherwise the code segment
 passed to this function was previously parsed with \code{\link[=parse_roxygen]{parse_roxygen()}} and
-line-breaks in and after the \verb{\\\dontrun{...}} are expressed with \code{"\\n"}, which
-contradicts to the definition used elsewhere in this package, where every
-element in a vector corresponds to a line. These line-breaks don't get
+line-breaks in and after the \verb{\\\dontrun{...}} are expressed with \code{"\\n"},
+which contradicts to the definition used elsewhere in this package, where
+every element in a vector corresponds to a line. These line-breaks don't get
 eliminated because they move to the front of a \code{code_segment} and
 \code{style_text("\\n1")} gives \code{"\\n1"}, i.e. trailing newlines are not
 eliminated.

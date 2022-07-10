@@ -21,7 +21,7 @@ styling are not identical.}
 }
 \description{
 A wrapper which initiates the styling of
-either R, Rmd or Rnw files by passing the relevant transformer function for each
-case.
+either R, Rmd or Rnw files by passing the relevant transformer function for
+each case.
 }
 \keyword{internal}

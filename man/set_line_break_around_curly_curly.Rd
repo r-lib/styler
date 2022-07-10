@@ -35,8 +35,8 @@ curly-curly affects styling of line break and spaces, namely:
 \details{
 \itemize{
 \item No line break after first or second \verb{\\\{}, before third and fourth \verb{\\\{}.
-\item No space after first and third \verb{\\\{}, one space after second and before third
-\verb{\\\}}.
+\item No space after first and third \verb{\\\{}, one space after second and before
+third \verb{\\\}}.
 \item No line breaks within curly-curly, e.g. \verb{\\\{\\\{ x \\\}\\\}} can only contain line
 breaks after the last brace or before the first brace. But these are not
 dependent on curly-curly specifically.

@@ -72,25 +72,35 @@ set_line_break_before_curly_opening <- function(pd) {
 
     no_line_break_before_curly_idx <- pd$token[line_break_to_set_idx] %in% "EQ_SUB"
     linebreak_before_curly <- ifelse(is_function_call(pd),
-      # if in function call and has pipe, it is not recognized as function call and
-      # goes to else case
+      # if in function call and has pipe, it is not recognized as function call
+      # and goes to else case
       any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1])] > 0),
       # if not a function call, only break line if it is a pipe followed by {}
       pd$token[line_break_to_set_idx] %in% c("SPECIAL-PIPE", "PIPE")
     )
     # no line break before last brace expression and named brace expression to
     should_be_on_same_line <- is_not_curly_curly &
-      ((is_last_expr & !linebreak_before_curly) | no_line_break_before_curly_idx)
+      (
+        (is_last_expr & !linebreak_before_curly) |
+          no_line_break_before_curly_idx
+      )
     is_not_curly_curly_idx <- line_break_to_set_idx[should_be_on_same_line]
     pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
 
 
     # other cases: line breaks
     should_not_be_on_same_line <- is_not_curly_curly &
-      ((!is_last_expr | linebreak_before_curly) & !no_line_break_before_curly_idx)
-    should_not_be_on_same_line_idx <- line_break_to_set_idx[should_not_be_on_same_line]
+      (
+        (!is_last_expr | linebreak_before_curly) &
+          !no_line_break_before_curly_idx
+      )
+    should_not_be_on_same_line_idx <- line_break_to_set_idx[
+      should_not_be_on_same_line
+    ]
     if (is_function_dec(pd)) {
-      should_not_be_on_same_line_idx <- setdiff(1 + should_not_be_on_same_line_idx, nrow(pd))
+      should_not_be_on_same_line_idx <- setdiff(
+        1 + should_not_be_on_same_line_idx, nrow(pd)
+      )
     } else {
       should_not_be_on_same_line_idx <- 1 + should_not_be_on_same_line_idx
     }
@@ -104,8 +114,9 @@ set_line_break_before_curly_opening <- function(pd) {
         next_non_comment,
         pd = pd
       )
-      non_comment_after_expr <-
-        non_comment_after_comma[non_comment_after_comma > should_not_be_on_same_line_idx[1]]
+      non_comment_after_expr <- non_comment_after_comma[
+        non_comment_after_comma > should_not_be_on_same_line_idx[1]
+      ]
       pd$lag_newlines[non_comment_after_comma] <- 1L
     }
   }
@@ -185,8 +196,8 @@ style_line_break_around_curly <- function(strict, pd) {
 #' curly-curly affects styling of line break and spaces, namely:
 #'
 #' * No line break after first or second `\{`, before third and fourth `\{`.
-#' * No space after first and third `\{`, one space after second and before third
-#'   `\}`.
+#' * No space after first and third `\{`, one space after second and before
+#'   third `\}`.
 #' * No line breaks within curly-curly, e.g. `\{\{ x \}\}` can only contain line
 #'   breaks after the last brace or before the first brace. But these are not
 #'   dependent on curly-curly specifically.
@@ -219,7 +230,11 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
 
 remove_line_breaks_in_fun_dec <- function(pd) {
   if (is_function_dec(pd)) {
-    round_after <- (pd$token == "')'" | pd$token_before == "'('") & pd$token_before != "COMMENT"
+    round_after <- (
+      pd$token == "')'" | pd$token_before == "'('"
+    ) &
+      pd$token_before != "COMMENT"
+
     pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
     pd$lag_newlines[round_after] <- 0L
   }
@@ -351,7 +366,9 @@ remove_line_break_in_fun_call <- function(pd, strict) {
   if (is_function_call(pd)) {
     # no blank lines within function calls
     if (strict) {
-      pd$lag_newlines[lag(pd$token == "','") & pd$lag_newlines > 1 & pd$token != "COMMENT"] <- 1L
+      pd$lag_newlines[
+        lag(pd$token == "','") & pd$lag_newlines > 1 & pd$token != "COMMENT"
+      ] <- 1L
     }
     if (nrow(pd) == 3) {
       pd$lag_newlines[3] <- 0L

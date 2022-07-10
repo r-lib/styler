@@ -29,7 +29,11 @@ is_unsaved_file <- function(path) {
 #' styler:::map_filetype_to_pattern(c(".rMd", "R"))
 #' @keywords internal
 map_filetype_to_pattern <- function(filetype) {
-  paste0("(", paste(set_and_assert_arg_filetype(filetype), collapse = "|"), ")$")
+  paste0(
+    "(",
+    paste(set_and_assert_arg_filetype(filetype), collapse = "|"),
+    ")$"
+  )
 }
 
 #' `dir()`, but without dot-prefix and different defaults

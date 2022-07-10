@@ -87,6 +87,7 @@ calls_sys <- function(sys_call, ...) {
   } else {
     error <- system(sys_call, ...)
   }
+  error
 }
 
 #' Get the value of an option

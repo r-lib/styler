@@ -81,7 +81,9 @@ create_tokens <- function(tokens,
 create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
   direction <- ifelse(after, 1L, -1L)
   first <- find_start_pos_id(pd, pos, by, direction, after)
-  new_ids <- seq(first, to = first + direction * (n - 1) * by, by = by * direction)
+  new_ids <- seq(first,
+    to = first + direction * (n - 1) * by, by = by * direction
+  )
   validate_new_pos_ids(new_ids, after)
   new_ids
 }
@@ -96,7 +98,12 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
 #'   nests.
 #' @inheritParams create_pos_ids
 #' @keywords internal
-find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) {
+find_start_pos_id <- function(pd,
+                              pos,
+                              by,
+                              direction,
+                              after,
+                              candidates = NULL) {
   candidates <- append(candidates, pd$pos_id[pos])
   if (is.null(pd$child[[pos]])) {
     ifelse(after, max(candidates), min(candidates)) + by * direction

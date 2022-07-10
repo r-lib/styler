@@ -37,8 +37,8 @@ be styled. Case is ignored, and the \code{.} is optional, e.g.
 \code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after
 standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.}
 
-\item{recursive}{A logical value indicating whether or not files in subdirectories
-of \code{path} should be styled as well.}
+\item{recursive}{A logical value indicating whether or not files in
+sub directories of \code{path} should be styled as well.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
@@ -62,8 +62,8 @@ styling are not identical.}
 }
 \description{
 Performs various substitutions in all \code{.R}, \code{.Rmd}, \code{.Rmarkdown}, \code{qmd}
-and/or \code{.Rnw} files
-in a directory (by default only \code{.R} files are styled - see \code{filetype} argument).
+and/or \code{.Rnw} files in a directory (by default only \code{.R} files are styled -
+see \code{filetype} argument).
 Carefully examine the results after running this function!
 }
 \section{Value}{
