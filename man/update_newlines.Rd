@@ -10,7 +10,8 @@ update_newlines(pd)
 \item{pd}{A parse table.}
 }
 \value{
-A parse table with synchronized \code{lag_newlines} and \code{newlines} columns.
+A parse table with synchronized \code{lag_newlines} and \code{newlines}
+columns.
 }
 \description{
 As we work only with the \code{lag_newlines} attribute for setting the line

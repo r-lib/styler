@@ -51,8 +51,9 @@ the current status of this.
 # save after styling when using the Addin
 options(styler.save_after_styling = TRUE)
 # only style with scope = "spaces" when using the Addin
+val <- "styler::tidyverse_style(scope = 'spaces')"
 options(
-  styler.addins_style_transformer = "styler::tidyverse_style(scope = 'spaces')"
+  styler.addins_style_transformer = val
 )
 }
 }

@@ -108,9 +108,9 @@ alignment_serialize_column <- function(relevant_pd_by_line, column) {
 #' @keywords internal
 alignment_serialize_line <- function(relevant_pd_by_line, column) {
   # TODO
-  # better also add lover bound for column. If you already checked up to comma 2,
-  # you don't need to re-construct text again, just check if text between comma 2
-  # and 3 has the same length.
+  # better also add lover bound for column. If you already checked up to
+  # comma 2, you don't need to re-construct text again, just check if text
+  # between comma 2 and 3 has the same length.
   comma_idx <- which(relevant_pd_by_line$token == "','")
   n_cols <- length(comma_idx)
   if (column > n_cols) {

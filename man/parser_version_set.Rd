@@ -24,11 +24,11 @@ unexpected behavior of the parser that styler was initially designed to work
 around. Examples are \href{https://github.com/r-lib/styler/issues/187}{#187},
 \href{https://github.com/r-lib/styler/issues/216}{#216},
 \href{https://github.com/r-lib/styler/issues/100}{#100} and others. With
-\href{https://github.com/r-lib/styler/issues/419}{#419}, the structure of the parse
-data changes and we need to dispatch for older versions. As it is inconvenient
-to pass a parser version down in the call stack in various places, the
-environment \code{env_current} is used to store the current version \emph{globally}
-but internally.
+\href{https://github.com/r-lib/styler/issues/419}{#419}, the structure of the
+parse data changes and we need to dispatch for older versions. As it is
+inconvenient to pass a parser version down in the call stack in various
+places, the environment \code{env_current} is used to store the current version
+\emph{globally} but internally.
 }
 \details{
 We version the parser as follows:

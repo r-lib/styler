@@ -36,6 +36,8 @@ NULL
 '
 style_text(text_in, base_indention = 3)
 # not equal to the naive approach
-styler:::construct_vertical(paste0(styler:::add_spaces(3), style_text(text_in), sep = ""))
+styler:::construct_vertical(
+  paste0(styler:::add_spaces(3), style_text(text_in), sep = "")
+)
 }
 \keyword{internal}

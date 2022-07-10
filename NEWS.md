@@ -43,6 +43,8 @@ editor_options:
     (#946).
 -   turned off `styler.print.Vertical` in vignettes so ANSI output of {prettycode} 
     not messing with {pkgdown} (\@IndrajeetPatil, #956, #957). 
+-   Improved code quality by fixing {lintr} warnings (#960).
+
 
 # styler 1.7.0
 

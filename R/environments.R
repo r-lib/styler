@@ -5,11 +5,11 @@
 #' around. Examples are [#187](https://github.com/r-lib/styler/issues/187),
 #' [#216](https://github.com/r-lib/styler/issues/216),
 #' [#100](https://github.com/r-lib/styler/issues/100) and others. With
-#' [#419](https://github.com/r-lib/styler/issues/419), the structure of the parse
-#' data changes and we need to dispatch for older versions. As it is inconvenient
-#' to pass a parser version down in the call stack in various places, the
-#' environment `env_current` is used to store the current version *globally*
-#' but internally.
+#' [#419](https://github.com/r-lib/styler/issues/419), the structure of the
+#' parse data changes and we need to dispatch for older versions. As it is
+#' inconvenient to pass a parser version down in the call stack in various
+#' places, the environment `env_current` is used to store the current version
+#' *globally* but internally.
 #'
 #' We version the parser as follows:
 #'

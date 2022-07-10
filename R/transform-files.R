@@ -11,8 +11,14 @@
 #' styling whether or not it was actually changed (or would be changed when
 #' `dry` is not "off").
 #' @keywords internal
-transform_files <- function(files, transformers, include_roxygen_examples, base_indention, dry) {
-  transformer <- make_transformer(transformers, include_roxygen_examples, base_indention)
+transform_files <- function(files,
+                            transformers,
+                            include_roxygen_examples,
+                            base_indention,
+                            dry) {
+  transformer <- make_transformer(
+    transformers, include_roxygen_examples, base_indention
+  )
   max_char <- min(max(nchar(files), 0), getOption("width"))
   len_files <- length(files)
   if (len_files > 0L && !getOption("styler.quiet", FALSE)) {
@@ -155,7 +161,9 @@ make_transformer <- function(transformers,
 #' [parse_transform_serialize_r()].
 #' @importFrom purrr map_at flatten_chr
 #' @keywords internal
-parse_transform_serialize_roxygen <- function(text, transformers, base_indention) {
+parse_transform_serialize_roxygen <- function(text,
+                                              transformers,
+                                              base_indention) {
   roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
   if (length(roxygen_seqs) < 1L) {
     return(text)

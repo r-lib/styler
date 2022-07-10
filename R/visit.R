@@ -128,7 +128,8 @@ context_towards_terminals <- function(pd_nested,
 #' @keywords internal
 extract_terminals <- function(pd_nested) {
   bind_rows(
-    ifelse(pd_nested$terminal | pd_nested$is_cached, split(pd_nested, seq_len(nrow(pd_nested))),
+    ifelse(pd_nested$terminal | pd_nested$is_cached,
+      split(pd_nested, seq_len(nrow(pd_nested))),
       pd_nested$child
     )
   )

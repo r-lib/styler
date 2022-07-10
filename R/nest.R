@@ -109,7 +109,8 @@ add_cache_block <- function(pd_nested) {
 #' @keywords internal
 drop_cached_children <- function(pd) {
   if (cache_is_activated()) {
-    pd_parent_first <- pd[order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal)), ]
+    order <- order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal))
+    pd_parent_first <- pd[order, ]
     pos_ids_to_keep <- pd_parent_first %>%
       split(cumsum(pd_parent_first$parent == 0)) %>%
       map(find_pos_id_to_keep) %>%
@@ -124,8 +125,9 @@ drop_cached_children <- function(pd) {
 #' Find the pos ids to keep
 #'
 #' To make a parse table shallow, we must know which ids to keep.
-#' `split(cumsum(pd_parent_first$parent == 0))` above puts comments with negative
-#' parents in the same block as proceeding expressions (but also with positive).
+#' `split(cumsum(pd_parent_first$parent == 0))` above puts comments with
+#' negative parents in the same block as proceeding expressions (but also with
+#' positive).
 #' `find_pos_id_to_keep()` must hence always keep negative comments. We did not
 #' use `split(cumsum(pd_parent_first$parent < 1))` because then every top-level
 #' comment is an expression on its own and processing takes much longer for
@@ -173,6 +175,7 @@ find_pos_id_to_keep <- function(pd) {
 #' option supports character vectors longer than one and the marker are not
 #' exactly matched, but using a  regular expression, which means you can have
 #' multiple marker on one line, e.g. `# nolint start styler: off`.
+# nolint end
 #' @name stylerignore
 #' @examples
 #' # as long as the order of the markers is correct, the lines are ignored.

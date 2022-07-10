@@ -8,8 +8,8 @@
 #' @keywords internal
 NULL
 
-#' @describeIn update_indention Is used to indent for and statements and function
-#'   definitions without parenthesis.
+#' @describeIn update_indention Is used to indent for and statements and
+#'   function definitions without parenthesis.
 #' @keywords internal
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
   tokens <- c("FOR", "WHILE", "FUNCTION")
@@ -39,7 +39,9 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   if (!is_if) {
     return(pd)
   }
-  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "')'"))] > 0
+  needs_indention_now <- pd$lag_newlines[
+    next_non_comment(pd, which(pd$token == "')'"))
+  ] > 0
 
   if (needs_indention_now) {
     pd$indent[expr_after_if] <- indent_by
@@ -57,7 +59,9 @@ indent_without_paren_if_else <- function(pd, indent_by) {
       pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
       pd$child[[expr_after_else_idx]]$token[1] != "IF"
 
-  needs_indention_now <- pd$lag_newlines[next_non_comment(pd, which(pd$token == "ELSE"))] > 0
+  needs_indention_now <- pd$lag_newlines[
+    next_non_comment(pd, which(pd$token == "ELSE"))
+  ] > 0
 
   if (has_else_without_curly_or_else_chid && needs_indention_now) {
     pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
@@ -231,7 +235,8 @@ pd_multi_line <- function(pd) {
 #' R/rules-spacing.R for tokens at the end of a line since this allows styling
 #' without touching indention.
 #' @param pd A parse table.
-#' @return A parse table with synchronized `lag_newlines` and `newlines` columns.
+#' @return A parse table with synchronized `lag_newlines` and `newlines`
+#'   columns.
 #' @seealso choose_indention
 #' @keywords internal
 update_newlines <- function(pd) {
