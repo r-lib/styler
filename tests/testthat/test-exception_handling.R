@@ -18,7 +18,7 @@ test_that("style_text with no tokens returns empty string and warning", {
 
 test_that("style_file with no tokens returns empty string and warning", {
   capture_output(expect_warning(
-    style_file(testthat_file("exception_handling", "empty_file.R")),
+    style_file(testthat_file("exception_handling", "empty_file.R"), dry = "on"),
     "not contain any tokens."
   ))
 })
