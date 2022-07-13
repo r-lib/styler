@@ -27,8 +27,11 @@ transform_utf8_one <- function(path, fun, dry) {
     {
       file_with_info <- read_utf8(path)
       # only write back when changed OR when there was a missing newline
-      new <- fun(file_with_info$text)
-      identical_content <- identical(unclass(file_with_info$text), unclass(new))
+      new <- unclass(fun(file_with_info$text))
+      if (identical(new, "")) {
+        new <- character(0)
+      }
+      identical_content <- identical(file_with_info$text, new)
       identical <- identical_content && !file_with_info$missing_EOF_line_break
       if (!identical) {
         if (dry == "fail") {

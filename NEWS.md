@@ -30,10 +30,12 @@ editor_options:
     there is no literal code immediately following after the end of the example
     section (#940).
 
+-   Files with no tokens in it are now transformed into zero-byte files (#962).
+
 **Other**
 
--   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955).
-    To access them, do `git checkout v1.0.0`.
+-   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955). To
+    access them, do `git checkout v1.0.0`.
 -   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
 -   Minor improvements to the documentation (\@IndrajeetPatil, #958).
 -   All (R)md files in this project's source code are now formatted with
@@ -41,10 +43,9 @@ editor_options:
     the visual mode in RStudio (#941).
 -   Update {pkgdown} action to always build, but only deploy on default branch
     (#946).
--   turned off `styler.print.Vertical` in vignettes so ANSI output of {prettycode} 
-    not messing with {pkgdown} (\@IndrajeetPatil, #956, #957). 
+-   turned off `styler.print.Vertical` in vignettes so ANSI output of
+    {prettycode} not messing with {pkgdown} (\@IndrajeetPatil, #956, #957).
 -   Improved code quality by fixing {lintr} warnings (#960).
-
 
 # styler 1.7.0
 

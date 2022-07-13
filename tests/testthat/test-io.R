@@ -24,3 +24,13 @@ test_that("non-ASCII characters are handled properly for file styling", {
     }
   )
 })
+
+test_that("empty files are converted to zero-bite files", {
+  local_test_setup()
+  for (file_content in list(character(), "", c("", ""))) {
+    tmp <- tempfile(fileext = ".R")
+    write_utf8(file_content, tmp)
+    suppressWarnings(style_file(tmp))
+    expect_true(file.size(tmp) == 0)
+  }
+})
