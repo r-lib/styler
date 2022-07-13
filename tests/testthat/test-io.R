@@ -1,5 +1,3 @@
-
-
 test_that("non-ASCII characters are handled properly for text styling", {
   expect_equal(
     style_text("glück <-3") %>% unclass(), "glück <- 3"
