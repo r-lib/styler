@@ -19,8 +19,8 @@ indent_braces(pd, indent_by)
 indent_op(
   pd,
   indent_by,
-  token = c(math_token, logical_token, special_token, "PIPE", "LEFT_ASSIGN",
-    "EQ_ASSIGN", "'$'", "'~'")
+  token = c(math_token, logical_token, special_token, "PIPE", "LEFT_ASSIGN", "EQ_ASSIGN",
+    "'$'", "'~'")
 )
 
 indent_eq_sub(pd, indent_by, token = c("EQ_SUB", "EQ_FORMALS"))
@@ -40,25 +40,25 @@ Update indention information of parse data
 }
 \section{Functions}{
 \itemize{
-\item \code{indent_without_paren_for_while_fun}: Is used to indent for and statements and
+\item \code{indent_without_paren_for_while_fun()}: Is used to indent for and statements and
 function definitions without parenthesis.
 
-\item \code{indent_without_paren_if_else}: Is used to indent if and if-else statements.
+\item \code{indent_without_paren_if_else()}: Is used to indent if and if-else statements.
 
-\item \code{indent_braces}: Inserts indention based on round, square and
+\item \code{indent_braces()}: Inserts indention based on round, square and
 curly brackets.
 
-\item \code{indent_op}: Indents \emph{all} tokens after \code{token} - including
+\item \code{indent_op()}: Indents \emph{all} tokens after \code{token} - including
 the last token.
 
-\item \code{indent_eq_sub}: Updates indention for token EQ_SUB. Only differs
+\item \code{indent_eq_sub()}: Updates indention for token EQ_SUB. Only differs
 from \code{\link[=indent_op]{indent_op()}} in the sense that not all subsequent tokens in the parse
 table are necessarily indented, as \code{EQ_SUB} and \code{EQ_FORMALS} can occur
 multiple times in a parse table.
 occurs is not indented (see\code{\link[=compute_indent_indices]{compute_indent_indices()}})
 
-\item \code{indent_without_paren}: Is used to indent for / while / if / if-else
+\item \code{indent_without_paren()}: Is used to indent for / while / if / if-else
 statements that do not have curly parenthesis.
-}}
 
+}}
 \keyword{internal}

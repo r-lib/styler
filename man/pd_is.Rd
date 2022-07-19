@@ -30,18 +30,18 @@ Check whether a parse table corresponds to a certain expression
 }
 \section{Functions}{
 \itemize{
-\item \code{is_curly_expr}: Checks whether \code{pd} contains an expression wrapped in
+\item \code{is_curly_expr()}: Checks whether \code{pd} contains an expression wrapped in
 curly brackets.
 
-\item \code{is_cond_expr}: Checks whether \code{pd} contains is a conditional expression.
+\item \code{is_cond_expr()}: Checks whether \code{pd} contains is a conditional expression.
 
-\item \code{is_while_expr}: Checks whether \code{pd} contains is a while loop.
+\item \code{is_while_expr()}: Checks whether \code{pd} contains is a while loop.
 
-\item \code{is_function_call}: Checks whether \code{pd} is a function call.
+\item \code{is_function_call()}: Checks whether \code{pd} is a function call.
 
-\item \code{is_function_dec}: Checks whether \code{pd} is a function declaration.
+\item \code{is_function_dec()}: Checks whether \code{pd} is a function declaration.
 
-\item \code{is_comment}: Checks for every token whether or not it is a comment.
+\item \code{is_comment()}: Checks for every token whether or not it is a comment.
+
 }}
-
 \keyword{internal}

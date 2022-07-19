@@ -23,11 +23,11 @@ as \code{\link[=style_text]{style_text()}}.
 }
 \section{Functions}{
 \itemize{
-\item \code{style_empty}: Nest and unnest \code{text} without applying any
+\item \code{style_empty()}: Nest and unnest \code{text} without applying any
 transformations but remove EOL spaces and indention due to the way the
 serialization is set up.
 
-\item \code{style_op}: Transformations for indention based on operators
-}}
+\item \code{style_op()}: Transformations for indention based on operators
 
+}}
 \keyword{internal}
