@@ -30,7 +30,7 @@ for cached code, we don't build up the nested structure and leave it shallow
 }
 \section{Functions}{
 \itemize{
-\item \code{add_attributes_caching}: Initializes \code{newlines} and \code{lag_newlines}.
-}}
+\item \code{add_attributes_caching()}: Initializes \code{newlines} and \code{lag_newlines}.
 
+}}
 \keyword{internal}

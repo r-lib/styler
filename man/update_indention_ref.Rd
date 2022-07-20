@@ -15,13 +15,13 @@ Update the indention reference
 }
 \section{Functions}{
 \itemize{
-\item \code{update_indention_ref_fun_dec}: Updates the reference pos_id for all
+\item \code{update_indention_ref_fun_dec()}: Updates the reference pos_id for all
 tokens in \code{pd_nested} if \code{pd_nested} contains a function declaration.
 Tokens inside a function declaration are are re-indented,
 that is, they are indented up to the level at which the token FUNCTION
 ends in terms of col2.
-}}
 
+}}
 \examples{
 \dontrun{
 a <- function(x,

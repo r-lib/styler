@@ -29,14 +29,14 @@ the need of setting all arguments explicitly.
 }
 \section{Functions}{
 \itemize{
-\item \code{specify_reindention}: Allows to specify which tokens are reindented and
+\item \code{specify_reindention()}: Allows to specify which tokens are reindented and
 how.
 
-\item \code{tidyverse_reindention}: Simple forwarder to
+\item \code{tidyverse_reindention()}: Simple forwarder to
 \code{specify_reindention} with reindention according to the tidyverse style
 guide.
-}}
 
+}}
 \examples{
 style_text("a <- xyz", reindention = specify_reindention(
   regex_pattern = "xyz", indention = 4, comments_only = FALSE
