@@ -10,7 +10,7 @@ editor_options:
 
 -  `style_dir()` and `style_pkg()` now default to styling all supported file 
    formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package) 
-   directory (\@IndrajeetPatil, ).
+   directory (\@IndrajeetPatil, #965).
 
 **Features**
 
