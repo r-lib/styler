@@ -9,7 +9,7 @@ style_dir(
   ...,
   style = tidyverse_style,
   transformers = style(...),
-  filetype = c("R", "Rprofile"),
+  filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
   recursive = TRUE,
   exclude_files = NULL,
   exclude_dirs = c("packrat", "renv"),
