@@ -195,7 +195,7 @@
 <span><span class="co">##     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L</span></span>
 <span><span class="co">##     pd_flat</span></span>
 <span><span class="co">## }</span></span>
-<span><span class="co">## &lt;bytecode: 0x55863f43c780&gt;</span></span>
+<span><span class="co">## &lt;bytecode: 0x55df5e546248&gt;</span></span>
 <span><span class="co">## &lt;environment: namespace:styler&gt;</span></span></code></pre>
 <p>As the name says, this function removes spaces after the opening parenthesis. But how? Its input is a <em>nest</em>. Since the visitor will go through all levels of nesting, we just need a function that can be applied to a <em>nest</em>, that is, to a parse table at one level of nesting. We can compute the nested parse table and look at one of the levels of nesting that is interesting for us (more on the data structure in the vignettes “Data structures” and “Manipulating the parse table”):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -277,7 +277,7 @@
 <span><span class="co">##         outer_indention_refs = NA)</span></span>
 <span><span class="co">##     transformed_absolute_indent</span></span>
 <span><span class="co">## }</span></span>
-<span><span class="co">## &lt;bytecode: 0x55863daf2b50&gt;</span></span>
+<span><span class="co">## &lt;bytecode: 0x55df5bd50c80&gt;</span></span>
 <span><span class="co">## &lt;environment: namespace:styler&gt;</span></span></code></pre>
 <p>This means that the order of the styling is clearly defined and it is for example not possible to modify line breaks based on spacing, because spacing will be set after line breaks are set. Do not rely on the column <code>col1</code>, <code>col2</code>, <code>line1</code> and <code>line2</code> in the parse table in any of your functions since these columns only reflect the position of tokens at the point of parsing,</p>
 <p>i.e. they are not kept up to date throughout the process of styling.</p>
@@ -330,14 +330,15 @@
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 18</span></span></span>
-<span><span class="co">##      id pos_id line1  col1 line2  col2 parent token terminal text  short</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>     9     11     1    24     1    24     19 '{'   TRUE     {     {    </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>    16     12     1    26     1    30     19 expr  FALSE    x + 1 x + 1</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>    15     18     1    32     1    32     19 '}'   TRUE     }     }    </span></span>
-<span><span class="co">## <span style="color: #949494;"># … with 7 more variables: token_before &lt;chr&gt;, token_after &lt;chr&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   stylerignore &lt;lgl&gt;, block &lt;lgl&gt;, is_cached &lt;lgl&gt;, internal &lt;lgl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   child &lt;named list&gt;</span></span></span></code></pre>
+<span><span class="co">##      id pos_id line1  col1 line2  col2 parent token terminal text  short token…¹</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>     9     11     1    24     1    24     19 '{'   TRUE     {     {     ')'    </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>    16     12     1    26     1    30     19 expr  FALSE    x + 1 x + 1 <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>    15     18     1    32     1    32     19 '}'   TRUE     }     }     NUM_CO…</span></span>
+<span><span class="co">## <span style="color: #949494;"># … with 6 more variables: token_after &lt;chr&gt;, stylerignore &lt;lgl&gt;, block &lt;lgl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   is_cached &lt;lgl&gt;, internal &lt;lgl&gt;, child &lt;named list&gt;, and abbreviated</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   variable name ¹​token_before</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
 <p>Remember what we said above: A transformer takes a flat parse table as input, updates it and returns it. So here it’s actually simple:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">set_line_break_before_curly_opening</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pd_flat</span><span class="op">)</span> <span class="op">{</span></span>
@@ -379,7 +380,7 @@
 <span><span class="co">##     pd$lag_newlines[round_after_curly] &lt;- 0L</span></span>
 <span><span class="co">##     pd</span></span>
 <span><span class="co">## }</span></span>
-<span><span class="co">## &lt;bytecode: 0x55863f48a988&gt;</span></span>
+<span><span class="co">## &lt;bytecode: 0x55df5e5cdfa0&gt;</span></span>
 <span><span class="co">## &lt;environment: namespace:styler&gt;</span></span></code></pre>
 <p>With our example function <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to worry about that as we are only adding line breaks, but we don’t remove them.</p>
 </div>
@@ -407,7 +408,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
