@@ -30,17 +30,17 @@ Initialize attributes
 }
 \section{Functions}{
 \itemize{
-\item \code{initialize_newlines}: Initializes \code{newlines} and \code{lag_newlines}.
+\item \code{initialize_newlines()}: Initializes \code{newlines} and \code{lag_newlines}.
 
-\item \code{initialize_spaces}: Initializes \code{spaces}.
+\item \code{initialize_spaces()}: Initializes \code{spaces}.
 
-\item \code{initialize_multi_line}: Initializes \code{multi_line}.
+\item \code{initialize_multi_line()}: Initializes \code{multi_line}.
 
-\item \code{initialize_indention_ref_pos_id}: Initializes \code{indention_ref_ind}.
+\item \code{initialize_indention_ref_pos_id()}: Initializes \code{indention_ref_ind}.
 
-\item \code{initialize_indent}: Initializes \code{indent}.
+\item \code{initialize_indent()}: Initializes \code{indent}.
 
-\item \code{validate_parse_data}: validates the parse data.
+\item \code{validate_parse_data()}: validates the parse data.
+
 }}
-
 \keyword{internal}

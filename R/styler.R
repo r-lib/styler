@@ -17,6 +17,7 @@
 #' style_text("a%>%b; a", scope = "line_breaks")
 #' style_text("a%>%b; a", scope = "tokens")
 "_PACKAGE"
+
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(c(
     ".",

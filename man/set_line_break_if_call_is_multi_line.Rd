@@ -30,8 +30,8 @@ Set line break for multi-line function calls
 }
 \section{Functions}{
 \itemize{
-\item \code{set_line_break_before_closing_call}: Sets line break before
+\item \code{set_line_break_before_closing_call()}: Sets line break before
 closing parenthesis.
-}}
 
+}}
 \keyword{internal}

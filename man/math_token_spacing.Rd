@@ -24,14 +24,14 @@ Helper function to create the input for the argument \code{math_token_spacing}  
 }
 \section{Functions}{
 \itemize{
-\item \code{specify_math_token_spacing}: Allows to fully specify the math token
+\item \code{specify_math_token_spacing()}: Allows to fully specify the math token
 spacing.
 
-\item \code{tidyverse_math_token_spacing}: Simple forwarder to
+\item \code{tidyverse_math_token_spacing()}: Simple forwarder to
 \code{specify_math_token_spacing} with spacing around math tokens according to the
 tidyverse style guide.
-}}
 
+}}
 \examples{
 style_text(
   "1+1   -3",
