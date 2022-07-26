@@ -65,8 +65,8 @@ set_line_break_before_curly_opening <- function(pd) {
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
     last_expr_idx <- max(which(pd$token == "expr"))
-    is_last_expr <- ifelse(pd$token[1] == "IF",
-      # rule not applicable for IF
+    is_last_expr <- ifelse(pd$token[1] %in% c("IF", "WHILE"),
+      # rule not applicable for if and while
       TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
     )
 
