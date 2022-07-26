@@ -118,6 +118,7 @@
 <li><p>There is now always one line break after <code>{</code> and before <code>#</code> (<a href="https://github.com/r-lib/styler/issues/916" class="external-link">#916</a>).</p></li>
 <li><p>the cache is also invalidated on changing the stylerignore markers (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</p></li>
 <li><p><code>{</code> is not put on a new line after <code>=</code> and in <code>function() {</code> for some edge cases (<a href="https://github.com/r-lib/styler/issues/939" class="external-link">#939</a>).</p></li>
+<li><p><code>while ({})</code> statements are now handled the same way as function statements with regards to breaking lines (<a href="https://github.com/r-lib/styler/issues/967" class="external-link">#967</a>).</p></li>
 <li><p>Parsing of {roxygen2} example comments now also works for edge cases when there is no literal code immediately following after the end of the example section (<a href="https://github.com/r-lib/styler/issues/940" class="external-link">#940</a>).</p></li>
 <li><p>Files with no tokens in it are now transformed into zero-byte files (<a href="https://github.com/r-lib/styler/issues/962" class="external-link">#962</a>).</p></li>
 </ul><p><strong>Other</strong></p>
