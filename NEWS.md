@@ -32,6 +32,9 @@ editor_options:
 -   `{` is not put on a new line after `=` and in `function() {` for some edge
     cases (#939).
 
+-   `while ({})` statements are now handled the same way as function statements
+    with regards to breaking lines (#967).
+
 -   Parsing of {roxygen2} example comments now also works for edge cases when
     there is no literal code immediately following after the end of the example
     section (#940).
