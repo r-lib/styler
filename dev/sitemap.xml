@@ -73,6 +73,9 @@
     <loc>https://styler.r-lib.org/reference/alignment_drop_comments.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/alignment_drop_last_expr.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/alignment_ensure_no_closing_brace.html</loc>
   </url>
   <url>

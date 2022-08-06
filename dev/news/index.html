@@ -111,6 +111,7 @@
 <p><strong>Features</strong></p>
 <ul><li>
 <code>filetype</code> <code>.qmd</code> is now supported, but not turned on by default (<a href="https://github.com/r-lib/styler/issues/931" class="external-link">#931</a>).</li>
+<li>alignment is now detected for function declaration in a similar way as for function calls (<a href="https://github.com/r-lib/styler/issues/968" class="external-link">#968</a>).</li>
 <li>new R option <code>styler.ignore_alignment</code> controls if alignment should be detected (and preserved) or not (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</li>
 </ul><p><strong>Bug Fixes</strong></p>
 <ul><li><p>alignment is detected in <code><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tibble::tribble()</a></code> (and similar) calls with more than 3 columns when left aligned (<a href="https://github.com/r-lib/styler/issues/945" class="external-link">#945</a>).</p></li>
