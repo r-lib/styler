@@ -16,10 +16,13 @@ set_space_around_op <- function(pd_flat, strict) {
   if (!any(op_after)) {
     return(pd_flat)
   }
-  if (sum(pd_flat$lag_newlines) > 2 &&
-    is_function_call(pd_flat) &&
-    any(pd_flat$token %in% c("EQ_SUB", "','")) &&
-    !getOption("styler.ignore_alignment", FALSE)
+  if (
+    !getOption("styler.ignore_alignment", FALSE) &&
+      (
+        (is_function_call(pd_flat) && sum(pd_flat$lag_newlines) > 2) ||
+          (is_function_dec(pd_flat) && sum(pd_flat$lag_newlines) > 1)
+      ) &&
+      any(pd_flat$token %in% c("EQ_SUB", "','", "EQ_FORMALS"))
   ) {
     is_on_aligned_line <- token_is_on_aligned_line(pd_flat)
   } else {

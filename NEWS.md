@@ -15,6 +15,8 @@ editor_options:
 **Features**
 
 -   `filetype` `.qmd` is now supported, but not turned on by default (#931).
+-   alignment is now detected for function declaration in a similar way as for
+    function calls (#968).
 -   new R option `styler.ignore_alignment` controls if alignment should be
     detected (and preserved) or not (#932).
 
