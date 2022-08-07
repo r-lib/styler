@@ -59,8 +59,6 @@ style_text("a\%>\%b; a", scope = I("tokens"))
 }
 \seealso{
 Other stylers: 
-\code{\link{style_dir}()},
-\code{\link{style_file}()},
 \code{\link{style_pkg}()},
 \code{\link{styler_addins}}
 }

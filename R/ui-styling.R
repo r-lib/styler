@@ -5,11 +5,18 @@ NULL
 
 #' Prettify R source code
 #'
-#' Performs various substitutions in all `.R` files in a package
-#' (code and tests). One can also (optionally) style `.Rmd`, `.Rmarkdown` and/or
-#' `.qmd`, `.Rnw` files (vignettes and readme) by changing the `filetype`
-#' argument.
+#' @description
+#' Performs various substitutions in a single file or all files of specified
+#' file types (see `filetype` argument) present in a
+#'
+#' - package (code and tests)
+#' - directory (and its nested contents)
+#'
 #' Carefully examine the results after running this function!
+#'
+#' @details
+#' Currently supported file types are `.Rmd`, `.Rmarkdown` and/or `.qmd`, `.Rnw`
+#' files (including vignettes and readme).
 #'
 #' @param pkg Path to a (subdirectory of an) R package.
 #' @param ... Arguments passed on to the `style` function.
@@ -21,6 +28,7 @@ NULL
 #'   conveniently constructed via the `style` argument and `...`. See
 #'   'Examples'.
 #' @inheritParams prettify_pkg
+#'
 #' @section Warning:
 #' This function overwrites files (if styling results in a change of the
 #' code to be formatted and `dry = "off"`). It is strongly suggested to only
@@ -33,6 +41,7 @@ NULL
 #' Then, we suggest to style with `scope = "tokens"` (if desired) and carefully
 #' inspect the changes to make sure the AST is not changed in an unexpected way
 #' that invalidates code.
+#'
 #' @section Round trip validation:
 #' The following section describes when and how styling is guaranteed to
 #' yield correct code.
@@ -51,7 +60,9 @@ NULL
 #' inspect the changes.
 #'
 #' See section 'Warning' for a good strategy to apply styling safely.
+#'
 #' @inheritSection transform_files Value
+#'
 #' @family stylers
 #' @examples
 #' \dontrun{
@@ -224,21 +235,14 @@ style_text <- function(text,
   construct_vertical(styled_text)
 }
 
-#' Prettify arbitrary R code
-#'
-#' Performs various substitutions in all `.R`, `.Rmd`, `.Rmarkdown`, `qmd`
-#' and/or `.Rnw` files in a directory (by default only `.R` files are styled -
-#' see `filetype` argument).
-#' Carefully examine the results after running this function!
+
 #' @param path Path to a directory with files to transform.
 #' @param recursive A logical value indicating whether or not files in
 #'   sub directories of `path` should be styled as well.
 #' @param exclude_dirs Character vector with directories to exclude
 #'   (recursively).
-##' @inheritParams style_pkg
+#' @inheritParams style_pkg
 #' @inheritSection transform_files Value
-#' @inheritSection style_pkg Warning
-#' @inheritSection style_pkg Round trip validation
 #' @family stylers
 #' @examples
 #' \dontrun{
@@ -250,6 +254,7 @@ style_text <- function(text,
 #' style_dir(style = tidyverse_style, strict = TRUE)
 #' style_dir(transformers = tidyverse_style(strict = TRUE))
 #' }
+#' @rdname style_pkg
 #' @export
 style_dir <- function(path = ".",
                       ...,
@@ -311,19 +316,13 @@ prettify_any <- function(transformers,
   )
 }
 
-#' Style files with R source code
-#'
-#' Performs various substitutions in the files specified.
-#' Carefully examine the results after running this function!
 #' @section Encoding:
 #' UTF-8 encoding is assumed. Please convert your code to UTF-8 if necessary
 #' before applying styler.
 #' @param path A character vector with paths to files to style. Supported
-#'   extensions: `.R`, `.Rmd`, `.Rmarkdown`, `.qmd` and `.Rnw`.
+#'   extensions: `.R`, `.Rmd`, `.Rmarkdown`, `.qmd`, and `.Rnw`.
 #' @inheritParams style_pkg
 #' @inheritSection transform_files Value
-#' @inheritSection style_pkg Warning
-#' @inheritSection style_pkg Round trip validation
 #' @examples
 #' file <- tempfile("styler", fileext = ".R")
 #' writeLines("1++1", file)
@@ -342,6 +341,7 @@ prettify_any <- function(transformers,
 #' readLines(file)
 #' unlink(file)
 #' @family stylers
+#' @rdname style_pkg
 #' @export
 style_file <- function(path,
                        ...,

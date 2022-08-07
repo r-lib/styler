@@ -2,6 +2,8 @@
 % Please edit documentation in R/ui-styling.R
 \name{style_pkg}
 \alias{style_pkg}
+\alias{style_dir}
+\alias{style_file}
 \title{Prettify R source code}
 \usage{
 style_pkg(
@@ -12,6 +14,30 @@ style_pkg(
   filetype = c("R", "Rprofile"),
   exclude_files = "R/RcppExports.R",
   exclude_dirs = c("packrat", "renv"),
+  include_roxygen_examples = TRUE,
+  base_indention = 0,
+  dry = "off"
+)
+
+style_dir(
+  path = ".",
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  filetype = c("R", "Rprofile"),
+  recursive = TRUE,
+  exclude_files = NULL,
+  exclude_dirs = c("packrat", "renv"),
+  include_roxygen_examples = TRUE,
+  base_indention = 0,
+  dry = "off"
+)
+
+style_file(
+  path,
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
   include_roxygen_examples = TRUE,
   base_indention = 0,
   dry = "off"
@@ -40,8 +66,7 @@ standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is t
 excluded from styling.}
 
 \item{exclude_dirs}{Character vector with directories to exclude
-(recursively). Note that the default values were set for consistency with
-\code{\link[=style_dir]{style_dir()}} and as these directories are anyways not styled.}
+(recursively).}
 
 \item{include_roxygen_examples}{Whether or not to style code in roxygen
 examples.}
@@ -56,13 +81,26 @@ from writing back to files .\code{"on"} and \code{"fail"} both don't write back,
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
 styling are not identical.}
+
+\item{path}{A character vector with paths to files to style. Supported
+extensions: \code{.R}, \code{.Rmd}, \code{.Rmarkdown}, \code{.qmd}, and \code{.Rnw}.}
+
+\item{recursive}{A logical value indicating whether or not files in
+sub directories of \code{path} should be styled as well.}
 }
 \description{
-Performs various substitutions in all \code{.R} files in a package
-(code and tests). One can also (optionally) style \code{.Rmd}, \code{.Rmarkdown} and/or
-\code{.qmd}, \code{.Rnw} files (vignettes and readme) by changing the \code{filetype}
-argument.
+Performs various substitutions in a single file or all files of specified
+file types (see \code{filetype} argument) present in a
+\itemize{
+\item package (code and tests)
+\item directory (and its nested contents)
+}
+
 Carefully examine the results after running this function!
+}
+\details{
+Currently supported file types are \code{.Rmd}, \code{.Rmarkdown} and/or \code{.qmd}, \code{.Rnw}
+files (including vignettes and readme).
 }
 \section{Warning}{
 
@@ -100,7 +138,23 @@ inspect the changes.
 See section 'Warning' for a good strategy to apply styling safely.
 }
 
+\section{Encoding}{
+
+UTF-8 encoding is assumed. Please convert your code to UTF-8 if necessary
+before applying styler.
+}
+
 \section{Value}{
+
+Invisibly returns a data frame that indicates for each file considered for
+styling whether or not it was actually changed (or would be changed when
+\code{dry} is not "off").
+
+
+Invisibly returns a data frame that indicates for each file considered for
+styling whether or not it was actually changed (or would be changed when
+\code{dry} is not "off").
+
 
 Invisibly returns a data frame that indicates for each file considered for
 styling whether or not it was actually changed (or would be changed when
@@ -124,11 +178,42 @@ style_pkg(
 # don't write back and fail if input is not already styled
 style_pkg("/path/to/pkg/", dry = "fail")
 }
+\dontrun{
+style_dir("path/to/dir", filetype = c("rmd", ".R"))
+
+# the following is identical (because of ... and defaults)
+# but the first is most convenient:
+style_dir(strict = TRUE)
+style_dir(style = tidyverse_style, strict = TRUE)
+style_dir(transformers = tidyverse_style(strict = TRUE))
+}
+file <- tempfile("styler", fileext = ".R")
+writeLines("1++1", file)
+
+# the following is identical (because of ... and defaults),
+# but the first is most convenient:
+style_file(file, strict = TRUE)
+style_file(file, style = tidyverse_style, strict = TRUE)
+style_file(file, transformers = tidyverse_style(strict = TRUE))
+
+# only style indention and less invasive  levels (i.e. spaces)
+style_file(file, scope = "indention", strict = TRUE)
+# name levels explicitly to not style less invasive levels
+style_file(file, scope = I(c("tokens", "spaces")), strict = TRUE)
+
+readLines(file)
+unlink(file)
 }
 \seealso{
 Other stylers: 
-\code{\link{style_dir}()},
-\code{\link{style_file}()},
+\code{\link{style_text}()},
+\code{\link{styler_addins}}
+
+Other stylers: 
+\code{\link{style_text}()},
+\code{\link{styler_addins}}
+
+Other stylers: 
 \code{\link{style_text}()},
 \code{\link{styler_addins}}
 }

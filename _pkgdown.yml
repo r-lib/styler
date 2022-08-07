@@ -6,10 +6,8 @@ reference:
   desc: >
     Functions for styling code
 - contents:
-  - style_text
-  - style_file
   - style_pkg
-  - style_dir
+  - style_text
   - styler_addins
 - title: "Fine-tune styling"
   desc: "Customize style guides"

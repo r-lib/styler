@@ -59,8 +59,6 @@ options(
 }
 \seealso{
 Other stylers: 
-\code{\link{style_dir}()},
-\code{\link{style_file}()},
 \code{\link{style_pkg}()},
 \code{\link{style_text}()}
 }
