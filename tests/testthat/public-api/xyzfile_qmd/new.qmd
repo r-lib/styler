@@ -7,13 +7,26 @@ output:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 Some text
+
 ```{r}
 # Some R code
 f <- function(x) {
   x
 }
 ```
+
 Final text
+
 ```{r}
 1 + 2
+```
+
+Following non-executable blocks shouldn't be styled.
+
+```{.r}
+1+2
+```
+
+```{{r}}
+1+2
 ```
