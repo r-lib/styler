@@ -21,6 +21,9 @@ editor_options:
 
 -   There is now always one line break after `{` and before `#` (#916).
 
+-   Line breaks may be added to function calls to ensure indention symmetry for
+    round braces (#975).
+
 -   the cache is also invalidated on changing the stylerignore markers (#932).
 
 -   `{` is not put on a new line after `=` and in `function() {` for some edge

@@ -311,6 +311,11 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
       return(pd)
     }
     break_pos <- find_line_break_position_in_multiline_call(pd)
+    idx_nested <- next_non_comment(pd, 2)
+    nested_call <- is_function_call(pd$child[[idx_nested]])
+    if (pd_is_multi_line(pd$child[[idx_nested]]) && sum(pd$lag_newlines) > 0) {
+      break_pos <- c(break_pos, idx_nested)
+    }
   }
   exception_pos <- c(
     which(pd$token %in% except_token_after),
