@@ -41,6 +41,38 @@ alignment_drop_comments <- function(pd_by_line) {
     compact()
 }
 
+
+#' Remove last expression
+#'
+#' In a *nest*, if the last token is an `expr`, the *nest* represents either
+#' an if, while or for statement or a function call. We don't call about that
+#' part, in fact it's important to remove it for alignment. See 'Examples'.
+#'
+#' @examples
+#' if (FALSE) {
+#'   call(
+#'     x = 12,
+#'     y =  3,
+#'   )
+#'
+#'   function(a = 33,
+#'            qq = 4) {
+#'     # we don't care about this part for alignment detection
+#'   }
+#' }
+#' @keywords internal
+alignment_drop_last_expr <- function(pds_by_line) {
+  # TODO could be skipped if we know it's not a function dec
+  pd_last_line <- pds_by_line[[length(pds_by_line)]]
+  last_two_lines <- pd_last_line$token[c(nrow(pd_last_line) - 1, nrow(pd_last_line))]
+  if (identical(last_two_lines, c("')'", "expr"))) {
+    pd_last_line <- pd_last_line[-nrow(pd_last_line), ]
+  }
+  pds_by_line[[length(pds_by_line)]] <- pd_last_line
+  pds_by_line
+}
+
+
 #' Ensure last pd has a trailing comma
 #'
 #' Must be after [alignment_ensure_no_closing_brace()] because if it comes after
@@ -83,9 +115,9 @@ alignment_col1_all_named <- function(relevant_pd_by_line) {
       return(FALSE)
     }
     x$token[3] == "expr" &&
-      x$token[1] %in% c("SYMBOL_SUB", "STR_CONST") &&
+      x$token[1] %in% c("SYMBOL_SUB", "STR_CONST", "SYMBOL_FORMALS") &&
       x$token[2] %in% c(
-        "EQ_SUB", "SPECIAL-IN", "LT", "GT", "EQ", "NE"
+        "EQ_SUB", "EQ_FORMALS", "SPECIAL-IN", "LT", "GT", "EQ", "NE"
       )
   }) %>%
     all()

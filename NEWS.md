@@ -6,9 +6,17 @@ editor_options:
 
 # styler 1.7.0.9000 (Development version)
 
+**User-facing changes**
+
+-  `style_dir()` and `style_pkg()` now default to styling all supported file 
+   formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package) 
+   directory (\@IndrajeetPatil, #965).
+
 **Features**
 
 -   `filetype` `.qmd` is now supported, but not turned on by default (#931).
+-   alignment is now detected for function declaration in a similar way as for
+    function calls (#968).
 -   new R option `styler.ignore_alignment` controls if alignment should be
     detected (and preserved) or not (#932).
 
@@ -20,6 +28,9 @@ editor_options:
 -   If there are only empty lines in a code chunk, they are all removed (#936).
 
 -   There is now always one line break after `{` and before `#` (#916).
+
+-   Line breaks may be added to function calls to ensure indention symmetry for
+    round braces (#975).
 
 -   the cache is also invalidated on changing the stylerignore markers (#932).
 
