@@ -6,7 +6,7 @@ editor_options:
 
 # styler 1.7.0.9000 (Development version)
 
-**Breaking Changes**
+**User-facing changes**
 
 -  `style_dir()` and `style_pkg()` now default to styling all supported file 
    formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package) 
