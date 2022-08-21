@@ -38,6 +38,25 @@ pre_visit <- function(pd_nested, funs) {
 
 #' @rdname visit
 #' @keywords internal
+pre_visit_one <- function(pd_nested, fun) {
+  if (is.null(pd_nested)) {
+    return()
+  }
+  pd_nested <- fun(pd_nested)
+
+  children <- pd_nested$child
+  for (i in seq_along(children)) {
+    child <- children[[i]]
+    if (!is.null(child)) {
+      children[[i]] <- pre_visit_one(child, fun)
+    }
+  }
+  pd_nested$child <- children
+  pd_nested
+}
+
+#' @rdname visit
+#' @keywords internal
 post_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
@@ -56,6 +75,26 @@ post_visit <- function(pd_nested, funs) {
   pd_nested$child <- children
 
   visit_one(pd_nested, funs)
+}
+
+#' @rdname visit
+#' @keywords internal
+post_visit_one <- function(pd_nested, fun) {
+  if (is.null(pd_nested)) {
+    return()
+  }
+  force(fun)
+
+  children <- pd_nested$child
+  for (i in seq_along(children)) {
+    child <- children[[i]]
+    if (!is.null(child)) {
+      children[[i]] <- post_visit_one(child, fun)
+    }
+  }
+  pd_nested$child <- children
+
+  fun(pd_nested)
 }
 
 #' Transform a flat parse table with a list of transformers

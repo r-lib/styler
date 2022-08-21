@@ -3,12 +3,18 @@
 \name{visit}
 \alias{visit}
 \alias{pre_visit}
+\alias{pre_visit_one}
 \alias{post_visit}
+\alias{post_visit_one}
 \title{Visit'em all}
 \usage{
 pre_visit(pd_nested, funs)
 
+pre_visit_one(pd_nested, fun)
+
 post_visit(pd_nested, funs)
+
+post_visit_one(pd_nested, fun)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}
