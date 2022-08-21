@@ -30,6 +30,7 @@ coventions
 covr
 cran
 cre
+cynkra
 datastructures
 dec
 deps
@@ -95,6 +96,7 @@ ixmypi
 ized
 Jupyterlab
 Kirill
+kirill
 knitr
 krlmlr
 labelled
@@ -128,6 +130,7 @@ nph
 NUM
 oldrel
 oneliner
+ORCID
 os
 ourself
 packagemanager
@@ -149,8 +152,8 @@ prettycode
 PRs
 purrr
 qmd
-questionr
 Qmd
+questionr
 rcmdcheck
 RcppExports
 rds
