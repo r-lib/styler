@@ -144,8 +144,8 @@ to check whether two structures are identical.</p></dd>
 <span class="r-in"><span>    <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"a &lt;- function(x) { if(x &gt; 1) { 1+1 } else {x} }"</span></span></span>
 <span class="r-in"><span>      <span class="va">nested_pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="va">initialized</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="visit.html">pre_visit</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        <span class="va">nested_pd</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">default_style_guide_attributes</span><span class="op">)</span></span></span>
+<span class="r-in"><span>      <span class="va">initialized</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="visit.html">pre_visit_one</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        <span class="va">nested_pd</span>, <span class="va">default_style_guide_attributes</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-in"><span>      <span class="fu">styler</span><span class="fu">:::</span><span class="fu">create_node_from_nested_root</span><span class="op">(</span><span class="va">initialized</span>,</span></span>
 <span class="r-in"><span>        structure_only <span class="op">=</span> <span class="cn">FALSE</span></span></span>
