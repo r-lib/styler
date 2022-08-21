@@ -109,7 +109,7 @@ make_visit_one <- function(funs) {
   body <- rlang::call2("{", !!!all_calls)
 
   env <- rlang::as_environment(funs, rlang::base_env())
-  rlang::new_function(rlang::pairlist2(pd_flat =), body, env)
+  rlang::new_function(rlang::pairlist2(pd_flat = ), body, env)
 }
 
 #' Propagate context to terminals
