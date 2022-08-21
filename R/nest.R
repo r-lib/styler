@@ -359,12 +359,14 @@ nest_parse_data <- function(pd_flat) {
 
   nested <- left_join(internal, rhs, by = c("id" = "parent_"))
 
-  for (i in seq_along(nested$child)) {
-    new <- combine_children(nested$child[[i]], nested$internal_child[[i]])
+  children <- nested$child
+  for (i in seq_along(children)) {
+    new <- combine_children(children[[i]], nested$internal_child[[i]])
     # Work around is.null(new)
-    nested$child[i] <- list(new)
+    children[i] <- list(new)
   }
-  nested <- nested[, setdiff(names(nested), "internal_child")]
+  nested$child <- children
+  nested$internal_child <- NULL
   nest_parse_data(nested)
 }
 
