@@ -20,9 +20,38 @@ pre_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
   }
+  if (length(funs) == 0) {
+    return(pd_nested)
+  }
   pd_nested <- visit_one(pd_nested, funs)
 
-  pd_nested$child <- map(pd_nested$child, pre_visit, funs = funs)
+  children <- pd_nested$child
+  for (i in seq_along(children)) {
+    child <- children[[i]]
+    if (!is.null(child)) {
+      children[[i]] <- pre_visit(child, funs)
+    }
+  }
+  pd_nested$child <- children
+  pd_nested
+}
+
+#' @rdname visit
+#' @keywords internal
+pre_visit_one <- function(pd_nested, fun) {
+  if (is.null(pd_nested)) {
+    return()
+  }
+  pd_nested <- fun(pd_nested)
+
+  children <- pd_nested$child
+  for (i in seq_along(children)) {
+    child <- children[[i]]
+    if (!is.null(child)) {
+      children[[i]] <- pre_visit_one(child, fun)
+    }
+  }
+  pd_nested$child <- children
   pd_nested
 }
 
@@ -32,9 +61,40 @@ post_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
   }
+  if (length(funs) == 0) {
+    return(pd_nested)
+  }
 
-  pd_nested$child <- map(pd_nested$child, post_visit, funs = funs)
+  children <- pd_nested$child
+  for (i in seq_along(children)) {
+    child <- children[[i]]
+    if (!is.null(child)) {
+      children[[i]] <- post_visit(child, funs)
+    }
+  }
+  pd_nested$child <- children
+
   visit_one(pd_nested, funs)
+}
+
+#' @rdname visit
+#' @keywords internal
+post_visit_one <- function(pd_nested, fun) {
+  if (is.null(pd_nested)) {
+    return()
+  }
+  force(fun)
+
+  children <- pd_nested$child
+  for (i in seq_along(children)) {
+    child <- children[[i]]
+    if (!is.null(child)) {
+      children[[i]] <- post_visit_one(child, fun)
+    }
+  }
+  pd_nested$child <- children
+
+  fun(pd_nested)
 }
 
 #' Transform a flat parse table with a list of transformers
@@ -46,7 +106,10 @@ post_visit <- function(pd_nested, funs) {
 #' @family visitors
 #' @keywords internal
 visit_one <- function(pd_flat, funs) {
-  Reduce(function(x, fun) fun(x), funs, init = pd_flat)
+  for (f in funs) {
+    pd_flat <- f(pd_flat)
+  }
+  pd_flat
 }
 
 #' Propagate context to terminals
