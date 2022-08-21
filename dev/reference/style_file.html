@@ -133,12 +133,13 @@ extensions: <code>.R</code>, <code>.Rmd</code>, <code>.Rmarkdown</code>, <code>.
 
 
 <dt>...</dt>
-<dd><p>Arguments passed on to the <code>style</code> function.</p></dd>
+<dd><p>Arguments passed on to the <code>style</code> function,
+see <code><a href="tidyverse_style.html">tidyverse_style()</a></code> for the default argument.</p></dd>
 
 
 <dt>style</dt>
 <dd><p>A function that creates a style guide to use, by default
-<code><a href="tidyverse_style.html">tidyverse_style()</a></code> (without the parentheses). Not used
+<code><a href="tidyverse_style.html">tidyverse_style</a></code>. Not used
 further except to construct the argument <code>transformers</code>. See
 <code><a href="style_guides.html">style_guides()</a></code> for details.</p></dd>
 
@@ -235,7 +236,7 @@ inspect the changes.</p>
 <span class="r-in"><span><span class="co"># but the first is most convenient:</span></span></span>
 <span class="r-in"><span><span class="fu">style_file</span><span class="op">(</span><span class="va">file</span>, strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Styling  1  files:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpBxauWt/styler298c5241e67e.R ℹ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpLt416Z/styler296c78dad565.R ℹ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Status	Count	Legend </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ✔ 	0	File unchanged.</span>
@@ -245,7 +246,7 @@ inspect the changes.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Please review the changes carefully!</span>
 <span class="r-in"><span><span class="fu">style_file</span><span class="op">(</span><span class="va">file</span>, style <span class="op">=</span> <span class="va">tidyverse_style</span>, strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Styling  1  files:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpBxauWt/styler298c5241e67e.R ✔ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpLt416Z/styler296c78dad565.R ✔ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Status	Count	Legend </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ✔ 	1	File unchanged.</span>
@@ -254,7 +255,7 @@ inspect the changes.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────────────────────</span>
 <span class="r-in"><span><span class="fu">style_file</span><span class="op">(</span><span class="va">file</span>, transformers <span class="op">=</span> <span class="fu"><a href="tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Styling  1  files:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpBxauWt/styler298c5241e67e.R ✔ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpLt416Z/styler296c78dad565.R ✔ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Status	Count	Legend </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ✔ 	1	File unchanged.</span>
@@ -265,7 +266,7 @@ inspect the changes.</p>
 <span class="r-in"><span><span class="co"># only style indention and less invasive  levels (i.e. spaces)</span></span></span>
 <span class="r-in"><span><span class="fu">style_file</span><span class="op">(</span><span class="va">file</span>, scope <span class="op">=</span> <span class="st">"indention"</span>, strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Styling  1  files:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpBxauWt/styler298c5241e67e.R ✔ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpLt416Z/styler296c78dad565.R ✔ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Status	Count	Legend </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ✔ 	1	File unchanged.</span>
@@ -275,7 +276,7 @@ inspect the changes.</p>
 <span class="r-in"><span><span class="co"># name levels explicitly to not style less invasive levels</span></span></span>
 <span class="r-in"><span><span class="fu">style_file</span><span class="op">(</span><span class="va">file</span>, scope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tokens"</span>, <span class="st">"spaces"</span><span class="op">)</span><span class="op">)</span>, strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Styling  1  files:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpBxauWt/styler298c5241e67e.R ✔ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpLt416Z/styler296c78dad565.R ✔ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ────────────────────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Status	Count	Legend </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ✔ 	1	File unchanged.</span>
