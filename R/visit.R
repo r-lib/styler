@@ -106,6 +106,8 @@ post_visit_one <- function(pd_nested, fun) {
 #' @family visitors
 #' @keywords internal
 visit_one <- function(pd_flat, funs) {
+  stopifnot(!is.null(names(funs)))
+  stopifnot(all(names(funs) != ""))
   for (f in funs) {
     pd_flat <- f(pd_flat)
   }

@@ -346,8 +346,9 @@ apply_transformers <- function(pd_nested, transformers) {
   transformed_updated_multi_line <- post_visit(
     pd_nested,
     c(
-      transformers$initialize, transformers$line_break, set_multi_line,
-      if (length(transformers$line_break) != 0) update_newlines
+      transformers$initialize, transformers$line_break,
+      set_multi_line = set_multi_line,
+      update_newlines = if (length(transformers$line_break) != 0) update_newlines
     )
   )
 
