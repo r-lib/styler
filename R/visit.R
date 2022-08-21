@@ -23,17 +23,9 @@ pre_visit <- function(pd_nested, funs) {
   if (length(funs) == 0L) {
     return(pd_nested)
   }
-  pd_nested <- visit_one(pd_nested, funs)
 
-  children <- pd_nested$child
-  for (i in seq_along(children)) {
-    child <- children[[i]]
-    if (!is.null(child)) {
-      children[[i]] <- pre_visit(child, funs)
-    }
-  }
-  pd_nested$child <- children
-  pd_nested
+  fun <- make_visit_one(funs)
+  pre_visit_one(pd_nested, fun)
 }
 
 #' @rdname visit
@@ -65,16 +57,8 @@ post_visit <- function(pd_nested, funs) {
     return(pd_nested)
   }
 
-  children <- pd_nested$child
-  for (i in seq_along(children)) {
-    child <- children[[i]]
-    if (!is.null(child)) {
-      children[[i]] <- post_visit(child, funs)
-    }
-  }
-  pd_nested$child <- children
-
-  visit_one(pd_nested, funs)
+  fun <- make_visit_one(funs)
+  post_visit_one(pd_nested, fun)
 }
 
 #' @rdname visit
@@ -99,19 +83,33 @@ post_visit_one <- function(pd_nested, fun) {
 
 #' Transform a flat parse table with a list of transformers
 #'
-#' Uses [Reduce()] to apply each function of `funs` sequentially to
-#'   `pd_flat`.
+#' Creates a single transformer function from a list of transformer functions.
+#'
+#' @details
+#' For an input of the form `list(f1 = f1, f2 = f2)`, creates a function
+#'
+#' ```r
+#' function(pd_flat) {
+#'   pd_flat <- f1(pd_flat)
+#'   pd_flat <- f2(pd_flat)
+#'   pd_flat
+#' }
+#' ```
+#'
+#' The function's environment is constructed from `rlang::as_environment(funs)`.
+#' This makes function sequences called by visitors interpretable in profiling.
+#'
 #' @param pd_flat A flat parse table.
-#' @param funs A list of transformer functions.
+#' @param funs A named list of transformer functions.
 #' @family visitors
 #' @keywords internal
-visit_one <- function(pd_flat, funs) {
-  stopifnot(!is.null(names(funs)))
-  stopifnot(all(names(funs) != ""))
-  for (f in funs) {
-    pd_flat <- f(pd_flat)
-  }
-  pd_flat
+make_visit_one <- function(funs) {
+  calls <- map(rlang::syms(names(funs)), ~ rlang::expr(pd_flat <- (!!.x)(pd_flat)))
+  all_calls <- c(calls, rlang::expr(pd_flat))
+  body <- rlang::call2("{", !!!all_calls)
+
+  env <- rlang::as_environment(funs, rlang::base_env())
+  rlang::new_function(rlang::pairlist2(pd_flat =), body, env)
 }
 
 #' Propagate context to terminals
