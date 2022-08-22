@@ -10,7 +10,7 @@ style_pkg(
   style = tidyverse_style,
   transformers = style(...),
   filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
-  exclude_files = "R/RcppExports.R",
+  exclude_files = c("R/RcppExports.R", "R/cpp11.R"),
   exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE,
   base_indention = 0,
@@ -20,10 +20,11 @@ style_pkg(
 \arguments{
 \item{pkg}{Path to a (subdirectory of an) R package.}
 
-\item{...}{Arguments passed on to the \code{style} function.}
+\item{...}{Arguments passed on to the \code{style} function,
+see \code{\link[=tidyverse_style]{tidyverse_style()}} for the default argument.}
 
 \item{style}{A function that creates a style guide to use, by default
-\code{\link[=tidyverse_style]{tidyverse_style()}} (without the parentheses). Not used
+\code{\link{tidyverse_style}}. Not used
 further except to construct the argument \code{transformers}. See
 \code{\link[=style_guides]{style_guides()}} for details.}
 
@@ -59,9 +60,8 @@ styling are not identical.}
 }
 \description{
 Performs various substitutions in all \code{.R} files in a package
-(code and tests). One can also (optionally) style \code{.Rmd}, \code{.Rmarkdown} and/or
-\code{.qmd}, \code{.Rnw} files (vignettes and readme) by changing the \code{filetype}
-argument.
+(code and tests), \code{.Rmd}, \code{.Rmarkdown} and/or
+\code{.qmd}, \code{.Rnw} files (vignettes and readme).
 Carefully examine the results after running this function!
 }
 \section{Warning}{

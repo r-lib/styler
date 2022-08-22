@@ -11,6 +11,7 @@ editor_options:
 -  `style_dir()` and `style_pkg()` now default to styling all supported file 
    formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package) 
    directory (\@IndrajeetPatil, #965).
+- `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
 
 **Features**
 
