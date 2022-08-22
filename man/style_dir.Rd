@@ -21,10 +21,11 @@ style_dir(
 \arguments{
 \item{path}{Path to a directory with files to transform.}
 
-\item{...}{Arguments passed on to the \code{style} function.}
+\item{...}{Arguments passed on to the \code{style} function,
+see \code{\link[=tidyverse_style]{tidyverse_style()}} for the default argument.}
 
 \item{style}{A function that creates a style guide to use, by default
-\code{\link[=tidyverse_style]{tidyverse_style()}} (without the parentheses). Not used
+\code{\link{tidyverse_style}}. Not used
 further except to construct the argument \code{transformers}. See
 \code{\link[=style_guides]{style_guides()}} for details.}
 

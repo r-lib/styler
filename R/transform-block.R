@@ -28,7 +28,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
                                               base_indention) {
   if (!all(pd_nested$is_cached, na.rm = TRUE) || !cache_is_activated()) {
     transformed_pd <- apply_transformers(pd_nested, transformers)
-    flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
+    flattened_pd <- post_visit_one(transformed_pd, extract_terminals) %>%
       enrich_terminals(transformers$use_raw_indention) %>%
       apply_ref_indention() %>%
       set_regex_indention(

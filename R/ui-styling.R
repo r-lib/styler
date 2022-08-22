@@ -6,15 +6,15 @@ NULL
 #' Prettify R source code
 #'
 #' Performs various substitutions in all `.R` files in a package
-#' (code and tests). One can also (optionally) style `.Rmd`, `.Rmarkdown` and/or
-#' `.qmd`, `.Rnw` files (vignettes and readme) by changing the `filetype`
-#' argument.
+#' (code and tests), `.Rmd`, `.Rmarkdown` and/or
+#' `.qmd`, `.Rnw` files (vignettes and readme).
 #' Carefully examine the results after running this function!
 #'
 #' @param pkg Path to a (subdirectory of an) R package.
-#' @param ... Arguments passed on to the `style` function.
+#' @param ... Arguments passed on to the `style` function,
+#'   see [tidyverse_style()] for the default argument.
 #' @param style A function that creates a style guide to use, by default
-#'   [tidyverse_style()] (without the parentheses). Not used
+#'   [`tidyverse_style`]. Not used
 #'   further except to construct the argument `transformers`. See
 #'   [style_guides()] for details.
 #' @param transformers A set of transformer functions. This argument is most
@@ -76,7 +76,7 @@ style_pkg <- function(pkg = ".",
                       style = tidyverse_style,
                       transformers = style(...),
                       filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
-                      exclude_files = "R/RcppExports.R",
+                      exclude_files = c("R/RcppExports.R", "R/cpp11.R"),
                       exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE,
                       base_indention = 0,
