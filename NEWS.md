@@ -629,7 +629,7 @@ Thanks to all contributors involved, in particular
 ## Adaption
 
 -   styler is now available through the pre-commit hook `style-files` in
-    <https://github.com/lorenzwalthert/pre-commit-hooks>.
+    <https://github.com/lorenzwalthert/precommit>.
 
 Thanks to all contributors involved, in particular
 
