@@ -238,10 +238,6 @@ tidyverse_style <- function(scope = "tokens",
     )
   )
 
-  if (getRversion() < "3.6") {
-    transformers_drop$token$force_assignment_op <- NULL
-  }
-
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
   create_style_guide(
     # transformer functions
