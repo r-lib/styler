@@ -12,7 +12,6 @@ editor_options:
    formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package) 
    directory (\@IndrajeetPatil, #965).
 -  `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
--  Minimum needed R version is now bumped to `3.5` (\@IndrajeetPatil, #985).
 
 **Features**
 
