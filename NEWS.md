@@ -13,6 +13,8 @@ editor_options:
    directory (\@IndrajeetPatil, #965).
 -  `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
 
+-   Minimum needed R version is now bumped to `3.5` (\@IndrajeetPatil, #986).
+
 **Features**
 
 -   `filetype` `.qmd` is now supported, but not turned on by default (#931).
@@ -628,7 +630,7 @@ Thanks to all contributors involved, in particular
 ## Adaption
 
 -   styler is now available through the pre-commit hook `style-files` in
-    <https://github.com/lorenzwalthert/pre-commit-hooks>.
+    <https://github.com/lorenzwalthert/precommit>.
 
 Thanks to all contributors involved, in particular
 
