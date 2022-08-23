@@ -10,7 +10,7 @@ articles:
   strict: strict.html
   styler: styler.html
   third-party-integrations: third-party-integrations.html
-last_built: 2022-08-22T18:41Z
+last_built: 2022-08-23T09:25Z
 urls:
   reference: https://styler.r-lib.org/reference
   article: https://styler.r-lib.org/articles
