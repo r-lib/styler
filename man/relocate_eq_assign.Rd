@@ -11,19 +11,10 @@ relocate_eq_assign(pd)
 \item{pd}{A parse table.}
 }
 \description{
-Although syntactically identical, \code{\link[utils:getParseData]{utils::getParseData()}} does not produce
-the same hierarchy of the parse table (parent and id relationship) for \verb{<-}
-and \code{=} (See 'Examples').
-This is considered to be a bug and causes problems because the
-nested parse table constructed with \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}} is not
-consistent if \code{EQ_ASSIGN} occurs in the expression to style. In particular,
-\code{EQ_ASSIGN} and the tokens to its left and right are located too high up in
-the hierarchy of the nested parse data. Hence, this function wraps the
-sub-expression into an expression, similar to \code{\link[=wrap_expr_in_curly]{wrap_expr_in_curly()}}.
-Since \code{wrap_expr_in_curly()} is called from within a visitor
-(and \code{relocate_eq_assign()} not), we need to
-wrap the the implementation \code{\link[=relocate_eq_assign_nest]{relocate_eq_assign_nest()}} that operates on
-\emph{nests} into a visitor call.
+This used to be relevant when \code{{styler}} supported R versions \verb{< 3.5}, and,
+therefore, parser version \code{1}, which had a bug that did not produce the same
+hierarchy of the parse table (parent and id relationship) for \verb{<-} and \code{=}
+(See 'Examples').
 }
 \examples{
 styler:::get_parse_data("a <- b <- 3")
