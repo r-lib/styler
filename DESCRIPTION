@@ -11,7 +11,12 @@ Authors@R:
       person(given = "Lorenz",
              family = "Walthert",
              role = c("cre", "aut"),
-             email = "lorenz.walthert@icloud.com"))
+             email = "lorenz.walthert@icloud.com"),
+      person(given = "Indrajeet",
+             family = "Patil",
+             role = "ctb",
+             email = "patilindrajeet.science@gmail.com",
+             comment = c(ORCID = "0000-0003-1995-6531", Twitter = "@patilindrajeets")))
 Description: Pretty-prints R code without changing the user's formatting
     intent.
 License: MIT + file LICENSE
