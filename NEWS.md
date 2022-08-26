@@ -51,6 +51,8 @@ editor_options:
 
 **Other**
 
+-   \@IndrajeetPatil is now a contributor to {styler}. Welcome and thanks for
+    everything you did so far! (#988).
 -   Non-exported and unused functions `odd()` and `even()` were removed 
     (\@IndrajeetPatil, #989).
 -   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955). To
