@@ -1,0 +1,43 @@
+name: Rperform Benchmarks (Receive)
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+on: pull_request
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      config: ${{ steps.read_rperform_config.outputs.config }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - id: read_rperform_config
+        run: |
+          content=`cat ./rperform/config.json`
+          # the following lines are only required for multi line json
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          # end of optional handling for multi line json
+          echo "::set-output name=config::$content"
+  build:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - ${{ fromJson(needs.prepare.outputs.config) }}
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: EngineerDanny/Rperform/actions/receive@master
+        with:
+          cache-version: 1

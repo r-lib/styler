@@ -22,3 +22,4 @@
 ^tic\.R$
 ^touchstone$
 ^vignettes/gsoc_proposal$
+^Rperform$
