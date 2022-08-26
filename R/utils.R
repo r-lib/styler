@@ -48,22 +48,11 @@ two_cols_match <- function(col1, col2, data) {
   all(unlist(data[col1]) == unlist(data[col2]))
 }
 
-odd <- function(x) {
-  x[odd_index(x)]
-}
-
 odd_index <- function(x) {
   if (length(x) < 1) {
     return(NULL)
   }
   seq(1L, length(x), by = 2)
-}
-
-even <- function(x) {
-  if (length(x) < 2) {
-    return(NULL)
-  }
-  x[even_index(x)]
 }
 
 even_index <- function(x) {

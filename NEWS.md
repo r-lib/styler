@@ -50,6 +50,8 @@ editor_options:
 
 **Other**
 
+-   Non-exported and unused functions `odd()` and `even()` were removed 
+    (\@IndrajeetPatil, #989).
 -   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955). To
     access them, do `git checkout v1.0.0`.
 -   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
