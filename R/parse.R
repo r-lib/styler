@@ -111,7 +111,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   pd <- pd %>%
     add_id_and_short()
 
-  parser_version_set(parser_version_find(pd))
+  #parser_version_set(parser_version_find(pd))
   pd
 }
 
