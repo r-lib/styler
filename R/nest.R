@@ -16,7 +16,6 @@ compute_parse_data_nested <- function(text,
   pd_nested <- parse_data %>%
     nest_parse_data() %>%
     flatten_operators() %>%
-    when(any(parse_data$token == "EQ_ASSIGN") ~ relocate_eq_assign(.), ~.) %>%
     add_cache_block()
 
   pd_nested

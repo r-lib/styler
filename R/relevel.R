@@ -99,36 +99,3 @@ wrap_expr_in_expr <- function(pd) {
     indents = pd$indent[1]
   )
 }
-
-
-#   ____________________________________________________________________________
-#   Relocate EQ_ASSIGN                                                      ####
-
-#' Relocate the expressions containing the token `EQ_ASSIGN` within the nested
-#' parse table
-#'
-#' This used to be relevant when `{styler}` supported R versions `< 3.5`, and,
-#' therefore, parser version `1`, which had a bug that did not produce the same
-#' hierarchy of the parse table (parent and id relationship) for `<-` and `=`
-#' (See 'Examples').
-#'
-#' @param pd A parse table.
-#' @examples
-#' styler:::get_parse_data("a <- b <- 3")
-#' styler:::get_parse_data("a  = b = 3")
-#' styler:::get_parse_data(
-#'   "x = 5
-#'   if(x >= 5)
-#'   y = TRUE else
-#'   y = FALSE",
-#' )
-#' styler:::get_parse_data(
-#'   "x <- 5
-#'   if(x >= 5)
-#'   y <- TRUE else
-#'   y <- FALSE",
-#' )
-#' @keywords internal
-relocate_eq_assign <- function(pd) {
-  pd
-}
