@@ -250,13 +250,15 @@ add_terminal_token_after <- function(pd_flat) {
     filter(terminal) %>%
     arrange_pos_id()
 
-  new_tibble(list(
-    pos_id = terminals$pos_id,
-    token_after = lead(terminals$token, default = "")
-  ),
-  nrow = nrow(terminals)
-  ) %>%
-    left_join(pd_flat, ., by = "pos_id")
+  rhs <- new_tibble(
+    list(
+      pos_id = terminals$pos_id,
+      token_after = lead(terminals$token, default = "")
+    ),
+    nrow = nrow(terminals)
+  )
+
+  left_join(pd_flat, rhs, by = "pos_id")
 }
 
 #' @rdname add_token_terminal
@@ -266,14 +268,15 @@ add_terminal_token_before <- function(pd_flat) {
     filter(terminal) %>%
     arrange_pos_id()
 
-  new_tibble(
+  rhs <- new_tibble(
     list(
       id = terminals$id,
       token_before = lag(terminals$token, default = "")
     ),
     nrow = nrow(terminals)
-  ) %>%
-    left_join(pd_flat, ., by = "id")
+  )
+
+  left_join(pd_flat, rhs, by = "id")
 }
 
 
@@ -351,13 +354,19 @@ nest_parse_data <- function(pd_flat) {
   internal$child <- NULL
 
   child$parent_ <- child$parent
-  joined <-
-    child %>%
-    nest_(., "child", setdiff(names(.), "parent_")) %>%
-    left_join(internal, ., by = c("id" = "parent_"))
-  nested <- joined
-  nested$child <- map2(nested$child, nested$internal_child, combine_children)
-  nested <- nested[, setdiff(names(nested), "internal_child")]
+
+  rhs <- nest_(child, "child", setdiff(names(child), "parent_"))
+
+  nested <- left_join(internal, rhs, by = c("id" = "parent_"))
+
+  children <- nested$child
+  for (i in seq_along(children)) {
+    new <- combine_children(children[[i]], nested$internal_child[[i]])
+    # Work around is.null(new)
+    children[i] <- list(new)
+  }
+  nested$child <- children
+  nested$internal_child <- NULL
   nest_parse_data(nested)
 }
 
