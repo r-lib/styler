@@ -1,10 +1,11 @@
----
-editor_options: 
-  markdown: 
-    wrap: 79
----
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# styler 1.7.0.9000 (Development version)
+# styler 1.7.0.9002 (Development version)
+
+- Same as previous version.
+
+
+# styler 1.7.0.9000 
 
 **User-facing changes**
 
