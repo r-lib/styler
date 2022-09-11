@@ -1,23 +1,22 @@
----
-editor_options: 
-  markdown: 
-    wrap: 79
----
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# styler 1.7.0.9000 (Development version)
+# styler 1.7.0.9002 (Development version)
+
+- Same as previous version.
+
+
+# styler 1.7.0.9000 
 
 **User-facing changes**
 
--  `style_dir()` and `style_pkg()` now default to styling all supported file 
-   formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package) 
-   directory (\@IndrajeetPatil, #965).
--  `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
-
+-   `style_dir()` and `style_pkg()` now default to styling all supported file
+    formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package)
+    directory (\@IndrajeetPatil, #965, #931).
+-   `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
 -   Minimum needed R version is now bumped to `3.5` (\@IndrajeetPatil, #986).
 
 **Features**
 
--   `filetype` `.qmd` is now supported, but not turned on by default (#931).
 -   alignment is now detected for function declaration in a similar way as for
     function calls (#968).
 -   new R option `styler.ignore_alignment` controls if alignment should be
@@ -30,7 +29,7 @@ editor_options:
 
 -   If there are only empty lines in a code chunk, they are all removed (#936).
 
--   There is now always one line break after `{` and before `#` (#916).
+-   There is now always one line break after `{` and before `#` (#952).
 
 -   Line breaks may be added to function calls to ensure indention symmetry for
     round braces (#975).
@@ -53,20 +52,24 @@ editor_options:
 
 -   \@IndrajeetPatil is now a contributor to {styler}. Welcome and thanks for
     everything you did so far! (#988).
--   Non-exported and unused functions `odd()` and `even()` were removed 
-    (\@IndrajeetPatil, #989).
 -   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955). To
     access them, do `git checkout v1.0.0`.
--   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
 -   Minor improvements to the documentation (\@IndrajeetPatil, #958).
+-   turned off `styler.print.Vertical` in vignettes so ANSI output of
+    {prettycode} not messing with {pkgdown} (\@IndrajeetPatil, #956, #957).
+-   Non-exported and unused functions `odd()` and `even()` were removed
+    (\@IndrajeetPatil, #989).
+-   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
 -   All (R)md files in this project's source code are now formatted with
     default pandoc markdown formatter. This conversion is required when using
     the visual mode in RStudio (#941).
 -   Update {pkgdown} action to always build, but only deploy on default branch
     (#946).
--   turned off `styler.print.Vertical` in vignettes so ANSI output of
-    {prettycode} not messing with {pkgdown} (\@IndrajeetPatil, #956, #957).
+-   Better stack tracing for profiling (#979, #980).
 -   Improved code quality by fixing {lintr} warnings (#960).
+-   Error now on R CMD note (\@IndrajeetPatil, #987).
+-   Test on latest Ubuntu instead of Ubuntu 18.04 (#982).
+-   Run tests in parallel (#978, \@krlmlr).
 
 # styler 1.7.0
 
