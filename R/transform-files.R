@@ -244,15 +244,20 @@ parse_transform_serialize_r <- function(text,
     transformers
   )
 
-  text_out <- pd_nested %>%
-    split(pd_nested$block) %>%
-    unname() %>%
-    map2(find_blank_lines_to_next_block(pd_nested),
-      parse_transform_serialize_r_block,
+  pd_split <- unname(split(pd_nested, pd_nested$block))
+  pd_blank <- find_blank_lines_to_next_block(pd_nested)
+
+  text_out <- vector("list", length(pd_split))
+  for (i in seq_along(pd_split)) {
+    text_out[[i]] <- parse_transform_serialize_r_block(
+      pd_split[[i]],
+      pd_blank[[i]],
       transformers = transformers,
       base_indention = base_indention
-    ) %>%
-    unlist()
+    )
+  }
+
+  text_out <- unlist(text_out)
 
   verify_roundtrip(
     text, text_out,
