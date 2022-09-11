@@ -11,7 +11,8 @@ editor_options:
 -  `style_dir()` and `style_pkg()` now default to styling all supported file 
    formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package) 
    directory (\@IndrajeetPatil, #965).
-- `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
+-  `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
+-   Minimum needed R version is now bumped to `3.5` (\@IndrajeetPatil, #986).
 
 **Features**
 
@@ -49,6 +50,10 @@ editor_options:
 
 **Other**
 
+-   \@IndrajeetPatil is now a contributor to {styler}. Welcome and thanks for
+    everything you did so far! (#988).
+-   Non-exported and unused functions `odd()` and `even()` were removed 
+    (\@IndrajeetPatil, #989).
 -   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955). To
     access them, do `git checkout v1.0.0`.
 -   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
@@ -628,7 +633,7 @@ Thanks to all contributors involved, in particular
 ## Adaption
 
 -   styler is now available through the pre-commit hook `style-files` in
-    <https://github.com/lorenzwalthert/pre-commit-hooks>.
+    <https://github.com/lorenzwalthert/precommit>.
 
 Thanks to all contributors involved, in particular
 

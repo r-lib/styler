@@ -10,7 +10,7 @@ Luke Tierney.
 
 ## Test environments
 
--   ubuntu 18.04 (on GitHub Actions): R devel, R 4.1.2, R 4.0.5, R 3.6, R 3.5,
+-   ubuntu 20.04 (on GitHub Actions): R devel, R 4.1.2, R 4.0.5, R 3.6, R 3.5,
     R 3.4
 -   Windows Server 10 (on GitHub Actions): R 3.6, R 4.0.5
 -   win-builder: R devel
