@@ -42,7 +42,7 @@ withr::with_options(
     transformers <- tidyverse_style()
     pd_nested <- styler:::compute_parse_data_nested(c(
       "call(",
-      "  ab = 1,",
+      "  ab = 1L,",
       "  a  = 2",
       ")"
     )) \%>\%

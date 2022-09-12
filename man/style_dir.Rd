@@ -14,7 +14,7 @@ style_dir(
   exclude_files = NULL,
   exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE,
-  base_indention = 0,
+  base_indention = 0L,
   dry = "off"
 )
 }

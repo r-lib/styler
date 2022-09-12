@@ -11,7 +11,7 @@ prettify_any(
   exclude_files,
   exclude_dirs,
   include_roxygen_examples,
-  base_indention = 0,
+  base_indention = 0L,
   dry
 )
 }
