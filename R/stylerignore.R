@@ -110,6 +110,7 @@ apply_stylerignore <- function(flattened_pd) {
   colnames_required_apply_stylerignore <- c(
     "pos_id_", "lag_newlines", "lag_spaces", "text", "first_pos_id_in_segment"
   )
+
   # cannot rely on flattened_pd$text == option_read("styler.ignore_start")
   # because if the marker logic is not correct (twice off in a row), we'll
   # get it wrong.
