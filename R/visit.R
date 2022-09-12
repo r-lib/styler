@@ -228,7 +228,7 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   groups <- flattened_pd$line1
   flattened_pd <- flattened_pd %>%
     split(groups) %>%
-    purrr::map_dfr(function(.x) {
+    map_dfr(function(.x) {
       .x$col2 <- cumsum(.x$nchar + .x$lag_spaces)
       .x
     })

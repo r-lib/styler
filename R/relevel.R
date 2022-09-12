@@ -176,7 +176,7 @@ relocate_eq_assign_nest <- function(pd) {
   if (length(idx_eq_assign) > 0L) {
     block_id <- find_block_id(pd)
     blocks <- split(pd, block_id)
-    pd <- purrr::map_dfr(blocks, relocate_eq_assign_one)
+    pd <- map_dfr(blocks, relocate_eq_assign_one)
   }
   pd
 }
