@@ -21,7 +21,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
     return(pd)
   }
 
-  if (pd$newlines[length(pd$newlines) - 1] == 0) {
+  if (pd$newlines[length(pd$newlines) - 1] == 0L) {
     return(pd)
   }
   pd$indent[nrow] <- indent_by
@@ -50,7 +50,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
 
 
   else_idx <- which(pd$token == "ELSE")
-  if (length(else_idx) == 0) {
+  if (length(else_idx) == 0L) {
     return(pd)
   }
   expr_after_else_idx <- next_non_comment(pd, else_idx)
@@ -167,7 +167,7 @@ needs_indention <- function(pd,
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
-  before_first_break <- which(pd$lag_newlines > 0)[1] - 1L
+  before_first_break <- which(pd$lag_newlines > 0L)[1] - 1L
   if (is.na(before_first_break)) {
     return(FALSE)
   }
@@ -240,7 +240,7 @@ pd_multi_line <- function(pd) {
 #' @seealso choose_indention
 #' @keywords internal
 update_newlines <- function(pd) {
-  seq_pd <- seq_len(nrow(pd) - 1)
-  pd$newlines[seq_pd] <- pd$lag_newlines[seq_pd + 1]
+  seq_pd <- seq_len(nrow(pd) - 1L)
+  pd$newlines[seq_pd] <- pd$lag_newlines[seq_pd + 1L]
   pd
 }

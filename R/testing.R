@@ -37,7 +37,7 @@ test_collection <- function(test, sub_test = NULL,
     full.names = FALSE
   )
 
-  if (length(in_names) < 1) abort("no items to check")
+  if (length(in_names) < 1L) abort("no items to check")
 
   out_names <- construct_out(in_names)
 
@@ -286,7 +286,7 @@ n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
 #' @keywords internal
 generate_test_samples <- function() {
   gen <- function(x) {
-    if (length(x) == 0) {
+    if (length(x) == 0L) {
       ""
     } else {
       c(
@@ -368,7 +368,7 @@ test_transformers_drop <- function(transformers) {
   purrr::walk2(transformers$transformers_drop, transformers[scopes], function(x, y) {
     # all x must be in y. select the x that are not in y
     diff <- setdiff(names(x), names(y))
-    if (length(diff) > 0) {
+    if (length(diff) > 0L) {
       rlang::abort(paste(
         "transformers_drop specifies exclusion rules for transformers that ",
         "are not in the style guilde. Please add the rule to the style guide ",

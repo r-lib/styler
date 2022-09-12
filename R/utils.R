@@ -49,7 +49,7 @@ two_cols_match <- function(col1, col2, data) {
 }
 
 odd_index <- function(x) {
-  if (length(x) < 1) {
+  if (length(x) < 1L) {
     return(NULL)
   }
   seq(1L, length(x), by = 2)

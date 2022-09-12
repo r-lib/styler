@@ -445,7 +445,7 @@ NULL
 #' ))
 #' @export
 specify_reindention <- function(regex_pattern = NULL,
-                                indention = 0,
+                                indention = 0L,
                                 comments_only = TRUE) {
   list(
     regex_pattern = regex_pattern,
@@ -462,7 +462,7 @@ specify_reindention <- function(regex_pattern = NULL,
 #' @export
 tidyverse_reindention <- function() {
   specify_reindention(
-    regex_pattern = NULL, indention = 0, comments_only = TRUE
+    regex_pattern = NULL, indention = 0L, comments_only = TRUE
   )
 }
 
