@@ -24,6 +24,7 @@
 #'
 #' @importFrom purrr map_int map_lgl map compact
 #' @importFrom rlang seq2
+#' @import fastmatch
 #' @keywords internal
 #' @examples
 #' library("magrittr")

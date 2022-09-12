@@ -52,7 +52,7 @@ match_stop_to_start <- function(start, stop_candidates) {
 #' @importFrom purrr map2 map_int
 #' @keywords internal
 find_dont_seqs <- function(bare) {
-  dont_openings <- which(bare %in% dont_keywords())
+  dont_openings <- which(bare %fin% dont_keywords())
   dont_closings <- map_int(dont_openings + 1L, find_dont_closings, bare = bare)
   map2(dont_openings, dont_closings, seq2)
 }

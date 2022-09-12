@@ -146,7 +146,7 @@ ensure_correct_txt <- function(pd, text) {
     return(pd)
   }
   problematic_text <- pd[is_problematic_text, ]
-  is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
+  is_parent_of_problematic_string <- pd$id %fin% problematic_text$parent
 
   is_unaffected_token <- !or(
     is_problematic_text, is_parent_of_problematic_string

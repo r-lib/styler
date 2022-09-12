@@ -205,7 +205,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
     return(list(separated = list(text), selectors = NULL))
   }
   all_lines <- seq2(1L, length(text))
-  active_segment <- as.integer(all_lines %in% roxygen_examples)
+  active_segment <- as.integer(all_lines %fin% roxygen_examples)
   segment_id <- cumsum(abs(c(0L, diff(active_segment)))) + 1L
   separated <- split(text, factor(segment_id))
   restyle_selector <- ifelse(roxygen_examples[1] == 1L, odd_index, even_index)
@@ -299,7 +299,7 @@ transformers_drop <- function(text, transformers) {
   for (scope in c("line_break", "space", "token", "indention")) {
     rules <- transformers$transformers_drop[[scope]]
     for (rule in names(rules)) {
-      if (!any(rules[[rule]] %in% token)) {
+      if (!any(rules[[rule]] %fin% token)) {
         transformers[[scope]][rule] <- NULL
       }
     }

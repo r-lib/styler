@@ -115,8 +115,8 @@ alignment_col1_all_named <- function(relevant_pd_by_line) {
       return(FALSE)
     }
     x$token[3] == "expr" &&
-      x$token[1] %in% c("SYMBOL_SUB", "STR_CONST", "SYMBOL_FORMALS") &&
-      x$token[2] %in% c(
+      x$token[1] %fin% c("SYMBOL_SUB", "STR_CONST", "SYMBOL_FORMALS") &&
+      x$token[2] %fin% c(
         "EQ_SUB", "EQ_FORMALS", "SPECIAL-IN", "LT", "GT", "EQ", "NE"
       )
   }) %>%

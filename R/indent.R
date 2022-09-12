@@ -14,7 +14,7 @@ NULL
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
   tokens <- c("FOR", "WHILE", "FUNCTION")
   nrow <- nrow(pd)
-  if (!(pd$token[1] %in% tokens)) {
+  if (!(pd$token[1] %fin% tokens)) {
     return(pd)
   }
   if (is_curly_expr(pd$child[[nrow]])) {
@@ -33,7 +33,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 #' @keywords internal
 indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
-  is_if <- pd$token[1] %in% "IF"
+  is_if <- pd$token[1] %fin% "IF"
   has_if_without_curly <-
     is_if && pd$child[[expr_after_if]]$token[1] != "'{'"
   if (!is_if) {
@@ -97,7 +97,7 @@ compute_indent_indices <- function(pd,
                                    token_opening,
                                    token_closing = NULL) {
   npd <- nrow(pd)
-  potential_triggers <- which(pd$token %in% token_opening)
+  potential_triggers <- which(pd$token %fin% token_opening)
   needs_indention <- needs_indention(pd, potential_triggers,
     other_trigger_tokens = c("EQ_SUB", "EQ_FORMALS")
   )
@@ -109,7 +109,7 @@ compute_indent_indices <- function(pd,
   if (is.null(token_closing)) {
     stop <- npd
   } else {
-    stop <- last(which(pd$token %in% token_closing)[needs_indention]) - 1
+    stop <- last(which(pd$token %fin% token_closing)[needs_indention]) - 1
   }
 
   seq2(start, stop)
@@ -183,7 +183,7 @@ needs_indention_one <- function(pd,
   )
 
   other_trigger_on_same_line <- (
-    pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
+    pd$token[remaining_row_idx_between_trigger_and_line_break] %fin%
       other_trigger_tokens
   )
   line_break_after_other_trigger <-

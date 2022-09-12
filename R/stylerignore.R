@@ -82,7 +82,7 @@ add_stylerignore <- function(pd_flat) {
   to_ignore <- as.logical(pd_flat$indicator_off %% 2)
   to_ignore[is_invalid] <- FALSE
   single_lines_to_ignore <- pd_flat$line1[start_candidate & on_same_line]
-  to_ignore[pd_flat$line1 %in% single_lines_to_ignore] <- TRUE
+  to_ignore[pd_flat$line1 %fin% single_lines_to_ignore] <- TRUE
   pd_flat$indicator_off <- NULL
   pd_flat[to_ignore, "stylerignore"] <- TRUE
   pd_flat

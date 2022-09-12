@@ -74,7 +74,7 @@ tidyverse_style <- function(scope = "tokens",
   indent_character <- " "
 
 
-  indention_manipulators <- if ("indention" %in% scope) {
+  indention_manipulators <- if ("indention" %fin% scope) {
     list(
       indent_braces = partial(indent_braces, indent_by = indent_by),
       unindent_fun_dec = unindent_fun_dec,
@@ -86,7 +86,7 @@ tidyverse_style <- function(scope = "tokens",
       update_indention_ref_fun_dec = update_indention_ref_fun_dec
     )
   }
-  space_manipulators <- if ("spaces" %in% scope) {
+  space_manipulators <- if ("spaces" %fin% scope) {
     list(
       remove_space_before_closing_paren = remove_space_before_closing_paren,
       remove_space_before_opening_paren = if (strict) {
@@ -127,9 +127,9 @@ tidyverse_style <- function(scope = "tokens",
     )
   }
 
-  use_raw_indention <- !("indention" %in% scope)
+  use_raw_indention <- !("indention" %fin% scope)
 
-  line_break_manipulators <- if ("line_breaks" %in% scope) {
+  line_break_manipulators <- if ("line_breaks" %fin% scope) {
     list(
       set_line_break_around_comma_and_or = set_line_break_around_comma_and_or,
       set_line_break_after_assignment = set_line_break_after_assignment,
@@ -171,7 +171,7 @@ tidyverse_style <- function(scope = "tokens",
     )
   }
 
-  token_manipulators <- if ("tokens" %in% scope) {
+  token_manipulators <- if ("tokens" %fin% scope) {
     list(
       fix_quotes = fix_quotes,
       force_assignment_op = force_assignment_op,
@@ -481,7 +481,7 @@ tidyverse_reindention <- function() {
 #' @importFrom rlang abort
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
-  if (!all((scope %in% levels))) {
+  if (!all((scope %fin% levels))) {
     abort(paste(
       "all values in", name, "must be one of the following:",
       paste(levels, collapse = ", ")

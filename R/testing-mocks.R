@@ -22,7 +22,7 @@ style_text_without_curly_curly <- function(text,
                                            transformers = style(...),
                                            include_roxygen_examples = TRUE) {
   dots <- list(...)
-  if ("strict" %in% names(dots)) {
+  if ("strict" %fin% names(dots)) {
     strict <- dots$strict
   } else {
     strict <- TRUE

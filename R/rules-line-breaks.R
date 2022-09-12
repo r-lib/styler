@@ -55,7 +55,7 @@
 #' }
 set_line_break_before_curly_opening <- function(pd) {
   line_break_to_set_idx <- which(
-    (pd$token_after == "'{'") & !(pd$token %in% c("COMMENT", "EQ_FORMALS"))
+    (pd$token_after == "'{'") & !(pd$token %fin% c("COMMENT", "EQ_FORMALS"))
   )
 
   line_break_to_set_idx <- setdiff(line_break_to_set_idx, nrow(pd))
@@ -65,18 +65,18 @@ set_line_break_before_curly_opening <- function(pd) {
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
     last_expr_idx <- max(which(pd$token == "expr"))
-    is_last_expr <- ifelse(pd$token[1] %in% c("IF", "WHILE"),
+    is_last_expr <- ifelse(pd$token[1] %fin% c("IF", "WHILE"),
       # rule not applicable for if and while
       TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
     )
 
-    no_line_break_before_curly_idx <- pd$token[line_break_to_set_idx] %in% "EQ_SUB"
+    no_line_break_before_curly_idx <- pd$token[line_break_to_set_idx] %fin% "EQ_SUB"
     linebreak_before_curly <- ifelse(is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
       # and goes to else case
       any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1])] > 0),
       # if not a function call, only break line if it is a pipe followed by {}
-      pd$token[line_break_to_set_idx] %in% c("SPECIAL-PIPE", "PIPE")
+      pd$token[line_break_to_set_idx] %fin% c("SPECIAL-PIPE", "PIPE")
     )
     # no line break before last brace expression and named brace expression to
     should_be_on_same_line <- is_not_curly_curly &
@@ -127,7 +127,7 @@ set_line_break_before_curly_opening <- function(pd) {
 set_line_break_around_comma_and_or <- function(pd, strict) {
   ops <- c("','", "AND", "OR", "AND2", "OR2")
   comma_with_line_break_that_can_be_removed_before <-
-    (pd$token %in% ops) &
+    (pd$token %fin% ops) &
       (pd$lag_newlines > 0) &
       (pd$token_before != "COMMENT") &
       (lag(pd$token) != "'['")
@@ -243,18 +243,18 @@ remove_line_breaks_in_fun_dec <- function(pd) {
 
 #' @importFrom rlang seq2
 add_line_break_after_pipe <- function(pd) {
-  is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
+  is_pipe <- pd$token %fin% c("SPECIAL-PIPE", "PIPE")
   pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1] <- 1L
 
   if (sum(is_pipe & pd$token_after != "COMMENT") > 1 &&
-    !(next_terminal(pd, vars = "token_before")$token_before %in% c("'('", "EQ_SUB", "','"))) {
+    !(next_terminal(pd, vars = "token_before")$token_before %fin% c("'('", "EQ_SUB", "','"))) {
     pd$lag_newlines[lag(is_pipe) & pd$token != "COMMENT"] <- 1L
   }
   pd
 }
 
 set_line_break_after_assignment <- function(pd) {
-  is_assignment <- lag(pd$token, default = FALSE) %in% c("LEFT_ASSIGN", "EQ_ASSIGN")
+  is_assignment <- lag(pd$token, default = FALSE) %fin% c("LEFT_ASSIGN", "EQ_ASSIGN")
   if (any(is_assignment)) {
     pd$lag_newlines[is_assignment] <- pmin(1L, pd$lag_newlines[is_assignment])
   }
@@ -300,10 +300,10 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
   if (!is_function_call(pd) && !is_subset_expr(pd)) {
     return(pd)
   }
-  has_force_text_before <- last(pd$child[[1]]$text) %in% force_text_before
+  has_force_text_before <- last(pd$child[[1]]$text) %fin% force_text_before
   if (has_force_text_before) {
     break_pos <- c(
-      which(lag(pd$token %in% c("','", "COMMENT"))),
+      which(lag(pd$token %fin% c("','", "COMMENT"))),
       nrow(pd) # always break before last because this is multi-line
     )
   } else {
@@ -318,8 +318,8 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
     }
   }
   exception_pos <- c(
-    which(pd$token %in% except_token_after),
-    ifelse(last(pd$child[[1]]$text) %in% except_text_before, break_pos, NA)
+    which(pd$token %fin% except_token_after),
+    ifelse(last(pd$child[[1]]$text) %fin% except_text_before, break_pos, NA)
   )
   pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
   if (has_force_text_before) {
@@ -356,7 +356,7 @@ set_line_break_before_closing_call <- function(pd, except_token_before) {
   npd <- nrow(pd)
   is_multi_line <- any(pd$lag_newlines[seq2(3L, npd - 1L)] > 0)
   if (is_multi_line == 0) {
-    exception <- which(pd$token_before %in% except_token_before)
+    exception <- which(pd$token_before %fin% except_token_before)
     pd$lag_newlines[setdiff(npd, exception)] <- 0L
     return(pd)
   }

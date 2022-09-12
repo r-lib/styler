@@ -9,7 +9,7 @@ set_space_around_op <- function(pd_flat, strict) {
   # calling token_is_on_aligned_line() twice because comma and operator spacing
   # depends on it.
   pd_flat <- add_space_after_comma(pd_flat)
-  op_after <- pd_flat$token %in% op_token
+  op_after <- pd_flat$token %fin% op_token
   op_before <- lead(op_after, default = FALSE)
   # include comma, but only for after
   op_after <- op_after | pd_flat$token == "','"
@@ -22,7 +22,7 @@ set_space_around_op <- function(pd_flat, strict) {
         (is_function_call(pd_flat) && sum(pd_flat$lag_newlines) > 2) ||
           (is_function_dec(pd_flat) && sum(pd_flat$lag_newlines) > 1)
       ) &&
-      any(pd_flat$token %in% c("EQ_SUB", "','", "EQ_FORMALS"))
+      any(pd_flat$token %fin% c("EQ_SUB", "','", "EQ_FORMALS"))
   ) {
     is_on_aligned_line <- token_is_on_aligned_line(pd_flat)
   } else {
@@ -55,13 +55,13 @@ set_space_around_op <- function(pd_flat, strict) {
 style_space_around_math_token <- function(strict, zero, one, pd_flat) {
   # We remove spaces for zero (e.g., around ^ in the tidyverse style guide)
   # even for strict = FALSE to be consistent with the : operator
-  if (any(pd_flat$token %in% zero)) {
+  if (any(pd_flat$token %fin% zero)) {
     pd_flat <- pd_flat %>%
       style_space_around_token(
         strict = TRUE, tokens = zero, level_before = 0L, level_after = 0L
       )
   }
-  if (any(pd_flat$token %in% one)) {
+  if (any(pd_flat$token %fin% one)) {
     pd_flat <- pd_flat %>%
       style_space_around_token(
         strict = strict, tokens = one, level_before = 1L, level_after = 1L
@@ -86,7 +86,7 @@ style_space_around_token <- function(pd_flat,
                                      tokens,
                                      level_before,
                                      level_after = level_before) {
-  op_after <- pd_flat$token %in% tokens
+  op_after <- pd_flat$token %fin% tokens
   op_before <- lead(op_after, default = FALSE)
   idx_before <- op_before & (pd_flat$newlines == 0L)
   idx_after <- op_after & (pd_flat$newlines == 0L)
@@ -118,7 +118,7 @@ style_space_around_tilde <- function(pd_flat, strict) {
 }
 
 remove_space_after_unary_pm_nested <- function(pd) {
-  if (any(pd$token[1] %in% c("'+'", "'-'"))) {
+  if (any(pd$token[1] %fin% c("'+'", "'-'"))) {
     pd$spaces[1] <- 0L
   }
 
@@ -126,7 +126,7 @@ remove_space_after_unary_pm_nested <- function(pd) {
 }
 
 remove_space_before_opening_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("'('", "'['", "LBB")
+  paren_after <- pd_flat$token %fin% c("'('", "'['", "LBB")
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -136,7 +136,7 @@ remove_space_before_opening_paren <- function(pd_flat) {
 }
 
 remove_space_after_opening_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("'('", "'['", "LBB")
+  paren_after <- pd_flat$token %fin% c("'('", "'['", "LBB")
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -145,7 +145,7 @@ remove_space_after_opening_paren <- function(pd_flat) {
 }
 
 remove_space_before_closing_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("')'", "']'")
+  paren_after <- pd_flat$token %fin% c("')'", "']'")
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -155,7 +155,7 @@ remove_space_before_closing_paren <- function(pd_flat) {
 }
 
 add_space_after_for_if_while <- function(pd_flat) {
-  comma_after <- pd_flat$token %in% c("FOR", "IF", "WHILE")
+  comma_after <- pd_flat$token %fin% c("FOR", "IF", "WHILE")
   if (!any(comma_after)) {
     return(pd_flat)
   }
@@ -223,7 +223,7 @@ remove_space_before_comma <- function(pd_flat) {
 #' @param pd_flat A flat parse table.
 #' @keywords internal
 set_space_between_levels <- function(pd_flat) {
-  if (pd_flat$token[1] %in% c("FUNCTION", "IF", "WHILE")) {
+  if (pd_flat$token[1] %fin% c("FUNCTION", "IF", "WHILE")) {
     index <- pd_flat$token == "')'" & pd_flat$newlines == 0L
     pd_flat$spaces[index] <- 1L
   } else if (pd_flat$token[1] == "FOR") {
@@ -344,7 +344,7 @@ remove_space_after_fun_dec <- function(pd_flat) {
 
 remove_space_around_colons <- function(pd_flat) {
   one_two_or_three_col_after <-
-    pd_flat$token %in% c("':'", "NS_GET_INT", "NS_GET")
+    pd_flat$token %fin% c("':'", "NS_GET_INT", "NS_GET")
 
   one_two_or_three_col_before <-
     lead(one_two_or_three_col_after, default = FALSE)

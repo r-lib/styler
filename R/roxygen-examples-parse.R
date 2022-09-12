@@ -102,7 +102,7 @@ roxygen_remove_extra_brace <- function(parsed) {
             },
             error = function(...) {
               # continue if braces are left, otherwise give up
-              if (any(last(parsed) %in% c("}", "\n"))) {
+              if (any(last(parsed) %fin% c("}", "\n"))) {
                 TRUE
               } else {
                 # this will error informatively. If not, outer loop will fail

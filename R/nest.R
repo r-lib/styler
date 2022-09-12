@@ -116,7 +116,7 @@ drop_cached_children <- function(pd) {
       map(find_pos_id_to_keep) %>%
       unlist() %>%
       unname()
-    pd[pd$pos_id %in% pos_ids_to_keep, ]
+    pd[pd$pos_id %fin% pos_ids_to_keep, ]
   } else {
     pd
   }
@@ -344,7 +344,7 @@ nest_parse_data <- function(pd_flat) {
   if (all(pd_flat$parent <= 0)) {
     return(pd_flat)
   }
-  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
+  pd_flat$internal <- with(pd_flat, (id %fin% parent) | (parent <= 0))
   split_data <- split(pd_flat, pd_flat$internal)
 
   child <- split_data$`FALSE`

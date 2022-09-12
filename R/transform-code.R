@@ -141,7 +141,7 @@ finalize_raw_chunks <- function(start, end, filetype, lines) {
     "\\1",
     header
   )
-  if (extracted_false %in% c("F", "FALSE")) {
+  if (extracted_false %fin% c("F", "FALSE")) {
     NULL
   } else {
     list(starts = start, ends = end)

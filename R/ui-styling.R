@@ -117,19 +117,19 @@ prettify_pkg <- function(transformers,
     set_arg_paths(exclude_files),
     dir_without_.(exclude_dirs, pattern = map_filetype_to_pattern(filetype))
   )
-  if ("\\.r" %in% filetype_) {
+  if ("\\.r" %fin% filetype_) {
     r_files <- dir_without_.(
       path = c("R", "tests", "data-raw", "demo"),
       pattern = "\\.r$"
     )
   }
 
-  if ("\\.rprofile" %in% filetype_) {
+  if ("\\.rprofile" %fin% filetype_) {
     rprofile_files <- dir_without_.(
       path = ".", pattern = "^\\.rprofile$"
     )
   }
-  if ("\\.rmd" %in% filetype_) {
+  if ("\\.rmd" %fin% filetype_) {
     vignette_files <- dir_without_.(
       path = "vignettes", pattern = "\\.rmd$"
     )
@@ -139,7 +139,7 @@ prettify_pkg <- function(transformers,
     )
   }
 
-  if ("\\.rmarkdown" %in% filetype_) {
+  if ("\\.rmarkdown" %fin% filetype_) {
     vignette_files <- append(
       vignette_files,
       dir_without_.(
@@ -154,7 +154,7 @@ prettify_pkg <- function(transformers,
     )
   }
 
-  if ("\\.rnw" %in% filetype_) {
+  if ("\\.rnw" %fin% filetype_) {
     vignette_files <- append(
       vignette_files,
       dir_without_.(
@@ -163,7 +163,7 @@ prettify_pkg <- function(transformers,
     )
   }
 
-  if ("\\.qmd" %in% filetype_) {
+  if ("\\.qmd" %fin% filetype_) {
     vignette_files <- append(
       vignette_files,
       dir_without_.(

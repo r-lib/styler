@@ -10,7 +10,7 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
   if (all(pd$indent == 0) || all(pd$terminal)) {
     return(pd)
   }
-  closing <- which(pd$token %in% token)
+  closing <- which(pd$token %fin% token)
   if (length(closing) == 0 || pd$lag_newlines[closing] > 0) {
     return(pd)
   }
@@ -45,8 +45,8 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
 #' @param unindent_by By how many spaces one level of indention is reversed.
 #' @keywords internal
 unindent_child <- function(pd, token = c("')'", "'}'"), unindent_by = 2) {
-  closing <- which(pd$token %in% token)
-  if (!("indent" %in% names(pd))) {
+  closing <- which(pd$token %fin% token)
+  if (!("indent" %fin% names(pd))) {
     pd$indent <- 0
   }
   if ((length(closing) > 0) && (closing == nrow(pd))) {

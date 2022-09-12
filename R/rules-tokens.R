@@ -24,7 +24,7 @@ add_brackets_in_pipe <- function(pd) {
 }
 
 add_brackets_in_pipe_child <- function(pd) {
-  is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
+  is_pipe <- pd$token %fin% c("SPECIAL-PIPE", "PIPE")
   Reduce(add_brackets_in_pipe_one, which(is_pipe), init = pd)
 }
 

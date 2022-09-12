@@ -26,7 +26,7 @@ style_roxygen_code_example_one <- function(example_one,
                                            transformers,
                                            base_indention) {
   bare <- parse_roxygen(example_one)
-  one_dont <- split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
+  one_dont <- split(bare$text, factor(cumsum(bare$text %fin% dont_keywords())))
   unmasked <- map(one_dont, style_roxygen_code_example_segment,
     transformers = transformers,
     base_indention = base_indention
@@ -78,7 +78,7 @@ style_roxygen_code_example_segment <- function(one_dont,
   dont_seqs <- find_dont_seqs(one_dont)
   split_segments <- split_roxygen_segments(one_dont, unlist(dont_seqs))
   is_dont <-
-    seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
+    seq2(1L, length(split_segments$separated)) %fin% split_segments$selectors
 
   map2(split_segments$separated, is_dont,
     style_roxygen_example_snippet,

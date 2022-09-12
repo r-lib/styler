@@ -19,7 +19,7 @@ indent_braces <- function(pd, indent_by) {
 #' @keywords internal
 unindent_fun_dec <- function(pd) {
   if (is_function_dec(pd)) {
-    idx_closing_brace <- which(pd$token %in% "')'")
+    idx_closing_brace <- which(pd$token %fin% "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
     pd$indent[fun_dec_head] <- 0L
   }
@@ -55,7 +55,7 @@ indent_op <- function(pd,
 indent_eq_sub <- function(pd,
                           indent_by,
                           token = c("EQ_SUB", "EQ_FORMALS")) {
-  eq_sub <- pd$token %in% token
+  eq_sub <- pd$token %fin% token
   if (!any(eq_sub)) {
     return(pd)
   }

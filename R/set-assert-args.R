@@ -72,7 +72,7 @@ set_and_assert_arg_filetype <- function(filetype) {
 #' @keywords internal
 assert_filetype <- function(lowercase_filetype) {
   allowed_types <- c("r", "rmd", "rmarkdown", "rnw", "rprofile", "qmd")
-  if (!all(lowercase_filetype %in% allowed_types)) {
+  if (!all(lowercase_filetype %fin% allowed_types)) {
     abort(paste(
       "filetype must not contain other values than 'R', 'Rprofile',",
       "'Rmd', 'Rmarkdown', 'qmd' or 'Rnw' (case is ignored)."
@@ -98,7 +98,7 @@ assert_text <- function(text) {
 #' @importFrom rlang abort
 #' @keywords internal
 assert_tokens <- function(tokens) {
-  invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
+  invalid_tokens <- tokens[!(tokens %fin% lookup_tokens()$token)]
   if (length(invalid_tokens) > 0) {
     abort(paste(
       "Token(s)", paste0(invalid_tokens, collapse = ", "), "are invalid.",

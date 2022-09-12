@@ -8,7 +8,7 @@
 #' @keywords internal
 apply_ref_indention <- function(flattened_pd) {
   target_tokens <- which(
-    flattened_pd$pos_id %in% flattened_pd$indention_ref_pos_id
+    flattened_pd$pos_id %fin% flattened_pd$indention_ref_pos_id
   )
   flattened_pd <- Reduce(
     apply_ref_indention_one,
@@ -38,7 +38,7 @@ apply_ref_indention_one <- function(flattened_pd, target_token) {
     flattened_pd$lag_spaces[token_to_update] + shift
 
   # update col1 / col2
-  cols_to_update <- flattened_pd$line1 %in% flattened_pd$line1[token_to_update]
+  cols_to_update <- flattened_pd$line1 %fin% flattened_pd$line1[token_to_update]
   flattened_pd$col1[cols_to_update] <- flattened_pd$col1[cols_to_update] + shift
   flattened_pd$col2[cols_to_update] <- flattened_pd$col2[cols_to_update] + shift
   flattened_pd

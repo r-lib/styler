@@ -82,7 +82,7 @@ initialize_indention_ref_pos_id <- function(pd_flat) {
 #' @describeIn initialize_attributes Initializes `indent`.
 #' @keywords internal
 initialize_indent <- function(pd_flat) {
-  if (!("indent" %in% names(pd_flat))) {
+  if (!("indent" %fin% names(pd_flat))) {
     pd_flat$indent <- 0
   }
   pd_flat
