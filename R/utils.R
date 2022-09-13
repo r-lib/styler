@@ -21,16 +21,7 @@ convert_newlines_to_linebreaks <- function(text) {
   } else {
     .x
   }) %>%
-    unlist()
-}
-
-#' Check whether two columns match
-#'
-#' @param col1,col2 Column names as string.
-#' @param data The data frames that contains `col1` and `col2`.
-#' @keywords internal
-two_cols_match <- function(col1, col2, data) {
-  all(unlist(data[col1]) == unlist(data[col2]))
+    unlist(use.names = FALSE)
 }
 
 odd_index <- function(x) {

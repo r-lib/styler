@@ -27,7 +27,7 @@ env_add_stylerignore <- function(pd_flat) {
     pd_flat_temp$pos_id, cumsum(is_stylerignore_switchpoint)
   ) %>%
     map(~ rep(.x[1], length(.x))) %>%
-    unlist()
+    unlist(use.names = FALSE)
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
   pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0)
   is_terminal_to_ignore <- pd_flat_temp$terminal & pd_flat_temp$stylerignore
