@@ -14,7 +14,7 @@ serialize_parse_data_flattened <- function(flattened_pd, indent_character = "") 
       collapse = "",
       map(lag_newlines, add_newlines),
       map2(
-        ifelse(lag_newlines > 0, indent_character, " "),
+        ifelse(lag_newlines > 0L, indent_character, " "),
         lag_spaces,
         rep_char
       ),

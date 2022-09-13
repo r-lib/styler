@@ -59,7 +59,7 @@ set_line_break_before_curly_opening <- function(pd) {
   )
 
   line_break_to_set_idx <- setdiff(line_break_to_set_idx, nrow(pd))
-  if (length(line_break_to_set_idx) > 0) {
+  if (length(line_break_to_set_idx) > 0L) {
     is_not_curly_curly <- map_chr(
       line_break_to_set_idx + 1L,
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
@@ -74,7 +74,7 @@ set_line_break_before_curly_opening <- function(pd) {
     linebreak_before_curly <- ifelse(is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
       # and goes to else case
-      any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1])] > 0),
+      any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1])] > 0L),
       # if not a function call, only break line if it is a pipe followed by {}
       pd$token[line_break_to_set_idx] %in% c("SPECIAL-PIPE", "PIPE")
     )
@@ -107,7 +107,7 @@ set_line_break_before_curly_opening <- function(pd) {
     pd$lag_newlines[should_not_be_on_same_line_idx] <- 1L
 
     # non-curly expressions after curly expressions must have line breaks
-    if (length(should_not_be_on_same_line_idx) > 0) {
+    if (length(should_not_be_on_same_line_idx) > 0L) {
       comma_exprs_idx <- which(pd$token == "','")
       comma_exprs_idx <- setdiff(comma_exprs_idx, 1 + is_not_curly_curly_idx)
       non_comment_after_comma <- map_int(comma_exprs_idx,
@@ -128,7 +128,7 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
   ops <- c("','", "AND", "OR", "AND2", "OR2")
   comma_with_line_break_that_can_be_removed_before <-
     (pd$token %in% ops) &
-      (pd$lag_newlines > 0) &
+      (pd$lag_newlines > 0L) &
       (pd$token_before != "COMMENT") &
       (lag(pd$token) != "'['")
 
@@ -137,7 +137,7 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
 
   comma_with_line_break_that_can_be_moved_two_tokens_left <- which(
     (pd$token == "EQ_SUB") &
-      (pd$lag_newlines > 0) &
+      (pd$lag_newlines > 0L) &
       (pd$token_before != "COMMENT") &
       (lag(pd$token) != "'['")
   )
@@ -307,13 +307,13 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
       nrow(pd) # always break before last because this is multi-line
     )
   } else {
-    if (!any(pd$lag_newlines[seq2(3L, nrow(pd))] > 0)) {
+    if (!any(pd$lag_newlines[seq2(3L, nrow(pd))] > 0L)) {
       return(pd)
     }
     break_pos <- find_line_break_position_in_multiline_call(pd)
     idx_nested <- next_non_comment(pd, 2)
     nested_call <- is_function_call(pd$child[[idx_nested]])
-    if (pd_is_multi_line(pd$child[[idx_nested]]) && sum(pd$lag_newlines) > 0) {
+    if (pd_is_multi_line(pd$child[[idx_nested]]) && sum(pd$lag_newlines) > 0L) {
       break_pos <- c(break_pos, idx_nested)
     }
   }
@@ -354,8 +354,8 @@ set_line_break_before_closing_call <- function(pd, except_token_before) {
     return(pd)
   }
   npd <- nrow(pd)
-  is_multi_line <- any(pd$lag_newlines[seq2(3L, npd - 1L)] > 0)
-  if (is_multi_line == 0) {
+  is_multi_line <- any(pd$lag_newlines[seq2(3L, npd - 1L)] > 0L)
+  if (is_multi_line == 0L) {
     exception <- which(pd$token_before %in% except_token_before)
     pd$lag_newlines[setdiff(npd, exception)] <- 0L
     return(pd)

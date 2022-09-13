@@ -53,7 +53,7 @@ flatten_operators_one <- function(pd_nested) {
 #' @keywords internal
 flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   token_pos_candidates <- which(pd_nested$token[-1] %in% token) + 1
-  if (length(token_pos_candidates) == 0) {
+  if (length(token_pos_candidates) == 0L) {
     return(pd_nested)
   }
   token_pos <- token_pos_candidates[
@@ -64,7 +64,7 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   } else {
     pos <- next_non_comment(pd_nested, token_pos)
   }
-  if (pos < 1) {
+  if (pos < 1L) {
     return(pd_nested)
   }
   if (!any(pd_nested$child[[pos]]$token[-1] %in% child_token)) {
@@ -173,7 +173,7 @@ relocate_eq_assign <- function(pd) {
 #' @keywords internal
 relocate_eq_assign_nest <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  if (length(idx_eq_assign) > 0) {
+  if (length(idx_eq_assign) > 0L) {
     block_id <- find_block_id(pd)
     blocks <- split(pd, block_id)
     pd <- map_dfr(blocks, relocate_eq_assign_one)

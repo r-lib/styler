@@ -84,11 +84,11 @@ roxygen_remove_extra_brace <- function(parsed) {
         while (worth_trying_to_remove_brace) {
           # remove brace
           brace <- which(parsed == "}")
-          if (length(brace) > 0) {
+          if (length(brace) > 0L) {
             parsed <- parsed[-last(brace)]
           }
           linebreak <- which(parsed == "\n")
-          if (length(linebreak) > 0) {
+          if (length(linebreak) > 0L) {
             parsed <- parsed[-last(linebreak)]
           }
           # try if can be parsed (need remve dontrun)

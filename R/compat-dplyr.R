@@ -80,6 +80,7 @@ slice <- function(.data, ...) {
   .data[c(...), , drop = FALSE]
 }
 
+# TODO: Use `purrr::map_dfr()` when it stops implicitly relying on `{dplyr}`
 #' @importFrom purrr as_mapper map
 map_dfr <- function(.x, .f, ..., .id = NULL) {
   .f <- as_mapper(.f, ...)
