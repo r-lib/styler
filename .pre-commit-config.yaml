@@ -24,6 +24,7 @@ repos:
         - r-lib/pkgapi
         - dplyr@1.0.9
         - roxygen2@7.2.1
+        - pkgbuild
     -   id: use-tidy-description
     -   id: spell-check
         exclude: >
