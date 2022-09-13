@@ -12,26 +12,10 @@ extern "C" SEXP _styler_ensure_last_n_empty(SEXP x, SEXP n) {
     return cpp11::as_sexp(ensure_last_n_empty(cpp11::as_cpp<cpp11::decay_t<std::vector<std::string>>>(x), cpp11::as_cpp<cpp11::decay_t<int>>(n)));
   END_CPP11
 }
-// index_helpers.cpp
-std::vector<int> odd_index(const sexp x);
-extern "C" SEXP _styler_odd_index(SEXP x) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(odd_index(cpp11::as_cpp<cpp11::decay_t<const sexp>>(x)));
-  END_CPP11
-}
-// index_helpers.cpp
-std::vector<int> even_index(const sexp x);
-extern "C" SEXP _styler_even_index(SEXP x) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(even_index(cpp11::as_cpp<cpp11::decay_t<const sexp>>(x)));
-  END_CPP11
-}
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
     {"_styler_ensure_last_n_empty", (DL_FUNC) &_styler_ensure_last_n_empty, 2},
-    {"_styler_even_index",          (DL_FUNC) &_styler_even_index,          1},
-    {"_styler_odd_index",           (DL_FUNC) &_styler_odd_index,           1},
     {NULL, NULL, 0}
 };
 }

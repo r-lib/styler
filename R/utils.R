@@ -24,6 +24,17 @@ convert_newlines_to_linebreaks <- function(text) {
     unlist(use.names = FALSE)
 }
 
+odd_index <- function(x) {
+  if (length(x) < 1) {
+    return(NULL)
+  }
+  seq(1L, length(x), by = 2)
+}
+
+even_index <- function(x) {
+  seq(2L, length(x), by = 2)
+}
+
 is_windows <- function() {
   identical(.Platform$OS.type, "windows")
 }

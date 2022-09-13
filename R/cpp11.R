@@ -3,11 +3,3 @@
 ensure_last_n_empty <- function(x, n) {
   .Call(`_styler_ensure_last_n_empty`, x, n)
 }
-
-odd_index <- function(x) {
-  .Call(`_styler_odd_index`, x)
-}
-
-even_index <- function(x) {
-  .Call(`_styler_even_index`, x)
-}
