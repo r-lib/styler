@@ -45,7 +45,7 @@ convert_newlines_to_linebreaks <- function(text) {
 #' @param data The data frames that contains `col1` and `col2`.
 #' @keywords internal
 two_cols_match <- function(col1, col2, data) {
-  all(unlist(data[col1]) == unlist(data[col2]))
+  identical(data[[col1]], data[[col2]])
 }
 
 odd_index <- function(x) {
