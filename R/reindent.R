@@ -30,9 +30,8 @@ apply_ref_indention <- function(flattened_pd) {
 #' @keywords internal
 apply_ref_indention_one <- function(flattened_pd, target_token) {
   token_to_update <- find_tokens_to_update(flattened_pd, target_token)
-  # udate spaces
+  # update spaces
   copied_spaces <- flattened_pd$col2[target_token]
-  old_spaces <- flattened_pd$lag_spaces[token_to_update[1]]
   shift <- copied_spaces
   flattened_pd$lag_spaces[token_to_update] <-
     flattened_pd$lag_spaces[token_to_update] + shift

@@ -114,9 +114,6 @@ set_line_break_before_curly_opening <- function(pd) {
         next_non_comment,
         pd = pd
       )
-      non_comment_after_expr <- non_comment_after_comma[
-        non_comment_after_comma > should_not_be_on_same_line_idx[1]
-      ]
       pd$lag_newlines[non_comment_after_comma] <- 1L
     }
   }
@@ -312,7 +309,6 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
     }
     break_pos <- find_line_break_position_in_multiline_call(pd)
     idx_nested <- next_non_comment(pd, 2)
-    nested_call <- is_function_call(pd$child[[idx_nested]])
     if (pd_is_multi_line(pd$child[[idx_nested]]) && sum(pd$lag_newlines) > 0L) {
       break_pos <- c(break_pos, idx_nested)
     }
