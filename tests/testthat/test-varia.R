@@ -2,15 +2,15 @@
 
 test_that("ensure_last_n_empty", {
   expect_equal(
-    ensure_last_n_empty("x"),
+    ensure_last_n_empty("x", 1L),
     c("x", "")
   )
   expect_equal(
-    ensure_last_n_empty(c("x", "")),
+    ensure_last_n_empty(c("x", ""), 1L),
     c("x", "")
   )
   expect_equal(
-    ensure_last_n_empty(c("1", "2")),
+    ensure_last_n_empty(c("1", "2"), 1L),
     c("1", "2", "")
   )
 })

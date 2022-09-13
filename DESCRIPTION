@@ -59,6 +59,7 @@ Collate:
     'communicate.R'
     'compat-dplyr.R'
     'compat-tidyr.R'
+    'cpp11.R'
     'detect-alignment-utils.R'
     'detect-alignment.R'
     'environments.R'
@@ -103,3 +104,6 @@ Collate:
     'vertical.R'
     'visit.R'
     'zzz.R'
+LinkingTo: 
+    cpp11
+SystemRequirements: C++11

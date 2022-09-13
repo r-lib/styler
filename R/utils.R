@@ -4,21 +4,6 @@ line_col_names <- function() {
   c("line1", "line2", "col1", "col2")
 }
 
-#' Ensure there is one (and only one) blank line at the end of a vector
-#' @examples
-#' styler:::ensure_last_n_empty("")
-#' styler:::ensure_last_n_empty(letters)
-#' styler:::ensure_last_n_empty(c(letters, "", "", ""))
-#' @keywords internal
-ensure_last_n_empty <- function(x, n = 1) {
-  if (all(x == "")) {
-    return("")
-  }
-  x <- c(x, "", "")
-  x <- x[seq(1, length(x) - which(rev(x) != "")[1] + 1L)]
-  c(x, rep("", n))
-}
-
 #' Replace the newline character with a line break
 #'
 #' @param text A character vector

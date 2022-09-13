@@ -18,6 +18,11 @@
 #' style_text("a%>%b; a", scope = "tokens")
 "_PACKAGE"
 
+## usethis namespace: start
+#' @useDynLib styler, .registration = TRUE
+## usethis namespace: end
+NULL
+
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(c(
     ".",
