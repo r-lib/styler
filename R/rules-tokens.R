@@ -37,7 +37,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
     new_pd <- create_tokens(
       texts = c("(", ")"),
       lag_newlines = rep(0L, 2),
-      spaces = 0,
+      spaces = 0L,
       pos_ids = new_pos_ids,
       token_before = c(child$token[1], "'('"),
       token_after = c("')'", child$token_after[1]),
@@ -76,7 +76,7 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2) {
     is_for_expr(.) ~ "forcond",
     is_function_dec(.) ~ "')'"
   )
-  if (length(key_token) > 0) {
+  if (length(key_token) > 0L) {
     pd <- pd %>%
       wrap_multiline_curly(indent_by,
         space_after = ifelse(contains_else_expr(pd), 1, 0),
@@ -98,7 +98,7 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2) {
 #'   the expression to be wrapped (ignoring comments). For if and while loops,
 #'   this is the closing "')'", for a for-loop it's "forcond".
 #' @keywords internal
-wrap_multiline_curly <- function(pd, indent_by, space_after = 1, key_token) {
+wrap_multiline_curly <- function(pd, indent_by, space_after = 1L, key_token) {
   to_be_wrapped_expr_with_child <- next_non_comment(
     pd, which(pd$token == key_token)[1]
   )

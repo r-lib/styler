@@ -79,7 +79,7 @@ style_pkg <- function(pkg = ".",
                       exclude_files = c("R/RcppExports.R", "R/cpp11.R"),
                       exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE,
-                      base_indention = 0,
+                      base_indention = 0L,
                       dry = "off") {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
   changed <- withr::with_dir(pkg_root, prettify_pkg(
@@ -260,7 +260,7 @@ style_dir <- function(path = ".",
                       exclude_files = NULL,
                       exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE,
-                      base_indention = 0,
+                      base_indention = 0L,
                       dry = "off") {
   changed <- withr::with_dir(
     path, prettify_any(
@@ -285,7 +285,7 @@ prettify_any <- function(transformers,
                          exclude_files,
                          exclude_dirs,
                          include_roxygen_examples,
-                         base_indention = 0,
+                         base_indention = 0L,
                          dry) {
   exclude_files <- set_arg_paths(exclude_files)
   exclude_dirs <- exclude_dirs %>%
@@ -348,7 +348,7 @@ style_file <- function(path,
                        style = tidyverse_style,
                        transformers = style(...),
                        include_roxygen_examples = TRUE,
-                       base_indention = 0,
+                       base_indention = 0L,
                        dry = "off") {
   path <- set_arg_paths(path)
   changed <- transform_files(path,
