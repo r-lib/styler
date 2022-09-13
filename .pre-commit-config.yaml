@@ -47,6 +47,9 @@ repos:
           (.*/|)\.pre-commit-.*|
           .*\.[rR]|
           .*\.Rproj|
+          .*\.cpp|
+          .*\.h|
+          .*\.hpp|
           .*\.py|
           .*\.feather|
           .*\.rds|
