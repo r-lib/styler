@@ -201,13 +201,16 @@ is_insufficiently_parsed_string <- function(pd) {
 is_insufficiently_parsed_number <- function(pd) {
   grepl("^0x", pd$text) & pd$token == "NUM_CONST"
 }
-#' @importFrom purrr map2_lgl
+
+#' Check whether columns match
+#' @keywords internal
+#' @noRd
 lines_and_cols_match <- function(data) {
   left <- paste0(line_col_names(), "")
   right <- paste0(line_col_names(), "parent")
-  map2_lgl(left, right,
-    two_cols_match,
-    data = data
-  ) %>%
-    all()
+  identical(
+    unlist(data[left], use.names = FALSE),
+    unlist(data[right], use.names = FALSE)
+  )
 }
+
