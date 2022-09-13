@@ -25,6 +25,9 @@ repos:
         - dplyr@1.0.9
         - roxygen2@7.2.1
         - pkgbuild
+        - brio
+        - decor
+        - cpp11
     -   id: use-tidy-description
     -   id: spell-check
         exclude: >
