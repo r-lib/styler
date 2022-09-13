@@ -213,4 +213,3 @@ lines_and_cols_match <- function(data) {
     unlist(data[right], use.names = FALSE)
   )
 }
-
