@@ -33,7 +33,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 #' @keywords internal
 indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
-  is_if <- pd$token[1] %in% "IF"
+  is_if <- pd$token[1] == "IF"
   has_if_without_curly <-
     is_if && pd$child[[expr_after_if]]$token[1] != "'{'"
   if (!is_if) {
