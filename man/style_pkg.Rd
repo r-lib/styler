@@ -13,7 +13,7 @@ style_pkg(
   exclude_files = c("R/RcppExports.R", "R/cpp11.R"),
   exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE,
-  base_indention = 0,
+  base_indention = 0L,
   dry = "off"
 )
 }

@@ -233,7 +233,7 @@ parse_transform_serialize_r <- function(text,
 
   text <- assert_text(text)
   pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
-  if (nrow(pd_nested) == 0) {
+  if (nrow(pd_nested) == 0L) {
     if (warn_empty) {
       warn("Text to style did not contain any tokens. Returning empty string.")
     }
@@ -285,7 +285,7 @@ parse_transform_serialize_r <- function(text,
 #' @keywords internal
 #' @seealso specify_transformers_drop
 transformers_drop <- function(text, transformers) {
-  if (length(text) > 0) {
+  if (length(text) > 0L) {
     is_colon <- text == ";"
     if (any(is_colon)) {
       # ; can only be parsed when on the same line as other token, not the case

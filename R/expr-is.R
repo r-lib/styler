@@ -150,7 +150,7 @@ contains_else_expr <- function(pd) {
 #' @keywords internal
 contains_else_expr_that_needs_braces <- function(pd) {
   else_idx <- which(pd$token == "ELSE")
-  if (length(else_idx) > 0) {
+  if (length(else_idx) > 0L) {
     non_comment_after_else <- next_non_comment(pd, else_idx)
     sub_expr <- pd$child[[non_comment_after_else]]
     # needs braces if NOT if_condition, NOT curly expr

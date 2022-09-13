@@ -111,7 +111,7 @@ drop_cached_children <- function(pd) {
     order <- order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal))
     pd_parent_first <- pd[order, ]
     pos_ids_to_keep <- pd_parent_first %>%
-      split(cumsum(pd_parent_first$parent == 0)) %>%
+      split(cumsum(pd_parent_first$parent == 0L)) %>%
       map(find_pos_id_to_keep) %>%
       unlist(use.names = FALSE)
     pd[pd$pos_id %in% pos_ids_to_keep, ]
@@ -123,11 +123,11 @@ drop_cached_children <- function(pd) {
 #' Find the pos ids to keep
 #'
 #' To make a parse table shallow, we must know which ids to keep.
-#' `split(cumsum(pd_parent_first$parent == 0))` above puts comments with
+#' `split(cumsum(pd_parent_first$parent == 0L))` above puts comments with
 #' negative parents in the same block as proceeding expressions (but also with
 #' positive).
 #' `find_pos_id_to_keep()` must hence always keep negative comments. We did not
-#' use `split(cumsum(pd_parent_first$parent < 1))` because then every top-level
+#' use `split(cumsum(pd_parent_first$parent < 1L))` because then every top-level
 #' comment is an expression on its own and processing takes much longer for
 #' typical roxygen annotated code.
 #' @param pd A temporary top level nest where the first expression is always a
@@ -339,10 +339,10 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @importFrom purrr map2
 #' @keywords internal
 nest_parse_data <- function(pd_flat) {
-  if (all(pd_flat$parent <= 0)) {
+  if (all(pd_flat$parent <= 0L)) {
     return(pd_flat)
   }
-  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0))
+  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0L))
   split_data <- split(pd_flat, pd_flat$internal)
 
   child <- split_data$`FALSE`
@@ -380,7 +380,7 @@ nest_parse_data <- function(pd_flat) {
 #' @keywords internal
 combine_children <- function(child, internal_child) {
   bound <- bind_rows(child, internal_child)
-  if (nrow(bound) == 0) {
+  if (nrow(bound) == 0L) {
     return(NULL)
   }
   bound[order(bound$pos_id), ]
