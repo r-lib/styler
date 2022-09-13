@@ -36,7 +36,7 @@ convert_newlines_to_linebreaks <- function(text) {
   } else {
     .x
   }) %>%
-    unlist()
+    unlist(use.names = FALSE)
 }
 
 #' Check whether two columns match
