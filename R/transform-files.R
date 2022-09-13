@@ -257,7 +257,7 @@ parse_transform_serialize_r <- function(text,
     )
   }
 
-  text_out <- unlist(text_out)
+  text_out <- unlist(text_out, use.names = FALSE)
 
   verify_roundtrip(
     text, text_out,

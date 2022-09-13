@@ -49,7 +49,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
       paste0(rep_char(" ", base_indention), pd_nested$text),
       ~ c(rep("", .x), .y)
     ) %>%
-      unlist()
+      unlist(use.names = FALSE)
   }
   c(rep("", start_line - 1), serialized_transformed_text)
 }

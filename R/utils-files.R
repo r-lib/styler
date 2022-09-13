@@ -53,7 +53,7 @@ map_filetype_to_pattern <- function(filetype) {
 #' setdiff("./file.R", "file.R") # you want to standardize first.
 dir_without_. <- function(path, recursive = TRUE, ...) {
   purrr::map(path, dir_without_._one, recursive = recursive, ...) %>%
-    unlist()
+    unlist(use.names = FALSE)
 }
 
 #' `dir()`, but with full names, ignored case, and included hidden files and
