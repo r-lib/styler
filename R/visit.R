@@ -20,7 +20,7 @@ pre_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
   }
-  if (length(funs) == 0) {
+  if (length(funs) == 0L) {
     return(pd_nested)
   }
   pd_nested <- visit_one(pd_nested, funs)
@@ -61,7 +61,7 @@ post_visit <- function(pd_nested, funs) {
   if (is.null(pd_nested)) {
     return()
   }
-  if (length(funs) == 0) {
+  if (length(funs) == 0L) {
     return(pd_nested)
   }
 
@@ -228,11 +228,10 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   groups <- flattened_pd$line1
   flattened_pd <- flattened_pd %>%
     split(groups) %>%
-    lapply(function(.x) {
+    map_dfr(function(.x) {
       .x$col2 <- cumsum(.x$nchar + .x$lag_spaces)
       .x
-    }) %>%
-    bind_rows()
+    })
   flattened_pd$col1 <- flattened_pd$col2 - flattened_pd$nchar
   flattened_pd
 }
@@ -258,7 +257,7 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #' @keywords internal
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
-    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0,
+    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0L,
       flattened_pd$indent,
       flattened_pd$lag_spaces
     )
