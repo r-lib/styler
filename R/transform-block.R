@@ -101,7 +101,7 @@ cache_find_block <- function(pd) {
 #' @return The line number on which the first token occurs.
 #' @keywords internal
 find_blank_lines_to_next_expr <- function(pd_nested) {
-  pd_nested$line1 - lag(pd_nested$line2, default = 0)
+  pd_nested$line1 - lag(pd_nested$line2, default = 0L)
 }
 
 #' Number of lines between cache blocks
@@ -113,6 +113,6 @@ find_blank_lines_to_next_expr <- function(pd_nested) {
 #' @param pd A top level nest.
 #' @keywords internal
 find_blank_lines_to_next_block <- function(pd) {
-  block_boundary <- pd$block != lag(pd$block, default = 0)
+  block_boundary <- pd$block != lag(pd$block, default = 0L)
   find_blank_lines_to_next_expr(pd)[block_boundary]
 }

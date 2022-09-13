@@ -89,13 +89,13 @@ find_tokens_to_update <- function(flattened_pd, target_token) {
 #' @keywords internal
 set_regex_indention <- function(flattened_pd,
                                 pattern,
-                                target_indention = 0,
+                                target_indention = 0L,
                                 comments_only = TRUE) {
   if (comments_only) {
     cond <- which(
-      (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0)
+      (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0L)
     )
-    if (length(cond) < 1) {
+    if (length(cond) < 1L) {
       return(flattened_pd)
     }
     to_check <- flattened_pd[cond, ]

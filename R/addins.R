@@ -52,7 +52,7 @@ style_active_file <- function() {
   context <- get_rstudio_context()
   transformer <- make_transformer(get_addins_style_transformer(),
     include_roxygen_examples = TRUE,
-    base_indention = 0,
+    base_indention = 0L,
     warn_empty = is_plain_r_file(context$path)
   )
   is_r_file <- any(
@@ -124,7 +124,7 @@ style_selection <- function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
   text <- context$selection[[1]]$text
-  if (all(nchar(text) == 0)) abort("No code selected")
+  if (all(nchar(text) == 0L)) abort("No code selected")
   out <- style_text(
     text,
     transformers = get_addins_style_transformer(),

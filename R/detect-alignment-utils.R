@@ -32,7 +32,7 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
 alignment_drop_comments <- function(pd_by_line) {
   map(pd_by_line, function(x) {
     out <- x[x$token != "COMMENT", ]
-    if (nrow(out) < 1) {
+    if (nrow(out) < 1L) {
       return(NULL)
     } else {
       out
@@ -184,7 +184,7 @@ alignment_serialize <- function(pd_sub) {
 #' @keywords internal
 alignment_has_correct_spacing_around_comma <- function(pd_sub) {
   comma_tokens <- which(pd_sub$token == "','")
-  if (length(comma_tokens) == 0) {
+  if (length(comma_tokens) == 0L) {
     return(TRUE)
   }
   relevant_comma_token <- comma_tokens[seq2(1, length(comma_tokens) - 1L)]
@@ -201,7 +201,7 @@ alignment_has_correct_spacing_around_comma <- function(pd_sub) {
 #' @importFrom rlang seq2
 alignment_has_correct_spacing_around_eq_sub <- function(pd_sub) {
   relevant_eq_sub_token <- which(pd_sub$token == "EQ_SUB")
-  if (length(relevant_eq_sub_token) == 0) {
+  if (length(relevant_eq_sub_token) == 0L) {
     return(TRUE)
   }
 

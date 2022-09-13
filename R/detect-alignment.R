@@ -33,7 +33,7 @@
 #'     transformers <- tidyverse_style()
 #'     pd_nested <- styler:::compute_parse_data_nested(c(
 #'       "call(",
-#'       "  ab = 1,",
+#'       "  ab = 1L,",
 #'       "  a  = 2",
 #'       ")"
 #'     )) %>%
@@ -50,7 +50,7 @@ token_is_on_aligned_line <- function(pd_flat) {
   pd_flat$.lag_spaces <- lag(pd_flat$spaces)
   pd_by_line <- split(pd_flat, line_idx)
   pd_by_line[purrr::map_lgl(pd_by_line, ~ any(.x$stylerignore))] <- NULL
-  if (length(pd_by_line) < 1) {
+  if (length(pd_by_line) < 1L) {
     return(TRUE)
   }
   last_line_is_closing_brace_only <- nrow(last(pd_by_line)) == 1
@@ -93,7 +93,7 @@ token_is_on_aligned_line <- function(pd_flat) {
   }
 
   pd_by_line <- alignment_drop_comments(pd_by_line)
-  if (length(pd_by_line) < 1) {
+  if (length(pd_by_line) < 1L) {
     return(TRUE)
   }
   pd_by_line <- alignment_drop_last_expr(pd_by_line) %>%
@@ -165,7 +165,7 @@ token_is_on_aligned_line <- function(pd_flat) {
     start_after_eq <- start_after_eq[start_after_eq > 0]
 
     if (column >= start_eval) {
-      if (length(start_after_eq) == 0) {
+      if (length(start_after_eq) == 0L) {
         return(FALSE)
       }
       # when match via , unsuccessful, matching by = must yield at least one =
@@ -176,7 +176,7 @@ token_is_on_aligned_line <- function(pd_flat) {
           previous_line[intersect(names(previous_line), names(start_after_eq))]
       }
       is_aligned <- all(
-        length(unique(current_col)) == 1,
+        length(unique(current_col)) == 1L,
         length(start_after_eq) > 1
       )
       if (!is_aligned) {

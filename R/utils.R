@@ -25,7 +25,7 @@ convert_newlines_to_linebreaks <- function(text) {
 }
 
 odd_index <- function(x) {
-  if (length(x) < 1) {
+  if (length(x) < 1L) {
     return(NULL)
   }
   seq(1L, length(x), by = 2)
