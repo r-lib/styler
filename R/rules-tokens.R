@@ -163,7 +163,7 @@ wrap_subexpr_in_curly <- function(pd,
     stretch_out = c(!to_be_wrapped_starts_with_comment, TRUE),
     space_after = space_after
   )
-  new_expr$indent <- max(pd$indent[last(ind_to_be_wrapped)] - indent_by, 0)
+  new_expr$indent <- max(pd$indent[last(ind_to_be_wrapped)] - indent_by, 0L)
   new_expr_in_expr <- new_expr %>%
     wrap_expr_in_expr() %>%
     remove_attributes(c("token_before", "token_after"))
