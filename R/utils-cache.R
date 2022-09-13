@@ -180,7 +180,7 @@ cache_write <- function(text, transformers, more_specs) {
     file.create()
 }
 
-styler_version <- unlist(unname(read.dcf("DESCRIPTION")[, "Version"]))
+styler_version <- unlist(unname(read.dcf("DESCRIPTION")[, "Version"]), use.names = FALSE)
 
 cache_get_name <- function() {
   getOption("styler.cache_name")
