@@ -42,4 +42,3 @@ std::vector<std::string> ensure_last_n_empty(std::vector<std::string> x, int n =
 
   return x;
 }
-
