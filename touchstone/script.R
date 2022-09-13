@@ -1,5 +1,7 @@
 library(touchstone)
 
+number_of_runs <- 50L
+
 branch_install()
 
 clear_branch_caches <- function() {
@@ -18,7 +20,7 @@ benchmark_run(
     cache_deactivate()
   },
   without_cache = style_pkg("touchstone/sources/here", filetype = c("R", "rmd")),
-  n = 30
+  n = number_of_runs
 )
 
 clear_branch_caches()
@@ -28,7 +30,7 @@ benchmark_run(
     cache_activate(gert::git_branch())
   },
   cache_applying = style_pkg("touchstone/sources/here", filetype = c("R", "rmd")),
-  n = 30
+  n = number_of_runs
 )
 
 clear_branch_caches()
@@ -42,7 +44,7 @@ benchmark_run(
     gert::git_reset_hard(repo = "touchstone/sources/here")
     style_pkg("touchstone/sources/here", filetype = c("R", "rmd"))
   },
-  n = 30
+  n = number_of_runs
 )
 
 clear_branch_caches()
