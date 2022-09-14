@@ -70,7 +70,7 @@ set_line_break_before_curly_opening <- function(pd) {
       TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
     )
 
-    no_line_break_before_curly_idx <- pd$token[line_break_to_set_idx] %in% "EQ_SUB"
+    no_line_break_before_curly_idx <- any(pd$token[line_break_to_set_idx] == "EQ_SUB")
     linebreak_before_curly <- ifelse(is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
       # and goes to else case
