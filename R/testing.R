@@ -183,12 +183,12 @@ style_empty <- function(text, base_indention = 0) {
 
 #' @describeIn test_transformer Transformations for indention based on operators
 #' @keywords internal
-style_op <- function(text, base_indention = 0) {
+style_op <- function(text, base_indention = 0L) {
   transformers <- list(
     # transformer functions
     initialize        = default_style_guide_attributes,
     line_break        = NULL,
-    space             = partial(indent_op, indent_by = 2),
+    space             = partial(indent_op, indent_by = 2L),
     token             = NULL,
     # transformer options
     use_raw_indention = FALSE,
