@@ -111,9 +111,7 @@ is_subset_expr <- function(pd) {
 #' @keywords internal
 is_shebang <- function(pd) {
   is_first_comment <- pd$pos_id == 1L
-  is_first_comment[is_first_comment] <- grepl(
-    "^#!", pd$text[is_first_comment]
-  )
+  is_first_comment[is_first_comment] <- startsWith(pd$text[is_first_comment], "#!")
   is_first_comment
 }
 

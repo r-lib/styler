@@ -303,7 +303,7 @@ prettify_any <- function(transformers,
         recursive = FALSE
       )
   } else {
-    files_other <- c()
+    files_other <- NULL
   }
   transform_files(
     setdiff(c(files_root, files_other), exclude_files),

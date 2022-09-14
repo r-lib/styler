@@ -8,7 +8,7 @@ next_terminal(
   pd,
   stack = FALSE,
   vars = c("pos_id", "token", "text"),
-  tokens_exclude = c()
+  tokens_exclude = NULL
 )
 }
 \arguments{

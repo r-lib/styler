@@ -71,7 +71,7 @@ style_active_file <- function() {
     abort("Can only style .R, .Rmd and .Rnw files.")
   }
   rstudioapi::modifyRange(
-    c(1, 1, length(context$contents) + 1, 1),
+    c(1L, 1L, length(context$contents) + 1L, 1L),
     paste0(ensure_last_n_empty(out), collapse = "\n"),
     id = context$id
   )
@@ -134,7 +134,7 @@ style_selection <- function() {
     context$selection[[1]]$range,
     paste0(c(
       out,
-      if (context$selection[[1]]$range$end[2] == 1) ""
+      if (context$selection[[1]]$range$end[2] == 1L) ""
     ), collapse = "\n"),
     id = context$id
   )
