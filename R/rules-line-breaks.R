@@ -65,7 +65,7 @@ set_line_break_before_curly_opening <- function(pd) {
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
     last_expr_idx <- max(which(pd$token == "expr"))
-    is_last_expr <- ifelse(pd$token[1] %in% c("IF", "WHILE"),
+    is_last_expr <- ifelse(any(c("IF", "WHILE") == pd$token[1]),
       # rule not applicable for if and while
       TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
     )
@@ -85,7 +85,7 @@ set_line_break_before_curly_opening <- function(pd) {
           no_line_break_before_curly_idx
       )
     is_not_curly_curly_idx <- line_break_to_set_idx[should_be_on_same_line]
-    pd$lag_newlines[1 + is_not_curly_curly_idx] <- 0L
+    pd$lag_newlines[1L + is_not_curly_curly_idx] <- 0L
 
 
     # other cases: line breaks
@@ -99,10 +99,10 @@ set_line_break_before_curly_opening <- function(pd) {
     ]
     if (is_function_dec(pd)) {
       should_not_be_on_same_line_idx <- setdiff(
-        1 + should_not_be_on_same_line_idx, nrow(pd)
+        1L + should_not_be_on_same_line_idx, nrow(pd)
       )
     } else {
-      should_not_be_on_same_line_idx <- 1 + should_not_be_on_same_line_idx
+      should_not_be_on_same_line_idx <- 1L + should_not_be_on_same_line_idx
     }
     pd$lag_newlines[should_not_be_on_same_line_idx] <- 1L
 
@@ -150,7 +150,7 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
 }
 
 style_line_break_around_curly <- function(strict, pd) {
-  if (is_curly_expr(pd) && nrow(pd) > 2) {
+  if (is_curly_expr(pd) && nrow(pd) > 2L) {
     closing_before <- pd$token == "'}'"
     opening_before <- (pd$token == "'{'")
     to_break <- lag(opening_before, default = FALSE) | closing_before
