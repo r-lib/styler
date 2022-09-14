@@ -85,7 +85,7 @@ cache_info <- function(cache_name = NULL, format = "both") {
     location = path_cache,
     activated = cache_is_activated(cache_name)
   )
-  if (format %in% c("lucid", "both")) {
+  if (any(c("lucid", "both") == format)) {
     cat(
       "Size:\t\t", tbl$size, " bytes (", tbl$n, " cached expressions)",
       "\nLast modified:\t", as.character(tbl$last_modified),
