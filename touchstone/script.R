@@ -1,6 +1,6 @@
 library(touchstone)
 
-number_of_runs <- 50L
+number_of_runs <- 30L
 
 branch_install()
 
