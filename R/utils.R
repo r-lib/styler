@@ -1,9 +1,5 @@
 parse_text <- function(x) parse_safely(x)[[1L]]
 
-line_col_names <- function() {
-  c("line1", "line2", "col1", "col2")
-}
-
 #' Replace the newline character with a line break
 #'
 #' @param text A character vector

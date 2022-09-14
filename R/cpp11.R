@@ -3,3 +3,7 @@
 ensure_last_n_empty <- function(x, n) {
   .Call(`_styler_ensure_last_n_empty`, x, n)
 }
+
+line_col_names <- function() {
+  .Call(`_styler_line_col_names`)
+}
