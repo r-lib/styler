@@ -8,7 +8,7 @@
 \usage{
 style_empty(text, base_indention = 0)
 
-style_op(text, base_indention = 0)
+style_op(text, base_indention = 0L)
 }
 \arguments{
 \item{text}{A character vector to transform.}

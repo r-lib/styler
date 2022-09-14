@@ -114,9 +114,6 @@ set_line_break_before_curly_opening <- function(pd) {
         next_non_comment,
         pd = pd
       )
-      non_comment_after_expr <- non_comment_after_comma[
-        non_comment_after_comma > should_not_be_on_same_line_idx[1]
-      ]
       pd$lag_newlines[non_comment_after_comma] <- 1L
     }
   }
@@ -244,9 +241,9 @@ remove_line_breaks_in_fun_dec <- function(pd) {
 #' @importFrom rlang seq2
 add_line_break_after_pipe <- function(pd) {
   is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
-  pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1] <- 1L
+  pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1L] <- 1L
 
-  if (sum(is_pipe & pd$token_after != "COMMENT") > 1 &&
+  if (sum(is_pipe & pd$token_after != "COMMENT") > 1L &&
     !(next_terminal(pd, vars = "token_before")$token_before %in% c("'('", "EQ_SUB", "','"))) {
     pd$lag_newlines[lag(is_pipe) & pd$token != "COMMENT"] <- 1L
   }
@@ -312,7 +309,6 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
     }
     break_pos <- find_line_break_position_in_multiline_call(pd)
     idx_nested <- next_non_comment(pd, 2)
-    nested_call <- is_function_call(pd$child[[idx_nested]])
     if (pd_is_multi_line(pd$child[[idx_nested]]) && sum(pd$lag_newlines) > 0L) {
       break_pos <- c(break_pos, idx_nested)
     }

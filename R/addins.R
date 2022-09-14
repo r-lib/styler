@@ -134,7 +134,7 @@ style_selection <- function() {
     context$selection[[1]]$range,
     paste0(c(
       out,
-      if (context$selection[[1]]$range$end[2] == 1) ""
+      if (context$selection[[1]]$range$end[2] == 1L) ""
     ), collapse = "\n"),
     id = context$id
   )

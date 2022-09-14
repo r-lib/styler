@@ -113,7 +113,7 @@ style_space_around_tilde <- function(pd_flat, strict) {
   } else if (is_asymmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
       strict = TRUE, "'~'", level_before = 1L,
-      level_after = ifelse(nrow(pd_flat$child[[2]]) > 1L, 1L, 0L)
+      level_after = as.integer(nrow(pd_flat$child[[2]]) > 1L)
     )
   }
   pd_flat
@@ -229,7 +229,7 @@ set_space_between_levels <- function(pd_flat) {
     index <- pd_flat$token == "')'" & pd_flat$newlines == 0L
     pd_flat$spaces[index] <- 1L
   } else if (pd_flat$token[1] == "FOR") {
-    index <- pd_flat$token == "forcond" & pd_flat$newlines == 0
+    index <- pd_flat$token == "forcond" & pd_flat$newlines == 0L
     pd_flat$spaces[index] <- 1L
   }
   pd_flat

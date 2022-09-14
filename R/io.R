@@ -88,7 +88,7 @@ read_utf8 <- function(path) {
   } else if (inherits(out, "warning")) {
     list(
       text = read_utf8_bare(path, warn = FALSE),
-      missing_EOF_line_break = grepl("incomplete", out$message)
+      missing_EOF_line_break = grepl("incomplete", out$message, fixed = TRUE)
     )
   }
 }
