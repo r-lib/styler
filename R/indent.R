@@ -34,8 +34,6 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
   is_if <- pd$token[1] == "IF"
-  has_if_without_curly <-
-    is_if && pd$child[[expr_after_if]]$token[1] != "'{'"
   if (!is_if) {
     return(pd)
   }
@@ -46,8 +44,6 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   if (needs_indention_now) {
     pd$indent[expr_after_if] <- indent_by
   }
-
-
 
   else_idx <- which(pd$token == "ELSE")
   if (length(else_idx) == 0L) {

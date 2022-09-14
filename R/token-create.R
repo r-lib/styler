@@ -145,7 +145,7 @@ validate_new_pos_ids <- function(new_ids, after) {
 #' @keywords internal
 wrap_expr_in_curly <- function(pd,
                                stretch_out = c(FALSE, FALSE),
-                               space_after = 1) {
+                               space_after = 1L) {
   if (is_curly_expr(pd)) {
     return(pd)
   }
@@ -154,8 +154,8 @@ wrap_expr_in_curly <- function(pd,
   }
 
   opening <- create_tokens("'{'", "{",
-    pos_ids = create_pos_ids(pd, 1, after = FALSE),
-    spaces = 1 - as.integer(stretch_out[1]),
+    pos_ids = create_pos_ids(pd, 1L, after = FALSE),
+    spaces = 1L - as.integer(stretch_out[1]),
     stylerignore = pd$stylerignore[1],
     indents = pd$indent[1]
   )

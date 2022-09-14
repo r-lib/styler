@@ -125,10 +125,7 @@ style_roxygen_example_snippet <- function(code_snippet,
       )
   }
 
-  code_snippet <- ensure_last_n_empty(
-    code_snippet,
-    n = ifelse(append_empty, 1L, 0L)
-  )
+  code_snippet <- ensure_last_n_empty(code_snippet, n = as.integer(append_empty))
 
   if (!is_cached && cache_is_active) {
     cache_write(
