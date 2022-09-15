@@ -32,7 +32,7 @@ Imports:
     rematch2 (>= 2.0.1),
     rlang (>= 0.1.1),
     rprojroot (>= 1.1),
-    tibble (>= 1.4.2),
+    tibble (>= 3.1.8.9001),
     tools,
     withr (>= 1.0.0),
 Suggests: 
@@ -46,6 +46,8 @@ Suggests:
     roxygen2,
     rstudioapi (>= 0.7),
     testthat (>= 3.0.0)
+Remotes:
+    tidyverse/tibble@f-1353-subset2-performance
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
