@@ -1,4 +1,4 @@
-
+skip_on_ci()
 
 test_that("pipe is indended correctly", {
   expect_warning(test_collection("indention_operators",
