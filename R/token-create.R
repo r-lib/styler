@@ -38,9 +38,7 @@ create_tokens <- function(tokens,
                           stylerignore,
                           block = NA,
                           is_cached = FALSE) {
-  len_text <- length(texts)
-  new_tibble(
-    list(
+  tibble(
       token = tokens,
       text = texts,
       short = substr(texts, 1, 5),
@@ -49,17 +47,16 @@ create_tokens <- function(tokens,
       pos_id = pos_ids,
       token_before = token_before,
       token_after = token_after,
-      terminal = rep(terminal, len_text),
-      internal = rep(FALSE, len_text),
+      terminal = terminal,
+      internal = FALSE,
       spaces = spaces,
-      multi_line = rep(0L, len_text),
+      multi_line = 0L,
       indention_ref_pos_id = indention_ref_pos_ids,
       indent = indents,
-      child = rep(list(child), len_text),
+      child = list(child),
       stylerignore = stylerignore,
       block = block,
       is_cached = is_cached
-    )
   )
 }
 
