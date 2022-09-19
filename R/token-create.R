@@ -59,8 +59,7 @@ create_tokens <- function(tokens,
       stylerignore = stylerignore,
       block = block,
       is_cached = is_cached
-    ),
-    nrow = len_text
+    )
   )
 }
 
@@ -78,7 +77,7 @@ create_tokens <- function(tokens,
 #' create one. The validation is done with [validate_new_pos_ids()]
 #' @family token creators
 #' @keywords internal
-create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
+create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
   direction <- ifelse(after, 1L, -1L)
   first <- find_start_pos_id(pd, pos, by, direction, after)
   new_ids <- seq(first,
