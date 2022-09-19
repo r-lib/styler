@@ -38,25 +38,28 @@ create_tokens <- function(tokens,
                           stylerignore,
                           block = NA,
                           is_cached = FALSE) {
-  tibble(
-    token = tokens,
-    text = texts,
-    short = substr(texts, 1, 5),
-    lag_newlines = lag_newlines,
-    newlines = lead(lag_newlines),
-    pos_id = pos_ids,
-    token_before = token_before,
-    token_after = token_after,
-    terminal = terminal,
-    internal = FALSE,
-    spaces = spaces,
-    multi_line = 0L,
-    indention_ref_pos_id = indention_ref_pos_ids,
-    indent = indents,
-    child = list(child),
-    stylerignore = stylerignore,
-    block = block,
-    is_cached = is_cached
+  len_text <- length(texts)
+  new_tibble(
+    list(
+      token = tokens,
+      text = texts,
+      short = substr(texts, 1, 5),
+      lag_newlines = lag_newlines,
+      newlines = lead(lag_newlines),
+      pos_id = pos_ids,
+      token_before = token_before,
+      token_after = token_after,
+      terminal = rep(terminal, len_text),
+      internal = rep(FALSE, len_text),
+      spaces = spaces,
+      multi_line = rep(0L, len_text),
+      indention_ref_pos_id = indention_ref_pos_ids,
+      indent = indents,
+      child = rep(list(child), len_text),
+      stylerignore = stylerignore,
+      block = block,
+      is_cached = is_cached
+    )
   )
 }
 
