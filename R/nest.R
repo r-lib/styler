@@ -252,8 +252,7 @@ add_terminal_token_after <- function(pd_flat) {
     list(
       pos_id = terminals$pos_id,
       token_after = lead(terminals$token, default = "")
-    ),
-    nrow = nrow(terminals)
+    )
   )
 
   left_join(pd_flat, rhs, by = "pos_id")
@@ -270,8 +269,7 @@ add_terminal_token_before <- function(pd_flat) {
     list(
       id = terminals$id,
       token_before = lag(terminals$token, default = "")
-    ),
-    nrow = nrow(terminals)
+    )
   )
 
   left_join(pd_flat, rhs, by = "id")

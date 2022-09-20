@@ -30,7 +30,7 @@ transform_files <- function(files,
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
-  new_tibble(list(file = files, changed = changed), nrow = len_files)
+  new_tibble(list(file = files, changed = changed))
 }
 
 #' Transform a file and output a customized message
