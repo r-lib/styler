@@ -150,7 +150,7 @@ find_start_pos_id <- function(pd,
 validate_new_pos_ids <- function(new_ids, after) {
   ref <- if (after) {
     floor(new_ids)
-  } else{
+  } else {
     ceiling(new_ids)
   }
 
