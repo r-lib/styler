@@ -339,7 +339,11 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
 #' @keywords internal
 find_line_break_position_in_multiline_call <- function(pd) {
   candidate <- (which(pd$token == "EQ_SUB") - 1L)[1]
-  ifelse(is.na(candidate), 3L, candidate)
+  if (is.na(candidate)) {
+    3L
+  } else {
+    candidate
+  }
 }
 
 
