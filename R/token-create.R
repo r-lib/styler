@@ -78,7 +78,11 @@ create_tokens <- function(tokens,
 #' @family token creators
 #' @keywords internal
 create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
-  direction <- ifelse(after, 1L, -1L)
+  direction <- if (after) {
+    1L
+  } else {
+    -1L
+  }
   first <- find_start_pos_id(pd, pos, by, direction, after)
   new_ids <- seq(first,
     to = first + direction * (n - 1) * by, by = by * direction

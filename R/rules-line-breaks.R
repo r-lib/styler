@@ -65,11 +65,12 @@ set_line_break_before_curly_opening <- function(pd) {
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
     last_expr_idx <- max(which(pd$token == "expr"))
-    is_last_expr <- ifelse(any(c("IF", "WHILE") == pd$token[1]),
+    is_last_expr <- if (any(c("IF", "WHILE") == pd$token[1])) {
       # rule not applicable for if and while
-      TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
-    )
-
+      TRUE
+    } else {
+      (line_break_to_set_idx + 1L) == last_expr_idx
+    }
     no_line_break_before_curly_idx <- any(pd$token[line_break_to_set_idx] == "EQ_SUB")
     linebreak_before_curly <- ifelse(is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
