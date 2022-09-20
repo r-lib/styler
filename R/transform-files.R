@@ -66,7 +66,15 @@ transform_file <- function(path,
   }
   changed <- transform_code(path, fun = fun, ..., dry = dry)
 
-  bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
+  bullet <- if (is.na(changed)) {
+    "warning"
+  } else {
+    if (changed) {
+      "info"
+    } else {
+      "tick"
+    }
+  }
 
   if (!getOption("styler.quiet", FALSE)) {
     cli::cat_bullet(bullet = bullet)

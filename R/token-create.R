@@ -148,7 +148,12 @@ find_start_pos_id <- function(pd,
 #' @family token creators
 #' @keywords internal
 validate_new_pos_ids <- function(new_ids, after) {
-  ref <- ifelse(after, floor(new_ids), ceiling(new_ids))
+  ref <- if (after) {
+    floor(new_ids)
+  } else{
+    ceiling(new_ids)
+  }
+
   if (any(abs(new_ids - ref) > 0.5)) abort("too many ids assigned.")
 }
 
