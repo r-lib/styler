@@ -53,16 +53,18 @@ token_is_on_aligned_line <- function(pd_flat) {
   if (length(pd_by_line) < 1L) {
     return(TRUE)
   }
-  last_line_is_closing_brace_only <- nrow(last(pd_by_line)) == 1
-  relevant_idx <- seq2(2, ifelse(last_line_is_closing_brace_only,
-    length(pd_by_line) - 1,
+  last_line_is_closing_brace_only <- nrow(last(pd_by_line)) == 1L
+  last_idx <- if (last_line_is_closing_brace_only) {
+    length(pd_by_line) - 1L
+  } else {
     length(pd_by_line)
-  ))
+  }
+  relevant_idx <- seq2(2L, last_idx)
   pd_by_line <- pd_by_line[relevant_idx]
 
   relevant_lag_spaces_col_1 <- map_int(pd_by_line, ~ .x$.lag_spaces[1])
 
-  col1_is_aligned <- length(unique(relevant_lag_spaces_col_1)) == 1
+  col1_is_aligned <- length(unique(relevant_lag_spaces_col_1)) == 1L
   if (!col1_is_aligned) {
     return(FALSE)
   }
