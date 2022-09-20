@@ -2,7 +2,7 @@ test_that("styler tests did not use R.cache in user root", {
   skip_on_cran()
   skip_on_covr()
   expect_true(
-    length(list.files(R.cache::getCachePath("styler"), recursive = TRUE)) == 0
+    length(list.files(R.cache::getCachePath("styler"), recursive = TRUE)) == 0L
   )
 })
 
@@ -11,6 +11,6 @@ test_that("clear Cache", {
   skip_on_cran()
   skip_on_covr()
   expect_true(
-    length(list.dirs(R.cache::getCachePath("styler"))) == 1
+    length(list.dirs(R.cache::getCachePath("styler"))) == 1L
   )
 })
