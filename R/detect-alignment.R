@@ -107,7 +107,11 @@ token_is_on_aligned_line <- function(pd_flat) {
   # over columns.
   n_cols <- map_int(pd_by_line, ~ sum(.x$token == "','"))
   previous_line <- current_col <- 0L
-  start_eval <- ifelse(alignment_col1_all_named(pd_by_line), 1L, 2L)
+  start_eval <- if (alignment_col1_all_named(pd_by_line)) {
+    1L
+  } else {
+    2L
+  }
   for (column in seq2(1L, max(n_cols))) {
     by_line <- alignment_serialize_column(pd_by_line, column) %>%
       compact() %>%
