@@ -48,10 +48,12 @@ create_tree_from_pd_with_default_style_attributes <- function(pd,
 #' @keywords internal
 create_node_from_nested_root <- function(pd_nested, structure_only) {
   assert_data.tree_installation()
-  n <- data.tree::Node$new(ifelse(
-    structure_only, "Hierarchical structure",
+  name <- if (structure_only) {
+    "Hierarchical structure"
+  } else {
     "ROOT (token: short_text [lag_newlines/spaces] {pos_id})"
-  ))
+  }
+  n <- data.tree::Node$new(name)
   create_node_from_nested(pd_nested, n, structure_only)
   n
 }

@@ -25,10 +25,11 @@ assert_transformers <- function(transformers) {
   no_name <- is.null(transformers$style_guide_name)
   no_version <- is.null(transformers$style_guide_version)
   if (no_name || no_version) {
-    action <- ifelse(utils::packageVersion("styler") >= version_cutoff,
-      "are not supported anymore",
+    action <- if (utils::packageVersion("styler") >= version_cutoff) {
+      "are not supported anymore"
+    } else {
       "depreciated and will be removed in a future version of styler."
-    )
+    }
     message <- paste(
       "Style guides without a name and a version field are",
       action, "\nIf you are a user: Open an issue on",

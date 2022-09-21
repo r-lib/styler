@@ -66,7 +66,15 @@ transform_file <- function(path,
   }
   changed <- transform_code(path, fun = fun, ..., dry = dry)
 
-  bullet <- ifelse(is.na(changed), "warning", ifelse(changed, "info", "tick"))
+  bullet <- if (is.na(changed)) {
+    "warning"
+  } else {
+    if (changed) {
+      "info"
+    } else {
+      "tick"
+    }
+  }
 
   if (!getOption("styler.quiet", FALSE)) {
     cli::cat_bullet(bullet = bullet)
@@ -208,7 +216,11 @@ split_roxygen_segments <- function(text, roxygen_examples) {
   active_segment <- as.integer(all_lines %in% roxygen_examples)
   segment_id <- cumsum(abs(c(0L, diff(active_segment)))) + 1L
   separated <- split(text, factor(segment_id))
-  restyle_selector <- ifelse(roxygen_examples[1] == 1L, odd_index, even_index)
+  restyle_selector <- if (roxygen_examples[1] == 1L) {
+    odd_index
+  } else {
+    even_index
+  }
 
   list(separated = separated, selectors = restyle_selector(separated))
 }
