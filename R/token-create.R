@@ -59,8 +59,7 @@ create_tokens <- function(tokens,
       stylerignore = stylerignore,
       block = block,
       is_cached = is_cached
-    ),
-    nrow = len_text
+    )
   )
 }
 
@@ -78,8 +77,12 @@ create_tokens <- function(tokens,
 #' create one. The validation is done with [validate_new_pos_ids()]
 #' @family token creators
 #' @keywords internal
-create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
-  direction <- ifelse(after, 1L, -1L)
+create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
+  direction <- if (after) {
+    1L
+  } else {
+    -1L
+  }
   first <- find_start_pos_id(pd, pos, by, direction, after)
   new_ids <- seq(first,
     to = first + direction * (n - 1) * by, by = by * direction
@@ -106,13 +109,28 @@ find_start_pos_id <- function(pd,
                               candidates = NULL) {
   candidates <- append(candidates, pd$pos_id[pos])
   if (is.null(pd$child[[pos]])) {
-    ifelse(after, max(candidates), min(candidates)) + by * direction
+    start_pos_idx <- if (after) {
+      max(candidates)
+    } else {
+      min(candidates)
+    }
+    start_pos_idx <- start_pos_idx + (by * direction)
   } else {
-    find_start_pos_id(
-      pd$child[[pos]], ifelse(after, nrow(pd$child[[pos]]), 1L),
-      by, direction, after, candidates
+    start_pos_idx <- find_start_pos_id(
+      pd$child[[pos]],
+      if (after) {
+        nrow(pd$child[[pos]])
+      } else {
+        1L
+      },
+      by,
+      direction,
+      after,
+      candidates
     )
   }
+
+  start_pos_idx
 }
 
 
@@ -130,7 +148,12 @@ find_start_pos_id <- function(pd,
 #' @family token creators
 #' @keywords internal
 validate_new_pos_ids <- function(new_ids, after) {
-  ref <- ifelse(after, floor(new_ids), ceiling(new_ids))
+  ref <- if (after) {
+    floor(new_ids)
+  } else {
+    ceiling(new_ids)
+  }
+
   if (any(abs(new_ids - ref) > 0.5)) abort("too many ids assigned.")
 }
 
@@ -145,7 +168,7 @@ validate_new_pos_ids <- function(new_ids, after) {
 #' @keywords internal
 wrap_expr_in_curly <- function(pd,
                                stretch_out = c(FALSE, FALSE),
-                               space_after = 1) {
+                               space_after = 1L) {
   if (is_curly_expr(pd)) {
     return(pd)
   }
@@ -154,8 +177,8 @@ wrap_expr_in_curly <- function(pd,
   }
 
   opening <- create_tokens("'{'", "{",
-    pos_ids = create_pos_ids(pd, 1, after = FALSE),
-    spaces = 1 - as.integer(stretch_out[1]),
+    pos_ids = create_pos_ids(pd, 1L, after = FALSE),
+    spaces = 1L - as.integer(stretch_out[1]),
     stylerignore = pd$stylerignore[1],
     indents = pd$indent[1]
   )

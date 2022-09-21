@@ -4,7 +4,7 @@
 \alias{wrap_multiline_curly}
 \title{Wrap a multi-line statement in curly braces}
 \usage{
-wrap_multiline_curly(pd, indent_by, space_after = 1L, key_token)
+wrap_multiline_curly(pd, indent_by, key_token, space_after = 1L)
 }
 \arguments{
 \item{pd}{A parse table.}
@@ -12,11 +12,11 @@ wrap_multiline_curly(pd, indent_by, space_after = 1L, key_token)
 \item{indent_by}{The amount of spaces used to indent an expression in curly
 braces. Used for unindention.}
 
-\item{space_after}{How many spaces should be inserted after the closing brace.}
-
 \item{key_token}{The token that comes right before the token that contains
 the expression to be wrapped (ignoring comments). For if and while loops,
 this is the closing "')'", for a for-loop it's "forcond".}
+
+\item{space_after}{How many spaces should be inserted after the closing brace.}
 }
 \description{
 Wrap a multi-line statement in curly braces

@@ -75,8 +75,8 @@ is_comment <- function(pd) {
 #' expression (like `~column`), in the second row if it is a symmetric tilde
 #' expression (like `a~b`).
 #' @keywords internal
-is_tilde_expr <- function(pd, tilde_pos = c(1, 2)) {
-  if (is.null(pd) || nrow(pd) == 1) {
+is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {
+  if (is.null(pd) || nrow(pd) == 1L) {
     return(FALSE)
   }
   any(pd$token[tilde_pos] == "'~'")
@@ -84,7 +84,7 @@ is_tilde_expr <- function(pd, tilde_pos = c(1, 2)) {
 
 #' @rdname is_tilde_expr
 is_asymmetric_tilde_expr <- function(pd) {
-  is_tilde_expr(pd, tilde_pos = 1)
+  is_tilde_expr(pd, tilde_pos = 1L)
 }
 
 #' @rdname is_tilde_expr
@@ -111,9 +111,7 @@ is_subset_expr <- function(pd) {
 #' @keywords internal
 is_shebang <- function(pd) {
   is_first_comment <- pd$pos_id == 1L
-  is_first_comment[is_first_comment] <- grepl(
-    "^#!", pd$text[is_first_comment]
-  )
+  is_first_comment[is_first_comment] <- startsWith(pd$text[is_first_comment], "#!")
   is_first_comment
 }
 

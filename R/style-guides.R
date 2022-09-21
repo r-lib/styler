@@ -158,7 +158,7 @@ tidyverse_style <- function(scope = "tokens",
           except_token_after = "COMMENT",
           # don't modify line break here
           except_text_before = c("ifelse", "if_else"),
-          force_text_before = c("switch") # force line break after first token
+          force_text_before = "switch" # force line break after first token
         )
       },
       remove_line_break_in_fun_call = purrr::partial(
@@ -492,7 +492,7 @@ scope_normalize <- function(scope, name = substitute(scope)) {
 
   if (inherits(scope, "AsIs")) {
     factor(as.character(scope), levels = levels, ordered = TRUE)
-  } else if (length(scope) == 1) {
+  } else if (length(scope) == 1L) {
     scope <- levels[as.logical(rev(cumsum(scope == rev(levels))))]
     factor(scope, levels = levels, ordered = TRUE)
   } else {

@@ -11,12 +11,12 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
     return(pd_by_line)
   }
   last <- last(pd_by_line)
-  if (nrow(last) == 1) {
+  if (nrow(last) == 1L) {
     # can drop last line completely
     pd_by_line[-length(pd_by_line)]
   } else {
     # only drop last elment of last line
-    pd_by_line[[length(pd_by_line)]] <- last[seq2(1, nrow(last) - 1), ]
+    pd_by_line[[length(pd_by_line)]] <- last[seq2(1L, nrow(last) - 1L), ]
     pd_by_line
   }
 }
@@ -111,14 +111,12 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
 #' @keywords internal
 alignment_col1_all_named <- function(relevant_pd_by_line) {
   map_lgl(relevant_pd_by_line, function(x) {
-    if (nrow(x) < 3) {
+    if (nrow(x) < 3L) {
       return(FALSE)
     }
     x$token[3] == "expr" &&
-      x$token[1] %in% c("SYMBOL_SUB", "STR_CONST", "SYMBOL_FORMALS") &&
-      x$token[2] %in% c(
-        "EQ_SUB", "EQ_FORMALS", "SPECIAL-IN", "LT", "GT", "EQ", "NE"
-      )
+      any(c("SYMBOL_SUB", "STR_CONST", "SYMBOL_FORMALS") == x$token[1]) &&
+      any(c("EQ_SUB", "EQ_FORMALS", "SPECIAL-IN", "LT", "GT", "EQ", "NE") == x$token[2])
   }) %>%
     all()
 }

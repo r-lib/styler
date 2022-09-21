@@ -58,7 +58,7 @@ previous_non_comment <- function(pd, pos) {
 next_terminal <- function(pd,
                           stack = FALSE,
                           vars = c("pos_id", "token", "text"),
-                          tokens_exclude = c()) {
+                          tokens_exclude = NULL) {
   pd$position <- seq2(1, nrow(pd))
   pd <- pd[!(pd$token %in% tokens_exclude), ]
   if (pd$terminal[1]) {
