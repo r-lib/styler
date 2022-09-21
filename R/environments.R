@@ -43,7 +43,11 @@ parser_version_get <- function() {
 
 #' @rdname parser_version_set
 parser_version_find <- function(pd) {
-  ifelse(any(pd$token == "equal_assign"), 2, 3)
+  if (any(pd$token == "equal_assign")) {
+    2L
+  } else {
+    3L
+  }
 }
 
 
