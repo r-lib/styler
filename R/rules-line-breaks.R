@@ -65,11 +65,12 @@ set_line_break_before_curly_opening <- function(pd) {
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
     last_expr_idx <- max(which(pd$token == "expr"))
-    is_last_expr <- ifelse(any(c("IF", "WHILE") == pd$token[1]),
+    is_last_expr <- if (any(c("IF", "WHILE") == pd$token[1])) {
       # rule not applicable for if and while
-      TRUE, (line_break_to_set_idx + 1L) == last_expr_idx
-    )
-
+      TRUE
+    } else {
+      (line_break_to_set_idx + 1L) == last_expr_idx
+    }
     no_line_break_before_curly_idx <- any(pd$token[line_break_to_set_idx] == "EQ_SUB")
     linebreak_before_curly <- ifelse(is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
@@ -338,7 +339,11 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
 #' @keywords internal
 find_line_break_position_in_multiline_call <- function(pd) {
   candidate <- (which(pd$token == "EQ_SUB") - 1L)[1]
-  ifelse(is.na(candidate), 3L, candidate)
+  if (is.na(candidate)) {
+    3L
+  } else {
+    candidate
+  }
 }
 
 
@@ -368,10 +373,10 @@ remove_line_break_in_fun_call <- function(pd, strict) {
     # no blank lines within function calls
     if (strict) {
       pd$lag_newlines[
-        lag(pd$token == "','") & pd$lag_newlines > 1 & pd$token != "COMMENT"
+        lag(pd$token == "','") & pd$lag_newlines > 1L & pd$token != "COMMENT"
       ] <- 1L
     }
-    if (nrow(pd) == 3) {
+    if (nrow(pd) == 3L) {
       pd$lag_newlines[3] <- 0L
     }
   }
@@ -386,7 +391,7 @@ set_linebreak_after_ggplot2_plus <- function(pd) {
     first_plus <- which(is_plus_raw)[1]
     next_non_comment <- next_non_comment(pd, first_plus)
     is_plus_or_comment_after_plus_before_fun_call <-
-      lag(is_plus_raw, next_non_comment - first_plus - 1, default = FALSE) &
+      lag(is_plus_raw, next_non_comment - first_plus - 1L, default = FALSE) &
         (pd$token_after == "SYMBOL_FUNCTION_CALL" | pd$token_after == "SYMBOL_PACKAGE")
     if (any(is_plus_or_comment_after_plus_before_fun_call, na.rm = TRUE)) {
       gg_call <- pd$child[[previous_non_comment(pd, first_plus)]]$child[[1]]

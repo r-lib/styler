@@ -78,7 +78,11 @@ create_tokens <- function(tokens,
 #' @family token creators
 #' @keywords internal
 create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
-  direction <- ifelse(after, 1L, -1L)
+  direction <- if (after) {
+    1L
+  } else {
+    -1L
+  }
   first <- find_start_pos_id(pd, pos, by, direction, after)
   new_ids <- seq(first,
     to = first + direction * (n - 1) * by, by = by * direction
@@ -105,13 +109,28 @@ find_start_pos_id <- function(pd,
                               candidates = NULL) {
   candidates <- append(candidates, pd$pos_id[pos])
   if (is.null(pd$child[[pos]])) {
-    ifelse(after, max(candidates), min(candidates)) + by * direction
+    start_pos_idx <- if (after) {
+      max(candidates)
+    } else {
+      min(candidates)
+    }
+    start_pos_idx <- start_pos_idx + (by * direction)
   } else {
-    find_start_pos_id(
-      pd$child[[pos]], ifelse(after, nrow(pd$child[[pos]]), 1L),
-      by, direction, after, candidates
+    start_pos_idx <- find_start_pos_id(
+      pd$child[[pos]],
+      if (after) {
+        nrow(pd$child[[pos]])
+      } else {
+        1L
+      },
+      by,
+      direction,
+      after,
+      candidates
     )
   }
+
+  start_pos_idx
 }
 
 
@@ -129,7 +148,12 @@ find_start_pos_id <- function(pd,
 #' @family token creators
 #' @keywords internal
 validate_new_pos_ids <- function(new_ids, after) {
-  ref <- ifelse(after, floor(new_ids), ceiling(new_ids))
+  ref <- if (after) {
+    floor(new_ids)
+  } else {
+    ceiling(new_ids)
+  }
+
   if (any(abs(new_ids - ref) > 0.5)) abort("too many ids assigned.")
 }
 

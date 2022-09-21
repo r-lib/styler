@@ -486,7 +486,7 @@ scope_normalize <- function(scope, name = substitute(scope)) {
 
   if (inherits(scope, "AsIs")) {
     factor(as.character(scope), levels = levels, ordered = TRUE)
-  } else if (length(scope) == 1) {
+  } else if (length(scope) == 1L) {
     scope <- levels[as.logical(rev(cumsum(scope == rev(levels))))]
     factor(scope, levels = levels, ordered = TRUE)
   } else {

@@ -52,9 +52,14 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
   if (length(token_pos_candidates) == 0L) {
     return(pd_nested)
   }
-  token_pos <- token_pos_candidates[
-    ifelse(left, 1L, length(token_pos_candidates))
-  ]
+
+  token_pos_idx <- if (left) {
+    1L
+  } else {
+    length(token_pos_candidates)
+  }
+  token_pos <- token_pos_candidates[token_pos_idx]
+
   if (left) {
     pos <- previous_non_comment(pd_nested, token_pos)
   } else {

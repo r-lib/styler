@@ -11,12 +11,12 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
     return(pd_by_line)
   }
   last <- last(pd_by_line)
-  if (nrow(last) == 1) {
+  if (nrow(last) == 1L) {
     # can drop last line completely
     pd_by_line[-length(pd_by_line)]
   } else {
     # only drop last elment of last line
-    pd_by_line[[length(pd_by_line)]] <- last[seq2(1, nrow(last) - 1), ]
+    pd_by_line[[length(pd_by_line)]] <- last[seq2(1L, nrow(last) - 1L), ]
     pd_by_line
   }
 }

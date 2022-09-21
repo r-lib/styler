@@ -1,3 +1,4 @@
+# nocov start
 .default_ignore_start <- "styler: off"
 .default_ignore_stop <- "styler: on"
 
@@ -67,3 +68,5 @@ remove_cache_old_versions <- function() {
     unlink(dir, recursive = TRUE, force = TRUE)
   })
 }
+
+# nocov end
