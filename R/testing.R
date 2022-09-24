@@ -191,11 +191,11 @@ style_op <- function(text, base_indention = 0L) {
     initialize = list(
       default_style_guide_attributes = default_style_guide_attributes
     ),
-    line_break        = NULL,
-    space             = list(
+    line_break = NULL,
+    space = list(
       indent_op = partial(indent_op, indent_by = 2L)
     ),
-    token             = NULL,
+    token = NULL,
     # transformer options
     use_raw_indention = FALSE,
     reindention = specify_reindention(),
