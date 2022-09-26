@@ -60,7 +60,8 @@ create_tokens <- function(tokens,
       block = block,
       is_cached = is_cached
     )
-  )
+  ) %>%
+    as.data.frame()
 }
 
 #' Create valid pos_ids if possible
