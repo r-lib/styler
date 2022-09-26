@@ -112,7 +112,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
     add_id_and_short()
 
   parser_version_set(parser_version_find(pd))
-  pd
+  as.data.frame(pd)
 }
 
 #' Add column `pos_id` and `short`
@@ -163,7 +163,8 @@ ensure_correct_txt <- function(pd, text) {
     by.y = "id",
     suffixes = c("", "parent")
   ) %>%
-    as_tibble(.name_repair = "minimal")
+    as_tibble(.name_repair = "minimal") %>%
+    as.data.frame()
 
   if (!lines_and_cols_match(new_text)) {
     abort(paste(

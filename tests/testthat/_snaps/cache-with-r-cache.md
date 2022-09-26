@@ -3,28 +3,22 @@
     Code
       cache_info[, c("n", "size", "last_modified", "activated")]
     Output
-      # A tibble: 1 x 4
-            n  size last_modified activated
-        <int> <dbl> <dttm>        <lgl>    
-      1     0     0 -Inf -Inf     FALSE    
+        n size last_modified activated
+      1 0    0          -Inf     FALSE
 
 ---
 
     Code
       cache_info[, c("n", "size", "activated")]
     Output
-      # A tibble: 1 x 3
-            n  size activated
-        <int> <dbl> <lgl>    
-      1     1     0 TRUE     
+        n size activated
+      1 1    0      TRUE
 
 ---
 
     Code
       cache_info[, c("n", "size", "activated")]
     Output
-      # A tibble: 1 x 3
-            n  size activated
-        <int> <dbl> <lgl>    
-      1     2     0 TRUE     
+        n size activated
+      1 2    0      TRUE
 
