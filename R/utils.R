@@ -85,7 +85,7 @@ option_read <- function(x, default = NULL, error_if_not_found = TRUE) {
   }
 }
 
-
+#' @keywords internal
 unwhich <- function(x, length) {
   x_ <- rep(FALSE, length)
   x_[x] <- TRUE
