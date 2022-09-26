@@ -75,8 +75,8 @@ cache_info <- function(cache_name = NULL, format = "both") {
   rlang::arg_match(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
-  file_info <- file.info(files) #%>%
-    #as_tibble()
+  file_info <- file.info(files) # %>%
+  # as_tibble()
   tbl <- data.frame( # tibble(
     n = nrow(file_info),
     size = sum(file_info$size),

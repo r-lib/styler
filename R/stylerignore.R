@@ -123,8 +123,8 @@ apply_stylerignore <- function(flattened_pd) {
     env_current$stylerignore[, colnames_required_apply_stylerignore],
     by.x = "pos_id", by.y = "first_pos_id_in_segment", all.x = TRUE,
     sort = FALSE
-  ) #%>%
-    #as_tibble()
+  ) # %>%
+  # as_tibble()
   flattened_pd %>%
     stylerignore_consolidate_col("lag_newlines") %>%
     stylerignore_consolidate_col("lag_spaces") %>%
