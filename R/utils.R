@@ -4,10 +4,12 @@ line_col_names <- function() {
   c("line1", "line2", "col1", "col2")
 }
 
+#' @keywords internal
 styler_df <- function(..., .size = NULL, .name_repair = "minimal") {
   vctrs::data_frame(..., .size = .size, .name_repair = .name_repair)
 }
 
+#' @keywords internal
 new_styler_df <- function(x) {
   vctrs::new_data_frame(x)
 }
