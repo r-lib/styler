@@ -94,10 +94,8 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
-  pd <- styler_df(
-    utils::getParseData(parsed, includeText = include_text),
-    .name_repair = "minimal"
-  )
+  pd <- utils::getParseData(parsed, includeText = include_text) %>%
+    styler_df()
   if (getRversion() < "4.2") {
     is_unicode_parsing_error <- grepl("^\"<U\\+[0-9]+>\"$", pd$text)
     if (any(is_unicode_parsing_error)) {
@@ -163,7 +161,7 @@ ensure_correct_txt <- function(pd, text) {
     by.y = "id",
     suffixes = c("", "parent")
   ) %>%
-    styler_df(.name_repair = "minimal")
+    styler_df()
 
   if (!lines_and_cols_match(new_text)) {
     abort(paste(
