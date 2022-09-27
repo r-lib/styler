@@ -62,8 +62,7 @@ left_join <- function(x, y, by) {
 
   res <- merge(x, y, by.x = by_x, by.y = by_y, all.x = TRUE, sort = FALSE) %>%
     arrange_pos_id()
-  res <- new_styler_df(res) %>%
-    styler_df()
+  res <- new_styler_df(res)
   # dplyr::left_join set unknown list columns to NULL, merge sets them
   # to NA
   if (exists("child", res) && anyNA(res$child)) {
