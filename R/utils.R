@@ -4,6 +4,19 @@ line_col_names <- function() {
   c("line1", "line2", "col1", "col2")
 }
 
+#' Wrapper functions to encapsulate data frame creation
+#' @keywords internal
+#' @noRd
+styler_df <- function(..., .size = NULL, .name_repair = "minimal") {
+  vctrs::data_frame(..., .size = .size, .name_repair = .name_repair)
+}
+
+#' @keywords internal
+#' @noRd
+new_styler_df <- function(x) {
+  vctrs::new_data_frame(x)
+}
+
 #' Ensure there is one (and only one) blank line at the end of a vector
 #' @examples
 #' styler:::ensure_last_n_empty("")
@@ -85,7 +98,7 @@ option_read <- function(x, default = NULL, error_if_not_found = TRUE) {
   }
 }
 
-
+#' @keywords internal
 unwhich <- function(x, length) {
   x_ <- rep(FALSE, length)
   x_[x] <- TRUE

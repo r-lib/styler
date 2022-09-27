@@ -94,7 +94,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
-  pd <- as_tibble(
+  pd <- styler_df(
     utils::getParseData(parsed, includeText = include_text),
     .name_repair = "minimal"
   )
@@ -163,7 +163,7 @@ ensure_correct_txt <- function(pd, text) {
     by.y = "id",
     suffixes = c("", "parent")
   ) %>%
-    as_tibble(.name_repair = "minimal")
+    styler_df(.name_repair = "minimal")
 
   if (!lines_and_cols_match(new_text)) {
     abort(paste(

@@ -3,7 +3,7 @@ test_that("Cache management works", {
   expect_false(cache_info(format = "tabular")$activated)
   local_test_setup(cache = TRUE)
   # at fresh startup
-  expect_s3_class(cache_info(format = "tabular"), "tbl_df")
+  expect_s3_class(cache_info(format = "tabular"), "data.frame")
   expect_error(capture.output(cache_info()), NA)
   expect_equal(basename(cache_activate()), styler_version)
   expect_equal(basename(cache_activate("xyz")), "xyz")

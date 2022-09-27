@@ -1,5 +1,5 @@
 #' @keywords api
-#' @import tibble
+#' @importFrom tibble tribble
 #' @importFrom magrittr %>%
 NULL
 

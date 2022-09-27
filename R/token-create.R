@@ -39,7 +39,7 @@ create_tokens <- function(tokens,
                           block = NA,
                           is_cached = FALSE) {
   len_text <- length(texts)
-  new_tibble(
+  new_styler_df(
     list(
       token = tokens,
       text = texts,
