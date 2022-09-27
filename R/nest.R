@@ -249,13 +249,12 @@ add_terminal_token_after <- function(pd_flat) {
     filter(terminal) %>%
     arrange_pos_id()
 
-  rhs <- new_tibble(
+  rhs <- new_styler_df(
     list(
       pos_id = terminals$pos_id,
       token_after = lead(terminals$token, default = "")
     )
-  ) %>%
-    as.data.frame()
+  )
 
   left_join(pd_flat, rhs, by = "pos_id")
 }
@@ -267,13 +266,12 @@ add_terminal_token_before <- function(pd_flat) {
     filter(terminal) %>%
     arrange_pos_id()
 
-  rhs <- new_tibble(
+  rhs <- new_styler_df(
     list(
       id = terminals$id,
       token_before = lag(terminals$token, default = "")
     )
-  ) %>%
-    as.data.frame()
+  )
 
   left_join(pd_flat, rhs, by = "id")
 }

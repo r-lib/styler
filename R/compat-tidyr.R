@@ -6,6 +6,5 @@ nest_ <- function(data, key_col, nest_cols = character()) {
   res <- list()
   res[[key_column]] <- key_levels
   res[[key_col]] <- split(data[, nest_cols], key_factor)
-  new_tibble(res) %>%
-    as.data.frame()
+  new_styler_df(res)
 }

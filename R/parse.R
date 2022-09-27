@@ -94,7 +94,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
-  pd <- as_tibble(
+  pd <- styler_df(
     utils::getParseData(parsed, includeText = include_text),
     .name_repair = "minimal"
   )
@@ -112,7 +112,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
     add_id_and_short()
 
   parser_version_set(parser_version_find(pd))
-  as.data.frame(pd)
+  pd
 }
 
 #' Add column `pos_id` and `short`
@@ -163,8 +163,7 @@ ensure_correct_txt <- function(pd, text) {
     by.y = "id",
     suffixes = c("", "parent")
   ) %>%
-    as_tibble(.name_repair = "minimal") %>%
-    as.data.frame()
+    styler_df(.name_repair = "minimal")
 
   if (!lines_and_cols_match(new_text)) {
     abort(paste(
