@@ -7,8 +7,8 @@ line_col_names <- function() {
 #' Wrapper functions to encapsulate data frame creation
 #' @keywords internal
 #' @noRd
-styler_df <- function(..., .size = NULL, .name_repair = "minimal") {
-  vctrs::data_frame(..., .size = .size, .name_repair = .name_repair)
+styler_df <- function(...) {
+  vctrs::data_frame(..., .name_repair = "minimal")
 }
 
 #' @keywords internal
