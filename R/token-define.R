@@ -1,4 +1,4 @@
-token <- tribble(
+token <- tibble::tribble(
   ~text,           ~class,         ~token,
   "&",          "logical",          "AND",
   "&&",         "logical",         "AND2",

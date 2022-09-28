@@ -29,11 +29,11 @@ Imports:
     magrittr (>= 2.0.0),
     purrr (>= 0.2.3),
     R.cache (>= 0.15.0),
-    rematch2 (>= 2.0.1),
     rlang (>= 0.1.1),
     rprojroot (>= 1.1),
     tibble (>= 1.4.2),
     tools,
+    vctrs (>= 0.4.1),
     withr (>= 1.0.0),
 Suggests: 
     data.tree (>= 0.1.6),

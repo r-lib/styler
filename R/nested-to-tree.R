@@ -16,6 +16,7 @@ create_tree_from_pd_with_default_style_attributes <- function(pd,
                                                               structure_only = FALSE) {
   pd %>%
     create_node_from_nested_root(structure_only) %>%
+    # don't use `styler_df()` here; `vctrs::data_frame()` only accepts a vector, not a <Node/R6> object
     as.data.frame()
 }
 

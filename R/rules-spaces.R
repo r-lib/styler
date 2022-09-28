@@ -266,7 +266,7 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
     return(pd)
   }
 
-  comments <- rematch2::re_match(
+  comments <- re_match(
     pd$text[is_comment],
     "^(?<prefix>#+['\\*]*)(?<space_after_prefix> *)(?<text>.*)$"
   )

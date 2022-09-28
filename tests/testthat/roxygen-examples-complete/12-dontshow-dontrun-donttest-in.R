@@ -16,7 +16,7 @@
 #' }
 #' }
 #' set_line_break_before_curly_opening_style <- function() {
-#'   create_style_guide(line_break = tibble::lst(set_line_break_before_curly_opening))
+#'   create_style_guide(line_break = list(set_line_break_before_curly_opening))
 #' }
 #' @examples
 #' \dontrun{
@@ -32,9 +32,9 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                indention = NULL,
                                use_raw_indention = FALSE,
                                reindention = tidyverse_reindention()) {
-  lst(
+  list(
     # transformer functions
-    initialize = lst(initialize),
+    initialize = list(initialize),
     line_break,
     space,
     token,
@@ -63,7 +63,7 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' }
 #' }
 #' set_line_break_before_curly_opening_style <- function() {
-#' create_style_guide(line_break= tibble::lst(set_line_break_before_curly_opening))
+#' create_style_guide(line_break= list(set_line_break_before_curly_opening))
 #' }
 #' @examples
 #' \donttest{style_text("a <- function(x) { x }
@@ -78,9 +78,9 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
                                indention = NULL,
                                use_raw_indention = FALSE,
                                reindention = tidyverse_reindention()) {
-  lst(
+  list(
     #transformer functions
-    initialize = lst(initialize),
+    initialize = list(initialize),
     line_break,
     space,
     token,
