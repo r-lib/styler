@@ -1,7 +1,4 @@
 test_that("does apply spacing rules only if not aligned", {
-  skip_if_not_installed("tibble")
-  library(tibble)
-
   expect_warning(test_collection("alignment",
     transformer = style_text
   ), NA)
