@@ -1,4 +1,7 @@
 test_that("analogous to test-roxygen-examples-complete", {
+  skip_if_not_installed("tibble")
+  library(tibble)
+
   expect_warning(test_collection(
     "roxygen-examples-complete", "^1[^1234567890]",
     transformer = style_text
