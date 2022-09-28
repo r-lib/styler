@@ -32,7 +32,7 @@ ensure_last_n_empty <- function(x, n = 1) {
   c(x, rep("", n))
 }
 
-#' @note Ported over and slightly simplified version of `rematch2::re_match()`.
+#' @note Slightly simplified version of `rematch2::re_match()` (License: MIT).
 #' @keywords internal
 #' @noRd
 re_match <- function(text, pattern) {
