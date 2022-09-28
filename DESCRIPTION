@@ -31,7 +31,6 @@ Imports:
     R.cache (>= 0.15.0),
     rlang (>= 0.1.1),
     rprojroot (>= 1.1),
-    tibble (>= 1.4.2),
     tools,
     vctrs (>= 0.4.1),
     withr (>= 1.0.0),
@@ -45,6 +44,7 @@ Suggests:
     rmarkdown,
     roxygen2,
     rstudioapi (>= 0.7),
+    tibble (>= 1.4.2),
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
