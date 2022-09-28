@@ -32,6 +32,32 @@ ensure_last_n_empty <- function(x, n = 1) {
   c(x, rep("", n))
 }
 
+#' @note Slightly simplified version of `rematch2::re_match()` (License: MIT).
+#' @keywords internal
+#' @noRd
+re_match <- function(text, pattern) {
+  stopifnot(is.character(pattern), length(pattern) == 1L, !is.na(pattern))
+  text <- as.character(text)
+  match <- regexpr(pattern, text, perl = TRUE)
+  start <- as.vector(match)
+  length <- attr(match, "match.length")
+  end <- start + length - 1L
+  matchstr <- substring(text, start, end)
+  matchstr[start == -1] <- NA_character_
+  res <- data.frame(stringsAsFactors = FALSE, .text = text, .match = matchstr)
+
+  gstart <- attr(match, "capture.start")
+  glength <- attr(match, "capture.length")
+  gend <- gstart + glength - 1L
+  groupstr <- substring(text, gstart, gend)
+  groupstr[gstart == -1] <- NA_character_
+  dim(groupstr) <- dim(gstart)
+  res <- cbind(groupstr, res, stringsAsFactors = FALSE)
+
+  names(res) <- c(attr(match, "capture.names"), ".text", ".match")
+  res
+}
+
 #' Replace the newline character with a line break
 #'
 #' @param text A character vector
