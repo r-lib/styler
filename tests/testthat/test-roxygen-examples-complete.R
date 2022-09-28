@@ -1,5 +1,3 @@
-
-
 test_that("analogous to test-roxygen-examples-complete", {
   expect_warning(test_collection(
     "roxygen-examples-complete", "^1[^1234567890]",

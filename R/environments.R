@@ -58,7 +58,7 @@ parser_version_find <- function(pd) {
 #' @details
 #' * `parser_version`: Needed to dispatch between parser versions, see
 #'   [parser_version_set()] for details.
-#' * `stylerignore`: A tibble with parse data containing tokens that fall within
+#' * `stylerignore`: A data frame with parse data containing tokens that fall within
 #'   a stylerignore sequence. This is used after serializing the flattened
 #'   parse table to apply the initial formatting to these tokens. See
 #'   [stylerignore] for details.
