@@ -36,7 +36,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
         target_indention = transformers$reindention$indention,
         comments_only = transformers$reindention$comments_only
       )
-    is_on_newline <- flattened_pd$lag_newlines > 0
+    is_on_newline <- flattened_pd$lag_newlines > 0L
     is_on_newline[1] <- TRUE
     flattened_pd$lag_spaces[is_on_newline] <- flattened_pd$lag_spaces[is_on_newline] + base_indention
     serialized_transformed_text <- serialize_parse_data_flattened(
