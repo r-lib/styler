@@ -77,7 +77,7 @@ indent_eq_sub <- function(pd,
 #' @describeIn update_indention Is used to indent for / while / if / if-else
 #'   statements that do not have curly parenthesis.
 #' @keywords internal
-indent_without_paren <- function(pd, indent_by = 2) {
+indent_without_paren <- function(pd, indent_by = 2L) {
   pd %>%
     indent_without_paren_for_while_fun(indent_by) %>%
     indent_without_paren_if_else(indent_by)

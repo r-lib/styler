@@ -14,7 +14,7 @@ specify_transformers_drop(spaces = NULL, indention = NULL, line_breaks = NULL, t
 style_dir(path = ".", ..., style = tidyverse_style, transformers = style(...), filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"), recursive = TRUE, exclude_files = NULL, exclude_dirs = c("packrat", "renv"), include_roxygen_examples = TRUE, base_indention = 0L, dry = "off")
 style_file(path, ..., style = tidyverse_style, transformers = style(...), include_roxygen_examples = TRUE, base_indention = 0L, dry = "off")
 style_pkg(pkg = ".", ..., style = tidyverse_style, transformers = style(...), filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"), exclude_files = c("R/RcppExports.R", "R/cpp11.R"), exclude_dirs = c("packrat", "renv"), include_roxygen_examples = TRUE, base_indention = 0L, dry = "off")
-style_text(text, ..., style = tidyverse_style, transformers = style(...), include_roxygen_examples = TRUE, base_indention = 0)
+style_text(text, ..., style = tidyverse_style, transformers = style(...), include_roxygen_examples = TRUE, base_indention = 0L)
 tidyverse_math_token_spacing()
 tidyverse_reindention()
 tidyverse_style(scope = "tokens", strict = TRUE, indent_by = 2, start_comments_with_one_space = FALSE, reindention = tidyverse_reindention(), math_token_spacing = tidyverse_math_token_spacing())

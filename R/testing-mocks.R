@@ -12,7 +12,7 @@
 #' [compute_indent_indices()], we must have
 #' a way of testing this without the interaction of `\{\{`.
 #' @examples
-#' styler:::style_text_without_curly_curly("rlang::list2({{ x }} := 2)")
+#' styler:::style_text_without_curly_curly("rlang::list2({{ x }} := 2L)")
 #' styler:::style_text("rlang::list2({{ x }} := 3)")
 #' @keywords internal
 #' @seealso set_line_break_around_curly_curly

@@ -62,7 +62,7 @@ add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
     return(pd_flat)
   }
-  pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0)
+  pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0L)
   on_same_line <- pd_flat$line1 == pd_flat_lat_line1
   cumsum_start <- cumsum(start_candidate & !on_same_line)
   cumsum_stop <- cumsum(
