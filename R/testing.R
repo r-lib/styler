@@ -161,7 +161,7 @@ NULL
 #'   transformations but remove EOL spaces and indention due to the way the
 #'   serialization is set up.
 #' @keywords internal
-style_empty <- function(text, base_indention = 0) {
+style_empty <- function(text, base_indention = 0L) {
   transformers <- list(
     # transformer functions
     initialize = default_style_guide_attributes,
@@ -350,7 +350,7 @@ local_test_setup <- function(cache = FALSE,
 }
 
 cache_more_specs_default <- function() {
-  cache_more_specs(include_roxygen_examples = TRUE, base_indention = 0)
+  cache_more_specs(include_roxygen_examples = TRUE, base_indention = 0L)
 }
 
 #' Test `transformers_drop` for consistency

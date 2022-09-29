@@ -33,7 +33,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
   rh_child <- pd$child[[next_non_comment]]
   if (nrow(rh_child) < 2 && rh_child$token == "SYMBOL") {
     child <- pd$child[[next_non_comment]]
-    new_pos_ids <- create_pos_ids(child, 1, after = TRUE, n = 2)
+    new_pos_ids <- create_pos_ids(child, 1, after = TRUE, n = 2L)
     new_pd <- create_tokens(
       texts = c("(", ")"),
       lag_newlines = rep(0L, 2),
@@ -68,7 +68,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #'   braces. Used for unindention.
 #' @keywords internal
 #' @importFrom purrr when
-wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2) {
+wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
   key_token <- when(
     pd,
     is_cond_expr(.) ~ "')'",
@@ -127,7 +127,7 @@ wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
 #' already wrapped into a such.
 #' @inheritParams wrap_multiline_curly
 #' @keywords internal
-wrap_else_multiline_curly <- function(pd, indent_by = 2, space_after = 0) {
+wrap_else_multiline_curly <- function(pd, indent_by = 2, space_after = 0L) {
   if (contains_else_expr(pd) &&
     pd_is_multi_line(pd) &&
     contains_else_expr_that_needs_braces(pd) &&

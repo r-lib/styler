@@ -82,11 +82,11 @@ odd_index <- function(x) {
   if (length(x) < 1L) {
     return(NULL)
   }
-  seq(1L, length(x), by = 2)
+  seq(1L, length(x), by = 2L)
 }
 
 even_index <- function(x) {
-  seq(2L, length(x), by = 2)
+  seq(2L, length(x), by = 2L)
 }
 
 is_windows <- function() {
