@@ -39,7 +39,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   }
   needs_indention_now <- pd$lag_newlines[
     next_non_comment(pd, which(pd$token == "')'"))
-  ] > 0
+  ] > 0L
 
   if (needs_indention_now) {
     pd$indent[expr_after_if] <- indent_by
@@ -57,7 +57,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
 
   needs_indention_now <- pd$lag_newlines[
     next_non_comment(pd, which(pd$token == "ELSE"))
-  ] > 0
+  ] > 0L
 
   if (has_else_without_curly_or_else_chid && needs_indention_now) {
     pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
@@ -214,7 +214,7 @@ set_multi_line <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 pd_is_multi_line <- function(pd) {
-  pd_multi_line(pd) > 0
+  pd_multi_line(pd) > 0L
 }
 
 pd_multi_line <- function(pd) {

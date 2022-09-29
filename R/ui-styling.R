@@ -215,7 +215,7 @@ style_text <- function(text,
                        style = tidyverse_style,
                        transformers = style(...),
                        include_roxygen_examples = TRUE,
-                       base_indention = 0) {
+                       base_indention = 0L) {
   transformer <- make_transformer(transformers,
     include_roxygen_examples = include_roxygen_examples,
     base_indention = base_indention

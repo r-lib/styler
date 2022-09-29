@@ -347,7 +347,7 @@ apply_transformers <- function(pd_nested, transformers) {
     pd_nested,
     c(
       transformers$initialize, transformers$line_break, set_multi_line,
-      if (length(transformers$line_break) != 0) update_newlines
+      if (length(transformers$line_break) != 0L) update_newlines
     )
   )
 

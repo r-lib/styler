@@ -6,7 +6,7 @@
 \alias{style_op}
 \title{Transforming test input with a transformer function}
 \usage{
-style_empty(text, base_indention = 0)
+style_empty(text, base_indention = 0L)
 
 style_op(text, base_indention = 0L)
 }
