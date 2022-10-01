@@ -26,7 +26,8 @@
 #'   {
 #'     code(to = execute)
 #'   },
-#'   c = { # this is the named case
+#'   c = {
+#'     # this is the named case
 #'     g(x = 7)
 #'   }
 #' )
