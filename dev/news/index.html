@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.7.0.9002</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.7.0.9003</span>
       </span>
     </div>
 
@@ -106,6 +106,24 @@
       <small>Source: <a href="https://github.com/r-lib/styler/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.7.0.9003" id="styler-1709003">styler 1.7.0.9003<a class="anchor" aria-label="anchor" href="#styler-1709003"></a></h2>
+<p><strong>Performance and code quality improvements</strong></p>
+<ul><li>Use integer literals and avoid coercions where needed (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/994" class="external-link">#994</a>).</li>
+<li>Don’t preserve names for <code><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist()</a></code> (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/998" class="external-link">#998</a>).</li>
+<li>Remove unused variables (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/999" class="external-link">#999</a>).</li>
+<li>Get rid of lints with performance implications (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1000" class="external-link">#1000</a>).</li>
+<li>Use more efficient match() alternative (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1001" class="external-link">#1001</a>).</li>
+<li>Don’t use <code>nrow</code> arg in <code>new_tibble()</code> calls (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1003" class="external-link">#1003</a>).</li>
+<li>Performance improvements with <code>if()</code> + <code>else()</code> instead of <code><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse()</a></code> (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1006" class="external-link">#1006</a>).</li>
+<li>Replace tibbles with data frames to improve performance (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1007" class="external-link">#1007</a>).</li>
+<li>Simplify <code>styler_df()</code> signature (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1009" class="external-link">#1009</a>).</li>
+<li>Minor cleanup (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1016" class="external-link">#1016</a>).</li>
+</ul><p><strong>Dependency related changes</strong></p>
+<ul><li>Don’t import entire tibble package (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1007" class="external-link">#1007</a>).</li>
+<li>Drop {rematch2} dependency (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1011" class="external-link">#1011</a>).</li>
+</ul><p><strong>Other changes</strong></p>
+<ul><li>Add flags to skip code coverage for zzz.R (<a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/r-lib/styler/issues/1005" class="external-link">#1005</a>).</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.7.0.9002" id="styler-1709002-development-version">styler 1.7.0.9002 (Development version)<a class="anchor" aria-label="anchor" href="#styler-1709002-development-version"></a></h2>
 <ul><li>Same as previous version.</li></ul></div>
