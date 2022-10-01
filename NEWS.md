@@ -1,5 +1,31 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# styler 1.7.0.9003
+
+**Performance and code quality improvements**
+
+- Use integer literals and avoid coercions where needed (\@IndrajeetPatil, #994).
+- Don't preserve names for `unlist()` (\@IndrajeetPatil, #998).
+- Remove unused variables (\@IndrajeetPatil, #999).
+- Get rid of lints with performance implications (\@IndrajeetPatil, #1000).
+- Use more efficient match() alternative (\@IndrajeetPatil, #1001).
+- Don't use `nrow` arg in `new_tibble()` calls (\@IndrajeetPatil, #1003).
+- Performance improvements with `if()` + `else()` instead of `ifelse()` (\@IndrajeetPatil, #1006).
+- Replace tibbles with data frames to improve performance (\@IndrajeetPatil, #1007). 
+- Simplify `styler_df()` signature (\@IndrajeetPatil, #1009).
+- Minor cleanup (\@IndrajeetPatil, #1016).
+
+
+**Dependency related changes**
+
+- Don't import entire tibble package (\@IndrajeetPatil, #1007).
+- Drop {rematch2} dependency (\@IndrajeetPatil, #1011).
+
+**Other changes**
+
+- Add flags to skip code coverage for zzz.R (\@IndrajeetPatil, #1005).
+
+
 # styler 1.7.0.9002 (Development version)
 
 - Same as previous version.
