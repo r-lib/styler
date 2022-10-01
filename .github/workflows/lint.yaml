@@ -30,7 +30,7 @@ jobs:
       - name: Lint
         run: |
           library(lintr)
-          lint_package(linters = linters_with_defaults(
+          lint_dir("R", linters = linters_with_defaults(
             commented_code_linter = NULL,
             cyclocomp_linter = cyclocomp_linter(20),
             implicit_integer_linter = NULL,
