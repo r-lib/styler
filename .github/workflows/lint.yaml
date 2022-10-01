@@ -1,0 +1,45 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+name: lint
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            r-lib/lintr
+            local::.
+          needs: lint
+
+      - name: Lint
+        run: |
+          library(lintr)
+          lint_package(linters = linters_with_defaults(
+            commented_code_linter = NULL,
+            cyclocomp_linter = cyclocomp_linter(20),
+            implicit_integer_linter = NULL,
+            line_length_linter(120),
+            object_name_linter = NULL,
+            object_length_linter(50),
+            object_usage_linter = NULL,
+            todo_comment_linter = NULL,
+            extraction_operator_linter = NULL,
+            defaults = linters_with_tags(tags = NULL)
+          ))
+        shell: Rscript {0}
