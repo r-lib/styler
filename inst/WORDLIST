@@ -23,6 +23,7 @@ cli
 CMD
 codecov
 coercible
+coercions
 compat
 config
 CONST

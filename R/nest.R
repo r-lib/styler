@@ -329,7 +329,7 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #'  a parent to other tokens (called internal) and such that are not (called
 #'  child). Then, the token in child are joined to their parents in internal
 #'  and all token information of the children is nested into a column "child".
-#'  This is done recursively until we are only left with a nested tibble that
+#'  This is done recursively until we are only left with a nested data frame that
 #'  contains one row: The nested parse table.
 #' @param pd_flat A flat parse table including both terminals and non-terminals.
 #' @seealso [compute_parse_data_nested()]

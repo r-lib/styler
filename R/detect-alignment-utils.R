@@ -186,8 +186,8 @@ alignment_has_correct_spacing_around_comma <- function(pd_sub) {
     return(TRUE)
   }
   relevant_comma_token <- comma_tokens[seq2(1, length(comma_tokens) - 1L)]
-  correct_spaces_before <- pd_sub$.lag_spaces[relevant_comma_token] == 0
-  correct_spaces_after <- pd_sub$spaces[relevant_comma_token] > 0
+  correct_spaces_before <- pd_sub$.lag_spaces[relevant_comma_token] == 0L
+  correct_spaces_after <- pd_sub$spaces[relevant_comma_token] > 0L
   all(correct_spaces_before) && all(correct_spaces_after)
 }
 

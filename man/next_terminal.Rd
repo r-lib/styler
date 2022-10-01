@@ -15,7 +15,7 @@ next_terminal(
 \item{pd}{A nest.}
 
 \item{stack}{Whether or not to also return information on the tokens that
-are between \code{pd} and the first terminal, so the returned tibble can be
+are between \code{pd} and the first terminal, so the returned data frame can be
 understood as a transition path from \code{pd} to the next terminal, instead of
 the information at the terminal only. The order is inside-out,
 i.e. the first non-terminal on top, the terminal last.}
@@ -26,7 +26,7 @@ i.e. the first non-terminal on top, the terminal last.}
 one wants to find the next token that is not a comment for example.}
 }
 \value{
-Returns a tibble (which is \strong{not} a valid parse table for
+Returns a data frame (which is \strong{not} a valid parse table for
 \code{stack = TRUE}), with \code{vars} and another variable \code{position} that denotes
 the index each element in the transition. This can be helpful in conjunction
 with \code{\link[purrr:pluck]{purrr::pluck()}} or \code{\link[purrr:modify_in]{purrr::modify_in()}} to reach the terminal in the

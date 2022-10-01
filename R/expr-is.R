@@ -89,7 +89,7 @@ is_asymmetric_tilde_expr <- function(pd) {
 
 #' @rdname is_tilde_expr
 is_symmetric_tilde_expr <- function(pd) {
-  is_tilde_expr(pd, tilde_pos = 2)
+  is_tilde_expr(pd, tilde_pos = 2L)
 }
 
 is_subset_expr <- function(pd) {
