@@ -7,15 +7,15 @@ concurrency:
 on:
   pull_request:
     paths:
-     # Directories with source code and benchmarking code
-     - "inst/**"
-     - "r/**"
-     - "src/**"
-     - "touchstone/**"
-     # Benchmarking config file
-     - ".github/workflows/touchstone-*.yaml"
-     # Package metadata
-     - DESCRIPTION
+      # Directories with source code and benchmarking code
+      - "inst/**"
+      - "r/**"
+      - "src/**"
+      - "touchstone/**"
+      # Benchmarking config file
+      - ".github/workflows/touchstone-*.yaml"
+      # Package metadata
+      - DESCRIPTION
 
 jobs:
   prepare:
