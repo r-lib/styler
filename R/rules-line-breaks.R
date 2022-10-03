@@ -22,11 +22,11 @@
 #'   code(to = execute)
 #' })
 #' call2(
-#'   x = 2,
-#'   {
+#'   x = 2, {
 #'     code(to = execute)
 #'   },
-#'   c = { # this is the named case
+#'   c = {
+#'     # this is the named case
 #'     g(x = 7)
 #'   }
 #' )
