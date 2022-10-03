@@ -31,8 +31,7 @@ testthat("braces braces are cool", {
   code(to = execute)
 })
 call2(
-  x = 2,
-  {
+  x = 2, {
     code(to = execute)
   },
   c = {
