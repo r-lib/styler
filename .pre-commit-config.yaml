@@ -9,7 +9,7 @@ repos:
     rev: v0.3.2.9003
     hooks:
     -   id: style-files
-        args: ['--ignore-start="^# styler: on$"', '--ignore-stop="^# styler: off$"']
+        args: ['--ignore-start="^# styler: off$"', '--ignore-stop="^# styler: on$"']
         exclude:  >
           (?x)^(
           tests/testthat/.*/.*\.R(md|nw)?|
