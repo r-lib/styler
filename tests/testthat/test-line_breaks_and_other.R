@@ -68,3 +68,9 @@ test_that("line is correctly broken around = ", {
     transformer = style_text
   ), NA)
 })
+
+test_that("comments are not moved down after {", {
+  expect_warning(test_collection("line_breaks_and_other", "comment-around-curly",
+    transformer = style_text
+  ), NA)
+})
