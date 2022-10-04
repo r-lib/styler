@@ -158,9 +158,7 @@ style_line_break_around_curly <- function(strict, pd) {
     len_to_break <- sum(to_break)
     pd$lag_newlines[to_break] <- ifelse(
       pd$token[to_break] == "COMMENT",
-      {
-        if (strict) pmin else pmax
-      }(1L, pd$lag_newlines[to_break]),
+      pmin(1L, pd$lag_newlines[to_break]),
       1L
     )
   } else {
