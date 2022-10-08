@@ -4,7 +4,18 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
 
-on: pull_request
+on:
+  pull_request:
+    paths:
+      # Directories with source code and benchmarking code
+      - "inst/**"
+      - "R/**"
+      - "src/**"
+      - "touchstone/**"
+      # Benchmarking config file
+      - ".github/workflows/touchstone-*.yaml"
+      # Package metadata
+      - DESCRIPTION
 
 jobs:
   prepare:

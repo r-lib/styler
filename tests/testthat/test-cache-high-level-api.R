@@ -137,7 +137,7 @@ test_that("no speedup when tranformer changes", {
   first <- system.time(style_text(text, transformers = t1))
   t1 <- tidyverse_style(indent_by = 4)
   second <- system.time(style_text(text, transformers = t1))
-  expect_false(first["elapsed"] / 1.3 > second["elapsed"])
+  expect_true(first["elapsed"] < 1.3 * second["elapsed"])
 })
 
 
