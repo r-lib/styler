@@ -21,12 +21,12 @@ env_add_stylerignore <- function(pd_flat) {
     default_style_guide_attributes()
   is_stylerignore_switchpoint <- pd_flat_temp$stylerignore != lag(
     pd_flat_temp$stylerignore,
-    default = pd_flat_temp$stylerignore[1]
+    default = pd_flat_temp$stylerignore[1L]
   )
   pd_flat_temp$first_pos_id_in_segment <- split(
     pd_flat_temp$pos_id, cumsum(is_stylerignore_switchpoint)
   ) %>%
-    map(~ rep(.x[1], length(.x))) %>%
+    map(~ rep(.x[1L], length(.x))) %>%
     unlist(use.names = FALSE)
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
   pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0L)
