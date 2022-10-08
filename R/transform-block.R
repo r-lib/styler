@@ -76,7 +76,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
 cache_find_block <- function(pd) {
   first_after_cache_state_switch <- pd$is_cached != lag(pd$is_cached, default = !pd$is_cached[1L])
 
-  not_first_on_line <- find_blank_lines_to_next_expr(pd) == 0
+  not_first_on_line <- find_blank_lines_to_next_expr(pd) == 0L
   invalid_turning_point_idx <- which(
     not_first_on_line & first_after_cache_state_switch
   )

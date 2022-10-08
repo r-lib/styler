@@ -377,7 +377,7 @@ apply_transformers <- function(pd_nested, transformers) {
 #'   Needed for reverse engineering the scope.
 #' @keywords internal
 parse_tree_must_be_identical <- function(transformers) {
-  length(transformers$token) == 0
+  length(transformers$token) == 0L
 }
 
 #' Verify the styling
