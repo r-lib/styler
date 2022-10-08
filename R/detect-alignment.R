@@ -38,7 +38,7 @@
 #'       ")"
 #'     )) %>%
 #'       styler:::post_visit(transformers$initialize)
-#'     nest <- pd_nested$child[[1]]
+#'     nest <- pd_nested$child[[1L]]
 #'     styler:::token_is_on_aligned_line(nest)
 #'   }
 #' )
@@ -62,7 +62,7 @@ token_is_on_aligned_line <- function(pd_flat) {
   relevant_idx <- seq2(2L, last_idx)
   pd_by_line <- pd_by_line[relevant_idx]
 
-  relevant_lag_spaces_col_1 <- map_int(pd_by_line, ~ .x$.lag_spaces[1])
+  relevant_lag_spaces_col_1 <- map_int(pd_by_line, ~ .x$.lag_spaces[1L])
 
   col1_is_aligned <- length(unique(relevant_lag_spaces_col_1)) == 1L
   if (!col1_is_aligned) {
@@ -82,7 +82,7 @@ token_is_on_aligned_line <- function(pd_flat) {
   if (!all(has_correct_spacing_around_eq_sub)) {
     return(FALSE)
   }
-  starting_with_comma <- map_lgl(pd_by_line, ~ .x$token[1] == "','")
+  starting_with_comma <- map_lgl(pd_by_line, ~ .x$token[1L] == "','")
   if (any(starting_with_comma)) {
     return(FALSE)
   }

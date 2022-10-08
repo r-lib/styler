@@ -11,7 +11,7 @@ next_non_comment <- function(pd, pos) {
   if (all(candidates %in% which(pd$token == "COMMENT"))) {
     return(integer(0))
   }
-  setdiff(candidates, which(pd$token == "COMMENT"))[1]
+  setdiff(candidates, which(pd$token == "COMMENT"))[1L]
 }
 
 #' @rdname next_non_comment
@@ -60,11 +60,11 @@ next_terminal <- function(pd,
                           tokens_exclude = NULL) {
   pd$position <- seq2(1, nrow(pd))
   pd <- pd[!(pd$token %in% tokens_exclude), ]
-  if (pd$terminal[1]) {
+  if (pd$terminal[1L]) {
     pd[1, c("position", vars)]
   } else {
     current <- next_terminal(
-      pd$child[[1]],
+      pd$child[[1L]],
       stack = stack, vars = vars, tokens_exclude = tokens_exclude
     )
     if (stack) {

@@ -47,7 +47,7 @@ withr::with_options(
       ")"
     )) \%>\%
       styler:::post_visit(transformers$initialize)
-    nest <- pd_nested$child[[1]]
+    nest <- pd_nested$child[[1L]]
     styler:::token_is_on_aligned_line(nest)
   }
 )

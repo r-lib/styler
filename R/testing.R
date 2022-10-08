@@ -290,8 +290,8 @@ generate_test_samples <- function() {
       ""
     } else {
       c(
-        paste0(x[1], gen(x[-1])),
-        paste0(x[1], " # comment\n", paste(x[-1], collapse = ""))
+        paste0(x[1L], gen(x[-1L])),
+        paste0(x[1L], " # comment\n", paste(x[-1L], collapse = ""))
       )
     }
   }

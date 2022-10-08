@@ -144,7 +144,7 @@ drop_cached_children <- function(pd) {
 #' styler:::get_parse_data(c("", "c(#", "1)", "#"))
 #' @keywords internal
 find_pos_id_to_keep <- function(pd) {
-  if (pd$is_cached[1]) {
+  if (pd$is_cached[1L]) {
     pd$pos_id[pd$parent <= 0]
   } else {
     pd$pos_id
@@ -291,9 +291,9 @@ add_attributes_caching <- function(pd_flat, transformers, more_specs) {
   pd_flat$block <- rep(NA, nrow(pd_flat))
   pd_flat$is_cached <- rep(FALSE, nrow(pd_flat))
   if (cache_is_activated()) {
-    is_parent <- pd_flat$parent == 0
+    is_parent <- pd_flat$parent == 0L
     pd_flat$is_cached[is_parent] <- map_lgl(
-      pd_flat$text[pd_flat$parent == 0],
+      pd_flat$text[pd_flat$parent == 0L],
       is_cached, transformers,
       more_specs = more_specs
     )
