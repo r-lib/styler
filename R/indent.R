@@ -14,7 +14,7 @@ NULL
 indent_without_paren_for_while_fun <- function(pd, indent_by) {
   tokens <- c("FOR", "WHILE", "FUNCTION")
   nrow <- nrow(pd)
-  if (!(pd$token[1] %in% tokens)) {
+  if (!(pd$token[1L] %in% tokens)) {
     return(pd)
   }
   if (is_curly_expr(pd$child[[nrow]])) {
@@ -32,8 +32,8 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 #' @importFrom rlang seq2
 #' @keywords internal
 indent_without_paren_if_else <- function(pd, indent_by) {
-  expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1])
-  is_if <- pd$token[1] == "IF"
+  expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1L])
+  is_if <- pd$token[1L] == "IF"
   if (!is_if) {
     return(pd)
   }
@@ -52,8 +52,8 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_else_idx <- next_non_comment(pd, else_idx)
   has_else_without_curly_or_else_chid <-
     any(pd$token == "ELSE") &&
-      pd$child[[expr_after_else_idx]]$token[1] != "'{'" &&
-      pd$child[[expr_after_else_idx]]$token[1] != "IF"
+      pd$child[[expr_after_else_idx]]$token[1L] != "'{'" &&
+      pd$child[[expr_after_else_idx]]$token[1L] != "IF"
 
   needs_indention_now <- pd$lag_newlines[
     next_non_comment(pd, which(pd$token == "ELSE"))
@@ -97,7 +97,7 @@ compute_indent_indices <- function(pd,
   needs_indention <- needs_indention(pd, potential_triggers,
     other_trigger_tokens = c("EQ_SUB", "EQ_FORMALS")
   )
-  trigger <- potential_triggers[needs_indention][1]
+  trigger <- potential_triggers[needs_indention][1L]
   if (is.na(trigger)) {
     return(numeric(0))
   }
@@ -163,7 +163,7 @@ needs_indention <- function(pd,
 needs_indention_one <- function(pd,
                                 potential_trigger_pos,
                                 other_trigger_tokens) {
-  before_first_break <- which(pd$lag_newlines > 0L)[1] - 1L
+  before_first_break <- which(pd$lag_newlines > 0L)[1L] - 1L
   if (is.na(before_first_break)) {
     return(FALSE)
   }

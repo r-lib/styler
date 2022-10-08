@@ -216,7 +216,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
   active_segment <- as.integer(all_lines %in% roxygen_examples)
   segment_id <- cumsum(abs(c(0L, diff(active_segment)))) + 1L
   separated <- split(text, factor(segment_id))
-  restyle_selector <- if (roxygen_examples[1] == 1L) {
+  restyle_selector <- if (roxygen_examples[1L] == 1L) {
     odd_index
   } else {
     even_index
@@ -377,7 +377,7 @@ apply_transformers <- function(pd_nested, transformers) {
 #'   Needed for reverse engineering the scope.
 #' @keywords internal
 parse_tree_must_be_identical <- function(transformers) {
-  length(transformers$token) == 0
+  length(transformers$token) == 0L
 }
 
 #' Verify the styling

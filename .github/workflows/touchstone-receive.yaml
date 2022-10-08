@@ -9,7 +9,7 @@ on:
     paths:
       # Directories with source code and benchmarking code
       - "inst/**"
-      - "r/**"
+      - "R/**"
       - "src/**"
       - "touchstone/**"
       # Benchmarking config file

@@ -28,7 +28,7 @@ ensure_last_n_empty <- function(x, n = 1) {
     return("")
   }
   x <- c(x, "", "")
-  x <- x[seq(1, length(x) - which(rev(x) != "")[1] + 1L)]
+  x <- x[seq(1, length(x) - which(rev(x) != "")[1L] + 1L)]
   c(x, rep("", n))
 }
 

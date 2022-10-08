@@ -65,7 +65,7 @@ set_line_break_before_curly_opening <- function(pd) {
       ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
     ) != "'{'"
     last_expr_idx <- max(which(pd$token == "expr"))
-    is_last_expr <- if (any(c("IF", "WHILE") == pd$token[1])) {
+    is_last_expr <- if (any(c("IF", "WHILE") == pd$token[1L])) {
       # rule not applicable for if and while
       TRUE
     } else {
@@ -75,7 +75,7 @@ set_line_break_before_curly_opening <- function(pd) {
     linebreak_before_curly <- ifelse(is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
       # and goes to else case
-      any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1])] > 0L),
+      any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1L])] > 0L),
       # if not a function call, only break line if it is a pipe followed by {}
       pd$token[line_break_to_set_idx] %in% c("SPECIAL-PIPE", "PIPE")
     )
@@ -156,15 +156,16 @@ style_line_break_around_curly <- function(strict, pd) {
     opening_before <- (pd$token == "'{'")
     to_break <- lag(opening_before, default = FALSE) | closing_before
     len_to_break <- sum(to_break)
-    pd$lag_newlines[to_break] <- ifelse(rep(strict, len_to_break),
-      1L,
-      pmax(1L, pd$lag_newlines[to_break])
+    pd$lag_newlines[to_break] <- ifelse(
+      pd$token[to_break] == "COMMENT",
+      pmin(1L, pd$lag_newlines[to_break]),
+      if (strict) 1L else pmax(1L, pd$lag_newlines[to_break])
     )
   } else {
     is_else <- pd$token == "ELSE"
     if (any(pd$token_before[is_else] == "'}'")) {
       pd$lag_newlines[is_else] <- 0L
-      pd$spaces[c(is_else, FALSE)[-1]] <- 1L
+      pd$spaces[c(is_else, FALSE)[-1L]] <- 1L
     }
     is_if_after_else <- pd$token == "ELSE" & pd$token_after == "IF"
     pd$lag_newlines[lag(is_if_after_else)] <- 0L
@@ -298,7 +299,7 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
   if (!is_function_call(pd) && !is_subset_expr(pd)) {
     return(pd)
   }
-  has_force_text_before <- last(pd$child[[1]]$text) %in% force_text_before
+  has_force_text_before <- last(pd$child[[1L]]$text) %in% force_text_before
   if (has_force_text_before) {
     break_pos <- c(
       which(lag(pd$token %in% c("','", "COMMENT"))),
@@ -316,11 +317,11 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
   }
   exception_pos <- c(
     which(pd$token %in% except_token_after),
-    ifelse(last(pd$child[[1]]$text) %in% except_text_before, break_pos, NA)
+    ifelse(last(pd$child[[1L]]$text) %in% except_text_before, break_pos, NA)
   )
   pd$lag_newlines[setdiff(break_pos, exception_pos)] <- 1L
   if (has_force_text_before) {
-    first_arg <- which(pd$token == "expr")[2]
+    first_arg <- which(pd$token == "expr")[2L]
     if (lag(pd$token)[first_arg] != "COMMENT") {
       pd$lag_newlines[first_arg] <- 0L
     }
@@ -338,7 +339,7 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
 #' @inheritParams set_line_break_if_call_is_multi_line
 #' @keywords internal
 find_line_break_position_in_multiline_call <- function(pd) {
-  candidate <- (which(pd$token == "EQ_SUB") - 1L)[1]
+  candidate <- (which(pd$token == "EQ_SUB") - 1L)[1L]
   if (is.na(candidate)) {
     3L
   } else {
@@ -377,7 +378,7 @@ remove_line_break_in_fun_call <- function(pd, strict) {
       ] <- 1L
     }
     if (nrow(pd) == 3L) {
-      pd$lag_newlines[3] <- 0L
+      pd$lag_newlines[3L] <- 0L
     }
   }
   pd
@@ -386,15 +387,15 @@ remove_line_break_in_fun_call <- function(pd, strict) {
 
 set_linebreak_after_ggplot2_plus <- function(pd) {
   # if expression is unary, first token is +. Exclude this case.
-  is_plus_raw <- c(FALSE, pd$token[-1] == "'+'")
+  is_plus_raw <- c(FALSE, pd$token[-1L] == "'+'")
   if (any(is_plus_raw)) {
-    first_plus <- which(is_plus_raw)[1]
+    first_plus <- which(is_plus_raw)[1L]
     next_non_comment <- next_non_comment(pd, first_plus)
     is_plus_or_comment_after_plus_before_fun_call <-
       lag(is_plus_raw, next_non_comment - first_plus - 1L, default = FALSE) &
         (pd$token_after == "SYMBOL_FUNCTION_CALL" | pd$token_after == "SYMBOL_PACKAGE")
     if (any(is_plus_or_comment_after_plus_before_fun_call, na.rm = TRUE)) {
-      gg_call <- pd$child[[previous_non_comment(pd, first_plus)]]$child[[1]]
+      gg_call <- pd$child[[previous_non_comment(pd, first_plus)]]$child[[1L]]
       if (!is.null(gg_call) && isTRUE(gg_call$text[gg_call$token == "SYMBOL_FUNCTION_CALL"] == "ggplot")) {
         plus_without_comment_after <- setdiff(
           which(is_plus_raw),
