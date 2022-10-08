@@ -165,7 +165,7 @@ style_line_break_around_curly <- function(strict, pd) {
     is_else <- pd$token == "ELSE"
     if (any(pd$token_before[is_else] == "'}'")) {
       pd$lag_newlines[is_else] <- 0L
-      pd$spaces[c(is_else, FALSE)[-1]] <- 1L
+      pd$spaces[c(is_else, FALSE)[-1L]] <- 1L
     }
     is_if_after_else <- pd$token == "ELSE" & pd$token_after == "IF"
     pd$lag_newlines[lag(is_if_after_else)] <- 0L
@@ -387,7 +387,7 @@ remove_line_break_in_fun_call <- function(pd, strict) {
 
 set_linebreak_after_ggplot2_plus <- function(pd) {
   # if expression is unary, first token is +. Exclude this case.
-  is_plus_raw <- c(FALSE, pd$token[-1] == "'+'")
+  is_plus_raw <- c(FALSE, pd$token[-1L] == "'+'")
   if (any(is_plus_raw)) {
     first_plus <- which(is_plus_raw)[1L]
     next_non_comment <- next_non_comment(pd, first_plus)

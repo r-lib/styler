@@ -46,7 +46,7 @@ add_roxygen_mask <- function(text, initial_text, example_type) {
   space <- ifelse(text == "", "", " ")
   out <- c(
     paste0("#' @", example_type, space[1L], text[1L]),
-    map2_chr(space[-1], text[-1], ~ paste0("#'", .x, .y))
+    map2_chr(space[-1L], text[-1L], ~ paste0("#'", .x, .y))
   )
 
   ordinary_comment <- grep("^#[^']", initial_text, value = TRUE)
