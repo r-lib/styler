@@ -112,7 +112,7 @@ apply_stylerignore <- function(flattened_pd) {
   # cannot rely on flattened_pd$text == option_read("styler.ignore_start")
   # because if the marker logic is not correct (twice off in a row), we'll
   # get it wrong.
-  to_ignore <- flattened_pd$stylerignore == TRUE
+  to_ignore <- flattened_pd$stylerignore
   not_first <- flattened_pd$stylerignore == lag(
     flattened_pd$stylerignore,
     default = FALSE
