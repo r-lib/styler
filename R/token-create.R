@@ -172,23 +172,23 @@ wrap_expr_in_curly <- function(pd,
   if (is_curly_expr(pd)) {
     return(pd)
   }
-  if (stretch_out[1]) {
-    pd$lag_newlines[1] <- 1L
+  if (stretch_out[1L]) {
+    pd$lag_newlines[1L] <- 1L
   }
 
   opening <- create_tokens("'{'", "{",
     pos_ids = create_pos_ids(pd, 1L, after = FALSE),
-    spaces = 1L - as.integer(stretch_out[1]),
-    stylerignore = pd$stylerignore[1],
-    indents = pd$indent[1]
+    spaces = 1L - as.integer(stretch_out[1L]),
+    stylerignore = pd$stylerignore[1L],
+    indents = pd$indent[1L]
   )
 
   closing <- create_tokens(
     "'}'", "}",
-    spaces = space_after, lag_newlines = as.integer(stretch_out[2]),
+    spaces = space_after, lag_newlines = as.integer(stretch_out[2L]),
     pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
-    stylerignore = pd$stylerignore[1],
-    indents = pd$indent[1]
+    stylerignore = pd$stylerignore[1L],
+    indents = pd$indent[1L]
   )
 
   bind_rows(opening, pd, closing) %>%

@@ -145,7 +145,7 @@ drop_cached_children <- function(pd) {
 #' styler:::get_parse_data(c("", "c(#", "1)", "#"))
 #' @keywords internal
 find_pos_id_to_keep <- function(pd) {
-  if (pd$is_cached[1]) {
+  if (pd$is_cached[1L]) {
     pd$pos_id[pd$parent <= 0]
   } else {
     pd$pos_id

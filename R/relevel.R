@@ -102,8 +102,8 @@ wrap_expr_in_expr <- function(pd) {
     pos_ids = create_pos_ids(pd, 1, after = FALSE),
     child = pd,
     terminal = FALSE,
-    stylerignore = pd$stylerignore[1],
-    indents = pd$indent[1]
+    stylerignore = pd$stylerignore[1L],
+    indents = pd$indent[1L]
   )
 }
 
@@ -214,7 +214,7 @@ find_block_id <- function(pd) {
 #' @keywords internal
 relocate_eq_assign_one <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_ind <- seq2(idx_eq_assign[1] - 1L, last(idx_eq_assign) + 1L)
+  eq_ind <- seq2(idx_eq_assign[1L] - 1L, last(idx_eq_assign) + 1L)
   # initialize because wrap_expr_in_expr -> create_tokens -> requires it
   pd$indent <- 0
   eq_expr <- pd[eq_ind, ] %>%
@@ -240,9 +240,9 @@ relocate_eq_assign_one <- function(pd) {
 #' @keywords internal
 add_line_col_to_wrapped_expr <- function(pd) {
   if (nrow(pd) > 1) abort("pd must be a wrapped expression that has one row.")
-  pd$line1 <- pd$child[[1]]$line1[1]
-  pd$line2 <- last(pd$child[[1]]$line2)
-  pd$col1 <- pd$child[[1]]$col1[1]
-  pd$col2 <- last(pd$child[[1]]$col2)
+  pd$line1 <- pd$child[[1L]]$line1[1L]
+  pd$line2 <- last(pd$child[[1L]]$line2)
+  pd$col1 <- pd$child[[1L]]$col1[1L]
+  pd$col2 <- last(pd$child[[1L]]$col2)
   pd
 }

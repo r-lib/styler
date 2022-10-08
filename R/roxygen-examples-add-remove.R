@@ -5,7 +5,7 @@
 #' @importFrom rlang seq2
 remove_dont_mask <- function(roxygen) {
   mask <- c(
-    1L, 2L, if (roxygen[3] == "\n") 3L, last(which(roxygen == "}"))
+    1L, 2L, if (roxygen[3L] == "\n") 3L, last(which(roxygen == "}"))
   ) %>% sort()
   list(
     code = roxygen[-mask], mask = paste(roxygen[seq2(1, 2)], collapse = "")
@@ -45,7 +45,7 @@ remove_roxygen_header <- function(text) {
 add_roxygen_mask <- function(text, initial_text, example_type) {
   space <- ifelse(text == "", "", " ")
   out <- c(
-    paste0("#' @", example_type, space[1], text[1]),
+    paste0("#' @", example_type, space[1L], text[1L]),
     map2_chr(space[-1], text[-1], ~ paste0("#'", .x, .y))
   )
 
@@ -55,7 +55,7 @@ add_roxygen_mask <- function(text, initial_text, example_type) {
   }
   without_mask <- remove_roxygen_mask(out)
   for (idx in seq_along(ordinary_comment)) {
-    to_replace <- which(ordinary_comment[idx] == without_mask)[1]
+    to_replace <- which(ordinary_comment[idx] == without_mask)[1L]
     out[to_replace] <- ordinary_comment[idx]
     without_mask[to_replace] <- NA
   }

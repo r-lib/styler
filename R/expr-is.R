@@ -12,23 +12,23 @@ is_curly_expr <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
   }
-  pd$token[1] == "'{'"
+  pd$token[1L] == "'{'"
 }
 
 is_for_expr <- function(pd) {
-  pd$token[1] == "FOR"
+  pd$token[1L] == "FOR"
 }
 
 #' @describeIn pd_is Checks whether `pd` contains is a conditional expression.
 #' @keywords internal
 is_cond_expr <- function(pd) {
-  pd$token[1] == "IF"
+  pd$token[1L] == "IF"
 }
 
 #' @describeIn pd_is Checks whether `pd` contains is a while loop.
 #' @keywords internal
 is_while_expr <- function(pd) {
-  pd$token[1] == "WHILE"
+  pd$token[1L] == "WHILE"
 }
 
 #' @describeIn pd_is Checks whether `pd` is a function call.
@@ -37,10 +37,10 @@ is_function_call <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
   }
-  if (is.na(pd$token_before[2])) {
+  if (is.na(pd$token_before[2L])) {
     return(FALSE)
   }
-  pd$token_before[2] == "SYMBOL_FUNCTION_CALL"
+  pd$token_before[2L] == "SYMBOL_FUNCTION_CALL"
 }
 
 #' @describeIn pd_is Checks whether `pd` is a function declaration.
@@ -49,7 +49,7 @@ is_function_dec <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
   }
-  pd$token[1] == "FUNCTION"
+  pd$token[1L] == "FUNCTION"
 }
 
 #' @describeIn pd_is Checks for every token whether or not it is a comment.
@@ -96,7 +96,7 @@ is_subset_expr <- function(pd) {
   if (is.null(pd) || nrow(pd) == 1) {
     return(FALSE)
   }
-  pd$token[2] == "'['"
+  pd$token[2L] == "'['"
 }
 
 
