@@ -113,10 +113,6 @@ compute_indent_indices <- function(pd,
     stop <- npd
   } else {
     offset <- if (any(pd$token == "LBB")) 2L else 1L
-      2
-    } else {
-      1
-    }
     stop <- last(which(pd$token %in% token_closing)[needs_indention]) - offset
   }
 
