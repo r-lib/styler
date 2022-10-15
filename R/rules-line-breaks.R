@@ -128,7 +128,7 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
     (pd$token %in% ops) &
       (pd$lag_newlines > 0L) &
       (pd$token_before != "COMMENT") &
-      (lag(pd$token) != "'['")
+      !(lag(pd$token) %in% c("LBB", "'['"))
 
   pd$lag_newlines[comma_with_line_break_that_can_be_removed_before] <- 0L
   pd$lag_newlines[lag(comma_with_line_break_that_can_be_removed_before)] <- 1L
@@ -137,7 +137,7 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
     (pd$token == "EQ_SUB") &
       (pd$lag_newlines > 0L) &
       (pd$token_before != "COMMENT") &
-      (lag(pd$token) != "'['")
+      !(lag(pd$token) %in% c("'['", "LBB"))
   )
 
   pd$lag_newlines[comma_with_line_break_that_can_be_moved_two_tokens_left] <- 0L
@@ -362,7 +362,12 @@ set_line_break_before_closing_call <- function(pd, except_token_before) {
     pd$lag_newlines[setdiff(npd, exception)] <- 0L
     return(pd)
   }
-  pd$lag_newlines[npd] <- 1L
+  idx_non_comment <- previous_non_comment(pd, npd)
+  if (pd$token[idx_non_comment] == "']'") {
+    pd$lag_newlines[idx_non_comment] <- 1L
+  } else {
+    pd$lag_newlines[npd] <- 1L
+  }
   pd
 }
 
