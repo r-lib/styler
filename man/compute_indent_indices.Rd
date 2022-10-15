@@ -41,7 +41,7 @@ Since text \code{[[} has token \code{"LBB"} and text \verb{]]} is parsed as two 
 }
 
 \examples{
-styler:::parse_text('a[1]')
-styler:::parse_text('a[[1\n]]')
+styler:::parse_text("a[1]")
+styler:::parse_text("a[[1\n]]")
 }
 \keyword{internal}
