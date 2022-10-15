@@ -4,7 +4,7 @@
 indent_braces <- function(pd, indent_by) {
   indent_indices <- compute_indent_indices(
     pd,
-    token_opening = c("'('", "'['", "'{'"),
+    token_opening = c("'('", "'['", "'{'", "LBB"),
     token_closing = c("')'", "']'", "'}'")
   )
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
