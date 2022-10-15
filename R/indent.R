@@ -112,7 +112,7 @@ compute_indent_indices <- function(pd,
   if (is.null(token_closing)) {
     stop <- npd
   } else {
-    offset <- if (any(pd$token == "LBB")) {
+    offset <- if (any(pd$token == "LBB")) 2L else 1L
       2
     } else {
       1
