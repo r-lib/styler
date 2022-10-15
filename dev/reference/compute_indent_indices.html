@@ -144,7 +144,22 @@ example in if-else expressions, this is not the case and indenting
 everything between '(' and the penultimate token would result in the wrong
 formatting.</p>
     </div>
+    <div id="handing-of-">
+    <h2>Handing of <code>[[</code></h2>
+    
 
+<p>Since text <code>[[</code> has token <code>"LBB"</code> and text <code>]]</code> is parsed as two independent
+<code>]</code> (see 'Examples'), indention has to stop at the first <code>]</code>.</p>
+    </div>
+
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_text</span><span class="op">(</span><span class="st">"a[1]"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a[1]</span>
+<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_text</span><span class="op">(</span><span class="st">"a[[1\n]]"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a[[1]]</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
