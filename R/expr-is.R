@@ -96,7 +96,7 @@ is_subset_expr <- function(pd) {
   if (is.null(pd) || nrow(pd) == 1) {
     return(FALSE)
   }
-  pd$token[2L] %in% c("'['", "LBB")
+  pd$token[2L] %in% subset_token_opening
 }
 
 
