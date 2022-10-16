@@ -380,6 +380,8 @@ test_transformers_drop <- function(transformers) {
 
 
 skip_during_parallel <- function() {
-  is_parallel <- as.logical(as.logical(toupper(Sys.getenv("STYLER_TEST_IS_TRULY_PARALLEL", TRUE))))
-  testthat::skip_if(is_parallel)
+  Sys.getenv("STYLER_TEST_IS_TRULY_PARALLEL", TRUE) %>%
+    toupper() %>%
+    as.logical() %>%
+    testthat::skip_if()
 }
