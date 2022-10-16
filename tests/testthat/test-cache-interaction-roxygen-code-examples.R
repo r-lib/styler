@@ -42,18 +42,6 @@ test_that("roxzgen code examples are written to cache as both individual express
   )
 })
 
-
-test_that("roxzgen code examples are written to cache as whole expressions bring speedgain", {
-  skip_on_cran()
-  local_test_setup(cache = TRUE)
-  text <- readLines(test_path("cache-with-r-cache/roxygen-cache-1.R"))
-  first <- system.time(styled <- style_text(text))
-  # don't use full cache, only roxygen cache
-  styled[1] <- "#' This is a nother text"
-  second <- system.time(style_text(styled))
-  expect_gt(first["elapsed"], 4 * second["elapsed"])
-})
-
 test_that("cache is deactivated at end of caching related testthat file", {
   expect_false(cache_is_activated())
 })
