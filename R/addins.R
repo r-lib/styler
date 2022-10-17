@@ -75,7 +75,7 @@ style_active_file <- function() {
     paste0(ensure_last_n_empty(out), collapse = "\n"),
     id = context$id
   )
-  if (save_after_styling_is_active() == TRUE && context$path != "") {
+  if (save_after_styling_is_active() && context$path != "") {
     rstudioapi::documentSave(context$id)
   }
   rstudioapi::setCursorPosition(context$selection[[1L]]$range)
@@ -138,7 +138,7 @@ style_selection <- function() {
     ), collapse = "\n"),
     id = context$id
   )
-  if (save_after_styling_is_active() == TRUE && context$path != "") {
+  if (save_after_styling_is_active() && context$path != "") {
     invisible(rstudioapi::documentSave(context$id))
   }
 }

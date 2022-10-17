@@ -377,3 +377,11 @@ test_transformers_drop <- function(transformers) {
     }
   })
 }
+
+
+skip_during_parallel <- function() {
+  Sys.getenv("STYLER_TEST_IS_TRULY_PARALLEL", TRUE) %>%
+    toupper() %>%
+    as.logical() %>%
+    testthat::skip_if()
+}

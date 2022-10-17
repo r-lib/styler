@@ -87,8 +87,15 @@ indent_without_paren_if_else <- function(pd, indent_by) {
 #' example in if-else expressions, this is not the case and indenting
 #' everything between '(' and the penultimate token would result in the wrong
 #' formatting.
+#' @section Handing of `[[`:
+#' Since text `[[` has token `"LBB"` and text `]]` is parsed as two independent
+#' `]` (see 'Examples'), indention has to stop at the first `]`.
+# one token earlier
 #' @importFrom rlang seq2
 #' @keywords internal
+#' @examples
+#' styler:::parse_text("a[1]")
+#' styler:::parse_text("a[[1\n]]")
 compute_indent_indices <- function(pd,
                                    token_opening,
                                    token_closing = NULL) {
@@ -105,7 +112,8 @@ compute_indent_indices <- function(pd,
   if (is.null(token_closing)) {
     stop <- npd
   } else {
-    stop <- last(which(pd$token %in% token_closing)[needs_indention]) - 1
+    offset <- if (any(pd$token == "LBB")) 2L else 1L
+    stop <- last(which(pd$token %in% token_closing)[needs_indention]) - offset
   }
 
   seq2(start, stop)
