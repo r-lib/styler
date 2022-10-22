@@ -70,3 +70,5 @@ op_token <- c(
   "EQ_SUB", "ELSE", "IN",
   "EQ_FORMALS"
 )
+
+subset_token_opening <- c("'['", "LBB")
