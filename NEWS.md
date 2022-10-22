@@ -8,36 +8,35 @@ bug fixes and the removal of 8 recursive dependencies. We also welcome
 \@IndrajeetPatil as a new contributor to {styler}, who has contributed 
 significantly to this and and previous releases.
 
-
 **Features**
 
 - `style_dir()` and `style_pkg()` now default to styling all supported file
-formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package)
-directory (#965, #931, #1033).
- - `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
- - Minimum needed R version is now bumped to `3.5` (#986).
+  formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package)
+  directory (#965, #931, #1033).
+- `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
+- minimum needed R version is now bumped to `3.5` (#986).
 
 - alignment is now detected for function declaration in a similar way as for
-function calls (#968).
+  function calls (#968).
 - new R option `styler.ignore_alignment` controls if alignment should be
-detected (and preserved) or not (#932).
+  detected (and preserved) or not (#932).
 
 
 **Bug Fixes**
 
 - alignment is detected in `tibble::tribble()` (and similar) calls with more
-than 3 columns when left aligned (#945).
+  than 3 columns when left aligned (#945).
 
-- Fix alignment detection for one column, mixed named/unnamed (#1035).
+- fix alignment detection for one column, mixed named/unnamed (#1035).
 
-- If there are only empty lines in a code chunk, they are all removed (#936).
+- if there are only empty lines in a code chunk, they are all removed (#936).
 
 - apply rules for [ to [[ and its closing counterpair (#1030)
 
-- There is now at most one line break after `{` and before `#` (#952, #1022).
+- there is now at most one line break after `{` and before `#` (#952, #1022).
 
-- Line breaks may be added to function calls to ensure indention symmetry for
-round braces (#975).
+- line breaks may be added to function calls to ensure indention symmetry for
+  round braces (#975).
 
 - the cache is also invalidated on changing the stylerignore markers (#932).
 
@@ -45,41 +44,41 @@ round braces (#975).
 cases (#939).
 
 - `while ({})` statements are now handled the same way as function statements
-with regards to breaking lines (#967).
+  with regards to breaking lines (#967).
 
-- Parsing of {roxygen2} example comments now also works for edge cases when
-there is no literal code immediately following after the end of the example
-section (#940).
+- parsing of {roxygen2} example comments now also works for edge cases when
+  there is no literal code immediately following after the end of the example
+  section (#940).
 
-- Files with no tokens in it are now transformed into zero-byte files (#962).
+- files with no tokens in it are now transformed into zero-byte files (#962).
 
 **Documentation**
 
-- Old (and outdated) vignettes have been removed (#955). To
-access them, do `git checkout v1.0.0`.
-- Minor improvements to the documentation (#958).
- - turned off `styler.print.Vertical` in vignettes so ANSI output of
+- old (and outdated) vignettes have been removed (#955). To access them, do 
+  `git checkout v1.0.0`.
+- minor improvements to the documentation (#958).
+- turned off `styler.colored_print.vertical` in vignettes so ANSI output of
  {prettycode} not messing with {pkgdown} (#956, #957).
 
 
 **Performance and code quality improvements**
 
-- Use integer literals and avoid coercions where needed (#994).
- - Don't preserve names for `unlist()` (#998).
-- Remove unused variables (#999).
-- Get rid of lints with performance implications (#1000).
-- Use more efficient match() alternative (#1001).
-- Don't use `nrow` arg in `new_tibble()` calls (#1003).
-- Performance improvements with `if()` + `else()` instead of `ifelse()` (#1006).
- - Replace tibbles with data frames to improve performance (#1007). 
-- Simplify `styler_df()` signature (#1009).
-- Minor cleanup (#1016).
- - Non-exported and unused functions `odd()` and `even()` were removed
+- use integer literals and avoid coercions where needed (#994).
+- don't preserve names for `unlist()` (#998).
+- remove unused variables (#999).
+- get rid of lints with performance implications (#1000).
+- use more efficient match() alternative (#1001).
+- don't use `nrow` arg in `new_tibble()` calls (#1003).
+- performance improvements with `if()` + `else()` instead of `ifelse()` (#1006).
+- replace tibbles with data frames to improve performance (#1007). 
+- simplify `styler_df()` signature (#1009).
+- minor cleanup (#1016).
+- non-exported and unused functions `odd()` and `even()` were removed
  (#989).
- - All (R)md files in this project's source code are now formatted with
-default pandoc markdown formatter. This conversion is required when using
-the visual mode in RStudio (#941).
-- Improved code quality by fixing {lintr} warnings (#960, #1028).
+- all (R)md files in this project's source code are now formatted with default 
+  pandoc markdown formatter. This conversion is required when using the visual 
+  mode in RStudio (#941).
+- improved code quality by fixing {lintr} warnings (#960, #1028).
 
 
 **Dependency related changes**
@@ -87,22 +86,22 @@ the visual mode in RStudio (#941).
 In total, 8 recursive dependencies are removed: {ellipsis}, {pillar}, 
 {rematch2}, {tibble}, {utf8}, {fansi}, {lifecycle}, {pkgconfig}.
 
-- Don't import entire tibble package (#1007).
-- Drop {rematch2} dependency (#1011).
+- don't import entire tibble package (#1007).
+- drop {rematch2} dependency (#1011).
 
 
 **Infrastructure**
 
-- Upgrade testing infra to testthat 3e (#949).
-- Run tests in parallel (#978).
-- Run some tests sequentially (#1031)
-- Better stack tracing for profiling (#979, #980).
-- Add flags to skip code coverage for zzz.R (#1005).
- - Error now on R CMD note (#987).
-- Test on latest Ubuntu instead of Ubuntu 18.04 (#982).
-- Use latest GitHub Actions for R (#1034).
-- Update {pkgdown} action to always build, but only deploy on default branch
-(#946).
+- upgrade testing infra to testthat 3e (#949).
+- run tests in parallel (#978).
+- run some tests sequentially (#1031)
+- better stack tracing for profiling (#979, #980).
+- add flags to skip code coverage for zzz.R (#1005).
+- error now on R CMD note (#987).
+- test on latest Ubuntu instead of Ubuntu 18.04 (#982).
+- use latest GitHub Actions for R (#1034).
+- update {pkgdown} action to always build, but only deploy on default branch 
+  (#946).
 - remove pre-commit push hook for news entry (#1023).
 
 A big hand to everyone who made this release possible: 
