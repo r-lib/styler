@@ -1,101 +1,109 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# styler 1.7.0.9003
+
+# styler 1.8.0
+
+{styler} 1.8.0 comes with a host of new features, around 40% speed improvement,
+bug fixes and the removal of 8 recursive dependencies. We also welcome 
+\@IndrajeetPatil as a new contributor to {styler}, who has contributed 
+significantly to this and and previous releases.
+
+
+**Features**
+
+- `style_dir()` and `style_pkg()` now default to styling all supported file
+formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package)
+directory (#965, #931, #1033).
+ - `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
+ - Minimum needed R version is now bumped to `3.5` (#986).
+
+- alignment is now detected for function declaration in a similar way as for
+function calls (#968).
+- new R option `styler.ignore_alignment` controls if alignment should be
+detected (and preserved) or not (#932).
+
+
+**Bug Fixes**
+
+- alignment is detected in `tibble::tribble()` (and similar) calls with more
+than 3 columns when left aligned (#945).
+
+- Fix alignment detection for one column, mixed named/unnamed (#1035).
+
+- If there are only empty lines in a code chunk, they are all removed (#936).
+
+- apply rules for [ to [[ and its closing counterpair (#1030)
+
+- There is now at most one line break after `{` and before `#` (#952, #1022).
+
+- Line breaks may be added to function calls to ensure indention symmetry for
+round braces (#975).
+
+- the cache is also invalidated on changing the stylerignore markers (#932).
+
+- `{` is not put on a new line after `=` and in `function() {` for some edge
+cases (#939).
+
+- `while ({})` statements are now handled the same way as function statements
+with regards to breaking lines (#967).
+
+- Parsing of {roxygen2} example comments now also works for edge cases when
+there is no literal code immediately following after the end of the example
+section (#940).
+
+- Files with no tokens in it are now transformed into zero-byte files (#962).
+
+**Documentation**
+
+- Old (and outdated) vignettes have been removed (#955). To
+access them, do `git checkout v1.0.0`.
+- Minor improvements to the documentation (#958).
+ - turned off `styler.print.Vertical` in vignettes so ANSI output of
+ {prettycode} not messing with {pkgdown} (#956, #957).
+
 
 **Performance and code quality improvements**
 
-- Use integer literals and avoid coercions where needed (\@IndrajeetPatil, #994).
-- Don't preserve names for `unlist()` (\@IndrajeetPatil, #998).
-- Remove unused variables (\@IndrajeetPatil, #999).
-- Get rid of lints with performance implications (\@IndrajeetPatil, #1000).
-- Use more efficient match() alternative (\@IndrajeetPatil, #1001).
-- Don't use `nrow` arg in `new_tibble()` calls (\@IndrajeetPatil, #1003).
-- Performance improvements with `if()` + `else()` instead of `ifelse()` (\@IndrajeetPatil, #1006).
-- Replace tibbles with data frames to improve performance (\@IndrajeetPatil, #1007). 
-- Simplify `styler_df()` signature (\@IndrajeetPatil, #1009).
-- Minor cleanup (\@IndrajeetPatil, #1016).
+- Use integer literals and avoid coercions where needed (#994).
+ - Don't preserve names for `unlist()` (#998).
+- Remove unused variables (#999).
+- Get rid of lints with performance implications (#1000).
+- Use more efficient match() alternative (#1001).
+- Don't use `nrow` arg in `new_tibble()` calls (#1003).
+- Performance improvements with `if()` + `else()` instead of `ifelse()` (#1006).
+ - Replace tibbles with data frames to improve performance (#1007). 
+- Simplify `styler_df()` signature (#1009).
+- Minor cleanup (#1016).
+ - Non-exported and unused functions `odd()` and `even()` were removed
+ (#989).
+ - All (R)md files in this project's source code are now formatted with
+default pandoc markdown formatter. This conversion is required when using
+the visual mode in RStudio (#941).
+- Improved code quality by fixing {lintr} warnings (#960, #1028).
 
 
 **Dependency related changes**
 
-- Don't import entire tibble package (\@IndrajeetPatil, #1007).
-- Drop {rematch2} dependency (\@IndrajeetPatil, #1011).
+In total, 8 recursive dependencies are removed: {ellipsis}, {pillar}, 
+{rematch2}, {tibble}, {utf8}, {fansi}, {lifecycle}, {pkgconfig}.
 
-**Other changes**
-
-- Add flags to skip code coverage for zzz.R (\@IndrajeetPatil, #1005).
-
-
-# styler 1.7.0.9002 (Development version)
-
-- Same as previous version.
+- Don't import entire tibble package (#1007).
+- Drop {rematch2} dependency (#1011).
 
 
-# styler 1.7.0.9000 
+**Infrastructure**
 
-**User-facing changes**
-
--   `style_dir()` and `style_pkg()` now default to styling all supported file
-    formats (`.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.qmd`) in the (package)
-    directory (\@IndrajeetPatil, #965, #931).
--   `style_pkg()` now excludes the auto-generated `R/cpp11.R` file (#977).
--   Minimum needed R version is now bumped to `3.5` (\@IndrajeetPatil, #986).
-
-**Features**
-
--   alignment is now detected for function declaration in a similar way as for
-    function calls (#968).
--   new R option `styler.ignore_alignment` controls if alignment should be
-    detected (and preserved) or not (#932).
-
-**Bug Fixes**
-
--   alignment is detected in `tibble::tribble()` (and similar) calls with more
-    than 3 columns when left aligned (#945).
-
--   If there are only empty lines in a code chunk, they are all removed (#936).
-
--   There is now always one line break after `{` and before `#` (#952).
-
--   Line breaks may be added to function calls to ensure indention symmetry for
-    round braces (#975).
-
--   the cache is also invalidated on changing the stylerignore markers (#932).
-
--   `{` is not put on a new line after `=` and in `function() {` for some edge
-    cases (#939).
-
--   `while ({})` statements are now handled the same way as function statements
-    with regards to breaking lines (#967).
-
--   Parsing of {roxygen2} example comments now also works for edge cases when
-    there is no literal code immediately following after the end of the example
-    section (#940).
-
--   Files with no tokens in it are now transformed into zero-byte files (#962).
-
-**Other**
-
--   \@IndrajeetPatil is now a contributor to {styler}. Welcome and thanks for
-    everything you did so far! (#988).
--   Old (and outdated) vignettes have been removed (\@IndrajeetPatil, #955). To
-    access them, do `git checkout v1.0.0`.
--   Minor improvements to the documentation (\@IndrajeetPatil, #958).
--   turned off `styler.print.Vertical` in vignettes so ANSI output of
-    {prettycode} not messing with {pkgdown} (\@IndrajeetPatil, #956, #957).
--   Non-exported and unused functions `odd()` and `even()` were removed
-    (\@IndrajeetPatil, #989).
--   Upgrade testing infra to testthat 3e (\@IndrajeetPatil, #949).
--   All (R)md files in this project's source code are now formatted with
-    default pandoc markdown formatter. This conversion is required when using
-    the visual mode in RStudio (#941).
--   Update {pkgdown} action to always build, but only deploy on default branch
-    (#946).
--   Better stack tracing for profiling (#979, #980).
--   Improved code quality by fixing {lintr} warnings (#960).
--   Error now on R CMD note (\@IndrajeetPatil, #987).
--   Test on latest Ubuntu instead of Ubuntu 18.04 (#982).
--   Run tests in parallel (#978, \@krlmlr).
+- Upgrade testing infra to testthat 3e (#949).
+- Run tests in parallel (#978).
+- Run some tests sequentially (#1031)
+- Better stack tracing for profiling (#979, #980).
+- Add flags to skip code coverage for zzz.R (#1005).
+ - Error now on R CMD note (#987).
+- Test on latest Ubuntu instead of Ubuntu 18.04 (#982).
+- Use latest GitHub Actions for R (#1034).
+- Update {pkgdown} action to always build, but only deploy on default branch
+(#946).
+- remove pre-commit push hook for news entry (#1023).
 
 # styler 1.7.0
 
