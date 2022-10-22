@@ -109,7 +109,7 @@ token_is_on_aligned_line <- function(pd_flat) {
   previous_line <- current_col <- 0L
   # if all col1 are named or there is at max 1 column,
   # start at column 1, else start at column 2
-  start_eval <- if (max(n_cols) == 1 || alignment_col1_all_named(pd_by_line)) {
+  start_eval <- if (max(n_cols) == 1L || alignment_col1_all_named(pd_by_line)) {
     1L
   } else {
     2L
