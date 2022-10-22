@@ -105,6 +105,14 @@ In total, 8 recursive dependencies are removed: {ellipsis}, {pillar},
 (#946).
 - remove pre-commit push hook for news entry (#1023).
 
+A big hand to everyone who made this release possible: 
+
+[&#x0040;behrman](https://github.com/behrman), 
+[&#x0040;EngineerDanny](https://github.com/EngineerDanny), [&#x0040;gavinsimpson](https://github.com/gavinsimpson), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;jabenninghoff](https://github.com/jabenninghoff), 
+[&#x0040;krlmlr](https://github.com/krlmlr), 
+[&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;moodymudskipper](https://github.com/moodymudskipper), [&#x0040;RaymondBalise](https://github.com/RaymondBalise), [&#x0040;Robinlovelace](https://github.com/Robinlovelace), [&#x0040;sebffischer](https://github.com/sebffischer), 
+[&#x0040;sgorm123](https://github.com/sgorm123), [&#x0040;stefanoborini](https://github.com/stefanoborini), and [&#x0040;wdkrnls](https://github.com/wdkrnls).
+
 # styler 1.7.0
 
 -   if `else` follows directly after `if`, line breaks are removed (#935).
