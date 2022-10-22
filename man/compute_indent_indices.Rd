@@ -34,4 +34,14 @@ example in if-else expressions, this is not the case and indenting
 everything between '(' and the penultimate token would result in the wrong
 formatting.
 }
+\section{Handing of \code{[[}}{
+
+Since text \code{[[} has token \code{"LBB"} and text \verb{]]} is parsed as two independent
+\verb{]} (see 'Examples'), indention has to stop at the first \verb{]}.
+}
+
+\examples{
+styler:::parse_text("a[1]")
+styler:::parse_text("a[[1\n]]")
+}
 \keyword{internal}
