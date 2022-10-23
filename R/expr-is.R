@@ -31,8 +31,11 @@ is_while_expr <- function(pd) {
   pd$token[1L] == "WHILE"
 }
 
+
+#' Check whether `pd` is a function call
 #' @describeIn pd_is Checks whether `pd` is a function call.
-#' @keywords internal
+#' @keywords other
+#' @export
 is_function_call <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
