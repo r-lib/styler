@@ -4,6 +4,7 @@
 #' @param pos The position of the token to start the search from.
 #' @importFrom rlang seq2
 #' @keywords internal
+#' @export
 next_non_comment <- function(pd, pos) {
   if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) {
     return(integer(0))
@@ -15,6 +16,7 @@ next_non_comment <- function(pd, pos) {
   setdiff(candidates, which(pd$token == "COMMENT"))[1L]
 }
 
+#' @export
 #' @rdname next_non_comment
 previous_non_comment <- function(pd, pos) {
   if (length(pos) < 1 || is.na(pos) || pos > nrow(pd)) {
