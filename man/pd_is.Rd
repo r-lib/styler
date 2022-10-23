@@ -27,6 +27,8 @@ is_comment(pd)
 }
 \description{
 Check whether a parse table corresponds to a certain expression
+
+Check whether \code{pd} is a function call
 }
 \section{Functions}{
 \itemize{
@@ -45,3 +47,4 @@ curly brackets.
 
 }}
 \keyword{internal}
+\keyword{other}
