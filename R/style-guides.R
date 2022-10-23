@@ -479,6 +479,7 @@ tidyverse_reindention <- function() {
 #'   construction of the factor fails.
 #' @keywords internal
 #' @importFrom rlang abort
+#' @export
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
   if (!all((scope %in% levels))) {
