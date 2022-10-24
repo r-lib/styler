@@ -30,7 +30,7 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
 })
 
 
-test_that("roxzgen code examples are written to cache as whole expressions bring speedgain", {
+test_that("roxygen code examples are written to cache as whole expressions bring speedgain", {
   skip_on_cran()
   local_test_setup(cache = TRUE)
   text <- readLines(test_path("cache-with-r-cache/roxygen-cache-1.R"))
