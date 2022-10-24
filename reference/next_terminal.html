@@ -18,7 +18,7 @@ next terminal"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -114,33 +114,42 @@ next terminal</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">next_terminal</span><span class="op">(</span>
-  <span class="va">pd</span>,
-  stack <span class="op">=</span> <span class="cn">FALSE</span>,
-  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pos_id"</span>, <span class="st">"token"</span>, <span class="st">"text"</span><span class="op">)</span>,
-  tokens_exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">next_terminal</span><span class="op">(</span></span>
+<span>  <span class="va">pd</span>,</span>
+<span>  stack <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pos_id"</span>, <span class="st">"token"</span>, <span class="st">"text"</span><span class="op">)</span>,</span>
+<span>  tokens_exclude <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pd</dt>
 <dd><p>A nest.</p></dd>
+
+
 <dt>stack</dt>
 <dd><p>Whether or not to also return information on the tokens that
-are between <code>pd</code> and the first terminal, so the returned tibble can be
+are between <code>pd</code> and the first terminal, so the returned data frame can be
 understood as a transition path from <code>pd</code> to the next terminal, instead of
 the information at the terminal only. The order is inside-out,
 i.e. the first non-terminal on top, the terminal last.</p></dd>
+
+
 <dt>vars</dt>
 <dd><p>The variables to return.</p></dd>
+
+
 <dt>tokens_exclude</dt>
 <dd><p>A vector with tokens to exclude. This can be helpful if
 one wants to find the next token that is not a comment for example.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a tibble (which is <strong>not</strong> a valid parse table for
+    
+
+<p>Returns a data frame (which is <strong>not</strong> a valid parse table for
 <code>stack = TRUE</code>), with <code>vars</code> and another variable <code>position</code> that denotes
 the index each element in the transition. This can be helpful in conjunction
 with <code><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">purrr::pluck()</a></code> or <code><a href="https://purrr.tidyverse.org/reference/modify_in.html" class="external-link">purrr::modify_in()</a></code> to reach the terminal in the
@@ -149,17 +158,15 @@ nested structure.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">with_options</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>styler.cache_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, <span class="co"># temporarily deactivate cache</span></span>
-<span class="r-in">  <span class="op">{</span></span>
-<span class="r-in">    <span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="st">"if (TRUE) f()"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu">styler</span><span class="fu">:::</span><span class="fu">next_terminal</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   position pos_id token text </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        1      2 IF    if   </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">with_options</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>styler.cache_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, <span class="co"># temporarily deactivate cache</span></span></span>
+<span class="r-in"><span>  <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="st">"if (TRUE) f()"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu">styler</span><span class="fu">:::</span><span class="fu">next_terminal</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    position pos_id token text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21        1      2    IF   if</span>
 </code></pre></div>
     </div>
   </div>
@@ -174,7 +181,7 @@ nested structure.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

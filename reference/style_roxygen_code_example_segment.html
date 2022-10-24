@@ -3,9 +3,9 @@
 contains at most one \\dontrun{...} or friends.
 We drop all newline characters first because otherwise the code segment
 passed to this function was previously parsed with parse_roxygen() and
-line-breaks in and after the \\dontrun{...} are expressed with &quot;\n&quot;, which
-contradicts to the definition used elsewhere in this package, where every
-element in a vector corresponds to a line. These line-breaks don't get
+line-breaks in and after the \\dontrun{...} are expressed with &quot;\n&quot;,
+which contradicts to the definition used elsewhere in this package, where
+every element in a vector corresponds to a line. These line-breaks don't get
 eliminated because they move to the front of a code_segment and
 style_text(&quot;\n1&quot;) gives &quot;\n1&quot;, i.e. trailing newlines are not
 eliminated."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -26,7 +26,7 @@ eliminated."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -121,16 +121,16 @@ eliminated."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs
 contains at most one <code>\\dontrun{...}</code> or friends.
 We drop all newline characters first because otherwise the code segment
 passed to this function was previously parsed with <code><a href="parse_roxygen.html">parse_roxygen()</a></code> and
-line-breaks in and after the <code>\\dontrun{...}</code> are expressed with <code>"\n"</code>, which
-contradicts to the definition used elsewhere in this package, where every
-element in a vector corresponds to a line. These line-breaks don't get
+line-breaks in and after the <code>\\dontrun{...}</code> are expressed with <code>"\n"</code>,
+which contradicts to the definition used elsewhere in this package, where
+every element in a vector corresponds to a line. These line-breaks don't get
 eliminated because they move to the front of a <code>code_segment</code> and
 <code>style_text("\n1")</code> gives <code>"\n1"</code>, i.e. trailing newlines are not
 eliminated.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">style_roxygen_code_example_segment</span><span class="op">(</span><span class="va">one_dont</span>, <span class="va">transformers</span>, <span class="va">base_indention</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">style_roxygen_code_example_segment</span><span class="op">(</span><span class="va">one_dont</span>, <span class="va">transformers</span>, <span class="va">base_indention</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -138,14 +138,18 @@ eliminated.</p>
     <dl><dt>one_dont</dt>
 <dd><p>Bare R code containing at most one <code>\\dontrun{...}</code> or
 friends.</p></dd>
+
+
 <dt>transformers</dt>
-<dd><p>Passed to <code><a href="cache_make_key.html">cache_make_key()</a></code> to generate
-a key.</p></dd>
+<dd><p>Passed to <code><a href="cache_make_key.html">cache_make_key()</a></code> to generate a key.</p></dd>
+
+
 <dt>base_indention</dt>
 <dd><p>Integer scalar indicating by how many spaces the whole
 output text should be indented. Note that this is not the same as splitting
 by line and add a <code>base_indention</code> spaces before the code in the case
 multi-line strings are present. See 'Examples'.</p></dd>
+
 </dl></div>
     <div id="hierarchy">
     <h2>Hierarchy</h2>
@@ -180,7 +184,7 @@ we style them in <code><a href="style_roxygen_example_snippet.html">style_roxyge
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

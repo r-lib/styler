@@ -25,19 +25,7 @@
     <loc>https://styler.r-lib.org/articles/distribute_custom_style_guides.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/articles/gsoc_proposal/data_structures.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/gsoc_proposal/manipulating_nested_parse_data.html</loc>
-  </url>
-  <url>
     <loc>https://styler.r-lib.org/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/introducing_styler.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/articles/performance_improvements.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/articles/remove_rules.html</loc>
@@ -86,6 +74,9 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/alignment_drop_comments.html</loc>
+  </url>
+  <url>
+    <loc>https://styler.r-lib.org/reference/alignment_drop_last_expr.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/alignment_ensure_no_closing_brace.html</loc>
@@ -454,9 +445,6 @@
     <loc>https://styler.r-lib.org/reference/print.vertical.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/rds_to_version.html</loc>
-  </url>
-  <url>
     <loc>https://styler.r-lib.org/reference/read_utf8.html</loc>
   </url>
   <url>
@@ -649,6 +637,9 @@
     <loc>https://styler.r-lib.org/reference/transform_mixed.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/transform_mixed_non_empty.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/transform_utf8.html</loc>
   </url>
   <url>
@@ -659,9 +650,6 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/try_transform_as_r_file.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/reference/two_cols_match.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/unindent_child.html</loc>

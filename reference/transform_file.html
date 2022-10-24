@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -112,42 +112,57 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">transform_file</span><span class="op">(</span>
-  <span class="va">path</span>,
-  <span class="va">fun</span>,
-  <span class="va">max_char_path</span>,
-  message_before <span class="op">=</span> <span class="st">""</span>,
-  message_after <span class="op">=</span> <span class="st">" [DONE]"</span>,
-  message_after_if_changed <span class="op">=</span> <span class="st">" *"</span>,
-  <span class="va">...</span>,
-  <span class="va">dry</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">transform_file</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  <span class="va">fun</span>,</span>
+<span>  <span class="va">max_char_path</span>,</span>
+<span>  message_before <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  message_after <span class="op">=</span> <span class="st">" [DONE]"</span>,</span>
+<span>  message_after_if_changed <span class="op">=</span> <span class="st">" *"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">dry</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>A vector with file paths to transform.</p></dd>
+
+
 <dt>fun</dt>
 <dd><p>A function that returns a character vector.</p></dd>
+
+
 <dt>max_char_path</dt>
 <dd><p>The number of characters of the longest path. Determines
 the indention level of <code>message_after</code>.</p></dd>
+
+
 <dt>message_before</dt>
 <dd><p>The message to print before the path.</p></dd>
+
+
 <dt>message_after</dt>
 <dd><p>The message to print after the path.</p></dd>
+
+
 <dt>message_after_if_changed</dt>
 <dd><p>The message to print after <code>message_after</code> if
 any file was transformed.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments passed to <code><a href="transform_utf8.html">transform_utf8()</a></code>.</p></dd>
+
+
 <dt>dry</dt>
 <dd><p>To indicate whether styler should run in <em>dry</em> mode, i.e. refrain
 from writing back to files .<code>"on"</code> and <code>"fail"</code> both don't write back, the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
 styling are not identical.</p></dd>
+
 </dl></div>
 
   </div>
@@ -162,7 +177,7 @@ styling are not identical.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

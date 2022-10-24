@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -112,22 +112,22 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">indent_without_paren_for_while_fun</span><span class="op">(</span><span class="va">pd</span>, <span class="va">indent_by</span><span class="op">)</span>
-
-<span class="fu">indent_without_paren_if_else</span><span class="op">(</span><span class="va">pd</span>, <span class="va">indent_by</span><span class="op">)</span>
-
-<span class="fu">indent_braces</span><span class="op">(</span><span class="va">pd</span>, <span class="va">indent_by</span><span class="op">)</span>
-
-<span class="fu">indent_op</span><span class="op">(</span>
-  <span class="va">pd</span>,
-  <span class="va">indent_by</span>,
-  token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">math_token</span>, <span class="va">logical_token</span>, <span class="va">special_token</span>, <span class="st">"PIPE"</span>, <span class="st">"LEFT_ASSIGN"</span>,
-    <span class="st">"EQ_ASSIGN"</span>, <span class="st">"'$'"</span>, <span class="st">"'~'"</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">indent_eq_sub</span><span class="op">(</span><span class="va">pd</span>, <span class="va">indent_by</span>, token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EQ_SUB"</span>, <span class="st">"EQ_FORMALS"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">indent_without_paren</span><span class="op">(</span><span class="va">pd</span>, indent_by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">indent_without_paren_for_while_fun</span><span class="op">(</span><span class="va">pd</span>, <span class="va">indent_by</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">indent_without_paren_if_else</span><span class="op">(</span><span class="va">pd</span>, <span class="va">indent_by</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">indent_braces</span><span class="op">(</span><span class="va">pd</span>, <span class="va">indent_by</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">indent_op</span><span class="op">(</span></span>
+<span>  <span class="va">pd</span>,</span>
+<span>  <span class="va">indent_by</span>,</span>
+<span>  token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">math_token</span>, <span class="va">logical_token</span>, <span class="va">special_token</span>, <span class="st">"PIPE"</span>, <span class="st">"LEFT_ASSIGN"</span>, <span class="st">"EQ_ASSIGN"</span>,</span>
+<span>    <span class="st">"'$'"</span>, <span class="st">"'~'"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">indent_eq_sub</span><span class="op">(</span><span class="va">pd</span>, <span class="va">indent_by</span>, token <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EQ_SUB"</span>, <span class="st">"EQ_FORMALS"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">indent_without_paren</span><span class="op">(</span><span class="va">pd</span>, indent_by <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -135,27 +135,32 @@
     <dl><dt>pd</dt>
 <dd><p>A nested or flat parse table that is already enhanced with
 line break and space information via <code><a href="default_style_guide_attributes.html">default_style_guide_attributes()</a></code>.</p></dd>
+
+
 <dt>indent_by</dt>
 <dd><p>How many spaces should be added after the token of interest.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The token the indention should be based on.</p></dd>
+
 </dl></div>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>indent_without_paren_for_while_fun</code>: Is used to indent for and statements and function
-definitions without parenthesis.</p></li>
-<li><p><code>indent_without_paren_if_else</code>: Is used to indent if and if-else statements.</p></li>
-<li><p><code>indent_braces</code>: Inserts indention based on round, square and
+<ul><li><p><code>indent_without_paren_for_while_fun()</code>: Is used to indent for and statements and
+function definitions without parenthesis.</p></li>
+<li><p><code>indent_without_paren_if_else()</code>: Is used to indent if and if-else statements.</p></li>
+<li><p><code>indent_braces()</code>: Inserts indention based on round, square and
 curly brackets.</p></li>
-<li><p><code>indent_op</code>: Indents <em>all</em> tokens after <code>token</code> - including
+<li><p><code>indent_op()</code>: Indents <em>all</em> tokens after <code>token</code> - including
 the last token.</p></li>
-<li><p><code>indent_eq_sub</code>: Updates indention for token EQ_SUB. Only differs
+<li><p><code>indent_eq_sub()</code>: Updates indention for token EQ_SUB. Only differs
 from <code>indent_op()</code> in the sense that not all subsequent tokens in the parse
 table are necessarily indented, as <code>EQ_SUB</code> and <code>EQ_FORMALS</code> can occur
 multiple times in a parse table.
 occurs is not indented (see<code><a href="compute_indent_indices.html">compute_indent_indices()</a></code>)</p></li>
-<li><p><code>indent_without_paren</code>: Is used to indent for / while / if / if-else
+<li><p><code>indent_without_paren()</code>: Is used to indent for / while / if / if-else
 statements that do not have curly parenthesis.</p></li>
 </ul></div>
 
@@ -171,7 +176,7 @@ statements that do not have curly parenthesis.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

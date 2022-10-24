@@ -34,7 +34,7 @@ curly-curly affects styling of line break and spaces, namely:"><!-- mathjax --><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -146,22 +146,23 @@ curly-curly affects styling of line break and spaces, namely:</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">set_line_break_around_curly_curly</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span>
-
-<span class="fu">set_space_in_curly_curly</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">set_line_break_around_curly_curly</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_space_in_curly_curly</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pd</dt>
 <dd><p>A parse table.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
     
 <ul><li><p>No line break after first or second <code>\{</code>, before third and fourth <code>\{</code>.</p></li>
-<li><p>No space after first and third <code>\{</code>, one space after second and before third
-<code>\}</code>.</p></li>
+<li><p>No space after first and third <code>\{</code>, one space after second and before
+third <code>\}</code>.</p></li>
 <li><p>No line breaks within curly-curly, e.g. <code>\{\{ x \}\}</code> can only contain line
 breaks after the last brace or before the first brace. But these are not
 dependent on curly-curly specifically.</p></li>
@@ -183,7 +184,7 @@ dependent on curly-curly specifically.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -31,7 +31,7 @@ nests into a visitor call."><!-- mathjax --><script src="https://cdnjs.cloudflar
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -139,85 +139,196 @@ wrap the the implementation <code><a href="relocate_eq_assign_nest.html">relocat
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">relocate_eq_assign</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">relocate_eq_assign</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pd</dt>
 <dd><p>A parse table.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span><span class="st">"a &lt;- b &lt;- 3"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    line1  col1 line2  col2    id parent token       terminal text   pos_id short</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1     1     1    11    11      0 expr        FALSE    a &lt;- …      1 <span style="color: #949494;">"</span>a &lt;…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1     1     1     1     1      3 SYMBOL      TRUE     a           2 <span style="color: #949494;">"</span>a<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     1     1     1     1     3     11 expr        FALSE    a           3 <span style="color: #949494;">"</span>a<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     1     3     1     4     2     11 LEFT_ASSIGN TRUE     &lt;-          4 <span style="color: #949494;">"</span>&lt;-<span style="color: #949494;">"</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     1     6     1    11    10     11 expr        FALSE    b &lt;- 3      5 <span style="color: #949494;">"</span>b &lt;…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     1     6     1     6     4      6 SYMBOL      TRUE     b           6 <span style="color: #949494;">"</span>b<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     1     6     1     6     6     10 expr        FALSE    b           7 <span style="color: #949494;">"</span>b<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     1     8     1     9     5     10 LEFT_ASSIGN TRUE     &lt;-          8 <span style="color: #949494;">"</span>&lt;-<span style="color: #949494;">"</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     1    11     1    11     7      8 NUM_CONST   TRUE     3           9 <span style="color: #949494;">"</span>3<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     1    11     1    11     8     10 expr        FALSE    3          10 <span style="color: #949494;">"</span>3<span style="color: #949494;">"</span>  </span>
-<span class="r-in"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span><span class="st">"a  = b = 3"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    line1  col1 line2  col2    id parent token        terminal text  pos_id short</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1     1     1    10    14      0 expr_or_ass… FALSE    a  =…      1 <span style="color: #949494;">"</span>a  …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1     1     1     1     1      3 SYMBOL       TRUE     a          2 <span style="color: #949494;">"</span>a<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     1     1     1     1     3     14 expr         FALSE    a          3 <span style="color: #949494;">"</span>a<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     1     4     1     4     2     14 EQ_ASSIGN    TRUE     =          4 <span style="color: #949494;">"</span>=<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     1     6     1    10    13     14 expr_or_ass… FALSE    b = 3      5 <span style="color: #949494;">"</span>b =…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     1     6     1     6     5      7 SYMBOL       TRUE     b          6 <span style="color: #949494;">"</span>b<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     1     6     1     6     7     13 expr         FALSE    b          7 <span style="color: #949494;">"</span>b<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     1     8     1     8     6     13 EQ_ASSIGN    TRUE     =          8 <span style="color: #949494;">"</span>=<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     1    10     1    10     9     10 NUM_CONST    TRUE     3          9 <span style="color: #949494;">"</span>3<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     1    10     1    10    10     13 expr         FALSE    3         10 <span style="color: #949494;">"</span>3<span style="color: #949494;">"</span>  </span>
-<span class="r-in"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"x = 5</span>
-<span class="r-in">  if(x &gt;= 5)</span>
-<span class="r-in">  y = TRUE else</span>
-<span class="r-in">  y = FALSE"</span>,</span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 29 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    line1  col1 line2  col2    id parent token        terminal text  pos_id short</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1     1     1     5     9      0 expr_or_ass… FALSE    <span style="color: #949494;">"</span>x =…      1 <span style="color: #949494;">"</span>x =…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1     1     1     1     1      3 SYMBOL       TRUE     <span style="color: #949494;">"</span>x<span style="color: #949494;">"</span>        2 <span style="color: #949494;">"</span>x<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     1     1     1     1     3      9 expr         FALSE    <span style="color: #949494;">"</span>x<span style="color: #949494;">"</span>        3 <span style="color: #949494;">"</span>x<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     1     3     1     3     2      9 EQ_ASSIGN    TRUE     <span style="color: #949494;">"</span>=<span style="color: #949494;">"</span>        4 <span style="color: #949494;">"</span>=<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     1     5     1     5     5      6 NUM_CONST    TRUE     <span style="color: #949494;">"</span>5<span style="color: #949494;">"</span>        5 <span style="color: #949494;">"</span>5<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     1     5     1     5     6      9 expr         FALSE    <span style="color: #949494;">"</span>5<span style="color: #949494;">"</span>        6 <span style="color: #949494;">"</span>5<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     2     3     4    11    42      0 expr         FALSE    <span style="color: #949494;">"</span>if(…      7 <span style="color: #949494;">"</span>if(…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     2     3     2     4    11     42 IF           TRUE     <span style="color: #949494;">"</span>if<span style="color: #949494;">"</span>       8 <span style="color: #949494;">"</span>if<span style="color: #949494;">"</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     2     5     2     5    12     42 '('          TRUE     <span style="color: #949494;">"</span>(<span style="color: #949494;">"</span>        9 <span style="color: #949494;">"</span>(<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     2     6     2    11    19     42 expr         FALSE    <span style="color: #949494;">"</span>x &gt;…     10 <span style="color: #949494;">"</span>x &gt;…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 19 more rows</span></span>
-<span class="r-in"><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"x &lt;- 5</span>
-<span class="r-in">  if(x &gt;= 5)</span>
-<span class="r-in">  y &lt;- TRUE else</span>
-<span class="r-in">  y &lt;- FALSE"</span>,</span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 29 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    line1  col1 line2  col2    id parent token       terminal text   pos_id short</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1     1     1     6     7      0 expr        FALSE    <span style="color: #949494;">"</span>x &lt;-…      1 <span style="color: #949494;">"</span>x &lt;…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1     1     1     1     1      3 SYMBOL      TRUE     <span style="color: #949494;">"</span>x<span style="color: #949494;">"</span>         2 <span style="color: #949494;">"</span>x<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     1     1     1     1     3      7 expr        FALSE    <span style="color: #949494;">"</span>x<span style="color: #949494;">"</span>         3 <span style="color: #949494;">"</span>x<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     1     3     1     4     2      7 LEFT_ASSIGN TRUE     <span style="color: #949494;">"</span>&lt;-<span style="color: #949494;">"</span>        4 <span style="color: #949494;">"</span>&lt;-<span style="color: #949494;">"</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     1     6     1     6     4      5 NUM_CONST   TRUE     <span style="color: #949494;">"</span>5<span style="color: #949494;">"</span>         5 <span style="color: #949494;">"</span>5<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     1     6     1     6     5      7 expr        FALSE    <span style="color: #949494;">"</span>5<span style="color: #949494;">"</span>         6 <span style="color: #949494;">"</span>5<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     2     3     4    12    39      0 expr        FALSE    <span style="color: #949494;">"</span>if(x…      7 <span style="color: #949494;">"</span>if(…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     2     3     2     4    10     39 IF          TRUE     <span style="color: #949494;">"</span>if<span style="color: #949494;">"</span>        8 <span style="color: #949494;">"</span>if<span style="color: #949494;">"</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     2     5     2     5    11     39 '('         TRUE     <span style="color: #949494;">"</span>(<span style="color: #949494;">"</span>         9 <span style="color: #949494;">"</span>(<span style="color: #949494;">"</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     2     6     2    11    18     39 expr        FALSE    <span style="color: #949494;">"</span>x &gt;=…     10 <span style="color: #949494;">"</span>x &gt;…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 19 more rows</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span><span class="st">"a &lt;- b &lt;- 3"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    line1 col1 line2 col2 id parent       token terminal        text pos_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1    1     1   11 11      0        expr    FALSE a &lt;- b &lt;- 3      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      1    1     1    1  1      3      SYMBOL     TRUE           a      2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      1    1     1    1  3     11        expr    FALSE           a      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      1    3     1    4  2     11 LEFT_ASSIGN     TRUE          &lt;-      4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      1    6     1   11 10     11        expr    FALSE      b &lt;- 3      5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      1    6     1    6  4      6      SYMBOL     TRUE           b      6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      1    6     1    6  6     10        expr    FALSE           b      7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      1    8     1    9  5     10 LEFT_ASSIGN     TRUE          &lt;-      8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      1   11     1   11  7      8   NUM_CONST     TRUE           3      9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     1   11     1   11  8     10        expr    FALSE           3     10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    short</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  a &lt;- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     &lt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  b &lt;- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     &lt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     3</span>
+<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span><span class="st">"a  = b = 3"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    line1 col1 line2 col2 id parent                  token terminal       text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1    1     1   10 14      0 expr_or_assign_or_help    FALSE a  = b = 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      1    1     1    1  1      3                 SYMBOL     TRUE          a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      1    1     1    1  3     14                   expr    FALSE          a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      1    4     1    4  2     14              EQ_ASSIGN     TRUE          =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      1    6     1   10 13     14 expr_or_assign_or_help    FALSE      b = 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      1    6     1    6  5      7                 SYMBOL     TRUE          b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      1    6     1    6  7     13                   expr    FALSE          b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      1    8     1    8  6     13              EQ_ASSIGN     TRUE          =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      1   10     1   10  9     10              NUM_CONST     TRUE          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     1   10     1   10 10     13                   expr    FALSE          3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    pos_id short</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       1 a  = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       2     a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       3     a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       4     =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       5 b = 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       6     b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7       7     b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8       8     =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9       9     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     10     3</span>
+<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"x = 5</span></span></span>
+<span class="r-in"><span><span class="st">  if(x &gt;= 5)</span></span></span>
+<span class="r-in"><span><span class="st">  y = TRUE else</span></span></span>
+<span class="r-in"><span><span class="st">  y = FALSE"</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    line1 col1 line2 col2 id parent                  token terminal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1    1     1    5  9      0 expr_or_assign_or_help    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      1    1     1    1  1      3                 SYMBOL     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      1    1     1    1  3      9                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      1    3     1    3  2      9              EQ_ASSIGN     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      1    5     1    5  5      6              NUM_CONST     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      1    5     1    5  6      9                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      2    3     4   11 42      0                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      2    3     2    4 11     42                     IF     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      2    5     2    5 12     42                    '('     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     2    6     2   11 19     42                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11     2    6     2    6 13     15                 SYMBOL     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12     2    6     2    6 15     19                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13     2    8     2    9 14     19                     GE     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14     2   11     2   11 16     17              NUM_CONST     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15     2   11     2   11 17     19                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16     2   12     2   12 18     42                    ')'     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17     3    3     3   10 31     42 expr_or_assign_or_help    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18     3    3     3    3 23     25                 SYMBOL     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19     3    3     3    3 25     31                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20     3    5     3    5 24     31              EQ_ASSIGN     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21     3    7     3   10 27     28              NUM_CONST     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22     3    7     3   10 28     31                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23     3   12     3   15 29     42                   ELSE     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24     4    3     4   11 41     42 expr_or_assign_or_help    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25     4    3     4    3 33     35                 SYMBOL     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26     4    3     4    3 35     41                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27     4    5     4    5 34     41              EQ_ASSIGN     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28     4    7     4   11 37     38              NUM_CONST     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29     4    7     4   11 38     41                   expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        text pos_id short</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                     x = 5      1 x = 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                         x      2     x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                         x      3     x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                         =      4     =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                         5      5     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                         5      6     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  if(x &gt;= 5)\n  y = TRUE else\n  y = FALSE      7 if(x </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                                        if      8    if</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                                         (      9     (</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10                                   x &gt;= 5     10 x &gt;= </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                                        x     11     x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                                        x     12     x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                                       &gt;=     13    &gt;=</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                                        5     14     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                                        5     15     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                                        )     16     )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                                 y = TRUE     17 y = T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                                        y     18     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                                        y     19     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20                                        =     20     =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                                     TRUE     21  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                                     TRUE     22  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23                                     else     23  else</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24                                y = FALSE     24 y = F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                                        y     25     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                                        y     26     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                                        =     27     =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28                                    FALSE     28 FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29                                    FALSE     29 FALSE</span>
+<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="get_parse_data.html">get_parse_data</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"x &lt;- 5</span></span></span>
+<span class="r-in"><span><span class="st">  if(x &gt;= 5)</span></span></span>
+<span class="r-in"><span><span class="st">  y &lt;- TRUE else</span></span></span>
+<span class="r-in"><span><span class="st">  y &lt;- FALSE"</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    line1 col1 line2 col2 id parent       token terminal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1    1     1    6  7      0        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      1    1     1    1  1      3      SYMBOL     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      1    1     1    1  3      7        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      1    3     1    4  2      7 LEFT_ASSIGN     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      1    6     1    6  4      5   NUM_CONST     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      1    6     1    6  5      7        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      2    3     4   12 39      0        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      2    3     2    4 10     39          IF     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      2    5     2    5 11     39         '('     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     2    6     2   11 18     39        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11     2    6     2    6 12     14      SYMBOL     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12     2    6     2    6 14     18        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13     2    8     2    9 13     18          GE     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14     2   11     2   11 15     16   NUM_CONST     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15     2   11     2   11 16     18        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16     2   12     2   12 17     39         ')'     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17     3    3     3   11 28     39        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18     3    3     3    3 22     24      SYMBOL     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19     3    3     3    3 24     28        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20     3    5     3    6 23     28 LEFT_ASSIGN     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21     3    8     3   11 25     26   NUM_CONST     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22     3    8     3   11 26     28        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23     3   13     3   16 27     39        ELSE     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24     4    3     4   12 37     39        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25     4    3     4    3 31     33      SYMBOL     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26     4    3     4    3 33     37        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27     4    5     4    6 32     37 LEFT_ASSIGN     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28     4    8     4   12 34     35   NUM_CONST     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29     4    8     4   12 35     37        expr    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                          text pos_id short</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                      x &lt;- 5      1 x &lt;- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                           x      2     x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                           x      3     x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                          &lt;-      4    &lt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                           5      5     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                           5      6     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  if(x &gt;= 5)\n  y &lt;- TRUE else\n  y &lt;- FALSE      7 if(x </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                                          if      8    if</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                                           (      9     (</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10                                     x &gt;= 5     10 x &gt;= </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                                          x     11     x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                                          x     12     x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                                         &gt;=     13    &gt;=</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                                          5     14     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                                          5     15     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                                          )     16     )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                                  y &lt;- TRUE     17 y &lt;- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                                          y     18     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                                          y     19     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20                                         &lt;-     20    &lt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                                       TRUE     21  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                                       TRUE     22  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23                                       else     23  else</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24                                 y &lt;- FALSE     24 y &lt;- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                                          y     25     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                                          y     26     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                                         &lt;-     27    &lt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28                                      FALSE     28 FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29                                      FALSE     29 FALSE</span>
 </code></pre></div>
     </div>
   </div>
@@ -232,7 +343,7 @@ wrap the the implementation <code><a href="relocate_eq_assign_nest.html">relocat
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

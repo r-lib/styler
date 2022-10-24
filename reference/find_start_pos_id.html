@@ -19,7 +19,7 @@ preserved."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -116,26 +116,37 @@ preserved.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">find_start_pos_id</span><span class="op">(</span><span class="va">pd</span>, <span class="va">pos</span>, <span class="va">by</span>, <span class="va">direction</span>, <span class="va">after</span>, candidates <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_start_pos_id</span><span class="op">(</span><span class="va">pd</span>, <span class="va">pos</span>, <span class="va">by</span>, <span class="va">direction</span>, <span class="va">after</span>, candidates <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pd</dt>
 <dd><p>A parse table.</p></dd>
+
+
 <dt>pos</dt>
 <dd><p>The position where the new id should be inserted.</p></dd>
+
+
 <dt>by</dt>
 <dd><p>By how much the reference <code>pos_id</code> should be increased / decreased
 to create a new id.</p></dd>
+
+
 <dt>direction</dt>
 <dd><p>Derived from <code>after</code>. <code>1</code> if <code>after = TRUE</code>, <code>-1</code> otherwise.</p></dd>
+
+
 <dt>after</dt>
 <dd><p>Boolean indicating whether it should be inserted after or before
 <code>pos</code>.</p></dd>
+
+
 <dt>candidates</dt>
 <dd><p>The <code>pos_ids</code> of the candidates that origin from other
 nests.</p></dd>
+
 </dl></div>
 
   </div>
@@ -150,7 +161,7 @@ nests.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

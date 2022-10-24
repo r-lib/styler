@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -112,17 +112,27 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">is_cached</span><span class="op">(</span><span class="va">text</span>, <span class="va">transformers</span>, <span class="va">more_specs</span>, cache_dir <span class="op">=</span> <span class="fu">get_cache_dir</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_cached</span><span class="op">(</span><span class="va">text</span>, <span class="va">transformers</span>, <span class="va">more_specs</span>, cache_dir <span class="op">=</span> <span class="fu">get_cache_dir</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>text, transformers, more_specs</dt>
-<dd><p>Passed to <code><a href="cache_make_key.html">cache_make_key()</a></code> to generate
-a key.</p></dd>
+    <dl><dt>text</dt>
+<dd><p>Passed to <code><a href="cache_make_key.html">cache_make_key()</a></code> to generate a key.</p></dd>
+
+
+<dt>transformers</dt>
+<dd><p>Passed to <code><a href="cache_make_key.html">cache_make_key()</a></code> to generate a key.</p></dd>
+
+
+<dt>more_specs</dt>
+<dd><p>Passed to <code><a href="cache_make_key.html">cache_make_key()</a></code> to generate a key.</p></dd>
+
+
 <dt>cache_dir</dt>
 <dd><p>The caching directory relative to the <code>.Rcache</code> root to
 look for a cached value.</p></dd>
+
 </dl></div>
 
   </div>
@@ -137,7 +147,7 @@ look for a cached value.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

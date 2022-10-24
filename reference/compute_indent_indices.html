@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -112,20 +112,25 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">compute_indent_indices</span><span class="op">(</span><span class="va">pd</span>, <span class="va">token_opening</span>, token_closing <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compute_indent_indices</span><span class="op">(</span><span class="va">pd</span>, <span class="va">token_opening</span>, token_closing <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pd</dt>
 <dd><p>A parse table.</p></dd>
+
+
 <dt>token_opening</dt>
 <dd><p>A character vector with tokens that could induce
 indention for subsequent tokens.</p></dd>
+
+
 <dt>token_closing</dt>
 <dd><p>A character vector with tokens that could terminate
 indention for previous tokens. If <code>NULL</code> (the default), indention should
 end with the last token in the parse table.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -139,7 +144,22 @@ example in if-else expressions, this is not the case and indenting
 everything between '(' and the penultimate token would result in the wrong
 formatting.</p>
     </div>
+    <div id="handing-of-">
+    <h2>Handing of <code>[[</code></h2>
+    
 
+<p>Since text <code>[[</code> has token <code>"LBB"</code> and text <code>]]</code> is parsed as two independent
+<code>]</code> (see 'Examples'), indention has to stop at the first <code>]</code>.</p>
+    </div>
+
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_text</span><span class="op">(</span><span class="st">"a[1]"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a[1]</span>
+<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_text</span><span class="op">(</span><span class="st">"a[[1\n]]"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a[[1]]</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -152,7 +172,7 @@ formatting.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

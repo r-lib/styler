@@ -20,7 +20,7 @@ effects"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -117,7 +117,7 @@ effects</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">catch_style_file_output</span><span class="op">(</span><span class="va">file_in</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">catch_style_file_output</span><span class="op">(</span><span class="va">file_in</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -125,10 +125,13 @@ effects</p>
     <dl><dt>file_in</dt>
 <dd><p>A vector with paths relative to <code>tests/testthat</code> the path
 to the reference file.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list. Each element is a character vector with the captured output of
+    
+
+<p>A list. Each element is a character vector with the captured output of
 <code><a href="style_file.html">style_file()</a></code> called on
 <code>file_in</code> ran in a temp dir to avoid side effects on the input file (because
 the next time the test would ran, the file would not need styling). The
@@ -153,7 +156,7 @@ how many characters the path of the temporary directory has.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

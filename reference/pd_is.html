@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
       </span>
     </div>
 
@@ -112,34 +112,35 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">is_curly_expr</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span>
-
-<span class="fu">is_cond_expr</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span>
-
-<span class="fu">is_while_expr</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span>
-
-<span class="fu">is_function_call</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span>
-
-<span class="fu">is_function_dec</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span>
-
-<span class="fu">is_comment</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_curly_expr</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_cond_expr</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_while_expr</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_function_call</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_function_dec</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_comment</span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pd</dt>
 <dd><p>A parse table.</p></dd>
+
 </dl></div>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>is_curly_expr</code>: Checks whether <code>pd</code> contains an expression wrapped in
+<ul><li><p><code>is_curly_expr()</code>: Checks whether <code>pd</code> contains an expression wrapped in
 curly brackets.</p></li>
-<li><p><code>is_cond_expr</code>: Checks whether <code>pd</code> contains is a conditional expression.</p></li>
-<li><p><code>is_while_expr</code>: Checks whether <code>pd</code> contains is a while loop.</p></li>
-<li><p><code>is_function_call</code>: Checks whether <code>pd</code> is a function call.</p></li>
-<li><p><code>is_function_dec</code>: Checks whether <code>pd</code> is a function declaration.</p></li>
-<li><p><code>is_comment</code>: Checks for every token whether or not it is a comment.</p></li>
+<li><p><code>is_cond_expr()</code>: Checks whether <code>pd</code> contains is a conditional expression.</p></li>
+<li><p><code>is_while_expr()</code>: Checks whether <code>pd</code> contains is a while loop.</p></li>
+<li><p><code>is_function_call()</code>: Checks whether <code>pd</code> is a function call.</p></li>
+<li><p><code>is_function_dec()</code>: Checks whether <code>pd</code> is a function declaration.</p></li>
+<li><p><code>is_comment()</code>: Checks for every token whether or not it is a comment.</p></li>
 </ul></div>
 
   </div>
@@ -154,7 +155,7 @@ curly brackets.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
