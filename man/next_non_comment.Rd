@@ -17,4 +17,10 @@ previous_non_comment(pd, pos)
 \description{
 Find the index of the next or previous non-comment in a parse table.
 }
+\seealso{
+Other third-party style guide helpers: 
+\code{\link{pd_is}},
+\code{\link{scope_normalize}()}
+}
+\concept{third-party style guide helpers}
 \keyword{internal}
