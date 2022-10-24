@@ -46,5 +46,11 @@ curly brackets.
 \item \code{is_comment()}: Checks for every token whether or not it is a comment.
 
 }}
+\seealso{
+Other third-party style guide helpers: 
+\code{\link{next_non_comment}()},
+\code{\link{scope_normalize}()}
+}
+\concept{third-party style guide helpers}
 \keyword{internal}
 \keyword{other}

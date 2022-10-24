@@ -35,6 +35,7 @@ is_while_expr <- function(pd) {
 #' Check whether `pd` is a function call
 #' @describeIn pd_is Checks whether `pd` is a function call.
 #' @keywords other
+#' @family third-party style guide helpers
 #' @export
 is_function_call <- function(pd) {
   if (is.null(pd)) {
@@ -63,8 +64,6 @@ is_comment <- function(pd) {
   }
   pd$token == "COMMENT"
 }
-
-
 
 #' Check whether a parse table contains a tilde
 #'

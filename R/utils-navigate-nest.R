@@ -4,6 +4,7 @@
 #' @param pos The position of the token to start the search from.
 #' @importFrom rlang seq2
 #' @keywords internal
+#' @family third-party style guide helpers
 #' @export
 next_non_comment <- function(pd, pos) {
   if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) {
