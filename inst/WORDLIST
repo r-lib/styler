@@ -27,6 +27,7 @@ coercions
 compat
 config
 CONST
+counterpair
 coventions
 covr
 cpp
@@ -63,6 +64,7 @@ examplesIf
 exampletestr
 expr
 expr EQ
+fansi
 fileext
 filetype
 forcond
@@ -150,6 +152,7 @@ patilindrajeet
 patilindrajeets
 pgkdown
 pkgapi
+pkgconfig
 pkgdown
 pkgs
 pos
