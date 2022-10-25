@@ -10,6 +10,8 @@
 \alias{is_function_declaration}
 \alias{is_comment}
 \alias{is_tilde_expr}
+\alias{is_asymmetric_tilde_expr}
+\alias{is_symmetric_tilde_expr}
 \title{Check whether a parse table corresponds to a certain expression}
 \usage{
 is_curly_expr(pd)
@@ -27,6 +29,10 @@ is_function_declaration(pd)
 is_comment(pd)
 
 is_tilde_expr(pd, tilde_pos = c(1L, 2L))
+
+is_asymmetric_tilde_expr(pd)
+
+is_symmetric_tilde_expr(pd)
 }
 \arguments{
 \item{pd}{A parse table.}
@@ -60,6 +66,10 @@ curly brackets.
 \item \code{is_comment()}: Checks for every token whether or not it is a comment.
 
 \item \code{is_tilde_expr()}: Checks whether \code{pd} contains a tilde.
+
+\item \code{is_asymmetric_tilde_expr()}: If \code{pd} contains a tilde, checks whether it is asymmetrical.
+
+\item \code{is_symmetric_tilde_expr()}: If \code{pd} contains a tilde, checks whether it is symmetrical.
 
 }}
 \examples{

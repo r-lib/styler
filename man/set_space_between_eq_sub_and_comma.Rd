@@ -2,7 +2,7 @@
 % Please edit documentation in R/rules-spaces.R
 \name{set_space_between_eq_sub_and_comma}
 \alias{set_space_between_eq_sub_and_comma}
-\title{Set space between EQ_SUB and "','"}
+\title{Set space between \code{EQ_SUB} and \code{"','"}}
 \usage{
 set_space_between_eq_sub_and_comma(pd)
 }
@@ -10,6 +10,6 @@ set_space_between_eq_sub_and_comma(pd)
 \item{pd}{A parse table.}
 }
 \description{
-Set space between EQ_SUB and "','"
+Set space between \code{EQ_SUB} and \code{"','"}
 }
 \keyword{internal}
