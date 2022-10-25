@@ -1,7 +1,11 @@
-#' Check whether a parse table corresponds to a certain expression
+#' @title Check whether a parse table corresponds to a certain expression
+#' @name pd_is
 #'
 #' @param pd A parse table.
-#' @name pd_is
+#' @param tilde_pos Integer vector indicating row-indices that should be
+#'   checked for tilde. See 'Details'.
+#'
+#' @family third-party style guide helpers
 #' @keywords internal
 NULL
 
@@ -34,10 +38,7 @@ is_while_expr <- function(pd) {
 }
 
 
-#' Check whether `pd` is a function call
 #' @describeIn pd_is Checks whether `pd` is a function call.
-#' @family third-party style guide helpers
-#'
 #' @examples
 #' code <- "x <- list(1:3)"
 #' pd <- compute_parse_data_nested(code)
@@ -72,13 +73,7 @@ is_comment <- function(pd) {
   pd$token == "COMMENT"
 }
 
-#' Check whether a parse table contains a tilde
-#'
-#'
-#' @param pd A parse table.
-#' @param tilde_pos Integer vector indicating row-indices that should be
-#'   checked for tilde. See 'Details'.
-#'
+#' @describeIn pd_is Checks whether `pd` contains a tilde.
 #' @details
 #' A tilde is on the top row in the parse table if it is an asymmetric tilde
 #' expression (like `~column`), in the second row if it is a symmetric tilde
@@ -102,7 +97,7 @@ is_symmetric_tilde_expr <- function(pd) {
 }
 
 is_subset_expr <- function(pd) {
-  if (is.null(pd) || nrow(pd) == 1) {
+  if (is.null(pd) || nrow(pd) == 1L) {
     return(FALSE)
   }
   pd$token[2L] %in% subset_token_opening

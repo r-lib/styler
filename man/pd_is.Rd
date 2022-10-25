@@ -9,6 +9,7 @@
 \alias{is_function_call}
 \alias{is_function_declaration}
 \alias{is_comment}
+\alias{is_tilde_expr}
 \title{Check whether a parse table corresponds to a certain expression}
 \usage{
 is_curly_expr(pd)
@@ -24,14 +25,22 @@ is_function_call(pd)
 is_function_declaration(pd)
 
 is_comment(pd)
+
+is_tilde_expr(pd, tilde_pos = c(1L, 2L))
 }
 \arguments{
 \item{pd}{A parse table.}
+
+\item{tilde_pos}{Integer vector indicating row-indices that should be
+checked for tilde. See 'Details'.}
 }
 \description{
 Check whether a parse table corresponds to a certain expression
-
-Check whether \code{pd} is a function call
+}
+\details{
+A tilde is on the top row in the parse table if it is an asymmetric tilde
+expression (like \code{~column}), in the second row if it is a symmetric tilde
+expression (like \code{a~b}).
 }
 \section{Functions}{
 \itemize{
@@ -49,6 +58,8 @@ curly brackets.
 \item \code{is_function_declaration()}: Checks whether \code{pd} is a function declaration.
 
 \item \code{is_comment()}: Checks for every token whether or not it is a comment.
+
+\item \code{is_tilde_expr()}: Checks whether \code{pd} contains a tilde.
 
 }}
 \examples{

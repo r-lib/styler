@@ -96,10 +96,8 @@ style_space_around_token <- function(pd_flat,
     pd_flat$spaces[idx_before] <- level_before
     pd_flat$spaces[idx_after] <- level_after
   } else {
-    pd_flat$spaces[idx_before] <-
-      pmax(pd_flat$spaces[idx_before], level_before)
-    pd_flat$spaces[idx_after] <-
-      pmax(pd_flat$spaces[idx_after], level_after)
+    pd_flat$spaces[idx_before] <- pmax(pd_flat$spaces[idx_before], level_before)
+    pd_flat$spaces[idx_after] <- pmax(pd_flat$spaces[idx_after], level_after)
   }
   pd_flat
 }
@@ -110,12 +108,15 @@ style_space_around_tilde <- function(pd_flat, strict) {
       strict, "'~'",
       level_before = 1L, level_after = 1L
     )
-  } else if (is_asymmetric_tilde_expr(pd_flat)) {
+  }
+
+  if (is_asymmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
       strict = TRUE, "'~'", level_before = 1L,
       level_after = as.integer(nrow(pd_flat$child[[2L]]) > 1L)
     )
   }
+
   pd_flat
 }
 
