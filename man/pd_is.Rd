@@ -46,6 +46,16 @@ curly brackets.
 \item \code{is_comment()}: Checks for every token whether or not it is a comment.
 
 }}
+\examples{
+\donttest{
+code <- "x <- list(1:3)"
+pd <- styler:::compute_parse_data_nested(code)
+
+is_function_call(pd)
+
+is_function_call(pd$child$`19`$child$`17`)
+}
+}
 \seealso{
 Other third-party style guide helpers: 
 \code{\link{next_non_comment}()},
@@ -53,4 +63,3 @@ Other third-party style guide helpers:
 }
 \concept{third-party style guide helpers}
 \keyword{internal}
-\keyword{other}
