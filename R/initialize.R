@@ -9,7 +9,7 @@
 #'   list(styler.cache_name = NULL), # temporarily deactivate cache
 #'   {
 #'     string_to_format <- "call( 3)"
-#'     pd <- styler:::compute_parse_data_nested(string_to_format)
+#'     pd <- compute_parse_data_nested(string_to_format)
 #'     styler:::pre_visit_one(pd, default_style_guide_attributes)
 #'   }
 #' )

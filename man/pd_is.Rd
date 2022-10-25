@@ -49,7 +49,7 @@ curly brackets.
 \examples{
 \donttest{
 code <- "x <- list(1:3)"
-pd <- styler:::compute_parse_data_nested(
+pd <- compute_parse_data_nested(
   code,
   transformers = tidyverse_style(),
   more_specs = NULL

@@ -36,7 +36,7 @@ create_tree_from_pd_with_default_style_attributes <- function(pd,
 #'     list(styler.cache_name = NULL), # temporarily deactivate cache
 #'     {
 #'       code <- "a <- function(x) { if(x > 1) { 1+1 } else {x} }"
-#'       nested_pd <- styler:::compute_parse_data_nested(code)
+#'       nested_pd <- compute_parse_data_nested(code)
 #'       initialized <- styler:::pre_visit_one(
 #'         nested_pd, default_style_guide_attributes
 #'       )
