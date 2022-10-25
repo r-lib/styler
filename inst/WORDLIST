@@ -25,6 +25,7 @@ codecov
 coercible
 coercions
 compat
+cond
 config
 CONST
 counterpair
