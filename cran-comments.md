@@ -4,15 +4,11 @@ editor_options:
     wrap: 79
 ---
 
-This release does not check for a specific error message from `parse()` anymore
-when the input involves unparsable use of `_`. The release was requested by
-Luke Tierney.
-
 ## Test environments
 
--   ubuntu 20.04 (on GitHub Actions): R devel, R 4.1.2, R 4.0.5, R 3.6, R 3.5,
-    R 3.4
--   Windows Server 10 (on GitHub Actions): R 3.6, R 4.0.5
+-   ubuntu 20.04 (on GitHub Actions): R devel, R 4.2.1, 4.1.2, R 4.0.5, R 3.6,
+    R 3.5.
+-   Windows Server 10 (on GitHub Actions): R devel, R 4.2.1, R 4.1.2, R 3.6.
 -   win-builder: R devel
 
 ## R CMD check results
@@ -35,15 +31,7 @@ compliant with the requirements of CRAN.
 
 ## Downstream Dependencies
 
-I also ran R CMD check on all downstream dependencies of styler using the
-revdepcheck package. The downstream dependencies are:
-
--   Reverse imports: biocthis, boomer, exampletestr, flow, iNZightTools,
-    languageserver, questionr, shinymeta, shinyobjects, ShinyQuickStarter,
-    systemPipeShiny, tidypaleo.
-
--   Reverse suggests: admiral, autothresholdr, crunch, datastructures, drake,
-    epigraphdb, ghclass, knitr, multiverse, nph, precommit, reprex,
-    shiny.react, shinydashboardPlus, shinyMonacoEditor, upsetjs, usethis.
+I also ran R CMD check on all 39 downstream dependencies of styler using the
+revdepcheck package.
 
 All of them finished R CMD CHECK with zero (0) ERRORS, WARNINGS and NOTES.
