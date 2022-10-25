@@ -7,7 +7,7 @@ NULL
 
 #' @describeIn pd_is Checks whether `pd` contains an expression wrapped in
 #'   curly brackets.
-#' @keywords internal
+#' @export
 is_curly_expr <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
@@ -15,18 +15,19 @@ is_curly_expr <- function(pd) {
   pd$token[1L] == "'{'"
 }
 
+#' @export
 is_for_expr <- function(pd) {
   pd$token[1L] == "FOR"
 }
 
 #' @describeIn pd_is Checks whether `pd` contains is a conditional expression.
-#' @keywords internal
+#' @export
 is_cond_expr <- function(pd) {
   pd$token[1L] == "IF"
 }
 
 #' @describeIn pd_is Checks whether `pd` contains is a while loop.
-#' @keywords internal
+#' @export
 is_while_expr <- function(pd) {
   pd$token[1L] == "WHILE"
 }
@@ -61,8 +62,8 @@ is_function_call <- function(pd) {
 }
 
 #' @describeIn pd_is Checks whether `pd` is a function declaration.
-#' @keywords internal
-is_function_dec <- function(pd) {
+#' @export
+is_function_declaration <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
   }
@@ -70,7 +71,7 @@ is_function_dec <- function(pd) {
 }
 
 #' @describeIn pd_is Checks for every token whether or not it is a comment.
-#' @keywords internal
+#' @export
 is_comment <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
@@ -89,7 +90,7 @@ is_comment <- function(pd) {
 #' A tilde is on the top row in the parse table if it is an asymmetric tilde
 #' expression (like `~column`), in the second row if it is a symmetric tilde
 #' expression (like `a~b`).
-#' @keywords internal
+#' @export
 is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {
   if (is.null(pd) || nrow(pd) == 1L) {
     return(FALSE)

@@ -6,7 +6,7 @@
 \alias{is_cond_expr}
 \alias{is_while_expr}
 \alias{is_function_call}
-\alias{is_function_dec}
+\alias{is_function_declaration}
 \alias{is_comment}
 \title{Check whether a parse table corresponds to a certain expression}
 \usage{
@@ -18,7 +18,7 @@ is_while_expr(pd)
 
 is_function_call(pd)
 
-is_function_dec(pd)
+is_function_declaration(pd)
 
 is_comment(pd)
 }
@@ -41,7 +41,7 @@ curly brackets.
 
 \item \code{is_function_call()}: Checks whether \code{pd} is a function call.
 
-\item \code{is_function_dec()}: Checks whether \code{pd} is a function declaration.
+\item \code{is_function_declaration()}: Checks whether \code{pd} is a function declaration.
 
 \item \code{is_comment()}: Checks for every token whether or not it is a comment.
 
