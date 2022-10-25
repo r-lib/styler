@@ -31,6 +31,11 @@ reference:
   desc: "Utilities to help manage the styler cache"
 - contents:
   - starts_with("cache")
+- title: "Third-party style guide helpers"
+  desc: "Utilities for customizing styler for non-tidyverse style guides"
+- contents:
+  - compute_parse_data_nested
+  - has_concept("third-party style guide helpers")
 - title: "Other"
   contents:
   - print.vertical
