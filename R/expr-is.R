@@ -86,12 +86,14 @@ is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {
   any(pd$token[tilde_pos] == "'~'")
 }
 
-#' @rdname is_tilde_expr
+#' @describeIn pd_is If `pd` contains a tilde, checks whether it is asymmetrical.
+#' @export
 is_asymmetric_tilde_expr <- function(pd) {
   is_tilde_expr(pd, tilde_pos = 1L)
 }
 
-#' @rdname is_tilde_expr
+#' @describeIn pd_is If `pd` contains a tilde, checks whether it is symmetrical.
+#' @export
 is_symmetric_tilde_expr <- function(pd) {
   is_tilde_expr(pd, tilde_pos = 2L)
 }

@@ -287,7 +287,7 @@ start_comments_with_space <- function(pd, force_one = FALSE) {
       comments$text
     ) %>%
     trimws("right")
-  pd$short[is_comment] <- substr(pd$text[is_comment], 1, 5)
+  pd$short[is_comment] <- substr(pd$text[is_comment], 1L, 5L)
   pd
 }
 
@@ -346,20 +346,16 @@ remove_space_after_fun_dec <- function(pd_flat) {
 }
 
 remove_space_around_colons <- function(pd_flat) {
-  one_two_or_three_col_after <-
-    pd_flat$token %in% c("':'", "NS_GET_INT", "NS_GET")
+  one_two_or_three_col_after <- pd_flat$token %in% c("':'", "NS_GET_INT", "NS_GET")
+  one_two_or_three_col_before <- lead(one_two_or_three_col_after, default = FALSE)
 
-  one_two_or_three_col_before <-
-    lead(one_two_or_three_col_after, default = FALSE)
-
-  col_around <-
-    one_two_or_three_col_before | one_two_or_three_col_after
+  col_around <- one_two_or_three_col_before | one_two_or_three_col_after
 
   pd_flat$spaces[col_around & (pd_flat$newlines == 0L)] <- 0L
   pd_flat
 }
 
-#' Set space between EQ_SUB and "','"
+#' Set space between `EQ_SUB` and `"','"`
 #' @param pd A parse table.
 #' @keywords internal
 set_space_between_eq_sub_and_comma <- function(pd) {
