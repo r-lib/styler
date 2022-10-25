@@ -15,6 +15,7 @@ is_curly_expr <- function(pd) {
   pd$token[1L] == "'{'"
 }
 
+#' @describeIn pd_is Checks whether `pd` contains a `for` loop.
 #' @export
 is_for_expr <- function(pd) {
   pd$token[1L] == "FOR"
@@ -26,7 +27,7 @@ is_conditional_expr <- function(pd) {
   pd$token[1L] == "IF"
 }
 
-#' @describeIn pd_is Checks whether `pd` contains is a while loop.
+#' @describeIn pd_is Checks whether `pd` contains a `while` loop.
 #' @export
 is_while_expr <- function(pd) {
   pd$token[1L] == "WHILE"
