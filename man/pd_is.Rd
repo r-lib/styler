@@ -47,18 +47,10 @@ curly brackets.
 
 }}
 \examples{
-\donttest{
 code <- "x <- list(1:3)"
-pd <- compute_parse_data_nested(
-  code,
-  transformers = tidyverse_style(),
-  more_specs = NULL
-)
-
+pd <- compute_parse_data_nested(code)
 is_function_call(pd)
-
 is_function_call(pd$child$`19`$child$`17`)
-}
 }
 \seealso{
 Other third-party style guide helpers: 

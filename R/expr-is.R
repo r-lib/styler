@@ -38,18 +38,10 @@ is_while_expr <- function(pd) {
 #' @family third-party style guide helpers
 #'
 #' @examples
-#' \donttest{
 #' code <- "x <- list(1:3)"
-#' pd <- compute_parse_data_nested(
-#'   code,
-#'   transformers = tidyverse_style(),
-#'   more_specs = NULL
-#' )
-#'
+#' pd <- compute_parse_data_nested(code)
 #' is_function_call(pd)
-#'
 #' is_function_call(pd$child$`19`$child$`17`)
-#' }
 #' @export
 is_function_call <- function(pd) {
   if (is.null(pd)) {
