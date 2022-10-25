@@ -3,7 +3,7 @@
 \name{pd_is}
 \alias{pd_is}
 \alias{is_curly_expr}
-\alias{is_cond_expr}
+\alias{is_conditional_expr}
 \alias{is_while_expr}
 \alias{is_function_call}
 \alias{is_function_declaration}
@@ -12,7 +12,7 @@
 \usage{
 is_curly_expr(pd)
 
-is_cond_expr(pd)
+is_conditional_expr(pd)
 
 is_while_expr(pd)
 
@@ -35,7 +35,7 @@ Check whether \code{pd} is a function call
 \item \code{is_curly_expr()}: Checks whether \code{pd} contains an expression wrapped in
 curly brackets.
 
-\item \code{is_cond_expr()}: Checks whether \code{pd} contains is a conditional expression.
+\item \code{is_conditional_expr()}: Checks whether \code{pd} contains is a conditional expression.
 
 \item \code{is_while_expr()}: Checks whether \code{pd} contains is a while loop.
 

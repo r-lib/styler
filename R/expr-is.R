@@ -22,7 +22,7 @@ is_for_expr <- function(pd) {
 
 #' @describeIn pd_is Checks whether `pd` contains is a conditional expression.
 #' @export
-is_cond_expr <- function(pd) {
+is_conditional_expr <- function(pd) {
   pd$token[1L] == "IF"
 }
 
@@ -168,7 +168,7 @@ contains_else_expr_that_needs_braces <- function(pd) {
     non_comment_after_else <- next_non_comment(pd, else_idx)
     sub_expr <- pd$child[[non_comment_after_else]]
     # needs braces if NOT if_condition, NOT curly expr
-    !is_cond_expr(sub_expr) && !is_curly_expr(sub_expr)
+    !is_conditional_expr(sub_expr) && !is_curly_expr(sub_expr)
   } else {
     FALSE
   }
