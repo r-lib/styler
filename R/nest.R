@@ -6,10 +6,10 @@
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
 #' @importFrom purrr when
-#' @keywords internal
+#' @export
 compute_parse_data_nested <- function(text,
-                                      transformers,
-                                      more_specs) {
+                                      transformers = tidyverse_style(),
+                                      more_specs = NULL) {
   parse_data <- text_to_flat_pd(text, transformers, more_specs = more_specs)
   env_add_stylerignore(parse_data)
   parse_data$child <- rep(list(NULL), length(parse_data$text))
