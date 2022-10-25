@@ -65,7 +65,7 @@ NULL
 #' @export
 tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
-                            indent_by = 2,
+                            indent_by = 2L,
                             start_comments_with_one_space = FALSE,
                             reindention = tidyverse_reindention(),
                             math_token_spacing = tidyverse_math_token_spacing()) {

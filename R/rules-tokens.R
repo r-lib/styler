@@ -74,7 +74,7 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
     is_cond_expr(.) ~ "')'",
     is_while_expr(.) ~ "')'",
     is_for_expr(.) ~ "forcond",
-    is_function_dec(.) ~ "')'"
+    is_function_declaration(.) ~ "')'"
   )
   if (length(key_token) > 0L) {
     pd <- pd %>%

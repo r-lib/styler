@@ -22,7 +22,7 @@ set_space_around_op <- function(pd_flat, strict) {
     !getOption("styler.ignore_alignment", FALSE) &&
       (
         (is_function_call(pd_flat) && sum_lag_newlines > 2L) ||
-          (is_function_dec(pd_flat) && sum_lag_newlines > 1L)
+          (is_function_declaration(pd_flat) && sum_lag_newlines > 1L)
       ) &&
       any(pd_flat$token %in% c("EQ_SUB", "','", "EQ_FORMALS"))
   ) {
