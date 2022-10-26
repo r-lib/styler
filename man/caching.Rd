@@ -39,7 +39,7 @@ empty files which have the hash of output code as name).
 \section{Using a cache for styler in CI/CD}{
 
 If you want to set up caching in a CI/CD pipeline, we suggest to set the
-\code{{R.cache}} root path to a directory for which you have the cache enabled as
+\code{{R.cache}} root path to a directory for which you have the cache enabled.
 This can often be set in config files of CI/CD tools, e.g. see the
 \href{https://docs.travis-ci.com/user/caching}{Travis documentation on caching}.
 }

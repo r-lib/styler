@@ -45,6 +45,7 @@ is_cached <- function(text,
 #' @param more_specs A named vector coercible to character that determines the
 #'   styling but are style guide independent, such as `include_roxygen_examples`
 #'   or `base_indention`.
+#'
 #' @details
 #' We need to compare:
 #'
@@ -64,6 +65,7 @@ is_cached <- function(text,
 #'   see `as.character(list(purrr::partial(sum, x = 4)))`. For that reason,
 #'   all arguments passed to a `purrr::partial()` call must be put in the
 #'   style guide under `more_specs_style_guide`.
+#'
 #' @section Experiments:
 #'
 #' There is unexplainable behavior in conjunction with hashing and
@@ -84,6 +86,7 @@ is_cached <- function(text,
 #'   overwritten / rebased by now) contains a reprex. Otherwise, search for
 #'   43219ixmypi in commit messages and restore this commit to reproduce the
 #'   behavior.
+#'
 #' @examples
 #' add <- function(x, y) {
 #'   x + y
@@ -123,13 +126,16 @@ cache_find_path <- function(cache_name = NULL) {
 #' @keywords internal
 cache_is_activated <- function(cache_name = NULL) {
   current_cache <- cache_get_name()
+
   if (is.null(cache_name)) {
-    !is.null(current_cache)
-  } else if (!is.null(current_cache)) {
-    cache_name == current_cache
-  } else {
-    FALSE
+    return(!is.null(current_cache))
   }
+
+  if (!is.null(current_cache)) {
+    return(cache_name == current_cache)
+  }
+
+  return(FALSE)
 }
 
 #' Cache text
@@ -186,13 +192,9 @@ cache_get_name <- function() {
   getOption("styler.cache_name")
 }
 
-cache_get_or_derive_name <- function(cache_name) {
-  if (is.null(cache_name)) {
-    cache_name <- cache_get_name()
-    if (is.null(cache_name)) {
-      cache_name <- styler_version
-    }
-  }
+cache_get_or_derive_name <- function(cache_name = NULL) {
+  cache_name <- cache_name %||% cache_get_name()
+  cache_name <- cache_name %||% styler_version
   cache_name
 }
 
