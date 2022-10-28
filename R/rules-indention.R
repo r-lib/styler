@@ -18,7 +18,7 @@ indent_braces <- function(pd, indent_by) {
 #' @seealso set_unindention_child update_indention_ref_fun_dec
 #' @keywords internal
 unindent_fun_dec <- function(pd) {
-  if (is_function_dec(pd)) {
+  if (is_function_declaration(pd)) {
     idx_closing_brace <- which(pd$token %in% "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
     pd$indent[fun_dec_head] <- 0L

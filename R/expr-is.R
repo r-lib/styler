@@ -1,13 +1,17 @@
-#' Check whether a parse table corresponds to a certain expression
+#' @title Check whether a parse table corresponds to a certain expression
+#' @name pd_is
 #'
 #' @param pd A parse table.
-#' @name pd_is
+#' @param tilde_pos Integer vector indicating row-indices that should be
+#'   checked for tilde. See 'Details'.
+#'
+#' @family third-party style guide helpers
 #' @keywords internal
 NULL
 
 #' @describeIn pd_is Checks whether `pd` contains an expression wrapped in
 #'   curly brackets.
-#' @keywords internal
+#' @export
 is_curly_expr <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
@@ -15,24 +19,32 @@ is_curly_expr <- function(pd) {
   pd$token[1L] == "'{'"
 }
 
+#' @describeIn pd_is Checks whether `pd` contains a `for` loop.
+#' @export
 is_for_expr <- function(pd) {
   pd$token[1L] == "FOR"
 }
 
 #' @describeIn pd_is Checks whether `pd` contains is a conditional expression.
-#' @keywords internal
-is_cond_expr <- function(pd) {
+#' @export
+is_conditional_expr <- function(pd) {
   pd$token[1L] == "IF"
 }
 
-#' @describeIn pd_is Checks whether `pd` contains is a while loop.
-#' @keywords internal
+#' @describeIn pd_is Checks whether `pd` contains a `while` loop.
+#' @export
 is_while_expr <- function(pd) {
   pd$token[1L] == "WHILE"
 }
 
+
 #' @describeIn pd_is Checks whether `pd` is a function call.
-#' @keywords internal
+#' @examples
+#' code <- "x <- list(1:3)"
+#' pd <- compute_parse_data_nested(code)
+#' is_function_call(pd)
+#' is_function_call(pd$child$`19`$child$`17`)
+#' @export
 is_function_call <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
@@ -44,8 +56,8 @@ is_function_call <- function(pd) {
 }
 
 #' @describeIn pd_is Checks whether `pd` is a function declaration.
-#' @keywords internal
-is_function_dec <- function(pd) {
+#' @export
+is_function_declaration <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
   }
@@ -53,7 +65,7 @@ is_function_dec <- function(pd) {
 }
 
 #' @describeIn pd_is Checks for every token whether or not it is a comment.
-#' @keywords internal
+#' @export
 is_comment <- function(pd) {
   if (is.null(pd)) {
     return(FALSE)
@@ -61,20 +73,12 @@ is_comment <- function(pd) {
   pd$token == "COMMENT"
 }
 
-
-
-#' Check whether a parse table contains a tilde
-#'
-#'
-#' @param pd A parse table.
-#' @param tilde_pos Integer vector indicating row-indices that should be
-#'   checked for tilde. See 'Details'.
-#'
+#' @describeIn pd_is Checks whether `pd` contains a tilde.
 #' @details
 #' A tilde is on the top row in the parse table if it is an asymmetric tilde
 #' expression (like `~column`), in the second row if it is a symmetric tilde
 #' expression (like `a~b`).
-#' @keywords internal
+#' @export
 is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {
   if (is.null(pd) || nrow(pd) == 1L) {
     return(FALSE)
@@ -82,18 +86,20 @@ is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {
   any(pd$token[tilde_pos] == "'~'")
 }
 
-#' @rdname is_tilde_expr
+#' @describeIn pd_is If `pd` contains a tilde, checks whether it is asymmetrical.
+#' @export
 is_asymmetric_tilde_expr <- function(pd) {
   is_tilde_expr(pd, tilde_pos = 1L)
 }
 
-#' @rdname is_tilde_expr
+#' @describeIn pd_is If `pd` contains a tilde, checks whether it is symmetrical.
+#' @export
 is_symmetric_tilde_expr <- function(pd) {
   is_tilde_expr(pd, tilde_pos = 2L)
 }
 
 is_subset_expr <- function(pd) {
-  if (is.null(pd) || nrow(pd) == 1) {
+  if (is.null(pd) || nrow(pd) == 1L) {
     return(FALSE)
   }
   pd$token[2L] %in% subset_token_opening
@@ -152,7 +158,7 @@ contains_else_expr_that_needs_braces <- function(pd) {
     non_comment_after_else <- next_non_comment(pd, else_idx)
     sub_expr <- pd$child[[non_comment_after_else]]
     # needs braces if NOT if_condition, NOT curly expr
-    !is_cond_expr(sub_expr) && !is_curly_expr(sub_expr)
+    !is_conditional_expr(sub_expr) && !is_curly_expr(sub_expr)
   } else {
     FALSE
   }

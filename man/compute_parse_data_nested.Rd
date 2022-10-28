@@ -4,7 +4,11 @@
 \alias{compute_parse_data_nested}
 \title{Obtain a nested parse table from a character vector}
 \usage{
-compute_parse_data_nested(text, transformers, more_specs)
+compute_parse_data_nested(
+  text,
+  transformers = tidyverse_style(),
+  more_specs = NULL
+)
 }
 \arguments{
 \item{text}{The text to parse.}
@@ -21,4 +25,3 @@ of the parse table.
 Parses \code{text} to a flat parse table and subsequently changes its
 representation into a nested parse table with \code{\link[=nest_parse_data]{nest_parse_data()}}.
 }
-\keyword{internal}
