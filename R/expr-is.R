@@ -9,8 +9,7 @@
 #' @keywords internal
 NULL
 
-#' @describeIn pd_is Checks whether `pd` contains an expression wrapped in
-#'   curly brackets.
+#' @describeIn pd_is Checks whether `pd` contains an expression wrapped in curly brackets.
 #' @export
 is_curly_expr <- function(pd) {
   if (is.null(pd)) {

@@ -50,8 +50,7 @@ expression (like \code{a~b}).
 }
 \section{Functions}{
 \itemize{
-\item \code{is_curly_expr()}: Checks whether \code{pd} contains an expression wrapped in
-curly brackets.
+\item \code{is_curly_expr()}: Checks whether \code{pd} contains an expression wrapped in curly brackets.
 
 \item \code{is_for_expr()}: Checks whether \code{pd} contains a \code{for} loop.
 
