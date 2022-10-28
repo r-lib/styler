@@ -20,11 +20,11 @@ set_space_around_op <- function(pd_flat, strict) {
   sum_lag_newlines <- sum(pd_flat$lag_newlines)
   if (
     !getOption("styler.ignore_alignment", FALSE) &&
-    (
-      (is_function_call(pd_flat) && sum_lag_newlines > 2L) ||
-      (is_function_declaration(pd_flat) && sum_lag_newlines > 1L)
-    ) &&
-    any(pd_flat$token %in% c("EQ_SUB", "','", "EQ_FORMALS"))
+      (
+        (is_function_call(pd_flat) && sum_lag_newlines > 2L) ||
+          (is_function_declaration(pd_flat) && sum_lag_newlines > 1L)
+      ) &&
+      any(pd_flat$token %in% c("EQ_SUB", "','", "EQ_FORMALS"))
   ) {
     is_on_aligned_line <- token_is_on_aligned_line(pd_flat)
   } else {
@@ -105,15 +105,15 @@ style_space_around_token <- function(pd_flat,
 style_space_around_tilde <- function(pd_flat, strict) {
   if (is_symmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
-                                        strict, "'~'",
-                                        level_before = 1L, level_after = 1L
+      strict, "'~'",
+      level_before = 1L, level_after = 1L
     )
   }
 
   if (is_asymmetric_tilde_expr(pd_flat)) {
     pd_flat <- style_space_around_token(pd_flat,
-                                        strict = TRUE, "'~'", level_before = 1L,
-                                        level_after = as.integer(nrow(pd_flat$child[[2L]]) > 1L)
+      strict = TRUE, "'~'", level_before = 1L,
+      level_after = as.integer(nrow(pd_flat$child[[2L]]) > 1L)
     )
   }
 

@@ -81,7 +81,7 @@ tidyverse_style <- function(scope = "tokens",
       indent_op = partial(indent_op, indent_by = indent_by),
       indent_eq_sub = partial(indent_eq_sub, indent_by = indent_by),
       indent_without_paren = partial(indent_without_paren,
-                                     indent_by = indent_by
+        indent_by = indent_by
       ),
       update_indention_ref_fun_dec = update_indention_ref_fun_dec
     )
@@ -104,7 +104,7 @@ tidyverse_style <- function(scope = "tokens",
         strict = strict
       ),
       spacing_around_op = purrr::partial(set_space_around_op,
-                                         strict = strict
+        strict = strict
       ),
       remove_space_after_opening_paren = remove_space_after_opening_paren,
       remove_space_after_excl = remove_space_after_excl,
@@ -113,7 +113,7 @@ tidyverse_style <- function(scope = "tokens",
       remove_space_after_fun_dec = remove_space_after_fun_dec,
       remove_space_around_colons = remove_space_around_colons,
       start_comments_with_space = partial(start_comments_with_space,
-                                          force_one = start_comments_with_one_space
+        force_one = start_comments_with_one_space
       ),
       remove_space_after_unary_pm_nested = remove_space_after_unary_pm_nested,
       spacing_before_comments = if (strict) {
