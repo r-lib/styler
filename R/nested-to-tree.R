@@ -16,15 +16,16 @@ create_tree_from_pd_with_default_style_attributes <- function(pd,
                                                               structure_only = FALSE) {
   pd %>%
     create_node_from_nested_root(structure_only) %>%
+    # don't use `styler_df()` here; `vctrs::data_frame()` only accepts a vector, not a <Node/R6> object
     as.data.frame()
 }
 
 
-#' Convert a nested tibble into a node tree
+#' Convert a nested data frame into a node tree
 #'
-#' This function is convenient to display all nesting levels of a nested tibble
+#' This function is convenient to display all nesting levels of a nested data frame
 #' at once.
-#' @param pd_nested A nested tibble.
+#' @param pd_nested A nested data frame.
 #' @param structure_only Whether or not create a tree that represents the
 #'   structure of the expression without any information on the tokens. Useful
 #'   to check whether two structures are identical.

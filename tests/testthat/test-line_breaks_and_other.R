@@ -69,8 +69,13 @@ test_that("line is correctly broken around = ", {
   ), NA)
 })
 
+test_that("comments are not moved down after {", {
+  expect_warning(test_collection("line_breaks_and_other", "comment-around-curly",
+    transformer = style_text
+  ), NA)
+
 test_that("empty lines between roxygen comments and code are removed", {
   expect_warning(test_collection("line_breaks_and_other", "line-break-between-roxygen-and-code",
-    transformer = style_text
+      transformer = style_text
   ), NA)
 })

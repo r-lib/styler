@@ -12,7 +12,7 @@ next_non_comment <- function(pd, pos) {
   if (all(candidates %in% which(pd$token == "COMMENT"))) {
     return(integer(0))
   }
-  setdiff(candidates, which(pd$token == "COMMENT"))[1]
+  setdiff(candidates, which(pd$token == "COMMENT"))[1L]
 }
 
 #' @rdname next_non_comment
@@ -33,7 +33,7 @@ previous_non_comment <- function(pd, pos) {
 #' next terminal
 #' @param pd A nest.
 #' @param stack Whether or not to also return information on the tokens that
-#'   are between `pd` and the first terminal, so the returned tibble can be
+#'   are between `pd` and the first terminal, so the returned data frame can be
 #'   understood as a transition path from `pd` to the next terminal, instead of
 #'   the information at the terminal only. The order is inside-out,
 #'   i.e. the first non-terminal on top, the terminal last.
@@ -41,7 +41,7 @@ previous_non_comment <- function(pd, pos) {
 #' @param tokens_exclude A vector with tokens to exclude. This can be helpful if
 #'   one wants to find the next token that is not a comment for example.
 #' @return
-#' Returns a tibble (which is **not** a valid parse table for
+#' Returns a data frame (which is **not** a valid parse table for
 #' `stack = TRUE`), with `vars` and another variable `position` that denotes
 #' the index each element in the transition. This can be helpful in conjunction
 #' with [purrr::pluck()] or [purrr::modify_in()] to reach the terminal in the
@@ -61,11 +61,11 @@ next_terminal <- function(pd,
                           tokens_exclude = NULL) {
   pd$position <- seq2(1, nrow(pd))
   pd <- pd[!(pd$token %in% tokens_exclude), ]
-  if (pd$terminal[1]) {
+  if (pd$terminal[1L]) {
     pd[1, c("position", vars)]
   } else {
     current <- next_terminal(
-      pd$child[[1]],
+      pd$child[[1L]],
       stack = stack, vars = vars, tokens_exclude = tokens_exclude
     )
     if (stack) {

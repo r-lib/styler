@@ -145,7 +145,7 @@ drop_cached_children <- function(pd) {
 #' styler:::get_parse_data(c("", "c(#", "1)", "#"))
 #' @keywords internal
 find_pos_id_to_keep <- function(pd) {
-  if (pd$is_cached[1]) {
+  if (pd$is_cached[1L]) {
     pd$pos_id[pd$parent <= 0]
   } else {
     pd$pos_id
@@ -249,7 +249,7 @@ add_terminal_token_after <- function(pd_flat) {
     filter(terminal) %>%
     arrange_pos_id()
 
-  rhs <- new_tibble(
+  rhs <- new_styler_df(
     list(
       pos_id = terminals$pos_id,
       token_after = lead(terminals$token, default = "")
@@ -266,7 +266,7 @@ add_terminal_token_before <- function(pd_flat) {
     filter(terminal) %>%
     arrange_pos_id()
 
-  rhs <- new_tibble(
+  rhs <- new_styler_df(
     list(
       id = terminals$id,
       token_before = lag(terminals$token, default = "")
@@ -292,9 +292,9 @@ add_attributes_caching <- function(pd_flat, transformers, more_specs) {
   pd_flat$block <- rep(NA, nrow(pd_flat))
   pd_flat$is_cached <- rep(FALSE, nrow(pd_flat))
   if (cache_is_activated()) {
-    is_parent <- pd_flat$parent == 0
+    is_parent <- pd_flat$parent == 0L
     pd_flat$is_cached[is_parent] <- map_lgl(
-      pd_flat$text[pd_flat$parent == 0],
+      pd_flat$text[pd_flat$parent == 0L],
       is_cached, transformers,
       more_specs = more_specs
     )
@@ -330,7 +330,7 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #'  a parent to other tokens (called internal) and such that are not (called
 #'  child). Then, the token in child are joined to their parents in internal
 #'  and all token information of the children is nested into a column "child".
-#'  This is done recursively until we are only left with a nested tibble that
+#'  This is done recursively until we are only left with a nested data frame that
 #'  contains one row: The nested parse table.
 #' @param pd_flat A flat parse table including both terminals and non-terminals.
 #' @seealso [compute_parse_data_nested()]

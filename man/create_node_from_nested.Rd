@@ -7,7 +7,7 @@
 create_node_from_nested(pd_nested, parent, structure_only)
 }
 \arguments{
-\item{pd_nested}{A nested tibble.}
+\item{pd_nested}{A nested data frame.}
 
 \item{parent}{The parent of the node to be created.}
 

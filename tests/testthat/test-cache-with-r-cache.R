@@ -3,7 +3,7 @@ test_that("Cache management works", {
   expect_false(cache_info(format = "tabular")$activated)
   local_test_setup(cache = TRUE)
   # at fresh startup
-  expect_s3_class(cache_info(format = "tabular"), "tbl_df")
+  expect_s3_class(cache_info(format = "tabular"), "data.frame")
   expect_error(capture.output(cache_info()), NA)
   expect_equal(basename(cache_activate()), styler_version)
   expect_equal(basename(cache_activate("xyz")), "xyz")
@@ -24,37 +24,6 @@ test_that("Cache management works", {
   expect_equal(getOption("styler.cache_location"), NULL)
   expect_error(cache_clear("testthat", ask = FALSE), NA)
 })
-
-test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
-  local_test_setup(cache = TRUE)
-  text <- test_path("cache-with-r-cache/mlflow-1-in.R") %>%
-    readLines()
-  benchmark <- system.time(text_styled <- as.character(style_text(text)))
-  expect_equal(text, text_styled)
-  full_cached_benchmark <- system.time(text_styled2 <- as.character(style_text(text_styled)))
-  expect_equal(text, text_styled2)
-
-  # modify one function declaration
-  text_styled[2] <- gsub(")", " )", text_styled[2], fixed = TRUE)
-  partially_cached_benchmark <- system.time(
-    text_cached_partially <- as.character(style_text(text_styled))
-  )
-  expect_equal(text, text_cached_partially)
-  cache_deactivate()
-  not_cached_benchmark <- system.time(
-    text_not_cached <- as.character(style_text(text_styled))
-  )
-  expect_equal(text, text_not_cached)
-
-  skip_on_cran()
-  skip_on_covr()
-  expect_lt(
-    partially_cached_benchmark["elapsed"] * 2.4,
-    not_cached_benchmark["elapsed"]
-  )
-  expect_lt(full_cached_benchmark["elapsed"] * 45, benchmark["elapsed"])
-})
-
 
 test_that("cached expressions are displayed propperly", {
   skip_if(getRversion() < "4.2")

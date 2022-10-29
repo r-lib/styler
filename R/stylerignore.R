@@ -21,12 +21,12 @@ env_add_stylerignore <- function(pd_flat) {
     default_style_guide_attributes()
   is_stylerignore_switchpoint <- pd_flat_temp$stylerignore != lag(
     pd_flat_temp$stylerignore,
-    default = pd_flat_temp$stylerignore[1]
+    default = pd_flat_temp$stylerignore[1L]
   )
   pd_flat_temp$first_pos_id_in_segment <- split(
     pd_flat_temp$pos_id, cumsum(is_stylerignore_switchpoint)
   ) %>%
-    map(~ rep(.x[1], length(.x))) %>%
+    map(~ rep(.x[1L], length(.x))) %>%
     unlist(use.names = FALSE)
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
   pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0L)
@@ -62,7 +62,7 @@ add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
     return(pd_flat)
   }
-  pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0)
+  pd_flat_lat_line1 <- lag(pd_flat$line2, default = 0L)
   on_same_line <- pd_flat$line1 == pd_flat_lat_line1
   cumsum_start <- cumsum(start_candidate & !on_same_line)
   cumsum_stop <- cumsum(
@@ -70,7 +70,7 @@ add_stylerignore <- function(pd_flat) {
       pd_flat$token == "COMMENT"
   )
   pd_flat$indicator_off <- cumsum_start + cumsum_stop
-  is_invalid <- cumsum_start - cumsum_stop < 0 | cumsum_start - cumsum_stop > 1
+  is_invalid <- cumsum_start - cumsum_stop < 0L | cumsum_start - cumsum_stop > 1L
   if (any(is_invalid)) {
     warn(paste0(
       "Invalid stylerignore sequences found, potentially ignoring some of the ",
@@ -78,7 +78,7 @@ add_stylerignore <- function(pd_flat) {
     ))
   }
 
-  to_ignore <- as.logical(pd_flat$indicator_off %% 2)
+  to_ignore <- as.logical(pd_flat$indicator_off %% 2L)
   to_ignore[is_invalid] <- FALSE
   single_lines_to_ignore <- pd_flat$line1[start_candidate & on_same_line]
   to_ignore[pd_flat$line1 %in% single_lines_to_ignore] <- TRUE
@@ -112,7 +112,7 @@ apply_stylerignore <- function(flattened_pd) {
   # cannot rely on flattened_pd$text == option_read("styler.ignore_start")
   # because if the marker logic is not correct (twice off in a row), we'll
   # get it wrong.
-  to_ignore <- flattened_pd$stylerignore == TRUE
+  to_ignore <- flattened_pd$stylerignore
   not_first <- flattened_pd$stylerignore == lag(
     flattened_pd$stylerignore,
     default = FALSE
@@ -123,8 +123,8 @@ apply_stylerignore <- function(flattened_pd) {
     env_current$stylerignore[, colnames_required_apply_stylerignore],
     by.x = "pos_id", by.y = "first_pos_id_in_segment", all.x = TRUE,
     sort = FALSE
-  ) %>%
-    as_tibble()
+  )
+
   flattened_pd %>%
     stylerignore_consolidate_col("lag_newlines") %>%
     stylerignore_consolidate_col("lag_spaces") %>%

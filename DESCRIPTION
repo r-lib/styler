@@ -1,7 +1,7 @@
 Type: Package
 Package: styler
 Title: Non-Invasive Pretty Printing of R Code
-Version: 1.7.0.9002
+Version: 1.8.0.9000
 Authors@R: 
     c(person(given = "Kirill",
              family = "Müller",
@@ -29,11 +29,10 @@ Imports:
     magrittr (>= 2.0.0),
     purrr (>= 0.2.3),
     R.cache (>= 0.15.0),
-    rematch2 (>= 2.0.1),
     rlang (>= 0.1.1),
     rprojroot (>= 1.1),
-    tibble (>= 1.4.2),
     tools,
+    vctrs (>= 0.4.1),
     withr (>= 1.0.0),
 Suggests: 
     data.tree (>= 0.1.6),
@@ -45,12 +44,15 @@ Suggests:
     rmarkdown,
     roxygen2,
     rstudioapi (>= 0.7),
+    tibble (>= 1.4.2),
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "collate",
-    "pkgapi::api_roclet"))
+Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace", "collate",
+    if (rlang::is_installed("pkgapi")) "pkgapi::api_roclet" else {
+    warning("Please install r-lib/pkgapi to make sure the file API is kept
+    up to date"); NULL}))
 RoxygenNote: 7.2.1
 Config/testthat/edition: 3
 Config/testthat/parallel: true

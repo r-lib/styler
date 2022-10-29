@@ -27,7 +27,7 @@ options(styler.colored_print.vertical = FALSE)
 
 styler provides the following API to format code:
 
--   `style_file()` styles `.R`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.Rprofile` files.
+-   `style_file()` styles `.R`, `.qmd`, `.Rmd`, `.Rmarkdown`, `.Rnw`, and `.Rprofile` files.
 
 -   `style_dir()` styles all these files in a directory.
 
