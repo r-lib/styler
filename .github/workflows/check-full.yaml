@@ -59,3 +59,4 @@ jobs:
           error-on: '"note"'
         env:
           _R_CHECK_FORCE_SUGGESTS_: false
+          _R_CHECK_THINGS_IN_TEMP_DIR_: true
