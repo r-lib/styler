@@ -2,7 +2,13 @@
 #' @param pd A parse table.
 #' @param pos The position of the token to start the search from.
 #' @importFrom rlang seq2
-#' @keywords internal
+#' @examples
+#' code <- "a <- # hi \n x %>% b()"
+#' writeLines(code)
+#' pd <- compute_parse_data_nested(code)
+#' child <- pd$child[[1]]
+#' previous_non_comment(child, 4L)
+#' next_non_comment(child, 2L)
 #' @family third-party style guide helpers
 #' @export
 next_non_comment <- function(pd, pos) {

@@ -72,10 +72,41 @@ expression (like \code{a~b}).
 
 }}
 \examples{
+code <- "if (TRUE) { 1 }"
+pd <- compute_parse_data_nested(code)
+is_curly_expr(pd)
+is_curly_expr(pd$child$`17`$child$`14`)
+
+code <- "for (i in 1:5) print(1:i)"
+pd <- compute_parse_data_nested(code)
+is_for_expr(pd)
+is_for_expr(pd$child$`30`)
+
+code <- "if (TRUE) x <- 1 else x <- 0"
+pd <- compute_parse_data_nested(code)
+is_conditional_expr(pd)
+is_conditional_expr(pd$child$`24`)
+
 code <- "x <- list(1:3)"
 pd <- compute_parse_data_nested(code)
 is_function_call(pd)
 is_function_call(pd$child$`19`$child$`17`)
+
+code <- "foo <- function() NULL"
+pd <- compute_parse_data_nested(code)
+is_function_declaration(pd)
+is_function_declaration(pd$child$`12`$child$`11`)
+
+code <- "x <- 1 # TODO: check value"
+pd <- compute_parse_data_nested(code)
+is_comment(pd)
+
+code <- "lm(wt ~ mpg, mtcars)"
+pd <- compute_parse_data_nested(code)
+is_tilde_expr(pd$child$`20`$child$`10`)
+is_symmetric_tilde_expr(pd$child$`20`$child$`10`)
+is_asymmetric_tilde_expr(pd$child$`20`$child$`10`)
+
 }
 \seealso{
 Other third-party style guide helpers: 

@@ -477,8 +477,10 @@ tidyverse_reindention <- function() {
 #' @param scope A character vector of length one or a vector of class `AsIs`.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
-#' @keywords internal
 #' @importFrom rlang abort
+#' @examples
+#' scope_normalize(I("tokens"))
+#' scope_normalize(I(c("indention", "tokens")))
 #' @family third-party style guide helpers
 #' @export
 scope_normalize <- function(scope, name = substitute(scope)) {

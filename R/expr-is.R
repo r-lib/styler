@@ -10,6 +10,12 @@
 NULL
 
 #' @describeIn pd_is Checks whether `pd` contains an expression wrapped in curly brackets.
+#' @examples
+#' code <- "if (TRUE) { 1 }"
+#' pd <- compute_parse_data_nested(code)
+#' is_curly_expr(pd)
+#' is_curly_expr(pd$child$`17`$child$`14`)
+#'
 #' @export
 is_curly_expr <- function(pd) {
   if (is.null(pd)) {
@@ -19,12 +25,24 @@ is_curly_expr <- function(pd) {
 }
 
 #' @describeIn pd_is Checks whether `pd` contains a `for` loop.
+#' @examples
+#' code <- "for (i in 1:5) print(1:i)"
+#' pd <- compute_parse_data_nested(code)
+#' is_for_expr(pd)
+#' is_for_expr(pd$child$`30`)
+#'
 #' @export
 is_for_expr <- function(pd) {
   pd$token[1L] == "FOR"
 }
 
 #' @describeIn pd_is Checks whether `pd` contains is a conditional expression.
+#' @examples
+#' code <- "if (TRUE) x <- 1 else x <- 0"
+#' pd <- compute_parse_data_nested(code)
+#' is_conditional_expr(pd)
+#' is_conditional_expr(pd$child$`24`)
+#'
 #' @export
 is_conditional_expr <- function(pd) {
   pd$token[1L] == "IF"
@@ -43,6 +61,7 @@ is_while_expr <- function(pd) {
 #' pd <- compute_parse_data_nested(code)
 #' is_function_call(pd)
 #' is_function_call(pd$child$`19`$child$`17`)
+#'
 #' @export
 is_function_call <- function(pd) {
   if (is.null(pd)) {
@@ -55,6 +74,12 @@ is_function_call <- function(pd) {
 }
 
 #' @describeIn pd_is Checks whether `pd` is a function declaration.
+#' @examples
+#' code <- "foo <- function() NULL"
+#' pd <- compute_parse_data_nested(code)
+#' is_function_declaration(pd)
+#' is_function_declaration(pd$child$`12`$child$`11`)
+#'
 #' @export
 is_function_declaration <- function(pd) {
   if (is.null(pd)) {
@@ -64,6 +89,11 @@ is_function_declaration <- function(pd) {
 }
 
 #' @describeIn pd_is Checks for every token whether or not it is a comment.
+#' @examples
+#' code <- "x <- 1 # TODO: check value"
+#' pd <- compute_parse_data_nested(code)
+#' is_comment(pd)
+#'
 #' @export
 is_comment <- function(pd) {
   if (is.null(pd)) {
@@ -77,6 +107,13 @@ is_comment <- function(pd) {
 #' A tilde is on the top row in the parse table if it is an asymmetric tilde
 #' expression (like `~column`), in the second row if it is a symmetric tilde
 #' expression (like `a~b`).
+#' @examples
+#' code <- "lm(wt ~ mpg, mtcars)"
+#' pd <- compute_parse_data_nested(code)
+#' is_tilde_expr(pd$child$`20`$child$`10`)
+#' is_symmetric_tilde_expr(pd$child$`20`$child$`10`)
+#' is_asymmetric_tilde_expr(pd$child$`20`$child$`10`)
+#'
 #' @export
 is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {
   if (is.null(pd) || nrow(pd) == 1L) {
