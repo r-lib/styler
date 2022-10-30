@@ -6,6 +6,13 @@
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
 #' @importFrom purrr when
+#' @examples
+#' code <- "
+#' ab     <- 1L # some comment
+#' abcdef <- 2L
+#' "
+#' writeLines(code)
+#' compute_parse_data_nested(code)
 #' @export
 compute_parse_data_nested <- function(text,
                                       transformers = tidyverse_style(),
