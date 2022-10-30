@@ -25,3 +25,11 @@ of the parse table.
 Parses \code{text} to a flat parse table and subsequently changes its
 representation into a nested parse table with \code{\link[=nest_parse_data]{nest_parse_data()}}.
 }
+\examples{
+code <- "
+ab     <- 1L # some comment
+abcdef <- 2L
+"
+writeLines(code)
+compute_parse_data_nested(code)
+}
