@@ -82,7 +82,7 @@ The source code is organized as follows:
 | compat-dplyr.R | compatibility functions. Since styler does not depend on dplyr, we define the dplyr functions ourself.|
 | compat-tidyr.R | compatibility functions. Since styler does not depend on tidy, we define the tidyr functions ourself.|
 | expr-is.R      | Functions to check whether an expression matches a predicate (e.g. whether it *is* a function call, a curly brace expression etc.). |
-| indent.R       | Computation of whether indention is needed (needs_indention()), if so which indices are indented and how indention is it is triggered. |
+| indent.R       | Computation of whether indention is needed (`needs_indention()`), if so which indices are indented and how indention is it is triggered. |
 | initialize.R   | initializer called with the visitor at each nest. |
 | nest.R         | converting from a text representation into a flat and then into a nested parse table representation. |
 | nested-to-tree.R | utilities to create a tree representation from text (after text was converted into a nested parse table). |  
@@ -97,7 +97,7 @@ The source code is organized as follows:
 | testing.R | function used for testing. |
 | token-create.R | Utilities for creating tokens, mostly to insert braces around mutli-line if statements. |
 | token-define.R | Defines which tokens belong to which group. |
-| transform-code.R, transform-files.R | Transformation of code for APIs that manipulate files (e.g. style_file()). |
+| transform-code.R, transform-files.R | Transformation of code for APIs that manipulate files (e.g. `style_file()`). |
 | ui.R | User interaces. Top-level functions for styling. |
 | unindent.R | Certain tokens cause unindention, e.g. closing braces. |
 | utils.R | low-level general purpose utilities. |
