@@ -390,7 +390,7 @@ remove_line_break_in_fun_call <- function(pd, strict) {
 }
 
 
-set_linebreak_after_ggplot2_plus <- function(pd) {
+set_line_break_after_ggplot2_plus <- function(pd) {
   # if expression is unary, first token is +. Exclude this case.
   is_plus_raw <- c(FALSE, pd$token[-1L] == "'+'")
   if (any(is_plus_raw)) {
