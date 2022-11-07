@@ -65,7 +65,7 @@ NULL
 #' @export
 tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
-                            indent_by = 2,
+                            indent_by = 2L,
                             start_comments_with_one_space = FALSE,
                             reindention = tidyverse_reindention(),
                             math_token_spacing = tidyverse_math_token_spacing()) {
@@ -477,8 +477,12 @@ tidyverse_reindention <- function() {
 #' @param scope A character vector of length one or a vector of class `AsIs`.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
-#' @keywords internal
 #' @importFrom rlang abort
+#' @examples
+#' scope_normalize(I("tokens"))
+#' scope_normalize(I(c("indention", "tokens")))
+#' @family third-party style guide helpers
+#' @export
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
   if (!all((scope %in% levels))) {

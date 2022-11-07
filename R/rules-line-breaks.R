@@ -98,7 +98,7 @@ set_line_break_before_curly_opening <- function(pd) {
     should_not_be_on_same_line_idx <- line_break_to_set_idx[
       should_not_be_on_same_line
     ]
-    if (is_function_dec(pd)) {
+    if (is_function_declaration(pd)) {
       should_not_be_on_same_line_idx <- setdiff(
         1L + should_not_be_on_same_line_idx, nrow(pd)
       )
@@ -228,7 +228,7 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
 }
 
 remove_line_breaks_in_fun_dec <- function(pd) {
-  if (is_function_dec(pd)) {
+  if (is_function_declaration(pd)) {
     round_after <- (
       pd$token == "')'" | pd$token_before == "'('"
     ) &

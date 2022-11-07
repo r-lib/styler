@@ -71,10 +71,10 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
   key_token <- when(
     pd,
-    is_cond_expr(.) ~ "')'",
+    is_conditional_expr(.) ~ "')'",
     is_while_expr(.) ~ "')'",
     is_for_expr(.) ~ "forcond",
-    is_function_dec(.) ~ "')'"
+    is_function_declaration(.) ~ "')'"
   )
   if (length(key_token) > 0L) {
     pd <- pd %>%
@@ -83,7 +83,7 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
         space_after = as.integer(contains_else_expr(pd))
       )
   }
-  if (is_cond_expr(pd)) {
+  if (is_conditional_expr(pd)) {
     pd <- pd %>%
       wrap_else_multiline_curly(indent_by, space_after = 0L)
   }
