@@ -1,5 +1,35 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# styler 1.8.1 
+
+**Features**
+
+- Expose internals used with other style guides (\@Robinlovelace + 
+  collaborators, #1043, #1052).
+
+
+**Other**
+
+- Bump minimal version requirement on {withr} as `...` in 
+  `withr::local_options()` was introduced only in v.2.3.0 (#1051).
+- Rename internal function `set_linebreak_after_ggplot2_plus()` to 
+  `set_line_break_after_ggplot2_plus()` for consistency (\@Polkas, #1049).
+- Reformat contributing guidelines (#1047).
+- Improve YAML formatting for pkgdown (#1042).
+- Simplify caching internal's conditionals with `rlang::%||%` (#1041).
+- Only run {pkgapi} if available (#1039).
+- Typos (\@MichaelChirico, #1038)
+
+This release was requested by CRAN to resolve an R CMD Check note (#1044). 
+A big hand to everyone who made this release possible: 
+
+[&#x0040;DaveJarvis](https://github.com/DaveJarvis), 
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
+[&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), 
+[&#x0040;MichaelChirico](https://github.com/MichaelChirico), 
+[&#x0040;Polkas](https://github.com/Polkas), and 
+[&#x0040;Robinlovelace](https://github.com/Robinlovelace).
+
 
 # styler 1.8.0
 

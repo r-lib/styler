@@ -4,6 +4,18 @@ editor_options:
     wrap: 79
 ---
 
+This release was requested by the CRAN team to fix the following note:
+
+```
+Version: 1.8.0
+
+Check: for detritus in the temp directory
+Result: NOTE
+Found the following
+files/directories: 'Rscript1f0f0d.ckXemN'
+Flavor: r-devel-linux-x86_64-fedora-clang
+``` 
+
 ## Test environments
 
 -   ubuntu 20.04 (on GitHub Actions): R devel, R 4.2.1, 4.1.2, R 4.0.5, R 3.6,
