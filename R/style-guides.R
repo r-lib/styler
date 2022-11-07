@@ -165,8 +165,8 @@ tidyverse_style <- function(scope = "tokens",
         strict = strict
       ),
       add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
-      set_linebreak_after_ggplot2_plus = if (strict) {
-        set_linebreak_after_ggplot2_plus
+      set_line_break_after_ggplot2_plus = if (strict) {
+        set_line_break_after_ggplot2_plus
       }
     )
   }
