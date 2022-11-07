@@ -1,4 +1,6 @@
-#' @title Check whether a parse table corresponds to a certain expression
+#' What is a parse table representing?
+#'
+#' Check whether a parse table corresponds to a certain expression.
 #' @name pd_is
 #'
 #' @param pd A parse table.
@@ -14,7 +16,8 @@ NULL
 #' code <- "if (TRUE) { 1 }"
 #' pd <- compute_parse_data_nested(code)
 #' is_curly_expr(pd)
-#' is_curly_expr(pd$child$`17`$child$`14`)
+#' child_of_child <- pd$child[[1]]$child[[5]]
+#' is_curly_expr(child_of_child)
 #'
 #' @export
 is_curly_expr <- function(pd) {
@@ -29,7 +32,7 @@ is_curly_expr <- function(pd) {
 #' code <- "for (i in 1:5) print(1:i)"
 #' pd <- compute_parse_data_nested(code)
 #' is_for_expr(pd)
-#' is_for_expr(pd$child$`30`)
+#' is_for_expr(pd$child[[1]])
 #'
 #' @export
 is_for_expr <- function(pd) {
@@ -41,7 +44,7 @@ is_for_expr <- function(pd) {
 #' code <- "if (TRUE) x <- 1 else x <- 0"
 #' pd <- compute_parse_data_nested(code)
 #' is_conditional_expr(pd)
-#' is_conditional_expr(pd$child$`24`)
+#' is_conditional_expr(pd$child[[1]])
 #'
 #' @export
 is_conditional_expr <- function(pd) {
@@ -60,7 +63,8 @@ is_while_expr <- function(pd) {
 #' code <- "x <- list(1:3)"
 #' pd <- compute_parse_data_nested(code)
 #' is_function_call(pd)
-#' is_function_call(pd$child$`19`$child$`17`)
+#' child_of_child <- pd$child[[1]]$child[[3]]
+#' is_function_call(child_of_child)
 #'
 #' @export
 is_function_call <- function(pd) {
@@ -78,7 +82,8 @@ is_function_call <- function(pd) {
 #' code <- "foo <- function() NULL"
 #' pd <- compute_parse_data_nested(code)
 #' is_function_declaration(pd)
-#' is_function_declaration(pd$child$`12`$child$`11`)
+#' child_of_child <- pd$child[[1]]$child[[3]]
+#' is_function_declaration(child_of_child)
 #'
 #' @export
 is_function_declaration <- function(pd) {
@@ -110,9 +115,9 @@ is_comment <- function(pd) {
 #' @examples
 #' code <- "lm(wt ~ mpg, mtcars)"
 #' pd <- compute_parse_data_nested(code)
-#' is_tilde_expr(pd$child$`20`$child$`10`)
-#' is_symmetric_tilde_expr(pd$child$`20`$child$`10`)
-#' is_asymmetric_tilde_expr(pd$child$`20`$child$`10`)
+#' is_tilde_expr(pd$child[[1]]$child[[3]])
+#' is_symmetric_tilde_expr(pd$child[[1]]$child[[3]])
+#' is_asymmetric_tilde_expr(pd$child[[1]]$child[[3]])
 #'
 #' @export
 is_tilde_expr <- function(pd, tilde_pos = c(1L, 2L)) {

@@ -12,7 +12,7 @@
 \alias{is_tilde_expr}
 \alias{is_asymmetric_tilde_expr}
 \alias{is_symmetric_tilde_expr}
-\title{Check whether a parse table corresponds to a certain expression}
+\title{What is a parse table representing?}
 \usage{
 is_curly_expr(pd)
 
@@ -41,7 +41,7 @@ is_symmetric_tilde_expr(pd)
 checked for tilde. See 'Details'.}
 }
 \description{
-Check whether a parse table corresponds to a certain expression
+Check whether a parse table corresponds to a certain expression.
 }
 \details{
 A tilde is on the top row in the parse table if it is an asymmetric tilde
@@ -75,27 +75,30 @@ expression (like \code{a~b}).
 code <- "if (TRUE) { 1 }"
 pd <- compute_parse_data_nested(code)
 is_curly_expr(pd)
-is_curly_expr(pd$child$`17`$child$`14`)
+child_of_child <- pd$child[[1]]$child[[5]]
+is_curly_expr(child_of_child)
 
 code <- "for (i in 1:5) print(1:i)"
 pd <- compute_parse_data_nested(code)
 is_for_expr(pd)
-is_for_expr(pd$child$`30`)
+is_for_expr(pd$child[[1]])
 
 code <- "if (TRUE) x <- 1 else x <- 0"
 pd <- compute_parse_data_nested(code)
 is_conditional_expr(pd)
-is_conditional_expr(pd$child$`24`)
+is_conditional_expr(pd$child[[1]])
 
 code <- "x <- list(1:3)"
 pd <- compute_parse_data_nested(code)
 is_function_call(pd)
-is_function_call(pd$child$`19`$child$`17`)
+child_of_child <- pd$child[[1]]$child[[3]]
+is_function_call(child_of_child)
 
 code <- "foo <- function() NULL"
 pd <- compute_parse_data_nested(code)
 is_function_declaration(pd)
-is_function_declaration(pd$child$`12`$child$`11`)
+child_of_child <- pd$child[[1]]$child[[3]]
+is_function_declaration(child_of_child)
 
 code <- "x <- 1 # TODO: check value"
 pd <- compute_parse_data_nested(code)
@@ -103,9 +106,9 @@ is_comment(pd)
 
 code <- "lm(wt ~ mpg, mtcars)"
 pd <- compute_parse_data_nested(code)
-is_tilde_expr(pd$child$`20`$child$`10`)
-is_symmetric_tilde_expr(pd$child$`20`$child$`10`)
-is_asymmetric_tilde_expr(pd$child$`20`$child$`10`)
+is_tilde_expr(pd$child[[1]]$child[[3]])
+is_symmetric_tilde_expr(pd$child[[1]]$child[[3]])
+is_asymmetric_tilde_expr(pd$child[[1]]$child[[3]])
 
 }
 \seealso{
