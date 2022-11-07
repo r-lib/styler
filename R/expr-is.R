@@ -8,7 +8,6 @@
 #'   checked for tilde. See 'Details'.
 #'
 #' @family third-party style guide helpers
-#' @keywords internal
 NULL
 
 #' @describeIn pd_is Checks whether `pd` contains an expression wrapped in curly brackets.
