@@ -177,7 +177,7 @@ context_towards_terminals <- function(pd_nested,
   )
   ref_pos_id_is_na <- !is.na(pd_nested$indention_ref_pos_id)
   pd_nested$indention_ref_pos_id[!ref_pos_id_is_na] <- outer_indention_refs
-  pd_nested$lag_newlines[1] <- pd_nested$lag_newlines[1] + outer_lag_newlines
+  pd_nested$lag_newlines[1L] <- pd_nested$lag_newlines[1L] + outer_lag_newlines
   pd_nested$spaces[nrow(pd_nested)] <-
     pd_nested$spaces[nrow(pd_nested)] + outer_spaces
   pd_nested

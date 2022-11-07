@@ -26,7 +26,7 @@ indention mechanisms are changed later, e.g. by simplifying
 a way of testing this without the interaction of \verb{\\\{\\\{}.
 }
 \examples{
-styler:::style_text_without_curly_curly("rlang::list2({{ x }} := 2)")
+styler:::style_text_without_curly_curly("rlang::list2({{ x }} := 2L)")
 styler:::style_text("rlang::list2({{ x }} := 3)")
 }
 \seealso{

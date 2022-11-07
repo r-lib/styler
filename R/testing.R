@@ -161,7 +161,7 @@ NULL
 #'   transformations but remove EOL spaces and indention due to the way the
 #'   serialization is set up.
 #' @keywords internal
-style_empty <- function(text, base_indention = 0) {
+style_empty <- function(text, base_indention = 0L) {
   transformers <- list(
     # transformer functions
     initialize = list(
@@ -296,8 +296,8 @@ generate_test_samples <- function() {
       ""
     } else {
       c(
-        paste0(x[1], gen(x[-1])),
-        paste0(x[1], " # comment\n", paste(x[-1], collapse = ""))
+        paste0(x[1L], gen(x[-1L])),
+        paste0(x[1L], " # comment\n", paste(x[-1L], collapse = ""))
       )
     }
   }
@@ -356,7 +356,7 @@ local_test_setup <- function(cache = FALSE,
 }
 
 cache_more_specs_default <- function() {
-  cache_more_specs(include_roxygen_examples = TRUE, base_indention = 0)
+  cache_more_specs(include_roxygen_examples = TRUE, base_indention = 0L)
 }
 
 #' Test `transformers_drop` for consistency
@@ -382,4 +382,12 @@ test_transformers_drop <- function(transformers) {
       ))
     }
   })
+}
+
+
+skip_during_parallel <- function() {
+  Sys.getenv("STYLER_TEST_IS_TRULY_PARALLEL", TRUE) %>%
+    toupper() %>%
+    as.logical() %>%
+    testthat::skip_if()
 }

@@ -75,10 +75,10 @@ style_active_file <- function() {
     paste0(ensure_last_n_empty(out), collapse = "\n"),
     id = context$id
   )
-  if (save_after_styling_is_active() == TRUE && context$path != "") {
+  if (save_after_styling_is_active() && context$path != "") {
     rstudioapi::documentSave(context$id)
   }
-  rstudioapi::setCursorPosition(context$selection[[1]]$range)
+  rstudioapi::setCursorPosition(context$selection[[1L]]$range)
 }
 
 #' Wrapper around [style_pkg()] for access via Addin.
@@ -123,7 +123,7 @@ save_after_styling_is_active <- function() {
 style_selection <- function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
-  text <- context$selection[[1]]$text
+  text <- context$selection[[1L]]$text
   if (all(nchar(text) == 0L)) abort("No code selected")
   out <- style_text(
     text,
@@ -131,14 +131,14 @@ style_selection <- function() {
     base_indention = nchar(gsub("^( *).*", "\\1", text))
   )
   rstudioapi::modifyRange(
-    context$selection[[1]]$range,
+    context$selection[[1L]]$range,
     paste0(c(
       out,
-      if (context$selection[[1]]$range$end[2] == 1L) ""
+      if (context$selection[[1L]]$range$end[2L] == 1L) ""
     ), collapse = "\n"),
     id = context$id
   )
-  if (save_after_styling_is_active() == TRUE && context$path != "") {
+  if (save_after_styling_is_active() && context$path != "") {
     invisible(rstudioapi::documentSave(context$id))
   }
 }

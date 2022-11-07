@@ -10,7 +10,7 @@
 ^\.github$
 ^\.gitsum$
 ^\.pre-commit-config\.yaml$
-^_pkgdown\.yml$
+^_pkgdown\.yaml$
 ^cran-comments\.md$
 ^doc$
 ^docs$

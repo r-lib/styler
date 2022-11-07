@@ -2,12 +2,12 @@
 % Please edit documentation in R/nested-to-tree.R
 \name{create_node_from_nested_root}
 \alias{create_node_from_nested_root}
-\title{Convert a nested tibble into a node tree}
+\title{Convert a nested data frame into a node tree}
 \usage{
 create_node_from_nested_root(pd_nested, structure_only)
 }
 \arguments{
-\item{pd_nested}{A nested tibble.}
+\item{pd_nested}{A nested data frame.}
 
 \item{structure_only}{Whether or not create a tree that represents the
 structure of the expression without any information on the tokens. Useful
@@ -17,7 +17,7 @@ to check whether two structures are identical.}
 An object of class "Node" and "R6".
 }
 \description{
-This function is convenient to display all nesting levels of a nested tibble
+This function is convenient to display all nesting levels of a nested data frame
 at once.
 }
 \examples{

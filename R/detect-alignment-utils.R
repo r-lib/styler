@@ -93,8 +93,8 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
       lag_newlines = 0L,
       spaces = 0L,
       pos_ids = NA,
-      stylerignore = last_pd$stylerignore[1],
-      indents = last_pd$indent[1]
+      stylerignore = last_pd$stylerignore[1L],
+      indents = last_pd$indent[1L]
     )
     tokens$.lag_spaces <- 0
 
@@ -114,9 +114,9 @@ alignment_col1_all_named <- function(relevant_pd_by_line) {
     if (nrow(x) < 3L) {
       return(FALSE)
     }
-    x$token[3] == "expr" &&
-      any(c("SYMBOL_SUB", "STR_CONST", "SYMBOL_FORMALS") == x$token[1]) &&
-      any(c("EQ_SUB", "EQ_FORMALS", "SPECIAL-IN", "LT", "GT", "EQ", "NE") == x$token[2])
+    x$token[3L] == "expr" &&
+      any(c("SYMBOL_SUB", "STR_CONST", "SYMBOL_FORMALS") == x$token[1L]) &&
+      any(c("EQ_SUB", "EQ_FORMALS", "SPECIAL-IN", "LT", "GT", "EQ", "NE") == x$token[2L])
   }) %>%
     all()
 }
@@ -186,8 +186,8 @@ alignment_has_correct_spacing_around_comma <- function(pd_sub) {
     return(TRUE)
   }
   relevant_comma_token <- comma_tokens[seq2(1, length(comma_tokens) - 1L)]
-  correct_spaces_before <- pd_sub$.lag_spaces[relevant_comma_token] == 0
-  correct_spaces_after <- pd_sub$spaces[relevant_comma_token] > 0
+  correct_spaces_before <- pd_sub$.lag_spaces[relevant_comma_token] == 0L
+  correct_spaces_after <- pd_sub$spaces[relevant_comma_token] > 0L
   all(correct_spaces_before) && all(correct_spaces_after)
 }
 

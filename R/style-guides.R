@@ -315,7 +315,7 @@ tidyverse_style <- function(scope = "tokens",
 #' }
 #' set_line_break_before_curly_opening_style <- function() {
 #'   create_style_guide(
-#'     line_break = tibble::lst(set_line_break_before_curly_opening),
+#'     line_break = list(set_line_break_before_curly_opening),
 #'     style_guide_name = "some-style-guide",
 #'     style_guide_version = "some-version"
 #'   )

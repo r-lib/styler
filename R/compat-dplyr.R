@@ -26,7 +26,7 @@ arrange_pos_id <- function(data) {
 
 bind_rows <- function(x, y = NULL, ...) {
   if (is.null(x) && is.null(y)) {
-    return(new_tibble(list()))
+    return(new_styler_df(list()))
   }
   if (is.null(x)) {
     if (inherits(y, "data.frame")) {
@@ -62,7 +62,7 @@ left_join <- function(x, y, by) {
 
   res <- merge(x, y, by.x = by_x, by.y = by_y, all.x = TRUE, sort = FALSE) %>%
     arrange_pos_id()
-  res <- new_tibble(res)
+  res <- new_styler_df(res)
   # dplyr::left_join set unknown list columns to NULL, merge sets them
   # to NA
   if (exists("child", res) && anyNA(res$child)) {

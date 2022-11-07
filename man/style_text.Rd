@@ -10,7 +10,7 @@ style_text(
   style = tidyverse_style,
   transformers = style(...),
   include_roxygen_examples = TRUE,
-  base_indention = 0
+  base_indention = 0L
 )
 }
 \arguments{

@@ -30,7 +30,7 @@ transform_files <- function(files,
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
-  new_tibble(list(file = files, changed = changed))
+  new_styler_df(list(file = files, changed = changed))
 }
 
 #' Transform a file and output a customized message
@@ -216,7 +216,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
   active_segment <- as.integer(all_lines %in% roxygen_examples)
   segment_id <- cumsum(abs(c(0L, diff(active_segment)))) + 1L
   separated <- split(text, factor(segment_id))
-  restyle_selector <- if (roxygen_examples[1] == 1L) {
+  restyle_selector <- if (roxygen_examples[1L] == 1L) {
     odd_index
   } else {
     even_index
@@ -348,7 +348,7 @@ apply_transformers <- function(pd_nested, transformers) {
     c(
       transformers$initialize, transformers$line_break,
       set_multi_line = set_multi_line,
-      update_newlines = if (length(transformers$line_break) != 0) update_newlines
+      update_newlines = if (length(transformers$line_break) != 0L) update_newlines
     )
   )
 
@@ -378,7 +378,7 @@ apply_transformers <- function(pd_nested, transformers) {
 #'   Needed for reverse engineering the scope.
 #' @keywords internal
 parse_tree_must_be_identical <- function(transformers) {
-  length(transformers$token) == 0
+  length(transformers$token) == 0L
 }
 
 #' Verify the styling

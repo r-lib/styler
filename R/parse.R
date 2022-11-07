@@ -45,10 +45,10 @@ parse_safely <- function(text, ...) {
 #' @param initial_text The initial text to style.
 #' @keywords internal
 has_crlf_as_first_line_sep <- function(message, initial_text) {
-  split <- strsplit(message, ":", fixed = TRUE)[[1]]
-  if (length(split) > 1L && split[1] == "<text>") {
-    start_char <- as.numeric(split[3])
-    offending_line <- initial_text[as.integer(split[2])]
+  split <- strsplit(message, ":", fixed = TRUE)[[1L]]
+  if (length(split) > 1L && split[1L] == "<text>") {
+    start_char <- as.numeric(split[3L])
+    offending_line <- initial_text[as.integer(split[2L])]
     if (!is.na(offending_line)) {
       if (substr(offending_line, start_char, start_char + 1) == "\r\n") {
         return(TRUE)
@@ -94,10 +94,8 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
   parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
-  pd <- as_tibble(
-    utils::getParseData(parsed, includeText = include_text),
-    .name_repair = "minimal"
-  )
+  pd <- utils::getParseData(parsed, includeText = include_text) %>%
+    styler_df()
   if (getRversion() < "4.2") {
     is_unicode_parsing_error <- grepl("^\"<U\\+[0-9]+>\"$", pd$text)
     if (any(is_unicode_parsing_error)) {
@@ -163,7 +161,7 @@ ensure_correct_txt <- function(pd, text) {
     by.y = "id",
     suffixes = c("", "parent")
   ) %>%
-    as_tibble(.name_repair = "minimal")
+    styler_df()
 
   if (!lines_and_cols_match(new_text)) {
     abort(paste(

@@ -8,8 +8,7 @@ a <- function(x) {
       22 + 1
     ))
     if (x > 10) {
-      for (x in 22) {
-        # FIXME in operator only to be surrounded by one space. What about %in%?
+      for (x in 22) { # FIXME in operator only to be surrounded by one space. What about %in%?
         prin(x)
       }
     }

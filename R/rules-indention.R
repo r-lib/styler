@@ -4,7 +4,7 @@
 indent_braces <- function(pd, indent_by) {
   indent_indices <- compute_indent_indices(
     pd,
-    token_opening = c("'('", "'['", "'{'"),
+    token_opening = c("'('", "'['", "'{'", "LBB"),
     token_closing = c("')'", "']'", "'}'")
   )
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
@@ -59,7 +59,7 @@ indent_eq_sub <- function(pd,
   if (!any(eq_sub)) {
     return(pd)
   }
-  has_line_break <- pd$lag_newlines > 0 | pd$token == "COMMENT"
+  has_line_break <- pd$lag_newlines > 0L | pd$token == "COMMENT"
   indent_indices <- which(lag(eq_sub, default = FALSE) & has_line_break)
   if (any(pd$token[indent_indices] == "COMMENT")) {
     indent_indices <- purrr::map_int(indent_indices, function(idx) {
@@ -77,7 +77,7 @@ indent_eq_sub <- function(pd,
 #' @describeIn update_indention Is used to indent for / while / if / if-else
 #'   statements that do not have curly parenthesis.
 #' @keywords internal
-indent_without_paren <- function(pd, indent_by = 2) {
+indent_without_paren <- function(pd, indent_by = 2L) {
   pd %>%
     indent_without_paren_for_while_fun(indent_by) %>%
     indent_without_paren_if_else(indent_by)
@@ -105,9 +105,9 @@ NULL
 #' @importFrom rlang seq2
 #' @keywords internal
 update_indention_ref_fun_dec <- function(pd_nested) {
-  if (pd_nested$token[1] == "FUNCTION") {
-    seq <- seq2(3, nrow(pd_nested) - 2)
-    pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2]
+  if (pd_nested$token[1L] == "FUNCTION") {
+    seq <- seq2(3L, nrow(pd_nested) - 2L)
+    pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2L]
   }
   pd_nested
 }

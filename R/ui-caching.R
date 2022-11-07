@@ -49,7 +49,7 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #'
 #' @section Using a cache for styler in CI/CD:
 #' If you want to set up caching in a CI/CD pipeline, we suggest to set the
-#' `{R.cache}` root path to a directory for which you have the cache enabled as
+#' `{R.cache}` root path to a directory for which you have the cache enabled.
 #' This can often be set in config files of CI/CD tools, e.g. see the
 #' [Travis documentation on caching](https://docs.travis-ci.com/user/caching).
 #'
@@ -75,16 +75,18 @@ cache_info <- function(cache_name = NULL, format = "both") {
   rlang::arg_match(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
-  file_info <- file.info(files) %>%
-    as_tibble()
-  tbl <- tibble(
+  file_info <- file.info(files)
+
+  tbl <- styler_df(
     n = nrow(file_info),
     size = sum(file_info$size),
     last_modified = suppressWarnings(max(file_info$mtime)),
     created = file.info(path_cache)$ctime,
     location = path_cache,
-    activated = cache_is_activated(cache_name)
+    activated = cache_is_activated(cache_name),
+    stringsAsFactors = FALSE
   )
+
   if (any(c("lucid", "both") == format)) {
     cat(
       "Size:\t\t", tbl$size, " bytes (", tbl$n, " cached expressions)",
@@ -110,16 +112,15 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #' @inheritParams cache_clear
 #' @param verbose Whether or not to print an informative message about what the
 #'   function is doing.
+#'
+#' @importFrom rlang "%||%"
 #' @family cache managers
 #' @export
 cache_activate <- function(cache_name = NULL,
                            verbose = !getOption("styler.quiet", FALSE)) {
-  if (!is.null(cache_name)) {
-    options("styler.cache_name" = cache_name)
-  } else {
-    options("styler.cache_name" = styler_version)
-  }
+  options("styler.cache_name" = cache_name %||% styler_version)
   path <- cache_find_path(cache_name)
+
   if (verbose) {
     cat(
       "Using cache ", cache_get_name(), " at ",
@@ -127,6 +128,7 @@ cache_activate <- function(cache_name = NULL,
       sep = ""
     )
   }
+
   invisible(path)
 }
 

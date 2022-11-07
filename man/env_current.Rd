@@ -17,7 +17,7 @@ The elements that are added to this environment are:
 \itemize{
 \item \code{parser_version}: Needed to dispatch between parser versions, see
 \code{\link[=parser_version_set]{parser_version_set()}} for details.
-\item \code{stylerignore}: A tibble with parse data containing tokens that fall within
+\item \code{stylerignore}: A data frame with parse data containing tokens that fall within
 a stylerignore sequence. This is used after serializing the flattened
 parse table to apply the initial formatting to these tokens. See
 \link{stylerignore} for details.
