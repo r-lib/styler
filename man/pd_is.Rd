@@ -117,4 +117,3 @@ Other third-party style guide helpers:
 \code{\link{scope_normalize}()}
 }
 \concept{third-party style guide helpers}
-\keyword{internal}
