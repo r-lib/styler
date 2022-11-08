@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.8.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.8.1.9000</span>
       </span>
     </div>
 
@@ -106,6 +106,21 @@
       <small>Source: <a href="https://github.com/r-lib/styler/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.8.1" id="styler-181">styler 1.8.1<small>2022-11-07</small><a class="anchor" aria-label="anchor" href="#styler-181"></a></h2>
+<p><strong>Features</strong></p>
+<ul><li>Expose internals used with other style guides (<a href="https://github.com/Robinlovelace" class="external-link">@Robinlovelace</a> + collaborators, <a href="https://github.com/r-lib/styler/issues/1043" class="external-link">#1043</a>, <a href="https://github.com/r-lib/styler/issues/1052" class="external-link">#1052</a>).</li>
+</ul><p><strong>Other</strong></p>
+<ul><li>Bump minimal version requirement on {withr} as <code>...</code> in <code><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">withr::local_options()</a></code> was introduced only in v.2.3.0 (<a href="https://github.com/r-lib/styler/issues/1051" class="external-link">#1051</a>).</li>
+<li>Rename internal function <code>set_linebreak_after_ggplot2_plus()</code> to <code>set_line_break_after_ggplot2_plus()</code> for consistency (<a href="https://github.com/Polkas" class="external-link">@Polkas</a>, <a href="https://github.com/r-lib/styler/issues/1049" class="external-link">#1049</a>).</li>
+<li>Reformat contributing guidelines (<a href="https://github.com/r-lib/styler/issues/1047" class="external-link">#1047</a>).</li>
+<li>Improve YAML formatting for pkgdown (<a href="https://github.com/r-lib/styler/issues/1042" class="external-link">#1042</a>).</li>
+<li>Simplify caching internal’s conditionals with <code>rlang::%||%</code> (<a href="https://github.com/r-lib/styler/issues/1041" class="external-link">#1041</a>).</li>
+<li>Only run {pkgapi} if available (<a href="https://github.com/r-lib/styler/issues/1039" class="external-link">#1039</a>).</li>
+<li>Typos (<a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/r-lib/styler/issues/1038" class="external-link">#1038</a>)</li>
+</ul><p>This release was requested by CRAN to resolve an R CMD Check note (<a href="https://github.com/r-lib/styler/issues/1044" class="external-link">#1044</a>). A big hand to everyone who made this release possible:</p>
+<p><a href="https://github.com/DaveJarvis" class="external-link">@DaveJarvis</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/Polkas" class="external-link">@Polkas</a>, and <a href="https://github.com/Robinlovelace" class="external-link">@Robinlovelace</a>.</p>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.8.0" id="styler-180">styler 1.8.0<small>2022-10-22</small><a class="anchor" aria-label="anchor" href="#styler-180"></a></h2>
 <p>{styler} 1.8.0 comes with a host of new features, around 40% speed improvement, bug fixes and the removal of 8 recursive dependencies. We also welcome <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a> as a new contributor to {styler}, who has contributed significantly to this and and previous releases.</p>
