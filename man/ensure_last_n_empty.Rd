@@ -4,7 +4,7 @@
 \alias{ensure_last_n_empty}
 \title{Ensure there is one (and only one) blank line at the end of a vector}
 \usage{
-ensure_last_n_empty(x, n = 1)
+ensure_last_n_empty(x, n = 1L)
 }
 \description{
 Ensure there is one (and only one) blank line at the end of a vector

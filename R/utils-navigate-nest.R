@@ -13,11 +13,11 @@
 #' @export
 next_non_comment <- function(pd, pos) {
   if (length(pos) < 1 || is.na(pos) || pos >= nrow(pd)) {
-    return(integer(0))
+    return(integer(0L))
   }
   candidates <- seq2(pos + 1L, nrow(pd))
   if (all(candidates %in% which(pd$token == "COMMENT"))) {
-    return(integer(0))
+    return(integer(0L))
   }
   setdiff(candidates, which(pd$token == "COMMENT"))[1L]
 }
@@ -26,11 +26,11 @@ next_non_comment <- function(pd, pos) {
 #' @rdname next_non_comment
 previous_non_comment <- function(pd, pos) {
   if (length(pos) < 1 || is.na(pos) || pos > nrow(pd)) {
-    return(integer(0))
+    return(integer(0L))
   }
   candidates <- seq2(1L, pos - 1L)
   if (all(candidates %in% which(pd$token == "COMMENT"))) {
-    return(integer(0))
+    return(integer(0L))
   }
   last(setdiff(candidates, which(pd$token == "COMMENT")))
 }

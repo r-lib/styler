@@ -45,13 +45,13 @@ parse_transform_serialize_r_block <- function(pd_nested,
     )
   } else {
     serialized_transformed_text <- map2(
-      c(0, find_blank_lines_to_next_expr(pd_nested)[-1L] - 1L),
+      c(0L, find_blank_lines_to_next_expr(pd_nested)[-1L] - 1L),
       paste0(rep_char(" ", base_indention), pd_nested$text),
       ~ c(rep("", .x), .y)
     ) %>%
       unlist(use.names = FALSE)
   }
-  c(rep("", start_line - 1), serialized_transformed_text)
+  c(rep("", start_line - 1L), serialized_transformed_text)
 }
 
 #' Find the groups of expressions that should be processed together

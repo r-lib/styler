@@ -31,12 +31,12 @@ add_brackets_in_pipe_child <- function(pd) {
 add_brackets_in_pipe_one <- function(pd, pos) {
   next_non_comment <- next_non_comment(pd, pos)
   rh_child <- pd$child[[next_non_comment]]
-  if (nrow(rh_child) < 2 && rh_child$token == "SYMBOL") {
+  if (nrow(rh_child) < 2L && rh_child$token == "SYMBOL") {
     child <- pd$child[[next_non_comment]]
-    new_pos_ids <- create_pos_ids(child, 1, after = TRUE, n = 2L)
+    new_pos_ids <- create_pos_ids(child, 1L, after = TRUE, n = 2L)
     new_pd <- create_tokens(
       texts = c("(", ")"),
-      lag_newlines = rep(0L, 2),
+      lag_newlines = rep(0L, 2L),
       spaces = 0L,
       pos_ids = new_pos_ids,
       token_before = c(child$token[1L], "'('"),

@@ -197,10 +197,10 @@ relocate_eq_assign_nest <- function(pd) {
 #' @keywords internal
 find_block_id <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_belongs_to_block <- c(0, diff(idx_eq_assign) > 2)
+  eq_belongs_to_block <- c(0L, diff(idx_eq_assign) > 2L)
 
-  empty_seq <- rep(0, nrow(pd))
-  empty_seq[idx_eq_assign - 1] <- eq_belongs_to_block
+  empty_seq <- rep(0L, nrow(pd))
+  empty_seq[idx_eq_assign - 1L] <- eq_belongs_to_block
   block_id <- cumsum(empty_seq)
   block_id
 }
@@ -216,7 +216,7 @@ relocate_eq_assign_one <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   eq_ind <- seq2(idx_eq_assign[1L] - 1L, last(idx_eq_assign) + 1L)
   # initialize because wrap_expr_in_expr -> create_tokens -> requires it
-  pd$indent <- 0
+  pd$indent <- 0L
   eq_expr <- pd[eq_ind, ] %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%

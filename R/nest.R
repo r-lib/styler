@@ -65,7 +65,7 @@ add_cache_block <- function(pd_nested) {
   if (cache_is_activated()) {
     pd_nested$block <- cache_find_block(pd_nested)
   } else {
-    pd_nested$block <- rep(1, length(pd_nested$block))
+    pd_nested$block <- rep(1L, length(pd_nested$block))
   }
   pd_nested
 }
