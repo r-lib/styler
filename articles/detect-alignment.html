@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
       </span>
     </div>
 
@@ -153,18 +153,25 @@
 <span>  a   <span class="op">=</span>       <span class="fl">3</span>,</span>
 <span>  bre <span class="op">=</span> <span class="fl">3213232</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Until styler 1.1.1.9002 (with <code>strict = TRUE</code>, e.g. as in <code>styler::style_file(..., strict = TRUE)</code>), this was formatted as follows:</p>
+<p>Until styler 1.1.1.9002 (with <code>strict = TRUE</code>, e.g. as in
+<code>styler::style_file(..., strict = TRUE)</code>), this was formatted
+as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span></span>
 <span>  a <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  bre <span class="op">=</span> <span class="fl">3213232</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>because no alignment detection was built in.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>styler &gt;= 1.1.1.9003 detects aforementioned alignment for function calls. This vignette describes how aligned code is defined in styler and gives some examples so users can format their aligned code to match the definition styler uses to ensure their code is not unintentionally reformatted.</p>
+<p>styler &gt;= 1.1.1.9003 detects aforementioned alignment for function
+calls. This vignette describes how aligned code is defined in styler and
+gives some examples so users can format their aligned code to match the
+definition styler uses to ensure their code is not unintentionally
+reformatted.</p>
 <div class="section level3">
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
-<p>These typical examples match <em>styler</em>’s definition of alignment. Note the spacing around operators and commas.</p>
+<p>These typical examples match <em>styler</em>’s definition of
+alignment. Note the spacing around operators and commas.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span><span class="va">key_here</span>,  <span class="op">~</span><span class="va">right_aligned</span>,</span>
@@ -194,19 +201,27 @@
 <div class="section level2">
 <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
 </h2>
-<p>An important definition used in the remainder is the one of a <strong>column</strong>. All arguments of a function call that have the same position but are placed on different lines form a column. The below call shows a call with two columns and two rows. Columns separate arguments of the function call, so the separator is the comma. The first row is named because all arguments are named, the second is unnamed:</p>
+<p>An important definition used in the remainder is the one of a
+<strong>column</strong>. All arguments of a function call that have the
+same position but are placed on different lines form a column. The below
+call shows a call with two columns and two rows. Columns separate
+arguments of the function call, so the separator is the comma. The first
+row is named because all arguments are named, the second is unnamed:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/call.html" class="external-link">call</a></span><span class="op">(</span></span>
 <span>  <span class="co"># column 1  | column 2 |</span></span>
 <span>  abkj <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">7</span>,        <span class="co"># | row 1</span></span>
 <span>  more_ <span class="op">=</span> <span class="st">"a"</span>, <span class="fl">2</span>         <span class="co"># | row 2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><strong>For alignment detection, the first column is omitted if not all arguments in that column are named</strong></p>
+<p><strong>For alignment detection, the first column is omitted if not
+all arguments in that column are named</strong></p>
 <div class="section level3">
 <h3 id="function-calls">Function calls<a class="anchor" aria-label="anchor" href="#function-calls"></a>
 </h3>
-<p>Below, we try to explain in an intuitive way how your code should look like to be recognized as aligned.</p>
-<p>Make commas match position vertically and align everything right before commas:</p>
+<p>Below, we try to explain in an intuitive way how your code should
+look like to be recognized as aligned.</p>
+<p>Make commas match position vertically and align everything right
+before commas:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># all arguments of first column named -&gt; must right align values after `=`,</span></span>
 <span><span class="co"># one or more spaces around `=`, none before and at least one after the comma.</span></span>
@@ -229,7 +244,8 @@
 <span>  p <span class="op">=</span> <span class="fl">2</span>,   g <span class="op">=</span> <span class="fu">gg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,  n <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fl">3</span>, <span class="co">#</span></span>
 <span>  <span class="fl">31</span>,    fds <span class="op">=</span>    <span class="op">-</span><span class="fl">1</span>, gz <span class="op">=</span> <span class="va">f</span> <span class="op">/</span> <span class="fl">3</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>… or match position of <code>=</code> vertically and align everything after this operator left</p>
+<p>… or match position of <code>=</code> vertically and align everything
+after this operator left</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># all arguments of first column named -&gt; must left align values after `=`,</span></span>
 <span><span class="co"># at least one space before `=`, exactly one after, none before and at least one</span></span>
@@ -278,10 +294,13 @@
 <p>not supported yet.</p>
 </div>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p>With <code>strict = FALSE</code>, the spacing would have been kept, however, <code>strict = FALSE</code> has a number of other implications because it is in general less invasive. For example, it would not add braces and line breaks to “if (TRUE) return()”.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>With <code>strict = FALSE</code>, the spacing would have
+been kept, however, <code>strict = FALSE</code> has a number of other
+implications because it is in general less invasive. For example, it
+would not add braces and line breaks to “if (TRUE) return()”.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
