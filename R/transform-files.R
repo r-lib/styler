@@ -263,7 +263,7 @@ parse_transform_serialize_r <- function(text,
   for (i in seq_along(pd_split)) {
     text_out[[i]] <- parse_transform_serialize_r_block(
       pd_split[[i]],
-      pd_blank[[i]],
+      start_line = pd_blank[[i]],
       transformers = transformers,
       base_indention = base_indention
     )
