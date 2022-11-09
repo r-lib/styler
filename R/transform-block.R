@@ -54,7 +54,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
   c(
     rep("", if (start_line == 0L) start_line else start_line - 1L),
     serialized_transformed_text
-    )
+  )
 }
 
 #' Find the groups of expressions that should be processed together
