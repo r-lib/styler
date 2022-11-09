@@ -256,14 +256,21 @@ parse_transform_serialize_r <- function(text,
     transformers
   )
 
+  strict <- transformers$more_specs_style_guide$strict
   pd_split <- unname(split(pd_nested, pd_nested$block))
   pd_blank <- find_blank_lines_to_next_block(pd_nested)
+
+  start_line <- if (strict) {
+    1L
+  } else {
+    pd_blank[[i]]
+  }
 
   text_out <- vector("list", length(pd_split))
   for (i in seq_along(pd_split)) {
     text_out[[i]] <- parse_transform_serialize_r_block(
       pd_split[[i]],
-      start_line = pd_blank[[i]],
+      start_line = start_line,
       transformers = transformers,
       base_indention = base_indention
     )

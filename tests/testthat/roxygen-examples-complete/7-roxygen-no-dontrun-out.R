@@ -7,8 +7,7 @@
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @inheritSection style_pkg Roundtrip Validation
-#' @examples
-#' # the following is identical but the former is more convenient:
+#' @examples # the following is identical but the former is more convenient:
 #' file <- tempfile("styler",
 #'   fileext = ".R"
 #' )

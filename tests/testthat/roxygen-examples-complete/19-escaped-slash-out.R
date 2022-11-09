@@ -1,7 +1,6 @@
 #' Data frame and Tables Pretty Formatting
 #'
-#' @examples
-#' c("\nA \\nyellow \\\nline", "yellow")
+#' @examples c("\nA \\nyellow \\\nline", "yellow")
 #' c("\ A \\ nyellow \\\ nline", "yellow")
 #' \dontrun{
 #' c("\nA \\nyellow \\\nline", "yellow")

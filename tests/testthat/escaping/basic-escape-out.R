@@ -1,28 +1,24 @@
 #' things
 #'
-#' @examples
-#' call("\\.")
+#' @examples call("\\.")
 NULL
 
 
 #' things
 #'
-#' @examples
-#' call("\n")
+#' @examples call("\n")
 NULL
 
 #' things
 #'
-#' @examples
-#' call("\n")
+#' @examples call("\n")
 #' ano("\\.", further = X)
 NULL
 
 
 #' things
 #'
-#' @examples
-#' call("\n")
+#' @examples call("\n")
 #' ano("\\.", further = X)
 NULL
 

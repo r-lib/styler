@@ -5,8 +5,7 @@
 #' @param text A character vector with text to style.
 #' @inheritParams style_pkg
 #' @family stylers
-#' @examples
-#' style_text("call( 1)")
+#' @examples style_text("call( 1)")
 #' style_text("1    + 1", strict = FALSE)
 #' style_text("a%>%b", scope = "spaces")
 #' style_text("a%>%b; a", scope = "line_breaks")

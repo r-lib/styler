@@ -1,8 +1,7 @@
 #' Hi
 #'
 #' x
-#' @examples
-#' a %>%
+#' @examples a %>%
 #'   x(b = 3) %>%
 #'   ff()
 #' \dontrun{

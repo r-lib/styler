@@ -3,8 +3,7 @@
 #'
 #' is stuff
 #'
-#' @examples
-#' 1 + 1
+#' @examples 1 + 1
 #'
 
 #' nolint start

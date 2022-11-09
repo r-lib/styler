@@ -1,10 +1,8 @@
-
 #' Create a style guide
 #'
 #' @param reindention A list of parameters for regex re-indention, most
 #'   conveniently constructed using [specify_reindention()].
-#' @examples
-#' set_line_break_before_crly_opening <- function(pd_flat) {
+#' @examples set_line_break_before_crly_opening <- function(pd_flat) {
 #'   op <- pd_flat$token %in% "'{'"
 #'   pd_flat$lag_newlines[op] <- 1L
 #'   pd_flat
