@@ -77,8 +77,7 @@ style_roxygen_code_example_segment <- function(one_dont,
   }
   dont_seqs <- find_dont_seqs(one_dont)
   split_segments <- split_roxygen_segments(one_dont, unlist(dont_seqs))
-  is_dont <-
-    seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
+  is_dont <- seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
 
   map2(split_segments$separated, is_dont,
     style_roxygen_example_snippet,

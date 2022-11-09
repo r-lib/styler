@@ -53,8 +53,8 @@ transform_file <- function(path,
                            message_after_if_changed = " *",
                            ...,
                            dry) {
-  char_after_path <- nchar(message_before) + nchar(path) + 1
-  max_char_after_message_path <- nchar(message_before) + max_char_path + 1
+  char_after_path <- nchar(message_before) + nchar(path) + 1L
+  max_char_after_message_path <- nchar(message_before) + max_char_path + 1L
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
   if (!getOption("styler.quiet", FALSE)) {
@@ -261,7 +261,7 @@ parse_transform_serialize_r <- function(text,
   pd_blank <- find_blank_lines_to_next_block(pd_nested)
 
   start_line <- if (strict) {
-    1L
+    1L # FIXME: should be 0L for roxygen examples
   } else {
     pd_blank[[i]]
   }
