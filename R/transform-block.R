@@ -52,7 +52,7 @@ parse_transform_serialize_r_block <- function(pd_nested,
       unlist(use.names = FALSE)
   }
   c(
-    rep("", if (start_line == 0L) start_line else start_line - 1L),
+    rep("", start_line - as.integer(start_line > 0L)),
     serialized_transformed_text
   )
 }
