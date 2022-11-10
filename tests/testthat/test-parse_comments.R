@@ -1,6 +1,3 @@
-library("testthat")
-
-
 test_that("spacing within comments is done correctly", {
   expect_warning(test_collection("parse_comments",
     "within_spacing_with_force",

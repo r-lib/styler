@@ -119,8 +119,11 @@ style_roxygen_example_snippet <- function(code_snippet,
   )
   if (!is_cached || !cache_is_active) {
     code_snippet <- code_snippet %>%
-      parse_transform_serialize_r(transformers,
-        base_indention = base_indention, warn_empty = FALSE
+      parse_transform_serialize_r(
+        transformers,
+        base_indention = base_indention,
+        warn_empty = FALSE,
+        is_roxygen_code_example = TRUE
       )
   }
 
