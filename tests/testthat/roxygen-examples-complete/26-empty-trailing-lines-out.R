@@ -1,7 +1,8 @@
 #' this
 #'
 #' mey
-#' @examples 2 + 1
+#' @examples
+#' 2 + 1
 #'
 NULL
 
@@ -9,7 +10,8 @@ NULL
 #' this
 #'
 #' mey
-#' @examples 2 + 1
+#' @examples
+#' 2 + 1
 #'
 NULL
 
@@ -17,5 +19,6 @@ NULL
 #' this
 #'
 #' mey
-#' @examples 2 + 1
+#' @examples
+#' 2 + 1
 NULL

@@ -1,7 +1,8 @@
 #' Do stuff
 #'
 #' Some things we do
-#' @examples g()
+#' @examples
+#' g()
 #' \dontrun{
 #' f(x)
 #' }

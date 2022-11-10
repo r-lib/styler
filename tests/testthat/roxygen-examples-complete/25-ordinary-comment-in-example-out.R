@@ -1,7 +1,8 @@
 #' Example
 # Random comment
 #' Roxygen
-#' @examples 1 + 1
+#' @examples
+#' 1 + 1
 NULL
 
 
@@ -15,7 +16,8 @@ NULL
 #' Example
 # Random comment
 #' Roxygen
-#' @examples 1 + 1
+#' @examples
+#' 1 + 1
 # comment
 # more
 NULL
@@ -23,6 +25,7 @@ NULL
 #' Example
 # Random comment
 #' Roxygen
+#' @examples
 # There
 #' 1 + 1
 # comment
@@ -32,6 +35,7 @@ NULL
 #' Example
 #' Random comment
 #' Roxygen
+#' @examples
 # There
 #' 1 + 1
 # comment
@@ -41,6 +45,7 @@ NULL
 #' Example
 # Random comment
 #' Roxygen
+#' @examples
 # There
 #' \dontrun{
 #' 1 + 1
@@ -52,6 +57,7 @@ NULL
 #' Example
 # Random comment
 #' Roxygen
+#' @examples
 # There
 #' \dontrun{
 #' 1 + 1
@@ -63,6 +69,7 @@ NULL
 #' Example
 # Random comment
 #' Roxygen
+#' @examples
 # 'There
 #' \dontrun{
 #' 1 + 1
@@ -74,6 +81,7 @@ NULL
 #' Example
 # Random comment
 #' Roxygen
+#' @examples
 # There
 #' \dontrun{
 # comment
@@ -85,6 +93,7 @@ NULL
 #' Example
 # Random comment
 #' Roxygen
+#' @examples
 # There
 #' \dontrun{
 #' call(
@@ -104,7 +113,8 @@ func <- function() NULL
 
 #' Hi
 # Comment
-#' @examples 1 + 1
+#' @examples
+#' 1 + 1
 # this
 # this
 # this
@@ -114,7 +124,8 @@ NULL
 
 #' Hi
 # Comment
-#' @examples 1 + 1
+#' @examples
+#' 1 + 1
 # this
 # this
 # this

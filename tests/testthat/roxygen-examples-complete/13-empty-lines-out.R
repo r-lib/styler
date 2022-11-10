@@ -2,7 +2,8 @@
 #'
 #' @param reindention A list of parameters for regex re-indention, most
 #'   conveniently constructed using [specify_reindention()].
-#' @examples # empty
+#' @examples
+#' # empty
 #'
 #'
 #' # two

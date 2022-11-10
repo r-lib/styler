@@ -113,7 +113,8 @@ prettify_pkg <- function(transformers,
 #' @param text A character vector with text to style.
 #' @inheritParams style_pkg
 #' @family stylers
-#' @examples style_text("call( 1)")
+#' @examples
+#' style_text("call( 1)")
 #' style_text("1    + 1", strict = FALSE)
 #' style_text("a%>%b", scope = "spaces")
 #' style_text("a%>%b; a", scope = "line_breaks")
@@ -198,7 +199,8 @@ prettify_any <- function(transformers,
 #' @inheritSection transform_files Value
 #' @inheritSection style_pkg Warning
 #' @inheritSection style_pkg Roundtrip Validation
-#' @examples # the following is identical but the former is more convenient:
+#' @examples
+#' # the following is identical but the former is more convenient:
 #' file <- tempfile("styler", fileext = ".R")
 #' xfun::write_utf8("1++1", file)
 #' style_file(file, style = tidyverse_style, strict = TRUE)

@@ -262,13 +262,13 @@ parse_transform_serialize_r <- function(text,
   pd_split <- unname(split(pd_nested, pd_nested$block))
   pd_blank <- find_blank_lines_to_next_block(pd_nested)
 
-  start_line <- if (is_roxygen_code_example) 0L else 1L
-
   text_out <- vector("list", length(pd_split))
   for (i in seq_along(pd_split)) {
+    start_line <- if (is_roxygen_code_example || !strict) pd_blank[[i]] else 1L
+
     text_out[[i]] <- parse_transform_serialize_r_block(
       pd_split[[i]],
-      start_line = if (strict) start_line else pd_blank[[i]],
+      start_line = start_line,
       transformers = transformers,
       base_indention = base_indention
     )
