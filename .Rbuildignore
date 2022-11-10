@@ -9,6 +9,7 @@
 ^\.Rproj\.user$
 ^\.github$
 ^\.gitsum$
+^\.lintr$
 ^\.pre-commit-config\.yaml$
 ^_pkgdown\.yaml$
 ^cran-comments\.md$
@@ -22,4 +23,3 @@
 ^tic\.R$
 ^touchstone$
 ^vignettes/gsoc_proposal$
-^\.lintr$
