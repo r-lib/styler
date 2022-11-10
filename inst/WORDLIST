@@ -35,6 +35,7 @@ cpp
 cran
 cre
 ctb
+cyclocomp
 cynkra
 datastructures
 dec
@@ -117,6 +118,8 @@ LF
 LIBS
 lifecycle
 Ligges
+linter
+linters
 lintr
 linux
 lorenz
@@ -257,6 +260,7 @@ tidyr
 tidyverse
 Tidyverse
 Tierney
+todo
 tokenized
 travis
 tryCatch
