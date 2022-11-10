@@ -230,7 +230,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' Wrapper function for the common three operations.
 #' @param warn_empty Whether or not a warning should be displayed when `text`
 #'   does not contain any tokens.
-#' @param is_roxygen_code_example Is code a roxygen examples block.
+#' @param is_roxygen_code_example Is code a roxygen examples block?
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams parse_transform_serialize_r_block
 #' @seealso [parse_transform_serialize_roxygen()]
