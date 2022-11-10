@@ -25,7 +25,7 @@ multi-line strings are present. See 'Examples'.}
 \item{warn_empty}{Whether or not a warning should be displayed when \code{text}
 does not contain any tokens.}
 
-\item{is_roxygen_code_example}{Is code a roxygen examples block.}
+\item{is_roxygen_code_example}{Is code a roxygen examples block?}
 }
 \description{
 Wrapper function for the common three operations.
