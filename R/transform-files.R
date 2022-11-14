@@ -93,7 +93,6 @@ transform_file <- function(path,
 #'   examples.
 #' @inheritParams parse_transform_serialize_r
 #' @keywords internal
-#' @importFrom purrr when
 make_transformer <- function(transformers,
                              include_roxygen_examples,
                              base_indention,
@@ -167,7 +166,6 @@ make_transformer <- function(transformers,
 #' Finally, that we have roxygen code snippets that are either dont* or not,
 #' we style them in [style_roxygen_example_snippet()] using
 #' [parse_transform_serialize_r()].
-#' @importFrom purrr map_at flatten_chr
 #' @keywords internal
 parse_transform_serialize_roxygen <- function(text,
                                               transformers,
@@ -206,7 +204,7 @@ parse_transform_serialize_roxygen <- function(text,
 #'   sections. This list is named `separated`.
 #' * An integer vector with the indices that correspond to roxygen code
 #'   examples in `separated`.
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 split_roxygen_segments <- function(text, roxygen_examples) {
   if (is.null(roxygen_examples)) {
@@ -233,7 +231,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams parse_transform_serialize_r_block
 #' @seealso [parse_transform_serialize_roxygen()]
-#' @importFrom rlang abort
+
 #' @keywords internal
 parse_transform_serialize_r <- function(text,
                                         transformers,
@@ -340,7 +338,6 @@ transformers_drop <- function(text, transformers) {
 #'
 #' @param pd_nested A nested parse table.
 #' @param transformers A list of *named* transformer functions
-#' @importFrom purrr flatten
 #' @keywords internal
 apply_transformers <- function(pd_nested, transformers) {
   transformed_updated_multi_line <- post_visit(
@@ -393,7 +390,7 @@ parse_tree_must_be_identical <- function(transformers) {
 #' Note that this method ignores roxygen code examples and
 #' comments and no verification can be conducted if tokens are in the styling
 #' scope.
-#' @importFrom rlang abort
+
 #' @examples
 #' styler:::verify_roundtrip("a+1", "a + 1")
 #' styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")

@@ -3,7 +3,6 @@
 #' This function initializes and removes various variables from the parse
 #' table.
 #' @param pd_flat A parse table.
-#' @importFrom utils tail
 #' @examples
 #' withr::with_options(
 #'   list(styler.cache_name = NULL), # temporarily deactivate cache
@@ -88,7 +87,7 @@ initialize_indent <- function(pd_flat) {
   pd_flat
 }
 
-#' @importFrom rlang abort
+
 #' @describeIn initialize_attributes validates the parse data.
 #' @keywords internal
 validate_parse_data <- function(pd_flat) {

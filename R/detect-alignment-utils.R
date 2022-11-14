@@ -3,7 +3,7 @@
 #' Must be after dropping comments because the closing brace is only guaranteed
 #' to be the last token in that case.
 #' @inheritParams alignment_drop_comments
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 alignment_ensure_no_closing_brace <- function(pd_by_line,
                                               last_line_droped_early) {
@@ -28,7 +28,6 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
 #' @param pd_by_line A list, each element corresponding to a potentially
 #'   incomplete parse table that represents all token from one line.
 #' @keywords internal
-#' @importFrom purrr map compact
 alignment_drop_comments <- function(pd_by_line) {
   map(pd_by_line, function(x) {
     out <- x[x$token != "COMMENT", ]
@@ -107,7 +106,6 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
 #' Checks if all arguments of column 1 are named
 #' @param relevant_pd_by_line A list with parse tables of a multi-line call,
 #'   excluding first and last column.
-#' @importFrom purrr map_lgl
 #' @keywords internal
 alignment_col1_all_named <- function(relevant_pd_by_line) {
   map_lgl(relevant_pd_by_line, function(x) {
@@ -124,7 +122,6 @@ alignment_col1_all_named <- function(relevant_pd_by_line) {
 #' Serialize all lines for a given column
 #' @param column The index of the column to serialize.
 #' @inheritParams alignment_col1_all_named
-#' @importFrom purrr map
 #' @keywords internal
 alignment_serialize_column <- function(relevant_pd_by_line, column) {
   map(relevant_pd_by_line, alignment_serialize_line, column = column)
@@ -178,7 +175,7 @@ alignment_serialize <- function(pd_sub) {
 #' At least one space after comma, none before, for all but the last comma on
 #' the line
 #' @param pd_sub The subset of a parse table corresponding to one line.
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 alignment_has_correct_spacing_around_comma <- function(pd_sub) {
   comma_tokens <- which(pd_sub$token == "','")
@@ -196,7 +193,7 @@ alignment_has_correct_spacing_around_comma <- function(pd_sub) {
 #' At least one space around `EQ_SUB`
 #' @inheritParams alignment_has_correct_spacing_around_comma
 #' @keywords internal
-#' @importFrom rlang seq2
+#'
 alignment_has_correct_spacing_around_eq_sub <- function(pd_sub) {
   relevant_eq_sub_token <- which(pd_sub$token == "EQ_SUB")
   if (length(relevant_eq_sub_token) == 0L) {

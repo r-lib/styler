@@ -18,6 +18,15 @@
 #' style_text("a%>%b; a", scope = "tokens")
 "_PACKAGE"
 
+## styler namespace: start
+#' @importFrom rlang abort with_handlers seq2 is_installed with_handlers warn is_empty "%||%"
+#' @importFrom purrr map map_lgl map_int map_chr map2 map2_chr map_at pmap pwalk
+#' @importFrom purrr as_mapper compact when partial flatten flatten_int flatten_chr
+#' @importFrom magrittr set_names or "%>%"
+#' @importFrom utils tail write.table capture.output
+## styler namespace: end
+NULL
+
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(c(
     ".",

@@ -16,8 +16,6 @@
 #' last dash and adding -out.R. In contrast to older versions of this
 #' function, every *-out.R file has just one in file.
 #' @inheritParams transform_and_check
-#' @importFrom purrr flatten_chr pwalk map
-#' @importFrom rlang abort
 #' @keywords internal
 test_collection <- function(test, sub_test = NULL,
                             dry = "off",
@@ -101,8 +99,6 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param ... Parameters passed to transformer function.
 #' @param out_tree Name of tree file if written out.
 #' @inheritParams transform_utf8
-#' @importFrom utils write.table
-#' @importFrom rlang warn
 #' @keywords internal
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,

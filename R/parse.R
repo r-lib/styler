@@ -5,8 +5,7 @@
 #' that we can only detect wrong EOL style if it occurs on the first line
 #' already.
 #' @param text Text to parse.
-#' @param ... Parameters passed to [base::parse()]
-#' @importFrom rlang abort with_handlers warn
+#' @param ... Parameters passed to [base::parse()].
 #' @keywords internal
 #' @examples
 #' \dontrun{
@@ -72,7 +71,7 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
 #'
 #' @inheritParams get_parse_data
 #' @return A flat parse table
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 tokenize <- function(text) {
   get_parse_data(text, include_text = TRUE) %>%
@@ -132,8 +131,6 @@ add_id_and_short <- function(pd) {
 #' with the text of their parents if their line / col position matches and
 #' return an error otherwise.
 #' @param pd A parse table.
-#' @importFrom rlang abort
-#' @importFrom magrittr or
 #' @keywords internal
 ensure_correct_txt <- function(pd, text) {
   is_problematic_text <- or(

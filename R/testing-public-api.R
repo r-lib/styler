@@ -15,7 +15,6 @@
 #' This also implies that the ruler width, which depend on the path
 #' length, will again have the same width on all systems and is independent of
 #' how many characters the path of the temporary directory has.
-#' @importFrom utils capture.output
 #' @keywords internal
 catch_style_file_output <- function(file_in) {
   file_in <- testthat_file(file_in)

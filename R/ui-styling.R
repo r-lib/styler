@@ -1,7 +1,3 @@
-#' @keywords api
-#' @importFrom magrittr %>%
-NULL
-
 #' Prettify R source code
 #'
 #' Performs various substitutions in all `.R` files in a package

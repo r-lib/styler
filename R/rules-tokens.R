@@ -67,7 +67,6 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' @param indent_by The amount of spaces used to indent an expression in curly
 #'   braces. Used for unindention.
 #' @keywords internal
-#' @importFrom purrr when
 wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
   key_token <- when(
     pd,
@@ -196,9 +195,7 @@ if_for_while_part_requires_braces <- function(pd, key_token) {
 #' style_text("'here
 #' is a string
 #' '")
-#' @importFrom purrr map map_chr
 #' @param pd_flat A flat parse table.
-#' @importFrom rlang is_empty
 #' @keywords internal
 fix_quotes <- function(pd_flat) {
   str_const <- which(pd_flat$token == "STR_CONST")
@@ -210,7 +207,6 @@ fix_quotes <- function(pd_flat) {
   pd_flat
 }
 
-#' @importFrom rlang is_empty
 fix_quotes_one <- function(x) {
   rx <- "^'([^\"]*)'$"
   i <- grep(rx, x)

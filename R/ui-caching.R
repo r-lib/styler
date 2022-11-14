@@ -113,7 +113,6 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #' @param verbose Whether or not to print an informative message about what the
 #'   function is doing.
 #'
-#' @importFrom rlang "%||%"
 #' @family cache managers
 #' @export
 cache_activate <- function(cache_name = NULL,

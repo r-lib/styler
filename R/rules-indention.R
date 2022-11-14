@@ -102,7 +102,7 @@ NULL
 #'   x + y
 #' }
 #' }
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 update_indention_ref_fun_dec <- function(pd_nested) {
   if (pd_nested$token[1L] == "FUNCTION") {
