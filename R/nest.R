@@ -59,7 +59,6 @@ text_to_flat_pd <- function(text, transformers, more_specs) {
 #' input.
 #' @param pd_nested A top level nest.
 #' @keywords internal
-#'
 add_cache_block <- function(pd_nested) {
   if (cache_is_activated()) {
     pd_nested$block <- cache_find_block(pd_nested)

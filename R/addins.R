@@ -179,7 +179,6 @@ set_style_transformers <- function() {
 }
 
 #' Return the style function or name
-#'
 #' @keywords internal
 get_addins_style_transformer_name <- function() {
   getOption("styler.addins_style_transformer")
@@ -207,7 +206,6 @@ communicate_addins_style_transformers <- function() {
 #' @param context The context from `styler:::get_rstudio_context()`.
 #' @param transformer A transformer function most conveniently constructed with
 #'   [make_transformer()].
-
 #' @keywords internal
 try_transform_as_r_file <- function(context, transformer) {
   with_handlers(

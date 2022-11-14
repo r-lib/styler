@@ -3,7 +3,6 @@
 #' Must be after dropping comments because the closing brace is only guaranteed
 #' to be the last token in that case.
 #' @inheritParams alignment_drop_comments
-#'
 #' @keywords internal
 alignment_ensure_no_closing_brace <- function(pd_by_line,
                                               last_line_droped_early) {
@@ -129,7 +128,6 @@ alignment_serialize_column <- function(relevant_pd_by_line, column) {
 
 #' Serialize one line for a column
 #'
-#'
 #' @inheritParams alignment_serialize_column
 #' @inheritParams alignment_col1_all_named
 #' @keywords internal
@@ -144,7 +142,7 @@ alignment_serialize_line <- function(relevant_pd_by_line, column) {
     # line does not have values at that column
     return(NULL)
   }
-  between_commas <- seq2(max(1, comma_idx[column - 1L]), comma_idx[column])
+  between_commas <- seq2(max(1L, comma_idx[column - 1L]), comma_idx[column])
   relevant_pd_by_line <- relevant_pd_by_line[between_commas, ]
   alignment_serialize(relevant_pd_by_line)
 }
@@ -193,14 +191,13 @@ alignment_has_correct_spacing_around_comma <- function(pd_sub) {
 #' At least one space around `EQ_SUB`
 #' @inheritParams alignment_has_correct_spacing_around_comma
 #' @keywords internal
-#'
 alignment_has_correct_spacing_around_eq_sub <- function(pd_sub) {
   relevant_eq_sub_token <- which(pd_sub$token == "EQ_SUB")
   if (length(relevant_eq_sub_token) == 0L) {
     return(TRUE)
   }
 
-  correct_spaces_before <- pd_sub$.lag_spaces[relevant_eq_sub_token] >= 1
-  correct_spaces_after <- pd_sub$spaces[relevant_eq_sub_token] >= 1
+  correct_spaces_before <- pd_sub$.lag_spaces[relevant_eq_sub_token] >= 1L
+  correct_spaces_after <- pd_sub$spaces[relevant_eq_sub_token] >= 1L
   all(correct_spaces_before) && all(correct_spaces_after)
 }
