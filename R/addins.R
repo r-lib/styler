@@ -157,7 +157,7 @@ set_style_transformers <- function() {
       current_style
     )
   if (!is.null(new_style)) {
-    parsed_new_style <- with_handlers(
+    parsed_new_style <- rlang::with_handlers(
       {
         transformers <- eval(parse(text = new_style))
         style_text(
@@ -208,7 +208,7 @@ communicate_addins_style_transformers <- function() {
 #'   [make_transformer()].
 #' @keywords internal
 try_transform_as_r_file <- function(context, transformer) {
-  with_handlers(
+  rlang::with_handlers(
     transformer(context$contents),
     error = function(e) {
       preamble_for_unsaved <- paste(

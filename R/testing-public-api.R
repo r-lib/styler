@@ -21,7 +21,7 @@ catch_style_file_output <- function(file_in) {
   temp_path <- copy_to_tempdir(file_in)
   raw_output <- withr::with_dir(
     dirname(temp_path),
-    capture.output(
+    utils::capture.output(
       style_file(basename(temp_path), scope = "tokens")
     )
   )

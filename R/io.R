@@ -20,7 +20,7 @@ transform_utf8 <- function(path, fun, dry) {
 #' @keywords internal
 transform_utf8_one <- function(path, fun, dry) {
   rlang::arg_match(dry, c("on", "off", "fail"))
-  with_handlers(
+  rlang::with_handlers(
     {
       file_with_info <- read_utf8(path)
       # only write back when changed OR when there was a missing newline

@@ -19,23 +19,23 @@
 "_PACKAGE"
 
 ## styler namespace: start
-#' @importFrom rlang abort with_handlers seq2 is_installed with_handlers warn is_empty "%||%"
+#'
+#' @importFrom rlang abort warn seq2 is_installed "%||%" set_names
 #' @importFrom purrr map map_lgl map_int map_chr map2 map2_chr map_at pmap pwalk
-#' @importFrom purrr as_mapper compact when partial flatten flatten_int flatten_chr
-#' @importFrom magrittr set_names or "%>%"
-#' @importFrom utils tail write.table capture.output
+#' @importFrom purrr compact when partial flatten flatten_int flatten_chr
+#' @importFrom magrittr "%>%"
+#'
 ## styler namespace: end
 NULL
 
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c(
-    ".",
-    "pd", "pd_nested", "pd_flat", "flattened_pd",
-    "line1", "line2", "col1", "col2", "parent",
-    "terminal", "text", "short",
-    "spaces", "lag_spaces",
-    "newlines", "lag_newlines",
-    "pos_id",
-    NULL
-  ))
-}
+
+utils::globalVariables(c(
+  ".",
+  "pd", "pd_nested", "pd_flat", "flattened_pd",
+  "line1", "line2", "col1", "col2", "parent",
+  "terminal", "text", "short",
+  "spaces", "lag_spaces",
+  "newlines", "lag_newlines",
+  "pos_id",
+  NULL
+))

@@ -109,7 +109,7 @@ transform_and_check <- function(in_item, out_item,
   read_in <- read_utf8_bare(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
-      write.table(out_tree,
+      utils::write.table(out_tree,
         col.names = FALSE, row.names = FALSE, quote = FALSE,
         fileEncoding = "UTF-8"
       )

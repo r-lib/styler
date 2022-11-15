@@ -32,7 +32,7 @@ style_roxygen_code_example_one <- function(example_one,
   ) %>%
     flatten_chr()
   if (bare$example_type == "examplesIf") {
-    with_handlers(
+    rlang::with_handlers(
       parse_text(unmasked[1L]),
       error = function(e) {
         abort(paste0(

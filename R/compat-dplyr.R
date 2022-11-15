@@ -82,7 +82,7 @@ slice <- function(.data, ...) {
 
 # TODO: Use `purrr::map_dfr()` when it stops implicitly relying on `{dplyr}`
 map_dfr <- function(.x, .f, ..., .id = NULL) {
-  .f <- as_mapper(.f, ...)
+  .f <- purrr::as_mapper(.f, ...)
   res <- map(.x, .f, ...)
   bind_rows(res, .id = .id)
 }

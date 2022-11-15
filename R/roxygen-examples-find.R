@@ -9,7 +9,7 @@ identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
   if (length(starts) < 1L) {
     return(integer())
   }
-  stop_candidates <- which(or(
+  stop_candidates <- which(magrittr::or(
     grepl("(^[^#]|^#'[\\s\t]*@)", text, perl = TRUE),
     grepl("^ *\t*$", text) & grepl("^#' *", lead(text))
   ))
@@ -42,7 +42,7 @@ match_stop_to_start <- function(start, stop_candidates) {
   }
 }
 
-#' Find dontrun and friend sequences
+#' Find `dontrun` and friend sequences
 #'
 #' Returns the indices of the lines that correspond to a `dontrun` or
 #' friends sequence.

@@ -199,7 +199,7 @@ if_for_while_part_requires_braces <- function(pd, key_token) {
 #' @keywords internal
 fix_quotes <- function(pd_flat) {
   str_const <- which(pd_flat$token == "STR_CONST")
-  if (is_empty(str_const)) {
+  if (rlang::is_empty(str_const)) {
     return(pd_flat)
   }
 
@@ -210,7 +210,7 @@ fix_quotes <- function(pd_flat) {
 fix_quotes_one <- function(x) {
   rx <- "^'([^\"]*)'$"
   i <- grep(rx, x)
-  if (is_empty(i)) {
+  if (rlang::is_empty(i)) {
     return(x)
   }
 

@@ -16,7 +16,7 @@
 #' }
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
-  tried_parsing <- with_handlers(
+  tried_parsing <- rlang::with_handlers(
     parse(text = text, ...),
     error = function(e) e,
     warning = function(w) w
@@ -133,7 +133,7 @@ add_id_and_short <- function(pd) {
 #' @param pd A parse table.
 #' @keywords internal
 ensure_correct_txt <- function(pd, text) {
-  is_problematic_text <- or(
+  is_problematic_text <- magrittr::or(
     is_insufficiently_parsed_string(pd),
     is_insufficiently_parsed_number(pd)
   )
@@ -143,7 +143,7 @@ ensure_correct_txt <- function(pd, text) {
   problematic_text <- pd[is_problematic_text, ]
   is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
 
-  is_unaffected_token <- !or(
+  is_unaffected_token <- !magrittr::or(
     is_problematic_text, is_parent_of_problematic_string
   )
 
