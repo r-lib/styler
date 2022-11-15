@@ -11,7 +11,6 @@
 #' start marker can have many tokens).
 #' @inheritParams add_stylerignore
 #' @keywords internal
-#' @importFrom purrr map
 env_add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
     env_current$stylerignore <- pd_flat[0, ]

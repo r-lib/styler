@@ -144,7 +144,7 @@ find_start_pos_id <- function(pd,
 #' @param new_ids A vector with new ids
 #' @param after Whether the ids are created with `after = TRUE` (and hence
 #' should be in the range x.0-x.45) or not.
-#' @importFrom rlang abort
+
 #' @family token creators
 #' @keywords internal
 validate_new_pos_ids <- function(new_ids, after) {

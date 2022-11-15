@@ -6,7 +6,6 @@
 #' @inheritParams parse_transform_serialize_r
 #' @param example Roxygen example code.
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
-#' @importFrom purrr map flatten_chr
 #' @keywords internal
 style_roxygen_code_example <- function(example, transformers, base_indention) {
   example <- split(example, cumsum(grepl("^#' *@examples", example)))
@@ -33,7 +32,7 @@ style_roxygen_code_example_one <- function(example_one,
   ) %>%
     flatten_chr()
   if (bare$example_type == "examplesIf") {
-    with_handlers(
+    rlang::with_handlers(
       parse_text(unmasked[1L]),
       error = function(e) {
         abort(paste0(
@@ -64,8 +63,6 @@ style_roxygen_code_example_one <- function(example_one,
 #'   friends.
 #' @inheritParams parse_transform_serialize_r
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
-#' @importFrom rlang seq2
-#' @importFrom purrr map2 flatten_chr
 #' @keywords internal
 style_roxygen_code_example_segment <- function(one_dont,
                                                transformers,

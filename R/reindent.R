@@ -84,7 +84,6 @@ find_tokens_to_update <- function(flattened_pd, target_token) {
 #'   checked or all tokens.
 #' @return A flattened parse table with indention set to `target_indention` for
 #'   the tokens that match `regex.`
-#' @importFrom purrr map flatten_int
 #' @keywords internal
 set_regex_indention <- function(flattened_pd,
                                 pattern,

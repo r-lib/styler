@@ -29,5 +29,6 @@ a <- function(x,
   x + y
 }
 }
+
 }
 \keyword{internal}

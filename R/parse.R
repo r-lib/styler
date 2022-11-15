@@ -5,8 +5,7 @@
 #' that we can only detect wrong EOL style if it occurs on the first line
 #' already.
 #' @param text Text to parse.
-#' @param ... Parameters passed to [base::parse()]
-#' @importFrom rlang abort with_handlers warn
+#' @param ... Parameters passed to [base::parse()].
 #' @keywords internal
 #' @examples
 #' \dontrun{
@@ -17,7 +16,7 @@
 #' }
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
-  tried_parsing <- with_handlers(
+  tried_parsing <- rlang::with_handlers(
     parse(text = text, ...),
     error = function(e) e,
     warning = function(w) w
@@ -72,7 +71,7 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
 #'
 #' @inheritParams get_parse_data
 #' @return A flat parse table
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 tokenize <- function(text) {
   get_parse_data(text, include_text = TRUE) %>%
@@ -132,11 +131,9 @@ add_id_and_short <- function(pd) {
 #' with the text of their parents if their line / col position matches and
 #' return an error otherwise.
 #' @param pd A parse table.
-#' @importFrom rlang abort
-#' @importFrom magrittr or
 #' @keywords internal
 ensure_correct_txt <- function(pd, text) {
-  is_problematic_text <- or(
+  is_problematic_text <- magrittr::or(
     is_insufficiently_parsed_string(pd),
     is_insufficiently_parsed_number(pd)
   )
@@ -146,7 +143,7 @@ ensure_correct_txt <- function(pd, text) {
   problematic_text <- pd[is_problematic_text, ]
   is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
 
-  is_unaffected_token <- !or(
+  is_unaffected_token <- !magrittr::or(
     is_problematic_text, is_parent_of_problematic_string
   )
 

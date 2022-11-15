@@ -43,7 +43,6 @@ lookup_tokens <- function() {
 #' Lookup which new tokens were created from "SPECIAL"
 #'
 #' @param regex A regular expression pattern to search for.
-#' @importFrom purrr map_chr
 #' @keywords internal
 lookup_new_special <- function(regex = NA) {
   new_special <- c("PIPE", "IN", "OTHER")
