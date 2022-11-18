@@ -31,16 +31,16 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #'
 #' To comply with the CRAN policy, \{styler\} will by default clean up cache files
 #' that are older than 6 days. This implies that you loose the benefit of the cache
-#' for the files not styled in the last 6 days. You can set the R option
-#' `styler.cache_root` explicitly, (e.g. in your `.Rprofile` with
-#' [usethis::edit_r_profile()]) to
+#' for the files not styled in the last 6 days.
 #'
-#' * confirm the default and silence the message with
-#'   `options(styler.cache_root = "styler")`.
+#' If you want to avoid this, i.e., if you want the cache to last longer, you can use the
+#' R option `styler.cache_root` to opt for an indefinitely long-lived cache by setting it to
+#' `options(styler.cache_root = "styler-perm")`.
 #'
-#' * opt for an indefinitely long-living cache by setting the option to something
-#'   else (we recommend `options(styler.cache_root = "styler-perm")`, which is
-#'   also used by pre-commit).
+#' If you are happy with the cache being cleared after 6 days, you can confirm the default and
+#' silence this message by setting it instead to `options(styler.cache_root = "styler")`.
+#'
+#' You can make this change in your `.Rprofile` using [usethis::edit_r_profile()]).
 #'
 #' @section Manage the cache:
 #' See [cache_info()],[cache_activate()] or [cache_clear()] for utilities to

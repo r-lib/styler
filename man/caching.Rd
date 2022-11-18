@@ -14,16 +14,16 @@ be quicker.
 
 To comply with the CRAN policy, \{styler\} will by default clean up cache files
 that are older than 6 days. This implies that you loose the benefit of the cache
-for the files not styled in the last 6 days. You can set the R option
-\code{styler.cache_root} explicitly, (e.g. in your \code{.Rprofile} with
-\code{\link[usethis:edit]{usethis::edit_r_profile()}}) to
-\itemize{
-\item confirm the default and silence the message with
-\code{options(styler.cache_root = "styler")}.
-\item opt for an indefinitely long-living cache by setting the option to something
-else (we recommend \code{options(styler.cache_root = "styler-perm")}, which is
-also used by pre-commit).
-}
+for the files not styled in the last 6 days.
+
+If you want to avoid this, i.e., if you want the cache to last longer, you can use the
+R option \code{styler.cache_root} to opt for an indefinitely long-lived cache by setting it to
+\code{options(styler.cache_root = "styler-perm")}.
+
+If you are happy with the cache being cleared after 6 days, you can confirm the default and
+silence this message by setting it instead to \code{options(styler.cache_root = "styler")}.
+
+You can make this change in your \code{.Rprofile} using \code{\link[usethis:edit]{usethis::edit_r_profile()}}).
 }
 
 \section{Manage the cache}{
