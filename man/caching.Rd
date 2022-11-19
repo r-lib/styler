@@ -23,7 +23,7 @@ R option \code{styler.cache_root} to opt for an indefinitely long-lived cache by
 If you are happy with the cache being cleared after 6 days, you can confirm the default and
 silence this message by setting it instead to \code{options(styler.cache_root = "styler")}.
 
-You can make this change in your \code{.Rprofile} using \code{\link[usethis:edit]{usethis::edit_r_profile()}}).
+You can make this change in your \code{.Rprofile} using \verb{usethis::edit_r_profile()]}.
 }
 
 \section{Manage the cache}{

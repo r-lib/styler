@@ -40,7 +40,7 @@ cache_clear <- function(cache_name = NULL, ask = TRUE) {
 #' If you are happy with the cache being cleared after 6 days, you can confirm the default and
 #' silence this message by setting it instead to `options(styler.cache_root = "styler")`.
 #'
-#' You can make this change in your `.Rprofile` using [usethis::edit_r_profile()]).
+#' You can make this change in your `.Rprofile` using `usethis::edit_r_profile()`.
 #'
 #' @section Manage the cache:
 #' See [cache_info()],[cache_activate()] or [cache_clear()] for utilities to
