@@ -3,8 +3,6 @@
 #' check whether any of the children of `pd` has `token` on the same line as the
 #' closing `token` of pd. If so, unindent that token.
 #' @inheritParams unindent_child
-#' @importFrom purrr map
-#' @importFrom rlang seq2
 #' @keywords internal
 set_unindention_child <- function(pd, token = "')'", unindent_by) {
   if (all(pd$indent == 0L) || all(pd$terminal)) {

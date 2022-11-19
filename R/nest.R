@@ -5,7 +5,6 @@
 #' @inheritParams text_to_flat_pd
 #' @return A nested parse table. See [tokenize()] for details on the columns
 #'   of the parse table.
-#' @importFrom purrr when
 #' @examples
 #' code <- "
 #' ab     <- 1L # some comment
@@ -60,7 +59,6 @@ text_to_flat_pd <- function(text, transformers, more_specs) {
 #' input.
 #' @param pd_nested A top level nest.
 #' @keywords internal
-#' @importFrom rlang seq2
 add_cache_block <- function(pd_nested) {
   if (cache_is_activated()) {
     pd_nested$block <- cache_find_block(pd_nested)
@@ -342,7 +340,6 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @param pd_flat A flat parse table including both terminals and non-terminals.
 #' @seealso [compute_parse_data_nested()]
 #' @return A nested parse table.
-#' @importFrom purrr map2
 #' @keywords internal
 nest_parse_data <- function(pd_flat) {
   if (all(pd_flat$parent <= 0L)) {

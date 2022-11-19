@@ -61,7 +61,6 @@ NULL
 #'
 #' # styling line breaks only without spaces
 #' style_text(c("ab <- 3", "a =3"), strict = TRUE, scope = I(c("line_breaks", "tokens")))
-#' @importFrom purrr partial
 #' @export
 tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
@@ -324,7 +323,6 @@ tidyverse_style <- function(scope = "tokens",
 #'   "a <- function(x) { x }",
 #'   style = set_line_break_before_curly_opening_style
 #' )
-#' @importFrom purrr compact
 #' @export
 create_style_guide <- function(initialize = default_style_guide_attributes,
                                line_break = NULL,
@@ -477,7 +475,7 @@ tidyverse_reindention <- function() {
 #' @param scope A character vector of length one or a vector of class `AsIs`.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
-#' @importFrom rlang abort
+
 #' @examples
 #' scope_normalize(I("tokens"))
 #' scope_normalize(I(c("indention", "tokens")))

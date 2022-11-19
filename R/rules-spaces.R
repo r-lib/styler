@@ -251,7 +251,6 @@ set_space_between_levels <- function(pd_flat) {
 #'
 #' @param pd A parse table.
 #' @param force_one Whether or not to force one space or allow multiple spaces.
-#' @importFrom purrr map_chr
 #' @keywords internal
 start_comments_with_space <- function(pd, force_one = FALSE) {
   is_comment <- is_comment(pd)

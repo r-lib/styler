@@ -172,7 +172,7 @@ relocate_eq_assign <- function(pd) {
 #'
 #' Please refer to the section 'Examples' in [relocate_eq_assign()] for details.
 #' @param pd A parse table.
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 relocate_eq_assign_nest <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
@@ -236,7 +236,7 @@ relocate_eq_assign_one <- function(pd) {
 #' Adds line and col information to an expression from its child
 #'
 #' @param pd A parse table.
-#' @importFrom rlang abort
+
 #' @keywords internal
 add_line_col_to_wrapped_expr <- function(pd) {
   if (nrow(pd) > 1) abort("pd must be a wrapped expression that has one row.")

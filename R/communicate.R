@@ -40,8 +40,7 @@ communicate_summary <- function(changed, ruler_width) {
   }
 }
 
-#' @importFrom rlang abort
-#' @importFrom rlang is_installed
+
 assert_data.tree_installation <- function() {
   if (!is_installed("data.tree")) {
     abort("The package data.tree needs to be installed for this functionality.")

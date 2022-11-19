@@ -9,7 +9,7 @@ parse_safely(text, ...)
 \arguments{
 \item{text}{Text to parse.}
 
-\item{...}{Parameters passed to \code{\link[base:parse]{base::parse()}}}
+\item{...}{Parameters passed to \code{\link[base:parse]{base::parse()}}.}
 }
 \description{
 Parses text safely, i.e. throws an informative error if EOL style does not

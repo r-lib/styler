@@ -10,7 +10,7 @@ lead <- function(x, n = 1L, default = NA) {
   c(x[-seq_len(n)], rep(default, n))
 }
 
-#' @importFrom rlang abort
+
 arrange <- function(.data, ...) {
   ord <- eval(substitute(order(...)), .data, parent.frame())
   .data[ord, , drop = FALSE]
@@ -81,9 +81,8 @@ slice <- function(.data, ...) {
 }
 
 # TODO: Use `purrr::map_dfr()` when it stops implicitly relying on `{dplyr}`
-#' @importFrom purrr as_mapper map
 map_dfr <- function(.x, .f, ..., .id = NULL) {
-  .f <- as_mapper(.f, ...)
+  .f <- purrr::as_mapper(.f, ...)
   res <- map(.x, .f, ...)
   bind_rows(res, .id = .id)
 }

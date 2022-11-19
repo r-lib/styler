@@ -1,7 +1,7 @@
 #' Find the index of the next or previous non-comment in a parse table.
 #' @param pd A parse table.
 #' @param pos The position of the token to start the search from.
-#' @importFrom rlang seq2
+#'
 #' @examples
 #' code <- "a <- # hi \n x %>% b()"
 #' writeLines(code)

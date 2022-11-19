@@ -240,7 +240,7 @@ remove_line_breaks_in_fun_dec <- function(pd) {
   pd
 }
 
-#' @importFrom rlang seq2
+#'
 add_line_break_after_pipe <- function(pd) {
   is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
   pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1L] <- 1L
@@ -272,7 +272,7 @@ set_line_break_after_assignment <- function(pd) {
 #' @param force_text_before A character vector with text before "'('" that
 #'   forces a line break after every argument in the call.
 #' @name set_line_break_if_call_is_multi_line
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 NULL
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/roxygen-examples-find.R
 \name{find_dont_seqs}
 \alias{find_dont_seqs}
-\title{Find dontrun and friend sequences}
+\title{Find \code{dontrun} and friend sequences}
 \usage{
 find_dont_seqs(bare)
 }

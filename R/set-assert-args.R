@@ -69,7 +69,7 @@ set_and_assert_arg_filetype <- function(filetype) {
 #' Make sure all supplied file types are allowed
 #'
 #' @param lowercase_filetype A vector with file types to check, all lower case.
-#' @importFrom rlang abort
+
 #' @keywords internal
 assert_filetype <- function(lowercase_filetype) {
   allowed_types <- c("r", "rmd", "rmarkdown", "rnw", "rprofile", "qmd")
@@ -96,7 +96,7 @@ assert_text <- function(text) {
 #'
 #' Check whether one or more tokens exist and have a unique token-text mapping
 #' @param tokens Tokens to check.
-#' @importFrom rlang abort
+
 #' @keywords internal
 assert_tokens <- function(tokens) {
   invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]

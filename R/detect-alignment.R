@@ -22,8 +22,6 @@
 #' * For the recursive creation of text, greedily check column by column to make
 #'   sure we can stop as soon as we found that columns are not aligned.
 #'
-#' @importFrom purrr map_int map_lgl map compact
-#' @importFrom rlang seq2
 #' @keywords internal
 #' @examples
 #' library("magrittr")

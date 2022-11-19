@@ -9,7 +9,6 @@
 #' @param pd_nested A nested parse table.
 #' @inheritParams visit_one
 #' @family visitors
-#' @importFrom purrr map
 #' @name visit
 #' @keywords internal
 NULL
@@ -120,7 +119,6 @@ visit_one <- function(pd_flat, funs) {
 #' relative in `pd_nested`) will be converted into absolute.
 #' @inherit context_towards_terminals
 #' @seealso context_towards_terminals visitors
-#' @importFrom purrr pmap
 #' @keywords internal
 context_to_terminals <- function(pd_nested,
                                  outer_lag_newlines,

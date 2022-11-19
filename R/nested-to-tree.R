@@ -4,7 +4,6 @@
 #' @param text A character vector.
 #' @inheritParams create_node_from_nested_root
 #' @return A data frame.
-#' @importFrom purrr when
 #' @keywords internal
 create_tree <- function(text, structure_only = FALSE) {
   compute_parse_data_nested(text, transformers = NULL) %>%
@@ -62,7 +61,6 @@ create_node_from_nested_root <- function(pd_nested, structure_only) {
 #'
 #' @inheritParams create_node_from_nested_root
 #' @param parent The parent of the node to be created.
-#' @importFrom purrr map2 map
 #' @keywords internal
 create_node_from_nested <- function(pd_nested, parent, structure_only) {
   if (is.null(pd_nested)) {
