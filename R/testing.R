@@ -235,11 +235,11 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
 #' @keywords internal
 n_times_faster_with_cache <- function(x1, x2 = x1, ...,
                                       fun = styler::style_text,
-                                      n = 3,
+                                      n = 3L,
                                       clear = "always") {
   rlang::arg_match(clear, c("always", "final", "never", "all but last"))
 
-  out <- purrr::map(1:n, n_times_faster_bench,
+  out <- purrr::map(1L:n, n_times_faster_bench,
     x1 = x1, x2 = x2, fun = fun,
     ..., n = n, clear = clear
   )
@@ -258,7 +258,7 @@ n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
   first <- system.time(fun(x1, ...))
 
   if (is.null(x2)) {
-    second <- c(elapsed = 1)
+    second <- c(elapsed = 1L)
   } else {
     second <- system.time(fun(x2, ...))
   }

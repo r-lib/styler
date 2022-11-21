@@ -28,6 +28,7 @@ repos:
           inst/.*|
           man/.*|
           tests/.*|
+          vignettes/.*|
           )$
       - id: roxygenize
         additional_dependencies:

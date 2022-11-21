@@ -151,7 +151,7 @@ drop_cached_children <- function(pd) {
 #' @keywords internal
 find_pos_id_to_keep <- function(pd) {
   if (pd$is_cached[1L]) {
-    pd$pos_id[pd$parent <= 0]
+    pd$pos_id[pd$parent <= 0L]
   } else {
     pd$pos_id
   }
@@ -323,7 +323,7 @@ add_attributes_caching <- function(pd_flat, transformers, more_specs) {
 #' @keywords internal
 set_spaces <- function(spaces_after_prefix, force_one) {
   if (force_one) {
-    rep(1, length(spaces_after_prefix))
+    rep(1L, length(spaces_after_prefix))
   } else {
     pmax(spaces_after_prefix, 1L)
   }

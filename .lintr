@@ -1,6 +1,7 @@
 linters: linters_with_defaults(
    commented_code_linter = NULL,
-   cyclocomp_linter = cyclocomp_linter(25),
+   cyclocomp_linter = cyclocomp_linter(40),
+   function_argument_linter = NULL,
    line_length_linter(120),
    object_name_linter = NULL,
    object_length_linter(50),
@@ -15,5 +16,6 @@ linters: linters_with_defaults(
 exclusions: list(
   "inst",
   "man",
-  "tests"
+  "tests",
+  "vignettes"
  )

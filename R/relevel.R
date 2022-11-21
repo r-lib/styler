@@ -27,7 +27,7 @@ flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, "PIPE", math_token, "'$'")
   pd_token_right <- c(
     special_token, "PIPE", "LEFT_ASSIGN",
-    if (parser_version_get() > 1) "EQ_ASSIGN",
+    if (parser_version_get() > 1L) "EQ_ASSIGN",
     "'+'", "'-'", "'~'"
   )
   pd_nested %>%
@@ -99,7 +99,7 @@ bind_with_child <- function(pd_nested, pos) {
 wrap_expr_in_expr <- function(pd) {
   create_tokens(
     "expr", "",
-    pos_ids = create_pos_ids(pd, 1, after = FALSE),
+    pos_ids = create_pos_ids(pd, 1L, after = FALSE),
     child = pd,
     terminal = FALSE,
     stylerignore = pd$stylerignore[1L],
@@ -145,7 +145,7 @@ wrap_expr_in_expr <- function(pd) {
 #' )
 #' @keywords internal
 relocate_eq_assign <- function(pd) {
-  if (parser_version_get() < 2) {
+  if (parser_version_get() < 2L) {
     post_visit_one(pd, relocate_eq_assign_nest)
   } else {
     pd
@@ -239,7 +239,7 @@ relocate_eq_assign_one <- function(pd) {
 
 #' @keywords internal
 add_line_col_to_wrapped_expr <- function(pd) {
-  if (nrow(pd) > 1) abort("pd must be a wrapped expression that has one row.")
+  if (nrow(pd) > 1L) abort("pd must be a wrapped expression that has one row.")
   pd$line1 <- pd$child[[1L]]$line1[1L]
   pd$line2 <- last(pd$child[[1L]]$line2)
   pd$col1 <- pd$child[[1L]]$col1[1L]
