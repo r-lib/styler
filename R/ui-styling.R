@@ -300,9 +300,13 @@ prettify_any <- function(transformers,
   } else {
     files_other <- NULL
   }
+
   transform_files(
     setdiff(c(files_root, files_other), exclude_files),
-    transformers, include_roxygen_examples, base_indention, dry
+    transformers,
+    include_roxygen_examples,
+    base_indention,
+    dry
   )
 }
 
