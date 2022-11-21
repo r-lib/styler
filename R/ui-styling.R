@@ -267,6 +267,7 @@ style_dir <- function(path = ".",
   invisible(changed)
 }
 
+# nolint: start
 #' Prettify R code in current working directory
 #'
 #' This is a helper function for style_dir.
@@ -280,7 +281,7 @@ prettify_any <- function(transformers,
                          exclude_files,
                          exclude_dirs,
                          include_roxygen_examples,
-                         base_indention = 0L, # nolint: function_argument
+                         base_indention = 0L,
                          dry) {
   exclude_files <- set_arg_paths(exclude_files)
   exclude_dirs <- exclude_dirs %>%
@@ -309,6 +310,7 @@ prettify_any <- function(transformers,
     dry
   )
 }
+# nolint: end
 
 #' Style files with R source code
 #'
