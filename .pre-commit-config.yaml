@@ -23,6 +23,12 @@ repos:
       - id: lintr
         additional_dependencies:
           - r-lib/lintr
+        exclude: >
+          (?x)^(
+          inst/.*|
+          man/.*|
+          tests/.*|
+          )$
       - id: roxygenize
         additional_dependencies:
           - r-lib/pkgapi
