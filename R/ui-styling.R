@@ -280,7 +280,7 @@ prettify_any <- function(transformers,
                          exclude_files,
                          exclude_dirs,
                          include_roxygen_examples,
-                         base_indention = 0L,
+                         base_indention = 0L, # nolint: function_argument
                          dry) {
   exclude_files <- set_arg_paths(exclude_files)
   exclude_dirs <- exclude_dirs %>%

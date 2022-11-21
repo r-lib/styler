@@ -7,6 +7,7 @@ linters: linters_with_defaults(
    object_usage_linter = NULL,
    todo_comment_linter = NULL,
    extraction_operator_linter = NULL,
+   nonportable_path_linter = NULL,
    undesirable_function_linter = NULL,
    undesirable_operator_linter = NULL,
    defaults = linters_with_tags(tags = NULL)

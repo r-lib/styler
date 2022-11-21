@@ -23,8 +23,6 @@ repos:
       - id: lintr
         additional_dependencies:
           - r-lib/lintr
-        warn-only: true
-        verbose: True
       - id: roxygenize
         additional_dependencies:
           - r-lib/pkgapi
