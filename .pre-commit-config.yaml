@@ -28,6 +28,7 @@ repos:
           inst/.*|
           man/.*|
           tests/.*|
+          touchstone/.*|
           vignettes/.*|
           )$
       - id: roxygenize

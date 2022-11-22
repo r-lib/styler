@@ -22,5 +22,6 @@ exclusions: list(
   "inst",
   "man",
   "tests",
+  "touchstone",
   "vignettes"
  )
