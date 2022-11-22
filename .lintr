@@ -5,6 +5,7 @@ linters: linters_with_defaults(
    function_argument_linter = NULL,
    indentation_linter = NULL,
    line_length_linter(120),
+   namespace_linter = NULL,
    nested_ifelse_linter = NULL,
    object_name_linter = NULL,
    object_length_linter(70),
