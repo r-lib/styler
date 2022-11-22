@@ -368,7 +368,7 @@ test_transformers_drop <- function(transformers) {
       rlang::abort(paste(
         "transformers_drop specifies exclusion rules for transformers that ",
         "are not in the style guilde. Please add the rule to the style guide ",
-        "or remove the dropping rules:", paste(diff, collapse = ", ")
+        "or remove the dropping rules:", toString(diff)
       ))
     }
   })

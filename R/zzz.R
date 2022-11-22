@@ -54,9 +54,7 @@ remove_old_cache_files <- function() {
 remove_cache_old_versions <- function() {
   dirs <- list.dirs(R.cache::getCachePath("styler"), recursive = FALSE)
   old_package_dirs <- dirs[basename(dirs) != as.character(styler_version)]
-  purrr::walk(old_package_dirs, function(dir) {
-    unlink(dir, recursive = TRUE, force = TRUE)
-  })
+  purrr::walk(old_package_dirs, unlink, dir, recursive = TRUE, force = TRUE)
 }
 
 # nocov end

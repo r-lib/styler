@@ -13,7 +13,7 @@
 #' @keywords internal
 env_add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
-    env_current$stylerignore <- pd_flat[0, ]
+    env_current$stylerignore <- pd_flat[0L, ]
     return()
   }
   pd_flat_temp <- pd_flat[pd_flat$terminal | pd_flat$is_cached, ] %>%
