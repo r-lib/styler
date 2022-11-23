@@ -43,7 +43,7 @@ test_dry <- function(path, styler, styled = FALSE) {
   summary <- styler(path, dry = "on")
   checker <- ifelse(styled, testthat::expect_false, testthat::expect_true)
   checker(summary$changed)
-  testthat::expect_true(identical(before, readLines(path)))
+  testthat::expect_identical(before, readLines(path))
 
   if (styled) {
     testthat::expect_error(styler(path, dry = "fail"), NA)

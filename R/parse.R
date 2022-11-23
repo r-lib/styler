@@ -49,7 +49,7 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
     start_char <- as.numeric(split[3L])
     offending_line <- initial_text[as.integer(split[2L])]
     if (!is.na(offending_line)) {
-      if (substr(offending_line, start_char, start_char + 1) == "\r\n") {
+      if (substr(offending_line, start_char, start_char + 1L) == "\r\n") {
         return(TRUE)
       }
     }
@@ -119,7 +119,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
 #' @keywords internal
 add_id_and_short <- function(pd) {
   pd$pos_id <- seq2(1L, nrow(pd))
-  pd$short <- substr(pd$text, 1, 5)
+  pd$short <- substr(pd$text, 1L, 5L)
   pd
 }
 

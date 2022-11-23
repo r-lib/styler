@@ -9,7 +9,7 @@ n_times_faster_with_cache(
   x2 = x1,
   ...,
   fun = styler::style_text,
-  n = 3,
+  n = 3L,
   clear = "always"
 )
 }

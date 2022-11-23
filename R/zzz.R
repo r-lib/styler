@@ -25,7 +25,7 @@
 
 
 ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
-  if (ask && stats::runif(1) > 0.9 && is.null(getOption("styler.cache_root"))) {
+  if (ask && stats::runif(1L) > 0.9 && is.null(getOption("styler.cache_root"))) {
     ask_to_switch_to_non_default_cache_root_impl()
     options(styler.cache_root = "styler")
   }
@@ -44,7 +44,7 @@ remove_old_cache_files <- function() {
     R.cache::getCachePath(c("styler", styler_version)),
     full.names = TRUE, recursive = TRUE
   )
-  date_boundary <- Sys.time() - 60 * 60 * 24 * 6
+  date_boundary <- Sys.time() - 60L * 60L * 24L * 6L
   file.remove(
     all_cached[file.info(all_cached)$mtime < date_boundary]
   )
@@ -54,9 +54,7 @@ remove_old_cache_files <- function() {
 remove_cache_old_versions <- function() {
   dirs <- list.dirs(R.cache::getCachePath("styler"), recursive = FALSE)
   old_package_dirs <- dirs[basename(dirs) != as.character(styler_version)]
-  purrr::walk(old_package_dirs, function(dir) {
-    unlink(dir, recursive = TRUE, force = TRUE)
-  })
+  purrr::walk(old_package_dirs, unlink, recursive = TRUE, force = TRUE)
 }
 
 # nocov end
