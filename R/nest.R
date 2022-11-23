@@ -21,11 +21,13 @@ compute_parse_data_nested <- function(text,
   parse_data$child <- rep(list(NULL), length(parse_data$text))
   pd_nested <- parse_data %>%
     nest_parse_data() %>%
-    flatten_operators() %>%
-    when(any(parse_data$token == "EQ_ASSIGN") ~ relocate_eq_assign(.), ~.) %>%
-    add_cache_block()
+    flatten_operators()
 
-  pd_nested
+  if (any(parse_data$token == "EQ_ASSIGN")) {
+    pd_nested <- relocate_eq_assign(pd_nested)
+  }
+
+  pd_nested %>% add_cache_block()
 }
 
 #' Creates a flat parse table with minimal initialization
