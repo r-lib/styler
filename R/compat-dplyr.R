@@ -86,3 +86,48 @@ map_dfr <- function(.x, .f, ..., .id = NULL) {
   res <- map(.x, .f, ...)
   bind_rows(res, .id = .id)
 }
+
+# `when()` was deprecated in purrr 1.0.0 because it's not related to the
+# core purpose of purrr [Licence: MIT].
+when <- function(., ...) {
+  dots <- list(...)
+  names <- names(dots)
+  named <- if (is.null(names)) rep(FALSE, length(dots)) else names != ""
+
+  if (sum(!named) == 0L) {
+    stop("At least one matching condition is needed.",
+      call. = FALSE
+    )
+  }
+
+  is_formula <-
+    vapply(
+      dots,
+      function(dot) identical(class(dot), "formula"),
+      logical(1L)
+    )
+
+  env <- new.env(parent = parent.frame())
+  env[["."]] <- .
+
+  if (sum(named) > 0L) {
+    for (i in which(named)) {
+      env[[names[i]]] <- dots[[i]]
+    }
+  }
+
+  result <- NULL
+  for (i in which(!named)) {
+    if (is_formula[i]) {
+      action <- length(dots[[i]])
+      if (action == 2L || is_true(eval(dots[[i]][[2L]], env, env))) {
+        result <- eval(dots[[i]][[action]], env, env)
+        break
+      }
+    } else {
+      result <- dots[[i]]
+    }
+  }
+
+  result
+}
