@@ -75,7 +75,7 @@ set_line_break_before_curly_opening <- function(pd) {
     linebreak_before_curly <- ifelse(is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
       # and goes to else case
-      any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1L])] > 0L),
+      any(pd$lag_newlines[seq2(1L, line_break_to_set_idx[1L])] > 0L),
       # if not a function call, only break line if it is a pipe followed by {}
       pd$token[line_break_to_set_idx] %in% c("SPECIAL-PIPE", "PIPE")
     )
@@ -110,7 +110,7 @@ set_line_break_before_curly_opening <- function(pd) {
     # non-curly expressions after curly expressions must have line breaks
     if (length(should_not_be_on_same_line_idx) > 0L) {
       comma_exprs_idx <- which(pd$token == "','")
-      comma_exprs_idx <- setdiff(comma_exprs_idx, 1 + is_not_curly_curly_idx)
+      comma_exprs_idx <- setdiff(comma_exprs_idx, 1L + is_not_curly_curly_idx)
       non_comment_after_comma <- map_int(comma_exprs_idx,
         next_non_comment,
         pd = pd
@@ -310,7 +310,7 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
       return(pd)
     }
     break_pos <- find_line_break_position_in_multiline_call(pd)
-    idx_nested <- next_non_comment(pd, 2)
+    idx_nested <- next_non_comment(pd, 2L)
     if (pd_is_multi_line(pd$child[[idx_nested]]) && sum(pd$lag_newlines) > 0L) {
       break_pos <- c(break_pos, idx_nested)
     }
@@ -407,7 +407,7 @@ set_line_break_after_ggplot2_plus <- function(pd) {
           which(lead(pd$token == "COMMENT"))
         )
 
-        pd$lag_newlines[plus_without_comment_after + 1] <- 1L
+        pd$lag_newlines[plus_without_comment_after + 1L] <- 1L
       }
     }
   }

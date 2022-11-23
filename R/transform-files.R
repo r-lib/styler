@@ -19,7 +19,7 @@ transform_files <- function(files,
   transformer <- make_transformer(
     transformers, include_roxygen_examples, base_indention
   )
-  max_char <- min(max(nchar(files), 0), getOption("width"))
+  max_char <- min(max(nchar(files), 0L), getOption("width"))
   len_files <- length(files)
   if (len_files > 0L && !getOption("styler.quiet", FALSE)) {
     cat("Styling ", len_files, " files:\n")

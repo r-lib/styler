@@ -62,7 +62,7 @@ alignment_drop_comments <- function(pd_by_line) {
 alignment_drop_last_expr <- function(pds_by_line) {
   # TODO could be skipped if we know it's not a function dec
   pd_last_line <- pds_by_line[[length(pds_by_line)]]
-  last_two_lines <- pd_last_line$token[c(nrow(pd_last_line) - 1, nrow(pd_last_line))]
+  last_two_lines <- pd_last_line$token[c(nrow(pd_last_line) - 1L, nrow(pd_last_line))]
   if (identical(last_two_lines, c("')'", "expr"))) {
     pd_last_line <- pd_last_line[-nrow(pd_last_line), ]
   }
@@ -81,7 +81,7 @@ alignment_drop_last_expr <- function(pds_by_line) {
 alignment_ensure_trailing_comma <- function(pd_by_line) {
   last_pd <- last(pd_by_line)
   # needed to make sure comma is added without space
-  last_pd$spaces[nrow(last_pd)] <- 0
+  last_pd$spaces[nrow(last_pd)] <- 0L
   if (last(last_pd$token) == "','") {
     return(pd_by_line)
   } else {
@@ -94,7 +94,7 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
       stylerignore = last_pd$stylerignore[1L],
       indents = last_pd$indent[1L]
     )
-    tokens$.lag_spaces <- 0
+    tokens$.lag_spaces <- 0L
 
     tokens$lag_newlines <- tokens$pos_id <- NULL
     pd_by_line[[length(pd_by_line)]] <- rbind(last_pd, tokens)
@@ -180,7 +180,7 @@ alignment_has_correct_spacing_around_comma <- function(pd_sub) {
   if (length(comma_tokens) == 0L) {
     return(TRUE)
   }
-  relevant_comma_token <- comma_tokens[seq2(1, length(comma_tokens) - 1L)]
+  relevant_comma_token <- comma_tokens[seq2(1L, length(comma_tokens) - 1L)]
   correct_spaces_before <- pd_sub$.lag_spaces[relevant_comma_token] == 0L
   correct_spaces_after <- pd_sub$spaces[relevant_comma_token] > 0L
   all(correct_spaces_before) && all(correct_spaces_after)

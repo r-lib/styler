@@ -486,7 +486,7 @@ scope_normalize <- function(scope, name = substitute(scope)) {
   if (!all((scope %in% levels))) {
     abort(paste(
       "all values in", name, "must be one of the following:",
-      paste(levels, collapse = ", ")
+      toString(levels)
     ))
   }
 

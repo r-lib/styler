@@ -8,7 +8,7 @@ remove_dont_mask <- function(roxygen) {
     1L, 2L, if (roxygen[3L] == "\n") 3L, last(which(roxygen == "}"))
   ) %>% sort()
   list(
-    code = roxygen[-mask], mask = paste(roxygen[seq2(1, 2)], collapse = "")
+    code = roxygen[-mask], mask = paste(roxygen[seq2(1L, 2L)], collapse = "")
   )
 }
 

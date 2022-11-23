@@ -115,7 +115,7 @@ wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
       pd, all_to_be_wrapped_ind, indent_by, space_after
     )
 
-    if (nrow(pd) > 5L) pd$lag_newlines[6] <- 0L
+    if (nrow(pd) > 5L) pd$lag_newlines[6L] <- 0L
   }
   pd
 }
@@ -126,7 +126,7 @@ wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
 #' already wrapped into a such.
 #' @inheritParams wrap_multiline_curly
 #' @keywords internal
-wrap_else_multiline_curly <- function(pd, indent_by = 2, space_after = 0L) {
+wrap_else_multiline_curly <- function(pd, indent_by = 2L, space_after = 0L) {
   if (contains_else_expr(pd) &&
     pd_is_multi_line(pd) &&
     contains_else_expr_that_needs_braces(pd) &&

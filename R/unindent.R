@@ -14,9 +14,9 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
   }
 
   first_on_last_line <- last(
-    c(1, which(pd$lag_newlines > 0L | pd$multi_line > 0L))
+    c(1L, which(pd$lag_newlines > 0L | pd$multi_line > 0L))
   )
-  on_same_line <- seq2(first_on_last_line, closing - 1)
+  on_same_line <- seq2(first_on_last_line, closing - 1L)
   cand_ind <- setdiff(on_same_line, which(pd$terminal))
 
   if (length(cand_ind) < 1L) {

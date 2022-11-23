@@ -21,7 +21,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
     return(pd)
   }
 
-  if (pd$newlines[length(pd$newlines) - 1] == 0L) {
+  if (pd$newlines[length(pd$newlines) - 1L] == 0L) {
     return(pd)
   }
   pd$indent[nrow] <- indent_by
@@ -60,7 +60,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   ] > 0L
 
   if (has_else_without_curly_or_else_chid && needs_indention_now) {
-    pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
+    pd$indent[seq(else_idx + 1L, nrow(pd))] <- indent_by
   }
   pd
 }
@@ -108,7 +108,7 @@ compute_indent_indices <- function(pd,
   if (is.na(trigger)) {
     return(numeric(0L))
   }
-  start <- trigger + 1
+  start <- trigger + 1L
   if (is.null(token_closing)) {
     stop <- npd
   } else {
