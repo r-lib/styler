@@ -121,20 +121,23 @@ make_transformer <- function(transformers,
         parse_transform_serialize_r(transformers,
           base_indention = base_indention,
           warn_empty = warn_empty
-        ) %>%
-        when(
-          include_roxygen_examples ~
-            parse_transform_serialize_roxygen(.,
-              transformers = transformers, base_indention = base_indention
-            ),
-          ~.
         )
+
+      if (include_roxygen_examples) {
+        transformed_code <- parse_transform_serialize_roxygen(
+          transformed_code,
+          transformers = transformers,
+          base_indention = base_indention
+        )
+      }
+
       if (should_use_cache) {
         cache_write(
           transformed_code, transformers,
           cache_more_specs(include_roxygen_examples, base_indention)
         )
       }
+
       transformed_code
     } else {
       text

@@ -22,7 +22,7 @@
 #'
 #' @importFrom rlang abort warn seq2 is_installed "%||%" set_names
 #' @importFrom purrr map map_lgl map_int map_chr map2 map2_chr map_at pmap pwalk
-#' @importFrom purrr compact when partial flatten flatten_int flatten_chr
+#' @importFrom purrr compact partial flatten flatten_int flatten_chr
 #' @importFrom magrittr "%>%"
 #'
 ## styler namespace: end
