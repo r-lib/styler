@@ -120,7 +120,7 @@ when <- function(., ...) {
   for (i in which(!named)) {
     if (is_formula[i]) {
       action <- length(dots[[i]])
-      if (action == 2L || is_true(eval(dots[[i]][[2L]], env, env))) {
+      if (action == 2L || rlang::is_true(eval(dots[[i]][[2L]], env, env))) {
         result <- eval(dots[[i]][[action]], env, env)
         break
       }
