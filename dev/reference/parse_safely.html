@@ -134,12 +134,22 @@ already.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_safely</span><span class="op">(</span><span class="st">"a + 3 -4 -&gt; x\r\n glück + 1"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_safely</span><span class="op">(</span><span class="st">"a + 3 -4 -&gt; x\r\n glück + 1"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in styler:::parse_safely("a + 3 -4 -&gt; x\r\n glück + 1") : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   The code to style seems to use Windows style line endings (CRLF). styler currently only supports Unix style line endings (LF). Please change the EOL character in your editor to Unix style and try again.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The parsing error was:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;text&gt;:1:14: unexpected input</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: a + 3 -4 -&gt; x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  ^</span>
 <span class="r-in"><span><span class="co"># This cannot be detected as a EOL style problem because the first</span></span></span>
 <span class="r-in"><span><span class="co"># line ends as expected with \n</span></span></span>
-<span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_safely</span><span class="op">(</span><span class="st">"a + 3 -4 -&gt; x\nx + 2\r\n glück + 1"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_safely</span><span class="op">(</span><span class="st">"a + 3 -4 -&gt; x\nx + 2\r\n glück + 1"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in styler:::parse_safely("a + 3 -4 -&gt; x\nx + 2\r\n glück + 1") : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;text&gt;:2:6: unexpected input</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: a + 3 -4 -&gt; x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: x + 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ^</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">parse_safely</span><span class="op">(</span><span class="st">"a + 3 -4 -&gt; \n glück + 1"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> expression(glück + 1 &lt;- a + 3 - 4)</span>
 </code></pre></div>
