@@ -398,7 +398,7 @@ parse_tree_must_be_identical <- function(transformers) {
 #' styler:::verify_roundtrip("a+1", "a + 1")
 #' styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
 #' \dontrun{
-#' styler:::verify_roundtrip("a+1", "b - 3")
+#' try(styler:::verify_roundtrip("a+1", "b - 3"))
 #' }
 #' @keywords internal
 verify_roundtrip <- function(old_text, new_text, parsable_only = FALSE) {

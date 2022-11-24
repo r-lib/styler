@@ -57,7 +57,7 @@ assert_transformers <- function(transformers) {
 #' @examples
 #' styler:::set_and_assert_arg_filetype("rMd")
 #' \dontrun{
-#' styler:::set_and_assert_arg_filetype("xyz")
+#' try(styler:::set_and_assert_arg_filetype("xyz"))
 #' }
 #' @keywords internal
 set_and_assert_arg_filetype <- function(filetype) {

@@ -108,7 +108,7 @@ styling whether or not it was actually changed (or would be changed when
 }
 
 \examples{
-\dontrun{
+if (FALSE) {
 # the following is identical (because of ... and defaults)
 # but the first is most convenient:
 style_pkg(strict = TRUE)

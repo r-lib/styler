@@ -19,7 +19,7 @@ line trigger.
 }
 }
 \examples{
-\dontrun{
+if (FALSE) {
 tryCatch(
   {
     f(8)

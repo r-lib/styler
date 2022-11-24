@@ -31,7 +31,7 @@ scope.
 styler:::verify_roundtrip("a+1", "a + 1")
 styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
 \dontrun{
-styler:::verify_roundtrip("a+1", "b - 3")
+try(styler:::verify_roundtrip("a+1", "b - 3"))
 }
 }
 \keyword{internal}

@@ -111,7 +111,7 @@ See section 'Warning' for a good strategy to apply styling safely.
 }
 
 \examples{
-\dontrun{
+if (FALSE) {
 style_dir("path/to/dir", filetype = c("rmd", ".R"))
 
 # the following is identical (because of ... and defaults)

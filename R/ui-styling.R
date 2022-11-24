@@ -49,7 +49,7 @@
 #' @inheritSection transform_files Value
 #' @family stylers
 #' @examples
-#' \dontrun{
+#' if (FALSE) {
 #' # the following is identical (because of ... and defaults)
 #' # but the first is most convenient:
 #' style_pkg(strict = TRUE)
@@ -236,7 +236,7 @@ style_text <- function(text,
 #' @inheritSection style_pkg Round trip validation
 #' @family stylers
 #' @examples
-#' \dontrun{
+#' if (FALSE) {
 #' style_dir("path/to/dir", filetype = c("rmd", ".R"))
 #'
 #' # the following is identical (because of ... and defaults)

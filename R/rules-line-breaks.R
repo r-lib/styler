@@ -10,7 +10,7 @@
 #'   line trigger.
 #' @keywords internal
 #' @examples
-#' \dontrun{
+#' if (FALSE) {
 #' tryCatch(
 #'   {
 #'     f(8)
