@@ -19,48 +19,48 @@ line trigger.
 }
 }
 \examples{
-\dontrun{
-tryCatch(
-  {
-    f(8)
-  },
-  error = function(e) NULL
-)
-# last-argument case
-testthat("braces braces are cool", {
-  code(to = execute)
-})
-call2(
-  x = 2, {
+if (FALSE) {
+  tryCatch(
+    {
+      f(8)
+    },
+    error = function(e) NULL
+  )
+  # last-argument case
+  testthat("braces braces are cool", {
     code(to = execute)
-  },
-  c = {
-    # this is the named case
-    g(x = 7)
-  }
-)
-tryGugus(
-  {
-    g5(k = na)
-  },
-  a + b # line break also here because
-  # preceded by brace expression
-)
+  })
+  call2(
+    x = 2, {
+      code(to = execute)
+    },
+    c = {
+      # this is the named case
+      g(x = 7)
+    }
+  )
+  tryGugus(
+    {
+      g5(k = na)
+    },
+    a + b # line break also here because
+    # preceded by brace expression
+  )
 
-# brace expressions go on new line if part of a pipe, in function call...
-c(
+  # brace expressions go on new line if part of a pipe, in function call...
+  c(
+    data \%>\%
+      filter(bar) \%>\%
+      {
+        cor(.$col1, .$col2, use = "complete.obs")
+      }
+  )
+  # ... or outside
   data \%>\%
     filter(bar) \%>\%
     {
       cor(.$col1, .$col2, use = "complete.obs")
     }
-)
-# ... or outside
-data \%>\%
-  filter(bar) \%>\%
-  {
-    cor(.$col1, .$col2, use = "complete.obs")
-  }
 }
 }
 \keyword{internal}
