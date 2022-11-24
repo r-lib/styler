@@ -109,20 +109,20 @@ styling whether or not it was actually changed (or would be changed when
 
 \examples{
 if (FALSE) {
-# the following is identical (because of ... and defaults)
-# but the first is most convenient:
-style_pkg(strict = TRUE)
-style_pkg(style = tidyverse_style, strict = TRUE)
-style_pkg(transformers = tidyverse_style(strict = TRUE))
+  # the following is identical (because of ... and defaults)
+  # but the first is most convenient:
+  style_pkg(strict = TRUE)
+  style_pkg(style = tidyverse_style, strict = TRUE)
+  style_pkg(transformers = tidyverse_style(strict = TRUE))
 
-# more options from `tidyverse_style()`
-style_pkg(
-  scope = "line_breaks",
-  math_token_spacing = specify_math_token_spacing(zero = "'+'")
-)
+  # more options from `tidyverse_style()`
+  style_pkg(
+    scope = "line_breaks",
+    math_token_spacing = specify_math_token_spacing(zero = "'+'")
+  )
 
-# don't write back and fail if input is not already styled
-style_pkg("/path/to/pkg/", dry = "fail")
+  # don't write back and fail if input is not already styled
+  style_pkg("/path/to/pkg/", dry = "fail")
 }
 }
 \seealso{
