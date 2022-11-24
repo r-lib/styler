@@ -8,12 +8,11 @@
 #' @param ... Parameters passed to [base::parse()].
 #' @keywords internal
 #' @examples
-#' \dontrun{
 #' try(styler:::parse_safely("a + 3 -4 -> x\r\n glück + 1"))
 #' # This cannot be detected as a EOL style problem because the first
 #' # line ends as expected with \n
 #' try(styler:::parse_safely("a + 3 -4 -> x\nx + 2\r\n glück + 1"))
-#' }
+#'
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
   tried_parsing <- rlang::with_handlers(

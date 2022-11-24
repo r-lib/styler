@@ -56,9 +56,7 @@ assert_transformers <- function(transformers) {
 #'   standard format.
 #' @examples
 #' styler:::set_and_assert_arg_filetype("rMd")
-#' \dontrun{
 #' try(styler:::set_and_assert_arg_filetype("xyz"))
-#' }
 #' @keywords internal
 set_and_assert_arg_filetype <- function(filetype) {
   without_dot <- gsub("^\\.", "", tolower(filetype))
