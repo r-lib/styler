@@ -111,15 +111,15 @@ See section 'Warning' for a good strategy to apply styling safely.
 }
 
 \examples{
-if (FALSE) {
-  style_dir("path/to/dir", filetype = c("rmd", ".R"))
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+style_dir("path/to/dir", filetype = c("rmd", ".R"))
 
-  # the following is identical (because of ... and defaults)
-  # but the first is most convenient:
-  style_dir(strict = TRUE)
-  style_dir(style = tidyverse_style, strict = TRUE)
-  style_dir(transformers = tidyverse_style(strict = TRUE))
-}
+# the following is identical (because of ... and defaults)
+# but the first is most convenient:
+style_dir(strict = TRUE)
+style_dir(style = tidyverse_style, strict = TRUE)
+style_dir(transformers = tidyverse_style(strict = TRUE))
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other stylers: 

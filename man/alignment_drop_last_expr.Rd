@@ -12,16 +12,16 @@ an if, while or for statement or a function call. We don't call about that
 part, in fact it's important to remove it for alignment. See 'Examples'.
 }
 \examples{
-if (FALSE) {
-  call(
-    x = 12,
-    y =  3,
-  )
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+call(
+  x = 12,
+  y =  3,
+)
 
-  function(a = 33,
-           qq = 4) {
-    # we don't care about this part for alignment detection
-  }
+function(a = 33,
+         qq = 4) {
+  # we don't care about this part for alignment detection
 }
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

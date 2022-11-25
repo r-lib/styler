@@ -19,48 +19,48 @@ line trigger.
 }
 }
 \examples{
-if (FALSE) {
-  tryCatch(
-    {
-      f(8)
-    },
-    error = function(e) NULL
-  )
-  # last-argument case
-  testthat("braces braces are cool", {
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+tryCatch(
+  {
+    f(8)
+  },
+  error = function(e) NULL
+)
+# last-argument case
+testthat("braces braces are cool", {
+  code(to = execute)
+})
+call2(
+  x = 2, {
     code(to = execute)
-  })
-  call2(
-    x = 2, {
-      code(to = execute)
-    },
-    c = {
-      # this is the named case
-      g(x = 7)
-    }
-  )
-  tryGugus(
-    {
-      g5(k = na)
-    },
-    a + b # line break also here because
-    # preceded by brace expression
-  )
+  },
+  c = {
+    # this is the named case
+    g(x = 7)
+  }
+)
+tryGugus(
+  {
+    g5(k = na)
+  },
+  a + b # line break also here because
+  # preceded by brace expression
+)
 
-  # brace expressions go on new line if part of a pipe, in function call...
-  c(
-    data \%>\%
-      filter(bar) \%>\%
-      {
-        cor(.$col1, .$col2, use = "complete.obs")
-      }
-  )
-  # ... or outside
+# brace expressions go on new line if part of a pipe, in function call...
+c(
   data \%>\%
     filter(bar) \%>\%
     {
       cor(.$col1, .$col2, use = "complete.obs")
     }
-}
+)
+# ... or outside
+data \%>\%
+  filter(bar) \%>\%
+  {
+    cor(.$col1, .$col2, use = "complete.obs")
+  }
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}
