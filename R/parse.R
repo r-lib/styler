@@ -47,10 +47,8 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
   if (length(split) > 1L && split[1L] == "<text>") {
     start_char <- as.numeric(split[3L])
     offending_line <- initial_text[as.integer(split[2L])]
-    if (!is.na(offending_line)) {
-      if (substr(offending_line, start_char, start_char + 1L) == "\r\n") {
-        return(TRUE)
-      }
+    if (!is.na(offending_line) && substr(offending_line, start_char, start_char + 1L) == "\r\n") {
+      return(TRUE)
     }
   }
   FALSE
