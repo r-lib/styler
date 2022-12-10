@@ -67,7 +67,7 @@ test_that("When expressions are cached, number of newlines between them are pres
   # applied cache
   expect_equal(text[1:4], as.character(style_text(text[1:4])))
 
-  # expect_equal(text, as.character(style_text(text)))
+  expect_equal(text, as.character(style_text(text)))
 })
 
 test_that("cache is deactivated at end of caching related testthat file", {
