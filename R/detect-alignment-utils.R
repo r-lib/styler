@@ -46,17 +46,15 @@ alignment_drop_comments <- function(pd_by_line) {
 #' an if, while or for statement or a function call. We don't call about that
 #' part, in fact it's important to remove it for alignment. See 'Examples'.
 #'
-#' @examples
-#' if (FALSE) {
-#'   call(
-#'     x = 12,
-#'     y =  3,
-#'   )
+#' @examplesIf FALSE
+#' call(
+#'   x = 12,
+#'   y =  3,
+#' )
 #'
-#'   function(a = 33,
-#'            qq = 4) {
-#'     # we don't care about this part for alignment detection
-#'   }
+#' function(a = 33,
+#'          qq = 4) {
+#'   # we don't care about this part for alignment detection
 #' }
 #' @keywords internal
 alignment_drop_last_expr <- function(pds_by_line) {

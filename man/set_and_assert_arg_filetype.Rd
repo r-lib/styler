@@ -16,8 +16,6 @@ processing.
 }
 \examples{
 styler:::set_and_assert_arg_filetype("rMd")
-\dontrun{
-styler:::set_and_assert_arg_filetype("xyz")
-}
+try(styler:::set_and_assert_arg_filetype("xyz"))
 }
 \keyword{internal}

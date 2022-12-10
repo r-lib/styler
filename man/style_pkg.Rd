@@ -108,7 +108,7 @@ styling whether or not it was actually changed (or would be changed when
 }
 
 \examples{
-\dontrun{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # the following is identical (because of ... and defaults)
 # but the first is most convenient:
 style_pkg(strict = TRUE)
@@ -123,7 +123,7 @@ style_pkg(
 
 # don't write back and fail if input is not already styled
 style_pkg("/path/to/pkg/", dry = "fail")
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other stylers: 

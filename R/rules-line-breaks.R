@@ -9,8 +9,7 @@
 #' * Extension: Also, expressions following on braced expressions also cause a
 #'   line trigger.
 #' @keywords internal
-#' @examples
-#' \dontrun{
+#' @examplesIf FALSE
 #' tryCatch(
 #'   {
 #'     f(8)
@@ -52,7 +51,6 @@
 #'   {
 #'     cor(.$col1, .$col2, use = "complete.obs")
 #'   }
-#' }
 set_line_break_before_curly_opening <- function(pd) {
   line_break_to_set_idx <- which(
     (pd$token_after == "'{'") & !(pd$token %in% c("COMMENT", "EQ_FORMALS"))

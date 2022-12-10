@@ -68,13 +68,14 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #'   braces. Used for unindention.
 #' @keywords internal
 wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
-  key_token <- when(
-    pd,
-    is_conditional_expr(.) ~ "')'",
-    is_while_expr(.) ~ "')'",
-    is_for_expr(.) ~ "forcond",
-    is_function_declaration(.) ~ "')'"
-  )
+  key_token <- NULL
+
+  if (is_for_expr(pd)) {
+    key_token <- "forcond"
+  } else if (is_conditional_expr(pd) || is_while_expr(pd) || is_function_declaration(pd)) {
+    key_token <- "')'"
+  }
+
   if (length(key_token) > 0L) {
     pd <- pd %>%
       wrap_multiline_curly(indent_by,

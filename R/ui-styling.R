@@ -48,8 +48,7 @@
 #' See section 'Warning' for a good strategy to apply styling safely.
 #' @inheritSection transform_files Value
 #' @family stylers
-#' @examples
-#' \dontrun{
+#' @examplesIf FALSE
 #' # the following is identical (because of ... and defaults)
 #' # but the first is most convenient:
 #' style_pkg(strict = TRUE)
@@ -64,7 +63,6 @@
 #'
 #' # don't write back and fail if input is not already styled
 #' style_pkg("/path/to/pkg/", dry = "fail")
-#' }
 #' @export
 style_pkg <- function(pkg = ".",
                       ...,
@@ -235,8 +233,7 @@ style_text <- function(text,
 #' @inheritSection style_pkg Warning
 #' @inheritSection style_pkg Round trip validation
 #' @family stylers
-#' @examples
-#' \dontrun{
+#' @examplesIf FALSE
 #' style_dir("path/to/dir", filetype = c("rmd", ".R"))
 #'
 #' # the following is identical (because of ... and defaults)
@@ -244,7 +241,6 @@ style_text <- function(text,
 #' style_dir(strict = TRUE)
 #' style_dir(style = tidyverse_style, strict = TRUE)
 #' style_dir(transformers = tidyverse_style(strict = TRUE))
-#' }
 #' @export
 style_dir <- function(path = ".",
                       ...,

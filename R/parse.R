@@ -8,12 +8,11 @@
 #' @param ... Parameters passed to [base::parse()].
 #' @keywords internal
 #' @examples
-#' \dontrun{
-#' styler:::parse_safely("a + 3 -4 -> x\r\n glück + 1")
+#' try(styler:::parse_safely("a + 3 -4 -> x\r\n glück + 1"))
 #' # This cannot be detected as a EOL style problem because the first
 #' # line ends as expected with \n
-#' styler:::parse_safely("a + 3 -4 -> x\nx + 2\r\n glück + 1")
-#' }
+#' try(styler:::parse_safely("a + 3 -4 -> x\nx + 2\r\n glück + 1"))
+#'
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
   tried_parsing <- rlang::with_handlers(
@@ -48,10 +47,8 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
   if (length(split) > 1L && split[1L] == "<text>") {
     start_char <- as.numeric(split[3L])
     offending_line <- initial_text[as.integer(split[2L])]
-    if (!is.na(offending_line)) {
-      if (substr(offending_line, start_char, start_char + 1L) == "\r\n") {
-        return(TRUE)
-      }
+    if (!is.na(offending_line) && substr(offending_line, start_char, start_char + 1L) == "\r\n") {
+      return(TRUE)
     }
   }
   FALSE
