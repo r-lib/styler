@@ -132,4 +132,3 @@ repos:
 ci:
   skip: [pkgdown]
   autoupdate_schedule: monthly
-
