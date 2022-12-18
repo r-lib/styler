@@ -128,3 +128,8 @@ repos:
         language: fail
         files: '\.Rhistory|\.RData|\.Rds|\.rds$'
         # `exclude: <regex>` to allow committing specific files.
+        
+ci:
+  skip: [pkgdown]
+  autoupdate_schedule: monthly
+
