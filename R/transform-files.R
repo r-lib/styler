@@ -265,7 +265,14 @@ parse_transform_serialize_r <- function(text,
 
   text_out <- vector("list", length(pd_split))
   for (i in seq_along(pd_split)) {
-    start_line <- if (is_roxygen_code_example || !strict) pd_blank[[i]] else 1L
+    # if the first block: only preserve for roxygen or not strict
+    # if a later block: always preserve line breaks
+    start_line <- if (i == 1L) {
+      if (is_roxygen_code_example || !strict) pd_blank[[i]] else 1L
+    } else {
+      pd_blank[[i]]
+    }
+
 
     text_out[[i]] <- parse_transform_serialize_r_block(
       pd_split[[i]],
