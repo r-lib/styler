@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.3.2.9003
+    rev: v0.3.2.9005
     hooks:
       - id: style-files
         args:
@@ -97,11 +97,14 @@ repos:
           tests/testthat/rnw/011-conditional-eval-out\.Rnw|
           tests/testthat/.*\.R(md)?
           )$
+      - id: pkgdown
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:
       - id: check-added-large-files
         args: ["--maxkb=200"]
+      - id: check-yaml
+      - id: mixed-line-ending
       - id: file-contents-sorter
         files: "\\.Rbuildignore$"
       - id: end-of-file-fixer
@@ -125,3 +128,7 @@ repos:
         language: fail
         files: '\.Rhistory|\.RData|\.Rds|\.rds$'
         # `exclude: <regex>` to allow committing specific files.
+        
+ci:
+  skip: [pkgdown]
+  autoupdate_schedule: monthly
