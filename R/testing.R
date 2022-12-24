@@ -161,13 +161,13 @@ style_empty <- function(text, base_indention = 0L) {
   transformers <- list(
     # transformer functions
     initialize = default_style_guide_attributes,
-    line_break        = NULL,
-    space             = NULL,
-    token             = NULL,
+    line_break = NULL,
+    space = NULL,
+    token = NULL,
     # transformer options
     use_raw_indention = FALSE,
-    reindention       = specify_reindention(),
-    indent_character  = " ",
+    reindention = specify_reindention(),
+    indent_character = " ",
     NULL
   )
   transformed_text <- parse_transform_serialize_r(text,
