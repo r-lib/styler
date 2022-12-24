@@ -36,6 +36,8 @@ jobs:
           architecture: "x64"
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
+        env: 
+          SKIP: pkgdown
       - name: Commit files
         if: failure() && startsWith(github.ref, 'refs/heads')
         run: |
