@@ -200,14 +200,17 @@ test_that("all expressions within a stylerignore sequence (whether cached or not
     ")",
     "# styler: on"
   )
-  without_ignore <- full[c(-1, -length(full))]
+  without_ignore <- full[c(-1L, -length(full))]
   local_test_setup(cache = TRUE)
-  expect_true(all(compute_parse_data_nested(without_ignore, transformers, specs)$block == 1))
+
+  expect_true(all(compute_parse_data_nested(without_ignore, transformers, specs)$block == 1L))
+
   cache_by_expression("a", transformers, more_specs = NULL)
   is_cached("a", transformers, more_specs = NULL)
   cache_by_expression("flush(\n  1\n)", transformers, more_specs = NULL)
   cache_by_expression(c("a", "flush(", "  1", ")"), transformers, more_specs = NULL)
-  expect_true(all(compute_parse_data_nested(full)$block == 1))
+
+  expect_true(all(compute_parse_data_nested(full)$block == 1L))
 })
 
 
@@ -220,11 +223,11 @@ test_that("all expressions within a stylerignore sequence (whether cached or not
     ")",
     "# styler: on"
   )
-  without_ignore <- full[c(-1, -length(full))]
+  without_ignore <- full[c(-1L, -length(full))]
   local_test_setup(cache = TRUE)
 
-  expect_equal(as.character(style_text(without_ignore)), c("a", "flush(", "  1", ")"))
-  expect_equal(as.character(style_text(full)), full)
+  expect_identical(as.character(style_text(without_ignore)), c("a", "flush(", "  1", ")"))
+  expect_identical(as.character(style_text(full)), full)
 })
 
 test_that("cache is deactivated at end of caching related testthat file", {
