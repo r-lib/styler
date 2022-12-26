@@ -15,16 +15,44 @@ indent_braces <- function(pd, indent_by) {
 #'
 #' Necessary for consistent indention of the function declaration header.
 #' @param pd A parse table.
+#' @inheritParams is_double_indent_function_declaration
 #' @seealso set_unindention_child update_indention_ref_fun_dec
 #' @keywords internal
-unindent_fun_dec <- function(pd) {
+unindent_fun_dec <- function(pd, indent_by = 2L) {
   if (is_function_declaration(pd)) {
     idx_closing_brace <- which(pd$token %in% "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
-    pd$indent[fun_dec_head] <- 0L
+    if (is_double_indent_function_declaration(pd, indent_by = indent_by)) {
+      pd$indent[fun_dec_head] <- 2L * indent_by
+    } else {
+      pd$indent[fun_dec_head] <- 0L
+    }
   }
   pd
 }
+
+#' Is the function declaration double indented?
+#'
+#' Assumes you already checked if it's a function with
+#' `is_function_declaration`.
+#' @param pd A parse table.
+#' @inheritParams tidyverse_style
+#' @keywords internal
+is_double_indent_function_declaration <- function(pd, indent_by = 2L) {
+  head_pd <- pd[-nrow(pd), ]
+  line_break_in_header <- which(
+    head_pd$lag_newlines > 0L | head_pd$multi_line > 0L
+  )
+  if (length(line_break_in_header) > 0L) {
+    # indent results from applying the rules, spaces is the initial spaces
+    # (which is indention if a newline is ahead)
+    pd$spaces[line_break_in_header[1L] - 1L] <= 2L * indent_by
+  } else {
+    FALSE
+  }
+}
+
+
 
 #' @describeIn update_indention Indents *all* tokens after `token` - including
 #'   the last token.
@@ -105,7 +133,7 @@ NULL
 #'
 #' @keywords internal
 update_indention_ref_fun_dec <- function(pd_nested) {
-  if (pd_nested$token[1L] == "FUNCTION") {
+  if (is_function_declaration(pd_nested) && !is_double_indent_function_declaration(pd_nested)) {
     seq <- seq2(3L, nrow(pd_nested) - 2L)
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2L]
   }

@@ -10,8 +10,8 @@ b
 # multiple nested levels
 {
   v <- function(x =
-                  122,
-                y) {
+        122,
+      y) {
   }
 }
 
