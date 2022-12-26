@@ -231,6 +231,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' Wrapper function for the common three operations.
 #' @param warn_empty Whether or not a warning should be displayed when `text`
 #'   does not contain any tokens.
+#' @param is_roxygen_code_example Is code a roxygen examples block?
 #' @inheritParams compute_parse_data_nested
 #' @inheritParams parse_transform_serialize_r_block
 #' @seealso [parse_transform_serialize_roxygen()]
@@ -239,7 +240,8 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 parse_transform_serialize_r <- function(text,
                                         transformers,
                                         base_indention,
-                                        warn_empty = TRUE) {
+                                        warn_empty = TRUE,
+                                        is_roxygen_code_example = FALSE) {
   more_specs <- cache_more_specs(
     include_roxygen_examples = TRUE, base_indention = base_indention
   )
@@ -257,14 +259,24 @@ parse_transform_serialize_r <- function(text,
     transformers
   )
 
+  strict <- transformers$more_specs_style_guide$strict %||% TRUE
   pd_split <- unname(split(pd_nested, pd_nested$block))
   pd_blank <- find_blank_lines_to_next_block(pd_nested)
 
   text_out <- vector("list", length(pd_split))
   for (i in seq_along(pd_split)) {
+    # if the first block: only preserve for roxygen or not strict
+    # if a later block: always preserve line breaks
+    start_line <- if (i == 1L) {
+      if (is_roxygen_code_example || !strict) pd_blank[[i]] else 1L
+    } else {
+      pd_blank[[i]]
+    }
+
+
     text_out[[i]] <- parse_transform_serialize_r_block(
       pd_split[[i]],
-      pd_blank[[i]],
+      start_line = start_line,
       transformers = transformers,
       base_indention = base_indention
     )

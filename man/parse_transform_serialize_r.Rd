@@ -8,7 +8,8 @@ parse_transform_serialize_r(
   text,
   transformers,
   base_indention,
-  warn_empty = TRUE
+  warn_empty = TRUE,
+  is_roxygen_code_example = FALSE
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ multi-line strings are present. See 'Examples'.}
 
 \item{warn_empty}{Whether or not a warning should be displayed when \code{text}
 does not contain any tokens.}
+
+\item{is_roxygen_code_example}{Is code a roxygen examples block?}
 }
 \description{
 Wrapper function for the common three operations.

@@ -1,4 +1,3 @@
-
 test_that("top-level test: Caches top-level expressions efficiently on style_text()", {
   local_test_setup(cache = TRUE)
   text <- test_path("cache-with-r-cache/mlflow-1-in.R") %>%
