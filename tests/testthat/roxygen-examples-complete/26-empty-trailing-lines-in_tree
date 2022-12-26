@@ -26,5 +26,12 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' me [1/0] {25}                          
  ¦--COMMENT: #' @e [1/0] {26}                          
  ¦--COMMENT: #' 2  [1/0] {27}                          
- °--expr: NULL [1/0] {29}                              
-     °--NULL_CONST: NULL [0/0] {28}                    
+ ¦--expr: NULL [1/0] {29}                              
+ ¦   °--NULL_CONST: NULL [0/0] {28}                    
+ ¦--COMMENT: #' th [4/0] {30}                          
+ ¦--COMMENT: #' [1/0] {31}                             
+ ¦--COMMENT: #' em [1/0] {32}                          
+ ¦--COMMENT: #' @e [1/0] {33}                          
+ ¦--COMMENT: #' 2  [1/0] {34}                          
+ °--expr: NULL [2/0] {36}                              
+     °--NULL_CONST: NULL [0/0] {35}                    
