@@ -24,6 +24,9 @@ style_roxygen_code_example <- function(example, transformers, base_indention) {
 style_roxygen_code_example_one <- function(example_one,
                                            transformers,
                                            base_indention) {
+  # Workaround for imperfect parsing of roxygen2 examples
+  example_one <- grep("^ *#+'", example_one, value = TRUE)
+
   bare <- parse_roxygen(example_one)
   one_dont <- split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
   unmasked <- map(one_dont, style_roxygen_code_example_segment,
