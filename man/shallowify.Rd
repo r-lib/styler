@@ -22,7 +22,7 @@ parse table shallow at these locations, fully relying on the \code{text} column:
 \section{Top-level comments}{
 
 Note that we do not cache top-level comments. Because package code has a lot
-of roxygen comments and each of them is a top level expression, checking is
+of roxygen comments and each of them is a top-level expression, checking is
 very expensive. More expensive than styling, because comments are always
 terminals. This will also yield large speed improvements in
 \code{\link[=compute_parse_data_nested]{compute_parse_data_nested()}} because nesting is expensive and will not be

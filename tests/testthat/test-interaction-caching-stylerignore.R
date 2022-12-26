@@ -83,8 +83,8 @@ test_that("caching works ", {
 # sequence will be in a different block if cached and not be senth though
 # apply_stylerignore.
 
-# if the stylerignore tag is top level
-test_that("caching works for top level expressions", {
+# if the stylerignore tag is top-level
+test_that("caching works for top-level expressions", {
   local_test_setup(cache = TRUE)
   text1 <- "1 + 1"
   expect_equal(
@@ -104,7 +104,7 @@ test_that("caching works for top level expressions", {
   )
 })
 
-# if the stylerignore tag is not top level
+# if the stylerignore tag is not top-level
 # since we only cache top-level expressions, the whole expression is either
 # cached or not, depending on whether it is complying to the style guide.
 test_that("caching works for non-top-level expressions", {

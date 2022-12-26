@@ -59,7 +59,7 @@ text_to_flat_pd <- function(text, transformers, more_specs) {
 #'
 #' Must be after [nest_parse_data()] because requires a nested parse table as
 #' input.
-#' @param pd_nested A top level nest.
+#' @param pd_nested A top-level nest.
 #' @keywords internal
 add_cache_block <- function(pd_nested) {
   if (cache_is_activated()) {
@@ -85,7 +85,7 @@ add_cache_block <- function(pd_nested) {
 #'
 #' @section Top-level comments:
 #' Note that we do not cache top-level comments. Because package code has a lot
-#' of roxygen comments and each of them is a top level expression, checking is
+#' of roxygen comments and each of them is a top-level expression, checking is
 #' very expensive. More expensive than styling, because comments are always
 #' terminals. This will also yield large speed improvements in
 #' [compute_parse_data_nested()] because nesting is expensive and will not be
@@ -124,8 +124,8 @@ shallowify <- function(pd) {
 #' use `split(cumsum(pd_parent_first$parent < 1L))` because then every top-level
 #' comment is an expression on its own and processing takes much longer for
 #' typical roxygen annotated code.
-#' @param pd A temporary top level nest where the first expression is always a
-#'   top level expression, potentially cached.
+#' @param pd A temporary top-level nest where the first expression is always a
+#'   top-level expression, potentially cached.
 #' @details
 #' Note that top-level comments **above** code have negative parents
 #' (the negative value of the parent of the code expression that follows after,

@@ -226,7 +226,7 @@ tidyverse_style <- function(scope = "tokens",
     tokens = list(
       resolve_semicolon = "';'",
       add_brackets_in_pipe = c("SPECIAL-PIPE", "PIPE"),
-      # before 3.6, these assignments are not wrapped into top level expression
+      # before 3.6, these assignments are not wrapped into top-level expression
       # and `text` supplied to transformers_drop() is "", so it appears to not
       # contain EQ_ASSIGN, and the transformer is falsely removed.
       # compute_parse_data_nested / text_to_flat_pd ('a = 4')
@@ -265,7 +265,7 @@ tidyverse_style <- function(scope = "tokens",
 #' This is a helper function to create a style guide, which is technically
 #' speaking a named list of groups of transformer functions where each
 #' transformer function corresponds to one styling rule. The output of this
-#' function can be used as an argument for `style` in top level functions
+#' function can be used as an argument for `style` in top-level functions
 #' like [style_text()] and friends. Note that for caching to work properly,
 #' unquote all inputs to the transformer function if possible with rlang's `!!`,
 #' otherwise, they will be passed as references (generic variable names) instead
