@@ -28,3 +28,13 @@ NULL
 #' @examples
 #' 2 + 1
 NULL
+
+
+
+#' this
+#'
+#' empty line after example
+#' @examples
+#' 2 + 1
+
+NULL
