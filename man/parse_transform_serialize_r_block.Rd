@@ -25,7 +25,7 @@ multi-line strings are present. See 'Examples'.}
 }
 \description{
 We process blocks of nested parse tables for speed. See \code{\link[=cache_find_block]{cache_find_block()}}
-for details on how a top level nest is split into blocks.
+for details on how a top-level nest is split into blocks.
 }
 \examples{
 text_in <- 'x<- function()
