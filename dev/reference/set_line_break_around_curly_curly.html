@@ -12,7 +12,7 @@ but will most likely give an error at runtime because the way the syntactic
 sugar is defined in rlang is to use a single token within curly-curly. In
 addition, because rlang parses \{\{ in a special way (just as !!), the
 expression \{\{ x \}\} will give a runtime error when used outside of a
-context that is capable of handling it, e.g. on the top level (that is, not
+context that is capable of handling it, e.g. on the top-level (that is, not
 within function call like rlang_fun(\{\{ x \}\})) or within a base R
 function such as c(). However, these differences are assumed to be
 irrelevant for styling curly-curly, as much as they were for styling !!.
@@ -138,7 +138,7 @@ but will most likely give an error at runtime because the way the syntactic
 sugar is defined in rlang is to use a single token within curly-curly. In
 addition, because rlang parses <code>\{\{</code> in a special way (just as <code>!!</code>), the
 expression <code>\{\{ x \}\}</code> will give a runtime error when used outside of a
-context that is capable of handling it, e.g. on the top level (that is, not
+context that is capable of handling it, e.g. on the top-level (that is, not
 within function call like <code>rlang_fun(\{\{ x \}\})</code>) or within a base R
 function such as <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code>. However, these differences are assumed to be
 irrelevant for styling curly-curly, as much as they were for styling <code>!!</code>.
