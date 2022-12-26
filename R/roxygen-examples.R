@@ -25,7 +25,7 @@ style_roxygen_code_example_one <- function(example_one,
                                            transformers,
                                            base_indention) {
   # Workaround for imperfect parsing of roxygen2 examples
-  example_one <- grep("^ *#+'", example_one, value = TRUE)
+  example_one <- example_one[example_one != ""]
 
   bare <- parse_roxygen(example_one)
   one_dont <- split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
