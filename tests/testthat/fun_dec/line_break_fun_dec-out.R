@@ -39,7 +39,8 @@ a <- function(x,
   x - 1
 }
 
-a <- function( #
+a <- function(
+    #
     x,
     y) {
   x - 1

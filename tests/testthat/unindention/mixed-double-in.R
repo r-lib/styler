@@ -68,3 +68,21 @@ function(x,
                          y) {
   1
 }
+
+
+# last brace
+function(
+    x, y) NULL
+
+function(
+    x, y
+) NULL
+
+function(
+    x,
+    y) NULL
+
+function(
+    x,
+    y
+) NULL
