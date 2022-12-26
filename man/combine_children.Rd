@@ -16,8 +16,8 @@ Binds two parse tables together and arranges them so that the tokens are in
 the correct order.
 }
 \details{
-Essentially, this is a wrapper around \code{\link[dplyr:bind_rows]{dplyr::bind_rows()}}, but
-returns \code{NULL} if the result of \code{\link[dplyr:bind_rows]{dplyr::bind_rows()}} is a data frame with
+Essentially, this is a wrapper around \code{\link[dplyr:bind]{dplyr::bind_rows()}}, but
+returns \code{NULL} if the result of \code{\link[dplyr:bind]{dplyr::bind_rows()}} is a data frame with
 zero rows.
 }
 \keyword{internal}
