@@ -34,7 +34,7 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
 #' Is the function declaration double indented?
 #'
 #' Assumes you already checked if it's a function with
-#' `is_function_declaration`. It is double indeted if the first token
+#' `is_function_declaration`. It is double indented if the first token
 #' after the first line break that is a `"SYMBOL_FORMALS"` is
 #' @param pd A parse table.
 #' @inheritParams tidyverse_style
