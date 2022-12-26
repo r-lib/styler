@@ -247,13 +247,13 @@ parse_transform_serialize_r <- function(text,
   )
 
   text <- assert_text(text)
-  pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
-  if (nrow(pd_nested) == 0L) {
+  if (identical(text, "")) {
     if (warn_empty) {
       warn("Text to style did not contain any tokens. Returning empty string.")
     }
     return("")
   }
+  pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
   transformers <- transformers_drop(
     pd_nested$text[!pd_nested$is_cached],
     transformers

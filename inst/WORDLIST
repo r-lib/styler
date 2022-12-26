@@ -166,6 +166,7 @@ pre
 precommit
 prefill
 prettycode
+priori
 PRs
 purrr
 qmd
@@ -227,6 +228,7 @@ sessioninfo
 setCacheRootPath
 setdiff
 setenv
+Shallowify
 shinydashboardPlus
 shinymeta
 shinyMonacoEditor

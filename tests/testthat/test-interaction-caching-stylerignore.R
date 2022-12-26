@@ -83,8 +83,8 @@ test_that("caching works ", {
 # sequence will be in a different block if cached and not be senth though
 # apply_stylerignore.
 
-# if the stylerignore tag is top level
-test_that("caching works for top level expressions", {
+# if the stylerignore tag is top-level
+test_that("caching works for top-level expressions", {
   local_test_setup(cache = TRUE)
   text1 <- "1 + 1"
   expect_equal(
@@ -104,7 +104,7 @@ test_that("caching works for top level expressions", {
   )
 })
 
-# if the stylerignore tag is not top level
+# if the stylerignore tag is not top-level
 # since we only cache top-level expressions, the whole expression is either
 # cached or not, depending on whether it is complying to the style guide.
 test_that("caching works for non-top-level expressions", {
@@ -185,6 +185,49 @@ test_that("changing ignore markers invalidates cache", {
     style_text(text7)
     expect_equal(cache_info(format = "tabular")$n, opt[["n"]])
   })
+})
+
+
+
+test_that("all expressions within a stylerignore sequence (whether cached or not) are put in the same block (low-level)", {
+  transformers <- tidyverse_style()
+  specs <- transformers$more_specs_style_guide
+  full <- c(
+    "# styler: off",
+    "a",
+    "flush(",
+    "1",
+    ")",
+    "# styler: on"
+  )
+  without_ignore <- full[c(-1L, -length(full))]
+  local_test_setup(cache = TRUE)
+
+  expect_true(all(compute_parse_data_nested(without_ignore, transformers, specs)$block == 1L))
+
+  cache_by_expression("a", transformers, more_specs = NULL)
+  is_cached("a", transformers, more_specs = NULL)
+  cache_by_expression("flush(\n  1\n)", transformers, more_specs = NULL)
+  cache_by_expression(c("a", "flush(", "  1", ")"), transformers, more_specs = NULL)
+
+  expect_true(all(compute_parse_data_nested(full)$block == 1L))
+})
+
+
+test_that("all expressions within a stylerignore sequence (whether cached or not) are put in the same block (high-level)", {
+  full <- c(
+    "# styler: off",
+    "a",
+    "flush(",
+    "1",
+    ")",
+    "# styler: on"
+  )
+  without_ignore <- full[c(-1L, -length(full))]
+  local_test_setup(cache = TRUE)
+
+  expect_identical(as.character(style_text(without_ignore)), c("a", "flush(", "  1", ")"))
+  expect_identical(as.character(style_text(full)), full)
 })
 
 test_that("cache is deactivated at end of caching related testthat file", {

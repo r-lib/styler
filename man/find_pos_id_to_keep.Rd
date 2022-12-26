@@ -7,8 +7,8 @@
 find_pos_id_to_keep(pd)
 }
 \arguments{
-\item{pd}{A temporary top level nest where the first expression is always a
-top level expression, potentially cached.}
+\item{pd}{A temporary top-level nest where the first expression is always a
+top-level expression, potentially cached.}
 }
 \description{
 To make a parse table shallow, we must know which ids to keep.

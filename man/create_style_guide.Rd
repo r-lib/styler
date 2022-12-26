@@ -72,7 +72,7 @@ advise for using spaces as indention characters.}
 This is a helper function to create a style guide, which is technically
 speaking a named list of groups of transformer functions where each
 transformer function corresponds to one styling rule. The output of this
-function can be used as an argument for \code{style} in top level functions
+function can be used as an argument for \code{style} in top-level functions
 like \code{\link[=style_text]{style_text()}} and friends. Note that for caching to work properly,
 unquote all inputs to the transformer function if possible with rlang's \verb{!!},
 otherwise, they will be passed as references (generic variable names) instead
