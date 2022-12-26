@@ -34,15 +34,14 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
 #' Is the function declaration double indented?
 #'
 #' Assumes you already checked if it's a function with
-#' `is_function_declaration`.
+#' `is_function_declaration`. It is double indeted if the first token
+#' after the first line break that is a `"SYMBOL_FORMALS"` is
 #' @param pd A parse table.
 #' @inheritParams tidyverse_style
 #' @keywords internal
 is_double_indent_function_declaration <- function(pd, indent_by = 2L) {
   head_pd <- pd[-nrow(pd), ]
-  line_break_in_header <- which(
-    head_pd$lag_newlines > 0L | head_pd$multi_line > 0L
-  )
+  line_break_in_header <- which(head_pd$lag_newlines > 0L & head_pd$token == "SYMBOL_FORMALS")
   if (length(line_break_in_header) > 0L) {
     # indent results from applying the rules, spaces is the initial spaces
     # (which is indention if a newline is ahead)
