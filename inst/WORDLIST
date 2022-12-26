@@ -227,6 +227,7 @@ sessioninfo
 setCacheRootPath
 setdiff
 setenv
+Shallowify
 shinydashboardPlus
 shinymeta
 shinyMonacoEditor

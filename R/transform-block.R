@@ -56,24 +56,35 @@ parse_transform_serialize_r_block <- function(pd_nested,
 
 #' Find the groups of expressions that should be processed together
 #'
-#' Every expression is an expression itself, Expressions on same line are in
-#' same block.
-#' Multiple expressions can sit on one row, e.g. in line comment and commands
-#' separated with ";". This creates a problem when processing each expression
-#' separately because when putting them together, we need complicated handling
-#' of line breaks between them, as it is not apriori clear that there is a line
-#' break separating them. To avoid this, we put top level expressions that sit
-#' on the same line into one block, so the assumption that there is a line break
-#' between each block of expressions holds.
 #' @param pd A top level parse table.
 #' @details
-#' we want to for turning points:
-#' - change in cache state is a turning point
-#' - expressions that are not on a new line cannot be a turning point. In this
-#'   case, the turning point is moved to the first expression on the line
+#' We want blocks to be formed according to these rules:
+#' - blocks should contain either cached or uncached expressions only. If a
+#'   block contains cached expressions only, it does not have to be processed
+#'   and can be returned immediately. If a block contains uncached expressions,
+#'   it makes sense to put as many uncached expression in it, since processing
+#'   one bigger block has less overhead than processing many smaller blocks.
+#' - Multiple expressions can sit on one row, e.g. in line comment and commands
+#'   separated with ";". This creates a problem when processing each expression
+#'   separately because when putting them together, we need complicated handling
+#'   of line breaks between them, as it is not apriori clear that there is a
+#'   line break separating them. To avoid this, we put top level expressions
+#'   that sit on the same line into one block, so the assumption that there is a
+#'   line break between each block of expressions holds.
+#' - all expressions in a stylerignore sequence must be in the same block. If
+#'   that's not the case, the first expression in a block might not be a
+#'   top-level terminal, but another top-level expression.
+#'   [apply_stylerignore()]  joins `env_current$stylerignore`, which contains
+#'   only terminals, with the first expression in a stylerignore sequence, based
+#'   on the first `pos_id` in that stylerignore sequence
+#'   (`first_pos_id_in_segment`).
 #' @param pd A top level nest.
 #' @keywords internal
 cache_find_block <- function(pd) {
+  if (nrow(pd) < 1L) {
+    # TODO how can a block be length 0?
+    return(integer())
+  }
   first_after_cache_state_switch <- pd$is_cached != lag(pd$is_cached, default = !pd$is_cached[1L])
 
   not_first_on_line <- find_blank_lines_to_next_expr(pd) == 0L
@@ -85,10 +96,16 @@ cache_find_block <- function(pd) {
   valid_replacements <- map_int(invalid_turning_point_idx, function(x) {
     first_on_line_idx[last(which(x > first_on_line_idx))]
   })
-  sort(unique(c(
-    setdiff(which(first_after_cache_state_switch), invalid_turning_point_idx),
-    valid_replacements
-  ))) %>%
+
+  turning_points <- setdiff(
+    which(first_after_cache_state_switch),
+    c(which(pd$stylerignore), invalid_turning_point_idx)
+  ) %>%
+    c(1L, valid_replacements) %>%
+    unique() %>%
+    sort()
+
+  turning_points %>%
     unwhich(nrow(pd)) %>%
     cumsum()
 }

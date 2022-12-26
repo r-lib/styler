@@ -187,6 +187,46 @@ test_that("changing ignore markers invalidates cache", {
   })
 })
 
+
+
+test_that("all expressions within a stylerignore sequence (whether cached or not) are put in the same block (low-level)", {
+  transformers <- tidyverse_style()
+  specs <- transformers$more_specs_style_guide
+  full <- c(
+    "# styler: off",
+    "a",
+    "flush(",
+    "1",
+    ")",
+    "# styler: on"
+  )
+  without_ignore <- full[c(-1, -length(full))]
+  local_test_setup(cache = TRUE)
+  expect_true(all(compute_parse_data_nested(without_ignore, transformers, specs)$block == 1))
+  cache_by_expression("a", transformers, more_specs = NULL)
+  is_cached("a", transformers, more_specs = NULL)
+  cache_by_expression("flush(\n  1\n)", transformers, more_specs = NULL)
+  cache_by_expression(c("a", "flush(", "  1", ")"), transformers, more_specs = NULL)
+  expect_true(all(compute_parse_data_nested(full)$block == 1))
+})
+
+
+test_that("all expressions within a stylerignore sequence (whether cached or not) are put in the same block (high-level)", {
+  full <- c(
+    "# styler: off",
+    "a",
+    "flush(",
+    "1",
+    ")",
+    "# styler: on"
+  )
+  without_ignore <- full[c(-1, -length(full))]
+  local_test_setup(cache = TRUE)
+
+  expect_equal(as.character(style_text(without_ignore)), c("a", "flush(", "  1", ")"))
+  expect_equal(as.character(style_text(full)), full)
+})
+
 test_that("cache is deactivated at end of caching related testthat file", {
   expect_false(cache_is_activated())
 })
