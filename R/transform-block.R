@@ -81,10 +81,6 @@ parse_transform_serialize_r_block <- function(pd_nested,
 #' @param pd A top level nest.
 #' @keywords internal
 cache_find_block <- function(pd) {
-  if (nrow(pd) < 1L) {
-    # TODO how can a block be length 0?
-    return(integer())
-  }
   first_after_cache_state_switch <- pd$is_cached != lag(pd$is_cached, default = !pd$is_cached[1L])
 
   not_first_on_line <- find_blank_lines_to_next_expr(pd) == 0L
