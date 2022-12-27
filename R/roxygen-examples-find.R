@@ -10,9 +10,12 @@ identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
     return(integer())
   }
   stop_candidates <- which(magrittr::or(
+    # starts with code or a tag
     grepl("(^[^#]|^#'[\\s\t]*@)", text, perl = TRUE),
+    # starts with a roxygen comment with a blank line after
     grepl("^ *\t*$", text) & grepl("^#' *", lead(text))
-  ))
+  )) %>%
+    c(length(text) + 1L) # if ending with a roxygen example
   stops <- map(starts, match_stop_to_start, stop_candidates) %>%
     flatten_int()
   if (length(stops) < 1L) {
