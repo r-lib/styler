@@ -211,8 +211,12 @@ set_line_break_around_curly_curly <- function(pd) {
     closing_before <- (pd$token == "'}'") &
       (pd$token_after == "'}'" | pd$token_before == "'}'")
     if (any(opening_before) && any(closing_before)) {
-      pd$lag_newlines[lag(opening_before, default = FALSE) & pd$token != "COMMENT"] <- 0L
-      pd$lag_newlines[closing_before & pd$token_before != "COMMENT"] <- 0L
+      pos_opening_idx <- lag(opening_before, default = FALSE) & pd$token != "COMMENT"
+      pd$lag_newlines[pos_opening_idx] <- 0L
+      if (any(pos_opening_idx)) {
+        # if line is broken with opening `{`, also break it with closing
+        pd$lag_newlines[closing_before & pd$token_after != "COMMENT"] <- 0L
+      }
     }
   }
   pd
