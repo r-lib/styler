@@ -346,6 +346,9 @@
     <loc>https://styler.r-lib.org/reference/is_code_chunk_header_or_xaringan_or_code_output.html</loc>
   </url>
   <url>
+    <loc>https://styler.r-lib.org/reference/is_double_indent_function_declaration.html</loc>
+  </url>
+  <url>
     <loc>https://styler.r-lib.org/reference/is_insufficiently_parsed_string.html</loc>
   </url>
   <url>
