@@ -35,7 +35,7 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
 #'
 #' Assumes you already checked if it's a function with
 #' `is_function_declaration`. It is double indented if the first token
-#' after the first line break that is a `"SYMBOL_FORMALS"` is
+#' after the first line break that is a `"SYMBOL_FORMALS"`.
 #' @param pd A parse table.
 #' @inheritParams tidyverse_style
 #' @keywords internal
