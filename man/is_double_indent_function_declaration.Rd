@@ -15,6 +15,6 @@ operators such as '('.}
 \description{
 Assumes you already checked if it's a function with
 \code{is_function_declaration}. It is double indented if the first token
-after the first line break that is a \code{"SYMBOL_FORMALS"} is
+after the first line break that is a \code{"SYMBOL_FORMALS"}.
 }
 \keyword{internal}
