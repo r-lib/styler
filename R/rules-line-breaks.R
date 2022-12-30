@@ -235,9 +235,11 @@ remove_line_breaks_in_fun_dec <- function(pd) {
       pd$token == "')'" | pd$token_before == "'('"
     ) &
       pd$token_before != "COMMENT"
-
     pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
     pd$lag_newlines[round_after] <- 0L
+    if (is_double_indent_function_declaration(pd)) {
+      pd$lag_newlines[lag(pd$token == "'('")] <- 1L
+    }
   }
   pd
 }
