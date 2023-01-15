@@ -4,17 +4,8 @@ editor_options:
     wrap: 79
 ---
 
-This release was requested by the CRAN team to fix the following note:
+This is a release to fix critical bugs and release a new feature.
 
-```
-Version: 1.8.0
-
-Check: for detritus in the temp directory
-Result: NOTE
-Found the following
-files/directories: 'Rscript1f0f0d.ckXemN'
-Flavor: r-devel-linux-x86_64-fedora-clang
-``` 
 
 ## Test environments
 

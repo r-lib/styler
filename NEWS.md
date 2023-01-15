@@ -1,5 +1,70 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# styler 1.9.0
+
+**Features**
+
+- The tidyverse recently introduced double-indention for function declarations
+  that don't fit on one line. It indents two levels, i.e. 4 spaces if you `indent_by` two spaces.
+
+```r
+# old style: remains compliant and won't be re-styled
+my_fun <- function(long_argument = 2,
+                   indent_up_to_first = "x") {
+  # ...
+}
+
+# new style: now also compliant and won't be re-styled
+my_fun <- function(
+    long_argument = 2,
+    indent_double = "x") {
+  # ...
+}
+```
+
+You can also use the R package [{codegrip}](https://github.com/lionel-/codegrip)
+to toggle between the two modes (#1083).
+
+**Bug fixes**
+
+- Previously styled code that is now stylerignored should always be formatted 
+  correctly. It boils down to the requirement that stylerignore sequences must 
+  always be in the same block (#1082).
+- styling around `{{` and comments now yields parsable output (#1088).
+- trailing blank lines in roxygen code examples are removed (#1085).
+- roxygen code examples that don't have any code following after them are now 
+  also styled (#1067).
+
+**Other user-facing changes**
+
+- Less noisy communication if R option `styler.cache_root` is not set (#1063).
+
+**Infrastructure**
+
+- use {lintr} config (#1057, #1059) and pre-commit hook (#1064).
+- use new {pkgdown} hook, check for parsable yaml and mixed line ending (#1080,
+  #1081).
+- update GitHub Actions workflow versions one time (#1073) and add dependabot 
+  for the future (#1974).
+- bdr test for additional examples (#1068).
+- check for link rot regularly (#1077, #1086).
+
+**Internals**
+
+- replace retired `purrr::when()` with `if` statements (#1066).
+- more integer literals (#1054).
+- Consistently use `@examplesIf` for conditionally running examples (#1071).
+- document imports in a single file (#1060).
+- format YAML files (#1061).
+
+A big shout out to anyone who contributed to this release:
+
+[&#x0040;balthasars](https://github.com/balthasars),
+[&#x0040;hadley](https://github.com/hadley), 
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
+[&#x0040;juliangrimm225](https://github.com/) and 
+[&#x0040;krlmlr](https://github.com/krlmlr).
+
 # styler 1.8.1 
 
 **Features**

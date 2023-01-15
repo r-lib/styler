@@ -11,6 +11,7 @@ AST
 aut
 autothresholdr
 backport
+bdr
 benchmarking
 biocthis
 bootswatch
@@ -23,6 +24,7 @@ cli
 CMD
 codebase
 codecov
+codegrip
 coercible
 coercions
 compat
@@ -39,6 +41,7 @@ cyclocomp
 cynkra
 datastructures
 dec
+dependabot
 deps
 desc
 dev
@@ -300,5 +303,6 @@ xfun
 Xie
 xyzpackage
 YAML
+yaml
 yihui
 zzz
