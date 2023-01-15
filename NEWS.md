@@ -60,7 +60,10 @@ to toggle between the two modes (#1083).
 A big shout out to anyone who contributed to this release:
 
 [&#x0040;balthasars](https://github.com/balthasars),
-[&#x0040;hadley](https://github.com/hadley), [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;juliangrimm225](https://github.com/juliangrimm225) and [&#x0040;krlmlr](https://github.com/krlmlr).
+[&#x0040;hadley](https://github.com/hadley), 
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
+[&#x0040;juliangrimm225](https://github.com/) and 
+[&#x0040;krlmlr](https://github.com/krlmlr).
 
 # styler 1.8.1 
 
