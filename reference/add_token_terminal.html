@@ -4,7 +4,7 @@ and we cannot wait to initialize this attribute until apply_transformers(),
 where all other attributes are initialized with
 default_style_guide_attributes() (when using tidyverse_style()) because
 for cached code, we don't build up the nested structure and leave it shallow
-(to speed up things), see also drop_cached_children()."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+(to speed up things), see also shallowify()."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -22,7 +22,7 @@ for cached code, we don't build up the nested structure and leave it shallow
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@ and we cannot wait to initialize this attribute until <code><a href="apply_trans
 where all other attributes are initialized with
 <code><a href="default_style_guide_attributes.html">default_style_guide_attributes()</a></code> (when using <code><a href="tidyverse_style.html">tidyverse_style()</a></code>) because
 for cached code, we don't build up the nested structure and leave it shallow
-(to speed up things), see also <code><a href="drop_cached_children.html">drop_cached_children()</a></code>.</p>
+(to speed up things), see also <code><a href="shallowify.html">shallowify()</a></code>.</p>
     </div>
 
     <div id="ref-usage">
@@ -161,7 +161,7 @@ for cached code, we don't build up the nested structure and leave it shallow
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
