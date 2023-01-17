@@ -34,9 +34,9 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
 \item{filetype}{Vector of file extensions indicating which file types should
-be styled. Case is ignored, and the \code{.} is optional, e.g.
-\code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after
-standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.}
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after standardization) are:
+"r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
+Rmd.}
 
 \item{recursive}{A logical value indicating whether or not files in
 sub directories of \code{path} should be styled as well.}
