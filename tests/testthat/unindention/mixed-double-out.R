@@ -58,7 +58,8 @@ function(
 }
 
 
-function(x, y) {
+function(
+    x, y) {
   1
 }
 
@@ -70,9 +71,15 @@ function(x,
 
 
 # last brace
-function(x, y) NULL
+function(
+    x, y) {
+  NULL
+}
 
-function(x, y) NULL
+function(
+    x, y) {
+  NULL
+}
 
 function(
     x,
