@@ -107,6 +107,17 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.9.0.9001" id="styler-1909001">styler 1.9.0.9001<a class="anchor" aria-label="anchor" href="#styler-1909001"></a></h2>
+<p><strong>Bug fixes</strong></p>
+<ul><li>Fix interaction between cache and stylerignore that could produce invalid code (<a href="https://github.com/r-lib/styler/issues/1072" class="external-link">#1072</a>).</li>
+<li>Don’t remove line break around <code>{{</code> and comments that can yield invalid code (<a href="https://github.com/r-lib/styler/issues/1070" class="external-link">#1070</a>).</li>
+<li>Double indent is also kept if there is only one argument (<a href="https://github.com/r-lib/styler/issues/1094" class="external-link">#1094</a>).</li>
+<li>Improved blank lines handling for roxygen examples (<a href="https://github.com/r-lib/styler/issues/1085" class="external-link">#1085</a>).</li>
+<li>style roxygen examples even if nothing comes after (<a href="https://github.com/r-lib/styler/issues/1089" class="external-link">#1089</a>).</li>
+</ul><p><strong>Other</strong></p>
+<ul><li>Document <code>"qmd"</code> as a valid <code>filetype</code> (<a href="https://github.com/r-lib/styler/issues/1091" class="external-link">#1091</a>).</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.9.0" id="styler-190">styler 1.9.0<small>2023-01-15</small><a class="anchor" aria-label="anchor" href="#styler-190"></a></h2>
 <p><strong>Features</strong></p>
 <ul><li>The tidyverse recently introduced double-indention for function declarations that don’t fit on one line. It indents two levels, i.e. 4 spaces if you <code>indent_by</code> two spaces.</li>
