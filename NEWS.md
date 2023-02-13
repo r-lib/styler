@@ -1,5 +1,21 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# styler 1.9.0.9001
+
+**Bug fixes**
+
+- Fix interaction between cache and stylerignore that could produce invalid code (#1072).
+- Don't remove line break around `{{` and comments that can yield invalid code (#1070).
+- Double indent is also kept if there is only one argument (#1094).
+- Improved blank lines handling for roxygen examples (#1085).
+- style roxygen examples even if nothing comes after (#1089).
+
+**Other**
+
+- Document `"qmd"` as a valid `filetype` (#1091).
+
+
+
 # styler 1.9.0
 
 **Features**
