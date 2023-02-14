@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# styler 1.9.0.9001
+# styler 1.9.1
 
 **Bug fixes**
 
@@ -15,6 +15,9 @@
 
 - Document `"qmd"` as a valid `filetype` (#1091).
 
+Thanks for everyone who contributed to this release:
+
+[&#x0040;dpprdan](https://github.com/dpprdan), [&#x0040;flying-sheep](https://github.com/flying-sheep), [&#x0040;giocomai](https://github.com/giocomai) and [&#x0040;MichaelChirico](https://github.com/MichaelChirico).
 
 
 # styler 1.9.0
