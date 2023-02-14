@@ -247,7 +247,7 @@ parse_transform_serialize_r <- function(text,
   )
 
   text <- assert_text(text)
-  if (identical(text, "")) {
+  if (identical(unique(text), "")) {
     if (warn_empty) {
       warn("Text to style did not contain any tokens. Returning empty string.")
     }
