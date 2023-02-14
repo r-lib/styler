@@ -6,6 +6,7 @@
 
 - Fix interaction between cache and stylerignore that could produce invalid code (#1072).
 - Don't remove line break around `{{` and comments that can yield invalid code (#1070).
+- Styling empty roxygen code examples don't cause errors anymore (#1096).
 - Double indent is also kept if there is only one argument (#1094).
 - Improved blank lines handling for roxygen examples (#1085).
 - style roxygen examples even if nothing comes after (#1089).
