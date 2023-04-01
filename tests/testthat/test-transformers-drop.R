@@ -94,10 +94,7 @@ test_that("tidyverse transformers are correctly dropped", {
   names_indention <- c("indent_braces", "indent_op", "indent_without_paren")
   expect_setequal(names(t_fun$indention), names_indention)
 
-  names_tokens <- c(
-    "fix_quotes",
-    if (getRversion() < "3.6") "force_assignment_op"
-  )
+  names_tokens <- "fix_quotes"
   expect_setequal(names(t_fun$token), names_tokens)
 })
 
