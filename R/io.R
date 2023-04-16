@@ -20,7 +20,7 @@ transform_utf8 <- function(path, fun, dry) {
 #' @keywords internal
 transform_utf8_one <- function(path, fun, dry) {
   rlang::arg_match(dry, c("on", "off", "fail"))
-  rlang::with_handlers(
+  rlang::try_fetch(
     {
       file_with_info <- read_utf8(path)
       # only write back when changed OR when there was a missing newline
@@ -70,7 +70,7 @@ transform_utf8_one <- function(path, fun, dry) {
 #' @param path A path to a file to read.
 #' @keywords internal
 read_utf8 <- function(path) {
-  out <- rlang::with_handlers(
+  out <- rlang::try_fetch(
     read_utf8_bare(path),
     warning = function(w) w,
     error = function(e) e

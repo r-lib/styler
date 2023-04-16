@@ -413,7 +413,7 @@ parse_tree_must_be_identical <- function(transformers) {
 #' @keywords internal
 verify_roundtrip <- function(old_text, new_text, parsable_only = FALSE) {
   if (parsable_only) {
-    rlang::with_handlers(
+    rlang::try_fetch(
       parse_safely(new_text),
       error = function(e) {
         rlang::abort(paste0(
