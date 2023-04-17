@@ -66,7 +66,7 @@ parse_roxygen <- function(roxygen) {
 #' )
 #' @keywords internal
 roxygen_remove_extra_brace <- function(parsed) {
-  parsed <- rlang::with_handlers(
+  parsed <- rlang::try_fetch(
     {
       parse(text = paste0(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
       parsed
@@ -92,7 +92,7 @@ roxygen_remove_extra_brace <- function(parsed) {
             parsed <- parsed[-last(linebreak)]
           }
           # try if can be parsed (need remve dontrun)
-          worth_trying_to_remove_brace <- rlang::with_handlers(
+          worth_trying_to_remove_brace <- rlang::try_fetch(
             {
               # this will error informatively
               parse(text = gsub("^\\\\[[:alpha:]]+", "", parsed))
@@ -143,10 +143,12 @@ emulate_rd <- function(roxygen) {
     )
     roxygen <- gsub("(^#)[^']", "#' #", roxygen)
 
-    text <- roxygen2::roc_proc_text(
+    processed <- roxygen2::roc_proc_text(
       roxygen2::rd_roclet(),
       paste(roxygen, collapse = "\n")
-    )[[1L]]$get_section("examples")
+    )
+
+    text <- processed[[1L]]$get_section("examples")
     text <- as.character(text)[-1L]
     text <- c(
       if (grepl("^#'(\\s|\t)*@examples(\\s|\t)*$", roxygen[2L])) "",
