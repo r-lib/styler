@@ -56,9 +56,7 @@ assert_transformers <- function(transformers) {
 #'   standard format.
 #' @examples
 #' styler:::set_and_assert_arg_filetype("rMd")
-#' \dontrun{
-#' styler:::set_and_assert_arg_filetype("xyz")
-#' }
+#' try(styler:::set_and_assert_arg_filetype("xyz"))
 #' @keywords internal
 set_and_assert_arg_filetype <- function(filetype) {
   without_dot <- gsub("^\\.", "", tolower(filetype))
@@ -69,7 +67,7 @@ set_and_assert_arg_filetype <- function(filetype) {
 #' Make sure all supplied file types are allowed
 #'
 #' @param lowercase_filetype A vector with file types to check, all lower case.
-#' @importFrom rlang abort
+
 #' @keywords internal
 assert_filetype <- function(lowercase_filetype) {
   allowed_types <- c("r", "rmd", "rmarkdown", "rnw", "rprofile", "qmd")
@@ -96,13 +94,13 @@ assert_text <- function(text) {
 #'
 #' Check whether one or more tokens exist and have a unique token-text mapping
 #' @param tokens Tokens to check.
-#' @importFrom rlang abort
+
 #' @keywords internal
 assert_tokens <- function(tokens) {
   invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
   if (length(invalid_tokens) > 0L) {
     abort(paste(
-      "Token(s)", paste0(invalid_tokens, collapse = ", "), "are invalid.",
+      "Token(s)", toString(invalid_tokens), "are invalid.",
       "You can lookup all valid tokens and their text",
       "with styler:::lookup_tokens(). Make sure you supply the values of",
       "the column 'token', not 'text'."

@@ -11,6 +11,7 @@ AST
 aut
 autothresholdr
 backport
+bdr
 benchmarking
 biocthis
 bootswatch
@@ -21,7 +22,9 @@ chnages
 ci
 cli
 CMD
+codebase
 codecov
+codegrip
 coercible
 coercions
 compat
@@ -34,9 +37,11 @@ cpp
 cran
 cre
 ctb
+cyclocomp
 cynkra
 datastructures
 dec
+dependabot
 deps
 desc
 dev
@@ -96,6 +101,7 @@ initializer
 inode
 integrations
 interaces
+internal's
 invasiveness
 iNZightTools
 io
@@ -115,6 +121,8 @@ LF
 LIBS
 lifecycle
 Ligges
+linter
+linters
 lintr
 linux
 lorenz
@@ -133,6 +141,7 @@ netlify
 netReg
 nocomments
 NONINFRINGEMENT
+nonportable
 nph
 NUM
 oldrel
@@ -160,6 +169,7 @@ pre
 precommit
 prefill
 prettycode
+priori
 PRs
 purrr
 qmd
@@ -221,6 +231,7 @@ sessioninfo
 setCacheRootPath
 setdiff
 setenv
+Shallowify
 shinydashboardPlus
 shinymeta
 shinyMonacoEditor
@@ -255,6 +266,7 @@ tidyr
 tidyverse
 Tidyverse
 Tierney
+todo
 tokenized
 travis
 tryCatch
@@ -290,5 +302,7 @@ xenial
 xfun
 Xie
 xyzpackage
+YAML
+yaml
 yihui
 zzz

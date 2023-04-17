@@ -43,7 +43,7 @@ create_tokens <- function(tokens,
     list(
       token = tokens,
       text = texts,
-      short = substr(texts, 1, 5),
+      short = substr(texts, 1L, 5L),
       lag_newlines = lag_newlines,
       newlines = lead(lag_newlines),
       pos_id = pos_ids,
@@ -85,7 +85,7 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
   }
   first <- find_start_pos_id(pd, pos, by, direction, after)
   new_ids <- seq(first,
-    to = first + direction * (n - 1) * by, by = by * direction
+    to = first + direction * (n - 1L) * by, by = by * direction
   )
   validate_new_pos_ids(new_ids, after)
   new_ids
@@ -144,7 +144,7 @@ find_start_pos_id <- function(pd,
 #' @param new_ids A vector with new ids
 #' @param after Whether the ids are created with `after = TRUE` (and hence
 #' should be in the range x.0-x.45) or not.
-#' @importFrom rlang abort
+
 #' @family token creators
 #' @keywords internal
 validate_new_pos_ids <- function(new_ids, after) {

@@ -5,9 +5,7 @@
 #'
 #' @examples
 #' 1 + 1
-#'
-
-#' nolint start
+# nolint start
 #' @examplesIf long_condition_line
 #' 32 / 3
-#' nolint end
+# nolint end

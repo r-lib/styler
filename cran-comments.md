@@ -4,6 +4,9 @@ editor_options:
     wrap: 79
 ---
 
+This is a release to fix critical bugs and release a new feature.
+
+
 ## Test environments
 
 -   ubuntu 20.04 (on GitHub Actions): R devel, R 4.2.1, 4.1.2, R 4.0.5, R 3.6,

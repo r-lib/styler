@@ -6,7 +6,6 @@
 #' @inheritParams parse_transform_serialize_r
 #' @param example Roxygen example code.
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
-#' @importFrom purrr map flatten_chr
 #' @keywords internal
 style_roxygen_code_example <- function(example, transformers, base_indention) {
   example <- split(example, cumsum(grepl("^#' *@examples", example)))
@@ -25,6 +24,9 @@ style_roxygen_code_example <- function(example, transformers, base_indention) {
 style_roxygen_code_example_one <- function(example_one,
                                            transformers,
                                            base_indention) {
+  # Workaround for imperfect parsing of roxygen2 examples
+  example_one <- example_one[example_one != ""]
+
   bare <- parse_roxygen(example_one)
   one_dont <- split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
   unmasked <- map(one_dont, style_roxygen_code_example_segment,
@@ -33,7 +35,7 @@ style_roxygen_code_example_one <- function(example_one,
   ) %>%
     flatten_chr()
   if (bare$example_type == "examplesIf") {
-    with_handlers(
+    rlang::try_fetch(
       parse_text(unmasked[1L]),
       error = function(e) {
         abort(paste0(
@@ -64,8 +66,6 @@ style_roxygen_code_example_one <- function(example_one,
 #'   friends.
 #' @inheritParams parse_transform_serialize_r
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
-#' @importFrom rlang seq2
-#' @importFrom purrr map2 flatten_chr
 #' @keywords internal
 style_roxygen_code_example_segment <- function(one_dont,
                                                transformers,
@@ -77,8 +77,7 @@ style_roxygen_code_example_segment <- function(one_dont,
   }
   dont_seqs <- find_dont_seqs(one_dont)
   split_segments <- split_roxygen_segments(one_dont, unlist(dont_seqs))
-  is_dont <-
-    seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
+  is_dont <- seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
 
   map2(split_segments$separated, is_dont,
     style_roxygen_example_snippet,
@@ -120,8 +119,11 @@ style_roxygen_example_snippet <- function(code_snippet,
   )
   if (!is_cached || !cache_is_active) {
     code_snippet <- code_snippet %>%
-      parse_transform_serialize_r(transformers,
-        base_indention = base_indention, warn_empty = FALSE
+      parse_transform_serialize_r(
+        transformers,
+        base_indention = base_indention,
+        warn_empty = FALSE,
+        is_roxygen_code_example = TRUE
       )
   }
 

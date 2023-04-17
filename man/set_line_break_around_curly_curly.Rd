@@ -26,7 +26,7 @@ but will most likely give an error at runtime because the way the syntactic
 sugar is defined in rlang is to use a single token within curly-curly. In
 addition, because rlang parses \verb{\\\{\\\{} in a special way (just as \verb{!!}), the
 expression \verb{\\\{\\\{ x \\\}\\\}} will give a runtime error when used outside of a
-context that is capable of handling it, e.g. on the top level (that is, not
+context that is capable of handling it, e.g. on the top-level (that is, not
 within function call like \verb{rlang_fun(\\\{\\\{ x \\\}\\\})}) or within a base R
 function such as \code{\link[=c]{c()}}. However, these differences are assumed to be
 irrelevant for styling curly-curly, as much as they were for styling \verb{!!}.

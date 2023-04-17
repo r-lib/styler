@@ -16,8 +16,6 @@
 #' last dash and adding -out.R. In contrast to older versions of this
 #' function, every *-out.R file has just one in file.
 #' @inheritParams transform_and_check
-#' @importFrom purrr flatten_chr pwalk map
-#' @importFrom rlang abort
 #' @keywords internal
 test_collection <- function(test, sub_test = NULL,
                             dry = "off",
@@ -101,8 +99,6 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param ... Parameters passed to transformer function.
 #' @param out_tree Name of tree file if written out.
 #' @inheritParams transform_utf8
-#' @importFrom utils write.table
-#' @importFrom rlang warn
 #' @keywords internal
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
@@ -113,7 +109,7 @@ transform_and_check <- function(in_item, out_item,
   read_in <- read_utf8_bare(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
-      write.table(out_tree,
+      utils::write.table(out_tree,
         col.names = FALSE, row.names = FALSE, quote = FALSE,
         fileEncoding = "UTF-8"
       )
@@ -245,11 +241,11 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
 #' @keywords internal
 n_times_faster_with_cache <- function(x1, x2 = x1, ...,
                                       fun = styler::style_text,
-                                      n = 3,
+                                      n = 3L,
                                       clear = "always") {
   rlang::arg_match(clear, c("always", "final", "never", "all but last"))
 
-  out <- purrr::map(1:n, n_times_faster_bench,
+  out <- purrr::map(1L:n, n_times_faster_bench,
     x1 = x1, x2 = x2, fun = fun,
     ..., n = n, clear = clear
   )
@@ -268,7 +264,7 @@ n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
   first <- system.time(fun(x1, ...))
 
   if (is.null(x2)) {
-    second <- c(elapsed = 1)
+    second <- c(elapsed = 1L)
   } else {
     second <- system.time(fun(x2, ...))
   }
@@ -378,7 +374,7 @@ test_transformers_drop <- function(transformers) {
       rlang::abort(paste(
         "transformers_drop specifies exclusion rules for transformers that ",
         "are not in the style guilde. Please add the rule to the style guide ",
-        "or remove the dropping rules:", paste(diff, collapse = ", ")
+        "or remove the dropping rules:", toString(diff)
       ))
     }
   })

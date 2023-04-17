@@ -19,7 +19,7 @@ line trigger.
 }
 }
 \examples{
-\dontrun{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 tryCatch(
   {
     f(8)
@@ -61,6 +61,6 @@ data \%>\%
   {
     cor(.$col1, .$col2, use = "complete.obs")
   }
-}
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

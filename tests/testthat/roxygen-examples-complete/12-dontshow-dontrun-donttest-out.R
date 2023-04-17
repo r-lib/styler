@@ -1,4 +1,3 @@
-
 #' Create a style guide
 #'
 #' @param reindention A list of parameters for regex re-indention, most

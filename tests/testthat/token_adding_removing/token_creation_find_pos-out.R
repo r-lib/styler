@@ -1,4 +1,3 @@
-
 print_out <- function(x, ...) {
   lines <- m(y, ..., print = TRUE)
   paste(lines, sep = "\n")

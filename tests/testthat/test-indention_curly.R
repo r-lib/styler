@@ -32,7 +32,7 @@ test_that("custom indention for curly braces is corretct ", {
 
 
 test_that(paste(
-  "complete styling via top level api is correct",
+  "complete styling via top-level api is correct",
   "(round, curly, spacing)"
 ), {
   expect_warning(test_collection("indention_curly_brackets",

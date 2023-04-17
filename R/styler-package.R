@@ -18,15 +18,24 @@
 #' style_text("a%>%b; a", scope = "tokens")
 "_PACKAGE"
 
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c(
-    ".",
-    "pd", "pd_nested", "pd_flat", "flattened_pd",
-    "line1", "line2", "col1", "col2", "parent",
-    "terminal", "text", "short",
-    "spaces", "lag_spaces",
-    "newlines", "lag_newlines",
-    "pos_id",
-    NULL
-  ))
-}
+## styler namespace: start
+#'
+#' @importFrom rlang abort warn seq2 is_installed "%||%" set_names
+#' @importFrom purrr map map_lgl map_int map_chr map2 map2_chr map_at pmap pwalk
+#' @importFrom purrr compact partial flatten flatten_int flatten_chr
+#' @importFrom magrittr "%>%"
+#'
+## styler namespace: end
+NULL
+
+
+utils::globalVariables(c(
+  ".",
+  "pd", "pd_nested", "pd_flat", "flattened_pd",
+  "line1", "line2", "col1", "col2", "parent",
+  "terminal", "text", "short",
+  "spaces", "lag_spaces",
+  "newlines", "lag_newlines",
+  "pos_id",
+  NULL
+))

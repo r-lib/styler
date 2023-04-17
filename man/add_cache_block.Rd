@@ -7,7 +7,7 @@
 add_cache_block(pd_nested)
 }
 \arguments{
-\item{pd_nested}{A top level nest.}
+\item{pd_nested}{A top-level nest.}
 }
 \description{
 Must be after \code{\link[=nest_parse_data]{nest_parse_data()}} because requires a nested parse table as

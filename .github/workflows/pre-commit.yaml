@@ -2,8 +2,8 @@ name: pre-commit
 on:
   push:
     branches-ignore:
-      - 'master'
-      - 'main'
+      - "master"
+      - "main"
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 
@@ -18,10 +18,10 @@ jobs:
       )
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
+        uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Install system dependencies
@@ -30,12 +30,14 @@ jobs:
           # your system installation code here
           # sudo apt-get install -y libcurl4-openssl-dev
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.9"
           architecture: "x64"
       - name: Run pre-commit
-        uses: pre-commit/action@v2.0.3
+        uses: pre-commit/action@v3.0.0
+        env: 
+          SKIP: pkgdown
       - name: Commit files
         if: failure() && startsWith(github.ref, 'refs/heads')
         run: |
@@ -53,3 +55,4 @@ jobs:
           branch: ${{ github.ref }}
     env:
       RENV_CONFIG_CACHE_ENABLED: FALSE
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

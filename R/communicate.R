@@ -23,7 +23,7 @@ communicate_warning <- function(changed, transformers) {
 #' @keywords internal
 communicate_summary <- function(changed, ruler_width) {
   if (!getOption("styler.quiet", FALSE)) {
-    cli::cat_rule(width = max(40, ruler_width))
+    cli::cat_rule(width = max(40L, ruler_width))
     cat("Status\tCount\tLegend \n")
     cli::cat_bullet(
       "\t", sum(!changed, na.rm = TRUE), "\tFile unchanged.",
@@ -36,12 +36,11 @@ communicate_summary <- function(changed, ruler_width) {
     cli::cat_bullet(
       bullet = "cross", "\t", sum(is.na(changed)), "\tStyling threw an error."
     )
-    cli::cat_rule(width = max(40, ruler_width))
+    cli::cat_rule(width = max(40L, ruler_width))
   }
 }
 
-#' @importFrom rlang abort
-#' @importFrom rlang is_installed
+
 assert_data.tree_installation <- function() {
   if (!is_installed("data.tree")) {
     abort("The package data.tree needs to be installed for this functionality.")

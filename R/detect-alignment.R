@@ -22,8 +22,6 @@
 #' * For the recursive creation of text, greedily check column by column to make
 #'   sure we can stop as soon as we found that columns are not aligned.
 #'
-#' @importFrom purrr map_int map_lgl map compact
-#' @importFrom rlang seq2
 #' @keywords internal
 #' @examples
 #' library("magrittr")
@@ -31,7 +29,7 @@
 #'   list(styler.cache_name = NULL), # temporarily deactivate cache
 #'   {
 #'     transformers <- tidyverse_style()
-#'     pd_nested <- styler:::compute_parse_data_nested(c(
+#'     pd_nested <- compute_parse_data_nested(c(
 #'       "call(",
 #'       "  ab = 1L,",
 #'       "  a  = 2",
@@ -124,7 +122,7 @@ token_is_on_aligned_line <- function(pd_flat) {
     max_previous_col <- max(current_col)
 
     # first col has no leading ,
-    current_col <- nchar(by_line) - as.integer(column > 1)
+    current_col <- nchar(by_line) - as.integer(column > 1L)
     # Problem `by_line` counting from comma before column 3, previous_line
     # counting 1 space before ~
     if (column > 1L) {
@@ -141,7 +139,7 @@ token_is_on_aligned_line <- function(pd_flat) {
       current_col <- "^(,[\\s\\t]*)[^ ]*.*$" %>%
         gsub("\\1", by_line, perl = TRUE) %>%
         nchar() %>%
-        magrittr::subtract(1)
+        magrittr::subtract(1L)
 
       if (column > 1L) {
         # must add previous columns, as first column might not align

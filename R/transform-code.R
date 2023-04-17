@@ -6,7 +6,7 @@
 #'
 #' @inheritParams transform_utf8
 #' @param ... Further arguments passed to [transform_utf8()].
-#' @importFrom rlang abort
+
 #' @keywords internal
 transform_code <- function(path, fun, ..., dry) {
   if (is_plain_r_file(path) || is_rprofile_file(path)) {
@@ -34,14 +34,13 @@ transform_code <- function(path, fun, ..., dry) {
 #'
 #' @param transformer_fun A styler transformer function.
 #' @inheritParams separate_chunks
-#' @importFrom purrr flatten_chr
 #' @keywords internal
 transform_mixed <- function(lines, transformer_fun, filetype) {
   chunks <- separate_chunks(lines, filetype)
   chunks$r_chunks <- map(chunks$r_chunks, transform_mixed_non_empty,
     transformer_fun = transformer_fun
   )
-  map2(chunks$text_chunks, c(chunks$r_chunks, list(character(0))), c) %>%
+  map2(chunks$text_chunks, c(chunks$r_chunks, list(character(0L))), c) %>%
     flatten_chr()
 }
 
@@ -63,18 +62,16 @@ transform_mixed_non_empty <- function(r_chunk, transformer_fun) {
 #' code) within an Rmd or Rnw file, and returns these separately.
 #' @param lines A character vector of lines from an Rmd or Rnw file.
 #' @param filetype A string indicating the filetype - either 'Rmd' or 'Rnw'.
-#' @importFrom purrr map2
-#' @importFrom rlang seq2
 #' @keywords internal
 separate_chunks <- function(lines, filetype) {
   r_raw_chunks <- identify_raw_chunks(lines, filetype = filetype)
 
   r_chunks <- map2(
-    r_raw_chunks$starts, r_raw_chunks$ends, ~ lines[seq2(.x + 1, .y - 1)]
+    r_raw_chunks$starts, r_raw_chunks$ends, ~ lines[seq2(.x + 1L, .y - 1L)]
   )
 
   text_chunks <- map2(
-    c(1, r_raw_chunks$ends), c(r_raw_chunks$starts, length(lines)),
+    c(1L, r_raw_chunks$ends), c(r_raw_chunks$starts, length(lines)),
     ~ lines[seq2(.x, .y)]
   )
   list(r_chunks = r_chunks, text_chunks = text_chunks)
@@ -91,7 +88,7 @@ separate_chunks <- function(lines, filetype) {
 #' matched twice, on which we throw an error.
 #' @inheritParams separate_chunks
 #' @param engine_pattern A regular expression that must match the engine name.
-#' @importFrom rlang abort
+
 #' @keywords internal
 identify_raw_chunks <- function(lines,
                                 filetype,

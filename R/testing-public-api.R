@@ -15,14 +15,13 @@
 #' This also implies that the ruler width, which depend on the path
 #' length, will again have the same width on all systems and is independent of
 #' how many characters the path of the temporary directory has.
-#' @importFrom utils capture.output
 #' @keywords internal
 catch_style_file_output <- function(file_in) {
   file_in <- testthat_file(file_in)
   temp_path <- copy_to_tempdir(file_in)
   raw_output <- withr::with_dir(
     dirname(temp_path),
-    capture.output(
+    utils::capture.output(
       style_file(basename(temp_path), scope = "tokens")
     )
   )
@@ -44,7 +43,7 @@ test_dry <- function(path, styler, styled = FALSE) {
   summary <- styler(path, dry = "on")
   checker <- ifelse(styled, testthat::expect_false, testthat::expect_true)
   checker(summary$changed)
-  testthat::expect_true(identical(before, readLines(path)))
+  testthat::expect_identical(before, readLines(path))
 
   if (styled) {
     testthat::expect_error(styler(path, dry = "fail"), NA)

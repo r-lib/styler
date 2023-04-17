@@ -27,7 +27,7 @@ flatten_operators_one <- function(pd_nested) {
   pd_token_left <- c(special_token, "PIPE", math_token, "'$'")
   pd_token_right <- c(
     special_token, "PIPE", "LEFT_ASSIGN",
-    if (parser_version_get() > 1) "EQ_ASSIGN",
+    if (parser_version_get() > 1L) "EQ_ASSIGN",
     "'+'", "'-'", "'~'"
   )
   pd_nested %>%
@@ -99,7 +99,7 @@ bind_with_child <- function(pd_nested, pos) {
 wrap_expr_in_expr <- function(pd) {
   create_tokens(
     "expr", "",
-    pos_ids = create_pos_ids(pd, 1, after = FALSE),
+    pos_ids = create_pos_ids(pd, 1L, after = FALSE),
     child = pd,
     terminal = FALSE,
     stylerignore = pd$stylerignore[1L],
@@ -145,7 +145,7 @@ wrap_expr_in_expr <- function(pd) {
 #' )
 #' @keywords internal
 relocate_eq_assign <- function(pd) {
-  if (parser_version_get() < 2) {
+  if (parser_version_get() < 2L) {
     post_visit_one(pd, relocate_eq_assign_nest)
   } else {
     pd
@@ -172,7 +172,7 @@ relocate_eq_assign <- function(pd) {
 #'
 #' Please refer to the section 'Examples' in [relocate_eq_assign()] for details.
 #' @param pd A parse table.
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 relocate_eq_assign_nest <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
@@ -197,10 +197,10 @@ relocate_eq_assign_nest <- function(pd) {
 #' @keywords internal
 find_block_id <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
-  eq_belongs_to_block <- c(0, diff(idx_eq_assign) > 2)
+  eq_belongs_to_block <- c(0L, diff(idx_eq_assign) > 2L)
 
-  empty_seq <- rep(0, nrow(pd))
-  empty_seq[idx_eq_assign - 1] <- eq_belongs_to_block
+  empty_seq <- rep(0L, nrow(pd))
+  empty_seq[idx_eq_assign - 1L] <- eq_belongs_to_block
   block_id <- cumsum(empty_seq)
   block_id
 }
@@ -216,7 +216,7 @@ relocate_eq_assign_one <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   eq_ind <- seq2(idx_eq_assign[1L] - 1L, last(idx_eq_assign) + 1L)
   # initialize because wrap_expr_in_expr -> create_tokens -> requires it
-  pd$indent <- 0
+  pd$indent <- 0L
   eq_expr <- pd[eq_ind, ] %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%
@@ -236,10 +236,10 @@ relocate_eq_assign_one <- function(pd) {
 #' Adds line and col information to an expression from its child
 #'
 #' @param pd A parse table.
-#' @importFrom rlang abort
+
 #' @keywords internal
 add_line_col_to_wrapped_expr <- function(pd) {
-  if (nrow(pd) > 1) abort("pd must be a wrapped expression that has one row.")
+  if (nrow(pd) > 1L) abort("pd must be a wrapped expression that has one row.")
   pd$line1 <- pd$child[[1L]]$line1[1L]
   pd$line2 <- last(pd$child[[1L]]$line2)
   pd$col1 <- pd$child[[1L]]$col1[1L]

@@ -9,7 +9,7 @@ parse_safely(text, ...)
 \arguments{
 \item{text}{Text to parse.}
 
-\item{...}{Parameters passed to \code{\link[base:parse]{base::parse()}}}
+\item{...}{Parameters passed to \code{\link[base:parse]{base::parse()}}.}
 }
 \description{
 Parses text safely, i.e. throws an informative error if EOL style does not
@@ -18,12 +18,11 @@ that we can only detect wrong EOL style if it occurs on the first line
 already.
 }
 \examples{
-\dontrun{
-styler:::parse_safely("a + 3 -4 -> x\r\n glück + 1")
+try(styler:::parse_safely("a + 3 -4 -> x\r\n glück + 1"))
 # This cannot be detected as a EOL style problem because the first
 # line ends as expected with \n
-styler:::parse_safely("a + 3 -4 -> x\nx + 2\r\n glück + 1")
-}
+try(styler:::parse_safely("a + 3 -4 -> x\nx + 2\r\n glück + 1"))
+
 styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 }
 \keyword{internal}

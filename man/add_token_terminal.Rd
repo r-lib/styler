@@ -26,7 +26,7 @@ and we cannot wait to initialize this attribute until \code{\link[=apply_transfo
 where all other attributes are initialized with
 \code{\link[=default_style_guide_attributes]{default_style_guide_attributes()}} (when using \code{\link[=tidyverse_style]{tidyverse_style()}}) because
 for cached code, we don't build up the nested structure and leave it shallow
-(to speed up things), see also \code{\link[=drop_cached_children]{drop_cached_children()}}.
+(to speed up things), see also \code{\link[=shallowify]{shallowify()}}.
 }
 \section{Functions}{
 \itemize{

@@ -3,18 +3,19 @@
 #' Finds the sequence from start to stop of the lines in `text` that are
 #' code examples in roxygen comments.
 #' @param text A text consisting of code and/or roxygen comments.
-#' @importFrom purrr map_int map2
-#' @importFrom rlang seq2
 #' @keywords internal
 identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
   starts <- grep("^#'(\\s|\t)*@examples(If\\s|\\s|\t|$)", text, perl = TRUE)
   if (length(starts) < 1L) {
     return(integer())
   }
-  stop_candidates <- which(or(
+  stop_candidates <- which(magrittr::or(
+    # starts with code or a tag
     grepl("(^[^#]|^#'[\\s\t]*@)", text, perl = TRUE),
+    # starts with a roxygen comment with a blank line after
     grepl("^ *\t*$", text) & grepl("^#' *", lead(text))
-  ))
+  )) %>%
+    c(length(text) + 1L) # if ending with a roxygen example
   stops <- map(starts, match_stop_to_start, stop_candidates) %>%
     flatten_int()
   if (length(stops) < 1L) {
@@ -44,12 +45,11 @@ match_stop_to_start <- function(start, stop_candidates) {
   }
 }
 
-#' Find dontrun and friend sequences
+#' Find `dontrun` and friend sequences
 #'
 #' Returns the indices of the lines that correspond to a `dontrun` or
 #' friends sequence.
 #' @param bare Bare code.
-#' @importFrom purrr map2 map_int
 #' @keywords internal
 find_dont_seqs <- function(bare) {
   dont_openings <- which(bare %in% dont_keywords())
@@ -57,7 +57,7 @@ find_dont_seqs <- function(bare) {
   map2(dont_openings, dont_closings, seq2)
 }
 
-#' @importFrom rlang seq2
+#'
 find_dont_closings <- function(bare, dont_openings) {
   opening <- cumsum(bare == "{")
   closing <- cumsum(bare == "}")

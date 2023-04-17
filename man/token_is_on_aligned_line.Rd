@@ -40,7 +40,7 @@ withr::with_options(
   list(styler.cache_name = NULL), # temporarily deactivate cache
   {
     transformers <- tidyverse_style()
-    pd_nested <- styler:::compute_parse_data_nested(c(
+    pd_nested <- compute_parse_data_nested(c(
       "call(",
       "  ab = 1L,",
       "  a  = 2",

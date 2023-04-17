@@ -9,8 +9,7 @@
 #' * Extension: Also, expressions following on braced expressions also cause a
 #'   line trigger.
 #' @keywords internal
-#' @examples
-#' \dontrun{
+#' @examplesIf FALSE
 #' tryCatch(
 #'   {
 #'     f(8)
@@ -52,7 +51,6 @@
 #'   {
 #'     cor(.$col1, .$col2, use = "complete.obs")
 #'   }
-#' }
 set_line_break_before_curly_opening <- function(pd) {
   line_break_to_set_idx <- which(
     (pd$token_after == "'{'") & !(pd$token %in% c("COMMENT", "EQ_FORMALS"))
@@ -75,7 +73,7 @@ set_line_break_before_curly_opening <- function(pd) {
     linebreak_before_curly <- ifelse(is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
       # and goes to else case
-      any(pd$lag_newlines[seq2(1, line_break_to_set_idx[1L])] > 0L),
+      any(pd$lag_newlines[seq2(1L, line_break_to_set_idx[1L])] > 0L),
       # if not a function call, only break line if it is a pipe followed by {}
       pd$token[line_break_to_set_idx] %in% c("SPECIAL-PIPE", "PIPE")
     )
@@ -98,7 +96,7 @@ set_line_break_before_curly_opening <- function(pd) {
     should_not_be_on_same_line_idx <- line_break_to_set_idx[
       should_not_be_on_same_line
     ]
-    if (is_function_dec(pd)) {
+    if (is_function_declaration(pd)) {
       should_not_be_on_same_line_idx <- setdiff(
         1L + should_not_be_on_same_line_idx, nrow(pd)
       )
@@ -110,7 +108,7 @@ set_line_break_before_curly_opening <- function(pd) {
     # non-curly expressions after curly expressions must have line breaks
     if (length(should_not_be_on_same_line_idx) > 0L) {
       comma_exprs_idx <- which(pd$token == "','")
-      comma_exprs_idx <- setdiff(comma_exprs_idx, 1 + is_not_curly_curly_idx)
+      comma_exprs_idx <- setdiff(comma_exprs_idx, 1L + is_not_curly_curly_idx)
       non_comment_after_comma <- map_int(comma_exprs_idx,
         next_non_comment,
         pd = pd
@@ -188,7 +186,7 @@ style_line_break_around_curly <- function(strict, pd) {
 #' sugar is defined in rlang is to use a single token within curly-curly. In
 #' addition, because rlang parses `\{\{` in a special way (just as `!!`), the
 #' expression `\{\{ x \}\}` will give a runtime error when used outside of a
-#' context that is capable of handling it, e.g. on the top level (that is, not
+#' context that is capable of handling it, e.g. on the top-level (that is, not
 #' within function call like `rlang_fun(\{\{ x \}\})`) or within a base R
 #' function such as [c()]. However, these differences are assumed to be
 #' irrelevant for styling curly-curly, as much as they were for styling `!!`.
@@ -213,8 +211,12 @@ set_line_break_around_curly_curly <- function(pd) {
     closing_before <- (pd$token == "'}'") &
       (pd$token_after == "'}'" | pd$token_before == "'}'")
     if (any(opening_before) && any(closing_before)) {
-      pd$lag_newlines[lag(opening_before, default = FALSE)] <- 0L
-      pd$lag_newlines[closing_before] <- 0L
+      pos_opening_idx <- lag(opening_before, default = FALSE) & pd$token != "COMMENT"
+      pd$lag_newlines[pos_opening_idx] <- 0L
+      if (any(pos_opening_idx)) {
+        # if line is broken with opening `{`, also break it with closing
+        pd$lag_newlines[closing_before & pd$token_after != "COMMENT"] <- 0L
+      }
     }
   }
   pd
@@ -228,19 +230,22 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
 }
 
 remove_line_breaks_in_fun_dec <- function(pd) {
-  if (is_function_dec(pd)) {
+  if (is_function_declaration(pd)) {
+    is_double_indention <- is_double_indent_function_declaration(pd)
     round_after <- (
       pd$token == "')'" | pd$token_before == "'('"
     ) &
       pd$token_before != "COMMENT"
-
     pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
     pd$lag_newlines[round_after] <- 0L
+    if (is_double_indention) {
+      pd$lag_newlines[lag(pd$token == "'('")] <- 1L
+    }
   }
   pd
 }
 
-#' @importFrom rlang seq2
+#'
 add_line_break_after_pipe <- function(pd) {
   is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
   pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1L] <- 1L
@@ -272,7 +277,7 @@ set_line_break_after_assignment <- function(pd) {
 #' @param force_text_before A character vector with text before "'('" that
 #'   forces a line break after every argument in the call.
 #' @name set_line_break_if_call_is_multi_line
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 NULL
 
@@ -310,7 +315,7 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
       return(pd)
     }
     break_pos <- find_line_break_position_in_multiline_call(pd)
-    idx_nested <- next_non_comment(pd, 2)
+    idx_nested <- next_non_comment(pd, 2L)
     if (pd_is_multi_line(pd$child[[idx_nested]]) && sum(pd$lag_newlines) > 0L) {
       break_pos <- c(break_pos, idx_nested)
     }
@@ -390,7 +395,7 @@ remove_line_break_in_fun_call <- function(pd, strict) {
 }
 
 
-set_linebreak_after_ggplot2_plus <- function(pd) {
+set_line_break_after_ggplot2_plus <- function(pd) {
   # if expression is unary, first token is +. Exclude this case.
   is_plus_raw <- c(FALSE, pd$token[-1L] == "'+'")
   if (any(is_plus_raw)) {
@@ -407,7 +412,7 @@ set_linebreak_after_ggplot2_plus <- function(pd) {
           which(lead(pd$token == "COMMENT"))
         )
 
-        pd$lag_newlines[plus_without_comment_after + 1] <- 1L
+        pd$lag_newlines[plus_without_comment_after + 1L] <- 1L
       }
     }
   }

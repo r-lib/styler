@@ -23,12 +23,12 @@ new_styler_df <- function(x) {
 #' styler:::ensure_last_n_empty(letters)
 #' styler:::ensure_last_n_empty(c(letters, "", "", ""))
 #' @keywords internal
-ensure_last_n_empty <- function(x, n = 1) {
+ensure_last_n_empty <- function(x, n = 1L) {
   if (all(x == "")) {
     return("")
   }
   x <- c(x, "", "")
-  x <- x[seq(1, length(x) - which(rev(x) != "")[1L] + 1L)]
+  x <- x[seq(1L, length(x) - which(rev(x) != "")[1L] + 1L)]
   c(x, rep("", n))
 }
 
@@ -43,14 +43,14 @@ re_match <- function(text, pattern) {
   length <- attr(match, "match.length")
   end <- start + length - 1L
   matchstr <- substring(text, start, end)
-  matchstr[start == -1] <- NA_character_
+  matchstr[start == -1L] <- NA_character_
   res <- data.frame(stringsAsFactors = FALSE, .text = text, .match = matchstr)
 
   gstart <- attr(match, "capture.start")
   glength <- attr(match, "capture.length")
   gend <- gstart + glength - 1L
   groupstr <- substring(text, gstart, gend)
-  groupstr[gstart == -1] <- NA_character_
+  groupstr[gstart == -1L] <- NA_character_
   dim(groupstr) <- dim(gstart)
   res <- cbind(groupstr, res, stringsAsFactors = FALSE)
 
@@ -70,7 +70,7 @@ re_match <- function(text, pattern) {
 #' @keywords internal
 convert_newlines_to_linebreaks <- function(text) {
   split <- strsplit(text, "\n", fixed = TRUE)
-  map(split, ~ if (identical(.x, character(0))) {
+  map(split, ~ if (identical(.x, character(0L))) {
     ""
   } else {
     .x

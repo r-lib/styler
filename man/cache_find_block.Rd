@@ -7,25 +7,33 @@
 cache_find_block(pd)
 }
 \arguments{
-\item{pd}{A top level nest.}
+\item{pd}{A top-level nest.}
 }
 \description{
-Every expression is an expression itself, Expressions on same line are in
-same block.
-Multiple expressions can sit on one row, e.g. in line comment and commands
-separated with ";". This creates a problem when processing each expression
-separately because when putting them together, we need complicated handling
-of line breaks between them, as it is not apriori clear that there is a line
-break separating them. To avoid this, we put top level expressions that sit
-on the same line into one block, so the assumption that there is a line break
-between each block of expressions holds.
+Find the groups of expressions that should be processed together
 }
 \details{
-we want to for turning points:
+We want blocks to be formed according to these rules:
 \itemize{
-\item change in cache state is a turning point
-\item expressions that are not on a new line cannot be a turning point. In this
-case, the turning point is moved to the first expression on the line
+\item Blocks should contain either cached or uncached expressions only. If a
+block contains cached expressions only, it does not have to be processed
+and can be returned immediately. If a block contains uncached expressions,
+it makes sense to put as many uncached expression in it, since processing
+one bigger block has less overhead than processing many smaller blocks.
+\item Multiple expressions can sit on one row, e.g. in-line comment and commands
+separated with ";". This creates a problem when processing each expression
+separately because when putting them together, we need complicated handling
+of line breaks between them, as it is not \emph{a priori} clear that there is a
+line break separating them. To avoid this, we put top-level expressions
+that sit on the same line into one block, so the assumption that there is a
+line break between each block of expressions holds.
+\item All expressions in a stylerignore sequence must be in the same block. If
+that's not the case, the first expression in a block might not be a
+top-level terminal, but another top-level expression.
+\code{\link[=apply_stylerignore]{apply_stylerignore()}}  joins \code{env_current$stylerignore}, which contains
+only terminals, with the first expression in a stylerignore sequence, based
+on the first \code{pos_id} in that stylerignore sequence
+(\code{first_pos_id_in_segment}).
 }
 }
 \keyword{internal}

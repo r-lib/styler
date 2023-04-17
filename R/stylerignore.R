@@ -11,13 +11,14 @@
 #' start marker can have many tokens).
 #' @inheritParams add_stylerignore
 #' @keywords internal
-#' @importFrom purrr map
 env_add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
-    env_current$stylerignore <- pd_flat[0, ]
+    env_current$stylerignore <- pd_flat[0L, ]
     return()
   }
-  pd_flat_temp <- pd_flat[pd_flat$terminal | pd_flat$is_cached, ] %>%
+  # the whole stylerignore sequence must be contained in one block.
+  # this means the block can contain cached and uncached expressions.
+  pd_flat_temp <- pd_flat[pd_flat$terminal, ] %>%
     default_style_guide_attributes()
   is_stylerignore_switchpoint <- pd_flat_temp$stylerignore != lag(
     pd_flat_temp$stylerignore,

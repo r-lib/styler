@@ -33,9 +33,9 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
 \item{filetype}{Vector of file extensions indicating which file types should
-be styled. Case is ignored, and the \code{.} is optional, e.g.
-\code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after
-standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.}
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after standardization) are:
+"r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
+Rmd.}
 
 \item{exclude_files}{Character vector with paths to files that should be
 excluded from styling.}
@@ -108,7 +108,7 @@ styling whether or not it was actually changed (or would be changed when
 }
 
 \examples{
-\dontrun{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # the following is identical (because of ... and defaults)
 # but the first is most convenient:
 style_pkg(strict = TRUE)
@@ -123,7 +123,7 @@ style_pkg(
 
 # don't write back and fail if input is not already styled
 style_pkg("/path/to/pkg/", dry = "fail")
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other stylers: 

@@ -2,13 +2,13 @@
 #'
 #' @param roxygen Roxygen code examples that contains a dont* segment only.
 #' @keywords internal
-#' @importFrom rlang seq2
+#'
 remove_dont_mask <- function(roxygen) {
   mask <- c(
     1L, 2L, if (roxygen[3L] == "\n") 3L, last(which(roxygen == "}"))
   ) %>% sort()
   list(
-    code = roxygen[-mask], mask = paste(roxygen[seq2(1, 2)], collapse = "")
+    code = roxygen[-mask], mask = paste(roxygen[seq2(1L, 2L)], collapse = "")
   )
 }
 
@@ -41,7 +41,6 @@ remove_roxygen_header <- function(text) {
 #'   potentially ordinary comments.
 #' @param example_type Either 'examples' or 'examplesIf'.
 #' @keywords internal
-#' @importFrom purrr map2_chr
 add_roxygen_mask <- function(text, initial_text, example_type) {
   space <- ifelse(text == "", "", " ")
   out <- c(

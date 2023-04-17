@@ -7,7 +7,7 @@
 find_blank_lines_to_next_block(pd)
 }
 \arguments{
-\item{pd}{A top level nest.}
+\item{pd}{A top-level nest.}
 }
 \description{
 This is relevant when putting expressions together into a block and preserve

@@ -31,12 +31,12 @@ add_brackets_in_pipe_child <- function(pd) {
 add_brackets_in_pipe_one <- function(pd, pos) {
   next_non_comment <- next_non_comment(pd, pos)
   rh_child <- pd$child[[next_non_comment]]
-  if (nrow(rh_child) < 2 && rh_child$token == "SYMBOL") {
+  if (nrow(rh_child) < 2L && rh_child$token == "SYMBOL") {
     child <- pd$child[[next_non_comment]]
-    new_pos_ids <- create_pos_ids(child, 1, after = TRUE, n = 2L)
+    new_pos_ids <- create_pos_ids(child, 1L, after = TRUE, n = 2L)
     new_pd <- create_tokens(
       texts = c("(", ")"),
-      lag_newlines = rep(0L, 2),
+      lag_newlines = rep(0L, 2L),
       spaces = 0L,
       pos_ids = new_pos_ids,
       token_before = c(child$token[1L], "'('"),
@@ -67,15 +67,15 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' @param indent_by The amount of spaces used to indent an expression in curly
 #'   braces. Used for unindention.
 #' @keywords internal
-#' @importFrom purrr when
 wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
-  key_token <- when(
-    pd,
-    is_cond_expr(.) ~ "')'",
-    is_while_expr(.) ~ "')'",
-    is_for_expr(.) ~ "forcond",
-    is_function_dec(.) ~ "')'"
-  )
+  key_token <- NULL
+
+  if (is_for_expr(pd)) {
+    key_token <- "forcond"
+  } else if (is_conditional_expr(pd) || is_while_expr(pd) || is_function_declaration(pd)) {
+    key_token <- "')'"
+  }
+
   if (length(key_token) > 0L) {
     pd <- pd %>%
       wrap_multiline_curly(indent_by,
@@ -83,7 +83,7 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
         space_after = as.integer(contains_else_expr(pd))
       )
   }
-  if (is_cond_expr(pd)) {
+  if (is_conditional_expr(pd)) {
     pd <- pd %>%
       wrap_else_multiline_curly(indent_by, space_after = 0L)
   }
@@ -116,7 +116,7 @@ wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
       pd, all_to_be_wrapped_ind, indent_by, space_after
     )
 
-    if (nrow(pd) > 5L) pd$lag_newlines[6] <- 0L
+    if (nrow(pd) > 5L) pd$lag_newlines[6L] <- 0L
   }
   pd
 }
@@ -127,7 +127,7 @@ wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
 #' already wrapped into a such.
 #' @inheritParams wrap_multiline_curly
 #' @keywords internal
-wrap_else_multiline_curly <- function(pd, indent_by = 2, space_after = 0L) {
+wrap_else_multiline_curly <- function(pd, indent_by = 2L, space_after = 0L) {
   if (contains_else_expr(pd) &&
     pd_is_multi_line(pd) &&
     contains_else_expr_that_needs_braces(pd) &&
@@ -196,13 +196,11 @@ if_for_while_part_requires_braces <- function(pd, key_token) {
 #' style_text("'here
 #' is a string
 #' '")
-#' @importFrom purrr map map_chr
 #' @param pd_flat A flat parse table.
-#' @importFrom rlang is_empty
 #' @keywords internal
 fix_quotes <- function(pd_flat) {
   str_const <- which(pd_flat$token == "STR_CONST")
-  if (is_empty(str_const)) {
+  if (rlang::is_empty(str_const)) {
     return(pd_flat)
   }
 
@@ -210,11 +208,10 @@ fix_quotes <- function(pd_flat) {
   pd_flat
 }
 
-#' @importFrom rlang is_empty
 fix_quotes_one <- function(x) {
   rx <- "^'([^\"]*)'$"
   i <- grep(rx, x)
-  if (is_empty(i)) {
+  if (rlang::is_empty(i)) {
     return(x)
   }
 

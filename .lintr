@@ -1,0 +1,27 @@
+linters: linters_with_defaults(
+   commented_code_linter = NULL,
+   cyclocomp_linter = cyclocomp_linter(40),
+   fixed_regex_linter = NULL,
+   function_argument_linter = NULL,
+   indentation_linter = NULL,
+   line_length_linter(120),
+   namespace_linter = NULL,
+   nested_ifelse_linter = NULL,
+   object_name_linter = NULL,
+   object_length_linter(70),
+   object_usage_linter = NULL,
+   todo_comment_linter = NULL,
+   extraction_operator_linter = NULL,
+   nonportable_path_linter = NULL,
+   string_boundary_linter = NULL,
+   undesirable_function_linter = NULL,
+   undesirable_operator_linter = NULL,
+   defaults = linters_with_tags(tags = NULL)
+ )
+exclusions: list(
+  "inst",
+  "man",
+  "tests",
+  "touchstone",
+  "vignettes"
+ )

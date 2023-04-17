@@ -21,7 +21,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
     return(pd)
   }
 
-  if (pd$newlines[length(pd$newlines) - 1] == 0L) {
+  if (pd$newlines[length(pd$newlines) - 1L] == 0L) {
     return(pd)
   }
   pd$indent[nrow] <- indent_by
@@ -29,7 +29,7 @@ indent_without_paren_for_while_fun <- function(pd, indent_by) {
 }
 
 #' @describeIn update_indention Is used to indent if and if-else statements.
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 indent_without_paren_if_else <- function(pd, indent_by) {
   expr_after_if <- next_non_comment(pd, which(pd$token == "')'")[1L])
@@ -60,7 +60,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   ] > 0L
 
   if (has_else_without_curly_or_else_chid && needs_indention_now) {
-    pd$indent[seq(else_idx + 1, nrow(pd))] <- indent_by
+    pd$indent[seq(else_idx + 1L, nrow(pd))] <- indent_by
   }
   pd
 }
@@ -91,7 +91,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
 #' Since text `[[` has token `"LBB"` and text `]]` is parsed as two independent
 #' `]` (see 'Examples'), indention has to stop at the first `]`.
 # one token earlier
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 #' @examples
 #' styler:::parse_text("a[1]")
@@ -106,9 +106,9 @@ compute_indent_indices <- function(pd,
   )
   trigger <- potential_triggers[needs_indention][1L]
   if (is.na(trigger)) {
-    return(numeric(0))
+    return(numeric(0L))
   }
-  start <- trigger + 1
+  start <- trigger + 1L
   if (is.null(token_closing)) {
     stop <- npd
   } else {
@@ -161,7 +161,7 @@ needs_indention <- function(pd,
 #'   if on the same line as the token corresponding to `potential_trigger` and
 #'   directly followed by a line break.
 #' @return `TRUE` if indention is needed, `FALSE` otherwise.
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 #' @examples
 #' style_text(c(
@@ -206,7 +206,6 @@ needs_indention_one <- function(pd,
 #' Sets the column `multi_line` in `pd` by checking row-wise whether any child
 #' of a token is a multi-line token.
 #' @param pd A parse table.
-#' @importFrom purrr map_lgl
 #' @keywords internal
 set_multi_line <- function(pd) {
   pd$multi_line <- unname(map_int(pd$child, pd_multi_line))

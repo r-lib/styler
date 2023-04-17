@@ -20,4 +20,13 @@ styling tokens includes styling spaces). If
 individually. See compare \code{\link[=tidyverse_style]{tidyverse_style()}} for the possible levels and
 their order.
 }
-\keyword{internal}
+\examples{
+scope_normalize(I("tokens"))
+scope_normalize(I(c("indention", "tokens")))
+}
+\seealso{
+Other third-party style guide helpers: 
+\code{\link{next_non_comment}()},
+\code{\link{pd_is}}
+}
+\concept{third-party style guide helpers}

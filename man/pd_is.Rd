@@ -3,45 +3,117 @@
 \name{pd_is}
 \alias{pd_is}
 \alias{is_curly_expr}
-\alias{is_cond_expr}
+\alias{is_for_expr}
+\alias{is_conditional_expr}
 \alias{is_while_expr}
 \alias{is_function_call}
-\alias{is_function_dec}
+\alias{is_function_declaration}
 \alias{is_comment}
-\title{Check whether a parse table corresponds to a certain expression}
+\alias{is_tilde_expr}
+\alias{is_asymmetric_tilde_expr}
+\alias{is_symmetric_tilde_expr}
+\title{What is a parse table representing?}
 \usage{
 is_curly_expr(pd)
 
-is_cond_expr(pd)
+is_for_expr(pd)
+
+is_conditional_expr(pd)
 
 is_while_expr(pd)
 
 is_function_call(pd)
 
-is_function_dec(pd)
+is_function_declaration(pd)
 
 is_comment(pd)
+
+is_tilde_expr(pd, tilde_pos = c(1L, 2L))
+
+is_asymmetric_tilde_expr(pd)
+
+is_symmetric_tilde_expr(pd)
 }
 \arguments{
 \item{pd}{A parse table.}
+
+\item{tilde_pos}{Integer vector indicating row-indices that should be
+checked for tilde. See 'Details'.}
 }
 \description{
-Check whether a parse table corresponds to a certain expression
+Check whether a parse table corresponds to a certain expression.
+}
+\details{
+A tilde is on the top row in the parse table if it is an asymmetric tilde
+expression (like \code{~column}), in the second row if it is a symmetric tilde
+expression (like \code{a~b}).
 }
 \section{Functions}{
 \itemize{
-\item \code{is_curly_expr()}: Checks whether \code{pd} contains an expression wrapped in
-curly brackets.
+\item \code{is_curly_expr()}: Checks whether \code{pd} contains an expression wrapped in curly brackets.
 
-\item \code{is_cond_expr()}: Checks whether \code{pd} contains is a conditional expression.
+\item \code{is_for_expr()}: Checks whether \code{pd} contains a \code{for} loop.
 
-\item \code{is_while_expr()}: Checks whether \code{pd} contains is a while loop.
+\item \code{is_conditional_expr()}: Checks whether \code{pd} contains is a conditional expression.
+
+\item \code{is_while_expr()}: Checks whether \code{pd} contains a \code{while} loop.
 
 \item \code{is_function_call()}: Checks whether \code{pd} is a function call.
 
-\item \code{is_function_dec()}: Checks whether \code{pd} is a function declaration.
+\item \code{is_function_declaration()}: Checks whether \code{pd} is a function declaration.
 
 \item \code{is_comment()}: Checks for every token whether or not it is a comment.
 
+\item \code{is_tilde_expr()}: Checks whether \code{pd} contains a tilde.
+
+\item \code{is_asymmetric_tilde_expr()}: If \code{pd} contains a tilde, checks whether it is asymmetrical.
+
+\item \code{is_symmetric_tilde_expr()}: If \code{pd} contains a tilde, checks whether it is symmetrical.
+
 }}
-\keyword{internal}
+\examples{
+code <- "if (TRUE) { 1 }"
+pd <- compute_parse_data_nested(code)
+is_curly_expr(pd)
+child_of_child <- pd$child[[1]]$child[[5]]
+is_curly_expr(child_of_child)
+
+code <- "for (i in 1:5) print(1:i)"
+pd <- compute_parse_data_nested(code)
+is_for_expr(pd)
+is_for_expr(pd$child[[1]])
+
+code <- "if (TRUE) x <- 1 else x <- 0"
+pd <- compute_parse_data_nested(code)
+is_conditional_expr(pd)
+is_conditional_expr(pd$child[[1]])
+
+code <- "x <- list(1:3)"
+pd <- compute_parse_data_nested(code)
+is_function_call(pd)
+child_of_child <- pd$child[[1]]$child[[3]]
+is_function_call(child_of_child)
+
+code <- "foo <- function() NULL"
+pd <- compute_parse_data_nested(code)
+is_function_declaration(pd)
+child_of_child <- pd$child[[1]]$child[[3]]
+is_function_declaration(child_of_child)
+
+code <- "x <- 1 # TODO: check value"
+pd <- compute_parse_data_nested(code)
+is_comment(pd)
+
+code <- "lm(wt ~ mpg, mtcars)"
+pd <- compute_parse_data_nested(code)
+is_tilde_expr(pd$child[[1]]$child[[3]])
+is_symmetric_tilde_expr(pd$child[[1]]$child[[3]])
+is_asymmetric_tilde_expr(pd$child[[1]]$child[[3]])
+
+}
+\seealso{
+Other third-party style guide helpers: 
+\code{\link{next_non_comment}()},
+\code{\link{scope_normalize}()}
+}
+\concept{third-party style guide helpers}

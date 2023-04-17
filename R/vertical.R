@@ -16,7 +16,6 @@ construct_vertical <- function(x) {
 #' @param colored Whether or not the output should be colored with
 #'   `prettycode::highlight()`.
 #' @param style Passed to `prettycode::highlight()`.
-#' @importFrom rlang is_installed warn
 #' @export
 print.vertical <- function(x, ...,
                            colored = getOption("styler.colored_print.vertical"),

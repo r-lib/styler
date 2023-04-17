@@ -45,7 +45,7 @@
 NULL
 
 
-#' @importFrom rlang abort
+
 #' @keywords internal
 style_active_file <- function() {
   communicate_addins_style_transformers()
@@ -118,7 +118,6 @@ save_after_styling_is_active <- function() {
 }
 
 #' Styles the highlighted selection in a `.R` or `.Rmd` file.
-#' @importFrom rlang abort
 #' @keywords internal
 style_selection <- function() {
   communicate_addins_style_transformers()
@@ -148,9 +147,7 @@ get_rstudio_context <- function() {
 }
 
 #' Asks the user to supply a style
-#' @importFrom rlang abort
 #' @keywords internal
-#' @importFrom rlang with_handlers abort
 set_style_transformers <- function() {
   current_style <- get_addins_style_transformer_name()
   new_style <-
@@ -160,7 +157,7 @@ set_style_transformers <- function() {
       current_style
     )
   if (!is.null(new_style)) {
-    parsed_new_style <- with_handlers(
+    parsed_new_style <- rlang::try_fetch(
       {
         transformers <- eval(parse(text = new_style))
         style_text(
@@ -182,7 +179,6 @@ set_style_transformers <- function() {
 }
 
 #' Return the style function or name
-#'
 #' @keywords internal
 get_addins_style_transformer_name <- function() {
   getOption("styler.addins_style_transformer")
@@ -210,10 +206,9 @@ communicate_addins_style_transformers <- function() {
 #' @param context The context from `styler:::get_rstudio_context()`.
 #' @param transformer A transformer function most conveniently constructed with
 #'   [make_transformer()].
-#' @importFrom rlang with_handlers abort
 #' @keywords internal
 try_transform_as_r_file <- function(context, transformer) {
-  with_handlers(
+  rlang::try_fetch(
     transformer(context$contents),
     error = function(e) {
       preamble_for_unsaved <- paste(

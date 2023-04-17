@@ -5,19 +5,17 @@
 #' that we can only detect wrong EOL style if it occurs on the first line
 #' already.
 #' @param text Text to parse.
-#' @param ... Parameters passed to [base::parse()]
-#' @importFrom rlang abort with_handlers warn
+#' @param ... Parameters passed to [base::parse()].
 #' @keywords internal
 #' @examples
-#' \dontrun{
-#' styler:::parse_safely("a + 3 -4 -> x\r\n glück + 1")
+#' try(styler:::parse_safely("a + 3 -4 -> x\r\n glück + 1"))
 #' # This cannot be detected as a EOL style problem because the first
 #' # line ends as expected with \n
-#' styler:::parse_safely("a + 3 -4 -> x\nx + 2\r\n glück + 1")
-#' }
+#' try(styler:::parse_safely("a + 3 -4 -> x\nx + 2\r\n glück + 1"))
+#'
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
-  tried_parsing <- with_handlers(
+  tried_parsing <- rlang::try_fetch(
     parse(text = text, ...),
     error = function(e) e,
     warning = function(w) w
@@ -49,10 +47,8 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
   if (length(split) > 1L && split[1L] == "<text>") {
     start_char <- as.numeric(split[3L])
     offending_line <- initial_text[as.integer(split[2L])]
-    if (!is.na(offending_line)) {
-      if (substr(offending_line, start_char, start_char + 1) == "\r\n") {
-        return(TRUE)
-      }
+    if (!is.na(offending_line) && substr(offending_line, start_char, start_char + 1L) == "\r\n") {
+      return(TRUE)
     }
   }
   FALSE
@@ -72,7 +68,7 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
 #'
 #' @inheritParams get_parse_data
 #' @return A flat parse table
-#' @importFrom rlang seq2
+#'
 #' @keywords internal
 tokenize <- function(text) {
   get_parse_data(text, include_text = TRUE) %>%
@@ -120,7 +116,7 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
 #' @keywords internal
 add_id_and_short <- function(pd) {
   pd$pos_id <- seq2(1L, nrow(pd))
-  pd$short <- substr(pd$text, 1, 5)
+  pd$short <- substr(pd$text, 1L, 5L)
   pd
 }
 
@@ -132,11 +128,9 @@ add_id_and_short <- function(pd) {
 #' with the text of their parents if their line / col position matches and
 #' return an error otherwise.
 #' @param pd A parse table.
-#' @importFrom rlang abort
-#' @importFrom magrittr or
 #' @keywords internal
 ensure_correct_txt <- function(pd, text) {
-  is_problematic_text <- or(
+  is_problematic_text <- magrittr::or(
     is_insufficiently_parsed_string(pd),
     is_insufficiently_parsed_number(pd)
   )
@@ -146,7 +140,7 @@ ensure_correct_txt <- function(pd, text) {
   problematic_text <- pd[is_problematic_text, ]
   is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
 
-  is_unaffected_token <- !or(
+  is_unaffected_token <- !magrittr::or(
     is_problematic_text, is_parent_of_problematic_string
   )
 

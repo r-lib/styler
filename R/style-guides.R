@@ -61,11 +61,10 @@ NULL
 #'
 #' # styling line breaks only without spaces
 #' style_text(c("ab <- 3", "a =3"), strict = TRUE, scope = I(c("line_breaks", "tokens")))
-#' @importFrom purrr partial
 #' @export
 tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
-                            indent_by = 2,
+                            indent_by = 2L,
                             start_comments_with_one_space = FALSE,
                             reindention = tidyverse_reindention(),
                             math_token_spacing = tidyverse_math_token_spacing()) {
@@ -165,8 +164,8 @@ tidyverse_style <- function(scope = "tokens",
         strict = strict
       ),
       add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
-      set_linebreak_after_ggplot2_plus = if (strict) {
-        set_linebreak_after_ggplot2_plus
+      set_line_break_after_ggplot2_plus = if (strict) {
+        set_line_break_after_ggplot2_plus
       }
     )
   }
@@ -227,7 +226,7 @@ tidyverse_style <- function(scope = "tokens",
     tokens = list(
       resolve_semicolon = "';'",
       add_brackets_in_pipe = c("SPECIAL-PIPE", "PIPE"),
-      # before 3.6, these assignments are not wrapped into top level expression
+      # before 3.6, these assignments are not wrapped into top-level expression
       # and `text` supplied to transformers_drop() is "", so it appears to not
       # contain EQ_ASSIGN, and the transformer is falsely removed.
       # compute_parse_data_nested / text_to_flat_pd ('a = 4')
@@ -266,7 +265,7 @@ tidyverse_style <- function(scope = "tokens",
 #' This is a helper function to create a style guide, which is technically
 #' speaking a named list of groups of transformer functions where each
 #' transformer function corresponds to one styling rule. The output of this
-#' function can be used as an argument for `style` in top level functions
+#' function can be used as an argument for `style` in top-level functions
 #' like [style_text()] and friends. Note that for caching to work properly,
 #' unquote all inputs to the transformer function if possible with rlang's `!!`,
 #' otherwise, they will be passed as references (generic variable names) instead
@@ -324,7 +323,6 @@ tidyverse_style <- function(scope = "tokens",
 #'   "a <- function(x) { x }",
 #'   style = set_line_break_before_curly_opening_style
 #' )
-#' @importFrom purrr compact
 #' @export
 create_style_guide <- function(initialize = default_style_guide_attributes,
                                line_break = NULL,
@@ -477,14 +475,18 @@ tidyverse_reindention <- function() {
 #' @param scope A character vector of length one or a vector of class `AsIs`.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
-#' @keywords internal
-#' @importFrom rlang abort
+
+#' @examples
+#' scope_normalize(I("tokens"))
+#' scope_normalize(I(c("indention", "tokens")))
+#' @family third-party style guide helpers
+#' @export
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
   if (!all((scope %in% levels))) {
     abort(paste(
       "all values in", name, "must be one of the following:",
-      paste(levels, collapse = ", ")
+      toString(levels)
     ))
   }
 

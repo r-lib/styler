@@ -1,7 +1,3 @@
-#' @keywords api
-#' @importFrom magrittr %>%
-NULL
-
 #' Prettify R source code
 #'
 #' Performs various substitutions in all `.R` files in a package
@@ -52,8 +48,7 @@ NULL
 #' See section 'Warning' for a good strategy to apply styling safely.
 #' @inheritSection transform_files Value
 #' @family stylers
-#' @examples
-#' \dontrun{
+#' @examplesIf FALSE
 #' # the following is identical (because of ... and defaults)
 #' # but the first is most convenient:
 #' style_pkg(strict = TRUE)
@@ -68,7 +63,6 @@ NULL
 #'
 #' # don't write back and fail if input is not already styled
 #' style_pkg("/path/to/pkg/", dry = "fail")
-#' }
 #' @export
 style_pkg <- function(pkg = ".",
                       ...,
@@ -93,9 +87,10 @@ style_pkg <- function(pkg = ".",
 #' Prettify a package
 #'
 #' @param filetype Vector of file extensions indicating which file types should
-#'   be styled. Case is ignored, and the `.` is optional, e.g.
-#'   `c(".R", ".Rmd")`, or `c("r", "rmd")`. Supported values (after
-#'   standardization) are: "r", "rprofile", "rmd", "rmarkdown", "rnw". Rmarkdown is treated as Rmd.
+#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R",
+#'   ".Rmd")`, or `c("r", "rmd")`. Supported values (after standardization) are:
+#'   "r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
+#'   Rmd.
 #' @param exclude_files Character vector with paths to files that should be
 #'   excluded from styling.
 #' @param exclude_dirs Character vector with directories to exclude
@@ -239,8 +234,7 @@ style_text <- function(text,
 #' @inheritSection style_pkg Warning
 #' @inheritSection style_pkg Round trip validation
 #' @family stylers
-#' @examples
-#' \dontrun{
+#' @examplesIf FALSE
 #' style_dir("path/to/dir", filetype = c("rmd", ".R"))
 #'
 #' # the following is identical (because of ... and defaults)
@@ -248,7 +242,6 @@ style_text <- function(text,
 #' style_dir(strict = TRUE)
 #' style_dir(style = tidyverse_style, strict = TRUE)
 #' style_dir(transformers = tidyverse_style(strict = TRUE))
-#' }
 #' @export
 style_dir <- function(path = ".",
                       ...,
@@ -271,6 +264,7 @@ style_dir <- function(path = ".",
   invisible(changed)
 }
 
+# nolint: start
 #' Prettify R code in current working directory
 #'
 #' This is a helper function for style_dir.
@@ -304,11 +298,16 @@ prettify_any <- function(transformers,
   } else {
     files_other <- NULL
   }
+
   transform_files(
     setdiff(c(files_root, files_other), exclude_files),
-    transformers, include_roxygen_examples, base_indention, dry
+    transformers,
+    include_roxygen_examples,
+    base_indention,
+    dry
   )
 }
+# nolint: end
 
 #' Style files with R source code
 #'

@@ -512,9 +512,9 @@ test_that("Can properly determine style_after_saving", {
 test_that("Can display warning on unset styler cache", {
   withr::local_options(styler.cache_root = NULL)
   withr::local_seed(7)
-  expect_warning(
+  expect_message(
     ask_to_switch_to_non_default_cache_root(ask = TRUE),
-    'options(styler.cache_root = "styler-perm")',
+    "See `?styler::caching`",
     fixed = TRUE
   )
 })

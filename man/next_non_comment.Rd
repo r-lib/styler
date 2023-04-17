@@ -17,4 +17,17 @@ previous_non_comment(pd, pos)
 \description{
 Find the index of the next or previous non-comment in a parse table.
 }
-\keyword{internal}
+\examples{
+code <- "a <- # hi \n x \%>\% b()"
+writeLines(code)
+pd <- compute_parse_data_nested(code)
+child <- pd$child[[1]]
+previous_non_comment(child, 4L)
+next_non_comment(child, 2L)
+}
+\seealso{
+Other third-party style guide helpers: 
+\code{\link{pd_is}},
+\code{\link{scope_normalize}()}
+}
+\concept{third-party style guide helpers}

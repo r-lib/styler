@@ -25,27 +25,17 @@
 
 
 ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
-  if (ask && stats::runif(1) > 0.9 && is.null(getOption("styler.cache_root"))) {
+  if (ask && stats::runif(1L) > 0.9 && is.null(getOption("styler.cache_root"))) {
     ask_to_switch_to_non_default_cache_root_impl()
     options(styler.cache_root = "styler")
   }
 }
 
+
 ask_to_switch_to_non_default_cache_root_impl <- function() {
-  rlang::warn(paste0(
-    "The R option `styler.cache_root` is not set, which means the cache ",
-    "will get cleaned up after 6 days (and repeated styling will be slower).",
-    " To keep cache files longer, set ",
-    "the option to location within the {R.cache} cache where you want to ",
-    "store the cache, e.g. `\"styler-perm\"`.\n\n",
-    "options(styler.cache_root = \"styler-perm\")\n\n",
-    "in your .Rprofile. Note that the cache literally ",
-    "takes zero space on your disk, only the inode, and you can always ",
-    "manually clean up with `styler::cache_clear()`, and if you update the ",
-    "{styler} package, the cache is removed in any case. To ignore this ",
-    "message in the future, set the default explictly to \"styler\" with\n\n",
-    "options(styler.cache_root = \"styler\")\n\nin your `.Rprofile`. This ",
-    "message will only be displayed once in a while.\n"
+  rlang::inform(paste0(
+    "{styler} cache is cleared after 6 days. ",
+    "See `?styler::caching` to configure differently or silence this message."
   ))
 }
 
@@ -54,7 +44,7 @@ remove_old_cache_files <- function() {
     R.cache::getCachePath(c("styler", styler_version)),
     full.names = TRUE, recursive = TRUE
   )
-  date_boundary <- Sys.time() - 60 * 60 * 24 * 6
+  date_boundary <- Sys.time() - 60L * 60L * 24L * 6L
   file.remove(
     all_cached[file.info(all_cached)$mtime < date_boundary]
   )
@@ -64,9 +54,7 @@ remove_old_cache_files <- function() {
 remove_cache_old_versions <- function() {
   dirs <- list.dirs(R.cache::getCachePath("styler"), recursive = FALSE)
   old_package_dirs <- dirs[basename(dirs) != as.character(styler_version)]
-  purrr::walk(old_package_dirs, function(dir) {
-    unlink(dir, recursive = TRUE, force = TRUE)
-  })
+  purrr::walk(old_package_dirs, unlink, recursive = TRUE, force = TRUE)
 }
 
 # nocov end

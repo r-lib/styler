@@ -1,5 +1,5 @@
 #' @examples
-#'   my_fun <- function() {
+#' my_fun <- function() {
 #'   print("hello world!")
 #' }
 #' # before this comment is a left-over space
