@@ -100,8 +100,8 @@ shallowify <- function(pd) {
   if (cache_is_activated()) {
     order <- order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal))
     pd_parent_first <- vec_slice(pd, order)
-    pos_ids_to_keep <- pd_parent_first %>%
-      split(cumsum(pd_parent_first$parent == 0L)) %>%
+    pd_parent_first_split <- vec_split(pd_parent_first, cumsum(pd_parent_first$parent == 0L))
+    pos_ids_to_keep <- pd_parent_first_split[[2L]] %>%
       map(find_pos_id_to_keep) %>%
       unlist(use.names = FALSE)
     shallow <- vec_slice(pd, pd$pos_id %in% pos_ids_to_keep)
@@ -335,10 +335,9 @@ nest_parse_data <- function(pd_flat) {
       return(pd_flat)
     }
     pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0L))
-    split_data <- split(pd_flat, pd_flat$internal)
 
-    child <- split_data$`FALSE`
-    internal <- split_data$`TRUE`
+    child <- vec_slice(pd_flat, !pd_flat$internal)
+    internal <- vec_slice(pd_flat, pd_flat$internal)
 
     internal$internal_child <- internal$child
     internal$child <- NULL

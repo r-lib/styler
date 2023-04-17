@@ -24,9 +24,12 @@ env_add_stylerignore <- function(pd_flat) {
     pd_flat_temp$stylerignore,
     default = pd_flat_temp$stylerignore[1L]
   )
-  pd_flat_temp$first_pos_id_in_segment <- split(
+
+  pos_id_split <- vec_split(
     pd_flat_temp$pos_id, cumsum(is_stylerignore_switchpoint)
-  ) %>%
+  )
+
+  pd_flat_temp$first_pos_id_in_segment <- pos_id_split[[2L]] %>%
     map(~ rep(.x[1L], length(.x))) %>%
     unlist(use.names = FALSE)
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines

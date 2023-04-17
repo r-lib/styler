@@ -216,7 +216,7 @@ split_roxygen_segments <- function(text, roxygen_examples) {
   all_lines <- seq2(1L, length(text))
   active_segment <- as.integer(all_lines %in% roxygen_examples)
   segment_id <- cumsum(abs(c(0L, diff(active_segment)))) + 1L
-  separated <- split(text, factor(segment_id))
+  separated <- vec_split(text, factor(segment_id))[[2L]]
   restyle_selector <- if (roxygen_examples[1L] == 1L) {
     odd_index
   } else {
@@ -260,7 +260,7 @@ parse_transform_serialize_r <- function(text,
   )
 
   strict <- transformers$more_specs_style_guide$strict %||% TRUE
-  pd_split <- unname(split(pd_nested, pd_nested$block))
+  pd_split <- vec_split(pd_nested, pd_nested$block)[[2L]]
   pd_blank <- find_blank_lines_to_next_block(pd_nested)
 
   text_out <- vector("list", length(pd_split))

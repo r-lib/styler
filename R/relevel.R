@@ -178,8 +178,8 @@ relocate_eq_assign_nest <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   if (length(idx_eq_assign) > 0L) {
     block_id <- find_block_id(pd)
-    blocks <- split(pd, block_id)
-    pd <- map_dfr(blocks, relocate_eq_assign_one)
+    blocks <- vec_split(pd, block_id)
+    pd <- map_dfr(blocks[[2L]], relocate_eq_assign_one)
   }
   pd
 }

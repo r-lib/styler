@@ -26,6 +26,7 @@
 #' @importFrom rlang abort warn seq2 is_installed "%||%" set_names
 #' @importFrom vctrs vec_rbind
 #' @importFrom vctrs vec_slice
+#' @importFrom vctrs vec_split
 ## usethis namespace: end
 NULL
 
