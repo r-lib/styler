@@ -77,7 +77,7 @@ next_terminal <- function(pd,
       stack = stack, vars = vars, tokens_exclude = tokens_exclude
     )
     if (stack) {
-      bind_rows(pd[1L, c("position", vars)], current)
+      vec_rbind(pd[1L, c("position", vars)], current)
     } else {
       current
     }

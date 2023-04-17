@@ -191,6 +191,6 @@ wrap_expr_in_curly <- function(pd,
     indents = pd$indent[1L]
   )
 
-  bind_rows(opening, pd, closing) %>%
+  vec_rbind(opening, pd, closing) %>%
     set_multi_line()
 }

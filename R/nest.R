@@ -367,12 +367,12 @@ nest_parse_data <- function(pd_flat) {
 #' the correct order.
 #' @param child A parse table or `NULL`.
 #' @param internal_child A parse table or `NULL`.
-#' @details Essentially, this is a wrapper around [dplyr::bind_rows()], but
-#'   returns `NULL` if the result of [dplyr::bind_rows()] is a data frame with
+#' @details Essentially, this is a wrapper around vctrs::vec_rbind()], but
+#'   returns `NULL` if the result of vctrs::vec_rbind()] is a data frame with
 #'   zero rows.
 #' @keywords internal
 combine_children <- function(child, internal_child) {
-  bound <- bind_rows(child, internal_child)
+  bound <- vec_rbind(child, internal_child)
   if (nrow(bound) == 0L) {
     return(NULL)
   }

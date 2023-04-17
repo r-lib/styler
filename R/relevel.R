@@ -86,7 +86,7 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
 bind_with_child <- function(pd_nested, pos) {
   pd_nested %>%
     slice(-pos) %>%
-    bind_rows(pd_nested$child[[pos]]) %>%
+    vec_rbind(pd_nested$child[[pos]]) %>%
     arrange_pos_id()
 }
 
@@ -228,7 +228,7 @@ relocate_eq_assign_one <- function(pd) {
   eq_expr$parent <- NA
   pd$indent <- NULL
   non_eq_expr <- pd[-eq_ind, ]
-  pd <- bind_rows(eq_expr, non_eq_expr) %>%
+  pd <- vec_rbind(eq_expr, non_eq_expr) %>%
     arrange_pos_id()
   pd
 }

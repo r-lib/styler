@@ -188,8 +188,8 @@ context_towards_terminals <- function(pd_nested,
 #' @param pd_nested A nested parse table.
 #' @keywords internal
 extract_terminals <- function(pd_nested) {
-  bind_rows(
-    ifelse(pd_nested$terminal | pd_nested$is_cached,
+  vec_rbind(
+    !!!ifelse(pd_nested$terminal | pd_nested$is_cached,
       split(pd_nested, seq_len(nrow(pd_nested))),
       pd_nested$child
     )

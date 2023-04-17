@@ -24,30 +24,6 @@ arrange_pos_id <- function(data) {
   data
 }
 
-bind_rows <- function(x, y = NULL, ...) {
-  if (is.null(x) && is.null(y)) {
-    return(new_styler_df(list()))
-  }
-  if (is.null(x)) {
-    if (inherits(y, "data.frame")) {
-      return(y)
-    }
-    return(do.call(rbind.data.frame, x))
-  }
-  if (is.null(y)) {
-    if (inherits(x, "data.frame")) {
-      return(x)
-    }
-    return(do.call(rbind.data.frame, x))
-  }
-  if (NCOL(x) != NCOL(y)) {
-    for (nme in setdiff(names(x), names(y))) {
-      y[[nme]] <- NA
-    }
-  }
-  bind_rows(rbind.data.frame(x, y), ...)
-}
-
 filter <- function(.data, ...) {
   subset(.data, ...)
 }
@@ -80,9 +56,8 @@ slice <- function(.data, ...) {
   .data[c(...), , drop = FALSE]
 }
 
-# TODO: Use `purrr::map_dfr()` when it stops implicitly relying on `{dplyr}`
-map_dfr <- function(.x, .f, ..., .id = NULL) {
+map_dfr <- function(.x, .f, ...) {
   .f <- purrr::as_mapper(.f, ...)
   res <- map(.x, .f, ...)
-  bind_rows(res, .id = .id)
+  vec_rbind(!!!res)
 }

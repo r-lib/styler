@@ -51,10 +51,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
       block = NA,
       is_cached = FALSE
     )
-    pd$child[[next_non_comment]] <- bind_rows(
-      pd$child[[next_non_comment]],
-      new_pd
-    ) %>%
+    pd$child[[next_non_comment]] <- vec_rbind(pd$child[[next_non_comment]], new_pd) %>%
       arrange_pos_id()
   }
   pd
@@ -170,7 +167,7 @@ wrap_subexpr_in_curly <- function(pd,
 
   pd %>%
     slice(-ind_to_be_wrapped) %>%
-    bind_rows(new_expr_in_expr) %>%
+    vec_rbind(new_expr_in_expr) %>%
     set_multi_line() %>%
     arrange_pos_id()
 }
@@ -204,7 +201,7 @@ fix_quotes <- function(pd_flat) {
     return(pd_flat)
   }
 
-  pd_flat$text[str_const] <- map(pd_flat$text[str_const], fix_quotes_one)
+  pd_flat$text[str_const] <- map_chr(pd_flat$text[str_const], fix_quotes_one)
   pd_flat
 }
 

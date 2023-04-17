@@ -167,7 +167,7 @@ ensure_correct_txt <- function(pd, text) {
     names(new_text),
     paste0(line_col_names(), "parent")
   )
-  bind_rows(
+  vec_rbind(
     new_text[, names_to_keep],
     pd[is_unaffected_token, ],
     pd[is_parent_of_problematic_string, ]
