@@ -60,7 +60,7 @@ set_line_break_before_curly_opening <- function(pd) {
   if (length(line_break_to_set_idx) > 0L) {
     is_not_curly_curly <- map_chr(
       line_break_to_set_idx + 1L,
-      ~ next_terminal(pd[.x, ], vars = "token_after")$token_after
+      ~ next_terminal(vec_slice(pd, .x), vars = "token_after")$token_after
     ) != "'{'"
     last_expr_idx <- max(which(pd$token == "expr"))
     is_last_expr <- if (any(c("IF", "WHILE") == pd$token[1L])) {

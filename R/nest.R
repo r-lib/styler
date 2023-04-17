@@ -99,12 +99,12 @@ add_cache_block <- function(pd_nested) {
 shallowify <- function(pd) {
   if (cache_is_activated()) {
     order <- order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal))
-    pd_parent_first <- pd[order, ]
+    pd_parent_first <- vec_slice(pd, order)
     pos_ids_to_keep <- pd_parent_first %>%
       split(cumsum(pd_parent_first$parent == 0L)) %>%
       map(find_pos_id_to_keep) %>%
       unlist(use.names = FALSE)
-    shallow <- pd[pd$pos_id %in% pos_ids_to_keep, ]
+    shallow <- vec_slice(pd, pd$pos_id %in% pos_ids_to_keep)
     shallow$terminal[shallow$is_cached] <- TRUE
     # all cached expressions need to be marked as terminals because to
     # [apply_stylerignore()], we rely on terminals only.
@@ -376,5 +376,5 @@ combine_children <- function(child, internal_child) {
   if (nrow(bound) == 0L) {
     return(NULL)
   }
-  bound[order(bound$pos_id), ]
+  vec_slice(bound, order(bound$pos_id))
 }

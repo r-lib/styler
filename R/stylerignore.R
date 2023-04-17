@@ -13,12 +13,12 @@
 #' @keywords internal
 env_add_stylerignore <- function(pd_flat) {
   if (!env_current$any_stylerignore) {
-    env_current$stylerignore <- pd_flat[0L, ]
+    env_current$stylerignore <- vec_slice(pd_flat, 0L)
     return()
   }
   # the whole stylerignore sequence must be contained in one block.
   # this means the block can contain cached and uncached expressions.
-  pd_flat_temp <- pd_flat[pd_flat$terminal, ] %>%
+  pd_flat_temp <- vec_slice(pd_flat, pd_flat$terminal) %>%
     default_style_guide_attributes()
   is_stylerignore_switchpoint <- pd_flat_temp$stylerignore != lag(
     pd_flat_temp$stylerignore,
@@ -32,7 +32,7 @@ env_add_stylerignore <- function(pd_flat) {
   pd_flat_temp$lag_newlines <- pd_flat_temp$lag_newlines
   pd_flat_temp$lag_spaces <- lag(pd_flat_temp$spaces, default = 0L)
   is_terminal_to_ignore <- pd_flat_temp$terminal & pd_flat_temp$stylerignore
-  env_current$stylerignore <- pd_flat_temp[is_terminal_to_ignore, ]
+  env_current$stylerignore <- vec_slice(pd_flat_temp, is_terminal_to_ignore)
 }
 
 #' Adds the stylerignore column
@@ -120,7 +120,7 @@ apply_stylerignore <- function(flattened_pd) {
   )
 
   flattened_pd <- merge(
-    flattened_pd[!(to_ignore & not_first), ],
+    vec_slice(flattened_pd, !(to_ignore & not_first)),
     env_current$stylerignore[, colnames_required_apply_stylerignore],
     by.x = "pos_id", by.y = "first_pos_id_in_segment", all.x = TRUE,
     sort = FALSE

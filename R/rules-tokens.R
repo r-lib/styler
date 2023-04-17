@@ -12,7 +12,7 @@ resolve_semicolon <- function(pd) {
     return(pd)
   }
   pd$lag_newlines[lag(is_semicolon)] <- 1L
-  pd <- pd[!is_semicolon, ]
+  pd <- vec_slice(pd, !is_semicolon)
   pd
 }
 
@@ -99,7 +99,7 @@ wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
   to_be_wrapped_expr_with_child <- next_non_comment(
     pd, which(pd$token == key_token)[1L]
   )
-  next_terminal <- next_terminal(pd[to_be_wrapped_expr_with_child, ])$text
+  next_terminal <- next_terminal(vec_slice(pd, to_be_wrapped_expr_with_child))$text
   requires_braces <- if_for_while_part_requires_braces(pd, key_token) && !any(pd$stylerignore)
   if (requires_braces || next_terminal == "return") {
     closing_brace_ind <- which(pd$token == key_token)[1L]
@@ -156,7 +156,7 @@ wrap_subexpr_in_curly <- function(pd,
   to_be_wrapped_starts_with_comment <-
     pd$token[ind_to_be_wrapped[1L]] == "COMMENT"
   new_expr <- wrap_expr_in_curly(
-    pd[ind_to_be_wrapped, ],
+    vec_slice(pd, ind_to_be_wrapped),
     stretch_out = c(!to_be_wrapped_starts_with_comment, TRUE),
     space_after = space_after
   )

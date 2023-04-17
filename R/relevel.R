@@ -217,7 +217,7 @@ relocate_eq_assign_one <- function(pd) {
   eq_ind <- seq2(idx_eq_assign[1L] - 1L, last(idx_eq_assign) + 1L)
   # initialize because wrap_expr_in_expr -> create_tokens -> requires it
   pd$indent <- 0L
-  eq_expr <- pd[eq_ind, ] %>%
+  eq_expr <- vec_slice(pd, eq_ind) %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%
     remove_attributes(c(
@@ -227,7 +227,7 @@ relocate_eq_assign_one <- function(pd) {
   eq_expr$id <- NA
   eq_expr$parent <- NA
   pd$indent <- NULL
-  non_eq_expr <- pd[-eq_ind, ]
+  non_eq_expr <- vec_slice(pd, -eq_ind)
   pd <- vec_rbind(eq_expr, non_eq_expr) %>%
     arrange_pos_id()
   pd

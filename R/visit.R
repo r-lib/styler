@@ -195,7 +195,7 @@ extract_terminals <- function(pd_nested) {
 
   for (i in seq_len(nrow(pd_nested))) {
     if (terminal[[i]] || is_cached[[i]]) {
-      child[[i]] <- list(pd_nested[i, ])
+      child[[i]] <- list(vec_slice(pd_nested, i))
     }
   }
 
