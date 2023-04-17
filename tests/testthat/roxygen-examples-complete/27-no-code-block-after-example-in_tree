@@ -6,7 +6,7 @@ ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: #' [1/0] {5}                              
  ¦--COMMENT: #' @e [1/0] {6}                           
  ¦--COMMENT: #' 1+ [1/0] {7}                           
- ¦--COMMENT: #' no [3/0] {8}                           
+ ¦--COMMENT: # nol [3/0] {8}                           
  ¦--COMMENT: #' @e [1/0] {9}                           
  ¦--COMMENT: #' 32 [1/0] {10}                          
- °--COMMENT: #' no [1/0] {11}                          
+ °--COMMENT: # nol [1/0] {11}                          
