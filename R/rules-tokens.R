@@ -204,7 +204,7 @@ fix_quotes <- function(pd_flat) {
     return(pd_flat)
   }
 
-  pd_flat$text[str_const] <- map(pd_flat$text[str_const], fix_quotes_one)
+  pd_flat$text[str_const] <- map_chr(pd_flat$text[str_const], fix_quotes_one)
   pd_flat
 }
 
