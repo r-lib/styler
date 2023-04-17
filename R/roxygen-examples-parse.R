@@ -143,10 +143,12 @@ emulate_rd <- function(roxygen) {
     )
     roxygen <- gsub("(^#)[^']", "#' #", roxygen)
 
-    text <- roxygen2::roc_proc_text(
+    processed <- roxygen2::roc_proc_text(
       roxygen2::rd_roclet(),
       paste(roxygen, collapse = "\n")
-    )[[1L]]$get_section("examples")
+    )
+
+    text <- processed[[1L]]$get_section("examples")
     text <- as.character(text)[-1L]
     text <- c(
       if (grepl("^#'(\\s|\t)*@examples(\\s|\t)*$", roxygen[2L])) "",

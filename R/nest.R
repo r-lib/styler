@@ -330,33 +330,35 @@ set_spaces <- function(spaces_after_prefix, force_one) {
 #' @return A nested parse table.
 #' @keywords internal
 nest_parse_data <- function(pd_flat) {
-  if (all(pd_flat$parent <= 0L)) {
-    return(pd_flat)
+  repeat {
+    if (all(pd_flat$parent <= 0L)) {
+      return(pd_flat)
+    }
+    pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0L))
+    split_data <- split(pd_flat, pd_flat$internal)
+
+    child <- split_data$`FALSE`
+    internal <- split_data$`TRUE`
+
+    internal$internal_child <- internal$child
+    internal$child <- NULL
+
+    child$parent_ <- child$parent
+
+    rhs <- nest_(child, "child", setdiff(names(child), "parent_"))
+
+    nested <- left_join(internal, rhs, by = c("id" = "parent_"))
+
+    children <- nested$child
+    for (i in seq_along(children)) {
+      new <- combine_children(children[[i]], nested$internal_child[[i]])
+      # Work around is.null(new)
+      children[i] <- list(new)
+    }
+    nested$child <- children
+    nested$internal_child <- NULL
+    pd_flat <- nested
   }
-  pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0L))
-  split_data <- split(pd_flat, pd_flat$internal)
-
-  child <- split_data$`FALSE`
-  internal <- split_data$`TRUE`
-
-  internal$internal_child <- internal$child
-  internal$child <- NULL
-
-  child$parent_ <- child$parent
-
-  rhs <- nest_(child, "child", setdiff(names(child), "parent_"))
-
-  nested <- left_join(internal, rhs, by = c("id" = "parent_"))
-
-  children <- nested$child
-  for (i in seq_along(children)) {
-    new <- combine_children(children[[i]], nested$internal_child[[i]])
-    # Work around is.null(new)
-    children[i] <- list(new)
-  }
-  nested$child <- children
-  nested$internal_child <- NULL
-  nest_parse_data(nested)
 }
 
 #' Combine child and internal child
