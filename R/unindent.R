@@ -23,16 +23,16 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
     return(pd)
   }
 
-  candidates <- pd[cand_ind, ]
+  candidates <- vec_slice(pd, cand_ind)
 
-  non_candidates <- pd[-cand_ind, ]
+  non_candidates <- vec_slice(pd, -cand_ind)
 
   candidates$child <- map(candidates$child,
     unindent_child,
     unindent_by = abs(pd$indent[closing] - pd$indent[closing - 1L])
   )
 
-  bind_rows(candidates, non_candidates) %>%
+  vec_rbind(candidates, non_candidates) %>%
     arrange_pos_id()
 }
 

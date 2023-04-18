@@ -68,7 +68,7 @@ next_terminal <- function(pd,
                           vars = c("pos_id", "token", "text"),
                           tokens_exclude = NULL) {
   pd$position <- seq2(1L, nrow(pd))
-  pd <- pd[!(pd$token %in% tokens_exclude), ]
+  pd <- vec_slice(pd, !(pd$token %in% tokens_exclude))
   if (pd$terminal[1L]) {
     pd[1L, c("position", vars)]
   } else {
@@ -77,7 +77,7 @@ next_terminal <- function(pd,
       stack = stack, vars = vars, tokens_exclude = tokens_exclude
     )
     if (stack) {
-      bind_rows(pd[1L, c("position", vars)], current)
+      vec_rbind(pd[1L, c("position", vars)], current)
     } else {
       current
     }

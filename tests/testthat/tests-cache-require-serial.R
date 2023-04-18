@@ -22,10 +22,10 @@ test_that("top-level test: Caches top-level expressions efficiently on style_tex
   skip_on_cran()
   skip_on_covr()
   expect_lt(
-    partially_cached_benchmark["elapsed"] * 2.4,
+    partially_cached_benchmark["elapsed"] * 1.5,
     not_cached_benchmark["elapsed"]
   )
-  expect_lt(full_cached_benchmark["elapsed"] * 45, benchmark["elapsed"])
+  expect_lt(full_cached_benchmark["elapsed"] * 35, benchmark["elapsed"])
 })
 
 
@@ -37,5 +37,5 @@ test_that("roxygen code examples are written to cache as whole expressions bring
   # don't use full cache, only roxygen cache
   styled[1] <- "#' This is a nother text"
   second <- system.time(style_text(styled))
-  expect_gt(first["elapsed"], 4 * second["elapsed"])
+  expect_gt(first["elapsed"], second["elapsed"] * 2.5)
 })

@@ -179,7 +179,7 @@ needs_indention_one <- function(pd,
     potential_trigger_pos, before_first_break
   )
   multi_line_token <- pd_is_multi_line(
-    pd[row_idx_between_trigger_and_line_break, ]
+    vec_slice(pd, row_idx_between_trigger_and_line_break)
   )
   remaining_row_idx_between_trigger_and_line_break <- setdiff(
     row_idx_between_trigger_and_line_break,
