@@ -1,6 +1,6 @@
 test_that("analogous to test-roxygen-examples-complete", {
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^1[^1234567890]",
+    "roxygen-examples-complete", "^01",
     transformer = style_text
   ), NA)
 
@@ -31,42 +31,42 @@ test_that("analogous to test-roxygen-examples-complete", {
   ), NA)
 
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^2[^1234567890]",
+    "roxygen-examples-complete", "^02",
     transformer = style_text
   ), NA)
 
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^3",
+    "roxygen-examples-complete", "^03",
     transformer = style_text
   ), NA)
 
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^4",
+    "roxygen-examples-complete", "^04",
     transformer = style_text
   ), NA)
 
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^5",
+    "roxygen-examples-complete", "^05",
     transformer = style_text
   ), NA)
 
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^6",
+    "roxygen-examples-complete", "^06",
     transformer = style_text
   ), NA)
 
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^7",
+    "roxygen-examples-complete", "^07",
     transformer = style_text
   ), NA)
 
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^8",
+    "roxygen-examples-complete", "^08",
     transformer = style_text
   ), NA)
 
   expect_warning(test_collection(
-    "roxygen-examples-complete", "^9",
+    "roxygen-examples-complete", "^09",
     transformer = style_text
   ), NA)
 
