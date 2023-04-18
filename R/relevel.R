@@ -85,7 +85,7 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
 #' @keywords internal
 bind_with_child <- function(pd_nested, pos) {
   pd_nested %>%
-    slice(-pos) %>%
+    vec_slice(-pos) %>%
     vec_rbind(pd_nested$child[[pos]]) %>%
     arrange_pos_id()
 }

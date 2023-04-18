@@ -166,7 +166,7 @@ wrap_subexpr_in_curly <- function(pd,
     remove_attributes(c("token_before", "token_after"))
 
   pd %>%
-    slice(-ind_to_be_wrapped) %>%
+    vec_slice(-ind_to_be_wrapped) %>%
     vec_rbind(new_expr_in_expr) %>%
     set_multi_line() %>%
     arrange_pos_id()

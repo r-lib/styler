@@ -13,13 +13,13 @@ lead <- function(x, n = 1L, default = NA) {
 
 arrange <- function(.data, ...) {
   ord <- eval(substitute(order(...)), .data, parent.frame())
-  .data[ord, , drop = FALSE]
+  vec_slice(.data, ord)
 }
 
 arrange_pos_id <- function(data) {
   pos_id <- data$pos_id
   if (is.unsorted(pos_id)) {
-    data <- data[order(pos_id), , drop = FALSE]
+    data <- vec_slice(data, order(pos_id))
   }
   data
 }
@@ -50,10 +50,6 @@ left_join <- function(x, y, by) {
 
 last <- function(x) {
   x[[length(x)]]
-}
-
-slice <- function(.data, ...) {
-  .data[c(...), , drop = FALSE]
 }
 
 map_dfr <- function(.x, .f, ...) {
