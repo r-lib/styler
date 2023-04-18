@@ -231,7 +231,7 @@ one:</p>
 <span><span class="co">##     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L</span></span>
 <span><span class="co">##     pd_flat</span></span>
 <span><span class="co">## }</span></span>
-<span><span class="co">## &lt;bytecode: 0x563442dd1f28&gt;</span></span>
+<span><span class="co">## &lt;bytecode: 0x55ab836ed6a8&gt;</span></span>
 <span><span class="co">## &lt;environment: namespace:styler&gt;</span></span></code></pre>
 <p>As the name says, this function removes spaces after the opening
 parenthesis. But how? Its input is a <em>nest</em>. Since the visitor
@@ -248,10 +248,10 @@ table”):</p>
 <span><span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">token</span>, <span class="va">terminal</span>, <span class="va">text</span>, <span class="va">newlines</span>, <span class="va">spaces</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   token terminal text newlines spaces</span></span>
-<span><span class="co">## 2  expr    FALSE call        0      0</span></span>
-<span><span class="co">## 4   '('     TRUE    (        0      1</span></span>
+<span><span class="co">## 1  expr    FALSE call        0      0</span></span>
+<span><span class="co">## 2   '('     TRUE    (        0      1</span></span>
 <span><span class="co">## 3  expr    FALSE    3        0      0</span></span>
-<span><span class="co">## 7   ')'     TRUE    )        0      0</span></span></code></pre>
+<span><span class="co">## 4   ')'     TRUE    )        0      0</span></span></code></pre>
 <p><code><a href="../reference/default_style_guide_attributes.html">default_style_guide_attributes()</a></code> is called to initialize
 some variables, it does not actually transform the parse table.</p>
 <p>All the function <code>remove_space_after_opening_paren()</code> now
@@ -273,10 +273,10 @@ If we apply the rule to our parse table, we can see that the column
 <code class="sourceCode R"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">remove_space_after_opening_paren</span><span class="op">(</span><span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">token</span>, <span class="va">terminal</span>, <span class="va">text</span>, <span class="va">newlines</span>, <span class="va">spaces</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   token terminal text newlines spaces</span></span>
-<span><span class="co">## 2  expr    FALSE call        0      0</span></span>
-<span><span class="co">## 4   '('     TRUE    (        0      0</span></span>
+<span><span class="co">## 1  expr    FALSE call        0      0</span></span>
+<span><span class="co">## 2   '('     TRUE    (        0      0</span></span>
 <span><span class="co">## 3  expr    FALSE    3        0      0</span></span>
-<span><span class="co">## 7   ')'     TRUE    )        0      0</span></span></code></pre>
+<span><span class="co">## 4   ')'     TRUE    )        0      0</span></span></code></pre>
 <p>All top-level styling functions have a <code>style</code> argument
 (which defaults to <code>tidyverse_style</code>). If you check out the
 help file, you can see that the argument <code>style</code> is only used
@@ -379,7 +379,7 @@ transformers: <code><a href="../reference/apply_transformers.html">apply_transfo
 <span><span class="co">##         outer_indention_refs = NA)</span></span>
 <span><span class="co">##     transformed_absolute_indent</span></span>
 <span><span class="co">## }</span></span>
-<span><span class="co">## &lt;bytecode: 0x563442ef18d0&gt;</span></span>
+<span><span class="co">## &lt;bytecode: 0x55ab8310fd08&gt;</span></span>
 <span><span class="co">## &lt;environment: namespace:styler&gt;</span></span></code></pre>
 <p>This means that the order of the styling is clearly defined and it is
 for example not possible to modify line breaks based on spacing, because
@@ -456,18 +456,18 @@ Since line break rules manipulate the lags <em>before</em> the token, we
 need to change <code>lag_newlines</code> at the token “‘{’”.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pd</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">child</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">##    id pos_id line1 col1 line2 col2 parent token terminal  text short</span></span>
-<span><span class="co">## 11  9     11     1   24     1   24     19   '{'     TRUE     {     {</span></span>
-<span><span class="co">## 4  16     12     1   26     1   30     19  expr    FALSE x + 1 x + 1</span></span>
-<span><span class="co">## 18 15     18     1   32     1   32     19   '}'     TRUE     }     }</span></span>
-<span><span class="co">##    token_before token_after stylerignore block is_cached internal</span></span>
-<span><span class="co">## 11          ')'      SYMBOL        FALSE    NA     FALSE    FALSE</span></span>
-<span><span class="co">## 4          &lt;NA&gt;        &lt;NA&gt;        FALSE    NA     FALSE    FALSE</span></span>
-<span><span class="co">## 18    NUM_CONST                    FALSE    NA     FALSE    FALSE</span></span>
-<span><span class="co">##                                                                                                                                                                                                                                                                                                                                                                                                                     child</span></span>
-<span><span class="co">## 11                                                                                                                                                                                                                                                                                                                                                                                                                   NULL</span></span>
-<span><span class="co">## 4  12, 11, 14, 14, 15, 17, 1, 1, 1, 26, 28, 30, 1, 1, 1, 26, 28, 30, 16, 16, 16, expr, '+', expr, FALSE, TRUE, FALSE, x, +, 1, x, +, 1, NA, SYMBOL, NA, NA, NUM_CONST, NA, FALSE, FALSE, FALSE, NA, NA, NA, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 13, 10, 1, 26, 1, 26, 12, SYMBOL, TRUE, x, x, '{', '+', FALSE, NA, FALSE, FALSE, 16, 13, 1, 30, 1, 30, 14, NUM_CONST, TRUE, 1, 1, '+', '}', FALSE, NA, FALSE, FALSE</span></span>
-<span><span class="co">## 18                                                                                                                                                                                                                                                                                                                                                                                                                   NULL</span></span></code></pre>
+<pre><code><span><span class="co">##   id pos_id line1 col1 line2 col2 parent token terminal  text short</span></span>
+<span><span class="co">## 1  9     11     1   24     1   24     19   '{'     TRUE     {     {</span></span>
+<span><span class="co">## 2 16     12     1   26     1   30     19  expr    FALSE x + 1 x + 1</span></span>
+<span><span class="co">## 3 15     18     1   32     1   32     19   '}'     TRUE     }     }</span></span>
+<span><span class="co">##   token_before token_after stylerignore block is_cached internal</span></span>
+<span><span class="co">## 1          ')'      SYMBOL        FALSE    NA     FALSE    FALSE</span></span>
+<span><span class="co">## 2         &lt;NA&gt;        &lt;NA&gt;        FALSE    NA     FALSE    FALSE</span></span>
+<span><span class="co">## 3    NUM_CONST                    FALSE    NA     FALSE    FALSE</span></span>
+<span><span class="co">##                                                                                                                                                                                                                                                                                                                                                                                                                    child</span></span>
+<span><span class="co">## 1                                                                                                                                                                                                                                                                                                                                                                                                                   NULL</span></span>
+<span><span class="co">## 2 12, 11, 14, 14, 15, 17, 1, 1, 1, 26, 28, 30, 1, 1, 1, 26, 28, 30, 16, 16, 16, expr, '+', expr, FALSE, TRUE, FALSE, x, +, 1, x, +, 1, NA, SYMBOL, NA, NA, NUM_CONST, NA, FALSE, FALSE, FALSE, NA, NA, NA, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 13, 10, 1, 26, 1, 26, 12, SYMBOL, TRUE, x, x, '{', '+', FALSE, NA, FALSE, FALSE, 16, 13, 1, 30, 1, 30, 14, NUM_CONST, TRUE, 1, 1, '+', '}', FALSE, NA, FALSE, FALSE</span></span>
+<span><span class="co">## 3                                                                                                                                                                                                                                                                                                                                                                                                                   NULL</span></span></code></pre>
 <p>Remember what we said above: A transformer takes a flat parse table
 as input, updates it and returns it. So here it’s actually simple:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
@@ -517,7 +517,7 @@ bracket that comes after a curly brace looks as follows:</p>
 <span><span class="co">##     pd$lag_newlines[round_after_curly] &lt;- 0L</span></span>
 <span><span class="co">##     pd</span></span>
 <span><span class="co">## }</span></span>
-<span><span class="co">## &lt;bytecode: 0x563442e33888&gt;</span></span>
+<span><span class="co">## &lt;bytecode: 0x55ab83743a18&gt;</span></span>
 <span><span class="co">## &lt;environment: namespace:styler&gt;</span></span></code></pre>
 <p>With our example function
 <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to
