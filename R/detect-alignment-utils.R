@@ -15,7 +15,7 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
     pd_by_line[-length(pd_by_line)]
   } else {
     # only drop last elment of last line
-    pd_by_line[[length(pd_by_line)]] <- last[seq2(1L, nrow(last) - 1L), ]
+    pd_by_line[[length(pd_by_line)]] <- vec_slice(last, seq2(1L, nrow(last) - 1L))
     pd_by_line
   }
 }
@@ -29,7 +29,7 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
 #' @keywords internal
 alignment_drop_comments <- function(pd_by_line) {
   map(pd_by_line, function(x) {
-    out <- x[x$token != "COMMENT", ]
+    out <- vec_slice(x, x$token != "COMMENT")
     if (nrow(out) < 1L) {
       return(NULL)
     } else {
@@ -62,7 +62,7 @@ alignment_drop_last_expr <- function(pds_by_line) {
   pd_last_line <- pds_by_line[[length(pds_by_line)]]
   last_two_lines <- pd_last_line$token[c(nrow(pd_last_line) - 1L, nrow(pd_last_line))]
   if (identical(last_two_lines, c("')'", "expr"))) {
-    pd_last_line <- pd_last_line[-nrow(pd_last_line), ]
+    pd_last_line <- vec_slice(pd_last_line, -nrow(pd_last_line))
   }
   pds_by_line[[length(pds_by_line)]] <- pd_last_line
   pds_by_line
@@ -141,7 +141,7 @@ alignment_serialize_line <- function(relevant_pd_by_line, column) {
     return(NULL)
   }
   between_commas <- seq2(max(1L, comma_idx[column - 1L]), comma_idx[column])
-  relevant_pd_by_line <- relevant_pd_by_line[between_commas, ]
+  relevant_pd_by_line <- vec_slice(relevant_pd_by_line, between_commas)
   alignment_serialize(relevant_pd_by_line)
 }
 

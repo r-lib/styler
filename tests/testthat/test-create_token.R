@@ -18,7 +18,7 @@ test_that("pos_id can be created", {
   pd <- create_tokens("XZY_TEST", "test", pos_ids = 3, stylerignore = FALSE, indents = 0)
   new_id <- create_pos_ids(pd, 1L, by = 0.4)
   expect_error(
-    bind_rows(
+    vec_rbind(
       create_tokens("XZY_TEST", "test",
         pos_ids = new_id,
         stylerignore = FALSE, indents = 0
@@ -36,7 +36,7 @@ test_that("unambiguous pos_id won't be created (down)", {
     stylerignore = FALSE, indents = 0
   )
   new_id <- create_pos_ids(pd, 1L, by = 0.4)
-  pd <- bind_rows(
+  pd <- vec_rbind(
     create_tokens("XZY_TEST", "test",
       pos_ids = new_id,
       stylerignore = FALSE, indents = 0
@@ -53,7 +53,7 @@ test_that("unambiguous pos_id won't be created (up)", {
   )
   new_id <- create_pos_ids(pd, 1L, by = 0.4, after = TRUE)
 
-  pd <- bind_rows(
+  pd <- vec_rbind(
     create_tokens("XZY_TEST", "test", pos_ids = new_id, stylerignore = FALSE, indents = 0),
     pd
   )

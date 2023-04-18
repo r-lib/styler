@@ -188,12 +188,19 @@ context_towards_terminals <- function(pd_nested,
 #' @param pd_nested A nested parse table.
 #' @keywords internal
 extract_terminals <- function(pd_nested) {
-  bind_rows(
-    ifelse(pd_nested$terminal | pd_nested$is_cached,
-      split(pd_nested, seq_len(nrow(pd_nested))),
-      pd_nested$child
-    )
-  )
+  terminal <- pd_nested$terminal
+  is_cached <- pd_nested$is_cached
+
+  child <- pd_nested$child
+
+  for (i in seq_len(nrow(pd_nested))) {
+    if (terminal[[i]] || is_cached[[i]]) {
+      child[[i]] <- list(vec_slice(pd_nested, i))
+    }
+  }
+
+  # child is a list of data frame lists here
+  unlist(unname(child), recursive = FALSE)
 }
 
 #' Enrich flattened parse table
@@ -224,8 +231,8 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
   flattened_pd$newlines <- lead(flattened_pd$lag_newlines, default = 0L)
   flattened_pd$nchar <- nchar(flattened_pd$text, type = "width")
   groups <- flattened_pd$line1
-  flattened_pd <- flattened_pd %>%
-    split(groups) %>%
+  split_pd <- vec_split(flattened_pd, groups)[[2L]]
+  flattened_pd <- split_pd %>%
     map_dfr(function(.x) {
       .x$col2 <- cumsum(.x$nchar + .x$lag_spaces)
       .x

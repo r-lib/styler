@@ -85,8 +85,8 @@ flatten_pd <- function(pd_nested, token, child_token = token, left = TRUE) {
 #' @keywords internal
 bind_with_child <- function(pd_nested, pos) {
   pd_nested %>%
-    slice(-pos) %>%
-    bind_rows(pd_nested$child[[pos]]) %>%
+    vec_slice(-pos) %>%
+    vec_rbind(pd_nested$child[[pos]]) %>%
     arrange_pos_id()
 }
 
@@ -178,8 +178,8 @@ relocate_eq_assign_nest <- function(pd) {
   idx_eq_assign <- which(pd$token == "EQ_ASSIGN")
   if (length(idx_eq_assign) > 0L) {
     block_id <- find_block_id(pd)
-    blocks <- split(pd, block_id)
-    pd <- map_dfr(blocks, relocate_eq_assign_one)
+    blocks <- vec_split(pd, block_id)
+    pd <- map_dfr(blocks[[2L]], relocate_eq_assign_one)
   }
   pd
 }
@@ -217,7 +217,7 @@ relocate_eq_assign_one <- function(pd) {
   eq_ind <- seq2(idx_eq_assign[1L] - 1L, last(idx_eq_assign) + 1L)
   # initialize because wrap_expr_in_expr -> create_tokens -> requires it
   pd$indent <- 0L
-  eq_expr <- pd[eq_ind, ] %>%
+  eq_expr <- vec_slice(pd, eq_ind) %>%
     wrap_expr_in_expr() %>%
     add_line_col_to_wrapped_expr() %>%
     remove_attributes(c(
@@ -227,8 +227,8 @@ relocate_eq_assign_one <- function(pd) {
   eq_expr$id <- NA
   eq_expr$parent <- NA
   pd$indent <- NULL
-  non_eq_expr <- pd[-eq_ind, ]
-  pd <- bind_rows(eq_expr, non_eq_expr) %>%
+  non_eq_expr <- vec_slice(pd, -eq_ind)
+  pd <- vec_rbind(eq_expr, non_eq_expr) %>%
     arrange_pos_id()
   pd
 }

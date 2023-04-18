@@ -96,8 +96,8 @@ set_regex_indention <- function(flattened_pd,
     if (length(cond) < 1L) {
       return(flattened_pd)
     }
-    to_check <- flattened_pd[cond, ]
-    not_to_check <- flattened_pd[-cond, ]
+    to_check <- vec_slice(flattened_pd, cond)
+    not_to_check <- vec_slice(flattened_pd, -cond)
   } else {
     to_check <- flattened_pd
     not_to_check <- NULL
@@ -108,6 +108,6 @@ set_regex_indention <- function(flattened_pd,
     flatten_int()
 
   to_check$lag_spaces[indices_to_force] <- target_indention
-  bind_rows(to_check, not_to_check) %>%
+  vec_rbind(to_check, not_to_check) %>%
     arrange_pos_id()
 }

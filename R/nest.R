@@ -99,12 +99,12 @@ add_cache_block <- function(pd_nested) {
 shallowify <- function(pd) {
   if (cache_is_activated()) {
     order <- order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal))
-    pd_parent_first <- pd[order, ]
-    pos_ids_to_keep <- pd_parent_first %>%
-      split(cumsum(pd_parent_first$parent == 0L)) %>%
+    pd_parent_first <- vec_slice(pd, order)
+    pd_parent_first_split <- vec_split(pd_parent_first, cumsum(pd_parent_first$parent == 0L))
+    pos_ids_to_keep <- pd_parent_first_split[[2L]] %>%
       map(find_pos_id_to_keep) %>%
       unlist(use.names = FALSE)
-    shallow <- pd[pd$pos_id %in% pos_ids_to_keep, ]
+    shallow <- vec_slice(pd, pd$pos_id %in% pos_ids_to_keep)
     shallow$terminal[shallow$is_cached] <- TRUE
     # all cached expressions need to be marked as terminals because to
     # [apply_stylerignore()], we rely on terminals only.
@@ -335,10 +335,9 @@ nest_parse_data <- function(pd_flat) {
       return(pd_flat)
     }
     pd_flat$internal <- with(pd_flat, (id %in% parent) | (parent <= 0L))
-    split_data <- split(pd_flat, pd_flat$internal)
 
-    child <- split_data$`FALSE`
-    internal <- split_data$`TRUE`
+    child <- vec_slice(pd_flat, !pd_flat$internal)
+    internal <- vec_slice(pd_flat, pd_flat$internal)
 
     internal$internal_child <- internal$child
     internal$child <- NULL
@@ -367,14 +366,14 @@ nest_parse_data <- function(pd_flat) {
 #' the correct order.
 #' @param child A parse table or `NULL`.
 #' @param internal_child A parse table or `NULL`.
-#' @details Essentially, this is a wrapper around [dplyr::bind_rows()], but
-#'   returns `NULL` if the result of [dplyr::bind_rows()] is a data frame with
+#' @details Essentially, this is a wrapper around vctrs::vec_rbind()], but
+#'   returns `NULL` if the result of vctrs::vec_rbind()] is a data frame with
 #'   zero rows.
 #' @keywords internal
 combine_children <- function(child, internal_child) {
-  bound <- bind_rows(child, internal_child)
+  bound <- vec_rbind(child, internal_child)
   if (nrow(bound) == 0L) {
     return(NULL)
   }
-  bound[order(bound$pos_id), ]
+  vec_slice(bound, order(bound$pos_id))
 }

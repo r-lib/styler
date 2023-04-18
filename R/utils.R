@@ -14,7 +14,7 @@ styler_df <- function(...) {
 #' @keywords internal
 #' @noRd
 new_styler_df <- function(x) {
-  vctrs::new_data_frame(x)
+  vctrs::data_frame(!!!x)
 }
 
 #' Ensure there is one (and only one) blank line at the end of a vector

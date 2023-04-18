@@ -137,7 +137,7 @@ ensure_correct_txt <- function(pd, text) {
   if (!any(is_problematic_text)) {
     return(pd)
   }
-  problematic_text <- pd[is_problematic_text, ]
+  problematic_text <- vec_slice(pd, is_problematic_text)
   is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
 
   is_unaffected_token <- !magrittr::or(
@@ -167,10 +167,10 @@ ensure_correct_txt <- function(pd, text) {
     names(new_text),
     paste0(line_col_names(), "parent")
   )
-  bind_rows(
+  vec_rbind(
     new_text[, names_to_keep],
-    pd[is_unaffected_token, ],
-    pd[is_parent_of_problematic_string, ]
+    vec_slice(pd, is_unaffected_token),
+    vec_slice(pd, is_parent_of_problematic_string)
   ) %>%
     arrange_pos_id()
 }
