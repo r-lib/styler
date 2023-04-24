@@ -55,9 +55,6 @@
     <loc>https://styler.r-lib.org/reference/add_id_and_short.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/add_line_col_to_wrapped_expr.html</loc>
-  </url>
-  <url>
     <loc>https://styler.r-lib.org/reference/add_roxygen_mask.html</loc>
   </url>
   <url>
@@ -274,9 +271,6 @@
     <loc>https://styler.r-lib.org/reference/find_blank_lines_to_next_expr.html</loc>
   </url>
   <url>
-    <loc>https://styler.r-lib.org/reference/find_block_id.html</loc>
-  </url>
-  <url>
     <loc>https://styler.r-lib.org/reference/find_dont_seqs.html</loc>
   </url>
   <url>
@@ -449,15 +443,6 @@
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/reindention.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/reference/relocate_eq_assign.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/reference/relocate_eq_assign_nest.html</loc>
-  </url>
-  <url>
-    <loc>https://styler.r-lib.org/reference/relocate_eq_assign_one.html</loc>
   </url>
   <url>
     <loc>https://styler.r-lib.org/reference/remove_dont_mask.html</loc>
