@@ -40,7 +40,7 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
 #' @inheritParams tidyverse_style
 #' @keywords internal
 is_double_indent_function_declaration <- function(pd, indent_by = 2L) {
-  head_pd <- pd[-nrow(pd), ]
+  head_pd <- vec_slice(pd, -nrow(pd))
   line_break_in_header <- which(head_pd$lag_newlines > 0L & head_pd$token == "SYMBOL_FORMALS")
   if (length(line_break_in_header) > 0L) {
     # indent results from applying the rules, spaces is the initial spaces

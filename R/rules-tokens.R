@@ -12,7 +12,7 @@ resolve_semicolon <- function(pd) {
     return(pd)
   }
   pd$lag_newlines[lag(is_semicolon)] <- 1L
-  pd <- pd[!is_semicolon, ]
+  pd <- vec_slice(pd, !is_semicolon)
   pd
 }
 
@@ -51,10 +51,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
       block = NA,
       is_cached = FALSE
     )
-    pd$child[[next_non_comment]] <- bind_rows(
-      pd$child[[next_non_comment]],
-      new_pd
-    ) %>%
+    pd$child[[next_non_comment]] <- vec_rbind(pd$child[[next_non_comment]], new_pd) %>%
       arrange_pos_id()
   }
   pd
@@ -102,7 +99,7 @@ wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
   to_be_wrapped_expr_with_child <- next_non_comment(
     pd, which(pd$token == key_token)[1L]
   )
-  next_terminal <- next_terminal(pd[to_be_wrapped_expr_with_child, ])$text
+  next_terminal <- next_terminal(vec_slice(pd, to_be_wrapped_expr_with_child))$text
   requires_braces <- if_for_while_part_requires_braces(pd, key_token) && !any(pd$stylerignore)
   if (requires_braces || next_terminal == "return") {
     closing_brace_ind <- which(pd$token == key_token)[1L]
@@ -159,7 +156,7 @@ wrap_subexpr_in_curly <- function(pd,
   to_be_wrapped_starts_with_comment <-
     pd$token[ind_to_be_wrapped[1L]] == "COMMENT"
   new_expr <- wrap_expr_in_curly(
-    pd[ind_to_be_wrapped, ],
+    vec_slice(pd, ind_to_be_wrapped),
     stretch_out = c(!to_be_wrapped_starts_with_comment, TRUE),
     space_after = space_after
   )
@@ -169,8 +166,8 @@ wrap_subexpr_in_curly <- function(pd,
     remove_attributes(c("token_before", "token_after"))
 
   pd %>%
-    slice(-ind_to_be_wrapped) %>%
-    bind_rows(new_expr_in_expr) %>%
+    vec_slice(-ind_to_be_wrapped) %>%
+    vec_rbind(new_expr_in_expr) %>%
     set_multi_line() %>%
     arrange_pos_id()
 }
@@ -204,7 +201,7 @@ fix_quotes <- function(pd_flat) {
     return(pd_flat)
   }
 
-  pd_flat$text[str_const] <- map(pd_flat$text[str_const], fix_quotes_one)
+  pd_flat$text[str_const] <- map_chr(pd_flat$text[str_const], fix_quotes_one)
   pd_flat
 }
 

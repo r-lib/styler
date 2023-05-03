@@ -46,7 +46,12 @@ token_is_on_aligned_line <- function(pd_flat) {
   # pos_id too expensive to construct in alignment_ensure_trailing_comma()
   pd_flat$lag_newlines <- pd_flat$pos_id <- NULL
   pd_flat$.lag_spaces <- lag(pd_flat$spaces)
-  pd_by_line <- split(pd_flat, line_idx)
+  pd_by_line_split <- vec_split(pd_flat, line_idx)
+
+  # FIXME: Why are we using names here?
+  pd_by_line <- pd_by_line_split[[2L]]
+  names(pd_by_line) <- as.character(pd_by_line_split[[1L]])
+
   pd_by_line[purrr::map_lgl(pd_by_line, ~ any(.x$stylerignore))] <- NULL
   if (length(pd_by_line) < 1L) {
     return(TRUE)
