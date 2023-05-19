@@ -24,7 +24,8 @@
 }
 
 delete_temp_directory_if_empty <- function(path) {
-  if (grepl(tools::R_user_dir("R.cache", which = "cache"), path, fixed = TRUE)) {
+  designated_cache_path <- tools::R_user_dir("R.cache", which = "cache")
+  if (grepl(designated_cache_path, path, fixed = TRUE)) {
     all_files <- list.files(path,
       full.names = TRUE,
       recursive = TRUE,
@@ -37,8 +38,8 @@ delete_temp_directory_if_empty <- function(path) {
     return(FALSE)
   } else {
     rlang::abort(c(
-      "Can only delete absolute paths under `tools::R_user_dir('R.cache'), ",
-      "not ", path
+      "Can only delete absolute paths under `tools::R_user_dir('R.cache') (",
+      designated_cache_path, ") not ", path
     ))
   }
 }
@@ -71,8 +72,11 @@ remove_old_cache_files <- function() {
   )
   path_styler_specific <- dirname(path_version_specific)
   path_r_cache_specific <- dirname(path_styler_specific)
+  paths <- normalizePath(
+    c(path_version_specific, path_styler_specific, path_r_cache_specific)
+  )
   purrr::walk(
-    c(path_version_specific, path_styler_specific, path_r_cache_specific),
+    paths,
     delete_temp_directory_if_empty
   )
 }
