@@ -24,8 +24,12 @@
 }
 
 delete_temp_directory_if_empty <- function(path) {
-  designated_cache_path <- tools::R_user_dir("R.cache", which = "cache")
-  if (grepl(designated_cache_path, path, fixed = TRUE)) {
+  designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"))
+  match_cache_dir <- grepl(
+    paste0("start", designated_cache_path), paste0("start", path),
+    fixed = TRUE
+  )
+  if (match_cache_dir || grepl("^(/var/|/tmp/|/private/)", path)) {
     all_files <- list.files(path,
       full.names = TRUE,
       recursive = TRUE,
