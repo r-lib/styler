@@ -14,3 +14,16 @@ test_that("clear Cache", {
     length(list.dirs(R.cache::getCachePath("styler"))) == 1L
   )
 })
+
+
+test_that("can delete empty directory", {
+  tmpdir <- withr::local_tempdir()
+  withr::local_dir(tmpdir)
+  dir.create("xxx")
+  expect_true(delete_temp_directory_if_empty("xxx"))
+  dir.create("xxx")
+  file.create("xxx/yyy")
+  list.files("xxx")
+  expect_false(delete_temp_directory_if_empty("xxx"))
+  expect_true(file.exists(tmpdir))
+})

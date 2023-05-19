@@ -23,6 +23,25 @@
   invisible()
 }
 
+delete_temp_directory_if_empty <- function(path) {
+  if (grepl(tools::R_user_dir("R.cache", which = "cache"), path, fixed = TRUE)) {
+    all_files <- list.files(path,
+      full.names = TRUE,
+      recursive = TRUE,
+      all.files = FALSE
+    )
+    if (length(all_files) < 1L) {
+      unlink(path, recursive = TRUE)
+      return(TRUE)
+    }
+    return(FALSE)
+  } else {
+    rlang::abort(
+      "Can only delete absolute paths under `tools::R_user_dir('R.cache')"
+    )
+  }
+}
+
 
 ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
   if (ask && stats::runif(1L) > 0.9 && is.null(getOption("styler.cache_root"))) {
@@ -40,13 +59,20 @@ ask_to_switch_to_non_default_cache_root_impl <- function() {
 }
 
 remove_old_cache_files <- function() {
+  path_version_specific <- R.cache::getCachePath(c("styler", styler_version))
   all_cached <- list.files(
-    R.cache::getCachePath(c("styler", styler_version)),
+    path_version_specific,
     full.names = TRUE, recursive = TRUE
   )
   date_boundary <- Sys.time() - 60L * 60L * 24L * 6L
   file.remove(
     all_cached[file.info(all_cached)$mtime < date_boundary]
+  )
+  path_styler_specific <- dirname(path_version_specific)
+  path_r_cache_specific <- dirname(path_styler_specific)
+  purrr::walk(
+    c(path_version_specific, path_styler_specific, path_r_cache_specific),
+    delete_temp_directory_if_empty
   )
 }
 
