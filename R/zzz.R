@@ -36,9 +36,10 @@ delete_temp_directory_if_empty <- function(path) {
     }
     return(FALSE)
   } else {
-    rlang::abort(
-      "Can only delete absolute paths under `tools::R_user_dir('R.cache')"
-    )
+    rlang::abort(c(
+      "Can only delete absolute paths under `tools::R_user_dir('R.cache'), ",
+      "not ", path
+    ))
   }
 }
 
