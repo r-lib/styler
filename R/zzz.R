@@ -24,6 +24,9 @@
 }
 
 delete_temp_directory_if_empty <- function(path) {
+  if (getRversion() < package_version("4.0.0")) {
+    return(FALSE)
+  }
   designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"))
   match_cache_dir <- grepl(
     paste0("start", designated_cache_path), paste0("start", path),
@@ -40,11 +43,6 @@ delete_temp_directory_if_empty <- function(path) {
       return(TRUE)
     }
     return(FALSE)
-  } else {
-    rlang::abort(c(
-      "Can only delete absolute paths under `tools::R_user_dir('R.cache') (",
-      designated_cache_path, ") not ", path
-    ))
   }
 }
 
