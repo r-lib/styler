@@ -24,6 +24,8 @@
 }
 
 delete_temp_directory_if_empty <- function(path) {
+  rlang::warn("here are all the env variables:")
+  print(Sys.getenv())
   if (getRversion() < package_version("4.0.0")) {
     return(FALSE)
   }
@@ -43,6 +45,11 @@ delete_temp_directory_if_empty <- function(path) {
       return(TRUE)
     }
     return(FALSE)
+  } else {
+    rlang::abort(c(
+      "Can only delete absolute paths under `tools::R_user_dir('R.cache') (",
+      designated_cache_path, ") not ", path
+    ))
   }
 }
 
