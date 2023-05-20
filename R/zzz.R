@@ -24,17 +24,16 @@
 }
 
 delete_temp_directory_if_empty <- function(path) {
-  rlang::warn("here are all the env variables:")
-  print(Sys.getenv())
+  path <- normalizePath(path)
   if (getRversion() < package_version("4.0.0")) {
     return(FALSE)
   }
+
   designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"))
-  match_cache_dir <- grepl(
-    paste0("start", designated_cache_path), paste0("start", path),
-    fixed = TRUE
-  )
-  if (match_cache_dir || grepl("^(/var/|/tmp/|/private/)", path)) {
+  is_in_tools_cache <- startsWith(path, designated_cache_path)
+  temp_dir <- normalizePath(Sys.getenv("TMPDIR", Sys.getenv("TMP")))
+  is_in_generic_cache <- startsWith(path, temp_dir)
+  if (is_in_tools_cache || is_in_generic_cache) {
     all_files <- list.files(path,
       full.names = TRUE,
       recursive = TRUE,
