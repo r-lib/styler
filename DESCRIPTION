@@ -1,7 +1,7 @@
 Type: Package
 Package: styler
 Title: Non-Invasive Pretty Printing of R Code
-Version: 1.9.1
+Version: 1.10.0
 Authors@R: 
     c(person(given = "Kirill",
              family = "Müller",
