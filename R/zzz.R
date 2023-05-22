@@ -23,12 +23,19 @@
   invisible()
 }
 
-delete_temp_directory_if_empty <- function(path) {
+#' Delete a cache or temp directory
+#'
+#' For safety, `path` is only deleted if it is a sub-directory of a temporary
+#' directory or user cache. Since this function relies on `tools::R_user_dir()`,
+#' it early returns `FALSE` on `R < 4.0.0`.
+#' @param path Absolute path to a directory to delete.
+#' @returns `TRUE` if anything was deleted, `FALSE` otherwise.
+#' @keywords internal
+delete_if_cache_directory <- function(path) {
   path <- normalizePath(path)
   if (getRversion() < package_version("4.0.0")) {
     return(FALSE)
   }
-
   designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"))
   is_in_tools_cache <- startsWith(path, designated_cache_path)
   temp_dir <- normalizePath(Sys.getenv("TMPDIR", Sys.getenv("TMP")))
@@ -43,13 +50,8 @@ delete_temp_directory_if_empty <- function(path) {
       unlink(path, recursive = TRUE)
       return(TRUE)
     }
-    return(FALSE)
-  } else {
-    rlang::abort(c(
-      "Can only delete absolute paths under `tools::R_user_dir('R.cache') (",
-      designated_cache_path, ") not ", path
-    ))
   }
+  FALSE
 }
 
 
@@ -85,7 +87,7 @@ remove_old_cache_files <- function() {
   )
   purrr::walk(
     paths,
-    delete_temp_directory_if_empty
+    delete_if_cache_directory
   )
 }
 
