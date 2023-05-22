@@ -7,6 +7,7 @@
 ^README-.*\.png$
 ^README\.Rmd$
 ^\.Rproj\.user$
+^\.dev$
 ^\.github$
 ^\.gitsum$
 ^\.lintr$
