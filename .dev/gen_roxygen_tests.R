@@ -7,6 +7,8 @@ unique_tests <- unique(sub("-.*", "", all_examples))
 # tests using 'scope = "spaces"' in test_collection()
 tests_scope_spaces <- "15"
 
+warning_map <- c(`23` = '"issues/1242"')
+
 for (test in unique_tests) {
   out_file <- file.path("tests", "testthat", paste0("test-", roxygen_stub, "-", test, ".R"))
   extras <- if (test %in% tests_scope_spaces) ', scope = "spaces"' else ""
@@ -15,8 +17,8 @@ for (test in unique_tests) {
     "",
     sprintf('test_that("analogous to test-%s: %s", {', roxygen_stub, test),
     sprintf(
-      '  expect_warning(test_collection("%s", "^%s-", transformer = style_text%s), NA)',
-      roxygen_stub, test, extras
+      '  expect_warning(test_collection("%s", "^%s-", transformer = style_text%s), %s)',
+      roxygen_stub, test, extras, warning_map[test]
     ),
     "})",
     NULL
