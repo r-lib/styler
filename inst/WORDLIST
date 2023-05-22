@@ -232,6 +232,7 @@ setCacheRootPath
 setdiff
 setenv
 Shallowify
+sharding
 shinydashboardPlus
 shinymeta
 shinyMonacoEditor

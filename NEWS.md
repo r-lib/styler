@@ -1,4 +1,25 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+# styler 1.10.0
+
+**Infrastructure**
+
+- Bump `actions/checkout` to version 3 in GitHub Actions (#1098).
+- Bump {touchstone} config (#1104, #1107).
+- split `test-public_api.R` for better sharding (#1109).
+- 0-pad filenames for sharding (#1110)
+- add missing {testthat} snapshots (#1115).
+
+**Other changes**
+
+- Remove tail recursion in favor of `repeat` (#1113).
+- Prefer {vctrs} functions over slower {base} equivalents (#1114).
+- Replace deprecated use of `rlang::with_handlers()` (#1103).
+- Require at least R 3.6 (#1101).
+
+
+Thanks for everyone contributing to this release: 
+
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;kyleam](https://github.com/kyleam), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;mvanaman](https://github.com/mvanaman), [&#x0040;olivroy](https://github.com/olivroy), and [&#x0040;vvarik](https://github.com/vvarik).
 
 # styler 1.9.1
 
