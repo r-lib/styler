@@ -18,7 +18,7 @@ the correct order."><meta name="robots" content="noindex"><!-- mathjax --><scrip
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.9.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.10.0.9000</span>
       </span>
     </div>
 
@@ -129,8 +129,8 @@ the correct order.</p>
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>Essentially, this is a wrapper around <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">dplyr::bind_rows()</a></code>, but
-returns <code>NULL</code> if the result of <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">dplyr::bind_rows()</a></code> is a data frame with
+    <p>Essentially, this is a wrapper around vctrs::vec_rbind()], but
+returns <code>NULL</code> if the result of vctrs::vec_rbind()] is a data frame with
 zero rows.</p>
     </div>
 
