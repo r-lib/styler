@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
       </span>
     </div>
 
@@ -106,6 +106,22 @@
       <small>Source: <a href="https://github.com/r-lib/styler/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.10.0" id="styler-1100">styler 1.10.0<small>2023-05-24</small><a class="anchor" aria-label="anchor" href="#styler-1100"></a></h2>
+<p>This release contains speed-ups between 20% and 40% depending on your use case thanks to replacing {base} functionality with {vctrs} (<a href="https://github.com/r-lib/styler/issues/1114" class="external-link">#1114</a>). With the speed boost introduced in version 1.8.0 in Oct. 2022, {styler} is now up to 2x as fast as before release 1.8.0.</p>
+<p>This release was created upon a request by the CRAN team to actively manage not just cached files but also the potentially empty cache directories they live in (<a href="https://github.com/r-lib/styler/issues/1118" class="external-link">#1118</a>). Here are the changes in detail:</p>
+<ul><li>Require at least R 3.6 (<a href="https://github.com/r-lib/styler/issues/1101" class="external-link">#1101</a>).</li>
+<li>Prefer {vctrs} functions over slower {base} equivalents (<a href="https://github.com/r-lib/styler/issues/1114" class="external-link">#1114</a>).</li>
+<li>Replace deprecated use of <code><a href="https://rlang.r-lib.org/reference/with_handlers.html" class="external-link">rlang::with_handlers()</a></code> (<a href="https://github.com/r-lib/styler/issues/1103" class="external-link">#1103</a>).</li>
+<li>Remove tail recursion in favor of <code>repeat</code> (<a href="https://github.com/r-lib/styler/issues/1113" class="external-link">#1113</a>).</li>
+<li>split <code>test-public_api.R</code> for better sharding (<a href="https://github.com/r-lib/styler/issues/1109" class="external-link">#1109</a>).</li>
+<li>0-pad filenames for sharding (<a href="https://github.com/r-lib/styler/issues/1110" class="external-link">#1110</a>)</li>
+<li>add missing {testthat} snapshots (<a href="https://github.com/r-lib/styler/issues/1115" class="external-link">#1115</a>).</li>
+<li>Bump {touchstone} config (<a href="https://github.com/r-lib/styler/issues/1104" class="external-link">#1104</a>, <a href="https://github.com/r-lib/styler/issues/1107" class="external-link">#1107</a>).</li>
+<li>Bump <code>actions/checkout</code> to version 3 in GitHub Actions (<a href="https://github.com/r-lib/styler/issues/1098" class="external-link">#1098</a>).</li>
+</ul><p>Thanks for everyone contributing to this release:</p>
+<p><a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/kyleam" class="external-link">@kyleam</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/mvanaman" class="external-link">@mvanaman</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>, and <a href="https://github.com/vvarik" class="external-link">@vvarik</a>.</p>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.9.1" id="styler-191">styler 1.9.1<small>2023-03-04</small><a class="anchor" aria-label="anchor" href="#styler-191"></a></h2>
 <p><strong>Bug fixes</strong></p>
