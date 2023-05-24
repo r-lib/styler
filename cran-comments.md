@@ -39,4 +39,5 @@ compliant with the requirements of CRAN.
 I also ran R CMD check on all 39 downstream dependencies of styler using the
 revdepcheck package.
 
-All of them finished R CMD CHECK with zero (0) ERRORS, WARNINGS and NOTES.
+All of them finished R CMD CHECK with the same number of ERRORS, WARNINGS and 
+NOTES.
