@@ -188,10 +188,17 @@ into <code>&lt;-</code> for assignment. That means you want</p>
 <pre><code><span><span class="va">string</span> <span class="op">=</span> <span class="st">"hi there"</span> </span></code></pre>
 <p>to remain unchanged after applying styler. This is not the case if
 you use the default style guide of styler:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"string = 'hi there'"</span><span class="op">)</span></span>
-<span><span class="va">string</span> <span class="op">&lt;-</span> <span class="st">"hi there"</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(styler)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Warning <span class="cf">in</span> <span class="fu">normalizePath</span>(<span class="fu">Sys.getenv</span>(<span class="st">"TMPDIR"</span>, <span class="fu">Sys.getenv</span>(<span class="st">"TMP"</span>)))<span class="sc">:</span> path[<span class="dv">1</span>]<span class="ot">=</span><span class="st">""</span><span class="sc">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>No such file or directory</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Warning <span class="cf">in</span> <span class="fu">normalizePath</span>(<span class="fu">Sys.getenv</span>(<span class="st">"TMPDIR"</span>, <span class="fu">Sys.getenv</span>(<span class="st">"TMP"</span>)))<span class="sc">:</span> path[<span class="dv">1</span>]<span class="ot">=</span><span class="st">""</span><span class="sc">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>No such file or directory</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Warning <span class="cf">in</span> <span class="fu">normalizePath</span>(<span class="fu">Sys.getenv</span>(<span class="st">"TMPDIR"</span>, <span class="fu">Sys.getenv</span>(<span class="st">"TMP"</span>)))<span class="sc">:</span> path[<span class="dv">1</span>]<span class="ot">=</span><span class="st">""</span><span class="sc">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>No such file or directory</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">style_text</span>(<span class="st">"string = 'hi there'"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">"hi there"</span></span></code></pre></div>
 <p>So you need to figure out which rule is responsible for this. Let’s
 check the transformer categories used with the tidyverse style
 guide.</p>
@@ -271,7 +278,7 @@ declaration of this (unexported) function.</p>
 <span><span class="co">#&gt;     pd$text[to_replace] &lt;- "&lt;-"</span></span>
 <span><span class="co">#&gt;     pd</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55a5d8354630&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x55deacc5b008&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>Next, you simply set that element to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
