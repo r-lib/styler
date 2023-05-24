@@ -1,4 +1,29 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+# styler 1.10.0
+
+This release contains speed-ups between 20% and 40% depending on your use case
+thanks to replacing {base} functionality with {vctrs} (#1114). With the speed
+boost introduced in version 1.8.0 in Oct. 2022, {styler} is now up to 2x as fast
+as before release 1.8.0.
+
+This release was created upon a request by the CRAN team to actively manage not
+just cached files but also the potentially empty cache directories they live in
+(#1118). Here are the changes in detail:
+
+
+- Require at least R 3.6 (#1101).
+- Prefer {vctrs} functions over slower {base} equivalents (#1114).
+- Replace deprecated use of `rlang::with_handlers()` (#1103).
+- Remove tail recursion in favor of `repeat` (#1113).
+- split `test-public_api.R` for better sharding (#1109).
+- 0-pad filenames for sharding (#1110)
+- add missing {testthat} snapshots (#1115).
+- Bump {touchstone} config (#1104, #1107).
+- Bump `actions/checkout` to version 3 in GitHub Actions (#1098).
+
+Thanks for everyone contributing to this release: 
+
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;kyleam](https://github.com/kyleam), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;mvanaman](https://github.com/mvanaman), [&#x0040;olivroy](https://github.com/olivroy), and [&#x0040;vvarik](https://github.com/vvarik).
 
 # styler 1.9.1
 

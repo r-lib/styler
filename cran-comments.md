@@ -4,14 +4,16 @@ editor_options:
     wrap: 79
 ---
 
-This is a release to fix critical bugs and release a new feature.
+This is a release requested by the CRAN team to delete empty directories in the
+user's cache.
 
 
 ## Test environments
 
--   ubuntu 20.04 (on GitHub Actions): R devel, R 4.2.1, 4.1.2, R 4.0.5, R 3.6,
-    R 3.5.
--   Windows Server 10 (on GitHub Actions): R devel, R 4.2.1, R 4.1.2, R 3.6.
+-   ubuntu 20.04 (on GitHub Actions): R devel, R 4.3.0, R 4.2.1, 4.1.2, R 4.0.5, 
+    R 3.6
+-   Windows Server 10 (on GitHub Actions): R devel, R 4.3.0, R 4.2.1, R 4.1.2, 
+    R 3.6.
 -   win-builder: R devel
 
 ## R CMD check results
@@ -37,4 +39,5 @@ compliant with the requirements of CRAN.
 I also ran R CMD check on all 39 downstream dependencies of styler using the
 revdepcheck package.
 
-All of them finished R CMD CHECK with zero (0) ERRORS, WARNINGS and NOTES.
+All of them finished R CMD CHECK with the same number of ERRORS, WARNINGS and 
+NOTES.
