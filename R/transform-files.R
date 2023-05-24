@@ -418,19 +418,16 @@ verify_roundtrip <- function(old_text, new_text, parsable_only = FALSE) {
       error = function(e) {
         rlang::abort(paste0(
           "Styling resulted in code that isn't parsable. This should not ",
-          "happen. Please file a bug report on GitHub ",
-          "(https://github.com/r-lib/styler/issues) using a reprex."
-        ))
+          "happen."
+        ), .internal = TRUE)
       }
     )
   } else if (!expressions_are_identical(old_text, new_text)) {
     msg <- paste(
       "The expression evaluated before the styling is not the same as the",
-      "expression after styling. This should not happen. Please file a",
-      "bug report on GitHub (https://github.com/r-lib/styler/issues)",
-      "using a reprex."
+      "expression after styling. This should not happen."
     )
-    abort(msg)
+    abort(msg, .internal = TRUE)
   }
 }
 

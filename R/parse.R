@@ -158,9 +158,8 @@ ensure_correct_txt <- function(pd, text) {
 
   if (!lines_and_cols_match(new_text)) {
     abort(paste(
-      "Error in styler:::ensure_correct_txt().",
-      "Please file an issue on GitHub (https://github.com/r-lib/styler/issues)"
-    ))
+      "Error in styler:::ensure_correct_txt()."
+    ), .internal = TRUE)
   }
   names_to_keep <- setdiff(
     names(new_text),
