@@ -76,7 +76,7 @@ remove_old_cache_files <- function() {
     path_version_specific,
     full.names = TRUE, recursive = TRUE
   )
-  date_boundary <- Sys.time() - as.difftime(6, unit = "days")
+  date_boundary <- Sys.time() - as.difftime(6L, unit = "days")
   file.remove(
     all_cached[file.info(all_cached)$mtime < date_boundary]
   )
