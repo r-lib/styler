@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+styler::cache_deactivate()
 ```
 
 ```{r, echo = FALSE, include = FALSE}
@@ -60,7 +61,9 @@ Here are the steps required to deactivate a rule you don't like
 Lets assume you want to remove the rule that turns `=` into `<-` for
 assignment. That means you want
 
-    string = "hi there" 
+```         
+string = "hi there" 
+```
 
 to remain unchanged after applying styler. This is not the case if you use the
 default style guide of styler:
