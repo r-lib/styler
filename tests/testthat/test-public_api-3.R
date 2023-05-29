@@ -159,6 +159,7 @@ test_that("Can display warning on unset styler cache", {
 })
 
 test_that("No sensitive to decimal option", {
+  skip_if_not_installed("prettycode")
   withr::local_options(OutDec = ",")
   expect_snapshot({
     style_text("1")
