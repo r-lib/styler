@@ -4,8 +4,8 @@ editor_options:
     wrap: 79
 ---
 
-This is a release requested by the CRAN team to delete empty directories in the
-user's cache.
+This is a release requested by the CRAN team to delete the population of the 
+user's cache while building vignettes.
 
 
 ## Test environments
