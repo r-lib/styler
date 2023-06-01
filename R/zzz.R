@@ -38,7 +38,7 @@ delete_if_cache_directory <- function(path) {
   }
   designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"))
   is_in_tools_cache <- startsWith(path, designated_cache_path)
-  temp_dir <- normalizePath(Sys.getenv("TMPDIR", Sys.getenv("TMP")))
+  temp_dir <- normalizePath(dirname(tempdir()))
   is_in_generic_cache <- startsWith(path, temp_dir)
   if (is_in_tools_cache || is_in_generic_cache) {
     all_files <- list.files(path,
