@@ -64,9 +64,9 @@ ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
 
 
 ask_to_switch_to_non_default_cache_root_impl <- function() {
-  rlang::inform(paste0(
+  cli::cli_inform(paste0(
     "{styler} cache is cleared after 6 days. ",
-    "See `?styler::caching` to configure differently or silence this message."
+    "See {.help styler::caching} to configure differently or silence this message."
   ))
 }
 
