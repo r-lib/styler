@@ -28,22 +28,22 @@ assert_transformers <- function(transformers) {
     action <- if (utils::packageVersion("styler") >= version_cutoff) {
       "are not supported anymore"
     } else {
-      "depreciated and will be removed in a future version of styler."
+      "deprecated and will be removed in a future version of styler."
     }
     message <- paste(
       "Style guides without a name and a version field are",
       action, "\nIf you are a user: Open an issue on",
       "https://github.com/r-lib/styler and provide a reproducible example",
       "of this error. \nIf you are a developer:",
-      "When you create a style guide with `styler::create_style_guide()`, the",
+      "When you create a style guide with {.fn styler::create_style_guide}, the",
       "argument `style_guide_name` and `style_guide_version` should be",
-      "non-NULL. See help(\"create_style_guide\") for how to set them."
+      "non-NULL. See {.help styler::create_style_guide} for how to set them."
     )
 
     if (utils::packageVersion("styler") >= version_cutoff) {
-      rlang::abort(message)
+      cli::cli_abort(message)
     } else {
-      rlang::warn(message)
+      cli::cli_warn(message)
     }
   }
 }
