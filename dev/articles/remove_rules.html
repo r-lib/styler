@@ -149,10 +149,11 @@
 style, there are multiple ways:</p>
 <ul>
 <li><p>Use the tidyverse style guide, but not with the default options.
-Starting point for this approach is the <a href="https://styler.r-lib.org/reference/tidyverse_style.html">help
-file</a> for the function <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>, which returns
-the transformer functions that prettify your code. Most of these options
-are explained in <code><a href="../articles/styler.html">vignette("styler")</a></code>.</p></li>
+Starting point for this approach is the
+<code><a href="../reference/tidyverse_style.html">help("tidyverse_style")</a></code> for the function
+<code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>, which returns the transformer functions
+that prettify your code. Most of these options are explained in
+<code><a href="../articles/styler.html">vignette("styler")</a></code>.</p></li>
 <li><p>If you can’t get styler behaving the way you want using the
 arguments of <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code>, you have another option,
 which is described in a <code><a href="../articles/customizing_styler.html">vignette("customizing_styler")</a></code>:
@@ -272,7 +273,7 @@ declaration of this (unexported) function.</p>
 <span><span class="co">#&gt;     pd$text[to_replace] &lt;- "&lt;-"</span></span>
 <span><span class="co">#&gt;     pd</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x5578daf5d300&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x565554b2bf90&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>Next, you simply set that element to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -321,7 +322,7 @@ removed by styler.</p>
 <ul>
 <li>Then pinpoint the probable rule type (e.g. line breaks if you want
 less new lines).</li>
-<li>In a local styler clone, add e.g. a <code>return(pd</code> at the
+<li>In a local styler clone, add e.g. a <code>return(pd)</code> at the
 top of the body to deactivate the rule quickly, or add a
 <code>print(pd)</code> or <code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> call in the functions
 of that type (e.g. the different functions of
