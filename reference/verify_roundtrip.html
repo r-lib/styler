@@ -21,7 +21,7 @@ resulting code is parsable."><!-- mathjax --><script src="https://cdnjs.cloudfla
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.1</span>
       </span>
     </div>
 
@@ -152,7 +152,9 @@ scope.</p>
 <span class="r-in"><span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">verify_roundtrip</span><span class="op">(</span><span class="st">"a+1"</span>, <span class="st">"a + 1 # comments are dropped"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">styler</span><span class="fu">:::</span><span class="fu">verify_roundtrip</span><span class="op">(</span><span class="st">"a+1"</span>, <span class="st">"b - 3"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in styler:::verify_roundtrip("a+1", "b - 3") : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   The expression evaluated before the styling is not the same as the expression after styling. This should not happen. Please file a bug report on GitHub (https://github.com/r-lib/styler/issues) using a reprex.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   The expression evaluated before the styling is not the same as the expression after styling. This should not happen.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> This is an internal error that was detected in the <span style="color: #0000BB;">styler</span> package.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Please report it at <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/r-lib/styler/issues&gt;</span> with a reprex (<span style="color: #0000BB; font-style: italic;">&lt;https://tidyverse.org/help/&gt;</span>) and the full backtrace.</span>
 </code></pre></div>
     </div>
   </div>

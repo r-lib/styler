@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.1</span>
       </span>
     </div>
 
@@ -144,6 +144,7 @@
 
     
     
+<pre><code><span><span class="co">## Deactivated cache.</span></span></code></pre>
 <div class="section level2">
 <h2 id="entry-points">Entry-points<a class="anchor" aria-label="anchor" href="#entry-points"></a>
 </h2>
@@ -161,7 +162,10 @@ package and styling the highlighted selection, see
 <code><a href="../reference/styler_addins.html">help("styler_addins")</a></code>.</p></li>
 </ul>
 <p>Beyond that, styler can be used through other tools documented in the
-<code><a href="../articles/third-party-integrations.html">vignette("third-party-integrations")</a></code>.</p>
+<code><a href="../articles/third-party-integrations.html">vignette("third-party-integrations")</a></code>. Let’s get
+started.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="passing-arguments-to-the-style-guide">Passing arguments to the style guide<a class="anchor" aria-label="anchor" href="#passing-arguments-to-the-style-guide"></a>
 </h4>
@@ -169,16 +173,6 @@ package and styling the highlighted selection, see
 application of it. That’s why you must supply a style guide via
 <code>transformers</code> when styling (in case you don’t want to rely
 on the defaults):</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>Warning in normalizePath(Sys.getenv("TMPDIR", Sys.getenv("TMP"))): path[1]="":
-No such file or directory
-
-Warning in normalizePath(Sys.getenv("TMPDIR", Sys.getenv("TMP"))): path[1]="":
-No such file or directory
-
-Warning in normalizePath(Sys.getenv("TMPDIR", Sys.getenv("TMP"))): path[1]="":
-No such file or directory</code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/style_text.html">style_text</a></span><span class="op">(</span><span class="st">"a + b"</span>, transformers <span class="op">=</span> <span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"indention"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="va">a</span> <span class="op">+</span> <span class="va">b</span></span></code></pre>
