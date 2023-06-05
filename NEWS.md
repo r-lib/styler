@@ -2,7 +2,10 @@
 
 This release was requested by CRAN due to accidentally populating a user cache while building vignettes for R >= 4.3.0.
 
+* Deactivate caching in vignette creation (#1124).
 * Code quality improvements (#1122).
+* Use {cli} message for cache (#1127).
+* Use `tempdir()` to get temporary directory instead of own unreliable heuristic (#1126). 
 * Bump JamesIves/github-pages-deploy-action from 4.4.1 to 4.4.2 (#1123).
 
 Thanks to everyone who contributed to this release: [&#x0040;olivroy](https://github.com/olivroy) and [&#x0040;krlmlr](https://github.com/krlmlr).
