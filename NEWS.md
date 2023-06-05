@@ -1,4 +1,12 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+# styler 1.10.1
+
+This release was requested by CRAN due to accidentally populating a user cache while building vignettes for R >= 4.3.0.
+
+* Code quality improvements (#1122).
+* Bump JamesIves/github-pages-deploy-action from 4.4.1 to 4.4.2 (#1123).
+
+Thanks to everyone who contributed to this release: [&#x0040;olivroy](https://github.com/olivroy) and [&#x0040;krlmlr](https://github.com/krlmlr).
+
 # styler 1.10.0
 
 This release contains speed-ups between 20% and 40% depending on your use case

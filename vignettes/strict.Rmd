@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
   results = "hide"
 )
 
+styler::cache_deactivate()
+
 knitr::knit_engines$set(list(
   styler = function(options) {
     options$comment <- ""

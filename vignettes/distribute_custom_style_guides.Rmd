@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+styler::cache_deactivate()
+options(styler.colored_print.vertical = FALSE)
 ```
 
 This vignette describes how you can distribute your own style guide. It builds on `vignette("customizing_styler")` and assumes you understand how to create a style guide with `create_style_guide()`.
