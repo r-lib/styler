@@ -1,4 +1,5 @@
 test_that("caching utils make right blocks with semi-colon", {
+  skip_if_not_installed("dplyr")
   blocks_simple_uncached <- compute_parse_data_nested(c("1 + 1", "2; 1+1")) %>%
     dplyr::mutate(is_cached = FALSE) %>%
     cache_find_block()
@@ -16,6 +17,7 @@ test_that("caching utils make right blocks with semi-colon", {
 })
 
 test_that("caching utils make right blocks with comments", {
+  skip_if_not_installed("dplyr")
   text <- '
    ### comment
    x = 1 ### comment
@@ -100,6 +102,7 @@ test_that("blank lines are correctly identified", {
 })
 
 test_that("caching utils make right blocks with comments", {
+  skip_if_not_installed("dplyr")
   blocks_simple_uncached <- compute_parse_data_nested(c("1 + 1", "2 # comment")) %>%
     dplyr::mutate(is_cached = FALSE) %>%
     cache_find_block()
