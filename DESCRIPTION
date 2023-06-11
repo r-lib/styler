@@ -37,7 +37,6 @@ Imports:
 Suggests: 
     data.tree (>= 0.1.6),
     digest,
-    dplyr,
     here,
     knitr,
     prettycode,
