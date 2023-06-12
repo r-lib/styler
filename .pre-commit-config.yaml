@@ -34,8 +34,9 @@ repos:
       - id: roxygenize
         additional_dependencies:
           - r-lib/pkgapi
-          - dplyr@1.0.9
-          - roxygen2@7.2.2
+          - dplyr@1.1.2
+          - roxygen2@7.2.3
+          - rlang@1.1.0
       - id: use-tidy-description
       - id: spell-check
         exclude: >
