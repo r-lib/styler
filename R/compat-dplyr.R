@@ -57,12 +57,3 @@ map_dfr <- function(.x, .f, ...) {
   res <- map(.x, .f, ...)
   vec_rbind(!!!res)
 }
-
-mutate <- function(.data, ...) {
-  collected <- list(...)
-  for (idx in seq_along(collected)) {
-    .data[names(collected)[idx]] <- unname(collected[[idx]])
-  }
-
-  .data
-}
