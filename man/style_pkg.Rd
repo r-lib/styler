@@ -10,7 +10,7 @@ style_pkg(
   style = tidyverse_style,
   transformers = style(...),
   filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
-  exclude_files = c("R/RcppExports.R", "R/cpp11.R"),
+  exclude_files = c("R/RcppExports.R", "R/cpp11.R", "R/import-standalone.+R"),
   exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE,
   base_indention = 0L,
