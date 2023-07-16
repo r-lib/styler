@@ -153,3 +153,10 @@ test_that("overall", {
     transformer = style_text
   ), NA)
 })
+
+test_that("double-indent-r6", {
+  expect_warning(test_collection("indention_operators",
+    "r6",
+    transformer = style_text
+  ), NA)
+})
