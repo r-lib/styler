@@ -69,7 +69,7 @@ style_pkg <- function(pkg = ".",
                       style = tidyverse_style,
                       transformers = style(...),
                       filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
-                      exclude_files = c("R/RcppExports.R", "R/cpp11.R", "R/import-standalone.+R"),
+                      exclude_files = c("R/RcppExports\\.R", "R/cpp11\\.R", "R/import-standalone.*\\.R"),
                       exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE,
                       base_indention = 0L,
@@ -91,7 +91,7 @@ style_pkg <- function(pkg = ".",
 #'   ".Rmd")`, or `c("r", "rmd")`. Supported values (after standardization) are:
 #'   "r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
 #'   Rmd.
-#' @param exclude_files Character vector with paths or regular expressions to files
+#' @param exclude_files Character vector with regular expressions to files
 #'   that should be excluded from styling.
 #' @param exclude_dirs Character vector with directories to exclude
 #'   (recursively). Note that the default values were set for consistency with
@@ -107,6 +107,8 @@ prettify_pkg <- function(transformers,
                          dry) {
   filetype_ <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
+  all_files <- list.files(".", recursive = TRUE, all.files = TRUE)
+  exclude_files <- grep(paste0(exclude_files, collapse = "|"), all_files, value = TRUE)
   exclude_files <- set_arg_paths(exclude_files)
   exclude_files_regex <- paste0(exclude_files[!file.exists(exclude_files)], collapse = "|")
   exclude_files <- c(
@@ -173,8 +175,6 @@ prettify_pkg <- function(transformers,
     c(r_files, rprofile_files, vignette_files, readme),
     exclude_files
   )
-  # Remove the regex.
-  files <- files[!grepl(exclude_files_regex, files)]
   transform_files(files,
     transformers = transformers,
     include_roxygen_examples = include_roxygen_examples,

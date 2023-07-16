@@ -28,7 +28,7 @@ Rmd.}
 \item{recursive}{A logical value indicating whether or not files in
 subdirectories should be styled as well.}
 
-\item{exclude_files}{Character vector with paths or regular expressions to files
+\item{exclude_files}{Character vector with regular expressions to files
 that should be excluded from styling.}
 
 \item{exclude_dirs}{Character vector with directories to exclude
