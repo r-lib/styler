@@ -567,8 +567,8 @@
 <div class="section level3">
 <h3 id="adaption-of-styler-1-1-1">Adaption of styler<a class="anchor" aria-label="anchor" href="#adaption-of-styler-1-1-1"></a></h3>
 <p>Since it’s never been mentioned in the release notes, we also mention here where else you can use styler functionality:</p>
-<ul><li><p><code><a href="https://usethis.r-lib.org/reference/tidyverse.html" class="external-link">usethis::use_tidy_style()</a></code> styles your project according to the tidyverse style guide.</p></li>
-<li><p><code>reprex::reprex(style = TRUE)</code> to prettify reprex code before printing. To permanently use <code>style = TRUE</code> without specifying it every time, you can add the following line to your <code>.Rprofile</code> (via <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_profile()</a></code>): <code>options(reprex.styler = TRUE)</code>.</p></li>
+<ul><li><p><code>usethis::use_tidy_style()</code> styles your project according to the tidyverse style guide.</p></li>
+<li><p><code>reprex::reprex(style = TRUE)</code> to prettify reprex code before printing. To permanently use <code>style = TRUE</code> without specifying it every time, you can add the following line to your <code>.Rprofile</code> (via <code>usethis::edit_r_profile()</code>): <code>options(reprex.styler = TRUE)</code>.</p></li>
 <li><p>you can pretty-print your R code in RMarkdown reports without having styler modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g. <code>```{r   name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy =   "styler")</code> at the top of your RMarkdown script.</p></li>
 <li><p>pretty-printing of <a href="https://github.com/ropensci/drake" class="external-link">drake</a> workflow data frames with <code>drake::drake_plan_source()</code>.</p></li>
 <li><p>Adding styler as a fixer to the <a href="https://github.com/dense-analysis/ale/pull/2401" class="external-link">ale Plug-in</a> for VIM.</p></li>
