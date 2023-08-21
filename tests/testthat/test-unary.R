@@ -1,5 +1,3 @@
-
-
 test_that("no spaces before unary operator", {
   expect_warning(test_collection("unary_spacing",
     "unary_simple",
