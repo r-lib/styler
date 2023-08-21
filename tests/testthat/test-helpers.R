@@ -1,5 +1,3 @@
-
-
 test_that("can construct and print vertical", {
   skip_if_not_installed("prettycode")
   expect_snapshot({

@@ -1,5 +1,3 @@
-
-
 test_that("one-line function call yields correct indention", {
   expect_warning(test_collection("indention_round_brackets",
     "one_line",
