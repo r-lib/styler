@@ -59,3 +59,4 @@ jobs:
           error-on: 'ifelse(getRversion() > 3.6, "warning", "note")'
         env:
           _R_CHECK_FORCE_SUGGESTS_: false
+          _R_CHECK_STOP_ON_INVALID_NUMERIC_VERSION_INPUTS_: true
