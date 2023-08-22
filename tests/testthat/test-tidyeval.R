@@ -1,5 +1,3 @@
-
-
 test_that("no spaces within bang-bang operator !!!", {
   expect_warning(test_collection("tidyeval", "bang_bang",
     transformer = style_text

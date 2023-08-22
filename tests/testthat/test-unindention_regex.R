@@ -1,4 +1,3 @@
-
 test_that("forced regex token-dependent indention", {
   expect_warning(test_collection(
     "unindention_regex", "regex_force_with",

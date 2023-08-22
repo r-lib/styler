@@ -1,5 +1,3 @@
-
-
 test_that("curly braces", {
   expect_warning(test_collection(
     "spacing", "round",
