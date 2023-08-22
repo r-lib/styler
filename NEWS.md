@@ -1,3 +1,10 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# styler 1.10.2
+
+- Same as previous version.
+
+
 # styler 1.10.1
 
 This release was requested by CRAN due to accidentally populating a user cache while building vignettes for R >= 4.3.0.
