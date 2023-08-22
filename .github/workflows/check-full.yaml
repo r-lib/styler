@@ -56,6 +56,7 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-          error-on: 'ifelse(getRversion() > 3.6, "warning", "note")'
+          error-on: 'ifelse(getRversion() > "3.6", "warning", "note")'
         env:
           _R_CHECK_FORCE_SUGGESTS_: false
+          _R_CHECK_STOP_ON_INVALID_NUMERIC_VERSION_INPUTS_: true
