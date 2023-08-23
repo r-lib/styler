@@ -282,7 +282,9 @@ set_line_break_after_assignment <- function(pd) {
 NULL
 
 #' Sets line break after opening parenthesis
-#'
+#' @param pd The parse table.
+#' @param except_token_after,except_token_before The tokens before or after the
+#'   token that cause an exception.
 #' @details
 #' In general, every call that is multi-line has a line break after the opening
 #' parenthesis. Exceptions:

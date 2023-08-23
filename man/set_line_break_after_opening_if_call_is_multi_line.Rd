@@ -11,6 +11,12 @@ set_line_break_after_opening_if_call_is_multi_line(
   force_text_before = NULL
 )
 }
+\arguments{
+\item{pd}{The parse table.}
+
+\item{except_token_after, except_token_before}{The tokens before or after the
+token that cause an exception.}
+}
 \description{
 Sets line break after opening parenthesis
 }
