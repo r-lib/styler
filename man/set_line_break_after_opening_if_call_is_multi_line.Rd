@@ -14,8 +14,13 @@ set_line_break_after_opening_if_call_is_multi_line(
 \arguments{
 \item{pd}{The parse table.}
 
-\item{except_token_after, except_token_before}{The tokens before or after the
-token that cause an exception.}
+\item{except_token_after}{The tokens after the token that cause an exception.}
+
+\item{except_text_before}{A character vector with text before a token that
+does not cause a line break.}
+
+\item{force_text_before}{A character vector with text before "'('" that
+forces a line break after every argument in the call.}
 }
 \description{
 Sets line break after opening parenthesis

@@ -13,17 +13,8 @@ remove_line_break_in_fun_call(pd, strict)
 \arguments{
 \item{pd}{A parse table.}
 
-\item{except_token_before}{A character vector with text before "')'" that do
-not cause a line break before "')'".}
-
-\item{except_token_after}{A character vector with tokens after "'('" that do
-not cause a line break after "'('".}
-
-\item{except_text_before}{A character vector with text before "'('" that do
-not cause a line break after "'('".}
-
-\item{force_text_before}{A character vector with text before "'('" that
-forces a line break after every argument in the call.}
+\item{except_token_before}{A character vector with tokens that do
+not cause a line break after them.}
 }
 \description{
 Set line break for multi-line function calls
@@ -32,6 +23,9 @@ Set line break for multi-line function calls
 \itemize{
 \item \code{set_line_break_before_closing_call()}: Sets line break before
 closing parenthesis.
+
+\item \code{remove_line_break_in_fun_call()}: Remove line breaks in
+function calls.
 
 }}
 \keyword{internal}

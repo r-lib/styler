@@ -268,14 +268,8 @@ set_line_break_after_assignment <- function(pd) {
 
 #' Set line break for multi-line function calls
 #' @param pd A parse table.
-#' @param except_token_after A character vector with tokens after "'('" that do
-#'   not cause a line break after "'('".
-#' @param except_text_before A character vector with text before "'('" that do
-#'   not cause a line break after "'('".
-#' @param except_token_before A character vector with text before "')'" that do
-#'   not cause a line break before "')'".
-#' @param force_text_before A character vector with text before "'('" that
-#'   forces a line break after every argument in the call.
+#' @param except_token_before A character vector with tokens that do
+#'   not cause a line break after them.
 #' @name set_line_break_if_call_is_multi_line
 #'
 #' @keywords internal
@@ -283,8 +277,11 @@ NULL
 
 #' Sets line break after opening parenthesis
 #' @param pd The parse table.
-#' @param except_token_after,except_token_before The tokens before or after the
-#'   token that cause an exception.
+#' @param except_token_after The tokens after the token that cause an exception.
+#' @param except_text_before A character vector with text before a token that
+#'   does not cause a line break.
+#' @param force_text_before A character vector with text before "'('" that
+#'   forces a line break after every argument in the call.
 #' @details
 #' In general, every call that is multi-line has a line break after the opening
 #' parenthesis. Exceptions:
@@ -343,7 +340,7 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
 #' position of the first named argument and breaks returns the index of it.
 #' If there is no named argument, the line is broken right after the opening
 #' parenthesis.
-#' @inheritParams set_line_break_if_call_is_multi_line
+#' @param pd A parse table.
 #' @keywords internal
 find_line_break_position_in_multiline_call <- function(pd) {
   candidate <- (which(pd$token == "EQ_SUB") - 1L)[1L]
@@ -379,7 +376,8 @@ set_line_break_before_closing_call <- function(pd, except_token_before) {
 }
 
 
-#' @rdname set_line_break_if_call_is_multi_line
+#' @describeIn set_line_break_if_call_is_multi_line Remove line breaks in
+#'   function calls.
 #' @keywords internal
 remove_line_break_in_fun_call <- function(pd, strict) {
   if (is_function_call(pd)) {
