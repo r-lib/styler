@@ -182,7 +182,6 @@ ensure_correct_txt <- function(pd, text) {
 #' changes from "all strings" to "all problematic strings", is partly
 #' misleading and this approach was chosen for performance reasons only.
 #' @param pd A parse table.
-#' @param text The initial code to style.
 #' @keywords internal
 is_insufficiently_parsed_string <- function(pd) {
   grepl("^\\[", pd$text) & pd$token == "STR_CONST"

@@ -1,5 +1,3 @@
-
-
 test_that("repreated parsing solves wrong parent assignment", {
   expect_warning(
     test_collection(
