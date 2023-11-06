@@ -343,7 +343,7 @@ nest_parse_data <- function(pd_flat) {
 
     rhs <- nest_(child, "child", setdiff(names(child), "parent_"))
 
-    nested <- left_join(internal, rhs, by = c("id" = "parent_"))
+    nested <- left_join(internal, rhs, by = c(id = "parent_"))
 
     children <- nested$child
     for (i in seq_along(children)) {

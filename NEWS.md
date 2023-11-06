@@ -1,3 +1,23 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# styler 1.10.2
+
+This release was requested by the CRAN team to fix CRAN warning on invalid 
+numeric version inputs (#1143).
+
+**Minor changes**
+
+* Use cli messaging for cache (#1127).
+* Use latest (and stable!) pre-commit (#1144).
+* Fix CRAN warning on invalid numeric version inputs (#1143).
+* Bump JamesIves/github-pages-deploy-action from 4.4.2 to 4.4.3 (#1139).
+* fix pre-commit (#1132).
+* Don't require dplyr anywhere (#1131).
+
+We thank everyone who helped making this release possible.
+
+[&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;olivroy](https://github.com/olivroy), [&#x0040;rkrug](https://github.com/rkrug), and [&#x0040;rossdrucker](https://github.com/rossdrucker).
+
 # styler 1.10.1
 
 This release was requested by CRAN due to accidentally populating a user cache while building vignettes for R >= 4.3.0.
