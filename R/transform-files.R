@@ -119,8 +119,9 @@ make_transformer <- function(transformers,
     if (use_cache) {
       text
     } else {
-      transformed_code <- text %>%
+      transformed_code <-
         parse_transform_serialize_r(
+          text,
           transformers,
           base_indention = base_indention,
           warn_empty = warn_empty

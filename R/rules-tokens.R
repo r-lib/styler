@@ -81,8 +81,7 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
       )
   }
   if (is_conditional_expr(pd)) {
-    pd <- pd %>%
-      wrap_else_multiline_curly(indent_by, space_after = 0L)
+    pd <- wrap_else_multiline_curly(pd, indent_by, space_after = 0L)
   }
   pd
 }
