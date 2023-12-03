@@ -32,21 +32,17 @@ transform_utf8_one <- function(path, fun, dry) {
       identical <- identical_content && !file_with_info$missing_EOF_line_break
       if (!identical) {
         switch(dry,
-          "fail" = {
-            rlang::abort(
-              paste0(
-                "File `", path, "` would be modified by styler and argument dry",
-                " is set to 'fail'."
-              ),
-              class = "dryError"
-            )
-          },
-          "on" = {
+          fail = rlang::abort(
+            paste0(
+              "File `", path, "` would be modified by styler and argument dry",
+              " is set to 'fail'."
+            ),
+            class = "dryError"
+          ),
+          on = {
             # don't do anything
           },
-          "off" = {
-            write_utf8(new, path)
-          },
+          off = write_utf8(new, path),
           {
             # not implemented
           }
