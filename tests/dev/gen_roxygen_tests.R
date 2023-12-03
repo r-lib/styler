@@ -1,5 +1,5 @@
 #!/usr/bin/Rscript
-# execute from package TLD: ./.dev/gen_roxygen_tests.R
+# execute from package TLD: ./tests/dev/gen_roxygen_tests.R
 roxygen_stub <- "roxygen-examples-complete"
 all_examples <- list.files(file.path("tests", "testthat", roxygen_stub))
 unique_tests <- unique(sub("-.*", "", all_examples))
