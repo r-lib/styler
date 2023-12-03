@@ -161,7 +161,7 @@ A big shout out to anyone who contributed to this release:
 This release was requested by CRAN to resolve an R CMD Check note (#1044). 
 A big hand to everyone who made this release possible: 
 
-[&#x0040;DaveJarvis](https://github.com/DaveJarvis), 
+Dave Jarvis, 
 [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
 [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), 
 [&#x0040;MichaelChirico](https://github.com/MichaelChirico), 
