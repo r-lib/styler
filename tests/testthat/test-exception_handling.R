@@ -1,5 +1,3 @@
-
-
 test_that("style_text returns custom error", {
   expect_error(style_text("a <- 3 4"), "unexpected numeric constant")
 })
@@ -32,6 +30,6 @@ test_that("warning is given when transformers does not contain a version", {
   }
   expect_fun(
     assert_transformers(sg),
-    "name and a version field are depreciated and will be removed in a future version of styler"
+    "name and a version field are deprecated and will be removed in a future version of styler"
   )
 })

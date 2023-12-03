@@ -153,12 +153,13 @@ test_that("Can display warning on unset styler cache", {
   withr::local_seed(7)
   expect_message(
     ask_to_switch_to_non_default_cache_root(ask = TRUE),
-    "See `?styler::caching`",
+    regexp = "styler::caching",
     fixed = TRUE
   )
 })
 
 test_that("No sensitive to decimal option", {
+  skip_if_not_installed("prettycode")
   withr::local_options(OutDec = ",")
   expect_snapshot({
     style_text("1")

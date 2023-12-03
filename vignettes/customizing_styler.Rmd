@@ -7,6 +7,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(styler.colored_print.vertical = FALSE)
+styler::cache_deactivate()
+```
+
 This vignette provides a high-level overview of how styler works and how you can define your own style guide and format code according to it. If you simply want to customize the tidyverse style guide to your needs, check out `vignette("styler")`, to remove some rules, have a look at `vignette("remove_rules")`. How to distribute a custom style guide is described in `vignette("distribute_custom_style_guides")`.
 
 # How styler works
@@ -23,8 +32,8 @@ The `transformers` argument is, apart from the code to style, the key argument o
 
 ```{r, message = FALSE}
 library("styler")
+library("magrittr")
 cache_deactivate()
-library("dplyr")
 names(tidyverse_style())
 str(tidyverse_style(), give.attr = FALSE, list.len = 3)
 ```
@@ -41,8 +50,9 @@ As the name says, this function removes spaces after the opening parenthesis. Bu
 string_to_format <- "call( 3)"
 pd <- styler:::compute_parse_data_nested(string_to_format) %>%
   styler:::pre_visit_one(default_style_guide_attributes)
-pd$child[[1]] %>%
-  select(token, terminal, text, newlines, spaces)
+
+cols <- c('token', 'terminal', 'text', 'newlines', 'spaces')
+pd$child[[1]][, cols]
 ```
 
 `default_style_guide_attributes()` is called to initialize some variables, it does not actually transform the parse table.
@@ -50,8 +60,7 @@ pd$child[[1]] %>%
 All the function `remove_space_after_opening_paren()` now does is to look for the opening bracket and set the column `spaces` of the token to zero. Note that it is very important to check whether there is also a line break following after that token. If so, `spaces` should not be touched because of the way `spaces` and `newlines` are defined. `spaces` are the number of spaces after a token and `newlines`. Hence, if a line break follows, spaces are not EOL spaces, but rather the spaces directly before the next token. If there was a line break after the token and the rule did not check for that, indention for the token following `(` would be removed. This would be unwanted for example if `use_raw_indention` is set to `TRUE` (which means indention should not be touched). If we apply the rule to our parse table, we can see that the column `spaces` changes and is now zero for all tokens:
 
 ```{r}
-styler:::remove_space_after_opening_paren(pd$child[[1]]) %>%
-  select(token, terminal, text, newlines, spaces)
+styler:::remove_space_after_opening_paren(pd$child[[1]])[, cols]
 ```
 
 All top-level styling functions have a `style` argument (which defaults to `tidyverse_style`). If you check out the help file, you can see that the argument `style` is only used to create the default `transformers` argument, which defaults to `style(...)`. This allows for the styling options to be set without having to specify them inside the function passed to `transformers`.

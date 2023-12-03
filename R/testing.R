@@ -327,7 +327,7 @@ local_test_setup <- function(cache = FALSE,
                              .local_envir = parent.frame()) {
   current_cache <- cache_info(format = "tabular")
   withr::local_options(
-    list("styler.quiet" = TRUE, "R.cache.rootPath" = tempfile()),
+    list(styler.quiet = TRUE, R.cache.rootPath = tempfile()),
     .local_envir = .local_envir
   )
   if (cache) {
@@ -379,5 +379,5 @@ skip_during_parallel <- function() {
   Sys.getenv("STYLER_TEST_IS_TRULY_PARALLEL", TRUE) %>%
     toupper() %>%
     as.logical() %>%
-    testthat::skip_if()
+    testthat::skip_if("Running in parallel")
 }

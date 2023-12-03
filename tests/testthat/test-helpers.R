@@ -1,6 +1,5 @@
-
-
 test_that("can construct and print vertical", {
+  skip_if_not_installed("prettycode")
   expect_snapshot({
     construct_vertical(c("1 + 1", "nw"))
   })

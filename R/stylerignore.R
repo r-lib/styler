@@ -76,9 +76,9 @@ add_stylerignore <- function(pd_flat) {
   pd_flat$indicator_off <- cumsum_start + cumsum_stop
   is_invalid <- cumsum_start - cumsum_stop < 0L | cumsum_start - cumsum_stop > 1L
   if (any(is_invalid)) {
-    warn(paste0(
+    cli::cli_warn(paste0(
       "Invalid stylerignore sequences found, potentially ignoring some of the ",
-      "markers set.\nSee `help(\"stylerignore\", \"styler\")`."
+      "markers set.\nSee {.help styler::stylerignore}."
     ))
   }
 

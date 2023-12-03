@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+styler::cache_deactivate()
 ```
 
 ```{r, echo = FALSE, include = FALSE}
@@ -25,8 +26,7 @@ If you want to change the behavior of styler to match your desired style, there
 are multiple ways:
 
 -   Use the tidyverse style guide, but not with the default options. Starting
-    point for this approach is the [help
-    file](https://styler.r-lib.org/reference/tidyverse_style.html) for the
+    point for this approach is the `help("tidyverse_style")` for the
     function `tidyverse_style()`, which returns the transformer functions that
     prettify your code. Most of these options are explained in
     `vignette("styler")`.
@@ -61,7 +61,9 @@ Here are the steps required to deactivate a rule you don't like
 Lets assume you want to remove the rule that turns `=` into `<-` for
 assignment. That means you want
 
-    string = "hi there" 
+```         
+string = "hi there" 
+```
 
 to remain unchanged after applying styler. This is not the case if you use the
 default style guide of styler:
@@ -164,7 +166,7 @@ styler.
 
 -   Then pinpoint the probable rule type (e.g. line breaks if you want less new
     lines).
--   In a local styler clone, add e.g. a `return(pd` at the top of the body to
+-   In a local styler clone, add e.g. a `return(pd)` at the top of the body to
     deactivate the rule quickly, or add a `print(pd)` or `browser()` call in
     the functions of that type (e.g. the different functions of
     `R/rules-line-breaks.R`), `load_all()`, run your example, see if that

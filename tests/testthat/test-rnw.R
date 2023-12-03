@@ -1,5 +1,3 @@
-
-
 test_that("can style .Rnw files", {
   expect_warning(test_collection(
     "rnw", "008-outdec",

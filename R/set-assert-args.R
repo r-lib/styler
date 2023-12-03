@@ -9,7 +9,7 @@ set_arg_write_tree <- function(write_tree) {
   if (is.na(write_tree)) {
     write_tree <- is_installed("data.tree")
   } else if (write_tree) {
-    assert_data.tree_installation()
+    check_installed("data.tree")
   }
   write_tree
 }
@@ -21,29 +21,29 @@ set_arg_write_tree <- function(write_tree) {
 #' @inheritParams make_transformer
 #' @keywords internal
 assert_transformers <- function(transformers) {
-  version_cutoff <- 2.0
+  version_cutoff <- "2.0"
   no_name <- is.null(transformers$style_guide_name)
   no_version <- is.null(transformers$style_guide_version)
   if (no_name || no_version) {
     action <- if (utils::packageVersion("styler") >= version_cutoff) {
       "are not supported anymore"
     } else {
-      "depreciated and will be removed in a future version of styler."
+      "deprecated and will be removed in a future version of styler."
     }
     message <- paste(
       "Style guides without a name and a version field are",
       action, "\nIf you are a user: Open an issue on",
       "https://github.com/r-lib/styler and provide a reproducible example",
       "of this error. \nIf you are a developer:",
-      "When you create a style guide with `styler::create_style_guide()`, the",
+      "When you create a style guide with {.fn styler::create_style_guide}, the",
       "argument `style_guide_name` and `style_guide_version` should be",
-      "non-NULL. See help(\"create_style_guide\") for how to set them."
+      "non-NULL. See {.help styler::create_style_guide} for how to set them."
     )
 
     if (utils::packageVersion("styler") >= version_cutoff) {
-      rlang::abort(message)
+      cli::cli_abort(message)
     } else {
-      rlang::warn(message)
+      cli::cli_warn(message)
     }
   }
 }

@@ -158,9 +158,8 @@ ensure_correct_txt <- function(pd, text) {
 
   if (!lines_and_cols_match(new_text)) {
     abort(paste(
-      "Error in styler:::ensure_correct_txt().",
-      "Please file an issue on GitHub (https://github.com/r-lib/styler/issues)"
-    ))
+      "Error in styler:::ensure_correct_txt()."
+    ), .internal = TRUE)
   }
   names_to_keep <- setdiff(
     names(new_text),
@@ -183,7 +182,6 @@ ensure_correct_txt <- function(pd, text) {
 #' changes from "all strings" to "all problematic strings", is partly
 #' misleading and this approach was chosen for performance reasons only.
 #' @param pd A parse table.
-#' @param text The initial code to style.
 #' @keywords internal
 is_insufficiently_parsed_string <- function(pd) {
   grepl("^\\[", pd$text) & pd$token == "STR_CONST"
