@@ -24,10 +24,10 @@ can direct your attention to the content of your code. It helps to keep
 the coding style consistent across projects and facilitate
 collaboration. You can access styler through
 
--   the RStudio Addin as demonstrated below
--   R functions like `style_pkg()`, `style_file()` or `style_text()`
--   various other tools described in
-    `vignette("third-party-integrations")`
+- the RStudio Addin as demonstrated below
+- R functions like `style_pkg()`, `style_file()` or `style_text()`
+- various other tools described in
+  `vignette("third-party-integrations")`
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
 
@@ -50,6 +50,6 @@ remotes::install_github("r-lib/styler")
 
 The following online docs are available:
 
--   [latest CRAN release](https://styler.r-lib.org).
+- [latest CRAN release](https://styler.r-lib.org).
 
--   [GitHub development version](https://styler.r-lib.org/dev/).
+- [GitHub development version](https://styler.r-lib.org/dev/).
