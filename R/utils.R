@@ -117,11 +117,10 @@ calls_sys <- function(sys_call, ...) {
 #'   option was not set.
 #' @keywords internal
 option_read <- function(x, default = NULL, error_if_not_found = TRUE) {
-  if (x %in% names(options()) || !error_if_not_found) {
-    getOption(x, default)
-  } else {
+  if (!(x %in% names(options())) && error_if_not_found) {
     rlang::abort(paste("R option", x, "must be set."))
   }
+  getOption(x, default)
 }
 
 #' @keywords internal

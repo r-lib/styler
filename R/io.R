@@ -31,30 +31,34 @@ transform_utf8_one <- function(path, fun, dry) {
       identical_content <- identical(file_with_info$text, new)
       identical <- identical_content && !file_with_info$missing_EOF_line_break
       if (!identical) {
-        if (dry == "fail") {
-          rlang::abort(
-            paste0(
-              "File `", path, "` would be modified by styler and argument dry",
-              " is set to 'fail'."
-            ),
-            class = "dryError"
-          )
-        } else if (dry == "on") {
-          # don't do anything
-        } else if (dry == "off") {
-          write_utf8(new, path)
-        } else {
-          # not implemented
-        }
+        switch(dry,
+          "fail" = {
+            rlang::abort(
+              paste0(
+                "File `", path, "` would be modified by styler and argument dry",
+                " is set to 'fail'."
+              ),
+              class = "dryError"
+            )
+          },
+          "on" = {
+            # don't do anything
+          },
+          "off" = {
+            write_utf8(new, path)
+          },
+          {
+            # not implemented
+          }
+        )
       }
       !identical
     },
     error = function(e) {
       if (inherits(e, "dryError")) {
         rlang::abort(conditionMessage(e))
-      } else {
-        warn(paste0("When processing ", path, ": ", conditionMessage(e)))
       }
+      warn(paste0("When processing ", path, ": ", conditionMessage(e)))
       NA
     }
   )
