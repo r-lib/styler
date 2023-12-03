@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: f3498c421d68a1db26de1a1fe3ecc91dd6f03b5e
+    rev: v0.3.2.9019
     hooks:
       - id: style-files
         args:

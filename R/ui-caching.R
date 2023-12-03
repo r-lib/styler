@@ -138,7 +138,7 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #' @export
 cache_activate <- function(cache_name = NULL,
                            verbose = !getOption("styler.quiet", FALSE)) {
-  options("styler.cache_name" = cache_name %||% styler_version)
+  options(styler.cache_name = cache_name %||% styler_version)
   path <- cache_find_path(cache_name)
 
   if (verbose) {
@@ -155,7 +155,7 @@ cache_activate <- function(cache_name = NULL,
 #' @rdname cache_activate
 #' @export
 cache_deactivate <- function(verbose = !getOption("styler.quiet", FALSE)) {
-  options("styler.cache_name" = NULL)
+  options(styler.cache_name = NULL)
 
   if (verbose) {
     cat("Deactivated cache.\n")

@@ -10,7 +10,8 @@ style_pkg(
   style = tidyverse_style,
   transformers = style(...),
   filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
-  exclude_files = c("R/RcppExports.R", "R/cpp11.R"),
+  exclude_files = c("R/RcppExports\\\\.R", "R/cpp11\\\\.R",
+    "R/import-standalone.*\\\\.R"),
   exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE,
   base_indention = 0L,
@@ -37,8 +38,8 @@ be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".R
 "r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
 Rmd.}
 
-\item{exclude_files}{Character vector with paths to files that should be
-excluded from styling.}
+\item{exclude_files}{Character vector with regular expressions to files
+that should be excluded from styling.}
 
 \item{exclude_dirs}{Character vector with directories to exclude
 (recursively). Note that the default values were set for consistency with

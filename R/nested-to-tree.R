@@ -66,13 +66,8 @@ create_node_from_nested <- function(pd_nested, parent, structure_only) {
   if (is.null(pd_nested)) {
     return()
   }
-
   node_info <- create_node_info(pd_nested, structure_only)
-
-  child_nodes <-
-    node_info %>%
-    map(parent$AddChild)
-
+  child_nodes <- map(node_info, parent$AddChild)
   map2(pd_nested$child, child_nodes, create_node_from_nested, structure_only)
 }
 

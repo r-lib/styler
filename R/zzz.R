@@ -36,7 +36,7 @@ delete_if_cache_directory <- function(path) {
   if (getRversion() < package_version("4.0.0")) {
     return(FALSE)
   }
-  designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"))
+  designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"), mustWork = FALSE)
   is_in_tools_cache <- startsWith(path, designated_cache_path)
   temp_dir <- normalizePath(dirname(tempdir()))
   is_in_generic_cache <- startsWith(path, temp_dir)

@@ -4,8 +4,8 @@ editor_options:
     wrap: 79
 ---
 
-This is a release requested by the CRAN team to delete the population of the 
-user's cache while building vignettes.
+This is a release requested by the CRAN team to comply with 
+`R_CHECK_STOP_ON_INVALID_NUMERIC_VERSION_INPUTS`.
 
 
 ## Test environments

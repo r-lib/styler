@@ -102,8 +102,10 @@ cache_make_key <- function(text, transformers, more_specs) {
     text = hash_standardize(text),
     style_guide_name = transformers$style_guide_name,
     style_guide_version = transformers$style_guide_version,
-    more_specs_style_guide = as.character(transformers$more_specs_style_guide) %>%
-      set_names(names(transformers$more_specs_style_guide)),
+    more_specs_style_guide = set_names(
+      as.character(transformers$more_specs_style_guide),
+      names(transformers$more_specs_style_guide)
+    ),
     more_specs = more_specs
   )
 }
@@ -157,8 +159,7 @@ cache_by_expression <- function(text,
   expressions <- parse(text = text, keep.source = TRUE) %>%
     utils::getParseData(includeText = TRUE)
   if (env_current$any_stylerignore) {
-    expressions <- expressions %>%
-      add_stylerignore()
+    expressions <- add_stylerignore(expressions)
   } else {
     expressions$stylerignore <- rep(FALSE, length(expressions$text))
   }
@@ -169,8 +170,11 @@ cache_by_expression <- function(text,
   # which the indention
   # was removed via parse, same as it is in cache_by_expression) and add the
   # base indention.
-  expressions[expressions$parent == 0L & expressions$token != "COMMENT" & !expressions$stylerignore, "text"] %>%
-    map(cache_write, transformers = transformers, more_specs)
+  map(
+    expressions[expressions$parent == 0L & expressions$token != "COMMENT" & !expressions$stylerignore, "text"],
+    cache_write,
+    transformers = transformers, more_specs
+  )
 }
 
 

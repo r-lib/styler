@@ -23,8 +23,8 @@ be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".R
 "r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
 Rmd.}
 
-\item{exclude_files}{Character vector with paths to files that should be
-excluded from styling.}
+\item{exclude_files}{Character vector with regular expressions to files
+that should be excluded from styling.}
 
 \item{exclude_dirs}{Character vector with directories to exclude
 (recursively). Note that the default values were set for consistency with

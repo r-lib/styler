@@ -1,5 +1,3 @@
-
-
 test_that("simple examples can be parsed", {
   expected_out <- c("\n", "x <- 1\n")
   expect_equal(parse_roxygen(c("#' @examples", "#' x <- 1"))$text, expected_out)

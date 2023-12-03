@@ -1,4 +1,3 @@
-
 test_that("line breaks work in general", {
   expect_warning(test_collection("line_breaks_fun_call",
     "token_dependent_mixed",
