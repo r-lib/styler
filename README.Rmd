@@ -1,7 +1,5 @@
 ---
-output:
-  github_document:
-    html_preview: true
+output: github_document
 editor_options: 
   markdown: 
     wrap: 79
