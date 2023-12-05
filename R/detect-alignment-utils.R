@@ -153,9 +153,9 @@ alignment_serialize_line <- function(relevant_pd_by_line, column) {
 alignment_serialize <- function(pd_sub) {
   out <- Map(function(terminal, text, child, spaces, newlines) {
     if (terminal) {
-      return(paste0(text, rep_char(" ", spaces)))
+      paste0(text, rep_char(" ", spaces))
     } else {
-      return(paste0(alignment_serialize(child), rep_char(" ", spaces)))
+      paste0(alignment_serialize(child), rep_char(" ", spaces))
     }
   }, pd_sub$terminal, pd_sub$text, pd_sub$child, pd_sub$spaces, pd_sub$newlines)
   if (anyNA(out)) {
