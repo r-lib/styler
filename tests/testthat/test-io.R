@@ -9,7 +9,7 @@ test_that("non-ASCII characters are handled properly for file styling", {
   skip_if(.Platform$OS.type != "windows")
 
   withr::with_locale(
-    c(LC_CTYPE = "English_United States.1252"),
+    c("LC_CTYPE" = "English_United States.932"),
     {
       tmp <- tempfile(fileext = ".R")
       con <- file(tmp, encoding = "UTF-8")
