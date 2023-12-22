@@ -14,3 +14,4 @@ revdep/
 touchstone/*
 !touchstone/config.json
 !touchstone/script.R
+README.html
