@@ -17,6 +17,7 @@
 ^doc$
 ^docs$
 ^gitsum$
+^hextools
 ^inst/WORDLIST$
 ^inst/hooks/.*$
 ^revdep$
