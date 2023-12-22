@@ -4,6 +4,7 @@
 .gitsum
 Meta
 R/scratch
+README.html
 doc
 docs
 gitsum
@@ -14,4 +15,3 @@ revdep/
 touchstone/*
 !touchstone/config.json
 !touchstone/script.R
-README.html
