@@ -59,4 +59,4 @@ The following online docs are available:
 Hex sticker font is
 [Gayathri](https://fonts.google.com/specimen/Gayathri), and the image is
 taken from icon made by [Freepik](https://www.freepik.com) and available
-at [flaticon.com](https://www.flaticon.com/free-icon/suit_1355137).
+at [flaticon.com](https://www.flaticon.com/free-icon/suit).
