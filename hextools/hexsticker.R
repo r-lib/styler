@@ -15,6 +15,7 @@ project_root <- here::here()
 # https://www.flaticon.com/free-icon/suit_1355137
 image <- image_read(file.path(project_root, "hextools", "suit.png"))
 manual_logo_path <- file.path(project_root, "man", "figures", "logo.png")
+color_font <- "#b3c9e5"
 
 sticker(
   # image
@@ -25,7 +26,7 @@ sticker(
   s_height = 1.2,
   # package name
   package = "styler",
-  p_color = "#F6ECA9",
+  p_color = color_font,
   p_family = google_font_name,
   p_size = 58,
   p_x = 0.35,
@@ -33,14 +34,15 @@ sticker(
   angle = 90,
   # image
   h_color = "black",
-  h_fill = "#11235A",
+  h_fill = "#a18595",
   # package URL
   url = "       https://styler.r-lib.org/",
   u_size = 10,
-  u_color = "#F6ECA9",
+  u_color = color_font,
   # saving sticker
   filename = manual_logo_path,
   dpi = 600,
 )
+
 
 rmarkdown::render("README.Rmd")
