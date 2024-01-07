@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.3.2.9019
+    rev: v0.3.2.9027
     hooks:
       - id: style-files
         args:
@@ -21,8 +21,6 @@ repos:
           tests/testmanual/addins/r-valid\.R|
           )$
       - id: lintr
-        additional_dependencies:
-          - r-lib/lintr
         exclude: >
           (?x)^(
           inst/.*|
@@ -34,9 +32,9 @@ repos:
       - id: roxygenize
         additional_dependencies:
           - r-lib/pkgapi
-          - dplyr@1.1.2
-          - roxygen2@7.2.3
-          - rlang@1.1.0
+          - dplyr
+          - roxygen2
+          - rlang
       - id: use-tidy-description
       - id: spell-check
         exclude: >
@@ -62,6 +60,7 @@ repos:
           .*\.Rds|
           .*\.sh|
           .*\.RData|
+          .*\.png|
           .*-in_tree
           )$
       - id: readme-rmd-rendered
