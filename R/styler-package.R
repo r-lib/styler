@@ -18,14 +18,15 @@
 #' style_text("a%>%b; a", scope = "tokens")
 "_PACKAGE"
 
-## usethis namespace: start
+## styler namespace: start
 #'
-#' @importFrom magrittr "%>%"
+#' @importFrom magrittr %>%
 #' @importFrom purrr compact partial flatten flatten_int flatten_chr
 #' @importFrom purrr map map_lgl map_int map_chr map2 map2_chr map_at pmap pwalk
-#' @importFrom rlang abort warn seq2 check_installed is_installed "%||%" set_names
+#' @importFrom rlang abort warn seq2 check_installed is_installed %||% set_names
 #' @importFrom vctrs vec_rbind vec_slice vec_split
-## usethis namespace: end
+#'
+## styler namespace: end
 NULL
 
 
