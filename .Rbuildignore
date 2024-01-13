@@ -21,6 +21,7 @@
 ^inst/WORDLIST$
 ^inst/hextools$
 ^inst/hooks/.*$
+^pkgdown$
 ^revdep$
 ^tests/testmanual$
 ^tic\.R$

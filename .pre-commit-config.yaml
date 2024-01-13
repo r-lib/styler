@@ -21,6 +21,8 @@ repos:
           tests/testmanual/addins/r-valid\.R|
           )$
       - id: lintr
+        additional_dependencies:
+          - r-lib/lintr
         exclude: >
           (?x)^(
           inst/.*|
