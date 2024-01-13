@@ -68,12 +68,10 @@ transform_file <- function(path,
 
   bullet <- if (is.na(changed)) {
     "warning"
+  } else if (changed) {
+    "info"
   } else {
-    if (changed) {
-      "info"
-    } else {
-      "tick"
-    }
+    "tick"
   }
 
   if (!getOption("styler.quiet", FALSE)) {

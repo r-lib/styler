@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# styler
+# styler <img src="man/figures/logo.png" align="right" width="240" />
 
 <!-- badges: start -->
 
@@ -53,3 +53,10 @@ The following online docs are available:
 - [latest CRAN release](https://styler.r-lib.org).
 
 - [GitHub development version](https://styler.r-lib.org/dev/).
+
+## Acknowledgments
+
+Hex sticker font is
+[Gayathri](https://fonts.google.com/specimen/Gayathri), and the image is
+taken from icon made by [Freepik](https://www.freepik.com) and available
+at [flaticon.com](https://www.flaticon.com/free-icon/suit).
