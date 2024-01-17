@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `{styler}`: Non-Invasive Pretty Printing of R Code
+# {styler}: Non-Invasive Pretty Printing of R Code
 
 <!-- badges: start -->
 

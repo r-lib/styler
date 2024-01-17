@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `{styler}`: Non-Invasive Pretty Printing of R Code
+# {styler}: Non-Invasive Pretty Printing of R Code
 
 <!-- badges: start -->
 
