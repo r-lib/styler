@@ -13,7 +13,7 @@ showtext_auto()
 project_root <- here::here()
 
 # https://www.flaticon.com/free-icon/suit_1355137
-image <- image_read(file.path(project_root, "hextools", "suit.png"))
+image <- image_read(file.path(project_root, "inst", "hextools", "suit.png"))
 manual_logo_path <- file.path(project_root, "man", "figures", "logo.png")
 color_font <- "#b3c9e5"
 

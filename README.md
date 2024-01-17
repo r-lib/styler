@@ -1,22 +1,21 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# styler <img src="man/figures/logo.png" align="right" width="240" />
+# {styler}: Non-Invasive Pretty Printing of R Code
 
 <!-- badges: start -->
 
 [![R build
 status](https://github.com/r-lib/styler/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/styler/actions)
-[![Life cycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![codecov test
-coverage](https://app.codecov.io/gh/r-lib/styler/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/styler)
+[![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![Test
+coverage](https://codecov.io/gh/r-lib/styler/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/styler?branch=main)
 [![CRAN
 Status](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
 
 <!-- badges: end -->
 
-# Overview
+# Overview <img src="man/figures/logo.png" align="right" width="240" />
 
 styler formats your code according to the [tidyverse style
 guide](https://style.tidyverse.org) (or your custom style guide) so you
