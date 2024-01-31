@@ -478,7 +478,7 @@ tidyverse_reindention <- function() {
 #' @family third-party style guide helpers
 #' @export
 scope_normalize <- function(scope, name = substitute(scope)) {
-  levels <-  c("none", "spaces", "indention", "line_breaks", "tokens")
+  levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
   rlang::arg_match(
     scope,
     values = levels,
