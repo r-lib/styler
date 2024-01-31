@@ -95,10 +95,10 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   if (getRversion() < "4.2") {
     is_unicode_parsing_error <- grepl("^\"<U\\+[0-9]+>\"$", pd$text)
     if (any(is_unicode_parsing_error)) {
-      rlang::abort(paste0(
-        "Can't parse input due to unicode restriction in base R. Please ",
-        "upgrade R to >= 4.2 to style this input. ",
-        "Context: https://github.com/r-lib/styler/issues/847"
+      cli::cli_abort(c(
+        "Can't parse input due to unicode restriction in base R.",
+        i = "Please upgrade R to >= 4.2 to style this input. ",
+        "Context: {.url https://github.com/r-lib/styler/issues/847}"
       ))
     }
   }
