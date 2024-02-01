@@ -19,7 +19,7 @@ transform_utf8 <- function(path, fun, dry) {
 #'   styling are not identical.
 #' @keywords internal
 transform_utf8_one <- function(path, fun, dry) {
-  rlang::arg_match(dry, c("on", "off", "fail"))
+  rlang::arg_match0(dry, c("on", "off", "fail"))
   rlang::try_fetch(
     {
       file_with_info <- read_utf8(path)
