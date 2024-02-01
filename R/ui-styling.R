@@ -87,10 +87,10 @@ style_pkg <- function(pkg = ".",
 #' Prettify a package
 #'
 #' @param filetype Vector of file extensions indicating which file types should
-#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R",
-#'   ".Rmd")`, or `c("r", "rmd")`. Supported values (after standardization) are:
-#'   "r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
-#'   Rmd.
+#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R",".Rmd")`,
+#'   or `c("r", "rmd")`. Supported values (after standardization) are:
+#'   "qmd", "r", "rmd", "rmarkdown", "rnw", and "rprofile".
+#'   Rmarkdown is treated as Rmd.
 #' @param exclude_files Character vector with regular expressions to files
 #'   that should be excluded from styling.
 #' @param exclude_dirs Character vector with directories to exclude

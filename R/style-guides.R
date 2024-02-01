@@ -479,11 +479,7 @@ tidyverse_reindention <- function() {
 #' @export
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
-  rlang::arg_match(
-    scope,
-    values = levels,
-    multiple = TRUE
-  )
+  rlang::arg_match(scope, values = levels, multiple = TRUE)
 
   if (inherits(scope, "AsIs")) {
     factor(as.character(scope), levels = levels, ordered = TRUE)
