@@ -22,7 +22,7 @@ transform_code <- function(path, fun, ..., dry) {
       ..., dry = dry
     )
   } else {
-    abort(paste(path, "is not an R, Rmd, qmd, or Rnw file"))
+    cli::cli_abort("{.path {path}} is not a qmd, R, Rmd, or Rnw file.")
   }
 }
 

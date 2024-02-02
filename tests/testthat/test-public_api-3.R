@@ -120,31 +120,31 @@ test_that("scope can be specified as is", {
 
 test_that("Can properly determine style_after_saving", {
   withr::with_envvar(list(save_after_styling = TRUE), {
-    expect_warning(op <- save_after_styling_is_active(), "is depreciated")
-    expect_equal(op, TRUE)
+    expect_warning(op <- save_after_styling_is_active(), "is deprecated")
+    expect_true(op)
   })
 
   withr::with_envvar(list(save_after_styling = FALSE), {
-    expect_warning(op <- save_after_styling_is_active(), "is depreciated")
-    expect_equal(op, FALSE)
+    expect_warning(op <- save_after_styling_is_active(), "is deprecated")
+    expect_false(op)
   })
 
 
   withr::with_options(list(styler.save_after_styling = TRUE), {
     expect_silent(op <- save_after_styling_is_active())
-    expect_equal(op, TRUE)
+    expect_true(op)
   })
 
   withr::with_options(list(styler.save_after_styling = TRUE), {
     withr::with_envvar(list(save_after_styling = FALSE), {
-      expect_warning(op <- save_after_styling_is_active(), "is depreciated")
-      expect_equal(op, TRUE)
+      expect_warning(op <- save_after_styling_is_active(), "is deprecated")
+      expect_true(op)
     })
   })
 
   withr::with_options(list(styler.save_after_styling = FALSE), {
     expect_silent(op <- save_after_styling_is_active())
-    expect_equal(op, FALSE)
+    expect_false(op)
   })
 })
 
