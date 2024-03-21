@@ -349,44 +349,44 @@
 <h3 id="alignment-detection-1-5-1">Alignment detection<a class="anchor" aria-label="anchor" href="#alignment-detection-1-5-1"></a></h3>
 <ul><li>
 <p>Code with left alignment after <code>=</code> in function calls is now recognized as aligned and won’t be reformatted (<a href="https://github.com/r-lib/styler/issues/774" class="external-link">#774</a>, <a href="https://github.com/r-lib/styler/issues/777" class="external-link">#777</a>).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># already detected previously</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">call</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y2 =</span>    <span class="dv">17</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># newly detected</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">call</span>(</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y2 =</span> <span class="dv">17</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># already detected previously</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">call</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="at">y2 =</span>    <span class="dv">17</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># newly detected</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">call</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="at">y2 =</span> <span class="dv">17</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>)</span></code></pre></div>
 </li>
 <li>
 <p>Similarly, left aligned after comma is now detected (<a href="https://github.com/r-lib/styler/issues/785" class="external-link">#785</a>, <a href="https://github.com/r-lib/styler/issues/786" class="external-link">#786</a>).</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># previously detected</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">call</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>, <span class="st">"It's old"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y2 =</span> <span class="dv">17</span>,      <span class="st">"before"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x,             <span class="sc">~</span>y,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"another"</span>,     <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"b"</span>,       <span class="dv">1211234</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># newly detected</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">call</span>(</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">2</span>,           <span class="at">p =</span> <span class="st">"another"</span>,</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"hhjkjkbew"</span>, <span class="at">x =</span> <span class="dv">3</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x,        <span class="sc">~</span>y,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"another"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"b"</span>,       <span class="dv">1211234</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># previously detected</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">call</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>, <span class="st">"It's old"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="at">y2 =</span> <span class="dv">17</span>,      <span class="st">"before"</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  <span class="sc">~</span>x,             <span class="sc">~</span>y,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="st">"another"</span>,     <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  <span class="st">"b"</span>,       <span class="dv">1211234</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># newly detected</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="fu">call</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">2</span>,           <span class="at">p =</span> <span class="st">"another"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"hhjkjkbew"</span>, <span class="at">x =</span> <span class="dv">3</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>)</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>  <span class="sc">~</span>x,        <span class="sc">~</span>y,</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>  <span class="st">"another"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>  <span class="st">"b"</span>,       <span class="dv">1211234</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>)</span></code></pre></div>
 <p>Also see <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>.</p>
 </li>
 </ul></div>
@@ -492,13 +492,13 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.1" id="styler-131">styler 1.3.1<small>2020-02-13</small><a class="anchor" aria-label="anchor" href="#styler-131"></a></h2>
 <p>Emergency release. In case multiple expressions are on one line and only some of them are cached, styler can remove code. To reach this state, some of the expressions must have been styled previously alone and the cache must be active. Example:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(styler)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cache_activate</span>()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Using cache 1.3.0 at ~/.Rcache/styler/1.3.0.</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">style_text</span>(<span class="st">"1"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">style_text</span>(<span class="st">"1 # comment"</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # comment</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(styler)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">cache_activate</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; Using cache 1.3.0 at ~/.Rcache/styler/1.3.0.</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">style_text</span>(<span class="st">"1"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="fu">style_text</span>(<span class="st">"1 # comment"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; # comment</span></span></code></pre></div>
 <p>This is obviously detrimental. We have added additional tests and fixed the problem (<a href="https://github.com/r-lib/styler/issues/593" class="external-link">#593</a>, <a href="https://github.com/r-lib/styler/issues/595" class="external-link">#595</a>), but we want repeat the warning from <code><a href="../reference/style_file.html">?style_file</a></code> that all style APIs apart from <code><a href="../reference/style_text.html">style_text()</a></code> overwrite code and that styler can only check the AST remains valid with <code>scope &lt; "tokens"</code>. So use this if you are conservative. Or deactivate the cache with <code>deactivate_cache()</code> until it has fully matured.</p>
 <p>We thank the people who have contributed to this release:</p>
 <p><a href="https://github.com/ellessenne" class="external-link">@ellessenne</a> and <a href="https://github.com/renkun-ken" class="external-link">@renkun-ken</a>.</p>
@@ -655,64 +655,64 @@
 <div class="section level3">
 <h3 id="stylers-1-0-0">stylers<a class="anchor" aria-label="anchor" href="#stylers-1-0-0"></a></h3>
 <p>These are functions used to style code. They style a directory, a whole package, a file or a string.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">style_dir</span>(<span class="at">path =</span> <span class="st">"."</span>, </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...), </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">filetype =</span> <span class="st">"R"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">exclude_files =</span> <span class="cn">NULL</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">style_pkg</span>(<span class="at">pkg =</span> <span class="st">"."</span>, </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...), <span class="at">filetype =</span> <span class="st">"R"</span>, </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">exclude_files =</span> <span class="st">"R/RcppExports.R"</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">style_file</span>(path, </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">style_text</span>(text, ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">style_dir</span>(<span class="at">path =</span> <span class="st">"."</span>, </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...), </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">filetype =</span> <span class="st">"R"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">exclude_files =</span> <span class="cn">NULL</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">style_pkg</span>(<span class="at">pkg =</span> <span class="st">"."</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...), <span class="at">filetype =</span> <span class="st">"R"</span>, </span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  <span class="at">exclude_files =</span> <span class="st">"R/RcppExports.R"</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="fu">style_file</span>(path, </span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...)</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>)</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="fu">style_text</span>(text, ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...))</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="style-guides-1-0-0">style guides<a class="anchor" aria-label="anchor" href="#style-guides-1-0-0"></a></h3>
 <p>These functions are the style guides implemented.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidyverse_style</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">scope =</span> <span class="st">"tokens"</span>, </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">strict =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">indent_by =</span> <span class="dv">2</span>, </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_comments_with_one_space =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">reindention =</span> <span class="fu">tidyverse_reindention</span>(), </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">math_token_spacing =</span> <span class="fu">tidyverse_math_token_spacing</span>()</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tidyverse_reindention</span>()</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tidyverse_math_token_spacing</span>()<span class="er">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">tidyverse_style</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="at">scope =</span> <span class="st">"tokens"</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="at">strict =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="at">indent_by =</span> <span class="dv">2</span>, </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="at">start_comments_with_one_space =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="at">reindention =</span> <span class="fu">tidyverse_reindention</span>(), </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="at">math_token_spacing =</span> <span class="fu">tidyverse_math_token_spacing</span>()</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="fu">tidyverse_reindention</span>()</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="fu">tidyverse_math_token_spacing</span>()<span class="er">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="style-guide-creators-1-0-0">style guide creators<a class="anchor" aria-label="anchor" href="#style-guide-creators-1-0-0"></a></h3>
 <p>This function is used to create a style guide.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">create_style_guide</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">initialize =</span> default_style_guide_attributes, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_break =</span> <span class="cn">NULL</span>, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">space =</span> <span class="cn">NULL</span>, </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">token =</span> <span class="cn">NULL</span>, </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">indention =</span> <span class="cn">NULL</span>, </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">use_raw_indention =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">reindention =</span> <span class="fu">tidyverse_reindention</span>()</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">create_style_guide</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">initialize =</span> default_style_guide_attributes, </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="at">line_break =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="at">space =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="at">token =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="at">indention =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="at">use_raw_indention =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>  <span class="at">reindention =</span> <span class="fu">tidyverse_reindention</span>()</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="helpers-1-0-0">Helpers<a class="anchor" aria-label="anchor" href="#helpers-1-0-0"></a></h3>
 <p>These are helper functions used to specify the style guides in use.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specify_math_token_spacing</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">zero =</span> <span class="cn">NULL</span>, </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">one =</span> <span class="fu">c</span>(<span class="st">"'+'"</span>, <span class="st">"'-'"</span>, <span class="st">"'*'"</span>, <span class="st">"'/'"</span>, <span class="st">"'^'"</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">specify_reindention</span>(</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">regex_pattern =</span> <span class="cn">NULL</span>, </span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">indention =</span> <span class="dv">0</span>, </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">comments_only =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">initialize_default_attributes</span>(pd_flat)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">specify_math_token_spacing</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="at">zero =</span> <span class="cn">NULL</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="at">one =</span> <span class="fu">c</span>(<span class="st">"'+'"</span>, <span class="st">"'-'"</span>, <span class="st">"'*'"</span>, <span class="st">"'/'"</span>, <span class="st">"'^'"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">specify_reindention</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="at">regex_pattern =</span> <span class="cn">NULL</span>, </span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  <span class="at">indention =</span> <span class="dv">0</span>, </span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  <span class="at">comments_only =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">initialize_default_attributes</span>(pd_flat)</span></code></pre></div>
 </div>
 </div>
   </div>
