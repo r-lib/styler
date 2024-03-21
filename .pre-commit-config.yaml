@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.3.2.9027
+    rev: v0.4.0
     hooks:
       - id: style-files
         args:
@@ -101,7 +101,7 @@ repos:
           )$
       - id: pkgdown
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: check-added-large-files
         args: ["--maxkb=200"]
@@ -119,7 +119,7 @@ repos:
           tests/testthat/_snaps/.*|
           )$
   - repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: 475bf5d96927a1887ce2863ff3075b1d7240bc51
+    rev: 517cddbf1d8514ddaf43159686617ae65895dc99
     hooks:
       - id: tidy-gitignore
   - repo: local

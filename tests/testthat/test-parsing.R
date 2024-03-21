@@ -29,9 +29,10 @@ test_that("CRLF EOLs fail with informative error", {
 
 
 test_that("mixed CRLF / LF EOLs fail", {
+  error_msg_stem <- if (getRversion() < "4.4") "unexpected input" else "unexpected invalid token"
   expect_error(
     style_text("a + 3 -4 -> x\nx + 2\r\n glück + 1"),
-    "unexpected input"
+    error_msg_stem
   )
 })
 
