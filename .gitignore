@@ -1,9 +1,11 @@
+.DS_Store
 .RData
 .Rhistory
 .Rproj.user
 .gitsum
 Meta
 R/scratch
+README.html
 doc
 docs
 gitsum

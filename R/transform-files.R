@@ -68,12 +68,10 @@ transform_file <- function(path,
 
   bullet <- if (is.na(changed)) {
     "warning"
+  } else if (changed) {
+    "info"
   } else {
-    if (changed) {
-      "info"
-    } else {
-      "tick"
-    }
+    "tick"
   }
 
   if (!getOption("styler.quiet", FALSE)) {
@@ -116,9 +114,13 @@ make_transformer <- function(transformers,
       use_cache <- FALSE
     }
 
-    if (!use_cache) {
-      transformed_code <- text %>%
-        parse_transform_serialize_r(transformers,
+    if (use_cache) {
+      text
+    } else {
+      transformed_code <-
+        parse_transform_serialize_r(
+          text,
+          transformers,
           base_indention = base_indention,
           warn_empty = warn_empty
         )
@@ -139,8 +141,6 @@ make_transformer <- function(transformers,
       }
 
       transformed_code
-    } else {
-      text
     }
   }
 }

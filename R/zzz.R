@@ -36,7 +36,7 @@ delete_if_cache_directory <- function(path) {
   if (getRversion() < package_version("4.0.0")) {
     return(FALSE)
   }
-  designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"))
+  designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"), mustWork = FALSE)
   is_in_tools_cache <- startsWith(path, designated_cache_path)
   temp_dir <- normalizePath(dirname(tempdir()))
   is_in_generic_cache <- startsWith(path, temp_dir)
@@ -66,7 +66,7 @@ ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
 ask_to_switch_to_non_default_cache_root_impl <- function() {
   cli::cli_inform(paste0(
     "{{styler}} cache is cleared after 6 days. ",
-    "See {.help styler::caching} to configure differently or silence this message."
+    "See {.topic styler::caching} to configure differently or silence this message."
   ))
 }
 

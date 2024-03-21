@@ -471,7 +471,7 @@ tidyverse_reindention <- function() {
 #' @param scope A character vector of length one or a vector of class `AsIs`.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
-
+#'
 #' @examples
 #' scope_normalize(I("tokens"))
 #' scope_normalize(I(c("indention", "tokens")))
@@ -479,12 +479,7 @@ tidyverse_reindention <- function() {
 #' @export
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
-  if (!all((scope %in% levels))) {
-    abort(paste(
-      "all values in", name, "must be one of the following:",
-      toString(levels)
-    ))
-  }
+  rlang::arg_match(scope, values = levels, multiple = TRUE)
 
   if (inherits(scope, "AsIs")) {
     factor(as.character(scope), levels = levels, ordered = TRUE)

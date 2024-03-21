@@ -95,15 +95,14 @@ get_parse_data <- function(text, include_text = TRUE, ...) {
   if (getRversion() < "4.2") {
     is_unicode_parsing_error <- grepl("^\"<U\\+[0-9]+>\"$", pd$text)
     if (any(is_unicode_parsing_error)) {
-      rlang::abort(paste0(
-        "Can't parse input due to unicode restriction in base R. Please ",
-        "upgrade R to >= 4.2 to style this input. ",
-        "Context: https://github.com/r-lib/styler/issues/847"
+      cli::cli_abort(c(
+        "Can't parse input due to unicode restriction in base R.",
+        i = "Please upgrade R to >= 4.2 to style this input.",
+        "Context: {.url https://github.com/r-lib/styler/issues/847}"
       ))
     }
   }
-  pd <- pd %>%
-    add_id_and_short()
+  pd <- add_id_and_short(pd)
 
   pd
 }
@@ -182,7 +181,6 @@ ensure_correct_txt <- function(pd, text) {
 #' changes from "all strings" to "all problematic strings", is partly
 #' misleading and this approach was chosen for performance reasons only.
 #' @param pd A parse table.
-#' @param text The initial code to style.
 #' @keywords internal
 is_insufficiently_parsed_string <- function(pd) {
   grepl("^\\[", pd$text) & pd$token == "STR_CONST"

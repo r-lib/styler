@@ -68,7 +68,7 @@ style_active_file <- function() {
   } else if (is_r_file) {
     out <- try_transform_as_r_file(context, transformer)
   } else {
-    abort("Can only style .R, .Rmd and .Rnw files.")
+    abort("Can only style .qmd, .R, .Rmd, and .Rnw files.")
   }
   rstudioapi::modifyRange(
     c(1L, 1L, length(context$contents) + 1L, 1L),
@@ -97,11 +97,12 @@ save_after_styling_is_active <- function() {
   op_old <- as.logical(toupper(Sys.getenv("save_after_styling")))
   op_new <- getOption("styler.save_after_styling", default = "")
   if (!is.na(op_old)) {
-    rlang::warn(paste(
-      "Using the environment variable save_after_styling is depreciated and",
-      "won't work in a future version of styler. Please use the R option",
-      "`styler.save_after_styling` to control the behavior. If both are set,",
-      "the R option is taken."
+    cli::cli_warn(c(
+      "Using the environment variable {.envvar save_after_styling} is \\
+      deprecated and won't work in a future version of styler. ",
+      "!" = "Please use `options(styler.save_after_styling)` \\
+             to control the behavior.",
+      i = "If both are set, the R option is used."
     ))
   }
 
@@ -123,7 +124,7 @@ style_selection <- function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
   text <- context$selection[[1L]]$text
-  if (all(nchar(text) == 0L)) abort("No code selected")
+  if (!any(nzchar(text))) abort("No code selected")
   out <- style_text(
     text,
     transformers = get_addins_style_transformer(),
@@ -212,9 +213,9 @@ try_transform_as_r_file <- function(context, transformer) {
     transformer(context$contents),
     error = function(e) {
       preamble_for_unsaved <- paste(
-        "Styling of unsaved files is only supported for R files with valid ",
-        "code. Please save the file (as .R or .Rmd) and make sure that the R ",
-        "code in it can be parsed. Then, try to style again."
+        "Styling of unsaved files is only supported for R files with valid",
+        "code. Please save the file (as .qmd, .R, or .Rmd) and make sure that",
+        "the R code in it can be parsed. Then, try to style again."
       )
 
       if (context$path == "") {

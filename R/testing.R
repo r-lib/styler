@@ -237,7 +237,7 @@ n_times_faster_with_cache <- function(x1, x2 = x1, ...,
                                       fun = styler::style_text,
                                       n = 3L,
                                       clear = "always") {
-  rlang::arg_match(clear, c("always", "final", "never", "all but last"))
+  rlang::arg_match0(clear, c("always", "final", "never", "all but last"))
 
   out <- purrr::map(1L:n, n_times_faster_bench,
     x1 = x1, x2 = x2, fun = fun,
@@ -327,7 +327,7 @@ local_test_setup <- function(cache = FALSE,
                              .local_envir = parent.frame()) {
   current_cache <- cache_info(format = "tabular")
   withr::local_options(
-    list("styler.quiet" = TRUE, "R.cache.rootPath" = tempfile()),
+    list(styler.quiet = TRUE, R.cache.rootPath = tempfile()),
     .local_envir = .local_envir
   )
   if (cache) {
