@@ -1,0 +1,163 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})       
+ ¦--COMMENT: # sty [0/0] {1}                                  
+ ¦--expr: aflh( [1/0] {2}                                     
+ ¦   ¦--expr: aflh [0/0] {4}                                  
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: aflh [0/0] {3}              
+ ¦   ¦--'(': ( [0/0] {5}                                      
+ ¦   ¦--expr: {
+  i [0/0] {6}                                
+ ¦   ¦   ¦--'{': { [0/2] {7}                                  
+ ¦   ¦   ¦--expr: isfri [1/0] {8}                             
+ ¦   ¦   ¦   ¦--expr: isfri [0/1] {14}                        
+ ¦   ¦   ¦   ¦   °--SYMBOL: isfri [0/0] {13}                  
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {15}                  
+ ¦   ¦   ¦   ¦--COMMENT: # com [1/4] {16}                     
+ ¦   ¦   ¦   ¦--expr: tjnfa [1/1] {17}                        
+ ¦   ¦   ¦   ¦   ¦--expr: tjnfa [0/0] {19}                    
+ ¦   ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: tjnfa [0/0] {18}
+ ¦   ¦   ¦   ¦   ¦--'(': ( [0/0] {20}                         
+ ¦   ¦   ¦   ¦   °--')': ) [0/0] {21}                         
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/1] {22}                  
+ ¦   ¦   ¦   ¦--COMMENT: # com [0/4] {23}                     
+ ¦   ¦   ¦   ¦--expr: tjnfa [1/1] {24}                        
+ ¦   ¦   ¦   ¦   ¦--expr: tjnfa [0/0] {26}                    
+ ¦   ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: tjnfa [0/0] {25}
+ ¦   ¦   ¦   ¦   ¦--'(': ( [0/0] {27}                         
+ ¦   ¦   ¦   ¦   °--')': ) [0/0] {28}                         
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {29}                  
+ ¦   ¦   ¦   ¦--expr: tjnfx [1/1] {30}                        
+ ¦   ¦   ¦   ¦   ¦--expr: tjnfx [0/0] {32}                    
+ ¦   ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: tjnfx [0/0] {31}
+ ¦   ¦   ¦   ¦   ¦--'(': ( [0/0] {33}                         
+ ¦   ¦   ¦   ¦   °--')': ) [0/0] {34}                         
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {35}                  
+ ¦   ¦   ¦   ¦--expr: tf797 [1/1] {36}                        
+ ¦   ¦   ¦   ¦   ¦--expr: tf797 [0/0] {38}                    
+ ¦   ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: tf797 [0/0] {37}
+ ¦   ¦   ¦   ¦   ¦--'(': ( [0/0] {39}                         
+ ¦   ¦   ¦   ¦   °--')': ) [0/0] {40}                         
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/1] {41}                  
+ ¦   ¦   ¦   ¦--COMMENT: # mor [0/4] {42}                     
+ ¦   ¦   ¦   ¦--COMMENT: # com [1/4] {43}                     
+ ¦   ¦   ¦   °--expr: yyexp [1/0] {44}                        
+ ¦   ¦   ¦       ¦--expr: yyexp [0/0] {46}                    
+ ¦   ¦   ¦       ¦   °--SYMBOL_FUNCTION_CALL: yyexp [0/0] {45}
+ ¦   ¦   ¦       ¦--'(': ( [0/0] {47}                         
+ ¦   ¦   ¦       °--')': ) [0/0] {48}                         
+ ¦   ¦   °--'}': } [1/0] {49}                                 
+ ¦   °--')': ) [0/0] {50}                                     
+ ¦--COMMENT: # sty [1/0] {51}                                 
+ ¦--expr: aflh( [3/0] {52}                                    
+ ¦   ¦--expr: aflh [0/0] {54}                                 
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: aflh [0/0] {53}             
+ ¦   ¦--'(': ( [0/0] {55}                                     
+ ¦   ¦--expr: {
+  i [0/0] {56}                               
+ ¦   ¦   ¦--'{': { [0/2] {57}                                 
+ ¦   ¦   ¦--expr: isfri [1/0] {58}                            
+ ¦   ¦   ¦   ¦--expr: isfri [0/1] {64}                        
+ ¦   ¦   ¦   ¦   °--SYMBOL: isfri [0/0] {63}                  
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {65}                  
+ ¦   ¦   ¦   ¦--COMMENT: # com [1/4] {66}                     
+ ¦   ¦   ¦   ¦--expr: tjnfa [1/1] {67}                        
+ ¦   ¦   ¦   ¦   ¦--expr: tjnfa [0/0] {69}                    
+ ¦   ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: tjnfa [0/0] {68}
+ ¦   ¦   ¦   ¦   ¦--'(': ( [0/0] {70}                         
+ ¦   ¦   ¦   ¦   °--')': ) [0/0] {71}                         
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/1] {72}                  
+ ¦   ¦   ¦   ¦--COMMENT: # com [0/4] {73}                     
+ ¦   ¦   ¦   ¦--expr: tjnfa [1/1] {74}                        
+ ¦   ¦   ¦   ¦   ¦--expr: tjnfa [0/0] {76}                    
+ ¦   ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: tjnfa [0/0] {75}
+ ¦   ¦   ¦   ¦   ¦--'(': ( [0/0] {77}                         
+ ¦   ¦   ¦   ¦   °--')': ) [0/0] {78}                         
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {79}                  
+ ¦   ¦   ¦   ¦--expr: tjnfx [1/1] {80}                        
+ ¦   ¦   ¦   ¦   ¦--expr: tjnfx [0/0] {82}                    
+ ¦   ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: tjnfx [0/0] {81}
+ ¦   ¦   ¦   ¦   ¦--'(': ( [0/0] {83}                         
+ ¦   ¦   ¦   ¦   °--')': ) [0/0] {84}                         
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {85}                  
+ ¦   ¦   ¦   ¦--expr: tf797 [1/1] {86}                        
+ ¦   ¦   ¦   ¦   ¦--expr: tf797 [0/0] {88}                    
+ ¦   ¦   ¦   ¦   ¦   °--SYMBOL_FUNCTION_CALL: tf797 [0/0] {87}
+ ¦   ¦   ¦   ¦   ¦--'(': ( [0/0] {89}                         
+ ¦   ¦   ¦   ¦   °--')': ) [0/0] {90}                         
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/1] {91}                  
+ ¦   ¦   ¦   ¦--COMMENT: # mor [0/4] {92}                     
+ ¦   ¦   ¦   ¦--COMMENT: # com [1/4] {93}                     
+ ¦   ¦   ¦   °--expr: yyexp [1/0] {94}                        
+ ¦   ¦   ¦       ¦--expr: yyexp [0/0] {96}                    
+ ¦   ¦   ¦       ¦   °--SYMBOL_FUNCTION_CALL: yyexp [0/0] {95}
+ ¦   ¦   ¦       ¦--'(': ( [0/0] {97}                         
+ ¦   ¦   ¦       °--')': ) [0/0] {98}                         
+ ¦   ¦   °--'}': } [1/0] {99}                                 
+ ¦   °--')': ) [0/0] {100}                                    
+ ¦--COMMENT: # sty [3/0] {101}                                
+ ¦--expr: aflh( [1/0] {102}                                   
+ ¦   ¦--expr: aflh [0/0] {104}                                
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: aflh [0/0] {103}            
+ ¦   ¦--'(': ( [0/0] {105}                                    
+ ¦   ¦--expr: {
+  i [0/0] {106}                              
+ ¦   ¦   ¦--'{': { [0/2] {107}                                
+ ¦   ¦   ¦--expr: isfri [1/1] {108}                           
+ ¦   ¦   ¦   ¦--expr: isfri [0/1] {114}                       
+ ¦   ¦   ¦   ¦   °--SYMBOL: isfri [0/0] {113}                 
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {115}                 
+ ¦   ¦   ¦   ¦--COMMENT: # com [1/4] {116}                    
+ ¦   ¦   ¦   ¦--expr: tjnfa [1/1] {118}                       
+ ¦   ¦   ¦   ¦   °--SYMBOL: tjnfa [0/0] {117}                 
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {119}                 
+ ¦   ¦   ¦   ¦--expr: tjnfa [1/1] {121}                       
+ ¦   ¦   ¦   ¦   °--SYMBOL: tjnfa [0/0] {120}                 
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {122}                 
+ ¦   ¦   ¦   ¦--expr: tjnfx [1/1] {124}                       
+ ¦   ¦   ¦   ¦   °--SYMBOL: tjnfx [0/0] {123}                 
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {125}                 
+ ¦   ¦   ¦   ¦--COMMENT: # mor [1/4] {126}                    
+ ¦   ¦   ¦   ¦--expr: tf797 [1/1] {128}                       
+ ¦   ¦   ¦   ¦   °--SYMBOL: tf797 [0/0] {127}                 
+ ¦   ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/1] {129}                 
+ ¦   ¦   ¦   ¦--COMMENT: # com [0/4] {130}                    
+ ¦   ¦   ¦   ¦--COMMENT: # her [1/4] {131}                    
+ ¦   ¦   ¦   °--expr: yyexp [1/0] {133}                       
+ ¦   ¦   ¦       °--SYMBOL: yyexp [0/0] {132}                 
+ ¦   ¦   ¦--COMMENT: # [0/2] {134}                            
+ ¦   ¦   ¦--COMMENT: # wha [1/0] {135}                        
+ ¦   ¦   °--'}': } [1/0] {136}                                
+ ¦   °--')': ) [0/0] {137}                                    
+ ¦--COMMENT: # sty [1/0] {138}                                
+ °--expr: aflh( [3/0] {139}                                   
+     ¦--expr: aflh [0/0] {141}                                
+     ¦   °--SYMBOL_FUNCTION_CALL: aflh [0/0] {140}            
+     ¦--'(': ( [0/0] {142}                                    
+     ¦--expr: {
+  i [0/0] {143}                              
+     ¦   ¦--'{': { [0/2] {144}                                
+     ¦   ¦--expr: isfri [1/1] {145}                           
+     ¦   ¦   ¦--expr: isfri [0/1] {151}                       
+     ¦   ¦   ¦   °--SYMBOL: isfri [0/0] {150}                 
+     ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {152}                 
+     ¦   ¦   ¦--COMMENT: # com [1/4] {153}                    
+     ¦   ¦   ¦--expr: tjnfa [1/1] {155}                       
+     ¦   ¦   ¦   °--SYMBOL: tjnfa [0/0] {154}                 
+     ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {156}                 
+     ¦   ¦   ¦--expr: tjnfa [1/1] {158}                       
+     ¦   ¦   ¦   °--SYMBOL: tjnfa [0/0] {157}                 
+     ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {159}                 
+     ¦   ¦   ¦--expr: tjnfx [1/1] {161}                       
+     ¦   ¦   ¦   °--SYMBOL: tjnfx [0/0] {160}                 
+     ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/4] {162}                 
+     ¦   ¦   ¦--COMMENT: # mor [1/4] {163}                    
+     ¦   ¦   ¦--expr: tf797 [1/1] {165}                       
+     ¦   ¦   ¦   °--SYMBOL: tf797 [0/0] {164}                 
+     ¦   ¦   ¦--SPECIAL-PIPE: %>% [0/1] {166}                 
+     ¦   ¦   ¦--COMMENT: # com [0/4] {167}                    
+     ¦   ¦   ¦--COMMENT: # her [1/4] {168}                    
+     ¦   ¦   °--expr: yyexp [1/0] {170}                       
+     ¦   ¦       °--SYMBOL: yyexp [0/0] {169}                 
+     ¦   ¦--COMMENT: # [0/2] {171}                            
+     ¦   ¦--COMMENT: # wha [1/0] {172}                        
+     ¦   °--'}': } [1/0] {173}                                
+     °--')': ) [0/0] {174}                                    

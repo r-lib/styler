@@ -1,16 +1,17 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: # a c [0/0] {1}                           
- °--expr:  [1/0] {2}                                   
-     ¦--expr:  [0/1] {4}                               
+ °--expr: a <-  [1/0] {2}                              
+     ¦--expr: a [0/1] {4}                              
      ¦   °--SYMBOL: a [0/0] {3}                        
      ¦--LEFT_ASSIGN: <- [0/1] {5}                      
-     °--expr:  [0/0] {6}                               
+     °--expr: funct [0/0] {6}                          
          ¦--FUNCTION: funct [0/0] {7}                  
          ¦--'(': ( [0/0] {8}                           
          ¦--SYMBOL_FORMALS: x [0/0] {9}                
          ¦--')': ) [0/1] {10}                          
-         °--expr:  [0/0] {11}                          
+         °--expr: {
+  x [0/0] {11}                    
              ¦--'{': { [0/2] {12}                      
-             ¦--expr:  [1/0] {14}                      
+             ¦--expr: x [1/0] {14}                     
              ¦   °--SYMBOL: x [0/0] {13}               
              °--'}': } [1/0] {15}                      

@@ -1,54 +1,54 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--expr:  [0/0] {1}                                   
+ ¦--expr: if(TR [0/0] {1}                              
  ¦   ¦--IF: if [0/0] {2}                               
  ¦   ¦--'(': ( [0/0] {3}                               
- ¦   ¦--expr:  [0/0] {5}                               
+ ¦   ¦--expr: TRUE [0/0] {5}                           
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {4}                  
  ¦   ¦--')': ) [0/0] {6}                               
- ¦   °--expr:  [0/0] {8}                               
+ ¦   °--expr: NULL [0/0] {8}                           
  ¦       °--NULL_CONST: NULL [0/0] {7}                 
- ¦--expr:  [2/1] {9}                                   
+ ¦--expr: if(TR [2/1] {9}                              
  ¦   ¦--IF: if [0/0] {10}                              
  ¦   ¦--'(': ( [0/0] {11}                              
- ¦   ¦--expr:  [0/0] {13}                              
+ ¦   ¦--expr: TRUE [0/0] {13}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {12}                 
  ¦   ¦--')': ) [0/0] {14}                              
- ¦   °--expr:  [0/0] {16}                              
+ ¦   °--expr: NULL [0/0] {16}                          
  ¦       °--NULL_CONST: NULL [0/0] {15}                
  ¦--COMMENT: # com [0/0] {17}                          
- ¦--expr:  [3/0] {18}                                  
+ ¦--expr: if(TR [3/0] {18}                             
  ¦   ¦--IF: if [0/0] {19}                              
  ¦   ¦--'(': ( [0/0] {20}                              
- ¦   ¦--expr:  [0/0] {22}                              
+ ¦   ¦--expr: TRUE [0/0] {22}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {21}                 
  ¦   ¦--')': ) [0/1] {23}                              
  ¦   ¦--COMMENT: # com [0/0] {24}                      
- ¦   °--expr:  [1/0] {26}                              
+ ¦   °--expr: NULL [1/0] {26}                          
  ¦       °--NULL_CONST: NULL [0/0] {25}                
- ¦--expr:  [2/0] {27}                                  
+ ¦--expr: if(TR [2/0] {27}                             
  ¦   ¦--IF: if [0/0] {28}                              
  ¦   ¦--'(': ( [0/0] {29}                              
- ¦   ¦--expr:  [0/1] {31}                              
+ ¦   ¦--expr: TRUE [0/1] {31}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {30}                 
  ¦   ¦--COMMENT: # com [0/0] {32}                      
  ¦   ¦--')': ) [1/0] {33}                              
- ¦   °--expr:  [0/0] {35}                              
+ ¦   °--expr: NULL [0/0] {35}                          
  ¦       °--NULL_CONST: NULL [0/0] {34}                
- ¦--expr:  [2/0] {36}                                  
+ ¦--expr: if( # [2/0] {36}                             
  ¦   ¦--IF: if [0/0] {37}                              
  ¦   ¦--'(': ( [0/1] {38}                              
  ¦   ¦--COMMENT: # com [0/0] {39}                      
- ¦   ¦--expr:  [1/0] {41}                              
+ ¦   ¦--expr: TRUE [1/0] {41}                          
  ¦   ¦   °--NUM_CONST: TRUE [0/0] {40}                 
  ¦   ¦--')': ) [0/0] {42}                              
- ¦   °--expr:  [0/0] {44}                              
+ ¦   °--expr: NULL [0/0] {44}                          
  ¦       °--NULL_CONST: NULL [0/0] {43}                
- °--expr:  [2/0] {45}                                  
+ °--expr: if #  [2/0] {45}                             
      ¦--IF: if [0/1] {46}                              
      ¦--COMMENT: # com [0/0] {47}                      
      ¦--'(': ( [1/0] {48}                              
-     ¦--expr:  [0/0] {50}                              
+     ¦--expr: TRUE [0/0] {50}                          
      ¦   °--NUM_CONST: TRUE [0/0] {49}                 
      ¦--')': ) [0/0] {51}                              
-     °--expr:  [0/0] {53}                              
+     °--expr: NULL [0/0] {53}                          
          °--NULL_CONST: NULL [0/0] {52}                

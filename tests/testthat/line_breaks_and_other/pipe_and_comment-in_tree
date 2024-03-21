@@ -1,15 +1,15 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- °--expr:  [0/0] {1}                                   
-     ¦--expr:  [0/1] {2}                               
-     ¦   ¦--expr:  [0/0] {4}                           
+ °--expr: 1:10  [0/0] {1}                              
+     ¦--expr: 1:10 [0/1] {2}                           
+     ¦   ¦--expr: 1 [0/0] {4}                          
      ¦   ¦   °--NUM_CONST: 1 [0/0] {3}                 
      ¦   ¦--':': : [0/0] {5}                           
-     ¦   °--expr:  [0/0] {7}                           
+     ¦   °--expr: 10 [0/0] {7}                         
      ¦       °--NUM_CONST: 10 [0/0] {6}                
      ¦--SPECIAL-PIPE: %>% [0/1] {8}                    
      ¦--COMMENT: # sum [0/2] {9}                       
-     °--expr:  [1/0] {10}                              
-         ¦--expr:  [0/0] {12}                          
+     °--expr: sum() [1/0] {10}                         
+         ¦--expr: sum [0/0] {12}                       
          ¦   °--SYMBOL_FUNCTION_CALL: sum [0/0] {11}   
          ¦--'(': ( [0/0] {13}                          
          °--')': ) [0/0] {14}                          

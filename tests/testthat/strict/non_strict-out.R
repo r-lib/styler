@@ -4,6 +4,23 @@ test <- function() {
   "even if the string contains an escaped ' single quote"
   'but not if it contains a "double quote'
 
+  "multi-line quotes
+  remain multi-line
+  "
+
+  "That also holds true
+  if
+  single quotes are used
+  ."
+
+  "strings with embedded\nline breaks are handled correctly"
+
+  "\\"
+  "\\'"
+  "\\\\"
+  "\\\\'"
+  "'\\\\'"
+
   # Comments are always preserved
 
   function_calls(get_spaces = around_equal)
@@ -65,7 +82,7 @@ test <- function() {
   a > b
   a * b
   a / b
-  a ^ b
+  a^b
   a & b
   a | b
   a := b
@@ -118,8 +135,8 @@ test <- function() {
 
   nested(
     function_call (with),
-    many
-    ,     first_level_args)
+    many,
+    first_level_args)
 
   nested(
     function_call (with),  # a comment and
@@ -135,7 +152,13 @@ test <- function() {
 
 
 # formula
-lm(a~b + c, data = NA)
-lm(a~. - 1, data = NA)
-a~b:c
-a~b:c
+lm(a ~ b + c, data = NA)
+lm(a ~ . - 1, data = NA)
+a ~ b:c
+a ~ b:c
+a   ~   b:c
+
+~a
+~gg
+b ~   k
+call(1, ~qq)

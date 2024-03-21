@@ -10,11 +10,17 @@ default_style_guide_attributes(pd_flat)
 \item{pd_flat}{A parse table.}
 }
 \description{
-This function initialises and removes various variables from the parse
+This function initializes and removes various variables from the parse
 table.
 }
 \examples{
-string_to_format <- "call( 3)"
-pd <- styler:::compute_parse_data_nested(string_to_format)
-styler:::pre_visit(pd, c(default_style_guide_attributes))
+withr::with_options(
+  list(styler.cache_name = NULL), # temporarily deactivate cache
+  {
+    string_to_format <- "call( 3)"
+    pd <- compute_parse_data_nested(string_to_format)
+    styler:::pre_visit_one(pd, default_style_guide_attributes)
+  }
+)
 }
+\keyword{internal}

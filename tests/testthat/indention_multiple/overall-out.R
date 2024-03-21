@@ -17,7 +17,7 @@ a <- function(x) {
   c(
     list(x + 2),
     c(c(
-      26 ^ 2, # FIXME ^ operator has to be surrounded by one space (or none?!), never multiple
+      26^2,
       8,
       7
     ))

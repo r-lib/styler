@@ -1,5 +1,5 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
  ¦--COMMENT: # com [0/0] {1}                           
  ¦--COMMENT: #' sp [1/0] {2}                           
- °--expr:  [1/0] {4}                                   
+ °--expr: a [1/0] {4}                                  
      °--SYMBOL: a [0/0] {3}                            

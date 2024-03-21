@@ -1,5 +1,6 @@
-function()
+function() {
   NULL
+}
 
 for (i in 1:3)
 {

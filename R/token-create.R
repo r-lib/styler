@@ -18,35 +18,48 @@
 #' @param terminal Boolean vector indicating whether a token is a terminal or
 #'   not.
 #' @param child The children of the tokens.
+#' @param stylerignore Boolean to indicate if the line should be ignored by
+#'   styler. Must take value from token before, can't have a default.
+#' @param block The block (of caching) to which the token belongs. An integer.
+#' @param is_cached Whether the token is cached already.
 #' @family token creators
+#' @keywords internal
 create_tokens <- function(tokens,
                           texts,
-                          lag_newlines = 0,
-                          spaces = 0,
+                          lag_newlines = 0L,
+                          spaces = 0L,
                           pos_ids,
                           token_before = NA,
                           token_after = NA,
                           indention_ref_pos_ids = NA,
-                          indents = 0,
+                          indents,
                           terminal = TRUE,
-                          child = NULL) {
-  len_text <- length(text)
-  data_frame(
-    token = tokens,
-    text = texts,
-    short = substr(texts, 1, 5),
-    lag_newlines = lag_newlines,
-    newlines = lead(lag_newlines),
-    pos_id = pos_ids,
-    token_before = token_before,
-    token_after = token_after,
-    terminal = rep(terminal, len_text),
-    internal = rep(FALSE, len_text),
-    spaces = spaces,
-    multi_line = rep(FALSE, len_text),
-    indention_ref_pos_id = indention_ref_pos_ids,
-    indent = indents,
-    child = rep(list(child), len_text)
+                          child = NULL,
+                          stylerignore,
+                          block = NA,
+                          is_cached = FALSE) {
+  len_text <- length(texts)
+  new_styler_df(
+    list(
+      token = tokens,
+      text = texts,
+      short = substr(texts, 1L, 5L),
+      lag_newlines = lag_newlines,
+      newlines = lead(lag_newlines),
+      pos_id = pos_ids,
+      token_before = token_before,
+      token_after = token_after,
+      terminal = rep(terminal, len_text),
+      internal = rep(FALSE, len_text),
+      spaces = spaces,
+      multi_line = rep(0L, len_text),
+      indention_ref_pos_id = indention_ref_pos_ids,
+      indent = indents,
+      child = rep(list(child), len_text),
+      stylerignore = stylerignore,
+      block = block,
+      is_cached = is_cached
+    )
   )
 }
 
@@ -63,10 +76,17 @@ create_tokens <- function(tokens,
 #' Returns a valid sequences of pos_ids or an error if it was not possible to
 #' create one. The validation is done with [validate_new_pos_ids()]
 #' @family token creators
-create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
-  direction <- ifelse(after, 1L, -1L)
+#' @keywords internal
+create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
+  direction <- if (after) {
+    1L
+  } else {
+    -1L
+  }
   first <- find_start_pos_id(pd, pos, by, direction, after)
-  new_ids <- seq(first, to = first + direction * (n - 1) * by, by = by * direction)
+  new_ids <- seq(first,
+    to = first + direction * (n - 1L) * by, by = by * direction
+  )
   validate_new_pos_ids(new_ids, after)
   new_ids
 }
@@ -80,16 +100,37 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1) {
 #' @param candidates The `pos_ids` of the candidates that origin from other
 #'   nests.
 #' @inheritParams create_pos_ids
-find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) {
+#' @keywords internal
+find_start_pos_id <- function(pd,
+                              pos,
+                              by,
+                              direction,
+                              after,
+                              candidates = NULL) {
   candidates <- append(candidates, pd$pos_id[pos])
   if (is.null(pd$child[[pos]])) {
-    ifelse(after, max(candidates), min(candidates)) + by * direction
+    start_pos_idx <- if (after) {
+      max(candidates)
+    } else {
+      min(candidates)
+    }
+    start_pos_idx <- start_pos_idx + (by * direction)
   } else {
-    find_start_pos_id(
-      pd$child[[pos]], if_else(after, nrow(pd$child[[pos]]), 1L),
-      by, direction, after, candidates
+    start_pos_idx <- find_start_pos_id(
+      pd$child[[pos]],
+      if (after) {
+        nrow(pd$child[[pos]])
+      } else {
+        1L
+      },
+      by,
+      direction,
+      after,
+      candidates
     )
   }
+
+  start_pos_idx
 }
 
 
@@ -103,10 +144,17 @@ find_start_pos_id <- function(pd, pos, by, direction, after, candidates = NULL) 
 #' @param new_ids A vector with new ids
 #' @param after Whether the ids are created with `after = TRUE` (and hence
 #' should be in the range x.0-x.45) or not.
+
 #' @family token creators
+#' @keywords internal
 validate_new_pos_ids <- function(new_ids, after) {
-  ref <- ifelse(after, floor(new_ids), ceiling(new_ids))
-  if (any(abs(new_ids - ref) > 0.5)) stop("too many ids assigned")
+  ref <- if (after) {
+    floor(new_ids)
+  } else {
+    ceiling(new_ids)
+  }
+
+  if (any(abs(new_ids - ref) > 0.5)) abort("too many ids assigned.")
 }
 
 #' Wrap an expression in curly braces
@@ -116,23 +164,33 @@ validate_new_pos_ids <- function(new_ids, after) {
 #' @param pd A parse table.
 #' @param stretch_out Whether or not to create a line break after the opening
 #'   curly brace and before the closing curly brace.
-wrap_expr_in_curly <- function(pd, stretch_out = c(FALSE, FALSE)) {
-  if (is_curly_expr(pd)) return(pd)
-  if (stretch_out[1]) {
-    pd$lag_newlines[1] <- 1L
+#' @param space_after How many spaces should be inserted after the closing brace.
+#' @keywords internal
+wrap_expr_in_curly <- function(pd,
+                               stretch_out = c(FALSE, FALSE),
+                               space_after = 1L) {
+  if (is_curly_expr(pd)) {
+    return(pd)
+  }
+  if (stretch_out[1L]) {
+    pd$lag_newlines[1L] <- 1L
   }
 
-  opening <- create_tokens(
-    "'{'", "{",
-    pos_ids = create_pos_ids(pd, 1, after = FALSE),
-    spaces = 1 - as.integer(stretch_out[1])
+  opening <- create_tokens("'{'", "{",
+    pos_ids = create_pos_ids(pd, 1L, after = FALSE),
+    spaces = 1L - as.integer(stretch_out[1L]),
+    stylerignore = pd$stylerignore[1L],
+    indents = pd$indent[1L]
   )
 
   closing <- create_tokens(
-    "'}'", "}", spaces = 1, lag_newlines = as.integer(stretch_out[2]),
-    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE)
+    "'}'", "}",
+    spaces = space_after, lag_newlines = as.integer(stretch_out[2L]),
+    pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
+    stylerignore = pd$stylerignore[1L],
+    indents = pd$indent[1L]
   )
 
-  bind_rows(opening, pd, closing) %>%
+  vec_rbind(opening, pd, closing) %>%
     set_multi_line()
 }

@@ -1,0 +1,19 @@
+---
+output:
+  github_document:
+    html_preview: true
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+Some text
+```{r}
+# Some R code
+f <- function(x) {
+  x
+}
+```
+Final text
+```{r}
+1 + 2
+```

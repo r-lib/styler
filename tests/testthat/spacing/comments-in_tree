@@ -1,13 +1,13 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--expr:  [0/1] {2}                                   
+ ¦--expr: a [0/1] {2}                                  
  ¦   °--SYMBOL: a [0/0] {1}                            
  ¦--COMMENT: # com [0/0] {3}                           
- ¦--expr:  [1/1] {5}                                   
+ ¦--expr: b [1/1] {5}                                  
  ¦   °--SYMBOL: b [0/0] {4}                            
  ¦--COMMENT: #comm [0/0] {6}                           
- ¦--expr:  [1/4] {8}                                   
+ ¦--expr: c [1/4] {8}                                  
  ¦   °--SYMBOL: c [0/0] {7}                            
  ¦--COMMENT: # com [0/0] {9}                           
- ¦--expr:  [1/1] {11}                                  
+ ¦--expr: dejk [1/1] {11}                              
  ¦   °--SYMBOL: dejk [0/0] {10}                        
  °--COMMENT: #comm [0/0] {12}                          

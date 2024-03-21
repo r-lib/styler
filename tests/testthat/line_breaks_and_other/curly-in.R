@@ -16,7 +16,7 @@ test_that("I am here",
 if (x > 3) { "x"
 }
 
-# A } should always go on its own line, unless it’s followed by else or ).
+# A } should always go on its own line, unless it's followed by else or ).
 if (x > 3) {
   "x"}
 
@@ -31,3 +31,13 @@ test_that("I am here", {
   a_test(x)
 }
 )
+
+test_that(
+  desc = "bla",
+  code = {
+
+
+
+    # comment
+    expect_equal(1 + 1, 2)
+  })

@@ -1,0 +1,59 @@
+---
+title: "Distribute custom style guides"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Distribute custom style guides}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+styler::cache_deactivate()
+options(styler.colored_print.vertical = FALSE)
+```
+
+This vignette describes how you can distribute your own style guide. It builds on `vignette("customizing_styler")` and assumes you understand how to create a style guide with `create_style_guide()`.
+
+## Reference implementations
+
+There are a few packages that implement a third-party style guide that are maintained by styler contributors:
+
+-   [lorenzwalthert/styler.nocomments](https://github.com/lorenzwalthert/styler.nocomments)
+-   [lorenzwalthert/semicoloner](https://github.com/lorenzwalthert/semicoloner)
+-   [lorenzwalthert/oneliner](https://github.com/lorenzwalthert/oneliner)
+-   [mlr-org/styler.mlr](https://github.com/mlr-org/styler.mlr)
+
+Other available style guides include:
+
+-   [ropensci-review-tools/spaceout](https://github.com/ropensci-review-tools/spaceout)
+-   [gadenbuie/grkstyle](https://github.com/gadenbuie/grkstyle)
+
+To start out, you can use the [GitHub Template](https://github.com/lorenzwalthert/styler.yours) for third-party style guides that has already the right directory structure and patterns described below in place.
+
+You made one too? Please submit a PR to include it in the list.
+
+## Design patterns
+
+The style guides mentioned above follow best practices and can serve as a good and rather minimal example of how to implement your own style guide. Most importantly, these two packages:
+
+-   export all functions that {styler} exports, but the `style` argument set to the custom style guide, plus custom style guides. The advantage of this is that you can use that namespace as a drop-in replacement for styler everywhere. In particular, if you want to use the tidyverse style guide, use `styler::style_pkg()`, if you want to use a third-party style guide, use the other namespace, e.g. `styler.mlr::style_pkg()`
+-   depend on {styler} and use {styler} internals via `:::`. These internals are subject to change without prior notice, which is why the packages also have unit tests. Also note that importing internals from another package means your package can't be added to CRAN because packages calling private methods from other packages don't pass CRAN checks. The only way around this would be to export some styler internals, e.g. via a {styler.infra} package, but that would be a lot of work on our side and therefore not currently on the roadmap. Another alternative for developers might be to use <https://github.com/wch/staticimports>, which we have not explored so far.
+-   implement unit tests following {styler}'s testing convention with `*-in.R` and `*-out.R` files that are checked with `styler:::test_collection()`.
+
+When creating a custom style guide and distribute it, we want to quickly recall important arguments for `create_style_guide()` from the docs:
+
+-   `style_guide_name`, `style_guide_version` and `more_specs_style_guide`: These arguments are relevant for caching and make sure the user's cache is invalidated on releasing a new version. The documentation specifies how to set these arguments.
+-   `transformers_drop`: This argument can be created with `specify_transformers_drop()` to define conditions under which a transformer can be removed from the style guide without an effect on the result. This makes styler faster. For example, if you have a transformer that removes the token `;` and replaces it with a line break, it is only required if the code to style contains this token. Since this will hardly be the case for people who adhere to the tidyverse style guide, we formulate such a rule like this
+
+```{r}
+styler::specify_transformers_drop(
+  spaces = list(style_space_around_tilde = "'~'"),
+  tokens = list(resolve_semicolon = "';'")
+)
+```
+
+Where the name must correspond to the transformer function in question and the value is the token that must be absent in order to drop the transformer.

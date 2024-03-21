@@ -65,7 +65,7 @@ test <- function() {
   a > b
   a * b
   a / b
-  a ^ b
+  a^b
   a & b
   a | b
   a := b
@@ -87,7 +87,7 @@ test <- function() {
   # Only with conservative settings:
   call(
     preserves, distance,
-    after, commas,
+    after,     commas,
     given_has, one
   )
 
@@ -120,8 +120,8 @@ test <- function() {
 
   nested(
     function_call(with),
-    many
-    , first_level_args
+    many,
+    first_level_args
   )
 
   nested(
@@ -140,7 +140,12 @@ test <- function() {
 
 
 # formula
-lm(a~b + c, data = NA)
-lm(a~. - 1, data = NA)
-a~b:c
-a~b:c
+lm(a ~ b + c, data = NA)
+lm(a ~ . - 1, data = NA)
+a ~ b:c
+a ~ b:c
+a ~ b:c
+~a
+~gg
+b ~ k
+call(1, ~qq)

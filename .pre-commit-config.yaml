@@ -1,0 +1,134 @@
+# All available hooks: https://pre-commit.com/hooks.html
+# R specific hooks: https://github.com/lorenzwalthert/precommit
+default_stages: [commit]
+default_language_version:
+  python: python3
+
+repos:
+  - repo: https://github.com/lorenzwalthert/precommit
+    rev: f3498c421d68a1db26de1a1fe3ecc91dd6f03b5e
+    hooks:
+      - id: style-files
+        args:
+          ['--ignore-start="^# styler: off$"', '--ignore-stop="^# styler: on$"']
+        exclude: >
+          (?x)^(
+          tests/testthat/.*/.*\.R(md|nw)?|
+          vignettes/customizing_styler\.Rmd|
+          tests/testthat/public-api/xyzfile-rnw/random4\.Rnw|
+          vignettes/detect-alignment\.Rmd|
+          tests/testmanual/addins/.*invalid.*|
+          tests/testmanual/addins/r-valid\.R|
+          )$
+      - id: lintr
+        additional_dependencies:
+          - r-lib/lintr
+        exclude: >
+          (?x)^(
+          inst/.*|
+          man/.*|
+          tests/.*|
+          touchstone/.*|
+          vignettes/.*|
+          )$
+      - id: roxygenize
+        additional_dependencies:
+          - r-lib/pkgapi
+          - dplyr@1.0.9
+          - roxygen2@7.2.2
+      - id: use-tidy-description
+      - id: spell-check
+        exclude: >
+          (?x)^(
+          \.github/.*\.yaml|
+          data/.*|
+          tests/testthat/.*|
+          touchstone/config\.json|
+          (.*/|)\.Rprofile|
+          (.*/|)\.Renviron|
+          (.*/|)\.gitignore|
+          (.*/|)NAMESPACE|
+          (.*/|)WORDLIST|
+          (.*/|)\.travis.yml|
+          (.*/|)appveyor.yml|
+          (.*/|)\.Rbuildignore|
+          (.*/|)\.pre-commit-.*|
+          .*\.[rR]|
+          .*\.Rproj|
+          .*\.py|
+          .*\.feather|
+          .*\.rds|
+          .*\.Rds|
+          .*\.sh|
+          .*\.RData|
+          .*-in_tree
+          )$
+      - id: readme-rmd-rendered
+      - id: parsable-R
+        exclude: >
+          (?x)^(
+          tests/testthat/public-api/xyzaddin/addin_region-.*|
+          tests/.*invalid.*|
+          tests/testthat/rmd/no-tidy-out\.Rmd|
+          tests/testthat/escaping/basic-escape-out\.R|
+          tests/testthat/indention_operators/.*pipe.*|
+          tests/testthat/line_breaks_and_other/.*pipe.*|
+          tests/testthat/exception_handling/parser-error\.R|
+          tests/testthat/public-api/xyzfile_rmd/random4\.Rmd|
+          tests/testthat/rmd/no-tidy-(in|out)\.Rmd|
+          )$
+      - id: no-browser-statement
+        exclude: >
+          (?x)^(
+          tests/testthat/public-api/xyzaddin/addin_region-.*|
+          tests/testmanual/addins/r-invalid\.R|
+          tests/testthat/escaping/basic-escape-out\.R|
+          tests/testthat/indention_operators/.*pipe.*|
+          tests/testthat/line_breaks_and_other/.*pipe.*|
+          tests/testthat/exception_handling/parser-error.R|
+          tests/testmanual/|
+          )$
+      - id: deps-in-desc
+        exclude: >
+          (?x)^(
+          touchstone/.*|
+          tests/testmanual/addins/.*invalid.*|
+          tests/testthat/escaping/basic-escape-out\.R|
+          tests/testthat/rnw/011-conditional-eval-out\.Rnw|
+          tests/testthat/.*\.R(md)?
+          )$
+      - id: pkgdown
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=200"]
+      - id: check-yaml
+      - id: mixed-line-ending
+      - id: file-contents-sorter
+        files: "\\.Rbuildignore$"
+      - id: end-of-file-fixer
+        exclude: >
+          (?x)^(
+          \.Rd|
+          tests/testthat/exception_handling/empty_file\.R|
+          tests/testthat/parse_comments/eol_eof_spaces-.*|
+          tests/testthat/reference-objects/.*|
+          tests/testthat/_snaps/.*|
+          )$
+  - repo: https://github.com/lorenzwalthert/gitignore-tidy
+    rev: 475bf5d96927a1887ce2863ff3075b1d7240bc51
+    hooks:
+      - id: tidy-gitignore
+  - repo: local
+    hooks:
+      - id: forbid-to-commit
+        name: Don't commit common R artifacts
+        entry: Cannot commit .Rhistory, .RData, .Rds or .rds.
+        language: fail
+        files: '\.Rhistory|\.RData|\.Rds|\.rds$'
+        # `exclude: <regex>` to allow committing specific files.
+
+ci:
+  skip: [pkgdown]
+  autoupdate_schedule: monthly

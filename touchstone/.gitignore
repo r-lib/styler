@@ -1,0 +1,4 @@
+*
+!.gitignore
+!config.json
+!script.R

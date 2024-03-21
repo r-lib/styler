@@ -1,7 +1,7 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--expr:  [0/0] {2}                                   
+ ¦--expr: 1 [0/0] {2}                                  
  ¦   °--NUM_CONST: 1 [0/0] {1}                         
- ¦--expr:  [1/0] {4}                                   
+ ¦--expr: 2 [1/0] {4}                                  
  ¦   °--NUM_CONST: 2 [0/0] {3}                         
- °--expr:  [1/0] {6}                                   
+ °--expr: 3 [1/0] {6}                                  
      °--NUM_CONST: 3 [0/0] {5}                         

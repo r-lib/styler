@@ -1,8 +1,3 @@
-
-
-
-
-
 a <- function(x) {
 x
 }

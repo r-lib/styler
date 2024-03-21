@@ -1,9 +1,9 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--expr:  [0/0] {1}                                   
- ¦   ¦--expr:  [0/0] {3}                               
+ ¦--expr: a() [0/0] {1}                                
+ ¦   ¦--expr: a [0/0] {3}                              
  ¦   ¦   °--SYMBOL_FUNCTION_CALL: a [0/0] {2}          
  ¦   ¦--'(': ( [0/0] {4}                               
  ¦   °--')': ) [0/0] {5}                               
- ¦--expr:  [1/1] {7}                                   
+ ¦--expr: b [1/1] {7}                                  
  ¦   °--SYMBOL: b [0/0] {6}                            
  °--COMMENT: # com [0/0] {8}                           

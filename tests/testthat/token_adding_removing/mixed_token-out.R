@@ -14,13 +14,6 @@ d
 'text with "quotes"'
 
 
-# no linebreak after special if they fit in a line
-a %>% b() %>% c()
-
-# linebreak after special
-a %>%
-  b() %>%
-  c()
 
 # adding brackets in pipes
 a %>%

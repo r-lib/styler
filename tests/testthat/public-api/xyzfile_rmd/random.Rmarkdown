@@ -1,0 +1,18 @@
+Some text
+```{r}
+# Some R code
+f <- function(x) {
+  x
+}
+```
+More text
+```{r}
+# More R code
+g <- function(y) {
+  y
+}
+```
+Final text
+```{r}
+1 + 2
+```

@@ -1,120 +1,335 @@
 #' Transform files with transformer functions
 #'
 #' `transform_files` applies transformations to file contents and writes back
-#'   the result.
+#' the result.
 #' @param files A character vector with paths to the file that should be
 #'   transformed.
 #' @inheritParams make_transformer
+#' @inheritParams transform_file
 #' @section Value:
 #' Invisibly returns a data frame that indicates for each file considered for
-#' styling whether or not it was actually changed.
-transform_files <- function(files, transformers) {
-  transformer <- make_transformer(transformers)
-  max_char <- min(max(nchar(files), 0), 80)
-  if (length(files) > 0L) {
-    cat("Styling ", length(files), " files:\n")
+#' styling whether or not it was actually changed (or would be changed when
+#' `dry` is not "off").
+#' @keywords internal
+transform_files <- function(files,
+                            transformers,
+                            include_roxygen_examples,
+                            base_indention,
+                            dry) {
+  transformer <- make_transformer(
+    transformers, include_roxygen_examples, base_indention
+  )
+  max_char <- min(max(nchar(files), 0L), getOption("width"))
+  len_files <- length(files)
+  if (len_files > 0L && !getOption("styler.quiet", FALSE)) {
+    cat("Styling ", len_files, " files:\n")
   }
 
-  changed <- map_lgl(
-    files, transform_file, fun = transformer, max_char_path = max_char
+  changed <- map_lgl(files, transform_file,
+    fun = transformer, max_char_path = max_char, dry = dry
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
-  data_frame(file = files, changed = changed)
+  new_styler_df(list(file = files, changed = changed))
 }
 
 #' Transform a file and output a customized message
 #'
-#' Wraps `enc::transform_lines_enc()` and outputs customized messages.
+#' Transforms file contents and outputs customized messages.
 #' @param max_char_path The number of characters of the longest path. Determines
 #'   the indention level of `message_after`.
 #' @param message_before The message to print before the path.
 #' @param message_after The message to print after the path.
 #' @param message_after_if_changed The message to print after `message_after` if
 #'   any file was transformed.
-#' @inheritParams enc::transform_lines_enc
-#' @param ... Further arguments passed to `enc::transform_lines_enc()`.
+#' @inheritParams transform_code
+#' @param ... Further arguments passed to [transform_utf8()].
+#' @keywords internal
 transform_file <- function(path,
                            fun,
-                           verbose = FALSE,
                            max_char_path,
                            message_before = "",
                            message_after = " [DONE]",
                            message_after_if_changed = " *",
-                           ...) {
-  char_after_path <- nchar(message_before) + nchar(path) + 1
-  max_char_after_message_path <- nchar(message_before) + max_char_path + 1
+                           ...,
+                           dry) {
+  char_after_path <- nchar(message_before) + nchar(path) + 1L
+  max_char_after_message_path <- nchar(message_before) + max_char_path + 1L
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
-  cat(
-    message_before,
-    path,
-    rep_char(" ", max(0, n_spaces_before_message_after)),
-    append = FALSE
-  )
-  changed <- transform_code(path, fun = fun, verbose = verbose, ...)
-
-  bullet <- ifelse(is.na(changed),
-    "warning",
-    ifelse(changed,
-      "info",
-      "tick"
+  if (!getOption("styler.quiet", FALSE)) {
+    cat(
+      message_before, path,
+      rep_char(" ", max(0L, n_spaces_before_message_after)),
+      append = FALSE
     )
-  )
+  }
+  changed <- transform_code(path, fun = fun, ..., dry = dry)
 
-  cli::cat_bullet(
-    bullet = bullet
-  )
+  bullet <- if (is.na(changed)) {
+    "warning"
+  } else {
+    if (changed) {
+      "info"
+    } else {
+      "tick"
+    }
+  }
+
+  if (!getOption("styler.quiet", FALSE)) {
+    cli::cat_bullet(bullet = bullet)
+  }
   invisible(changed)
 }
 
 #' Closure to return a transformer function
 #'
 #' This function takes a list of transformer functions as input and
-#'  returns a function that can be applied to character strings
-#'  that should be transformed.
+#' returns a function that can be applied to character strings
+#' that should be transformed.
 #' @param transformers A list of transformer functions that operate on flat
 #'   parse tables.
-make_transformer <- function(transformers) {
+#' @param include_roxygen_examples Whether or not to style code in roxygen
+#'   examples.
+#' @inheritParams parse_transform_serialize_r
+#' @keywords internal
+make_transformer <- function(transformers,
+                             include_roxygen_examples,
+                             base_indention,
+                             warn_empty = TRUE) {
   force(transformers)
+  assert_transformers(transformers)
+
   function(text) {
-    transformed_text <- parse_transform_serialize(text, transformers)
-    transformed_text
+    text <- ensure_last_n_empty(trimws(text, which = "right"), n = 0L)
+    should_use_cache <- cache_is_activated()
+
+    if (should_use_cache) {
+      use_cache <- is_cached(
+        text, transformers,
+        cache_more_specs(
+          include_roxygen_examples = include_roxygen_examples,
+          base_indention = base_indention
+        )
+      )
+    } else {
+      use_cache <- FALSE
+    }
+
+    if (!use_cache) {
+      transformed_code <- text %>%
+        parse_transform_serialize_r(transformers,
+          base_indention = base_indention,
+          warn_empty = warn_empty
+        )
+
+      if (include_roxygen_examples) {
+        transformed_code <- parse_transform_serialize_roxygen(
+          transformed_code,
+          transformers = transformers,
+          base_indention = base_indention
+        )
+      }
+
+      if (should_use_cache) {
+        cache_write(
+          transformed_code, transformers,
+          cache_more_specs(include_roxygen_examples, base_indention)
+        )
+      }
+
+      transformed_code
+    } else {
+      text
+    }
   }
+}
+
+#' Parse, transform and serialize roxygen comments
+#'
+#' Splits `text` into roxygen code examples and non-roxygen code examples and
+#' then maps over these examples by applying
+#' [style_roxygen_code_example()].
+#' @section Hierarchy:
+#' Styling involves splitting roxygen example code into segments, and segments
+#' into snippets. This describes the process for input of
+#' [parse_transform_serialize_roxygen()]:
+#'
+#' - Splitting code into roxygen example code and other code. Downstream,
+#'   we are only concerned about roxygen code. See
+#'   [parse_transform_serialize_roxygen()].
+#' - Every roxygen example code can have zero or more
+#'   dontrun / dontshow / donttest sequences. We next create segments of roxygen
+#'   code examples that contain at most one of these. See
+#'   [style_roxygen_code_example()].
+#' - We further split the segment that contains at most one dont* sequence into
+#'   snippets that are either don* or not. See
+#'   [style_roxygen_code_example_segment()].
+#'
+#' Finally, that we have roxygen code snippets that are either dont* or not,
+#' we style them in [style_roxygen_example_snippet()] using
+#' [parse_transform_serialize_r()].
+#' @keywords internal
+parse_transform_serialize_roxygen <- function(text,
+                                              transformers,
+                                              base_indention) {
+  roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
+  if (length(roxygen_seqs) < 1L) {
+    return(text)
+  }
+  if (!rlang::is_installed("roxygen2")) {
+    rlang::abort(paste0(
+      "To style roxygen code examples, you need to have the package ",
+      "`{roxygen2}` installed. To exclude them from styling, set ",
+      "`include_roxygen_examples = FALSE`."
+    ))
+  }
+  split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
+  map_at(split_segments$separated, split_segments$selectors,
+    style_roxygen_code_example,
+    transformers = transformers,
+    base_indention = base_indention
+  ) %>%
+    flatten_chr()
+}
+
+
+#' Split text into roxygen and non-roxygen example segments
+#'
+#' @param text Roxygen comments
+#' @param roxygen_examples Integer sequence that indicates which lines in `text`
+#'   are roxygen examples. Most conveniently obtained with
+#'   [identify_start_to_stop_of_roxygen_examples_from_text].
+#' @return
+#' A list with two elements:
+#'
+#' * A list that contains elements grouped into roxygen and non-roxygen
+#'   sections. This list is named `separated`.
+#' * An integer vector with the indices that correspond to roxygen code
+#'   examples in `separated`.
+#'
+#' @keywords internal
+split_roxygen_segments <- function(text, roxygen_examples) {
+  if (is.null(roxygen_examples)) {
+    return(list(separated = list(text), selectors = NULL))
+  }
+  all_lines <- seq2(1L, length(text))
+  active_segment <- as.integer(all_lines %in% roxygen_examples)
+  segment_id <- cumsum(abs(c(0L, diff(active_segment)))) + 1L
+  separated <- vec_split(text, factor(segment_id))[[2L]]
+  restyle_selector <- if (roxygen_examples[1L] == 1L) {
+    odd_index
+  } else {
+    even_index
+  }
+
+  list(separated = separated, selectors = restyle_selector(separated))
 }
 
 #' Parse, transform and serialize text
 #'
 #' Wrapper function for the common three operations.
+#' @param warn_empty Whether or not a warning should be displayed when `text`
+#'   does not contain any tokens.
+#' @param is_roxygen_code_example Is code a roxygen examples block?
 #' @inheritParams compute_parse_data_nested
-#' @inheritParams apply_transformers
-parse_transform_serialize <- function(text, transformers) {
+#' @inheritParams parse_transform_serialize_r_block
+#' @seealso [parse_transform_serialize_roxygen()]
+
+#' @keywords internal
+parse_transform_serialize_r <- function(text,
+                                        transformers,
+                                        base_indention,
+                                        warn_empty = TRUE,
+                                        is_roxygen_code_example = FALSE) {
+  more_specs <- cache_more_specs(
+    include_roxygen_examples = TRUE, base_indention = base_indention
+  )
+
   text <- assert_text(text)
-  pd_nested <- compute_parse_data_nested(text)
-  start_line <- find_start_line(pd_nested)
-  if (nrow(pd_nested) == 0) {
-    warning(
-      "Text to style did not contain any tokens. Returning empty string.",
-      call. = FALSE
-    )
+  if (identical(unique(text), "")) {
+    if (warn_empty) {
+      warn("Text to style did not contain any tokens. Returning empty string.")
+    }
     return("")
   }
-  transformed_pd <- apply_transformers(pd_nested, transformers)
-  flattened_pd <- post_visit(transformed_pd, list(extract_terminals)) %>%
-    enrich_terminals(transformers$use_raw_indention) %>%
-    apply_ref_indention() %>%
-    set_regex_indention(
-      pattern          = transformers$reindention$regex_pattern,
-      target_indention = transformers$reindention$indention,
-      comments_only    = transformers$reindention$comments_only
-    )
-  serialized_transformed_text <-
-    serialize_parse_data_flattened(flattened_pd, start_line = start_line)
+  pd_nested <- compute_parse_data_nested(text, transformers, more_specs)
+  transformers <- transformers_drop(
+    pd_nested$text[!pd_nested$is_cached],
+    transformers
+  )
 
-  if (can_verify_roundtrip(transformers)) {
-    verify_roundtrip(text, serialized_transformed_text)
+  strict <- transformers$more_specs_style_guide$strict %||% TRUE
+  pd_split <- vec_split(pd_nested, pd_nested$block)[[2L]]
+  pd_blank <- find_blank_lines_to_next_block(pd_nested)
+
+  text_out <- vector("list", length(pd_split))
+  for (i in seq_along(pd_split)) {
+    # if the first block: only preserve for roxygen or not strict
+    # if a later block: always preserve line breaks
+    start_line <- if (i == 1L) {
+      if (is_roxygen_code_example || !strict) pd_blank[[i]] else 1L
+    } else {
+      pd_blank[[i]]
+    }
+
+
+    text_out[[i]] <- parse_transform_serialize_r_block(
+      pd_split[[i]],
+      start_line = start_line,
+      transformers = transformers,
+      base_indention = base_indention
+    )
   }
-  serialized_transformed_text
+
+  text_out <- unlist(text_out, use.names = FALSE)
+
+  verify_roundtrip(
+    text, text_out,
+    parsable_only = !parse_tree_must_be_identical(transformers)
+  )
+
+  text_out <- convert_newlines_to_linebreaks(text_out)
+  if (cache_is_activated()) {
+    cache_by_expression(text_out, transformers, more_specs = more_specs)
+  }
+  text_out
+}
+
+
+#' Remove transformers that are not needed
+#'
+#' The goal is to speed up styling by removing all rules that are only
+#' applicable in contexts that don't occur often, e.g. for most code, we don't
+#' expect ";" to be in it, so we don't need to apply `resolve_semicolon()` on
+#' every *nest*.
+#' @param text Text to parse. Can also be the column `text` of the output of
+#'   [compute_parse_data_nested()], where each element is a token (instead of a
+#'   line).
+#' @param transformers the transformers.
+#' @keywords internal
+#' @seealso specify_transformers_drop
+transformers_drop <- function(text, transformers) {
+  if (length(text) > 0L) {
+    is_colon <- text == ";"
+    if (any(is_colon)) {
+      # ; can only be parsed when on the same line as other token, not the case
+      # here since text is output of compute_parse_data_nested.
+      text <- c(text[!is_colon], "1;")
+    }
+    token <- unique(tokenize(text)$token)
+  } else {
+    token <- character()
+  }
+  for (scope in c("line_break", "space", "token", "indention")) {
+    rules <- transformers$transformers_drop[[scope]]
+    for (rule in names(rules)) {
+      if (!any(rules[[rule]] %in% token)) {
+        transformers[[scope]][rule] <- NULL
+      }
+    }
+  }
+  transformers
 }
 
 #' Apply transformers to a parse table
@@ -131,22 +346,21 @@ parse_transform_serialize <- function(text, transformers) {
 #'   hence line breaks must be modified first).
 #' * spacing rules (must be after line-breaks and updating newlines and
 #'   multi-line).
+#' * indention.
 #' * token manipulation / replacement (is last since adding and removing tokens
 #'   will invalidate columns token_after and token_before).
 #' * Update indention reference (must be after line breaks).
 #'
 #' @param pd_nested A nested parse table.
 #' @param transformers A list of *named* transformer functions
-#' @importFrom purrr flatten
+#' @keywords internal
 apply_transformers <- function(pd_nested, transformers) {
-  transformed_line_breaks <- pre_visit(
-    pd_nested,
-    c(transformers$initialize, transformers$line_break)
-  )
-
   transformed_updated_multi_line <- post_visit(
-    transformed_line_breaks,
-    c(set_multi_line, update_newlines)
+    pd_nested,
+    c(
+      transformers$initialize, transformers$line_break, set_multi_line,
+      if (length(transformers$line_break) != 0L) update_newlines
+    )
   )
 
   transformed_all <- pre_visit(
@@ -156,9 +370,9 @@ apply_transformers <- function(pd_nested, transformers) {
 
   transformed_absolute_indent <- context_to_terminals(
     transformed_all,
-    outer_lag_newlines = 0,
-    outer_indent = 0,
-    outer_spaces = 0,
+    outer_lag_newlines = 0L,
+    outer_indent = 0L,
+    outer_spaces = 0L,
     outer_indention_refs = NA
   )
   transformed_absolute_indent
@@ -166,39 +380,54 @@ apply_transformers <- function(pd_nested, transformers) {
 
 
 
-#' Check whether a roundtrip verification can be carried out
+#' Check whether a round trip verification can be carried out
 #'
 #' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
 #' we can compare the expression before and after styling and return an error if
 #' it is not the same.
 #' @param transformers The list of transformer functions used for styling.
 #'   Needed for reverse engineering the scope.
-can_verify_roundtrip <- function(transformers) {
-  is.null(transformers$token)
+#' @keywords internal
+parse_tree_must_be_identical <- function(transformers) {
+  length(transformers$token) == 0L
 }
 
 #' Verify the styling
 #'
 #' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),
 #' we can compare the expression before and after styling and return an error if
-#' it is not the same. Note that this method ignores comments and no
-#' verification can be conducted if scope > "line_breaks".
+#' it is not the same.
+#' If that's not possible, a weaker guarantee that we want to give is that the
+#' resulting code is parsable.
+#' @param parsable_only If we should only check for the code to be parsable.
 #' @inheritParams expressions_are_identical
+#' @section Limitation:
+#' Note that this method ignores roxygen code examples and
+#' comments and no verification can be conducted if tokens are in the styling
+#' scope.
+
 #' @examples
 #' styler:::verify_roundtrip("a+1", "a + 1")
 #' styler:::verify_roundtrip("a+1", "a + 1 # comments are dropped")
-#' \dontrun{
-#' styler:::verify_roundtrip("a+1", "b - 3")
-#' }
-verify_roundtrip <- function(old_text, new_text) {
-  if (!expressions_are_identical(old_text, new_text)) {
+#' try(styler:::verify_roundtrip("a+1", "b - 3"))
+#' @keywords internal
+verify_roundtrip <- function(old_text, new_text, parsable_only = FALSE) {
+  if (parsable_only) {
+    rlang::try_fetch(
+      parse_safely(new_text),
+      error = function(e) {
+        rlang::abort(paste0(
+          "Styling resulted in code that isn't parsable. This should not ",
+          "happen."
+        ), .internal = TRUE)
+      }
+    )
+  } else if (!expressions_are_identical(old_text, new_text)) {
     msg <- paste(
       "The expression evaluated before the styling is not the same as the",
-      "expression after styling. This should not happen. Please file a",
-      "bug report on GitHub (https://github.com/r-lib/styler/issues)",
-      "using a reprex."
+      "expression after styling. This should not happen."
     )
-    stop(msg, call. = FALSE)
+    abort(msg, .internal = TRUE)
   }
 }
 
@@ -206,9 +435,10 @@ verify_roundtrip <- function(old_text, new_text) {
 #'
 #' @param old_text The initial expression in its character representation.
 #' @param new_text The styled expression in its character representation.
+#' @keywords internal
 expressions_are_identical <- function(old_text, new_text) {
   identical(
-    parse(text = old_text, keep.source = FALSE),
-    parse(text = new_text, keep.source = FALSE)
+    parse_safely(old_text, keep.source = FALSE),
+    parse_safely(new_text, keep.source = FALSE)
   )
 }

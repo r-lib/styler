@@ -1,36 +1,55 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-styler
-======
 
-[![Build Status](https://travis-ci.org/r-lib/styler.svg?branch=master)](https://travis-ci.org/r-lib/styler) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=master&svg=true)](https://ci.appveyor.com/project/r-lib/styler) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![codecov](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler) [![cran version](http://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
+# styler
 
-The goal of styler is to provide non-invasive pretty-printing of R source code while adhering to the [tidyverse](https://github.com/tidyverse/style) formatting rules. Support for custom style guides is planned.
+<!-- badges: start -->
 
-You can install the package from GitHub:
+[![R build
+status](https://github.com/r-lib/styler/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/styler/actions)
+[![Life cycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![codecov test
+coverage](https://app.codecov.io/gh/r-lib/styler/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/styler)
+[![CRAN
+Status](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
 
-``` r
-# install.packages("remotes")
-remotes::install_github("krlmlr/styler")
-```
+<!-- badges: end -->
 
-You can style a simple character vector of code with `style_text()`:
+# Overview
 
-``` r
-ugly_code <- "a<-function( x){1+1}           "
-style_text(ugly_code)
-#> a <- function(x) {
-#>   1 + 1
-#> }
-```
+styler formats your code according to the [tidyverse style
+guide](https://style.tidyverse.org) (or your custom style guide) so you
+can direct your attention to the content of your code. It helps to keep
+the coding style consistent across projects and facilitate
+collaboration. You can access styler through
 
-There are a few variants of `style_text()`:
-
--   `style_file()` styles .R and/or .Rmd files.
--   `style_dir()` styles all .R files in a directory.
--   `style_pkg()` styles the source files of an R package.
--   RStudio Addins for styling the active file, styling the current package and styling the highlighted code region.
+-   the RStudio Addin as demonstrated below
+-   R functions like `style_pkg()`, `style_file()` or `style_text()`
+-   various other tools described in
+    `vignette("third-party-integrations")`
 
 <img src="https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif" width="650px" />
 
-You can find more information on the wiki of [Google Summer of Code 2017](https://github.com/rstats-gsoc/gsoc2017/wiki/Noninvasive-source-code-formatting) or check out the [pkgdown](https://r-lib.github.io/styler/) page.
+## Installation
+
+You can install the package from CRAN.
+
+``` r
+install.packages("styler")
+```
+
+Or get the development version from GitHub:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("r-lib/styler")
+```
+
+## Documentation
+
+The following online docs are available:
+
+-   [latest CRAN release](https://styler.r-lib.org).
+
+-   [GitHub development version](https://styler.r-lib.org/dev/).

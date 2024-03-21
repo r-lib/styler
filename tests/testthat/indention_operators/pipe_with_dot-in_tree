@@ -1,23 +1,23 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- °--expr:  [0/0] {1}                                   
-     ¦--expr:  [0/1] {2}                               
-     ¦   ¦--expr:  [0/0] {4}                           
+ °--expr: strsp [0/0] {1}                              
+     ¦--expr: strsp [0/1] {2}                          
+     ¦   ¦--expr: strsp [0/0] {4}                      
      ¦   ¦   °--SYMBOL_FUNCTION_CALL: strsp [0/0] {3}  
      ¦   ¦--'(': ( [0/0] {5}                           
-     ¦   ¦--expr:  [0/0] {7}                           
+     ¦   ¦--expr: "\n" [0/0] {7}                      
      ¦   ¦   °--STR_CONST: "\n" [0/0] {6}             
      ¦   ¦--',': , [0/1] {8}                           
      ¦   ¦--SYMBOL_SUB: fixed [0/1] {9}                
      ¦   ¦--EQ_SUB: = [0/1] {10}                       
-     ¦   ¦--expr:  [0/0] {12}                          
+     ¦   ¦--expr: TRUE [0/0] {12}                      
      ¦   ¦   °--NUM_CONST: TRUE [0/0] {11}             
      ¦   °--')': ) [0/0] {13}                          
      ¦--SPECIAL-PIPE: %>% [0/2] {14}                   
-     °--expr:  [1/0] {15}                              
-         ¦--expr:  [0/0] {17}                          
+     °--expr: .[[1L [1/0] {15}                         
+         ¦--expr: . [0/0] {17}                         
          ¦   °--SYMBOL: . [0/0] {16}                   
          ¦--LBB: [[ [0/0] {18}                         
-         ¦--expr:  [0/0] {20}                          
+         ¦--expr: 1L [0/0] {20}                        
          ¦   °--NUM_CONST: 1L [0/0] {19}               
          ¦--']': ] [0/0] {21}                          
          °--']': ] [0/0] {22}                          

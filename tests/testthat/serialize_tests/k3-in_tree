@@ -1,6 +1,6 @@
 ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- °--expr:  [0/0] {1}                                   
-     ¦--expr:  [0/0] {3}                               
+ °--expr: call( [0/0] {1}                              
+     ¦--expr: call [0/0] {3}                           
      ¦   °--SYMBOL_FUNCTION_CALL: call [0/0] {2}       
      ¦--'(': ( [0/0] {4}                               
      °--')': ) [0/0] {5}                               

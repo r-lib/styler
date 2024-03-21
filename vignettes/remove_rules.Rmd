@@ -1,0 +1,206 @@
+---
+title: "Remove rules"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Remove rules}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 79
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+styler::cache_deactivate()
+```
+
+```{r, echo = FALSE, include = FALSE}
+options(styler.colored_print.vertical = FALSE)
+```
+
+If you want to change the behavior of styler to match your desired style, there
+are multiple ways:
+
+-   Use the tidyverse style guide, but not with the default options. Starting
+    point for this approach is the `help("tidyverse_style")` for the
+    function `tidyverse_style()`, which returns the transformer functions that
+    prettify your code. Most of these options are explained in
+    `vignette("styler")`.
+
+-   If you can't get styler behaving the way you want using the arguments of
+    `tidyverse_style()`, you have another option, which is described in a
+    `vignette("customizing_styler")`: Creating your own style guide from
+    scratch. Yes, I admit, it's pretty long and if you don't want to become a
+    *styler expert*, it may be a little bit overwhelming.
+
+-   If you don't care about how to create new rules but you simply want to
+    *remove* a rule, I have good news for you: There is a quick way to do it.
+    And that's what the remainder of this vignette focuses on.
+
+Once you are happy with your style guide, you might want to have a look at how
+to distribute it, which is described in
+`vignette("distribute_custom_style_guides")`.
+
+# Theory
+
+Here are the steps required to deactivate a rule you don't like
+
+-   Figure out which transformer function in the transformers returned by
+    `tidyerse_style()` corresponds to the rule you want to remove.
+
+-   Set that element in the list to `NULL`, which is equivalent to removing it.
+
+-   Pass the list to `style_text` as a transformer.
+
+# Practice
+
+Lets assume you want to remove the rule that turns `=` into `<-` for
+assignment. That means you want
+
+```         
+string = "hi there" 
+```
+
+to remain unchanged after applying styler. This is not the case if you use the
+default style guide of styler:
+
+```{r, comment = ""}
+library(styler)
+style_text("string = 'hi there'")
+```
+
+So you need to figure out which rule is responsible for this. Let's check the
+transformer categories used with the tidyverse style guide.
+
+```{r}
+transformers <- tidyverse_style()
+names(transformers)
+```
+
+From the aforementioned
+[vignette](https://styler.r-lib.org/articles/customizing_styler.html):
+
+> We note that there are different types of transformer functions. initialize
+> initializes some variables in the nested parse table (so it is not actually a
+> transformer), and the other elements modify either spacing, line breaks or
+> tokens. use_raw_indention is not a function, it is just an option.
+
+Now, we can look at the names of the rules that are sub-elements of the
+transformer categories.
+
+```{r}
+library(magrittr)
+levels <- c("space", "line_break", "indention", "token")
+purrr::map(
+  levels,
+  ~ names(transformers[[.x]])
+) %>%
+  purrr::set_names(levels)
+```
+
+Spotted the rule we want to get rid of? It's under `token` and it's called
+`force_assignment_op`. I agree, we could have chosen a better name. If you are
+not sure if you can guess from the name of the rule what it does you can also
+have a look at the function declaration of this (unexported) function.
+
+```{r}
+styler:::force_assignment_op
+```
+
+Next, you simply set that element to `NULL`.
+
+```{r}
+transformers$token$force_assignment_op <- NULL
+```
+
+And you can use the modified transformer list as input to `style_text()`
+
+```{r}
+style_text("string = 'hi there'", transformers = transformers)
+```
+
+If you want to use it the same way as `tidyverse_style()`, here's the last
+step:
+
+```{r}
+eq_assign_style <- function(...) {
+  transformers <- tidyverse_style(...)
+  transformers$token$force_assignment_op <- NULL
+  transformers
+}
+
+style_text("string = 'hi there'", style = eq_assign_style)
+```
+
+That's it. Note that the transformer functions and how they are returned by
+`tidyverse_style()` is not part of the exposed API. This means that the order,
+the naming etc. may change. Also, remember we did not add a rule to replace
+`<-` with `=`, but we only removed a rule to replace `=` with `<-`, so `<-`
+won't be touched:
+
+```{r}
+style_text("string <- 'hi there'", style = eq_assign_style)
+```
+
+If you want to turn `<-` into `=`, you need to add a rule as described in
+`vignette("customizing_styler")`.
+
+If you have trouble identifying a rule based on rule names,
+
+-   First write an example whose results is not the one you wanted, e.g.
+
+``` r
+code <- "
+f <- function () {
+
+return (1)
+}"
+```
+
+is code that will have the first empty line in the function body removed by
+styler.
+
+-   Then pinpoint the probable rule type (e.g. line breaks if you want less new
+    lines).
+-   In a local styler clone, add e.g. a `return(pd)` at the top of the body to
+    deactivate the rule quickly, or add a `print(pd)` or `browser()` call in
+    the functions of that type (e.g. the different functions of
+    `R/rules-line-breaks.R`), `load_all()`, run your example, see if that
+    function made the change. move the `print(pd)` or `browser()` call to
+    another function if not.
+-   Once you've identified the culprit (in this case
+    `style_line_break_around_curly`), set it to `NULL` as shown earlier.
+
+# Some other rules and their transformers
+
+-   You don't like multi-line ifelse statements getting wrapped around curly
+    braces: `transformers$token$wrap_if_else_multi_line_in_curly`.
+
+-   You don't like multi-line calls to be broken before the first named
+    argument:
+    `transformers$line_break$set_line_break_after_opening_if_call_is_multi_line`
+    (interacting with
+    `transformers$line_break$set_line_break_before_closing_call`).
+
+-   You don't like the line being broken after the pipe:
+    `transformers$line_break$add_line_break_after_pipe`
+
+-   You don't like single quotes to be replaced by double quotes:
+    `transformers$space$fix_quotes`.
+
+-   You don't like comments to start with one space:
+    `transformers$space$start_comments_with_space`
+
+I think you get the idea. I nevertheless recommend using the [tidyverse style
+guide](https://style.tidyverse.org/) as is since
+
+-   it is a well-established, thought-through style.
+
+-   using a consistent style (no matter which) reduces friction in the
+    community.
+
+If you have questions, don't hesitate to create an issue in the GitHub repo.

@@ -42,7 +42,7 @@ if (TRUE)
 
 if (FALSE)
   1 + a * (31 / 2) else
-  3 ^ k
+  3^k
 
 
 if (TRUE)

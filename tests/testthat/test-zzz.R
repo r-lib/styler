@@ -1,0 +1,13 @@
+test_that("can delete empty cache directory", {
+  skip_if(getRversion() < package_version("4.0.0"))
+  skip_on_cran()
+  tmpdir <- withr::local_tempdir()
+  withr::local_dir(tmpdir)
+  dir.create("xxx")
+  expect_true(delete_if_cache_directory(file.path(getwd(), "xxx")))
+  dir.create("xxx")
+  file.create("xxx/yyy")
+  list.files("xxx")
+  expect_false(delete_if_cache_directory(file.path(getwd(), "xxx")))
+  expect_true(file.exists(tmpdir))
+})

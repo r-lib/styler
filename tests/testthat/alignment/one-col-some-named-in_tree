@@ -1,0 +1,48 @@
+ROOT (token: short_text [lag_newlines/spaces] {pos_id})
+ ¦--expr: foo(
+ [0/0] {1}                             
+ ¦   ¦--expr: foo [0/0] {3}                            
+ ¦   ¦   °--SYMBOL_FUNCTION_CALL: foo [0/0] {2}        
+ ¦   ¦--'(': ( [0/2] {4}                               
+ ¦   ¦--expr: img [1/0] {6}                            
+ ¦   ¦   °--SYMBOL: img [0/0] {5}                      
+ ¦   ¦--',': , [0/2] {7}                               
+ ¦   ¦--SYMBOL_SUB: pkg [1/1] {8}                      
+ ¦   ¦--EQ_SUB: = [0/1] {9}                            
+ ¦   ¦--expr: "abc" [0/0] {11}                         
+ ¦   ¦   °--STR_CONST: "abc" [0/0] {10}                
+ ¦   ¦--',': , [0/2] {12}                              
+ ¦   ¦--SYMBOL_SUB: color [1/7] {13}                   
+ ¦   ¦--EQ_SUB: = [0/1] {14}                           
+ ¦   ¦--expr: "lmn" [0/0] {16}                         
+ ¦   ¦   °--STR_CONST: "lmn" [0/0] {15}                
+ ¦   ¦--',': , [0/2] {17}                              
+ ¦   ¦--SYMBOL_SUB: font [1/2] {18}                    
+ ¦   ¦--EQ_SUB: = [0/1] {19}                           
+ ¦   ¦--expr: "xyz" [0/0] {21}                         
+ ¦   ¦   °--STR_CONST: "xyz" [0/0] {20}                
+ ¦   °--')': ) [1/0] {22}                              
+ °--expr: foo(
+ [3/0] {23}                            
+     ¦--expr: foo [0/0] {25}                           
+     ¦   °--SYMBOL_FUNCTION_CALL: foo [0/0] {24}       
+     ¦--'(': ( [0/2] {26}                              
+     ¦--expr: img [1/0] {28}                           
+     ¦   °--SYMBOL: img [0/0] {27}                     
+     ¦--',': , [0/1] {29}                              
+     ¦--COMMENT: # [0/2] {30}                          
+     ¦--SYMBOL_SUB: pkg [1/1] {31}                     
+     ¦--EQ_SUB: = [0/1] {32}                           
+     ¦--expr: "abc" [0/0] {34}                         
+     ¦   °--STR_CONST: "abc" [0/0] {33}                
+     ¦--',': , [0/2] {35}                              
+     ¦--SYMBOL_SUB: color [1/7] {36}                   
+     ¦--EQ_SUB: = [0/1] {37}                           
+     ¦--expr: "lmn" [0/0] {39}                         
+     ¦   °--STR_CONST: "lmn" [0/0] {38}                
+     ¦--',': , [0/2] {40}                              
+     ¦--SYMBOL_SUB: font [1/2] {41}                    
+     ¦--EQ_SUB: = [0/1] {42}                           
+     ¦--expr: "xyz" [0/0] {44}                         
+     ¦   °--STR_CONST: "xyz" [0/0] {43}                
+     °--')': ) [1/0] {45}                              
