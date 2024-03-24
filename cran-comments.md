@@ -4,8 +4,8 @@ editor_options:
     wrap: 79
 ---
 
-This is a release requested by the CRAN team to comply with 
-`R_CHECK_STOP_ON_INVALID_NUMERIC_VERSION_INPUTS`.
+This is a release requested by the CRAN team to comply with new error messages
+in the R parser that caused unit tests to fail.
 
 
 ## Test environments
