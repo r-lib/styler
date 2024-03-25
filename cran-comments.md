@@ -36,7 +36,7 @@ compliant with the requirements of CRAN.
 
 ## Downstream Dependencies
 
-I also ran R CMD check on all 39 downstream dependencies of styler using the
+I also ran R CMD check on all 47 downstream dependencies of styler using the
 revdepcheck package.
 
 All of them finished R CMD CHECK with the same number of ERRORS, WARNINGS and 
