@@ -34,8 +34,8 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
 #' Is the function declaration double indented?
 #'
 #' Assumes you already checked if it's a function with
-#' `is_function_declaration`. It is double indented if the first token
-#' after the first line break that is a `"SYMBOL_FORMALS"`.
+#' `is_function_declaration`. It is double indented if the body of the function
+#' is indented less than the first argument of the function.
 #' @param pd A parse table.
 #' @inheritParams tidyverse_style
 #' @keywords internal
@@ -45,7 +45,26 @@ is_double_indent_function_declaration <- function(pd, indent_by = 2L) {
   if (length(line_break_in_header) > 0L) {
     # indent results from applying the rules, spaces is the initial spaces
     # (which is indention if a newline is ahead)
-    pd$spaces[line_break_in_header[1L] - 1L] <= 2L * indent_by
+
+    idx_line_break <- last(which(pd$newlines > 0L))
+    if (length(idx_line_break) > 0L && idx_line_break + 1L == nrow(pd)) {
+      # function() #
+      # { <- measure indention on opening brace
+      # if last line break is at last token ("'{'")
+      indention_child <- pd$spaces[idx_line_break]
+    } else {
+      # function() { #
+      #   stuff <-measure indention inside the brace
+      child <- pd$child[[nrow(pd)]]
+      # even with comments, first is {, otherwise it's first case
+      # child$token == "'{'" & child$lag_newlines > 0
+
+      idx_first_line_break_in_child <- which(child$newlines > 0L)[1L]
+      indention_child <- child$spaces[idx_first_line_break_in_child]
+    }
+
+
+    pd$spaces[line_break_in_header[1L] - 1L] > indention_child
   } else {
     FALSE
   }
