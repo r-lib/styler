@@ -3,9 +3,10 @@
     Code
       cat(catch_style_file_output(file.path("public-api", "xyzdir-dirty",
         "dirty-sample-with-scope-tokens.R")), sep = "\n")
+    Message
+      Styling 1 file:
     Output
-      Styling  1  files:
-       dirty-sample-with-scope-tokens.R i 
+       'dirty-sample-with-scope-tokens.R' i 
       ----------------------------------------
       Status	Count	Legend 
       v 	0	File unchanged.
@@ -19,9 +20,10 @@
     Code
       cat(catch_style_file_output(file.path("public-api", "xyzdir-dirty",
         "clean-sample-with-scope-tokens.R")), sep = "\n")
+    Message
+      Styling 1 file:
     Output
-      Styling  1  files:
-       clean-sample-with-scope-tokens.R v 
+       'clean-sample-with-scope-tokens.R' v 
       ----------------------------------------
       Status	Count	Legend 
       v 	1	File unchanged.
@@ -34,9 +36,10 @@
     Code
       cat(catch_style_file_output(file.path("public-api", "xyzdir-dirty",
         "dirty-sample-with-scope-spaces.R")), sep = "\n")
+    Message
+      Styling 1 file:
     Output
-      Styling  1  files:
-       dirty-sample-with-scope-spaces.R i 
+       'dirty-sample-with-scope-spaces.R' i 
       ----------------------------------------
       Status	Count	Legend 
       v 	0	File unchanged.

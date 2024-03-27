@@ -22,7 +22,7 @@ transform_files <- function(files,
   max_char <- min(max(nchar(files), 0L), getOption("width"))
   len_files <- length(files)
   if (len_files > 0L && !getOption("styler.quiet", FALSE)) {
-    cat("Styling ", len_files, " files:\n")
+    cli::cli_inform("Styling {len_files} file{?s}:")
   }
 
   changed <- map_lgl(files, transform_file,
@@ -59,7 +59,8 @@ transform_file <- function(path,
     max_char_after_message_path - char_after_path
   if (!getOption("styler.quiet", FALSE)) {
     cat(
-      message_before, path,
+      message_before,
+      cli::format_inline("{.file {path}}"), # path
       rep_char(" ", max(0L, n_spaces_before_message_after)),
       append = FALSE
     )
