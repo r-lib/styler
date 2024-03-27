@@ -68,7 +68,7 @@ transform_file <- function(path,
 
   if (!getOption("styler.quiet", FALSE)) {
     if (is.na(changed)) {
-      bullet <-  "warning"
+      bullet <- "warning"
       color <- "red"
     } else if (changed) {
       bullet <- "info"
