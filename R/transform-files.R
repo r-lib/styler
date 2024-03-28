@@ -54,7 +54,7 @@ transform_file <- function(path,
                            ...,
                            dry) {
   char_after_path <- nchar(message_before) + nchar(path) + 1L
-  max_char_after_message_path <- nchar(message_before) + max_char_path + 1L
+  max_char_after_message_path <- nchar(message_before) + max_char_path
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
   if (!getOption("styler.quiet", FALSE)) {
