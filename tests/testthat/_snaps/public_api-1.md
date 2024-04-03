@@ -45,3 +45,38 @@
       ----------------------------------------
       Please review the changes carefully!
 
+# messages have the correct width
+
+    Code
+      styled <- style_pkg(testthat_file("public-api", "xyzpackage"))
+    Output
+      Styling  3  files:
+       R/hello-world.R                  v 
+       tests/testthat.R                 v 
+       tests/testthat/test-package-xyz.R v 
+      ----------------------------------------
+      Status	Count	Legend 
+      v 	3	File unchanged.
+      i 	0	File changed.
+      x 	0	Styling threw an error.
+      ----------------------------------------
+
+---
+
+    Code
+      styled <- style_pkg(
+        testthat_file(
+          "public-api",
+          "xyzpackage"))
+    Output
+      Styling  3  files:
+       R/hello-world.R         v 
+       tests/testthat.R        v 
+       tests/testthat/test-package-xyz.R v 
+      ----------------------------------------
+      Status	Count	Legend 
+      v 	3	File unchanged.
+      i 	0	File changed.
+      x 	0	Styling threw an error.
+      ----------------------------------------
+

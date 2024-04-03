@@ -131,6 +131,16 @@ test_that("messages (via cat()) of style_file are correct", {
   }
 })
 
+test_that("messages have the correct width", {
+  expect_snapshot(
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"))
+  )
+  withr::local_options(width = 24)
+  expect_snapshot({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"))
+  })
+})
+
 test_that("Messages can be suppressed", {
   withr::with_options(
     list(styler.quiet = TRUE),
