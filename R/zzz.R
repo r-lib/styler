@@ -17,9 +17,14 @@
   )
   toset <- !(names(op.styler) %in% names(op))
   if (any(toset)) options(op.styler[toset])
-  ask_to_switch_to_non_default_cache_root()
-  remove_cache_old_versions()
-  remove_old_cache_files()
+  rlang::try_fetch(
+    {
+      ask_to_switch_to_non_default_cache_root()
+      remove_cache_old_versions()
+      remove_old_cache_files()
+    },
+    error = function(...) NULL
+  )
   invisible()
 }
 
