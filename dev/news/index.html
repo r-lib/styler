@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">styler</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.10.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.10.3.9000</span>
       </span>
     </div>
 
@@ -106,6 +106,28 @@
       <small>Source: <a href="https://github.com/r-lib/styler/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.10.3" id="styler-1103">styler 1.10.3<small>2024-04-07</small><a class="anchor" aria-label="anchor" href="#styler-1103"></a></h2>
+<p>This release was requested by the CRAN team since parser error messages changed, which were hard-coded in some unit tests (<a href="https://github.com/r-lib/styler/issues/1180" class="external-link">#1180</a>).</p>
+<p><strong>Minor changes</strong></p>
+<ul><li>Add a package sticker (<a href="https://github.com/r-lib/styler/issues/1172" class="external-link">#1172</a>, <a href="https://github.com/r-lib/styler/issues/1173" class="external-link">#1173</a>).</li>
+<li>Improve error message for scope (<a href="https://github.com/r-lib/styler/issues/1176" class="external-link">#1176</a>).</li>
+<li>Update lintr config and address newly found lints (<a href="https://github.com/r-lib/styler/issues/1158" class="external-link">#1158</a>).</li>
+<li>Fix new lints about implicit return (<a href="https://github.com/r-lib/styler/issues/1166" class="external-link">#1166</a>).</li>
+<li>Clean new lints (<a href="https://github.com/r-lib/styler/issues/1149" class="external-link">#1149</a>).</li>
+<li>Clean up unnecessary YAML front matter in README (<a href="https://github.com/r-lib/styler/issues/1165" class="external-link">#1165</a>).</li>
+</ul><p><strong>CI</strong></p>
+<ul><li>Update pre-commit and GitHub Actions (<a href="https://github.com/r-lib/styler/issues/1177" class="external-link">#1177</a>, <a href="https://github.com/r-lib/styler/issues/1175" class="external-link">#1175</a>, <a href="https://github.com/r-lib/styler/issues/1171" class="external-link">#1171</a>, <a href="https://github.com/r-lib/styler/issues/1171" class="external-link">#1171</a>, <a href="https://github.com/r-lib/styler/issues/1164" class="external-link">#1164</a>, <a href="https://github.com/r-lib/styler/issues/1152" class="external-link">#1152</a>, <a href="https://github.com/r-lib/styler/issues/1148" class="external-link">#1148</a>).</li>
+<li>Delete URL check workflow (<a href="https://github.com/r-lib/styler/issues/1160" class="external-link">#1160</a>).</li>
+</ul><p><strong>Testing</strong></p>
+<ul><li>Suppress warning in io tests (<a href="https://github.com/r-lib/styler/issues/1169" class="external-link">#1169</a>).</li>
+<li>Ensure unit tests check for appropriate error messages in the R parser for R &gt; 4.3 (<a href="https://github.com/r-lib/styler/issues/1180" class="external-link">#1180</a>).</li>
+<li>Remove outdated test about repeated parsing (<a href="https://github.com/r-lib/styler/issues/1163" class="external-link">#1163</a>).</li>
+<li>Update roxygen test comments (<a href="https://github.com/r-lib/styler/issues/1162" class="external-link">#1162</a>).</li>
+<li>Delete unused snapshot (<a href="https://github.com/r-lib/styler/issues/1159" class="external-link">#1159</a>).</li>
+</ul><p>We thank everyone who helped making this release possible.</p>
+<p><a href="https://github.com/AshesITR" class="external-link">@AshesITR</a>, <a href="https://github.com/averissimo" class="external-link">@averissimo</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/mcanouil" class="external-link">@mcanouil</a>, <a href="https://github.com/moodymudskipper" class="external-link">@moodymudskipper</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/sbanville-delfi" class="external-link">@sbanville-delfi</a>, <a href="https://github.com/sorhawell" class="external-link">@sorhawell</a>, <a href="https://github.com/ssh352" class="external-link">@ssh352</a>, <a href="https://github.com/swo" class="external-link">@swo</a>, and <a href="https://github.com/vertesy" class="external-link">@vertesy</a>.</p>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.10.2" id="styler-1102">styler 1.10.2<small>2023-08-29</small><a class="anchor" aria-label="anchor" href="#styler-1102"></a></h2>
 <p>This release was requested by the CRAN team to fix CRAN warning on invalid numeric version inputs (<a href="https://github.com/r-lib/styler/issues/1143" class="external-link">#1143</a>).</p>
