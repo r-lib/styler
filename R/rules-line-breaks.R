@@ -417,3 +417,52 @@ set_line_break_after_ggplot2_plus <- function(pd) {
   }
   pd
 }
+
+set_linebreak_each_argument_if_multi_line <- function(pd) {
+  if (!(any(pd$token == "','"))) {
+    return(pd)
+  }
+
+  # does this expression contain expressions with linebreaks?
+  has_children <- purrr::some(pd$child, purrr::negate(is.null))
+  has_internal_linebreak <- FALSE
+  is_function_definition <- pd$token[1] == "FUNCTION"
+
+  if (has_children && !is_function_definition) {
+    children <- pd$child
+
+    # don't count anything inside {} as internal linebreaks
+    idx_pre_open_brace <- which(pd$token_after == "'{'")
+    if (length(idx_pre_open_brace)) {
+      children[idx_pre_open_brace + 1] <- NULL
+    }
+
+    has_internal_linebreak <- children %>%
+      purrr::discard(is.null) %>%
+      purrr::map_lgl(function(x) {
+        sum(x$newlines, x$lag_newlines) > 0
+      }) %>%
+      any()
+  }
+
+  if (!has_internal_linebreak && sum(pd$newlines, pd$lag_newlines) < 1) {
+    return(pd)
+  }
+
+  idx_comma <- which(pd$token == "','")
+  idx_open_paren <- grep("'[[(]'", pd$token)
+  idx_close_paren <- grep("'(]|\\))'", pd$token)
+  idx_comma_has_comment <- which(pd$token[idx_comma + 1] == "COMMENT")
+  idx_comma[idx_comma_has_comment] <- idx_comma[idx_comma_has_comment] + 1
+  pd[idx_comma + 1L, "lag_newlines"] <- 1L
+
+  if (length(idx_open_paren)) {
+    pd[idx_open_paren[1] + 1L, "lag_newlines"] <- 1L
+  }
+
+  if (length(idx_close_paren)) {
+    pd[idx_close_paren[length(idx_close_paren)], "lag_newlines"] <- 1L
+  }
+
+  pd
+}

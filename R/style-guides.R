@@ -66,6 +66,7 @@ tidyverse_style <- function(scope = "tokens",
                             strict = TRUE,
                             indent_by = 2L,
                             start_comments_with_one_space = FALSE,
+                            function_argument_on_new_line = FALSE,
                             reindention = tidyverse_reindention(),
                             math_token_spacing = tidyverse_math_token_spacing()) {
   args <- as.list(environment())
@@ -79,10 +80,11 @@ tidyverse_style <- function(scope = "tokens",
       unindent_fun_dec = unindent_fun_dec,
       indent_op = partial(indent_op, indent_by = indent_by),
       indent_eq_sub = partial(indent_eq_sub, indent_by = indent_by),
-      indent_without_paren = partial(indent_without_paren,
-        indent_by = indent_by
-      ),
-      update_indention_ref_fun_dec = update_indention_ref_fun_dec
+      indent_without_paren = partial(indent_without_paren, indent_by = indent_by),
+      update_indention_ref_fun_dec <- partial(update_indention_ref_fun_dec,
+        indent_by = indent_by,
+        function_argument_on_new_line = function_argument_on_new_line
+      )
     )
   }
   space_manipulators <- if ("spaces" %in% scope) {
@@ -166,6 +168,9 @@ tidyverse_style <- function(scope = "tokens",
       add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
       set_line_break_after_ggplot2_plus = if (strict) {
         set_line_break_after_ggplot2_plus
+      },
+      set_linebreak_each_argument_if_multi_line = if (function_argument_on_new_line) {
+        set_linebreak_each_argument_if_multi_line
       }
     )
   }

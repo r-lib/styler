@@ -22,11 +22,11 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
   if (is_function_declaration(pd)) {
     idx_closing_brace <- which(pd$token == "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
-    if (is_double_indent_function_declaration(pd, indent_by = indent_by)) {
-      pd$indent[fun_dec_head] <- 2L * indent_by
-    } else {
+    # if (is_double_indent_function_declaration(pd, indent_by = indent_by)) {
+    #   pd$indent[fun_dec_head] <- 2L * indent_by
+    # } else {
       pd$indent[fun_dec_head] <- 0L
-    }
+  #   }
   }
   pd
 }
@@ -131,10 +131,19 @@ NULL
 #' }
 #'
 #' @keywords internal
-update_indention_ref_fun_dec <- function(pd_nested) {
-  if (is_function_declaration(pd_nested) && !is_double_indent_function_declaration(pd_nested)) {
-    seq <- seq2(3L, nrow(pd_nested) - 2L)
+update_indention_ref_fun_dec <- function(pd_nested,
+                                         function_argument_on_new_line = FALSE,
+                                         indent_by = 2L) {
+  seq <- seq2(3L, nrow(pd_nested) - 2L)
+
+  if (isTRUE(function_argument_on_new_line) && pd_nested$token[1] == "FUNCTION" && nrow(pd_nested) > 4L) {
+    pd_nested$indention_ref_pos_id[seq] <- 0L
+    pd_nested$indent[seq] <- indent_by
+  }
+
+  if (!isTRUE(function_argument_on_new_line) && is_function_declaration(pd_nested) && !is_double_indent_function_declaration(pd_nested)) {
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2L]
   }
+
   pd_nested
 }
