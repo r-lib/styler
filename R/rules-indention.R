@@ -25,8 +25,8 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
     # if (is_double_indent_function_declaration(pd, indent_by = indent_by)) {
     #   pd$indent[fun_dec_head] <- 2L * indent_by
     # } else {
-      pd$indent[fun_dec_head] <- 0L
-  #   }
+    pd$indent[fun_dec_head] <- 0L
+    #   }
   }
   pd
 }

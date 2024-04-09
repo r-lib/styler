@@ -5,7 +5,11 @@
 \alias{update_indention_ref_fun_dec}
 \title{Update the indention reference}
 \usage{
-update_indention_ref_fun_dec(pd_nested)
+update_indention_ref_fun_dec(
+  pd_nested,
+  function_argument_on_new_line = FALSE,
+  indent_by = 2L
+)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}
