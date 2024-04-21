@@ -69,6 +69,7 @@ Collate:
     'io.R'
     'nest.R'
     'nested-to-tree.R'
+    'options.R'
     'parse.R'
     'reindent.R'
     'token-define.R'
