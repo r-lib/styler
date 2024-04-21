@@ -13,16 +13,31 @@ An option value of \code{NULL} means that the default is used.
 \section{Options for the styler package}{
 
 \itemize{
-\item \code{styler.addins_style_transformer}: character. The name of the style transformer to use in the addins.
-\item \code{styler.cache_name}: character. The name of the styler cache to use.
-\item \code{styler.cache_root}: character. The directory where the cache files are stored.
-\item \code{styler.colored_print.vertical}: logical. It decides whether or not the output should be colored with
-\code{prettycode::highlight()}.
-\item \code{styler.ignore_alignment}: logical. If \code{TRUE}, alignment, when detected, is ignored.
-\item \code{styler.ignore_start}, \code{styler.ignore_stop}: character. Regular expressions to ignore lines that match them.
-\item \code{styler.quiet}: logical. It decides whether or not to print an informative message about what the
-function is doing. If \code{TRUE}, no output is printed.
-\item \code{styler.test_dir_writable}: logical. If \code{TRUE}, the package tests whether the directory is writable.
+\item \code{styler.addins_style_transformer}: character.
+The name of the style transformer to use in the addins.
+(default: \code{"styler::tidyverse_style()"})
+\item \code{styler.cache_name}: character.
+The name of the styler cache to use.
+(default: current styler package version)
+\item \code{styler.cache_root}: character.
+The directory where the cache files are stored.
+(default: \code{NULL})
+\item \code{styler.colored_print.vertical}: logical.
+It decides whether or not the output should be colored with \code{prettycode::highlight()}.
+(default: \code{TRUE})
+\item \code{styler.ignore_alignment}: logical.
+If \code{TRUE}, alignment, when detected, is ignored.
+(default: \code{FALSE})
+\item \code{styler.ignore_start}, \code{styler.ignore_stop}: character.
+Regular expressions to ignore lines that match them.
+(default: \code{"styler: off"} and \code{"styler: on"}, respectively)
+\item \code{styler.quiet}: logical.
+It decides whether or not to print an informative message about what the function is doing.
+If \code{TRUE}, no output is printed.
+(default: \code{FALSE})
+\item \code{styler.test_dir_writable}: logical.
+If \code{TRUE}, the package tests whether the directory is writable.
+(default: \code{TRUE})
 }
 }
 
