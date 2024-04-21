@@ -27,10 +27,10 @@
 #'
 #' - `styler.cache_name`: character.
 #'   The name of the styler cache to use.
-#'   (default: current styler package version)
+#'   (default: `r unlist(unname(read.dcf("DESCRIPTION")[, "Version"]), use.names = FALSE)`)
 #'
 #' - `styler.cache_root`: character.
-#'   The directory where the cache files are stored.
+#'   The directory where the cache files are stored. For more, see `help("caching")`.
 #'   (default: `NULL`)
 #'
 #' - `styler.colored_print.vertical`: logical.
@@ -38,11 +38,11 @@
 #'   (default: `TRUE`)
 #'
 #' - `styler.ignore_alignment`: logical.
-#'   If `TRUE`, alignment, when detected, is ignored.
+#'   If `TRUE`, alignment, when detected, is ignored. For more, see `vignette("detect-alignment")`.
 #'   (default: `FALSE`)
 #'
 #' - `styler.ignore_start`, `styler.ignore_stop`: character.
-#'   Regular expressions to ignore lines that match them.
+#'   Regular expressions to ignore lines that match them. For more, see `help("stylerignore")`.
 #'   (default: `"styler: off"` and `"styler: on"`, respectively)
 #'
 #' - `styler.quiet`: logical.

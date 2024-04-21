@@ -18,18 +18,18 @@ The name of the style transformer to use in the addins.
 (default: \code{"styler::tidyverse_style()"})
 \item \code{styler.cache_name}: character.
 The name of the styler cache to use.
-(default: current styler package version)
+(default: 1.10.3.9000)
 \item \code{styler.cache_root}: character.
-The directory where the cache files are stored.
+The directory where the cache files are stored. For more, see \code{help("caching")}.
 (default: \code{NULL})
 \item \code{styler.colored_print.vertical}: logical.
 It decides whether or not the output should be colored with \code{prettycode::highlight()}.
 (default: \code{TRUE})
 \item \code{styler.ignore_alignment}: logical.
-If \code{TRUE}, alignment, when detected, is ignored.
+If \code{TRUE}, alignment, when detected, is ignored. For more, see \code{vignette("detect-alignment")}.
 (default: \code{FALSE})
 \item \code{styler.ignore_start}, \code{styler.ignore_stop}: character.
-Regular expressions to ignore lines that match them.
+Regular expressions to ignore lines that match them. For more, see \code{help("stylerignore")}.
 (default: \code{"styler: off"} and \code{"styler: on"}, respectively)
 \item \code{styler.quiet}: logical.
 It decides whether or not to print an informative message about what the function is doing.
