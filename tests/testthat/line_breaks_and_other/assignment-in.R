@@ -4,8 +4,7 @@ x <-
 
 x <- 3
 
-# FIXME: edge case not working for R < 3.6: Problem: most likely, comment is
-# not moved to the right nest with relocate_eq_assign.
+
 x <-
   # the culprit
 

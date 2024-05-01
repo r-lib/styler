@@ -140,19 +140,33 @@ remove_space_before_opening_paren <- function(pd_flat) {
   pd_flat
 }
 
-remove_space_after_opening_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("'('", "'['", "LBB")
+remove_space_after_opening_paren <- function(pd_flat, strict) {
+  braces <- c("'('", "'['", "LBB")
+  paren_after <- pd_flat$token %in%  braces
   if (!any(paren_after)) {
     return(pd_flat)
+  }
+  # remove blank lines after opening braces
+  if (strict) {
+    pd_flat$lag_newlines[
+      lag(pd_flat$token %in% braces) & pd_flat$lag_newlines > 1L
+    ] <- 1L
   }
   pd_flat$spaces[paren_after & (pd_flat$newlines == 0L)] <- 0L
   pd_flat
 }
 
-remove_space_before_closing_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("')'", "']'")
+remove_space_before_closing_paren <- function(pd_flat, strict) {
+  braces <- c("')'", "']'")
+  paren_after <- pd_flat$token %in% braces
   if (!any(paren_after)) {
     return(pd_flat)
+  }
+  # remove blank lines before closing braces
+  if (strict) {
+    pd_flat$lag_newlines[
+      pd_flat$token %in% braces & pd_flat$lag_newlines > 1L
+    ] <- 1L
   }
   paren_before <- lead(paren_after, default = FALSE)
   pd_flat$spaces[paren_before & (pd_flat$newlines == 0L)] <- 0L
