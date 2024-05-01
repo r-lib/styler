@@ -140,7 +140,7 @@ remove_space_before_opening_paren <- function(pd_flat) {
   pd_flat
 }
 
-remove_space_after_opening_paren <- function(pd_flat, strict) {
+remove_space_after_opening_paren <- function(pd_flat, strict = TRUE) {
   braces <- c("'('", "'['", "LBB")
   paren_after <- pd_flat$token %in% braces
   if (!any(paren_after)) {
@@ -156,7 +156,7 @@ remove_space_after_opening_paren <- function(pd_flat, strict) {
   pd_flat
 }
 
-remove_space_before_closing_paren <- function(pd_flat, strict) {
+remove_space_before_closing_paren <- function(pd_flat, strict = TRUE) {
   braces <- c("')'", "']'")
   paren_after <- pd_flat$token %in% braces
   if (!any(paren_after)) {
