@@ -10,10 +10,8 @@ in the R parser that caused unit tests to fail.
 
 ## Test environments
 
--   ubuntu 20.04 (on GitHub Actions): R devel, R 4.3.0, R 4.2.1, 4.1.2, R 4.0.5, 
-    R 3.6
--   Windows Server 10 (on GitHub Actions): R devel, R 4.3.0, R 4.2.1, R 4.1.2, 
-    R 3.6.
+-   ubuntu-latest (on GitHub Actions): R devel, R 4.4.0, R 4.3.0, R 4.2.1, 4.1.2, R 4.0.5
+-   Windows Server 10 (on GitHub Actions): R devel, R 4.4.0, R 4.3.0, R 4.2.1, R 4.1.2, R 4.0.5
 -   win-builder: R devel
 
 ## R CMD check results
