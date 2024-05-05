@@ -8,7 +8,6 @@ linters: linters_with_tags(
     line_length_linter(120L),
     namespace_linter = NULL,
     nested_ifelse_linter = NULL,
-    # TODO: remove this once the lint message is fixed
     nzchar_linter = NULL,
     object_name_linter = NULL,
     object_length_linter(70L),
