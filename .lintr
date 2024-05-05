@@ -15,7 +15,6 @@ linters: linters_with_tags(
     object_overwrite_linter = NULL,
     object_usage_linter = NULL,
     todo_comment_linter = NULL,
-    extraction_operator_linter = NULL,
     nonportable_path_linter = NULL,
     string_boundary_linter = NULL,
     undesirable_function_linter = NULL,
