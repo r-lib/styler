@@ -108,9 +108,8 @@ prettify_pkg <- function(transformers,
   filetype_ <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
   all_files <- list.files(".", recursive = TRUE, all.files = TRUE)
-  exclude_files <- grep(paste0(exclude_files, collapse = "|"), all_files, value = TRUE)
+  exclude_files <- grep(paste(exclude_files, collapse = "|"), all_files, value = TRUE)
   exclude_files <- set_arg_paths(exclude_files)
-  exclude_files_regex <- paste0(exclude_files[!file.exists(exclude_files)], collapse = "|")
   exclude_files <- c(
     exclude_files,
     dir_without_.(exclude_dirs, pattern = map_filetype_to_pattern(filetype))

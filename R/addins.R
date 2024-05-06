@@ -72,7 +72,7 @@ style_active_file <- function() {
   }
   rstudioapi::modifyRange(
     c(1L, 1L, length(context$contents) + 1L, 1L),
-    paste0(ensure_last_n_empty(out), collapse = "\n"),
+    paste(ensure_last_n_empty(out), collapse = "\n"),
     id = context$id
   )
   if (save_after_styling_is_active() && context$path != "") {
@@ -132,7 +132,7 @@ style_selection <- function() {
   )
   rstudioapi::modifyRange(
     context$selection[[1L]]$range,
-    paste0(c(
+    paste(c(
       out,
       if (context$selection[[1L]]$range$end[2L] == 1L) ""
     ), collapse = "\n"),

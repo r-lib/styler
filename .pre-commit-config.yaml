@@ -23,6 +23,7 @@ repos:
       - id: lintr
         additional_dependencies:
           - r-lib/lintr
+          - any::cyclocomp
         exclude: >
           (?x)^(
           inst/.*|

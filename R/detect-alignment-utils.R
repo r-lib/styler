@@ -161,7 +161,7 @@ alignment_serialize <- function(pd_sub) {
   if (anyNA(out)) {
     return(NA)
   }
-  paste0(out, collapse = "")
+  paste(out, collapse = "")
 }
 
 #' Check if spacing around comma is correct
