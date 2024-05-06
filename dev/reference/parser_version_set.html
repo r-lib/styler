@@ -162,8 +162,9 @@ environment <code>env_current</code>.</p></li>
 <li><p><code>parser_version_find()</code> determines the version of the parser from parse
 data. This does not necessarily mean that the version found is the
 actual version, but it <em>behaves</em> like it. For example, code that does not
-contain <code>EQ_ASSIGN</code> is parsed the same way with version 1 and 2. If the
-behavior is identical, the version is set to 1.</p></li>
+contain <code>EQ_ASSIGN</code> is parsed the same way with version <code>1</code> and <code>2</code>. If the
+behavior is identical, the version is set to <code>1</code>. Since the package now
+requires R &gt;= 4.0, the version is always set to <code>3</code>.</p></li>
 </ul></div>
 
   </div>
