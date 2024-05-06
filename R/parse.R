@@ -87,8 +87,6 @@ tokenize <- function(text) {
 #' @param ... Other arguments passed to [utils::getParseData()].
 #' @keywords internal
 get_parse_data <- function(text, include_text = TRUE, ...) {
-  # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
-  parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
   pd <- utils::getParseData(parsed, includeText = include_text) %>%
     styler_df()
