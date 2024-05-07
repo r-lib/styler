@@ -87,10 +87,7 @@ tidyverse_style <- function(scope = "tokens",
   }
   space_manipulators <- if ("spaces" %in% scope) {
     list(
-      remove_space_before_closing_paren = purrr::partial(
-        remove_space_before_closing_paren,
-        strict = strict
-      ),
+      remove_space_before_closing_paren = remove_space_before_closing_paren,
       remove_space_before_opening_paren = if (strict) {
         remove_space_before_opening_paren
       },
@@ -108,10 +105,7 @@ tidyverse_style <- function(scope = "tokens",
       spacing_around_op = purrr::partial(set_space_around_op,
         strict = strict
       ),
-      remove_space_after_opening_paren = purrr::partial(
-        remove_space_after_opening_paren,
-        strict = strict
-      ),
+      remove_space_after_opening_paren = remove_space_after_opening_paren,
       remove_space_after_excl = remove_space_after_excl,
       set_space_after_bang_bang = set_space_after_bang_bang,
       remove_space_before_dollar = remove_space_before_dollar,

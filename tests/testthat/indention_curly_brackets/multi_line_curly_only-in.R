@@ -5,8 +5,10 @@
 
       {
 
+        # some additions
         {1 + 3}
         {2 + sin(pi)}
 
+        # nothing to see here
 
       }

@@ -54,8 +54,10 @@ x[a == 3 &
   b == v, ]
 
 x[
+  # comments above
   a == 3 &
     b == v,
+  # or below shouldn't be an issue
 ]
 
 x[
