@@ -22,15 +22,15 @@ This vignette describes how you can distribute your own style guide. It builds o
 
 There are a few packages that implement a third-party style guide that are maintained by styler contributors:
 
--   [lorenzwalthert/styler.nocomments](https://github.com/lorenzwalthert/styler.nocomments)
--   [lorenzwalthert/semicoloner](https://github.com/lorenzwalthert/semicoloner)
--   [lorenzwalthert/oneliner](https://github.com/lorenzwalthert/oneliner)
--   [mlr-org/styler.mlr](https://github.com/mlr-org/styler.mlr)
+-   [lorenzwalthert/styler.nocomments](https://github.com/lorenzwalthert/styler.nocomments): Drops comments.
+-   [lorenzwalthert/semicoloner](https://github.com/lorenzwalthert/semicoloner): Puts `;` at the end of liens.
+-   [lorenzwalthert/oneliner](https://github.com/lorenzwalthert/oneliner): Puts all code on one line.
+-   [mlr-org/styler.mlr](https://github.com/mlr-org/styler.mlr): Implements mlr's style guide.
 
 Other available style guides include:
-
--   [ropensci-review-tools/spaceout](https://github.com/ropensci-review-tools/spaceout)
--   [gadenbuie/grkstyle](https://github.com/gadenbuie/grkstyle)
+-   [Robinlovelace/styler.equals](https://github.com/Robinlovelace/styler.equals): Tidyverse style but `=` instead of `<-` for assignment.
+-   [ropensci-review-tools/spaceout](https://github.com/ropensci-review-tools/spaceout): More spaces around braces.
+-   [gadenbuie/grkstyle](https://github.com/gadenbuie/grkstyle): Styles indention differently and allows to use tabs for it instead of spaces.
 
 To start out, you can use the [GitHub Template](https://github.com/lorenzwalthert/styler.yours) for third-party style guides that has already the right directory structure and patterns described below in place.
 
