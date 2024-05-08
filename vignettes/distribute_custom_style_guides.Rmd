@@ -23,7 +23,7 @@ This vignette describes how you can distribute your own style guide. It builds o
 There are a few packages that implement a third-party style guide that are maintained by styler contributors:
 
 -   [lorenzwalthert/styler.nocomments](https://github.com/lorenzwalthert/styler.nocomments): Drops comments.
--   [lorenzwalthert/semicoloner](https://github.com/lorenzwalthert/semicoloner): Puts `;` at the end of liens.
+-   [lorenzwalthert/semicoloner](https://github.com/lorenzwalthert/semicoloner): Puts `;` at the end of lines.
 -   [lorenzwalthert/oneliner](https://github.com/lorenzwalthert/oneliner): Puts all code on one line.
 -   [mlr-org/styler.mlr](https://github.com/mlr-org/styler.mlr): Implements mlr's style guide.
 
