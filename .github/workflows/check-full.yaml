@@ -39,9 +39,14 @@ jobs:
 
     steps:
       - name: Set locale
-        env:
-          OVERRIDE_LOCALE: "${{ matrix.config.locale }}"
-        run: echo $OVERRIDE_LOCALE >> $GITHUB_ENV
+        run: |
+          if [ "${{ matrix.config.locale }}" == "en_US" ]; then
+            sudo locale-gen en_US
+            echo "LC_ALL=en_US" >> $GITHUB_ENV
+          elif [ "${{ matrix.config.locale }}" == "zh_CN" ]; then
+            sudo locale-gen zh_CN
+            echo "LC_ALL=zh_CN" >> $GITHUB_ENV
+          fi
 
       - uses: actions/checkout@v4
 
