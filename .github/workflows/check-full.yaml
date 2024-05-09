@@ -40,7 +40,7 @@ jobs:
     steps:
       - name: Set locale
         run: |
-          if [ "${{ matrix.config.locale }}" == "en_US" ]; then
+          if [ -z "${{ matrix.config.locale }}" ] || [ "${{ matrix.config.locale }}" == "en_US" ]; then
             sudo locale-gen en_US
             echo "LC_ALL=en_US" >> $GITHUB_ENV
           elif [ "${{ matrix.config.locale }}" == "zh_CN" ]; then
