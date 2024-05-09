@@ -3,6 +3,7 @@
 .Rhistory
 .Rproj.user
 .gitsum
+.vscode
 Meta
 R/scratch
 README.html
@@ -16,4 +17,3 @@ revdep/
 touchstone/*
 !touchstone/config.json
 !touchstone/script.R
-.vscode
