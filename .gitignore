@@ -3,6 +3,7 @@
 .Rhistory
 .Rproj.user
 .gitsum
+.vscode
 Meta
 R/scratch
 README.html
