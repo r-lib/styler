@@ -419,7 +419,7 @@ set_line_break_after_ggplot2_plus <- function(pd) {
 }
 
 
-remove_empty_line_after_opening_braces <- function(pd) {
+remove_empty_lines_after_opening_braces <- function(pd) {
   opening_braces <- c("'('", "'['", "LBB")
   paren_after <- pd$token %in% opening_braces
   if (!any(paren_after)) {
@@ -431,7 +431,7 @@ remove_empty_line_after_opening_braces <- function(pd) {
   pd
 }
 
-remove_empty_line_before_closing_braces <- function(pd) {
+remove_empty_lines_before_closing_braces <- function(pd) {
   closing_braces <- c("')'", "']'", "RBB")
   paren_before <- pd$token %in% closing_braces
   if (!any(paren_before)) {

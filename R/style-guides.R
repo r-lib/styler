@@ -167,8 +167,8 @@ tidyverse_style <- function(scope = "tokens",
       set_line_break_after_ggplot2_plus = if (strict) {
         set_line_break_after_ggplot2_plus
       },
-      remove_empty_line_after_opening_braces = remove_empty_line_after_opening_braces,
-      remove_empty_line_before_closing_braces = remove_empty_line_before_closing_braces
+      remove_empty_lines_after_opening_braces = remove_empty_lines_after_opening_braces,
+      remove_empty_lines_before_closing_braces = remove_empty_lines_before_closing_braces
     )
   }
 
