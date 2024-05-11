@@ -76,7 +76,9 @@ test_that("tidyverse transformers are correctly dropped", {
     "set_line_break_after_opening_if_call_is_multi_line",
     "set_line_break_before_closing_call",
     "remove_line_break_in_fun_call",
-    "set_line_break_after_ggplot2_plus"
+    "set_line_break_after_ggplot2_plus",
+    "remove_empty_line_after_opening_braces",
+    "remove_empty_line_before_closing_braces"
   )
   expect_setequal(names(t_fun$line_break), names_line_break)
 
