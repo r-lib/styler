@@ -432,7 +432,7 @@ remove_empty_lines_after_opening_braces <- function(pd) {
 }
 
 remove_empty_lines_before_closing_braces <- function(pd) {
-  closing_braces <- c("')'", "']'", "RBB")
+  closing_braces <- c("')'", "']'")
   paren_before <- pd$token %in% closing_braces
   if (!any(paren_before)) {
     return(pd)
