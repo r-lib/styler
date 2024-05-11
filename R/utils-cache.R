@@ -9,7 +9,7 @@ hash_standardize <- function(text) {
   text %>%
     convert_newlines_to_linebreaks() %>%
     enc2utf8() %>%
-    paste0(collapse = "\n") %>%
+    paste(collapse = "\n") %>%
     list()
 }
 
