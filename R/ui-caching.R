@@ -93,7 +93,7 @@ NULL
 #' @family cache managers
 #' @export
 cache_info <- function(cache_name = NULL, format = "both") {
-  rlang::arg_match(format, c("tabular", "lucid", "both"))
+  rlang::arg_match0(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
   file_info <- file.info(files)

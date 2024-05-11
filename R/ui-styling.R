@@ -68,7 +68,7 @@ style_pkg <- function(pkg = ".",
                       ...,
                       style = tidyverse_style,
                       transformers = style(...),
-                      filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
+                      filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "qmd"),
                       exclude_files = c("R/RcppExports\\.R", "R/cpp11\\.R", "R/import-standalone.*\\.R"),
                       exclude_dirs = c("packrat", "renv"),
                       include_roxygen_examples = TRUE,
@@ -87,10 +87,10 @@ style_pkg <- function(pkg = ".",
 #' Prettify a package
 #'
 #' @param filetype Vector of file extensions indicating which file types should
-#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R",
-#'   ".Rmd")`, or `c("r", "rmd")`. Supported values (after standardization) are:
-#'   "r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
-#'   Rmd.
+#'   be styled. Case is ignored, and the `.` is optional, e.g. `c(".R",".Rmd")`,
+#'   or `c("r", "rmd")`. Supported values (after standardization) are:
+#'   "qmd", "r", "rmd", "rmarkdown", "rnw", and "rprofile".
+#'   Rmarkdown is treated as Rmd.
 #' @param exclude_files Character vector with regular expressions to files
 #'   that should be excluded from styling.
 #' @param exclude_dirs Character vector with directories to exclude
@@ -108,9 +108,8 @@ prettify_pkg <- function(transformers,
   filetype_ <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
   all_files <- list.files(".", recursive = TRUE, all.files = TRUE)
-  exclude_files <- grep(paste0(exclude_files, collapse = "|"), all_files, value = TRUE)
+  exclude_files <- grep(paste(exclude_files, collapse = "|"), all_files, value = TRUE)
   exclude_files <- set_arg_paths(exclude_files)
-  exclude_files_regex <- paste0(exclude_files[!file.exists(exclude_files)], collapse = "|")
   exclude_files <- c(
     exclude_files,
     dir_without_.(exclude_dirs, pattern = map_filetype_to_pattern(filetype))

@@ -1,5 +1,37 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# styler 1.10.3
+
+This release was requested by the CRAN team since parser error messages changed, 
+which were hard-coded in some unit tests (#1180).
+
+**Minor changes**
+
+- Add a package sticker (#1172, #1173).
+- Improve error message for scope (#1176).
+- Update lintr config and address newly found lints (#1158).
+- Fix new lints about implicit return (#1166).
+- Clean new lints (#1149).
+- Clean up unnecessary YAML front matter in README (#1165).
+
+**CI**
+
+- Update pre-commit and GitHub Actions (#1177, #1175, #1171, #1171, #1164, #1152, #1148).
+- Delete URL check workflow (#1160).
+
+**Testing**
+
+- Suppress warning in io tests (#1169).
+- Ensure unit tests check for appropriate error messages in the R parser for 
+  R > 4.3 (#1180).
+- Remove outdated test about repeated parsing (#1163).
+- Update roxygen test comments (#1162).
+- Delete unused snapshot (#1159).
+
+We thank everyone who helped making this release possible.
+
+[&#x0040;AshesITR](https://github.com/AshesITR), [&#x0040;averissimo](https://github.com/averissimo),  [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;mcanouil](https://github.com/mcanouil), [&#x0040;moodymudskipper](https://github.com/moodymudskipper), [&#x0040;olivroy](https://github.com/olivroy), [&#x0040;sbanville-delfi](https://github.com/sbanville-delfi), [&#x0040;sorhawell](https://github.com/sorhawell), [&#x0040;ssh352](https://github.com/ssh352), [&#x0040;swo](https://github.com/swo), and [&#x0040;vertesy](https://github.com/vertesy).
+
 # styler 1.10.2
 
 This release was requested by the CRAN team to fix CRAN warning on invalid 

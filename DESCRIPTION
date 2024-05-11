@@ -1,7 +1,7 @@
 Type: Package
 Package: styler
 Title: Non-Invasive Pretty Printing of R Code
-Version: 1.10.2
+Version: 1.10.3.9000
 Authors@R: 
     c(person(given = "Kirill",
              family = "Müller",
@@ -23,7 +23,7 @@ License: MIT + file LICENSE
 URL: https://github.com/r-lib/styler, https://styler.r-lib.org
 BugReports: https://github.com/r-lib/styler/issues
 Depends:
-    R (>= 3.6.0)
+    R (>= 4.0.0)
 Imports: 
     cli (>= 3.1.1),
     magrittr (>= 2.0.0),
@@ -52,7 +52,7 @@ Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace", "collate",
     if (rlang::is_installed("pkgapi")) "pkgapi::api_roclet" else {
     warning("Please install r-lib/pkgapi to make sure the file API is kept
     up to date"); NULL}))
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Collate: 
@@ -69,6 +69,7 @@ Collate:
     'io.R'
     'nest.R'
     'nested-to-tree.R'
+    'options.R'
     'parse.R'
     'reindent.R'
     'token-define.R'

@@ -11,6 +11,7 @@ reference:
       - style_pkg
       - style_dir
       - styler_addins
+      - styler_options
   - title: "Fine-tune styling"
     desc: "Customize style guides"
   - contents:

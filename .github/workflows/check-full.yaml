@@ -12,32 +12,44 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.locale }}
 
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'release'}
+          - { os: macos-latest, r: "release" }
 
-          - {os: windows-latest, r: 'release'}
-          # Use 3.6 to trigger usage of RTools35
-          - {os: windows-latest, r: '3.6'}
+          - { os: windows-latest, r: "devel" }
+          - { os: windows-latest, r: "release" }
           # use 4.1 to check with rtools40's older compiler
-          - {os: windows-latest, r: '4.1'}
+          - { os: windows-latest, r: "4.1" }
 
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
-          - {os: ubuntu-latest,   r: 'oldrel-2'}
-          - {os: ubuntu-latest,   r: 'oldrel-3'}
-          - {os: ubuntu-latest,   r: 'oldrel-4'}
+          - { os: ubuntu-latest, r: "devel", http-user-agent: "release" }
+          - { os: ubuntu-latest, r: "devel", locale: "en_US" }
+          #- { os: ubuntu-latest, r: "release", locale: "zh_CN" }
+          - { os: ubuntu-latest, r: "oldrel-1" }
+          - { os: ubuntu-latest, r: "oldrel-2" }
+          - { os: ubuntu-latest, r: "oldrel-3" }
+          - { os: ubuntu-latest, r: "oldrel-4" }
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
+      - name: Set 'en_US' locale
+        if: matrix.config.locale == 'en_US'
+        run: |
+          sudo locale-gen en_US
+          echo "LC_ALL=en_US" >> $GITHUB_ENV
+
+      - name: Set 'zh_CN' locale
+        if: matrix.config.locale == 'zh_CN'
+        run: |
+          sudo locale-gen zh_CN
+          echo "LC_ALL=zh_CN" >> $GITHUB_ENV
+
       - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
@@ -50,13 +62,15 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          pak-version: devel
+          upgrade: "TRUE"
           extra-packages: any::rcmdcheck
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-          error-on: 'ifelse(getRversion() > "3.6", "warning", "note")'
+          error-on: '"note"'
         env:
           _R_CHECK_FORCE_SUGGESTS_: false
           _R_CHECK_STOP_ON_INVALID_NUMERIC_VERSION_INPUTS_: true

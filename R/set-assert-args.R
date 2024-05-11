@@ -73,8 +73,8 @@ assert_filetype <- function(lowercase_filetype) {
   allowed_types <- c("r", "rmd", "rmarkdown", "rnw", "rprofile", "qmd")
   if (!all(lowercase_filetype %in% allowed_types)) {
     abort(paste(
-      "filetype must not contain other values than 'R', 'Rprofile',",
-      "'Rmd', 'Rmarkdown', 'qmd' or 'Rnw' (case is ignored)."
+      "filetype must not contain other values than 'qmd', 'R',",
+      "'Rmarkdown', 'Rmd', 'Rnw', or 'Rprofile' (case is ignored)."
     ))
   }
 }

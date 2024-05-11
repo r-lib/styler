@@ -68,7 +68,7 @@ parse_roxygen <- function(roxygen) {
 roxygen_remove_extra_brace <- function(parsed) {
   parsed <- rlang::try_fetch(
     {
-      parse(text = paste0(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
+      parse(text = paste(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
       parsed
     },
     error = function(e) {
