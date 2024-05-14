@@ -1,6 +1,9 @@
 home:
   strip_header: true
 
+template:
+  bootstrap: 5
+
 reference:
   - title: "Styling API"
     desc: >
