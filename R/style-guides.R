@@ -130,6 +130,8 @@ tidyverse_style <- function(scope = "tokens",
 
   line_break_manipulators <- if ("line_breaks" %in% scope) {
     list(
+      remove_empty_lines_after_opening_and_before_closing_braces =
+        remove_empty_lines_after_opening_and_before_closing_braces,
       set_line_break_around_comma_and_or = set_line_break_around_comma_and_or,
       set_line_break_after_assignment = set_line_break_after_assignment,
       set_line_break_before_curly_opening = set_line_break_before_curly_opening,
@@ -166,9 +168,7 @@ tidyverse_style <- function(scope = "tokens",
       add_line_break_after_pipe = if (strict) add_line_break_after_pipe,
       set_line_break_after_ggplot2_plus = if (strict) {
         set_line_break_after_ggplot2_plus
-      },
-      remove_empty_lines_after_opening_braces = remove_empty_lines_after_opening_braces,
-      remove_empty_lines_before_closing_braces = remove_empty_lines_before_closing_braces
+      }
     )
   }
 

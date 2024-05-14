@@ -419,26 +419,23 @@ set_line_break_after_ggplot2_plus <- function(pd) {
 }
 
 
-remove_empty_lines_after_opening_braces <- function(pd) {
+remove_empty_lines_after_opening_and_before_closing_braces <- function(pd) {
   opening_braces <- c("'('", "'['", "LBB")
-  paren_after <- pd$token %in% opening_braces
-  if (!any(paren_after)) {
-    return(pd)
-  }
-  pd$lag_newlines[
-    lag(pd$token %in% opening_braces) & pd$lag_newlines > 1L
-  ] <- 1L
-  pd
-}
-
-remove_empty_lines_before_closing_braces <- function(pd) {
   closing_braces <- c("')'", "']'")
-  paren_before <- pd$token %in% closing_braces
-  if (!any(paren_before)) {
-    return(pd)
+
+  paren_after <- pd$token %in% opening_braces
+  if (any(paren_after)) {
+    pd$lag_newlines[
+      lag(pd$token %in% opening_braces) & pd$lag_newlines > 1L
+    ] <- 1L
   }
-  pd$lag_newlines[
-    pd$token %in% closing_braces & pd$lag_newlines > 1L
-  ] <- 1L
+
+  paren_before <- pd$token %in% closing_braces
+  if (any(paren_before)) {
+    pd$lag_newlines[
+      pd$token %in% closing_braces & pd$lag_newlines > 1L
+    ] <- 1L
+  }
+
   pd
 }
