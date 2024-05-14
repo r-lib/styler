@@ -98,7 +98,7 @@ The source code is organized as follows:
 | token-create.R | Utilities for creating tokens, mostly to insert braces around mutli-line if statements. |
 | token-define.R | Defines which tokens belong to which group. |
 | transform-code.R, transform-files.R | Transformation of code for APIs that manipulate files (e.g. `style_file()`). |
-| ui.R | User interaces. Top-level functions for styling. |
+| ui.R | User interfaces. Top-level functions for styling. |
 | unindent.R | Certain tokens cause unindention, e.g. closing braces. |
 | utils.R | low-level general purpose utilities. |
 | vertical.R | S3 class for pretty printing of styled code. |
