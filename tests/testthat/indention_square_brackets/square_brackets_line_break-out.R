@@ -60,10 +60,6 @@ x[
   # or below shouldn't be an issue
 ]
 
-x[
-  a,
-  b
-]
 
 x[
   a,
@@ -71,6 +67,10 @@ x[
 ]
 
 x[
-  a,
-  b
+  # this comment shouldn't be an issue
+  1, c(
+    1, 2
+
+    # neither should this one
+  )
 ]

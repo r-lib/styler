@@ -63,21 +63,25 @@ x[
 
   ]
 
+
 x[
 
   a,
   b
+
+
 ]
 
 x[
-  a,
-  b
 
-]
+  # this comment shouldn't be an issue
+  1, c(
 
-x[
+  1, 2
 
-  a,
-  b
+  # neither should this one
+
+  )
+
 
 ]
