@@ -223,7 +223,10 @@ set_line_break_around_curly_curly <- function(pd) {
 
 # if ) follows on }, don't break line
 remove_line_break_before_round_closing_after_curly <- function(pd) {
-  round_after_curly <- pd$token == "')'" & (pd$token_before == "'}'")
+  curly_and_round <- pd$token %in% c("'{'", "')'")
+  curly_and_round_previous <- pd$token_before %in% c("'{'", "')'")
+  curly_and_round_next <- pd$token_after %in% c("'{'", "')'")
+  round_after_curly <- curly_and_round & curly_and_round_previous & !curly_and_round_next
   pd$lag_newlines[round_after_curly] <- 0L
   pd
 }
