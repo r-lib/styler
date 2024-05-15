@@ -26,14 +26,20 @@ a[[
 
   2
 
+
 ]]
+
 
 a[[
 
-  2
-]]
+  # this comment shouldn't mess
+  1, c(
 
-a[[
-  2
+    1, 2
+
+    # neither should this one
+
+    )
+
 
 ]]
