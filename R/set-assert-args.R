@@ -1,19 +1,3 @@
-#' Set the write_tree argument
-#'
-#' Sets the argument `write_tree` in [test_collection()] to be `TRUE` for R
-#' versions higher or equal to 3.2, and `FALSE` otherwise since the second-level
-#' dependency `DiagrammeR` from `data.tree` is not available for R < 3.2.
-#' @param write_tree Whether or not to write tree.
-#' @keywords internal
-set_arg_write_tree <- function(write_tree) {
-  if (is.na(write_tree)) {
-    write_tree <- is_installed("data.tree")
-  } else if (write_tree) {
-    check_installed("data.tree")
-  }
-  write_tree
-}
-
 #' Assert the transformers
 #'
 #' Actually only assert name and version of style guide in order to make sure
