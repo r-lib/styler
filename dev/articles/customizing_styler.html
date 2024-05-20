@@ -218,10 +218,10 @@ transformer functions. Let’s quickly look at what those are.</p>
 <span><span class="co">#&gt; List of 12</span></span>
 <span><span class="co">#&gt;  $ initialize            :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ initialize:function (pd_flat)  </span></span>
-<span><span class="co">#&gt;  $ line_break            :List of 12</span></span>
-<span><span class="co">#&gt;   ..$ set_line_break_around_comma_and_or                :function (pd, strict)  </span></span>
-<span><span class="co">#&gt;   ..$ set_line_break_after_assignment                   :function (pd)  </span></span>
-<span><span class="co">#&gt;   ..$ set_line_break_before_curly_opening               :function (pd)  </span></span>
+<span><span class="co">#&gt;  $ line_break            :List of 13</span></span>
+<span><span class="co">#&gt;   ..$ remove_empty_lines_after_opening_and_before_closing_braces:function (pd)  </span></span>
+<span><span class="co">#&gt;   ..$ set_line_break_around_comma_and_or                        :function (pd, strict)  </span></span>
+<span><span class="co">#&gt;   ..$ set_line_break_after_assignment                           :function (pd)  </span></span>
 <span><span class="co">#&gt;   .. [list output truncated]</span></span>
 <span><span class="co">#&gt;  $ space                 :List of 19</span></span>
 <span><span class="co">#&gt;   ..$ remove_space_before_closing_paren :function (pd_flat)  </span></span>
@@ -240,14 +240,15 @@ one:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tidyverse_style.html">tidyverse_style</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">space</span><span class="op">$</span><span class="va">remove_space_after_opening_paren</span></span>
 <span><span class="co">#&gt; function (pd_flat) </span></span>
 <span><span class="co">#&gt; {</span></span>
-<span><span class="co">#&gt;     paren_after &lt;- pd_flat$token %in% c("'('", "'['", "LBB")</span></span>
+<span><span class="co">#&gt;     opening_braces &lt;- c("'('", "'['", "LBB")</span></span>
+<span><span class="co">#&gt;     paren_after &lt;- pd_flat$token %in% opening_braces</span></span>
 <span><span class="co">#&gt;     if (!any(paren_after)) {</span></span>
 <span><span class="co">#&gt;         return(pd_flat)</span></span>
 <span><span class="co">#&gt;     }</span></span>
 <span><span class="co">#&gt;     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L</span></span>
 <span><span class="co">#&gt;     pd_flat</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x563a45f21998&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x56180663bee8&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>As the name says, this function removes spaces after the opening
 parenthesis. But how? Its input is a <em>nest</em>. Since the visitor
@@ -395,7 +396,7 @@ transformers: <code><a href="../reference/apply_transformers.html">apply_transfo
 <span><span class="co">#&gt;         outer_indention_refs = NA)</span></span>
 <span><span class="co">#&gt;     transformed_absolute_indent</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x563a4991d780&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x56180a03e6c8&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>This means that the order of the styling is clearly defined and it is
 for example not possible to modify line breaks based on spacing, because
@@ -533,7 +534,7 @@ bracket that comes after a curly brace looks as follows:</p>
 <span><span class="co">#&gt;     pd$lag_newlines[round_after_curly] &lt;- 0L</span></span>
 <span><span class="co">#&gt;     pd</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x563a45d23210&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x56180643a4b8&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>With our example function
 <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to
