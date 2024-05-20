@@ -12,17 +12,27 @@
 #'
 #'
 #'
+#' (
+#'
+#'
 #' # more
 #' a <- 3
+#'
+#' )
 #' # a comment
 #' \dontrun{
+#' {
+#'
 #' x
+#'
+#' }
 #'
 #' y # hi
 #'
 #' # more
 #'
 #' a <- 3
+#'
 #' }
 #' @importFrom purrr compact
 #' @export
