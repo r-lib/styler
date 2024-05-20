@@ -93,22 +93,6 @@ is_windows <- function() {
   identical(.Platform$OS.type, "windows")
 }
 
-#' Invoke a system command
-#'
-#' Wraps a system command into [shell()] or [system()], depending on the
-#' operating system.
-#' @param sys_call The call to be executed.
-#' @param ... Arguments passed to [shell()] or [system()].
-#' @keywords internal
-calls_sys <- function(sys_call, ...) {
-  if (is_windows()) {
-    error <- shell(sys_call, ...)
-  } else {
-    error <- system(sys_call, ...)
-  }
-  error
-}
-
 #' Get the value of an option
 #'
 #' Basically a `getOptions()` that fails fast by default.
