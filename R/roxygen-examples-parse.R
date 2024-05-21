@@ -179,6 +179,6 @@ needs_rd_emulation <- function(roxygen) {
 #' @keywords internal
 post_parse_roxygen <- function(raw) {
   raw %>%
-    paste0(collapse = "") %>%
+    paste(collapse = "") %>%
     convert_newlines_to_linebreaks()
 }

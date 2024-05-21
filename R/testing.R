@@ -19,7 +19,7 @@
 #' @keywords internal
 test_collection <- function(test, sub_test = NULL,
                             dry = "off",
-                            write_tree = NA,
+                            write_tree = FALSE,
                             transformer,
                             ...) {
   path <- rprojroot::find_testthat_root_file(test)
@@ -93,9 +93,7 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param out_name The label of the out_item, defaults to `out_item`.
 #' @param transformer A function to apply to the content of `in_item`.
 #' @param write_tree Whether or not the tree structure of the test should be
-#'   computed and written to a file. Note that this needs R >= 3.2
-#'   (see [set_arg_write_tree()]). If the argument is set to `NA`, the function
-#'   determines whether R >= 3.2 is in use and if so, trees will be written.
+#'   computed and written to a files.
 #' @param ... Parameters passed to transformer function.
 #' @param out_tree Name of tree file if written out.
 #' @inheritParams transform_utf8
@@ -103,9 +101,9 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 transform_and_check <- function(in_item, out_item,
                                 in_name = in_item, out_name = out_item,
                                 transformer, dry,
-                                write_tree = NA,
+                                write_tree = FALSE,
                                 out_tree = "_tree", ...) {
-  write_tree <- set_arg_write_tree(write_tree)
+  if (write_tree) check_installed("data.tree")
   read_in <- read_utf8_bare(in_item)
   if (write_tree) {
     create_tree(read_in) %>%

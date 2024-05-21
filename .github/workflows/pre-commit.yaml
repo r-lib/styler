@@ -24,19 +24,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        run: |
-          # your system installation code here
-          # sudo apt-get install -y libcurl4-openssl-dev
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.1.0
         with:
           python-version: "3.9"
           architecture: "x64"
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
-        env: 
+        env:
           SKIP: pkgdown
       - name: Commit files
         if: failure() && startsWith(github.ref, 'refs/heads')
