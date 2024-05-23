@@ -51,9 +51,3 @@ left_join <- function(x, y, by) {
 last <- function(x) {
   x[[length(x)]]
 }
-
-map_dfr <- function(.x, .f, ...) {
-  .f <- purrr::as_mapper(.f, ...)
-  res <- map(.x, .f, ...)
-  vec_rbind(!!!res)
-}
