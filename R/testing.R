@@ -267,48 +267,6 @@ n_times_faster_bench <- function(i, x1, x2, fun, ..., n, clear) {
   )
 }
 
-
-#' Generate a comprehensive collection test cases for comment / insertion
-#' interaction
-#' Test consist of if / if-else / if-else-if-else cases, paired with various
-#' line-break and comment configurations. Used for internal testing.
-#' @return
-#' The function is called for its side effects, i.e. to write the
-#' test cases to *-in.R files that can be tested with [test_collection()]. Note
-#' that a few of the test cases are invalid and need to be removed / commented
-#' out manually.
-#' @keywords internal
-generate_test_samples <- function() {
-  gen <- function(x) {
-    if (length(x) == 0L) {
-      ""
-    } else {
-      c(
-        paste0(x[1L], gen(x[-1L])),
-        paste0(x[1L], " # comment\n", paste(x[-1L], collapse = ""))
-      )
-    }
-  }
-
-  collapse <- function(x) paste(x, collapse = "\n\n")
-
-  cat(
-    collapse(gen(c("if", "(", "TRUE", ")", "NULL"))),
-    file = "tests/testthat/insertion_comment_interaction/just_if-in.R"
-  )
-  cat(
-    collapse(gen(c("if", "(", "TRUE", ")", "NULL", " else", " NULL"))),
-    file = "tests/testthat/insertion_comment_interaction/if_else-in.R"
-  )
-  cat(
-    collapse(gen(c(
-      "if", "(", "TRUE", ")", "NULL", " else", " if", "(", "FALSE", ")", "NULL",
-      " else", " NULL"
-    ))),
-    file = "tests/testthat/insertion_comment_interaction/if_else_if_else-in.R"
-  )
-}
-
 #' @include ui-caching.R
 clear_testthat_cache <- purrr::partial(cache_clear, "testthat", ask = FALSE)
 activate_testthat_cache <- purrr::partial(cache_activate, "testthat")
