@@ -10,12 +10,6 @@ lead <- function(x, n = 1L, default = NA) {
   c(x[-seq_len(n)], rep(default, n))
 }
 
-
-arrange <- function(.data, ...) {
-  ord <- eval(substitute(order(...)), .data, parent.frame())
-  vec_slice(.data, ord)
-}
-
 arrange_pos_id <- function(data) {
   pos_id <- data$pos_id
   if (is.unsorted(pos_id)) {
