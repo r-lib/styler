@@ -141,7 +141,7 @@ or <code>base_indention</code>.</p></dd>
 a new cache.</p></li>
 <li><p>transformers. Cannot easily hash them because two environments won't be
 identical even if they contain the same objects (see 'Experiments'). Simple
-<code>as.character(transformers)</code> will not consider infinitively recursive
+<code>as.character(transformers)</code> will not consider infinitely recursive
 code dependencies.
 To fix this, transformers must have names and version number as described
 in <code><a href="create_style_guide.html">create_style_guide()</a></code>. Now, the only way to fool the cache invalidation

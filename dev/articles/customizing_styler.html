@@ -248,16 +248,14 @@ one:</p>
 <span><span class="co">#&gt;     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L</span></span>
 <span><span class="co">#&gt;     pd_flat</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x5626fa79fff8&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5589f4595620&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>As the name says, this function removes spaces after the opening
 parenthesis. But how? Its input is a <em>nest</em>. Since the visitor
 will go through all levels of nesting, we just need a function that can
 be applied to a <em>nest</em>, that is, to a parse table at one level of
 nesting. We can compute the nested parse table and look at one of the
-levels of nesting that is interesting for us (more on the data structure
-in the vignettes “Data structures” and “Manipulating the parse
-table”):</p>
+levels of nesting that is interesting for us:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">string_to_format</span> <span class="op">&lt;-</span> <span class="st">"call( 3)"</span></span>
 <span><span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu">styler</span><span class="fu">:::</span><span class="fu"><a href="../reference/compute_parse_data_nested.html">compute_parse_data_nested</a></span><span class="op">(</span><span class="va">string_to_format</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -396,7 +394,7 @@ transformers: <code><a href="../reference/apply_transformers.html">apply_transfo
 <span><span class="co">#&gt;         outer_indention_refs = NA)</span></span>
 <span><span class="co">#&gt;     transformed_absolute_indent</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x5626fe18c448&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5589f7f824e0&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>This means that the order of the styling is clearly defined and it is
 for example not possible to modify line breaks based on spacing, because
@@ -534,7 +532,7 @@ bracket that comes after a curly brace looks as follows:</p>
 <span><span class="co">#&gt;     pd$lag_newlines[round_after_curly] &lt;- 0L</span></span>
 <span><span class="co">#&gt;     pd</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x5626fa591ef0&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5589f43876d8&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>With our example function
 <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to
