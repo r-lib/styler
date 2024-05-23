@@ -27,7 +27,7 @@ Depends:
 Imports: 
     cli (>= 3.1.1),
     magrittr (>= 2.0.0),
-    purrr (>= 0.2.3),
+    purrr (>= 1.0.2),
     R.cache (>= 0.15.0),
     rlang (>= 1.0.0),
     rprojroot (>= 1.1),
