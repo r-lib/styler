@@ -244,7 +244,7 @@ remove_line_breaks_in_fun_dec <- function(pd) {
   pd
 }
 
-#'
+
 add_line_break_after_pipe <- function(pd) {
   is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
   pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1L] <- 1L
@@ -415,5 +415,27 @@ set_line_break_after_ggplot2_plus <- function(pd) {
       }
     }
   }
+  pd
+}
+
+
+remove_empty_lines_after_opening_and_before_closing_braces <- function(pd) {
+  opening_braces <- c("'('", "'['", "LBB")
+  closing_braces <- c("')'", "']'")
+
+  paren_after <- pd$token %in% opening_braces
+  if (any(paren_after)) {
+    pd$lag_newlines[
+      lag(pd$token %in% opening_braces) & pd$lag_newlines > 1L
+    ] <- 1L
+  }
+
+  paren_before <- pd$token %in% closing_braces
+  if (any(paren_before)) {
+    pd$lag_newlines[
+      pd$token %in% closing_braces & pd$lag_newlines > 1L
+    ] <- 1L
+  }
+
   pd
 }

@@ -9,7 +9,7 @@ hash_standardize <- function(text) {
   text %>%
     convert_newlines_to_linebreaks() %>%
     enc2utf8() %>%
-    paste0(collapse = "\n") %>%
+    paste(collapse = "\n") %>%
     list()
 }
 
@@ -54,7 +54,7 @@ is_cached <- function(text,
 #'   a new cache.
 #' * transformers. Cannot easily hash them because two environments won't be
 #'   identical even if they contain the same objects (see 'Experiments'). Simple
-#'   `as.character(transformers)` will not consider infinitively recursive
+#'   `as.character(transformers)` will not consider infinitely recursive
 #'   code dependencies.
 #'   To fix this, transformers must have names and version number as described
 #'   in [create_style_guide()]. Now, the only way to fool the cache invalidation

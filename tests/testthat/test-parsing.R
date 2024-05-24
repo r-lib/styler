@@ -36,10 +36,17 @@ test_that("mixed CRLF / LF EOLs fail", {
   )
 })
 
-test_that("unicode can't be propprely handled on Windows for R < 4.2", {
-  msg <- ifelse(getRversion() < "4.2" && is_windows(),
-    "Can't parse input due to unicode restriction in base R\\.",
-    NA
+test_that("unicode can't be properly handled on Windows for R < 4.2", {
+  skip_if_not(getRversion() < "4.2" && is_windows())
+
+  expect_error(
+    style_text('suit <- "♠"'),
+    "Can't parse input due to unicode restriction in base R\\."
   )
-  expect_error(style_text('suit <- "♠"'), msg)
+})
+
+test_that("unicode is properly handled in all settings other than on Windows for R < 4.2", {
+  skip_if(getRversion() < "4.2" && is_windows())
+
+  expect_error(style_text('suit <- "♠"'), NA)
 })

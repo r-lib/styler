@@ -27,7 +27,7 @@ Depends:
 Imports: 
     cli (>= 3.1.1),
     magrittr (>= 2.0.0),
-    purrr (>= 0.2.3),
+    purrr (>= 1.0.2),
     R.cache (>= 0.15.0),
     rlang (>= 1.0.0),
     rprojroot (>= 1.1),
@@ -53,6 +53,7 @@ Roxygen: list(markdown = TRUE, roclets = c( "rd", "namespace", "collate",
     warning("Please install r-lib/pkgapi to make sure the file API is kept
     up to date"); NULL}))
 RoxygenNote: 7.3.1
+Language: en-US
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Collate: 

@@ -44,7 +44,7 @@ We note that there are different types of transformer functions. `initialize` in
 tidyverse_style()$space$remove_space_after_opening_paren
 ```
 
-As the name says, this function removes spaces after the opening parenthesis. But how? Its input is a *nest*. Since the visitor will go through all levels of nesting, we just need a function that can be applied to a *nest*, that is, to a parse table at one level of nesting. We can compute the nested parse table and look at one of the levels of nesting that is interesting for us (more on the data structure in the vignettes "Data structures" and "Manipulating the parse table"):
+As the name says, this function removes spaces after the opening parenthesis. But how? Its input is a *nest*. Since the visitor will go through all levels of nesting, we just need a function that can be applied to a *nest*, that is, to a parse table at one level of nesting. We can compute the nested parse table and look at one of the levels of nesting that is interesting for us:
 
 ```{r}
 string_to_format <- "call( 3)"
