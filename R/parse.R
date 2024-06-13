@@ -20,13 +20,13 @@ parse_safely <- function(text, ...) {
     error = function(e) {
       if (has_crlf_as_first_line_sep(e$message, text)) {
         msg <- c(
-          "x" = "The code to style seems to use Windows style line endings (CRLF).",
-          "!" = "styler currently only supports Unix style line endings (LF). ",
-          "i" = "Please change the EOL character in your editor to Unix style
+          x = "The code to style seems to use Windows style line endings (CRLF).",
+          `!` = "styler currently only supports Unix style line endings (LF). ",
+          i = "Please change the EOL character in your editor to Unix style
                  and try again."
         )
       } else {
-        msg <- c("x" = "Styling failed")
+        msg <- c(x = "Styling failed")
       }
       cli::cli_abort(msg, parent = e, call = NULL)
     },
