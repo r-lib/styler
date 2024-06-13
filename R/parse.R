@@ -15,7 +15,7 @@
 #'
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
-  tried_parsing <- rlang::try_fetch(
+  tried_parsing <- withCallingHandlers(
     parse(text = text, ...),
     error = function(e) {
       if (has_crlf_as_first_line_sep(e$message, text)) {
