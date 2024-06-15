@@ -104,8 +104,7 @@ cache_info <- function(cache_name = NULL, format = "both") {
     last_modified = suppressWarnings(max(file_info$mtime)),
     created = file.info(path_cache)$ctime,
     location = path_cache,
-    activated = cache_is_activated(cache_name),
-    stringsAsFactors = FALSE
+    activated = cache_is_activated(cache_name)
   )
 
   if (any(c("lucid", "both") == format)) {

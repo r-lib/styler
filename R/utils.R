@@ -44,7 +44,7 @@ re_match <- function(text, pattern) {
   end <- start + length - 1L
   matchstr <- substring(text, start, end)
   matchstr[start == -1L] <- NA_character_
-  res <- data.frame(stringsAsFactors = FALSE, .text = text, .match = matchstr)
+  res <- data.frame(.text = text, .match = matchstr)
 
   gstart <- attr(match, "capture.start")
   glength <- attr(match, "capture.length")
@@ -52,7 +52,7 @@ re_match <- function(text, pattern) {
   groupstr <- substring(text, gstart, gend)
   groupstr[gstart == -1L] <- NA_character_
   dim(groupstr) <- dim(gstart)
-  res <- cbind(groupstr, res, stringsAsFactors = FALSE)
+  res <- cbind(groupstr, res)
 
   names(res) <- c(attr(match, "capture.names"), ".text", ".match")
   res

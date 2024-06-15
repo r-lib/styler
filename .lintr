@@ -14,6 +14,7 @@ linters: all_linters(
     todo_comment_linter = NULL,
     nonportable_path_linter = NULL,
     string_boundary_linter = NULL,
+    strings_as_factors_linter = NULL, # since we use R >= 4.0
     undesirable_function_linter = NULL,
     undesirable_operator_linter = NULL
   )
