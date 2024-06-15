@@ -58,14 +58,16 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
   # We remove spaces for zero (e.g., around ^ in the tidyverse style guide)
   # even for strict = FALSE to be consistent with the : operator
   if (any(pd_flat$token %in% zero)) {
-    pd_flat <- pd_flat %>%
+    pd_flat <-
       style_space_around_token(
+        pd_flat,
         strict = TRUE, tokens = zero, level_before = 0L, level_after = 0L
       )
   }
   if (any(pd_flat$token %in% one)) {
-    pd_flat <- pd_flat %>%
+    pd_flat <-
       style_space_around_token(
+        pd_flat,
         strict = strict, tokens = one, level_before = 1L, level_after = 1L
       )
   }
@@ -129,7 +131,8 @@ remove_space_after_unary_pm_nested <- function(pd) {
 }
 
 remove_space_before_opening_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("'('", "'['", "LBB")
+  opening_braces <- c("'('", "'['", "LBB")
+  paren_after <- pd_flat$token %in% opening_braces
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -139,7 +142,8 @@ remove_space_before_opening_paren <- function(pd_flat) {
 }
 
 remove_space_after_opening_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("'('", "'['", "LBB")
+  opening_braces <- c("'('", "'['", "LBB")
+  paren_after <- pd_flat$token %in% opening_braces
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -148,7 +152,8 @@ remove_space_after_opening_paren <- function(pd_flat) {
 }
 
 remove_space_before_closing_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("')'", "']'")
+  closing_braces <- c("')'", "']'")
+  paren_after <- pd_flat$token %in% closing_braces
   if (!any(paren_after)) {
     return(pd_flat)
   }

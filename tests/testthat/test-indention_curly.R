@@ -1,5 +1,3 @@
-
-
 test_that("indention on one-liner curley only is not changed", {
   expect_warning(test_collection("indention_curly_brackets",
     "one_line_curly",

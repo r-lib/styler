@@ -21,3 +21,11 @@ mpg %>%
     n = n(),
     n_class = n_distinct(class)
   )
+
+
+1:4 %>%
+  {
+    (
+      . + 1
+    )
+  }

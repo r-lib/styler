@@ -11,6 +11,7 @@ reference:
       - style_pkg
       - style_dir
       - styler_addins
+      - styler_options
   - title: "Fine-tune styling"
     desc: "Customize style guides"
   - contents:
@@ -41,17 +42,17 @@ reference:
       - print.vertical
 
 template:
+  bootstrap: 5
   params:
     bootswatch: flatly # https://bootswatch.com/flatly/
-    docsearch:
-      api_key: 13580d327d8a7159f83a7cff178d2141
-      index_name: r-lib_styler
 
 authors:
   Kirill Müller:
     href: https://krlmlr.info
   Lorenz Walthert:
     href: https://lorenzwalthert.com
+  Indrajeet Patil:
+    href: https://sites.google.com/site/indrajeetspatilmorality/
 
 development:
   mode: auto

@@ -66,18 +66,18 @@ transform_file <- function(path,
   }
   changed <- transform_code(path, fun = fun, ..., dry = dry)
 
-  bullet <- if (is.na(changed)) {
-    "warning"
-  } else {
-    if (changed) {
-      "info"
-    } else {
-      "tick"
-    }
-  }
-
   if (!getOption("styler.quiet", FALSE)) {
-    cli::cat_bullet(bullet = bullet)
+    if (is.na(changed)) {
+      bullet <- "warning"
+      color <- "red"
+    } else if (changed) {
+      bullet <- "info"
+      color <- "cyan"
+    } else {
+      bullet <- "tick"
+      color <- "green"
+    }
+    cli::cat_bullet(bullet = bullet, bullet_col = color)
   }
   invisible(changed)
 }
@@ -116,9 +116,13 @@ make_transformer <- function(transformers,
       use_cache <- FALSE
     }
 
-    if (!use_cache) {
-      transformed_code <- text %>%
-        parse_transform_serialize_r(transformers,
+    if (use_cache) {
+      text
+    } else {
+      transformed_code <-
+        parse_transform_serialize_r(
+          text,
+          transformers,
           base_indention = base_indention,
           warn_empty = warn_empty
         )
@@ -139,8 +143,6 @@ make_transformer <- function(transformers,
       }
 
       transformed_code
-    } else {
-      text
     }
   }
 }

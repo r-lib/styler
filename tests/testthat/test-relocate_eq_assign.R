@@ -1,4 +1,3 @@
-
 # Tests code in R/relevel.R
 test_that("tree hierarchy is the same no matter whether = or <- is used", {
   skip_if_not_installed("DiagrammeR")
