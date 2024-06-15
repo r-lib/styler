@@ -15,25 +15,26 @@
 #'
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
-  tried_parsing <- rlang::try_fetch(
+  tried_parsing <- withCallingHandlers(
     parse(text = text, ...),
-    error = function(e) e,
-    warning = function(w) w
-  )
-  if (inherits(tried_parsing, "error")) {
-    if (has_crlf_as_first_line_sep(tried_parsing$message, text)) {
-      abort(paste0(
-        "The code to style seems to use Windows style line endings (CRLF). ",
-        "styler currently only supports Unix style line endings (LF). ",
-        "Please change the EOL character in your editor to Unix style and try ",
-        "again.\nThe parsing error was:\n", tried_parsing$message
-      ))
-    } else {
-      abort(tried_parsing$message)
+    error = function(e) {
+      if (has_crlf_as_first_line_sep(e$message, text)) {
+        msg <- c(
+          x = "The code to style seems to use Windows style line endings (CRLF).",
+          `!` = "styler currently only supports Unix style line endings (LF). ",
+          i = "Please change the EOL character in your editor to Unix style
+                 and try again."
+        )
+      } else {
+        msg <- c(x = "Styling failed")
+      }
+      cli::cli_abort(msg, parent = e, call = NULL)
+    },
+    warning = function(w) {
+      cli::cli_warn(w$message)
+      w
     }
-  } else if (inherits(tried_parsing, "warning")) {
-    warn(tried_parsing$message)
-  }
+  )
   tried_parsing
 }
 

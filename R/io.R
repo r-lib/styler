@@ -54,7 +54,11 @@ transform_utf8_one <- function(path, fun, dry) {
       if (inherits(e, "dryError")) {
         rlang::abort(conditionMessage(e))
       }
-      warn(paste0("When processing ", path, ": ", conditionMessage(e)))
+      show_path <- cli::style_hyperlink(
+        cli::col_blue(basename(path)),
+        paste0("file://", path)
+      )
+      cli::cli_warn("When processing {show_path}:", parent = e)
       NA
     }
   )

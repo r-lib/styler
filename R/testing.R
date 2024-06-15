@@ -117,7 +117,7 @@ transform_and_check <- function(in_item, out_item,
     unclass()
   if (!file.exists(out_item)) {
     warn(paste(
-      "File", out_item, "does not exist. Creating it from transormation."
+      "File", out_item, "does not exist. Creating it from transformation."
     ))
     file.create(out_item)
   }
