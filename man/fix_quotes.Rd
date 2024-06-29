@@ -10,9 +10,7 @@ fix_quotes(pd_flat)
 \item{pd_flat}{A flat parse table.}
 }
 \description{
-We do not use \code{deparse()} as in previous implementations but \code{paste0()} since
-the former approach escapes the reverse backslash in the line break character
-\verb{\\\\n} whereas the solution with \code{paste0()} does not.
+Replace single quotes with double quotes
 }
 \examples{
 style_text("'here
