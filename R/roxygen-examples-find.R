@@ -5,13 +5,13 @@
 #' @param text A text consisting of code and/or roxygen comments.
 #' @keywords internal
 identify_start_to_stop_of_roxygen_examples_from_text <- function(text) {
-  starts <- grep("^#'(\\s|\t)*@examples(If\\s|\\s|\t|$)", text, perl = TRUE)
+  starts <- grep(R"{^#'(\s|\t)*@examples(If\s|\s|\t|$)}", text, perl = TRUE)
   if (length(starts) < 1L) {
     return(integer())
   }
   stop_candidates <- which(magrittr::or(
     # starts with code or a tag
-    grepl("(^[^#]|^#'[\\s\t]*@)", text, perl = TRUE),
+    grepl(R"{(^[^#]|^#'[\s\t]*@)}", text, perl = TRUE),
     # starts with a roxygen comment with a blank line after
     grepl("^ *\t*$", text) & grepl("^#' *", lead(text))
   )) %>%

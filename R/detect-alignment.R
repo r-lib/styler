@@ -141,8 +141,8 @@ token_is_on_aligned_line <- function(pd_flat) {
     is_aligned <- length(unique(current_col)) == 1L
     if (!is_aligned || length(current_col) < 2L) {
       # check 2: left aligned after , (comma to next token)
-      current_col <- "^(,[\\s\\t]*)[^ ]*.*$" %>%
-        gsub("\\1", by_line, perl = TRUE) %>%
+      current_col <-
+        gsub(R"(^(,[\s\t]*)[^ ]*.*$)", R"(\1)", by_line, perl = TRUE) %>%
         nchar() %>%
         magrittr::subtract(1L)
 
