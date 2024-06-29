@@ -185,9 +185,6 @@ if_for_while_part_requires_braces <- function(pd, key_token) {
 
 #' Replace single quotes with double quotes
 #'
-#' We do not use `deparse()` as in previous implementations but `paste0()` since
-#' the former approach escapes the reverse backslash in the line break character
-#' `\\n` whereas the solution with `paste0()` does not.
 #' @examples
 #' style_text("'here
 #' is a string
@@ -215,6 +212,6 @@ fix_quotes_one <- function(x) {
   xi <- gsub(rx, '"\\1"', x[i])
 
   # Replace inner escaped quotes (\') by ' and keep all other instances of \., including \\
-  x[i] <- gsub("\\\\(')|(\\\\[^'])", "\\1\\2", xi)
+  x[i] <- gsub(R"(\\(')|(\\[^']))", R"(\1\2)", xi)
   x
 }
