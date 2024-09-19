@@ -100,8 +100,8 @@ identify_raw_chunks <- function(lines,
 
   if (filetype == "Rmd") {
     starts <- grep(
-      "^[\t >]*```+\\s*\\{([Rr]( *[ ,].*)?)\\}\\s*$", lines,
-      perl = TRUE
+      "^[\t >]*```+\\s*\\{((r|webr-r|webr)( *[ ,].*)?)\\}\\s*$", 
+      lines, perl = TRUE, ignore.case = TRUE
     )
     ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
     ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1L]]) %>%
