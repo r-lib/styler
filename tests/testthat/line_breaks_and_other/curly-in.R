@@ -41,3 +41,9 @@ test_that(
     # comment
     expect_equal(1 + 1, 2)
   })
+
+
+while (TRUE) { }
+
+while (TRUE)
+  { }

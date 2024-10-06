@@ -122,7 +122,7 @@ tidyverse_style <- function(scope = "tokens",
       },
       set_space_between_levels = set_space_between_levels,
       set_space_between_eq_sub_and_comma = set_space_between_eq_sub_and_comma,
-      set_space_in_curly_curly = set_space_in_curly_curly
+      set_space_in_curly = set_space_in_curly
     )
   }
 
@@ -209,7 +209,7 @@ tidyverse_style <- function(scope = "tokens",
       start_comments_with_space = "COMMENT",
       remove_space_after_unary_pm_nested = c("'+'", "'-'"),
       spacing_before_comments = "COMMENT",
-      set_space_in_curly_curly = c("'{'", "'}'")
+      set_space_in_curly = c("'{'", "'}'")
     ),
     indention = list(
       # indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),

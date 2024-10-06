@@ -38,3 +38,8 @@ test_that(
     expect_equal(1 + 1, 2)
   }
 )
+
+
+while (TRUE) {}
+
+while (TRUE) {}
