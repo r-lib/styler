@@ -43,3 +43,13 @@ test_that(
 while (TRUE) {}
 
 while (TRUE) {}
+
+while (TRUE) {}
+
+while (TRUE) {
+  #
+}
+
+
+while (TRUE) { #
+}

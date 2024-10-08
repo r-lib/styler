@@ -149,15 +149,21 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
 }
 
 style_line_break_around_curly <- function(strict, pd) {
-  if (is_curly_expr(pd) && nrow(pd) > 2L) {
-    closing_before <- pd$token == "'}'"
-    opening_before <- (pd$token == "'{'")
-    to_break <- lag(opening_before, default = FALSE) | closing_before
-    pd$lag_newlines[to_break] <- ifelse(
-      pd$token[to_break] == "COMMENT",
-      pmin(1L, pd$lag_newlines[to_break]),
-      if (strict) 1L else pmax(1L, pd$lag_newlines[to_break])
-    )
+  if (is_curly_expr(pd)) {
+    n_row <- nrow(pd)
+    if (n_row > 2L) {
+      closing_before <- pd$token == "'}'"
+      opening_before <- (pd$token == "'{'")
+      to_break <- lag(opening_before, default = FALSE) | closing_before
+      pd$lag_newlines[to_break] <- ifelse(
+        pd$token[to_break] == "COMMENT",
+        pmin(1L, pd$lag_newlines[to_break]),
+        if (strict) 1L else pmax(1L, pd$lag_newlines[to_break])
+      )
+    } else if (n_row == 2L) {
+      # pd represents {}
+      pd$lag_newlines[2L] <- 0L
+    }
   } else {
     is_else <- pd$token == "ELSE"
     if (any(pd$token_before[is_else] == "'}'")) {

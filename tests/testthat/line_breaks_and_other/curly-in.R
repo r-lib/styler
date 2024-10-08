@@ -47,3 +47,15 @@ while (TRUE) { }
 
 while (TRUE)
   { }
+
+while (TRUE){
+
+ }
+
+while (TRUE){
+#
+ }
+
+
+while (TRUE){#
+ }
