@@ -22,7 +22,7 @@ transform_code <- function(path, fun, ..., dry) {
       ..., dry = dry
     )
   } else {
-    abort(paste(path, "is not an R, Rmd, qmd, or Rnw file"))
+    cli::cli_abort("{.path {path}} is not a qmd, R, Rmd, or Rnw file.")
   }
 }
 
@@ -100,8 +100,9 @@ identify_raw_chunks <- function(lines,
 
   if (filetype == "Rmd") {
     starts <- grep(
-      "^[\t >]*```+\\s*\\{([Rr]( *[ ,].*)?)\\}\\s*$", lines,
-      perl = TRUE
+      "^[\t >]*```+\\s*\\{((r|webr-r|webr)( *[ ,].*)?)\\}\\s*$",
+      lines,
+      perl = TRUE, ignore.case = TRUE
     )
     ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
     ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1L]]) %>%

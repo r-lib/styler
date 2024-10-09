@@ -122,7 +122,7 @@ tidyverse_style <- function(scope = "tokens",
       },
       set_space_between_levels = set_space_between_levels,
       set_space_between_eq_sub_and_comma = set_space_between_eq_sub_and_comma,
-      set_space_in_curly_curly = set_space_in_curly_curly
+      set_space_in_curly = set_space_in_curly
     )
   }
 
@@ -130,6 +130,8 @@ tidyverse_style <- function(scope = "tokens",
 
   line_break_manipulators <- if ("line_breaks" %in% scope) {
     list(
+      remove_empty_lines_after_opening_and_before_closing_braces =
+        remove_empty_lines_after_opening_and_before_closing_braces,
       set_line_break_around_comma_and_or = set_line_break_around_comma_and_or,
       set_line_break_after_assignment = set_line_break_after_assignment,
       set_line_break_before_curly_opening = set_line_break_before_curly_opening,
@@ -207,7 +209,7 @@ tidyverse_style <- function(scope = "tokens",
       start_comments_with_space = "COMMENT",
       remove_space_after_unary_pm_nested = c("'+'", "'-'"),
       spacing_before_comments = "COMMENT",
-      set_space_in_curly_curly = c("'{'", "'}'")
+      set_space_in_curly = c("'{'", "'}'")
     ),
     indention = list(
       # indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),
@@ -226,10 +228,6 @@ tidyverse_style <- function(scope = "tokens",
     tokens = list(
       resolve_semicolon = "';'",
       add_brackets_in_pipe = c("SPECIAL-PIPE", "PIPE"),
-      # before 3.6, these assignments are not wrapped into top-level expression
-      # and `text` supplied to transformers_drop() is "", so it appears to not
-      # contain EQ_ASSIGN, and the transformer is falsely removed.
-      # compute_parse_data_nested / text_to_flat_pd ('a = 4')
       force_assignment_op = "EQ_ASSIGN",
       wrap_if_else_while_for_fun_multi_line_in_curly = c(
         "IF", "WHILE", "FOR", "FUNCTION"
@@ -471,7 +469,7 @@ tidyverse_reindention <- function() {
 #' @param scope A character vector of length one or a vector of class `AsIs`.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
-
+#'
 #' @examples
 #' scope_normalize(I("tokens"))
 #' scope_normalize(I(c("indention", "tokens")))
@@ -479,12 +477,7 @@ tidyverse_reindention <- function() {
 #' @export
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
-  if (!all((scope %in% levels))) {
-    abort(paste(
-      "all values in", name, "must be one of the following:",
-      toString(levels)
-    ))
-  }
+  rlang::arg_match(scope, values = levels, multiple = TRUE)
 
   if (inherits(scope, "AsIs")) {
     factor(as.character(scope), levels = levels, ordered = TRUE)
