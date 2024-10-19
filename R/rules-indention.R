@@ -23,7 +23,8 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
     idx_closing_brace <- which(pd$token == "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
     if (is_double_indent_function_declaration(pd, indent_by = indent_by)) {
-      pd$indent[fun_dec_head] <- 2L * indent_by
+      pd$indent[fun_dec_head] <- indent_by
+      pd$indent[idx_closing_brace] <- 0L
     } else {
       pd$indent[fun_dec_head] <- 0L
     }
