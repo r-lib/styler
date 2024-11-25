@@ -111,9 +111,9 @@
 <url><loc>https://styler.r-lib.org/dev/reference/invalid_utf8.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/is_cached.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/is_code_chunk_header_or_xaringan_or_code_output.html</loc></url>
-<url><loc>https://styler.r-lib.org/dev/reference/is_double_indent_function_declaration.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/is_insufficiently_parsed_string.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/is_shebang.html</loc></url>
+<url><loc>https://styler.r-lib.org/dev/reference/is_single_indent_function_declaration.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/local_test_setup.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/lookup_new_special.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/lookup_tokens.html</loc></url>
