@@ -236,15 +236,17 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
 
 remove_line_breaks_in_fun_dec <- function(pd) {
   if (is_function_declaration(pd)) {
-    is_double_indention <- is_double_indent_function_declaration(pd)
+    is_single_indention <- is_single_indent_function_declaration(pd)
     round_after <- (
       pd$token == "')'" | pd$token_before == "'('"
     ) &
       pd$token_before != "COMMENT"
     pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
-    pd$lag_newlines[round_after] <- 0L
-    if (is_double_indention) {
+    if (is_single_indention) {
       pd$lag_newlines[lag(pd$token == "'('")] <- 1L
+      pd$lag_newlines[round_after] <- 1L
+    } else {
+      pd$lag_newlines[round_after] <- 0L
     }
   }
   pd
