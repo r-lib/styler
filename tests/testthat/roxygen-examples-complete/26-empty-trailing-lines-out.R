@@ -24,7 +24,6 @@ NULL
 NULL
 
 
-
 #' this
 #'
 #' empty line after example
