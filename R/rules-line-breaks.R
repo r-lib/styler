@@ -457,11 +457,19 @@ reduce_extra_blank_lines_between_scopes <- function(pd_flat, allowed_blank_lines
   # Calculate the maximum allowed lag_newlines
   max_lag_newlines <- allowed_blank_lines + 1L # +1 accounts for the line with the previous token
 
-  # Identify positions where lag_newlines exceed the maximum allowed
-  idx <- which(pd_flat$lag_newlines > max_lag_newlines)
+  # Create a copy of lag_newlines to track modifications
+  modified_lag_newlines <- pd_flat$lag_newlines
 
-  # Reduce lag_newlines to the maximum allowed at those positions
-  pd_flat$lag_newlines[idx] <- max_lag_newlines
+  # Iterate through the dataframe to reduce consecutive blank lines
+  for (i in seq_along(modified_lag_newlines)) {
+    if (modified_lag_newlines[i] > max_lag_newlines) {
+      modified_lag_newlines[i] <- max_lag_newlines
+    }
+  }
+
+  # Update the original data frame
+  pd_flat$lag_newlines <- modified_lag_newlines
 
   return(pd_flat)
 }
+
