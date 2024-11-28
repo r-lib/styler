@@ -174,8 +174,9 @@ add_space_after_for_if_while <- function(pd_flat) {
 
 #' @rdname set_line_break_around_curly_curly
 #' @keywords internal
-set_space_in_curly_curly <- function(pd) {
+set_space_in_curly <- function(pd) {
   if (is_curly_expr(pd)) {
+    # curly-curly
     after_inner_opening <- pd$token == "'{'" & pd$token_before == "'{'"
     before_inner_closing <- lead(pd$token == "'}'" & pd$token_after == "'}'")
     is_curly_curly_inner <- any(after_inner_opening, na.rm = TRUE) &&
@@ -193,6 +194,10 @@ set_space_in_curly_curly <- function(pd) {
       pd$spaces[after_outer_opening] <- 0L
       pd$spaces[before_outer_closing] <- 0L
     }
+
+    # empty curly
+    after_is_empty_curly <- lead(pd$token == "'}'" & pd$token_before == "'{'")
+    pd$spaces[after_is_empty_curly] <- 0L
   }
   pd
 }

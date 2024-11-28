@@ -149,15 +149,21 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
 }
 
 style_line_break_around_curly <- function(strict, pd) {
-  if (is_curly_expr(pd) && nrow(pd) > 2L) {
-    closing_before <- pd$token == "'}'"
-    opening_before <- (pd$token == "'{'")
-    to_break <- lag(opening_before, default = FALSE) | closing_before
-    pd$lag_newlines[to_break] <- ifelse(
-      pd$token[to_break] == "COMMENT",
-      pmin(1L, pd$lag_newlines[to_break]),
-      if (strict) 1L else pmax(1L, pd$lag_newlines[to_break])
-    )
+  if (is_curly_expr(pd)) {
+    n_row <- nrow(pd)
+    if (n_row > 2L) {
+      closing_before <- pd$token == "'}'"
+      opening_before <- (pd$token == "'{'")
+      to_break <- lag(opening_before, default = FALSE) | closing_before
+      pd$lag_newlines[to_break] <- ifelse(
+        pd$token[to_break] == "COMMENT",
+        pmin(1L, pd$lag_newlines[to_break]),
+        if (strict) 1L else pmax(1L, pd$lag_newlines[to_break])
+      )
+    } else if (n_row == 2L) {
+      # pd represents {}
+      pd$lag_newlines[2L] <- 0L
+    }
   } else {
     is_else <- pd$token == "ELSE"
     if (any(pd$token_before[is_else] == "'}'")) {
@@ -230,15 +236,17 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
 
 remove_line_breaks_in_fun_dec <- function(pd) {
   if (is_function_declaration(pd)) {
-    is_double_indention <- is_double_indent_function_declaration(pd)
+    is_single_indention <- is_single_indent_function_declaration(pd)
     round_after <- (
       pd$token == "')'" | pd$token_before == "'('"
     ) &
       pd$token_before != "COMMENT"
     pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
-    pd$lag_newlines[round_after] <- 0L
-    if (is_double_indention) {
+    if (is_single_indention) {
       pd$lag_newlines[lag(pd$token == "'('")] <- 1L
+      pd$lag_newlines[round_after] <- 1L
+    } else {
+      pd$lag_newlines[round_after] <- 0L
     }
   }
   pd

@@ -1,27 +1,27 @@
 function(a =
-      33,
-    b
-    ) {}
+    33,
+  b
+) {}
 
 function(a =
-      33,
-    b) {}
+    33,
+  b) {}
 
 function(a,
-    b,
-    c
-    ) {}
+  b,
+  c
+) {}
 
 function(a,
-    b,
-    c) {}
+  b,
+  c) {}
 
 function(ss,
-    a =
-      3,
-    er =
-      4
-    ) {}
+  a =
+    3,
+  er =
+    4
+) {}
 
 function(a =
            b,
