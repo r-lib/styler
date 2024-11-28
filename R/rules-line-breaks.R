@@ -472,4 +472,3 @@ reduce_extra_blank_lines_between_scopes <- function(pd_flat, allowed_blank_lines
 
   return(pd_flat)
 }
-
