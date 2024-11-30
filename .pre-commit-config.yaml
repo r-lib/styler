@@ -39,6 +39,8 @@ repos:
           - rlang
       - id: use-tidy-description
       - id: spell-check
+        additional_dependencies:
+          - ropensci/spelling
         exclude: >
           (?x)^(
           \.github/.*\.yaml|
