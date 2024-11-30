@@ -449,12 +449,7 @@ remove_empty_lines_after_opening_and_before_closing_braces <- function(pd) {
 }
 
 
-reduce_extra_blank_lines_between_scopes <- function(pd, allowed_blank_lines = 2L) {
-  # Calculate the maximum allowed lag_newlines
-  max_lag_newlines <- allowed_blank_lines + 1L # +1 accounts for the line with the previous token
-
-  # cap lag_newlines at max_lag_newlines
-  pd$lag_newlines <- pmin(pd$lag_newlines, max_lag_newlines)
-
+reduce_extra_blank_lines_between_top_level_exprs <- function(pd, allowed_blank_lines = 2L) {
+  pd$lag_newlines <- pmin(pd$lag_newlines, allowed_blank_lines + 1L)
   pd
 }
