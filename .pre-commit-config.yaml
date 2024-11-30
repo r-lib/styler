@@ -34,7 +34,6 @@ repos:
           )$
       - id: roxygenize
         additional_dependencies:
-          - r-lib/pkgapi
           - dplyr
           - roxygen2
           - rlang
@@ -102,7 +101,7 @@ repos:
           )$
       - id: pkgdown
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
         args: ["--maxkb=200"]
@@ -120,7 +119,7 @@ repos:
           tests/testthat/_snaps/.*|
           )$
   - repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: 517cddbf1d8514ddaf43159686617ae65895dc99
+    rev: 0.1.2
     hooks:
       - id: tidy-gitignore
   - repo: local
