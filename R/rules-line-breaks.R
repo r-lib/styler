@@ -449,26 +449,13 @@ remove_empty_lines_after_opening_and_before_closing_braces <- function(pd) {
 }
 
 
-#' Reduce multiple blank lines to a maximum number of allowed blank lines
-#' @param pd_flat A flat parse table.
-#' @param allowed_blank_lines The maximum number of allowed blank lines between code elements. Default is `2L`.
-#' @keywords internal
-reduce_extra_blank_lines_between_scopes <- function(pd_flat, allowed_blank_lines = 2L) {
+reduce_extra_blank_lines_between_scopes <- function(pd, allowed_blank_lines = 2L) {
   # Calculate the maximum allowed lag_newlines
-  max_lag_newlines <- allowed_blank_lines + 1L # +1 accounts for the line with the previous token
+  max_lag_newlines <- allowed_blank_lines + 1L  # +1 accounts for the line with the previous token
 
-  # Create a copy of lag_newlines to track modifications
-  modified_lag_newlines <- pd_flat$lag_newlines
+  # cap lag_newlines at max_lag_newlines
+  pd$lag_newlines <- pmin(pd$lag_newlines, max_lag_newlines)
 
-  # Iterate through the dataframe to reduce consecutive blank lines
-  for (i in seq_along(modified_lag_newlines)) {
-    if (modified_lag_newlines[i] > max_lag_newlines) {
-      modified_lag_newlines[i] <- max_lag_newlines
-    }
-  }
-
-  # Update the original data frame
-  pd_flat$lag_newlines <- modified_lag_newlines
-
-  return(pd_flat)
+  pd
 }
+
