@@ -24,7 +24,7 @@ test_that("extra line breaks between braced expressions are removed", {
 
 test_that("extra line breaks are not removed in non-strict mode", {
   expect_no_warning(
-    test_collection("line_breaks_top_level_exprs", "non_strict", transformer = style_text)
+    test_collection("line_breaks_top_level_exprs", "non_strict", transformer = style_text, strict = FALSE)
   )
 })
 
