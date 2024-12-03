@@ -53,9 +53,3 @@ while (TRUE) {
 
 while (TRUE) { #
 }
-
-
-for (i in 1:10) {}
-
-
-while (TRUE) {}
