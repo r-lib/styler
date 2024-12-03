@@ -27,4 +27,3 @@ test_that("extra line breaks are not removed in non-strict mode", {
     test_collection("line_breaks_top_level_exprs", "non_strict", transformer = style_text)
   )
 })
-
