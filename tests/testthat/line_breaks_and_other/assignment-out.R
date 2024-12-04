@@ -22,7 +22,6 @@ x <-
   3
 
 
-
 ImportantDataFrame$ImportantColumn1 <-
   ImportantDataFrame$ImportantColumn2 <-
   ComplicatedFunction(ImportantDataFrame$InputColumn)
@@ -30,7 +29,6 @@ ImportantDataFrame$ImportantColumn1 <-
 
 ImportantDataFrame$ImportantColumn1 <-
   ImportantDataFrame$ImportantColumn2 <- ComplicatedFunction(ImportantDataFrame$InputColumn)
-
 
 
 ImportantDataFrame$ImportantColumn1 <-
