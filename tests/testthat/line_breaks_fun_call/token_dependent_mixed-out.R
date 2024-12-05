@@ -16,7 +16,6 @@ call(call(
 ))
 
 
-
 # no more barcket on same line ->
 call(call(
   3, 4

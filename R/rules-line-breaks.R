@@ -447,3 +447,9 @@ remove_empty_lines_after_opening_and_before_closing_braces <- function(pd) {
 
   pd
 }
+
+
+set_line_breaks_between_top_level_exprs <- function(pd, allowed_blank_lines = 2L) {
+  pd$lag_newlines <- pmin(pd$lag_newlines, allowed_blank_lines + 1L)
+  pd
+}
