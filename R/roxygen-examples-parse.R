@@ -68,14 +68,14 @@ parse_roxygen <- function(roxygen) {
 roxygen_remove_extra_brace <- function(parsed) {
   parsed <- rlang::try_fetch(
     {
-      parse(text = paste(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
+      parse(text = paste(gsub(R"(^\\[[:alpha:]]*)", "", parsed), collapse = ""))
       parsed
     },
     error = function(e) {
       # might have extra braces that are not needed: try to remove them
 
       # if fails, you need initial input for best error message
-      parsed_ <- gsub("^\\\\[[:alpha:]]+", "", parsed)
+      parsed_ <- gsub(R"(^\\[[:alpha:]]+)", "", parsed)
       worth_trying_to_remove_brace <- any(parsed == "}")
       if (worth_trying_to_remove_brace) {
         # try to remove one and see if you can parse. If not, another one, until
@@ -95,7 +95,7 @@ roxygen_remove_extra_brace <- function(parsed) {
           worth_trying_to_remove_brace <- rlang::try_fetch(
             {
               # this will error informatively
-              parse(text = gsub("^\\\\[[:alpha:]]+", "", parsed))
+              parse(text = gsub(R"(^\\[[:alpha:]]+)", "", parsed))
               # if parsing succeeds, we can stop tryint to remove brace and move
               # on with parsed
               FALSE
@@ -107,7 +107,7 @@ roxygen_remove_extra_brace <- function(parsed) {
               } else {
                 # this will error informatively. If not, outer loop will fail
                 # informatively
-                parse(text = gsub("^\\\\[[:alpha:]]+", "", parsed_))
+                parse(text = gsub(R"(^\\[[:alpha:]]+)", "", parsed_))
                 FALSE
               }
             }
@@ -115,7 +115,7 @@ roxygen_remove_extra_brace <- function(parsed) {
         }
       } else {
         # this will error informatively
-        parse(text = gsub("^\\\\[[:alpha:]]*", "", parsed_))
+        parse(text = gsub(R"(^\\[[:alpha:]]*)", "", parsed_))
       }
       parsed
     }
@@ -167,7 +167,7 @@ emulate_rd <- function(roxygen) {
 #' @keywords internal
 needs_rd_emulation <- function(roxygen) {
   # escape characters \ and % count, but not macros like \dontrun
-  any(grepl("\\\\|%", gsub("^#'\\s*\\\\[[:alpha:]]*", "", roxygen)))
+  any(grepl(R"(\\|%)", gsub(R"(^#'\s*\\[[:alpha:]]*)", "", roxygen)))
 }
 
 #' Changing the line definition
