@@ -73,9 +73,15 @@ style_pkg <- function(pkg = ".",
                       exclude_files = "R/RcppExports.R",
                       include_roxygen_examples = TRUE) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  changed <- withr::with_dir(pkg_root, prettify_pkg(
-    transformers, filetype, exclude_files, include_roxygen_examples
-  ))
+  changed <- withr::with_dir(
+    pkg_root,
+    prettify_pkg(
+      transformers,
+      filetype,
+      exclude_files,
+      include_roxygen_examples
+    )
+  )
   invisible(changed)
 }
 
@@ -88,15 +94,21 @@ prettify_pkg <- function(transformers,
 
   if ("\\.r" %in% filetype) {
     r_files <- dir(
-      path = c("R", "tests", "data-raw"), pattern = "\\.r$",
-      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      path = c("R", "tests", "data-raw"),
+      pattern = "\\.r$",
+      ignore.case = TRUE,
+      recursive = TRUE,
+      full.names = TRUE
     )
   }
 
   if ("\\.rmd" %in% filetype) {
     vignette_files <- dir(
-      path = "vignettes", pattern = "\\.rmd$",
-      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      path = "vignettes",
+      pattern = "\\.rmd$",
+      ignore.case = TRUE,
+      recursive = TRUE,
+      full.names = TRUE
     )
     readme <- dir(pattern = "^readme\\.rmd$", ignore.case = TRUE)
   }
@@ -159,8 +171,13 @@ style_dir <- function(path = ".",
                       exclude_files = NULL,
                       include_roxygen_examples = TRUE) {
   changed <- withr::with_dir(
-    path, prettify_any(
-      transformers, filetype, recursive, exclude_files, include_roxygen_examples
+    path,
+    prettify_any(
+      transformers,
+      filetype,
+      recursive,
+      exclude_files,
+      include_roxygen_examples
     )
   )
   invisible(changed)
@@ -179,11 +196,16 @@ prettify_any <- function(transformers,
                          exclude_files,
                          include_roxygen_examples) {
   files <- dir(
-    path = ".", pattern = map_filetype_to_pattern(filetype),
-    ignore.case = TRUE, recursive = recursive, full.names = TRUE
+    path = ".",
+    pattern = map_filetype_to_pattern(filetype),
+    ignore.case = TRUE,
+    recursive = recursive,
+    full.names = TRUE
   )
   transform_files(
-    setdiff(files, exclude_files), transformers, include_roxygen_examples
+    setdiff(files, exclude_files),
+    transformers,
+    include_roxygen_examples
   )
 }
 

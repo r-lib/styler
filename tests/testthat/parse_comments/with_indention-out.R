@@ -2,12 +2,15 @@
 call(
   1,
   call2(
-    2, 3,
+    2,
+    3,
     call3( # zero
       # one
       # two2
-      1, 2 # two
-      , 22 # comment
+      1,
+      2 # two
+      ,
+      22 # comment
     ),
     5
   ), #' A roxygen comment

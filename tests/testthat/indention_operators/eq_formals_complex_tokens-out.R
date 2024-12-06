@@ -33,6 +33,8 @@ function(
 function(a =
            b,
          f =
-           d, c =
-           3, d =
+           d,
+         c =
+           3,
+         d =
            4) {}

@@ -5,7 +5,8 @@ test_that("this is a text", {
 (({
   {
     call(
-      12, 1 + 1,
+      12,
+      1 + 1,
       26
     )
   }
@@ -15,7 +16,8 @@ test_that("this is a text", {
 (({
   {
     call(
-      12, 1 + 1,
+      12,
+      1 + 1,
       26
     )
   }

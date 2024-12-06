@@ -6,6 +6,9 @@ if (x) {
 }
 
 # removing line-break
-test_that("x", {
-  my_test(call)
-})
+test_that(
+  "x",
+  {
+    my_test(call)
+  }
+)

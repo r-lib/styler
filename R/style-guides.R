@@ -141,6 +141,8 @@ tidyverse_style <- function(scope = "tokens",
         if (strict) remove_line_breaks_in_fun_dec,
       set_line_breaks_between_top_level_exprs =
         if (strict) set_line_breaks_between_top_level_exprs,
+      set_line_breaks_for_multiline_args =
+        if (strict) set_line_breaks_for_multiline_args,
       style_line_break_around_curly = partial(
         style_line_break_around_curly,
         strict
