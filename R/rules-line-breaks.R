@@ -468,7 +468,7 @@ set_line_breaks_for_multiline_args <- function(pd) {
     children <- pd$child
     idx_pre_open_brace <- which(pd$token_after == "'{'")
     if (length(idx_pre_open_brace)) {
-      children[idx_pre_open_brace + 1] <- NULL
+      children[idx_pre_open_brace + 1L] <- NULL
     }
 
     has_internal_linebreak <- children %>%
