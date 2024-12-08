@@ -58,14 +58,16 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
   # We remove spaces for zero (e.g., around ^ in the tidyverse style guide)
   # even for strict = FALSE to be consistent with the : operator
   if (any(pd_flat$token %in% zero)) {
-    pd_flat <- pd_flat %>%
+    pd_flat <-
       style_space_around_token(
+        pd_flat,
         strict = TRUE, tokens = zero, level_before = 0L, level_after = 0L
       )
   }
   if (any(pd_flat$token %in% one)) {
-    pd_flat <- pd_flat %>%
+    pd_flat <-
       style_space_around_token(
+        pd_flat,
         strict = strict, tokens = one, level_before = 1L, level_after = 1L
       )
   }
@@ -129,7 +131,8 @@ remove_space_after_unary_pm_nested <- function(pd) {
 }
 
 remove_space_before_opening_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("'('", "'['", "LBB")
+  opening_braces <- c("'('", "'['", "LBB")
+  paren_after <- pd_flat$token %in% opening_braces
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -139,7 +142,8 @@ remove_space_before_opening_paren <- function(pd_flat) {
 }
 
 remove_space_after_opening_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("'('", "'['", "LBB")
+  opening_braces <- c("'('", "'['", "LBB")
+  paren_after <- pd_flat$token %in% opening_braces
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -148,7 +152,8 @@ remove_space_after_opening_paren <- function(pd_flat) {
 }
 
 remove_space_before_closing_paren <- function(pd_flat) {
-  paren_after <- pd_flat$token %in% c("')'", "']'")
+  closing_braces <- c("')'", "']'")
+  paren_after <- pd_flat$token %in% closing_braces
   if (!any(paren_after)) {
     return(pd_flat)
   }
@@ -169,8 +174,9 @@ add_space_after_for_if_while <- function(pd_flat) {
 
 #' @rdname set_line_break_around_curly_curly
 #' @keywords internal
-set_space_in_curly_curly <- function(pd) {
+set_space_in_curly <- function(pd) {
   if (is_curly_expr(pd)) {
+    # curly-curly
     after_inner_opening <- pd$token == "'{'" & pd$token_before == "'{'"
     before_inner_closing <- lead(pd$token == "'}'" & pd$token_after == "'}'")
     is_curly_curly_inner <- any(after_inner_opening, na.rm = TRUE) &&
@@ -188,6 +194,10 @@ set_space_in_curly_curly <- function(pd) {
       pd$spaces[after_outer_opening] <- 0L
       pd$spaces[before_outer_closing] <- 0L
     }
+
+    # empty curly
+    after_is_empty_curly <- lead(pd$token == "'}'" & pd$token_before == "'{'")
+    pd$spaces[after_is_empty_curly] <- 0L
   }
   pd
 }
@@ -331,10 +341,11 @@ set_space_after_bang_bang <- function(pd_flat) {
   pd_flat
 }
 
-remove_space_before_dollar <- function(pd_flat) {
+remove_space_around_dollar <- function(pd_flat) {
   dollar_after <- (pd_flat$token == "'$'") & (pd_flat$lag_newlines == 0L)
   dollar_before <- lead(dollar_after, default = FALSE)
   pd_flat$spaces[dollar_before] <- 0L
+  pd_flat$spaces[dollar_after] <- 0L
   pd_flat
 }
 

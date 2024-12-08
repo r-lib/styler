@@ -1,5 +1,3 @@
-
-
 test_that("round brackets are unindented correctly", {
   expect_warning(test_collection("unindention",
     "mixed",

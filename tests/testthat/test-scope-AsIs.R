@@ -1,5 +1,3 @@
-
-
 test_that("no indention manipulation but spaces manipulation", {
   expect_warning(test_collection(
     "scope-AsIs", "scope_spaces-",

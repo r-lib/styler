@@ -149,16 +149,21 @@ set_line_break_around_comma_and_or <- function(pd, strict) {
 }
 
 style_line_break_around_curly <- function(strict, pd) {
-  if (is_curly_expr(pd) && nrow(pd) > 2L) {
-    closing_before <- pd$token == "'}'"
-    opening_before <- (pd$token == "'{'")
-    to_break <- lag(opening_before, default = FALSE) | closing_before
-    len_to_break <- sum(to_break)
-    pd$lag_newlines[to_break] <- ifelse(
-      pd$token[to_break] == "COMMENT",
-      pmin(1L, pd$lag_newlines[to_break]),
-      if (strict) 1L else pmax(1L, pd$lag_newlines[to_break])
-    )
+  if (is_curly_expr(pd)) {
+    n_row <- nrow(pd)
+    if (n_row > 2L) {
+      closing_before <- pd$token == "'}'"
+      opening_before <- (pd$token == "'{'")
+      to_break <- lag(opening_before, default = FALSE) | closing_before
+      pd$lag_newlines[to_break] <- ifelse(
+        pd$token[to_break] == "COMMENT",
+        pmin(1L, pd$lag_newlines[to_break]),
+        if (strict) 1L else pmax(1L, pd$lag_newlines[to_break])
+      )
+    } else if (n_row == 2L) {
+      # pd represents {}
+      pd$lag_newlines[2L] <- 0L
+    }
   } else {
     is_else <- pd$token == "ELSE"
     if (any(pd$token_before[is_else] == "'}'")) {
@@ -231,21 +236,23 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
 
 remove_line_breaks_in_fun_dec <- function(pd) {
   if (is_function_declaration(pd)) {
-    is_double_indention <- is_double_indent_function_declaration(pd)
+    is_single_indention <- is_single_indent_function_declaration(pd)
     round_after <- (
       pd$token == "')'" | pd$token_before == "'('"
     ) &
       pd$token_before != "COMMENT"
     pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
-    pd$lag_newlines[round_after] <- 0L
-    if (is_double_indention) {
+    if (is_single_indention) {
       pd$lag_newlines[lag(pd$token == "'('")] <- 1L
+      pd$lag_newlines[round_after] <- 1L
+    } else {
+      pd$lag_newlines[round_after] <- 0L
     }
   }
   pd
 }
 
-#'
+
 add_line_break_after_pipe <- function(pd) {
   is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
   pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1L] <- 1L
@@ -268,21 +275,20 @@ set_line_break_after_assignment <- function(pd) {
 
 #' Set line break for multi-line function calls
 #' @param pd A parse table.
-#' @param except_token_after A character vector with tokens after "'('" that do
-#'   not cause a line break after "'('".
-#' @param except_text_before A character vector with text before "'('" that do
-#'   not cause a line break after "'('".
-#' @param except_token_before A character vector with text before "')'" that do
-#'   not cause a line break before "')'".
-#' @param force_text_before A character vector with text before "'('" that
-#'   forces a line break after every argument in the call.
+#' @param except_token_before A character vector with tokens that do
+#'   not cause a line break after them.
 #' @name set_line_break_if_call_is_multi_line
 #'
 #' @keywords internal
 NULL
 
 #' Sets line break after opening parenthesis
-#'
+#' @param pd The parse table.
+#' @param except_token_after The tokens after the token that cause an exception.
+#' @param except_text_before A character vector with text before a token that
+#'   does not cause a line break.
+#' @param force_text_before A character vector with text before "'('" that
+#'   forces a line break after every argument in the call.
 #' @details
 #' In general, every call that is multi-line has a line break after the opening
 #' parenthesis. Exceptions:
@@ -341,7 +347,7 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
 #' position of the first named argument and breaks returns the index of it.
 #' If there is no named argument, the line is broken right after the opening
 #' parenthesis.
-#' @inheritParams set_line_break_if_call_is_multi_line
+#' @param pd A parse table.
 #' @keywords internal
 find_line_break_position_in_multiline_call <- function(pd) {
   candidate <- (which(pd$token == "EQ_SUB") - 1L)[1L]
@@ -377,7 +383,8 @@ set_line_break_before_closing_call <- function(pd, except_token_before) {
 }
 
 
-#' @rdname set_line_break_if_call_is_multi_line
+#' @describeIn set_line_break_if_call_is_multi_line Remove line breaks in
+#'   function calls.
 #' @keywords internal
 remove_line_break_in_fun_call <- function(pd, strict) {
   if (is_function_call(pd)) {
@@ -416,5 +423,33 @@ set_line_break_after_ggplot2_plus <- function(pd) {
       }
     }
   }
+  pd
+}
+
+
+remove_empty_lines_after_opening_and_before_closing_braces <- function(pd) {
+  opening_braces <- c("'('", "'['", "LBB")
+  closing_braces <- c("')'", "']'")
+
+  paren_after <- pd$token %in% opening_braces
+  if (any(paren_after)) {
+    pd$lag_newlines[
+      lag(pd$token %in% opening_braces) & pd$lag_newlines > 1L
+    ] <- 1L
+  }
+
+  paren_before <- pd$token %in% closing_braces
+  if (any(paren_before)) {
+    pd$lag_newlines[
+      pd$token %in% closing_braces & pd$lag_newlines > 1L
+    ] <- 1L
+  }
+
+  pd
+}
+
+
+set_line_breaks_between_top_level_exprs <- function(pd, allowed_blank_lines = 2L) {
+  pd$lag_newlines <- pmin(pd$lag_newlines, allowed_blank_lines + 1L)
   pd
 }

@@ -15,25 +15,26 @@
 #'
 #' styler:::parse_safely("a + 3 -4 -> \n glück + 1")
 parse_safely <- function(text, ...) {
-  tried_parsing <- rlang::try_fetch(
+  tried_parsing <- withCallingHandlers(
     parse(text = text, ...),
-    error = function(e) e,
-    warning = function(w) w
-  )
-  if (inherits(tried_parsing, "error")) {
-    if (has_crlf_as_first_line_sep(tried_parsing$message, text)) {
-      abort(paste0(
-        "The code to style seems to use Windows style line endings (CRLF). ",
-        "styler currently only supports Unix style line endings (LF). ",
-        "Please change the EOL character in your editor to Unix style and try ",
-        "again.\nThe parsing error was:\n", tried_parsing$message
-      ))
-    } else {
-      abort(tried_parsing$message)
+    error = function(e) {
+      if (has_crlf_as_first_line_sep(e$message, text)) {
+        msg <- c(
+          x = "The code to style seems to use Windows style line endings (CRLF).",
+          `!` = "styler currently only supports Unix style line endings (LF). ",
+          i = "Please change the EOL character in your editor to Unix style
+                 and try again."
+        )
+      } else {
+        msg <- c(x = "Styling failed")
+      }
+      cli::cli_abort(msg, parent = e, call = NULL)
+    },
+    warning = function(w) {
+      cli::cli_warn(w$message)
+      w
     }
-  } else if (inherits(tried_parsing, "warning")) {
-    warn(tried_parsing$message)
-  }
+  )
   tried_parsing
 }
 
@@ -87,23 +88,20 @@ tokenize <- function(text) {
 #' @param ... Other arguments passed to [utils::getParseData()].
 #' @keywords internal
 get_parse_data <- function(text, include_text = TRUE, ...) {
-  # avoid https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16041
-  parse_safely(text, keep.source = TRUE)
   parsed <- parse_safely(text, keep.source = TRUE)
   pd <- utils::getParseData(parsed, includeText = include_text) %>%
     styler_df()
   if (getRversion() < "4.2") {
     is_unicode_parsing_error <- grepl("^\"<U\\+[0-9]+>\"$", pd$text)
     if (any(is_unicode_parsing_error)) {
-      rlang::abort(paste0(
-        "Can't parse input due to unicode restriction in base R. Please ",
-        "upgrade R to >= 4.2 to style this input. ",
-        "Context: https://github.com/r-lib/styler/issues/847"
+      cli::cli_abort(c(
+        "Can't parse input due to unicode restriction in base R.",
+        i = "Please upgrade R to >= 4.2 to style this input.",
+        "Context: {.url https://github.com/r-lib/styler/issues/847}"
       ))
     }
   }
-  pd <- pd %>%
-    add_id_and_short()
+  pd <- add_id_and_short(pd)
 
   pd
 }
@@ -182,7 +180,6 @@ ensure_correct_txt <- function(pd, text) {
 #' changes from "all strings" to "all problematic strings", is partly
 #' misleading and this approach was chosen for performance reasons only.
 #' @param pd A parse table.
-#' @param text The initial code to style.
 #' @keywords internal
 is_insufficiently_parsed_string <- function(pd) {
   grepl("^\\[", pd$text) & pd$token == "STR_CONST"

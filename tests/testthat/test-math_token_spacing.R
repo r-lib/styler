@@ -1,5 +1,3 @@
-
-
 test_that("invalid tokens return error", {
   expect_error(test_collection(
     "math_token_spacing", "non_strict_math_spacing_all",

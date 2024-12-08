@@ -108,7 +108,7 @@ tidyverse_style <- function(scope = "tokens",
       remove_space_after_opening_paren = remove_space_after_opening_paren,
       remove_space_after_excl = remove_space_after_excl,
       set_space_after_bang_bang = set_space_after_bang_bang,
-      remove_space_before_dollar = remove_space_before_dollar,
+      remove_space_around_dollar = remove_space_around_dollar,
       remove_space_after_fun_dec = remove_space_after_fun_dec,
       remove_space_around_colons = remove_space_around_colons,
       start_comments_with_space = partial(start_comments_with_space,
@@ -122,7 +122,7 @@ tidyverse_style <- function(scope = "tokens",
       },
       set_space_between_levels = set_space_between_levels,
       set_space_between_eq_sub_and_comma = set_space_between_eq_sub_and_comma,
-      set_space_in_curly_curly = set_space_in_curly_curly
+      set_space_in_curly = set_space_in_curly
     )
   }
 
@@ -130,6 +130,8 @@ tidyverse_style <- function(scope = "tokens",
 
   line_break_manipulators <- if ("line_breaks" %in% scope) {
     list(
+      remove_empty_lines_after_opening_and_before_closing_braces =
+        remove_empty_lines_after_opening_and_before_closing_braces,
       set_line_break_around_comma_and_or = set_line_break_around_comma_and_or,
       set_line_break_after_assignment = set_line_break_after_assignment,
       set_line_break_before_curly_opening = set_line_break_before_curly_opening,
@@ -137,6 +139,8 @@ tidyverse_style <- function(scope = "tokens",
         if (strict) remove_line_break_before_round_closing_after_curly,
       remove_line_breaks_in_fun_dec =
         if (strict) remove_line_breaks_in_fun_dec,
+      set_line_breaks_between_top_level_exprs =
+        if (strict) set_line_breaks_between_top_level_exprs,
       style_line_break_around_curly = partial(
         style_line_break_around_curly,
         strict
@@ -201,13 +205,13 @@ tidyverse_style <- function(scope = "tokens",
       # remove_space_after_opening_paren = c("'('", "'['", "LBB"),
       remove_space_after_excl = "'!'",
       set_space_after_bang_bang = "'!'",
-      remove_space_before_dollar = "'$'",
+      remove_space_around_dollar = "'$'",
       remove_space_after_fun_dec = "FUNCTION",
       remove_space_around_colons = c("':'", "NS_GET_INT", "NS_GET"),
       start_comments_with_space = "COMMENT",
       remove_space_after_unary_pm_nested = c("'+'", "'-'"),
       spacing_before_comments = "COMMENT",
-      set_space_in_curly_curly = c("'{'", "'}'")
+      set_space_in_curly = c("'{'", "'}'")
     ),
     indention = list(
       # indent_braces = c("'('", "'['", "'{'", "')'", "']'", "'}'"),
@@ -226,10 +230,6 @@ tidyverse_style <- function(scope = "tokens",
     tokens = list(
       resolve_semicolon = "';'",
       add_brackets_in_pipe = c("SPECIAL-PIPE", "PIPE"),
-      # before 3.6, these assignments are not wrapped into top-level expression
-      # and `text` supplied to transformers_drop() is "", so it appears to not
-      # contain EQ_ASSIGN, and the transformer is falsely removed.
-      # compute_parse_data_nested / text_to_flat_pd ('a = 4')
       force_assignment_op = "EQ_ASSIGN",
       wrap_if_else_while_for_fun_multi_line_in_curly = c(
         "IF", "WHILE", "FOR", "FUNCTION"
@@ -471,7 +471,7 @@ tidyverse_reindention <- function() {
 #' @param scope A character vector of length one or a vector of class `AsIs`.
 #' @param name The name of the character vector to be displayed if the
 #'   construction of the factor fails.
-
+#'
 #' @examples
 #' scope_normalize(I("tokens"))
 #' scope_normalize(I(c("indention", "tokens")))
@@ -479,12 +479,7 @@ tidyverse_reindention <- function() {
 #' @export
 scope_normalize <- function(scope, name = substitute(scope)) {
   levels <- c("none", "spaces", "indention", "line_breaks", "tokens")
-  if (!all((scope %in% levels))) {
-    abort(paste(
-      "all values in", name, "must be one of the following:",
-      toString(levels)
-    ))
-  }
+  rlang::arg_match(scope, values = levels, multiple = TRUE)
 
   if (inherits(scope, "AsIs")) {
     factor(as.character(scope), levels = levels, ordered = TRUE)
