@@ -76,3 +76,10 @@ test_that("spacing around square brackets / braces", {
     transformer = style_text, strict = TRUE
   ), NA)
 })
+
+test_that("spacing around dollar", {
+  expect_warning(test_collection(
+    "spacing", "dollar",
+    transformer = style_text, strict = TRUE
+  ), NA)
+})
