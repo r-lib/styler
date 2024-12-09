@@ -1,6 +1,3 @@
-
-
-
 test_that("parse_tree_must_be_identical works", {
   expect_true(
     parse_tree_must_be_identical(tidyverse_style(scope = "line_breaks"))

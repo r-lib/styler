@@ -18,8 +18,6 @@ call(
 # new comment
 
 
-
-
 a()
 # I think it gets boring
 # new_line here
