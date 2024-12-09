@@ -127,31 +127,31 @@ test_that("works with other markers", {
 
 
 test_that("Simple example works", {
-  expect_warning(test_collection("stylerignore", "simple",
+  expect_no_warning(test_collection("stylerignore", "simple",
     transformer = style_text
-  ), NA)
+  ))
 })
 
 test_that("stylerignore does not need coincidence with top-level expressions", {
-  expect_warning(test_collection("stylerignore", "crossing",
+  expect_no_warning(test_collection("stylerignore", "crossing",
     transformer = style_text
-  ), NA)
+  ))
 })
 
 test_that("token adding or removing works in stylerignore", {
-  expect_warning(test_collection("stylerignore", "adding-removing",
+  expect_no_warning(test_collection("stylerignore", "adding-removing",
     transformer = style_text
-  ), NA)
+  ))
 })
 
 test_that("no token added or removed in complex case", {
-  expect_warning(test_collection("stylerignore", "braces",
+  expect_no_warning(test_collection("stylerignore", "braces",
     transformer = style_text
-  ), NA)
+  ))
 })
 
 test_that("stylerignore sequences are respected in alignment detection", {
-  expect_warning(test_collection("stylerignore", "alignment",
+  expect_no_warning(test_collection("stylerignore", "alignment",
     transformer = style_text
-  ), NA)
+  ))
 })
