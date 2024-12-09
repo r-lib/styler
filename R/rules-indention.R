@@ -16,9 +16,9 @@ indent_braces <- function(pd, indent_by) {
 #' Necessary for consistent indention of the function declaration header.
 #' @param pd A parse table.
 #' @inheritParams is_single_indent_function_declaration
-#' @seealso set_unindention_child update_indention_ref_fun_dec
+#' @seealso set_unindention_child update_indention_reference_function_declaration
 #' @keywords internal
-unindent_fun_dec <- function(pd, indent_by = 2L) {
+unindent_function_declaration <- function(pd, indent_by = 2L) {
   if (is_function_declaration(pd)) {
     idx_closing_brace <- which(pd$token == "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
@@ -133,7 +133,7 @@ NULL
 #' }
 #'
 #' @keywords internal
-update_indention_ref_fun_dec <- function(pd_nested) {
+update_indention_reference_function_declaration <- function(pd_nested) {
   if (is_function_declaration(pd_nested) && !is_single_indent_function_declaration(pd_nested)) {
     seq <- seq2(3L, nrow(pd_nested) - 2L)
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2L]

@@ -64,7 +64,7 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' @param indent_by The amount of spaces used to indent an expression in curly
 #'   braces. Used for unindention.
 #' @keywords internal
-wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
+wrap_if_else_while_for_function_multi_line_in_curly <- function(pd, indent_by = 2L) {
   key_token <- NULL
 
   if (is_for_expr(pd)) {
@@ -88,7 +88,7 @@ wrap_if_else_while_for_fun_multi_line_in_curly <- function(pd, indent_by = 2L) {
 
 #' Wrap a multi-line statement in curly braces
 #'
-#' @inheritParams wrap_if_else_while_for_fun_multi_line_in_curly
+#' @inheritParams wrap_if_else_while_for_function_multi_line_in_curly
 #' @inheritParams wrap_subexpr_in_curly
 #' @param key_token The token that comes right before the token that contains
 #'   the expression to be wrapped (ignoring comments). For if and while loops,
