@@ -18,8 +18,6 @@ post_visit_one(pd_nested, fun)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}
-
-\item{funs}{A list of transformer functions.}
 }
 \description{
 Apply a list of functions to each level in a nested parse table.
@@ -31,7 +29,7 @@ to the innermost level of nesting first and then going outwards).
 }
 \seealso{
 Other visitors: 
-\code{\link{visit_one}()}
+\code{\link{make_visit_one}()}
 }
 \concept{visitors}
 \keyword{internal}
