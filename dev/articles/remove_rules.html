@@ -169,16 +169,25 @@ the transformer categories.</p>
 <span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">levels</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $space</span></span>
-<span><span class="co">#&gt;  [1] "remove_space_before_closing_paren"  "remove_space_before_opening_paren" </span></span>
-<span><span class="co">#&gt;  [3] "add_space_after_for_if_while"       "remove_space_before_comma"         </span></span>
-<span><span class="co">#&gt;  [5] "style_space_around_math_token"      "style_space_around_tilde"          </span></span>
-<span><span class="co">#&gt;  [7] "spacing_around_op"                  "remove_space_after_opening_paren"  </span></span>
-<span><span class="co">#&gt;  [9] "remove_space_after_excl"            "set_space_after_bang_bang"         </span></span>
-<span><span class="co">#&gt; [11] "remove_space_around_dollar"         "remove_space_after_fun_dec"        </span></span>
-<span><span class="co">#&gt; [13] "remove_space_around_colons"         "start_comments_with_space"         </span></span>
-<span><span class="co">#&gt; [15] "remove_space_after_unary_pm_nested" "spacing_before_comments"           </span></span>
-<span><span class="co">#&gt; [17] "set_space_between_levels"           "set_space_between_eq_sub_and_comma"</span></span>
-<span><span class="co">#&gt; [19] "set_space_in_curly"                </span></span>
+<span><span class="co">#&gt;  [1] "remove_space_before_closing_paren"         </span></span>
+<span><span class="co">#&gt;  [2] "remove_space_before_opening_paren"         </span></span>
+<span><span class="co">#&gt;  [3] "add_space_after_for_if_while"              </span></span>
+<span><span class="co">#&gt;  [4] "remove_space_before_comma"                 </span></span>
+<span><span class="co">#&gt;  [5] "style_space_around_math_token"             </span></span>
+<span><span class="co">#&gt;  [6] "style_space_around_tilde"                  </span></span>
+<span><span class="co">#&gt;  [7] "spacing_around_op"                         </span></span>
+<span><span class="co">#&gt;  [8] "remove_space_after_opening_paren"          </span></span>
+<span><span class="co">#&gt;  [9] "remove_space_after_excl"                   </span></span>
+<span><span class="co">#&gt; [10] "set_space_after_bang_bang"                 </span></span>
+<span><span class="co">#&gt; [11] "remove_space_around_dollar"                </span></span>
+<span><span class="co">#&gt; [12] "remove_space_after_function_declaration"   </span></span>
+<span><span class="co">#&gt; [13] "remove_space_around_colons"                </span></span>
+<span><span class="co">#&gt; [14] "start_comments_with_space"                 </span></span>
+<span><span class="co">#&gt; [15] "remove_space_after_unary_plus_minus_nested"</span></span>
+<span><span class="co">#&gt; [16] "spacing_before_comments"                   </span></span>
+<span><span class="co">#&gt; [17] "set_space_between_levels"                  </span></span>
+<span><span class="co">#&gt; [18] "set_space_between_eq_sub_and_comma"        </span></span>
+<span><span class="co">#&gt; [19] "set_space_in_curly"                        </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $line_break</span></span>
 <span><span class="co">#&gt;  [1] "remove_empty_lines_after_opening_and_before_closing_braces"</span></span>
@@ -186,7 +195,7 @@ the transformer categories.</p>
 <span><span class="co">#&gt;  [3] "set_line_break_after_assignment"                           </span></span>
 <span><span class="co">#&gt;  [4] "set_line_break_before_curly_opening"                       </span></span>
 <span><span class="co">#&gt;  [5] "remove_line_break_before_round_closing_after_curly"        </span></span>
-<span><span class="co">#&gt;  [6] "remove_line_breaks_in_fun_dec"                             </span></span>
+<span><span class="co">#&gt;  [6] "remove_line_breaks_in_function_declaration"                </span></span>
 <span><span class="co">#&gt;  [7] "set_line_breaks_between_top_level_exprs"                   </span></span>
 <span><span class="co">#&gt;  [8] "style_line_break_around_curly"                             </span></span>
 <span><span class="co">#&gt;  [9] "set_line_break_around_curly_curly"                         </span></span>
@@ -197,16 +206,19 @@ the transformer categories.</p>
 <span><span class="co">#&gt; [14] "set_line_break_after_ggplot2_plus"                         </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $indention</span></span>
-<span><span class="co">#&gt; [1] "indent_braces"                "unindent_fun_dec"            </span></span>
-<span><span class="co">#&gt; [3] "indent_op"                    "indent_eq_sub"               </span></span>
-<span><span class="co">#&gt; [5] "indent_without_paren"         "update_indention_ref_fun_dec"</span></span>
+<span><span class="co">#&gt; [1] "indent_braces"                                  </span></span>
+<span><span class="co">#&gt; [2] "unindent_function_declaration"                  </span></span>
+<span><span class="co">#&gt; [3] "indent_op"                                      </span></span>
+<span><span class="co">#&gt; [4] "indent_eq_sub"                                  </span></span>
+<span><span class="co">#&gt; [5] "indent_without_paren"                           </span></span>
+<span><span class="co">#&gt; [6] "update_indention_reference_function_declaration"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $token</span></span>
-<span><span class="co">#&gt; [1] "fix_quotes"                                    </span></span>
-<span><span class="co">#&gt; [2] "force_assignment_op"                           </span></span>
-<span><span class="co">#&gt; [3] "resolve_semicolon"                             </span></span>
-<span><span class="co">#&gt; [4] "add_brackets_in_pipe"                          </span></span>
-<span><span class="co">#&gt; [5] "wrap_if_else_while_for_fun_multi_line_in_curly"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "fix_quotes"                                         </span></span>
+<span><span class="co">#&gt; [2] "force_assignment_op"                                </span></span>
+<span><span class="co">#&gt; [3] "resolve_semicolon"                                  </span></span>
+<span><span class="co">#&gt; [4] "add_brackets_in_pipe"                               </span></span>
+<span><span class="co">#&gt; [5] "wrap_if_else_while_for_function_multi_line_in_curly"</span></span></code></pre></div>
 <p>Spotted the rule we want to get rid of? It’s under <code>token</code>
 and it’s called <code>force_assignment_op</code>. I agree, we could have
 chosen a better name. If you are not sure if you can guess from the name
@@ -221,7 +233,7 @@ declaration of this (unexported) function.</p>
 <span><span class="co">#&gt;     pd$text[to_replace] &lt;- "&lt;-"</span></span>
 <span><span class="co">#&gt;     pd</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x559a2f4ae8a8&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x562e9fefedc0&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>Next, you simply set that element to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">

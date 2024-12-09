@@ -161,7 +161,7 @@
 <url><loc>https://styler.r-lib.org/dev/reference/set_line_break_if_call_is_multi_line.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/set_multi_line.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/set_regex_indention.html</loc></url>
-<url><loc>https://styler.r-lib.org/dev/reference/set_space_around_op.html</loc></url>
+<url><loc>https://styler.r-lib.org/dev/reference/set_space_around_operator.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/set_space_between_eq_sub_and_comma.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/set_space_between_levels.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/set_spaces.html</loc></url>
@@ -210,7 +210,7 @@
 <url><loc>https://styler.r-lib.org/dev/reference/transformers_drop.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/try_transform_as_r_file.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/unindent_child.html</loc></url>
-<url><loc>https://styler.r-lib.org/dev/reference/unindent_fun_dec.html</loc></url>
+<url><loc>https://styler.r-lib.org/dev/reference/unindent_function_declaration.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/update_indention.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/update_indention_ref.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/update_newlines.html</loc></url>
@@ -221,7 +221,7 @@
 <url><loc>https://styler.r-lib.org/dev/reference/wrap_else_multiline_curly.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/wrap_expr_in_curly.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/wrap_expr_in_expr.html</loc></url>
-<url><loc>https://styler.r-lib.org/dev/reference/wrap_if_else_while_for_fun_multi_line_in_curly.html</loc></url>
+<url><loc>https://styler.r-lib.org/dev/reference/wrap_if_else_while_for_function_multi_line_in_curly.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/wrap_multiline_curly.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/wrap_subexpr_in_curly.html</loc></url>
 <url><loc>https://styler.r-lib.org/dev/reference/write_utf8.html</loc></url>
