@@ -1,20 +1,20 @@
 test_that("forced regex token-dependent indention", {
-  expect_warning(test_collection(
+  expect_no_warning(test_collection(
     "unindention_regex", "regex_force_with",
     transformer = style_text, reindention = specify_reindention(c(
       "^#   ",
       "^##  ",
       "^### "
     ))
-  ), NA)
+  ))
 })
 
 test_that("do not force regex token-dependent indention without pattern", {
-  expect_warning(test_collection(
+  expect_no_warning(test_collection(
     "unindention_regex", "regex_force_no",
     transformer = style_text,
     reindention = specify_reindention(NULL)
-  ), NA)
+  ))
 })
 
 
