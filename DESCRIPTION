@@ -44,7 +44,7 @@ Suggests:
     roxygen2,
     rstudioapi (>= 0.7),
     tibble (>= 1.4.2),
-    testthat (>= 3.0.0)
+    testthat (>= 3.2.1)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

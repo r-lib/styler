@@ -43,35 +43,35 @@ test_that("tree hierarchy is the same no matter whether = or <- is used", {
 })
 
 test_that("braces are added in the right place in ifelse if eq_assign is in expr", {
-  expect_warning(test_collection(
+  expect_no_warning(test_collection(
     "relocate_eq_assign", "eq_assign_ifelse_scope_tokens",
     transformer = style_text,
     style = tidyverse_style
-  ), NA)
+  ))
 })
 
 test_that("complicated reassignment works", {
-  expect_warning(test_collection(
+  expect_no_warning(test_collection(
     "relocate_eq_assign", "eq_assign_multiple_tokens_eq_only",
     transformer = style_text,
     scope = "tokens",
     style = tidyverse_style
-  ), NA)
+  ))
 
-  expect_warning(test_collection(
+  expect_no_warning(test_collection(
     "relocate_eq_assign", "eq_assign_multiple_tokens_mixed",
     transformer = style_text,
     scope = "tokens",
     style = tidyverse_style
-  ), NA)
+  ))
 })
 
 
 test_that("eq_assign is not replaced", {
-  expect_warning(test_collection(
+  expect_no_warning(test_collection(
     "relocate_eq_assign", "eq_assign_ifelse_scope_line_breaks",
     transformer = style_text,
     scope = "line_breaks",
     style = tidyverse_style
-  ), NA)
+  ))
 })

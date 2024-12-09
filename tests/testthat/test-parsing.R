@@ -1,7 +1,6 @@
 test_that("long strings are parsed correctly", {
-  expect_warning(
-    test_collection("parsing", "long_strings", transformer = style_text),
-    NA
+  expect_no_warning(
+    test_collection("parsing", "long_strings", transformer = style_text)
   )
 })
 
