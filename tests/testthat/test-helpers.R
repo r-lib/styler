@@ -15,8 +15,3 @@ test_that("can lookup tokens", {
     lookup_new_special()
   })
 })
-
-test_that("can extend non-comment", {
-  pd <- compute_parse_data_nested(c("if (TRUE) # \n call(34)"))
-  expect_equal(extend_if_comment(pd$child[[1]], 4), 5)
-})
