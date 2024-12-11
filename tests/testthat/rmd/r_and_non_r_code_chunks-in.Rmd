@@ -18,6 +18,14 @@ Some text.
 1+1
 ```
 
+```{webr}
+1+1
+```
+
+```{webr-r}
+1+1
+```
+
 More text.
 
 ```{nonR}

@@ -26,8 +26,9 @@
 #' * `parser_version_find()` determines the version of the parser from parse
 #'   data. This does not necessarily mean that the version found is the
 #'   actual version, but it *behaves* like it. For example, code that does not
-#'   contain `EQ_ASSIGN` is parsed the same way with version 1 and 2. If the
-#'   behavior is identical, the version is set to 1.
+#'   contain `EQ_ASSIGN` is parsed the same way with version `1` and `2`. If the
+#'   behavior is identical, the version is set to `1`. Since the package now
+#'   requires R >= 4.0, the version is always set to `3`.
 #' @param version The version of the parser to be used.
 #' @param pd A parse table such as the output from
 #'   `utils::getParseData(parse(text = text))`.
@@ -42,10 +43,7 @@ parser_version_get <- function() {
 }
 
 #' @rdname parser_version_set
-parser_version_find <- function(pd) {
-  if (any(pd$token == "equal_assign")) 2L else 3L
-}
-
+parser_version_find <- function(pd) 3L
 
 #' The elements that are added to this environment are:
 #'
