@@ -5,9 +5,12 @@ if (y == 0) {
   2
 }
 
-test_that("I am here", {
-  a_test(x)
-})
+test_that(
+  "I am here",
+  {
+    a_test(x)
+  }
+)
 
 
 # A { should always be followed by a new line
@@ -27,9 +30,12 @@ if (1 > 3) {
   "y"
 }
 
-test_that("I am here", {
-  a_test(x)
-})
+test_that(
+  "I am here",
+  {
+    a_test(x)
+  }
+)
 
 test_that(
   desc = "bla",
