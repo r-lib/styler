@@ -12,12 +12,8 @@ remove_dont_mask <- function(roxygen) {
   )
 }
 
-remove_blank_lines <- function(code) {
-  code[code != "\n"]
-}
-
 remove_roxygen_mask <- function(text) {
-  code_with_header <- gsub(pattern = "^#'\\s?", "", text)
+  code_with_header <- gsub(pattern = R"(^#'\s?)", "", text)
   remove_roxygen_header(code_with_header)
 }
 
@@ -29,7 +25,7 @@ remove_roxygen_mask <- function(text) {
 #' #' @examples c(1, 2)
 #' @keywords internal
 remove_roxygen_header <- function(text) {
-  gsub("^[\\s\t]*@examples(If)?(\\s|\t)*", "", text, perl = TRUE)
+  gsub(R"(^[\s\t]*@examples(If)?(\s|\t)*)", "", text, perl = TRUE)
 }
 
 #' Add the roxygen mask to code
