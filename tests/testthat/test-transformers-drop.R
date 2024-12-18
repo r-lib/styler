@@ -73,6 +73,7 @@ test_that("tidyverse transformers are correctly dropped", {
   names_line_break <- c(
     "remove_empty_lines_after_opening_and_before_closing_braces",
     "set_line_breaks_between_top_level_exprs",
+    "set_line_breaks_for_multiline_args",
     "set_line_break_around_comma_and_or",
     "set_line_break_after_assignment",
     "set_line_break_after_opening_if_call_is_multi_line",

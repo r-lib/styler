@@ -82,9 +82,12 @@ test <- function() {
 
   # Only with conservative settings:
   call(
-    preserves, distance,
-    after,     commas,
-    given_has, one
+    preserves,
+    distance,
+    after,
+    commas,
+    given_has,
+    one
   )
 
   if (TRUE) {
@@ -104,14 +107,16 @@ test <- function() {
   single_line("function", call)
 
   multiline(
-    "function", call
+    "function",
+    call
   )
 
   nested(function_call("in", one, line))
 
   nested(function_call(
     "in",
-    multiple, lines
+    multiple,
+    lines
   ))
 
   nested(
@@ -123,14 +128,18 @@ test <- function() {
   nested(
     function_call(with), # a comment and
     many # more
-    , first_level_args
+    ,
+    first_level_args
   )
 
   difficult(
     nested(
-      "function", call
+      "function",
+      call
     ),
-    with, more, args
+    with,
+    more,
+    args
   )
 }
 

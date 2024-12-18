@@ -76,12 +76,18 @@ fun(
 )
 
 # FIXME closing brace could go on ntext line. Alternative: remove lin breaks completely.
-blew(x |>
-  c(), y = 2)
+blew(
+  x |>
+    c(),
+  y = 2
+)
 
 # FIXME closing brace could go on ntext line. Alternative: move c() up.
-blew(y = 2, x |>
-  c())
+blew(
+  y = 2,
+  x |>
+    c()
+)
 
 
 {

@@ -1,5 +1,6 @@
 call(call( # comment
-  3, 4
+  3,
+  4
 ))
 
 call(call(
