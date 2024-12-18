@@ -4,7 +4,7 @@
 #' @include token-define.R
 #' @keywords internal
 #' @include token-define.R
-set_space_around_op <- function(pd_flat, strict) {
+set_space_around_operator <- function(pd_flat, strict) {
   # spacing and operator in same function because alternative is
   # calling token_is_on_aligned_line() twice because comma and operator spacing
   # depends on it.
@@ -122,7 +122,7 @@ style_space_around_tilde <- function(pd_flat, strict) {
   pd_flat
 }
 
-remove_space_after_unary_pm_nested <- function(pd) {
+remove_space_after_unary_plus_minus_nested <- function(pd) {
   if (any(pd$token[1L] %in% c("'+'", "'-'"))) {
     pd$spaces[1L] <- 0L
   }
@@ -349,7 +349,7 @@ remove_space_around_dollar <- function(pd_flat) {
   pd_flat
 }
 
-remove_space_after_fun_dec <- function(pd_flat) {
+remove_space_after_function_declaration <- function(pd_flat) {
   fun_after <- (pd_flat$token == "FUNCTION") & (pd_flat$lag_newlines == 0L)
   pd_flat$spaces[fun_after] <- 0L
   pd_flat
