@@ -70,7 +70,6 @@ fun( s = g(x),
     gg = a(n == 2) |> b(),
     tt |> q(r = 3))
 
-# FIXME closing brace could go on ntext line. Alternative: remove lin breaks completely.
 blew(x |>
 
        c(), y = 2)

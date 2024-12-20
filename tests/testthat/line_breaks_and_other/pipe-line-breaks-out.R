@@ -80,7 +80,6 @@ fun(
   tt %>% q(r = 3)
 )
 
-# FIXME closing brace could go on ntext line. Alternative: remove lin breaks completely.
 blew(
   x %>%
     c(),
