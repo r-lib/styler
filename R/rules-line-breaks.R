@@ -461,9 +461,8 @@ set_line_breaks_for_multiline_args <- function(pd) {
   }
 
   has_children <- purrr::some(pd$child, purrr::negate(is.null))
-  is_function_definition <- pd$token[1L] == "FUNCTION"
 
-  if (!has_children || is_function_definition) {
+  if (!has_children || is_function_declaration(pd)) {
     return(pd)
   }
 
