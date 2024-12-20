@@ -1,19 +1,16 @@
 call(call(
-  call3(),
-  call,
+  call3(), call,
   4433,
   55
 ))
 
 call(call(
-  call3(),
-  call,
+  call3(), call,
   4433,
   55
 ))
 call(call(
-  call3(),
-  call,
+  call3(), call,
   4433,
   55
 ))
@@ -21,8 +18,7 @@ call(call(
 
 # no more barcket on same line ->
 call(call(
-  3,
-  4
+  3, 4
 ))
 
 
@@ -33,8 +29,7 @@ call(
 
 
 call(call(
-  call3(),
-  call,
+  call3(), call,
   44,
   55
 ))
@@ -42,15 +37,13 @@ call(call(
 #
 
 call(
-  call,
-  call(),
+  call, call(),
   3,
   4
 )
 
 call(call(
-  3,
-  4
+  3, 4
 ))
 
 call(call(

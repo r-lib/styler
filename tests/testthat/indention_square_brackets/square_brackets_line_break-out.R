@@ -16,23 +16,17 @@ fac[
 ]
 
 fac[
-  ,
-  `:`(a = b)
+  , `:`(a = b)
 ]
 
 fac[
-  ,
-  `:`(a = b)
+  , `:`(a = b)
 ]
 
-fac[
-  ,
-  `:`(a = c)
-]
+fac[, `:`(a = c)]
 
 fac[
-  ,
-  `:`(a = c)
+  , `:`(a = c)
 ]
 
 x[a == 3 |
@@ -74,10 +68,8 @@ x[
 
 x[
   # this comment shouldn't be an issue
-  1,
-  c(
-    1,
-    2
+  1, c(
+    1, 2
 
     # neither should this one
   )

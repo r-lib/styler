@@ -28,15 +28,11 @@ k <- function(x = fish,
 
 # aligned
 k <- function(x = flus(we),
-              aq = x - 22,
-              k = 22,
-              ayz = m(jk5),
-              xfea = 3) {}
+              aq =  x - 22, k = 22,
+              ayz = m(jk5), xfea =  3) {}
 
 
 # aligned
 k <- function(x = flus(we),
-              aq = x - 22,
-              k = 22,
-              ayz = m(jk5),
-              xfea = 3) {}
+              aq =  x - 22,    k = 22,
+              ayz = m(jk5), xfea =  3) {}

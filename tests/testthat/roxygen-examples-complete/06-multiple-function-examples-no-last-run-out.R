@@ -4,8 +4,7 @@
 #' Carefully examine the results after running this function!
 #' @examples style_pkg(
 #'   style =
-#'     tidyverse_style,
-#'   strict = TRUE
+#'     tidyverse_style, strict = TRUE
 #' )
 #' @name k
 a <- 2

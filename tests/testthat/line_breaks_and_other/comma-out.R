@@ -5,8 +5,7 @@ call(
 )
 
 call(
-  a,
-  b,
+  a, b,
   c
 )
 

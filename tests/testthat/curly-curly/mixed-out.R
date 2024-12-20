@@ -69,19 +69,13 @@ call(
   }
 )
 
-call(
-  "test",
-  {
-    1
-  }
-)
+call("test", {
+  1
+})
 
-call(
-  "test",
-  {
-    1
-  }
-)
+call("test", {
+  1
+})
 
 call(
   {
@@ -96,14 +90,12 @@ call(
 call({{ x }}, {{ y }})
 call({{ x }}, {{ y }})
 call(
-  {{ x }},
-  {{ y }}
+  {{ x }}, {{ y }}
 )
 
 call(
   {{ x }},
-  {{ y }} := 3,
-  f(bk)
+  {{ y }} := 3, f(bk)
 )
 
 call({{

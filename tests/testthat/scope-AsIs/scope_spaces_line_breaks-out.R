@@ -6,12 +6,9 @@ if (x) {
 }
 
 # removing line-break
-test_that(
-"x",
-          {
+test_that("x", {
             my_test(call)
-          }
-)
+          })
 
 
 # do not replace assignment

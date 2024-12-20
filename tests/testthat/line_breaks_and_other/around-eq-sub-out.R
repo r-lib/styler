@@ -28,14 +28,12 @@ c(
 
 
 c(
-  b = 4,
-  x # comment
+  b = 4, x # comment
   = 2
 )
 
 
 c(
   x = # comment
-    2,
-  c =
+    2, c =
   )

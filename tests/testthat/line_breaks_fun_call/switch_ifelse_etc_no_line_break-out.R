@@ -48,13 +48,11 @@ switch(x,
 )
 
 if_else(a,
-  c,
-  v
+  c, v
 )
 
 ifelse(x,
-  y,
-  z
+  y, z
 )
 
 
@@ -70,12 +68,10 @@ base::switch(f,
 )
 
 dplyr::ifelse(x,
-  1,
-  32
+  1, 32
 )
 
 dplyr::ifelse(
   x,
-  1,
-  32
+  1, 32
 )

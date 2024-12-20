@@ -3,12 +3,9 @@ test_that(x, {
   hh
 })
 
-test_that(
-  x,
-  {
-    hh
-  }
-)
+test_that(x, {
+  hh
+})
 
 
 # there are multiple brace expressions that spread over multiple lines
