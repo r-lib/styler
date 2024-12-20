@@ -81,9 +81,10 @@ blew(
   y = 2
 )
 
-# FIXME closing brace could go on ntext line. Alternative: move c() up.
-blew(y = 2, x |>
-  c())
+blew(
+  y = 2, x |>
+    c()
+)
 
 
 {
