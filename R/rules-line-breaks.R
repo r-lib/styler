@@ -311,7 +311,8 @@ set_line_break_after_opening_if_call_is_multi_line <- function(pd,
     return(pd)
   }
   idx <- length(pd$child[[1L]]$text)
-  has_force_text_before <- pd$child[[1L]]$text[idx] %in% force_text_before && pd$child[[1L]]$token[idx] == "SYMBOL_FUNCTION_CALL"
+  has_force_text_before <-
+    pd$child[[1L]]$text[idx] %in% force_text_before && pd$child[[1L]]$token[idx] == "SYMBOL_FUNCTION_CALL"
   if (has_force_text_before) {
     break_pos <- c(
       which(lag(pd$token %in% c("','", "COMMENT"))),
