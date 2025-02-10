@@ -74,5 +74,5 @@ dplyr::ifelse(
               1, 32
 )
 
-# variable name 'switch' is different, #1253
+# variable name 'switch' is different
 l$switch[1:3, ]
