@@ -23,8 +23,7 @@ token <- rbind.data.frame(
   c("if",            "cond",           "IF"),
   c("else",          "cond",         "ELSE"),
   c("in",       "loop_cond",           "IN"),
-  c("while",    "loop_cond",        "WHILE"),
-  stringsAsFactors = FALSE
+  c("while",    "loop_cond",        "WHILE")
 )
 # styler: on
 

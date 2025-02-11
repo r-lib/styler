@@ -40,8 +40,9 @@ a <- function(x,
 }
 
 a <- function(
-    #
-    x,
-    y) {
+  #
+  x,
+  y
+) {
   x - 1
 }
