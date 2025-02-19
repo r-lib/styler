@@ -3,9 +3,9 @@
 #' Style code according to the bli blauuu2 guide.
 #' @family some
 #' @examplesIf TRUE
-#' c()
+#' c( )
 #' @examples
-#' x <- 2
+#' x=2
 #' @importFrom purrr partial
 #' @export
 x <- 3
@@ -15,10 +15,8 @@ x <- 3
 #' Style code according to the bli blauuu2 guide.
 #' @family not
 #' @examples
-#' x <- 2
+#' x=2
 #' @examplesIf TRUE
-#' c()
+#' c( )
 #' @export
-function() {
-  NULL
-}
+function() NULL

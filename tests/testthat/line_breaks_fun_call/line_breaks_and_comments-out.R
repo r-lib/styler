@@ -1,4 +1,5 @@
-call( # comment
+call(
+  # comment
   am
 )
 
@@ -16,7 +17,6 @@ call(
   pm
 )
 
-
 call(b)
 
 call(
@@ -27,12 +27,14 @@ call(
   a # b
 )
 
-call( #
+call(
+  #
 )
 
 call(
   a # b
 )
-call( # b
+call(
+  # b
   a
 )

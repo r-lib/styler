@@ -3,9 +3,9 @@
 #' fjd;kzj lorem impesum
 #' @family xj2lkj
 #' @examplesIf {
-#'   "this-is-a-cond"
+#' 'this-is-a-cond'
 #' }
-#' c()
+#' c( )
 #' @importFrom purrr partial
 #' @export
 x <- 3
@@ -15,7 +15,7 @@ x <- 3
 #'
 #' fjd;kzj lorem impesum
 #' @examplesIf {
-#'   "this-is-a-cond" %>% c()
+#' 'this-is-a-cond' %>% c()
 #' }
-#' c()
+#' c( )
 x <- 3

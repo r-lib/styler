@@ -1,10 +1,7 @@
-while (TRUE) {
-  3
-}
+while (TRUE) 3
 
 # styler: off
-while(TRUE)
-  3
+while (TRUE) 3
 
 # styler: on
 while (TRUE)
@@ -13,42 +10,34 @@ while (TRUE)
 
 # styler: on
 
-for (i # styler: off
-  in 3)
+for (i in 3) # styler: off
   3
 
 # styler: off
-for (i
-     in 3)
-  3
+for (i in 3) 3
 # styler: on
-
 
 # styler: off
-for (i
-     in 3)  {
-  3}
+for (i in 3) {
+  3
+}
 # styler: on
 
+for (i in 3) {
+  3
+} # styler: off
 
-for (i
-  in 3) {
-  3} # styler: off
-
-for (i
-     in 3)  {# styler: off
+for (i in 3) {
+  # styler: off
   3
 }
 
-for (i# styler: off
-  in 3) {
+for (i in 3) {
+  # styler: off
   3
 }
 
-
-while (
-  FALSE
-) {
+while (FALSE) {
   # styler: off
   1
   # styler: on
@@ -62,7 +51,8 @@ while (
   # styler: on
 }
 
-while( # styler: off
+while (
+  # styler: off
   FALSE
 ) {
   1
@@ -72,8 +62,6 @@ while (
   # styler: off
   FALSE
 ) {
-
   1
-
 }
 # styler: on

@@ -36,7 +36,6 @@ call({{ x }})
 # not removing spaces within {{
 call({{ x }})
 
-
 # combine spaces and line breaks
 call({{ x }})
 
@@ -52,9 +51,9 @@ call({{ x }})
 {
   {
     1 + a
-  } + 1
+  } +
+    1
 } # not curly-culry!
-
 
 ##  ............................................................................
 ##  multiple                                                                ####
@@ -62,12 +61,9 @@ call("test", {
   1
 })
 
-call(
-  "test",
-  {
-    1
-  }
-)
+call("test", {
+  1
+})
 
 call("test", {
   1
@@ -90,24 +86,31 @@ call(
 call({{ x }}, {{ y }})
 call({{ x }}, {{ y }})
 call(
-  {{ x }}, {{ y }}
+  {{ x }},
+  {{ y }}
 )
 
 call(
   {{ x }},
-  {{ y }} := 3, f(bk)
+  {{ y }} := 3,
+  f(bk)
 )
 
-call({{
-  #
-  1
-}})
+call({
+  {
+    #
+    1
+  }
+})
 
-call({{
-  #
-}})
+call({
+  {
+    #
+  }
+})
 
-
-{{
-  #
-}}
+{
+  {
+    #
+  }
+}

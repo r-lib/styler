@@ -7,6 +7,5 @@
 #'
 #' @examples
 #' \dontrun{
-#'
 #' }
 2

@@ -5,7 +5,6 @@ foo(
   font = "xyz"
 )
 
-
 foo(
   img, #
   pkg = "abc",

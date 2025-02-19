@@ -1,3 +1,4 @@
+
 #' Create a style guide
 #'
 #' @param reindention A list of parameters for regex re-indention, most
@@ -46,13 +47,13 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' Another
 #' @examples
 #' \donttest{
-#' op <- pd_flat$token %in% "'('"
+#' op= pd_flat$token %in% "'('"
 #' }
 #' \donttest{
 #' op <- pd_flat$token %in% "')'"
 #' }
 #' \donttest{
-#' op <- pd_flat$token %in% "("
+#' op <- pd_flat$token %in%  "("
 #' }
 #' \donttest{
 #' op <- pd_flat$token %in% ")"
@@ -61,16 +62,16 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' op <- pd_flat$token %in% "{"
 #' }
 #' \donttest{
-#' op <- pd_flat$token %in% "}"
+#' op<- pd_flat$token %in% "}"
 #' }
-#' op <- pd_flat$token %in% "'['"
+#' op <-pd_flat$token %in% "'['"
 #' \donttest{
 #' op <- pd_flat$token %in% "']'"
 #' }
 #' \donttest{
-#' op <- pd_flat$token %in% "["
+#' op <- pd_flat$token%in% "["
 #' }
 #' \donttest{
-#' op <- pd_flat$token %in% "]"
+#' op <- pd_flat$token %in%"]"
 #' }
 NULL
