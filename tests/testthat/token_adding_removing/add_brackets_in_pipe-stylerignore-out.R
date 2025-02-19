@@ -11,7 +11,6 @@ aflh({
 })
 # styler: on
 
-
 aflh({
   isfris %>%
     # comment
@@ -22,7 +21,6 @@ aflh({
     # comment
     yyexprzB()
 })
-
 
 # styler: off
 aflh({
@@ -39,16 +37,15 @@ aflh({
 })
 # styler: on
 
-
 aflh({
   isfris %>%
     # comment
-    tjnfaxasf12af7987A() %>%
-    tjnfaxdfaasfaf7987A() %>%
-    tjnfxasfaf798fA() %>%
+    tjnfaxasf12af7987A %>%
+    tjnfaxdfaasfaf7987A %>%
+    tjnfxasfaf798fA %>%
     # more
-    tf797A() %>% # comments
+    tf797A %>% # comments
     # here
-    yyexprzB() #
+    yyexprzB #
   # whatnot
 })

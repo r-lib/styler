@@ -5,53 +5,54 @@ ranges[
 
 fak[a, b]
 
-fac[
-  a,
-  b
-]
+fac[a, b]
 
 fac[
   a,
   b
 ]
 
-fac[
-  , `:`(a = b)
+fac[,
+  `:`(a = b)
 ]
 
-fac[
-  , `:`(a = b)
+fac[,
+  `:`(a = b)
 ]
 
 fac[, `:`(a = c)]
 
-fac[
-  , `:`(a = c)
+fac[,
+  `:`(a = c)
 ]
 
-x[a == 3 |
-  b == v, ]
+x[
+  a == 3 |
+    b == v,
+]
 
-x[a == 3 |
-  b == v, ]
+x[a == 3 | b == v, ]
 
-x[a == 3 ||
-  b == v, ]
+x[
+  a == 3 ||
+    b == v,
+]
 
-x[a == 3 ||
-  b == v, ]
+x[a == 3 || b == v, ]
 
-x[a == 3 &&
-  b == v, ]
+x[a == 3 && b == v, ]
 
-x[a == 3 &
-  b == v, ]
+x[a == 3 & b == v, ]
 
-x[a == 3 &&
-  b == v, ]
+x[
+  a == 3 &&
+    b == v,
+]
 
-x[a == 3 &
-  b == v, ]
+x[
+  a == 3 &
+    b == v,
+]
 
 x[
   # comments above
@@ -60,7 +61,6 @@ x[
   # or below shouldn't be an issue
 ]
 
-
 x[
   a,
   b
@@ -68,8 +68,10 @@ x[
 
 x[
   # this comment shouldn't be an issue
-  1, c(
-    1, 2
+  1,
+  c(
+    1,
+    2
 
     # neither should this one
   )

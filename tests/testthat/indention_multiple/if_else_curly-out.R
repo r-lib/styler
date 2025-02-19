@@ -1,21 +1,15 @@
 {
-  if (TRUE)
-    3
-  else
-    4
+  if (TRUE) 3 else 4
 }
 
 {
   if (TRUE) {
     3
-  } else
-    4
+  } else 4
 }
 
 {
-  if (TRUE)
-    3
-  else {
+  if (TRUE) 3 else {
     4
   }
 }
@@ -37,10 +31,9 @@ foo <- function(x) {
   }
 }
 
-
 if (TRUE) {
   3
-} else  if (FALSE) {
+} else if (FALSE) {
   4
 }
 

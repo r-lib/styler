@@ -1,35 +1,32 @@
 x <-
   2
 
-
 x <- 3
-
 
 x <-
   # the culprit
 
   3
 
-
-x <- #
+x = #
   2
 
+x = 3
 
-x <- 3
-
-x <-
+x =
   # comment
   3
 
-
 ImportantDataFrame$ImportantColumn1 <-
   ImportantDataFrame$ImportantColumn2 <-
-  ComplicatedFunction(ImportantDataFrame$InputColumn)
-
-
-ImportantDataFrame$ImportantColumn1 <-
-  ImportantDataFrame$ImportantColumn2 <- ComplicatedFunction(ImportantDataFrame$InputColumn)
-
+    ComplicatedFunction(ImportantDataFrame$InputColumn)
 
 ImportantDataFrame$ImportantColumn1 <-
-  ImportantDataFrame$ImportantColumn2 <- ComplicatedFunction(ImportantDataFrame$InputColumn)
+  ImportantDataFrame$ImportantColumn2 <- ComplicatedFunction(
+    ImportantDataFrame$InputColumn
+  )
+
+ImportantDataFrame$ImportantColumn1 <-
+  ImportantDataFrame$ImportantColumn2 <- ComplicatedFunction(
+    ImportantDataFrame$InputColumn
+  )

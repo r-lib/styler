@@ -3,77 +3,63 @@ call(
   3
 )
 
-switch(x,
-  a = 2,
-  y = 3
-)
-
-
-switch( #
+switch(
   x,
   a = 2,
   y = 3
 )
 
+switch(
+  #
+  x,
+  a = 2,
+  y = 3
+)
 
-switch(x,
+switch(
+  x,
   a = 2, #
+
   y = 3
 )
 
-
-switch(x,
+switch(
+  x,
   a = 2,
   y = 3
 )
 
-switch(x,
-  a = 2,
-  y = 3
-)
+switch(x, a = 2, y = 3)
 
-switch(x,
-  a = 2,
-  y = 3
-)
+switch(x, a = 2, y = 3)
 
-switch(x,
-  a = 2,
-  y = 3
-) #
+switch(x, a = 2, y = 3) #
 
-switch(x,
+switch(
+  x,
   a = 2,
   y = 3 #
 )
 
-if_else(a,
-  c, v
-)
+if_else(a, c, v)
 
-ifelse(x,
-  y, z
-)
-
+ifelse(x, y, z)
 
 # namespacing
-base::switch(f,
+base::switch(f, x = 2, y = 3)
+
+base::switch(
+  f,
   x = 2,
   y = 3
 )
 
-base::switch(f,
-  x = 2,
-  y = 3
-)
-
-dplyr::ifelse(x,
-  1, 32
-)
+dplyr::ifelse(x, 1, 32)
 
 dplyr::ifelse(
   x,
-  1, 32
+  1,
+  32
 )
 
 # variable name 'switch' is different

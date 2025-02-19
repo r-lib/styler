@@ -1,4 +1,5 @@
-a <- function(x) {}
+a <- function(x) {
+}
 
 if (a) {
   3
@@ -12,4 +13,5 @@ if (x) {
   y
 } else if (x) {
   x
-} else {}
+} else {
+}

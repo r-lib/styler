@@ -6,7 +6,7 @@
 #' @examples
 #' style_pkg(style = tidyverse_style, strict = TRUE)
 #' style_pkg(
-#'   scope = "line_breaks",
-#'   math_token_spacing = specify_math_token_spacing(zero = "'+'")
+#'   scope ="line_breaks",
+#'   math_token_spacing = specify_math_token_spacing( zero = "'+'")
 #' )
-a <- call
+a = call

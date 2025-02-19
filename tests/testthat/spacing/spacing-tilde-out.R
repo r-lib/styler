@@ -1,9 +1,9 @@
 a ~ b
 ~b
-~ b + c
+~b + c
 a + b ~ c
 
 a ~ b
 ~b
-~ b + c
+~b + c
 a + b ~ c

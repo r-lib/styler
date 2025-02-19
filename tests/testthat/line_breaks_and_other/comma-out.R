@@ -1,13 +1,6 @@
-call(
-  a,
-  b,
-  c
-)
+call(a, b, c)
 
-call(
-  a, b,
-  c
-)
+call(a, b, c)
 
 call(a, )
 call(a, )
@@ -22,10 +15,7 @@ mpg %>%
     n_class = n_distinct(class)
   )
 
-
 1:4 %>%
   {
-    (
-      . + 1
-    )
+    (. + 1)
   }

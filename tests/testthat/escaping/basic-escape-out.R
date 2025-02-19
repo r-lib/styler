@@ -4,7 +4,6 @@
 #' call("\\.")
 NULL
 
-
 #' things
 #'
 #' @examples
@@ -18,24 +17,23 @@ NULL
 #' ano("\\.", further = X)
 NULL
 
-
 #' things
 #'
 #' @examples
-#' call("\n")
+#' call('\n')
 #' ano("\\.", further = X)
 NULL
 
-"single quotes with
-embedded and \n not embedded line breaks"
+'single quotes with
+embedded and \n not embedded line breaks'
 
-x <- "	2" # there is a tab emebbed (created with writeLines("x <- '\t2'"))
+x <- '	2' # there is a tab emebbed (created with writeLines("x <- '\t2'"))
 
-x <- "\001"
-"\x01"
+x <- '\001'
+'\x01'
 
 "\001"
-"\001"
+'\001'
 
 #' things
 #'

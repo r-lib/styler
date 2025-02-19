@@ -1,7 +1,3 @@
-if (X) {
-  return(TRUE)
-}
+if (X) return(TRUE)
 
-if (X) {
-  return(FALSE)
-}
+if (X) return(FALSE)

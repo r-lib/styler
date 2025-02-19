@@ -1,6 +1,7 @@
 test(
   "x",
-  {},
+  {
+  },
   a + b,
   {
     s(x = sd)
@@ -9,7 +10,8 @@ test(
 
 test(
   "x",
-  {},
+  {
+  },
   a + b,
   {
     s(x = sd)
@@ -18,17 +20,8 @@ test(
 
 test(
   "x",
-  {},
-  a + b,
   {
-    s(x = sd)
-  }
-)
-
-
-test(
-  "x",
-  {},
+  },
   a + b,
   {
     s(x = sd)
@@ -37,7 +30,8 @@ test(
 
 test(
   "x",
-  {}, # h
+  {
+  },
   a + b,
   {
     s(x = sd)
@@ -46,7 +40,18 @@ test(
 
 test(
   "x",
-  {}, # h
+  {
+  }, # h
+  a + b,
+  {
+    s(x = sd)
+  }
+)
+
+test(
+  "x",
+  {
+  }, # h
   a + b,
   # k
   {
@@ -56,7 +61,8 @@ test(
 
 test(
   "x",
-  {},
+  {
+  },
   a + b, # k
   {
     s(x = sd)
@@ -71,26 +77,34 @@ tetst(
   1 + +1
 )
 
-while ({
-  x
-}) {
+while (
+  {
+    x
+  }
+) {
   f()
 }
 
-while ({
-  x
-}) {
+while (
+  {
+    x
+  }
+) {
   f()
 }
 
-while ({
-  x
-}) {
+while (
+  {
+    x
+  }
+) {
   f()
 }
 
-while ({
-  x
-}) {
+while (
+  {
+    x
+  }
+) {
   f()
 }

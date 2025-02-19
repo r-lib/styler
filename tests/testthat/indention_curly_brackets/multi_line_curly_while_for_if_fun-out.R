@@ -9,7 +9,6 @@ a <- function(x, y, z) {
   }
 }
 
-
 if (
   require("logspline") &&
     require("rstanarm")

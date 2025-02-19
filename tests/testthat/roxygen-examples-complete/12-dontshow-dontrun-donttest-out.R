@@ -24,13 +24,15 @@
 #' }
 #' @importFrom purrr compact
 #' @export
-create_style_guide <- function(initialize = default_style_guide_attributes,
-                               line_break = NULL,
-                               space = NULL,
-                               token = NULL,
-                               indention = NULL,
-                               use_raw_indention = FALSE,
-                               reindention = tidyverse_reindention()) {
+create_style_guide <- function(
+  initialize = default_style_guide_attributes,
+  line_break = NULL,
+  space = NULL,
+  token = NULL,
+  indention = NULL,
+  use_raw_indention = FALSE,
+  reindention = tidyverse_reindention()
+) {
   list(
     # transformer functions
     initialize = list(initialize),
@@ -45,7 +47,6 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
     map(compact)
 }
 
-
 #' Create a style guide
 #'
 #' @param reindention A list of parameters for regex re-indention, most
@@ -58,29 +59,29 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' }
 #' @examples
 #' \dontshow{
-#' {
-#'   x
+#' {x
 #' }
 #' }
 #' set_line_break_before_curly_opening_style <- function() {
-#'   create_style_guide(line_break = list(set_line_break_before_curly_opening))
+#' create_style_guide(line_break= list(set_line_break_before_curly_opening))
 #' }
 #' @examples
-#' \donttest{
-#' style_text("a <- function(x) { x }
+#' \donttest{style_text("a <- function(x) { x }
 #' ", style = set_line_break_before_curly_opening_style)
-#' }
+#'  }
 #' @importFrom purrr compact
 #' @export
-create_style_guide <- function(initialize = default_style_guide_attributes,
-                               line_break = NULL,
-                               space = NULL,
-                               token = NULL,
-                               indention = NULL,
-                               use_raw_indention = FALSE,
-                               reindention = tidyverse_reindention()) {
+create_style_guide <- function(
+  initialize = default_style_guide_attributes,
+  line_break = NULL,
+  space = NULL,
+  token = NULL,
+  indention = NULL,
+  use_raw_indention = FALSE,
+  reindention = tidyverse_reindention()
+) {
   list(
-    # transformer functions
+    #transformer functions
     initialize = list(initialize),
     line_break,
     space,

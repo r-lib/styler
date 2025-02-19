@@ -1,2 +1,2 @@
 call(arg, , more_args)
-a[, , drop = FALSE]
+a[,, drop = FALSE]

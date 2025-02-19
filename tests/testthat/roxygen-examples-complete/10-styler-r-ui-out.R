@@ -65,38 +65,54 @@ NULL
 #' )
 #' }
 #' @export
-style_pkg <- function(pkg = ".",
-                      ...,
-                      style = tidyverse_style,
-                      transformers = style(...),
-                      filetype = "R",
-                      exclude_files = "R/RcppExports.R",
-                      include_roxygen_examples = TRUE) {
+style_pkg <- function(
+  pkg = ".",
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  filetype = "R",
+  exclude_files = "R/RcppExports.R",
+  include_roxygen_examples = TRUE
+) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  changed <- withr::with_dir(pkg_root, prettify_pkg(
-    transformers, filetype, exclude_files, include_roxygen_examples
-  ))
+  changed <- withr::with_dir(
+    pkg_root,
+    prettify_pkg(
+      transformers,
+      filetype,
+      exclude_files,
+      include_roxygen_examples
+    )
+  )
   invisible(changed)
 }
 
-prettify_pkg <- function(transformers,
-                         filetype,
-                         exclude_files,
-                         include_roxygen_examples) {
+prettify_pkg <- function(
+  transformers,
+  filetype,
+  exclude_files,
+  include_roxygen_examples
+) {
   filetype <- set_and_assert_arg_filetype(filetype)
   r_files <- vignette_files <- readme <- NULL
 
   if ("\\.r" %in% filetype) {
     r_files <- dir(
-      path = c("R", "tests", "data-raw"), pattern = "\\.r$",
-      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      path = c("R", "tests", "data-raw"),
+      pattern = "\\.r$",
+      ignore.case = TRUE,
+      recursive = TRUE,
+      full.names = TRUE
     )
   }
 
   if ("\\.rmd" %in% filetype) {
     vignette_files <- dir(
-      path = "vignettes", pattern = "\\.rmd$",
-      ignore.case = TRUE, recursive = TRUE, full.names = TRUE
+      path = "vignettes",
+      pattern = "\\.rmd$",
+      ignore.case = TRUE,
+      recursive = TRUE,
+      full.names = TRUE
     )
     readme <- dir(pattern = "^readme\\.rmd$", ignore.case = TRUE)
   }
@@ -104,7 +120,6 @@ prettify_pkg <- function(transformers,
   files <- setdiff(c(r_files, vignette_files, readme), exclude_files)
   transform_files(files, transformers, include_roxygen_examples)
 }
-
 
 #' Style a string
 #'
@@ -123,11 +138,13 @@ prettify_pkg <- function(transformers,
 #' style_text("a<-3++1", style = tidyverse_style, strict = TRUE)
 #' style_text("a<-3++1", transformers = tidyverse_style(strict = TRUE))
 #' @export
-style_text <- function(text,
-                       ...,
-                       style = tidyverse_style,
-                       transformers = style(...),
-                       include_roxygen_examples = TRUE) {
+style_text <- function(
+  text,
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  include_roxygen_examples = TRUE
+) {
   transformer <- make_transformer(transformers, include_roxygen_examples)
   styled_text <- transformer(text)
   construct_vertical(styled_text)
@@ -150,17 +167,24 @@ style_text <- function(text,
 #' style_dir(file_type = "r")
 #' }
 #' @export
-style_dir <- function(path = ".",
-                      ...,
-                      style = tidyverse_style,
-                      transformers = style(...),
-                      filetype = "R",
-                      recursive = TRUE,
-                      exclude_files = NULL,
-                      include_roxygen_examples = TRUE) {
+style_dir <- function(
+  path = ".",
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  filetype = "R",
+  recursive = TRUE,
+  exclude_files = NULL,
+  include_roxygen_examples = TRUE
+) {
   changed <- withr::with_dir(
-    path, prettify_any(
-      transformers, filetype, recursive, exclude_files, include_roxygen_examples
+    path,
+    prettify_any(
+      transformers,
+      filetype,
+      recursive,
+      exclude_files,
+      include_roxygen_examples
     )
   )
   invisible(changed)
@@ -173,17 +197,24 @@ style_dir <- function(path = ".",
 #' @param recursive A logical value indicating whether or not files in subdirectories
 #'   should be styled as well.
 #' @keywords internal
-prettify_any <- function(transformers,
-                         filetype,
-                         recursive,
-                         exclude_files,
-                         include_roxygen_examples) {
+prettify_any <- function(
+  transformers,
+  filetype,
+  recursive,
+  exclude_files,
+  include_roxygen_examples
+) {
   files <- dir(
-    path = ".", pattern = map_filetype_to_pattern(filetype),
-    ignore.case = TRUE, recursive = recursive, full.names = TRUE
+    path = ".",
+    pattern = map_filetype_to_pattern(filetype),
+    ignore.case = TRUE,
+    recursive = recursive,
+    full.names = TRUE
   )
   transform_files(
-    setdiff(files, exclude_files), transformers, include_roxygen_examples
+    setdiff(files, exclude_files),
+    transformers,
+    include_roxygen_examples
   )
 }
 
@@ -209,11 +240,13 @@ prettify_any <- function(transformers,
 #' unlink(file)
 #' @family stylers
 #' @export
-style_file <- function(path,
-                       ...,
-                       style = tidyverse_style,
-                       transformers = style(...),
-                       include_roxygen_examples = TRUE) {
+style_file <- function(
+  path,
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  include_roxygen_examples = TRUE
+) {
   changed <- withr::with_dir(
     dirname(path),
     transform_files(basename(path), transformers, include_roxygen_examples)

@@ -1,3 +1,4 @@
+
 #' Create a style guide
 #'
 #' @param reindention A list of parameters for regex re-indention, most
@@ -9,14 +10,21 @@
 #' # two
 #'
 #'
+#'
+#'
 #' (
-#'   # more
-#'   a <- 3
+#'
+#'
+#' # more
+#' a <- 3
+#'
 #' )
 #' # a comment
 #' \dontrun{
 #' {
-#'   x
+#'
+#' x
+#'
 #' }
 #'
 #' y # hi
@@ -24,6 +32,7 @@
 #' # more
 #'
 #' a <- 3
+#'
 #' }
 #' @importFrom purrr compact
 #' @export

@@ -10,9 +10,8 @@ test_that("x", {
   my_test(call)
 })
 
-
 # do not replace assignment
-a <- 3
+a = 3
 data_frame(a = 3)
 
 # do not resolve semicolon
@@ -22,5 +21,5 @@ c
 
 # don't add brackets in pipes
 a %>%
-  b() %>%
-  c()
+  b %>%
+  c

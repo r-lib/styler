@@ -4,7 +4,6 @@ foo(
   y = wt #<<
 )
 
-
 library(ggplot2)
 
 ggplot(aes(x, y), data) +

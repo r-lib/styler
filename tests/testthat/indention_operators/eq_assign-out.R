@@ -1,12 +1,11 @@
-switch(engine,
+switch(
+  engine,
   pdftex = {
     if (any) {
       x
     }
   },
-  new = (
-    2
-  )
+  new = (2)
 )
 
 {

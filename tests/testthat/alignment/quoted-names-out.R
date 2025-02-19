@@ -1,4 +1,5 @@
-df <- dplyr::rename(df,
+df <- dplyr::rename(
+  df,
   "xValues" = "Time",
   "xUnit" = "TimeUnit",
   "yValues" = "simulationValues",

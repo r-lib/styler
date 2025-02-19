@@ -2,10 +2,8 @@
 #'
 #' Performs various substitutions in all `.R` files in a package...
 #' Carefully examine the results after running this function!
-#' @examples style_pkg(
-#'   style =
-#'     tidyverse_style, strict = TRUE
-#' )
+#' @examples style_pkg(style =
+#' tidyverse_style, strict = TRUE)
 #' @name k
 a <- 2
 
@@ -17,10 +15,8 @@ a <- 2
 #' style_text("call( 1)", style = tidyverse_style, scope = "spaces")
 #' style_text("call( 1)", transformers = tidyverse_style(strict = TRUE))
 #' style_text(
-#'   c("ab <- 3", "a  <-3"),
-#'   strict = FALSE
-#' ) # keeps alignment of "<-"
+#' c("ab <- 3", "a  <-3"), strict = FALSE) # keeps alignment of "<-"
 #' style_text(c("ab <- 3", "a  <-3"), strict = TRUE) # drops alignment of "<-"
 #' @importFrom purrr partial
 #' @export
-a <- call
+a     <- call;
