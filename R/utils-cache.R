@@ -137,7 +137,7 @@ cache_is_activated <- function(cache_name = NULL) {
     return(cache_name == current_cache)
   }
 
-  return(FALSE)
+  FALSE
 }
 
 #' Cache text
