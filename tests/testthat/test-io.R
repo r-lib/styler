@@ -6,8 +6,10 @@ test_that("non-ASCII characters are handled properly for text styling", {
 
 
 test_that("non-ASCII characters are handled properly for file styling", {
-  skip_if(.Platform$OS.type != "windows")
-
+  # to avoid warnings
+  #  on unix: 'OS reports request to set locale to "English_United States.1252" cannot be honored'
+  #  on win: 'using locale code page other than 65001 ("UTF-8") may cause problems'
+  withr::local_options(list(warn = -1L))
   withr::with_locale(
     c(LC_CTYPE = "English_United States.1252"),
     {
