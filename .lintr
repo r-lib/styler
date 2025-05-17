@@ -11,10 +11,11 @@ linters: all_linters(
     object_length_linter(70L),
     object_overwrite_linter = NULL,
     object_usage_linter = NULL,
-    todo_comment_linter = NULL,
     nonportable_path_linter = NULL,
+    pipe_consistency_linter = NULL,
     string_boundary_linter = NULL,
     strings_as_factors_linter = NULL, # since we use R >= 4.0
+    todo_comment_linter = NULL,
     undesirable_function_linter = NULL,
     undesirable_operator_linter = NULL
   )
