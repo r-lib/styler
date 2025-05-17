@@ -9,7 +9,6 @@ test_that("I am here", {
   a_test(x)
 })
 
-
 # A { should always be followed by a new line
 if (x > 3) {
   "x"
@@ -31,25 +30,24 @@ test_that("I am here", {
   a_test(x)
 })
 
-test_that(
-  desc = "bla",
-  code = {
-    # comment
-    expect_equal(1 + 1, 2)
-  }
-)
+test_that(desc = "bla", code = {
+  # comment
+  expect_equal(1 + 1, 2)
+})
 
+while (TRUE) {
+}
 
-while (TRUE) {}
+while (TRUE) {
+}
 
-while (TRUE) {}
-
-while (TRUE) {}
+while (TRUE) {
+}
 
 while (TRUE) {
   #
 }
 
-
-while (TRUE) { #
+while (TRUE) {
+  #
 }

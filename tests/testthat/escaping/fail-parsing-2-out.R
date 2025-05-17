@@ -1,0 +1,5 @@
+#' Example
+#'
+#' @examples
+#' x <-
+NULL

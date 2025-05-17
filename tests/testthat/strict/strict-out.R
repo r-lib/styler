@@ -1,7 +1,7 @@
 test <- function() {
   "Double quotes remain as they are"
-  "Single quotes are converted to double quotes"
-  "even if the string contains an escaped ' single quote"
+  'Single quotes are converted to double quotes'
+  'even if the string contains an escaped \' single quote'
   'but not if it contains a "double quote'
 
   # Comments are always preserved
@@ -34,13 +34,17 @@ test <- function() {
     call
   })
 
-  braced("unnamed reduces space", {})
+  braced("unnamed reduces space", {
+  })
 
-  braced("unnamed adds space space", {})
+  braced("unnamed adds space space", {
+  })
 
-  braced(named_reduces_space = {})
+  braced(named_reduces_space = {
+  })
 
-  braced(named_adds_space = {})
+  braced(named_adds_space = {
+  })
 
   braced({
     empty_removes_space
@@ -56,7 +60,7 @@ test <- function() {
   a >= b
   a <- b
   a -> b
-  a <- b
+  a = b
   a < b
   a > b
   a * b
@@ -82,9 +86,12 @@ test <- function() {
 
   # Only with conservative settings:
   call(
-    preserves, distance,
-    after,     commas,
-    given_has, one
+    preserves,
+    distance,
+    after,
+    commas,
+    given_has,
+    one
   )
 
   if (TRUE) {
@@ -104,15 +111,19 @@ test <- function() {
   single_line("function", call)
 
   multiline(
-    "function", call
+    "function",
+    call
   )
 
   nested(function_call("in", one, line))
 
-  nested(function_call(
-    "in",
-    multiple, lines
-  ))
+  nested(
+    function_call(
+      "in",
+      multiple,
+      lines
+    )
+  )
 
   nested(
     function_call(with),
@@ -122,18 +133,20 @@ test <- function() {
 
   nested(
     function_call(with), # a comment and
-    many # more
-    , first_level_args
+    many, #more
+    first_level_args
   )
 
   difficult(
     nested(
-      "function", call
+      "function",
+      call
     ),
-    with, more, args
+    with,
+    more,
+    args
   )
 }
-
 
 # formula
 lm(a ~ b + c, data = NA)

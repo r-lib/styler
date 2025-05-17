@@ -1,11 +1,10 @@
-for (i in 1:10) {}
-
+for (i in 1:10) {
+}
 
 # some comment
 
-
-while (TRUE) {}
-
+while (TRUE) {
+}
 
 # some comment
 if (TRUE) NULL

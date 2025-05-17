@@ -1,4 +1,5 @@
-a <- function(x) { # test
+a <- function(x) {
+  # test
   # indnted comment
 }
 

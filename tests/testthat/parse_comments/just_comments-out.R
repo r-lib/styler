@@ -2,5 +2,4 @@
 #' A roxygen comment
 #'
 
-
 # some blank lines

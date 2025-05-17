@@ -5,7 +5,6 @@
 #' 1 + 1
 NULL
 
-
 #' Example
 # Random comment
 #' Roxygen
@@ -61,8 +60,7 @@ NULL
 # There
 #' \dontrun{
 #' 1 + 1
-#' # comment
-#' }
+#' } # comment
 # more
 NULL
 
@@ -97,8 +95,8 @@ NULL
 # There
 #' \dontrun{
 #' call(
-#'   # comment
-#'   1 + 1
+# comment
+#' 1 + 1
 #' )
 #' }
 # more
@@ -110,14 +108,13 @@ NULL
 #' df %>% func()
 func <- function() NULL
 
-
 #' Hi
 # Comment
 #' @examples
 #' 1 + 1
 # this
 # this
-# this
+#this
 # thi3
 #' c()
 NULL
@@ -128,7 +125,7 @@ NULL
 #' 1 + 1
 # this
 # this
-# this
+#this
 # thi3
 #' c()
 NULL

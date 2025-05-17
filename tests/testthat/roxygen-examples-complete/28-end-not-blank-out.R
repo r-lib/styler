@@ -1,3 +1,3 @@
 #' @export
 #' @examples
-#' x <- 1
+#' x=1
