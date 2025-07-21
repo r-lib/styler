@@ -168,9 +168,12 @@ get_engine_pattern <- function() {
 #' @inheritParams separate_chunks
 #' @keywords internal
 get_knitr_pattern <- function(filetype) {
-  if (filetype == "Rnw") {
-    knitr::all_patterns[["rnw"]]
-  } else if (filetype == "Rmd") {
-    knitr::all_patterns[["md"]]
+  if (!filetype %in% c("Rnw", "Rmd")) {
+    return(NULL)
   }
+  stopifnot(
+    `{knitr} is required to process vignette files (Rmd, Rnw)` =
+      requireNamespace("knitr", quietly = TRUE)
+  )
+  knitr::all_patterns[[if (filetype == "Rnw") "rnw" else "md"]]
 }
