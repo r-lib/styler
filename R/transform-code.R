@@ -171,9 +171,8 @@ get_knitr_pattern <- function(filetype) {
   if (!filetype %in% c("Rnw", "Rmd")) {
     return(NULL)
   }
-  stopifnot(
-    `{knitr} is required to process vignette files (Rmd, Rnw)` =
-      requireNamespace("knitr", quietly = TRUE)
-  )
+  if (!rlang::is_installed("knitr")) {
+    rlang::abort("{knitr} is required to process vignette files (Rmd, Rnw)")
+  }
   knitr::all_patterns[[if (filetype == "Rnw") "rnw" else "md"]]
 }
