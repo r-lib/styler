@@ -21,4 +21,3 @@ test_that("clear Cache", {
     length(list.dirs(R.cache::getCachePath("styler"))) == 1L
   )
 })
-
