@@ -184,7 +184,7 @@ one:</p>
 <span><span class="co">#&gt;     pd_flat$spaces[paren_after &amp; (pd_flat$newlines == 0L)] &lt;- 0L</span></span>
 <span><span class="co">#&gt;     pd_flat</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55fb0035c9d8&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x55c7724ed308&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>As the name says, this function removes spaces after the opening
 parenthesis. But how? Its input is a <em>nest</em>. Since the visitor
@@ -257,7 +257,7 @@ in <code><a href="../reference/create_style_guide.html">create_style_guide()</a>
 <span>    space <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>remove_space_after_opening_paren <span class="op">=</span> </span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="va">are_you_sure</span><span class="op">)</span> <span class="fu">styler</span><span class="fu">:::</span><span class="va">remove_space_after_opening_paren</span><span class="op">)</span>,</span>
 <span>    style_guide_name <span class="op">=</span> <span class="st">"styler::space_after_opening_style@https://github.com/r-lib/styler"</span>,</span>
-<span>    style_guide_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dcf.html" class="external-link">read.dcf</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="st">"Version"</span><span class="op">]</span></span>
+<span>    style_guide_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dcf.html" class="external-link">read.dcf</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="st">"Version"</span><span class="op">]</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Make sure to also disable caching during development with
@@ -330,7 +330,7 @@ transformers: <code><a href="../reference/apply_transformers.html">apply_transfo
 <span><span class="co">#&gt;         outer_indention_refs = NA)</span></span>
 <span><span class="co">#&gt;     transformed_absolute_indent</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55fafd8b8298&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x55c76f973a90&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>This means that the order of the styling is clearly defined and it is
 for example not possible to modify line breaks based on spacing, because
@@ -435,7 +435,7 @@ of that function.</p>
 <span>  <span class="fu"><a href="../reference/create_style_guide.html">create_style_guide</a></span><span class="op">(</span></span>
 <span>    line_break <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">set_line_break_before_curly_opening</span><span class="op">)</span>,</span>
 <span>    style_guide_name <span class="op">=</span> <span class="st">"styler::set_line_break_before_curly_opening_style@https://github.com/r-lib/styler"</span>,</span>
-<span>    style_guide_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dcf.html" class="external-link">read.dcf</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="st">"Version"</span><span class="op">]</span></span>
+<span>    style_guide_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dcf.html" class="external-link">read.dcf</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="st">"Version"</span><span class="op">]</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Now you can style your string according to it.</p>
@@ -468,7 +468,7 @@ bracket that comes after a curly brace looks as follows:</p>
 <span><span class="co">#&gt;     pd$lag_newlines[round_after_curly] &lt;- 0L</span></span>
 <span><span class="co">#&gt;     pd</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55fb003ce560&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x55c77256f350&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:styler&gt;</span></span></code></pre></div>
 <p>With our example function
 <code><a href="../reference/set_line_break_before_curly_opening.html">set_line_break_before_curly_opening()</a></code> we don’t need to
@@ -500,7 +500,7 @@ making this mistake.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
