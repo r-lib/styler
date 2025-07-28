@@ -83,20 +83,3 @@ next_terminal <- function(pd,
     }
   }
 }
-
-
-#' Find the index of the last comment in the sequence of comments-only tokens
-#' after the token that has position `pos` in `pd`.
-#' @param pd A parse table.
-#' @param pos The position of the token to start the search from.
-#' @keywords internal
-extend_if_comment <- function(pd, pos) {
-  if (pos == nrow(pd)) {
-    return(pos)
-  }
-  if (pd$token[pos + 1L] == "COMMENT") {
-    extend_if_comment(pd, pos + 1L)
-  } else {
-    pos
-  }
-}
