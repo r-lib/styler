@@ -58,4 +58,5 @@ The following online docs are available:
 Hex sticker font is
 [Gayathri](https://fonts.google.com/specimen/Gayathri), and the image is
 taken from icon made by [Freepik](https://www.freepik.com) and available
-at [flaticon.com](https://www.flaticon.com/free-icon/suit).
+at
+[flaticon.com](https://www.flaticon.com/free-icon/suit-and-tie-outfit_25978?term=suit&page=1&position=2&origin=search&related_id=25978).
