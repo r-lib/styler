@@ -12,7 +12,7 @@ an if, while or for statement or a function call. We don't call about that
 part, in fact it's important to remove it for alignment. See 'Examples'.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 call(
   x = 12,
   y =  3,
