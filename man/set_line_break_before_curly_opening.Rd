@@ -19,7 +19,7 @@ line trigger
 }
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 tryCatch(
   {
     f(8)
