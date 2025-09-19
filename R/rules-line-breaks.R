@@ -3,11 +3,11 @@
 #' Rule:
 #' * Principle: Function arguments that consist of a braced expression always
 #'   need to start on a new line
-#' * Exception: [...] unless it's the last argument and all other
+#' * Exception: unless it's the last argument and all other
 #'   arguments fit on the line of the function call
-#' * Exception: [...] or they are named.
+#' * Exception: or they are named
 #' * Extension: Also, expressions following on braced expressions also cause a
-#'   line trigger.
+#'   line trigger
 #' @keywords internal
 #' @examplesIf FALSE
 #' tryCatch(

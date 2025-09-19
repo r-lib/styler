@@ -112,7 +112,7 @@ See section 'Warning' for a good strategy to apply styling safely.
 }
 
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 style_dir("path/to/dir", filetype = c("rmd", ".R"))
 
 # the following is identical (because of ... and defaults)

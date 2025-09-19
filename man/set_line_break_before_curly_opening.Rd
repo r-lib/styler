@@ -11,15 +11,15 @@ Rule:
 \itemize{
 \item Principle: Function arguments that consist of a braced expression always
 need to start on a new line
-\item Exception: \link{...} unless it's the last argument and all other
+\item Exception: unless it's the last argument and all other
 arguments fit on the line of the function call
-\item Exception: \link{...} or they are named.
+\item Exception: or they are named
 \item Extension: Also, expressions following on braced expressions also cause a
-line trigger.
+line trigger
 }
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 tryCatch(
   {
     f(8)
