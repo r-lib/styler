@@ -110,7 +110,7 @@ styling whether or not it was actually changed (or would be changed when
 }
 
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # the following is identical (because of ... and defaults)
 # but the first is most convenient:
 style_pkg(strict = TRUE)
