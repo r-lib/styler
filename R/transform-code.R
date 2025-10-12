@@ -36,6 +36,9 @@ transform_code <- function(path, fun, ..., dry) {
 #' @inheritParams separate_chunks
 #' @keywords internal
 transform_mixed <- function(lines, transformer_fun, filetype) {
+  if (filetype %in% c("Rnw", "Rmd") && !rlang::is_installed("knitr")) {
+    rlang::abort("{knitr} is required to process vignette files (Rmd, Rnw)")
+  }
   chunks <- separate_chunks(lines, filetype)
   chunks$r_chunks <- map(chunks$r_chunks, transform_mixed_non_empty,
     transformer_fun = transformer_fun
@@ -168,9 +171,8 @@ get_engine_pattern <- function() {
 #' @inheritParams separate_chunks
 #' @keywords internal
 get_knitr_pattern <- function(filetype) {
-  if (filetype == "Rnw") {
-    knitr::all_patterns[["rnw"]]
-  } else if (filetype == "Rmd") {
-    knitr::all_patterns[["md"]]
-  }
+  switch(filetype,
+    Rnw = knitr::all_patterns[["rnw"]],
+    Rmd = knitr::all_patterns[["md"]]
+  )
 }

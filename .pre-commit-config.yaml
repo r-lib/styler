@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3.9009
+    rev: v0.4.3.9014
     hooks:
       - id: style-files
         args:
@@ -101,7 +101,7 @@ repos:
           )$
       - id: pkgdown
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
         args: ["--maxkb=200"]
