@@ -35,6 +35,7 @@ Imports:
     vctrs (>= 0.4.1),
     withr (>= 2.3.0),
 Suggests: 
+    DiagrammeR,
     data.tree (>= 0.1.6),
     digest,
     here,
