@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3.9014
+    rev: v0.4.3.9015
     hooks:
       - id: style-files
         args:
@@ -119,7 +119,7 @@ repos:
           tests/testthat/_snaps/.*|
           )$
   - repo: https://github.com/lorenzwalthert/gitignore-tidy
-    rev: 0.1.2
+    rev: 0.1.3
     hooks:
       - id: tidy-gitignore
   - repo: local

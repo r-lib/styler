@@ -1,6 +1,76 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# styler 1.10.3
+# {styler} 1.11.0
+
+This release fixes a bug related that prevented {styler} to format code with 
+comments in curly-curly expressions `{{` (#1269).
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil) is now a package 
+author. Thanks for your many contributions.
+
+**New features**
+
+- Add support for {webr} code chunks in Rmd/qmd documents (#1229).
+- Add colored output to R API (#1187).
+
+**Major changes**
+
+- Ensure {styler} can format code with comment in curly-curly (#1269).
+- Adapt to single indent semantics in style guide (#1235).
+- Remove excessive line breaks between top-level expressions (#1239).
+- Remove blank lines after opening and before closing braces (#1995).
+- Empty curly have no spaces around (#1234).
+- Remove spaces around dollar operator (#1246).
+- Improve stack trace styler throws on parse error (#1216).
+- Use Bootstrap 5 template for pkgdown website (#1209).
+- Complete third-party style guide documentation (#1201).
+- Document package options (#1193).
+- Bump minimum needed R version to 4.0 (#1197).
+
+**Minor changes**
+
+- Ensure formatted token is a call before forcing line breaks (#1254).
+- Fix lints (#1260), update `.lintr` file.
+- Use `all_linters()` instead of using tags (#1207).
+- Fix `paste_linter()` lints (#1204).
+- Turn off `strings_as_factors_linter()` (#1217).
+- Update precommit config (#1205).
+- Remove unused `extend_if_comment()` internal (#1250).
+- Remove unused internal utility: `calls_sys()` (#1213).
+- Remove unused testing helper: `generate_test_samples()` (#1212).
+- Improve a few function names (#1249).
+- Use `expect_no_warning()` (#1248).
+- Update WORDLIST (#1240, #1210).
+- Check for warnings in examples and tests (#1219).
+- Use stable version of {purrr} (#1215).
+- Don't store code tree structures in tests (#1208).
+- Update touchstone config (#1203).
+- Add non-US locale and use pak to upgrade packages in GHA (#1200).
+- Welcome Indrajeet as author (#1198).
+
+Thanks for everyone who contributed to this release:
+[&#x0040;armenic](https://github.com/armenic), 
+[&#x0040;bernt-matthias](https://github.com/bernt-matthias), 
+[&#x0040;cicdguy](https://github.com/cicdguy), 
+[&#x0040;elgabbas](https://github.com/elgabbas), 
+[&#x0040;fh-mthomson](https://github.com/fh-mthomson), 
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
+[&#x0040;kevinushey](https://github.com/kevinushey),
+[&#x0040;kongdd](https://github.com/kongdd), 
+[&#x0040;krlmlr](https://github.com/krlmlr), 
+[&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), 
+[&#x0040;maikol-solis](https://github.com/maikol-solis), 
+[&#x0040;MichaelChirico](https://github.com/MichaelChirico), 
+[&#x0040;nickhir](https://github.com/nickhir), 
+[&#x0040;obsaditelnost](https://github.com/obsaditelnost), 
+[&#x0040;olivroy](https://github.com/olivroy), 
+[&#x0040;rinkjames](https://github.com/rinkjames), 
+[&#x0040;SamGG](https://github.com/SamGG), 
+[&#x0040;stibu81](https://github.com/stibu81), 
+[&#x0040;strengejacke](https://github.com/strengejacke), 
+[&#x0040;wiper8](https://github.com/wiper8), and
+[&#x0040;wurli](https://github.com/wurli).
+
+# {styler} 1.10.3
 
 This release was requested by the CRAN team since parser error messages changed, 
 which were hard-coded in some unit tests (#1180).
@@ -32,7 +102,7 @@ We thank everyone who helped making this release possible.
 
 [&#x0040;AshesITR](https://github.com/AshesITR), [&#x0040;averissimo](https://github.com/averissimo),  [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;mcanouil](https://github.com/mcanouil), [&#x0040;moodymudskipper](https://github.com/moodymudskipper), [&#x0040;olivroy](https://github.com/olivroy), [&#x0040;sbanville-delfi](https://github.com/sbanville-delfi), [&#x0040;sorhawell](https://github.com/sorhawell), [&#x0040;ssh352](https://github.com/ssh352), [&#x0040;swo](https://github.com/swo), and [&#x0040;vertesy](https://github.com/vertesy).
 
-# styler 1.10.2
+# {styler} 1.10.2
 
 This release was requested by the CRAN team to fix CRAN warning on invalid 
 numeric version inputs (#1143).
@@ -50,7 +120,7 @@ We thank everyone who helped making this release possible.
 
 [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;olivroy](https://github.com/olivroy), [&#x0040;rkrug](https://github.com/rkrug), and [&#x0040;rossdrucker](https://github.com/rossdrucker).
 
-# styler 1.10.1
+# {styler} 1.10.1
 
 This release was requested by CRAN due to accidentally populating a user cache while building vignettes for R >= 4.3.0.
 
@@ -59,7 +129,7 @@ This release was requested by CRAN due to accidentally populating a user cache w
 
 Thanks to everyone who contributed to this release: [&#x0040;olivroy](https://github.com/olivroy) and [&#x0040;krlmlr](https://github.com/krlmlr).
 
-# styler 1.10.0
+# {styler} 1.10.0
 
 This release contains speed-ups between 20% and 40% depending on your use case
 thanks to replacing {base} functionality with {vctrs} (#1114). With the speed
@@ -85,7 +155,7 @@ Thanks for everyone contributing to this release:
 
 [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;kyleam](https://github.com/kyleam), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;mvanaman](https://github.com/mvanaman), [&#x0040;olivroy](https://github.com/olivroy), and [&#x0040;vvarik](https://github.com/vvarik).
 
-# styler 1.9.1
+# {styler} 1.9.1
 
 **Bug fixes**
 
@@ -105,7 +175,7 @@ Thanks for everyone who contributed to this release:
 [&#x0040;dpprdan](https://github.com/dpprdan), [&#x0040;flying-sheep](https://github.com/flying-sheep), [&#x0040;giocomai](https://github.com/giocomai) and [&#x0040;MichaelChirico](https://github.com/MichaelChirico).
 
 
-# styler 1.9.0
+# {styler} 1.9.0
 
 **Features**
 
@@ -170,7 +240,7 @@ A big shout out to anyone who contributed to this release:
 [&#x0040;juliangrimm225](https://github.com/) and 
 [&#x0040;krlmlr](https://github.com/krlmlr).
 
-# styler 1.8.1 
+# {styler} 1.8.1 
 
 **Features**
 
@@ -201,7 +271,7 @@ Dave Jarvis,
 [&#x0040;Robinlovelace](https://github.com/Robinlovelace).
 
 
-# styler 1.8.0
+# {styler} 1.8.0
 
 {styler} 1.8.0 comes with a host of new features, around 40% speed improvement,
 bug fixes and the removal of 8 recursive dependencies. We also welcome 
@@ -312,7 +382,7 @@ A big hand to everyone who made this release possible:
 [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;moodymudskipper](https://github.com/moodymudskipper), [&#x0040;RaymondBalise](https://github.com/RaymondBalise), [&#x0040;Robinlovelace](https://github.com/Robinlovelace), [&#x0040;sebffischer](https://github.com/sebffischer), 
 [&#x0040;sgorm123](https://github.com/sgorm123), [&#x0040;stefanoborini](https://github.com/stefanoborini), and [&#x0040;wdkrnls](https://github.com/wdkrnls).
 
-# styler 1.7.0
+# {styler} 1.7.0
 
 -   if `else` follows directly after `if`, line breaks are removed (#935).
 
@@ -426,11 +496,11 @@ Thanks to all contributors that made this release possible:
 [\@ssh352](https://github.com/ssh352), and
 [\@xjtusjtu](https://github.com/xjtusjtu).
 
-# styler 1.6.2
+# {styler} 1.6.2
 
 -   clean up cache files older than one week (#842).
 
-# styler 1.6.1
+# {styler} 1.6.1
 
 -   Files with `.Rmarkdown` extension are now recognized as an R markdown files
     in `style_file()` and friends (#824).
@@ -465,7 +535,7 @@ We'd like to thank all people who helped making this release possible:
 [\@lorenzwalthert](https://github.com/lorenzwalthert), and
 [\@MichaelChirico](https://github.com/MichaelChirico).
 
-# styler 1.5.1
+# {styler} 1.5.1
 
 ## Alignment detection
 
@@ -568,7 +638,7 @@ release of styler through their contributions in issues and pull requests:
 [\@RoyalTS](https://github.com/RoyalTS), and
 [\@russHyde](https://github.com/russHyde).
 
-# styler 1.4.1
+# {styler} 1.4.1
 
 -   fix interaction between cache and `base_indention`. This also fixes the
     Addin for styling a selection with base indention repeatedly (#764).
@@ -582,7 +652,7 @@ Thanks to everyone who contributed to this release:
 [\@lorenzwalthert](https://github.com/lorenzwalthert), and
 [\@renkun-ken](https://github.com/renkun-ken).
 
-# styler 1.4.0
+# {styler} 1.4.0
 
 ## API Changes
 
@@ -726,7 +796,7 @@ Thanks to all the people who made this release possible:
 [\@swsoyee](https://github.com/swsoyee), and
 [\@Winterstorm-j](https://github.com/Winterstorm-j).
 
-# styler 1.3.2
+# {styler} 1.3.2
 
 Release upon request by the CRAN team.
 
@@ -739,7 +809,7 @@ Release upon request by the CRAN team.
 -   skip timing tests on CRAN as requested by CRAN team because they did not
     pass on all machines (#603).
 
-# styler 1.3.1
+# {styler} 1.3.1
 
 Emergency release. In case multiple expressions are on one line and only some
 of them are cached, styler can remove code. To reach this state, some of the
@@ -766,7 +836,7 @@ We thank the people who have contributed to this release:
 [\@ellessenne](https://github.com/ellessenne) and
 [\@renkun-ken](https://github.com/renkun-ken).
 
-# styler 1.3.0
+# {styler} 1.3.0
 
 ## Breaking changes
 
@@ -820,7 +890,7 @@ Thanks to all contributors involved, in particular
 [\@pat-s](https://github.com/pat-s), and
 [\@programming-wizard](https://github.com).
 
-# styler 1.2.0
+# {styler} 1.2.0
 
 ## Breaking changes
 
@@ -899,7 +969,7 @@ Thanks to all contributors involved, in particular
 [\@pat-s](https://github.com/pat-s), \@reddy-ia, and
 [\@russHyde](https://github.com/russHyde)
 
-# styler 1.1.1
+# {styler} 1.1.1
 
 This is primarily a maintenance release upon the request of the CRAN team
 (#490).
@@ -988,7 +1058,7 @@ Thanks to all contributors involved, in particular
 [\@wdearden](https://github.com/wdearden),
 [\@wmayner](https://github.com/wmayner), and \@yech1990.
 
-# styler 1.1.0
+# {styler} 1.1.0
 
 This release introduces new features and is fully backward-compatible. It also
 adapts to changes in the R parser committed into R devel (#419).
@@ -1028,7 +1098,7 @@ Thanks to all contributors for patches, issues and the like: @jonmcalder,
 @krlmlr, @IndrajeetPatil, @kalibera, @Hasnep, @kiranmaiganji, @dirkschumacher,
 @ClaytonJY, @wlandau, @maurolepore
 
-# styler 1.0.2
+# {styler} 1.0.2
 
 This is a maintenance release without any breaking API changes.
 
@@ -1059,7 +1129,7 @@ Thanks to all contributors for patches, issues and the like: @katrinleinweber,
 @krlmlr, @dchiu911, @ramnathv, @aedobbyn, @Bio7, @tonytonov, @samhinshaw, @fny,
 @vnijs, @martin-mfg, @NGaffney, @dchiu911.
 
-# styler 1.0.1
+# {styler} 1.0.1
 
 This is a maintenance release without any breaking API changes.
 
@@ -1099,7 +1169,7 @@ Thanks to all contributors for patches, issues and the like: @devSJR, @klrmlr,
 @yutannihilation, @samhinshaw, @martin-mfg, @jjramsey, @RMHogervorst, @wlandau,
 @llrs, @aaronrudkin, @crew102, @jkgrain, @jennybc, @joranE.
 
-# styler 1.0.0
+# {styler} 1.0.0
 
 Initial release.
 

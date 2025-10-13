@@ -18,7 +18,7 @@ The name of the style transformer to use in the addins.
 (default: \code{"styler::tidyverse_style()"})
 \item \code{styler.cache_name}: character.
 The name of the styler cache to use.
-(default: 1.10.3.9000)
+(default: 1.11.0)
 \item \code{styler.cache_root}: character.
 The directory where the cache files are stored. For more, see \code{help("caching")}.
 (default: \code{NULL})

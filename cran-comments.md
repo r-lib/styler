@@ -4,14 +4,16 @@ editor_options:
     wrap: 79
 ---
 
-This is a release requested by the CRAN team to comply with new error messages
-in the R parser that caused unit tests to fail.
+This release fixes a bug related that prevented {styler} to format code with 
+comments in curly-curly expressions `{{` (#1269).
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil) is now a package 
+author. Thanks for your many contributions.
 
 
 ## Test environments
 
--   ubuntu-latest (on GitHub Actions): R devel, R 4.4.0, R 4.3.0, R 4.2.1, 4.1.2, R 4.0.5
--   Windows Server 10 (on GitHub Actions): R devel, R 4.4.0, R 4.3.0, R 4.2.1, R 4.1.2, R 4.0.5
+-   ubuntu-latest (on GitHub Actions): R devel, R 4.5.1, R 4.4.0, R 4.3.0, R 4.2.1, 4.1.2
+-   Windows Server 10 (on GitHub Actions): R devel, R 4.5.1, R 4.4.0, R 4.3.0, R 4.2.1, R 4.1.2
 -   win-builder: R devel
 
 ## R CMD check results
