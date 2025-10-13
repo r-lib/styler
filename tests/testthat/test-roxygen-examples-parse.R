@@ -41,6 +41,19 @@ test_that("donts can be parsed", {
   )
 })
 
+test_that("Nested dont* statements return informative error message", {
+  expect_error(
+    style_roxygen_code_example_one(
+      c(
+        "#' @examples", "#' # styler: off", "#' \\donttest{", "#' \\dontshow{",
+        "#'   1+1", "#' }", "#' }", "#' # styler: on"
+      ),
+      transformers = tidyverse_style(scope = "spaces"), base_indention = 2L
+    ),
+    regexp = "nested \\\\donttest"
+  )
+})
+
 test_that("braces examples can be parsed", {
   expect_equal(
     parse_roxygen(
