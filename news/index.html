@@ -53,7 +53,676 @@
       <small>Source: <a href="https://github.com/r-lib/styler/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-  </main></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.11.0" id="styler-1110">styler 1.11.0<a class="anchor" aria-label="anchor" href="#styler-1110"></a></h2><p class="text-muted">CRAN release: 2025-10-13</p>
+<p>This release fixes a bug related that prevented {styler} to format code with comments in curly-curly expressions <code>{{</code> (<a href="https://github.com/r-lib/styler/issues/1269" class="external-link">#1269</a>). <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a> is now a package author. Thanks for your many contributions.</p>
+<p><strong>New features</strong></p>
+<ul><li>Add support for {webr} code chunks in Rmd/qmd documents (<a href="https://github.com/r-lib/styler/issues/1229" class="external-link">#1229</a>).</li>
+<li>Add colored output to R API (<a href="https://github.com/r-lib/styler/issues/1187" class="external-link">#1187</a>).</li>
+</ul><p><strong>Major changes</strong></p>
+<ul><li>Ensure {styler} can format code with comment in curly-curly (<a href="https://github.com/r-lib/styler/issues/1269" class="external-link">#1269</a>).</li>
+<li>Adapt to single indent semantics in style guide (<a href="https://github.com/r-lib/styler/issues/1235" class="external-link">#1235</a>).</li>
+<li>Remove excessive line breaks between top-level expressions (<a href="https://github.com/r-lib/styler/issues/1239" class="external-link">#1239</a>).</li>
+<li>Remove blank lines after opening and before closing braces (<a href="https://github.com/r-lib/styler/issues/1995" class="external-link">#1995</a>).</li>
+<li>Empty curly have no spaces around (<a href="https://github.com/r-lib/styler/issues/1234" class="external-link">#1234</a>).</li>
+<li>Remove spaces around dollar operator (<a href="https://github.com/r-lib/styler/issues/1246" class="external-link">#1246</a>).</li>
+<li>Improve stack trace styler throws on parse error (<a href="https://github.com/r-lib/styler/issues/1216" class="external-link">#1216</a>).</li>
+<li>Use Bootstrap 5 template for pkgdown website (<a href="https://github.com/r-lib/styler/issues/1209" class="external-link">#1209</a>).</li>
+<li>Complete third-party style guide documentation (<a href="https://github.com/r-lib/styler/issues/1201" class="external-link">#1201</a>).</li>
+<li>Document package options (<a href="https://github.com/r-lib/styler/issues/1193" class="external-link">#1193</a>).</li>
+<li>Bump minimum needed R version to 4.0 (<a href="https://github.com/r-lib/styler/issues/1197" class="external-link">#1197</a>).</li>
+</ul><p><strong>Minor changes</strong></p>
+<ul><li>Ensure formatted token is a call before forcing line breaks (<a href="https://github.com/r-lib/styler/issues/1254" class="external-link">#1254</a>).</li>
+<li>Fix lints (<a href="https://github.com/r-lib/styler/issues/1260" class="external-link">#1260</a>), update <code>.lintr</code> file.</li>
+<li>Use <code>all_linters()</code> instead of using tags (<a href="https://github.com/r-lib/styler/issues/1207" class="external-link">#1207</a>).</li>
+<li>Fix <code>paste_linter()</code> lints (<a href="https://github.com/r-lib/styler/issues/1204" class="external-link">#1204</a>).</li>
+<li>Turn off <code>strings_as_factors_linter()</code> (<a href="https://github.com/r-lib/styler/issues/1217" class="external-link">#1217</a>).</li>
+<li>Update precommit config (<a href="https://github.com/r-lib/styler/issues/1205" class="external-link">#1205</a>).</li>
+<li>Remove unused <code>extend_if_comment()</code> internal (<a href="https://github.com/r-lib/styler/issues/1250" class="external-link">#1250</a>).</li>
+<li>Remove unused internal utility: <code>calls_sys()</code> (<a href="https://github.com/r-lib/styler/issues/1213" class="external-link">#1213</a>).</li>
+<li>Remove unused testing helper: <code>generate_test_samples()</code> (<a href="https://github.com/r-lib/styler/issues/1212" class="external-link">#1212</a>).</li>
+<li>Improve a few function names (<a href="https://github.com/r-lib/styler/issues/1249" class="external-link">#1249</a>).</li>
+<li>Use <code>expect_no_warning()</code> (<a href="https://github.com/r-lib/styler/issues/1248" class="external-link">#1248</a>).</li>
+<li>Update WORDLIST (<a href="https://github.com/r-lib/styler/issues/1240" class="external-link">#1240</a>, <a href="https://github.com/r-lib/styler/issues/1210" class="external-link">#1210</a>).</li>
+<li>Check for warnings in examples and tests (<a href="https://github.com/r-lib/styler/issues/1219" class="external-link">#1219</a>).</li>
+<li>Use stable version of {purrr} (<a href="https://github.com/r-lib/styler/issues/1215" class="external-link">#1215</a>).</li>
+<li>Don’t store code tree structures in tests (<a href="https://github.com/r-lib/styler/issues/1208" class="external-link">#1208</a>).</li>
+<li>Update touchstone config (<a href="https://github.com/r-lib/styler/issues/1203" class="external-link">#1203</a>).</li>
+<li>Add non-US locale and use pak to upgrade packages in GHA (<a href="https://github.com/r-lib/styler/issues/1200" class="external-link">#1200</a>).</li>
+<li>Welcome Indrajeet as author (<a href="https://github.com/r-lib/styler/issues/1198" class="external-link">#1198</a>).</li>
+</ul><p>Thanks for everyone who contributed to this release: <a href="https://github.com/armenic" class="external-link">@armenic</a>, <a href="https://github.com/bernt-matthias" class="external-link">@bernt-matthias</a>, <a href="https://github.com/cicdguy" class="external-link">@cicdguy</a>, <a href="https://github.com/elgabbas" class="external-link">@elgabbas</a>, <a href="https://github.com/fh-mthomson" class="external-link">@fh-mthomson</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/kevinushey" class="external-link">@kevinushey</a>, <a href="https://github.com/kongdd" class="external-link">@kongdd</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/maikol-solis" class="external-link">@maikol-solis</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/nickhir" class="external-link">@nickhir</a>, <a href="https://github.com/obsaditelnost" class="external-link">@obsaditelnost</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/rinkjames" class="external-link">@rinkjames</a>, <a href="https://github.com/SamGG" class="external-link">@SamGG</a>, <a href="https://github.com/stibu81" class="external-link">@stibu81</a>, <a href="https://github.com/strengejacke" class="external-link">@strengejacke</a>, <a href="https://github.com/wiper8" class="external-link">@wiper8</a>, and <a href="https://github.com/wurli" class="external-link">@wurli</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.10.3" id="styler-1103">styler 1.10.3<a class="anchor" aria-label="anchor" href="#styler-1103"></a></h2><p class="text-muted">CRAN release: 2024-04-07</p>
+<p>This release was requested by the CRAN team since parser error messages changed, which were hard-coded in some unit tests (<a href="https://github.com/r-lib/styler/issues/1180" class="external-link">#1180</a>).</p>
+<p><strong>Minor changes</strong></p>
+<ul><li>Add a package sticker (<a href="https://github.com/r-lib/styler/issues/1172" class="external-link">#1172</a>, <a href="https://github.com/r-lib/styler/issues/1173" class="external-link">#1173</a>).</li>
+<li>Improve error message for scope (<a href="https://github.com/r-lib/styler/issues/1176" class="external-link">#1176</a>).</li>
+<li>Update lintr config and address newly found lints (<a href="https://github.com/r-lib/styler/issues/1158" class="external-link">#1158</a>).</li>
+<li>Fix new lints about implicit return (<a href="https://github.com/r-lib/styler/issues/1166" class="external-link">#1166</a>).</li>
+<li>Clean new lints (<a href="https://github.com/r-lib/styler/issues/1149" class="external-link">#1149</a>).</li>
+<li>Clean up unnecessary YAML front matter in README (<a href="https://github.com/r-lib/styler/issues/1165" class="external-link">#1165</a>).</li>
+</ul><p><strong>CI</strong></p>
+<ul><li>Update pre-commit and GitHub Actions (<a href="https://github.com/r-lib/styler/issues/1177" class="external-link">#1177</a>, <a href="https://github.com/r-lib/styler/issues/1175" class="external-link">#1175</a>, <a href="https://github.com/r-lib/styler/issues/1171" class="external-link">#1171</a>, <a href="https://github.com/r-lib/styler/issues/1171" class="external-link">#1171</a>, <a href="https://github.com/r-lib/styler/issues/1164" class="external-link">#1164</a>, <a href="https://github.com/r-lib/styler/issues/1152" class="external-link">#1152</a>, <a href="https://github.com/r-lib/styler/issues/1148" class="external-link">#1148</a>).</li>
+<li>Delete URL check workflow (<a href="https://github.com/r-lib/styler/issues/1160" class="external-link">#1160</a>).</li>
+</ul><p><strong>Testing</strong></p>
+<ul><li>Suppress warning in io tests (<a href="https://github.com/r-lib/styler/issues/1169" class="external-link">#1169</a>).</li>
+<li>Ensure unit tests check for appropriate error messages in the R parser for R &gt; 4.3 (<a href="https://github.com/r-lib/styler/issues/1180" class="external-link">#1180</a>).</li>
+<li>Remove outdated test about repeated parsing (<a href="https://github.com/r-lib/styler/issues/1163" class="external-link">#1163</a>).</li>
+<li>Update roxygen test comments (<a href="https://github.com/r-lib/styler/issues/1162" class="external-link">#1162</a>).</li>
+<li>Delete unused snapshot (<a href="https://github.com/r-lib/styler/issues/1159" class="external-link">#1159</a>).</li>
+</ul><p>We thank everyone who helped making this release possible.</p>
+<p><a href="https://github.com/AshesITR" class="external-link">@AshesITR</a>, <a href="https://github.com/averissimo" class="external-link">@averissimo</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/mcanouil" class="external-link">@mcanouil</a>, <a href="https://github.com/moodymudskipper" class="external-link">@moodymudskipper</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/sbanville-delfi" class="external-link">@sbanville-delfi</a>, <a href="https://github.com/sorhawell" class="external-link">@sorhawell</a>, <a href="https://github.com/ssh352" class="external-link">@ssh352</a>, <a href="https://github.com/swo" class="external-link">@swo</a>, and <a href="https://github.com/vertesy" class="external-link">@vertesy</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.10.2" id="styler-1102">styler 1.10.2<a class="anchor" aria-label="anchor" href="#styler-1102"></a></h2><p class="text-muted">CRAN release: 2023-08-29</p>
+<p>This release was requested by the CRAN team to fix CRAN warning on invalid numeric version inputs (<a href="https://github.com/r-lib/styler/issues/1143" class="external-link">#1143</a>).</p>
+<p><strong>Minor changes</strong></p>
+<ul><li>Use cli messaging for cache (<a href="https://github.com/r-lib/styler/issues/1127" class="external-link">#1127</a>).</li>
+<li>Use latest (and stable!) pre-commit (<a href="https://github.com/r-lib/styler/issues/1144" class="external-link">#1144</a>).</li>
+<li>Fix CRAN warning on invalid numeric version inputs (<a href="https://github.com/r-lib/styler/issues/1143" class="external-link">#1143</a>).</li>
+<li>Bump JamesIves/github-pages-deploy-action from 4.4.2 to 4.4.3 (<a href="https://github.com/r-lib/styler/issues/1139" class="external-link">#1139</a>).</li>
+<li>fix pre-commit (<a href="https://github.com/r-lib/styler/issues/1132" class="external-link">#1132</a>).</li>
+<li>Don’t require dplyr anywhere (<a href="https://github.com/r-lib/styler/issues/1131" class="external-link">#1131</a>).</li>
+</ul><p>We thank everyone who helped making this release possible.</p>
+<p><a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/rkrug" class="external-link">@rkrug</a>, and <a href="https://github.com/rossdrucker" class="external-link">@rossdrucker</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.10.1" id="styler-1101">styler 1.10.1<a class="anchor" aria-label="anchor" href="#styler-1101"></a></h2><p class="text-muted">CRAN release: 2023-06-05</p>
+<p>This release was requested by CRAN due to accidentally populating a user cache while building vignettes for R &gt;= 4.3.0.</p>
+<ul><li>Code quality improvements (<a href="https://github.com/r-lib/styler/issues/1122" class="external-link">#1122</a>).</li>
+<li>Bump JamesIves/github-pages-deploy-action from 4.4.1 to 4.4.2 (<a href="https://github.com/r-lib/styler/issues/1123" class="external-link">#1123</a>).</li>
+</ul><p>Thanks to everyone who contributed to this release: <a href="https://github.com/olivroy" class="external-link">@olivroy</a> and <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.10.0" id="styler-1100">styler 1.10.0<a class="anchor" aria-label="anchor" href="#styler-1100"></a></h2><p class="text-muted">CRAN release: 2023-05-24</p>
+<p>This release contains speed-ups between 20% and 40% depending on your use case thanks to replacing {base} functionality with {vctrs} (<a href="https://github.com/r-lib/styler/issues/1114" class="external-link">#1114</a>). With the speed boost introduced in version 1.8.0 in Oct. 2022, {styler} is now up to 2x as fast as before release 1.8.0.</p>
+<p>This release was created upon a request by the CRAN team to actively manage not just cached files but also the potentially empty cache directories they live in (<a href="https://github.com/r-lib/styler/issues/1118" class="external-link">#1118</a>). Here are the changes in detail:</p>
+<ul><li>Require at least R 3.6 (<a href="https://github.com/r-lib/styler/issues/1101" class="external-link">#1101</a>).</li>
+<li>Prefer {vctrs} functions over slower {base} equivalents (<a href="https://github.com/r-lib/styler/issues/1114" class="external-link">#1114</a>).</li>
+<li>Replace deprecated use of <code><a href="https://rlang.r-lib.org/reference/with_handlers.html" class="external-link">rlang::with_handlers()</a></code> (<a href="https://github.com/r-lib/styler/issues/1103" class="external-link">#1103</a>).</li>
+<li>Remove tail recursion in favor of <code>repeat</code> (<a href="https://github.com/r-lib/styler/issues/1113" class="external-link">#1113</a>).</li>
+<li>split <code>test-public_api.R</code> for better sharding (<a href="https://github.com/r-lib/styler/issues/1109" class="external-link">#1109</a>).</li>
+<li>0-pad filenames for sharding (<a href="https://github.com/r-lib/styler/issues/1110" class="external-link">#1110</a>)</li>
+<li>add missing {testthat} snapshots (<a href="https://github.com/r-lib/styler/issues/1115" class="external-link">#1115</a>).</li>
+<li>Bump {touchstone} config (<a href="https://github.com/r-lib/styler/issues/1104" class="external-link">#1104</a>, <a href="https://github.com/r-lib/styler/issues/1107" class="external-link">#1107</a>).</li>
+<li>Bump <code>actions/checkout</code> to version 3 in GitHub Actions (<a href="https://github.com/r-lib/styler/issues/1098" class="external-link">#1098</a>).</li>
+</ul><p>Thanks for everyone contributing to this release:</p>
+<p><a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/kyleam" class="external-link">@kyleam</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/mvanaman" class="external-link">@mvanaman</a>, <a href="https://github.com/olivroy" class="external-link">@olivroy</a>, and <a href="https://github.com/vvarik" class="external-link">@vvarik</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.9.1" id="styler-191">styler 1.9.1<a class="anchor" aria-label="anchor" href="#styler-191"></a></h2><p class="text-muted">CRAN release: 2023-03-04</p>
+<p><strong>Bug fixes</strong></p>
+<ul><li>Fix interaction between cache and stylerignore that could produce invalid code (<a href="https://github.com/r-lib/styler/issues/1072" class="external-link">#1072</a>).</li>
+<li>Don’t remove line break around <code>{{</code> and comments that can yield invalid code (<a href="https://github.com/r-lib/styler/issues/1070" class="external-link">#1070</a>).</li>
+<li>Styling empty roxygen code examples don’t cause errors anymore (<a href="https://github.com/r-lib/styler/issues/1096" class="external-link">#1096</a>).</li>
+<li>Double indent is also kept if there is only one argument (<a href="https://github.com/r-lib/styler/issues/1094" class="external-link">#1094</a>).</li>
+<li>Improved blank lines handling for roxygen examples (<a href="https://github.com/r-lib/styler/issues/1085" class="external-link">#1085</a>).</li>
+<li>style roxygen examples even if nothing comes after (<a href="https://github.com/r-lib/styler/issues/1089" class="external-link">#1089</a>).</li>
+</ul><p><strong>Other</strong></p>
+<ul><li>Document <code>"qmd"</code> as a valid <code>filetype</code> (<a href="https://github.com/r-lib/styler/issues/1091" class="external-link">#1091</a>).</li>
+</ul><p>Thanks for everyone who contributed to this release:</p>
+<p><a href="https://github.com/dpprdan" class="external-link">@dpprdan</a>, <a href="https://github.com/flying-sheep" class="external-link">@flying-sheep</a>, <a href="https://github.com/giocomai" class="external-link">@giocomai</a> and <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.9.0" id="styler-190">styler 1.9.0<a class="anchor" aria-label="anchor" href="#styler-190"></a></h2><p class="text-muted">CRAN release: 2023-01-15</p>
+<p><strong>Features</strong></p>
+<ul><li>The tidyverse recently introduced double-indention for function declarations that don’t fit on one line. It indents two levels, i.e. 4 spaces if you <code>indent_by</code> two spaces.</li>
+</ul><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># old style: remains compliant and won't be re-styled</span></span>
+<span><span class="va">my_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">long_argument</span> <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                   <span class="va">indent_up_to_first</span> <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># ...</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># new style: now also compliant and won't be re-styled</span></span>
+<span><span class="va">my_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
+<span>    <span class="va">long_argument</span> <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>    <span class="va">indent_double</span> <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># ...</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>You can also use the R package <a href="https://github.com/lionel-/codegrip" class="external-link">{codegrip}</a> to toggle between the two modes (<a href="https://github.com/r-lib/styler/issues/1083" class="external-link">#1083</a>).</p>
+<p><strong>Bug fixes</strong></p>
+<ul><li>Previously styled code that is now stylerignored should always be formatted correctly. It boils down to the requirement that stylerignore sequences must always be in the same block (<a href="https://github.com/r-lib/styler/issues/1082" class="external-link">#1082</a>).</li>
+<li>styling around <code>{{</code> and comments now yields parsable output (<a href="https://github.com/r-lib/styler/issues/1088" class="external-link">#1088</a>).</li>
+<li>trailing blank lines in roxygen code examples are removed (<a href="https://github.com/r-lib/styler/issues/1085" class="external-link">#1085</a>).</li>
+<li>roxygen code examples that don’t have any code following after them are now also styled (<a href="https://github.com/r-lib/styler/issues/1067" class="external-link">#1067</a>).</li>
+</ul><p><strong>Other user-facing changes</strong></p>
+<ul><li>Less noisy communication if R option <code>styler.cache_root</code> is not set (<a href="https://github.com/r-lib/styler/issues/1063" class="external-link">#1063</a>).</li>
+</ul><p><strong>Infrastructure</strong></p>
+<ul><li>use {lintr} config (<a href="https://github.com/r-lib/styler/issues/1057" class="external-link">#1057</a>, <a href="https://github.com/r-lib/styler/issues/1059" class="external-link">#1059</a>) and pre-commit hook (<a href="https://github.com/r-lib/styler/issues/1064" class="external-link">#1064</a>).</li>
+<li>use new {pkgdown} hook, check for parsable yaml and mixed line ending (<a href="https://github.com/r-lib/styler/issues/1080" class="external-link">#1080</a>, <a href="https://github.com/r-lib/styler/issues/1081" class="external-link">#1081</a>).</li>
+<li>update GitHub Actions workflow versions one time (<a href="https://github.com/r-lib/styler/issues/1073" class="external-link">#1073</a>) and add dependabot for the future (<a href="https://github.com/r-lib/styler/issues/1974" class="external-link">#1974</a>).</li>
+<li>bdr test for additional examples (<a href="https://github.com/r-lib/styler/issues/1068" class="external-link">#1068</a>).</li>
+<li>check for link rot regularly (<a href="https://github.com/r-lib/styler/issues/1077" class="external-link">#1077</a>, <a href="https://github.com/r-lib/styler/issues/1086" class="external-link">#1086</a>).</li>
+</ul><p><strong>Internals</strong></p>
+<ul><li>replace retired <code><a href="https://purrr.tidyverse.org/reference/when.html" class="external-link">purrr::when()</a></code> with <code>if</code> statements (<a href="https://github.com/r-lib/styler/issues/1066" class="external-link">#1066</a>).</li>
+<li>more integer literals (<a href="https://github.com/r-lib/styler/issues/1054" class="external-link">#1054</a>).</li>
+<li>Consistently use <code>@examplesIf</code> for conditionally running examples (<a href="https://github.com/r-lib/styler/issues/1071" class="external-link">#1071</a>).</li>
+<li>document imports in a single file (<a href="https://github.com/r-lib/styler/issues/1060" class="external-link">#1060</a>).</li>
+<li>format YAML files (<a href="https://github.com/r-lib/styler/issues/1061" class="external-link">#1061</a>).</li>
+</ul><p>A big shout out to anyone who contributed to this release:</p>
+<p><a href="https://github.com/balthasars" class="external-link">@balthasars</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/" class="external-link">@juliangrimm225</a> and <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.8.1" id="styler-181">styler 1.8.1<a class="anchor" aria-label="anchor" href="#styler-181"></a></h2><p class="text-muted">CRAN release: 2022-11-07</p>
+<p><strong>Features</strong></p>
+<ul><li>Expose internals used with other style guides (<a href="https://github.com/Robinlovelace" class="external-link">@Robinlovelace</a> + collaborators, <a href="https://github.com/r-lib/styler/issues/1043" class="external-link">#1043</a>, <a href="https://github.com/r-lib/styler/issues/1052" class="external-link">#1052</a>).</li>
+</ul><p><strong>Other</strong></p>
+<ul><li>Bump minimal version requirement on {withr} as <code>...</code> in <code><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">withr::local_options()</a></code> was introduced only in v.2.3.0 (<a href="https://github.com/r-lib/styler/issues/1051" class="external-link">#1051</a>).</li>
+<li>Rename internal function <code>set_linebreak_after_ggplot2_plus()</code> to <code>set_line_break_after_ggplot2_plus()</code> for consistency (<a href="https://github.com/Polkas" class="external-link">@Polkas</a>, <a href="https://github.com/r-lib/styler/issues/1049" class="external-link">#1049</a>).</li>
+<li>Reformat contributing guidelines (<a href="https://github.com/r-lib/styler/issues/1047" class="external-link">#1047</a>).</li>
+<li>Improve YAML formatting for pkgdown (<a href="https://github.com/r-lib/styler/issues/1042" class="external-link">#1042</a>).</li>
+<li>Simplify caching internal’s conditionals with <code>rlang::%||%</code> (<a href="https://github.com/r-lib/styler/issues/1041" class="external-link">#1041</a>).</li>
+<li>Only run {pkgapi} if available (<a href="https://github.com/r-lib/styler/issues/1039" class="external-link">#1039</a>).</li>
+<li>Typos (<a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/r-lib/styler/issues/1038" class="external-link">#1038</a>)</li>
+</ul><p>This release was requested by CRAN to resolve an R CMD Check note (<a href="https://github.com/r-lib/styler/issues/1044" class="external-link">#1044</a>). A big hand to everyone who made this release possible:</p>
+<p>Dave Jarvis, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/Polkas" class="external-link">@Polkas</a>, and <a href="https://github.com/Robinlovelace" class="external-link">@Robinlovelace</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.8.0" id="styler-180">styler 1.8.0<a class="anchor" aria-label="anchor" href="#styler-180"></a></h2><p class="text-muted">CRAN release: 2022-10-22</p>
+<p>{styler} 1.8.0 comes with a host of new features, around 40% speed improvement, bug fixes and the removal of 8 recursive dependencies. We also welcome <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a> as a new contributor to {styler}, who has contributed significantly to this and and previous releases.</p>
+<p><strong>Features</strong></p>
+<ul><li><p><code><a href="../reference/style_dir.html">style_dir()</a></code> and <code><a href="../reference/style_pkg.html">style_pkg()</a></code> now default to styling all supported file formats (<code>.R</code>, <code>.Rmd</code>, <code>.Rmarkdown</code>, <code>.Rnw</code>, and <code>.qmd</code>) in the (package) directory (<a href="https://github.com/r-lib/styler/issues/965" class="external-link">#965</a>, <a href="https://github.com/r-lib/styler/issues/931" class="external-link">#931</a>, <a href="https://github.com/r-lib/styler/issues/1033" class="external-link">#1033</a>).</p></li>
+<li><p><code><a href="../reference/style_pkg.html">style_pkg()</a></code> now excludes the auto-generated <code>R/cpp11.R</code> file (<a href="https://github.com/r-lib/styler/issues/977" class="external-link">#977</a>).</p></li>
+<li><p>minimum needed R version is now bumped to <code>3.5</code> (<a href="https://github.com/r-lib/styler/issues/986" class="external-link">#986</a>).</p></li>
+<li><p>alignment is now detected for function declaration in a similar way as for function calls (<a href="https://github.com/r-lib/styler/issues/968" class="external-link">#968</a>).</p></li>
+<li><p>new R option <code>styler.ignore_alignment</code> controls if alignment should be detected (and preserved) or not (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</p></li>
+</ul><p><strong>Bug Fixes</strong></p>
+<ul><li><p>alignment is detected in <code><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tibble::tribble()</a></code> (and similar) calls with more than 3 columns when left aligned (<a href="https://github.com/r-lib/styler/issues/945" class="external-link">#945</a>).</p></li>
+<li><p>fix alignment detection for one column, mixed named/unnamed (<a href="https://github.com/r-lib/styler/issues/1035" class="external-link">#1035</a>).</p></li>
+<li><p>if there are only empty lines in a code chunk, they are all removed (<a href="https://github.com/r-lib/styler/issues/936" class="external-link">#936</a>).</p></li>
+<li><p>apply rules for [ to [[ and its closing counterpair (<a href="https://github.com/r-lib/styler/issues/1030" class="external-link">#1030</a>)</p></li>
+<li><p>there is now at most one line break after <code>{</code> and before <code>#</code> (<a href="https://github.com/r-lib/styler/issues/952" class="external-link">#952</a>, <a href="https://github.com/r-lib/styler/issues/1022" class="external-link">#1022</a>).</p></li>
+<li><p>line breaks may be added to function calls to ensure indention symmetry for round braces (<a href="https://github.com/r-lib/styler/issues/975" class="external-link">#975</a>).</p></li>
+<li><p>the cache is also invalidated on changing the stylerignore markers (<a href="https://github.com/r-lib/styler/issues/932" class="external-link">#932</a>).</p></li>
+<li><p><code>{</code> is not put on a new line after <code>=</code> and in <code>function() {</code> for some edge cases (<a href="https://github.com/r-lib/styler/issues/939" class="external-link">#939</a>).</p></li>
+<li><p><code>while ({})</code> statements are now handled the same way as function statements with regards to breaking lines (<a href="https://github.com/r-lib/styler/issues/967" class="external-link">#967</a>).</p></li>
+<li><p>parsing of {roxygen2} example comments now also works for edge cases when there is no literal code immediately following after the end of the example section (<a href="https://github.com/r-lib/styler/issues/940" class="external-link">#940</a>).</p></li>
+<li><p>files with no tokens in it are now transformed into zero-byte files (<a href="https://github.com/r-lib/styler/issues/962" class="external-link">#962</a>).</p></li>
+</ul><p><strong>Documentation</strong></p>
+<ul><li>old (and outdated) vignettes have been removed (<a href="https://github.com/r-lib/styler/issues/955" class="external-link">#955</a>). To access them, do <code>git checkout v1.0.0</code>.</li>
+<li>minor improvements to the documentation (<a href="https://github.com/r-lib/styler/issues/958" class="external-link">#958</a>).</li>
+<li>turned off <code>styler.colored_print.vertical</code> in vignettes so ANSI output of {prettycode} not messing with {pkgdown} (<a href="https://github.com/r-lib/styler/issues/956" class="external-link">#956</a>, <a href="https://github.com/r-lib/styler/issues/957" class="external-link">#957</a>).</li>
+</ul><p><strong>Performance and code quality improvements</strong></p>
+<ul><li>use integer literals and avoid coercions where needed (<a href="https://github.com/r-lib/styler/issues/994" class="external-link">#994</a>).</li>
+<li>don’t preserve names for <code><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist()</a></code> (<a href="https://github.com/r-lib/styler/issues/998" class="external-link">#998</a>).</li>
+<li>remove unused variables (<a href="https://github.com/r-lib/styler/issues/999" class="external-link">#999</a>).</li>
+<li>get rid of lints with performance implications (<a href="https://github.com/r-lib/styler/issues/1000" class="external-link">#1000</a>).</li>
+<li>use more efficient match() alternative (<a href="https://github.com/r-lib/styler/issues/1001" class="external-link">#1001</a>).</li>
+<li>don’t use <code>nrow</code> arg in <code>new_tibble()</code> calls (<a href="https://github.com/r-lib/styler/issues/1003" class="external-link">#1003</a>).</li>
+<li>performance improvements with <code>if()</code> + <code>else()</code> instead of <code><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse()</a></code> (<a href="https://github.com/r-lib/styler/issues/1006" class="external-link">#1006</a>).</li>
+<li>replace tibbles with data frames to improve performance (<a href="https://github.com/r-lib/styler/issues/1007" class="external-link">#1007</a>).</li>
+<li>simplify <code>styler_df()</code> signature (<a href="https://github.com/r-lib/styler/issues/1009" class="external-link">#1009</a>).</li>
+<li>minor cleanup (<a href="https://github.com/r-lib/styler/issues/1016" class="external-link">#1016</a>).</li>
+<li>non-exported and unused functions <code>odd()</code> and <code>even()</code> were removed (<a href="https://github.com/r-lib/styler/issues/989" class="external-link">#989</a>).</li>
+<li>all (R)md files in this project’s source code are now formatted with default pandoc markdown formatter. This conversion is required when using the visual mode in RStudio (<a href="https://github.com/r-lib/styler/issues/941" class="external-link">#941</a>).</li>
+<li>improved code quality by fixing {lintr} warnings (<a href="https://github.com/r-lib/styler/issues/960" class="external-link">#960</a>, <a href="https://github.com/r-lib/styler/issues/1028" class="external-link">#1028</a>).</li>
+</ul><p><strong>Dependency related changes</strong></p>
+<p>In total, 8 recursive dependencies are removed: {ellipsis}, {pillar}, {rematch2}, {tibble}, {utf8}, {fansi}, {lifecycle}, {pkgconfig}.</p>
+<ul><li>don’t import entire tibble package (<a href="https://github.com/r-lib/styler/issues/1007" class="external-link">#1007</a>).</li>
+<li>drop {rematch2} dependency (<a href="https://github.com/r-lib/styler/issues/1011" class="external-link">#1011</a>).</li>
+</ul><p><strong>Infrastructure</strong></p>
+<ul><li>upgrade testing infra to testthat 3e (<a href="https://github.com/r-lib/styler/issues/949" class="external-link">#949</a>).</li>
+<li>run tests in parallel (<a href="https://github.com/r-lib/styler/issues/978" class="external-link">#978</a>).</li>
+<li>run some tests sequentially (<a href="https://github.com/r-lib/styler/issues/1031" class="external-link">#1031</a>)</li>
+<li>better stack tracing for profiling (<a href="https://github.com/r-lib/styler/issues/979" class="external-link">#979</a>, <a href="https://github.com/r-lib/styler/issues/980" class="external-link">#980</a>).</li>
+<li>add flags to skip code coverage for zzz.R (<a href="https://github.com/r-lib/styler/issues/1005" class="external-link">#1005</a>).</li>
+<li>error now on R CMD note (<a href="https://github.com/r-lib/styler/issues/987" class="external-link">#987</a>).</li>
+<li>test on latest Ubuntu instead of Ubuntu 18.04 (<a href="https://github.com/r-lib/styler/issues/982" class="external-link">#982</a>).</li>
+<li>use latest GitHub Actions for R (<a href="https://github.com/r-lib/styler/issues/1034" class="external-link">#1034</a>).</li>
+<li>update {pkgdown} action to always build, but only deploy on default branch (<a href="https://github.com/r-lib/styler/issues/946" class="external-link">#946</a>).</li>
+<li>remove pre-commit push hook for news entry (<a href="https://github.com/r-lib/styler/issues/1023" class="external-link">#1023</a>).</li>
+</ul><p>A big hand to everyone who made this release possible:</p>
+<p><a href="https://github.com/behrman" class="external-link">@behrman</a>, <a href="https://github.com/EngineerDanny" class="external-link">@EngineerDanny</a>, <a href="https://github.com/gavinsimpson" class="external-link">@gavinsimpson</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/jabenninghoff" class="external-link">@jabenninghoff</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/moodymudskipper" class="external-link">@moodymudskipper</a>, <a href="https://github.com/RaymondBalise" class="external-link">@RaymondBalise</a>, <a href="https://github.com/Robinlovelace" class="external-link">@Robinlovelace</a>, <a href="https://github.com/sebffischer" class="external-link">@sebffischer</a>, <a href="https://github.com/sgorm123" class="external-link">@sgorm123</a>, <a href="https://github.com/stefanoborini" class="external-link">@stefanoborini</a>, and <a href="https://github.com/wdkrnls" class="external-link">@wdkrnls</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.7.0" id="styler-170">styler 1.7.0<a class="anchor" aria-label="anchor" href="#styler-170"></a></h2><p class="text-muted">CRAN release: 2022-03-13</p>
+<ul><li>if <code>else</code> follows directly after <code>if</code>, line breaks are removed (<a href="https://github.com/r-lib/styler/issues/935" class="external-link">#935</a>).</li>
+</ul><p><strong>API changes</strong></p>
+<ul><li><p>new R option <code>styler.cache_root</code> (defaulting to <code>"styler"</code>) that determines the sub-directory under the {R.cache} cache directory that {styler} uses. Non- default caches won’t be cleaned up by {styler}. We suggest <code>"styler-perm"</code> (also used by {precommit}).</p></li>
+<li>
+<p>stylerignore markers are now interpreted as regular expressions instead of comments that must match exactly. This allows to specify multiple markers in one regular expression for <code>styler.ignore_start</code> and <code>styler.ignore_stop</code>, e.g. to use markers for lintr and styler on the same line, you can use <code>options(styler.ignore_start = "nolint start|styler: off"</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># nolint start, styler: off</span></span>
+<span><span class="fl">1</span> <span class="op">+</span><span class="fl">1</span></span>
+<span><span class="co"># nolint end</span></span>
+<span><span class="co"># styler: on</span></span></code></pre></div>
+<p>As a consequence of this approach, the defaults for <code>styler.ignore_start</code> and <code>styler.ignore_stop</code> omit the <code>#</code> (<a href="https://github.com/r-lib/styler/issues/849" class="external-link">#849</a>).</p>
+</li>
+</ul><p><strong>Features</strong></p>
+<ul><li>{styler} can be ran via GitHub Actions using <code>usethis::use_github_action("style")</code> (<a href="https://github.com/r-lib/styler/issues/914" class="external-link">#914</a>).</li>
+<li>added guarantee that styled code is parsable (<a href="https://github.com/r-lib/styler/issues/892" class="external-link">#892</a>).</li>
+<li>Developers can now create style guides with indention characters other than spaces (<a href="https://github.com/r-lib/styler/issues/916" class="external-link">#916</a>).</li>
+</ul><p><strong>Documentation</strong></p>
+<ul><li>Add vignette on distributing style guide (<a href="https://github.com/r-lib/styler/issues/846" class="external-link">#846</a>, <a href="https://github.com/r-lib/styler/issues/861" class="external-link">#861</a>).</li>
+<li>Fix argument name <code>filetype</code> in Example for <code><a href="../reference/style_dir.html">style_dir()</a></code> (<a href="https://github.com/r-lib/styler/issues/855" class="external-link">#855</a>).</li>
+</ul><p><strong>Bug fixes</strong></p>
+<ul><li>Piped function without brackets <code>substitute(x %&gt;% y)</code> don’t get <code>()</code> added anymore for one level deep (not more yet, see <a href="https://github.com/r-lib/styler/issues/889" class="external-link">#889</a>), as this can change outcome of the code (<a href="https://github.com/r-lib/styler/issues/876" class="external-link">#876</a>).</li>
+<li>
+<code>.onLoad()</code> method no longer broken with {cli} &gt;= 3.1 (<a href="https://github.com/r-lib/styler/issues/893" class="external-link">#893</a>).</li>
+<li>Function calls containing <code>+</code> should no longer give any error on styling when there are comments and line breaks under certain circumstances (<a href="https://github.com/r-lib/styler/issues/905" class="external-link">#905</a>).</li>
+<li>rules that add tokens don’t break stylerignore sequences anymore (<a href="https://github.com/r-lib/styler/issues/891" class="external-link">#891</a>).</li>
+<li>Alignment detection respects stylerignore (<a href="https://github.com/r-lib/styler/issues/850" class="external-link">#850</a>).</li>
+<li>Unaligned expressions with quoted key (e.g. <code>c("x" = 2)</code>) are now correctly detected (<a href="https://github.com/r-lib/styler/issues/881" class="external-link">#881</a>).</li>
+<li>
+<code>~</code> causes now indention, like <code>+</code>, <code>-</code>, <code>|</code> etc. (<a href="https://github.com/r-lib/styler/issues/902" class="external-link">#902</a>).</li>
+<li>
+<code>Warning: Unknown or uninitialised column:</code> was fixed (<a href="https://github.com/r-lib/styler/issues/885" class="external-link">#885</a>).</li>
+<li>function calls with unequal number of token on different lines are no longer deemed aligned if there are arbitrary spaces around the tokens on the lines with most tokens (<a href="https://github.com/r-lib/styler/issues/902" class="external-link">#902</a>).</li>
+<li>if a line starts with <code>EQ_SUB</code> (<code>=</code>), the corresponding key is moved to that line too (<a href="https://github.com/r-lib/styler/issues/923" class="external-link">#923</a>).</li>
+<li>ensure a trailing blank line also if the input is cached (<a href="https://github.com/r-lib/styler/issues/867" class="external-link">#867</a>).</li>
+<li>Preserve trailing blank line in roxygen examples to simplify concatenation of examples (<a href="https://github.com/r-lib/styler/issues/880" class="external-link">#880</a>).</li>
+<li>
+<code>indenty_by</code> is now also respected when curly braces are added to an if statement by {styler} (<a href="https://github.com/r-lib/styler/issues/915" class="external-link">#915</a>).</li>
+<li>An error is now thrown on styling if input unicode characters can’t be correctly parsed for Windows and R &lt; 4.2 (<a href="https://github.com/r-lib/styler/issues/883" class="external-link">#883</a>).</li>
+<li>styling of text does not error anymore when the R option <code>OutDec</code> is set to a non-default value (<a href="https://github.com/r-lib/styler/issues/912" class="external-link">#912</a>).</li>
+</ul><p><strong>Infrastructure</strong></p>
+<ul><li>Remove dependency on {xfun} (<a href="https://github.com/r-lib/styler/issues/866" class="external-link">#866</a>).</li>
+<li>Remove {glue} dependency that was only used by {touchstone} script and is declared as a dependency already in the respective action (<a href="https://github.com/r-lib/styler/issues/910" class="external-link">#910</a>).</li>
+<li>Bump minimal R requirement to 3.4 in line with the <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/" class="external-link">tidyverse</a>, which allowed to remove the dependency at {backports} and some exception handling.</li>
+<li>rename default branch to main (<a href="https://github.com/r-lib/styler/issues/859" class="external-link">#859</a>).</li>
+<li>the built package size has been reduced by ~50% by listing <code>*-in_tree</code> files in <code>.Rbuildignore</code> (<a href="https://github.com/r-lib/styler/issues/879" class="external-link">#879</a>).</li>
+<li>Enable pre-commit.ci (<a href="https://github.com/r-lib/styler/issues/843" class="external-link">#843</a>).</li>
+<li>use pre-commit via GitHub Actions (<a href="https://github.com/r-lib/styler/issues/872" class="external-link">#872</a>).</li>
+<li>terminate running jobs on new push to save resources (<a href="https://github.com/r-lib/styler/issues/888" class="external-link">#888</a>).</li>
+<li>Use the {touchstone} GitHub Action instead of the literal script (<a href="https://github.com/r-lib/styler/issues/889" class="external-link">#889</a>).</li>
+<li>upgrade R CMD check Github Actions to use <code>v2</code>.</li>
+<li>{styler} test are relaxed to not assume a specific error message on the wrong usage of <code>_</code> (<a href="https://github.com/r-lib/styler/issues/929" class="external-link">#929</a>).</li>
+</ul><p>Thanks to all contributors that made this release possible:</p>
+<p><a href="https://github.com/bersbersbers" class="external-link">@bersbersbers</a>, <a href="https://github.com/daniel-wrench" class="external-link">@daniel-wrench</a>, <a href="https://github.com/dbykova" class="external-link">@dbykova</a>, <a href="https://github.com/EngrStudent" class="external-link">@EngrStudent</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/jam1015" class="external-link">@jam1015</a>, <a href="https://github.com/jooyoungseo" class="external-link">@jooyoungseo</a>, <a href="https://github.com/kalaschnik" class="external-link">@kalaschnik</a>, <a href="https://github.com/kaytif" class="external-link">@kaytif</a>, <a href="https://github.com/kpagacz" class="external-link">@kpagacz</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lionel-" class="external-link">@lionel-</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/maelle" class="external-link">@maelle</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/mine-cetinkaya-rundel" class="external-link">@mine-cetinkaya-rundel</a>, <a href="https://github.com/neuwirthe" class="external-link">@neuwirthe</a>, <a href="https://github.com/Polkas" class="external-link">@Polkas</a>, <a href="https://github.com/pwang2" class="external-link">@pwang2</a>, <a href="https://github.com/sebffischer" class="external-link">@sebffischer</a>, <a href="https://github.com/ShixiangWang" class="external-link">@ShixiangWang</a>, <a href="https://github.com/ssh352" class="external-link">@ssh352</a>, and <a href="https://github.com/xjtusjtu" class="external-link">@xjtusjtu</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.6.2" id="styler-162">styler 1.6.2<a class="anchor" aria-label="anchor" href="#styler-162"></a></h2><p class="text-muted">CRAN release: 2021-09-23</p>
+<ul><li>clean up cache files older than one week (<a href="https://github.com/r-lib/styler/issues/842" class="external-link">#842</a>).</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.6.1" id="styler-161">styler 1.6.1<a class="anchor" aria-label="anchor" href="#styler-161"></a></h2><p class="text-muted">CRAN release: 2021-09-17</p>
+<ul><li><p>Files with <code>.Rmarkdown</code> extension are now recognized as an R markdown files in <code><a href="../reference/style_file.html">style_file()</a></code> and friends (<a href="https://github.com/r-lib/styler/issues/824" class="external-link">#824</a>).</p></li>
+<li><p>Don’t break line before comments in pipes (<a href="https://github.com/r-lib/styler/issues/822" class="external-link">#822</a>).</p></li>
+<li><p>Ordinary comments (starting with <code>#</code>) that break a roxygen code example block (starting with <code>#'</code>) are now recognized and preserved (<a href="https://github.com/r-lib/styler/issues/830" class="external-link">#830</a>).</p></li>
+<li><p><code>@examplesIf</code> conditions longer than one line after styling throw an error for compatibility with {roxygen2} (<a href="https://github.com/r-lib/styler/issues/833" class="external-link">#833</a>).</p></li>
+<li><p>R Markdown chunk headers are no longer required to be parsable R code (<a href="https://github.com/r-lib/styler/issues/832" class="external-link">#832</a>).</p></li>
+<li><p>Break the line between <code>%&gt;%</code> and <code>{</code> inside and outside function calls (<a href="https://github.com/r-lib/styler/issues/825" class="external-link">#825</a>).</p></li>
+<li><p>Add language server to third-party integration vignette (<a href="https://github.com/r-lib/styler/issues/835" class="external-link">#835</a>).</p></li>
+<li><p>improved test setup with fixtures and similar (<a href="https://github.com/r-lib/styler/issues/798" class="external-link">#798</a>).</p></li>
+</ul><p>We’d like to thank all people who helped making this release possible:</p>
+<p><a href="https://github.com/bersbersbers" class="external-link">@bersbersbers</a>, <a href="https://github.com/eutwt" class="external-link">@eutwt</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/j-mammen" class="external-link">@j-mammen</a>, <a href="https://github.com/jennybc" class="external-link">@jennybc</a>, <a href="https://github.com/JohannesNE" class="external-link">@JohannesNE</a>, <a href="https://github.com/jonkeane" class="external-link">@jonkeane</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, and <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.5.1" id="styler-151">styler 1.5.1<a class="anchor" aria-label="anchor" href="#styler-151"></a></h2><p class="text-muted">CRAN release: 2021-07-13</p>
+<div class="section level3">
+<h3 id="alignment-detection-1-5-1">Alignment detection<a class="anchor" aria-label="anchor" href="#alignment-detection-1-5-1"></a></h3>
+<ul><li>
+<p>Code with left alignment after <code>=</code> in function calls is now recognized as aligned and won’t be reformatted (<a href="https://github.com/r-lib/styler/issues/774" class="external-link">#774</a>, <a href="https://github.com/r-lib/styler/issues/777" class="external-link">#777</a>).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># already detected previously</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">call</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="at">y2 =</span>    <span class="dv">17</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># newly detected</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">call</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="at">y2 =</span> <span class="dv">17</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>)</span></code></pre></div>
+</li>
+<li>
+<p>Similarly, left aligned after comma is now detected (<a href="https://github.com/r-lib/styler/issues/785" class="external-link">#785</a>, <a href="https://github.com/r-lib/styler/issues/786" class="external-link">#786</a>).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># previously detected</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">call</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">x  =</span> <span class="dv">12345</span>, <span class="st">"It's old"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="at">y2 =</span> <span class="dv">17</span>,      <span class="st">"before"</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  <span class="sc">~</span>x,             <span class="sc">~</span>y,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="st">"another"</span>,     <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  <span class="st">"b"</span>,       <span class="dv">1211234</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># newly detected</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="fu">call</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">2</span>,           <span class="at">p =</span> <span class="st">"another"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"hhjkjkbew"</span>, <span class="at">x =</span> <span class="dv">3</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>)</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>  <span class="sc">~</span>x,        <span class="sc">~</span>y,</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>  <span class="st">"another"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>  <span class="st">"b"</span>,       <span class="dv">1211234</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>)</span></code></pre></div>
+<p>Also see <code><a href="../articles/detect-alignment.html">vignette("detect-alignment")</a></code>.</p>
+</li>
+</ul></div>
+<div class="section level3">
+<h3 id="other-new-features-1-5-1">Other new features<a class="anchor" aria-label="anchor" href="#other-new-features-1-5-1"></a></h3>
+<ul><li>The base R pipe as introduced in R 4.1.0 is now styled the same way the magrittr pipe is (<a href="https://github.com/r-lib/styler/issues/803" class="external-link">#803</a>).</li>
+<li>code chunks with explicit <code>tidy = FALSE</code> in an Rmd or Rnw code header are not styled anymore. This can be handy when the code can’t be parsed, e.g. within a learnr tutorial (<a href="https://github.com/r-lib/styler/issues/790" class="external-link">#790</a>).</li>
+<li>
+<code>#&gt;</code> is recognized as an output marker and no space is added after <code>#</code> (<a href="https://github.com/r-lib/styler/issues/771" class="external-link">#771</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-and-fixes-1-5-1">Minor changes and fixes<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-1-5-1"></a></h3>
+<ul><li>No curly braces are added to else statements if they are within a pipe, as this can change evaluation logic of code involving the magrittr dot in rare cases (<a href="https://github.com/r-lib/styler/issues/816" class="external-link">#816</a>).</li>
+<li>Line breaks between <code>}</code> and <code>else</code> are removed (<a href="https://github.com/r-lib/styler/issues/793" class="external-link">#793</a>).</li>
+<li>In function calls, code after <code>= #\n</code> is indented correctly (<a href="https://github.com/r-lib/styler/issues/814" class="external-link">#814</a>).</li>
+<li>Multi-expressions containing multiple assignments no longer remove line breaks if they are not causing blank lines (<a href="https://github.com/r-lib/styler/issues/809" class="external-link">#809</a>).</li>
+<li>
+<code>exclude_dirs</code> in <code><a href="../reference/style_pkg.html">style_pkg()</a></code> is now properly respected if it is a sub-directory of a directory that is scheduled for styling (e.g. <code>test/testthat/some/dir</code>) (<a href="https://github.com/r-lib/styler/issues/811" class="external-link">#811</a>).</li>
+<li>The user is not prompted anymore to confirm the creation of a permanent cache as R.cache &gt;= 0.15.0 uses a standard location in line with CRAN policies (<a href="https://github.com/r-lib/styler/issues/819" class="external-link">#819</a>).</li>
+<li>R code chunks in nested non-R chunks in R markdown don’t yield an error anymore when document is styled, chunks are still not styled (<a href="https://github.com/r-lib/styler/issues/788" class="external-link">#788</a>, <a href="https://github.com/r-lib/styler/issues/794" class="external-link">#794</a>).</li>
+<li>
+<code><a href="../reference/cache_activate.html">cache_activate()</a></code> and <code><a href="../reference/cache_activate.html">cache_deactivate()</a></code> now respect the R option <code>styler.quiet</code> (<a href="https://github.com/r-lib/styler/issues/797" class="external-link">#797</a>).</li>
+<li>
+<code>multi_line</code> attribute in parse table is now integer, not boolean (<a href="https://github.com/r-lib/styler/issues/782" class="external-link">#782</a>).</li>
+<li>The style guide used in Addin is verified when set via R option (<a href="https://github.com/r-lib/styler/issues/789" class="external-link">#789</a>).</li>
+<li>Improve pkgdown author URLs (<a href="https://github.com/r-lib/styler/issues/775" class="external-link">#775</a>).</li>
+<li>Upgrade touchstone infra (<a href="https://github.com/r-lib/styler/issues/799" class="external-link">#799</a>, <a href="https://github.com/r-lib/styler/issues/805" class="external-link">#805</a>).</li>
+<li>Don’t test on R 3.3 anymore as tidyverse <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/" class="external-link">supports only four previous releases</a> (<a href="https://github.com/r-lib/styler/issues/804" class="external-link">#804</a>).</li>
+<li>Update Github Actions workflow (<a href="https://github.com/r-lib/styler/issues/810" class="external-link">#810</a>).</li>
+</ul><p>We’d like to thank everyone who has furthered the development of the latest release of styler through their contributions in issues and pull requests:</p>
+<p><a href="https://github.com/ardydavari" class="external-link">@ardydavari</a>, <a href="https://github.com/gadenbuie" class="external-link">@gadenbuie</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/jasonhan-vassar" class="external-link">@jasonhan-vassar</a>, <a href="https://github.com/laresbernardo" class="external-link">@laresbernardo</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/Moohan" class="external-link">@Moohan</a>, <a href="https://github.com/njtierney" class="external-link">@njtierney</a>, <a href="https://github.com/pat-s" class="external-link">@pat-s</a>, <a href="https://github.com/psychelzh" class="external-link">@psychelzh</a>, <a href="https://github.com/pvalders" class="external-link">@pvalders</a>, <a href="https://github.com/RoyalTS" class="external-link">@RoyalTS</a>, and <a href="https://github.com/russHyde" class="external-link">@russHyde</a>.</p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.4.1" id="styler-141">styler 1.4.1<a class="anchor" aria-label="anchor" href="#styler-141"></a></h2><p class="text-muted">CRAN release: 2021-03-30</p>
+<ul><li>fix interaction between cache and <code>base_indention</code>. This also fixes the Addin for styling a selection with base indention repeatedly (<a href="https://github.com/r-lib/styler/issues/764" class="external-link">#764</a>).</li>
+<li>add more examples to <code>styler_*</code> helpfiles (<a href="https://github.com/r-lib/styler/issues/762" class="external-link">#762</a>).</li>
+<li>hexadecimal integers now preserve the trailing <code>L</code> when styled (<a href="https://github.com/r-lib/styler/issues/761" class="external-link">#761</a>).</li>
+<li>add a pre-push hook to make sure news bullets are added to each PR (<a href="https://github.com/r-lib/styler/issues/765" class="external-link">#765</a>).</li>
+</ul><p>Thanks to everyone who contributed to this release:</p>
+<p><a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, and <a href="https://github.com/renkun-ken" class="external-link">@renkun-ken</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.4.0" id="styler-140">styler 1.4.0<a class="anchor" aria-label="anchor" href="#styler-140"></a></h2><p class="text-muted">CRAN release: 2021-03-22</p>
+<div class="section level3">
+<h3 id="api-changes-1-4-0">API Changes<a class="anchor" aria-label="anchor" href="#api-changes-1-4-0"></a></h3>
+<p><strong>new</strong></p>
+<ul><li><p><code><a href="../reference/style_file.html">style_file()</a></code> and friends gain argument <code>dry</code> to control if changes should be applied to files or not (<a href="https://github.com/r-lib/styler/issues/634" class="external-link">#634</a>).</p></li>
+<li><p><code><a href="../reference/style_file.html">style_file()</a></code> and friends gain argument <code>base_indention</code> (defaulting to 0) to control by how much the output code is indented (<a href="https://github.com/r-lib/styler/issues/649" class="external-link">#649</a>, <a href="https://github.com/r-lib/styler/issues/692" class="external-link">#692</a>). The Addin for styling a selection picks that up, e.g. you can style a function body and indention is preserved (<a href="https://github.com/r-lib/styler/issues/725" class="external-link">#725</a>).</p></li>
+<li><p>added an option for disabling all communication when using the package (<code>styler.quiet</code>) (<a href="https://github.com/r-lib/styler/issues/640" class="external-link">#640</a>).</p></li>
+<li><p><code>scope</code> in <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> can now be specified with higher granularity through <code><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I()</a></code>, e.g. <code>I(c('spaces', 'tokens'))</code> allows us to style spaces and tokens without styling line breaks and indention. Previously, only a string was allowed and all less invasive scopes were included, e.g. if you wanted to style tokens, you had to always also style spaces, indention, line breaks as well (<a href="https://github.com/r-lib/styler/issues/705" class="external-link">#705</a>, <a href="https://github.com/r-lib/styler/issues/707" class="external-link">#707</a>).</p></li>
+<li><p>added an option (<code>styler.test_dir_writeable</code>) that changes test behavior to not directly modify test files in the current directory (<a href="https://github.com/r-lib/styler/issues/548" class="external-link">#548</a>).</p></li>
+<li><p>New argument <code>transformers_drop</code> in <code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> to be populated with new helper function <code><a href="../reference/specify_transformers_drop.html">specify_transformers_drop()</a></code> for specifying conditions under which transformers are not going to be used and can therefore be omitted without effecting the result of styling (<a href="https://github.com/r-lib/styler/issues/711" class="external-link">#711</a>).</p></li>
+</ul><p><strong>deprecated</strong></p>
+<ul><li>The environment variable <code>save_after_styling</code> is deprecated in favor of the R option <code>styler.save_after_styling</code> to control if a file is saved after styling with the RStudio Addin. Note than in RStudio &gt;= 1.3.0, you can auto-save edits in general (Code -&gt; Saving -&gt; Auto-Save), e.g. on idle editor or focus loss, so this feature becomes less relevant (<a href="https://github.com/r-lib/styler/issues/631" class="external-link">#631</a>, <a href="https://github.com/r-lib/styler/issues/726" class="external-link">#726</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="major-changes-1-4-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-1-4-0"></a></h3>
+<ul><li><p>styler is now distributed under the MIT license (<a href="https://github.com/r-lib/styler/issues/751" class="external-link">#751</a>).</p></li>
+<li><p>Documentation overhaul: New README, new “Get started” pkgdown page, new vignettes on <code>strict = FALSE</code>, <code>Adoption</code> renamed to <code>Third-party   integrations</code> (<a href="https://github.com/r-lib/styler/issues/741" class="external-link">#741</a>), adding search to pkgdown (<a href="https://github.com/r-lib/styler/issues/623" class="external-link">#623</a>), group functions in pkgdown reference page (<a href="https://github.com/r-lib/styler/issues/625" class="external-link">#625</a>), minor other doc improvements (<a href="https://github.com/r-lib/styler/issues/643" class="external-link">#643</a>, <a href="https://github.com/r-lib/styler/issues/618" class="external-link">#618</a>, <a href="https://github.com/r-lib/styler/issues/614" class="external-link">#614</a>, <a href="https://github.com/r-lib/styler/issues/677" class="external-link">#677</a>, <a href="https://github.com/r-lib/styler/issues/651" class="external-link">#651</a>, <a href="https://github.com/r-lib/styler/issues/667" class="external-link">#667</a>, <a href="https://github.com/r-lib/styler/issues/672" class="external-link">#672</a>, <a href="https://github.com/r-lib/styler/issues/687" class="external-link">#687</a>, <a href="https://github.com/r-lib/styler/issues/752" class="external-link">#752</a>, <a href="https://github.com/r-lib/styler/issues/754" class="external-link">#754</a>).</p></li>
+<li><p><code>@exampleIsf</code> roxygen tag for conditional examples is now supported (<a href="https://github.com/r-lib/styler/issues/743" class="external-link">#743</a>).</p></li>
+<li><p>blank lines in function calls and headers are now removed, for the former only when there are no comments before or after the blank line (<a href="https://github.com/r-lib/styler/issues/629" class="external-link">#629</a>, <a href="https://github.com/r-lib/styler/issues/630" class="external-link">#630</a>, <a href="https://github.com/r-lib/styler/issues/635" class="external-link">#635</a>, <a href="https://github.com/r-lib/styler/issues/723" class="external-link">#723</a>).</p></li>
+<li><p>speed improvements: 15% faster on new code, 70% on repeated styling of compliant code (The latter is not so relevant because it was almost instantaneous already). Most relevant contributions were <a href="https://github.com/r-lib/styler/issues/679" class="external-link">#679</a>, <a href="https://github.com/r-lib/styler/issues/691" class="external-link">#691</a>, <a href="https://github.com/r-lib/styler/issues/681" class="external-link">#681</a>, <a href="https://github.com/r-lib/styler/issues/711" class="external-link">#711</a>, <a href="https://github.com/r-lib/styler/issues/739" class="external-link">#739</a>.</p></li>
+<li><p><code>#&lt;&lt;</code> is now recognized as the xaringan marker and no space is added after<code>#</code> (<a href="https://github.com/r-lib/styler/issues/700" class="external-link">#700</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-and-fixes-1-4-0">Minor changes and fixes<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-1-4-0"></a></h3>
+<ul><li><p><code><a href="../reference/style_dir.html">style_dir()</a></code> and <code><a href="../reference/style_pkg.html">style_pkg()</a></code> now apply directory exclusion recursively with <code>exclude_dirs</code> (<a href="https://github.com/r-lib/styler/issues/676" class="external-link">#676</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/switch.html" class="external-link">switch()</a></code> now has line breaks after every argument to match the tidyverse style guide (<a href="https://github.com/r-lib/styler/issues/722" class="external-link">#722</a>, <a href="https://github.com/r-lib/styler/issues/727" class="external-link">#727</a>).</p></li>
+<li><p>unary <code>+</code> before a function call does not give an error anymore, as before version 1.3.0 (<a href="https://github.com/r-lib/styler/issues/697" class="external-link">#697</a>).</p></li>
+<li><p>certain combinations of <code>stylerignore</code> markers and cached expressions now don’t give an error anymore (<a href="https://github.com/r-lib/styler/issues/738" class="external-link">#738</a>).</p></li>
+<li><p>cache is now correctly invalidated when style guide arguments change (<a href="https://github.com/r-lib/styler/issues/647" class="external-link">#647</a>).</p></li>
+<li><p>empty lines are now removed between pipes and assignments (<a href="https://github.com/r-lib/styler/issues/645" class="external-link">#645</a>, <a href="https://github.com/r-lib/styler/issues/710" class="external-link">#710</a>).</p></li>
+<li><p>multiple <code>@examples</code> roxygen tags in a code block of <code>#'</code> are no longer squashed (<a href="https://github.com/r-lib/styler/issues/748" class="external-link">#748</a>).</p></li>
+<li><p>roxygen code examples starting on the same line as the <code>@examples</code> tag are no longer moved to the next line (<a href="https://github.com/r-lib/styler/issues/748" class="external-link">#748</a>).</p></li>
+<li><p>always strip trailing spaces and make cache insensitive to it (<a href="https://github.com/r-lib/styler/issues/626" class="external-link">#626</a>).</p></li>
+<li><p><code><a href="../reference/style_text.html">style_text()</a></code> can now style all input that <code><a href="https://rdrr.io/r/base/character.html" class="external-link">is.character()</a></code>, not just if it inherits from classes <code>character</code>, <code>utf8</code> or <code>vertical</code> (<a href="https://github.com/r-lib/styler/issues/693" class="external-link">#693</a>).</p></li>
+<li><p>logical operators within square braces are now moved from the start of a line to the end of the previous line (<a href="https://github.com/r-lib/styler/issues/709" class="external-link">#709</a>).</p></li>
+<li><p>spaces are now removed before <code>[</code> and <code>[[</code> (<a href="https://github.com/r-lib/styler/issues/713" class="external-link">#713</a>).</p></li>
+<li><p>The internal <code><a href="../reference/create_tree.html">create_tree()</a></code> only used in testing of styler now works when the cache is activated (<a href="https://github.com/r-lib/styler/issues/688" class="external-link">#688</a>).</p></li>
+<li><p>simplification of internals (<a href="https://github.com/r-lib/styler/issues/692" class="external-link">#692</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="infrastructure-changes-1-4-0">Infrastructure changes<a class="anchor" aria-label="anchor" href="#infrastructure-changes-1-4-0"></a></h3>
+<ul><li><p>switched from travis and AppVeyor to GitHub Actions (<a href="https://github.com/r-lib/styler/issues/653" class="external-link">#653</a>, <a href="https://github.com/r-lib/styler/issues/660" class="external-link">#660</a>).</p></li>
+<li><p>Added basic continuous benchmarking with <a href="https://github.com/lorenzwalthert/touchstone" class="external-link">lorenzwalthert/touchstone</a> (<a href="https://github.com/r-lib/styler/issues/674" class="external-link">#674</a>, <a href="https://github.com/r-lib/styler/issues/684" class="external-link">#684</a>, <a href="https://github.com/r-lib/styler/issues/698" class="external-link">#698</a>).</p></li>
+<li><p>include <code>test-*</code> files in styling pre-commit hook (<a href="https://github.com/r-lib/styler/issues/724" class="external-link">#724</a>).</p></li>
+</ul><p>Thanks to all the people who made this release possible:</p>
+<p><a href="https://github.com/assignUser" class="external-link">@assignUser</a>, <a href="https://github.com/ColmanHumphrey" class="external-link">@ColmanHumphrey</a>, <a href="https://github.com/davidchall" class="external-link">@davidchall</a>, <a href="https://github.com/espinielli" class="external-link">@espinielli</a>, <a href="https://github.com/giko45" class="external-link">@giko45</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/intiben" class="external-link">@intiben</a>, <a href="https://github.com/jamespeapen" class="external-link">@jamespeapen</a>, <a href="https://github.com/jthomasmock" class="external-link">@jthomasmock</a>, <a href="https://github.com/Kalaschnik" class="external-link">@Kalaschnik</a>, <a href="https://github.com/kevinushey" class="external-link">@kevinushey</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lcolladotor" class="external-link">@lcolladotor</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/michaelquinn32" class="external-link">@michaelquinn32</a>, <a href="https://github.com/mine-cetinkaya-rundel" class="external-link">@mine-cetinkaya-rundel</a>, <a href="https://github.com/pat-s" class="external-link">@pat-s</a>, <a href="https://github.com/PMassicotte" class="external-link">@PMassicotte</a>, <a href="https://github.com/QuLogic" class="external-link">@QuLogic</a>, <a href="https://github.com/renkun-ken" class="external-link">@renkun-ken</a>, <a href="https://github.com/RichardJActon" class="external-link">@RichardJActon</a>, <a href="https://github.com/seed-of-apricot" class="external-link">@seed-of-apricot</a>, <a href="https://github.com/select-id-from-users" class="external-link">@select-id-from-users</a>, <a href="https://github.com/SimonDedman" class="external-link">@SimonDedman</a>, <a href="https://github.com/stefanoborini" class="external-link">@stefanoborini</a>, <a href="https://github.com/swsoyee" class="external-link">@swsoyee</a>, and <a href="https://github.com/Winterstorm-j" class="external-link">@Winterstorm-j</a>.</p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.2" id="styler-132">styler 1.3.2<a class="anchor" aria-label="anchor" href="#styler-132"></a></h2><p class="text-muted">CRAN release: 2020-02-23</p>
+<p>Release upon request by the CRAN team.</p>
+<div class="section level3">
+<h3 id="minor-changes-and-fixes-1-3-2">Minor changes and fixes<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-1-3-2"></a></h3>
+<ul><li>Add search and reference sections to pkgdown webpage (<a href="https://github.com/r-lib/styler/issues/623" class="external-link">#623</a>, <a href="https://github.com/r-lib/styler/issues/625" class="external-link">#625</a>).</li>
+<li>various fixes to handle special cases for caching and stylerignore and their interaction (<a href="https://github.com/r-lib/styler/issues/611" class="external-link">#611</a>, <a href="https://github.com/r-lib/styler/issues/610" class="external-link">#610</a>, <a href="https://github.com/r-lib/styler/issues/609" class="external-link">#609</a>, <a href="https://github.com/r-lib/styler/issues/607" class="external-link">#607</a>, <a href="https://github.com/r-lib/styler/issues/602" class="external-link">#602</a>, <a href="https://github.com/r-lib/styler/issues/600" class="external-link">#600</a>).</li>
+<li>also test on macOS (<a href="https://github.com/r-lib/styler/issues/604" class="external-link">#604</a>).</li>
+<li>skip timing tests on CRAN as requested by CRAN team because they did not pass on all machines (<a href="https://github.com/r-lib/styler/issues/603" class="external-link">#603</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.1" id="styler-131">styler 1.3.1<a class="anchor" aria-label="anchor" href="#styler-131"></a></h2><p class="text-muted">CRAN release: 2020-02-13</p>
+<p>Emergency release. In case multiple expressions are on one line and only some of them are cached, styler can remove code. To reach this state, some of the expressions must have been styled previously alone and the cache must be active. Example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(styler)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">cache_activate</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; Using cache 1.3.0 at ~/.Rcache/styler/1.3.0.</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">style_text</span>(<span class="st">"1"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="fu">style_text</span>(<span class="st">"1 # comment"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; # comment</span></span></code></pre></div>
+<p>This is obviously detrimental. We have added additional tests and fixed the problem (<a href="https://github.com/r-lib/styler/issues/593" class="external-link">#593</a>, <a href="https://github.com/r-lib/styler/issues/595" class="external-link">#595</a>), but we want repeat the warning from <code><a href="../reference/style_file.html">?style_file</a></code> that all style APIs apart from <code><a href="../reference/style_text.html">style_text()</a></code> overwrite code and that styler can only check the AST remains valid with <code>scope &lt; "tokens"</code>. So use this if you are conservative. Or deactivate the cache with <code>deactivate_cache()</code> until it has fully matured.</p>
+<p>We thank the people who have contributed to this release:</p>
+<p><a href="https://github.com/ellessenne" class="external-link">@ellessenne</a> and <a href="https://github.com/renkun-ken" class="external-link">@renkun-ken</a>.</p>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.0" id="styler-130">styler 1.3.0<a class="anchor" aria-label="anchor" href="#styler-130"></a></h2><p class="text-muted">CRAN release: 2020-02-10</p>
+<div class="section level3">
+<h3 id="breaking-changes-1-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-3-0"></a></h3>
+<ul><li><p><code><a href="../reference/style_pkg.html">style_pkg()</a></code> and <code><a href="../reference/style_dir.html">style_dir()</a></code> gain a new argument <code>exclude_dirs</code> to exclude directories from styling, by default <code>renv</code> and <code>packrat</code>. Note that the defaults won’t change the behavior of <code><a href="../reference/style_pkg.html">style_pkg()</a></code> because it does anyways does not style these directories and they were set for consistency.</p></li>
+<li><p><code><a href="../reference/style_file.html">style_file()</a></code> and friends now strip <code>./</code> in file paths returned invisibly, i.e. <code>./script.R</code> becomes <code>script.R</code> (<a href="https://github.com/r-lib/styler/issues/568" class="external-link">#568</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-1-3-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-3-0"></a></h3>
+<ul><li><p>ignore certain lines using <code># styler: off</code> and <code>#styler: on</code> or custom markers, see <code><a href="../reference/stylerignore.html">?stylerignore</a></code> (<a href="https://github.com/r-lib/styler/issues/560" class="external-link">#560</a>).</p></li>
+<li><p>styler caches results of styling, so applying styler to code it has styled before will be instantaneous. This brings large speed boosts in many situations, e.g. when <code><a href="../reference/style_pkg.html">style_pkg()</a></code> is run but only a few files have changed since the last styling or when using the <a href="https://github.com/lorenzwalthert/precommit" class="external-link">styler pre-commit hook</a>. Because styler caches by expression, you will also get speed boosts in large files with many expressions when you only change a few of them. See <code><a href="../reference/caching.html">?caching</a></code> for details (<a href="https://github.com/r-lib/styler/issues/538" class="external-link">#538</a>, <a href="https://github.com/r-lib/styler/issues/578" class="external-link">#578</a>).</p></li>
+<li><p><code><a href="../reference/create_style_guide.html">create_style_guide()</a></code> gains two arguments <code>style_guide_name</code> and <code>style_guide_version</code> that are carried as meta data, in particular to version third-party style guides and ensure the proper functioning of caching. This change is completely invisible to users who don’t create and distribute their own style guide like <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> (<a href="https://github.com/r-lib/styler/issues/572" class="external-link">#572</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-and-fixes-1-3-0">Minor changes and fixes<a class="anchor" aria-label="anchor" href="#minor-changes-and-fixes-1-3-0"></a></h3>
+<ul><li><p>lines are now broken after <code>+</code> in <code>ggplot2</code> calls for <code>strict = TRUE</code> (<a href="https://github.com/r-lib/styler/issues/569" class="external-link">#569</a>).</p></li>
+<li><p>function documentation now contains many more line breaks due to roxygen2 update to version 7.0.1 (<a href="https://github.com/r-lib/styler/issues/566" class="external-link">#566</a>).</p></li>
+<li><p>spaces next to the braces in subsetting expressions <code>[</code> and <code>[[</code> are now removed (<a href="https://github.com/r-lib/styler/issues/580" class="external-link">#580</a>).</p></li>
+<li><p>Adapt to changes in the R parser to make styler pass R CMD check again. (<a href="https://github.com/r-lib/styler/issues/583" class="external-link">#583</a>).</p></li>
+</ul><p>Thanks to all contributors involved, in particular <a href="https://github.com/colearendt" class="external-link">@colearendt</a>, <a href="https://github.com/davidski" class="external-link">@davidski</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/pat-s" class="external-link">@pat-s</a>, and <a href="https://github.com" class="external-link">@programming-wizard</a>.</p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0" id="styler-120">styler 1.2.0<a class="anchor" aria-label="anchor" href="#styler-120"></a></h2><p class="text-muted">CRAN release: 2019-10-17</p>
+<div class="section level3">
+<h3 id="breaking-changes-1-2-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-2-0"></a></h3>
+<ul><li><p><code><a href="../reference/style_file.html">style_file()</a></code> now correctly styles multiple files from different directories. We no longer display the file name of the styled file, but the absolute path. This is also reflected in the invisible return value of the function (<a href="https://github.com/r-lib/styler/issues/522" class="external-link">#522</a>).</p></li>
+<li><p><code><a href="../reference/style_file.html">style_file()</a></code> and friends do not write content back to a file when styling does not cause any changes in the file. This means the modification date of styled files is only changed when the content is changed (<a href="https://github.com/r-lib/styler/issues/532" class="external-link">#532</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-1-2-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-2-0"></a></h3>
+<ul><li><p>Aligned function calls are detected and remain unchanged if they match the styler <a href="https://styler.r-lib.org/articles/detect-alignment.html">definition for aligned function calls</a> (<a href="https://github.com/r-lib/styler/issues/537" class="external-link">#537</a>).</p></li>
+<li><p>curly-curly (<code>{{</code>) syntactic sugar introduced with rlang 0.4.0 is now explicitly handled, where previously it was just treated as two consecutive curly braces (<a href="https://github.com/r-lib/styler/issues/528" class="external-link">#528</a>).</p></li>
+<li><p><code><a href="../reference/style_pkg.html">style_pkg()</a></code>, <code><a href="../reference/style_dir.html">style_dir()</a></code> and the Addins can now style <code>.Rprofile</code>, and hidden files are now also styled (<a href="https://github.com/r-lib/styler/issues/530" class="external-link">#530</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-improvements-and-fixes-1-2-0">Minor improvements and fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-fixes-1-2-0"></a></h3>
+<ul><li><p>Roxygen code examples: leverage <code>roxygen2</code> for correct escaping of expressions that contain <code>\</code>, in particular in <code>dontrun{}</code> and friends, allow quoted braces that are not matched (<a href="https://github.com/r-lib/styler/issues/729" class="external-link">#729</a>).</p></li>
+<li><p>Brace expressions in function calls are formatted in a less compact way to improve readability. Typical use case: <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch()</a></code> (<a href="https://github.com/r-lib/styler/issues/543" class="external-link">#543</a>).</p></li>
+<li><p>Arguments in function declarations in a context which is indented multiple times should now be correct. This typically affects <code><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6Class()</a></code> (<a href="https://github.com/r-lib/styler/issues/546" class="external-link">#546</a>).</p></li>
+<li><p>Escape characters in roxygen code examples are now correctly escaped (<a href="https://github.com/r-lib/styler/issues/512" class="external-link">#512</a>).</p></li>
+<li><p>Special characters such as <code>\n</code> in strings are now preserved in text and not turned into literal values like a line break (<a href="https://github.com/r-lib/styler/issues/554" class="external-link">#554</a>).</p></li>
+<li><p>Style selection Addin now preserves line break when the last line selected is an entire line (<a href="https://github.com/r-lib/styler/issues/520" class="external-link">#520</a>).</p></li>
+<li><p>Style file Addin can now properly handle cancelling (<a href="https://github.com/r-lib/styler/issues/511" class="external-link">#511</a>).</p></li>
+<li><p>The body of a multi-line function declaration is now indented correctly for <code>strict = FALSE</code> and also wrapped in curly braces for <code>strict = TRUE</code> (<a href="https://github.com/r-lib/styler/issues/536" class="external-link">#536</a>).</p></li>
+<li><p>Advice for contributors in <code>CONTRIBUTING.md</code> was updated (<a href="https://github.com/r-lib/styler/issues/508" class="external-link">#508</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="adaption-1-2-0">Adaption<a class="anchor" aria-label="anchor" href="#adaption-1-2-0"></a></h3>
+<ul><li>styler is now available through the pre-commit hook <code>style-files</code> in <a href="https://github.com/lorenzwalthert/precommit" class="external-link uri">https://github.com/lorenzwalthert/precommit</a>.</li>
+</ul><p>Thanks to all contributors involved, in particular</p>
+<p><a href="https://github.com/Banana1530" class="external-link">@Banana1530</a>, <a href="https://github.com/batpigandme" class="external-link">@batpigandme</a>, <a href="https://github.com/cpsievert" class="external-link">@cpsievert</a>, <a href="https://github.com/ellessenne" class="external-link">@ellessenne</a>, <a href="https://github.com/Emiller88" class="external-link">@Emiller88</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/lwjohnst86" class="external-link">@lwjohnst86</a>, <a href="https://github.com/michaelquinn32" class="external-link">@michaelquinn32</a>, <a href="https://github.com/mine-cetinkaya-rundel" class="external-link">@mine-cetinkaya-rundel</a>, <a href="https://github.com/Moohan" class="external-link">@Moohan</a>, <a href="https://github.com/nxskok" class="external-link">@nxskok</a>, <a href="https://github.com/oliverbeagley" class="external-link">@oliverbeagley</a>, <a href="https://github.com/pat-s" class="external-link">@pat-s</a>, <a href="https://github.com/reddy-ia" class="external-link">@reddy-ia</a>, and <a href="https://github.com/russHyde" class="external-link">@russHyde</a></p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.1" id="styler-111">styler 1.1.1<a class="anchor" aria-label="anchor" href="#styler-111"></a></h2><p class="text-muted">CRAN release: 2019-05-06</p>
+<p>This is primarily a maintenance release upon the request of the CRAN team (<a href="https://github.com/r-lib/styler/issues/490" class="external-link">#490</a>).</p>
+<div class="section level3">
+<h3 id="major-changes-1-1-1">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-1-1-1"></a></h3>
+<ul><li><p>Users can now control style configurations for styler Addins (<a href="https://github.com/r-lib/styler/issues/463" class="external-link">#463</a>, <a href="https://github.com/r-lib/styler/issues/500" class="external-link">#500</a>), using the <code>Set style</code> Addin. See <code><a href="../reference/styler_addins.html">?styler::styler_addins</a></code> for details.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/function.html" class="external-link">return()</a></code> is now always put in braces and put on a new line when used in a conditional statement (<a href="https://github.com/r-lib/styler/issues/492" class="external-link">#492</a>).</p></li>
+<li><p><code>%&gt;%</code> almost always causes a line break now for <code>strict = TRUE</code> (<a href="https://github.com/r-lib/styler/issues/503" class="external-link">#503</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-1-1-1">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-1-1"></a></h3>
+<ul><li><p><code><a href="../reference/style_pkg.html">style_pkg()</a></code> now also styles the “demo” directory by default (<a href="https://github.com/r-lib/styler/issues/453" class="external-link">#453</a>).</p></li>
+<li><p>multi-line strings are now styled more consistently (<a href="https://github.com/r-lib/styler/issues/459" class="external-link">#459</a>).</p></li>
+<li><p>indention in roxygen code example styling (<a href="https://github.com/r-lib/styler/issues/455" class="external-link">#455</a>) and EOF spacing (<a href="https://github.com/r-lib/styler/issues/469" class="external-link">#469</a>) was fixed.</p></li>
+<li><p>indention for for loop edge case (<a href="https://github.com/r-lib/styler/issues/457" class="external-link">#457</a>) and comments in pipe chain (<a href="https://github.com/r-lib/styler/issues/482" class="external-link">#482</a>) were fixed.</p></li>
+<li><p>line-break styling around comma is improved (<a href="https://github.com/r-lib/styler/issues/479" class="external-link">#479</a>).</p></li>
+<li><p>bug that can cause an error when the variable <code>text</code> in any name space before styler on the search path was defined and did not have length 1 is fixed (<a href="https://github.com/r-lib/styler/issues/484" class="external-link">#484</a>).</p></li>
+<li><p>slightly confusing warning about empty strings caused with roxygen code examples and Rmd was removed.</p></li>
+<li><p>right apostrophe to let package pass R CMD Check in strict Latin-1 locale was removed (<a href="https://github.com/r-lib/styler/issues/490" class="external-link">#490</a>, reason for release).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="adaption-of-styler-1-1-1">Adaption of styler<a class="anchor" aria-label="anchor" href="#adaption-of-styler-1-1-1"></a></h3>
+<p>Since it’s never been mentioned in the release notes, we also mention here where else you can use styler functionality:</p>
+<ul><li><p><code>usethis::use_tidy_style()</code> styles your project according to the tidyverse style guide.</p></li>
+<li><p><code>reprex::reprex(style = TRUE)</code> to prettify reprex code before printing. To permanently use <code>style = TRUE</code> without specifying it every time, you can add the following line to your <code>.Rprofile</code> (via <code>usethis::edit_r_profile()</code>): <code>options(reprex.styler = TRUE)</code>.</p></li>
+<li><p>you can pretty-print your R code in RMarkdown reports without having styler modifying the source. This feature is implemented as a code chunk option in knitr. use <code>tidy = "styler"</code> in the header of a code chunks (e.g. <code>```{r   name-of-the-chunk, tidy = "styler"}</code>), or <code>knitr::opts_chunk$set(tidy =   "styler")</code> at the top of your RMarkdown script.</p></li>
+<li><p>pretty-printing of <a href="https://github.com/ropensci/drake" class="external-link">drake</a> workflow data frames with <code>drake::drake_plan_source()</code>.</p></li>
+<li><p>Adding styler as a fixer to the <a href="https://github.com/dense-analysis/ale/pull/2401" class="external-link">ale Plug-in</a> for VIM.</p></li>
+</ul><p>Thanks to all contributors involved, in particular <a href="https://github.com/ArthurPERE" class="external-link">@ArthurPERE</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>, <a href="https://github.com/igordot" class="external-link">@igordot</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/jackwasey" class="external-link">@jackwasey</a>, <a href="https://github.com/jcrodriguez1989" class="external-link">@jcrodriguez1989</a>, <a href="https://github.com/jennybc" class="external-link">@jennybc</a>, <a href="https://github.com/jonmcalder" class="external-link">@jonmcalder</a>, <a href="https://github.com/katrinleinweber" class="external-link">@katrinleinweber</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/lorenzwalthert" class="external-link">@lorenzwalthert</a>, <a href="https://github.com/michaelquinn32" class="external-link">@michaelquinn32</a>, <a href="https://github.com/msberends" class="external-link">@msberends</a>, <a href="https://github.com/raynamharris" class="external-link">@raynamharris</a>, <a href="https://github.com/riccardoporreca" class="external-link">@riccardoporreca</a>, <a href="https://github.com/rjake" class="external-link">@rjake</a>, <a href="https://github.com/Robinlovelace" class="external-link">@Robinlovelace</a>, <a href="https://github.com/skirmer" class="external-link">@skirmer</a>, <a href="https://github.com/thalesmello" class="external-link">@thalesmello</a>, <a href="https://github.com/tobiasgerstenberg" class="external-link">@tobiasgerstenberg</a>, <a href="https://github.com/tvatter" class="external-link">@tvatter</a>, <a href="https://github.com/wdearden" class="external-link">@wdearden</a>, <a href="https://github.com/wmayner" class="external-link">@wmayner</a>, and <a href="https://github.com/yech1990" class="external-link">@yech1990</a>.</p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="styler-110">styler 1.1.0<a class="anchor" aria-label="anchor" href="#styler-110"></a></h2><p class="text-muted">CRAN release: 2018-11-20</p>
+<p>This release introduces new features and is fully backward-compatible. It also adapts to changes in the R parser committed into R devel (<a href="https://github.com/r-lib/styler/issues/419" class="external-link">#419</a>).</p>
+<div class="section level3">
+<h3 id="major-changes-1-1-0">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-1-1-0"></a></h3>
+<ul><li><p>styler can now style roxygen code examples in the source code of package (<a href="https://github.com/r-lib/styler/issues/332" class="external-link">#332</a>) as well as Rnw files (<a href="https://github.com/r-lib/styler/issues/431" class="external-link">#431</a>).</p></li>
+<li><p>the print method for the output of <code><a href="../reference/style_text.html">style_text()</a></code> (<code><a href="../reference/print.vertical.html">print.vertical()</a></code>) now returns syntax-highlighted code by default, controllable via the option <code>styler.colored_print.vertical</code> (<a href="https://github.com/r-lib/styler/issues/417" class="external-link">#417</a>).</p></li>
+<li><p>the README was redesigned (<a href="https://github.com/r-lib/styler/issues/413" class="external-link">#413</a>).</p></li>
+<li><p>semi-colon expression that contained multiple assignments was fixed (<a href="https://github.com/r-lib/styler/issues/404" class="external-link">#404</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-1-1-0">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-1-0"></a></h3>
+<ul><li><p>cursor position is remembered for styling via Addin (<a href="https://github.com/r-lib/styler/issues/416" class="external-link">#416</a>).</p></li>
+<li><p>adapt spacing around tilde for multi-token expressions(<a href="https://github.com/r-lib/styler/issues/424" class="external-link">#424</a>) and brace edge case (<a href="https://github.com/r-lib/styler/issues/425" class="external-link">#425</a>).</p></li>
+<li><p>only add brackets to piped function call if RHS is a symbol (<a href="https://github.com/r-lib/styler/issues/422" class="external-link">#422</a>).</p></li>
+<li><p>increase coverage again to over 90% (<a href="https://github.com/r-lib/styler/issues/412" class="external-link">#412</a>).</p></li>
+<li><p>move rule that turns single quotes into double quotes to token modifier in `tidyverse_style_guide() (<a href="https://github.com/r-lib/styler/issues/406" class="external-link">#406</a>).</p></li>
+<li><p>remove line-breaks before commas (<a href="https://github.com/r-lib/styler/issues/405" class="external-link">#405</a>).</p></li>
+<li><p>removed package dependency enc in favor of xfun (<a href="https://github.com/r-lib/styler/issues/442" class="external-link">#442</a>).</p></li>
+</ul><p>Thanks to all contributors for patches, issues and the like: <a href="https://github.com/jonmcalder" class="external-link">@jonmcalder</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/IndrajeetPatil" class="external-link">@IndrajeetPatil</a>, <a href="https://github.com/kalibera" class="external-link">@kalibera</a>, <a href="https://github.com/Hasnep" class="external-link">@Hasnep</a>, <a href="https://github.com/kiranmaiganji" class="external-link">@kiranmaiganji</a>, <a href="https://github.com/dirkschumacher" class="external-link">@dirkschumacher</a>, <a href="https://github.com/ClaytonJY" class="external-link">@ClaytonJY</a>, <a href="https://github.com/wlandau" class="external-link">@wlandau</a>, <a href="https://github.com/maurolepore" class="external-link">@maurolepore</a></p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.2" id="styler-102">styler 1.0.2<a class="anchor" aria-label="anchor" href="#styler-102"></a></h2><p class="text-muted">CRAN release: 2018-06-26</p>
+<p>This is a maintenance release without any breaking API changes.</p>
+<div class="section level3">
+<h3 id="major-changes-1-0-2">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-1-0-2"></a></h3>
+<ul><li><p>Fixed indention for named multi-line function calls (<a href="https://github.com/r-lib/styler/issues/372" class="external-link">#372</a>).</p></li>
+<li><p>Non-R code chunks in <code>.Rmd</code> files are now respected and won’t get styled (<a href="https://github.com/r-lib/styler/issues/386" class="external-link">#386</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-1-0-2">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-0-2"></a></h3>
+<ul><li><p>Fixing an edge case in which, if very long strings were present in the code, tokens could be replaced with wrong text (<a href="https://github.com/r-lib/styler/issues/384" class="external-link">#384</a>).</p></li>
+<li><p>Spacing around tilde in formulas depends now on whether there is a LHS in the formula (<a href="https://github.com/r-lib/styler/issues/379" class="external-link">#379</a>).</p></li>
+<li><p>Spaces are now also added around <code>EQ_SUB</code> (<code>=</code>) (<a href="https://github.com/r-lib/styler/issues/380" class="external-link">#380</a>).</p></li>
+<li><p>Added <code>CONTRIBUTING.md</code> to outline guidelines for contributing to styler.</p></li>
+<li><p>More informative error messages for parsing problems (<a href="https://github.com/r-lib/styler/issues/401" class="external-link">#401</a>, <a href="https://github.com/r-lib/styler/issues/400" class="external-link">#400</a>).</p></li>
+<li><p>Improved documentation (<a href="https://github.com/r-lib/styler/issues/387" class="external-link">#387</a>).</p></li>
+</ul><p>Thanks to all contributors for patches, issues and the like: <a href="https://github.com/katrinleinweber" class="external-link">@katrinleinweber</a>, <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/dchiu911" class="external-link">@dchiu911</a>, <a href="https://github.com/ramnathv" class="external-link">@ramnathv</a>, <a href="https://github.com/aedobbyn" class="external-link">@aedobbyn</a>, <a href="https://github.com/Bio7" class="external-link">@Bio7</a>, <a href="https://github.com/tonytonov" class="external-link">@tonytonov</a>, <a href="https://github.com/samhinshaw" class="external-link">@samhinshaw</a>, <a href="https://github.com/fny" class="external-link">@fny</a>, <a href="https://github.com/vnijs" class="external-link">@vnijs</a>, <a href="https://github.com/martin-mfg" class="external-link">@martin-mfg</a>, <a href="https://github.com/NGaffney" class="external-link">@NGaffney</a>, <a href="https://github.com/dchiu911" class="external-link">@dchiu911</a>.</p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.1" id="styler-101">styler 1.0.1<a class="anchor" aria-label="anchor" href="#styler-101"></a></h2><p class="text-muted">CRAN release: 2018-03-08</p>
+<p>This is a maintenance release without any breaking API changes.</p>
+<div class="section level3">
+<h3 id="major--dependency-related-changes-1-0-1">Major &amp; dependency related changes<a class="anchor" aria-label="anchor" href="#major--dependency-related-changes-1-0-1"></a></h3>
+<ul><li><p>Removed implicit <code>dplyr</code> dependency via <code>purrr:::map_dfr()</code> (thanks <a href="https://github.com/jimhester" class="external-link">@jimhester</a>, <a href="https://github.com/r-lib/styler/issues/324" class="external-link">#324</a>).</p></li>
+<li><p>Added required minimal version dependency for purr (<code>&gt;= 0.2.3</code>) (<a href="https://github.com/r-lib/styler/issues/338" class="external-link">#338</a>).</p></li>
+<li><p>We rely on the tibble package which was optimized for speed in <code>v1.4.2</code> so styler should run ~2x as fast <a href="https://github.com/tidyverse/tibble/pull/348" class="external-link">(</a><a href="https://github.com/r-lib/styler/issues/348" class="external-link">#348</a>). For that reason, styler now depends on <code>tibble &gt;= 1.4.2</code>.</p></li>
+<li><p>In the dependency <code>enc</code>, a bug was fixed that removed/changed non-ASCII characters. Hence, styler now depends on <code>enc &gt;= 0.2</code> (<a href="https://github.com/r-lib/styler/issues/348" class="external-link">#348</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-1-0-1">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-0-1"></a></h3>
+<ul><li><p>We’re now recognizing and respecting more DSLs used in R comments: rplumber (<code>#*</code>, <a href="https://github.com/r-lib/styler/issues/306" class="external-link">#306</a>), shebang <code>#/!</code> (<a href="https://github.com/r-lib/styler/issues/345" class="external-link">#345</a>), knitr chunk headers for spinning (<code>#+</code> / <code>#-</code>, <a href="https://github.com/r-lib/styler/issues/362" class="external-link">#362</a>).</p></li>
+<li><p>Named arguments can stay on the first line if call is multi-line (<a href="https://github.com/r-lib/styler/issues/318" class="external-link">#318</a>).</p></li>
+<li><p>No space anymore with <code><a href="../reference/tidyverse_style.html">tidyverse_style()</a></code> after <code>!!</code> since with <code>rlang 0.2</code>, <code>!!</code> now binds tighter (<a href="https://github.com/r-lib/styler/issues/322" class="external-link">#322</a>), spacing around <code>~</code> (<a href="https://github.com/r-lib/styler/issues/316" class="external-link">#316</a>), no space anymore around <code>^</code> (<a href="https://github.com/r-lib/styler/issues/308" class="external-link">#308</a>).</p></li>
+<li><p>Code chunks in Rmd documents that don’t use the R engine are no longer formatted (<a href="https://github.com/r-lib/styler/issues/313" class="external-link">#313</a>).</p></li>
+<li><p>Various bug fixes and edge case improvements.</p></li>
+</ul><p>Thanks to all contributors for patches, issues and the like: <a href="https://github.com/devSJR" class="external-link">@devSJR</a>, <a href="https://github.com/klrmlr" class="external-link">@klrmlr</a>, <a href="https://github.com/yutannihilation" class="external-link">@yutannihilation</a>, <a href="https://github.com/samhinshaw" class="external-link">@samhinshaw</a>, <a href="https://github.com/martin-mfg" class="external-link">@martin-mfg</a>, <a href="https://github.com/jjramsey" class="external-link">@jjramsey</a>, <a href="https://github.com/RMHogervorst" class="external-link">@RMHogervorst</a>, <a href="https://github.com/wlandau" class="external-link">@wlandau</a>, <a href="https://github.com/llrs" class="external-link">@llrs</a>, <a href="https://github.com/aaronrudkin" class="external-link">@aaronrudkin</a>, <a href="https://github.com/crew102" class="external-link">@crew102</a>, <a href="https://github.com/jkgrain" class="external-link">@jkgrain</a>, <a href="https://github.com/jennybc" class="external-link">@jennybc</a>, <a href="https://github.com/joranE" class="external-link">@joranE</a>.</p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.0" id="styler-100">styler 1.0.0<a class="anchor" aria-label="anchor" href="#styler-100"></a></h2><p class="text-muted">CRAN release: 2017-12-11</p>
+<p>Initial release.</p>
+<div class="section level3">
+<h3 id="stylers-1-0-0">stylers<a class="anchor" aria-label="anchor" href="#stylers-1-0-0"></a></h3>
+<p>These are functions used to style code. They style a directory, a whole package, a file or a string.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">style_dir</span>(<span class="at">path =</span> <span class="st">"."</span>, </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...), </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">filetype =</span> <span class="st">"R"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">exclude_files =</span> <span class="cn">NULL</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">style_pkg</span>(<span class="at">pkg =</span> <span class="st">"."</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...), <span class="at">filetype =</span> <span class="st">"R"</span>, </span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  <span class="at">exclude_files =</span> <span class="st">"R/RcppExports.R"</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="fu">style_file</span>(path, </span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>  ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...)</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>)</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="fu">style_text</span>(text, ..., <span class="at">style =</span> tidyverse_style, <span class="at">transformers =</span> <span class="fu">style</span>(...))</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="style-guides-1-0-0">style guides<a class="anchor" aria-label="anchor" href="#style-guides-1-0-0"></a></h3>
+<p>These functions are the style guides implemented.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">tidyverse_style</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="at">scope =</span> <span class="st">"tokens"</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="at">strict =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="at">indent_by =</span> <span class="dv">2</span>, </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="at">start_comments_with_one_space =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="at">reindention =</span> <span class="fu">tidyverse_reindention</span>(), </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="at">math_token_spacing =</span> <span class="fu">tidyverse_math_token_spacing</span>()</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="fu">tidyverse_reindention</span>()</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="fu">tidyverse_math_token_spacing</span>()<span class="er">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="style-guide-creators-1-0-0">style guide creators<a class="anchor" aria-label="anchor" href="#style-guide-creators-1-0-0"></a></h3>
+<p>This function is used to create a style guide.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">create_style_guide</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">initialize =</span> default_style_guide_attributes, </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="at">line_break =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="at">space =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="at">token =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="at">indention =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="at">use_raw_indention =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>  <span class="at">reindention =</span> <span class="fu">tidyverse_reindention</span>()</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="helpers-1-0-0">Helpers<a class="anchor" aria-label="anchor" href="#helpers-1-0-0"></a></h3>
+<p>These are helper functions used to specify the style guides in use.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">specify_math_token_spacing</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="at">zero =</span> <span class="cn">NULL</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="at">one =</span> <span class="fu">c</span>(<span class="st">"'+'"</span>, <span class="st">"'-'"</span>, <span class="st">"'*'"</span>, <span class="st">"'/'"</span>, <span class="st">"'^'"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">specify_reindention</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="at">regex_pattern =</span> <span class="cn">NULL</span>, </span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  <span class="at">indention =</span> <span class="dv">0</span>, </span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  <span class="at">comments_only =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">initialize_default_attributes</span>(pd_flat)</span></code></pre></div>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
