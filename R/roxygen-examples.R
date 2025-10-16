@@ -46,8 +46,7 @@ style_roxygen_code_example_one <- function(example_one,
       }
     )
   }
-  unmasked %>%
-    add_roxygen_mask(example_one, bare$example_type)
+  add_roxygen_mask(unmasked, example_one, bare$example_type)
 }
 
 #' Style a roxygen code example segment
@@ -118,8 +117,9 @@ style_roxygen_example_snippet <- function(code_snippet,
     )
   )
   if (!is_cached || !cache_is_active) {
-    code_snippet <- code_snippet %>%
+    code_snippet <-
       parse_transform_serialize_r(
+        code_snippet,
         transformers,
         base_indention = base_indention,
         warn_empty = FALSE,

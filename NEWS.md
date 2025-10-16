@@ -1,3 +1,125 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# styler 1.11.0
+
+This release fixes a bug related that prevented {styler} to format code with 
+comments in curly-curly expressions `{{` (#1269).
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil) is now a package 
+author. Thanks for your many contributions.
+
+**New features**
+
+- Add support for {webr} code chunks in Rmd/qmd documents (#1229).
+- Add colored output to R API (#1187).
+
+**Major changes**
+
+- Ensure {styler} can format code with comment in curly-curly (#1269).
+- Adapt to single indent semantics in style guide (#1235).
+- Remove excessive line breaks between top-level expressions (#1239).
+- Remove blank lines after opening and before closing braces (#1995).
+- Empty curly have no spaces around (#1234).
+- Remove spaces around dollar operator (#1246).
+- Improve stack trace styler throws on parse error (#1216).
+- Use Bootstrap 5 template for pkgdown website (#1209).
+- Complete third-party style guide documentation (#1201).
+- Document package options (#1193).
+- Bump minimum needed R version to 4.0 (#1197).
+
+**Minor changes**
+
+- Ensure formatted token is a call before forcing line breaks (#1254).
+- Fix lints (#1260), update `.lintr` file.
+- Use `all_linters()` instead of using tags (#1207).
+- Fix `paste_linter()` lints (#1204).
+- Turn off `strings_as_factors_linter()` (#1217).
+- Update precommit config (#1205).
+- Remove unused `extend_if_comment()` internal (#1250).
+- Remove unused internal utility: `calls_sys()` (#1213).
+- Remove unused testing helper: `generate_test_samples()` (#1212).
+- Improve a few function names (#1249).
+- Use `expect_no_warning()` (#1248).
+- Update WORDLIST (#1240, #1210).
+- Check for warnings in examples and tests (#1219).
+- Use stable version of {purrr} (#1215).
+- Don't store code tree structures in tests (#1208).
+- Update touchstone config (#1203).
+- Add non-US locale and use pak to upgrade packages in GHA (#1200).
+- Welcome Indrajeet as author (#1198).
+
+Thanks for everyone who contributed to this release:
+[&#x0040;armenic](https://github.com/armenic), 
+[&#x0040;bernt-matthias](https://github.com/bernt-matthias), 
+[&#x0040;cicdguy](https://github.com/cicdguy), 
+[&#x0040;elgabbas](https://github.com/elgabbas), 
+[&#x0040;fh-mthomson](https://github.com/fh-mthomson), 
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
+[&#x0040;kevinushey](https://github.com/kevinushey),
+[&#x0040;kongdd](https://github.com/kongdd), 
+[&#x0040;krlmlr](https://github.com/krlmlr), 
+[&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), 
+[&#x0040;maikol-solis](https://github.com/maikol-solis), 
+[&#x0040;MichaelChirico](https://github.com/MichaelChirico), 
+[&#x0040;nickhir](https://github.com/nickhir), 
+[&#x0040;obsaditelnost](https://github.com/obsaditelnost), 
+[&#x0040;olivroy](https://github.com/olivroy), 
+[&#x0040;rinkjames](https://github.com/rinkjames), 
+[&#x0040;SamGG](https://github.com/SamGG), 
+[&#x0040;stibu81](https://github.com/stibu81), 
+[&#x0040;strengejacke](https://github.com/strengejacke), 
+[&#x0040;wiper8](https://github.com/wiper8), and
+[&#x0040;wurli](https://github.com/wurli).
+
+# styler 1.10.3
+
+This release was requested by the CRAN team since parser error messages changed, 
+which were hard-coded in some unit tests (#1180).
+
+**Minor changes**
+
+- Add a package sticker (#1172, #1173).
+- Improve error message for scope (#1176).
+- Update lintr config and address newly found lints (#1158).
+- Fix new lints about implicit return (#1166).
+- Clean new lints (#1149).
+- Clean up unnecessary YAML front matter in README (#1165).
+
+**CI**
+
+- Update pre-commit and GitHub Actions (#1177, #1175, #1171, #1171, #1164, #1152, #1148).
+- Delete URL check workflow (#1160).
+
+**Testing**
+
+- Suppress warning in io tests (#1169).
+- Ensure unit tests check for appropriate error messages in the R parser for 
+  R > 4.3 (#1180).
+- Remove outdated test about repeated parsing (#1163).
+- Update roxygen test comments (#1162).
+- Delete unused snapshot (#1159).
+
+We thank everyone who helped making this release possible.
+
+[&#x0040;AshesITR](https://github.com/AshesITR), [&#x0040;averissimo](https://github.com/averissimo),  [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;mcanouil](https://github.com/mcanouil), [&#x0040;moodymudskipper](https://github.com/moodymudskipper), [&#x0040;olivroy](https://github.com/olivroy), [&#x0040;sbanville-delfi](https://github.com/sbanville-delfi), [&#x0040;sorhawell](https://github.com/sorhawell), [&#x0040;ssh352](https://github.com/ssh352), [&#x0040;swo](https://github.com/swo), and [&#x0040;vertesy](https://github.com/vertesy).
+
+# styler 1.10.2
+
+This release was requested by the CRAN team to fix CRAN warning on invalid 
+numeric version inputs (#1143).
+
+**Minor changes**
+
+* Use cli messaging for cache (#1127).
+* Use latest (and stable!) pre-commit (#1144).
+* Fix CRAN warning on invalid numeric version inputs (#1143).
+* Bump JamesIves/github-pages-deploy-action from 4.4.2 to 4.4.3 (#1139).
+* fix pre-commit (#1132).
+* Don't require dplyr anywhere (#1131).
+
+We thank everyone who helped making this release possible.
+
+[&#x0040;krlmlr](https://github.com/krlmlr), [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), [&#x0040;MichaelChirico](https://github.com/MichaelChirico), [&#x0040;olivroy](https://github.com/olivroy), [&#x0040;rkrug](https://github.com/rkrug), and [&#x0040;rossdrucker](https://github.com/rossdrucker).
+
 # styler 1.10.1
 
 This release was requested by CRAN due to accidentally populating a user cache while building vignettes for R >= 4.3.0.
@@ -141,7 +263,7 @@ A big shout out to anyone who contributed to this release:
 This release was requested by CRAN to resolve an R CMD Check note (#1044). 
 A big hand to everyone who made this release possible: 
 
-[&#x0040;DaveJarvis](https://github.com/DaveJarvis), 
+Dave Jarvis, 
 [&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil), 
 [&#x0040;lorenzwalthert](https://github.com/lorenzwalthert), 
 [&#x0040;MichaelChirico](https://github.com/MichaelChirico), 

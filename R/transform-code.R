@@ -22,7 +22,7 @@ transform_code <- function(path, fun, ..., dry) {
       ..., dry = dry
     )
   } else {
-    abort(paste(path, "is not an R, Rmd, qmd, or Rnw file"))
+    cli::cli_abort("{.path {path}} is not a qmd, R, Rmd, or Rnw file.")
   }
 }
 
@@ -36,6 +36,9 @@ transform_code <- function(path, fun, ..., dry) {
 #' @inheritParams separate_chunks
 #' @keywords internal
 transform_mixed <- function(lines, transformer_fun, filetype) {
+  if (filetype %in% c("Rnw", "Rmd") && !rlang::is_installed("knitr")) {
+    rlang::abort("{knitr} is required to process vignette files (Rmd, Rnw)")
+  }
   chunks <- separate_chunks(lines, filetype)
   chunks$r_chunks <- map(chunks$r_chunks, transform_mixed_non_empty,
     transformer_fun = transformer_fun
@@ -100,8 +103,9 @@ identify_raw_chunks <- function(lines,
 
   if (filetype == "Rmd") {
     starts <- grep(
-      "^[\t >]*```+\\s*\\{([Rr]( *[ ,].*)?)\\}\\s*$", lines,
-      perl = TRUE
+      "^[\t >]*```+\\s*\\{((r|webr-r|webr)( *[ ,].*)?)\\}\\s*$",
+      lines,
+      perl = TRUE, ignore.case = TRUE
     )
     ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
     ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1L]]) %>%
@@ -167,9 +171,8 @@ get_engine_pattern <- function() {
 #' @inheritParams separate_chunks
 #' @keywords internal
 get_knitr_pattern <- function(filetype) {
-  if (filetype == "Rnw") {
-    knitr::all_patterns[["rnw"]]
-  } else if (filetype == "Rmd") {
-    knitr::all_patterns[["md"]]
-  }
+  switch(filetype,
+    Rnw = knitr::all_patterns[["rnw"]],
+    Rmd = knitr::all_patterns[["md"]]
+  )
 }

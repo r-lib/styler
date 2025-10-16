@@ -61,6 +61,17 @@ find_dont_seqs <- function(bare) {
 find_dont_closings <- function(bare, dont_openings) {
   opening <- cumsum(bare == "{")
   closing <- cumsum(bare == "}")
+  if (sum(closing) == 0L) {
+    rlang::abort(paste0(
+      "Failed to find closing braces for a \\dont* statement in a roxygen ",
+      "code example. This is most likely caused by nested \\donttest, ",
+      "\\dontrun or \\dontshow statement. These are not supported with ",
+      "{styler}, not even when {styler} is turned off for these lines as per ",
+      "the documentation at ",
+      "https://styler.r-lib.org/articles/styler.html#ignoring-certain-lines. ",
+      "See also GitHub issue https://github.com/r-lib/styler/issues/498."
+    ))
+  }
   diff <- opening - closing
   level_dont <- diff[dont_openings]
   match_closing <- intersect(
