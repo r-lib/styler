@@ -93,7 +93,7 @@ NULL
 #' @family cache managers
 #' @export
 cache_info <- function(cache_name = NULL, format = "both") {
-  rlang::arg_match(format, c("tabular", "lucid", "both"))
+  rlang::arg_match0(format, c("tabular", "lucid", "both"))
   path_cache <- cache_find_path(cache_name)
   files <- list.files(path_cache, full.names = TRUE)
   file_info <- file.info(files)
@@ -104,8 +104,7 @@ cache_info <- function(cache_name = NULL, format = "both") {
     last_modified = suppressWarnings(max(file_info$mtime)),
     created = file.info(path_cache)$ctime,
     location = path_cache,
-    activated = cache_is_activated(cache_name),
-    stringsAsFactors = FALSE
+    activated = cache_is_activated(cache_name)
   )
 
   if (any(c("lucid", "both") == format)) {
@@ -138,7 +137,7 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #' @export
 cache_activate <- function(cache_name = NULL,
                            verbose = !getOption("styler.quiet", FALSE)) {
-  options("styler.cache_name" = cache_name %||% styler_version)
+  options(styler.cache_name = cache_name %||% styler_version)
   path <- cache_find_path(cache_name)
 
   if (verbose) {
@@ -155,7 +154,7 @@ cache_activate <- function(cache_name = NULL,
 #' @rdname cache_activate
 #' @export
 cache_deactivate <- function(verbose = !getOption("styler.quiet", FALSE)) {
-  options("styler.cache_name" = NULL)
+  options(styler.cache_name = NULL)
 
   if (verbose) {
     cat("Deactivated cache.\n")

@@ -9,8 +9,9 @@ style_pkg(
   ...,
   style = tidyverse_style,
   transformers = style(...),
-  filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
-  exclude_files = c("R/RcppExports.R", "R/cpp11.R"),
+  filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "qmd"),
+  exclude_files = c("R/RcppExports\\\\.R", "R/cpp11\\\\.R",
+    "R/import-standalone.*\\\\.R"),
   exclude_dirs = c("packrat", "renv"),
   include_roxygen_examples = TRUE,
   base_indention = 0L,
@@ -33,12 +34,13 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
 \item{filetype}{Vector of file extensions indicating which file types should
-be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after standardization) are:
-"r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
-Rmd.}
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R",".Rmd")},
+or \code{c("r", "rmd")}. Supported values (after standardization) are:
+"qmd", "r", "rmd", "rmarkdown", "rnw", and "rprofile".
+Rmarkdown is treated as Rmd.}
 
-\item{exclude_files}{Character vector with paths to files that should be
-excluded from styling.}
+\item{exclude_files}{Character vector with regular expressions to files
+that should be excluded from styling.}
 
 \item{exclude_dirs}{Character vector with directories to exclude
 (recursively). Note that the default values were set for consistency with

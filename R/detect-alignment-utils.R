@@ -32,9 +32,8 @@ alignment_drop_comments <- function(pd_by_line) {
     out <- vec_slice(x, x$token != "COMMENT")
     if (nrow(out) < 1L) {
       return(NULL)
-    } else {
-      out
     }
+    out
   }) %>%
     compact()
 }
@@ -82,22 +81,22 @@ alignment_ensure_trailing_comma <- function(pd_by_line) {
   last_pd$spaces[nrow(last_pd)] <- 0L
   if (last(last_pd$token) == "','") {
     return(pd_by_line)
-  } else {
-    tokens <- create_tokens(
-      tokens = "','",
-      texts = ",",
-      lag_newlines = 0L,
-      spaces = 0L,
-      pos_ids = NA,
-      stylerignore = last_pd$stylerignore[1L],
-      indents = last_pd$indent[1L]
-    )
-    tokens$.lag_spaces <- 0L
-
-    tokens$lag_newlines <- tokens$pos_id <- NULL
-    pd_by_line[[length(pd_by_line)]] <- rbind(last_pd, tokens)
-    pd_by_line
   }
+
+  tokens <- create_tokens(
+    tokens = "','",
+    texts = ",",
+    lag_newlines = 0L,
+    spaces = 0L,
+    pos_ids = NA,
+    stylerignore = last_pd$stylerignore[1L],
+    indents = last_pd$indent[1L]
+  )
+  tokens$.lag_spaces <- 0L
+
+  tokens$lag_newlines <- tokens$pos_id <- NULL
+  pd_by_line[[length(pd_by_line)]] <- rbind(last_pd, tokens)
+  pd_by_line
 }
 
 #' Checks if all arguments of column 1 are named
@@ -154,16 +153,15 @@ alignment_serialize_line <- function(relevant_pd_by_line, column) {
 alignment_serialize <- function(pd_sub) {
   out <- Map(function(terminal, text, child, spaces, newlines) {
     if (terminal) {
-      return(paste0(text, rep_char(" ", spaces)))
+      paste0(text, rep_char(" ", spaces))
     } else {
-      return(paste0(alignment_serialize(child), rep_char(" ", spaces)))
+      paste0(alignment_serialize(child), rep_char(" ", spaces))
     }
   }, pd_sub$terminal, pd_sub$text, pd_sub$child, pd_sub$spaces, pd_sub$newlines)
   if (anyNA(out)) {
     return(NA)
-  } else {
-    paste0(out, collapse = "")
   }
+  paste(out, collapse = "")
 }
 
 #' Check if spacing around comma is correct

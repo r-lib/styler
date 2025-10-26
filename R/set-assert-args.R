@@ -1,19 +1,3 @@
-#' Set the write_tree argument
-#'
-#' Sets the argument `write_tree` in [test_collection()] to be `TRUE` for R
-#' versions higher or equal to 3.2, and `FALSE` otherwise since the second-level
-#' dependency `DiagrammeR` from `data.tree` is not available for R < 3.2.
-#' @param write_tree Whether or not to write tree.
-#' @keywords internal
-set_arg_write_tree <- function(write_tree) {
-  if (is.na(write_tree)) {
-    write_tree <- is_installed("data.tree")
-  } else if (write_tree) {
-    check_installed("data.tree")
-  }
-  write_tree
-}
-
 #' Assert the transformers
 #'
 #' Actually only assert name and version of style guide in order to make sure
@@ -21,7 +5,7 @@ set_arg_write_tree <- function(write_tree) {
 #' @inheritParams make_transformer
 #' @keywords internal
 assert_transformers <- function(transformers) {
-  version_cutoff <- 2.0
+  version_cutoff <- "2.0"
   no_name <- is.null(transformers$style_guide_name)
   no_version <- is.null(transformers$style_guide_version)
   if (no_name || no_version) {
@@ -73,8 +57,8 @@ assert_filetype <- function(lowercase_filetype) {
   allowed_types <- c("r", "rmd", "rmarkdown", "rnw", "rprofile", "qmd")
   if (!all(lowercase_filetype %in% allowed_types)) {
     abort(paste(
-      "filetype must not contain other values than 'R', 'Rprofile',",
-      "'Rmd', 'Rmarkdown', 'qmd' or 'Rnw' (case is ignored)."
+      "filetype must not contain other values than 'qmd', 'R',",
+      "'Rmarkdown', 'Rmd', 'Rnw', or 'Rprofile' (case is ignored)."
     ))
   }
 }

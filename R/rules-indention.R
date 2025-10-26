@@ -15,15 +15,16 @@ indent_braces <- function(pd, indent_by) {
 #'
 #' Necessary for consistent indention of the function declaration header.
 #' @param pd A parse table.
-#' @inheritParams is_double_indent_function_declaration
-#' @seealso set_unindention_child update_indention_ref_fun_dec
+#' @inheritParams is_single_indent_function_declaration
+#' @seealso set_unindention_child update_indention_reference_function_declaration
 #' @keywords internal
-unindent_fun_dec <- function(pd, indent_by = 2L) {
+unindent_function_declaration <- function(pd, indent_by = 2L) {
   if (is_function_declaration(pd)) {
-    idx_closing_brace <- which(pd$token %in% "')'")
+    idx_closing_brace <- which(pd$token == "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
-    if (is_double_indent_function_declaration(pd, indent_by = indent_by)) {
-      pd$indent[fun_dec_head] <- 2L * indent_by
+    if (is_single_indent_function_declaration(pd, indent_by = indent_by)) {
+      pd$indent[fun_dec_head] <- indent_by
+      pd$indent[idx_closing_brace] <- 0L
     } else {
       pd$indent[fun_dec_head] <- 0L
     }
@@ -31,20 +32,21 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
   pd
 }
 
-#' Is the function declaration double indented?
+#' Is the function declaration single indented?
 #'
 #' Assumes you already checked if it's a function with
-#' `is_function_declaration`. It is double indented if the first token
+#' `is_function_declaration`. It is single indented if the first token
 #' after the first line break that is a `"SYMBOL_FORMALS"`.
 #' @param pd A parse table.
 #' @inheritParams tidyverse_style
 #' @keywords internal
-is_double_indent_function_declaration <- function(pd, indent_by = 2L) {
+is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
   head_pd <- vec_slice(pd, -nrow(pd))
   line_break_in_header <- which(head_pd$lag_newlines > 0L & head_pd$token == "SYMBOL_FORMALS")
   if (length(line_break_in_header) > 0L) {
     # indent results from applying the rules, spaces is the initial spaces
     # (which is indention if a newline is ahead)
+    # The 2L factor is kept to convert double indent to single indent
     pd$spaces[line_break_in_header[1L] - 1L] <= 2L * indent_by
   } else {
     FALSE
@@ -131,8 +133,8 @@ NULL
 #' }
 #'
 #' @keywords internal
-update_indention_ref_fun_dec <- function(pd_nested) {
-  if (is_function_declaration(pd_nested) && !is_double_indent_function_declaration(pd_nested)) {
+update_indention_reference_function_declaration <- function(pd_nested) {
+  if (is_function_declaration(pd_nested) && !is_single_indent_function_declaration(pd_nested)) {
     seq <- seq2(3L, nrow(pd_nested) - 2L)
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2L]
   }

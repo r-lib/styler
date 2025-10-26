@@ -5,8 +5,7 @@ call(call(
 call(call(1,
   2))
 # multi-line: no indention based on first vall
-call(a(b(c({
-}))))
+call(a(b(c({}))))
 
 call(call(
   2),
