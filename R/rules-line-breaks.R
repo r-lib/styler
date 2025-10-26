@@ -481,3 +481,48 @@ set_line_breaks_between_top_level_exprs <- function(pd, allowed_blank_lines = 2L
   pd$lag_newlines <- pmin(pd$lag_newlines, allowed_blank_lines + 1L)
   pd
 }
+
+
+set_line_breaks_for_multiline_args <- function(pd) {
+  if (!any(pd$token == "','") || any(pd$text[1L] == "tribble")) {
+    return(pd)
+  }
+
+  has_children <- purrr::some(pd$child, purrr::negate(is.null))
+  if (!has_children || is_function_declaration(pd)) {
+    return(pd)
+  }
+
+  children <- pd$child
+  idx_pre_open_brace <- which(pd$token_after == "'{'")
+  if (length(idx_pre_open_brace)) {
+    children[idx_pre_open_brace + 1L] <- NULL
+  }
+
+  args_multiline <- children %>%
+    purrr::discard(is.null) %>%
+    purrr::map_lgl(~ any(.x$is_multi_line) || sum(.x$newlines, .x$lag_newlines) > 0L)
+
+  if (!any(args_multiline)) {
+    return(pd)
+  }
+
+  idx_paren <- which(pd$token == "'('")[1L]
+  if (!is.na(idx_paren) && idx_paren < nrow(pd)) {
+    pd[idx_paren + 1L, "lag_newlines"] <- 1L
+  }
+
+  idx_comma <- which(pd$token == "','")
+  idx_comma_has_comment <- which(pd$token[idx_comma + 1L] == "COMMENT")
+  for (i in seq_along(idx_comma)) {
+    arg_index <- i + 1L
+    if (arg_index <= length(args_multiline) && args_multiline[arg_index]) {
+      target_row <- idx_comma[i] + if (i %in% idx_comma_has_comment) 2L else 1L
+      if (target_row <= nrow(pd)) {
+        pd[target_row, "lag_newlines"] <- 1L
+      }
+    }
+  }
+
+  pd
+}
