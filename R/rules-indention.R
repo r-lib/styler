@@ -41,16 +41,24 @@ unindent_function_declaration <- function(pd, indent_by = 2L) {
 #' @inheritParams tidyverse_style
 #' @keywords internal
 is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
-  head_pd <- vec_slice(pd, -nrow(pd))
-  line_break_in_header <- which(head_pd$lag_newlines > 0L & head_pd$token == "SYMBOL_FORMALS")
-  if (length(line_break_in_header) > 0L) {
-    # indent results from applying the rules, spaces is the initial spaces
-    # (which is indention if a newline is ahead)
-    # The 2L factor is kept to convert double indent to single indent
-    pd$spaces[line_break_in_header[1L] - 1L] <= 2L * indent_by
-  } else {
-    FALSE
+  idx_paren_open <- which(pd$token == "'('")[1L]
+  idx_paren_close <- which(pd$token == "')'")[1L]
+  if (is.na(idx_paren_open) || is.na(idx_paren_close)) return(FALSE)
+
+  formals <- which(
+    pd$token %in% c("SYMBOL_FORMALS", "SYMBOL_SUB") &
+      seq_len(nrow(pd)) > idx_paren_open &
+      seq_len(nrow(pd)) < idx_paren_close
+  )
+  if (length(formals) == 0L) return(FALSE)
+
+  first_formal_idx <- formals[1L]
+  if (!any(pd$lag_newlines[seq2(idx_paren_open + 1L, first_formal_idx)] > 0L)) {
+    return(FALSE)
   }
+
+  pd$lag_newlines[idx_paren_close] > 0L ||
+    pd$spaces[first_formal_idx - 1L] <= 2L * indent_by
 }
 
 

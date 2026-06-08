@@ -46,3 +46,14 @@ a <- function(
 ) {
   x - 1
 }
+
+
+# nested multi-line header
+list(
+  a = function(
+    x,
+    y
+  ) {
+    x - 1
+  }
+)
