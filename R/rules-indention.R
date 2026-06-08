@@ -58,12 +58,20 @@ is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
   if (length(formals) == 0L) return(FALSE)
 
   first_formal_idx <- formals[1L]
-  if (!any(pd$lag_newlines[seq2(idx_paren_open + 1L, first_formal_idx)] > 0L)) {
-    return(FALSE)
+  if (any(pd$lag_newlines[seq2(idx_paren_open + 1L, first_formal_idx)] > 0L)) {
+    return(pd$lag_newlines[idx_paren_close] > 0L || pd$spaces[first_formal_idx - 1L] <= 2L * indent_by)
   }
 
-  pd$lag_newlines[idx_paren_close] > 0L ||
-    pd$spaces[first_formal_idx - 1L] <= 2L * indent_by
+  formals_nl <- which(
+    pd$token %in% c("SYMBOL_FORMALS", "SYMBOL_SUB") &
+      pd$lag_newlines > 0L &
+      row_idx > idx_paren_open &
+      row_idx < idx_paren_close
+  )
+  if (length(formals_nl) == 0L) return(FALSE)
+
+  first_nl_formal <- formals_nl[1L]
+  pd$spaces[first_nl_formal - 1L] <= 2L * indent_by
 }
 
 
