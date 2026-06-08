@@ -56,3 +56,21 @@ list(
     x - 1
   }
 )
+
+
+# ambiguous case: closing parenthesis starts on new line (weirdly indented) -> open indent
+a <- function(
+              x,
+              y
+               ) {
+  x - 1
+}
+
+
+# ambiguous case: closing parenthesis starts on new line -> open indent
+a <- function(
+              x,
+              y
+) {
+  x - 1
+}
