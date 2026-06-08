@@ -74,3 +74,22 @@ a <- function(
 ) {
   x - 1
 }
+
+
+# mixed structure A: first formal on same line, subsequent formal on new line (standard indent <= 4 spaces) -> open multi-line
+f <- function(a =
+  1,
+  b = 2
+) {}
+
+
+# mixed structure B: first formal on same line, subsequent formal on new line (heavily indented > 4 spaces) AND ')' on same line -> preserve aligned
+f <- function(a = 1,
+              b = 2) {}
+
+
+# mixed structure C: first formal on same line, subsequent formal on new line (heavily indented > 4 spaces) BUT ')' starts on new line -> open multi-line
+f <- function(a =
+                1,
+              b = 2
+) {}
