@@ -45,10 +45,11 @@ is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
   idx_paren_close <- which(pd$token == "')'")[1L]
   if (is.na(idx_paren_open) || is.na(idx_paren_close)) return(FALSE)
 
+  row_idx <- seq_len(nrow(pd))
   formals <- which(
     pd$token %in% c("SYMBOL_FORMALS", "SYMBOL_SUB") &
-      seq_len(nrow(pd)) > idx_paren_open &
-      seq_len(nrow(pd)) < idx_paren_close
+      row_idx > idx_paren_open &
+      row_idx < idx_paren_close
   )
   if (length(formals) == 0L) return(FALSE)
 
