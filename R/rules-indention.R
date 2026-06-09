@@ -32,15 +32,15 @@ unindent_function_declaration <- function(pd, indent_by = 2L) {
   pd
 }
 
-#' Is the function declaration authored with standard single/double indentation?
+#' Is the function declaration authored with single indentation?
 #'
 #' Assumes you already checked if it's a function declaration with
-#' `is_function_declaration`. It returns `TRUE` if the first formal argument
-#' starts on a new line AND either the closing parenthesis `)` also starts on a
-#' new line or the first argument is indented by standard single/double
-#' indentation (`<= 2 * indent_by` spaces). This robustly identifies standard
-#' multi-line headers while correctly returning `FALSE` for aligned/hanging
-#' indents (where arguments start on the first line or share the line with `)`).
+#' `is_function_declaration`. It returns `TRUE` if the declaration is authored
+#' with single indentation (where the first argument starts on a new line and
+#' the closing parenthesis `)` starts on a new line, or where arguments on new
+#' lines are indented by `<= 2 * indent_by` spaces). It returns `FALSE` if
+#' authored with hanging indentation (where arguments share the line with
+#' `function(` or `)` and are aligned).
 #' @param pd A parse table.
 #' @inheritParams tidyverse_style
 #' @keywords internal
@@ -58,10 +58,14 @@ is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
   if (length(formals) == 0L) return(FALSE)
 
   first_formal_idx <- formals[1L]
+  # If authored with single indentation (first argument on new line),
+  # return TRUE unless closing parenthesis shares the line (indicating hanging indentation).
   if (any(pd$lag_newlines[seq2(idx_paren_open + 1L, first_formal_idx)] > 0L)) {
     return(pd$lag_newlines[idx_paren_close] > 0L || pd$spaces[first_formal_idx - 1L] <= 2L * indent_by)
   }
 
+  # If first argument shares line with '(', check if subsequent arguments on new lines
+  # have single indentation (<= 4 spaces) vs. hanging indentation (> 4 spaces).
   formals_nl <- which(
     pd$token %in% c("SYMBOL_FORMALS", "SYMBOL_SUB") &
       pd$lag_newlines > 0L &

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rules-indention.R
 \name{is_single_indent_function_declaration}
 \alias{is_single_indent_function_declaration}
-\title{Is the function declaration authored with standard single/double indentation?}
+\title{Is the function declaration authored with single indentation?}
 \usage{
 is_single_indent_function_declaration(pd, indent_by = 2L)
 }
@@ -14,11 +14,11 @@ operators such as '('.}
 }
 \description{
 Assumes you already checked if it's a function declaration with
-\code{is_function_declaration}. It returns \code{TRUE} if the first formal argument
-starts on a new line AND either the closing parenthesis \verb{)} also starts on a
-new line or the first argument is indented by standard single/double
-indentation (\verb{<= 2 * indent_by} spaces). This robustly identifies standard
-multi-line headers while correctly returning \code{FALSE} for aligned/hanging
-indents (where arguments start on the first line or share the line with \verb{)}).
+\code{is_function_declaration}. It returns \code{TRUE} if the declaration is authored
+with single indentation (where the first argument starts on a new line and
+the closing parenthesis \verb{)} starts on a new line, or where arguments on new
+lines are indented by \verb{<= 2 * indent_by} spaces). It returns \code{FALSE} if
+authored with hanging indentation (where arguments share the line with
+\verb{function(} or \verb{)} and are aligned).
 }
 \keyword{internal}

@@ -48,7 +48,7 @@ a <- function(
 }
 
 
-# nested multi-line header
+# nested multi-line header -> single indentation
 list(
   a = function(
     x,
@@ -59,7 +59,7 @@ list(
 )
 
 
-# ambiguous case: closing parenthesis starts on new line (weirdly indented) -> open indent
+# ambiguous case: closing parenthesis starts on new line -> single indentation
 a <- function(
   x,
   y
@@ -68,7 +68,7 @@ a <- function(
 }
 
 
-# ambiguous case: closing parenthesis starts on new line -> open indent
+# ambiguous case: closing parenthesis starts on new line -> single indentation
 a <- function(
   x,
   y
@@ -77,7 +77,7 @@ a <- function(
 }
 
 
-# mixed structure A: first formal on same line, subsequent formal on new line (standard indent <= 4 spaces) -> open multi-line
+# mixed structure A: subsequent formal on new line (<= 4 spaces) -> single indentation
 f <- function(
   a =
     1,
@@ -85,12 +85,12 @@ f <- function(
 ) {}
 
 
-# mixed structure B: first formal on same line, subsequent formal on new line (heavily indented > 4 spaces) AND ')' on same line -> preserve aligned
+# mixed structure B: heavily indented (> 4 spaces) AND ')' on same line -> hanging indentation
 f <- function(a = 1,
               b = 2) {}
 
 
-# mixed structure C: first formal on same line, subsequent formal on new line (heavily indented > 4 spaces) BUT ')' starts on new line -> open multi-line
+# mixed structure C: heavily indented (> 4 spaces) BUT ')' starts on new line -> single indentation
 f <- function(a =
                 1,
               b = 2) {}
