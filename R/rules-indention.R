@@ -32,15 +32,15 @@ unindent_function_declaration <- function(pd, indent_by = 2L) {
   pd
 }
 
-#' Is the function declaration authored with single indentation?
+#' Is the function declaration single indented?
 #'
-#' Assumes you already checked if it's a function declaration with
-#' `is_function_declaration`. It returns `TRUE` if the declaration is authored
-#' with single indentation (where the first argument starts on a new line and
-#' the closing parenthesis `)` starts on a new line, or where arguments on new
-#' lines are indented by `<= 2 * indent_by` spaces). It returns `FALSE` if
-#' authored with hanging indentation (where arguments share the line with
-#' `function(` or `)` and are aligned).
+#' Assumes you already checked if it's a function with
+#' `is_function_declaration`. "single indented" means the formals are on the
+#' line after `function(` and indented one further level, and the closing `)`
+#' is also on its own line. The alternative compliant style within the style
+#' guide is "hanging indented" where formals share the line with `function(`,
+#' any subsequent lines of formals are indented relative to that `(`, and
+#' the closing `)` shares a line with the last formal argument.
 #' @param pd A parse table.
 #' @inheritParams tidyverse_style
 #' @keywords internal
