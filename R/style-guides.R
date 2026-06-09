@@ -130,6 +130,7 @@ tidyverse_style <- function(scope = "tokens",
 
   line_break_manipulators <- if ("line_breaks" %in% scope) {
     list(
+      # fmt: skip
       remove_empty_lines_after_opening_and_before_closing_braces =
         remove_empty_lines_after_opening_and_before_closing_braces,
       set_line_break_around_comma_and_or = set_line_break_around_comma_and_or,

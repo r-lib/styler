@@ -171,6 +171,7 @@ get_engine_pattern <- function() {
 #' @inheritParams separate_chunks
 #' @keywords internal
 get_knitr_pattern <- function(filetype) {
+  # fmt: skip
   switch(filetype,
     Rnw = knitr::all_patterns[["rnw"]],
     Rmd = knitr::all_patterns[["md"]]
