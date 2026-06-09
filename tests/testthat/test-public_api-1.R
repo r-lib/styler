@@ -33,7 +33,6 @@ test_that("styler does not return error when there is no file to style", {
 })
 
 
-
 test_that("styler can style Rmd file", {
   expect_false({
     out <- style_file(
@@ -95,8 +94,6 @@ test_that("styler handles malformed Rmd file and invalid R code in chunk", {
     "Malformed file"
   ))
 })
-
-
 
 
 test_that("messages (via cat()) of style_file are correct", {
