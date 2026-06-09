@@ -1,6 +1,7 @@
 # Caching
 
 ``` r
+
 library(styler)
 ```
 
@@ -33,6 +34,7 @@ requests:
   `another(call)` and all other expressions that were not changed.
 
 ``` r
+
 function() {
   # a comment
   x <- 2 # <- change this line

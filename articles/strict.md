@@ -7,6 +7,7 @@ it from the bullet point(s) or simply paste the code in the console to
 see the output.
 
 ``` r
+
 library(styler)
 ```
 

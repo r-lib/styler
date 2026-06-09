@@ -23,12 +23,14 @@ collaboration. You can access styler through
 You can install the package from CRAN.
 
 ``` r
+
 install.packages("styler")
 ```
 
 Or get the development version from GitHub:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("r-lib/styler")
 ```

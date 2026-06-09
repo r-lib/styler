@@ -306,6 +306,7 @@ CRAN release: 2023-01-15
   spaces if you `indent_by` two spaces.
 
 ``` r
+
 # old style: remains compliant and won't be re-styled
 my_fun <- function(long_argument = 2,
                    indent_up_to_first = "x") {
@@ -623,6 +624,7 @@ CRAN release: 2022-03-13
   `options(styler.ignore_start = "nolint start|styler: off"`:
 
   ``` r
+
   # nolint start, styler: off
   1 +1
   # nolint end

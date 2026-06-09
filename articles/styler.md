@@ -25,6 +25,7 @@ Beyond that, styler can be used through other tools documented in the
 Let’s get started.
 
 ``` r
+
 library(styler)
 ```
 
@@ -36,6 +37,7 @@ application of it. That’s why you must supply a style guide via
 defaults):
 
 ``` r
+
 style_text("a + b", transformers = tidyverse_style(scope = "indention"))
 ```
 
@@ -47,6 +49,7 @@ guide via the styling function
 to allow more concise syntax:
 
 ``` r
+
 # equivalent
 style_text("a + b", transformers = tidyverse_style(scope = "indention"))
 style_text("a + b", scope = "indention")
@@ -89,6 +92,7 @@ There are two ways to specify the scope of styling.
   `styler > 1.3.2`.
 
 ``` r
+
 # tokens and everything less invasive
 style_text("a=2", scope = "tokens")
 ```
@@ -96,6 +100,7 @@ style_text("a=2", scope = "tokens")
     a <- 2
 
 ``` r
+
 # just tokens and indention
 style_text("a=2", scope = I(c("tokens", "indention")))
 ```
@@ -117,6 +122,7 @@ things the way they are. Please see in
 you don’t need `strict = FALSE`, e.g.
 
 ``` r
+
 style_text(
   "tibble::tibble(
      small  = 2 ,
@@ -142,6 +148,7 @@ formatting. You can mark whole blocks or inline expressions with
 `styler: on` and `styler: off`:
 
 ``` r
+
 styler::style_text(
   "
   #> blocks
@@ -214,6 +221,7 @@ In any case, you can use the (invisible) return value of
 friends to learn how files were changed (or would have changed):
 
 ``` r
+
 out <- withr::with_tempfile(
   "code.R",
   {
@@ -234,6 +242,7 @@ out <- withr::with_tempfile(
     #> Please review the changes carefully!
 
 ``` r
+
 out
 ```
 
@@ -264,6 +273,7 @@ for math token spacing. Assuming you like spacing around `+` and `-`,
 but not around `/` and `*` and `^`, do the following:
 
 ``` r
+
 style_text(
   "1++1/2*2^2",
   math_token_spacing = specify_math_token_spacing(zero = c("'/'", "'*'", "'^'"))
@@ -279,6 +289,7 @@ indention to be 4 instead of two spaces, you can formulate an
 unindention rule and set `indent_by` to 4:
 
 ``` r
+
 style_text(
   c(
     "a <- function() {",

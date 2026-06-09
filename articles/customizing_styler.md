@@ -1,6 +1,7 @@
 # Customizing styler
 
 ``` r
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -62,6 +63,7 @@ to get the list of the transformer functions. Let’s quickly look at what
 those are.
 
 ``` r
+
 library("styler")
 library("magrittr")
 cache_deactivate()
@@ -96,6 +98,7 @@ it is just an option. All transformer functions have a similar
 structure. Let’s take a look at one:
 
 ``` r
+
 tidyverse_style()$space$remove_space_after_opening_paren
 #> function (pd_flat) 
 #> {
@@ -107,7 +110,7 @@ tidyverse_style()$space$remove_space_after_opening_paren
 #>     pd_flat$spaces[paren_after & (pd_flat$newlines == 0L)] <- 0L
 #>     pd_flat
 #> }
-#> <bytecode: 0x55cec20dfb68>
+#> <bytecode: 0x55f7d456c140>
 #> <environment: namespace:styler>
 ```
 
@@ -119,6 +122,7 @@ We can compute the nested parse table and look at one of the levels of
 nesting that is interesting for us:
 
 ``` r
+
 string_to_format <- "call( 3)"
 pd <- styler:::compute_parse_data_nested(string_to_format) %>%
   styler:::pre_visit_one(default_style_guide_attributes)
@@ -151,6 +155,7 @@ the rule to our parse table, we can see that the column `spaces` changes
 and is now zero for all tokens:
 
 ``` r
+
 styler:::remove_space_after_opening_paren(pd$child[[1]])[, cols]
 #>   token terminal text newlines spaces
 #> 1  expr    FALSE call        0      0
@@ -170,6 +175,7 @@ Let’s clarify this with an example. The following yields the same
 result:
 
 ``` r
+
 all.equal(
   style_text(string_to_format, transformers = tidyverse_style(strict = FALSE)),
   style_text(string_to_format, style = tidyverse_style, strict = FALSE),
@@ -189,6 +195,7 @@ in
 [`create_style_guide()`](https://styler.r-lib.org/reference/create_style_guide.md).
 
 ``` r
+
 space_after_opening_style <- function(are_you_sure) {
   create_style_guide(
     space = list(remove_space_after_opening_paren = 
@@ -211,6 +218,7 @@ you export your style guide.
 We can not try the style guide:
 
 ``` r
+
 style_text("call( 1,1)", style = space_after_opening_style, are_you_sure = TRUE)  
 #> call(1,1)
 ```
@@ -259,6 +267,7 @@ You can also look this up in the function that applies the transformers:
 [`apply_transformers()`](https://styler.r-lib.org/reference/apply_transformers.md):
 
 ``` r
+
 styler:::apply_transformers
 #> function (pd_nested, transformers) 
 #> {
@@ -272,7 +281,7 @@ styler:::apply_transformers
 #>         outer_indention_refs = NA)
 #>     transformed_absolute_indent
 #> }
-#> <bytecode: 0x55cebff5ba98>
+#> <bytecode: 0x55f7cf596a38>
 #> <environment: namespace:styler>
 ```
 
@@ -309,6 +318,7 @@ For illustrative purposes, we create a new style guide that has one rule
 only: Curly braces are always on a new line. So for example:
 
 ``` r
+
 add_one <- function(x) {
   x + 1
 }
@@ -317,6 +327,7 @@ add_one <- function(x) {
 Should be transformed to:
 
 ``` r
+
 add_one <- function(x) 
 {
   x + 1
@@ -329,10 +340,12 @@ by the position of line breaks and spaces. Let’s first create the nested
 parse table.
 
 ``` r
+
 code <- c("add_one <- function(x) { x + 1 }")
 ```
 
 ``` r
+
 styler:::create_tree(code)
 ```
 
@@ -358,6 +371,7 @@ styler:::create_tree(code)
      ## 19              °--'}': } [0/0] {15}
 
 ``` r
+
 pd <- styler:::compute_parse_data_nested(code)
 ```
 
@@ -366,6 +380,7 @@ line break rules manipulate the lags *before* the token, we need to
 change `lag_newlines` at the token “‘{’”.
 
 ``` r
+
 pd$child[[1]]$child[[3]]$child[[5]]
 #>   id pos_id line1 col1 line2 col2 parent token terminal  text short
 #> 1  9     11     1   24     1   24     19   '{'     TRUE     {     {
@@ -385,6 +400,7 @@ Remember what we said above: A transformer takes a flat parse table as
 input, updates it and returns it. So here it’s actually simple:
 
 ``` r
+
 set_line_break_before_curly_opening <- function(pd_flat) {
   op <- pd_flat$token %in% "'{'"
   pd_flat$lag_newlines[op] <- 1L
@@ -397,6 +413,7 @@ Almost done. Now, the last thing we need to do is to use
 to create our style guide consisting of that function.
 
 ``` r
+
 set_line_break_before_curly_opening_style <- function() {
   create_style_guide(
     line_break = list(set_line_break_before_curly_opening),
@@ -409,6 +426,7 @@ set_line_break_before_curly_opening_style <- function() {
 Now you can style your string according to it.
 
 ``` r
+
 style_text(code, style = set_line_break_before_curly_opening_style)
 #> add_one <- function(x)
 #> { x + 1 }
@@ -418,6 +436,7 @@ Note that when removing line breaks, always take care of comments, since
 you don’t want:
 
 ``` r
+
 a <- function() # comments should remain EOL
 { 
   3
@@ -439,6 +458,7 @@ tidyverse style that removes line breaks before the round closing
 bracket that comes after a curly brace looks as follows:
 
 ``` r
+
 styler:::remove_line_break_before_round_closing_after_curly
 #> function (pd) 
 #> {
@@ -447,7 +467,7 @@ styler:::remove_line_break_before_round_closing_after_curly
 #>     pd$lag_newlines[round_after_curly] <- 0L
 #>     pd
 #> }
-#> <bytecode: 0x55cec2131a20>
+#> <bytecode: 0x55f7d45ca800>
 #> <environment: namespace:styler>
 ```
 

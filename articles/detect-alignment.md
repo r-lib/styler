@@ -5,6 +5,7 @@
 Sometimes, you deliberately align code to make it more readable.
 
 ``` r
+
 call(
   a   =       3,
   bre = 3213232
@@ -16,13 +17,14 @@ Until styler 1.1.1.9002 (with `strict = TRUE`, e.g. as in
 follows:
 
 ``` r
+
 call(
   a = 3,
   bre = 3213232
 )
 ```
 
-because no alignment detection was built in.[¹](#fn1)
+because no alignment detection was built in.[^1]
 
 styler \>= 1.1.1.9003 detects aforementioned alignment for function
 calls. This vignette describes how aligned code is defined in styler and
@@ -36,6 +38,7 @@ These typical examples match *styler*’s definition of alignment. Note
 the spacing around operators and commas.
 
 ``` r
+
 tibble::tribble(
   ~key_here,  ~right_aligned,
   "left",            "right", # comments are allowed
@@ -71,6 +74,7 @@ function call, so the separator is the comma. The first row is named
 because all arguments are named, the second is unnamed:
 
 ``` r
+
 call(
   # column 1  | column 2 |
   abkj = f(2), 7,        # | row 1
@@ -90,6 +94,7 @@ Make commas match position vertically and align everything right before
 commas:
 
 ``` r
+
 # all arguments of first column named -> must right align values after `=`,
 # one or more spaces around `=`, none before and at least one after the comma.
 # aligned if the (imaginary) comma on the last line is in line with the commas
@@ -117,6 +122,7 @@ gell(
 operator left
 
 ``` r
+
 # all arguments of first column named -> must left align values after `=`,
 # at least one space before `=`, exactly one after, none before and at least one
 # after the comma.
@@ -145,6 +151,7 @@ gell(
 … or match the start of the token after `,`
 
 ``` r
+
 call(
   x = 2,           p = "another",
   y = "hhjkjkbew", x = 3
@@ -165,9 +172,7 @@ not supported yet.
 
 not supported yet.
 
-------------------------------------------------------------------------
-
-1.  With `strict = FALSE`, the spacing would have been kept, however,
+[^1]: With `strict = FALSE`, the spacing would have been kept, however,
     `strict = FALSE` has a number of other implications because it is in
     general less invasive. For example, it would not add braces and line
     breaks to “if (TRUE) return()”.

@@ -52,6 +52,7 @@ to remain unchanged after applying styler. This is not the case if you
 use the default style guide of styler:
 
 ``` r
+
 library(styler)
 style_text("string = 'hi there'")
 string <- "hi there"
@@ -61,6 +62,7 @@ So you need to figure out which rule is responsible for this. Let’s
 check the transformer categories used with the tidyverse style guide.
 
 ``` r
+
 transformers <- tidyverse_style()
 names(transformers)
 #>  [1] "initialize"             "line_break"             "space"                 
@@ -82,6 +84,7 @@ Now, we can look at the names of the rules that are sub-elements of the
 transformer categories.
 
 ``` r
+
 library(magrittr)
 levels <- c("space", "line_break", "indention", "token")
 purrr::map(
@@ -149,6 +152,7 @@ what it does you can also have a look at the function declaration of
 this (unexported) function.
 
 ``` r
+
 styler:::force_assignment_op
 #> function (pd) 
 #> {
@@ -157,13 +161,14 @@ styler:::force_assignment_op
 #>     pd$text[to_replace] <- "<-"
 #>     pd
 #> }
-#> <bytecode: 0x561380bf67e8>
+#> <bytecode: 0x555d23d8c4a8>
 #> <environment: namespace:styler>
 ```
 
 Next, you simply set that element to `NULL`.
 
 ``` r
+
 transformers$token$force_assignment_op <- NULL
 ```
 
@@ -171,6 +176,7 @@ And you can use the modified transformer list as input to
 [`style_text()`](https://styler.r-lib.org/reference/style_text.md)
 
 ``` r
+
 style_text("string = 'hi there'", transformers = transformers)
 #> string = "hi there"
 ```
@@ -180,6 +186,7 @@ If you want to use it the same way as
 here’s the last step:
 
 ``` r
+
 eq_assign_style <- function(...) {
   transformers <- tidyverse_style(...)
   transformers$token$force_assignment_op <- NULL
@@ -199,6 +206,7 @@ with `=`, but we only removed a rule to replace `=` with `<-`, so `<-`
 won’t be touched:
 
 ``` r
+
 style_text("string <- 'hi there'", style = eq_assign_style)
 #> string <- "hi there"
 ```
@@ -212,6 +220,7 @@ If you have trouble identifying a rule based on rule names,
 - First write an example whose results is not the one you wanted, e.g.
 
 ``` r
+
 code <- "
 f <- function () {
 

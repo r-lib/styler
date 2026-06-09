@@ -84,6 +84,7 @@ from the docs:
   rule like this
 
 ``` r
+
 styler::specify_transformers_drop(
   spaces = list(style_space_around_tilde = "'~'"),
   tokens = list(resolve_semicolon = "';'")
