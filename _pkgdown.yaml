@@ -1,6 +1,3 @@
-home:
-  strip_header: true
-
 reference:
   - title: "Styling API"
     desc: >
