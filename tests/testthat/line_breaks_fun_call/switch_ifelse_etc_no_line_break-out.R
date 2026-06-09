@@ -3,11 +3,17 @@ call(
   3
 )
 
-switch(x,
+switch(
+  x,
   a = 2,
   y = 3
 )
 
+# keep it on first line
+switch(x,
+  a = 2,
+  y = 3
+)
 
 switch( #
   x,
@@ -16,23 +22,17 @@ switch( #
 )
 
 
-switch(x,
+switch(
+  x,
   a = 2, #
+
+
   y = 3
 )
 
 
-switch(x,
-  a = 2,
-  y = 3
-)
-
-switch(x,
-  a = 2,
-  y = 3
-)
-
-switch(x,
+switch(
+  x,
   a = 2,
   y = 3
 )
@@ -40,11 +40,14 @@ switch(x,
 switch(x,
   a = 2,
   y = 3
-) #
+)
+
+switch(x, a = 2, y = 3)
+
+switch(x, a = 2, y = 3) #
 
 switch(x,
-  a = 2,
-  y = 3 #
+  a = 2, y = 3 #
 )
 
 if_else(a,
@@ -62,7 +65,8 @@ base::switch(f,
   y = 3
 )
 
-base::switch(f,
+base::switch(
+  f,
   x = 2,
   y = 3
 )
