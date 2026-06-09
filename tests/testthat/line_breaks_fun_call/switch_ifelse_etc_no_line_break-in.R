@@ -9,6 +9,11 @@ switch(
   y = 3
 )
 
+# keep it on first line
+switch(x,
+  a = 2,
+  y = 3
+)
 
 switch( #
   x,
