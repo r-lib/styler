@@ -27,7 +27,6 @@ test_that("multiple curly and round brackets don't cause extraindention", {
 })
 
 
-
 test_that("multiple curly and round brackets overall test", {
   expect_no_warning(test_collection("indention_multiple",
     "overall",
