@@ -22,10 +22,12 @@
 #'   paste0(styler:::add_spaces(3), style_text(text_in), sep = "")
 #' )
 #' @keywords internal
-parse_transform_serialize_r_block <- function(pd_nested,
-                                              start_line,
-                                              transformers,
-                                              base_indention) {
+parse_transform_serialize_r_block <- function(
+  pd_nested,
+  start_line,
+  transformers,
+  base_indention
+) {
   if (!all(pd_nested$is_cached, na.rm = TRUE) || !cache_is_activated()) {
     transformed_pd <- apply_transformers(pd_nested, transformers)
     flattened_pd <-
@@ -40,7 +42,10 @@ parse_transform_serialize_r_block <- function(pd_nested,
       )
     is_on_newline <- flattened_pd$lag_newlines > 0L
     is_on_newline[1L] <- TRUE
-    flattened_pd$lag_spaces[is_on_newline] <- flattened_pd$lag_spaces[is_on_newline] + base_indention
+    flattened_pd$lag_spaces[is_on_newline] <- flattened_pd$lag_spaces[
+      is_on_newline
+    ] +
+      base_indention
     serialized_transformed_text <- serialize_parse_data_flattened(
       flattened_pd,
       indent_character = transformers$indent_character
@@ -92,7 +97,8 @@ parse_transform_serialize_r_block <- function(pd_nested,
 #' @param pd A top-level nest.
 #' @keywords internal
 cache_find_block <- function(pd) {
-  first_after_cache_state_switch <- pd$is_cached != lag(pd$is_cached, default = !pd$is_cached[1L])
+  first_after_cache_state_switch <- pd$is_cached !=
+    lag(pd$is_cached, default = !pd$is_cached[1L])
 
   not_first_on_line <- find_blank_lines_to_next_expr(pd) == 0L
   invalid_turning_point_idx <- which(

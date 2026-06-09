@@ -17,9 +17,12 @@ construct_vertical <- function(x) {
 #'   `prettycode::highlight()`.
 #' @param style Passed to `prettycode::highlight()`.
 #' @export
-print.vertical <- function(x, ...,
-                           colored = getOption("styler.colored_print.vertical"),
-                           style = prettycode::default_style()) {
+print.vertical <- function(
+  x,
+  ...,
+  colored = getOption("styler.colored_print.vertical"),
+  style = prettycode::default_style()
+) {
   if (colored) {
     if (is_installed("prettycode")) {
       x <- prettycode::highlight(x, style = style)

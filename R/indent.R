@@ -96,12 +96,12 @@ indent_without_paren_if_else <- function(pd, indent_by) {
 #' @examples
 #' styler:::parse_text("a[1]")
 #' styler:::parse_text("a[[1\n]]")
-compute_indent_indices <- function(pd,
-                                   token_opening,
-                                   token_closing = NULL) {
+compute_indent_indices <- function(pd, token_opening, token_closing = NULL) {
   npd <- nrow(pd)
   potential_triggers <- which(pd$token %in% token_opening)
-  needs_indention <- needs_indention(pd, potential_triggers,
+  needs_indention <- needs_indention(
+    pd,
+    potential_triggers,
     other_trigger_tokens = c("EQ_SUB", "EQ_FORMALS")
   )
   trigger <- potential_triggers[needs_indention][1L]
@@ -128,11 +128,16 @@ compute_indent_indices <- function(pd,
 #'   tokens in `pd`.
 #' @inheritParams needs_indention_one
 #' @keywords internal
-needs_indention <- function(pd,
-                            potential_triggers_pos,
-                            other_trigger_tokens = NULL) {
-  map_lgl(potential_triggers_pos, needs_indention_one,
-    pd = pd, other_trigger_tokens = other_trigger_tokens
+needs_indention <- function(
+  pd,
+  potential_triggers_pos,
+  other_trigger_tokens = NULL
+) {
+  map_lgl(
+    potential_triggers_pos,
+    needs_indention_one,
+    pd = pd,
+    other_trigger_tokens = other_trigger_tokens
   )
 }
 
@@ -168,15 +173,18 @@ needs_indention <- function(pd,
 #'   "call(named = c,",
 #'   "named = b)"
 #' ), strict = FALSE)
-needs_indention_one <- function(pd,
-                                potential_trigger_pos,
-                                other_trigger_tokens) {
+needs_indention_one <- function(
+  pd,
+  potential_trigger_pos,
+  other_trigger_tokens
+) {
   before_first_break <- which(pd$lag_newlines > 0L)[1L] - 1L
   if (is.na(before_first_break)) {
     return(FALSE)
   }
   row_idx_between_trigger_and_line_break <- seq2(
-    potential_trigger_pos, before_first_break
+    potential_trigger_pos,
+    before_first_break
   )
   multi_line_token <- pd_is_multi_line(
     vec_slice(pd, row_idx_between_trigger_and_line_break)
@@ -186,10 +194,10 @@ needs_indention_one <- function(pd,
     potential_trigger_pos
   )
 
-  other_trigger_on_same_line <- (
-    pd$token[remaining_row_idx_between_trigger_and_line_break] %in%
-      other_trigger_tokens
-  )
+  other_trigger_on_same_line <- (pd$token[
+    remaining_row_idx_between_trigger_and_line_break
+  ] %in%
+    other_trigger_tokens)
   line_break_after_other_trigger <-
     pd$lag_newlines[remaining_row_idx_between_trigger_and_line_break + 1L] > 0L
 
@@ -198,7 +206,6 @@ needs_indention_one <- function(pd,
 
   !any(multi_line_token) & !any(active_trigger_on_same_line)
 }
-
 
 
 #' Set the multi-line column

@@ -16,7 +16,9 @@
     styler.test_dir_writable = TRUE
   )
   toset <- !(names(op.styler) %in% names(op))
-  if (any(toset)) options(op.styler[toset])
+  if (any(toset)) {
+    options(op.styler[toset])
+  }
   rlang::try_fetch(
     {
       ask_to_switch_to_non_default_cache_root()
@@ -41,12 +43,16 @@ delete_if_cache_directory <- function(path) {
   if (getRversion() < package_version("4.0.0")) {
     return(FALSE)
   }
-  designated_cache_path <- normalizePath(tools::R_user_dir("R.cache", which = "cache"), mustWork = FALSE)
+  designated_cache_path <- normalizePath(
+    tools::R_user_dir("R.cache", which = "cache"),
+    mustWork = FALSE
+  )
   is_in_tools_cache <- startsWith(path, designated_cache_path)
   temp_dir <- normalizePath(dirname(tempdir()))
   is_in_generic_cache <- startsWith(path, temp_dir)
   if (is_in_tools_cache || is_in_generic_cache) {
-    all_files <- list.files(path,
+    all_files <- list.files(
+      path,
       full.names = TRUE,
       recursive = TRUE,
       all.files = FALSE
@@ -61,7 +67,9 @@ delete_if_cache_directory <- function(path) {
 
 
 ask_to_switch_to_non_default_cache_root <- function(ask = interactive()) {
-  if (ask && stats::runif(1L) > 0.9 && is.null(getOption("styler.cache_root"))) {
+  if (
+    ask && stats::runif(1L) > 0.9 && is.null(getOption("styler.cache_root"))
+  ) {
     ask_to_switch_to_non_default_cache_root_impl()
     options(styler.cache_root = "styler")
   }
@@ -79,7 +87,8 @@ remove_old_cache_files <- function() {
   path_version_specific <- R.cache::getCachePath(c("styler", styler_version))
   all_cached <- list.files(
     path_version_specific,
-    full.names = TRUE, recursive = TRUE
+    full.names = TRUE,
+    recursive = TRUE
   )
   date_boundary <- Sys.time() - as.difftime(6L, units = "days")
   file.remove(

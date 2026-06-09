@@ -62,16 +62,17 @@ NULL
 #' # styling line breaks only without spaces
 #' style_text(c("ab <- 3", "a =3"), strict = TRUE, scope = I(c("line_breaks", "tokens")))
 #' @export
-tidyverse_style <- function(scope = "tokens",
-                            strict = TRUE,
-                            indent_by = 2L,
-                            start_comments_with_one_space = FALSE,
-                            reindention = tidyverse_reindention(),
-                            math_token_spacing = tidyverse_math_token_spacing()) {
+tidyverse_style <- function(
+  scope = "tokens",
+  strict = TRUE,
+  indent_by = 2L,
+  start_comments_with_one_space = FALSE,
+  reindention = tidyverse_reindention(),
+  math_token_spacing = tidyverse_math_token_spacing()
+) {
   args <- as.list(environment())
   scope <- scope_normalize(scope)
   indent_character <- " "
-
 
   indention_manipulators <- if ("indention" %in% scope) {
     list(
@@ -79,7 +80,8 @@ tidyverse_style <- function(scope = "tokens",
       unindent_function_declaration = unindent_function_declaration,
       indent_op = partial(indent_op, indent_by = indent_by),
       indent_eq_sub = partial(indent_eq_sub, indent_by = indent_by),
-      indent_without_paren = partial(indent_without_paren,
+      indent_without_paren = partial(
+        indent_without_paren,
         indent_by = indent_by
       ),
       update_indention_reference_function_declaration = update_indention_reference_function_declaration
@@ -94,7 +96,8 @@ tidyverse_style <- function(scope = "tokens",
       add_space_after_for_if_while = add_space_after_for_if_while,
       remove_space_before_comma = remove_space_before_comma,
       style_space_around_math_token = partial(
-        style_space_around_math_token, strict,
+        style_space_around_math_token,
+        strict,
         math_token_spacing$zero,
         math_token_spacing$one
       ),
@@ -102,7 +105,8 @@ tidyverse_style <- function(scope = "tokens",
         style_space_around_tilde,
         strict = strict
       ),
-      spacing_around_op = purrr::partial(set_space_around_operator,
+      spacing_around_op = purrr::partial(
+        set_space_around_operator,
         strict = strict
       ),
       remove_space_after_opening_paren = remove_space_after_opening_paren,
@@ -111,7 +115,8 @@ tidyverse_style <- function(scope = "tokens",
       remove_space_around_dollar = remove_space_around_dollar,
       remove_space_after_function_declaration = remove_space_after_function_declaration,
       remove_space_around_colons = remove_space_around_colons,
-      start_comments_with_space = partial(start_comments_with_space,
+      start_comments_with_space = partial(
+        start_comments_with_space,
         force_one = start_comments_with_one_space
       ),
       remove_space_after_unary_plus_minus_nested = remove_space_after_unary_plus_minus_nested,
@@ -135,12 +140,15 @@ tidyverse_style <- function(scope = "tokens",
       set_line_break_around_comma_and_or = set_line_break_around_comma_and_or,
       set_line_break_after_assignment = set_line_break_after_assignment,
       set_line_break_before_curly_opening = set_line_break_before_curly_opening,
-      remove_line_break_before_round_closing_after_curly =
-        if (strict) remove_line_break_before_round_closing_after_curly,
-      remove_line_breaks_in_function_declaration =
-        if (strict) remove_line_breaks_in_function_declaration,
-      set_line_breaks_between_top_level_exprs =
-        if (strict) set_line_breaks_between_top_level_exprs,
+      remove_line_break_before_round_closing_after_curly = if (strict) {
+        remove_line_break_before_round_closing_after_curly
+      },
+      remove_line_breaks_in_function_declaration = if (strict) {
+        remove_line_breaks_in_function_declaration
+      },
+      set_line_breaks_between_top_level_exprs = if (strict) {
+        set_line_breaks_between_top_level_exprs
+      },
       style_line_break_around_curly = partial(
         style_line_break_around_curly,
         strict
@@ -180,13 +188,12 @@ tidyverse_style <- function(scope = "tokens",
       force_assignment_op = force_assignment_op,
       resolve_semicolon = resolve_semicolon,
       add_brackets_in_pipe = add_brackets_in_pipe,
-      wrap_if_else_while_for_function_multi_line_in_curly =
-        if (strict) {
-          purrr::partial(
-            wrap_if_else_while_for_function_multi_line_in_curly,
-            indent_by = indent_by
-          )
-        }
+      wrap_if_else_while_for_function_multi_line_in_curly = if (strict) {
+        purrr::partial(
+          wrap_if_else_while_for_function_multi_line_in_curly,
+          indent_by = indent_by
+        )
+      }
     )
   }
 
@@ -232,7 +239,10 @@ tidyverse_style <- function(scope = "tokens",
       add_brackets_in_pipe = c("SPECIAL-PIPE", "PIPE"),
       force_assignment_op = "EQ_ASSIGN",
       wrap_if_else_while_for_function_multi_line_in_curly = c(
-        "IF", "WHILE", "FOR", "FUNCTION"
+        "IF",
+        "WHILE",
+        "FOR",
+        "FUNCTION"
       )
     )
   )
@@ -240,19 +250,19 @@ tidyverse_style <- function(scope = "tokens",
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
   create_style_guide(
     # transformer functions
-    initialize             = default_style_guide_attributes,
-    line_break             =        line_break_manipulators,
-    space                  =             space_manipulators,
-    token                  =             token_manipulators,
-    indention              =         indention_manipulators,
+    initialize = default_style_guide_attributes,
+    line_break = line_break_manipulators,
+    space = space_manipulators,
+    token = token_manipulators,
+    indention = indention_manipulators,
     # transformer options
-    use_raw_indention      =              use_raw_indention,
-    reindention            =                    reindention,
-    style_guide_name       =               style_guide_name,
-    style_guide_version    =                 styler_version,
-    more_specs_style_guide =                           args,
-    transformers_drop      =              transformers_drop,
-    indent_character       =               indent_character
+    use_raw_indention = use_raw_indention,
+    reindention = reindention,
+    style_guide_name = style_guide_name,
+    style_guide_version = styler_version,
+    more_specs_style_guide = args,
+    transformers_drop = transformers_drop,
+    indent_character = indent_character
   )
 }
 
@@ -320,18 +330,20 @@ tidyverse_style <- function(scope = "tokens",
 #'   style = set_line_break_before_curly_opening_style
 #' )
 #' @export
-create_style_guide <- function(initialize = default_style_guide_attributes,
-                               line_break = NULL,
-                               space = NULL,
-                               token = NULL,
-                               indention = NULL,
-                               use_raw_indention = FALSE,
-                               reindention = tidyverse_reindention(),
-                               style_guide_name = NULL,
-                               style_guide_version = NULL,
-                               more_specs_style_guide = NULL,
-                               transformers_drop = specify_transformers_drop(),
-                               indent_character = " ") {
+create_style_guide <- function(
+  initialize = default_style_guide_attributes,
+  line_break = NULL,
+  space = NULL,
+  token = NULL,
+  indention = NULL,
+  use_raw_indention = FALSE,
+  reindention = tidyverse_reindention(),
+  style_guide_name = NULL,
+  style_guide_version = NULL,
+  more_specs_style_guide = NULL,
+  transformers_drop = specify_transformers_drop(),
+  indent_character = " "
+) {
   list(
     # transformer functions
     initialize = list(initialize = initialize),
@@ -405,12 +417,16 @@ create_style_guide <- function(initialize = default_style_guide_attributes,
 #' # not, not via `is.null()` and we can use the `is.null()` check to see if
 #' # this scope was initially required by the user.
 #' @export
-specify_transformers_drop <- function(spaces = NULL,
-                                      indention = NULL,
-                                      line_breaks = NULL,
-                                      tokens = NULL) {
+specify_transformers_drop <- function(
+  spaces = NULL,
+  indention = NULL,
+  line_breaks = NULL,
+  tokens = NULL
+) {
   list(
-    space = spaces, indention = indention, line_break = line_breaks,
+    space = spaces,
+    indention = indention,
+    line_break = line_breaks,
     token = tokens
   )
 }
@@ -438,9 +454,11 @@ NULL
 #'   regex_pattern = "xyz", indention = 4, comments_only = FALSE
 #' ))
 #' @export
-specify_reindention <- function(regex_pattern = NULL,
-                                indention = 0L,
-                                comments_only = TRUE) {
+specify_reindention <- function(
+  regex_pattern = NULL,
+  indention = 0L,
+  comments_only = TRUE
+) {
   list(
     regex_pattern = regex_pattern,
     indention = indention,
@@ -456,7 +474,9 @@ specify_reindention <- function(regex_pattern = NULL,
 #' @export
 tidyverse_reindention <- function() {
   specify_reindention(
-    regex_pattern = NULL, indention = 0L, comments_only = TRUE
+    regex_pattern = NULL,
+    indention = 0L,
+    comments_only = TRUE
   )
 }
 
@@ -516,8 +536,7 @@ NULL
 #'   spacing.
 #' @export
 specify_math_token_spacing <-
-  function(zero = "'^'",
-           one = c("'+'", "'-'", "'*'", "'/'")) {
+  function(zero = "'^'", one = c("'+'", "'-'", "'*'", "'/'")) {
     assert_tokens(c(one, zero))
     list(
       one = setdiff(c(math_token, one), zero),

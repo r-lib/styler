@@ -10,8 +10,10 @@
 style_roxygen_code_example <- function(example, transformers, base_indention) {
   example <- vec_split(example, cumsum(grepl("^#' *@examples", example)))
   purrr::map(
-    example[[2L]], style_roxygen_code_example_one,
-    transformers = transformers, base_indention = base_indention
+    example[[2L]],
+    style_roxygen_code_example_one,
+    transformers = transformers,
+    base_indention = base_indention
   ) %>%
     flatten_chr()
 }
@@ -21,15 +23,22 @@ style_roxygen_code_example <- function(example, transformers, base_indention) {
 #' @param example_one A character vector, one element per line, that contains in
 #'   total at most one example tag.
 #' @keywords internal
-style_roxygen_code_example_one <- function(example_one,
-                                           transformers,
-                                           base_indention) {
+style_roxygen_code_example_one <- function(
+  example_one,
+  transformers,
+  base_indention
+) {
   # Workaround for imperfect parsing of roxygen2 examples
   example_one <- example_one[example_one != ""]
 
   bare <- parse_roxygen(example_one)
-  one_dont <- vec_split(bare$text, factor(cumsum(bare$text %in% dont_keywords())))
-  unmasked <- map(one_dont[[2L]], style_roxygen_code_example_segment,
+  one_dont <- vec_split(
+    bare$text,
+    factor(cumsum(bare$text %in% dont_keywords()))
+  )
+  unmasked <- map(
+    one_dont[[2L]],
+    style_roxygen_code_example_segment,
     transformers = transformers,
     base_indention = base_indention
   ) %>%
@@ -66,9 +75,11 @@ style_roxygen_code_example_one <- function(example_one,
 #' @inheritParams parse_transform_serialize_r
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
 #' @keywords internal
-style_roxygen_code_example_segment <- function(one_dont,
-                                               transformers,
-                                               base_indention) {
+style_roxygen_code_example_segment <- function(
+  one_dont,
+  transformers,
+  base_indention
+) {
   if (length(one_dont) < 1L) {
     return(character())
   } else if (identical(one_dont, "\n")) {
@@ -76,9 +87,12 @@ style_roxygen_code_example_segment <- function(one_dont,
   }
   dont_seqs <- find_dont_seqs(one_dont)
   split_segments <- split_roxygen_segments(one_dont, unlist(dont_seqs))
-  is_dont <- seq2(1L, length(split_segments$separated)) %in% split_segments$selectors
+  is_dont <- seq2(1L, length(split_segments$separated)) %in%
+    split_segments$selectors
 
-  map2(split_segments$separated, is_dont,
+  map2(
+    split_segments$separated,
+    is_dont,
     style_roxygen_example_snippet,
     transformers = transformers,
     base_indention = base_indention
@@ -94,10 +108,12 @@ style_roxygen_code_example_segment <- function(one_dont,
 #' @inheritParams parse_transform_serialize_r
 #' @inheritSection parse_transform_serialize_roxygen Hierarchy
 #' @keywords internal
-style_roxygen_example_snippet <- function(code_snippet,
-                                          transformers,
-                                          is_dont,
-                                          base_indention) {
+style_roxygen_example_snippet <- function(
+  code_snippet,
+  transformers,
+  is_dont,
+  base_indention
+) {
   if (is_dont) {
     decomposed <- remove_dont_mask(code_snippet)
     code_snippet <- decomposed$code
@@ -110,7 +126,8 @@ style_roxygen_example_snippet <- function(code_snippet,
 
   cache_is_active <- cache_is_activated()
   is_cached <- is_cached(
-    code_snippet, transformers,
+    code_snippet,
+    transformers,
     cache_more_specs(
       include_roxygen_examples = TRUE,
       base_indention = base_indention
@@ -127,13 +144,18 @@ style_roxygen_example_snippet <- function(code_snippet,
       )
   }
 
-  code_snippet <- ensure_last_n_empty(code_snippet, n = as.integer(append_empty))
+  code_snippet <- ensure_last_n_empty(
+    code_snippet,
+    n = as.integer(append_empty)
+  )
 
   if (!is_cached && cache_is_active) {
     cache_write(
-      code_snippet, transformers,
+      code_snippet,
+      transformers,
       cache_more_specs(
-        include_roxygen_examples = TRUE, base_indention = base_indention
+        include_roxygen_examples = TRUE,
+        base_indention = base_indention
       )
     )
   }

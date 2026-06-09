@@ -11,8 +11,10 @@ create_tree <- function(text, structure_only = FALSE) {
     create_tree_from_pd_with_default_style_attributes(structure_only)
 }
 
-create_tree_from_pd_with_default_style_attributes <- function(pd,
-                                                              structure_only = FALSE) {
+create_tree_from_pd_with_default_style_attributes <- function(
+  pd,
+  structure_only = FALSE
+) {
   pd %>%
     create_node_from_nested_root(structure_only) %>%
     # don't use `styler_df()` here; `vctrs::data_frame()` only accepts a vector, not a <Node/R6> object
@@ -76,10 +78,15 @@ create_node_info <- function(pd_nested, structure_only) {
     return(seq2(1L, nrow(pd_nested)))
   }
   paste0(
-    pd_nested$token, ": ",
-    pd_nested$short, " [",
-    pd_nested$lag_newlines, "/",
-    pd_nested$spaces, "] {",
-    pd_nested$pos_id, "}"
+    pd_nested$token,
+    ": ",
+    pd_nested$short,
+    " [",
+    pd_nested$lag_newlines,
+    "/",
+    pd_nested$spaces,
+    "] {",
+    pd_nested$pos_id,
+    "}"
   )
 }

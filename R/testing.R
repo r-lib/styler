@@ -17,11 +17,14 @@
 #' function, every *-out.R file has just one in file.
 #' @inheritParams transform_and_check
 #' @keywords internal
-test_collection <- function(test, sub_test = NULL,
-                            dry = "off",
-                            write_tree = FALSE,
-                            transformer,
-                            ...) {
+test_collection <- function(
+  test,
+  sub_test = NULL,
+  dry = "off",
+  write_tree = FALSE,
+  transformer,
+  ...
+) {
   path <- rprojroot::find_testthat_root_file(test)
 
   pattern <- paste0(
@@ -35,7 +38,9 @@ test_collection <- function(test, sub_test = NULL,
     full.names = FALSE
   )
 
-  if (length(in_names) < 1L) abort("no items to check")
+  if (length(in_names) < 1L) {
+    abort("no items to check")
+  }
 
   out_names <- construct_out(in_names)
 
@@ -51,7 +56,8 @@ test_collection <- function(test, sub_test = NULL,
     out_trees <- file.path(tempdir(), construct_tree(in_names))
   }
 
-  pwalk(list(in_items, out_items, in_names, out_names, out_trees),
+  pwalk(
+    list(in_items, out_items, in_names, out_names, out_trees),
     transform_and_check,
     transformer = transformer,
     dry = dry,
@@ -98,17 +104,28 @@ construct_tree <- function(in_paths, suffix = "_tree") {
 #' @param out_tree Name of tree file if written out.
 #' @inheritParams transform_utf8
 #' @keywords internal
-transform_and_check <- function(in_item, out_item,
-                                in_name = in_item, out_name = out_item,
-                                transformer, dry,
-                                write_tree = FALSE,
-                                out_tree = "_tree", ...) {
-  if (write_tree) check_installed("data.tree")
+transform_and_check <- function(
+  in_item,
+  out_item,
+  in_name = in_item,
+  out_name = out_item,
+  transformer,
+  dry,
+  write_tree = FALSE,
+  out_tree = "_tree",
+  ...
+) {
+  if (write_tree) {
+    check_installed("data.tree")
+  }
   read_in <- read_utf8_bare(in_item)
   if (write_tree) {
     create_tree(read_in) %>%
-      utils::write.table(out_tree,
-        col.names = FALSE, row.names = FALSE, quote = FALSE,
+      utils::write.table(
+        out_tree,
+        col.names = FALSE,
+        row.names = FALSE,
+        quote = FALSE,
         fileEncoding = "UTF-8"
       )
   }
@@ -117,7 +134,9 @@ transform_and_check <- function(in_item, out_item,
     unclass()
   if (!file.exists(out_item)) {
     warn(paste(
-      "File", out_item, "does not exist. Creating it from transformation."
+      "File",
+      out_item,
+      "does not exist. Creating it from transformation."
     ))
     file.create(out_item)
   }
@@ -168,7 +187,8 @@ style_empty <- function(text, base_indention = 0L) {
     indent_character = " ",
     NULL
   )
-  transformed_text <- parse_transform_serialize_r(text,
+  transformed_text <- parse_transform_serialize_r(
+    text,
     transformers = transformers,
     base_indention = base_indention
   )
@@ -180,18 +200,19 @@ style_empty <- function(text, base_indention = 0L) {
 style_op <- function(text, base_indention = 0L) {
   transformers <- list(
     # transformer functions
-    initialize        = default_style_guide_attributes,
-    line_break        = NULL,
-    space             = partial(indent_op, indent_by = 2L),
-    token             = NULL,
+    initialize = default_style_guide_attributes,
+    line_break = NULL,
+    space = partial(indent_op, indent_by = 2L),
+    token = NULL,
     # transformer options
     use_raw_indention = FALSE,
-    reindention       = specify_reindention(),
-    indent_character  = " ",
+    reindention = specify_reindention(),
+    indent_character = " ",
     NULL
   )
 
-  transformed_text <- parse_transform_serialize_r(text,
+  transformed_text <- parse_transform_serialize_r(
+    text,
     transformers = transformers,
     base_indention = base_indention
   )
@@ -231,15 +252,25 @@ copy_to_tempdir <- function(path_perm = testthat_file()) {
 #' A scalar indicating the relative difference of the second compared to the
 #'   first run.
 #' @keywords internal
-n_times_faster_with_cache <- function(x1, x2 = x1, ...,
-                                      fun = styler::style_text,
-                                      n = 3L,
-                                      clear = "always") {
+n_times_faster_with_cache <- function(
+  x1,
+  x2 = x1,
+  ...,
+  fun = styler::style_text,
+  n = 3L,
+  clear = "always"
+) {
   rlang::arg_match0(clear, c("always", "final", "never", "all but last"))
 
-  out <- purrr::map(1L:n, n_times_faster_bench,
-    x1 = x1, x2 = x2, fun = fun,
-    ..., n = n, clear = clear
+  out <- purrr::map(
+    1L:n,
+    n_times_faster_bench,
+    x1 = x1,
+    x2 = x2,
+    fun = fun,
+    ...,
+    n = n,
+    clear = clear
   )
   out <- out %>%
     purrr::map_dbl(
@@ -279,8 +310,7 @@ activate_testthat_cache <- purrr::partial(cache_activate, "testthat")
 #' @details
 #' * make styler quiet.
 #' @keywords internal
-local_test_setup <- function(cache = FALSE,
-                             .local_envir = parent.frame()) {
+local_test_setup <- function(cache = FALSE, .local_envir = parent.frame()) {
   current_cache <- cache_info(format = "tabular")
   withr::local_options(
     list(styler.quiet = TRUE, R.cache.rootPath = tempfile()),
@@ -317,17 +347,22 @@ test_transformers_drop <- function(transformers) {
     names(transformers)
   )
 
-  purrr::walk2(transformers$transformers_drop, transformers[scopes], function(x, y) {
-    # all x must be in y. select the x that are not in y
-    diff <- setdiff(names(x), names(y))
-    if (length(diff) > 0L) {
-      rlang::abort(paste(
-        "transformers_drop specifies exclusion rules for transformers that ",
-        "are not in the style guilde. Please add the rule to the style guide ",
-        "or remove the dropping rules:", toString(diff)
-      ))
+  purrr::walk2(
+    transformers$transformers_drop,
+    transformers[scopes],
+    function(x, y) {
+      # all x must be in y. select the x that are not in y
+      diff <- setdiff(names(x), names(y))
+      if (length(diff) > 0L) {
+        rlang::abort(paste(
+          "transformers_drop specifies exclusion rules for transformers that ",
+          "are not in the style guilde. Please add the rule to the style guide ",
+          "or remove the dropping rules:",
+          toString(diff)
+        ))
+      }
     }
-  })
+  )
 }
 
 

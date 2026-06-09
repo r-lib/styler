@@ -72,14 +72,16 @@ token_is_on_aligned_line <- function(pd_flat) {
     return(FALSE)
   }
   has_correct_spacing_around_comma <- map_lgl(
-    pd_by_line, alignment_has_correct_spacing_around_comma
+    pd_by_line,
+    alignment_has_correct_spacing_around_comma
   )
   if (!all(has_correct_spacing_around_comma)) {
     return(FALSE)
   }
 
   has_correct_spacing_around_eq_sub <- map_lgl(
-    pd_by_line, alignment_has_correct_spacing_around_eq_sub
+    pd_by_line,
+    alignment_has_correct_spacing_around_eq_sub
   )
 
   if (!all(has_correct_spacing_around_eq_sub)) {

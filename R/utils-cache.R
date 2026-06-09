@@ -22,10 +22,12 @@ hash_standardize <- function(text) {
 #' @param cache_dir The caching directory relative to the `.Rcache` root to
 #'   look for a cached value.
 #' @keywords internal
-is_cached <- function(text,
-                      transformers,
-                      more_specs,
-                      cache_dir = get_cache_dir()) {
+is_cached <- function(
+  text,
+  transformers,
+  more_specs,
+  cache_dir = get_cache_dir()
+) {
   R.cache::generateCache(
     key = cache_make_key(text, transformers, more_specs),
     dirs = cache_dir
@@ -153,9 +155,7 @@ cache_is_activated <- function(cache_name = NULL) {
 #' @param text A character vector with one or more expressions.
 #' @inheritParams cache_write
 #' @keywords internal
-cache_by_expression <- function(text,
-                                transformers,
-                                more_specs) {
+cache_by_expression <- function(text, transformers, more_specs) {
   expressions <- parse(text = text, keep.source = TRUE) %>%
     utils::getParseData(includeText = TRUE)
   if (env_current$any_stylerignore) {
@@ -171,9 +171,15 @@ cache_by_expression <- function(text,
   # was removed via parse, same as it is in cache_by_expression) and add the
   # base indention.
   map(
-    expressions[expressions$parent == 0L & expressions$token != "COMMENT" & !expressions$stylerignore, "text"],
+    expressions[
+      expressions$parent == 0L &
+        expressions$token != "COMMENT" &
+        !expressions$stylerignore,
+      "text"
+    ],
     cache_write,
-    transformers = transformers, more_specs
+    transformers = transformers,
+    more_specs
   )
 }
 
@@ -190,7 +196,10 @@ cache_write <- function(text, transformers, more_specs) {
     file.create()
 }
 
-styler_version <- unlist(unname(read.dcf("DESCRIPTION")[, "Version"]), use.names = FALSE)
+styler_version <- unlist(
+  unname(read.dcf("DESCRIPTION")[, "Version"]),
+  use.names = FALSE
+)
 
 cache_get_name <- function() {
   getOption("styler.cache_name")
@@ -212,8 +221,7 @@ get_cache_dir <- function(cache_name = cache_get_name()) {
 #' Syntactic sugar for creating more specs. This is useful when we want to add
 #' more arguments (because we can search for this function in the source code).
 #' @keywords internal
-cache_more_specs <- function(include_roxygen_examples,
-                             base_indention) {
+cache_more_specs <- function(include_roxygen_examples, base_indention) {
   list(
     include_roxygen_examples = include_roxygen_examples,
     base_indention = base_indention,

@@ -42,7 +42,9 @@ unindent_function_declaration <- function(pd, indent_by = 2L) {
 #' @keywords internal
 is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
   head_pd <- vec_slice(pd, -nrow(pd))
-  line_break_in_header <- which(head_pd$lag_newlines > 0L & head_pd$token == "SYMBOL_FORMALS")
+  line_break_in_header <- which(
+    head_pd$lag_newlines > 0L & head_pd$token == "SYMBOL_FORMALS"
+  )
   if (length(line_break_in_header) > 0L) {
     # indent results from applying the rules, spaces is the initial spaces
     # (which is indention if a newline is ahead)
@@ -54,22 +56,23 @@ is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
 }
 
 
-
 #' @describeIn update_indention Indents *all* tokens after `token` - including
 #'   the last token.
 #' @keywords internal
-indent_op <- function(pd,
-                      indent_by,
-                      token = c(
-                        math_token,
-                        logical_token,
-                        special_token,
-                        "PIPE",
-                        "LEFT_ASSIGN",
-                        "EQ_ASSIGN",
-                        "'$'",
-                        "'~'"
-                      )) {
+indent_op <- function(
+  pd,
+  indent_by,
+  token = c(
+    math_token,
+    logical_token,
+    special_token,
+    "PIPE",
+    "LEFT_ASSIGN",
+    "EQ_ASSIGN",
+    "'$'",
+    "'~'"
+  )
+) {
   indent_indices <- compute_indent_indices(pd, token)
   pd$indent[indent_indices] <- pd$indent[indent_indices] + indent_by
   pd
@@ -81,9 +84,7 @@ indent_op <- function(pd,
 #'   multiple times in a parse table.
 #'   occurs is not indented (see[compute_indent_indices()])
 #' @keywords internal
-indent_eq_sub <- function(pd,
-                          indent_by,
-                          token = c("EQ_SUB", "EQ_FORMALS")) {
+indent_eq_sub <- function(pd, indent_by, token = c("EQ_SUB", "EQ_FORMALS")) {
   eq_sub <- pd$token %in% token
   if (!any(eq_sub)) {
     return(pd)
@@ -134,7 +135,10 @@ NULL
 #'
 #' @keywords internal
 update_indention_reference_function_declaration <- function(pd_nested) {
-  if (is_function_declaration(pd_nested) && !is_single_indent_function_declaration(pd_nested)) {
+  if (
+    is_function_declaration(pd_nested) &&
+      !is_single_indent_function_declaration(pd_nested)
+  ) {
     seq <- seq2(3L, nrow(pd_nested) - 2L)
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2L]
   }

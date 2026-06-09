@@ -85,10 +85,12 @@ find_tokens_to_update <- function(flattened_pd, target_token) {
 #' @return A flattened parse table with indention set to `target_indention` for
 #'   the tokens that match `regex.`
 #' @keywords internal
-set_regex_indention <- function(flattened_pd,
-                                pattern,
-                                target_indention = 0L,
-                                comments_only = TRUE) {
+set_regex_indention <- function(
+  flattened_pd,
+  pattern,
+  target_indention = 0L,
+  comments_only = TRUE
+) {
   if (comments_only) {
     cond <- which(
       (flattened_pd$token == "COMMENT") & (flattened_pd$lag_newlines > 0L)

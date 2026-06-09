@@ -61,7 +61,8 @@ set_line_break_before_curly_opening <- function(pd) {
     is_not_curly_curly <- map_chr(
       line_break_to_set_idx + 1L,
       ~ next_terminal(vec_slice(pd, .x), vars = "token_after")$token_after
-    ) != "'{'"
+    ) !=
+      "'{'"
     last_expr_idx <- max(which(pd$token == "expr"))
     is_last_expr <- if (any(c("IF", "WHILE") == pd$token[1L])) {
       # rule not applicable for if and while
@@ -69,8 +70,11 @@ set_line_break_before_curly_opening <- function(pd) {
     } else {
       (line_break_to_set_idx + 1L) == last_expr_idx
     }
-    no_line_break_before_curly_idx <- any(pd$token[line_break_to_set_idx] == "EQ_SUB")
-    linebreak_before_curly <- ifelse(is_function_call(pd),
+    no_line_break_before_curly_idx <- any(
+      pd$token[line_break_to_set_idx] == "EQ_SUB"
+    )
+    linebreak_before_curly <- ifelse(
+      is_function_call(pd),
       # if in function call and has pipe, it is not recognized as function call
       # and goes to else case
       any(pd$lag_newlines[seq2(1L, line_break_to_set_idx[1L])] > 0L),
@@ -79,26 +83,22 @@ set_line_break_before_curly_opening <- function(pd) {
     )
     # no line break before last brace expression and named brace expression to
     should_be_on_same_line <- is_not_curly_curly &
-      (
-        (is_last_expr & !linebreak_before_curly) |
-          no_line_break_before_curly_idx
-      )
+      ((is_last_expr & !linebreak_before_curly) |
+        no_line_break_before_curly_idx)
     is_not_curly_curly_idx <- line_break_to_set_idx[should_be_on_same_line]
     pd$lag_newlines[1L + is_not_curly_curly_idx] <- 0L
 
-
     # other cases: line breaks
     should_not_be_on_same_line <- is_not_curly_curly &
-      (
-        (!is_last_expr | linebreak_before_curly) &
-          !no_line_break_before_curly_idx
-      )
+      ((!is_last_expr | linebreak_before_curly) &
+        !no_line_break_before_curly_idx)
     should_not_be_on_same_line_idx <- line_break_to_set_idx[
       should_not_be_on_same_line
     ]
     if (is_function_declaration(pd)) {
       should_not_be_on_same_line_idx <- setdiff(
-        1L + should_not_be_on_same_line_idx, nrow(pd)
+        1L + should_not_be_on_same_line_idx,
+        nrow(pd)
       )
     } else {
       should_not_be_on_same_line_idx <- 1L + should_not_be_on_same_line_idx
@@ -109,7 +109,8 @@ set_line_break_before_curly_opening <- function(pd) {
     if (length(should_not_be_on_same_line_idx) > 0L) {
       comma_exprs_idx <- which(pd$token == "','")
       comma_exprs_idx <- setdiff(comma_exprs_idx, 1L + is_not_curly_curly_idx)
-      non_comment_after_comma <- map_int(comma_exprs_idx,
+      non_comment_after_comma <- map_int(
+        comma_exprs_idx,
         next_non_comment,
         pd = pd
       )
@@ -122,11 +123,10 @@ set_line_break_before_curly_opening <- function(pd) {
 
 set_line_break_around_comma_and_or <- function(pd, strict) {
   ops <- c("','", "AND", "OR", "AND2", "OR2")
-  comma_with_line_break_that_can_be_removed_before <-
-    (pd$token %in% ops) &
-      (pd$lag_newlines > 0L) &
-      (pd$token_before != "COMMENT") &
-      !(lag(pd$token) %in% subset_token_opening)
+  comma_with_line_break_that_can_be_removed_before <- (pd$token %in% ops) &
+    (pd$lag_newlines > 0L) &
+    (pd$token_before != "COMMENT") &
+    !(lag(pd$token) %in% subset_token_opening)
 
   pd$lag_newlines[comma_with_line_break_that_can_be_removed_before] <- 0L
   pd$lag_newlines[lag(comma_with_line_break_that_can_be_removed_before)] <- 1L
@@ -223,7 +223,8 @@ set_line_break_around_outer_curly_curly <- function(pd) {
   closing_before <- (pd$token == "'}'") & (pd$token_before == "'}'")
 
   if (any(opening_before) && any(closing_before)) {
-    pos_opening_idx <- lag(opening_before, default = FALSE) & pd$token != "COMMENT"
+    pos_opening_idx <- lag(opening_before, default = FALSE) &
+      pd$token != "COMMENT"
     pd$lag_newlines[pos_opening_idx] <- 0L
     if (any(pos_opening_idx)) {
       # if line is broken with opening `{`, also break it with closing
@@ -241,8 +242,10 @@ set_line_break_around_inner_curly_curly <- function(pd) {
   closing_before <- (pd$token == "'}'") & (pd$token_after == "'}'")
 
   if (any(opening_before) && any(closing_before)) {
-    pos_opening_idx <- lag(opening_before, default = FALSE) & pd$token != "COMMENT"
-    can_remove_line_break_closing <- closing_before & pd$token_before != "COMMENT"
+    pos_opening_idx <- lag(opening_before, default = FALSE) &
+      pd$token != "COMMENT"
+    can_remove_line_break_closing <- closing_before &
+      pd$token_before != "COMMENT"
     if (any(pos_opening_idx) && any(can_remove_line_break_closing)) {
       pd$lag_newlines[pos_opening_idx] <- 0L
       # if line is broken with opening `{`, also break it with closing
@@ -263,9 +266,7 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
 remove_line_breaks_in_function_declaration <- function(pd) {
   if (is_function_declaration(pd)) {
     is_single_indention <- is_single_indent_function_declaration(pd)
-    round_after <- (
-      pd$token == "')'" | pd$token_before == "'('"
-    ) &
+    round_after <- (pd$token == "')'" | pd$token_before == "'('") &
       pd$token_before != "COMMENT"
     pd$lag_newlines[pd$lag_newlines > 1L] <- 1L
     if (is_single_indention) {
@@ -283,15 +284,19 @@ add_line_break_after_pipe <- function(pd) {
   is_pipe <- pd$token %in% c("SPECIAL-PIPE", "PIPE")
   pd$lag_newlines[lag(is_pipe) & pd$lag_newlines > 1L] <- 1L
 
-  if (sum(is_pipe & pd$token_after != "COMMENT") > 1L &&
-    !(next_terminal(pd, vars = "token_before")$token_before %in% c("'('", "EQ_SUB", "','"))) {
+  if (
+    sum(is_pipe & pd$token_after != "COMMENT") > 1L &&
+      !(next_terminal(pd, vars = "token_before")$token_before %in%
+        c("'('", "EQ_SUB", "','"))
+  ) {
     pd$lag_newlines[lag(is_pipe) & pd$token != "COMMENT"] <- 1L
   }
   pd
 }
 
 set_line_break_after_assignment <- function(pd) {
-  is_assignment <- lag(pd$token, default = FALSE) %in% c("LEFT_ASSIGN", "EQ_ASSIGN")
+  is_assignment <- lag(pd$token, default = FALSE) %in%
+    c("LEFT_ASSIGN", "EQ_ASSIGN")
   if (any(is_assignment)) {
     pd$lag_newlines[is_assignment] <- pmin(1L, pd$lag_newlines[is_assignment])
   }
@@ -329,16 +334,19 @@ NULL
 #'   line. Governed by `force_text_before`.
 #'
 #' @keywords internal
-set_line_break_after_opening_if_call_is_multi_line <- function(pd,
-                                                               except_token_after = NULL,
-                                                               except_text_before = NULL,
-                                                               force_text_before = NULL) {
+set_line_break_after_opening_if_call_is_multi_line <- function(
+  pd,
+  except_token_after = NULL,
+  except_text_before = NULL,
+  force_text_before = NULL
+) {
   if (!is_function_call(pd) && !is_subset_expr(pd)) {
     return(pd)
   }
   idx <- length(pd$child[[1L]]$text)
-  has_force_text_before <-
-    pd$child[[1L]]$text[idx] %in% force_text_before && pd$child[[1L]]$token[idx] == "SYMBOL_FUNCTION_CALL"
+  has_force_text_before <- pd$child[[1L]]$text[idx] %in%
+    force_text_before &&
+    pd$child[[1L]]$token[idx] == "SYMBOL_FUNCTION_CALL"
   if (has_force_text_before) {
     break_pos <- c(
       which(lag(pd$token %in% c("','", "COMMENT"))),
@@ -436,12 +444,21 @@ set_line_break_after_ggplot2_plus <- function(pd) {
   if (any(is_plus_raw)) {
     first_plus <- which(is_plus_raw)[1L]
     next_non_comment <- next_non_comment(pd, first_plus)
-    is_plus_or_comment_after_plus_before_fun_call <-
-      lag(is_plus_raw, next_non_comment - first_plus - 1L, default = FALSE) &
-        (pd$token_after == "SYMBOL_FUNCTION_CALL" | pd$token_after == "SYMBOL_PACKAGE")
+    is_plus_or_comment_after_plus_before_fun_call <- lag(
+      is_plus_raw,
+      next_non_comment - first_plus - 1L,
+      default = FALSE
+    ) &
+      (pd$token_after == "SYMBOL_FUNCTION_CALL" |
+        pd$token_after == "SYMBOL_PACKAGE")
     if (any(is_plus_or_comment_after_plus_before_fun_call, na.rm = TRUE)) {
       gg_call <- pd$child[[previous_non_comment(pd, first_plus)]]$child[[1L]]
-      if (!is.null(gg_call) && isTRUE(gg_call$text[gg_call$token == "SYMBOL_FUNCTION_CALL"] == "ggplot")) {
+      if (
+        !is.null(gg_call) &&
+          isTRUE(
+            gg_call$text[gg_call$token == "SYMBOL_FUNCTION_CALL"] == "ggplot"
+          )
+      ) {
         plus_without_comment_after <- setdiff(
           which(is_plus_raw),
           which(lead(pd$token == "COMMENT"))
@@ -477,7 +494,10 @@ remove_empty_lines_after_opening_and_before_closing_braces <- function(pd) {
 }
 
 
-set_line_breaks_between_top_level_exprs <- function(pd, allowed_blank_lines = 2L) {
+set_line_breaks_between_top_level_exprs <- function(
+  pd,
+  allowed_blank_lines = 2L
+) {
   pd$lag_newlines <- pmin(pd$lag_newlines, allowed_blank_lines + 1L)
   pd
 }

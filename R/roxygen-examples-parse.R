@@ -131,13 +131,17 @@ roxygen_remove_extra_brace <- function(parsed) {
 #' @keywords internal
 emulate_rd <- function(roxygen) {
   example_type <- gsub(
-    "^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "examples\\2", roxygen[1L]
+    "^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)",
+    "examples\\2",
+    roxygen[1L]
   )
   if (needs_rd_emulation(roxygen)) {
     roxygen <- c(
       "#' Example",
       gsub(
-        "^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)", "#' @examples \\4", roxygen
+        "^#'(\\s|\t)*@examples(If)?(\\s|\t)*(.*)",
+        "#' @examples \\4",
+        roxygen
       ),
       "x <- 1"
     )

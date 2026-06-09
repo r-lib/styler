@@ -11,13 +11,17 @@
 #' styling whether or not it was actually changed (or would be changed when
 #' `dry` is not "off").
 #' @keywords internal
-transform_files <- function(files,
-                            transformers,
-                            include_roxygen_examples,
-                            base_indention,
-                            dry) {
+transform_files <- function(
+  files,
+  transformers,
+  include_roxygen_examples,
+  base_indention,
+  dry
+) {
   transformer <- make_transformer(
-    transformers, include_roxygen_examples, base_indention
+    transformers,
+    include_roxygen_examples,
+    base_indention
   )
   max_char <- min(max(nchar(files), 0L), getOption("width"))
   len_files <- length(files)
@@ -25,8 +29,12 @@ transform_files <- function(files,
     cat("Styling ", len_files, " files:\n")
   }
 
-  changed <- map_lgl(files, transform_file,
-    fun = transformer, max_char_path = max_char, dry = dry
+  changed <- map_lgl(
+    files,
+    transform_file,
+    fun = transformer,
+    max_char_path = max_char,
+    dry = dry
   )
   communicate_summary(changed, max_char)
   communicate_warning(changed, transformers)
@@ -45,21 +53,24 @@ transform_files <- function(files,
 #' @inheritParams transform_code
 #' @param ... Further arguments passed to [transform_utf8()].
 #' @keywords internal
-transform_file <- function(path,
-                           fun,
-                           max_char_path,
-                           message_before = "",
-                           message_after = " [DONE]",
-                           message_after_if_changed = " *",
-                           ...,
-                           dry) {
+transform_file <- function(
+  path,
+  fun,
+  max_char_path,
+  message_before = "",
+  message_after = " [DONE]",
+  message_after_if_changed = " *",
+  ...,
+  dry
+) {
   char_after_path <- nchar(message_before) + nchar(path) + 1L
   max_char_after_message_path <- nchar(message_before) + max_char_path + 1L
   n_spaces_before_message_after <-
     max_char_after_message_path - char_after_path
   if (!getOption("styler.quiet", FALSE)) {
     cat(
-      message_before, path,
+      message_before,
+      path,
       rep_char(" ", max(0L, n_spaces_before_message_after)),
       append = FALSE
     )
@@ -93,10 +104,12 @@ transform_file <- function(path,
 #'   examples.
 #' @inheritParams parse_transform_serialize_r
 #' @keywords internal
-make_transformer <- function(transformers,
-                             include_roxygen_examples,
-                             base_indention,
-                             warn_empty = TRUE) {
+make_transformer <- function(
+  transformers,
+  include_roxygen_examples,
+  base_indention,
+  warn_empty = TRUE
+) {
   force(transformers)
   assert_transformers(transformers)
 
@@ -106,7 +119,8 @@ make_transformer <- function(transformers,
 
     if (should_use_cache) {
       use_cache <- is_cached(
-        text, transformers,
+        text,
+        transformers,
         cache_more_specs(
           include_roxygen_examples = include_roxygen_examples,
           base_indention = base_indention
@@ -137,7 +151,8 @@ make_transformer <- function(transformers,
 
       if (should_use_cache) {
         cache_write(
-          transformed_code, transformers,
+          transformed_code,
+          transformers,
           cache_more_specs(include_roxygen_examples, base_indention)
         )
       }
@@ -172,9 +187,11 @@ make_transformer <- function(transformers,
 #' we style them in [style_roxygen_example_snippet()] using
 #' [parse_transform_serialize_r()].
 #' @keywords internal
-parse_transform_serialize_roxygen <- function(text,
-                                              transformers,
-                                              base_indention) {
+parse_transform_serialize_roxygen <- function(
+  text,
+  transformers,
+  base_indention
+) {
   roxygen_seqs <- identify_start_to_stop_of_roxygen_examples_from_text(text)
   if (length(roxygen_seqs) < 1L) {
     return(text)
@@ -187,7 +204,9 @@ parse_transform_serialize_roxygen <- function(text,
     ))
   }
   split_segments <- split_roxygen_segments(text, unlist(roxygen_seqs))
-  map_at(split_segments$separated, split_segments$selectors,
+  map_at(
+    split_segments$separated,
+    split_segments$selectors,
     style_roxygen_code_example,
     transformers = transformers,
     base_indention = base_indention
@@ -239,13 +258,16 @@ split_roxygen_segments <- function(text, roxygen_examples) {
 #' @seealso [parse_transform_serialize_roxygen()]
 
 #' @keywords internal
-parse_transform_serialize_r <- function(text,
-                                        transformers,
-                                        base_indention,
-                                        warn_empty = TRUE,
-                                        is_roxygen_code_example = FALSE) {
+parse_transform_serialize_r <- function(
+  text,
+  transformers,
+  base_indention,
+  warn_empty = TRUE,
+  is_roxygen_code_example = FALSE
+) {
   more_specs <- cache_more_specs(
-    include_roxygen_examples = TRUE, base_indention = base_indention
+    include_roxygen_examples = TRUE,
+    base_indention = base_indention
   )
 
   text <- assert_text(text)
@@ -275,7 +297,6 @@ parse_transform_serialize_r <- function(text,
       pd_blank[[i]]
     }
 
-
     text_out[[i]] <- parse_transform_serialize_r_block(
       pd_split[[i]],
       start_line = start_line,
@@ -287,7 +308,8 @@ parse_transform_serialize_r <- function(text,
   text_out <- unlist(text_out, use.names = FALSE)
 
   verify_roundtrip(
-    text, text_out,
+    text,
+    text_out,
     parsable_only = !parse_tree_must_be_identical(transformers)
   )
 
@@ -360,7 +382,9 @@ apply_transformers <- function(pd_nested, transformers) {
   transformed_updated_multi_line <- post_visit(
     pd_nested,
     c(
-      transformers$initialize, transformers$line_break, set_multi_line,
+      transformers$initialize,
+      transformers$line_break,
+      set_multi_line,
       if (length(transformers$line_break) != 0L) update_newlines
     )
   )
@@ -379,7 +403,6 @@ apply_transformers <- function(pd_nested, transformers) {
   )
   transformed_absolute_indent
 }
-
 
 
 #' Check whether a round trip verification can be carried out
@@ -418,10 +441,13 @@ verify_roundtrip <- function(old_text, new_text, parsable_only = FALSE) {
     rlang::try_fetch(
       parse_safely(new_text),
       error = function(e) {
-        rlang::abort(paste0(
-          "Styling resulted in code that isn't parsable. This should not ",
-          "happen."
-        ), .internal = TRUE)
+        rlang::abort(
+          paste0(
+            "Styling resulted in code that isn't parsable. This should not ",
+            "happen."
+          ),
+          .internal = TRUE
+        )
       }
     )
   } else if (!expressions_are_identical(old_text, new_text)) {

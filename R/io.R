@@ -34,7 +34,9 @@ transform_utf8_one <- function(path, fun, dry) {
         switch(dry,
           fail = rlang::abort(
             paste0(
-              "File `", path, "` would be modified by styler and argument dry",
+              "File `",
+              path,
+              "` would be modified by styler and argument dry",
               " is set to 'fail'."
             ),
             class = "dryError"
@@ -104,7 +106,9 @@ read_utf8_bare <- function(con, warn = TRUE) {
   if (n > 0L) {
     stop(
       c(
-        "The file ", con, " is not encoded in UTF-8. ",
+        "The file ",
+        con,
+        " is not encoded in UTF-8. ",
         "These lines contain invalid UTF-8 characters: "
       ),
       toString(c(utils::head(i), if (n > 6L) "...")),

@@ -16,11 +16,13 @@
 #' styler:::style_text("rlang::list2({{ x }} := 3)")
 #' @keywords internal
 #' @seealso set_line_break_around_curly_curly
-style_text_without_curly_curly <- function(text,
-                                           ...,
-                                           style = tidyverse_style,
-                                           transformers = style(...),
-                                           include_roxygen_examples = TRUE) {
+style_text_without_curly_curly <- function(
+  text,
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  include_roxygen_examples = TRUE
+) {
   dots <- list(...)
   if ("strict" %in% names(dots)) {
     strict <- dots$strict
@@ -28,8 +30,11 @@ style_text_without_curly_curly <- function(text,
     strict <- TRUE
   }
   transformers$line_break$set_line_break_around_curly_curly <- NULL
-  style_text(text, ...,
-    style = NULL, transformers = transformers,
+  style_text(
+    text,
+    ...,
+    style = NULL,
+    transformers = transformers,
     include_roxygen_examples = include_roxygen_examples
   )
 }

@@ -5,10 +5,15 @@
 #'
 remove_dont_mask <- function(roxygen) {
   mask <- c(
-    1L, 2L, if (roxygen[3L] == "\n") 3L, last(which(roxygen == "}"))
-  ) %>% sort()
+    1L,
+    2L,
+    if (roxygen[3L] == "\n") 3L,
+    last(which(roxygen == "}"))
+  ) %>%
+    sort()
   list(
-    code = roxygen[-mask], mask = paste(roxygen[seq2(1L, 2L)], collapse = "")
+    code = roxygen[-mask],
+    mask = paste(roxygen[seq2(1L, 2L)], collapse = "")
   )
 }
 

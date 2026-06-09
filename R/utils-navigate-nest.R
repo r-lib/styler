@@ -63,10 +63,12 @@ previous_non_comment <- function(pd, pos) {
 #'     styler:::next_terminal(pd)
 #'   }
 #' )
-next_terminal <- function(pd,
-                          stack = FALSE,
-                          vars = c("pos_id", "token", "text"),
-                          tokens_exclude = NULL) {
+next_terminal <- function(
+  pd,
+  stack = FALSE,
+  vars = c("pos_id", "token", "text"),
+  tokens_exclude = NULL
+) {
   pd$position <- seq2(1L, nrow(pd))
   pd <- vec_slice(pd, !(pd$token %in% tokens_exclude))
   if (pd$terminal[1L]) {
@@ -74,7 +76,9 @@ next_terminal <- function(pd,
   } else {
     current <- next_terminal(
       pd$child[[1L]],
-      stack = stack, vars = vars, tokens_exclude = tokens_exclude
+      stack = stack,
+      vars = vars,
+      tokens_exclude = tokens_exclude
     )
     if (stack) {
       vec_rbind(pd[1L, c("position", vars)], current)

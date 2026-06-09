@@ -31,11 +31,22 @@ NULL
 
 utils::globalVariables(c(
   ".",
-  "pd", "pd_nested", "pd_flat", "flattened_pd",
-  "line1", "line2", "col1", "col2", "parent",
-  "terminal", "text", "short",
-  "spaces", "lag_spaces",
-  "newlines", "lag_newlines",
+  "pd",
+  "pd_nested",
+  "pd_flat",
+  "flattened_pd",
+  "line1",
+  "line2",
+  "col1",
+  "col2",
+  "parent",
+  "terminal",
+  "text",
+  "short",
+  "spaces",
+  "lag_spaces",
+  "newlines",
+  "lag_newlines",
   "pos_id",
   NULL
 ))

@@ -51,7 +51,10 @@ add_brackets_in_pipe_one <- function(pd, pos) {
       block = NA,
       is_cached = FALSE
     )
-    pd$child[[next_non_comment]] <- vec_rbind(pd$child[[next_non_comment]], new_pd) %>%
+    pd$child[[next_non_comment]] <- vec_rbind(
+      pd$child[[next_non_comment]],
+      new_pd
+    ) %>%
       arrange_pos_id()
   }
   pd
@@ -64,18 +67,24 @@ add_brackets_in_pipe_one <- function(pd, pos) {
 #' @param indent_by The amount of spaces used to indent an expression in curly
 #'   braces. Used for unindention.
 #' @keywords internal
-wrap_if_else_while_for_function_multi_line_in_curly <- function(pd, indent_by = 2L) {
+wrap_if_else_while_for_function_multi_line_in_curly <- function(
+  pd,
+  indent_by = 2L
+) {
   key_token <- NULL
 
   if (is_for_expr(pd)) {
     key_token <- "forcond"
-  } else if (is_conditional_expr(pd) || is_while_expr(pd) || is_function_declaration(pd)) {
+  } else if (
+    is_conditional_expr(pd) || is_while_expr(pd) || is_function_declaration(pd)
+  ) {
     key_token <- "')'"
   }
 
   if (length(key_token) > 0L) {
     pd <- pd %>%
-      wrap_multiline_curly(indent_by,
+      wrap_multiline_curly(
+        indent_by,
         key_token = key_token,
         space_after = as.integer(contains_else_expr(pd))
       )
@@ -96,20 +105,29 @@ wrap_if_else_while_for_function_multi_line_in_curly <- function(pd, indent_by = 
 #' @keywords internal
 wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
   to_be_wrapped_expr_with_child <- next_non_comment(
-    pd, which(pd$token == key_token)[1L]
+    pd,
+    which(pd$token == key_token)[1L]
   )
-  next_terminal <- next_terminal(vec_slice(pd, to_be_wrapped_expr_with_child))$text
-  requires_braces <- if_for_while_part_requires_braces(pd, key_token) && !any(pd$stylerignore)
+  next_terminal <- next_terminal(vec_slice(
+    pd,
+    to_be_wrapped_expr_with_child
+  ))$text
+  requires_braces <- if_for_while_part_requires_braces(pd, key_token) &&
+    !any(pd$stylerignore)
   if (requires_braces || next_terminal == "return") {
     closing_brace_ind <- which(pd$token == key_token)[1L]
     pd$spaces[closing_brace_ind] <- 1L
 
     all_to_be_wrapped_ind <- seq2(
-      closing_brace_ind + 1L, to_be_wrapped_expr_with_child
+      closing_brace_ind + 1L,
+      to_be_wrapped_expr_with_child
     )
 
     pd <- wrap_subexpr_in_curly(
-      pd, all_to_be_wrapped_ind, indent_by, space_after
+      pd,
+      all_to_be_wrapped_ind,
+      indent_by,
+      space_after
     )
 
     if (nrow(pd) > 5L) pd$lag_newlines[6L] <- 0L
@@ -124,17 +142,22 @@ wrap_multiline_curly <- function(pd, indent_by, key_token, space_after = 1L) {
 #' @inheritParams wrap_multiline_curly
 #' @keywords internal
 wrap_else_multiline_curly <- function(pd, indent_by = 2L, space_after = 0L) {
-  if (contains_else_expr(pd) &&
-    pd_is_multi_line(pd) &&
-    contains_else_expr_that_needs_braces(pd) &&
-    !any(pd$stylerignore) &&
-    pd$token_before[1L] != "SPECIAL-PIPE") {
+  if (
+    contains_else_expr(pd) &&
+      pd_is_multi_line(pd) &&
+      contains_else_expr_that_needs_braces(pd) &&
+      !any(pd$stylerignore) &&
+      pd$token_before[1L] != "SPECIAL-PIPE"
+  ) {
     else_idx <- which(pd$token == "ELSE")
     pd$spaces[else_idx] <- 1L
     all_to_be_wrapped_ind <- seq2(else_idx + 1L, nrow(pd))
 
     pd <- wrap_subexpr_in_curly(
-      pd, all_to_be_wrapped_ind, indent_by, space_after
+      pd,
+      all_to_be_wrapped_ind,
+      indent_by,
+      space_after
     )
   }
   pd
@@ -148,10 +171,12 @@ wrap_else_multiline_curly <- function(pd, indent_by = 2L, space_after = 0L) {
 #'   into a new expression.
 #' @inheritParams wrap_expr_in_curly
 #' @keywords internal
-wrap_subexpr_in_curly <- function(pd,
-                                  ind_to_be_wrapped,
-                                  indent_by,
-                                  space_after) {
+wrap_subexpr_in_curly <- function(
+  pd,
+  ind_to_be_wrapped,
+  indent_by,
+  space_after
+) {
   to_be_wrapped_starts_with_comment <-
     pd$token[ind_to_be_wrapped[1L]] == "COMMENT"
   new_expr <- wrap_expr_in_curly(

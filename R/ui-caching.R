@@ -109,11 +109,19 @@ cache_info <- function(cache_name = NULL, format = "both") {
 
   if (any(c("lucid", "both") == format)) {
     cat(
-      "Size:\t\t", tbl$size, " bytes (", tbl$n, " cached expressions)",
-      "\nLast modified:\t", as.character(tbl$last_modified),
-      "\nCreated:\t", as.character(tbl$created),
-      "\nLocation:\t", path_cache,
-      "\nActivated:\t", tbl$activated,
+      "Size:\t\t",
+      tbl$size,
+      " bytes (",
+      tbl$n,
+      " cached expressions)",
+      "\nLast modified:\t",
+      as.character(tbl$last_modified),
+      "\nCreated:\t",
+      as.character(tbl$created),
+      "\nLocation:\t",
+      path_cache,
+      "\nActivated:\t",
+      tbl$activated,
       "\n",
       sep = ""
     )
@@ -135,15 +143,20 @@ cache_info <- function(cache_name = NULL, format = "both") {
 #'
 #' @family cache managers
 #' @export
-cache_activate <- function(cache_name = NULL,
-                           verbose = !getOption("styler.quiet", FALSE)) {
+cache_activate <- function(
+  cache_name = NULL,
+  verbose = !getOption("styler.quiet", FALSE)
+) {
   options(styler.cache_name = cache_name %||% styler_version)
   path <- cache_find_path(cache_name)
 
   if (verbose) {
     cat(
-      "Using cache ", cache_get_name(), " at ",
-      path, ".\n",
+      "Using cache ",
+      cache_get_name(),
+      " at ",
+      path,
+      ".\n",
       sep = ""
     )
   }

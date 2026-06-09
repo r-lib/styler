@@ -13,9 +13,11 @@
 #' writeLines(code)
 #' compute_parse_data_nested(code)
 #' @export
-compute_parse_data_nested <- function(text,
-                                      transformers = tidyverse_style(),
-                                      more_specs = NULL) {
+compute_parse_data_nested <- function(
+  text,
+  transformers = tidyverse_style(),
+  more_specs = NULL
+) {
   parse_data <- text_to_flat_pd(text, transformers, more_specs = more_specs)
   env_add_stylerignore(parse_data)
   parse_data$child <- rep(list(NULL), length(parse_data$text))
@@ -95,9 +97,18 @@ add_cache_block <- function(pd_nested) {
 #' @keywords internal
 shallowify <- function(pd) {
   if (cache_is_activated()) {
-    order <- order(pd$line1, pd$col1, -pd$line2, -pd$col2, as.integer(pd$terminal))
+    order <- order(
+      pd$line1,
+      pd$col1,
+      -pd$line2,
+      -pd$col2,
+      as.integer(pd$terminal)
+    )
     pd_parent_first <- vec_slice(pd, order)
-    pd_parent_first_split <- vec_split(pd_parent_first, cumsum(pd_parent_first$parent == 0L))
+    pd_parent_first_split <- vec_split(
+      pd_parent_first,
+      cumsum(pd_parent_first$parent == 0L)
+    )
     pos_ids_to_keep <- pd_parent_first_split[[2L]] %>%
       map(find_pos_id_to_keep) %>%
       unlist(use.names = FALSE)
@@ -285,7 +296,8 @@ add_attributes_caching <- function(pd_flat, transformers, more_specs) {
     is_parent <- pd_flat$parent == 0L
     pd_flat$is_cached[is_parent] <- map_lgl(
       pd_flat$text[pd_flat$parent == 0L],
-      is_cached, transformers,
+      is_cached,
+      transformers,
       more_specs = more_specs
     )
     is_comment <- pd_flat$token == "COMMENT"

@@ -18,7 +18,7 @@ The name of the style transformer to use in the addins.
 (default: \code{"styler::tidyverse_style()"})
 \item \code{styler.cache_name}: character.
 The name of the styler cache to use.
-(default: 1.11.0)
+(default: 1.11.0.9001)
 \item \code{styler.cache_root}: character.
 The directory where the cache files are stored. For more, see \code{help("caching")}.
 (default: \code{NULL})
@@ -42,7 +42,7 @@ If \code{TRUE}, the package tests whether the directory is writable.
 }
 
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 getOption("styler.ignore_alignment")
 options(
   styler.ignore_alignment = TRUE,

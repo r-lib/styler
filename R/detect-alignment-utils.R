@@ -4,8 +4,10 @@
 #' to be the last token in that case.
 #' @inheritParams alignment_drop_comments
 #' @keywords internal
-alignment_ensure_no_closing_brace <- function(pd_by_line,
-                                              last_line_droped_early) {
+alignment_ensure_no_closing_brace <- function(
+  pd_by_line,
+  last_line_droped_early
+) {
   if (last_line_droped_early) {
     return(pd_by_line)
   }
@@ -15,7 +17,10 @@ alignment_ensure_no_closing_brace <- function(pd_by_line,
     pd_by_line[-length(pd_by_line)]
   } else {
     # only drop last elment of last line
-    pd_by_line[[length(pd_by_line)]] <- vec_slice(last, seq2(1L, nrow(last) - 1L))
+    pd_by_line[[length(pd_by_line)]] <- vec_slice(
+      last,
+      seq2(1L, nrow(last) - 1L)
+    )
     pd_by_line
   }
 }
@@ -59,7 +64,10 @@ alignment_drop_comments <- function(pd_by_line) {
 alignment_drop_last_expr <- function(pds_by_line) {
   # TODO could be skipped if we know it's not a function dec
   pd_last_line <- pds_by_line[[length(pds_by_line)]]
-  last_two_lines <- pd_last_line$token[c(nrow(pd_last_line) - 1L, nrow(pd_last_line))]
+  last_two_lines <- pd_last_line$token[c(
+    nrow(pd_last_line) - 1L,
+    nrow(pd_last_line)
+  )]
   if (identical(last_two_lines, c("')'", "expr"))) {
     pd_last_line <- vec_slice(pd_last_line, -nrow(pd_last_line))
   }
@@ -110,7 +118,10 @@ alignment_col1_all_named <- function(relevant_pd_by_line) {
     }
     x$token[3L] == "expr" &&
       any(c("SYMBOL_SUB", "STR_CONST", "SYMBOL_FORMALS") == x$token[1L]) &&
-      any(c("EQ_SUB", "EQ_FORMALS", "SPECIAL-IN", "LT", "GT", "EQ", "NE") == x$token[2L])
+      any(
+        c("EQ_SUB", "EQ_FORMALS", "SPECIAL-IN", "LT", "GT", "EQ", "NE") ==
+          x$token[2L]
+      )
   }) %>%
     all()
 }
@@ -151,13 +162,20 @@ alignment_serialize_line <- function(relevant_pd_by_line, column) {
 #' @inheritParams alignment_drop_comments
 #' @keywords internal
 alignment_serialize <- function(pd_sub) {
-  out <- Map(function(terminal, text, child, spaces, newlines) {
-    if (terminal) {
-      paste0(text, rep_char(" ", spaces))
-    } else {
-      paste0(alignment_serialize(child), rep_char(" ", spaces))
-    }
-  }, pd_sub$terminal, pd_sub$text, pd_sub$child, pd_sub$spaces, pd_sub$newlines)
+  out <- Map(
+    function(terminal, text, child, spaces, newlines) {
+      if (terminal) {
+        paste0(text, rep_char(" ", spaces))
+      } else {
+        paste0(alignment_serialize(child), rep_char(" ", spaces))
+      }
+    },
+    pd_sub$terminal,
+    pd_sub$text,
+    pd_sub$child,
+    pd_sub$spaces,
+    pd_sub$newlines
+  )
   if (anyNA(out)) {
     return(NA)
   }

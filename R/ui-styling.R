@@ -64,23 +64,35 @@
 #' # don't write back and fail if input is not already styled
 #' style_pkg("/path/to/pkg/", dry = "fail")
 #' @export
-style_pkg <- function(pkg = ".",
-                      ...,
-                      style = tidyverse_style,
-                      transformers = style(...),
-                      filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "qmd"),
-                      exclude_files = c("R/RcppExports\\.R", "R/cpp11\\.R", "R/import-standalone.*\\.R"),
-                      exclude_dirs = c("packrat", "renv"),
-                      include_roxygen_examples = TRUE,
-                      base_indention = 0L,
-                      dry = "off") {
+style_pkg <- function(
+  pkg = ".",
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "qmd"),
+  exclude_files = c(
+    "R/RcppExports\\.R",
+    "R/cpp11\\.R",
+    "R/import-standalone.*\\.R"
+  ),
+  exclude_dirs = c("packrat", "renv"),
+  include_roxygen_examples = TRUE,
+  base_indention = 0L,
+  dry = "off"
+) {
   pkg_root <- rprojroot::find_package_root_file(path = pkg)
-  changed <- withr::with_dir(pkg_root, prettify_pkg(
-    transformers,
-    filetype, exclude_files, exclude_dirs, include_roxygen_examples,
-    base_indention,
-    dry
-  ))
+  changed <- withr::with_dir(
+    pkg_root,
+    prettify_pkg(
+      transformers,
+      filetype,
+      exclude_files,
+      exclude_dirs,
+      include_roxygen_examples,
+      base_indention,
+      dry
+    )
+  )
   invisible(changed)
 }
 
@@ -98,17 +110,23 @@ style_pkg <- function(pkg = ".",
 #'   [style_dir()] and as these directories are anyways not styled.
 #' @inheritParams transform_files
 #' @keywords internal
-prettify_pkg <- function(transformers,
-                         filetype,
-                         exclude_files,
-                         exclude_dirs,
-                         include_roxygen_examples,
-                         base_indention,
-                         dry) {
+prettify_pkg <- function(
+  transformers,
+  filetype,
+  exclude_files,
+  exclude_dirs,
+  include_roxygen_examples,
+  base_indention,
+  dry
+) {
   filetype_ <- set_and_assert_arg_filetype(filetype)
   r_files <- rprofile_files <- vignette_files <- readme <- NULL
   all_files <- list.files(".", recursive = TRUE, all.files = TRUE)
-  exclude_files <- grep(paste(exclude_files, collapse = "|"), all_files, value = TRUE)
+  exclude_files <- grep(
+    paste(exclude_files, collapse = "|"),
+    all_files,
+    value = TRUE
+  )
   exclude_files <- set_arg_paths(exclude_files)
   exclude_files <- c(
     exclude_files,
@@ -123,12 +141,14 @@ prettify_pkg <- function(transformers,
 
   if ("\\.rprofile" %in% filetype_) {
     rprofile_files <- dir_without_.(
-      path = ".", pattern = "^\\.rprofile$"
+      path = ".",
+      pattern = "^\\.rprofile$"
     )
   }
   if ("\\.rmd" %in% filetype_) {
     vignette_files <- dir_without_.(
-      path = "vignettes", pattern = "\\.rmd$"
+      path = "vignettes",
+      pattern = "\\.rmd$"
     )
     readme <- dir_without_.(
       path = ".",
@@ -140,13 +160,15 @@ prettify_pkg <- function(transformers,
     vignette_files <- append(
       vignette_files,
       dir_without_.(
-        path = "vignettes", pattern = "\\.rmarkdown$"
+        path = "vignettes",
+        pattern = "\\.rmarkdown$"
       )
     )
     readme <- append(
       readme,
       dir_without_.(
-        path = ".", pattern = "^readme\\.rmarkdown$"
+        path = ".",
+        pattern = "^readme\\.rmarkdown$"
       )
     )
   }
@@ -155,7 +177,8 @@ prettify_pkg <- function(transformers,
     vignette_files <- append(
       vignette_files,
       dir_without_.(
-        path = "vignettes", pattern = "\\.rnw$"
+        path = "vignettes",
+        pattern = "\\.rnw$"
       )
     )
   }
@@ -174,7 +197,8 @@ prettify_pkg <- function(transformers,
     c(r_files, rprofile_files, vignette_files, readme),
     exclude_files
   )
-  transform_files(files,
+  transform_files(
+    files,
     transformers = transformers,
     include_roxygen_examples = include_roxygen_examples,
     base_indention = base_indention,
@@ -207,13 +231,16 @@ prettify_pkg <- function(transformers,
 #' # opt out with I() to only style specific levels
 #' style_text("a%>%b; a", scope = I("tokens"))
 #' @export
-style_text <- function(text,
-                       ...,
-                       style = tidyverse_style,
-                       transformers = style(...),
-                       include_roxygen_examples = TRUE,
-                       base_indention = 0L) {
-  transformer <- make_transformer(transformers,
+style_text <- function(
+  text,
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  include_roxygen_examples = TRUE,
+  base_indention = 0L
+) {
+  transformer <- make_transformer(
+    transformers,
     include_roxygen_examples = include_roxygen_examples,
     base_indention = base_indention
   )
@@ -246,22 +273,30 @@ style_text <- function(text,
 #' style_dir(style = tidyverse_style, strict = TRUE)
 #' style_dir(transformers = tidyverse_style(strict = TRUE))
 #' @export
-style_dir <- function(path = ".",
-                      ...,
-                      style = tidyverse_style,
-                      transformers = style(...),
-                      filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
-                      recursive = TRUE,
-                      exclude_files = NULL,
-                      exclude_dirs = c("packrat", "renv"),
-                      include_roxygen_examples = TRUE,
-                      base_indention = 0L,
-                      dry = "off") {
+style_dir <- function(
+  path = ".",
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  filetype = c("R", "Rprofile", "Rmd", "Rmarkdown", "Rnw", "Qmd"),
+  recursive = TRUE,
+  exclude_files = NULL,
+  exclude_dirs = c("packrat", "renv"),
+  include_roxygen_examples = TRUE,
+  base_indention = 0L,
+  dry = "off"
+) {
   changed <- withr::with_dir(
-    path, prettify_any(
+    path,
+    prettify_any(
       transformers,
-      filetype, recursive, exclude_files, exclude_dirs,
-      include_roxygen_examples, base_indention, dry
+      filetype,
+      recursive,
+      exclude_files,
+      exclude_dirs,
+      include_roxygen_examples,
+      base_indention,
+      dry
     )
   )
   invisible(changed)
@@ -275,21 +310,26 @@ style_dir <- function(path = ".",
 #' @param recursive A logical value indicating whether or not files in
 #'   subdirectories should be styled as well.
 #' @keywords internal
-prettify_any <- function(transformers,
-                         filetype,
-                         recursive,
-                         exclude_files,
-                         exclude_dirs,
-                         include_roxygen_examples,
-                         base_indention = 0L,
-                         dry) {
+prettify_any <- function(
+  transformers,
+  filetype,
+  recursive,
+  exclude_files,
+  exclude_dirs,
+  include_roxygen_examples,
+  base_indention = 0L,
+  dry
+) {
   exclude_files <- set_arg_paths(exclude_files)
   exclude_dirs <- exclude_dirs %>%
     list.dirs(recursive = TRUE, full.names = TRUE) %>%
     set_arg_paths()
   files_root <- dir(
-    path = ".", pattern = map_filetype_to_pattern(filetype),
-    ignore.case = TRUE, recursive = FALSE, all.files = TRUE
+    path = ".",
+    pattern = map_filetype_to_pattern(filetype),
+    ignore.case = TRUE,
+    recursive = FALSE,
+    all.files = TRUE
   )
   if (recursive) {
     files_other <- list.dirs(full.names = FALSE, recursive = TRUE) %>%
@@ -344,15 +384,18 @@ prettify_any <- function(transformers,
 #' unlink(file)
 #' @family stylers
 #' @export
-style_file <- function(path,
-                       ...,
-                       style = tidyverse_style,
-                       transformers = style(...),
-                       include_roxygen_examples = TRUE,
-                       base_indention = 0L,
-                       dry = "off") {
+style_file <- function(
+  path,
+  ...,
+  style = tidyverse_style,
+  transformers = style(...),
+  include_roxygen_examples = TRUE,
+  base_indention = 0L,
+  dry = "off"
+) {
   path <- set_arg_paths(path)
-  changed <- transform_files(path,
+  changed <- transform_files(
+    path,
     transformers = transformers,
     include_roxygen_examples = include_roxygen_examples,
     base_indention = base_indention,

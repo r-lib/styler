@@ -25,7 +25,6 @@ default_style_guide_attributes <- function(pd_flat) {
 }
 
 
-
 #' Initialize attributes
 #'
 #' @name initialize_attributes
@@ -46,9 +45,14 @@ initialize_newlines <- function(pd_flat) {
 #' @describeIn initialize_attributes Initializes `spaces`.
 #' @keywords internal
 initialize_spaces <- function(pd_flat) {
-  pd_flat$col3 <- lead(pd_flat$col1, default = utils::tail(pd_flat$col2, 1L) + 1L)
-  pd_flat$col2_nl <- ifelse(pd_flat$newlines > 0L,
-    rep(0L, nrow(pd_flat)), pd_flat$col2
+  pd_flat$col3 <- lead(
+    pd_flat$col1,
+    default = utils::tail(pd_flat$col2, 1L) + 1L
+  )
+  pd_flat$col2_nl <- ifelse(
+    pd_flat$newlines > 0L,
+    rep(0L, nrow(pd_flat)),
+    pd_flat$col2
   )
   pd_flat$spaces <- pd_flat$col3 - pd_flat$col2_nl - 1L
   pd_flat$col3 <- pd_flat$col2_nl <- NULL
@@ -64,10 +68,7 @@ remove_attributes <- function(pd_flat, attributes) {
 #' @keywords internal
 initialize_multi_line <- function(pd_flat) {
   nrow <- nrow(pd_flat)
-  pd_flat$multi_line <- ifelse(pd_flat$terminal,
-    rep(0L, nrow),
-    rep(NA, nrow)
-  )
+  pd_flat$multi_line <- ifelse(pd_flat$terminal, rep(0L, nrow), rep(NA, nrow))
   pd_flat
 }
 

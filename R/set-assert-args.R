@@ -16,7 +16,8 @@ assert_transformers <- function(transformers) {
     }
     message <- paste(
       "Style guides without a name and a version field are",
-      action, "\nIf you are a user: Open an issue on",
+      action,
+      "\nIf you are a user: Open an issue on",
       "https://github.com/r-lib/styler and provide a reproducible example",
       "of this error. \nIf you are a developer:",
       "When you create a style guide with {.fn styler::create_style_guide}, the",
@@ -84,7 +85,9 @@ assert_tokens <- function(tokens) {
   invalid_tokens <- tokens[!(tokens %in% lookup_tokens()$token)]
   if (length(invalid_tokens) > 0L) {
     abort(paste(
-      "Token(s)", toString(invalid_tokens), "are invalid.",
+      "Token(s)",
+      toString(invalid_tokens),
+      "are invalid.",
       "You can lookup all valid tokens and their text",
       "with styler:::lookup_tokens(). Make sure you supply the values of",
       "the column 'token', not 'text'."

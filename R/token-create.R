@@ -24,20 +24,22 @@
 #' @param is_cached Whether the token is cached already.
 #' @family token creators
 #' @keywords internal
-create_tokens <- function(tokens,
-                          texts,
-                          lag_newlines = 0L,
-                          spaces = 0L,
-                          pos_ids,
-                          token_before = NA,
-                          token_after = NA,
-                          indention_ref_pos_ids = NA,
-                          indents,
-                          terminal = TRUE,
-                          child = NULL,
-                          stylerignore,
-                          block = NA,
-                          is_cached = FALSE) {
+create_tokens <- function(
+  tokens,
+  texts,
+  lag_newlines = 0L,
+  spaces = 0L,
+  pos_ids,
+  token_before = NA,
+  token_after = NA,
+  indention_ref_pos_ids = NA,
+  indents,
+  terminal = TRUE,
+  child = NULL,
+  stylerignore,
+  block = NA,
+  is_cached = FALSE
+) {
   len_text <- length(texts)
   new_styler_df(
     list(
@@ -84,8 +86,10 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
     -1L
   }
   first <- find_start_pos_id(pd, pos, by, direction, after)
-  new_ids <- seq(first,
-    to = first + direction * (n - 1L) * by, by = by * direction
+  new_ids <- seq(
+    first,
+    to = first + direction * (n - 1L) * by,
+    by = by * direction
   )
   validate_new_pos_ids(new_ids, after)
   new_ids
@@ -101,12 +105,14 @@ create_pos_ids <- function(pd, pos, by = 0.1, after = FALSE, n = 1L) {
 #'   nests.
 #' @inheritParams create_pos_ids
 #' @keywords internal
-find_start_pos_id <- function(pd,
-                              pos,
-                              by,
-                              direction,
-                              after,
-                              candidates = NULL) {
+find_start_pos_id <- function(
+  pd,
+  pos,
+  by,
+  direction,
+  after,
+  candidates = NULL
+) {
   candidates <- append(candidates, pd$pos_id[pos])
   if (is.null(pd$child[[pos]])) {
     start_pos_idx <- if (after) {
@@ -132,7 +138,6 @@ find_start_pos_id <- function(pd,
 
   start_pos_idx
 }
-
 
 
 #' Validate sequence of new position ids
@@ -166,9 +171,11 @@ validate_new_pos_ids <- function(new_ids, after) {
 #'   curly brace and before the closing curly brace.
 #' @param space_after How many spaces should be inserted after the closing brace.
 #' @keywords internal
-wrap_expr_in_curly <- function(pd,
-                               stretch_out = c(FALSE, FALSE),
-                               space_after = 1L) {
+wrap_expr_in_curly <- function(
+  pd,
+  stretch_out = c(FALSE, FALSE),
+  space_after = 1L
+) {
   if (is_curly_expr(pd)) {
     return(pd)
   }
@@ -176,7 +183,9 @@ wrap_expr_in_curly <- function(pd,
     pd$lag_newlines[1L] <- 1L
   }
 
-  opening <- create_tokens("'{'", "{",
+  opening <- create_tokens(
+    "'{'",
+    "{",
     pos_ids = create_pos_ids(pd, 1L, after = FALSE),
     spaces = 1L - as.integer(stretch_out[1L]),
     stylerignore = pd$stylerignore[1L],
@@ -184,8 +193,10 @@ wrap_expr_in_curly <- function(pd,
   )
 
   closing <- create_tokens(
-    "'}'", "}",
-    spaces = space_after, lag_newlines = as.integer(stretch_out[2L]),
+    "'}'",
+    "}",
+    spaces = space_after,
+    lag_newlines = as.integer(stretch_out[2L]),
     pos_ids = create_pos_ids(pd, nrow(pd), after = TRUE),
     stylerignore = pd$stylerignore[1L],
     indents = pd$indent[1L]

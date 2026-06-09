@@ -27,7 +27,8 @@ set_unindention_child <- function(pd, token = "')'", unindent_by) {
 
   non_candidates <- vec_slice(pd, -cand_ind)
 
-  candidates$child <- map(candidates$child,
+  candidates$child <- map(
+    candidates$child,
     unindent_child,
     unindent_by = abs(pd$indent[closing] - pd$indent[closing - 1L])
   )

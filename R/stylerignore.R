@@ -20,13 +20,15 @@ env_add_stylerignore <- function(pd_flat) {
   # this means the block can contain cached and uncached expressions.
   pd_flat_temp <- vec_slice(pd_flat, pd_flat$terminal) %>%
     default_style_guide_attributes()
-  is_stylerignore_switchpoint <- pd_flat_temp$stylerignore != lag(
-    pd_flat_temp$stylerignore,
-    default = pd_flat_temp$stylerignore[1L]
-  )
+  is_stylerignore_switchpoint <- pd_flat_temp$stylerignore !=
+    lag(
+      pd_flat_temp$stylerignore,
+      default = pd_flat_temp$stylerignore[1L]
+    )
 
   pos_id_split <- vec_split(
-    pd_flat_temp$pos_id, cumsum(is_stylerignore_switchpoint)
+    pd_flat_temp$pos_id,
+    cumsum(is_stylerignore_switchpoint)
   )
 
   pd_flat_temp$first_pos_id_in_segment <- pos_id_split[[2L]] %>%
@@ -59,8 +61,10 @@ env_add_stylerignore <- function(pd_flat) {
 add_stylerignore <- function(pd_flat) {
   parse_text <- trimws(pd_flat$text)
   start_candidate <- grepl(
-    option_read("styler.ignore_start"), parse_text
-  ) & pd_flat$token == "COMMENT"
+    option_read("styler.ignore_start"),
+    parse_text
+  ) &
+    pd_flat$token == "COMMENT"
   pd_flat$stylerignore <- rep(FALSE, length(start_candidate))
   env_current$any_stylerignore <- any(start_candidate)
   if (!env_current$any_stylerignore) {
@@ -74,7 +78,8 @@ add_stylerignore <- function(pd_flat) {
       pd_flat$token == "COMMENT"
   )
   pd_flat$indicator_off <- cumsum_start + cumsum_stop
-  is_invalid <- cumsum_start - cumsum_stop < 0L | cumsum_start - cumsum_stop > 1L
+  is_invalid <- cumsum_start - cumsum_stop < 0L |
+    cumsum_start - cumsum_stop > 1L
   if (any(is_invalid)) {
     cli::cli_warn(c(
       "Invalid stylerignore sequences found, potentially ignoring some of the \\
@@ -112,21 +117,28 @@ apply_stylerignore <- function(flattened_pd) {
   }
   env_current$stylerignore$pos_id_ <- env_current$stylerignore$pos_id
   colnames_required_apply_stylerignore <- c(
-    "pos_id_", "lag_newlines", "lag_spaces", "text", "first_pos_id_in_segment"
+    "pos_id_",
+    "lag_newlines",
+    "lag_spaces",
+    "text",
+    "first_pos_id_in_segment"
   )
   # cannot rely on flattened_pd$text == option_read("styler.ignore_start")
   # because if the marker logic is not correct (twice off in a row), we'll
   # get it wrong.
   to_ignore <- flattened_pd$stylerignore
-  not_first <- flattened_pd$stylerignore == lag(
-    flattened_pd$stylerignore,
-    default = FALSE
-  )
+  not_first <- flattened_pd$stylerignore ==
+    lag(
+      flattened_pd$stylerignore,
+      default = FALSE
+    )
 
   flattened_pd <- merge(
     vec_slice(flattened_pd, !(to_ignore & not_first)),
     env_current$stylerignore[, colnames_required_apply_stylerignore],
-    by.x = "pos_id", by.y = "first_pos_id_in_segment", all.x = TRUE,
+    by.x = "pos_id",
+    by.y = "first_pos_id_in_segment",
+    all.x = TRUE,
     sort = FALSE
   )
 
@@ -150,11 +162,14 @@ apply_stylerignore <- function(flattened_pd) {
 #'   consolidate.
 #' @inheritParams apply_stylerignore
 #' @keywords internal
-stylerignore_consolidate_col <- function(flattened_pd,
-                                         col,
-                                         col_x = paste0(col, ".x"),
-                                         col_y = paste0(col, ".y")) {
-  flattened_pd[[col]] <- ifelse(is.na(flattened_pd[[col_y]]),
+stylerignore_consolidate_col <- function(
+  flattened_pd,
+  col,
+  col_x = paste0(col, ".x"),
+  col_y = paste0(col, ".y")
+) {
+  flattened_pd[[col]] <- ifelse(
+    is.na(flattened_pd[[col_y]]),
     flattened_pd[[col_x]],
     flattened_pd[[col_y]]
   )

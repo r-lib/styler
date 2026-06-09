@@ -48,7 +48,10 @@ has_crlf_as_first_line_sep <- function(message, initial_text) {
   if (length(split) > 1L && split[1L] == "<text>") {
     start_char <- as.numeric(split[3L])
     offending_line <- initial_text[as.integer(split[2L])]
-    if (!is.na(offending_line) && substr(offending_line, start_char, start_char + 1L) == "\r\n") {
+    if (
+      !is.na(offending_line) &&
+        substr(offending_line, start_char, start_char + 1L) == "\r\n"
+    ) {
       return(TRUE)
     }
   }
@@ -138,7 +141,8 @@ ensure_correct_txt <- function(pd, text) {
   is_parent_of_problematic_string <- pd$id %in% problematic_text$parent
 
   is_unaffected_token <- !magrittr::or(
-    is_problematic_text, is_parent_of_problematic_string
+    is_problematic_text,
+    is_parent_of_problematic_string
   )
 
   pd_with_all_text <- get_parse_data(text, include_text = TRUE)
@@ -147,7 +151,9 @@ ensure_correct_txt <- function(pd, text) {
     pd_with_all_text[is_parent_of_problematic_string, parent_cols_for_merge]
   problematic_text$text <- NULL
   problematic_text$short <- NULL
-  new_text <- merge(problematic_text, parent_of_problematic_text,
+  new_text <- merge(
+    problematic_text,
+    parent_of_problematic_text,
     by.x = "parent",
     by.y = "id",
     suffixes = c("", "parent")
@@ -155,9 +161,12 @@ ensure_correct_txt <- function(pd, text) {
     styler_df()
 
   if (!lines_and_cols_match(new_text)) {
-    abort(paste(
-      "Error in styler:::ensure_correct_txt()."
-    ), .internal = TRUE)
+    abort(
+      paste(
+        "Error in styler:::ensure_correct_txt()."
+      ),
+      .internal = TRUE
+    )
   }
   names_to_keep <- setdiff(
     names(new_text),

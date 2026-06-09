@@ -12,14 +12,18 @@ transform_code <- function(path, fun, ..., dry) {
   if (is_plain_r_file(path) || is_rprofile_file(path)) {
     transform_utf8(path, fun = fun, ..., dry = dry)
   } else if (is_rmd_file(path) || is_qmd_file(path)) {
-    transform_utf8(path,
+    transform_utf8(
+      path,
       fun = partial(transform_mixed, transformer_fun = fun, filetype = "Rmd"),
-      ..., dry = dry
+      ...,
+      dry = dry
     )
   } else if (is_rnw_file(path)) {
-    transform_utf8(path,
+    transform_utf8(
+      path,
       fun = partial(transform_mixed, transformer_fun = fun, filetype = "Rnw"),
-      ..., dry = dry
+      ...,
+      dry = dry
     )
   } else {
     cli::cli_abort("{.path {path}} is not a qmd, R, Rmd, or Rnw file.")
@@ -40,7 +44,9 @@ transform_mixed <- function(lines, transformer_fun, filetype) {
     rlang::abort("{knitr} is required to process vignette files (Rmd, Rnw)")
   }
   chunks <- separate_chunks(lines, filetype)
-  chunks$r_chunks <- map(chunks$r_chunks, transform_mixed_non_empty,
+  chunks$r_chunks <- map(
+    chunks$r_chunks,
+    transform_mixed_non_empty,
     transformer_fun = transformer_fun
   )
   map2(chunks$text_chunks, c(chunks$r_chunks, list(character(0L))), c) %>%
@@ -70,11 +76,14 @@ separate_chunks <- function(lines, filetype) {
   r_raw_chunks <- identify_raw_chunks(lines, filetype = filetype)
 
   r_chunks <- map2(
-    r_raw_chunks$starts, r_raw_chunks$ends, ~ lines[seq2(.x + 1L, .y - 1L)]
+    r_raw_chunks$starts,
+    r_raw_chunks$ends,
+    ~ lines[seq2(.x + 1L, .y - 1L)]
   )
 
   text_chunks <- map2(
-    c(1L, r_raw_chunks$ends), c(r_raw_chunks$starts, length(lines)),
+    c(1L, r_raw_chunks$ends),
+    c(r_raw_chunks$starts, length(lines)),
     ~ lines[seq2(.x, .y)]
   )
   list(r_chunks = r_chunks, text_chunks = text_chunks)
@@ -93,9 +102,11 @@ separate_chunks <- function(lines, filetype) {
 #' @param engine_pattern A regular expression that must match the engine name.
 
 #' @keywords internal
-identify_raw_chunks <- function(lines,
-                                filetype,
-                                engine_pattern = get_engine_pattern()) {
+identify_raw_chunks <- function(
+  lines,
+  filetype,
+  engine_pattern = get_engine_pattern()
+) {
   pattern <- get_knitr_pattern(filetype)
   if (is.null(pattern$chunk.begin) || is.null(pattern$chunk.end)) {
     abort("Unrecognized chunk pattern!")
@@ -105,7 +116,8 @@ identify_raw_chunks <- function(lines,
     starts <- grep(
       "^[\t >]*```+\\s*\\{((r|webr-r|webr)( *[ ,].*)?)\\}\\s*$",
       lines,
-      perl = TRUE, ignore.case = TRUE
+      perl = TRUE,
+      ignore.case = TRUE
     )
     ends <- grep("^[\t >]*```+\\s*$", lines, perl = TRUE)
     ends <- purrr::imap_int(starts, ~ ends[which(ends > .x)[1L]]) %>%
@@ -121,8 +133,12 @@ identify_raw_chunks <- function(lines,
     }
   }
 
-  purrr::map2(starts, ends, finalize_raw_chunks,
-    filetype = filetype, lines = lines
+  purrr::map2(
+    starts,
+    ends,
+    finalize_raw_chunks,
+    filetype = filetype,
+    lines = lines
   ) %>%
     purrr::compact() %>%
     purrr::transpose()

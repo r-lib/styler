@@ -120,19 +120,23 @@ visit_one <- function(pd_flat, funs) {
 #' @inherit context_towards_terminals
 #' @seealso context_towards_terminals visitors
 #' @keywords internal
-context_to_terminals <- function(pd_nested,
-                                 outer_lag_newlines,
-                                 outer_indent,
-                                 outer_spaces,
-                                 outer_indention_refs) {
+context_to_terminals <- function(
+  pd_nested,
+  outer_lag_newlines,
+  outer_indent,
+  outer_spaces,
+  outer_indention_refs
+) {
   if (is.null(pd_nested)) {
     return()
   }
 
   pd_transformed <- context_towards_terminals(
     pd_nested,
-    outer_lag_newlines, outer_indent,
-    outer_spaces, outer_indention_refs
+    outer_lag_newlines,
+    outer_indent,
+    outer_spaces,
+    outer_indention_refs
   )
 
   pd_transformed$child <- pmap(
@@ -163,16 +167,19 @@ context_to_terminals <- function(pd_nested,
 #' @return An updated parse table.
 #' @seealso context_to_terminals
 #' @keywords internal
-context_towards_terminals <- function(pd_nested,
-                                      outer_lag_newlines,
-                                      outer_indent,
-                                      outer_spaces,
-                                      outer_indention_refs) {
-  pd_nested$indent <- pd_nested$indent + ifelse(
-    is.na(pd_nested$indention_ref_pos_id),
-    outer_indent,
-    0L
-  )
+context_towards_terminals <- function(
+  pd_nested,
+  outer_lag_newlines,
+  outer_indent,
+  outer_spaces,
+  outer_indention_refs
+) {
+  pd_nested$indent <- pd_nested$indent +
+    ifelse(
+      is.na(pd_nested$indention_ref_pos_id),
+      outer_indent,
+      0L
+    )
   ref_pos_id_is_na <- !is.na(pd_nested$indention_ref_pos_id)
   pd_nested$indention_ref_pos_id[!ref_pos_id_is_na] <- outer_indention_refs
   pd_nested$lag_newlines[1L] <- pd_nested$lag_newlines[1L] + outer_lag_newlines
@@ -263,7 +270,8 @@ enrich_terminals <- function(flattened_pd, use_raw_indention = FALSE) {
 #' @keywords internal
 choose_indention <- function(flattened_pd, use_raw_indention) {
   if (!use_raw_indention) {
-    flattened_pd$lag_spaces <- ifelse(flattened_pd$lag_newlines > 0L,
+    flattened_pd$lag_spaces <- ifelse(
+      flattened_pd$lag_newlines > 0L,
       flattened_pd$indent,
       flattened_pd$lag_spaces
     )

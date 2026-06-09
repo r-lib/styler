@@ -20,10 +20,8 @@ set_space_around_operator <- function(pd_flat, strict) {
   sum_lag_newlines <- sum(pd_flat$lag_newlines)
   if (
     !getOption("styler.ignore_alignment", FALSE) &&
-      (
-        (is_function_call(pd_flat) && sum_lag_newlines > 2L) ||
-          (is_function_declaration(pd_flat) && sum_lag_newlines > 1L)
-      ) &&
+      ((is_function_call(pd_flat) && sum_lag_newlines > 2L) ||
+        (is_function_declaration(pd_flat) && sum_lag_newlines > 1L)) &&
       any(pd_flat$token %in% c("EQ_SUB", "','", "EQ_FORMALS"))
   ) {
     is_on_aligned_line <- token_is_on_aligned_line(pd_flat)
@@ -31,13 +29,17 @@ set_space_around_operator <- function(pd_flat, strict) {
     is_on_aligned_line <- FALSE
   }
   # operator
-  must_have_space_before <- op_before & (pd_flat$newlines == 0L) & !is_on_aligned_line
+  must_have_space_before <- op_before &
+    (pd_flat$newlines == 0L) &
+    !is_on_aligned_line
   pd_flat$spaces[must_have_space_before] <- if (strict) {
     1L
   } else {
     pmax(pd_flat$spaces[must_have_space_before], 1L)
   }
-  must_have_space_after <- op_after & (pd_flat$newlines == 0L) & !is_on_aligned_line
+  must_have_space_after <- op_after &
+    (pd_flat$newlines == 0L) &
+    !is_on_aligned_line
   pd_flat$spaces[must_have_space_after] <- if (strict) {
     1L
   } else {
@@ -61,14 +63,20 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
     pd_flat <-
       style_space_around_token(
         pd_flat,
-        strict = TRUE, tokens = zero, level_before = 0L, level_after = 0L
+        strict = TRUE,
+        tokens = zero,
+        level_before = 0L,
+        level_after = 0L
       )
   }
   if (any(pd_flat$token %in% one)) {
     pd_flat <-
       style_space_around_token(
         pd_flat,
-        strict = strict, tokens = one, level_before = 1L, level_after = 1L
+        strict = strict,
+        tokens = one,
+        level_before = 1L,
+        level_after = 1L
       )
   }
   pd_flat
@@ -85,11 +93,13 @@ style_space_around_math_token <- function(strict, zero, one, pd_flat) {
 #'   should be inserted around the `tokens` on the left and right position
 #'   respectively.
 #' @keywords internal
-style_space_around_token <- function(pd_flat,
-                                     strict,
-                                     tokens,
-                                     level_before,
-                                     level_after = level_before) {
+style_space_around_token <- function(
+  pd_flat,
+  strict,
+  tokens,
+  level_before,
+  level_after = level_before
+) {
   op_after <- pd_flat$token %in% tokens
   op_before <- lead(op_after, default = FALSE)
   idx_before <- op_before & (pd_flat$newlines == 0L)
@@ -106,15 +116,21 @@ style_space_around_token <- function(pd_flat,
 
 style_space_around_tilde <- function(pd_flat, strict) {
   if (is_symmetric_tilde_expr(pd_flat)) {
-    pd_flat <- style_space_around_token(pd_flat,
-      strict, "'~'",
-      level_before = 1L, level_after = 1L
+    pd_flat <- style_space_around_token(
+      pd_flat,
+      strict,
+      "'~'",
+      level_before = 1L,
+      level_after = 1L
     )
   }
 
   if (is_asymmetric_tilde_expr(pd_flat)) {
-    pd_flat <- style_space_around_token(pd_flat,
-      strict = TRUE, "'~'", level_before = 1L,
+    pd_flat <- style_space_around_token(
+      pd_flat,
+      strict = TRUE,
+      "'~'",
+      level_before = 1L,
       level_after = as.integer(nrow(pd_flat$child[[2L]]) > 1L)
     )
   }
@@ -356,8 +372,12 @@ remove_space_after_function_declaration <- function(pd_flat) {
 }
 
 remove_space_around_colons <- function(pd_flat) {
-  one_two_or_three_col_after <- pd_flat$token %in% c("':'", "NS_GET_INT", "NS_GET")
-  one_two_or_three_col_before <- lead(one_two_or_three_col_after, default = FALSE)
+  one_two_or_three_col_after <- pd_flat$token %in%
+    c("':'", "NS_GET_INT", "NS_GET")
+  one_two_or_three_col_before <- lead(
+    one_two_or_three_col_after,
+    default = FALSE
+  )
 
   col_around <- one_two_or_three_col_before | one_two_or_three_col_after
 

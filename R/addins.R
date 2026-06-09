@@ -45,12 +45,12 @@
 NULL
 
 
-
 #' @keywords internal
 style_active_file <- function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
-  transformer <- make_transformer(get_addins_style_transformer(),
+  transformer <- make_transformer(
+    get_addins_style_transformer(),
     include_roxygen_examples = TRUE,
     base_indention = 0L,
     warn_empty = is_plain_r_file(context$path)
@@ -124,7 +124,9 @@ style_selection <- function() {
   communicate_addins_style_transformers()
   context <- get_rstudio_context()
   text <- context$selection[[1L]]$text
-  if (!any(nzchar(text))) abort("No code selected")
+  if (!any(nzchar(text))) {
+    abort("No code selected")
+  }
   out <- style_text(
     text,
     transformers = get_addins_style_transformer(),
@@ -132,10 +134,13 @@ style_selection <- function() {
   )
   rstudioapi::modifyRange(
     context$selection[[1L]]$range,
-    paste(c(
-      out,
-      if (context$selection[[1L]]$range$end[2L] == 1L) ""
-    ), collapse = "\n"),
+    paste(
+      c(
+        out,
+        if (context$selection[[1L]]$range$end[2L] == 1L) ""
+      ),
+      collapse = "\n"
+    ),
     id = context$id
   )
   if (save_after_styling_is_active() && context$path != "") {
@@ -169,7 +174,9 @@ set_style_transformers <- function() {
       error = function(e) {
         abort(paste0(
           "The selected style transformers \"",
-          new_style, "\" is not valid: ", e$message
+          new_style,
+          "\" is not valid: ",
+          e$message
         ))
       }
     )
