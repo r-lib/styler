@@ -61,7 +61,7 @@ indent_without_paren_if_else <- function(pd, indent_by) {
     0L
 
   if (has_else_without_curly_or_else_chid && needs_indention_now) {
-    pd$indent[seq(else_idx + 1L, nrow(pd))] <- indent_by
+    pd$indent[seq(els_idx + 1L, nrow(pd))] <- indent_by
   }
   pd
 }
