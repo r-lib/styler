@@ -17,8 +17,6 @@ test_that(paste("multi-line function call yields correct indention"), {
 ##  ............................................................................
 
 
-
-
 # Does NOT cover indention by operators such as +"
 
 test_that("arithmetic grouping with braces yields correctly indention", {
