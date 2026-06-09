@@ -126,7 +126,7 @@ writeLines("1++1", file)
 # but the first is most convenient:
 style_file(file, strict = TRUE)
 #> Styling  1  files:
-#>  /tmp/Rtmpd37Igd/styler1bb8635afe87.R ℹ 
+#>  /tmp/RtmpBFzjKf/styler1c127a10ecf4.R ℹ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   0   File unchanged.
@@ -136,7 +136,7 @@ style_file(file, strict = TRUE)
 #> Please review the changes carefully!
 style_file(file, style = tidyverse_style, strict = TRUE)
 #> Styling  1  files:
-#>  /tmp/Rtmpd37Igd/styler1bb8635afe87.R ✔ 
+#>  /tmp/RtmpBFzjKf/styler1c127a10ecf4.R ✔ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   1   File unchanged.
@@ -145,7 +145,7 @@ style_file(file, style = tidyverse_style, strict = TRUE)
 #> ────────────────────────────────────────
 style_file(file, transformers = tidyverse_style(strict = TRUE))
 #> Styling  1  files:
-#>  /tmp/Rtmpd37Igd/styler1bb8635afe87.R ✔ 
+#>  /tmp/RtmpBFzjKf/styler1c127a10ecf4.R ✔ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   1   File unchanged.
@@ -156,7 +156,7 @@ style_file(file, transformers = tidyverse_style(strict = TRUE))
 # only style indention and less invasive  levels (i.e. spaces)
 style_file(file, scope = "indention", strict = TRUE)
 #> Styling  1  files:
-#>  /tmp/Rtmpd37Igd/styler1bb8635afe87.R ✔ 
+#>  /tmp/RtmpBFzjKf/styler1c127a10ecf4.R ✔ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   1   File unchanged.
@@ -166,7 +166,7 @@ style_file(file, scope = "indention", strict = TRUE)
 # name levels explicitly to not style less invasive levels
 style_file(file, scope = I(c("tokens", "spaces")), strict = TRUE)
 #> Styling  1  files:
-#>  /tmp/Rtmpd37Igd/styler1bb8635afe87.R ✔ 
+#>  /tmp/RtmpBFzjKf/styler1c127a10ecf4.R ✔ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   1   File unchanged.

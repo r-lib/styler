@@ -1,4 +1,4 @@
-# Overview
+# {styler}: Non-Invasive Pretty Printing of R Code
 
 # Overview
 
