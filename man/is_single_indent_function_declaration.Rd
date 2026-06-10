@@ -14,7 +14,11 @@ operators such as '('.}
 }
 \description{
 Assumes you already checked if it's a function with
-\code{is_function_declaration}. It is single indented if the first token
-after the first line break that is a \code{"SYMBOL_FORMALS"}.
+\code{is_function_declaration}. "single indented" means the formals are on the
+line after \verb{function(} and indented one further level, and the closing \verb{)}
+is also on its own line. The alternative compliant style within the style
+guide is "hanging indented" where formals share the line with \verb{function(},
+any subsequent lines of formals are indented relative to that \code{(}, and
+the closing \verb{)} shares a line with the last formal argument.
 }
 \keyword{internal}
