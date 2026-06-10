@@ -161,7 +161,7 @@ styler:::force_assignment_op
 #>     pd$text[to_replace] <- "<-"
 #>     pd
 #> }
-#> <bytecode: 0x5577b271ca38>
+#> <bytecode: 0x555c76abc970>
 #> <environment: namespace:styler>
 ```
 
