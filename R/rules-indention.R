@@ -47,17 +47,18 @@ unindent_function_declaration <- function(pd, indent_by = 2L) {
 is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
   idx_paren_open <- which(pd$token == "'('")[1L]
   idx_paren_close <- which(pd$token == "')'")[1L]
-  if (is.na(idx_paren_open) || is.na(idx_paren_close)) return(FALSE)
 
   row_idx <- seq_len(nrow(pd))
-  formals <- which(
-    pd$token %in% c("SYMBOL_FORMALS", "SYMBOL_SUB") &
+  is_formal <- (
+    pd$token == "SYMBOL_FORMALS" &
       row_idx > idx_paren_open &
       row_idx < idx_paren_close
   )
-  if (length(formals) == 0L) return(FALSE)
+  if (!any(is_formal)) {
+    return(FALSE)
+  }
 
-  first_formal_idx <- formals[1L]
+  first_formal_idx <- which(is_formal)[1L]
   # If authored with single indentation (first argument on new line),
   # return TRUE unless closing parenthesis shares the line (indicating hanging indentation).
   if (any(pd$lag_newlines[seq2(idx_paren_open + 1L, first_formal_idx)] > 0L)) {
@@ -66,18 +67,14 @@ is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
 
   # If first argument shares line with '(', check if subsequent arguments on new lines
   # have single indentation (<= 4 spaces) vs. hanging indentation (> 4 spaces).
-  formals_nl <- which(
-    pd$token %in% c("SYMBOL_FORMALS", "SYMBOL_SUB") &
-      pd$lag_newlines > 0L &
-      row_idx > idx_paren_open &
-      row_idx < idx_paren_close
-  )
-  if (length(formals_nl) == 0L) return(FALSE)
+  is_formal_nl <- is_formal & pd$lag_newlines > 0L
+  if (!any(is_formal_nl)) {
+    return(FALSE)
+  }
 
-  first_nl_formal <- formals_nl[1L]
+  first_nl_formal <- which(is_formal_nl)[1L]
   pd$spaces[first_nl_formal - 1L] <= 2L * indent_by
 }
-
 
 
 #' @describeIn update_indention Indents *all* tokens after `token` - including
