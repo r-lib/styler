@@ -238,6 +238,7 @@ tidyverse_style <- function(scope = "tokens",
   )
 
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
+  # fmt: skip
   create_style_guide(
     # transformer functions
     initialize             = default_style_guide_attributes,
