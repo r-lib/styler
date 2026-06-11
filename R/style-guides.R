@@ -248,21 +248,22 @@ tidyverse_style <- function(
   )
 
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
+  # fmt: skip
   create_style_guide(
     # transformer functions
-    initialize = default_style_guide_attributes,
-    line_break = line_break_manipulators,
-    space = space_manipulators,
-    token = token_manipulators,
-    indention = indention_manipulators,
+    initialize             = default_style_guide_attributes,
+    line_break             =        line_break_manipulators,
+    space                  =             space_manipulators,
+    token                  =             token_manipulators,
+    indention              =         indention_manipulators,
     # transformer options
-    use_raw_indention = use_raw_indention,
-    reindention = reindention,
-    style_guide_name = style_guide_name,
-    style_guide_version = styler_version,
-    more_specs_style_guide = args,
-    transformers_drop = transformers_drop,
-    indent_character = indent_character
+    use_raw_indention      =              use_raw_indention,
+    reindention            =                    reindention,
+    style_guide_name       =               style_guide_name,
+    style_guide_version    =                 styler_version,
+    more_specs_style_guide =                           args,
+    transformers_drop      =              transformers_drop,
+    indent_character       =               indent_character
   )
 }
 
