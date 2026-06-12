@@ -134,7 +134,6 @@ find_start_pos_id <- function(pd,
 }
 
 
-
 #' Validate sequence of new position ids
 #'
 #' Ids created with `after = TRUE` can have `pos_id` values between x.0 and

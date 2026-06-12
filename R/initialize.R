@@ -25,7 +25,6 @@ default_style_guide_attributes <- function(pd_flat) {
 }
 
 
-
 #' Initialize attributes
 #'
 #' @name initialize_attributes

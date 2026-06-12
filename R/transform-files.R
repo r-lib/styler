@@ -381,7 +381,6 @@ apply_transformers <- function(pd_nested, transformers) {
 }
 
 
-
 #' Check whether a round trip verification can be carried out
 #'
 #' If scope was set to "line_breaks" or lower (compare [tidyverse_style()]),

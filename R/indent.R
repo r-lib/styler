@@ -201,7 +201,6 @@ needs_indention_one <- function(pd,
 }
 
 
-
 #' Set the multi-line column
 #'
 #' Sets the column `multi_line` in `pd` by checking row-wise whether any child
