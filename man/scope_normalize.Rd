@@ -25,8 +25,8 @@ scope_normalize(I("tokens"))
 scope_normalize(I(c("indention", "tokens")))
 }
 \seealso{
-Other third-party style guide helpers: 
-\code{\link{next_non_comment}()},
+Other third-party style guide helpers:
+\code{\link[=next_non_comment]{next_non_comment()}},
 \code{\link{pd_is}}
 }
 \concept{third-party style guide helpers}

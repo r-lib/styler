@@ -112,8 +112,8 @@ is_asymmetric_tilde_expr(pd$child[[1]]$child[[3]])
 
 }
 \seealso{
-Other third-party style guide helpers: 
-\code{\link{next_non_comment}()},
-\code{\link{scope_normalize}()}
+Other third-party style guide helpers:
+\code{\link[=next_non_comment]{next_non_comment()}},
+\code{\link[=scope_normalize]{scope_normalize()}}
 }
 \concept{third-party style guide helpers}

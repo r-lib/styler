@@ -110,7 +110,7 @@ styling whether or not it was actually changed (or would be changed when
 }
 
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 # the following is identical (because of ... and defaults)
 # but the first is most convenient:
 style_pkg(strict = TRUE)
@@ -128,10 +128,10 @@ style_pkg("/path/to/pkg/", dry = "fail")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other stylers: 
-\code{\link{style_dir}()},
-\code{\link{style_file}()},
-\code{\link{style_text}()},
+Other stylers:
+\code{\link[=style_dir]{style_dir()}},
+\code{\link[=style_file]{style_file()}},
+\code{\link[=style_text]{style_text()}},
 \code{\link{styler_addins}}
 }
 \concept{stylers}

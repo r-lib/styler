@@ -40,6 +40,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Lorenz Walthert \email{lorenz.walthert@icloud.com}
   \item Kirill Müller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
   \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (\href{https://orcid.org/0000-0003-1995-6531}{ORCID})
 }

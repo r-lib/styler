@@ -22,9 +22,9 @@ Helper functions to control the behavior of caching. Simple wrappers around
 \code{\link[base:options]{base::options()}}.
 }
 \seealso{
-Other cache managers: 
-\code{\link{cache_clear}()},
-\code{\link{cache_info}()},
+Other cache managers:
+\code{\link[=cache_clear]{cache_clear()}},
+\code{\link[=cache_info]{cache_info()}},
 \code{\link{caching}}
 }
 \concept{cache managers}

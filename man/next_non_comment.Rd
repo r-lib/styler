@@ -26,8 +26,8 @@ previous_non_comment(child, 4L)
 next_non_comment(child, 2L)
 }
 \seealso{
-Other third-party style guide helpers: 
+Other third-party style guide helpers:
 \code{\link{pd_is}},
-\code{\link{scope_normalize}()}
+\code{\link[=scope_normalize]{scope_normalize()}}
 }
 \concept{third-party style guide helpers}

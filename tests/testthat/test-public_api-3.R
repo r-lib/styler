@@ -24,7 +24,6 @@ test_that("styler handles malformed Rnw file and invalid R code in chunk", {
 })
 
 
-
 test_that("styler can style R, Rmd and Rnw files via style_pkg()", {
   msg <- capture_output(
     style_pkg(testthat_file("public-api", "xyzpackage-rnw"),

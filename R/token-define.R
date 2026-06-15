@@ -1,4 +1,5 @@
 # styler: off
+# fmt: skip
 token <- rbind.data.frame(
   c("&",          "logical",          "AND"),
   c("&&",         "logical",         "AND2"),

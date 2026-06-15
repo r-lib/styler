@@ -112,7 +112,7 @@ See section 'Warning' for a good strategy to apply styling safely.
 }
 
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 style_dir("path/to/dir", filetype = c("rmd", ".R"))
 
 # the following is identical (because of ... and defaults)
@@ -123,10 +123,10 @@ style_dir(transformers = tidyverse_style(strict = TRUE))
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other stylers: 
-\code{\link{style_file}()},
-\code{\link{style_pkg}()},
-\code{\link{style_text}()},
+Other stylers:
+\code{\link[=style_file]{style_file()}},
+\code{\link[=style_pkg]{style_pkg()}},
+\code{\link[=style_text]{style_text()}},
 \code{\link{styler_addins}}
 }
 \concept{stylers}

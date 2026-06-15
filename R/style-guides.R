@@ -130,6 +130,7 @@ tidyverse_style <- function(scope = "tokens",
 
   line_break_manipulators <- if ("line_breaks" %in% scope) {
     list(
+      # fmt: skip
       remove_empty_lines_after_opening_and_before_closing_braces =
         remove_empty_lines_after_opening_and_before_closing_braces,
       set_line_break_around_comma_and_or = set_line_break_around_comma_and_or,
@@ -159,8 +160,7 @@ tidyverse_style <- function(scope = "tokens",
           set_line_break_after_opening_if_call_is_multi_line,
           except_token_after = "COMMENT",
           # don't modify line break here
-          except_text_before = c("ifelse", "if_else"),
-          force_text_before = "switch" # force line break after first token
+          except_text_before = c("ifelse", "if_else")
         )
       },
       remove_line_break_in_fun_call = purrr::partial(
@@ -238,6 +238,7 @@ tidyverse_style <- function(scope = "tokens",
   )
 
   style_guide_name <- "styler::tidyverse_style@https://github.com/r-lib"
+  # fmt: skip
   create_style_guide(
     # transformer functions
     initialize             = default_style_guide_attributes,

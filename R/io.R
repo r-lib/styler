@@ -31,6 +31,7 @@ transform_utf8_one <- function(path, fun, dry) {
       identical_content <- identical(file_with_info$text, new)
       identical <- identical_content && !file_with_info$missing_EOF_line_break
       if (!identical) {
+        # fmt: skip
         switch(dry,
           fail = rlang::abort(
             paste0(

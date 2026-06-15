@@ -178,6 +178,7 @@ style_empty <- function(text, base_indention = 0L) {
 #' @describeIn test_transformer Transformations for indention based on operators
 #' @keywords internal
 style_op <- function(text, base_indention = 0L) {
+  # fmt: skip
   transformers <- list(
     # transformer functions
     initialize        = default_style_guide_attributes,
