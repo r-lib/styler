@@ -1,0 +1,162 @@
+# {styler}: Non-Invasive Pretty Printing of R Code
+
+# Overview
+
+styler formats your code according to the [tidyverse style
+guide](https://style.tidyverse.org) (or your custom style guide) so you
+can direct your attention to the content of your code. It helps to keep
+the coding style consistent across projects and facilitate
+collaboration. You can access styler through
+
+- the RStudio Addin as demonstrated below
+- R functions like
+  [`style_pkg()`](https://styler.r-lib.org/dev/reference/style_pkg.md),
+  [`style_file()`](https://styler.r-lib.org/dev/reference/style_file.md)
+  or
+  [`style_text()`](https://styler.r-lib.org/dev/reference/style_text.md)
+- various other tools described in
+  [`vignette("third-party-integrations")`](https://styler.r-lib.org/dev/articles/third-party-integrations.md)
+
+![](https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif)
+
+## Installation
+
+You can install the package from CRAN.
+
+``` r
+
+install.packages("styler")
+```
+
+Or get the development version from GitHub:
+
+``` r
+
+# install.packages("remotes")
+remotes::install_github("r-lib/styler")
+```
+
+## Documentation
+
+The following online docs are available:
+
+- [latest CRAN release](https://styler.r-lib.org).
+
+- [GitHub development version](https://styler.r-lib.org/dev/).
+
+## Acknowledgments
+
+Hex sticker font is
+[Gayathri](https://fonts.google.com/specimen/Gayathri), and the image is
+taken from icon made by [Freepik](https://www.freepik.com) and available
+at
+[flaticon.com](https://www.flaticon.com/free-icon/suit-and-tie-outfit_25978?term=suit&page=1&position=2&origin=search&related_id=25978).
+
+# Package index
+
+## Styling API
+
+Functions for styling code
+
+- [`style_text()`](https://styler.r-lib.org/dev/reference/style_text.md)
+  : Style a string
+- [`style_file()`](https://styler.r-lib.org/dev/reference/style_file.md)
+  : Style files with R source code
+- [`style_pkg()`](https://styler.r-lib.org/dev/reference/style_pkg.md) :
+  Prettify R source code
+- [`style_dir()`](https://styler.r-lib.org/dev/reference/style_dir.md) :
+  Prettify arbitrary R code
+- [`styler_addins`](https://styler.r-lib.org/dev/reference/styler_addins.md)
+  : Stylers for RStudio Addins
+- [`styler_options`](https://styler.r-lib.org/dev/reference/styler_options.md)
+  : Package options
+
+## Fine-tune styling
+
+Customize style guides
+
+- [`tidyverse_style()`](https://styler.r-lib.org/dev/reference/tidyverse_style.md)
+  : The tidyverse style
+- [`specify_reindention()`](https://styler.r-lib.org/dev/reference/reindention.md)
+  [`tidyverse_reindention()`](https://styler.r-lib.org/dev/reference/reindention.md)
+  : Specify what is re-indented how
+- [`specify_math_token_spacing()`](https://styler.r-lib.org/dev/reference/math_token_spacing.md)
+  [`tidyverse_math_token_spacing()`](https://styler.r-lib.org/dev/reference/math_token_spacing.md)
+  : Specify spacing around math tokens
+- [`create_style_guide()`](https://styler.r-lib.org/dev/reference/create_style_guide.md)
+  : Create a style guide
+- [`specify_transformers_drop()`](https://styler.r-lib.org/dev/reference/specify_transformers_drop.md)
+  : Specify which tokens must be absent for a transformer to be dropped
+
+## Non-functional documentation
+
+Explaining features
+
+- [`caching`](https://styler.r-lib.org/dev/reference/caching.md) :
+  Remember the past to be quicker in the future
+- [`stylerignore`](https://styler.r-lib.org/dev/reference/stylerignore.md)
+  : Turn off styling for parts of the code
+- [`styler`](https://styler.r-lib.org/dev/reference/styler-package.md)
+  [`styler-package`](https://styler.r-lib.org/dev/reference/styler-package.md)
+  : styler: Non-Invasive Pretty Printing of R Code
+
+## Caching
+
+Utilities to help manage the styler cache
+
+- [`cache_activate()`](https://styler.r-lib.org/dev/reference/cache_activate.md)
+  [`cache_deactivate()`](https://styler.r-lib.org/dev/reference/cache_activate.md)
+  : Activate or deactivate the styler cache
+- [`cache_clear()`](https://styler.r-lib.org/dev/reference/cache_clear.md)
+  : Clear the cache
+- [`cache_info()`](https://styler.r-lib.org/dev/reference/cache_info.md)
+  : Show information about the styler cache
+
+## Third-party style guide helpers
+
+Utilities for customizing styler for non-tidyverse style guides
+
+- [`compute_parse_data_nested()`](https://styler.r-lib.org/dev/reference/compute_parse_data_nested.md)
+  : Obtain a nested parse table from a character vector
+- [`next_non_comment()`](https://styler.r-lib.org/dev/reference/next_non_comment.md)
+  [`previous_non_comment()`](https://styler.r-lib.org/dev/reference/next_non_comment.md)
+  : Find the index of the next or previous non-comment in a parse table.
+- [`is_curly_expr()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_for_expr()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_conditional_expr()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_while_expr()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_function_call()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_function_declaration()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_comment()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_tilde_expr()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_asymmetric_tilde_expr()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  [`is_symmetric_tilde_expr()`](https://styler.r-lib.org/dev/reference/pd_is.md)
+  : What is a parse table representing?
+- [`scope_normalize()`](https://styler.r-lib.org/dev/reference/scope_normalize.md)
+  : Convert the styling scope to its lower-level representation
+
+## Other
+
+- [`print(`*`<vertical>`*`)`](https://styler.r-lib.org/dev/reference/print.vertical.md)
+  : Print styled code
+
+# Articles
+
+### Get started
+
+- [Get started](https://styler.r-lib.org/dev/articles/styler.md):
+- [Alignment
+  detection](https://styler.r-lib.org/dev/articles/detect-alignment.md):
+- [The effect of \`strict =
+  FALSE\`](https://styler.r-lib.org/dev/articles/strict.md):
+- [Third-party
+  integrations](https://styler.r-lib.org/dev/articles/third-party-integrations.md):
+
+### Developers
+
+- [Remove rules](https://styler.r-lib.org/dev/articles/remove_rules.md):
+- [Customizing
+  styler](https://styler.r-lib.org/dev/articles/customizing_styler.md):
+- [Distribute custom style
+  guides](https://styler.r-lib.org/dev/articles/distribute_custom_style_guides.md):
+- [Caching](https://styler.r-lib.org/dev/articles/caching.md):
