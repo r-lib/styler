@@ -27,12 +27,11 @@ test_that("styler can style package and exclude some sub-directories", {
 })
 
 
-
 test_that("styler can style package and exclude some directories and files", {
   capture_output(expect_true({
     styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
       exclude_dirs = "tests",
-      exclude_files = ".Rprofile"
+      exclude_files = "\\.Rprofile"
     )
     nrow(styled) == 1
   }))
@@ -40,9 +39,17 @@ test_that("styler can style package and exclude some directories and files", {
   capture_output(expect_true({
     styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
       exclude_dirs = "tests",
-      exclude_files = "./.Rprofile"
+      exclude_files = ".*ofile"
     )
     nrow(styled) == 1
+  }))
+
+  capture_output(expect_true({
+    styled <- style_pkg(testthat_file("public-api", "xyzpackage"),
+      exclude_dirs = "tests",
+      exclude_files = "hello"
+    )
+    nrow(styled) == 0
   }))
 })
 

@@ -8,3 +8,11 @@ a <- function(x, y, z) {
     x[i] + 1
   }
 }
+
+
+if (
+  require("logspline") &&
+    require("rstanarm")
+) {
+  NULL
+}

@@ -68,7 +68,7 @@ parse_roxygen <- function(roxygen) {
 roxygen_remove_extra_brace <- function(parsed) {
   parsed <- rlang::try_fetch(
     {
-      parse(text = paste0(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
+      parse(text = paste(gsub("^\\\\[[:alpha:]]*", "", parsed), collapse = ""))
       parsed
     },
     error = function(e) {
@@ -179,6 +179,6 @@ needs_rd_emulation <- function(roxygen) {
 #' @keywords internal
 post_parse_roxygen <- function(raw) {
   raw %>%
-    paste0(collapse = "") %>%
+    paste(collapse = "") %>%
     convert_newlines_to_linebreaks()
 }

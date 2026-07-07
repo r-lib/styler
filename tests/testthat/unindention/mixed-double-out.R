@@ -37,29 +37,33 @@ function(x,
 
 # double
 function(
-    x,
-    y) {
+  x,
+  y
+) {
   1
 }
 
 
 function(
-    x,
-    y,
-    k) {
+  x,
+  y,
+  k
+) {
   1
 }
 
 
 function(
-    x,
-    y) {
+  x,
+  y
+) {
   1
 }
 
 
 function(
-    x, y) {
+  x, y
+) {
   1
 }
 
@@ -72,23 +76,23 @@ function(x,
 
 # last brace
 function(
-    x, y) {
+  x, y) {
   NULL
 }
 
 function(
-    x, y) {
+  x, y) {
   NULL
 }
 
 function(
-    x,
-    y) {
+  x,
+  y) {
   NULL
 }
 
 function(
-    x,
-    y) {
+  x,
+  y) {
   NULL
 }

@@ -1,5 +1,3 @@
-
-
 test_that("can create a token that has relevant columns", {
   pd_names <- c(
     "token", "text", "short", "lag_newlines", "newlines", "pos_id",

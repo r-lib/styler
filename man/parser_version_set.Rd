@@ -47,8 +47,9 @@ environment \code{env_current}.
 \item \code{parser_version_find()} determines the version of the parser from parse
 data. This does not necessarily mean that the version found is the
 actual version, but it \emph{behaves} like it. For example, code that does not
-contain \code{EQ_ASSIGN} is parsed the same way with version 1 and 2. If the
-behavior is identical, the version is set to 1.
+contain \code{EQ_ASSIGN} is parsed the same way with version \code{1} and \code{2}. If the
+behavior is identical, the version is set to \code{1}. Since the package now
+requires R >= 4.0, the version is always set to \code{3}.
 }
 }
 

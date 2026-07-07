@@ -1,5 +1,3 @@
-
-
 test_that("No files to compare returns error", {
   expect_error(test_collection("serialize_tests", "xyz",
     transformer = as_is

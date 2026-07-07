@@ -2,12 +2,12 @@
 % Please edit documentation in R/rules-line-breaks.R, R/rules-spaces.R
 \name{set_line_break_around_curly_curly}
 \alias{set_line_break_around_curly_curly}
-\alias{set_space_in_curly_curly}
+\alias{set_space_in_curly}
 \title{Styling around \verb{\\\{\\\{}}
 \usage{
 set_line_break_around_curly_curly(pd)
 
-set_space_in_curly_curly(pd)
+set_space_in_curly(pd)
 }
 \arguments{
 \item{pd}{A parse table.}

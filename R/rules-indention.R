@@ -15,15 +15,16 @@ indent_braces <- function(pd, indent_by) {
 #'
 #' Necessary for consistent indention of the function declaration header.
 #' @param pd A parse table.
-#' @inheritParams is_double_indent_function_declaration
-#' @seealso set_unindention_child update_indention_ref_fun_dec
+#' @inheritParams is_single_indent_function_declaration
+#' @seealso set_unindention_child update_indention_reference_function_declaration
 #' @keywords internal
-unindent_fun_dec <- function(pd, indent_by = 2L) {
+unindent_function_declaration <- function(pd, indent_by = 2L) {
   if (is_function_declaration(pd)) {
-    idx_closing_brace <- which(pd$token %in% "')'")
+    idx_closing_brace <- which(pd$token == "')'")
     fun_dec_head <- seq2(2L, idx_closing_brace)
-    if (is_double_indent_function_declaration(pd, indent_by = indent_by)) {
-      pd$indent[fun_dec_head] <- 2L * indent_by
+    if (is_single_indent_function_declaration(pd, indent_by = indent_by)) {
+      pd$indent[fun_dec_head] <- indent_by
+      pd$indent[idx_closing_brace] <- 0L
     } else {
       pd$indent[fun_dec_head] <- 0L
     }
@@ -31,26 +32,49 @@ unindent_fun_dec <- function(pd, indent_by = 2L) {
   pd
 }
 
-#' Is the function declaration double indented?
+#' Is the function declaration single indented?
 #'
 #' Assumes you already checked if it's a function with
-#' `is_function_declaration`. It is double indented if the first token
-#' after the first line break that is a `"SYMBOL_FORMALS"`.
+#' `is_function_declaration`. "single indented" means the formals are on the
+#' line after `function(` and indented one further level, and the closing `)`
+#' is also on its own line. The alternative compliant style within the style
+#' guide is "hanging indented" where formals share the line with `function(`,
+#' any subsequent lines of formals are indented relative to that `(`, and
+#' the closing `)` shares a line with the last formal argument.
 #' @param pd A parse table.
 #' @inheritParams tidyverse_style
 #' @keywords internal
-is_double_indent_function_declaration <- function(pd, indent_by = 2L) {
-  head_pd <- vec_slice(pd, -nrow(pd))
-  line_break_in_header <- which(head_pd$lag_newlines > 0L & head_pd$token == "SYMBOL_FORMALS")
-  if (length(line_break_in_header) > 0L) {
-    # indent results from applying the rules, spaces is the initial spaces
-    # (which is indention if a newline is ahead)
-    pd$spaces[line_break_in_header[1L] - 1L] <= 2L * indent_by
-  } else {
-    FALSE
-  }
-}
+is_single_indent_function_declaration <- function(pd, indent_by = 2L) {
+  idx_paren_open <- which(pd$token == "'('")[1L]
+  idx_paren_close <- which(pd$token == "')'")[1L]
 
+  row_idx <- seq_len(nrow(pd))
+  is_formal <- (
+    pd$token == "SYMBOL_FORMALS" &
+      row_idx > idx_paren_open &
+      row_idx < idx_paren_close
+  )
+  if (!any(is_formal)) {
+    return(FALSE)
+  }
+
+  first_formal_idx <- which(is_formal)[1L]
+  # If authored with single indentation (first argument on new line),
+  # return TRUE unless closing parenthesis shares the line (indicating hanging indentation).
+  if (any(pd$lag_newlines[seq2(idx_paren_open + 1L, first_formal_idx)] > 0L)) {
+    return(pd$lag_newlines[idx_paren_close] > 0L || pd$spaces[first_formal_idx - 1L] <= 2L * indent_by)
+  }
+
+  # If first argument shares line with '(', check if subsequent arguments on new lines
+  # have single indentation (<= 4 spaces) vs. hanging indentation (> 4 spaces).
+  is_formal_nl <- is_formal & pd$lag_newlines > 0L
+  if (!any(is_formal_nl)) {
+    return(FALSE)
+  }
+
+  first_nl_formal <- which(is_formal_nl)[1L]
+  pd$spaces[first_nl_formal - 1L] <= 2L * indent_by
+}
 
 
 #' @describeIn update_indention Indents *all* tokens after `token` - including
@@ -131,8 +155,8 @@ NULL
 #' }
 #'
 #' @keywords internal
-update_indention_ref_fun_dec <- function(pd_nested) {
-  if (is_function_declaration(pd_nested) && !is_double_indent_function_declaration(pd_nested)) {
+update_indention_reference_function_declaration <- function(pd_nested) {
+  if (is_function_declaration(pd_nested) && !is_single_indent_function_declaration(pd_nested)) {
     seq <- seq2(3L, nrow(pd_nested) - 2L)
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2L]
   }

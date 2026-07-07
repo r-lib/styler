@@ -34,15 +34,16 @@ conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
 
 \item{filetype}{Vector of file extensions indicating which file types should
-be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R", ".Rmd")}, or \code{c("r", "rmd")}. Supported values (after standardization) are:
-"r", "rprofile", "rmd", "rmarkdown", "rnw", "qmd". Rmarkdown is treated as
-Rmd.}
+be styled. Case is ignored, and the \code{.} is optional, e.g. \code{c(".R",".Rmd")},
+or \code{c("r", "rmd")}. Supported values (after standardization) are:
+"qmd", "r", "rmd", "rmarkdown", "rnw", and "rprofile".
+Rmarkdown is treated as Rmd.}
 
 \item{recursive}{A logical value indicating whether or not files in
 sub directories of \code{path} should be styled as well.}
 
-\item{exclude_files}{Character vector with paths to files that should be
-excluded from styling.}
+\item{exclude_files}{Character vector with regular expressions to files
+that should be excluded from styling.}
 
 \item{exclude_dirs}{Character vector with directories to exclude
 (recursively).}
@@ -111,7 +112,7 @@ See section 'Warning' for a good strategy to apply styling safely.
 }
 
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 style_dir("path/to/dir", filetype = c("rmd", ".R"))
 
 # the following is identical (because of ... and defaults)
@@ -122,10 +123,10 @@ style_dir(transformers = tidyverse_style(strict = TRUE))
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other stylers: 
-\code{\link{style_file}()},
-\code{\link{style_pkg}()},
-\code{\link{style_text}()},
+Other stylers:
+\code{\link[=style_file]{style_file()}},
+\code{\link[=style_pkg]{style_pkg()}},
+\code{\link[=style_text]{style_text()}},
 \code{\link{styler_addins}}
 }
 \concept{stylers}

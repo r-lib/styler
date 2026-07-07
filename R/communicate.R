@@ -27,14 +27,17 @@ communicate_summary <- function(changed, ruler_width) {
     cat("Status\tCount\tLegend \n")
     cli::cat_bullet(
       "\t", sum(!changed, na.rm = TRUE), "\tFile unchanged.",
-      bullet = "tick"
+      bullet = "tick",
+      bullet_col = "green"
     )
     cli::cat_bullet(
       "\t", sum(changed, na.rm = TRUE), "\tFile changed.",
-      bullet = "info"
+      bullet = "info",
+      bullet_col = "cyan"
     )
     cli::cat_bullet(
-      bullet = "cross", "\t", sum(is.na(changed)), "\tStyling threw an error."
+      bullet = "cross", "\t", sum(is.na(changed)), "\tStyling threw an error.",
+      bullet_col = "red"
     )
     cli::cat_rule(width = max(40L, ruler_width))
   }

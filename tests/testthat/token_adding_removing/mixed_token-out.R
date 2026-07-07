@@ -14,7 +14,6 @@ d
 'text with "quotes"'
 
 
-
 # adding brackets in pipes
 a %>%
   b() %>%

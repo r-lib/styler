@@ -34,17 +34,13 @@ test <- function() {
     call
   })
 
-  braced("unnamed reduces space", {
-  })
+  braced("unnamed reduces space", {})
 
-  braced("unnamed adds space space", {
-  })
+  braced("unnamed adds space space", {})
 
-  braced(named_reduces_space = {
-  })
+  braced(named_reduces_space = {})
 
-  braced(named_adds_space = {
-  })
+  braced(named_adds_space = {})
 
   braced({
     empty_removes_space

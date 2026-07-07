@@ -101,11 +101,11 @@ token_is_on_aligned_line <- function(pd_flat) {
   if (length(pd_by_line) < 1L) {
     return(TRUE)
   }
-  pd_by_line <- alignment_drop_last_expr(pd_by_line) %>%
+  pd_by_line <- pd_by_line %>%
+    alignment_drop_last_expr() %>%
     alignment_ensure_no_closing_brace(last_line_is_closing_brace_only)
 
-  pd_by_line <- pd_by_line %>%
-    alignment_ensure_trailing_comma()
+  pd_by_line <- alignment_ensure_trailing_comma(pd_by_line)
   # now, pd only contains arguments separated by values, ideal for iterating
   # over columns.
   n_cols <- map_int(pd_by_line, ~ sum(.x$token == "','"))

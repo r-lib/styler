@@ -26,6 +26,7 @@ ggplot(data = mtcars, mapping = aes(x = mpg, y = vs)) +
 ggplot(data = mtcars, mapping = aes(x = mpg, y = vs)) + ggplot2::geom_point() + g() # comment
 
 
+
 # add when comment
 ggplot(data = mtcars, mapping = aes(x = mpg, y = vs)) +
   ggplot2::geom_point() + g()  + geom_oint() # comment

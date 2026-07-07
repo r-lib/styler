@@ -1,5 +1,3 @@
-
-
 test_that("simple examples can be parsed", {
   expected_out <- c("\n", "x <- 1\n")
   expect_equal(parse_roxygen(c("#' @examples", "#' x <- 1"))$text, expected_out)
@@ -40,6 +38,19 @@ test_that("donts can be parsed", {
       "}",
       "\n"
     )
+  )
+})
+
+test_that("Nested dont* statements return informative error message", {
+  expect_error(
+    style_roxygen_code_example_one(
+      c(
+        "#' @examples", "#' # styler: off", "#' \\donttest{", "#' \\dontshow{",
+        "#'   1+1", "#' }", "#' }", "#' # styler: on"
+      ),
+      transformers = tidyverse_style(scope = "spaces"), base_indention = 2L
+    ),
+    regexp = "nested \\\\donttest"
   )
 })
 

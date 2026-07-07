@@ -1,9 +1,12 @@
+.DS_Store
 .RData
 .Rhistory
 .Rproj.user
 .gitsum
+.vscode
 Meta
 R/scratch
+README.html
 doc
 docs
 gitsum
@@ -11,6 +14,7 @@ inst/doc
 revdep/
 !revdep/*.md
 !revdep/problems.md
+tests/testthat/*/*-in_tree
 touchstone/*
 !touchstone/config.json
 !touchstone/script.R
