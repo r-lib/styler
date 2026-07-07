@@ -7,8 +7,9 @@ styler functionality is available in other tools, most notably
   (locally) and enforced as a continuous integration step in the cloud
   through <https://pre-commit.ci>.
 
-- via `usethis::use_tidy_style()` styles your project according to the
-  tidyverse style guide.
+- as an
+  [extension](https://p3m.dev/client/#/repos/openvsx/packages/lorenzwalthert.styler/overview)
+  for Code OSS based IDEs like Positron or VSCode.
 
 - through commenting a PR on GitHub with `\style` when the [GitHub
   Action](https://github.com/features/actions) [*Tidyverse
