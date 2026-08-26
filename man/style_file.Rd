@@ -39,7 +39,7 @@ by line and add a \code{base_indention} spaces before the code in the case
 multi-line strings are present. See 'Examples'.}
 
 \item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
-from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
+from writing back to files. Neither \code{"on"} nor \code{"fail"} write back; the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
 styling are not identical.}
