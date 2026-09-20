@@ -76,13 +76,19 @@ tidyverse_style <- function(scope = "tokens",
   indention_manipulators <- if ("indention" %in% scope) {
     list(
       indent_braces = partial(indent_braces, indent_by = indent_by),
-      unindent_function_declaration = unindent_function_declaration,
+      unindent_function_declaration = partial(
+        unindent_function_declaration,
+        indent_by = indent_by
+      ),
       indent_op = partial(indent_op, indent_by = indent_by),
       indent_eq_sub = partial(indent_eq_sub, indent_by = indent_by),
       indent_without_paren = partial(indent_without_paren,
         indent_by = indent_by
       ),
-      update_indention_reference_function_declaration = update_indention_reference_function_declaration
+      update_indention_reference_function_declaration = partial(
+        update_indention_reference_function_declaration,
+        indent_by = indent_by
+      )
     )
   }
   space_manipulators <- if ("spaces" %in% scope) {
@@ -138,8 +144,12 @@ tidyverse_style <- function(scope = "tokens",
       set_line_break_before_curly_opening = set_line_break_before_curly_opening,
       remove_line_break_before_round_closing_after_curly =
         if (strict) remove_line_break_before_round_closing_after_curly,
-      remove_line_breaks_in_function_declaration =
-        if (strict) remove_line_breaks_in_function_declaration,
+      remove_line_breaks_in_function_declaration = if (strict) {
+        partial(
+          remove_line_breaks_in_function_declaration,
+          indent_by = indent_by
+        )
+      },
       set_line_breaks_between_top_level_exprs =
         if (strict) set_line_breaks_between_top_level_exprs,
       style_line_break_around_curly = partial(

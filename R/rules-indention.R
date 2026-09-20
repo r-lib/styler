@@ -137,6 +137,7 @@ indent_without_paren <- function(pd, indent_by = 2L) {
 #' Update the indention reference
 #'
 #' @param pd_nested A nested parse table.
+#' @inheritParams tidyverse_style
 #' @name update_indention_ref
 #' @keywords internal
 NULL
@@ -155,8 +156,9 @@ NULL
 #' }
 #'
 #' @keywords internal
-update_indention_reference_function_declaration <- function(pd_nested) {
-  if (is_function_declaration(pd_nested) && !is_single_indent_function_declaration(pd_nested)) {
+update_indention_reference_function_declaration <- function(pd_nested, indent_by = 2L) {
+  if (is_function_declaration(pd_nested) &&
+    !is_single_indent_function_declaration(pd_nested, indent_by = indent_by)) {
     seq <- seq2(3L, nrow(pd_nested) - 2L)
     pd_nested$indention_ref_pos_id[seq] <- pd_nested$pos_id[2L]
   }

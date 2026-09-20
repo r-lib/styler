@@ -260,9 +260,9 @@ remove_line_break_before_round_closing_after_curly <- function(pd) {
   pd
 }
 
-remove_line_breaks_in_function_declaration <- function(pd) {
+remove_line_breaks_in_function_declaration <- function(pd, indent_by = 2L) {
   if (is_function_declaration(pd)) {
-    is_single_indention <- is_single_indent_function_declaration(pd)
+    is_single_indention <- is_single_indent_function_declaration(pd, indent_by = indent_by)
     round_after <- (
       pd$token == "')'" | pd$token_before == "'('"
     ) &
