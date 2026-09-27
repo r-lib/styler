@@ -5,7 +5,7 @@ Update the indention reference
 ## Usage
 
 ``` r
-update_indention_reference_function_declaration(pd_nested)
+update_indention_reference_function_declaration(pd_nested, indent_by = 2L)
 ```
 
 ## Arguments
@@ -13,6 +13,11 @@ update_indention_reference_function_declaration(pd_nested)
 - pd_nested:
 
   A nested parse table.
+
+- indent_by:
+
+  How many spaces of indention should be inserted after operators such
+  as '('.
 
 ## Functions
 
