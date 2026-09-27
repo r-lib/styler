@@ -57,7 +57,7 @@ style_file(
 - dry:
 
   To indicate whether styler should run in *dry* mode, i.e. refrain from
-  writing back to files .`"on"` and `"fail"` both don't write back, the
+  writing back to files. Neither `"on"` nor `"fail"` write back; the
   latter returns an error if the input code is not identical to the
   result of styling. "off", the default, writes back if the input and
   output of styling are not identical.
@@ -126,7 +126,7 @@ writeLines("1++1", file)
 # but the first is most convenient:
 style_file(file, strict = TRUE)
 #> Styling  1  files:
-#>  /tmp/Rtmpj3Xnvq/styler1c3826ae7983.R ℹ 
+#>  /tmp/RtmpHbDp7b/styler1c27395a2009.R ℹ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   0   File unchanged.
@@ -136,7 +136,7 @@ style_file(file, strict = TRUE)
 #> Please review the changes carefully!
 style_file(file, style = tidyverse_style, strict = TRUE)
 #> Styling  1  files:
-#>  /tmp/Rtmpj3Xnvq/styler1c3826ae7983.R ✔ 
+#>  /tmp/RtmpHbDp7b/styler1c27395a2009.R ✔ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   1   File unchanged.
@@ -145,7 +145,7 @@ style_file(file, style = tidyverse_style, strict = TRUE)
 #> ────────────────────────────────────────
 style_file(file, transformers = tidyverse_style(strict = TRUE))
 #> Styling  1  files:
-#>  /tmp/Rtmpj3Xnvq/styler1c3826ae7983.R ✔ 
+#>  /tmp/RtmpHbDp7b/styler1c27395a2009.R ✔ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   1   File unchanged.
@@ -156,7 +156,7 @@ style_file(file, transformers = tidyverse_style(strict = TRUE))
 # only style indention and less invasive  levels (i.e. spaces)
 style_file(file, scope = "indention", strict = TRUE)
 #> Styling  1  files:
-#>  /tmp/Rtmpj3Xnvq/styler1c3826ae7983.R ✔ 
+#>  /tmp/RtmpHbDp7b/styler1c27395a2009.R ✔ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   1   File unchanged.
@@ -166,7 +166,7 @@ style_file(file, scope = "indention", strict = TRUE)
 # name levels explicitly to not style less invasive levels
 style_file(file, scope = I(c("tokens", "spaces")), strict = TRUE)
 #> Styling  1  files:
-#>  /tmp/Rtmpj3Xnvq/styler1c3826ae7983.R ✔ 
+#>  /tmp/RtmpHbDp7b/styler1c27395a2009.R ✔ 
 #> ────────────────────────────────────────
 #> Status   Count   Legend 
 #> ✔   1   File unchanged.

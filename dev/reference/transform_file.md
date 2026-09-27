@@ -53,7 +53,7 @@ transform_file(
 - dry:
 
   To indicate whether styler should run in *dry* mode, i.e. refrain from
-  writing back to files .`"on"` and `"fail"` both don't write back, the
+  writing back to files. Neither `"on"` nor `"fail"` write back; the
   latter returns an error if the input code is not identical to the
   result of styling. "off", the default, writes back if the input and
   output of styling are not identical.
