@@ -5,10 +5,13 @@
 \alias{update_indention_reference_function_declaration}
 \title{Update the indention reference}
 \usage{
-update_indention_reference_function_declaration(pd_nested)
+update_indention_reference_function_declaration(pd_nested, indent_by = 2L)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}
+
+\item{indent_by}{How many spaces of indention should be inserted after
+operators such as '('.}
 }
 \description{
 Update the indention reference
