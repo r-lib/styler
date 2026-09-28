@@ -26,8 +26,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup system dependencies
-        run: | 
-          sudo apt install cmake libcurl4-openssl-dev libnode-dev pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake libcurl4-openssl-dev libnode-dev pandoc
       - name: Set up Python
         uses: actions/setup-python@v6.0.0
         with:
