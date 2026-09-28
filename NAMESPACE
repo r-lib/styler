@@ -32,27 +32,33 @@ export(tidyverse_math_token_spacing)
 export(tidyverse_reindention)
 export(tidyverse_style)
 importFrom(magrittr,"%>%")
-importFrom(purrr,compact)
-importFrom(purrr,flatten)
-importFrom(purrr,flatten_chr)
-importFrom(purrr,flatten_int)
-importFrom(purrr,map)
-importFrom(purrr,map2)
-importFrom(purrr,map2_chr)
-importFrom(purrr,map_at)
-importFrom(purrr,map_chr)
-importFrom(purrr,map_int)
-importFrom(purrr,map_lgl)
-importFrom(purrr,partial)
-importFrom(purrr,pmap)
-importFrom(purrr,pwalk)
-importFrom(rlang,"%||%")
-importFrom(rlang,abort)
-importFrom(rlang,check_installed)
-importFrom(rlang,is_installed)
-importFrom(rlang,seq2)
-importFrom(rlang,set_names)
-importFrom(rlang,warn)
-importFrom(vctrs,vec_rbind)
-importFrom(vctrs,vec_slice)
-importFrom(vctrs,vec_split)
+importFrom(purrr,
+  compact,
+  flatten,
+  flatten_chr,
+  flatten_int,
+  map,
+  map2,
+  map2_chr,
+  map_at,
+  map_chr,
+  map_int,
+  map_lgl,
+  partial,
+  pmap,
+  pwalk
+)
+importFrom(rlang,
+  "%||%",
+  abort,
+  check_installed,
+  is_installed,
+  seq2,
+  set_names,
+  warn
+)
+importFrom(vctrs,
+  vec_rbind,
+  vec_slice,
+  vec_split
+)
