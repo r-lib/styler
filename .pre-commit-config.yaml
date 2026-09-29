@@ -6,7 +6,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3.9025
+    rev: v0.4.3.9032
     hooks:
       - id: style-files
         args:
@@ -35,7 +35,7 @@ repos:
       - id: roxygenize
         additional_dependencies:
           - dplyr
-          - roxygen2
+          - roxygen2@8.1.0
           - rlang
       - id: use-tidy-description
       - id: spell-check
