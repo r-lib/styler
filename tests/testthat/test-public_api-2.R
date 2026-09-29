@@ -32,7 +32,6 @@ test_that("styler can style .r and .rmd files only via style_dir()", {
 })
 
 
-
 test_that("styler can style R and Rmd files via style_pkg()", {
   msg <- capture_output(
     style_pkg(testthat_file("public-api", "xyzpackage-rmd"),

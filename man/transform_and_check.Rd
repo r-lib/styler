@@ -11,7 +11,7 @@ transform_and_check(
   out_name = out_item,
   transformer,
   dry,
-  write_tree = NA,
+  write_tree = FALSE,
   out_tree = "_tree",
   ...
 )
@@ -28,15 +28,13 @@ transform_and_check(
 \item{transformer}{A function to apply to the content of \code{in_item}.}
 
 \item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
-from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
+from writing back to files. Neither \code{"on"} nor \code{"fail"} write back; the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
 styling are not identical.}
 
 \item{write_tree}{Whether or not the tree structure of the test should be
-computed and written to a file. Note that this needs R >= 3.2
-(see \code{\link[=set_arg_write_tree]{set_arg_write_tree()}}). If the argument is set to \code{NA}, the function
-determines whether R >= 3.2 is in use and if so, trees will be written.}
+computed and written to a files.}
 
 \item{out_tree}{Name of tree file if written out.}
 

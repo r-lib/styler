@@ -10,12 +10,6 @@ lead <- function(x, n = 1L, default = NA) {
   c(x[-seq_len(n)], rep(default, n))
 }
 
-
-arrange <- function(.data, ...) {
-  ord <- eval(substitute(order(...)), .data, parent.frame())
-  vec_slice(.data, ord)
-}
-
 arrange_pos_id <- function(data) {
   pos_id <- data$pos_id
   if (is.unsorted(pos_id)) {
@@ -50,10 +44,4 @@ left_join <- function(x, y, by) {
 
 last <- function(x) {
   x[[length(x)]]
-}
-
-map_dfr <- function(.x, .f, ...) {
-  .f <- purrr::as_mapper(.f, ...)
-  res <- map(.x, .f, ...)
-  vec_rbind(!!!res)
 }

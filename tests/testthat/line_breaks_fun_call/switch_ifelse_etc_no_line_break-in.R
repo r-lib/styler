@@ -9,6 +9,11 @@ switch(
   y = 3
 )
 
+# keep it on first line
+switch(x,
+  a = 2,
+  y = 3
+)
 
 switch( #
   x,
@@ -73,3 +78,6 @@ dplyr::ifelse(
   x,
               1, 32
 )
+
+# variable name 'switch' is different
+l$switch[1:3, ]

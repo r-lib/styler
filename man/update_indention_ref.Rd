@@ -2,20 +2,23 @@
 % Please edit documentation in R/rules-indention.R
 \name{update_indention_ref}
 \alias{update_indention_ref}
-\alias{update_indention_ref_fun_dec}
+\alias{update_indention_reference_function_declaration}
 \title{Update the indention reference}
 \usage{
-update_indention_ref_fun_dec(pd_nested)
+update_indention_reference_function_declaration(pd_nested, indent_by = 2L)
 }
 \arguments{
 \item{pd_nested}{A nested parse table.}
+
+\item{indent_by}{How many spaces of indention should be inserted after
+operators such as '('.}
 }
 \description{
 Update the indention reference
 }
 \section{Functions}{
 \itemize{
-\item \code{update_indention_ref_fun_dec()}: Updates the reference pos_id for all
+\item \code{update_indention_reference_function_declaration()}: Updates the reference pos_id for all
 tokens in \code{pd_nested} if \code{pd_nested} contains a function declaration.
 Tokens inside a function declaration are are re-indented,
 that is, they are indented up to the level at which the token FUNCTION

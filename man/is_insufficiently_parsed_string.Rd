@@ -8,8 +8,6 @@ is_insufficiently_parsed_string(pd)
 }
 \arguments{
 \item{pd}{A parse table.}
-
-\item{text}{The initial code to style.}
 }
 \description{
 Identifies strings that were not fully parsed due to their vast length.

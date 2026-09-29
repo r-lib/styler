@@ -61,9 +61,9 @@ styler. Must take value from token before, can't have a default.}
 Creates a terminal token represented as (a row of) a parse table.
 }
 \seealso{
-Other token creators: 
-\code{\link{create_pos_ids}()},
-\code{\link{validate_new_pos_ids}()}
+Other token creators:
+\code{\link[=create_pos_ids]{create_pos_ids()}},
+\code{\link[=validate_new_pos_ids]{validate_new_pos_ids()}}
 }
 \concept{token creators}
 \keyword{internal}

@@ -4,16 +4,16 @@ editor_options:
     wrap: 79
 ---
 
-This is a release requested by the CRAN team to delete the population of the 
-user's cache while building vignettes.
+This release fixes a bug related that prevented {styler} to format code with 
+comments in curly-curly expressions `{{` (#1269).
+[&#x0040;IndrajeetPatil](https://github.com/IndrajeetPatil) is now a package 
+author. Thanks for your many contributions.
 
 
 ## Test environments
 
--   ubuntu 20.04 (on GitHub Actions): R devel, R 4.3.0, R 4.2.1, 4.1.2, R 4.0.5, 
-    R 3.6
--   Windows Server 10 (on GitHub Actions): R devel, R 4.3.0, R 4.2.1, R 4.1.2, 
-    R 3.6.
+-   ubuntu-latest (on GitHub Actions): R devel, R 4.5.1, R 4.4.0, R 4.3.0, R 4.2.1, 4.1.2
+-   Windows Server 10 (on GitHub Actions): R devel, R 4.5.1, R 4.4.0, R 4.3.0, R 4.2.1, R 4.1.2
 -   win-builder: R devel
 
 ## R CMD check results
@@ -36,7 +36,7 @@ compliant with the requirements of CRAN.
 
 ## Downstream Dependencies
 
-I also ran R CMD check on all 39 downstream dependencies of styler using the
+I also ran R CMD check on all 47 downstream dependencies of styler using the
 revdepcheck package.
 
 All of them finished R CMD CHECK with the same number of ERRORS, WARNINGS and 

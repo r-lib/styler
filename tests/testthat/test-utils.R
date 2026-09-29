@@ -1,5 +1,3 @@
-
-
 test_that("non-comment-helpers", {
   pd <- compute_parse_data_nested("a <- # hi \n x %>% b()")
   child <- pd$child[[1]]

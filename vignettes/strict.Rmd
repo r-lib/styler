@@ -58,12 +58,11 @@ function()
 1 ~  more()   #   comment
 ```
 
--   More than one line break is tolerated before closing curly brace and line breaks between curly and round braces are not removed.
+-   Line breaks between curly and round braces are not removed.
 
 ```{styler}
 test({
   1
-
 }
 )
 ```

@@ -188,7 +188,6 @@ test_that("changing ignore markers invalidates cache", {
 })
 
 
-
 test_that("all expressions within a stylerignore sequence (whether cached or not) are put in the same block (low-level)", {
   transformers <- tidyverse_style()
   specs <- transformers$more_specs_style_guide

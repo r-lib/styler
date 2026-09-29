@@ -16,7 +16,7 @@ Uses \code{\link[=Reduce]{Reduce()}} to apply each function of \code{funs} seque
 \code{pd_flat}.
 }
 \seealso{
-Other visitors: 
+Other visitors:
 \code{\link{visit}}
 }
 \concept{visitors}

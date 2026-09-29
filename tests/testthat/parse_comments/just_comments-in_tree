@@ -1,5 +1,0 @@
-ROOT (token: short_text [lag_newlines/spaces] {pos_id})
- ¦--COMMENT: # A c [0/0] {1}                           
- ¦--COMMENT: #' A  [1/0] {2}                           
- ¦--COMMENT: #' [1/0] {3}                              
- °--COMMENT: # som [3/0] {4}                           

@@ -39,7 +39,7 @@ by line and add a \code{base_indention} spaces before the code in the case
 multi-line strings are present. See 'Examples'.}
 
 \item{dry}{To indicate whether styler should run in \emph{dry} mode, i.e. refrain
-from writing back to files .\code{"on"} and \code{"fail"} both don't write back, the
+from writing back to files. Neither \code{"on"} nor \code{"fail"} write back; the
 latter returns an error if the input code is not identical to the result
 of styling. "off", the default, writes back if the input and output of
 styling are not identical.}
@@ -116,10 +116,10 @@ readLines(file)
 unlink(file)
 }
 \seealso{
-Other stylers: 
-\code{\link{style_dir}()},
-\code{\link{style_pkg}()},
-\code{\link{style_text}()},
+Other stylers:
+\code{\link[=style_dir]{style_dir()}},
+\code{\link[=style_pkg]{style_pkg()}},
+\code{\link[=style_text]{style_text()}},
 \code{\link{styler_addins}}
 }
 \concept{stylers}

@@ -59,10 +59,10 @@ style_text("a\%>\%b; a", scope = "tokens")
 style_text("a\%>\%b; a", scope = I("tokens"))
 }
 \seealso{
-Other stylers: 
-\code{\link{style_dir}()},
-\code{\link{style_file}()},
-\code{\link{style_pkg}()},
+Other stylers:
+\code{\link[=style_dir]{style_dir()}},
+\code{\link[=style_file]{style_file()}},
+\code{\link[=style_pkg]{style_pkg()}},
 \code{\link{styler_addins}}
 }
 \concept{stylers}

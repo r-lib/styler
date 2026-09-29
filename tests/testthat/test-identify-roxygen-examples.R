@@ -1,5 +1,3 @@
-
-
 #' Things to consider:
 #' * one function declaration or many
 #' * example(s) is last tag or not?

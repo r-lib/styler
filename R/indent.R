@@ -39,28 +39,29 @@ indent_without_paren_if_else <- function(pd, indent_by) {
   }
   needs_indention_now <- pd$lag_newlines[
     next_non_comment(pd, which(pd$token == "')'"))
-  ] > 0L
+  ] >
+    0L
 
   if (needs_indention_now) {
     pd$indent[expr_after_if] <- indent_by
   }
 
-  else_idx <- which(pd$token == "ELSE")
-  if (length(else_idx) == 0L) {
+  els_idx <- which(pd$token == "ELSE")
+  if (length(els_idx) == 0L) {
     return(pd)
   }
-  expr_after_else_idx <- next_non_comment(pd, else_idx)
-  has_else_without_curly_or_else_chid <-
-    any(pd$token == "ELSE") &&
-      pd$child[[expr_after_else_idx]]$token[1L] != "'{'" &&
-      pd$child[[expr_after_else_idx]]$token[1L] != "IF"
+  expr_after_else_idx <- next_non_comment(pd, els_idx)
+  has_else_without_curly_or_else_chid <- any(pd$token == "ELSE") &&
+    pd$child[[expr_after_else_idx]]$token[1L] != "'{'" &&
+    pd$child[[expr_after_else_idx]]$token[1L] != "IF"
 
   needs_indention_now <- pd$lag_newlines[
     next_non_comment(pd, which(pd$token == "ELSE"))
-  ] > 0L
+  ] >
+    0L
 
   if (has_else_without_curly_or_else_chid && needs_indention_now) {
-    pd$indent[seq(else_idx + 1L, nrow(pd))] <- indent_by
+    pd$indent[seq(els_idx + 1L, nrow(pd))] <- indent_by
   }
   pd
 }
@@ -198,7 +199,6 @@ needs_indention_one <- function(pd,
 
   !any(multi_line_token) & !any(active_trigger_on_same_line)
 }
-
 
 
 #' Set the multi-line column

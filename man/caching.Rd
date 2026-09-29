@@ -67,9 +67,9 @@ This can often be set in config files of CI/CD tools, e.g. see the
 }
 
 \seealso{
-Other cache managers: 
-\code{\link{cache_activate}()},
-\code{\link{cache_clear}()},
-\code{\link{cache_info}()}
+Other cache managers:
+\code{\link[=cache_activate]{cache_activate()}},
+\code{\link[=cache_clear]{cache_clear()}},
+\code{\link[=cache_info]{cache_info()}}
 }
 \concept{cache managers}

@@ -22,9 +22,9 @@ empty file of size 0 bytes for every cached expression. The inode is
 excluded from this displayed size but negligible.
 }
 \seealso{
-Other cache managers: 
-\code{\link{cache_activate}()},
-\code{\link{cache_clear}()},
+Other cache managers:
+\code{\link[=cache_activate]{cache_activate()}},
+\code{\link[=cache_clear]{cache_clear()}},
 \code{\link{caching}}
 }
 \concept{cache managers}

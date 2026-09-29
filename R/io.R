@@ -13,13 +13,13 @@ transform_utf8 <- function(path, fun, dry) {
 #' @param path A vector with file paths to transform.
 #' @param fun A function that returns a character vector.
 #' @param dry To indicate whether styler should run in *dry* mode, i.e. refrain
-#'   from writing back to files .`"on"` and `"fail"` both don't write back, the
+#'   from writing back to files. Neither `"on"` nor `"fail"` write back; the
 #'   latter returns an error if the input code is not identical to the result
 #'   of styling. "off", the default, writes back if the input and output of
 #'   styling are not identical.
 #' @keywords internal
 transform_utf8_one <- function(path, fun, dry) {
-  rlang::arg_match(dry, c("on", "off", "fail"))
+  rlang::arg_match0(dry, c("on", "off", "fail"))
   rlang::try_fetch(
     {
       file_with_info <- read_utf8(path)
@@ -31,30 +31,35 @@ transform_utf8_one <- function(path, fun, dry) {
       identical_content <- identical(file_with_info$text, new)
       identical <- identical_content && !file_with_info$missing_EOF_line_break
       if (!identical) {
-        if (dry == "fail") {
-          rlang::abort(
+        # fmt: skip
+        switch(dry,
+          fail = rlang::abort(
             paste0(
               "File `", path, "` would be modified by styler and argument dry",
               " is set to 'fail'."
             ),
             class = "dryError"
-          )
-        } else if (dry == "on") {
-          # don't do anything
-        } else if (dry == "off") {
-          write_utf8(new, path)
-        } else {
-          # not implemented
-        }
+          ),
+          on = {
+            # don't do anything
+          },
+          off = write_utf8(new, path),
+          {
+            # not implemented
+          }
+        )
       }
       !identical
     },
     error = function(e) {
       if (inherits(e, "dryError")) {
         rlang::abort(conditionMessage(e))
-      } else {
-        warn(paste0("When processing ", path, ": ", conditionMessage(e)))
       }
+      show_path <- cli::style_hyperlink(
+        cli::col_blue(basename(path)),
+        paste0("file://", path)
+      )
+      cli::cli_warn("When processing {show_path}:", parent = e)
       NA
     }
   )
@@ -103,7 +108,8 @@ read_utf8_bare <- function(con, warn = TRUE) {
         "The file ", con, " is not encoded in UTF-8. ",
         "These lines contain invalid UTF-8 characters: "
       ),
-      toString(c(utils::head(i), if (n > 6L) "..."))
+      toString(c(utils::head(i), if (n > 6L) "...")),
+      call. = FALSE
     )
   }
   x

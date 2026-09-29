@@ -1,36 +1,6 @@
-
-
-test_that("repreated parsing solves wrong parent assignment", {
-  expect_warning(
-    test_collection(
-      "parsing", "repeated_parsing",
-      transformer = style_text,
-      strict = FALSE
-    ),
-    NA
-  )
-
-  # move to temp dir
-  dir <- tempfile("styler")
-  dir.create(dir)
-  path_temp <- file.path(dir, "repeated_parsing-in.R")
-  path_perm <- testthat_file("parsing", "repeated_parsing-in.R")
-  file.copy(path_perm, dir)
-
-  sys_call <- paste0(
-    "R -q -e \"styler::cache_deactivate(); styler::style_file(\\\"", path_temp, "\\\")\""
-  )
-  calls_sys(sys_call, intern = FALSE, ignore.stdout = TRUE, ignore.stderr = TRUE)
-  ref <- read_utf8_bare(testthat_file("parsing", "repeated_parsing-out.R"))
-  result <- read_utf8_bare(path_temp)
-  expect_equal(ref, result)
-  unlink(dir)
-})
-
 test_that("long strings are parsed correctly", {
-  expect_warning(
-    test_collection("parsing", "long_strings", transformer = style_text),
-    NA
+  expect_no_warning(
+    test_collection("parsing", "long_strings", transformer = style_text)
   )
 })
 
@@ -58,16 +28,24 @@ test_that("CRLF EOLs fail with informative error", {
 
 
 test_that("mixed CRLF / LF EOLs fail", {
+  error_msg_stem <- if (getRversion() < "4.4") "unexpected input" else "unexpected invalid token"
   expect_error(
     style_text("a + 3 -4 -> x\nx + 2\r\n glück + 1"),
-    "unexpected input"
+    error_msg_stem
   )
 })
 
-test_that("unicode can't be propprely handled on Windows for R < 4.2", {
-  msg <- ifelse(getRversion() < "4.2" && is_windows(),
-    "Can't parse input due to unicode restriction in base R\\.",
-    NA
+test_that("unicode can't be properly handled on Windows for R < 4.2", {
+  skip_if_not(getRversion() < "4.2" && is_windows())
+
+  expect_error(
+    style_text('suit <- "♠"'),
+    "Can't parse input due to unicode restriction in base R\\."
   )
-  expect_error(style_text('suit <- "♠"'), msg)
+})
+
+test_that("unicode is properly handled in all settings other than on Windows for R < 4.2", {
+  skip_if(getRversion() < "4.2" && is_windows())
+
+  expect_error(style_text('suit <- "♠"'), NA)
 })

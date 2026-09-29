@@ -1,7 +1,5 @@
 # A comment
-a <- function() {
-
-}
+a <- function() {}
 
 #+ chunk-label, opt1=value1
 "chunk-content"
